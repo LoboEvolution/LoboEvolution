@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!-- ====================================================================== 
+May 29, 2005 1:42:43 PM                                                        
+
+Cobra HTML Toolkit Project
+Author: J. H. S.
+====================================================================== -->
+<project name="project" default="default" basedir="/opt/XAMJ_Project">
+	<property name="cobra.version" value="0.98.5"/>
+	<property name="cobra.name" value="cobra-${cobra.version}"/>
+
+	<description>
+     	Cobra HTML Toolkit
+    </description>
+
+	<target name="default" depends="cobra_zip">
+	</target>
+
+	<target name="cobra_zip" depends="cobra_jar">
+		<zip destfile="/tmp/${cobra.name}.zip">
+			<zipfileset dir="/tmp" includes="cobra.jar" prefix="${cobra.name}/lib"/>
+			<zipfileset dir="../XAMJ_Build/ext" includes="js.jar" prefix="${cobra.name}/lib"/>
+			<zipfileset dir="../HTML_Renderer" includes="COBRA-README.txt" prefix="${cobra.name}"/>
+			<zipfileset dir="../HTML_Renderer" includes="COBRA-ACK.txt" prefix="${cobra.name}"/>
+			<zipfileset dir="../HTML_Renderer" includes="LICENSE.txt" prefix="${cobra.name}"/>
+			<zipfileset dir="../HTML_Renderer" includes="org/**/*.java,org/**/*.xml,org/**/*.html" prefix="${cobra.name}/src"/>
+			<zipfileset dir="../Common" includes="org/**/*.java,org/**/*.xml,org/**/*.html" prefix="${cobra.name}/src"/>
+			<zipfileset dir="../parser/src" includes="org/**/*.java,org/**/*.xml,org/**/*.html" prefix="${cobra.name}/src"/>
+			<zipfileset dir="../parser/src" includes="com/**/*.java,com/**/*.xml,com/**/*.html" prefix="${cobra.name}/src"/>
+			<zipfileset dir="/opt/html_xamjwg_org/cobra-api/" includes="**/*.html,**/*.css,**/*.gif" prefix="${cobra.name}/doc/api"/>
+		</zip>
+	</target>
+
+	<target name="cobra_jar" depends="cobra_classfiles">
+		<jar destfile="/tmp/cobra.jar">
+			<fileset dir="/tmp/cobra-build" includes="**/*.class,**/*.xml,**/*.gif,**/*.png,**/*.jpg"/>
+		</jar>
+	</target>
+
+	<target name="cobra_classfiles">
+		<mkdir dir="/tmp/cobra-build"/>
+		<delete>
+			<fileset dir="/tmp/cobra-build">
+				<include name="**/*.class"/>
+			</fileset>
+		</delete>
+
+		<javac srcdir="../Common" destdir="/tmp/cobra-build" 
+			classpath="" 
+			debug="on" 
+			target="1.8" 
+			source="1.8" 
+			includeantruntime="false" />
+
+		<javac srcdir="../parser/src"
+         destdir="/tmp/cobra-build"
+         classpath=""
+         debug="on"
+			target="1.8"
+			source="1.8"
+			includeantruntime="false"
+		/>
+		<javac srcdir="../HTML_Renderer"
+         destdir="/tmp/cobra-build"
+         classpath="/tmp/cobra-build:XAMJ_Build/ext/js.jar"
+         debug="on"
+			target="1.8"
+			source="1.8"
+			includeantruntime="false"
+		/>
+	</target>
+</project>
+
