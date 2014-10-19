@@ -119,15 +119,19 @@ public class CSSUtilities {
 	}
 
 	public static CSSStyleSheet parse(org.w3c.dom.Node ownerNode, String text,
-			String baseUri, boolean considerDoubleSlashComments) throws IOException {
+			String baseUri, boolean considerDoubleSlashComments)
+			throws IOException {
 
 		if (text != null && !"".equals(text)) {
-			String processedText = considerDoubleSlashComments ? preProcessCss(text) : text;
+			String processedText = considerDoubleSlashComments ? preProcessCss(text)
+					: text;
 			CSSOMParser parser = new CSSOMParser();
-			InputSource is = getCssInputSourceForStyleSheet(processedText,baseUri);
+			InputSource is = getCssInputSourceForStyleSheet(processedText,
+					baseUri);
 			is.setURI(baseUri);
 
-			CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) parser.parseStyleSheet(is, null, null);
+			CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) parser
+					.parseStyleSheet(is, null, null);
 			sheet.setHref(baseUri);
 			sheet.setOwnerNode(ownerNode);
 			return sheet;
@@ -184,15 +188,15 @@ public class CSSUtilities {
 		final HttpRequest request = bcontext.createHttpRequest();
 		URL baseURL = new URL(baseUri);
 		URL scriptURL = Urls.createURL(baseURL, href);
-		
+
 		String script = scriptURL == null ? href : scriptURL.toExternalForm();
-		
-		if(script!=null && (script.contains(".com") || script.contains(".it")))
-			script  = script.replace("file://", "http://");
-		
-		
+
+		if (script != null
+				&& (script.contains(".com") || script.contains(".it")))
+			script = script.replace("file://", "http://");
+
 		final String scriptURI = script;
-		
+
 		// Perform a synchronous request
 		SecurityManager sm = System.getSecurityManager();
 		if (sm == null) {
@@ -223,18 +227,19 @@ public class CSSUtilities {
 					+ "]. Response status was " + status + ".");
 			return null;
 		}
-		
+
 		return cssText(request.getResponseText());
 	}
 
-	public static ArrayList<String> cssText(String text) throws MalformedURLException {
+	public static ArrayList<String> cssText(String text)
+			throws MalformedURLException {
 
 		ArrayList<String> listText = new ArrayList<String>();
-		
-		text = text.replaceAll("\n", "").replaceAll("}", "}\n");
-		
+
+		text = text.replaceAll("\n", "").replaceAll("\r", "")
+				.replaceAll("}", "}\n");
+
 		String[] splitString = text.split("\n");
-		String app = "";
 
 		for (int i = 0; i < splitString.length; i++) {
 
@@ -245,40 +250,66 @@ public class CSSUtilities {
 				str = str.trim();
 
 				if (str.length() > 1 && str.endsWith("}")) {
-					listText.add(fixString(str));
-				} else {
-					app += str;
-					if (app.endsWith("}")) {
-						listText.add(fixString(app));
-						app = "";
+					if (str.contains("media"))
+						listText.add(fixMediaQueryString(str + "}"));
+					else {
+						listText.add(fixString(str));
 					}
-				}
-			}		
+				} 
+			}
 		}
 
 		return listText;
 	}
-	
-	
+
+	private static String fixMediaQueryString(String css) {
+
+		String stringFixed = "";
+		int app = 0;
+
+		String[] b = css.split("\\ ");
+
+		for (int i = 0; i < b.length; i++) {
+
+			String split = b[i];
+
+			if (!split.contains("*") && !split.startsWith("filter:")
+					&& !split.startsWith("-ms") && !split.startsWith("-moz")
+					&& app == 0) {
+				app = 0;
+				stringFixed += " " + b[i];
+			} else if (app == 1) {
+				app = 0;
+			} else {
+				app = 1;
+			}
+		}
+
+		return stringFixed;
+	}
+
 	private static String fixString(String css) {
-		
+
 		String stringFixed = "";
 		String result = "";
-		
+
 		String[] b = css.split("\\{");
-		
+
 		if (b.length != 1) {
-			
+
 			String str = b[1];
-			
+
 			String[] strSpli = str.split(";");
 
 			for (int i = 0; i < strSpli.length; i++) {
 
 				String split = strSpli[i];
 
-				if (!split.contains("*") && !split.startsWith("filter:") && !split.startsWith("-ms") && !split.startsWith("-moz")) {
-					stringFixed += split.replace("\\", "").replace("/", "").trim();
+				if (!split.contains("*") && !split.startsWith("filter:")
+						&& !split.startsWith("-ms")
+						&& !split.startsWith("-moz")) {
+					stringFixed += split.replace("\\", "").replace("/", "")
+							.trim();
 					if (!stringFixed.endsWith("}")) {
 						stringFixed += ";";
 					}
@@ -289,18 +320,7 @@ public class CSSUtilities {
 			}
 			result = b[0] + "{" + stringFixed.trim();
 		}
-		
+
 		return result;
-	}
-	
-	public static void main(String[] args) {
-			
-		String css = "body {background:#ddd;color:#000;text-align:center;\n" +  
-					 "margin:0px;border:0px;padding:0px}";
-		
-		css = css.replaceAll("\n", "").replaceAll("}", "}\n");
-		
-		System.out.println(css);
-		
 	}
 }
