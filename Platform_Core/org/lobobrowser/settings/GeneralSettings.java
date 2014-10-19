@@ -90,8 +90,8 @@ public class GeneralSettings implements java.io.Serializable {
 	public void restoreDefaults() {
 		this.startupURLs = Collections.singletonList(DEFAULT_STARTUP);
 		this.spoofIE = true;
-		this.ieVersion = "6.0";
-		this.mozVersion = "4.0";
+		this.ieVersion = "9.0";
+		this.mozVersion = "32.0";
 	}
 
 	public void saveChecked() throws java.io.IOException {
