@@ -1,8 +1,8 @@
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.w3c.dom.html.HTMLFormElement;
+import org.lobobrowser.w3c.dom.html.HTMLObjectElement;
 import org.w3c.dom.Document;
-import org.w3c.dom.html2.HTMLFormElement;
-import org.w3c.dom.html2.HTMLObjectElement;
 
 public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements
 		HTMLObjectElement {

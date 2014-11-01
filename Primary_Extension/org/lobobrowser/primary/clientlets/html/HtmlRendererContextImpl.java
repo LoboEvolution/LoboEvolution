@@ -48,10 +48,10 @@ import org.lobobrowser.ua.Parameter;
 import org.lobobrowser.ua.ParameterInfo;
 import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.ua.TargetType;
+import org.lobobrowser.w3c.dom.html.HTMLCollection;
+import org.lobobrowser.w3c.dom.html.HTMLElement;
+import org.lobobrowser.w3c.dom.html.HTMLLinkElement;
 import org.w3c.dom.Document;
-import org.w3c.dom.html2.HTMLCollection;
-import org.w3c.dom.html2.HTMLElement;
-import org.w3c.dom.html2.HTMLLinkElement;
 
 public class HtmlRendererContextImpl implements HtmlRendererContext {
 	private static final Logger logger = Logger

@@ -28,10 +28,10 @@ import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.util.io.BufferExceededException;
 import org.lobobrowser.util.io.RecordedInputStream;
+import org.lobobrowser.w3c.dom.html.HTMLDocument;
+import org.lobobrowser.w3c.dom.html.HTMLElement;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.html2.HTMLDocument;
-import org.w3c.dom.html2.HTMLElement;
 
 public class HtmlContent implements ComponentContent {
 	private static final Logger logger = Logger.getLogger(HtmlContent.class

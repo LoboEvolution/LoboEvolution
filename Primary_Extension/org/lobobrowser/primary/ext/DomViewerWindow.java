@@ -15,10 +15,10 @@ import javax.swing.tree.TreePath;
 
 import org.lobobrowser.gui.DefaultWindowFactory;
 import org.lobobrowser.util.gui.WrapperLayout;
+import org.lobobrowser.w3c.dom.html.HTMLDocument;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.html2.HTMLDocument;
 
 public class DomViewerWindow extends JFrame implements TreeSelectionListener {
 

@@ -25,7 +25,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import org.lobobrowser.js.AbstractScriptableDelegate;
-import org.w3c.dom.html2.HTMLElement;
+import org.lobobrowser.w3c.dom.html.HTMLElement;
 
 public class Event extends AbstractScriptableDelegate {
 	private boolean cancelBubble;

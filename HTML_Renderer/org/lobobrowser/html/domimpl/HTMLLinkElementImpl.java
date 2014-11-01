@@ -34,11 +34,11 @@ import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.TextDecorationRenderState;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.gui.ColorFactory;
+import org.lobobrowser.w3c.dom.html.HTMLBodyElement;
+import org.lobobrowser.w3c.dom.html.HTMLDocument;
+import org.lobobrowser.w3c.dom.html.HTMLLinkElement;
 import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.css.CSSStyleSheet;
-import org.w3c.dom.html2.HTMLBodyElement;
-import org.w3c.dom.html2.HTMLDocument;
-import org.w3c.dom.html2.HTMLLinkElement;
 
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 

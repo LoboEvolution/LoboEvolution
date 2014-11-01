@@ -32,8 +32,8 @@ import java.util.Map;
 
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.util.Nodes;
+import org.lobobrowser.w3c.dom.html.HTMLCollection;
 import org.w3c.dom.Node;
-import org.w3c.dom.html2.HTMLCollection;
 
 public class DescendentHTMLCollection extends AbstractScriptableDelegate
 		implements HTMLCollection {

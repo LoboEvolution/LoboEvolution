@@ -51,14 +51,14 @@ import org.lobobrowser.js.JavaInstantiator;
 import org.lobobrowser.js.JavaObjectWrapper;
 import org.lobobrowser.js.JavaScript;
 import org.lobobrowser.util.ID;
+import org.lobobrowser.w3c.dom.html.HTMLCollection;
+import org.lobobrowser.w3c.dom.html.HTMLElement;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.css.CSS2Properties;
-import org.w3c.dom.html2.HTMLCollection;
-import org.w3c.dom.html2.HTMLElement;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
 

@@ -47,7 +47,7 @@ import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.NavigatorWindow;
 import org.lobobrowser.util.Html;
 import org.lobobrowser.util.Strings;
-import org.w3c.dom.html2.HTMLDocument;
+import org.lobobrowser.w3c.dom.html.HTMLDocument;
 
 public class ExtensionImpl implements NavigatorExtension {
 	private static final Logger logger = Logger.getLogger(ExtensionImpl.class

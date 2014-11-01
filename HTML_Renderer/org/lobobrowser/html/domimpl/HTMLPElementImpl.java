@@ -2,7 +2,7 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.style.ParagraphRenderState;
 import org.lobobrowser.html.style.RenderState;
-import org.w3c.dom.html2.HTMLParagraphElement;
+import org.lobobrowser.w3c.dom.html.HTMLParagraphElement;
 
 public class HTMLPElementImpl extends HTMLAbstractUIElement implements
 		HTMLParagraphElement {

@@ -25,7 +25,7 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.TableCellRenderState;
-import org.w3c.dom.html2.HTMLTableCellElement;
+import org.lobobrowser.w3c.dom.html.HTMLTableCellElement;
 
 public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements
 		HTMLTableCellElement {

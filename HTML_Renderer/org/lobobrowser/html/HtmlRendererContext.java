@@ -25,8 +25,8 @@ package org.lobobrowser.html;
 
 import java.net.URL;
 
-import org.w3c.dom.html2.HTMLCollection;
-import org.w3c.dom.html2.HTMLLinkElement;
+import org.lobobrowser.w3c.dom.html.HTMLCollection;
+import org.lobobrowser.w3c.dom.html.HTMLLinkElement;
 
 /**
  * The <code>HtmlRendererContext</code> interface must be implemented in order
@@ -69,7 +69,7 @@ public interface HtmlRendererContext {
 	 *            Same as the target attribute in the HTML anchor tag, i.e.
 	 *            _top, _blank, etc.
 	 */
-	public void linkClicked(org.w3c.dom.html2.HTMLElement linkNode, URL url,
+	public void linkClicked(org.lobobrowser.w3c.dom.html.HTMLElement linkNode, URL url,
 			String target);
 
 	/**
@@ -119,7 +119,7 @@ public interface HtmlRendererContext {
 	 *         HTML of the tag must be rendered if the OBJECT content cannot be
 	 *         handled.
 	 */
-	public HtmlObject getHtmlObject(org.w3c.dom.html2.HTMLElement element);
+	public HtmlObject getHtmlObject(org.lobobrowser.w3c.dom.html.HTMLElement element);
 
 	/**
 	 * This method is called when a visual element is right-clicked.
@@ -131,7 +131,7 @@ public interface HtmlRendererContext {
 	 * @return The method should return true to continue propagating the event,
 	 *         or false to stop propagating it.
 	 */
-	public boolean onContextMenu(org.w3c.dom.html2.HTMLElement element,
+	public boolean onContextMenu(org.lobobrowser.w3c.dom.html.HTMLElement element,
 			java.awt.event.MouseEvent event);
 
 	/**
@@ -144,7 +144,7 @@ public interface HtmlRendererContext {
 	 * @return The method should return true to continue propagating the event,
 	 *         or false to stop propagating it.
 	 */
-	public boolean onMouseClick(org.w3c.dom.html2.HTMLElement element,
+	public boolean onMouseClick(org.lobobrowser.w3c.dom.html.HTMLElement element,
 			java.awt.event.MouseEvent event);
 
 	/**
@@ -157,7 +157,7 @@ public interface HtmlRendererContext {
 	 * @return The method should return true to continue propagating the event,
 	 *         or false to stop propagating it.
 	 */
-	public boolean onDoubleClick(org.w3c.dom.html2.HTMLElement element,
+	public boolean onDoubleClick(org.lobobrowser.w3c.dom.html.HTMLElement element,
 			java.awt.event.MouseEvent event);
 
 	/**
@@ -168,7 +168,7 @@ public interface HtmlRendererContext {
 	 * @param event
 	 *            The mouse event.
 	 */
-	public void onMouseOver(org.w3c.dom.html2.HTMLElement element,
+	public void onMouseOver(org.lobobrowser.w3c.dom.html.HTMLElement element,
 			java.awt.event.MouseEvent event);
 
 	/**
@@ -179,7 +179,7 @@ public interface HtmlRendererContext {
 	 * @param event
 	 *            The mouse event.
 	 */
-	public void onMouseOut(org.w3c.dom.html2.HTMLElement element,
+	public void onMouseOut(org.lobobrowser.w3c.dom.html.HTMLElement element,
 			java.awt.event.MouseEvent event);
 
 	/**

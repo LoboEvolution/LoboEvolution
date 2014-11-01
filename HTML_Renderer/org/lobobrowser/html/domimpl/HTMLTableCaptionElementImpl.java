@@ -22,7 +22,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.style.RenderState;
-import org.w3c.dom.html2.HTMLTableCaptionElement;
+import org.lobobrowser.w3c.dom.html.HTMLTableCaptionElement;
 
 public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement
 		implements HTMLTableCaptionElement {

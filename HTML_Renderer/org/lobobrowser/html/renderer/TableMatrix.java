@@ -44,10 +44,10 @@ import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.RenderThreadState;
+import org.lobobrowser.w3c.dom.html.HTMLTableCaptionElement;
+import org.lobobrowser.w3c.dom.html.HTMLTableCellElement;
+import org.lobobrowser.w3c.dom.html.HTMLTableRowElement;
 import org.w3c.dom.Node;
-import org.w3c.dom.html2.HTMLTableCaptionElement;
-import org.w3c.dom.html2.HTMLTableCellElement;
-import org.w3c.dom.html2.HTMLTableRowElement;
 
 class TableMatrix {
 	// private static final NodeFilter ROWS_FILTER = new RowsFilter();

@@ -56,6 +56,10 @@ import org.lobobrowser.util.Domains;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.WeakValueHashMap;
 import org.lobobrowser.util.io.EmptyReader;
+import org.lobobrowser.w3c.dom.html.HTMLCollection;
+import org.lobobrowser.w3c.dom.html.HTMLDocument;
+import org.lobobrowser.w3c.dom.html.HTMLElement;
+import org.lobobrowser.w3c.dom.html.HTMLLinkElement;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
@@ -73,10 +77,6 @@ import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.css.CSSStyleSheet;
-import org.w3c.dom.html2.HTMLCollection;
-import org.w3c.dom.html2.HTMLDocument;
-import org.w3c.dom.html2.HTMLElement;
-import org.w3c.dom.html2.HTMLLinkElement;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
 import org.xml.sax.ErrorHandler;
@@ -1362,14 +1362,14 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 
 	private class FrameFilter implements NodeFilter {
 		public boolean accept(Node node) {
-			return node instanceof org.w3c.dom.html2.HTMLFrameElement
-					|| node instanceof org.w3c.dom.html2.HTMLIFrameElement;
+			return node instanceof org.lobobrowser.w3c.dom.html.HTMLFrameElement
+					|| node instanceof org.lobobrowser.w3c.dom.html.HTMLIFrameElement;
 		}
 	}
 
 	// private class BodyFilter implements NodeFilter {
 	// public boolean accept(Node node) {
-	// return node instanceof org.w3c.dom.html2.HTMLBodyElement;
+	// return node instanceof org.lobobrowser.w3c.dom.html.HTMLBodyElement;
 	// }
 	// }
 

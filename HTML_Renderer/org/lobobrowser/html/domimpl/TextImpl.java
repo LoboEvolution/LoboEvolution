@@ -40,7 +40,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.w3c.dom.html2.Text#isElementContentWhitespace()
+	 * @see org.lobobrowser.w3c.dom.html.Text#isElementContentWhitespace()
 	 */
 	public boolean isElementContentWhitespace() {
 		String t = this.text;
@@ -50,7 +50,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.w3c.dom.html2.Text#replaceWholeText(java.lang.String)
+	 * @see org.lobobrowser.w3c.dom.html.Text#replaceWholeText(java.lang.String)
 	 */
 	public Text replaceWholeText(String content) throws DOMException {
 		NodeImpl parent = (NodeImpl) this.getParentNode();
@@ -64,7 +64,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.w3c.dom.html2.Text#splitText(int)
+	 * @see org.lobobrowser.w3c.dom.html.Text#splitText(int)
 	 */
 	public Text splitText(int offset) throws DOMException {
 		NodeImpl parent = (NodeImpl) this.getParentNode();
@@ -88,7 +88,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.w3c.dom.html2.Text#getwholeText()
+	 * @see org.lobobrowser.w3c.dom.html.Text#getwholeText()
 	 */
 	public String getWholeText() {
 		NodeImpl parent = (NodeImpl) this.getParentNode();

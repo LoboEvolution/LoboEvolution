@@ -24,7 +24,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.FormInput;
-import org.w3c.dom.html2.HTMLTextAreaElement;
+import org.lobobrowser.w3c.dom.html.HTMLTextAreaElement;
 
 public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 		HTMLTextAreaElement {
@@ -47,7 +47,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.w3c.dom.html2.HTMLTextAreaElement#getCols()
+	 * @see org.lobobrowser.w3c.dom.html.HTMLTextAreaElement#getCols()
 	 */
 	public int getCols() {
 		InputContext ic = this.inputContext;
@@ -57,7 +57,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.w3c.dom.html2.HTMLTextAreaElement#getRows()
+	 * @see org.lobobrowser.w3c.dom.html.HTMLTextAreaElement#getRows()
 	 */
 	public int getRows() {
 		InputContext ic = this.inputContext;
@@ -67,7 +67,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.w3c.dom.html2.HTMLTextAreaElement#getType()
+	 * @see org.lobobrowser.w3c.dom.html.HTMLTextAreaElement#getType()
 	 */
 	public String getType() {
 		return "textarea";
@@ -76,7 +76,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.w3c.dom.html2.HTMLTextAreaElement#setCols(int)
+	 * @see org.lobobrowser.w3c.dom.html.HTMLTextAreaElement#setCols(int)
 	 */
 	public void setCols(int cols) {
 		InputContext ic = this.inputContext;
@@ -88,7 +88,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.w3c.dom.html2.HTMLTextAreaElement#setRows(int)
+	 * @see org.lobobrowser.w3c.dom.html.HTMLTextAreaElement#setRows(int)
 	 */
 	public void setRows(int rows) {
 		InputContext ic = this.inputContext;

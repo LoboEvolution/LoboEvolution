@@ -25,7 +25,7 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.style.ListRenderState;
 import org.lobobrowser.html.style.RenderState;
-import org.w3c.dom.html2.HTMLOListElement;
+import org.lobobrowser.w3c.dom.html.HTMLOListElement;
 
 public class HTMLOListElementImpl extends HTMLAbstractUIElement implements
 		HTMLOListElement {

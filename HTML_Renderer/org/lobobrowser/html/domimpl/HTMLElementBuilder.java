@@ -23,8 +23,8 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.w3c.dom.html2.HTMLDocument;
-import org.w3c.dom.html2.HTMLElement;
+import org.lobobrowser.w3c.dom.html.HTMLDocument;
+import org.lobobrowser.w3c.dom.html.HTMLElement;
 
 public abstract class HTMLElementBuilder {
 	public final HTMLElement create(HTMLDocument document, String name) {

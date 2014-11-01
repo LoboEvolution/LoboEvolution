@@ -54,9 +54,9 @@ import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.RecordedInputStream;
+import org.lobobrowser.w3c.dom.html.HTMLDocument;
+import org.lobobrowser.w3c.dom.html.HTMLElement;
 import org.w3c.dom.Element;
-import org.w3c.dom.html2.HTMLDocument;
-import org.w3c.dom.html2.HTMLElement;
 
 /**
  * @author J. H. S.

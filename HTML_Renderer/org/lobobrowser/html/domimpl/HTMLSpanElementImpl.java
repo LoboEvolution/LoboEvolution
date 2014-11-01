@@ -23,7 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.w3c.dom.html2.HTMLElement;
+import org.lobobrowser.w3c.dom.html.HTMLElement;
 
 public class HTMLSpanElementImpl extends HTMLAbstractUIElement implements
 		HTMLElement {

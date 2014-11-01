@@ -25,7 +25,7 @@ import org.lobobrowser.html.style.BaseFontRenderState;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
-import org.w3c.dom.html2.HTMLBaseFontElement;
+import org.lobobrowser.w3c.dom.html.HTMLBaseFontElement;
 
 public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements
 		HTMLBaseFontElement {

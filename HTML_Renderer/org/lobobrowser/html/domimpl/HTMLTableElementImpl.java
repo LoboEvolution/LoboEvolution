@@ -30,13 +30,13 @@ import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.TableRenderState;
+import org.lobobrowser.w3c.dom.html.HTMLCollection;
+import org.lobobrowser.w3c.dom.html.HTMLElement;
+import org.lobobrowser.w3c.dom.html.HTMLTableCaptionElement;
+import org.lobobrowser.w3c.dom.html.HTMLTableElement;
+import org.lobobrowser.w3c.dom.html.HTMLTableSectionElement;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
-import org.w3c.dom.html2.HTMLCollection;
-import org.w3c.dom.html2.HTMLElement;
-import org.w3c.dom.html2.HTMLTableCaptionElement;
-import org.w3c.dom.html2.HTMLTableElement;
-import org.w3c.dom.html2.HTMLTableSectionElement;
 
 public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 		HTMLTableElement {

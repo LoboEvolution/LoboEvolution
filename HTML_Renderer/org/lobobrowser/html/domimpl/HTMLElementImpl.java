@@ -46,12 +46,12 @@ import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.StyleSheetAggregator;
 import org.lobobrowser.html.style.StyleSheetRenderState;
 import org.lobobrowser.util.Strings;
+import org.lobobrowser.w3c.dom.html.HTMLElement;
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.css.CSSStyleDeclaration;
-import org.w3c.dom.html2.HTMLElement;
 
 import com.steadystate.css.parser.CSSOMParser;
 

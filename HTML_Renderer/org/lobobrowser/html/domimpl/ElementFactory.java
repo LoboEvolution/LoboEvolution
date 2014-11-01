@@ -27,8 +27,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import org.lobobrowser.w3c.dom.html.HTMLElement;
 import org.w3c.dom.DOMException;
-import org.w3c.dom.html2.HTMLElement;
 
 class ElementFactory {
 	private final Map<String, Object> builders = new HashMap<String, Object>(80);

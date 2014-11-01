@@ -32,12 +32,12 @@ import java.util.logging.Logger;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.js.Executor;
+import org.lobobrowser.w3c.dom.html.HTMLScriptElement;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Document;
 import org.w3c.dom.UserDataHandler;
-import org.w3c.dom.html2.HTMLScriptElement;
 
 public class HTMLScriptElementImpl extends HTMLElementImpl implements
 		HTMLScriptElement {
