@@ -33,6 +33,9 @@
 package org.lobobrowser.w3c.dom.html;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.css.CSSStyleDeclaration;
+import org.mozilla.javascript.Function;
 
 /**
  * All HTML element interfaces derive from this class. Elements that only expose
@@ -109,6 +112,112 @@ public interface HTMLElement extends Element {
 	 * to conflicts with the "class" keyword exposed by many languages. See the
 	 * class attribute definition in HTML 4.01.
 	 */
+	
+
+	public NodeList getElementsByClassName(String classNames);
+
+	public String getInnerHTML();
+
+	public void setInnerHTML(String innerHTML);
+
+	public String getOuterHTML();
+
+	public void setOuterHTML(String outerHTML);
+
+	public void insertAdjacentHTML(String position, String text);
+
 	public void setClassName(String className);
+
+	public DOMTokenList getClassList();
+
+	public DOMStringMap getDataset();
+
+	public boolean getHidden();
+
+	public void setHidden(boolean hidden);
+
+	public void click();
+
+	public void scrollIntoView();
+
+	public void scrollIntoView(boolean top);
+
+	public int getTabIndex();
+
+	public void setTabIndex(int tabIndex);
+
+	public void focus();
+
+	public void blur();
+
+	public String getAccessKey();
+
+	public void setAccessKey(String accessKey);
+
+	public String getAccessKeyLabel();
+
+	public boolean getDraggable();
+
+	public void setDraggable(boolean draggable);
+
+	public String getContentEditable();
+
+	public void setContentEditable(String contentEditable);
+
+	public boolean getIsContentEditable();
+
+	public HTMLMenuElement getContextMenu();
+
+	public void setContextMenu(HTMLMenuElement contextMenu);
+
+	public String getSpellcheck();
+
+	public void setSpellcheck(String spellcheck);
+
+	public String getCommandType();
+
+	public String getLabel();
+
+	public String getIcon();
+
+	public boolean getDisabled();
+
+	public boolean getChecked();
+
+	public Element getOffsetParent();
+
+	public int getOffsetTop();
+
+	public int getOffsetLeft();
+
+	public int getOffsetWidth();
+
+	public int getOffsetHeight();
+
+	public boolean getItemScope();
+
+	public void setItemScope(boolean itemScope);
+
+	public String getItemType();
+
+	public void setItemType(String itemType);
+
+	public String getItemId();
+
+	public void setItemId(String itemId);
+
+	public DOMSettableTokenList getItemRef();
+
+	public void setItemRef(String itemRef);
+
+	public DOMSettableTokenList getItemProp();
+
+	public void setItemProp(String itemProp);
+
+	public HTMLPropertiesCollection getProperties();
+
+	public Object getItemValue();
+
+	public void setItemValue(Object itemValue);
 
 }
