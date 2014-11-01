@@ -46,17 +46,22 @@ import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.StyleSheetAggregator;
 import org.lobobrowser.html.style.StyleSheetRenderState;
 import org.lobobrowser.util.Strings;
+import org.lobobrowser.w3c.dom.html.DOMSettableTokenList;
+import org.lobobrowser.w3c.dom.html.DOMStringMap;
+import org.lobobrowser.w3c.dom.html.DOMTokenList;
 import org.lobobrowser.w3c.dom.html.HTMLElement;
+import org.lobobrowser.w3c.dom.html.HTMLMenuElement;
+import org.lobobrowser.w3c.dom.html.HTMLPropertiesCollection;
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
 import com.steadystate.css.parser.CSSOMParser;
 
-public class HTMLElementImpl extends ElementImpl implements HTMLElement,
-		CSS2PropertiesContext {
+public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2PropertiesContext {
 	
 	public HTMLElementImpl(String name, boolean noStyleSheet) {
 		super(name);
@@ -825,5 +830,275 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement,
 	public String toString() {
 		return super.toString() + "[currentStyle=" + this.getCurrentStyle()
 				+ "]";
+	}
+
+	@Override
+	public NodeList getElementsByClassName(String classNames) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOuterHTML(String outerHTML) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insertAdjacentHTML(String position, String text) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public DOMTokenList getClassList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DOMStringMap getDataset() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean getHidden() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void scrollIntoView() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void scrollIntoView(boolean top) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getTabIndex() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setTabIndex(int tabIndex) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void focus() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void blur() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getAccessKeyLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean getDraggable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setDraggable(boolean draggable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getContentEditable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setContentEditable(String contentEditable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getIsContentEditable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public HTMLMenuElement getContextMenu() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setContextMenu(HTMLMenuElement contextMenu) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getSpellcheck() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSpellcheck(String spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getCommandType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getIcon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean getDisabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getChecked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Element getOffsetParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean getItemScope() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setItemScope(boolean itemScope) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getItemType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setItemType(String itemType) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getItemId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setItemId(String itemId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public DOMSettableTokenList getItemRef() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setItemRef(String itemRef) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public DOMSettableTokenList getItemProp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setItemProp(String itemProp) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HTMLPropertiesCollection getProperties() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getItemValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setItemValue(Object itemValue) {
+		// TODO Auto-generated method stub
+		
 	}
 }
