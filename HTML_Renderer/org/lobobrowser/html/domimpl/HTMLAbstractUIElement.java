@@ -19,10 +19,37 @@ import org.w3c.dom.Document;
 public class HTMLAbstractUIElement extends HTMLElementImpl {
 	private Function onfocus, onblur, onclick, ondblclick, onmousedown,
 			onmouseup, onmouseover, onmousemove, onmouseout, onkeypress,
-			onkeydown, onkeyup, oncontextmenu;
+			onkeydown, onkeyup, oncontextmenu, onabort, onplay, onplaying,
+			onprogress, onreadystatechange, onscroll, onseeked, onseeking,
+			onselect, onshow, onstalled, onsubmit, onsuspend, ontimeupdate,
+			onwaiting, onvolumechange,onfinish,onstart,onbounce;
 
 	public HTMLAbstractUIElement(String name) {
 		super(name);
+	}
+
+	public Function getOnfinish() {
+		return this.getEventFunction(onfinish, "onfinish");
+	}
+
+	public void setOnfinish(Function onfinish) {
+		this.onfinish = onfinish;
+	}
+
+	public Function getOnstart() {
+		return this.getEventFunction(onstart, "onstart");
+	}
+
+	public void setOnstart(Function onstart) {
+		this.onstart = onstart;
+	}
+
+	public Function getOnbounce() {
+		return this.getEventFunction(onbounce, "onbounce");
+	}
+
+	public void setOnbounce(Function onbounce) {
+		this.onbounce = onbounce;
 	}
 
 	public Function getOnblur() {
@@ -129,6 +156,141 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 		this.oncontextmenu = oncontextmenu;
 	}
 
+	public Function getOnabort() {
+		return this.getEventFunction(onabort, "onabort");
+	}
+
+	public void setOnabort(Function onabort) {
+		this.onabort = onabort;
+	}
+
+	public Function getOnplay() {
+		return this.getEventFunction(onplay, "onplay");
+	}
+
+	public void setOnplay(Function onplay) {
+		this.onplay = onplay;
+	}
+
+	public Function getOnplaying() {
+		return this.getEventFunction(onplaying, "onplaying");
+	}
+
+	public void setOnplaying(Function onplaying) {
+		this.onplaying = onplaying;
+	}
+
+	public Function getOnprogress() {
+		return this.getEventFunction(onprogress, "onprogress");
+	}
+
+	public void setOnprogress(Function onprogress) {
+		this.onprogress = onprogress;
+	}
+
+	public Function getOnratechange() {
+		return this.getEventFunction(onprogress, "onprogress");
+	}
+
+	public void setOnratechange(Function onratechange) {
+	}
+
+	public Function getOnreadystatechange() {
+		return this.getEventFunction(onreadystatechange, "onreadystatechange");
+	}
+
+	public void setOnreadystatechange(Function onreadystatechange) {
+		this.onreadystatechange = onreadystatechange;
+	}
+
+	public Function getOnscroll() {
+		return this.getEventFunction(onscroll, "onscroll");
+	}
+
+	public void setOnscroll(Function onscroll) {
+		this.onscroll = onscroll;
+	}
+
+	public Function getOnseeked() {
+		return this.getEventFunction(onseeked, "onseeked");
+	}
+
+	public void setOnseeked(Function onseeked) {
+		this.onseeked = onseeked;
+	}
+
+	public Function getOnseeking() {
+		return this.getEventFunction(onseeking, "onseeking");
+	}
+
+	public void setOnseeking(Function onseeking) {
+		this.onseeking = onseeking;
+	}
+
+	public Function getOnselect() {
+		return this.getEventFunction(onselect, "onselect");
+	}
+
+	public void setOnselect(Function onselect) {
+		this.onselect = onselect;
+	}
+
+	public Function getOnshow() {
+		return this.getEventFunction(onshow, "onshow");
+	}
+
+	public void setOnshow(Function onshow) {
+		this.onshow = onshow;
+	}
+
+	public Function getOnstalled() {
+		return this.getEventFunction(onstalled, "onstalled");
+	}
+
+	public void setOnstalled(Function onstalled) {
+		this.onstalled = onstalled;
+	}
+
+	public Function getOnsubmit() {
+		return this.getEventFunction(onsubmit, "onsubmit");
+	}
+
+	public void setOnsubmit(Function onsubmit) {
+		this.onsubmit = onsubmit;
+	}
+
+	public Function getOnsuspend() {
+		return this.getEventFunction(onsuspend, "onsuspend");
+	}
+
+	public void setOnsuspend(Function onsuspend) {
+		this.onsuspend = onsuspend;
+	}
+
+	public Function getOntimeupdate() {
+		return this.getEventFunction(ontimeupdate, "ontimeupdate");
+	}
+
+	public void setOntimeupdate(Function ontimeupdate) {
+		this.ontimeupdate = ontimeupdate;
+	}
+
+	public Function getOnvolumechange() {
+		return this.getEventFunction(onvolumechange, "onvolumechange");
+	}
+
+	public void setOnvolumechange(Function onvolumechange) {
+		this.onvolumechange = onvolumechange;
+	}
+
+	public Function getOnwaiting() {
+		return this.getEventFunction(onwaiting, "onwaiting");
+	}
+
+	public void setOnwaiting(Function onwaiting) {
+		this.onwaiting = onwaiting;
+	}
+
 	public void focus() {
 		UINode node = this.getUINode();
 		if (node != null) {
@@ -194,10 +356,12 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 									this.getTagName() + "[" + this.getId()
 											+ "]." + attributeName, 1, null);
 						} catch (EcmaError ecmaError) {
-							logger.log(Level.WARNING, "Javascript error at "
-									+ ecmaError.getSourceName() + ":"
-									+ ecmaError.getLineNumber() + ": "
-									+ ecmaError.getMessage(), ecmaError);
+							logger.log(
+									Level.WARNING,
+									"Javascript error at "
+											+ ecmaError.sourceName() + ":"
+											+ ecmaError.lineNumber() + ": "
+											+ ecmaError.getMessage(), ecmaError);
 							f = null;
 						} catch (Throwable err) {
 							logger.log(Level.WARNING,
