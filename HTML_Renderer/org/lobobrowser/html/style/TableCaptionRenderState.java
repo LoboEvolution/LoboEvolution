@@ -18,10 +18,9 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-package org.lobobrowser.html.domimpl;
+package org.lobobrowser.html.style;
 
-import org.lobobrowser.html.style.DisplayRenderState;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.w3c.dom.Node;
 import org.w3c.dom.css.CSS2Properties;
 
