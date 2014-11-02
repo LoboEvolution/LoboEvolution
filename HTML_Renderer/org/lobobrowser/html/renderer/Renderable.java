@@ -25,7 +25,7 @@ package org.lobobrowser.html.renderer;
 
 import java.awt.Graphics;
 
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dombl.ModelNode;
 
 /**
  * Represents a renderer (view) node.

@@ -43,7 +43,7 @@ import org.lobobrowser.clientlet.ClientletContext;
 import org.lobobrowser.clientlet.ClientletException;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.html.HtmlRendererContext;
-import org.lobobrowser.html.domimpl.DocumentNotificationListener;
+import org.lobobrowser.html.dombl.DocumentNotificationListener;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.NodeImpl;
 import org.lobobrowser.html.gui.HtmlPanel;

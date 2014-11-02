@@ -1,6 +1,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.BrowserFrame;
+import org.lobobrowser.html.dombl.FrameNode;
 import org.lobobrowser.html.js.Window;
 import org.lobobrowser.html.style.IFrameRenderState;
 import org.lobobrowser.html.style.RenderState;

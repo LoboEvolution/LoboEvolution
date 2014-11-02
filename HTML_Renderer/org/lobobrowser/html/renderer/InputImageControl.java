@@ -30,10 +30,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.ImageObserver;
 
+import org.lobobrowser.html.dombl.ImageEvent;
+import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.domimpl.ImageEvent;
-import org.lobobrowser.html.domimpl.ImageListener;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.WrapperLayout;
 

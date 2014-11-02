@@ -37,7 +37,7 @@ import javax.swing.JComponent;
 
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.domimpl.DocumentNotificationListener;
+import org.lobobrowser.html.dombl.DocumentNotificationListener;
 import org.lobobrowser.html.domimpl.ElementImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.NodeImpl;

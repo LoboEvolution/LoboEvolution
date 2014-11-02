@@ -38,6 +38,14 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
+import org.lobobrowser.html.dombl.ChildHTMLCollection;
+import org.lobobrowser.html.dombl.ModelNode;
+import org.lobobrowser.html.dombl.NodeFilter;
+import org.lobobrowser.html.dombl.NodeVisitor;
+import org.lobobrowser.html.dombl.SkipVisitorException;
+import org.lobobrowser.html.dombl.StopVisitorException;
+import org.lobobrowser.html.dombl.TextFilter;
+import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.StyleSheetRenderState;
 import org.lobobrowser.js.AbstractScriptableDelegate;
@@ -156,7 +164,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 		}
 	}
 
-	int getChildCount() {
+	public int getChildCount() {
 		ArrayList<Node> nl = this.nodeList;
 		synchronized (this.treeLock) {
 			return nl == null ? 0 : nl.size();
@@ -286,14 +294,14 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 		return parent == null ? -1 : parent.getChildIndex(this);
 	}
 
-	int getChildIndex(Node child) {
+	public int getChildIndex(Node child) {
 		synchronized (this.treeLock) {
 			ArrayList<Node> nl = this.nodeList;
 			return nl == null ? -1 : nl.indexOf(child);
 		}
 	}
 
-	Node getChildAtIndex(int index) {
+	public Node getChildAtIndex(int index) {
 		synchronized (this.treeLock) {
 			ArrayList<Node> nl = this.nodeList;
 			try {
@@ -351,7 +359,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 		return this.document;
 	}
 
-	void setOwnerDocument(Document value) {
+	public void setOwnerDocument(Document value) {
 		this.document = value;
 		this.treeLock = value == null ? this : (Object) value;
 	}

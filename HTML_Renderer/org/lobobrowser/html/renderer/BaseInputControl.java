@@ -26,8 +26,8 @@ package org.lobobrowser.html.renderer;
 import java.awt.Graphics;
 import java.io.File;
 
+import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
-import org.lobobrowser.html.domimpl.InputContext;
 
 abstract class BaseInputControl extends BaseControl implements InputContext {
 

@@ -33,12 +33,12 @@ import java.util.Map;
 
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
+import org.lobobrowser.html.dombl.NodeFilter;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCaptionElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableRowElementImpl;
-import org.lobobrowser.html.domimpl.NodeFilter;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;

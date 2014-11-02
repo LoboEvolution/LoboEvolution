@@ -36,6 +36,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 
 import org.lobobrowser.html.FormInput;
+import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.CSS2PropertiesContext;

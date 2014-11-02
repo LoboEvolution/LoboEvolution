@@ -33,7 +33,7 @@ import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dombl.ModelNode;
 
 /**
  * @author J. H. S.

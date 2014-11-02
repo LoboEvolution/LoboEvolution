@@ -7,12 +7,12 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlRendererContext;
+import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.domimpl.HTMLAbstractUIElement;
 import org.lobobrowser.html.domimpl.HTMLButtonElementImpl;
 import org.lobobrowser.html.domimpl.HTMLInputElementImpl;
 import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
-import org.lobobrowser.html.domimpl.ModelNode;
 import org.lobobrowser.html.js.Event;
 import org.lobobrowser.html.js.Executor;
 import org.mozilla.javascript.Function;

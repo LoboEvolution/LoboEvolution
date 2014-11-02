@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.logging.Level;
 
 import org.lobobrowser.html.UserAgentContext;
+import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.js.JavaScript;
 import org.mozilla.javascript.Context;

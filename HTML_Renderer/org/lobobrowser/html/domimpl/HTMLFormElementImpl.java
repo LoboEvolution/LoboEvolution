@@ -29,6 +29,10 @@ import java.util.ArrayList;
 
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlRendererContext;
+import org.lobobrowser.html.dombl.DescendentHTMLCollection;
+import org.lobobrowser.html.dombl.NodeFilter;
+import org.lobobrowser.html.dombl.NodeVisitor;
+import org.lobobrowser.html.dombl.StopVisitorException;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLFormElement;

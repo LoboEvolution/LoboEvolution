@@ -3,6 +3,7 @@ package org.lobobrowser.html.domimpl;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.FormInput;
+import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLOptionsCollection;
 import org.lobobrowser.html.w3c.HTMLSelectElement;

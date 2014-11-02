@@ -43,7 +43,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
-	void setOwnerDocument(Document value) {
+	public void setOwnerDocument(Document value) {
 		super.setOwnerDocument(value);
 		if (value instanceof HTMLDocument) {
 			((HTMLDocument) value).setBody(this);

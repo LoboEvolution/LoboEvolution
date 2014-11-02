@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
 
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dombl.ModelNode;
 
 abstract class BaseRCollection extends BaseBoundableRenderable implements
 		RCollection {

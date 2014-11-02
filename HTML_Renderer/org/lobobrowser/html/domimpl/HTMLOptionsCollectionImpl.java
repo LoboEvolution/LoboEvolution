@@ -1,5 +1,7 @@
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.dombl.DescendentHTMLCollection;
+import org.lobobrowser.html.dombl.NodeFilter;
 import org.lobobrowser.html.w3c.HTMLOptionElement;
 import org.lobobrowser.html.w3c.HTMLOptionsCollection;
 import org.w3c.dom.DOMException;

@@ -38,7 +38,7 @@ import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlObject;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.domimpl.FrameNode;
+import org.lobobrowser.html.dombl.FrameNode;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
