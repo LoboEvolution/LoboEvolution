@@ -30,7 +30,7 @@ import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.NodeImpl;
 import org.lobobrowser.html.style.ListStyle;
 import org.lobobrowser.html.style.RenderState;
-import org.lobobrowser.w3c.dom.html.HTMLElement;
+import org.lobobrowser.html.w3c.HTMLElement;
 
 class RListItem extends BaseRListElement {
 	private static final int BULLET_WIDTH = 5;

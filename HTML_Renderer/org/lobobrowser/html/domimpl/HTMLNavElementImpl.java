@@ -22,7 +22,7 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.style.NavRenderState;
 import org.lobobrowser.html.style.RenderState;
-import org.lobobrowser.w3c.dom.html.HTMLNavElement;
+import org.lobobrowser.html.w3c.HTMLNavElement;
 
 
 public class HTMLNavElementImpl extends HTMLAbstractUIElement implements HTMLNavElement {

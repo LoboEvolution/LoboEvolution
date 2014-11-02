@@ -3,9 +3,9 @@ package org.lobobrowser.html.domimpl;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.FormInput;
-import org.lobobrowser.w3c.dom.html.HTMLElement;
-import org.lobobrowser.w3c.dom.html.HTMLOptionsCollection;
-import org.lobobrowser.w3c.dom.html.HTMLSelectElement;
+import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.html.w3c.HTMLOptionsCollection;
+import org.lobobrowser.html.w3c.HTMLSelectElement;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.DOMException;
 

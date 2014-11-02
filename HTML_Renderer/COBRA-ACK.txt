@@ -20,4 +20,4 @@ The following externals are used by this project:
 * [http://w3c.org] W3C DOM Java Bindings (W3C Software Copyright Notice and License)
   We implement these DOM interfaces. Source 
   redistributed unmodified. See package
-  org.lobobrowser.w3c.dom.html.
+  org.lobobrowser.html.w3c.

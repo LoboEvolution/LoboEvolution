@@ -11,7 +11,7 @@ import org.lobobrowser.html.domimpl.ModelNode;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
-import org.lobobrowser.w3c.dom.html.HTMLElement;
+import org.lobobrowser.html.w3c.HTMLElement;
 
 class BrowserFrameUIControl implements UIControl {
 	// private final BrowserFrame browserFrame;

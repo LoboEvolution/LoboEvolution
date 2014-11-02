@@ -7,7 +7,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import org.lobobrowser.html.HtmlObject;
-import org.lobobrowser.w3c.dom.html.HTMLElement;
+import org.lobobrowser.html.w3c.HTMLElement;
 
 /**
  * Simple implementation of {@link org.lobobrowser.html.HtmlObject}.

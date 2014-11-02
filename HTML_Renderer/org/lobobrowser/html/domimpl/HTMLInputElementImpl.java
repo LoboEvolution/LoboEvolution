@@ -26,7 +26,7 @@ package org.lobobrowser.html.domimpl;
 import java.util.logging.Level;
 
 import org.lobobrowser.html.FormInput;
-import org.lobobrowser.w3c.dom.html.HTMLInputElement;
+import org.lobobrowser.html.w3c.HTMLInputElement;
 
 public class HTMLInputElementImpl extends HTMLBaseInputElement implements
 		HTMLInputElement {

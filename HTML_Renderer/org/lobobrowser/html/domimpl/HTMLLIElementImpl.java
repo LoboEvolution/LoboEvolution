@@ -25,7 +25,7 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.style.DisplayRenderState;
 import org.lobobrowser.html.style.RenderState;
-import org.lobobrowser.w3c.dom.html.HTMLLIElement;
+import org.lobobrowser.html.w3c.HTMLLIElement;
 
 public class HTMLLIElementImpl extends HTMLAbstractUIElement implements
 		HTMLLIElement {

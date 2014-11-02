@@ -23,8 +23,8 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.js.AbstractScriptableDelegate;
-import org.lobobrowser.w3c.dom.html.HTMLCollection;
 import org.w3c.dom.Node;
 
 public class ChildHTMLCollection extends AbstractScriptableDelegate implements

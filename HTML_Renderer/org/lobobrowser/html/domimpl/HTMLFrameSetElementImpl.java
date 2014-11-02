@@ -23,7 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.w3c.dom.html.HTMLFrameSetElement;
+import org.lobobrowser.html.w3c.HTMLFrameSetElement;
 
 public class HTMLFrameSetElementImpl extends HTMLElementImpl implements
 		HTMLFrameSetElement {

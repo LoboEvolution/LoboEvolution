@@ -42,15 +42,15 @@ import org.lobobrowser.html.domimpl.FrameNode;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
+import org.lobobrowser.html.w3c.HTMLCollection;
+import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.html.w3c.HTMLLinkElement;
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.Parameter;
 import org.lobobrowser.ua.ParameterInfo;
 import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.ua.TargetType;
-import org.lobobrowser.w3c.dom.html.HTMLCollection;
-import org.lobobrowser.w3c.dom.html.HTMLElement;
-import org.lobobrowser.w3c.dom.html.HTMLLinkElement;
 import org.w3c.dom.Document;
 
 public class HtmlRendererContextImpl implements HtmlRendererContext {

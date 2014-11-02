@@ -44,9 +44,9 @@ import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.RenderThreadState;
-import org.lobobrowser.w3c.dom.html.HTMLTableCaptionElement;
-import org.lobobrowser.w3c.dom.html.HTMLTableCellElement;
-import org.lobobrowser.w3c.dom.html.HTMLTableRowElement;
+import org.lobobrowser.html.w3c.HTMLTableCaptionElement;
+import org.lobobrowser.html.w3c.HTMLTableCellElement;
+import org.lobobrowser.html.w3c.HTMLTableRowElement;
 import org.w3c.dom.Node;
 
 class TableMatrix {

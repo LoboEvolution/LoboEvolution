@@ -25,8 +25,8 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.style.BodyRenderState;
 import org.lobobrowser.html.style.RenderState;
-import org.lobobrowser.w3c.dom.html.HTMLBodyElement;
-import org.lobobrowser.w3c.dom.html.HTMLDocument;
+import org.lobobrowser.html.w3c.HTMLBodyElement;
+import org.lobobrowser.html.w3c.HTMLDocument;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Document;
 

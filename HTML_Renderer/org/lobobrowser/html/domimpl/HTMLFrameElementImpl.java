@@ -25,7 +25,7 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.js.Window;
-import org.lobobrowser.w3c.dom.html.HTMLFrameElement;
+import org.lobobrowser.html.w3c.HTMLFrameElement;
 import org.w3c.dom.Document;
 
 public class HTMLFrameElementImpl extends HTMLElementImpl implements

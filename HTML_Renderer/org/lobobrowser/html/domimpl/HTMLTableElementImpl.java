@@ -30,11 +30,11 @@ import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.TableRenderState;
-import org.lobobrowser.w3c.dom.html.HTMLCollection;
-import org.lobobrowser.w3c.dom.html.HTMLElement;
-import org.lobobrowser.w3c.dom.html.HTMLTableCaptionElement;
-import org.lobobrowser.w3c.dom.html.HTMLTableElement;
-import org.lobobrowser.w3c.dom.html.HTMLTableSectionElement;
+import org.lobobrowser.html.w3c.HTMLCollection;
+import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.html.w3c.HTMLTableCaptionElement;
+import org.lobobrowser.html.w3c.HTMLTableElement;
+import org.lobobrowser.html.w3c.HTMLTableSectionElement;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 

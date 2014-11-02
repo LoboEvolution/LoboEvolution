@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.style.ImageRenderState;
 import org.lobobrowser.html.style.RenderState;
-import org.lobobrowser.w3c.dom.html.HTMLImageElement;
+import org.lobobrowser.html.w3c.HTMLImageElement;
 import org.mozilla.javascript.Function;
 
 public class HTMLImageElementImpl extends HTMLAbstractUIElement implements

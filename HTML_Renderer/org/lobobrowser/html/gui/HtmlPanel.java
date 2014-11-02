@@ -48,9 +48,9 @@ import org.lobobrowser.html.renderer.FrameContext;
 import org.lobobrowser.html.renderer.NodeRenderer;
 import org.lobobrowser.html.renderer.RenderableSpot;
 import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.w3c.HTMLFrameSetElement;
 import org.lobobrowser.util.EventDispatch2;
 import org.lobobrowser.util.gui.WrapperLayout;
-import org.lobobrowser.w3c.dom.html.HTMLFrameSetElement;
 import org.w3c.dom.Document;
 import org.w3c.dom.Text;
 

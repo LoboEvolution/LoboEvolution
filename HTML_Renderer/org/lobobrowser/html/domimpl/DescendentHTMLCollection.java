@@ -30,9 +30,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.util.Nodes;
-import org.lobobrowser.w3c.dom.html.HTMLCollection;
 import org.w3c.dom.Node;
 
 public class DescendentHTMLCollection extends AbstractScriptableDelegate

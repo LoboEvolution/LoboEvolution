@@ -26,10 +26,10 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.html.gui.HtmlPanel;
+import org.lobobrowser.html.w3c.HTMLDocument;
+import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.util.io.BufferExceededException;
 import org.lobobrowser.util.io.RecordedInputStream;
-import org.lobobrowser.w3c.dom.html.HTMLDocument;
-import org.lobobrowser.w3c.dom.html.HTMLElement;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 

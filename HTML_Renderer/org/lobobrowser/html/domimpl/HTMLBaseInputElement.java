@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.js.Executor;
-import org.lobobrowser.w3c.dom.html.HTMLFormElement;
+import org.lobobrowser.html.w3c.HTMLFormElement;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Node;
 

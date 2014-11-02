@@ -1,6 +1,6 @@
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.w3c.dom.html.HTMLBRElement;
+import org.lobobrowser.html.w3c.HTMLBRElement;
 
 public class HTMLBRElementImpl extends HTMLElementImpl implements HTMLBRElement {
 	public HTMLBRElementImpl(String name) {

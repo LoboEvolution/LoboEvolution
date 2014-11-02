@@ -51,12 +51,12 @@ import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
+import org.lobobrowser.html.w3c.HTMLCollection;
+import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.html.w3c.HTMLLinkElement;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.BufferExceededException;
 import org.lobobrowser.util.io.RecordedInputStream;
-import org.lobobrowser.w3c.dom.html.HTMLCollection;
-import org.lobobrowser.w3c.dom.html.HTMLElement;
-import org.lobobrowser.w3c.dom.html.HTMLLinkElement;
 
 /**
  * The <code>SimpleHtmlRendererContext</code> class implements the

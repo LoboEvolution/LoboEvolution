@@ -5,9 +5,9 @@ import java.awt.Color;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableRowElementImpl;
+import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.html.w3c.HTMLTableElement;
 import org.lobobrowser.util.gui.ColorFactory;
-import org.lobobrowser.w3c.dom.html.HTMLElement;
-import org.lobobrowser.w3c.dom.html.HTMLTableElement;
 import org.w3c.dom.css.CSS2Properties;
 
 public class TableCellRenderState extends DisplayRenderState {

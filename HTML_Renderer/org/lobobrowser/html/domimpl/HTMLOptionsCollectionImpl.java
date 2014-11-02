@@ -1,7 +1,7 @@
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.w3c.dom.html.HTMLOptionElement;
-import org.lobobrowser.w3c.dom.html.HTMLOptionsCollection;
+import org.lobobrowser.html.w3c.HTMLOptionElement;
+import org.lobobrowser.html.w3c.HTMLOptionsCollection;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 

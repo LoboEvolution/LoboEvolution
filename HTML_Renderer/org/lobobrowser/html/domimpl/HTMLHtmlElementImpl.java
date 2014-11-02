@@ -23,7 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.w3c.dom.html.HTMLHtmlElement;
+import org.lobobrowser.html.w3c.HTMLHtmlElement;
 
 public class HTMLHtmlElementImpl extends HTMLElementImpl implements
 		HTMLHtmlElement {

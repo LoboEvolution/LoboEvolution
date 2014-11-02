@@ -28,7 +28,7 @@ import java.util.logging.Level;
 
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.style.CSSUtilities;
-import org.lobobrowser.w3c.dom.html.HTMLStyleElement;
+import org.lobobrowser.html.w3c.HTMLStyleElement;
 import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.css.CSSStyleSheet;
 

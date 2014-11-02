@@ -25,9 +25,9 @@ package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
 
-import org.lobobrowser.w3c.dom.html.HTMLCollection;
-import org.lobobrowser.w3c.dom.html.HTMLElement;
-import org.lobobrowser.w3c.dom.html.HTMLTableRowElement;
+import org.lobobrowser.html.w3c.HTMLCollection;
+import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.html.w3c.HTMLTableRowElement;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
@@ -158,7 +158,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 				int trcount = 0;
 				for (int i = 0; i < size; i++) {
 					Node node = (Node) nl.get(i);
-					if (node instanceof org.lobobrowser.w3c.dom.html.HTMLTableCellElement) {
+					if (node instanceof org.lobobrowser.html.w3c.HTMLTableCellElement) {
 						if (trcount == index) {
 							this.insertAt(cellElement, i);
 							return cellElement;
@@ -183,7 +183,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 				int trcount = 0;
 				for (int i = 0; i < size; i++) {
 					Node node = (Node) nl.get(i);
-					if (node instanceof org.lobobrowser.w3c.dom.html.HTMLTableCellElement) {
+					if (node instanceof org.lobobrowser.html.w3c.HTMLTableCellElement) {
 						if (trcount == index) {
 							this.removeChildAt(index);
 						}

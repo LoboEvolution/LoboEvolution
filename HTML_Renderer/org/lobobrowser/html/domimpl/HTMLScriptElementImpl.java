@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.js.Executor;
-import org.lobobrowser.w3c.dom.html.HTMLScriptElement;
+import org.lobobrowser.html.w3c.HTMLScriptElement;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.Scriptable;

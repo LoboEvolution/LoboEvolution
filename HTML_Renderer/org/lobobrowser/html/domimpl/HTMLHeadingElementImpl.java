@@ -24,7 +24,7 @@ import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.style.HeadingRenderState;
 import org.lobobrowser.html.style.RenderState;
-import org.lobobrowser.w3c.dom.html.HTMLHeadingElement;
+import org.lobobrowser.html.w3c.HTMLHeadingElement;
 
 public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements
 		HTMLHeadingElement {

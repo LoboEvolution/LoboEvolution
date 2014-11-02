@@ -4,7 +4,7 @@ import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.js.Window;
 import org.lobobrowser.html.style.IFrameRenderState;
 import org.lobobrowser.html.style.RenderState;
-import org.lobobrowser.w3c.dom.html.HTMLIFrameElement;
+import org.lobobrowser.html.w3c.HTMLIFrameElement;
 import org.w3c.dom.Document;
 
 public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements

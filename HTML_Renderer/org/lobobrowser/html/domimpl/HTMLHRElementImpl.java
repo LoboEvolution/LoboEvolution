@@ -1,6 +1,6 @@
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.w3c.dom.html.HTMLHRElement;
+import org.lobobrowser.html.w3c.HTMLHRElement;
 
 public class HTMLHRElementImpl extends HTMLAbstractUIElement implements
 		HTMLHRElement {
