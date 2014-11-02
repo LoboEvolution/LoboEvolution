@@ -26,6 +26,8 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.w3c.HTMLTextAreaElement;
+import org.lobobrowser.html.w3c.ValidityState;
+import org.w3c.dom.NodeList;
 
 public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 		HTMLTextAreaElement {
@@ -96,5 +98,137 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 		if (ic != null) {
 			ic.setRows(rows);
 		}
+	}
+
+	@Override
+	public boolean getAutofocus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAutofocus(boolean autofocus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getMaxLength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setMaxLength(int maxLength) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getPlaceholder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPlaceholder(String placeholder) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getRequired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setRequired(boolean required) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getWrap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setWrap(String wrap) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getTextLength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean getWillValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ValidityState getValidity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getValidationMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean checkValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setCustomValidity(String error) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NodeList getLabels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getSelectionStart() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setSelectionStart(int selectionStart) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getSelectionEnd() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setSelectionEnd(int selectionEnd) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSelectionRange(int start, int end) {
+		// TODO Auto-generated method stub
+		
 	}
 }

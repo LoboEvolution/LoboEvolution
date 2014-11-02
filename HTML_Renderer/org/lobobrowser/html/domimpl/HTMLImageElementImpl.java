@@ -257,4 +257,22 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 			dispatchEvent(this.expectedImgSrc, event);
 		}
 	}
+
+	@Override
+	public int getNaturalWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getNaturalHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean getComplete() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

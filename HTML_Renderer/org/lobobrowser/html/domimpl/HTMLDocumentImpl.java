@@ -64,6 +64,7 @@ import org.lobobrowser.html.style.StyleSheetRenderState;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLDocument;
 import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.html.w3c.HTMLHeadElement;
 import org.lobobrowser.html.w3c.HTMLLinkElement;
 import org.lobobrowser.util.Domains;
 import org.lobobrowser.util.Urls;
@@ -1448,5 +1449,113 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 				openBufferChanged(text);
 			}
 		}
+	}
+
+	@Override
+	public String getLastModified() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getCompatMode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getCharset() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCharset(String charset) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getCharacterSet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDefaultCharset() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getReadyState() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getElement(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDir() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDir(String dir) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HTMLHeadElement getHead() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HTMLCollection getEmbeds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HTMLCollection getPlugins() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HTMLCollection getScripts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public NodeList getElementsByClassName(String classNames) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setInnerHTML(String innerHTML) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HTMLDocument open(String type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HTMLDocument open(String type, String replace) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.dombl.InputContext;
+import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLOptionsCollection;
 import org.lobobrowser.html.w3c.HTMLSelectElement;
+import org.lobobrowser.html.w3c.ValidityState;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.NodeList;
 
 public class HTMLSelectElementImpl extends HTMLBaseInputElement implements
 		HTMLSelectElement {
@@ -162,5 +165,83 @@ public class HTMLSelectElementImpl extends HTMLBaseInputElement implements
 
 	public void setOnchange(Function value) {
 		this.onchange = value;
+	}
+
+	@Override
+	public boolean getAutofocus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAutofocus(boolean autofocus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Object item(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object namedItem(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void add(HTMLElement element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(HTMLElement element, int before) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HTMLCollection getSelectedOptions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean getWillValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ValidityState getValidity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getValidationMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean checkValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setCustomValidity(String error) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NodeList getLabels() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -294,4 +294,10 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new TableRenderState(prevRenderState, this);
 	}
+
+	@Override
+	public HTMLElement insertRow() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

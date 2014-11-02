@@ -69,4 +69,16 @@ public class HTMLOListElementImpl extends HTMLAbstractUIElement implements
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new ListRenderState(prevRenderState, this);
 	}
+
+	@Override
+	public boolean getReversed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setReversed(boolean reversed) {
+		// TODO Auto-generated method stub
+		
+	}
 }

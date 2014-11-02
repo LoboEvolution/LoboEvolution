@@ -32,6 +32,8 @@ import org.lobobrowser.html.style.CSSUtilities;
 import org.lobobrowser.html.style.ColorRenderState;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.TextDecorationRenderState;
+import org.lobobrowser.html.w3c.DOMSettableTokenList;
+import org.lobobrowser.html.w3c.DOMTokenList;
 import org.lobobrowser.html.w3c.HTMLBodyElement;
 import org.lobobrowser.html.w3c.HTMLDocument;
 import org.lobobrowser.html.w3c.HTMLLinkElement;
@@ -311,5 +313,23 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 		// js9.html.
 		// To change, perhaps add method to AbstractScriptableDelegate.
 		return this.getHref();
+	}
+
+	@Override
+	public DOMTokenList getRelList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DOMSettableTokenList getSizes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSizes(String sizes) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -23,11 +23,16 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import java.io.File;
 import java.util.logging.Level;
 
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.dombl.InputContext;
+import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLInputElement;
+import org.lobobrowser.html.w3c.HTMLOptionElement;
+import org.lobobrowser.html.w3c.ValidityState;
+import org.w3c.dom.NodeList;
 
 public class HTMLInputElementImpl extends HTMLBaseInputElement implements
 		HTMLInputElement {
@@ -196,5 +201,341 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements
 				return null;
 			}
 		}
+	}
+
+	@Override
+	public boolean getAutocomplete() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAutocomplete(boolean autocomplete) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getAutofocus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAutofocus(boolean autofocus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public File[] getFiles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getFormAction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFormAction(String formAction) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getFormEnctype() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFormEnctype(String formEnctype) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getFormMethod() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFormMethod(String formMethod) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getFormNoValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setFormNoValidate(boolean formNoValidate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getFormTarget() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFormTarget(String formTarget) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getHeight() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setHeight(String height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getIndeterminate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setIndeterminate(boolean indeterminate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HTMLElement getList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getMax() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMax(String max) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getMin() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMin(String min) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getMultiple() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setMultiple(boolean multiple) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getPattern() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPattern(String pattern) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getPlaceholder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPlaceholder(String placeholder) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getRequired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setRequired(boolean required) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getStep() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setStep(String step) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public long getValueAsDate() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setValueAsDate(long valueAsDate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getValueAsNumber() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setValueAsNumber(float valueAsNumber) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HTMLOptionElement getSelectedOption() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getWidth() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setWidth(String width) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stepUp() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stepUp(int n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stepDown() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stepDown(int n) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getWillValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ValidityState getValidity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getValidationMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean checkValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setCustomValidity(String error) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public NodeList getLabels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getSelectionStart() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setSelectionStart(int selectionStart) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getSelectionEnd() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setSelectionEnd(int selectionEnd) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSelectionRange(int start, int end) {
+		// TODO Auto-generated method stub
+		
 	}
 }

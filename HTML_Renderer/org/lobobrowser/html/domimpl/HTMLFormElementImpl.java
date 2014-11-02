@@ -255,4 +255,46 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 			return HTMLFormElementImpl.isInput(node);
 		}
 	}
+
+	@Override
+	public boolean getAutocomplete() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAutocomplete(boolean autocomplete) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getNoValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setNoValidate(boolean noValidate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean checkValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void dispatchFormInput() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dispatchFormChange() {
+		// TODO Auto-generated method stub
+		
+	}
 }

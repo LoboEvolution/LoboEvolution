@@ -199,4 +199,10 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 		throw new DOMException(DOMException.INDEX_SIZE_ERR,
 				"Index out of range");
 	}
+
+	@Override
+	public HTMLElement insertCell() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

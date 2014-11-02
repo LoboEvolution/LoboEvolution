@@ -141,4 +141,16 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements
 	protected void appendInnerTextImpl(StringBuffer buffer) {
 		// nop
 	}
+
+	@Override
+	public boolean getScoped() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setScoped(boolean scoped) {
+		// TODO Auto-generated method stub
+		
+	}
 }

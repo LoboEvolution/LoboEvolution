@@ -39,4 +39,16 @@ public class HTMLHRElementImpl extends HTMLAbstractUIElement implements
 	public void setWidth(String width) {
 		this.setAttribute("width", width);
 	}
+
+	@Override
+	public String getColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setColor(String color) {
+		// TODO Auto-generated method stub
+		
+	}
 }

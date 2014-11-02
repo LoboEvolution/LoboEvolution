@@ -2,6 +2,7 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.w3c.HTMLFormElement;
 import org.lobobrowser.html.w3c.HTMLObjectElement;
+import org.lobobrowser.html.w3c.ValidityState;
 import org.w3c.dom.Document;
 
 public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements
@@ -181,5 +182,35 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements
 
 	public void setVspace(int vspace) {
 		this.setAttribute("vspace", String.valueOf(vspace));
+	}
+
+	@Override
+	public boolean getWillValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ValidityState getValidity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getValidationMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean checkValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setCustomValidity(String error) {
+		// TODO Auto-generated method stub
+		
 	}
 }
