@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="class/" kind="src" path=""/>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Common"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Platform_Public_API"/>
-	<classpathentry kind="lib" path="class"/>
-	<classpathentry kind="output" path=""/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Platform_Public_API"/>	
 </classpath>
