@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path=""/>
+	<classpathentry excluding="class/" kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Common"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/HTML_Renderer"/>
@@ -8,5 +8,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/Platform_Public_API"/>
 	<classpathentry kind="lib" path="/XAMJ_Build/ext/jlfgr-1_0.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/parser"/>
+	<classpathentry kind="lib" path="class"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

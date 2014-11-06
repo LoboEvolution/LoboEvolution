@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path=""/>
+	<classpathentry excluding="org/|class/" kind="src" path=""/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Platform_Public_API"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Common"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Platform_Core"/>
@@ -11,5 +11,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/XAMJ_Build/ext/javafxc.jar"/>
 	<classpathentry kind="lib" path="/XAMJ_Build/ext/javafxrt.jar"/>
+	<classpathentry kind="lib" path="class"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
