@@ -1,0 +1,29 @@
+<project name="cssparser" default="dist" basedir=".">
+
+	<description>Ant buildfile for Parser</description>
+
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="samples" location="samples"/>
+
+	<target name="init">
+		<tstamp/>
+		<mkdir dir="${build}"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
+	</target>
+
+	<target name="dist" depends="compile">
+		<jar jarfile="ss_css2.jar" basedir="${build}"/>
+	</target>
+
+	<target name="samples" depends="compile">
+		<javac srcdir="${samples}" destdir="${build}" includeantruntime="false"/>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build}"/>
+	</target>
+</project>

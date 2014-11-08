@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Platform_Public_API"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Common"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Platform_Core"/>
+	<classpathentry kind="lib" path="/XAMJ_Build/ext/javafx-swing.jar"/>
+	<classpathentry kind="lib" path="/XAMJ_Build/ext/javafxgui.jar"/>
+	<classpathentry kind="lib" path="/XAMJ_Build/ext/Scenario.jar"/>
+	<classpathentry kind="lib" path="/XAMJ_Build/ext/websvc.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/XAMJ_Build/ext/javafxc.jar"/>
+	<classpathentry kind="lib" path="/XAMJ_Build/ext/javafxrt.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
