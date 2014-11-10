@@ -13,7 +13,7 @@ import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.w3c.HTMLElement;
 
-class BrowserFrameUIControl implements UIControl {
+public class BrowserFrameUIControl implements UIControl {
 	// private final BrowserFrame browserFrame;
 	private final Component component;
 	private final HTMLElement element;

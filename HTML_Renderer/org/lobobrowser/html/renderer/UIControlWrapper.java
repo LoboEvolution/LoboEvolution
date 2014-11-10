@@ -7,7 +7,7 @@ import java.awt.Graphics;
 
 import org.lobobrowser.html.HtmlObject;
 
-class UIControlWrapper implements UIControl {
+public class UIControlWrapper implements UIControl {
 	private final Component component;
 	private final HtmlObject htmlObject;
 

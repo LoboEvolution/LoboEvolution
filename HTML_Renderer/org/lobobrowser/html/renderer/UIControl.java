@@ -27,7 +27,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-abstract interface UIControl {
+public abstract interface UIControl {
 	public void setRUIControl(RUIControl ruicontrol);
 
 	/**

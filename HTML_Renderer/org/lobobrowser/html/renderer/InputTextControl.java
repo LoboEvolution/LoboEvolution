@@ -31,7 +31,7 @@ import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 
-class InputTextControl extends BaseInputTextControl {
+public class InputTextControl extends BaseInputTextControl {
 
 	private static final long serialVersionUID = 1L;
 

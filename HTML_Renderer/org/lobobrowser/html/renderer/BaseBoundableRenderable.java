@@ -38,7 +38,7 @@ import org.lobobrowser.html.dombl.ModelNode;
 /**
  * @author J. H. S.
  */
-abstract class BaseBoundableRenderable extends BaseRenderable implements
+public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		BoundableRenderable {
 	protected static final Logger logger = Logger
 			.getLogger(BaseBoundableRenderable.class.getName());

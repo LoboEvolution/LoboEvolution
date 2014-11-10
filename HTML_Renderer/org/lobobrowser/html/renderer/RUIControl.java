@@ -42,7 +42,7 @@ import org.lobobrowser.util.Objects;
 /**
  * @author J. H. S.
  */
-class RUIControl extends BaseElementRenderable implements RElement {
+public class RUIControl extends BaseElementRenderable implements RElement {
 	private static final int MAX_CACHE_SIZE = 10;
 	public final UIControl widget;
 	protected final ModelNode modelNode;

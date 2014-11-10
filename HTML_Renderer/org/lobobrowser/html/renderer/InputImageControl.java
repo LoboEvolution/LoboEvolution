@@ -37,7 +37,7 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.WrapperLayout;
 
-class InputImageControl extends BaseInputControl implements ImageListener {
+public class InputImageControl extends BaseInputControl implements ImageListener {
 
 	private static final long serialVersionUID = 1L;
 	// private JButton button;

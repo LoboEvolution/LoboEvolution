@@ -36,7 +36,7 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.style.HtmlValues;
 
-class ImgControl extends BaseControl implements ImageListener {
+public class ImgControl extends BaseControl implements ImageListener {
 
 	private static final long serialVersionUID = 1L;
 	private volatile Image image;

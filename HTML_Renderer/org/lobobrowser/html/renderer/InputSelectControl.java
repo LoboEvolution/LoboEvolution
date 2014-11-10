@@ -20,7 +20,7 @@ import org.lobobrowser.html.w3c.HTMLOptionElement;
 import org.lobobrowser.html.w3c.HTMLOptionsCollection;
 import org.lobobrowser.util.gui.WrapperLayout;
 
-class InputSelectControl extends BaseInputControl {
+public class InputSelectControl extends BaseInputControl {
 
 	private static final long serialVersionUID = 1L;
 	private final JComboBox<OptionItem> comboBox;

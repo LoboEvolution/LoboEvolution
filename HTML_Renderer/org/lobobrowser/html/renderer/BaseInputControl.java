@@ -29,7 +29,7 @@ import java.io.File;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 
-abstract class BaseInputControl extends BaseControl implements InputContext {
+public abstract class BaseInputControl extends BaseControl implements InputContext {
 
 	private static final long serialVersionUID = 1L;
 	protected String value;
