@@ -41,18 +41,38 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.lobobrowser.html.BrowserFrame;
-import org.lobobrowser.html.HtmlObject;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.dombl.UINode;
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.domimpl.HTMLIFrameElementImpl;
-import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
 import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.layout.AnchorLayout;
+import org.lobobrowser.html.layout.BlockQuoteLayout;
+import org.lobobrowser.html.layout.BrLayout;
+import org.lobobrowser.html.layout.ChildrenLayout;
+import org.lobobrowser.html.layout.CommonBlockLayout;
+import org.lobobrowser.html.layout.DivLayout;
+import org.lobobrowser.html.layout.EmLayout;
+import org.lobobrowser.html.layout.HLayout;
+import org.lobobrowser.html.layout.HrLayout;
+import org.lobobrowser.html.layout.IFrameLayout;
+import org.lobobrowser.html.layout.ImgLayout;
+import org.lobobrowser.html.layout.InputLayout2;
+import org.lobobrowser.html.layout.ListItemLayout;
+import org.lobobrowser.html.layout.MiscLayout;
+import org.lobobrowser.html.layout.NoScriptLayout;
+import org.lobobrowser.html.layout.NopLayout;
+import org.lobobrowser.html.layout.ObjectLayout;
+import org.lobobrowser.html.layout.PLayout;
+import org.lobobrowser.html.layout.SelectLayout;
+import org.lobobrowser.html.layout.SpanLayout;
+import org.lobobrowser.html.layout.StrikeLayout;
+import org.lobobrowser.html.layout.StrongLayout;
+import org.lobobrowser.html.layout.TableLayout;
+import org.lobobrowser.html.layout.TextAreaLayout2;
+import org.lobobrowser.html.layout.ULayout;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
@@ -93,24 +113,19 @@ public class RBlockViewport extends BaseRCollection {
 	// their own bounds.
 
 	public static final Insets ZERO_INSETS = new Insets(0, 0, 0, 0);
-	private static final Logger logger = Logger.getLogger(RBlockViewport.class
-			.getName());
+	private static final Logger logger = Logger.getLogger(RBlockViewport.class.getName());
 
-	// private final ArrayList awtComponents = new ArrayList();
-	private final RenderableContainer container;
-	private final int listNesting;
-	private final UserAgentContext userAgentContext;
-	private final HtmlRendererContext rendererContext;
-	private final FrameContext frameContext;
-
+	public final RenderableContainer container;
+	public final int listNesting;
+	public final UserAgentContext userAgentContext;
+	public final HtmlRendererContext rendererContext;
+	public final FrameContext frameContext;
 	private SortedSet<PositionedRenderable> positionedRenderables;
 	private ArrayList<RLine> seqRenderables = null;
 	private ArrayList<ExportableFloat> exportableFloats = null;
-	// private Collection exportedRenderables;
 	private RLine currentLine;
 	private int maxX;
 	private int maxY;
-	// private int availHeight;
 	private int desiredWidth; // includes insets
 	private int desiredHeight; // includes insets
 	private int availContentHeight; // does not include insets
@@ -124,8 +139,7 @@ public class RBlockViewport extends BaseRCollection {
 	private boolean sizeOnly;
 	private BoundableRenderable lastSeqBlock;
 
-	private static final Map<String, Object> elementLayout = new HashMap<String, Object>(
-			70);
+	private static final Map<String, Object> elementLayout = new HashMap<String, Object>();
 	private static final MarkupLayout miscLayout = new MiscLayout();
 
 	static {
@@ -494,9 +508,9 @@ public class RBlockViewport extends BaseRCollection {
 
 				// Now other renderables, but only those that can be
 				// vertically aligned
-				Set others = this.positionedRenderables;
+				Set<PositionedRenderable> others = this.positionedRenderables;
 				if (others != null) {
-					Iterator i2 = others.iterator();
+					Iterator<PositionedRenderable> i2 = others.iterator();
 					while (i2.hasNext()) {
 						PositionedRenderable pr = (PositionedRenderable) i2
 								.next();
@@ -589,7 +603,7 @@ public class RBlockViewport extends BaseRCollection {
 		return rline;
 	}
 
-	private void layoutMarkup(NodeImpl node) {
+	public void layoutMarkup(NodeImpl node) {
 		// This is the "inline" layout of an element.
 		// The difference with layoutChildren is that this
 		// method checks for padding and margin insets.
@@ -627,7 +641,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	private void layoutChildren(NodeImpl node) {
+	public void layoutChildren(NodeImpl node) {
 		NodeImpl[] childrenArray = node.getChildrenArray();
 		if (childrenArray != null) {
 			int length = childrenArray.length;
@@ -659,7 +673,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	private final void positionRBlock(HTMLElementImpl markupElement,
+	public final void positionRBlock(HTMLElementImpl markupElement,
 			RBlock renderable) {
 		if (!this.addElsewhereIfPositioned(renderable, markupElement, false,
 				true, false)) {
@@ -695,7 +709,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	private final void positionRElement(HTMLElementImpl markupElement,
+	public final void positionRElement(HTMLElementImpl markupElement,
 			RElement renderable, boolean usesAlignAttribute,
 			boolean obeysFloats, boolean alignCenterAttribute) {
 		if (!this.addElsewhereIfPositioned(renderable, markupElement,
@@ -725,7 +739,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	private final void layoutRBlock(HTMLElementImpl markupElement) {
+	public final void layoutRBlock(HTMLElementImpl markupElement) {
 		RBlock renderable = (RBlock) markupElement.getUINode();
 		if (renderable == null) {
 			renderable = new RBlock(markupElement, this.listNesting,
@@ -737,7 +751,7 @@ public class RBlockViewport extends BaseRCollection {
 		this.positionRBlock(markupElement, renderable);
 	}
 
-	private final void layoutRTable(HTMLElementImpl markupElement) {
+	public final void layoutRTable(HTMLElementImpl markupElement) {
 		RElement renderable = (RElement) markupElement.getUINode();
 		if (renderable == null) {
 			renderable = new RTable(markupElement, this.userAgentContext,
@@ -749,7 +763,7 @@ public class RBlockViewport extends BaseRCollection {
 				markupElement instanceof HTMLTableElementImpl, true, true);
 	}
 
-	private final void layoutListItem(HTMLElementImpl markupElement) {
+	public final void layoutListItem(HTMLElementImpl markupElement) {
 		RListItem renderable = (RListItem) markupElement.getUINode();
 		if (renderable == null) {
 			renderable = new RListItem(markupElement, this.listNesting,
@@ -761,7 +775,7 @@ public class RBlockViewport extends BaseRCollection {
 		this.positionRBlock(markupElement, renderable);
 	}
 
-	private final void layoutList(HTMLElementImpl markupElement) {
+	public final void layoutList(HTMLElementImpl markupElement) {
 		RList renderable = (RList) markupElement.getUINode();
 		if (renderable == null) {
 			renderable = new RList(markupElement, this.listNesting,
@@ -773,13 +787,7 @@ public class RBlockViewport extends BaseRCollection {
 		this.positionRBlock(markupElement, renderable);
 	}
 
-	// private void addParagraphBreak(ModelNode startNode) {
-	// // This needs to get replaced with paragraph collapsing
-	// this.addLineBreak(startNode, LineBreak.NONE);
-	// this.addLineBreak(startNode, LineBreak.NONE);
-	// }
-
-	private void addLineBreak(ModelNode startNode, int breakType) {
+	public void addLineBreak(ModelNode startNode, int breakType) {
 		RLine line = this.currentLine;
 		if (line == null) {
 			Insets insets = this.paddingInsets;
@@ -843,23 +851,6 @@ public class RBlockViewport extends BaseRCollection {
 		return false;
 	}
 
-	// final RBlockViewport getParentViewport(ExportedRenderable er) {
-	// if(er.alignment == 0) {
-	// return this.getParentViewport();
-	// }
-	// else {
-	// return this.getParentViewportForAlign();
-	// }
-	// }
-	//
-	// final boolean isImportable(ExportedRenderable er) {
-	// if(er.alignment == 0) {
-	// return this.positionsAbsolutes();
-	// }
-	// else {
-	// return this.getParentViewportForAlign() == null;
-	// }
-	// }
 
 	final RBlockViewport getParentViewport() {
 		// Use originalParent, which for one, is not going to be null during
@@ -871,22 +862,6 @@ public class RBlockViewport extends BaseRCollection {
 		return (RBlockViewport) parent;
 	}
 
-	// final RBlockViewport getParentViewportForAlign() {
-	// // Use originalParent, which for one, is not going to be null during
-	// layout.
-	// Object parent = this.getOriginalOrCurrentParent();
-	// if(parent instanceof RBlock) {
-	// RBlock block = (RBlock) parent;
-	// if(!block.couldBeScrollable()) {
-	// parent = ((BaseElementRenderable) parent).getOriginalOrCurrentParent();
-	// if(parent instanceof RBlockViewport) {
-	// return (RBlockViewport) parent;
-	// }
-	// }
-	// }
-	// return null;
-	// }
-	//
 	private static int getPosition(HTMLElementImpl element) {
 		RenderState rs = element.getRenderState();
 		return rs == null ? RenderState.POSITION_STATIC : rs.getPosition();
@@ -1032,7 +1007,7 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * Checks property 'float' and in some cases attribute 'align'.
 	 */
-	private void addRenderableToLineCheckStyle(RElement renderable,
+	public void addRenderableToLineCheckStyle(RElement renderable,
 			HTMLElementImpl element, boolean usesAlignAttribute) {
 		if (this.addElsewhereIfPositioned(renderable, element,
 				usesAlignAttribute, true, true)) {
@@ -1392,8 +1367,7 @@ public class RBlockViewport extends BaseRCollection {
 	 */
 	private void populateZIndexGroups(Collection others,
 			Collection seqRenderables, ArrayList destination) {
-		this.populateZIndexGroups(others, seqRenderables == null ? null
-				: seqRenderables.iterator(), destination);
+		this.populateZIndexGroups(others, seqRenderables == null ? null : seqRenderables.iterator(), destination);
 	}
 
 	/**
@@ -1438,18 +1412,15 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	public Renderable[] getRenderablesArray() {
-		SortedSet others = this.positionedRenderables;
+		SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		int othersSize = others == null ? 0 : others.size();
 		if (othersSize == 0) {
 			ArrayList sr = this.seqRenderables;
-			return sr == null ? Renderable.EMPTY_ARRAY : (Renderable[]) sr
-					.toArray(Renderable.EMPTY_ARRAY);
+			return sr == null ? Renderable.EMPTY_ARRAY : (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
 		} else {
 			ArrayList allRenderables = new ArrayList();
-			this.populateZIndexGroups(others, this.seqRenderables,
-					allRenderables);
-			return (Renderable[]) allRenderables
-					.toArray(Renderable.EMPTY_ARRAY);
+			this.populateZIndexGroups(others, this.seqRenderables, allRenderables);
+			return (Renderable[]) allRenderables.toArray(Renderable.EMPTY_ARRAY);
 		}
 	}
 
@@ -1473,8 +1444,7 @@ public class RBlockViewport extends BaseRCollection {
 		ArrayList sr = this.seqRenderables;
 		Iterator baseIterator = null;
 		if (sr != null) {
-			Renderable[] array = (Renderable[]) sr
-					.toArray(Renderable.EMPTY_ARRAY);
+			Renderable[] array = (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
 			Range range = MarkupUtilities.findRenderables(array, clipBounds,
 					true);
 			baseIterator = org.lobobrowser.util.ArrayUtilities.iterator(array,
@@ -1529,9 +1499,7 @@ public class RBlockViewport extends BaseRCollection {
 		Collection result = null;
 		SortedSet others = this.positionedRenderables;
 		int size = others == null ? 0 : others.size();
-		PositionedRenderable[] otherArray = size == 0 ? null
-				: (PositionedRenderable[]) others
-						.toArray(PositionedRenderable.EMPTY_ARRAY);
+		PositionedRenderable[] otherArray = size == 0 ? null : (PositionedRenderable[]) others.toArray(PositionedRenderable.EMPTY_ARRAY);
 		// Try to find in other renderables with z-index >= 0 first.
 		int index = 0;
 		if (size != 0) {
@@ -1560,8 +1528,7 @@ public class RBlockViewport extends BaseRCollection {
 		// Now do a "binary" search on sequential renderables.
 		ArrayList sr = this.seqRenderables;
 		if (sr != null) {
-			Renderable[] array = (Renderable[]) sr
-					.toArray(Renderable.EMPTY_ARRAY);
+			Renderable[] array = (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
 			BoundableRenderable found = MarkupUtilities.findRenderable(array,
 					pointx, pointy, true);
 			if (found != null) {
@@ -1603,7 +1570,7 @@ public class RBlockViewport extends BaseRCollection {
 		return renderable;
 	}
 
-	private final void addAlignableAsBlock(HTMLElementImpl markupElement,
+	public final void addAlignableAsBlock(HTMLElementImpl markupElement,
 			RElement renderable) {
 		// TODO: Get rid of this method?
 		// At this point block already has bounds.
@@ -1625,7 +1592,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	private final void layoutHr(HTMLElementImpl markupElement) {
+	public final void layoutHr(HTMLElementImpl markupElement) {
 		RElement renderable = (RElement) markupElement.getUINode();
 		if (renderable == null) {
 			renderable = this.setupNewUIControl(container, markupElement,
@@ -1636,42 +1603,10 @@ public class RBlockViewport extends BaseRCollection {
 		this.addAlignableAsBlock(markupElement, renderable);
 	}
 
-	private final BaseInputControl createInputControl(
-			HTMLBaseInputElement markupElement) {
-		String type = markupElement.getAttribute("type");
-		if (type == null) {
-			return new InputTextControl(markupElement);
-		}
-		type = type.toLowerCase();
-		if ("text".equals(type) || type.length() == 0) {
-			return new InputTextControl(markupElement);
-		} else if ("hidden".equals(type)) {
-			return null;
-		} else if ("submit".equals(type)) {
-			return new InputButtonControl(markupElement);
-		} else if ("password".equals(type)) {
-			return new InputPasswordControl(markupElement);
-		} else if ("radio".equals(type)) {
-			return new InputRadioControl(markupElement);
-		} else if ("checkbox".equals(type)) {
-			return new InputCheckboxControl(markupElement);
-		} else if ("image".equals(type)) {
-			return new InputImageControl(markupElement);
-		} else if ("reset".equals(type)) {
-			return new InputButtonControl(markupElement);
-		} else if ("button".equals(type)) {
-			return new InputButtonControl(markupElement);
-		} else if ("file".equals(type)) {
-			return new InputFileControl(markupElement);
-		} else {
-			return null;
-		}
-	}
-
 	/**
 	 * Gets offset from the left due to floats. It includes padding.
 	 */
-	private final int fetchLeftOffset(int newLineY) {
+	public final int fetchLeftOffset(int newLineY) {
 		Insets paddingInsets = this.paddingInsets;
 		FloatingBounds floatBounds = this.floatBounds;
 		if (floatBounds == null) {
@@ -1687,7 +1622,7 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * Gets offset from the right due to floats. It includes padding.
 	 */
-	private final int fetchRightOffset(int newLineY) {
+	public final int fetchRightOffset(int newLineY) {
 		Insets paddingInsets = this.paddingInsets;
 		FloatingBounds floatBounds = this.floatBounds;
 		if (floatBounds == null) {
@@ -1702,13 +1637,13 @@ public class RBlockViewport extends BaseRCollection {
 
 	private static final SizeExceededException SEE = new SizeExceededException();
 
-	private final void checkY(int y) {
+	public final void checkY(int y) {
 		if (this.yLimit != -1 && y > this.yLimit) {
 			throw SEE;
 		}
 	}
 
-	private final void layoutFloat(BoundableRenderable renderable,
+	public final void layoutFloat(BoundableRenderable renderable,
 			boolean layout, boolean leftFloat) {
 		renderable.setOriginalParent(this);
 		if (layout) {
@@ -1769,7 +1704,7 @@ public class RBlockViewport extends BaseRCollection {
 		// set in stone?
 	}
 
-	private final void addPositionedRenderable(BoundableRenderable renderable,
+	public final void addPositionedRenderable(BoundableRenderable renderable,
 			boolean verticalAlignable, boolean isFloat) {
 		// Expected to be called only in GUI thread.
 		SortedSet others = this.positionedRenderables;
@@ -1978,453 +1913,6 @@ public class RBlockViewport extends BaseRCollection {
 				} else {
 					((Renderable) robj).paint(g);
 				}
-			}
-		}
-	}
-
-	// ----------------------------------------------------------------
-
-	private static class NopLayout implements MarkupLayout {
-		public void layoutMarkup(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-		}
-	}
-
-	private static class NoScriptLayout implements MarkupLayout {
-		public void layoutMarkup(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			UserAgentContext ucontext = bodyLayout.userAgentContext;
-			if (!ucontext.isScriptingEnabled()) {
-				bodyLayout.layoutMarkup(markupElement);
-			} else {
-				// NOP
-			}
-		}
-	}
-
-	private static class ChildrenLayout implements MarkupLayout {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.xamjwg.html.renderer.MarkupLayout#layoutMarkup(java.awt.Container
-		 * , java.awt.Insets, org.xamjwg.html.domimpl.HTMLElementImpl)
-		 */
-		public void layoutMarkup(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			bodyLayout.layoutChildren(markupElement);
-		}
-	}
-
-	private static class MiscLayout extends CommonLayout {
-		public MiscLayout() {
-			super(DISPLAY_INLINE);
-		}
-	}
-
-	private static class HLayout extends CommonLayout {
-		public HLayout(int fontSize) {
-			super(DISPLAY_BLOCK);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.xamjwg.html.renderer.MarkupLayout#layoutMarkup(java.awt.Container
-		 * , java.awt.Insets, org.xamjwg.html.domimpl.HTMLElementImpl)
-		 */
-		public void layoutMarkup(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			super.layoutMarkup(bodyLayout, markupElement);
-		}
-	}
-
-	private static class PLayout extends CommonLayout {
-		public PLayout() {
-			super(DISPLAY_BLOCK);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.xamjwg.html.renderer.MarkupLayout#layoutMarkup(java.awt.Container
-		 * , java.awt.Insets, org.xamjwg.html.domimpl.HTMLElementImpl)
-		 */
-		public void layoutMarkup(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			super.layoutMarkup(bodyLayout, markupElement);
-		}
-	}
-
-	private static class ListItemLayout extends CommonLayout {
-		public ListItemLayout() {
-			super(DISPLAY_LIST_ITEM);
-		}
-	}
-
-	private static class BrLayout implements MarkupLayout {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.xamjwg.html.renderer.MarkupLayout#layoutMarkup(java.awt.Container
-		 * , java.awt.Insets, org.xamjwg.html.domimpl.HTMLElementImpl)
-		 */
-		public void layoutMarkup(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			String clear = markupElement.getAttribute("clear");
-			bodyLayout.addLineBreak(markupElement,
-					LineBreak.getBreakType(clear));
-		}
-	}
-
-	private static class HrLayout implements MarkupLayout {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.xamjwg.html.renderer.MarkupLayout#layoutMarkup(java.awt.Container
-		 * , java.awt.Insets, org.xamjwg.html.domimpl.HTMLElementImpl)
-		 */
-		public void layoutMarkup(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			bodyLayout.layoutHr(markupElement);
-		}
-	}
-
-	private static class TableLayout extends CommonLayout {
-		public TableLayout() {
-			super(DISPLAY_TABLE);
-		}
-	}
-
-	private static class CommonBlockLayout extends CommonLayout {
-		public CommonBlockLayout() {
-			super(DISPLAY_BLOCK);
-		}
-	}
-
-	// ---------------------------------------------------------------------------
-
-	private static class DivLayout extends CommonLayout {
-		public DivLayout() {
-			super(DISPLAY_BLOCK);
-		}
-	}
-
-	private static class BlockQuoteLayout extends CommonLayout {
-		public BlockQuoteLayout() {
-			super(DISPLAY_BLOCK);
-		}
-	}
-
-	private static class SpanLayout extends CommonLayout {
-		public SpanLayout() {
-			super(DISPLAY_INLINE);
-		}
-	}
-
-	private static class EmLayout extends CommonLayout {
-		public EmLayout() {
-			super(DISPLAY_INLINE);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.xamjwg.html.renderer.MarkupLayout#layoutMarkup(java.awt.Container
-		 * , java.awt.Insets, org.xamjwg.html.domimpl.HTMLElementImpl)
-		 */
-		public void layoutMarkup(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			super.layoutMarkup(bodyLayout, markupElement);
-		}
-	}
-
-	private static class ULayout extends CommonLayout {
-		public ULayout() {
-			super(DISPLAY_INLINE);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.xamjwg.html.renderer.MarkupLayout#layoutMarkup(java.awt.Container
-		 * , java.awt.Insets, org.xamjwg.html.domimpl.HTMLElementImpl)
-		 */
-		public void layoutMarkup(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			super.layoutMarkup(bodyLayout, markupElement);
-		}
-	}
-
-	private static class StrikeLayout extends CommonLayout {
-		public StrikeLayout() {
-			super(DISPLAY_INLINE);
-		}
-	}
-
-	private static class StrongLayout extends CommonLayout {
-		public StrongLayout() {
-			super(DISPLAY_INLINE);
-		}
-	}
-
-	private static class AnchorLayout extends CommonLayout {
-		public AnchorLayout() {
-			super(DISPLAY_INLINE);
-		}
-	}
-
-	private static class ObjectLayout extends CommonWidgetLayout {
-		private boolean tryToRenderContent;
-
-		/**
-		 * @param tryToRenderContent
-		 *            If the object is unknown, content is rendered as HTML.
-		 * @param usesAlignAttribute
-		 */
-		public ObjectLayout(boolean tryToRenderContent,
-				boolean usesAlignAttribute) {
-			super(ADD_INLINE, usesAlignAttribute);
-			this.tryToRenderContent = tryToRenderContent;
-		}
-
-		/**
-		 * Must use this ThreadLocal because an ObjectLayout instance is shared
-		 * across renderers.
-		 */
-		private final ThreadLocal htmlObject = new ThreadLocal();
-
-		public void layoutMarkup(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			HtmlObject ho = bodyLayout.rendererContext
-					.getHtmlObject(markupElement);
-			if (ho == null && this.tryToRenderContent) {
-				// Don't know what to do with it - render contents.
-				bodyLayout.layoutMarkup(markupElement);
-			} else if (ho != null) {
-				this.htmlObject.set(ho);
-				super.layoutMarkup(bodyLayout, markupElement);
-			}
-		}
-
-		protected RElement createRenderable(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			HtmlObject ho = (HtmlObject) this.htmlObject.get();
-			UIControl uiControl = new UIControlWrapper(ho);
-			RUIControl ruiControl = new RUIControl(markupElement, uiControl,
-					bodyLayout.container, bodyLayout.frameContext,
-					bodyLayout.userAgentContext);
-			return ruiControl;
-		}
-	}
-
-	private static class ImgLayout extends CommonWidgetLayout {
-		public ImgLayout() {
-			super(ADD_INLINE, true);
-		}
-
-		protected RElement createRenderable(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			UIControl control = new ImgControl(
-					(HTMLImageElementImpl) markupElement);
-			return new RImgControl(markupElement, control,
-					bodyLayout.container, bodyLayout.frameContext,
-					bodyLayout.userAgentContext);
-		}
-	}
-
-	private static class InputLayout2 extends CommonWidgetLayout {
-		public InputLayout2() {
-			super(ADD_INLINE, true);
-		}
-
-		protected RElement createRenderable(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
-			BaseInputControl uiControl = bodyLayout.createInputControl(bie);
-			if (uiControl == null) {
-				return null;
-			}
-			bie.setInputContext(uiControl);
-			return new RUIControl(markupElement, uiControl,
-					bodyLayout.container, bodyLayout.frameContext,
-					bodyLayout.userAgentContext);
-		}
-	}
-
-	private static class SelectLayout extends CommonWidgetLayout {
-		public SelectLayout() {
-			super(ADD_INLINE, true);
-		}
-
-		protected RElement createRenderable(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
-			BaseInputControl uiControl = new InputSelectControl(bie);
-			bie.setInputContext(uiControl);
-			return new RUIControl(markupElement, uiControl,
-					bodyLayout.container, bodyLayout.frameContext,
-					bodyLayout.userAgentContext);
-		}
-	}
-
-	private static class TextAreaLayout2 extends CommonWidgetLayout {
-		public TextAreaLayout2() {
-			super(ADD_INLINE, true);
-		}
-
-		protected RElement createRenderable(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
-			BaseInputControl control = new InputTextAreaControl(bie);
-			bie.setInputContext(control);
-			return new RUIControl(markupElement, control, bodyLayout.container,
-					bodyLayout.frameContext, bodyLayout.userAgentContext);
-		}
-	}
-
-	private static class IFrameLayout extends CommonWidgetLayout {
-		public IFrameLayout() {
-			super(ADD_INLINE, true);
-		}
-
-		protected RElement createRenderable(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			BrowserFrame frame = bodyLayout.rendererContext
-					.createBrowserFrame();
-			((HTMLIFrameElementImpl) markupElement).setBrowserFrame(frame);
-			UIControl control = new BrowserFrameUIControl(markupElement, frame);
-			return new RUIControl(markupElement, control, bodyLayout.container,
-					bodyLayout.frameContext, bodyLayout.userAgentContext);
-		}
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * This is layout common to elements that render themselves, except RBlock,
-	 * RTable and RList.
-	 */
-	private static abstract class CommonWidgetLayout implements MarkupLayout {
-		protected static final int ADD_INLINE = 0;
-		protected static final int ADD_AS_BLOCK = 1;
-		private final int method;
-		private final boolean useAlignAttribute;
-
-		public CommonWidgetLayout(int method, boolean usesAlignAttribute) {
-			this.method = method;
-			this.useAlignAttribute = usesAlignAttribute;
-		}
-
-		public void layoutMarkup(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			AbstractCSS2Properties style = markupElement.getCurrentStyle();
-			if (style != null) {
-				String display = style.getDisplay();
-				if (display != null && "none".equalsIgnoreCase(display)) {
-					return;
-				}
-			}
-			UINode node = markupElement.getUINode();
-			RElement renderable = null;
-			if (node == null) {
-				renderable = this.createRenderable(bodyLayout, markupElement);
-				if (renderable == null) {
-					if (logger.isLoggable(Level.INFO)) {
-						logger.info("layoutMarkup(): Don't know how to render "
-								+ markupElement + ".");
-					}
-					return;
-				}
-				markupElement.setUINode((UINode) renderable);
-			} else {
-				renderable = (RElement) node;
-			}
-			renderable.setOriginalParent(bodyLayout);
-			switch (this.method) {
-			case ADD_INLINE:
-				bodyLayout.addRenderableToLineCheckStyle(renderable,
-						markupElement, this.useAlignAttribute);
-				break;
-			case ADD_AS_BLOCK:
-				bodyLayout.positionRElement(markupElement, renderable,
-						this.useAlignAttribute, true, false);
-				break;
-			}
-		}
-
-		protected abstract RElement createRenderable(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement);
-	}
-
-	private static abstract class CommonLayout implements MarkupLayout {
-		protected static final int DISPLAY_NONE = 0;
-		protected static final int DISPLAY_INLINE = 1;
-		protected static final int DISPLAY_BLOCK = 2;
-		protected static final int DISPLAY_LIST_ITEM = 3;
-		protected static final int DISPLAY_TABLE = 6;
-
-		private final int display;
-
-		public CommonLayout(int defaultDisplay) {
-			this.display = defaultDisplay;
-		}
-
-		public void layoutMarkup(RBlockViewport bodyLayout,
-				HTMLElementImpl markupElement) {
-			RenderState rs = markupElement.getRenderState();
-			int display = rs == null ? this.display : rs.getDisplay();
-			if (display == RenderState.DISPLAY_INLINE) {
-				// Inline elements with absolute or fixed positions need
-				// to be treated as blocks.
-				int position = rs == null ? RenderState.POSITION_STATIC : rs
-						.getPosition();
-				if (position == RenderState.POSITION_ABSOLUTE
-						|| position == RenderState.POSITION_FIXED) {
-					display = RenderState.DISPLAY_BLOCK;
-				} else {
-					int boxFloat = rs == null ? RenderState.FLOAT_NONE : rs
-							.getFloat();
-					if (boxFloat != RenderState.FLOAT_NONE) {
-						display = RenderState.DISPLAY_BLOCK;
-					}
-				}
-			}
-			switch (display) {
-			case DISPLAY_NONE:
-				// skip it completely.
-				UINode node = markupElement.getUINode();
-				if (node instanceof BaseBoundableRenderable) {
-					// This is necessary so that if the element is made
-					// visible again, it can be invalidated.
-					((BaseBoundableRenderable) node).markLayoutValid();
-				}
-				break;
-			case DISPLAY_BLOCK:
-				bodyLayout.layoutRBlock(markupElement);
-				break;
-			case DISPLAY_LIST_ITEM:
-				String tagName = markupElement.getTagName();
-				if ("UL".equalsIgnoreCase(tagName)
-						|| "OL".equalsIgnoreCase(tagName)) {
-					bodyLayout.layoutList(markupElement);
-				} else {
-					bodyLayout.layoutListItem(markupElement);
-				}
-				break;
-			case DISPLAY_TABLE:
-				bodyLayout.layoutRTable(markupElement);
-				break;
-			default:
-				// Assume INLINE
-				bodyLayout.layoutMarkup(markupElement);
-				break;
 			}
 		}
 	}
@@ -2696,5 +2184,21 @@ public class RBlockViewport extends BaseRCollection {
 		} else {
 			this.addExportableFloat(renderable, leftFloat, newX, newY);
 		}
+	}
+	
+	public FrameContext getFrameContext() {
+		return frameContext;
+	}
+	
+	public RenderableContainer getContainer() {
+		return container;
+	}
+	
+	public UserAgentContext getUserAgentContext() {
+		return userAgentContext;
+	}
+	
+	public HtmlRendererContext getRendererContext() {
+		return rendererContext;
 	}
 }
