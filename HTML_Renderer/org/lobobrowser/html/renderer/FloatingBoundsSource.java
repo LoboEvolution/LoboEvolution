@@ -20,6 +20,6 @@
  */
 package org.lobobrowser.html.renderer;
 
-interface FloatingBoundsSource {
+public interface FloatingBoundsSource {
 	public FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth);
 }
