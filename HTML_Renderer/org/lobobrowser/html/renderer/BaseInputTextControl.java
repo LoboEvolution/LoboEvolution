@@ -31,7 +31,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 
-import org.lobobrowser.html.domimpl.ElementImpl;
+import org.lobobrowser.html.dombl.ElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.util.gui.WrapperLayout;
 

@@ -25,7 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.js.JavaScript;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;

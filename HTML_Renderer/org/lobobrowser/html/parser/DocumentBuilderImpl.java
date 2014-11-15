@@ -33,7 +33,7 @@ import javax.xml.parsers.DocumentBuilder;
 
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.domimpl.DOMImplementationImpl;
+import org.lobobrowser.html.dombl.DOMImplementationImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.io.WritableLineReader;
 import org.w3c.dom.DOMImplementation;

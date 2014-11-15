@@ -23,7 +23,7 @@ package org.lobobrowser.html.renderer;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.style.ListStyle;
 import org.lobobrowser.html.style.RenderState;
 

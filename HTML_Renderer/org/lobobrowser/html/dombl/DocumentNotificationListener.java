@@ -1,6 +1,6 @@
 package org.lobobrowser.html.dombl;
 
-import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.dombl.NodeImpl;
 
 /**
  * A listener of document changes.

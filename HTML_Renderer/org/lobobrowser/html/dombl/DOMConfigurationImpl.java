@@ -21,37 +21,42 @@
 /*
  * Created on Oct 9, 2005
  */
-package org.lobobrowser.html.domimpl;
+package org.lobobrowser.html.dombl;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.DOMException;
-import org.w3c.dom.DocumentFragment;
-import org.w3c.dom.Node;
+import org.w3c.dom.DOMStringList;
 
-public class DocumentFragmentImpl extends NodeImpl implements DocumentFragment {
-	public DocumentFragmentImpl() {
+public class DOMConfigurationImpl implements DOMConfiguration {
+	private final Map<String, Object> parameters = new HashMap<String, Object>();
+
+	public DOMConfigurationImpl() {
 		super();
 	}
 
-	public String getLocalName() {
-		return null;
+	public void setParameter(String name, Object value) throws DOMException {
+		synchronized (this) {
+			this.parameters.put(name, value);
+		}
 	}
 
-	public String getNodeName() {
-		return "#document-fragment";
+	public Object getParameter(String name) throws DOMException {
+		synchronized (this) {
+			return this.parameters.get(name);
+		}
 	}
 
-	public String getNodeValue() throws DOMException {
-		return null;
+	public boolean canSetParameter(String name, Object value) {
+		// TODO
+		return true;
 	}
 
-	public void setNodeValue(String nodeValue) throws DOMException {
-	}
-
-	public short getNodeType() {
-		return org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
-	}
-
-	protected Node createSimilarNode() {
-		return new DocumentFragmentImpl();
+	public DOMStringList getParameterNames() {
+		synchronized (this) {
+			return new DOMStringListImpl(parameters.keySet());
+		}
 	}
 }

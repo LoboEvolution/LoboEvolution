@@ -13,7 +13,7 @@ public class HTMLOptionsCollectionImpl extends DescendentHTMLCollection
 	public static final NodeFilter OPTION_FILTER = new OptionFilter();
 
 	public HTMLOptionsCollectionImpl(HTMLElementImpl selectElement) {
-		super(selectElement, OPTION_FILTER, selectElement.treeLock, false);
+		super(selectElement, OPTION_FILTER, selectElement.getTreeLock(), false);
 	}
 
 	public void setLength(int length) throws DOMException {

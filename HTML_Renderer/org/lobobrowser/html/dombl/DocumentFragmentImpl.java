@@ -21,15 +21,15 @@
 /*
  * Created on Oct 9, 2005
  */
-package org.lobobrowser.html.domimpl;
+package org.lobobrowser.html.dombl;
 
-import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Node;
 
-public class CommentImpl extends CharacterDataImpl implements Comment {
-	public CommentImpl(String text) {
-		super(text);
+public class DocumentFragmentImpl extends NodeImpl implements DocumentFragment {
+	public DocumentFragmentImpl() {
+		super();
 	}
 
 	public String getLocalName() {
@@ -37,22 +37,21 @@ public class CommentImpl extends CharacterDataImpl implements Comment {
 	}
 
 	public String getNodeName() {
-		return "#comment";
+		return "#document-fragment";
 	}
 
 	public String getNodeValue() throws DOMException {
-		return this.getTextContent();
+		return null;
 	}
 
 	public void setNodeValue(String nodeValue) throws DOMException {
-		this.setTextContent(nodeValue);
 	}
 
 	public short getNodeType() {
-		return Node.COMMENT_NODE;
+		return org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
 	}
 
 	protected Node createSimilarNode() {
-		return new CommentImpl(this.text);
+		return new DocumentFragmentImpl();
 	}
 }

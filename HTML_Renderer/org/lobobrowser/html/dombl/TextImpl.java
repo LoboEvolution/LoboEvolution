@@ -21,7 +21,7 @@
 /*
  * Created on Sep 4, 2005
  */
-package org.lobobrowser.html.domimpl;
+package org.lobobrowser.html.dombl;
 
 import org.lobobrowser.util.Strings;
 import org.w3c.dom.DOMException;

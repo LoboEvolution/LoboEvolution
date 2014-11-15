@@ -20,7 +20,7 @@
  */
 package org.lobobrowser.html.dombl;
 
-import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.dombl.NodeImpl;
 
 /**
  * An abstract implementation of {@link DocumentNotificationListener} with blank

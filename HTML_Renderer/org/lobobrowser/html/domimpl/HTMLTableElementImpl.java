@@ -83,12 +83,12 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 
 	public HTMLCollection getRows() {
 		return new DescendentHTMLCollection(this, new ElementFilter("TR"),
-				this.treeLock, false);
+				this.getTreeLock(), false);
 	}
 
 	public HTMLCollection getTBodies() {
 		return new DescendentHTMLCollection(this, new ElementFilter("TBODY"),
-				this.treeLock, false);
+				this.getTreeLock(), false);
 	}
 
 	public String getAlign() {
@@ -241,7 +241,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 					"Orphan element");
 		}
 		HTMLElement rowElement = (HTMLElement) doc.createElement("TR");
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			if (index == -1) {
 				this.appendChild(rowElement);
 				return rowElement;
@@ -270,7 +270,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void deleteRow(int index) throws DOMException {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl != null) {
 				int size = nl.size();

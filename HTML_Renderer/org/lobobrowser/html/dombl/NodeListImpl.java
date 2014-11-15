@@ -19,63 +19,36 @@
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
- * Created on Oct 9, 2005
+ * Created on Sep 3, 2005
  */
-package org.lobobrowser.html.domimpl;
+package org.lobobrowser.html.dombl;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
-import org.lobobrowser.html.dombl.NodeFilter;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-class FilteredNodeListImpl extends AbstractScriptableDelegate implements
+public class NodeListImpl extends AbstractScriptableDelegate implements
 		NodeList {
-	private final Collection sourceNodeList;
-	private final NodeFilter filter;
-	private final Object lock;
+	// Note: class must be public for reflection to work.
+	private final ArrayList nodeList = new ArrayList();
 
-	/**
-	 * @param filter
-	 * @param list
-	 */
-	public FilteredNodeListImpl(NodeFilter filter, Collection list, Object lock) {
+	public NodeListImpl(Collection collection) {
 		super();
-		this.filter = filter;
-		sourceNodeList = list;
-		this.lock = lock;
-	}
-
-	public Node item(int index) {
-		synchronized (this.lock) {
-			int count = 0;
-			Iterator i = this.sourceNodeList.iterator();
-			while (i.hasNext()) {
-				Node node = (Node) i.next();
-				if (this.filter.accept(node)) {
-					if (count == index) {
-						return node;
-					}
-					count++;
-				}
-			}
-			return null;
-		}
+		nodeList.addAll(collection);
 	}
 
 	public int getLength() {
-		synchronized (this.lock) {
-			int count = 0;
-			Iterator i = this.sourceNodeList.iterator();
-			while (i.hasNext()) {
-				Node node = (Node) i.next();
-				if (this.filter.accept(node)) {
-					count++;
-				}
-			}
-			return count;
+		return this.nodeList.size();
+	}
+
+	public Node item(int index) {
+		try {
+			return (Node) this.nodeList.get(index);
+		} catch (IndexOutOfBoundsException iob) {
+			return null;
 		}
 	}
 }

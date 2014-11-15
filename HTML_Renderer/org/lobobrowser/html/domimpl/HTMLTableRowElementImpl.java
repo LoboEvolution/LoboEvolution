@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.dombl.NodeFilter;
+import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.dombl.NodeVisitor;
 import org.lobobrowser.html.dombl.StopVisitorException;
 import org.lobobrowser.html.w3c.HTMLCollection;
@@ -81,7 +82,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 				return node instanceof HTMLTableCellElementImpl;
 			}
 		};
-		return new DescendentHTMLCollection(this, filter, this.treeLock, false);
+		return new DescendentHTMLCollection(this, filter, this.getTreeLock(), false);
 	}
 
 	public String getAlign() {
@@ -151,7 +152,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 					"Orphan element");
 		}
 		HTMLElement cellElement = (HTMLElement) doc.createElement(tagName);
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			if (index == -1) {
 				this.appendChild(cellElement);
 				return cellElement;
@@ -180,7 +181,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 	}
 
 	public void deleteCell(int index) throws DOMException {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl != null) {
 				int size = nl.size();

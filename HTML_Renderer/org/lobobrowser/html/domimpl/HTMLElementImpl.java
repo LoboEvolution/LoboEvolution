@@ -36,6 +36,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 
 import org.lobobrowser.html.FormInput;
+import org.lobobrowser.html.dombl.ElementImpl;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
@@ -374,7 +375,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	}
 
 	private void invalidateDescendentsForHover() {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			this.invalidateDescendentsForHoverImpl(this);
 		}
 	}
@@ -749,7 +750,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		return buffer.toString();
 	}
 
-	protected void appendOuterHTMLImpl(StringBuffer buffer) {
+	public void appendOuterHTMLImpl(StringBuffer buffer) {
 		String tagName = this.getTagName();
 		buffer.append('<');
 		buffer.append(tagName);

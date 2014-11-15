@@ -65,7 +65,7 @@ import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.renderer.BoundableRenderable;
 import org.lobobrowser.html.renderer.DelayedPair;
 import org.lobobrowser.html.renderer.FrameContext;

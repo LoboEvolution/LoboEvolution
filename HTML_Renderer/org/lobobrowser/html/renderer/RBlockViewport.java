@@ -47,7 +47,7 @@ import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
-import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.layout.AnchorLayout;
 import org.lobobrowser.html.layout.BlockQuoteLayout;
 import org.lobobrowser.html.layout.BrLayout;

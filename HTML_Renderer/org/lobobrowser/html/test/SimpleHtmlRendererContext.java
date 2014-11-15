@@ -152,8 +152,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * more robust reloading mechanism.
 	 */
 	public void reload() {
-		HTMLDocumentImpl document = (HTMLDocumentImpl) this.htmlPanel
-				.getRootNode();
+		HTMLDocumentImpl document = (HTMLDocumentImpl) this.htmlPanel.getRootNode();
 		if (document != null) {
 			try {
 				URL url = new URL(document.getDocumentURI());

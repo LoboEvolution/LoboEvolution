@@ -23,7 +23,7 @@
  */
 package org.lobobrowser.html.dombl;
 
-import org.lobobrowser.html.domimpl.TextImpl;
+import org.lobobrowser.html.dombl.TextImpl;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Node;
 

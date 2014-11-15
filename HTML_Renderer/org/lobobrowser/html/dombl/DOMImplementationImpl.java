@@ -21,9 +21,10 @@
 /*
  * Created on Oct 15, 2005
  */
-package org.lobobrowser.html.domimpl;
+package org.lobobrowser.html.dombl;
 
 import org.lobobrowser.html.UserAgentContext;
+import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;

@@ -21,36 +21,38 @@
 /*
  * Created on Oct 9, 2005
  */
-package org.lobobrowser.html.domimpl;
+package org.lobobrowser.html.dombl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import org.w3c.dom.Comment;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Node;
 
-import org.w3c.dom.DOMStringList;
-
-public class DOMStringListImpl implements DOMStringList {
-	private final List sourceList;
-
-	public DOMStringListImpl(Collection sourceList) {
-		List list = new ArrayList();
-		list.addAll(sourceList);
-		this.sourceList = list;
+public class CommentImpl extends CharacterDataImpl implements Comment {
+	public CommentImpl(String text) {
+		super(text);
 	}
 
-	public String item(int index) {
-		try {
-			return (String) this.sourceList.get(index);
-		} catch (IndexOutOfBoundsException iob) {
-			return null;
-		}
+	public String getLocalName() {
+		return null;
 	}
 
-	public int getLength() {
-		return this.sourceList.size();
+	public String getNodeName() {
+		return "#comment";
 	}
 
-	public boolean contains(String str) {
-		return this.sourceList.contains(str);
+	public String getNodeValue() throws DOMException {
+		return this.getTextContent();
+	}
+
+	public void setNodeValue(String nodeValue) throws DOMException {
+		this.setTextContent(nodeValue);
+	}
+
+	public short getNodeType() {
+		return Node.COMMENT_NODE;
+	}
+
+	protected Node createSimilarNode() {
+		return new CommentImpl(this.text);
 	}
 }

@@ -94,7 +94,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 		HTMLCollection elements = this.elements;
 		if (elements == null) {
 			elements = new DescendentHTMLCollection(this, new InputFilter(),
-					this.treeLock, false);
+					this.getTreeLock(), false);
 			this.elements = elements;
 		}
 		return elements;

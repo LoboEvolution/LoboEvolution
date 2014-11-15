@@ -45,7 +45,7 @@ import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.DocumentNotificationListener;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
-import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;

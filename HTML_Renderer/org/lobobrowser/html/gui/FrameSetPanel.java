@@ -40,7 +40,7 @@ import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.FrameNode;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.renderer.NodeRenderer;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.util.gui.WrapperLayout;

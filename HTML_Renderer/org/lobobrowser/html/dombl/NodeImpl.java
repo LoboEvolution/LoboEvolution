@@ -21,7 +21,7 @@
 /*
  * Created on Sep 3, 2005
  */
-package org.lobobrowser.html.domimpl;
+package org.lobobrowser.html.dombl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -46,6 +46,8 @@ import org.lobobrowser.html.dombl.SkipVisitorException;
 import org.lobobrowser.html.dombl.StopVisitorException;
 import org.lobobrowser.html.dombl.TextFilter;
 import org.lobobrowser.html.dombl.UINode;
+import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.StyleSheetRenderState;
 import org.lobobrowser.js.AbstractScriptableDelegate;
@@ -79,7 +81,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	 * A tree lock is less deadlock-prone than a node-level lock. This is
 	 * assigned in setOwnerDocument.
 	 */
-	protected volatile Object treeLock = this;
+	private volatile Object treeLock = this;
 
 	public NodeImpl() {
 		super();
@@ -111,7 +113,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	public Node appendChild(Node newChild) throws DOMException {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl == null) {
 				nl = new ArrayList<Node>(3);
@@ -130,13 +132,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	protected void removeAllChildren() {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			this.removeAllChildrenImpl();
 		}
 	}
 
 	protected void removeAllChildrenImpl() {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl != null) {
 				nl.clear();
@@ -150,7 +152,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 
 	protected NodeList getNodeList(NodeFilter filter) {
 		Collection<NodeImpl> collection = new ArrayList<NodeImpl>();
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			this.appendChildrenToCollectionImpl(filter, collection);
 		}
 		return new NodeListImpl(collection);
@@ -158,7 +160,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 
 	public NodeImpl[] getChildrenArray() {
 		ArrayList<Node> nl = this.nodeList;
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			return nl == null ? null : (NodeImpl[]) nl
 					.toArray(NodeImpl.EMPTY_ARRAY);
 		}
@@ -166,7 +168,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 
 	public int getChildCount() {
 		ArrayList<Node> nl = this.nodeList;
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			return nl == null ? 0 : nl.size();
 		}
 	}
@@ -192,7 +194,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	public ArrayList<NodeImpl> getDescendents(NodeFilter filter,
 			boolean nestIntoMatchingNodes) {
 		ArrayList<NodeImpl> al = new ArrayList<NodeImpl>();
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			this.extractDescendentsArrayImpl(filter, al, nestIntoMatchingNodes);
 		}
 		return al;
@@ -295,14 +297,14 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	public int getChildIndex(Node child) {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			return nl == null ? -1 : nl.indexOf(child);
 		}
 	}
 
 	public Node getChildAtIndex(int index) {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			try {
 				return nl == null ? null : (Node) nl.get(index);
@@ -361,14 +363,14 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 
 	public void setOwnerDocument(Document value) {
 		this.document = value;
-		this.treeLock = value == null ? this : (Object) value;
+		this.setTreeLock(value == null ? this : (Object) value);
 	}
 
-	void setOwnerDocument(Document value, boolean deep) {
+	public void setOwnerDocument(Document value, boolean deep) {
 		this.document = value;
-		this.treeLock = value == null ? this : (Object) value;
+		this.setTreeLock(value == null ? this : (Object) value);
 		if (deep) {
-			synchronized (this.treeLock) {
+			synchronized (this.getTreeLock()) {
 				ArrayList<Node> nl = this.nodeList;
 				if (nl != null) {
 					Iterator<Node> i = nl.iterator();
@@ -381,7 +383,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 		}
 	}
 
-	void visitImpl(NodeVisitor visitor) {
+	protected void visitImpl(NodeVisitor visitor) {
 		try {
 			visitor.visit(this);
 		} catch (SkipVisitorException sve) {
@@ -404,14 +406,14 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 		}
 	}
 
-	void visit(NodeVisitor visitor) {
-		synchronized (this.treeLock) {
+	public void visit(NodeVisitor visitor) {
+		synchronized (this.getTreeLock()) {
 			this.visitImpl(visitor);
 		}
 	}
 
 	public Node insertBefore(Node newChild, Node refChild) throws DOMException {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			int idx = nl == null ? -1 : nl.indexOf(refChild);
 			if (idx == -1) {
@@ -430,7 +432,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	protected Node insertAt(Node newChild, int idx) throws DOMException {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl == null) {
 				nl = new ArrayList<Node>();
@@ -448,7 +450,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	public Node replaceChild(Node newChild, Node oldChild) throws DOMException {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			int idx = nl == null ? -1 : nl.indexOf(oldChild);
 			if (idx == -1) {
@@ -464,7 +466,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	public Node removeChild(Node oldChild) throws DOMException {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl == null || !nl.remove(oldChild)) {
 				throw new DOMException(DOMException.NOT_FOUND_ERR,
@@ -479,7 +481,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 
 	public Node removeChildAt(int index) throws DOMException {
 		try {
-			synchronized (this.treeLock) {
+			synchronized (this.getTreeLock()) {
 				ArrayList<Node> nl = this.nodeList;
 				if (nl == null) {
 					throw new DOMException(DOMException.INDEX_SIZE_ERR,
@@ -500,7 +502,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	public boolean hasChildNodes() {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			return nl != null && !nl.isEmpty();
 		}
@@ -512,14 +514,14 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	public NodeList getChildNodes() {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			return new NodeListImpl(nl == null ? Collections.EMPTY_LIST : nl);
 		}
 	}
 
 	public Node getFirstChild() {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			try {
 				return nl == null ? null : (Node) nl.get(0);
@@ -530,7 +532,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	public Node getLastChild() {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			try {
 				return nl == null ? null : (Node) nl.get(nl.size() - 1);
@@ -541,7 +543,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	private Node getPreviousTo(Node node) {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			int idx = nl == null ? -1 : nl.indexOf(node);
 			if (idx == -1) {
@@ -557,7 +559,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	private Node getNextTo(Node node) {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			int idx = nl == null ? -1 : nl.indexOf(node);
 			if (idx == -1) {
@@ -664,7 +666,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	 */
 	public String getTextContent() throws DOMException {
 		StringBuffer sb = new StringBuffer();
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl != null) {
 				Iterator<Node> i = nl.iterator();
@@ -690,7 +692,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	public void setTextContent(String textContent) throws DOMException {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			this.removeChildrenImpl(new TextFilter());
 			if (textContent != null && !"".equals(textContent)) {
 				TextImpl t = new TextImpl(textContent);
@@ -710,7 +712,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	protected void removeChildren(NodeFilter filter) {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			this.removeChildrenImpl(filter);
 		}
 		if (!this.notificationsSuspended) {
@@ -732,7 +734,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	public Node insertAfter(Node newChild, Node refChild) {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			int idx = nl == null ? -1 : nl.indexOf(refChild);
 			if (idx == -1) {
@@ -752,7 +754,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 
 	public Text replaceAdjacentTextNodes(Text node, String textContent) {
 		try {
-			synchronized (this.treeLock) {
+			synchronized (this.getTreeLock()) {
 				ArrayList<Node> nl = this.nodeList;
 				if (nl == null) {
 					throw new DOMException(DOMException.NOT_FOUND_ERR,
@@ -795,7 +797,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 
 	public Text replaceAdjacentTextNodes(Text node) {
 		try {
-			synchronized (this.treeLock) {
+			synchronized (this.getTreeLock()) {
 				ArrayList<Node> nl = this.nodeList;
 				if (nl == null) {
 					throw new DOMException(DOMException.NOT_FOUND_ERR,
@@ -881,7 +883,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	public void normalize() {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl != null) {
 				Iterator<Node> i = nl.iterator();
@@ -1123,7 +1125,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 		// Generally called from the GUI thread, except for
 		// offset properties.
 		RenderState rs;
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			rs = this.renderState;
 			if (rs != INVALID_RENDER_STATE) {
 				return rs;
@@ -1155,7 +1157,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	}
 
 	protected void forgetRenderState() {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			if (this.renderState != INVALID_RENDER_STATE) {
 				this.renderState = INVALID_RENDER_STATE;
 				// Note that getRenderState() "validates"
@@ -1211,7 +1213,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 	 */
 	public String getInnerText() {
 		StringBuffer buffer = new StringBuffer();
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			this.appendInnerTextImpl(buffer);
 		}
 		return buffer.toString();
@@ -1237,5 +1239,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements
 				buffer.append(((Text) child).getTextContent());
 			}
 		}
+	}
+
+	public Object getTreeLock() {
+		return treeLock;
+	}
+
+	public void setTreeLock(Object treeLock) {
+		this.treeLock = treeLock;
 	}
 }

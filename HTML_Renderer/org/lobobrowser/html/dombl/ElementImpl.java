@@ -21,7 +21,7 @@
 /*
  * Created on Oct 29, 2005
  */
-package org.lobobrowser.html.domimpl;
+package org.lobobrowser.html.dombl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,6 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.util.Objects;
 import org.lobobrowser.util.Strings;
 import org.w3c.dom.Attr;
@@ -175,7 +176,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	public NodeList getElementsByTagName(String name) {
 		boolean matchesAll = "*".equals(name);
 		List<Object> descendents = new LinkedList<Object>();
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl != null) {
 				Iterator<Node> i = nl.iterator();
@@ -422,7 +423,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	 * @param includeComment
 	 */
 	protected String getRawInnerText(boolean includeComment) {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl != null) {
 				Iterator<Node> i = nl.iterator();
@@ -491,7 +492,7 @@ public class ElementImpl extends NodeImpl implements Element {
 					+ " does not belong to a document.");
 			return;
 		}
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl != null) {
 				nl.clear();

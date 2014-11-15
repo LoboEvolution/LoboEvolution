@@ -19,36 +19,63 @@
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
- * Created on Sep 3, 2005
+ * Created on Oct 9, 2005
  */
-package org.lobobrowser.html.domimpl;
+package org.lobobrowser.html.dombl;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
+import org.lobobrowser.html.dombl.NodeFilter;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class NodeListImpl extends AbstractScriptableDelegate implements
+class FilteredNodeListImpl extends AbstractScriptableDelegate implements
 		NodeList {
-	// Note: class must be public for reflection to work.
-	private final ArrayList nodeList = new ArrayList();
+	private final Collection sourceNodeList;
+	private final NodeFilter filter;
+	private final Object lock;
 
-	public NodeListImpl(Collection collection) {
+	/**
+	 * @param filter
+	 * @param list
+	 */
+	public FilteredNodeListImpl(NodeFilter filter, Collection list, Object lock) {
 		super();
-		nodeList.addAll(collection);
-	}
-
-	public int getLength() {
-		return this.nodeList.size();
+		this.filter = filter;
+		sourceNodeList = list;
+		this.lock = lock;
 	}
 
 	public Node item(int index) {
-		try {
-			return (Node) this.nodeList.get(index);
-		} catch (IndexOutOfBoundsException iob) {
+		synchronized (this.lock) {
+			int count = 0;
+			Iterator i = this.sourceNodeList.iterator();
+			while (i.hasNext()) {
+				Node node = (Node) i.next();
+				if (this.filter.accept(node)) {
+					if (count == index) {
+						return node;
+					}
+					count++;
+				}
+			}
 			return null;
+		}
+	}
+
+	public int getLength() {
+		synchronized (this.lock) {
+			int count = 0;
+			Iterator i = this.sourceNodeList.iterator();
+			while (i.hasNext()) {
+				Node node = (Node) i.next();
+				if (this.filter.accept(node)) {
+					count++;
+				}
+			}
+			return count;
 		}
 	}
 }

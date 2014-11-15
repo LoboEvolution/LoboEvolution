@@ -44,15 +44,22 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.ReadyStateChangeListener;
 import org.lobobrowser.html.UserAgentContext;
+import org.lobobrowser.html.dombl.AttrImpl;
 import org.lobobrowser.html.dombl.CDataSectionImpl;
+import org.lobobrowser.html.dombl.CommentImpl;
+import org.lobobrowser.html.dombl.DOMConfigurationImpl;
+import org.lobobrowser.html.dombl.DOMImplementationImpl;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
+import org.lobobrowser.html.dombl.DocumentFragmentImpl;
 import org.lobobrowser.html.dombl.DocumentNotificationListener;
 import org.lobobrowser.html.dombl.ElementFactory;
 import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.dombl.LocalErrorHandler;
 import org.lobobrowser.html.dombl.NodeFilter;
+import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.dombl.NodeVisitor;
+import org.lobobrowser.html.dombl.TextImpl;
 import org.lobobrowser.html.io.WritableLineReader;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.js.Location;
@@ -192,7 +199,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	/**
 	 * Caller should synchronize on document.
 	 */
-	void setElementById(String id, Element element) {
+	public void setElementById(String id, Element element) {
 		synchronized (this) {
 			this.elementsById.put(id, element);
 		}
@@ -295,7 +302,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 		synchronized (this) {
 			if (this.images == null) {
 				this.images = new DescendentHTMLCollection(this,
-						new ImageFilter(), this.treeLock);
+						new ImageFilter(), this.getTreeLock());
 			}
 			return this.images;
 		}
@@ -306,7 +313,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 			if (this.applets == null) {
 				// TODO: Should include OBJECTs that are applets?
 				this.applets = new DescendentHTMLCollection(this,
-						new AppletFilter(), this.treeLock);
+						new AppletFilter(), this.getTreeLock());
 			}
 			return this.applets;
 		}
@@ -316,7 +323,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 		synchronized (this) {
 			if (this.links == null) {
 				this.links = new DescendentHTMLCollection(this,
-						new LinkFilter(), this.treeLock);
+						new LinkFilter(), this.getTreeLock());
 			}
 			return this.links;
 		}
@@ -326,7 +333,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 		synchronized (this) {
 			if (this.forms == null) {
 				this.forms = new DescendentHTMLCollection(this,
-						new FormFilter(), this.treeLock);
+						new FormFilter(), this.getTreeLock());
 			}
 			return this.forms;
 		}
@@ -336,7 +343,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 		synchronized (this) {
 			if (this.frames == null) {
 				this.frames = new DescendentHTMLCollection(this,
-						new FrameFilter(), this.treeLock);
+						new FrameFilter(), this.getTreeLock());
 			}
 			return this.frames;
 		}
@@ -346,7 +353,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 		synchronized (this) {
 			if (this.anchors == null) {
 				this.anchors = new DescendentHTMLCollection(this,
-						new AnchorFilter(), this.treeLock);
+						new AnchorFilter(), this.getTreeLock());
 			}
 			return this.anchors;
 		}
@@ -396,7 +403,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	}
 
 	public void open() {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			if (this.reader != null) {
 				if (this.reader instanceof LocalWritableLineReader) {
 					try {
@@ -432,7 +439,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	public void load(boolean closeReader) throws IOException, SAXException,
 			UnsupportedEncodingException {
 		WritableLineReader reader;
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			this.removeAllChildrenImpl();
 			this.setTitle(null);
 			this.setBaseURI(null);
@@ -457,7 +464,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 						logger.log(Level.WARNING,
 								"load(): Unable to close stream", err);
 					}
-					synchronized (this.treeLock) {
+					synchronized (this.getTreeLock()) {
 						this.reader = null;
 					}
 				}
@@ -466,7 +473,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	}
 
 	public void close() {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			if (this.reader instanceof LocalWritableLineReader) {
 				try {
 					this.reader.close();
@@ -482,7 +489,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	}
 
 	public void write(String text) {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			if (this.reader != null) {
 				try {
 					// This can end up in openBufferChanged
@@ -495,7 +502,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	}
 
 	public void writeln(String text) {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			if (this.reader != null) {
 				try {
 					// This can end up in openBufferChanged
@@ -545,7 +552,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	}
 
 	public Element getDocumentElement() {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			ArrayList<?> nl = this.nodeList;
 			if (nl != null) {
 				Iterator<?> i = nl.iterator();
@@ -666,13 +673,13 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 		return element;
 	}
 
-	void setNamedItem(String name, Element element) {
+	public void setNamedItem(String name, Element element) {
 		synchronized (this) {
 			this.elementsByName.put(name, element);
 		}
 	}
 
-	void removeNamedItem(String name) {
+	public void removeNamedItem(String name) {
 		synchronized (this) {
 			this.elementsByName.remove(name);
 		}
@@ -753,7 +760,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 
 	public void normalizeDocument() {
 		// TODO: Normalization options from domConfig
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			this.visitImpl(new NodeVisitor() {
 				public void visit(Node node) {
 					node.normalize();
@@ -891,7 +898,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	}
 
 	final void addStyleSheet(CSSStyleSheet ss) {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			this.styleSheets.add(ss);
 			this.styleSheetAggregator = null;
 			// Need to invalidate all children up to
@@ -914,7 +921,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 
 	public void allInvalidated(boolean forgetRenderStates) {
 		if (forgetRenderStates) {
-			synchronized (this.treeLock) {
+			synchronized (this.getTreeLock()) {
 				this.styleSheetAggregator = null;
 				// Need to invalidate all children up to
 				// this point.
@@ -942,7 +949,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	private StyleSheetAggregator styleSheetAggregator = null;
 
 	final StyleSheetAggregator getStyleSheetAggregator() {
-		synchronized (this.treeLock) {
+		synchronized (this.getTreeLock()) {
 			StyleSheetAggregator ssa = this.styleSheetAggregator;
 			if (ssa == null) {
 				ssa = new StyleSheetAggregator(this);
