@@ -51,6 +51,7 @@ import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.layout.AnchorLayout;
 import org.lobobrowser.html.layout.BlockQuoteLayout;
 import org.lobobrowser.html.layout.BrLayout;
+import org.lobobrowser.html.layout.CanvasLayout;
 import org.lobobrowser.html.layout.ChildrenLayout;
 import org.lobobrowser.html.layout.CommonBlockLayout;
 import org.lobobrowser.html.layout.DivLayout;
@@ -209,6 +210,8 @@ public class RBlockViewport extends BaseRCollection {
 		el.put("APPLET", ol);
 		el.put("EMBED", ol);
 		el.put("IFRAME", new IFrameLayout());
+		el.put("CANVAS", new CanvasLayout());
+		
 	}
 
 	/**

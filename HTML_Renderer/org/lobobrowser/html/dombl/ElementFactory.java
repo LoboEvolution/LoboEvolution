@@ -128,6 +128,7 @@ public class ElementFactory {
 		builders.put("U", new UnderlineBuilder());
 		builders.put("SUP", new SupBuilder());
 		builders.put("SUB", new SubBuilder());
+		builders.put("CANVAS", new CanvasBuilder());
 		
 		
 	}

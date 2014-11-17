@@ -56,17 +56,14 @@ import org.xml.sax.SAXException;
  * may be used directly when a different DOM implementation is preferred.
  */
 public class HtmlParser {
-	private static final Logger logger = Logger.getLogger(HtmlParser.class
-			.getName());
+	private static final Logger logger = Logger.getLogger(HtmlParser.class.getName());
 	private final Document document;
 	private final UserAgentContext ucontext;
 	private final String publicId;
 	private final String systemId;
 
-	private static final Map<String, Character> ENTITIES = new HashMap<String, Character>(
-			256);
-	private static final Map<String, ElementInfo> ELEMENT_INFOS = new HashMap<String, ElementInfo>(
-			35);
+	private static final Map<String, Character> ENTITIES = new HashMap<String, Character>(256);
+	private static final Map<String, ElementInfo> ELEMENT_INFOS = new HashMap<String, ElementInfo>(35);
 
 	/**
 	 * A node <code>UserData</code> key used to tell nodes that their content
@@ -358,38 +355,30 @@ public class HtmlParser {
 
 		Map<String, ElementInfo> elementInfos = ELEMENT_INFOS;
 
-		elementInfos.put("NOSCRIPT", new ElementInfo(true,
-				ElementInfo.END_ELEMENT_REQUIRED, null, true));
+		elementInfos.put("NOSCRIPT", new ElementInfo(true, ElementInfo.END_ELEMENT_REQUIRED, null, true));
 
-		ElementInfo optionalEndElement = new ElementInfo(true,
-				ElementInfo.END_ELEMENT_OPTIONAL);
-		ElementInfo forbiddenEndElement = new ElementInfo(false,
-				ElementInfo.END_ELEMENT_FORBIDDEN);
-		ElementInfo onlyTextDE = new ElementInfo(false,
-				ElementInfo.END_ELEMENT_REQUIRED, true);
-		ElementInfo onlyText = new ElementInfo(false,
-				ElementInfo.END_ELEMENT_REQUIRED, false);
+		ElementInfo optionalEndElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL);
+		ElementInfo forbiddenEndElement = new ElementInfo(false,ElementInfo.END_ELEMENT_FORBIDDEN);
+		ElementInfo onlyTextDE = new ElementInfo(false, ElementInfo.END_ELEMENT_REQUIRED, true);
+		ElementInfo onlyText = new ElementInfo(false, ElementInfo.END_ELEMENT_REQUIRED, false);
 
 		Set<String> tableCellStopElements = new HashSet<String>();
 		tableCellStopElements.add("TH");
 		tableCellStopElements.add("TD");
 		tableCellStopElements.add("TR");
-		ElementInfo tableCellElement = new ElementInfo(true,
-				ElementInfo.END_ELEMENT_OPTIONAL, tableCellStopElements);
+		ElementInfo tableCellElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, tableCellStopElements);
 
 		Set<String> headStopElements = new HashSet<String>();
 		headStopElements.add("BODY");
 		headStopElements.add("DIV");
 		headStopElements.add("SPAN");
 		headStopElements.add("TABLE");
-		ElementInfo headElement = new ElementInfo(true,
-				ElementInfo.END_ELEMENT_OPTIONAL, headStopElements);
+		ElementInfo headElement = new ElementInfo(true,ElementInfo.END_ELEMENT_OPTIONAL, headStopElements);
 
 		Set<String> optionStopElements = new HashSet<String>();
 		optionStopElements.add("OPTION");
 		optionStopElements.add("SELECT");
-		ElementInfo optionElement = new ElementInfo(true,
-				ElementInfo.END_ELEMENT_OPTIONAL, optionStopElements);
+		ElementInfo optionElement = new ElementInfo(true,ElementInfo.END_ELEMENT_OPTIONAL, optionStopElements);
 
 		Set<String> paragraphStopElements = new HashSet<String>();
 		paragraphStopElements.add("P");
@@ -403,9 +392,9 @@ public class HtmlParser {
 		paragraphStopElements.add("HEADER");
 		paragraphStopElements.add("FOOTER");
 		paragraphStopElements.add("ARTICLE");
+		paragraphStopElements.add("CANVAS");
 		
-		ElementInfo paragraphElement = new ElementInfo(true,
-				ElementInfo.END_ELEMENT_OPTIONAL, paragraphStopElements);
+		ElementInfo paragraphElement = new ElementInfo(true,ElementInfo.END_ELEMENT_OPTIONAL, paragraphStopElements);
 
 		elementInfos.put("SCRIPT", onlyText);
 		elementInfos.put("STYLE", onlyText);
