@@ -26,13 +26,9 @@ package org.lobobrowser.html.gui;
 import java.awt.EventQueue;
 import java.awt.Insets;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.EventListener;
-import java.util.EventObject;
-
 import javax.swing.JComponent;
 
 import org.lobobrowser.html.HtmlRendererContext;
@@ -661,7 +657,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * Removes a listener of selection changes that was previously added.
 	 */
 	public void removeSelectionChangeListener(SelectionChangeListener listener) {
-		this.selectionDispatch.removeListener(listener);
+		selectionDispatch.removeListener(listener);
 	}
 
 	/**
@@ -716,7 +712,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	private ArrayList<DocumentNotification> notifications = new ArrayList<DocumentNotification>(
 			1);
 
-	private void addNotification(DocumentNotification notification) {
+	public void addNotification(DocumentNotification notification) {
 		// This can be called in a random thread.
 		ArrayList<DocumentNotification> notifs = this.notifications;
 		synchronized (notifs) {
@@ -747,7 +743,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		this.notificationTimer.restart();
 	}
 
-	private void processNotifications() {
+	public void processNotifications() {
 		// This is called in the GUI thread.
 		ArrayList<DocumentNotification> notifs = this.notifications;
 		DocumentNotification[] notifsArray;
@@ -778,69 +774,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		FrameSetPanel frameSetPanel = this.frameSetPanel;
 		if (frameSetPanel != null) {
 			frameSetPanel.processDocumentNotifications(notifsArray);
-		}
-	}
-
-	private class SelectionDispatch extends EventDispatch2 {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.xamjwg.util.EventDispatch2#dispatchEvent(java.util.EventListener,
-		 * java.util.EventObject)
-		 */
-		protected void dispatchEvent(EventListener listener, EventObject event) {
-			((SelectionChangeListener) listener)
-					.selectionChanged((SelectionChangeEvent) event);
-		}
-	}
-
-	private class LocalDocumentNotificationListener implements
-			DocumentNotificationListener {
-		public void allInvalidated() {
-			HtmlPanel.this.addNotification(new DocumentNotification(
-					DocumentNotification.GENERIC, null));
-		}
-
-		public void invalidated(NodeImpl node) {
-			HtmlPanel.this.addNotification(new DocumentNotification(
-					DocumentNotification.GENERIC, node));
-		}
-
-		public void lookInvalidated(NodeImpl node) {
-			HtmlPanel.this.addNotification(new DocumentNotification(
-					DocumentNotification.LOOK, node));
-		}
-
-		public void positionInvalidated(NodeImpl node) {
-			HtmlPanel.this.addNotification(new DocumentNotification(
-					DocumentNotification.POSITION, node));
-		}
-
-		public void sizeInvalidated(NodeImpl node) {
-			HtmlPanel.this.addNotification(new DocumentNotification(
-					DocumentNotification.SIZE, node));
-		}
-
-		public void externalScriptLoading(NodeImpl node) {
-			// Ignorable here.
-		}
-
-		public void nodeLoaded(NodeImpl node) {
-			HtmlPanel.this.addNotification(new DocumentNotification(
-					DocumentNotification.GENERIC, node));
-		}
-
-		public void structureInvalidated(NodeImpl node) {
-			HtmlPanel.this.addNotification(new DocumentNotification(
-					DocumentNotification.GENERIC, node));
-		}
-	}
-
-	private class NotificationTimerAction implements
-			java.awt.event.ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			HtmlPanel.this.processNotifications();
 		}
 	}
 }

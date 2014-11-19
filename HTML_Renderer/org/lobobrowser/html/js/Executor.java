@@ -62,13 +62,11 @@ public class Executor {
 		return ctx;
 	}
 
-	public static boolean executeFunction(NodeImpl element, Function f,
-			Event event) {
+	public static boolean executeFunction(NodeImpl element, Function f, Event event) {
 		return Executor.executeFunction(element, element, f, event);
 	}
 
-	public static boolean executeFunction(NodeImpl element, Object thisObject,
-			Function f, Event event) {
+	public static boolean executeFunction(NodeImpl element, Object thisObject, Function f, Event event) {
 		Document doc = element.getOwnerDocument();
 		if (doc == null) {
 			throw new IllegalStateException(
@@ -84,15 +82,11 @@ public class Executor {
 								+ Executor.SCOPE_KEY);
 			}
 			JavaScript js = JavaScript.getInstance();
-			Scriptable thisScope = (Scriptable) js.getJavascriptObject(
-					thisObject, scope);
+			Scriptable thisScope = (Scriptable) js.getJavascriptObject(thisObject, scope);
 			try {
-				Scriptable eventScriptable = (Scriptable) js
-						.getJavascriptObject(event, thisScope);
-				ScriptableObject.defineProperty(thisScope, "event",
-						eventScriptable, ScriptableObject.READONLY);
-				Object result = f
-						.call(ctx, thisScope, thisScope, new Object[0]);
+				Scriptable eventScriptable = (Scriptable) js.getJavascriptObject(event, thisScope);
+				ScriptableObject.defineProperty(thisScope, "event", eventScriptable, ScriptableObject.READONLY);
+				Object result = f.call(ctx, thisScope, thisScope, new Object[0]);
 				if (!(result instanceof Boolean)) {
 					return true;
 				}

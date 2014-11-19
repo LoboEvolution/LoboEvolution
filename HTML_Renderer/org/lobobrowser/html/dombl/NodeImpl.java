@@ -66,13 +66,10 @@ import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.w3c.dom.UserDataHandler;
 
-public abstract class NodeImpl extends AbstractScriptableDelegate implements
-		Node, ModelNode {
+public abstract class NodeImpl extends AbstractScriptableDelegate implements Node, ModelNode {
 	private static final NodeImpl[] EMPTY_ARRAY = new NodeImpl[0];
-	private static final RenderState INVALID_RENDER_STATE = new StyleSheetRenderState(
-			null);
-	protected static final Logger logger = Logger.getLogger(NodeImpl.class
-			.getName());
+	private static final RenderState INVALID_RENDER_STATE = new StyleSheetRenderState(null);
+	protected static final Logger logger = Logger.getLogger(NodeImpl.class.getName());
 	protected UINode uiNode;
 	protected ArrayList<Node> nodeList;
 	protected volatile Document document;

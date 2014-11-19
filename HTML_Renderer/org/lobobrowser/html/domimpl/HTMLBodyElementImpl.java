@@ -30,8 +30,7 @@ import org.lobobrowser.html.w3c.HTMLDocument;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Document;
 
-public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
-		HTMLBodyElement {
+public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBodyElement {
 	public HTMLBodyElementImpl(String name) {
 		super(name);
 	}

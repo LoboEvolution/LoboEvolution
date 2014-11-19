@@ -291,7 +291,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	public void setOnwaiting(Function onwaiting) {
 		this.onwaiting = onwaiting;
 	}
-
+	
 	public void focus() {
 		UINode node = this.getUINode();
 		if (node != null) {
@@ -308,15 +308,16 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 
 	private Map<String, Function> functionByAttribute = null;
 
-	protected Function getEventFunction(Function varValue, String attributeName) {
+	public Function getEventFunction(Function varValue, String attributeName) {
+		
 		if (varValue != null) {
 			return varValue;
 		}
+		
 		String normalAttributeName = this.normalizeAttributeName(attributeName);
 		synchronized (this) {
 			Map<String, Function> fba = this.functionByAttribute;
-			Function f = fba == null ? null : (Function) fba
-					.get(normalAttributeName);
+			Function f = fba == null ? null : (Function) fba.get(normalAttributeName);
 			if (f != null) {
 				return f;
 			}
@@ -337,18 +338,15 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 						throw new IllegalStateException(
 								"Element does not belong to a document.");
 					}
-					Context ctx = Executor.createContext(this.getDocumentURL(),
-							uac);
+					Context ctx = Executor.createContext(this.getDocumentURL(),uac);
 					try {
-						Scriptable scope = (Scriptable) doc
-								.getUserData(Executor.SCOPE_KEY);
+						Scriptable scope = (Scriptable) doc.getUserData(Executor.SCOPE_KEY);
 						if (scope == null) {
 							throw new IllegalStateException(
 									"Scriptable (scope) instance was expected to be keyed as UserData to document using "
 											+ Executor.SCOPE_KEY);
 						}
-						Scriptable thisScope = (Scriptable) JavaScript
-								.getInstance().getJavascriptObject(this, scope);
+						Scriptable thisScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(this, scope);
 						try {
 							// TODO: Get right line number for script. //TODO:
 							// Optimize this in case it's called multiple times?

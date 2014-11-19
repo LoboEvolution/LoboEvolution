@@ -1,7 +1,7 @@
 package org.lobobrowser.html.w3c;
 
 public interface HTMLCanvasElement extends HTMLElement {
-	// HTMLCanvasElement
+	
 	public int getWidth();
 
 	public void setWidth(int width);

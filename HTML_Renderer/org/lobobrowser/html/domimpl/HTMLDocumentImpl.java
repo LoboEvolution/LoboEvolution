@@ -46,6 +46,7 @@ import org.lobobrowser.html.ReadyStateChangeListener;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.AttrImpl;
 import org.lobobrowser.html.dombl.CDataSectionImpl;
+import org.lobobrowser.html.dombl.CSSStyleSheetList;
 import org.lobobrowser.html.dombl.CommentImpl;
 import org.lobobrowser.html.dombl.DOMConfigurationImpl;
 import org.lobobrowser.html.dombl.DOMImplementationImpl;
@@ -54,12 +55,21 @@ import org.lobobrowser.html.dombl.DocumentFragmentImpl;
 import org.lobobrowser.html.dombl.DocumentNotificationListener;
 import org.lobobrowser.html.dombl.ElementFactory;
 import org.lobobrowser.html.dombl.ImageEvent;
+import org.lobobrowser.html.dombl.ImageInfo;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.dombl.LocalErrorHandler;
-import org.lobobrowser.html.dombl.NodeFilter;
 import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.dombl.NodeVisitor;
 import org.lobobrowser.html.dombl.TextImpl;
+import org.lobobrowser.html.domfilter.AnchorFilter;
+import org.lobobrowser.html.domfilter.AppletFilter;
+import org.lobobrowser.html.domfilter.ElementFilter;
+import org.lobobrowser.html.domfilter.ElementNameFilter;
+import org.lobobrowser.html.domfilter.FormFilter;
+import org.lobobrowser.html.domfilter.FrameFilter;
+import org.lobobrowser.html.domfilter.ImageFilter;
+import org.lobobrowser.html.domfilter.LinkFilter;
+import org.lobobrowser.html.domfilter.TagNameFilter;
 import org.lobobrowser.html.io.WritableLineReader;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.js.Location;
@@ -68,11 +78,11 @@ import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.StyleSheetAggregator;
 import org.lobobrowser.html.style.StyleSheetRenderState;
+import org.lobobrowser.html.w3c.HTMLAllCollection;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLDocument;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLHeadElement;
-import org.lobobrowser.html.w3c.HTMLLinkElement;
 import org.lobobrowser.util.Domains;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.WeakValueHashMap;
@@ -102,19 +112,46 @@ import org.xml.sax.SAXException;
 /**
  * Implementation of the W3C <code>HTMLDocument</code> interface.
  */
-public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
-		DocumentView {
-	private static final Logger logger = Logger
-			.getLogger(HTMLDocumentImpl.class.getName());
+public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, DocumentView {
+	private static final Logger logger = Logger.getLogger(HTMLDocumentImpl.class.getName());
 	private final ElementFactory factory;
 	private final HtmlRendererContext rcontext;
 	private final UserAgentContext ucontext;
 	private final Window window;
 	private final Map<String, Element> elementsById = new WeakValueHashMap();
-	private String documentURI;
+	private final Map<String, Element> elementsByName = new HashMap<String, Element>(0);
+	private final Collection styleSheets = new CSSStyleSheetList();
+	private final Map<String, ImageInfo> imageInfos = new HashMap<String, ImageInfo>(4);
+	private final ArrayList<DocumentNotificationListener> documentNotificationListeners = new ArrayList<DocumentNotificationListener>(1);
+	private final ImageEvent BLANK_IMAGE_EVENT = new ImageEvent(this, null);
+	
 	private java.net.URL documentURL;
-
 	private WritableLineReader reader;
+	private DocumentType doctype;
+	private HTMLElement body;
+	private HTMLCollection images;
+	private HTMLCollection applets;
+	private HTMLCollection links;
+	private HTMLCollection forms;
+	private HTMLCollection anchors;
+	private HTMLCollection frames;
+	private StyleSheetAggregator styleSheetAggregator = null;
+	private DOMConfiguration domConfig;
+	private DOMImplementation domImplementation;
+	private Function onloadHandler;
+	
+	private Set<?> locales;
+	private volatile String baseURI;
+	private String defaultTarget;
+	private String title;
+	private String documentURI;
+	private String referrer;
+	private String domain;
+	private String inputEncoding;
+	private String xmlEncoding;
+	private String xmlVersion = null;
+	private boolean xmlStandalone;
+	private boolean strictErrorChecking = true;
 
 	public HTMLDocumentImpl(HtmlRendererContext rcontext) {
 		this(rcontext.getUserAgentContext(), rcontext, null, null);
@@ -164,201 +201,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 		// Set up Javascript scope
 		this.setUserData(Executor.SCOPE_KEY, window.getWindowScope(), null);
 	}
-
-	private Set<?> locales;
-
-	/**
-	 * Gets an <i>immutable</i> set of locales previously set for this document.
-	 */
-	public Set<?> getLocales() {
-		return locales;
-	}
-
-	/**
-	 * Sets the locales of the document. This helps determine whether specific
-	 * fonts can display text in the languages of all the locales.
-	 * 
-	 * @param locales
-	 *            An <i>immutable</i> set of <code>java.util.Locale</code>
-	 *            instances.
-	 */
-	public void setLocales(Set<?> locales) {
-		this.locales = locales;
-	}
-
-	String getDocumentHost() {
-		URL docUrl = this.documentURL;
-		return docUrl == null ? null : docUrl.getHost();
-	}
-
-	public URL getDocumentURL() {
-		// TODO: Security considerations?
-		return this.documentURL;
-	}
-
-	/**
-	 * Caller should synchronize on document.
-	 */
-	public void setElementById(String id, Element element) {
-		synchronized (this) {
-			this.elementsById.put(id, element);
-		}
-	}
-
-	void removeElementById(String id) {
-		synchronized (this) {
-			this.elementsById.remove(id);
-		}
-	}
-
-	private volatile String baseURI;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getbaseURI()
-	 */
-	public String getBaseURI() {
-		String buri = this.baseURI;
-		return buri == null ? this.documentURI : buri;
-	}
-
-	public void setBaseURI(String value) {
-		this.baseURI = value;
-	}
-
-	private String defaultTarget;
-
-	public String getDefaultTarget() {
-		return this.defaultTarget;
-	}
-
-	public void setDefaultTarget(String value) {
-		this.defaultTarget = value;
-	}
-
-	public AbstractView getDefaultView() {
-		return this.window;
-	}
-
-	public String getTextContent() throws DOMException {
-		return null;
-	}
-
-	public void setTextContent(String textContent) throws DOMException {
-		// NOP, per spec
-	}
-
-	private String title;
-
-	public String getTitle() {
-		return this.title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	private String referrer;
-
-	public String getReferrer() {
-		return this.referrer;
-	}
-
-	public void setReferrer(String value) {
-		this.referrer = value;
-	}
-
-	private String domain;
-
-	public String getDomain() {
-		return this.domain;
-	}
-
-	public void setDomain(String domain) {
-		String oldDomain = this.domain;
-		if (oldDomain != null && Domains.isValidCookieDomain(domain, oldDomain)) {
-			this.domain = domain;
-		} else {
-			throw new SecurityException("Cannot set domain to '" + domain
-					+ "' when current domain is '" + oldDomain + "'");
-		}
-	}
-
-	public HTMLElement getBody() {
-		synchronized (this) {
-			return this.body;
-		}
-	}
-
-	private HTMLCollection images;
-	private HTMLCollection applets;
-	private HTMLCollection links;
-	private HTMLCollection forms;
-	private HTMLCollection anchors;
-	private HTMLCollection frames;
-
-	public HTMLCollection getImages() {
-		synchronized (this) {
-			if (this.images == null) {
-				this.images = new DescendentHTMLCollection(this,
-						new ImageFilter(), this.getTreeLock());
-			}
-			return this.images;
-		}
-	}
-
-	public HTMLCollection getApplets() {
-		synchronized (this) {
-			if (this.applets == null) {
-				// TODO: Should include OBJECTs that are applets?
-				this.applets = new DescendentHTMLCollection(this,
-						new AppletFilter(), this.getTreeLock());
-			}
-			return this.applets;
-		}
-	}
-
-	public HTMLCollection getLinks() {
-		synchronized (this) {
-			if (this.links == null) {
-				this.links = new DescendentHTMLCollection(this,
-						new LinkFilter(), this.getTreeLock());
-			}
-			return this.links;
-		}
-	}
-
-	public HTMLCollection getForms() {
-		synchronized (this) {
-			if (this.forms == null) {
-				this.forms = new DescendentHTMLCollection(this,
-						new FormFilter(), this.getTreeLock());
-			}
-			return this.forms;
-		}
-	}
-
-	public HTMLCollection getFrames() {
-		synchronized (this) {
-			if (this.frames == null) {
-				this.frames = new DescendentHTMLCollection(this,
-						new FrameFilter(), this.getTreeLock());
-			}
-			return this.frames;
-		}
-	}
-
-	public HTMLCollection getAnchors() {
-		synchronized (this) {
-			if (this.anchors == null) {
-				this.anchors = new DescendentHTMLCollection(this,
-						new AnchorFilter(), this.getTreeLock());
-			}
-			return this.anchors;
-		}
-	}
-
+	
 	public String getCookie() {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
@@ -540,17 +383,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	public NodeList getElementsByName(String elementName) {
 		return this.getNodeList(new ElementNameFilter(elementName));
 	}
-
-	private DocumentType doctype;
-
-	public DocumentType getDoctype() {
-		return this.doctype;
-	}
-
-	public void setDoctype(DocumentType doctype) {
-		this.doctype = doctype;
-	}
-
+	
 	public Element getDocumentElement() {
 		synchronized (this.getTreeLock()) {
 			ArrayList<?> nl = this.nodeList;
@@ -662,8 +495,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 		return element;
 	}
 
-	private final Map<String, Element> elementsByName = new HashMap<String, Element>(
-			0);
+	
 
 	public Element namedItem(String name) {
 		Element element;
@@ -684,58 +516,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 			this.elementsByName.remove(name);
 		}
 	}
-
-	private String inputEncoding;
-
-	public String getInputEncoding() {
-		return this.inputEncoding;
-	}
-
-	private String xmlEncoding;
-
-	public String getXmlEncoding() {
-		return this.xmlEncoding;
-	}
-
-	private boolean xmlStandalone;
-
-	public boolean getXmlStandalone() {
-		return this.xmlStandalone;
-	}
-
-	public void setXmlStandalone(boolean xmlStandalone) throws DOMException {
-		this.xmlStandalone = xmlStandalone;
-	}
-
-	private String xmlVersion = null;
-
-	public String getXmlVersion() {
-		return this.xmlVersion;
-	}
-
-	public void setXmlVersion(String xmlVersion) throws DOMException {
-		this.xmlVersion = xmlVersion;
-	}
-
-	private boolean strictErrorChecking = true;
-
-	public boolean getStrictErrorChecking() {
-		return this.strictErrorChecking;
-	}
-
-	public void setStrictErrorChecking(boolean strictErrorChecking) {
-		this.strictErrorChecking = strictErrorChecking;
-	}
-
-	public String getDocumentURI() {
-		return this.documentURI;
-	}
-
-	public void setDocumentURI(String documentURI) {
-		// TODO: Security considerations? Chaging documentURL?
-		this.documentURI = documentURI;
-	}
-
+	
 	public Node adoptNode(Node source) throws DOMException {
 		if (source instanceof NodeImpl) {
 			NodeImpl node = (NodeImpl) source;
@@ -746,8 +527,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 					"Invalid Node implementation");
 		}
 	}
-
-	private DOMConfiguration domConfig;
 
 	public DOMConfiguration getDomConfig() {
 		synchronized (this) {
@@ -773,8 +552,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 			throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No renaming");
 	}
-
-	private DOMImplementation domImplementation;
+	
 
 	/*
 	 * (non-Javadoc)
@@ -876,28 +654,8 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	public String getURL() {
 		return this.documentURI;
 	}
-
-	private HTMLElement body;
-
-	public void setBody(HTMLElement body) {
-		synchronized (this) {
-			this.body = body;
-		}
-	}
-
-	private final Collection styleSheets = new CSSStyleSheetList();
-
-	public class CSSStyleSheetList extends ArrayList<Object> {
-		public int getLength() {
-			return this.size();
-		}
-
-		public CSSStyleSheet item(int index) {
-			return (CSSStyleSheet) get(index);
-		}
-	}
-
-	final void addStyleSheet(CSSStyleSheet ss) {
+	
+  final void addStyleSheet(CSSStyleSheet ss) {
 		synchronized (this.getTreeLock()) {
 			this.styleSheets.add(ss);
 			this.styleSheetAggregator = null;
@@ -946,8 +704,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 		return this.styleSheets;
 	}
 
-	private StyleSheetAggregator styleSheetAggregator = null;
-
 	final StyleSheetAggregator getStyleSheetAggregator() {
 		synchronized (this.getTreeLock()) {
 			StyleSheetAggregator ssa = this.styleSheetAggregator;
@@ -963,9 +719,9 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 			return ssa;
 		}
 	}
+	
 
-	private final ArrayList<DocumentNotificationListener> documentNotificationListeners = new ArrayList<DocumentNotificationListener>(
-			1);
+	
 
 	/**
 	 * Adds a document notification listener, which is informed about changes to
@@ -1030,8 +786,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 		// been changed.
 		for (int i = 0; i < size; i++) {
 			try {
-				DocumentNotificationListener dnl = (DocumentNotificationListener) listenersList
-						.get(i);
+				DocumentNotificationListener dnl = (DocumentNotificationListener) listenersList.get(i);
 				dnl.lookInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
 				// ignore
@@ -1189,10 +944,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 		return new StyleSheetRenderState(this);
 	}
 
-	private final Map<String, ImageInfo> imageInfos = new HashMap<String, ImageInfo>(
-			4);
-	private final ImageEvent BLANK_IMAGE_EVENT = new ImageEvent(this, null);
-
 	/**
 	 * Loads images asynchronously such that they are shared if loaded
 	 * simultaneously from the same URI. Informs the listener immediately if an
@@ -1298,17 +1049,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 			imageListener.imageLoaded(event);
 		}
 	}
-
-	private Function onloadHandler;
-
-	public Function getOnloadHandler() {
-		return onloadHandler;
-	}
-
-	public void setOnloadHandler(Function onloadHandler) {
-		this.onloadHandler = onloadHandler;
-	}
-
+	
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		Function onloadHandler = this.onloadHandler;
 		if (onloadHandler != null) {
@@ -1324,109 +1065,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	protected Node createSimilarNode() {
 		return new HTMLDocumentImpl(this.ucontext, this.rcontext, this.reader,
 				this.documentURI);
-	}
-
-	public static class ImageInfo {
-		// Access to this class is synchronized on imageInfos.
-		public ImageEvent imageEvent;
-		public boolean loaded;
-		private ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(
-				1);
-
-		void addListener(ImageListener listener) {
-			this.listeners.add(listener);
-		}
-
-		ImageListener[] getListeners() {
-			return (ImageListener[]) this.listeners
-					.toArray(ImageListener.EMPTY_ARRAY);
-		}
-	}
-
-	private class ImageFilter implements NodeFilter {
-		public boolean accept(Node node) {
-			return "IMG".equalsIgnoreCase(node.getNodeName());
-		}
-	}
-
-	private class AppletFilter implements NodeFilter {
-		public boolean accept(Node node) {
-			// TODO: "OBJECT" elements that are applets too.
-			return "APPLET".equalsIgnoreCase(node.getNodeName());
-		}
-	}
-
-	private class LinkFilter implements NodeFilter {
-		public boolean accept(Node node) {
-			return node instanceof HTMLLinkElement;
-		}
-	}
-
-	private class AnchorFilter implements NodeFilter {
-		public boolean accept(Node node) {
-			String nodeName = node.getNodeName();
-			return "A".equalsIgnoreCase(nodeName)
-					|| "ANCHOR".equalsIgnoreCase(nodeName);
-		}
-	}
-
-	private class FormFilter implements NodeFilter {
-		public boolean accept(Node node) {
-			String nodeName = node.getNodeName();
-			return "FORM".equalsIgnoreCase(nodeName);
-		}
-	}
-
-	private class FrameFilter implements NodeFilter {
-		public boolean accept(Node node) {
-			return node instanceof org.lobobrowser.html.w3c.HTMLFrameElement
-					|| node instanceof org.lobobrowser.html.w3c.HTMLIFrameElement;
-		}
-	}
-
-	// private class BodyFilter implements NodeFilter {
-	// public boolean accept(Node node) {
-	// return node instanceof org.lobobrowser.html.w3c.HTMLBodyElement;
-	// }
-	// }
-
-	private class ElementNameFilter implements NodeFilter {
-		private final String name;
-
-		public ElementNameFilter(String name) {
-			this.name = name;
-		}
-
-		public boolean accept(Node node) {
-			// TODO: Case sensitive?
-			return (node instanceof Element)
-					&& this.name.equals(((Element) node).getAttribute("name"));
-		}
-	}
-
-	private class ElementFilter implements NodeFilter {
-		public ElementFilter() {
-		}
-
-		public boolean accept(Node node) {
-			return node instanceof Element;
-		}
-	}
-
-	private class TagNameFilter implements NodeFilter {
-		private final String name;
-
-		public TagNameFilter(String name) {
-			this.name = name;
-		}
-
-		public boolean accept(Node node) {
-			if (!(node instanceof Element)) {
-				return false;
-			}
-			String n = this.name;
-			return n.equalsIgnoreCase(((Element) node).getTagName());
-		}
 	}
 
 	/**
@@ -1456,6 +1094,251 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 				openBufferChanged(text);
 			}
 		}
+	}
+	
+	@Override
+	public HTMLElement getBody() {
+		synchronized (this) {
+			return this.body;
+		}
+	}
+
+	@Override
+	public void setBody(HTMLElement body) {
+		synchronized (this) {
+			this.body = body;
+		}
+	}
+	
+	public String getReferrer() {
+		return this.referrer;
+	}
+
+	public void setReferrer(String value) {
+		this.referrer = value;
+	}
+
+	public String getDomain() {
+		return this.domain;
+	}
+
+	public void setDomain(String domain) {
+		String oldDomain = this.domain;
+		if (oldDomain != null && Domains.isValidCookieDomain(domain, oldDomain)) {
+			this.domain = domain;
+		} else {
+			throw new SecurityException("Cannot set domain to '" + domain
+					+ "' when current domain is '" + oldDomain + "'");
+		}
+	}
+
+	public HTMLCollection getImages() {
+		synchronized (this) {
+			if (this.images == null) {
+				this.images = new DescendentHTMLCollection(this,
+						new ImageFilter(), this.getTreeLock());
+			}
+			return this.images;
+		}
+	}
+
+	public HTMLCollection getApplets() {
+		synchronized (this) {
+			if (this.applets == null) {
+				// TODO: Should include OBJECTs that are applets?
+				this.applets = new DescendentHTMLCollection(this,
+						new AppletFilter(), this.getTreeLock());
+			}
+			return this.applets;
+		}
+	}
+
+	public HTMLCollection getLinks() {
+		synchronized (this) {
+			if (this.links == null) {
+				this.links = new DescendentHTMLCollection(this,
+						new LinkFilter(), this.getTreeLock());
+			}
+			return this.links;
+		}
+	}
+
+	public HTMLCollection getForms() {
+		synchronized (this) {
+			if (this.forms == null) {
+				this.forms = new DescendentHTMLCollection(this,
+						new FormFilter(), this.getTreeLock());
+			}
+			return this.forms;
+		}
+	}
+
+	public HTMLCollection getFrames() {
+		synchronized (this) {
+			if (this.frames == null) {
+				this.frames = new DescendentHTMLCollection(this,
+						new FrameFilter(), this.getTreeLock());
+			}
+			return this.frames;
+		}
+	}
+
+	public HTMLCollection getAnchors() {
+		synchronized (this) {
+			if (this.anchors == null) {
+				this.anchors = new DescendentHTMLCollection(this,
+						new AnchorFilter(), this.getTreeLock());
+			}
+			return this.anchors;
+		}
+	}
+	
+	public DocumentType getDoctype() {
+		return this.doctype;
+	}
+
+	public void setDoctype(DocumentType doctype) {
+		this.doctype = doctype;
+	}
+	
+	public String getInputEncoding() {
+		return this.inputEncoding;
+	}
+
+	public String getXmlEncoding() {
+		return this.xmlEncoding;
+	}
+	
+	public boolean getXmlStandalone() {
+		return this.xmlStandalone;
+	}
+
+	public void setXmlStandalone(boolean xmlStandalone) throws DOMException {
+		this.xmlStandalone = xmlStandalone;
+	}
+
+	
+
+	public String getXmlVersion() {
+		return this.xmlVersion;
+	}
+
+	public void setXmlVersion(String xmlVersion) throws DOMException {
+		this.xmlVersion = xmlVersion;
+	}
+
+	
+
+	public boolean getStrictErrorChecking() {
+		return this.strictErrorChecking;
+	}
+
+	public void setStrictErrorChecking(boolean strictErrorChecking) {
+		this.strictErrorChecking = strictErrorChecking;
+	}
+
+	public String getDocumentURI() {
+		return this.documentURI;
+	}
+	
+	public Function getOnloadHandler() {
+		return onloadHandler;
+	}
+
+	public void setOnloadHandler(Function onloadHandler) {
+		this.onloadHandler = onloadHandler;
+	}
+	
+	/**
+	 * Gets an <i>immutable</i> set of locales previously set for this document.
+	 */
+	public Set<?> getLocales() {
+		return locales;
+	}
+
+	/**
+	 * Sets the locales of the document. This helps determine whether specific
+	 * fonts can display text in the languages of all the locales.
+	 * 
+	 * @param locales
+	 *            An <i>immutable</i> set of <code>java.util.Locale</code>
+	 *            instances.
+	 */
+	public void setLocales(Set<?> locales) {
+		this.locales = locales;
+	}
+
+	String getDocumentHost() {
+		URL docUrl = this.documentURL;
+		return docUrl == null ? null : docUrl.getHost();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xamjwg.html.domimpl.NodeImpl#getbaseURI()
+	 */
+	public String getBaseURI() {
+		String buri = this.baseURI;
+		return buri == null ? this.documentURI : buri;
+	}
+
+	public void setBaseURI(String value) {
+		this.baseURI = value;
+	}
+
+
+	public String getDefaultTarget() {
+		return this.defaultTarget;
+	}
+
+	public void setDefaultTarget(String value) {
+		this.defaultTarget = value;
+	}
+
+	public AbstractView getDefaultView() {
+		return this.window;
+	}
+
+	public String getTextContent() throws DOMException {
+		return null;
+	}
+
+	public void setTextContent(String textContent) throws DOMException {
+		// NOP, per spec
+	}
+	
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public URL getDocumentURL() {
+		// TODO: Security considerations?
+		return this.documentURL;
+	}
+
+	/**
+	 * Caller should synchronize on document.
+	 */
+	public void setElementById(String id, Element element) {
+		synchronized (this) {
+			this.elementsById.put(id, element);
+		}
+	}
+
+	void removeElementById(String id) {
+		synchronized (this) {
+			this.elementsById.remove(id);
+		}
+	}
+
+	public void setDocumentURI(String documentURI) {
+		// TODO: Security considerations? Chaging documentURL?
+		this.documentURI = documentURI;
 	}
 
 	@Override
@@ -1562,6 +1445,172 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 
 	@Override
 	public HTMLDocument open(String type, String replace) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void write(String... text) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void writeln(String... text) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean hasFocus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String getDesignMode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDesignMode(String designMode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean execCommand(String commandId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean execCommand(String commandId, boolean showUI) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean execCommand(String commandId, boolean showUI, String value) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean queryCommandEnabled(String commandId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean queryCommandIndeterm(String commandId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean queryCommandState(String commandId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean queryCommandSupported(String commandId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String queryCommandValue(String commandId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HTMLCollection getCommands() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getFgColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFgColor(String fgColor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getBgColor() {
+		return null;
+	}
+
+	@Override
+	public void setBgColor(String bgColor) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public String getLinkColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLinkColor(String linkColor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getVlinkColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setVlinkColor(String vlinkColor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getAlinkColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAlinkColor(String alinkColor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HTMLAllCollection getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public NodeList getItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public NodeList getItems(String typeNames) {
 		// TODO Auto-generated method stub
 		return null;
 	}

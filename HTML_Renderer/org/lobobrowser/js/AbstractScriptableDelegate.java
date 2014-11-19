@@ -19,7 +19,6 @@
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.js;
-
 import org.mozilla.javascript.Scriptable;
 
 public abstract class AbstractScriptableDelegate implements ScriptableDelegate {

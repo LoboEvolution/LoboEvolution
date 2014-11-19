@@ -38,7 +38,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public int getWidth() {
 		String widthText = this.getAttribute("width");
-		System.out.println("widthText: " + widthText);
 		if (widthText == null) {
 			return 0;
 		}
@@ -51,14 +50,12 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements HTML
 
 	@Override
 	public void setWidth(int width) {
-		System.out.println("width: " + width);
 		this.setAttribute("width", String.valueOf(width));
 	}
 
 	@Override
 	public int getHeight() {
 		String heightText = this.getAttribute("height");
-		System.out.println("heightText: " + heightText);
 		if (heightText == null) {
 			return 0;
 		}
@@ -71,7 +68,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements HTML
 
 	@Override
 	public void setHeight(int height) {
-		System.out.println("height: " + height);
 		this.setAttribute("height", String.valueOf(height));
 	}
 
@@ -88,8 +84,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements HTML
 	}
 
 	@Override
-	public Object getContext(String contextId) {
-		// TODO Auto-generated method stub
+	public Object getContext(String contextId) {	
 		return null;
 	}
 }

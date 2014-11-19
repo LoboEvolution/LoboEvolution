@@ -322,93 +322,61 @@ public interface HTMLDocument extends Document {
 	public HTMLDocument open(String type);
 
 	public HTMLDocument open(String type, String replace);
-	/*
-	 * public Window open(String url, String name, String features); public
-	 * Window open(String url, String name, String features, boolean replace);
-	 * 
-	 * public void write(String... text); public void writeln(String... text);
-	 * public boolean hasFocus(); public String getDesignMode(); public void
-	 * setDesignMode(String designMode); public boolean execCommand(String
-	 * commandId); public boolean execCommand(String commandId, boolean showUI);
-	 * public boolean execCommand(String commandId, boolean showUI, String
-	 * value); public boolean queryCommandEnabled(String commandId); public
-	 * boolean queryCommandIndeterm(String commandId); public boolean
-	 * queryCommandState(String commandId); public boolean
-	 * queryCommandSupported(String commandId); public String
-	 * queryCommandValue(String commandId); public HTMLCollection getCommands();
-	 * public Function getOnabort(); public void setOnabort(Function onabort);
-	 * public Function getOnblur(); public void setOnblur(Function onblur);
-	 * public Function getOncanplay(); public void setOncanplay(Function
-	 * oncanplay); public Function getOncanplaythrough(); public void
-	 * setOncanplaythrough(Function oncanplaythrough); public Function
-	 * getOnchange(); public void setOnchange(Function onchange); public
-	 * Function getOnclick(); public void setOnclick(Function onclick); public
-	 * Function getOncontextmenu(); public void setOncontextmenu(Function
-	 * oncontextmenu); public Function getOndblclick(); public void
-	 * setOndblclick(Function ondblclick); public Function getOndrag(); public
-	 * void setOndrag(Function ondrag); public Function getOndragend(); public
-	 * void setOndragend(Function ondragend); public Function getOndragenter();
-	 * public void setOndragenter(Function ondragenter); public Function
-	 * getOndragleave(); public void setOndragleave(Function ondragleave);
-	 * public Function getOndragover(); public void setOndragover(Function
-	 * ondragover); public Function getOndragstart(); public void
-	 * setOndragstart(Function ondragstart); public Function getOndrop(); public
-	 * void setOndrop(Function ondrop); public Function getOndurationchange();
-	 * public void setOndurationchange(Function ondurationchange); public
-	 * Function getOnemptied(); public void setOnemptied(Function onemptied);
-	 * public Function getOnended(); public void setOnended(Function onended);
-	 * public Function getOnerror(); public void setOnerror(Function onerror);
-	 * public Function getOnfocus(); public void setOnfocus(Function onfocus);
-	 * public Function getOnformchange(); public void setOnformchange(Function
-	 * onformchange); public Function getOnforminput(); public void
-	 * setOnforminput(Function onforminput); public Function getOninput();
-	 * public void setOninput(Function oninput); public Function getOninvalid();
-	 * public void setOninvalid(Function oninvalid); public Function
-	 * getOnkeydown(); public void setOnkeydown(Function onkeydown); public
-	 * Function getOnkeypress(); public void setOnkeypress(Function onkeypress);
-	 * public Function getOnkeyup(); public void setOnkeyup(Function onkeyup);
-	 * public Function getOnload(); public void setOnload(Function onload);
-	 * public Function getOnloadeddata(); public void setOnloadeddata(Function
-	 * onloadeddata); public Function getOnloadedmetadata(); public void
-	 * setOnloadedmetadata(Function onloadedmetadata); public Function
-	 * getOnloadstart(); public void setOnloadstart(Function onloadstart);
-	 * public Function getOnmousedown(); public void setOnmousedown(Function
-	 * onmousedown); public Function getOnmousemove(); public void
-	 * setOnmousemove(Function onmousemove); public Function getOnmouseout();
-	 * public void setOnmouseout(Function onmouseout); public Function
-	 * getOnmouseover(); public void setOnmouseover(Function onmouseover);
-	 * public Function getOnmouseup(); public void setOnmouseup(Function
-	 * onmouseup); public Function getOnmousewheel(); public void
-	 * setOnmousewheel(Function onmousewheel); public Function getOnpause();
-	 * public void setOnpause(Function onpause); public Function getOnplay();
-	 * public void setOnplay(Function onplay); public Function getOnplaying();
-	 * public void setOnplaying(Function onplaying); public Function
-	 * getOnprogress(); public void setOnprogress(Function onprogress); public
-	 * Function getOnratechange(); public void setOnratechange(Function
-	 * onratechange); public Function getOnreadystatechange(); public void
-	 * setOnreadystatechange(Function onreadystatechange); public Function
-	 * getOnscroll(); public void setOnscroll(Function onscroll); public
-	 * Function getOnseeked(); public void setOnseeked(Function onseeked);
-	 * public Function getOnseeking(); public void setOnseeking(Function
-	 * onseeking); public Function getOnselect(); public void
-	 * setOnselect(Function onselect); public Function getOnshow(); public void
-	 * setOnshow(Function onshow); public Function getOnstalled(); public void
-	 * setOnstalled(Function onstalled); public Function getOnsubmit(); public
-	 * void setOnsubmit(Function onsubmit); public Function getOnsuspend();
-	 * public void setOnsuspend(Function onsuspend); public Function
-	 * getOntimeupdate(); public void setOntimeupdate(Function ontimeupdate);
-	 * public Function getOnvolumechange(); public void
-	 * setOnvolumechange(Function onvolumechange); public Function
-	 * getOnwaiting(); public void setOnwaiting(Function onwaiting); //
-	 * HTMLDocument-36 public String getFgColor(); public void setFgColor(String
-	 * fgColor); public String getBgColor(); public void setBgColor(String
-	 * bgColor); public String getLinkColor(); public void setLinkColor(String
-	 * linkColor); public String getVlinkColor(); public void
-	 * setVlinkColor(String vlinkColor); public String getAlinkColor(); public
-	 * void setAlinkColor(String alinkColor); public HTMLCollection
-	 * getAnchors(); public HTMLCollection getApplets(); public void clear();
-	 * public HTMLAllCollection getAll(); // HTMLDocument-37 public NodeList
-	 * getItems(); public NodeList getItems(String typeNames);
-	 */
+	
+	public void write(String... text);
+
+	public void writeln(String... text);
+
+	public boolean hasFocus();
+
+	public String getDesignMode();
+
+	public void setDesignMode(String designMode);
+
+	public boolean execCommand(String commandId);
+
+	public boolean execCommand(String commandId, boolean showUI);
+
+	public boolean execCommand(String commandId, boolean showUI, String value);
+
+	public boolean queryCommandEnabled(String commandId);
+
+	public boolean queryCommandIndeterm(String commandId);
+
+	public boolean queryCommandState(String commandId);
+
+	public boolean queryCommandSupported(String commandId);
+
+	public String queryCommandValue(String commandId);
+
+	public HTMLCollection getCommands();
+
+	public String getFgColor();
+
+	public void setFgColor(String fgColor);
+
+	public String getBgColor();
+
+	public void setBgColor(String bgColor);
+
+	public String getLinkColor();
+
+	public void setLinkColor(String linkColor);
+
+	public String getVlinkColor();
+
+	public void setVlinkColor(String vlinkColor);
+
+	public String getAlinkColor();
+
+	public void setAlinkColor(String alinkColor);
+
+	public void clear();
+
+	public HTMLAllCollection getAll();
+
+	public NodeList getItems();
+
+	public NodeList getItems(String typeNames);
 
 }

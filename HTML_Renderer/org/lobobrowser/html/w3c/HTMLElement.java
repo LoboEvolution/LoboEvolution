@@ -34,8 +34,6 @@ package org.lobobrowser.html.w3c;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.css.CSSStyleDeclaration;
-import org.mozilla.javascript.Function;
 
 /**
  * All HTML element interfaces derive from this class. Elements that only expose

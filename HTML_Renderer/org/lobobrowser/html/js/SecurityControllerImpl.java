@@ -27,7 +27,6 @@ import java.security.PermissionCollection;
 import java.security.Policy;
 import java.security.PrivilegedAction;
 import java.security.ProtectionDomain;
-import java.security.SecureClassLoader;
 import java.util.MissingResourceException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,7 +78,7 @@ public class SecurityControllerImpl extends SecurityController {
 
 	public GeneratedClassLoader createClassLoader(ClassLoader parent,
 			Object staticDomain) {
-		return new LocalSecureClassLoader(parent);
+		return new LocalSecureClassLoader(parent,codesource);
 	}
 
 	public Object getDynamicSecurityDomain(Object securityDomain) {
@@ -87,24 +86,8 @@ public class SecurityControllerImpl extends SecurityController {
 		if (policy == null) {
 			return null;
 		} else {
-			PermissionCollection permissions = this.policy
-					.getPermissions(codesource);
+			PermissionCollection permissions = this.policy.getPermissions(codesource);
 			return new ProtectionDomain(codesource, permissions);
-		}
-	}
-
-	private class LocalSecureClassLoader extends SecureClassLoader implements
-			GeneratedClassLoader {
-		public LocalSecureClassLoader(ClassLoader parent) {
-			super(parent);
-		}
-
-		public Class defineClass(String name, byte[] b) {
-			return this.defineClass(name, b, 0, b.length, codesource);
-		}
-
-		public void linkClass(Class clazz) {
-			super.resolveClass(clazz);
 		}
 	}
 }
