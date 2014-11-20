@@ -39,6 +39,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.io.WritableLineReader;
 import org.w3c.dom.DOMException;
@@ -355,78 +356,79 @@ public class HtmlParser {
 
 		Map<String, ElementInfo> elementInfos = ELEMENT_INFOS;
 
-		elementInfos.put("NOSCRIPT", new ElementInfo(true, ElementInfo.END_ELEMENT_REQUIRED, null, true));
+		elementInfos.put(HtmlProperties.NOSCRIPT, new ElementInfo(true, ElementInfo.END_ELEMENT_REQUIRED, null, true));
 
 		ElementInfo optionalEndElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL);
 		ElementInfo forbiddenEndElement = new ElementInfo(false,ElementInfo.END_ELEMENT_FORBIDDEN);
 		ElementInfo onlyTextDE = new ElementInfo(false, ElementInfo.END_ELEMENT_REQUIRED, true);
 		ElementInfo onlyText = new ElementInfo(false, ElementInfo.END_ELEMENT_REQUIRED, false);
 
+		
 		Set<String> tableCellStopElements = new HashSet<String>();
-		tableCellStopElements.add("TH");
-		tableCellStopElements.add("TD");
-		tableCellStopElements.add("TR");
-		ElementInfo tableCellElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, tableCellStopElements);
+			tableCellStopElements.add(HtmlProperties.TH);
+			tableCellStopElements.add(HtmlProperties.TD);
+			tableCellStopElements.add(HtmlProperties.TR);
+			ElementInfo tableCellElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, tableCellStopElements);
 
-		Set<String> headStopElements = new HashSet<String>();
-		headStopElements.add("BODY");
-		headStopElements.add("DIV");
-		headStopElements.add("SPAN");
-		headStopElements.add("TABLE");
-		ElementInfo headElement = new ElementInfo(true,ElementInfo.END_ELEMENT_OPTIONAL, headStopElements);
+			Set<String> headStopElements = new HashSet<String>();
+			headStopElements.add(HtmlProperties.BODY);
+			headStopElements.add(HtmlProperties.DIV);
+			headStopElements.add(HtmlProperties.SPAN);
+			headStopElements.add(HtmlProperties.TABLE);
+			ElementInfo headElement = new ElementInfo(true,ElementInfo.END_ELEMENT_OPTIONAL, headStopElements);
 
-		Set<String> optionStopElements = new HashSet<String>();
-		optionStopElements.add("OPTION");
-		optionStopElements.add("SELECT");
-		ElementInfo optionElement = new ElementInfo(true,ElementInfo.END_ELEMENT_OPTIONAL, optionStopElements);
+			Set<String> optionStopElements = new HashSet<String>();
+			optionStopElements.add(HtmlProperties.OPTION);
+			optionStopElements.add(HtmlProperties.SELECT);
+			ElementInfo optionElement = new ElementInfo(true,ElementInfo.END_ELEMENT_OPTIONAL, optionStopElements);
 
-		Set<String> paragraphStopElements = new HashSet<String>();
-		paragraphStopElements.add("P");
-		paragraphStopElements.add("DIV");
-		paragraphStopElements.add("TABLE");
-		paragraphStopElements.add("PRE");
-		paragraphStopElements.add("UL");
-		paragraphStopElements.add("OL");
-		paragraphStopElements.add("NAV");
-		paragraphStopElements.add("SECTION");
-		paragraphStopElements.add("HEADER");
-		paragraphStopElements.add("FOOTER");
-		paragraphStopElements.add("ARTICLE");
-		paragraphStopElements.add("CANVAS");
-		
-		ElementInfo paragraphElement = new ElementInfo(true,ElementInfo.END_ELEMENT_OPTIONAL, paragraphStopElements);
+			Set<String> paragraphStopElements = new HashSet<String>();
+			paragraphStopElements.add(HtmlProperties.P);
+			paragraphStopElements.add(HtmlProperties.DIV);
+			paragraphStopElements.add(HtmlProperties.TABLE);
+			paragraphStopElements.add(HtmlProperties.PRE);
+			paragraphStopElements.add(HtmlProperties.UL);
+			paragraphStopElements.add(HtmlProperties.OL);
+			paragraphStopElements.add(HtmlProperties.NAV);
+			paragraphStopElements.add(HtmlProperties.SECTION);
+			paragraphStopElements.add(HtmlProperties.HEADER);
+			paragraphStopElements.add(HtmlProperties.FOOTER);
+			paragraphStopElements.add(HtmlProperties.ARTICLE);
+			paragraphStopElements.add(HtmlProperties.CANVAS);
+			
+			ElementInfo paragraphElement = new ElementInfo(true,ElementInfo.END_ELEMENT_OPTIONAL, paragraphStopElements);
 
-		elementInfos.put("SCRIPT", onlyText);
-		elementInfos.put("STYLE", onlyText);
-		elementInfos.put("TEXTAREA", onlyTextDE);
-		elementInfos.put("IMG", forbiddenEndElement);
-		elementInfos.put("META", forbiddenEndElement);
-		elementInfos.put("LINK", forbiddenEndElement);
-		elementInfos.put("BASE", forbiddenEndElement);
-		elementInfos.put("INPUT", forbiddenEndElement);
-		elementInfos.put("FRAME", forbiddenEndElement);
-		elementInfos.put("BR", forbiddenEndElement);
-		elementInfos.put("HR", forbiddenEndElement);
-		elementInfos.put("EMBED", forbiddenEndElement);
-		elementInfos.put("SPACER", forbiddenEndElement);
-		
-		elementInfos.put("P", paragraphElement);
-		elementInfos.put("LI", optionalEndElement);
-		elementInfos.put("DT", optionalEndElement);
-		elementInfos.put("DD", optionalEndElement);
-		elementInfos.put("CAPTION", optionalEndElement);
-		elementInfos.put("TR", optionalEndElement);
-		elementInfos.put("TH", tableCellElement);
-		elementInfos.put("TD", tableCellElement);
-		elementInfos.put("HEAD", headElement);
-		elementInfos.put("OPTION", optionElement);
+			elementInfos.put(HtmlProperties.SCRIPT, onlyText);
+			elementInfos.put(HtmlProperties.STYLE, onlyText);
+			elementInfos.put(HtmlProperties.TEXTAREA, onlyTextDE);
+			elementInfos.put(HtmlProperties.IMG, forbiddenEndElement);
+			elementInfos.put(HtmlProperties.META, forbiddenEndElement);
+			elementInfos.put(HtmlProperties.LINK, forbiddenEndElement);
+			elementInfos.put(HtmlProperties.BASE, forbiddenEndElement);
+			elementInfos.put(HtmlProperties.INPUT, forbiddenEndElement);
+			elementInfos.put(HtmlProperties.FRAME, forbiddenEndElement);
+			elementInfos.put(HtmlProperties.BR, forbiddenEndElement);
+			elementInfos.put(HtmlProperties.HR, forbiddenEndElement);
+			elementInfos.put(HtmlProperties.EMBED, forbiddenEndElement);
+			elementInfos.put(HtmlProperties.SPACER, forbiddenEndElement);
+			
+			elementInfos.put(HtmlProperties.P, paragraphElement);
+			elementInfos.put(HtmlProperties.LI, optionalEndElement);
+			elementInfos.put(HtmlProperties.DT, optionalEndElement);
+			elementInfos.put(HtmlProperties.DD, optionalEndElement);
+			elementInfos.put(HtmlProperties.CAPTION, optionalEndElement);
+			elementInfos.put(HtmlProperties.TR, optionalEndElement);
+			elementInfos.put(HtmlProperties.TH, tableCellElement);
+			elementInfos.put(HtmlProperties.TD, tableCellElement);
+			elementInfos.put(HtmlProperties.HEAD, headElement);
+			elementInfos.put(HtmlProperties.OPTION, optionElement);
 
-		// Note: The specification states anchors have
-		// a required end element, but browsers generally behave
-		// as if it's optional.
-		elementInfos.put("A", optionalEndElement);
-		elementInfos.put("ANCHOR", optionalEndElement);
-		// TODO: Keep adding tags here
+			// Note: The specification states anchors have
+			// a required end element, but browsers generally behave
+			// as if it's optional.
+			elementInfos.put(HtmlProperties.A, optionalEndElement);
+			elementInfos.put(HtmlProperties.ANCHOR, optionalEndElement);
+			// TODO: Keep adding tags here
 	}
 
 	/**
