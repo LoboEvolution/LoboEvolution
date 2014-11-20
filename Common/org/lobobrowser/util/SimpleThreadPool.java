@@ -12,8 +12,7 @@ import java.util.logging.Logger;
  * the thread pool.
  */
 public class SimpleThreadPool {
-	private static final Logger logger = Logger
-			.getLogger(SimpleThreadPool.class.getName());
+	private static final Logger logger = Logger.getLogger(SimpleThreadPool.class.getName());
 	private final LinkedList taskList = new LinkedList();
 	private final Set runningSet = new HashSet();
 	private final int minThreads;

@@ -39,11 +39,11 @@ import java.util.TreeSet;
 public class History implements java.io.Serializable {
 	private static final long serialVersionUID = 2257845000800300100L;
 
-	private transient ArrayList historySequence;
+	private transient ArrayList<String> historySequence;
 
-	private final SortedSet historySortedSet = new TreeSet();
-	private final Map historyMap = new HashMap();
-	private final SortedSet historyTimedSet = new TreeSet();
+	private final SortedSet<String> historySortedSet = new TreeSet<String>();
+	private final Map<String, TimedEntry> historyMap = new HashMap<String, TimedEntry>();
+	private final SortedSet<TimedEntry> historyTimedSet = new TreeSet<TimedEntry>();
 
 	private int sequenceCapacity;
 	private int commonEntriesCapacity;
@@ -56,7 +56,7 @@ public class History implements java.io.Serializable {
 	 */
 	public History(int sequenceCapacity, int commonEntriesCapacity) {
 		super();
-		this.historySequence = new ArrayList();
+		this.historySequence = new ArrayList<String>();
 		this.sequenceIndex = -1;
 		this.sequenceCapacity = sequenceCapacity;
 		this.commonEntriesCapacity = commonEntriesCapacity;
@@ -64,7 +64,7 @@ public class History implements java.io.Serializable {
 
 	private void readObject(java.io.ObjectInputStream in)
 			throws ClassNotFoundException, java.io.IOException {
-		this.historySequence = new ArrayList();
+		this.historySequence = new ArrayList<String>();
 		this.sequenceIndex = -1;
 		in.defaultReadObject();
 	}
@@ -125,9 +125,9 @@ public class History implements java.io.Serializable {
 		}
 	}
 
-	public Collection getRecentItems(int maxNumItems) {
-		Collection items = new LinkedList();
-		Iterator i = this.historyTimedSet.iterator();
+	public Collection<String> getRecentItems(int maxNumItems) {
+		Collection<String> items = new LinkedList<String>();
+		Iterator<TimedEntry> i = this.historyTimedSet.iterator();
 		int count = 0;
 		while (i.hasNext() && count++ < maxNumItems) {
 			TimedEntry entry = (TimedEntry) i.next();
@@ -136,12 +136,12 @@ public class History implements java.io.Serializable {
 		return items;
 	}
 
-	public Collection getHeadMatchItems(String item, int maxNumItems) {
+	public Collection<String> getHeadMatchItems(String item, int maxNumItems) {
 		Object[] array = this.historySortedSet.toArray();
 		int idx = Arrays.binarySearch(array, item);
 		int startIdx = idx >= 0 ? idx : (-idx - 1);
 		int count = 0;
-		Collection items = new LinkedList();
+		Collection<String> items = new LinkedList<String>();
 		for (int i = startIdx; i < array.length && (count++ < maxNumItems); i++) {
 			String potentialItem = (String) array[i];
 			if (potentialItem.startsWith(item)) {
@@ -198,54 +198,4 @@ public class History implements java.io.Serializable {
 			this.addAsRecentOnly(item);
 		}
 	}
-
-	private class TimedEntry implements Comparable, java.io.Serializable {
-		private static final long serialVersionUID = 2257845000000000200L;
-		private long timestamp = System.currentTimeMillis();
-		private final String value;
-
-		/**
-		 * @param value
-		 */
-		public TimedEntry(String value) {
-			this.value = value;
-		}
-
-		public void touch() {
-			this.timestamp = System.currentTimeMillis();
-		}
-
-		public boolean equals(Object obj) {
-			TimedEntry other = (TimedEntry) obj;
-			return other.value.equals(this.value);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.lang.Comparable#compareTo(java.lang.Object)
-		 */
-		public int compareTo(Object arg0) {
-			if (this.equals(arg0)) {
-				return 0;
-			}
-			TimedEntry other = (TimedEntry) arg0;
-			long time1 = this.timestamp;
-			long time2 = other.timestamp;
-			if (time1 > time2) {
-				// More recent goes first
-				return -1;
-			} else if (time2 > time1) {
-				return +1;
-			} else {
-				int diff = System.identityHashCode(this)
-						- System.identityHashCode(other);
-				if (diff == 0) {
-					return +1;
-				}
-				return diff;
-			}
-		}
-	}
-
 }
