@@ -21,7 +21,6 @@
 package org.lobobrowser.html.builder;
 
 import org.lobobrowser.html.domimpl.HTMLButtonElementImpl;
-import org.lobobrowser.html.domimpl.HTMLElementBuilder;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 
 public class ButtonBuilder extends HTMLElementBuilder {

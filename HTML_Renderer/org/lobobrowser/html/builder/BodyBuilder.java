@@ -21,7 +21,6 @@
 package org.lobobrowser.html.builder;
 
 import org.lobobrowser.html.domimpl.HTMLBodyElementImpl;
-import org.lobobrowser.html.domimpl.HTMLElementBuilder;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 
 public class BodyBuilder extends HTMLElementBuilder{

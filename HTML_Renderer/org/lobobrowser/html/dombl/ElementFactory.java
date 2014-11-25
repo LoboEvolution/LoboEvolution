@@ -30,7 +30,6 @@ import java.util.Map;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.builder.*;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
-import org.lobobrowser.html.domimpl.HTMLElementBuilder;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.w3c.dom.DOMException;
