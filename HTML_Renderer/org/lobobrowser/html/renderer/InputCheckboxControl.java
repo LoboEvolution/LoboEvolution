@@ -28,6 +28,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.util.gui.WrapperLayout;
 
@@ -101,6 +102,6 @@ public class InputCheckboxControl extends BaseInputControl {
 	}
 
 	public String getValue() {
-		return this.controlElement.getAttribute("value");
+		return this.controlElement.getAttribute(HtmlAttributeProperties.VALUE);
 	}
 }

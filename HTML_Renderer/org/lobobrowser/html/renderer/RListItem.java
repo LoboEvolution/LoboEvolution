@@ -25,6 +25,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Insets;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.NodeImpl;
@@ -63,7 +64,7 @@ class RListItem extends BaseRListElement {
 		Integer value = this.value;
 		if (value == null) {
 			HTMLElement node = (HTMLElement) this.modelNode;
-			String valueText = node == null ? null : node.getAttribute("value");
+			String valueText = node == null ? null : node.getAttribute(HtmlAttributeProperties.VALUE);
 			if (valueText == null) {
 				value = UNSET;
 			} else {

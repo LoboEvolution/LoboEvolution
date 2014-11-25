@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.style.DisplayRenderState;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.w3c.HTMLLIElement;
@@ -34,15 +35,15 @@ public class HTMLLIElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public String getType() {
-		return this.getAttribute("type");
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
 	public void setType(String type) {
-		this.setAttribute("type", type);
+		this.setAttribute(HtmlAttributeProperties.TYPE, type);
 	}
 
 	public int getValue() {
-		String valueText = this.getAttribute("value");
+		String valueText = this.getAttribute(HtmlAttributeProperties.VALUE);
 		if (valueText == null) {
 			return 0;
 		}
@@ -54,7 +55,7 @@ public class HTMLLIElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void setValue(int value) {
-		this.setAttribute("value", String.valueOf(value));
+		this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(value));
 	}
 
 	protected RenderState createRenderState(RenderState prevRenderState) {

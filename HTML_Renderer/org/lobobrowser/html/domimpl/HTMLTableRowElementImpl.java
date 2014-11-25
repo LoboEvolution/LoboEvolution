@@ -25,6 +25,8 @@ package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.dombl.NodeFilter;
 import org.lobobrowser.html.dombl.NodeImpl;
@@ -43,7 +45,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 	}
 
 	public HTMLTableRowElementImpl() {
-		super("TR", true);
+		super(HtmlProperties.TR, true);
 	}
 
 	public int getRowIndex() {
@@ -86,43 +88,43 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 	}
 
 	public String getAlign() {
-		return this.getAttribute("align");
+		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
 	public void setAlign(String align) {
-		this.setAttribute("align", align);
+		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
 	public String getBgColor() {
-		return this.getAttribute("bgcolor");
+		return this.getAttribute(HtmlAttributeProperties.BGCOLOR);
 	}
 
 	public void setBgColor(String bgColor) {
-		this.setAttribute("bgcolor", bgColor);
+		this.setAttribute(HtmlAttributeProperties.BGCOLOR, bgColor);
 	}
 
 	public String getCh() {
-		return this.getAttribute("ch");
+		return this.getAttribute(HtmlAttributeProperties.CH);
 	}
 
 	public void setCh(String ch) {
-		this.setAttribute("ch", ch);
+		this.setAttribute(HtmlAttributeProperties.CH, ch);
 	}
 
 	public String getChOff() {
-		return this.getAttribute("choff");
+		return this.getAttribute(HtmlAttributeProperties.CHOFF);
 	}
 
 	public void setChOff(String chOff) {
-		this.setAttribute("choff", chOff);
+		this.setAttribute(HtmlAttributeProperties.CHOFF, chOff);
 	}
 
 	public String getVAlign() {
-		return this.getAttribute("valign");
+		return this.getAttribute(HtmlAttributeProperties.VALIGN);
 	}
 
 	public void setVAlign(String vAlign) {
-		this.setAttribute("valign", vAlign);
+		this.setAttribute(HtmlAttributeProperties.VALIGN, vAlign);
 	}
 
 	/**
@@ -137,11 +139,11 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 	 *             When the index is out of range.
 	 */
 	public HTMLElement insertHeader(int index) throws DOMException {
-		return this.insertCell(index, "TH");
+		return this.insertCell(index, HtmlProperties.TH);
 	}
 
 	public HTMLElement insertCell(int index) throws DOMException {
-		return this.insertCell(index, "TD");
+		return this.insertCell(index, HtmlProperties.TD);
 	}
 
 	private HTMLElement insertCell(int index, String tagName)

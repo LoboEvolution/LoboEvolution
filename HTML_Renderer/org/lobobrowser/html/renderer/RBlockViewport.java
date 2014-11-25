@@ -41,6 +41,7 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
@@ -735,7 +736,7 @@ public class RBlockViewport extends BaseRCollection {
 					this.sizeOnly);
 			boolean centerBlock = false;
 			if (alignCenterAttribute) {
-				String align = markupElement.getAttribute("align");
+				String align = markupElement.getAttribute(HtmlAttributeProperties.ALIGN);
 				centerBlock = align != null && align.equalsIgnoreCase("center");
 			}
 			this.addAsSeqBlock(renderable, obeysFloats, false, true,
@@ -839,7 +840,7 @@ public class RBlockViewport extends BaseRCollection {
 			}
 		}
 		if (align == null && usesAlignAttribute) {
-			align = element.getAttribute("align");
+			align = element.getAttribute(HtmlAttributeProperties.ALIGN);
 		}
 		if (align != null) {
 			if ("left".equalsIgnoreCase(align)) {
@@ -968,7 +969,7 @@ public class RBlockViewport extends BaseRCollection {
 						usesAlignAttribute, style, true)) {
 					boolean centerBlock = false;
 					if (renderable instanceof RTable) {
-						String align = element.getAttribute("align");
+						String align = element.getAttribute(HtmlAttributeProperties.ALIGN);
 						centerBlock = align != null
 								&& align.equalsIgnoreCase("center");
 					}
@@ -1579,7 +1580,7 @@ public class RBlockViewport extends BaseRCollection {
 		// TODO: Get rid of this method?
 		// At this point block already has bounds.
 		boolean regularAdd = false;
-		String align = markupElement.getAttribute("align");
+		String align = markupElement.getAttribute(HtmlAttributeProperties.ALIGN);
 		if (align != null) {
 			if ("left".equalsIgnoreCase(align)) {
 				this.layoutFloat(renderable, false, true);

@@ -31,6 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.util.Objects;
 import org.lobobrowser.util.Strings;
@@ -103,33 +104,33 @@ public class ElementImpl extends NodeImpl implements Element {
 	}
 
 	public void setId(String id) {
-		this.setAttribute("id", id);
+		this.setAttribute(HtmlAttributeProperties.ID, id);
 	}
 
 	// private String title;
 
 	public String getTitle() {
-		return this.getAttribute("title");
+		return this.getAttribute(HtmlAttributeProperties.TITLE);
 	}
 
 	public void setTitle(String title) {
-		this.setAttribute("title", title);
+		this.setAttribute(HtmlAttributeProperties.TITLE, title);
 	}
 
 	public String getLang() {
-		return this.getAttribute("lang");
+		return this.getAttribute(HtmlAttributeProperties.LANG);
 	}
 
 	public void setLang(String lang) {
-		this.setAttribute("lang", lang);
+		this.setAttribute(HtmlAttributeProperties.LANG, lang);
 	}
 
 	public String getDir() {
-		return this.getAttribute("dir");
+		return this.getAttribute(HtmlAttributeProperties.DIR);
 	}
 
 	public void setDir(String dir) {
-		this.setAttribute("dir", dir);
+		this.setAttribute(HtmlAttributeProperties.DIR, dir);
 	}
 
 	public final String getAttribute(String name) {
@@ -144,7 +145,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	private Attr getAttr(String normalName, String value) {
 		// TODO: "specified" attributes
 		return new AttrImpl(normalName, value, true, this,
-				"id".equals(normalName));
+				HtmlAttributeProperties.ID.equals(normalName));
 	}
 
 	public Attr getAttributeNode(String name) {
@@ -265,7 +266,7 @@ public class ElementImpl extends NodeImpl implements Element {
 		// checking attribute names, i.e. they may not call the super
 		// implementation if an attribute is already taken care of.
 		boolean isName = false;
-		if ("id".equals(normalName) || (isName = "name".equals(normalName))) {
+		if (HtmlAttributeProperties.ID.equals(normalName) || (isName = HtmlAttributeProperties.NAME.equals(normalName))) {
 			// Note that the value of name is used
 			// as an ID, but the value of ID is not
 			// used as a name.
@@ -281,7 +282,7 @@ public class ElementImpl extends NodeImpl implements Element {
 				// }
 				document.setElementById(value, this);
 				if (isName) {
-					String oldName = this.getAttribute("name");
+					String oldName = this.getAttribute(HtmlAttributeProperties.NAME);
 					if (oldName != null) {
 						document.removeNamedItem(oldName);
 					}
@@ -350,7 +351,7 @@ public class ElementImpl extends NodeImpl implements Element {
 
 	public void setIdAttribute(String name, boolean isId) throws DOMException {
 		String normalName = this.normalizeAttributeName(name);
-		if (!"id".equals(normalName)) {
+		if (!HtmlAttributeProperties.ID.equals(normalName)) {
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
 					"IdAttribute can't be anything other than ID");
 		}
@@ -359,7 +360,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	public void setIdAttributeNode(Attr idAttr, boolean isId)
 			throws DOMException {
 		String normalName = this.normalizeAttributeName(idAttr.getName());
-		if (!"id".equals(normalName)) {
+		if (!HtmlAttributeProperties.ID.equals(normalName)) {
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
 					"IdAttribute can't be anything other than ID");
 		}

@@ -1,5 +1,6 @@
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLFormElement;
 import org.lobobrowser.html.w3c.HTMLOptionElement;
 import org.lobobrowser.html.w3c.HTMLSelectElement;
@@ -11,7 +12,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements
 	}
 
 	public boolean getDefaultSelected() {
-		return this.getAttributeAsBoolean("selected");
+		return this.getAttributeAsBoolean(HtmlAttributeProperties.SELECTED);
 	}
 
 	public boolean getDisabled() {
@@ -34,7 +35,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements
 	}
 
 	public String getLabel() {
-		return this.getAttribute("label");
+		return this.getAttribute(HtmlAttributeProperties.LABEL);
 	}
 
 	public boolean getSelected() {
@@ -50,11 +51,11 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements
 	}
 
 	public String getValue() {
-		return this.getAttribute("value");
+		return this.getAttribute(HtmlAttributeProperties.VALUE);
 	}
 
 	public void setDefaultSelected(boolean defaultSelected) {
-		this.setAttribute("selected", defaultSelected ? "selected" : null);
+		this.setAttribute(HtmlAttributeProperties.SELECTED, defaultSelected ? HtmlAttributeProperties.SELECTED : null);
 	}
 
 	public void setDisabled(boolean disabled) {
@@ -62,7 +63,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements
 	}
 
 	public void setLabel(String label) {
-		this.setAttribute("label", label);
+		this.setAttribute(HtmlAttributeProperties.LABEL, label);
 	}
 
 	private boolean selected;
@@ -92,7 +93,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements
 	}
 
 	public void setValue(String value) {
-		this.setAttribute("value", value);
+		this.setAttribute(HtmlAttributeProperties.VALUE, value);
 	}
 
 	public String toString() {

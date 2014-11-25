@@ -95,6 +95,7 @@ public interface HtmlProperties {
 	public final String TD = "TD";
 	public final String TH = "TH";
 	public final String TR = "TR";
+	public final String TBODY = "TBODY";
 	public final String TT = "TT";
 	public final String UL = "UL";
 	public final String U = "U";

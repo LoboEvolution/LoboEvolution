@@ -22,6 +22,7 @@ package org.lobobrowser.html.style;
 
 import java.awt.Color;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 
 public class IFrameRenderState extends StyleSheetRenderState {
@@ -39,7 +40,7 @@ public class IFrameRenderState extends StyleSheetRenderState {
 		if (overflow == OVERFLOW_NONE) {
 			HTMLElementImpl element = this.element;
 			if (element != null) {
-				String scrolling = element.getAttribute("scrolling");
+				String scrolling = element.getAttribute(HtmlAttributeProperties.SCROLLING);
 				if (scrolling != null) {
 					scrolling = scrolling.trim().toLowerCase();
 					if ("no".equals(scrolling)) {
@@ -65,7 +66,7 @@ public class IFrameRenderState extends StyleSheetRenderState {
 		if (overflow == OVERFLOW_NONE) {
 			HTMLElementImpl element = this.element;
 			if (element != null) {
-				String scrolling = element.getAttribute("scrolling");
+				String scrolling = element.getAttribute(HtmlAttributeProperties.SCROLLING);
 				if (scrolling != null) {
 					scrolling = scrolling.trim().toLowerCase();
 					if ("no".equals(scrolling)) {
@@ -97,7 +98,7 @@ public class IFrameRenderState extends StyleSheetRenderState {
 			}
 			HTMLElementImpl element = this.element;
 			if (element != null) {
-				String border = element.getAttribute("frameborder");
+				String border = element.getAttribute(HtmlAttributeProperties.FRAMEBORDER);
 				if (border != null) {
 					border = border.trim();
 				}

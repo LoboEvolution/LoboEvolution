@@ -27,6 +27,7 @@ import java.io.File;
 import java.util.logging.Level;
 
 import org.lobobrowser.html.FormInput;
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLInputElement;
@@ -53,7 +54,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements
 	public boolean getChecked() {
 		InputContext ic = this.inputContext;
 		if (ic == null) {
-			return this.getAttributeAsBoolean("checked");
+			return this.getAttributeAsBoolean(HtmlAttributeProperties.CHECKED);
 		} else {
 			return ic.getChecked();
 		}
@@ -91,31 +92,31 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements
 	}
 
 	public String getSrc() {
-		return this.getAttribute("src");
+		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
 
 	public void setSrc(String src) {
-		this.setAttribute("src", src);
+		this.setAttribute(HtmlAttributeProperties.SRC, src);
 	}
 
 	/**
 	 * Gets input type in lowercase.
 	 */
 	public String getType() {
-		String type = this.getAttribute("type");
+		String type = this.getAttribute(HtmlAttributeProperties.TYPE);
 		return type == null ? null : type.toLowerCase();
 	}
 
 	public void setType(String type) {
-		this.setAttribute("type", type);
+		this.setAttribute(HtmlAttributeProperties.TYPE, type);
 	}
 
 	public String getUseMap() {
-		return this.getAttribute("usemap");
+		return this.getAttribute(HtmlAttributeProperties.USEMAP);
 	}
 
 	public void setUseMap(String useMap) {
-		this.setAttribute("usemap", useMap);
+		this.setAttribute(HtmlAttributeProperties.USEMAP, useMap);
 	}
 
 	public void click() {

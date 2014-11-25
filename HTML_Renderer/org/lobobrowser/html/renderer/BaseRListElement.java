@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.renderer;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
@@ -67,7 +68,7 @@ class BaseRListElement extends RBlock {
 			}
 		}
 		if (listStyle == null || listStyle.type == ListStyle.TYPE_UNSET) {
-			String typeAttributeText = rootElement.getAttribute("type");
+			String typeAttributeText = rootElement.getAttribute(HtmlAttributeProperties.TYPE);
 			if (typeAttributeText != null) {
 				int newStyleType = HtmlValues
 						.getListStyleTypeDeprecated(typeAttributeText);

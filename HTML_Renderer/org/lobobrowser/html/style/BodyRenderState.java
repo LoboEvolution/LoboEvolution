@@ -22,6 +22,7 @@ package org.lobobrowser.html.style;
 
 import java.awt.Color;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.util.gui.ColorFactory;
 
@@ -47,7 +48,7 @@ public class BodyRenderState extends StyleSheetRenderState {
 		}
 		binfo = super.getBackgroundInfo();
 		if (binfo == null || binfo.backgroundColor == null) {
-			String bgcolor = this.element.getAttribute("bgcolor");
+			String bgcolor = this.element.getAttribute(HtmlAttributeProperties.BGCOLOR);
 			if (bgcolor != null && bgcolor.length() != 0) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
@@ -66,7 +67,7 @@ public class BodyRenderState extends StyleSheetRenderState {
 		if (c != null) {
 			return c;
 		}
-		String tcolor = this.element.getAttribute("text");
+		String tcolor = this.element.getAttribute(HtmlAttributeProperties.TEXT);
 		
 		if(tcolor == null) tcolor = "black";
 		
@@ -85,12 +86,12 @@ public class BodyRenderState extends StyleSheetRenderState {
 		insets = super.getMarginInsets();
 		if (insets == null) {
 			HTMLElementImpl element = this.element;
-			String leftMargin = element.getAttribute("leftmargin");
-			String rightMargin = element.getAttribute("rightmargin");
-			String bottomMargin = element.getAttribute("rightmargin");
-			String topMargin = element.getAttribute("topmargin");
-			String marginWidth = element.getAttribute("marginwidth");
-			String marginHeight = element.getAttribute("marginheight");
+			String leftMargin = element.getAttribute(HtmlAttributeProperties.LEFTMARGIN);
+			String rightMargin = element.getAttribute(HtmlAttributeProperties.RIGHTMARGIN);
+			String bottomMargin = element.getAttribute(HtmlAttributeProperties.TOPMARGIN);
+			String topMargin = element.getAttribute(HtmlAttributeProperties.TOPMARGIN);
+			String marginWidth = element.getAttribute(HtmlAttributeProperties.MARGINWIDTH);
+			String marginHeight = element.getAttribute(HtmlAttributeProperties.MARGINHEIGHT);
 			if (leftMargin == null) {
 				leftMargin = marginWidth;
 			}

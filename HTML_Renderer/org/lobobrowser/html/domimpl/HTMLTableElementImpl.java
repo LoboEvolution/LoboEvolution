@@ -25,6 +25,8 @@ package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.dombl.ElementFilter;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
@@ -44,7 +46,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 		HTMLTableElement {
 
 	public HTMLTableElementImpl() {
-		super("TABLE");
+		super(HtmlProperties.TABLE);
 	}
 
 	public HTMLTableElementImpl(String name) {
@@ -82,85 +84,85 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public HTMLCollection getRows() {
-		return new DescendentHTMLCollection(this, new ElementFilter("TR"),
+		return new DescendentHTMLCollection(this, new ElementFilter(HtmlProperties.TR),
 				this.getTreeLock(), false);
 	}
 
 	public HTMLCollection getTBodies() {
-		return new DescendentHTMLCollection(this, new ElementFilter("TBODY"),
+		return new DescendentHTMLCollection(this, new ElementFilter(HtmlProperties.TBODY),
 				this.getTreeLock(), false);
 	}
 
 	public String getAlign() {
-		return this.getAttribute("align");
+		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
 	public void setAlign(String align) {
-		this.setAttribute("align", align);
+		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
 	public String getBgColor() {
-		return this.getAttribute("bgcolor");
+		return this.getAttribute(HtmlAttributeProperties.BGCOLOR);
 	}
 
 	public void setBgColor(String bgColor) {
-		this.setAttribute("bgcolor", bgColor);
+		this.setAttribute(HtmlAttributeProperties.BGCOLOR, bgColor);
 	}
 
 	public String getBorder() {
-		return this.getAttribute("border");
+		return this.getAttribute(HtmlAttributeProperties.BORDER);
 	}
 
 	public void setBorder(String border) {
-		this.setAttribute("border", border);
+		this.setAttribute(HtmlAttributeProperties.BORDER, border);
 	}
 
 	public String getCellPadding() {
-		return this.getAttribute("cellpadding");
+		return this.getAttribute(HtmlAttributeProperties.CELLPADDING);
 	}
 
 	public void setCellPadding(String cellPadding) {
-		this.setAttribute("cellpadding", cellPadding);
+		this.setAttribute(HtmlAttributeProperties.CELLPADDING, cellPadding);
 	}
 
 	public String getCellSpacing() {
-		return this.getAttribute("cellspacing");
+		return this.getAttribute(HtmlAttributeProperties.CELLSPACING);
 	}
 
 	public void setCellSpacing(String cellSpacing) {
-		this.setAttribute("cellspacing", cellSpacing);
+		this.setAttribute(HtmlAttributeProperties.CELLSPACING, cellSpacing);
 	}
 
 	public String getFrame() {
-		return this.getAttribute("frame");
+		return this.getAttribute(HtmlAttributeProperties.FRAME);
 	}
 
 	public void setFrame(String frame) {
-		this.setAttribute("frame", frame);
+		this.setAttribute(HtmlAttributeProperties.FRAME, frame);
 	}
 
 	public String getRules() {
-		return this.getAttribute("rules");
+		return this.getAttribute(HtmlAttributeProperties.RULES);
 	}
 
 	public void setRules(String rules) {
-		this.setAttribute("rules", rules);
+		this.setAttribute(HtmlAttributeProperties.RULES, rules);
 	}
 
 	public String getSummary() {
-		return this.getAttribute("summary");
+		return this.getAttribute(HtmlAttributeProperties.SUMMARY);
 	}
 
 	public void setSummary(String summary) {
-		this.setAttribute("summary", summary);
+		this.setAttribute(HtmlAttributeProperties.SUMMARY, summary);
 	}
 
 	public String getWidth() {
-		return this.getAttribute("width");
+		return this.getAttribute(HtmlAttributeProperties.WIDTH);
 	}
 
 	public void setWidth(String width) {
-		this.setAttribute("width", width);
+		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
 	}
 
 	/*
@@ -173,7 +175,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 			AbstractCSS2Properties props = this.getCurrentStyle();
 			String heightText = props == null ? null : props.getHeight();
 			if (heightText == null) {
-				return new HtmlLength(this.getAttribute("height"));
+				return new HtmlLength(this.getAttribute(HtmlAttributeProperties.HEIGHT));
 			} else {
 				return new HtmlLength(HtmlValues.getPixelSize(heightText,
 						this.getRenderState(), 0, availHeight));
@@ -193,7 +195,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 			AbstractCSS2Properties props = this.getCurrentStyle();
 			String widthText = props == null ? null : props.getWidth();
 			if (widthText == null) {
-				return new HtmlLength(this.getAttribute("width"));
+				return new HtmlLength(this.getAttribute(HtmlAttributeProperties.WIDTH));
 			} else {
 				return new HtmlLength(HtmlValues.getPixelSize(widthText,
 						this.getRenderState(), 0, availWidth));

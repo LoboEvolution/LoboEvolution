@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
@@ -34,27 +35,27 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public String getColor() {
-		return this.getAttribute("color");
+		return this.getAttribute(HtmlAttributeProperties.COLOR);
 	}
 
 	public String getFace() {
-		return this.getAttribute("face");
+		return this.getAttribute(HtmlAttributeProperties.FACE);
 	}
 
 	public String getSize() {
-		return this.getAttribute("size");
+		return this.getAttribute(HtmlAttributeProperties.SIZE);
 	}
 
 	public void setColor(String color) {
-		this.setAttribute("color", color);
+		this.setAttribute(HtmlAttributeProperties.COLOR, color);
 	}
 
 	public void setFace(String face) {
-		this.setAttribute("face", face);
+		this.setAttribute(HtmlAttributeProperties.FACE, face);
 	}
 
 	public void setSize(String size) {
-		this.setAttribute("size", size);
+		this.setAttribute(HtmlAttributeProperties.SIZE, size);
 	}
 
 	protected RenderState createRenderState(RenderState prevRenderState) {
@@ -62,9 +63,9 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	protected AbstractCSS2Properties createDefaultStyleSheet() {
-		String fontFamily = this.getAttribute("face");
-		String color = this.getAttribute("color");
-		String size = this.getAttribute("size");
+		String fontFamily = this.getAttribute(HtmlAttributeProperties.FACE);
+		String color = this.getAttribute(HtmlAttributeProperties.COLOR);
+		String size = this.getAttribute(HtmlAttributeProperties.SIZE);
 		String fontSize = null;
 		if (size != null) {
 			ModelNode parentModelNode = this.getParentModelNode();
@@ -84,7 +85,7 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements
 			css.internalSetLC("font-family", fontFamily);
 		}
 		if (color != null) {
-			css.internalSetLC("color", color);
+			css.internalSetLC(HtmlAttributeProperties.COLOR, color);
 		}
 		return css;
 	}

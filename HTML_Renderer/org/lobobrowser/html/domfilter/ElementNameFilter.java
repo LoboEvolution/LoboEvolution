@@ -20,6 +20,7 @@
 */
 package org.lobobrowser.html.domfilter;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.NodeFilter;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -34,6 +35,6 @@ public class ElementNameFilter implements NodeFilter {
 	public boolean accept(Node node) {
 		// TODO: Case sensitive?
 		return (node instanceof Element)
-				&& this.name.equals(((Element) node).getAttribute("name"));
+				&& this.name.equals(((Element) node).getAttribute(HtmlAttributeProperties.NAME));
 	}
 }

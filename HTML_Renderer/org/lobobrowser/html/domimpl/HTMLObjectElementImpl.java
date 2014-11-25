@@ -1,5 +1,6 @@
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLFormElement;
 import org.lobobrowser.html.w3c.HTMLObjectElement;
 import org.lobobrowser.html.w3c.ValidityState;
@@ -12,83 +13,83 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public String getAlign() {
-		return this.getAttribute("align");
+		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
 	public String getAlt() {
-		return this.getAttribute("alt");
+		return this.getAttribute(HtmlAttributeProperties.ALT);
 	}
 
 	public String getArchive() {
-		return this.getAttribute("archive");
+		return this.getAttribute(HtmlAttributeProperties.ARCHIVE);
 	}
 
 	public String getCode() {
-		return this.getAttribute("code");
+		return this.getAttribute(HtmlAttributeProperties.CODE);
 	}
 
 	public String getCodeBase() {
-		return this.getAttribute("codebase");
+		return this.getAttribute(HtmlAttributeProperties.CODEBASE);
 	}
 
 	public String getHeight() {
-		return this.getAttribute("height");
+		return this.getAttribute(HtmlAttributeProperties.HEIGHT);
 	}
 
 	public String getName() {
-		return this.getAttribute("name");
+		return this.getAttribute(HtmlAttributeProperties.NAME);
 	}
 
 	public String getObject() {
-		return this.getAttribute("object");
+		return this.getAttribute(HtmlAttributeProperties.OBJECT);
 	}
 
 	public String getWidth() {
-		return this.getAttribute("width");
+		return this.getAttribute(HtmlAttributeProperties.WIDTH);
 	}
 
 	public void setAlign(String align) {
-		this.setAttribute("align", align);
+		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
 	public void setAlt(String alt) {
-		this.setAttribute("alt", alt);
+		this.setAttribute(HtmlAttributeProperties.ALT, alt);
 	}
 
 	public void setArchive(String archive) {
-		this.setAttribute("archive", archive);
+		this.setAttribute(HtmlAttributeProperties.ARCHIVE, archive);
 	}
 
 	public void setCode(String code) {
-		this.setAttribute("code", code);
+		this.setAttribute(HtmlAttributeProperties.CODE, code);
 	}
 
 	public void setCodeBase(String codeBase) {
-		this.setAttribute("codebase", codeBase);
+		this.setAttribute(HtmlAttributeProperties.CODEBASE, codeBase);
 	}
 
 	public void setHeight(String height) {
-		this.setAttribute("height", height);
+		this.setAttribute(HtmlAttributeProperties.HEIGHT, height);
 	}
 
 	public void setName(String name) {
-		this.setAttribute("name", name);
+		this.setAttribute(HtmlAttributeProperties.NAME, name);
 	}
 
 	public void setObject(String object) {
-		this.setAttribute("object", object);
+		this.setAttribute(HtmlAttributeProperties.OBJECT, object);
 	}
 
 	public void setWidth(String width) {
-		this.setAttribute("width", width);
+		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
 	}
 
 	public String getBorder() {
-		return this.getAttribute("border");
+		return this.getAttribute(HtmlAttributeProperties.BORDER);
 	}
 
 	public String getCodeType() {
-		return this.getAttribute("codetype");
+		return this.getAttribute(HtmlAttributeProperties.CODETYPE);
 	}
 
 	public Document getContentDocument() {
@@ -96,11 +97,11 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public String getData() {
-		return this.getAttribute("data");
+		return this.getAttribute(HtmlAttributeProperties.DATA);
 	}
 
 	public boolean getDeclare() {
-		return "declare".equalsIgnoreCase(this.getAttribute("declare"));
+		return "declare".equalsIgnoreCase(this.getAttribute(HtmlAttributeProperties.DECLARE));
 	}
 
 	public HTMLFormElement getForm() {
@@ -110,78 +111,78 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements
 
 	public int getHspace() {
 		try {
-			return Integer.parseInt(this.getAttribute("hspace"));
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.HSPACE));
 		} catch (Exception err) {
 			return 0;
 		}
 	}
 
 	public String getStandby() {
-		return this.getAttribute("standby");
+		return this.getAttribute(HtmlAttributeProperties.STANDBY);
 	}
 
 	public int getTabIndex() {
 		try {
-			return Integer.parseInt(this.getAttribute("tabindex"));
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.TABINDEX));
 		} catch (Exception err) {
 			return 0;
 		}
 	}
 
 	public String getType() {
-		return this.getAttribute("type");
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
 	public String getUseMap() {
-		return this.getAttribute("usemap");
+		return this.getAttribute(HtmlAttributeProperties.USEMAP);
 	}
 
 	public int getVspace() {
 		try {
-			return Integer.parseInt(this.getAttribute("vspace"));
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.VSPACE));
 		} catch (Exception err) {
 			return 0;
 		}
 	}
 
 	public void setBorder(String border) {
-		this.setAttribute("border", border);
+		this.setAttribute(HtmlAttributeProperties.BORDER, border);
 	}
 
 	public void setCodeType(String codeType) {
-		this.setAttribute("codetype", codeType);
+		this.setAttribute(HtmlAttributeProperties.CODETYPE, codeType);
 	}
 
 	public void setData(String data) {
-		this.setAttribute("data", data);
+		this.setAttribute(HtmlAttributeProperties.DATA, data);
 	}
 
 	public void setDeclare(boolean declare) {
-		this.setAttribute("declare", declare ? "declare" : null);
+		this.setAttribute(HtmlAttributeProperties.DECLARE, declare ? "declare" : null);
 	}
 
 	public void setHspace(int hspace) {
-		this.setAttribute("hspace", String.valueOf(hspace));
+		this.setAttribute(HtmlAttributeProperties.HSPACE, String.valueOf(hspace));
 	}
 
 	public void setStandby(String standby) {
-		this.setAttribute("standby", standby);
+		this.setAttribute(HtmlAttributeProperties.STANDBY, standby);
 	}
 
 	public void setTabIndex(int tabIndex) {
-		this.setAttribute("tabindex", String.valueOf(tabIndex));
+		this.setAttribute(HtmlAttributeProperties.TABINDEX, String.valueOf(tabIndex));
 	}
 
 	public void setType(String type) {
-		this.setAttribute("type", type);
+		this.setAttribute(HtmlAttributeProperties.TYPE, type);
 	}
 
 	public void setUseMap(String useMap) {
-		this.setAttribute("usemap", useMap);
+		this.setAttribute(HtmlAttributeProperties.USEMAP, useMap);
 	}
 
 	public void setVspace(int vspace) {
-		this.setAttribute("vspace", String.valueOf(vspace));
+		this.setAttribute(HtmlAttributeProperties.VSPACE, String.valueOf(vspace));
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.lobobrowser.html.FormInput;
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.domimpl.HTMLAbstractUIElement;
@@ -70,7 +71,7 @@ class HtmlController {
 			return false;
 		} else if (node instanceof HTMLButtonElementImpl) {
 			HTMLButtonElementImpl button = (HTMLButtonElementImpl) node;
-			String rawType = button.getAttribute("type");
+			String rawType = button.getAttribute(HtmlAttributeProperties.TYPE);
 			String type;
 			if (rawType == null) {
 				type = "submit";

@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ElementImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.dombl.NodeImpl;
@@ -86,7 +87,7 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate
 					if (id != null && id.length() != 0) {
 						itemsByName.put(id, element);
 					}
-					String name = element.getAttribute("name");
+					String name = element.getAttribute(HtmlAttributeProperties.NAME);
 					if (name != null && name.length() != 0 && !name.equals(id)) {
 						itemsByName.put(name, element);
 					}

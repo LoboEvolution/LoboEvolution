@@ -29,6 +29,8 @@ import java.util.MissingResourceException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.js.Executor;
@@ -46,7 +48,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements
 	private static final boolean loggableInfo = logger.isLoggable(Level.INFO);
 
 	public HTMLScriptElementImpl() {
-		super("SCRIPT", true);
+		super(HtmlProperties.SCRIPT, true);
 	}
 
 	public HTMLScriptElementImpl(String name) {
@@ -69,19 +71,19 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements
 	}
 
 	public String getHtmlFor() {
-		return this.getAttribute("htmlFor");
+		return this.getAttribute(HtmlAttributeProperties.HTMLFOR);
 	}
 
 	public void setHtmlFor(String htmlFor) {
-		this.setAttribute("htmlFor", htmlFor);
+		this.setAttribute(HtmlAttributeProperties.HTMLFOR, htmlFor);
 	}
 
 	public String getEvent() {
-		return this.getAttribute("event");
+		return this.getAttribute(HtmlAttributeProperties.EVENT);
 	}
 
 	public void setEvent(String event) {
-		this.setAttribute("event", event);
+		this.setAttribute(HtmlAttributeProperties.EVENT, event);
 	}
 
 	private boolean defer;
@@ -95,19 +97,19 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements
 	}
 
 	public String getSrc() {
-		return this.getAttribute("src");
+		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
 
 	public void setSrc(String src) {
-		this.setAttribute("src", src);
+		this.setAttribute(HtmlAttributeProperties.SRC, src);
 	}
 
 	public String getType() {
-		return this.getAttribute("type");
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
 	public void setType(String type) {
-		this.setAttribute("type", type);
+		this.setAttribute(HtmlAttributeProperties.TYPE, type);
 	}
 
 	public Object setUserData(String key, Object data, UserDataHandler handler) {

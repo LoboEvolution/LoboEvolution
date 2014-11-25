@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.TableCellRenderState;
 import org.lobobrowser.html.w3c.HTMLTableCellElement;
@@ -39,55 +40,55 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public String getAbbr() {
-		return this.getAttribute("abbr");
+		return this.getAttribute(HtmlAttributeProperties.ABBR);
 	}
 
 	public void setAbbr(String abbr) {
-		this.setAttribute("abbr", abbr);
+		this.setAttribute(HtmlAttributeProperties.ABBR, abbr);
 	}
 
 	public String getAlign() {
-		return this.getAttribute("align");
+		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
 	public void setAlign(String align) {
-		this.setAttribute("align", align);
+		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
 	public String getAxis() {
-		return this.getAttribute("axis");
+		return this.getAttribute(HtmlAttributeProperties.AXIS);
 	}
 
 	public void setAxis(String axis) {
-		this.setAttribute("axis", axis);
+		this.setAttribute(HtmlAttributeProperties.AXIS, axis);
 	}
 
 	public String getBgColor() {
-		return this.getAttribute("bgcolor");
+		return this.getAttribute(HtmlAttributeProperties.BGCOLOR);
 	}
 
 	public void setBgColor(String bgColor) {
-		this.setAttribute("bgcolor", bgColor);
+		this.setAttribute(HtmlAttributeProperties.BGCOLOR, bgColor);
 	}
 
 	public String getCh() {
-		return this.getAttribute("ch");
+		return this.getAttribute(HtmlAttributeProperties.CH);
 	}
 
 	public void setCh(String ch) {
-		this.setAttribute("ch", ch);
+		this.setAttribute(HtmlAttributeProperties.CH, ch);
 	}
 
 	public String getChOff() {
-		return this.getAttribute("choff");
+		return this.getAttribute(HtmlAttributeProperties.CHOFF);
 	}
 
 	public void setChOff(String chOff) {
-		this.setAttribute("choff", chOff);
+		this.setAttribute(HtmlAttributeProperties.CHOFF, chOff);
 	}
 
 	public int getColSpan() {
-		String colSpanText = this.getAttribute("colspan");
+		String colSpanText = this.getAttribute(HtmlAttributeProperties.COLSPAN);
 		if (colSpanText == null) {
 			return 1;
 		} else {
@@ -100,35 +101,35 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void setColSpan(int colSpan) {
-		this.setAttribute("colspan", String.valueOf(colSpan));
+		this.setAttribute(HtmlAttributeProperties.COLSPAN, String.valueOf(colSpan));
 	}
 
 	public String getHeaders() {
-		return this.getAttribute("headers");
+		return this.getAttribute(HtmlAttributeProperties.HEADERS);
 	}
 
 	public void setHeaders(String headers) {
-		this.setAttribute("headers", headers);
+		this.setAttribute(HtmlAttributeProperties.HEADERS, headers);
 	}
 
 	public String getHeight() {
-		return this.getAttribute("height");
+		return this.getAttribute(HtmlAttributeProperties.HEIGHT);
 	}
 
 	public void setHeight(String height) {
-		this.setAttribute("height", height);
+		this.setAttribute(HtmlAttributeProperties.HEIGHT, height);
 	}
 
 	public boolean getNoWrap() {
-		return "nowrap".equalsIgnoreCase(this.getAttribute("nowrap"));
+		return HtmlAttributeProperties.NOWRAP.equalsIgnoreCase(this.getAttribute(HtmlAttributeProperties.NOWRAP));
 	}
 
 	public void setNoWrap(boolean noWrap) {
-		this.setAttribute("nowrap", noWrap ? "nowrap" : null);
+		this.setAttribute(HtmlAttributeProperties.NOWRAP, noWrap ? HtmlAttributeProperties.NOWRAP : null);
 	}
 
 	public int getRowSpan() {
-		String rowSpanText = this.getAttribute("rowspan");
+		String rowSpanText = this.getAttribute(HtmlAttributeProperties.ROWSPAN);
 		if (rowSpanText == null) {
 			return 1;
 		} else {
@@ -141,31 +142,31 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void setRowSpan(int rowSpan) {
-		this.setAttribute("rowspan", String.valueOf(rowSpan));
+		this.setAttribute(HtmlAttributeProperties.ROWSPAN, String.valueOf(rowSpan));
 	}
 
 	public String getScope() {
-		return this.getAttribute("scope");
+		return this.getAttribute(HtmlAttributeProperties.SCOPE);
 	}
 
 	public void setScope(String scope) {
-		this.setAttribute("scope", scope);
+		this.setAttribute(HtmlAttributeProperties.SCOPE, scope);
 	}
 
 	public String getVAlign() {
-		return this.getAttribute("valign");
+		return this.getAttribute(HtmlAttributeProperties.VALIGN);
 	}
 
 	public void setVAlign(String vAlign) {
-		this.setAttribute("valign", vAlign);
+		this.setAttribute(HtmlAttributeProperties.VALIGN, vAlign);
 	}
 
 	public String getWidth() {
-		return this.getAttribute("width");
+		return this.getAttribute(HtmlAttributeProperties.WIDTH);
 	}
 
 	public void setWidth(String width) {
-		this.setAttribute("width", width);
+		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
 	}
 
 	protected RenderState createRenderState(RenderState prevRenderState) {

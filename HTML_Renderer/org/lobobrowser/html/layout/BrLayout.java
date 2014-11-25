@@ -20,6 +20,7 @@
 */
 package org.lobobrowser.html.layout;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.LineBreak;
 import org.lobobrowser.html.renderer.MarkupLayout;
@@ -34,7 +35,7 @@ public class BrLayout implements MarkupLayout {
 	 * , java.awt.Insets, org.xamjwg.html.domimpl.HTMLElementImpl)
 	 */
 	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-		String clear = markupElement.getAttribute("clear");
+		String clear = markupElement.getAttribute(HtmlAttributeProperties.CLEAR);
 		bodyLayout.addLineBreak(markupElement, LineBreak.getBreakType(clear));
 	}
 }

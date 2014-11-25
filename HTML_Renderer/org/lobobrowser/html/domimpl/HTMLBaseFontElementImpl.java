@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.BaseFontRenderState;
@@ -35,24 +36,24 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public String getColor() {
-		return this.getAttribute("color");
+		return this.getAttribute(HtmlAttributeProperties.COLOR);
 	}
 
 	public String getFace() {
-		return this.getAttribute("face");
+		return this.getAttribute(HtmlAttributeProperties.FACE);
 	}
 
 	public void setColor(String color) {
-		this.setAttribute("color", color);
+		this.setAttribute(HtmlAttributeProperties.COLOR, color);
 	}
 
 	public void setFace(String face) {
-		this.setAttribute("face", face);
+		this.setAttribute(HtmlAttributeProperties.FACE, face);
 	}
 
 	public int getSize() {
 		try {
-			return Integer.parseInt(this.getAttribute("size"));
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.SIZE));
 		} catch (Exception thrown) {
 			this.warn("getSize(): Unable to parse size attribute in " + this
 					+ ".", thrown);
@@ -61,11 +62,11 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void setSize(int size) {
-		this.setAttribute("size", String.valueOf(size));
+		this.setAttribute(HtmlAttributeProperties.SIZE, String.valueOf(size));
 	}
 
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		String size = this.getAttribute("size");
+		String size = this.getAttribute(HtmlAttributeProperties.SIZE);
 		if (size != null) {
 			int fontNumber = HtmlValues.getFontNumberOldStyle(size,
 					prevRenderState);
@@ -76,9 +77,9 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	protected AbstractCSS2Properties createDefaultStyleSheet() {
-		String fontFamily = this.getAttribute("face");
-		String color = this.getAttribute("color");
-		String size = this.getAttribute("size");
+		String fontFamily = this.getAttribute(HtmlAttributeProperties.FACE);
+		String color = this.getAttribute(HtmlAttributeProperties.COLOR);
+		String size = this.getAttribute(HtmlAttributeProperties.SIZE);
 		ModelNode parentModelNode = this.getParentModelNode();
 		RenderState parentRS = parentModelNode == null ? null : parentModelNode
 				.getRenderState();
@@ -95,7 +96,7 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements
 			css.internalSetLC("font-family", fontFamily);
 		}
 		if (color != null) {
-			css.internalSetLC("color", color);
+			css.internalSetLC(HtmlAttributeProperties.COLOR, color);
 		}
 		return css;
 	}

@@ -29,6 +29,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.util.gui.WrapperLayout;
@@ -50,7 +51,7 @@ public class InputRadioControl extends BaseInputControl {
 		// be lost (including revalidation due to hover.)
 
 		HTMLElementImpl controlElement = this.controlElement;
-		String name = controlElement.getAttribute("name");
+		String name = controlElement.getAttribute(HtmlAttributeProperties.NAME);
 		ButtonGroup prevGroup = this.buttonGroup;
 		if (prevGroup != null) {
 			prevGroup.remove(radio);
@@ -127,6 +128,6 @@ public class InputRadioControl extends BaseInputControl {
 	}
 
 	public String getValue() {
-		return this.controlElement.getAttribute("value");
+		return this.controlElement.getAttribute(HtmlAttributeProperties.VALUE);
 	}
 }

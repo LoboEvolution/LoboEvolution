@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.style.BodyRenderState;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.w3c.HTMLBodyElement;
@@ -50,51 +51,51 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	}
 
 	public String getALink() {
-		return this.getAttribute("alink");
+		return this.getAttribute(HtmlAttributeProperties.ALINK);
 	}
 
 	public void setALink(String aLink) {
-		this.setAttribute("alink", aLink);
+		this.setAttribute(HtmlAttributeProperties.ALINK, aLink);
 	}
 
 	public String getBackground() {
-		return this.getAttribute("background");
+		return this.getAttribute(HtmlAttributeProperties.BACKGROUND);
 	}
 
 	public void setBackground(String background) {
-		this.setAttribute("background", background);
+		this.setAttribute(HtmlAttributeProperties.BACKGROUND, background);
 	}
 
 	public String getBgColor() {
-		return this.getAttribute("bgcolor");
+		return this.getAttribute(HtmlAttributeProperties.BGCOLOR);
 	}
 
 	public void setBgColor(String bgColor) {
-		this.setAttribute("bgcolor", bgColor);
+		this.setAttribute(HtmlAttributeProperties.BGCOLOR, bgColor);
 	}
 
 	public String getLink() {
-		return this.getAttribute("link");
+		return this.getAttribute(HtmlAttributeProperties.LINK);
 	}
 
 	public void setLink(String link) {
-		this.setAttribute("link", link);
+		this.setAttribute(HtmlAttributeProperties.LINK, link);
 	}
 
 	public String getText() {
-		return this.getAttribute("text");
+		return this.getAttribute(HtmlAttributeProperties.TEXT);
 	}
 
 	public void setText(String text) {
-		this.setAttribute("text", text);
+		this.setAttribute(HtmlAttributeProperties.TEXT, text);
 	}
 
 	public String getVLink() {
-		return this.getAttribute("vlink");
+		return this.getAttribute(HtmlAttributeProperties.VLINK);
 	}
 
 	public void setVLink(String vLink) {
-		this.setAttribute("vlink", vLink);
+		this.setAttribute(HtmlAttributeProperties.VLINK, vLink);
 	}
 
 	protected RenderState createRenderState(RenderState prevRenderState) {
@@ -120,7 +121,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	}
 
 	protected void assignAttributeField(String normalName, String value) {
-		if ("onload".equals(normalName)) {
+		if (HtmlAttributeProperties.ONLOAD.equals(normalName)) {
 			Function onload = this.getEventFunction(null, normalName);
 			if (onload != null) {
 				this.setOnload(onload);

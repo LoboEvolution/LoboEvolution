@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.gui.ColorFactory;
@@ -39,8 +40,7 @@ import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.css.CSSStyleSheet;
 
-public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
-		implements CSS2Properties {
+public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate implements CSS2Properties {
 	private static final Logger logger = Logger
 			.getLogger(AbstractCSS2Properties.class.getName());
 
@@ -143,7 +143,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	public static final String QUOTES = "quotes";
 	public static final String RICHNESS = "richness";
 	public static final String RIGHT = "right";
-	public static final String SIZE = "size";
+	public static final String SIZE = HtmlAttributeProperties.SIZE;
 	public static final String SPEAK = "speak";
 	public static final String SPEAK_HEADER = "speak-header";
 	public static final String SPEAK_NUMERAL = "speak-numeral";
@@ -168,8 +168,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	public static final String WORD_SPACING = "word_spacing";
 	public static final String Z_INDEX = "z-index";
 
-	private static final Map<String, Object> SUB_SETTERS = new HashMap<String, Object>(
-			20);
+	private static final Map<String, Object> SUB_SETTERS = new HashMap<String, Object>(20);
 
 	private final CSS2PropertiesContext context;
 	private AbstractCSS2Properties localStyleProperties;
@@ -185,12 +184,9 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 		subSetters.put(BORDER_LEFT, new BorderSetter2(BORDER_LEFT));
 		subSetters.put(BORDER_BOTTOM, new BorderSetter2(BORDER_BOTTOM));
 		subSetters.put(BORDER_RIGHT, new BorderSetter2(BORDER_RIGHT));
-		subSetters.put(BORDER_COLOR, new FourCornersSetter(BORDER_COLOR,
-				"border-", "-color"));
-		subSetters.put(BORDER_STYLE, new FourCornersSetter(BORDER_STYLE,
-				"border-", "-style"));
-		subSetters.put(BORDER_WIDTH, new FourCornersSetter(BORDER_WIDTH,
-				"border-", "-width"));
+		subSetters.put(BORDER_COLOR, new FourCornersSetter(BORDER_COLOR, "border-", "-color"));
+		subSetters.put(BORDER_STYLE, new FourCornersSetter(BORDER_STYLE,"border-", "-style"));
+		subSetters.put(BORDER_WIDTH, new FourCornersSetter(BORDER_WIDTH,"border-", "-width"));
 		subSetters.put(BACKGROUND, new BackgroundSetter());
 		subSetters.put(BACKGROUND_IMAGE, new BackgroundImageSetter());
 		subSetters.put(FONT, new FontSetter());

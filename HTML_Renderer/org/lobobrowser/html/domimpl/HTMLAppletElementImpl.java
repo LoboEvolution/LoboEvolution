@@ -1,5 +1,6 @@
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.w3c.dom.html.HTMLAppletElement;
 
 public class HTMLAppletElementImpl extends HTMLAbstractUIElement implements
@@ -9,90 +10,90 @@ public class HTMLAppletElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public String getAlign() {
-		return this.getAttribute("align");
+		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
 	public String getAlt() {
-		return this.getAttribute("alt");
+		return this.getAttribute(HtmlAttributeProperties.ALT);
 	}
 
 	public String getArchive() {
-		return this.getAttribute("archive");
+		return this.getAttribute(HtmlAttributeProperties.ARCHIVE);
 	}
 
 	public String getCode() {
-		return this.getAttribute("code");
+		return this.getAttribute(HtmlAttributeProperties.CODE);
 	}
 
 	public String getCodeBase() {
-		return this.getAttribute("codebase");
+		return this.getAttribute(HtmlAttributeProperties.CODEBASE);
 	}
 
 	public String getHeight() {
-		return this.getAttribute("height");
+		return this.getAttribute(HtmlAttributeProperties.HEIGHT);
 	}
 
 	public String getHspace() {
-		return this.getAttribute("hspace");
+		return this.getAttribute(HtmlAttributeProperties.HSPACE);
 	}
 
 	public String getName() {
-		return this.getAttribute("name");
+		return this.getAttribute(HtmlAttributeProperties.NAME);
 	}
 
 	public String getObject() {
-		return this.getAttribute("object");
+		return this.getAttribute(HtmlAttributeProperties.OBJECT);
 	}
 
 	public String getVspace() {
-		return this.getAttribute("vspace");
+		return this.getAttribute(HtmlAttributeProperties.VSPACE);
 	}
 
 	public String getWidth() {
-		return this.getAttribute("width");
+		return this.getAttribute(HtmlAttributeProperties.WIDTH);
 	}
 
 	public void setAlign(String align) {
-		this.setAttribute("align", align);
+		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
 	public void setAlt(String alt) {
-		this.setAttribute("alt", alt);
+		this.setAttribute(HtmlAttributeProperties.ALT, alt);
 	}
 
 	public void setArchive(String archive) {
-		this.setAttribute("archive", archive);
+		this.setAttribute(HtmlAttributeProperties.ARCHIVE, archive);
 	}
 
 	public void setCode(String code) {
-		this.setAttribute("code", code);
+		this.setAttribute(HtmlAttributeProperties.CODE, code);
 	}
 
 	public void setCodeBase(String codeBase) {
-		this.setAttribute("codebase", codeBase);
+		this.setAttribute(HtmlAttributeProperties.CODEBASE, codeBase);
 	}
 
 	public void setHeight(String height) {
-		this.setAttribute("height", height);
+		this.setAttribute(HtmlAttributeProperties.HEIGHT, height);
 	}
 
 	public void setHspace(String hspace) {
-		this.setAttribute("hspace", hspace);
+		this.setAttribute(HtmlAttributeProperties.HSPACE, hspace);
 	}
 
 	public void setName(String name) {
-		this.setAttribute("name", name);
+		this.setAttribute(HtmlAttributeProperties.NAME, name);
 	}
 
 	public void setObject(String object) {
-		this.setAttribute("object", object);
+		this.setAttribute(HtmlAttributeProperties.OBJECT, object);
 	}
 
 	public void setVspace(String vspace) {
-		this.setAttribute("vspace", vspace);
+		this.setAttribute(HtmlAttributeProperties.VSPACE, vspace);
 	}
 
 	public void setWidth(String width) {
-		this.setAttribute("width", width);
+		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
 	}
 }

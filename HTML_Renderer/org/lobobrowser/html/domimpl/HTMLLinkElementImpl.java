@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.style.CSSUtilities;
@@ -70,48 +71,48 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public String getHref() {
-		String href = this.getAttribute("href");
+		String href = this.getAttribute(HtmlAttributeProperties.HREF);
 		return href == null ? "" : Urls.removeControlCharacters(href);
 	}
 
 	public void setHref(String href) {
-		this.setAttribute("href", href);
+		this.setAttribute(HtmlAttributeProperties.HREF, href);
 	}
 
 	public String getHreflang() {
-		return this.getAttribute("hreflang");
+		return this.getAttribute(HtmlAttributeProperties.HREFLANG);
 	}
 
 	public void setHreflang(String hreflang) {
-		this.setAttribute("hreflang", hreflang);
+		this.setAttribute(HtmlAttributeProperties.HREFLANG, hreflang);
 	}
 
 	public String getMedia() {
-		return this.getAttribute("media");
+		return this.getAttribute(HtmlAttributeProperties.MEDIA);
 	}
 
 	public void setMedia(String media) {
-		this.setAttribute("media", media);
+		this.setAttribute(HtmlAttributeProperties.MEDIA, media);
 	}
 
 	public String getRel() {
-		return this.getAttribute("rel");
+		return this.getAttribute(HtmlAttributeProperties.REL);
 	}
 
 	public void setRel(String rel) {
-		this.setAttribute("rel", rel);
+		this.setAttribute(HtmlAttributeProperties.REL, rel);
 	}
 
 	public String getRev() {
-		return this.getAttribute("rev");
+		return this.getAttribute(HtmlAttributeProperties.REV);
 	}
 
 	public void setRev(String rev) {
-		this.setAttribute("rev", rev);
+		this.setAttribute(HtmlAttributeProperties.REV, rev);
 	}
 
 	public String getTarget() {
-		String target = this.getAttribute("target");
+		String target = this.getAttribute(HtmlAttributeProperties.TARGET);
 		if (target != null) {
 			return target;
 		}
@@ -120,15 +121,15 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void setTarget(String target) {
-		this.setAttribute("target", target);
+		this.setAttribute(HtmlAttributeProperties.TARGET, target);
 	}
 
 	public String getType() {
-		return this.getAttribute("type");
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
 	public void setType(String type) {
-		this.setAttribute("type", type);
+		this.setAttribute(HtmlAttributeProperties.TYPE, type);
 	}
 
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
@@ -147,7 +148,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 	 */
 	protected void processLink() {
 		this.styleSheet = null;
-		String rel = this.getAttribute("rel");
+		String rel = this.getAttribute(HtmlAttributeProperties.REL);
 		if (rel != null) {
 			String cleanRel = rel.trim().toLowerCase();
 			boolean isStyleSheet = cleanRel.equals("stylesheet");
@@ -299,7 +300,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		if (this.hasAttribute("href")) {
+		if (this.hasAttribute(HtmlAttributeProperties.HREF)) {
 			prevRenderState = new TextDecorationRenderState(prevRenderState,
 					RenderState.MASK_TEXTDECORATION_UNDERLINE);
 			prevRenderState = new ColorRenderState(prevRenderState,

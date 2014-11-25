@@ -31,6 +31,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.text.JTextComponent;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.util.gui.WrapperLayout;
@@ -60,7 +61,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		ElementImpl element = this.controlElement;
-		String colsStr = element.getAttribute("cols");
+		String colsStr = element.getAttribute(HtmlAttributeProperties.COLS);
 		if (colsStr != null) {
 			try {
 				this.setCols(Integer.parseInt(colsStr));
@@ -68,7 +69,7 @@ public class InputTextAreaControl extends BaseInputControl {
 				// ignore
 			}
 		}
-		String rowsStr = element.getAttribute("rows");
+		String rowsStr = element.getAttribute(HtmlAttributeProperties.ROWS);
 		if (rowsStr != null) {
 			try {
 				this.setRows(Integer.parseInt(rowsStr));

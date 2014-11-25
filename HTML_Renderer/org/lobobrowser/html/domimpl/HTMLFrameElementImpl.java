@@ -24,6 +24,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.BrowserFrame;
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.FrameNode;
 import org.lobobrowser.html.js.Window;
 import org.lobobrowser.html.w3c.HTMLFrameElement;
@@ -50,43 +51,43 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements
 	}
 
 	public String getFrameBorder() {
-		return this.getAttribute("frameBorder");
+		return this.getAttribute(HtmlAttributeProperties.FRAMEBORDER);
 	}
 
 	public void setFrameBorder(String frameBorder) {
-		this.setAttribute("frameBorder", frameBorder);
+		this.setAttribute(HtmlAttributeProperties.FRAMEBORDER, frameBorder);
 	}
 
 	public String getLongDesc() {
-		return this.getAttribute("longdesc");
+		return this.getAttribute(HtmlAttributeProperties.LONGDESC);
 	}
 
 	public void setLongDesc(String longDesc) {
-		this.setAttribute("longdesc", longDesc);
+		this.setAttribute(HtmlAttributeProperties.LONGDESC, longDesc);
 	}
 
 	public String getMarginHeight() {
-		return this.getAttribute("marginHeight");
+		return this.getAttribute(HtmlAttributeProperties.MARGINHEIGHT);
 	}
 
 	public void setMarginHeight(String marginHeight) {
-		this.setAttribute("marginHeight", marginHeight);
+		this.setAttribute(HtmlAttributeProperties.MARGINHEIGHT, marginHeight);
 	}
 
 	public String getMarginWidth() {
-		return this.getAttribute("marginWidth");
+		return this.getAttribute(HtmlAttributeProperties.MARGINWIDTH);
 	}
 
 	public void setMarginWidth(String marginWidth) {
-		this.setAttribute("marginWidth", marginWidth);
+		this.setAttribute(HtmlAttributeProperties.MARGINWIDTH, marginWidth);
 	}
 
 	public String getName() {
-		return this.getAttribute("name");
+		return this.getAttribute(HtmlAttributeProperties.NAME);
 	}
 
 	public void setName(String name) {
-		this.setAttribute("name", name);
+		this.setAttribute(HtmlAttributeProperties.NAME, name);
 	}
 
 	private boolean noResize;
@@ -100,19 +101,19 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements
 	}
 
 	public String getScrolling() {
-		return this.getAttribute("scrolling");
+		return this.getAttribute(HtmlAttributeProperties.SCROLLING);
 	}
 
 	public void setScrolling(String scrolling) {
-		this.setAttribute("scrolling", scrolling);
+		this.setAttribute(HtmlAttributeProperties.SCROLLING, scrolling);
 	}
 
 	public String getSrc() {
-		return this.getAttribute("src");
+		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
 
 	public void setSrc(String src) {
-		this.setAttribute("src", src);
+		this.setAttribute(HtmlAttributeProperties.SRC, src);
 	}
 
 	public Document getContentDocument() {

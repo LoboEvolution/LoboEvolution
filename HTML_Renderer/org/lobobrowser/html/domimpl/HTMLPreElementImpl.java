@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.style.PreRenderState;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.w3c.HTMLPreElement;
@@ -34,7 +35,7 @@ public class HTMLPreElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public int getWidth() {
-		String widthText = this.getAttribute("width");
+		String widthText = this.getAttribute(HtmlAttributeProperties.WIDTH);
 		if (widthText == null) {
 			return 0;
 		}
@@ -46,7 +47,7 @@ public class HTMLPreElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void setWidth(int width) {
-		this.setAttribute("width", String.valueOf(width));
+		this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
 	}
 
 	protected RenderState createRenderState(RenderState prevRenderState) {

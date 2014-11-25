@@ -28,6 +28,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLInputElementImpl;
 import org.lobobrowser.util.gui.WrapperLayout;
@@ -62,7 +63,7 @@ public class InputButtonControl extends BaseInputControl {
 			button.setForeground(foregroundColor);
 		}
 		HTMLInputElementImpl element = (HTMLInputElementImpl) this.controlElement;
-		String text = element.getAttribute("value");
+		String text = element.getAttribute(HtmlAttributeProperties.VALUE);
 		if (text == null || text.length() == 0) {
 			String type = element.getType();
 			if ("submit".equalsIgnoreCase(type)) {

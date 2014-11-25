@@ -31,6 +31,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.util.gui.WrapperLayout;
@@ -53,7 +54,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 		// Otherwise, layout revalidation causes typed values to
 		// be lost (including revalidation due to hover.)
 		ElementImpl element = this.controlElement;
-		String value = element.getAttribute("value");
+		String value = element.getAttribute(HtmlAttributeProperties.VALUE);
 		widget.setText(value);
 
 		this.widget = widget;
@@ -62,7 +63,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
-		String maxLengthText = this.controlElement.getAttribute("maxlength");
+		String maxLengthText = this.controlElement.getAttribute(HtmlAttributeProperties.MAXLENGTH);
 		if (maxLengthText != null) {
 			try {
 				this.maxLength = Integer.parseInt(maxLengthText);

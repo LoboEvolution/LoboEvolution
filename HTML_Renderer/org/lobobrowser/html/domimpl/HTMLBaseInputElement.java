@@ -26,6 +26,7 @@ package org.lobobrowser.html.domimpl;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.FormInput;
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.dombl.InputContext;
@@ -74,11 +75,11 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	}
 
 	public String getDefaultValue() {
-		return this.getAttribute("defaultValue");
+		return this.getAttribute(HtmlAttributeProperties.DEFAULTVALUE);
 	}
 
 	public void setDefaultValue(String defaultValue) {
-		this.setAttribute("defaultValue", defaultValue);
+		this.setAttribute(HtmlAttributeProperties.DEFAULTVALUE, defaultValue);
 	}
 
 	public HTMLFormElement getForm() {
@@ -104,44 +105,44 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	}
 
 	public String getAccept() {
-		return this.getAttribute("accept");
+		return this.getAttribute(HtmlAttributeProperties.ACCEPT);
 	}
 
 	public void setAccept(String accept) {
-		this.setAttribute("accept", accept);
+		this.setAttribute(HtmlAttributeProperties.ACCEPT, accept);
 	}
 
 	public String getAccessKey() {
-		return this.getAttribute("accessKey");
+		return this.getAttribute(HtmlAttributeProperties.ACCESSKEY);
 	}
 
 	public void setAccessKey(String accessKey) {
-		this.setAttribute("accessKey", accessKey);
+		this.setAttribute(HtmlAttributeProperties.ACCESSKEY, accessKey);
 	}
 
 	public String getAlign() {
-		return this.getAttribute("align");
+		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
 	public void setAlign(String align) {
-		this.setAttribute("align", align);
+		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
 	public String getAlt() {
-		return this.getAttribute("alit");
+		return this.getAttribute(HtmlAttributeProperties.ALT);
 	}
 
 	public void setAlt(String alt) {
-		this.setAttribute("alt", alt);
+		this.setAttribute(HtmlAttributeProperties.ALT, alt);
 	}
 
 	public String getName() {
 		// TODO: Should this return value of "id"?
-		return this.getAttribute("name");
+		return this.getAttribute(HtmlAttributeProperties.NAME);
 	}
 
 	public void setName(String name) {
-		this.setAttribute("name", name);
+		this.setAttribute(HtmlAttributeProperties.NAME, name);
 	}
 
 	public boolean getDisabled() {
@@ -223,7 +224,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 			if (dv != null) {
 				return dv;
 			} else {
-				String val = this.getAttribute("value");
+				String val = this.getAttribute(HtmlAttributeProperties.VALUE);
 				return val == null ? "" : val;
 			}
 		}
@@ -280,7 +281,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 * .String, java.lang.String)
 	 */
 	protected void assignAttributeField(String normalName, String value) {
-		if ("value".equals(normalName)) {
+		if (HtmlAttributeProperties.VALUE.equals(normalName)) {
 			this.setValue(value);
 		} else if ("checked".equals(normalName)) {
 			this.setChecked(value != null);
@@ -288,7 +289,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 			this.setDisabled(value != null);
 		} else if ("readonly".equals(normalName)) {
 			this.setReadOnly(value != null);
-		} else if ("src".equals(normalName)) {
+		} else if (HtmlAttributeProperties.SRC.equals(normalName)) {
 			this.loadImage(value);
 		} else {
 			super.assignAttributeField(normalName, value);

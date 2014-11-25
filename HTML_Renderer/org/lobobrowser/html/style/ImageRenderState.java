@@ -22,6 +22,7 @@ package org.lobobrowser.html.style;
 
 import java.awt.Color;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 
 public class ImageRenderState extends StyleSheetRenderState {
@@ -44,7 +45,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 			int hspace = 0;
 			int vspace = 0;
 			boolean createNew = false;
-			String hspaceText = this.element.getAttribute("hspace");
+			String hspaceText = this.element.getAttribute(HtmlAttributeProperties.HSPACE);
 			if (hspaceText != null && hspaceText.length() != 0) {
 				createNew = true;
 				try {
@@ -53,7 +54,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 					// TODO: Percentages?
 				}
 			}
-			String vspaceText = this.element.getAttribute("vspace");
+			String vspaceText = this.element.getAttribute(HtmlAttributeProperties.VSPACE);
 			if (vspaceText != null && vspaceText.length() != 0) {
 				createNew = true;
 				try {
@@ -93,7 +94,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 			}
 			HTMLElementImpl element = this.element;
 			if (element != null) {
-				String border = element.getAttribute("border");
+				String border = element.getAttribute(HtmlAttributeProperties.BORDER);
 				if (border != null) {
 					border = border.trim();
 					int value;

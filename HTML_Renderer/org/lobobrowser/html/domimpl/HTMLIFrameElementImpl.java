@@ -1,6 +1,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.BrowserFrame;
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.FrameNode;
 import org.lobobrowser.html.js.Window;
 import org.lobobrowser.html.style.IFrameRenderState;
@@ -19,7 +20,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements
 	public void setBrowserFrame(BrowserFrame frame) {
 		this.browserFrame = frame;
 		if (frame != null) {
-			String src = this.getAttribute("src");
+			String src = this.getAttribute(HtmlAttributeProperties.SRC);
 			if (src != null) {
 				try {
 					frame.loadURL(this.getFullURL(src));
@@ -36,7 +37,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public String getAlign() {
-		return this.getAttribute("align");
+		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
 	public Document getContentDocument() {
@@ -59,83 +60,83 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public String getFrameBorder() {
-		return this.getAttribute("frameborder");
+		return this.getAttribute(HtmlAttributeProperties.FRAMEBORDER);
 	}
 
 	public String getHeight() {
-		return this.getAttribute("height");
+		return this.getAttribute(HtmlAttributeProperties.HEIGHT);
 	}
 
 	public String getLongDesc() {
-		return this.getAttribute("longdesc");
+		return this.getAttribute(HtmlAttributeProperties.LONGDESC);
 	}
 
 	public String getMarginHeight() {
-		return this.getAttribute("marginheight");
+		return this.getAttribute(HtmlAttributeProperties.FRAMEBORDER);
 	}
 
 	public String getMarginWidth() {
-		return this.getAttribute("marginwidth");
+		return this.getAttribute(HtmlAttributeProperties.MARGINWIDTH);
 	}
 
 	public String getName() {
-		return this.getAttribute("name");
+		return this.getAttribute(HtmlAttributeProperties.NAME);
 	}
 
 	public String getScrolling() {
-		return this.getAttribute("scrolling");
+		return this.getAttribute(HtmlAttributeProperties.SCROLLING);
 	}
 
 	public String getSrc() {
-		return this.getAttribute("src");
+		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
 
 	public String getWidth() {
-		return this.getAttribute("width");
+		return this.getAttribute(HtmlAttributeProperties.WIDTH);
 	}
 
 	public void setAlign(String align) {
-		this.setAttribute("align", align);
+		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
 	public void setFrameBorder(String frameBorder) {
-		this.setAttribute("frameborder", frameBorder);
+		this.setAttribute(HtmlAttributeProperties.FRAMEBORDER, frameBorder);
 	}
 
 	public void setHeight(String height) {
-		this.setAttribute("height", height);
+		this.setAttribute(HtmlAttributeProperties.HEIGHT, height);
 	}
 
 	public void setLongDesc(String longDesc) {
-		this.setAttribute("longdesc", longDesc);
+		this.setAttribute(HtmlAttributeProperties.LONGDESC, longDesc);
 	}
 
 	public void setMarginHeight(String marginHeight) {
-		this.setAttribute("marginHeight", marginHeight);
+		this.setAttribute(HtmlAttributeProperties.FRAMEBORDER, marginHeight);
 	}
 
 	public void setMarginWidth(String marginWidth) {
-		this.setAttribute("marginWidth", marginWidth);
+		this.setAttribute(HtmlAttributeProperties.MARGINWIDTH, marginWidth);
 	}
 
 	public void setName(String name) {
-		this.setAttribute("name", name);
+		this.setAttribute(HtmlAttributeProperties.NAME, name);
 	}
 
 	public void setScrolling(String scrolling) {
-		this.setAttribute("scrolling", scrolling);
+		this.setAttribute(HtmlAttributeProperties.SCROLLING, scrolling);
 	}
 
 	public void setSrc(String src) {
-		this.setAttribute("src", src);
+		this.setAttribute(HtmlAttributeProperties.SRC, src);
 	}
 
 	public void setWidth(String width) {
-		this.setAttribute("width", width);
+		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
 	}
 
 	protected void assignAttributeField(String normalName, String value) {
-		if ("src".equals(normalName)) {
+		if (HtmlAttributeProperties.SRC.equals(normalName)) {
 			BrowserFrame frame = this.browserFrame;
 			if (frame != null) {
 				try {

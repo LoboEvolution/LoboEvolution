@@ -21,6 +21,7 @@
 
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.TableCaptionRenderState;
 import org.lobobrowser.html.w3c.HTMLTableCaptionElement;
@@ -33,19 +34,19 @@ public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement
 	}
 
 	public String getAlign() {
-		return this.getAttribute("text-align");
+		return this.getAttribute(HtmlAttributeProperties.TEXTALIGN);
 	}
 
 	public void setAlign(String align) {
-		this.setAttribute("text-align", align);
+		this.setAttribute(HtmlAttributeProperties.TEXTALIGN, align);
 	}
 
 	public String getCaptionSide() {
-		return this.getAttribute("caption-side");
+		return this.getAttribute(HtmlAttributeProperties.CAPTIONSIDE);
 	}
 
 	public void setCaptionSide(String captionSide) {
-		this.setAttribute("caption-side", captionSide);
+		this.setAttribute(HtmlAttributeProperties.CAPTIONSIDE, captionSide);
 	}
 
 	protected RenderState createRenderState(RenderState prevRenderState) {

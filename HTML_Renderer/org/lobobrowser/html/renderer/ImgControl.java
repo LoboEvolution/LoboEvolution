@@ -30,6 +30,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.image.ImageObserver;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
@@ -74,14 +75,14 @@ public class ImgControl extends BaseControl implements ImageListener {
 		// Expected in the GUI thread.
 		HTMLElementImpl element = this.controlElement;
 		int dw = HtmlValues.getOldSyntaxPixelSize(
-				element.getAttribute("width"), availWidth, -1);
+				element.getAttribute(HtmlAttributeProperties.WIDTH), availWidth, -1);
 		int dh = HtmlValues.getOldSyntaxPixelSize(
-				element.getAttribute("height"), availHeight, -1);
+				element.getAttribute(HtmlAttributeProperties.HEIGHT), availHeight, -1);
 		this.declaredWidth = dw;
 		this.declaredHeight = dh;
 		this.preferredSize = this.createPreferredSize(dw, dh);
 		int valign;
-		String alignText = element.getAttribute("align");
+		String alignText = element.getAttribute(HtmlAttributeProperties.ALIGN);
 		if (alignText == null) {
 			valign = RElement.VALIGN_BASELINE;
 		} else {

@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Insets;
 
 import org.lobobrowser.html.BrowserFrame;
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
@@ -54,8 +55,8 @@ public class BrowserFrameUIControl implements UIControl {
 			HTMLElement element = (HTMLElement) node;
 			RenderState renderState = node.getRenderState();
 			HtmlInsets insets = null;
-			String marginwidth = element.getAttribute("marginwidth");
-			String marginheight = element.getAttribute("marginheight");
+			String marginwidth = element.getAttribute(HtmlAttributeProperties.MARGINWIDTH);
+			String marginheight = element.getAttribute(HtmlAttributeProperties.MARGINHEIGHT);
 			if (marginwidth != null && marginwidth.length() != 0) {
 				if (insets == null) {
 					insets = new HtmlInsets();
@@ -134,9 +135,9 @@ public class BrowserFrameUIControl implements UIControl {
 
 	public Dimension getPreferredSize() {
 		int width = HtmlValues.getOldSyntaxPixelSize(
-				element.getAttribute("width"), this.availWidth, 100);
+				element.getAttribute(HtmlAttributeProperties.WIDTH), this.availWidth, 100);
 		int height = HtmlValues.getOldSyntaxPixelSize(
-				element.getAttribute("height"), this.availHeight, 100);
+				element.getAttribute(HtmlAttributeProperties.HEIGHT), this.availHeight, 100);
 		return new Dimension(width, height);
 	}
 

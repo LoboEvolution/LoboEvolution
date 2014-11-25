@@ -26,6 +26,8 @@ package org.lobobrowser.html.domimpl;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.style.CSSUtilities;
 import org.lobobrowser.html.w3c.HTMLStyleElement;
@@ -39,7 +41,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements
 	private CSSStyleSheet styleSheet;
 
 	public HTMLStyleElementImpl() {
-		super("STYLE", true);
+		super(HtmlProperties.STYLE, true);
 	}
 
 	public HTMLStyleElementImpl(String name) {
@@ -61,19 +63,19 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements
 	}
 
 	public String getMedia() {
-		return this.getAttribute("media");
+		return this.getAttribute(HtmlAttributeProperties.MEDIA);
 	}
 
 	public void setMedia(String media) {
-		this.setAttribute("media", media);
+		this.setAttribute(HtmlAttributeProperties.MEDIA, media);
 	}
 
 	public String getType() {
-		return this.getAttribute("type");
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
 	public void setType(String type) {
-		this.setAttribute("type", type);
+		this.setAttribute(HtmlAttributeProperties.TYPE, type);
 	}
 
 	public Object setUserData(String key, Object data, UserDataHandler handler) {

@@ -36,6 +36,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 
 import org.lobobrowser.html.FormInput;
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ElementImpl;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.parser.HtmlParser;
@@ -160,7 +161,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 			}
 			sds = new LocalCSS2Properties(this);
 			// Add any declarations in style attribute (last takes precedence).
-			String style = this.getAttribute("style");
+			String style = this.getAttribute(HtmlAttributeProperties.STYLE);
 		
 			if (style != null && style.length() != 0) {
 				CSSOMParser parser = new CSSOMParser();
@@ -251,21 +252,21 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	}
 
 	public String getClassName() {
-		String className = this.getAttribute("class");
+		String className = this.getAttribute(HtmlAttributeProperties.CLASS);
 		// Blank required instead of null.
 		return className == null ? "" : className;
 	}
 
 	public void setClassName(String className) {
-		this.setAttribute("class", className);
+		this.setAttribute(HtmlAttributeProperties.CLASS, className);
 	}
 
 	public String getCharset() {
-		return this.getAttribute("charset");
+		return this.getAttribute(HtmlAttributeProperties.CHARSET);
 	}
 
 	public void setCharset(String charset) {
-		this.setAttribute("charset", charset);
+		this.setAttribute(HtmlAttributeProperties.CHARSET, charset);
 	}
 
 	public void warn(String message, Throwable err) {

@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.w3c.HTMLElement;
@@ -530,7 +531,7 @@ public class StyleSheetRenderState implements RenderState {
 			// Fall back to align attribute.
 			HTMLElement element = this.element;
 			if (element != null) {
-				textAlign = element.getAttribute("align");
+				textAlign = element.getAttribute(HtmlAttributeProperties.ALIGN);
 				if (textAlign == null || textAlign.length() == 0) {
 					RenderState prs = this.prevRenderState;
 					if (prs != null) {

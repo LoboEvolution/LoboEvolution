@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.style.ListRenderState;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.w3c.HTMLOListElement;
@@ -34,16 +35,16 @@ public class HTMLOListElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public boolean getCompact() {
-		String compactText = this.getAttribute("compact");
-		return "compact".equalsIgnoreCase(compactText);
+		String compactText = this.getAttribute(HtmlAttributeProperties.COMPACT);
+		return HtmlAttributeProperties.COMPACT.equalsIgnoreCase(compactText);
 	}
 
 	public void setCompact(boolean compact) {
-		this.setAttribute("compact", compact ? "compact" : null);
+		this.setAttribute(HtmlAttributeProperties.COMPACT, compact ? HtmlAttributeProperties.COMPACT : null);
 	}
 
 	public int getStart() {
-		String startText = this.getAttribute("start");
+		String startText = this.getAttribute(HtmlAttributeProperties.START);
 		if (startText == null) {
 			return 1;
 		}
@@ -55,15 +56,15 @@ public class HTMLOListElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void setStart(int start) {
-		this.setAttribute("start", String.valueOf(start));
+		this.setAttribute(HtmlAttributeProperties.START, String.valueOf(start));
 	}
 
 	public String getType() {
-		return this.getAttribute("type");
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
 	public void setType(String type) {
-		this.setAttribute("type", type);
+		this.setAttribute(HtmlAttributeProperties.TYPE, type);
 	}
 
 	protected RenderState createRenderState(RenderState prevRenderState) {

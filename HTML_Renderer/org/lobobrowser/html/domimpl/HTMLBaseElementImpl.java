@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.w3c.dom.UserDataHandler;
 
 public class HTMLBaseElementImpl extends HTMLElementImpl {
@@ -38,8 +39,8 @@ public class HTMLBaseElementImpl extends HTMLElementImpl {
 	private final void processBaseTag() {
 		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc != null) {
-			doc.setBaseURI(this.getAttribute("href"));
-			doc.setDefaultTarget(this.getAttribute("target"));
+			doc.setBaseURI(this.getAttribute(HtmlAttributeProperties.HREF));
+			doc.setDefaultTarget(this.getAttribute(HtmlAttributeProperties.TARGET));
 		}
 	}
 }

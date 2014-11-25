@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.NodeFilter;
@@ -150,7 +151,7 @@ class TableMatrix {
 		ALL_CELLS.clear();
 		ROW_ELEMENTS.clear();
 		// TODO: Does it need this old-style border?
-		String borderText = this.tableElement.getAttribute("border");
+		String borderText = this.tableElement.getAttribute(HtmlAttributeProperties.BORDER);
 		int border = 0;
 		if (borderText != null) {
 			try {
@@ -162,7 +163,7 @@ class TableMatrix {
 				// ignore
 			}
 		}
-		String cellSpacingText = this.tableElement.getAttribute("cellspacing");
+		String cellSpacingText = this.tableElement.getAttribute(HtmlAttributeProperties.CELLSPACING);
 		int cellSpacing = 1;
 		if (cellSpacingText != null) {
 			try {
@@ -235,7 +236,7 @@ class TableMatrix {
 			AbstractCSS2Properties props = element.getCurrentStyle();
 			String widthText = props == null ? null : props.getWidth();
 			if (widthText == null) {
-				String widthAttr = element.getAttribute("width");
+				String widthAttr = element.getAttribute(HtmlAttributeProperties.WIDTH);
 				if (widthAttr == null)
 					return null;
 				return new HtmlLength(widthAttr);
@@ -254,7 +255,7 @@ class TableMatrix {
 			AbstractCSS2Properties props = element.getCurrentStyle();
 			String heightText = props == null ? null : props.getHeight();
 			if (heightText == null) {
-				String ha = element.getAttribute("height");
+				String ha = element.getAttribute(HtmlAttributeProperties.HEIGHT);
 				if (ha == null) {
 					return null;
 				} else {
@@ -445,7 +446,7 @@ class TableMatrix {
 			}
 			// TODO: TR.height an IE quirk?
 			String rowHeightText = rowElement == null ? null : rowElement
-					.getAttribute("height");
+					.getAttribute(HtmlAttributeProperties.HEIGHT);
 			HtmlLength rowHeightLength = null;
 			if (rowHeightText != null) {
 				try {

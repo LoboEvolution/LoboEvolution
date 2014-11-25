@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLFrameSetElement;
 
 public class HTMLFrameSetElementImpl extends HTMLElementImpl implements
@@ -37,18 +38,18 @@ public class HTMLFrameSetElementImpl extends HTMLElementImpl implements
 	}
 
 	public String getCols() {
-		return this.getAttribute("cols");
+		return this.getAttribute(HtmlAttributeProperties.COLS);
 	}
 
 	public void setCols(String cols) {
-		this.setAttribute("cols", cols);
+		this.setAttribute(HtmlAttributeProperties.COLS, cols);
 	}
 
 	public String getRows() {
-		return this.getAttribute("rows");
+		return this.getAttribute(HtmlAttributeProperties.ROWS);
 	}
 
 	public void setRows(String rows) {
-		this.setAttribute("rows", rows);
+		this.setAttribute(HtmlAttributeProperties.ROWS, rows);
 	}
 }

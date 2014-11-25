@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.renderer;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
@@ -75,7 +76,7 @@ class RList extends BaseRListElement {
 			return;
 		}
 		HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-		String startText = rootElement.getAttribute("start");
+		String startText = rootElement.getAttribute(HtmlAttributeProperties.START);
 		if (startText != null) {
 			try {
 				counterStart = Integer.parseInt(startText);

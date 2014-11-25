@@ -28,6 +28,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.FormInput;
+import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.dombl.NodeFilter;
@@ -47,7 +49,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public HTMLFormElementImpl() {
-		super("FORM");
+		super(HtmlProperties.FORM);
 	}
 
 	public Object namedItem(final String name) {
@@ -56,7 +58,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 			this.visit(new NodeVisitor() {
 				public void visit(Node node) {
 					if (HTMLFormElementImpl.isInput(node)) {
-						if (name.equals(((Element) node).getAttribute("name"))) {
+						if (name.equals(((Element) node).getAttribute(HtmlAttributeProperties.NAME))) {
 							throw new StopVisitorException(node);
 						}
 					}
@@ -105,39 +107,39 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public String getName() {
-		return this.getAttribute("name");
+		return this.getAttribute(HtmlAttributeProperties.NAME);
 	}
 
 	public void setName(String name) {
-		this.setAttribute("name", name);
+		this.setAttribute(HtmlAttributeProperties.NAME, name);
 	}
 
 	public String getAcceptCharset() {
-		return this.getAttribute("acceptCharset");
+		return this.getAttribute(HtmlAttributeProperties.ACCEPTCHARSET);
 	}
 
 	public void setAcceptCharset(String acceptCharset) {
-		this.setAttribute("acceptCharset", acceptCharset);
+		this.setAttribute(HtmlAttributeProperties.ACCEPTCHARSET, acceptCharset);
 	}
 
 	public String getAction() {
-		return this.getAttribute("action");
+		return this.getAttribute(HtmlAttributeProperties.ACTION);
 	}
 
 	public void setAction(String action) {
-		this.setAttribute("action", action);
+		this.setAttribute(HtmlAttributeProperties.ACTION, action);
 	}
 
 	public String getEnctype() {
-		return this.getAttribute("enctype");
+		return this.getAttribute(HtmlAttributeProperties.ENCTYPE);
 	}
 
 	public void setEnctype(String enctype) {
-		this.setAttribute("enctype", enctype);
+		this.setAttribute(HtmlAttributeProperties.ENCTYPE, enctype);
 	}
 
 	public String getMethod() {
-		String method = this.getAttribute("method");
+		String method = this.getAttribute(HtmlAttributeProperties.METHOD);
 		if (method == null) {
 			method = "GET";
 		}
@@ -145,15 +147,15 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void setMethod(String method) {
-		this.setAttribute("method", method);
+		this.setAttribute(HtmlAttributeProperties.METHOD, method);
 	}
 
 	public String getTarget() {
-		return this.getAttribute("target");
+		return this.getAttribute(HtmlAttributeProperties.TARGET);
 	}
 
 	public void setTarget(String target) {
-		this.setAttribute("target", target);
+		this.setAttribute(HtmlAttributeProperties.TARGET, target);
 	}
 
 	public void submit() {

@@ -23,12 +23,14 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.w3c.HTMLHtmlElement;
 
 public class HTMLHtmlElementImpl extends HTMLElementImpl implements
 		HTMLHtmlElement {
 	public HTMLHtmlElementImpl() {
-		super("HTML", true);
+		super(HtmlProperties.HTML, true);
 	}
 
 	public HTMLHtmlElementImpl(String name) {
@@ -36,10 +38,10 @@ public class HTMLHtmlElementImpl extends HTMLElementImpl implements
 	}
 
 	public String getVersion() {
-		return this.getAttribute("version");
+		return this.getAttribute(HtmlAttributeProperties.VERSION);
 	}
 
 	public void setVersion(String version) {
-		this.setAttribute("version", version);
+		this.setAttribute(HtmlAttributeProperties.VERSION, version);
 	}
 }

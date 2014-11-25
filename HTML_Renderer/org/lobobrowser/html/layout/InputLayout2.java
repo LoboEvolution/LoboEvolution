@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.layout;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.BaseInputControl;
@@ -52,7 +53,7 @@ public class InputLayout2 extends CommonWidgetLayout {
 	}
 
 	private final BaseInputControl createInputControl(HTMLBaseInputElement markupElement) {
-		String type = markupElement.getAttribute("type");
+		String type = markupElement.getAttribute(HtmlAttributeProperties.TYPE);
 		if (type == null) {
 			return new InputTextControl(markupElement);
 		}

@@ -30,6 +30,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.ImageObserver;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
@@ -82,14 +83,14 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 		super.reset(availWidth, availHeight);
 		HTMLElementImpl element = this.controlElement;
 		int dw = HtmlValues.getOldSyntaxPixelSize(
-				element.getAttribute("width"), availWidth, -1);
+				element.getAttribute(HtmlAttributeProperties.WIDTH), availWidth, -1);
 		int dh = HtmlValues.getOldSyntaxPixelSize(
-				element.getAttribute("height"), availHeight, -1);
+				element.getAttribute(HtmlAttributeProperties.HEIGHT), availHeight, -1);
 		this.declaredWidth = dw;
 		this.declaredHeight = dh;
 		this.preferredSize = this.createPreferredSize(dw, dh);
 		int valign;
-		String alignText = element.getAttribute("align");
+		String alignText = element.getAttribute(HtmlAttributeProperties.ALIGN);
 		if (alignText == null) {
 			valign = RElement.VALIGN_BASELINE;
 		} else {

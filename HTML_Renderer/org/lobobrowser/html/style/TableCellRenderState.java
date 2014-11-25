@@ -2,6 +2,7 @@ package org.lobobrowser.html.style;
 
 import java.awt.Color;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableRowElementImpl;
@@ -40,9 +41,9 @@ public class TableCellRenderState extends DisplayRenderState {
 				return super.getAlignXPercent();
 			}
 		}
-		// Parent already knows about "align" attribute, but override because of
+		// Parent already knows about HtmlAttributeProperties.ALIGN attribute, but override because of
 		// TH.
-		String align = this.element.getAttribute("align");
+		String align = this.element.getAttribute(HtmlAttributeProperties.ALIGN);
 		HTMLElement element = this.element;
 		HTMLElement rowElement = null;
 		Object parent = element.getParentNode();
@@ -51,7 +52,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		}
 		if (align == null || align.length() == 0) {
 			if (rowElement != null) {
-				align = rowElement.getAttribute("align");
+				align = rowElement.getAttribute(HtmlAttributeProperties.ALIGN);
 				if (align != null && align.length() == 0) {
 					align = null;
 				}
@@ -92,7 +93,7 @@ public class TableCellRenderState extends DisplayRenderState {
 				return super.getAlignYPercent();
 			}
 		}
-		String valign = this.element.getAttribute("valign");
+		String valign = this.element.getAttribute(HtmlAttributeProperties.VALIGN);
 		HTMLElement element = this.element;
 		HTMLElement rowElement = null;
 		Object parent = element.getParentNode();
@@ -101,7 +102,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		}
 		if (valign == null || valign.length() == 0) {
 			if (rowElement != null) {
-				valign = rowElement.getAttribute("valign");
+				valign = rowElement.getAttribute(HtmlAttributeProperties.VALIGN);
 				if (valign != null && valign.length() == 0) {
 					valign = null;
 				}
@@ -155,7 +156,7 @@ public class TableCellRenderState extends DisplayRenderState {
 			}
 		}
 		if (binfo == null || binfo.backgroundImage == null) {
-			String background = element.getAttribute("background");
+			String background = element.getAttribute(HtmlAttributeProperties.BACKGROUND);
 			if (background != null && !"".equals(background)) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
@@ -189,7 +190,7 @@ public class TableCellRenderState extends DisplayRenderState {
 				// Return without caching
 				return null;
 			}
-			String cellPaddingText = tableElement.getAttribute("cellpadding");
+			String cellPaddingText = tableElement.getAttribute(HtmlAttributeProperties.CELLPADDING);
 			if (cellPaddingText != null && cellPaddingText.length() != 0) {
 				cellPaddingText = cellPaddingText.trim();
 				int cellPadding;
@@ -259,7 +260,7 @@ public class TableCellRenderState extends DisplayRenderState {
 			HTMLElementImpl element = this.element;
 			String width = props == null ? null : props.getWidth();
 			if (width == null) {
-				width = element.getAttribute("width");
+				width = element.getAttribute(HtmlAttributeProperties.WIDTH);
 				if (width != null && width.length() > 0 && !width.endsWith("%")) {
 					wsValue = WS_NORMAL;
 				}

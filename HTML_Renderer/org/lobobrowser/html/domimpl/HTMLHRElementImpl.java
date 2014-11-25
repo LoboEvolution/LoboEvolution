@@ -1,5 +1,6 @@
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLHRElement;
 
 public class HTMLHRElementImpl extends HTMLAbstractUIElement implements
@@ -9,46 +10,45 @@ public class HTMLHRElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public String getAlign() {
-		return this.getAttribute("align");
+		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
 	public boolean getNoShade() {
-		return "noshade".equalsIgnoreCase(this.getAttribute("noshade"));
+		return HtmlAttributeProperties.NOSHADE.equalsIgnoreCase(this.getAttribute(HtmlAttributeProperties.NOSHADE));
 	}
 
 	public String getSize() {
-		return this.getAttribute("size");
+		return this.getAttribute(HtmlAttributeProperties.SIZE);
 	}
 
 	public String getWidth() {
-		return this.getAttribute("width");
+		return this.getAttribute(HtmlAttributeProperties.WIDTH);
 	}
 
 	public void setAlign(String align) {
-		this.setAttribute("align", align);
+		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
 	public void setNoShade(boolean noShade) {
-		this.setAttribute("noshade", noShade ? "noshade" : null);
+		this.setAttribute(HtmlAttributeProperties.NOSHADE, noShade ? HtmlAttributeProperties.NOSHADE : null);
 	}
 
 	public void setSize(String size) {
-		this.setAttribute("size", size);
+		this.setAttribute(HtmlAttributeProperties.SIZE, size);
 	}
 
 	public void setWidth(String width) {
-		this.setAttribute("width", width);
+		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
 	}
 
 	@Override
 	public String getColor() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.COLOR);
 	}
 
 	@Override
 	public void setColor(String color) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.COLOR, color);
 		
 	}
 }

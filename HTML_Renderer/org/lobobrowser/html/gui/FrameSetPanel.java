@@ -37,6 +37,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import org.lobobrowser.html.BrowserFrame;
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.FrameNode;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
@@ -164,8 +165,8 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 			HtmlRendererContext context = this.htmlContext;
 			if (context != null) {
 				HTMLElementImpl element = (HTMLElementImpl) this.rootNode;
-				String rows = element.getAttribute("rows");
-				String cols = element.getAttribute("cols");
+				String rows = element.getAttribute(HtmlAttributeProperties.ROWS);
+				String cols = element.getAttribute(HtmlAttributeProperties.COLS);
 				HtmlLength[] rowLengths = this.getLengths(rows);
 				HtmlLength[] colLengths = this.getLengths(cols);
 				HTMLElementImpl[] subframes = this.getSubFrames(element);
@@ -183,7 +184,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 						if (frameElement instanceof FrameNode) {
 							BrowserFrame frame = context.createBrowserFrame();
 							((FrameNode) frameElement).setBrowserFrame(frame);
-							String src = frameElement.getAttribute("src");
+							String src = frameElement.getAttribute(HtmlAttributeProperties.SRC);
 							if (src != null) {
 								java.net.URL url;
 								try {

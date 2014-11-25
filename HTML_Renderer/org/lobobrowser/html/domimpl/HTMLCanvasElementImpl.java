@@ -21,6 +21,7 @@
 
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.style.BlockRenderState;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.w3c.HTMLCanvasElement;
@@ -37,7 +38,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements HTML
 
 	@Override
 	public int getWidth() {
-		String widthText = this.getAttribute("width");
+		String widthText = this.getAttribute(HtmlAttributeProperties.WIDTH);
 		if (widthText == null) {
 			return 0;
 		}
@@ -50,12 +51,12 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements HTML
 
 	@Override
 	public void setWidth(int width) {
-		this.setAttribute("width", String.valueOf(width));
+		this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
 	}
 
 	@Override
 	public int getHeight() {
-		String heightText = this.getAttribute("height");
+		String heightText = this.getAttribute(HtmlAttributeProperties.HEIGHT);
 		if (heightText == null) {
 			return 0;
 		}
@@ -68,7 +69,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements HTML
 
 	@Override
 	public void setHeight(int height) {
-		this.setAttribute("height", String.valueOf(height));
+		this.setAttribute(HtmlAttributeProperties.HEIGHT, String.valueOf(height));
 	}
 
 	@Override

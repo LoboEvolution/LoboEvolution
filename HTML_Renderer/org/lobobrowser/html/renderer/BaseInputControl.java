@@ -26,6 +26,7 @@ package org.lobobrowser.html.renderer;
 import java.awt.Graphics;
 import java.io.File;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 
@@ -41,7 +42,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
-		String sizeText = this.controlElement.getAttribute("size");
+		String sizeText = this.controlElement.getAttribute(HtmlAttributeProperties.SIZE);
 		if (sizeText != null) {
 			try {
 				this.size = Integer.parseInt(sizeText);

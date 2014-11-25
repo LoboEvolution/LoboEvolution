@@ -25,6 +25,8 @@ package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.dombl.UINode;
@@ -37,7 +39,7 @@ import org.mozilla.javascript.Function;
 public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 		HTMLImageElement {
 	public HTMLImageElementImpl() {
-		super("IMG");
+		super(HtmlProperties.IMG);
 	}
 
 	public HTMLImageElementImpl(String name) {
@@ -45,35 +47,35 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public String getName() {
-		return this.getAttribute("name");
+		return this.getAttribute(HtmlAttributeProperties.NAME);
 	}
 
 	public void setName(String name) {
-		this.setAttribute("name", name);
+		this.setAttribute(HtmlAttributeProperties.NAME, name);
 	}
 
 	public String getAlign() {
-		return this.getAttribute("align");
+		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
 	public void setAlign(String align) {
-		this.setAttribute("align", align);
+		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
 	public String getAlt() {
-		return this.getAttribute("alt");
+		return this.getAttribute(HtmlAttributeProperties.ALT);
 	}
 
 	public void setAlt(String alt) {
-		this.setAttribute("alt", alt);
+		this.setAttribute(HtmlAttributeProperties.ALT, alt);
 	}
 
 	public String getBorder() {
-		return this.getAttribute("border");
+		return this.getAttribute(HtmlAttributeProperties.BORDER);
 	}
 
 	public void setBorder(String border) {
-		this.setAttribute("border", border);
+		this.setAttribute(HtmlAttributeProperties.BORDER, border);
 	}
 
 	public int getHeight() {
@@ -82,35 +84,35 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void setHeight(int height) {
-		this.setAttribute("height", String.valueOf(height));
+		this.setAttribute(HtmlAttributeProperties.HEIGHT, String.valueOf(height));
 	}
 
 	public int getHspace() {
-		return this.getAttributeAsInt("hspace", 0);
+		return this.getAttributeAsInt(HtmlAttributeProperties.HSPACE, 0);
 	}
 
 	public void setHspace(int hspace) {
-		this.setAttribute("hspace", String.valueOf("hspace"));
+		this.setAttribute(HtmlAttributeProperties.HSPACE, String.valueOf(hspace));
 	}
 
 	public boolean getIsMap() {
-		return this.getAttributeAsBoolean("isMap");
+		return this.getAttributeAsBoolean(HtmlAttributeProperties.ISMAP);
 	}
 
 	public void setIsMap(boolean isMap) {
-		this.setAttribute("isMap", isMap ? "isMap" : null);
+		this.setAttribute(HtmlAttributeProperties.ISMAP, isMap ? HtmlAttributeProperties.ISMAP : null);
 	}
 
 	public String getLongDesc() {
-		return this.getAttribute("longDesc");
+		return this.getAttribute(HtmlAttributeProperties.LONGDESC);
 	}
 
 	public void setLongDesc(String longDesc) {
-		this.setAttribute("longDesc", longDesc);
+		this.setAttribute(HtmlAttributeProperties.LONGDESC, longDesc);
 	}
 
 	public String getSrc() {
-		return this.getAttribute("src");
+		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
 
 	/**
@@ -119,23 +121,23 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 	 * to be loaded.
 	 */
 	public void setSrc(String src) {
-		this.setAttribute("src", src);
+		this.setAttribute(HtmlAttributeProperties.SRC, src);
 	}
 
 	public String getUseMap() {
-		return this.getAttribute("useMap");
+		return this.getAttribute(HtmlAttributeProperties.USEMAP);
 	}
 
 	public void setUseMap(String useMap) {
-		this.setAttribute("useMap", useMap);
+		this.setAttribute(HtmlAttributeProperties.USEMAP, useMap);
 	}
 
 	public int getVspace() {
-		return this.getAttributeAsInt("vspace", 0);
+		return this.getAttributeAsInt(HtmlAttributeProperties.VSPACE, 0);
 	}
 
 	public void setVspace(int vspace) {
-		this.setAttribute("vspace", String.valueOf(vspace));
+		this.setAttribute(HtmlAttributeProperties.VSPACE, String.valueOf(vspace));
 	}
 
 	public int getWidth() {
@@ -144,12 +146,12 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void setWidth(int width) {
-		this.setAttribute("width", String.valueOf(width));
+		this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
 	}
 
 	protected void assignAttributeField(String normalName, String value) {
 		super.assignAttributeField(normalName, value);
-		if ("src".equals(normalName)) {
+		if (HtmlAttributeProperties.SRC.equals(normalName)) {
 			this.loadImage(value);
 		}
 	}

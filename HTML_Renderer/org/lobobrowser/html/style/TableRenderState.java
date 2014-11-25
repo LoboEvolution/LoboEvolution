@@ -22,6 +22,7 @@ package org.lobobrowser.html.style;
 
 import java.awt.Color;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
 import org.lobobrowser.util.gui.ColorFactory;
@@ -65,7 +66,7 @@ public class TableRenderState extends StyleSheetRenderState {
 			}
 		}
 		if (binfo == null || binfo.backgroundImage == null) {
-			String background = element.getAttribute("background");
+			String background = element.getAttribute(HtmlAttributeProperties.BACKGROUND);
 			if (background != null && !"".equals(background)) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
@@ -92,7 +93,7 @@ public class TableRenderState extends StyleSheetRenderState {
 			}
 			HTMLElementImpl element = this.element;
 			if (element != null) {
-				String border = element.getAttribute("border");
+				String border = element.getAttribute(HtmlAttributeProperties.BORDER);
 				if (border != null) {
 					border = border.trim();
 					int value;
