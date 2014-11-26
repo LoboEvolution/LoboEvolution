@@ -260,25 +260,25 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 
 	@Override
 	public boolean getAutocomplete() {
-		// TODO Auto-generated method stub
-		return false;
+		String autocomplete = this.getAttribute(HtmlAttributeProperties.AUTOCOMPLETE);
+		return HtmlAttributeProperties.AUTOCOMPLETE.equalsIgnoreCase(autocomplete);
 	}
 
 	@Override
 	public void setAutocomplete(boolean autocomplete) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.AUTOCOMPLETE, autocomplete ? HtmlAttributeProperties.AUTOCOMPLETE : null);
 		
 	}
 
 	@Override
 	public boolean getNoValidate() {
-		// TODO Auto-generated method stub
-		return false;
+		String noValidate = this.getAttribute(HtmlAttributeProperties.NOVALIDATE);
+		return HtmlAttributeProperties.NOVALIDATE.equalsIgnoreCase(noValidate);
 	}
 
 	@Override
 	public void setNoValidate(boolean noValidate) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.NOVALIDATE, noValidate ? HtmlAttributeProperties.NOVALIDATE : null);
 		
 	}
 

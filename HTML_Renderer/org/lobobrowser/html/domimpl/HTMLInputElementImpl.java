@@ -206,25 +206,27 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements
 
 	@Override
 	public boolean getAutocomplete() {
-		// TODO Auto-generated method stub
-		return false;
+		String autocomplete = this.getAttribute(HtmlAttributeProperties.AUTOCOMPLETE);
+		return HtmlAttributeProperties.MUTED.equalsIgnoreCase(autocomplete);
 	}
 
 	@Override
 	public void setAutocomplete(boolean autocomplete) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.AUTOCOMPLETE, autocomplete ? HtmlAttributeProperties.AUTOCOMPLETE : null);
+
 		
 	}
 
 	@Override
 	public boolean getAutofocus() {
-		// TODO Auto-generated method stub
-		return false;
+		String focus = this.getAttribute(HtmlAttributeProperties.AUTOFOCUS);
+		return HtmlAttributeProperties.AUTOFOCUS.equalsIgnoreCase(focus);
 	}
 
 	@Override
 	public void setAutofocus(boolean autofocus) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.AUTOFOCUS, autofocus ? HtmlAttributeProperties.AUTOFOCUS : null);
+
 		
 	}
 
@@ -236,73 +238,66 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements
 
 	@Override
 	public String getFormAction() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.FORMACTION);
 	}
 
 	@Override
 	public void setFormAction(String formAction) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.FORMACTION, formAction);
 		
 	}
 
 	@Override
 	public String getFormEnctype() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.FORMENCTYPE);
 	}
 
 	@Override
 	public void setFormEnctype(String formEnctype) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.FORMENCTYPE, formEnctype);
 		
 	}
 
 	@Override
 	public String getFormMethod() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.FORMMETHOD);
 	}
 
 	@Override
 	public void setFormMethod(String formMethod) {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute(HtmlAttributeProperties.FORMMETHOD, formMethod);
 	}
 
 	@Override
 	public boolean getFormNoValidate() {
-		// TODO Auto-generated method stub
-		return false;
+		String formNoValidate = this.getAttribute(HtmlAttributeProperties.FORMNOVALIDATE);
+		return HtmlAttributeProperties.FORMNOVALIDATE.equalsIgnoreCase(formNoValidate);
 	}
 
 	@Override
 	public void setFormNoValidate(boolean formNoValidate) {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute(HtmlAttributeProperties.FORMNOVALIDATE, formNoValidate ? HtmlAttributeProperties.FORMNOVALIDATE : null);
 	}
 
 	@Override
 	public String getFormTarget() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.FORMTARGET);
 	}
 
 	@Override
 	public void setFormTarget(String formTarget) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.FORMTARGET, formTarget);
 		
 	}
 
 	@Override
 	public String getHeight() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.HEIGHT);
 	}
 
 	@Override
 	public void setHeight(String height) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.HEIGHT, height);
 		
 	}
 
@@ -326,86 +321,79 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements
 
 	@Override
 	public String getMax() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.MAX);
 	}
 
 	@Override
 	public void setMax(String max) {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute(HtmlAttributeProperties.MAX, max);
 	}
 
 	@Override
 	public String getMin() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.MIN);
 	}
 
 	@Override
 	public void setMin(String min) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.MIN, min);
 		
 	}
 
 	@Override
 	public boolean getMultiple() {
-		// TODO Auto-generated method stub
-		return false;
+		String multiple = this.getAttribute(HtmlAttributeProperties.MULTIPLE);
+		return HtmlAttributeProperties.MULTIPLE.equalsIgnoreCase(multiple);
 	}
 
 	@Override
 	public void setMultiple(boolean multiple) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.MULTIPLE, multiple ? HtmlAttributeProperties.MULTIPLE : null);
 		
 	}
 
 	@Override
 	public String getPattern() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.PATTERN);
 	}
 
 	@Override
 	public void setPattern(String pattern) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.PATTERN, pattern);
 		
 	}
 
 	@Override
 	public String getPlaceholder() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.PLACEHOLDER);
 	}
 
 	@Override
 	public void setPlaceholder(String placeholder) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.PLACEHOLDER, placeholder);
 		
 	}
 
 	@Override
 	public boolean getRequired() {
-		// TODO Auto-generated method stub
-		return false;
+		String required = this.getAttribute(HtmlAttributeProperties.REQUIRED);
+		return HtmlAttributeProperties.REQUIRED.equalsIgnoreCase(required);
 	}
 
 	@Override
 	public void setRequired(boolean required) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.REQUIRED, required ? HtmlAttributeProperties.REQUIRED : null);
 		
 	}
 
 	@Override
 	public String getStep() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.STEP);
 	}
 
 	@Override
 	public void setStep(String step) {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute(HtmlAttributeProperties.STEP, step);
 	}
 
 	@Override

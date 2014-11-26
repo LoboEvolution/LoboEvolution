@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLVideoElement;
 import org.lobobrowser.html.w3c.MediaError;
 import org.lobobrowser.html.w3c.TimeRanges;
@@ -39,13 +40,12 @@ public class HTMLVideoElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public String getSrc() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
 
 	@Override
 	public void setSrc(String src) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.SRC,src);
 		
 	}
 
@@ -63,13 +63,12 @@ public class HTMLVideoElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public String getPreload() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.PRELOAD);
 	}
 
 	@Override
 	public void setPreload(String preload) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.PRELOAD, preload);
 		
 	}
 
@@ -177,25 +176,25 @@ public class HTMLVideoElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public boolean getAutoplay() {
-		// TODO Auto-generated method stub
-		return false;
+		String autoplay = this.getAttribute(HtmlAttributeProperties.AUTOPLAY);
+		return HtmlAttributeProperties.AUTOPLAY.equalsIgnoreCase(autoplay);
 	}
 
 	@Override
 	public void setAutoplay(boolean autoplay) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.AUTOPLAY, autoplay ? HtmlAttributeProperties.AUTOPLAY : null);
 		
 	}
 
 	@Override
 	public boolean getLoop() {
-		// TODO Auto-generated method stub
-		return false;
+		String loop = this.getAttribute(HtmlAttributeProperties.LOOP);
+		return HtmlAttributeProperties.LOOP.equalsIgnoreCase(loop);
 	}
 
 	@Override
 	public void setLoop(boolean loop) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.LOOP, loop ? HtmlAttributeProperties.LOOP : null);
 		
 	}
 
@@ -213,13 +212,13 @@ public class HTMLVideoElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public boolean getControls() {
-		// TODO Auto-generated method stub
-		return false;
+		String controls = this.getAttribute(HtmlAttributeProperties.CONTROLS);
+		return HtmlAttributeProperties.CONTROLS.equalsIgnoreCase(controls);
 	}
 
 	@Override
 	public void setControls(boolean controls) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.CONTROLS, controls ? HtmlAttributeProperties.CONTROLS : null);
 		
 	}
 
@@ -237,37 +236,35 @@ public class HTMLVideoElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public boolean getMuted() {
-		// TODO Auto-generated method stub
-		return false;
+		String muted = this.getAttribute(HtmlAttributeProperties.MUTED);
+		return HtmlAttributeProperties.MUTED.equalsIgnoreCase(muted);
 	}
 
 	@Override
 	public void setMuted(boolean muted) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.MUTED, muted ? HtmlAttributeProperties.MUTED : null);
 		
 	}
 
 	@Override
 	public String getWidth() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.WIDTH);
 	}
 
 	@Override
 	public void setWidth(String width) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
 		
 	}
 
 	@Override
 	public String getHeight() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.HEIGHT);
 	}
 
 	@Override
 	public void setHeight(String height) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.HEIGHT, height);
 		
 	}
 
@@ -285,13 +282,12 @@ public class HTMLVideoElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public String getPoster() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.POSTER);
 	}
 
 	@Override
 	public void setPoster(String poster) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.POSTER, poster);
 		
 	}
 

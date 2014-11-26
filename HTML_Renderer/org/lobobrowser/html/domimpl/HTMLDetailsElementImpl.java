@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLDetailsElement;
 
 public class HTMLDetailsElementImpl extends HTMLElementImpl implements
@@ -32,13 +33,14 @@ public class HTMLDetailsElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public boolean getOpen() {
-		// TODO Auto-generated method stub
-		return false;
+		String open = this.getAttribute(HtmlAttributeProperties.OPEN);
+		return HtmlAttributeProperties.OPEN.equalsIgnoreCase(open);
 	}
 
 	@Override
 	public void setOpen(boolean open) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.OPEN, open ? HtmlAttributeProperties.OPEN : null);
+
 		
 	}
 

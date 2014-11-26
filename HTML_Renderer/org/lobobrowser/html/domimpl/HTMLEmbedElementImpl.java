@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLEmbedElement;
 
 public class HTMLEmbedElementImpl extends HTMLElementImpl implements
@@ -27,54 +28,49 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements
 
 	public HTMLEmbedElementImpl(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String getSrc() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
 
 	@Override
 	public void setSrc(String src) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.SRC,src);
 		
 	}
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
 	@Override
 	public void setType(String type) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.TYPE,type);
 		
 	}
 
 	@Override
 	public String getWidth() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.WIDTH);
 	}
 
 	@Override
 	public void setWidth(String width) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.WIDTH,width);
 		
 	}
 
 	@Override
 	public String getHeight() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.HEIGHT);
 	}
 
 	@Override
 	public void setHeight(String height) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.HEIGHT,height);
 		
 	}
 

@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLTimeElement;
 
 public class HTMLTimeElementImpl extends HTMLElementImpl implements
@@ -31,14 +32,12 @@ public class HTMLTimeElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public String getDateTime() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.DATETIME);
 	}
 
 	@Override
 	public void setDateTime(String dateTime) {
-		// TODO Auto-generated method stub
-
+		this.setAttribute(HtmlAttributeProperties.DATETIME, dateTime);
 	}
 
 	@Override

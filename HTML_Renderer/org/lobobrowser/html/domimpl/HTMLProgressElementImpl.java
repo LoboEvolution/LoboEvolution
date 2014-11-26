@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLFormElement;
 import org.lobobrowser.html.w3c.HTMLProgressElement;
 import org.w3c.dom.NodeList;
@@ -29,31 +30,39 @@ public class HTMLProgressElementImpl extends HTMLElementImpl implements
 
 	public HTMLProgressElementImpl(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public float getValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.VALUE));
+		} catch (Exception thrown) {
+			this.warn("getSize(): Unable to parse size attribute in " + this+ ".", thrown);
+			return 0;
+		}
 	}
 
 	@Override
 	public void setValue(float value) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.VALUE,String.valueOf(value));
 		
 	}
+	
+	
 
 	@Override
 	public float getMax() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.MAX));
+		} catch (Exception thrown) {
+			this.warn("getSize(): Unable to parse size attribute in " + this+ ".", thrown);
+			return 0;
+		}
 	}
 
 	@Override
 	public void setMax(float max) {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute(HtmlAttributeProperties.VALUE,String.valueOf(max));
 	}
 
 	@Override

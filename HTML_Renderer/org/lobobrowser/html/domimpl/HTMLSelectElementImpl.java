@@ -3,6 +3,7 @@ package org.lobobrowser.html.domimpl;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.FormInput;
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLElement;
@@ -169,13 +170,13 @@ public class HTMLSelectElementImpl extends HTMLBaseInputElement implements
 
 	@Override
 	public boolean getAutofocus() {
-		// TODO Auto-generated method stub
-		return false;
+		String auto = this.getAttribute(HtmlAttributeProperties.AUTOFOCUS);
+		return HtmlAttributeProperties.AUTOFOCUS.equalsIgnoreCase(auto);
 	}
 
 	@Override
 	public void setAutofocus(boolean autofocus) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.AUTOFOCUS, autofocus ? HtmlAttributeProperties.AUTOFOCUS : null);
 		
 	}
 

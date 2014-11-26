@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLFormElement;
 import org.lobobrowser.html.w3c.HTMLMeterElement;
 import org.w3c.dom.NodeList;
@@ -34,73 +35,103 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public float getValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.VALUE));
+		} catch (Exception thrown) {
+			this.warn("getSize(): Unable to parse size attribute in " + this
+					+ ".", thrown);
+			return 0;
+		}
 	}
 
 	@Override
 	public void setValue(float value) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(value));
 		
 	}
 
 	@Override
 	public float getMin() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.MIN));
+		} catch (Exception thrown) {
+			this.warn("getSize(): Unable to parse size attribute in " + this
+					+ ".", thrown);
+			return 0;
+		}
 	}
 
 	@Override
 	public void setMin(float min) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.MIN, String.valueOf(min));
 		
 	}
 
 	@Override
 	public float getMax() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.MAX));
+		} catch (Exception thrown) {
+			this.warn("getSize(): Unable to parse size attribute in " + this
+					+ ".", thrown);
+			return 0;
+		}
 	}
 
 	@Override
 	public void setMax(float max) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.MAX, String.valueOf(max));
 		
 	}
 
 	@Override
 	public float getLow() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.LOW));
+		} catch (Exception thrown) {
+			this.warn("getSize(): Unable to parse size attribute in " + this
+					+ ".", thrown);
+			return 0;
+		}
 	}
 
 	@Override
 	public void setLow(float low) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.LOW, String.valueOf(low));
 		
 	}
 
 	@Override
 	public float getHigh() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.HEIGHT));
+		} catch (Exception thrown) {
+			this.warn("getSize(): Unable to parse size attribute in " + this
+					+ ".", thrown);
+			return 0;
+		}
 	}
 
 	@Override
 	public void setHigh(float high) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.HEIGHT, String.valueOf(high));
 		
 	}
 
 	@Override
 	public float getOptimum() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.OPTINUM));
+		} catch (Exception thrown) {
+			this.warn("getSize(): Unable to parse size attribute in " + this
+					+ ".", thrown);
+			return 0;
+		}
 	}
 
 	@Override
 	public void setOptimum(float optimum) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.OPTINUM, String.valueOf(optimum));
 		
 	}
 

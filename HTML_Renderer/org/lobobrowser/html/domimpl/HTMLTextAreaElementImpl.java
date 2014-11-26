@@ -24,6 +24,8 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.FormInput;
+import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.w3c.HTMLTextAreaElement;
 import org.lobobrowser.html.w3c.ValidityState;
@@ -36,7 +38,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 	}
 
 	public HTMLTextAreaElementImpl() {
-		super("TEXTAREA");
+		super(HtmlProperties.TEXTAREA);
 	}
 
 	protected FormInput[] getFormInputs() {
@@ -102,61 +104,63 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 
 	@Override
 	public boolean getAutofocus() {
-		// TODO Auto-generated method stub
-		return false;
+		String autofocus = this.getAttribute(HtmlAttributeProperties.AUTOFOCUS);
+		return HtmlAttributeProperties.AUTOFOCUS.equalsIgnoreCase(autofocus);
 	}
 
 	@Override
 	public void setAutofocus(boolean autofocus) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.AUTOFOCUS, autofocus ? HtmlAttributeProperties.AUTOFOCUS : null);
 		
 	}
 
 	@Override
 	public int getMaxLength() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.MAXLENGTH));
+		} catch (Exception thrown) {
+			this.warn("getMaxLength(): Unable to parse size attribute in " + this + ".", thrown);
+			return 0;
+		}
 	}
 
 	@Override
 	public void setMaxLength(int maxLength) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.MAXLENGTH, String.valueOf(maxLength));
 		
 	}
 
 	@Override
 	public String getPlaceholder() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.PLACEHOLDER);
 	}
 
 	@Override
 	public void setPlaceholder(String placeholder) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.PLACEHOLDER,placeholder);
 		
 	}
 
 	@Override
 	public boolean getRequired() {
-		// TODO Auto-generated method stub
-		return false;
+		String required = this.getAttribute(HtmlAttributeProperties.REQUIRED);
+		return HtmlAttributeProperties.REQUIRED.equalsIgnoreCase(required);
 	}
 
 	@Override
 	public void setRequired(boolean required) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.REQUIRED, required ? HtmlAttributeProperties.REQUIRED : null);
 		
 	}
 
 	@Override
 	public String getWrap() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.WRAP);
 	}
 
 	@Override
 	public void setWrap(String wrap) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.WRAP,wrap);
 		
 	}
 

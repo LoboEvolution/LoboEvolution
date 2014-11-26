@@ -73,13 +73,14 @@ public class HTMLOListElementImpl extends HTMLAbstractUIElement implements
 
 	@Override
 	public boolean getReversed() {
-		// TODO Auto-generated method stub
-		return false;
+		String reversed = this.getAttribute(HtmlAttributeProperties.RESERVED);
+		return HtmlAttributeProperties.RESERVED.equalsIgnoreCase(reversed);
 	}
 
 	@Override
 	public void setReversed(boolean reversed) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.RESERVED, reversed ? HtmlAttributeProperties.RESERVED : null);
+
 		
 	}
 }

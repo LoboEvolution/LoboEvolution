@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLAudioElement;
 import org.lobobrowser.html.w3c.MediaError;
 import org.lobobrowser.html.w3c.TimeRanges;
@@ -40,13 +41,12 @@ public class HTMLAudioElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public String getSrc() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
 
 	@Override
 	public void setSrc(String src) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.SRC,src);
 		
 	}
 
@@ -64,13 +64,12 @@ public class HTMLAudioElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public String getPreload() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.PRELOAD);
 	}
 
 	@Override
 	public void setPreload(String preload) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.PRELOAD, preload);
 		
 	}
 
@@ -178,25 +177,25 @@ public class HTMLAudioElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public boolean getAutoplay() {
-		// TODO Auto-generated method stub
-		return false;
+		String autoplay = this.getAttribute(HtmlAttributeProperties.AUTOPLAY);
+		return HtmlAttributeProperties.AUTOPLAY.equalsIgnoreCase(autoplay);
 	}
 
 	@Override
 	public void setAutoplay(boolean autoplay) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.AUTOPLAY, autoplay ? HtmlAttributeProperties.AUTOPLAY : null);
 		
 	}
 
 	@Override
 	public boolean getLoop() {
-		// TODO Auto-generated method stub
-		return false;
+		String loop = this.getAttribute(HtmlAttributeProperties.LOOP);
+		return HtmlAttributeProperties.LOOP.equalsIgnoreCase(loop);
 	}
 
 	@Override
 	public void setLoop(boolean loop) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.LOOP, loop ? HtmlAttributeProperties.LOOP : null);
 		
 	}
 
@@ -214,13 +213,13 @@ public class HTMLAudioElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public boolean getControls() {
-		// TODO Auto-generated method stub
-		return false;
+		String controls = this.getAttribute(HtmlAttributeProperties.CONTROLS);
+		return HtmlAttributeProperties.CONTROLS.equalsIgnoreCase(controls);
 	}
 
 	@Override
 	public void setControls(boolean controls) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.CONTROLS, controls ? HtmlAttributeProperties.CONTROLS : null);
 		
 	}
 
@@ -238,13 +237,13 @@ public class HTMLAudioElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public boolean getMuted() {
-		// TODO Auto-generated method stub
-		return false;
+		String muted = this.getAttribute(HtmlAttributeProperties.MUTED);
+		return HtmlAttributeProperties.MUTED.equalsIgnoreCase(muted);
 	}
 
 	@Override
 	public void setMuted(boolean muted) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.MUTED, muted ? HtmlAttributeProperties.MUTED : null);
 		
 	}
 

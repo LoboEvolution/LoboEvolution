@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLFormElement;
 import org.lobobrowser.html.w3c.HTMLKeygenElement;
 import org.lobobrowser.html.w3c.ValidityState;
@@ -30,37 +31,33 @@ public class HTMLKeygenElementImpl extends HTMLElementImpl implements
 
 	public HTMLKeygenElementImpl(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean getAutofocus() {
-		// TODO Auto-generated method stub
-		return false;
+		String auto = this.getAttribute(HtmlAttributeProperties.AUTOFOCUS);
+		return HtmlAttributeProperties.AUTOFOCUS.equalsIgnoreCase(auto);
 	}
 
 	@Override
 	public void setAutofocus(boolean autofocus) {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute(HtmlAttributeProperties.AUTOFOCUS, autofocus ? HtmlAttributeProperties.AUTOFOCUS : null);		
 	}
 
 	@Override
 	public String getChallenge() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.CHALLENGE);
 	}
 
 	@Override
 	public void setChallenge(String challenge) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.CHALLENGE, challenge);
 		
 	}
 
 	@Override
 	public void setDisabled(boolean disabled) {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute(HtmlAttributeProperties.DISABLE, disabled ? HtmlAttributeProperties.DISABLE : null);		
 	}
 
 	@Override
@@ -71,25 +68,23 @@ public class HTMLKeygenElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public String getKeytype() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.KEYTYPE);
 	}
 
 	@Override
 	public void setKeytype(String keytype) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.KEYTYPE,keytype);
 		
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.NAME);
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.NAME,name);
 		
 	}
 

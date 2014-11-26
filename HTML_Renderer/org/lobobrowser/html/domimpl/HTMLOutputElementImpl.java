@@ -31,7 +31,6 @@ public class HTMLOutputElementImpl extends HTMLElementImpl implements
 
 	public HTMLOutputElementImpl(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

@@ -146,13 +146,13 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public boolean getScoped() {
-		// TODO Auto-generated method stub
-		return false;
+		String scoped = this.getAttribute(HtmlAttributeProperties.SCOPED);
+		return HtmlAttributeProperties.SCOPED.equalsIgnoreCase(scoped);
 	}
 
 	@Override
 	public void setScoped(boolean scoped) {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute(HtmlAttributeProperties.SCOPED, scoped ? HtmlAttributeProperties.SCOPED : null);
 	}
+	
 }

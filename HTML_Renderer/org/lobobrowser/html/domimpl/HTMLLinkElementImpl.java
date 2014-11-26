@@ -330,7 +330,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 
 	@Override
 	public void setSizes(String sizes) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.SIZES, sizes);
 		
 	}
 }

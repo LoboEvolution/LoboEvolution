@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLSourceElement;
 
 
@@ -32,37 +33,34 @@ public class HTMLSourceElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public String getSrc() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
 
 	@Override
 	public void setSrc(String src) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.SRC,src);
 		
 	}
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
 	@Override
 	public void setType(String type) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.TYPE,type);
 		
 	}
 
 	@Override
 	public String getMedia() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.MEDIA);
 	}
 
 	@Override
 	public void setMedia(String media) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.MEDIA,media);
 		
 	}
 
