@@ -25,10 +25,10 @@ package org.lobobrowser.html.parser;
 
 import java.util.Set;
 
-class ElementInfo {
+public class ElementInfo {
 	public final int endElementType;
 	public final boolean childElementOk;
-	public final Set stopTags;
+	public final Set<String> stopTags;
 	public final boolean noScriptElement;
 	public final boolean decodeEntities;
 
@@ -52,7 +52,7 @@ class ElementInfo {
 	 * @param ok
 	 * @param type
 	 */
-	public ElementInfo(boolean ok, int type, Set stopTags) {
+	public ElementInfo(boolean ok, int type, Set<String> stopTags) {
 		this.childElementOk = ok;
 		this.endElementType = type;
 		this.stopTags = stopTags;
@@ -60,7 +60,7 @@ class ElementInfo {
 		this.decodeEntities = true;
 	}
 
-	public ElementInfo(boolean ok, int type, Set stopTags,
+	public ElementInfo(boolean ok, int type, Set<String> stopTags,
 			boolean noScriptElement) {
 		this.childElementOk = ok;
 		this.endElementType = type;

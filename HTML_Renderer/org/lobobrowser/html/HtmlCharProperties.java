@@ -1,0 +1,283 @@
+/*
+    GNU LESSER GENERAL PUBLIC LICENSE
+    Copyright (C) 2006 The XAMJ Project
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net
+*/
+package org.lobobrowser.html;
+
+public interface HtmlCharProperties {
+	
+	public final String AMP = "amp";
+	public final String LT = "lt";
+	public final String GT = "gt";
+	public final String QUOT = "quot";
+	public final String NBSP = "nbsp";
+	public final String LSQUO = "lsquo";
+	public final String RSQUO = "rsquo";
+	public final String FRASL = "frasl";
+	public final String NDASH = "ndash";
+	public final String MDASH = "mdash";
+	public final String IEXCL = "iexcl";
+	public final String CENT = "cent";
+	public final String POUND = "pound";
+	public final String CURREN = "curren";
+	public final String YEN = "yen";
+	public final String BRVBAR = "brvbar";
+	public final String BRKBAR = "brkbar";
+	public final String SECT = "sect";
+	public final String UML = "uml";
+	public final String DIE = "die";
+	public final String COPY = "copy";
+	public final String ORDF = "ordf";
+	public final String LAQUO = "laquo";
+	public final String NOT = "not";
+	public final String SHY = "shy";
+	public final String REG = "reg";
+	public final String MACR = "macr";
+	public final String HIBAR = "hibar";
+	public final String DEG = "deg";
+	public final String PLUSMN = "plusmn";
+	public final String SUP2 = "sup2";
+	public final String SUP3 = "sup3";
+	public final String ACUTE = "acute";
+	public final String MICRO = "micro";
+	public final String PARA = "para";
+	public final String MIDDOT = "middot";
+	public final String CEDIL = "cedil";
+	public final String SUP1 = "sup1";
+	public final String ORDM = "ordm";
+	public final String RAQUO = "raquo";
+	public final String FRAC14 = "frac14";
+	public final String FRAC12 = "frac12";
+	public final String FRAC34 = "frac34";
+	public final String IQUEST = "iquest";
+	public final String THORN2 = "THORN";
+	public final String SZLIG = "szlig";
+	public final String AGRAVE = "agrave";
+	public final String AACUTE = "aacute";
+	public final String ACIRC = "acirc";
+	public final String ATILDE = "atilde";
+	public final String AUML = "auml";
+	public final String ARING = "aring";
+	public final String AELIG = "aelig";
+	public final String CCEDIL = "ccedil";
+	public final String EGRAVE = "egrave";
+	public final String EACUTE = "eacute";
+	public final String ECIRC = "ecirc";
+	public final String EUML = "euml";
+	public final String IGRAVE = "igrave";
+	public final String IACUTE = "iacute";
+	public final String ICIRC = "icirc";
+	public final String IUML = "iuml";
+	public final String ETH = "eth";
+	public final String NTILDE = "ntilde";
+	public final String OGRAVE = "ograve";
+	public final String OACUTE = "oacute";
+	public final String OCIRC = "ocirc";
+	public final String OTILDE = "otilde";
+	public final String OUML = "ouml";
+	public final String DIVIDE = "divide";
+	public final String OSLASH = "oslash";
+	public final String UGRAVE = "ugrave";
+	public final String UACUTE = "uacute";
+	public final String UCIRC = "ucirc";
+	public final String UUML = "uuml";
+	public final String YACUTE = "yacute";
+	public final String THORN = "thorn";
+	public final String YUML = "yuml";
+	public final String CHI2 = "Chi";
+	public final String PSI2 = "Psi";
+	public final String OMEGA2 = "Omega";
+	public final String ALPHA = "alpha";
+	public final String BETA = "beta";
+	public final String GAMMA = "gamma";
+	public final String DELTA = "delta";
+	public final String EPSILON = "epsilon";
+	public final String ZETA = "zeta";
+	public final String ETA = "eta";
+	public final String THETA = "theta";
+	public final String IOTA = "iota";
+	public final String KAPPA = "kappa";
+	public final String LAMBDA = "lambda";
+	public final String MU = "mu";
+	public final String NU = "nu";
+	public final String XI = "xi";
+	public final String OMICRON = "omicron";
+	public final String PI = "pi";
+	public final String RHO = "rho";
+	public final String SIGMA = "sigma";
+	public final String SIGMAF = "sigmaf";
+	public final String TAU = "tau";
+	public final String UPSILON = "upsilon";
+	public final String PHI = "phi";
+	public final String CHI = "chi";
+	public final String PSI = "psi";
+	public final String OMEGA = "omega";
+	public final String THETASYM = "thetasym";
+	public final String UPSIH = "upsih";
+	public final String PIV = "piv";
+	public final String FORALL = "forall";
+	public final String PART = "part";
+	public final String EXIST = "exist";
+	public final String EMPTY = "empty";
+	public final String NABLA = "nabla";
+	public final String ISIN = "isin";
+	public final String NOTIN = "notin";
+	public final String NI = "ni";
+	public final String PROD = "prod";
+	public final String SUM = "sum";
+	public final String MINUS = "minus";
+	public final String LOWAST = "lowast";
+	public final String RADIC = "radic";
+	public final String PROP = "prop";
+	public final String INFIN = "infin";
+	public final String ANG = "ang";
+	public final String AND = "and";
+	public final String OR = "or";
+	public final String CAP = "cap";
+	public final String CUP = "cup";
+	public final String INT = "int";
+	public final String THERE4 = "there4";
+	public final String SIM = "sim";
+	public final String CONG = "cong";
+	public final String ASYMP = "asymp";
+	public final String NE = "ne";
+	public final String EQUIV = "equiv";
+	public final String LE = "le";
+	public final String GE = "ge";
+	public final String SUB = "sub";
+	public final String SUP = "sup";
+	public final String NSUB = "nsub";
+	public final String SUBE = "sube";
+	public final String SUPE = "supe";
+	public final String OPLUS = "oplus";
+	public final String OTIMES = "otimes";
+	public final String PERP = "perp";
+	public final String SDOT = "sdot";
+	public final String LOZ = "loz";
+	public final String LCEIL = "lceil";
+	public final String RCEIL = "rceil";
+	public final String LFLOOR = "lfloor";
+	public final String RFLOOR = "rfloor";
+	public final String LANG = "lang";
+	public final String RANG = "rang";
+	public final String LARR = "larr";
+	public final String UARR = "uarr";
+	public final String RARR = "rarr";
+	public final String DARR = "darr";
+	public final String HARR = "harr";
+	public final String CRARR = "crarr";
+	public final String BULL = "bull";
+	public final String PRIME = "prime";
+	public final String OLINE = "oline";
+	public final String WEIERP = "weierp";
+	public final String IMAGE = "image";
+	public final String REAL = "real";
+	public final String TRADE = "trade";
+	public final String EURO = "euro";
+	public final String ALEFSYM = "alefsym";
+	public final String SPADES = "spades";
+	public final String CLUBS = "clubs";
+	public final String HEARTS = "hearts";
+	public final String DIAMS = "diams";
+	public final String OELIG = "oelig";
+	public final String SCARON = "scaron";
+	public final String FNOF = "fnof";
+	public final String ENSP = "ensp";
+	public final String EMSP = "emsp";
+	public final String THINSP = "thinsp";
+	public final String ZWNJ = "zwnj";
+	public final String ZWJ = "zwj";
+	public final String LRM = "lrm";
+	public final String RLM = "rlm";
+	public final String SBQUO = "sbquo";
+	public final String LDQUO = "ldquo";
+	public final String RDQUO = "rdquo";
+	public final String BDQUO = "bdquo";
+	public final String DAGGER = "dagger";
+	public final String HELLIP = "hellip";
+	public final String PERMIL = "permil";
+	public final String LSAQUO = "lsaquo";
+	public final String RSAQUO = "rsaquo";
+	public final String CIRC = "circ";
+	public final String TILDE = "tilde";
+	
+	
+	public final String AGRAVE2 = "Agrave";
+	public final String AACUTE2 = "Aacute";
+	public final String ACIRC2 = "Acirc";
+	public final String ATILDE2 = "Atilde";
+	public final String AUML2 = "Auml";
+	public final String ARING2 = "Aring";
+	public final String AELIG2 = "AElig";
+	public final String CCEDIL2 = "Ccedil";
+	public final String DAGGER2 = "Dagger";
+	public final String EGRAVE2 = "Egrave";
+	public final String EACUTE2 = "Eacute";
+	public final String ECIRC2 = "Ecirc";
+	public final String EUML2 = "Euml";
+	public final String IGRAVE2 = "Igrave";
+	public final String IACUTE2 = "Iacute";
+	public final String ICIRC2 = "Icirc";
+	public final String IUML2 = "Iuml";
+	public final String ETH2 = "ETH";
+	public final String NTILDE2 = "Ntilde";
+	public final String OGRAVE2 = "Ograve";
+	public final String OACUTE2 = "Oacute";
+	public final String OCIRC2 = "Ocirc";
+	public final String OTILDE2 = "Otilde";
+	public final String OUML2 = "Ouml";
+	public final String OELIG2 = "OElig";
+	public final String TIMES = "times";
+	public final String OSLASH2 = "Oslash";
+	public final String UGRAVE2 = "Ugrave";
+	public final String UACUTE2 = "Uacute";
+	public final String UCIRC2 = "Ucirc";
+	public final String UUML2 = "Uuml";
+	public final String YACUTE2 = "Yacute";
+	public final String SCARON2 = "Scaron";
+	public final String LARR2 = "lArr";
+	public final String UARR2 = "uArr";
+	public final String RARR2 = "rArr";
+	public final String DARR2 = "dArr";
+	public final String HARR2 = "hArr";
+	public final String PRIME2 = "Prime";
+	public final String ALPHA2 = "Alpha";
+	public final String BETA2 = "Beta";
+	public final String GAMMA2 = "Gamma";
+	public final String DELTA2 = "Delta";
+	public final String EPSILON2 = "Epsilon";
+	public final String ZETA2 = "Zeta";
+	public final String ETA2 = "Eta";
+	public final String THETA2 = "Theta";
+	public final String IOTA2 = "Iota";
+	public final String KAPPA2 = "Kappa";
+	public final String LAMBDA2 = "Lambda";
+	public final String MU2 = "Mu";
+	public final String NU2 = "Nu";
+	public final String XI2 = "Xi";
+	public final String OMICRON2 = "Omicron";
+	public final String PI2 = "Pi";
+	public final String RHO2 = "Rho";
+	public final String SIGMA2 = "Sigma";
+	public final String SIGMAF2 = "Sigmaf";
+	public final String TAU2 = "Tau";
+	public final String UPSILON2 = "Upsilon";
+	public final String PHI2 = "Phi";
+
+}

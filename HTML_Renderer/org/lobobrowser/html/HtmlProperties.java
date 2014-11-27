@@ -26,6 +26,7 @@ public interface HtmlProperties {
 	public final String APPLET = "APPLET";
 	public final String ANCHOR = "ANCHOR";
 	public final String ARTICLE = "ARTICLE";
+	public final String AUDIO = "AUDIO";
 	public final String B = "B";
 	public final String BLOCKQUOTE = "BLOCKQUOTE";
 	public final String BASE = "BASE";
@@ -37,6 +38,7 @@ public interface HtmlProperties {
 	public final String CENTER = "CENTER";
 	public final String CAPTION = "CAPTION";
 	public final String CANVAS = "CANVAS";
+	public final String COMMAND = "COMMAND";
 	public final String CITE = "CITE";
 	public final String CODE = "CODE";
 	public final String DIV = "DIV";
@@ -44,6 +46,7 @@ public interface HtmlProperties {
 	public final String DL = "DL";
 	public final String DT = "DT";
 	public final String DFN = "DFN";
+	public final String DETAILS = "DETAILS";
 	public final String EM = "EM";
 	public final String EMBED = "EMBED";
 	public final String FOOTER = "FOOTER";
@@ -67,19 +70,25 @@ public interface HtmlProperties {
 	public final String IMG = "IMG";
 	public final String LINK = "LINK";
 	public final String LI = "LI";
+	public final String KEYGEN = "KEYGEN";
+	public final String METER = "METER";
+	public final String MARQUEE = "MARQUEE";
 	public final String META = "META";
 	public final String NAV = "NAV";
 	public final String NOSCRIPT = "NOSCRIPT";
 	public final String OPTION = "OPTION";
 	public final String OBJECT = "OBJECT";
+	public final String OUTPUT = "OUTPUT";
 	public final String OL = "OL";
 	public final String KBD = "KBD";
 	public final String P = "P";
 	public final String PRE = "PRE";
+	public final String PROGRESS = "PROGRESS";
 	public final String S = "S";
 	public final String STYLE = "STYLE";
 	public final String STRIKE = "STRIKE";
 	public final String SECTION = "SECTION";
+	public final String SOURCE = "SOURCE";
 	public final String SAMP = "SAMP";
 	public final String SPAN = "SPAN";
 	public final String SCRIPT = "SCRIPT";
@@ -97,8 +106,10 @@ public interface HtmlProperties {
 	public final String TR = "TR";
 	public final String TBODY = "TBODY";
 	public final String TT = "TT";
+	public final String TIME = "TIME";
 	public final String UL = "UL";
 	public final String U = "U";
 	public final String VAR = "VAR";
+	public final String VIDEO = "VIDEO";
 
 }
