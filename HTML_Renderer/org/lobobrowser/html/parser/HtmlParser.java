@@ -39,8 +39,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.html.HtmlMapping;
 import org.lobobrowser.html.HtmlMappingChar;
-import org.lobobrowser.html.HtmlMappingTag;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.io.WritableLineReader;
 import org.w3c.dom.DOMException;
@@ -76,7 +76,7 @@ public class HtmlParser {
 
 	static {
 		ENTITIES = HtmlMappingChar.mappingChar();
-		ELEMENT_INFOS = HtmlMappingTag.mappingTag();
+		ELEMENT_INFOS = HtmlMapping.mappingTag();
 	}
 
 	/**
