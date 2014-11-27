@@ -20,14 +20,20 @@
 */
 package org.lobobrowser.html.domfilter;
 
-import org.lobobrowser.html.HtmlProperties;
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.NodeFilter;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-public class AnchorFilter implements NodeFilter {
+public class ClassNameFilter  implements NodeFilter {
+	private final String _class;
+
+	public ClassNameFilter(String _class) {
+		this._class = _class;
+	}
+
 	public boolean accept(Node node) {
-		String nodeName = node.getNodeName();
-		return HtmlProperties.A.equalsIgnoreCase(nodeName)
-				|| HtmlProperties.ANCHOR.equalsIgnoreCase(nodeName);
+		return (node instanceof Element)
+				&& this._class.equals(((Element) node).getAttribute(HtmlAttributeProperties.CLASS));
 	}
 }

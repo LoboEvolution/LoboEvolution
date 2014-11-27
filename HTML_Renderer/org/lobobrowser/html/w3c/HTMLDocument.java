@@ -288,22 +288,12 @@ public interface HTMLDocument extends Document {
 	public String getLastModified();
 
 	public String getCompatMode();
-
-	public String getCharset();
-
-	public void setCharset(String charset);
-
+	
 	public String getCharacterSet();
 
 	public String getDefaultCharset();
 
 	public String getReadyState();
-
-	public Object getElement(String name);
-
-	public String getDir();
-
-	public void setDir(String dir);
 
 	public HTMLHeadElement getHead();
 
@@ -316,8 +306,6 @@ public interface HTMLDocument extends Document {
 	public NodeList getElementsByClassName(String classNames);
 
 	public String getInnerHTML();
-
-	public void setInnerHTML(String innerHTML);
 
 	public HTMLDocument open(String type);
 

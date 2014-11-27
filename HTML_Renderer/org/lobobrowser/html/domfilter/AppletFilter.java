@@ -20,12 +20,12 @@
 */
 package org.lobobrowser.html.domfilter;
 
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.NodeFilter;
 import org.w3c.dom.Node;
 
 public class AppletFilter implements NodeFilter {
 	public boolean accept(Node node) {
-		// TODO: "OBJECT" elements that are applets too.
-		return "APPLET".equalsIgnoreCase(node.getNodeName());
+		return HtmlProperties.APPLET.equalsIgnoreCase(node.getNodeName());
 	}
 } 

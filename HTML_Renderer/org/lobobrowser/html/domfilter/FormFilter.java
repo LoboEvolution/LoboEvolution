@@ -20,12 +20,13 @@
 */
 package org.lobobrowser.html.domfilter;
 
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.NodeFilter;
 import org.w3c.dom.Node;
 
 public class FormFilter implements NodeFilter {
 	public boolean accept(Node node) {
 		String nodeName = node.getNodeName();
-		return "FORM".equalsIgnoreCase(nodeName);
+		return HtmlProperties.FORM.equalsIgnoreCase(nodeName);
 	}
 }

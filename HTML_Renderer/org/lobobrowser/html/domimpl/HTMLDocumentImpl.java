@@ -29,6 +29,7 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
@@ -63,6 +64,7 @@ import org.lobobrowser.html.dombl.NodeVisitor;
 import org.lobobrowser.html.dombl.TextImpl;
 import org.lobobrowser.html.domfilter.AnchorFilter;
 import org.lobobrowser.html.domfilter.AppletFilter;
+import org.lobobrowser.html.domfilter.ClassNameFilter;
 import org.lobobrowser.html.domfilter.ElementFilter;
 import org.lobobrowser.html.domfilter.ElementNameFilter;
 import org.lobobrowser.html.domfilter.FormFilter;
@@ -129,6 +131,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	private WritableLineReader reader;
 	private DocumentType doctype;
 	private HTMLElement body;
+	private HTMLHeadElement head;
 	private HTMLCollection images;
 	private HTMLCollection applets;
 	private HTMLCollection links;
@@ -1317,7 +1320,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	}
 
 	public URL getDocumentURL() {
-		// TODO: Security considerations?
 		return this.documentURL;
 	}
 
@@ -1337,32 +1339,28 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	}
 
 	public void setDocumentURI(String documentURI) {
-		// TODO: Security considerations? Chaging documentURL?
 		this.documentURI = documentURI;
 	}
 
 	@Override
 	public String getLastModified() {
-		// TODO Auto-generated method stub
-		return null;
+
+		String result = "";
+		try {
+			URL docURL = new java.net.URL(documentURI);
+			URLConnection connection = docURL.openConnection();
+			result = connection.getHeaderField("Last-Modified");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 
 	@Override
 	public String getCompatMode() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public String getCharset() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setCharset(String charset) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -1383,27 +1381,9 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		return null;
 	}
 
-	@Override
-	public Object getElement(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getDir() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setDir(String dir) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public HTMLHeadElement getHead() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -1427,14 +1407,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 
 	@Override
 	public NodeList getElementsByClassName(String classNames) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setInnerHTML(String innerHTML) {
-		// TODO Auto-generated method stub
-		
+		return this.getNodeList(new ClassNameFilter(classNames));
 	}
 
 	@Override
