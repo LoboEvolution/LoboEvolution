@@ -41,6 +41,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.ReadyStateChangeListener;
@@ -65,12 +67,17 @@ import org.lobobrowser.html.dombl.TextImpl;
 import org.lobobrowser.html.domfilter.AnchorFilter;
 import org.lobobrowser.html.domfilter.AppletFilter;
 import org.lobobrowser.html.domfilter.ClassNameFilter;
+import org.lobobrowser.html.domfilter.CommandFilter;
+import org.lobobrowser.html.domfilter.ElementAttributeFilter;
 import org.lobobrowser.html.domfilter.ElementFilter;
 import org.lobobrowser.html.domfilter.ElementNameFilter;
+import org.lobobrowser.html.domfilter.EmbedFilter;
 import org.lobobrowser.html.domfilter.FormFilter;
 import org.lobobrowser.html.domfilter.FrameFilter;
 import org.lobobrowser.html.domfilter.ImageFilter;
 import org.lobobrowser.html.domfilter.LinkFilter;
+import org.lobobrowser.html.domfilter.PluginsFilter;
+import org.lobobrowser.html.domfilter.ScriptFilter;
 import org.lobobrowser.html.domfilter.TagNameFilter;
 import org.lobobrowser.html.io.WritableLineReader;
 import org.lobobrowser.html.js.Executor;
@@ -114,7 +121,8 @@ import org.xml.sax.SAXException;
 /**
  * Implementation of the W3C <code>HTMLDocument</code> interface.
  */
-public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, DocumentView {
+public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
+		DocumentView {
 	private static final Logger logger = Logger.getLogger(HTMLDocumentImpl.class.getName());
 	private final ElementFactory factory;
 	private final HtmlRendererContext rcontext;
@@ -126,23 +134,26 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	private final Map<String, ImageInfo> imageInfos = new HashMap<String, ImageInfo>(4);
 	private final ArrayList<DocumentNotificationListener> documentNotificationListeners = new ArrayList<DocumentNotificationListener>(1);
 	private final ImageEvent BLANK_IMAGE_EVENT = new ImageEvent(this, null);
-	
+
 	private java.net.URL documentURL;
 	private WritableLineReader reader;
 	private DocumentType doctype;
 	private HTMLElement body;
-	private HTMLHeadElement head;
 	private HTMLCollection images;
 	private HTMLCollection applets;
 	private HTMLCollection links;
 	private HTMLCollection forms;
 	private HTMLCollection anchors;
 	private HTMLCollection frames;
+	private HTMLCollection embeds;
+	private HTMLCollection scripts;
+	private HTMLCollection plugins;
+	private HTMLCollection commands;
 	private StyleSheetAggregator styleSheetAggregator = null;
 	private DOMConfiguration domConfig;
 	private DOMImplementation domImplementation;
 	private Function onloadHandler;
-	
+
 	private Set<?> locales;
 	private volatile String baseURI;
 	private String defaultTarget;
@@ -204,7 +215,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		// Set up Javascript scope
 		this.setUserData(Executor.SCOPE_KEY, window.getWindowScope(), null);
 	}
-	
+
 	public String getCookie() {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
@@ -386,7 +397,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	public NodeList getElementsByName(String elementName) {
 		return this.getNodeList(new ElementNameFilter(elementName));
 	}
-	
+
 	public Element getDocumentElement() {
 		synchronized (this.getTreeLock()) {
 			ArrayList<?> nl = this.nodeList;
@@ -498,8 +509,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		return element;
 	}
 
-	
-
 	public Element namedItem(String name) {
 		Element element;
 		synchronized (this) {
@@ -519,7 +528,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 			this.elementsByName.remove(name);
 		}
 	}
-	
+
 	public Node adoptNode(Node source) throws DOMException {
 		if (source instanceof NodeImpl) {
 			NodeImpl node = (NodeImpl) source;
@@ -555,7 +564,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 			throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No renaming");
 	}
-	
 
 	/*
 	 * (non-Javadoc)
@@ -657,8 +665,8 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	public String getURL() {
 		return this.documentURI;
 	}
-	
-  final void addStyleSheet(CSSStyleSheet ss) {
+
+	final void addStyleSheet(CSSStyleSheet ss) {
 		synchronized (this.getTreeLock()) {
 			this.styleSheets.add(ss);
 			this.styleSheetAggregator = null;
@@ -722,9 +730,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 			return ssa;
 		}
 	}
-	
-
-	
 
 	/**
 	 * Adds a document notification listener, which is informed about changes to
@@ -789,7 +794,8 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		// been changed.
 		for (int i = 0; i < size; i++) {
 			try {
-				DocumentNotificationListener dnl = (DocumentNotificationListener) listenersList.get(i);
+				DocumentNotificationListener dnl = (DocumentNotificationListener) listenersList
+						.get(i);
 				dnl.lookInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
 				// ignore
@@ -1052,7 +1058,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 			imageListener.imageLoaded(event);
 		}
 	}
-	
+
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		Function onloadHandler = this.onloadHandler;
 		if (onloadHandler != null) {
@@ -1098,7 +1104,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 			}
 		}
 	}
-	
+
 	@Override
 	public HTMLElement getBody() {
 		synchronized (this) {
@@ -1112,7 +1118,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 			this.body = body;
 		}
 	}
-	
+
 	public String getReferrer() {
 		return this.referrer;
 	}
@@ -1195,7 +1201,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 			return this.anchors;
 		}
 	}
-	
+
 	public DocumentType getDoctype() {
 		return this.doctype;
 	}
@@ -1203,7 +1209,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	public void setDoctype(DocumentType doctype) {
 		this.doctype = doctype;
 	}
-	
+
 	public String getInputEncoding() {
 		return this.inputEncoding;
 	}
@@ -1211,7 +1217,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	public String getXmlEncoding() {
 		return this.xmlEncoding;
 	}
-	
+
 	public boolean getXmlStandalone() {
 		return this.xmlStandalone;
 	}
@@ -1220,8 +1226,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		this.xmlStandalone = xmlStandalone;
 	}
 
-	
-
 	public String getXmlVersion() {
 		return this.xmlVersion;
 	}
@@ -1229,8 +1233,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	public void setXmlVersion(String xmlVersion) throws DOMException {
 		this.xmlVersion = xmlVersion;
 	}
-
-	
 
 	public boolean getStrictErrorChecking() {
 		return this.strictErrorChecking;
@@ -1243,7 +1245,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	public String getDocumentURI() {
 		return this.documentURI;
 	}
-	
+
 	public Function getOnloadHandler() {
 		return onloadHandler;
 	}
@@ -1251,7 +1253,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	public void setOnloadHandler(Function onloadHandler) {
 		this.onloadHandler = onloadHandler;
 	}
-	
+
 	/**
 	 * Gets an <i>immutable</i> set of locales previously set for this document.
 	 */
@@ -1275,7 +1277,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		URL docUrl = this.documentURL;
 		return docUrl == null ? null : docUrl.getHost();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -1289,7 +1291,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	public void setBaseURI(String value) {
 		this.baseURI = value;
 	}
-
 
 	public String getDefaultTarget() {
 		return this.defaultTarget;
@@ -1310,7 +1311,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	public void setTextContent(String textContent) throws DOMException {
 		// NOP, per spec
 	}
-	
+
 	public String getTitle() {
 		return this.title;
 	}
@@ -1381,7 +1382,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		return null;
 	}
 
-
 	@Override
 	public HTMLHeadElement getHead() {
 		return null;
@@ -1389,20 +1389,35 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 
 	@Override
 	public HTMLCollection getEmbeds() {
-		// TODO Auto-generated method stub
-		return null;
+		synchronized (this) {
+			if (this.embeds == null) {
+				this.embeds = new DescendentHTMLCollection(this,
+						new EmbedFilter(), this.getTreeLock());
+			}
+			return this.embeds;
+		}
 	}
 
 	@Override
 	public HTMLCollection getPlugins() {
-		// TODO Auto-generated method stub
-		return null;
+		synchronized (this) {
+			if (this.plugins == null) {
+				this.plugins = new DescendentHTMLCollection(this,
+						new PluginsFilter(), this.getTreeLock());
+			}
+			return this.plugins;
+		}
 	}
 
 	@Override
 	public HTMLCollection getScripts() {
-		// TODO Auto-generated method stub
-		return null;
+		synchronized (this) {
+			if (this.scripts == null) {
+				this.scripts = new DescendentHTMLCollection(this,
+						new ScriptFilter(), this.getTreeLock());
+			}
+			return this.scripts;
+		}
 	}
 
 	@Override
@@ -1425,13 +1440,13 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	@Override
 	public void write(String... text) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void writeln(String... text) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -1449,7 +1464,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	@Override
 	public void setDesignMode(String designMode) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -1502,8 +1517,13 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 
 	@Override
 	public HTMLCollection getCommands() {
-		// TODO Auto-generated method stub
-		return null;
+		synchronized (this) {
+			if (this.commands == null) {
+				this.commands = new DescendentHTMLCollection(this,
+						new CommandFilter(), this.getTreeLock());
+			}
+			return this.commands;
+		}
 	}
 
 	@Override
@@ -1515,12 +1535,15 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	@Override
 	public void setFgColor(String fgColor) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public String getBgColor() {
-		return null;
+		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList,
+				HtmlAttributeProperties.BGCOLOR);
+		return attr.getAttribute();
 	}
 
 	@Override
@@ -1530,44 +1553,49 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 
 	@Override
 	public String getLinkColor() {
-		// TODO Auto-generated method stub
-		return null;
+		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList,
+				HtmlAttributeProperties.LINK);
+		return attr.getAttribute();
 	}
 
 	@Override
 	public void setLinkColor(String linkColor) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public String getVlinkColor() {
-		// TODO Auto-generated method stub
-		return null;
+		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList,
+				HtmlAttributeProperties.VLINK);
+		return attr.getAttribute();
 	}
 
 	@Override
 	public void setVlinkColor(String vlinkColor) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public String getAlinkColor() {
-		// TODO Auto-generated method stub
-		return null;
+		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList,
+				HtmlAttributeProperties.ALINK);
+		return attr.getAttribute();
 	}
 
 	@Override
 	public void setAlinkColor(String alinkColor) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

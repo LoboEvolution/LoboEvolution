@@ -137,8 +137,7 @@ public class ElementImpl extends NodeImpl implements Element {
 		String normalName = this.normalizeAttributeName(name);
 		synchronized (this) {
 			Map<String, String> attributes = this.attributes;
-			return attributes == null ? null : (String) attributes
-					.get(normalName);
+			return attributes == null ? null : (String) attributes.get(normalName);
 		}
 	}
 

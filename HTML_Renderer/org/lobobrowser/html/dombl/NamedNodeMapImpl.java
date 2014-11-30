@@ -48,8 +48,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements
 			String name = (String) entry.getKey();
 			String value = (String) entry.getValue();
 			// TODO: "specified" attributes
-			Attr attr = new AttrImpl(name, value, true, owner,
-					"ID".equals(name));
+			Attr attr = new AttrImpl(name, value, true, owner,"ID".equals(name));
 			this.attributes.put(name, attr);
 			this.attributeList.add(attr);
 		}

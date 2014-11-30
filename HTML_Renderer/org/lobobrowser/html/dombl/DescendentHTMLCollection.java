@@ -39,8 +39,7 @@ import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.util.Nodes;
 import org.w3c.dom.Node;
 
-public class DescendentHTMLCollection extends AbstractScriptableDelegate
-		implements HTMLCollection {
+public class DescendentHTMLCollection extends AbstractScriptableDelegate implements HTMLCollection {
 	private final NodeImpl rootNode;
 	private final NodeFilter nodeFilter;
 	private final Object treeLock;

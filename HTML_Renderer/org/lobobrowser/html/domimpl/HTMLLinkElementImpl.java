@@ -283,14 +283,12 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 				String vlink = body.getVLink();
 				String link = body.getLink();
 				if (vlink != null || link != null) {
-					HtmlRendererContext rcontext = this
-							.getHtmlRendererContext();
+					HtmlRendererContext rcontext = this.getHtmlRendererContext();
 					if (rcontext != null) {
 						boolean visited = rcontext.isVisitedLink(this);
 						String colorText = visited ? vlink : link;
 						if (colorText != null) {
-							return ColorFactory.getInstance().getColor(
-									colorText);
+							return ColorFactory.getInstance().getColor(colorText);
 						}
 					}
 				}
@@ -301,10 +299,8 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		if (this.hasAttribute(HtmlAttributeProperties.HREF)) {
-			prevRenderState = new TextDecorationRenderState(prevRenderState,
-					RenderState.MASK_TEXTDECORATION_UNDERLINE);
-			prevRenderState = new ColorRenderState(prevRenderState,
-					this.getLinkColor());
+			prevRenderState = new TextDecorationRenderState(prevRenderState,RenderState.MASK_TEXTDECORATION_UNDERLINE);
+			prevRenderState = new ColorRenderState(prevRenderState, this.getLinkColor());
 		}
 		return super.createRenderState(prevRenderState);
 	}
