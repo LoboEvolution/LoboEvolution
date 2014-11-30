@@ -71,9 +71,9 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate
 
 	private void ensurePopulatedImpl() {
 		if (this.itemsByName == null) {
-			ArrayList<NodeImpl> descendents = this.rootNode.getDescendents(
+			List<NodeImpl> descendents = this.rootNode.getDescendents(
 					this.nodeFilter, this.nestIntoMatchingNodes);
-			this.itemsByIndex = descendents == null ? Collections.emptyList()
+			this.itemsByIndex = descendents == null ? Collections.<NodeImpl>emptyList()
 					: descendents;
 			int size = descendents == null ? 0 : descendents.size();
 			Map<String, ElementImpl> itemsByName = new HashMap<String, ElementImpl>(

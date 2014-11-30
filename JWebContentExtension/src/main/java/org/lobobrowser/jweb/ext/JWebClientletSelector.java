@@ -24,8 +24,6 @@ import org.lobobrowser.clientlet.Clientlet;
 import org.lobobrowser.clientlet.ClientletRequest;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ClientletSelector;
-import org.lobobrowser.jweb.java.JavaSourceClientlet;
-import org.lobobrowser.jweb.javafx.CompiledJavaFXClientlet;
 import org.lobobrowser.util.Strings;
 
 public class JWebClientletSelector implements ClientletSelector {
@@ -54,39 +52,40 @@ public class JWebClientletSelector implements ClientletSelector {
 	}
 
 	public Clientlet select(ClientletRequest request, ClientletResponse response) {
-		try {
-			if (response
-					.matches("text/x-javafx-source", new String[] { ".fx" })) {
-				this.checkJavaVersionForJWeb("JavaFX 1.0+", JAVAFX_REQ_VERSION);
-				return new CompiledJavaFXClientlet();
-			} else if (response.matches("text/x-java-source",
-					new String[] { ".java" })) {
-				this.checkJavaVersionForJWeb("the Java Compiler API", null);
-				return new JavaSourceClientlet();
-			} else {
-				String mimeType = response.getMimeType();
-				String mimeTypeTL = mimeType == null ? null : mimeType
-						.toLowerCase();
-				if (mimeTypeTL == null || mimeTypeTL.startsWith("text/")
-						|| mimeTypeTL.startsWith("application/x-java")) {
-					// Java files sometimes have text/plain as MIME-Type.
-					String path = response.getResponseURL().getPath();
-					if (path.endsWith(".java")) {
-						this.checkJavaVersionForJWeb("the Java Compiler API",
-								null);
-						return new JavaSourceClientlet();
-					} else if (path.endsWith(".fx")) {
-						this.checkJavaVersionForJWeb("JavaFX 1.0+",
-								JAVAFX_REQ_VERSION);
-						return new CompiledJavaFXClientlet();
-					}
-				}
-			}
+//		try {
 			return null;
-		} catch (InvalidVersionException ve) {
-			return new BadVersionClientlet(ve.getMissingFeature(),
-					ve.getPreferredVersion());
-		}
+//			if (response
+//					.matches("text/x-javafx-source", new String[] { ".fx" })) {
+//				this.checkJavaVersionForJWeb("JavaFX 1.0+", JAVAFX_REQ_VERSION);
+//				return new CompiledJavaFXClientlet();
+//			} else if (response.matches("text/x-java-source",
+//					new String[] { ".java" })) {
+//				this.checkJavaVersionForJWeb("the Java Compiler API", null);
+//				return new JavaSourceClientlet();
+//			} else {
+//				String mimeType = response.getMimeType();
+//				String mimeTypeTL = mimeType == null ? null : mimeType
+//						.toLowerCase();
+//				if (mimeTypeTL == null || mimeTypeTL.startsWith("text/")
+//						|| mimeTypeTL.startsWith("application/x-java")) {
+//					// Java files sometimes have text/plain as MIME-Type.
+//					String path = response.getResponseURL().getPath();
+//					if (path.endsWith(".java")) {
+//						this.checkJavaVersionForJWeb("the Java Compiler API",
+//								null);
+//						return new JavaSourceClientlet();
+//					} else if (path.endsWith(".fx")) {
+//						this.checkJavaVersionForJWeb("JavaFX 1.0+",
+//								JAVAFX_REQ_VERSION);
+//						return new CompiledJavaFXClientlet();
+//					}
+//				}
+//			}
+//			return null;
+//		} catch (InvalidVersionException ve) {
+//			return new BadVersionClientlet(ve.getMissingFeature(),
+//					ve.getPreferredVersion());
+//		}
 	}
 
 	private static class InvalidVersionException extends Exception {
