@@ -32,35 +32,5 @@
       <artifactId>Platform_Core</artifactId>
       <version>${project.version}</version>
     </dependency>
-	<dependency>
-		<groupId>com.javafx</groupId>
-		<artifactId>scenario</artifactId>
-		<version>1.0.1</version>	
-	</dependency>
-	<dependency>
-		<groupId>com.github.loboevolution.javafx</groupId>
-		<artifactId>swing</artifactId>
-		<version>Unknown</version>	
-	</dependency>
-	<dependency>
-		<groupId>com.github.loboevolution.javafx</groupId>
-		<artifactId>gui</artifactId>
-		<version>Unknown</version>	
-	</dependency>
-	<dependency>
-		<groupId>com.github.loboevolution.javafx</groupId>
-		<artifactId>websvc</artifactId>
-		<version>Unknown</version>	
-	</dependency>
-	<dependency>
-		<groupId>com.github.loboevolution.javafx</groupId>
-		<artifactId>c</artifactId>
-		<version>Unknown</version>	
-	</dependency>
-	<dependency>
-		<groupId>com.github.loboevolution.javafx</groupId>
-		<artifactId>rt</artifactId>
-		<version>Unknown</version>	
-	</dependency>				
 	</dependencies>
 </project>
