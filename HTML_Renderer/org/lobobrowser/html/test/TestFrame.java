@@ -55,8 +55,7 @@ import org.lobobrowser.html.gui.SelectionChangeListener;
  * A Swing frame that can be used to test the Cobra HTML rendering engine.
  */
 public class TestFrame extends JFrame {
-	private static final Logger logger = Logger.getLogger(TestFrame.class
-			.getName());
+	private static final Logger logger = Logger.getLogger(TestFrame.class.getName());
 	private final SimpleHtmlRendererContext rcontext;
 	private final JTree tree;
 	private final HtmlPanel htmlPanel;

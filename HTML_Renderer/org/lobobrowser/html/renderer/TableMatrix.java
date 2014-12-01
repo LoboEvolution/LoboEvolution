@@ -34,7 +34,7 @@ import java.util.Map;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.dombl.NodeFilter;
+import org.lobobrowser.html.domfilter.NodeFilter;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCaptionElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;

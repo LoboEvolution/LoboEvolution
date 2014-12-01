@@ -32,9 +32,10 @@ import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
-import org.lobobrowser.html.dombl.NodeFilter;
 import org.lobobrowser.html.dombl.NodeVisitor;
 import org.lobobrowser.html.dombl.StopVisitorException;
+import org.lobobrowser.html.domfilter.InputFilter;
+import org.lobobrowser.html.domfilter.NodeFilter;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLFormElement;
@@ -241,21 +242,10 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 		});
 	}
 
-	static boolean isInput(Node node) {
+	public static boolean isInput(Node node) {
 		String name = node.getNodeName().toLowerCase();
 		return name.equals("input") || name.equals("textarea")
 				|| name.equals("select");
-	}
-
-	private class InputFilter implements NodeFilter {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.xamjwg.html.domimpl.NodeFilter#accept(org.w3c.dom.Node)
-		 */
-		public boolean accept(Node node) {
-			return HTMLFormElementImpl.isInput(node);
-		}
 	}
 
 	@Override

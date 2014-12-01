@@ -32,6 +32,7 @@ import java.util.Map;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ElementImpl;
+import org.lobobrowser.html.domfilter.NodeFilter;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.w3c.HTMLCollection;

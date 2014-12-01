@@ -854,34 +854,6 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
-	// private void applyBackground(BackgroundInfo binfo, String background,
-	// CSSStyleDeclaration declaration) {
-	// String[] tokens = HtmlValues.splitCssValue(background);
-	// boolean hasXPosition = false;
-	// for(int i = 0; i < tokens.length; i++) {
-	// String token = tokens[i];
-	// if(ColorFactory.getInstance().isColor(token)) {
-	// binfo.backgroundColor = ColorFactory.getInstance().getColor(token);
-	// }
-	// else if(HtmlValues.isUrl(token)) {
-	// binfo.backgroundImage = HtmlValues.getURIFromStyleValue(token,
-	// declaration, this.document);
-	// }
-	// else if(isBackgroundRepeat(token)) {
-	// this.applyBackgroundRepeat(binfo, token);
-	// }
-	// else if(isBackgroundPosition(token)) {
-	// if(hasXPosition) {
-	// this.applyBackgroundVerticalPosition(binfo, token);
-	// }
-	// else {
-	// hasXPosition = true;
-	// this.applyBackgroundHorizontalPositon(binfo, token);
-	// }
-	// }
-	// }
-	// }
-
 	private void applyBackgroundRepeat(BackgroundInfo binfo,
 			String backgroundRepeatText) {
 		String brtl = backgroundRepeatText.toLowerCase();

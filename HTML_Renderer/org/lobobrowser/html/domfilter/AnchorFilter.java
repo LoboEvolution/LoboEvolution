@@ -21,7 +21,6 @@
 package org.lobobrowser.html.domfilter;
 
 import org.lobobrowser.html.HtmlProperties;
-import org.lobobrowser.html.dombl.NodeFilter;
 import org.w3c.dom.Node;
 
 public class AnchorFilter implements NodeFilter {

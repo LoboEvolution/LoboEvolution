@@ -20,11 +20,11 @@
 */
 package org.lobobrowser.html.domfilter;
 
-import org.lobobrowser.html.w3c.HTMLLinkElement;
+import org.lobobrowser.html.w3c.HTMLOptionElement;
 import org.w3c.dom.Node;
 
-public class LinkFilter implements NodeFilter {
+public class OptionFilter implements NodeFilter {
 	public boolean accept(Node node) {
-		return node instanceof HTMLLinkElement;
+		return node instanceof HTMLOptionElement;
 	}
 }

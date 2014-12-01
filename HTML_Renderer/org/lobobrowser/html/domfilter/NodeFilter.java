@@ -19,25 +19,12 @@
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
- * Created on Dec 3, 2005
+ * Created on Oct 8, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domfilter;
 
-import org.lobobrowser.html.domfilter.NodeFilter;
 import org.w3c.dom.Node;
 
-public final class ElementFilter implements NodeFilter {
-	private final String elementName;
-
-	/**
-	 * @param name
-	 */
-	public ElementFilter(String name) {
-		super();
-		elementName = name;
-	}
-
-	public final boolean accept(Node node) {
-		return this.elementName.equalsIgnoreCase(node.getNodeName());
-	}
+public interface NodeFilter {
+	public boolean accept(Node node);
 }

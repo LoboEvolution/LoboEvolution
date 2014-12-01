@@ -21,7 +21,7 @@
 /*
  * Created on Nov 13, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domfilter;
 
 import org.w3c.dom.Node;
 

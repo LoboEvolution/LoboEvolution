@@ -26,7 +26,7 @@ package org.lobobrowser.html.dombl;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.lobobrowser.html.dombl.NodeFilter;
+import org.lobobrowser.html.domfilter.NodeFilter;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
