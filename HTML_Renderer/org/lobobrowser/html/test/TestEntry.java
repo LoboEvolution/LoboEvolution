@@ -23,6 +23,9 @@
  */
 package org.lobobrowser.html.test;
 
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+
 /**
  * The <code>TestEntry</code> class is a Java test program for the Cobra HTML
  * rendering engine. It displays a frame with a text field and three tabs. The
@@ -41,6 +44,17 @@ public class TestEntry {
 	 *            Program arguments.
 	 */
 	public static void main(String[] args) {
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		    	
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (Exception e) {
+		    // If Nimbus is not available, you can set the GUI to another look and feel.
+		}
 		TestFrame frame = new TestFrame("Cobra Test Tool");
 		frame.setSize(800, 400);
 		frame.setExtendedState(TestFrame.MAXIMIZED_BOTH);

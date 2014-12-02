@@ -38,6 +38,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import org.lobobrowser.gui.ConsoleModel;
 import org.lobobrowser.gui.DefaultWindowFactory;
@@ -115,8 +116,18 @@ public class PlatformInit {
 	 * Initializes the Swing look & feel.
 	 */
 	public void initLookAndFeel() throws Exception {
-		// Set appropriate Swing L&F
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+
 	}
 
 	public boolean isCodeLocationDirectory() {
