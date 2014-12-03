@@ -30,6 +30,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
@@ -87,7 +88,6 @@ import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.StyleSheetAggregator;
 import org.lobobrowser.html.style.StyleSheetRenderState;
-import org.lobobrowser.html.w3c.HTMLAllCollection;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLDocument;
 import org.lobobrowser.html.w3c.HTMLElement;
@@ -121,8 +121,7 @@ import org.xml.sax.SAXException;
 /**
  * Implementation of the W3C <code>HTMLDocument</code> interface.
  */
-public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
-		DocumentView {
+public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, DocumentView {
 	private static final Logger logger = Logger.getLogger(HTMLDocumentImpl.class.getName());
 	private final ElementFactory factory;
 	private final HtmlRendererContext rcontext;
@@ -260,6 +259,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	}
 
 	public void open() {
+		System.out.println("open1");
 		synchronized (this.getTreeLock()) {
 			if (this.reader != null) {
 				if (this.reader instanceof LocalWritableLineReader) {
@@ -1062,8 +1062,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		Function onloadHandler = this.onloadHandler;
 		if (onloadHandler != null) {
-			if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY
-					.equals(key) && data == Boolean.FALSE) {
+			if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
 				// TODO: onload event object?
 				Executor.executeFunction(this, onloadHandler, null);
 			}
@@ -1072,8 +1071,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	}
 
 	protected Node createSimilarNode() {
-		return new HTMLDocumentImpl(this.ucontext, this.rcontext, this.reader,
-				this.documentURI);
+		return new HTMLDocumentImpl(this.ucontext, this.rcontext, this.reader,this.documentURI);
 	}
 
 	/**
@@ -1154,7 +1152,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	public HTMLCollection getApplets() {
 		synchronized (this) {
 			if (this.applets == null) {
-				// TODO: Should include OBJECTs that are applets?
 				this.applets = new DescendentHTMLCollection(this,
 						new AppletFilter(), this.getTreeLock());
 			}
@@ -1366,14 +1363,14 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 
 	@Override
 	public String getCharacterSet() {
-		// TODO Auto-generated method stub
-		return null;
+		NodeList nodeList = getElementsByTagName(HtmlProperties.META);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList,HtmlAttributeProperties.CHARSET);
+		return attr.getAttribute();
 	}
 
 	@Override
 	public String getDefaultCharset() {
-		// TODO Auto-generated method stub
-		return null;
+		return Charset.defaultCharset().displayName();
 	}
 
 	@Override
@@ -1423,30 +1420,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	@Override
 	public NodeList getElementsByClassName(String classNames) {
 		return this.getNodeList(new ClassNameFilter(classNames));
-	}
-
-	@Override
-	public HTMLDocument open(String type) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public HTMLDocument open(String type, String replace) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void write(String... text) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void writeln(String... text) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -1528,8 +1501,9 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 
 	@Override
 	public String getFgColor() {
-		// TODO Auto-generated method stub
-		return null;
+		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, HtmlAttributeProperties.TEXT);
+		return attr.getAttribute();
 	}
 
 	@Override
@@ -1541,21 +1515,20 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	@Override
 	public String getBgColor() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
-		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList,
-				HtmlAttributeProperties.BGCOLOR);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList,HtmlAttributeProperties.BGCOLOR);
 		return attr.getAttribute();
 	}
 
 	@Override
 	public void setBgColor(String bgColor) {
 		// TODO Auto-generated method stub
+		System.out.println("bgColor: " + bgColor);
 	}
 
 	@Override
 	public String getLinkColor() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
-		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList,
-				HtmlAttributeProperties.LINK);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList,HtmlAttributeProperties.LINK);
 		return attr.getAttribute();
 	}
 
@@ -1596,23 +1569,5 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument,
 	public void clear() {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public HTMLAllCollection getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public NodeList getItems() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public NodeList getItems(String typeNames) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

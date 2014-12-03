@@ -835,12 +835,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 				+ "]";
 	}
 
-	@Override
-	public NodeList getElementsByClassName(String classNames) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public void setOuterHTML(String outerHTML) {
 		// TODO Auto-generated method stub

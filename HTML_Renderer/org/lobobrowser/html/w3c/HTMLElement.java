@@ -33,7 +33,6 @@
 package org.lobobrowser.html.w3c;
 
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 /**
  * All HTML element interfaces derive from this class. Elements that only expose
@@ -110,8 +109,6 @@ public interface HTMLElement extends Element {
 	 * to conflicts with the "class" keyword exposed by many languages. See the
 	 * class attribute definition in HTML 4.01.
 	 */
-
-	public NodeList getElementsByClassName(String classNames);
 
 	public String getInnerHTML();
 

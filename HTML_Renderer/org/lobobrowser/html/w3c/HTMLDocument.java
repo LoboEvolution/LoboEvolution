@@ -306,15 +306,7 @@ public interface HTMLDocument extends Document {
 	public NodeList getElementsByClassName(String classNames);
 
 	public String getInnerHTML();
-
-	public HTMLDocument open(String type);
-
-	public HTMLDocument open(String type, String replace);
 	
-	public void write(String... text);
-
-	public void writeln(String... text);
-
 	public boolean hasFocus();
 
 	public String getDesignMode();
@@ -360,11 +352,4 @@ public interface HTMLDocument extends Document {
 	public void setAlinkColor(String alinkColor);
 
 	public void clear();
-
-	public HTMLAllCollection getAll();
-
-	public NodeList getItems();
-
-	public NodeList getItems(String typeNames);
-
 }
