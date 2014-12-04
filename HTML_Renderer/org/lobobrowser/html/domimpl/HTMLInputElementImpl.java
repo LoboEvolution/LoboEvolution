@@ -35,8 +35,19 @@ import org.lobobrowser.html.w3c.HTMLOptionElement;
 import org.lobobrowser.html.w3c.ValidityState;
 import org.w3c.dom.NodeList;
 
-public class HTMLInputElementImpl extends HTMLBaseInputElement implements
-		HTMLInputElement {
+public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLInputElement {
+	
+	private final String IMAGE = "image";
+	private final String SUBMIT = "submit";
+	private final String TEXT = "tetx";
+	private final String PASSWORD = "password";
+	private final String HIDDEN = "hidden";
+	private final String RADIO = "radio";
+	private final String CHECKBOX = "checkbox";
+	private final String RESET = "reset";
+	private final String FILE = "file";
+	
+	
 	public HTMLInputElementImpl(String name) {
 		super(name);
 	}
@@ -128,28 +139,28 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements
 
 	public boolean isSubmittableWithEnterKey() {
 		String type = this.getType();
-		return (type == null || "".equals(type) || "text".equals(type) || "password"
+		return (type == null || "".equals(type) || TEXT.equals(type) || PASSWORD
 				.equals(type));
 	}
 
 	public boolean isSubmittableWithPress() {
 		String type = this.getType();
-		return "submit".equals(type) || "image".equals(type);
+		return SUBMIT.equals(type) || IMAGE.equals(type);
 	}
 
 	public boolean isSubmitInput() {
 		String type = this.getType();
-		return "submit".equals(type);
+		return SUBMIT.equals(type);
 	}
 
 	public boolean isImageInput() {
 		String type = this.getType();
-		return "image".equals(type);
+		return IMAGE.equals(type);
 	}
 
 	public boolean isResetInput() {
 		String type = this.getType();
-		return "reset".equals(type);
+		return RESET.equals(type);
 	}
 
 	void resetInput() {
@@ -168,13 +179,13 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements
 		if (type == null) {
 			return new FormInput[] { new FormInput(name, this.getValue()) };
 		} else {
-			if ("text".equals(type) || "password".equals(type)
-					|| "hidden".equals(type) || "".equals(type)) {
+			if (TEXT.equals(type) || PASSWORD.equals(type)
+					|| HIDDEN.equals(type) || "".equals(type)) {
 				return new FormInput[] { new FormInput(name, this.getValue()) };
-			} else if ("submit".equals(type)) {
+			} else if (SUBMIT.equals(type)) {
 				// It's done as an "extra" form input
 				return null;
-			} else if ("radio".equals(type) || "checkbox".equals(type)) {
+			} else if (RADIO.equals(type) || CHECKBOX.equals(type)) {
 				if (this.getChecked()) {
 					String value = this.getValue();
 					if (value == null || value.length() == 0) {
@@ -184,10 +195,10 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements
 				} else {
 					return null;
 				}
-			} else if ("image".equals(type)) {
+			} else if (IMAGE.equals(type)) {
 				// It's done as an "extra" form input
 				return null;
-			} else if ("file".equals(type)) {
+			} else if (FILE.equals(type)) {
 				java.io.File file = this.getFileValue();
 				if (file == null) {
 					if (logger.isLoggable(Level.INFO)) {
@@ -428,14 +439,16 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements
 
 	@Override
 	public String getWidth() {
-		// TODO Auto-generated method stub
-		return null;
+		if(getType().equalsIgnoreCase(IMAGE))
+			return this.getAttribute(HtmlAttributeProperties.WIDTH);
+		else
+			return null;
 	}
 
 	@Override
 	public void setWidth(String width) {
-		// TODO Auto-generated method stub
-		
+		if(getType().equalsIgnoreCase(IMAGE))
+			this.setAttribute(HtmlAttributeProperties.WIDTH,width);		
 	}
 
 	@Override
