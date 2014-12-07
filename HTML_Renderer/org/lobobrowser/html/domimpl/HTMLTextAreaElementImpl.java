@@ -166,8 +166,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 
 	@Override
 	public int getTextLength() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getValue().length();
 	}
 
 	@Override
