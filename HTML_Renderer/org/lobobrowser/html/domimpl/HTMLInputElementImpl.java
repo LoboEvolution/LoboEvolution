@@ -35,8 +35,9 @@ import org.lobobrowser.html.w3c.HTMLOptionElement;
 import org.lobobrowser.html.w3c.ValidityState;
 import org.w3c.dom.NodeList;
 
-public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLInputElement {
-	
+public class HTMLInputElementImpl extends HTMLBaseInputElement implements
+		HTMLInputElement {
+
 	private final String IMAGE = "image";
 	private final String SUBMIT = "submit";
 	private final String TEXT = "tetx";
@@ -46,8 +47,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	private final String CHECKBOX = "checkbox";
 	private final String RESET = "reset";
 	private final String FILE = "file";
-	
-	
+
 	public HTMLInputElementImpl(String name) {
 		super(name);
 	}
@@ -199,15 +199,15 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 				// It's done as an "extra" form input
 				return null;
 			} else if (FILE.equals(type)) {
-				java.io.File file = this.getFileValue();
-				if (file == null) {
+				File[] files = this.getFileValue();
+				if (files == null) {
 					if (logger.isLoggable(Level.INFO)) {
 						logger.info("getFormInputs(): File input named " + name
 								+ " has null file.");
 					}
 					return null;
 				} else {
-					return new FormInput[] { new FormInput(name, file) };
+					return new FormInput[] { new FormInput(name, files) };
 				}
 			} else {
 				return null;
@@ -217,15 +217,16 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 
 	@Override
 	public boolean getAutocomplete() {
-		String autocomplete = this.getAttribute(HtmlAttributeProperties.AUTOCOMPLETE);
+		String autocomplete = this
+				.getAttribute(HtmlAttributeProperties.AUTOCOMPLETE);
 		return HtmlAttributeProperties.MUTED.equalsIgnoreCase(autocomplete);
 	}
 
 	@Override
 	public void setAutocomplete(boolean autocomplete) {
-		this.setAttribute(HtmlAttributeProperties.AUTOCOMPLETE, autocomplete ? HtmlAttributeProperties.AUTOCOMPLETE : null);
+		this.setAttribute(HtmlAttributeProperties.AUTOCOMPLETE,
+				autocomplete ? HtmlAttributeProperties.AUTOCOMPLETE : null);
 
-		
 	}
 
 	@Override
@@ -236,15 +237,15 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 
 	@Override
 	public void setAutofocus(boolean autofocus) {
-		this.setAttribute(HtmlAttributeProperties.AUTOFOCUS, autofocus ? HtmlAttributeProperties.AUTOFOCUS : null);
+		this.setAttribute(HtmlAttributeProperties.AUTOFOCUS,
+				autofocus ? HtmlAttributeProperties.AUTOFOCUS : null);
 
-		
 	}
 
 	@Override
 	public File[] getFiles() {
-		// TODO Auto-generated method stub
-		return null;
+		InputContext ic = this.inputContext;
+		return ic.getFileValue();
 	}
 
 	@Override
@@ -255,7 +256,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setFormAction(String formAction) {
 		this.setAttribute(HtmlAttributeProperties.FORMACTION, formAction);
-		
+
 	}
 
 	@Override
@@ -266,7 +267,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setFormEnctype(String formEnctype) {
 		this.setAttribute(HtmlAttributeProperties.FORMENCTYPE, formEnctype);
-		
+
 	}
 
 	@Override
@@ -281,13 +282,16 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 
 	@Override
 	public boolean getFormNoValidate() {
-		String formNoValidate = this.getAttribute(HtmlAttributeProperties.FORMNOVALIDATE);
-		return HtmlAttributeProperties.FORMNOVALIDATE.equalsIgnoreCase(formNoValidate);
+		String formNoValidate = this
+				.getAttribute(HtmlAttributeProperties.FORMNOVALIDATE);
+		return HtmlAttributeProperties.FORMNOVALIDATE
+				.equalsIgnoreCase(formNoValidate);
 	}
 
 	@Override
 	public void setFormNoValidate(boolean formNoValidate) {
-		this.setAttribute(HtmlAttributeProperties.FORMNOVALIDATE, formNoValidate ? HtmlAttributeProperties.FORMNOVALIDATE : null);
+		this.setAttribute(HtmlAttributeProperties.FORMNOVALIDATE,
+				formNoValidate ? HtmlAttributeProperties.FORMNOVALIDATE : null);
 	}
 
 	@Override
@@ -298,7 +302,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setFormTarget(String formTarget) {
 		this.setAttribute(HtmlAttributeProperties.FORMTARGET, formTarget);
-		
+
 	}
 
 	@Override
@@ -309,7 +313,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setHeight(String height) {
 		this.setAttribute(HtmlAttributeProperties.HEIGHT, height);
-		
+
 	}
 
 	@Override
@@ -321,7 +325,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setIndeterminate(boolean indeterminate) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -348,7 +352,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setMin(String min) {
 		this.setAttribute(HtmlAttributeProperties.MIN, min);
-		
+
 	}
 
 	@Override
@@ -359,8 +363,9 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 
 	@Override
 	public void setMultiple(boolean multiple) {
-		this.setAttribute(HtmlAttributeProperties.MULTIPLE, multiple ? HtmlAttributeProperties.MULTIPLE : null);
-		
+		this.setAttribute(HtmlAttributeProperties.MULTIPLE,
+				multiple ? HtmlAttributeProperties.MULTIPLE : null);
+
 	}
 
 	@Override
@@ -371,7 +376,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setPattern(String pattern) {
 		this.setAttribute(HtmlAttributeProperties.PATTERN, pattern);
-		
+
 	}
 
 	@Override
@@ -382,7 +387,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setPlaceholder(String placeholder) {
 		this.setAttribute(HtmlAttributeProperties.PLACEHOLDER, placeholder);
-		
+
 	}
 
 	@Override
@@ -393,8 +398,9 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 
 	@Override
 	public void setRequired(boolean required) {
-		this.setAttribute(HtmlAttributeProperties.REQUIRED, required ? HtmlAttributeProperties.REQUIRED : null);
-		
+		this.setAttribute(HtmlAttributeProperties.REQUIRED,
+				required ? HtmlAttributeProperties.REQUIRED : null);
+
 	}
 
 	@Override
@@ -416,7 +422,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setValueAsDate(long valueAsDate) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -428,7 +434,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setValueAsNumber(float valueAsNumber) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -439,7 +445,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 
 	@Override
 	public String getWidth() {
-		if(getType().equalsIgnoreCase(IMAGE))
+		if (getType().equalsIgnoreCase(IMAGE))
 			return this.getAttribute(HtmlAttributeProperties.WIDTH);
 		else
 			return null;
@@ -447,32 +453,32 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 
 	@Override
 	public void setWidth(String width) {
-		if(getType().equalsIgnoreCase(IMAGE))
-			this.setAttribute(HtmlAttributeProperties.WIDTH,width);		
+		if (getType().equalsIgnoreCase(IMAGE))
+			this.setAttribute(HtmlAttributeProperties.WIDTH, width);
 	}
 
 	@Override
 	public void stepUp() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void stepUp(int n) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void stepDown() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void stepDown(int n) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -502,7 +508,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setCustomValidity(String error) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -520,7 +526,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setSelectionStart(int selectionStart) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -532,12 +538,12 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setSelectionEnd(int selectionEnd) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setSelectionRange(int start, int end) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

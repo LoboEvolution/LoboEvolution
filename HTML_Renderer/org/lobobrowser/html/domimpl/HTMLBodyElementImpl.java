@@ -103,6 +103,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	}
 
 	public Function getOnload() {
+		System.out.println("1");
 		Object document = this.document;
 		if (document instanceof HTMLDocumentImpl) {
 			return ((HTMLDocumentImpl) document).getOnloadHandler();
@@ -112,6 +113,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	}
 
 	public void setOnload(Function onload) {
+		System.out.println("2");
 		Object document = this.document;
 		if (document instanceof HTMLDocumentImpl) {
 			// Note that body.onload overrides
@@ -121,6 +123,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	}
 
 	protected void assignAttributeField(String normalName, String value) {
+		System.out.println("3");
 		if (HtmlAttributeProperties.ONLOAD.equals(normalName)) {
 			Function onload = this.getEventFunction(null, normalName);
 			if (onload != null) {

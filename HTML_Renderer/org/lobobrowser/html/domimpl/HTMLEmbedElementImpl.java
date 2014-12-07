@@ -76,26 +76,22 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements
 
 	@Override
 	public String getAlign() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
 	@Override
 	public void setAlign(String align) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.ALIGN,align);
 		
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.NAME);
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute(HtmlAttributeProperties.NAME,name);
 	}
-
 }

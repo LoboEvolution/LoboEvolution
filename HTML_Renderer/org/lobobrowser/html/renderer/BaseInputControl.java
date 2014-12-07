@@ -295,7 +295,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 		// For selects
 	}
 
-	public File getFileValue() {
+	public File[] getFileValue() {
 		// For file inputs
 		return null;
 	}

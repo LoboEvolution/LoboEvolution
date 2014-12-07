@@ -23,17 +23,18 @@
  */
 package org.lobobrowser.html;
 
+import java.io.File;
+
 /**
  * The <code>FormInput</code> class contains the state of an HTML form input
  * item.
  */
 public class FormInput {
-	// private final InputStream inputStream;
-	// private final String charset;
+	
 	public static final FormInput[] EMPTY_ARRAY = new FormInput[0];
 	private final String name;
 	private final String textValue;
-	private final java.io.File fileValue;
+	private final File[] fileValue;
 
 	/**
 	 * Constructs a <code>FormInput</code> with a text value.
@@ -58,7 +59,7 @@ public class FormInput {
 	 * @param value
 	 *            The value of the input.
 	 */
-	public FormInput(String name, java.io.File value) {
+	public FormInput(String name, File[] value) {
 		this.name = name;
 		this.textValue = null;
 		this.fileValue = value;
@@ -101,7 +102,7 @@ public class FormInput {
 	 * 
 	 * @see #isFile()
 	 */
-	public java.io.File getFileValue() {
+	public File[] getFileValue() {
 		return this.fileValue;
 	}
 
@@ -113,24 +114,6 @@ public class FormInput {
 	 */
 	public String getCharset() {
 		return "UTF-8";
-	}
-
-	/**
-	 * Gets data as an input stream. The caller is responsible for closing the
-	 * stream.
-	 * 
-	 * @deprecated Call either {@link #getTextValue()} or
-	 *             {@link #getFileValue()} instead.
-	 */
-	public java.io.InputStream getInputStream() throws java.io.IOException {
-		if (this.isText()) {
-			return new java.io.ByteArrayInputStream(this.getTextValue()
-					.getBytes("UTF-8"));
-		} else if (this.isFile()) {
-			return new java.io.FileInputStream(this.getFileValue());
-		} else {
-			return null;
-		}
 	}
 
 	/**

@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.FormInput;
@@ -230,7 +231,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
-	protected java.io.File getFileValue() {
+	protected File[] getFileValue() {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
 			return ic.getFileValue();

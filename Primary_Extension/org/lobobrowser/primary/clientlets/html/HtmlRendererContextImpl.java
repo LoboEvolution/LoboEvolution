@@ -460,7 +460,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 						return formInputs[index].getName();
 					}
 
-					public File getFileValue() {
+					public File[] getFileValue() {
 						return formInputs[index].getFileValue();
 					}
 

@@ -22,6 +22,8 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.ua;
 
+import java.io.File;
+
 /**
  * Represents a URL parameter. It may be a GET or POST parameter.
  */
@@ -43,5 +45,5 @@ public interface Parameter {
 
 	public boolean isFile();
 
-	public java.io.File getFileValue();
+	public File[] getFileValue();
 }

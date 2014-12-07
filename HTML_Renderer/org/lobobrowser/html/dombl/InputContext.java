@@ -23,6 +23,8 @@
  */
 package org.lobobrowser.html.dombl;
 
+import java.io.File;
+
 public interface InputContext {
 	public boolean getChecked();
 
@@ -82,7 +84,7 @@ public interface InputContext {
 
 	public void setVisibleSize(int value);
 
-	public java.io.File getFileValue();
+	public File[] getFileValue();
 
 	public void resetInput();
 }

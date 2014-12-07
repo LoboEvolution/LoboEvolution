@@ -455,5 +455,4 @@ public interface HTMLInputElement extends HTMLElement {
 	public void setSelectionEnd(int selectionEnd);
 
 	public void setSelectionRange(int start, int end);
-
 }

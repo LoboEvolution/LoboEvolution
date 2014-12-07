@@ -37,6 +37,7 @@ public class InputFileControl extends BaseInputControl {
 	private static final long serialVersionUID = 1L;
 	private final JTextField textField = new JTextField();
 	private final JButton browseButton = new JButton();
+	private File[] filesValue;
 
 	public InputFileControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
@@ -66,19 +67,23 @@ public class InputFileControl extends BaseInputControl {
 		// nop - security
 	}
 
-	private File fileValue;
-
-	private void setFileValue(File file) {
-		this.fileValue = file;
-		if (file == null) {
+	private void setFileValue(File[] files) {
+		this.filesValue = files;
+		if (files == null) {
 			this.textField.setText("");
 		} else {
-			this.textField.setText(file.getAbsolutePath());
+			String paths = "";
+			for (int i = 0; i < files.length; i++) {
+				File f = files[i];
+				paths += paths + ";" + f.getAbsolutePath();
+			}
+
+			this.textField.setText(paths);
 		}
 	}
 
-	public File getFileValue() {
-		return this.fileValue;
+	public File[] getFileValue() {
+		return this.filesValue;
 	}
 
 	public void resetInput() {
@@ -93,8 +98,9 @@ public class InputFileControl extends BaseInputControl {
 
 		public void actionPerformed(ActionEvent e) {
 			JFileChooser chooser = new JFileChooser();
+			chooser.setMultiSelectionEnabled(true);
 			if (chooser.showOpenDialog(InputFileControl.this) == JFileChooser.APPROVE_OPTION) {
-				setFileValue(chooser.getSelectedFile());
+				setFileValue(chooser.getSelectedFiles());
 			} else {
 				setFileValue(null);
 			}

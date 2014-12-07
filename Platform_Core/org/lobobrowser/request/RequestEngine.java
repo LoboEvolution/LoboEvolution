@@ -84,7 +84,7 @@ public final class RequestEngine {
 	private static final boolean loggerInfo = logger.isLoggable(Level.INFO);
 
 	private final SimpleThreadPool threadPool;
-	private final Collection processingRequests = new HashSet();
+	private final Collection<RequestInfo> processingRequests = new HashSet<RequestInfo>();
 	private final CookieStore cookieStore = CookieStore.getInstance();
 	private final CacheSettings cacheSettings;
 	private final BooleanSettings booleanSettings;
@@ -110,10 +110,10 @@ public final class RequestEngine {
 	}
 
 	public String getCookie(java.net.URL url) {
-		Collection cookies = this.cookieStore.getCookies(url.getHost(),
+		Collection<?> cookies = this.cookieStore.getCookies(url.getHost(),
 				url.getPath());
 		StringBuffer cookieText = new StringBuffer();
-		Iterator i = cookies.iterator();
+		Iterator<?> i = cookies.iterator();
 		while (i.hasNext()) {
 			Cookie cookie = (Cookie) i.next();
 			cookieText.append(cookie.getName());
@@ -144,9 +144,9 @@ public final class RequestEngine {
 
 	public void cancelRequestIfRunning(RequestHandler rhToDelete) {
 		rhToDelete.cancel();
-		List handlersToCancel = new ArrayList();
+		List<RequestInfo> handlersToCancel = new ArrayList<RequestInfo>();
 		synchronized (this.processingRequests) {
-			Iterator ri = this.processingRequests.iterator();
+			Iterator<RequestInfo> ri = this.processingRequests.iterator();
 			while (ri.hasNext()) {
 				RequestInfo rinfo = (RequestInfo) ri.next();
 				if (rinfo.getRequestHandler() == rhToDelete) {
@@ -154,7 +154,7 @@ public final class RequestEngine {
 				}
 			}
 		}
-		Iterator ri2 = handlersToCancel.iterator();
+		Iterator<RequestInfo> ri2 = handlersToCancel.iterator();
 		while (ri2.hasNext()) {
 			RequestInfo rinfo = (RequestInfo) ri2.next();
 			rinfo.abort();
@@ -250,20 +250,19 @@ public final class RequestEngine {
 						Parameter parameter = parameters[i];
 						String name = parameter.getName();
 						if (parameter.isText()) {
-							writer.writeText(name, parameter.getTextValue(),
-									"UTF-8");
+							writer.writeText(name, parameter.getTextValue(),"UTF-8");
 						} else if (parameter.isFile()) {
-							File file = parameter.getFileValue();
-							FileInputStream in = new FileInputStream(
-									parameter.getFileValue());
+							File[] file = parameter.getFileValue();
+							
+							for(int f=0;f<file.length;f++){
+							
+							FileInputStream in = new FileInputStream(file[f]);
 							try {
-								BufferedInputStream bin = new BufferedInputStream(
-										in, 8192);
-								writer.writeFileData(name, file.getName(),
-										Files.getContentType(file), bin);
+								BufferedInputStream bin = new BufferedInputStream(in, 8192);
+								writer.writeFileData(name, file[f].getName(), Files.getContentType(file[f]), bin);
 							} finally {
 								in.close();
-							}
+							}}
 						} else {
 							logger.warning("postData(): Skipping parameter "
 									+ name

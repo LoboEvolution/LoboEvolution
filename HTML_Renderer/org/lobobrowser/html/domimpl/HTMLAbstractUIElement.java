@@ -23,7 +23,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 			onkeydown, onkeyup, oncontextmenu, onabort, onplay, onplaying,
 			onprogress, onreadystatechange, onscroll, onseeked, onseeking,
 			onselect, onshow, onstalled, onsubmit, onsuspend, ontimeupdate,
-			onwaiting, onvolumechange,onfinish,onstart,onbounce;
+			onwaiting, onvolumechange,onfinish,onstart,onbounce,onload;
 
 	public HTMLAbstractUIElement(String name) {
 		super(name);
@@ -290,6 +290,14 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 
 	public void setOnwaiting(Function onwaiting) {
 		this.onwaiting = onwaiting;
+	}
+	
+	public Function getOnload() {
+		return this.getEventFunction(onload, "onload");
+	}
+
+	public void setOnload(Function onload) {
+		this.onload = onload;
 	}
 	
 	public void focus() {
