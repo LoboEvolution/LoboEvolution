@@ -107,6 +107,7 @@ import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
@@ -259,7 +260,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	}
 
 	public void open() {
-		System.out.println("open1");
 		synchronized (this.getTreeLock()) {
 			if (this.reader != null) {
 				if (this.reader instanceof LocalWritableLineReader) {
@@ -1454,7 +1454,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 
 	@Override
 	public boolean execCommand(String commandId, boolean showUI, String value) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -1508,8 +1507,8 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 
 	@Override
 	public void setFgColor(String fgColor) {
-		// TODO Auto-generated method stub
-
+		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.TEXT);
+		attr.setAttribute(this, fgColor);
 	}
 
 	@Override
@@ -1521,8 +1520,8 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 
 	@Override
 	public void setBgColor(String bgColor) {
-		// TODO Auto-generated method stub
-		System.out.println("bgColor: " + bgColor);
+		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.BGCOLOR);
+		attr.setAttribute(this, bgColor);
 	}
 
 	@Override
@@ -1534,20 +1533,21 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 
 	@Override
 	public void setLinkColor(String linkColor) {
-		// TODO Auto-generated method stub
+		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.LINK);
+		attr.setAttribute(this, linkColor);
 	}
 
 	@Override
 	public String getVlinkColor() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
-		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList,
-				HtmlAttributeProperties.VLINK);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, HtmlAttributeProperties.VLINK);
 		return attr.getAttribute();
 	}
 
 	@Override
 	public void setVlinkColor(String vlinkColor) {
-		// TODO Auto-generated method stub
+		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.VLINK);
+		attr.setAttribute(this, vlinkColor);
 
 	}
 
@@ -1561,13 +1561,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 
 	@Override
 	public void setAlinkColor(String alinkColor) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-
+		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.ALINK);
+		attr.setAttribute(this, alinkColor);
 	}
 }

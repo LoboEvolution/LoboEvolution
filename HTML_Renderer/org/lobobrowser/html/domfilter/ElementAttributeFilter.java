@@ -20,6 +20,9 @@
  */
 package org.lobobrowser.html.domfilter;
 
+import org.lobobrowser.html.dombl.AttrImpl;
+import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.w3c.HTMLElement;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -33,6 +36,11 @@ public class ElementAttributeFilter {
 		this.attribute = attribute;
 		this.nodeList = nodeList;
 	}
+	
+	public ElementAttributeFilter(String attribute) {
+		this.attribute = attribute;
+		nodeList = null;
+	}
 
 	public String getAttribute() {
 
@@ -40,7 +48,6 @@ public class ElementAttributeFilter {
 
 		Node node = nodeList.item(0);
 		NamedNodeMap attribs = node.getAttributes();
-		
 
 		for (int s = 0; s < attribs.getLength(); s++) {
 			Attr attr = (Attr) attribs.item(s);
@@ -51,5 +58,26 @@ public class ElementAttributeFilter {
 
 		return result;
 
+	}
+
+	public void setAttribute(HTMLDocumentImpl doc,String val) {
+		boolean result = false;
+		HTMLElement el = doc.getBody();
+		NamedNodeMap attributes = el.getAttributes();
+		for (int s = 0; s < attributes.getLength(); s++) {
+			Attr attr = (Attr) attributes.item(s);
+			
+			if(attribute.equals(attr.getNodeName())){
+				attr.setNodeValue(val);
+				el.setAttributeNode(attr);
+				result = true;
+			}
+		}
+		
+		if(!result){			
+			Attr attr = new AttrImpl(attribute, val, true, el,true);
+			el.setAttributeNode(attr);
+		}
+		doc.setBody(el);
 	}
 }
