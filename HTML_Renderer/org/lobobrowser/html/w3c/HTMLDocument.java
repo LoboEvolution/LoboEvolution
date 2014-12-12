@@ -350,4 +350,7 @@ public interface HTMLDocument extends Document {
 	public String getAlinkColor();
 
 	public void setAlinkColor(String alinkColor);
+		
+	public void addEventListener(String script, String function);
+
 }

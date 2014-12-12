@@ -107,7 +107,6 @@ import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
@@ -1563,5 +1562,10 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	public void setAlinkColor(String alinkColor) {
 		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.ALINK);
 		attr.setAttribute(this, alinkColor);
+	}
+
+	@Override
+	public void addEventListener(String script, String fun) {
+		// TODO Auto-generated method stub
 	}
 }
