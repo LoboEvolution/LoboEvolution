@@ -65,7 +65,6 @@ import org.lobobrowser.html.dombl.LocalErrorHandler;
 import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.dombl.NodeVisitor;
 import org.lobobrowser.html.dombl.TextImpl;
-import org.lobobrowser.html.dombl.Utility;
 import org.lobobrowser.html.domfilter.AnchorFilter;
 import org.lobobrowser.html.domfilter.AppletFilter;
 import org.lobobrowser.html.domfilter.ClassNameFilter;
@@ -94,6 +93,7 @@ import org.lobobrowser.html.w3c.HTMLDocument;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLHeadElement;
 import org.lobobrowser.util.Domains;
+import org.lobobrowser.util.JavascriptCommon;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.WeakValueHashMap;
 import org.lobobrowser.util.io.EmptyReader;
@@ -1568,7 +1568,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	@Override
 	public void addEventListener(String script, String function) {
 		
-		Utility ut = new Utility();
+		JavascriptCommon ut = new JavascriptCommon();
 		System.out.println("IVAN: " + ut.mapFunction(script));
 		ElementAttributeFilter attr = new ElementAttributeFilter(ut.mapFunction(script));
 		String[] split = function.split("\\{");
@@ -1578,7 +1578,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 
 	@Override
 	public void removeEventListener(String script, String function) {
-		Utility ut = new Utility();
+		JavascriptCommon ut = new JavascriptCommon();
 		ElementAttributeFilter attr = new ElementAttributeFilter(ut.mapFunction(script));
 		String[] split = function.split("\\{");
 		function = split[1].replace("}", "").trim();

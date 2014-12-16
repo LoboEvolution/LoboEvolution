@@ -39,7 +39,6 @@ import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ElementImpl;
 import org.lobobrowser.html.dombl.UINode;
-import org.lobobrowser.html.dombl.Utility;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.CSS2PropertiesContext;
@@ -55,6 +54,7 @@ import org.lobobrowser.html.w3c.DOMTokenList;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLMenuElement;
 import org.lobobrowser.html.w3c.HTMLPropertiesCollection;
+import org.lobobrowser.util.JavascriptCommon;
 import org.lobobrowser.util.Strings;
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.DOMException;
@@ -1099,7 +1099,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 
 	@Override
 	public void addEventListener(String script, String function) {
-		Utility ut = new Utility();
+		JavascriptCommon ut = new JavascriptCommon();
 		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		Element element = doc.getElementById(getId());
 		String[] split = function.split("\\{");
@@ -1110,7 +1110,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 
 	@Override
 	public void removeEventListener(String script, String function) {
-		Utility ut = new Utility();
+		JavascriptCommon ut = new JavascriptCommon();
 		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		Element element = doc.getElementById(getId());
 		element.removeAttribute(ut.mapFunction(script));
