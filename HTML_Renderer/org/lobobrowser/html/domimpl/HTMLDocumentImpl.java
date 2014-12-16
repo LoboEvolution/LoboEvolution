@@ -65,6 +65,7 @@ import org.lobobrowser.html.dombl.LocalErrorHandler;
 import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.dombl.NodeVisitor;
 import org.lobobrowser.html.dombl.TextImpl;
+import org.lobobrowser.html.dombl.Utility;
 import org.lobobrowser.html.domfilter.AnchorFilter;
 import org.lobobrowser.html.domfilter.AppletFilter;
 import org.lobobrowser.html.domfilter.ClassNameFilter;
@@ -1565,7 +1566,22 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	}
 
 	@Override
-	public void addEventListener(String script, String fun) {
-		// TODO Auto-generated method stub
+	public void addEventListener(String script, String function) {
+		
+		Utility ut = new Utility();
+		System.out.println("IVAN: " + ut.mapFunction(script));
+		ElementAttributeFilter attr = new ElementAttributeFilter(ut.mapFunction(script));
+		String[] split = function.split("\\{");
+		function = split[1].replace("}", "").trim();
+		attr.setAttribute(this, function);
+	}
+
+	@Override
+	public void removeEventListener(String script, String function) {
+		Utility ut = new Utility();
+		ElementAttributeFilter attr = new ElementAttributeFilter(ut.mapFunction(script));
+		String[] split = function.split("\\{");
+		function = split[1].replace("}", "").trim();
+		attr.removeAttribute(this, function);
 	}
 }

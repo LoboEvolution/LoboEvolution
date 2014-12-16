@@ -39,6 +39,7 @@ import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ElementImpl;
 import org.lobobrowser.html.dombl.UINode;
+import org.lobobrowser.html.dombl.Utility;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.CSS2PropertiesContext;
@@ -109,7 +110,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	}
 
 	/**
-	 * Gets the style object associated with the element. It may return null
+	 * Gets the style object associated with the . It may return null
 	 * only if the type of element does not handle stylesheets.
 	 */
 	public AbstractCSS2Properties getCurrentStyle() {
@@ -862,14 +863,15 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 
 	@Override
 	public boolean getHidden() {
-		// TODO Auto-generated method stub
-		return false;
+		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		Element element = doc.getElementById(getId());
+		String hidden = element.getAttribute(HtmlAttributeProperties.HIDDEN);
+		return hidden == null ? false : true;
 	}
 
 	@Override
 	public void setHidden(boolean hidden) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
@@ -879,13 +881,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	}
 
 	@Override
-	public void scrollIntoView() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void scrollIntoView(boolean top) {
+		System.out.println("scrollIntoView bool;: " + top);
 		// TODO Auto-generated method stub
 		
 	}
@@ -1098,5 +1095,25 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	public void setItemValue(Object itemValue) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void addEventListener(String script, String function) {
+		Utility ut = new Utility();
+		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		Element element = doc.getElementById(getId());
+		String[] split = function.split("\\{");
+		function = split[1].replace("}", "").trim();
+		element.setAttribute(ut.mapFunction(script), function);
+		doc.setElementById(getId(), element);
+	}
+
+	@Override
+	public void removeEventListener(String script, String function) {
+		Utility ut = new Utility();
+		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		Element element = doc.getElementById(getId());
+		element.removeAttribute(ut.mapFunction(script));
+		doc.setElementById(getId(), element);
 	}
 }

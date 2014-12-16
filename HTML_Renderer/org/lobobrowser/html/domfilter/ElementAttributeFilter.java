@@ -60,24 +60,32 @@ public class ElementAttributeFilter {
 
 	}
 
-	public void setAttribute(HTMLDocumentImpl doc,String val) {
+	public void setAttribute(HTMLDocumentImpl doc, String val) {
 		boolean result = false;
 		HTMLElement el = doc.getBody();
-		NamedNodeMap attributes = el.getAttributes();
-		for (int s = 0; s < attributes.getLength(); s++) {
-			Attr attr = (Attr) attributes.item(s);
-			
-			if(attribute.equals(attr.getNodeName())){
-				attr.setNodeValue(val);
-				el.setAttributeNode(attr);
-				result = true;
+		if (el != null) {
+			NamedNodeMap attributes = el.getAttributes();
+			for (int s = 0; s < attributes.getLength(); s++) {
+				Attr attr = (Attr) attributes.item(s);
+
+				if (attribute.equals(attr.getNodeName())) {
+					attr.setNodeValue(val);
+					el.setAttributeNode(attr);
+					result = true;
+				}
 			}
+
+			if (!result) {
+				Attr attr = new AttrImpl(attribute, val, true, el, true);
+				el.setAttributeNode(attr);
+			}
+			doc.setBody(el);
 		}
-		
-		if(!result){			
-			Attr attr = new AttrImpl(attribute, val, true, el,true);
-			el.setAttributeNode(attr);
-		}
+	}
+	
+	public void removeAttribute(HTMLDocumentImpl doc,String val) {
+		HTMLElement el = doc.getBody();
+		el.removeAttribute(attribute);
 		doc.setBody(el);
 	}
 }

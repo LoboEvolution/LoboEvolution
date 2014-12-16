@@ -79,6 +79,7 @@ public interface HtmlAttributeProperties {
 	public final String HREFLANG = "hreflang";
 	public final String HTMLFOR = "htmlFor";
 	public final String HEADERS = "headers";
+	public final String HIDDEN = "hidden";
 	public final String ID = "id";
 	public final String ISMAP = "isMap";
 	public final String LINK = "link";

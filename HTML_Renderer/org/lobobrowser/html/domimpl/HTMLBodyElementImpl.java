@@ -123,7 +123,6 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	}
 
 	protected void assignAttributeField(String normalName, String value) {
-		System.out.println("3");
 		if (HtmlAttributeProperties.ONLOAD.equals(normalName)) {
 			Function onload = this.getEventFunction(null, normalName);
 			if (onload != null) {

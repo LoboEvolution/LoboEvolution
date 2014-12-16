@@ -911,5 +911,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			this.retained = retained;
 		}
 	}
-
+	
+	public void addEventListener(String script, String function) {
+		// TODO Auto-generated method stub
+	}
 }

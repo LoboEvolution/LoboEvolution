@@ -131,9 +131,7 @@ public interface HTMLElement extends Element {
 	public void setHidden(boolean hidden);
 
 	public void click();
-
-	public void scrollIntoView();
-
+	
 	public void scrollIntoView(boolean top);
 
 	public int getTabIndex();
@@ -213,5 +211,9 @@ public interface HTMLElement extends Element {
 	public Object getItemValue();
 
 	public void setItemValue(Object itemValue);
+	
+	public void addEventListener(String script, String function);
+	
+	public void removeEventListener(String script, String function);
 
 }
