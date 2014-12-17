@@ -35,8 +35,8 @@ import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.RUIControl;
 
-public class InputLayout2 extends CommonWidgetLayout {
-	public InputLayout2() {
+public class InputLayout extends CommonWidgetLayout {
+	public InputLayout() {
 		super(ADD_INLINE, true);
 	}
 

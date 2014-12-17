@@ -62,7 +62,7 @@ import org.lobobrowser.html.layout.HLayout;
 import org.lobobrowser.html.layout.HrLayout;
 import org.lobobrowser.html.layout.IFrameLayout;
 import org.lobobrowser.html.layout.ImgLayout;
-import org.lobobrowser.html.layout.InputLayout2;
+import org.lobobrowser.html.layout.InputLayout;
 import org.lobobrowser.html.layout.ListItemLayout;
 import org.lobobrowser.html.layout.MiscLayout;
 import org.lobobrowser.html.layout.NoScriptLayout;
@@ -181,7 +181,7 @@ public class RBlockViewport extends BaseRCollection {
 		AnchorLayout anchor = new AnchorLayout();
 		el.put(HtmlProperties.A, anchor);
 		el.put(HtmlProperties.ANCHOR, anchor);
-		el.put(HtmlProperties.INPUT, new InputLayout2());
+		el.put(HtmlProperties.INPUT, new InputLayout());
 		el.put(HtmlProperties.TEXTAREA, new TextAreaLayout2());
 		el.put(HtmlProperties.SELECT, new SelectLayout());
 		ListItemLayout list = new ListItemLayout();
