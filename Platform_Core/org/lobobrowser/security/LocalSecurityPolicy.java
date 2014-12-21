@@ -83,15 +83,13 @@ public class LocalSecurityPolicy extends Policy {
 		permissions.add(new PropertyPermission("*", "read,write"));
 		permissions.add(new AWTPermission("*"));
 		permissions.add(new HistoryPermission());
-		permissions.add(new SocketPermission("*",
-				"connect,resolve,listen,accept"));
+		permissions.add(new SocketPermission("*","connect,resolve,listen,accept"));
 		permissions.add(new RuntimePermission("createClassLoader"));
 		permissions.add(new RuntimePermission("getClassLoader"));
 		permissions.add(new RuntimePermission("exitVM"));
 		permissions.add(new RuntimePermission("setIO"));
 		permissions.add(new RuntimePermission("setContextClassLoader"));
-		permissions.add(new RuntimePermission(
-				"enableContextClassLoaderOverride"));
+		permissions.add(new RuntimePermission("enableContextClassLoaderOverride"));
 		permissions.add(new RuntimePermission("setFactory"));
 		permissions.add(new RuntimePermission("accessClassInPackage.*"));
 		permissions.add(new RuntimePermission("defineClassInPackage.*"));
@@ -113,8 +111,7 @@ public class LocalSecurityPolicy extends Policy {
 		permissions.add(new SecurityPermission("putProviderProperty.*"));
 		permissions.add(new SecurityPermission("insertProvider.*"));
 		permissions.add(new SecurityPermission("removeProvider.*"));
-		permissions
-				.add(new java.util.logging.LoggingPermission("control", null));
+		permissions.add(new java.util.logging.LoggingPermission("control", null));
 		permissions.add(GenericLocalPermission.EXT_GENERIC);
 
 		// Note: execute needed to launch external browser.
@@ -223,14 +220,12 @@ public class LocalSecurityPolicy extends Policy {
 			}
 			// Custom permissions
 			permissions.add(StoreHostPermission.forURL(location));
-			permissions.add(new RuntimePermission(
-					"com.sun.media.jmc.accessMedia"));
+			permissions.add(new RuntimePermission("com.sun.media.jmc.accessMedia"));
 		} else {
 			permissions.add(new PropertyPermission("java.version", "read"));
 			permissions.add(new PropertyPermission("os.name", "read"));
 			permissions.add(new PropertyPermission("line.separator", "read"));
-			permissions.add(new SocketPermission(location.getHost(),
-					"connect,resolve"));
+			permissions.add(new SocketPermission(location.getHost(),"connect,resolve"));
 
 			// TODO: Security: This permission should not be given, but it's
 			// required

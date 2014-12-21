@@ -27,8 +27,7 @@ public class GenericLocalPermission extends BasicPermission {
 	private static final long serialVersionUID = 1L;
 	// public static final java.security.Permission FRAME_PARENT = new
 	// GenericLocalPermission("frame-parent");
-	public static final java.security.Permission EXT_GENERIC = new GenericLocalPermission(
-			"extension");
+	public static final java.security.Permission EXT_GENERIC = new GenericLocalPermission("extension");
 
 	public GenericLocalPermission(String name) {
 		super(name);

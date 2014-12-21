@@ -59,6 +59,7 @@ import org.lobobrowser.clientlet.ClientletRequest;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.Header;
 import org.lobobrowser.main.ExtensionManager;
+import org.lobobrowser.security.SSLCertificate;
 import org.lobobrowser.settings.BooleanSettings;
 import org.lobobrowser.settings.CacheSettings;
 import org.lobobrowser.settings.ConnectionSettings;
@@ -178,36 +179,29 @@ public final class RequestEngine {
 		String encoding = pinfo.getEncoding();
 		if (encoding == null || NORMAL_FORM_ENCODING.equalsIgnoreCase(encoding)) {
 			ByteArrayOutputStream bufOut = new ByteArrayOutputStream();
-			if (pinfo != null) {
-				Parameter[] parameters = pinfo.getParameters();
-				boolean firstParam = true;
-				for (int i = 0; i < parameters.length; i++) {
-					Parameter parameter = parameters[i];
-					String name = parameter.getName();
-					String encName = URLEncoder.encode(name, "UTF-8");
-					if (parameter.isText()) {
-						if (firstParam) {
-							firstParam = false;
-						} else {
-							bufOut.write((byte) '&');
-						}
-						String valueStr = parameter.getTextValue();
-						String encValue = URLEncoder.encode(valueStr, "UTF-8");
-						bufOut.write(encName.getBytes("UTF-8"));
-						bufOut.write((byte) '=');
-						bufOut.write(encValue.getBytes("UTF-8"));
+			Parameter[] parameters = pinfo.getParameters();
+			boolean firstParam = true;
+			for (int i = 0; i < parameters.length; i++) {
+				Parameter parameter = parameters[i];
+				String name = parameter.getName();
+				String encName = URLEncoder.encode(name, "UTF-8");
+				if (parameter.isText()) {
+					if (firstParam) {
+						firstParam = false;
 					} else {
-						logger.warning("postData(): Ignoring non-textual parameter "
-								+ name
-								+ " for POST with encoding "
-								+ encoding
-								+ ".");
+						bufOut.write((byte) '&');
 					}
-				}
-			} else {
-				// No pinfo provided - check alternative POST data
-				if (altPostData != null) {
-					bufOut.write(altPostData.getBytes("UTF-8"));
+					String valueStr = parameter.getTextValue();
+					String encValue = URLEncoder.encode(valueStr, "UTF-8");
+					bufOut.write(encName.getBytes("UTF-8"));
+					bufOut.write((byte) '=');
+					bufOut.write(encValue.getBytes("UTF-8"));
+				} else {
+					logger.warning("postData(): Ignoring non-textual parameter "
+							+ name
+							+ " for POST with encoding "
+							+ encoding
+							+ ".");
 				}
 			}
 			// Do not add a line break to post content. Some servers
@@ -800,6 +794,8 @@ public final class RequestEngine {
 				cacheInfo = this.getCacheInfo(rhandler, connectionUrl);
 			}
 			try {
+				
+				SSLCertificate.setCertificate();
 				URLConnection connection = this.getURLConnection(connectionUrl,
 						request, protocol, method, rhandler, cacheInfo);
 				rinfo = new RequestInfo(connection, rhandler);
