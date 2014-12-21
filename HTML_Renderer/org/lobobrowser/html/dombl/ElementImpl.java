@@ -33,6 +33,7 @@ import java.util.Map;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.w3c.HTMLMenuElement;
 import org.lobobrowser.util.Objects;
 import org.lobobrowser.util.Strings;
 import org.w3c.dom.Attr;
@@ -47,6 +48,7 @@ import org.w3c.dom.TypeInfo;
 
 public class ElementImpl extends NodeImpl implements Element {
 	private final String name;
+	private String id;
 
 	public ElementImpl(String name) {
 		super();
@@ -96,8 +98,6 @@ public class ElementImpl extends NodeImpl implements Element {
 		}
 	}
 
-	private String id;
-
 	public String getId() {
 		String id = this.id;
 		return id == null ? "" : id;
@@ -106,8 +106,6 @@ public class ElementImpl extends NodeImpl implements Element {
 	public void setId(String id) {
 		this.setAttribute(HtmlAttributeProperties.ID, id);
 	}
-
-	// private String title;
 
 	public String getTitle() {
 		return this.getAttribute(HtmlAttributeProperties.TITLE);
@@ -132,7 +130,74 @@ public class ElementImpl extends NodeImpl implements Element {
 	public void setDir(String dir) {
 		this.setAttribute(HtmlAttributeProperties.DIR, dir);
 	}
+	
+	public boolean getHidden() {
+		return this.getAttribute(HtmlAttributeProperties.HIDDEN) == null ? true : false;
+	}
+	
+	public String getContentEditable() {
+		return this.getAttribute(HtmlAttributeProperties.CONTENTEDITABLE);
+	}
 
+	public void setContentEditable(String contenteditable) {
+		this.setAttribute(HtmlAttributeProperties.CONTENTEDITABLE, contenteditable);
+	}
+	
+	public String getSpellcheck() {
+		return this.getAttribute(HtmlAttributeProperties.SPELLCHECK);
+	}
+
+	public void setSpellcheck(String spellcheck) {
+		this.setAttribute(HtmlAttributeProperties.SPELLCHECK, spellcheck);
+	}
+	
+	public boolean getDraggable() {
+		String draggable = getAttribute(HtmlAttributeProperties.DRAGGABLE);
+		if (draggable == null)
+			return false;
+		else
+			return new Boolean(draggable);
+	}
+
+	public void setDraggable(boolean draggable) {
+		this.setAttribute(HtmlAttributeProperties.DRAGGABLE, String.valueOf(draggable));
+	}
+	
+	public int getTabIndex() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+	public void setTabIndex(int tabIndex) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public HTMLMenuElement getContextMenu() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public void setContextMenu(HTMLMenuElement contextMenu) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	public final String getAttribute(String name) {
 		String normalName = this.normalizeAttributeName(name);
 		synchronized (this) {

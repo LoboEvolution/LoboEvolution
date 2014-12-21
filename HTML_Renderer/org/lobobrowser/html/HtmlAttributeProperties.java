@@ -46,6 +46,7 @@ public interface HtmlAttributeProperties {
 	public final String CODETYPE = "codetype";
 	public final String COMPACT = "compact";
 	public final String CONTROLS = "controls";
+	public final String CONTENTEDITABLE = "contenteditable";
 	public final String CHOFF = "chOff";
 	public final String CH = "ch";
 	public final String CELLSPACING = "cellspacing";
@@ -61,6 +62,7 @@ public interface HtmlAttributeProperties {
 	public final String DECLARE = "declare";
 	public final String DIR = "dir";
 	public final String DISABLE = "disabled";
+	public final String DRAGGABLE = "draggable";
 	public final String DEFAULTVALUE = "defaultValue";
 	public final String ENCTYPE = "enctype";
 	public final String EVENT = "event";
@@ -131,6 +133,7 @@ public interface HtmlAttributeProperties {
 	public final String SCOPE = "scope";
 	public final String SCOPED = "scoped";
 	public final String STYLE = "style";
+	public final String SPELLCHECK = "spellcheck";
 	public final String TABINDEX = "tabindex";
 	public final String TARGET = "target";
 	public final String TEXT = "text";

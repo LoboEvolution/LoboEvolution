@@ -128,8 +128,6 @@ public interface HTMLElement extends Element {
 
 	public boolean getHidden();
 
-	public void setHidden(boolean hidden);
-
 	public void click();
 	
 	public void scrollIntoView(boolean top);

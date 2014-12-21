@@ -793,8 +793,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	}
 
 	public int getOffsetTop() {
-		// TODO: Sometimes this can be called while parsing, and
-		// browsers generally give the right answer.
 		UINode uiNode = this.getUINode();
 		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().y;
 	}
@@ -862,19 +860,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	}
 
 	@Override
-	public boolean getHidden() {
-		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		Element element = doc.getElementById(getId());
-		String hidden = element.getAttribute(HtmlAttributeProperties.HIDDEN);
-		return hidden == null ? false : true;
-	}
-
-	@Override
-	public void setHidden(boolean hidden) {
-		// TODO Auto-generated method stub	
-	}
-
-	@Override
 	public void click() {
 		// TODO Auto-generated method stub
 		
@@ -882,19 +867,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 
 	@Override
 	public void scrollIntoView(boolean top) {
-		System.out.println("scrollIntoView bool;: " + top);
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getTabIndex() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setTabIndex(int tabIndex) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -910,19 +882,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public String getAccessKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setAccessKey(String accessKey) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public String getAccessKeyLabel() {
 		// TODO Auto-generated method stub
@@ -930,59 +890,14 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	}
 
 	@Override
-	public boolean getDraggable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void setDraggable(boolean draggable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getContentEditable() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setContentEditable(String contentEditable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public boolean getIsContentEditable() {
-		// TODO Auto-generated method stub
-		return false;
+		String content = getAttribute(HtmlAttributeProperties.CONTENTEDITABLE);
+		if (content == null)
+			return false;
+		else
+			return new Boolean(content);
 	}
-
-	@Override
-	public HTMLMenuElement getContextMenu() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setContextMenu(HTMLMenuElement contextMenu) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getSpellcheck() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setSpellcheck(String spellcheck) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public String getCommandType() {
 		// TODO Auto-generated method stub
@@ -1003,14 +918,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 
 	@Override
 	public boolean getDisabled() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getAttribute(HtmlAttributeProperties.DISABLE) == null ? true : false;
 	}
 
 	@Override
 	public boolean getChecked() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getAttribute(HtmlAttributeProperties.CHECKED) == null ? true : false;
 	}
 
 	@Override
