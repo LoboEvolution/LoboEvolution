@@ -28,8 +28,8 @@ import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.RUIControl;
 
-public class TextAreaLayout2 extends CommonWidgetLayout {
-	public TextAreaLayout2() {
+public class TextAreaLayout extends CommonWidgetLayout {
+	public TextAreaLayout() {
 		super(ADD_INLINE, true);
 	}
 
