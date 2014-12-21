@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.renderer;
 
+import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -43,8 +44,14 @@ public class InputCheckboxControl extends BaseInputControl {
 		JCheckBox checkBox = new JCheckBox();
 		checkBox.setOpaque(false);
 		this.widget = checkBox;
-		checkBox.setSelected(this.controlElement.getAttributeAsBoolean("checked"));
 		
+		if(modelNode.getTitle() != null)
+			checkBox.setToolTipText(modelNode.getTitle());
+		checkBox.setVisible(modelNode.getHidden());
+		checkBox.applyComponentOrientation(direction(modelNode.getDir()));
+		checkBox.setSelected(this.controlElement.getAttributeAsBoolean("checked"));
+		checkBox.setEnabled(!modelNode.getDisabled());
+		checkBox.setSelected(modelNode.getChecked());
 		widget.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				HtmlController.getInstance().onPressed(
@@ -103,5 +110,16 @@ public class InputCheckboxControl extends BaseInputControl {
 
 	public String getValue() {
 		return this.controlElement.getAttribute(HtmlAttributeProperties.VALUE);
+	}
+	
+	private ComponentOrientation direction(String dir) {
+
+		if ("ltr".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.LEFT_TO_RIGHT;
+		} else if ("rtl".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.RIGHT_TO_LEFT;
+		} else {
+			return ComponentOrientation.UNKNOWN;
+		}
 	}
 }

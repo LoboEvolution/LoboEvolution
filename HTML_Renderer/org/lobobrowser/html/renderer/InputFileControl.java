@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.renderer;
 
+import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
@@ -48,6 +49,12 @@ public class InputFileControl extends BaseInputControl {
 		java.awt.Dimension ps = this.textField.getPreferredSize();
 		this.textField.setPreferredSize(new java.awt.Dimension(128, ps.height));
 		this.textField.setEditable(false);
+		if(modelNode.getTitle() != null)
+			this.textField.setToolTipText(modelNode.getTitle());
+		textField.setVisible(modelNode.getHidden());
+		textField.applyComponentOrientation(direction(modelNode.getDir()));
+		textField.setEditable(new Boolean(modelNode.getContentEditable()));
+		textField.setEnabled(!modelNode.getDisabled());
 		this.add(this.textField);
 		this.add(Box.createHorizontalStrut(4));
 		this.add(browseButton);
@@ -104,6 +111,17 @@ public class InputFileControl extends BaseInputControl {
 			} else {
 				setFileValue(null);
 			}
+		}
+	}
+	
+	private ComponentOrientation direction(String dir) {
+
+		if ("ltr".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.LEFT_TO_RIGHT;
+		} else if ("rtl".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.RIGHT_TO_LEFT;
+		} else {
+			return ComponentOrientation.UNKNOWN;
 		}
 	}
 }

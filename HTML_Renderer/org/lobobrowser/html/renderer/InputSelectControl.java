@@ -1,5 +1,6 @@
 package org.lobobrowser.html.renderer;
 
+import java.awt.ComponentOrientation;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -26,7 +27,11 @@ public class InputSelectControl extends BaseInputControl {
 	private final JComboBox<OptionItem> comboBox;
 	private final JList<OptionItem> list;
 	private final DefaultListModel<OptionItem> listModel;
-
+	private static final int STATE_NONE = 0;
+	private static final int STATE_COMBO = 1;
+	private static final int STATE_LIST = 2;
+	private int state = STATE_NONE;
+	private boolean suspendSelections = false;
 	private boolean inSelectionEvent;
 
 	public InputSelectControl(final HTMLBaseInputElement modelNode) {
@@ -101,15 +106,16 @@ public class InputSelectControl extends BaseInputControl {
 		// be lost (including revalidation due to hover.)
 
 		this.comboBox = comboBox;
+		
+		if(modelNode.getTitle() != null)
+			comboBox.setToolTipText(modelNode.getTitle());
+		comboBox.setVisible(modelNode.getHidden());
+		comboBox.applyComponentOrientation(direction(modelNode.getDir()));
+		comboBox.setEditable(new Boolean(modelNode.getContentEditable()));
+		comboBox.setEnabled(!modelNode.getDisabled());
 		this.list = list;
 		this.resetItemList();
 	}
-
-	private static final int STATE_NONE = 0;
-	private static final int STATE_COMBO = 1;
-	private static final int STATE_LIST = 2;
-	private int state = STATE_NONE;
-	private boolean suspendSelections = false;
 
 	private void resetItemList() {
 		HTMLSelectElementImpl selectElement = (HTMLSelectElementImpl) this.controlElement;
@@ -356,6 +362,17 @@ public class InputSelectControl extends BaseInputControl {
 				value = this.option.getText();
 			}
 			return value;
+		}
+	}
+	
+	private ComponentOrientation direction(String dir) {
+
+		if ("ltr".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.LEFT_TO_RIGHT;
+		} else if ("rtl".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.RIGHT_TO_LEFT;
+		} else {
+			return ComponentOrientation.UNKNOWN;
 		}
 	}
 }

@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.renderer;
 
+import java.awt.ComponentOrientation;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Insets;
@@ -55,6 +56,13 @@ public class InputTextAreaControl extends BaseInputControl {
 		ElementImpl element = this.controlElement;
 		String value = element.getTextContent();
 		((JTextArea) widget).setLineWrap(true);
+		
+		if(modelNode.getTitle() != null)
+			widget.setToolTipText(modelNode.getTitle());
+		widget.setVisible(modelNode.getHidden());
+		widget.applyComponentOrientation(direction(modelNode.getDir()));
+		widget.setEditable(new Boolean(modelNode.getContentEditable()));
+		widget.setEnabled(!modelNode.getDisabled());
 		widget.setText(value);
 	}
 
@@ -192,5 +200,16 @@ public class InputTextAreaControl extends BaseInputControl {
 
 	public void resetInput() {
 		this.widget.setText("");
+	}
+	
+	private ComponentOrientation direction(String dir) {
+
+		if ("ltr".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.LEFT_TO_RIGHT;
+		} else if ("rtl".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.RIGHT_TO_LEFT;
+		} else {
+			return ComponentOrientation.UNKNOWN;
+		}
 	}
 }

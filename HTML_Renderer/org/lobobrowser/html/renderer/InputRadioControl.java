@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.renderer;
 
+import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -44,6 +45,12 @@ public class InputRadioControl extends BaseInputControl {
 		this.setLayout(WrapperLayout.getInstance());
 		JRadioButton radio = new JRadioButton();
 		radio.setOpaque(false);
+		if(modelNode.getTitle() != null)
+			radio.setToolTipText(modelNode.getTitle());
+		radio.setVisible(modelNode.getHidden());
+		radio.applyComponentOrientation(direction(modelNode.getDir()));
+		radio.setEnabled(!modelNode.getDisabled());
+		radio.setSelected(modelNode.getChecked());
 		this.widget = radio;
 
 		// Note: Value attribute cannot be set in reset() method.
@@ -129,5 +136,16 @@ public class InputRadioControl extends BaseInputControl {
 
 	public String getValue() {
 		return this.controlElement.getAttribute(HtmlAttributeProperties.VALUE);
+	}
+	
+	private ComponentOrientation direction(String dir) {
+
+		if ("ltr".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.LEFT_TO_RIGHT;
+		} else if ("rtl".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.RIGHT_TO_LEFT;
+		} else {
+			return ComponentOrientation.UNKNOWN;
+		}
 	}
 }
