@@ -42,7 +42,15 @@ public abstract class CommonLayout implements MarkupLayout {
 
 	public void layoutMarkup(RBlockViewport bodyLayout,	HTMLElementImpl markupElement) {
 		RenderState rs = markupElement.getRenderState();
-		int display = rs == null ? this.display : rs.getDisplay();
+		
+		int display = 0;
+		
+		if(!markupElement.getHidden()){
+			display = 	DISPLAY_NONE;
+		}else{	
+			display = rs == null ? this.display : rs.getDisplay();
+		}
+		
 		if (display == RenderState.DISPLAY_INLINE) {
 			// Inline elements with absolute or fixed positions need
 			// to be treated as blocks.
