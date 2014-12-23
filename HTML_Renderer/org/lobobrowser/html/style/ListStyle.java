@@ -21,6 +21,8 @@
 package org.lobobrowser.html.style;
 
 import java.awt.Image;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class ListStyle {
 	public static final int TYPE_UNSET = 256;
@@ -29,10 +31,14 @@ public class ListStyle {
 	public static final int TYPE_CIRCLE = 2;
 	public static final int TYPE_SQUARE = 3;
 	public static final int TYPE_DECIMAL = 4;
-	public static final int TYPE_LOWER_ALPHA = 5;
-	public static final int TYPE_UPPER_ALPHA = 6;
-	public static final int TYPE_LOWER_LATIN = 7;
-	public static final int TYPE_UPPER_LATIN = 8;
+	public static final int TYPE_DECIMAL_LEADING_ZERO = 5;
+	public static final int TYPE_LOWER_ALPHA = 6;
+	public static final int TYPE_UPPER_ALPHA = 7;
+	public static final int TYPE_LOWER_LATIN = 8;
+	public static final int TYPE_UPPER_LATIN = 9;
+	public static final int TYPE_LOWER_ROMAN = 10;
+	public static final int TYPE_UPPER_ROMAN = 11;
+	
 
 	public static final int POSITION_UNSET = 0;
 	public static final int POSITION_INSIDE = 0;
@@ -51,4 +57,42 @@ public class ListStyle {
 
 	public ListStyle() {
 	}
+	
+	
+	public static String getRomanNumerals(int num) {
+	    LinkedHashMap<String, Integer> roman_numerals = new LinkedHashMap<String, Integer>();
+	    roman_numerals.put("M", 1000);
+	    roman_numerals.put("CM", 900);
+	    roman_numerals.put("D", 500);
+	    roman_numerals.put("CD", 400);
+	    roman_numerals.put("C", 100);
+	    roman_numerals.put("XC", 90);
+	    roman_numerals.put("L", 50);
+	    roman_numerals.put("XL", 40);
+	    roman_numerals.put("X", 10);
+	    roman_numerals.put("IX", 9);
+	    roman_numerals.put("V", 5);
+	    roman_numerals.put("IV", 4);
+	    roman_numerals.put("I", 1);
+	    String res = "";
+	    for(Map.Entry<String, Integer> entry : roman_numerals.entrySet()){
+	      int matches = num/entry.getValue();
+	      res += repeat(entry.getKey(), matches);
+	      num = num % entry.getValue();
+	    }
+	    return res;
+	  }
+	
+	
+	  private static String repeat(String s, int n) {
+	    if(s == null) {
+	        return null;
+	    }
+	    final StringBuilder sb = new StringBuilder();
+	    for(int i = 0; i < n; i++) {
+	        sb.append(s);
+	    }
+	    return sb.toString();
+	  }
+	
 }

@@ -107,8 +107,7 @@ class RListItem extends BaseRListElement {
 		RBlockViewport layout = this.bodyLayout;
 		if (layout != null) {
 			ListStyle listStyle = this.listStyle;
-			int bulletType = listStyle == null ? ListStyle.TYPE_UNSET
-					: listStyle.type;
+			int bulletType = listStyle == null ? ListStyle.TYPE_UNSET : listStyle.type;
 			if (bulletType != ListStyle.TYPE_NONE) {
 				if (bulletType == ListStyle.TYPE_UNSET) {
 					RCollection parent = this.getOriginalOrCurrentParent();
@@ -131,10 +130,8 @@ class RListItem extends BaseRListElement {
 							this.hasVScrollBar);
 					Insets paddingInsets = this.paddingInsets;
 					int baselineOffset = layout.getFirstBaselineOffset();
-					int bulletRight = (marginInsets == null ? 0
-							: marginInsets.left) - BULLET_RMARGIN;
-					int bulletBottom = insets.top + baselineOffset
-							+ (paddingInsets == null ? 0 : paddingInsets.top);
+					int bulletRight = (marginInsets == null ? 0 : marginInsets.left) - BULLET_RMARGIN;
+					int bulletBottom = insets.top + baselineOffset + (paddingInsets == null ? 0 : paddingInsets.top);
 					int bulletTop = bulletBottom - BULLET_HEIGHT;
 					int bulletLeft = bulletRight - BULLET_WIDTH;
 					int bulletNumber = this.count;
@@ -143,29 +140,40 @@ class RListItem extends BaseRListElement {
 					case ListStyle.TYPE_DECIMAL:
 						numberText = bulletNumber + ".";
 						break;
+					case ListStyle.TYPE_DECIMAL_LEADING_ZERO:
+						if(bulletNumber<10)	
+							numberText = "0" + bulletNumber + ".";
+						else
+							numberText = bulletNumber + ".";
+						break;
 					case ListStyle.TYPE_LOWER_ALPHA:
-						numberText = ((char) ('a' + bulletNumber)) + ".";
+						numberText = ((char) ('a' + (bulletNumber-1))) + ".";
+						
 						break;
 					case ListStyle.TYPE_UPPER_ALPHA:
-						numberText = ((char) ('A' + bulletNumber)) + ".";
+						numberText = ((char) ('A' + (bulletNumber-1))) + ".";
+						break;
+					case ListStyle.TYPE_LOWER_ROMAN:
+						numberText = ListStyle.getRomanNumerals(bulletNumber).toLowerCase() + ".";;
+						break;
+					case ListStyle.TYPE_UPPER_ROMAN:
+						numberText = ListStyle.getRomanNumerals(bulletNumber).toUpperCase() + ".";
 						break;
 					case ListStyle.TYPE_DISC:
-						g.fillOval(bulletLeft, bulletTop, BULLET_WIDTH,
-								BULLET_HEIGHT);
+						g.fillOval(bulletLeft, bulletTop, BULLET_WIDTH,	BULLET_HEIGHT);
 						break;
 					case ListStyle.TYPE_CIRCLE:
-						g.drawOval(bulletLeft, bulletTop, BULLET_WIDTH,
-								BULLET_HEIGHT);
+						g.drawOval(bulletLeft, bulletTop, BULLET_WIDTH,	BULLET_HEIGHT);
 						break;
 					case ListStyle.TYPE_SQUARE:
-						g.fillRect(bulletLeft, bulletTop, BULLET_WIDTH,
-								BULLET_HEIGHT);
+						g.fillRect(bulletLeft, bulletTop, BULLET_WIDTH, BULLET_HEIGHT);
 						break;
 					}
+					
+					
 					if (numberText != null) {
 						FontMetrics fm = g.getFontMetrics();
-						int numberLeft = bulletRight
-								- fm.stringWidth(numberText);
+						int numberLeft = bulletRight - fm.stringWidth(numberText);
 						int numberY = bulletBottom;
 						g.drawString(numberText, numberLeft, numberY);
 					}

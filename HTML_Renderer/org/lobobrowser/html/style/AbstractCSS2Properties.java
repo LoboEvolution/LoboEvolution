@@ -29,8 +29,6 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.gui.ColorFactory;
@@ -143,7 +141,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	public static final String QUOTES = "quotes";
 	public static final String RICHNESS = "richness";
 	public static final String RIGHT = "right";
-	public static final String SIZE = HtmlAttributeProperties.SIZE;
+	public static final String SIZE = "size";
 	public static final String SPEAK = "speak";
 	public static final String SPEAK_HEADER = "speak-header";
 	public static final String SPEAK_NUMERAL = "speak-numeral";

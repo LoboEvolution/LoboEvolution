@@ -59,12 +59,12 @@ public class HtmlValues {
 
 	static {
 		FontInfo systemFont = new FontInfo();
-		SYSTEM_FONTS.put("caption", systemFont);
-		SYSTEM_FONTS.put("icon", systemFont);
-		SYSTEM_FONTS.put("menu", systemFont);
-		SYSTEM_FONTS.put("message-box", systemFont);
-		SYSTEM_FONTS.put("small-caption", systemFont);
-		SYSTEM_FONTS.put("status-bar", systemFont);
+		SYSTEM_FONTS.put(CSSValuesProperties.CAPTION, systemFont);
+		SYSTEM_FONTS.put(CSSValuesProperties.ICON, systemFont);
+		SYSTEM_FONTS.put(CSSValuesProperties.MENU, systemFont);
+		SYSTEM_FONTS.put(CSSValuesProperties.MESSAGE_BOX, systemFont);
+		SYSTEM_FONTS.put(CSSValuesProperties.SMALL_CAPTION, systemFont);
+		SYSTEM_FONTS.put(CSSValuesProperties.STATUS_BAR, systemFont);
 	}
 
 	private HtmlValues() {
@@ -72,11 +72,11 @@ public class HtmlValues {
 
 	public static boolean isBorderStyle(String token) {
 		String tokenTL = token.toLowerCase();
-		return tokenTL.equals("solid") || tokenTL.equals("dashed")
-				|| tokenTL.equals("dotted") || tokenTL.equals("double")
-				|| tokenTL.equals("none") || tokenTL.equals("hidden")
-				|| tokenTL.equals("groove") || tokenTL.equals("ridge")
-				|| tokenTL.equals("inset") || tokenTL.equals("outset");
+		return tokenTL.equals(CSSValuesProperties.SOLID) || tokenTL.equals(CSSValuesProperties.DASHED)
+				|| tokenTL.equals(CSSValuesProperties.DOTTED) || tokenTL.equals(CSSValuesProperties.DOUBLE)
+				|| tokenTL.equals(CSSValuesProperties.NONE) || tokenTL.equals(CSSValuesProperties.HIDDEN)
+				|| tokenTL.equals(CSSValuesProperties.GROOVE) || tokenTL.equals(CSSValuesProperties.RIDGE)
+				|| tokenTL.equals(CSSValuesProperties.INSET) || tokenTL.equals(CSSValuesProperties.OUTSET);
 	}
 
 	public static HtmlInsets getMarginInsets(CSS2Properties cssProperties,
@@ -173,7 +173,7 @@ public class HtmlValues {
 		if (insets == null) {
 			insets = new HtmlInsets();
 		}
-		if ("auto".equalsIgnoreCase(sizeText)) {
+		if (CSSValuesProperties.AUTO.equalsIgnoreCase(sizeText)) {
 			insets.topType = HtmlInsets.TYPE_AUTO;
 		} else if (sizeText.endsWith("%")) {
 			insets.topType = HtmlInsets.TYPE_PERCENT;
@@ -202,7 +202,7 @@ public class HtmlValues {
 		if (insets == null) {
 			insets = new HtmlInsets();
 		}
-		if ("auto".equalsIgnoreCase(sizeText)) {
+		if (CSSValuesProperties.AUTO.equalsIgnoreCase(sizeText)) {
 			insets.leftType = HtmlInsets.TYPE_AUTO;
 		} else if (sizeText.endsWith("%")) {
 			insets.leftType = HtmlInsets.TYPE_PERCENT;
@@ -231,7 +231,7 @@ public class HtmlValues {
 		if (insets == null) {
 			insets = new HtmlInsets();
 		}
-		if ("auto".equalsIgnoreCase(sizeText)) {
+		if (CSSValuesProperties.AUTO.equalsIgnoreCase(sizeText)) {
 			insets.bottomType = HtmlInsets.TYPE_AUTO;
 		} else if (sizeText.endsWith("%")) {
 			insets.bottomType = HtmlInsets.TYPE_PERCENT;
@@ -260,7 +260,7 @@ public class HtmlValues {
 		if (insets == null) {
 			insets = new HtmlInsets();
 		}
-		if ("auto".equalsIgnoreCase(sizeText)) {
+		if (CSSValuesProperties.AUTO.equalsIgnoreCase(sizeText)) {
 			insets.rightType = HtmlInsets.TYPE_AUTO;
 		} else if (sizeText.endsWith("%")) {
 			insets.rightType = HtmlInsets.TYPE_PERCENT;
@@ -431,8 +431,8 @@ public class HtmlValues {
 			}
 			return (int) Math.round(font.getSize() * value);
 		} else if (specTL.endsWith("px") || specTL.endsWith("pt")
-				|| specTL.endsWith("cm") || specTL.endsWith("pc")
-				|| specTL.endsWith("cm") || specTL.endsWith("mm")
+				|| specTL.endsWith("em") || specTL.endsWith("pc")
+				|| specTL.endsWith("em") || specTL.endsWith("mm")
 				|| specTL.endsWith("ex")) {
 			int pixelSize = getPixelSize(spec, parentRenderState,
 					DEFAULT_FONT_SIZE_INT);
@@ -451,25 +451,25 @@ public class HtmlValues {
 			} catch (NumberFormatException nfe) {
 				return DEFAULT_FONT_SIZE;
 			}
-		} else if ("small".equals(specTL)) {
+		} else if (CSSValuesProperties.SMALL.equals(specTL)) {
 			return 12.0f;
-		} else if ("medium".equals(specTL)) {
+		} else if (CSSValuesProperties.MEDIUM.equals(specTL)) {
 			return 14.0f;
-		} else if ("large".equals(specTL)) {
+		} else if (CSSValuesProperties.LARGE.equals(specTL)) {
 			return 20.0f;
-		} else if ("x-small".equals(specTL)) {
+		} else if (CSSValuesProperties.X_SMALL.equals(specTL)) {
 			return 11.0f;
-		} else if ("xx-small".equals(specTL)) {
+		} else if (CSSValuesProperties.XX_SMALL.equals(specTL)) {
 			return 10.0f;
-		} else if ("x-large".equals(specTL)) {
+		} else if (CSSValuesProperties.X_LARGE.equals(specTL)) {
 			return 26.0f;
-		} else if ("xx-large".equals(specTL)) {
+		} else if (CSSValuesProperties.XX_LARGE.equals(specTL)) {
 			return 40.0f;
-		} else if ("larger".equals(specTL)) {
+		} else if (CSSValuesProperties.LARGER.equals(specTL)) {
 			int parentFontSize = parentRenderState == null ? DEFAULT_FONT_SIZE_INT
 					: parentRenderState.getFont().getSize();
 			return parentFontSize * 1.2f;
-		} else if ("smaller".equals(specTL)) {
+		} else if (CSSValuesProperties.SMALLER.equals(specTL)) {
 			int parentFontSize = parentRenderState == null ? DEFAULT_FONT_SIZE_INT
 					: parentRenderState.getFont().getSize();
 			return parentFontSize / 1.2f;
@@ -544,7 +544,7 @@ public class HtmlValues {
 					.getDefaultToolkit().getScreenResolution();
 			double inches = val / 6;
 			return (int) Math.round(dpi * inches);
-		} else if (lcSpec.endsWith("cm")) {
+		} else if (lcSpec.endsWith("em")) {
 			String valText = lcSpec.substring(0, lcSpec.length() - 2);
 			double val;
 			try {
@@ -738,7 +738,7 @@ public class HtmlValues {
 
 	public static boolean isLength(String token) {
 		if (token.endsWith("px") || token.endsWith("pt")
-				|| token.endsWith("pc") || token.endsWith("cm")
+				|| token.endsWith("pc") || token.endsWith("em")
 				|| token.endsWith("mm") || token.endsWith("ex")
 				|| token.endsWith("em")) {
 			return true;
@@ -804,23 +804,29 @@ public class HtmlValues {
 
 	public static int getListStyleType(String token) {
 		String tokenTL = token.toLowerCase();
-		if ("none".equals(tokenTL)) {
+		if (CSSValuesProperties.NONE.equals(tokenTL)) {
 			return ListStyle.TYPE_NONE;
-		} else if ("disc".equals(tokenTL)) {
+		} else if (CSSValuesProperties.DISC.equals(tokenTL)) {
 			return ListStyle.TYPE_DISC;
-		} else if ("circle".equals(tokenTL)) {
+		} else if (CSSValuesProperties.CIRCLE.equals(tokenTL)) {
 			return ListStyle.TYPE_CIRCLE;
-		} else if ("square".equals(tokenTL)) {
+		} else if (CSSValuesProperties.SQUARE.equals(tokenTL)) {
 			return ListStyle.TYPE_SQUARE;
-		} else if ("decimal".equals(tokenTL)) {
+		} else if (CSSValuesProperties.DECIMAL.equals(tokenTL)) {
 			return ListStyle.TYPE_DECIMAL;
-		} else if ("lower-alpha".equals(tokenTL)
-				|| "lower-latin".equals(tokenTL)) {
+		} else if (CSSValuesProperties.DECIMAL_LEADING_ZERO.equals(tokenTL)) {
+			return ListStyle.TYPE_DECIMAL_LEADING_ZERO;
+		}else if (CSSValuesProperties.LOWER_ALPHA.equals(tokenTL)
+				|| CSSValuesProperties.LOWER_LATIN.equals(tokenTL)) {
 			return ListStyle.TYPE_LOWER_ALPHA;
-		} else if ("upper-alpha".equals(tokenTL)
-				|| "upper-latin".equals(tokenTL)) {
+		} else if (CSSValuesProperties.UPPER_ALPHA.equals(tokenTL)
+				|| CSSValuesProperties.UPPER_LATIN.equals(tokenTL)) {
 			return ListStyle.TYPE_UPPER_ALPHA;
-		} else {
+		} else if (CSSValuesProperties.LOWER_ROMAN.equals(tokenTL)) {
+			return ListStyle.TYPE_LOWER_ROMAN;
+		} else if (CSSValuesProperties.UPPER_ROMAN.equals(tokenTL)) {
+			return ListStyle.TYPE_UPPER_ROMAN;
+		}else {
 			// TODO: Many types missing here
 			return ListStyle.TYPE_UNSET;
 		}
@@ -828,11 +834,11 @@ public class HtmlValues {
 
 	public static int getListStyleTypeDeprecated(String token) {
 		String tokenTL = token.toLowerCase();
-		if ("disc".equals(tokenTL)) {
+		if (CSSValuesProperties.DISC.equals(tokenTL)) {
 			return ListStyle.TYPE_DISC;
-		} else if ("circle".equals(tokenTL)) {
+		} else if (CSSValuesProperties.CIRCLE.equals(tokenTL)) {
 			return ListStyle.TYPE_CIRCLE;
-		} else if ("square".equals(tokenTL)) {
+		} else if (CSSValuesProperties.SQUARE.equals(tokenTL)) {
 			return ListStyle.TYPE_SQUARE;
 		} else if ("1".equals(tokenTL)) {
 			return ListStyle.TYPE_DECIMAL;
@@ -841,16 +847,15 @@ public class HtmlValues {
 		} else if ("A".equals(tokenTL)) {
 			return ListStyle.TYPE_UPPER_ALPHA;
 		} else {
-			// TODO: Missing i, I.
 			return ListStyle.TYPE_UNSET;
 		}
 	}
 
 	public static int getListStylePosition(String token) {
 		String tokenTL = token.toLowerCase();
-		if ("inside".equals(tokenTL)) {
+		if (CSSValuesProperties.INSIDE.equals(tokenTL)) {
 			return ListStyle.POSITION_INSIDE;
-		} else if ("outside".equals(tokenTL)) {
+		} else if (CSSValuesProperties.OUTSIDE.equals(tokenTL)) {
 			return ListStyle.POSITION_OUTSIDE;
 		} else {
 			return ListStyle.POSITION_UNSET;
@@ -878,17 +883,17 @@ public class HtmlValues {
 	}
 
 	public static boolean isFontStyle(String token) {
-		return "italic".equals(token) || "normal".equals(token)
-				|| "oblique".equals(token);
+		return CSSValuesProperties.ITALIC.equals(token) || CSSValuesProperties.NORMAL.equals(token)
+				|| CSSValuesProperties.OBLIQUE.equals(token);
 	}
 
 	public static boolean isFontVariant(String token) {
-		return "small-caps".equals(token) || "normal".equals(token);
+		return CSSValuesProperties.SMALL_CAPS.equals(token) || CSSValuesProperties.NORMAL.equals(token);
 	}
 
 	public static boolean isFontWeight(String token) {
-		if ("bold".equals(token) || "bolder".equals(token)
-				|| "lighter".equals(token)) {
+		if (CSSValuesProperties.BOLD.equals(token) || CSSValuesProperties.BOLDER.equals(token)
+				|| CSSValuesProperties.LIGHTER.equals(token)) {
 			return true;
 		}
 		try {
@@ -944,25 +949,25 @@ public class HtmlValues {
 			return HtmlValues.BORDER_STYLE_NONE;
 		}
 		String stl = styleText.toLowerCase();
-		if ("solid".equals(stl)) {
+		if (CSSValuesProperties.SOLID.equals(stl)) {
 			return BORDER_STYLE_SOLID;
-		} else if ("dashed".equals(stl)) {
+		} else if (CSSValuesProperties.DASHED.equals(stl)) {
 			return BORDER_STYLE_DASHED;
-		} else if ("dotted".equals(stl)) {
+		} else if (CSSValuesProperties.DOTTED.equals(stl)) {
 			return BORDER_STYLE_DOTTED;
-		} else if ("none".equals(stl)) {
+		} else if (CSSValuesProperties.NONE.equals(stl)) {
 			return BORDER_STYLE_NONE;
-		} else if ("hidden".equals(stl)) {
+		} else if (CSSValuesProperties.HIDDEN.equals(stl)) {
 			return BORDER_STYLE_HIDDEN;
-		} else if ("double".equals(stl)) {
+		} else if (CSSValuesProperties.DOUBLE.equals(stl)) {
 			return BORDER_STYLE_DOUBLE;
-		} else if ("groove".equals(stl)) {
+		} else if (CSSValuesProperties.GROOVE.equals(stl)) {
 			return BORDER_STYLE_GROOVE;
-		} else if ("ridge".equals(stl)) {
+		} else if (CSSValuesProperties.RIDGE.equals(stl)) {
 			return BORDER_STYLE_RIDGE;
-		} else if ("inset".equals(stl)) {
+		} else if (CSSValuesProperties.INSET.equals(stl)) {
 			return BORDER_STYLE_INSET;
-		} else if ("outset".equals(stl)) {
+		} else if (CSSValuesProperties.OUTSET.equals(stl)) {
 			return BORDER_STYLE_OUTSET;
 		} else {
 			return BORDER_STYLE_NONE;
@@ -971,15 +976,15 @@ public class HtmlValues {
 
 	public static boolean isBackgroundRepeat(String repeat) {
 		String repeatTL = repeat.toLowerCase();
-		return repeatTL.indexOf("repeat") != -1;
+		return repeatTL.indexOf(CSSValuesProperties.REPEAT) != -1;
 	}
 
 	public static boolean isBackgroundPosition(String token) {
 		return isLength(token) || token.endsWith("%")
-				|| token.equalsIgnoreCase("top")
-				|| token.equalsIgnoreCase("center")
-				|| token.equalsIgnoreCase("bottom")
-				|| token.equalsIgnoreCase("left")
-				|| token.equalsIgnoreCase("right");
+				|| token.equalsIgnoreCase(CSSValuesProperties.TOP)
+				|| token.equalsIgnoreCase(CSSValuesProperties.CENTER)
+				|| token.equalsIgnoreCase(CSSValuesProperties.BOTTOM)
+				|| token.equalsIgnoreCase(CSSValuesProperties.LEFT)
+				|| token.equalsIgnoreCase(CSSValuesProperties.RIGHT);
 	}
 }
