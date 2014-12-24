@@ -28,11 +28,13 @@ import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.style.RenderState;
 
 public abstract class CommonLayout implements MarkupLayout {
+	
 	protected static final int DISPLAY_NONE = 0;
 	protected static final int DISPLAY_INLINE = 1;
 	protected static final int DISPLAY_BLOCK = 2;
 	protected static final int DISPLAY_LIST_ITEM = 3;
 	protected static final int DISPLAY_TABLE = 6;
+	protected static final int DISPLAY_INLINE_BLOCK = 8;
 
 	private final int display;
 
@@ -42,9 +44,9 @@ public abstract class CommonLayout implements MarkupLayout {
 
 	public void layoutMarkup(RBlockViewport bodyLayout,	HTMLElementImpl markupElement) {
 		RenderState rs = markupElement.getRenderState();
-		
+			
 		int display = 0;
-		
+				
 		if(!markupElement.getHidden()){
 			display = 	DISPLAY_NONE;
 		}else{	
@@ -64,6 +66,7 @@ public abstract class CommonLayout implements MarkupLayout {
 				}
 			}
 		}
+		
 		switch (display) {
 		case DISPLAY_NONE:
 			// skip it completely.
@@ -88,6 +91,9 @@ public abstract class CommonLayout implements MarkupLayout {
 			break;
 		case DISPLAY_TABLE:
 			bodyLayout.layoutRTable(markupElement);
+			break;
+		case DISPLAY_INLINE_BLOCK:
+			bodyLayout.layoutRInlineBlock(markupElement);
 			break;
 		default:
 			// Assume INLINE

@@ -2191,6 +2191,12 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 	
+	public void layoutRInlineBlock(final HTMLElementImpl markupElement) {
+		final RInlineBlock inlineBlock = new RInlineBlock(container, markupElement, userAgentContext, rendererContext, frameContext);		
+		inlineBlock.doLayout(availContentWidth, availContentHeight, sizeOnly);
+		addRenderableToLine(inlineBlock);
+		}
+	
 	public FrameContext getFrameContext() {
 		return frameContext;
 	}

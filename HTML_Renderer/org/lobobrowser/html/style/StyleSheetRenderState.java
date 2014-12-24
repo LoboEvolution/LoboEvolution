@@ -126,7 +126,9 @@ public class StyleSheetRenderState implements RenderState {
 				displayInt = DISPLAY_TABLE_CELL;
 			} else if ("table-row".equals(displayTextTL)) {
 				displayInt = DISPLAY_TABLE_ROW;
-			} else {
+			} else if ("inline-block".equals(displayTextTL)) {
+				displayInt = DISPLAY_INLINE_BLOCK;
+			}else {
 				displayInt = this.getDefaultDisplay();
 			}
 		} else {

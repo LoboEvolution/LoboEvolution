@@ -31,6 +31,7 @@ import java.awt.FontMetrics;
  * @author J. H. S.
  */
 public interface RenderState {
+	
 	public static final int MASK_TEXTDECORATION_UNDERLINE = 1;
 	public static final int MASK_TEXTDECORATION_OVERLINE = 2;
 	public static final int MASK_TEXTDECORATION_LINE_THROUGH = 4;
@@ -51,6 +52,7 @@ public interface RenderState {
 	public static final int DISPLAY_TABLE_CELL = 5;
 	public static final int DISPLAY_TABLE = 6;
 	public static final int DISPLAY_TABLE_CAPTION = 7;
+	public static final int DISPLAY_INLINE_BLOCK = 8;
 
 	public static final int WS_NORMAL = 0;
 	public static final int WS_PRE = 1;
