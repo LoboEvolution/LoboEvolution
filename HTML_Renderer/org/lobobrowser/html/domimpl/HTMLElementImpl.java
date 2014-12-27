@@ -37,6 +37,7 @@ import java.util.logging.Level;
 
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.dombl.DOMTokenListImpl;
 import org.lobobrowser.html.dombl.ElementImpl;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.parser.HtmlParser;
@@ -52,7 +53,6 @@ import org.lobobrowser.html.w3c.DOMSettableTokenList;
 import org.lobobrowser.html.w3c.DOMStringMap;
 import org.lobobrowser.html.w3c.DOMTokenList;
 import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.HTMLMenuElement;
 import org.lobobrowser.html.w3c.HTMLPropertiesCollection;
 import org.lobobrowser.util.JavascriptCommon;
 import org.lobobrowser.util.Strings;
@@ -254,7 +254,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 
 	public String getClassName() {
 		String className = this.getAttribute(HtmlAttributeProperties.CLASS);
-		// Blank required instead of null.
 		return className == null ? "" : className;
 	}
 
@@ -849,8 +848,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 
 	@Override
 	public DOMTokenList getClassList() {
-		// TODO Auto-generated method stub
-		return null;
+		return new DOMTokenListImpl(this,this.getClassName());
 	}
 
 	@Override
@@ -888,15 +886,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public boolean getIsContentEditable() {
-		String content = getAttribute(HtmlAttributeProperties.CONTENTEDITABLE);
-		if (content == null)
-			return false;
-		else
-			return new Boolean(content);
-	}
 	
 	@Override
 	public String getCommandType() {
@@ -917,55 +906,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	}
 
 	@Override
-	public boolean getDisabled() {
-		return this.getAttribute(HtmlAttributeProperties.DISABLE) == null ? true : false;
-	}
-
-	@Override
-	public boolean getChecked() {
-		return this.getAttribute(HtmlAttributeProperties.CHECKED) == null ? true : false;
-	}
-
-	@Override
 	public Element getOffsetParent() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public boolean getItemScope() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void setItemScope(boolean itemScope) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getItemType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setItemType(String itemType) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getItemId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setItemId(String itemId) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -982,14 +925,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 
 	@Override
 	public DOMSettableTokenList getItemProp() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void setItemProp(String itemProp) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

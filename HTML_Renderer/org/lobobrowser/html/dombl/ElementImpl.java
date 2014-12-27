@@ -152,7 +152,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	}
 	
 	public boolean getDraggable() {
-		String draggable = getAttribute(HtmlAttributeProperties.DRAGGABLE);
+		String draggable = this.getAttribute(HtmlAttributeProperties.DRAGGABLE);
 		if (draggable == null)
 			return false;
 		else
@@ -161,6 +161,52 @@ public class ElementImpl extends NodeImpl implements Element {
 
 	public void setDraggable(boolean draggable) {
 		this.setAttribute(HtmlAttributeProperties.DRAGGABLE, String.valueOf(draggable));
+	}
+	
+	public boolean getIsContentEditable() {
+		String content = getAttribute(HtmlAttributeProperties.CONTENTEDITABLE);
+		if (content == null)
+			return false;
+		else
+			return new Boolean(content);
+	}
+	
+	public boolean getDisabled() {
+		return this.getAttribute(HtmlAttributeProperties.DISABLE) == null ? true : false;
+	}
+
+	public boolean getChecked() {
+		return this.getAttribute(HtmlAttributeProperties.CHECKED) == null ? true : false;
+	}
+	
+	public boolean getItemScope() {
+		String itemscope = this.getAttribute(HtmlAttributeProperties.ITEMSCOPE);
+		if (itemscope == null)
+			return false;
+		else
+			return new Boolean(itemscope);
+	}
+
+	public void setItemScope(boolean itemscope) {
+		this.setAttribute(HtmlAttributeProperties.ITEMSCOPE, String.valueOf(itemscope));
+		
+	}
+	
+	public String getItemType() {
+		return this.getAttribute(HtmlAttributeProperties.ITEMTYPE);
+	}
+
+	public void setItemType(String itemType) {
+		this.setAttribute(HtmlAttributeProperties.ITEMTYPE,itemType);
+		
+	}
+	
+	public String getItemId() {
+		return this.getAttribute(HtmlAttributeProperties.ITEMID);
+	}
+
+	public void setItemId(String itemId) {
+		this.setAttribute(HtmlAttributeProperties.ITEMID,itemId);
 	}
 	
 	public int getTabIndex() {

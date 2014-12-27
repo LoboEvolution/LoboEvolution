@@ -84,6 +84,11 @@ public interface HtmlAttributeProperties {
 	public final String HIDDEN = "hidden";
 	public final String ID = "id";
 	public final String ISMAP = "isMap";
+	public final String ITEMSCOPE = "itemscope";
+	public final String ITEMTYPE = "itemtype";
+	public final String ITEMID = "itemid";
+	public final String ITEMREF = "itemref";
+	public final String ITEMPROP = "itemprop";
 	public final String LINK = "link";
 	public final String LABEL = "label";
 	public final String LONGDESC = "longdesc";
