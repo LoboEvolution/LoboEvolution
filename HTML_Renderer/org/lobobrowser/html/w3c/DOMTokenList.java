@@ -13,6 +13,8 @@ public interface DOMTokenList {
 	public void remove(String token);
 
 	public boolean toggle(String token);
+	
+	public boolean toggle(String token,boolean force);
 
 	public String toString();
 }
