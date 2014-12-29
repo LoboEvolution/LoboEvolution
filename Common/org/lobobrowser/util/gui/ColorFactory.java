@@ -65,7 +65,10 @@ public class ColorFactory {
 			return true;
 		}
 		String normalSpec = colorSpec.toLowerCase();
-		if (normalSpec.startsWith(RGB_START)) {
+		
+		if (normalSpec.startsWith(RGBA_START)) {
+			return true;
+		} else if (normalSpec.startsWith(RGB_START)) {
 			return true;
 		}
 		synchronized (this) {
@@ -159,9 +162,6 @@ public class ColorFactory {
 					}
 					color = new Color(normalize(red), normalize(green), normalize(blue));
 				} else if (normalSpec.startsWith("#")) {
-					// TODO: OPTIMIZE: It would be more efficient to
-					// create new Color(hex), but CssParser doesn't
-					// give us values formatted with "#" either way.
 					int len = normalSpec.length();
 					int[] rgba = new int[4];
 					rgba[3] = 255;
