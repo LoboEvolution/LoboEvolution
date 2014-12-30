@@ -34,18 +34,19 @@ import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ElementImpl;
+import org.lobobrowser.html.dombl.JTextAreaImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.util.gui.WrapperLayout;
 
 public class InputTextAreaControl extends BaseInputControl {
 
 	private static final long serialVersionUID = 1L;
-	private final JTextComponent widget;
+	private final JTextAreaImpl widget;
 
 	public InputTextAreaControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		this.setLayout(WrapperLayout.getInstance());
-		JTextComponent widget = this.createTextField();
+		JTextAreaImpl widget = (JTextAreaImpl) this.createTextField();
 		this.widget = widget;
 		this.add(new JScrollPane(widget));
 
@@ -55,7 +56,7 @@ public class InputTextAreaControl extends BaseInputControl {
 
 		ElementImpl element = this.controlElement;
 		String value = element.getTextContent();
-		((JTextArea) widget).setLineWrap(true);
+		((JTextAreaImpl) widget).setLineWrap(true);
 		
 		if(modelNode.getTitle() != null)
 			widget.setToolTipText(modelNode.getTitle());
@@ -63,6 +64,7 @@ public class InputTextAreaControl extends BaseInputControl {
 		widget.applyComponentOrientation(direction(modelNode.getDir()));
 		widget.setEditable(new Boolean(modelNode.getContentEditable()));
 		widget.setEnabled(!modelNode.getDisabled());
+		widget.setPlaceholder(modelNode.getPlaceholder());
 		widget.setText(value);
 	}
 
@@ -88,7 +90,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	}
 
 	protected JTextComponent createTextField() {
-		return new JTextArea();
+		return new JTextAreaImpl();
 	}
 
 	/*

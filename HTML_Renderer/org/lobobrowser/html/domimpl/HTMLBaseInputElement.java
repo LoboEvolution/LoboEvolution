@@ -145,6 +145,15 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	public void setName(String name) {
 		this.setAttribute(HtmlAttributeProperties.NAME, name);
 	}
+	
+	public String getPlaceholder() {
+		return this.getAttribute(HtmlAttributeProperties.PLACEHOLDER);
+	}
+
+	public void setPlaceholder(String placeholder) {
+		this.setAttribute(HtmlAttributeProperties.PLACEHOLDER, placeholder);
+
+	}
 
 	public boolean getDisabled() {
 		InputContext ic = this.inputContext;

@@ -131,17 +131,6 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 	}
 
 	@Override
-	public String getPlaceholder() {
-		return this.getAttribute(HtmlAttributeProperties.PLACEHOLDER);
-	}
-
-	@Override
-	public void setPlaceholder(String placeholder) {
-		this.setAttribute(HtmlAttributeProperties.PLACEHOLDER,placeholder);
-		
-	}
-
-	@Override
 	public boolean getRequired() {
 		String required = this.getAttribute(HtmlAttributeProperties.REQUIRED);
 		return HtmlAttributeProperties.REQUIRED.equalsIgnoreCase(required);

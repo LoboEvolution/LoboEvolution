@@ -26,10 +26,9 @@ package org.lobobrowser.html.renderer;
 import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 
+import org.lobobrowser.html.dombl.JTextFieldImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 
 public class InputTextControl extends BaseInputTextControl {
@@ -38,7 +37,7 @@ public class InputTextControl extends BaseInputTextControl {
 
 	public InputTextControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
-		JTextField text = (JTextField) this.widget;
+		JTextFieldImpl text =  (JTextFieldImpl) this.widget;
 		
 		if(modelNode.getTitle() != null)
 			text.setToolTipText(modelNode.getTitle());
@@ -47,6 +46,7 @@ public class InputTextControl extends BaseInputTextControl {
 		text.applyComponentOrientation(direction(modelNode.getDir()));
 		text.setEditable(new Boolean(modelNode.getContentEditable()));
 		text.setEnabled(!modelNode.getDisabled());
+		text.setPlaceholder(modelNode.getPlaceholder());
 		text.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				HtmlController.getInstance().onEnterPressed(modelNode, null);
@@ -62,7 +62,7 @@ public class InputTextControl extends BaseInputTextControl {
 	 * .String)
 	 */
 	protected JTextComponent createTextField() {
-		return new JTextField();
+		return new JTextFieldImpl();
 	}
 	
 	private ComponentOrientation direction(String dir) {
