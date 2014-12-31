@@ -111,7 +111,7 @@ public class InputSelectControl extends BaseInputControl {
 			comboBox.setToolTipText(modelNode.getTitle());
 		comboBox.setVisible(modelNode.getHidden());
 		comboBox.applyComponentOrientation(direction(modelNode.getDir()));
-		comboBox.setEditable(new Boolean(modelNode.getContentEditable()));
+		comboBox.setEditable(new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		comboBox.setEnabled(!modelNode.getDisabled());
 		this.list = list;
 		this.resetItemList();

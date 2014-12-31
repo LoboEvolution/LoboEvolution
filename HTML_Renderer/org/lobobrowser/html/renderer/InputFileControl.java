@@ -53,7 +53,7 @@ public class InputFileControl extends BaseInputControl {
 			this.textField.setToolTipText(modelNode.getTitle());
 		textField.setVisible(modelNode.getHidden());
 		textField.applyComponentOrientation(direction(modelNode.getDir()));
-		textField.setEditable(new Boolean(modelNode.getContentEditable()));
+		textField.setEditable(new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		textField.setEnabled(!modelNode.getDisabled());
 		this.add(this.textField);
 		this.add(Box.createHorizontalStrut(4));

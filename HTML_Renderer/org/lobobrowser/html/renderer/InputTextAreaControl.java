@@ -62,7 +62,7 @@ public class InputTextAreaControl extends BaseInputControl {
 			widget.setToolTipText(modelNode.getTitle());
 		widget.setVisible(modelNode.getHidden());
 		widget.applyComponentOrientation(direction(modelNode.getDir()));
-		widget.setEditable(new Boolean(modelNode.getContentEditable()));
+		widget.setEditable(new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		widget.setEnabled(!modelNode.getDisabled());
 		widget.setPlaceholder(modelNode.getPlaceholder());
 		widget.setText(value);

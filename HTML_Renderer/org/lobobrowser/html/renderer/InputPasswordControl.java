@@ -23,18 +23,34 @@
  */
 package org.lobobrowser.html.renderer;
 
+import java.awt.ComponentOrientation;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPasswordField;
 import javax.swing.text.JTextComponent;
-
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 
-public class InputPasswordControl extends InputTextControl {
+public class InputPasswordControl extends BaseInputTextControl {
 
 	private static final long serialVersionUID = 1L;
 
-	public InputPasswordControl(final HTMLBaseInputElement modelNode) {
-		super(modelNode);
-	}
+	public InputPasswordControl(final HTMLBaseInputElement modelNode) {super(modelNode);
+	JPasswordField pwd =  (JPasswordField) this.widget;
+	
+	if(modelNode.getTitle() != null)
+		pwd.setToolTipText(modelNode.getTitle());
+	
+	pwd.setVisible(modelNode.getHidden());
+	pwd.applyComponentOrientation(direction(modelNode.getDir()));
+	pwd.setEditable(new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
+	pwd.setEnabled(!modelNode.getDisabled());
+	pwd.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent event) {
+			HtmlController.getInstance().onEnterPressed(modelNode, null);
+		}
+	});
+}
 
 	/*
 	 * (non-Javadoc)
@@ -45,5 +61,16 @@ public class InputPasswordControl extends InputTextControl {
 	 */
 	protected JTextComponent createTextField() {
 		return new JPasswordField();
+	}
+	
+	private ComponentOrientation direction(String dir) {
+
+		if ("ltr".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.LEFT_TO_RIGHT;
+		} else if ("rtl".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.RIGHT_TO_LEFT;
+		} else {
+			return ComponentOrientation.UNKNOWN;
+		}
 	}
 }

@@ -26,6 +26,7 @@ package org.lobobrowser.html.renderer;
 import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.dombl.JTextFieldImpl;
@@ -44,7 +45,7 @@ public class InputTextControl extends BaseInputTextControl {
 		
 		text.setVisible(modelNode.getHidden());
 		text.applyComponentOrientation(direction(modelNode.getDir()));
-		text.setEditable(new Boolean(modelNode.getContentEditable()));
+		text.setEditable(new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		text.setEnabled(!modelNode.getDisabled());
 		text.setPlaceholder(modelNode.getPlaceholder());
 		text.addActionListener(new ActionListener() {
