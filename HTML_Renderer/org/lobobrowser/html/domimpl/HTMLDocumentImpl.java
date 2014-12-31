@@ -1569,7 +1569,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	public void addEventListener(String script, String function) {
 		
 		JavascriptCommon ut = new JavascriptCommon();
-		System.out.println("IVAN: " + ut.mapFunction(script));
 		ElementAttributeFilter attr = new ElementAttributeFilter(ut.mapFunction(script));
 		String[] split = function.split("\\{");
 		function = split[1].replace("}", "").trim();

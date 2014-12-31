@@ -9,7 +9,7 @@ public class ColorCommon{
 	public static Map<String,Color> mapColor(){
 
 		Map<String,Color>colorMap = new HashMap<String,Color>();
-		colorMap.put("trasparent",new Color(0, 0, 0, 0));
+		colorMap.put("transparent",new Color(0, 0, 0, 0));					  
 		colorMap.put("aliceblue",new Color(0xF0F8FF));
 		colorMap.put("antiquewhite",new Color(0xFAEBD7));
 		colorMap.put("antiquewhite1",new Color(0xFFEFDB));
