@@ -29,6 +29,7 @@ import java.util.logging.Logger;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
+import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.CSSUtilities;
 import org.lobobrowser.html.style.ColorRenderState;
 import org.lobobrowser.html.style.RenderState;
@@ -133,10 +134,10 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
-		if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key)
+		if (HtmlParser.MODIFYING_KEY.equals(key)
 				&& data != Boolean.TRUE) {
 			this.processLink();
-		} else if (com.steadystate.css.dom.CSSStyleSheetImpl.KEY_DISABLED_CHANGED.equals(key)) {
+		} else if ("styleSheet.disabled.changed".equals(key)) {
 			this.informDocumentInvalid();
 		}
 		return super.setUserData(key, data, handler);

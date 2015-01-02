@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -35,60 +35,59 @@ import org.w3c.dom.css.CSSStyleSheet;
  */
 public abstract class AbstractCSSRuleImpl extends CSSOMObjectImpl {
 
-	private static final long serialVersionUID = 7829784704712797815L;
+    private static final long serialVersionUID = 7829784704712797815L;
 
-	private CSSStyleSheetImpl parentStyleSheet_;
-	private CSSRule parentRule_;
+    private CSSStyleSheetImpl parentStyleSheet_;
+    private CSSRule parentRule_;
 
-	protected CSSStyleSheetImpl getParentStyleSheetImpl() {
-		return parentStyleSheet_;
-	}
+    protected CSSStyleSheetImpl getParentStyleSheetImpl() {
+        return parentStyleSheet_;
+    }
 
-	public void setParentStyleSheet(final CSSStyleSheetImpl parentStyleSheet) {
-		parentStyleSheet_ = parentStyleSheet;
-	}
+    public void setParentStyleSheet(final CSSStyleSheetImpl parentStyleSheet) {
+        parentStyleSheet_ = parentStyleSheet;
+    }
 
-	public void setParentRule(final CSSRule parentRule) {
-		parentRule_ = parentRule;
-	}
+    public void setParentRule(final CSSRule parentRule) {
+        parentRule_ = parentRule;
+    }
 
-	public AbstractCSSRuleImpl(final CSSStyleSheetImpl parentStyleSheet,
-			final CSSRule parentRule) {
-		super();
-		parentStyleSheet_ = parentStyleSheet;
-		parentRule_ = parentRule;
-	}
+    public AbstractCSSRuleImpl(final CSSStyleSheetImpl parentStyleSheet, final CSSRule parentRule) {
+        super();
+        parentStyleSheet_ = parentStyleSheet;
+        parentRule_ = parentRule;
+    }
 
-	public AbstractCSSRuleImpl() {
-		super();
-	}
+    public AbstractCSSRuleImpl() {
+        super();
+    }
 
-	public CSSStyleSheet getParentStyleSheet() {
-		return parentStyleSheet_;
-	}
+    public CSSStyleSheet getParentStyleSheet() {
+        return parentStyleSheet_;
+    }
 
-	public CSSRule getParentRule() {
-		return parentRule_;
-	}
+    public CSSRule getParentRule() {
+        return parentRule_;
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof CSSRule)) {
-			return false;
-		}
-		return super.equals(obj);
-		// don't use parentRule and parentStyleSheet in equals()
-		// recursive loop -> stack overflow!
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof CSSRule)) {
+            return false;
+        }
+        return super.equals(obj);
+        // don't use parentRule and parentStyleSheet in equals()
+        // recursive loop -> stack overflow!
+    }
 
-	@Override
-	public int hashCode() {
-		final int hash = super.hashCode();
-		// don't use parentRule and parentStyleSheet in hashCode()
-		// recursive loop -> stack overflow!
-		return hash;
-	}
+    @Override
+    public int hashCode() {
+        final int hash = super.hashCode();
+        // don't use parentRule and parentStyleSheet in hashCode()
+        // recursive loop -> stack overflow!
+        return hash;
+    }
 }

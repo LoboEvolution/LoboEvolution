@@ -273,7 +273,7 @@ public class CSSUtilities {
 
 			String split = b[i];
 
-			if (!split.contains("*") && !split.startsWith("filter:")
+			if (!split.startsWith("filter:")
 					&& !split.startsWith("-ms") && !split.startsWith("-moz")
 					&& app == 0) {
 				app = 0;
@@ -305,7 +305,7 @@ public class CSSUtilities {
 
 				String split = strSpli[i];
 
-				if (!split.contains("*") && !split.startsWith("filter:")
+				if (!split.startsWith("filter:")
 						&& !split.startsWith("-ms")
 						&& !split.startsWith("-moz")) {
 					stringFixed += split.replace("\\", "").replace("/", "")

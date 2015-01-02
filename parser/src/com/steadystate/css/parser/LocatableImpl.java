@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -34,13 +34,13 @@ import org.w3c.css.sac.Locator;
  */
 public class LocatableImpl implements Locatable {
 
-	private Locator locator_;
+    private Locator locator_;
 
-	public Locator getLocator() {
-		return locator_;
-	}
+    public Locator getLocator() {
+        return locator_;
+    }
 
-	public void setLocator(final Locator locator) {
-		locator_ = locator;
-	}
+    public void setLocator(final Locator locator) {
+        locator_ = locator;
+    }
 }

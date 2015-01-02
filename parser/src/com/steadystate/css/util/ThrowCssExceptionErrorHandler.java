@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -32,40 +32,38 @@ import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
 
 /**
- * Helper implementation of {@link ErrorHandler}, which throws CssException in
- * case of problems.
+ * Helper implementation of {@link ErrorHandler}, which throws CssException in case of problems.
  *
  * @version $Revision: $
  * @author rbri
  * @see ErrorHandler
  */
-public class ThrowCssExceptionErrorHandler implements ErrorHandler,
-		Serializable {
-	private static final long serialVersionUID = -3933638774901855095L;
+public class ThrowCssExceptionErrorHandler implements ErrorHandler, Serializable {
+    private static final long serialVersionUID = -3933638774901855095L;
 
-	/**
-	 * Singleton.
-	 */
-	public static final ThrowCssExceptionErrorHandler INSTANCE = new ThrowCssExceptionErrorHandler();
+    /**
+     * Singleton.
+     */
+    public static final ThrowCssExceptionErrorHandler INSTANCE = new ThrowCssExceptionErrorHandler();
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public void error(final CSSParseException exception) {
-		throw exception;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void error(final CSSParseException exception) {
+        throw exception;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public void fatalError(final CSSParseException exception) {
-		throw exception;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void fatalError(final CSSParseException exception) {
+        throw exception;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public void warning(final CSSParseException exception) {
-		// ignore warnings
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void warning(final CSSParseException exception) {
+        // ignore warnings
+    }
 }

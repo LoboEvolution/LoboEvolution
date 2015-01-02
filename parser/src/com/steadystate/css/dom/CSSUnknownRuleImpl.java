@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -37,97 +37,117 @@ import com.steadystate.css.util.LangUtils;
  *
  * TODO: Reinstate setCssText
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David
- *         Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements
-		CSSUnknownRule {
+public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements CSSUnknownRule {
 
-	private static final long serialVersionUID = -268104019127675990L;
+    private static final long serialVersionUID = -268104019127675990L;
 
-	private String text_;
+    private String text_;
 
-	public String getText() {
-		return text_;
-	}
+    public String getText() {
+        return text_;
+    }
 
-	public void setText(final String text) {
-		text_ = text;
-	}
+    public void setText(final String text) {
+        text_ = text;
+    }
 
-	public CSSUnknownRuleImpl(final CSSStyleSheetImpl parentStyleSheet,
-			final CSSRule parentRule, final String text) {
-		super(parentStyleSheet, parentRule);
-		text_ = text;
-	}
+    public CSSUnknownRuleImpl(
+            final CSSStyleSheetImpl parentStyleSheet,
+            final CSSRule parentRule,
+            final String text) {
+        super(parentStyleSheet, parentRule);
+        text_ = text;
+    }
 
-	public CSSUnknownRuleImpl() {
-		super();
-	}
+    public CSSUnknownRuleImpl() {
+        super();
+    }
 
-	public short getType() {
-		return UNKNOWN_RULE;
-	}
+    public short getType() {
+        return UNKNOWN_RULE;
+    }
 
-	public String getCssText() {
-		return text_;
-	}
+    public String getCssText() {
+        return text_;
+    }
 
-	public void setCssText(final String cssText) throws DOMException {
-		/*
-		 * if( _parentStyleSheet != null && _parentStyleSheet.isReadOnly() )
-		 * throw new DOMExceptionImpl( DOMException.NO_MODIFICATION_ALLOWED_ERR,
-		 * DOMExceptionImpl.READ_ONLY_STYLE_SHEET );
-		 * 
-		 * try { // // Parse the rule string and retrieve the rule //
-		 * StringReader sr = new StringReader( cssText ); CSS2Parser parser =
-		 * new CSS2Parser( sr ); ASTStyleSheetRuleSingle ssrs =
-		 * parser.styleSheetRuleSingle(); CSSRule r = (CSSRule)
-		 * ssrs.jjtGetChild( 0 );
-		 * 
-		 * // // The rule must be an unknown rule // if( r.getType() ==
-		 * CSSRule.UNKNOWN_RULE ) { _text = ((ASTUnknownRule)r)._text;
-		 * setChildren( ((SimpleNode)r).getChildren() ); } else { throw new
-		 * DOMExceptionImpl( DOMException.INVALID_MODIFICATION_ERR,
-		 * DOMExceptionImpl.EXPECTING_UNKNOWN_RULE ); } } catch( ParseException
-		 * e ) { throw new DOMExceptionImpl( DOMException.SYNTAX_ERR,
-		 * DOMExceptionImpl.SYNTAX_ERROR, e.getMessage() ); }
-		 */
-	}
+    public void setCssText(final String cssText) throws DOMException {
+/*
+        if( _parentStyleSheet != null && _parentStyleSheet.isReadOnly() )
+        throw new DOMExceptionImpl(
+        DOMException.NO_MODIFICATION_ALLOWED_ERR,
+        DOMExceptionImpl.READ_ONLY_STYLE_SHEET );
 
-	// There's no need to override the methods from AbstractCSSRuleImpl
-	// public CSSStyleSheet getParentStyleSheet() {
-	// return parentStyleSheet;
-	// }
-	//
-	// public CSSRule getParentRule() {
-	// return parentRule;
-	// }
+        try
+        {
+            //
+            // Parse the rule string and retrieve the rule
+            //
+            StringReader sr = new StringReader( cssText );
+            CSS2Parser parser = new CSS2Parser( sr );
+            ASTStyleSheetRuleSingle ssrs = parser.styleSheetRuleSingle();
+            CSSRule r = (CSSRule) ssrs.jjtGetChild( 0 );
 
-	@Override
-	public String toString() {
-		return getCssText();
-	}
+            //
+            // The rule must be an unknown rule
+            //
+            if( r.getType() == CSSRule.UNKNOWN_RULE )
+            {
+                _text = ((ASTUnknownRule)r)._text;
+                setChildren( ((SimpleNode)r).getChildren() );
+            }
+            else
+            {
+                throw new DOMExceptionImpl(
+                DOMException.INVALID_MODIFICATION_ERR,
+                DOMExceptionImpl.EXPECTING_UNKNOWN_RULE );
+            }
+        }
+        catch( ParseException e )
+        {
+            throw new DOMExceptionImpl(
+            DOMException.SYNTAX_ERR,
+            DOMExceptionImpl.SYNTAX_ERROR,
+            e.getMessage() );
+        }
+*/
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof CSSUnknownRule)) {
-			return false;
-		}
-		final CSSUnknownRule cur = (CSSUnknownRule) obj;
-		return super.equals(obj)
-				&& LangUtils.equals(getCssText(), cur.getCssText());
-	}
+    // There's no need to override the methods from AbstractCSSRuleImpl
+//    public CSSStyleSheet getParentStyleSheet() {
+//        return parentStyleSheet;
+//    }
+//
+//    public CSSRule getParentRule() {
+//        return parentRule;
+//    }
 
-	@Override
-	public int hashCode() {
-		int hash = super.hashCode();
-		hash = LangUtils.hashCode(hash, text_);
-		return hash;
-	}
+    @Override
+    public String toString() {
+        return getCssText();
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof CSSUnknownRule)) {
+            return false;
+        }
+        final CSSUnknownRule cur = (CSSUnknownRule) obj;
+        return super.equals(obj)
+            && LangUtils.equals(getCssText(), cur.getCssText());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = LangUtils.hashCode(hash, text_);
+        return hash;
+    }
 
 }

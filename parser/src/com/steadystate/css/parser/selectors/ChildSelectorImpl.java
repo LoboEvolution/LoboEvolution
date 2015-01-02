@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -36,52 +36,49 @@ import com.steadystate.css.parser.Locatable;
 import com.steadystate.css.parser.LocatableImpl;
 
 /**
- * @author <a href="mailto:davidsch@users.sourceforge.net">David
- *         Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class ChildSelectorImpl extends LocatableImpl implements
-		DescendantSelector, Serializable {
+public class ChildSelectorImpl extends LocatableImpl implements DescendantSelector, Serializable {
 
-	private static final long serialVersionUID = -5843289529637921083L;
+    private static final long serialVersionUID = -5843289529637921083L;
 
-	private Selector ancestorSelector_;
-	private SimpleSelector simpleSelector_;
+    private Selector ancestorSelector_;
+    private SimpleSelector simpleSelector_;
 
-	public void setAncestorSelector(final Selector ancestorSelector) {
-		ancestorSelector_ = ancestorSelector;
-		if (ancestorSelector instanceof Locatable) {
-			setLocator(((Locatable) ancestorSelector).getLocator());
-		} else if (ancestorSelector == null) {
-			setLocator(null);
-		}
-	}
+    public void setAncestorSelector(final Selector ancestorSelector) {
+        ancestorSelector_ = ancestorSelector;
+        if (ancestorSelector instanceof Locatable) {
+            setLocator(((Locatable) ancestorSelector).getLocator());
+        }
+        else if (ancestorSelector == null) {
+            setLocator(null);
+        }
+    }
 
-	public void setSimpleSelector(final SimpleSelector simpleSelector) {
-		simpleSelector_ = simpleSelector;
-	}
+    public void setSimpleSelector(final SimpleSelector simpleSelector) {
+        simpleSelector_ = simpleSelector;
+    }
 
-	public ChildSelectorImpl(final Selector parent,
-			final SimpleSelector simpleSelector) {
-		setAncestorSelector(parent);
-		setSimpleSelector(simpleSelector);
-	}
+    public ChildSelectorImpl(final Selector parent, final SimpleSelector simpleSelector) {
+        setAncestorSelector(parent);
+        setSimpleSelector(simpleSelector);
+    }
 
-	public short getSelectorType() {
-		return Selector.SAC_CHILD_SELECTOR;
-	}
+    public short getSelectorType() {
+        return Selector.SAC_CHILD_SELECTOR;
+    }
 
-	public Selector getAncestorSelector() {
-		return ancestorSelector_;
-	}
+    public Selector getAncestorSelector() {
+        return ancestorSelector_;
+    }
 
-	public SimpleSelector getSimpleSelector() {
-		return simpleSelector_;
-	}
+    public SimpleSelector getSimpleSelector() {
+        return simpleSelector_;
+    }
 
-	@Override
-	public String toString() {
-		return ancestorSelector_.toString() + " > "
-				+ simpleSelector_.toString();
-	}
+    @Override
+    public String toString() {
+        return ancestorSelector_.toString() + " > " + simpleSelector_.toString();
+    }
 }

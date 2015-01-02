@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -39,57 +39,57 @@ import com.steadystate.css.parser.LocatableImpl;
  * @author Ahmed Ashour
  * @author rbri
  */
-public class GeneralAdjacentSelectorImpl extends LocatableImpl implements
-		SiblingSelector, Serializable {
+public class GeneralAdjacentSelectorImpl extends LocatableImpl implements SiblingSelector, Serializable {
 
-	private static final long serialVersionUID = 1292704016876205605L;
+    private static final long serialVersionUID = 1292704016876205605L;
 
-	private short nodeType_;
-	private Selector selector_;
-	private SimpleSelector siblingSelector_;
+    private short nodeType_;
+    private Selector selector_;
+    private SimpleSelector siblingSelector_;
 
-	public void setNodeType(final short nodeType) {
-		nodeType_ = nodeType;
-	}
+    public void setNodeType(final short nodeType) {
+        nodeType_ = nodeType;
+    }
 
-	public void setSelector(final Selector child) {
-		selector_ = child;
-		if (child instanceof Locatable) {
-			setLocator(((Locatable) child).getLocator());
-		} else if (child == null) {
-			setLocator(null);
-		}
-	}
+    public void setSelector(final Selector child) {
+        selector_ = child;
+        if (child instanceof Locatable) {
+            setLocator(((Locatable) child).getLocator());
+        }
+        else if (child == null) {
+            setLocator(null);
+        }
+    }
 
-	public void setSiblingSelector(final SimpleSelector directAdjacent) {
-		siblingSelector_ = directAdjacent;
-	}
+    public void setSiblingSelector(final SimpleSelector directAdjacent) {
+        siblingSelector_ = directAdjacent;
+    }
 
-	public GeneralAdjacentSelectorImpl(final short nodeType,
-			final Selector child, final SimpleSelector directAdjacent) {
-		setNodeType(nodeType);
-		setSelector(child);
-		setSiblingSelector(directAdjacent);
-	}
+    public GeneralAdjacentSelectorImpl(final short nodeType,
+            final Selector child, final SimpleSelector directAdjacent) {
+        setNodeType(nodeType);
+        setSelector(child);
+        setSiblingSelector(directAdjacent);
+    }
 
-	public short getNodeType() {
-		return nodeType_;
-	}
+    public short getNodeType() {
+        return nodeType_;
+    }
 
-	public short getSelectorType() {
-		return Selector.SAC_ANY_NODE_SELECTOR; // for now
-	}
+    public short getSelectorType() {
+        return Selector.SAC_ANY_NODE_SELECTOR; //for now
+    }
 
-	public Selector getSelector() {
-		return selector_;
-	}
+    public Selector getSelector() {
+        return selector_;
+    }
 
-	public SimpleSelector getSiblingSelector() {
-		return siblingSelector_;
-	}
+    public SimpleSelector getSiblingSelector() {
+        return siblingSelector_;
+    }
 
-	@Override
-	public String toString() {
-		return selector_.toString() + " ~ " + siblingSelector_.toString();
-	}
+    @Override
+    public String toString() {
+        return selector_.toString() + " ~ " + siblingSelector_.toString();
+    }
 }

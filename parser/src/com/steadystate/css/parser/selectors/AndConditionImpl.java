@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -36,50 +36,49 @@ import com.steadystate.css.parser.LocatableImpl;
 
 /**
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David
- *         Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class AndConditionImpl extends LocatableImpl implements
-		CombinatorCondition, Serializable {
+public class AndConditionImpl extends LocatableImpl implements CombinatorCondition, Serializable {
 
-	private static final long serialVersionUID = -3180583860092672742L;
+    private static final long serialVersionUID = -3180583860092672742L;
 
-	private Condition firstCondition_;
-	private Condition secondCondition_;
+    private Condition firstCondition_;
+    private Condition secondCondition_;
 
-	public void setFirstCondition(final Condition c1) {
-		firstCondition_ = c1;
-		if (c1 instanceof Locatable) {
-			setLocator(((Locatable) c1).getLocator());
-		} else if (c1 == null) {
-			setLocator(null);
-		}
-	}
+    public void setFirstCondition(final Condition c1) {
+        firstCondition_ = c1;
+        if (c1 instanceof Locatable) {
+            setLocator(((Locatable) c1).getLocator());
+        }
+        else if (c1 == null) {
+            setLocator(null);
+        }
+    }
 
-	public void setSecondCondition(final Condition c2) {
-		secondCondition_ = c2;
-	}
+    public void setSecondCondition(final Condition c2) {
+        secondCondition_ = c2;
+    }
 
-	public AndConditionImpl(final Condition c1, final Condition c2) {
-		setFirstCondition(c1);
-		setSecondCondition(c2);
-	}
+    public AndConditionImpl(final Condition c1, final Condition c2) {
+        setFirstCondition(c1);
+        setSecondCondition(c2);
+    }
 
-	public short getConditionType() {
-		return Condition.SAC_AND_CONDITION;
-	}
+    public short getConditionType() {
+        return Condition.SAC_AND_CONDITION;
+    }
 
-	public Condition getFirstCondition() {
-		return firstCondition_;
-	}
+    public Condition getFirstCondition() {
+        return firstCondition_;
+    }
 
-	public Condition getSecondCondition() {
-		return secondCondition_;
-	}
+    public Condition getSecondCondition() {
+        return secondCondition_;
+    }
 
-	@Override
-	public String toString() {
-		return getFirstCondition().toString() + getSecondCondition().toString();
-	}
+    @Override
+    public String toString() {
+        return getFirstCondition().toString() + getSecondCondition().toString();
+    }
 }

@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -34,39 +34,37 @@ import org.w3c.css.sac.Selector;
 import com.steadystate.css.parser.LocatableImpl;
 
 /**
- * @author <a href="mailto:davidsch@users.sourceforge.net">David
- *         Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class ElementSelectorImpl extends LocatableImpl implements
-		ElementSelector, Serializable {
+public class ElementSelectorImpl extends LocatableImpl implements ElementSelector, Serializable {
 
-	private static final long serialVersionUID = 7507121069969409061L;
+    private static final long serialVersionUID = 7507121069969409061L;
 
-	private String localName_;
+    private String localName_;
 
-	public void setLocalName(final String localName) {
-		localName_ = localName;
-	}
+    public void setLocalName(final String localName) {
+        localName_ = localName;
+    }
 
-	public ElementSelectorImpl(final String localName) {
-		setLocalName(localName);
-	}
+    public ElementSelectorImpl(final String localName) {
+        setLocalName(localName);
+    }
 
-	public short getSelectorType() {
-		return Selector.SAC_ELEMENT_NODE_SELECTOR;
-	}
+    public short getSelectorType() {
+        return Selector.SAC_ELEMENT_NODE_SELECTOR;
+    }
 
-	public String getNamespaceURI() {
-		return null;
-	}
+    public String getNamespaceURI() {
+        return null;
+    }
 
-	public String getLocalName() {
-		return localName_;
-	}
+    public String getLocalName() {
+        return localName_;
+    }
 
-	@Override
-	public String toString() {
-		return (getLocalName() != null) ? getLocalName() : "*";
-	}
+    @Override
+    public String toString() {
+        return (getLocalName() != null) ? getLocalName() : "*";
+    }
 }

@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -36,122 +36,115 @@ import org.w3c.dom.css.RGBColor;
 /**
  * Implementation of {@link RGBColor}.
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David
- *         Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  */
 public class RGBColorImpl implements RGBColor, Serializable {
 
-	private static final long serialVersionUID = 8152675334081993160L;
-	private CSSPrimitiveValue red_;
-	private CSSPrimitiveValue green_;
-	private CSSPrimitiveValue blue_;
+    private static final long serialVersionUID = 8152675334081993160L;
+    private CSSPrimitiveValue red_;
+    private CSSPrimitiveValue green_;
+    private CSSPrimitiveValue blue_;
 
-	/**
-	 * Constructor that reads the values from the given chain of LexicalUnits.
-	 * 
-	 * @param lu
-	 *            the values
-	 * @throws DOMException
-	 *             in case of error
-	 */
-	public RGBColorImpl(final LexicalUnit lu) throws DOMException {
-		LexicalUnit next = lu;
-		red_ = new CSSValueImpl(next, true);
-		next = next.getNextLexicalUnit(); // ,
-		if (next != null) {
-			if (next.getLexicalUnitType() != LexicalUnit.SAC_OPERATOR_COMMA) {
-				// error
-				throw new DOMException(DOMException.SYNTAX_ERR,
-						"rgb parameters must be separated by ','.");
-			}
-			next = next.getNextLexicalUnit();
-			if (next != null) {
-				green_ = new CSSValueImpl(next, true);
-				next = next.getNextLexicalUnit(); // ,
-				if (next != null) {
-					if (next.getLexicalUnitType() != LexicalUnit.SAC_OPERATOR_COMMA) {
-						// error
-						throw new DOMException(DOMException.SYNTAX_ERR,
-								"rgb parameters must be separated by ','.");
-					}
-					next = next.getNextLexicalUnit();
-					blue_ = new CSSValueImpl(next, true);
-					next = next.getNextLexicalUnit();
-					if (next != null) {
-						// error
-						throw new DOMException(DOMException.SYNTAX_ERR,
-								"Too many parameters for rgb function.");
-					}
-				}
-			}
-		}
-	}
+    /**
+     * Constructor that reads the values from the given
+     * chain of LexicalUnits.
+     * @param lu the values
+     * @throws DOMException in case of error
+     */
+    public RGBColorImpl(final LexicalUnit lu) throws DOMException {
+        LexicalUnit next = lu;
+        red_ = new CSSValueImpl(next, true);
+        next = next.getNextLexicalUnit();   // ,
+        if (next != null) {
+            if (next.getLexicalUnitType() != LexicalUnit.SAC_OPERATOR_COMMA) {
+                // error
+                throw new DOMException(DOMException.SYNTAX_ERR,
+                    "rgb parameters must be separated by ','.");
+            }
+            next = next.getNextLexicalUnit();
+            if (next != null) {
+                green_ = new CSSValueImpl(next, true);
+                next = next.getNextLexicalUnit();   // ,
+                if (next != null) {
+                    if (next.getLexicalUnitType() != LexicalUnit.SAC_OPERATOR_COMMA) {
+                        // error
+                        throw new DOMException(DOMException.SYNTAX_ERR,
+                            "rgb parameters must be separated by ','.");
+                    }
+                    next = next.getNextLexicalUnit();
+                    blue_ = new CSSValueImpl(next, true);
+                    next = next.getNextLexicalUnit();
+                    if (next != null) {
+                        // error
+                        throw new DOMException(DOMException.SYNTAX_ERR,
+                            "Too many parameters for rgb function.");
+                    }
+                }
+            }
+        }
+    }
 
-	/**
-	 * Constructor. The values for the colors are null.
-	 */
-	public RGBColorImpl() {
-		super();
-	}
+    /**
+     * Constructor.
+     * The values for the colors are null.
+     */
+    public RGBColorImpl() {
+        super();
+    }
 
-	/**
-	 * Returns the red part.
-	 */
-	public CSSPrimitiveValue getRed() {
-		return red_;
-	}
+    /**
+     * Returns the red part.
+     */
+    public CSSPrimitiveValue getRed() {
+        return red_;
+    }
 
-	/**
-	 * Sets the red part to a new value.
-	 * 
-	 * @param red
-	 *            the new CSSPrimitiveValue
-	 */
-	public void setRed(final CSSPrimitiveValue red) {
-		red_ = red;
-	}
+    /**
+     * Sets the red part to a new value.
+     * @param red the new CSSPrimitiveValue
+     */
+    public void setRed(final CSSPrimitiveValue red) {
+        red_ = red;
+    }
 
-	/**
-	 * Returns the green part.
-	 */
-	public CSSPrimitiveValue getGreen() {
-		return green_;
-	}
+    /**
+     * Returns the green part.
+     */
+    public CSSPrimitiveValue getGreen() {
+        return green_;
+    }
 
-	/**
-	 * Sets the green part to a new value.
-	 * 
-	 * @param green
-	 *            the new CSSPrimitiveValue
-	 */
-	public void setGreen(final CSSPrimitiveValue green) {
-		green_ = green;
-	}
+    /**
+     * Sets the green part to a new value.
+     * @param green the new CSSPrimitiveValue
+     */
+    public void setGreen(final CSSPrimitiveValue green) {
+        green_ = green;
+    }
 
-	/**
-	 * Returns the blue part.
-	 */
-	public CSSPrimitiveValue getBlue() {
-		return blue_;
-	}
+    /**
+     * Returns the blue part.
+     */
+    public CSSPrimitiveValue getBlue() {
+        return blue_;
+    }
 
-	/**
-	 * Sets the blue part to a new value.
-	 * 
-	 * @param blue
-	 *            the new CSSPrimitiveValue
-	 */
-	public void setBlue(final CSSPrimitiveValue blue) {
-		blue_ = blue;
-	}
+    /**
+     * Sets the blue part to a new value.
+     * @param blue the new CSSPrimitiveValue
+     */
+    public void setBlue(final CSSPrimitiveValue blue) {
+        blue_ = blue;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString() {
-		return new StringBuilder("rgb(").append(red_).append(", ")
-				.append(green_).append(", ").append(blue_).append(")")
-				.toString();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return new StringBuilder("rgb(")
+            .append(red_).append(", ")
+            .append(green_).append(", ")
+            .append(blue_).append(")").toString();
+    }
 }

@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -35,51 +35,49 @@ import com.steadystate.css.parser.LocatableImpl;
 
 /**
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David
- *         Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class ClassConditionImpl extends LocatableImpl implements
-		AttributeCondition, Serializable {
+public class ClassConditionImpl extends LocatableImpl implements AttributeCondition, Serializable {
 
-	private static final long serialVersionUID = -2216489300949054242L;
+    private static final long serialVersionUID = -2216489300949054242L;
 
-	private String value_;
+    private String value_;
 
-	public void setValue(final String value) {
-		value_ = value;
-	}
+    public void setValue(final String value) {
+        value_ = value;
+    }
 
-	public ClassConditionImpl(final String value) {
-		setValue(value);
-	}
+    public ClassConditionImpl(final String value) {
+        setValue(value);
+    }
 
-	public short getConditionType() {
-		return Condition.SAC_CLASS_CONDITION;
-	}
+    public short getConditionType() {
+        return Condition.SAC_CLASS_CONDITION;
+    }
 
-	public String getNamespaceURI() {
-		return null;
-	}
+    public String getNamespaceURI() {
+        return null;
+    }
 
-	public String getLocalName() {
-		return null;
-	}
+    public String getLocalName() {
+        return null;
+    }
 
-	public boolean getSpecified() {
-		return true;
-	}
+    public boolean getSpecified() {
+        return true;
+    }
 
-	public String getValue() {
-		return value_;
-	}
+    public String getValue() {
+        return value_;
+    }
 
-	@Override
-	public String toString() {
-		final String value = getValue();
-		if (value != null) {
-			return "." + value;
-		}
-		return ".";
-	}
+    @Override
+    public String toString() {
+        final String value = getValue();
+        if (value != null) {
+            return "." + value;
+        }
+        return ".";
+    }
 }

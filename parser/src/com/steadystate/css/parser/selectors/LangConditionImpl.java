@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -35,35 +35,33 @@ import com.steadystate.css.parser.LocatableImpl;
 
 /**
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David
- *         Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class LangConditionImpl extends LocatableImpl implements LangCondition,
-		Serializable {
+public class LangConditionImpl extends LocatableImpl implements LangCondition, Serializable {
 
-	private static final long serialVersionUID = 1701599531953055387L;
+    private static final long serialVersionUID = 1701599531953055387L;
 
-	private String lang_;
+    private String lang_;
 
-	public void setLang(final String lang) {
-		lang_ = lang;
-	}
+    public void setLang(final String lang) {
+        lang_ = lang;
+    }
 
-	public LangConditionImpl(final String lang) {
-		setLang(lang);
-	}
+    public LangConditionImpl(final String lang) {
+        setLang(lang);
+    }
 
-	public short getConditionType() {
-		return Condition.SAC_LANG_CONDITION;
-	}
+    public short getConditionType() {
+        return Condition.SAC_LANG_CONDITION;
+    }
 
-	public String getLang() {
-		return lang_;
-	}
+    public String getLang() {
+        return lang_;
+    }
 
-	@Override
-	public String toString() {
-		return ":lang(" + getLang() + ")";
-	}
+    @Override
+    public String toString() {
+        return ":lang(" + getLang() + ")";
+    }
 }

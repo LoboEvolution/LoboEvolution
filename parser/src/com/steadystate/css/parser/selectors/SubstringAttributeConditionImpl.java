@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -36,60 +36,58 @@ import com.steadystate.css.parser.LocatableImpl;
 /**
  * @author Ahmed Ashour
  */
-public class SubstringAttributeConditionImpl extends LocatableImpl implements
-		AttributeCondition, Serializable {
+public class SubstringAttributeConditionImpl extends LocatableImpl implements AttributeCondition, Serializable {
 
-	private static final long serialVersionUID = 7628763646156568710L;
+    private static final long serialVersionUID = 7628763646156568710L;
 
-	private String localName_;
-	private String value_;
-	private boolean specified_;
+    private String localName_;
+    private String value_;
+    private boolean specified_;
 
-	public void setLocalName(final String localName) {
-		localName_ = localName;
-	}
+    public void setLocalName(final String localName) {
+        localName_ = localName;
+    }
 
-	public void setValue(final String value) {
-		value_ = value;
-	}
+    public void setValue(final String value) {
+        value_ = value;
+    }
 
-	public void setSpecified(final boolean specified) {
-		specified_ = specified;
-	}
+    public void setSpecified(final boolean specified) {
+        specified_ = specified;
+    }
 
-	public SubstringAttributeConditionImpl(final String localName,
-			final String value, final boolean specified) {
-		setLocalName(localName);
-		setValue(value);
-		setSpecified(specified);
-	}
+    public SubstringAttributeConditionImpl(final String localName, final String value, final boolean specified) {
+        setLocalName(localName);
+        setValue(value);
+        setSpecified(specified);
+    }
 
-	public short getConditionType() {
-		return Condition.SAC_ATTRIBUTE_CONDITION; // for now
-	}
+    public short getConditionType() {
+        return Condition.SAC_ATTRIBUTE_CONDITION; //for now
+    }
 
-	public String getNamespaceURI() {
-		return null;
-	}
+    public String getNamespaceURI() {
+        return null;
+    }
 
-	public String getLocalName() {
-		return localName_;
-	}
+    public String getLocalName() {
+        return localName_;
+    }
 
-	public boolean getSpecified() {
-		return specified_;
-	}
+    public boolean getSpecified() {
+        return specified_;
+    }
 
-	public String getValue() {
-		return value_;
-	}
+    public String getValue() {
+        return value_;
+    }
 
-	@Override
-	public String toString() {
-		final String value = getValue();
-		if (value != null) {
-			return "[" + getLocalName() + "*=\"" + value + "\"]";
-		}
-		return "[" + getLocalName() + "]";
-	}
+    @Override
+    public String toString() {
+        final String value = getValue();
+        if (value != null) {
+            return "[" + getLocalName() + "*=\"" + value + "\"]";
+        }
+        return "[" + getLocalName() + "]";
+    }
 }

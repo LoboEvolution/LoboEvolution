@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -31,142 +31,129 @@ import org.w3c.dom.css.CSSValue;
 import com.steadystate.css.util.LangUtils;
 
 /**
- * @author <a href="mailto:davidsch@users.sourceforge.net">David
- *         Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
 public class Property extends CSSOMObjectImpl {
-	private static final long serialVersionUID = 8720637891949104989L;
+    private static final long serialVersionUID = 8720637891949104989L;
 
-	private String name_;
-	private CSSValue value_;
-	private boolean important_;
+    private String name_;
+    private CSSValue value_;
+    private boolean important_;
 
-	/**
-	 * Creates new Property.
-	 * 
-	 * @param name
-	 *            the name
-	 * @param value
-	 *            the value
-	 * @param important
-	 *            true if the important flag set
-	 */
-	public Property(final String name, final CSSValue value,
-			final boolean important) {
-		name_ = name;
-		value_ = value;
-		important_ = important;
-	}
+    /**
+     * Creates new Property.
+     * @param name the name
+     * @param value the value
+     * @param important true if the important flag set
+     */
+    public Property(final String name, final CSSValue value, final boolean important) {
+        name_ = name;
+        value_ = value;
+        important_ = important;
+    }
 
-	/**
-	 * Constructor. The attributes are null.
-	 */
-	public Property() {
-		super();
-	}
+    /**
+     * Constructor.
+     * The attributes are null.
+     */
+    public Property() {
+        super();
+    }
 
-	/**
-	 * Returns the name.
-	 * 
-	 * @return the name
-	 */
-	public String getName() {
-		return name_;
-	}
+    /**
+     * Returns the name.
+     * @return the name
+     */
+    public String getName() {
+        return name_;
+    }
 
-	/**
-	 * Sets the name to a new value.
-	 * 
-	 * @param name
-	 *            the new name
-	 */
-	public void setName(final String name) {
-		name_ = name;
-	}
+    /**
+     * Sets the name to a new value.
+     * @param name the new name
+     */
+    public void setName(final String name) {
+        name_ = name;
+    }
 
-	/**
-	 * Returns the value.
-	 * 
-	 * @return the value
-	 */
-	public CSSValue getValue() {
-		return value_;
-	}
+    /**
+     * Returns the value.
+     * @return the value
+     */
+    public CSSValue getValue() {
+        return value_;
+    }
 
-	/**
-	 * Returns true if the important flag is set.
-	 * 
-	 * @return true or false
-	 */
-	public boolean isImportant() {
-		return important_;
-	}
+    /**
+     * Returns true if the important flag is set.
+     * @return true or false
+     */
+    public boolean isImportant() {
+        return important_;
+    }
 
-	/**
-	 * Sets the value to a new value.
-	 * 
-	 * @param value
-	 *            the new CSSValue
-	 */
-	public void setValue(final CSSValue value) {
-		value_ = value;
-	}
+    /**
+     * Sets the value to a new value.
+     * @param value the new CSSValue
+     */
+    public void setValue(final CSSValue value) {
+        value_ = value;
+    }
 
-	/**
-	 * Sets the important flag to a new value.
-	 * 
-	 * @param important
-	 *            the new flag value
-	 */
-	public void setImportant(final boolean important) {
-		important_ = important;
-	}
+    /**
+     * Sets the important flag to a new value.
+     * @param important the new flag value
+     */
+    public void setImportant(final boolean important) {
+        important_ = important;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString() {
-		final StringBuilder result = new StringBuilder();
-		result.append(name_);
-		result.append(":");
-		if (null != value_) {
-			result.append(" ");
-			result.append(value_.toString());
-		}
-		if (important_) {
-			result.append(" !important");
-		}
-		return result.toString();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        final StringBuilder result = new StringBuilder();
+        result.append(name_);
+        result.append(":");
+        if (null != value_) {
+            result.append(" ");
+            result.append(value_.toString());
+        }
+        if (important_) {
+            result.append(" !important");
+        }
+        return result.toString();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof Property)) {
-			return false;
-		}
-		final Property p = (Property) obj;
-		return super.equals(obj) && (important_ == p.important_)
-				&& LangUtils.equals(name_, p.name_)
-				&& LangUtils.equals(value_, p.value_);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Property)) {
+            return false;
+        }
+        final Property p = (Property) obj;
+        return super.equals(obj)
+            && (important_ == p.important_)
+            && LangUtils.equals(name_, p.name_)
+            && LangUtils.equals(value_, p.value_);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int hashCode() {
-		int hash = super.hashCode();
-		hash = LangUtils.hashCode(hash, important_);
-		hash = LangUtils.hashCode(hash, name_);
-		hash = LangUtils.hashCode(hash, value_);
-		return hash;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = LangUtils.hashCode(hash, important_);
+        hash = LangUtils.hashCode(hash, name_);
+        hash = LangUtils.hashCode(hash, value_);
+        return hash;
+    }
 }

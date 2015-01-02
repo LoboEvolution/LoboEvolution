@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -35,39 +35,37 @@ import com.steadystate.css.parser.LocatableImpl;
 
 /**
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David
- *         Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class PseudoElementSelectorImpl extends LocatableImpl implements
-		ElementSelector, Serializable {
+public class PseudoElementSelectorImpl extends LocatableImpl implements ElementSelector, Serializable {
 
-	private static final long serialVersionUID = 2913936296006875268L;
+    private static final long serialVersionUID = 2913936296006875268L;
 
-	private String localName_;
+    private String localName_;
 
-	public void setLocaleName(final String localName) {
-		localName_ = localName;
-	}
+    public void setLocaleName(final String localName) {
+        localName_ = localName;
+    }
 
-	public PseudoElementSelectorImpl(final String localName) {
-		setLocaleName(localName);
-	}
+    public PseudoElementSelectorImpl(final String localName) {
+        setLocaleName(localName);
+    }
 
-	public short getSelectorType() {
-		return Selector.SAC_PSEUDO_ELEMENT_SELECTOR;
-	}
+    public short getSelectorType() {
+        return Selector.SAC_PSEUDO_ELEMENT_SELECTOR;
+    }
 
-	public String getNamespaceURI() {
-		return null;
-	}
+    public String getNamespaceURI() {
+        return null;
+    }
 
-	public String getLocalName() {
-		return localName_;
-	}
+    public String getLocalName() {
+        return localName_;
+    }
 
-	@Override
-	public String toString() {
-		return localName_;
-	}
+    @Override
+    public String toString() {
+        return localName_;
+    }
 }

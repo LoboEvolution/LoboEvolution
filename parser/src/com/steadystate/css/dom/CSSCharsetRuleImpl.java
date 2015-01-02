@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -41,96 +41,103 @@ import com.steadystate.css.util.LangUtils;
 /**
  * Implementation of {@link CSSCharsetRule}.
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David
- *         Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl implements
-		CSSCharsetRule {
+public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl implements CSSCharsetRule {
 
-	private static final long serialVersionUID = -2472209213089007127L;
+    private static final long serialVersionUID = -2472209213089007127L;
 
-	private String encoding_;
+    private String encoding_;
 
-	public CSSCharsetRuleImpl(final CSSStyleSheetImpl parentStyleSheet,
-			final CSSRule parentRule, final String encoding) {
-		super(parentStyleSheet, parentRule);
-		encoding_ = encoding;
-	}
+    public CSSCharsetRuleImpl(
+            final CSSStyleSheetImpl parentStyleSheet,
+            final CSSRule parentRule,
+            final String encoding) {
+        super(parentStyleSheet, parentRule);
+        encoding_ = encoding;
+    }
 
-	public CSSCharsetRuleImpl() {
-		super();
-	}
+    public CSSCharsetRuleImpl() {
+        super();
+    }
 
-	public short getType() {
-		return CHARSET_RULE;
-	}
+    public short getType() {
+        return CHARSET_RULE;
+    }
 
-	public String getCssText() {
-		return "@charset \"" + getEncoding() + "\";";
-	}
+    public String getCssText() {
+        return "@charset \"" + getEncoding() + "\";";
+    }
 
-	public void setCssText(final String cssText) throws DOMException {
-		final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
-		if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
-			throw new DOMExceptionImpl(
-					DOMException.NO_MODIFICATION_ALLOWED_ERR,
-					DOMExceptionImpl.READ_ONLY_STYLE_SHEET);
-		}
+    public void setCssText(final String cssText) throws DOMException {
+        final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
+        if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
+            throw new DOMExceptionImpl(
+                DOMException.NO_MODIFICATION_ALLOWED_ERR,
+                DOMExceptionImpl.READ_ONLY_STYLE_SHEET);
+        }
 
-		try {
-			final InputSource is = new InputSource(new StringReader(cssText));
-			final CSSOMParser parser = new CSSOMParser();
-			final CSSRule r = parser.parseRule(is);
+        try {
+            final InputSource is = new InputSource(new StringReader(cssText));
+            final CSSOMParser parser = new CSSOMParser();
+            final CSSRule r = parser.parseRule(is);
 
-			// The rule must be a charset rule
-			if (r.getType() == CSSRule.CHARSET_RULE) {
-				encoding_ = ((CSSCharsetRuleImpl) r).encoding_;
-			} else {
-				throw new DOMExceptionImpl(
-						DOMException.INVALID_MODIFICATION_ERR,
-						DOMExceptionImpl.EXPECTING_CHARSET_RULE);
-			}
-		} catch (final CSSException e) {
-			throw new DOMExceptionImpl(DOMException.SYNTAX_ERR,
-					DOMExceptionImpl.SYNTAX_ERROR, e.getMessage());
-		} catch (final IOException e) {
-			throw new DOMExceptionImpl(DOMException.SYNTAX_ERR,
-					DOMExceptionImpl.SYNTAX_ERROR, e.getMessage());
-		}
-	}
+            // The rule must be a charset rule
+            if (r.getType() == CSSRule.CHARSET_RULE) {
+                encoding_ = ((CSSCharsetRuleImpl) r).encoding_;
+            }
+            else {
+                throw new DOMExceptionImpl(
+                    DOMException.INVALID_MODIFICATION_ERR,
+                    DOMExceptionImpl.EXPECTING_CHARSET_RULE);
+            }
+        }
+        catch (final CSSException e) {
+            throw new DOMExceptionImpl(
+                DOMException.SYNTAX_ERR,
+                DOMExceptionImpl.SYNTAX_ERROR,
+                e.getMessage());
+        }
+        catch (final IOException e) {
+            throw new DOMExceptionImpl(
+                DOMException.SYNTAX_ERR,
+                DOMExceptionImpl.SYNTAX_ERROR,
+                e.getMessage());
+        }
+    }
 
-	public String getEncoding() {
-		return encoding_;
-	}
+    public String getEncoding() {
+        return encoding_;
+    }
 
-	public void setEncoding(final String encoding) throws DOMException {
-		encoding_ = encoding;
-	}
+    public void setEncoding(final String encoding) throws DOMException {
+        encoding_ = encoding;
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof CSSCharsetRule)) {
-			return false;
-		}
-		final CSSCharsetRule ccr = (CSSCharsetRule) obj;
-		return super.equals(obj)
-				&& LangUtils.equals(getEncoding(), ccr.getEncoding());
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof CSSCharsetRule)) {
+            return false;
+        }
+        final CSSCharsetRule ccr = (CSSCharsetRule) obj;
+        return super.equals(obj)
+            && LangUtils.equals(getEncoding(), ccr.getEncoding());
+    }
 
-	@Override
-	public int hashCode() {
-		int hash = super.hashCode();
-		hash = LangUtils.hashCode(hash, encoding_);
-		return hash;
-	}
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = LangUtils.hashCode(hash, encoding_);
+        return hash;
+    }
 
-	@Override
-	public String toString() {
-		return getCssText();
-	}
+    @Override
+    public String toString() {
+        return getCssText();
+    }
 
 }

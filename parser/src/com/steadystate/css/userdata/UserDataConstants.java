@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -28,10 +28,9 @@ package com.steadystate.css.userdata;
 
 public final class UserDataConstants {
 
-	private static final String KEY_PREFIX = UserDataConstants.class
-			.getPackage().getName();
-	public static final String KEY_LOCATOR = KEY_PREFIX + ".locator";
+    private static final String KEY_PREFIX = UserDataConstants.class.getPackage().getName();
+    public static final String KEY_LOCATOR = KEY_PREFIX + ".locator";
 
-	private UserDataConstants() {
-	}
+    private UserDataConstants() {
+    }
 }

@@ -1,7 +1,7 @@
 /*
  * CSS Parser Project
  *
- * Copyright (C) 1999-2011 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2014 David Schweinsberg.  All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -33,36 +33,35 @@ import org.w3c.css.sac.SACMediaList;
 /**
  * Implementation of {@link SACMediaList}.
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David
- *         Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
 public class SACMediaListImpl extends LocatableImpl implements SACMediaList {
 
-	private List<String> media_ = new ArrayList<String>(10);
+    private List<String> media_ = new ArrayList<String>(10);
 
-	public int getLength() {
-		return media_.size();
-	}
+    public int getLength() {
+        return media_.size();
+    }
 
-	public String item(final int index) {
-		return media_.get(index);
-	}
+    public String item(final int index) {
+        return media_.get(index);
+    }
 
-	public void add(final String s) {
-		media_.add(s);
-	}
+    public void add(final String s) {
+        media_.add(s);
+    }
 
-	@Override
-	public String toString() {
-		final StringBuilder sb = new StringBuilder();
-		final int len = getLength();
-		for (int i = 0; i < len; i++) {
-			sb.append(item(i));
-			if (i < len - 1) {
-				sb.append(", ");
-			}
-		}
-		return sb.toString();
-	}
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        final int len = getLength();
+        for (int i = 0; i < len; i++) {
+            sb.append(item(i));
+            if (i < len - 1) {
+                sb.append(", ");
+            }
+        }
+        return sb.toString();
+    }
 }
