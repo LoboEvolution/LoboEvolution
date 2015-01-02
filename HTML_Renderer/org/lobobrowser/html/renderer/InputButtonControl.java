@@ -87,7 +87,7 @@ public class InputButtonControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#click()
+	 * @see org.lobobrowser.html.dombl.InputContext#click()
 	 */
 	public void click() {
 		this.widget.doClick();
@@ -96,7 +96,7 @@ public class InputButtonControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#getValue()
+	 * @see org.lobobrowser.html.dombl.InputContext#getValue()
 	 */
 	public String getValue() {
 		return this.widget.getText();
@@ -110,7 +110,7 @@ public class InputButtonControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setValue(java.lang.String)
+	 * @see org.lobobrowser.html.dombl.InputContext#setValue(java.lang.String)
 	 */
 	public void setValue(String value) {
 		this.widget.setText(value);

@@ -81,7 +81,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#getMaxLength()
+	 * @see org.lobobrowser.html.dombl.InputContext#getMaxLength()
 	 */
 	public int getMaxLength() {
 		return this.maxLength;
@@ -90,7 +90,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#getReadOnly()
+	 * @see org.lobobrowser.html.dombl.InputContext#getReadOnly()
 	 */
 	public boolean getReadOnly() {
 		return !this.widget.isEditable();
@@ -99,7 +99,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#getValue()
+	 * @see org.lobobrowser.html.dombl.InputContext#getValue()
 	 */
 	public String getValue() {
 		return this.widget.getText();
@@ -108,7 +108,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#select()
+	 * @see org.lobobrowser.html.dombl.InputContext#select()
 	 */
 	public void select() {
 		this.widget.selectAll();
@@ -117,7 +117,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setDisabled(boolean)
+	 * @see org.lobobrowser.html.dombl.InputContext#setDisabled(boolean)
 	 */
 	public void setDisabled(boolean disabled) {
 		super.setDisabled(disabled);
@@ -127,7 +127,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setMaxLength(int)
+	 * @see org.lobobrowser.html.dombl.InputContext#setMaxLength(int)
 	 */
 	public void setMaxLength(int maxLength) {
 		this.maxLength = maxLength;
@@ -136,7 +136,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setReadOnly(boolean)
+	 * @see org.lobobrowser.html.dombl.InputContext#setReadOnly(boolean)
 	 */
 	public void setReadOnly(boolean readOnly) {
 		this.widget.setEditable(!readOnly);
@@ -145,7 +145,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setValue(java.lang.String)
+	 * @see org.lobobrowser.html.dombl.InputContext#setValue(java.lang.String)
 	 */
 	public void setValue(String value) {
 		this.widget.setText(value);

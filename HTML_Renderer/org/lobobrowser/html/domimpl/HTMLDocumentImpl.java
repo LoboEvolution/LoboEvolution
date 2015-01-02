@@ -583,7 +583,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getLocalName()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getLocalName()
 	 */
 	public String getLocalName() {
 		// Always null for document
@@ -593,7 +593,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getNodeName()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getNodeName()
 	 */
 	public String getNodeName() {
 		return "#document";
@@ -602,7 +602,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getNodeType()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getNodeType()
 	 */
 	public short getNodeType() {
 		return Node.DOCUMENT_NODE;
@@ -611,7 +611,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getNodeValue()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getNodeValue()
 	 */
 	public String getNodeValue() throws DOMException {
 		// Always null for document
@@ -621,7 +621,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#setNodeValue(java.lang.String)
+	 * @see org.lobobrowser.html.dombl.NodeImpl#setNodeValue(java.lang.String)
 	 */
 	public void setNodeValue(String nodeValue) throws DOMException {
 		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR,
@@ -1278,7 +1278,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getbaseURI()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getbaseURI()
 	 */
 	public String getBaseURI() {
 		String buri = this.baseURI;

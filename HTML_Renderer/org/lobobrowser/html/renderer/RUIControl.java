@@ -152,7 +152,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#invalidateState(org.xamjwg
+	 * org.lobobrowser.html.render.BoundableRenderable#invalidateState(org.xamjwg
 	 * .html.renderer.RenderableContext)
 	 */
 	public void invalidateRenderStyle() {
@@ -163,8 +163,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.domimpl.ContainingBlockContext#repaint(org.xamjwg.html
-	 * .renderer.RenderableContext)
+	 * org.lobobrowser.html.dombl.UINode(org.lobobrowser.html.dombl.ModelNode modelNode);
 	 */
 	public void repaint(ModelNode modelNode) {
 		Object widget = this.widget;
@@ -192,9 +191,9 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#paintSelection(java.awt.
-	 * Graphics, boolean, org.xamjwg.html.renderer.RenderablePoint,
-	 * org.xamjwg.html.renderer.RenderablePoint)
+	 * org.lobobrowser.html.render.BoundableRenderable#paintSelection(java.awt.
+	 * Graphics, boolean, org.lobobrowser.html.render.RenderablePoint,
+	 * org.lobobrowser.html.render.RenderablePoint)
 	 */
 	public boolean paintSelection(Graphics g, boolean inSelection,
 			RenderableSpot startPoint, RenderableSpot endPoint) {

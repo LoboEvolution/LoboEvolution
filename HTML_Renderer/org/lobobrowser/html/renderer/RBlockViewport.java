@@ -225,7 +225,7 @@ public class RBlockViewport extends BaseRCollection {
 	 *            The nesting level for lists. This is zero except inside a
 	 *            list.
 	 * @param pcontext
-	 *            The HTMLParserContext instance.
+	 *            The UserAgentContext instance.
 	 * @param frameContext
 	 *            This is usually going to be HtmlBlock, an object where text
 	 *            selections are contained.
@@ -1788,7 +1788,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseClick(java.awt.event
+	 * org.lobobrowser.html.render.BoundableRenderable#onMouseClick(java.awt.event
 	 * .MouseEvent, int, int)
 	 */
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
@@ -1827,7 +1827,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseDisarmed(java.awt
+	 * org.lobobrowser.html.render.BoundableRenderable#onMouseDisarmed(java.awt
 	 * .event.MouseEvent)
 	 */
 	public boolean onMouseDisarmed(MouseEvent event) {
@@ -1849,7 +1849,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMousePressed(java.awt.
+	 * org.lobobrowser.html.render.BoundableRenderable#onMousePressed(java.awt.
 	 * event.MouseEvent, int, int)
 	 */
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
@@ -1873,7 +1873,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseReleased(java.awt
+	 * org.lobobrowser.html.render.BoundableRenderable#onMouseReleased(java.awt
 	 * .event.MouseEvent, int, int)
 	 */
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {

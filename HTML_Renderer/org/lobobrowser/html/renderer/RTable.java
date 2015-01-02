@@ -189,7 +189,7 @@ class RTable extends BaseElementRenderable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BoundableRenderable#getRenderablePoint(int,
+	 * @see org.lobobrowser.html.render.BoundableRenderable#getRenderablePoint(int,
 	 * int)
 	 */
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
@@ -218,7 +218,7 @@ class RTable extends BaseElementRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseClick(java.awt.event
+	 * org.lobobrowser.html.render.BoundableRenderable#onMouseClick(java.awt.event
 	 * .MouseEvent, int, int)
 	 */
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
@@ -265,7 +265,7 @@ class RTable extends BaseElementRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseDisarmed(java.awt
+	 * org.lobobrowser.html.render.BoundableRenderable#onMouseDisarmed(java.awt
 	 * .event.MouseEvent)
 	 */
 	public boolean onMouseDisarmed(MouseEvent event) {
@@ -276,7 +276,7 @@ class RTable extends BaseElementRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMousePressed(java.awt.
+	 * org.lobobrowser.html.render.BoundableRenderable#onMousePressed(java.awt.
 	 * event.MouseEvent, int, int)
 	 */
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
@@ -303,7 +303,7 @@ class RTable extends BaseElementRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseReleased(java.awt
+	 * org.lobobrowser.html.render.BoundableRenderable#onMouseReleased(java.awt
 	 * .event.MouseEvent, int, int)
 	 */
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
@@ -329,7 +329,7 @@ class RTable extends BaseElementRenderable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RCollection#getRenderables()
+	 * @see org.lobobrowser.html.render.RCollection#getRenderables()
 	 */
 	public Iterator<BoundableRenderable> getRenderables() {
 		Collection<PositionedRenderable> prs = this.positionedRenderables;
@@ -359,7 +359,7 @@ class RTable extends BaseElementRenderable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RenderableContainer#getBackground()
+	 * @see org.lobobrowser.html.render.RenderableContainer#getBackground()
 	 */
 	public Color getPaintedBackgroundColor() {
 		return this.container.getPaintedBackgroundColor();

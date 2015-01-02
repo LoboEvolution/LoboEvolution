@@ -284,7 +284,7 @@ abstract class BaseElementRenderable extends BaseRCollection implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RenderableContainer#add(java.awt.Component)
+	 * @see org.lobobrowser.html.render.RenderableContainer#add(java.awt.Component)
 	 */
 	public Component addComponent(Component component) {
 		// Expected to be called in GUI thread.
@@ -909,7 +909,7 @@ abstract class BaseElementRenderable extends BaseRCollection implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RenderableContainer#add(java.awt.Component)
+	 * @see org.lobobrowser.html.render.RenderableContainer#add(java.awt.Component)
 	 */
 	public void addDelayedPair(DelayedPair pair) {
 		// Expected to be called in GUI thread.

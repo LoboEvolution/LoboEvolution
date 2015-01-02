@@ -672,7 +672,7 @@ class RLine extends BaseRCollection {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RCollection#getRenderables()
+	 * @see org.lobobrowser.html.render.RCollection#getRenderables()
 	 */
 	public Iterator<Renderable> getRenderables() {
 		return this.renderables.iterator();

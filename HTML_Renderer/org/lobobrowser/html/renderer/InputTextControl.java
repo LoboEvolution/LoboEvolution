@@ -59,7 +59,7 @@ public class InputTextControl extends BaseInputTextControl {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BaseInputTextControl#createTextField(java.lang
+	 * org.lobobrowser.html.render.BaseInputTextControl#createTextField(java.lang
 	 * .String)
 	 */
 	protected JTextComponent createTextField() {

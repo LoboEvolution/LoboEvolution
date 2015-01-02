@@ -941,7 +941,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RenderableContext#getAlignmentX()
+	 * @see org.lobobrowser.html.render.RenderableContext#getAlignmentX()
 	 */
 	public float getAlignmentX() {
 		// TODO: Removable method?
@@ -951,7 +951,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RenderableContext#getAlignmentY()
+	 * @see org.lobobrowser.html.render.RenderableContext#getAlignmentY()
 	 */
 	public float getAlignmentY() {
 		return 0.5f;
@@ -961,7 +961,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.RenderableContext#getFullURL(java.lang.String)
+	 * org.lobobrowser.html.render.RenderableContext#getFullURL(java.lang.String)
 	 */
 	public URL getFullURL(String spec) throws MalformedURLException {
 		Object doc = this.document;
@@ -986,7 +986,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.RenderableContext#getDocumentItem(java.lang.
+	 * org.lobobrowser.html.render.RenderableContext#getDocumentItem(java.lang.
 	 * String)
 	 */
 	public Object getDocumentItem(String name) {
@@ -998,7 +998,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.RenderableContext#setDocumentItem(java.lang.
+	 * org.lobobrowser.html.render.RenderableContext#setDocumentItem(java.lang.
 	 * String, java.lang.Object)
 	 */
 	public void setDocumentItem(String name, Object value) {
@@ -1013,7 +1013,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.RenderableContext#isEqualOrDescendentOf(org.
+	 * org.lobobrowser.html.render.RenderableContext#isEqualOrDescendentOf(org.
 	 * xamjwg.html.renderer.RenderableContext)
 	 */
 	public final boolean isEqualOrDescendentOf(ModelNode otherContext) {

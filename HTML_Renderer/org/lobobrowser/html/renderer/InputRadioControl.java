@@ -95,7 +95,7 @@ public class InputRadioControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#click()
+	 * @see org.lobobrowser.html.dombl.InputContext#click()
 	 */
 	public void click() {
 		this.widget.doClick();
@@ -104,7 +104,7 @@ public class InputRadioControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#getChecked()
+	 * @see org.lobobrowser.html.dombl.InputContext#getChecked()
 	 */
 	public boolean getChecked() {
 		return this.widget.isSelected();
@@ -113,7 +113,7 @@ public class InputRadioControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setChecked(boolean)
+	 * @see org.lobobrowser.html.dombl.InputContext#setChecked(boolean)
 	 */
 	public void setChecked(boolean checked) {
 		this.widget.setSelected(checked);
@@ -122,7 +122,7 @@ public class InputRadioControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setDisabled(boolean)
+	 * @see org.lobobrowser.html.dombl.InputContext#setDisabled(boolean)
 	 */
 	public void setDisabled(boolean disabled) {
 		super.setDisabled(disabled);

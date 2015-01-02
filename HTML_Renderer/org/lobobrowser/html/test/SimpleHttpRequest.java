@@ -143,7 +143,7 @@ public class SimpleHttpRequest implements HttpRequest {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.HttpRequest#getResponseImage()
+	 * @see org.lobobrowser.html.HttpRequest#getResponseImage()
 	 */
 	public synchronized Image getResponseImage() {
 		byte[] bytes = this.responseBytes;

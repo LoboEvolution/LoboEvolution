@@ -58,7 +58,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.HtmlParserContext#getAppCodeName()
+	 * @see org.lobobrowser.html.UserAgentContext#getAppCodeName()
 	 */
 	public String getAppCodeName() {
 		return UserAgentImpl.getInstance().getName();
@@ -67,7 +67,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.HtmlParserContext#getAppMinorVersion()
+	 * @see org.lobobrowser.html.UserAgentContext#getAppMinorVersion()
 	 */
 	public String getAppMinorVersion() {
 		return UserAgentImpl.getInstance().getMinorVersion();
@@ -76,7 +76,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.HtmlParserContext#getAppName()
+	 * @see org.lobobrowser.html.UserAgentContext#getAppName()
 	 */
 	public String getAppName() {
 		return UserAgentImpl.getInstance().getName();
@@ -85,7 +85,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.HtmlParserContext#getAppVersion()
+	 * @see org.lobobrowser.html.UserAgentContext#getAppVersion()
 	 */
 	public String getAppVersion() {
 		return UserAgentImpl.getInstance().getMajorVersion();
@@ -94,7 +94,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.HtmlParserContext#getBrowserLanguage()
+	 * @see org.lobobrowser.html.UserAgentContext#getBrowserLanguage()
 	 */
 	public String getBrowserLanguage() {
 		return "EN"; // TODO
@@ -103,7 +103,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.HtmlParserContext#getPlatform()
+	 * @see org.lobobrowser.html.UserAgentContext#getPlatform()
 	 */
 	public String getPlatform() {
 		return System.getProperty("os.name");
@@ -112,7 +112,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.HtmlParserContext#getUserAgent()
+	 * @see org.lobobrowser.html.UserAgentContext#getUserAgent()
 	 */
 	public String getUserAgent() {
 		return UserAgentImpl.getInstance().getUserAgentString();
@@ -121,7 +121,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.HtmlParserContext#isCookieEnabled()
+	 * @see org.lobobrowser.html.UserAgentContext#isCookieEnabled()
 	 */
 	public boolean isCookieEnabled() {
 		// TODO: Settings

@@ -60,7 +60,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getattributes()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getattributes()
 	 */
 	public NamedNodeMap getAttributes() {
 		synchronized (this) {
@@ -485,7 +485,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getLocalName()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getLocalName()
 	 */
 	public String getLocalName() {
 		return this.getNodeName();
@@ -494,7 +494,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getNodeName()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getNodeName()
 	 */
 	public String getNodeName() {
 		return this.name;
@@ -503,7 +503,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getNodeType()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getNodeType()
 	 */
 	public short getNodeType() {
 		return Node.ELEMENT_NODE;
@@ -512,7 +512,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getNodeValue()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getNodeValue()
 	 */
 	public String getNodeValue() throws DOMException {
 		return null;
@@ -521,7 +521,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#setNodeValue(java.lang.String)
+	 * @see org.lobobrowser.html.dombl.NodeImpl#setNodeValue(java.lang.String)
 	 */
 	public void setNodeValue(String nodeValue) throws DOMException {
 		// nop

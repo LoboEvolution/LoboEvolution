@@ -31,8 +31,8 @@ public class BrLayout implements MarkupLayout {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.MarkupLayout#layoutMarkup(java.awt.Container
-	 * , java.awt.Insets, org.xamjwg.html.domimpl.HTMLElementImpl)
+	 * org.lobobrowser.html.render.MarkupLayout#layoutMarkup(java.awt.Container
+	 * , java.awt.Insets, org.lobobrowser.html.dombl.HTMLElementImpl)
 	 */
 	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 		String clear = markupElement.getAttribute(HtmlAttributeProperties.CLEAR);

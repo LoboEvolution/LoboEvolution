@@ -56,7 +56,7 @@ public class InputPasswordControl extends BaseInputTextControl {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.InputTextControl#createTextField(java.lang.String
+	 * org.lobobrowser.html.render.InputTextControl#createTextField(java.lang.String
 	 * )
 	 */
 	protected JTextComponent createTextField() {

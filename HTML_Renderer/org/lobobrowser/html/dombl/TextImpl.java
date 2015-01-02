@@ -102,7 +102,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getlocalName()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getlocalName()
 	 */
 	public String getLocalName() {
 		return null;
@@ -111,7 +111,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getnodeName()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getnodeName()
 	 */
 	public String getNodeName() {
 		return "#text";
@@ -120,7 +120,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getnodeType()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getnodeType()
 	 */
 	public short getNodeType() {
 		return Node.TEXT_NODE;
@@ -129,7 +129,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getnodeValue()
+	 * @see org.lobobrowser.html.dombl.NodeImpl#getnodeValue()
 	 */
 	public String getNodeValue() throws DOMException {
 		return this.text;
@@ -138,7 +138,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#setnodeValue(java.lang.String)
+	 * @see org.lobobrowser.html.dombl.NodeImpl#setnodeValue(java.lang.String)
 	 */
 	public void setNodeValue(String nodeValue) throws DOMException {
 		this.text = nodeValue;

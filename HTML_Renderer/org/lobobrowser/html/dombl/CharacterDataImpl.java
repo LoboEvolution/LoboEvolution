@@ -57,7 +57,7 @@ public abstract class CharacterDataImpl extends NodeImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#cloneNode(boolean)
+	 * @see org.lobobrowser.html.dombl.NodeImpl#cloneNode(boolean)
 	 */
 	public Node cloneNode(boolean deep) {
 		CharacterDataImpl newNode = (CharacterDataImpl) super.cloneNode(deep);

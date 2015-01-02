@@ -102,9 +102,9 @@ final class RSpacing extends BaseBoundableRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#paintSelection(java.awt.
-	 * Graphics, boolean, org.xamjwg.html.renderer.RenderablePoint,
-	 * org.xamjwg.html.renderer.RenderablePoint)
+	 * org.lobobrowser.html.render.BoundableRenderable#paintSelection(java.awt.
+	 * Graphics, boolean, org.lobobrowser.html.render.RenderablePoint,
+	 * org.lobobrowser.html.render.RenderablePoint)
 	 */
 	public boolean paintSelection(Graphics g, boolean inSelection,
 			RenderableSpot startPoint, RenderableSpot endPoint) {
@@ -138,7 +138,7 @@ final class RSpacing extends BaseBoundableRenderable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BoundableRenderable#getRenderable(int, int)
+	 * @see org.lobobrowser.html.render.BoundableRenderable#getRenderable(int, int)
 	 */
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		return new RenderableSpot(this, x, y);

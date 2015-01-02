@@ -96,7 +96,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#getCols()
+	 * @see org.lobobrowser.html.render.BaseInputControl#getCols()
 	 */
 	public int getCols() {
 		return this.cols;
@@ -105,7 +105,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#getRows()
+	 * @see org.lobobrowser.html.render.BaseInputControl#getRows()
 	 */
 	public int getRows() {
 		return this.rows;
@@ -117,7 +117,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#setCols(int)
+	 * @see org.lobobrowser.html.render.BaseInputControl#setCols(int)
 	 */
 	public void setCols(int cols) {
 		if (cols != this.cols) {
@@ -129,7 +129,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#setRows(int)
+	 * @see org.lobobrowser.html.render.BaseInputControl#setRows(int)
 	 */
 	public void setRows(int rows) {
 		if (rows != this.rows) {
@@ -166,7 +166,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#getReadOnly()
+	 * @see org.lobobrowser.html.render.BaseInputControl#getReadOnly()
 	 */
 	public boolean getReadOnly() {
 		return !this.widget.isEditable();
@@ -175,7 +175,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#getValue()
+	 * @see org.lobobrowser.html.render.BaseInputControl#getValue()
 	 */
 	public String getValue() {
 		String text = this.widget.getText();
@@ -185,7 +185,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#setReadOnly(boolean)
+	 * @see org.lobobrowser.html.render.BaseInputControl#setReadOnly(boolean)
 	 */
 	public void setReadOnly(boolean readOnly) {
 		this.widget.setEditable(readOnly);
@@ -194,7 +194,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#setValue(java.lang.String)
+	 * @see org.lobobrowser.html.render.BaseInputControl#setValue(java.lang.String)
 	 */
 	public void setValue(String value) {
 		this.widget.setText(value);

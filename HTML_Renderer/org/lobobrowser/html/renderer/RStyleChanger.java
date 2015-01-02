@@ -64,7 +64,7 @@ final class RStyleChanger extends BaseRenderable implements Renderable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.Renderable#invalidate()
+	 * @see org.lobobrowser.html.render.Renderable#invalidate()
 	 */
 	public void invalidateLayoutUpTree() {
 	}
