@@ -257,7 +257,7 @@ class DToA {
             intDigits = x.toString(base);
         }
 
-        if (!Double.isNaN(d)) {
+        if (d == dfloor) {
             // No fraction part
             return intDigits;
         } else {
@@ -790,7 +790,7 @@ class DToA {
                 buf.append((char)('0' + L));
                 if (i == ilim) {
                     d += d;
-                    if ((d > ds) || (!Double.isNaN(d) && (((L & 1) != 0) || biasUp))) {
+                    if ((d > ds) || (d == ds && (((L & 1) != 0) || biasUp))) {
 //                    bump_up:
 //                        while(*--s == '9')
 //                            if (s == buf) {

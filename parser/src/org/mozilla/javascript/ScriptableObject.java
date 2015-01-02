@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import org.mozilla.javascript.arrays.ExternalArray;
 import org.mozilla.javascript.debug.DebuggableObject;
 import org.mozilla.javascript.annotations.JSConstructor;
 import org.mozilla.javascript.annotations.JSFunction;
@@ -118,6 +119,8 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
     private transient Slot firstAdded;
     private transient Slot lastAdded;
 
+    // Support for external byte arrays
+    private ExternalArray externalArray;
 
     private volatile Map<Object,Object> associatedValues;
 
@@ -434,6 +437,9 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
      */
     public boolean has(int index, Scriptable start)
     {
+        if ((externalArray != null) && externalArray.inRange(index)) {
+            return true;
+        }
         return null != getSlot(null, index, SLOT_QUERY);
     }
 
@@ -465,6 +471,10 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
      */
     public Object get(int index, Scriptable start)
     {
+        if ((externalArray != null) && externalArray.inRange(index)) {
+            return externalArray.get(index);
+        }
+
         Slot slot = getSlot(null, index, SLOT_QUERY);
         if (slot == null) {
             return Scriptable.NOT_FOUND;
@@ -505,11 +515,15 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
      */
     public void put(int index, Scriptable start, Object value)
     {
-        if (putImpl(null, index, start, value))
-            return;
+        if ((externalArray != null) && externalArray.inRange(index)) {
+            checkNotSealed(null, index);
+            externalArray.put(index, value);
+        } else {
+            if (putImpl(null, index, start, value))
+                return;
 
-        if (start == this) throw Kit.codeBug();
-        start.put(index, start, value);
+            if (start == this) throw Kit.codeBug();
+        }
     }
 
     /**
@@ -530,14 +544,17 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
      * Removes the indexed property from the object.
      *
      * If the property is not found, or it has the PERMANENT attribute,
-     * no action is taken.
+     * no action is taken. If an external array is used and the index is inside the
+     * array, then no action is taken either.
      *
      * @param index the numeric index for the property
      */
     public void delete(int index)
     {
         checkNotSealed(null, index);
-        removeSlot(null, index);
+        if ((externalArray == null) || !externalArray.inRange(index)) {
+            removeSlot(null, index);
+        }
     }
 
     /**
@@ -1747,14 +1764,15 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
      */
     public void defineOwnProperties(Context cx, ScriptableObject props) {
         Object[] ids = props.getIds();
-        for (Object id : ids) {
-            Object descObj = props.get(id);
+        ScriptableObject[] descs = new ScriptableObject[ids.length];
+        for (int i = 0, len = ids.length; i < len; ++i) {
+            Object descObj = ScriptRuntime.getObjectElem(props, ids[i], cx);
             ScriptableObject desc = ensureScriptableObject(descObj);
             checkPropertyDefinition(desc);
+            descs[i] = desc;
         }
-        for (Object id : ids) {
-            ScriptableObject desc = (ScriptableObject)props.get(id);
-            defineOwnProperty(cx, id, desc);
+        for (int i = 0, len = ids.length; i < len; ++i) {
+            defineOwnProperty(cx, ids[i], descs[i]);
         }
     }
 
@@ -2687,6 +2705,25 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
         return slot.setValue(value, this, start);
     }
 
+    /**
+     * Replace the implementation of the "array" slots of this type with the specified array. "put" and "get"
+     * operations using an "index" in that case are delegated directly to the array. Attempts to set
+     * items in the array with different values in this case will fail with a TypeError.
+     *
+     * @since 1.7R5
+     */
+    public void setExternalArray(ExternalArray array) {
+        this.externalArray = array;
+    }
+
+    public ExternalArray getExternalArray() {
+        return externalArray;
+    }
+
+    public boolean hasExternalArray() {
+        return (externalArray != null);
+    }
+
     private Slot findAttributeSlot(String name, int index, int accessType)
     {
         Slot slot = getSlot(name, index, accessType);
@@ -2956,10 +2993,16 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
 
     Object[] getIds(boolean getAll) {
         Slot[] s = slots;
-        Object[] a = ScriptRuntime.emptyArgs;
-        if (s == null)
-            return a;
-        int c = 0;
+        Object[] a;
+
+        int al = (s == null ? 0 : s.length) + (externalArray == null ? 0 : externalArray.getLength());
+        if (al == 0) {
+            return ScriptRuntime.emptyArgs;
+        }
+
+        a = new Object[al];
+        int c = (externalArray == null ? 0 : externalArray.copyIds(a));
+
         Slot slot = firstAdded;
         while (slot != null && slot.wasDeleted) {
             // we used to removed deleted slots from the linked list here
@@ -2970,8 +3013,6 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
         }
         while (slot != null) {
             if (getAll || (slot.getAttributes() & DONTENUM) == 0) {
-                if (c == 0)
-                    a = new Object[s.length];
                 a[c++] = slot.name != null
                         ? slot.name
                         : Integer.valueOf(slot.indexOrHash);
@@ -3080,11 +3121,15 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
     // a subclass that implements java.util.Map.
 
     public int size() {
-        return count < 0 ? ~count : count;
+        int s = (count < 0 ? ~count : count);
+        if (externalArray != null) {
+            s += externalArray.getLength();
+        }
+        return s;
     }
 
     public boolean isEmpty() {
-        return count == 0 || count == -1;
+        return ((count == 0) || (count == -1)) && ((externalArray == null) || (externalArray.getLength() == 0));
     }
 
 

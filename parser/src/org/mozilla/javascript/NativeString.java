@@ -156,11 +156,13 @@ final class NativeString extends IdScriptableObject
           case Id_equalsIgnoreCase:  arity=1; s="equalsIgnoreCase";  break;
           case Id_match:             arity=1; s="match";             break;
           case Id_search:            arity=1; s="search";            break;
-          case Id_replace:           arity=1; s="replace";           break;
+          case Id_replace:           arity=2; s="replace";           break;
           case Id_localeCompare:     arity=1; s="localeCompare";     break;
           case Id_toLocaleLowerCase: arity=0; s="toLocaleLowerCase"; break;
           case Id_toLocaleUpperCase: arity=0; s="toLocaleUpperCase"; break;
           case Id_trim:              arity=0; s="trim";              break;
+          case Id_trimLeft:          arity=0; s="trimLeft";          break;
+          case Id_trimRight:         arity=0; s="trimRight";         break;
           default: throw new IllegalArgumentException(String.valueOf(id));
         }
         initPrototypeMethod(STRING_TAG, id, s, arity);
@@ -213,7 +215,7 @@ final class NativeString extends IdScriptableObject
                 int N = args.length;
                 if (N < 1)
                     return "";
-                StringBuffer sb = new StringBuffer(N);
+                StringBuilder sb = new StringBuilder(N);
                 for (int i = 0; i != N; ++i) {
                     sb.append(ScriptRuntime.toUint16(args[i]));
                 }
@@ -394,6 +396,33 @@ final class NativeString extends IdScriptableObject
 
                     return str.substring(start, end);
                 }
+              case Id_trimLeft:
+                {
+                    String str = ScriptRuntime.toString(thisObj);
+                    char[] chars = str.toCharArray();
+
+                    int start = 0;
+                    while (start < chars.length && ScriptRuntime.isJSWhitespaceOrLineTerminator(chars[start])) {
+                      start++;
+                    }
+                    int end = chars.length;
+
+                    return str.substring(start, end);
+                }
+              case Id_trimRight:
+                {
+                    String str = ScriptRuntime.toString(thisObj);
+                    char[] chars = str.toCharArray();
+
+                    int start = 0;
+
+                    int end = chars.length;
+                    while (end > start && ScriptRuntime.isJSWhitespaceOrLineTerminator(chars[end-1])) {
+                      end--;
+                    }
+
+                    return str.substring(start, end);
+                }
             }
             throw new IllegalArgumentException(String.valueOf(id));
         }
@@ -413,7 +442,7 @@ final class NativeString extends IdScriptableObject
                                  String attribute, Object[] args)
     {
         String str = ScriptRuntime.toString(thisObj);
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         result.append('<');
         result.append(tag);
         if (attribute != null) {
@@ -486,7 +515,7 @@ final class NativeString extends IdScriptableObject
         String search = ScriptRuntime.toString(args, 0);
         double end = ScriptRuntime.toNumber(args, 1);
 
-        if (Double.isNaN(end) || end > target.length())
+        if (end != end || end > target.length())
             end = target.length();
         else if (end < 0)
             end = 0;
@@ -583,7 +612,7 @@ final class NativeString extends IdScriptableObject
         }
 
         // Find total capacity for the final string to avoid unnecessary
-        // re-allocations in StringBuffer
+        // re-allocations in StringBuilder
         int size = target.length();
         String[] argsAsStrings = new String[N];
         for (int i = 0; i != N; ++i) {
@@ -592,7 +621,7 @@ final class NativeString extends IdScriptableObject
             size += s.length();
         }
 
-        StringBuffer result = new StringBuffer(size);
+        StringBuilder result = new StringBuilder(size);
         result.append(target);
         for (int i = 0; i != N; ++i) {
             result.append(argsAsStrings[i]);
@@ -601,35 +630,32 @@ final class NativeString extends IdScriptableObject
     }
 
     private static CharSequence js_slice(CharSequence target, Object[] args) {
-        if (args.length != 0) {
-            double begin = ScriptRuntime.toInteger(args[0]);
-            double end;
-            int length = target.length();
-            if (begin < 0) {
-                begin += length;
-                if (begin < 0)
-                    begin = 0;
-            } else if (begin > length) {
-                begin = length;
-            }
-
-            if (args.length == 1) {
-                end = length;
-            } else {
-                end = ScriptRuntime.toInteger(args[1]);
-                if (end < 0) {
-                    end += length;
-                    if (end < 0)
-                        end = 0;
-                } else if (end > length) {
-                    end = length;
-                }
-                if (end < begin)
-                    end = begin;
-            }
-            return target.subSequence((int) begin, (int) end);
+        double begin = args.length < 1 ? 0 : ScriptRuntime.toInteger(args[0]);
+        double end;
+        int length = target.length();
+        if (begin < 0) {
+            begin += length;
+            if (begin < 0)
+                begin = 0;
+        } else if (begin > length) {
+            begin = length;
         }
-        return target;
+
+        if (args.length < 2 || args[1] == Undefined.instance) {
+            end = length;
+        } else {
+            end = ScriptRuntime.toInteger(args[1]);
+            if (end < 0) {
+                end += length;
+                if (end < 0)
+                    end = 0;
+            } else if (end > length) {
+                end = length;
+            }
+            if (end < begin)
+                end = begin;
+        }
+        return target.subSequence((int) begin, (int) end);
     }
 
 // #string_id_map#
@@ -678,10 +704,12 @@ final class NativeString extends IdScriptableObject
                 if (c=='r') { X="toString";id=Id_toString; }
                 else if (c=='s') { X="fontsize";id=Id_fontsize; }
                 else if (c=='u') { X="toSource";id=Id_toSource; }
+                else if (c=='L') { X="trimLeft";id=Id_trimLeft; }
                 break L;
             case 9: c=s.charAt(0);
                 if (c=='f') { X="fontcolor";id=Id_fontcolor; }
                 else if (c=='s') { X="substring";id=Id_substring; }
+                else if (c=='t') { X="trimRight";id=Id_trimRight; }
                 break L;
             case 10: X="charCodeAt";id=Id_charCodeAt; break L;
             case 11: switch (s.charAt(2)) {
@@ -744,7 +772,9 @@ final class NativeString extends IdScriptableObject
         Id_toLocaleLowerCase         = 35,
         Id_toLocaleUpperCase         = 36,
         Id_trim                      = 37,
-        MAX_PROTOTYPE_ID             = Id_trim;
+        Id_trimLeft                  = 38,
+        Id_trimRight                 = 39,
+        MAX_PROTOTYPE_ID             = Id_trimRight;
 
 // #/string_id_map#
 

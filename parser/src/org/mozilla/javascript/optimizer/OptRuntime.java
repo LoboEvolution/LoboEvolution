@@ -151,7 +151,7 @@ public final class OptRuntime extends ScriptRuntime
             return oneObj;
         } else if (num == -1.0) {
             return minusOneObj;
-        } else if (Double.isNaN(num)) {
+        } else if (num != num) {
             return NaNobj;
         }
         return new Double(num);

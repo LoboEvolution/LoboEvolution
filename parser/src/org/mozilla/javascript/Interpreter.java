@@ -662,7 +662,7 @@ public final class Interpreter extends Icode implements Evaluator
                                   String nativeStackTrace)
     {
         String tag = "org.mozilla.javascript.Interpreter.interpretLoop";
-        StringBuffer sb = new StringBuffer(nativeStackTrace.length() + 1000);
+        StringBuilder sb = new StringBuilder(nativeStackTrace.length() + 1000);
         String lineSeparator = SecurityUtilities.getSystemProperty("line.separator");
 
         CallFrame[] array = (CallFrame[])ex.interpreterStackInfo;
@@ -1578,7 +1578,7 @@ switch (op) {
         continue Loop;
     case Icode_VAR_INC_DEC : {
         stackTop = doVarIncDec(cx, frame, stack, sDbl, stackTop,
-                               vars, varDbls, indexReg);
+                               vars, varDbls, varAttributes, indexReg);
         continue Loop;
     }
     case Icode_ZERO :
@@ -2352,24 +2352,37 @@ switch (op) {
     private static int doVarIncDec(Context cx, CallFrame frame,
                                    Object[] stack, double[] sDbl,
                                    int stackTop, Object[] vars,
-                                   double[] varDbls, int indexReg) {
+                                   double[] varDbls, int[] varAttributes,
+                                   int indexReg) {
         // indexReg : varindex
         ++stackTop;
         int incrDecrMask = frame.idata.itsICode[frame.pc];
         if (!frame.useActivation) {
-            stack[stackTop] = DOUBLE_MARK;
             Object varValue = vars[indexReg];
             double d;
             if (varValue == DOUBLE_MARK) {
                 d = varDbls[indexReg];
             } else {
                 d = ScriptRuntime.toNumber(varValue);
-                vars[indexReg] = DOUBLE_MARK;
             }
             double d2 = ((incrDecrMask & Node.DECR_FLAG) == 0)
                         ? d + 1.0 : d - 1.0;
-            varDbls[indexReg] = d2;
-            sDbl[stackTop] = ((incrDecrMask & Node.POST_FLAG) == 0) ? d2 : d;
+            boolean post = ((incrDecrMask & Node.POST_FLAG) != 0);
+            if ((varAttributes[indexReg] & ScriptableObject.READONLY) == 0) {
+                if (varValue != DOUBLE_MARK) {
+                    vars[indexReg] = DOUBLE_MARK;
+                }
+                varDbls[indexReg] = d2;
+                stack[stackTop] = DOUBLE_MARK;
+                sDbl[stackTop] = post ? d : d2;
+            } else {
+                if (post && varValue != DOUBLE_MARK) {
+                    stack[stackTop] = varValue;
+                } else {
+                    stack[stackTop] = DOUBLE_MARK;
+                    sDbl[stackTop] = post ? d : d2;
+                }
+            }
         } else {
             String varName = frame.idata.argNames[indexReg];
             stack[stackTop] = ScriptRuntime.nameIncrDecr(frame.scope, varName,
@@ -3033,12 +3046,12 @@ switch (op) {
             return false;
         } else if (x == UniqueTag.DOUBLE_MARK) {
             double d = frame.sDbl[i];
-            return !Double.isNaN(d) && d != 0.0;
+            return d == d && d != 0.0;
         } else if (x == null || x == Undefined.instance) {
             return false;
         } else if (x instanceof Number) {
             double d = ((Number)x).doubleValue();
-            return (!Double.isNaN(d) && d != 0.0);
+            return (d == d && d != 0.0);
         } else if (x instanceof Boolean) {
             return ((Boolean)x).booleanValue();
         } else {

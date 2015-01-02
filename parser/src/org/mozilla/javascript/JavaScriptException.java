@@ -33,23 +33,28 @@ public class JavaScriptException extends RhinoException
      *
      * @param value the JavaScript value thrown.
      */
-    public JavaScriptException(Object value, String sourceName, int lineNumber)
-    {
+    public JavaScriptException(Object value, String sourceName, int lineNumber) {
         recordErrorOrigin(sourceName, lineNumber, null, 0);
         this.value = value;
         // Fill in fileName and lineNumber automatically when not specified
         // explicitly, see Bugzilla issue #342807
-        if (value instanceof NativeError && Context.getContext()
-                .hasFeature(Context.FEATURE_LOCATION_INFORMATION_IN_ERROR)) {
-            NativeError error = (NativeError) value;
-            if (!error.has("fileName", error)) {
-                error.put("fileName", error, sourceName);
+
+        if (value instanceof Scriptable && Context.getContext().hasFeature(Context.FEATURE_LOCATION_INFORMATION_IN_ERROR)) {
+            Scriptable obj = (Scriptable) value;
+            while(obj != null && !(obj instanceof NativeError)) {
+                obj = obj.getPrototype();
             }
-            if (!error.has("lineNumber", error)) {
-                error.put("lineNumber", error, Integer.valueOf(lineNumber));
+            if (obj != null) {
+                NativeError error = (NativeError) obj;
+                if (!error.has("fileName", error)) {
+                    error.put("fileName", error, sourceName);
+                }
+                if (!error.has("lineNumber", error)) {
+                    error.put("lineNumber", error, Integer.valueOf(lineNumber));
+                }
+                // set stack property, see bug #549604
+                error.setStackProvider(this);
             }
-            // set stack property, see bug #549604
-            error.setStackProvider(this);
         }
     }
 

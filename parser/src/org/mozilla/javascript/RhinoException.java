@@ -8,7 +8,6 @@
 package org.mozilla.javascript;
 
 import java.io.CharArrayWriter;
-import java.io.File;
 import java.io.FilenameFilter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -45,7 +44,7 @@ public abstract class RhinoException extends RuntimeException
         if (sourceName == null || lineNumber <= 0) {
             return details;
         }
-        StringBuffer buf = new StringBuffer(details);
+        StringBuilder buf = new StringBuilder(details);
         buf.append(" (");
         if (sourceName != null) {
             buf.append(sourceName);
@@ -205,14 +204,36 @@ public abstract class RhinoException extends RuntimeException
         String lineSeparator = SecurityUtilities.getSystemProperty("line.separator");
         ScriptStackElement[] stack = getScriptStack();
         for (ScriptStackElement elem : stack) {
-            if (useMozillaStackStyle) {
-                elem.renderMozillaStyle(buffer);
-            } else {
-                elem.renderJavaStyle(buffer);
-            }
+            elem.render(buffer);
             buffer.append(lineSeparator);
         }
         return buffer.toString();
+    }
+
+    /**
+     * Get a string representing the script stack in a way that is compatible with V8.
+     * If the function "Error.prepareStackTrace" is defined, then call that function,
+     * passing it an array of CallSite objects. Otherwise, behave as if "getScriptStackTrace"
+     * was called instead.
+     * @since 1.7R5
+     */
+    public Object getPreparedScriptStackTrace(Context cx, Scriptable scope, Scriptable err)
+    {
+        Scriptable top = ScriptableObject.getTopLevelScope(scope);
+        Scriptable error = TopLevel.getBuiltinCtor(cx, top, TopLevel.Builtins.Error);
+        Object prepare = error.get("prepareStackTrace", error);
+        if (prepare instanceof Function) {
+            Function prepareFunc = (Function)prepare;
+            ScriptStackElement[] elts = getScriptStack();
+
+            Object[] rawStack = new Object[elts.length];
+            for (int i = 0; i < elts.length; i++) {
+                rawStack[i] = cx.newObject(top, "CallSite");
+                ((NativeCallSite)rawStack[i]).setElement(elts[i]);
+            }
+            return prepareFunc.call(cx, scope, null, new Object[] { err, cx.newArray(top, rawStack) });
+        }
+        return getScriptStackTrace();
     }
 
     /**
@@ -309,7 +330,7 @@ public abstract class RhinoException extends RuntimeException
      * @since 1.7R3
      */
     public static boolean usesMozillaStackStyle() {
-        return useMozillaStackStyle;
+        return (stackStyle == StackStyle.MOZILLA);
     }
 
     /**
@@ -318,17 +339,36 @@ public abstract class RhinoException extends RuntimeException
      * (<code>functionName()@fileName:lineNumber</code>)
      * instead of Rhino's own Java-inspired format
      * (<code>    at fileName:lineNumber (functionName)</code>)
+     * Calling this with "true" is the equivalent of calling:
+     * <code>setStackStyle(StackStyle.MOZILLA);</code>
      * @param flag whether to render stacks in Mozilla/Firefox style
      * @see ScriptStackElement
      * @since 1.7R3
      */
     public static void useMozillaStackStyle(boolean flag) {
-        useMozillaStackStyle = flag;
+        stackStyle = (flag ? StackStyle.MOZILLA : StackStyle.RHINO);
+    }
+
+    /**
+     * Return the stack trace style currently in use.
+     * @since 1.7R5
+     */
+    public static StackStyle getStackStyle() {
+        return stackStyle;
+    }
+
+    /**
+     * Set the stack trace style to use. This replaces "useMozillaStackStyle" since there are now
+     * more than two different formats. See "StackStyle" for documentation.
+     * @since 1.7R5
+     */
+    public static void setStackStyle(StackStyle style) {
+        stackStyle = style;
     }
 
     static final long serialVersionUID = 1883500631321581169L;
-    
-    private static boolean useMozillaStackStyle = false;
+
+    private static StackStyle stackStyle = StackStyle.RHINO;
 
     private String sourceName;
     private int lineNumber;

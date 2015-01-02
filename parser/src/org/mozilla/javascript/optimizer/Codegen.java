@@ -1074,7 +1074,7 @@ public class Codegen implements Evaluator
                     "org/mozilla/javascript/optimizer/OptRuntime",
                     "minusOneObj", "Ljava/lang/Double;");
 
-        } else if (Double.isNaN(num)) {
+        } else if (num != num) {
             cfw.add(ByteCode.GETSTATIC,
                     "org/mozilla/javascript/ScriptRuntime",
                     "NaNobj", "Ljava/lang/Double;");

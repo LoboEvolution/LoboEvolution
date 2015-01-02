@@ -368,10 +368,8 @@ public class FunctionNode extends ScriptNode {
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
-		if (!isGetterOrSetter()) {
-			sb.append(makeIndent(depth));
-			sb.append("function");
-		}
+        sb.append(makeIndent(depth));
+        sb.append("function");
         if (functionName != null) {
             sb.append(" ");
             sb.append(functionName.toSource(0));
@@ -400,7 +398,7 @@ public class FunctionNode extends ScriptNode {
         } else {
             sb.append(getBody().toSource(depth).trim());
         }
-        if (functionType == FUNCTION_STATEMENT || isGetterOrSetter()) {
+        if (functionType == FUNCTION_STATEMENT) {
             sb.append("\n");
         }
         return sb.toString();

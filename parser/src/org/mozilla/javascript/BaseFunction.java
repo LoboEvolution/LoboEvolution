@@ -131,7 +131,7 @@ public class BaseFunction extends IdScriptableObject implements Function
             attr = prototypePropertyAttributes;
             break;
           case Id_arguments:
-            attr = DONTENUM | PERMANENT;
+            attr = argumentsAttributes;
             break;
           default: throw new IllegalStateException();
         }
@@ -179,7 +179,11 @@ public class BaseFunction extends IdScriptableObject implements Function
                     // This should not be called since "arguments" is PERMANENT
                     Kit.codeBug();
                 }
-                defaultPut("arguments", value);
+                if (defaultHas("arguments")) {
+                    defaultPut("arguments", value);
+                } else if ((argumentsAttributes & READONLY) == 0) {
+                    argumentsObj = value;
+                }
                 return;
             case Id_name:
             case Id_arity:
@@ -187,6 +191,20 @@ public class BaseFunction extends IdScriptableObject implements Function
                 return;
         }
         super.setInstanceIdValue(id, value);
+    }
+
+    @Override
+    protected void setInstanceIdAttributes(int id, int attr)
+    {
+        switch (id) {
+            case Id_prototype:
+                prototypePropertyAttributes = attr;
+                return;
+            case Id_arguments:
+                argumentsAttributes = attr;
+                return;
+        }
+        super.setInstanceIdAttributes(id, attr);
     }
 
     @Override
@@ -206,7 +224,7 @@ public class BaseFunction extends IdScriptableObject implements Function
         int arity;
         switch (id) {
           case Id_constructor: arity=1; s="constructor"; break;
-          case Id_toString:    arity=1; s="toString";    break;
+          case Id_toString:    arity=0; s="toString";    break;
           case Id_toSource:    arity=1; s="toSource";    break;
           case Id_apply:       arity=2; s="apply";       break;
           case Id_call:        arity=1; s="call";        break;
@@ -396,7 +414,7 @@ public class BaseFunction extends IdScriptableObject implements Function
      */
     String decompile(int indent, int flags)
     {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         boolean justbody = (0 != (flags & Decompiler.ONLY_BODY_FLAG));
         if (!justbody) {
             sb.append("function ");
@@ -464,7 +482,7 @@ public class BaseFunction extends IdScriptableObject implements Function
       // <Function name>.arguments is deprecated, so we use a slow
       // way of getting it that doesn't add to the invocation cost.
       // TODO: add warning, error based on version
-      Object value = defaultGet("arguments");
+      Object value = defaultHas("arguments") ? defaultGet("arguments") : argumentsObj;
       if (value != NOT_FOUND) {
           // Should after changing <Function name>.arguments its
           // activation still be available during Function call?
@@ -484,7 +502,7 @@ public class BaseFunction extends IdScriptableObject implements Function
                                         Object[] args)
     {
         int arglen = args.length;
-        StringBuffer sourceBuf = new StringBuffer();
+        StringBuilder sourceBuf = new StringBuilder();
 
         sourceBuf.append("function ");
         /* version != 1.2 Function constructor behavior -
@@ -580,9 +598,12 @@ public class BaseFunction extends IdScriptableObject implements Function
 // #/string_id_map#
 
     private Object prototypeProperty;
+    private Object argumentsObj = NOT_FOUND;
+
     // For function object instances, attributes are
     //  {configurable:false, enumerable:false};
     // see ECMA 15.3.5.2
     private int prototypePropertyAttributes = PERMANENT|DONTENUM;
+    private int argumentsAttributes = PERMANENT|DONTENUM;
 }
 
