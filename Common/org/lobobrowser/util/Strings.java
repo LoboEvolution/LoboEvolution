@@ -1,6 +1,6 @@
 /*
     GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 Lobo Evolution
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
