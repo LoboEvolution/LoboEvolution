@@ -157,9 +157,6 @@ public class ReuseManager {
 				}
 				break OUTER;
 			}
-		} finally {
-			// long time2 = System.currentTimeMillis();
-			// System.out.println("launch(): Took " + (time2 - time1) + " ms.");
 		}
 		if (!launched) {
 			PlatformInit entry = PlatformInit.getInstance();

@@ -122,7 +122,6 @@ public class CssParserTest extends JFrame {
 				in.close();
 			}
 			String source = new String(content, "ISO-8859-1");
-			System.out.println("source: " + source);
 			this.textArea.setText(source);
 			long time1 = System.currentTimeMillis();
 			CSSOMParser parser = new CSSOMParser();
