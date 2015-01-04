@@ -1,3 +1,63 @@
+Version 0.98.6
+--------------
+
+- Add Look and Feel Nimbus. Nimbus is a polished cross-patform look and feel introduced in the Java SE 6 Update 10 (6u10) release.
+- Add Clear cache
+- Add Https suppor
+- Add multi select file in input tag file	
+- Add hidden attribute
+- Add global attribute suppor for input tag
+- Add css inline-block
+- Add RGBA support. Improve color support. Browser render 510 colors.List of color rendered http://jdatestamp.sourceforge.net/colors.html
+- Add placeholder attribute in input tag
+
+- Add more document javascript methods:
+	01. document.getElementsByClassName
+	02. document.lastModified
+	03. document.linkColor
+	04. document.vlinkColor
+	05. document.alinkColor
+	06. document.bgcolor
+	07. document.commands
+	08. document.scripts
+	09. document.puglins 	
+	10. document.embeds
+	11  document.fgColor
+	12.	document.characterSet
+	13.	document.defaultCharset
+	14. document.addEventListener
+	15. document.removeEventListener. 
+
+- Add more element javascript methods:
+	01. element.addEventListener
+	02. element.removeEventListener
+	03. element.hidden
+	04. element.lassList 
+	05. element.itemscope
+	06. element.itemtype
+	07. element.itemid
+
+- Add textarea javascript method:
+	01. textlength
+
+- Add input javascript method:
+	01. width
+
+- Improve css list-style-type
+	01. Fix list-style-type: upper-alpha
+	02.	Fix list-style-type: lower-alpha
+	03.	Add list-style-type: upper-roman
+	04.	Add list-style-type: lower-roman
+	05.	Add list-style-type: decimal-leading-zero
+	
+LIBRARIES:
+
+- Add backport of OpenJFX 8 to run on Java 7 http://grepcode.com/snapshot/repo1.maven.org/maven2/net.java.openjfx.backport/openjfx-78-backport/1.8.0-ea-b96.1
+- Delete HtmlUnit-rhino-fork
+- Update Mozilla Rhino from fork https://github.com/apigee/rhino 
+- Update cssparser code to commit 462
+
+
 Version 0.98.5
 --------------
 

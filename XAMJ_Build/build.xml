@@ -1,8 +1,8 @@
 <?xml version="1.0"?>	
 <!-- ====================================================================== 
-May 29, 2005 1:42:43 PM                                                        
+Gen 04, 2015 17:15                                                        
 
-The Lobo Project
+The Lobo Evolution
 Author: J. H. S.
 ====================================================================== -->
 <project name="project" default="default">
@@ -19,7 +19,7 @@ Author: J. H. S.
 	<taskdef name="izpack" classpath="/opt/IzPack/lib/compiler.jar" 
 			 classname="com.izforge.izpack.ant.IzPackTask"/>
 	
-	<property name="lobo.version" value="0.98.5"/>
+	<property name="lobo.version" value=" 0.98.6"/>
 	<property name="build.dir" value="/tmp/lobo-build/"/>
 	<property name="lobo.dir" value="${build.dir}/lobo-${lobo.version}"/>
 	<!-- Install IzPack under /opt/ directory -->

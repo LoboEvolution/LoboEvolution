@@ -53,7 +53,7 @@ public class UserAgentImpl implements UserAgent {
 	}
 
 	public String getMinorVersion() {
-		return "98.5";
+		return "98.6";
 	}
 
 	public String getVersion() {
