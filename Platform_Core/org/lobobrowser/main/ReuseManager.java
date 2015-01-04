@@ -157,6 +157,8 @@ public class ReuseManager {
 				}
 				break OUTER;
 			}
+		}finally{
+			
 		}
 		if (!launched) {
 			PlatformInit entry = PlatformInit.getInstance();
