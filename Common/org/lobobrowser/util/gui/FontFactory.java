@@ -40,19 +40,17 @@ import javax.swing.text.StyleContext;
 
 import org.lobobrowser.util.Objects;
 
-/** Note: Undocumented class? */
-//import sun.font.FontManager;
-
 /**
  * @author J. H. S.
  */
 public class FontFactory {
-	private static final Logger logger = Logger.getLogger(FontFactory.class
-			.getName());
+	private static final Logger logger = Logger.getLogger(FontFactory.class.getName());
 	private static final boolean loggableFine = logger.isLoggable(Level.FINE);
 	private static final FontFactory instance = new FontFactory();
 	private final Set<String> fontFamilies = new HashSet<String>(40);
 	private final Map<FontKey, Font> fontMap = new HashMap<FontKey, Font>(50);
+	private final Map<String, Font> registeredFonts = new HashMap<String, Font>(0);
+	private String defaultFontName = Font.SANS_SERIF;
 
 	/**
 	 * 
@@ -76,9 +74,6 @@ public class FontFactory {
 	public static final FontFactory getInstance() {
 		return instance;
 	}
-
-	private final Map<String, Font> registeredFonts = new HashMap<String, Font>(
-			0);
 
 	/**
 	 * Registers a font family. It does not close the stream provided. Fonts
@@ -127,8 +122,6 @@ public class FontFactory {
 			return font;
 		}
 	}
-
-	private String defaultFontName = "SansSerif";
 
 	public String getDefaultFontName() {
 		return defaultFontName;
@@ -201,6 +194,7 @@ public class FontFactory {
 				|| "bolder".equalsIgnoreCase(key.fontWeight)) {
 			fontStyle |= Font.BOLD;
 		}
+		
 		if (baseFont != null) {
 			return baseFont.deriveFont(fontStyle, key.fontSize);
 		} else if (matchingFace != null) {

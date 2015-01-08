@@ -47,12 +47,7 @@ import org.w3c.dom.css.CSS2Properties;
  */
 public class StyleSheetRenderState implements RenderState {
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
-	// Default font needs to be something that displays in all languages.
-	// Serif, SansSerif, Monospaced.
-	private static final String DEFAULT_FONT_FAMILY = "SansSerif";
-	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(
-			DEFAULT_FONT_FAMILY, null, null, null,
-			HtmlValues.DEFAULT_FONT_SIZE, null, null);
+	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(Font.SANS_SERIF, null, null, null,HtmlValues.DEFAULT_FONT_SIZE, null, null);
 	protected static final HtmlInsets INVALID_INSETS = new HtmlInsets();
 	protected static final BackgroundInfo INVALID_BACKGROUND_INFO = new BackgroundInfo();
 	protected static final BorderInfo INVALID_BORDER_INFO = new BorderInfo();
@@ -249,7 +244,7 @@ public class StyleSheetRenderState implements RenderState {
 			fontFamily = prs.getFont().getFamily();
 		}
 		if (fontFamily == null) {
-			fontFamily = DEFAULT_FONT_FAMILY;
+			fontFamily = Font.SANS_SERIF;
 		}
 		if (newFontStyle != null) {
 			fontStyle = newFontStyle;
