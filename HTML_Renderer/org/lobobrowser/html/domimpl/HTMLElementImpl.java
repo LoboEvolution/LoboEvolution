@@ -950,6 +950,17 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public Element querySelector(String selectors) {
+		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		Element element = null;
+		if (selectors.startsWith("#"))
+			element = doc.getElementById(selectors.replace("#", ""));
+		if (selectors.startsWith("."))
+			element = (Element) doc.getElementsByClassName(selectors.replace(".", "")).item(0);
+		return element;
+	}
 
 	@Override
 	public void addEventListener(String script, String function) {

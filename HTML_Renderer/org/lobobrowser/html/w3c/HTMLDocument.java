@@ -34,6 +34,7 @@ package org.lobobrowser.html.w3c;
 
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
@@ -354,6 +355,8 @@ public interface HTMLDocument extends Document {
 	public void addEventListener(String script, String function);
 	
 	public void removeEventListener(String script, String function);
+	
+	public Element querySelector(String selectors);
 	
 
 }

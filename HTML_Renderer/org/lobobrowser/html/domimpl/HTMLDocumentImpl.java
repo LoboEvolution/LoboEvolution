@@ -1486,6 +1486,17 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public Element querySelector(String selectors) {
+		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		Element element = null;
+		if (selectors.startsWith("#"))
+			element = doc.getElementById(selectors.replace("#", ""));
+		if (selectors.startsWith("."))
+			element = (Element) doc.getElementsByClassName(selectors.replace(".", "")).item(0);
+		return element;
+	}
 
 	@Override
 	public HTMLCollection getCommands() {

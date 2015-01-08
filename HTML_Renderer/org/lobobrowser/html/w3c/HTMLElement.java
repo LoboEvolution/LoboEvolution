@@ -213,5 +213,7 @@ public interface HTMLElement extends Element {
 	public void addEventListener(String script, String function);
 	
 	public void removeEventListener(String script, String function);
+	
+	public Element querySelector(String selectors);
 
 }
