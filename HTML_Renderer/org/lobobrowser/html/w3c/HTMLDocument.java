@@ -358,5 +358,7 @@ public interface HTMLDocument extends Document {
 	
 	public Element querySelector(String selectors);
 	
+	public NodeList querySelectorAll(String selectors);
+	
 
 }

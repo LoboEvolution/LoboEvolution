@@ -39,6 +39,7 @@ import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.DOMTokenListImpl;
 import org.lobobrowser.html.dombl.ElementImpl;
+import org.lobobrowser.html.dombl.QuerySelectorImpl;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
@@ -953,13 +954,14 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	
 	@Override
 	public Element querySelector(String selectors) {
-		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		Element element = null;
-		if (selectors.startsWith("#"))
-			element = doc.getElementById(selectors.replace("#", ""));
-		if (selectors.startsWith("."))
-			element = (Element) doc.getElementsByClassName(selectors.replace(".", "")).item(0);
-		return element;
+		QuerySelectorImpl qsel = new QuerySelectorImpl();
+		return qsel.documentQuerySelector(this.document, selectors);
+	}
+	
+	@Override
+	public NodeList querySelectorAll(String selectors) {
+		QuerySelectorImpl qsel = new QuerySelectorImpl();
+		return qsel.documentQuerySelectorAll(this.document, selectors);
 	}
 
 	@Override

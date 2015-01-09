@@ -64,6 +64,7 @@ import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.dombl.LocalErrorHandler;
 import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.dombl.NodeVisitor;
+import org.lobobrowser.html.dombl.QuerySelectorImpl;
 import org.lobobrowser.html.dombl.TextImpl;
 import org.lobobrowser.html.domfilter.AnchorFilter;
 import org.lobobrowser.html.domfilter.AppletFilter;
@@ -1489,13 +1490,14 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	
 	@Override
 	public Element querySelector(String selectors) {
-		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		Element element = null;
-		if (selectors.startsWith("#"))
-			element = doc.getElementById(selectors.replace("#", ""));
-		if (selectors.startsWith("."))
-			element = (Element) doc.getElementsByClassName(selectors.replace(".", "")).item(0);
-		return element;
+		QuerySelectorImpl qsel = new QuerySelectorImpl();
+		return qsel.documentQuerySelector(this.document, selectors);
+	}
+	
+	@Override
+	public NodeList querySelectorAll(String selectors) {
+		QuerySelectorImpl qsel = new QuerySelectorImpl();
+		return qsel.documentQuerySelectorAll(this.document, selectors);
 	}
 
 	@Override

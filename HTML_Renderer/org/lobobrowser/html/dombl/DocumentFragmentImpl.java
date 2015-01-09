@@ -23,8 +23,6 @@
  */
 package org.lobobrowser.html.dombl;
 
-import org.lobobrowser.html.domfilter.ElementIdFilter;
-import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.w3c.HTMLDocumentFragment;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentFragment;
@@ -62,48 +60,13 @@ public class DocumentFragmentImpl extends NodeImpl implements DocumentFragment,H
 
 	@Override
 	public Element querySelector(String selectors) {
-		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		Element element = null;
-		if (selectors.startsWith("#"))
-			element = doc.getElementById(selectors.replace("#", ""));
-		if (selectors.startsWith("."))
-			element = (Element) doc.getElementsByClassName(selectors.replace(".", "")).item(0);
-		return element;
+		QuerySelectorImpl qsel = new QuerySelectorImpl();
+		return qsel.documentQuerySelector(this.document, selectors);
 	}
 
 	@Override
 	public NodeList querySelectorAll(String selectors) {
-		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-		NodeList list = null;
-
-		if (selectors.contains(",")) {
-			String[] strList = selectors.split(",");
-
-			for (int i = 0; i < strList.length; i++) {
-
-				String node = strList[i];
-
-				if (list == null) {
-					list = getList(doc, node);
-				} else {// TODO}
-				}
-			}
-		} else {
-			list = getList(doc, selectors);
-		}
-		return list;
-	}
-	
-	private NodeList getList(HTMLDocumentImpl doc,String selectors){
-		NodeList list = null;
-		
-		if (selectors.startsWith("#")) {
-			list = getNodeList(new ElementIdFilter(selectors.replace("#", "")));
-		}
-		if (selectors.startsWith(".")) {
-			list = doc.getElementsByClassName(selectors.replace(".", ""));
-		}
-		
-		return list;
+		QuerySelectorImpl qsel = new QuerySelectorImpl();
+		return qsel.documentQuerySelectorAll(this.document, selectors);
 	}
 }
