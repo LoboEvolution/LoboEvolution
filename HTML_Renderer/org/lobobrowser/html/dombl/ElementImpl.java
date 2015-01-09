@@ -210,25 +210,27 @@ public class ElementImpl extends NodeImpl implements Element {
 	}
 	
 	public int getTabIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			return Integer.parseInt(this
+					.getAttribute(HtmlAttributeProperties.TABINDEX));
+		} catch (Exception err) {
+			return 0;
+		}
 	}
 
 	
 	public void setTabIndex(int tabIndex) {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute(HtmlAttributeProperties.TABINDEX,String.valueOf(tabIndex));
 	}
 
 	
 	public String getAccessKey() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.ACCESSKEY);
 	}
 
 	
 	public void setAccessKey(String accessKey) {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.ACCESSKEY,accessKey);
 		
 	}
 
