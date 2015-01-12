@@ -44,8 +44,17 @@ import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.domimpl.HTMLOptionElementImpl;
 import org.lobobrowser.html.domimpl.HTMLScriptElementImpl;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
+import org.lobobrowser.html.w3c.ApplicationCache;
+import org.lobobrowser.html.w3c.BarProp;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.html.w3c.MessagePort;
+import org.lobobrowser.html.w3c.Selection;
+import org.lobobrowser.html.w3c.StyleMedia;
+import org.lobobrowser.html.w3c.UndoManager;
+import org.lobobrowser.html.w3c.webdatabase.Database;
+import org.lobobrowser.html.w3c.webdatabase.DatabaseCallback;
+import org.lobobrowser.html.w3c.webstorage.Storage;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.js.JavaClassWrapper;
 import org.lobobrowser.js.JavaClassWrapperFactory;
@@ -58,29 +67,32 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.css.CSS2Properties;
+import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
 
 public class Window extends AbstractScriptableDelegate implements AbstractView {
-	private static final Logger logger = Logger.getLogger(Window.class
-			.getName());
-	private static final Map CONTEXT_WINDOWS = new WeakHashMap();
-	// private static final JavaClassWrapper IMAGE_WRAPPER =
-	// JavaClassWrapperFactory.getInstance().getClassWrapper(Image.class);
-	private static final JavaClassWrapper XMLHTTPREQUEST_WRAPPER = JavaClassWrapperFactory
-			.getInstance().getClassWrapper(XMLHttpRequest.class);
-
+	private static final Logger logger = Logger.getLogger(Window.class.getName());
+	private static final Map<HtmlRendererContext, WeakReference<Window>> CONTEXT_WINDOWS = new WeakHashMap<HtmlRendererContext, WeakReference<Window>>();
+	private static final JavaClassWrapper XMLHTTPREQUEST_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(XMLHttpRequest.class);
 	private static int timerIdCounter = 0;
-
 	private final HtmlRendererContext rcontext;
 	private final UserAgentContext uaContext;
-
 	private Navigator navigator;
 	private Screen screen;
 	private Location location;
-	private Map taskMap;
+	private ScriptableObject windowScope;
+	private History history;
+	private Function onunload;
+	private Map<Integer, TaskWrapper> taskMap;
 	private volatile HTMLDocumentImpl document;
+	private int length;
+	private String name;
+	private boolean lengthSet = false;
+	private boolean nameSet = false;
 
 	public Window(HtmlRendererContext rcontext, UserAgentContext uaContext) {
 		// TODO: Probably need to create a new Window instance
@@ -154,9 +166,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	private void putAndStartTask(Integer timeoutID, Timer timer, Object retained) {
 		TaskWrapper oldTaskWrapper = null;
 		synchronized (this) {
-			Map taskMap = this.taskMap;
+			Map<Integer, TaskWrapper> taskMap = this.taskMap;
 			if (taskMap == null) {
-				taskMap = new HashMap(4);
+				taskMap = new HashMap<Integer, TaskWrapper>(4);
 				this.taskMap = taskMap;
 			} else {
 				oldTaskWrapper = (TaskWrapper) taskMap.get(timeoutID);
@@ -173,7 +185,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	private void forgetTask(Integer timeoutID, boolean cancel) {
 		TaskWrapper oldTimer = null;
 		synchronized (this) {
-			Map taskMap = this.taskMap;
+			Map<Integer, TaskWrapper> taskMap = this.taskMap;
 			if (taskMap != null) {
 				oldTimer = (TaskWrapper) taskMap.remove(timeoutID);
 			}
@@ -186,7 +198,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	private void forgetAllTasks() {
 		TaskWrapper[] oldTaskWrappers = null;
 		synchronized (this) {
-			Map taskMap = this.taskMap;
+			Map<Integer, TaskWrapper> taskMap = this.taskMap;
 			if (taskMap != null) {
 				oldTaskWrappers = (TaskWrapper[]) taskMap.values().toArray(
 						new TaskWrapper[0]);
@@ -200,16 +212,6 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			}
 		}
 	}
-
-	// private Timer getTask(Long timeoutID) {
-	// synchronized(this) {
-	// Map taskMap = this.taskMap;
-	// if(taskMap != null) {
-	// return (Timer) taskMap.get(timeoutID);
-	// }
-	// }
-	// return null;
-	// }
 
 	/**
 	 * @param aFunction
@@ -379,25 +381,16 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				return new XMLHttpRequest(uaContext, hd.getDocumentURL(), ws);
 			}
 		};
-		Function xmlHttpRequestC = JavaObjectWrapper.getConstructor(
-				"XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, ws, xi);
-		ScriptableObject.defineProperty(ws, "XMLHttpRequest", xmlHttpRequestC,
-				ScriptableObject.READONLY);
+		Function xmlHttpRequestC = JavaObjectWrapper.getConstructor("XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, ws, xi);
+		ScriptableObject.defineProperty(ws, "XMLHttpRequest", xmlHttpRequestC,ScriptableObject.READONLY);
 
 		// HTML element classes
-		this.defineElementClass(ws, doc, "Image", "img",
-				HTMLImageElementImpl.class);
-		this.defineElementClass(ws, doc, "Script", "script",
-				HTMLScriptElementImpl.class);
-		this.defineElementClass(ws, doc, "IFrame", "iframe",
-				HTMLIFrameElementImpl.class);
-		this.defineElementClass(ws, doc, "Option", "option",
-				HTMLOptionElementImpl.class);
-		this.defineElementClass(ws, doc, "Select", "select",
-				HTMLSelectElementImpl.class);
+		this.defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);
+		this.defineElementClass(ws, doc, "Script", "script", HTMLScriptElementImpl.class);
+		this.defineElementClass(ws, doc, "IFrame", "iframe", HTMLIFrameElementImpl.class);
+		this.defineElementClass(ws, doc, "Option", "option", HTMLOptionElementImpl.class);
+		this.defineElementClass(ws, doc, "Select", "select", HTMLSelectElementImpl.class);
 	}
-
-	private ScriptableObject windowScope;
 
 	public Scriptable getWindowScope() {
 		synchronized (this) {
@@ -422,7 +415,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 
 	private final void defineElementClass(Scriptable scope,
 			final Document document, final String jsClassName,
-			final String elementName, Class javaClass) {
+			final String elementName, Class<?> javaClass) {
 		JavaInstantiator ji = new JavaInstantiator() {
 			public Object newInstance() {
 				Document d = document;
@@ -433,12 +426,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				return d.createElement(elementName);
 			}
 		};
-		JavaClassWrapper classWrapper = JavaClassWrapperFactory.getInstance()
-				.getClassWrapper(javaClass);
-		Function constructorFunction = JavaObjectWrapper.getConstructor(
-				jsClassName, classWrapper, scope, ji);
-		ScriptableObject.defineProperty(scope, jsClassName,
-				constructorFunction, ScriptableObject.READONLY);
+		JavaClassWrapper classWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
+		Function constructorFunction = JavaObjectWrapper.getConstructor(jsClassName, classWrapper, scope, ji);
+		ScriptableObject.defineProperty(scope, jsClassName,	constructorFunction, ScriptableObject.READONLY);
 	}
 
 	public static Window getWindow(HtmlRendererContext rcontext) {
@@ -446,7 +436,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			return null;
 		}
 		synchronized (CONTEXT_WINDOWS) {
-			Reference wref = (Reference) CONTEXT_WINDOWS.get(rcontext);
+			Reference<?> wref = (Reference<?>) CONTEXT_WINDOWS.get(rcontext);
 			if (wref != null) {
 				Window window = (Window) wref.get();
 				if (window != null) {
@@ -454,13 +444,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				}
 			}
 			Window window = new Window(rcontext, rcontext.getUserAgentContext());
-			CONTEXT_WINDOWS.put(rcontext, new WeakReference(window));
+			CONTEXT_WINDOWS.put(rcontext, new WeakReference<Window>(window));
 			return window;
 		}
 	}
 
-	public Window open(String relativeUrl, String windowName,
-			String windowFeatures, boolean replace) {
+	public Window open(String relativeUrl, String windowName, String windowFeatures, boolean replace) {
 		HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
 			java.net.URL url;
@@ -471,8 +460,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				try {
 					url = new java.net.URL(relativeUrl);
 				} catch (java.net.MalformedURLException mfu) {
-					throw new IllegalArgumentException("Malformed URI: "
-							+ relativeUrl);
+					throw new IllegalArgumentException("Malformed URI: " + relativeUrl);
 				}
 			}
 			HtmlRendererContext newContext = rcontext.open(url, windowName,
@@ -481,6 +469,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		} else {
 			return null;
 		}
+	}
+	
+	public Window open() {
+		return this.open("", "window:" + String.valueOf(ID.generateLong()));
 	}
 
 	public Window open(String url) {
@@ -604,9 +596,6 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		return null;
 	}
 
-	private int length;
-	private boolean lengthSet = false;
-
 	/**
 	 * Gets the number of frames.
 	 */
@@ -625,12 +614,22 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	public String getName() {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			return rcontext.getName();
+		if (this.nameSet) {
+			return this.name;
 		} else {
-			return null;
+			HtmlRendererContext rcontext = this.rcontext;
+			if (rcontext != null) {
+				return rcontext.getName();
+			} else {
+				return null;
+			}
 		}
+	}
+	
+	@Override
+	public void setName(String name) {
+		this.nameSet = true;
+		this.name = name;
 	}
 
 	public Window getParent() {
@@ -732,7 +731,6 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		this.getLocation().setHref(location);
 	}
 
-	private History history;
 
 	public History getHistory() {
 		synchronized (this) {
@@ -773,8 +771,6 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
-	private Function onunload;
-
 	public Function getOnunload() {
 		return onunload;
 	}
@@ -783,8 +779,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		this.onunload = onunload;
 	}
 
-	public org.w3c.dom.Node namedItem(String name) {
-		// Bug 1928758: Element IDs are named objects in context.
+	public Node namedItem(String name) {
 		HTMLDocumentImpl doc = this.document;
 		if (doc == null) {
 			return null;
@@ -801,14 +796,14 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	private static abstract class WeakWindowTask implements ActionListener {
-		private final WeakReference windowRef;
+		private final WeakReference<Window> windowRef;
 
 		public WeakWindowTask(Window window) {
-			this.windowRef = new WeakReference(window);
+			this.windowRef = new WeakReference<Window>(window);
 		}
 
 		protected Window getWindow() {
-			WeakReference ref = this.windowRef;
+			WeakReference<Window> ref = this.windowRef;
 			return ref == null ? null : (Window) ref.get();
 		}
 	}
@@ -818,14 +813,14 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		// to get garbage collected, especially in infinite loop
 		// scenarios.
 		private final Integer timeIDInt;
-		private final WeakReference functionRef;
+		private final WeakReference<Function> functionRef;
 		private final boolean removeTask;
 
 		public FunctionTimerTask(Window window, Integer timeIDInt,
 				Function function, boolean removeTask) {
 			super(window);
 			this.timeIDInt = timeIDInt;
-			this.functionRef = new WeakReference(function);
+			this.functionRef = new WeakReference<Function>(function);
 			this.removeTask = removeTask;
 		}
 
@@ -914,5 +909,1072 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	
 	public void addEventListener(String script, String function) {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public UndoManager getUndoManager() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Selection getSelection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getLocationbar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLocationbar(Object locationbar) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BarProp getMenubar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMenubar(BarProp menubar) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BarProp getPersonalbar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPersonalbar(BarProp personalbar) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BarProp getScrollbars() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setScrollbars(BarProp scrollbars) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BarProp getStatusbar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setStatusbar(BarProp statusbar) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BarProp getToolbar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setToolbar(BarProp toolbar) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setFrames(Object frames) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Element getFrameElement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ApplicationCache getApplicationCache() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void print() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Object showModalDialog(String url) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object showModalDialog(String url, Object argument) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void postMessage(Object message, String targetOrigin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void postMessage(Object message, String targetOrigin,
+			MessagePort[] ports) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnabort() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnabort(Function onabort) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnafterprint() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnafterprint(Function onafterprint) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnbeforeprint() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnbeforeprint(Function onbeforeprint) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnbeforeunload() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnbeforeunload(Function onbeforeunload) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnblur() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnblur(Function onblur) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOncanplay() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOncanplay(Function oncanplay) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOncanplaythrough() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOncanplaythrough(Function oncanplaythrough) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnchange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnchange(Function onchange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnclick() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnclick(Function onclick) {
+		System.out.println("onclick: " + onclick);
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOncontextmenu() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOncontextmenu(Function oncontextmenu) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndblclick() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndblclick(Function ondblclick) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndrag() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndrag(Function ondrag) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragend() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragend(Function ondragend) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragenter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragenter(Function ondragenter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragleave() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragleave(Function ondragleave) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragover() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragover(Function ondragover) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragstart() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragstart(Function ondragstart) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndrop() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndrop(Function ondrop) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndurationchange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndurationchange(Function ondurationchange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnemptied() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnemptied(Function onemptied) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnended() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnended(Function onended) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnerror() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnerror(Function onerror) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnfocus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnfocus(Function onfocus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnformchange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnformchange(Function onformchange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnforminput() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnforminput(Function onforminput) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnhashchange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnhashchange(Function onhashchange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOninput() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOninput(Function oninput) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOninvalid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOninvalid(Function oninvalid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnkeydown() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnkeydown(Function onkeydown) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnkeypress() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnkeypress(Function onkeypress) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnkeyup() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnkeyup(Function onkeyup) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnloadeddata() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnloadeddata(Function onloadeddata) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnloadedmetadata() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnloadedmetadata(Function onloadedmetadata) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnloadstart() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnloadstart(Function onloadstart) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmessage(Function onmessage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmousedown() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmousedown(Function onmousedown) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmousemove() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmousemove(Function onmousemove) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmouseout() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmouseout(Function onmouseout) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmouseover() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmouseover(Function onmouseover) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmouseup() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmouseup(Function onmouseup) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmousewheel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmousewheel(Function onmousewheel) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnoffline() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnoffline(Function onoffline) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnonline() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnonline(Function ononline) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnpause() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnpause(Function onpause) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnplay() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnplay(Function onplay) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnplaying() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnplaying(Function onplaying) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnpagehide() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnpagehide(Function onpagehide) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnpageshow() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnpageshow(Function onpageshow) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnpopstate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnpopstate(Function onpopstate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnprogress() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnprogress(Function onprogress) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnratechange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnratechange(Function onratechange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnreadystatechange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnreadystatechange(Function onreadystatechange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnredo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnredo(Function onredo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnresize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnresize(Function onresize) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnscroll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnscroll(Function onscroll) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnseeked() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnseeked(Function onseeked) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnseeking() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnseeking(Function onseeking) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnselect() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnselect(Function onselect) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnshow() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnshow(Function onshow) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnstalled() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnstalled(Function onstalled) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnstorage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnstorage(Function onstorage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnsubmit() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnsubmit(Function onsubmit) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnsuspend() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnsuspend(Function onsuspend) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOntimeupdate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOntimeupdate(Function ontimeupdate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnundo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnundo(Function onundo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnvolumechange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnvolumechange(Function onvolumechange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnwaiting() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnwaiting(Function onwaiting) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public CSSStyleDeclaration getComputedStyle(Element elt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CSSStyleDeclaration getComputedStyle(Element elt, String pseudoElt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public StyleMedia getStyleMedia() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getInnerWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getInnerHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getPageXOffset() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getPageYOffset() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void scroll(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getScreenX() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getScreenY() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getOuterWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getOuterHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int setTimeout(Object handler) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int setTimeout(Object handler, Object timeout, Object... args) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int setInterval(Object handler) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int setInterval(Object handler, Object timeout, Object... args) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Database openDatabase(String name, String version,
+			String displayName, int estimatedSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Database openDatabase(String name, String version,
+			String displayName, int estimatedSize,
+			DatabaseCallback creationCallback) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Storage getSessionStorage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Storage getLocalStorage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

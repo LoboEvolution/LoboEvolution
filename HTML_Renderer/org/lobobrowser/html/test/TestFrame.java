@@ -170,8 +170,7 @@ public class TestFrame extends JFrame {
 			super(contextComponent, ucontext);
 		}
 
-		public HtmlRendererContext open(URL url, String windowName,
-				String windowFeatures, boolean replace) {
+		public HtmlRendererContext open(URL url, String windowName, String windowFeatures, boolean replace) {
 			TestFrame frame = new TestFrame("Cobra Test Tool");
 			frame.setSize(600, 400);
 			frame.setExtendedState(TestFrame.NORMAL);
