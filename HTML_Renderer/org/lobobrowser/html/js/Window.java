@@ -70,7 +70,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.css.CSS2Properties;
-import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
 
@@ -626,7 +625,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 	
-	@Override
+	
 	public void setName(String name) {
 		this.nameSet = true;
 		this.name = name;
@@ -743,14 +742,17 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
-	public CSS2Properties getComputedStyle(HTMLElement element,
-			String pseudoElement) {
+	public CSS2Properties getComputedStyle(HTMLElement element, String pseudoElement) {
 		if (element instanceof HTMLElementImpl) {
 			return ((HTMLElementImpl) element).getComputedStyle(pseudoElement);
 		} else {
 			throw new java.lang.IllegalArgumentException(
 					"Element implementation unknown: " + element);
 		}
+	}
+	
+	public CSS2Properties getComputedStyle(HTMLElement elt) {
+		return getComputedStyle(elt, null);
 	}
 
 	public Function getOnload() {
@@ -911,1054 +913,1016 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		// TODO Auto-generated method stub
 	}
 
-	@Override
+	
 	public UndoManager getUndoManager() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public Selection getSelection() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public Object getLocationbar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setLocationbar(Object locationbar) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public BarProp getMenubar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setMenubar(BarProp menubar) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public BarProp getPersonalbar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setPersonalbar(BarProp personalbar) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public BarProp getScrollbars() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setScrollbars(BarProp scrollbars) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public BarProp getStatusbar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setStatusbar(BarProp statusbar) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public BarProp getToolbar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setToolbar(BarProp toolbar) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void stop() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void setFrames(Object frames) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Element getFrameElement() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public ApplicationCache getApplicationCache() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void print() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Object showModalDialog(String url) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public Object showModalDialog(String url, Object argument) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void postMessage(Object message, String targetOrigin) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void postMessage(Object message, String targetOrigin,
 			MessagePort[] ports) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnabort() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnabort(Function onabort) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnafterprint() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnafterprint(Function onafterprint) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnbeforeprint() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnbeforeprint(Function onbeforeprint) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnbeforeunload() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnbeforeunload(Function onbeforeunload) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnblur() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnblur(Function onblur) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOncanplay() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOncanplay(Function oncanplay) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOncanplaythrough() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOncanplaythrough(Function oncanplaythrough) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnchange() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnchange(Function onchange) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnclick() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnclick(Function onclick) {
 		System.out.println("onclick: " + onclick);
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOncontextmenu() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOncontextmenu(Function oncontextmenu) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOndblclick() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOndblclick(Function ondblclick) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOndrag() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOndrag(Function ondrag) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOndragend() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOndragend(Function ondragend) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOndragenter() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOndragenter(Function ondragenter) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOndragleave() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOndragleave(Function ondragleave) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOndragover() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOndragover(Function ondragover) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOndragstart() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOndragstart(Function ondragstart) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOndrop() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOndrop(Function ondrop) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOndurationchange() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOndurationchange(Function ondurationchange) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnemptied() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnemptied(Function onemptied) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnended() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnended(Function onended) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnerror() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnerror(Function onerror) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnfocus() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnfocus(Function onfocus) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnformchange() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnformchange(Function onformchange) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnforminput() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnforminput(Function onforminput) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnhashchange() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnhashchange(Function onhashchange) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOninput() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOninput(Function oninput) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOninvalid() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOninvalid(Function oninvalid) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnkeydown() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnkeydown(Function onkeydown) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnkeypress() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnkeypress(Function onkeypress) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnkeyup() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnkeyup(Function onkeyup) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnloadeddata() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnloadeddata(Function onloadeddata) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnloadedmetadata() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnloadedmetadata(Function onloadedmetadata) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnloadstart() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnloadstart(Function onloadstart) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnmessage() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnmessage(Function onmessage) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnmousedown() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnmousedown(Function onmousedown) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnmousemove() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnmousemove(Function onmousemove) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnmouseout() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnmouseout(Function onmouseout) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnmouseover() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnmouseover(Function onmouseover) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnmouseup() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnmouseup(Function onmouseup) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnmousewheel() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnmousewheel(Function onmousewheel) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnoffline() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnoffline(Function onoffline) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnonline() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnonline(Function ononline) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnpause() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnpause(Function onpause) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnplay() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnplay(Function onplay) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnplaying() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnplaying(Function onplaying) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnpagehide() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnpagehide(Function onpagehide) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnpageshow() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnpageshow(Function onpageshow) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnpopstate() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnpopstate(Function onpopstate) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnprogress() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnprogress(Function onprogress) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnratechange() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnratechange(Function onratechange) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnreadystatechange() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnreadystatechange(Function onreadystatechange) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnredo() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnredo(Function onredo) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnresize() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnresize(Function onresize) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnscroll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnscroll(Function onscroll) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnseeked() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnseeked(Function onseeked) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnseeking() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnseeking(Function onseeking) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnselect() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnselect(Function onselect) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnshow() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnshow(Function onshow) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnstalled() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnstalled(Function onstalled) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnstorage() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnstorage(Function onstorage) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnsubmit() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnsubmit(Function onsubmit) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnsuspend() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnsuspend(Function onsuspend) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOntimeupdate() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOntimeupdate(Function ontimeupdate) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnundo() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnundo(Function onundo) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnvolumechange() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnvolumechange(Function onvolumechange) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Function getOnwaiting() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public void setOnwaiting(Function onwaiting) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public CSSStyleDeclaration getComputedStyle(Element elt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CSSStyleDeclaration getComputedStyle(Element elt, String pseudoElt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-	@Override
 	public StyleMedia getStyleMedia() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public int getInnerWidth() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public int getInnerHeight() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public int getPageXOffset() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public int getPageYOffset() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public void scroll(int x, int y) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public int getScreenX() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public int getScreenY() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public int getOuterWidth() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public int getOuterHeight() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	@Override
-	public int setTimeout(Object handler) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int setTimeout(Object handler, Object timeout, Object... args) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int setInterval(Object handler) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int setInterval(Object handler, Object timeout, Object... args) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
+	
 	public Database openDatabase(String name, String version,
 			String displayName, int estimatedSize) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public Database openDatabase(String name, String version,
 			String displayName, int estimatedSize,
 			DatabaseCallback creationCallback) {
@@ -1966,13 +1930,13 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		return null;
 	}
 
-	@Override
+	
 	public Storage getSessionStorage() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	
 	public Storage getLocalStorage() {
 		// TODO Auto-generated method stub
 		return null;
