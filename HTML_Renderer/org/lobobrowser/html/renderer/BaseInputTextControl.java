@@ -32,7 +32,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.dombl.ElementImpl;
+import org.lobobrowser.html.domimpl.DOMElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.util.gui.WrapperLayout;
 
@@ -53,7 +53,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 		// Note: Value attribute cannot be set in reset() method.
 		// Otherwise, layout revalidation causes typed values to
 		// be lost (including revalidation due to hover.)
-		ElementImpl element = this.controlElement;
+		DOMElementImpl element = this.controlElement;
 		String value = element.getAttribute(HtmlAttributeProperties.VALUE);
 		widget.setText(value);
 

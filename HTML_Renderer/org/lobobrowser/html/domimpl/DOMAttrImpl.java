@@ -21,7 +21,7 @@
 /*
  * Created on Sep 10, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
@@ -29,7 +29,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
 
-public class AttrImpl extends NodeImpl implements Attr {
+public class DOMAttrImpl extends DOMNodeImpl implements Attr {
 	private String name;
 	private String value;
 	private boolean specified;
@@ -40,7 +40,7 @@ public class AttrImpl extends NodeImpl implements Attr {
 	 * @param name
 	 * @param value
 	 */
-	public AttrImpl(String name, String value, boolean specified,
+	public DOMAttrImpl(String name, String value, boolean specified,
 			Element owner, boolean isId) {
 		super();
 		this.name = name;
@@ -53,7 +53,7 @@ public class AttrImpl extends NodeImpl implements Attr {
 	/**
 	 * @param name
 	 */
-	public AttrImpl(String name) {
+	public DOMAttrImpl(String name) {
 		super();
 		this.name = name;
 		this.value = "";
@@ -116,7 +116,7 @@ public class AttrImpl extends NodeImpl implements Attr {
 	}
 
 	protected Node createSimilarNode() {
-		return new AttrImpl(this.name, this.value, this.specified,
+		return new DOMAttrImpl(this.name, this.value, this.specified,
 				this.ownerElement, this.isId);
 	}
 }

@@ -23,6 +23,7 @@ package org.lobobrowser.html.dombl;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.domfilter.ElementFilter;
+import org.lobobrowser.html.domimpl.DOMNodeListImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -131,7 +132,7 @@ public class QuerySelectorImpl {
 							Attr attr = (Attr) attributes.item(s);
 							if (attr.getName().equals("class") && attr.getValue().equals(str1)) {
 								listNode.add(node.item(i));
-								list = new NodeListImpl(listNode);
+								list = new DOMNodeListImpl(listNode);
 							}
 						}
 					}
@@ -150,7 +151,7 @@ public class QuerySelectorImpl {
 					Attr attr = (Attr) attributes.item(s);
 					if (attr.getName().equals(str1.replace("]", "").trim())) {
 						listNode.add(node.item(i));
-						list = new NodeListImpl(listNode);
+						list = new DOMNodeListImpl(listNode);
 					}
 				}
 			}
@@ -164,7 +165,7 @@ public class QuerySelectorImpl {
 			for (int i = 0; i < node.getLength(); i++) {
 				if (str0.equals(node.item(i).getParentNode().getNodeName())) {
 					listNode.add(node.item(i));
-					list = new NodeListImpl(listNode);
+					list = new DOMNodeListImpl(listNode);
 				}
 			}
 		} else if (selectors.contains(",")) {
@@ -178,7 +179,7 @@ public class QuerySelectorImpl {
 						listNode.add(node.item(i));
 				}
 			}
-			list = new NodeListImpl(listNode);
+			list = new DOMNodeListImpl(listNode);
 		} else{
 			list = doc.getElementsByClassName(selectors);
 		}

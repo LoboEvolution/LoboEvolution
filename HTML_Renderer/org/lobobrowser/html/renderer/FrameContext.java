@@ -20,7 +20,7 @@
  */
 package org.lobobrowser.html.renderer;
 
-import org.lobobrowser.html.dombl.NodeImpl;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 
 /**
  * Provides direct access to the GUI component where the document is rendered,
@@ -31,5 +31,5 @@ public interface FrameContext {
 
 	public void expandSelection(RenderableSpot rpoint);
 
-	public void delayedRelayout(NodeImpl node);
+	public void delayedRelayout(DOMNodeImpl node);
 }

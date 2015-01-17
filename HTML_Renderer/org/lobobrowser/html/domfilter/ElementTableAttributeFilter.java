@@ -19,44 +19,24 @@
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
- * Created on Oct 9, 2005
+ * Created on Dec 3, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domfilter;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.w3c.dom.Node;
 
-import org.w3c.dom.DOMConfiguration;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.DOMStringList;
+public final class ElementTableAttributeFilter implements NodeFilter {
+	private final String elementName;
 
-public class DOMConfigurationImpl implements DOMConfiguration {
-	private final Map<String, Object> parameters = new HashMap<String, Object>();
-
-	public DOMConfigurationImpl() {
+	/**
+	 * @param name
+	 */
+	public ElementTableAttributeFilter(String name) {
 		super();
+		elementName = name;
 	}
 
-	public void setParameter(String name, Object value) throws DOMException {
-		synchronized (this) {
-			this.parameters.put(name, value);
-		}
-	}
-
-	public Object getParameter(String name) throws DOMException {
-		synchronized (this) {
-			return this.parameters.get(name);
-		}
-	}
-
-	public boolean canSetParameter(String name, Object value) {
-		// TODO
-		return true;
-	}
-
-	public DOMStringList getParameterNames() {
-		synchronized (this) {
-			return new DOMStringListImpl(parameters.keySet());
-		}
+	public final boolean accept(Node node) {
+		return this.elementName.equalsIgnoreCase(node.getNodeName());
 	}
 }

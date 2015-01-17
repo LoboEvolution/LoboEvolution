@@ -21,7 +21,7 @@
 /*
  * Created on Sep 3, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,20 +35,20 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-public class NamedNodeMapImpl extends AbstractScriptableDelegate implements
+public class DOMAttrMapImpl extends AbstractScriptableDelegate implements
 		NamedNodeMap {
 	// Note: class must be public for reflection to work.
 	private final Map attributes = new HashMap();
 	private final ArrayList attributeList = new ArrayList();
 
-	public NamedNodeMapImpl(Element owner, Map attribs) {
+	public DOMAttrMapImpl(Element owner, Map attribs) {
 		Iterator i = attribs.entrySet().iterator();
 		while (i.hasNext()) {
 			Map.Entry entry = (Map.Entry) i.next();
 			String name = (String) entry.getKey();
 			String value = (String) entry.getValue();
 			// TODO: "specified" attributes
-			Attr attr = new AttrImpl(name, value, true, owner,"ID".equals(name));
+			Attr attr = new DOMAttrImpl(name, value, true, owner,"ID".equals(name));
 			this.attributes.put(name, attr);
 			this.attributeList.add(attr);
 		}

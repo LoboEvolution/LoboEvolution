@@ -21,21 +21,21 @@
 /*
  * Created on Sep 3, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
-public abstract class CharacterDataImpl extends NodeImpl implements
+public abstract class DOMCharacterDataImpl extends DOMNodeImpl implements
 		CharacterData {
 	protected volatile String text;
 
-	public CharacterDataImpl() {
+	public DOMCharacterDataImpl() {
 		super();
 	}
 
-	public CharacterDataImpl(String text) {
+	public DOMCharacterDataImpl(String text) {
 		this.text = text;
 	}
 
@@ -57,10 +57,10 @@ public abstract class CharacterDataImpl extends NodeImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#cloneNode(boolean)
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#cloneNode(boolean)
 	 */
 	public Node cloneNode(boolean deep) {
-		CharacterDataImpl newNode = (CharacterDataImpl) super.cloneNode(deep);
+		DOMCharacterDataImpl newNode = (DOMCharacterDataImpl) super.cloneNode(deep);
 		newNode.setData(this.getData());
 		return newNode;
 	}

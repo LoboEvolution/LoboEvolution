@@ -21,7 +21,7 @@
 package org.lobobrowser.html.gui;
 
 import org.lobobrowser.html.dombl.DocumentNotificationListener;
-import org.lobobrowser.html.dombl.NodeImpl;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 
 public class LocalDocumentNotificationListener implements
 		DocumentNotificationListener {
@@ -31,41 +31,41 @@ public class LocalDocumentNotificationListener implements
 				DocumentNotification.GENERIC, null));
 	}
 
-	public void invalidated(NodeImpl node) {
+	public void invalidated(DOMNodeImpl node) {
 		HtmlPanel html = new HtmlPanel();
 		html.addNotification(new DocumentNotification(
 				DocumentNotification.GENERIC, node));
 	}
 
-	public void lookInvalidated(NodeImpl node) {
+	public void lookInvalidated(DOMNodeImpl node) {
 		HtmlPanel html = new HtmlPanel();
 		html.addNotification(new DocumentNotification(
 				DocumentNotification.LOOK, node));
 	}
 
-	public void positionInvalidated(NodeImpl node) {
+	public void positionInvalidated(DOMNodeImpl node) {
 		HtmlPanel html = new HtmlPanel();
 		html.addNotification(new DocumentNotification(
 				DocumentNotification.POSITION, node));
 	}
 
-	public void sizeInvalidated(NodeImpl node) {
+	public void sizeInvalidated(DOMNodeImpl node) {
 		HtmlPanel html = new HtmlPanel();
 		html.addNotification(new DocumentNotification(
 				DocumentNotification.SIZE, node));
 	}
 
-	public void externalScriptLoading(NodeImpl node) {
+	public void externalScriptLoading(DOMNodeImpl node) {
 		// Ignorable here.
 	}
 
-	public void nodeLoaded(NodeImpl node) {
+	public void nodeLoaded(DOMNodeImpl node) {
 		HtmlPanel html = new HtmlPanel();
 		html.addNotification(new DocumentNotification(
 				DocumentNotification.GENERIC, node));
 	}
 
-	public void structureInvalidated(NodeImpl node) {
+	public void structureInvalidated(DOMNodeImpl node) {
 		HtmlPanel html = new HtmlPanel();
 		html.addNotification(new DocumentNotification(
 				DocumentNotification.GENERIC, node));

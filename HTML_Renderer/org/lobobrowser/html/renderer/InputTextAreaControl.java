@@ -33,8 +33,8 @@ import javax.swing.JTextArea;
 import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.dombl.ElementImpl;
 import org.lobobrowser.html.dombl.JTextAreaImpl;
+import org.lobobrowser.html.domimpl.DOMElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.util.gui.WrapperLayout;
 
@@ -54,7 +54,7 @@ public class InputTextAreaControl extends BaseInputControl {
 		// Otherwise, layout revalidation causes typed values to
 		// be lost (including revalidation due to hover.)
 
-		ElementImpl element = this.controlElement;
+		DOMElementImpl element = this.controlElement;
 		String value = element.getTextContent();
 		((JTextAreaImpl) widget).setLineWrap(true);
 		
@@ -70,7 +70,7 @@ public class InputTextAreaControl extends BaseInputControl {
 
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
-		ElementImpl element = this.controlElement;
+		DOMElementImpl element = this.controlElement;
 		String colsStr = element.getAttribute(HtmlAttributeProperties.COLS);
 		if (colsStr != null) {
 			try {

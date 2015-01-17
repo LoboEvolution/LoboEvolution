@@ -1,6 +1,6 @@
 package org.lobobrowser.html.gui;
 
-import org.lobobrowser.html.dombl.NodeImpl;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 
 class DocumentNotification {
 	public static final int LOOK = 0;
@@ -9,9 +9,9 @@ class DocumentNotification {
 	public static final int GENERIC = 3;
 
 	public final int type;
-	public final NodeImpl node;
+	public final DOMNodeImpl node;
 
-	public DocumentNotification(int type, NodeImpl node) {
+	public DocumentNotification(int type, DOMNodeImpl node) {
 		this.type = type;
 		this.node = node;
 	}

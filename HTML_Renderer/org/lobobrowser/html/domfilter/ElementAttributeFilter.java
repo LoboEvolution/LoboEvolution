@@ -20,7 +20,7 @@
  */
 package org.lobobrowser.html.domfilter;
 
-import org.lobobrowser.html.dombl.AttrImpl;
+import org.lobobrowser.html.domimpl.DOMAttrImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.w3c.dom.Attr;
@@ -76,7 +76,7 @@ public class ElementAttributeFilter {
 			}
 
 			if (!result) {
-				Attr attr = new AttrImpl(attribute, val, true, el, true);
+				Attr attr = new DOMAttrImpl(attribute, val, true, el, true);
 				el.setAttributeNode(attr);
 			}
 			doc.setBody(el);

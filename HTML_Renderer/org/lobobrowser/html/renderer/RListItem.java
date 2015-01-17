@@ -28,7 +28,7 @@ import java.awt.Insets;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.dombl.NodeImpl;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.style.ListStyle;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.w3c.HTMLElement;
@@ -38,7 +38,7 @@ class RListItem extends BaseRListElement {
 	private static final int BULLET_HEIGHT = 5;
 	private static final int BULLET_RMARGIN = 5;
 
-	public RListItem(NodeImpl modelNode, int listNesting,
+	public RListItem(DOMNodeImpl modelNode, int listNesting,
 			UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer parentContainer,
 			RCollection parent) {

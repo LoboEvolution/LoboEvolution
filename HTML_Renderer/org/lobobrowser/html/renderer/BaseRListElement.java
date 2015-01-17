@@ -23,8 +23,8 @@ package org.lobobrowser.html.renderer;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.ListStyle;
@@ -33,7 +33,7 @@ class BaseRListElement extends RBlock {
 	protected static final String DEFAULT_COUNTER_NAME = "$cobra.counter";
 	protected ListStyle listStyle = null;
 
-	public BaseRListElement(NodeImpl modelNode, int listNesting,
+	public BaseRListElement(DOMNodeImpl modelNode, int listNesting,
 			UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer parentContainer) {
 		super(modelNode, listNesting, pcontext, rcontext, frameContext,

@@ -19,40 +19,39 @@
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
- * Created on Oct 9, 2005
+ * Created on Sep 4, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
-import org.w3c.dom.Comment;
-import org.w3c.dom.DOMException;
+import org.w3c.dom.CDATASection;
 import org.w3c.dom.Node;
 
-public class CommentImpl extends CharacterDataImpl implements Comment {
-	public CommentImpl(String text) {
+public class DOMCDataSectionImpl extends DOMTextImpl implements CDATASection {
+
+	public DOMCDataSectionImpl() {
+		super();
+	}
+
+	public DOMCDataSectionImpl(String text) {
 		super(text);
 	}
 
-	public String getLocalName() {
-		return null;
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeName()
+	 */
 	public String getNodeName() {
-		return "#comment";
+		return "#cdata-section";
 	}
 
-	public String getNodeValue() throws DOMException {
-		return this.getTextContent();
-	}
-
-	public void setNodeValue(String nodeValue) throws DOMException {
-		this.setTextContent(nodeValue);
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeType()
+	 */
 	public short getNodeType() {
-		return Node.COMMENT_NODE;
+		return Node.CDATA_SECTION_NODE;
 	}
 
-	protected Node createSimilarNode() {
-		return new CommentImpl(this.text);
-	}
 }

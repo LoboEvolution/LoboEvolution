@@ -19,25 +19,36 @@
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
- * Created on Dec 3, 2005
+ * Created on Sep 3, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.domfilter.NodeFilter;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-public final class ElementFilter implements NodeFilter {
-	private final String elementName;
+public class DOMNodeListImpl extends AbstractScriptableDelegate implements
+		NodeList {
+	// Note: class must be public for reflection to work.
+	private final ArrayList nodeList = new ArrayList();
 
-	/**
-	 * @param name
-	 */
-	public ElementFilter(String name) {
+	public DOMNodeListImpl(Collection collection) {
 		super();
-		elementName = name;
+		nodeList.addAll(collection);
 	}
 
-	public final boolean accept(Node node) {
-		return this.elementName.equalsIgnoreCase(node.getNodeName());
+	public int getLength() {
+		return this.nodeList.size();
+	}
+
+	public Node item(int index) {
+		try {
+			return (Node) this.nodeList.get(index);
+		} catch (IndexOutOfBoundsException iob) {
+			return null;
+		}
 	}
 }

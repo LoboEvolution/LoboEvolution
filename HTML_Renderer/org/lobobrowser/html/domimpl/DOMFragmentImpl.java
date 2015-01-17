@@ -21,8 +21,9 @@
 /*
  * Created on Oct 9, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.dombl.QuerySelectorImpl;
 import org.lobobrowser.html.w3c.HTMLDocumentFragment;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentFragment;
@@ -30,8 +31,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class DocumentFragmentImpl extends NodeImpl implements DocumentFragment,HTMLDocumentFragment {
-	public DocumentFragmentImpl() {
+public class DOMFragmentImpl extends DOMNodeImpl implements DocumentFragment,HTMLDocumentFragment {
+	public DOMFragmentImpl() {
 		super();
 	}
 
@@ -55,7 +56,7 @@ public class DocumentFragmentImpl extends NodeImpl implements DocumentFragment,H
 	}
 
 	protected Node createSimilarNode() {
-		return new DocumentFragmentImpl();
+		return new DOMFragmentImpl();
 	}
 
 	@Override

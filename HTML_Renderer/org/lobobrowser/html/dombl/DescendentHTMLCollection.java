@@ -31,22 +31,22 @@ import java.util.List;
 import java.util.Map;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.dombl.ElementImpl;
 import org.lobobrowser.html.domfilter.NodeFilter;
+import org.lobobrowser.html.domimpl.DOMElementImpl;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
-import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.util.Nodes;
 import org.w3c.dom.Node;
 
 public class DescendentHTMLCollection extends AbstractScriptableDelegate implements HTMLCollection {
-	private final NodeImpl rootNode;
+	private final DOMNodeImpl rootNode;
 	private final NodeFilter nodeFilter;
 	private final Object treeLock;
 	private final boolean nestIntoMatchingNodes;
 
-	public DescendentHTMLCollection(NodeImpl node, NodeFilter filter,
+	public DescendentHTMLCollection(DOMNodeImpl node, NodeFilter filter,
 			Object treeLock) {
 		this(node, filter, treeLock, true);
 	}
@@ -55,7 +55,7 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 	 * @param node
 	 * @param filter
 	 */
-	public DescendentHTMLCollection(NodeImpl node, NodeFilter filter,
+	public DescendentHTMLCollection(DOMNodeImpl node, NodeFilter filter,
 			Object treeLock, boolean nestMatchingNodes) {
 		rootNode = node;
 		nodeFilter = filter;
@@ -66,23 +66,23 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 				document, this));
 	}
 
-	private Map<String, ElementImpl> itemsByName = null;
-	private List<NodeImpl> itemsByIndex = null;
+	private Map<String, DOMElementImpl> itemsByName = null;
+	private List<DOMNodeImpl> itemsByIndex = null;
 
 	private void ensurePopulatedImpl() {
 		if (this.itemsByName == null) {
-			ArrayList<NodeImpl> descendents = this.rootNode.getDescendents(
+			ArrayList<DOMNodeImpl> descendents = this.rootNode.getDescendents(
 					this.nodeFilter, this.nestIntoMatchingNodes);
 			this.itemsByIndex = descendents == null ? Collections.emptyList()
 					: descendents;
 			int size = descendents == null ? 0 : descendents.size();
-			Map<String, ElementImpl> itemsByName = new HashMap<String, ElementImpl>(
+			Map<String, DOMElementImpl> itemsByName = new HashMap<String, DOMElementImpl>(
 					size * 3 / 2);
 			this.itemsByName = itemsByName;
 			for (int i = 0; i < size; i++) {
 				Object descNode = descendents.get(i);
-				if (descNode instanceof ElementImpl) {
-					ElementImpl element = (ElementImpl) descNode;
+				if (descNode instanceof DOMElementImpl) {
+					DOMElementImpl element = (DOMElementImpl) descNode;
 					String id = element.getId();
 					if (id != null && id.length() != 0) {
 						itemsByName.put(id, element);
@@ -221,7 +221,7 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 					collection);
 		}
 
-		public void structureInvalidated(NodeImpl node) {
+		public void structureInvalidated(DOMNodeImpl node) {
 			DescendentHTMLCollection collection = (DescendentHTMLCollection) this.collectionRef
 					.get();
 			if (collection == null) {
@@ -236,7 +236,7 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 			}
 		}
 
-		public void nodeLoaded(NodeImpl node) {
+		public void nodeLoaded(DOMNodeImpl node) {
 			this.structureInvalidated(node);
 		}
 	}

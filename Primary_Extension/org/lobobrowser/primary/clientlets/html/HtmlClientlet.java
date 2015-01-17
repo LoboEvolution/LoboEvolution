@@ -44,8 +44,8 @@ import org.lobobrowser.clientlet.ClientletException;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.DocumentNotificationListener;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
-import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
@@ -354,17 +354,17 @@ public class HtmlClientlet implements Clientlet {
 		public void allInvalidated() {
 		}
 
-		public void externalScriptLoading(NodeImpl node) {
+		public void externalScriptLoading(DOMNodeImpl node) {
 			// We can expect this to occur only in the parser thread.
 			if (this.hasVisibleElements) {
 				this.ensureSwitchedToRendering();
 			}
 		}
 
-		public void invalidated(NodeImpl node) {
+		public void invalidated(DOMNodeImpl node) {
 		}
 
-		public void lookInvalidated(NodeImpl node) {
+		public void lookInvalidated(DOMNodeImpl node) {
 		}
 
 		private void addHttpEquivElement(HTMLElement element) {
@@ -376,7 +376,7 @@ public class HtmlClientlet implements Clientlet {
 			httpEquivElements.add(element);
 		}
 
-		public void nodeLoaded(NodeImpl node) {
+		public void nodeLoaded(DOMNodeImpl node) {
 			// We can expect this to occur only in the parser thread.
 			if (this.detectHttpEquiv) {
 				if (node instanceof HTMLElement) {
@@ -415,16 +415,16 @@ public class HtmlClientlet implements Clientlet {
 			}
 		}
 
-		public void positionInvalidated(NodeImpl node) {
+		public void positionInvalidated(DOMNodeImpl node) {
 		}
 
-		public void sizeInvalidated(NodeImpl node) {
+		public void sizeInvalidated(DOMNodeImpl node) {
 		}
 
-		public void structureInvalidated(NodeImpl node) {
+		public void structureInvalidated(DOMNodeImpl node) {
 		}
 
-		private final boolean mayBeVisibleElement(NodeImpl node) {
+		private final boolean mayBeVisibleElement(DOMNodeImpl node) {
 			if (node instanceof HTMLElement) {
 				HTMLElement element = (HTMLElement) node;
 				boolean visible = !NON_VISIBLE_ELEMENTS.contains(element

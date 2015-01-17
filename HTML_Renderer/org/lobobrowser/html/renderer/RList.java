@@ -23,13 +23,13 @@ package org.lobobrowser.html.renderer;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.style.ListStyle;
 import org.lobobrowser.html.style.RenderState;
 
 class RList extends BaseRListElement {
-	public RList(NodeImpl modelNode, int listNesting,
+	public RList(DOMNodeImpl modelNode, int listNesting,
 			UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer parentContainer,
 			RCollection parent) {

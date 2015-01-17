@@ -35,7 +35,7 @@ import java.util.Map;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.dombl.UINode;
-import org.lobobrowser.html.dombl.NodeImpl;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.util.Objects;
 
@@ -324,7 +324,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		int dw = RUIControl.this.declaredWidth;
 		int dh = RUIControl.this.declaredHeight;
 		if (dw == -1 || dh == -1) {
-			this.frameContext.delayedRelayout((NodeImpl) this.modelNode);
+			this.frameContext.delayedRelayout((DOMNodeImpl) this.modelNode);
 		} else {
 			RUIControl.this.repaint();
 		}

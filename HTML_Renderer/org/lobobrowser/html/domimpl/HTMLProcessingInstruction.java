@@ -5,7 +5,6 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.dombl.NodeImpl;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.ProcessingInstruction;
@@ -16,7 +15,7 @@ import org.w3c.dom.ProcessingInstruction;
  * 
  * @author vitek
  */
-public class HTMLProcessingInstruction extends NodeImpl implements
+public class HTMLProcessingInstruction extends DOMNodeImpl implements
 		ProcessingInstruction, Cloneable {
 	String target;
 	String data;

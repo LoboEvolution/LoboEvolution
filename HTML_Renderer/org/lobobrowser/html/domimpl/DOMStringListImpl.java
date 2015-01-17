@@ -21,7 +21,7 @@
 /*
  * Created on Oct 9, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
 import java.util.Collection;

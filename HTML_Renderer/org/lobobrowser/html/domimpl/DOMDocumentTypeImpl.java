@@ -21,19 +21,19 @@
 /*
  * Created on Oct 15, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-public class DocumentTypeImpl extends NodeImpl implements DocumentType {
+public class DOMDocumentTypeImpl extends DOMNodeImpl implements DocumentType {
 	private final String qualifiedName;
 	private final String publicId;
 	private final String systemId;
 
-	public DocumentTypeImpl(String qname, String publicId, String systemId) {
+	public DOMDocumentTypeImpl(String qname, String publicId, String systemId) {
 		super();
 		this.qualifiedName = qname;
 		this.publicId = publicId;
@@ -88,7 +88,7 @@ public class DocumentTypeImpl extends NodeImpl implements DocumentType {
 	}
 
 	protected Node createSimilarNode() {
-		return new DocumentTypeImpl(this.qualifiedName, this.publicId,
+		return new DOMDocumentTypeImpl(this.qualifiedName, this.publicId,
 				this.systemId);
 	}
 }

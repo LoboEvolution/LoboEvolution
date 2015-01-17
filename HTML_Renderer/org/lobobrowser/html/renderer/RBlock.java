@@ -45,7 +45,7 @@ import javax.swing.JScrollBar;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ModelNode;
-import org.lobobrowser.html.dombl.NodeImpl;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.layout.LayoutValue;
 import org.lobobrowser.html.style.BlockRenderState;
 import org.lobobrowser.html.style.RenderState;
@@ -89,7 +89,7 @@ public class RBlock extends BaseElementRenderable implements
 	private LayoutValue lastLayoutValue = null;
 	private LayoutKey lastLayoutKey = null;
 
-	public RBlock(NodeImpl modelNode, int listNesting,
+	public RBlock(DOMNodeImpl modelNode, int listNesting,
 			UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer parentContainer) {
 		super(parentContainer, modelNode, pcontext);
@@ -489,7 +489,7 @@ public class RBlock extends BaseElementRenderable implements
 		this.applyStyle(availWidth, availHeight);
 
 		RBlockViewport bodyLayout = this.bodyLayout;
-		NodeImpl node = (NodeImpl) this.modelNode;
+		DOMNodeImpl node = (DOMNodeImpl) this.modelNode;
 		if (node == null || bodyLayout == null) {
 			Insets insets = this.getInsets(false, false);
 			return new LayoutValue(insets.left + insets.right, insets.bottom

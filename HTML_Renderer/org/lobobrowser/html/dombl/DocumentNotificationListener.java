@@ -1,6 +1,6 @@
 package org.lobobrowser.html.dombl;
 
-import org.lobobrowser.html.dombl.NodeImpl;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 
 /**
  * A listener of document changes.
@@ -11,7 +11,7 @@ public interface DocumentNotificationListener {
 	 * 
 	 * @param node
 	 */
-	public void sizeInvalidated(NodeImpl node);
+	public void sizeInvalidated(DOMNodeImpl node);
 
 	/**
 	 * Called if something such as a color or decoration has changed. This would
@@ -19,14 +19,14 @@ public interface DocumentNotificationListener {
 	 * 
 	 * @param node
 	 */
-	public void lookInvalidated(NodeImpl node);
+	public void lookInvalidated(DOMNodeImpl node);
 
 	/**
 	 * Changed if the position of the node in a parent has changed.
 	 * 
 	 * @param node
 	 */
-	public void positionInvalidated(NodeImpl node);
+	public void positionInvalidated(DOMNodeImpl node);
 
 	/**
 	 * This is called when the node has changed, but it is unclear if it's a
@@ -35,7 +35,7 @@ public interface DocumentNotificationListener {
 	 * 
 	 * @param node
 	 */
-	public void invalidated(NodeImpl node);
+	public void invalidated(DOMNodeImpl node);
 
 	/**
 	 * Called when the node (with all its contents) is first created by the
@@ -43,14 +43,14 @@ public interface DocumentNotificationListener {
 	 * 
 	 * @param node
 	 */
-	public void nodeLoaded(NodeImpl node);
+	public void nodeLoaded(DOMNodeImpl node);
 
 	/**
 	 * The children of the node might have changed.
 	 * 
 	 * @param node
 	 */
-	public void structureInvalidated(NodeImpl node);
+	public void structureInvalidated(DOMNodeImpl node);
 
 	/**
 	 * Called when a external script (a SCRIPT tag with a src attribute) is
@@ -58,7 +58,7 @@ public interface DocumentNotificationListener {
 	 * 
 	 * @param node
 	 */
-	public void externalScriptLoading(NodeImpl node);
+	public void externalScriptLoading(DOMNodeImpl node);
 
 	/**
 	 * This is called when the whole document is potentially invalid, e.g. when

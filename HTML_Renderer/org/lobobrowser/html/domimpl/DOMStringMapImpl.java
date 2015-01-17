@@ -18,7 +18,7 @@
 
     Contact info: lobochief@users.sourceforge.net
 */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.w3c.DOMStringMap;
 

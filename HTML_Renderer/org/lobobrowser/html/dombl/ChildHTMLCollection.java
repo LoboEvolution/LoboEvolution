@@ -23,19 +23,19 @@
  */
 package org.lobobrowser.html.dombl;
 
-import org.lobobrowser.html.dombl.NodeImpl;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.Node;
 
 public class ChildHTMLCollection extends AbstractScriptableDelegate implements
 		HTMLCollection {
-	private final NodeImpl rootNode;
+	private final DOMNodeImpl rootNode;
 
 	/**
 	 * @param node
 	 */
-	public ChildHTMLCollection(NodeImpl node) {
+	public ChildHTMLCollection(DOMNodeImpl node) {
 		super();
 		rootNode = node;
 	}

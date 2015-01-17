@@ -47,9 +47,9 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.dombl.UINode;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
-import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.layout.AnchorLayout;
 import org.lobobrowser.html.layout.BlockQuoteLayout;
 import org.lobobrowser.html.layout.BrLayout;
@@ -313,7 +313,7 @@ public class RBlockViewport extends BaseRCollection {
 		this.availContentWidth = availw;
 
 		// New floating algorithm.
-		this.layoutPass((NodeImpl) this.modelNode);
+		this.layoutPass((DOMNodeImpl) this.modelNode);
 
 		Collection delayedPairs = container.getDelayedPairs();
 		if (delayedPairs != null && delayedPairs.size() > 0) {
@@ -378,7 +378,7 @@ public class RBlockViewport extends BaseRCollection {
 		this.height = paddingInsets.bottom + maxY;
 	}
 
-	private void layoutPass(NodeImpl rootNode) {
+	private void layoutPass(DOMNodeImpl rootNode) {
 		RenderableContainer container = this.container;
 		container.clearDelayedPairs();
 		this.positionedOrdinal = 0;
@@ -608,7 +608,7 @@ public class RBlockViewport extends BaseRCollection {
 		return rline;
 	}
 
-	public void layoutMarkup(NodeImpl node) {
+	public void layoutMarkup(DOMNodeImpl node) {
 		// This is the "inline" layout of an element.
 		// The difference with layoutChildren is that this
 		// method checks for padding and margin insets.
@@ -646,12 +646,12 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	public void layoutChildren(NodeImpl node) {
-		NodeImpl[] childrenArray = node.getChildrenArray();
+	public void layoutChildren(DOMNodeImpl node) {
+		DOMNodeImpl[] childrenArray = node.getChildrenArray();
 		if (childrenArray != null) {
 			int length = childrenArray.length;
 			for (int i = 0; i < length; i++) {
-				NodeImpl child = childrenArray[i];
+				DOMNodeImpl child = childrenArray[i];
 				short nodeType = child.getNodeType();
 				if (nodeType == Node.TEXT_NODE) {
 					this.layoutText(child);
@@ -1257,7 +1257,7 @@ public class RBlockViewport extends BaseRCollection {
 		this.currentLine = newLine;
 	}
 
-	private void layoutText(NodeImpl textNode) {
+	private void layoutText(DOMNodeImpl textNode) {
 		RenderState renderState = textNode.getRenderState();
 		if (renderState == null) {
 			throw new IllegalStateException("RenderState is null for node "

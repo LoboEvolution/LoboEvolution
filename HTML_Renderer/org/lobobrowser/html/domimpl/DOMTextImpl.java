@@ -21,19 +21,19 @@
 /*
  * Created on Sep 4, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.util.Strings;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
-public class TextImpl extends CharacterDataImpl implements Text {
-	public TextImpl() {
+public class DOMTextImpl extends DOMCharacterDataImpl implements Text {
+	public DOMTextImpl() {
 		this("");
 	}
 
-	public TextImpl(String text) {
+	public DOMTextImpl(String text) {
 		this.text = text;
 	}
 
@@ -53,7 +53,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	 * @see org.lobobrowser.html.w3c.Text#replaceWholeText(java.lang.String)
 	 */
 	public Text replaceWholeText(String content) throws DOMException {
-		NodeImpl parent = (NodeImpl) this.getParentNode();
+		DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
 		if (parent == null) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
 					"Text node has no parent");
@@ -67,7 +67,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	 * @see org.lobobrowser.html.w3c.Text#splitText(int)
 	 */
 	public Text splitText(int offset) throws DOMException {
-		NodeImpl parent = (NodeImpl) this.getParentNode();
+		DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
 		if (parent == null) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
 					"Text node has no parent");
@@ -80,7 +80,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 		String content1 = t.substring(0, offset);
 		String content2 = t.substring(offset);
 		this.text = content1;
-		TextImpl newNode = new TextImpl(content2);
+		DOMTextImpl newNode = new DOMTextImpl(content2);
 		newNode.setOwnerDocument(this.document);
 		return (Text) parent.insertAfter(newNode, this);
 	}
@@ -91,7 +91,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	 * @see org.lobobrowser.html.w3c.Text#getwholeText()
 	 */
 	public String getWholeText() {
-		NodeImpl parent = (NodeImpl) this.getParentNode();
+		DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
 		if (parent == null) {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
 					"Text node has no parent");
@@ -102,7 +102,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getlocalName()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getlocalName()
 	 */
 	public String getLocalName() {
 		return null;
@@ -111,7 +111,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getnodeName()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeName()
 	 */
 	public String getNodeName() {
 		return "#text";
@@ -120,7 +120,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getnodeType()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeType()
 	 */
 	public short getNodeType() {
 		return Node.TEXT_NODE;
@@ -129,7 +129,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getnodeValue()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeValue()
 	 */
 	public String getNodeValue() throws DOMException {
 		return this.text;
@@ -138,7 +138,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#setnodeValue(java.lang.String)
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#setnodeValue(java.lang.String)
 	 */
 	public void setNodeValue(String nodeValue) throws DOMException {
 		this.text = nodeValue;
@@ -149,7 +149,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	}
 
 	protected Node createSimilarNode() {
-		return new TextImpl(this.text);
+		return new DOMTextImpl(this.text);
 	}
 
 	public String toString() {

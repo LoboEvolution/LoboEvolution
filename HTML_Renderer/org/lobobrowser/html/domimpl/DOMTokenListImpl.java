@@ -18,9 +18,8 @@
 
     Contact info: lobochief@users.sourceforge.net
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.w3c.DOMTokenList;
 
 public class DOMTokenListImpl implements DOMTokenList {

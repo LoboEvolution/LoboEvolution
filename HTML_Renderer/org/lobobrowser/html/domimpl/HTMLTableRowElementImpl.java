@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
-import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.dombl.NodeVisitor;
 import org.lobobrowser.html.dombl.StopVisitorException;
 import org.lobobrowser.html.domfilter.NodeFilter;
@@ -49,7 +48,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 	}
 
 	public int getRowIndex() {
-		NodeImpl parent = (NodeImpl) this.getParentNode();
+		DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
 		if (parent == null) {
 			return -1;
 		}

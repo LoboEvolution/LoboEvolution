@@ -48,24 +48,16 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.ReadyStateChangeListener;
 import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.dombl.AttrImpl;
-import org.lobobrowser.html.dombl.CDataSectionImpl;
 import org.lobobrowser.html.dombl.CSSStyleSheetList;
-import org.lobobrowser.html.dombl.CommentImpl;
-import org.lobobrowser.html.dombl.DOMConfigurationImpl;
-import org.lobobrowser.html.dombl.DOMImplementationImpl;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
-import org.lobobrowser.html.dombl.DocumentFragmentImpl;
 import org.lobobrowser.html.dombl.DocumentNotificationListener;
 import org.lobobrowser.html.dombl.ElementFactory;
 import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageInfo;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.dombl.LocalErrorHandler;
-import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.dombl.NodeVisitor;
 import org.lobobrowser.html.dombl.QuerySelectorImpl;
-import org.lobobrowser.html.dombl.TextImpl;
 import org.lobobrowser.html.domfilter.AnchorFilter;
 import org.lobobrowser.html.domfilter.AppletFilter;
 import org.lobobrowser.html.domfilter.ClassNameFilter;
@@ -123,7 +115,7 @@ import org.xml.sax.SAXException;
 /**
  * Implementation of the W3C <code>HTMLDocument</code> interface.
  */
-public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, DocumentView {
+public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, DocumentView {
 	private static final Logger logger = Logger.getLogger(HTMLDocumentImpl.class.getName());
 	private final ElementFactory factory;
 	private final HtmlRendererContext rcontext;
@@ -428,25 +420,25 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		// TODO: According to documentation, when a document
 		// fragment is added to a node, its children are added,
 		// not itself.
-		DocumentFragmentImpl node = new DocumentFragmentImpl();
+		DOMFragmentImpl node = new DOMFragmentImpl();
 		node.setOwnerDocument(this);
 		return node;
 	}
 
 	public Text createTextNode(String data) {
-		TextImpl node = new TextImpl(data);
+		DOMTextImpl node = new DOMTextImpl(data);
 		node.setOwnerDocument(this);
 		return node;
 	}
 
 	public Comment createComment(String data) {
-		CommentImpl node = new CommentImpl(data);
+		DOMCommentImpl node = new DOMCommentImpl(data);
 		node.setOwnerDocument(this);
 		return node;
 	}
 
 	public CDATASection createCDATASection(String data) throws DOMException {
-		CDataSectionImpl node = new CDataSectionImpl(data);
+		DOMCDataSectionImpl node = new DOMCDataSectionImpl(data);
 		node.setOwnerDocument(this);
 		return node;
 	}
@@ -460,7 +452,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	}
 
 	public Attr createAttribute(String name) throws DOMException {
-		return new AttrImpl(name);
+		return new DOMAttrImpl(name);
 	}
 
 	public EntityReference createEntityReference(String name)
@@ -531,8 +523,8 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	}
 
 	public Node adoptNode(Node source) throws DOMException {
-		if (source instanceof NodeImpl) {
-			NodeImpl node = (NodeImpl) source;
+		if (source instanceof DOMNodeImpl) {
+			DOMNodeImpl node = (DOMNodeImpl) source;
 			node.setOwnerDocument(this, true);
 			return node;
 		} else {
@@ -584,7 +576,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getLocalName()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getLocalName()
 	 */
 	public String getLocalName() {
 		// Always null for document
@@ -594,7 +586,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getNodeName()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getNodeName()
 	 */
 	public String getNodeName() {
 		return "#document";
@@ -603,7 +595,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getNodeType()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getNodeType()
 	 */
 	public short getNodeType() {
 		return Node.DOCUMENT_NODE;
@@ -612,7 +604,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getNodeValue()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getNodeValue()
 	 */
 	public String getNodeValue() throws DOMException {
 		// Always null for document
@@ -622,7 +614,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#setNodeValue(java.lang.String)
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#setNodeValue(java.lang.String)
 	 */
 	public void setNodeValue(String nodeValue) throws DOMException {
 		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR,
@@ -755,7 +747,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		}
 	}
 
-	public void sizeInvalidated(NodeImpl node) {
+	public void sizeInvalidated(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		int size;
 		synchronized (listenersList) {
@@ -783,7 +775,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	 * 
 	 * @param node
 	 */
-	public void lookInvalidated(NodeImpl node) {
+	public void lookInvalidated(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		int size;
 		synchronized (listenersList) {
@@ -810,7 +802,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	 * 
 	 * @param node
 	 */
-	public void positionInParentInvalidated(NodeImpl node) {
+	public void positionInParentInvalidated(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		int size;
 		synchronized (listenersList) {
@@ -837,7 +829,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	 * 
 	 * @param node
 	 */
-	public void invalidated(NodeImpl node) {
+	public void invalidated(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		int size;
 		synchronized (listenersList) {
@@ -863,7 +855,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	 * 
 	 * @param node
 	 */
-	public void structureInvalidated(NodeImpl node) {
+	public void structureInvalidated(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		int size;
 		synchronized (listenersList) {
@@ -884,7 +876,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		}
 	}
 
-	public void nodeLoaded(NodeImpl node) {
+	public void nodeLoaded(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		int size;
 		synchronized (listenersList) {
@@ -905,7 +897,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		}
 	}
 
-	public void externalScriptLoading(NodeImpl node) {
+	public void externalScriptLoading(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		int size;
 		synchronized (listenersList) {
@@ -1279,7 +1271,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getbaseURI()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getbaseURI()
 	 */
 	public String getBaseURI() {
 		String buri = this.baseURI;
@@ -1382,6 +1374,7 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 
 	@Override
 	public HTMLHeadElement getHead() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

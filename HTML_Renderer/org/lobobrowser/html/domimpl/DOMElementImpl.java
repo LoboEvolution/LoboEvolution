@@ -21,7 +21,7 @@
 /*
  * Created on Oct 29, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.w3c.HTMLMenuElement;
 import org.lobobrowser.util.Objects;
 import org.lobobrowser.util.Strings;
@@ -46,11 +45,11 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.w3c.dom.TypeInfo;
 
-public class ElementImpl extends NodeImpl implements Element {
+public class DOMElementImpl extends DOMNodeImpl implements Element {
 	private final String name;
 	private String id;
 
-	public ElementImpl(String name) {
+	public DOMElementImpl(String name) {
 		super();
 		this.name = name;
 	}
@@ -60,7 +59,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getattributes()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getattributes()
 	 */
 	public NamedNodeMap getAttributes() {
 		synchronized (this) {
@@ -69,7 +68,7 @@ public class ElementImpl extends NodeImpl implements Element {
 				attrs = new HashMap<String, String>();
 				this.attributes = attrs;
 			}
-			return new NamedNodeMapImpl(this, this.attributes);
+			return new DOMAttrMapImpl(this, this.attributes);
 		}
 	}
 
@@ -81,13 +80,13 @@ public class ElementImpl extends NodeImpl implements Element {
 	}
 
 	public boolean equalAttributes(Node arg) {
-		if (arg instanceof ElementImpl) {
+		if (arg instanceof DOMElementImpl) {
 			synchronized (this) {
 				Map<String, String> attrs1 = this.attributes;
 				if (attrs1 == null) {
 					attrs1 = Collections.emptyMap();
 				}
-				Map<String, String> attrs2 = ((ElementImpl) arg).attributes;
+				Map<String, String> attrs2 = ((DOMElementImpl) arg).attributes;
 				if (attrs2 == null) {
 					attrs2 = Collections.emptyMap();
 				}
@@ -256,7 +255,7 @@ public class ElementImpl extends NodeImpl implements Element {
 
 	private Attr getAttr(String normalName, String value) {
 		// TODO: "specified" attributes
-		return new AttrImpl(normalName, value, true, this,
+		return new DOMAttrImpl(normalName, value, true, this,
 				HtmlAttributeProperties.ID.equals(normalName));
 	}
 
@@ -310,7 +309,7 @@ public class ElementImpl extends NodeImpl implements Element {
 				}
 			}
 		}
-		return new NodeListImpl(descendents);
+		return new DOMNodeListImpl(descendents);
 	}
 
 	public NodeList getElementsByTagNameNS(String namespaceURI, String localName)
@@ -487,7 +486,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getLocalName()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getLocalName()
 	 */
 	public String getLocalName() {
 		return this.getNodeName();
@@ -496,7 +495,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getNodeName()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getNodeName()
 	 */
 	public String getNodeName() {
 		return this.name;
@@ -505,7 +504,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getNodeType()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getNodeType()
 	 */
 	public short getNodeType() {
 		return Node.ELEMENT_NODE;
@@ -514,7 +513,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#getNodeValue()
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getNodeValue()
 	 */
 	public String getNodeValue() throws DOMException {
 		return null;
@@ -523,7 +522,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.NodeImpl#setNodeValue(java.lang.String)
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#setNodeValue(java.lang.String)
 	 */
 	public void setNodeValue(String nodeValue) throws DOMException {
 		// nop
@@ -552,8 +551,8 @@ public class ElementImpl extends NodeImpl implements Element {
 							}
 							sb.append(txt);
 						}
-					} else if (node instanceof ElementImpl) {
-						ElementImpl en = (ElementImpl) node;
+					} else if (node instanceof DOMElementImpl) {
+						DOMElementImpl en = (DOMElementImpl) node;
 						String txt = en.getRawInnerText(includeComment);
 						if (!"".equals(txt)) {
 							if (sb == null) {

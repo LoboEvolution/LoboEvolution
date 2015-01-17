@@ -64,8 +64,8 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.dombl.UINode;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.renderer.BoundableRenderable;
 import org.lobobrowser.html.renderer.DelayedPair;
 import org.lobobrowser.html.renderer.FrameContext;
@@ -523,7 +523,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer,
 	 * Sets the root node to render. This method should be invoked in the GUI
 	 * dispatch thread.
 	 */
-	public void setRootNode(NodeImpl node) {
+	public void setRootNode(DOMNodeImpl node) {
 		if (node != null) {
 			RBlock block = new RBlock(node, 0, this.ucontext, this.rcontext,
 					this.frameContext, this);
@@ -561,9 +561,9 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer,
 		this.repaint();
 	}
 
-	public NodeImpl getRootNode() {
+	public DOMNodeImpl getRootNode() {
 		RBlock block = this.rblock;
-		return block == null ? null : (NodeImpl) block.getModelNode();
+		return block == null ? null : (DOMNodeImpl) block.getModelNode();
 	}
 
 	private void onMouseClick(MouseEvent event) {
@@ -887,7 +887,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer,
 				switch (type) {
 				case DocumentNotification.GENERIC:
 				case DocumentNotification.SIZE: {
-					NodeImpl node = dn.node;
+					DOMNodeImpl node = dn.node;
 					if (node == null) {
 						// This is all-invalidate (new style sheet)
 						if (loggableInfo) {
@@ -915,8 +915,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer,
 				}
 				case DocumentNotification.POSITION: {
 					// TODO: Could be more efficient.
-					NodeImpl node = dn.node;
-					NodeImpl parent = (NodeImpl) node.getParentNode();
+					DOMNodeImpl node = dn.node;
+					DOMNodeImpl parent = (DOMNodeImpl) node.getParentNode();
 					if (parent != null) {
 						UINode uiNode = parent.findUINode();
 						if (uiNode != null) {
@@ -928,7 +928,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer,
 					break;
 				}
 				case DocumentNotification.LOOK: {
-					NodeImpl node = dn.node;
+					DOMNodeImpl node = dn.node;
 					UINode uiNode = node.findUINode();
 					if (uiNode != null) {
 						if (repainters == null) {

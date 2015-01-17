@@ -21,10 +21,9 @@
 /*
  * Created on Oct 15, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -43,7 +42,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 
 	public DocumentType createDocumentType(String qualifiedName,
 			String publicId, String systemId) throws DOMException {
-		return new DocumentTypeImpl(qualifiedName, publicId, systemId);
+		return new DOMDocumentTypeImpl(qualifiedName, publicId, systemId);
 	}
 
 	public Document createDocument(String namespaceURI, String qualifiedName,

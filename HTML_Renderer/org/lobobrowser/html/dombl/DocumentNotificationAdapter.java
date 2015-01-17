@@ -20,7 +20,7 @@
  */
 package org.lobobrowser.html.dombl;
 
-import org.lobobrowser.html.dombl.NodeImpl;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 
 /**
  * An abstract implementation of {@link DocumentNotificationListener} with blank
@@ -31,24 +31,24 @@ public abstract class DocumentNotificationAdapter implements
 	public void allInvalidated() {
 	}
 
-	public void externalScriptLoading(NodeImpl node) {
+	public void externalScriptLoading(DOMNodeImpl node) {
 	}
 
-	public void invalidated(NodeImpl node) {
+	public void invalidated(DOMNodeImpl node) {
 	}
 
-	public void lookInvalidated(NodeImpl node) {
+	public void lookInvalidated(DOMNodeImpl node) {
 	}
 
-	public void nodeLoaded(NodeImpl node) {
+	public void nodeLoaded(DOMNodeImpl node) {
 	}
 
-	public void positionInvalidated(NodeImpl node) {
+	public void positionInvalidated(DOMNodeImpl node) {
 	}
 
-	public void sizeInvalidated(NodeImpl node) {
+	public void sizeInvalidated(DOMNodeImpl node) {
 	}
 
-	public void structureInvalidated(NodeImpl node) {
+	public void structureInvalidated(DOMNodeImpl node) {
 	}
 }

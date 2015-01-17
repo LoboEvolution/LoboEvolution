@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
-import org.lobobrowser.html.dombl.ElementFilter;
+import org.lobobrowser.html.domfilter.ElementTableAttributeFilter;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;
@@ -84,12 +84,12 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public HTMLCollection getRows() {
-		return new DescendentHTMLCollection(this, new ElementFilter(HtmlProperties.TR),
+		return new DescendentHTMLCollection(this, new ElementTableAttributeFilter(HtmlProperties.TR),
 				this.getTreeLock(), false);
 	}
 
 	public HTMLCollection getTBodies() {
-		return new DescendentHTMLCollection(this, new ElementFilter(HtmlProperties.TBODY),
+		return new DescendentHTMLCollection(this, new ElementTableAttributeFilter(HtmlProperties.TBODY),
 				this.getTreeLock(), false);
 	}
 
@@ -211,7 +211,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void deleteTHead() {
-		this.removeChildren(new ElementFilter("THEAD"));
+		this.removeChildren(new ElementTableAttributeFilter("THEAD"));
 	}
 
 	public HTMLElement createTFoot() {
@@ -220,7 +220,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void deleteTFoot() {
-		this.removeChildren(new ElementFilter("TFOOT"));
+		this.removeChildren(new ElementTableAttributeFilter("TFOOT"));
 	}
 
 	public HTMLElement createCaption() {
@@ -229,7 +229,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public void deleteCaption() {
-		this.removeChildren(new ElementFilter("CAPTION"));
+		this.removeChildren(new ElementTableAttributeFilter("CAPTION"));
 	}
 
 	/**

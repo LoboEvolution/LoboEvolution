@@ -40,8 +40,8 @@ import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.FrameNode;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.renderer.NodeRenderer;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.util.gui.WrapperLayout;
@@ -84,10 +84,10 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 	}
 
 	private HTMLElementImpl[] getSubFrames(HTMLElementImpl parent) {
-		NodeImpl[] children = parent.getChildrenArray();
-		ArrayList<NodeImpl> subFrames = new ArrayList<NodeImpl>();
+		DOMNodeImpl[] children = parent.getChildrenArray();
+		ArrayList<DOMNodeImpl> subFrames = new ArrayList<DOMNodeImpl>();
 		for (int i = 0; i < children.length; i++) {
-			NodeImpl child = children[i];
+			DOMNodeImpl child = children[i];
 			if (child instanceof HTMLElementImpl) {
 				String nodeName = child.getNodeName();
 				if ("FRAME".equalsIgnoreCase(nodeName)
@@ -105,7 +105,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 	 * Sets the FRAMESET node and invalidates the component so it can be
 	 * rendered immediately in the GUI thread.
 	 */
-	public void setRootNode(NodeImpl node) {
+	public void setRootNode(DOMNodeImpl node) {
 		// Method expected to be called in the GUI thread.
 		if (!(node instanceof HTMLElementImpl)) {
 			throw new IllegalArgumentException("node=" + node);

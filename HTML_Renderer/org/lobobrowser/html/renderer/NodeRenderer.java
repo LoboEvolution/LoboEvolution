@@ -23,8 +23,8 @@
  */
 package org.lobobrowser.html.renderer;
 
-import org.lobobrowser.html.dombl.NodeImpl;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 
 public interface NodeRenderer {
-	public void setRootNode(NodeImpl node);
+	public void setRootNode(DOMNodeImpl node);
 }

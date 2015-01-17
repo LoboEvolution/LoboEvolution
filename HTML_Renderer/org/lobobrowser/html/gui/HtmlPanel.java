@@ -29,14 +29,15 @@ import java.awt.Rectangle;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
+
 import javax.swing.JComponent;
 
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.DocumentNotificationListener;
-import org.lobobrowser.html.dombl.ElementImpl;
+import org.lobobrowser.html.domimpl.DOMElementImpl;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
-import org.lobobrowser.html.dombl.NodeImpl;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
 import org.lobobrowser.html.renderer.BoundableRenderable;
@@ -70,7 +71,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private volatile boolean isFrameSet = false;
 	private volatile NodeRenderer nodeRenderer = null;
-	private volatile NodeImpl rootNode;
+	private volatile DOMNodeImpl rootNode;
 	private volatile int preferredWidth = -1;
 	private volatile Insets defaultMarginInsets = new Insets(8, 8, 8, 8);
 	private volatile int defaultOverflowX = RenderState.OVERFLOW_AUTO;
@@ -203,7 +204,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		this.nodeRenderer = shp;
 	}
 
-	private void setUpFrameSet(NodeImpl fsrn) {
+	private void setUpFrameSet(DOMNodeImpl fsrn) {
 		this.isFrameSet = true;
 		this.htmlBlockPanel = null;
 		FrameSetPanel fsp = this.createFrameSetPanel();
@@ -367,7 +368,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	}
 
 	private void scrollToElementImpl(String nameOrId) {
-		NodeImpl node = this.rootNode;
+		DOMNodeImpl node = this.rootNode;
 		if (node instanceof HTMLDocumentImpl) {
 			HTMLDocumentImpl doc = (HTMLDocumentImpl) node;
 			org.w3c.dom.Element element = doc.getElementById(nameOrId);
@@ -391,7 +392,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) node;
 		nodeImpl.addDocumentNotificationListener(this.notificationListener);
 		this.rootNode = nodeImpl;
-		NodeImpl fsrn = this.getFrameSetRootNode(nodeImpl);
+		DOMNodeImpl fsrn = this.getFrameSetRootNode(nodeImpl);
 		boolean newIfs = fsrn != null;
 		if (newIfs != this.isFrameSet || this.getComponentCount() == 0) {
 			this.isFrameSet = newIfs;
@@ -452,13 +453,13 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	/**
 	 * Gets the HTML DOM node currently rendered if any.
 	 */
-	public NodeImpl getRootNode() {
+	public DOMNodeImpl getRootNode() {
 		return this.rootNode;
 	}
 
 	private boolean resetIfFrameSet() {
-		NodeImpl nodeImpl = this.rootNode;
-		NodeImpl fsrn = this.getFrameSetRootNode(nodeImpl);
+		DOMNodeImpl dOMNodeImpl = this.rootNode;
+		DOMNodeImpl fsrn = this.getFrameSetRootNode(dOMNodeImpl);
 		boolean newIfs = fsrn != null;
 		if (newIfs != this.isFrameSet || this.getComponentCount() == 0) {
 			this.isFrameSet = newIfs;
@@ -475,9 +476,9 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		return false;
 	}
 
-	private NodeImpl getFrameSetRootNode(NodeImpl node) {
+	private DOMNodeImpl getFrameSetRootNode(DOMNodeImpl node) {
 		if (node instanceof Document) {
-			ElementImpl element = (ElementImpl) ((Document) node)
+			DOMElementImpl element = (DOMElementImpl) ((Document) node)
 					.getDocumentElement();
 			if (element != null
 					&& "HTML".equalsIgnoreCase(element.getTagName())) {
@@ -490,18 +491,18 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		}
 	}
 
-	private NodeImpl getFrameSet(NodeImpl node) {
-		NodeImpl[] children = node.getChildrenArray();
+	private DOMNodeImpl getFrameSet(DOMNodeImpl node) {
+		DOMNodeImpl[] children = node.getChildrenArray();
 		if (children == null) {
 			return null;
 		}
 		int length = children.length;
-		NodeImpl frameSet = null;
+		DOMNodeImpl frameSet = null;
 		for (int i = 0; i < length; i++) {
-			NodeImpl child = children[i];
+			DOMNodeImpl child = children[i];
 			if (child instanceof Text) {
 				// Ignore
-			} else if (child instanceof ElementImpl) {
+			} else if (child instanceof DOMElementImpl) {
 				String tagName = child.getNodeName();
 				if ("HEAD".equalsIgnoreCase(tagName)
 						|| "NOFRAMES".equalsIgnoreCase(tagName)
@@ -514,7 +515,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 					frameSet = child;
 					break;
 				} else {
-					if (this.hasSomeHtml((ElementImpl) child)) {
+					if (this.hasSomeHtml((DOMElementImpl) child)) {
 						return null;
 					}
 				}
@@ -523,25 +524,25 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		return frameSet;
 	}
 
-	private boolean hasSomeHtml(ElementImpl element) {
+	private boolean hasSomeHtml(DOMElementImpl element) {
 		String tagName = element.getTagName();
 		if ("HEAD".equalsIgnoreCase(tagName)
 				|| "TITLE".equalsIgnoreCase(tagName)
 				|| "META".equalsIgnoreCase(tagName)) {
 			return false;
 		}
-		NodeImpl[] children = element.getChildrenArray();
+		DOMNodeImpl[] children = element.getChildrenArray();
 		if (children != null) {
 			int length = children.length;
 			for (int i = 0; i < length; i++) {
-				NodeImpl child = children[i];
+				DOMNodeImpl child = children[i];
 				if (child instanceof Text) {
 					String textContent = ((Text) child).getTextContent();
 					if (textContent != null && !"".equals(textContent.trim())) {
 						return false;
 					}
-				} else if (child instanceof ElementImpl) {
-					if (this.hasSomeHtml((ElementImpl) child)) {
+				} else if (child instanceof DOMElementImpl) {
+					if (this.hasSomeHtml((DOMElementImpl) child)) {
 						return false;
 					}
 				}
@@ -735,7 +736,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * later. Multiple invalidations may be processed in a single document
 	 * layout.
 	 */
-	public void delayedRelayout(NodeImpl node) {
+	public void delayedRelayout(DOMNodeImpl node) {
 		ArrayList<DocumentNotification> notifs = this.notifications;
 		synchronized (notifs) {
 			notifs.add(new DocumentNotification(DocumentNotification.SIZE, node));

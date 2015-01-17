@@ -25,7 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.dombl.NodeImpl;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.js.JavaScript;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
@@ -62,11 +62,11 @@ public class Executor {
 		return ctx;
 	}
 
-	public static boolean executeFunction(NodeImpl element, Function f, Event event) {
+	public static boolean executeFunction(DOMNodeImpl element, Function f, Event event) {
 		return Executor.executeFunction(element, element, f, event);
 	}
 
-	public static boolean executeFunction(NodeImpl element, Object thisObject, Function f, Event event) {
+	public static boolean executeFunction(DOMNodeImpl element, Object thisObject, Function f, Event event) {
 		Document doc = element.getOwnerDocument();
 		if (doc == null) {
 			throw new IllegalStateException(

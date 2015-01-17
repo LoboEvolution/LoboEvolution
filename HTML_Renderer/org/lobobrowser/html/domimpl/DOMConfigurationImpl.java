@@ -19,36 +19,44 @@
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
- * Created on Sep 3, 2005
+ * Created on Oct 9, 2005
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.domimpl;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.lobobrowser.js.AbstractScriptableDelegate;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.DOMConfiguration;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.DOMStringList;
 
-public class NodeListImpl extends AbstractScriptableDelegate implements
-		NodeList {
-	// Note: class must be public for reflection to work.
-	private final ArrayList nodeList = new ArrayList();
+public class DOMConfigurationImpl implements DOMConfiguration {
+	private final Map<String, Object> parameters = new HashMap<String, Object>();
 
-	public NodeListImpl(Collection collection) {
+	public DOMConfigurationImpl() {
 		super();
-		nodeList.addAll(collection);
 	}
 
-	public int getLength() {
-		return this.nodeList.size();
+	public void setParameter(String name, Object value) throws DOMException {
+		synchronized (this) {
+			this.parameters.put(name, value);
+		}
 	}
 
-	public Node item(int index) {
-		try {
-			return (Node) this.nodeList.get(index);
-		} catch (IndexOutOfBoundsException iob) {
-			return null;
+	public Object getParameter(String name) throws DOMException {
+		synchronized (this) {
+			return this.parameters.get(name);
+		}
+	}
+
+	public boolean canSetParameter(String name, Object value) {
+		// TODO
+		return true;
+	}
+
+	public DOMStringList getParameterNames() {
+		synchronized (this) {
+			return new DOMStringListImpl(parameters.keySet());
 		}
 	}
 }

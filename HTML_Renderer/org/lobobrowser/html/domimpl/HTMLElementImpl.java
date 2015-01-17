@@ -37,8 +37,6 @@ import java.util.logging.Level;
 
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.dombl.DOMTokenListImpl;
-import org.lobobrowser.html.dombl.ElementImpl;
 import org.lobobrowser.html.dombl.QuerySelectorImpl;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.parser.HtmlParser;
@@ -66,7 +64,7 @@ import org.w3c.dom.css.CSSStyleDeclaration;
 
 import com.steadystate.css.parser.CSSOMParser;
 
-public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2PropertiesContext {
+public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2PropertiesContext {
 	
 	public HTMLElementImpl(String name, boolean noStyleSheet) {
 		super(name);
@@ -784,7 +782,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	}
 
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		// Overrides NodeImpl method
+		// Overrides DOMNodeImpl method
 		// Called in synchronized block already
 		if(prevRenderState.getColor() == null)
 			prevRenderState = new ColorRenderState(prevRenderState, java.awt.Color.BLACK);
