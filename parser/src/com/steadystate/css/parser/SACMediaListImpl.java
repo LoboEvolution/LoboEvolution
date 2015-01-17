@@ -30,6 +30,8 @@ import java.util.List;
 
 import org.w3c.css.sac.SACMediaList;
 
+import com.steadystate.css.parser.media.MediaQuery;
+
 /**
  * Implementation of {@link SACMediaList}.
  *
@@ -38,18 +40,30 @@ import org.w3c.css.sac.SACMediaList;
  */
 public class SACMediaListImpl extends LocatableImpl implements SACMediaList {
 
-    private List<String> media_ = new ArrayList<String>(10);
+    private final List<MediaQuery> mediaQueries_;
+
+    public SACMediaListImpl() {
+        mediaQueries_ = new ArrayList<MediaQuery>();
+    }
 
     public int getLength() {
-        return media_.size();
+        return mediaQueries_.size();
     }
 
     public String item(final int index) {
-        return media_.get(index);
+        return mediaQuery(index).getMedia();
+    }
+
+    public MediaQuery mediaQuery(final int index) {
+        return mediaQueries_.get(index);
     }
 
     public void add(final String s) {
-        media_.add(s);
+        add(new MediaQuery(s));
+    }
+
+    public void add(final MediaQuery mediaQuery) {
+        mediaQueries_.add(mediaQuery);
     }
 
     @Override

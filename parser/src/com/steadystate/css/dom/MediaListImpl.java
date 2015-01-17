@@ -40,6 +40,8 @@ import org.w3c.dom.stylesheets.MediaList;
 
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.Locatable;
+import com.steadystate.css.parser.SACMediaListImpl;
+import com.steadystate.css.parser.media.MediaQuery;
 import com.steadystate.css.userdata.UserDataConstants;
 import com.steadystate.css.util.LangUtils;
 import com.steadystate.css.util.ThrowCssExceptionErrorHandler;
@@ -53,13 +55,15 @@ import com.steadystate.css.util.ThrowCssExceptionErrorHandler;
 public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
     private static final long serialVersionUID = 6662784733573034870L;
 
-    private List<String> media_ = new ArrayList<String>();
+    private List<MediaQuery> mediaQueries_;
 
     /**
      * Creates new MediaList.
      * @param mediaList the media list
      */
     public MediaListImpl(final SACMediaList mediaList) {
+        this();
+
         setMediaList(mediaList);
 
         if (mediaList instanceof Locatable) {
@@ -75,16 +79,20 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
      * The attributes are null.
      */
     public MediaListImpl() {
-        super();
+        mediaQueries_ = new ArrayList<MediaQuery>(10);
     }
 
     public String getMediaText() {
         final StringBuilder sb = new StringBuilder("");
-        for (int i = 0; i < media_.size(); i++) {
-            sb.append(media_.get(i));
-            if (i < media_.size() - 1) {
+        boolean isNotFirst = false;
+        for (MediaQuery mediaQuery : mediaQueries_) {
+            if (isNotFirst) {
                 sb.append(", ");
             }
+            else {
+                isNotFirst = true;
+            }
+            sb.append(mediaQuery.getMedia());
         }
         return sb.toString();
     }
@@ -106,28 +114,36 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
     }
 
     public int getLength() {
-        return media_.size();
+        return mediaQueries_.size();
     }
 
     public String item(final int index) {
-        return (index < media_.size()) ? media_.get(index) : null;
+        final MediaQuery mq = mediaQuery(index);
+        if (null == mq) { return null; }
+
+        return mq.getMedia();
+    }
+
+    public MediaQuery mediaQuery(final int index) {
+        if (index < 0 || (index >= mediaQueries_.size())) {
+            return null;
+        }
+        return mediaQueries_.get(index);
     }
 
     public void deleteMedium(final String oldMedium) throws DOMException {
-        for (int i = 0; i < media_.size(); i++) {
-            final String str = media_.get(i);
+        for (MediaQuery mediaQuery : mediaQueries_) {
+            final String str = mediaQuery.getMedia();
             if (str.equalsIgnoreCase(oldMedium)) {
-                media_.remove(i);
+                mediaQueries_.remove(mediaQuery);
                 return;
             }
         }
-        throw new DOMExceptionImpl(
-            DOMException.NOT_FOUND_ERR,
-            DOMExceptionImpl.NOT_FOUND);
+        throw new DOMExceptionImpl(DOMException.NOT_FOUND_ERR, DOMExceptionImpl.NOT_FOUND);
     }
 
     public void appendMedium(final String newMedium) throws DOMException {
-        media_.add(newMedium);
+        mediaQueries_.add(new MediaQuery(newMedium));
     }
 
     @Override
@@ -136,12 +152,23 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
     }
 
     public void setMedia(final List<String> media) {
-        media_ = media;
+        mediaQueries_.clear();
+        for (String medium : media) {
+            mediaQueries_.add(new MediaQuery(medium));
+        }
     }
 
     private void setMediaList(final SACMediaList mediaList) {
+        if (mediaList instanceof SACMediaListImpl) {
+            final SACMediaListImpl impl = (SACMediaListImpl) mediaList;
+            for (int i = 0; i < mediaList.getLength(); i++) {
+                mediaQueries_.add(impl.mediaQuery(i));
+            }
+            return;
+        }
+
         for (int i = 0; i < mediaList.getLength(); i++) {
-            media_.add(mediaList.item(i));
+            mediaQueries_.add(new MediaQuery(mediaList.item(i)));
         }
     }
 
@@ -174,7 +201,7 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
     @Override
     public int hashCode() {
         int hash = super.hashCode();
-        hash = LangUtils.hashCode(hash, media_);
+        hash = LangUtils.hashCode(hash, mediaQueries_);
         return hash;
     }
 }

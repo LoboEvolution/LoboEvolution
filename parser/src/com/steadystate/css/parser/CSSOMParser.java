@@ -342,8 +342,7 @@ public class CSSOMParser {
             startMedia(media, null);
         }
 
-        public void startMedia(final SACMediaList media, final Locator locator)
-            throws CSSException {
+        public void startMedia(final SACMediaList media, final Locator locator) throws CSSException {
             final MediaListImpl ml = new MediaListImpl(media);
             // Create the media rule and add it to the rule list
             final CSSMediaRuleImpl mr = new CSSMediaRuleImpl(
@@ -427,8 +426,7 @@ public class CSSOMParser {
             startSelector(selectors, null);
         }
 
-        public void startSelector(final SelectorList selectors, final Locator locator)
-            throws CSSException {
+        public void startSelector(final SelectorList selectors, final Locator locator) throws CSSException {
             // Create the style rule and add it to the rule list
             final CSSStyleRuleImpl sr = new CSSStyleRuleImpl(
                 CSSOMParser.this.getParentStyleSheet(),
@@ -452,18 +450,16 @@ public class CSSOMParser {
             root_ = nodeStack_.pop();
         }
 
-        public void property(final String name, final LexicalUnit value, final boolean important)
-            throws CSSException {
+        public void property(final String name, final LexicalUnit value, final boolean important) throws CSSException {
             property(name, value, important, null);
         }
 
         public void property(final String name, final LexicalUnit value, final boolean important,
-                final Locator locator) {
+                                final Locator locator) {
             final CSSStyleDeclarationImpl decl =
                 (CSSStyleDeclarationImpl) nodeStack_.peek();
             try {
-                final Property property =
-                    new Property(name, new CSSValueImpl(value), important);
+                final Property property = new Property(name, new CSSValueImpl(value), important);
                 addLocator(locator, property);
                 decl.addProperty(property);
             }

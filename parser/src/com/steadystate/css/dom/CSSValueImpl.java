@@ -274,6 +274,8 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
                     return CSS_STRING;
                 case LexicalUnit.SAC_DIMENSION:
                     return CSS_DIMENSION;
+                default:
+                    return CSS_UNKNOWN;
             }
         }
         else if (value_ instanceof RectImpl) {
