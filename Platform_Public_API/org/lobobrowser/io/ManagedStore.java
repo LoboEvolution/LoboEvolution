@@ -92,9 +92,4 @@ public interface ManagedStore {
 	public Object retrieveObject(String path, ClassLoader classLoader)
 			throws java.io.IOException, ClassNotFoundException;
 
-	/**
-	 * @deprecated Use {@link #retrieveObject(String, ClassLoader)}.
-	 */
-	public Object retrieveObject(String path) throws java.io.IOException,
-			ClassNotFoundException;
 }

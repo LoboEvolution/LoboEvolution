@@ -82,27 +82,6 @@ public class HtmlParser {
 	/**
 	 * Constructs a <code>HtmlParser</code>.
 	 * 
-	 * @param document
-	 *            A W3C Document instance.
-	 * @param errorHandler
-	 *            The error handler.
-	 * @param publicId
-	 *            The public ID of the document.
-	 * @param systemId
-	 *            The system ID of the document.
-	 * @deprecated UserAgentContext should be passed in constructor.
-	 */
-	public HtmlParser(Document document, ErrorHandler errorHandler,
-			String publicId, String systemId) {
-		this.ucontext = null;
-		this.document = document;
-		this.publicId = publicId;
-		this.systemId = systemId;
-	}
-
-	/**
-	 * Constructs a <code>HtmlParser</code>.
-	 * 
 	 * @param ucontext
 	 *            The user agent context.
 	 * @param document

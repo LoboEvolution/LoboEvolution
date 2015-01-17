@@ -243,14 +243,6 @@ public class PlatformInit {
 	}
 
 	/**
-	 * @deprecated Use {@link #init(boolean, boolean)}.
-	 */
-	public void init(String[] args, boolean exitWhenAllWindowsAreClosed)
-			throws Exception {
-		this.init(exitWhenAllWindowsAreClosed, true);
-	}
-
-	/**
 	 * Initializes security, protocols, look & feel, console, the default window
 	 * factory, extensions and <code>java.library.path</code>. This method
 	 * should be invoked before using other functionality in the browser API. If

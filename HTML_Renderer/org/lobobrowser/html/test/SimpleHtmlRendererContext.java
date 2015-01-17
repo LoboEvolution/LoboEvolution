@@ -80,18 +80,6 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * 
 	 * @param contextComponent
 	 *            The component that will render HTML.
-	 * @deprecated Use constructor that takes <code>HtmlPanel</code> and
-	 *             <code>UserAgentContext</code>
-	 */
-	public SimpleHtmlRendererContext(HtmlPanel contextComponent) {
-		this(contextComponent, (UserAgentContext) null);
-	}
-
-	/**
-	 * Constructs a SimpleHtmlRendererContext.
-	 * 
-	 * @param contextComponent
-	 *            The component that will render HTML.
 	 * @see SimpleUserAgentContext
 	 */
 	public SimpleHtmlRendererContext(HtmlPanel contextComponent,

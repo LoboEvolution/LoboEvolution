@@ -231,23 +231,6 @@ public interface HtmlRendererContext {
 	/**
 	 * Opens a separate browser window and renders a URL.
 	 * 
-	 * @param absoluteUrl
-	 *            The URL to be rendered.
-	 * @param windowName
-	 *            The name of the new window.
-	 * @param windowFeatures
-	 *            The features of the new window (same as in Javascript open
-	 *            method).
-	 * @param replace
-	 * @return A new {@link org.lobobrowser.html.HtmlRendererContext} instance.
-	 * @deprecated Use {@link #open(URL, String, String, boolean)} instead.
-	 */
-	public HtmlRendererContext open(String absoluteUrl, String windowName,
-			String windowFeatures, boolean replace);
-
-	/**
-	 * Opens a separate browser window and renders a URL.
-	 * 
 	 * @param url
 	 *            The URL to be rendered.
 	 * @param windowName

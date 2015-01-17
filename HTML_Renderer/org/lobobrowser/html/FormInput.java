@@ -107,16 +107,6 @@ public class FormInput {
 	}
 
 	/**
-	 * Always returns UTF-8.
-	 * 
-	 * @deprecated The method is implemented only to provide some backward
-	 *             compatibility.
-	 */
-	public String getCharset() {
-		return "UTF-8";
-	}
-
-	/**
 	 * Shows a string representation of the <code>FormInput</code> that may be
 	 * useful in debugging.
 	 * 

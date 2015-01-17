@@ -24,6 +24,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.lobobrowser.html.HtmlRendererContext;
+import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.style.CSSUtilities;
 import org.lobobrowser.util.io.IORoutines;
@@ -160,8 +161,7 @@ public class CssParserTest extends JFrame {
 		writer.println("</DL>");
 		writer.flush();
 		String html = stringWriter.toString();
-		HtmlRendererContext rcontext = new SimpleHtmlRendererContext(
-				this.cssOutput);
+		HtmlRendererContext rcontext = new SimpleHtmlRendererContext(this.cssOutput, (UserAgentContext) null);
 		this.cssOutput.setHtml(html, "about:css", rcontext);
 	}
 
