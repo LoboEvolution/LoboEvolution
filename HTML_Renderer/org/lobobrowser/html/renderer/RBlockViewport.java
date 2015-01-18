@@ -53,6 +53,7 @@ import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
 import org.lobobrowser.html.layout.AnchorLayout;
 import org.lobobrowser.html.layout.BlockQuoteLayout;
 import org.lobobrowser.html.layout.BrLayout;
+import org.lobobrowser.html.layout.ButtonLayout;
 import org.lobobrowser.html.layout.CanvasLayout;
 import org.lobobrowser.html.layout.ChildrenLayout;
 import org.lobobrowser.html.layout.CommonBlockLayout;
@@ -182,6 +183,7 @@ public class RBlockViewport extends BaseRCollection {
 		el.put(HtmlProperties.A, anchor);
 		el.put(HtmlProperties.ANCHOR, anchor);
 		el.put(HtmlProperties.INPUT, new InputLayout());
+		el.put(HtmlProperties.BUTTON, new ButtonLayout());
 		el.put(HtmlProperties.TEXTAREA, new TextAreaLayout());
 		el.put(HtmlProperties.SELECT, new SelectLayout());
 		ListItemLayout list = new ListItemLayout();

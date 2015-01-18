@@ -228,6 +228,8 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
 			// Note: Per HTML Spec, setValue does not set attribute.
+			System.out.println("ss " +ic.getValue());
+			
 			return ic.getValue();
 		} else {
 			String dv = this.deferredValue;
@@ -290,7 +292,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 * org.lobobrowser.html.dombl.HTMLElementImpl#assignAttributeField(java.lang
 	 * .String, java.lang.String)
 	 */
-	protected void assignAttributeField(String normalName, String value) {
+	public void assignAttributeField(String normalName, String value) {
 		if (HtmlAttributeProperties.VALUE.equals(normalName)) {
 			this.setValue(value);
 		} else if ("checked".equals(normalName)) {

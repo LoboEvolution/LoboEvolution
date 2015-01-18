@@ -93,21 +93,16 @@ public class HtmlMapping {
 	public static Map<String, ElementInfo> mappingTag() {
 
 		Map<String, ElementInfo> elementInfos = new HashMap<String, ElementInfo>();
-		ElementInfo optionalEndElement = new ElementInfo(true,
-				ElementInfo.END_ELEMENT_OPTIONAL);
-		ElementInfo forbiddenEndElement = new ElementInfo(false,
-				ElementInfo.END_ELEMENT_FORBIDDEN);
-		ElementInfo onlyTextDE = new ElementInfo(false,
-				ElementInfo.END_ELEMENT_REQUIRED, true);
-		ElementInfo onlyText = new ElementInfo(false,
-				ElementInfo.END_ELEMENT_REQUIRED, false);
+		ElementInfo optionalEndElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL);
+		ElementInfo forbiddenEndElement = new ElementInfo(false, ElementInfo.END_ELEMENT_FORBIDDEN);
+		ElementInfo onlyTextDE = new ElementInfo(false,	ElementInfo.END_ELEMENT_REQUIRED, true);
+		ElementInfo onlyText = new ElementInfo(false,ElementInfo.END_ELEMENT_REQUIRED, false);
 
 		Set<String> tableCellStopElements = new HashSet<String>();
 		tableCellStopElements.add(HtmlProperties.TH);
 		tableCellStopElements.add(HtmlProperties.TD);
 		tableCellStopElements.add(HtmlProperties.TR);
-		ElementInfo tableCellElement = new ElementInfo(true,
-				ElementInfo.END_ELEMENT_OPTIONAL, tableCellStopElements);
+		ElementInfo tableCellElement = new ElementInfo(true,ElementInfo.END_ELEMENT_OPTIONAL, tableCellStopElements);
 
 		Set<String> headStopElements = new HashSet<String>();
 		headStopElements.add(HtmlProperties.BODY);
@@ -115,15 +110,13 @@ public class HtmlMapping {
 		headStopElements.add(HtmlProperties.SPAN);
 		headStopElements.add(HtmlProperties.TABLE);
 
-		ElementInfo headElement = new ElementInfo(true,
-				ElementInfo.END_ELEMENT_OPTIONAL, headStopElements);
+		ElementInfo headElement = new ElementInfo(true,	ElementInfo.END_ELEMENT_OPTIONAL, headStopElements);
 
 		Set<String> optionStopElements = new HashSet<String>();
 		optionStopElements.add(HtmlProperties.OPTION);
 		optionStopElements.add(HtmlProperties.SELECT);
 
-		ElementInfo optionElement = new ElementInfo(true,
-				ElementInfo.END_ELEMENT_OPTIONAL, optionStopElements);
+		ElementInfo optionElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, optionStopElements);
 
 		Set<String> paragraphStopElements = new HashSet<String>();
 		paragraphStopElements.add(HtmlProperties.P);
@@ -139,11 +132,9 @@ public class HtmlMapping {
 		paragraphStopElements.add(HtmlProperties.ARTICLE);
 		paragraphStopElements.add(HtmlProperties.CANVAS);
 
-		ElementInfo paragraphElement = new ElementInfo(true,
-				ElementInfo.END_ELEMENT_OPTIONAL, paragraphStopElements);
+		ElementInfo paragraphElement = new ElementInfo(true,ElementInfo.END_ELEMENT_OPTIONAL, paragraphStopElements);
 
-		elementInfos.put(HtmlProperties.NOSCRIPT, new ElementInfo(true,
-				ElementInfo.END_ELEMENT_REQUIRED, null, true));
+		elementInfos.put(HtmlProperties.NOSCRIPT, new ElementInfo(true,	ElementInfo.END_ELEMENT_REQUIRED, null, true));
 		elementInfos.put(HtmlProperties.SCRIPT, onlyText);
 		elementInfos.put(HtmlProperties.STYLE, onlyText);
 		elementInfos.put(HtmlProperties.TEXTAREA, onlyTextDE);
@@ -152,6 +143,7 @@ public class HtmlMapping {
 		elementInfos.put(HtmlProperties.LINK, forbiddenEndElement);
 		elementInfos.put(HtmlProperties.BASE, forbiddenEndElement);
 		elementInfos.put(HtmlProperties.INPUT, forbiddenEndElement);
+		elementInfos.put(HtmlProperties.BUTTON, forbiddenEndElement);
 		elementInfos.put(HtmlProperties.FRAME, forbiddenEndElement);
 		elementInfos.put(HtmlProperties.BR, forbiddenEndElement);
 		elementInfos.put(HtmlProperties.HR, forbiddenEndElement);
