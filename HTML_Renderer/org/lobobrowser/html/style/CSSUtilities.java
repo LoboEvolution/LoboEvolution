@@ -98,17 +98,15 @@ public class CSSUtilities {
 		URL scriptURL = Urls.createURL(baseURL, href);
 		final String scriptURI = scriptURL == null ? href : scriptURL
 				.toExternalForm();
-
+		
 		if (text != null && !"".equals(text)) {
 			String processedText = considerDoubleSlashComments ? preProcessCss(text)
 					: text;
 			CSSOMParser parser = new CSSOMParser();
-			InputSource is = getCssInputSourceForStyleSheet(processedText,
-					scriptURI);
+			InputSource is = getCssInputSourceForStyleSheet(processedText,scriptURI);
 			is.setURI(scriptURI);
 
-			CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) parser
-					.parseStyleSheet(is, null, null);
+			CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) parser.parseStyleSheet(is, null, null);
 			sheet.setHref(scriptURI);
 			sheet.setOwnerNode(ownerNode);
 			return sheet;
@@ -121,7 +119,7 @@ public class CSSUtilities {
 	public static CSSStyleSheet parse(org.w3c.dom.Node ownerNode, String text,
 			String baseUri, boolean considerDoubleSlashComments)
 			throws IOException {
-
+		
 		if (text != null && !"".equals(text)) {
 			String processedText = considerDoubleSlashComments ? preProcessCss(text)
 					: text;
@@ -130,8 +128,7 @@ public class CSSUtilities {
 					baseUri);
 			is.setURI(baseUri);
 
-			CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) parser
-					.parseStyleSheet(is, null, null);
+			CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) parser.parseStyleSheet(is, null, null);
 			sheet.setHref(baseUri);
 			sheet.setOwnerNode(ownerNode);
 			return sheet;
@@ -236,8 +233,7 @@ public class CSSUtilities {
 
 		ArrayList<String> listText = new ArrayList<String>();
 
-		text = text.replaceAll("\n", "").replaceAll("\r", "")
-				.replaceAll("}", "}\n");
+		text = text.replaceAll("\n", "").replaceAll("\r", "").replaceAll("}", "}\n");
 
 		String[] splitString = text.split("\n");
 
@@ -284,8 +280,14 @@ public class CSSUtilities {
 				app = 1;
 			}
 		}
+		
+		int counter = countChar(stringFixed,"{");
+		int counter1 = countChar(stringFixed,"}");
+		
+		if(counter < counter1)
+			stringFixed = stringFixed.replace("}}","}");
 
-		return stringFixed;
+		return stringFixed.trim();
 	}
 
 	private static String fixString(String css) {
@@ -322,5 +324,16 @@ public class CSSUtilities {
 		}
 
 		return result;
+	}
+
+	private static int countChar(String str, String str1){
+		
+		int  occurrences = 0;
+		for(char c : str.toCharArray()){
+		   if(c == str1.charAt(0)){
+		      occurrences++;
+		   }
+		}
+		return occurrences;
 	}
 }
