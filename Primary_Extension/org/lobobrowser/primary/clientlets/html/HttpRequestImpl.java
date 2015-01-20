@@ -122,6 +122,7 @@ public class HttpRequestImpl implements HttpRequest {
 
 	@Override
 	public void setRequestHeader(String header, String value) {
+		System.out.println("setRequestHeader1");
 		// TODO Auto-generated method stub
 
 	}

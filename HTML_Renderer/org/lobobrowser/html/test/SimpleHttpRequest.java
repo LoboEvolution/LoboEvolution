@@ -43,6 +43,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.ReadyStateChangeListener;
 import org.lobobrowser.html.UserAgentContext;
+import org.lobobrowser.http.Header;
+import org.lobobrowser.http.Request;
 import org.lobobrowser.util.EventDispatch;
 import org.lobobrowser.util.GenericEventListener;
 import org.lobobrowser.util.Urls;
@@ -58,20 +60,20 @@ import org.w3c.dom.Document;
  * @author J. H. S.
  */
 public class SimpleHttpRequest implements HttpRequest {
-	private static final Logger logger = Logger
-			.getLogger(SimpleHttpRequest.class.getName());
+	private static final Logger logger = Logger.getLogger(SimpleHttpRequest.class.getName());
 	private int readyState;
 	private int status;
 	private String statusText;
 	private byte[] responseBytes;
 	private final UserAgentContext context;
 	private final Proxy proxy;
-
+	private Request req = new Request();
 	private boolean isAsync;
-	private java.net.URL requestURL;
+	private URL requestURL;
 	protected String requestMethod;
 	protected String requestUserName;
 	protected String requestPassword;
+	public enum ReadyState {UNINITIALIZED, OPEN, SENT, RECEIVING, LOADED}
 
 	/**
 	 * The <code>URLConnection</code> is assigned to this field while it is
@@ -82,7 +84,7 @@ public class SimpleHttpRequest implements HttpRequest {
 	/**
 	 * Response headers are set in this map after a response is received.
 	 */
-	protected java.util.Map responseHeadersMap;
+	protected Map responseHeadersMap;
 
 	/**
 	 * Response headers are set in this string after a response is received.
@@ -95,7 +97,7 @@ public class SimpleHttpRequest implements HttpRequest {
 		this.proxy = proxy;
 	}
 
-	public synchronized int getReadyState() {
+	public synchronized ReadyState getReadyState() {
 		return this.readyState;
 	}
 
@@ -389,8 +391,95 @@ public class SimpleHttpRequest implements HttpRequest {
 	}
 
 	@Override
-	public void setRequestHeader(String header, String value) {
-		// TODO Auto-generated method stub
-
-	}
+	/**
+     * Specifies a request header for the HTTP request.
+     *
+     * @param header
+     * @param value
+     */
+    public void setRequestHeader(String header, String value) {
+        if (getReadyState() != ReadyState.OPEN) {
+            throw new IllegalStateException("The AsyncHttpRequest must be opened prior to " +
+                    "setting a request header");
+        }
+        
+        //TODO
+        //if the header argument doesn't match the "field-name production", throw an illegal argument exception
+        //if the value argument doesn't match the "field-value production", throw an illegal argument exception
+        if (header == null || value == null) {
+            throw new IllegalArgumentException("Neither the header, nor value, may be null");
+        }
+        
+        //NOTE: The spec says, nothing should be done if the header argument matches:
+        //Accept-Charset, Accept-Encoding, Content-Length, Expect, Date, Host, Keep-Alive,
+        //Referer, TE, Trailer, Transfer-Encoding, Upgrade
+        //The spec says this for security reasons, but I don't understand why? I'll follow
+        //the spec's suggestion until I know more (can always allow more headers, but
+        //restricting them is more painful). Note that Session doesn't impose any such
+        //restrictions, so you can always set "Accept-Encoding" etc on the Session...
+        //except that Session has no way to set these at the moment, except via a Request.
+        if (header.equalsIgnoreCase("Accept-Charset") ||
+            header.equalsIgnoreCase("Accept-Encoding") ||
+            header.equalsIgnoreCase("Content-Length") ||
+            header.equalsIgnoreCase("Expect") ||
+            header.equalsIgnoreCase("Date") ||
+            header.equalsIgnoreCase("Host") ||
+            header.equalsIgnoreCase("Keep-Alive") ||
+            header.equalsIgnoreCase("Referer") ||
+            header.equalsIgnoreCase("TE") ||
+            header.equalsIgnoreCase("Trailer") ||
+            header.equalsIgnoreCase("Transfer-Encoding") ||
+            header.equalsIgnoreCase("Upgrade")) {
+            
+            //ignore the header
+        }
+        
+        if (header.equalsIgnoreCase("Authorization") ||
+            header.equalsIgnoreCase("Content-Base") ||
+            header.equalsIgnoreCase("Content-Location") ||
+            header.equalsIgnoreCase("Content-MD5") ||
+            header.equalsIgnoreCase("Content-Range") ||
+            header.equalsIgnoreCase("Content-Type") ||
+            header.equalsIgnoreCase("Content-Version") ||
+            header.equalsIgnoreCase("Delta-Base") ||
+            header.equalsIgnoreCase("Depth") ||
+            header.equalsIgnoreCase("Destination") ||
+            header.equalsIgnoreCase("ETag") ||
+            header.equalsIgnoreCase("Expect") ||
+            header.equalsIgnoreCase("From") ||
+            header.equalsIgnoreCase("If-Modified-Since") ||
+            header.equalsIgnoreCase("If-Range") ||
+            header.equalsIgnoreCase("If-Unmodified-Since") ||
+            header.equalsIgnoreCase("Max-Forwards") ||
+            header.equalsIgnoreCase("MIME-Version") ||
+            header.equalsIgnoreCase("Overwrite") ||
+            header.equalsIgnoreCase("Proxy-Authorization") ||
+            header.equalsIgnoreCase("SOAPAction") ||
+            header.equalsIgnoreCase("Timeout")) {
+            
+            //replace the current header, if any
+            for (Header h : req.getHeaders()) {
+                if (h.getName().equalsIgnoreCase(header)) {
+                    req.removeHeader(h);
+                    req.setHeader(new Header(header, value));
+                    break;
+                }
+            }
+        } else {
+            //append the value to the header, if one is already specified. Else,
+            //just add it as a new header
+            boolean appended = false;
+            for (Header h : req.getHeaders()) {
+                if (h.getName().equalsIgnoreCase(header)) {
+                    req.removeHeader(h);
+                    req.setHeader(new Header(header, h.getValue() + ", " + value));
+                    appended = true;
+                    break;
+                }
+            }
+            if (!appended) {
+                req.setHeader(new Header(header, value));
+            }
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package org.lobobrowser.html.js;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,20 +15,20 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Document;
+import org.w3c.dom.events.EventException;
+import org.w3c.dom.events.EventListener;
 
 public class XMLHttpRequest extends AbstractScriptableDelegate {
-	// TODO: See reference:
-	// http://www.xulplanet.com/references/objref/XMLHttpRequest.html
 
-	private static final Logger logger = Logger.getLogger(XMLHttpRequest.class
-			.getName());
+	private static final Logger logger = Logger.getLogger(XMLHttpRequest.class.getName());
 	private final HttpRequest request;
 	private final UserAgentContext pcontext;
 	private final Scriptable scope;
-	private final java.net.URL codeSource;
+	private final URL codeSource;
+	private Function onreadystatechange;
+	private boolean listenerAdded;
 
-	public XMLHttpRequest(UserAgentContext pcontext, java.net.URL codeSource,
-			Scriptable scope) {
+	public XMLHttpRequest(UserAgentContext pcontext, java.net.URL codeSource, Scriptable scope) {
 		this.request = pcontext.createHttpRequest();
 		this.pcontext = pcontext;
 		this.scope = scope;
@@ -80,38 +81,88 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	}
 
 	public void open(String method, String url, boolean asyncFlag,
-			String userName, String password) throws java.io.IOException {
+			String userName, String password) throws IOException {
 		request.open(method, this.getFullURL(url), asyncFlag, userName,
 				password);
 	}
 
 	public void open(String method, String url, boolean asyncFlag,
-			String userName) throws java.io.IOException {
+			String userName) throws IOException {
 		request.open(method, this.getFullURL(url), asyncFlag, userName);
 	}
 
 	public void open(String method, String url, boolean asyncFlag)
-			throws java.io.IOException {
+			throws IOException {
 		request.open(method, this.getFullURL(url), asyncFlag);
 	}
-
-	public void open(String method, String url) throws java.io.IOException {
+	
+	public void open(String method, String url) throws IOException {
 		request.open(method, this.getFullURL(url));
 	}
-
-	public void send(String content) throws java.io.IOException {
+	
+	public void send() throws IOException {
+        send((String)null);
+    }
+	
+	public void send(Document data) throws IOException {
+        send(data.getTextContent());
+    }
+	
+	public void send(String content) throws IOException {
 		request.send(content);
 	}
-
-	private Function onreadystatechange;
-	private boolean listenerAdded;
 
 	public Function getOnreadystatechange() {
 		synchronized (this) {
 			return this.onreadystatechange;
 		}
 	}
+	
+	public void addEventListener(String arg0, EventListener arg1, boolean arg2) {
+		// TODO Auto-generated method stub
+		
+	}
 
+	public boolean dispatchEvent(Event arg0) throws EventException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void removeEventListener(String arg0, EventListener arg1,boolean arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public int getTimeout() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void setTimeout(int timeout) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean getWithCredentials() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setWithCredentials(boolean withCredentials) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void overrideMimeType(String mime) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public byte[] getResponseBody() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public void setOnreadystatechange(final Function value) {
 		synchronized (this) {
 			this.onreadystatechange = value;

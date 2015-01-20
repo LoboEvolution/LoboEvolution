@@ -26,6 +26,7 @@ package org.lobobrowser.html;
 import java.awt.Image;
 import java.net.URL;
 
+import org.lobobrowser.html.test.SimpleHttpRequest.ReadyState;
 import org.w3c.dom.Document;
 
 /**
@@ -72,7 +73,7 @@ public interface HttpRequest {
 	 * @return A value corresponding to one of the STATE* constants in this
 	 *         class.
 	 */
-	public int getReadyState();
+	public ReadyState getReadyState();
 
 	/**
 	 * Gets the request response as text.

@@ -26,32 +26,45 @@ package org.lobobrowser.util;
 /**
  * @author J. H. S.
  */
-public class NameValuePair implements java.io.Serializable {
-	private static final long serialVersionUID = 22574500600001010L;
-	public final String name;
-	public final String value;
+public class NameValuePair extends AbstractBean implements Cloneable {
+	public String name;
+	public String value;
 
-	/**
-	 * @param name
-	 * @param value
-	 */
-	public NameValuePair(final String name, final String value) {
-		super();
+	public NameValuePair() {
+	}
+
+	public NameValuePair(String name, String value) {
 		this.name = name;
 		this.value = value;
 	}
 
-	/**
-	 * @return Returns the name.
-	 */
-	public String getName() {
+	public void setName(String name) {
+		String old = getName();
+		this.name = name;
+		firePropertyChange("name", old, name);
+	}
+
+	public final String getName() {
 		return name;
 	}
 
-	/**
-	 * @return Returns the value.
-	 */
-	public String getValue() {
+	public void setValue(String value) {
+		String old = getValue();
+		this.value = value;
+		firePropertyChange("value", old, value);
+	}
+
+	public final String getValue() {
 		return value;
+	}
+
+	@Override
+	public NameValuePair clone() {
+		return new NameValuePair(name, value);
+	}
+
+	@Override
+	public String toString() {
+		return name + "=" + value;
 	}
 }
