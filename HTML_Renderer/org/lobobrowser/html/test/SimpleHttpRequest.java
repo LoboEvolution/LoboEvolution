@@ -97,7 +97,7 @@ public class SimpleHttpRequest implements HttpRequest {
 		this.proxy = proxy;
 	}
 
-	public synchronized ReadyState getReadyState() {
+	public synchronized int getReadyState() {
 		return this.readyState;
 	}
 
@@ -339,8 +339,6 @@ public class SimpleHttpRequest implements HttpRequest {
 					null);
 			java.io.InputStream in = err == null ? c.getInputStream() : err;
 			int contentLength = c.getContentLength();
-			// TODO: In the "interactive" state, some response text is supposed
-			// to be available.
 			this.changeState(HttpRequest.STATE_INTERACTIVE, istatus,
 					istatusText, null);
 			byte[] bytes = IORoutines.load(in, contentLength == -1 ? 4096
@@ -398,26 +396,15 @@ public class SimpleHttpRequest implements HttpRequest {
      * @param value
      */
     public void setRequestHeader(String header, String value) {
-        if (getReadyState() != ReadyState.OPEN) {
+        if (getReadyState() != HttpRequest.STATE_LOADING) {
             throw new IllegalStateException("The AsyncHttpRequest must be opened prior to " +
                     "setting a request header");
         }
         
-        //TODO
-        //if the header argument doesn't match the "field-name production", throw an illegal argument exception
-        //if the value argument doesn't match the "field-value production", throw an illegal argument exception
         if (header == null || value == null) {
             throw new IllegalArgumentException("Neither the header, nor value, may be null");
         }
         
-        //NOTE: The spec says, nothing should be done if the header argument matches:
-        //Accept-Charset, Accept-Encoding, Content-Length, Expect, Date, Host, Keep-Alive,
-        //Referer, TE, Trailer, Transfer-Encoding, Upgrade
-        //The spec says this for security reasons, but I don't understand why? I'll follow
-        //the spec's suggestion until I know more (can always allow more headers, but
-        //restricting them is more painful). Note that Session doesn't impose any such
-        //restrictions, so you can always set "Accept-Encoding" etc on the Session...
-        //except that Session has no way to set these at the moment, except via a Request.
         if (header.equalsIgnoreCase("Accept-Charset") ||
             header.equalsIgnoreCase("Accept-Encoding") ||
             header.equalsIgnoreCase("Content-Length") ||
@@ -431,7 +418,7 @@ public class SimpleHttpRequest implements HttpRequest {
             header.equalsIgnoreCase("Transfer-Encoding") ||
             header.equalsIgnoreCase("Upgrade")) {
             
-            //ignore the header
+            return;
         }
         
         if (header.equalsIgnoreCase("Authorization") ||

@@ -73,7 +73,7 @@ public interface HttpRequest {
 	 * @return A value corresponding to one of the STATE* constants in this
 	 *         class.
 	 */
-	public ReadyState getReadyState();
+	public int getReadyState();
 
 	/**
 	 * Gets the request response as text.
