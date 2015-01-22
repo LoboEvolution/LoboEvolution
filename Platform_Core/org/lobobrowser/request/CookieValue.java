@@ -29,18 +29,21 @@ import java.io.Serializable;
  * @author J. H. S.
  */
 public class CookieValue implements Serializable {
-	private final String value;
-	private final String path;
-	private final Long expirationTime;
+	
 	private static final long serialVersionUID = 225784501000400500L;
+	private String value;
+	private String path;
+	private String domain;
+	private Long expirationTime;
 
 	/**
 	 * 
 	 */
-	public CookieValue(String value, String path, Long expirationTime) {
+	public CookieValue(String value, String path, String domain,Long expirationTime) {
 		this.value = value;
 		this.path = path;
 		this.expirationTime = expirationTime;
+		this.domain = domain;
 	}
 
 	public CookieValue(String value, String path) {
@@ -59,6 +62,10 @@ public class CookieValue implements Serializable {
 
 	public String getPath() {
 		return path;
+	}
+	
+	public String getDomain() {
+		return domain;
 	}
 
 	public boolean isExpired() {

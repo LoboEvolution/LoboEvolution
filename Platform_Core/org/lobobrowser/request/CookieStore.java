@@ -28,6 +28,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -109,10 +110,8 @@ public class CookieStore {
 		while (tok.hasMoreTokens()) {
 			String token = tok.nextToken();
 			int idx = token.indexOf('=');
-			String name = idx == -1 ? token.trim() : token.substring(0, idx)
-					.trim();
-			String value = idx == -1 ? "" : Strings.unquote(token.substring(
-					idx + 1).trim());
+			String name = idx == -1 ? token.trim() : token.substring(0, idx).trim();
+			String value = idx == -1 ? "" : Strings.unquote(token.substring(idx + 1).trim());
 			if (!hasCookieName) {
 				cookieName = name;
 				cookieValue = value;
@@ -141,11 +140,7 @@ public class CookieStore {
 			path = "/";
 		}
 		if (domain != null) {
-			if (expires == null && maxAge == null
-					&& logger.isLoggable(Level.INFO)) {
-				// One of the RFCs says transient cookies should not have
-				// a domain specified, but websites apparently rely on that,
-				// specifically Paypal.
+			if (expires == null && maxAge == null && logger.isLoggable(Level.INFO)) {
 				logger.log(Level.INFO,
 						"saveCookie(): Not rejecting transient cookie that specifies domain '"
 								+ domain + "'.");
@@ -201,19 +196,17 @@ public class CookieStore {
 		this.saveCookie(domain, path, cookieName, expiresDate, cookieValue);
 	}
 
-	public void saveCookie(String domain, String path, String name,
-			java.util.Date expires, String value) {
+	public void saveCookie(String domain, String path, String name, Date expires, String value) {
 		// TODO: SECURITY
 		if (logger.isLoggable(Level.INFO)) {
 			logger.info("saveCookie(): domain=" + domain + ",name=" + name
 					+ ",expires=" + expires + ",value=[" + value + "].");
 		}
 		Long expiresLong = expires == null ? null : expires.getTime();
-		CookieValue cookieValue = new CookieValue(value, path, expiresLong);
+		CookieValue cookieValue = new CookieValue(value, path, domain,expiresLong);
 		synchronized (this) {
 			// Always save a transient cookie. It acts as a cache.
-			Map<String, CookieValue> hostMap = this.transientMapByHost
-					.get(domain);
+			Map<String, CookieValue> hostMap = this.transientMapByHost.get(domain);
 			if (hostMap == null) {
 				hostMap = new HashMap<String, CookieValue>(2);
 				this.transientMapByHost.put(domain, hostMap);
@@ -274,8 +267,7 @@ public class CookieStore {
 						if (path.startsWith(cookieValue.getPath())) {
 							String cookieName = entry.getKey();
 							transientCookieNames.add(cookieName);
-							cookies.add(new Cookie(cookieName, cookieValue
-									.getValue()));
+							cookies.add(new Cookie(cookieName, cookieValue.getValue(),cookieValue.getPath(),cookieValue.getDomain(),cookieValue.getExpires()));
 						} else {
 							if (liflag) {
 								logger.info("getCookiesStrict(): Skipping cookie "
@@ -325,8 +317,7 @@ public class CookieStore {
 										hostMap.put(cookieName, cookieValue);
 									}
 									// Now add cookie to the collection.
-									cookies.add(new Cookie(cookieName,
-											cookieValue.getValue()));
+									cookies.add(new Cookie(cookieName, cookieValue.getValue(),cookieValue.getPath(),cookieValue.getDomain(),cookieValue.getExpires()));
 								} else {
 									if (logger.isLoggable(Level.INFO)) {
 										logger.info("getCookiesStrict(): Skipping cookie "
