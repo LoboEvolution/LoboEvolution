@@ -22,7 +22,6 @@
 package org.lobobrowser.http;
 
 import java.io.StringWriter;
-import java.util.Collection;
 import java.util.Properties;
 
 import javax.xml.transform.Transformer;
@@ -35,11 +34,9 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.lobobrowser.html.domimpl.DOMNodeListImpl;
 import org.lobobrowser.http.XPathFunctionResolverImpl;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * <p>Various utilities for working with XPath. This class uses a static XPath
@@ -71,10 +68,10 @@ public class XPathUtils {
      *         never be null, but may contain no results.
      * @throws IllegalArgumentException if the expression does not parse
      */
-    public synchronized static NodeList getElements(String expression, Node node) throws XPathExpressionException {
+    /*public synchronized static NodeList getElements(String expression, Node node) throws XPathExpressionException {
         NodeList nodes = new DOMNodeListImpl((Collection)xpath.evaluate(expression, node, XPathConstants.NODESET));
         return nodes;
-    }
+    }*/
 
     /**
      * Returns a Node matching the given expression. If more than one node matches,
@@ -120,10 +117,10 @@ public class XPathUtils {
      *         never be null, but may contain no results.
      * @throws IllegalArgumentException if the expression does not parse
      */
-    public synchronized static NodeList getElements(XPathExpression expression, Node node) throws XPathExpressionException {
+    /*public synchronized static NodeList getElements(XPathExpression expression, Node node) throws XPathExpressionException {
         NodeList nodes = new DOMNodeListImpl((Collection)expression.evaluate(node, XPathConstants.NODESET));
         return nodes;
-    }
+    }*/
 
     /**
      * Returns a Node matching the given expression. If more than one node matches,

@@ -26,5 +26,5 @@ package org.lobobrowser.http;
  * @author rbair
  */
 public enum Method {
-    GET, PUT, POST, DELETE, HEAD, OPTIONS, TRACE
+	GET, PUT, POST, DELETE, HEAD, OPTIONS, TRACE
 }
