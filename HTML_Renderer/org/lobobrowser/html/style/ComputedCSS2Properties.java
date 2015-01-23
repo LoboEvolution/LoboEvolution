@@ -26,12 +26,12 @@ public class ComputedCSS2Properties extends AbstractCSS2Properties {
 	}
 
 	protected void setPropertyValueLC(String lowerCaseName, String value) {
-		throw new java.lang.IllegalAccessError(
+		throw new IllegalAccessError(
 				"Style properties cannot be set in this instance.");
 	}
 
 	protected void checkSetProperty() {
-		throw new java.lang.IllegalAccessError(
+		throw new IllegalAccessError(
 				"Style properties cannot be set in this instance.");
 	}
 

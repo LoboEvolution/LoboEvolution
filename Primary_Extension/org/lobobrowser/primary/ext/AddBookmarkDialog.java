@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
+import java.net.URL;
 
 import javax.swing.AbstractAction;
 import javax.swing.Box;
@@ -47,7 +48,7 @@ public class AddBookmarkDialog extends JDialog {
 	private final FormField descriptionField = new FormField(FieldType.TEXT,
 			"Description:");
 	private final FormField tagsField = new FormField(FieldType.TEXT, "Tags:");
-	private final java.net.URL url;
+	private final URL url;
 
 	public AddBookmarkDialog(Frame owner, boolean modal,
 			BookmarkInfo existingInfo) throws HeadlessException {

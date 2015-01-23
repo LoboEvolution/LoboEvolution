@@ -24,6 +24,7 @@
 package org.lobobrowser.html.dombl;
 
 import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.lobobrowser.html.style.RenderState;
 
@@ -35,7 +36,7 @@ public interface ModelNode {
 	// There shouldn't be any references to GUI components here.
 	// Events are processed by controller in renderer package.
 
-	public java.net.URL getFullURL(String spec) throws MalformedURLException;
+	public URL getFullURL(String spec) throws MalformedURLException;
 
 	public void warn(String message, Throwable err);
 

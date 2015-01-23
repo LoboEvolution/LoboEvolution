@@ -51,7 +51,7 @@ public class Urls {
 	}
 
 	/** Whether the URL refers to a resource in the local file system. */
-	public static boolean isLocal(java.net.URL url) {
+	public static boolean isLocal(URL url) {
 		if (isLocalFile(url)) {
 			return true;
 		}
@@ -63,7 +63,7 @@ public class Urls {
 			try {
 				URL subUrl = new URL(subUrlString);
 				return isLocal(subUrl);
-			} catch (java.net.MalformedURLException mfu) {
+			} catch (MalformedURLException mfu) {
 				return false;
 			}
 		} else {
@@ -72,12 +72,12 @@ public class Urls {
 	}
 
 	/** Whether the URL is a file in the local file system. */
-	public static boolean isLocalFile(java.net.URL url) {
+	public static boolean isLocalFile(URL url) {
 		String scheme = url.getProtocol();
 		return "file".equalsIgnoreCase(scheme) && !hasHost(url);
 	}
 
-	public static boolean hasHost(java.net.URL url) {
+	public static boolean hasHost(URL url) {
 		String host = url.getHost();
 		return host != null && !"".equals(host);
 	}
@@ -86,7 +86,7 @@ public class Urls {
 	 * Creates an absolute URL in a manner equivalent to major browsers.
 	 */
 	public static URL createURL(URL baseUrl, String relativeUrl)
-			throws java.net.MalformedURLException {
+			throws MalformedURLException {
 		return new URL(baseUrl, relativeUrl);
 	}
 

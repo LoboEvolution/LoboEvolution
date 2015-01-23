@@ -24,7 +24,7 @@ public class TimedEntry implements Comparable<Object>, java.io.Serializable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 * @see java.lang.Comparable#compareTo(Object)
 	 */
 	public int compareTo(Object arg0) {
 		if (this.equals(arg0)) {

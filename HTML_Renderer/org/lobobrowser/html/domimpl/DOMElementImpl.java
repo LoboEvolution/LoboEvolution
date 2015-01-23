@@ -522,7 +522,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#setNodeValue(java.lang.String)
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#setNodeValue(String)
 	 */
 	public void setNodeValue(String nodeValue) throws DOMException {
 		// nop

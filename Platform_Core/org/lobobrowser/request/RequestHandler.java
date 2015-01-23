@@ -58,7 +58,7 @@ public interface RequestHandler {
 	public boolean handleException(ClientletResponse response,
 			Throwable exception) throws ClientletException;
 
-	public void handleProgress(ProgressType progressType, java.net.URL url,
+	public void handleProgress(ProgressType progressType, URL url,
 			String method, int value, int max);
 
 	public void cancel();

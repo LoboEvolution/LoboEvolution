@@ -200,7 +200,7 @@ public class CSSUtilities {
 			try {
 				request.open("GET", scriptURI, false);
 				request.send(null);
-			} catch (java.io.IOException thrown) {
+			} catch (IOException thrown) {
 				logger.log(Level.WARNING, "parse()", thrown);
 			}
 
@@ -211,7 +211,7 @@ public class CSSUtilities {
 					try {
 						request.open("GET", scriptURI, false);
 						request.send(null);
-					} catch (java.io.IOException thrown) {
+					} catch (IOException thrown) {
 						logger.log(Level.WARNING, "parse()", thrown);
 					}
 					return null;

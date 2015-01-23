@@ -24,6 +24,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -376,7 +378,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	}
 
 	public void documentAccessed(NavigatorWindowEvent event) {
-		java.net.URL url = event.getUrl();
+		URL url = event.getUrl();
 		if ("GET".equals(event.getMethod())
 				&& isHistoryRequest(event.getRequestType())) {
 			NavigationHistory.getInstance().addAsRecent(url, null);
@@ -388,7 +390,7 @@ public class ComponentSource implements NavigatorWindowListener {
 			logger.info("documentRendering(): event=" + event);
 		}
 		if (this.window.getTopFrame() == event.getNavigatorFrame()) {
-			java.net.URL url = event.getUrl();
+			URL url = event.getUrl();
 			this.addressField.setUrl(url);
 			this.clearState();
 			this.actionPool.updateEnabling();
@@ -398,7 +400,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	public void setNavigationEntry(NavigationEntry entry) {
 		if (entry != null) {
 			if (this.window.getTopFrame() == entry.getNavigatorFrame()) {
-				java.net.URL url = entry.getUrl();
+				URL url = entry.getUrl();
 				this.addressField.setUrl(url);
 				this.clearState();
 				this.actionPool.updateEnabling();
@@ -468,13 +470,13 @@ public class ComponentSource implements NavigatorWindowListener {
 			this.window.stop();
 			this.clearState();
 			this.window.getTopFrame().navigate(roughLocation, requestType);
-		} catch (java.net.MalformedURLException mfu) {
+		} catch (MalformedURLException mfu) {
 			ExtensionImpl.showError(this.window.getTopFrame(), null,
-					new java.net.MalformedURLException(roughLocation));
+					new MalformedURLException(roughLocation));
 		}
 	}
 
-	public void navigate(java.net.URL url) {
+	public void navigate(URL url) {
 		this.window.stop();
 		this.clearState();
 		this.window.getTopFrame().navigate(url);
@@ -517,7 +519,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		for (HistoryEntry<BookmarkInfo> hentry : historyEntries) {
 			BookmarkInfo binfo = hentry.getItemInfo();
 			String text = binfo.getTitle();
-			java.net.URL url = binfo.getUrl();
+			URL url = binfo.getUrl();
 			String urlText = url.toExternalForm();
 			if (text == null || text.length() == 0) {
 				text = urlText;
@@ -547,7 +549,7 @@ public class ComponentSource implements NavigatorWindowListener {
 						PREFERRED_MAX_MENU_SIZE * PREFERRED_MAX_MENU_SIZE);
 		Map<String, JMenu> tagMenus = new HashMap<String, JMenu>();
 		for (BookmarkInfo binfo : bookmarkInfoList) {
-			java.net.URL url = binfo.getUrl();
+			URL url = binfo.getUrl();
 			String urlText = url.toExternalForm();
 			String[] tags = binfo.getTags();
 			if (tags != null) {
@@ -594,7 +596,7 @@ public class ComponentSource implements NavigatorWindowListener {
 			String method = entry.getMethod();
 			if ("GET".equals(method)) {
 				String title = entry.getTitle();
-				java.net.URL url = entry.getUrl();
+				URL url = entry.getUrl();
 				String text = title == null || title.length() == 0 ? url
 						.toExternalForm() : title;
 				Action action = this.actionPool.createGoToAction(entry);
@@ -614,7 +616,7 @@ public class ComponentSource implements NavigatorWindowListener {
 			String method = entry.getMethod();
 			if ("GET".equals(method)) {
 				String title = entry.getTitle();
-				java.net.URL url = entry.getUrl();
+				URL url = entry.getUrl();
 				String text = title == null || title.length() == 0 ? url
 						.toExternalForm() : title;
 				Action action = this.actionPool.createGoToAction(entry);
@@ -637,7 +639,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		for (HostEntry entry : hostEntries) {
 			String urlText = "http://" + entry.host;
 			try {
-				java.net.URL url = new java.net.URL(urlText);
+				URL url = new URL(urlText);
 				long elapsed = System.currentTimeMillis() - entry.timestamp;
 				String menuText = entry.host + " ("
 						+ Timing.getElapsedText(elapsed) + " ago)";
@@ -645,7 +647,7 @@ public class ComponentSource implements NavigatorWindowListener {
 				JMenuItem menuItem = menuItem(menuText, action);
 				menuItem.setToolTipText(url.toExternalForm());
 				recentHostsMenu.add(menuItem);
-			} catch (java.net.MalformedURLException mfu) {
+			} catch (MalformedURLException mfu) {
 				logger.log(Level.WARNING, "populateRecentHosts(): Bad URL="
 						+ urlText, mfu);
 			}
@@ -693,7 +695,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		if (searchEngine != null) {
 			try {
 				this.navigate(searchEngine.getURL(this.getAddressBarText()));
-			} catch (java.net.MalformedURLException mfu) {
+			} catch (MalformedURLException mfu) {
 				window.getTopFrame().alert("Malformed search URL.");
 			}
 		}

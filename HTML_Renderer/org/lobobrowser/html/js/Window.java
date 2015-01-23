@@ -27,6 +27,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -451,14 +453,14 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	public Window open(String relativeUrl, String windowName, String windowFeatures, boolean replace) {
 		HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
-			java.net.URL url;
+			URL url;
 			Object document = this.document;
 			if (document instanceof HTMLDocumentImpl) {
 				url = ((HTMLDocumentImpl) document).getFullURL(relativeUrl);
 			} else {
 				try {
-					url = new java.net.URL(relativeUrl);
-				} catch (java.net.MalformedURLException mfu) {
+					url = new URL(relativeUrl);
+				} catch (MalformedURLException mfu) {
 					throw new IllegalArgumentException("Malformed URI: " + relativeUrl);
 				}
 			}
@@ -746,7 +748,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		if (element instanceof HTMLElementImpl) {
 			return ((HTMLElementImpl) element).getComputedStyle(pseudoElement);
 		} else {
-			throw new java.lang.IllegalArgumentException(
+			throw new IllegalArgumentException(
 					"Element implementation unknown: " + element);
 		}
 	}

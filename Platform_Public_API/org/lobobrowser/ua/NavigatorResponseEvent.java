@@ -22,6 +22,8 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.ua;
 
+import java.net.URL;
+
 import org.lobobrowser.clientlet.ClientletResponse;
 
 /**
@@ -43,7 +45,7 @@ public class NavigatorResponseEvent extends NavigatorEvent {
 		return response;
 	}
 
-	public java.net.URL getUrl() {
+	public URL getUrl() {
 		return this.response == null ? null : this.response.getResponseURL();
 	}
 

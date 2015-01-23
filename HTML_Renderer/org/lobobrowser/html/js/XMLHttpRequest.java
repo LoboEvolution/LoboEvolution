@@ -1,6 +1,7 @@
 package org.lobobrowser.html.js;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +29,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	private Function onreadystatechange;
 	private boolean listenerAdded;
 
-	public XMLHttpRequest(UserAgentContext pcontext, java.net.URL codeSource, Scriptable scope) {
+	public XMLHttpRequest(UserAgentContext pcontext, URL codeSource, Scriptable scope) {
 		this.request = pcontext.createHttpRequest();
 		this.pcontext = pcontext;
 		this.scope = scope;
@@ -76,7 +77,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	}
 
 	private URL getFullURL(String relativeUrl)
-			throws java.net.MalformedURLException {
+			throws MalformedURLException {
 		return Urls.createURL(this.codeSource, relativeUrl);
 	}
 

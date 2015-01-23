@@ -394,66 +394,6 @@ class RLine extends BaseRCollection {
 		this.width = this.xoffset = newX;
 	}
 
-	// /**
-	// * Positions line elements vertically.
-	// */
-	// public final void positionVertically() {
-	// ArrayList renderables = this.renderables;
-	//
-	// // Find word maximum metrics.
-	// int maxDescent = 0;
-	// int maxAscentPlusLeading = 0;
-	// int maxWordHeight = 0;
-	// for(Iterator i = renderables.iterator(); i.hasNext(); ) {
-	// Renderable r = (Renderable) i.next();
-	// if(r instanceof RWord) {
-	// RWord rword = (RWord) r;
-	// int descent = rword.descent;
-	// if(descent > maxDescent) {
-	// maxDescent = descent;
-	// }
-	// int ascentPlusLeading = rword.ascentPlusLeading;
-	// if(ascentPlusLeading > maxAscentPlusLeading) {
-	// maxAscentPlusLeading = ascentPlusLeading;
-	// }
-	// if(rword.height > maxWordHeight) {
-	// maxWordHeight = rword.height;
-	// }
-	// }
-	// }
-	//
-	// // Determine proper baseline
-	// int lineHeight = this.height;
-	// int baseLine = lineHeight - maxDescent;
-	// for(Iterator i = renderables.iterator(); i.hasNext(); ) {
-	// Renderable r = (Renderable) i.next();
-	// if(r instanceof RElement) {
-	// RElement relement = (RElement) r;
-	// switch(relement.getVAlign()) {
-	// case RElement.VALIGN_ABSBOTTOM:
-	// //TODO
-	// break;
-	// case RElement.VALIGN_ABSMIDDLE:
-	// int midWord = baseLine + maxDescent - maxWordHeight / 2;
-	// int halfElementHeight = relement.getHeight() / 2;
-	// if(midWord + halfElementHeight > lineHeight) {
-	// // Change baseLine
-	// midWord = lineHeight - halfElementHeight;
-	// baseLine = midWord + maxWordHeight / 2 - maxDescent;
-	// }
-	// else if(midWord - halfElementHeight < 0) {
-	// midWord = halfElementHeight;
-	// baseLine = midWord + maxWordHeight / 2 - maxDescent;
-	// }
-	// else {
-	// relement.setY(midWord - halfElementHeight);
-	// }
-	// break;
-	// }
-	// }
-	// }
-	//
-	// }
 
 	/**
 	 * Rearrange line elements based on a new line height and alignment

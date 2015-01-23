@@ -165,7 +165,7 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 			} finally {
 				in.close();
 			}
-		} catch (java.io.FileNotFoundException fnf) {
+		} catch (FileNotFoundException fnf) {
 			return this.updateSizeFile();
 		}
 	}
@@ -439,7 +439,7 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.io.ManagedStore#getManagedFile(java.lang.String)
+	 * @see org.xamjwg.io.ManagedStore#getManagedFile(String)
 	 */
 	public ManagedFile getManagedFile(String path) throws IOException {
 		return new ManagedFileImpl(path);

@@ -115,7 +115,7 @@ public class RedirectRequestHandler implements RequestHandler {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * net.sourceforge.xamj.http.RequestHandler#handleException(java.lang.Exception
+	 * net.sourceforge.xamj.http.RequestHandler#handleException(Exception
 	 * )
 	 */
 	public boolean handleException(ClientletResponse response,
@@ -127,7 +127,7 @@ public class RedirectRequestHandler implements RequestHandler {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * net.sourceforge.xamj.http.RequestHandler#handleProgress(java.net.URL,
+	 * net.sourceforge.xamj.http.RequestHandler#handleProgress(URL,
 	 * int, int)
 	 */
 	public void handleProgress(ProgressType progressType, URL url,

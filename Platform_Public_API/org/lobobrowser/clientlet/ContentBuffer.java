@@ -22,11 +22,13 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.clientlet;
 
+import java.net.URL;
+
 /**
  * Undocumented.
  * 
  * @author J. H. S.
  */
 public interface ContentBuffer {
-	public java.net.URL getURL();
+	public URL getURL();
 }

@@ -23,6 +23,8 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.lobobrowser.ua;
 
 import java.awt.Component;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 
 import org.lobobrowser.clientlet.ComponentContent;
@@ -37,10 +39,10 @@ public interface NavigatorFrame {
 	 * 
 	 * @param urlOrPath
 	 *            The absolute URL or file path to open.
-	 * @throws java.net.MalformedURLException
+	 * @throws MalformedURLException
 	 */
 	public NavigatorFrame open(String urlOrPath)
-			throws java.net.MalformedURLException;
+			throws MalformedURLException;
 
 	/**
 	 * Opens a URL in a separate window.
@@ -48,7 +50,7 @@ public interface NavigatorFrame {
 	 * @param url
 	 *            The URL to open.
 	 */
-	public NavigatorFrame open(java.net.URL url);
+	public NavigatorFrame open(URL url);
 
 	/**
 	 * Opens a URL in a separate window using the properties provided.
@@ -58,10 +60,10 @@ public interface NavigatorFrame {
 	 * @param windowProperties
 	 *            Window properties, following Javascript Window.open()
 	 *            conventions.
-	 * @throws java.net.MalformedURLException
+	 * @throws MalformedURLException
 	 */
-	public NavigatorFrame open(java.net.URL url, Properties windowProperties)
-			throws java.net.MalformedURLException;
+	public NavigatorFrame open(URL url, Properties windowProperties)
+			throws MalformedURLException;
 
 	/**
 	 * Opens a URL in a separate window.
@@ -76,7 +78,7 @@ public interface NavigatorFrame {
 	 * @param pinfo
 	 *            The URL parameter information.
 	 */
-	public NavigatorFrame open(java.net.URL url, String method,
+	public NavigatorFrame open(URL url, String method,
 			ParameterInfo pinfo, String windowId, Properties windowProperties);
 
 	/**
@@ -89,7 +91,7 @@ public interface NavigatorFrame {
 	 * @param pinfo
 	 *            The URL parameter information.
 	 */
-	public NavigatorFrame open(java.net.URL url, String method,
+	public NavigatorFrame open(URL url, String method,
 			ParameterInfo pinfo);
 
 	/**
@@ -99,7 +101,7 @@ public interface NavigatorFrame {
 	 *            An <i>absolute</i> URL or file path.
 	 */
 	public void navigate(String urlOrPath)
-			throws java.net.MalformedURLException;
+			throws MalformedURLException;
 
 	/**
 	 * Navigates to a URL in the current frame.
@@ -110,7 +112,7 @@ public interface NavigatorFrame {
 	 *            The request type.
 	 */
 	public void navigate(String urlOrPath, RequestType requestType)
-			throws java.net.MalformedURLException;
+			throws MalformedURLException;
 
 	/**
 	 * Navigates to a URL in the current frame.
@@ -118,7 +120,7 @@ public interface NavigatorFrame {
 	 * @param url
 	 *            An absolute URL.
 	 */
-	public void navigate(java.net.URL url);
+	public void navigate(URL url);
 
 	/**
 	 * Navigates to a URL in the current frame.
@@ -128,7 +130,7 @@ public interface NavigatorFrame {
 	 * @param requestType
 	 *            The request type.
 	 */
-	public void navigate(java.net.URL url, RequestType requestType);
+	public void navigate(URL url, RequestType requestType);
 
 	/**
 	 * Navigates to a URL in the current frame.
@@ -144,7 +146,7 @@ public interface NavigatorFrame {
 	 * @param requestType
 	 *            The request type.
 	 */
-	public void navigate(java.net.URL url, String method,
+	public void navigate(URL url, String method,
 			ParameterInfo paramInfo, TargetType targetType,
 			RequestType requestType);
 
@@ -165,13 +167,13 @@ public interface NavigatorFrame {
 	 * @param originatingFrame
 	 *            The frame where the request originated.
 	 */
-	public void navigate(java.net.URL url, String method,
+	public void navigate(URL url, String method,
 			ParameterInfo paramInfo, TargetType targetType,
 			RequestType requestType, NavigatorFrame originatingFrame);
 
 	/**
 	 * Similar to
-	 * {@link #navigate(java.net.URL, String, ParameterInfo, TargetType, RequestType)}
+	 * {@link #navigate(URL, String, ParameterInfo, TargetType, RequestType)}
 	 * , except this method should be called when navigation is triggered by a
 	 * user click.
 	 * 
@@ -185,7 +187,7 @@ public interface NavigatorFrame {
 	 *            <code>linkObject</code> might be of type
 	 *            <code>org.w3c.dom.html2.HTMLElement</code>.
 	 */
-	public void linkClicked(java.net.URL url, TargetType targetType,
+	public void linkClicked(URL url, TargetType targetType,
 			Object linkObject);
 
 	/**

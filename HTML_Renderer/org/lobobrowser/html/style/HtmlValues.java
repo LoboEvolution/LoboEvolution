@@ -25,6 +25,8 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -621,7 +623,7 @@ public class HtmlValues {
 		}
 	}
 
-	public static java.net.URL getURIFromStyleValue(String fullURLStyleValue) {
+	public static URL getURIFromStyleValue(String fullURLStyleValue) {
 		String start = "url(";
 		if (!fullURLStyleValue.toLowerCase().startsWith(start)) {
 			return null;
@@ -635,7 +637,7 @@ public class HtmlValues {
 		String tentativeUri = unquoteAndUnescape(quotedUri);
 		try {
 			return Urls.createURL(null, tentativeUri);
-		} catch (java.net.MalformedURLException mfu) {
+		} catch (MalformedURLException mfu) {
 			logger.log(Level.WARNING, "Unable to create URL for URI=["
 					+ tentativeUri + "].", mfu);
 			return null;

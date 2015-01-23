@@ -25,6 +25,8 @@ package org.lobobrowser.clientlet;
 import java.awt.Component;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.lobobrowser.io.ManagedStore;
 import org.lobobrowser.ua.NavigatorFrame;
@@ -142,7 +144,7 @@ public interface ClientletContext {
 	 *            The target URI.
 	 * @see NavigatorFrame#navigate(String)
 	 */
-	public void navigate(String uri) throws java.net.MalformedURLException;
+	public void navigate(String uri) throws MalformedURLException;
 
 	/**
 	 * For documents requested in order to open a new window, this method may be
@@ -197,7 +199,7 @@ public interface ClientletContext {
 	 * @see NavigatorFrame#setProgressEvent(NavigatorProgressEvent)
 	 */
 	public void setProgressEvent(org.lobobrowser.ua.ProgressType progressType,
-			int value, int max, java.net.URL url);
+			int value, int max, URL url);
 
 	/**
 	 * Sets the current progress state.

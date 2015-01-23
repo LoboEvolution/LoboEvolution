@@ -21,6 +21,7 @@
 package org.lobobrowser.util.io;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class NetRoutines {
 	public static boolean isLocalAddress(String host) {
@@ -29,7 +30,7 @@ public class NetRoutines {
 			return address.isAnyLocalAddress() || address.isLinkLocalAddress()
 					|| address.isLoopbackAddress()
 					|| address.isSiteLocalAddress();
-		} catch (java.net.UnknownHostException uhe) {
+		} catch (UnknownHostException uhe) {
 			return false;
 		}
 	}

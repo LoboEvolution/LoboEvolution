@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.settings;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -82,7 +83,7 @@ public class GeneralSettings implements java.io.Serializable {
 	public void save() {
 		try {
 			this.saveChecked();
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			logger.log(Level.WARNING, "save(): Unable to save settings", ioe);
 		}
 	}
@@ -94,7 +95,7 @@ public class GeneralSettings implements java.io.Serializable {
 		this.mozVersion = "32.0";
 	}
 
-	public void saveChecked() throws java.io.IOException {
+	public void saveChecked() throws IOException {
 		StorageManager.getInstance().saveSettings(
 				this.getClass().getSimpleName(), this);
 	}

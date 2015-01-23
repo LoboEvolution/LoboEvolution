@@ -23,20 +23,24 @@
  */
 package org.lobobrowser.security;
 
+import java.net.URL;
 import java.security.BasicPermission;
 
 /**
  * Permission for restricted store access.
  */
 public class StoreHostPermission extends BasicPermission {
+	
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * @param name
 	 */
-	private StoreHostPermission(String name) {
+	public StoreHostPermission(String name) {
 		super(name);
 	}
 
-	public static StoreHostPermission forURL(java.net.URL url) {
+	public static StoreHostPermission forURL(URL url) {
 		if (LocalSecurityPolicy.isLocal(url)) {
 			return new StoreHostPermission("*");
 		} else {

@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.util;
 
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -62,7 +63,7 @@ public class History implements java.io.Serializable {
 		this.commonEntriesCapacity = commonEntriesCapacity;
 	}
 
-	private void readObject(java.io.ObjectInputStream in)
+	private void readObject(ObjectInputStream in)
 			throws ClassNotFoundException, java.io.IOException {
 		this.historySequence = new ArrayList<String>();
 		this.sequenceIndex = -1;

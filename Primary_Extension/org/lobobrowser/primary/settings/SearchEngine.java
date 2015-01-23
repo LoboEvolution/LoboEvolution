@@ -21,6 +21,10 @@
 package org.lobobrowser.primary.settings;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 
 public class SearchEngine implements Serializable {
 	private static final long serialVersionUID = 225745010000001000L;
@@ -38,15 +42,14 @@ public class SearchEngine implements Serializable {
 		this.queryParameter = queryParameter;
 	}
 
-	public java.net.URL getURL(String query)
-			throws java.net.MalformedURLException {
+	public URL getURL(String query) throws MalformedURLException {
 		String baseUrl = this.baseUrl;
 		int qmIdx = baseUrl.indexOf('?');
 		char join = qmIdx == -1 ? '?' : '&';
 		try {
-			return new java.net.URL(baseUrl + join + this.queryParameter + "="
-					+ java.net.URLEncoder.encode(query, "UTF-8"));
-		} catch (java.io.UnsupportedEncodingException uee) {
+			return new URL(baseUrl + join + this.queryParameter + "="
+					+ URLEncoder.encode(query, "UTF-8"));
+		} catch (UnsupportedEncodingException uee) {
 			throw new IllegalStateException("not expected", uee);
 		}
 	}

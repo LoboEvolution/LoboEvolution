@@ -28,6 +28,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.SocketPermission;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
@@ -128,7 +129,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	private final ArrayList<DocumentNotificationListener> documentNotificationListeners = new ArrayList<DocumentNotificationListener>(1);
 	private final ImageEvent BLANK_IMAGE_EVENT = new ImageEvent(this, null);
 
-	private java.net.URL documentURL;
+	private URL documentURL;
 	private WritableLineReader reader;
 	private DocumentType doctype;
 	private HTMLElement body;
@@ -177,19 +178,19 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		this.reader = reader;
 		this.documentURI = documentURI;
 		try {
-			java.net.URL docURL = new java.net.URL(documentURI);
+			URL docURL = new URL(documentURI);
 			SecurityManager sm = System.getSecurityManager();
 			if (sm != null) {
 				// Do not allow creation of HTMLDocumentImpl if there's
 				// no permission to connect to the host of the URL.
 				// This is so that cookies cannot be written arbitrarily
 				// with setCookie() method.
-				sm.checkPermission(new java.net.SocketPermission(docURL
+				sm.checkPermission(new SocketPermission(docURL
 						.getHost(), "connect"));
 			}
 			this.documentURL = docURL;
 			this.domain = docURL.getHost();
-		} catch (java.net.MalformedURLException mfu) {
+		} catch (MalformedURLException mfu) {
 			logger.warning("HTMLDocumentImpl(): Document URI [" + documentURI
 					+ "] is malformed.");
 		}
@@ -327,7 +328,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 			if (this.reader instanceof LocalWritableLineReader) {
 				try {
 					this.reader.close();
-				} catch (java.io.IOException ioe) {
+				} catch (IOException ioe) {
 					// ignore
 				}
 				this.reader = null;
@@ -614,7 +615,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#setNodeValue(java.lang.String)
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#setNodeValue(String)
 	 */
 	public void setNodeValue(String nodeValue) throws DOMException {
 		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR,
@@ -1024,7 +1025,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 					try {
 						httpRequest.open("GET", url, true);
 						httpRequest.send(null);
-					} catch (java.io.IOException thrown) {
+					} catch (IOException thrown) {
 						logger.log(Level.WARNING, "loadImage()", thrown);
 					}
 				} else {
@@ -1036,7 +1037,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 									try {
 										httpRequest.open("GET", url, true);
 										httpRequest.send(null);
-									} catch (java.io.IOException thrown) {
+									} catch (IOException thrown) {
 										logger.log(Level.WARNING,
 												"loadImage()", thrown);
 									}
@@ -1338,7 +1339,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 
 		String result = "";
 		try {
-			URL docURL = new java.net.URL(documentURI);
+			URL docURL = new URL(documentURI);
 			URLConnection connection = docURL.openConnection();
 			result = connection.getHeaderField("Last-Modified");
 		} catch (Exception e) {

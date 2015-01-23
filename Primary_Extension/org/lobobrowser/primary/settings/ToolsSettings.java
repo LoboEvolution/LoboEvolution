@@ -1,6 +1,7 @@
 package org.lobobrowser.primary.settings;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,8 +19,8 @@ public class ToolsSettings implements Serializable {
 
 	private Collection<SearchEngine> searchEngines;
 	private SearchEngine selectedSearchEngine;
-	private java.io.File downloadDirectory;
-	private java.io.File openFileDirectory;
+	private File downloadDirectory;
+	private File openFileDirectory;
 
 	static {
 		ToolsSettings ins = null;
@@ -107,7 +108,7 @@ public class ToolsSettings implements Serializable {
 		try {
 			StorageManager.getInstance().saveSettings(
 					this.getClass().getSimpleName(), this);
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			logger.log(Level.WARNING, "Unable to save settings: "
 					+ this.getClass().getSimpleName() + ".", ioe);
 		}
@@ -129,19 +130,19 @@ public class ToolsSettings implements Serializable {
 		this.selectedSearchEngine = selectedSearchEngine;
 	}
 
-	public java.io.File getDownloadDirectory() {
+	public File getDownloadDirectory() {
 		return downloadDirectory;
 	}
 
-	public void setDownloadDirectory(java.io.File downloadDirectory) {
+	public void setDownloadDirectory(File downloadDirectory) {
 		this.downloadDirectory = downloadDirectory;
 	}
 
-	public java.io.File getOpenFileDirectory() {
+	public File getOpenFileDirectory() {
 		return openFileDirectory;
 	}
 
-	public void setOpenFileDirectory(java.io.File openFileDirectory) {
+	public void setOpenFileDirectory(File openFileDirectory) {
 		this.openFileDirectory = openFileDirectory;
 	}
 }

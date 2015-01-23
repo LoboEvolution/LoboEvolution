@@ -24,6 +24,14 @@ import java.awt.Component;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.lang.reflect.InvocationTargetException;
+import java.net.ConnectException;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -137,7 +145,7 @@ public class ExtensionImpl implements NavigatorExtension {
 	}
 
 	static String getErrorHtml(ClientletResponse response, Throwable exception) {
-		java.net.URL url = response == null ? null : response.getResponseURL();
+		URL url = response == null ? null : response.getResponseURL();
 		String method = response == null ? null : response
 				.getLastRequestMethod();
 		Writer swriter = new StringWriter();
@@ -189,7 +197,7 @@ public class ExtensionImpl implements NavigatorExtension {
 		return swriter.toString();
 	}
 
-	private static String getErrorUrlText(java.net.URL url, String method) {
+	private static String getErrorUrlText(URL url, String method) {
 		StringBuffer buf = new StringBuffer();
 		boolean isGet = "GET".equals(method);
 		if (isGet) {
@@ -202,7 +210,7 @@ public class ExtensionImpl implements NavigatorExtension {
 		return buf.toString();
 	}
 
-	private static String getExceptionMeaning(java.net.URL url,
+	private static String getExceptionMeaning(URL url,
 			Throwable exception) {
 		if (exception instanceof org.lobobrowser.clientlet.JavaVersionException) {
 			JavaVersionException jve = (JavaVersionException) exception;
@@ -230,32 +238,32 @@ public class ExtensionImpl implements NavigatorExtension {
 					// oops
 					cause = exception;
 				}
-			} else if (exception instanceof java.lang.reflect.InvocationTargetException) {
-				cause = ((java.lang.reflect.InvocationTargetException) exception)
+			} else if (exception instanceof InvocationTargetException) {
+				cause = ((InvocationTargetException) exception)
 						.getCause();
 			}
-			if (cause instanceof java.net.MalformedURLException) {
+			if (cause instanceof MalformedURLException) {
 				return "A URL or URI was not formatted correctly.";
-			} else if (cause instanceof java.net.UnknownHostException) {
+			} else if (cause instanceof UnknownHostException) {
 				return "The host named '"
-						+ ((java.net.UnknownHostException) cause).getMessage()
+						+ ((UnknownHostException) cause).getMessage()
 						+ "' could not be found by the Domain Name Service (DNS).";
-			} else if (cause instanceof java.lang.SecurityException) {
+			} else if (cause instanceof SecurityException) {
 				return "An attempted security violation has been detected and stopped.";
-			} else if (cause instanceof java.net.ProtocolException) {
+			} else if (cause instanceof ProtocolException) {
 				return "Indicates there is an error in the underlying communications protocol.";
-			} else if (cause instanceof java.net.SocketTimeoutException) {
+			} else if (cause instanceof SocketTimeoutException) {
 				return "It means the server accepted the connection, but failed to respond after a long period of time. This is usually indicative of a server problem.";
-			} else if (cause instanceof java.net.ConnectException) {
+			} else if (cause instanceof ConnectException) {
 				return "It means a connection to the server could not be obtained. Typically, the server has refused the connection, i.e. it's not accepting connections on a given port.";
-			} else if (cause instanceof java.net.SocketException) {
+			} else if (cause instanceof SocketException) {
 				return "Indicates there was an error in the underlying protocol, e.g. TCP/IP.";
 			} else if (cause instanceof java.io.IOException) {
 				return "Indicates an Input/Output error has occurred. This is typically due "
 						+ "to a network connection that cannot be establised or one that has failed, "
 						+ "but it can also mean that a file could not be accessed or found.";
-			} else if (cause instanceof java.lang.NullPointerException
-					|| cause instanceof java.lang.ClassCastException) {
+			} else if (cause instanceof NullPointerException
+					|| cause instanceof ClassCastException) {
 				return "This is a common Java exception that generally occurs due to a programming error. "
 						+ "The stack trace will show if the error is in browser code, an extension or the document itself.";
 			} else if (cause instanceof ClientletException) {

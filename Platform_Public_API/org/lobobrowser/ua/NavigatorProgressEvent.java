@@ -22,6 +22,8 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.ua;
 
+import java.net.URL;
+
 /**
  * An event containing response progress information.
  * 
@@ -29,13 +31,13 @@ package org.lobobrowser.ua;
  */
 public class NavigatorProgressEvent extends NavigatorEvent {
 	private final ProgressType progressType;
-	private final java.net.URL url;
+	private final URL url;
 	private final String method;
 	private final int currentValue;
 	private final int maxValue;
 
 	public NavigatorProgressEvent(Object source, NavigatorFrame clientletFrame,
-			ProgressType progressType, java.net.URL url, String method,
+			ProgressType progressType, URL url, String method,
 			int value, int max) {
 		super(source, NavigatorEventType.PROGRESS_UPDATED, clientletFrame);
 		this.progressType = progressType;
@@ -53,7 +55,7 @@ public class NavigatorProgressEvent extends NavigatorEvent {
 		return progressType;
 	}
 
-	public java.net.URL getUrl() {
+	public URL getUrl() {
 		return url;
 	}
 

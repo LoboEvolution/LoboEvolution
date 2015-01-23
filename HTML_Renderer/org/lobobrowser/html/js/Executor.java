@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.js;
 
+import java.net.URL;
 import java.util.MissingResourceException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,7 +44,7 @@ public class Executor {
 	 * @param codeSource
 	 * @param ucontext
 	 */
-	public static Context createContext(java.net.URL codeSource,
+	public static Context createContext(URL codeSource,
 			UserAgentContext ucontext) {
 		Context prev = Context.getCurrentContext();
 		Context ctx = Context.enter();
@@ -53,8 +54,7 @@ public class Executor {
 			// We still need to create a context because of exit() but
 			// we cannot set a new security controller.
 			try {
-				ctx.setSecurityController(new SecurityControllerImpl(
-						codeSource, ucontext.getSecurityPolicy()));
+				ctx.setSecurityController(new SecurityControllerImpl(codeSource, ucontext.getSecurityPolicy()));
 			} catch (MissingResourceException err) {
 				logger.log(Level.WARNING, "Missing Resource");
 			}
@@ -104,7 +104,7 @@ public class Executor {
 	}
 
 	public static boolean executeFunction(Scriptable thisScope, Function f,
-			java.net.URL codeSource, UserAgentContext ucontext) {
+			URL codeSource, UserAgentContext ucontext) {
 		Context ctx = createContext(codeSource, ucontext);
 		try {
 			try {

@@ -24,9 +24,11 @@
 package org.lobobrowser.main;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.Authenticator;
 import java.net.CookieHandler;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLStreamHandler;
 import java.security.Permission;
@@ -166,7 +168,7 @@ public class PlatformInit {
 	public void initLogging(boolean debugOn) throws Exception {
 		// Set up debugging & console
 		String loggingToken = debugOn ? "logging-debug" : "logging";
-		java.io.InputStream in = this.getClass().getResourceAsStream(
+		InputStream in = this.getClass().getResourceAsStream(
 				"/properties/" + loggingToken + ".properties");
 		if (in == null) {
 			in = this.getClass().getResourceAsStream(
@@ -406,14 +408,14 @@ public class PlatformInit {
 			java.security.ProtectionDomain pd = this.getClass()
 					.getProtectionDomain();
 			java.security.CodeSource cs = pd.getCodeSource();
-			java.net.URL url = cs.getLocation();
+			URL url = cs.getLocation();
 			String jarPath = url.getPath();
 			File jarFile;
 			try {
 				jarFile = new File(url.toURI());
-			} catch (java.net.URISyntaxException use) {
+			} catch (URISyntaxException use) {
 				throw new IllegalStateException(use);
-			} catch (java.lang.IllegalArgumentException iae) {
+			} catch (IllegalArgumentException iae) {
 				throw new IllegalStateException(
 						"Application code source apparently not a local JAR file: "
 								+ url

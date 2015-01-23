@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.store;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -55,7 +56,7 @@ public class CacheStoreInfo {
 		return this.length;
 	}
 
-	public void addCacheFile(java.io.File file) {
+	public void addCacheFile(File file) {
 		CacheFileInfo cfi = new CacheFileInfo(file);
 		this.length += cfi.getInitialLength();
 		this.fileInfos.add(cfi);

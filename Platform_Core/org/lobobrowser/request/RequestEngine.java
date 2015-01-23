@@ -30,6 +30,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.Proxy;
 import java.net.URL;
@@ -57,7 +58,7 @@ import org.lobobrowser.clientlet.CancelClientletException;
 import org.lobobrowser.clientlet.ClientletException;
 import org.lobobrowser.clientlet.ClientletRequest;
 import org.lobobrowser.clientlet.ClientletResponse;
-import org.lobobrowser.clientlet.Header;
+import org.lobobrowser.http.Header;
 import org.lobobrowser.main.ExtensionManager;
 import org.lobobrowser.security.SSLCertificate;
 import org.lobobrowser.settings.BooleanSettings;
@@ -110,7 +111,7 @@ public final class RequestEngine {
 		return instance;
 	}
 
-	public String getCookie(java.net.URL url) {
+	public String getCookie(URL url) {
 		Collection<?> cookies = this.cookieStore.getCookies(url.getHost(),
 				url.getPath());
 		StringBuffer cookieText = new StringBuffer();
@@ -381,7 +382,7 @@ public final class RequestEngine {
 							|| !Strings.isBlank(url.getHost())) {
 						try {
 							persistentContent = cm.getPersistent(url, false);
-						} catch (java.io.IOException ioe) {
+						} catch (IOException ioe) {
 							logger.log(
 									Level.WARNING,
 									"getCacheInfo(): Unable to load cache file.",
@@ -398,7 +399,7 @@ public final class RequestEngine {
 		});
 	}
 
-	private void cache(final RequestHandler rhandler, final java.net.URL url,
+	private void cache(final RequestHandler rhandler, final URL url,
 			final URLConnection connection, final byte[] content,
 			final java.io.Serializable altPersistentObject,
 			final Object altObject, final int approxAltObjectSize) {
@@ -582,7 +583,7 @@ public final class RequestEngine {
 	}
 
 	public AsyncResult<byte[]> loadBytesAsync(final String urlOrPath)
-			throws java.net.MalformedURLException {
+			throws MalformedURLException {
 		return this.loadBytesAsync(Urls.guessURL(urlOrPath));
 	}
 
@@ -658,7 +659,7 @@ public final class RequestEngine {
 						expires = cacheInfo.getExpiresGivenOffset(defaultOffset
 								.longValue());
 						if (loggerInfo) {
-							java.util.Date expiresDate = expires == null ? null
+							Date expiresDate = expires == null ? null
 									: new Date(expires);
 							logger.info("getURLConnection(): Used default offset for "
 									+ connectionUrl
@@ -972,7 +973,7 @@ public final class RequestEngine {
 					if (responseIn != null) {
 						try {
 							responseIn.close();
-						} catch (java.io.IOException ioe) {
+						} catch (IOException ioe) {
 							// ignore
 						}
 					}

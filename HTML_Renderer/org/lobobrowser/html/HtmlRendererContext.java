@@ -241,7 +241,7 @@ public interface HtmlRendererContext {
 	 * @param replace
 	 * @return A new {@link org.lobobrowser.html.HtmlRendererContext} instance.
 	 */
-	public HtmlRendererContext open(java.net.URL url, String windowName,
+	public HtmlRendererContext open(URL url, String windowName,
 			String windowFeatures, boolean replace);
 
 	/**

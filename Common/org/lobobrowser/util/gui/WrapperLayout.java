@@ -35,7 +35,7 @@ public class WrapperLayout implements LayoutManager {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.awt.LayoutManager#addLayoutComponent(java.lang.String,
+	 * @see java.awt.LayoutManager#addLayoutComponent(String,
 	 * java.awt.Component)
 	 */
 	public void addLayoutComponent(String arg0, Component arg1) {

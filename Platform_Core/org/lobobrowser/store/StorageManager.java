@@ -236,7 +236,7 @@ public class StorageManager implements Runnable {
 				logger.log(Level.SEVERE, "run()", err);
 				try {
 					Thread.sleep(MANAGED_STORE_UPDATE_DELAY);
-				} catch (java.lang.InterruptedException ie) {
+				} catch (InterruptedException ie) {
 					// Ignore this time.
 				}
 			}

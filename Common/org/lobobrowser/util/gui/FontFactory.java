@@ -26,6 +26,7 @@ package org.lobobrowser.util.gui;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.font.TextAttribute;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -87,7 +88,7 @@ public class FontFactory {
 	 *            Should be {@link Font#TRUETYPE_FONT}.
 	 */
 	public void registerFont(String fontName, int fontFormat,
-			java.io.InputStream fontStream)
+			InputStream fontStream)
 			throws java.awt.FontFormatException, java.io.IOException {
 		Font f = Font.createFont(fontFormat, fontStream);
 		synchronized (this) {

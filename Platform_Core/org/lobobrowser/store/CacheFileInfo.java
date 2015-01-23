@@ -52,7 +52,7 @@ public class CacheFileInfo implements Comparable<Object> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 * @see java.lang.Comparable#compareTo(Object)
 	 */
 	public int compareTo(Object arg0) {
 		// Tested 2/3/2008.

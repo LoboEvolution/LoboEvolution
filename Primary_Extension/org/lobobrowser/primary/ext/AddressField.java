@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -92,7 +93,7 @@ public class AddressField extends JComboBox<String> {
 		}
 	}
 
-	public void setUrl(java.net.URL url) {
+	public void setUrl(URL url) {
 		this.setText(url == null ? "" : url.toExternalForm());
 	}
 

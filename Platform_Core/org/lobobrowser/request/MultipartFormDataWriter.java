@@ -47,7 +47,7 @@ public class MultipartFormDataWriter {
 	 *            Data stream. The caller is responsible for closing it.
 	 */
 	public final void writeFileData(String name, String fileName,
-			String contentType, InputStream in) throws java.io.IOException {
+			String contentType, InputStream in) throws IOException {
 		String headers = "--" + this.boundary + "\r\n"
 				+ "Content-Disposition: form-data; name=\"" + name
 				+ "\"; filename=\"" + fileName + "\"\r\n" + "Content-Type: "
@@ -74,7 +74,7 @@ public class MultipartFormDataWriter {
 		out.write(LINE_BREAK_BYTES);
 	}
 
-	public final void send() throws java.io.IOException {
+	public final void send() throws IOException {
 		String finalDelimiter = "--" + this.boundary + "--\r\n";
 		OutputStream out = this.out;
 		out.write(finalDelimiter.getBytes("ISO-8859-1"));

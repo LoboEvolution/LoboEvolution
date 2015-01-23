@@ -145,7 +145,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 			try {
 				URL url = new URL(document.getDocumentURI());
 				this.navigate(url, null);
-			} catch (java.net.MalformedURLException throwable) {
+			} catch (MalformedURLException throwable) {
 				this.warn("reload(): Malformed URL", throwable);
 			}
 		}
@@ -191,8 +191,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 *            The absolute URL of the document.
 	 * @see #navigate(URL, String)
 	 */
-	public void navigate(String fullURL) throws java.net.MalformedURLException {
-		java.net.URL href = Urls.createURL(null, fullURL);
+	public void navigate(String fullURL) throws MalformedURLException {
+		URL href = Urls.createURL(null, fullURL);
 		this.navigate(href, "_this");
 	}
 
@@ -219,7 +219,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * 
 	 * @see #navigate(URL, String)
 	 */
-	public void submitForm(final String method, final java.net.URL action,
+	public void submitForm(final String method, final URL action,
 			final String target, final String enctype,
 			final FormInput[] formInputs) {
 		// This method implements simple incremental rendering.
@@ -325,7 +325,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * @see #submitForm(String, URL, String, String, FormInput[])
 	 */
 	protected void submitFormSync(final String method,
-			final java.net.URL action, final String target, String enctype,
+			final URL action, final String target, String enctype,
 			final FormInput[] formInputs) throws IOException,
 			org.xml.sax.SAXException {
 		final String actualMethod = method.toUpperCase();
@@ -362,7 +362,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 							+ name + " for GET.");
 				}
 			}
-			resolvedURL = new java.net.URL(newUrlBuffer.toString());
+			resolvedURL = new URL(newUrlBuffer.toString());
 		} else {
 			resolvedURL = action;
 		}
@@ -376,7 +376,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 				urlForLoading = new URL(resolvedURL.getProtocol(),
 						action.getHost(), action.getPort(), action.getPath()
 								+ refText);
-			} catch (java.net.MalformedURLException throwable) {
+			} catch (MalformedURLException throwable) {
 				this.warn("malformed", throwable);
 				urlForLoading = action;
 			}
@@ -459,7 +459,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 						logger.warning("No Location header in redirect from "
 								+ action + ".");
 					} else {
-						java.net.URL href;
+						URL href;
 						href = Urls.createURL(action, location);
 						SimpleHtmlRendererContext.this.navigate(href, target);
 					}
@@ -610,7 +610,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 *            Whether an existing window with the same name should be
 	 *            replaced.
 	 */
-	public HtmlRendererContext open(java.net.URL url, String windowName,
+	public HtmlRendererContext open(URL url, String windowName,
 			String windowFeatures, boolean replace) {
 		this.warn("open(): Not overridden");
 		return null;

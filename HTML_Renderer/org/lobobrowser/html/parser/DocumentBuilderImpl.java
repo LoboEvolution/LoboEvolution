@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.URL;
 import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -154,7 +155,7 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 			} else if (uri != null) {
 				// To comply with the InputSource documentation, we need
 				// to do this:
-				java.net.URLConnection connection = new java.net.URL(uri)
+				java.net.URLConnection connection = new URL(uri)
 						.openConnection();
 				in = connection.getInputStream();
 				if (encoding == null) {

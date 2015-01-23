@@ -73,5 +73,5 @@ public interface UserAgent {
 	// * to produce it is well known. The session ID does not persist
 	// * if the browser exits.
 	// */
-	// public String getSessionID(java.net.URL url);
+	// public String getSessionID(URL url);
 }

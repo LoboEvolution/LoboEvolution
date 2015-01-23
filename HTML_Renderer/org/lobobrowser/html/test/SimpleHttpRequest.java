@@ -27,6 +27,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -44,6 +45,7 @@ import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.ReadyStateChangeListener;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.http.Header;
+import org.lobobrowser.http.Method;
 import org.lobobrowser.http.Request;
 import org.lobobrowser.util.EventDispatch;
 import org.lobobrowser.util.GenericEventListener;
@@ -67,19 +69,14 @@ public class SimpleHttpRequest implements HttpRequest {
 	private byte[] responseBytes;
 	private final UserAgentContext context;
 	private final Proxy proxy;
-	private Request req = new Request();
+	private Request req;
 	private boolean isAsync;
-	private URL requestURL;
-	protected String requestMethod;
-	protected String requestUserName;
-	protected String requestPassword;
-	public enum ReadyState {UNINITIALIZED, OPEN, SENT, RECEIVING, LOADED}
 
 	/**
 	 * The <code>URLConnection</code> is assigned to this field while it is
 	 * ongoing.
 	 */
-	protected java.net.URLConnection connection;
+	protected URLConnection connection;
 
 	/**
 	 * Response headers are set in this map after a response is received.
@@ -91,10 +88,11 @@ public class SimpleHttpRequest implements HttpRequest {
 	 */
 	protected String responseHeaders;
 
-	public SimpleHttpRequest(UserAgentContext context, java.net.Proxy proxy) {
+	public SimpleHttpRequest(UserAgentContext context, Proxy proxy) {
 		super();
 		this.context = context;
 		this.proxy = proxy;
+		req = new Request();
 	}
 
 	public synchronized int getReadyState() {
@@ -128,7 +126,7 @@ public class SimpleHttpRequest implements HttpRequest {
 		if (bytes == null) {
 			return null;
 		}
-		java.io.InputStream in = new ByteArrayInputStream(bytes);
+		InputStream in = new ByteArrayInputStream(bytes);
 		try {
 			return DocumentBuilderFactory.newInstance().newDocumentBuilder()
 					.parse(in);
@@ -207,7 +205,7 @@ public class SimpleHttpRequest implements HttpRequest {
 		this.open(method, urlObj, asyncFlag, null);
 	}
 
-	public void open(String method, java.net.URL url, boolean asyncFlag,
+	public void open(String method, URL url, boolean asyncFlag,
 			String userName) throws IOException {
 		this.open(method, url, asyncFlag, userName, null);
 	}
@@ -226,20 +224,22 @@ public class SimpleHttpRequest implements HttpRequest {
 	 * @param password
 	 *            The password of the request (not supported.)
 	 */
-	public void open(final String method, final java.net.URL url,
-			boolean asyncFlag, final String userName, final String password)
-			throws java.io.IOException {
+	public void open(final String method, final URL url,boolean asyncFlag, final String userName, final String password) throws IOException {
 		this.abort();
 		Proxy proxy = this.proxy;
-		URLConnection c = proxy == null || proxy == Proxy.NO_PROXY ? url
-				.openConnection() : url.openConnection(proxy);
+		URLConnection c = proxy == null || proxy == Proxy.NO_PROXY ? url.openConnection() : url.openConnection(proxy);
 		synchronized (this) {
 			this.connection = c;
 			this.isAsync = asyncFlag;
-			this.requestMethod = method;
-			this.requestURL = url;
-			this.requestUserName = userName;
-			this.requestPassword = password;
+			
+			req.setUsername(userName);
+			req.setPassword(password);
+			req.setUrl(url.toString());
+			
+			if(method.equalsIgnoreCase(Method.GET.name()))
+				req.setMethod(Method.GET);
+			else
+				req.setMethod(Method.POST);
 		}
 		this.changeState(HttpRequest.STATE_LOADING, 0, null, null);
 	}
@@ -252,11 +252,9 @@ public class SimpleHttpRequest implements HttpRequest {
 	 * @param content
 	 *            POST content or <code>null</code> if there's no such content.
 	 */
-	public void send(final String content) throws java.io.IOException {
-		final java.net.URL url = this.requestURL;
-		if (url == null) {
-			throw new IOException("No URL has been provided.");
-		}
+	public void send(final String content) throws IOException {
+		final URL url = new URL(req.getUrl());
+	
 		if (this.isAsync) {
 			// Should use a thread pool instead
 			new Thread("SimpleHttpRequest-" + url.getHost()) {
@@ -302,10 +300,10 @@ public class SimpleHttpRequest implements HttpRequest {
 			c.setRequestProperty("User-Agent", this.context.getUserAgent());
 			int istatus;
 			String istatusText;
-			java.io.InputStream err;
+			InputStream err;
 			if (c instanceof HttpURLConnection) {
 				HttpURLConnection hc = (HttpURLConnection) c;
-				String method = this.requestMethod;
+				String method = req.getMethod().name();
 				if (method == null) {
 					throw new java.io.IOException("Null method.");
 				}
@@ -337,7 +335,7 @@ public class SimpleHttpRequest implements HttpRequest {
 			}
 			this.changeState(HttpRequest.STATE_LOADED, istatus, istatusText,
 					null);
-			java.io.InputStream in = err == null ? c.getInputStream() : err;
+			InputStream in = err == null ? c.getInputStream() : err;
 			int contentLength = c.getContentLength();
 			this.changeState(HttpRequest.STATE_INTERACTIVE, istatus,
 					istatusText, null);

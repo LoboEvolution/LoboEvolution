@@ -26,6 +26,7 @@ package org.lobobrowser.html.gui;
 import java.awt.EventQueue;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ import org.lobobrowser.util.EventDispatch2;
 import org.lobobrowser.util.gui.WrapperLayout;
 import org.w3c.dom.Document;
 import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 
 /**
  * The <code>HtmlPanel</code> class is a Swing component that can render a HTML
@@ -443,9 +445,9 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			} finally {
 				reader.close();
 			}
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			throw new IllegalStateException("Unexpected condition.", ioe);
-		} catch (org.xml.sax.SAXException se) {
+		} catch (SAXException se) {
 			throw new IllegalStateException("Unexpected condition.", se);
 		}
 	}

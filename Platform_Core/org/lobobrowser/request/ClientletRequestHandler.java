@@ -67,7 +67,7 @@ public class ClientletRequestHandler extends AbstractRequestHandler {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * net.sourceforge.xamj.http.RequestHandler#handleException(java.lang.Exception
+	 * net.sourceforge.xamj.http.RequestHandler#handleException(Exception
 	 * )
 	 */
 	public boolean handleException(ClientletResponse response,

@@ -959,7 +959,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.lobobrowser.html.render.RenderableContext#getFullURL(java.lang.String)
+	 * org.lobobrowser.html.render.RenderableContext#getFullURL(String)
 	 */
 	public URL getFullURL(String spec) throws MalformedURLException {
 		Object doc = this.document;
@@ -984,7 +984,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.lobobrowser.html.render.RenderableContext#getDocumentItem(java.lang.
+	 * org.lobobrowser.html.render.RenderableContext#getDocumentItem(
 	 * String)
 	 */
 	public Object getDocumentItem(String name) {
@@ -996,7 +996,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.lobobrowser.html.render.RenderableContext#setDocumentItem(java.lang.
+	 * org.lobobrowser.html.render.RenderableContext#setDocumentItem(
 	 * String, java.lang.Object)
 	 */
 	public void setDocumentItem(String name, Object value) {

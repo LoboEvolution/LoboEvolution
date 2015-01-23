@@ -21,6 +21,7 @@
 package org.lobobrowser.primary.clientlets.html;
 
 import java.awt.Component;
+import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -81,7 +82,7 @@ public class HtmlContent implements ComponentContent {
 				byte[] bytesSoFar = ris.getBytesRead();
 				try {
 					return new String(bytesSoFar, this.charset);
-				} catch (java.io.UnsupportedEncodingException uee) {
+				} catch (UnsupportedEncodingException uee) {
 					return "[Error: " + uee + "]";
 				}
 			} else {

@@ -220,14 +220,14 @@ public class HtmlClientlet implements Clientlet {
 			}
 			if (refresh != null) {
 				String destUri = refresh.destinationUrl;
-				java.net.URL currentURL = response.getResponseURL();
-				java.net.URL destURL;
+				URL currentURL = response.getResponseURL();
+				URL destURL;
 				if (destUri == null) {
 					destURL = currentURL;
 				} else {
 					destURL = Urls.createURL(currentURL, destUri);
 				}
-				final java.net.URL finalURL = destURL;
+				final URL finalURL = destURL;
 				java.awt.event.ActionListener action = new java.awt.event.ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						NavigatorFrame frame = cc.getNavigatorFrame();
@@ -255,7 +255,7 @@ public class HtmlClientlet implements Clientlet {
 		}
 	}
 
-	private String extractCharset(java.net.URL responseURL, String contentType) {
+	private String extractCharset(URL responseURL, String contentType) {
 		StringTokenizer tok = new StringTokenizer(contentType, ";");
 		if (tok.hasMoreTokens()) {
 			tok.nextToken();

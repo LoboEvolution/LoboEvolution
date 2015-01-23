@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
@@ -89,7 +90,7 @@ public class ParserTest extends JFrame {
 			URL url;
 			try {
 				url = new URL(uri);
-			} catch (java.net.MalformedURLException mfu) {
+			} catch (MalformedURLException mfu) {
 				int idx = uri.indexOf(':');
 				if (idx == -1 || idx == 1) {
 					// try file

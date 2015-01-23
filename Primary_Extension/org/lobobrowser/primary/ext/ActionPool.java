@@ -27,6 +27,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -103,21 +106,21 @@ public class ActionPool {
 	}
 
 	public Action createNavigateAction(String fullURL) {
-		java.net.URL url;
+		URL url;
 		try {
-			url = new java.net.URL(fullURL);
-		} catch (java.net.MalformedURLException mfu) {
+			url = new URL(fullURL);
+		} catch (MalformedURLException mfu) {
 			logger.log(Level.WARNING, "createNavigateAction()", mfu);
 			url = null;
 		}
 		return new NavigateAction(url);
 	}
 
-	public Action createNavigateAction(java.net.URL url) {
+	public Action createNavigateAction(URL url) {
 		return new NavigateAction(url);
 	}
 
-	public Action createBookmarkNavigateAction(java.net.URL url) {
+	public Action createBookmarkNavigateAction(URL url) {
 		return new BookmarkNavigateAction(url);
 	}
 
@@ -135,7 +138,7 @@ public class ActionPool {
 	public void addBookmark() {
 		NavigationEntry entry = window.getCurrentNavigationEntry();
 		if (entry != null) {
-			java.net.URL url = entry.getUrl();
+			URL url = entry.getUrl();
 			BookmarksHistory history = BookmarksHistory.getInstance();
 			BookmarkInfo existingInfo = history.getExistingInfo(url
 					.toExternalForm());
@@ -147,7 +150,7 @@ public class ActionPool {
 			}
 			java.awt.Window awtWindow = window.getAwtWindow();
 			if (!(awtWindow instanceof java.awt.Frame)) {
-				throw new java.lang.IllegalStateException(
+				throw new IllegalStateException(
 						"Bookmaks dialog only supported when an AWT Frame is available.");
 			}
 			AddBookmarkDialog dialog = new AddBookmarkDialog(
@@ -169,7 +172,7 @@ public class ActionPool {
 	public void searchBookmarks() {
 		java.awt.Window awtWindow = window.getAwtWindow();
 		if (!(awtWindow instanceof java.awt.Frame)) {
-			throw new java.lang.IllegalStateException(
+			throw new IllegalStateException(
 					"Search dialog only supported when an AWT Frame is available.");
 		}
 		SearchDialog dialog = new SearchDialog((java.awt.Frame) awtWindow,
@@ -196,7 +199,7 @@ public class ActionPool {
 	public void showPreferences() {
 		java.awt.Window awtWindow = window.getAwtWindow();
 		if (!(awtWindow instanceof java.awt.Frame)) {
-			throw new java.lang.IllegalStateException(
+			throw new IllegalStateException(
 					"Preferences dialog only supported when an AWT Frame is available.");
 		}
 		PreferencesDialog dialog = new PreferencesDialog((java.awt.Frame) awtWindow);
@@ -245,7 +248,7 @@ public class ActionPool {
 								.toExternalForm());
 				componentSource.navigate(roughLocation,
 						RequestType.PROGRAMMATIC);
-			} catch (java.io.UnsupportedEncodingException uee) {
+			} catch (UnsupportedEncodingException uee) {
 				// not expected - ignore
 			}
 		}
@@ -284,7 +287,7 @@ public class ActionPool {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				window.getTopFrame().open("about:blank");
-			} catch (java.net.MalformedURLException mfu) {
+			} catch (MalformedURLException mfu) {
 				throw new IllegalStateException("not expected", mfu);
 			}
 		}
@@ -509,7 +512,7 @@ public class ActionPool {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				window.getTopFrame().navigate("about:bookmarks");
-			} catch (java.net.MalformedURLException mfu) {
+			} catch (MalformedURLException mfu) {
 				throw new IllegalStateException("not expected", mfu);
 			}
 		}
@@ -524,9 +527,9 @@ public class ActionPool {
 	class NavigateAction extends AbstractAction {
 
 		private static final long serialVersionUID = 1L;
-		private final java.net.URL url;
+		private final URL url;
 
-		public NavigateAction(java.net.URL url) {
+		public NavigateAction(URL url) {
 			this.url = url;
 		}
 
@@ -538,9 +541,9 @@ public class ActionPool {
 	class BookmarkNavigateAction extends AbstractAction {
 
 		private static final long serialVersionUID = 1L;
-		private final java.net.URL url;
+		private final URL url;
 
-		public BookmarkNavigateAction(java.net.URL url) {
+		public BookmarkNavigateAction(URL url) {
 			this.url = url;
 		}
 

@@ -58,7 +58,7 @@ public class TextFieldComboBoxEditor implements ComboBoxEditor {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see javax.swing.ComboBoxEditor#setItem(java.lang.Object)
+	 * @see javax.swing.ComboBoxEditor#setItem(Object)
 	 */
 	public void setItem(Object arg0) {
 		// this.item = arg0;

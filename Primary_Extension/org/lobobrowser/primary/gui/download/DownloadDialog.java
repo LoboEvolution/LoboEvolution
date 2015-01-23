@@ -91,10 +91,10 @@ public class DownloadDialog extends JFrame {
 	private final JButton openFolderButton = new JButton();
 	private final JButton openButton = new JButton();
 
-	private final java.net.URL url;
+	private final URL url;
 	private final int knownContentLength;
 
-	public DownloadDialog(ClientletResponse response, java.net.URL url,
+	public DownloadDialog(ClientletResponse response, URL url,
 			int transferSpeed) {
 		this.url = url;
 		this.setIconImage(DefaultWindowFactory.getInstance()
@@ -240,7 +240,7 @@ public class DownloadDialog extends JFrame {
 	private long lastProgressValue;
 	private double lastTransferRate = Double.NaN;
 
-	private void startDownload(java.io.File file) {
+	private void startDownload(File file) {
 		this.saveButton.setEnabled(false);
 
 		this.timeLeftField.setCaption("Time left:");

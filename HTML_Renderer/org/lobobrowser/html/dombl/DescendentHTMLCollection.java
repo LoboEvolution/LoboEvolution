@@ -121,7 +121,7 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 			this.ensurePopulatedImpl();
 			try {
 				return (Node) this.itemsByIndex.get(index);
-			} catch (java.lang.IndexOutOfBoundsException iob) {
+			} catch (IndexOutOfBoundsException iob) {
 				return null;
 			}
 		}

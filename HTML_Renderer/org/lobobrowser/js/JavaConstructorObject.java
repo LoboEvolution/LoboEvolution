@@ -66,7 +66,7 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 		}
 	}
 
-	public java.lang.Object getDefaultValue(java.lang.Class hint) {
+	public java.lang.Object getDefaultValue(Class hint) {
 		if (String.class.equals(hint)) {
 			return "function " + this.name;
 		} else {

@@ -879,7 +879,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer,
 			// notifications come in batches. Other types
 			// of noitifications probably come one by one.
 			boolean topLayout = false;
-			java.util.ArrayList repainters = null;
+			ArrayList repainters = null;
 			int length = notifications.length;
 			for (int i = 0; i < length; i++) {
 				DocumentNotification dn = notifications[i];

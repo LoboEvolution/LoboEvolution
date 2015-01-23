@@ -25,6 +25,7 @@ package org.lobobrowser.main;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -90,7 +91,7 @@ public class ReuseManager {
 					} finally {
 						in.close();
 					}
-				} catch (java.io.EOFException eofe) {
+				} catch (EOFException eofe) {
 					eofe.printStackTrace(System.err);
 					portFile.delete();
 				} catch (FileNotFoundException fnfe) {

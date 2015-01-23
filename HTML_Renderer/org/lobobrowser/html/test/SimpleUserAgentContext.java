@@ -1,5 +1,7 @@
 package org.lobobrowser.html.test;
 
+import java.net.Proxy;
+import java.net.URL;
 import java.security.Policy;
 import java.util.Collections;
 import java.util.HashMap;
@@ -62,7 +64,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	 * {@link #createHttpRequest()} by default. This implementation returns the
 	 * value of a local field.
 	 * 
-	 * @see #setProxy(java.net.Proxy)
+	 * @see #setProxy(Proxy)
 	 */
 	protected java.net.Proxy getProxy() {
 		return this.proxy;
@@ -74,7 +76,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	 * @param proxy
 	 *            A <code>java.net.Proxy</code> instance.
 	 */
-	public void setProxy(java.net.Proxy proxy) {
+	public void setProxy(Proxy proxy) {
 		this.proxy = proxy;
 	}
 
@@ -220,7 +222,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	 * if any, to get cookie information for the given URL. If no cookie handler
 	 * is available, this method returns the empty string.
 	 */
-	public String getCookie(java.net.URL url) {
+	public String getCookie(URL url) {
 		java.net.CookieHandler handler = java.net.CookieHandler.getDefault();
 		if (handler == null) {
 			return "";
@@ -285,7 +287,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	 * This method uses the default CookieHandler, if one is available, to set a
 	 * cookie value.
 	 */
-	public void setCookie(java.net.URL url, String cookieSpec) {
+	public void setCookie(URL url, String cookieSpec) {
 		java.net.CookieHandler handler = java.net.CookieHandler.getDefault();
 		if (handler == null) {
 			return;

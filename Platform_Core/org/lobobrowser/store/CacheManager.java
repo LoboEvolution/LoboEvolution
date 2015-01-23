@@ -24,6 +24,7 @@
 package org.lobobrowser.store;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -151,7 +152,7 @@ public final class CacheManager implements Runnable {
 			cacheFile.setLastModified(System.currentTimeMillis());
 			try {
 				return IORoutines.load(cacheFile);
-			} catch (java.io.FileNotFoundException fnf) {
+			} catch (FileNotFoundException fnf) {
 				return null;
 			}
 		}
@@ -165,7 +166,7 @@ public final class CacheManager implements Runnable {
 		}
 	}
 
-	public JarFile getJarFile(URL url) throws java.io.IOException {
+	public JarFile getJarFile(URL url) throws IOException {
 		File cacheFile = getCacheFile(url, false);
 		synchronized (getLock(cacheFile)) {
 			if (!cacheFile.exists()) {
@@ -264,7 +265,7 @@ public final class CacheManager implements Runnable {
 				logger.log(Level.SEVERE, "run()", err);
 				try {
 					Thread.sleep(AFTER_SWEEP_SLEEP);
-				} catch (java.lang.InterruptedException ie) {
+				} catch (InterruptedException ie) {
 					// ignore
 				}
 			}

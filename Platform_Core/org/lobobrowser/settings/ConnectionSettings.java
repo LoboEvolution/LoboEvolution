@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.settings;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
@@ -233,7 +234,7 @@ public class ConnectionSettings implements java.io.Serializable {
 		try {
 			StorageManager.getInstance().saveSettings(
 					this.getClass().getSimpleName(), this);
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			logger.log(Level.WARNING, "save(): Unable to save settings", ioe);
 		}
 	}

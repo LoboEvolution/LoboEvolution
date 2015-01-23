@@ -20,6 +20,8 @@
  */
 package org.lobobrowser.gui;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -154,14 +156,14 @@ public class NavigationEngine {
 
 	public NavigationEntry findEntry(String absoluteURL) {
 		try {
-			java.net.URL targetURL = Urls.guessURL(absoluteURL);
+			URL targetURL = Urls.guessURL(absoluteURL);
 			for (NavigationEntry entry : this.history) {
 				if (Urls.sameNoRefURL(targetURL, entry.getUrl())) {
 					return entry;
 				}
 			}
 			return null;
-		} catch (java.net.MalformedURLException mfu) {
+		} catch (MalformedURLException mfu) {
 			if (logger.isLoggable(Level.INFO)) {
 				logger.log(Level.INFO, "findEntry(): URL is malformed: "
 						+ absoluteURL, mfu);

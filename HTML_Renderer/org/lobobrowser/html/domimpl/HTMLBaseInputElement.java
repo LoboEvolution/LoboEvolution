@@ -227,9 +227,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	public String getValue() {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
-			// Note: Per HTML Spec, setValue does not set attribute.
-			System.out.println("ss " +ic.getValue());
-			
+			// Note: Per HTML Spec, setValue does not set attribute.			
 			return ic.getValue();
 		} else {
 			String dv = this.deferredValue;

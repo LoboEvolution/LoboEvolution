@@ -22,6 +22,8 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.io;
 
+import java.io.IOException;
+
 /**
  * Represents client-side storage with quota restrictions. A clientlet engine
  * will typically provide an instance of this interface per host. A manged store
@@ -38,23 +40,23 @@ public interface ManagedStore {
 	 * Gets a ManagedFile instance for the given managed path. Directories in
 	 * the path are separated by "/".
 	 * 
-	 * @throws java.io.IOException
+	 * @throws IOException
 	 */
-	public ManagedFile getManagedFile(String path) throws java.io.IOException;
+	public ManagedFile getManagedFile(String path) throws IOException;
 
 	/**
 	 * Gets a ManagedFile relative to a given parent. Directories in the
 	 * relative path are separated by "/".
 	 * 
-	 * @throws java.io.IOException
+	 * @throws IOException
 	 */
 	public ManagedFile getManagedFile(ManagedFile parent, String relativePath)
-			throws java.io.IOException;
+			throws IOException;
 
 	/**
 	 * Gets the top-level directory of the managed store.
 	 */
-	public ManagedFile getRootManagedDirectory() throws java.io.IOException;
+	public ManagedFile getRootManagedDirectory() throws IOException;
 
 	/**
 	 * Gets the managed store quota.
@@ -65,17 +67,17 @@ public interface ManagedStore {
 	 * Gets an <i>approximation</i> of the number of bytes currently used up in
 	 * the managed store.
 	 * 
-	 * @throws java.io.IOException
+	 * @throws IOException
 	 */
-	public long getSize() throws java.io.IOException;
+	public long getSize() throws IOException;
 
 	/**
 	 * Saves a serializable object at the given managed file path.
 	 * 
-	 * @throws java.io.IOException
+	 * @throws IOException
 	 */
 	public void saveObject(String path, java.io.Serializable object)
-			throws java.io.IOException;
+			throws IOException;
 
 	/**
 	 * Retrieves a serializable object. If the file identified by
@@ -86,10 +88,10 @@ public interface ManagedStore {
 	 * @param classLoader
 	 *            A class loader that can load the expected object type.
 	 * @return An object unserialized from managed file data.
-	 * @throws java.io.IOException
+	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
 	public Object retrieveObject(String path, ClassLoader classLoader)
-			throws java.io.IOException, ClassNotFoundException;
+			throws IOException, ClassNotFoundException;
 
 }

@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 
@@ -90,7 +91,7 @@ public class StringListControl extends JComponent {
 				stringsAL.add(line);
 			}
 			this.setStrings(stringsAL.toArray(new String[0]));
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			throw new IllegalStateException("not expected", ioe);
 		}
 	}

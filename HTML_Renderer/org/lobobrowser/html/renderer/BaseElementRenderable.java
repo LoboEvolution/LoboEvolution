@@ -28,6 +28,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
+import java.io.IOException;
+import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Collection;
@@ -82,7 +84,7 @@ abstract class BaseElementRenderable extends BaseRCollection implements
 	protected Insets marginInsets;
 	protected Insets paddingInsets;
 	protected BorderInfo borderInfo;
-	protected java.net.URL lastBackgroundImageUri;
+	protected URL lastBackgroundImageUri;
 	protected Insets defaultMarginInsets = null;
 	protected Insets defaultPaddingInsets = null;
 	protected int overflowX;
@@ -395,7 +397,7 @@ abstract class BaseElementRenderable extends BaseRCollection implements
 		}
 		BackgroundInfo binfo = rs.getBackgroundInfo();
 		this.backgroundColor = binfo == null ? null : binfo.backgroundColor;
-		java.net.URL backgroundImageUri = binfo == null ? null
+		URL backgroundImageUri = binfo == null ? null
 				: binfo.backgroundImage;
 		if (backgroundImageUri == null) {
 			this.backgroundImage = null;
@@ -531,7 +533,7 @@ abstract class BaseElementRenderable extends BaseRCollection implements
 		// Check if background image needs to be loaded
 	}
 
-	protected void loadBackgroundImage(final java.net.URL imageURL) {
+	protected void loadBackgroundImage(final URL imageURL) {
 		ModelNode rc = this.modelNode;
 		UserAgentContext ctx = this.userAgentContext;
 		if (ctx != null) {
@@ -560,7 +562,7 @@ abstract class BaseElementRenderable extends BaseRCollection implements
 				try {
 					request.open("GET", imageURL);
 					request.send(null);
-				} catch (java.io.IOException thrown) {
+				} catch (IOException thrown) {
 					logger.log(Level.WARNING, "loadBackgroundImage()", thrown);
 				}
 			} else {
@@ -571,7 +573,7 @@ abstract class BaseElementRenderable extends BaseRCollection implements
 						try {
 							request.open("GET", imageURL);
 							request.send(null);
-						} catch (java.io.IOException thrown) {
+						} catch (IOException thrown) {
 							logger.log(Level.WARNING, "loadBackgroundImage()",
 									thrown);
 						}

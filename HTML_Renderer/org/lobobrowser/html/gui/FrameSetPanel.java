@@ -28,6 +28,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
@@ -186,7 +187,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 							((FrameNode) frameElement).setBrowserFrame(frame);
 							String src = frameElement.getAttribute(HtmlAttributeProperties.SRC);
 							if (src != null) {
-								java.net.URL url;
+								URL url;
 								try {
 									url = frameElement.getFullURL(src);
 									if (url != null) {

@@ -1,5 +1,6 @@
 package org.lobobrowser.primary.clientlets.html;
 
+import java.net.URL;
 import java.security.Policy;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +11,7 @@ import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.request.RequestEngine;
 import org.lobobrowser.request.UserAgentImpl;
+import org.lobobrowser.security.LocalSecurityPolicy;
 import org.lobobrowser.ua.NavigatorFrame;
 
 public class UserAgentContextImpl implements UserAgentContext {
@@ -128,7 +130,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 		return true;
 	}
 
-	public String getCookie(java.net.URL url) {
+	public String getCookie(URL url) {
 		// Requires privileges.
 		return RequestEngine.getInstance().getCookie(url);
 	}
@@ -138,13 +140,13 @@ public class UserAgentContextImpl implements UserAgentContext {
 		return true;
 	}
 
-	public void setCookie(java.net.URL url, String cookieSpec) {
+	public void setCookie(URL url, String cookieSpec) {
 		// Requires privileges.
 		RequestEngine.getInstance().setCookie(url, cookieSpec);
 	}
 
 	public Policy getSecurityPolicy() {
-		return org.lobobrowser.security.LocalSecurityPolicy.getInstance();
+		return LocalSecurityPolicy.getInstance();
 	}
 
 	public int getScriptingOptimizationLevel() {

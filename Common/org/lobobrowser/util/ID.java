@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.util;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.InetAddress;
 import java.security.MessageDigest;
@@ -80,7 +81,7 @@ public class ID {
 			return digest.digest(content.getBytes("UTF-8"));
 		} catch (NoSuchAlgorithmException e) {
 			throw new IllegalStateException(e);
-		} catch (java.io.UnsupportedEncodingException uee) {
+		} catch (UnsupportedEncodingException uee) {
 			throw new IllegalStateException(uee);
 		}
 	}

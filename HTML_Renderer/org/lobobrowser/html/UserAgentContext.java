@@ -1,5 +1,7 @@
 package org.lobobrowser.html;
 
+import java.net.URL;
+
 /**
  * Provides information about the user agent (browser) driving the parser and/or
  * renderer.
@@ -84,7 +86,7 @@ public interface UserAgentContext {
 	 * Method used to implement Javascript <code>document.cookie</code>
 	 * property.
 	 */
-	public String getCookie(java.net.URL url);
+	public String getCookie(URL url);
 
 	/**
 	 * Method used to implement <code>document.cookie</code> property.
@@ -93,7 +95,7 @@ public interface UserAgentContext {
 	 *            Specification of cookies, as they would appear in the
 	 *            Set-Cookie header value of HTTP.
 	 */
-	public void setCookie(java.net.URL url, String cookieSpec);
+	public void setCookie(URL url, String cookieSpec);
 
 	/**
 	 * Gets the security policy for scripting. Return <code>null</code> if

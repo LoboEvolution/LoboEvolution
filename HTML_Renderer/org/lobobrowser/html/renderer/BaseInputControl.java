@@ -207,7 +207,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.InputContext#setValue(java.lang.String)
+	 * @see org.lobobrowser.html.dombl.InputContext#setValue(String)
 	 */
 	public void setValue(String value) {
 		this.value = value;

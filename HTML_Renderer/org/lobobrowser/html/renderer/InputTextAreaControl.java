@@ -194,7 +194,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.render.BaseInputControl#setValue(java.lang.String)
+	 * @see org.lobobrowser.html.render.BaseInputControl#setValue(String)
 	 */
 	public void setValue(String value) {
 		this.widget.setText(value);

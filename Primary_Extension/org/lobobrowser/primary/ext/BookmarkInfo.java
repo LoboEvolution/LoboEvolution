@@ -20,10 +20,12 @@
  */
 package org.lobobrowser.primary.ext;
 
+import java.net.URL;
+
 public class BookmarkInfo implements java.io.Serializable {
 	private static final long serialVersionUID = 2257845000007000400L;
 
-	private java.net.URL url;
+	private URL url;
 	private String title;
 	private String description;
 	private String[] tags;
@@ -70,11 +72,11 @@ public class BookmarkInfo implements java.io.Serializable {
 		this.title = title;
 	}
 
-	public java.net.URL getUrl() {
+	public URL getUrl() {
 		return url;
 	}
 
-	public void setUrl(java.net.URL url) {
+	public void setUrl(URL url) {
 		this.url = url;
 	}
 }

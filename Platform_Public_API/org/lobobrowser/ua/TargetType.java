@@ -25,7 +25,7 @@ package org.lobobrowser.ua;
 /**
  * Frame target type for navigation.
  * 
- * @see NavigatorFrame#navigate(java.net.URL, String, ParameterInfo, TargetType,
+ * @see NavigatorFrame#navigate(URL, String, ParameterInfo, TargetType,
  *      RequestType)
  */
 public enum TargetType {

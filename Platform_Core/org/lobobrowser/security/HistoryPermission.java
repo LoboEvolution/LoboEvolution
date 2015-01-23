@@ -57,7 +57,7 @@ public class HistoryPermission extends Permission {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
+	 * @see java.lang.Object#equals(Object)
 	 */
 	public boolean equals(Object obj) {
 		return obj instanceof HistoryPermission;

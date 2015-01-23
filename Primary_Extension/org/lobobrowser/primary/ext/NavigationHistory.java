@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.primary.ext;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -69,7 +70,7 @@ public class NavigationHistory extends BaseHistory<Object> implements
 			try {
 				StorageManager.getInstance().saveSettings(
 						this.getClass().getSimpleName(), this);
-			} catch (java.io.IOException ioe) {
+			} catch (IOException ioe) {
 				logger.log(Level.WARNING, "Unable to save settings: "
 						+ this.getClass().getSimpleName(), ioe);
 			}

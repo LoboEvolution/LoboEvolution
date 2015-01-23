@@ -45,6 +45,8 @@ import org.lobobrowser.clientlet.ClientletAccess;
 import org.lobobrowser.clientlet.ClientletContext;
 import org.lobobrowser.clientlet.ClientletException;
 import org.lobobrowser.clientlet.ClientletResponse;
+import org.lobobrowser.http.Method;
+import org.lobobrowser.http.Request;
 import org.lobobrowser.request.RequestEngine;
 import org.lobobrowser.request.RequestHandler;
 import org.lobobrowser.request.SimpleRequestHandler;
@@ -61,12 +63,13 @@ import org.w3c.dom.Document;
 
 public class NetworkRequestImpl implements NetworkRequest {
 	// TODO: Class not thread safe?
-	private static final Logger logger = Logger
-			.getLogger(NetworkRequestImpl.class.getName());
+	private static final Logger logger = Logger.getLogger(NetworkRequestImpl.class.getName());
 	private final EventDispatch READY_STATE_CHANGE = new EventDispatch();
 	private volatile int readyState = NetworkRequest.STATE_UNINITIALIZED;
 	private volatile LocalResponse localResponse;
-
+	private Request req = new Request();
+	private boolean isAsynchronous = false;
+	
 	public NetworkRequestImpl() {
 	}
 
@@ -88,13 +91,7 @@ public class NetworkRequestImpl implements NetworkRequest {
 		LocalResponse lr = this.localResponse;
 		return lr == null ? null : lr.getResponseImage();
 	}
-
-	// public java.util.jar.JarFile getResponseJarFile() throws
-	// java.io.IOException {
-	// LocalResponse lr = this.localResponse;
-	// return lr == null ? null : lr.getResponseJarFile();
-	// }
-
+	
 	public byte[] getResponseBytes() {
 		LocalResponse lr = this.localResponse;
 		return lr == null ? null : lr.getResponseBytes();
@@ -105,7 +102,7 @@ public class NetworkRequestImpl implements NetworkRequest {
 			LocalResponse lr = this.localResponse;
 			return lr == null ? NetworkRequest.STATE_UNINITIALIZED : lr
 					.getStatus();
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			return 0;
 		}
 	}
@@ -114,7 +111,7 @@ public class NetworkRequestImpl implements NetworkRequest {
 		try {
 			LocalResponse lr = this.localResponse;
 			return lr == null ? null : lr.getStatusText();
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			return null;
 		}
 	}
@@ -156,31 +153,29 @@ public class NetworkRequestImpl implements NetworkRequest {
 		this.open(method, urlObj, asyncFlag, null, null);
 	}
 
-	public void open(String method, java.net.URL url, boolean asyncFlag,
+	public void open(String method, URL url, boolean asyncFlag,
 			String userName) {
 		this.open(method, url, asyncFlag, userName, null);
 	}
 
-	private boolean isAsynchronous = false;
-	private String requestMethod;
-	private java.net.URL requestURL;
-	private String requestUserName;
-	private String requestPassword;
-
-	public void open(String method, java.net.URL url, boolean asyncFlag,
-			String userName, String password) {
+	public void open(String method, URL url, boolean asyncFlag, String userName, String password) {
 		this.isAsynchronous = asyncFlag;
-		this.requestMethod = method;
-		this.requestURL = url;
-		this.requestUserName = userName;
-		this.requestPassword = password;
+		
+		req.setUsername(userName);
+		req.setPassword(password);
+		req.setUrl(url.toString());
+		
+		if(method.equalsIgnoreCase(Method.GET.name()))
+			req.setMethod(Method.GET);
+		else
+			req.setMethod(Method.POST);
+		
 		this.changeReadyState(NetworkRequest.STATE_LOADING);
 	}
 
 	public void send(String content) throws IOException {
 		try {
-			RequestHandler rhandler = new LocalRequestHandler(this.requestURL,
-					this.requestMethod, content);
+			RequestHandler rhandler = new LocalRequestHandler(new URL(req.getUrl()), req.getMethod().name(), content);
 			this.currentRequestHandler = rhandler;
 			try {
 				// TODO: Username and password support
@@ -237,8 +232,7 @@ public class NetworkRequestImpl implements NetworkRequest {
 			int numRead;
 			int readSoFar = 0;
 			boolean firstTime = true;
-			ClientletContext threadContext = ClientletAccess
-					.getCurrentClientletContext();
+			ClientletContext threadContext = ClientletAccess.getCurrentClientletContext();
 			NavigatorProgressEvent prevProgress = null;
 			if (threadContext != null) {
 				prevProgress = threadContext.getProgressEvent();
@@ -288,6 +282,14 @@ public class NetworkRequestImpl implements NetworkRequest {
 			this.changeReadyState(NetworkRequest.STATE_COMPLETE);
 		}
 	}
+	
+	public Request getReq() {
+		return req;
+	}
+
+	public void setReq(Request req) {
+		this.req = req;
+	}
 
 	private class LocalRequestHandler extends SimpleRequestHandler {
 		private final String method;
@@ -328,17 +330,6 @@ public class NetworkRequestImpl implements NetworkRequest {
 		public void processResponse(ClientletResponse response)
 				throws ClientletException, IOException {
 			NetworkRequestImpl.this.setResponse(response);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see net.sourceforge.xamj.http.RequestHandler#handleProgress(int,
-		 * java.net.URL, int, int)
-		 */
-		public void handleProgress(
-				org.lobobrowser.ua.ProgressType progressType, URL url,
-				int value, int max) {
 		}
 	}
 
@@ -464,7 +455,7 @@ public class NetworkRequestImpl implements NetworkRequest {
 		}
 
 		public void writeBytes(byte[] bytes, int offset, int length)
-				throws java.io.IOException {
+				throws IOException {
 			ByteArrayOutputStream out = this.cacheable.buffer;
 			if (out == null) {
 				out = new ByteArrayOutputStream();
@@ -500,11 +491,6 @@ public class NetworkRequestImpl implements NetworkRequest {
 				}
 			}
 			return headers;
-		}
-
-		public int getLength() {
-			ByteArrayOutputStream out = this.cacheable.buffer;
-			return out == null ? 0 : out.size();
 		}
 
 		/**
@@ -557,8 +543,6 @@ public class NetworkRequestImpl implements NetworkRequest {
 		}
 
 		public byte[] getResponseBytes() {
-			// TODO: OPTIMIZATION: When the response comes from the RAM cache,
-			// there's no need to build a custom buffer here.
 			return this.cacheable.getResponseBytes();
 		}
 	}

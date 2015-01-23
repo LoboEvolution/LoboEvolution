@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.primary.ext;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,7 +67,7 @@ public class IconFactory {
 				}
 				return icon;
 			}
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			logger.log(Level.WARNING, "getIcon(): Resource path "
 					+ resourcePath + " gave error.", ioe);
 			return null;

@@ -6,7 +6,7 @@ public class LocalFilter implements ObjectFilter {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.util.ObjectFilter#decode(java.lang.Object)
+	 * @see org.xamjwg.util.ObjectFilter#decode(Object)
 	 */
 	public Object decode(Object source) {
 		WeakReference wf = (WeakReference) source;
@@ -16,10 +16,10 @@ public class LocalFilter implements ObjectFilter {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.util.ObjectFilter#encode(java.lang.Object)
+	 * @see org.xamjwg.util.ObjectFilter#encode(Object)
 	 */
 	public Object encode(Object source) {
-		throw new java.lang.UnsupportedOperationException(
+		throw new UnsupportedOperationException(
 				"Read-only collection.");
 	}
 }

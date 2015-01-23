@@ -24,6 +24,8 @@
 package org.lobobrowser.primary.clientlets;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
@@ -66,7 +68,7 @@ public class ArchiveClassLoader extends BaseClassLoader {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see java.net.URLStreamHandler#openConnection(java.net.URL)
+		 * @see java.net.URLStreamHandler#openConnection(URL)
 		 */
 		protected URLConnection openConnection(URL u) throws IOException {
 			return new GenericURLConnection(u,
@@ -76,7 +78,7 @@ public class ArchiveClassLoader extends BaseClassLoader {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see java.net.URLStreamHandler#openConnection(java.net.URL,
+		 * @see java.net.URLStreamHandler#openConnection(URL,
 		 * java.net.Proxy)
 		 */
 		@Override
@@ -101,7 +103,7 @@ public class ArchiveClassLoader extends BaseClassLoader {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.ClassLoader#findClass(java.lang.String)
+	 * @see java.lang.ClassLoader#findClass(String)
 	 */
 	protected Class findClass(String arg0) throws ClassNotFoundException {
 		final String subPath = arg0.replace('.', '/') + ".class";
@@ -121,7 +123,7 @@ public class ArchiveClassLoader extends BaseClassLoader {
 									if (entry == null) {
 										return null;
 									}
-									java.io.InputStream in = jarFile
+									InputStream in = jarFile
 											.getInputStream(entry);
 									try {
 										byte[] bytes = IORoutines.loadExact(in,
@@ -156,17 +158,17 @@ public class ArchiveClassLoader extends BaseClassLoader {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.ClassLoader#findResource(java.lang.String)
+	 * @see java.lang.ClassLoader#findResource(String)
 	 */
 	protected URL findResource(final String name) {
 		try {
 			return AccessController
 					.doPrivileged(new PrivilegedAction<java.net.URL>() {
-						public java.net.URL run() {
+						public URL run() {
 							try {
-								return new java.net.URL(null, "volatile:"
+								return new URL(null, "volatile:"
 										+ name, new LocalURLStreamHandler(name));
-							} catch (java.net.MalformedURLException mfu) {
+							} catch (MalformedURLException mfu) {
 								throw new IllegalStateException(mfu
 										.getMessage());
 							}
@@ -181,7 +183,7 @@ public class ArchiveClassLoader extends BaseClassLoader {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.ClassLoader#findResources(java.lang.String)
+	 * @see java.lang.ClassLoader#findResources(String)
 	 */
 	protected Enumeration findResources(String name) throws IOException {
 		URL url = this.findResource(name);
@@ -194,16 +196,16 @@ public class ArchiveClassLoader extends BaseClassLoader {
 		}
 	}
 
-	private java.io.InputStream getResourceAsStreamImpl(
+	private InputStream getResourceAsStreamImpl(
 			final String resourceName) {
 		ArchiveInfo[] ainfos = this.archiveInfos;
 		int len = ainfos.length;
-		java.io.InputStream in = null;
+		InputStream in = null;
 		for (int i = 0; i < len; i++) {
 			final ArchiveInfo ainfo = ainfos[i];
 			try {
 				final JarFile jarFile = ainfo.getJarFile();
-				in = (java.io.InputStream) AccessController
+				in = (InputStream) AccessController
 						.doPrivileged(new PrivilegedAction<Object>() {
 							public Object run() {
 								try {

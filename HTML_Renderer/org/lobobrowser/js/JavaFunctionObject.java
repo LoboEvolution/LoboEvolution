@@ -150,7 +150,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 		}
 	}
 
-	public java.lang.Object getDefaultValue(java.lang.Class hint) {
+	public java.lang.Object getDefaultValue(Class hint) {
 		if (loggableInfo) {
 			logger.info("getDefaultValue(): hint=" + hint + ",this=" + this);
 		}

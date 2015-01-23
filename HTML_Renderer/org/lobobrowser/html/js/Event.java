@@ -34,10 +34,9 @@ public class Event extends AbstractScriptableDelegate {
 	private boolean returnValue;
 	private HTMLElement srcElement;
 	private String type;
-	private final java.awt.event.InputEvent inputEvent;
+	private final InputEvent inputEvent;
 
-	public Event(String type, HTMLElement srcElement,
-			java.awt.event.InputEvent mouseEvent, int leafX, int leafY) {
+	public Event(String type, HTMLElement srcElement, InputEvent mouseEvent, int leafX, int leafY) {
 		this.type = type;
 		this.srcElement = srcElement;
 		this.leafX = leafX;

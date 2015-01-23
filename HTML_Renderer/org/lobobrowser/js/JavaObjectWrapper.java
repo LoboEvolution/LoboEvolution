@@ -253,7 +253,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 		return new JavaConstructorObject(className, classWrapper, instantiator);
 	}
 
-	public java.lang.Object getDefaultValue(java.lang.Class hint) {
+	public java.lang.Object getDefaultValue(Class hint) {
 		if (loggableInfo) {
 			logger.info("getDefaultValue(): hint=" + hint + ",this="
 					+ this.getJavaObject());

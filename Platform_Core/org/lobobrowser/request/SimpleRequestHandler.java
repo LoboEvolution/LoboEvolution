@@ -120,7 +120,7 @@ public abstract class SimpleRequestHandler implements RequestHandler {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see javax.net.ssl.HostnameVerifier#verify(java.lang.String,
+		 * @see javax.net.ssl.HostnameVerifier#verify(String,
 		 * javax.net.ssl.SSLSession)
 		 */
 		public boolean verify(final String host, SSLSession arg1) {

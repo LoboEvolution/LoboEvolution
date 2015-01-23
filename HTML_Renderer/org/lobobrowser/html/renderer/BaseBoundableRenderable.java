@@ -355,7 +355,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		RCollection parent = this.parent;
 		for (;;) {
 			if (parent == null) {
-				throw new java.lang.IllegalArgumentException(
+				throw new IllegalArgumentException(
 						"Not an ancestor: " + ancestor);
 			}
 			if (parent == ancestor) {

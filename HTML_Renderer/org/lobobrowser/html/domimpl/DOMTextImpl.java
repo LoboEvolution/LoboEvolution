@@ -50,7 +50,7 @@ public class DOMTextImpl extends DOMCharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.w3c.Text#replaceWholeText(java.lang.String)
+	 * @see org.lobobrowser.html.w3c.Text#replaceWholeText(String)
 	 */
 	public Text replaceWholeText(String content) throws DOMException {
 		DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
@@ -138,7 +138,7 @@ public class DOMTextImpl extends DOMCharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#setnodeValue(java.lang.String)
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#setnodeValue(String)
 	 */
 	public void setNodeValue(String nodeValue) throws DOMException {
 		this.text = nodeValue;

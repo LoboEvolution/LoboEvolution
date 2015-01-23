@@ -23,7 +23,7 @@ package org.lobobrowser.request;
 import java.net.URL;
 
 import org.lobobrowser.clientlet.ClientletRequest;
-import org.lobobrowser.clientlet.Header;
+import org.lobobrowser.http.Header;
 import org.lobobrowser.ua.ParameterInfo;
 import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.ua.UserAgent;

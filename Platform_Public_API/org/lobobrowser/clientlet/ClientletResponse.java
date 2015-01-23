@@ -25,6 +25,8 @@ package org.lobobrowser.clientlet;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.net.URL;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.lobobrowser.ua.RequestType;
@@ -37,7 +39,7 @@ public interface ClientletResponse {
 	 * Gets the response URL. This may be different to the request URL in the
 	 * case of a redirect.
 	 */
-	public java.net.URL getResponseURL();
+	public URL getResponseURL();
 
 	/**
 	 * Gets the request method for the response URL. This may be different to
@@ -167,7 +169,7 @@ public interface ClientletResponse {
 	 * @param object
 	 *            A <code>Serializable</code> object.
 	 */
-	public void setNewPersistentCachedObject(java.io.Serializable object);
+	public void setNewPersistentCachedObject(Serializable object);
 
 	/**
 	 * If available, gets an object previously cached in main memory associated
@@ -207,7 +209,7 @@ public interface ClientletResponse {
 	 * Gets the value of the "Date" header. This method returns
 	 * <code>null</code> if the header is not available.
 	 */
-	public java.util.Date getDate();
+	public Date getDate();
 
 	/**
 	 * Gets the type of request.

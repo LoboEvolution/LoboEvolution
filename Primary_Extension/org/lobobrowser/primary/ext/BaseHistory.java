@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.primary.ext;
 
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -147,7 +148,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 		}
 	}
 
-	public void addAsRecent(java.net.URL url, T itemInfo) {
+	public void addAsRecent(URL url, T itemInfo) {
 		String item = url.toExternalForm();
 		synchronized (this) {
 			TimedEntry entry = (TimedEntry) this.historyMap.get(item);
@@ -173,7 +174,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 		}
 	}
 
-	public void touch(java.net.URL url) {
+	public void touch(URL url) {
 		String item = url.toExternalForm();
 		synchronized (this) {
 			TimedEntry entry = (TimedEntry) this.historyMap.get(item);
@@ -194,14 +195,14 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 			java.io.Serializable {
 		private static final long serialVersionUID = 2257845000000000200L;
 		private long timestamp = System.currentTimeMillis();
-		private final java.net.URL url;
+		private final URL url;
 		private final String value;
 		private T itemInfo;
 
 		/**
 		 * @param url
 		 */
-		public TimedEntry(java.net.URL url, String textValue, T itemInfo) {
+		public TimedEntry(URL url, String textValue, T itemInfo) {
 			this.itemInfo = itemInfo;
 			this.value = textValue;
 			this.url = url;
@@ -220,7 +221,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see java.lang.Comparable#compareTo(java.lang.Object)
+		 * @see java.lang.Comparable#compareTo(Object)
 		 */
 		public int compareTo(Object arg0) {
 			if (this.equals(arg0)) {

@@ -36,7 +36,7 @@ public class Handler extends URLStreamHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.net.URLStreamHandler#openConnection(java.net.URL)
+	 * @see java.net.URLStreamHandler#openConnection(URL)
 	 */
 	protected URLConnection openConnection(URL arg0) throws IOException {
 		return new AboutURLConnection(arg0);
@@ -45,7 +45,7 @@ public class Handler extends URLStreamHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.net.URLStreamHandler#openConnection(java.net.URL,
+	 * @see java.net.URLStreamHandler#openConnection(URL,
 	 * java.net.Proxy)
 	 */
 	@Override

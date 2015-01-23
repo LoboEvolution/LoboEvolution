@@ -21,10 +21,11 @@
 package org.lobobrowser.html.style;
 
 import java.awt.Color;
+import java.net.URL;
 
 public class BackgroundInfo {
 	public Color backgroundColor;
-	public java.net.URL backgroundImage;
+	public URL backgroundImage;
 	public boolean backgroundXPositionAbsolute;
 	public int backgroundXPosition;
 	public boolean backgroundYPositionAbsolute;

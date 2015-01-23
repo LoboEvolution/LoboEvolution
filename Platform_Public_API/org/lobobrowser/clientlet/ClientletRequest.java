@@ -22,6 +22,9 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.clientlet;
 
+import java.net.URL;
+
+import org.lobobrowser.http.Header;
 import org.lobobrowser.ua.ParameterInfo;
 import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.ua.UserAgent;
@@ -42,7 +45,7 @@ public interface ClientletRequest {
 	/**
 	 * Gets the request URL.
 	 */
-	public java.net.URL getRequestURL();
+	public URL getRequestURL();
 
 	/**
 	 * Gets information about the user agent making the request.

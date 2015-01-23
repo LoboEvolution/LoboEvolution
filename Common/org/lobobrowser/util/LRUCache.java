@@ -20,6 +20,8 @@
  */
 package org.lobobrowser.util;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -49,8 +51,8 @@ public class LRUCache implements java.io.Serializable {
 		this.removalEvent = new RemovalDispatch();
 	}
 
-	private void readObject(java.io.ObjectInputStream in)
-			throws java.io.IOException, ClassNotFoundException {
+	private void readObject(ObjectInputStream in)
+			throws IOException, ClassNotFoundException {
 		in.defaultReadObject();
 		// Need to initialize transient fields here.
 		this.removalEvent = new RemovalDispatch();

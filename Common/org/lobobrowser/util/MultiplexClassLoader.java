@@ -44,7 +44,7 @@ public abstract class MultiplexClassLoader extends BaseClassLoader {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.ClassLoader#loadClass(java.lang.String, boolean)
+	 * @see java.lang.ClassLoader#loadClass(String, boolean)
 	 */
 	public synchronized Class loadClass(String name, boolean resolve)
 			throws ClassNotFoundException {

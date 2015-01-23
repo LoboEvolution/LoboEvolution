@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.js;
 
+import java.net.URL;
 import java.security.AccessControlContext;
 import java.security.AccessController;
 import java.security.CodeSource;
@@ -27,6 +28,7 @@ import java.security.PermissionCollection;
 import java.security.Policy;
 import java.security.PrivilegedAction;
 import java.security.ProtectionDomain;
+import java.security.cert.Certificate;
 import java.util.MissingResourceException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,18 +40,18 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.SecurityController;
 
 public class SecurityControllerImpl extends SecurityController {
-	private final java.net.URL url;
+	private final URL url;
 	private final java.security.Policy policy;
 	private final CodeSource codesource;
 	
 	private static final Logger logger = Logger.getLogger(SecurityControllerImpl.class
 			.getName());
 
-	public SecurityControllerImpl(java.net.URL url, Policy policy) {
+	public SecurityControllerImpl(URL url, Policy policy) {
 		this.url = url;
 		this.policy = policy;
-		this.codesource = new CodeSource(this.url,
-				(java.security.cert.Certificate[]) null);
+		Certificate[] certs = new Certificate[] {};
+		this.codesource = new CodeSource(this.url, certs);
 	}
 
 	public Object callWithDomain(Object securityDomain, final Context ctx,

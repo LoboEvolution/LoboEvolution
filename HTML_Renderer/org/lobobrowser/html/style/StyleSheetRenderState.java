@@ -28,6 +28,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Toolkit;
 import java.awt.font.TextAttribute;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -640,7 +641,7 @@ public class StyleSheetRenderState implements RenderState {
 			}
 			String backgroundImageText = props.getBackgroundImage();
 			if (backgroundImageText != null && backgroundImageText.length() > 0) {
-				java.net.URL backgroundImage = HtmlValues
+				URL backgroundImage = HtmlValues
 						.getURIFromStyleValue(backgroundImageText);
 				if (backgroundImage != null) {
 					if (binfo == null) {

@@ -29,6 +29,7 @@ import java.awt.Container;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -146,7 +147,7 @@ public class TestFrame extends JFrame {
 			URL url;
 			try {
 				url = new URL(uri);
-			} catch (java.net.MalformedURLException mfu) {
+			} catch (MalformedURLException mfu) {
 				int idx = uri.indexOf(':');
 				if (idx == -1 || idx == 1) {
 					// try file

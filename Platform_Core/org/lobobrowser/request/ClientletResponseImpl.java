@@ -30,6 +30,7 @@ import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Date;
 import java.util.EventObject;
 import java.util.Iterator;
 import java.util.List;
@@ -127,7 +128,7 @@ public class ClientletResponseImpl implements ClientletResponse {
 		return this.requestHandler.getLatestRequestMethod();
 	}
 
-	public void handleProgress(ProgressType progressType, java.net.URL url,
+	public void handleProgress(ProgressType progressType, URL url,
 			String method, int value, int max) {
 		this.requestHandler.handleProgress(progressType, url, method, value,
 				max);
@@ -159,7 +160,7 @@ public class ClientletResponseImpl implements ClientletResponse {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.dom.ClientletResponse#getHeader(java.lang.String)
+	 * @see org.xamjwg.dom.ClientletResponse#getHeader(String)
 	 */
 	public String getHeader(String name) {
 		return this.connection.getHeaderField(name);
@@ -168,7 +169,7 @@ public class ClientletResponseImpl implements ClientletResponse {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.dom.ClientletResponse#getHeaders(java.lang.String, char)
+	 * @see org.xamjwg.dom.ClientletResponse#getHeaders(String, char)
 	 */
 	public String[] getHeaders(String name) {
 		Map<String, List<String>> headers = this.connection.getHeaderFields();
@@ -428,7 +429,7 @@ public class ClientletResponseImpl implements ClientletResponse {
 		return newTransientObjectSize;
 	}
 
-	public java.util.Date getDate() {
+	public Date getDate() {
 		String dateText = this.connection.getHeaderField("Date");
 		if (dateText == null) {
 			return null;

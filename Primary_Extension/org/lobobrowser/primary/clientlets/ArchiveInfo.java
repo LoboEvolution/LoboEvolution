@@ -23,15 +23,18 @@
  */
 package org.lobobrowser.primary.clientlets;
 
+import java.io.IOException;
+import java.net.URL;
+
 public class ArchiveInfo {
 	public static final ArchiveInfo[] EMPTY_ARRAY = new ArchiveInfo[0];
 	public final java.io.File file;
-	public final java.net.URL url;
+	public final URL url;
 
 	/**
 	 * @param jarFile
 	 */
-	public ArchiveInfo(final java.net.URL url, final java.io.File file) {
+	public ArchiveInfo(final URL url, final java.io.File file) {
 		super();
 		this.url = url;
 		this.file = file;
@@ -39,7 +42,7 @@ public class ArchiveInfo {
 
 	private java.util.jar.JarFile jarFile;
 
-	public java.util.jar.JarFile getJarFile() throws java.io.IOException {
+	public java.util.jar.JarFile getJarFile() throws IOException {
 		if (this.jarFile == null) {
 			synchronized (this) {
 				if (this.jarFile == null) {

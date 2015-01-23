@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.primary.clientlets;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -55,7 +56,7 @@ public class ArchiveCollection {
 
 	private ArchiveClassLoader classLoader;
 
-	public ClassLoader getClassLoader() throws java.io.IOException {
+	public ClassLoader getClassLoader() throws IOException {
 		synchronized (this) {
 			if (this.archiveInfos.size() == 0) {
 				return this.getClass().getClassLoader();

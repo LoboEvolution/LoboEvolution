@@ -580,7 +580,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		if (content != null) {
 			Component component = content.getComponent();
 			if (component == null) {
-				throw new java.lang.IllegalStateException("Component from "
+				throw new IllegalStateException("Component from "
 						+ content + " is null: " + response.getResponseURL()
 						+ ".");
 			}
@@ -676,14 +676,14 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	}
 
 	public final void navigate(String urlOrPath)
-			throws java.net.MalformedURLException {
+			throws MalformedURLException {
 		URL url = Urls.guessURL(urlOrPath);
 		this.navigate(url, "GET", null, TargetType.SELF,
 				RequestType.PROGRAMMATIC);
 	}
 
 	public final void navigate(String urlOrPath, RequestType requestType)
-			throws java.net.MalformedURLException {
+			throws MalformedURLException {
 		URL url = Urls.guessURL(urlOrPath);
 		this.navigate(url, "GET", null, TargetType.SELF, requestType);
 	}
@@ -869,7 +869,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	 * @return The top frame of the new window. The method may return
 	 *         <code>null</code> if navigation was vetoed by a listener.
 	 */
-	public NavigatorFrame open(java.net.URL url, String method,
+	public NavigatorFrame open(URL url, String method,
 			ParameterInfo pinfo, String windowId, Properties windowProperties) {
 		NavigationEvent event = new NavigationEvent(this, url, method, pinfo,
 				TargetType.BLANK, RequestType.OPEN_WINDOW, this);

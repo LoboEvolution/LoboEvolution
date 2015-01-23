@@ -44,7 +44,7 @@ public class CertificateSSL {
 		 * find valid certification path to requested target
 		 */
 		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
-			public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+			public X509Certificate[] getAcceptedIssuers() {
 				return null;
 			}
 

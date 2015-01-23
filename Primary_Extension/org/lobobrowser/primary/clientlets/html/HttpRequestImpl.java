@@ -24,8 +24,10 @@ import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
 
+import org.lobobrowser.context.NetworkRequestImpl;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.ReadyStateChangeListener;
+import org.lobobrowser.http.Header;
 import org.lobobrowser.ua.NetworkRequest;
 import org.lobobrowser.ua.NetworkRequestEvent;
 import org.lobobrowser.ua.NetworkRequestListener;
@@ -122,8 +124,81 @@ public class HttpRequestImpl implements HttpRequest {
 
 	@Override
 	public void setRequestHeader(String header, String value) {
-		System.out.println("setRequestHeader1");
-		// TODO Auto-generated method stub
-
-	}
+		
+		NetworkRequestImpl nr = new NetworkRequestImpl();
+		
+		if (getReadyState() != HttpRequest.STATE_LOADING) {
+            throw new IllegalStateException("The AsyncHttpRequest must be opened prior to " +
+                    "setting a request header");
+        }
+        
+        if (header == null || value == null) {
+            throw new IllegalArgumentException("Neither the header, nor value, may be null");
+        }
+        
+        if (header.equalsIgnoreCase("Accept-Charset") ||
+            header.equalsIgnoreCase("Accept-Encoding") ||
+            header.equalsIgnoreCase("Content-Length") ||
+            header.equalsIgnoreCase("Expect") ||
+            header.equalsIgnoreCase("Date") ||
+            header.equalsIgnoreCase("Host") ||
+            header.equalsIgnoreCase("Keep-Alive") ||
+            header.equalsIgnoreCase("Referer") ||
+            header.equalsIgnoreCase("TE") ||
+            header.equalsIgnoreCase("Trailer") ||
+            header.equalsIgnoreCase("Transfer-Encoding") ||
+            header.equalsIgnoreCase("Upgrade")) {
+            
+            return;
+        }
+        
+        if (header.equalsIgnoreCase("Authorization") ||
+            header.equalsIgnoreCase("Content-Base") ||
+            header.equalsIgnoreCase("Content-Location") ||
+            header.equalsIgnoreCase("Content-MD5") ||
+            header.equalsIgnoreCase("Content-Range") ||
+            header.equalsIgnoreCase("Content-Type") ||
+            header.equalsIgnoreCase("Content-Version") ||
+            header.equalsIgnoreCase("Delta-Base") ||
+            header.equalsIgnoreCase("Depth") ||
+            header.equalsIgnoreCase("Destination") ||
+            header.equalsIgnoreCase("ETag") ||
+            header.equalsIgnoreCase("Expect") ||
+            header.equalsIgnoreCase("From") ||
+            header.equalsIgnoreCase("If-Modified-Since") ||
+            header.equalsIgnoreCase("If-Range") ||
+            header.equalsIgnoreCase("If-Unmodified-Since") ||
+            header.equalsIgnoreCase("Max-Forwards") ||
+            header.equalsIgnoreCase("MIME-Version") ||
+            header.equalsIgnoreCase("Overwrite") ||
+            header.equalsIgnoreCase("Proxy-Authorization") ||
+            header.equalsIgnoreCase("SOAPAction") ||
+            header.equalsIgnoreCase("Timeout")) {
+        	
+        	//replace the current header, if any
+            for (Header h : nr.getReq().getHeaders()) {
+                if (h.getName().equalsIgnoreCase(header)) {
+                	nr.getReq().removeHeader(h);
+                    nr.getReq().setHeader(new Header(header, value));
+                    break;
+                }
+            }
+        } else {
+            //append the value to the header, if one is already specified. Else,
+            //just add it as a new header
+        	
+            boolean appended = false;
+            for (Header h : nr.getReq().getHeaders()) {
+                if (h.getName().equalsIgnoreCase(header)) {
+                	nr.getReq().removeHeader(h);
+                	nr.getReq().setHeader(new Header(header, h.getValue() + ", " + value));
+                    appended = true;
+                    break;
+                }
+            }
+            if (!appended) {
+            	nr.getReq().setHeader(new Header(header, value));
+            }
+        }
+    }
 }

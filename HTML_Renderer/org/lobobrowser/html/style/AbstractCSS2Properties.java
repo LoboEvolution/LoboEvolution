@@ -23,12 +23,15 @@
  */
 package org.lobobrowser.html.style;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.gui.ColorFactory;
@@ -1724,13 +1727,13 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 						finalValue = newValue;
 					} else {
 						try {
-							java.net.URL styleUrl = Urls.createURL(null,
+							URL styleUrl = Urls.createURL(null,
 									baseHref);
 							finalValue = "url("
 									+ HtmlValues.quoteAndEscape(Urls.createURL(
 											styleUrl, tentativeUri)
 											.toExternalForm()) + ")";
-						} catch (java.net.MalformedURLException mfu) {
+						} catch (MalformedURLException mfu) {
 							logger.log(Level.WARNING,
 									"Unable to create URL for URI=["
 											+ tentativeUri + "], with base=["

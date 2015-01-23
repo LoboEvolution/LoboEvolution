@@ -213,7 +213,7 @@ public class Strings {
 		byte[] bytes;
 		try {
 			bytes = source.getBytes("UTF-8");
-		} catch (java.io.UnsupportedEncodingException ue) {
+		} catch (UnsupportedEncodingException ue) {
 			throw new IllegalStateException(ue);
 		}
 		byte[] result;

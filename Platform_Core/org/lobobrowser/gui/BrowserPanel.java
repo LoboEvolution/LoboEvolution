@@ -24,6 +24,8 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.EventListener;
@@ -167,7 +169,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 	 *            An absolute URL or file path.
 	 */
 	public void navigate(String urlOrPath)
-			throws java.net.MalformedURLException {
+			throws MalformedURLException {
 		this.framePanel.navigate(urlOrPath);
 	}
 
@@ -177,8 +179,8 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 	 * @param url
 	 *            A URL.
 	 */
-	public void navigate(java.net.URL url)
-			throws java.net.MalformedURLException {
+	public void navigate(URL url)
+			throws MalformedURLException {
 		this.framePanel.navigate(url);
 	}
 

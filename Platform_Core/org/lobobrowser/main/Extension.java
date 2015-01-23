@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandlerFactory;
@@ -161,7 +162,7 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		return this.extId;
 	}
 
-	public URL getCodeSource() throws java.net.MalformedURLException {
+	public URL getCodeSource() throws MalformedURLException {
 		return this.extRoot.toURL();
 	}
 
@@ -177,10 +178,10 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 	private NavigatorExtension platformExtension;
 
 	public void initClassLoader(ClassLoader parentClassLoader)
-			throws java.net.MalformedURLException, ClassNotFoundException,
+			throws MalformedURLException, ClassNotFoundException,
 			IllegalAccessException, InstantiationException {
 		URL url = this.extRoot.toURL();
-		java.net.URL[] urls = new java.net.URL[] { url };
+		java.net.URL[] urls = new URL[] { url };
 		ExtensionClassLoader classLoader = new ExtensionClassLoader(urls,
 				parentClassLoader);
 		String extClassName = this.extClassName;
@@ -262,7 +263,7 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
-	public void close() throws java.io.IOException {
+	public void close() throws IOException {
 		if (this.jarFile != null) {
 			this.jarFile.close();
 		}

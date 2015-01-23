@@ -112,7 +112,7 @@ public class ListSet {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.util.List#contains(java.lang.Object)
+	 * @see java.util.List#contains(Object)
 	 */
 	public boolean contains(Object o) {
 		return this.set.contains(o);
@@ -139,7 +139,7 @@ public class ListSet {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.util.List#indexOf(java.lang.Object)
+	 * @see java.util.List#indexOf(Object)
 	 */
 	public int indexOf(Object o) {
 		return this.list.indexOf(o);
@@ -166,7 +166,7 @@ public class ListSet {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.util.List#lastIndexOf(java.lang.Object)
+	 * @see java.util.List#lastIndexOf(Object)
 	 */
 	public int lastIndexOf(Object o) {
 		return this.list.lastIndexOf(o);
@@ -206,7 +206,7 @@ public class ListSet {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.util.List#remove(java.lang.Object)
+	 * @see java.util.List#remove(Object)
 	 */
 	public boolean remove(Object o) {
 		if (this.set.remove(o)) {

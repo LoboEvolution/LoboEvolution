@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -85,7 +86,7 @@ public class AboutURLConnection extends URLConnection {
 				.getBytes("UTF-8"));
 	}
 
-	private String getURLText(java.net.URL url) {
+	private String getURLText(URL url) {
 		String path = url.getPath();
 		if ("blank".equalsIgnoreCase(path)) {
 			return "";
@@ -99,7 +100,7 @@ public class AboutURLConnection extends URLConnection {
 			try {
 				String searchQuery = java.net.URLDecoder.decode(query, "UTF-8");
 				return this.getBookmarks(searchQuery);
-			} catch (java.io.UnsupportedEncodingException uee) {
+			} catch (UnsupportedEncodingException uee) {
 				throw new IllegalStateException("not expected", uee);
 			}
 		} else if ("java-properties".equals(path)) {
@@ -223,7 +224,7 @@ public class AboutURLConnection extends URLConnection {
 
 	private void writeBookmark(PrintWriter writer,
 			HistoryEntry<BookmarkInfo> entry) {
-		java.net.URL url = entry.getUrl();
+		URL url = entry.getUrl();
 		String urlText = url.toExternalForm();
 		BookmarkInfo binfo = entry.getItemInfo();
 		String text = binfo.getTitle();

@@ -23,6 +23,8 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import java.io.IOException;
+import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.MissingResourceException;
@@ -141,7 +143,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements
 				baseLineNumber = 1; // TODO: Line number of inner text??
 			} else {
 				this.informExternalScriptLoading();
-				java.net.URL scriptURL = ((HTMLDocumentImpl) doc)
+				URL scriptURL = ((HTMLDocumentImpl) doc)
 						.getFullURL(src);
 				scriptURI = scriptURL == null ? src : scriptURL
 						.toExternalForm();
@@ -154,7 +156,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements
 						try {
 							request.open("GET", scriptURI, false);
 							request.send(null);
-						} catch (java.io.IOException thrown) {
+						} catch (IOException thrown) {
 							logger.log(Level.WARNING, "processScript()", thrown);
 						}
 					} else {
@@ -168,7 +170,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements
 											request.open("GET", scriptURI,
 													false);
 											request.send(null);
-										} catch (java.io.IOException thrown) {
+										} catch (IOException thrown) {
 											logger.log(Level.WARNING,
 													"processScript()", thrown);
 										}
@@ -209,7 +211,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements
 				try {
 					long time1 = liflag ? System.currentTimeMillis() : 0;
 					if (text == null) {
-						throw new java.lang.IllegalStateException(
+						throw new IllegalStateException(
 								"Script source is null: " + this + ".");
 					}
 					ctx.evaluateString(scope, text, scriptURI, baseLineNumber,null);

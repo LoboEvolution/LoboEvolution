@@ -20,7 +20,9 @@
  */
 package org.lobobrowser.primary.clientlets.download;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 import org.lobobrowser.clientlet.CancelClientletException;
 import org.lobobrowser.clientlet.Clientlet;
@@ -34,7 +36,7 @@ import org.lobobrowser.util.Urls;
 public class DownloadClientlet implements Clientlet {
 	public void process(ClientletContext context) throws ClientletException {
 		ClientletResponse response = context.getResponse();
-		java.net.URL url = response.getResponseURL();
+		URL url = response.getResponseURL();
 		if (url.getProtocol().equals("file") && "".equals(url.getHost())) {
 			String shorterPath = Strings.truncate(Urls.getNoRefForm(url), 64);
 			context.getNavigatorFrame().alert(
@@ -77,7 +79,7 @@ public class DownloadClientlet implements Clientlet {
 				} finally {
 					in.close();
 				}
-			} catch (java.io.IOException ioe) {
+			} catch (IOException ioe) {
 				throw new ClientletException(ioe);
 			}
 		}

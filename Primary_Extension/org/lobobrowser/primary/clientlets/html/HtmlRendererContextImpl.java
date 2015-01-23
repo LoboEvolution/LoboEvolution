@@ -222,7 +222,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		}
 	}
 
-	public HtmlRendererContext open(java.net.URL urlObj, String windowName,
+	public HtmlRendererContext open(URL urlObj, String windowName,
 			String windowFeatures, boolean replace) {
 		Properties windowProperties = windowFeatures == null ? null
 				: org.lobobrowser.gui.NavigatorWindowImpl

@@ -32,7 +32,7 @@ import org.lobobrowser.clientlet.ClientletResponse;
 public class NavigationEntry {
 	// Note: Do not retain request context here.
 
-	private final java.net.URL url;
+	private final URL url;
 	private final String method;
 	private final String title;
 	private final String description;
@@ -59,7 +59,7 @@ public class NavigationEntry {
 		return title;
 	}
 
-	public java.net.URL getUrl() {
+	public URL getUrl() {
 		return url;
 	}
 

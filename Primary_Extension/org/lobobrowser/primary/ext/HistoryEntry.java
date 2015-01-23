@@ -23,7 +23,7 @@ package org.lobobrowser.primary.ext;
 import java.net.URL;
 
 public class HistoryEntry<T> {
-	private final java.net.URL url;
+	private final URL url;
 	private final long timetstamp;
 	private final T itemInfo;
 
@@ -42,7 +42,7 @@ public class HistoryEntry<T> {
 		return timetstamp;
 	}
 
-	public java.net.URL getUrl() {
+	public URL getUrl() {
 		return url;
 	}
 }

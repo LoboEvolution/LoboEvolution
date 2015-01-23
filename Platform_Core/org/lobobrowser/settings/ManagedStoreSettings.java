@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.settings;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,7 +69,7 @@ class ManagedStoreSettings implements Serializable {
 		try {
 			StorageManager.getInstance().saveSettings(
 					this.getClass().getSimpleName(), this);
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			logger.log(Level.WARNING, "Unable to save settings: "
 					+ this.getClass().getSimpleName(), ioe);
 		}

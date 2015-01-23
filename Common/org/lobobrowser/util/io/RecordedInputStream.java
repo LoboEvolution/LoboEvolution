@@ -26,6 +26,7 @@ package org.lobobrowser.util.io;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Wraps an InputStream and records all of the bytes read. This stream supports
@@ -111,7 +112,7 @@ public class RecordedInputStream extends InputStream {
 
 	public synchronized void mark(int readlimit) {
 		if (this.hasReachedMaxBufferSize) {
-			throw new java.lang.IllegalStateException(
+			throw new IllegalStateException(
 					"Maximum buffer size was already reached.");
 		}
 		this.markPosition = this.store.size();
@@ -119,7 +120,7 @@ public class RecordedInputStream extends InputStream {
 
 	public synchronized void reset() throws IOException {
 		if (this.hasReachedMaxBufferSize) {
-			throw new java.lang.IllegalStateException(
+			throw new IllegalStateException(
 					"Maximum buffer size was already reached.");
 		}
 		int mp = this.markPosition;
@@ -175,7 +176,7 @@ public class RecordedInputStream extends InputStream {
 	}
 
 	public String getString(String encoding)
-			throws java.io.UnsupportedEncodingException,
+			throws UnsupportedEncodingException,
 			BufferExceededException {
 		if (this.hasReachedMaxBufferSize) {
 			throw new BufferExceededException();

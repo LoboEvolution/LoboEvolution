@@ -109,14 +109,14 @@ public class TempFileManager {
 						}
 						file.delete();
 					}
-				} catch (java.io.IOException ioe) {
+				} catch (IOException ioe) {
 					// ignore
 				}
 			}
 		}
 	}
 
-	public JarFile createJarFile(byte[] bytes) throws java.io.IOException {
+	public JarFile createJarFile(byte[] bytes) throws IOException {
 		// Dequeue and clean up first
 		for (;;) {
 			Reference<? extends JarFile> ref = REFERENCE_QUEUE.poll();

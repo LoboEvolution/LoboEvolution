@@ -1,5 +1,7 @@
 package org.lobobrowser.html.domimpl;
 
+import java.net.MalformedURLException;
+
 import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.FrameNode;
@@ -24,7 +26,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements
 			if (src != null) {
 				try {
 					frame.loadURL(this.getFullURL(src));
-				} catch (java.net.MalformedURLException mfu) {
+				} catch (MalformedURLException mfu) {
 					this.warn("setBrowserFrame(): Unable to navigate to src.",
 							mfu);
 				}
@@ -141,7 +143,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements
 			if (frame != null) {
 				try {
 					frame.loadURL(this.getFullURL(value));
-				} catch (java.net.MalformedURLException mfu) {
+				} catch (MalformedURLException mfu) {
 					this.warn(
 							"assignAttributeField(): Unable to navigate to src.",
 							mfu);

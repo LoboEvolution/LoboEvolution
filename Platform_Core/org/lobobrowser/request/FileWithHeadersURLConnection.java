@@ -138,7 +138,7 @@ public class FileWithHeadersURLConnection extends HttpURLConnection {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.net.URLConnection#getHeaderField(java.lang.String)
+	 * @see java.net.URLConnection#getHeaderField(String)
 	 */
 	public String getHeaderField(String name) {
 		try {

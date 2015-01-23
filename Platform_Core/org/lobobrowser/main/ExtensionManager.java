@@ -24,6 +24,7 @@ import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLConnection;
@@ -109,7 +110,7 @@ public class ExtensionManager {
 		this.createExtensions(extDirs, extFiles);
 	}
 
-	private void addExtension(File file) throws java.io.IOException {
+	private void addExtension(File file) throws IOException {
 		if (!file.exists()) {
 			logger.warning("addExtension(): File " + file + " does not exist.");
 			return;
@@ -185,7 +186,7 @@ public class ExtensionManager {
 		for (Extension ei : libraries) {
 			try {
 				libraryURLCollection.add(ei.getCodeSource());
-			} catch (java.net.MalformedURLException thrown) {
+			} catch (MalformedURLException thrown) {
 				logger.log(Level.SEVERE, "createExtensions()", thrown);
 			}
 		}

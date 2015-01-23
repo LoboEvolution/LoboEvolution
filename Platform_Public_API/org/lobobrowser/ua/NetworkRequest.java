@@ -24,6 +24,7 @@
 package org.lobobrowser.ua;
 
 import java.awt.Image;
+import java.io.IOException;
 import java.net.URL;
 
 import org.w3c.dom.Document;
@@ -124,7 +125,7 @@ public interface NetworkRequest {
 	 * @param url
 	 *            The destination URL.
 	 */
-	public void open(String method, String url) throws java.io.IOException;
+	public void open(String method, String url) throws IOException;
 
 	/**
 	 * Opens an asynchronous request.
@@ -134,7 +135,7 @@ public interface NetworkRequest {
 	 * @param url
 	 *            The destination URL.
 	 */
-	public void open(String method, URL url) throws java.io.IOException;
+	public void open(String method, URL url) throws IOException;
 
 	/**
 	 * Opens an request.
@@ -147,7 +148,7 @@ public interface NetworkRequest {
 	 *            Whether the request is asynchronous.
 	 */
 	public void open(String method, URL url, boolean asyncFlag)
-			throws java.io.IOException;
+			throws IOException;
 
 	/**
 	 * Opens a request.
@@ -160,7 +161,7 @@ public interface NetworkRequest {
 	 *            Whether the request should be asynchronous.
 	 */
 	public void open(String method, String url, boolean asyncFlag)
-			throws java.io.IOException;
+			throws IOException;
 
 	/**
 	 * Opens a request.
@@ -174,8 +175,8 @@ public interface NetworkRequest {
 	 * @param userName
 	 *            The HTTP authentication user name.
 	 */
-	public void open(String method, java.net.URL url, boolean asyncFlag,
-			String userName) throws java.io.IOException;
+	public void open(String method, URL url, boolean asyncFlag,
+			String userName) throws IOException;
 
 	/**
 	 * Opens a request.
@@ -191,17 +192,17 @@ public interface NetworkRequest {
 	 * @param password
 	 *            The HTTP authentication password.
 	 */
-	public void open(String method, java.net.URL url, boolean asyncFlag,
-			String userName, String password) throws java.io.IOException;
+	public void open(String method, URL url, boolean asyncFlag,
+			String userName, String password) throws IOException;
 
 	/**
 	 * Sends POST content if any.
 	 * 
 	 * @param content
 	 *            POST content or <code>null</code> for GET requests.
-	 * @throws java.io.IOException
+	 * @throws IOException
 	 */
-	public void send(String content) throws java.io.IOException;
+	public void send(String content) throws IOException;
 
 	/**
 	 * Adds a listener of ReadyState changes. The listener should be invoked
