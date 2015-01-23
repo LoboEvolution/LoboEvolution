@@ -69,7 +69,7 @@ public class LocalJavaFileObject implements JavaFileObject {
 			String sntl = simpleName.toLowerCase();
 			return sntl.endsWith(".java") || sntl.endsWith(".fx");
 		} else {
-			throw new java.lang.UnsupportedOperationException("simpleName="
+			throw new UnsupportedOperationException("simpleName="
 					+ simpleName + ",kind=" + kind);
 		}
 	}

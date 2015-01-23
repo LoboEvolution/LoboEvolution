@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.jweb.compilation;
 
+import java.net.URL;
 import java.util.Map;
 import java.util.Properties;
 
@@ -60,7 +61,7 @@ public class BuildResult implements java.io.Serializable {
 	}
 
 	public ClassLoader buildClassLoader(ClientletContext context,
-			java.net.URL codeLocation, ClassLoader systemLoader,
+			URL codeLocation, ClassLoader systemLoader,
 			PathRepository classPathRepository) {
 		ClassLoader parentLoader = new PathRepositoryClassLoader(context,
 				systemLoader, classPathRepository);

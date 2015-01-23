@@ -27,6 +27,7 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -101,7 +102,7 @@ public class ResponseJavaInputFile implements JavaFileObject {
 	}
 
 	public OutputStream openOutputStream() throws IOException {
-		throw new java.lang.UnsupportedOperationException();
+		throw new UnsupportedOperationException();
 	}
 
 	public Reader openReader(boolean arg0) throws IOException {
@@ -109,13 +110,13 @@ public class ResponseJavaInputFile implements JavaFileObject {
 	}
 
 	public Writer openWriter() throws IOException {
-		throw new java.lang.UnsupportedOperationException();
+		throw new UnsupportedOperationException();
 	}
 
 	public URI toUri() {
 		try {
 			return this.response.getResponseURL().toURI();
-		} catch (java.net.URISyntaxException use) {
+		} catch (URISyntaxException use) {
 			logger.log(Level.WARNING, "toUri(): Bad URI syntax.", use);
 			return null;
 		}

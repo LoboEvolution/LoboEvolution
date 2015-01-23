@@ -22,6 +22,7 @@ package org.lobobrowser.jweb.loading;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
@@ -63,18 +64,18 @@ public class PathRepositoryClassLoader extends SecureClassLoader {
 			if (javaFileObject == null) {
 				throw new ClassNotFoundException(className);
 			}
-			java.io.InputStream in = javaFileObject.openInputStream();
+			InputStream in = javaFileObject.openInputStream();
 			try {
 				byte[] buffer = IORoutines.load(in, 4096);
 				java.net.URI uri = javaFileObject.toUri();
 				if (uri == null) {
-					throw new java.lang.NullPointerException(
+					throw new NullPointerException(
 							"URI not available in " + javaFileObject);
 				}
 				URL url;
 				try {
 					url = uri.toURL();
-				} catch (java.net.MalformedURLException mfu) {
+				} catch (MalformedURLException mfu) {
 					logger.log(Level.WARNING, "findClass(): Malformed URL: "
 							+ uri + ".");
 					throw new ClassNotFoundException(className, mfu);
@@ -86,7 +87,7 @@ public class PathRepositoryClassLoader extends SecureClassLoader {
 			} finally {
 				in.close();
 			}
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			if (logger.isLoggable(Level.FINE)) {
 				logger.log(Level.FINE, "findClass(): Failed to find "
 						+ className + ".", ioe);
@@ -117,13 +118,13 @@ public class PathRepositoryClassLoader extends SecureClassLoader {
 							+ resourceName + "' returning " + url + ".");
 				}
 				return url;
-			} catch (java.net.MalformedURLException mfu) {
+			} catch (MalformedURLException mfu) {
 				logger.log(Level.WARNING,
 						"findResource(): Bad resource URL for resource named '"
 								+ resourceName + "'.");
 				return null;
 			}
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			if (logger.isLoggable(Level.INFO)) {
 				logger.log(Level.INFO,
 						"findResource(): IOException for resource named '"
@@ -163,7 +164,7 @@ public class PathRepositoryClassLoader extends SecureClassLoader {
 				return null;
 			}
 			return fileObject.openInputStream();
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			if (logger.isLoggable(Level.INFO)) {
 				logger.log(Level.INFO,
 						"findResource(): IOException for resource named '"

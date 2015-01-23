@@ -72,7 +72,7 @@ public class OutputJavaFileObject implements JavaFileObject {
 
 	public CharSequence getCharContent(boolean ignoreEncodingErrors)
 			throws IOException {
-		throw new java.lang.UnsupportedOperationException();
+		throw new UnsupportedOperationException();
 	}
 
 	public long getLastModified() {

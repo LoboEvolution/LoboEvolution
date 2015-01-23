@@ -26,7 +26,9 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Date;
 
 import javax.tools.FileObject;
 
@@ -63,7 +65,7 @@ public class URLFileObject implements FileObject {
 	}
 
 	public long getLastModified() {
-		java.util.Date date = this.context.getResponse().getDate();
+		Date date = this.context.getResponse().getDate();
 		return date == null ? 0 : date.getTime();
 	}
 
@@ -96,7 +98,7 @@ public class URLFileObject implements FileObject {
 	}
 
 	public OutputStream openOutputStream() throws IOException {
-		throw new java.lang.UnsupportedOperationException(
+		throw new UnsupportedOperationException(
 				"Writing output to URL not supported.");
 	}
 
@@ -105,15 +107,15 @@ public class URLFileObject implements FileObject {
 	}
 
 	public Writer openWriter() throws IOException {
-		throw new java.lang.UnsupportedOperationException(
+		throw new UnsupportedOperationException(
 				"Writing output to URL not supported.");
 	}
 
 	public URI toUri() {
 		try {
 			return this.resourceURL.toURI();
-		} catch (java.net.URISyntaxException mfu) {
-			throw new java.lang.IllegalStateException(
+		} catch (URISyntaxException mfu) {
+			throw new IllegalStateException(
 					"Unexpected error converting URL to URI: "
 							+ this.resourceURL + ".", mfu);
 		}

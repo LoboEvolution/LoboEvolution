@@ -23,6 +23,9 @@ package org.lobobrowser.jweb.compilation;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -91,7 +94,7 @@ public class JavaResponseFileManager implements JavaFileManager {
 			return this.classPathRepository.getFileForInput(this.context,
 					packageName, relativeName);
 		} else {
-			throw new java.lang.UnsupportedOperationException(
+			throw new UnsupportedOperationException(
 					"Not expected to be called for location=" + location + ".");
 		}
 	}
@@ -103,7 +106,7 @@ public class JavaResponseFileManager implements JavaFileManager {
 					+ ",packageName=" + packageName + ",relativeName="
 					+ relativeName);
 		}
-		throw new java.lang.UnsupportedOperationException(
+		throw new UnsupportedOperationException(
 				"Not expected to be called");
 	}
 
@@ -136,14 +139,14 @@ public class JavaResponseFileManager implements JavaFileManager {
 			}
 			return jfo;
 		} else {
-			throw new java.lang.UnsupportedOperationException("location="
+			throw new UnsupportedOperationException("location="
 					+ location + ",className=" + className + ",kind=" + kind);
 		}
 	}
 
 	private java.net.URI getOutputFileURI(String fileName)
-			throws java.net.URISyntaxException {
-		java.net.URL responseURL = this.context.getResponse().getResponseURL();
+			throws URISyntaxException {
+		URL responseURL = this.context.getResponse().getResponseURL();
 		String host = responseURL.getHost();
 		int port = responseURL.getPort();
 		String hostPort = host == null || host.length() == 0 ? "" : "//" + host
@@ -152,7 +155,7 @@ public class JavaResponseFileManager implements JavaFileManager {
 				+ "-" + fileName;
 		// Security: It's important that the URI host be the same as
 		// the response host.
-		return new java.net.URI(responseURL.getProtocol() + ":" + hostPort
+		return new URI(responseURL.getProtocol() + ":" + hostPort
 				+ outputPath);
 	}
 
@@ -186,12 +189,12 @@ public class JavaResponseFileManager implements JavaFileManager {
 					this.outFiles.put(className, outFile);
 				}
 				return outFile;
-			} catch (java.net.URISyntaxException use) {
+			} catch (URISyntaxException use) {
 				throw new IllegalStateException("Unexpected URI syntax error.",
 						use);
 			}
 		} else {
-			throw new java.lang.UnsupportedOperationException("location="
+			throw new UnsupportedOperationException("location="
 					+ location + ",className=" + className + ",kind=" + kind
 					+ ",sibling=" + sibling);
 		}
@@ -236,7 +239,7 @@ public class JavaResponseFileManager implements JavaFileManager {
 			return this.sourcePathRepository.list(this.context, packageName,
 					kinds, recurse);
 		} else {
-			throw new java.lang.UnsupportedOperationException(
+			throw new UnsupportedOperationException(
 					"list(): Location=" + location + ",packageName="
 							+ packageName + ",kinds=" + kinds + ",recurse="
 							+ recurse);
@@ -271,7 +274,7 @@ public class JavaResponseFileManager implements JavaFileManager {
 	}
 
 	public void setPersistedBuildResult(BuildResult buildResult)
-			throws java.io.IOException {
+			throws IOException {
 		this.resultingClassName = buildResult.className;
 		Map<String, JavaFileObject> outFiles = this.outFiles;
 		for (Map.Entry<String, OutputFileInfo> entry : buildResult.outputFiles
@@ -294,7 +297,7 @@ public class JavaResponseFileManager implements JavaFileManager {
 				synchronized (outFiles) {
 					outFiles.put(entry.getKey(), jfo);
 				}
-			} catch (java.net.URISyntaxException use) {
+			} catch (URISyntaxException use) {
 				throw new IllegalStateException("Unexpected URI syntax error.",
 						use);
 			}

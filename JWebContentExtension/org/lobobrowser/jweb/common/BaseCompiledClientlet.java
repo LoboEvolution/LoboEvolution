@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -86,7 +87,7 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 	static {
 		String bootClassPath = System.getProperty(SUN_BOOT_CLASS_PATH_PROPERTY);
 		if (bootClassPath == null) {
-			throw new java.lang.IllegalStateException("Property "
+			throw new IllegalStateException("Property "
 					+ SUN_BOOT_CLASS_PATH_PROPERTY + " not found.");
 		}
 		String pathSeparator = System.getProperty("path.separator");
@@ -96,9 +97,9 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 		while (tok.hasMoreTokens()) {
 			String entryPath = tok.nextToken().trim();
 			try {
-				java.net.URL url = Urls.guessURL(entryPath);
+				URL url = Urls.guessURL(entryPath);
 				entries.add(url);
-			} catch (java.net.MalformedURLException mfu1) {
+			} catch (MalformedURLException mfu1) {
 				logger.log(Level.WARNING,
 						"<clinit>: Unable to create URL for '" + entryPath
 								+ "'.", mfu1);
@@ -305,14 +306,14 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 			}
 		} catch (ClientletException ce) {
 			throw ce;
-		} catch (java.lang.ClassNotFoundException cnf) {
+		} catch (ClassNotFoundException cnf) {
 			throw new ClientletException(
 					"Unexpected: Class not found after building document.", cnf);
-		} catch (java.lang.InstantiationException ie) {
+		} catch (InstantiationException ie) {
 			throw new ClientletException(
 					"Unable to instantiate class. Note that the class should be non-abstract and have a default constructor.",
 					ie);
-		} catch (java.lang.reflect.InvocationTargetException ite) {
+		} catch (InvocationTargetException ite) {
 			throw new ClientletException(
 					"Got InvactionTargetException. Target exception attached.",
 					ite.getTargetException());
@@ -494,7 +495,7 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 					try {
 						URL url = Urls.guessURL(baseURL, token);
 						urlList.add(url);
-					} catch (java.net.MalformedURLException mfu) {
+					} catch (MalformedURLException mfu) {
 						throw new ClientletException("Path URI in directive '"
 								+ pathPropName + "' is malformed: " + classPath
 								+ ".");

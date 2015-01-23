@@ -45,7 +45,7 @@ public class JarFileObject implements FileObject {
 	}
 
 	public boolean delete() {
-		throw new java.lang.UnsupportedOperationException(
+		throw new UnsupportedOperationException(
 				"No deletion in JAR file.");
 	}
 
@@ -73,7 +73,7 @@ public class JarFileObject implements FileObject {
 	}
 
 	public OutputStream openOutputStream() throws IOException {
-		throw new java.lang.UnsupportedOperationException(
+		throw new UnsupportedOperationException(
 				"No writing into JAR files.");
 	}
 

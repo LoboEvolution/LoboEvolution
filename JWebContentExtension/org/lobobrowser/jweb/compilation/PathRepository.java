@@ -20,6 +20,9 @@
  */
 package org.lobobrowser.jweb.compilation;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -96,21 +99,21 @@ public class PathRepository {
 		}
 	}
 
-	private static java.io.File getFile(URL url) throws java.io.IOException {
+	private static java.io.File getFile(URL url) throws IOException {
 		try {
 			return new java.io.File(url.toURI());
-		} catch (java.net.URISyntaxException us) {
+		} catch (URISyntaxException us) {
 			try {
 				return new java.io.File(URLDecoder.decode(url.getPath(),
 						"UTF-8"));
-			} catch (java.io.UnsupportedEncodingException ue) {
+			} catch (UnsupportedEncodingException ue) {
 				throw new java.io.FileNotFoundException("Bad file URL: " + url);
 			}
 		}
 	}
 
 	private JarFile createJarFile(ClientletContext context, URL url,
-			boolean isLocalFile, java.io.File file) throws java.io.IOException {
+			boolean isLocalFile, java.io.File file) throws IOException {
 		if (isLocalFile) {
 			return new JarFile(file);
 		} else {
@@ -133,7 +136,7 @@ public class PathRepository {
 	}
 
 	public JavaFileObject getJavaFileForInput(ClientletContext context,
-			String className, Kind kind) throws java.io.IOException {
+			String className, Kind kind) throws IOException {
 		String suffix;
 		if (Kind.CLASS.equals(kind)) {
 			suffix = ".class";
@@ -162,7 +165,7 @@ public class PathRepository {
 	}
 
 	public FileObject getFileForInput(ClientletContext context,
-			String packageName, String resourceName) throws java.io.IOException {
+			String packageName, String resourceName) throws IOException {
 		String resourceAsPath = packageName.replace(".", "/") + "/"
 				+ resourceName;
 		for (JarInfo jinfo : this.jarFiles) {
@@ -191,7 +194,7 @@ public class PathRepository {
 					PathManager.getNestingKindForName(classAsPath));
 			jfo.openInputStream();
 			return jfo;
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			if (logger.isLoggable(Level.FINE)) {
 				logger.log(Level.FINE, "getJavaFileForInput()", ioe);
 			}
@@ -207,7 +210,7 @@ public class PathRepository {
 					resourcePath);
 			jfo.openInputStream();
 			return jfo;
-		} catch (java.io.IOException ioe) {
+		} catch (IOException ioe) {
 			if (logger.isLoggable(Level.FINE)) {
 				logger.log(Level.FINE, "getJavaFileForInput()", ioe);
 			}
@@ -217,7 +220,7 @@ public class PathRepository {
 
 	public List<JavaFileObject> list(ClientletContext context,
 			String packageName, Set<Kind> kinds, boolean recurse)
-			throws java.io.IOException {
+			throws IOException {
 		String packagePath = packageName.replace('.', '/');
 		Collection<JarInfo> jarFiles = this.jarFiles;
 		List<JavaFileObject> list = new ArrayList<JavaFileObject>();
@@ -258,7 +261,7 @@ public class PathRepository {
 						NestingKind nestingKind = PathManager
 								.getNestingKindForName(name);
 						String normalizedFullName;
-						if (java.io.File.separatorChar != '/') {
+						if (File.separatorChar != '/') {
 							normalizedFullName = fullName.replace(
 									java.io.File.separatorChar, '/');
 						} else {
@@ -385,7 +388,7 @@ public class PathRepository {
 			List<JavaFileObject> list, URL dirURL, String packagePath,
 			Set<Kind> kinds, boolean recurse) {
 		if (Urls.isLocalFile(dirURL)) {
-			if (java.io.File.separatorChar != '/') {
+			if (File.separatorChar != '/') {
 				packagePath = packagePath.replace('/',
 						java.io.File.separatorChar);
 			}
@@ -460,7 +463,7 @@ public class PathRepository {
 			this.jarURL = jarURL;
 		}
 
-		public void close() throws java.io.IOException {
+		public void close() throws IOException {
 			JarFile jarFile = this.cachedJarFile;
 			if (jarFile != null) {
 				jarFile.close();
@@ -468,7 +471,7 @@ public class PathRepository {
 		}
 
 		private JarFile getJarFile(ClientletContext context)
-				throws java.io.IOException {
+				throws IOException {
 			JarFile jf;
 			synchronized (this) {
 				jf = this.cachedJarFile;
@@ -509,7 +512,7 @@ public class PathRepository {
 		}
 
 		public JavaFileObject getJavaFileForInput(ClientletContext context,
-				String classAsPath, Kind kind) throws java.io.IOException {
+				String classAsPath, Kind kind) throws IOException {
 			JarFile jarFile = this.getJarFile(context);
 			JarEntry entry = jarFile.getJarEntry(classAsPath);
 			if (entry == null) {
@@ -520,14 +523,14 @@ public class PathRepository {
 						entry.getName());
 				return new JarJavaFileObject(jarFile, entry, uri, kind,
 						PathManager.getNestingKindForName(classAsPath));
-			} catch (java.net.URISyntaxException use) {
-				throw new java.lang.IllegalStateException(
+			} catch (URISyntaxException use) {
+				throw new IllegalStateException(
 						"Unexpected URI syntax error.", use);
 			}
 		}
 
 		public FileObject getFileForInput(ClientletContext context,
-				String resourcePath) throws java.io.IOException {
+				String resourcePath) throws IOException {
 			JarFile jarFile = this.getJarFile(context);
 			JarEntry entry = jarFile.getJarEntry(resourcePath);
 			if (entry == null) {
@@ -537,14 +540,14 @@ public class PathRepository {
 				java.net.URI uri = createJarEntryURI(this.jarURL,
 						entry.getName());
 				return new JarFileObject(jarFile, entry, uri);
-			} catch (java.net.URISyntaxException use) {
-				throw new java.lang.IllegalStateException(
+			} catch (URISyntaxException use) {
+				throw new IllegalStateException(
 						"Unexpected URI syntax error.", use);
 			}
 		}
 
 		private void populate(ClientletContext context, JarFile jarFile)
-				throws java.io.IOException {
+				throws IOException {
 			Map<String, List<EntryInfo>> entriesByPackagePath = this.entriesByPackagePath;
 			Enumeration<JarEntry> entries = jarFile.entries();
 			while (entries.hasMoreElements()) {
@@ -565,7 +568,7 @@ public class PathRepository {
 
 		public void populateList(ClientletContext context,
 				List<JavaFileObject> list, String packagePath, Set<Kind> kinds,
-				boolean recurse) throws java.io.IOException {
+				boolean recurse) throws IOException {
 			JarFile jarFile = this.getJarFile(context);
 			synchronized (this) {
 				if (!this.populated) {
@@ -598,7 +601,7 @@ public class PathRepository {
 											name);
 									list.add(new JarJavaFileObject(jarFile,
 											jarEntry, uri, kind, nk));
-								} catch (java.net.URISyntaxException use) {
+								} catch (URISyntaxException use) {
 									logger.log(Level.WARNING, "populateList()",
 											use);
 								}
@@ -621,7 +624,7 @@ public class PathRepository {
 								URI uri = createJarEntryURI(jarURL, name);
 								list.add(new JarJavaFileObject(jarFile,
 										jarEntry, uri, kind, nk));
-							} catch (java.net.URISyntaxException use) {
+							} catch (URISyntaxException use) {
 								logger.log(Level.WARNING, "populateList()", use);
 							}
 						}

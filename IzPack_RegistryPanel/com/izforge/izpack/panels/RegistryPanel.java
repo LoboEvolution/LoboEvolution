@@ -93,7 +93,7 @@ public class RegistryPanel extends IzPanel implements NativeLibraryClient {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.izforge.izpack.util.NativeLibraryClient#freeLibrary(java.lang.String)
+	 * com.izforge.izpack.util.NativeLibraryClient#freeLibrary(String)
 	 */
 	public void freeLibrary(String arg0) {
 	}

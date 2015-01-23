@@ -37,7 +37,7 @@ public class BuildResultClassLoader extends SecureClassLoader {
 	// private static final Logger logger =
 	// Logger.getLogger(BuildResultClassLoader.class.getName());
 	private final BuildResult buildResult;
-	private final java.net.URL codeLocation;
+	private final URL codeLocation;
 
 	public BuildResultClassLoader(ClassLoader parent, URL codeLocation,
 			BuildResult buildResult) {
