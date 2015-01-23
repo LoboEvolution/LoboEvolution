@@ -47,7 +47,7 @@ class HrControl extends BaseControl {
 		int y = size.height / 2 - 1;
 		int width = size.width - offset * 2;
 		g.setColor(Color.black);
-		g.drawRect(x, y, width, 2);
+		g.drawRect(x, y, width, 0);
 	}
 
 	public boolean paintSelection(Graphics g, boolean inSelection,
