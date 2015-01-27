@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.renderer;
 
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,6 +49,7 @@ public class InputTextControl extends BaseInputTextControl {
 		text.setEditable(new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		text.setEnabled(!modelNode.getDisabled());
 		text.setPlaceholder(modelNode.getPlaceholder());
+		text.setSelectionColor(Color.BLUE);
 		text.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				HtmlController.getInstance().onEnterPressed(modelNode, null);

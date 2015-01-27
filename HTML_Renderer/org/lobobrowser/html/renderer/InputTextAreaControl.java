@@ -23,13 +23,13 @@
  */
 package org.lobobrowser.html.renderer;
 
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Insets;
 
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
@@ -65,6 +65,7 @@ public class InputTextAreaControl extends BaseInputControl {
 		widget.setEditable(new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		widget.setEnabled(!modelNode.getDisabled());
 		widget.setPlaceholder(modelNode.getPlaceholder());
+		widget.setSelectionColor(Color.BLUE);
 		widget.setText(value);
 	}
 

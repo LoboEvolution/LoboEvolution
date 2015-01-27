@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.renderer;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Insets;
@@ -50,11 +51,9 @@ abstract class BaseInputTextControl extends BaseInputControl {
 		widget.setFont(font.deriveFont(DEFAULT_FONT_SIZE));
 		widget.setDocument(new LimitedDocument());
 
-		// Note: Value attribute cannot be set in reset() method.
-		// Otherwise, layout revalidation causes typed values to
-		// be lost (including revalidation due to hover.)
 		DOMElementImpl element = this.controlElement;
 		String value = element.getAttribute(HtmlAttributeProperties.VALUE);
+		widget.setSelectionColor(Color.BLUE);
 		widget.setText(value);
 
 		this.widget = widget;
