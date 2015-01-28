@@ -6,8 +6,8 @@ import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.FrameNode;
 import org.lobobrowser.html.js.Window;
-import org.lobobrowser.html.style.IFrameRenderState;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.IFrameRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.w3c.HTMLIFrameElement;
 import org.w3c.dom.Document;
 

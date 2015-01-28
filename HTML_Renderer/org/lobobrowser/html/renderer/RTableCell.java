@@ -28,7 +28,7 @@ import java.awt.Dimension;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 
 class RTableCell extends RBlock {
 	private final HTMLTableCellElementImpl cellElement;

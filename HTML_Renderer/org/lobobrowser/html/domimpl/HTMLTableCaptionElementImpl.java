@@ -22,8 +22,8 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.style.RenderState;
-import org.lobobrowser.html.style.TableCaptionRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.html.renderstate.TableCaptionRenderState;
 import org.lobobrowser.html.w3c.HTMLTableCaptionElement;
 
 public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement

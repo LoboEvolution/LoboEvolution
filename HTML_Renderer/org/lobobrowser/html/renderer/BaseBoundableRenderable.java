@@ -188,7 +188,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		}
 	}
 
-	protected boolean isValid() {
+	public boolean isValid() {
 		return this.layoutUpTreeCanBeInvalidated;
 	}
 

@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 
 import org.lobobrowser.html.HtmlObject;
+import org.lobobrowser.html.control.RUIControl;
 
 public class UIControlWrapper implements UIControl {
 	private final Component component;

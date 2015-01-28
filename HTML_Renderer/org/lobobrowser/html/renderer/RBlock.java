@@ -47,8 +47,8 @@ import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.layout.LayoutValue;
-import org.lobobrowser.html.style.BlockRenderState;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.BlockRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.RenderThreadState;
 import org.lobobrowser.util.Objects;
 

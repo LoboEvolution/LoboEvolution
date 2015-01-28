@@ -25,8 +25,8 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.ListStyle;
-import org.lobobrowser.html.style.RenderState;
 
 class RList extends BaseRListElement {
 	public RList(DOMNodeImpl modelNode, int listNesting,

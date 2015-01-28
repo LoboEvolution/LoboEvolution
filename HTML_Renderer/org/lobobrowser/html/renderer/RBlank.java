@@ -29,7 +29,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 import org.lobobrowser.html.dombl.ModelNode;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 
 final class RBlank extends BaseBoundableRenderable {
 	// TODO: Is there a need for RBlank's at all?

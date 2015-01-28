@@ -20,8 +20,8 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.style.RenderState;
-import org.lobobrowser.html.style.TextDecorationRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.html.renderstate.TextDecorationRenderState;
 
 /**
  * Element used for U.

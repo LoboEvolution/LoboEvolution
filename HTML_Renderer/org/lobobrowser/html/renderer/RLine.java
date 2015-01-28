@@ -33,7 +33,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import org.lobobrowser.html.dombl.ModelNode;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 
 /**
  * @author J. H. S.

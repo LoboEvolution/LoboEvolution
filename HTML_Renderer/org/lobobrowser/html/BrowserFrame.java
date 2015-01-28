@@ -68,7 +68,7 @@ public interface BrowserFrame {
 	 * 
 	 * @param overflowX
 	 *            See constants in
-	 *            {@link org.lobobrowser.html.style.RenderState}.
+	 *            {@link org.lobobrowser.html.renderstate.RenderState}.
 	 */
 	public void setDefaultOverflowX(int overflowX);
 
@@ -77,7 +77,7 @@ public interface BrowserFrame {
 	 * 
 	 * @param overflowY
 	 *            See constants in
-	 *            {@link org.lobobrowser.html.style.RenderState}.
+	 *            {@link org.lobobrowser.html.renderstate.RenderState}.
 	 */
 	public void setDefaultOverflowY(int overflowY);
 }

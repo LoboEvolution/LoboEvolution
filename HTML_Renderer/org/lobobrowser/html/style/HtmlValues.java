@@ -34,6 +34,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.w3c.dom.css.CSS2Properties;

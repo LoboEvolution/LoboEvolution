@@ -31,8 +31,8 @@ import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.js.Executor;
-import org.lobobrowser.html.style.ImageRenderState;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.ImageRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.w3c.HTMLImageElement;
 import org.mozilla.javascript.Function;
 

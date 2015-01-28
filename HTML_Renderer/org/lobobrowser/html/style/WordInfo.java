@@ -28,7 +28,7 @@ import java.awt.FontMetrics;
 /**
  * @author J. H. S.
  */
-class WordInfo {
+public class WordInfo {
 	public FontMetrics fontMetrics;
 	public int descent;
 	public int ascentPlusLeading;

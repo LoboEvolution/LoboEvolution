@@ -20,8 +20,8 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.style.FontNameRenderState;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.FontNameRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 
 /**
  * Element used for TT and CODE.

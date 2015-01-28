@@ -24,6 +24,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 
+import org.lobobrowser.html.renderstate.RenderState;
+
 public abstract class RenderStateDelegator implements RenderState {
 	protected final RenderState delegate;
 

@@ -20,8 +20,8 @@
 */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.style.NavRenderState;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.NavRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.w3c.HTMLNavElement;
 
 

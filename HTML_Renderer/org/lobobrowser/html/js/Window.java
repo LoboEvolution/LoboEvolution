@@ -54,9 +54,6 @@ import org.lobobrowser.html.w3c.MessagePort;
 import org.lobobrowser.html.w3c.Selection;
 import org.lobobrowser.html.w3c.StyleMedia;
 import org.lobobrowser.html.w3c.UndoManager;
-import org.lobobrowser.html.w3c.webdatabase.Database;
-import org.lobobrowser.html.w3c.webdatabase.DatabaseCallback;
-import org.lobobrowser.html.w3c.webstorage.Storage;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.js.JavaClassWrapper;
 import org.lobobrowser.js.JavaClassWrapperFactory;
@@ -1916,31 +1913,5 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	public int getOuterHeight() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-	
-	public Database openDatabase(String name, String version,
-			String displayName, int estimatedSize) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-	public Database openDatabase(String name, String version,
-			String displayName, int estimatedSize,
-			DatabaseCallback creationCallback) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-	public Storage getSessionStorage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-	public Storage getLocalStorage() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

@@ -27,6 +27,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
+import org.lobobrowser.html.control.RUIControl;
+
 public abstract interface UIControl {
 	public void setRUIControl(RUIControl ruicontrol);
 

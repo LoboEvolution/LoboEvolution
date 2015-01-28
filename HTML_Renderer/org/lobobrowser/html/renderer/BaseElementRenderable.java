@@ -43,17 +43,17 @@ import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.BackgroundInfo;
 import org.lobobrowser.html.style.BorderInfo;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.GUITasks;
 import org.w3c.dom.css.CSS2Properties;
 
-abstract class BaseElementRenderable extends BaseRCollection implements
+public abstract class BaseElementRenderable extends BaseRCollection implements
 		RElement, RenderableContainer, java.awt.image.ImageObserver {
 	protected static final Integer INVALID_SIZE = new Integer(Integer.MIN_VALUE);
 

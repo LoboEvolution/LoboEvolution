@@ -77,7 +77,7 @@ import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.Renderable;
 import org.lobobrowser.html.renderer.RenderableContainer;
 import org.lobobrowser.html.renderer.RenderableSpot;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.util.Nodes;
 import org.lobobrowser.util.Objects;
 import org.lobobrowser.util.gui.ColorFactory;

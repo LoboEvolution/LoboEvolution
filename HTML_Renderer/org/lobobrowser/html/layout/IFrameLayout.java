@@ -21,12 +21,12 @@
 package org.lobobrowser.html.layout;
 
 import org.lobobrowser.html.BrowserFrame;
+import org.lobobrowser.html.control.BrowserFrameUIControl;
+import org.lobobrowser.html.control.RUIControl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLIFrameElementImpl;
-import org.lobobrowser.html.renderer.BrowserFrameUIControl;
 import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.renderer.RElement;
-import org.lobobrowser.html.renderer.RUIControl;
 import org.lobobrowser.html.renderer.UIControl;
 
 public class IFrameLayout extends CommonWidgetLayout {

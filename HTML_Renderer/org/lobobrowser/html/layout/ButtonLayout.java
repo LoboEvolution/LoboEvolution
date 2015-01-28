@@ -20,13 +20,13 @@
 */
 package org.lobobrowser.html.layout;
 
+import org.lobobrowser.html.control.BaseInputControl;
+import org.lobobrowser.html.control.InputButtonControl;
+import org.lobobrowser.html.control.RUIControl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.renderer.BaseInputControl;
-import org.lobobrowser.html.renderer.InputButtonControl;
 import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.renderer.RElement;
-import org.lobobrowser.html.renderer.RUIControl;
 
 public class ButtonLayout extends CommonWidgetLayout{
 

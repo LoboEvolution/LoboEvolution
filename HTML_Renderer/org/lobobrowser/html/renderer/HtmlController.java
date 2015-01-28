@@ -18,12 +18,12 @@ import org.lobobrowser.html.js.Event;
 import org.lobobrowser.html.js.Executor;
 import org.mozilla.javascript.Function;
 
-class HtmlController {
+public class HtmlController {
 	private static final Logger logger = Logger.getLogger(HtmlController.class
 			.getName());
 	private static final HtmlController instance = new HtmlController();
 
-	static HtmlController getInstance() {
+	public static HtmlController getInstance() {
 		return instance;
 	}
 

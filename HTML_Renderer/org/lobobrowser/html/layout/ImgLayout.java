@@ -20,12 +20,12 @@
  */
 package org.lobobrowser.html.layout;
 
+import org.lobobrowser.html.control.ImgControl;
+import org.lobobrowser.html.control.RImgControl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
-import org.lobobrowser.html.renderer.ImgControl;
 import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.renderer.RElement;
-import org.lobobrowser.html.renderer.RImgControl;
 import org.lobobrowser.html.renderer.UIControl;
 
 public class ImgLayout extends CommonWidgetLayout {
