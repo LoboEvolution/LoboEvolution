@@ -25,7 +25,9 @@ import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 
 public class Navigator extends AbstractScriptableDelegate {
+	
 	private final UserAgentContext context;
+	private MimeTypesCollection mimeTypes;
 
 	/**
 	 * @param context
@@ -68,11 +70,49 @@ public class Navigator extends AbstractScriptableDelegate {
 	}
 
 	public boolean javaEnabled() {
-		// True always?
+		// TODO True always?
 		return true;
 	}
 
-	private MimeTypesCollection mimeTypes;
+	public String getLanguage() {
+		// TODO
+		return null;
+	}
+
+	public boolean isOnLine() {
+		// TODO
+		return false;
+	}
+
+	public void yieldForStorageUpdates() {
+		// TODO
+	}
+
+	public String isContentHandlerRegistered(String mimeType, String url) {
+		// TODO
+		return null;
+	}
+
+	public String isProtocolHandlerRegistered(String scheme, String url) {
+		// TODO
+		return null;
+	}
+
+	public void registerContentHandler(String mimeType, String url, String title) {
+		// TODO
+	}
+
+	public void registerProtocolHandler(String scheme, String url, String title) {
+		// TODO
+	}
+
+	public void unregisterContentHandler(String mimeType, String url) {
+		// TODO
+	}
+
+	public void unregisterProtocolHandler(String scheme, String url) {
+		// TODO
+	}
 
 	public MimeTypesCollection getMimeTypes() {
 		synchronized (this) {
