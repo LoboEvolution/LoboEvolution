@@ -77,4 +77,17 @@ public class History extends AbstractScriptableDelegate {
 			ctx.goToHistoryURL(url);
 		}
 	}
+
+	public Object getState() {
+		return window.getStatus();
+
+	}
+
+	public void pushState(Object data, String title, String url) {
+		//TODO
+	}
+
+	public void replaceState(Object data, String title, String url) {
+		//TODO
+	}
 }
