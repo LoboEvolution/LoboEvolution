@@ -44,6 +44,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.HtmlCommandMapping;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.HttpRequest;
@@ -1449,12 +1450,18 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 
 	@Override
 	public boolean execCommand(String commandId, boolean showUI, String value) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean queryCommandEnabled(String commandId) {
-		// TODO Auto-generated method stub
+		Iterator<String> it = HtmlCommandMapping.EXECUTE_CMDS.iterator();
+		while (it.hasNext()) {
+			if (commandId.equalsIgnoreCase((String)it.next()))  {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -1472,7 +1479,12 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 
 	@Override
 	public boolean queryCommandSupported(String commandId) {
-		// TODO Auto-generated method stub
+		Iterator<String> it = HtmlCommandMapping.EXECUTE_CMDS.iterator();
+		while (it.hasNext()) {
+			if (commandId.equalsIgnoreCase((String)it.next()))  {
+				return true;
+			}
+		}
 		return false;
 	}
 
