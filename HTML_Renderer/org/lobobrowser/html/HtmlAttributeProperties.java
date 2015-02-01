@@ -118,6 +118,7 @@ public interface HtmlAttributeProperties {
 	public final String POSTER = "poster";
 	public final String PRELOAD = "preload";
 	public final String PLACEHOLDER = "placeholder";
+	public final String PROFILE = "profile";
 	public final String ROWS = "rows";
 	public final String REL = "rel";
 	public final String RESERVED = "reversed";
