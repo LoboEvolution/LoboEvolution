@@ -11,8 +11,7 @@ import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.Document;
 
 public class Location extends AbstractScriptableDelegate {
-	private static final Logger logger = Logger.getLogger(Location.class
-			.getName());
+	private static final Logger logger = Logger.getLogger(Location.class.getName());
 	private final Window window;
 
 	Location(final Window window) {
@@ -116,7 +115,6 @@ public class Location extends AbstractScriptableDelegate {
 	}
 
 	public void reload() {
-		// TODO: This is not really reload.
 		Document document = this.window.getDocumentNode();
 		if (document instanceof HTMLDocumentImpl) {
 			HTMLDocumentImpl docImpl = (HTMLDocumentImpl) document;
@@ -134,8 +132,10 @@ public class Location extends AbstractScriptableDelegate {
 	}
 
 	public String toString() {
-		// This needs to be href. Callers
-		// rely on that.
 		return this.getHref();
+	}
+
+	public void assign(String url) {
+		this.setHref(url);
 	}
 }
