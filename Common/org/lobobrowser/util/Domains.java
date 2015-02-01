@@ -50,7 +50,6 @@ public class Domains {
 		gTLDs.add(".aero");
 		gTLDs.add(".coop");
 		gTLDs.add(".museum");
-		// TODO: New gTLDs?
 	}
 
 	/**
