@@ -32,6 +32,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
+import javax.swing.Timer;
 
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
@@ -50,6 +51,7 @@ import org.lobobrowser.html.w3c.HTMLFrameSetElement;
 import org.lobobrowser.util.EventDispatch2;
 import org.lobobrowser.util.gui.WrapperLayout;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
@@ -66,7 +68,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private static final long serialVersionUID = 1L;
 	private final EventDispatch2 selectionDispatch = new SelectionDispatch();
-	private final javax.swing.Timer notificationTimer;
+	private final Timer notificationTimer;
 	private final DocumentNotificationListener notificationListener;
 	private final Runnable notificationImmediateAction;
 	private static final int NOTIF_TIMER_DELAY = 300;
@@ -89,8 +91,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		super();
 		this.setLayout(WrapperLayout.getInstance());
 		this.setOpaque(false);
-		this.notificationTimer = new javax.swing.Timer(NOTIF_TIMER_DELAY,
-				new NotificationTimerAction());
+		this.notificationTimer = new Timer(NOTIF_TIMER_DELAY,new NotificationTimerAction());
 		this.notificationTimer.setRepeats(false);
 		this.notificationListener = new LocalDocumentNotificationListener();
 		this.notificationImmediateAction = new Runnable() {
@@ -155,7 +156,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * @param node
 	 *            A DOM node.
 	 */
-	public void scrollTo(org.w3c.dom.Node node) {
+	public void scrollTo(Node node) {
 		HtmlBlockPanel htmlBlock = this.htmlBlockPanel;
 		if (htmlBlock != null) {
 			htmlBlock.scrollTo(node);
@@ -610,7 +611,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 *         there is no such node. It also returns <code>null</code> for
 	 *         FRAMESETs.
 	 */
-	public org.w3c.dom.Node getSelectionNode() {
+	public Node getSelectionNode() {
 		HtmlBlockPanel block = this.htmlBlockPanel;
 		if (block == null) {
 			return null;
