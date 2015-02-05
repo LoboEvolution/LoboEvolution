@@ -21,7 +21,7 @@
 /*
  * Created on Nov 12, 2005
  */
-package org.lobobrowser.html.js;
+package org.lobobrowser.html.domfilter;
 
 public interface ObjectFilter {
 	public boolean accept(Object target);
