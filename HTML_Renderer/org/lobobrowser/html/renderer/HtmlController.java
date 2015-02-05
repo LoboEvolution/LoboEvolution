@@ -14,13 +14,12 @@ import org.lobobrowser.html.domimpl.HTMLButtonElementImpl;
 import org.lobobrowser.html.domimpl.HTMLInputElementImpl;
 import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
-import org.lobobrowser.html.js.Event;
 import org.lobobrowser.html.js.Executor;
+import org.lobobrowser.html.jsimpl.MouseEventImpl;
 import org.mozilla.javascript.Function;
 
 public class HtmlController {
-	private static final Logger logger = Logger.getLogger(HtmlController.class
-			.getName());
+	private static final Logger logger = Logger.getLogger(HtmlController.class.getName());
 	private static final HtmlController instance = new HtmlController();
 
 	public static HtmlController getInstance() {
@@ -54,7 +53,7 @@ public class HtmlController {
 			HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			Function f = uiElement.getOnclick();
 			if (f != null) {
-				Event jsEvent = new Event("click", uiElement, event, x, y);
+				MouseEventImpl jsEvent = new MouseEventImpl("click", uiElement, event, x, y);
 				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
 					return false;
 				}
@@ -111,7 +110,7 @@ public class HtmlController {
 			HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			Function f = uiElement.getOncontextmenu();
 			if (f != null) {
-				Event jsEvent = new Event("contextmenu", uiElement, event, x, y);
+				MouseEventImpl jsEvent = new MouseEventImpl("contextmenu", uiElement, event, x, y);
 				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
 					return false;
 				}
@@ -143,7 +142,7 @@ public class HtmlController {
 				uiElement.setMouseOver(true);
 				Function f = uiElement.getOnmouseover();
 				if (f != null) {
-					Event jsEvent = new Event("mouseover", uiElement, event, x,
+					MouseEventImpl jsEvent = new MouseEventImpl("mouseover", uiElement, event, x,
 							y);
 					Executor.executeFunction(uiElement, f, jsEvent);
 				}
@@ -168,7 +167,7 @@ public class HtmlController {
 				uiElement.setMouseOver(false);
 				Function f = uiElement.getOnmouseout();
 				if (f != null) {
-					Event jsEvent = new Event("mouseout", uiElement, event, x,
+					MouseEventImpl jsEvent = new MouseEventImpl("mouseout", uiElement, event, x,
 							y);
 					Executor.executeFunction(uiElement, f, jsEvent);
 				}
@@ -194,7 +193,7 @@ public class HtmlController {
 			HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			Function f = uiElement.getOndblclick();
 			if (f != null) {
-				Event jsEvent = new Event("dblclick", uiElement, event, x, y);
+				MouseEventImpl jsEvent = new MouseEventImpl("dblclick", uiElement, event, x, y);
 				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
 					return false;
 				}
@@ -238,7 +237,7 @@ public class HtmlController {
 			HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			Function f = uiElement.getOnmousedown();
 			if (f != null) {
-				Event jsEvent = new Event("mousedown", uiElement, event, x, y);
+				MouseEventImpl jsEvent = new MouseEventImpl("mousedown", uiElement, event, x, y);
 				pass = Executor.executeFunction(uiElement, f, jsEvent);
 			}
 		}
@@ -266,7 +265,7 @@ public class HtmlController {
 			HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			Function f = uiElement.getOnmouseup();
 			if (f != null) {
-				Event jsEvent = new Event("mouseup", uiElement, event, x, y);
+				MouseEventImpl jsEvent = new MouseEventImpl("mouseup", uiElement, event, x, y);
 				pass = Executor.executeFunction(uiElement, f, jsEvent);
 			}
 		}
@@ -299,7 +298,7 @@ public class HtmlController {
 			HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			Function f = uiElement.getOnclick();
 			if (f != null) {
-				Event jsEvent = new Event("click", uiElement, event, x, y);
+				MouseEventImpl jsEvent = new MouseEventImpl("click", uiElement, event, x, y);
 				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
 					return false;
 				}
@@ -337,7 +336,7 @@ public class HtmlController {
 			HTMLSelectElementImpl uiElement = (HTMLSelectElementImpl) node;
 			Function f = uiElement.getOnchange();
 			if (f != null) {
-				Event jsEvent = new Event("change", uiElement);
+				MouseEventImpl jsEvent = new MouseEventImpl("change", uiElement);
 				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
 					return false;
 				}
