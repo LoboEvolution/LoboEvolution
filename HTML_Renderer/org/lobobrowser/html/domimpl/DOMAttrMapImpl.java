@@ -35,10 +35,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-public class DOMAttrMapImpl extends AbstractScriptableDelegate implements
-		NamedNodeMap {
-	// Note: class must be public for reflection to work.
-	private final Map attributes = new HashMap();
+public class DOMAttrMapImpl extends AbstractScriptableDelegate implements NamedNodeMap {
+	private final Map<String,Node> attributes = new HashMap<String,Node>();
 	private final ArrayList attributeList = new ArrayList();
 
 	public DOMAttrMapImpl(Element owner, Map attribs) {

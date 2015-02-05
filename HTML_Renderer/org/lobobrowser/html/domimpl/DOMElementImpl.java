@@ -269,14 +269,12 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 		}
 	}
 
-	public Attr getAttributeNodeNS(String namespaceURI, String localName)
-			throws DOMException {
+	public Attr getAttributeNodeNS(String namespaceURI, String localName) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
 				"Namespaces not supported");
 	}
 
-	public String getAttributeNS(String namespaceURI, String localName)
-			throws DOMException {
+	public String getAttributeNS(String namespaceURI, String localName) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
 				"Namespaces not supported");
 	}
