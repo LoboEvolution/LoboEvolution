@@ -20,15 +20,11 @@
 */
 package org.lobobrowser.html.control;
 
-import java.awt.ComponentOrientation;
-import javax.swing.JButton;
-
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 
 public class ButtonControll extends InputButtonControl {
 	
 	private static final long serialVersionUID = 1L;
-	private JButton widget;
 	
 	public ButtonControll(HTMLBaseInputElement modelNode) {
 		super(modelNode);
