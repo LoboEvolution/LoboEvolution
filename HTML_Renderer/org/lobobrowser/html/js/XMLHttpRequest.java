@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.ReadyStateChangeListener;
 import org.lobobrowser.html.UserAgentContext;
+import org.lobobrowser.html.w3c.events.Event;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.js.JavaScript;
 import org.lobobrowser.util.Urls;

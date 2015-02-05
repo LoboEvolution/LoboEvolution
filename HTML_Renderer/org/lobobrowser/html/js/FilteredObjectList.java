@@ -26,6 +26,7 @@ package org.lobobrowser.html.js;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.lobobrowser.html.domfilter.ObjectFilter;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 
 public class FilteredObjectList extends AbstractScriptableDelegate {
