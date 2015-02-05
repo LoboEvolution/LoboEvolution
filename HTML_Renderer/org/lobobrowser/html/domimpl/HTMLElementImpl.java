@@ -56,7 +56,6 @@ import org.lobobrowser.html.w3c.HTMLPropertiesCollection;
 import org.lobobrowser.util.JavascriptCommon;
 import org.lobobrowser.util.Strings;
 import org.w3c.css.sac.InputSource;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -241,16 +240,10 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return sds;
 	}
 
-	public void setStyle(Object value) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
-				"Cannot set style property");
+	public void setStyle(String value) {
+		this.setAttribute(HtmlAttributeProperties.STYLE,value);
 	}
-
-	public void setCurrentStyle(Object value) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
-				"Cannot set currentStyle property");
-	}
-
+	
 	public String getClassName() {
 		String className = this.getAttribute(HtmlAttributeProperties.CLASS);
 		return className == null ? "" : className;
