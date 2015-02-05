@@ -41,12 +41,11 @@ public class JavascriptCommon {
 		list.add("load");
 
 		for (int i = 0; i < list.size(); i++) {
-			if (script.equals(list.get(0))) {
+			if (script.equals(list.get(i))) {
 				script = "on" + script;
 				break;
 			}
-		}
-		
+		}		
 		return script;
 	}
 }
