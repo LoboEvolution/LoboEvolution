@@ -33,6 +33,7 @@ import org.lobobrowser.html.layout.CommonBlockLayout;
 import org.lobobrowser.html.layout.DivLayout;
 import org.lobobrowser.html.layout.EmLayout;
 import org.lobobrowser.html.layout.HLayout;
+import org.lobobrowser.html.layout.HeadLayout;
 import org.lobobrowser.html.layout.HrLayout;
 import org.lobobrowser.html.layout.IFrameLayout;
 import org.lobobrowser.html.layout.ImgLayout;
@@ -78,13 +79,14 @@ public class HtmlLayoutMapping {
 		el.put(HtmlProperties.SECTION, new PLayout());
 		el.put(HtmlProperties.NOSCRIPT, new NoScriptLayout());
 		
+		
 		NopLayout nop = new NopLayout();
 		el.put(HtmlProperties.SCRIPT, nop);
-		el.put(HtmlProperties.HEAD, nop);
 		el.put(HtmlProperties.TITLE, nop);
 		el.put(HtmlProperties.META, nop);
 		el.put(HtmlProperties.STYLE, nop);
 		el.put(HtmlProperties.LINK, nop);
+		el.put(HtmlProperties.HEAD, new HeadLayout());
 		el.put(HtmlProperties.IMG, new ImgLayout());
 		el.put(HtmlProperties.TABLE, new TableLayout());
 		

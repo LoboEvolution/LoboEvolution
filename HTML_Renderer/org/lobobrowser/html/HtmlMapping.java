@@ -47,6 +47,7 @@ import org.lobobrowser.html.builder.FontBuilder;
 import org.lobobrowser.html.builder.FormBuilder;
 import org.lobobrowser.html.builder.FrameBuilder;
 import org.lobobrowser.html.builder.FramesetBuilder;
+import org.lobobrowser.html.builder.HeadBuilder;
 import org.lobobrowser.html.builder.HeadingBuilder;
 import org.lobobrowser.html.builder.HrBuilder;
 import org.lobobrowser.html.builder.HtmlBuilder;
@@ -214,6 +215,7 @@ public class HtmlMapping {
 		builders.put(HtmlProperties.S, strike);
 
 		builders.put(HtmlProperties.HTML, new HtmlBuilder());
+		builders.put(HtmlProperties.HEAD, new HeadBuilder());
 		builders.put(HtmlProperties.TITLE, new TitleBuilder());
 		builders.put(HtmlProperties.BASE, new BaseBuilder());
 		builders.put(HtmlProperties.BODY, new BodyBuilder());
