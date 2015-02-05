@@ -45,6 +45,7 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlCommandMapping;
+import org.lobobrowser.html.HtmlEventProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.HttpRequest;
@@ -79,6 +80,14 @@ import org.lobobrowser.html.io.WritableLineReader;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.js.Location;
 import org.lobobrowser.html.js.Window;
+import org.lobobrowser.html.jsimpl.CustomEventImpl;
+import org.lobobrowser.html.jsimpl.EventImpl;
+import org.lobobrowser.html.jsimpl.KeyboardEventImpl;
+import org.lobobrowser.html.jsimpl.MouseEventImpl;
+import org.lobobrowser.html.jsimpl.MutationEventImpl;
+import org.lobobrowser.html.jsimpl.MutationNameEventImpl;
+import org.lobobrowser.html.jsimpl.TextEventImpl;
+import org.lobobrowser.html.jsimpl.UIEventImpl;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.renderstate.StyleSheetRenderState;
@@ -87,6 +96,8 @@ import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLDocument;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLHeadElement;
+import org.lobobrowser.html.w3c.events.DocumentEvent;
+import org.lobobrowser.html.w3c.events.Event;
 import org.lobobrowser.util.Domains;
 import org.lobobrowser.util.JavascriptCommon;
 import org.lobobrowser.util.Urls;
@@ -117,7 +128,7 @@ import org.xml.sax.SAXException;
 /**
  * Implementation of the W3C <code>HTMLDocument</code> interface.
  */
-public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, DocumentView {
+public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, DocumentView, DocumentEvent{
 	private static final Logger logger = Logger.getLogger(HTMLDocumentImpl.class.getName());
 	private final ElementFactory factory;
 	private final HtmlRendererContext rcontext;
@@ -478,20 +489,42 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	}
 
 	public Node importNode(Node importedNode, boolean deep) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
-				"Not implemented");
+		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Not implemented");
 	}
 
-	public Element createElementNS(String namespaceURI, String qualifiedName)
-			throws DOMException {
+	public Element createElementNS(String namespaceURI, String qualifiedName) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
 	}
 
-	public Attr createAttributeNS(String namespaceURI, String qualifiedName)
-			throws DOMException {
+	public Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
 	}
+	
+	public Event createEvent(String eventType) throws DOMException {
 
+		switch (eventType) {
+		case HtmlEventProperties.EVENT:
+			return new EventImpl();
+		case HtmlEventProperties.UIEVENT:
+			return new UIEventImpl();
+		case HtmlEventProperties.MOUSEEVENT:
+			return new MouseEventImpl();
+		case HtmlEventProperties.MUTATIONEVENT:
+			return new MutationEventImpl();
+		case HtmlEventProperties.MUTATIONNAMEEVENT:
+			return new MutationNameEventImpl();
+		case HtmlEventProperties.TEXTEVENT:
+			return new TextEventImpl();
+		case HtmlEventProperties.KEYBOARDEVENT:
+			return new KeyboardEventImpl();
+		case HtmlEventProperties.CUSTOMEVENT:
+			return new CustomEventImpl();
+		default:
+			return new EventImpl();
+		}
+
+	}
+	
 	public NodeList getElementsByTagNameNS(String namespaceURI, String localName) {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
 	}
