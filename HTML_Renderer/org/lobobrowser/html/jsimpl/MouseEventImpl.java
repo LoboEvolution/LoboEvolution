@@ -52,12 +52,6 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 	}
 
 	@Override
-	public boolean getMetaKey() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public EventTarget getRelatedTarget() {
 		// TODO Auto-generated method stub
 		return null;

@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.jweb.javafx;
 
+import java.awt.Component;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,7 +49,7 @@ public class ClientletStageDelegate extends StageDelegate {
 	public ClientletStageDelegate(ClientletContext context) {
 	}
 
-	public java.awt.Component createComponent() {
+	public Component createComponent() {
 		FXClassType stageDelegateType = FXContext.getInstance().findClass(
 				this.getClass().getName());
 		FXObjectValue thisValue = FXLocal.getContext().mirrorOf(this);

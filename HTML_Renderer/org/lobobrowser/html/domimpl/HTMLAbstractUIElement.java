@@ -86,10 +86,12 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	}
 
 	public Function getOnkeydown() {
+		System.out.println("1");
 		return this.getEventFunction(onkeydown, "onkeydown");
 	}
 
 	public void setOnkeydown(Function onkeydown) {
+		System.out.println("2");
 		this.onkeydown = onkeydown;
 	}
 

@@ -287,10 +287,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * operation will be scheduled to be performed in the GUI thread.
 	 */
 	public void clearDocument() {
-		if (java.awt.EventQueue.isDispatchThread()) {
+		if (EventQueue.isDispatchThread()) {
 			this.clearDocumentImpl();
 		} else {
-			java.awt.EventQueue.invokeLater(new Runnable() {
+			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					HtmlPanel.this.clearDocumentImpl();
 				}
@@ -337,10 +337,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 */
 	public void setDocument(final Document node,
 			final HtmlRendererContext rcontext) {
-		if (java.awt.EventQueue.isDispatchThread()) {
+		if (EventQueue.isDispatchThread()) {
 			this.setDocumentImpl(node, rcontext);
 		} else {
-			java.awt.EventQueue.invokeLater(new Runnable() {
+			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					HtmlPanel.this.setDocumentImpl(node, rcontext);
 				}

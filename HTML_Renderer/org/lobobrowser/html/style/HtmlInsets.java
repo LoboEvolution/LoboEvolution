@@ -100,7 +100,7 @@ public class HtmlInsets {
 		this.rightType = rightType;
 	}
 
-	public java.awt.Insets getAWTInsets(int defaultTop, int defaultLeft,
+	public Insets getAWTInsets(int defaultTop, int defaultLeft,
 			int defaultBottom, int defaultRight, int availWidth,
 			int availHeight, int autoX, int autoY) {
 		int top = getInsetPixels(this.top, this.topType, defaultTop,
@@ -114,7 +114,7 @@ public class HtmlInsets {
 		return new Insets(top, left, bottom, right);
 	}
 
-	public java.awt.Insets getSimpleAWTInsets(int availWidth, int availHeight) {
+	public Insets getSimpleAWTInsets(int availWidth, int availHeight) {
 		int top = getInsetPixels(this.top, this.topType, 0, availHeight, 0);
 		int left = getInsetPixels(this.left, this.leftType, 0, availWidth, 0);
 		int bottom = getInsetPixels(this.bottom, this.bottomType, 0,

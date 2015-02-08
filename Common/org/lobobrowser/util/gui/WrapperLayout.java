@@ -26,6 +26,7 @@ package org.lobobrowser.util.gui;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.LayoutManager;
 
 /**
@@ -55,7 +56,7 @@ public class WrapperLayout implements LayoutManager {
 	 * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
 	 */
 	public Dimension preferredLayoutSize(Container arg0) {
-		java.awt.Insets insets = arg0.getInsets();
+		Insets insets = arg0.getInsets();
 		int count = arg0.getComponentCount();
 		if (count > 0) {
 			Dimension d = arg0.getComponent(0).getPreferredSize();
@@ -73,7 +74,7 @@ public class WrapperLayout implements LayoutManager {
 	 * @see java.awt.LayoutManager#minimumLayoutSize(java.awt.Container)
 	 */
 	public Dimension minimumLayoutSize(Container arg0) {
-		java.awt.Insets insets = arg0.getInsets();
+		Insets insets = arg0.getInsets();
 		int count = arg0.getComponentCount();
 		if (count > 0) {
 			Dimension d = arg0.getComponent(0).getMinimumSize();
@@ -94,7 +95,7 @@ public class WrapperLayout implements LayoutManager {
 		int count = arg0.getComponentCount();
 		if (count > 0) {
 			Component child = arg0.getComponent(0);
-			java.awt.Insets insets = arg0.getInsets();
+			Insets insets = arg0.getInsets();
 			child.setBounds(insets.left, insets.top, arg0.getWidth()
 					- insets.left - insets.right, arg0.getHeight() - insets.top
 					- insets.bottom);

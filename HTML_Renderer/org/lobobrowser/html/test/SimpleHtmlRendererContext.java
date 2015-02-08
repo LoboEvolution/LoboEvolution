@@ -24,6 +24,7 @@
 package org.lobobrowser.html.test;
 
 import java.awt.Component;
+import java.awt.Window;
 import java.awt.event.MouseEvent;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -802,16 +803,16 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 		return true;
 	}
 
-	private static java.awt.Window getWindow(Component c) {
-		java.awt.Component current = c;
-		while (current != null && !(current instanceof java.awt.Window)) {
+	private static Window getWindow(Component c) {
+		Component current = c;
+		while (current != null && !(current instanceof Window)) {
 			current = current.getParent();
 		}
-		return (java.awt.Window) current;
+		return (Window) current;
 	}
 
 	public void resizeBy(int byWidth, int byHeight) {
-		java.awt.Window window = getWindow(this.htmlPanel);
+		Window window = getWindow(this.htmlPanel);
 		if (window != null) {
 			window.setSize(window.getWidth() + byWidth, window.getHeight()
 					+ byHeight);
@@ -819,7 +820,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	}
 
 	public void resizeTo(int width, int height) {
-		java.awt.Window window = getWindow(this.htmlPanel);
+		Window window = getWindow(this.htmlPanel);
 		if (window != null) {
 			window.setSize(width, height);
 		}

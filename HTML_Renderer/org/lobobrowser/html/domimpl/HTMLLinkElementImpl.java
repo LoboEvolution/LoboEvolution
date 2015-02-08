@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import java.awt.Color;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -276,7 +277,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
-	private java.awt.Color getLinkColor() {
+	private Color getLinkColor() {
 		HTMLDocument doc = (HTMLDocument) this.document;
 		if (doc != null) {
 			HTMLBodyElement body = (HTMLBodyElement) doc.getBody();
@@ -295,7 +296,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 				}
 			}
 		}
-		return java.awt.Color.BLUE;
+		return Color.BLUE;
 	}
 
 	protected RenderState createRenderState(RenderState prevRenderState) {

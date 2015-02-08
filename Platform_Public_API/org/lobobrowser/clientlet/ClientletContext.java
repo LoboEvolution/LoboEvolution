@@ -128,7 +128,7 @@ public interface ClientletContext {
 	 * provided for convenience. It does not set any properties such as title or
 	 * source code.
 	 */
-	public void setResultingContent(java.awt.Component content);
+	public void setResultingContent(Component content);
 
 	/**
 	 * Gets content previously set with {@link #setResultingContent(Component)}.

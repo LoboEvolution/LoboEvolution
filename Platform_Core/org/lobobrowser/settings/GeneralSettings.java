@@ -20,6 +20,8 @@
  */
 package org.lobobrowser.settings;
 
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -46,7 +48,7 @@ public class GeneralSettings implements java.io.Serializable {
 	private volatile boolean spoofIE;
 	private volatile String ieVersion;
 	private volatile String mozVersion;
-	private volatile java.awt.Rectangle initialWindowBounds;
+	private volatile Rectangle initialWindowBounds;
 
 	static {
 		GeneralSettings ins = null;
@@ -118,11 +120,10 @@ public class GeneralSettings implements java.io.Serializable {
 		this.startupURLs = Arrays.asList(urls);
 	}
 
-	public java.awt.Rectangle getInitialWindowBounds() {
-		java.awt.Rectangle bounds = initialWindowBounds;
+	public Rectangle getInitialWindowBounds() {
+		Rectangle bounds = initialWindowBounds;
 		if (bounds == null) {
-			return java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment()
-					.getMaximumWindowBounds();
+			return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		}
 		if (bounds.width < 100) {
 			bounds.width = 100;
@@ -133,7 +134,7 @@ public class GeneralSettings implements java.io.Serializable {
 		return bounds;
 	}
 
-	public void setInitialWindowBounds(java.awt.Rectangle initialWindowBounds) {
+	public void setInitialWindowBounds(Rectangle initialWindowBounds) {
 		this.initialWindowBounds = initialWindowBounds;
 	}
 

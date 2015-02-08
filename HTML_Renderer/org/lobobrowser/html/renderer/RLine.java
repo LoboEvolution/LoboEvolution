@@ -28,6 +28,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -477,7 +478,7 @@ class RLine extends BaseRCollection {
 		// TODO: Could throw OverflowException when we add floating widgets
 	}
 
-	public boolean onMouseClick(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		Renderable[] rarray = (Renderable[]) this.renderables
 				.toArray(Renderable.EMPTY_ARRAY);
 		BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y,
@@ -490,7 +491,7 @@ class RLine extends BaseRCollection {
 		}
 	}
 
-	public boolean onDoubleClick(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		Renderable[] rarray = (Renderable[]) this.renderables
 				.toArray(Renderable.EMPTY_ARRAY);
 		BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y,
@@ -505,7 +506,7 @@ class RLine extends BaseRCollection {
 
 	private BoundableRenderable mousePressTarget;
 
-	public boolean onMousePressed(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		Renderable[] rarray = (Renderable[]) this.renderables
 				.toArray(Renderable.EMPTY_ARRAY);
 		BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y,
@@ -532,7 +533,7 @@ class RLine extends BaseRCollection {
 		}
 	}
 
-	public boolean onMouseReleased(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		Renderable[] rarray = (Renderable[]) this.renderables
 				.toArray(Renderable.EMPTY_ARRAY);
 		BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y,
@@ -555,7 +556,7 @@ class RLine extends BaseRCollection {
 		}
 	}
 
-	public boolean onMouseDisarmed(java.awt.event.MouseEvent event) {
+	public boolean onMouseDisarmed(MouseEvent event) {
 		BoundableRenderable target = this.mousePressTarget;
 		if (target != null) {
 			this.mousePressTarget = null;

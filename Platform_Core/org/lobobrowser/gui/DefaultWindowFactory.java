@@ -23,6 +23,11 @@
  */
 package org.lobobrowser.gui;
 
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashSet;
 import java.util.Map;
@@ -54,7 +59,7 @@ public class DefaultWindowFactory implements WindowFactory {
 	// TODO: Should use an expiring cache instead of a WeakHashMap.
 	private final Map<String, ImageIcon> imageMap = new WeakValueHashMap();
 	private final Map<String, DefaultBrowserWindow> framesById = new WeakValueHashMap();
-	private final Set<java.awt.Frame> frames = new HashSet<java.awt.Frame>();
+	private final Set<Frame> frames = new HashSet<Frame>();
 	private final GeneralSettings generalSettings;
 
 	private volatile boolean exitWhenAllWindowsClosed = false;
@@ -132,7 +137,7 @@ public class DefaultWindowFactory implements WindowFactory {
 				logger.info("createBaseWindow(): Adding window listener: window="
 						+ window + ",windowId=" + windowId);
 			}
-			window.addWindowListener(new java.awt.event.WindowAdapter() {
+			window.addWindowListener(new WindowAdapter() {
 				@Override
 				public void windowClosing(WindowEvent e) {
 					super.windowClosing(e);
@@ -150,7 +155,7 @@ public class DefaultWindowFactory implements WindowFactory {
 				}
 
 				@Override
-				public void windowClosed(java.awt.event.WindowEvent e) {
+				public void windowClosed(WindowEvent e) {
 					super.windowClosed(e);
 					Set frames = DefaultWindowFactory.this.frames;
 					synchronized (DefaultWindowFactory.this) {
@@ -242,8 +247,7 @@ public class DefaultWindowFactory implements WindowFactory {
 				windowContext, hasMenuBar, hasAddressBar, hasToolBar,
 				hasStatusBar);
 		window.setTitle(title);
-		java.awt.Rectangle windowBounds = this.generalSettings
-				.getInitialWindowBounds();
+		Rectangle windowBounds = this.generalSettings.getInitialWindowBounds();
 		if (width != -1 || height != -1) {
 			if (width != -1) {
 				windowBounds.width = width;
@@ -265,9 +269,8 @@ public class DefaultWindowFactory implements WindowFactory {
 		if (icon != null) {
 			window.setIconImage(icon.getImage());
 		}
-		java.awt.Dimension windowSize = windowBounds.getSize();
-		java.awt.Rectangle maxBounds = java.awt.GraphicsEnvironment
-				.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		Dimension windowSize = windowBounds.getSize();
+		Rectangle maxBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		int maxX = maxBounds.width - windowSize.width;
 		int maxY = maxBounds.height - windowSize.height;
 		int x = ID.random(0, maxX);

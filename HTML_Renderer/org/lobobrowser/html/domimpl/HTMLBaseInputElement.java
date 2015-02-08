@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import java.awt.Image;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -316,7 +317,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		this.onload = onload;
 	}
 
-	private java.awt.Image image = null;
+	private Image image = null;
 	private String imageSrc;
 
 	private void loadImage(String src) {

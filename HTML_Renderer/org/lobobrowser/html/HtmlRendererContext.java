@@ -23,9 +23,11 @@
  */
 package org.lobobrowser.html;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
 
 import org.lobobrowser.html.w3c.HTMLCollection;
+import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLLinkElement;
 
 /**
@@ -119,7 +121,7 @@ public interface HtmlRendererContext {
 	 *         HTML of the tag must be rendered if the OBJECT content cannot be
 	 *         handled.
 	 */
-	public HtmlObject getHtmlObject(org.lobobrowser.html.w3c.HTMLElement element);
+	public HtmlObject getHtmlObject(HTMLElement element);
 
 	/**
 	 * This method is called when a visual element is right-clicked.
@@ -131,8 +133,7 @@ public interface HtmlRendererContext {
 	 * @return The method should return true to continue propagating the event,
 	 *         or false to stop propagating it.
 	 */
-	public boolean onContextMenu(org.lobobrowser.html.w3c.HTMLElement element,
-			java.awt.event.MouseEvent event);
+	public boolean onContextMenu(HTMLElement element, MouseEvent event);
 
 	/**
 	 * This method is called when there's a mouse click on an element.
@@ -144,8 +145,8 @@ public interface HtmlRendererContext {
 	 * @return The method should return true to continue propagating the event,
 	 *         or false to stop propagating it.
 	 */
-	public boolean onMouseClick(org.lobobrowser.html.w3c.HTMLElement element,
-			java.awt.event.MouseEvent event);
+	public boolean onMouseClick(HTMLElement element,
+			MouseEvent event);
 
 	/**
 	 * This method is called when there's a mouse double-click on an element.
@@ -157,8 +158,8 @@ public interface HtmlRendererContext {
 	 * @return The method should return true to continue propagating the event,
 	 *         or false to stop propagating it.
 	 */
-	public boolean onDoubleClick(org.lobobrowser.html.w3c.HTMLElement element,
-			java.awt.event.MouseEvent event);
+	public boolean onDoubleClick(HTMLElement element,
+			MouseEvent event);
 
 	/**
 	 * This method is called when the mouse first hovers over an element.
@@ -168,8 +169,8 @@ public interface HtmlRendererContext {
 	 * @param event
 	 *            The mouse event.
 	 */
-	public void onMouseOver(org.lobobrowser.html.w3c.HTMLElement element,
-			java.awt.event.MouseEvent event);
+	public void onMouseOver(HTMLElement element,
+			MouseEvent event);
 
 	/**
 	 * This method is called when the mouse no longer hovers a given element.
@@ -179,8 +180,8 @@ public interface HtmlRendererContext {
 	 * @param event
 	 *            The mouse event.
 	 */
-	public void onMouseOut(org.lobobrowser.html.w3c.HTMLElement element,
-			java.awt.event.MouseEvent event);
+	public void onMouseOut(HTMLElement element,
+			MouseEvent event);
 
 	/**
 	 * This method should return true if and only if image loading needs to be

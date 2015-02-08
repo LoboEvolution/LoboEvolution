@@ -24,6 +24,7 @@
 package org.lobobrowser.html.renderer;
 
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.renderstate.RenderState;
@@ -69,15 +70,15 @@ final class RStyleChanger extends BaseRenderable implements Renderable {
 	public void invalidateLayoutUpTree() {
 	}
 
-	public void onMouseClick(java.awt.event.MouseEvent event, int x, int y) {
+	public void onMouseClick(MouseEvent event, int x, int y) {
 		throw new UnsupportedOperationException("unexpected");
 	}
 
-	public void onMousePressed(java.awt.event.MouseEvent event, int x, int y) {
+	public void onMousePressed(MouseEvent event, int x, int y) {
 		throw new UnsupportedOperationException("unexpected");
 	}
 
-	public void onMouseReleased(java.awt.event.MouseEvent event, int x, int y) {
+	public void onMouseReleased(MouseEvent event, int x, int y) {
 		throw new UnsupportedOperationException("unexpected");
 	}
 }

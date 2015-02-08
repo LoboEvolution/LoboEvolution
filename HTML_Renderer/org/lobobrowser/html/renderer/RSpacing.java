@@ -43,7 +43,7 @@ final class RSpacing extends BaseBoundableRenderable {
 	protected void invalidateLayoutLocal() {
 	}
 
-	public boolean onMouseClick(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseClick(me, event, x, y);
@@ -52,7 +52,7 @@ final class RSpacing extends BaseBoundableRenderable {
 		}
 	}
 
-	public boolean onDoubleClick(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onDoubleClick(me, event, x, y);
@@ -61,7 +61,7 @@ final class RSpacing extends BaseBoundableRenderable {
 		}
 	}
 
-	public boolean onMousePressed(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseDown(me, event, x, y);
@@ -70,7 +70,7 @@ final class RSpacing extends BaseBoundableRenderable {
 		}
 	}
 
-	public boolean onMouseReleased(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseUp(me, event, x, y);
@@ -79,7 +79,7 @@ final class RSpacing extends BaseBoundableRenderable {
 		}
 	}
 
-	public boolean onMouseDisarmed(java.awt.event.MouseEvent event) {
+	public boolean onMouseDisarmed(MouseEvent event) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseDisarmed(me, event);

@@ -24,10 +24,12 @@
 package org.lobobrowser.html.control;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -68,7 +70,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 
 	public void focus() {
 		super.focus();
-		java.awt.Component c = this.widget.getComponent();
+		Component c = this.widget.getComponent();
 		c.requestFocus();
 	}
 
@@ -111,7 +113,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		}
 	}
 
-	public boolean onMouseClick(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseClick(me, event, x, y);
@@ -120,7 +122,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		}
 	}
 
-	public boolean onDoubleClick(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onDoubleClick(me, event, x, y);
@@ -129,7 +131,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		}
 	}
 
-	public boolean onMousePressed(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseDown(me, event, x, y);
@@ -138,7 +140,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		}
 	}
 
-	public boolean onMouseReleased(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseUp(me, event, x, y);
@@ -147,7 +149,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		}
 	}
 
-	public boolean onMouseDisarmed(java.awt.event.MouseEvent event) {
+	public boolean onMouseDisarmed(MouseEvent event) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
 			return HtmlController.getInstance().onMouseDisarmed(me, event);

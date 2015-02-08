@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.request;
 
+import java.awt.Frame;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 
@@ -70,7 +71,7 @@ public class AuthenticatorImpl extends Authenticator {
 		AssociatedSettings settings = this.associatedSettings;
 		String userName = settings.getUserNameForHost(this.getRequestingHost());
 
-		java.awt.Frame frame = GUITasks.getTopFrame();
+		Frame frame = GUITasks.getTopFrame();
 		AuthenticationDialog dialog = new AuthenticationDialog(frame);
 		if (userName != null) {
 			dialog.setUserName(userName);

@@ -24,6 +24,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Window;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.AccessController;
@@ -330,7 +331,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 	 */
 	public void dispose() {
 		if (this.closeWindowOnDispose) {
-			java.awt.Window awtFrame = this.getAwtWindow();
+			Window awtFrame = this.getAwtWindow();
 			if (awtFrame != null) {
 				awtFrame.dispose();
 			}
@@ -350,12 +351,12 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		return this.framePanel.forward();
 	}
 
-	public java.awt.Window getAwtWindow() {
+	public Window getAwtWindow() {
 		Container parent = this.getParent();
-		while (parent != null && !(parent instanceof java.awt.Window)) {
+		while (parent != null && !(parent instanceof Window)) {
 			parent = parent.getParent();
 		}
-		return (java.awt.Window) parent;
+		return (Window) parent;
 	}
 
 	public NavigationEntry[] getBackNavigationEntries() {

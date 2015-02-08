@@ -146,8 +146,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 			// Pack to use preferred sizes
 			progressWindow.pack();
 			// Then resize
-			progressWindow.setSize(new java.awt.Dimension(400, progressWindow
-					.getHeight()));
+			progressWindow.setSize(new Dimension(400, progressWindow.getHeight()));
 			progressWindow.setLocationByPlatform(true);
 			progressWindow.setVisible(true);
 			progressWindow.addWindowListener(new WindowAdapter() {

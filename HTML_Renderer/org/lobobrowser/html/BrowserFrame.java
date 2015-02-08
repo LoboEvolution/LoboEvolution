@@ -24,6 +24,7 @@
 package org.lobobrowser.html;
 
 import java.awt.Component;
+import java.awt.Insets;
 import java.net.URL;
 
 import org.w3c.dom.Document;
@@ -61,7 +62,7 @@ public interface BrowserFrame {
 	 * @param insets
 	 *            The margin insets.
 	 */
-	public void setDefaultMarginInsets(java.awt.Insets insets);
+	public void setDefaultMarginInsets(Insets insets);
 
 	/**
 	 * Sets the default horizontal overflow of the browser frame.

@@ -20,12 +20,14 @@
  */
 package org.lobobrowser.html.dombl;
 
+import java.awt.Image;
 import java.util.EventObject;
 
 public class ImageEvent extends EventObject {
-	public final java.awt.Image image;
+	private static final long serialVersionUID = 1101831272894733276L;
+	public final Image image;
 
-	public ImageEvent(Object source, java.awt.Image image) {
+	public ImageEvent(Object source, Image image) {
 		super(source);
 		this.image = image;
 	}

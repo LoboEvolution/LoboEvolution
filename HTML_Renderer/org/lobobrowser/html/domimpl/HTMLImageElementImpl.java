@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
@@ -166,7 +167,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 		this.onload = onload;
 	}
 
-	private java.awt.Image image = null;
+	private Image image = null;
 	private String imageSrc;
 
 	private void loadImage(String src) {
@@ -182,7 +183,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
-	public final java.awt.Image getImage() {
+	public final Image getImage() {
 		synchronized (this.listeners) {
 			return this.image;
 		}
@@ -199,7 +200,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 	 */
 	public void addImageListener(ImageListener listener) {
 		ArrayList<ImageListener> l = this.listeners;
-		java.awt.Image currentImage;
+		Image currentImage;
 		synchronized (l) {
 			currentImage = this.image;
 			l.add(listener);

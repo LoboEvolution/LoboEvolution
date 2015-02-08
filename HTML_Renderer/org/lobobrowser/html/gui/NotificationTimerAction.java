@@ -21,8 +21,9 @@
 package org.lobobrowser.html.gui;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class NotificationTimerAction implements java.awt.event.ActionListener {
+public class NotificationTimerAction implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		HtmlPanel html = new HtmlPanel();
 		html.processNotifications();

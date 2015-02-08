@@ -98,8 +98,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer,
 		RenderableContainer, ClipboardOwner {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(HtmlBlockPanel.class
-			.getName());
+	private static final Logger logger = Logger.getLogger(HtmlBlockPanel.class.getName());
 	private static final boolean loggableInfo = logger.isLoggable(Level.INFO);
 	protected final FrameContext frameContext;
 	protected final UserAgentContext ucontext;
@@ -181,7 +180,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer,
 			 * (non-Javadoc)
 			 * 
 			 * @see
-			 * java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.
+			 * java.awt.event.MouseMotionListener#mouseMoved(
 			 * MouseEvent)
 			 */
 			public void mouseMoved(MouseEvent arg0) {
@@ -1053,10 +1052,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer,
 		}
 	}
 
-	// public Insets getDefaultPaddingInsets() {
-	// return defaultPaddingInsets;
-	// }
-	//
 	public int getDefaultOverflowX() {
 		return defaultOverflowX;
 	}

@@ -26,6 +26,7 @@ package org.lobobrowser.util.gui;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.LayoutManager;
 
 /**
@@ -39,7 +40,7 @@ public class CenterLayout implements LayoutManager {
 	}
 
 	public Dimension preferredLayoutSize(Container arg0) {
-		java.awt.Insets insets = arg0.getInsets();
+		Insets insets = arg0.getInsets();
 		int count = arg0.getComponentCount();
 		if (count > 0) {
 			Dimension d = arg0.getComponent(0).getPreferredSize();
@@ -57,7 +58,7 @@ public class CenterLayout implements LayoutManager {
 	 * @see java.awt.LayoutManager#minimumLayoutSize(java.awt.Container)
 	 */
 	public Dimension minimumLayoutSize(Container arg0) {
-		java.awt.Insets insets = arg0.getInsets();
+		Insets insets = arg0.getInsets();
 		int count = arg0.getComponentCount();
 		if (count > 0) {
 			Dimension d = arg0.getComponent(0).getMinimumSize();
@@ -78,7 +79,7 @@ public class CenterLayout implements LayoutManager {
 		int count = container.getComponentCount();
 		if (count > 0) {
 			Component child = container.getComponent(0);
-			java.awt.Insets insets = container.getInsets();
+			Insets insets = container.getInsets();
 			int availWidth = container.getWidth() - insets.left - insets.right;
 			int availHeight = container.getHeight() - insets.top
 					- insets.bottom;

@@ -290,7 +290,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 		return cancelled;
 	}
 	
-	public boolean isMetaKey() {
+	public boolean getMetaKey() {
 		return metaKey;
 	}
 

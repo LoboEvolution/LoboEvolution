@@ -268,7 +268,7 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 				if (retValue instanceof ComponentContent) {
 					context.setResultingContent((ComponentContent) retValue);
 				} else if (retValue instanceof java.awt.Window) {
-					java.awt.Window window = (java.awt.Window) retValue;
+					Window window = (java.awt.Window) retValue;
 					this.prepareWindow(window);
 					throw new CancelClientletException("Opening window.");
 				} else if (retValue instanceof Component) {
