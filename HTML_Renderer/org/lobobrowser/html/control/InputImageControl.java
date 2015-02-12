@@ -44,28 +44,24 @@ import org.lobobrowser.util.gui.WrapperLayout;
 public class InputImageControl extends BaseInputControl implements ImageListener {
 
 	private static final long serialVersionUID = 1L;
-	// private JButton button;
+	private int valign = RElement.VALIGN_BASELINE;
+	private Dimension preferredSize;
+	private int declaredWidth;
+	private int declaredHeight;
+	private Image image;
 	private boolean mouseBeingPressed;
+	private String alt;
 
 	public InputImageControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		this.setLayout(WrapperLayout.getInstance());
-		// JButton button = new LocalButton();
-		// this.button = button;
-		// button.setMargin(RBlockViewport.ZERO_INSETS);
-		// button.setBorder(null);
-		// this.add(button);
+		alt = modelNode.getAlt();
 		modelNode.addImageListener(this);
 		this.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				mouseBeingPressed = true;
 				repaint();
 			}
-
-			// public void mouseExited(MouseEvent e) {
-			// mouseBeingPressed = false;
-			// repaint();
-			// }
 
 			public void mouseReleased(MouseEvent e) {
 				mouseBeingPressed = false;
@@ -76,19 +72,37 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 		});
 	}
 
-	private int valign = RElement.VALIGN_BASELINE;
-	private Dimension preferredSize;
-	private int declaredWidth;
-	private int declaredHeight;
-	private Image image;
-
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		Dimension size = this.getSize();
+		Insets insets = this.getInsets();
+		Image image = this.image;
+		if (image != null) {
+			g.drawImage(image, insets.left, insets.top, size.width
+					- insets.left - insets.right, size.height - insets.top
+					- insets.bottom, this);
+		} else {
+			g.drawString(alt, 10, 10);
+		}
+		if (this.mouseBeingPressed) {
+			Color over = new Color(255, 100, 100, 64);
+			if (over != null) {
+				Color oldColor = g.getColor();
+				try {
+					g.setColor(over);
+					g.fillRect(0, 0, size.width, size.height);
+				} finally {
+					g.setColor(oldColor);
+				}
+			}
+		}
+	}
+	
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		HTMLElementImpl element = this.controlElement;
-		int dw = HtmlValues.getOldSyntaxPixelSize(
-				element.getAttribute(HtmlAttributeProperties.WIDTH), availWidth, -1);
-		int dh = HtmlValues.getOldSyntaxPixelSize(
-				element.getAttribute(HtmlAttributeProperties.HEIGHT), availHeight, -1);
+		int dw = HtmlValues.getOldSyntaxPixelSize(element.getAttribute(HtmlAttributeProperties.WIDTH), availWidth, -1);
+		int dh = HtmlValues.getOldSyntaxPixelSize(element.getAttribute(HtmlAttributeProperties.HEIGHT), availHeight, -1);
 		this.declaredWidth = dw;
 		this.declaredHeight = dh;
 		this.preferredSize = this.createPreferredSize(dw, dh);
@@ -115,38 +129,6 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 			}
 		}
 		this.valign = valign;
-	}
-
-	public int getVAlign() {
-		return this.valign;
-	}
-
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Dimension size = this.getSize();
-		Insets insets = this.getInsets();
-		synchronized (this) {
-		}
-		Image image = this.image;
-		if (image != null) {
-			g.drawImage(image, insets.left, insets.top, size.width
-					- insets.left - insets.right, size.height - insets.top
-					- insets.bottom, this);
-		} else {
-			// TODO: alt
-		}
-		if (this.mouseBeingPressed) {
-			Color over = new Color(255, 100, 100, 64);
-			if (over != null) {
-				Color oldColor = g.getColor();
-				try {
-					g.setColor(over);
-					g.fillRect(0, 0, size.width, size.height);
-				} finally {
-					g.setColor(oldColor);
-				}
-			}
-		}
 	}
 
 	public Dimension getPreferredSize() {
@@ -249,14 +231,8 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 	public void resetInput() {
 		// NOP
 	}
-
-	// private static class LocalButton extends JButton {
-	// public void revalidate() {
-	// // ignore
-	// }
-	//
-	// public void repaint() {
-	// // ignore
-	// }
-	// }
+	
+	public int getVAlign() {
+		return this.valign;
+	}
 }
