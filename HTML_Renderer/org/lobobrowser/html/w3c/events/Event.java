@@ -25,6 +25,8 @@ public interface Event {
 	public void preventDefault();
 
 	public void initEvent(String eventTypeArg, boolean canBubbleArg, boolean cancelableArg);
+	
+	public void initEventNS(String namespaceURIArg, String eventTypeArg,boolean canBubbleArg, boolean cancelableArg);
 
 	public void stopImmediatePropagation();
 

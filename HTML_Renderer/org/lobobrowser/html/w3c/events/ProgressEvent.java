@@ -11,8 +11,4 @@ public interface ProgressEvent extends Event {
 	public void initProgressEvent(String typeArg, boolean canBubbleArg,
 			boolean cancelableArg, boolean lengthComputableArg, int loadedArg,
 			int totalArg);
-
-	public void initProgressEventNS(String namespaceURI, String typeArg,
-			boolean canBubbleArg, boolean cancelableArg,
-			boolean lengthComputableArg, int loadedArg, int totalArg);
 }
