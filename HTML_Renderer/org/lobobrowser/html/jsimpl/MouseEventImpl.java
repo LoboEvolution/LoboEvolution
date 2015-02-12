@@ -9,7 +9,7 @@ import org.lobobrowser.html.w3c.events.MouseEvent;
 import org.w3c.dom.views.AbstractView;
 
 public class MouseEventImpl extends UIEventImpl implements MouseEvent {
-
+	
 	public MouseEventImpl() {
 	}
 
@@ -27,38 +27,51 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 	}
 
 	@Override
-	public void initMouseEvent(String typeArg, boolean canBubbleArg,
-			boolean cancelableArg, AbstractView viewArg, int detailArg,
-			int screenXArg, int screenYArg, int clientXArg, int clientYArg,
-			boolean ctrlKeyArg, boolean altKeyArg, boolean shiftKeyArg,
-			boolean metaKeyArg, int buttonArg, EventTarget relatedTargetArg) {
+	public void initMouseEvent(String type, boolean canBubble,
+			boolean cancelable, AbstractView view, int detail,
+			int screenX, int screenY, int clientX, int clientY,
+			boolean ctrlKey, boolean altKey, boolean shiftKey,
+			boolean metaKey, int button, EventTarget relatedTarget) {
+
+		initMouseEventNS(null, type, canBubble, cancelable, view,
+				detail, screenX, screenY, clientX, clientY,
+				ctrlKey, altKey, shiftKey, metaKey, button,
+				relatedTarget);
+
+	}
+
+	@Override
+	public void initMouseEventNS(String namespaceURI, String type, boolean canBubble,
+			boolean cancelable, AbstractView view, int detail,
+			int screenX, int screenY, int clientX, int clientY,
+			boolean ctrlKey, boolean altKey, boolean shiftKey,
+			boolean metaKey, int button, EventTarget relatedTarget) {
 		
-		setType(typeArg);
-		setCancelBubble(canBubbleArg);
-		setCancelable(cancelableArg);
-		setView(viewArg);
-		setDetail(detailArg);
-		setScreenX(screenXArg);
-		setScreenY(screenYArg);
-		setClientX(clientXArg);
-		setClientY(clientYArg);
-		setCtrlKey(ctrlKeyArg);
-		setAltKey(altKeyArg);
-		setShiftKey(shiftKeyArg);
-		setMetaKey(metaKeyArg);
-		setButton(buttonArg);
-		setCurrentTarget(relatedTargetArg);
+		setType(type);
+		setCanBubble(canBubble);
+		setCancelable(cancelable);
+		setView(view);
+		setDetail(detail);
+		setScreenX(screenX);
+		setScreenY(screenY);
+		setClientX(clientX);
+		setClientY(clientY);
+		setCtrlKey(ctrlKey);
+		setAltKey(altKey);
+		setShiftKey(shiftKey);
+		setMetaKey(metaKey);
+		setButton(button);
+		setCurrentTarget(relatedTarget);
 
 	}
 
 	@Override
-	public EventTarget getRelatedTarget() {
-		// TODO Auto-generated method stub
-		return null;
+	public HTMLElement getRelatedTarget() {
+		return this.getSrcElement();
 	}
 
 	@Override
-	public boolean getModifierState(String keyArg) {
+	public boolean getModifierState(String key) {
 		// TODO Auto-generated method stub
 		return false;
 	}

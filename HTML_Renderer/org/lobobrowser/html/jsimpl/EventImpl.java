@@ -33,11 +33,11 @@ import org.w3c.dom.views.AbstractView;
 public class EventImpl extends AbstractScriptableDelegate implements Event {
 	
 	
-	private boolean ctrlKey; 
-	private boolean altKey;
-	private boolean shiftKey;
+	private Boolean ctrlKey = null; 
+	private Boolean altKey = null; ;
+	private Boolean shiftKey = null; ;
 	private boolean metaKey; 
-	private boolean cancelBubble;
+	private boolean canBubble;
 	private boolean returnValue;
 	private boolean bubbles;
 	private boolean cancelable;
@@ -54,14 +54,15 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 	private int leafY;
 	private short eventPhase;
 	private long timeStamp;
+	private String type;
+	private String namespaceURI;
 	private HTMLElement fromElement;
 	private HTMLElement toElement;
 	private HTMLElement srcElement;
 	private AbstractView view;
-	private InputEvent inputEvent= null;
+	private InputEvent inputEvent;
 	private EventTarget target;
 	private EventTarget currentTarget;
-	private String type;
 	
 	public EventImpl(){}
 
@@ -97,20 +98,34 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 		this.timeStamp = System.currentTimeMillis();
 		this.eventPhase = Event.AT_TARGET;
 	}
+	
+	public void initEventNS(String namespaceURI, String type, boolean bubbles, boolean cancelable) {
+		this.namespaceURI = namespaceURI;
+		this.type = type;
+		this.bubbles = bubbles;
+		this.cancelable = cancelable;
+	}
 
 	public boolean getAltKey() {
-		System.out.println("alt: " + this.inputEvent.isAltDown());
-		
+		if (altKey != null)
+			return altKey;
+
 		InputEvent ie = this.inputEvent;
 		return ie == null ? false : ie.isAltGraphDown();
 	}
 
 	public boolean getShiftKey() {
+		if (shiftKey != null)
+			return shiftKey;
+
 		InputEvent ie = this.inputEvent;
 		return ie == null ? false : ie.isShiftDown();
 	}
 
 	public boolean getCtrlKey() {
+		if (ctrlKey != null)
+			return ctrlKey;
+
 		InputEvent ie = this.inputEvent;
 		return ie == null ? false : ie.isControlDown();
 	}
@@ -124,12 +139,12 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 		}
 	}
 
-	public boolean isCancelBubble() {
-		return cancelBubble;
+	public boolean isCanBubble() {
+		return canBubble;
 	}
 
-	public void setCancelBubble(boolean cancelBubble) {
-		this.cancelBubble = cancelBubble;
+	public void setCanBubble(boolean canBubble) {
+		this.canBubble = canBubble;
 	}
 
 	public String getType() {
@@ -223,13 +238,13 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
 	public void stopPropagation() {
 		if (this.bubbles) {
-			this.cancelBubble = true;
+			this.canBubble = true;
 		}
 	}
 
 	public void stopImmediatePropagation() {
 		if (this.bubbles) {
-			this.cancelBubble = true;
+			this.canBubble = true;
 		}
 		this.cancelled = true;
 	}
@@ -262,14 +277,6 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 		return timeStamp;
 	}
 
-	public boolean isDefaultPrevented() {
-		return defaultPrevented;
-	}
-
-	public boolean isIsTrusted() {
-		return isTrusted;
-	}
-
 	public void setTarget(EventTarget target) {
 		this.target = target;
 	}
@@ -280,10 +287,6 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
 	public void setEventPhase(short eventPhase) {
 		this.eventPhase = eventPhase;
-	}
-
-	public boolean cancelBubble() {
-		return cancelBubble;
 	}
 
 	public boolean cancelled() {
@@ -353,7 +356,15 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 	public void setButton(int button) {
 		this.button = button;
 	}
+	
+	public String getNamespaceURI() {
+		return namespaceURI;
+	}
 
+	public void setNamespaceURI(String namespaceURI) {
+		this.namespaceURI = namespaceURI;
+	}
+	
 	@Override
 	public boolean getDefaultPrevented() {
 		// TODO Auto-generated method stub

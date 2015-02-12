@@ -9,9 +9,15 @@ import org.lobobrowser.html.w3c.events.WheelEvent;
 import org.w3c.dom.views.AbstractView;
 
 public class WheelEventImpl extends MouseEventImpl implements WheelEvent {
-	
-	public WheelEventImpl(){}
-	
+
+	private int deltaX;
+	private int deltaY;
+	private int deltaZ;
+	private int deltaMode;
+
+	public WheelEventImpl() {
+	}
+
 	public WheelEventImpl(String type, HTMLElement srcElement) {
 		super(type, srcElement);
 	}
@@ -26,37 +32,45 @@ public class WheelEventImpl extends MouseEventImpl implements WheelEvent {
 	}
 
 	@Override
-	public void initWheelEvent(String typeArg, boolean canBubbleArg,
-			boolean cancelableArg, AbstractView viewArg, int detailArg,
-			int screenXArg, int screenYArg, int clientXArg, int clientYArg,
-			short buttonArg, EventTarget relatedTargetArg,
-			String modifiersListArg, int deltaXArg, int deltaYArg,
-			int deltaZArg, int deltaMode) {
-		// TODO Auto-generated method stub
+	public void initWheelEvent(String type, boolean canBubble,
+			boolean cancelable, AbstractView view, int detail, int screenX,
+			int screenY, int clientX, int clientY, short button,
+			EventTarget relatedTarget, String modifiersList, int deltaX,
+			int deltaY, int deltaZ, int deltaMode) {
+		setType(type);
+		setCanBubble(canBubble);
+		setCancelable(cancelable);
+		setView(view);
+		setDetail(detail);
+		setScreenX(screenX);
+		setScreenY(screenY);
+		setClientX(clientX);
+		setClientY(clientY);
+		setButton(button);
+		this.deltaX = deltaX;
+		this.deltaY = deltaY;
+		this.deltaZ = deltaZ;
+		this.deltaMode = deltaMode;
 
 	}
 
 	@Override
 	public int getDeltaX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return deltaX;
 	}
 
 	@Override
 	public int getDeltaY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return deltaY;
 	}
 
 	@Override
 	public int getDeltaZ() {
-		// TODO Auto-generated method stub
-		return 0;
+		return deltaZ;
 	}
 
 	@Override
 	public int getDeltaMode() {
-		// TODO Auto-generated method stub
-		return 0;
+		return deltaMode;
 	}
 }

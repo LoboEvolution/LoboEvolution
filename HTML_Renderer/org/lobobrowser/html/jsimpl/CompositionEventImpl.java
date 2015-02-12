@@ -9,6 +9,8 @@ import org.w3c.dom.views.AbstractView;
 
 public class CompositionEventImpl extends UIEventImpl implements CompositionEvent {
 	
+	private String data;
+	
 	public CompositionEventImpl(){}
 	
 	public CompositionEventImpl(String type, HTMLElement srcElement) {
@@ -25,15 +27,17 @@ public class CompositionEventImpl extends UIEventImpl implements CompositionEven
 	}
 	
 	@Override
-	public void initCompositionEvent(String typeArg, boolean canBubbleArg,
-			boolean cancelableArg, AbstractView viewArg, String dataArg) {
-		// TODO Auto-generated method stub
-		
+	public void initCompositionEvent(String type, boolean cancelBubble,
+			boolean cancelable, AbstractView view, String data) {
+		setType(type);
+		setCanBubble(cancelBubble);
+		setCancelable(cancelable);
+		setView(view);
+		this.data = data;
 	}
 
 	@Override
 	public String getData() {
-		// TODO Auto-generated method stub
-		return null;
+		return data;
 	}
 }

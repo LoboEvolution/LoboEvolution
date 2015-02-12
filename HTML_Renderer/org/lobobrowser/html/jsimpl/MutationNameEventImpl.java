@@ -7,10 +7,15 @@ import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.events.MutationNameEvent;
 import org.w3c.dom.Node;
 
-public class MutationNameEventImpl extends MutationEventImpl implements MutationNameEvent {
-	
-	public MutationNameEventImpl(){}
-	
+public class MutationNameEventImpl extends MutationEventImpl implements
+		MutationNameEvent {
+
+	private String prevNamespaceURI;
+	private String prevNodeName;
+
+	public MutationNameEventImpl() {
+	}
+
 	public MutationNameEventImpl(String type, HTMLElement srcElement) {
 		super(type, srcElement);
 	}
@@ -26,23 +31,25 @@ public class MutationNameEventImpl extends MutationEventImpl implements Mutation
 	}
 
 	@Override
-	public void initMutationNameEvent(String typeArg, boolean canBubbleArg,
-			boolean cancelableArg, Node relatedNodeArg,
-			String prevNamespaceURIArg, String prevNodeNameArg) {
-		// TODO Auto-generated method stub
+	public void initMutationNameEvent(String type, boolean canBubble,
+			boolean cancelable, Node relatedNode, String prevNamespaceURI,
+			String prevNodeName) {
 
+		setType(type);
+		setCanBubble(canBubble);
+		setCancelable(cancelable);
+		this.prevNamespaceURI = prevNamespaceURI;
+		this.prevNodeName = prevNodeName;
 	}
 
 	@Override
 	public String getPrevNamespaceURI() {
-		// TODO Auto-generated method stub
-		return null;
+		return prevNamespaceURI;
 	}
 
 	@Override
 	public String getPrevNodeName() {
-		// TODO Auto-generated method stub
-		return null;
+		return prevNodeName;
 	}
 
 }

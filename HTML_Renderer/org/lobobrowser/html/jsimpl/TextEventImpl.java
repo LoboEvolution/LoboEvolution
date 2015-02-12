@@ -8,9 +8,12 @@ import org.lobobrowser.html.w3c.events.TextEvent;
 import org.w3c.dom.views.AbstractView;
 
 public class TextEventImpl extends UIEventImpl implements TextEvent {
-	
-	public TextEventImpl(){}
-	
+
+	private String data;
+
+	public TextEventImpl() {
+	}
+
 	public TextEventImpl(String type, HTMLElement srcElement) {
 		super(type, srcElement);
 	}
@@ -25,23 +28,20 @@ public class TextEventImpl extends UIEventImpl implements TextEvent {
 	}
 
 	@Override
-	public void initTextEvent(String typeArg, boolean canBubbleArg,
-			boolean cancelableArg, AbstractView viewArg, String dataArg,
-			int inputMode) {
-		// TODO Auto-generated method stub
-
+	public void initTextEvent(String type, boolean canBubble,
+			boolean cancelable, AbstractView view, String data) {
+		
+		if (data == null)
+			throw new NullPointerException();
+		setType(type);
+		setCanBubble(canBubble);
+		setCancelable(cancelable);
+		setView(view);
+		this.data = data;
 	}
 
 	@Override
 	public String getData() {
-		// TODO Auto-generated method stub
-		return null;
+		return data;
 	}
-
-	@Override
-	public int getInputMode() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

@@ -8,9 +8,16 @@ import org.lobobrowser.html.w3c.events.MutationEvent;
 import org.w3c.dom.Node;
 
 public class MutationEventImpl extends EventImpl implements MutationEvent {
-	
-	public MutationEventImpl(){}
-	
+
+	private Node related;
+	private String pvalue;
+	private String nvalue;
+	private String attname;
+	private short attchid;
+
+	public MutationEventImpl() {
+	}
+
 	public MutationEventImpl(String type, HTMLElement srcElement) {
 		super(type, srcElement);
 	}
@@ -26,41 +33,43 @@ public class MutationEventImpl extends EventImpl implements MutationEvent {
 	}
 
 	@Override
-	public void initMutationEvent(String typeArg, boolean canBubbleArg,
-			boolean cancelableArg, Node relatedNodeArg, String prevValueArg,
-			String newValueArg, String attrNameArg, short attrChangeArg) {
-		// TODO Auto-generated method stub
+	public void initMutationEvent(String type, boolean canBubble,
+			boolean cancelable, Node relatedNode, String prevValue,
+			String newValue, String attrName, short attrChange) {
+
+		setType(type);
+		setCanBubble(canBubble);
+		setCancelable(cancelable);		
+		related = relatedNode;
+		pvalue = prevValue;
+		nvalue = newValue;
+		attname = attrName;
+		attchid = attrChange;
 
 	}
 
 	@Override
 	public Node getRelatedNode() {
-		// TODO Auto-generated method stub
-		return null;
+		return related;
 	}
 
 	@Override
 	public String getPrevValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return pvalue;
 	}
 
 	@Override
 	public String getNewValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return nvalue;
 	}
 
 	@Override
 	public String getAttrName() {
-		// TODO Auto-generated method stub
-		return null;
+		return attname;
 	}
 
 	@Override
 	public short getAttrChange() {
-		// TODO Auto-generated method stub
-		return 0;
+		return attchid;
 	}
-
 }

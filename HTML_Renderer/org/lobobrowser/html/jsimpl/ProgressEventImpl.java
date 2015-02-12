@@ -8,6 +8,9 @@ import org.lobobrowser.html.w3c.events.ProgressEvent;
 
 public class ProgressEventImpl extends EventImpl implements ProgressEvent {
 	
+	private int loaded;
+	private int total;
+
 	public ProgressEventImpl(){}
 	
 	public ProgressEventImpl(String type, HTMLElement srcElement) {
@@ -25,36 +28,30 @@ public class ProgressEventImpl extends EventImpl implements ProgressEvent {
 	}
 
 	@Override
-	public void initProgressEvent(String typeArg, boolean canBubbleArg,
-			boolean cancelableArg, boolean lengthComputableArg, int loadedArg,
-			int totalArg) {
-		// TODO Auto-generated method stub
+	public void initProgressEvent(String type, boolean canBubble,
+			boolean cancelable, boolean lengthComputable, int loaded,
+			int total) {
 
-	}
-
-	@Override
-	public void initProgressEventNS(String namespaceURI, String typeArg,
-			boolean canBubbleArg, boolean cancelableArg,
-			boolean lengthComputableArg, int loadedArg, int totalArg) {
-		// TODO Auto-generated method stub
+		setType(type);
+		setCanBubble(canBubble);
+		setCancelable(cancelable);		
+		total = (lengthComputable)? total: -1;
+		loaded = (loaded >= 0)? loaded: 0;
 
 	}
 
 	@Override
 	public boolean getLengthComputable() {
-		// TODO Auto-generated method stub
-		return false;
+		return (total >= 0);
 	}
 
 	@Override
 	public int getLoaded() {
-		// TODO Auto-generated method stub
-		return 0;
+		return loaded;
 	}
 
 	@Override
 	public int getTotal() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (total >= 0)? total: 0;
 	}
 }

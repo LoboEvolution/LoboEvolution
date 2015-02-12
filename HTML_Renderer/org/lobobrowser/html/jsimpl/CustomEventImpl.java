@@ -24,11 +24,11 @@ public class CustomEventImpl extends EventImpl implements CustomEvent {
 	}
 	
 	@Override
-	public void initCustomEvent(String typeArg, boolean canBubbleArg,
-			boolean cancelableArg, int detailArg) {
-		setType(typeArg);
-		setCancelBubble(canBubbleArg);
-		setCancelable(cancelableArg);
-		setDetail(detailArg);
+	public void initCustomEvent(String type, boolean canBubble,
+			boolean cancelable, int detail) {
+		setType(type);
+		setCanBubble(canBubble);
+		setCancelable(cancelable);
+		setDetail(detail);
 	}
 }
