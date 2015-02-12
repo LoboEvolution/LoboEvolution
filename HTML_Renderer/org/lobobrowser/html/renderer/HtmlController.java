@@ -1,6 +1,7 @@
 package org.lobobrowser.html.renderer;
 
 import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +16,7 @@ import org.lobobrowser.html.domimpl.HTMLInputElementImpl;
 import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
 import org.lobobrowser.html.js.Executor;
+import org.lobobrowser.html.jsimpl.KeyboardEventImpl;
 import org.lobobrowser.html.jsimpl.MouseEventImpl;
 import org.mozilla.javascript.Function;
 
@@ -337,6 +339,52 @@ public class HtmlController {
 			Function f = uiElement.getOnchange();
 			if (f != null) {
 				MouseEventImpl jsEvent = new MouseEventImpl("change", uiElement);
+				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
+					return false;
+				}
+			}
+		}
+		// No propagate
+		return false;
+	}
+	
+	public boolean onKeyDown(ModelNode node,KeyEvent event) {
+		if (node instanceof HTMLInputElementImpl) {
+			HTMLInputElementImpl uiElement = (HTMLInputElementImpl) node;
+			Function f = uiElement.getOnkeydown();
+			if (f != null) {
+				KeyboardEventImpl jsEvent = new KeyboardEventImpl("keydown", uiElement,event);
+				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
+					return false;
+				}
+			}
+		}
+		// No propagate
+		return false;
+	}
+	
+	public boolean onKeyPress(ModelNode node,KeyEvent event){
+		
+		if (node instanceof HTMLInputElementImpl) {
+			HTMLInputElementImpl uiElement = (HTMLInputElementImpl) node;
+			Function f = uiElement.getOnkeypress();
+			if (f != null) {
+				KeyboardEventImpl jsEvent = new KeyboardEventImpl("keypress", uiElement,event);
+				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
+					return false;
+				}
+			}
+		}
+		// No propagate
+		return false;
+	}
+	
+	public boolean onKeyUp(ModelNode node,KeyEvent event) {
+		if (node instanceof HTMLInputElementImpl) {
+			HTMLInputElementImpl uiElement = (HTMLInputElementImpl) node;
+			Function f = uiElement.getOnkeyup();
+			if (f != null) {
+				KeyboardEventImpl jsEvent = new KeyboardEventImpl("keyup", uiElement,event);
 				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
 					return false;
 				}
