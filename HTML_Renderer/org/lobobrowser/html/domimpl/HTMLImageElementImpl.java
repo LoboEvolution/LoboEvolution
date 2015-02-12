@@ -80,12 +80,18 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public int getHeight() {
+		String height = this.getAttribute(HtmlAttributeProperties.HEIGHT);
 		UINode r = this.uiNode;
+
+		if (height != null && height.length() > 0)
+			return new Integer(height).intValue();
+
 		return r == null ? 0 : r.getBounds().height;
 	}
 
 	public void setHeight(int height) {
-		this.setAttribute(HtmlAttributeProperties.HEIGHT, String.valueOf(height));
+		this.setAttribute(HtmlAttributeProperties.HEIGHT,
+				String.valueOf(height));
 	}
 
 	public int getHspace() {
@@ -142,7 +148,13 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	public int getWidth() {
+
+		String width = this.getAttribute(HtmlAttributeProperties.WIDTH);
 		UINode r = this.uiNode;
+
+		if (width != null && width.length() > 0)
+			return new Integer(width).intValue();
+
 		return r == null ? 0 : r.getBounds().width;
 	}
 
