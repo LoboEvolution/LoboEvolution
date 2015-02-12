@@ -27,6 +27,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Insets;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -35,6 +37,7 @@ import javax.swing.text.JTextComponent;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.DOMElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.renderer.HtmlController;
 import org.lobobrowser.util.gui.WrapperLayout;
 
 abstract class BaseInputTextControl extends BaseInputControl {
@@ -55,6 +58,25 @@ abstract class BaseInputTextControl extends BaseInputControl {
 		String value = element.getAttribute(HtmlAttributeProperties.VALUE);
 		widget.setSelectionColor(Color.BLUE);
 		widget.setText(value);
+		
+		widget.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent event) {
+				HtmlController.getInstance().onKeyDown(modelNode, event);
+				HtmlController.getInstance().onKeyPress(modelNode, event);
+			}
+
+			@Override
+			public void keyReleased(KeyEvent event) {
+				HtmlController.getInstance().onKeyUp(modelNode, event);
+
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+		});
 
 		this.widget = widget;
 		this.add(widget);

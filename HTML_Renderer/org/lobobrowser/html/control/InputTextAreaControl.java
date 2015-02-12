@@ -28,6 +28,8 @@ import java.awt.ComponentOrientation;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Insets;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JScrollPane;
 import javax.swing.text.JTextComponent;
@@ -36,6 +38,7 @@ import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.JTextAreaImpl;
 import org.lobobrowser.html.domimpl.DOMElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.renderer.HtmlController;
 import org.lobobrowser.util.gui.WrapperLayout;
 
 public class InputTextAreaControl extends BaseInputControl {
@@ -67,6 +70,24 @@ public class InputTextAreaControl extends BaseInputControl {
 		widget.setPlaceholder(modelNode.getPlaceholder());
 		widget.setSelectionColor(Color.BLUE);
 		widget.setText(value);
+		widget.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent event) {
+				HtmlController.getInstance().onKeyDown(modelNode, event);
+				HtmlController.getInstance().onKeyPress(modelNode, event);
+			}
+
+			@Override
+			public void keyReleased(KeyEvent event) {
+				HtmlController.getInstance().onKeyUp(modelNode, event);
+
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+		});
 	}
 
 	public void reset(int availWidth, int availHeight) {
