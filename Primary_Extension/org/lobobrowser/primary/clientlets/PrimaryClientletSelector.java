@@ -33,6 +33,7 @@ import org.lobobrowser.clientlet.ClientletSelector;
 import org.lobobrowser.primary.clientlets.download.DownloadClientlet;
 import org.lobobrowser.primary.clientlets.html.HtmlClientlet;
 import org.lobobrowser.primary.clientlets.img.ImageClientlet;
+import org.lobobrowser.primary.clientlets.pdf.PdfClientlet;
 
 public class PrimaryClientletSelector implements ClientletSelector {
 	private static final Logger logger = Logger
@@ -45,12 +46,14 @@ public class PrimaryClientletSelector implements ClientletSelector {
 	public Clientlet select(ClientletRequest request, ClientletResponse response) {
 		// Don't try to catch too much here.
 		// Clientlets here are not overriddable.
-
+		
 		String mimeType = response.getMimeType();
+		
 		if (logger.isLoggable(Level.INFO)) {
 			logger.info("select(): mimeType=" + mimeType);
 		}
 		String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
+		System.out.println(mimeTypeTL);
 		if ("text/html".equals(mimeTypeTL)) {
 			// TODO: XHTML needs its own clientlet.
 			return new HtmlClientlet();
@@ -86,6 +89,7 @@ public class PrimaryClientletSelector implements ClientletSelector {
 			ClientletResponse response) {
 		String mimeType = response.getMimeType();
 		String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
+		System.out.println("mtttl2: " + mimeTypeTL);
 		if (mimeTypeTL != null && mimeTypeTL.startsWith("text/")) {
 			return new TextClientlet();
 		} else if ("application/xhtml+xml".equals(mimeTypeTL)) {
@@ -104,11 +108,9 @@ public class PrimaryClientletSelector implements ClientletSelector {
 					|| "xaml".equals(extensionTL)
 					|| "css".equals(extensionTL) || "js".equals(extensionTL)) {
 				return new TextClientlet();
-			} else if (mimeType == null) {
-				// If mime-type is completely missing,
-				// disregard extension and assume HTML.
-				// Works for
-				// DLink router authentication page.
+			}else if ("pdf".equals(extensionTL)){
+				return new PdfClientlet();
+			}else if (mimeType == null) {
 				return new HtmlClientlet();
 			} else {
 				return new DownloadClientlet();

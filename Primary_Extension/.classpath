@@ -8,5 +8,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/Platform_Public_API"/>
 	<classpathentry kind="lib" path="/XAMJ_Build/ext/jlfgr-1_0.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/parser"/>
+	<classpathentry kind="lib" path="/XAMJ_Build/ext/PDFrenderer.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

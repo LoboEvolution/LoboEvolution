@@ -66,6 +66,7 @@
             <file src="ext/primary.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/jweb-ext.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/jlfgr-1_0.jar" targetdir="$INSTALL_PATH/ext"/>
+            <file src="ext/PDFrenderer.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/javafxc.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/javafxrt.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/Scenario.jar" targetdir="$INSTALL_PATH/ext"/>
