@@ -18,7 +18,11 @@ public class PdfClientlet implements Clientlet {
 	public void process(ClientletContext context) throws ClientletException {
 		ClientletResponse response = context.getResponse();
 		URL url = response.getResponseURL();
-		
-		new PdfDialog(response,url,1);
+		PdfDialog viewer;
+		viewer = new PdfDialog(true);
+		String fileName = url.toString();
+		if (fileName != null) {
+			viewer.doOpen(fileName);
+		}
 	}
 }
