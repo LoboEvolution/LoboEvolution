@@ -100,6 +100,7 @@ public class LocalSecurityPolicy extends Policy {
 		permissions.add(new RuntimePermission("getProtectionDomain"));
 		permissions.add(new RuntimePermission("shutdownHooks"));
 		permissions.add(new RuntimePermission("modifyThread"));
+		permissions.add(new RuntimePermission("queuePrintJob"));
 		permissions.add(new RuntimePermission("com.sun.media.jmc.accessMedia"));
 		// loadLibrary necessary in Java 6, in particular loadLibrary.sunmscapi.
 		permissions.add(new RuntimePermission("loadLibrary.*"));
