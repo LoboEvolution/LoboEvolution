@@ -36,9 +36,8 @@ package org.lobobrowser.html.w3c;
  * This element is used for single-line text input. See the ISINDEX element
  * definition in HTML 4.01. This element is deprecated in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLIsIndexElement extends HTMLElement {
 	/**

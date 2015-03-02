@@ -30,12 +30,14 @@ package org.lobobrowser.gui;
 public interface BrowserWindow {
 	/**
 	 * Gets the root {@link FramePanel} of the window.
+	 * @return FramePanel
 	 */
 	public FramePanel getTopFramePanel();
 
 	/**
 	 * Gets a {@link WindowCallback} instance that receives navigation
 	 * notifications. This method may return <code>null</code>.
+	 * @return WindowCallback
 	 */
 	public WindowCallback getWindowCallback();
 }

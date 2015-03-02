@@ -37,7 +37,7 @@ import java.beans.VetoableChangeSupport;
  * patterns to allow visual manipulation of the bean's properties and event
  * handlers at design-time.</p>
  *
- * <p>Here is a simple example bean that contains one property, foo, and the
+ * Here is a simple example bean that contains one property, foo, and the
  * proper pattern for implementing property change notification:
  * <pre><code>
  *  public class ABean extends JavaBean {
@@ -53,7 +53,7 @@ import java.beans.VetoableChangeSupport;
  *      return foo;
  *    }
  *  }
- * </code></pre></p>
+ * </code></pre>
  *
  * <p>You will notice that "getFoo()" is used in the setFoo method rather than
  * accessing "foo" directly for the gets. This is done intentionally so that if
@@ -65,7 +65,7 @@ import java.beans.VetoableChangeSupport;
  * be assured from the above code fragment that a property change event will only
  * occur if old is indeed different from getFoo()</p>
  *
- * <p><code>JavaBean</code> also supports {@link VetoablePropertyChange} events.
+ * <code>JavaBean</code> also supports VetoablePropertyChange events.
  * These events are similar to <code>PropertyChange</code> events, except a special
  * exception can be used to veto changing the property. For example, perhaps the
  * property is changing from "fred" to "red", but a listener deems that "red" is
@@ -104,9 +104,9 @@ import java.beans.VetoableChangeSupport;
  *      }
  *    }
  *  }
- * </code></pre></p>
+ * </code></pre>
  *
- * @status REVIEWED
+ * status REVIEWED
  * @author rbair
  */
 public abstract class AbstractBean {
@@ -192,8 +192,9 @@ public abstract class AbstractBean {
      * the parameter.
      *
      * <pre>
+     * <code>
      * PropertyChangeListener[] listeners = bean.getPropertyChangeListeners();
-     * for (int i = 0; i < listeners.length; i++) {
+     * for (int i = 0; i &lt; listeners.length; i++) {
      *	 if (listeners[i] instanceof PropertyChangeListenerProxy) {
      *     PropertyChangeListenerProxy proxy =
      *                    (PropertyChangeListenerProxy)listeners[i];
@@ -203,6 +204,7 @@ public abstract class AbstractBean {
      *     }
      *   }
      * }
+     * </code>
      *</pre>
      *
      * @see java.beans.PropertyChangeListenerProxy
@@ -475,7 +477,7 @@ public abstract class AbstractBean {
     }
 
     /**
-     * @inheritDoc
+     * @exception CloneNotSupportedException
      */
     public Object clone() throws CloneNotSupportedException {
         AbstractBean result = (AbstractBean) super .clone();

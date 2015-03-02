@@ -384,7 +384,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	}
 
 	/**
-	 * Gets the parent frame. This is <code>null<code> for the top-most frame
+	 * Gets the parent frame. This is <code>null</code> for the top-most frame
 	 * in a window or when the FramePanel is detached.
 	 */
 	public NavigatorFrame getParentFrame() {

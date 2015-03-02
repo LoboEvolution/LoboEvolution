@@ -1,13 +1,13 @@
 package org.mozilla.javascript.typedarrays;
 
+import java.util.List;
+
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.IdFunctionObject;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
-
-import java.util.List;
 
 public abstract class NativeTypedArrayView
     extends NativeArrayBufferView

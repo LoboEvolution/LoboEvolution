@@ -6,9 +6,9 @@
 
 package org.mozilla.javascript;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.io.Serializable;
 
 /**
  * Cache of generated classes and data structures to access Java runtime
@@ -141,29 +141,6 @@ public class ClassCache implements Serializable
             classAdapterCache = new ConcurrentHashMap<JavaAdapter.JavaAdapterSignature,Class<?>>(16, 0.75f, 1);
         }
         return classAdapterCache;
-    }
-
-    /**
-     * @deprecated
-     * The method always returns false.
-     * @see #setInvokerOptimizationEnabled(boolean enabled)
-     */
-    public boolean isInvokerOptimizationEnabled()
-    {
-        return false;
-    }
-
-    /**
-     * @deprecated
-     * The method does nothing.
-     * Invoker optimization is no longer used by Rhino.
-     * On modern JDK like 1.4 or 1.5 the disadvantages of the optimization
-     * like increased memory usage or longer initialization time overweight
-     * small speed increase that can be gained using generated proxy class
-     * to replace reflection.
-     */
-    public synchronized void setInvokerOptimizationEnabled(boolean enabled)
-    {
     }
 
     /**

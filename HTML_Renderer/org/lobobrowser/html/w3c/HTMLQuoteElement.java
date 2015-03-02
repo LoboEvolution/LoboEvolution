@@ -36,9 +36,8 @@ package org.lobobrowser.html.w3c;
  * For the <code>Q</code> and <code>BLOCKQUOTE</code> elements. See the Q
  * element definition in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLQuoteElement extends HTMLElement {
 	/**

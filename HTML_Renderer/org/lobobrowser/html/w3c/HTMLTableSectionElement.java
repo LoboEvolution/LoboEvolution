@@ -37,9 +37,8 @@ import org.w3c.dom.DOMException;
 /**
  * The <code>THEAD</code>, <code>TFOOT</code>, and <code>TBODY</code> elements.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLTableSectionElement extends HTMLElement {
 	/**

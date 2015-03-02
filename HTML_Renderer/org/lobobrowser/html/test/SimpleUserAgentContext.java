@@ -48,7 +48,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 
 	/**
 	 * Creates a {@link org.lobobrowser.html.test.SimpleHttpRequest} instance.
-	 * The {@link org.lobobrowser.html.HttpRequest}</code> object returned by
+	 * The {@link org.lobobrowser.html.HttpRequest} object returned by
 	 * this method is used to load images, scripts, style sheets, and to
 	 * implement the Javascript XMLHttpRequest class. Override if a custom
 	 * mechanism to make requests is needed.
@@ -390,7 +390,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	/**
 	 * Sets the value normally returned by {@link #isInternalCSSEnabled()}.
 	 * 
-	 * @param enabled
+	 * @param internalCSSEnabled
 	 *            A boolean value.
 	 */
 	public void setInternalCSSEnabled(boolean internalCSSEnabled) {

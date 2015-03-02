@@ -71,8 +71,7 @@ public interface ManagedFile {
 	/**
 	 * Creates an input stream for reading from the managed file.
 	 * 
-	 * @throws FileNotFoundException
-	 *             If the file does not exist.
+	 * @throws IOException
 	 */
 	public InputStream openInputStream() throws IOException;
 

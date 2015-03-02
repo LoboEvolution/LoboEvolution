@@ -20,7 +20,6 @@
  */
 package org.lobobrowser.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Graphics;
@@ -29,11 +28,8 @@ import java.awt.HeadlessException;
 import java.awt.RenderingHints;
 
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 
 import org.lobobrowser.main.ExtensionManager;
 import org.lobobrowser.ua.NavigatorFrame;

@@ -89,7 +89,6 @@ public abstract class SecurityController
      * The method uses the SecurityController instance associated with the
      * current {@link Context} to construct proper dynamic domain and create
      * corresponding class loader.
-     * <par>
      * If no SecurityController is associated with the current {@link Context} ,
      * the method calls {@link Context#createClassLoader(ClassLoader parent)}.
      *

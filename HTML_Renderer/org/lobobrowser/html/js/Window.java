@@ -220,7 +220,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 * @see <a
 	 *      href="http://developer.mozilla.org/en/docs/DOM:window.setInterval">Window.setInterval
 	 *      interface definition</a>
-	 * @todo Make proper and refactore with
+	 * TODO Make proper and refactore with
 	 *       {@link Window#setTimeout(Function, double)}.
 	 */
 	public int setInterval(final Function aFunction, final double aTimeInMs) {
@@ -251,7 +251,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 * @see <a
 	 *      href="http://developer.mozilla.org/en/docs/DOM:window.setInterval">Window.setInterval
 	 *      interface definition</a>
-	 * @todo Make proper and refactore with
+	 * TODO Make proper and refactore with
 	 *       {@link Window#setTimeout(String, double)}.
 	 */
 	public int setInterval(final String aExpression, double aTimeInMs) {

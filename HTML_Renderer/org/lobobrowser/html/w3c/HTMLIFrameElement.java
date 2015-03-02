@@ -37,9 +37,8 @@ import org.w3c.dom.Document;
 /**
  * Inline subwindows. See the IFRAME element definition in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLIFrameElement extends HTMLElement {
 	/**

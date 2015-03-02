@@ -36,9 +36,8 @@ package org.lobobrowser.html.w3c;
  * For the <code>H1</code> to <code>H6</code> elements. See the H1 element
  * definition in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLHeadingElement extends HTMLElement {
 	/**

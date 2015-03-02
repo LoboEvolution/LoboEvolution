@@ -71,7 +71,7 @@ public class CSSException extends RuntimeException {
 	/**
 	 * Creates a new CSSException with an embeded exception.
 	 * 
-	 * @param a
+	 * @param e
 	 *            the embeded exception.
 	 */
 	public CSSException(Exception e) {
@@ -82,7 +82,7 @@ public class CSSException extends RuntimeException {
 	/**
 	 * Creates a new CSSException with a specific code.
 	 * 
-	 * @param a
+	 * @param code
 	 *            the embeded exception.
 	 */
 	public CSSException(short code) {

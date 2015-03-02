@@ -36,9 +36,8 @@ package org.lobobrowser.html.w3c;
  * Document base URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC
  * 2396</a>]. See the BASE element definition in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the 
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLBaseElement extends HTMLElement {
 	/**

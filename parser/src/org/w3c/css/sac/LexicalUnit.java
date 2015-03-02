@@ -50,19 +50,19 @@ public interface LexicalUnit {
 	 */
 	public static final short SAC_OPERATOR_EXP = 6;
 	/**
-	 * <
+	 * &lt;
 	 */
 	public static final short SAC_OPERATOR_LT = 7;
 	/**
-	 * >
+	 * &gt;
 	 */
 	public static final short SAC_OPERATOR_GT = 8;
 	/**
-	 * <=
+	 * &lt;=
 	 */
 	public static final short SAC_OPERATOR_LE = 9;
 	/**
-	 * >=
+	 * &gt;=
 	 */
 	public static final short SAC_OPERATOR_GE = 10;
 	/**

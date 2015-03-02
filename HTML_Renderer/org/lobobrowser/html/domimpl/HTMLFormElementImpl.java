@@ -35,7 +35,6 @@ import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.dombl.NodeVisitor;
 import org.lobobrowser.html.dombl.StopVisitorException;
 import org.lobobrowser.html.domfilter.InputFilter;
-import org.lobobrowser.html.domfilter.NodeFilter;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLFormElement;

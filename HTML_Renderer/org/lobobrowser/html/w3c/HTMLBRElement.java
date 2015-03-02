@@ -35,9 +35,9 @@ package org.lobobrowser.html.w3c;
 /**
  * Force a line break. See the BR element definition in HTML 4.01.
  * <p>
- * See also the <a
+ * See also the
  * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLBRElement extends HTMLElement {
 	/**

@@ -6,10 +6,10 @@
 
 package org.mozilla.javascript.ast;
 
-import org.mozilla.javascript.EvaluatorException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.mozilla.javascript.EvaluatorException;
 
 /**
  * An error reporter that gathers the errors and warnings for later display.
@@ -34,7 +34,7 @@ public class ErrorCollector implements IdeErrorReporter {
     }
 
     /**
-     * @inheritDoc
+     * 
      */
     public void warning(String message, String sourceName, int offset, int length)
     {
@@ -55,7 +55,7 @@ public class ErrorCollector implements IdeErrorReporter {
     }
 
     /**
-     * @inheritDoc
+     * 
      */
     public void error(String message, String sourceName,
                       int fileOffset, int length)
@@ -66,7 +66,7 @@ public class ErrorCollector implements IdeErrorReporter {
     }
 
     /**
-     * @inheritDoc
+     *
      */
     public EvaluatorException runtimeError(String message, String sourceName,
                                            int line, String lineSource,

@@ -26,8 +26,7 @@ import org.lobobrowser.html.style.RenderStateDelegator;
 public class TextDecorationRenderState extends RenderStateDelegator {
 	private int textDecorationMask;
 
-	public TextDecorationRenderState(RenderState prevRenderState,
-			int textDecorationMask) {
+	public TextDecorationRenderState(RenderState prevRenderState, int textDecorationMask) {
 		super(prevRenderState);
 		this.textDecorationMask = textDecorationMask;
 	}

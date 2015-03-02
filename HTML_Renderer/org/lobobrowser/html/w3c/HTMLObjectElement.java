@@ -40,9 +40,8 @@ import org.w3c.dom.Document;
  * the underlying object is instantiated. See the OBJECT element definition in
  * [<a href='http://www.w3.org/TR/1999/REC-html401-19991224'>HTML 4.01</a>].
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLObjectElement extends HTMLElement {
 	/**

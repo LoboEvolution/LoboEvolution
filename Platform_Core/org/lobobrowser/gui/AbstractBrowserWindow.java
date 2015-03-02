@@ -42,6 +42,7 @@ public abstract class AbstractBrowserWindow extends JFrame implements
 
 	/**
 	 * Returns true if window bounds were assigned via properties.
+	 * @return boolean
 	 */
 	public boolean isBoundsAssigned() {
 		return boundsAssigned;

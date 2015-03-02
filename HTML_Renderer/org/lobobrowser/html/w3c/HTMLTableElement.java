@@ -43,9 +43,8 @@ import org.w3c.dom.DOMException;
  * called, the method returns the existing THead or TFoot element. See the TABLE
  * element definition in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLTableElement extends HTMLElement {
 	/**

@@ -128,7 +128,7 @@ public class LocalSecurityPolicy extends Policy {
 	 * set.
 	 * 
 	 * @param permission
-	 *            A <code>Permission<code> instance.
+	 *            A <code>Permission</code> instance.
 	 */
 	public static void addPrivilegedPermission(Permission permission) {
 		SecurityManager sm = System.getSecurityManager();

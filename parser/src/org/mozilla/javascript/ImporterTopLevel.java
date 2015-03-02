@@ -29,13 +29,13 @@ package org.mozilla.javascript;
  * </ul>
  * The following code from the shell illustrates this use:
  * <pre>
- * js> importClass(java.io.File)
- * js> f = new File('help.txt')
+ * importClass(java.io.File)
+ * f = new File('help.txt')
  * help.txt
- * js> importPackage(java.util)
- * js> v = new Vector()
+ * importPackage(java.util)
+ *  v = new Vector()
  * []
- *
+ * </pre>
  * @author Norris Boyd
  */
 public class ImporterTopLevel extends TopLevel {

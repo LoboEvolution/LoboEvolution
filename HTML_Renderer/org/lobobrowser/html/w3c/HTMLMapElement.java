@@ -35,9 +35,8 @@ package org.lobobrowser.html.w3c;
 /**
  * Client-side image map. See the MAP element definition in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLMapElement extends HTMLElement {
 	/**

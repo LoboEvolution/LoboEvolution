@@ -36,9 +36,8 @@ package org.lobobrowser.html.w3c;
  * Base font. See the BASEFONT element definition in HTML 4.01. This element is
  * deprecated in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLBaseFontElement extends HTMLElement {
 	/**

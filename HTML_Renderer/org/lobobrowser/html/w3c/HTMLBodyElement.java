@@ -37,9 +37,9 @@ package org.lobobrowser.html.w3c;
  * if the tags are not present in the source document. See the BODY element
  * definition in HTML 4.01.
  * <p>
- * See also the <a
  * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * 
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLBodyElement extends HTMLElement {
 	/**

@@ -12,7 +12,7 @@ package org.mozilla.javascript.ast;
  * three parts:<p>
  *
  * <ol>
- *  <li>optional: an {@code @}</li>  (specifying an attribute access)</li>
+ *  <li>optional: an {@code @}  (specifying an attribute access)</li>
  *  <li>optional: a namespace (a {@code Name}) and double-colon</li>
  *  <li>required:  either a {@code Name} or a bracketed [expression]</li>
  * </ol>

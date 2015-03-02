@@ -27,6 +27,7 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.dombl.JTextFieldImpl;

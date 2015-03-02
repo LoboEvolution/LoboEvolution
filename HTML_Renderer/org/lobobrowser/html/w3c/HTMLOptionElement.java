@@ -35,9 +35,8 @@ package org.lobobrowser.html.w3c;
 /**
  * A selectable choice. See the OPTION element definition in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLOptionElement extends HTMLElement {
 	/**

@@ -106,7 +106,7 @@ public interface ClientletContext {
 	 *            <code>test.acme.com</code>, then the <code>hostName</code>
 	 *            parameter can be <code>acme.com</code> but not
 	 *            <code>com</code>.
-	 * @throws java.security.SecurityException
+	 * @throws  java.io.IOException
 	 *             If the caller doesn't have access to the managed store for
 	 *             the host given.
 	 */

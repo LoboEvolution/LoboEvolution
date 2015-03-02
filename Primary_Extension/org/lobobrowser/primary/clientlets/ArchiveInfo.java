@@ -32,7 +32,8 @@ public class ArchiveInfo {
 	public final URL url;
 
 	/**
-	 * @param jarFile
+	 * @param url
+	 * @param file
 	 */
 	public ArchiveInfo(final URL url, final java.io.File file) {
 		super();

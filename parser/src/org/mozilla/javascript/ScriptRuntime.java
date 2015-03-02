@@ -7,7 +7,7 @@
 package org.mozilla.javascript;
 
 import java.io.Serializable;
-import java.lang.reflect.*;
+import java.lang.reflect.Constructor;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -25,8 +25,8 @@ import org.mozilla.javascript.typedarrays.NativeUint32NativeArray;
 import org.mozilla.javascript.typedarrays.NativeUint8ClampedArray;
 import org.mozilla.javascript.typedarrays.NativeUint8NativeArray;
 import org.mozilla.javascript.v8dtoa.FastDtoa;
-import org.mozilla.javascript.xml.XMLObject;
 import org.mozilla.javascript.xml.XMLLib;
+import org.mozilla.javascript.xml.XMLObject;
 
 /**
  * This is the class that implements the runtime.
@@ -57,6 +57,8 @@ public class ScriptRuntime {
     /**
      * Returns representation of the [[ThrowTypeError]] object.
      * See ECMA 5 spec, 13.2.3
+     * @param cx
+     * @return BaseFunction
      */
     public static BaseFunction typeErrorThrower(Context cx) {
       if (cx.typeErrorThrower == null) {
@@ -350,6 +352,8 @@ public class ScriptRuntime {
      * Convert the value to a boolean.
      *
      * See ECMA 9.2.
+     * @param val
+     * @return boolean
      */
     public static boolean toBoolean(Object val)
     {
@@ -389,6 +393,8 @@ public class ScriptRuntime {
      * Convert the value to a number.
      *
      * See ECMA 9.3.
+     * @param val
+     * @return double
      */
     public static double toNumber(Object val)
     {
@@ -588,8 +594,9 @@ public class ScriptRuntime {
 
     /**
      * ToNumber applied to the String type
-     *
      * See ECMA 9.3.1
+     * @param s
+     * @return double
      */
     public static double toNumber(String s) {
         int len = s.length();
@@ -664,6 +671,9 @@ public class ScriptRuntime {
      * ECMA function formal arguments are undefined if not supplied;
      * this function pads the argument array out to the expected
      * length, if necessary.
+     * @param  args
+     * @param count
+     * @return Object[]
      */
     public static Object[] padArguments(Object[] args, int count) {
         if (count < args.length)
@@ -690,6 +700,9 @@ public class ScriptRuntime {
     /**
      * For escaping strings printed by object and array literals; not quite
      * the same as 'escape.'
+     * @param s
+     * @param escapeQuote
+     * @return String
      */
     public static String escapeString(String s, char escapeQuote)
     {
@@ -778,6 +791,8 @@ public class ScriptRuntime {
      * Convert the value to a string.
      *
      * See ECMA 9.8.
+     * @param val
+     * @return String
      */
     public static String toString(Object val) {
         for (;;) {
@@ -821,6 +836,8 @@ public class ScriptRuntime {
 
     /**
      * Optimized version of toString(Object) for numbers.
+     * @param val
+     * @return String
      */
     public static String toString(double val) {
         return numberToString(val, 10);
@@ -979,6 +996,9 @@ public class ScriptRuntime {
 
     /**
      * Warning: this doesn't allow to resolve primitive prototype properly when many top scopes are involved
+     * @param cx
+     * @param obj
+     * @return Scriptable
      */
     public static Scriptable toObjectOrNull(Context cx, Object obj)
     {
@@ -992,6 +1012,10 @@ public class ScriptRuntime {
 
     /**
      * @param scope the scope that should be used to resolve primitive prototype
+     * @param cx
+     * @param obj
+     * @param scope
+     * @return Scriptable
      */
     public static Scriptable toObjectOrNull(Context cx, Object obj,
                                             final Scriptable scope)
@@ -1020,6 +1044,10 @@ public class ScriptRuntime {
      * Convert the value to an object.
      *
      * See ECMA 9.9.
+     * @param cx
+     * @param scope
+     * @param val
+     * @return  Scriptable
      */
     public static Scriptable toObject(Context cx, Scriptable scope, Object val)
     {
@@ -1104,6 +1132,8 @@ public class ScriptRuntime {
     /**
      *
      * See ECMA 9.4.
+     * @param val
+     * @return double
      */
     public static double toInteger(Object val) {
         return toInteger(toNumber(val));
@@ -1133,6 +1163,8 @@ public class ScriptRuntime {
     /**
      *
      * See ECMA 9.5.
+     * @param val
+     * @return int
      */
     public static int toInt32(Object val)
     {
@@ -1175,6 +1207,7 @@ public class ScriptRuntime {
 
     /**
      * See ECMA 9.6.
+     * @param d
      * @return long value representing 32 bits unsigned integer
      */
     public static long toUint32(double d) {
@@ -1207,6 +1240,8 @@ public class ScriptRuntime {
     /**
      *
      * See ECMA 9.7.
+     * @param val
+     * @return char
      */
     public static char toUint16(Object val) {
         double d = toNumber(val);
@@ -1308,6 +1343,8 @@ public class ScriptRuntime {
      * Return -1L if str is not an index, or the index value as lower 32
      * bits of the result. Note that the result needs to be cast to an int
      * in order to produce the actual index, which may be negative.
+     * @param str
+     * @return long
      */
     public static long indexFromString(String str)
     {
@@ -1365,6 +1402,8 @@ public class ScriptRuntime {
     /**
      * If str is a decimal presentation of Uint32 value, return it as long.
      * Othewise return -1L;
+     * @param str
+     * @return long
      */
     public static long testUint32String(String str)
     {
@@ -1457,6 +1496,10 @@ public class ScriptRuntime {
 
     /**
      * Call obj.[[Get]](id)
+     * @param obj
+     * @param elem
+     * @param cx
+     * @return Object
      */
     public static Object getObjectElem(Object obj, Object elem, Context cx)
     {
@@ -2314,8 +2357,8 @@ public class ScriptRuntime {
     }
 
     /**
-     * Prepare for calling <expression>(...): return function corresponding to
-     * <expression> and make parent scope of the function available
+     * Prepare for calling (...): return function corresponding to
+     * and make parent scope of the function available
      * as ScriptRuntime.lastStoredScriptable() for consumption as thisObj.
      * The caller must call ScriptRuntime.lastStoredScriptable() immediately
      * after calling this method.

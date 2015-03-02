@@ -1,8 +1,8 @@
 package org.mozilla.javascript.arrays;
 
-import org.mozilla.javascript.ScriptRuntime;
-
 import java.io.Serializable;
+
+import org.mozilla.javascript.ScriptRuntime;
 
 /**
  * The abstract base class for the different types of external arrays. Users must construct one of

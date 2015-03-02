@@ -4,10 +4,8 @@ import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.domfilter.NodeFilter;
 import org.lobobrowser.html.domfilter.OptionFilter;
 import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.HTMLOptionElement;
 import org.lobobrowser.html.w3c.HTMLOptionsCollection;
 import org.w3c.dom.DOMException;
-import org.w3c.dom.Node;
 
 public class HTMLOptionsCollectionImpl extends DescendentHTMLCollection
 		implements HTMLOptionsCollection {

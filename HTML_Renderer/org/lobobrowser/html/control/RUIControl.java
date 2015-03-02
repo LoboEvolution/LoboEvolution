@@ -95,6 +95,8 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 
 	public final void paint(Graphics g) {
 		RenderState rs = this.modelNode.getRenderState();
+		System.out.println("paint: " + rs.getVisibility());
+		
 		if (rs != null && rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
 			// Just don't paint it.
 			return;

@@ -22,9 +22,6 @@
 package org.lobobrowser.html.style;
 
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -36,12 +33,9 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
-import org.lobobrowser.util.Urls;
 import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSMediaRule;
 import org.w3c.dom.css.CSSRule;
@@ -57,7 +51,7 @@ import org.w3c.dom.stylesheets.MediaList;
  * {@link #addStyleSheet(CSSStyleSheet)} method. HTML elements have a
  * <code>style</code> object that has a list of <code>CSSStyleDeclaration</code>
  * instances. The instances inserted in that list are obtained by means of the
- * {@link #getStyleDeclarations(HTMLElementImpl, String, String, String)}
+ * getStyleDeclarations(HTMLElementImpl, String, String, String)}
  * method.
  */
 public class StyleSheetAggregator {
@@ -534,7 +528,7 @@ public class StyleSheetAggregator {
 		private final ArrayList<SimpleSelector> ancestorSelectors;
 
 		/**
-		 * @param selectors
+		 * @param simpleSelectors
 		 *            A collection of SimpleSelector's.
 		 * @param rule
 		 *            A CSS rule.

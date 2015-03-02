@@ -133,8 +133,7 @@ public class HtmlValues {
 	}
 
 	/**
-	 * Populates {@link BorderInfo.insets}.
-	 * 
+	 * Populates BorderInfo.insets.
 	 * @param binfo
 	 *            A BorderInfo with its styles already populated.
 	 * @param cssProperties

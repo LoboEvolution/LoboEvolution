@@ -38,7 +38,6 @@ public interface ElementSelector extends SimpleSelector {
 	 * <p>
 	 * <code>NULL</code> if this element selector can match any element.
 	 * </p>
-	 * </ul>
 	 */
 	public String getLocalName();
 }

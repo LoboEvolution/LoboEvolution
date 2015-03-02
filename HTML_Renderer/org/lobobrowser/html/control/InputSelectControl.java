@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -318,13 +319,13 @@ public class InputSelectControl extends BaseInputControl {
 			OptionItem item = (OptionItem) this.comboBox.getSelectedItem();
 			return item == null ? null : new String[] { item.getValue() };
 		} else {
-			Object[] values = this.list.getSelectedValues();
+			List<OptionItem> values = this.list.getSelectedValuesList();
 			if (values == null) {
 				return null;
 			}
 			ArrayList<String> al = new ArrayList<String>();
-			for (int i = 0; i < values.length; i++) {
-				OptionItem item = (OptionItem) values[i];
+			for (int i = 0; i < values.size(); i++) {
+				OptionItem item = (OptionItem) values.get(i);
 				al.add(item.getValue());
 			}
 			return (String[]) al.toArray(new String[0]);

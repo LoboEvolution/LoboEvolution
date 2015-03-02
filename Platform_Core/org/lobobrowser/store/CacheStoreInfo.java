@@ -34,10 +34,6 @@ public class CacheStoreInfo {
 	private long length;
 	private final Collection<CacheFileInfo> fileInfos = new ArrayList<CacheFileInfo>();
 
-	/**
-	 * @param length
-	 * @param fileInfos
-	 */
 	public CacheStoreInfo() {
 		super();
 	}

@@ -37,9 +37,8 @@ import org.w3c.dom.NodeList;
 /**
  * Multi-line text field. See the TEXTAREA element definition in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLTextAreaElement extends HTMLElement {
 	/**

@@ -35,9 +35,8 @@ package org.lobobrowser.html.w3c;
 /**
  * Create a horizontal rule. See the HR element definition in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLHRElement extends HTMLElement {
 	/**

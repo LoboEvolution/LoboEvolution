@@ -115,7 +115,7 @@ public class PlatformInit {
 	}
 
 	/**
-	 * Initializes the Swing look & feel.
+	 * Initializes the Swing look feel.
 	 */
 	public void initLookAndFeel() throws Exception {
 		try {
@@ -245,7 +245,7 @@ public class PlatformInit {
 	}
 
 	/**
-	 * Initializes security, protocols, look & feel, console, the default window
+	 * Initializes security, protocols, look feel, console, the default window
 	 * factory, extensions and <code>java.library.path</code>. This method
 	 * should be invoked before using other functionality in the browser API. If
 	 * this method is not called, at the very least
@@ -390,7 +390,7 @@ public class PlatformInit {
 	 * facility.
 	 * 
 	 * @param permission
-	 *            A <code>Permission<code> instance.
+	 *            A <code>Permission</code> instance.
 	 */
 	public void addPrivilegedPermission(Permission permission) {
 		LocalSecurityPolicy.addPrivilegedPermission(permission);

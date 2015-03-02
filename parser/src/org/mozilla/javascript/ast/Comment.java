@@ -12,15 +12,16 @@ import org.mozilla.javascript.Token;
  * Node representing comments.
  * Node type is {@link Token#COMMENT}.<p>
  *
- * <p>JavaScript effectively has five comment types:
+ *JavaScript effectively has five comment types:
  *   <ol>
- *     <li>// line comments</li>
- *     <li>/<span class="none">* block comments *\/</li>
- *     <li>/<span class="none">** jsdoc comments *\/</li>
- *     <li>&lt;!-- html-open line comments</li>
- *     <li>^\\s*--&gt; html-close line comments</li>
+ *     <li> line comments</li>
+ *     <li>
+ *     		<span class="none">block comments</span>
+ *     </li>
+ *     <li>
+ *     		<span class="none">jsdoc comments</span>
+ *     </li>
  *   </ol>
- *
  * <p>The first three should be familiar to Java programmers.  JsDoc comments
  * are really just block comments with some conventions about the formatting
  * within the comment delimiters.  Line and block comments are described in the

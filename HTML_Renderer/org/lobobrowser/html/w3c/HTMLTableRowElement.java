@@ -37,9 +37,8 @@ import org.w3c.dom.DOMException;
 /**
  * A row in a table. See the TR element definition in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLTableRowElement extends HTMLElement {
 	/**

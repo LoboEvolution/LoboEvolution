@@ -29,9 +29,9 @@ import java.security.Permission;
  * @author J. H. S.
  */
 public class HistoryPermission extends Permission {
-	/**
-	 * @param name
-	 */
+	
+	private static final long serialVersionUID = 1L;
+
 	public HistoryPermission() {
 		super("");
 	}

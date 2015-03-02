@@ -263,7 +263,7 @@ public interface NavigatorFrame {
 	/**
 	 * Gets the most recent progress event.
 	 * 
-	 * @see #setProgressEvent(NavigatorProgressEvent)t
+	 * @see #setProgressEvent(NavigatorProgressEvent)
 	 */
 	public NavigatorProgressEvent getProgressEvent();
 
@@ -311,10 +311,8 @@ public interface NavigatorFrame {
 
 	/**
 	 * Replaces the content of the frame.
-	 * 
-	 * @throws java.security.SecurityException
-	 *             Thrown when the caller does not have permission to replace
-	 *             the content of the frame.
+	 * Thrown when the caller does not have permission to replace
+	 * the content of the frame.
 	 * @see org.lobobrowser.clientlet.ClientletContext#setResultingContent(Component)
 	 */
 	public void replaceContent(
@@ -333,10 +331,8 @@ public interface NavigatorFrame {
 
 	/**
 	 * Gets source code for content currently showing, if any.
-	 * 
-	 * @throws java.security.SecurityException
-	 *             Thrown when the caller does not have permission to get the
-	 *             source code.
+	 * Thrown when the caller does not have permission to get the
+	 * source code.
 	 */
 	public String getSourceCode();
 

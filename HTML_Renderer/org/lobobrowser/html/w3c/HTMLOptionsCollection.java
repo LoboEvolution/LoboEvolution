@@ -42,9 +42,8 @@ import org.w3c.dom.Node;
  * the HTML DOM are assumed to be live meaning that they are automatically
  * updated when the underlying document is changed.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  * 
  * @since DOM Level 2
  */

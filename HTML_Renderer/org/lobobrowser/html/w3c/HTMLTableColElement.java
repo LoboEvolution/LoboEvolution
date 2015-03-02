@@ -36,9 +36,8 @@ package org.lobobrowser.html.w3c;
  * Regroups the <code>COL</code> and <code>COLGROUP</code> elements. See the COL
  * element definition in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLTableColElement extends HTMLElement {
 	/**

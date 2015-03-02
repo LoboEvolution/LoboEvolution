@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.xml.ws.Response;
+
 import org.lobobrowser.util.NameValuePair;
 
 /**

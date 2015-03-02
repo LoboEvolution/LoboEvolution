@@ -17,11 +17,11 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Map;
 import java.util.HashMap;
-import java.util.Set;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import org.mozilla.javascript.ast.AstRoot;
 import org.mozilla.javascript.ast.ScriptNode;
@@ -118,7 +118,7 @@ public class Context
     /**
      * Controls behaviour of <tt>Date.prototype.getYear()</tt>.
      * If <tt>hasFeature(FEATURE_NON_ECMA_GET_YEAR)</tt> returns true,
-     * Date.prototype.getYear subtructs 1900 only if 1900 <= date < 2000.
+     * Date.prototype.getYear subtructs 1900 only if 1900 &lt;= date &lt; 2000.
      * The default behavior of {@link #hasFeature(int)} is always to subtruct
      * 1900 as rquired by ECMAScript B.2.4.
      */
@@ -2172,12 +2172,12 @@ public class Context
     }
 
     /**
-     * Set threshold of executed instructions counter that triggers call to
+     * <p>Set threshold of executed instructions counter that triggers call to
      * <code>observeInstructionCount()</code>.
      * When the threshold is zero, instruction counting is disabled,
      * otherwise each time the run-time executes at least the threshold value
      * of script instructions, <code>observeInstructionCount()</code> will
-     * be called.<p/>
+     * be called.</p>
      * Note that the meaning of "instruction" is not guaranteed to be
      * consistent between compiled and interpretive modes: executing a given
      * script or function in the different modes will result in different

@@ -33,7 +33,7 @@ public abstract class MultiplexClassLoader extends BaseClassLoader {
 	private final BaseClassLoader[] parentLoaders;
 
 	/**
-	 * @param parent
+	 * @param classLoaders
 	 */
 	public MultiplexClassLoader(Collection classLoaders) {
 		super(null);

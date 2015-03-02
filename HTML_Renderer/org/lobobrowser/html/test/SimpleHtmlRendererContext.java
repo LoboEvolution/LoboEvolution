@@ -583,20 +583,6 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	}
 
 	/**
-	 * @deprecated Use {@link #open(URL, String, String, boolean)}.
-	 */
-	public final HtmlRendererContext open(String url, String windowName,
-			String windowFeatures, boolean replace) {
-		URL urlObj;
-		try {
-			urlObj = new URL(url);
-		} catch (MalformedURLException mfu) {
-			throw new IllegalArgumentException("Malformed URL: " + url);
-		}
-		return this.open(urlObj, windowName, windowFeatures, replace);
-	}
-
-	/**
 	 * It should open a new browser window. This implementation does nothing and
 	 * should be overridden.
 	 * 

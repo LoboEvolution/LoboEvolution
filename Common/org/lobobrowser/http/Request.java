@@ -27,9 +27,10 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.lobobrowser.http.Method;
-import org.lobobrowser.util.AbstractBean;
+import javax.xml.ws.Response;
+
 import org.lobobrowser.http.Header.Element;
+import org.lobobrowser.util.AbstractBean;
 import org.w3c.dom.Document;
 
 import sun.misc.BASE64Decoder;
@@ -37,14 +38,14 @@ import sun.misc.BASE64Encoder;
 
 /**
  * <p>Represents an http request. A <code>Request</code> is constructed and then
- * passed to a {@link Session} for execution. The <code>Session</code> then returns
- * a {@link Response} after execution finishes.</p>
+ * passed to a Session for execution. The <code>Session</code> then returns
+ * a Response after execution finishes.</p>
  * 
  * <p>It is not possible to reuse <code>Request</code>s with content bodies because
  * those bodies are specified as <code>InputStream</code>s. This is done for
  * efficient handling of large files that may be used as content bodies.</p>
  * 
- * <p>To help simplify reuse of <code>Request</codes>s, a copy constructor is provided
+ * <p>To help simplify reuse of <code>Request</code>, a copy constructor is provided
  * which will copy everything _except_ the content body from the source
  * <code>Request</code></p>.
  * 
@@ -135,7 +136,7 @@ public class Request extends AbstractBean {
     private String stringBody;
 
     /** 
-     * <p>Creates a new instance of Request. The following default values are
+     * Creates a new instance of Request. The following default values are
      * used:
      * <ul>
      *      <li>headers: Accept-Encoding = gzip</li>
@@ -144,7 +145,7 @@ public class Request extends AbstractBean {
      *      <li>method: GET</li>
      *      <li>url: null</li>
      *      <li>requestBody: null</li>
-     * </ul></p>
+     * </ul>
      */
     public Request() {
         this(Method.GET, null);
@@ -343,7 +344,7 @@ public class Request extends AbstractBean {
     /**
      * Adds the given parameter to the set of parameters.
      * 
-     * @param parem the Parameter to add. This must not be null.
+     * @param param the Parameter to add. This must not be null.
      */
     public void setParameter(Parameter param) {
         if (param == null) {

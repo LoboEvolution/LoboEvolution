@@ -49,9 +49,8 @@ import org.w3c.dom.NodeList;
  * <code>getElementById</code> is inherited from the <code>Document</code>
  * interface where it was moved to.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLDocument extends Document {
 	/**

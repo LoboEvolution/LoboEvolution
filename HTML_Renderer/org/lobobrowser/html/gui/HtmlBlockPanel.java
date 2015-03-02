@@ -407,7 +407,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer,
 	/**
 	 * Allows {@link #getPreferredSize()} to render the HTML block in order to
 	 * determine the preferred size of this component. Note that
-	 * <code>getPreferredSize()<code> is a potentially time-consuming
+	 * <code>getPreferredSize()</code> is a potentially time-consuming
 	 * operation if the preferred width is set.
 	 * 
 	 * @param width

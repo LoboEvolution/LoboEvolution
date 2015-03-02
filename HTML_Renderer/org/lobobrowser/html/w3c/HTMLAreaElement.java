@@ -36,9 +36,7 @@ package org.lobobrowser.html.w3c;
  * Client-side image map area definition. See the AREA element definition in
  * HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLAreaElement extends HTMLElement {
 	/**

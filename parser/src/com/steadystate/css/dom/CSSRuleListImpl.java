@@ -27,7 +27,6 @@
 package com.steadystate.css.dom;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -40,9 +40,8 @@ import org.w3c.dom.NodeList;
  * can be directly accessed through the select element as a collection. See the
  * SELECT element definition in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLSelectElement extends HTMLElement {
 	/**

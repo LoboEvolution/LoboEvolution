@@ -1,21 +1,61 @@
 package org.lobobrowser.primary.gui.pdf;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.geom.Rectangle2D;
+import java.awt.print.Book;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+import javax.swing.JToolBar;
+import javax.swing.JTree;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.filechooser.FileFilter;
 
 import com.sun.pdfview.Flag;
 import com.sun.pdfview.FullScreenWindow;
@@ -28,50 +68,8 @@ import com.sun.pdfview.PDFPrintPage;
 import com.sun.pdfview.PageChangeListener;
 import com.sun.pdfview.PagePanel;
 import com.sun.pdfview.ThumbPanel;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.geom.Rectangle2D;
-import java.awt.print.Book;
-import java.awt.print.PageFormat;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
-import java.awt.Toolkit;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.*;
-import java.net.*;
-import java.util.logging.Level;
-
-import javax.swing.Action;
-import javax.swing.Box;
-import javax.swing.ButtonGroup;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
-import javax.swing.JToolBar;
-import javax.swing.JTree;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.SwingUtilities;
-
 import com.sun.pdfview.action.GoToAction;
 import com.sun.pdfview.action.PDFAction;
-
-import java.lang.reflect.InvocationTargetException;
 
 public class PdfDialog extends JFrame implements KeyListener,
 		TreeSelectionListener, PageChangeListener {

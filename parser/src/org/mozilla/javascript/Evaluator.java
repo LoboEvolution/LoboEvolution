@@ -6,9 +6,9 @@
 
 package org.mozilla.javascript;
 
-import org.mozilla.javascript.ast.ScriptNode;
-
 import java.util.List;
+
+import org.mozilla.javascript.ast.ScriptNode;
 
 /**
  * Abstraction of evaluation, which can be implemented either by an
@@ -64,7 +64,7 @@ public interface Evaluator {
     /**
      * Get the source position information by examining the stack.
      * @param cx Context
-     * @param linep Array object of length >= 1; getSourcePositionFromStack
+     * @param linep Array object of <code>length &gt;= 1;</code> getSourcePositionFromStack
      *              will assign the line number to linep[0].
      * @return the name of the file or other source container
      */

@@ -5,7 +5,19 @@
 
 package org.mozilla.javascript.optimizer;
 
-import org.mozilla.javascript.*;
+import org.mozilla.javascript.Callable;
+import org.mozilla.javascript.ConsString;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.ContextAction;
+import org.mozilla.javascript.ContextFactory;
+import org.mozilla.javascript.JavaScriptException;
+import org.mozilla.javascript.NativeFunction;
+import org.mozilla.javascript.NativeGenerator;
+import org.mozilla.javascript.NativeIterator;
+import org.mozilla.javascript.Script;
+import org.mozilla.javascript.ScriptRuntime;
+import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 
 public final class OptRuntime extends ScriptRuntime
 {
@@ -16,6 +28,11 @@ public final class OptRuntime extends ScriptRuntime
 
     /**
      * Implement ....() call shrinking optimizer code.
+     * @param fun
+     * @param thisObj
+     * @param cx
+     * @param scope
+     * @return Object
      */
     public static Object call0(Callable fun, Scriptable thisObj,
                                Context cx, Scriptable scope)
@@ -25,6 +42,12 @@ public final class OptRuntime extends ScriptRuntime
 
     /**
      * Implement ....(arg) call shrinking optimizer code.
+     * @param fun
+     * @param thisObj
+     * @param arg0
+     * @param cx
+     * @param scope
+     * @return Object 
      */
     public static Object call1(Callable fun, Scriptable thisObj, Object arg0,
                                Context cx, Scriptable scope)
@@ -34,6 +57,13 @@ public final class OptRuntime extends ScriptRuntime
 
     /**
      * Implement ....(arg0, arg1) call shrinking optimizer code.
+     * @param fun
+     * @param thisObj
+     * @param arg0
+     * @param arg1
+     * @param cx
+     * @param scope
+     * @return Object 
      */
     public static Object call2(Callable fun, Scriptable thisObj,
                                Object arg0, Object arg1,
@@ -44,6 +74,12 @@ public final class OptRuntime extends ScriptRuntime
 
     /**
      * Implement ....(arg0, arg1, ...) call shrinking optimizer code.
+     * @param fun
+     * @param thisObj
+     * @param args
+     * @param cx
+     * @param scope
+     * @return Object  
      */
     public static Object callN(Callable fun, Scriptable thisObj,
                                Object[] args,
@@ -54,6 +90,11 @@ public final class OptRuntime extends ScriptRuntime
 
     /**
      * Implement name(args) call shrinking optimizer code.
+     * @param args
+     * @param name
+     * @param cx
+     * @param scope
+     * @return Object  
      */
     public static Object callName(Object[] args, String name,
                                   Context cx, Scriptable scope)
@@ -65,6 +106,10 @@ public final class OptRuntime extends ScriptRuntime
 
     /**
      * Implement name() call shrinking optimizer code.
+     * @param name
+     * @param cx
+     * @param scope
+     * @return Object 
      */
     public static Object callName0(String name,
                                    Context cx, Scriptable scope)
@@ -76,6 +121,11 @@ public final class OptRuntime extends ScriptRuntime
 
     /**
      * Implement x.property() call shrinking optimizer code.
+     * @param value
+     * @param property
+     * @param cx
+     * @param scope
+     * @return Object 
      */
     public static Object callProp0(Object value, String property,
                                    Context cx, Scriptable scope)

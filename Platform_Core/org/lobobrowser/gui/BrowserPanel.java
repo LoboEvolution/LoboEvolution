@@ -165,9 +165,8 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 
 	/**
 	 * Navigates to the URL or path provided.
-	 * 
-	 * @param urlOrPath
-	 *            An absolute URL or file path.
+	 * @param urlOrPath An absolute URL or file path.
+	 * @throws java.net.MalformedURLException
 	 */
 	public void navigate(String urlOrPath)
 			throws MalformedURLException {
@@ -176,9 +175,8 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 
 	/**
 	 * Navigates to the URL provided.
-	 * 
-	 * @param url
-	 *            A URL.
+	 * @param url A URL.
+	 * @throws java.net.MalformedURLException
 	 */
 	public void navigate(URL url)
 			throws MalformedURLException {
@@ -302,6 +300,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 	 * current <code>BrowserPanel</code> is disposed.
 	 * 
 	 * @see #setCloseWindowOnDispose(boolean)
+	 * @return boolean
 	 */
 	public boolean isCloseWindowOnDispose() {
 		return closeWindowOnDispose;
@@ -473,6 +472,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 
 	/**
 	 * Gets the recommended title of the document currently in the top frame.
+	 * @return String
 	 */
 	public String getDocumentTitle() {
 		return documentTitle;
@@ -561,6 +561,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 	 * example, if the frame is currently showing HTML, this method will
 	 * probably return an instance of
 	 * <code>org.w3c.dom.html2.HTMLDocument</code>.
+	 * @return Object
 	 */
 	public Object getContentObject() {
 		return this.framePanel.getContentObject();
@@ -571,6 +572,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 	 * {@link FramePanel#getContentObject()}. This is not necessarily the same
 	 * as the mime type declared in the headers of the response that produced
 	 * the current content.
+	 * @return String
 	 */
 	public String getCurrentMimeType() {
 		return this.framePanel.getCurrentMimeType();
@@ -655,6 +657,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 
 	/**
 	 * Gets the component content currently set in the frame.
+	 * @return ComponentContent
 	 */
 	public ComponentContent getComponentContent() {
 		return this.framePanel.getComponentContent();

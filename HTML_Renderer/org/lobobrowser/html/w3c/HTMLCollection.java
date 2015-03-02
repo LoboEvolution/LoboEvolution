@@ -41,9 +41,9 @@ import org.w3c.dom.Node;
  * live meaning that they are automatically updated when the underlying document
  * is changed.
  * <p>
- * See also the <a
+ * See also the
  * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLCollection {
 	/**

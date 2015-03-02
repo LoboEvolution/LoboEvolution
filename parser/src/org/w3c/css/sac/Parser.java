@@ -171,7 +171,7 @@ public interface Parser {
 	/**
 	 * Parse a CSS style declaration (without '{' and '}').
 	 *
-	 * @param styleValue
+	 * @param source
 	 *            The declaration.
 	 * @exception CSSException
 	 *                Any CSS exception, possibly wrapping another exception.

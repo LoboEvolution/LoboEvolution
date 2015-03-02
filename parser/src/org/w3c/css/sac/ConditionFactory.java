@@ -112,7 +112,7 @@ public interface ConditionFactory {
 	/**
 	 * Creates a lang condition
 	 *
-	 * @param value
+	 * @param lang
 	 *            the value of the language.
 	 * @return A lang condition
 	 * @exception CSSException
@@ -163,13 +163,8 @@ public interface ConditionFactory {
 	/**
 	 * Creates a class condition
 	 *
-	 * @param localName
-	 *            the localName of the attribute
 	 * @param namespaceURI
 	 *            the namespace URI of the attribute
-	 * @param specified
-	 *            <code>true</code> if the attribute must be specified in the
-	 *            document.
 	 * @param value
 	 *            the name of the class.
 	 * @return A class condition

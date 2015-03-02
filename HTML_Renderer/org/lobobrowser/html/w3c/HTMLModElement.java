@@ -36,9 +36,8 @@ package org.lobobrowser.html.w3c;
  * Notice of modification to part of a document. See the INS and DEL element
  * definitions in HTML 4.01.
  * <p>
- * See also the <a
- * 
- * Object Model (DOM) Level 2 HTML Specification</a>.
+ * See also the
+ * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLModElement extends HTMLElement {
 	/**

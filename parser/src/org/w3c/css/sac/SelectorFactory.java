@@ -74,7 +74,7 @@ public interface SelectorFactory {
 	 *            the <a
 	 *            href="http://www.w3.org/TR/REC-xml-names/#NT-LocalPart">local
 	 *            part</a> of the element name. <code>NULL</code> if this
-	 *            element selector can match any element.</p>
+	 *            element selector can match any element.
 	 * @return the element selector
 	 * @exception CSSException
 	 *                If this selector is not supported.
@@ -134,10 +134,10 @@ public interface SelectorFactory {
 
 	/**
 	 * Creates a pseudo element selector.
-	 * 
+	 * @param namespaceURI
 	 * @param pseudoName
 	 *            the pseudo element name. <code>NULL</code> if this element
-	 *            selector can match any pseudo element.</p>
+	 *            selector can match any pseudo element.
 	 * @return the element selector
 	 * @exception CSSException
 	 *                If this selector is not supported.
@@ -180,7 +180,7 @@ public interface SelectorFactory {
 	 *            the type of nodes in the siblings list.
 	 * @param child
 	 *            the child selector
-	 * @param adjacent
+	 * @param directAdjacent
 	 *            the direct adjacent selector
 	 * @return the sibling selector with nodeType equals to
 	 *         org.w3c.dom.Node.ELEMENT_NODE

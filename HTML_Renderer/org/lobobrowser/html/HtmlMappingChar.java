@@ -22,7 +22,6 @@ package org.lobobrowser.html;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.lobobrowser.html.HtmlCharProperties;
 
 public class HtmlMappingChar {
 

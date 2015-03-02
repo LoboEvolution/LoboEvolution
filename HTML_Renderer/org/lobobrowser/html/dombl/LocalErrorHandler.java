@@ -34,9 +34,6 @@ public class LocalErrorHandler implements ErrorHandler {
 	private static final Logger logger = Logger
 			.getLogger(LocalErrorHandler.class.getName());
 
-	/**
-	 * @param context
-	 */
 	public LocalErrorHandler() {
 	}
 

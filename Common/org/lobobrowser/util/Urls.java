@@ -280,7 +280,7 @@ public class Urls {
 	 * "%20". (Firefox 3 also encodes other non-ASCII and some ASCII
 	 * characters).
 	 * 
-	 * @param the
+	 * @param url
 	 *            URL to convert
 	 * @return the encoded URL
 	 */
@@ -290,9 +290,9 @@ public class Urls {
 
 	/**
 	 * Converts the given URL into a valid URL by removing control characters
-	 * (ASCII code < 32).
+	 * <code>(ASCII code &lt; 32)</code>.
 	 * 
-	 * @param the
+	 * @param url
 	 *            URL to convert
 	 * @return the encoded URL
 	 */
