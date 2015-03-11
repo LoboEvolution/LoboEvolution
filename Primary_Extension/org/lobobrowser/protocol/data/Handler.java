@@ -6,40 +6,30 @@ import java.net.URLConnection;
 import java.net.URLStreamHandler;
 
 /**
- * http://www.ietf.org/rfc/rfc2397.txt
- * 
- * 
- * dataurl := "data:" [ mediatype ] [ ";base64" ] "," data mediatype := [ type
- * "/" subtype ] *( ";" parameter ) data := *urlchar parameter := attribute "="
- * value
- * 
- * 
- * @author toenz
- *
+ * The Class Handler.
  */
 public class Handler extends URLStreamHandler {
 
+	/* (non-Javadoc)
+	 * @see java.net.URLStreamHandler#openConnection(java.net.URL)
+	 */
 	@Override
 	protected URLConnection openConnection(URL url) throws IOException {
 		return new DataURLConnection(url);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.net.URLStreamHandler#parseURL(java.net.URL, java.lang.String, int, int)
+	 */
 	@Override
 	protected void parseURL(URL u, String spec, int start, int limit) {
-		int index = spec.toLowerCase().indexOf(":");
-		String protocoll = "data";
-		String path = spec.substring(index + 1);
-
-		setURL(u, protocoll,
-		/* host */null,
-		/* port */80,
-		/* authority */null,
-		/* userinfo */null,
-		/* path */path,
-		/* query */null,
-		/* ref */null);
+		String sub =  spec.substring(start, limit);
+		setURL(u, "data", "", -1, "", "", sub, "", "");
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see java.net.URLStreamHandler#toExternalForm(java.net.URL)
+	 */
 	protected String toExternalForm(URL u) {
 		return u.getProtocol() + ":" + u.getPath();
 	}
