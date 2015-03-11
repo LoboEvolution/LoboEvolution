@@ -6,31 +6,68 @@
 
 package org.mozilla.javascript.ast;
 
+
 /**
  * AST node representing the set of assignment operators such as {@code =},
  * {@code *=} and {@code +=}.
  */
 public class Assignment extends InfixExpression {
 
+    /**
+     * Instantiates a new assignment.
+     */
     public Assignment() {
     }
 
+    /**
+     * Instantiates a new assignment.
+     *
+     * @param pos the pos
+     */
     public Assignment(int pos) {
         super(pos);
     }
 
+    /**
+     * Instantiates a new assignment.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public Assignment(int pos, int len) {
         super(pos, len);
     }
 
+    /**
+     * Instantiates a new assignment.
+     *
+     * @param pos the pos
+     * @param len the len
+     * @param left the left
+     * @param right the right
+     */
     public Assignment(int pos, int len, AstNode left, AstNode right) {
         super(pos, len, left, right);
     }
 
+    /**
+     * Instantiates a new assignment.
+     *
+     * @param left the left
+     * @param right the right
+     */
     public Assignment(AstNode left, AstNode right) {
         super(left, right);
     }
 
+    /**
+     * Instantiates a new assignment.
+     *
+     * @param operator the operator
+     * @param left the left
+     * @param right the right
+     * @param operatorPos the operator pos
+     */
     public Assignment(int operator, AstNode left,
                       AstNode right, int operatorPos) {
         super(operator, left, right, operatorPos);

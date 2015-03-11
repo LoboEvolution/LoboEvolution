@@ -23,10 +23,21 @@ package org.lobobrowser.html.domfilter;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class ElementFilter.
+ */
 public class ElementFilter implements NodeFilter {
+	
+	/**
+	 * Instantiates a new element filter.
+	 */
 	public ElementFilter() {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
 	public boolean accept(Node node) {
 		return node instanceof Element;
 	}

@@ -23,8 +23,15 @@ package org.lobobrowser.html.builder;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLNavElementImpl;
 
+
+/**
+ * The Class NavBuilder.
+ */
 public class NavBuilder extends HTMLElementBuilder {
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
 	@Override
 	protected HTMLElementImpl build(String name) {
 		return new HTMLNavElementImpl(name);

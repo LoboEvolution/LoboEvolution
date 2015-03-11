@@ -23,14 +23,24 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.renderstate.TextDecorationRenderState;
 
+
 /**
  * Element used for STRIKE.
  */
 public class HTMLStrikeElementImpl extends HTMLAbstractUIElement {
+	
+	/**
+	 * Instantiates a new HTML strike element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLStrikeElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		prevRenderState = new TextDecorationRenderState(prevRenderState,
 				RenderState.MASK_TEXTDECORATION_LINE_THROUGH);

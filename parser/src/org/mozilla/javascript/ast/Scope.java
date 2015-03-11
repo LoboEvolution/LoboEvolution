@@ -15,6 +15,7 @@ import java.util.Map;
 import org.mozilla.javascript.Node;
 import org.mozilla.javascript.Token;
 
+
 /**
  * Represents a scope in the lexical scope chain.  Base type for
  * all {@link AstNode} implementations that can introduce a new scope.
@@ -22,34 +23,61 @@ import org.mozilla.javascript.Token;
 public class Scope extends Jump {
 
     // Use LinkedHashMap so that the iteration order is the insertion order
+    /** The symbol table. */
     protected Map<String,Symbol> symbolTable;
+    
+    /** The parent scope. */
     protected Scope parentScope;
+    
+    /** The top. */
     protected ScriptNode top;     // current script or function scope
 
+    /** The child scopes. */
     private List<Scope> childScopes;
 
     {
         this.type = Token.BLOCK;
     }
 
+    /**
+     * Instantiates a new scope.
+     */
     public Scope() {
     }
 
+    /**
+     * Instantiates a new scope.
+     *
+     * @param pos the pos
+     */
     public Scope(int pos) {
         this.position = pos;
     }
 
+    /**
+     * Instantiates a new scope.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public Scope(int pos, int len) {
         this(pos);
         this.length = len;
     }
 
+    /**
+     * Gets the parent scope.
+     *
+     * @return the parent scope
+     */
     public Scope getParentScope() {
         return parentScope;
     }
 
     /**
-     * Sets parent scope
+     * Sets parent scope.
+     *
+     * @param parentScope the new parent scope
      */
     public void setParentScope(Scope parentScope) {
         this.parentScope = parentScope;
@@ -74,8 +102,8 @@ public class Scope extends Jump {
     /**
      * Add a scope to our list of child scopes.
      * Sets the child's parent scope to this scope.
-     * @throws IllegalStateException if the child's parent scope is
-     * non-{@code null}
+     *
+     * @param child the child
      */
     public void addChildScope(Scope child) {
         if (childScopes == null) {
@@ -108,14 +136,18 @@ public class Scope extends Jump {
     }
 
     /**
-     * Returns current script or function scope
+     * Returns current script or function scope.
+     *
+     * @return the top
      */
     public ScriptNode getTop() {
         return top;
     }
 
     /**
-     * Sets top current script or function scope
+     * Sets top current script or function scope.
+     *
+     * @param top the new top
      */
     public void setTop(ScriptNode top) {
         this.top = top;
@@ -126,6 +158,9 @@ public class Scope extends Jump {
      * from "scope" to the new node, and making "scope" a nested
      * scope contained by the new node.
      * Useful for injecting a new scope in a scope chain.
+     *
+     * @param scope the scope
+     * @return the scope
      */
     public static Scope splitScope(Scope scope) {
         Scope result = new Scope(scope.getType());
@@ -141,6 +176,9 @@ public class Scope extends Jump {
 
     /**
      * Copies all symbols from source scope to dest scope.
+     *
+     * @param source the source
+     * @param dest the dest
      */
     public static void joinScopes(Scope source, Scope dest) {
         Map<String,Symbol> src = source.ensureSymbolTable();
@@ -156,7 +194,8 @@ public class Scope extends Jump {
     }
 
     /**
-     * Returns the scope in which this name is defined
+     * Returns the scope in which this name is defined.
+     *
      * @param name the symbol to look up
      * @return this {@link Scope}, one of its parent scopes, or {@code null} if
      * the name is not defined any this scope chain
@@ -182,6 +221,8 @@ public class Scope extends Jump {
 
     /**
      * Enters a symbol into this scope.
+     *
+     * @param symbol the symbol
      */
     public void putSymbol(Symbol symbol) {
         if (symbol.getName() == null)
@@ -202,11 +243,18 @@ public class Scope extends Jump {
 
     /**
      * Sets the symbol table for this scope.  May be {@code null}.
+     *
+     * @param table the table
      */
     public void setSymbolTable(Map<String, Symbol> table) {
         symbolTable = table;
     }
 
+    /**
+     * Ensure symbol table.
+     *
+     * @return the map
+     */
     private Map<String,Symbol> ensureSymbolTable() {
         if (symbolTable == null) {
             symbolTable = new LinkedHashMap<String,Symbol>(5);
@@ -217,9 +265,8 @@ public class Scope extends Jump {
     /**
      * Returns a copy of the child list, with each child cast to an
      * {@link AstNode}.
-     * @throws ClassCastException if any non-{@code AstNode} objects are
-     * in the child list, e.g. if this method is called after the code
-     * generator begins the tree transformation.
+     *
+     * @return the statements
      */
     public List<AstNode> getStatements() {
         List<AstNode> stmts = new ArrayList<AstNode>();
@@ -231,6 +278,9 @@ public class Scope extends Jump {
         return stmts;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.Jump#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -244,6 +294,9 @@ public class Scope extends Jump {
         return sb.toString();
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.Jump#visit(org.mozilla.javascript.ast.NodeVisitor)
+     */
     @Override
     public void visit(NodeVisitor v) {
         if (v.visit(this)) {

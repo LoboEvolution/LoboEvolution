@@ -26,14 +26,26 @@ package org.lobobrowser.primary.clientlets;
 import java.io.IOException;
 import java.net.URL;
 
+
+/**
+ * The Class ArchiveInfo.
+ */
 public class ArchiveInfo {
+	
+	/** The Constant EMPTY_ARRAY. */
 	public static final ArchiveInfo[] EMPTY_ARRAY = new ArchiveInfo[0];
+	
+	/** The file. */
 	public final java.io.File file;
+	
+	/** The url. */
 	public final URL url;
 
 	/**
-	 * @param url
-	 * @param file
+	 * Instantiates a new archive info.
+	 *
+	 * @param url the url
+	 * @param file the file
 	 */
 	public ArchiveInfo(final URL url, final java.io.File file) {
 		super();
@@ -41,8 +53,15 @@ public class ArchiveInfo {
 		this.file = file;
 	}
 
+	/** The jar file. */
 	private java.util.jar.JarFile jarFile;
 
+	/**
+	 * Gets the jar file.
+	 *
+	 * @return the jar file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public java.util.jar.JarFile getJarFile() throws IOException {
 		if (this.jarFile == null) {
 			synchronized (this) {

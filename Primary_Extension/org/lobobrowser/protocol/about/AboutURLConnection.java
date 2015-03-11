@@ -42,10 +42,19 @@ import org.lobobrowser.primary.ext.HistoryEntry;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.Timing;
 
+
 /**
+ * The Class AboutURLConnection.
+ *
  * @author J. H. S.
  */
 public class AboutURLConnection extends URLConnection {
+	
+	/**
+	 * Instantiates a new about url connection.
+	 *
+	 * @param url the url
+	 */
 	public AboutURLConnection(URL url) {
 		super(url);
 	}
@@ -86,6 +95,12 @@ public class AboutURLConnection extends URLConnection {
 				.getBytes("UTF-8"));
 	}
 
+	/**
+	 * Gets the URL text.
+	 *
+	 * @param url the url
+	 * @return the URL text
+	 */
 	private String getURLText(URL url) {
 		String path = url.getPath();
 		if ("blank".equalsIgnoreCase(path)) {
@@ -110,6 +125,11 @@ public class AboutURLConnection extends URLConnection {
 		}
 	}
 
+	/**
+	 * Gets the system properties.
+	 *
+	 * @return the system properties
+	 */
 	private String getSystemProperties() {
 		StringWriter swriter = new StringWriter();
 		PrintWriter writer = new PrintWriter(swriter);
@@ -126,11 +146,22 @@ public class AboutURLConnection extends URLConnection {
 		return swriter.toString();
 	}
 
+	/**
+	 * Gets the bookmarks.
+	 *
+	 * @return the bookmarks
+	 */
 	private String getBookmarks() {
 		BookmarksHistory history = BookmarksHistory.getInstance();
 		return this.getBookmarks(history.getAllEntries());
 	}
 
+	/**
+	 * Gets the bookmarks.
+	 *
+	 * @param searchQuery the search query
+	 * @return the bookmarks
+	 */
 	private String getBookmarks(String searchQuery) {
 		// This is more of a scan. Not efficient but it does the
 		// job for now considering the number of entries is limited.
@@ -152,6 +183,13 @@ public class AboutURLConnection extends URLConnection {
 		return this.getBookmarks(finalEntries);
 	}
 
+	/**
+	 * Gets the match score.
+	 *
+	 * @param binfo the binfo
+	 * @param keywords the keywords
+	 * @return the match score
+	 */
 	private int getMatchScore(BookmarkInfo binfo, String[] keywords) {
 		int total = 0;
 		for (int i = 0; i < keywords.length; i++) {
@@ -165,6 +203,13 @@ public class AboutURLConnection extends URLConnection {
 		return total;
 	}
 
+	/**
+	 * Gets the match score.
+	 *
+	 * @param binfo the binfo
+	 * @param keyword the keyword
+	 * @return the match score
+	 */
 	private int getMatchScore(BookmarkInfo binfo, String keyword) {
 		String keywordTL = keyword.toLowerCase();
 		int score = 0;
@@ -200,6 +245,12 @@ public class AboutURLConnection extends URLConnection {
 		return score;
 	}
 
+	/**
+	 * Gets the bookmarks.
+	 *
+	 * @param entries the entries
+	 * @return the bookmarks
+	 */
 	private String getBookmarks(Collection<HistoryEntry<BookmarkInfo>> entries) {
 		StringWriter swriter = new StringWriter();
 		PrintWriter writer = new PrintWriter(swriter);
@@ -222,6 +273,12 @@ public class AboutURLConnection extends URLConnection {
 		return swriter.toString();
 	}
 
+	/**
+	 * Write bookmark.
+	 *
+	 * @param writer the writer
+	 * @param entry the entry
+	 */
 	private void writeBookmark(PrintWriter writer,
 			HistoryEntry<BookmarkInfo> entry) {
 		URL url = entry.getUrl();
@@ -247,10 +304,23 @@ public class AboutURLConnection extends URLConnection {
 		writer.println("</LI>");
 	}
 
+	/**
+	 * The Class ScoredEntry.
+	 */
 	private class ScoredEntry implements Comparable<Object> {
+		
+		/** The history entry. */
 		private final HistoryEntry<BookmarkInfo> historyEntry;
+		
+		/** The score. */
 		private final int score;
 
+		/**
+		 * Instantiates a new scored entry.
+		 *
+		 * @param historyEntry the history entry
+		 * @param score the score
+		 */
 		public ScoredEntry(final HistoryEntry<BookmarkInfo> historyEntry,
 				final int score) {
 			super();
@@ -258,10 +328,18 @@ public class AboutURLConnection extends URLConnection {
 			this.score = score;
 		}
 
+		/**
+		 * Gets the history entry.
+		 *
+		 * @return the history entry
+		 */
 		public HistoryEntry<BookmarkInfo> getHistoryEntry() {
 			return historyEntry;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Comparable#compareTo(java.lang.Object)
+		 */
 		public int compareTo(Object o) {
 			if (this == o) {
 				return 0;
@@ -286,6 +364,9 @@ public class AboutURLConnection extends URLConnection {
 			}
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#hashCode()
+		 */
 		public int hashCode() {
 			return this.score;
 		}

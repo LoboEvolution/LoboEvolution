@@ -6,6 +6,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * This class reflects Java packages into the JavaScript environment.  We
  * lazily reflect classes and subpackages, and use a caching/sharing
@@ -22,10 +23,13 @@ package org.mozilla.javascript;
 public class NativeJavaTopPackage
     extends NativeJavaPackage implements Function, IdFunctionCall
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -1455787259477709999L;
 
     // we know these are packages so we can skip the class check
     // note that this is ok even if the package isn't present.
+    /** The Constant commonPackages. */
     private static final String[][] commonPackages = {
             {"java", "lang", "reflect"},
             {"java", "io"},
@@ -37,17 +41,28 @@ public class NativeJavaTopPackage
             {"javax", "swing"}
     };
 
+    /**
+     * Instantiates a new native java top package.
+     *
+     * @param loader the loader
+     */
     NativeJavaTopPackage(ClassLoader loader)
     {
         super(true, "", loader);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Function#call(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
     {
         return construct(cx, scope, args);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Function#construct(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
         ClassLoader loader = null;
@@ -69,6 +84,13 @@ public class NativeJavaTopPackage
         return pkg;
     }
 
+    /**
+     * Inits the.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param sealed the sealed
+     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         ClassLoader loader = cx.getApplicationClassLoader();
@@ -111,6 +133,9 @@ public class NativeJavaTopPackage
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdFunctionCall#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
     {
@@ -122,6 +147,14 @@ public class NativeJavaTopPackage
         throw f.unknown();
     }
 
+    /**
+     * Js_get class.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param args the args
+     * @return the scriptable
+     */
     private Scriptable js_getClass(Context cx, Scriptable scope, Object[] args)
     {
         if (args.length > 0  && args[0] instanceof Wrapper) {
@@ -148,7 +181,10 @@ public class NativeJavaTopPackage
         throw Context.reportRuntimeError0("msg.not.java.obj");
     }
 
+    /** The Constant FTAG. */
     private static final Object FTAG = "JavaTopPackage";
+    
+    /** The Constant Id_getClass. */
     private static final int Id_getClass = 1;
 }
 

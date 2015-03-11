@@ -23,8 +23,15 @@ package org.lobobrowser.html.builder;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableHeadElementImpl;
 
+
+/**
+ * The Class ThBuilder.
+ */
 public class ThBuilder extends HTMLElementBuilder {
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
 	@Override
 	protected HTMLElementImpl build(String name) {
 		return new HTMLTableHeadElementImpl(name);

@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Form field label text. See the LABEL element definition in HTML 4.01.
  * <p>
@@ -39,36 +40,52 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLLabelElement extends HTMLElement {
+	
 	/**
 	 * Returns the <code>FORM</code> element containing this control. Returns
 	 * <code>null</code> if this control is not within the context of a form.
+	 *
+	 * @return the form
 	 */
 	public HTMLFormElement getForm();
 
 	/**
 	 * A single character access key to give access to the form control. See the
 	 * accesskey attribute definition in HTML 4.01.
+	 *
+	 * @return the access key
 	 */
 	public String getAccessKey();
 
 	/**
 	 * A single character access key to give access to the form control. See the
 	 * accesskey attribute definition in HTML 4.01.
+	 *
+	 * @param accessKey the new access key
 	 */
 	public void setAccessKey(String accessKey);
 
 	/**
 	 * This attribute links this label with another form control by
 	 * <code>id</code> attribute. See the for attribute definition in HTML 4.01.
+	 *
+	 * @return the html for
 	 */
 	public String getHtmlFor();
 
 	/**
 	 * This attribute links this label with another form control by
 	 * <code>id</code> attribute. See the for attribute definition in HTML 4.01.
+	 *
+	 * @param htmlFor the new html for
 	 */
 	public void setHtmlFor(String htmlFor);
 
 
+	/**
+	 * Gets the control.
+	 *
+	 * @return the control
+	 */
 	public HTMLElement getControl();
 }

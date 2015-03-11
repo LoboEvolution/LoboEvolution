@@ -33,12 +33,14 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Random;
 
+
 /**
  * The local-bound server that allows the browser JVM to be reused.
  */
 public class ReuseServer implements Runnable {
+	
 	/**
-	 * 
+	 * Instantiates a new reuse server.
 	 */
 	public ReuseServer() {
 		Thread t = new Thread(this, "ReuseServer");
@@ -46,16 +48,33 @@ public class ReuseServer implements Runnable {
 		t.start();
 	}
 
+	/** The Constant MIN_PORT. */
 	private static final int MIN_PORT = 55000;
+	
+	/** The Constant TOP_PORT. */
 	private static final int TOP_PORT = 65000;
+	
+	/** The Constant RAND. */
 	private static final Random RAND = new Random(System.currentTimeMillis());
 
+	/**
+	 * Gets the random port.
+	 *
+	 * @return the random port
+	 */
 	private static int getRandomPort() {
 		return Math.abs(RAND.nextInt()) % (TOP_PORT - MIN_PORT) + MIN_PORT;
 	}
 
+	/** The server socket. */
 	private ServerSocket serverSocket;
 
+	/**
+	 * Start.
+	 *
+	 * @param bindAddr the bind addr
+	 * @return the int
+	 */
 	public int start(InetAddress bindAddr) {
 		// Should be called with bindAddr=127.0.0.1 only.
 		synchronized (this) {
@@ -78,6 +97,9 @@ public class ReuseServer implements Runnable {
 				"Unable to bind reuse server after many tries.");
 	}
 
+	/**
+	 * Stop.
+	 */
 	public void stop() {
 		synchronized (this) {
 			if (this.serverSocket != null) {

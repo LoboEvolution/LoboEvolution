@@ -61,42 +61,78 @@ import org.lobobrowser.util.GenericEventListener;
 import org.lobobrowser.util.Urls;
 import org.w3c.dom.Document;
 
+
+/**
+ * The Class NetworkRequestImpl.
+ */
 public class NetworkRequestImpl implements NetworkRequest {
 	// TODO: Class not thread safe?
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(NetworkRequestImpl.class.getName());
+	
+	/** The ready state change. */
 	private final EventDispatch READY_STATE_CHANGE = new EventDispatch();
+	
+	/** The ready state. */
 	private volatile int readyState = NetworkRequest.STATE_UNINITIALIZED;
+	
+	/** The local response. */
 	private volatile LocalResponse localResponse;
+	
+	/** The req. */
 	private Request req = new Request();
+	
+	/** The is asynchronous. */
 	private boolean isAsynchronous = false;
 	
+	/**
+	 * Instantiates a new network request impl.
+	 */
 	public NetworkRequestImpl() {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#getReadyState()
+	 */
 	public int getReadyState() {
 		return this.readyState;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#getResponseText()
+	 */
 	public String getResponseText() {
 		LocalResponse lr = this.localResponse;
 		return lr == null ? null : lr.getResponseText();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#getResponseXML()
+	 */
 	public Document getResponseXML() {
 		LocalResponse lr = this.localResponse;
 		return lr == null ? null : lr.getResponseXML();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#getResponseImage()
+	 */
 	public Image getResponseImage() {
 		LocalResponse lr = this.localResponse;
 		return lr == null ? null : lr.getResponseImage();
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#getResponseBytes()
+	 */
 	public byte[] getResponseBytes() {
 		LocalResponse lr = this.localResponse;
 		return lr == null ? null : lr.getResponseBytes();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#getStatus()
+	 */
 	public int getStatus() {
 		try {
 			LocalResponse lr = this.localResponse;
@@ -107,6 +143,9 @@ public class NetworkRequestImpl implements NetworkRequest {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#getStatusText()
+	 */
 	public String getStatusText() {
 		try {
 			LocalResponse lr = this.localResponse;
@@ -116,8 +155,12 @@ public class NetworkRequestImpl implements NetworkRequest {
 		}
 	}
 
+	/** The current request handler. */
 	private volatile RequestHandler currentRequestHandler;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#abort()
+	 */
 	public void abort() {
 		RequestHandler rhToDelete = this.currentRequestHandler;
 		if (rhToDelete != null) {
@@ -125,39 +168,63 @@ public class NetworkRequestImpl implements NetworkRequest {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#getAllResponseHeaders()
+	 */
 	public String getAllResponseHeaders() {
 		LocalResponse lr = this.localResponse;
 		return lr == null ? null : lr.getAllResponseHeaders();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#getResponseHeader(java.lang.String)
+	 */
 	public String getResponseHeader(String headerName) {
 		LocalResponse lr = this.localResponse;
 		return lr == null ? null : lr.getResponseHeader(headerName);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#open(java.lang.String, java.lang.String)
+	 */
 	public void open(String method, String url) throws IOException {
 		this.open(method, url, true);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#open(java.lang.String, java.net.URL)
+	 */
 	public void open(String method, URL url) {
 		this.open(method, url, true, null, null);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#open(java.lang.String, java.net.URL, boolean)
+	 */
 	public void open(String method, URL url, boolean asyncFlag) {
 		this.open(method, url, asyncFlag, null, null);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#open(java.lang.String, java.lang.String, boolean)
+	 */
 	public void open(String method, String url, boolean asyncFlag)
 			throws IOException {
 		URL urlObj = Urls.createURL(null, url);
 		this.open(method, urlObj, asyncFlag, null, null);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#open(java.lang.String, java.net.URL, boolean, java.lang.String)
+	 */
 	public void open(String method, URL url, boolean asyncFlag,
 			String userName) {
 		this.open(method, url, asyncFlag, userName, null);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#open(java.lang.String, java.net.URL, boolean, java.lang.String, java.lang.String)
+	 */
 	public void open(String method, URL url, boolean asyncFlag, String userName, String password) {
 		this.isAsynchronous = asyncFlag;
 		
@@ -173,6 +240,9 @@ public class NetworkRequestImpl implements NetworkRequest {
 		this.changeReadyState(NetworkRequest.STATE_LOADING);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#send(java.lang.String)
+	 */
 	public void send(String content) throws IOException {
 		try {
 			RequestHandler rhandler = new LocalRequestHandler(new URL(req.getUrl()), req.getMethod().name(), content);
@@ -192,6 +262,9 @@ public class NetworkRequestImpl implements NetworkRequest {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NetworkRequest#addNetworkRequestListener(org.lobobrowser.ua.NetworkRequestListener)
+	 */
 	public void addNetworkRequestListener(final NetworkRequestListener listener) {
 		this.READY_STATE_CHANGE.addListener(new GenericEventListener() {
 			public void processEvent(EventObject event) {
@@ -200,12 +273,22 @@ public class NetworkRequestImpl implements NetworkRequest {
 		});
 	}
 
+	/**
+	 * Change ready state.
+	 *
+	 * @param newState the new state
+	 */
 	private void changeReadyState(int newState) {
 		this.readyState = newState;
 		this.READY_STATE_CHANGE.fireEvent(new NetworkRequestEvent(this,
 				newState));
 	}
 
+	/**
+	 * Sets the response.
+	 *
+	 * @param response the new response
+	 */
 	private void setResponse(ClientletResponse response) {
 		if (response.isFromCache()) {
 			Object cachedResponse = response.getTransientCachedObject();
@@ -283,22 +366,47 @@ public class NetworkRequestImpl implements NetworkRequest {
 		}
 	}
 	
+	/**
+	 * Gets the req.
+	 *
+	 * @return the req
+	 */
 	public Request getReq() {
 		return req;
 	}
 
+	/**
+	 * Sets the req.
+	 *
+	 * @param req the new req
+	 */
 	public void setReq(Request req) {
 		this.req = req;
 	}
 
+	/**
+	 * The Class LocalRequestHandler.
+	 */
 	private class LocalRequestHandler extends SimpleRequestHandler {
+		
+		/** The method. */
 		private final String method;
 
+		/**
+		 * Instantiates a new local request handler.
+		 *
+		 * @param url the url
+		 * @param method the method
+		 * @param altPostData the alt post data
+		 */
 		public LocalRequestHandler(URL url, String method, String altPostData) {
 			super(url, method, altPostData, RequestType.ELEMENT);
 			this.method = method;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.request.SimpleRequestHandler#getLatestRequestMethod()
+		 */
 		@Override
 		public String getLatestRequestMethod() {
 			return this.method;
@@ -333,16 +441,37 @@ public class NetworkRequestImpl implements NetworkRequest {
 		}
 	}
 
+	/**
+	 * The Class CacheableResponse.
+	 */
 	private static class CacheableResponse {
+		
+		/** The image ref. */
 		private WeakReference<Image> imageRef;
+		
+		/** The buffer. */
 		private java.io.ByteArrayOutputStream buffer;
+		
+		/** The document. */
 		private Document document;
+		
+		/** The text content. */
 		private String textContent;
+		
+		/** The complete. */
 		private boolean complete;
 
+		/**
+		 * Instantiates a new cacheable response.
+		 */
 		public CacheableResponse() {
 		}
 
+		/**
+		 * Gets the estimated size.
+		 *
+		 * @return the estimated size
+		 */
 		public int getEstimatedSize() {
 			ByteArrayOutputStream out = this.buffer;
 			int factor = 3;
@@ -351,10 +480,21 @@ public class NetworkRequestImpl implements NetworkRequest {
 			return (out == null ? 0 : out.size()) * factor + 512;
 		}
 
+		/**
+		 * New local response.
+		 *
+		 * @param response the response
+		 * @return the local response
+		 */
 		public LocalResponse newLocalResponse(ClientletResponse response) {
 			return new LocalResponse(response, this);
 		}
 
+		/**
+		 * Gets the response image.
+		 *
+		 * @return the response image
+		 */
 		public Image getResponseImage() {
 			// A hard reference to the image is not a good idea here.
 			// Images will retain their observers, and it's also
@@ -371,6 +511,12 @@ public class NetworkRequestImpl implements NetworkRequest {
 			return img;
 		}
 
+		/**
+		 * Gets the response text.
+		 *
+		 * @param charset the charset
+		 * @return the response text
+		 */
 		public String getResponseText(String charset) {
 			String responseText = this.textContent;
 			if (responseText != null) {
@@ -396,6 +542,8 @@ public class NetworkRequestImpl implements NetworkRequest {
 		}
 
 		/**
+		 * Gets the response bytes.
+		 *
 		 * @return Returns the responseBytes.
 		 */
 		public byte[] getResponseBytes() {
@@ -403,6 +551,11 @@ public class NetworkRequestImpl implements NetworkRequest {
 			return out == null ? null : out.toByteArray();
 		}
 
+		/**
+		 * Gets the response xml.
+		 *
+		 * @return the response xml
+		 */
 		public Document getResponseXML() {
 			Document doc = this.document;
 			if (doc == null && this.complete) {
@@ -422,30 +575,48 @@ public class NetworkRequestImpl implements NetworkRequest {
 		}
 	}
 
+	/**
+	 * The Class LocalResponse.
+	 */
 	private static class LocalResponse {
+		
+		/** The cresponse. */
 		private final ClientletResponse cresponse;
+		
+		/** The cacheable. */
 		private final CacheableResponse cacheable;
 
 		// Caching fields:
+		/** The headers. */
 		private Map headers;
 
 		/**
-		 * @param status
-		 * @param text
-		 * @param bytes
-		 * @param headers
+		 * Instantiates a new local response.
+		 *
+		 * @param response the response
 		 */
 		public LocalResponse(ClientletResponse response) {
 			this.cresponse = response;
 			this.cacheable = new CacheableResponse();
 		}
 
+		/**
+		 * Instantiates a new local response.
+		 *
+		 * @param response the response
+		 * @param cacheable the cacheable
+		 */
 		public LocalResponse(ClientletResponse response,
 				CacheableResponse cacheable) {
 			this.cresponse = response;
 			this.cacheable = cacheable;
 		}
 
+		/**
+		 * Gets the cacheable response.
+		 *
+		 * @return the cacheable response
+		 */
 		public CacheableResponse getCacheableResponse() {
 			CacheableResponse c = this.cacheable;
 			if (!c.complete) {
@@ -454,6 +625,14 @@ public class NetworkRequestImpl implements NetworkRequest {
 			return c;
 		}
 
+		/**
+		 * Write bytes.
+		 *
+		 * @param bytes the bytes
+		 * @param offset the offset
+		 * @param length the length
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		public void writeBytes(byte[] bytes, int offset, int length)
 				throws IOException {
 			ByteArrayOutputStream out = this.cacheable.buffer;
@@ -464,10 +643,20 @@ public class NetworkRequestImpl implements NetworkRequest {
 			out.write(bytes, offset, length);
 		}
 
+		/**
+		 * Sets the complete.
+		 *
+		 * @param complete the new complete
+		 */
 		public void setComplete(boolean complete) {
 			this.cacheable.complete = complete;
 		}
 
+		/**
+		 * Gets the headers.
+		 *
+		 * @return the headers
+		 */
 		public Map getHeaders() {
 			Map h = this.headers;
 			if (h == null) {
@@ -477,6 +666,11 @@ public class NetworkRequestImpl implements NetworkRequest {
 			return h;
 		}
 
+		/**
+		 * Gets the headers impl.
+		 *
+		 * @return the headers impl
+		 */
 		private Map getHeadersImpl() {
 			Map<String, String> headers = new HashMap<String, String>();
 			ClientletResponse cresponse = this.cresponse;
@@ -494,23 +688,40 @@ public class NetworkRequestImpl implements NetworkRequest {
 		}
 
 		/**
+		 * Gets the status.
+		 *
 		 * @return Returns the status.
+		 * @throws IOException Signals that an I/O exception has occurred.
 		 */
 		public int getStatus() throws IOException {
 			return this.cresponse.getResponseCode();
 		}
 
 		/**
+		 * Gets the status text.
+		 *
 		 * @return Returns the statusText.
+		 * @throws IOException Signals that an I/O exception has occurred.
 		 */
 		public String getStatusText() throws IOException {
 			return this.cresponse.getResponseMessage();
 		}
 
+		/**
+		 * Gets the response header.
+		 *
+		 * @param headerName the header name
+		 * @return the response header
+		 */
 		public String getResponseHeader(String headerName) {
 			return (String) this.getHeaders().get(headerName.toLowerCase());
 		}
 
+		/**
+		 * Gets the all response headers.
+		 *
+		 * @return the all response headers
+		 */
 		public String getAllResponseHeaders() {
 			ClientletResponse cresponse = this.cresponse;
 			Iterator headerNames = cresponse.getHeaderNames();
@@ -530,18 +741,38 @@ public class NetworkRequestImpl implements NetworkRequest {
 			return allHeadersBuf.toString();
 		}
 
+		/**
+		 * Gets the response text.
+		 *
+		 * @return the response text
+		 */
 		public String getResponseText() {
 			return this.cacheable.getResponseText(this.cresponse.getCharset());
 		}
 
+		/**
+		 * Gets the response xml.
+		 *
+		 * @return the response xml
+		 */
 		public Document getResponseXML() {
 			return this.cacheable.getResponseXML();
 		}
 
+		/**
+		 * Gets the response image.
+		 *
+		 * @return the response image
+		 */
 		public Image getResponseImage() {
 			return this.cacheable.getResponseImage();
 		}
 
+		/**
+		 * Gets the response bytes.
+		 *
+		 * @return the response bytes
+		 */
 		public byte[] getResponseBytes() {
 			return this.cacheable.getResponseBytes();
 		}

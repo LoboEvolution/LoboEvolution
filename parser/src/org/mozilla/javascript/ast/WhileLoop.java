@@ -8,41 +8,60 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
+
 /**
- * While statement.  Node type is {@link Token#WHILE}.<p>
+ * While statement.  Node type is {@link Token#WHILE}.
  *
  * <pre><i>WhileStatement</i>:
  *     <b>while</b> <b>(</b> Expression <b>)</b> Statement</pre>
  */
 public class WhileLoop extends Loop {
 
+    /** The condition. */
     private AstNode condition;
 
     {
         type = Token.WHILE;
     }
 
+    /**
+     * Instantiates a new while loop.
+     */
     public WhileLoop() {
     }
 
+    /**
+     * Instantiates a new while loop.
+     *
+     * @param pos the pos
+     */
     public WhileLoop(int pos) {
         super(pos);
     }
 
+    /**
+     * Instantiates a new while loop.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public WhileLoop(int pos, int len) {
         super(pos, len);
     }
 
     /**
-     * Returns loop condition
+     * Returns loop condition.
+     *
+     * @return the condition
      */
     public AstNode getCondition() {
         return condition;
     }
 
     /**
-     * Sets loop condition
-     * @throws IllegalArgumentException} if condition is {@code null}
+     * Sets loop condition.
+     *
+     * @param condition the new condition
      */
     public void setCondition(AstNode condition) {
         assertNotNull(condition);
@@ -50,6 +69,9 @@ public class WhileLoop extends Loop {
         condition.setParent(this);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.Scope#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -68,6 +90,8 @@ public class WhileLoop extends Loop {
 
     /**
      * Visits this node, the condition, then the body.
+     *
+     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

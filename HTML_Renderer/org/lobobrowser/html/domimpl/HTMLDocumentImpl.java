@@ -125,62 +125,161 @@ import org.w3c.dom.views.DocumentView;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
+
 /**
  * Implementation of the W3C <code>HTMLDocument</code> interface.
  */
 public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, DocumentView, DocumentEvent{
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(HTMLDocumentImpl.class.getName());
+	
+	/** The factory. */
 	private final ElementFactory factory;
+	
+	/** The rcontext. */
 	private final HtmlRendererContext rcontext;
+	
+	/** The ucontext. */
 	private final UserAgentContext ucontext;
+	
+	/** The window. */
 	private final Window window;
+	
+	/** The elements by id. */
 	private final Map<String, Element> elementsById = new WeakValueHashMap();
+	
+	/** The elements by name. */
 	private final Map<String, Element> elementsByName = new HashMap<String, Element>(0);
+	
+	/** The style sheets. */
 	private final Collection styleSheets = new CSSStyleSheetList();
+	
+	/** The image infos. */
 	private final Map<String, ImageInfo> imageInfos = new HashMap<String, ImageInfo>(4);
+	
+	/** The document notification listeners. */
 	private final ArrayList<DocumentNotificationListener> documentNotificationListeners = new ArrayList<DocumentNotificationListener>(1);
+	
+	/** The blank image event. */
 	private final ImageEvent BLANK_IMAGE_EVENT = new ImageEvent(this, null);
 
+	/** The document url. */
 	private URL documentURL;
+	
+	/** The reader. */
 	private WritableLineReader reader;
+	
+	/** The doctype. */
 	private DocumentType doctype;
+	
+	/** The body. */
 	private HTMLElement body;
+	
+	/** The images. */
 	private HTMLCollection images;
+	
+	/** The applets. */
 	private HTMLCollection applets;
+	
+	/** The links. */
 	private HTMLCollection links;
+	
+	/** The forms. */
 	private HTMLCollection forms;
+	
+	/** The anchors. */
 	private HTMLCollection anchors;
+	
+	/** The frames. */
 	private HTMLCollection frames;
+	
+	/** The embeds. */
 	private HTMLCollection embeds;
+	
+	/** The scripts. */
 	private HTMLCollection scripts;
+	
+	/** The plugins. */
 	private HTMLCollection plugins;
+	
+	/** The commands. */
 	private HTMLCollection commands;
+	
+	/** The style sheet aggregator. */
 	private StyleSheetAggregator styleSheetAggregator = null;
+	
+	/** The dom config. */
 	private DOMConfiguration domConfig;
+	
+	/** The dom implementation. */
 	private DOMImplementation domImplementation;
+	
+	/** The onload handler. */
 	private Function onloadHandler;
 
+	/** The locales. */
 	private Set<?> locales;
+	
+	/** The base uri. */
 	private volatile String baseURI;
+	
+	/** The default target. */
 	private String defaultTarget;
+	
+	/** The title. */
 	private String title;
+	
+	/** The document uri. */
 	private String documentURI;
+	
+	/** The referrer. */
 	private String referrer;
+	
+	/** The domain. */
 	private String domain;
+	
+	/** The input encoding. */
 	private String inputEncoding;
+	
+	/** The xml encoding. */
 	private String xmlEncoding;
+	
+	/** The xml version. */
 	private String xmlVersion = null;
+	
+	/** The xml standalone. */
 	private boolean xmlStandalone;
+	
+	/** The strict error checking. */
 	private boolean strictErrorChecking = true;
 
+	/**
+	 * Instantiates a new HTML document impl.
+	 *
+	 * @param rcontext the rcontext
+	 */
 	public HTMLDocumentImpl(HtmlRendererContext rcontext) {
 		this(rcontext.getUserAgentContext(), rcontext, null, null);
 	}
 
+	/**
+	 * Instantiates a new HTML document impl.
+	 *
+	 * @param ucontext the ucontext
+	 */
 	public HTMLDocumentImpl(UserAgentContext ucontext) {
 		this(ucontext, null, null, null);
 	}
 
+	/**
+	 * Instantiates a new HTML document impl.
+	 *
+	 * @param ucontext the ucontext
+	 * @param rcontext the rcontext
+	 * @param reader the reader
+	 * @param documentURI the document uri
+	 */
 	public HTMLDocumentImpl(final UserAgentContext ucontext,
 			final HtmlRendererContext rcontext, WritableLineReader reader,
 			String documentURI) {
@@ -222,6 +321,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		this.setUserData(Executor.SCOPE_KEY, window.getWindowScope(), null);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getCookie()
+	 */
 	public String getCookie() {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
@@ -245,6 +347,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#setCookie(java.lang.String)
+	 */
 	public void setCookie(final String cookie) throws DOMException {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
@@ -265,6 +370,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#open()
+	 */
 	public void open() {
 		synchronized (this.getTreeLock()) {
 			if (this.reader != null) {
@@ -289,16 +397,24 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * Loads the document from the reader provided when the current instance of
 	 * <code>HTMLDocumentImpl</code> was constructed. It then closes the reader.
-	 * 
-	 * @throws IOException
-	 * @throws SAXException
-	 * @throws UnsupportedEncodingException
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SAXException the SAX exception
+	 * @throws UnsupportedEncodingException the unsupported encoding exception
 	 */
 	public void load() throws IOException, SAXException,
 			UnsupportedEncodingException {
 		this.load(true);
 	}
 
+	/**
+	 * Load.
+	 *
+	 * @param closeReader the close reader
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SAXException the SAX exception
+	 * @throws UnsupportedEncodingException the unsupported encoding exception
+	 */
 	public void load(boolean closeReader) throws IOException, SAXException,
 			UnsupportedEncodingException {
 		WritableLineReader reader;
@@ -335,6 +451,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#close()
+	 */
 	public void close() {
 		synchronized (this.getTreeLock()) {
 			if (this.reader instanceof LocalWritableLineReader) {
@@ -351,6 +470,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#write(java.lang.String)
+	 */
 	public void write(String text) {
 		synchronized (this.getTreeLock()) {
 			if (this.reader != null) {
@@ -364,6 +486,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#writeln(java.lang.String)
+	 */
 	public void writeln(String text) {
 		synchronized (this.getTreeLock()) {
 			if (this.reader != null) {
@@ -377,6 +502,11 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/**
+	 * Open buffer changed.
+	 *
+	 * @param text the text
+	 */
 	private void openBufferChanged(String text) {
 		// Assumed to execute in a lock
 		// Assumed that text is not broken up HTML.
@@ -399,11 +529,17 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * Gets the collection of elements whose <code>name</code> attribute is
 	 * <code>elementName</code>.
+	 *
+	 * @param elementName the element name
+	 * @return the elements by name
 	 */
 	public NodeList getElementsByName(String elementName) {
 		return this.getNodeList(new ElementNameFilter(elementName));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getDocumentElement()
+	 */
 	public Element getDocumentElement() {
 		synchronized (this.getTreeLock()) {
 			ArrayList<?> nl = this.nodeList;
@@ -420,6 +556,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createElement(java.lang.String)
+	 */
 	public Element createElement(String tagName) throws DOMException {
 		return this.factory.createElement(this, tagName);
 	}
@@ -438,24 +577,36 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return node;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createTextNode(java.lang.String)
+	 */
 	public Text createTextNode(String data) {
 		DOMTextImpl node = new DOMTextImpl(data);
 		node.setOwnerDocument(this);
 		return node;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createComment(java.lang.String)
+	 */
 	public Comment createComment(String data) {
 		DOMCommentImpl node = new DOMCommentImpl(data);
 		node.setOwnerDocument(this);
 		return node;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createCDATASection(java.lang.String)
+	 */
 	public CDATASection createCDATASection(String data) throws DOMException {
 		DOMCDataSectionImpl node = new DOMCDataSectionImpl(data);
 		node.setOwnerDocument(this);
 		return node;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createProcessingInstruction(java.lang.String, java.lang.String)
+	 */
 	public ProcessingInstruction createProcessingInstruction(String target,
 			String data) throws DOMException {
 		HTMLProcessingInstruction node = new HTMLProcessingInstruction(target,
@@ -464,10 +615,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return node;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createAttribute(java.lang.String)
+	 */
 	public Attr createAttribute(String name) throws DOMException {
 		return new DOMAttrImpl(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createEntityReference(java.lang.String)
+	 */
 	public EntityReference createEntityReference(String name)
 			throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
@@ -475,10 +632,10 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 
 	/**
 	 * Gets all elements that match the given tag name.
-	 * 
-	 * @param tagname
-	 *            The element tag name or an asterisk character (*) to match all
+	 *
+	 * @param tagname            The element tag name or an asterisk character (*) to match all
 	 *            elements.
+	 * @return the elements by tag name
 	 */
 	public NodeList getElementsByTagName(String tagname) {
 		if ("*".equals(tagname)) {
@@ -488,18 +645,30 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#importNode(org.w3c.dom.Node, boolean)
+	 */
 	public Node importNode(Node importedNode, boolean deep) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Not implemented");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createElementNS(java.lang.String, java.lang.String)
+	 */
 	public Element createElementNS(String namespaceURI, String qualifiedName) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createAttributeNS(java.lang.String, java.lang.String)
+	 */
 	public Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.events.DocumentEvent#createEvent(java.lang.String)
+	 */
 	public Event createEvent(String eventType) throws DOMException {
 
 		switch (eventType) {
@@ -525,10 +694,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getElementsByTagNameNS(java.lang.String, java.lang.String)
+	 */
 	public NodeList getElementsByTagNameNS(String namespaceURI, String localName) {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getElementById(java.lang.String)
+	 */
 	public Element getElementById(String elementId) {
 		Element element;
 		synchronized (this) {
@@ -537,6 +712,12 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return element;
 	}
 
+	/**
+	 * Named item.
+	 *
+	 * @param name the name
+	 * @return the element
+	 */
 	public Element namedItem(String name) {
 		Element element;
 		synchronized (this) {
@@ -545,18 +726,32 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return element;
 	}
 
+	/**
+	 * Sets the named item.
+	 *
+	 * @param name the name
+	 * @param element the element
+	 */
 	public void setNamedItem(String name, Element element) {
 		synchronized (this) {
 			this.elementsByName.put(name, element);
 		}
 	}
 
+	/**
+	 * Removes the named item.
+	 *
+	 * @param name the name
+	 */
 	public void removeNamedItem(String name) {
 		synchronized (this) {
 			this.elementsByName.remove(name);
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#adoptNode(org.w3c.dom.Node)
+	 */
 	public Node adoptNode(Node source) throws DOMException {
 		if (source instanceof DOMNodeImpl) {
 			DOMNodeImpl node = (DOMNodeImpl) source;
@@ -568,6 +763,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getDomConfig()
+	 */
 	public DOMConfiguration getDomConfig() {
 		synchronized (this) {
 			if (this.domConfig == null) {
@@ -577,6 +775,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#normalizeDocument()
+	 */
 	public void normalizeDocument() {
 		// TODO: Normalization options from domConfig
 		synchronized (this.getTreeLock()) {
@@ -588,6 +789,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#renameNode(org.w3c.dom.Node, java.lang.String, java.lang.String)
+	 */
 	public Node renameNode(Node n, String namespaceURI, String qualifiedName)
 			throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No renaming");
@@ -656,14 +860,23 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				"Cannot set node value of document");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getHtmlRendererContext()
+	 */
 	public final HtmlRendererContext getHtmlRendererContext() {
 		return this.rcontext;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getUserAgentContext()
+	 */
 	public UserAgentContext getUserAgentContext() {
 		return this.ucontext;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getFullURL(java.lang.String)
+	 */
 	public final URL getFullURL(String uri) {
 		try {
 			String baseURI = this.getBaseURI();
@@ -682,18 +895,34 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/**
+	 * Gets the location.
+	 *
+	 * @return the location
+	 */
 	public final Location getLocation() {
 		return this.window.getLocation();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#setLocation(java.lang.String)
+	 */
 	public void setLocation(String location) {
 		this.getLocation().setHref(location);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getURL()
+	 */
 	public String getURL() {
 		return this.documentURI;
 	}
 
+	/**
+	 * Adds the style sheet.
+	 *
+	 * @param ss the ss
+	 */
 	final void addStyleSheet(CSSStyleSheet ss) {
 		synchronized (this.getTreeLock()) {
 			this.styleSheets.add(ss);
@@ -716,6 +945,11 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		this.allInvalidated();
 	}
 
+	/**
+	 * All invalidated.
+	 *
+	 * @param forgetRenderStates the forget render states
+	 */
 	public void allInvalidated(boolean forgetRenderStates) {
 		if (forgetRenderStates) {
 			synchronized (this.getTreeLock()) {
@@ -739,10 +973,20 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		this.allInvalidated();
 	}
 
+	/**
+	 * Gets the style sheets.
+	 *
+	 * @return the style sheets
+	 */
 	public Collection<CSSStyleSheet> getStyleSheets() {
 		return this.styleSheets;
 	}
 
+	/**
+	 * Gets the style sheet aggregator.
+	 *
+	 * @return the style sheet aggregator
+	 */
 	final StyleSheetAggregator getStyleSheetAggregator() {
 		synchronized (this.getTreeLock()) {
 			StyleSheetAggregator ssa = this.styleSheetAggregator;
@@ -774,6 +1018,11 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/**
+	 * Removes the document notification listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void removeDocumentNotificationListener(
 			DocumentNotificationListener listener) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
@@ -782,6 +1031,11 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/**
+	 * Size invalidated.
+	 *
+	 * @param node the node
+	 */
 	public void sizeInvalidated(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		int size;
@@ -807,8 +1061,8 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 * Called if something such as a color or decoration has changed. This would
 	 * be something which does not affect the rendered size, and can be
 	 * revalidated with a simple repaint.
-	 * 
-	 * @param node
+	 *
+	 * @param node the node
 	 */
 	public void lookInvalidated(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
@@ -834,8 +1088,8 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 
 	/**
 	 * Changed if the position of the node in a parent has changed.
-	 * 
-	 * @param node
+	 *
+	 * @param node the node
 	 */
 	public void positionInParentInvalidated(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
@@ -861,8 +1115,8 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * This is called when the node has changed, but it is unclear if it's a
 	 * size change or a look change. An attribute change should trigger this.
-	 * 
-	 * @param node
+	 *
+	 * @param node the node
 	 */
 	public void invalidated(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
@@ -887,8 +1141,8 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 
 	/**
 	 * This is called when children of the node might have changed.
-	 * 
-	 * @param node
+	 *
+	 * @param node the node
 	 */
 	public void structureInvalidated(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
@@ -911,6 +1165,11 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/**
+	 * Node loaded.
+	 *
+	 * @param node the node
+	 */
 	public void nodeLoaded(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		int size;
@@ -932,6 +1191,11 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/**
+	 * External script loading.
+	 *
+	 * @param node the node
+	 */
 	public void externalScriptLoading(DOMNodeImpl node) {
 		ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		int size;
@@ -977,6 +1241,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new StyleSheetRenderState(this);
 	}
@@ -985,9 +1252,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 * Loads images asynchronously such that they are shared if loaded
 	 * simultaneously from the same URI. Informs the listener immediately if an
 	 * image is already known.
-	 * 
-	 * @param relativeUri
-	 * @param imageListener
+	 *
+	 * @param relativeUri the relative uri
+	 * @param imageListener the image listener
 	 */
 	protected void loadImage(String relativeUri, ImageListener imageListener) {
 		HtmlRendererContext rcontext = this.getHtmlRendererContext();
@@ -1087,6 +1354,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setUserData(java.lang.String, java.lang.Object, org.w3c.dom.UserDataHandler)
+	 */
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		Function onloadHandler = this.onloadHandler;
 		if (onloadHandler != null) {
@@ -1098,6 +1368,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return super.setUserData(key, data, handler);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#createSimilarNode()
+	 */
 	protected Node createSimilarNode() {
 		return new HTMLDocumentImpl(this.ucontext, this.rcontext, this.reader,this.documentURI);
 	}
@@ -1109,20 +1382,28 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 * @author J. H. S.
 	 */
 	private class LocalWritableLineReader extends WritableLineReader {
+		
 		/**
-		 * @param reader
+		 * Instantiates a new local writable line reader.
+		 *
+		 * @param reader the reader
 		 */
 		public LocalWritableLineReader(LineNumberReader reader) {
 			super(reader);
 		}
 
 		/**
-		 * @param reader
+		 * Instantiates a new local writable line reader.
+		 *
+		 * @param reader the reader
 		 */
 		public LocalWritableLineReader(Reader reader) {
 			super(reader);
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.io.WritableLineReader#write(java.lang.String)
+		 */
 		public void write(String text) throws IOException {
 			super.write(text);
 			if ("".equals(text)) {
@@ -1131,6 +1412,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getBody()
+	 */
 	@Override
 	public HTMLElement getBody() {
 		synchronized (this) {
@@ -1138,6 +1422,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#setBody(org.lobobrowser.html.w3c.HTMLElement)
+	 */
 	@Override
 	public void setBody(HTMLElement body) {
 		synchronized (this) {
@@ -1145,18 +1432,32 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getReferrer()
+	 */
 	public String getReferrer() {
 		return this.referrer;
 	}
 
+	/**
+	 * Sets the referrer.
+	 *
+	 * @param value the new referrer
+	 */
 	public void setReferrer(String value) {
 		this.referrer = value;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getDomain()
+	 */
 	public String getDomain() {
 		return this.domain;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#setDomain(java.lang.String)
+	 */
 	public void setDomain(String domain) {
 		String oldDomain = this.domain;
 		if (oldDomain != null && Domains.isValidCookieDomain(domain, oldDomain)) {
@@ -1167,6 +1468,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getImages()
+	 */
 	public HTMLCollection getImages() {
 		synchronized (this) {
 			if (this.images == null) {
@@ -1177,6 +1481,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getApplets()
+	 */
 	public HTMLCollection getApplets() {
 		synchronized (this) {
 			if (this.applets == null) {
@@ -1187,6 +1494,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getLinks()
+	 */
 	public HTMLCollection getLinks() {
 		synchronized (this) {
 			if (this.links == null) {
@@ -1197,6 +1507,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getForms()
+	 */
 	public HTMLCollection getForms() {
 		synchronized (this) {
 			if (this.forms == null) {
@@ -1207,6 +1520,11 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/**
+	 * Gets the frames.
+	 *
+	 * @return the frames
+	 */
 	public HTMLCollection getFrames() {
 		synchronized (this) {
 			if (this.frames == null) {
@@ -1217,6 +1535,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getAnchors()
+	 */
 	public HTMLCollection getAnchors() {
 		synchronized (this) {
 			if (this.anchors == null) {
@@ -1227,60 +1548,107 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getDoctype()
+	 */
 	public DocumentType getDoctype() {
 		return this.doctype;
 	}
 
+	/**
+	 * Sets the doctype.
+	 *
+	 * @param doctype the new doctype
+	 */
 	public void setDoctype(DocumentType doctype) {
 		this.doctype = doctype;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getInputEncoding()
+	 */
 	public String getInputEncoding() {
 		return this.inputEncoding;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getXmlEncoding()
+	 */
 	public String getXmlEncoding() {
 		return this.xmlEncoding;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getXmlStandalone()
+	 */
 	public boolean getXmlStandalone() {
 		return this.xmlStandalone;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#setXmlStandalone(boolean)
+	 */
 	public void setXmlStandalone(boolean xmlStandalone) throws DOMException {
 		this.xmlStandalone = xmlStandalone;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getXmlVersion()
+	 */
 	public String getXmlVersion() {
 		return this.xmlVersion;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#setXmlVersion(java.lang.String)
+	 */
 	public void setXmlVersion(String xmlVersion) throws DOMException {
 		this.xmlVersion = xmlVersion;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getStrictErrorChecking()
+	 */
 	public boolean getStrictErrorChecking() {
 		return this.strictErrorChecking;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#setStrictErrorChecking(boolean)
+	 */
 	public void setStrictErrorChecking(boolean strictErrorChecking) {
 		this.strictErrorChecking = strictErrorChecking;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getDocumentURI()
+	 */
 	public String getDocumentURI() {
 		return this.documentURI;
 	}
 
+	/**
+	 * Gets the onload handler.
+	 *
+	 * @return the onload handler
+	 */
 	public Function getOnloadHandler() {
 		return onloadHandler;
 	}
 
+	/**
+	 * Sets the onload handler.
+	 *
+	 * @param onloadHandler the new onload handler
+	 */
 	public void setOnloadHandler(Function onloadHandler) {
 		this.onloadHandler = onloadHandler;
 	}
 
 	/**
 	 * Gets an <i>immutable</i> set of locales previously set for this document.
+	 *
+	 * @return the locales
 	 */
 	public Set<?> getLocales() {
 		return locales;
@@ -1298,6 +1666,11 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		this.locales = locales;
 	}
 
+	/**
+	 * Gets the document host.
+	 *
+	 * @return the document host
+	 */
 	String getDocumentHost() {
 		URL docUrl = this.documentURL;
 		return docUrl == null ? null : docUrl.getHost();
@@ -1313,44 +1686,80 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return buri == null ? this.documentURI : buri;
 	}
 
+	/**
+	 * Sets the base uri.
+	 *
+	 * @param value the new base uri
+	 */
 	public void setBaseURI(String value) {
 		this.baseURI = value;
 	}
 
+	/**
+	 * Gets the default target.
+	 *
+	 * @return the default target
+	 */
 	public String getDefaultTarget() {
 		return this.defaultTarget;
 	}
 
+	/**
+	 * Sets the default target.
+	 *
+	 * @param value the new default target
+	 */
 	public void setDefaultTarget(String value) {
 		this.defaultTarget = value;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.views.DocumentView#getDefaultView()
+	 */
 	public AbstractView getDefaultView() {
 		return this.window;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getTextContent()
+	 */
 	public String getTextContent() throws DOMException {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setTextContent(java.lang.String)
+	 */
 	public void setTextContent(String textContent) throws DOMException {
 		// NOP, per spec
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getTitle()
+	 */
 	public String getTitle() {
 		return this.title;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#setTitle(java.lang.String)
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getDocumentURL()
+	 */
 	public URL getDocumentURL() {
 		return this.documentURL;
 	}
 
 	/**
 	 * Caller should synchronize on document.
+	 *
+	 * @param id the id
+	 * @param element the element
 	 */
 	public void setElementById(String id, Element element) {
 		synchronized (this) {
@@ -1358,16 +1767,27 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/**
+	 * Removes the element by id.
+	 *
+	 * @param id the id
+	 */
 	void removeElementById(String id) {
 		synchronized (this) {
 			this.elementsById.remove(id);
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#setDocumentURI(java.lang.String)
+	 */
 	public void setDocumentURI(String documentURI) {
 		this.documentURI = documentURI;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getLastModified()
+	 */
 	@Override
 	public String getLastModified() {
 
@@ -1383,12 +1803,18 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getCompatMode()
+	 */
 	@Override
 	public String getCompatMode() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getCharacterSet()
+	 */
 	@Override
 	public String getCharacterSet() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.META);
@@ -1396,23 +1822,35 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return attr.getAttribute();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getDefaultCharset()
+	 */
 	@Override
 	public String getDefaultCharset() {
 		return Charset.defaultCharset().displayName();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getReadyState()
+	 */
 	@Override
 	public String getReadyState() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getHead()
+	 */
 	@Override
 	public HTMLHeadElement getHead() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getEmbeds()
+	 */
 	@Override
 	public HTMLCollection getEmbeds() {
 		synchronized (this) {
@@ -1424,6 +1862,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getPlugins()
+	 */
 	@Override
 	public HTMLCollection getPlugins() {
 		synchronized (this) {
@@ -1435,6 +1876,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getScripts()
+	 */
 	@Override
 	public HTMLCollection getScripts() {
 		synchronized (this) {
@@ -1446,47 +1890,71 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getElementsByClassName(java.lang.String)
+	 */
 	@Override
 	public NodeList getElementsByClassName(String classNames) {
 		return this.getNodeList(new ClassNameFilter(classNames));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#hasFocus()
+	 */
 	@Override
 	public boolean hasFocus() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getDesignMode()
+	 */
 	@Override
 	public String getDesignMode() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#setDesignMode(java.lang.String)
+	 */
 	@Override
 	public void setDesignMode(String designMode) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#execCommand(java.lang.String)
+	 */
 	@Override
 	public boolean execCommand(String commandId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#execCommand(java.lang.String, boolean)
+	 */
 	@Override
 	public boolean execCommand(String commandId, boolean showUI) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#execCommand(java.lang.String, boolean, java.lang.String)
+	 */
 	@Override
 	public boolean execCommand(String commandId, boolean showUI, String value) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#queryCommandEnabled(java.lang.String)
+	 */
 	@Override
 	public boolean queryCommandEnabled(String commandId) {
 		Iterator<String> it = HtmlCommandMapping.EXECUTE_CMDS.iterator();
@@ -1498,18 +1966,27 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#queryCommandIndeterm(java.lang.String)
+	 */
 	@Override
 	public boolean queryCommandIndeterm(String commandId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#queryCommandState(java.lang.String)
+	 */
 	@Override
 	public boolean queryCommandState(String commandId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#queryCommandSupported(java.lang.String)
+	 */
 	@Override
 	public boolean queryCommandSupported(String commandId) {
 		Iterator<String> it = HtmlCommandMapping.EXECUTE_CMDS.iterator();
@@ -1521,24 +1998,36 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#queryCommandValue(java.lang.String)
+	 */
 	@Override
 	public String queryCommandValue(String commandId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#querySelector(java.lang.String)
+	 */
 	@Override
 	public Element querySelector(String selectors) {
 		QuerySelectorImpl qsel = new QuerySelectorImpl();
 		return qsel.documentQuerySelector(this.document, selectors);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#querySelectorAll(java.lang.String)
+	 */
 	@Override
 	public NodeList querySelectorAll(String selectors) {
 		QuerySelectorImpl qsel = new QuerySelectorImpl();
 		return qsel.documentQuerySelectorAll(this.document, selectors);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getCommands()
+	 */
 	@Override
 	public HTMLCollection getCommands() {
 		synchronized (this) {
@@ -1550,6 +2039,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getFgColor()
+	 */
 	@Override
 	public String getFgColor() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
@@ -1557,12 +2049,18 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return attr.getAttribute();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#setFgColor(java.lang.String)
+	 */
 	@Override
 	public void setFgColor(String fgColor) {
 		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.TEXT);
 		attr.setAttribute(this, fgColor);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getBgColor()
+	 */
 	@Override
 	public String getBgColor() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
@@ -1570,12 +2068,18 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return attr.getAttribute();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#setBgColor(java.lang.String)
+	 */
 	@Override
 	public void setBgColor(String bgColor) {
 		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.BGCOLOR);
 		attr.setAttribute(this, bgColor);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getLinkColor()
+	 */
 	@Override
 	public String getLinkColor() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
@@ -1583,12 +2087,18 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return attr.getAttribute();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#setLinkColor(java.lang.String)
+	 */
 	@Override
 	public void setLinkColor(String linkColor) {
 		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.LINK);
 		attr.setAttribute(this, linkColor);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getVlinkColor()
+	 */
 	@Override
 	public String getVlinkColor() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
@@ -1596,6 +2106,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return attr.getAttribute();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#setVlinkColor(java.lang.String)
+	 */
 	@Override
 	public void setVlinkColor(String vlinkColor) {
 		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.VLINK);
@@ -1603,6 +2116,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#getAlinkColor()
+	 */
 	@Override
 	public String getAlinkColor() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
@@ -1611,12 +2127,18 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		return attr.getAttribute();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#setAlinkColor(java.lang.String)
+	 */
 	@Override
 	public void setAlinkColor(String alinkColor) {
 		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.ALINK);
 		attr.setAttribute(this, alinkColor);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#addEventListener(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void addEventListener(String script, String function) {
 		
@@ -1627,6 +2149,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		attr.setAttribute(this, function);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocument#removeEventListener(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void removeEventListener(String script, String function) {
 		JavascriptCommon ut = new JavascriptCommon();

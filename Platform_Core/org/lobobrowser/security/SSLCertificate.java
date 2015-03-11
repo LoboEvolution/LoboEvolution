@@ -31,8 +31,15 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+
+/**
+ * The Class SSLCertificate.
+ */
 public class SSLCertificate {
 
+	/**
+	 * Sets the certificate.
+	 */
 	public static void setCertificate() {
 
 		try {

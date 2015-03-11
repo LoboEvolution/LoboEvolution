@@ -27,20 +27,39 @@ import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.w3c.HTMLHtmlElement;
 
+
+/**
+ * The Class HTMLHtmlElementImpl.
+ */
 public class HTMLHtmlElementImpl extends HTMLElementImpl implements
 		HTMLHtmlElement {
+	
+	/**
+	 * Instantiates a new HTML html element impl.
+	 */
 	public HTMLHtmlElementImpl() {
 		super(HtmlProperties.HTML, true);
 	}
 
+	/**
+	 * Instantiates a new HTML html element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLHtmlElementImpl(String name) {
 		super(name, true);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLHtmlElement#getVersion()
+	 */
 	public String getVersion() {
 		return this.getAttribute(HtmlAttributeProperties.VERSION);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLHtmlElement#setVersion(java.lang.String)
+	 */
 	public void setVersion(String version) {
 		this.setAttribute(HtmlAttributeProperties.VERSION, version);
 	}

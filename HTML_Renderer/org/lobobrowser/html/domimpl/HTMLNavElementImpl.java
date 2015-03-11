@@ -25,12 +25,24 @@ import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.w3c.HTMLNavElement;
 
 
+
+/**
+ * The Class HTMLNavElementImpl.
+ */
 public class HTMLNavElementImpl extends HTMLAbstractUIElement implements HTMLNavElement {
 
+	/**
+	 * Instantiates a new HTML nav element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLNavElementImpl(String name) {
 		super(name);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new NavRenderState(prevRenderState, this);
 	}

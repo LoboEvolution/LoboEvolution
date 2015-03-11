@@ -89,8 +89,17 @@ import org.lobobrowser.html.builder.UnderlineBuilder;
 import org.lobobrowser.html.builder.VideoBuilder;
 import org.lobobrowser.html.parser.ElementInfo;
 
+
+/**
+ * The Class HtmlMapping.
+ */
 public class HtmlMapping {
 
+	/**
+	 * Mapping tag.
+	 *
+	 * @return the map
+	 */
 	public static Map<String, ElementInfo> mappingTag() {
 
 		Map<String, ElementInfo> elementInfos = new HashMap<String, ElementInfo>();
@@ -166,6 +175,11 @@ public class HtmlMapping {
 
 	}
 
+	/**
+	 * Mapping html.
+	 *
+	 * @return the map
+	 */
 	public static Map<String, Object> mappingHtml() {
 
 		Map<String, Object> builders = new HashMap<String, Object>();

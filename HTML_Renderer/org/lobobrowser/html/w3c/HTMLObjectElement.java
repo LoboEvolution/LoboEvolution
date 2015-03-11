@@ -34,6 +34,7 @@ package org.lobobrowser.html.w3c;
 
 import org.w3c.dom.Document;
 
+
 /**
  * Generic embedded object.In principle, all properties on the object element
  * are read-write but in some environments some properties may be read-only once
@@ -44,21 +45,28 @@ import org.w3c.dom.Document;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLObjectElement extends HTMLElement {
+	
 	/**
 	 * Returns the <code>FORM</code> element containing this control. Returns
 	 * <code>null</code> if this control is not within the context of a form.
+	 *
+	 * @return the form
 	 */
 	public HTMLFormElement getForm();
 
 	/**
 	 * Applet class file. See the <code>code</code> attribute for
 	 * HTMLAppletElement.
+	 *
+	 * @return the code
 	 */
 	public String getCode();
 
 	/**
 	 * Applet class file. See the <code>code</code> attribute for
 	 * HTMLAppletElement.
+	 *
+	 * @param code the new code
 	 */
 	public void setCode(String code);
 
@@ -66,6 +74,8 @@ public interface HTMLObjectElement extends HTMLElement {
 	 * Aligns this object (vertically or horizontally) with respect to its
 	 * surrounding text. See the align attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the align
 	 */
 	public String getAlign();
 
@@ -73,30 +83,40 @@ public interface HTMLObjectElement extends HTMLElement {
 	 * Aligns this object (vertically or horizontally) with respect to its
 	 * surrounding text. See the align attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param align the new align
 	 */
 	public void setAlign(String align);
 
 	/**
 	 * Space-separated list of archives. See the archive attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return the archive
 	 */
 	public String getArchive();
 
 	/**
 	 * Space-separated list of archives. See the archive attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param archive the new archive
 	 */
 	public void setArchive(String archive);
 
 	/**
 	 * Width of border around the object. See the border attribute definition in
 	 * HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the border
 	 */
 	public String getBorder();
 
 	/**
 	 * Width of border around the object. See the border attribute definition in
 	 * HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param border the new border
 	 */
 	public void setBorder(String border);
 
@@ -105,6 +125,8 @@ public interface HTMLObjectElement extends HTMLElement {
 	 * 2396</a>] for <code>classid</code>, <code>data</code>, and
 	 * <code>archive</code> attributes. See the codebase attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return the code base
 	 */
 	public String getCodeBase();
 
@@ -113,18 +135,24 @@ public interface HTMLObjectElement extends HTMLElement {
 	 * 2396</a>] for <code>classid</code>, <code>data</code>, and
 	 * <code>archive</code> attributes. See the codebase attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param codeBase the new code base
 	 */
 	public void setCodeBase(String codeBase);
 
 	/**
 	 * Content type for data downloaded via <code>classid</code> attribute. See
 	 * the codetype attribute definition in HTML 4.01.
+	 *
+	 * @return the code type
 	 */
 	public String getCodeType();
 
 	/**
 	 * Content type for data downloaded via <code>classid</code> attribute. See
 	 * the codetype attribute definition in HTML 4.01.
+	 *
+	 * @param codeType the new code type
 	 */
 	public void setCodeType(String codeType);
 
@@ -132,6 +160,8 @@ public interface HTMLObjectElement extends HTMLElement {
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * specifying the location of the object's data. See the data attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the data
 	 */
 	public String getData();
 
@@ -139,28 +169,38 @@ public interface HTMLObjectElement extends HTMLElement {
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * specifying the location of the object's data. See the data attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param data the new data
 	 */
 	public void setData(String data);
 
 	/**
 	 * Declare (for future reference), but do not instantiate, this object. See
 	 * the declare attribute definition in HTML 4.01.
+	 *
+	 * @return the declare
 	 */
 	public boolean getDeclare();
 
 	/**
 	 * Declare (for future reference), but do not instantiate, this object. See
 	 * the declare attribute definition in HTML 4.01.
+	 *
+	 * @param declare the new declare
 	 */
 	public void setDeclare(boolean declare);
 
 	/**
 	 * Override height. See the height attribute definition in HTML 4.01.
+	 *
+	 * @return the height
 	 */
 	public String getHeight();
 
 	/**
 	 * Override height. See the height attribute definition in HTML 4.01.
+	 *
+	 * @param height the new height
 	 */
 	public void setHeight(String height);
 
@@ -168,6 +208,8 @@ public interface HTMLObjectElement extends HTMLElement {
 	 * Horizontal space, in pixels, to the left and right of this image, applet,
 	 * or object. See the hspace attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the hspace
 	 */
 	public int getHspace();
 
@@ -175,66 +217,88 @@ public interface HTMLObjectElement extends HTMLElement {
 	 * Horizontal space, in pixels, to the left and right of this image, applet,
 	 * or object. See the hspace attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param hspace the new hspace
 	 */
 	public void setHspace(int hspace);
 
 	/**
 	 * Form control or object name when submitted with a form. See the name
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * Form control or object name when submitted with a form. See the name
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name);
 
 	/**
 	 * Message to render while loading the object. See the standby attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the standby
 	 */
 	public String getStandby();
 
 	/**
 	 * Message to render while loading the object. See the standby attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param standby the new standby
 	 */
 	public void setStandby(String standby);
 
 	/**
 	 * Index that represents the element's position in the tabbing order. See
 	 * the tabindex attribute definition in HTML 4.01.
+	 *
+	 * @return the tab index
 	 */
 	public int getTabIndex();
 
 	/**
 	 * Index that represents the element's position in the tabbing order. See
 	 * the tabindex attribute definition in HTML 4.01.
+	 *
+	 * @param tabIndex the new tab index
 	 */
 	public void setTabIndex(int tabIndex);
 
 	/**
 	 * Content type for data downloaded via <code>data</code> attribute. See the
 	 * type attribute definition in HTML 4.01.
+	 *
+	 * @return the type
 	 */
 	public String getType();
 
 	/**
 	 * Content type for data downloaded via <code>data</code> attribute. See the
 	 * type attribute definition in HTML 4.01.
+	 *
+	 * @param type the new type
 	 */
 	public void setType(String type);
 
 	/**
 	 * Use client-side image map. See the usemap attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return the use map
 	 */
 	public String getUseMap();
 
 	/**
 	 * Use client-side image map. See the usemap attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param useMap the new use map
 	 */
 	public void setUseMap(String useMap);
 
@@ -242,6 +306,8 @@ public interface HTMLObjectElement extends HTMLElement {
 	 * Vertical space, in pixels, above and below this image, applet, or object.
 	 * See the vspace attribute definition in HTML 4.01. This attribute is
 	 * deprecated in HTML 4.01.
+	 *
+	 * @return the vspace
 	 */
 	public int getVspace();
 
@@ -249,23 +315,30 @@ public interface HTMLObjectElement extends HTMLElement {
 	 * Vertical space, in pixels, above and below this image, applet, or object.
 	 * See the vspace attribute definition in HTML 4.01. This attribute is
 	 * deprecated in HTML 4.01.
+	 *
+	 * @param vspace the new vspace
 	 */
 	public void setVspace(int vspace);
 
 	/**
 	 * Override width. See the width attribute definition in HTML 4.01.
+	 *
+	 * @return the width
 	 */
 	public String getWidth();
 
 	/**
 	 * Override width. See the width attribute definition in HTML 4.01.
+	 *
+	 * @param width the new width
 	 */
 	public void setWidth(String width);
 
 	/**
 	 * The document this object contains, if there is any and it is available,
 	 * or <code>null</code> otherwise.
-	 * 
+	 *
+	 * @return the content document
 	 * @since DOM Level 2
 	 */
 	public Document getContentDocument();
@@ -273,14 +346,39 @@ public interface HTMLObjectElement extends HTMLElement {
 	
 	//public Window getContentWindow();
 
+	/**
+	 * Gets the will validate.
+	 *
+	 * @return the will validate
+	 */
 	public boolean getWillValidate();
 
+	/**
+	 * Gets the validity.
+	 *
+	 * @return the validity
+	 */
 	public ValidityState getValidity();
 
+	/**
+	 * Gets the validation message.
+	 *
+	 * @return the validation message
+	 */
 	public String getValidationMessage();
 
+	/**
+	 * Check validity.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean checkValidity();
 
+	/**
+	 * Sets the custom validity.
+	 *
+	 * @param error the new custom validity
+	 */
 	public void setCustomValidity(String error);
 
 }

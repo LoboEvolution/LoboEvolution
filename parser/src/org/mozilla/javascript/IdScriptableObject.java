@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+
 /**
 Base class for native object implementation that uses IdFunctionObject 
 to export its methods to script via class-name.prototype object.
@@ -34,26 +35,54 @@ may override scopeInit or fillConstructorProperties methods.
 public abstract class IdScriptableObject extends ScriptableObject
     implements IdFunctionCall
 {
+    
+    /** The prototype values. */
     private transient PrototypeValues prototypeValues;
 
+    /**
+     * The Class PrototypeValues.
+     */
     private static final class PrototypeValues implements Serializable
     {
+        
+        /** The Constant serialVersionUID. */
         static final long serialVersionUID = 3038645279153854371L;
 
+        /** The Constant NAME_SLOT. */
         private static final int NAME_SLOT = 1;
+        
+        /** The Constant SLOT_SPAN. */
         private static final int SLOT_SPAN = 2;
 
+        /** The obj. */
         private IdScriptableObject obj;
+        
+        /** The max id. */
         private int maxId;
+        
+        /** The value array. */
         private Object[] valueArray;
+        
+        /** The attribute array. */
         private short[] attributeArray;
 
         // The following helps to avoid creation of valueArray during runtime
         // initialization for common case of "constructor" property
+        /** The constructor id. */
         int constructorId;
+        
+        /** The constructor. */
         private IdFunctionObject constructor;
+        
+        /** The constructor attrs. */
         private short constructorAttrs;
 
+        /**
+         * Instantiates a new prototype values.
+         *
+         * @param obj the obj
+         * @param maxId the max id
+         */
         PrototypeValues(IdScriptableObject obj, int maxId)
         {
             if (obj == null) throw new IllegalArgumentException();
@@ -62,11 +91,24 @@ public abstract class IdScriptableObject extends ScriptableObject
             this.maxId = maxId;
         }
 
+        /**
+         * Gets the max id.
+         *
+         * @return the max id
+         */
         final int getMaxId()
         {
             return maxId;
         }
 
+        /**
+         * Inits the value.
+         *
+         * @param id the id
+         * @param name the name
+         * @param value the value
+         * @param attributes the attributes
+         */
         final void initValue(int id, String name, Object value, int attributes)
         {
             if (!(1 <= id && id <= maxId))
@@ -91,6 +133,14 @@ public abstract class IdScriptableObject extends ScriptableObject
             initSlot(id, name, value, attributes);
         }
 
+        /**
+         * Inits the slot.
+         *
+         * @param id the id
+         * @param name the name
+         * @param value the value
+         * @param attributes the attributes
+         */
         private void initSlot(int id, String name, Object value,
                               int attributes)
         {
@@ -115,6 +165,11 @@ public abstract class IdScriptableObject extends ScriptableObject
             }
         }
 
+        /**
+         * Creates the precached constructor.
+         *
+         * @return the id function object
+         */
         final IdFunctionObject createPrecachedConstructor()
         {
             if (constructorId != 0) throw new IllegalStateException();
@@ -135,11 +190,23 @@ public abstract class IdScriptableObject extends ScriptableObject
             return constructor;
         }
 
+        /**
+         * Find id.
+         *
+         * @param name the name
+         * @return the int
+         */
         final int findId(String name)
         {
             return obj.findPrototypeId(name);
         }
 
+        /**
+         * Checks for.
+         *
+         * @param id the id
+         * @return true, if successful
+         */
         final boolean has(int id)
         {
             Object[] array = valueArray;
@@ -156,6 +223,12 @@ public abstract class IdScriptableObject extends ScriptableObject
             return value != NOT_FOUND;
         }
 
+        /**
+         * Gets the.
+         *
+         * @param id the id
+         * @return the object
+         */
         final Object get(int id)
         {
             Object value = ensureId(id);
@@ -165,6 +238,13 @@ public abstract class IdScriptableObject extends ScriptableObject
             return value;
         }
 
+        /**
+         * Sets the.
+         *
+         * @param id the id
+         * @param start the start
+         * @param value the value
+         */
         final void set(int id, Scriptable start, Object value)
         {
             if (value == NOT_FOUND) throw new IllegalArgumentException();
@@ -188,6 +268,11 @@ public abstract class IdScriptableObject extends ScriptableObject
             }
         }
 
+        /**
+         * Delete.
+         *
+         * @param id the id
+         */
         final void delete(int id)
         {
             ensureId(id);
@@ -201,12 +286,24 @@ public abstract class IdScriptableObject extends ScriptableObject
             }
         }
 
+        /**
+         * Gets the attributes.
+         *
+         * @param id the id
+         * @return the attributes
+         */
         final int getAttributes(int id)
         {
             ensureId(id);
             return attributeArray[id - 1];
         }
 
+        /**
+         * Sets the attributes.
+         *
+         * @param id the id
+         * @param attributes the attributes
+         */
         final void setAttributes(int id, int attributes)
         {
             ScriptableObject.checkValidAttributes(attributes);
@@ -216,6 +313,13 @@ public abstract class IdScriptableObject extends ScriptableObject
             }
         }
 
+        /**
+         * Gets the names.
+         *
+         * @param getAll the get all
+         * @param extraEntries the extra entries
+         * @return the names
+         */
         final Object[] getNames(boolean getAll, Object[] extraEntries)
         {
             Object[] names = null;
@@ -251,6 +355,12 @@ public abstract class IdScriptableObject extends ScriptableObject
             }
         }
 
+        /**
+         * Ensure id.
+         *
+         * @param id the id
+         * @return the object
+         */
         private Object ensureId(int id)
         {
             Object[] array = valueArray;
@@ -285,30 +395,60 @@ public abstract class IdScriptableObject extends ScriptableObject
         }
     }
 
+    /**
+     * Instantiates a new id scriptable object.
+     */
     public IdScriptableObject()
     {
     }
 
+    /**
+     * Instantiates a new id scriptable object.
+     *
+     * @param scope the scope
+     * @param prototype the prototype
+     */
     public IdScriptableObject(Scriptable scope, Scriptable prototype)
     {
         super(scope, prototype);
     }
 
+    /**
+     * Default has.
+     *
+     * @param name the name
+     * @return true, if successful
+     */
     protected final boolean defaultHas(String name)
     {
         return super.has(name, this);
     }
 
+    /**
+     * Default get.
+     *
+     * @param name the name
+     * @return the object
+     */
     protected final Object defaultGet(String name)
     {
         return super.get(name, this);
     }
 
+    /**
+     * Default put.
+     *
+     * @param name the name
+     * @param value the value
+     */
     protected final void defaultPut(String name, Object value)
     {
         super.put(name, this, value);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#has(java.lang.String, org.mozilla.javascript.Scriptable)
+     */
     @Override
     public boolean has(String name, Scriptable start)
     {
@@ -330,6 +470,9 @@ public abstract class IdScriptableObject extends ScriptableObject
         return super.has(name, start);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#get(java.lang.String, org.mozilla.javascript.Scriptable)
+     */
     @Override
     public Object get(String name, Scriptable start)
     {
@@ -355,6 +498,9 @@ public abstract class IdScriptableObject extends ScriptableObject
         return NOT_FOUND;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#put(java.lang.String, org.mozilla.javascript.Scriptable, java.lang.Object)
+     */
     @Override
     public void put(String name, Scriptable start, Object value)
     {
@@ -390,6 +536,9 @@ public abstract class IdScriptableObject extends ScriptableObject
         super.put(name, start, value);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#delete(java.lang.String)
+     */
     @Override
     public void delete(String name)
     {
@@ -417,6 +566,9 @@ public abstract class IdScriptableObject extends ScriptableObject
         super.delete(name);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getAttributes(java.lang.String)
+     */
     @Override
     public int getAttributes(String name)
     {
@@ -434,6 +586,9 @@ public abstract class IdScriptableObject extends ScriptableObject
         return super.getAttributes(name);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#setAttributes(java.lang.String, int)
+     */
     @Override
     public void setAttributes(String name, int attributes)
     {
@@ -457,6 +612,9 @@ public abstract class IdScriptableObject extends ScriptableObject
         super.setAttributes(name, attributes);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getIds(boolean)
+     */
     @Override
     Object[] getIds(boolean getAll)
     {
@@ -507,12 +665,21 @@ public abstract class IdScriptableObject extends ScriptableObject
 
     /**
      * Get maximum id findInstanceIdInfo can generate.
+     *
+     * @return the max instance id
      */
     protected int getMaxInstanceId()
     {
         return 0;
     }
 
+    /**
+     * Instance id info.
+     *
+     * @param attributes the attributes
+     * @param id the id
+     * @return the int
+     */
     protected static int instanceIdInfo(int attributes, int id)
     {
         return (attributes << 16) | id;
@@ -522,24 +689,35 @@ public abstract class IdScriptableObject extends ScriptableObject
      * Map name to id of instance property.
      * Should return 0 if not found or the result of
      * {@link #instanceIdInfo(int, int)}.
+     *
+     * @param name the name
+     * @return the int
      */
     protected int findInstanceIdInfo(String name)
     {
         return 0;
     }
 
-    /** Map id back to property name it defines.
+    /**
+     *  Map id back to property name it defines.
+     *
+     * @param id the id
+     * @return the instance id name
      */
     protected String getInstanceIdName(int id)
     {
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
-    /** Get id value.
-     ** If id value is constant, descendant can call cacheIdValue to store
-     ** value in the permanent cache.
-     ** Default implementation creates IdFunctionObject instance for given id
-     ** and cache its value
+    /**
+     *  Get id value.
+     * * If id value is constant, descendant can call cacheIdValue to store
+     * * value in the permanent cache.
+     * * Default implementation creates IdFunctionObject instance for given id
+     * * and cache its value
+     *
+     * @param id the id
+     * @return the instance id value
      */
     protected Object getInstanceIdValue(int id)
     {
@@ -549,6 +727,9 @@ public abstract class IdScriptableObject extends ScriptableObject
     /**
      * Set or delete id value. If value == NOT_FOUND , the implementation
      * should make sure that the following getInstanceIdValue return NOT_FOUND.
+     *
+     * @param id the id
+     * @param value the value
      */
     protected void setInstanceIdValue(int id, Object value)
     {
@@ -569,14 +750,31 @@ public abstract class IdScriptableObject extends ScriptableObject
                 + " " + getInstanceIdName(id) + " property");
     }
 
-    /** 'thisObj' will be null if invoked as constructor, in which case
-     ** instance of Scriptable should be returned. */
+    /**
+     *  'thisObj' will be null if invoked as constructor, in which case
+     * * instance of Scriptable should be returned.
+     *
+     * @param f the f
+     * @param cx the cx
+     * @param scope the scope
+     * @param thisObj the this obj
+     * @param args the args
+     * @return the object
+     */
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
     {
         throw f.unknown();
     }
 
+    /**
+     * Export as js class.
+     *
+     * @param maxPrototypeId the max prototype id
+     * @param scope the scope
+     * @param sealed the sealed
+     * @return the id function object
+     */
     public final IdFunctionObject exportAsJSClass(int maxPrototypeId,
                                                   Scriptable scope,
                                                   boolean sealed)
@@ -600,11 +798,21 @@ public abstract class IdScriptableObject extends ScriptableObject
         return ctor;
     }
 
+    /**
+     * Checks for prototype map.
+     *
+     * @return true, if successful
+     */
     public final boolean hasPrototypeMap()
     {
         return prototypeValues != null;
     }
 
+    /**
+     * Activate prototype map.
+     *
+     * @param maxPrototypeId the max prototype id
+     */
     public final void activatePrototypeMap(int maxPrototypeId)
     {
         PrototypeValues values = new PrototypeValues(this, maxPrototypeId);
@@ -615,6 +823,14 @@ public abstract class IdScriptableObject extends ScriptableObject
         }
     }
 
+    /**
+     * Inits the prototype method.
+     *
+     * @param tag the tag
+     * @param id the id
+     * @param name the name
+     * @param arity the arity
+     */
     public final void initPrototypeMethod(Object tag, int id, String name,
                                           int arity)
     {
@@ -623,6 +839,11 @@ public abstract class IdScriptableObject extends ScriptableObject
         prototypeValues.initValue(id, name, f, DONTENUM);
     }
 
+    /**
+     * Inits the prototype constructor.
+     *
+     * @param f the f
+     */
     public final void initPrototypeConstructor(IdFunctionObject f)
     {
         int id = prototypeValues.constructorId;
@@ -634,26 +855,59 @@ public abstract class IdScriptableObject extends ScriptableObject
         prototypeValues.initValue(id, "constructor", f, DONTENUM);
     }
 
+    /**
+     * Inits the prototype value.
+     *
+     * @param id the id
+     * @param name the name
+     * @param value the value
+     * @param attributes the attributes
+     */
     public final void initPrototypeValue(int id, String name, Object value,
                                          int attributes)
     {
         prototypeValues.initValue(id, name, value, attributes);
     }
 
+    /**
+     * Inits the prototype id.
+     *
+     * @param id the id
+     */
     protected void initPrototypeId(int id)
     {
         throw new IllegalStateException(String.valueOf(id));
     }
 
+    /**
+     * Find prototype id.
+     *
+     * @param name the name
+     * @return the int
+     */
     protected int findPrototypeId(String name)
     {
         throw new IllegalStateException(name);
     }
 
+    /**
+     * Fill constructor properties.
+     *
+     * @param ctor the ctor
+     */
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
     }
 
+    /**
+     * Adds the id function property.
+     *
+     * @param obj the obj
+     * @param tag the tag
+     * @param id the id
+     * @param name the name
+     * @param arity the arity
+     */
     protected void addIdFunctionProperty(Scriptable obj, Object tag, int id,
                                          String name, int arity)
     {
@@ -677,11 +931,11 @@ public abstract class IdScriptableObject extends ScriptableObject
      * </pre>
      * Note that although such function can be implemented universally via
      * java.lang.Class.isInstance(), it would be much more slower.
+     *
      * @param f function that is attempting to convert 'this'
      * object.
      * @return Scriptable object suitable for a check by the instanceof
      * operator.
-     * @throws RuntimeException if no more instanceof target can be found
      */
     protected static EcmaError incompatibleCallError(IdFunctionObject f)
     {
@@ -689,6 +943,16 @@ public abstract class IdScriptableObject extends ScriptableObject
                                        f.getFunctionName());
     }
 
+    /**
+     * New id function.
+     *
+     * @param tag the tag
+     * @param id the id
+     * @param name the name
+     * @param arity the arity
+     * @param scope the scope
+     * @return the id function object
+     */
     private IdFunctionObject newIdFunction(Object tag, int id, String name,
                                            int arity, Scriptable scope)
     {
@@ -698,6 +962,9 @@ public abstract class IdScriptableObject extends ScriptableObject
         return f;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#defineOwnProperty(org.mozilla.javascript.Context, java.lang.Object, org.mozilla.javascript.ScriptableObject)
+     */
     @Override
     public void defineOwnProperty(Context cx, Object key, ScriptableObject desc) {
       if (key instanceof String) {
@@ -750,6 +1017,9 @@ public abstract class IdScriptableObject extends ScriptableObject
     }
 
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getOwnPropertyDescriptor(org.mozilla.javascript.Context, java.lang.Object)
+     */
     @Override
     protected ScriptableObject getOwnPropertyDescriptor(Context cx, Object id) {
       ScriptableObject desc = super.getOwnPropertyDescriptor(cx, id);
@@ -759,6 +1029,12 @@ public abstract class IdScriptableObject extends ScriptableObject
       return desc;
     }
 
+    /**
+     * Gets the built in descriptor.
+     *
+     * @param name the name
+     * @return the built in descriptor
+     */
     private ScriptableObject getBuiltInDescriptor(String name) {
       Object value = null;
       int attr = EMPTY;
@@ -786,6 +1062,13 @@ public abstract class IdScriptableObject extends ScriptableObject
       return null;
     }
 
+    /**
+     * Read object.
+     *
+     * @param stream the stream
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws ClassNotFoundException the class not found exception
+     */
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException
     {
@@ -796,6 +1079,12 @@ public abstract class IdScriptableObject extends ScriptableObject
         }
     }
 
+    /**
+     * Write object.
+     *
+     * @param stream the stream
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private void writeObject(ObjectOutputStream stream)
         throws IOException
     {

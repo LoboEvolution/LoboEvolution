@@ -24,26 +24,44 @@ package org.lobobrowser.ua;
 
 import java.io.File;
 
+
 /**
  * Represents a URL parameter. It may be a GET or POST parameter.
  */
 public interface Parameter {
+	
 	/**
 	 * Gets the parameter name.
+	 *
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * Determines if the parameter value is best represented as text.
+	 *
+	 * @return true, if is text
 	 */
 	public boolean isText();
 
 	/**
 	 * Gets the value as text.
+	 *
+	 * @return the text value
 	 */
 	public String getTextValue();
 
+	/**
+	 * Checks if is file.
+	 *
+	 * @return true, if is file
+	 */
 	public boolean isFile();
 
+	/**
+	 * Gets the file value.
+	 *
+	 * @return the file value
+	 */
 	public File[] getFileValue();
 }

@@ -6,6 +6,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * This class implements generator objects. See
  * http://developer.mozilla.org/en/docs/New_in_JavaScript_1.7#Generators
@@ -13,10 +14,20 @@ package org.mozilla.javascript;
  * @author Norris Boyd
  */
 public final class NativeGenerator extends IdScriptableObject {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1645892441041347273L;
 
+    /** The Constant GENERATOR_TAG. */
     private static final Object GENERATOR_TAG = "Generator";
 
+    /**
+     * Inits the.
+     *
+     * @param scope the scope
+     * @param sealed the sealed
+     * @return the native generator
+     */
     static NativeGenerator init(ScriptableObject scope, boolean sealed) {
         // Generator
         // Can't use "NativeGenerator().exportAsJSClass" since we don't want
@@ -48,6 +59,13 @@ public final class NativeGenerator extends IdScriptableObject {
      */
     private NativeGenerator() { }
 
+    /**
+     * Instantiates a new native generator.
+     *
+     * @param scope the scope
+     * @param function the function
+     * @param savedState the saved state
+     */
     public NativeGenerator(Scriptable scope, NativeFunction function,
                            Object savedState)
     {
@@ -63,22 +81,39 @@ public final class NativeGenerator extends IdScriptableObject {
         this.setPrototype(prototype);
     }
 
+    /** The Constant GENERATOR_CLOSE. */
     public static final int GENERATOR_SEND  = 0,
                             GENERATOR_THROW = 1,
                             GENERATOR_CLOSE = 2;
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getClassName()
+     */
     @Override
     public String getClassName() {
         return "Generator";
     }
 
+    /**
+     * The Class CloseGeneratorAction.
+     */
     private static class CloseGeneratorAction implements ContextAction {
+        
+        /** The generator. */
         private NativeGenerator generator;
 
+        /**
+         * Instantiates a new close generator action.
+         *
+         * @param generator the generator
+         */
         CloseGeneratorAction(NativeGenerator generator) {
             this.generator = generator;
         }
 
+        /* (non-Javadoc)
+         * @see org.mozilla.javascript.ContextAction#run(org.mozilla.javascript.Context)
+         */
         public Object run(Context cx) {
             Scriptable scope = ScriptableObject.getTopLevelScope(generator);
             Callable closeGenerator = new Callable() {
@@ -93,6 +128,9 @@ public final class NativeGenerator extends IdScriptableObject {
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
+     */
     @Override
     protected void initPrototypeId(int id) {
         String s;
@@ -108,6 +146,9 @@ public final class NativeGenerator extends IdScriptableObject {
         initPrototypeMethod(GENERATOR_TAG, id, s, arity);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -155,6 +196,15 @@ public final class NativeGenerator extends IdScriptableObject {
         }
     }
 
+    /**
+     * Resume.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param operation the operation
+     * @param value the value
+     * @return the object
+     */
     private Object resume(Context cx, Scriptable scope, int operation,
                           Object value)
     {
@@ -201,7 +251,10 @@ public final class NativeGenerator extends IdScriptableObject {
 
 // #string_id_map#
 
-    @Override
+    /* (non-Javadoc)
+ * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
+ */
+@Override
     protected int findPrototypeId(String s) {
         int id;
 // #generated# Last update: 2007-06-14 13:13:03 EDT
@@ -225,6 +278,7 @@ public final class NativeGenerator extends IdScriptableObject {
         return id;
     }
 
+    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         Id_close                 = 1,
         Id_next                  = 2,
@@ -234,14 +288,30 @@ public final class NativeGenerator extends IdScriptableObject {
         MAX_PROTOTYPE_ID         = 5;
 
 // #/string_id_map#
-    private NativeFunction function;
+    /** The function. */
+private NativeFunction function;
+    
+    /** The saved state. */
     private Object savedState;
+    
+    /** The line source. */
     private String lineSource;
+    
+    /** The line number. */
     private int lineNumber;
+    
+    /** The first time. */
     private boolean firstTime = true;
+    
+    /** The locked. */
     private boolean locked;
 
+    /**
+     * The Class GeneratorClosedException.
+     */
     public static class GeneratorClosedException extends RuntimeException {
+        
+        /** The Constant serialVersionUID. */
         private static final long serialVersionUID = 2561315658662379681L;
     }
 }

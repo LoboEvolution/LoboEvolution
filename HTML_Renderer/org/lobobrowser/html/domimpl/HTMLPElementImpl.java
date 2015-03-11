@@ -5,20 +5,39 @@ import org.lobobrowser.html.renderstate.ParagraphRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.w3c.HTMLParagraphElement;
 
+
+/**
+ * The Class HTMLPElementImpl.
+ */
 public class HTMLPElementImpl extends HTMLAbstractUIElement implements
 		HTMLParagraphElement {
+	
+	/**
+	 * Instantiates a new HTMLP element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLPElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLParagraphElement#getAlign()
+	 */
 	public String getAlign() {
 		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLParagraphElement#setAlign(java.lang.String)
+	 */
 	public void setAlign(String align) {
 		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.StringBuffer)
+	 */
 	protected void appendInnerTextImpl(StringBuffer buffer) {
 		int length = buffer.length();
 		int lineBreaks;
@@ -44,6 +63,9 @@ public class HTMLPElementImpl extends HTMLAbstractUIElement implements
 		buffer.append("\r\n\r\n");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new ParagraphRenderState(prevRenderState, this);
 	}

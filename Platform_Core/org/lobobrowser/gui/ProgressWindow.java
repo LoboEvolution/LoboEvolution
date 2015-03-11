@@ -43,15 +43,22 @@ import org.lobobrowser.request.ClientletRequestHandler;
 import org.lobobrowser.request.UserAgentImpl;
 import org.lobobrowser.ua.NavigatorProgressEvent;
 
+
 /**
  * Progress window shown before a window is opened.
  */
 public class ProgressWindow extends JFrame {
+	
+	/** The status progress bar. */
 	private final OpenProgressBar statusProgressBar;
+	
+	/** The status label. */
 	private final JLabel statusLabel;
 
 	/**
-	 * @throws java.awt.HeadlessException
+	 * Instantiates a new progress window.
+	 *
+	 * @throws HeadlessException the headless exception
 	 */
 	public ProgressWindow() throws HeadlessException {
 		super(UserAgentImpl.getInstance().getName());
@@ -80,6 +87,11 @@ public class ProgressWindow extends JFrame {
 		topPanel.add(statusProgressBar, BorderLayout.CENTER);
 	}
 
+	/**
+	 * Update progress.
+	 *
+	 * @param event the event
+	 */
 	public void updateProgress(NavigatorProgressEvent event) {
 		statusLabel.setText(ClientletRequestHandler.getProgressMessage(
 				event.getProgressType(), event.getUrl()));
@@ -104,10 +116,22 @@ public class ProgressWindow extends JFrame {
 		}
 	}
 
+	/**
+	 * Round1.
+	 *
+	 * @param value the value
+	 * @return the double
+	 */
 	private static double round1(double value) {
 		return Math.round(value * 10.0) / 10.0;
 	}
 
+	/**
+	 * Gets the size text.
+	 *
+	 * @param numBytes the num bytes
+	 * @return the size text
+	 */
 	private static String getSizeText(int numBytes) {
 		if (numBytes < 1024) {
 			return "";

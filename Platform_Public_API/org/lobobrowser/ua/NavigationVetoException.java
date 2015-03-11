@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.ua;
 
+
 /**
  * An exception thrown by {@link NavigationListener} methods in order to prevent
  * navigation from occurring.
@@ -27,18 +28,38 @@ package org.lobobrowser.ua;
  * @see NavigationListener
  */
 public class NavigationVetoException extends Exception {
+	
+	/**
+	 * Instantiates a new navigation veto exception.
+	 */
 	public NavigationVetoException() {
 		super();
 	}
 
+	/**
+	 * Instantiates a new navigation veto exception.
+	 *
+	 * @param message the message
+	 * @param cause the cause
+	 */
 	public NavigationVetoException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
+	/**
+	 * Instantiates a new navigation veto exception.
+	 *
+	 * @param message the message
+	 */
 	public NavigationVetoException(String message) {
 		super(message);
 	}
 
+	/**
+	 * Instantiates a new navigation veto exception.
+	 *
+	 * @param cause the cause
+	 */
 	public NavigationVetoException(Throwable cause) {
 		super(cause);
 	}

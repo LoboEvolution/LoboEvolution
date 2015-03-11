@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
+
 /**
  * A URL-based script provider that can load modules against a set of base
  * privileged and fallback URIs. It is deliberately not named "URI provider"
@@ -33,12 +34,21 @@ import java.util.List;
  */
 public class UrlModuleSourceProvider extends ModuleSourceProviderBase
 {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /** The privileged uris. */
     private final Iterable<URI> privilegedUris;
+    
+    /** The fallback uris. */
     private final Iterable<URI> fallbackUris;
+    
+    /** The url connection security domain provider. */
     private final UrlConnectionSecurityDomainProvider
         urlConnectionSecurityDomainProvider;
+    
+    /** The url connection expiry calculator. */
     private final UrlConnectionExpiryCalculator urlConnectionExpiryCalculator;
 
     /**
@@ -85,6 +95,9 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
             urlConnectionSecurityDomainProvider;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.commonjs.module.provider.ModuleSourceProviderBase#loadFromPrivilegedLocations(java.lang.String, java.lang.Object)
+     */
     @Override
     protected ModuleSource loadFromPrivilegedLocations(
             String moduleId, Object validator)
@@ -93,6 +106,9 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
         return loadFromPathList(moduleId, validator, privilegedUris);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.commonjs.module.provider.ModuleSourceProviderBase#loadFromFallbackLocations(java.lang.String, java.lang.Object)
+     */
     @Override
     protected ModuleSource loadFromFallbackLocations(
             String moduleId, Object validator)
@@ -101,6 +117,16 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
         return loadFromPathList(moduleId, validator, fallbackUris);
     }
 
+    /**
+     * Load from path list.
+     *
+     * @param moduleId the module id
+     * @param validator the validator
+     * @param paths the paths
+     * @return the module source
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws URISyntaxException the URI syntax exception
+     */
     private ModuleSource loadFromPathList(String moduleId,
             Object validator, Iterable<URI> paths)
             throws IOException, URISyntaxException
@@ -118,6 +144,9 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
         return null;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.commonjs.module.provider.ModuleSourceProviderBase#loadFromUri(java.net.URI, java.net.URI, java.lang.Object)
+     */
     @Override
     protected ModuleSource loadFromUri(URI uri, URI base, Object validator)
     throws IOException, URISyntaxException
@@ -131,6 +160,15 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
                source : loadFromActualUri(uri, base, validator);
     }
 
+    /**
+     * Load from actual uri.
+     *
+     * @param uri the uri
+     * @param base the base
+     * @param validator the validator
+     * @return the module source
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     protected ModuleSource loadFromActualUri(URI uri, URI base, Object validator)
     throws IOException
     {
@@ -177,6 +215,13 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
         }
     }
 
+    /**
+     * Gets the reader.
+     *
+     * @param urlConnection the url connection
+     * @return the reader
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private static Reader getReader(URLConnection urlConnection)
     throws IOException
     {
@@ -184,6 +229,12 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
                 getCharacterEncoding(urlConnection));
     }
 
+    /**
+     * Gets the character encoding.
+     *
+     * @param urlConnection the url connection
+     * @return the character encoding
+     */
     private static String getCharacterEncoding(URLConnection urlConnection) {
         final ParsedContentType pct = new ParsedContentType(
                 urlConnection.getContentType());
@@ -200,12 +251,23 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
         }
     }
 
+    /**
+     * Gets the security domain.
+     *
+     * @param urlConnection the url connection
+     * @return the security domain
+     */
     private Object getSecurityDomain(URLConnection urlConnection) {
         return urlConnectionSecurityDomainProvider == null ? null :
             urlConnectionSecurityDomainProvider.getSecurityDomain(
                     urlConnection);
     }
 
+    /**
+     * Close.
+     *
+     * @param urlConnection the url connection
+     */
     private void close(URLConnection urlConnection) {
         try {
             urlConnection.getInputStream().close();
@@ -236,20 +298,43 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
         return url.openConnection();
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.commonjs.module.provider.ModuleSourceProviderBase#entityNeedsRevalidation(java.lang.Object)
+     */
     @Override
     protected boolean entityNeedsRevalidation(Object validator) {
         return !(validator instanceof URLValidator)
                 || ((URLValidator)validator).entityNeedsRevalidation();
     }
 
+    /**
+     * The Class URLValidator.
+     */
     private static class URLValidator implements Serializable {
+        
+        /** The Constant serialVersionUID. */
         private static final long serialVersionUID = 1L;
 
+        /** The uri. */
         private final URI uri;
+        
+        /** The last modified. */
         private final long lastModified;
+        
+        /** The entity tags. */
         private final String entityTags;
+        
+        /** The expiry. */
         private long expiry;
 
+        /**
+         * Instantiates a new URL validator.
+         *
+         * @param uri the uri
+         * @param urlConnection the url connection
+         * @param request_time the request_time
+         * @param urlConnectionExpiryCalculator the url connection expiry calculator
+         */
         public URLValidator(URI uri, URLConnection urlConnection,
                 long request_time, UrlConnectionExpiryCalculator
                 urlConnectionExpiryCalculator) {
@@ -260,6 +345,15 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
                     urlConnectionExpiryCalculator);
         }
 
+        /**
+         * Update validator.
+         *
+         * @param urlConnection the url connection
+         * @param request_time the request_time
+         * @param urlConnectionExpiryCalculator the url connection expiry calculator
+         * @return true, if successful
+         * @throws IOException Signals that an I/O exception has occurred.
+         */
         boolean updateValidator(URLConnection urlConnection, long request_time,
                 UrlConnectionExpiryCalculator urlConnectionExpiryCalculator)
         throws IOException
@@ -272,6 +366,13 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
             return isResourceChanged;
         }
 
+        /**
+         * Checks if is resource changed.
+         *
+         * @param urlConnection the url connection
+         * @return true, if is resource changed
+         * @throws IOException Signals that an I/O exception has occurred.
+         */
         private boolean isResourceChanged(URLConnection urlConnection)
         throws IOException {
             if(urlConnection instanceof HttpURLConnection) {
@@ -281,6 +382,14 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
             return lastModified == urlConnection.getLastModified();
         }
 
+        /**
+         * Calculate expiry.
+         *
+         * @param urlConnection the url connection
+         * @param request_time the request_time
+         * @param urlConnectionExpiryCalculator the url connection expiry calculator
+         * @return the long
+         */
         private long calculateExpiry(URLConnection urlConnection,
                 long request_time, UrlConnectionExpiryCalculator
                 urlConnectionExpiryCalculator)
@@ -318,6 +427,12 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
                 urlConnectionExpiryCalculator.calculateExpiry(urlConnection);
         }
 
+        /**
+         * Gets the max age.
+         *
+         * @param cacheControl the cache control
+         * @return the max age
+         */
         private int getMaxAge(String cacheControl) {
             final int maxAgeIndex = cacheControl.indexOf("max-age");
             if(maxAgeIndex == -1) {
@@ -343,6 +458,12 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
             }
         }
 
+        /**
+         * Gets the entity tags.
+         *
+         * @param urlConnection the url connection
+         * @return the entity tags
+         */
         private String getEntityTags(URLConnection urlConnection) {
             final List<String> etags = urlConnection.getHeaderFields().get("ETag");
             if(etags == null || etags.isEmpty()) {
@@ -357,10 +478,21 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
             return b.toString();
         }
 
+        /**
+         * Applies to.
+         *
+         * @param uri the uri
+         * @return true, if successful
+         */
         boolean appliesTo(URI uri) {
             return this.uri.equals(uri);
         }
 
+        /**
+         * Apply conditionals.
+         *
+         * @param urlConnection the url connection
+         */
         void applyConditionals(URLConnection urlConnection) {
             if(lastModified != 0L) {
                 urlConnection.setIfModifiedSince(lastModified);
@@ -370,6 +502,11 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase
             }
         }
 
+        /**
+         * Entity needs revalidation.
+         *
+         * @return true, if successful
+         */
         boolean entityNeedsRevalidation() {
             return System.currentTimeMillis() > expiry;
         }

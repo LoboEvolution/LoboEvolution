@@ -28,15 +28,32 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+
+/**
+ * The Class FilteredCollection.
+ */
 public class FilteredCollection implements Collection {
+	
+	/** The filter. */
 	private final ObjectFilter filter;
+	
+	/** The source collection. */
 	private final Collection sourceCollection;
 
+	/**
+	 * Instantiates a new filtered collection.
+	 *
+	 * @param sourceCollection the source collection
+	 * @param filter the filter
+	 */
 	public FilteredCollection(Collection sourceCollection, ObjectFilter filter) {
 		this.filter = filter;
 		this.sourceCollection = sourceCollection;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Collection#size()
+	 */
 	public int size() {
 		int count = 0;
 		Iterator i = this.sourceCollection.iterator();
@@ -48,6 +65,9 @@ public class FilteredCollection implements Collection {
 		return count;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Collection#isEmpty()
+	 */
 	public boolean isEmpty() {
 		Iterator i = this.sourceCollection.iterator();
 		while (i.hasNext()) {
@@ -58,6 +78,9 @@ public class FilteredCollection implements Collection {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Collection#contains(java.lang.Object)
+	 */
 	public boolean contains(Object o) {
 		return this.sourceCollection.contains(this.filter.encode(o));
 	}
@@ -119,10 +142,16 @@ public class FilteredCollection implements Collection {
 		};
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Collection#toArray()
+	 */
 	public Object[] toArray() {
 		return this.toArray(new Object[0]);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Collection#toArray(java.lang.Object[])
+	 */
 	public Object[] toArray(Object[] a) {
 		Collection bucket = new ArrayList();
 		Iterator i = this.sourceCollection.iterator();
@@ -135,14 +164,23 @@ public class FilteredCollection implements Collection {
 		return bucket.toArray(a);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Collection#add(java.lang.Object)
+	 */
 	public boolean add(Object o) {
 		return this.sourceCollection.add(this.filter.encode(o));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Collection#remove(java.lang.Object)
+	 */
 	public boolean remove(Object o) {
 		return this.sourceCollection.remove(this.filter.encode(o));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Collection#containsAll(java.util.Collection)
+	 */
 	public boolean containsAll(Collection c) {
 		Iterator i = c.iterator();
 		while (i.hasNext()) {
@@ -153,6 +191,9 @@ public class FilteredCollection implements Collection {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Collection#addAll(java.util.Collection)
+	 */
 	public boolean addAll(Collection c) {
 		boolean result = false;
 		Iterator i = c.iterator();
@@ -164,6 +205,9 @@ public class FilteredCollection implements Collection {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Collection#removeAll(java.util.Collection)
+	 */
 	public boolean removeAll(Collection c) {
 		boolean result = false;
 		Iterator i = c.iterator();
@@ -175,6 +219,9 @@ public class FilteredCollection implements Collection {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Collection#retainAll(java.util.Collection)
+	 */
 	public boolean retainAll(Collection c) {
 		boolean result = false;
 		Object[] values = this.toArray();
@@ -188,6 +235,9 @@ public class FilteredCollection implements Collection {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Collection#clear()
+	 */
 	public void clear() {
 		Object[] values = this.toArray();
 		for (int i = 0; i < values.length; i++) {

@@ -29,28 +29,53 @@ import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.w3c.HTMLBaseFontElement;
 
+
+/**
+ * The Class HTMLBaseFontElementImpl.
+ */
 public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements
 		HTMLBaseFontElement {
+	
+	/**
+	 * Instantiates a new HTML base font element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLBaseFontElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBaseFontElement#getColor()
+	 */
 	public String getColor() {
 		return this.getAttribute(HtmlAttributeProperties.COLOR);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBaseFontElement#getFace()
+	 */
 	public String getFace() {
 		return this.getAttribute(HtmlAttributeProperties.FACE);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBaseFontElement#setColor(java.lang.String)
+	 */
 	public void setColor(String color) {
 		this.setAttribute(HtmlAttributeProperties.COLOR, color);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBaseFontElement#setFace(java.lang.String)
+	 */
 	public void setFace(String face) {
 		this.setAttribute(HtmlAttributeProperties.FACE, face);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBaseFontElement#getSize()
+	 */
 	public int getSize() {
 		try {
 			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.SIZE));
@@ -61,10 +86,16 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBaseFontElement#setSize(int)
+	 */
 	public void setSize(int size) {
 		this.setAttribute(HtmlAttributeProperties.SIZE, String.valueOf(size));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		String size = this.getAttribute(HtmlAttributeProperties.SIZE);
 		if (size != null) {
@@ -76,6 +107,9 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements
 		return super.createRenderState(prevRenderState);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createDefaultStyleSheet()
+	 */
 	protected AbstractCSS2Properties createDefaultStyleSheet() {
 		String fontFamily = this.getAttribute(HtmlAttributeProperties.FACE);
 		String color = this.getAttribute(HtmlAttributeProperties.COLOR);

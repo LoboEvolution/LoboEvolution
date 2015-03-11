@@ -40,12 +40,26 @@ import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.renderer.HtmlController;
 import org.lobobrowser.util.gui.WrapperLayout;
 
+
+/**
+ * The Class BaseInputTextControl.
+ */
 abstract class BaseInputTextControl extends BaseInputControl {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant DEFAULT_FONT_SIZE. */
 	private static final float DEFAULT_FONT_SIZE = 14.0f;
+	
+	/** The widget. */
 	protected final JTextComponent widget;
 
+	/**
+	 * Instantiates a new base input text control.
+	 *
+	 * @param modelNode the model node
+	 */
 	public BaseInputTextControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		this.setLayout(WrapperLayout.getInstance());
@@ -82,6 +96,9 @@ abstract class BaseInputTextControl extends BaseInputControl {
 		this.add(widget);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#reset(int, int)
+	 */
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		String maxLengthText = this.controlElement.getAttribute(HtmlAttributeProperties.MAXLENGTH);
@@ -95,8 +112,14 @@ abstract class BaseInputTextControl extends BaseInputControl {
 
 	}
 
+	/**
+	 * Creates the text field.
+	 *
+	 * @return the j text component
+	 */
 	protected abstract JTextComponent createTextField();
 
+	/** The max length. */
 	private int maxLength = -1;
 
 	/*
@@ -172,6 +195,9 @@ abstract class BaseInputTextControl extends BaseInputControl {
 		this.widget.setText(value);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
 	public java.awt.Dimension getPreferredSize() {
 		int size = this.size;
 		JTextComponent widget = this.widget;
@@ -187,6 +213,9 @@ abstract class BaseInputTextControl extends BaseInputControl {
 		return new java.awt.Dimension(pw, ph);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.InputContext#resetInput()
+	 */
 	public void resetInput() {
 		this.widget.setText("");
 	}
@@ -196,6 +225,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	 */
 	private class LimitedDocument extends javax.swing.text.PlainDocument {
 
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		/*

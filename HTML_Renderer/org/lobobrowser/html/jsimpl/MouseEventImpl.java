@@ -8,24 +8,56 @@ import org.lobobrowser.html.w3c.events.EventTarget;
 import org.lobobrowser.html.w3c.events.MouseEvent;
 import org.w3c.dom.views.AbstractView;
 
+
+/**
+ * The Class MouseEventImpl.
+ */
 public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 	
+	/**
+	 * Instantiates a new mouse event impl.
+	 */
 	public MouseEventImpl() {
 	}
 
+	/**
+	 * Instantiates a new mouse event impl.
+	 *
+	 * @param type the type
+	 * @param srcElement the src element
+	 */
 	public MouseEventImpl(String type, HTMLElement srcElement) {
 		super(type, srcElement);
 	}
 
+	/**
+	 * Instantiates a new mouse event impl.
+	 *
+	 * @param type the type
+	 * @param srcElement the src element
+	 * @param mouseEvent the mouse event
+	 * @param leafX the leaf x
+	 * @param leafY the leaf y
+	 */
 	public MouseEventImpl(String type, HTMLElement srcElement,
 			InputEvent mouseEvent, int leafX, int leafY) {
 		super(type, srcElement, mouseEvent, leafX, leafY);
 	}
 
+	/**
+	 * Instantiates a new mouse event impl.
+	 *
+	 * @param type the type
+	 * @param srcElement the src element
+	 * @param keyEvent the key event
+	 */
 	public MouseEventImpl(String type, HTMLElement srcElement, KeyEvent keyEvent) {
 		super(type, srcElement, keyEvent);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.events.MouseEvent#initMouseEvent(java.lang.String, boolean, boolean, org.w3c.dom.views.AbstractView, int, int, int, int, int, boolean, boolean, boolean, boolean, int, org.lobobrowser.html.w3c.events.EventTarget)
+	 */
 	@Override
 	public void initMouseEvent(String type, boolean canBubble,
 			boolean cancelable, AbstractView view, int detail,
@@ -40,6 +72,9 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.events.MouseEvent#initMouseEventNS(java.lang.String, java.lang.String, boolean, boolean, org.w3c.dom.views.AbstractView, int, int, int, int, int, boolean, boolean, boolean, boolean, int, org.lobobrowser.html.w3c.events.EventTarget)
+	 */
 	@Override
 	public void initMouseEventNS(String namespaceURI, String type, boolean canBubble,
 			boolean cancelable, AbstractView view, int detail,
@@ -65,47 +100,71 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.events.MouseEvent#getRelatedTarget()
+	 */
 	@Override
 	public HTMLElement getRelatedTarget() {
 		return this.getSrcElement();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.events.MouseEvent#getModifierState(java.lang.String)
+	 */
 	@Override
 	public boolean getModifierState(String key) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.events.MouseEvent#getPageX()
+	 */
 	@Override
 	public int getPageX() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.events.MouseEvent#getPageY()
+	 */
 	@Override
 	public int getPageY() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.events.MouseEvent#getX()
+	 */
 	@Override
 	public int getX() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.events.MouseEvent#getY()
+	 */
 	@Override
 	public int getY() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.events.MouseEvent#getOffsetX()
+	 */
 	@Override
 	public int getOffsetX() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.events.MouseEvent#getOffsetY()
+	 */
 	@Override
 	public int getOffsetY() {
 		// TODO Auto-generated method stub

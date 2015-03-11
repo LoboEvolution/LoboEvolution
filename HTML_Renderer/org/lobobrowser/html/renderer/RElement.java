@@ -23,6 +23,7 @@ package org.lobobrowser.html.renderer;
 
 import org.lobobrowser.html.dombl.UINode;
 
+
 /**
  * A renderer node for elements such as blocks, lists, tables, inputs, images,
  * etc.
@@ -44,25 +45,68 @@ public interface RElement extends RCollection, UINode, BoundableRenderable {
 	/**
 	 * Vertical alignment for elements rendered in a line. Returns one of the
 	 * constants defined in this class.
+	 *
+	 * @return the v align
 	 */
 	public int getVAlign();
 
+	/**
+	 * Gets the margin top.
+	 *
+	 * @return the margin top
+	 */
 	public int getMarginTop();
 
+	/**
+	 * Gets the margin left.
+	 *
+	 * @return the margin left
+	 */
 	public int getMarginLeft();
 
+	/**
+	 * Gets the margin bottom.
+	 *
+	 * @return the margin bottom
+	 */
 	public int getMarginBottom();
 
+	/**
+	 * Gets the margin right.
+	 *
+	 * @return the margin right
+	 */
 	public int getMarginRight();
 
+	/**
+	 * Gets the collapsible margin top.
+	 *
+	 * @return the collapsible margin top
+	 */
 	public int getCollapsibleMarginTop();
 
+	/**
+	 * Gets the collapsible margin bottom.
+	 *
+	 * @return the collapsible margin bottom
+	 */
 	public int getCollapsibleMarginBottom();
 
+	/** The Constant VALIGN_TOP. */
 	public static final int VALIGN_TOP = 0;
+	
+	/** The Constant VALIGN_MIDDLE. */
 	public static final int VALIGN_MIDDLE = 1;
+	
+	/** The Constant VALIGN_BOTTOM. */
 	public static final int VALIGN_BOTTOM = 2;
+	
+	/** The Constant VALIGN_ABSMIDDLE. */
 	public static final int VALIGN_ABSMIDDLE = 3;
+	
+	/** The Constant VALIGN_ABSBOTTOM. */
 	public static final int VALIGN_ABSBOTTOM = 4;
+	
+	/** The Constant VALIGN_BASELINE. */
 	public static final int VALIGN_BASELINE = 5;
 }

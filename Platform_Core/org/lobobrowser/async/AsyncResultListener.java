@@ -25,11 +25,13 @@ package org.lobobrowser.async;
 
 import java.util.EventListener;
 
+
 /**
  * Listener of asynchronous results.
- * 
- * @see org.lobobrowser.async.AsyncResult
+ *
  * @author J. H. S.
+ * @param <TResult> the generic type
+ * @see org.lobobrowser.async.AsyncResult
  */
 public interface AsyncResultListener<TResult> extends EventListener {
 	/**

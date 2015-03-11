@@ -24,14 +24,26 @@ package org.lobobrowser.ua;
 
 import org.lobobrowser.clientlet.ClientletResponse;
 
+
 /**
  * A navigator event containing an exception.
  * 
  * @see NavigatorErrorListener#errorOcurred(NavigatorExceptionEvent)
  */
 public class NavigatorExceptionEvent extends NavigatorResponseEvent {
+	
+	/** The exception. */
 	private final Throwable exception;
 
+	/**
+	 * Instantiates a new navigator exception event.
+	 *
+	 * @param source the source
+	 * @param eventType the event type
+	 * @param clientletFrame the clientlet frame
+	 * @param response the response
+	 * @param exception the exception
+	 */
 	public NavigatorExceptionEvent(Object source, NavigatorEventType eventType,
 			NavigatorFrame clientletFrame, ClientletResponse response,
 			final Throwable exception) {
@@ -40,6 +52,11 @@ public class NavigatorExceptionEvent extends NavigatorResponseEvent {
 		this.exception = exception;
 	}
 
+	/**
+	 * Gets the exception.
+	 *
+	 * @return the exception
+	 */
 	public Throwable getException() {
 		return exception;
 	}

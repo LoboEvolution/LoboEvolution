@@ -25,19 +25,36 @@ package org.lobobrowser.request;
 
 import java.io.Serializable;
 
+
 /**
+ * The Class CookieValue.
+ *
  * @author J. H. S.
  */
 public class CookieValue implements Serializable {
 	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 225784501000400500L;
+	
+	/** The value. */
 	private String value;
+	
+	/** The path. */
 	private String path;
+	
+	/** The domain. */
 	private String domain;
+	
+	/** The expiration time. */
 	private Long expirationTime;
 
 	/**
-	 * 
+	 * Instantiates a new cookie value.
+	 *
+	 * @param value the value
+	 * @param path the path
+	 * @param domain the domain
+	 * @param expirationTime the expiration time
 	 */
 	public CookieValue(String value, String path, String domain,Long expirationTime) {
 		this.value = value;
@@ -46,34 +63,68 @@ public class CookieValue implements Serializable {
 		this.domain = domain;
 	}
 
+	/**
+	 * Instantiates a new cookie value.
+	 *
+	 * @param value the value
+	 * @param path the path
+	 */
 	public CookieValue(String value, String path) {
 		this.value = value;
 		this.path = path;
 		this.expirationTime = null;
 	}
 
+	/**
+	 * Gets the value.
+	 *
+	 * @return the value
+	 */
 	public String getValue() {
 		return this.value;
 	}
 
+	/**
+	 * Gets the expires.
+	 *
+	 * @return the expires
+	 */
 	public Long getExpires() {
 		return this.expirationTime;
 	}
 
+	/**
+	 * Gets the path.
+	 *
+	 * @return the path
+	 */
 	public String getPath() {
 		return path;
 	}
 	
+	/**
+	 * Gets the domain.
+	 *
+	 * @return the domain
+	 */
 	public String getDomain() {
 		return domain;
 	}
 
+	/**
+	 * Checks if is expired.
+	 *
+	 * @return true, if is expired
+	 */
 	public boolean isExpired() {
 		Long exp = this.expirationTime;
 		return exp == null ? false : exp.longValue() < System
 				.currentTimeMillis();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return "CookieValue[value=" + value + ",path=" + path + ",expiration="
 				+ expirationTime + "]";

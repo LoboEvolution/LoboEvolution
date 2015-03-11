@@ -24,6 +24,7 @@ package org.lobobrowser.ua;
 
 import org.lobobrowser.clientlet.ClientletSelector;
 
+
 /**
  * This interface must be implemented by a platform extension or plugin.
  */
@@ -47,16 +48,16 @@ public interface NavigatorExtension {
 	 * <p>
 	 * Note that this method may not be invoked if the window does not require
 	 * any toolbars, status bars, address bars or menus.
-	 * 
-	 * @param wcontext
+	 *
+	 * @param wcontext the wcontext
 	 */
 	public void windowOpening(NavigatorWindow wcontext);
 
 	/**
 	 * Invoked when a window is about to close. At this point the extension can
 	 * perform cleanup operations that are window specific.
-	 * 
-	 * @param wcontext
+	 *
+	 * @param wcontext the wcontext
 	 */
 	public void windowClosing(NavigatorWindow wcontext);
 

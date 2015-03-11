@@ -21,7 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
+ * The Class JavaMembers.
  *
  * @author Mike Shaver
  * @author Norris Boyd
@@ -30,11 +32,25 @@ import java.util.Map;
  */
 class JavaMembers
 {
+    
+    /**
+     * Instantiates a new java members.
+     *
+     * @param scope the scope
+     * @param cl the cl
+     */
     JavaMembers(Scriptable scope, Class<?> cl)
     {
         this(scope, cl, false);
     }
 
+    /**
+     * Instantiates a new java members.
+     *
+     * @param scope the scope
+     * @param cl the cl
+     * @param includeProtected the include protected
+     */
     JavaMembers(Scriptable scope, Class<?> cl, boolean includeProtected)
     {
         try {
@@ -55,6 +71,13 @@ class JavaMembers
         }
     }
 
+    /**
+     * Checks for.
+     *
+     * @param name the name
+     * @param isStatic the is static
+     * @return true, if successful
+     */
     boolean has(String name, boolean isStatic)
     {
         Map<String,Object> ht = isStatic ? staticMembers : members;
@@ -65,6 +88,15 @@ class JavaMembers
         return findExplicitFunction(name, isStatic) != null;
     }
 
+    /**
+     * Gets the.
+     *
+     * @param scope the scope
+     * @param name the name
+     * @param javaObject the java object
+     * @param isStatic the is static
+     * @return the object
+     */
     Object get(Scriptable scope, String name, Object javaObject,
                boolean isStatic)
     {
@@ -106,6 +138,15 @@ class JavaMembers
         return cx.getWrapFactory().wrap(cx, scope, rval, type);
     }
 
+    /**
+     * Put.
+     *
+     * @param scope the scope
+     * @param name the name
+     * @param javaObject the java object
+     * @param value the value
+     * @param isStatic the is static
+     */
     void put(Scriptable scope, String name, Object javaObject,
              Object value, boolean isStatic)
     {
@@ -171,12 +212,24 @@ class JavaMembers
         }
     }
 
+    /**
+     * Gets the ids.
+     *
+     * @param isStatic the is static
+     * @return the ids
+     */
     Object[] getIds(boolean isStatic)
     {
         Map<String,Object> map = isStatic ? staticMembers : members;
         return map.keySet().toArray(new Object[map.size()]);
     }
 
+    /**
+     * Java signature.
+     *
+     * @param type the type
+     * @return the string
+     */
     static String javaSignature(Class<?> type)
     {
         if (!type.isArray()) {
@@ -204,6 +257,12 @@ class JavaMembers
         }
     }
 
+    /**
+     * Live connect signature.
+     *
+     * @param argTypes the arg types
+     * @return the string
+     */
     static String liveConnectSignature(Class<?>[] argTypes)
     {
         int N = argTypes.length;
@@ -220,6 +279,13 @@ class JavaMembers
         return sb.toString();
     }
 
+    /**
+     * Find explicit function.
+     *
+     * @param name the name
+     * @param isStatic the is static
+     * @return the member box
+     */
     private MemberBox findExplicitFunction(String name, boolean isStatic)
     {
         int sigStart = name.indexOf('(');
@@ -261,6 +327,15 @@ class JavaMembers
         return null;
     }
 
+    /**
+     * Gets the explicit function.
+     *
+     * @param scope the scope
+     * @param name the name
+     * @param javaObject the java object
+     * @param isStatic the is static
+     * @return the explicit function
+     */
     private Object getExplicitFunction(Scriptable scope, String name,
                                        Object javaObject, boolean isStatic)
     {
@@ -302,6 +377,11 @@ class JavaMembers
      * signature as its public methods from public superclasses and
      * interfaces (if they exist). Basically upcasts every method to the
      * nearest accessible method.
+     *
+     * @param clazz the clazz
+     * @param includeProtected the include protected
+     * @param includePrivate the include private
+     * @return the method[]
      */
     private static Method[] discoverAccessibleMethods(Class<?> clazz,
                                                       boolean includeProtected,
@@ -312,6 +392,14 @@ class JavaMembers
         return map.values().toArray(new Method[map.size()]);
     }
 
+    /**
+     * Discover accessible methods.
+     *
+     * @param clazz the clazz
+     * @param map the map
+     * @param includeProtected the include protected
+     * @param includePrivate the include private
+     */
     private static void discoverAccessibleMethods(Class<?> clazz,
             Map<MethodSignature,Method> map, boolean includeProtected,
             boolean includePrivate)
@@ -383,22 +471,43 @@ class JavaMembers
         }
     }
 
+    /**
+     * The Class MethodSignature.
+     */
     private static final class MethodSignature
     {
+        
+        /** The name. */
         private final String name;
+        
+        /** The args. */
         private final Class<?>[] args;
 
+        /**
+         * Instantiates a new method signature.
+         *
+         * @param name the name
+         * @param args the args
+         */
         private MethodSignature(String name, Class<?>[] args)
         {
             this.name = name;
             this.args = args;
         }
 
+        /**
+         * Instantiates a new method signature.
+         *
+         * @param method the method
+         */
         MethodSignature(Method method)
         {
             this(method.getName(), method.getParameterTypes());
         }
 
+        /* (non-Javadoc)
+         * @see java.lang.Object#equals(java.lang.Object)
+         */
         @Override
         public boolean equals(Object o)
         {
@@ -410,6 +519,9 @@ class JavaMembers
             return false;
         }
 
+        /* (non-Javadoc)
+         * @see java.lang.Object#hashCode()
+         */
         @Override
         public int hashCode()
         {
@@ -417,6 +529,13 @@ class JavaMembers
         }
     }
 
+    /**
+     * Reflect.
+     *
+     * @param scope the scope
+     * @param includeProtected the include protected
+     * @param includePrivate the include private
+     */
     private void reflect(Scriptable scope,
                          boolean includeProtected,
                          boolean includePrivate)
@@ -642,6 +761,12 @@ class JavaMembers
         ctors = new NativeJavaMethod(ctorMembers, cl.getSimpleName());
     }
 
+    /**
+     * Gets the accessible constructors.
+     *
+     * @param includePrivate the include private
+     * @return the accessible constructors
+     */
     private Constructor<?>[] getAccessibleConstructors(boolean includePrivate)
     {
       // The JVM currently doesn't allow changing access on java.lang.Class
@@ -662,6 +787,13 @@ class JavaMembers
       return cl.getConstructors();
     }
 
+    /**
+     * Gets the accessible fields.
+     *
+     * @param includeProtected the include protected
+     * @param includePrivate the include private
+     * @return the accessible fields
+     */
     private Field[] getAccessibleFields(boolean includeProtected,
                                         boolean includePrivate) {
         if (includePrivate || includeProtected) {
@@ -694,6 +826,15 @@ class JavaMembers
         return cl.getFields();
     }
 
+    /**
+     * Find getter.
+     *
+     * @param isStatic the is static
+     * @param ht the ht
+     * @param prefix the prefix
+     * @param propertyName the property name
+     * @return the member box
+     */
     private MemberBox findGetter(boolean isStatic, Map<String,Object> ht, String prefix,
                                  String propertyName)
     {
@@ -709,6 +850,13 @@ class JavaMembers
         return null;
     }
 
+    /**
+     * Extract get method.
+     *
+     * @param methods the methods
+     * @param isStatic the is static
+     * @return the member box
+     */
     private static MemberBox extractGetMethod(MemberBox[] methods,
                                               boolean isStatic)
     {
@@ -728,6 +876,14 @@ class JavaMembers
         return null;
     }
 
+    /**
+     * Extract set method.
+     *
+     * @param type the type
+     * @param methods the methods
+     * @param isStatic the is static
+     * @return the member box
+     */
     private static MemberBox extractSetMethod(Class<?> type, MemberBox[] methods,
                                               boolean isStatic)
     {
@@ -761,6 +917,13 @@ class JavaMembers
         return null;
     }
 
+    /**
+     * Extract set method.
+     *
+     * @param methods the methods
+     * @param isStatic the is static
+     * @return the member box
+     */
     private static MemberBox extractSetMethod(MemberBox[] methods,
                                               boolean isStatic)
     {
@@ -777,6 +940,14 @@ class JavaMembers
         return null;
     }
 
+    /**
+     * Gets the field and methods objects.
+     *
+     * @param scope the scope
+     * @param javaObject the java object
+     * @param isStatic the is static
+     * @return the field and methods objects
+     */
     Map<String,FieldAndMethods> getFieldAndMethodsObjects(Scriptable scope,
             Object javaObject, boolean isStatic)
     {
@@ -794,6 +965,15 @@ class JavaMembers
         return result;
     }
 
+    /**
+     * Lookup class.
+     *
+     * @param scope the scope
+     * @param dynamicType the dynamic type
+     * @param staticType the static type
+     * @param includeProtected the include protected
+     * @return the java members
+     */
     static JavaMembers lookupClass(Scriptable scope, Class<?> dynamicType,
                                    Class<?> staticType, boolean includeProtected)
     {
@@ -850,17 +1030,34 @@ class JavaMembers
         return members;
     }
 
+    /**
+     * Report member not found.
+     *
+     * @param memberName the member name
+     * @return the runtime exception
+     */
     RuntimeException reportMemberNotFound(String memberName)
     {
         return Context.reportRuntimeError2(
             "msg.java.member.not.found", cl.getName(), memberName);
     }
 
+    /** The cl. */
     private Class<?> cl;
+    
+    /** The members. */
     private Map<String,Object> members;
+    
+    /** The field and methods. */
     private Map<String,FieldAndMethods> fieldAndMethods;
+    
+    /** The static members. */
     private Map<String,Object> staticMembers;
+    
+    /** The static field and methods. */
     private Map<String,FieldAndMethods> staticFieldAndMethods;
+    
+    /** The ctors. */
     NativeJavaMethod ctors; // we use NativeJavaMethod for ctor overload resolution
 }
 

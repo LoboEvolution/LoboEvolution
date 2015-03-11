@@ -53,8 +53,14 @@ import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.GUITasks;
 import org.w3c.dom.css.CSS2Properties;
 
+
+/**
+ * The Class BaseElementRenderable.
+ */
 public abstract class BaseElementRenderable extends BaseRCollection implements
 		RElement, RenderableContainer, java.awt.image.ImageObserver {
+	
+	/** The Constant INVALID_SIZE. */
 	protected static final Integer INVALID_SIZE = new Integer(Integer.MIN_VALUE);
 
 	/**
@@ -74,46 +80,105 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 	 * case of a Document node.
 	 */
 	protected Color backgroundColor;
+	
+	/** The background image. */
 	protected volatile Image backgroundImage;
+	
+	/** The z index. */
 	protected int zIndex;
+	
+	/** The border top color. */
 	protected Color borderTopColor;
+	
+	/** The border left color. */
 	protected Color borderLeftColor;
+	
+	/** The border bottom color. */
 	protected Color borderBottomColor;
+	
+	/** The border right color. */
 	protected Color borderRightColor;
+	
+	/** The border insets. */
 	protected Insets borderInsets;
+	
+	/** The margin insets. */
 	protected Insets marginInsets;
+	
+	/** The padding insets. */
 	protected Insets paddingInsets;
+	
+	/** The border info. */
 	protected BorderInfo borderInfo;
+	
+	/** The last background image uri. */
 	protected URL lastBackgroundImageUri;
+	
+	/** The default margin insets. */
 	protected Insets defaultMarginInsets = null;
+	
+	/** The default padding insets. */
 	protected Insets defaultPaddingInsets = null;
+	
+	/** The overflow x. */
 	protected int overflowX;
+	
+	/** The overflow y. */
 	protected int overflowY;
 
+	/** The user agent context. */
 	protected final UserAgentContext userAgentContext;
 
+	/**
+	 * Instantiates a new base element renderable.
+	 *
+	 * @param container the container
+	 * @param modelNode the model node
+	 * @param ucontext the ucontext
+	 */
 	public BaseElementRenderable(RenderableContainer container,
 			ModelNode modelNode, UserAgentContext ucontext) {
 		super(container, modelNode);
 		this.userAgentContext = ucontext;
 	}
 
+	/**
+	 * Sets the default padding insets.
+	 *
+	 * @param insets the new default padding insets
+	 */
 	public void setDefaultPaddingInsets(Insets insets) {
 		this.defaultPaddingInsets = insets;
 	}
 
+	/**
+	 * Sets the default margin insets.
+	 *
+	 * @param insets the new default margin insets
+	 */
 	public void setDefaultMarginInsets(Insets insets) {
 		this.defaultMarginInsets = insets;
 	}
 
+	/**
+	 * Gets the alignment x.
+	 *
+	 * @return the alignment x
+	 */
 	public float getAlignmentX() {
 		return 0.0f;
 	}
 
+	/**
+	 * Gets the alignment y.
+	 *
+	 * @return the alignment y
+	 */
 	public float getAlignmentY() {
 		return 0.0f;
 	}
 
+	/** The layout deep can be invalidated. */
 	protected boolean layoutDeepCanBeInvalidated = false;
 
 	/**
@@ -136,6 +201,9 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseBoundableRenderable#invalidateLayoutLocal()
+	 */
 	protected void invalidateLayoutLocal() {
 		RenderState rs = this.modelNode.getRenderState();
 		if (rs != null) {
@@ -149,11 +217,25 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		this.lastAvailWidthForDeclared = -1;
 	}
 
+	/** The declared width. */
 	private Integer declaredWidth = INVALID_SIZE;
+	
+	/** The declared height. */
 	private Integer declaredHeight = INVALID_SIZE;
+	
+	/** The last avail width for declared. */
 	private int lastAvailWidthForDeclared = -1;
+	
+	/** The last avail height for declared. */
 	private int lastAvailHeightForDeclared = -1;
 
+	/**
+	 * Gets the declared width.
+	 *
+	 * @param renderState the render state
+	 * @param actualAvailWidth the actual avail width
+	 * @return the declared width
+	 */
 	protected Integer getDeclaredWidth(RenderState renderState,
 			int actualAvailWidth) {
 		Integer dw = this.declaredWidth;
@@ -168,6 +250,11 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		return dw;
 	}
 
+	/**
+	 * Checks for declared width.
+	 *
+	 * @return true, if successful
+	 */
 	public final boolean hasDeclaredWidth() {
 		Integer dw = this.declaredWidth;
 		if (dw == INVALID_SIZE) {
@@ -185,6 +272,13 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		return dw != null;
 	}
 
+	/**
+	 * Gets the declared width impl.
+	 *
+	 * @param renderState the render state
+	 * @param availWidth the avail width
+	 * @return the declared width impl
+	 */
 	private final int getDeclaredWidthImpl(RenderState renderState,
 			int availWidth) {
 		Object rootNode = this.modelNode;
@@ -205,6 +299,13 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		}
 	}
 
+	/**
+	 * Gets the declared height.
+	 *
+	 * @param renderState the render state
+	 * @param actualAvailHeight the actual avail height
+	 * @return the declared height
+	 */
 	protected Integer getDeclaredHeight(RenderState renderState,
 			int actualAvailHeight) {
 		Integer dh = this.declaredHeight;
@@ -219,6 +320,13 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		return dh;
 	}
 
+	/**
+	 * Gets the declared height impl.
+	 *
+	 * @param renderState the render state
+	 * @param availHeight the avail height
+	 * @return the declared height impl
+	 */
 	protected int getDeclaredHeightImpl(RenderState renderState, int availHeight) {
 		Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLElementImpl) {
@@ -240,6 +348,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 
 	/**
 	 * All overriders should call super implementation.
+	 *
+	 * @param g the g
 	 */
 	public void paint(Graphics g) {
 	}
@@ -247,6 +357,10 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 	/**
 	 * Lays out children, and deals with "valid" state. Override doLayout method
 	 * instead of this one.
+	 *
+	 * @param availWidth the avail width
+	 * @param availHeight the avail height
+	 * @param sizeOnly the size only
 	 */
 	public final void layout(int availWidth, int availHeight, boolean sizeOnly) {
 		// Must call doLayout regardless of validity state.
@@ -258,9 +372,19 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		}
 	}
 
+	/**
+	 * Do layout.
+	 *
+	 * @param availWidth the avail width
+	 * @param availHeight the avail height
+	 * @param sizeOnly the size only
+	 */
 	protected abstract void doLayout(int availWidth, int availHeight,
 			boolean sizeOnly);
 
+	/**
+	 * Send gui components to parent.
+	 */
 	protected final void sendGUIComponentsToParent() {
 		// Ensures that parent has all the components
 		// below this renderer node. (Parent expected to have removed them).
@@ -276,6 +400,9 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		}
 	}
 
+	/**
+	 * Clear gui components.
+	 */
 	protected final void clearGUIComponents() {
 		Collection<Component> gc = this.guiComponents;
 		if (gc != null) {
@@ -303,6 +430,9 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		return component;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RenderableContainer#updateAllWidgetBounds()
+	 */
 	public void updateAllWidgetBounds() {
 		this.container.updateAllWidgetBounds();
 	}
@@ -316,6 +446,9 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		this.updateWidgetBounds(guiPoint.x, guiPoint.y);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.UINode#getBoundsRelativeToBlock()
+	 */
 	public Rectangle getBoundsRelativeToBlock() {
 		RCollection parent = this;
 		int x = 0, y = 0;
@@ -330,6 +463,11 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		return new Rectangle(x, y, this.getWidth(), this.getHeight());
 	}
 
+	/**
+	 * Clear style.
+	 *
+	 * @param isRootBlock the is root block
+	 */
 	protected void clearStyle(boolean isRootBlock) {
 		this.borderInfo = null;
 		this.borderInsets = null;
@@ -368,6 +506,12 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		}
 	}
 
+	/**
+	 * Apply style.
+	 *
+	 * @param availWidth the avail width
+	 * @param availHeight the avail height
+	 */
 	protected void applyStyle(int availWidth, int availHeight) {
 		// TODO: Can be optimized if there's no style?
 		// TODO: There's part of this that doesn't depend on availWidth
@@ -533,6 +677,11 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		// Check if background image needs to be loaded
 	}
 
+	/**
+	 * Load background image.
+	 *
+	 * @param imageURL the image url
+	 */
 	protected void loadBackgroundImage(final URL imageURL) {
 		ModelNode rc = this.modelNode;
 		UserAgentContext ctx = this.userAgentContext;
@@ -584,46 +733,94 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseRenderable#getZIndex()
+	 */
 	public int getZIndex() {
 		return this.zIndex;
 	}
 
+	/**
+	 * Gets the border top color.
+	 *
+	 * @return the border top color
+	 */
 	private Color getBorderTopColor() {
 		Color c = this.borderTopColor;
 		return c == null ? Color.black : c;
 	}
 
+	/**
+	 * Gets the border left color.
+	 *
+	 * @return the border left color
+	 */
 	private Color getBorderLeftColor() {
 		Color c = this.borderLeftColor;
 		return c == null ? Color.black : c;
 	}
 
+	/**
+	 * Gets the border bottom color.
+	 *
+	 * @return the border bottom color
+	 */
 	private Color getBorderBottomColor() {
 		Color c = this.borderBottomColor;
 		return c == null ? Color.black : c;
 	}
 
+	/**
+	 * Gets the border right color.
+	 *
+	 * @return the border right color
+	 */
 	private Color getBorderRightColor() {
 		Color c = this.borderRightColor;
 		return c == null ? Color.black : c;
 	}
 
+	/**
+	 * Gets the width element.
+	 *
+	 * @return the width element
+	 */
 	protected int getWidthElement() {
 		return this.width;
 	}
 
+	/**
+	 * Gets the height element.
+	 *
+	 * @return the height element
+	 */
 	protected int getHeightElement() {
 		return this.height;
 	}
 
+	/**
+	 * Gets the start x.
+	 *
+	 * @return the start x
+	 */
 	protected int getStartX() {
 		return 0;
 	}
 
+	/**
+	 * Gets the start y.
+	 *
+	 * @return the start y
+	 */
 	protected int getStartY() {
 		return 0;
 	}
 
+	/**
+	 * Pre paint.
+	 *
+	 * @param g the g
+	 */
 	protected void prePaint(java.awt.Graphics g) {
 		int startWidth = getWidthElement();
 		int startHeight = getHeightElement();
@@ -835,6 +1032,9 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int, int, int, int)
+	 */
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, int w,
 			int h) {
 		// This is so that a loading image doesn't cause
@@ -846,11 +1046,16 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		return true;
 	}
 
+	/** The Constant SCROLL_BAR_THICKNESS. */
 	protected static final int SCROLL_BAR_THICKNESS = 16;
 
 	/**
 	 * Gets insets of content area. It includes margin, borders and scrollbars,
 	 * but not padding.
+	 *
+	 * @param hscroll the hscroll
+	 * @param vscroll the vscroll
+	 * @return the insets
 	 */
 	public Insets getInsets(boolean hscroll, boolean vscroll) {
 		RenderState rs = this.modelNode.getRenderState();
@@ -881,6 +1086,9 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		return new Insets(top, left, bottom, right);
 	}
 
+	/**
+	 * Send delayed pairs to parent.
+	 */
 	protected final void sendDelayedPairsToParent() {
 		// Ensures that parent has all the components
 		// below this renderer node. (Parent expected to have removed them).
@@ -897,6 +1105,9 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RenderableContainer#clearDelayedPairs()
+	 */
 	public final void clearDelayedPairs() {
 		Collection<DelayedPair> gc = this.delayedPairs;
 		if (gc != null) {
@@ -904,6 +1115,9 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RenderableContainer#getDelayedPairs()
+	 */
 	public final Collection<DelayedPair> getDelayedPairs() {
 		return this.delayedPairs;
 	}
@@ -930,14 +1144,23 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		gc.add(pair);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RenderableContainer#getParentContainer()
+	 */
 	public RenderableContainer getParentContainer() {
 		return this.container;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#isContainedByNode()
+	 */
 	public boolean isContainedByNode() {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RElement#getCollapsibleMarginBottom()
+	 */
 	public int getCollapsibleMarginBottom() {
 		int cm;
 		Insets paddingInsets = this.paddingInsets;
@@ -964,11 +1187,19 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		return cm;
 	}
 
+	/**
+	 * Checks if is margin boundary.
+	 *
+	 * @return true, if is margin boundary
+	 */
 	protected boolean isMarginBoundary() {
 		return (this.overflowY != RenderState.OVERFLOW_VISIBLE && this.overflowX != RenderState.OVERFLOW_NONE)
 				|| this.modelNode instanceof HTMLDocumentImpl;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RElement#getCollapsibleMarginTop()
+	 */
 	public int getCollapsibleMarginTop() {
 		int cm;
 		Insets paddingInsets = this.paddingInsets;
@@ -995,21 +1226,33 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		return cm;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RElement#getMarginBottom()
+	 */
 	public int getMarginBottom() {
 		Insets marginInsets = this.marginInsets;
 		return marginInsets == null ? 0 : marginInsets.bottom;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RElement#getMarginLeft()
+	 */
 	public int getMarginLeft() {
 		Insets marginInsets = this.marginInsets;
 		return marginInsets == null ? 0 : marginInsets.left;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RElement#getMarginRight()
+	 */
 	public int getMarginRight() {
 		Insets marginInsets = this.marginInsets;
 		return marginInsets == null ? 0 : marginInsets.right;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RElement#getMarginTop()
+	 */
 	public int getMarginTop() {
 		Insets marginInsets = this.marginInsets;
 		return marginInsets == null ? 0 : marginInsets.top;

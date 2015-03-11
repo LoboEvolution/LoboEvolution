@@ -8,8 +8,9 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
+
 /**
- * New expression. Node type is {@link Token#NEW}.<p>
+ * New expression. Node type is {@link Token#NEW}.
  *
  * <pre><i>NewExpression</i> :
  *      MemberExpression
@@ -21,19 +22,34 @@ import org.mozilla.javascript.Token;
  */
 public class NewExpression extends FunctionCall {
 
+    /** The initializer. */
     private ObjectLiteral initializer;
 
     {
         type = Token.NEW;
     }
 
+    /**
+     * Instantiates a new new expression.
+     */
     public NewExpression() {
     }
 
+    /**
+     * Instantiates a new new expression.
+     *
+     * @param pos the pos
+     */
     public NewExpression(int pos) {
         super(pos);
     }
 
+    /**
+     * Instantiates a new new expression.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public NewExpression(int pos, int len) {
         super(pos, len);
     }
@@ -62,6 +78,9 @@ public class NewExpression extends FunctionCall {
           initializer.setParent(this);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.FunctionCall#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -83,6 +102,8 @@ public class NewExpression extends FunctionCall {
     /**
      * Visits this node, the target, and each argument.  If there is
      * a trailing initializer node, visits that last.
+     *
+     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

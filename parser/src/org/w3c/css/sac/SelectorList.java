@@ -8,24 +8,30 @@
  */
 package org.w3c.css.sac;
 
+
 /**
  * The SelectorList interface provides the abstraction of an ordered collection
  * of selectors, without defining or constraining how this collection is
  * implemented.
  *
- * @version $Revision: 477010 $
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  */
 public interface SelectorList {
 
 	/**
-	 * Returns the length of this selector list
+	 * Returns the length of this selector list.
+	 *
+	 * @return the length
 	 */
 	public int getLength();
 
 	/**
 	 * Returns the selector at the specified index, or <code>null</code> if this
 	 * is not a valid index.
+	 *
+	 * @param index the index
+	 * @return the selector
 	 */
 	public Selector item(int index);
 }

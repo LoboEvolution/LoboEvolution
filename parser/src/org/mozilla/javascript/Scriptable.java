@@ -8,6 +8,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * This is interface that all objects in JavaScript must implement.
  * The interface provides for the management of properties and for
@@ -21,10 +22,10 @@ package org.mozilla.javascript;
  * manipulate properties in prototype chains.
  * <p>
  *
- * @see org.mozilla.javascript.ScriptableObject
  * @author Norris Boyd
  * @author Nick Thompson
  * @author Brendan Eich
+ * @see org.mozilla.javascript.ScriptableObject
  */
 
 public interface Scriptable {
@@ -34,6 +35,8 @@ public interface Scriptable {
      * This corresponds to the [[Class]] operation in ECMA and is used
      * by Object.prototype.toString() in ECMA.<p>
      * See ECMA 8.6.2 and 15.2.4.2.
+     *
+     * @return the class name
      */
     public String getClassName();
 
@@ -55,7 +58,7 @@ public interface Scriptable {
      * this method or the form of <code>get</code> that takes an
      * integer:
      * <table>
-     * <caption> </caption>
+     * <caption>Scriptable</caption>
      * <tr><th>JavaScript code</th><th>Java code</th></tr>
      * <tr><td>a.b      </td><td>a.get("b", a)</td></tr>
      * <tr><td>a["foo"] </td><td>a.get("foo", a)</td></tr>
@@ -149,7 +152,7 @@ public interface Scriptable {
      * object's responsibility to modify <i>o</i>. <p>
      * This design allows properties to be defined in prototypes and implemented
      * in terms of getters and setters of Java values without consuming slots
-     * in each instance.<p>
+     * in each instance.
      * <p>
      * The values that may be set are limited to the following:
      * <UL>

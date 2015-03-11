@@ -57,13 +57,25 @@ import org.lobobrowser.ua.NavigatorWindow;
 import org.lobobrowser.util.Html;
 import org.lobobrowser.util.Strings;
 
+
+/**
+ * The Class ExtensionImpl.
+ */
 public class ExtensionImpl implements NavigatorExtension {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(ExtensionImpl.class
 			.getName());
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtension#destroy()
+	 */
 	public void destroy() {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtension#init(org.lobobrowser.ua.NavigatorExtensionContext)
+	 */
 	public void init(NavigatorExtensionContext pcontext) {
 		pcontext.addURLStreamHandlerFactory(new PrimaryStreamHandlerFactory());
 		pcontext.addClientletSelector(new PrimaryClientletSelector());
@@ -75,10 +87,16 @@ public class ExtensionImpl implements NavigatorExtension {
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtension#windowClosing(org.lobobrowser.ua.NavigatorWindow)
+	 */
 	public void windowClosing(NavigatorWindow wcontext) {
 		NavigationHistory.getInstance().save();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtension#windowOpening(org.lobobrowser.ua.NavigatorWindow)
+	 */
 	public void windowOpening(NavigatorWindow wcontext) {
 		ComponentSource cs = new ComponentSource(wcontext);
 		Component[] abc = cs.getAddressBarComponents();
@@ -103,6 +121,13 @@ public class ExtensionImpl implements NavigatorExtension {
 		cs.setNavigationEntry(firstEntry);
 	}
 
+	/**
+	 * Show error.
+	 *
+	 * @param frame the frame
+	 * @param response the response
+	 * @param exception the exception
+	 */
 	public static void showError(NavigatorFrame frame,
 			ClientletResponse response, Throwable exception) {
 		if (logger.isLoggable(Level.WARNING)) {
@@ -118,6 +143,14 @@ public class ExtensionImpl implements NavigatorExtension {
 		// TODO: Get window or something, and ensure current URL is shown.
 	}
 
+	/**
+	 * Gets the error component.
+	 *
+	 * @param frame the frame
+	 * @param response the response
+	 * @param exception the exception
+	 * @return the error component
+	 */
 	private static ComponentContent getErrorComponent(NavigatorFrame frame,
 			ClientletResponse response, Throwable exception) {
 		HtmlPanel panel = new HtmlPanel();
@@ -137,6 +170,12 @@ public class ExtensionImpl implements NavigatorExtension {
 				sourceCode);
 	}
 
+	/**
+	 * Gets the root cause.
+	 *
+	 * @param t the t
+	 * @return the root cause
+	 */
 	private static Throwable getRootCause(Throwable t) {
 		while (t.getCause() != null) {
 			t = t.getCause();
@@ -144,6 +183,13 @@ public class ExtensionImpl implements NavigatorExtension {
 		return t;
 	}
 
+	/**
+	 * Gets the error html.
+	 *
+	 * @param response the response
+	 * @param exception the exception
+	 * @return the error html
+	 */
 	static String getErrorHtml(ClientletResponse response, Throwable exception) {
 		URL url = response == null ? null : response.getResponseURL();
 		String method = response == null ? null : response
@@ -197,6 +243,13 @@ public class ExtensionImpl implements NavigatorExtension {
 		return swriter.toString();
 	}
 
+	/**
+	 * Gets the error url text.
+	 *
+	 * @param url the url
+	 * @param method the method
+	 * @return the error url text
+	 */
 	private static String getErrorUrlText(URL url, String method) {
 		StringBuffer buf = new StringBuffer();
 		boolean isGet = "GET".equals(method);
@@ -210,6 +263,13 @@ public class ExtensionImpl implements NavigatorExtension {
 		return buf.toString();
 	}
 
+	/**
+	 * Gets the exception meaning.
+	 *
+	 * @param url the url
+	 * @param exception the exception
+	 * @return the exception meaning
+	 */
 	private static String getExceptionMeaning(URL url,
 			Throwable exception) {
 		if (exception instanceof org.lobobrowser.clientlet.JavaVersionException) {

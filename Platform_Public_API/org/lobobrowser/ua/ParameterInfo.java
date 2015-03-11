@@ -22,19 +22,25 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.ua;
 
+
 /**
  * Represents a collection of URL parameters.
  * 
  * @author J. H. S.
  */
 public interface ParameterInfo {
+	
 	/**
 	 * Gets the POST encoding for the parameters.
+	 *
+	 * @return the encoding
 	 */
 	public String getEncoding();
 
 	/**
 	 * Gets the array of parameters.
+	 *
+	 * @return the parameters
 	 */
 	public Parameter[] getParameters();
 }

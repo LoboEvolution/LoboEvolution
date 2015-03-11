@@ -33,44 +33,77 @@ import org.w3c.css.sac.Condition;
 
 import com.steadystate.css.parser.LocatableImpl;
 
+
 /**
+ * The Class IdConditionImpl.
+ *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
 public class IdConditionImpl extends LocatableImpl implements AttributeCondition, Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 5955662524656167683L;
 
+    /** The value_. */
     private String value_;
 
+    /**
+     * Sets the value.
+     *
+     * @param value the new value
+     */
     public void setValue(final String value) {
         value_ = value;
     }
 
+    /**
+     * Instantiates a new id condition impl.
+     *
+     * @param value the value
+     */
     public IdConditionImpl(final String value) {
         setValue(value);
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Condition#getConditionType()
+     */
     public short getConditionType() {
         return Condition.SAC_ID_CONDITION;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.AttributeCondition#getNamespaceURI()
+     */
     public String getNamespaceURI() {
         return null;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.AttributeCondition#getLocalName()
+     */
     public String getLocalName() {
         return null;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.AttributeCondition#getSpecified()
+     */
     public boolean getSpecified() {
         return true;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.AttributeCondition#getValue()
+     */
     public String getValue() {
         return value_;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         final String value = getValue();

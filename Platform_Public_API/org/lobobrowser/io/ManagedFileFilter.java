@@ -22,16 +22,19 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.io;
 
+
 /**
  * A filter of managed files.
- * 
- * @see org.lobobrowser.io.ManagedFile#listFiles(ManagedFileFilter)
+ *
  * @author J. H. S.
+ * @see org.lobobrowser.io.ManagedFile#listFiles(ManagedFileFilter)
  */
 public interface ManagedFileFilter {
+	
 	/**
-	 * @param file
-	 *            A managed file.
+	 * Accept.
+	 *
+	 * @param file            A managed file.
 	 * @return True if the file is accepted by the filter, false otherwise.
 	 */
 	public boolean accept(ManagedFile file);

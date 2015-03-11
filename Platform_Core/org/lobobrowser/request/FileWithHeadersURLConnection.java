@@ -36,24 +36,43 @@ import java.util.Map;
 import org.lobobrowser.util.NameValuePair;
 import org.lobobrowser.util.io.IORoutines;
 
+
 /**
+ * The Class FileWithHeadersURLConnection.
+ *
  * @author J. H. S.
  */
 public class FileWithHeadersURLConnection extends HttpURLConnection {
+	
+	/** The content. */
 	private final byte[] content;
+	
+	/** The connected. */
 	private boolean connected = false;
+	
+	/** The input stream. */
 	private InputStream inputStream;
+	
+	/** The headers map. */
 	private final Map<String, List<String>> headersMap = new HashMap<String, List<String>>();
+	
+	/** The headers list. */
 	private final List<NameValuePair> headersList = new ArrayList<NameValuePair>();
 
 	/**
-	 * @param url
+	 * Instantiates a new file with headers url connection.
+	 *
+	 * @param url the url
+	 * @param content the content
 	 */
 	public FileWithHeadersURLConnection(URL url, byte[] content) {
 		super(url);
 		this.content = content;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.net.HttpURLConnection#disconnect()
+	 */
 	public void disconnect() {
 		if (this.connected) {
 			InputStream in = this.inputStream;
@@ -85,6 +104,12 @@ public class FileWithHeadersURLConnection extends HttpURLConnection {
 		}
 	}
 
+	/**
+	 * Read headers.
+	 *
+	 * @param in the in
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void readHeaders(InputStream in) throws IOException {
 		String line;
 		List<NameValuePair> headersList = this.headersList;
@@ -184,6 +209,9 @@ public class FileWithHeadersURLConnection extends HttpURLConnection {
 		return this.headersMap;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.net.HttpURLConnection#usingProxy()
+	 */
 	@Override
 	public boolean usingProxy() {
 		return false;

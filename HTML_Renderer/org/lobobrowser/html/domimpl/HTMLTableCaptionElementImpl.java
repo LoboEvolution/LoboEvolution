@@ -26,29 +26,57 @@ import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.renderstate.TableCaptionRenderState;
 import org.lobobrowser.html.w3c.HTMLTableCaptionElement;
 
+
+/**
+ * The Class HTMLTableCaptionElementImpl.
+ */
 public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement
 		implements HTMLTableCaptionElement {
 
+	/**
+	 * Instantiates a new HTML table caption element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLTableCaptionElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableCaptionElement#getAlign()
+	 */
 	public String getAlign() {
 		return this.getAttribute(HtmlAttributeProperties.TEXTALIGN);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableCaptionElement#setAlign(java.lang.String)
+	 */
 	public void setAlign(String align) {
 		this.setAttribute(HtmlAttributeProperties.TEXTALIGN, align);
 	}
 
+	/**
+	 * Gets the caption side.
+	 *
+	 * @return the caption side
+	 */
 	public String getCaptionSide() {
 		return this.getAttribute(HtmlAttributeProperties.CAPTIONSIDE);
 	}
 
+	/**
+	 * Sets the caption side.
+	 *
+	 * @param captionSide the new caption side
+	 */
 	public void setCaptionSide(String captionSide) {
 		this.setAttribute(HtmlAttributeProperties.CAPTIONSIDE, captionSide);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new TableCaptionRenderState(prevRenderState, this);
 	}

@@ -25,14 +25,18 @@ package org.lobobrowser.async;
 
 import java.util.EventObject;
 
+
 /**
  * An asynchronous result event. This is a generic class with a
  * <code>TResult</code> type parameter, the type of the result.
- * 
- * @see org.lobobrowser.async.AsyncResultListener
+ *
  * @author J. H. S.
+ * @param <TResult> the generic type
+ * @see org.lobobrowser.async.AsyncResultListener
  */
 public class AsyncResultEvent<TResult> extends EventObject {
+	
+	/** The result. */
 	private final TResult result;
 
 	/**
@@ -50,6 +54,8 @@ public class AsyncResultEvent<TResult> extends EventObject {
 
 	/**
 	 * Gets the asynchronous result. This may be an exception instance.
+	 *
+	 * @return the result
 	 */
 	public TResult getResult() {
 		return this.result;

@@ -12,12 +12,13 @@ import java.util.List;
 
 import org.mozilla.javascript.Token;
 
+
 /**
  * AST node for an Object literal (also called an Object initialiser in
  * Ecma-262).  The elements list will always be non-{@code null}, although
  * the list will have no elements if the Object literal is empty.<p>
  *
- * Node type is {@link Token#OBJECTLIT}.<p>
+ * Node type is {@link Token#OBJECTLIT}.
  *
  * <pre><i>ObjectLiteral</i> :
  *       <b>{}</b>
@@ -32,23 +33,41 @@ import org.mozilla.javascript.Token;
  */
 public class ObjectLiteral extends AstNode implements DestructuringForm {
 
+    /** The Constant NO_ELEMS. */
     private static final List<ObjectProperty> NO_ELEMS =
         Collections.unmodifiableList(new ArrayList<ObjectProperty>());
 
+    /** The elements. */
     private List<ObjectProperty> elements;
+    
+    /** The is destructuring. */
     boolean isDestructuring;
 
     {
         type = Token.OBJECTLIT;
     }
 
+    /**
+     * Instantiates a new object literal.
+     */
     public ObjectLiteral() {
     }
 
+    /**
+     * Instantiates a new object literal.
+     *
+     * @param pos the pos
+     */
     public ObjectLiteral(int pos) {
         super(pos);
     }
 
+    /**
+     * Instantiates a new object literal.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public ObjectLiteral(int pos, int len) {
         super(pos, len);
     }
@@ -56,6 +75,8 @@ public class ObjectLiteral extends AstNode implements DestructuringForm {
     /**
      * Returns the element list.  Returns an immutable empty list if there are
      * no elements.
+     *
+     * @return the elements
      */
     public List<ObjectProperty> getElements() {
         return elements != null ? elements : NO_ELEMS;
@@ -79,8 +100,8 @@ public class ObjectLiteral extends AstNode implements DestructuringForm {
 
     /**
      * Adds an element to the list, and sets its parent to this node.
+     *
      * @param element the property node to append to the end of the list
-     * @throws IllegalArgumentException} if element is {@code null}
      */
     public void addElement(ObjectProperty element) {
         assertNotNull(element);
@@ -95,6 +116,8 @@ public class ObjectLiteral extends AstNode implements DestructuringForm {
      * Marks this node as being a destructuring form - that is, appearing
      * in a context such as {@code for ([a, b] in ...)} where it's the
      * target of a destructuring assignment.
+     *
+     * @param destructuring the new checks if is destructuring
      */
     public void setIsDestructuring(boolean destructuring) {
         isDestructuring = destructuring;
@@ -104,11 +127,16 @@ public class ObjectLiteral extends AstNode implements DestructuringForm {
      * Returns true if this node is in a destructuring position:
      * a function parameter, the target of a variable initializer, the
      * iterator of a for..in loop, etc.
+     *
+     * @return true, if is destructuring
      */
     public boolean isDestructuring() {
         return isDestructuring;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -124,6 +152,8 @@ public class ObjectLiteral extends AstNode implements DestructuringForm {
     /**
      * Visits this node, then visits each child property node, in lexical
      * (source) order.
+     *
+     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

@@ -23,14 +23,29 @@ package org.lobobrowser.primary.ext;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+
+/**
+ * The Class SearchPageSource.
+ */
 public class SearchPageSource {
 
+	/** The action pool. */
 	private final ActionPool actionPool;
 
+	/**
+	 * Instantiates a new search page source.
+	 *
+	 * @param actionPool the action pool
+	 */
 	SearchPageSource(ActionPool actionPool) {
 		this.actionPool = actionPool;
 	}
 
+	/**
+	 * Gets the search menu.
+	 *
+	 * @return the search menu
+	 */
 	public JMenu getSearchMenu() {
 		JMenu searchMenu = new JMenu("Search");
 		searchMenu.setMnemonic('S');
@@ -40,17 +55,32 @@ public class SearchPageSource {
 		return searchMenu;
 	}
 
+	/**
+	 * Gets the google search menu.
+	 *
+	 * @return the google search menu
+	 */
 	private JMenuItem getGoogleSearchMenu() {
 		return ComponentSource.menuItem("Google",
 				this.actionPool.createNavigateAction("http://google.com"));
 	}
 
+	/**
+	 * Gets the yahoo search menu.
+	 *
+	 * @return the yahoo search menu
+	 */
 	private JMenuItem getYahooSearchMenu() {
 		return ComponentSource
 				.menuItem("Yahoo!", this.actionPool
 						.createNavigateAction("http://search.yahoo.com"));
 	}
 
+	/**
+	 * Gets the bing search menu.
+	 *
+	 * @return the bing search menu
+	 */
 	private JMenuItem getBingSearchMenu() {
 		return ComponentSource.menuItem("Bing",
 				this.actionPool.createNavigateAction("http://www.bing.com"));

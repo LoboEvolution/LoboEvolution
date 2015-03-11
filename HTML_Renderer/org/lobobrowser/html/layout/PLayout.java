@@ -23,7 +23,15 @@ package org.lobobrowser.html.layout;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.RBlockViewport;
 
+
+/**
+ * The Class PLayout.
+ */
 public class PLayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new p layout.
+	 */
 	public PLayout() {
 		super(DISPLAY_BLOCK);
 	}

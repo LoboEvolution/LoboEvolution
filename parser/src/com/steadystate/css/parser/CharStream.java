@@ -2,6 +2,9 @@
 /* JavaCCOptions:STATIC=false,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package com.steadystate.css.parser;
 
+import java.io.IOException;
+
+
 /**
  * This interface describes a character stream that maintains line and
  * column number positions of the characters.  It also has the capability
@@ -24,9 +27,17 @@ interface CharStream {
    * Returns the next character from the selected input.  The method
    * of selecting the input is the responsibility of the class
    * implementing this interface.  Can throw any java.io.IOException.
+   *
+   * @return the char
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  char readChar() throws java.io.IOException;
+  char readChar() throws IOException;
 
+  /**
+   * Gets the column.
+   *
+   * @return the column
+   */
   @Deprecated
   /**
    * Returns the column position of the character last read.
@@ -35,6 +46,11 @@ interface CharStream {
    */
   int getColumn();
 
+  /**
+   * Gets the line.
+   *
+   * @return the line
+   */
   @Deprecated
   /**
    * Returns the line number of the character last read.
@@ -46,24 +62,32 @@ interface CharStream {
   /**
    * Returns the column number of the last character for current token (being
    * matched after the last call to BeginTOken).
+   *
+   * @return the end column
    */
   int getEndColumn();
 
   /**
    * Returns the line number of the last character for current token (being
    * matched after the last call to BeginTOken).
+   *
+   * @return the end line
    */
   int getEndLine();
 
   /**
    * Returns the column number of the first character for current token (being
    * matched after the last call to BeginTOken).
+   *
+   * @return the begin column
    */
   int getBeginColumn();
 
   /**
    * Returns the line number of the first character for current token (being
    * matched after the last call to BeginTOken).
+   *
+   * @return the begin line
    */
   int getBeginLine();
 
@@ -72,6 +96,8 @@ interface CharStream {
    * had already read some characters, but could not use them to match a
    * (longer) token. So, they will be used again as the prefix of the next
    * token and it is the implemetation's responsibility to do this right.
+   *
+   * @param amount the amount
    */
   void backup(int amount);
 
@@ -79,14 +105,19 @@ interface CharStream {
    * Returns the next character that marks the beginning of the next token.
    * All characters must remain in the buffer between two successive calls
    * to this method to implement backup correctly.
+   *
+   * @return the char
+   * @throws IOException Signals that an I/O exception has occurred.
    */
-  char BeginToken() throws java.io.IOException;
+  char BeginToken() throws IOException;
 
   /**
    * Returns a string made up of characters from the marked token beginning
    * to the current buffer position. Implementations have the choice of returning
    * anything that they want to. For example, for efficiency, one might decide
    * to just return null, which is a valid implementation.
+   *
+   * @return the string
    */
   String GetImage();
 
@@ -95,11 +126,14 @@ interface CharStream {
    * the currently matched token. This is used to build up the matched string
    * for use in actions in the case of MORE. A simple and inefficient
    * implementation of this is as follows :
-   *
+   * 
    *   {
    *      String t = GetImage();
    *      return t.substring(t.length() - len, t.length()).toCharArray();
    *   }
+   *
+   * @param len the len
+   * @return the char[]
    */
   char[] GetSuffix(int len);
 

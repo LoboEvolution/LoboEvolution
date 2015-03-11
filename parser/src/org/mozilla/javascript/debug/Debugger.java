@@ -10,6 +10,7 @@ package org.mozilla.javascript.debug;
 
 import org.mozilla.javascript.Context;
 
+
 /**
 Interface to implement if the application is interested in receiving debug
 information.
@@ -28,10 +29,12 @@ bytecode is done.
                                String source);
 
 /**
-Called when execution entered a particular function or script.
-
-@return implementation of DebugFrame which receives debug information during
-        the function or script execution or null otherwise
-*/
+ * Called when execution entered a particular function or script.
+ *
+ * @param cx the cx
+ * @param fnOrScript the fn or script
+ * @return implementation of DebugFrame which receives debug information during
+ *         the function or script execution or null otherwise
+ */
     DebugFrame getFrame(Context cx, DebuggableScript fnOrScript);
 }

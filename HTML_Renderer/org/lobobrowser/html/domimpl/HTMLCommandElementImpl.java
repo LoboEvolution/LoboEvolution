@@ -22,56 +22,89 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.w3c.HTMLCommandElement;
 
+
+/**
+ * The Class HTMLCommandElementImpl.
+ */
 public class HTMLCommandElementImpl extends HTMLElementImpl implements
 		HTMLCommandElement {
 
+	/**
+	 * Instantiates a new HTML command element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLCommandElementImpl(String name) {
 		super(name);
 		// TODO Auto-generated constructor stub
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCommandElement#getType()
+	 */
 	@Override
 	public String getType() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCommandElement#setType(java.lang.String)
+	 */
 	@Override
 	public void setType(String type) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCommandElement#setLabel(java.lang.String)
+	 */
 	@Override
 	public void setLabel(String label) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCommandElement#setIcon(java.lang.String)
+	 */
 	@Override
 	public void setIcon(String icon) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCommandElement#setDisabled(boolean)
+	 */
 	@Override
 	public void setDisabled(boolean disabled) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCommandElement#setChecked(boolean)
+	 */
 	@Override
 	public void setChecked(boolean checked) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCommandElement#getRadiogroup()
+	 */
 	@Override
 	public String getRadiogroup() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCommandElement#setRadiogroup(java.lang.String)
+	 */
 	@Override
 	public void setRadiogroup(String radiogroup) {
 		// TODO Auto-generated method stub

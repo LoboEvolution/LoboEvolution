@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+
 /**
  * This class implements the Date native object.
  * See ECMA 15.9.
@@ -18,12 +19,22 @@ import java.util.TimeZone;
  */
 final class NativeDate extends IdScriptableObject
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -8307438915861678966L;
 
+    /** The Constant DATE_TAG. */
     private static final Object DATE_TAG = "Date";
 
+    /** The Constant js_NaN_date_str. */
     private static final String js_NaN_date_str = "Invalid Date";
 
+    /**
+     * Inits the.
+     *
+     * @param scope the scope
+     * @param sealed the sealed
+     */
     static void init(Scriptable scope, boolean sealed)
     {
         NativeDate obj = new NativeDate();
@@ -32,6 +43,9 @@ final class NativeDate extends IdScriptableObject
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
+    /**
+     * Instantiates a new native date.
+     */
     private NativeDate()
     {
         if (thisTimeZone == null) {
@@ -42,12 +56,18 @@ final class NativeDate extends IdScriptableObject
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getClassName()
+     */
     @Override
     public String getClassName()
     {
         return "Date";
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
+     */
     @Override
     public Object getDefaultValue(Class<?> typeHint)
     {
@@ -56,11 +76,19 @@ final class NativeDate extends IdScriptableObject
         return super.getDefaultValue(typeHint);
     }
 
+    /**
+     * Gets the JS time value.
+     *
+     * @return the JS time value
+     */
     double getJSTimeValue()
     {
         return date;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#fillConstructorProperties(org.mozilla.javascript.IdFunctionObject)
+     */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -73,6 +101,9 @@ final class NativeDate extends IdScriptableObject
         super.fillConstructorProperties(ctor);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
+     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -131,6 +162,9 @@ final class NativeDate extends IdScriptableObject
         initPrototypeMethod(DATE_TAG, id, s, arity);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -381,23 +415,56 @@ final class NativeDate extends IdScriptableObject
 
     /* ECMA helper functions */
 
+    /** The Constant HalfTimeDomain. */
     private static final double HalfTimeDomain = 8.64e15;
+    
+    /** The Constant HoursPerDay. */
     private static final double HoursPerDay    = 24.0;
+    
+    /** The Constant MinutesPerHour. */
     private static final double MinutesPerHour = 60.0;
+    
+    /** The Constant SecondsPerMinute. */
     private static final double SecondsPerMinute = 60.0;
+    
+    /** The Constant msPerSecond. */
     private static final double msPerSecond    = 1000.0;
+    
+    /** The Constant MinutesPerDay. */
     private static final double MinutesPerDay  = (HoursPerDay * MinutesPerHour);
+    
+    /** The Constant SecondsPerDay. */
     private static final double SecondsPerDay  = (MinutesPerDay * SecondsPerMinute);
+    
+    /** The Constant SecondsPerHour. */
     private static final double SecondsPerHour = (MinutesPerHour * SecondsPerMinute);
+    
+    /** The Constant msPerDay. */
     private static final double msPerDay       = (SecondsPerDay * msPerSecond);
+    
+    /** The Constant msPerHour. */
     private static final double msPerHour      = (SecondsPerHour * msPerSecond);
+    
+    /** The Constant msPerMinute. */
     private static final double msPerMinute    = (SecondsPerMinute * msPerSecond);
 
+    /**
+     * Day.
+     *
+     * @param t the t
+     * @return the double
+     */
     private static double Day(double t)
     {
         return Math.floor(t / msPerDay);
     }
 
+    /**
+     * Time within day.
+     *
+     * @param t the t
+     * @return the double
+     */
     private static double TimeWithinDay(double t)
     {
         double result;
@@ -407,6 +474,12 @@ final class NativeDate extends IdScriptableObject
         return result;
     }
 
+    /**
+     * Checks if is leap year.
+     *
+     * @param year the year
+     * @return true, if successful
+     */
     private static boolean IsLeapYear(int year)
     {
         return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
@@ -415,17 +488,35 @@ final class NativeDate extends IdScriptableObject
     /* math here has to be f.p, because we need
      *  floor((1968 - 1969) / 4) == -1
      */
+    /**
+     * Day from year.
+     *
+     * @param y the y
+     * @return the double
+     */
     private static double DayFromYear(double y)
     {
         return ((365 * ((y)-1970) + Math.floor(((y)-1969)/4.0)
                  - Math.floor(((y)-1901)/100.0) + Math.floor(((y)-1601)/400.0)));
     }
 
+    /**
+     * Time from year.
+     *
+     * @param y the y
+     * @return the double
+     */
     private static double TimeFromYear(double y)
     {
         return DayFromYear(y) * msPerDay;
     }
 
+    /**
+     * Year from time.
+     *
+     * @param t the t
+     * @return the int
+     */
     private static int YearFromTime(double t)
     {
         int lo = (int) Math.floor((t / msPerDay) / 366) + 1970;
@@ -459,6 +550,13 @@ final class NativeDate extends IdScriptableObject
         return lo;
     }
 
+    /**
+     * Day from month.
+     *
+     * @param m the m
+     * @param year the year
+     * @return the double
+     */
     private static double DayFromMonth(int m, int year)
     {
         int day = m * 30;
@@ -472,6 +570,13 @@ final class NativeDate extends IdScriptableObject
         return day;
     }
 
+    /**
+     * Days in month.
+     *
+     * @param year the year
+     * @param month the month
+     * @return the int
+     */
     private static int DaysInMonth(int year, int month)
     {
         // month is 1-based for DaysInMonth!
@@ -482,6 +587,12 @@ final class NativeDate extends IdScriptableObject
                : 30 + (month & 1);
     }
 
+    /**
+     * Month from time.
+     *
+     * @param t the t
+     * @return the int
+     */
     private static int MonthFromTime(double t)
     {
         int year = YearFromTime(t);
@@ -519,6 +630,12 @@ final class NativeDate extends IdScriptableObject
         return (d >= mstart) ? estimate + 2 : estimate + 1;
     }
 
+    /**
+     * Date from time.
+     *
+     * @param t the t
+     * @return the int
+     */
     private static int DateFromTime(double t)
     {
         int year = YearFromTime(t);
@@ -560,6 +677,12 @@ final class NativeDate extends IdScriptableObject
         return d + 1;
      }
 
+    /**
+     * Week day.
+     *
+     * @param t the t
+     * @return the int
+     */
     private static int WeekDay(double t)
     {
         double result;
@@ -570,11 +693,22 @@ final class NativeDate extends IdScriptableObject
         return (int) result;
     }
 
+    /**
+     * Now.
+     *
+     * @return the double
+     */
     private static double now()
     {
         return System.currentTimeMillis();
     }
 
+    /**
+     * Daylight saving ta.
+     *
+     * @param t the t
+     * @return the double
+     */
     private static double DaylightSavingTA(double t)
     {
         // Another workaround!  The JRE doesn't seem to know about DST
@@ -599,6 +733,12 @@ final class NativeDate extends IdScriptableObject
      * This function should be used with caution when used other than
      * for determining DST; it hasn't been proven not to produce an
      * incorrect year for times near year boundaries.
+     */
+    /**
+     * Equivalent year.
+     *
+     * @param year the year
+     * @return the int
      */
     private static int EquivalentYear(int year)
     {
@@ -632,16 +772,34 @@ final class NativeDate extends IdScriptableObject
         throw Kit.codeBug();
     }
 
+    /**
+     * Local time.
+     *
+     * @param t the t
+     * @return the double
+     */
     private static double LocalTime(double t)
     {
         return t + LocalTZA + DaylightSavingTA(t);
     }
 
+    /**
+     * Internal utc.
+     *
+     * @param t the t
+     * @return the double
+     */
     private static double internalUTC(double t)
     {
         return t - LocalTZA - DaylightSavingTA(t - LocalTZA);
     }
 
+    /**
+     * Hour from time.
+     *
+     * @param t the t
+     * @return the int
+     */
     private static int HourFromTime(double t)
     {
         double result;
@@ -651,6 +809,12 @@ final class NativeDate extends IdScriptableObject
         return (int) result;
     }
 
+    /**
+     * Min from time.
+     *
+     * @param t the t
+     * @return the int
+     */
     private static int MinFromTime(double t)
     {
         double result;
@@ -660,6 +824,12 @@ final class NativeDate extends IdScriptableObject
         return (int) result;
     }
 
+    /**
+     * Sec from time.
+     *
+     * @param t the t
+     * @return the int
+     */
     private static int SecFromTime(double t)
     {
         double result;
@@ -669,6 +839,12 @@ final class NativeDate extends IdScriptableObject
         return (int) result;
     }
 
+    /**
+     * Ms from time.
+     *
+     * @param t the t
+     * @return the int
+     */
     private static int msFromTime(double t)
     {
         double result;
@@ -678,6 +854,15 @@ final class NativeDate extends IdScriptableObject
         return (int) result;
     }
 
+    /**
+     * Make time.
+     *
+     * @param hour the hour
+     * @param min the min
+     * @param sec the sec
+     * @param ms the ms
+     * @return the double
+     */
     private static double MakeTime(double hour, double min,
                                    double sec, double ms)
     {
@@ -685,6 +870,14 @@ final class NativeDate extends IdScriptableObject
             * msPerSecond + ms;
     }
 
+    /**
+     * Make day.
+     *
+     * @param year the year
+     * @param month the month
+     * @param date the date
+     * @return the double
+     */
     private static double MakeDay(double year, double month, double date)
     {
         year += Math.floor(month / 12);
@@ -699,11 +892,24 @@ final class NativeDate extends IdScriptableObject
         return yearday + monthday + date - 1;
     }
 
+    /**
+     * Make date.
+     *
+     * @param day the day
+     * @param time the time
+     * @return the double
+     */
     private static double MakeDate(double day, double time)
     {
         return day * msPerDay + time;
     }
 
+    /**
+     * Time clip.
+     *
+     * @param d the d
+     * @return the double
+     */
     private static double TimeClip(double d)
     {
         if (d != d ||
@@ -722,6 +928,18 @@ final class NativeDate extends IdScriptableObject
     /* end of ECMA helper functions */
 
     /* find UTC time from given date... no 1900 correction! */
+    /**
+     * Date_msec from date.
+     *
+     * @param year the year
+     * @param mon the mon
+     * @param mday the mday
+     * @param hour the hour
+     * @param min the min
+     * @param sec the sec
+     * @param msec the msec
+     * @return the double
+     */
     private static double date_msecFromDate(double year, double mon,
                                             double mday, double hour,
                                             double min, double sec,
@@ -738,7 +956,15 @@ final class NativeDate extends IdScriptableObject
     }
 
     /* compute the time in msec (unclipped) from the given args */
+    /** The Constant MAXARGS. */
     private static final int MAXARGS = 7;
+    
+    /**
+     * Date_msec from args.
+     *
+     * @param args the args
+     * @return the double
+     */
     private static double date_msecFromArgs(Object[] args)
     {
         double array[] = new double[MAXARGS];
@@ -769,19 +995,28 @@ final class NativeDate extends IdScriptableObject
                                  array[3], array[4], array[5], array[6]);
     }
 
+    /**
+     * Js static function_ utc.
+     *
+     * @param args the args
+     * @return the double
+     */
     private static double jsStaticFunction_UTC(Object[] args)
     {
         return TimeClip(date_msecFromArgs(args));
     }
 
     /**
-    * 15.9.1.15 Date Time String Format<br>
-    * Parse input string according to simplified ISO-8601 Extended Format:
-    * <ul>
-    * <li><code>YYYY-MM-DD'T'HH:mm:ss.sss'Z'</code></li>
-    * <li>or <code>YYYY-MM-DD'T'HH:mm:ss.sss[+-]hh:mm</code></li>
-    * </ul>
-    */
+     * 15.9.1.15 Date Time String Format<br>
+     * Parse input string according to simplified ISO-8601 Extended Format:
+     * <ul>
+     * <li><code>YYYY-MM-DD'T'HH:mm:ss.sss'Z'</code></li>
+     * <li>or <code>YYYY-MM-DD'T'HH:mm:ss.sss[+-]hh:mm</code></li>
+     * </ul>
+     *
+     * @param s the s
+     * @return the double
+     */
     private static double parseISOString(String s) {
         // we use a simple state machine to parse the input string
         final int ERROR = -1;
@@ -927,6 +1162,12 @@ final class NativeDate extends IdScriptableObject
         return ScriptRuntime.NaN;
     }
 
+    /**
+     * Date_parse string.
+     *
+     * @param s the s
+     * @return the double
+     */
     private static double date_parseString(String s)
     {
         double d = parseISOString(s);
@@ -1140,6 +1381,13 @@ final class NativeDate extends IdScriptableObject
         }
     }
 
+    /**
+     * Date_format.
+     *
+     * @param t the t
+     * @param methodId the method id
+     * @return the string
+     */
     private static String date_format(double t, int methodId)
     {
         StringBuilder result = new StringBuilder(60);
@@ -1208,6 +1456,12 @@ final class NativeDate extends IdScriptableObject
     }
 
     /* the javascript constructor */
+    /**
+     * Js constructor.
+     *
+     * @param args the args
+     * @return the object
+     */
     private static Object jsConstructor(Object[] args)
     {
         NativeDate obj = new NativeDate();
@@ -1246,6 +1500,13 @@ final class NativeDate extends IdScriptableObject
         return obj;
     }
 
+    /**
+     * To locale_helper.
+     *
+     * @param t the t
+     * @param methodId the method id
+     * @return the string
+     */
     private static String toLocale_helper(double t, int methodId)
     {
         DateFormat formatter;
@@ -1280,6 +1541,12 @@ final class NativeDate extends IdScriptableObject
         }
     }
 
+    /**
+     * Js_to utc string.
+     *
+     * @param date the date
+     * @return the string
+     */
     private static String js_toUTCString(double date)
     {
         StringBuilder result = new StringBuilder(60);
@@ -1305,6 +1572,12 @@ final class NativeDate extends IdScriptableObject
         return result.toString();
     }
 
+    /**
+     * Js_to iso string.
+     *
+     * @param t the t
+     * @return the string
+     */
     private static String js_toISOString(double t) {
         StringBuilder result = new StringBuilder(27);
 
@@ -1333,6 +1606,13 @@ final class NativeDate extends IdScriptableObject
         return result.toString();
     }
 
+    /**
+     * Append0 padded uint.
+     *
+     * @param sb the sb
+     * @param i the i
+     * @param minWidth the min width
+     */
     private static void append0PaddedUint(StringBuilder sb, int i, int minWidth)
     {
         if (i < 0) Kit.codeBug();
@@ -1364,6 +1644,12 @@ final class NativeDate extends IdScriptableObject
         sb.append((char)('0' + i));
     }
 
+    /**
+     * Append month name.
+     *
+     * @param sb the sb
+     * @param index the index
+     */
     private static void appendMonthName(StringBuilder sb, int index)
     {
         // Take advantage of the fact that all month abbreviations
@@ -1377,6 +1663,12 @@ final class NativeDate extends IdScriptableObject
         }
     }
 
+    /**
+     * Append week day name.
+     *
+     * @param sb the sb
+     * @param index the index
+     */
     private static void appendWeekDayName(StringBuilder sb, int index)
     {
         String days = "Sun"+"Mon"+"Tue"+"Wed"+"Thu"+"Fri"+"Sat";
@@ -1386,6 +1678,14 @@ final class NativeDate extends IdScriptableObject
         }
     }
 
+    /**
+     * Make time.
+     *
+     * @param date the date
+     * @param args the args
+     * @param methodId the method id
+     * @return the double
+     */
     private static double makeTime(double date, Object[] args, int methodId)
     {
         if (args.length == 0) {
@@ -1493,6 +1793,14 @@ final class NativeDate extends IdScriptableObject
         return TimeClip(result);
     }
 
+    /**
+     * Make date.
+     *
+     * @param date the date
+     * @param args the args
+     * @param methodId the method id
+     * @return the double
+     */
     private static double makeDate(double date, Object[] args, int methodId)
     {
         /* see complaint about ECMA in date_MakeTime */
@@ -1591,7 +1899,10 @@ final class NativeDate extends IdScriptableObject
 
 // #string_id_map#
 
-    @Override
+    /* (non-Javadoc)
+ * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
+ */
+@Override
     protected int findPrototypeId(String s)
     {
         int id;
@@ -1712,6 +2023,7 @@ final class NativeDate extends IdScriptableObject
         return id;
     }
 
+    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         ConstructorId_now       = -3,
         ConstructorId_parse     = -2,
@@ -1767,18 +2079,31 @@ final class NativeDate extends IdScriptableObject
 
         MAX_PROTOTYPE_ID        = Id_toJSON;
 
+    /** The Constant Id_toGMTString. */
     private static final int
         Id_toGMTString  =  Id_toUTCString; // Alias, see Ecma B.2.6
 // #/string_id_map#
 
     /* cached values */
-    private static TimeZone thisTimeZone;
+    /** The this time zone. */
+private static TimeZone thisTimeZone;
+    
+    /** The Local tza. */
     private static double LocalTZA;
+    
+    /** The time zone formatter. */
     private static DateFormat timeZoneFormatter;
+    
+    /** The locale date time formatter. */
     private static DateFormat localeDateTimeFormatter;
+    
+    /** The locale date formatter. */
     private static DateFormat localeDateFormatter;
+    
+    /** The locale time formatter. */
     private static DateFormat localeTimeFormatter;
 
+    /** The date. */
     private double date;
 }
 

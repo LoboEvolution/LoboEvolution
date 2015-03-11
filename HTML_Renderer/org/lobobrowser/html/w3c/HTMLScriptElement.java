@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Script statements. See the SCRIPT element definition in HTML 4.01.
  * <p>
@@ -39,57 +40,78 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLScriptElement extends HTMLElement {
+	
 	/**
 	 * The script content of the element.
+	 *
+	 * @return the text
 	 */
 	public String getText();
 
 	/**
 	 * The script content of the element.
+	 *
+	 * @param text the new text
 	 */
 	public void setText(String text);
 
 	/**
 	 * Reserved for future use.
+	 *
+	 * @return the html for
 	 */
 	public String getHtmlFor();
 
 	/**
 	 * Reserved for future use.
+	 *
+	 * @param htmlFor the new html for
 	 */
 	public void setHtmlFor(String htmlFor);
 
 	/**
 	 * Reserved for future use.
+	 *
+	 * @return the event
 	 */
 	public String getEvent();
 
 	/**
 	 * Reserved for future use.
+	 *
+	 * @param event the new event
 	 */
 	public void setEvent(String event);
 
 	/**
 	 * The character encoding of the linked resource. See the charset attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the charset
 	 */
 	public String getCharset();
 
 	/**
 	 * The character encoding of the linked resource. See the charset attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param charset the new charset
 	 */
 	public void setCharset(String charset);
 
 	/**
 	 * Indicates that the user agent can defer processing of the script. See the
 	 * defer attribute definition in HTML 4.01.
+	 *
+	 * @return the defer
 	 */
 	public boolean getDefer();
 
 	/**
 	 * Indicates that the user agent can defer processing of the script. See the
 	 * defer attribute definition in HTML 4.01.
+	 *
+	 * @param defer the new defer
 	 */
 	public void setDefer(boolean defer);
 
@@ -97,6 +119,8 @@ public interface HTMLScriptElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating an external script. See the src attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return the src
 	 */
 	public String getSrc();
 
@@ -104,18 +128,24 @@ public interface HTMLScriptElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating an external script. See the src attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param src the new src
 	 */
 	public void setSrc(String src);
 
 	/**
 	 * The content type of the script language. See the type attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the type
 	 */
 	public String getType();
 
 	/**
 	 * The content type of the script language. See the type attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param type the new type
 	 */
 	public void setType(String type);
 }

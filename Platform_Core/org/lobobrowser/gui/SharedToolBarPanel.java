@@ -25,14 +25,22 @@ import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+
 /**
  * The shared toolbar component.
  */
 public class SharedToolBarPanel extends JPanel {
+	
+	/**
+	 * Instantiates a new shared tool bar panel.
+	 */
 	public SharedToolBarPanel() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
 	public Dimension getPreferredSize() {
 		return new Dimension(1, 32);
 	}

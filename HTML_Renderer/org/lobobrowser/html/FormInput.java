@@ -25,15 +25,23 @@ package org.lobobrowser.html;
 
 import java.io.File;
 
+
 /**
  * The <code>FormInput</code> class contains the state of an HTML form input
  * item.
  */
 public class FormInput {
 	
+	/** The Constant EMPTY_ARRAY. */
 	public static final FormInput[] EMPTY_ARRAY = new FormInput[0];
+	
+	/** The name. */
 	private final String name;
+	
+	/** The text value. */
 	private final String textValue;
+	
+	/** The file value. */
 	private final File[] fileValue;
 
 	/**
@@ -67,6 +75,8 @@ public class FormInput {
 
 	/**
 	 * Gets the name of the input.
+	 *
+	 * @return the name
 	 */
 	public String getName() {
 		return this.name;
@@ -74,6 +84,8 @@ public class FormInput {
 
 	/**
 	 * Returns true if the form input holds a text value.
+	 *
+	 * @return true, if is text
 	 */
 	public boolean isText() {
 		return this.textValue != null;
@@ -81,6 +93,8 @@ public class FormInput {
 
 	/**
 	 * Returns true if the form input holds a file value.
+	 *
+	 * @return true, if is file
 	 */
 	public boolean isFile() {
 		return this.fileValue != null;
@@ -89,7 +103,8 @@ public class FormInput {
 	/**
 	 * Gets the text value of the form input. If the form input does not hold a
 	 * text value, this method should not be called.
-	 * 
+	 *
+	 * @return the text value
 	 * @see #isText()
 	 */
 	public String getTextValue() {
@@ -99,7 +114,8 @@ public class FormInput {
 	/**
 	 * Gets the file value of the form input. If the form input does not hold a
 	 * file value, this method should not be called.
-	 * 
+	 *
+	 * @return the file value
 	 * @see #isFile()
 	 */
 	public File[] getFileValue() {
@@ -109,7 +125,8 @@ public class FormInput {
 	/**
 	 * Shows a string representation of the <code>FormInput</code> that may be
 	 * useful in debugging.
-	 * 
+	 *
+	 * @return the string
 	 * @see #getTextValue()
 	 */
 	public String toString() {

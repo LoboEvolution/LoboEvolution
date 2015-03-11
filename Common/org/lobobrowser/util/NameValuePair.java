@@ -23,46 +23,88 @@
  */
 package org.lobobrowser.util;
 
+
 /**
+ * The Class NameValuePair.
+ *
  * @author J. H. S.
  */
 public class NameValuePair extends AbstractBean implements Cloneable {
+	
+	/** The name. */
 	public String name;
+	
+	/** The value. */
 	public String value;
 
+	/**
+	 * Instantiates a new name value pair.
+	 */
 	public NameValuePair() {
 	}
 
+	/**
+	 * Instantiates a new name value pair.
+	 *
+	 * @param name the name
+	 * @param value the value
+	 */
 	public NameValuePair(String name, String value) {
 		this.name = name;
 		this.value = value;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		String old = getName();
 		this.name = name;
 		firePropertyChange("name", old, name);
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public final String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the value.
+	 *
+	 * @param value the new value
+	 */
 	public void setValue(String value) {
 		String old = getValue();
 		this.value = value;
 		firePropertyChange("value", old, value);
 	}
 
+	/**
+	 * Gets the value.
+	 *
+	 * @return the value
+	 */
 	public final String getValue() {
 		return value;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.util.AbstractBean#clone()
+	 */
 	@Override
 	public NameValuePair clone() {
 		return new NameValuePair(name, value);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return name + "=" + value;

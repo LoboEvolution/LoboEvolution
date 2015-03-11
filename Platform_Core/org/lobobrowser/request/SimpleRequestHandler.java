@@ -36,28 +36,56 @@ import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.ua.ProgressType;
 import org.lobobrowser.ua.RequestType;
 
+
 /**
  * Request handler used by request().
  * 
  * @author J. H. S.
  */
 public abstract class SimpleRequestHandler implements RequestHandler {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(SimpleRequestHandler.class.getName());
+	
+	/** The request. */
 	private final ClientletRequest request;
+	
+	/** The request type. */
 	private final RequestType requestType;
 
+	/**
+	 * Instantiates a new simple request handler.
+	 *
+	 * @param forNewWindow the for new window
+	 * @param url the url
+	 * @param requestType the request type
+	 */
 	public SimpleRequestHandler(boolean forNewWindow, URL url,
 			RequestType requestType) {
 		this.requestType = requestType;
 		this.request = new ClientletRequestImpl(forNewWindow, url, requestType);
 	}
 
+	/**
+	 * Instantiates a new simple request handler.
+	 *
+	 * @param url the url
+	 * @param requestType the request type
+	 */
 	public SimpleRequestHandler(URL url, RequestType requestType) {
 		this.requestType = requestType;
 		this.request = new ClientletRequestImpl(url, requestType);
 	}
 
+	/**
+	 * Instantiates a new simple request handler.
+	 *
+	 * @param url the url
+	 * @param method the method
+	 * @param altPostData the alt post data
+	 * @param requestType the request type
+	 */
 	public SimpleRequestHandler(URL url, String method, String altPostData,
 			RequestType requestType) {
 		this.requestType = requestType;
@@ -65,35 +93,63 @@ public abstract class SimpleRequestHandler implements RequestHandler {
 				requestType);
 	}
 
+	/**
+	 * Checks if is new navigation entry.
+	 *
+	 * @return true, if is new navigation entry
+	 */
 	public boolean isNewNavigationEntry() {
 		return false;
 	}
 
+	/**
+	 * Gets the cache file suffix.
+	 *
+	 * @return the cache file suffix
+	 */
 	public String getCacheFileSuffix() {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#getHostnameVerifier()
+	 */
 	public HostnameVerifier getHostnameVerifier() {
 		return new LocalHostnameVerifier();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#getLatestRequestMethod()
+	 */
 	public String getLatestRequestMethod() {
 		return this.request.getMethod();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#getLatestRequestURL()
+	 */
 	public URL getLatestRequestURL() {
 		return this.request.getRequestURL();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#getRequest()
+	 */
 	public ClientletRequest getRequest() {
 		return this.request;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#handleProgress(org.lobobrowser.ua.ProgressType, java.net.URL, java.lang.String, int, int)
+	 */
 	public void handleProgress(ProgressType progressType, URL url,
 			String method, int value, int max) {
 		// nop
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#handleException(org.lobobrowser.clientlet.ClientletResponse, java.lang.Throwable)
+	 */
 	public boolean handleException(ClientletResponse response,
 			Throwable exception) throws ClientletException {
 		logger.log(Level.WARNING,
@@ -102,20 +158,33 @@ public abstract class SimpleRequestHandler implements RequestHandler {
 		return true;
 	}
 
+	/** The cancelled. */
 	private volatile boolean cancelled;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#cancel()
+	 */
 	public void cancel() {
 		this.cancelled = true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#isCancelled()
+	 */
 	public boolean isCancelled() {
 		return this.cancelled;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#getRequestType()
+	 */
 	public RequestType getRequestType() {
 		return this.requestType;
 	}
 
+	/**
+	 * The Class LocalHostnameVerifier.
+	 */
 	private class LocalHostnameVerifier implements HostnameVerifier {
 		/*
 		 * (non-Javadoc)

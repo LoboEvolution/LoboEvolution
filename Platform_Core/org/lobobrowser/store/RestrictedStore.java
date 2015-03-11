@@ -52,7 +52,13 @@ import org.lobobrowser.io.ManagedStore;
 import org.lobobrowser.io.QuotaExceededException;
 import org.lobobrowser.util.WrapperException;
 
+
+/**
+ * The Class RestrictedStore.
+ */
 public final class RestrictedStore implements QuotaSource, ManagedStore {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(RestrictedStore.class
 			.getName());
 
@@ -60,20 +66,34 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 	 * Canonical base directory.
 	 */
 	private final File baseDirectory;
+	
+	/** The base canonical path. */
 	private final String baseCanonicalPath;
+	
+	/** The size file canonical path. */
 	private final String sizeFileCanonicalPath;
+	
+	/** The quota. */
 	private final long quota;
 
+	/** The size file name. */
 	private final String SIZE_FILE_NAME = ".W$Dir$Size";
-	/** Made up **/
+	
+	/**  Made up *. */
 	private final int EMPTY_FILE_SIZE = 64;
-	/** Made up **/
+	
+	/**  Made up *. */
 	private final int DIRECTORY_SIZE = 64;
 
+	/** The size. */
 	private long size = -1;
 
 	/**
-	 * 
+	 * Instantiates a new restricted store.
+	 *
+	 * @param baseDirectory the base directory
+	 * @param quota the quota
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public RestrictedStore(File baseDirectory, long quota) throws IOException {
 		// Security: This constructor is only allowed to be invoked
@@ -96,6 +116,12 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		this.quota = quota;
 	}
 
+	/**
+	 * Update size file.
+	 *
+	 * @return the long
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	long updateSizeFile() throws IOException {
 		long totalSize = this.computeSize();
 		long prevSize;
@@ -111,6 +137,12 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		return totalSize;
 	}
 
+	/**
+	 * Update size file impl.
+	 *
+	 * @param totalSize the total size
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void updateSizeFileImpl(long totalSize) throws IOException {
 		// The computed size is not necessarily precise. That's
 		// why we have this.
@@ -128,10 +160,16 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.io.ManagedStore#getQuota()
+	 */
 	public long getQuota() {
 		return this.quota;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.io.ManagedStore#getSize()
+	 */
 	public long getSize() throws IOException {
 		try {
 			return AccessController.doPrivileged(new PrivilegedAction<Long>() {
@@ -155,6 +193,12 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		}
 	}
 
+	/**
+	 * Gets the size from file.
+	 *
+	 * @return the size from file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private long getSizeFromFile() throws IOException {
 		File sizeFile = new File(this.baseDirectory, SIZE_FILE_NAME);
 		try {
@@ -170,10 +214,23 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		}
 	}
 
+	/**
+	 * Compute size.
+	 *
+	 * @return the long
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private long computeSize() throws IOException {
 		return this.computeSize(this.baseDirectory);
 	}
 
+	/**
+	 * Compute size.
+	 *
+	 * @param directory the directory
+	 * @return the long
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private long computeSize(File directory) throws IOException {
 		if (!directory.isDirectory()) {
 			throw new IllegalArgumentException("'directory' not a directory");
@@ -195,9 +252,15 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		return total;
 	}
 
+	/** The last updated size. */
 	private long lastUpdatedSize = Long.MIN_VALUE;
+	
+	/** The size update threshold. */
 	private static long SIZE_UPDATE_THRESHOLD = 4096;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.store.QuotaSource#addUsedBytes(long)
+	 */
 	public void addUsedBytes(long addition) throws IOException {
 		synchronized (this) {
 			// long size = this.getSize();
@@ -226,10 +289,22 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 	 * 
 	 * @see net.sourceforge.xamj.store.QuotaSource#addUsedBytes(long)
 	 */
+	/**
+	 * Subtract used bytes.
+	 *
+	 * @param reduction the reduction
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void subtractUsedBytes(long reduction) throws IOException {
 		this.addUsedBytes(-reduction);
 	}
 
+	/**
+	 * Check not size file.
+	 *
+	 * @param canonicalPath the canonical path
+	 * @param ref the ref
+	 */
 	private void checkNotSizeFile(String canonicalPath, String ref) {
 		if (this.sizeFileCanonicalPath.equals(canonicalPath)) {
 			throw new SecurityException("This particular path not allowed: "
@@ -237,6 +312,12 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		}
 	}
 
+	/**
+	 * Check path.
+	 *
+	 * @param canonicalPath the canonical path
+	 * @param ref the ref
+	 */
 	private void checkPath(String canonicalPath, String ref) {
 		if (!canonicalPath.startsWith(this.baseCanonicalPath)) {
 			throw new SecurityException("Path outside protected store: " + ref);
@@ -244,6 +325,14 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		this.checkNotSizeFile(canonicalPath, ref);
 	}
 
+	/**
+	 * Gets the input stream.
+	 *
+	 * @param fullFile the full file
+	 * @param ref the ref
+	 * @return the input stream
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public InputStream getInputStream(final File fullFile, final String ref)
 			throws IOException {
 		try {
@@ -267,6 +356,14 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		}
 	}
 
+	/**
+	 * Gets the output stream.
+	 *
+	 * @param fullFile the full file
+	 * @param ref the ref
+	 * @return the output stream
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public OutputStream getOutputStream(final File fullFile, final String ref)
 			throws IOException {
 		try {
@@ -309,6 +406,12 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		}
 	}
 
+	/**
+	 * Gets the relative path.
+	 *
+	 * @param canonicalPath the canonical path
+	 * @return the relative path
+	 */
 	private String getRelativePath(String canonicalPath) {
 		String relativePath = canonicalPath.substring(this.baseCanonicalPath
 				.length());
@@ -321,6 +424,13 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		return relativePath;
 	}
 
+	/**
+	 * Gets the paths.
+	 *
+	 * @param regexp the regexp
+	 * @return the paths
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public Collection getPaths(String regexp) throws IOException {
 		final Pattern pattern = Pattern.compile(regexp);
 		try {
@@ -348,6 +458,14 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		}
 	}
 
+	/**
+	 * Gets the paths.
+	 *
+	 * @param pattern the pattern
+	 * @param directory the directory
+	 * @return the paths
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private Collection getPaths(Pattern pattern, File directory)
 			throws IOException {
 		// Security: This method is expected to be private.
@@ -384,6 +502,9 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		return this.quota - this.getSize();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.io.ManagedStore#saveObject(java.lang.String, java.io.Serializable)
+	 */
 	public void saveObject(String path, Serializable object) throws IOException {
 		ManagedFile file = this.getManagedFile(path);
 		OutputStream out = file.openOutputStream();
@@ -397,17 +518,34 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		}
 	}
 
+	/**
+	 * Removes the object.
+	 *
+	 * @param path the path
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void removeObject(String path) throws IOException {
 		final ManagedFile file = this.getManagedFile(path);
 		file.delete();
 	}
 
+	/**
+	 * Retrieve object.
+	 *
+	 * @param path the path
+	 * @return the object
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException the class not found exception
+	 */
 	public Object retrieveObject(String path) throws IOException,
 			ClassNotFoundException {
 		return this.retrieveObject(path, Thread.currentThread()
 				.getContextClassLoader());
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.io.ManagedStore#retrieveObject(java.lang.String, java.lang.ClassLoader)
+	 */
 	public Object retrieveObject(String path, ClassLoader classLoader)
 			throws IOException, ClassNotFoundException {
 		ManagedFile file = this.getManagedFile(path);
@@ -445,10 +583,20 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		return new ManagedFileImpl(path);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.io.ManagedStore#getRootManagedDirectory()
+	 */
 	public ManagedFile getRootManagedDirectory() throws IOException {
 		return new ManagedFileImpl("/");
 	}
 
+	/**
+	 * Managed to native.
+	 *
+	 * @param path the path
+	 * @return the file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private File managedToNative(final String path) throws IOException {
 		try {
 			return AccessController.doPrivileged(new PrivilegedAction<File>() {
@@ -485,6 +633,13 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		}
 	}
 
+	/**
+	 * Native to managed.
+	 *
+	 * @param file the file
+	 * @return the managed file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private ManagedFile nativeToManaged(File file) throws IOException {
 		String canonical = file.getCanonicalPath();
 		if (!canonical.startsWith(this.baseCanonicalPath)) {
@@ -497,18 +652,37 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		return new ManagedFileImpl(mpath);
 	}
 
+	/**
+	 * The Class ManagedFileImpl.
+	 */
 	private class ManagedFileImpl implements ManagedFile {
 		// NOTE: ManagedFileImpl instances should only be allowed
 		// to exist in association with a RestrictedStore.
+		/** The path. */
 		private final String path;
+		
+		/** The native file. */
 		private final File nativeFile;
 
+		/**
+		 * Instantiates a new managed file impl.
+		 *
+		 * @param path the path
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		private ManagedFileImpl(String path) throws IOException {
 			this.path = path;
 			// Note: managedToNative has a security check.
 			this.nativeFile = managedToNative(path);
 		}
 
+		/**
+		 * Instantiates a new managed file impl.
+		 *
+		 * @param parent the parent
+		 * @param relPath the rel path
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		private ManagedFileImpl(ManagedFile parent, String relPath)
 				throws IOException {
 			if (parent == null) {

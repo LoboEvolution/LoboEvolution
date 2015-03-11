@@ -29,17 +29,27 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
+
 /**
+ * The Class CollectionUtilities.
+ *
  * @author J. H. S.
  */
 public class CollectionUtilities {
+	
 	/**
-	 * 
+	 * Instantiates a new collection utilities.
 	 */
 	private CollectionUtilities() {
 		super();
 	}
 
+	/**
+	 * Gets the iterator enumeration.
+	 *
+	 * @param i the i
+	 * @return the iterator enumeration
+	 */
 	public static Enumeration getIteratorEnumeration(final Iterator i) {
 		return new Enumeration() {
 			public boolean hasMoreElements() {
@@ -52,6 +62,12 @@ public class CollectionUtilities {
 		};
 	}
 
+	/**
+	 * Iterator union.
+	 *
+	 * @param iterators the iterators
+	 * @return the iterator
+	 */
 	public static Iterator iteratorUnion(final Iterator[] iterators) {
 		return new Iterator() {
 			private int iteratorIndex = 0;
@@ -96,6 +112,12 @@ public class CollectionUtilities {
 		};
 	}
 
+	/**
+	 * Reverse.
+	 *
+	 * @param collection the collection
+	 * @return the collection
+	 */
 	public static Collection reverse(Collection collection) {
 		LinkedList newCollection = new LinkedList();
 		Iterator i = collection.iterator();
@@ -105,6 +127,12 @@ public class CollectionUtilities {
 		return newCollection;
 	}
 
+	/**
+	 * Singleton iterator.
+	 *
+	 * @param item the item
+	 * @return the iterator
+	 */
 	public static Iterator singletonIterator(final Object item) {
 		return new Iterator() {
 			private boolean gotItem = false;

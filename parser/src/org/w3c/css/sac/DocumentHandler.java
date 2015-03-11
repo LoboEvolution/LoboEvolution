@@ -8,14 +8,15 @@
  */
 package org.w3c.css.sac;
 
+
 /**
  * This is the main interface that most CSS applications implement: if the
  * application needs to be informed of basic parsing events, it implements this
  * interface and registers an instance with the CSS parser using the
  * setCSSHandler method.
  *
- * @version $Revision: 477010 $
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  */
 public interface DocumentHandler {
 

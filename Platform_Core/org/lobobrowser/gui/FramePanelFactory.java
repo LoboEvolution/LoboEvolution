@@ -20,25 +20,27 @@
  */
 package org.lobobrowser.gui;
 
+
 /**
  * A factory used to create {@link FramePanel} instances.
  */
 public interface FramePanelFactory {
+	
 	/**
 	 * Creates a {@link FramePanel} given its parent.
-	 * 
-	 * @param parent
-	 *            The containing {@link FramePanel}.
+	 *
+	 * @param parent            The containing {@link FramePanel}.
+	 * @return the frame panel
 	 */
 
 	public FramePanel createFramePanel(FramePanel parent);
 
 	/**
 	 * Creates a top-level{@link FramePanel} given a window ID.
-	 * 
-	 * @param windowId
-	 *            A string that identifies the window. This may be
+	 *
+	 * @param windowId            A string that identifies the window. This may be
 	 *            <code>null</code>.
+	 * @return the frame panel
 	 */
 	public FramePanel createFramePanel(String windowId);
 }

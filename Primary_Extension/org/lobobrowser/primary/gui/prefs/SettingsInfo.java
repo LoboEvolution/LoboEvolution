@@ -20,10 +20,30 @@
  */
 package org.lobobrowser.primary.gui.prefs;
 
+
+/**
+ * The Interface SettingsInfo.
+ */
 public interface SettingsInfo {
+	
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName();
 
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
 	public String getDescription();
 
+	/**
+	 * Creates the settings ui.
+	 *
+	 * @return the abstract settings ui
+	 */
 	public AbstractSettingsUI createSettingsUI();
 }

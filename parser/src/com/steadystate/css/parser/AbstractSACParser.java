@@ -50,6 +50,7 @@ import com.steadystate.css.parser.selectors.ConditionFactoryImpl;
 import com.steadystate.css.parser.selectors.SelectorFactoryImpl;
 import com.steadystate.css.sac.DocumentHandlerExt;
 
+
 /**
  * Base implementation of {@link Parser}.
  *
@@ -57,18 +58,43 @@ import com.steadystate.css.sac.DocumentHandlerExt;
  * @author RBRi
  */
 abstract class AbstractSACParser implements Parser {
+    
+    /** The document handler_. */
     private DocumentHandler documentHandler_;
+    
+    /** The error handler_. */
     private ErrorHandler errorHandler_;
+    
+    /** The source_. */
     private InputSource source_;
+    
+    /** The locale_. */
     private Locale locale_;
+    
+    /** The selector factory_. */
     private SelectorFactory selectorFactory_;
+    
+    /** The condition factory_. */
     private ConditionFactory conditionFactory_;
+    
+    /** The sac parser messages_. */
     private ResourceBundle sacParserMessages_;
 
+    /** The Constant NUM_CHARS. */
     private static final String NUM_CHARS = "0123456789.";
 
+    /**
+     * Gets the token.
+     *
+     * @return the token
+     */
     protected abstract Token getToken();
 
+    /**
+     * Gets the document handler.
+     *
+     * @return the document handler
+     */
     protected DocumentHandler getDocumentHandler() {
         if (documentHandler_ == null) {
             setDocumentHandler(new HandlerBase());
@@ -76,10 +102,18 @@ abstract class AbstractSACParser implements Parser {
         return documentHandler_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Parser#setDocumentHandler(org.w3c.css.sac.DocumentHandler)
+     */
     public void setDocumentHandler(final DocumentHandler handler) {
         documentHandler_ = handler;
     }
 
+    /**
+     * Gets the error handler.
+     *
+     * @return the error handler
+     */
     protected ErrorHandler getErrorHandler() {
         if (errorHandler_ == null) {
             setErrorHandler(new HandlerBase());
@@ -87,14 +121,25 @@ abstract class AbstractSACParser implements Parser {
         return errorHandler_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Parser#setErrorHandler(org.w3c.css.sac.ErrorHandler)
+     */
     public void setErrorHandler(final ErrorHandler eh) {
         errorHandler_ = eh;
     }
 
+    /**
+     * Gets the input source.
+     *
+     * @return the input source
+     */
     protected InputSource getInputSource() {
         return source_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Parser#setLocale(java.util.Locale)
+     */
     public void setLocale(final Locale locale) {
         if (locale_ != locale) {
             sacParserMessages_ = null;
@@ -102,6 +147,11 @@ abstract class AbstractSACParser implements Parser {
         locale_ = locale;
     }
 
+    /**
+     * Gets the locale.
+     *
+     * @return the locale
+     */
     protected Locale getLocale() {
         if (locale_ == null) {
             setLocale(Locale.getDefault());
@@ -109,6 +159,11 @@ abstract class AbstractSACParser implements Parser {
         return locale_;
     }
 
+    /**
+     * Gets the selector factory.
+     *
+     * @return the selector factory
+     */
     protected SelectorFactory getSelectorFactory() {
         if (selectorFactory_ == null) {
             selectorFactory_ = new SelectorFactoryImpl();
@@ -116,10 +171,18 @@ abstract class AbstractSACParser implements Parser {
         return selectorFactory_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Parser#setSelectorFactory(org.w3c.css.sac.SelectorFactory)
+     */
     public void setSelectorFactory(final SelectorFactory selectorFactory) {
         selectorFactory_ = selectorFactory;
     }
 
+    /**
+     * Gets the condition factory.
+     *
+     * @return the condition factory
+     */
     protected ConditionFactory getConditionFactory() {
         if (conditionFactory_ == null) {
             conditionFactory_ = new ConditionFactoryImpl();
@@ -127,10 +190,18 @@ abstract class AbstractSACParser implements Parser {
         return conditionFactory_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Parser#setConditionFactory(org.w3c.css.sac.ConditionFactory)
+     */
     public void setConditionFactory(final ConditionFactory conditionFactory) {
         conditionFactory_ = conditionFactory;
     }
 
+    /**
+     * Gets the SAC parser messages.
+     *
+     * @return the SAC parser messages
+     */
     protected ResourceBundle getSACParserMessages() {
         if (sacParserMessages_ == null) {
             try {
@@ -145,16 +216,33 @@ abstract class AbstractSACParser implements Parser {
         return sacParserMessages_;
     }
 
+    /**
+     * Gets the locator.
+     *
+     * @return the locator
+     */
     public Locator getLocator() {
         return createLocator(getToken());
     }
 
+    /**
+     * Creates the locator.
+     *
+     * @param t the t
+     * @return the locator
+     */
     protected Locator createLocator(final Token t) {
         return new LocatorImpl(getInputSource().getURI(),
             t == null ? 0 : t.beginLine,
             t == null ? 0 : t.beginColumn);
     }
 
+    /**
+     * Add_escapes.
+     *
+     * @param str the str
+     * @return the string
+     */
     protected String add_escapes(final String str) {
         final StringBuilder retval = new StringBuilder();
         char ch;
@@ -201,6 +289,13 @@ abstract class AbstractSACParser implements Parser {
         return retval.toString();
     }
 
+    /**
+     * To css parse exception.
+     *
+     * @param key the key
+     * @param e the e
+     * @return the CSS parse exception
+     */
     protected CSSParseException toCSSParseException(final String key, final ParseException e) {
         final String messagePattern1 = getSACParserMessages().getString("invalidExpectingOne");
         final String messagePattern2 = getSACParserMessages().getString("invalidExpectingMore");
@@ -251,17 +346,38 @@ abstract class AbstractSACParser implements Parser {
             e.currentToken.next.beginColumn);
     }
 
+    /**
+     * To css parse exception.
+     *
+     * @param e the e
+     * @return the CSS parse exception
+     */
     protected CSSParseException toCSSParseException(final TokenMgrError e) {
         final String messagePattern = getSACParserMessages().getString("tokenMgrError");
         return new CSSParseException(messagePattern, getInputSource().getURI(), 1, 1);
     }
 
+    /**
+     * To css parse exception.
+     *
+     * @param messageKey the message key
+     * @param msgParams the msg params
+     * @param locator the locator
+     * @return the CSS parse exception
+     */
     protected CSSParseException toCSSParseException(final String messageKey,
             final Object[] msgParams, final Locator locator) {
         final String messagePattern = getSACParserMessages().getString(messageKey);
         return new CSSParseException(MessageFormat.format(messagePattern, msgParams), locator);
     }
 
+    /**
+     * Creates the skip warning.
+     *
+     * @param key the key
+     * @param e the e
+     * @return the CSS parse exception
+     */
     protected CSSParseException createSkipWarning(final String key, final CSSParseException e) {
         String s = null;
         try {
@@ -273,6 +389,9 @@ abstract class AbstractSACParser implements Parser {
         return new CSSParseException(s, e.getURI(), e.getLineNumber(), e.getColumnNumber());
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Parser#parseStyleSheet(org.w3c.css.sac.InputSource)
+     */
     public void parseStyleSheet(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -290,10 +409,16 @@ abstract class AbstractSACParser implements Parser {
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Parser#parseStyleSheet(java.lang.String)
+     */
     public void parseStyleSheet(final String uri) throws IOException {
         parseStyleSheet(new InputSource(uri));
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Parser#parseStyleDeclaration(org.w3c.css.sac.InputSource)
+     */
     public void parseStyleDeclaration(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -311,6 +436,9 @@ abstract class AbstractSACParser implements Parser {
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Parser#parseRule(org.w3c.css.sac.InputSource)
+     */
     public void parseRule(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -328,6 +456,9 @@ abstract class AbstractSACParser implements Parser {
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Parser#parseSelectors(org.w3c.css.sac.InputSource)
+     */
     public SelectorList parseSelectors(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -347,6 +478,9 @@ abstract class AbstractSACParser implements Parser {
         return sl;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Parser#parsePropertyValue(org.w3c.css.sac.InputSource)
+     */
     public LexicalUnit parsePropertyValue(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -366,6 +500,9 @@ abstract class AbstractSACParser implements Parser {
         return lu;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Parser#parsePriority(org.w3c.css.sac.InputSource)
+     */
     public boolean parsePriority(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -385,6 +522,13 @@ abstract class AbstractSACParser implements Parser {
         return b;
     }
 
+    /**
+     * Parses the media.
+     *
+     * @param source the source
+     * @return the SAC media list
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public SACMediaList parseMedia(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -404,6 +548,13 @@ abstract class AbstractSACParser implements Parser {
         return ml;
     }
 
+    /**
+     * Gets the char stream.
+     *
+     * @param source the source
+     * @return the char stream
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private CharStream getCharStream(final InputSource source) throws IOException {
         if (source.getCharacterStream() != null) {
             return new CssCharStream(source.getCharacterStream(), 1, 1);
@@ -417,26 +568,107 @@ abstract class AbstractSACParser implements Parser {
         return null;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Parser#getParserVersion()
+     */
     public abstract String getParserVersion();
+    
+    /**
+     * Gets the grammar uri.
+     *
+     * @return the grammar uri
+     */
     protected abstract String getGrammarUri();
+    
+    /**
+     * Re init.
+     *
+     * @param charStream the char stream
+     */
     protected abstract void ReInit(CharStream charStream);
+    
+    /**
+     * Style sheet.
+     *
+     * @throws CSSParseException the CSS parse exception
+     * @throws ParseException the parse exception
+     */
     protected abstract void styleSheet() throws CSSParseException, ParseException;
+    
+    /**
+     * Style declaration.
+     *
+     * @throws ParseException the parse exception
+     */
     protected abstract void styleDeclaration() throws ParseException;
+    
+    /**
+     * Style sheet rule single.
+     *
+     * @throws ParseException the parse exception
+     */
     protected abstract void styleSheetRuleSingle() throws ParseException;
+    
+    /**
+     * Parses the selectors internal.
+     *
+     * @return the selector list
+     * @throws ParseException the parse exception
+     */
     protected abstract SelectorList parseSelectorsInternal() throws ParseException;
+    
+    /**
+     * Selector list.
+     *
+     * @return the selector list
+     * @throws ParseException the parse exception
+     */
     protected abstract SelectorList selectorList() throws ParseException;
+    
+    /**
+     * Expr.
+     *
+     * @return the lexical unit
+     * @throws ParseException the parse exception
+     */
     protected abstract LexicalUnit expr() throws ParseException;
+    
+    /**
+     * Prio.
+     *
+     * @return true, if successful
+     * @throws ParseException the parse exception
+     */
     protected abstract boolean prio() throws ParseException;
+    
+    /**
+     * Media list.
+     *
+     * @param ml the ml
+     * @throws ParseException the parse exception
+     */
     protected abstract void mediaList(SACMediaListImpl ml) throws ParseException;
 
+    /**
+     * Handle start document.
+     */
     protected void handleStartDocument() {
         getDocumentHandler().startDocument(getInputSource());
     }
 
+    /**
+     * Handle end document.
+     */
     protected void handleEndDocument() {
         getDocumentHandler().endDocument(getInputSource());
     }
 
+    /**
+     * Handle ignorable at rule.
+     *
+     * @param s the s
+     * @param locator the locator
+     */
     protected void handleIgnorableAtRule(final String s, final Locator locator) {
         final DocumentHandler documentHandler = getDocumentHandler();
         if (documentHandler instanceof DocumentHandlerExt) {
@@ -447,6 +679,12 @@ abstract class AbstractSACParser implements Parser {
         }
     }
 
+    /**
+     * Handle charset.
+     *
+     * @param characterEncoding the character encoding
+     * @param locator the locator
+     */
     protected void handleCharset(final String characterEncoding, final Locator locator) {
         final DocumentHandler documentHandler = getDocumentHandler();
         if (documentHandler instanceof DocumentHandlerExt) {
@@ -454,6 +692,14 @@ abstract class AbstractSACParser implements Parser {
         }
     }
 
+    /**
+     * Handle import style.
+     *
+     * @param uri the uri
+     * @param media the media
+     * @param defaultNamespaceURI the default namespace uri
+     * @param locator the locator
+     */
     protected void handleImportStyle(final String uri, final SACMediaList media,
             final String defaultNamespaceURI, final Locator locator) {
         final DocumentHandler documentHandler = getDocumentHandler();
@@ -465,6 +711,12 @@ abstract class AbstractSACParser implements Parser {
         }
     }
 
+    /**
+     * Handle start media.
+     *
+     * @param media the media
+     * @param locator the locator
+     */
     protected void handleStartMedia(final SACMediaList media, final Locator locator) {
         final DocumentHandler documentHandler = getDocumentHandler();
         if (documentHandler instanceof DocumentHandlerExt) {
@@ -475,14 +727,32 @@ abstract class AbstractSACParser implements Parser {
         }
     }
 
+    /**
+     * Handle medium.
+     *
+     * @param medium the medium
+     * @param locator the locator
+     */
     protected void handleMedium(final String medium, final Locator locator) {
         // empty default impl
     }
 
+    /**
+     * Handle end media.
+     *
+     * @param media the media
+     */
     protected void handleEndMedia(final SACMediaList media) {
         getDocumentHandler().endMedia(media);
     }
 
+    /**
+     * Handle start page.
+     *
+     * @param name the name
+     * @param pseudoPage the pseudo page
+     * @param locator the locator
+     */
     protected void handleStartPage(final String name, final String pseudoPage, final Locator locator) {
         final DocumentHandler documentHandler = getDocumentHandler();
         if (documentHandler instanceof DocumentHandlerExt) {
@@ -493,10 +763,21 @@ abstract class AbstractSACParser implements Parser {
         }
     }
 
+    /**
+     * Handle end page.
+     *
+     * @param name the name
+     * @param pseudoPage the pseudo page
+     */
     protected void handleEndPage(final String name, final String pseudoPage) {
         getDocumentHandler().endPage(name, pseudoPage);
     }
 
+    /**
+     * Handle start font face.
+     *
+     * @param locator the locator
+     */
     protected void handleStartFontFace(final Locator locator) {
         final DocumentHandler documentHandler = getDocumentHandler();
         if (documentHandler instanceof DocumentHandlerExt) {
@@ -507,14 +788,28 @@ abstract class AbstractSACParser implements Parser {
         }
     }
 
+    /**
+     * Handle end font face.
+     */
     protected void handleEndFontFace() {
         getDocumentHandler().endFontFace();
     }
 
+    /**
+     * Handle selector.
+     *
+     * @param selector the selector
+     */
     protected void handleSelector(final Selector selector) {
         // empty default impl
     }
 
+    /**
+     * Handle start selector.
+     *
+     * @param selectors the selectors
+     * @param locator the locator
+     */
     protected void handleStartSelector(final SelectorList selectors, final Locator locator) {
         final DocumentHandler documentHandler = getDocumentHandler();
         if (documentHandler instanceof DocumentHandlerExt) {
@@ -525,10 +820,23 @@ abstract class AbstractSACParser implements Parser {
         }
     }
 
+    /**
+     * Handle end selector.
+     *
+     * @param selectors the selectors
+     */
     protected void handleEndSelector(final SelectorList selectors) {
         getDocumentHandler().endSelector(selectors);
     }
 
+    /**
+     * Handle property.
+     *
+     * @param name the name
+     * @param value the value
+     * @param important the important
+     * @param locator the locator
+     */
     protected void handleProperty(final String name, final LexicalUnit value,
             final boolean important, final Locator locator) {
         final DocumentHandler documentHandler = getDocumentHandler();
@@ -540,6 +848,14 @@ abstract class AbstractSACParser implements Parser {
         }
     }
 
+    /**
+     * Function internal.
+     *
+     * @param prev the prev
+     * @param funct the funct
+     * @param params the params
+     * @return the lexical unit
+     */
     protected LexicalUnit functionInternal(final LexicalUnit prev, final String funct,
             final LexicalUnit params) {
 
@@ -564,6 +880,13 @@ abstract class AbstractSACParser implements Parser {
             params);
     }
 
+    /**
+     * Hexcolor internal.
+     *
+     * @param prev the prev
+     * @param t the t
+     * @return the lexical unit
+     */
     protected LexicalUnit hexcolorInternal(final LexicalUnit prev, final Token t) {
         // Step past the hash at the beginning
         final int i = 1;
@@ -611,6 +934,13 @@ abstract class AbstractSACParser implements Parser {
         }
     }
 
+    /**
+     * Int value.
+     *
+     * @param op the op
+     * @param s the s
+     * @return the int
+     */
     int intValue(final char op, final String s) {
         final int result = Integer.parseInt(s);
         if (op == '-') {
@@ -619,6 +949,13 @@ abstract class AbstractSACParser implements Parser {
         return result;
     }
 
+    /**
+     * Float value.
+     *
+     * @param op the op
+     * @param s the s
+     * @return the float
+     */
     float floatValue(final char op, final String s) {
         final float result = Float.parseFloat(s);
         if (op == '-') {
@@ -627,6 +964,12 @@ abstract class AbstractSACParser implements Parser {
         return result;
     }
 
+    /**
+     * Gets the last num pos.
+     *
+     * @param s the s
+     * @return the last num pos
+     */
     int getLastNumPos(final String s) {
         int i = 0;
         for ( ; i < s.length(); i++) {
@@ -640,10 +983,14 @@ abstract class AbstractSACParser implements Parser {
     /**
      * Unescapes escaped characters in the specified string, according to the
      * <a href="http://www.w3.org/TR/CSS21/syndata.html#escaped-characters">CSS specification</a>.
-     *
+     * 
      * This could be done directly in the parser, but portions of the lexer would have to be moved
      * to the parser, meaning that the grammar would no longer match the standard grammar specified
      * by the W3C. This would make the parser and lexer much less maintainable.
+     *
+     * @param s the s
+     * @param unescapeDoubleQuotes the unescape double quotes
+     * @return the string
      */
     public String unescape(final String s, final boolean unescapeDoubleQuotes) {
         if (s == null) {
@@ -766,6 +1113,12 @@ abstract class AbstractSACParser implements Parser {
         return buf.toString();
     }
 
+    /**
+     * Hexval.
+     *
+     * @param c the c
+     * @return the int
+     */
     private static int hexval(final char c) {
         switch(c) {
             case '0' :

@@ -28,10 +28,20 @@ import java.awt.event.MouseEvent;
 
 import org.lobobrowser.html.dombl.ModelNode;
 
+
 /**
  * This is used when there's padding or margins in inline elements.
  */
 final class RSpacing extends BaseBoundableRenderable {
+	
+	/**
+	 * Instantiates a new r spacing.
+	 *
+	 * @param me the me
+	 * @param container the container
+	 * @param width the width
+	 * @param height the height
+	 */
 	public RSpacing(ModelNode me, RenderableContainer container, int width,
 			int height) {
 		super(container, me);
@@ -40,9 +50,15 @@ final class RSpacing extends BaseBoundableRenderable {
 		this.height = height;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseBoundableRenderable#invalidateLayoutLocal()
+	 */
 	protected void invalidateLayoutLocal() {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -52,6 +68,9 @@ final class RSpacing extends BaseBoundableRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onDoubleClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -61,6 +80,9 @@ final class RSpacing extends BaseBoundableRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMousePressed(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -70,6 +92,9 @@ final class RSpacing extends BaseBoundableRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseReleased(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -79,6 +104,9 @@ final class RSpacing extends BaseBoundableRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseDisarmed(java.awt.event.MouseEvent)
+	 */
 	public boolean onMouseDisarmed(MouseEvent event) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -122,6 +150,9 @@ final class RSpacing extends BaseBoundableRenderable {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#extractSelectionText(java.lang.StringBuffer, boolean, org.lobobrowser.html.renderer.RenderableSpot, org.lobobrowser.html.renderer.RenderableSpot)
+	 */
 	public boolean extractSelectionText(StringBuffer buffer,
 			boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
@@ -144,10 +175,16 @@ final class RSpacing extends BaseBoundableRenderable {
 		return new RenderableSpot(this, x, y);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#isContainedByNode()
+	 */
 	public boolean isContainedByNode() {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onRightClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onRightClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {

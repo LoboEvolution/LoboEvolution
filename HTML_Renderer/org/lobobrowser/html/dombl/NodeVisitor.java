@@ -23,12 +23,17 @@
  */
 package org.lobobrowser.html.dombl;
 
+
+/**
+ * The Interface NodeVisitor.
+ */
 public interface NodeVisitor {
+	
 	/**
 	 * Visits a node. The call should be expected to occur in a synchronized
 	 * block. The lock will be node-dependent.
-	 * 
-	 * @param node
+	 *
+	 * @param node the node
 	 */
 	public void visit(org.w3c.dom.Node node);
 }

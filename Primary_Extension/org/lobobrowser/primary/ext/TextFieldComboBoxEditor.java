@@ -34,13 +34,23 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+
 /**
+ * The Class TextFieldComboBoxEditor.
+ *
  * @author J. H. S.
  */
 public class TextFieldComboBoxEditor implements ComboBoxEditor {
+	
+	/** The text field. */
 	private final JTextField textField;
+	
+	/** The in notification. */
 	private boolean inNotification = false;
 
+	/**
+	 * Instantiates a new text field combo box editor.
+	 */
 	public TextFieldComboBoxEditor() {
 		this.textField = new JTextField();
 	}
@@ -108,14 +118,29 @@ public class TextFieldComboBoxEditor implements ComboBoxEditor {
 		this.textField.removeActionListener(arg0);
 	}
 
+	/**
+	 * Adds the key listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void addKeyListener(KeyListener listener) {
 		this.textField.addKeyListener(listener);
 	}
 
+	/**
+	 * Removes the key listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void removeKeyListener(KeyListener listener) {
 		this.textField.removeKeyListener(listener);
 	}
 
+	/**
+	 * Adds the change listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void addChangeListener(final ChangeListener listener) {
 		this.textField.getDocument().addDocumentListener(
 				new DocumentListener() {

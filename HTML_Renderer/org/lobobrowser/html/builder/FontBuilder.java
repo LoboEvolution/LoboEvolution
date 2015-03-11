@@ -23,8 +23,15 @@ package org.lobobrowser.html.builder;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLFontElementImpl;
 
+
+/**
+ * The Class FontBuilder.
+ */
 public class FontBuilder extends HTMLElementBuilder {
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
 	@Override
 	protected HTMLElementImpl build(String name) {
 		return new HTMLFontElementImpl(name);

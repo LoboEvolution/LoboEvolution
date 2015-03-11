@@ -11,37 +11,65 @@ import java.util.List;
 
 import org.mozilla.javascript.Token;
 
+
 /**
  * AST node for a JavaScript 1.7 Array comprehension.
- * Node type is {@link Token#ARRAYCOMP}.<p>
+ * Node type is {@link Token#ARRAYCOMP}.
  */
 public class ArrayComprehension extends Scope {
 
+    /** The result. */
     private AstNode result;
+    
+    /** The loops. */
     private List<ArrayComprehensionLoop> loops =
         new ArrayList<ArrayComprehensionLoop>();
+    
+    /** The filter. */
     private AstNode filter;
+    
+    /** The if position. */
     private int ifPosition = -1;
+    
+    /** The lp. */
     private int lp = -1;
+    
+    /** The rp. */
     private int rp = -1;
 
     {
         type = Token.ARRAYCOMP;
     }
 
+    /**
+     * Instantiates a new array comprehension.
+     */
     public ArrayComprehension() {
     }
 
+    /**
+     * Instantiates a new array comprehension.
+     *
+     * @param pos the pos
+     */
     public ArrayComprehension(int pos) {
         super(pos);
     }
 
+    /**
+     * Instantiates a new array comprehension.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public ArrayComprehension(int pos, int len) {
         super(pos, len);
     }
 
     /**
-     * Returns result expression node (just after opening bracket)
+     * Returns result expression node (just after opening bracket).
+     *
+     * @return the result
      */
     public AstNode getResult() {
         return result;
@@ -49,7 +77,8 @@ public class ArrayComprehension extends Scope {
 
     /**
      * Sets result expression, and sets its parent to this node.
-     * @throws IllegalArgumentException if result is {@code null}
+     *
+     * @param result the new result
      */
     public void setResult(AstNode result) {
         assertNotNull(result);
@@ -58,15 +87,18 @@ public class ArrayComprehension extends Scope {
     }
 
     /**
-     * Returns loop list
+     * Returns loop list.
+     *
+     * @return the loops
      */
     public List<ArrayComprehensionLoop> getLoops() {
         return loops;
     }
 
     /**
-     * Sets loop list
-     * @throws IllegalArgumentException if loops is {@code null}
+     * Sets loop list.
+     *
+     * @param loops the new loops
      */
     public void setLoops(List<ArrayComprehensionLoop> loops) {
         assertNotNull(loops);
@@ -78,7 +110,8 @@ public class ArrayComprehension extends Scope {
 
     /**
      * Adds a child loop node, and sets its parent to this node.
-     * @throws IllegalArgumentException if acl is {@code null}
+     *
+     * @param acl the acl
      */
     public void addLoop(ArrayComprehensionLoop acl) {
         assertNotNull(acl);
@@ -87,7 +120,9 @@ public class ArrayComprehension extends Scope {
     }
 
     /**
-     * Returns filter expression, or {@code null} if not present
+     * Returns filter expression, or {@code null} if not present.
+     *
+     * @return the filter
      */
     public AstNode getFilter() {
         return filter;
@@ -96,6 +131,8 @@ public class ArrayComprehension extends Scope {
     /**
      * Sets filter expression, and sets its parent to this node.
      * Can be {@code null}.
+     *
+     * @param filter the new filter
      */
     public void setFilter(AstNode filter) {
         this.filter = filter;
@@ -104,47 +141,62 @@ public class ArrayComprehension extends Scope {
     }
 
     /**
-     * Returns position of 'if' keyword, -1 if not present
+     * Returns position of 'if' keyword, -1 if not present.
+     *
+     * @return the if position
      */
     public int getIfPosition() {
         return ifPosition;
     }
 
     /**
-     * Sets position of 'if' keyword
+     * Sets position of 'if' keyword.
+     *
+     * @param ifPosition the new if position
      */
     public void setIfPosition(int ifPosition) {
         this.ifPosition = ifPosition;
     }
 
     /**
-     * Returns filter left paren position, or -1 if no filter
+     * Returns filter left paren position, or -1 if no filter.
+     *
+     * @return the filter lp
      */
     public int getFilterLp() {
         return lp;
     }
 
     /**
-     * Sets filter left paren position, or -1 if no filter
+     * Sets filter left paren position, or -1 if no filter.
+     *
+     * @param lp the new filter lp
      */
     public void setFilterLp(int lp) {
         this.lp = lp;
     }
 
     /**
-     * Returns filter right paren position, or -1 if no filter
+     * Returns filter right paren position, or -1 if no filter.
+     *
+     * @return the filter rp
      */
     public int getFilterRp() {
         return rp;
     }
 
     /**
-     * Sets filter right paren position, or -1 if no filter
+     * Sets filter right paren position, or -1 if no filter.
+     *
+     * @param rp the new filter rp
      */
     public void setFilterRp(int rp) {
         this.rp = rp;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.Scope#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder(250);
@@ -165,6 +217,8 @@ public class ArrayComprehension extends Scope {
     /**
      * Visits this node, the result expression, the loops, and the optional
      * filter.
+     *
+     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

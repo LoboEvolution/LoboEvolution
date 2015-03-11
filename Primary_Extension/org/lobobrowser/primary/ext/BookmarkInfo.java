@@ -22,26 +22,59 @@ package org.lobobrowser.primary.ext;
 
 import java.net.URL;
 
+
+/**
+ * The Class BookmarkInfo.
+ */
 public class BookmarkInfo implements java.io.Serializable {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2257845000007000400L;
 
+	/** The url. */
 	private URL url;
+	
+	/** The title. */
 	private String title;
+	
+	/** The description. */
 	private String description;
+	
+	/** The tags. */
 	private String[] tags;
 
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * Sets the description.
+	 *
+	 * @param description the new description
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * Gets the tags.
+	 *
+	 * @return the tags
+	 */
 	public String[] getTags() {
 		return tags;
 	}
 
+	/**
+	 * Gets the tags text.
+	 *
+	 * @return the tags text
+	 */
 	public String getTagsText() {
 		String[] tags = this.tags;
 		if (tags == null) {
@@ -60,22 +93,47 @@ public class BookmarkInfo implements java.io.Serializable {
 		return buffer.toString();
 	}
 
+	/**
+	 * Sets the tags.
+	 *
+	 * @param tags the new tags
+	 */
 	public void setTags(String[] tags) {
 		this.tags = tags;
 	}
 
+	/**
+	 * Gets the title.
+	 *
+	 * @return the title
+	 */
 	public String getTitle() {
 		return title;
 	}
 
+	/**
+	 * Sets the title.
+	 *
+	 * @param title the new title
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/**
+	 * Gets the url.
+	 *
+	 * @return the url
+	 */
 	public URL getUrl() {
 		return url;
 	}
 
+	/**
+	 * Sets the url.
+	 *
+	 * @param url the new url
+	 */
 	public void setUrl(URL url) {
 		this.url = url;
 	}

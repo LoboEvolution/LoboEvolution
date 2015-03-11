@@ -75,13 +75,26 @@ import com.sun.javafx.runtime.TypeInfo;
 import com.sun.javafx.runtime.sequence.Sequence;
 import com.sun.javafx.runtime.sequence.Sequences;
 
+
+/**
+ * The Class BaseCompiledClientlet.
+ */
 public abstract class BaseCompiledClientlet implements Clientlet {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(BaseCompiledClientlet.class.getName());
+	
+	/** The Constant BASE_PLATFORM_CLASS_PATH. */
 	private static final ArrayList<URL> BASE_PLATFORM_CLASS_PATH;
+	
+	/** The Constant SUN_BOOT_CLASS_PATH_PROPERTY. */
 	private static final String SUN_BOOT_CLASS_PATH_PROPERTY = "sun.boot.class.path";
+	
+	/** The Constant STAGE_DELEGATE_MONITOR. */
 	private static final Object STAGE_DELEGATE_MONITOR = new Object();
 
+	/** The scene type. */
 	private static FXClassType sceneType;
 
 	static {
@@ -112,6 +125,11 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 		}
 	}
 
+	/**
+	 * Gets the scene type.
+	 *
+	 * @return the scene type
+	 */
 	private static FXClassType getSceneType() {
 		if (sceneType == null) {
 			synchronized (STAGE_DELEGATE_MONITOR) {
@@ -124,11 +142,19 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 		return sceneType;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.Clientlet#process(org.lobobrowser.clientlet.ClientletContext)
+	 */
 	public void process(ClientletContext context) throws ClientletException {
 		// Context class loader already set in Extension.
 		this.processImpl(context);
 	}
 
+	/**
+	 * Prepare window.
+	 *
+	 * @param window the window
+	 */
 	private void prepareWindow(Window window) {
 		window.addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
@@ -154,6 +180,15 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 		}
 	}
 
+	/**
+	 * Gets the component content from fx object.
+	 *
+	 * @param context the context
+	 * @param fxObject the fx object
+	 * @param binfo the binfo
+	 * @return the component content from fx object
+	 * @throws ClientletException the clientlet exception
+	 */
 	private static ComponentContent getComponentContentFromFXObject(
 			ClientletContext context, FXObject fxObject, ClassInfo binfo)
 			throws ClientletException {
@@ -184,6 +219,18 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 		}
 	}
 
+	/**
+	 * Gets the actual response object.
+	 *
+	 * @param context the context
+	 * @param clazz the clazz
+	 * @param tentative the tentative
+	 * @return the actual response object
+	 * @throws ClientletException the clientlet exception
+	 * @throws IllegalAccessException the illegal access exception
+	 * @throws InvocationTargetException the invocation target exception
+	 * @throws NoSuchMethodException the no such method exception
+	 */
 	private static ResponseObject getActualResponseObject(
 			ClientletContext context, Class<? extends Object> clazz,
 			Object tentative) throws ClientletException,
@@ -245,6 +292,12 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 		return new ResponseObject(tentative, null, null);
 	}
 
+	/**
+	 * Process impl.
+	 *
+	 * @param context the context
+	 * @throws ClientletException the clientlet exception
+	 */
 	private void processImpl(ClientletContext context)
 			throws ClientletException {
 		try {
@@ -322,6 +375,12 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 		}
 	}
 
+	/**
+	 * Gets the full class info.
+	 *
+	 * @param clazz the clazz
+	 * @return the full class info
+	 */
 	private static String getFullClassInfo(Class<? extends Object> clazz) {
 		StringBuffer buffer = new StringBuffer();
 		Class<?> superclass = clazz.getSuperclass();
@@ -355,11 +414,24 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 		return buffer.toString();
 	}
 
+	/**
+	 * Checks if is reload request.
+	 *
+	 * @param requestType the request type
+	 * @return true, if is reload request
+	 */
 	private static boolean isReloadRequest(RequestType requestType) {
 		return requestType == RequestType.SOFT_RELOAD
 				|| requestType == RequestType.HARD_RELOAD;
 	}
 
+	/**
+	 * Gets the directives.
+	 *
+	 * @param sourceCode the source code
+	 * @return the directives
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private Properties getDirectives(String sourceCode) throws IOException {
 		Properties directives = new Properties();
 		String commentStart = "/*!";
@@ -390,6 +462,15 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 		return directives;
 	}
 
+	/**
+	 * Gets the class for response.
+	 *
+	 * @param context the context
+	 * @return the class for response
+	 * @throws ClassNotFoundException the class not found exception
+	 * @throws ClientletException the clientlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private ClassInfo getClassForResponse(ClientletContext context)
 			throws ClassNotFoundException, ClientletException, IOException {
 		ClientletResponse response = context.getResponse();
@@ -473,6 +554,16 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 				directives, newSourceCode);
 	}
 
+	/**
+	 * Gets the path repository.
+	 *
+	 * @param context the context
+	 * @param directives the directives
+	 * @param pathPropName the path prop name
+	 * @param listPropName the list prop name
+	 * @return the path repository
+	 * @throws ClientletException the clientlet exception
+	 */
 	private PathRepository getPathRepository(ClientletContext context,
 			Properties directives, String pathPropName, String listPropName)
 			throws ClientletException {
@@ -519,11 +610,21 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 		return PathManager.getInstance().getPathRepository(paths, entryList);
 	}
 
+	/**
+	 * Gets the platform class path repository.
+	 *
+	 * @return the platform class path repository
+	 */
 	protected PathRepository getPlatformClassPathRepository() {
 		return PathManager.getInstance().getPathRepository(
 				this.getPlatformClassPath(), null);
 	}
 
+	/**
+	 * Gets the platform class path.
+	 *
+	 * @return the platform class path
+	 */
 	protected URL[] getPlatformClassPath() {
 		URL[] extraEntries = this.getExtraPlatformClassPath();
 		URL[] sunBootClassPath = BASE_PLATFORM_CLASS_PATH.toArray(new URL[0]);
@@ -536,13 +637,38 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 		return wholeClassPath;
 	}
 
+	/**
+	 * Compile.
+	 *
+	 * @param fileManager the file manager
+	 * @param diagnosticListener the diagnostic listener
+	 * @param compilationUnits the compilation units
+	 * @throws ClientletException the clientlet exception
+	 */
 	protected abstract void compile(JavaFileManager fileManager,
 			DiagnosticListener<? super JavaFileObject> diagnosticListener,
 			java.util.List<JavaFileObject> compilationUnits)
 			throws ClientletException;
 
+	/**
+	 * Gets the extra platform class path.
+	 *
+	 * @return the extra platform class path
+	 */
 	protected abstract URL[] getExtraPlatformClassPath();
 
+	/**
+	 * Builds the response.
+	 *
+	 * @param fileManager the file manager
+	 * @param response the response
+	 * @param sourceCode the source code
+	 * @param directives the directives
+	 * @return the builds the result
+	 * @throws ClientletException the clientlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException the class not found exception
+	 */
 	private BuildResult buildResponse(JavaResponseFileManager fileManager,
 			ClientletResponse response, String sourceCode, Properties directives)
 			throws ClientletException, IOException, ClassNotFoundException {
@@ -574,15 +700,40 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 		return fileManager.getBuildResult(sourceCode, directives);
 	}
 
+	/**
+	 * The Class ScriptContent.
+	 */
 	private static class ScriptContent extends AbstractComponentContent {
+		
+		/** The component. */
 		private final Component component;
+		
+		/** The properties. */
 		private final Properties properties;
+		
+		/** The script source. */
 		private final String scriptSource;
+		
+		/** The context. */
 		private final ClientletContext context;
+		
+		/** The secondary title. */
 		private String secondaryTitle;
+		
+		/** The stage. */
 		private Stage stage;
+		
+		/** The cached actual component. */
 		private Component cachedActualComponent;
 
+		/**
+		 * Instantiates a new script content.
+		 *
+		 * @param component the component
+		 * @param properties the properties
+		 * @param scriptSource the script source
+		 * @param context the context
+		 */
 		public ScriptContent(final Component component,
 				final Properties properties, final String scriptSource,
 				final ClientletContext context) {
@@ -592,14 +743,23 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 			this.context = context;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.clientlet.AbstractComponentContent#canCopy()
+		 */
 		public boolean canCopy() {
 			return false;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.clientlet.AbstractComponentContent#copy()
+		 */
 		public boolean copy() {
 			return false;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.clientlet.AbstractComponentContent#getComponent()
+		 */
 		public Component getComponent() {
 			Component cac = this.cachedActualComponent;
 			if (cac == null) {
@@ -613,6 +773,11 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 			return cac;
 		}
 
+		/**
+		 * Creates the component.
+		 *
+		 * @return the component
+		 */
 		private Component createComponent() {
 			// Always wrap component, so that we can set the
 			// ClientletContext in the event queue thread.
@@ -624,15 +789,24 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 			return panel;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.clientlet.AbstractComponentContent#getDescription()
+		 */
 		public String getDescription() {
 			Properties props = this.properties;
 			return props == null ? "" : props.getProperty("description");
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.clientlet.AbstractComponentContent#getSourceCode()
+		 */
 		public String getSourceCode() {
 			return this.scriptSource;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.clientlet.AbstractComponentContent#getTitle()
+		 */
 		public String getTitle() {
 			Properties props = this.properties;
 			String title = props == null ? null : props.getProperty("title");
@@ -644,14 +818,25 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 			return title;
 		}
 
+		/**
+		 * Sets the secondary title.
+		 *
+		 * @param titleOverride the new secondary title
+		 */
 		public void setSecondaryTitle(String titleOverride) {
 			this.secondaryTitle = titleOverride;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.clientlet.AbstractComponentContent#addNotify()
+		 */
 		@Override
 		public void addNotify() {
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.clientlet.AbstractComponentContent#removeNotify()
+		 */
 		@Override
 		public void removeNotify() {
 			Stage stage = this.stage;
@@ -660,25 +845,50 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 			}
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.clientlet.AbstractComponentContent#getContentObject()
+		 */
 		public Object getContentObject() {
 			return this.component;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.clientlet.AbstractComponentContent#getMimeType()
+		 */
 		public String getMimeType() {
 			return "text/x-java-source";
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.clientlet.AbstractComponentContent#setProperty(java.lang.String, java.lang.Object)
+		 */
 		public void setProperty(String name, Object value) {
 			// TODO Auto-generated method stub
 
 		}
 	}
 
+	/**
+	 * The listener interface for receiving localDiagnostic events.
+	 * The class that is interested in processing a localDiagnostic
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addLocalDiagnosticListener</code> method. When
+	 * the localDiagnostic event occurs, that object's appropriate
+	 * method is invoked.
+	 */
 	public static class LocalDiagnosticListener implements
 			DiagnosticListener<JavaFileObject> {
+		
+		/** The buffer. */
 		private final StringBuffer buffer = new StringBuffer();
+		
+		/** The has errors. */
 		private boolean hasErrors = false;
 
+		/* (non-Javadoc)
+		 * @see javax.tools.DiagnosticListener#report(javax.tools.Diagnostic)
+		 */
 		public void report(Diagnostic<? extends JavaFileObject> diagnostic) {
 			if (diagnostic.getKind() == Diagnostic.Kind.ERROR) {
 				hasErrors = true;
@@ -692,22 +902,51 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 			buffer.append("\r\n");
 		}
 
+		/**
+		 * Gets the diagnostic output.
+		 *
+		 * @return the diagnostic output
+		 */
 		public String getDiagnosticOutput() {
 			return buffer.toString();
 		}
 
+		/**
+		 * Checks for errors.
+		 *
+		 * @return true, if successful
+		 */
 		public boolean hasErrors() {
 			return this.hasErrors;
 		}
 
 	}
 
+	/**
+	 * The Class ClassInfo.
+	 */
 	private static class ClassInfo {
+		
+		/** The class loader. */
 		public final ClassLoader classLoader;
+		
+		/** The result class. */
 		public final Class<? extends Object> resultClass;
+		
+		/** The directives. */
 		public final Properties directives;
+		
+		/** The source code. */
 		public final String sourceCode;
 
+		/**
+		 * Instantiates a new class info.
+		 *
+		 * @param classLoader the class loader
+		 * @param resultClass the result class
+		 * @param directives the directives
+		 * @param sourceCode the source code
+		 */
 		public ClassInfo(ClassLoader classLoader,
 				Class<? extends Object> resultClass, Properties directives,
 				String sourceCode) {
@@ -719,10 +958,24 @@ public abstract class BaseCompiledClientlet implements Clientlet {
 		}
 	}
 
+	/**
+	 * The Class ResponseObject.
+	 */
 	private static class ResponseObject {
+		
+		/** The object. */
 		public final Object object;
+		
+		/** The secondary title. */
 		public final String secondaryTitle;
 
+		/**
+		 * Instantiates a new response object.
+		 *
+		 * @param object the object
+		 * @param secondaryTitle the secondary title
+		 * @param stage the stage
+		 */
 		public ResponseObject(Object object, String secondaryTitle, Stage stage) {
 			this.object = object;
 			this.secondaryTitle = secondaryTitle;

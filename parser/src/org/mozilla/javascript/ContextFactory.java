@@ -11,6 +11,7 @@ package org.mozilla.javascript;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 
+
 /**
  * Factory class that Rhino runtime uses to create new {@link Context}
  * instances.  A <code>ContextFactory</code> can also notify listeners
@@ -109,14 +110,26 @@ import java.security.PrivilegedAction;
 
 public class ContextFactory
 {
+    
+    /** The has custom global. */
     private static volatile boolean hasCustomGlobal;
+    
+    /** The global. */
     private static ContextFactory global = new ContextFactory();
 
+    /** The sealed. */
     private volatile boolean sealed;
 
+    /** The listeners lock. */
     private final Object listenersLock = new Object();
+    
+    /** The listeners. */
     private volatile Object listeners;
+    
+    /** The disabled listening. */
     private boolean disabledListening;
+    
+    /** The application class loader. */
     private ClassLoader applicationClassLoader;
 
     /**
@@ -124,14 +137,19 @@ public class ContextFactory
      */
     public interface Listener
     {
+        
         /**
          * Notify about newly created {@link Context} object.
+         *
+         * @param cx the cx
          */
         public void contextCreated(Context cx);
 
         /**
          * Notify that the specified {@link Context} instance is no longer
          * associated with the current thread.
+         *
+         * @param cx the cx
          */
         public void contextReleased(Context cx);
     }
@@ -139,6 +157,7 @@ public class ContextFactory
     /**
      * Get global ContextFactory.
      *
+     * @return the global
      * @see #hasExplicitGlobal()
      * @see #initGlobal(ContextFactory)
      */
@@ -153,6 +172,7 @@ public class ContextFactory
      * already called and false to indicate that the global factory was not
      * explicitly set.
      *
+     * @return true, if successful
      * @see #getGlobal()
      * @see #initGlobal(ContextFactory)
      */
@@ -165,6 +185,7 @@ public class ContextFactory
      * Set global ContextFactory.
      * The method can only be called once.
      *
+     * @param factory the factory
      * @see #getGlobal()
      * @see #hasExplicitGlobal()
      */
@@ -180,11 +201,31 @@ public class ContextFactory
         global = factory;
     }
 
+    /**
+     * The Interface GlobalSetter.
+     */
     public interface GlobalSetter {
+        
+        /**
+         * Sets the context factory global.
+         *
+         * @param factory the new context factory global
+         */
         public void setContextFactoryGlobal(ContextFactory factory);
+        
+        /**
+         * Gets the context factory global.
+         *
+         * @return the context factory global
+         */
         public ContextFactory getContextFactoryGlobal();
     }
 
+    /**
+     * Gets the global setter.
+     *
+     * @return the global setter
+     */
     public synchronized static GlobalSetter getGlobalSetter() {
         if (hasCustomGlobal) {
             throw new IllegalStateException();
@@ -209,6 +250,8 @@ public class ContextFactory
      * execution thread. <tt>makeContext()</tt> is allowed to call
      * {@link Context#seal(Object)} on the result to prevent
      * {@link Context} changes by hostile scripts or applets.
+     *
+     * @return the context
      */
     protected Context makeContext()
     {
@@ -219,6 +262,10 @@ public class ContextFactory
      * Implementation of {@link Context#hasFeature(int featureIndex)}.
      * This can be used to customize {@link Context} without introducing
      * additional subclasses.
+     *
+     * @param cx the cx
+     * @param featureIndex the feature index
+     * @return true, if successful
      */
     protected boolean hasFeature(Context cx, int featureIndex)
     {
@@ -287,6 +334,11 @@ public class ContextFactory
         throw new IllegalArgumentException(String.valueOf(featureIndex));
     }
 
+    /**
+     * Checks if is dom3 present.
+     *
+     * @return true, if is dom3 present
+     */
     private boolean isDom3Present() {
         Class<?> nodeClass = Kit.classOrNull("org.w3c.dom.Node");
         if (nodeClass == null) return false;
@@ -305,11 +357,13 @@ public class ContextFactory
      * {@link org.mozilla.javascript.xml.XMLLib.Factory XMLLib.Factory}
      * to be used by the <code>Context</code> instances produced by this
      * factory. See {@link Context#getE4xImplementationFactory} for details.
-     *
+     * 
      * May return null, in which case E4X functionality is not supported in
      * Rhino.
-     *
+     * 
      * The default implementation now prefers the DOM3 E4X implementation.
+     *
+     * @return the e4x implementation factory
      */
     protected org.mozilla.javascript.xml.XMLLib.Factory
         getE4xImplementationFactory()
@@ -341,6 +395,9 @@ public class ContextFactory
      * generated JVM classes when no {@link SecurityController}
      * is installed.
      * Application can override the method to provide custom class loading.
+     *
+     * @param parent the parent
+     * @return the generated class loader
      */
     protected GeneratedClassLoader createClassLoader(final ClassLoader parent)
     {
@@ -356,6 +413,8 @@ public class ContextFactory
      * Unless it was explicitly initialized with
      * {@link #initApplicationClassLoader(ClassLoader)} the method returns
      * null to indicate that Thread.getContextClassLoader() should be used.
+     *
+     * @return the application class loader
      */
     public final ClassLoader getApplicationClassLoader()
     {
@@ -365,6 +424,7 @@ public class ContextFactory
     /**
      * Set explicit class loader to use when searching for Java classes.
      *
+     * @param loader the loader
      * @see #getApplicationClassLoader()
      */
     public final void initApplicationClassLoader(ClassLoader loader)
@@ -389,6 +449,13 @@ public class ContextFactory
      * create the first stack frame with scriptable code, it calls this method
      * to perform the real call. In this way execution of any script
      * happens inside this function.
+     *
+     * @param callable the callable
+     * @param cx the cx
+     * @param scope the scope
+     * @param thisObj the this obj
+     * @param args the args
+     * @return the object
      */
     protected Object doTopCall(Callable callable,
                                Context cx, Scriptable scope,
@@ -403,10 +470,18 @@ public class ContextFactory
      * {@link Context#observeInstructionCount(int instructionCount)}.
      * This can be used to customize {@link Context} without introducing
      * additional subclasses.
+     *
+     * @param cx the cx
+     * @param instructionCount the instruction count
      */
     protected void observeInstructionCount(Context cx, int instructionCount) {
     }
 
+    /**
+     * On context created.
+     *
+     * @param cx the cx
+     */
     protected void onContextCreated(Context cx)
     {
         Object listeners = this.listeners;
@@ -418,6 +493,11 @@ public class ContextFactory
         }
     }
 
+    /**
+     * On context released.
+     *
+     * @param cx the cx
+     */
     protected void onContextReleased(Context cx)
     {
         Object listeners = this.listeners;
@@ -429,6 +509,11 @@ public class ContextFactory
         }
     }
 
+    /**
+     * Adds the listener.
+     *
+     * @param listener the listener
+     */
     public final void addListener(Listener listener)
     {
         checkNotSealed();
@@ -440,6 +525,11 @@ public class ContextFactory
         }
     }
 
+    /**
+     * Removes the listener.
+     *
+     * @param listener the listener
+     */
     public final void removeListener(Listener listener)
     {
         checkNotSealed();
@@ -466,6 +556,8 @@ public class ContextFactory
 
     /**
      * Checks if this is a sealed ContextFactory.
+     *
+     * @return true, if is sealed
      * @see #seal()
      */
     public final boolean isSealed()
@@ -484,6 +576,9 @@ public class ContextFactory
         sealed = true;
     }
 
+    /**
+     * Check not sealed.
+     */
     protected final void checkNotSealed()
     {
         if (sealed) throw new IllegalStateException();
@@ -497,6 +592,8 @@ public class ContextFactory
      * new Context instance. The instance will be temporary associated
      * with the thread during call to {@link ContextAction#run(Context)}.
      *
+     * @param action the action
+     * @return the object
      * @see ContextFactory#call(ContextAction)
      * @see Context#call(ContextFactory factory, Callable callable,
      *                   Scriptable scope, Scriptable thisObj,
@@ -552,8 +649,10 @@ public class ContextFactory
     }
 
     /**
-     * @deprecated use {@link #enterContext()} instead
+     * Enter.
+     *
      * @return a Context associated with the current thread
+     * @deprecated use {@link #enterContext()} instead
      */
     public final Context enter()
     {
@@ -561,6 +660,8 @@ public class ContextFactory
     }
 
     /**
+     * Exit.
+     *
      * @deprecated Use {@link Context#exit()} instead.
      */
     public final void exit()
@@ -576,12 +677,11 @@ public class ContextFactory
      * is associated with the current thread and returned if the current thread
      * has no associated context and <code>cx</code> is not associated with any
      * other thread.
+     *
      * @param cx a Context to associate with the thread if possible
      * @return a Context associated with the current thread
      * @see #enterContext()
      * @see #call(ContextAction)
-     * @throws IllegalStateException if <code>cx</code> is already associated
-     * with a different thread
      */
     public final Context enterContext(Context cx)
     {

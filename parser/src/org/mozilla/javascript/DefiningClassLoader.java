@@ -4,6 +4,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * Load generated classes.
  *
@@ -12,14 +13,26 @@ package org.mozilla.javascript;
 public class DefiningClassLoader extends ClassLoader
     implements GeneratedClassLoader
 {
+    
+    /**
+     * Instantiates a new defining class loader.
+     */
     public DefiningClassLoader() {
         this.parentLoader = getClass().getClassLoader();
     }
 
+    /**
+     * Instantiates a new defining class loader.
+     *
+     * @param parentLoader the parent loader
+     */
     public DefiningClassLoader(ClassLoader parentLoader) {
         this.parentLoader = parentLoader;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.GeneratedClassLoader#defineClass(java.lang.String, byte[])
+     */
     public Class<?> defineClass(String name, byte[] data) {
         // Use our own protection domain for the generated classes.
         // TODO: we might want to use a separate protection domain for classes
@@ -28,10 +41,16 @@ public class DefiningClassLoader extends ClassLoader
                 SecurityUtilities.getProtectionDomain(getClass()));
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.GeneratedClassLoader#linkClass(java.lang.Class)
+     */
     public void linkClass(Class<?> cl) {
         resolveClass(cl);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.ClassLoader#loadClass(java.lang.String, boolean)
+     */
     @Override
     public Class<?> loadClass(String name, boolean resolve)
         throws ClassNotFoundException
@@ -50,5 +69,6 @@ public class DefiningClassLoader extends ClassLoader
         return cl;
     }
 
+    /** The parent loader. */
     private final ClassLoader parentLoader;
 }

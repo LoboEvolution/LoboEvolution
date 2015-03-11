@@ -47,6 +47,7 @@ import org.lobobrowser.html.renderer.NodeRenderer;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.util.gui.WrapperLayout;
 
+
 /**
  * A Swing panel used to render FRAMESETs only. It is used by {@link HtmlPanel}
  * when a document is determined to be a FRAMESET.
@@ -55,10 +56,17 @@ import org.lobobrowser.util.gui.WrapperLayout;
  * @see HtmlBlockPanel
  */
 public class FrameSetPanel extends JComponent implements NodeRenderer {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(FrameSetPanel.class
 			.getName());
 
+	/**
+	 * Instantiates a new frame set panel.
+	 */
 	public FrameSetPanel() {
 		super();
 		this.setLayout(WrapperLayout.getInstance());
@@ -66,6 +74,12 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 		this.setPreferredSize(new Dimension(600, 400));
 	}
 
+	/**
+	 * Gets the lengths.
+	 *
+	 * @param spec the spec
+	 * @return the lengths
+	 */
 	private HtmlLength[] getLengths(String spec) {
 		if (spec == null) {
 			return new HtmlLength[] { new HtmlLength("1*") };
@@ -84,6 +98,12 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 		return (HtmlLength[]) lengths.toArray(HtmlLength.EMPTY_ARRAY);
 	}
 
+	/**
+	 * Gets the sub frames.
+	 *
+	 * @param parent the parent
+	 * @return the sub frames
+	 */
 	private HTMLElementImpl[] getSubFrames(HTMLElementImpl parent) {
 		DOMNodeImpl[] children = parent.getChildrenArray();
 		ArrayList<DOMNodeImpl> subFrames = new ArrayList<DOMNodeImpl>();
@@ -100,11 +120,14 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 		return (HTMLElementImpl[]) subFrames.toArray(new HTMLElementImpl[0]);
 	}
 
+	/** The root node. */
 	private HTMLElementImpl rootNode;
 
 	/**
 	 * Sets the FRAMESET node and invalidates the component so it can be
 	 * rendered immediately in the GUI thread.
+	 *
+	 * @param node the new root node
 	 */
 	public void setRootNode(DOMNodeImpl node) {
 		// Method expected to be called in the GUI thread.
@@ -121,6 +144,9 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 		this.repaint();
 	}
 
+	/**
+	 * Validate all.
+	 */
 	protected void validateAll() {
 		Component toValidate = this;
 		for (;;) {
@@ -133,6 +159,11 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 		toValidate.validate();
 	}
 
+	/**
+	 * Process document notifications.
+	 *
+	 * @param notifications the notifications
+	 */
 	public final void processDocumentNotifications(
 			DocumentNotification[] notifications) {
 		// Called in the GUI thread.
@@ -147,10 +178,18 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 		}
 	}
 
+	/** The html context. */
 	private HtmlRendererContext htmlContext;
+	
+	/** The frame components. */
 	private Component[] frameComponents;
+	
+	/** The dom invalid. */
 	private boolean domInvalid = true;
 
+	/* (non-Javadoc)
+	 * @see java.awt.Component#setBounds(int, int, int, int)
+	 */
 	public void setBounds(int x, int y, int w, int h) {
 		super.setBounds(x, y, w, h);
 	}
@@ -224,6 +263,13 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 		super.doLayout();
 	}
 
+	/**
+	 * Gets the absolute lengths.
+	 *
+	 * @param htmlLengths the html lengths
+	 * @param totalSize the total size
+	 * @return the absolute lengths
+	 */
 	private int[] getAbsoluteLengths(HtmlLength[] htmlLengths, int totalSize) {
 		int[] absLengths = new int[htmlLengths.length];
 		int totalSizeNonMulti = 0;
@@ -257,6 +303,19 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 		return absLengths;
 	}
 
+	/**
+	 * Gets the split pane.
+	 *
+	 * @param context the context
+	 * @param colLengths the col lengths
+	 * @param firstCol the first col
+	 * @param numCols the num cols
+	 * @param rowLengths the row lengths
+	 * @param firstRow the first row
+	 * @param numRows the num rows
+	 * @param frameComponents the frame components
+	 * @return the split pane
+	 */
 	private Component getSplitPane(HtmlRendererContext context,
 			int[] colLengths, int firstCol, int numCols, int[] rowLengths,
 			int firstRow, int numRows, Component[] frameComponents) {

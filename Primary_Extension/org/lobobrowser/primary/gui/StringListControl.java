@@ -35,13 +35,21 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
+
+/**
+ * The Class StringListControl.
+ */
 public class StringListControl extends JComponent {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The combo box. */
 	private final JComboBox<String> comboBox;
 
+	/**
+	 * Instantiates a new string list control.
+	 */
 	public StringListControl() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.comboBox = new JComboBox<String>();
@@ -53,8 +61,14 @@ public class StringListControl extends JComponent {
 		this.add(editButton);
 	}
 
+	/** The strings. */
 	private String[] strings;
 
+	/**
+	 * Sets the strings.
+	 *
+	 * @param strings the new strings
+	 */
 	public void setStrings(String[] strings) {
 		this.strings = strings;
 		JComboBox<String> comboBox = this.comboBox;
@@ -64,10 +78,20 @@ public class StringListControl extends JComponent {
 		}
 	}
 
+	/**
+	 * Gets the strings.
+	 *
+	 * @return the strings
+	 */
 	public String[] getStrings() {
 		return this.strings;
 	}
 
+	/**
+	 * Gets the strings as text.
+	 *
+	 * @return the strings as text
+	 */
 	public String getStringsAsText() {
 		String lineSeparator = System.getProperty("line.separator");
 		String[] strings = this.strings;
@@ -82,6 +106,11 @@ public class StringListControl extends JComponent {
 		return buffer.toString();
 	}
 
+	/**
+	 * Sets the strings from text.
+	 *
+	 * @param text the new strings from text
+	 */
 	public void setStringsFromText(String text) {
 		try {
 			BufferedReader reader = new BufferedReader(new StringReader(text));
@@ -96,18 +125,29 @@ public class StringListControl extends JComponent {
 		}
 	}
 
+	/** The edit list caption. */
 	private String editListCaption;
 
+	/**
+	 * Sets the edits the list caption.
+	 *
+	 * @param caption the new edits the list caption
+	 */
 	public void setEditListCaption(String caption) {
 		this.editListCaption = caption;
 	}
 
+	/**
+	 * The Class EditAction.
+	 */
 	private class EditAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			Frame parentFrame = SwingTasks.getFrame(StringListControl.this);
 			SimpleTextEditDialog dialog;

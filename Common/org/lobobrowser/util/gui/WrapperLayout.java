@@ -29,7 +29,10 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 
+
 /**
+ * The Class WrapperLayout.
+ *
  * @author J. H. S.
  */
 public class WrapperLayout implements LayoutManager {
@@ -102,8 +105,14 @@ public class WrapperLayout implements LayoutManager {
 		}
 	}
 
+	/** The instance. */
 	private static WrapperLayout instance = new WrapperLayout();
 
+	/**
+	 * Gets the single instance of WrapperLayout.
+	 *
+	 * @return single instance of WrapperLayout
+	 */
 	public static WrapperLayout getInstance() {
 		return instance;
 	}

@@ -23,7 +23,15 @@ package org.lobobrowser.html.layout;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.RBlockViewport;
 
+
+/**
+ * The Class EmLayout.
+ */
 public class EmLayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new em layout.
+	 */
 	public EmLayout() {
 		super(DISPLAY_INLINE);
 	}

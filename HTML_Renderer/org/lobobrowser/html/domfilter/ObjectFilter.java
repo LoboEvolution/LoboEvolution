@@ -23,6 +23,17 @@
  */
 package org.lobobrowser.html.domfilter;
 
+
+/**
+ * The Interface ObjectFilter.
+ */
 public interface ObjectFilter {
+	
+	/**
+	 * Accept.
+	 *
+	 * @param target the target
+	 * @return true, if successful
+	 */
 	public boolean accept(Object target);
 }

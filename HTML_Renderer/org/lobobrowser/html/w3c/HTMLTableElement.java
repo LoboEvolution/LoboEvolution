@@ -34,6 +34,7 @@ package org.lobobrowser.html.w3c;
 
 import org.w3c.dom.DOMException;
 
+
 /**
  * The create* and delete* methods on the table allow authors to construct and
  * modify tables. [<a href='http://www.w3.org/TR/1999/REC-html401-19991224'>HTML
@@ -47,69 +48,77 @@ import org.w3c.dom.DOMException;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLTableElement extends HTMLElement {
+	
 	/**
 	 * Returns the table's <code>CAPTION</code>, or void if none exists.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the caption
 	 */
 	public HTMLTableCaptionElement getCaption();
 
 	/**
 	 * Returns the table's <code>CAPTION</code>, or void if none exists.
-	 * 
-	 * @exception DOMException
-	 *                HIERARCHY_REQUEST_ERR: if the element is not a
-	 *                <code>CAPTION</code>.
+	 *
 	 * @version DOM Level 2
+	 * @param caption the new caption
+	 * @exception DOMException                HIERARCHY_REQUEST_ERR: if the element is not a
+	 *                <code>CAPTION</code>.
 	 */
 	public void setCaption(HTMLTableCaptionElement caption) throws DOMException;
 
 	/**
 	 * Returns the table's <code>THEAD</code>, or <code>null</code> if none
 	 * exists.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the t head
 	 */
 	public HTMLTableSectionElement getTHead();
 
 	/**
 	 * Returns the table's <code>THEAD</code>, or <code>null</code> if none
 	 * exists.
-	 * 
-	 * @exception DOMException
-	 *                HIERARCHY_REQUEST_ERR: if the element is not a
-	 *                <code>THEAD</code>.
+	 *
 	 * @version DOM Level 2
+	 * @param tHead the new t head
+	 * @exception DOMException                HIERARCHY_REQUEST_ERR: if the element is not a
+	 *                <code>THEAD</code>.
 	 */
 	public void setTHead(HTMLTableSectionElement tHead) throws DOMException;
 
 	/**
 	 * Returns the table's <code>TFOOT</code>, or <code>null</code> if none
 	 * exists.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the t foot
 	 */
 	public HTMLTableSectionElement getTFoot();
 
 	/**
 	 * Returns the table's <code>TFOOT</code>, or <code>null</code> if none
 	 * exists.
-	 * 
-	 * @exception DOMException
-	 *                HIERARCHY_REQUEST_ERR: if the element is not a
-	 *                <code>TFOOT</code>.
+	 *
 	 * @version DOM Level 2
+	 * @param tFoot the new t foot
+	 * @exception DOMException                HIERARCHY_REQUEST_ERR: if the element is not a
+	 *                <code>TFOOT</code>.
 	 */
 	public void setTFoot(HTMLTableSectionElement tFoot) throws DOMException;
 
 	/**
 	 * Returns a collection of all the rows in the table, including all in
 	 * <code>THEAD</code>, <code>TFOOT</code>, all <code>TBODY</code> elements.
+	 *
+	 * @return the rows
 	 */
 	public HTMLCollection getRows();
 
 	/**
 	 * Returns a collection of the table bodies (including implicit ones).
+	 *
+	 * @return the t bodies
 	 */
 	public HTMLCollection getTBodies();
 
@@ -117,6 +126,8 @@ public interface HTMLTableElement extends HTMLElement {
 	 * Specifies the table's position with respect to the rest of the document.
 	 * See the align attribute definition in HTML 4.01. This attribute is
 	 * deprecated in HTML 4.01.
+	 *
+	 * @return the align
 	 */
 	public String getAlign();
 
@@ -124,102 +135,136 @@ public interface HTMLTableElement extends HTMLElement {
 	 * Specifies the table's position with respect to the rest of the document.
 	 * See the align attribute definition in HTML 4.01. This attribute is
 	 * deprecated in HTML 4.01.
+	 *
+	 * @param align the new align
 	 */
 	public void setAlign(String align);
 
 	/**
 	 * Cell background color. See the bgcolor attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the bg color
 	 */
 	public String getBgColor();
 
 	/**
 	 * Cell background color. See the bgcolor attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param bgColor the new bg color
 	 */
 	public void setBgColor(String bgColor);
 
 	/**
 	 * The width of the border around the table. See the border attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the border
 	 */
 	public String getBorder();
 
 	/**
 	 * The width of the border around the table. See the border attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param border the new border
 	 */
 	public void setBorder(String border);
 
 	/**
 	 * Specifies the horizontal and vertical space between cell content and cell
 	 * borders. See the cellpadding attribute definition in HTML 4.01.
+	 *
+	 * @return the cell padding
 	 */
 	public String getCellPadding();
 
 	/**
 	 * Specifies the horizontal and vertical space between cell content and cell
 	 * borders. See the cellpadding attribute definition in HTML 4.01.
+	 *
+	 * @param cellPadding the new cell padding
 	 */
 	public void setCellPadding(String cellPadding);
 
 	/**
 	 * Specifies the horizontal and vertical separation between cells. See the
 	 * cellspacing attribute definition in HTML 4.01.
+	 *
+	 * @return the cell spacing
 	 */
 	public String getCellSpacing();
 
 	/**
 	 * Specifies the horizontal and vertical separation between cells. See the
 	 * cellspacing attribute definition in HTML 4.01.
+	 *
+	 * @param cellSpacing the new cell spacing
 	 */
 	public void setCellSpacing(String cellSpacing);
 
 	/**
 	 * Specifies which external table borders to render. See the frame attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the frame
 	 */
 	public String getFrame();
 
 	/**
 	 * Specifies which external table borders to render. See the frame attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param frame the new frame
 	 */
 	public void setFrame(String frame);
 
 	/**
 	 * Specifies which internal table borders to render. See the rules attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the rules
 	 */
 	public String getRules();
 
 	/**
 	 * Specifies which internal table borders to render. See the rules attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param rules the new rules
 	 */
 	public void setRules(String rules);
 
 	/**
 	 * Description about the purpose or structure of a table. See the summary
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @return the summary
 	 */
 	public String getSummary();
 
 	/**
 	 * Description about the purpose or structure of a table. See the summary
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @param summary the new summary
 	 */
 	public void setSummary(String summary);
 
 	/**
 	 * Specifies the desired table width. See the width attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return the width
 	 */
 	public String getWidth();
 
 	/**
 	 * Specifies the desired table width. See the width attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param width the new width
 	 */
 	public void setWidth(String width);
 
@@ -267,36 +312,37 @@ public interface HTMLTableElement extends HTMLElement {
 	 * inserted into a <code>TBODY</code> which is created and inserted into the
 	 * table.A table row cannot be empty according to [<a
 	 * href='http://www.w3.org/TR/1999/REC-html401-19991224'>HTML 4.01</a>].
-	 * 
-	 * @param index
-	 *            The row number where to insert a new row. This index starts
+	 *
+	 * @version DOM Level 2
+	 * @param index            The row number where to insert a new row. This index starts
 	 *            from 0 and is relative to the logical order (not document
 	 *            order) of all the rows contained inside the table.
 	 * @return The newly created row.
-	 * @exception DOMException
-	 *                INDEX_SIZE_ERR: Raised if the specified index is greater
+	 * @exception DOMException                INDEX_SIZE_ERR: Raised if the specified index is greater
 	 *                than the number of rows or if the index is a negative
 	 *                number other than -1.
-	 * @version DOM Level 2
 	 */
 	public HTMLElement insertRow(int index) throws DOMException;
 
 	/**
 	 * Delete a table row.
-	 * 
-	 * @param index
-	 *            The index of the row to be deleted. This index starts from 0
+	 *
+	 * @version DOM Level 2
+	 * @param index            The index of the row to be deleted. This index starts from 0
 	 *            and is relative to the logical order (not document order) of
 	 *            all the rows contained inside the table. If the index is -1
 	 *            the last row in the table is deleted.
-	 * @exception DOMException
-	 *                INDEX_SIZE_ERR: Raised if the specified index is greater
+	 * @exception DOMException                INDEX_SIZE_ERR: Raised if the specified index is greater
 	 *                than or equal to the number of rows or if the index is a
 	 *                negative number other than -1.
-	 * @version DOM Level 2
 	 */
 	public void deleteRow(int index) throws DOMException;
 
+	/**
+	 * Insert row.
+	 *
+	 * @return the HTML element
+	 */
 	public HTMLElement insertRow();
 
 }

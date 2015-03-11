@@ -26,20 +26,42 @@ package org.lobobrowser.util;
 import java.io.IOException;
 import java.io.InputStream;
 
+
 /**
+ * The Class MonitoredInputStream.
+ *
  * @author J. H. S.
  */
 public class MonitoredInputStream extends InputStream {
+	
+	/** The delegate. */
 	private final InputStream delegate;
+	
+	/** The progress. */
 	private int progress = 0;
+	
+	/** The min progress event gap. */
 	private final long minProgressEventGap;
+	
+	/** The evt progress. */
 	public final EventDispatch evtProgress = new EventDispatch();
 
+	/**
+	 * Instantiates a new monitored input stream.
+	 *
+	 * @param delegate the delegate
+	 * @param minProgressEventGap the min progress event gap
+	 */
 	public MonitoredInputStream(InputStream delegate, int minProgressEventGap) {
 		this.delegate = delegate;
 		this.minProgressEventGap = minProgressEventGap;
 	}
 
+	/**
+	 * Instantiates a new monitored input stream.
+	 *
+	 * @param delegate the delegate
+	 */
 	public MonitoredInputStream(InputStream delegate) {
 		this(delegate, 200);
 	}
@@ -84,6 +106,7 @@ public class MonitoredInputStream extends InputStream {
 		return b;
 	}
 
+	/** The last even posted. */
 	private long lastEvenPosted = 0;
 
 	/*

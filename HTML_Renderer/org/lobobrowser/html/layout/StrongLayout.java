@@ -20,7 +20,15 @@
 */
 package org.lobobrowser.html.layout;
 
+
+/**
+ * The Class StrongLayout.
+ */
 public class StrongLayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new strong layout.
+	 */
 	public StrongLayout() {
 		super(DISPLAY_INLINE);
 	}

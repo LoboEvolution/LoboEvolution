@@ -28,20 +28,39 @@ import org.lobobrowser.html.renderstate.DisplayRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.w3c.HTMLLIElement;
 
+
+/**
+ * The Class HTMLLIElementImpl.
+ */
 public class HTMLLIElementImpl extends HTMLAbstractUIElement implements
 		HTMLLIElement {
+	
+	/**
+	 * Instantiates a new HTMLLI element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLLIElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLIElement#getType()
+	 */
 	public String getType() {
 		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLIElement#setType(java.lang.String)
+	 */
 	public void setType(String type) {
 		this.setAttribute(HtmlAttributeProperties.TYPE, type);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLIElement#getValue()
+	 */
 	public int getValue() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.VALUE);
 		if (valueText == null) {
@@ -54,10 +73,16 @@ public class HTMLLIElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLIElement#setValue(int)
+	 */
 	public void setValue(int value) {
 		this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(value));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new DisplayRenderState(prevRenderState, this,
 				RenderState.DISPLAY_LIST_ITEM);

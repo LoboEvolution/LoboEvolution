@@ -31,39 +31,92 @@ import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.ua.ProgressType;
 import org.lobobrowser.ua.RequestType;
 
+
+/**
+ * The Interface RequestHandler.
+ */
 public interface RequestHandler {
+	
+	/**
+	 * Gets the request.
+	 *
+	 * @return the request
+	 */
 	public ClientletRequest getRequest();
 
 	/**
 	 * Gets the actual request URL, which may be different from the URL of the
 	 * original request.
+	 *
+	 * @return the latest request url
 	 */
 	public URL getLatestRequestURL();
 
 	/**
 	 * Gets the actual request method, which may be different from the method of
 	 * the original request.
+	 *
+	 * @return the latest request method
 	 */
 	public String getLatestRequestMethod();
 
 	/**
 	 * Gets a hostname verifier used when an HTTPS host does not match the
 	 * cerificate information.
+	 *
+	 * @return the hostname verifier
 	 */
 	public HostnameVerifier getHostnameVerifier();
 
+	/**
+	 * Process response.
+	 *
+	 * @param response the response
+	 * @throws ClientletException the clientlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void processResponse(ClientletResponse response)
 			throws ClientletException, IOException;
 
+	/**
+	 * Handle exception.
+	 *
+	 * @param response the response
+	 * @param exception the exception
+	 * @return true, if successful
+	 * @throws ClientletException the clientlet exception
+	 */
 	public boolean handleException(ClientletResponse response,
 			Throwable exception) throws ClientletException;
 
+	/**
+	 * Handle progress.
+	 *
+	 * @param progressType the progress type
+	 * @param url the url
+	 * @param method the method
+	 * @param value the value
+	 * @param max the max
+	 */
 	public void handleProgress(ProgressType progressType, URL url,
 			String method, int value, int max);
 
+	/**
+	 * Cancel.
+	 */
 	public void cancel();
 
+	/**
+	 * Checks if is cancelled.
+	 *
+	 * @return true, if is cancelled
+	 */
 	public boolean isCancelled();
 
+	/**
+	 * Gets the request type.
+	 *
+	 * @return the request type
+	 */
 	public RequestType getRequestType();
 }

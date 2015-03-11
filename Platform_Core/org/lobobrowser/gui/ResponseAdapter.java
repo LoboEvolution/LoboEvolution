@@ -20,11 +20,16 @@
  */
 package org.lobobrowser.gui;
 
+
 /**
  * A convenience abstract implementation of {@link ResponseListener}, with blank
  * methods.
  */
 public abstract class ResponseAdapter implements ResponseListener {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.ResponseListener#responseProcessed(org.lobobrowser.gui.ResponseEvent)
+	 */
 	public void responseProcessed(ResponseEvent event) {
 	}
 }

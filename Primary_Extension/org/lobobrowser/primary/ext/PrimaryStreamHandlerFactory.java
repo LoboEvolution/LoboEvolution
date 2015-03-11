@@ -23,11 +23,21 @@ package org.lobobrowser.primary.ext;
 import java.net.URLStreamHandler;
 import java.net.URLStreamHandlerFactory;
 
+
+/**
+ * A factory for creating PrimaryStreamHandler objects.
+ */
 public class PrimaryStreamHandlerFactory implements URLStreamHandlerFactory {
 
+	/**
+	 * Instantiates a new primary stream handler factory.
+	 */
 	public PrimaryStreamHandlerFactory() {
 	}
 
+	/* (non-Javadoc)
+	 * @see java.net.URLStreamHandlerFactory#createURLStreamHandler(java.lang.String)
+	 */
 	public URLStreamHandler createURLStreamHandler(String protocol) {
 		if ("about".equals(protocol)) {
 			return new org.lobobrowser.protocol.about.Handler();

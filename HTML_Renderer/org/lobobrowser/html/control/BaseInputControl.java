@@ -32,16 +32,31 @@ import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.RenderableSpot;
 
+
+/**
+ * The Class BaseInputControl.
+ */
 public abstract class BaseInputControl extends BaseControl implements InputContext {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The value. */
 	protected String value;
 
+	/**
+	 * Instantiates a new base input control.
+	 *
+	 * @param modelNode the model node
+	 */
 	public BaseInputControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		this.setOpaque(false);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseControl#reset(int, int)
+	 */
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		String sizeText = this.controlElement.getAttribute(HtmlAttributeProperties.SIZE);
@@ -54,10 +69,14 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseControl#getVAlign()
+	 */
 	public int getVAlign() {
 		return RElement.VALIGN_ABSBOTTOM;
 	}
 
+	/** The size. */
 	protected int size = -1;
 
 	/*
@@ -142,6 +161,8 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 	/**
 	 * Returns <code>null</code>. It should be overridden by controls that
 	 * support multiple values.
+	 *
+	 * @return the values
 	 */
 	public String[] getValues() {
 		return null;
@@ -265,38 +286,72 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 	 * boolean, org.lobobrowser.html.render.RenderablePoint,
 	 * org.lobobrowser.html.render.RenderablePoint)
 	 */
+	/**
+	 * Paint selection.
+	 *
+	 * @param g the g
+	 * @param inSelection the in selection
+	 * @param startPoint the start point
+	 * @param endPoint the end point
+	 * @return true, if successful
+	 */
 	public boolean paintSelection(Graphics g, boolean inSelection,
 			RenderableSpot startPoint, RenderableSpot endPoint) {
 		return inSelection;
 	}
 
+	/**
+	 * Gets the multiple.
+	 *
+	 * @return the multiple
+	 */
 	public boolean getMultiple() {
 		// For selects
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.InputContext#getSelectedIndex()
+	 */
 	public int getSelectedIndex() {
 		// For selects
 		return -1;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.InputContext#getVisibleSize()
+	 */
 	public int getVisibleSize() {
 		// For selects
 		return 0;
 	}
 
+	/**
+	 * Sets the multiple.
+	 *
+	 * @param value the new multiple
+	 */
 	public void setMultiple(boolean value) {
 		// For selects
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.InputContext#setSelectedIndex(int)
+	 */
 	public void setSelectedIndex(int value) {
 		// For selects
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.InputContext#setVisibleSize(int)
+	 */
 	public void setVisibleSize(int value) {
 		// For selects
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.InputContext#getFileValue()
+	 */
 	public File[] getFileValue() {
 		// For file inputs
 		return null;

@@ -23,8 +23,15 @@ package org.lobobrowser.html.builder;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLSpanElementImpl;
 
+
+/**
+ * The Class SpanBuilder.
+ */
 public class SpanBuilder extends HTMLElementBuilder {
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
 	@Override
 	protected HTMLElementImpl build(String name) {
 		return new HTMLSpanElementImpl(name);

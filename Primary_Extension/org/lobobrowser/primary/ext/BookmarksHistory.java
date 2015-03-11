@@ -26,11 +26,21 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.store.StorageManager;
 
+
+/**
+ * The Class BookmarksHistory.
+ */
 public class BookmarksHistory extends BaseHistory<BookmarkInfo> implements
 		java.io.Serializable {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2257845000200000300L;
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(BookmarksHistory.class.getName());
+	
+	/** The Constant instance. */
 	private static final BookmarksHistory instance;
 
 	static {
@@ -49,16 +59,23 @@ public class BookmarksHistory extends BaseHistory<BookmarkInfo> implements
 	}
 
 	/**
-	 * @param sequenceCapacity
-	 * @param commonEntriesCapacity
+	 * Instantiates a new bookmarks history.
 	 */
 	private BookmarksHistory() {
 	}
 
+	/**
+	 * Gets the single instance of BookmarksHistory.
+	 *
+	 * @return single instance of BookmarksHistory
+	 */
 	public static BookmarksHistory getInstance() {
 		return instance;
 	}
 
+	/**
+	 * Save.
+	 */
 	public void save() {
 		synchronized (this) {
 			try {

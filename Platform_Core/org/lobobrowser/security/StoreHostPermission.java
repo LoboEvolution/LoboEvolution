@@ -26,20 +26,30 @@ package org.lobobrowser.security;
 import java.net.URL;
 import java.security.BasicPermission;
 
+
 /**
  * Permission for restricted store access.
  */
 public class StoreHostPermission extends BasicPermission {
 	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @param name
+	 * Instantiates a new store host permission.
+	 *
+	 * @param name the name
 	 */
 	public StoreHostPermission(String name) {
 		super(name);
 	}
 
+	/**
+	 * For url.
+	 *
+	 * @param url the url
+	 * @return the store host permission
+	 */
 	public static StoreHostPermission forURL(URL url) {
 		if (LocalSecurityPolicy.isLocal(url)) {
 			return new StoreHostPermission("*");
@@ -52,6 +62,12 @@ public class StoreHostPermission extends BasicPermission {
 		}
 	}
 
+	/**
+	 * For host.
+	 *
+	 * @param hostName the host name
+	 * @return the store host permission
+	 */
 	public static StoreHostPermission forHost(String hostName) {
 		// TODO What about a JAR URL or a VC URL?
 		String h = hostName == null || "".equals(hostName) ? "<<local>>"

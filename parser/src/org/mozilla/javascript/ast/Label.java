@@ -8,48 +8,73 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
+
 /**
  * AST node representing a label.  It is a distinct node type so it can
  * record its length and position for code-processing tools.
- * Node type is {@link Token#LABEL}.<p>
+ * Node type is {@link Token#LABEL}.
  */
 public class Label extends Jump {
 
+    /** The name. */
     private String name;
 
     {
         type = Token.LABEL;
     }
 
+    /**
+     * Instantiates a new label.
+     */
     public Label() {
     }
 
+    /**
+     * Instantiates a new label.
+     *
+     * @param pos the pos
+     */
     public Label(int pos) {
         this(pos, -1);
     }
 
+    /**
+     * Instantiates a new label.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public Label(int pos, int len) {
         // can't call super (Jump) for historical reasons
         position = pos;
         length = len;
     }
 
+    /**
+     * Instantiates a new label.
+     *
+     * @param pos the pos
+     * @param len the len
+     * @param name the name
+     */
     public Label(int pos, int len, String name) {
         this(pos, len);
         setName(name);
     }
 
     /**
-     * Returns the label text
+     * Returns the label text.
+     *
+     * @return the name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Sets the label text
-     * @throws IllegalArgumentException if name is {@code null} or the
-     * empty string.
+     * Sets the label text.
+     *
+     * @param name the new name
      */
     public void setName(String name) {
         name = name == null ? null : name.trim();
@@ -58,6 +83,9 @@ public class Label extends Jump {
         this.name = name;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.Jump#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -69,6 +97,8 @@ public class Label extends Jump {
 
     /**
      * Visits this label.  There are no children to visit.
+     *
+     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

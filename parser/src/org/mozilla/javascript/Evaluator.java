@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.mozilla.javascript.ast.ScriptNode;
 
+
 /**
  * Abstraction of evaluation, which can be implemented either by an
  * interpreter or compiler.
@@ -72,7 +73,8 @@ public interface Evaluator {
 
     /**
      * Given a native stack trace, patch it with script-specific source
-     * and line information
+     * and line information.
+     *
      * @param ex exception
      * @param nativeStackTrace the native stack trace
      * @return patched stack trace
@@ -81,7 +83,8 @@ public interface Evaluator {
                                   String nativeStackTrace);
 
     /**
-     * Get the script stack for the given exception
+     * Get the script stack for the given exception.
+     *
      * @param ex exception from execution
      * @return list of strings for the stack trace
      */

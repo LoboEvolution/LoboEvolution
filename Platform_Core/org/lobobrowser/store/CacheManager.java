@@ -40,21 +40,35 @@ import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.IORoutines;
 
+
 /**
+ * The Class CacheManager.
+ *
  * @author J. H. S.
  */
 public final class CacheManager implements Runnable {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CacheManager.class
 			.getName());
+	
+	/** The Constant AFTER_SWEEP_SLEEP. */
 	private static final int AFTER_SWEEP_SLEEP = 5 * 60 * 1000;
+	
+	/** The Constant INITIAL_SLEEP. */
 	private static final int INITIAL_SLEEP = 30 * 1000;
+	
+	/** The Constant DELETE_TOLERANCE. */
 	private static final int DELETE_TOLERANCE = 60 * 1000;
+	
+	/** The Constant MAX_CACHE_SIZE. */
 	private static final long MAX_CACHE_SIZE = 100000000;
 
+	/** The transient cache. */
 	private final LRUCache transientCache = new LRUCache(1000000);
 
 	/**
-	 * 
+	 * Instantiates a new cache manager.
 	 */
 	private CacheManager() {
 		super();
@@ -64,8 +78,14 @@ public final class CacheManager implements Runnable {
 		t.start();
 	}
 
+	/** The instance. */
 	private static CacheManager instance;
 
+	/**
+	 * Gets the single instance of CacheManager.
+	 *
+	 * @return single instance of CacheManager
+	 */
 	public static CacheManager getInstance() {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
@@ -81,6 +101,13 @@ public final class CacheManager implements Runnable {
 		return instance;
 	}
 
+	/**
+	 * Put transient.
+	 *
+	 * @param url the url
+	 * @param value the value
+	 * @param approxSize the approx size
+	 */
 	public void putTransient(URL url, Object value, int approxSize) {
 		String key = Urls.getNoRefForm(url);
 		synchronized (this.transientCache) {
@@ -88,6 +115,12 @@ public final class CacheManager implements Runnable {
 		}
 	}
 
+	/**
+	 * Gets the transient.
+	 *
+	 * @param url the url
+	 * @return the transient
+	 */
 	public Object getTransient(URL url) {
 		String key = Urls.getNoRefForm(url);
 		synchronized (this.transientCache) {
@@ -95,6 +128,11 @@ public final class CacheManager implements Runnable {
 		}
 	}
 
+	/**
+	 * Removes the transient.
+	 *
+	 * @param url the url
+	 */
 	public void removeTransient(URL url) {
 		String key = Urls.getNoRefForm(url);
 		synchronized (this.transientCache) {
@@ -102,18 +140,33 @@ public final class CacheManager implements Runnable {
 		}
 	}
 
+	/**
+	 * Sets the max transient cache size.
+	 *
+	 * @param approxMaxSize the new max transient cache size
+	 */
 	public void setMaxTransientCacheSize(int approxMaxSize) {
 		synchronized (this.transientCache) {
 			this.transientCache.setApproxMaxSize(approxMaxSize);
 		}
 	}
 
+	/**
+	 * Gets the max transient cache size.
+	 *
+	 * @return the max transient cache size
+	 */
 	public int getMaxTransientCacheSize() {
 		synchronized (this.transientCache) {
 			return this.transientCache.getApproxMaxSize();
 		}
 	}
 
+	/**
+	 * Gets the transient cache info.
+	 *
+	 * @return the transient cache info
+	 */
 	public CacheInfo getTransientCacheInfo() {
 		long approxSize;
 		int numEntries;
@@ -126,6 +179,14 @@ public final class CacheManager implements Runnable {
 		return new CacheInfo(approxSize, numEntries, entryInfo);
 	}
 
+	/**
+	 * Put persistent.
+	 *
+	 * @param url the url
+	 * @param rawContent the raw content
+	 * @param isDecoration the is decoration
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void putPersistent(URL url, byte[] rawContent, boolean isDecoration)
 			throws IOException {
 		File cacheFile = getCacheFile(url, isDecoration);
@@ -143,6 +204,14 @@ public final class CacheManager implements Runnable {
 		}
 	}
 
+	/**
+	 * Gets the persistent.
+	 *
+	 * @param url the url
+	 * @param isDecoration the is decoration
+	 * @return the persistent
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public byte[] getPersistent(URL url, boolean isDecoration)
 			throws IOException {
 		// We don't return an InputStream because further synchronization
@@ -158,6 +227,14 @@ public final class CacheManager implements Runnable {
 		}
 	}
 
+	/**
+	 * Removes the persistent.
+	 *
+	 * @param url the url
+	 * @param isDecoration the is decoration
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public boolean removePersistent(URL url, boolean isDecoration)
 			throws IOException {
 		File cacheFile = getCacheFile(url, isDecoration);
@@ -166,6 +243,13 @@ public final class CacheManager implements Runnable {
 		}
 	}
 
+	/**
+	 * Gets the jar file.
+	 *
+	 * @param url the url
+	 * @return the jar file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public JarFile getJarFile(URL url) throws IOException {
 		File cacheFile = getCacheFile(url, false);
 		synchronized (getLock(cacheFile)) {
@@ -182,6 +266,14 @@ public final class CacheManager implements Runnable {
 		}
 	}
 
+	/**
+	 * Gets the cache file.
+	 *
+	 * @param url the url
+	 * @param isDecoration the is decoration
+	 * @return the cache file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private static File getCacheFile(URL url, boolean isDecoration)
 			throws IOException {
 		// Use file, not path, because query string matters in caching.
@@ -203,6 +295,13 @@ public final class CacheManager implements Runnable {
 				fileName);
 	}
 
+	/**
+	 * Gets the lock.
+	 *
+	 * @param file the file
+	 * @return the lock
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private static Object getLock(File file) throws IOException {
 		return ("cm:" + file.getCanonicalPath()).intern();
 	}
@@ -210,6 +309,11 @@ public final class CacheManager implements Runnable {
 	/**
 	 * Touches the cache file corresponding to the given URL and returns
 	 * <code>true</code> if the file exists.
+	 *
+	 * @param url the url
+	 * @param isDecoration the is decoration
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public boolean checkCacheFile(URL url, boolean isDecoration)
 			throws IOException {
@@ -223,6 +327,11 @@ public final class CacheManager implements Runnable {
 		}
 	}
 	
+	/**
+	 * Clear cache.
+	 *
+	 * @throws Exception the exception
+	 */
 	public void clearCache() throws Exception {
 
 		File userHome = new File(System.getProperty("user.home"));
@@ -233,6 +342,11 @@ public final class CacheManager implements Runnable {
 		deleteRecursive(hostHome);
 	}
 
+	/**
+	 * Delete recursive.
+	 *
+	 * @param rootDir the root dir
+	 */
 	private void deleteRecursive(File rootDir) {
 
 		File[] c = rootDir.listFiles();
@@ -246,11 +360,20 @@ public final class CacheManager implements Runnable {
 		}
 	}
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws Exception the exception
+	 */
 	public static void main(String[] args) throws Exception {
 		CacheManager c = new CacheManager();
 		c.clearCache();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	public void run() {
 		try {
 			Thread.sleep(INITIAL_SLEEP);
@@ -272,10 +395,20 @@ public final class CacheManager implements Runnable {
 		}
 	}
 
+	/**
+	 * Gets the max cache size.
+	 *
+	 * @return the max cache size
+	 */
 	private long getMaxCacheSize() {
 		return MAX_CACHE_SIZE;
 	}
 
+	/**
+	 * Sweep cache.
+	 *
+	 * @throws Exception the exception
+	 */
 	private void sweepCache() throws Exception {
 		CacheStoreInfo sinfo = this.getCacheStoreInfo();
 		if (logger.isLoggable(Level.INFO)) {
@@ -319,6 +452,12 @@ public final class CacheManager implements Runnable {
 		}
 	}
 
+	/**
+	 * Gets the cache store info.
+	 *
+	 * @return the cache store info
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private CacheStoreInfo getCacheStoreInfo() throws IOException {
 		CacheStoreInfo csinfo = new CacheStoreInfo();
 		File cacheRoot = StorageManager.getInstance().getCacheRoot();
@@ -326,6 +465,12 @@ public final class CacheManager implements Runnable {
 		return csinfo;
 	}
 
+	/**
+	 * Populate cache store info.
+	 *
+	 * @param csinfo the csinfo
+	 * @param directory the directory
+	 */
 	private void populateCacheStoreInfo(CacheStoreInfo csinfo, File directory) {
 		File[] files = directory.listFiles();
 		if (files == null) {

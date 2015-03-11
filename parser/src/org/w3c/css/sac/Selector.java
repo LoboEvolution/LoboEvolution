@@ -13,6 +13,7 @@
  */
 package org.w3c.css.sac;
 
+
 /**
  * This interface defines a selector.
  * <p>
@@ -21,8 +22,8 @@ package org.w3c.css.sac;
  * <p>
  * All examples are CSS2 compliant.
  *
- * @version $Revision: 477010 $
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  */
 public interface Selector {
 
@@ -152,7 +153,9 @@ public interface Selector {
 	public static final short SAC_DIRECT_ADJACENT_SELECTOR = 12;
 
 	/**
-	 * An integer indicating the type of <code>Selector</code>
+	 * An integer indicating the type of <code>Selector</code>.
+	 *
+	 * @return the selector type
 	 */
 	public short getSelectorType();
 

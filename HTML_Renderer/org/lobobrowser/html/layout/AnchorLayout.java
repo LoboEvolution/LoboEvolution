@@ -20,7 +20,15 @@
 */
 package org.lobobrowser.html.layout;
 
+
+/**
+ * The Class AnchorLayout.
+ */
 public class AnchorLayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new anchor layout.
+	 */
 	public AnchorLayout() {
 		super(DISPLAY_INLINE);
 	}

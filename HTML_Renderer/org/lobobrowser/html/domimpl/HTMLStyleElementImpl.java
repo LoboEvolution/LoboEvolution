@@ -37,24 +37,45 @@ import org.w3c.dom.css.CSSStyleSheet;
 
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 
+
+/**
+ * The Class HTMLStyleElementImpl.
+ */
 public class HTMLStyleElementImpl extends HTMLElementImpl implements
 		HTMLStyleElement {
+	
+	/** The style sheet. */
 	private CSSStyleSheet styleSheet;
 
+	/**
+	 * Instantiates a new HTML style element impl.
+	 */
 	public HTMLStyleElementImpl() {
 		super(HtmlProperties.STYLE, true);
 	}
 
+	/**
+	 * Instantiates a new HTML style element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLStyleElementImpl(String name) {
 		super(name, true);
 	}
 
+	/** The disabled. */
 	private boolean disabled;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#getDisabled()
+	 */
 	public boolean getDisabled() {
 		return this.disabled;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLStyleElement#setDisabled(boolean)
+	 */
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
 		CSSStyleSheet sheet = this.styleSheet;
@@ -63,22 +84,37 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLStyleElement#getMedia()
+	 */
 	public String getMedia() {
 		return this.getAttribute(HtmlAttributeProperties.MEDIA);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLStyleElement#setMedia(java.lang.String)
+	 */
 	public void setMedia(String media) {
 		this.setAttribute(HtmlAttributeProperties.MEDIA, media);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLStyleElement#getType()
+	 */
 	public String getType() {
 		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLStyleElement#setType(java.lang.String)
+	 */
 	public void setType(String type) {
 		this.setAttribute(HtmlAttributeProperties.TYPE, type);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setUserData(java.lang.String, java.lang.Object, org.w3c.dom.UserDataHandler)
+	 */
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		if (HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
 			this.processStyle();
@@ -88,6 +124,9 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements
 		return super.setUserData(key, data, handler);
 	}
 
+	/**
+	 * Process style.
+	 */
 	protected void processStyle() {
 		this.styleSheet = null;
 		UserAgentContext uacontext = this.getUserAgentContext();
@@ -139,16 +178,25 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.StringBuffer)
+	 */
 	protected void appendInnerTextImpl(StringBuffer buffer) {
 		// nop
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLStyleElement#getScoped()
+	 */
 	@Override
 	public boolean getScoped() {
 		String scoped = this.getAttribute(HtmlAttributeProperties.SCOPED);
 		return HtmlAttributeProperties.SCOPED.equalsIgnoreCase(scoped);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLStyleElement#setScoped(boolean)
+	 */
 	@Override
 	public void setScoped(boolean scoped) {
 		this.setAttribute(HtmlAttributeProperties.SCOPED, scoped ? HtmlAttributeProperties.SCOPED : null);

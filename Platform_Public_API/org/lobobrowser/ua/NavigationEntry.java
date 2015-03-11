@@ -26,18 +26,37 @@ import java.net.URL;
 
 import org.lobobrowser.clientlet.ClientletResponse;
 
+
 /**
  * Represents one item in the navigation history.
  */
 public class NavigationEntry {
 	// Note: Do not retain request context here.
 
+	/** The url. */
 	private final URL url;
+	
+	/** The method. */
 	private final String method;
+	
+	/** The title. */
 	private final String title;
+	
+	/** The description. */
 	private final String description;
+	
+	/** The frame. */
 	private final NavigatorFrame frame;
 
+	/**
+	 * Instantiates a new navigation entry.
+	 *
+	 * @param frame the frame
+	 * @param url the url
+	 * @param method the method
+	 * @param title the title
+	 * @param description the description
+	 */
 	public NavigationEntry(NavigatorFrame frame, final URL url,
 			final String method, String title, String description) {
 		super();
@@ -50,33 +69,67 @@ public class NavigationEntry {
 
 	/**
 	 * Gets the uppercase request method that resulted in this navigation entry.
+	 *
+	 * @return the method
 	 */
 	public String getMethod() {
 		return method;
 	}
 
+	/**
+	 * Gets the title.
+	 *
+	 * @return the title
+	 */
 	public String getTitle() {
 		return title;
 	}
 
+	/**
+	 * Gets the url.
+	 *
+	 * @return the url
+	 */
 	public URL getUrl() {
 		return url;
 	}
 
+	/**
+	 * Gets the navigator frame.
+	 *
+	 * @return the navigator frame
+	 */
 	public NavigatorFrame getNavigatorFrame() {
 		return frame;
 	}
 
+	/**
+	 * From response.
+	 *
+	 * @param frame the frame
+	 * @param response the response
+	 * @param title the title
+	 * @param description the description
+	 * @return the navigation entry
+	 */
 	public static NavigationEntry fromResponse(NavigatorFrame frame,
 			ClientletResponse response, String title, String description) {
 		return new NavigationEntry(frame, response.getResponseURL(),
 				response.getLastRequestMethod(), title, description);
 	}
 
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return "NavigationEntry[url=" + this.url + ",method=" + this.method
 				+ ",title=" + title + "]";

@@ -33,86 +33,151 @@ import org.lobobrowser.ua.NetworkRequestEvent;
 import org.lobobrowser.ua.NetworkRequestListener;
 import org.w3c.dom.Document;
 
+
+/**
+ * The Class HttpRequestImpl.
+ */
 public class HttpRequestImpl implements HttpRequest {
+	
+	/** The network request. */
 	private final NetworkRequest networkRequest;
 
+	/**
+	 * Instantiates a new http request impl.
+	 *
+	 * @param networkRequest the network request
+	 */
 	public HttpRequestImpl(final NetworkRequest networkRequest) {
 		super();
 		this.networkRequest = networkRequest;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#abort()
+	 */
 	public void abort() {
 		networkRequest.abort();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#getAllResponseHeaders()
+	 */
 	public String getAllResponseHeaders() {
 		return networkRequest.getAllResponseHeaders();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#getReadyState()
+	 */
 	public int getReadyState() {
 		return networkRequest.getReadyState();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#getResponseBytes()
+	 */
 	public byte[] getResponseBytes() {
 		return networkRequest.getResponseBytes();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#getResponseHeader(java.lang.String)
+	 */
 	public String getResponseHeader(String headerName) {
 		return networkRequest.getResponseHeader(headerName);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#getResponseImage()
+	 */
 	public Image getResponseImage() {
 		return networkRequest.getResponseImage();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#getResponseText()
+	 */
 	public String getResponseText() {
 		return networkRequest.getResponseText();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#getResponseXML()
+	 */
 	public Document getResponseXML() {
 		return networkRequest.getResponseXML();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#getStatus()
+	 */
 	public int getStatus() {
 		return networkRequest.getStatus();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#getStatusText()
+	 */
 	public String getStatusText() {
 		return networkRequest.getStatusText();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.lang.String, boolean)
+	 */
 	public void open(String method, String url, boolean asyncFlag)
 			throws IOException {
 		networkRequest.open(method, url, asyncFlag);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.lang.String)
+	 */
 	public void open(String method, String url) throws IOException {
 		networkRequest.open(method, url);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL, boolean, java.lang.String, java.lang.String)
+	 */
 	public void open(String method, URL url, boolean asyncFlag,
 			String userName, String password) throws IOException {
 		networkRequest.open(method, url, asyncFlag, userName, password);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL, boolean, java.lang.String)
+	 */
 	public void open(String method, URL url, boolean asyncFlag, String userName)
 			throws IOException {
 		networkRequest.open(method, url, asyncFlag, userName);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL, boolean)
+	 */
 	public void open(String method, URL url, boolean asyncFlag)
 			throws IOException {
 		networkRequest.open(method, url, asyncFlag);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL)
+	 */
 	public void open(String method, URL url) throws IOException {
 		networkRequest.open(method, url);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#send(java.lang.String)
+	 */
 	public void send(String content) throws IOException {
 		networkRequest.send(content);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#addReadyStateChangeListener(org.lobobrowser.html.ReadyStateChangeListener)
+	 */
 	public void addReadyStateChangeListener(
 			final ReadyStateChangeListener listener) {
 		networkRequest.addNetworkRequestListener(new NetworkRequestListener() {
@@ -122,6 +187,9 @@ public class HttpRequestImpl implements HttpRequest {
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HttpRequest#setRequestHeader(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void setRequestHeader(String header, String value) {
 		

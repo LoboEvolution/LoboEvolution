@@ -28,10 +28,27 @@ import javax.tools.JavaFileObject;
 
 import org.lobobrowser.clientlet.ClientletContext;
 
+
+/**
+ * The Class URLJavaFileObject.
+ */
 public class URLJavaFileObject extends URLFileObject implements JavaFileObject {
+	
+	/** The kind. */
 	private final Kind kind;
+	
+	/** The nesting kind. */
 	private final NestingKind nestingKind;
 
+	/**
+	 * Instantiates a new URL java file object.
+	 *
+	 * @param context the context
+	 * @param url the url
+	 * @param fullName the full name
+	 * @param kind the kind
+	 * @param nestingKind the nesting kind
+	 */
 	public URLJavaFileObject(ClientletContext context, URL url,
 			String fullName, Kind kind, NestingKind nestingKind) {
 		super(context, url, fullName);
@@ -39,18 +56,30 @@ public class URLJavaFileObject extends URLFileObject implements JavaFileObject {
 		this.nestingKind = nestingKind;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#getAccessLevel()
+	 */
 	public Modifier getAccessLevel() {
 		return Modifier.PUBLIC;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#getKind()
+	 */
 	public Kind getKind() {
 		return this.kind;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#getNestingKind()
+	 */
 	public NestingKind getNestingKind() {
 		return this.nestingKind;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#isNameCompatible(java.lang.String, javax.tools.JavaFileObject.Kind)
+	 */
 	public boolean isNameCompatible(String simpleName, Kind kind) {
 		return PathManager.isNameCompatible(simpleName, kind);
 	}

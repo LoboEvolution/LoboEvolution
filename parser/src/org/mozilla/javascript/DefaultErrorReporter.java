@@ -6,6 +6,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * This is the default error reporter for JavaScript.
  *
@@ -13,13 +14,27 @@ package org.mozilla.javascript;
  */
 class DefaultErrorReporter implements ErrorReporter
 {
+    
+    /** The Constant instance. */
     static final DefaultErrorReporter instance = new DefaultErrorReporter();
 
+    /** The for eval. */
     private boolean forEval;
+    
+    /** The chained reporter. */
     private ErrorReporter chainedReporter;
 
+    /**
+     * Instantiates a new default error reporter.
+     */
     private DefaultErrorReporter() { }
 
+    /**
+     * For eval.
+     *
+     * @param reporter the reporter
+     * @return the error reporter
+     */
     static ErrorReporter forEval(ErrorReporter reporter)
     {
         DefaultErrorReporter r = new DefaultErrorReporter();
@@ -28,6 +43,9 @@ class DefaultErrorReporter implements ErrorReporter
         return r;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ErrorReporter#warning(java.lang.String, java.lang.String, int, java.lang.String, int)
+     */
     public void warning(String message, String sourceURI, int line,
                         String lineText, int lineOffset)
     {
@@ -39,6 +57,9 @@ class DefaultErrorReporter implements ErrorReporter
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ErrorReporter#error(java.lang.String, java.lang.String, int, java.lang.String, int)
+     */
     public void error(String message, String sourceURI, int line,
                       String lineText, int lineOffset)
     {
@@ -66,6 +87,9 @@ class DefaultErrorReporter implements ErrorReporter
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ErrorReporter#runtimeError(java.lang.String, java.lang.String, int, java.lang.String, int)
+     */
     public EvaluatorException runtimeError(String message, String sourceURI,
                                            int line, String lineText,
                                            int lineOffset)

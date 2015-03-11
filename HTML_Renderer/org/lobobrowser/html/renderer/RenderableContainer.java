@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.util.Collection;
 
+
 /**
  * A RenderableContainer is either usually a parent block or the root GUI
  * component. It's is a Renderable or GUI component whose layout may be
@@ -32,28 +33,84 @@ import java.util.Collection;
  */
 public interface RenderableContainer {
 	// public Insets getInsets();
+	/**
+	 * Adds the component.
+	 *
+	 * @param component the component
+	 * @return the component
+	 */
 	public Component addComponent(Component component);
 
 	// public void remove(Component component);
+	/**
+	 * Invalidate layout up tree.
+	 */
 	public void invalidateLayoutUpTree();
 
+	/**
+	 * Repaint.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 */
 	public void repaint(int x, int y, int width, int height);
 
+	/**
+	 * Relayout.
+	 */
 	public void relayout();
 
+	/**
+	 * Update all widget bounds.
+	 */
 	public void updateAllWidgetBounds();
 
+	/**
+	 * Gets the painted background color.
+	 *
+	 * @return the painted background color
+	 */
 	public Color getPaintedBackgroundColor();
 
+	/**
+	 * Gets the GUI point.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @return the GUI point
+	 */
 	public java.awt.Point getGUIPoint(int x, int y);
 
+	/**
+	 * Focus.
+	 */
 	public void focus();
 
+	/**
+	 * Adds the delayed pair.
+	 *
+	 * @param pair the pair
+	 */
 	public void addDelayedPair(DelayedPair pair);
 
+	/**
+	 * Gets the delayed pairs.
+	 *
+	 * @return the delayed pairs
+	 */
 	public Collection getDelayedPairs();
 
+	/**
+	 * Gets the parent container.
+	 *
+	 * @return the parent container
+	 */
 	public RenderableContainer getParentContainer();
 
+	/**
+	 * Clear delayed pairs.
+	 */
 	public void clearDelayedPairs();
 }

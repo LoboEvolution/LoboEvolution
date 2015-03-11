@@ -28,20 +28,40 @@ import java.util.Collection;
 import java.util.EventListener;
 import java.util.EventObject;
 
+
 /**
+ * The Class EventDispatch2.
+ *
  * @author J. H. S.
  */
 public abstract class EventDispatch2 {
+	
+	/** The listeners. */
 	private Collection<EventListener> listeners;
+	
+	/** The Constant EMPTY_ARRAY. */
 	private static final EventListener[] EMPTY_ARRAY = new EventListener[0];
 
+	/**
+	 * Instantiates a new event dispatch2.
+	 */
 	public EventDispatch2() {
 	}
 
+	/**
+	 * Creates the listener collection.
+	 *
+	 * @return the collection
+	 */
 	public Collection<EventListener> createListenerCollection() {
 		return new ArrayList<EventListener>();
 	}
 
+	/**
+	 * Adds the listener.
+	 *
+	 * @param listener the listener
+	 */
 	public final void addListener(EventListener listener) {
 		synchronized (this) {
 			if (this.listeners == null) {
@@ -51,6 +71,11 @@ public abstract class EventDispatch2 {
 		}
 	}
 
+	/**
+	 * Removes the listener.
+	 *
+	 * @param listener the listener
+	 */
 	public final void removeListener(EventListener listener) {
 		synchronized (this) {
 			if (this.listeners != null) {
@@ -59,6 +84,12 @@ public abstract class EventDispatch2 {
 		}
 	}
 
+	/**
+	 * Fire event.
+	 *
+	 * @param event the event
+	 * @return true, if successful
+	 */
 	public final boolean fireEvent(EventObject event) {
 		EventListener[] larray;
 		synchronized (this) {
@@ -76,6 +107,12 @@ public abstract class EventDispatch2 {
 		return true;
 	}
 
+	/**
+	 * Dispatch event.
+	 *
+	 * @param listener the listener
+	 * @param event the event
+	 */
 	protected abstract void dispatchEvent(EventListener listener,
 			EventObject event);
 }

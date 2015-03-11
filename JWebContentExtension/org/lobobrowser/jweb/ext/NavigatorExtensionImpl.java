@@ -25,18 +25,35 @@ import org.lobobrowser.ua.NavigatorExtension;
 import org.lobobrowser.ua.NavigatorExtensionContext;
 import org.lobobrowser.ua.NavigatorWindow;
 
+
+/**
+ * The Class NavigatorExtensionImpl.
+ */
 public class NavigatorExtensionImpl implements NavigatorExtension {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtension#destroy()
+	 */
 	public void destroy() {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtension#init(org.lobobrowser.ua.NavigatorExtensionContext)
+	 */
 	public void init(NavigatorExtensionContext pcontext) {
 		ClientletSelector selector = new JWebClientletSelector();
 		pcontext.addClientletSelector(selector);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtension#windowClosing(org.lobobrowser.ua.NavigatorWindow)
+	 */
 	public void windowClosing(NavigatorWindow wcontext) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtension#windowOpening(org.lobobrowser.ua.NavigatorWindow)
+	 */
 	public void windowOpening(NavigatorWindow wcontext) {
 	}
 }

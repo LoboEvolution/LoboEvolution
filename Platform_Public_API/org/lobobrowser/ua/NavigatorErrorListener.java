@@ -22,6 +22,7 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.ua;
 
+
 /**
  * A listener of navigator events.
  * 
@@ -29,5 +30,11 @@ package org.lobobrowser.ua;
  * @see NavigatorWindowListener
  */
 public interface NavigatorErrorListener extends java.util.EventListener {
+	
+	/**
+	 * Error ocurred.
+	 *
+	 * @param event the event
+	 */
 	public void errorOcurred(NavigatorExceptionEvent event);
 }

@@ -52,21 +52,45 @@ import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.gui.SelectionChangeEvent;
 import org.lobobrowser.html.gui.SelectionChangeListener;
 
+
 /**
  * A Swing frame that can be used to test the Cobra HTML rendering engine.
  */
 public class TestFrame extends JFrame {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(TestFrame.class.getName());
+	
+	/** The rcontext. */
 	private final SimpleHtmlRendererContext rcontext;
+	
+	/** The tree. */
 	private final JTree tree;
+	
+	/** The html panel. */
 	private final HtmlPanel htmlPanel;
+	
+	/** The text area. */
 	private final JTextArea textArea;
+	
+	/** The address field. */
 	private final JTextField addressField;
 
+	/**
+	 * Instantiates a new test frame.
+	 *
+	 * @throws HeadlessException the headless exception
+	 */
 	public TestFrame() throws HeadlessException {
 		this("");
 	}
 
+	/**
+	 * Instantiates a new test frame.
+	 *
+	 * @param title the title
+	 * @throws HeadlessException the headless exception
+	 */
 	public TestFrame(String title) throws HeadlessException {
 		super(title);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -133,15 +157,30 @@ public class TestFrame extends JFrame {
 		});
 	}
 
+	/**
+	 * Gets the html renderer context.
+	 *
+	 * @return the html renderer context
+	 */
 	public HtmlRendererContext getHtmlRendererContext() {
 		return this.rcontext;
 	}
 
+	/**
+	 * Navigate.
+	 *
+	 * @param uri the uri
+	 */
 	public void navigate(String uri) {
 		this.addressField.setText(uri);
 		this.process(uri);
 	}
 
+	/**
+	 * Process.
+	 *
+	 * @param uri the uri
+	 */
 	private void process(String uri) {
 		try {
 			URL url;
@@ -165,12 +204,25 @@ public class TestFrame extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class LocalHtmlRendererContext.
+	 */
 	private class LocalHtmlRendererContext extends SimpleHtmlRendererContext {
+		
+		/**
+		 * Instantiates a new local html renderer context.
+		 *
+		 * @param contextComponent the context component
+		 * @param ucontext the ucontext
+		 */
 		public LocalHtmlRendererContext(HtmlPanel contextComponent,
 				UserAgentContext ucontext) {
 			super(contextComponent, ucontext);
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.test.SimpleHtmlRendererContext#open(java.net.URL, java.lang.String, java.lang.String, boolean)
+		 */
 		public HtmlRendererContext open(URL url, String windowName, String windowFeatures, boolean replace) {
 			TestFrame frame = new TestFrame("Cobra Test Tool");
 			frame.setSize(600, 400);

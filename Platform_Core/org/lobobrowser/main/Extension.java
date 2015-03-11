@@ -53,13 +53,22 @@ import org.lobobrowser.ua.NavigatorWindow;
 import org.lobobrowser.ua.UserAgent;
 import org.lobobrowser.util.EventDispatch2;
 
+
 /**
  * Encapsulates a browser extension or plugin.
  */
 public class Extension implements Comparable, NavigatorExtensionContext {
+	
+	/** The Constant ATTRIBUTE_EXTENSION_CLASS. */
 	private static final String ATTRIBUTE_EXTENSION_CLASS = "extension.class";
+	
+	/** The Constant ATTRIBUTE_EXTENSION_PRIORITY. */
 	private static final String ATTRIBUTE_EXTENSION_PRIORITY = "extension.priority";
+	
+	/** The Constant EXTENSION_PROPERTIES_FILE. */
 	private static final String EXTENSION_PROPERTIES_FILE = "lobo-extension.properties";
+	
+	/** The Constant PRIMARY_EXTENSION_FILE_NAME. */
 	private static final String PRIMARY_EXTENSION_FILE_NAME = "primary.jar";
 
 	/**
@@ -82,22 +91,48 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 	 */
 	public static final int NORMAL_PRIORITY = 5;
 
+	/** The priority. */
 	private final int priority;
+	
+	/** The ext root. */
 	private final File extRoot;
+	
+	/** The jar file. */
 	private final JarFile jarFile;
+	
+	/** The ext class name. */
 	private final String extClassName;
+	
+	/** The ext id. */
 	private final String extId;
+	
+	/** The is primary. */
 	private final boolean isPrimary;
+	
+	/** The is library. */
 	private final boolean isLibrary;
 
 	// TODO: Move these collections to ExtensionManager.
 	// More efficient. Consider removal of extensions.
 
+	/** The clientlet selectors. */
 	private final Collection<ClientletSelector> clientletSelectors;
+	
+	/** The connection processors. */
 	private final Collection<ConnectionProcessor> connectionProcessors;
+	
+	/** The navigation listeners. */
 	private final Collection<NavigationListener> navigationListeners;
+	
+	/** The event. */
 	private final EventDispatch2 EVENT = new NavigatorErrorEventDispatch();
 
+	/**
+	 * Instantiates a new extension.
+	 *
+	 * @param extRoot the ext root
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public Extension(File extRoot) throws IOException {
 		this.clientletSelectors = new LinkedList<ClientletSelector>();
 		this.connectionProcessors = new ArrayList<ConnectionProcessor>();
@@ -158,25 +193,58 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public String getId() {
 		return this.extId;
 	}
 
+	/**
+	 * Gets the code source.
+	 *
+	 * @return the code source
+	 * @throws MalformedURLException the malformed url exception
+	 */
 	public URL getCodeSource() throws MalformedURLException {
 		return this.extRoot.toURL();
 	}
 
+	/**
+	 * Checks if is primary extension.
+	 *
+	 * @return true, if is primary extension
+	 */
 	public boolean isPrimaryExtension() {
 		return this.isPrimary;
 	}
 
+	/**
+	 * Checks if is library only.
+	 *
+	 * @return true, if is library only
+	 */
 	public boolean isLibraryOnly() {
 		return this.isLibrary;
 	}
 
+	/** The class loader. */
 	private ClassLoader classLoader;
+	
+	/** The platform extension. */
 	private NavigatorExtension platformExtension;
 
+	/**
+	 * Inits the class loader.
+	 *
+	 * @param parentClassLoader the parent class loader
+	 * @throws MalformedURLException the malformed url exception
+	 * @throws ClassNotFoundException the class not found exception
+	 * @throws IllegalAccessException the illegal access exception
+	 * @throws InstantiationException the instantiation exception
+	 */
 	public void initClassLoader(ClassLoader parentClassLoader)
 			throws MalformedURLException, ClassNotFoundException,
 			IllegalAccessException, InstantiationException {
@@ -196,6 +264,11 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * Gets the class loader.
+	 *
+	 * @return the class loader
+	 */
 	public ClassLoader getClassLoader() {
 		synchronized (this) {
 			return this.classLoader;
@@ -205,6 +278,8 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 	/**
 	 * Gets the {@link org.lobobrowser.ua.NavigatorExtension} implementation. It
 	 * may return <code>null</code> in the case of a library.
+	 *
+	 * @return the navigator extension
 	 */
 	public NavigatorExtension getNavigatorExtension() {
 		synchronized (this) {
@@ -212,6 +287,9 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * Inits the extension.
+	 */
 	public void initExtension() {
 		Thread currentThread = Thread.currentThread();
 		ClassLoader prevClassLoader = currentThread.getContextClassLoader();
@@ -229,6 +307,11 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * Inits the extension window.
+	 *
+	 * @param wcontext the wcontext
+	 */
 	public void initExtensionWindow(NavigatorWindow wcontext) {
 		Thread currentThread = Thread.currentThread();
 		ClassLoader prevClassLoader = currentThread.getContextClassLoader();
@@ -246,6 +329,11 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * Shutdown extension window.
+	 *
+	 * @param wcontext the wcontext
+	 */
 	public void shutdownExtensionWindow(NavigatorWindow wcontext) {
 		Thread currentThread = Thread.currentThread();
 		ClassLoader prevClassLoader = currentThread.getContextClassLoader();
@@ -263,12 +351,20 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * Close.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void close() throws IOException {
 		if (this.jarFile != null) {
 			this.jarFile.close();
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtensionContext#addClientletSelector(org.lobobrowser.clientlet.ClientletSelector)
+	 */
 	public void addClientletSelector(ClientletSelector cs) {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
@@ -279,6 +375,13 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * Gets the clientlet.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @return the clientlet
+	 */
 	public Clientlet getClientlet(ClientletRequest request,
 			ClientletResponse response) {
 		// Need to set the class loader in thread context, otherwise
@@ -304,6 +407,13 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * Gets the last resort clientlet.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @return the last resort clientlet
+	 */
 	public Clientlet getLastResortClientlet(ClientletRequest request,
 			ClientletResponse response) {
 		Thread currentThread = Thread.currentThread();
@@ -327,16 +437,24 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtensionContext#addNavigatorErrorListener(org.lobobrowser.ua.NavigatorErrorListener)
+	 */
 	public void addNavigatorErrorListener(NavigatorErrorListener listener) {
 		EVENT.addListener(listener);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtensionContext#removeNavigatorErrorListener(org.lobobrowser.ua.NavigatorErrorListener)
+	 */
 	public void removeNavigatorErrorListener(NavigatorErrorListener listener) {
 		EVENT.removeListener(listener);
 	}
 
 	/**
-	 * @param event
+	 * Handle error.
+	 *
+	 * @param event the event
 	 * @return True only if the event was dispatched to at least one listener.
 	 */
 	public boolean handleError(NavigatorExceptionEvent event) {
@@ -344,6 +462,9 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		return EVENT.fireEvent(event);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtensionContext#addURLStreamHandlerFactory(java.net.URLStreamHandlerFactory)
+	 */
 	public void addURLStreamHandlerFactory(URLStreamHandlerFactory factory) {
 		// TODO: Since extensions are intialized in parallel,
 		// this is not necessarily done in order of priority.
@@ -351,10 +472,16 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 				.addFactory(factory);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtensionContext#getUserAgent()
+	 */
 	public UserAgent getUserAgent() {
 		return org.lobobrowser.request.UserAgentImpl.getInstance();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	public int compareTo(Object o) {
 		// Reverse order based on priority.
 		Extension other = (Extension) o;
@@ -365,10 +492,16 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		return this.extRoot.compareTo(other.extRoot);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	public int hashCode() {
 		return this.priority | this.extRoot.hashCode();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object other) {
 		if (!(other instanceof Extension)) {
 			return false;
@@ -376,11 +509,17 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		return ((Extension) other).extRoot.equals(this.extRoot);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return "ExtensionInfo[extRoot=" + this.extRoot + ",isLibrary="
 				+ this.isLibrary + "]";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtensionContext#addConnectionProcessor(org.lobobrowser.ua.ConnectionProcessor)
+	 */
 	public void addConnectionProcessor(ConnectionProcessor processor) {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
@@ -391,6 +530,9 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtensionContext#addNavigationListener(org.lobobrowser.ua.NavigationListener)
+	 */
 	public void addNavigationListener(NavigationListener listener) {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
@@ -401,6 +543,9 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtensionContext#removeClientletSelector(org.lobobrowser.clientlet.ClientletSelector)
+	 */
 	public void removeClientletSelector(ClientletSelector selector) {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
@@ -411,6 +556,9 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtensionContext#removeConnectionProcessor(org.lobobrowser.ua.ConnectionProcessor)
+	 */
 	public void removeConnectionProcessor(ConnectionProcessor processor) {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
@@ -421,6 +569,9 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorExtensionContext#removeNavigationListener(org.lobobrowser.ua.NavigationListener)
+	 */
 	public void removeNavigationListener(NavigationListener listener) {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
@@ -431,6 +582,12 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * Dispatch before navigate.
+	 *
+	 * @param event the event
+	 * @throws NavigationVetoException the navigation veto exception
+	 */
 	void dispatchBeforeNavigate(NavigationEvent event)
 			throws NavigationVetoException {
 		// Should not be public
@@ -457,6 +614,12 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * Dispatch before local navigate.
+	 *
+	 * @param event the event
+	 * @throws NavigationVetoException the navigation veto exception
+	 */
 	void dispatchBeforeLocalNavigate(NavigationEvent event)
 			throws NavigationVetoException {
 		// Should not be public
@@ -483,6 +646,12 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * Dispatch before window open.
+	 *
+	 * @param event the event
+	 * @throws NavigationVetoException the navigation veto exception
+	 */
 	void dispatchBeforeWindowOpen(NavigationEvent event)
 			throws NavigationVetoException {
 		// Should not be public
@@ -509,6 +678,12 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * Dispatch pre connection.
+	 *
+	 * @param connection the connection
+	 * @return the URL connection
+	 */
 	URLConnection dispatchPreConnection(URLConnection connection) {
 		// Should not be public
 		Thread currentThread = Thread.currentThread();
@@ -535,6 +710,12 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * Dispatch post connection.
+	 *
+	 * @param connection the connection
+	 * @return the URL connection
+	 */
 	URLConnection dispatchPostConnection(URLConnection connection) {
 		// Should not be public
 		Thread currentThread = Thread.currentThread();
@@ -558,7 +739,14 @@ public class Extension implements Comparable, NavigatorExtensionContext {
 		}
 	}
 
+	/**
+	 * The Class NavigatorErrorEventDispatch.
+	 */
 	private static class NavigatorErrorEventDispatch extends EventDispatch2 {
+		
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.util.EventDispatch2#dispatchEvent(java.util.EventListener, java.util.EventObject)
+		 */
 		@Override
 		protected void dispatchEvent(EventListener listener, EventObject event) {
 			((NavigatorErrorListener) listener)

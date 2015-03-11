@@ -23,11 +23,24 @@ package org.lobobrowser.html.domimpl;
 import org.w3c.dom.Document;
 import org.w3c.dom.UserDataHandler;
 
+
+/**
+ * The Class HTMLTitleElementImpl.
+ */
 public class HTMLTitleElementImpl extends HTMLElementImpl {
+	
+	/**
+	 * Instantiates a new HTML title element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLTitleElementImpl(String name) {
 		super(name, true);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setUserData(java.lang.String, java.lang.Object, org.w3c.dom.UserDataHandler)
+	 */
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key)
 				&& data == Boolean.FALSE) {

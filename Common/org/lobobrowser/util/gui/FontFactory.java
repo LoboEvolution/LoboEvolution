@@ -24,8 +24,10 @@
 package org.lobobrowser.util.gui;
 
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.font.TextAttribute;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -41,20 +43,37 @@ import javax.swing.text.StyleContext;
 
 import org.lobobrowser.util.Objects;
 
+
 /**
+ * A factory for creating Font objects.
+ *
  * @author J. H. S.
  */
 public class FontFactory {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(FontFactory.class.getName());
+	
+	/** The Constant loggableFine. */
 	private static final boolean loggableFine = logger.isLoggable(Level.FINE);
+	
+	/** The Constant instance. */
 	private static final FontFactory instance = new FontFactory();
+	
+	/** The font families. */
 	private final Set<String> fontFamilies = new HashSet<String>(40);
+	
+	/** The font map. */
 	private final Map<FontKey, Font> fontMap = new HashMap<FontKey, Font>(50);
+	
+	/** The registered fonts. */
 	private final Map<String, Font> registeredFonts = new HashMap<String, Font>(0);
+	
+	/** The default font name. */
 	private String defaultFontName = Font.SANS_SERIF;
 
 	/**
-	 * 
+	 * Instantiates a new font factory.
 	 */
 	private FontFactory() {
 		boolean liflag = loggableFine;
@@ -72,6 +91,11 @@ public class FontFactory {
 		}
 	}
 
+	/**
+	 * Gets the single instance of FontFactory.
+	 *
+	 * @return single instance of FontFactory
+	 */
 	public static final FontFactory getInstance() {
 		return instance;
 	}
@@ -80,16 +104,17 @@ public class FontFactory {
 	 * Registers a font family. It does not close the stream provided. Fonts
 	 * should be registered before the renderer has a chance to cache document
 	 * font specifications.
-	 * 
-	 * @param fontName
-	 *            The name of a font as it would appear in a font-family
+	 *
+	 * @param fontName            The name of a font as it would appear in a font-family
 	 *            specification.
-	 * @param fontFormat
-	 *            Should be {@link Font#TRUETYPE_FONT}.
+	 * @param fontFormat            Should be {@link Font#TRUETYPE_FONT}.
+	 * @param fontStream the font stream
+	 * @throws FontFormatException the font format exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void registerFont(String fontName, int fontFormat,
 			InputStream fontStream)
-			throws java.awt.FontFormatException, java.io.IOException {
+			throws FontFormatException, IOException {
 		Font f = Font.createFont(fontFormat, fontStream);
 		synchronized (this) {
 			this.registeredFonts.put(fontName.toLowerCase(), f);
@@ -109,6 +134,18 @@ public class FontFactory {
 		}
 	}
 
+	/**
+	 * Gets the font.
+	 *
+	 * @param fontFamily the font family
+	 * @param fontStyle the font style
+	 * @param fontVariant the font variant
+	 * @param fontWeight the font weight
+	 * @param fontSize the font size
+	 * @param locales the locales
+	 * @param superscript the superscript
+	 * @return the font
+	 */
 	public Font getFont(String fontFamily, String fontStyle,
 			String fontVariant, String fontWeight, float fontSize, Set locales,
 			Integer superscript) {
@@ -124,6 +161,11 @@ public class FontFactory {
 		}
 	}
 
+	/**
+	 * Gets the default font name.
+	 *
+	 * @return the default font name
+	 */
 	public String getDefaultFontName() {
 		return defaultFontName;
 	}
@@ -144,11 +186,24 @@ public class FontFactory {
 		this.defaultFontName = defaultFontName;
 	}
 
+	/**
+	 * Creates a new Font object.
+	 *
+	 * @param key the key
+	 * @return the font
+	 */
 	private final Font createFont(FontKey key) {
 		Font font = createFont_Impl(key);
 		return superscriptFont(font, key.superscript);
 	}
 
+	/**
+	 * Superscript font.
+	 *
+	 * @param baseFont the base font
+	 * @param newSuperscript the new superscript
+	 * @return the font
+	 */
 	public static Font superscriptFont(Font baseFont, Integer newSuperscript) {
 		if (newSuperscript == null) {
 			return baseFont;
@@ -167,6 +222,12 @@ public class FontFactory {
 		}
 	}
 
+	/**
+	 * Creates a new Font object.
+	 *
+	 * @param key the key
+	 * @return the font
+	 */
 	private final Font createFont_Impl(FontKey key) {
 		String fontNames = key.fontFamily;
 		String matchingFace = null;
@@ -228,6 +289,14 @@ public class FontFactory {
 				(int) Math.round(key.fontSize));
 	}
 
+	/**
+	 * Creates a new Font object.
+	 *
+	 * @param name the name
+	 * @param style the style
+	 * @param size the size
+	 * @return the font
+	 */
 	private Font createFont(String name, int style, int size) {
 		return StyleContext.getDefaultStyleContext().getFont(name, style, size);
 		// Proprietary Sun API. Maybe shouldn't use it. Works well for Chinese.
@@ -235,21 +304,42 @@ public class FontFactory {
 		// size));
 	}
 
+	/**
+	 * The Class FontKey.
+	 */
 	private static class FontKey {
+		
+		/** The font family. */
 		public final String fontFamily;
+		
+		/** The font style. */
 		public final String fontStyle;
+		
+		/** The font variant. */
 		public final String fontVariant;
+		
+		/** The font weight. */
 		public final String fontWeight;
+		
+		/** The font size. */
 		public final float fontSize;
+		
+		/** The locales. */
 		public final Set locales;
+		
+		/** The superscript. */
 		public final Integer superscript;
 
 		/**
-		 * @param fontFamily
-		 * @param fontStyle
-		 * @param fontVariant
-		 * @param fontWeight
-		 * @param fontSize
+		 * Instantiates a new font key.
+		 *
+		 * @param fontFamily the font family
+		 * @param fontStyle the font style
+		 * @param fontVariant the font variant
+		 * @param fontWeight the font weight
+		 * @param fontSize the font size
+		 * @param locales the locales
+		 * @param superscript the superscript
 		 */
 		public FontKey(final String fontFamily, final String fontStyle,
 				final String fontVariant, final String fontWeight,
@@ -265,6 +355,9 @@ public class FontFactory {
 			this.superscript = superscript;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
 		public boolean equals(Object other) {
 			if (other == this) {
 				// Quick check.
@@ -288,8 +381,12 @@ public class FontFactory {
 					&& Objects.equals(this.locales, ors.locales);
 		}
 
+		/** The cached hash. */
 		private int cachedHash = -1;
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#hashCode()
+		 */
 		public int hashCode() {
 			int ch = this.cachedHash;
 			if (ch != -1) {
@@ -315,6 +412,9 @@ public class FontFactory {
 			return ch;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
 		public String toString() {
 			return "FontKey[family=" + this.fontFamily + ",size="
 					+ this.fontSize + ",style=" + this.fontStyle + ",weight="

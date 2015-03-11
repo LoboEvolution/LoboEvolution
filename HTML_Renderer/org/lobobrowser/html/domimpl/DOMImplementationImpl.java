@@ -29,27 +29,50 @@ import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
 
+
+/**
+ * The Class DOMImplementationImpl.
+ */
 public class DOMImplementationImpl implements DOMImplementation {
+	
+	/** The context. */
 	private final UserAgentContext context;
 
+	/**
+	 * Instantiates a new DOM implementation impl.
+	 *
+	 * @param context the context
+	 */
 	public DOMImplementationImpl(UserAgentContext context) {
 		this.context = context;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.DOMImplementation#hasFeature(java.lang.String, java.lang.String)
+	 */
 	public boolean hasFeature(String feature, String version) {
 		return "HTML".equals(feature) && "2.0".compareTo(version) <= 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.DOMImplementation#createDocumentType(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	public DocumentType createDocumentType(String qualifiedName,
 			String publicId, String systemId) throws DOMException {
 		return new DOMDocumentTypeImpl(qualifiedName, publicId, systemId);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.DOMImplementation#createDocument(java.lang.String, java.lang.String, org.w3c.dom.DocumentType)
+	 */
 	public Document createDocument(String namespaceURI, String qualifiedName,
 			DocumentType doctype) throws DOMException {
 		return new HTMLDocumentImpl(this.context);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.DOMImplementation#getFeature(java.lang.String, java.lang.String)
+	 */
 	public Object getFeature(String feature, String version) {
 		if ("HTML".equals(feature) && "2.0".compareTo(version) <= 0) {
 			return this;

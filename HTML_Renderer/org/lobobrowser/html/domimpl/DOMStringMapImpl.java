@@ -22,26 +22,42 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.w3c.DOMStringMap;
 
+
+/**
+ * The Class DOMStringMapImpl.
+ */
 public class DOMStringMapImpl implements DOMStringMap {
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.DOMStringMap#getElement(java.lang.String)
+	 */
 	@Override
 	public String getElement(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.DOMStringMap#setElement(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void setElement(String name, String value) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.DOMStringMap#createElement(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void createElement(String name, String value) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.DOMStringMap#deleteElement(java.lang.String)
+	 */
 	@Override
 	public void deleteElement(String name) {
 		// TODO Auto-generated method stub

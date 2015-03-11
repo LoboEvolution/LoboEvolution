@@ -44,6 +44,7 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+
 /**
  * The <code>DocumentBuilderImpl</code> class is an HTML DOM parser that
  * implements the standard W3C <code>DocumentBuilder</code> interface.
@@ -51,11 +52,21 @@ import org.xml.sax.SAXException;
  * @author J. H. S.
  */
 public class DocumentBuilderImpl extends DocumentBuilder {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(DocumentBuilderImpl.class.getName());
+	
+	/** The resolver. */
 	private EntityResolver resolver;
+	
+	/** The error handler. */
 	private ErrorHandler errorHandler;
+	
+	/** The bcontext. */
 	private final UserAgentContext bcontext;
+	
+	/** The rcontext. */
 	private final HtmlRendererContext rcontext;
 
 	/**
@@ -110,10 +121,12 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 	/**
 	 * Parses an HTML document. Note that this method will read the entire input
 	 * source before returning a <code>Document</code> instance.
-	 * 
-	 * @param is
-	 *            The input source, which may be an instance of
+	 *
+	 * @param is            The input source, which may be an instance of
 	 *            {@link org.lobobrowser.html.parser.InputSourceImpl}.
+	 * @return the document
+	 * @throws SAXException the SAX exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see #createDocument(InputSource)
 	 */
 	public Document parse(InputSource is) throws org.xml.sax.SAXException,
@@ -126,11 +139,13 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 	/**
 	 * Creates a document without parsing the input provided, so the document
 	 * object can be used for incremental rendering.
-	 * 
-	 * @param is
-	 *            The input source, which may be an instance of
+	 *
+	 * @param is            The input source, which may be an instance of
 	 *            {@link org.lobobrowser.html.parser.InputSourceImpl}. The input
 	 *            source must provide either an input stream or a reader.
+	 * @return the document
+	 * @throws SAXException the SAX exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HTMLDocumentImpl#load()
 	 */
 	public Document createDocument(InputSource is) throws SAXException,
@@ -172,28 +187,47 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 		return document;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.xml.parsers.DocumentBuilder#isNamespaceAware()
+	 */
 	public boolean isNamespaceAware() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.xml.parsers.DocumentBuilder#isValidating()
+	 */
 	public boolean isValidating() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.xml.parsers.DocumentBuilder#setEntityResolver(org.xml.sax.EntityResolver)
+	 */
 	public void setEntityResolver(EntityResolver er) {
 		this.resolver = er;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.xml.parsers.DocumentBuilder#setErrorHandler(org.xml.sax.ErrorHandler)
+	 */
 	public void setErrorHandler(ErrorHandler eh) {
 		this.errorHandler = eh;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.xml.parsers.DocumentBuilder#newDocument()
+	 */
 	public Document newDocument() {
 		return new HTMLDocumentImpl(this.bcontext);
 	}
 
+	/** The dom implementation. */
 	private DOMImplementation domImplementation;
 
+	/* (non-Javadoc)
+	 * @see javax.xml.parsers.DocumentBuilder#getDOMImplementation()
+	 */
 	public DOMImplementation getDOMImplementation() {
 		synchronized (this) {
 			if (this.domImplementation == null) {
@@ -204,10 +238,20 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 		}
 	}
 
+	/**
+	 * Gets the error handler.
+	 *
+	 * @return the error handler
+	 */
 	public ErrorHandler getErrorHandler() {
 		return errorHandler;
 	}
 
+	/**
+	 * Gets the resolver.
+	 *
+	 * @return the resolver
+	 */
 	public EntityResolver getResolver() {
 		return resolver;
 	}

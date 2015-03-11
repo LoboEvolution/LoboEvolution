@@ -24,14 +24,29 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.w3c.dom.Node;
 import org.w3c.dom.css.CSS2Properties;
 
+
+/**
+ * The Class TableCaptionRenderState.
+ */
 public class TableCaptionRenderState extends DisplayRenderState {
+	
+	/**
+	 * Instantiates a new table caption render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param element the element
+	 */
 	public TableCaptionRenderState(RenderState prevRenderState,
 			HTMLElementImpl element) {
 		super(prevRenderState, element, RenderState.DISPLAY_TABLE_CAPTION);
 	}
 
+	/** The align x percent. */
 	private int alignXPercent = -1;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getAlignXPercent()
+	 */
 	public int getAlignXPercent() {
 		int axp = this.alignXPercent;
 		if (axp != -1) {
@@ -42,6 +57,12 @@ public class TableCaptionRenderState extends DisplayRenderState {
 		return axp;
 	}
 
+	/**
+	 * Gets the align x percent.
+	 *
+	 * @param htmlElement the html element
+	 * @return the align x percent
+	 */
 	public int getAlignXPercent(HTMLElementImpl htmlElement) {
 		int axp = 50;// caption text is default in middle of caption
 		String textAlign = null;

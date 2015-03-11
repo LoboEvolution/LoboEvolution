@@ -8,6 +8,7 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
+
 /**
  * AST node representing unary operators such as {@code ++},
  * {@code ~}, {@code typeof} and {@code delete}.  The type field
@@ -22,18 +23,32 @@ import org.mozilla.javascript.Token;
  */
 public class UnaryExpression extends AstNode {
 
+    /** The operand. */
     private AstNode operand;
+    
+    /** The is postfix. */
     private boolean isPostfix;
 
+    /**
+     * Instantiates a new unary expression.
+     */
     public UnaryExpression() {
     }
 
+    /**
+     * Instantiates a new unary expression.
+     *
+     * @param pos the pos
+     */
     public UnaryExpression(int pos) {
         super(pos);
     }
 
     /**
-     * Constructs a new postfix UnaryExpression
+     * Constructs a new postfix UnaryExpression.
+     *
+     * @param pos the pos
+     * @param len the len
      */
     public UnaryExpression(int pos, int len) {
         super(pos, len);
@@ -41,6 +56,10 @@ public class UnaryExpression extends AstNode {
 
     /**
      * Constructs a new prefix UnaryExpression.
+     *
+     * @param operator the operator
+     * @param operatorPosition the operator position
+     * @param operand the operand
      */
     public UnaryExpression(int operator, int operatorPosition,
                            AstNode operand) {
@@ -51,11 +70,11 @@ public class UnaryExpression extends AstNode {
      * Constructs a new UnaryExpression with the specified operator
      * and operand.  It sets the parent of the operand, and sets its own bounds
      * to encompass the operator and operand.
+     *
      * @param operator the node type
      * @param operatorPosition the absolute position of the operator.
      * @param operand the operand expression
      * @param postFix true if the operator follows the operand.  Int
-     * @throws IllegalArgumentException} if {@code operand} is {@code null}
      */
     public UnaryExpression(int operator, int operatorPosition,
                            AstNode operand, boolean postFix) {
@@ -72,7 +91,9 @@ public class UnaryExpression extends AstNode {
     }
 
     /**
-     * Returns operator token &ndash; alias for {@link #getType}
+     * Returns operator token &ndash; alias for {@link #getType}.
+     *
+     * @return the operator
      */
     public int getOperator() {
         return type;
@@ -80,9 +101,9 @@ public class UnaryExpression extends AstNode {
 
     /**
      * Sets operator &ndash; same as {@link #setType}, but throws an
-     * exception if the operator is invalid
-     * @throws IllegalArgumentException if operator is not a valid
-     * Token code
+     * exception if the operator is invalid.
+     *
+     * @param operator the new operator
      */
     public void setOperator(int operator) {
         if (!Token.isValidToken(operator))
@@ -90,13 +111,19 @@ public class UnaryExpression extends AstNode {
         setType(operator);
     }
 
+    /**
+     * Gets the operand.
+     *
+     * @return the operand
+     */
     public AstNode getOperand() {
         return operand;
     }
 
     /**
      * Sets the operand, and sets its parent to be this node.
-     * @throws IllegalArgumentException} if {@code operand} is {@code null}
+     *
+     * @param operand the new operand
      */
     public void setOperand(AstNode operand) {
         assertNotNull(operand);
@@ -105,26 +132,35 @@ public class UnaryExpression extends AstNode {
     }
 
     /**
-     * Returns whether the operator is postfix
+     * Returns whether the operator is postfix.
+     *
+     * @return true, if is postfix
      */
     public boolean isPostfix() {
         return isPostfix;
     }
 
     /**
-     * Returns whether the operator is prefix
+     * Returns whether the operator is prefix.
+     *
+     * @return true, if is prefix
      */
     public boolean isPrefix() {
         return !isPostfix;
     }
 
     /**
-     * Sets whether the operator is postfix
+     * Sets whether the operator is postfix.
+     *
+     * @param isPostfix the new checks if is postfix
      */
     public void setIsPostfix(boolean isPostfix) {
         this.isPostfix = isPostfix;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -145,6 +181,8 @@ public class UnaryExpression extends AstNode {
 
     /**
      * Visits this node, then the operand.
+     *
+     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

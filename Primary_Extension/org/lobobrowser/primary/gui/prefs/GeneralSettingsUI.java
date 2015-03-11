@@ -39,17 +39,39 @@ import org.lobobrowser.primary.gui.StringListControl;
 import org.lobobrowser.primary.gui.SwingTasks;
 import org.lobobrowser.settings.GeneralSettings;
 
+
+/**
+ * The Class GeneralSettingsUI.
+ */
 public class GeneralSettingsUI extends AbstractSettingsUI {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The settings. */
 	private final GeneralSettings settings = GeneralSettings.getInstance();
+	
+	/** The ie version field. */
 	private final FormField ieVersionField;
+	
+	/** The mozilla version field. */
 	private final FormField mozillaVersionField;
+	
+	/** The ie spoof panel. */
 	private final CheckBoxPanel ieSpoofPanel;
+	
+	/** The moz panel. */
 	private final FormPanel mozPanel;
+	
+	/** The ie panel. */
 	private final FormPanel iePanel;
+	
+	/** The startup pages string list control. */
 	private final StringListControl startupPagesStringListControl;
 
+	/**
+	 * Instantiates a new general settings ui.
+	 */
 	public GeneralSettingsUI() {
 		this.ieVersionField = new FormField(FieldType.TEXT, "MSIE Version:");
 		this.mozillaVersionField = new FormField(FieldType.TEXT,
@@ -76,8 +98,14 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.ieSpoofPanel.updateEnabling();
 	}
 
+	/** The Constant MAX_STARTUP_PAGES. */
 	private static final int MAX_STARTUP_PAGES = 4;
 
+	/**
+	 * Gets the startup group box.
+	 *
+	 * @return the startup group box
+	 */
 	private Component getStartupGroupBox() {
 		Box startupGroupBox = new Box(BoxLayout.Y_AXIS);
 		startupGroupBox.setBorder(new TitledBorder(new EtchedBorder(),
@@ -92,6 +120,11 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		return startupGroupBox;
 	}
 
+	/**
+	 * Gets the user agent group box.
+	 *
+	 * @return the user agent group box
+	 */
 	private Component getUserAgentGroupBox() {
 		JPanel groupBox = new JPanel();
 		groupBox.setPreferredSize(new Dimension(400, 100));
@@ -102,20 +135,36 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		return groupBox;
 	}
 
+	/**
+	 * Gets the IE check box panel.
+	 *
+	 * @return the IE check box panel
+	 */
 	private Component getIECheckBoxPanel() {
 		return this.ieSpoofPanel;
 	}
 
+	/**
+	 * Gets the moz version panel.
+	 *
+	 * @return the moz version panel
+	 */
 	private Component getMozVersionPanel() {
 		return this.mozPanel;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.primary.gui.prefs.AbstractSettingsUI#restoreDefaults()
+	 */
 	@Override
 	public void restoreDefaults() {
 		this.settings.restoreDefaults();
 		this.loadSettings();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.primary.gui.prefs.AbstractSettingsUI#save()
+	 */
 	@Override
 	public void save() {
 		GeneralSettings settings = this.settings;
@@ -126,6 +175,9 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		settings.save();
 	}
 
+	/**
+	 * Load settings.
+	 */
 	private void loadSettings() {
 		GeneralSettings settings = this.settings;
 		this.ieSpoofPanel.setSelected(settings.isSpoofIE());

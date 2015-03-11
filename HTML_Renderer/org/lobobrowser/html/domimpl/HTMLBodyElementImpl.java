@@ -31,11 +31,24 @@ import org.lobobrowser.html.w3c.HTMLDocument;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Document;
 
+
+/**
+ * The Class HTMLBodyElementImpl.
+ */
 public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBodyElement {
+	
+	/**
+	 * Instantiates a new HTML body element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLBodyElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setOwnerDocument(org.w3c.dom.Document, boolean)
+	 */
 	public void setOwnerDocument(Document value, boolean deep) {
 		super.setOwnerDocument(value, deep);
 		if (value instanceof HTMLDocument) {
@@ -43,6 +56,9 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setOwnerDocument(org.w3c.dom.Document)
+	 */
 	public void setOwnerDocument(Document value) {
 		super.setOwnerDocument(value);
 		if (value instanceof HTMLDocument) {
@@ -50,58 +66,100 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBodyElement#getALink()
+	 */
 	public String getALink() {
 		return this.getAttribute(HtmlAttributeProperties.ALINK);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBodyElement#setALink(java.lang.String)
+	 */
 	public void setALink(String aLink) {
 		this.setAttribute(HtmlAttributeProperties.ALINK, aLink);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBodyElement#getBackground()
+	 */
 	public String getBackground() {
 		return this.getAttribute(HtmlAttributeProperties.BACKGROUND);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBodyElement#setBackground(java.lang.String)
+	 */
 	public void setBackground(String background) {
 		this.setAttribute(HtmlAttributeProperties.BACKGROUND, background);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBodyElement#getBgColor()
+	 */
 	public String getBgColor() {
 		return this.getAttribute(HtmlAttributeProperties.BGCOLOR);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBodyElement#setBgColor(java.lang.String)
+	 */
 	public void setBgColor(String bgColor) {
 		this.setAttribute(HtmlAttributeProperties.BGCOLOR, bgColor);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBodyElement#getLink()
+	 */
 	public String getLink() {
 		return this.getAttribute(HtmlAttributeProperties.LINK);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBodyElement#setLink(java.lang.String)
+	 */
 	public void setLink(String link) {
 		this.setAttribute(HtmlAttributeProperties.LINK, link);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBodyElement#getText()
+	 */
 	public String getText() {
 		return this.getAttribute(HtmlAttributeProperties.TEXT);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBodyElement#setText(java.lang.String)
+	 */
 	public void setText(String text) {
 		this.setAttribute(HtmlAttributeProperties.TEXT, text);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBodyElement#getVLink()
+	 */
 	public String getVLink() {
 		return this.getAttribute(HtmlAttributeProperties.VLINK);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLBodyElement#setVLink(java.lang.String)
+	 */
 	public void setVLink(String vLink) {
 		this.setAttribute(HtmlAttributeProperties.VLINK, vLink);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new BodyRenderState(prevRenderState, this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#getOnload()
+	 */
 	public Function getOnload() {
 		Object document = this.document;
 		if (document instanceof HTMLDocumentImpl) {
@@ -111,6 +169,9 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#setOnload(org.mozilla.javascript.Function)
+	 */
 	public void setOnload(Function onload) {
 		Object document = this.document;
 		if (document instanceof HTMLDocumentImpl) {
@@ -120,6 +181,9 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#assignAttributeField(java.lang.String, java.lang.String)
+	 */
 	protected void assignAttributeField(String normalName, String value) {
 		if (HtmlAttributeProperties.ONLOAD.equals(normalName)) {
 			Function onload = this.getEventFunction(null, normalName);

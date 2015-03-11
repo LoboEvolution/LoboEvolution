@@ -35,10 +35,24 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class DOMAttrMapImpl.
+ */
 public class DOMAttrMapImpl extends AbstractScriptableDelegate implements NamedNodeMap {
+	
+	/** The attributes. */
 	private final Map<String,Node> attributes = new HashMap<String,Node>();
+	
+	/** The attribute list. */
 	private final ArrayList attributeList = new ArrayList();
 
+	/**
+	 * Instantiates a new DOM attr map impl.
+	 *
+	 * @param owner the owner
+	 * @param attribs the attribs
+	 */
 	public DOMAttrMapImpl(Element owner, Map attribs) {
 		Iterator i = attribs.entrySet().iterator();
 		while (i.hasNext()) {
@@ -52,28 +66,43 @@ public class DOMAttrMapImpl extends AbstractScriptableDelegate implements NamedN
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.NamedNodeMap#getLength()
+	 */
 	public int getLength() {
 		return this.attributeList.size();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.NamedNodeMap#getNamedItem(java.lang.String)
+	 */
 	public Node getNamedItem(String name) {
 		return (Node) this.attributes.get(name);
 	}
 
 	/**
-	 * @param name
+	 * Named item.
+	 *
+	 * @param name the name
+	 * @return the node
 	 */
 	public Node namedItem(String name) {
 		// Method needed for Javascript indexing.
 		return this.getNamedItem(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.NamedNodeMap#getNamedItemNS(java.lang.String, java.lang.String)
+	 */
 	public Node getNamedItemNS(String namespaceURI, String localName)
 			throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
 				"No namespace support");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.NamedNodeMap#item(int)
+	 */
 	public Node item(int index) {
 		try {
 			return (Node) this.attributeList.get(index);
@@ -82,16 +111,25 @@ public class DOMAttrMapImpl extends AbstractScriptableDelegate implements NamedN
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.NamedNodeMap#removeNamedItem(java.lang.String)
+	 */
 	public Node removeNamedItem(String name) throws DOMException {
 		return (Node) this.attributes.remove(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.NamedNodeMap#removeNamedItemNS(java.lang.String, java.lang.String)
+	 */
 	public Node removeNamedItemNS(String namespaceURI, String localName)
 			throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
 				"No namespace support");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.NamedNodeMap#setNamedItem(org.w3c.dom.Node)
+	 */
 	public Node setNamedItem(Node arg) throws DOMException {
 		Object prevValue = this.attributes.put(arg.getNodeName(), arg);
 		if (prevValue != null) {
@@ -101,6 +139,9 @@ public class DOMAttrMapImpl extends AbstractScriptableDelegate implements NamedN
 		return arg;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.NamedNodeMap#setNamedItemNS(org.w3c.dom.Node)
+	 */
 	public Node setNamedItemNS(Node arg) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
 				"No namespace support");

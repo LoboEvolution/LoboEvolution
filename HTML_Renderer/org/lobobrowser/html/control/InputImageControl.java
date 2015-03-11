@@ -41,17 +41,41 @@ import org.lobobrowser.html.renderer.RenderableSpot;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.WrapperLayout;
 
+
+/**
+ * The Class InputImageControl.
+ */
 public class InputImageControl extends BaseInputControl implements ImageListener {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The valign. */
 	private int valign = RElement.VALIGN_BASELINE;
+	
+	/** The preferred size. */
 	private Dimension preferredSize;
+	
+	/** The declared width. */
 	private int declaredWidth;
+	
+	/** The declared height. */
 	private int declaredHeight;
+	
+	/** The image. */
 	private Image image;
+	
+	/** The mouse being pressed. */
 	private boolean mouseBeingPressed;
+	
+	/** The alt. */
 	private String alt;
 
+	/**
+	 * Instantiates a new input image control.
+	 *
+	 * @param modelNode the model node
+	 */
 	public InputImageControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		this.setLayout(WrapperLayout.getInstance());
@@ -72,6 +96,9 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Dimension size = this.getSize();
@@ -98,6 +125,9 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#reset(int, int)
+	 */
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		HTMLElementImpl element = this.controlElement;
@@ -131,11 +161,21 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 		this.valign = valign;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
 	public Dimension getPreferredSize() {
 		Dimension ps = this.preferredSize;
 		return ps == null ? new Dimension(0, 0) : ps;
 	}
 
+	/**
+	 * Creates the preferred size.
+	 *
+	 * @param dw the dw
+	 * @param dh the dh
+	 * @return the dimension
+	 */
 	public Dimension createPreferredSize(int dw, int dh) {
 		Image img = this.image;
 		if (dw == -1) {
@@ -153,6 +193,11 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 		return new Dimension(dw, dh);
 	}
 
+	/**
+	 * Check preferred size change.
+	 *
+	 * @return true, if successful
+	 */
 	private final boolean checkPreferredSizeChange() {
 		Dimension newPs = this.createPreferredSize(this.declaredWidth,
 				this.declaredHeight);
@@ -197,6 +242,13 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 	 * @see java.awt.Component#imageUpdate(java.awt.Image, int, int, int, int,
 	 * int)
 	 */
+	/**
+	 * Image update.
+	 *
+	 * @param img the img
+	 * @param w the w
+	 * @param h the h
+	 */
 	public void imageUpdate(Image img, final int w, final int h) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -209,11 +261,17 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#paintSelection(java.awt.Graphics, boolean, org.lobobrowser.html.renderer.RenderableSpot, org.lobobrowser.html.renderer.RenderableSpot)
+	 */
 	public boolean paintSelection(Graphics g, boolean inSelection,
 			RenderableSpot startPoint, RenderableSpot endPoint) {
 		return inSelection;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.ImageListener#imageLoaded(org.lobobrowser.html.dombl.ImageEvent)
+	 */
 	public void imageLoaded(ImageEvent event) {
 		// Implementation of ImageListener. Invoked in a request thread most
 		// likely.
@@ -228,10 +286,16 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.InputContext#resetInput()
+	 */
 	public void resetInput() {
 		// NOP
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#getVAlign()
+	 */
 	public int getVAlign() {
 		return this.valign;
 	}

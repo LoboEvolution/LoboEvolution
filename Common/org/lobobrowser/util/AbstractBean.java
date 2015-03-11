@@ -28,6 +28,7 @@ import java.beans.PropertyVetoException;
 import java.beans.VetoableChangeListener;
 import java.beans.VetoableChangeSupport;
 
+
 /**
  * <p>A convenience class from which to extend all non-visual JavaBeans. It
  * manages the PropertyChange notification system, making it relatively trivial
@@ -123,7 +124,9 @@ public abstract class AbstractBean {
      */
     private transient VetoableChangeSupport vcs;
 
-    /** Creates a new instance of JavaBean */
+    /**
+     *  Creates a new instance of JavaBean.
+     */
     protected AbstractBean() {
         pcs = new PropertyChangeSupport(this );
         vcs = new VetoableChangeSupport(this );
@@ -132,6 +135,9 @@ public abstract class AbstractBean {
     /**
      * Creates a new instance of JavaBean, using the supplied PropertyChangeSupport and
      * VetoableChangeSupport delegates. Neither of these may be null.
+     *
+     * @param pcs the pcs
+     * @param vcs the vcs
      */
     protected AbstractBean(PropertyChangeSupport pcs,
             VetoableChangeSupport vcs) {
@@ -190,12 +196,12 @@ public abstract class AbstractBean {
      * test each element to see if it's a
      * <code>PropertyChangeListenerProxy</code>, perform the cast, and examine
      * the parameter.
-     *
+     * 
      * <pre>
      * <code>
      * PropertyChangeListener[] listeners = bean.getPropertyChangeListeners();
      * for (int i = 0; i &lt; listeners.length; i++) {
-     *	 if (listeners[i] instanceof PropertyChangeListenerProxy) {
+     * 	 if (listeners[i] instanceof PropertyChangeListenerProxy) {
      *     PropertyChangeListenerProxy proxy =
      *                    (PropertyChangeListenerProxy)listeners[i];
      *     if (proxy.getPropertyName().equals("foo")) {
@@ -205,11 +211,11 @@ public abstract class AbstractBean {
      *   }
      * }
      * </code>
-     *</pre>
+     * </pre>
      *
-     * @see java.beans.PropertyChangeListenerProxy
      * @return all of the <code>PropertyChangeListeners</code> added or an
      *         empty array if no listeners have been added
+     * @see java.beans.PropertyChangeListenerProxy
      */
     public final PropertyChangeListener[] getPropertyChangeListeners() {
         return pcs.getPropertyChangeListeners();
@@ -477,7 +483,10 @@ public abstract class AbstractBean {
     }
 
     /**
-     * @exception CloneNotSupportedException
+     * Clone.
+     *
+     * @return the object
+     * @exception CloneNotSupportedException the clone not supported exception
      */
     public Object clone() throws CloneNotSupportedException {
         AbstractBean result = (AbstractBean) super .clone();

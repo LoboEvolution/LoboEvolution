@@ -6,6 +6,7 @@
 
 package org.mozilla.javascript.ast;
 
+
 /**
  * Simple visitor interface for traversing the AST.  The nodes are visited in
  * an arbitrary order.  The visitor must cast nodes to the appropriate

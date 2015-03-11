@@ -26,17 +26,41 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 
+
+/**
+ * The Class FormField.
+ */
 public class FormField {
+	
+	/** The type. */
 	public final FieldType type;
 
+	/**
+	 * Instantiates a new form field.
+	 *
+	 * @param type the type
+	 */
 	public FormField(final FieldType type) {
 		this(FieldType.TEXT, "");
 	}
 
+	/**
+	 * Instantiates a new form field.
+	 *
+	 * @param type the type
+	 * @param caption the caption
+	 */
 	public FormField(final FieldType type, String caption) {
 		this(type, caption, true);
 	}
 
+	/**
+	 * Instantiates a new form field.
+	 *
+	 * @param type the type
+	 * @param caption the caption
+	 * @param editable the editable
+	 */
 	public FormField(final FieldType type, final String caption,
 			final boolean editable) {
 		this.type = type;
@@ -44,15 +68,31 @@ public class FormField {
 		this.setEditable(editable);
 	}
 
+	/**
+	 * Instantiates a new form field.
+	 *
+	 * @param type the type
+	 * @param editable the editable
+	 */
 	public FormField(final FieldType type, final boolean editable) {
 		this.type = type;
 		this.setEditable(editable);
 	}
 
+	/**
+	 * Gets the caption.
+	 *
+	 * @return the caption
+	 */
 	public String getCaption() {
 		return this.getLabel().getText();
 	}
 
+	/**
+	 * Checks if is editable.
+	 *
+	 * @return true, if is editable
+	 */
 	public boolean isEditable() {
 		JComponent fe = this.getFieldEditor();
 		if (fe instanceof JTextComponent) {
@@ -62,10 +102,20 @@ public class FormField {
 		}
 	}
 
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public FieldType getType() {
 		return type;
 	}
 
+	/**
+	 * Gets the value.
+	 *
+	 * @return the value
+	 */
 	public String getValue() {
 		JComponent fe = this.getFieldEditor();
 		if (fe instanceof JTextComponent) {
@@ -75,6 +125,11 @@ public class FormField {
 		}
 	}
 
+	/**
+	 * Sets the value.
+	 *
+	 * @param value the new value
+	 */
 	public void setValue(String value) {
 		JComponent fe = this.getFieldEditor();
 		if (fe instanceof JTextComponent) {
@@ -82,14 +137,29 @@ public class FormField {
 		}
 	}
 
+	/**
+	 * Gets the tool tip.
+	 *
+	 * @return the tool tip
+	 */
 	public String getToolTip() {
 		return this.getFieldEditor().getToolTipText();
 	}
 
+	/**
+	 * Sets the tool tip.
+	 *
+	 * @param tooltip the new tool tip
+	 */
 	public void setToolTip(String tooltip) {
 		this.getFieldEditor().setToolTipText(tooltip);
 	}
 
+	/**
+	 * Sets the editable.
+	 *
+	 * @param editable the new editable
+	 */
 	public void setEditable(boolean editable) {
 		JComponent fe = this.getFieldEditor();
 		if (fe instanceof JTextComponent) {
@@ -97,12 +167,23 @@ public class FormField {
 		}
 	}
 
+	/**
+	 * Sets the caption.
+	 *
+	 * @param caption the new caption
+	 */
 	public void setCaption(String caption) {
 		this.getLabel().setText(caption);
 	}
 
+	/** The label. */
 	private JLabel label;
 
+	/**
+	 * Gets the label.
+	 *
+	 * @return the label
+	 */
 	public JLabel getLabel() {
 		JLabel label = this.label;
 		if (label != null) {
@@ -113,8 +194,14 @@ public class FormField {
 		return label;
 	}
 
+	/** The field editor. */
 	private JComponent fieldEditor;
 
+	/**
+	 * Gets the field editor.
+	 *
+	 * @return the field editor
+	 */
 	public JComponent getFieldEditor() {
 		JComponent fe = this.fieldEditor;
 		if (fe != null) {

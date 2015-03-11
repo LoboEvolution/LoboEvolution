@@ -25,19 +25,26 @@ import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.NavigatorProgressEvent;
 
+
 /**
  * A interface that receives calls during requests.
  */
 public interface WindowCallback {
+	
 	/**
 	 * Gets a component that may be used as a parent of prompt dialogs during
 	 * requests.
+	 *
+	 * @return the component
 	 */
 	public java.awt.Component getComponent();
 
 	/**
 	 * Called when a document has been accessed, but has not yet rendered.
 	 * Processing could be cancelled.
+	 *
+	 * @param frame the frame
+	 * @param response the response
 	 */
 	public void handleDocumentAccess(NavigatorFrame frame,
 			ClientletResponse response);
@@ -45,39 +52,59 @@ public interface WindowCallback {
 	/**
 	 * Called when the document has either rendered or is beginning to be
 	 * incrementally rendered.
+	 *
+	 * @param frame the frame
+	 * @param response the response
+	 * @param content the content
 	 */
 	public void handleDocumentRendering(NavigatorFrame frame,
 			ClientletResponse response, ComponentContent content);
 
 	/**
 	 * Updates request progress.
+	 *
+	 * @param event the event
 	 */
 	public void updateProgress(NavigatorProgressEvent event);
 
 	/**
 	 * Invoked when there's a request error.
+	 *
+	 * @param frame the frame
+	 * @param response the response
+	 * @param exception the exception
 	 */
 	public void handleError(NavigatorFrame frame, ClientletResponse response,
 			Throwable exception);
 
 	/**
 	 * Called to set a status message.
+	 *
+	 * @param frame the frame
+	 * @param status the status
 	 */
 	public void setStatus(NavigatorFrame frame, String status);
 
 	/**
 	 * Called to set a default status message.
+	 *
+	 * @param frame the frame
+	 * @param defaultStatus the default status
 	 */
 	public void setDefaultStatus(NavigatorFrame frame, String defaultStatus);
 
 	/**
 	 * Gets the current window status message.
+	 *
+	 * @return the status
 	 */
 	public String getStatus();
 
 	/**
 	 * Gets the current default status message or <code>null</code> if there's
 	 * no default.
+	 *
+	 * @return the default status
 	 */
 	public String getDefaultStatus();
 }

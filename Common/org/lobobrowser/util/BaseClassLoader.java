@@ -25,6 +25,7 @@ package org.lobobrowser.util;
 
 import java.security.SecureClassLoader;
 
+
 /**
  * Base class for all project class loaders.
  * 
@@ -33,14 +34,16 @@ import java.security.SecureClassLoader;
 public abstract class BaseClassLoader extends SecureClassLoader {
 
 	/**
-	 * @param parent
+	 * Instantiates a new base class loader.
+	 *
+	 * @param parent the parent
 	 */
 	public BaseClassLoader(ClassLoader parent) {
 		super(parent);
 	}
 
 	/**
-	 * 
+	 * Instantiates a new base class loader.
 	 */
 	public BaseClassLoader() {
 		super();

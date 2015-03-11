@@ -24,14 +24,30 @@ import java.util.ArrayList;
 
 import org.w3c.dom.css.CSSStyleSheet;
 
+
+/**
+ * The Class CSSStyleSheetList.
+ */
 public class CSSStyleSheetList extends ArrayList<Object> {
 	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Gets the length.
+	 *
+	 * @return the length
+	 */
 	public int getLength() {
 		return this.size();
 	}
 
+	/**
+	 * Item.
+	 *
+	 * @param index the index
+	 * @return the CSS style sheet
+	 */
 	public CSSStyleSheet item(int index) {
 		return (CSSStyleSheet) get(index);
 	}

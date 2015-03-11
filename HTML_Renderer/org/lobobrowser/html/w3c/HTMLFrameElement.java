@@ -34,6 +34,7 @@ package org.lobobrowser.html.w3c;
 
 import org.w3c.dom.Document;
 
+
 /**
  * Create a frame. See the FRAME element definition in HTML 4.01.
  * <p>
@@ -41,15 +42,20 @@ import org.w3c.dom.Document;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLFrameElement extends HTMLElement {
+	
 	/**
 	 * Request frame borders. See the frameborder attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return the frame border
 	 */
 	public String getFrameBorder();
 
 	/**
 	 * Request frame borders. See the frameborder attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param frameBorder the new frame border
 	 */
 	public void setFrameBorder(String frameBorder);
 
@@ -57,6 +63,8 @@ public interface HTMLFrameElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a long description of this image or frame. See the longdesc
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @return the long desc
 	 */
 	public String getLongDesc();
 
@@ -64,66 +72,88 @@ public interface HTMLFrameElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a long description of this image or frame. See the longdesc
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @param longDesc the new long desc
 	 */
 	public void setLongDesc(String longDesc);
 
 	/**
 	 * Frame margin height, in pixels. See the marginheight attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @return the margin height
 	 */
 	public String getMarginHeight();
 
 	/**
 	 * Frame margin height, in pixels. See the marginheight attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @param marginHeight the new margin height
 	 */
 	public void setMarginHeight(String marginHeight);
 
 	/**
 	 * Frame margin width, in pixels. See the marginwidth attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @return the margin width
 	 */
 	public String getMarginWidth();
 
 	/**
 	 * Frame margin width, in pixels. See the marginwidth attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @param marginWidth the new margin width
 	 */
 	public void setMarginWidth(String marginWidth);
 
 	/**
 	 * The frame name (object of the <code>target</code> attribute). See the
 	 * name attribute definition in HTML 4.01.
+	 *
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * The frame name (object of the <code>target</code> attribute). See the
 	 * name attribute definition in HTML 4.01.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name);
 
 	/**
 	 * When true, forbid user from resizing frame. See the noresize attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the no resize
 	 */
 	public boolean getNoResize();
 
 	/**
 	 * When true, forbid user from resizing frame. See the noresize attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param noResize the new no resize
 	 */
 	public void setNoResize(boolean noResize);
 
 	/**
 	 * Specify whether or not the frame should have scrollbars. See the
 	 * scrolling attribute definition in HTML 4.01.
+	 *
+	 * @return the scrolling
 	 */
 	public String getScrolling();
 
 	/**
 	 * Specify whether or not the frame should have scrollbars. See the
 	 * scrolling attribute definition in HTML 4.01.
+	 *
+	 * @param scrolling the new scrolling
 	 */
 	public void setScrolling(String scrolling);
 
@@ -131,6 +161,8 @@ public interface HTMLFrameElement extends HTMLElement {
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating the initial frame contents. See the src attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @return the src
 	 */
 	public String getSrc();
 
@@ -138,13 +170,16 @@ public interface HTMLFrameElement extends HTMLElement {
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating the initial frame contents. See the src attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @param src the new src
 	 */
 	public void setSrc(String src);
 
 	/**
 	 * The document this frame contains, if there is any and it is available, or
 	 * <code>null</code> otherwise.
-	 * 
+	 *
+	 * @return the content document
 	 * @since DOM Level 2
 	 */
 	public Document getContentDocument();

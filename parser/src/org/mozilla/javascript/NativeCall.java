@@ -6,28 +6,48 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * This class implements the activation object.
- *
+ * 
  * See ECMA 10.1.6
  *
- * @see org.mozilla.javascript.Arguments
  * @author Norris Boyd
+ * @see org.mozilla.javascript.Arguments
  */
 public final class NativeCall extends IdScriptableObject
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -7471457301304454454L;
 
+    /** The Constant CALL_TAG. */
     private static final Object CALL_TAG = "Call";
 
+    /**
+     * Inits the.
+     *
+     * @param scope the scope
+     * @param sealed the sealed
+     */
     static void init(Scriptable scope, boolean sealed)
     {
         NativeCall obj = new NativeCall();
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
+    /**
+     * Instantiates a new native call.
+     */
     NativeCall() { }
 
+    /**
+     * Instantiates a new native call.
+     *
+     * @param function the function
+     * @param scope the scope
+     * @param args the args
+     */
     NativeCall(NativeFunction function, Scriptable scope, Object[] args)
     {
         this.function = function;
@@ -68,18 +88,27 @@ public final class NativeCall extends IdScriptableObject
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getClassName()
+     */
     @Override
     public String getClassName()
     {
         return "Call";
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
+     */
     @Override
     protected int findPrototypeId(String s)
     {
         return s.equals("constructor") ? Id_constructor : 0;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
+     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -93,6 +122,9 @@ public final class NativeCall extends IdScriptableObject
         initPrototypeMethod(CALL_TAG, id, s, arity);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -113,13 +145,18 @@ public final class NativeCall extends IdScriptableObject
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
+    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         Id_constructor   = 1,
         MAX_PROTOTYPE_ID = 1;
 
+    /** The function. */
     NativeFunction function;
+    
+    /** The original args. */
     Object[] originalArgs;
 
+    /** The parent activation call. */
     transient NativeCall parentActivationCall;
 }
 

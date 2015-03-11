@@ -29,47 +29,91 @@ package com.steadystate.css.dom;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSStyleSheet;
 
+
 /**
+ * The Class AbstractCSSRuleImpl.
+ *
  * @author koch
  * @author rbri
  */
 public abstract class AbstractCSSRuleImpl extends CSSOMObjectImpl {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 7829784704712797815L;
 
+    /** The parent style sheet_. */
     private CSSStyleSheetImpl parentStyleSheet_;
+    
+    /** The parent rule_. */
     private CSSRule parentRule_;
 
+    /**
+     * Gets the parent style sheet impl.
+     *
+     * @return the parent style sheet impl
+     */
     protected CSSStyleSheetImpl getParentStyleSheetImpl() {
         return parentStyleSheet_;
     }
 
+    /**
+     * Sets the parent style sheet.
+     *
+     * @param parentStyleSheet the new parent style sheet
+     */
     public void setParentStyleSheet(final CSSStyleSheetImpl parentStyleSheet) {
         parentStyleSheet_ = parentStyleSheet;
     }
 
+    /**
+     * Sets the parent rule.
+     *
+     * @param parentRule the new parent rule
+     */
     public void setParentRule(final CSSRule parentRule) {
         parentRule_ = parentRule;
     }
 
+    /**
+     * Instantiates a new abstract css rule impl.
+     *
+     * @param parentStyleSheet the parent style sheet
+     * @param parentRule the parent rule
+     */
     public AbstractCSSRuleImpl(final CSSStyleSheetImpl parentStyleSheet, final CSSRule parentRule) {
         super();
         parentStyleSheet_ = parentStyleSheet;
         parentRule_ = parentRule;
     }
 
+    /**
+     * Instantiates a new abstract css rule impl.
+     */
     public AbstractCSSRuleImpl() {
         super();
     }
 
+    /**
+     * Gets the parent style sheet.
+     *
+     * @return the parent style sheet
+     */
     public CSSStyleSheet getParentStyleSheet() {
         return parentStyleSheet_;
     }
 
+    /**
+     * Gets the parent rule.
+     *
+     * @return the parent rule
+     */
     public CSSRule getParentRule() {
         return parentRule_;
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.dom.CSSOMObjectImpl#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -83,6 +127,9 @@ public abstract class AbstractCSSRuleImpl extends CSSOMObjectImpl {
         // recursive loop -> stack overflow!
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.dom.CSSOMObjectImpl#hashCode()
+     */
     @Override
     public int hashCode() {
         final int hash = super.hashCode();

@@ -46,6 +46,7 @@ import com.steadystate.css.userdata.UserDataConstants;
 import com.steadystate.css.util.LangUtils;
 import com.steadystate.css.util.ThrowCssExceptionErrorHandler;
 
+
 /**
  * Implements {@link MediaList}.
  *
@@ -53,8 +54,11 @@ import com.steadystate.css.util.ThrowCssExceptionErrorHandler;
  * @author rbri
  */
 public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 6662784733573034870L;
 
+    /** The media queries_. */
     private List<MediaQuery> mediaQueries_;
 
     /**
@@ -82,6 +86,9 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
         mediaQueries_ = new ArrayList<MediaQuery>(10);
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.stylesheets.MediaList#getMediaText()
+     */
     public String getMediaText() {
         final StringBuilder sb = new StringBuilder("");
         boolean isNotFirst = false;
@@ -97,6 +104,9 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
         return sb.toString();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.stylesheets.MediaList#setMediaText(java.lang.String)
+     */
     public void setMediaText(final String mediaText) throws DOMException {
         final InputSource source = new InputSource(new StringReader(mediaText));
         try {
@@ -113,10 +123,16 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.stylesheets.MediaList#getLength()
+     */
     public int getLength() {
         return mediaQueries_.size();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.stylesheets.MediaList#item(int)
+     */
     public String item(final int index) {
         final MediaQuery mq = mediaQuery(index);
         if (null == mq) { return null; }
@@ -124,6 +140,12 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
         return mq.getMedia();
     }
 
+    /**
+     * Media query.
+     *
+     * @param index the index
+     * @return the media query
+     */
     public MediaQuery mediaQuery(final int index) {
         if (index < 0 || (index >= mediaQueries_.size())) {
             return null;
@@ -131,6 +153,9 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
         return mediaQueries_.get(index);
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.stylesheets.MediaList#deleteMedium(java.lang.String)
+     */
     public void deleteMedium(final String oldMedium) throws DOMException {
         for (MediaQuery mediaQuery : mediaQueries_) {
             final String str = mediaQuery.getMedia();
@@ -142,15 +167,26 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
         throw new DOMExceptionImpl(DOMException.NOT_FOUND_ERR, DOMExceptionImpl.NOT_FOUND);
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.stylesheets.MediaList#appendMedium(java.lang.String)
+     */
     public void appendMedium(final String newMedium) throws DOMException {
         mediaQueries_.add(new MediaQuery(newMedium));
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return getMediaText();
     }
 
+    /**
+     * Sets the media.
+     *
+     * @param media the new media
+     */
     public void setMedia(final List<String> media) {
         mediaQueries_.clear();
         for (String medium : media) {
@@ -158,6 +194,11 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
         }
     }
 
+    /**
+     * Sets the media list.
+     *
+     * @param mediaList the new media list
+     */
     private void setMediaList(final SACMediaList mediaList) {
         if (mediaList instanceof SACMediaListImpl) {
             final SACMediaListImpl impl = (SACMediaListImpl) mediaList;
@@ -172,6 +213,12 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
         }
     }
 
+    /**
+     * Equals media.
+     *
+     * @param ml the ml
+     * @return true, if successful
+     */
     private boolean equalsMedia(final MediaList ml) {
         if ((ml == null) || (getLength() != ml.getLength())) {
             return false;
@@ -186,6 +233,9 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
         return true;
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.dom.CSSOMObjectImpl#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -198,6 +248,9 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
         return super.equals(obj) && equalsMedia(ml);
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.dom.CSSOMObjectImpl#hashCode()
+     */
     @Override
     public int hashCode() {
         int hash = super.hashCode();

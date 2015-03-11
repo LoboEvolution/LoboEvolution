@@ -37,17 +37,39 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+
 /**
+ * The Class IORoutines.
+ *
  * @author J. H. S.
  */
 public class IORoutines {
+	
+	/** The Constant LINE_BREAK_BYTES. */
 	public static final byte[] LINE_BREAK_BYTES = { (byte) 13, (byte) 10 };
 
+	/**
+	 * Load as text.
+	 *
+	 * @param in the in
+	 * @param encoding the encoding
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static String loadAsText(InputStream in, String encoding)
 			throws IOException {
 		return loadAsText(in, encoding, 4096);
 	}
 
+	/**
+	 * Load as text.
+	 *
+	 * @param in the in
+	 * @param encoding the encoding
+	 * @param bufferSize the buffer size
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static String loadAsText(InputStream in, String encoding,
 			int bufferSize) throws IOException {
 		InputStreamReader reader = new InputStreamReader(in, encoding);
@@ -70,6 +92,13 @@ public class IORoutines {
 		return new String(buffer, 0, offset);
 	}
 
+	/**
+	 * Load.
+	 *
+	 * @param file the file
+	 * @return the byte[]
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static byte[] load(File file) throws IOException {
 		long fileLength = file.length();
 		if (fileLength > Integer.MAX_VALUE) {
@@ -83,10 +112,25 @@ public class IORoutines {
 		}
 	}
 
+	/**
+	 * Load.
+	 *
+	 * @param in the in
+	 * @return the byte[]
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static byte[] load(InputStream in) throws IOException {
 		return load(in, 4096);
 	}
 
+	/**
+	 * Load.
+	 *
+	 * @param in the in
+	 * @param initialBufferSize the initial buffer size
+	 * @return the byte[]
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static byte[] load(InputStream in, int initialBufferSize)
 			throws IOException {
 		if (initialBufferSize == 0) {
@@ -117,6 +161,14 @@ public class IORoutines {
 		return buffer;
 	}
 
+	/**
+	 * Load exact.
+	 *
+	 * @param in the in
+	 * @param length the length
+	 * @return the byte[]
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static byte[] loadExact(InputStream in, int length)
 			throws IOException {
 		byte[] buffer = new byte[length];
@@ -136,6 +188,14 @@ public class IORoutines {
 		return buffer;
 	}
 
+	/**
+	 * Equal content.
+	 *
+	 * @param file the file
+	 * @param content the content
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static boolean equalContent(File file, byte[] content)
 			throws IOException {
 		long length = file.length();
@@ -151,6 +211,13 @@ public class IORoutines {
 		}
 	}
 
+	/**
+	 * Save.
+	 *
+	 * @param file the file
+	 * @param content the content
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void save(File file, byte[] content) throws IOException {
 		FileOutputStream out = new FileOutputStream(file);
 		try {
@@ -162,6 +229,10 @@ public class IORoutines {
 
 	/**
 	 * Reads line without buffering.
+	 *
+	 * @param in the in
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static String readLine(InputStream in) throws IOException {
 		int b;
@@ -183,10 +254,22 @@ public class IORoutines {
 		return sb == null ? null : sb.toString();
 	}
 
+	/**
+	 * Touch.
+	 *
+	 * @param file the file
+	 */
 	public static void touch(File file) {
 		file.setLastModified(System.currentTimeMillis());
 	}
 
+	/**
+	 * Save strings.
+	 *
+	 * @param file the file
+	 * @param list the list
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void saveStrings(File file, Collection list)
 			throws IOException {
 		BufferedOutputStream bout = new BufferedOutputStream(
@@ -206,6 +289,13 @@ public class IORoutines {
 		}
 	}
 
+	/**
+	 * Load strings.
+	 *
+	 * @param file the file
+	 * @return the list
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static List<String> loadStrings(File file) throws IOException {
 		List<String> list = new LinkedList<String>();
 		InputStream in = new FileInputStream(file);

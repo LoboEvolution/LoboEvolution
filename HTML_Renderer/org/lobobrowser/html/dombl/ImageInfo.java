@@ -22,16 +22,35 @@ package org.lobobrowser.html.dombl;
 
 import java.util.ArrayList;
 
+
+/**
+ * The Class ImageInfo.
+ */
 public class ImageInfo {
 	// Access to this class is synchronized on imageInfos.
+	/** The image event. */
 	public ImageEvent imageEvent;
+	
+	/** The loaded. */
 	public boolean loaded;
+	
+	/** The listeners. */
 	private ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
 
+	/**
+	 * Adds the listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void addListener(ImageListener listener) {
 		this.listeners.add(listener);
 	}
 
+	/**
+	 * Gets the listeners.
+	 *
+	 * @return the listeners
+	 */
 	public ImageListener[] getListeners() {
 		return (ImageListener[]) this.listeners.toArray(ImageListener.EMPTY_ARRAY);
 	}

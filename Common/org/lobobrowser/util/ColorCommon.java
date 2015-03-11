@@ -4,8 +4,17 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * The Class ColorCommon.
+ */
 public class ColorCommon{
 	
+	/**
+	 * Map color.
+	 *
+	 * @return the map
+	 */
 	public static Map<String,Color> mapColor(){
 
 		Map<String,Color>colorMap = new HashMap<String,Color>();

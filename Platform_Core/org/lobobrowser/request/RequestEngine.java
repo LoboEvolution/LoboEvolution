@@ -80,18 +80,40 @@ import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.Files;
 import org.lobobrowser.util.io.IORoutines;
 
+
+/**
+ * The Class RequestEngine.
+ */
 public final class RequestEngine {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(RequestEngine.class
 			.getName());
+	
+	/** The Constant loggerInfo. */
 	private static final boolean loggerInfo = logger.isLoggable(Level.INFO);
 
+	/** The thread pool. */
 	private final SimpleThreadPool threadPool;
+	
+	/** The processing requests. */
 	private final Collection<RequestInfo> processingRequests = new HashSet<RequestInfo>();
+	
+	/** The cookie store. */
 	private final CookieStore cookieStore = CookieStore.getInstance();
+	
+	/** The cache settings. */
 	private final CacheSettings cacheSettings;
+	
+	/** The boolean settings. */
 	private final BooleanSettings booleanSettings;
+	
+	/** The connection settings. */
 	private final ConnectionSettings connectionSettings;
 
+	/**
+	 * Instantiates a new request engine.
+	 */
 	private RequestEngine() {
 		// Use few threads to avoid excessive parallelism. Note that
 		// downloads are not handled by this thread pool.
@@ -105,12 +127,24 @@ public final class RequestEngine {
 		this.booleanSettings = BooleanSettings.getInstance();
 	}
 
+	/** The Constant instance. */
 	private static final RequestEngine instance = new RequestEngine();
 
+	/**
+	 * Gets the single instance of RequestEngine.
+	 *
+	 * @return single instance of RequestEngine
+	 */
 	public static RequestEngine getInstance() {
 		return instance;
 	}
 
+	/**
+	 * Gets the cookie.
+	 *
+	 * @param url the url
+	 * @return the cookie
+	 */
 	public String getCookie(URL url) {
 		Collection<?> cookies = this.cookieStore.getCookies(url.getHost(),
 				url.getPath());
@@ -127,23 +161,48 @@ public final class RequestEngine {
 		return cookieText.toString();
 	}
 
+	/**
+	 * Sets the cookie.
+	 *
+	 * @param url the url
+	 * @param cookieSpec the cookie spec
+	 */
 	public void setCookie(URL url, String cookieSpec) {
 		this.cookieStore.saveCookie(url, cookieSpec);
 	}
 
+	/**
+	 * Sets the cookie.
+	 *
+	 * @param urlHostName the url host name
+	 * @param cookieSpec the cookie spec
+	 */
 	public void setCookie(String urlHostName, String cookieSpec) {
 		this.cookieStore.saveCookie(urlHostName, cookieSpec);
 	}
 
+	/**
+	 * Cancel all requests.
+	 */
 	public void cancelAllRequests() {
 		this.threadPool.cancelAll();
 	}
 
+	/**
+	 * Cancel request.
+	 *
+	 * @param rhToDelete the rh to delete
+	 */
 	public void cancelRequest(RequestHandler rhToDelete) {
 		this.threadPool.cancel(new RequestHandlerTask(rhToDelete));
 		this.cancelRequestIfRunning(rhToDelete);
 	}
 
+	/**
+	 * Cancel request if running.
+	 *
+	 * @param rhToDelete the rh to delete
+	 */
 	public void cancelRequestIfRunning(RequestHandler rhToDelete) {
 		rhToDelete.cancel();
 		List<RequestInfo> handlersToCancel = new ArrayList<RequestInfo>();
@@ -163,6 +222,11 @@ public final class RequestEngine {
 		}
 	}
 
+	/**
+	 * Schedule request.
+	 *
+	 * @param handler the handler
+	 */
 	public void scheduleRequest(RequestHandler handler) {
 		// Note: Important to create task with current access context if there's
 		// a security manager.
@@ -172,8 +236,17 @@ public final class RequestEngine {
 		this.threadPool.schedule(new RequestHandlerTask(handler, context));
 	}
 
+	/** The Constant NORMAL_FORM_ENCODING. */
 	private static final String NORMAL_FORM_ENCODING = "application/x-www-form-urlencoded";
 
+	/**
+	 * Post data.
+	 *
+	 * @param connection the connection
+	 * @param pinfo the pinfo
+	 * @param altPostData the alt post data
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void postData(URLConnection connection, ParameterInfo pinfo,
 			String altPostData) throws IOException {
 		BooleanSettings boolSettings = this.booleanSettings;
@@ -291,6 +364,15 @@ public final class RequestEngine {
 		}
 	}
 
+	/**
+	 * Complete get url.
+	 *
+	 * @param baseURL the base url
+	 * @param pinfo the pinfo
+	 * @param ref the ref
+	 * @return the string
+	 * @throws Exception the exception
+	 */
 	private String completeGetUrl(String baseURL, ParameterInfo pinfo,
 			String ref) throws Exception {
 		String newNoRefURL;
@@ -323,6 +405,16 @@ public final class RequestEngine {
 		}
 	}
 
+	/**
+	 * Adds the request properties.
+	 *
+	 * @param connection the connection
+	 * @param request the request
+	 * @param cacheInfo the cache info
+	 * @param requestMethod the request method
+	 * @param lastRequestURL the last request url
+	 * @throws ProtocolException the protocol exception
+	 */
 	private void addRequestProperties(URLConnection connection,
 			ClientletRequest request, CacheInfo cacheInfo,
 			String requestMethod, URL lastRequestURL) throws ProtocolException {
@@ -366,6 +458,14 @@ public final class RequestEngine {
 		}
 	}
 
+	/**
+	 * Gets the cache info.
+	 *
+	 * @param rhandler the rhandler
+	 * @param url the url
+	 * @return the cache info
+	 * @throws Exception the exception
+	 */
 	private CacheInfo getCacheInfo(final RequestHandler rhandler, final URL url)
 			throws Exception {
 		return AccessController.doPrivileged(new PrivilegedAction<CacheInfo>() {
@@ -399,6 +499,17 @@ public final class RequestEngine {
 		});
 	}
 
+	/**
+	 * Cache.
+	 *
+	 * @param rhandler the rhandler
+	 * @param url the url
+	 * @param connection the connection
+	 * @param content the content
+	 * @param altPersistentObject the alt persistent object
+	 * @param altObject the alt object
+	 * @param approxAltObjectSize the approx alt object size
+	 */
 	private void cache(final RequestHandler rhandler, final URL url,
 			final URLConnection connection, final byte[] content,
 			final java.io.Serializable altPersistentObject,
@@ -525,6 +636,12 @@ public final class RequestEngine {
 		});
 	}
 
+	/**
+	 * May be cached.
+	 *
+	 * @param connection the connection
+	 * @return true, if successful
+	 */
 	private boolean mayBeCached(HttpURLConnection connection) {
 		String cacheControl = connection.getHeaderField("Cache-Control");
 		if (cacheControl != null) {
@@ -539,6 +656,11 @@ public final class RequestEngine {
 		return true;
 	}
 
+	/**
+	 * Prints the request headers.
+	 *
+	 * @param connection the connection
+	 */
 	private void printRequestHeaders(URLConnection connection) {
 		Map<String, List<String>> headers = connection.getRequestProperties();
 		StringBuffer buffer = new StringBuffer();
@@ -550,15 +672,34 @@ public final class RequestEngine {
 				+ connection.getURL() + "]\r\n" + buffer.toString());
 	}
 
+	/**
+	 * Inline request.
+	 *
+	 * @param rhandler the rhandler
+	 */
 	public void inlineRequest(RequestHandler rhandler) {
 		// Security checked by low-level APIs in this case.
 		this.processHandler(rhandler, 0, false);
 	}
 
+	/**
+	 * Load bytes.
+	 *
+	 * @param urlOrPath the url or path
+	 * @return the byte[]
+	 * @throws Exception the exception
+	 */
 	public byte[] loadBytes(String urlOrPath) throws Exception {
 		return this.loadBytes(Urls.guessURL(urlOrPath));
 	}
 
+	/**
+	 * Load bytes.
+	 *
+	 * @param url the url
+	 * @return the byte[]
+	 * @throws Exception the exception
+	 */
 	public byte[] loadBytes(final URL url) throws Exception {
 		final BoxedObject boxed = new BoxedObject();
 		this.inlineRequest(new SimpleRequestHandler(url, RequestType.ELEMENT) {
@@ -582,11 +723,24 @@ public final class RequestEngine {
 		return (byte[]) boxed.getObject();
 	}
 
+	/**
+	 * Load bytes async.
+	 *
+	 * @param urlOrPath the url or path
+	 * @return the async result
+	 * @throws MalformedURLException the malformed url exception
+	 */
 	public AsyncResult<byte[]> loadBytesAsync(final String urlOrPath)
 			throws MalformedURLException {
 		return this.loadBytesAsync(Urls.guessURL(urlOrPath));
 	}
 
+	/**
+	 * Load bytes async.
+	 *
+	 * @param url the url
+	 * @return the async result
+	 */
 	public AsyncResult<byte[]> loadBytesAsync(final URL url) {
 		final AsyncResultImpl<byte[]> asyncResult = new AsyncResultImpl<byte[]>();
 		this.scheduleRequest(new SimpleRequestHandler(url, RequestType.ELEMENT) {
@@ -610,6 +764,10 @@ public final class RequestEngine {
 	/**
 	 * Whether possibly cached request should always be revalidated, i.e. any
 	 * expiration information is ignored.
+	 *
+	 * @param connectionUrl the connection url
+	 * @param requestType the request type
+	 * @return true, if successful
 	 */
 	private static boolean shouldRevalidateAlways(URL connectionUrl,
 			RequestType requestType) {
@@ -619,11 +777,19 @@ public final class RequestEngine {
 	/**
 	 * Whether the request type should always be obtained from cache if it is
 	 * there.
+	 *
+	 * @param requestType the request type
+	 * @return true, if successful
 	 */
 	private static boolean doesNotExpire(RequestType requestType) {
 		return requestType == RequestType.HISTORY;
 	}
 
+	/**
+	 * Gets the safe extension manager.
+	 *
+	 * @return the safe extension manager
+	 */
 	private ExtensionManager getSafeExtensionManager() {
 		return AccessController
 				.doPrivileged(new PrivilegedAction<ExtensionManager>() {
@@ -633,6 +799,18 @@ public final class RequestEngine {
 				});
 	}
 
+	/**
+	 * Gets the URL connection.
+	 *
+	 * @param connectionUrl the connection url
+	 * @param request the request
+	 * @param protocol the protocol
+	 * @param method the method
+	 * @param rhandler the rhandler
+	 * @param cacheInfo the cache info
+	 * @return the URL connection
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private URLConnection getURLConnection(URL connectionUrl,
 			ClientletRequest request, String protocol, String method,
 			RequestHandler rhandler, CacheInfo cacheInfo) throws IOException {
@@ -747,12 +925,25 @@ public final class RequestEngine {
 		return connection;
 	}
 
+	/**
+	 * Checks if is OK to retrieve from cache.
+	 *
+	 * @param requestType the request type
+	 * @return true, if is OK to retrieve from cache
+	 */
 	private static boolean isOKToRetrieveFromCache(RequestType requestType) {
 		return requestType != RequestType.SOFT_RELOAD
 				&& requestType != RequestType.HARD_RELOAD
 				&& requestType != RequestType.DOWNLOAD;
 	}
 
+	/**
+	 * Process handler.
+	 *
+	 * @param rhandler the rhandler
+	 * @param recursionLevel the recursion level
+	 * @param trackRequestInfo the track request info
+	 */
 	private void processHandler(final RequestHandler rhandler,
 			final int recursionLevel, final boolean trackRequestInfo) {
 		// Method must be private.
@@ -1017,22 +1208,46 @@ public final class RequestEngine {
 		}
 	}
 
+	/**
+	 * The Class RequestInfo.
+	 */
 	private static class RequestInfo {
+		
+		/** The request handler. */
 		private final RequestHandler requestHandler;
 
+		/** The is aborted. */
 		private volatile boolean isAborted = false;
+		
+		/** The input stream. */
 		private volatile InputStream inputStream;
+		
+		/** The connection. */
 		private volatile URLConnection connection;
 
+		/**
+		 * Instantiates a new request info.
+		 *
+		 * @param connection the connection
+		 * @param rhandler the rhandler
+		 */
 		RequestInfo(URLConnection connection, RequestHandler rhandler) {
 			this.connection = connection;
 			this.requestHandler = rhandler;
 		}
 
+		/**
+		 * Checks if is aborted.
+		 *
+		 * @return true, if is aborted
+		 */
 		boolean isAborted() {
 			return this.isAborted;
 		}
 
+		/**
+		 * Abort.
+		 */
 		void abort() {
 			try {
 				this.isAborted = true;
@@ -1048,32 +1263,63 @@ public final class RequestEngine {
 			}
 		}
 
+		/**
+		 * Gets the request handler.
+		 *
+		 * @return the request handler
+		 */
 		RequestHandler getRequestHandler() {
 			return this.requestHandler;
 		}
 
+		/**
+		 * Sets the connection.
+		 *
+		 * @param connection the connection
+		 * @param in the in
+		 */
 		void setConnection(URLConnection connection, InputStream in) {
 			this.connection = connection;
 			this.inputStream = in;
 		}
 	}
 
+	/**
+	 * The Class RequestHandlerTask.
+	 */
 	private class RequestHandlerTask implements SimpleThreadPoolTask {
+		
+		/** The handler. */
 		private final RequestHandler handler;
 
+		/** The access context. */
 		private final AccessControlContext accessContext;
 
+		/**
+		 * Instantiates a new request handler task.
+		 *
+		 * @param handler the handler
+		 * @param accessContext the access context
+		 */
 		private RequestHandlerTask(RequestHandler handler,
 				AccessControlContext accessContext) {
 			this.handler = handler;
 			this.accessContext = accessContext;
 		}
 
+		/**
+		 * Instantiates a new request handler task.
+		 *
+		 * @param handler the handler
+		 */
 		private RequestHandlerTask(RequestHandler handler) {
 			this.handler = handler;
 			this.accessContext = null;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		public void run() {
 			SecurityManager sm = System.getSecurityManager();
 			if (sm != null && this.accessContext != null) {
@@ -1092,26 +1338,44 @@ public final class RequestEngine {
 			}
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.util.SimpleThreadPoolTask#cancel()
+		 */
 		public void cancel() {
 			cancelRequestIfRunning(this.handler);
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#hashCode()
+		 */
 		public int hashCode() {
 			return this.handler.hashCode();
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
 		public boolean equals(Object other) {
 			return other instanceof RequestHandlerTask
 					&& ((RequestHandlerTask) other).handler
 							.equals(this.handler);
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
 		public String toString() {
 			return "RequestHandlerTask[host="
 					+ this.handler.getLatestRequestURL().getHost() + "]";
 		}
 	}
 
+	/**
+	 * Checks if is file.
+	 *
+	 * @param url the url
+	 * @return true, if is file
+	 */
 	public boolean isFile(String url) {
 		for (int i = url.length() - 1; i > 0; i--)
 			if (url.substring(i).contains("."))

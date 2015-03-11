@@ -11,10 +11,11 @@ import java.util.List;
 
 import org.mozilla.javascript.Token;
 
+
 /**
  * A list of one or more var, const or let declarations.
  * Node type is {@link Token#VAR}, {@link Token#CONST} or
- * {@link Token#LET}.<p>
+ * {@link Token#LET}.
  *
  * If the node is for {@code var} or {@code const}, the node position
  * is the beginning of the {@code var} or {@code const} keyword.
@@ -26,34 +27,54 @@ import org.mozilla.javascript.Token;
  */
 public class VariableDeclaration extends AstNode {
 
+    /** The variables. */
     private List<VariableInitializer> variables = new ArrayList<VariableInitializer>();
+    
+    /** The is statement. */
     private boolean isStatement;
 
     {
         type = Token.VAR;
     }
 
+    /**
+     * Instantiates a new variable declaration.
+     */
     public VariableDeclaration() {
     }
 
+    /**
+     * Instantiates a new variable declaration.
+     *
+     * @param pos the pos
+     */
     public VariableDeclaration(int pos) {
         super(pos);
     }
 
+    /**
+     * Instantiates a new variable declaration.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public VariableDeclaration(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns variable list.  Never {@code null}.
+     *
+     * @return the variables
      */
     public List<VariableInitializer> getVariables() {
         return variables;
     }
 
     /**
-     * Sets variable list
-     * @throws IllegalArgumentException if variables list is {@code null}
+     * Sets variable list.
+     *
+     * @param variables the new variables
      */
     public void setVariables(List<VariableInitializer> variables) {
         assertNotNull(variables);
@@ -66,7 +87,8 @@ public class VariableDeclaration extends AstNode {
     /**
      * Adds a variable initializer node to the child list.
      * Sets initializer node's parent to this node.
-     * @throws IllegalArgumentException if v is {@code null}
+     *
+     * @param v the v
      */
     public void addVariable(VariableInitializer v) {
         assertNotNull(v);
@@ -76,7 +98,9 @@ public class VariableDeclaration extends AstNode {
 
     /**
      * Sets the node type and returns this node.
-     * @throws IllegalArgumentException if {@code declType} is invalid
+     *
+     * @param type the type
+     * @return the org.mozilla.javascript. node
      */
     @Override
     public org.mozilla.javascript.Node setType(int type) {
@@ -98,6 +122,8 @@ public class VariableDeclaration extends AstNode {
 
     /**
      * Returns true if this is a {@link Token#CONST} declaration.
+     *
+     * @return true, if is const
      */
     public boolean isConst() {
         return type == Token.CONST;
@@ -105,6 +131,8 @@ public class VariableDeclaration extends AstNode {
 
     /**
      * Returns true if this is a {@link Token#LET} declaration.
+     *
+     * @return true, if is let
      */
     public boolean isLet() {
         return type == Token.LET;
@@ -112,6 +140,8 @@ public class VariableDeclaration extends AstNode {
 
     /**
      * Returns true if this node represents a statement.
+     *
+     * @return true, if is statement
      */
     public boolean isStatement() {
         return isStatement;
@@ -119,15 +149,25 @@ public class VariableDeclaration extends AstNode {
 
     /**
      * Set or unset the statement flag.
+     *
+     * @param isStatement the new checks if is statement
      */
     public void setIsStatement(boolean isStatement) {
         this.isStatement = isStatement;
     }
 
+    /**
+     * Decl type name.
+     *
+     * @return the string
+     */
     private String declTypeName() {
         return Token.typeToName(type).toLowerCase();
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -143,6 +183,8 @@ public class VariableDeclaration extends AstNode {
 
     /**
      * Visits this node, then each {@link VariableInitializer} child.
+     *
+     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

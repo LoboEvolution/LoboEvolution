@@ -27,31 +27,59 @@ import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class DOMCommentImpl.
+ */
 public class DOMCommentImpl extends DOMCharacterDataImpl implements Comment {
+	
+	/**
+	 * Instantiates a new DOM comment impl.
+	 *
+	 * @param text the text
+	 */
 	public DOMCommentImpl(String text) {
 		super(text);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getLocalName()
+	 */
 	public String getLocalName() {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeName()
+	 */
 	public String getNodeName() {
 		return "#comment";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeValue()
+	 */
 	public String getNodeValue() throws DOMException {
 		return this.getTextContent();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setNodeValue(java.lang.String)
+	 */
 	public void setNodeValue(String nodeValue) throws DOMException {
 		this.setTextContent(nodeValue);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeType()
+	 */
 	public short getNodeType() {
 		return Node.COMMENT_NODE;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#createSimilarNode()
+	 */
 	protected Node createSimilarNode() {
 		return new DOMCommentImpl(this.text);
 	}

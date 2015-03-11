@@ -9,6 +9,7 @@ import java.net.URI;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
+
 /**
  * Should be implemented by Rhino embeddings to allow the require() function to
  * obtain {@link ModuleScript} objects. We provide two default implementations,
@@ -18,10 +19,12 @@ import org.mozilla.javascript.Scriptable;
  */
 public interface ModuleScriptProvider
 {
+    
     /**
      * Returns a module script. It should attempt to load the module script if
      * it is not already available to it, or return an already loaded module
      * script instance if it is available to it.
+     *
      * @param cx current context. Can be used to compile module scripts.
      * @param moduleId the ID of the module. An implementation must only accept
      * an absolute ID, starting with a term.
@@ -38,8 +41,6 @@ public interface ModuleScriptProvider
      * Null should be returned if the script could not found.
      * @throws Exception if there was an unrecoverable problem obtaining the
      * script
-     * @throws IllegalArgumentException if the module ID is syntactically not a
-     * valid absolute module identifier.
      */
     public ModuleScript getModuleScript(Context cx, String moduleId,
             URI moduleUri, URI baseUri, Scriptable paths)

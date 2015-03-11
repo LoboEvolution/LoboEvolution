@@ -32,6 +32,7 @@ import org.w3c.css.sac.SACMediaList;
 
 import com.steadystate.css.parser.media.MediaQuery;
 
+
 /**
  * Implementation of {@link SACMediaList}.
  *
@@ -40,32 +41,61 @@ import com.steadystate.css.parser.media.MediaQuery;
  */
 public class SACMediaListImpl extends LocatableImpl implements SACMediaList {
 
+    /** The media queries_. */
     private final List<MediaQuery> mediaQueries_;
 
+    /**
+     * Instantiates a new SAC media list impl.
+     */
     public SACMediaListImpl() {
         mediaQueries_ = new ArrayList<MediaQuery>();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.SACMediaList#getLength()
+     */
     public int getLength() {
         return mediaQueries_.size();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.SACMediaList#item(int)
+     */
     public String item(final int index) {
         return mediaQuery(index).getMedia();
     }
 
+    /**
+     * Media query.
+     *
+     * @param index the index
+     * @return the media query
+     */
     public MediaQuery mediaQuery(final int index) {
         return mediaQueries_.get(index);
     }
 
+    /**
+     * Adds the.
+     *
+     * @param s the s
+     */
     public void add(final String s) {
         add(new MediaQuery(s));
     }
 
+    /**
+     * Adds the.
+     *
+     * @param mediaQuery the media query
+     */
     public void add(final MediaQuery mediaQuery) {
         mediaQueries_.add(mediaQuery);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();

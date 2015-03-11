@@ -58,6 +58,7 @@ import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.w3c.dom.Node;
 
+
 /**
  * A substantial portion of the HTML rendering logic of the package can be found
  * in this class. This class is in charge of laying out the DOM subtree of a
@@ -91,51 +92,100 @@ public class RBlockViewport extends BaseRCollection {
 	// of the RBlockViewport, so ancestor blocks can obtain them to adjust
 	// their own bounds.
 
+	/** The Constant ZERO_INSETS. */
 	public static final Insets ZERO_INSETS = new Insets(0, 0, 0, 0);
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(RBlockViewport.class.getName());
 
+	/** The container. */
 	public final RenderableContainer container;
+	
+	/** The list nesting. */
 	public final int listNesting;
+	
+	/** The user agent context. */
 	public final UserAgentContext userAgentContext;
+	
+	/** The renderer context. */
 	public final HtmlRendererContext rendererContext;
+	
+	/** The frame context. */
 	public final FrameContext frameContext;
+	
+	/** The positioned renderables. */
 	private SortedSet<PositionedRenderable> positionedRenderables;
+	
+	/** The seq renderables. */
 	private ArrayList<RLine> seqRenderables = null;
+	
+	/** The exportable floats. */
 	private ArrayList<ExportableFloat> exportableFloats = null;
+	
+	/** The current line. */
 	private RLine currentLine;
+	
+	/** The max x. */
 	private int maxX;
+	
+	/** The max y. */
 	private int maxY;
+	
+	/** The desired width. */
 	private int desiredWidth; // includes insets
+	
+	/** The desired height. */
 	private int desiredHeight; // includes insets
+	
+	/** The avail content height. */
 	private int availContentHeight; // does not include insets
+	
+	/** The avail content width. */
 	private int availContentWidth; // does not include insets
+	
+	/** The y limit. */
 	private int yLimit;
+	
+	/** The positioned ordinal. */
 	private int positionedOrdinal;
+	
+	/** The current collapsible margin. */
 	private int currentCollapsibleMargin;
+	
+	/** The padding insets. */
 	private Insets paddingInsets;
+	
+	/** The override no wrap. */
 	private boolean overrideNoWrap;
+	
+	/** The float bounds. */
 	private FloatingBounds floatBounds = null;
+	
+	/** The size only. */
 	private boolean sizeOnly;
+	
+	/** The last seq block. */
 	private BoundableRenderable lastSeqBlock;
+	
+	/** The Constant elementLayout. */
 	private static final Map<String, Object> elementLayout = HtmlLayoutMapping.layout();
+	
+	/** The Constant miscLayout. */
 	private static final MarkupLayout miscLayout = new MiscLayout();
 	
 
 	/**
 	 * Constructs an HtmlBlockLayout.
-	 * 
-	 * @param container
-	 *            This is usually going to be an RBlock.
-	 * @param listNesting
-	 *            The nesting level for lists. This is zero except inside a
+	 *
+	 * @param modelNode the model node
+	 * @param container            This is usually going to be an RBlock.
+	 * @param listNesting            The nesting level for lists. This is zero except inside a
 	 *            list.
-	 * @param pcontext
-	 *            The UserAgentContext instance.
-	 * @param frameContext
-	 *            This is usually going to be HtmlBlock, an object where text
+	 * @param pcontext            The UserAgentContext instance.
+	 * @param rcontext the rcontext
+	 * @param frameContext            This is usually going to be HtmlBlock, an object where text
 	 *            selections are contained.
-	 * @param parent
-	 *            This is usually going to be the parent of
+	 * @param parent            This is usually going to be the parent of
 	 *            <code>container</code>.
 	 */
 	public RBlockViewport(ModelNode modelNode, RenderableContainer container,
@@ -153,16 +203,29 @@ public class RBlockViewport extends BaseRCollection {
 		this.layoutUpTreeCanBeInvalidated = true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseBoundableRenderable#invalidateLayoutLocal()
+	 */
 	public void invalidateLayoutLocal() {
 		// Workaround for fact that RBlockViewport does not
 		// get validated or invalidated.
 		this.layoutUpTreeCanBeInvalidated = true;
 	}
 
+	/**
+	 * Gets the avail content width.
+	 *
+	 * @return the avail content width
+	 */
 	public int getAvailContentWidth() {
 		return this.availContentWidth;
 	}
 
+	/**
+	 * Inits the collapsible margin.
+	 *
+	 * @return the int
+	 */
 	private int initCollapsibleMargin() {
 		Object parent = this.parent;
 		if (!(parent instanceof RBlock)) {
@@ -176,11 +239,15 @@ public class RBlockViewport extends BaseRCollection {
 	 * Builds the layout/renderer tree from scratch. Note: Returned dimension
 	 * needs to be actual size needed for rendered content, not the available
 	 * container size. This is relied upon by table layout.
-	 * 
-	 * @param yLimit
-	 *            If other than -1, <code>layout</code> will throw
+	 *
+	 * @param desiredWidth the desired width
+	 * @param desiredHeight the desired height
+	 * @param paddingInsets the padding insets
+	 * @param yLimit            If other than -1, <code>layout</code> will throw
 	 *            <code>SizeExceededException</code> in the event that the
 	 *            layout goes beyond this y-coordinate point.
+	 * @param floatBounds the float bounds
+	 * @param sizeOnly the size only
 	 */
 	public void layout(int desiredWidth, int desiredHeight,
 			Insets paddingInsets, int yLimit, FloatingBounds floatBounds,
@@ -283,6 +350,11 @@ public class RBlockViewport extends BaseRCollection {
 		this.height = paddingInsets.bottom + maxY;
 	}
 
+	/**
+	 * Layout pass.
+	 *
+	 * @param rootNode the root node
+	 */
 	private void layoutPass(DOMNodeImpl rootNode) {
 		RenderableContainer container = this.container;
 		container.clearDelayedPairs();
@@ -310,11 +382,11 @@ public class RBlockViewport extends BaseRCollection {
 
 	/**
 	 * Applies any horizonal aLignment. It may adjust height if necessary.
-	 * 
-	 * @param canvasWidth
-	 *            The new width of the viewport. It could be different to the
+	 *
+	 * @param alignXPercent the align x percent
+	 * @param canvasWidth            The new width of the viewport. It could be different to the
 	 *            previously calculated width.
-	 * @param paddingInsets
+	 * @param paddingInsets the padding insets
 	 */
 	public void alignX(int alignXPercent, int canvasWidth, Insets paddingInsets) {
 		int prevMaxY = this.maxY;
@@ -386,9 +458,10 @@ public class RBlockViewport extends BaseRCollection {
 
 	/**
 	 * Applies vertical alignment.
-	 * 
-	 * @param canvasHeight
-	 * @param paddingInsets
+	 *
+	 * @param alignYPercent the align y percent
+	 * @param canvasHeight the canvas height
+	 * @param paddingInsets the padding insets
 	 */
 	public void alignY(int alignYPercent, int canvasHeight, Insets paddingInsets) {
 		int prevMaxY = this.maxY;
@@ -466,6 +539,14 @@ public class RBlockViewport extends BaseRCollection {
 	// return block.height - prevHeight;
 	// }
 	//
+	/**
+	 * Adds the line.
+	 *
+	 * @param startNode the start node
+	 * @param prevLine the prev line
+	 * @param newLineY the new line y
+	 * @return the r line
+	 */
 	private RLine addLine(ModelNode startNode, RLine prevLine, int newLineY) {
 		// lineDone must be called before we try to
 		// get float bounds.
@@ -513,6 +594,11 @@ public class RBlockViewport extends BaseRCollection {
 		return rline;
 	}
 
+	/**
+	 * Layout markup.
+	 *
+	 * @param node the node
+	 */
 	public void layoutMarkup(DOMNodeImpl node) {
 		// This is the "inline" layout of an element.
 		// The difference with layoutChildren is that this
@@ -551,6 +637,11 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Layout children.
+	 *
+	 * @param node the node
+	 */
 	public void layoutChildren(DOMNodeImpl node) {
 		DOMNodeImpl[] childrenArray = node.getChildrenArray();
 		if (childrenArray != null) {
@@ -583,6 +674,12 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Position r block.
+	 *
+	 * @param markupElement the markup element
+	 * @param renderable the renderable
+	 */
 	public final void positionRBlock(HTMLElementImpl markupElement,
 			RBlock renderable) {
 		if (!this.addElsewhereIfPositioned(renderable, markupElement, false,
@@ -619,6 +716,15 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Position r element.
+	 *
+	 * @param markupElement the markup element
+	 * @param renderable the renderable
+	 * @param usesAlignAttribute the uses align attribute
+	 * @param obeysFloats the obeys floats
+	 * @param alignCenterAttribute the align center attribute
+	 */
 	public final void positionRElement(HTMLElementImpl markupElement,
 			RElement renderable, boolean usesAlignAttribute,
 			boolean obeysFloats, boolean alignCenterAttribute) {
@@ -649,6 +755,11 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Layout r block.
+	 *
+	 * @param markupElement the markup element
+	 */
 	public final void layoutRBlock(HTMLElementImpl markupElement) {
 		RBlock renderable = (RBlock) markupElement.getUINode();
 		if (renderable == null) {
@@ -661,6 +772,11 @@ public class RBlockViewport extends BaseRCollection {
 		this.positionRBlock(markupElement, renderable);
 	}
 
+	/**
+	 * Layout r table.
+	 *
+	 * @param markupElement the markup element
+	 */
 	public final void layoutRTable(HTMLElementImpl markupElement) {
 		RElement renderable = (RElement) markupElement.getUINode();
 		if (renderable == null) {
@@ -673,6 +789,11 @@ public class RBlockViewport extends BaseRCollection {
 				markupElement instanceof HTMLTableElementImpl, true, true);
 	}
 
+	/**
+	 * Layout list item.
+	 *
+	 * @param markupElement the markup element
+	 */
 	public final void layoutListItem(HTMLElementImpl markupElement) {
 		RListItem renderable = (RListItem) markupElement.getUINode();
 		if (renderable == null) {
@@ -685,6 +806,11 @@ public class RBlockViewport extends BaseRCollection {
 		this.positionRBlock(markupElement, renderable);
 	}
 
+	/**
+	 * Layout list.
+	 *
+	 * @param markupElement the markup element
+	 */
 	public final void layoutList(HTMLElementImpl markupElement) {
 		RList renderable = (RList) markupElement.getUINode();
 		if (renderable == null) {
@@ -697,6 +823,12 @@ public class RBlockViewport extends BaseRCollection {
 		this.positionRBlock(markupElement, renderable);
 	}
 
+	/**
+	 * Adds the line break.
+	 *
+	 * @param startNode the start node
+	 * @param breakType the break type
+	 */
 	public void addLineBreak(ModelNode startNode, int breakType) {
 		RLine line = this.currentLine;
 		if (line == null) {
@@ -733,6 +865,16 @@ public class RBlockViewport extends BaseRCollection {
 		this.currentLine = this.addLine(startNode, line, newLineY);
 	}
 
+	/**
+	 * Adds the elsewhere if float.
+	 *
+	 * @param renderable the renderable
+	 * @param element the element
+	 * @param usesAlignAttribute the uses align attribute
+	 * @param style the style
+	 * @param layout the layout
+	 * @return true, if successful
+	 */
 	private boolean addElsewhereIfFloat(BoundableRenderable renderable,
 			HTMLElementImpl element, boolean usesAlignAttribute,
 			AbstractCSS2Properties style, boolean layout) {
@@ -762,6 +904,11 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 
+	/**
+	 * Gets the parent viewport.
+	 *
+	 * @return the parent viewport
+	 */
 	final RBlockViewport getParentViewport() {
 		// Use originalParent, which for one, is not going to be null during
 		// layout.
@@ -772,6 +919,12 @@ public class RBlockViewport extends BaseRCollection {
 		return (RBlockViewport) parent;
 	}
 
+	/**
+	 * Gets the position.
+	 *
+	 * @param element the element
+	 * @return the position
+	 */
 	private static int getPosition(HTMLElementImpl element) {
 		RenderState rs = element.getRenderState();
 		return rs == null ? RenderState.POSITION_STATIC : rs.getPosition();
@@ -779,13 +932,12 @@ public class RBlockViewport extends BaseRCollection {
 
 	/**
 	 * Checks for position and float attributes.
-	 * 
-	 * @param container
-	 * @param containerSize
-	 * @param insets
-	 * @param renderable
-	 * @param element
-	 * @param usesAlignAttribute
+	 *
+	 * @param renderable the renderable
+	 * @param element the element
+	 * @param usesAlignAttribute the uses align attribute
+	 * @param layoutIfPositioned the layout if positioned
+	 * @param obeysFloats the obeys floats
 	 * @return True if it was added elsewhere.
 	 */
 	private boolean addElsewhereIfPositioned(RElement renderable,
@@ -916,6 +1068,10 @@ public class RBlockViewport extends BaseRCollection {
 
 	/**
 	 * Checks property 'float' and in some cases attribute 'align'.
+	 *
+	 * @param renderable the renderable
+	 * @param element the element
+	 * @param usesAlignAttribute the uses align attribute
 	 */
 	public void addRenderableToLineCheckStyle(RElement renderable,
 			HTMLElementImpl element, boolean usesAlignAttribute) {
@@ -928,6 +1084,11 @@ public class RBlockViewport extends BaseRCollection {
 		this.addRenderableToLine(renderable);
 	}
 
+	/**
+	 * Adds the renderable to line.
+	 *
+	 * @param renderable the renderable
+	 */
 	private void addRenderableToLine(Renderable renderable) {
 		renderable.getModelNode().getRenderState();
 		RLine line = this.currentLine;
@@ -967,6 +1128,11 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Adds the word to line.
+	 *
+	 * @param renderable the renderable
+	 */
 	private void addWordToLine(RWord renderable) {
 		// this.skipLineBreakBefore = false;
 		RLine line = this.currentLine;
@@ -1002,6 +1168,13 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Adds the as seq block check style.
+	 *
+	 * @param block the block
+	 * @param element the element
+	 * @param usesAlignAttribute the uses align attribute
+	 */
 	private void addAsSeqBlockCheckStyle(RElement block,
 			HTMLElementImpl element, boolean usesAlignAttribute) {
 		if (this.addElsewhereIfPositioned(block, element, usesAlignAttribute,
@@ -1011,10 +1184,22 @@ public class RBlockViewport extends BaseRCollection {
 		this.addAsSeqBlock(block);
 	}
 
+	/**
+	 * Adds the as seq block.
+	 *
+	 * @param block the block
+	 */
 	private void addAsSeqBlock(RElement block) {
 		this.addAsSeqBlock(block, true, true, true, false);
 	}
 
+	/**
+	 * Gets the new block y.
+	 *
+	 * @param newBlock the new block
+	 * @param expectedY the expected y
+	 * @return the new block y
+	 */
 	private int getNewBlockY(BoundableRenderable newBlock, int expectedY) {
 		// Assumes the previous block is not a line with height > 0.
 		if (!(newBlock instanceof RElement)) {
@@ -1029,6 +1214,12 @@ public class RBlockViewport extends BaseRCollection {
 		return expectedY - Math.min(topMargin, ccm);
 	}
 
+	/**
+	 * Gets the effective block height.
+	 *
+	 * @param block the block
+	 * @return the effective block height
+	 */
 	private int getEffectiveBlockHeight(BoundableRenderable block) {
 		// Assumes block is the last one in the sequence.
 		if (!(block instanceof RElement)) {
@@ -1045,6 +1236,15 @@ public class RBlockViewport extends BaseRCollection {
 				- Math.min(blockMarginBottom, parentMarginBottom);
 	}
 
+	/**
+	 * Adds the as seq block.
+	 *
+	 * @param block the block
+	 * @param obeysFloats the obeys floats
+	 * @param informLineDone the inform line done
+	 * @param addLine the add line
+	 * @param centerBlock the center block
+	 */
 	private void addAsSeqBlock(BoundableRenderable block, boolean obeysFloats,
 			boolean informLineDone, boolean addLine, boolean centerBlock) {
 		Insets insets = this.paddingInsets;
@@ -1128,6 +1328,12 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Adds the line after block.
+	 *
+	 * @param block the block
+	 * @param informLineDone the inform line done
+	 */
 	private void addLineAfterBlock(RBlock block, boolean informLineDone) {
 		ArrayList sr = this.seqRenderables;
 		if (sr == null) {
@@ -1162,6 +1368,11 @@ public class RBlockViewport extends BaseRCollection {
 		this.currentLine = newLine;
 	}
 
+	/**
+	 * Layout text.
+	 *
+	 * @param textNode the text node
+	 */
 	private void layoutText(DOMNodeImpl textNode) {
 		RenderState renderState = textNode.getRenderState();
 		if (renderState == null) {
@@ -1269,11 +1480,11 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	/**
-	 * 
-	 * @param others
-	 *            An ordered collection.
-	 * @param seqRenderables
-	 * @param destination
+	 * Populate z index groups.
+	 *
+	 * @param others            An ordered collection.
+	 * @param seqRenderables the seq renderables
+	 * @param destination the destination
 	 */
 	private void populateZIndexGroups(Collection others,
 			Collection seqRenderables, ArrayList destination) {
@@ -1281,11 +1492,11 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	/**
-	 * 
-	 * @param others
-	 *            An ordered collection.
-	 * @param seqRenderablesIterator
-	 * @param destination
+	 * Populate z index groups.
+	 *
+	 * @param others            An ordered collection.
+	 * @param seqRenderablesIterator the seq renderables iterator
+	 * @param destination the destination
 	 */
 	private void populateZIndexGroups(Collection others,
 			Iterator seqRenderablesIterator, ArrayList destination) {
@@ -1321,6 +1532,11 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Gets the renderables array.
+	 *
+	 * @return the renderables array
+	 */
 	public Renderable[] getRenderablesArray() {
 		SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		int othersSize = others == null ? 0 : others.size();
@@ -1334,6 +1550,9 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RCollection#getRenderables()
+	 */
 	public Iterator getRenderables() {
 		SortedSet others = this.positionedRenderables;
 		if (others == null || others.size() == 0) {
@@ -1347,6 +1566,12 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Gets the renderables.
+	 *
+	 * @param clipBounds the clip bounds
+	 * @return the renderables
+	 */
 	public Iterator getRenderables(Rectangle clipBounds) {
 		if (!EventQueue.isDispatchThread() && logger.isLoggable(Level.INFO)) {
 			logger.warning("getRenderables(): Invoked outside GUI dispatch thread.");
@@ -1388,20 +1613,42 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseRCollection#getRenderable(int, int)
+	 */
 	public BoundableRenderable getRenderable(int x, int y) {
 		Iterator i = this.getRenderables(x, y);
 		return i == null ? null : (i.hasNext() ? (BoundableRenderable) i.next()
 				: null);
 	}
 
+	/**
+	 * Gets the renderable.
+	 *
+	 * @param point the point
+	 * @return the renderable
+	 */
 	public BoundableRenderable getRenderable(java.awt.Point point) {
 		return this.getRenderable(point.x, point.y);
 	}
 
+	/**
+	 * Gets the renderables.
+	 *
+	 * @param point the point
+	 * @return the renderables
+	 */
 	public Iterator getRenderables(java.awt.Point point) {
 		return this.getRenderables(point.x, point.y);
 	}
 
+	/**
+	 * Gets the renderables.
+	 *
+	 * @param pointx the pointx
+	 * @param pointy the pointy
+	 * @return the renderables
+	 */
 	public Iterator getRenderables(int pointx, int pointy) {
 		if (!EventQueue.isDispatchThread() && logger.isLoggable(Level.INFO)) {
 			logger.warning("getRenderable(): Invoked outside GUI dispatch thread.");
@@ -1472,6 +1719,14 @@ public class RBlockViewport extends BaseRCollection {
 		return result == null ? null : result.iterator();
 	}
 
+	/**
+	 * Setup new ui control.
+	 *
+	 * @param container the container
+	 * @param element the element
+	 * @param control the control
+	 * @return the r element
+	 */
 	private RElement setupNewUIControl(RenderableContainer container,
 			HTMLElementImpl element, UIControl control) {
 		RElement renderable = new RUIControl(element, control, container,
@@ -1480,6 +1735,12 @@ public class RBlockViewport extends BaseRCollection {
 		return renderable;
 	}
 
+	/**
+	 * Adds the alignable as block.
+	 *
+	 * @param markupElement the markup element
+	 * @param renderable the renderable
+	 */
 	public final void addAlignableAsBlock(HTMLElementImpl markupElement,
 			RElement renderable) {
 		// TODO: Get rid of this method?
@@ -1502,6 +1763,11 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Layout hr.
+	 *
+	 * @param markupElement the markup element
+	 */
 	public final void layoutHr(HTMLElementImpl markupElement) {
 		RElement renderable = (RElement) markupElement.getUINode();
 		if (renderable == null) {
@@ -1515,6 +1781,9 @@ public class RBlockViewport extends BaseRCollection {
 
 	/**
 	 * Gets offset from the left due to floats. It includes padding.
+	 *
+	 * @param newLineY the new line y
+	 * @return the int
 	 */
 	public final int fetchLeftOffset(int newLineY) {
 		Insets paddingInsets = this.paddingInsets;
@@ -1531,6 +1800,9 @@ public class RBlockViewport extends BaseRCollection {
 
 	/**
 	 * Gets offset from the right due to floats. It includes padding.
+	 *
+	 * @param newLineY the new line y
+	 * @return the int
 	 */
 	public final int fetchRightOffset(int newLineY) {
 		Insets paddingInsets = this.paddingInsets;
@@ -1545,14 +1817,27 @@ public class RBlockViewport extends BaseRCollection {
 		return right;
 	}
 
+	/** The Constant SEE. */
 	private static final SizeExceededException SEE = new SizeExceededException();
 
+	/**
+	 * Check y.
+	 *
+	 * @param y the y
+	 */
 	public final void checkY(int y) {
 		if (this.yLimit != -1 && y > this.yLimit) {
 			throw SEE;
 		}
 	}
 
+	/**
+	 * Layout float.
+	 *
+	 * @param renderable the renderable
+	 * @param layout the layout
+	 * @param leftFloat the left float
+	 */
 	public final void layoutFloat(BoundableRenderable renderable,
 			boolean layout, boolean leftFloat) {
 		renderable.setOriginalParent(this);
@@ -1575,6 +1860,13 @@ public class RBlockViewport extends BaseRCollection {
 		this.scheduleFloat(floatInfo);
 	}
 
+	/**
+	 * Schedule abs delayed pair.
+	 *
+	 * @param renderable the renderable
+	 * @param x the x
+	 * @param y the y
+	 */
 	private void scheduleAbsDelayedPair(BoundableRenderable renderable, int x,
 			int y) {
 		// It gets reimported in the local
@@ -1606,6 +1898,11 @@ public class RBlockViewport extends BaseRCollection {
 		this.container.addDelayedPair(pair);
 	}
 
+	/**
+	 * Import delayed pair.
+	 *
+	 * @param pair the pair
+	 */
 	void importDelayedPair(DelayedPair pair) {
 		BoundableRenderable r = pair.child;
 		r.setOrigin(pair.x, pair.y);
@@ -1614,6 +1911,13 @@ public class RBlockViewport extends BaseRCollection {
 		// set in stone?
 	}
 
+	/**
+	 * Adds the positioned renderable.
+	 *
+	 * @param renderable the renderable
+	 * @param verticalAlignable the vertical alignable
+	 * @param isFloat the is float
+	 */
 	public final void addPositionedRenderable(BoundableRenderable renderable,
 			boolean verticalAlignable, boolean isFloat) {
 		// Expected to be called only in GUI thread.
@@ -1631,6 +1935,11 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Gets the first line height.
+	 *
+	 * @return the first line height
+	 */
 	public int getFirstLineHeight() {
 		ArrayList renderables = this.seqRenderables;
 		if (renderables != null) {
@@ -1651,6 +1960,11 @@ public class RBlockViewport extends BaseRCollection {
 		return 1;
 	}
 
+	/**
+	 * Gets the first baseline offset.
+	 *
+	 * @return the first baseline offset
+	 */
 	public int getFirstBaselineOffset() {
 		ArrayList renderables = this.seqRenderables;
 		if (renderables != null) {
@@ -1680,6 +1994,9 @@ public class RBlockViewport extends BaseRCollection {
 
 	// ----------------------------------------------------------------
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getLowestRenderableSpot(int, int)
+	 */
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		BoundableRenderable br = this.getRenderable(new Point(x, y));
 		if (br != null) {
@@ -1712,6 +2029,9 @@ public class RBlockViewport extends BaseRCollection {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onDoubleClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		Iterator i = this.getRenderables(new Point(x, y));
 		if (i != null) {
@@ -1748,6 +2068,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/** The armed renderable. */
 	private BoundableRenderable armedRenderable;
 
 	/*
@@ -1808,6 +2129,9 @@ public class RBlockViewport extends BaseRCollection {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.Renderable#paint(java.awt.Graphics)
+	 */
 	public void paint(Graphics g) {
 		Rectangle clipBounds = g.getClipBounds();
 		Iterator i = this.getRenderables(clipBounds);
@@ -1827,14 +2151,25 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#isContainedByNode()
+	 */
 	public boolean isContainedByNode() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return "RBlockViewport[node=" + this.modelNode + "]";
 	}
 
+	/**
+	 * Schedule float.
+	 *
+	 * @param floatInfo the float info
+	 */
 	private void scheduleFloat(RFloatInfo floatInfo) {
 		RLine line = this.currentLine;
 		if (line == null) {
@@ -1861,8 +2196,14 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/** The pending floats. */
 	private Collection<RFloatInfo> pendingFloats = null;
 
+	/**
+	 * Line done.
+	 *
+	 * @param line the line
+	 */
 	private void lineDone(RLine line) {
 		int yAfterLine = line == null ? this.paddingInsets.top : line.y
 				+ line.height;
@@ -1878,6 +2219,14 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Adds the exportable float.
+	 *
+	 * @param element the element
+	 * @param leftFloat the left float
+	 * @param origX the orig x
+	 * @param origY the orig y
+	 */
 	private void addExportableFloat(BoundableRenderable element,
 			boolean leftFloat, int origX, int origY) {
 		ArrayList<ExportableFloat> ep = this.exportableFloats;
@@ -1889,12 +2238,11 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	/**
-	 * 
-	 * @param element
-	 * @param y
-	 *            The desired top position of the float element.
-	 * @param floatType
-	 *            -1 (left) or +1 (right)
+	 * Place float.
+	 *
+	 * @param element the element
+	 * @param y            The desired top position of the float element.
+	 * @param leftFloat the left float
 	 */
 	private void placeFloat(BoundableRenderable element, int y,
 			boolean leftFloat) {
@@ -1980,8 +2328,14 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/** The is float limit. */
 	private Boolean isFloatLimit = null;
 
+	/**
+	 * Checks if is float limit.
+	 *
+	 * @return true, if is float limit
+	 */
 	private boolean isFloatLimit() {
 		Boolean fl = this.isFloatLimit;
 		if (fl == null) {
@@ -1991,6 +2345,11 @@ public class RBlockViewport extends BaseRCollection {
 		return fl.booleanValue();
 	}
 
+	/**
+	 * Checks if is float limit impl.
+	 *
+	 * @return the boolean
+	 */
 	private Boolean isFloatLimitImpl() {
 		Object parent = this.getOriginalOrCurrentParent();
 		if (!(parent instanceof RBlock)) {
@@ -2052,6 +2411,11 @@ public class RBlockViewport extends BaseRCollection {
 	// return null;
 	// }
 
+	/**
+	 * Gets the exportable floating info.
+	 *
+	 * @return the exportable floating info
+	 */
 	public FloatingInfo getExportableFloatingInfo() {
 		ArrayList<ExportableFloat> ef = this.exportableFloats;
 		if (ef == null) {
@@ -2062,6 +2426,12 @@ public class RBlockViewport extends BaseRCollection {
 		return new FloatingInfo(0, 0, floats);
 	}
 
+	/**
+	 * Import floating info.
+	 *
+	 * @param floatingInfo the floating info
+	 * @param block the block
+	 */
 	private void importFloatingInfo(FloatingInfo floatingInfo,
 			BoundableRenderable block) {
 		int shiftX = floatingInfo.shiftX + block.getX();
@@ -2074,6 +2444,13 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Import float.
+	 *
+	 * @param ef the ef
+	 * @param shiftX the shift x
+	 * @param shiftY the shift y
+	 */
 	private void importFloat(ExportableFloat ef, int shiftX, int shiftY) {
 		BoundableRenderable renderable = ef.element;
 		int newX = ef.origX + shiftX;
@@ -2096,24 +2473,49 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 	
+	/**
+	 * Layout r inline block.
+	 *
+	 * @param markupElement the markup element
+	 */
 	public void layoutRInlineBlock(final HTMLElementImpl markupElement) {
 		final RInlineBlock inlineBlock = new RInlineBlock(container, markupElement, userAgentContext, rendererContext, frameContext);		
 		inlineBlock.doLayout(availContentWidth, availContentHeight, sizeOnly);
 		addRenderableToLine(inlineBlock);
 		}
 	
+	/**
+	 * Gets the frame context.
+	 *
+	 * @return the frame context
+	 */
 	public FrameContext getFrameContext() {
 		return frameContext;
 	}
 	
+	/**
+	 * Gets the container.
+	 *
+	 * @return the container
+	 */
 	public RenderableContainer getContainer() {
 		return container;
 	}
 	
+	/**
+	 * Gets the user agent context.
+	 *
+	 * @return the user agent context
+	 */
 	public UserAgentContext getUserAgentContext() {
 		return userAgentContext;
 	}
 	
+	/**
+	 * Gets the renderer context.
+	 *
+	 * @return the renderer context
+	 */
 	public HtmlRendererContext getRendererContext() {
 		return rendererContext;
 	}

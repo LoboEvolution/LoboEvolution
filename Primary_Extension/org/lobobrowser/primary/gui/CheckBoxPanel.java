@@ -28,12 +28,27 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+
+/**
+ * The Class CheckBoxPanel.
+ */
 public class CheckBoxPanel extends JPanel {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The check box. */
 	private final JCheckBox checkBox;
+	
+	/** The sub panel. */
 	private final JComponent subPanel;
 
+	/**
+	 * Instantiates a new check box panel.
+	 *
+	 * @param text the text
+	 * @param subPanel the sub panel
+	 */
 	public CheckBoxPanel(String text, JComponent subPanel) {
 		this.subPanel = subPanel;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -50,28 +65,51 @@ public class CheckBoxPanel extends JPanel {
 		SwingTasks.setNestedEnabled(subPanel, checkBox.isSelected());
 	}
 
+	/**
+	 * Update enabling.
+	 */
 	public void updateEnabling() {
 		SwingTasks.setNestedEnabled(subPanel, checkBox.isSelected());
 	}
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param text the new text
+	 */
 	public void setText(String text) {
 		this.checkBox.setText(text);
 	}
 
+	/**
+	 * Sets the selected.
+	 *
+	 * @param selected the new selected
+	 */
 	public void setSelected(boolean selected) {
 		this.checkBox.setSelected(selected);
 	}
 
+	/**
+	 * Checks if is selected.
+	 *
+	 * @return true, if is selected
+	 */
 	public boolean isSelected() {
 		return this.checkBox.isSelected();
 	}
 
+	/**
+	 * The Class CheckBoxAction.
+	 */
 	public class CheckBoxAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			SwingTasks.setNestedEnabled(subPanel, checkBox.isSelected());
 		}

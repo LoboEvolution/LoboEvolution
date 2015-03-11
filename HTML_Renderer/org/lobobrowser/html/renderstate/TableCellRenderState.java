@@ -15,16 +15,35 @@ import org.lobobrowser.html.w3c.HTMLTableElement;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.w3c.dom.css.CSS2Properties;
 
+
+/**
+ * The Class TableCellRenderState.
+ */
 public class TableCellRenderState extends DisplayRenderState {
+	
+	/**
+	 * Instantiates a new table cell render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param element the element
+	 */
 	public TableCellRenderState(RenderState prevRenderState,
 			HTMLElementImpl element) {
 		super(prevRenderState, element, RenderState.DISPLAY_TABLE_CELL);
 	}
 
+	/** The align x percent. */
 	private int alignXPercent = -1;
+	
+	/** The align y percent. */
 	private int alignYPercent = -1;
+	
+	/** The background info. */
 	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#invalidate()
+	 */
 	public void invalidate() {
 		super.invalidate();
 		this.alignXPercent = -1;
@@ -33,6 +52,9 @@ public class TableCellRenderState extends DisplayRenderState {
 		this.paddingInsets = INVALID_INSETS;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getAlignXPercent()
+	 */
 	public int getAlignXPercent() {
 		int axp = this.alignXPercent;
 		if (axp != -1) {
@@ -85,6 +107,9 @@ public class TableCellRenderState extends DisplayRenderState {
 		return axp;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getAlignYPercent()
+	 */
 	public int getAlignYPercent() {
 		int ayp = this.alignYPercent;
 		if (ayp != -1) {
@@ -131,6 +156,9 @@ public class TableCellRenderState extends DisplayRenderState {
 		return ayp;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getBackgroundInfo()
+	 */
 	public BackgroundInfo getBackgroundInfo() {
 		BackgroundInfo binfo = this.backgroundInfo;
 		if (binfo != INVALID_BACKGROUND_INFO) {
@@ -172,6 +200,11 @@ public class TableCellRenderState extends DisplayRenderState {
 		return binfo;
 	}
 
+	/**
+	 * Gets the table element.
+	 *
+	 * @return the table element
+	 */
 	private HTMLTableElement getTableElement() {
 		org.w3c.dom.Node ancestor = this.element.getParentNode();
 		while (ancestor != null && !(ancestor instanceof HTMLTableElement)) {
@@ -180,8 +213,12 @@ public class TableCellRenderState extends DisplayRenderState {
 		return (HTMLTableElement) ancestor;
 	}
 
+	/** The padding insets. */
 	private HtmlInsets paddingInsets = INVALID_INSETS;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getPaddingInsets()
+	 */
 	public HtmlInsets getPaddingInsets() {
 		HtmlInsets insets = this.paddingInsets;
 		if (insets != INVALID_INSETS) {
@@ -224,6 +261,9 @@ public class TableCellRenderState extends DisplayRenderState {
 		return insets;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getWhiteSpace()
+	 */
 	public int getWhiteSpace() {
 		// Overrides super.
 		if (RenderThreadState.getState().overrideNoWrap) {

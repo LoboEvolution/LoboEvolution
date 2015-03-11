@@ -22,22 +22,29 @@ package org.lobobrowser.gui;
 
 import javax.swing.JFrame;
 
+
 /**
  * Browser windows should extend this class.
  */
 public abstract class AbstractBrowserWindow extends JFrame implements
 		BrowserWindow {
+	
 	/**
 	 * Gets the root {@link FramePanel} of the window.
+	 *
+	 * @return the top frame panel
 	 */
 	public abstract FramePanel getTopFramePanel();
 
 	/**
 	 * Gets a {@link WindowCallback} instance that receives navigation
 	 * notifications. This method may return <code>null</code>.
+	 *
+	 * @return the window callback
 	 */
 	public abstract WindowCallback getWindowCallback();
 
+	/** The bounds assigned. */
 	private boolean boundsAssigned;
 
 	/**

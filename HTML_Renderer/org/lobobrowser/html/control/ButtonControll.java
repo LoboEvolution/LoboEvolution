@@ -22,10 +22,20 @@ package org.lobobrowser.html.control;
 
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 
+
+/**
+ * The Class ButtonControll.
+ */
 public class ButtonControll extends InputButtonControl {
 	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Instantiates a new button controll.
+	 *
+	 * @param modelNode the model node
+	 */
 	public ButtonControll(HTMLBaseInputElement modelNode) {
 		super(modelNode);
 	}

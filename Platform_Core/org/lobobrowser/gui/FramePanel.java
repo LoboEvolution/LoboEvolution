@@ -72,6 +72,7 @@ import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.WrapperException;
 import org.lobobrowser.util.gui.WrapperLayout;
 
+
 /**
  * A browser frame panel. It may be used as any other Swing component. The
  * {@link #navigate(String)} method may be invoked to load content into the
@@ -89,21 +90,42 @@ import org.lobobrowser.util.gui.WrapperLayout;
  * @see PlatformInit#init(boolean, boolean)
  */
 public class FramePanel extends JPanel implements NavigatorFrame {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(FramePanel.class
 			.getName());
+	
+	/** The window id. */
 	private final String windowId;
+	
+	/** The navigation engine. */
 	private final NavigationEngine navigationEngine = new NavigationEngine();
+	
+	/** The known parent frame. */
 	private final FramePanel knownParentFrame;
+	
+	/** The navigation listeners. */
 	private final Collection<NavigationListener> navigationListeners = new ArrayList<NavigationListener>();
+	
+	/** The response listeners. */
 	private final Collection<ResponseListener> responseListeners = new ArrayList<ResponseListener>();
+	
+	/** The content listeners. */
 	private final Collection<ContentListener> contentListeners = new ArrayList<ContentListener>();
+	
+	/** The properties monitor. */
 	private final Object propertiesMonitor = new Object();
 
+	/** The opener frame. */
 	private NavigatorFrame openerFrame;
+	
+	/** The top frame window. */
 	private Window topFrameWindow;
 
 	/**
 	 * Constructs a FramePanel specifying a "window" ID.
+	 *
+	 * @param windowId the window id
 	 */
 	public FramePanel(String windowId) {
 		this.knownParentFrame = null;
@@ -117,6 +139,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	 * Constructs a FramePanel specifying a non-null parent frame. This
 	 * constructor is useful when navigation in the new frame must occur before
 	 * the frame is added to the GUI component hierarchy.
+	 *
+	 * @param parentFrame the parent frame
 	 */
 	public FramePanel(FramePanel parentFrame) {
 		this.knownParentFrame = parentFrame;
@@ -135,6 +159,11 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		this((FramePanel) null);
 	}
 
+	/**
+	 * Sets the opener frame.
+	 *
+	 * @param opener the new opener frame
+	 */
 	public void setOpenerFrame(NavigatorFrame opener) {
 		this.openerFrame = opener;
 	}
@@ -249,6 +278,12 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/**
+	 * Dispatch before navigate.
+	 *
+	 * @param event the event
+	 * @throws NavigationVetoException the navigation veto exception
+	 */
 	private void dispatchBeforeNavigate(final NavigationEvent event)
 			throws NavigationVetoException {
 		try {
@@ -279,6 +314,12 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/**
+	 * Dispatch before local navigate.
+	 *
+	 * @param event the event
+	 * @throws NavigationVetoException the navigation veto exception
+	 */
 	private void dispatchBeforeLocalNavigate(final NavigationEvent event)
 			throws NavigationVetoException {
 		try {
@@ -309,6 +350,12 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/**
+	 * Dispatch before window open.
+	 *
+	 * @param event the event
+	 * @throws NavigationVetoException the navigation veto exception
+	 */
 	private void dispatchBeforeWindowOpen(final NavigationEvent event)
 			throws NavigationVetoException {
 		try {
@@ -339,6 +386,11 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/**
+	 * Dispatch content set.
+	 *
+	 * @param event the event
+	 */
 	private void dispatchContentSet(ContentEvent event) {
 		ContentListener[] listeners;
 		synchronized (this) {
@@ -350,6 +402,11 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/**
+	 * Dispatch response processed.
+	 *
+	 * @param event the event
+	 */
 	private void dispatchResponseProcessed(ResponseEvent event) {
 		ResponseListener[] listeners;
 		synchronized (this) {
@@ -367,6 +424,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	 * implementor of the interface among its ancestor components. Unless
 	 * overridden, this implementation of <code>getWindowCallback</code> only
 	 * looks for instances of the {@link BrowserWindow} interface.
+	 *
+	 * @return the window callback
 	 */
 	protected WindowCallback getWindowCallback() {
 		FramePanel kpf = this.knownParentFrame;
@@ -386,6 +445,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	/**
 	 * Gets the parent frame. This is <code>null</code> for the top-most frame
 	 * in a window or when the FramePanel is detached.
+	 *
+	 * @return the parent frame
 	 */
 	public NavigatorFrame getParentFrame() {
 		// TODO: Security?
@@ -403,6 +464,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	/**
 	 * Gets the top-most frame in a window. It may return the current frame if
 	 * its parent is <code>null</code>.
+	 *
+	 * @return the top frame
 	 */
 	public NavigatorFrame getTopFrame() {
 		NavigatorFrame current = this;
@@ -417,11 +480,16 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Implements {@link NavigatorFrame#getComponent()}.
+	 *
+	 * @return the component
 	 */
 	public Component getComponent() {
 		return this;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
+	 */
 	public void paint(Graphics g) {
 		// Unless done this way, duplicate
 		// painting occurs for nested frames.
@@ -432,6 +500,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Gets an array of navigation entries that came before the current one.
+	 *
+	 * @return the back navigation entries
 	 */
 	public NavigationEntry[] getBackNavigationEntries() {
 		SecurityManager sm = System.getSecurityManager();
@@ -446,6 +516,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	/**
 	 * Gets an array of navigation entries that would be visited with
 	 * consecutive <code>forward</code> calls.
+	 *
+	 * @return the forward navigation entries
 	 */
 	public NavigationEntry[] getForwardNavigationEntries() {
 		SecurityManager sm = System.getSecurityManager();
@@ -459,6 +531,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Determines if the current navigation entry has associated source code.
+	 *
+	 * @return true, if successful
 	 */
 	public boolean hasSource() {
 		// TODO: Security?
@@ -469,6 +543,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	/**
 	 * Determines whether there's a selection with content to be copied in this
 	 * frame.
+	 *
+	 * @return true, if successful
 	 */
 	public boolean canCopy() {
 		// TODO: Security?
@@ -479,6 +555,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	/**
 	 * Copies the selection, if any, to the clipboard. Whether this method is
 	 * supported depends on content being rendered.
+	 *
+	 * @return true, if successful
 	 */
 	public boolean copy() {
 		// TODO: Security?
@@ -486,6 +564,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		return content == null ? false : content.copy();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#replaceContent(java.awt.Component)
+	 */
 	public final void replaceContent(final Component component) {
 		// TODO: Security?
 		this.replaceContent(null, new SimpleComponentContent(component));
@@ -494,6 +575,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	/**
 	 * Replaces the content of the frame. This method can be safely called
 	 * outside the GUI dispatch thread.
+	 *
+	 * @param response the response
+	 * @param content the content
 	 */
 	public void replaceContent(final ClientletResponse response,
 			final ComponentContent content) {
@@ -519,6 +603,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.Container#addImpl(java.awt.Component, java.lang.Object, int)
+	 */
 	@Override
 	protected void addImpl(Component comp, Object constraints, int index) {
 		// Check security. Content downloaded off the web should
@@ -530,6 +617,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		super.addImpl(comp, constraints, index);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.Container#remove(java.awt.Component)
+	 */
 	@Override
 	public void remove(Component comp) {
 		// Check security. Content downloaded off the web should
@@ -541,6 +631,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		super.remove(comp);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.Container#remove(int)
+	 */
 	@Override
 	public void remove(int index) {
 		// Check security. Content downloaded off the web should
@@ -552,6 +645,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		super.remove(index);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.Container#removeAll()
+	 */
 	@Override
 	public void removeAll() {
 		// Check security. Content downloaded off the web should
@@ -563,6 +659,12 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		super.removeAll();
 	}
 
+	/**
+	 * Replace content impl.
+	 *
+	 * @param response the response
+	 * @param content the content
+	 */
 	protected void replaceContentImpl(final ClientletResponse response,
 			final ComponentContent content) {
 		if (logger.isLoggable(Level.INFO)) {
@@ -628,6 +730,11 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		this.content = null;
 	}
 
+	/**
+	 * Gets the window.
+	 *
+	 * @return the window
+	 */
 	private Window getWindow() {
 		// TODO: Security? Getting parent security?
 		FramePanel kpf = this.knownParentFrame;
@@ -657,6 +764,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Opens a confirmation dialog.
+	 *
+	 * @param message the message
+	 * @return true, if successful
 	 */
 	public boolean confirm(final String message) {
 		return AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
@@ -670,11 +780,16 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Implements {@link NavigatorFrame#invokeLater(Runnable)}.
+	 *
+	 * @param runnable the runnable
 	 */
 	public void invokeLater(Runnable runnable) {
 		EventQueue.invokeLater(runnable);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#navigate(java.lang.String)
+	 */
 	public final void navigate(String urlOrPath)
 			throws MalformedURLException {
 		URL url = Urls.guessURL(urlOrPath);
@@ -682,17 +797,26 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 				RequestType.PROGRAMMATIC);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#navigate(java.lang.String, org.lobobrowser.ua.RequestType)
+	 */
 	public final void navigate(String urlOrPath, RequestType requestType)
 			throws MalformedURLException {
 		URL url = Urls.guessURL(urlOrPath);
 		this.navigate(url, "GET", null, TargetType.SELF, requestType);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#navigate(java.net.URL, java.lang.String, org.lobobrowser.ua.ParameterInfo, org.lobobrowser.ua.TargetType, org.lobobrowser.ua.RequestType)
+	 */
 	public void navigate(URL url, String method, ParameterInfo paramInfo,
 			TargetType type, RequestType requestType) {
 		this.navigate(url, method, paramInfo, type, requestType, this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#navigate(java.net.URL, java.lang.String, org.lobobrowser.ua.ParameterInfo, org.lobobrowser.ua.TargetType, org.lobobrowser.ua.RequestType, org.lobobrowser.ua.NavigatorFrame)
+	 */
 	public void navigate(URL url, String method, ParameterInfo paramInfo,
 			TargetType type, RequestType requestType,
 			NavigatorFrame originatingFrame) {
@@ -701,6 +825,11 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		this.navigate(event);
 	}
 
+	/**
+	 * Navigate.
+	 *
+	 * @param event the event
+	 */
 	private void navigate(NavigationEvent event) {
 		try {
 			this.dispatchBeforeNavigate(event);
@@ -744,10 +873,21 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/**
+	 * Navigate to history entry.
+	 *
+	 * @param url the url
+	 */
 	private void navigateToHistoryEntry(URL url) {
 		this.navigateLocal(url, "GET", RequestType.HISTORY, this);
 	}
 
+	/**
+	 * Checks if is OK to add referrer.
+	 *
+	 * @param requestType the request type
+	 * @return true, if is OK to add referrer
+	 */
 	protected boolean isOKToAddReferrer(RequestType requestType) {
 		return requestType == RequestType.CLICK
 				|| requestType == RequestType.PROGRAMMATIC
@@ -757,6 +897,14 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 				|| requestType == RequestType.FORM;
 	}
 
+	/**
+	 * Navigate local.
+	 *
+	 * @param url the url
+	 * @param method the method
+	 * @param requestType the request type
+	 * @param originatingFrame the originating frame
+	 */
 	private void navigateLocal(URL url, String method, RequestType requestType,
 			FramePanel originatingFrame) {
 		NavigationEvent event = new NavigationEvent(this, url, method,
@@ -764,6 +912,11 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		this.navigateLocal(event);
 	}
 
+	/**
+	 * Navigate local.
+	 *
+	 * @param event the event
+	 */
 	private void navigateLocal(NavigationEvent event) {
 		try {
 			this.dispatchBeforeLocalNavigate(event);
@@ -809,8 +962,10 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Opens a window and renders the URL or path provided.
-	 * 
+	 *
+	 * @param urlOrPath the url or path
 	 * @return The top frame of the new window.
+	 * @throws MalformedURLException the malformed url exception
 	 */
 	public final NavigatorFrame open(String urlOrPath)
 			throws MalformedURLException {
@@ -865,7 +1020,12 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	 * request that a new window is opened. For example, this method will be
 	 * invoked on JavaScript Window.open() calls. Override to be informed of
 	 * such calls.
-	 * 
+	 *
+	 * @param url the url
+	 * @param method the method
+	 * @param pinfo the pinfo
+	 * @param windowId the window id
+	 * @param windowProperties the window properties
 	 * @return The top frame of the new window. The method may return
 	 *         <code>null</code> if navigation was vetoed by a listener.
 	 */
@@ -903,7 +1063,13 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Static method for opening a window.
-	 * 
+	 *
+	 * @param opener the opener
+	 * @param url the url
+	 * @param windowId the window id
+	 * @param windowProperties the window properties
+	 * @param method the method
+	 * @param pinfo the pinfo
 	 * @return The top frame in the window that was opened.
 	 */
 	public static NavigatorFrame openWindow(final FramePanel opener, URL url,
@@ -964,6 +1130,10 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Opens a message prompt dialog.
+	 *
+	 * @param message the message
+	 * @param inputDefault the input default
+	 * @return the string
 	 */
 	public String prompt(final String message, final String inputDefault) {
 		return AccessController.doPrivileged(new PrivilegedAction<String>() {
@@ -999,6 +1169,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Opens an alert dialog.
+	 *
+	 * @param message the message
 	 */
 	public void alert(final String message) {
 		AccessController.doPrivileged(new PrivilegedAction<Object>() {
@@ -1015,6 +1187,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	 * Navigates to the given entry without adding the entry to frame history.
 	 * This is the mechanism that should be used to "go back" to an entry
 	 * already visited.
+	 *
+	 * @param entry the entry
+	 * @return true, if successful
 	 */
 	public boolean goTo(NavigationEntry entry) {
 		if (!"GET".equals(entry.getMethod())) {
@@ -1029,6 +1204,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Navigates back.
+	 *
+	 * @return true, if successful
 	 */
 	public boolean back() {
 		return this.moveNavigation(-1);
@@ -1036,11 +1213,19 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Navigates forward.
+	 *
+	 * @return true, if successful
 	 */
 	public boolean forward() {
 		return this.moveNavigation(+1);
 	}
 
+	/**
+	 * Move navigation.
+	 *
+	 * @param offset the offset
+	 * @return true, if successful
+	 */
 	private boolean moveNavigation(int offset) {
 		if (offset == 0 || offset > 1 || offset < -1) {
 			throw new IllegalArgumentException(
@@ -1066,6 +1251,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Determines whether the frame can navigate forward.
+	 *
+	 * @return true, if successful
 	 */
 	public boolean canForward() {
 		synchronized (this) {
@@ -1075,6 +1262,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Determines whether the frame can navigate back.
+	 *
+	 * @return true, if successful
 	 */
 	public boolean canBack() {
 		synchronized (this) {
@@ -1110,6 +1299,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Determines whether the current document can be reloaded.
+	 *
+	 * @return true, if successful
 	 */
 	public boolean canReload() {
 		NavigationEntry entry;
@@ -1123,6 +1314,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	/**
 	 * Creates a frame that is expected to be used as a child of the current
 	 * one.
+	 *
+	 * @return the navigator frame
 	 */
 	public NavigatorFrame createFrame() {
 		return FramePanelFactorySource.getInstance().getActiveFactory()
@@ -1131,6 +1324,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Gets the default window status.
+	 *
+	 * @return the default status
 	 */
 	public String getDefaultStatus() {
 		WindowCallback wc = this.getWindowCallback();
@@ -1141,12 +1336,20 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/**
+	 * Gets the item.
+	 *
+	 * @param name the name
+	 * @return the item
+	 */
 	public Object getItem(String name) {
 		return Items.getItem(this, name);
 	}
 
 	/**
 	 * Gets the frame that opened the current frame, if any.
+	 *
+	 * @return the opener frame
 	 */
 	public NavigatorFrame getOpenerFrame() {
 		return this.openerFrame;
@@ -1154,6 +1357,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Gets the current window status.
+	 *
+	 * @return the status
 	 */
 	public String getStatus() {
 		WindowCallback wc = this.getWindowCallback();
@@ -1166,6 +1371,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Gets the window ID if this is the top frame in a window.
+	 *
+	 * @return the window id
 	 */
 	public String getWindowId() {
 		return this.windowId;
@@ -1173,6 +1380,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Determines if the window is closed.
+	 *
+	 * @return true, if is window closed
 	 */
 	public boolean isWindowClosed() {
 		Window window = this.getWindow();
@@ -1184,6 +1393,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Sets the default window status.
+	 *
+	 * @param value the new default status
 	 */
 	public void setDefaultStatus(String value) {
 		WindowCallback wc = this.getWindowCallback();
@@ -1192,12 +1403,20 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/**
+	 * Sets the item.
+	 *
+	 * @param name the name
+	 * @param value the value
+	 */
 	public void setItem(String name, Object value) {
 		Items.setItem(this, name, value);
 	}
 
 	/**
 	 * Sets the window status.
+	 *
+	 * @param status the new status
 	 */
 	public void setStatus(String status) {
 		WindowCallback wc = this.getWindowCallback();
@@ -1206,6 +1425,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
 	@Override
 	public Dimension getPreferredSize() {
 		if (this.isPreferredSizeSet()) {
@@ -1215,41 +1437,61 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getMinimumSize()
+	 */
 	@Override
 	public Dimension getMinimumSize() {
 		return new Dimension(1, 1);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getMaximumSize()
+	 */
 	@Override
 	public Dimension getMaximumSize() {
 		return new Dimension(Short.MAX_VALUE, Short.MAX_VALUE);
 	}
 
+	/** The content. */
 	private ComponentContent content;
 
 	/**
 	 * Gets the component content currently set in the frame.
+	 *
+	 * @return the component content
 	 */
 	public ComponentContent getComponentContent() {
 		// TODO: Security?
 		return this.content;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#getSourceCode()
+	 */
 	public String getSourceCode() {
 		ComponentContent content = this.content;
 		return content == null ? null : content.getSourceCode();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#navigate(java.net.URL)
+	 */
 	public final void navigate(URL url) {
 		this.navigate(url, RequestType.PROGRAMMATIC);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#navigate(java.net.URL, org.lobobrowser.ua.RequestType)
+	 */
 	public final void navigate(URL url, RequestType requestType) {
 		this.navigate(url, "GET", null, TargetType.SELF, requestType);
 	}
 
 	/**
 	 * Gets the current navigation entry.
+	 *
+	 * @return the current navigation entry
 	 */
 	public NavigationEntry getCurrentNavigationEntry() {
 		synchronized (this) {
@@ -1257,12 +1499,19 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#getProgressEvent()
+	 */
 	public NavigatorProgressEvent getProgressEvent() {
 		return this.progressEvent;
 	}
 
+	/** The progress event. */
 	private NavigatorProgressEvent progressEvent;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#setProgressEvent(org.lobobrowser.ua.NavigatorProgressEvent)
+	 */
 	public void setProgressEvent(NavigatorProgressEvent event) {
 		this.progressEvent = event;
 		if (event != null) {
@@ -1273,15 +1522,24 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#createNetworkRequest()
+	 */
 	public NetworkRequest createNetworkRequest() {
 		return new org.lobobrowser.context.NetworkRequestImpl();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.Component#toString()
+	 */
 	public String toString() {
 		return "FramePanel[windowId=" + windowId + ",hashCode="
 				+ this.hashCode() + ",parent=" + this.getParent() + "]";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#resizeWindowBy(int, int)
+	 */
 	public void resizeWindowBy(int byWidth, int byHeight) {
 		Window window = this.getWindow();
 		if (logger.isLoggable(Level.INFO)) {
@@ -1294,6 +1552,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#resizeWindowTo(int, int)
+	 */
 	public void resizeWindowTo(int width, int height) {
 		Window window = this.getWindow();
 		if (logger.isLoggable(Level.INFO)) {
@@ -1305,10 +1566,20 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/**
+	 * Gets the top frame window.
+	 *
+	 * @return the top frame window
+	 */
 	public Window getTopFrameWindow() {
 		return topFrameWindow;
 	}
 
+	/**
+	 * Sets the top frame window.
+	 *
+	 * @param topFrameWindow the new top frame window
+	 */
 	public void setTopFrameWindow(Window topFrameWindow) {
 		this.topFrameWindow = topFrameWindow;
 	}
@@ -1318,6 +1589,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	 * example, if the frame is currently showing HTML, this method will
 	 * probably return an instance of
 	 * <code>org.w3c.dom.html2.HTMLDocument</code>.
+	 *
+	 * @return the content object
 	 */
 	public Object getContentObject() {
 		ComponentContent content = this.getComponentContent();
@@ -1329,24 +1602,35 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	 * {@link FramePanel#getContentObject()}. This is not necessarily the same
 	 * as the mime type declared in the headers of the response that produced
 	 * the current content.
+	 *
+	 * @return the current mime type
 	 */
 	public String getCurrentMimeType() {
 		ComponentContent content = this.getComponentContent();
 		return content == null ? null : content.getMimeType();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#linkClicked(java.net.URL, org.lobobrowser.ua.TargetType, java.lang.Object)
+	 */
 	public void linkClicked(URL url, TargetType targetType, Object linkObject) {
 		NavigationEvent event = new NavigationEvent(this, url, targetType,
 				RequestType.CLICK, linkObject, this);
 		this.navigate(event);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#getHistoryLength()
+	 */
 	public int getHistoryLength() {
 		synchronized (this) {
 			return this.navigationEngine.getLength();
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#getNextNavigationEntry()
+	 */
 	public NavigationEntry getNextNavigationEntry() {
 		synchronized (this) {
 			NavigationEntry[] entries = this.navigationEngine
@@ -1355,6 +1639,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#getPreviousNavigationEntry()
+	 */
 	public NavigationEntry getPreviousNavigationEntry() {
 		synchronized (this) {
 			NavigationEntry[] entries = this.navigationEngine
@@ -1363,10 +1650,16 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#moveInHistory(int)
+	 */
 	public void moveInHistory(int offset) {
 		this.moveNavigation(offset);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#navigateInHistory(java.lang.String)
+	 */
 	public void navigateInHistory(String absoluteURL) {
 		NavigationEntry entry;
 		synchronized (this) {
@@ -1377,8 +1670,12 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/** The content properties. */
 	private Map contentProperties = null;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorFrame#setProperty(java.lang.String, java.lang.Object)
+	 */
 	public void setProperty(String name, Object value) {
 		ComponentContent content = this.getComponentContent();
 		synchronized (this.propertiesMonitor) {
@@ -1394,6 +1691,11 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 	}
 
+	/**
+	 * Update content properties.
+	 *
+	 * @param content the content
+	 */
 	private void updateContentProperties(ComponentContent content) {
 		synchronized (this.propertiesMonitor) {
 			Map props = this.contentProperties;

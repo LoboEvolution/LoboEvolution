@@ -31,54 +31,64 @@ import java.util.Iterator;
 
 import org.lobobrowser.ua.RequestType;
 
+
 /**
  * Represents a URL response such as an HTTP or file protocol response.
  */
 public interface ClientletResponse {
+	
 	/**
 	 * Gets the response URL. This may be different to the request URL in the
 	 * case of a redirect.
+	 *
+	 * @return the response url
 	 */
 	public URL getResponseURL();
 
 	/**
 	 * Gets the request method for the response URL. This may be different to
 	 * the original request method in case of a redirect.
+	 *
+	 * @return the last request method
 	 */
 	public String getLastRequestMethod();
 
 	/**
 	 * Gets a response header.
-	 * 
-	 * @param name
-	 *            The header name.
+	 *
+	 * @param name            The header name.
+	 * @return the header
 	 */
 	public String getHeader(String name);
 
 	/**
 	 * Gets all values for a particular header.
-	 * 
-	 * @param name
-	 *            The header name.
+	 *
+	 * @param name            The header name.
+	 * @return the headers
 	 */
 	public String[] getHeaders(String name);
 
 	/**
 	 * Gets an iterator of response header names.
+	 *
+	 * @return the header names
 	 */
 	public Iterator getHeaderNames();
 
 	/**
 	 * Gets the response stream.
-	 * 
-	 * @throws IOException
+	 *
+	 * @return the input stream
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public InputStream getInputStream() throws IOException;
 
 	/**
 	 * Gets the response content type. This can also contain a character
 	 * encoding, e.g. <em>text/html; charset=ISO-8859-1</em>.
-	 * 
+	 *
+	 * @return the content type
 	 * @see #getMimeType()
 	 */
 	public String getContentType();
@@ -86,7 +96,8 @@ public interface ClientletResponse {
 	/**
 	 * Gets only the mime-type part of the content type, e.g. <em>text/html</em>
 	 * .
-	 * 
+	 *
+	 * @return the mime type
 	 * @see #getContentType()
 	 */
 	public String getMimeType();
@@ -110,38 +121,54 @@ public interface ClientletResponse {
 	/**
 	 * Gets the content length of the reponse. This may be -1 if the content
 	 * length is not known.
+	 *
+	 * @return the content length
 	 */
 	public int getContentLength();
 
 	/**
 	 * Returns true only if the response comes from a local cache.
+	 *
+	 * @return true, if is from cache
 	 */
 	public boolean isFromCache();
 
 	/**
 	 * Gets the charset specified with the content type. If no such charset has
 	 * been provided, the implementation may recommend a default.
+	 *
+	 * @return the charset
 	 */
 	public String getCharset();
 
 	/**
 	 * Determines whether a charset has been provided with the Content-Type
 	 * header.
+	 *
+	 * @return true, if is charset provided
 	 */
 	public boolean isCharsetProvided();
 
 	/**
 	 * Gets the HTTP response or status code.
+	 *
+	 * @return the response code
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public int getResponseCode() throws IOException;
 
 	/**
 	 * Gets the HTTP response message.
+	 *
+	 * @return the response message
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public String getResponseMessage() throws IOException;
 
 	/**
 	 * Returns true only if the response is allowed to be cached.
+	 *
+	 * @return true, if is cacheable
 	 */
 	public boolean isCacheable();
 
@@ -149,15 +176,17 @@ public interface ClientletResponse {
 	 * Returns true only if the response does not result from a reload, forward
 	 * or back. Generally, this method indicates that a response is not related
 	 * to an entry already in the navigation history.
+	 *
+	 * @return true, if is new navigation action
 	 */
 	public boolean isNewNavigationAction();
 
 	/**
 	 * If available, gets an object previously persisted along with the cached
 	 * document.
-	 * 
-	 * @param classLoader
-	 *            A class loader that can load an object of the type expected.
+	 *
+	 * @param classLoader            A class loader that can load an object of the type expected.
+	 * @return the persistent cached object
 	 * @see #setNewPersistentCachedObject(Serializable)
 	 */
 	public Object getPersistentCachedObject(ClassLoader classLoader);
@@ -177,7 +206,8 @@ public interface ClientletResponse {
 	 * <p>
 	 * <b>Note</b>: Most callers should only use the persistent cached object if
 	 * {@link #isFromCache()} returns true.
-	 * 
+	 *
+	 * @return the transient cached object
 	 * @see #setNewTransientCachedObject(Object, int)
 	 */
 	public Object getTransientCachedObject();
@@ -202,17 +232,23 @@ public interface ClientletResponse {
 	 * <p>
 	 * <b>Note</b>: Most callers should only use the transient cached object if
 	 * {@link #isFromCache()} returns true.
+	 *
+	 * @return the transient cached object size
 	 */
 	public int getTransientCachedObjectSize();
 
 	/**
 	 * Gets the value of the "Date" header. This method returns
 	 * <code>null</code> if the header is not available.
+	 *
+	 * @return the date
 	 */
 	public Date getDate();
 
 	/**
 	 * Gets the type of request.
+	 *
+	 * @return the request type
 	 */
 	public RequestType getRequestType();
 }

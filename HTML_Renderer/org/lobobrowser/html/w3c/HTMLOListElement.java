@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Ordered list. See the OL element definition in HTML 4.01.
  * <p>
@@ -39,45 +40,68 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLOListElement extends HTMLElement {
+	
 	/**
 	 * Reduce spacing between list items. See the compact attribute definition
 	 * in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the compact
 	 */
 	public boolean getCompact();
 
 	/**
 	 * Reduce spacing between list items. See the compact attribute definition
 	 * in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param compact the new compact
 	 */
 	public void setCompact(boolean compact);
 
 	/**
 	 * Starting sequence number. See the start attribute definition in HTML
 	 * 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the start
 	 */
 	public int getStart();
 
 	/**
 	 * Starting sequence number. See the start attribute definition in HTML
 	 * 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param start the new start
 	 */
 	public void setStart(int start);
 
 	/**
 	 * Numbering style. See the type attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the type
 	 */
 	public String getType();
 
 	/**
 	 * Numbering style. See the type attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param type the new type
 	 */
 	public void setType(String type);
 
 	// HTMLOListElement
+	/**
+	 * Gets the reversed.
+	 *
+	 * @return the reversed
+	 */
 	public boolean getReversed();
 
+	/**
+	 * Sets the reversed.
+	 *
+	 * @param reversed the new reversed
+	 */
 	public void setReversed(boolean reversed);
 
 }

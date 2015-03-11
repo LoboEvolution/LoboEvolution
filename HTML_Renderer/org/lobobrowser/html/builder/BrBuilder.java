@@ -23,8 +23,15 @@ package org.lobobrowser.html.builder;
 import org.lobobrowser.html.domimpl.HTMLBRElementImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 
+
+/**
+ * The Class BrBuilder.
+ */
 public class BrBuilder extends HTMLElementBuilder {
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
 	@Override
 	protected HTMLElementImpl build(String name) {
 		return new HTMLBRElementImpl(name);

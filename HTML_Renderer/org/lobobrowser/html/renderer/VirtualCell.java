@@ -25,25 +25,47 @@ package org.lobobrowser.html.renderer;
 
 import org.lobobrowser.html.style.HtmlLength;
 
+
+/**
+ * The Class VirtualCell.
+ */
 class VirtualCell {
+	
+	/** The actual cell. */
 	private final RTableCell actualCell;
+	
+	/** The is top left. */
 	private final boolean isTopLeft;
+	
+	/** The column. */
 	private int column;
+	
+	/** The row. */
 	private int row;
 
 	/**
-	 * @param cell
+	 * Instantiates a new virtual cell.
+	 *
+	 * @param cell the cell
+	 * @param isTopLeft the is top left
 	 */
 	public VirtualCell(RTableCell cell, boolean isTopLeft) {
 		actualCell = cell;
 		this.isTopLeft = isTopLeft;
 	}
 
+	/**
+	 * Checks if is top left.
+	 *
+	 * @return true, if is top left
+	 */
 	public boolean isTopLeft() {
 		return this.isTopLeft;
 	}
 
 	/**
+	 * Gets the column.
+	 *
 	 * @return Returns the column.
 	 */
 	public int getColumn() {
@@ -51,14 +73,17 @@ class VirtualCell {
 	}
 
 	/**
-	 * @param column
-	 *            The column to set.
+	 * Sets the column.
+	 *
+	 * @param column            The column to set.
 	 */
 	public void setColumn(int column) {
 		this.column = column;
 	}
 
 	/**
+	 * Gets the row.
+	 *
 	 * @return Returns the row.
 	 */
 	public int getRow() {
@@ -66,20 +91,28 @@ class VirtualCell {
 	}
 
 	/**
-	 * @param row
-	 *            The row to set.
+	 * Sets the row.
+	 *
+	 * @param row            The row to set.
 	 */
 	public void setRow(int row) {
 		this.row = row;
 	}
 
 	/**
+	 * Gets the actual cell.
+	 *
 	 * @return Returns the actualCell.
 	 */
 	public RTableCell getActualCell() {
 		return actualCell;
 	}
 
+	/**
+	 * Gets the height length.
+	 *
+	 * @return the height length
+	 */
 	public HtmlLength getHeightLength() {
 		// TODO: Does not consider cellpadding and border
 		RTableCell cell = this.actualCell;
@@ -96,6 +129,11 @@ class VirtualCell {
 		return length;
 	}
 
+	/**
+	 * Gets the width length.
+	 *
+	 * @return the width length
+	 */
 	public HtmlLength getWidthLength() {
 		RTableCell cell = this.actualCell;
 		String widthText = cell.getWidthText();

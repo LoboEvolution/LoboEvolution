@@ -45,13 +45,28 @@ import org.w3c.dom.stylesheets.MediaList;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 import com.steadystate.css.parser.CSSOMParser;
 
+
+/**
+ * The Class CSSUtilities.
+ */
 public class CSSUtilities {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CSSUtilities.class
 			.getName());
 
+	/**
+	 * Instantiates a new CSS utilities.
+	 */
 	private CSSUtilities() {
 	}
 
+	/**
+	 * Pre process css.
+	 *
+	 * @param text the text
+	 * @return the string
+	 */
 	public static String preProcessCss(String text) {
 		try {
 			BufferedReader reader = new BufferedReader(new StringReader(text));
@@ -82,6 +97,13 @@ public class CSSUtilities {
 		}
 	}
 
+	/**
+	 * Gets the css input source for style sheet.
+	 *
+	 * @param text the text
+	 * @param scriptURI the script uri
+	 * @return the css input source for style sheet
+	 */
 	public static InputSource getCssInputSourceForStyleSheet(String text,
 			String scriptURI) {
 		java.io.Reader reader = new StringReader(text);
@@ -90,6 +112,17 @@ public class CSSUtilities {
 		return is;
 	}
 
+	/**
+	 * Parses the.
+	 *
+	 * @param ownerNode the owner node
+	 * @param href the href
+	 * @param text the text
+	 * @param baseUri the base uri
+	 * @param considerDoubleSlashComments the consider double slash comments
+	 * @return the CSS style sheet
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static CSSStyleSheet parse(org.w3c.dom.Node ownerNode, String href,
 			String text, String baseUri, boolean considerDoubleSlashComments)
 			throws IOException {
@@ -116,6 +149,16 @@ public class CSSUtilities {
 		}
 	}
 
+	/**
+	 * Parses the.
+	 *
+	 * @param ownerNode the owner node
+	 * @param text the text
+	 * @param baseUri the base uri
+	 * @param considerDoubleSlashComments the consider double slash comments
+	 * @return the CSS style sheet
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static CSSStyleSheet parse(org.w3c.dom.Node ownerNode, String text,
 			String baseUri, boolean considerDoubleSlashComments)
 			throws IOException {
@@ -138,6 +181,13 @@ public class CSSUtilities {
 		}
 	}
 
+	/**
+	 * Matches media.
+	 *
+	 * @param mediaValues the media values
+	 * @param rcontext the rcontext
+	 * @return true, if successful
+	 */
 	public static boolean matchesMedia(String mediaValues,
 			UserAgentContext rcontext) {
 		if (mediaValues == null || mediaValues.length() == 0) {
@@ -157,6 +207,13 @@ public class CSSUtilities {
 		return false;
 	}
 
+	/**
+	 * Matches media.
+	 *
+	 * @param mediaList the media list
+	 * @param rcontext the rcontext
+	 * @return true, if successful
+	 */
 	public static boolean matchesMedia(MediaList mediaList,
 			UserAgentContext rcontext) {
 		if (mediaList == null) {
@@ -178,6 +235,15 @@ public class CSSUtilities {
 		return false;
 	}
 
+	/**
+	 * Css text.
+	 *
+	 * @param href the href
+	 * @param doc the doc
+	 * @param baseUri the base uri
+	 * @return the array list
+	 * @throws MalformedURLException the malformed url exception
+	 */
 	public static ArrayList<String> cssText(String href, HTMLDocumentImpl doc,
 			String baseUri) throws MalformedURLException {
 
@@ -228,6 +294,13 @@ public class CSSUtilities {
 		return cssText(request.getResponseText());
 	}
 
+	/**
+	 * Css text.
+	 *
+	 * @param text the text
+	 * @return the array list
+	 * @throws MalformedURLException the malformed url exception
+	 */
 	public static ArrayList<String> cssText(String text)
 			throws MalformedURLException {
 
@@ -258,6 +331,12 @@ public class CSSUtilities {
 		return listText;
 	}
 
+	/**
+	 * Fix media query string.
+	 *
+	 * @param css the css
+	 * @return the string
+	 */
 	private static String fixMediaQueryString(String css) {
 
 		String stringFixed = "";
@@ -290,6 +369,12 @@ public class CSSUtilities {
 		return stringFixed.trim();
 	}
 
+	/**
+	 * Fix string.
+	 *
+	 * @param css the css
+	 * @return the string
+	 */
 	private static String fixString(String css) {
 
 		String stringFixed = "";
@@ -326,6 +411,13 @@ public class CSSUtilities {
 		return result;
 	}
 
+	/**
+	 * Count char.
+	 *
+	 * @param str the str
+	 * @param str1 the str1
+	 * @return the int
+	 */
 	private static int countChar(String str, String str1){
 		
 		int  occurrences = 0;

@@ -29,6 +29,7 @@ import org.lobobrowser.ua.ParameterInfo;
 import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.ua.UserAgent;
 
+
 /**
  * A URL request such as a HTTP, file or FTP request.
  * 
@@ -44,53 +45,73 @@ public interface ClientletRequest {
 
 	/**
 	 * Gets the request URL.
+	 *
+	 * @return the request url
 	 */
 	public URL getRequestURL();
 
 	/**
 	 * Gets information about the user agent making the request.
+	 *
+	 * @return the user agent
 	 */
 	public UserAgent getUserAgent();
 
 	/**
 	 * Gets the referring URL. It should be <code>null</code> if none or
 	 * unknown.
+	 *
+	 * @return the referrer
 	 */
 	public String getReferrer();
 
 	/**
 	 * Gets information about the request parameters.
+	 *
+	 * @return the parameter info
 	 */
 	public ParameterInfo getParameterInfo();
 
 	/**
 	 * Gets additional headers used in the request.
+	 *
+	 * @return the extra headers
 	 */
 	public Header[] getExtraHeaders();
 
 	/**
 	 * Convenience method. Determines if the request method is GET.
+	 *
+	 * @return true, if is gets the request
 	 */
 	public boolean isGetRequest();
 
 	/**
 	 * Convenience method. Determines if the request method is POST.
+	 *
+	 * @return true, if is post request
 	 */
 	public boolean isPostRequest();
 
 	/**
 	 * Determines if the request was made in order to open a new browser window.
+	 *
+	 * @return true, if is new window request
 	 */
 	public boolean isNewWindowRequest();
 
 	/**
 	 * Provides alternative POST data in case no <code>ParameterInfo</code> is
 	 * provied.
+	 *
+	 * @return the alt post data
 	 */
 	public String getAltPostData();
 
 	/**
 	 * Gets the type of request.
+	 *
+	 * @return the request type
 	 */
 	public RequestType getRequestType();
 }

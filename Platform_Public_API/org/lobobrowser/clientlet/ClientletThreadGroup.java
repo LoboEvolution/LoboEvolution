@@ -22,6 +22,7 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.clientlet;
 
+
 /**
  * An interface the platform should have a <code>ThreadGroup</code> extension
  * implement such that threads created during a request belong to an instance of
@@ -30,8 +31,11 @@ package org.lobobrowser.clientlet;
  * @see ClientletAccess#getCurrentClientletContext()
  */
 public interface ClientletThreadGroup {
+	
 	/**
 	 * Gets the clientlet context associated with the thread group.
+	 *
+	 * @return the clientlet context
 	 */
 	public ClientletContext getClientletContext();
 }

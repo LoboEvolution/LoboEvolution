@@ -23,10 +23,20 @@ package org.lobobrowser.html.builder;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLHeadingElementImpl;
 
+
+/**
+ * The Class HeadingBuilder.
+ */
 public class HeadingBuilder extends HTMLElementBuilder{
 
+	/**
+	 * Instantiates a new heading builder.
+	 */
 	public HeadingBuilder() {}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
 	@Override
 	protected HTMLElementImpl build(String name) {
 		return new HTMLHeadingElementImpl(name);

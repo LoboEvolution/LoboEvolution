@@ -24,16 +24,22 @@ package org.lobobrowser.ua;
 
 import java.util.EventListener;
 
+
 /**
  * A listener of navigator window events. Listener methods are invoked by the
  * user agent in the GUI dispatch thread.
+ *
+ * @see NavigatorWindowEvent
  */
 public interface NavigatorWindowListener extends EventListener {
+	
 	/**
 	 * Invoked after a connection request to a URL succeeds and the document
 	 * starts loading. There is no guarantee that the document will render. For
 	 * example, a download may be started instead.
 	 * <p>
+	 *
+	 * @param event the event
 	 */
 	public void documentAccessed(NavigatorWindowEvent event);
 
@@ -44,6 +50,8 @@ public interface NavigatorWindowListener extends EventListener {
 	 * <p>
 	 * This method is meant to be used by the primary extension in order to
 	 * update the address bar.
+	 *
+	 * @param event the event
 	 */
 	public void documentRendering(NavigatorWindowEvent event);
 
@@ -52,16 +60,22 @@ public interface NavigatorWindowListener extends EventListener {
 	 * <p>
 	 * This method is meant to be used by the primary extension in order to
 	 * update its progress bar. It is invoked outside the GUI dispatch thread.
+	 *
+	 * @param event the event
 	 */
 	public void progressUpdated(NavigatorProgressEvent event);
 
 	/**
 	 * Invoked when the status message is updated.
+	 *
+	 * @param event the event
 	 */
 	public void statusUpdated(NavigatorWindowEvent event);
 
 	/**
 	 * Invoked when the default status message is updated.
+	 *
+	 * @param event the event
 	 */
 	public void defaultStatusUpdated(NavigatorWindowEvent event);
 }

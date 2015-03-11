@@ -33,33 +33,56 @@ import org.w3c.css.sac.Selector;
 
 import com.steadystate.css.parser.LocatableImpl;
 
+
 /**
+ * The Class CharacterDataSelectorImpl.
  *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
 public class CharacterDataSelectorImpl extends LocatableImpl implements CharacterDataSelector, Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 4635511567927852889L;
 
+    /** The data_. */
     private String data_;
 
+    /**
+     * Sets the data.
+     *
+     * @param data the new data
+     */
     public void setData(final String data) {
         data_ = data;
     }
 
+    /**
+     * Instantiates a new character data selector impl.
+     *
+     * @param data the data
+     */
     public CharacterDataSelectorImpl(final String data) {
         setData(data);
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.Selector#getSelectorType()
+     */
     public short getSelectorType() {
         return Selector.SAC_CDATA_SECTION_NODE_SELECTOR;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.CharacterDataSelector#getData()
+     */
     public String getData() {
         return data_;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return getData();

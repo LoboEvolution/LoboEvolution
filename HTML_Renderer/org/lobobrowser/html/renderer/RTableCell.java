@@ -30,14 +30,28 @@ import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.renderstate.RenderState;
 
+
+/**
+ * The Class RTableCell.
+ */
 class RTableCell extends RBlock {
+	
+	/** The cell element. */
 	private final HTMLTableCellElementImpl cellElement;
+	
+	/** The top left virtual cell. */
 	private VirtualCell topLeftVirtualCell;
 
 	// private int cellPadding;
 
 	/**
-	 * @param element
+	 * Instantiates a new r table cell.
+	 *
+	 * @param element the element
+	 * @param pcontext the pcontext
+	 * @param rcontext the rcontext
+	 * @param frameContext the frame context
+	 * @param tableAsContainer the table as container
 	 */
 	public RTableCell(HTMLTableCellElementImpl element,
 			UserAgentContext pcontext, HtmlRendererContext rcontext,
@@ -46,6 +60,16 @@ class RTableCell extends RBlock {
 		this.cellElement = element;
 	}
 
+	/**
+	 * Do cell layout.
+	 *
+	 * @param width the width
+	 * @param height the height
+	 * @param expandWidth the expand width
+	 * @param expandHeight the expand height
+	 * @param sizeOnly the size only
+	 * @return the dimension
+	 */
 	protected Dimension doCellLayout(int width, int height,
 			boolean expandWidth, boolean expandHeight, boolean sizeOnly) {
 		return this.doCellLayout(width, height, expandWidth, expandHeight,
@@ -53,12 +77,15 @@ class RTableCell extends RBlock {
 	}
 
 	/**
-	 * @param width
-	 *            The width available, including insets.
-	 * @param height
-	 *            The height available, including insets.
-	 * @param useCache
-	 *            Testing parameter. Should always be true.
+	 * Do cell layout.
+	 *
+	 * @param width            The width available, including insets.
+	 * @param height            The height available, including insets.
+	 * @param expandWidth the expand width
+	 * @param expandHeight the expand height
+	 * @param sizeOnly the size only
+	 * @param useCache            Testing parameter. Should always be true.
+	 * @return the dimension
 	 */
 	protected Dimension doCellLayout(int width, int height,
 			boolean expandWidth, boolean expandHeight, boolean sizeOnly,
@@ -76,6 +103,9 @@ class RTableCell extends RBlock {
 		}
 	}
 
+	/**
+	 * Clear layout cache.
+	 */
 	void clearLayoutCache() {
 		// test method
 		this.cachedLayout.clear();
@@ -85,32 +115,56 @@ class RTableCell extends RBlock {
 	// this.cellPadding = value;
 	// }
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#getDeclaredHeight(org.lobobrowser.html.renderstate.RenderState, int)
+	 */
 	protected Integer getDeclaredHeight(RenderState renderState, int availHeight) {
 		// Overridden since height declaration is handled by table.
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#getDeclaredWidth(org.lobobrowser.html.renderstate.RenderState, int)
+	 */
 	protected Integer getDeclaredWidth(RenderState renderState, int availWidth) {
 		// Overridden since width declaration is handled by table.
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RBlock#finalize()
+	 */
 	public void finalize() throws Throwable {
 		super.finalize();
 	}
 
+	/**
+	 * Sets the top left virtual cell.
+	 *
+	 * @param vc the new top left virtual cell
+	 */
 	public void setTopLeftVirtualCell(VirtualCell vc) {
 		this.topLeftVirtualCell = vc;
 	}
 
+	/**
+	 * Gets the top left virtual cell.
+	 *
+	 * @return the top left virtual cell
+	 */
 	public VirtualCell getTopLeftVirtualCell() {
 		return this.topLeftVirtualCell;
 	}
 
+	/** The col span. */
 	private int colSpan = -1;
+	
+	/** The row span. */
 	private int rowSpan = -1;
 
 	/**
+	 * Gets the virtual column.
+	 *
 	 * @return Returns the virtualColumn.
 	 */
 	public int getVirtualColumn() {
@@ -119,6 +173,8 @@ class RTableCell extends RBlock {
 	}
 
 	/**
+	 * Gets the virtual row.
+	 *
 	 * @return Returns the virtualRow.
 	 */
 	public int getVirtualRow() {
@@ -126,6 +182,11 @@ class RTableCell extends RBlock {
 		return vc == null ? 0 : vc.getRow();
 	}
 
+	/**
+	 * Gets the col span.
+	 *
+	 * @return the col span
+	 */
 	public int getColSpan() {
 		int cs = this.colSpan;
 		if (cs == -1) {
@@ -138,6 +199,11 @@ class RTableCell extends RBlock {
 		return cs;
 	}
 
+	/**
+	 * Gets the row span.
+	 *
+	 * @return the row span
+	 */
 	public int getRowSpan() {
 		int rs = this.rowSpan;
 		if (rs == -1) {
@@ -150,14 +216,29 @@ class RTableCell extends RBlock {
 		return rs;
 	}
 
+	/**
+	 * Sets the row span.
+	 *
+	 * @param rowSpan the new row span
+	 */
 	public void setRowSpan(int rowSpan) {
 		this.rowSpan = rowSpan;
 	}
 
+	/**
+	 * Gets the height text.
+	 *
+	 * @return the height text
+	 */
 	public String getHeightText() {
 		return this.cellElement.getHeight();
 	}
 
+	/**
+	 * Gets the width text.
+	 *
+	 * @return the width text
+	 */
 	public String getWidthText() {
 		return this.cellElement.getWidth();
 	}
@@ -170,6 +251,15 @@ class RTableCell extends RBlock {
 	//
 	//
 
+	/**
+	 * Sets the cell bounds.
+	 *
+	 * @param colSizes the col sizes
+	 * @param rowSizes the row sizes
+	 * @param hasBorder the has border
+	 * @param cellSpacingX the cell spacing x
+	 * @param cellSpacingY the cell spacing y
+	 */
 	public void setCellBounds(TableMatrix.SizeInfo[] colSizes,
 			TableMatrix.SizeInfo[] rowSizes, int hasBorder, int cellSpacingX,
 			int cellSpacingY) {
@@ -210,6 +300,9 @@ class RTableCell extends RBlock {
 		this.setBounds(x, y, width, height);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#isMarginBoundary()
+	 */
 	protected boolean isMarginBoundary() {
 		return true;
 	}

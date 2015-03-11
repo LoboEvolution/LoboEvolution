@@ -23,11 +23,24 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.w3c.dom.UserDataHandler;
 
+
+/**
+ * The Class HTMLBaseElementImpl.
+ */
 public class HTMLBaseElementImpl extends HTMLElementImpl {
+	
+	/**
+	 * Instantiates a new HTML base element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLBaseElementImpl(String name) {
 		super(name, true);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setUserData(java.lang.String, java.lang.Object, org.w3c.dom.UserDataHandler)
+	 */
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key)
 				&& data != Boolean.TRUE) {
@@ -36,6 +49,9 @@ public class HTMLBaseElementImpl extends HTMLElementImpl {
 		return super.setUserData(key, data, handler);
 	}
 
+	/**
+	 * Process base tag.
+	 */
 	private final void processBaseTag() {
 		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc != null) {

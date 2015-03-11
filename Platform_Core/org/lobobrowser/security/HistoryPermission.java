@@ -25,13 +25,20 @@ package org.lobobrowser.security;
 
 import java.security.Permission;
 
+
 /**
+ * The Class HistoryPermission.
+ *
  * @author J. H. S.
  */
 public class HistoryPermission extends Permission {
 	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instantiates a new history permission.
+	 */
 	public HistoryPermission() {
 		super("");
 	}

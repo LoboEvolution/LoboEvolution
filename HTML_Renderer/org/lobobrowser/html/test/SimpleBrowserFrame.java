@@ -32,6 +32,7 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.w3c.dom.Document;
 
+
 /**
  * The <code>SimpleBrowserFrame</code> class implements the
  * {@link org.lobobrowser.html.BrowserFrame} interface. It represents a browser
@@ -42,8 +43,15 @@ import org.w3c.dom.Document;
 public class SimpleBrowserFrame extends HtmlPanel implements BrowserFrame {
 	/** The {@link HtmlRendererContext} associated with the browser frame. */
 	private final HtmlRendererContext rcontext;
+	
+	/** The parent rcontext. */
 	private final HtmlRendererContext parentRcontext;
 
+	/**
+	 * Instantiates a new simple browser frame.
+	 *
+	 * @param parentRcontext the parent rcontext
+	 */
 	public SimpleBrowserFrame(HtmlRendererContext parentRcontext) {
 		this.parentRcontext = parentRcontext;
 		this.rcontext = this.createHtmlRendererContext(parentRcontext);
@@ -52,44 +60,70 @@ public class SimpleBrowserFrame extends HtmlPanel implements BrowserFrame {
 	/**
 	 * Creates the {@link HtmlRendererContext} associated with this browser
 	 * frame. Override to use a specialized instance.
-	 * 
-	 * @param parentRcontext
-	 *            The parent context.
+	 *
+	 * @param parentRcontext            The parent context.
+	 * @return the html renderer context
 	 */
 	protected HtmlRendererContext createHtmlRendererContext(
 			HtmlRendererContext parentRcontext) {
 		return new SimpleHtmlRendererContext(this, parentRcontext);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.BrowserFrame#getHtmlRendererContext()
+	 */
 	public HtmlRendererContext getHtmlRendererContext() {
 		return this.rcontext;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.BrowserFrame#getComponent()
+	 */
 	public Component getComponent() {
 		return this;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.BrowserFrame#loadURL(java.net.URL)
+	 */
 	public void loadURL(URL url) {
 		this.rcontext.navigate(url, "_this");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.BrowserFrame#getContentDocument()
+	 */
 	public Document getContentDocument() {
 		return (Document) this.getRootNode();
 	}
 
+	/**
+	 * Gets the parent html renderer context.
+	 *
+	 * @return the parent html renderer context
+	 */
 	public HtmlRendererContext getParentHtmlRendererContext() {
 		return this.parentRcontext;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.gui.HtmlPanel#setDefaultMarginInsets(java.awt.Insets)
+	 */
 	public void setDefaultMarginInsets(Insets insets) {
 		// Current implementation is the frame HtmlPanel.
 		super.setDefaultMarginInsets(insets);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.gui.HtmlPanel#setDefaultOverflowX(int)
+	 */
 	public void setDefaultOverflowX(int overflowX) {
 		super.setDefaultOverflowX(overflowX);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.gui.HtmlPanel#setDefaultOverflowY(int)
+	 */
 	public void setDefaultOverflowY(int overflowY) {
 		super.setDefaultOverflowY(overflowY);
 	}

@@ -23,7 +23,15 @@ package org.lobobrowser.html.domfilter;
 import org.lobobrowser.html.HtmlProperties;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class AnchorFilter.
+ */
 public class AnchorFilter implements NodeFilter {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
 	public boolean accept(Node node) {
 		String nodeName = node.getNodeName();
 		return HtmlProperties.A.equalsIgnoreCase(nodeName)

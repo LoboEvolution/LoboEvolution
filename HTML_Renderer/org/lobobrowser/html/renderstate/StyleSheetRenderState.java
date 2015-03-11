@@ -50,37 +50,83 @@ import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.util.gui.FontFactory;
 import org.w3c.dom.css.CSS2Properties;
 
+
 /**
+ * The Class StyleSheetRenderState.
+ *
  * @author J. H. S.
  */
 public class StyleSheetRenderState implements RenderState {
+	
+	/** The Constant FONT_FACTORY. */
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
+	
+	/** The Constant DEFAULT_FONT. */
 	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(Font.SANS_SERIF, null, null, null,HtmlValues.DEFAULT_FONT_SIZE, null, null);
+	
+	/** The Constant INVALID_INSETS. */
 	protected static final HtmlInsets INVALID_INSETS = new HtmlInsets();
+	
+	/** The Constant INVALID_BACKGROUND_INFO. */
 	protected static final BackgroundInfo INVALID_BACKGROUND_INFO = new BackgroundInfo();
+	
+	/** The Constant INVALID_BORDER_INFO. */
 	protected static final BorderInfo INVALID_BORDER_INFO = new BorderInfo();
+	
+	/** The Constant INVALID_COLOR. */
 	protected static final Color INVALID_COLOR = new Color(100, 0, 100);
 
+	/** The element. */
 	protected final HTMLElementImpl element;
+	
+	/** The document. */
 	protected final HTMLDocumentImpl document;
+	
+	/** The prev render state. */
 	protected final RenderState prevRenderState;
 
+	/** The i font. */
 	private Font iFont;
+	
+	/** The i font metrics. */
 	private FontMetrics iFontMetrics;
+	
+	/** The i color. */
 	private Color iColor;
+	
+	/** The i background color. */
 	private Color iBackgroundColor = INVALID_COLOR;
+	
+	/** The i text background color. */
 	private Color iTextBackgroundColor = INVALID_COLOR;
+	
+	/** The i overlay color. */
 	private Color iOverlayColor = INVALID_COLOR;
+	
+	/** The i text decoration. */
 	private int iTextDecoration = -1;
+	
+	/** The i text transform. */
 	private int iTextTransform = -1;
+	
+	/** The i blank width. */
 	private int iBlankWidth = -1;
+	
+	/** The i highlight. */
 	private boolean iHighlight;
 
+	/** The i background info. */
 	protected BackgroundInfo iBackgroundInfo = INVALID_BACKGROUND_INFO;
 
 	static {
 	}
 
+	/**
+	 * Instantiates a new style sheet render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param element the element
+	 */
 	public StyleSheetRenderState(RenderState prevRenderState,
 			HTMLElementImpl element) {
 		this.prevRenderState = prevRenderState;
@@ -88,6 +134,11 @@ public class StyleSheetRenderState implements RenderState {
 		this.document = (HTMLDocumentImpl) element.getOwnerDocument();
 	}
 
+	/**
+	 * Instantiates a new style sheet render state.
+	 *
+	 * @param document the document
+	 */
 	public StyleSheetRenderState(HTMLDocumentImpl document) {
 		this.prevRenderState = null;
 		this.element = null;
@@ -99,12 +150,21 @@ public class StyleSheetRenderState implements RenderState {
 	// this.prevRenderState = prevRenderState;
 	// }
 
+	/**
+	 * Gets the default display.
+	 *
+	 * @return the default display
+	 */
 	protected int getDefaultDisplay() {
 		return DISPLAY_INLINE;
 	}
 
+	/** The i display. */
 	private Integer iDisplay;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getDisplay()
+	 */
 	public int getDisplay() {
 		Integer d = this.iDisplay;
 		if (d != null) {
@@ -142,24 +202,41 @@ public class StyleSheetRenderState implements RenderState {
 		return displayInt;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getPreviousRenderState()
+	 */
 	public RenderState getPreviousRenderState() {
 		return this.prevRenderState;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getFontBase()
+	 */
 	public int getFontBase() {
 		RenderState prs = this.prevRenderState;
 		return prs == null ? 3 : prs.getFontBase();
 	}
 
+	/**
+	 * Repaint.
+	 */
 	public void repaint() {
 		// Dummy implementation
 	}
 
+	/**
+	 * Gets the css properties.
+	 *
+	 * @return the css properties
+	 */
 	protected final AbstractCSS2Properties getCssProperties() {
 		HTMLElementImpl element = this.element;
 		return element == null ? null : element.getCurrentStyle();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#invalidate()
+	 */
 	public void invalidate() {
 		Map<String, WordInfo> map = this.iWordInfoMap;
 		if (map != null) {
@@ -186,6 +263,9 @@ public class StyleSheetRenderState implements RenderState {
 		// Should NOT invalidate parent render state.
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getFont()
+	 */
 	public Font getFont() {
 		Font f = this.iFont;
 		if (f != null) {
@@ -294,6 +374,9 @@ public class StyleSheetRenderState implements RenderState {
 		return f;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getColor()
+	 */
 	public Color getColor() {
 		Color c = this.iColor;
 		if (c != null) {
@@ -316,6 +399,9 @@ public class StyleSheetRenderState implements RenderState {
 		return c;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getBackgroundColor()
+	 */
 	public Color getBackgroundColor() {
 		Color c = this.iBackgroundColor;
 		if (c != INVALID_COLOR) {
@@ -338,6 +424,9 @@ public class StyleSheetRenderState implements RenderState {
 		return localColor;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getTextBackgroundColor()
+	 */
 	public Color getTextBackgroundColor() {
 		Color c = this.iTextBackgroundColor;
 		if (c != INVALID_COLOR) {
@@ -365,6 +454,9 @@ public class StyleSheetRenderState implements RenderState {
 		return localColor;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getOverlayColor()
+	 */
 	public Color getOverlayColor() {
 		Color c = this.iOverlayColor;
 		if (c != INVALID_COLOR) {
@@ -388,6 +480,9 @@ public class StyleSheetRenderState implements RenderState {
 		return c;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getTextDecorationMask()
+	 */
 	public int getTextDecorationMask() {
 		int td = this.iTextDecoration;
 		if (td != -1) {
@@ -426,6 +521,9 @@ public class StyleSheetRenderState implements RenderState {
 		return td;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getTextTransform()
+	 */
 	public int getTextTransform() {
 		int tt = this.iTextTransform;
 		if (tt != -1) {
@@ -464,6 +562,9 @@ public class StyleSheetRenderState implements RenderState {
 		return tt;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getFontMetrics()
+	 */
 	public final FontMetrics getFontMetrics() {
 		FontMetrics fm = this.iFontMetrics;
 		if (fm == null) {
@@ -474,6 +575,9 @@ public class StyleSheetRenderState implements RenderState {
 		return fm;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getBlankWidth()
+	 */
 	public int getBlankWidth() {
 		int bw = this.iBlankWidth;
 		if (bw == -1) {
@@ -484,6 +588,8 @@ public class StyleSheetRenderState implements RenderState {
 	}
 
 	/**
+	 * Checks if is highlight.
+	 *
 	 * @return Returns the iHighlight.
 	 */
 	public boolean isHighlight() {
@@ -491,15 +597,20 @@ public class StyleSheetRenderState implements RenderState {
 	}
 
 	/**
-	 * @param highlight
-	 *            The iHighlight to set.
+	 * Sets the highlight.
+	 *
+	 * @param highlight            The iHighlight to set.
 	 */
 	public void setHighlight(boolean highlight) {
 		this.iHighlight = highlight;
 	}
 
+	/** The i word info map. */
 	Map<String, WordInfo> iWordInfoMap = null;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getWordInfo(java.lang.String)
+	 */
 	public final WordInfo getWordInfo(String word) {
 		// Expected to be called only in the GUI (rendering) thread.
 		// No synchronization necessary.
@@ -523,8 +634,12 @@ public class StyleSheetRenderState implements RenderState {
 		return wi;
 	}
 
+	/** The align x percent. */
 	private int alignXPercent = -1;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getAlignXPercent()
+	 */
 	public int getAlignXPercent() {
 		int axp = this.alignXPercent;
 		if (axp != -1) {
@@ -560,14 +675,21 @@ public class StyleSheetRenderState implements RenderState {
 		return axp;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getAlignYPercent()
+	 */
 	public int getAlignYPercent() {
 		// This is only settable in table cells.
 		// TODO: Does it work with display: table-cell?
 		return 0;
 	}
 
+	/** The counters. */
 	private Map<String, ArrayList<Object>> counters = null;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getCount(java.lang.String, int)
+	 */
 	public int getCount(String counter, int nesting) {
 		// Expected to be called only in GUI thread.
 		RenderState prs = this.prevRenderState;
@@ -587,6 +709,9 @@ public class StyleSheetRenderState implements RenderState {
 		return integer == null ? 0 : integer.intValue();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#resetCount(java.lang.String, int, int)
+	 */
 	public void resetCount(String counter, int nesting, int value) {
 		// Expected to be called only in the GUI thread.
 		RenderState prs = this.prevRenderState;
@@ -607,6 +732,9 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#incrementCount(java.lang.String, int)
+	 */
 	public int incrementCount(String counter, int nesting) {
 		// Expected to be called only in the GUI thread.
 		RenderState prs = this.prevRenderState;
@@ -630,6 +758,9 @@ public class StyleSheetRenderState implements RenderState {
 		return prevValue;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getBackgroundInfo()
+	 */
 	public BackgroundInfo getBackgroundInfo() {
 		BackgroundInfo binfo = this.iBackgroundInfo;
 		if (binfo != INVALID_BACKGROUND_INFO) {
@@ -676,8 +807,12 @@ public class StyleSheetRenderState implements RenderState {
 		return binfo;
 	}
 
+	/** The i text indent text. */
 	private String iTextIndentText = null;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getTextIndentText()
+	 */
 	public String getTextIndentText() {
 		String tiText = this.iTextIndentText;
 		if (tiText != null) {
@@ -698,6 +833,9 @@ public class StyleSheetRenderState implements RenderState {
 		return tiText;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getTextIndent(int)
+	 */
 	public int getTextIndent(int availSize) {
 		// No caching for this one.
 		String tiText = this.getTextIndentText();
@@ -708,8 +846,12 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
+	/** The i white space. */
 	protected Integer iWhiteSpace;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getWhiteSpace()
+	 */
 	public int getWhiteSpace() {
 		if (RenderThreadState.getState().overrideNoWrap) {
 			return WS_NOWRAP;
@@ -742,9 +884,15 @@ public class StyleSheetRenderState implements RenderState {
 		return wsValue;
 	}
 
+	/** The margin insets. */
 	protected HtmlInsets marginInsets = INVALID_INSETS;
+	
+	/** The padding insets. */
 	protected HtmlInsets paddingInsets = INVALID_INSETS;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getMarginInsets()
+	 */
 	public HtmlInsets getMarginInsets() {
 		HtmlInsets mi = this.marginInsets;
 		if (mi != INVALID_INSETS) {
@@ -760,6 +908,9 @@ public class StyleSheetRenderState implements RenderState {
 		return mi;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getPaddingInsets()
+	 */
 	public HtmlInsets getPaddingInsets() {
 		HtmlInsets mi = this.paddingInsets;
 		if (mi != INVALID_INSETS) {
@@ -775,6 +926,12 @@ public class StyleSheetRenderState implements RenderState {
 		return mi;
 	}
 
+	/**
+	 * Apply background horizontal positon.
+	 *
+	 * @param binfo the binfo
+	 * @param xposition the xposition
+	 */
 	private void applyBackgroundHorizontalPositon(BackgroundInfo binfo,
 			String xposition) {
 		if (xposition.endsWith("%")) {
@@ -809,6 +966,12 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
+	/**
+	 * Apply background vertical position.
+	 *
+	 * @param binfo the binfo
+	 * @param yposition the yposition
+	 */
 	private void applyBackgroundVerticalPosition(BackgroundInfo binfo,
 			String yposition) {
 		if (yposition.endsWith("%")) {
@@ -843,6 +1006,12 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
+	/**
+	 * Apply background position.
+	 *
+	 * @param binfo the binfo
+	 * @param position the position
+	 */
 	private void applyBackgroundPosition(BackgroundInfo binfo, String position) {
 		binfo.backgroundXPositionAbsolute = false;
 		binfo.backgroundYPositionAbsolute = false;
@@ -859,6 +1028,12 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
+	/**
+	 * Apply background repeat.
+	 *
+	 * @param binfo the binfo
+	 * @param backgroundRepeatText the background repeat text
+	 */
 	private void applyBackgroundRepeat(BackgroundInfo binfo,
 			String backgroundRepeatText) {
 		String brtl = backgroundRepeatText.toLowerCase();
@@ -873,8 +1048,12 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
+	/** The cached visibility. */
 	private Integer cachedVisibility;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getVisibility()
+	 */
 	public int getVisibility() {
 		Integer v = this.cachedVisibility;
 		if (v != null) {
@@ -905,8 +1084,12 @@ public class StyleSheetRenderState implements RenderState {
 		return visibility;
 	}
 
+	/** The cached position. */
 	private Integer cachedPosition;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getPosition()
+	 */
 	public int getPosition() {
 		Integer p = this.cachedPosition;
 		if (p != null) {
@@ -939,8 +1122,12 @@ public class StyleSheetRenderState implements RenderState {
 		return position;
 	}
 
+	/** The cached float. */
 	private Integer cachedFloat;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getFloat()
+	 */
 	public int getFloat() {
 		Integer p = this.cachedFloat;
 		if (p != null) {
@@ -969,14 +1156,23 @@ public class StyleSheetRenderState implements RenderState {
 		return floatValue;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return "StyleSheetRenderState[font=" + this.getFont()
 				+ ",textDecoration=" + this.getTextDecorationMask() + "]";
 	}
 
+	/** The overflow x. */
 	protected int overflowX = -1;
+	
+	/** The overflow y. */
 	protected int overflowY = -1;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getOverflowX()
+	 */
 	public int getOverflowX() {
 		int overflow = this.overflowX;
 		if (overflow != -1) {
@@ -1011,6 +1207,9 @@ public class StyleSheetRenderState implements RenderState {
 		return overflow;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getOverflowY()
+	 */
 	public int getOverflowY() {
 		int overflow = this.overflowY;
 		if (overflow != -1) {
@@ -1045,8 +1244,12 @@ public class StyleSheetRenderState implements RenderState {
 		return overflow;
 	}
 
+	/** The border info. */
 	protected BorderInfo borderInfo = INVALID_BORDER_INFO;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.RenderState#getBorderInfo()
+	 */
 	public BorderInfo getBorderInfo() {
 		BorderInfo binfo = this.borderInfo;
 		if (binfo != INVALID_BORDER_INFO) {

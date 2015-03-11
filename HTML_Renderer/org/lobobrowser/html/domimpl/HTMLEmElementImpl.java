@@ -23,14 +23,24 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.renderstate.FontStyleRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 
+
 /**
  * Element used for I, EM and CITE.
  */
 public class HTMLEmElementImpl extends HTMLAbstractUIElement {
+	
+	/**
+	 * Instantiates a new HTML em element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLEmElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		prevRenderState = new FontStyleRenderState(prevRenderState,
 				java.awt.Font.ITALIC);

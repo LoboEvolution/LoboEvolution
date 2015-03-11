@@ -32,7 +32,15 @@ import javax.tools.ToolProvider;
 import org.lobobrowser.clientlet.ClientletException;
 import org.lobobrowser.jweb.common.BaseCompiledClientlet;
 
+
+/**
+ * The Class JavaSourceClientlet.
+ */
 public class JavaSourceClientlet extends BaseCompiledClientlet {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.jweb.common.BaseCompiledClientlet#compile(javax.tools.JavaFileManager, javax.tools.DiagnosticListener, java.util.List)
+	 */
 	@Override
 	protected void compile(JavaFileManager fileManager,
 			DiagnosticListener<? super JavaFileObject> diagnosticListener,
@@ -62,6 +70,9 @@ public class JavaSourceClientlet extends BaseCompiledClientlet {
 				compilationUnits).call();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.jweb.common.BaseCompiledClientlet#getExtraPlatformClassPath()
+	 */
 	@Override
 	protected URL[] getExtraPlatformClassPath() {
 		// The standard boot classpath plus clientlets is sufficient.

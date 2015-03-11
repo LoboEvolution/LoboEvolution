@@ -45,25 +45,50 @@ import java.util.logging.Logger;
 import org.lobobrowser.security.LocalSecurityPolicy;
 import org.lobobrowser.security.StoreHostPermission;
 
+
 /**
  * * @author J. H. S.
  */
 public class StorageManager implements Runnable {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(StorageManager.class
 			.getName());
+	
+	/** The Constant HOST_STORE_QUOTA. */
 	private static final long HOST_STORE_QUOTA = 200 * 1024;
 	// Note that the installer makes assumptions about these names.
+	/** The Constant HOST_STORE_DIR. */
 	private static final String HOST_STORE_DIR = "HostStore";
+	
+	/** The Constant CACHE_DIR. */
 	private static final String CACHE_DIR = "cache";
+	
+	/** The Constant CONTENT_DIR. */
 	private static final String CONTENT_DIR = "content";
+	
+	/** The Constant SETTINGS_DIR. */
 	private static final String SETTINGS_DIR = "settings";
+	
+	/** The Constant instance. */
 	private static final StorageManager instance = new StorageManager();
+	
+	/** The store directory. */
 	private final File storeDirectory;
 
+	/**
+	 * Gets the single instance of StorageManager.
+	 *
+	 * @return single instance of StorageManager
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static StorageManager getInstance() throws IOException {
 		return instance;
 	}
 
+	/**
+	 * Instantiates a new storage manager.
+	 */
 	private StorageManager() {
 		this.storeDirectory = LocalSecurityPolicy.STORE_DIRECTORY;
 		if (!this.storeDirectory.exists()) {
@@ -71,8 +96,12 @@ public class StorageManager implements Runnable {
 		}
 	}
 
+	/** The thread started. */
 	private boolean threadStarted = false;
 
+	/**
+	 * Ensure thread started.
+	 */
 	private void ensureThreadStarted() {
 		if (!this.threadStarted) {
 			synchronized (this) {
@@ -87,12 +116,25 @@ public class StorageManager implements Runnable {
 		}
 	}
 
+	/**
+	 * Gets the app home.
+	 *
+	 * @return the app home
+	 */
 	public File getAppHome() {
 		return this.storeDirectory;
 	}
 
+	/** The Constant NO_HOST. */
 	private static final String NO_HOST = "$NO_HOST$";
 
+	/**
+	 * Gets the cache host directory.
+	 *
+	 * @param hostName the host name
+	 * @return the cache host directory
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public File getCacheHostDirectory(String hostName) throws IOException {
 		CacheManager.getInstance();
 		File cacheDir = this.getCacheRoot();
@@ -102,6 +144,14 @@ public class StorageManager implements Runnable {
 		return new File(cacheDir, normalizedFileName(hostName));
 	}
 
+	/**
+	 * Gets the content cache file.
+	 *
+	 * @param hostName the host name
+	 * @param fileName the file name
+	 * @return the content cache file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public File getContentCacheFile(String hostName, String fileName)
 			throws IOException {
 		File domainDir = this.getCacheHostDirectory(hostName);
@@ -109,12 +159,26 @@ public class StorageManager implements Runnable {
 		return new File(xamjDir, fileName);
 	}
 
+	/**
+	 * Gets the cache root.
+	 *
+	 * @return the cache root
+	 */
 	public File getCacheRoot() {
 		return new File(this.storeDirectory, CACHE_DIR);
 	}
 
+	/** The restricted store cache. */
 	private final Map<String, RestrictedStore> restrictedStoreCache = new HashMap<String, RestrictedStore>();
 
+	/**
+	 * Gets the restricted store.
+	 *
+	 * @param hostName the host name
+	 * @param createIfNotExists the create if not exists
+	 * @return the restricted store
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public RestrictedStore getRestrictedStore(String hostName,
 			final boolean createIfNotExists) throws IOException {
 		SecurityManager sm = System.getSecurityManager();
@@ -161,10 +225,22 @@ public class StorageManager implements Runnable {
 		return store;
 	}
 
+	/**
+	 * Gets the settings directory.
+	 *
+	 * @return the settings directory
+	 */
 	public File getSettingsDirectory() {
 		return new File(this.storeDirectory, SETTINGS_DIR);
 	}
 
+	/**
+	 * Save settings.
+	 *
+	 * @param name the name
+	 * @param data the data
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void saveSettings(String name, Serializable data) throws IOException {
 		File dir = this.getSettingsDirectory();
 		if (!dir.exists()) {
@@ -182,6 +258,15 @@ public class StorageManager implements Runnable {
 		}
 	}
 
+	/**
+	 * Retrieve settings.
+	 *
+	 * @param name the name
+	 * @param classLoader the class loader
+	 * @return the serializable
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException the class not found exception
+	 */
 	public Serializable retrieveSettings(String name, ClassLoader classLoader)
 			throws IOException, ClassNotFoundException {
 		File dir = this.getSettingsDirectory();
@@ -209,16 +294,32 @@ public class StorageManager implements Runnable {
 	}
 
 	
+	/**
+	 * Normalized file name.
+	 *
+	 * @param hostName the host name
+	 * @return the string
+	 */
 	static String normalizedFileName(String hostName) {
 		return hostName;
 	}
 
+	/**
+	 * Gets the host name.
+	 *
+	 * @param fileName the file name
+	 * @return the host name
+	 */
 	static String getHostName(String fileName) {
 		return fileName;
 	}
 
+	/** The Constant MANAGED_STORE_UPDATE_DELAY. */
 	private static final int MANAGED_STORE_UPDATE_DELAY = 1000 * 60 * 5; 
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	public void run() {
 		for (;;) {
 			try {

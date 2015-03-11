@@ -30,14 +30,22 @@ import java.net.URLConnection;
 import java.util.Collections;
 import java.util.Map;
 
+
 /**
+ * The Class GenericURLConnection.
+ *
  * @author J. H. S.
  */
 public class GenericURLConnection extends URLConnection {
+	
+	/** The input stream. */
 	private final InputStream inputStream;
 
 	/**
-	 * 
+	 * Instantiates a new generic url connection.
+	 *
+	 * @param url the url
+	 * @param in the in
 	 */
 	public GenericURLConnection(URL url, InputStream in) {
 		super(url);

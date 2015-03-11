@@ -10,14 +10,14 @@ package org.w3c.css.sac;
 
 /**
  * This interface is only for constraints on selectors.
- *
+ * 
  * <p>
  * A <code>ConditionalSelector</code> can only accept a simple selector or a
  * negative selector.
  * </p>
  *
- * @version $Revision: 477010 $
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  */
 public interface SimpleSelector extends Selector {
 	// empty

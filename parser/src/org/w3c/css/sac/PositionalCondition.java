@@ -8,9 +8,12 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Interface PositionalCondition.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  * @see Condition#SAC_POSITIONAL_CONDITION
  */
 public interface PositionalCondition extends Condition {
@@ -21,18 +24,24 @@ public interface PositionalCondition extends Condition {
 	 * A negative value means from the end of the child node list.
 	 * <p>
 	 * The child node list begins at 0.
+	 *
+	 * @return the position
 	 */
 	public int getPosition();
 
 	/**
 	 * <code>true</code> if the child node list only shows nodes of the same
 	 * type of the selector (only elements, only PIS, ...)
+	 *
+	 * @return the type node
 	 */
 	public boolean getTypeNode();
 
 	/**
 	 * <code>true</code> if the node should have the same node type (for
 	 * element, same namespaceURI and same localName).
+	 *
+	 * @return the type
 	 */
 	public boolean getType();
 }

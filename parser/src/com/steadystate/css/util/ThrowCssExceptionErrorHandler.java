@@ -31,14 +31,17 @@ import java.io.Serializable;
 import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
 
+
 /**
  * Helper implementation of {@link ErrorHandler}, which throws CssException in case of problems.
  *
- * @version $Revision: $
  * @author rbri
+ * @version $Revision: $
  * @see ErrorHandler
  */
 public class ThrowCssExceptionErrorHandler implements ErrorHandler, Serializable {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -3933638774901855095L;
 
     /**

@@ -13,9 +13,12 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Interface Condition.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  */
 public interface Condition {
 
@@ -86,14 +89,15 @@ public interface Condition {
 	 * @see LangCondition
 	 */
 	public static final short SAC_LANG_CONDITION = 6;
+	
 	/**
 	 * This condition checks for a value in a space-separated values in a
 	 * specified attribute example:
 	 * 
 	 * <pre class="example">
 	 *   [values~="10"]
-	 * </pre>
-	 * 
+	 * </pre>.
+	 *
 	 * @see AttributeCondition
 	 */
 	public static final short SAC_ONE_OF_ATTRIBUTE_CONDITION = 7;
@@ -147,6 +151,8 @@ public interface Condition {
 
 	/**
 	 * An integer indicating the type of <code>Condition</code>.
+	 *
+	 * @return the condition type
 	 */
 	public short getConditionType();
 }

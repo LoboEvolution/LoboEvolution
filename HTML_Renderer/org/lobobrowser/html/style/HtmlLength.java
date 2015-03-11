@@ -23,17 +23,37 @@
  */
 package org.lobobrowser.html.style;
 
+
+/**
+ * The Class HtmlLength.
+ */
 public final class HtmlLength {
 	// Note: Preferred type has higher value
+	/** The Constant PIXELS. */
 	public static final int PIXELS = 1;
+	
+	/** The Constant LENGTH. */
 	public static final int LENGTH = 2;
+	
+	/** The Constant MULTI_LENGTH. */
 	public static final int MULTI_LENGTH = 0;
 
+	/** The Constant EMPTY_ARRAY. */
 	public static final HtmlLength[] EMPTY_ARRAY = new HtmlLength[0];
 
+	/** The length type. */
 	private final int lengthType;
+	
+	/** The value. */
 	private volatile int value;
 
+	/**
+	 * Instantiates a new html length.
+	 *
+	 * @param spec the spec
+	 * @throws IndexOutOfBoundsException the index out of bounds exception
+	 * @throws NumberFormatException the number format exception
+	 */
 	public HtmlLength(String spec) throws IndexOutOfBoundsException,
 			NumberFormatException {
 		spec = spec.trim();
@@ -57,12 +77,19 @@ public final class HtmlLength {
 		this.value = Integer.parseInt(parseable);
 	}
 
+	/**
+	 * Instantiates a new html length.
+	 *
+	 * @param pixels the pixels
+	 */
 	public HtmlLength(int pixels) {
 		this.lengthType = PIXELS;
 		this.value = pixels;
 	}
 
 	/**
+	 * Gets the length type.
+	 *
 	 * @return Returns the lengthType.
 	 */
 	public final int getLengthType() {
@@ -70,12 +97,20 @@ public final class HtmlLength {
 	}
 
 	/**
+	 * Gets the raw value.
+	 *
 	 * @return Returns the spec.
 	 */
 	public final int getRawValue() {
 		return this.value;
 	}
 
+	/**
+	 * Gets the length.
+	 *
+	 * @param availLength the avail length
+	 * @return the length
+	 */
 	public final int getLength(int availLength) {
 		int lt = this.lengthType;
 		if (lt == LENGTH) {
@@ -85,12 +120,23 @@ public final class HtmlLength {
 		}
 	}
 
+	/**
+	 * Divide by.
+	 *
+	 * @param denominator the denominator
+	 */
 	public final void divideBy(int denominator) {
 		int val = this.value;
 		val = val / denominator;
 		this.value = val;
 	}
 
+	/**
+	 * Checks if is preferred over.
+	 *
+	 * @param otherLength the other length
+	 * @return true, if is preferred over
+	 */
 	public final boolean isPreferredOver(HtmlLength otherLength) {
 		if (otherLength == null) {
 			return true;

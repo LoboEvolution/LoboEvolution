@@ -23,8 +23,17 @@ package org.lobobrowser.html;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * The Class HtmlMappingChar.
+ */
 public class HtmlMappingChar {
 
+	/**
+	 * Mapping char.
+	 *
+	 * @return the map
+	 */
 	public static Map<String, Character> mappingChar() {
 
 		Map<String, Character> entities = new HashMap<String, Character>();

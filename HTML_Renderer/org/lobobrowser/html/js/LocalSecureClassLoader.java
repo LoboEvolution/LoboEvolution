@@ -25,19 +25,37 @@ import java.security.SecureClassLoader;
 
 import org.mozilla.javascript.GeneratedClassLoader;
 
+
+/**
+ * The Class LocalSecureClassLoader.
+ */
 public class LocalSecureClassLoader extends SecureClassLoader implements GeneratedClassLoader {
+	
+	/** The codesource. */
 	private CodeSource codesource;
 	
+	/**
+	 * Instantiates a new local secure class loader.
+	 *
+	 * @param parent the parent
+	 * @param codesource the codesource
+	 */
 	public LocalSecureClassLoader(ClassLoader parent,CodeSource codesource) {
 		super(parent);
 		this.codesource = codesource;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.GeneratedClassLoader#defineClass(java.lang.String, byte[])
+	 */
 	@Override
 	public Class defineClass(String name, byte[] b) {
 		return this.defineClass(name, b, 0, b.length, codesource);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.GeneratedClassLoader#linkClass(java.lang.Class)
+	 */
 	public void linkClass(Class clazz) {
 		super.resolveClass(clazz);
 	}

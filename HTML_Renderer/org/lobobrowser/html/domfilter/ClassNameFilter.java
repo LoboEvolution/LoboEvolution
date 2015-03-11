@@ -24,13 +24,27 @@ import org.lobobrowser.html.HtmlAttributeProperties;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class ClassNameFilter.
+ */
 public class ClassNameFilter  implements NodeFilter {
+	
+	/** The _class. */
 	private final String _class;
 
+	/**
+	 * Instantiates a new class name filter.
+	 *
+	 * @param _class the _class
+	 */
 	public ClassNameFilter(String _class) {
 		this._class = _class;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
 	public boolean accept(Node node) {
 		return (node instanceof Element)
 				&& this._class.equals(((Element) node).getAttribute(HtmlAttributeProperties.CLASS));

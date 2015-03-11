@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Menu list. See the MENU element definition in HTML 4.01. This element is
  * deprecated in HTML 4.01.
@@ -40,25 +41,48 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLMenuElement extends HTMLElement {
+	
 	/**
 	 * Reduce spacing between list items. See the compact attribute definition
 	 * in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the compact
 	 */
 	public boolean getCompact();
 
 	/**
 	 * Reduce spacing between list items. See the compact attribute definition
 	 * in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param compact the new compact
 	 */
 	public void setCompact(boolean compact);
 
 	// HTMLMenuElement
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public String getType();
 
+	/**
+	 * Sets the type.
+	 *
+	 * @param type the new type
+	 */
 	public void setType(String type);
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getLabel()
+	 */
 	public String getLabel();
 
+	/**
+	 * Sets the label.
+	 *
+	 * @param label the new label
+	 */
 	public void setLabel(String label);
 
 }

@@ -25,20 +25,36 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
+
+/**
+ * The Class PreferencesTree.
+ */
 public class PreferencesTree extends JTree {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instantiates a new preferences tree.
+	 */
 	public PreferencesTree() {
 		TreeNode rootNode = this.createRootNode();
 		this.setModel(new DefaultTreeModel(rootNode));
 		this.setRootVisible(false);
 	}
 
+	/**
+	 * Inits the selection.
+	 */
 	public void initSelection() {
 		this.addSelectionRow(0);
 	}
 
+	/**
+	 * Creates the root node.
+	 *
+	 * @return the tree node
+	 */
 	private TreeNode createRootNode() {
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
 		root.add(new DefaultMutableTreeNode(this.getGeneralSettingsInfo()));
@@ -47,6 +63,11 @@ public class PreferencesTree extends JTree {
 		return root;
 	}
 
+	/**
+	 * Gets the general settings info.
+	 *
+	 * @return the general settings info
+	 */
 	private SettingsInfo getGeneralSettingsInfo() {
 		return new SettingsInfo() {
 			public AbstractSettingsUI createSettingsUI() {
@@ -67,6 +88,11 @@ public class PreferencesTree extends JTree {
 		};
 	}
 
+	/**
+	 * Gets the connection settings info.
+	 *
+	 * @return the connection settings info
+	 */
 	private SettingsInfo getConnectionSettingsInfo() {
 		return new SettingsInfo() {
 			public AbstractSettingsUI createSettingsUI() {
@@ -87,6 +113,11 @@ public class PreferencesTree extends JTree {
 		};
 	}
 
+	/**
+	 * Gets the tools settings info.
+	 *
+	 * @return the tools settings info
+	 */
 	private SettingsInfo getToolsSettingsInfo() {
 		return new SettingsInfo() {
 			public AbstractSettingsUI createSettingsUI() {

@@ -30,6 +30,7 @@ import java.io.Serializable;
 
 import org.w3c.css.sac.LexicalUnit;
 
+
 /**
  * Implementation of {@link LexicalUnit}.
  *
@@ -38,62 +39,129 @@ import org.w3c.css.sac.LexicalUnit;
  */
 public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -7260032046960116891L;
 
+    /** The lexical unit type_. */
     private short lexicalUnitType_;
+    
+    /** The next lexical unit_. */
     private LexicalUnit nextLexicalUnit_;
+    
+    /** The previous lexical unit_. */
     private LexicalUnit previousLexicalUnit_;
+    
+    /** The float value_. */
     private float floatValue_;
+    
+    /** The dimension_. */
     private String dimension_;
+    
+    /** The function name_. */
     private String functionName_;
+    
+    /** The parameters_. */
     private LexicalUnit parameters_;
+    
+    /** The string value_. */
     private String stringValue_;
 
-    /** cache **/
+    /**  cache *. */
     private transient String toString_;
 
+    /**
+     * Sets the lexical unit type.
+     *
+     * @param type the new lexical unit type
+     */
     public void setLexicalUnitType(final short type) {
         lexicalUnitType_ = type;
         toString_ = null;
     }
 
+    /**
+     * Sets the next lexical unit.
+     *
+     * @param next the new next lexical unit
+     */
     public void setNextLexicalUnit(final LexicalUnit next) {
         nextLexicalUnit_ = next;
     }
 
+    /**
+     * Sets the previous lexical unit.
+     *
+     * @param prev the new previous lexical unit
+     */
     public void setPreviousLexicalUnit(final LexicalUnit prev) {
         previousLexicalUnit_ = prev;
     }
 
+    /**
+     * Sets the float value.
+     *
+     * @param floatVal the new float value
+     */
     public void setFloatValue(final float floatVal) {
         floatValue_ = floatVal;
         toString_ = null;
     }
 
+    /**
+     * Gets the dimension.
+     *
+     * @return the dimension
+     */
     public String getDimension() {
         return dimension_;
     }
 
+    /**
+     * Sets the dimension.
+     *
+     * @param dimension the new dimension
+     */
     public void setDimension(final String dimension) {
         dimension_ = dimension;
         toString_ = null;
     }
 
+    /**
+     * Sets the function name.
+     *
+     * @param function the new function name
+     */
     public void setFunctionName(final String function) {
         functionName_ = function;
         toString_ = null;
     }
 
+    /**
+     * Sets the parameters.
+     *
+     * @param params the new parameters
+     */
     public void setParameters(final LexicalUnit params) {
         parameters_ = params;
         toString_ = null;
     }
 
+    /**
+     * Sets the string value.
+     *
+     * @param stringVal the new string value
+     */
     public void setStringValue(final String stringVal) {
         stringValue_ = stringVal;
         toString_ = null;
     }
 
+    /**
+     * Instantiates a new lexical unit impl.
+     *
+     * @param previous the previous
+     * @param type the type
+     */
     protected LexicalUnitImpl(final LexicalUnit previous, final short type) {
         this();
         lexicalUnitType_ = type;
@@ -104,7 +172,10 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Seria
     }
 
     /**
-     * Integer
+     * Integer.
+     *
+     * @param previous the previous
+     * @param value the value
      */
     protected LexicalUnitImpl(final LexicalUnit previous, final int value) {
         this(previous, SAC_INTEGER);
@@ -112,7 +183,11 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Seria
     }
 
     /**
-     * Dimension
+     * Dimension.
+     *
+     * @param previous the previous
+     * @param type the type
+     * @param value the value
      */
     protected LexicalUnitImpl(final LexicalUnit previous, final short type, final float value) {
         this(previous, type);
@@ -120,7 +195,12 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Seria
     }
 
     /**
-     * Unknown dimension
+     * Unknown dimension.
+     *
+     * @param previous the previous
+     * @param type the type
+     * @param dimension the dimension
+     * @param value the value
      */
     protected LexicalUnitImpl(
             final LexicalUnit previous,
@@ -133,7 +213,11 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Seria
     }
 
     /**
-     * String
+     * String.
+     *
+     * @param previous the previous
+     * @param type the type
+     * @param value the value
      */
     protected LexicalUnitImpl(final LexicalUnit previous, final short type, final String value) {
         this(previous, type);
@@ -141,7 +225,12 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Seria
     }
 
     /**
-     * Function
+     * Function.
+     *
+     * @param previous the previous
+     * @param type the type
+     * @param name the name
+     * @param params the params
      */
     protected LexicalUnitImpl(
             final LexicalUnit previous,
@@ -153,6 +242,14 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Seria
         parameters_ = params;
     }
 
+    /**
+     * Instantiates a new lexical unit impl.
+     *
+     * @param previous the previous
+     * @param type the type
+     * @param name the name
+     * @param stringValue the string value
+     */
     protected LexicalUnitImpl(final LexicalUnit previous, final short type, final String name,
             final String stringValue) {
         this(previous, type);
@@ -166,26 +263,44 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Seria
     protected LexicalUnitImpl() {
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.LexicalUnit#getLexicalUnitType()
+     */
     public short getLexicalUnitType() {
         return lexicalUnitType_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.LexicalUnit#getNextLexicalUnit()
+     */
     public LexicalUnit getNextLexicalUnit() {
         return nextLexicalUnit_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.LexicalUnit#getPreviousLexicalUnit()
+     */
     public LexicalUnit getPreviousLexicalUnit() {
         return previousLexicalUnit_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.LexicalUnit#getIntegerValue()
+     */
     public int getIntegerValue() {
         return (int) floatValue_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.LexicalUnit#getFloatValue()
+     */
     public float getFloatValue() {
         return floatValue_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.LexicalUnit#getDimensionUnitText()
+     */
     public String getDimensionUnitText() {
         switch (lexicalUnitType_) {
             case SAC_EM:
@@ -227,22 +342,37 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Seria
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.LexicalUnit#getFunctionName()
+     */
     public String getFunctionName() {
         return functionName_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.LexicalUnit#getParameters()
+     */
     public LexicalUnit getParameters() {
         return parameters_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.LexicalUnit#getStringValue()
+     */
     public String getStringValue() {
         return stringValue_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.LexicalUnit#getSubValues()
+     */
     public LexicalUnit getSubValues() {
         return parameters_;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         if (null != toString_) {
@@ -381,6 +511,11 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Seria
         return toString_;
     }
 
+    /**
+     * To debug string.
+     *
+     * @return the string
+     */
     public String toDebugString() {
         final StringBuilder sb = new StringBuilder();
         switch (lexicalUnitType_) {
@@ -602,6 +737,11 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Seria
         return sb.toString();
     }
 
+    /**
+     * Append params.
+     *
+     * @param sb the sb
+     */
     private void appendParams(final StringBuilder sb) {
         LexicalUnit l = parameters_;
         if (l != null) {
@@ -617,126 +757,335 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Seria
         }
     }
 
+    /**
+     * Gets the trimed float value.
+     *
+     * @return the trimed float value
+     */
     private String getTrimedFloatValue() {
         final float f = getFloatValue();
         final String s = Float.toString(f);
         return (f - (int) f != 0) ? s : s.substring(0, s.length() - 2);
     }
 
+    /**
+     * Creates the number.
+     *
+     * @param prev the prev
+     * @param i the i
+     * @return the lexical unit
+     */
     public static LexicalUnit createNumber(final LexicalUnit prev, final int i) {
         return new LexicalUnitImpl(prev, i);
     }
 
+    /**
+     * Creates the number.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createNumber(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_REAL, f);
     }
 
+    /**
+     * Creates the percentage.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createPercentage(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_PERCENTAGE, f);
     }
 
+    /**
+     * Creates the pixel.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createPixel(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_PIXEL, f);
     }
 
+    /**
+     * Creates the centimeter.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createCentimeter(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_CENTIMETER, f);
     }
 
+    /**
+     * Creates the millimeter.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createMillimeter(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_MILLIMETER, f);
     }
 
+    /**
+     * Creates the inch.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createInch(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_INCH, f);
     }
 
+    /**
+     * Creates the point.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createPoint(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_POINT, f);
     }
 
+    /**
+     * Creates the pica.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createPica(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_PICA, f);
     }
 
+    /**
+     * Creates the em.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createEm(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_EM, f);
     }
 
+    /**
+     * Creates the ex.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createEx(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_EX, f);
     }
 
+    /**
+     * Creates the degree.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createDegree(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_DEGREE, f);
     }
 
+    /**
+     * Creates the radian.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createRadian(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_RADIAN, f);
     }
 
+    /**
+     * Creates the gradian.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createGradian(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_GRADIAN, f);
     }
 
+    /**
+     * Creates the millisecond.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createMillisecond(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_MILLISECOND, f);
     }
 
+    /**
+     * Creates the second.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createSecond(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_SECOND, f);
     }
 
+    /**
+     * Creates the hertz.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createHertz(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_HERTZ, f);
     }
 
+    /**
+     * Creates the dimension.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @param dim the dim
+     * @return the lexical unit
+     */
     public static LexicalUnit createDimension(final LexicalUnit prev, final float f, final String dim) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_DIMENSION, dim, f);
     }
 
+    /**
+     * Creates the kilo hertz.
+     *
+     * @param prev the prev
+     * @param f the f
+     * @return the lexical unit
+     */
     public static LexicalUnit createKiloHertz(final LexicalUnit prev, final float f) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_KILOHERTZ, f);
     }
 
+    /**
+     * Creates the counter.
+     *
+     * @param prev the prev
+     * @param params the params
+     * @return the lexical unit
+     */
     public static LexicalUnit createCounter(final LexicalUnit prev, final LexicalUnit params) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_COUNTER_FUNCTION, "counter", params);
     }
 
+    /**
+     * Creates the counters.
+     *
+     * @param prev the prev
+     * @param params the params
+     * @return the lexical unit
+     */
     public static LexicalUnit createCounters(final LexicalUnit prev, final LexicalUnit params) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_COUNTERS_FUNCTION, "counters", params);
     }
 
+    /**
+     * Creates the attr.
+     *
+     * @param prev the prev
+     * @param value the value
+     * @return the lexical unit
+     */
     public static LexicalUnit createAttr(final LexicalUnit prev, final String value) {
         // according to LexicalUnit.SAC_ATTR, LexicalUnit.getStringValue(), not
         // LexicalUnit.getParameters() is applicable
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_ATTR, "name", value);
     }
 
+    /**
+     * Creates the rect.
+     *
+     * @param prev the prev
+     * @param params the params
+     * @return the lexical unit
+     */
     public static LexicalUnit createRect(final LexicalUnit prev, final LexicalUnit params) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_RECT_FUNCTION, "rect", params);
     }
 
+    /**
+     * Creates the rgb color.
+     *
+     * @param prev the prev
+     * @param params the params
+     * @return the lexical unit
+     */
     public static LexicalUnit createRgbColor(final LexicalUnit prev, final LexicalUnit params) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_RGBCOLOR, "rgb", params);
     }
 
+    /**
+     * Creates the function.
+     *
+     * @param prev the prev
+     * @param name the name
+     * @param params the params
+     * @return the lexical unit
+     */
     public static LexicalUnit createFunction(final LexicalUnit prev, final String name, final LexicalUnit params) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_FUNCTION, name, params);
     }
 
+    /**
+     * Creates the string.
+     *
+     * @param prev the prev
+     * @param value the value
+     * @return the lexical unit
+     */
     public static LexicalUnit createString(final LexicalUnit prev, final String value) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_STRING_VALUE, value);
     }
 
+    /**
+     * Creates the ident.
+     *
+     * @param prev the prev
+     * @param value the value
+     * @return the lexical unit
+     */
     public static LexicalUnit createIdent(final LexicalUnit prev, final String value) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_IDENT, value);
     }
 
+    /**
+     * Creates the uri.
+     *
+     * @param prev the prev
+     * @param value the value
+     * @return the lexical unit
+     */
     public static LexicalUnit createURI(final LexicalUnit prev, final String value) {
         return new LexicalUnitImpl(prev, LexicalUnit.SAC_URI, value);
     }
 
+    /**
+     * Creates the comma.
+     *
+     * @param prev the prev
+     * @return the lexical unit
+     */
     public static LexicalUnit createComma(final LexicalUnit prev) {
         return new LexicalUnitImpl(prev, SAC_OPERATOR_COMMA);
     }

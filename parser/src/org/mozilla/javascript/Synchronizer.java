@@ -8,26 +8,28 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * This class provides support for implementing Java-style synchronized
  * methods in Javascript.
- *
+ * 
  * Synchronized functions are created from ordinary Javascript
  * functions by the <code>Synchronizer</code> constructor, e.g.
  * <code>new Packages.org.mozilla.javascript.Synchronizer(fun)</code>.
  * The resulting object is a function that establishes an exclusive
  * lock on the <code>this</code> object of its invocation.
- *
+ * 
  * The Rhino shell provides a short-cut for the creation of
  * synchronized methods: <code>sync(fun)</code> has the same effect as
  * calling the above constructor.
  *
- * @see org.mozilla.javascript.Delegator
  * @author Matthias Radestock
+ * @see org.mozilla.javascript.Delegator
  */
 
 public class Synchronizer extends Delegator {
 
+    /** The sync object. */
     private Object syncObject;
 
     /**
@@ -52,6 +54,13 @@ public class Synchronizer extends Delegator {
     }
 
     /**
+     * Call.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param thisObj the this obj
+     * @param args the args
+     * @return the object
      * @see org.mozilla.javascript.Function#call
      */
     @Override

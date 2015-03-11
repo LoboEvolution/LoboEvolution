@@ -22,17 +22,25 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.clientlet;
 
+
 /**
  * Provides utility methods to access the current clientlet context.
  */
 public class ClientletAccess {
+	
+	/** The Constant currentClientletContext. */
 	private static final ThreadLocal<ClientletContext> currentClientletContext = new ThreadLocal<ClientletContext>();
 
+	/**
+	 * Instantiates a new clientlet access.
+	 */
 	private ClientletAccess() {
 	}
 
 	/**
 	 * Gets the {@link ClientletContext} of the current thread, if any.
+	 *
+	 * @return the current clientlet context
 	 */
 	public static ClientletContext getCurrentClientletContext() {
 		ClientletContext ctx = currentClientletContext.get();

@@ -22,6 +22,7 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.clientlet;
 
+
 /**
  * Content set by a {@link Clientlet}. To ensure backward compatibility, it is
  * recommended that {@link AbstractComponentContent} be extended instead of
@@ -30,16 +31,34 @@ package org.lobobrowser.clientlet;
  * @see ClientletContext#setResultingContent(ComponentContent)
  */
 public interface ComponentContent {
+	
+	/**
+	 * Gets the component.
+	 *
+	 * @return the component
+	 */
 	public java.awt.Component getComponent();
 
+	/**
+	 * Gets the title.
+	 *
+	 * @return the title
+	 */
 	public String getTitle();
 
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
 	public String getDescription();
 
 	/**
 	 * Determines whether it's possible to copy content to the clipboard. This
 	 * method can be used by the platform to determine if a menu item should be
 	 * enabled.
+	 *
+	 * @return true, if successful
 	 */
 	public boolean canCopy();
 
@@ -52,6 +71,8 @@ public interface ComponentContent {
 
 	/**
 	 * Gets the source code associated with the content.
+	 *
+	 * @return the source code
 	 */
 	public String getSourceCode();
 
@@ -68,6 +89,8 @@ public interface ComponentContent {
 	 * Gets an implementation-dependent object that represents the content. For
 	 * example, if the content is HTML, the object returned by this method may
 	 * be of type HTMLDocument.
+	 *
+	 * @return the content object
 	 */
 	public Object getContentObject();
 
@@ -76,15 +99,17 @@ public interface ComponentContent {
 	 * returned by {@link #getContentObject()}. This may differ from the
 	 * mime-type of the response that produced the content, and it may also be
 	 * <code>null</code>.
+	 *
+	 * @return the mime type
 	 */
 	public String getMimeType();
 
 	/**
 	 * Sets a property of the content. Property names are
 	 * implementation-dependent.
-	 * 
-	 * @param name
-	 * @param value
+	 *
+	 * @param name the name
+	 * @param value the value
 	 */
 	public void setProperty(String name, Object value);
 }

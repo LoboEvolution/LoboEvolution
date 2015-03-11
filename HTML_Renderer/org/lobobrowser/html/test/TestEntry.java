@@ -26,6 +26,7 @@ package org.lobobrowser.html.test;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+
 /**
  * The <code>TestEntry</code> class is a Java test program for the Cobra HTML
  * rendering engine. It displays a frame with a text field and three tabs. The
@@ -33,6 +34,10 @@ import javax.swing.UIManager.LookAndFeelInfo;
  * HTML source code.
  */
 public class TestEntry {
+	
+	/**
+	 * Instantiates a new test entry.
+	 */
 	private TestEntry() {
 		super();
 	}

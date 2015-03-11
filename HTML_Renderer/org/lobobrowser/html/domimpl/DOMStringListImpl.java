@@ -29,15 +29,29 @@ import java.util.List;
 
 import org.w3c.dom.DOMStringList;
 
+
+/**
+ * The Class DOMStringListImpl.
+ */
 public class DOMStringListImpl implements DOMStringList {
+	
+	/** The source list. */
 	private final List sourceList;
 
+	/**
+	 * Instantiates a new DOM string list impl.
+	 *
+	 * @param sourceList the source list
+	 */
 	public DOMStringListImpl(Collection sourceList) {
 		List list = new ArrayList();
 		list.addAll(sourceList);
 		this.sourceList = list;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.DOMStringList#item(int)
+	 */
 	public String item(int index) {
 		try {
 			return (String) this.sourceList.get(index);
@@ -46,10 +60,16 @@ public class DOMStringListImpl implements DOMStringList {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.DOMStringList#getLength()
+	 */
 	public int getLength() {
 		return this.sourceList.size();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.DOMStringList#contains(java.lang.String)
+	 */
 	public boolean contains(String str) {
 		return this.sourceList.contains(str);
 	}

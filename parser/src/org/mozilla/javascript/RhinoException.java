@@ -16,12 +16,16 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 /**
  * The class of exceptions thrown by the JavaScript engine.
  */
 public abstract class RhinoException extends RuntimeException
 {
 
+    /**
+     * Instantiates a new rhino exception.
+     */
     RhinoException()
     {
         Evaluator e = Context.createInterpreter();
@@ -29,6 +33,11 @@ public abstract class RhinoException extends RuntimeException
             e.captureStackInfo(this);
     }
 
+    /**
+     * Instantiates a new rhino exception.
+     *
+     * @param details the details
+     */
     RhinoException(String details)
     {
         super(details);
@@ -37,6 +46,9 @@ public abstract class RhinoException extends RuntimeException
             e.captureStackInfo(this);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Throwable#getMessage()
+     */
     @Override
     public final String getMessage()
     {
@@ -57,6 +69,11 @@ public abstract class RhinoException extends RuntimeException
         return buf.toString();
     }
 
+    /**
+     * Details.
+     *
+     * @return the string
+     */
     public String details()
     {
         return super.getMessage();
@@ -65,6 +82,8 @@ public abstract class RhinoException extends RuntimeException
     /**
      * Get the uri of the script source containing the error, or null
      * if that information is not available.
+     *
+     * @return the string
      */
     public final String sourceName()
     {
@@ -76,8 +95,6 @@ public abstract class RhinoException extends RuntimeException
      *
      * @param sourceName the uri of the script source responsible for the error.
      *                   It should not be <tt>null</tt>.
-     *
-     * @throws IllegalStateException if the method is called more then once.
      */
     public final void initSourceName(String sourceName)
     {
@@ -89,6 +106,8 @@ public abstract class RhinoException extends RuntimeException
     /**
      * Returns the line number of the statement causing the error,
      * or zero if not available.
+     *
+     * @return the int
      */
     public final int lineNumber()
     {
@@ -100,8 +119,6 @@ public abstract class RhinoException extends RuntimeException
      *
      * @param lineNumber the line number in the script source.
      *                   It should be positive number.
-     *
-     * @throws IllegalStateException if the method is called more then once.
      */
     public final void initLineNumber(int lineNumber)
     {
@@ -112,6 +129,8 @@ public abstract class RhinoException extends RuntimeException
 
     /**
      * The column number of the location of the error, or zero if unknown.
+     *
+     * @return the int
      */
     public final int columnNumber()
     {
@@ -123,8 +142,6 @@ public abstract class RhinoException extends RuntimeException
      *
      * @param columnNumber the column number in the script source.
      *                     It should be positive number.
-     *
-     * @throws IllegalStateException if the method is called more then once.
      */
     public final void initColumnNumber(int columnNumber)
     {
@@ -135,6 +152,8 @@ public abstract class RhinoException extends RuntimeException
 
     /**
      * The source text of the line causing the error, or null if unknown.
+     *
+     * @return the string
      */
     public final String lineSource()
     {
@@ -146,8 +165,6 @@ public abstract class RhinoException extends RuntimeException
      *
      * @param lineSource the text of the source line responsible for the error.
      *                   It should not be <tt>null</tt>.
-     *
-     * @throws IllegalStateException if the method is called more then once.
      */
     public final void initLineSource(String lineSource)
     {
@@ -156,6 +173,14 @@ public abstract class RhinoException extends RuntimeException
         this.lineSource = lineSource;
     }
 
+    /**
+     * Record error origin.
+     *
+     * @param sourceName the source name
+     * @param lineNumber the line number
+     * @param lineSource the line source
+     * @param columnNumber the column number
+     */
     final void recordErrorOrigin(String sourceName, int lineNumber,
                                  String lineSource, int columnNumber)
     {
@@ -178,6 +203,11 @@ public abstract class RhinoException extends RuntimeException
         }
     }
 
+    /**
+     * Generate stack trace.
+     *
+     * @return the string
+     */
     private String generateStackTrace()
     {
         // Get stable reference to work properly with concurrent access
@@ -215,6 +245,11 @@ public abstract class RhinoException extends RuntimeException
      * If the function "Error.prepareStackTrace" is defined, then call that function,
      * passing it an array of CallSite objects. Otherwise, behave as if "getScriptStackTrace"
      * was called instead.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param err the err
+     * @return the prepared script stack trace
      * @since 1.7R5
      */
     public Object getPreparedScriptStackTrace(Context cx, Scriptable scope, Scriptable err)
@@ -238,12 +273,13 @@ public abstract class RhinoException extends RuntimeException
 
     /**
      * Get a string representing the script stack of this exception.
-     * @deprecated the filter argument is ignored as we are able to
-     * recognize script stack elements by our own. Use
-     * #getScriptStackTrace() instead.
+     *
      * @param filter ignored
      * @return a script stack dump
      * @since 1.6R6
+     * @deprecated the filter argument is ignored as we are able to
+     * recognize script stack elements by our own. Use
+     * #getScriptStackTrace() instead.
      */
     public String getScriptStackTrace(FilenameFilter filter)
     {
@@ -299,6 +335,9 @@ public abstract class RhinoException extends RuntimeException
     }
 
 
+    /* (non-Javadoc)
+     * @see java.lang.Throwable#printStackTrace(java.io.PrintWriter)
+     */
     @Override
     public void printStackTrace(PrintWriter s)
     {
@@ -309,6 +348,9 @@ public abstract class RhinoException extends RuntimeException
         }
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Throwable#printStackTrace(java.io.PrintStream)
+     */
     @Override
     public void printStackTrace(PrintStream s)
     {
@@ -324,7 +366,7 @@ public abstract class RhinoException extends RuntimeException
      * use the Mozilla/Firefox style of rendering script stacks
      * (<code>functionName()@fileName:lineNumber</code>)
      * instead of Rhino's own Java-inspired format
-     * (<code>    at fileName:lineNumber (functionName)</code>).
+     * (<code> at fileName:lineNumber (functionName)</code>).
      * @return true if stack is rendered in Mozilla/Firefox style
      * @see ScriptStackElement
      * @since 1.7R3
@@ -338,7 +380,7 @@ public abstract class RhinoException extends RuntimeException
      * use the Mozilla/Firefox style of rendering script stacks
      * (<code>functionName()@fileName:lineNumber</code>)
      * instead of Rhino's own Java-inspired format
-     * (<code>    at fileName:lineNumber (functionName)</code>)
+     * (<code>at fileName:lineNumber (functionName)</code>)
      * Calling this with "true" is the equivalent of calling:
      * <code>setStackStyle(StackStyle.MOZILLA);</code>
      * @param flag whether to render stacks in Mozilla/Firefox style
@@ -351,6 +393,8 @@ public abstract class RhinoException extends RuntimeException
 
     /**
      * Return the stack trace style currently in use.
+     *
+     * @return the stack style
      * @since 1.7R5
      */
     public static StackStyle getStackStyle() {
@@ -360,21 +404,35 @@ public abstract class RhinoException extends RuntimeException
     /**
      * Set the stack trace style to use. This replaces "useMozillaStackStyle" since there are now
      * more than two different formats. See "StackStyle" for documentation.
+     *
+     * @param style the new stack style
      * @since 1.7R5
      */
     public static void setStackStyle(StackStyle style) {
         stackStyle = style;
     }
 
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 1883500631321581169L;
 
+    /** The stack style. */
     private static StackStyle stackStyle = StackStyle.RHINO;
 
+    /** The source name. */
     private String sourceName;
+    
+    /** The line number. */
     private int lineNumber;
+    
+    /** The line source. */
     private String lineSource;
+    
+    /** The column number. */
     private int columnNumber;
 
+    /** The interpreter stack info. */
     Object interpreterStackInfo;
+    
+    /** The interpreter line data. */
     int[] interpreterLineData;
 }

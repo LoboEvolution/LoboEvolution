@@ -24,13 +24,27 @@ import org.lobobrowser.html.HtmlAttributeProperties;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class ElementNameFilter.
+ */
 public class ElementNameFilter implements NodeFilter {
+	
+	/** The name. */
 	private final String name;
 
+	/**
+	 * Instantiates a new element name filter.
+	 *
+	 * @param name the name
+	 */
 	public ElementNameFilter(String name) {
 		this.name = name;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
 	public boolean accept(Node node) {
 		// TODO: Case sensitive?
 		return (node instanceof Element)

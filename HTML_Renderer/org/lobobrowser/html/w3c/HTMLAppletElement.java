@@ -32,14 +32,18 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * An embedded Java applet. See the APPLET element definition in HTML 4.01.
  */
 public interface HTMLAppletElement extends HTMLElement {
+	
 	/**
 	 * Aligns this object (vertically or horizontally) with respect to its
 	 * surrounding text. See the align attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the align
 	 */
 	public String getAlign();
 
@@ -47,6 +51,8 @@ public interface HTMLAppletElement extends HTMLElement {
 	 * Aligns this object (vertically or horizontally) with respect to its
 	 * surrounding text. See the align attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param align the new align
 	 */
 	public void setAlign(String align);
 
@@ -54,6 +60,8 @@ public interface HTMLAppletElement extends HTMLElement {
 	 * Alternate text for user agents not rendering the normal content of this
 	 * element. See the alt attribute definition in HTML 4.01. This attribute is
 	 * deprecated in HTML 4.01.
+	 *
+	 * @return the alt
 	 */
 	public String getAlt();
 
@@ -61,30 +69,40 @@ public interface HTMLAppletElement extends HTMLElement {
 	 * Alternate text for user agents not rendering the normal content of this
 	 * element. See the alt attribute definition in HTML 4.01. This attribute is
 	 * deprecated in HTML 4.01.
+	 *
+	 * @param alt the new alt
 	 */
 	public void setAlt(String alt);
 
 	/**
 	 * Comma-separated archive list. See the archive attribute definition in
 	 * HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the archive
 	 */
 	public String getArchive();
 
 	/**
 	 * Comma-separated archive list. See the archive attribute definition in
 	 * HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param archive the new archive
 	 */
 	public void setArchive(String archive);
 
 	/**
 	 * Applet class file. See the code attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the code
 	 */
 	public String getCode();
 
 	/**
 	 * Applet class file. See the code attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param code the new code
 	 */
 	public void setCode(String code);
 
@@ -92,6 +110,8 @@ public interface HTMLAppletElement extends HTMLElement {
 	 * Optional base URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC
 	 * 2396</a>] for applet. See the codebase attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the code base
 	 */
 	public String getCodeBase();
 
@@ -99,18 +119,24 @@ public interface HTMLAppletElement extends HTMLElement {
 	 * Optional base URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC
 	 * 2396</a>] for applet. See the codebase attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param codeBase the new code base
 	 */
 	public void setCodeBase(String codeBase);
 
 	/**
 	 * Override height. See the height attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the height
 	 */
 	public String getHeight();
 
 	/**
 	 * Override height. See the height attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param height the new height
 	 */
 	public void setHeight(String height);
 
@@ -118,8 +144,9 @@ public interface HTMLAppletElement extends HTMLElement {
 	 * Horizontal space, in pixels, to the left and right of this image, applet,
 	 * or object. See the hspace attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the hspace
 	 */
 	public int getHspace();
 
@@ -127,36 +154,43 @@ public interface HTMLAppletElement extends HTMLElement {
 	 * Horizontal space, in pixels, to the left and right of this image, applet,
 	 * or object. See the hspace attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param hspace the new hspace
 	 */
 	public void setHspace(int hspace);
 
 	/**
 	 * The name of the applet. See the name attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * The name of the applet. See the name attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name);
 
 	/**
 	 * The value of the "object" attribute. See the object attribute definition
 	 * in HTML 4.01. This attribute is deprecated in HTML 4.01.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the object
 	 */
 	public String getObject();
 
 	/**
 	 * The value of the "object" attribute. See the object attribute definition
 	 * in HTML 4.01. This attribute is deprecated in HTML 4.01.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param object the new object
 	 */
 	public void setObject(String object);
 
@@ -164,8 +198,9 @@ public interface HTMLAppletElement extends HTMLElement {
 	 * Vertical space, in pixels, above and below this image, applet, or object.
 	 * See the vspace attribute definition in HTML 4.01. This attribute is
 	 * deprecated in HTML 4.01.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the vspace
 	 */
 	public int getVspace();
 
@@ -173,20 +208,25 @@ public interface HTMLAppletElement extends HTMLElement {
 	 * Vertical space, in pixels, above and below this image, applet, or object.
 	 * See the vspace attribute definition in HTML 4.01. This attribute is
 	 * deprecated in HTML 4.01.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param vspace the new vspace
 	 */
 	public void setVspace(int vspace);
 
 	/**
 	 * Override width. See the width attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the width
 	 */
 	public String getWidth();
 
 	/**
 	 * Override width. See the width attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param width the new width
 	 */
 	public void setWidth(String width);
 

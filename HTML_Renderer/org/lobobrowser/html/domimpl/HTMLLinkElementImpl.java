@@ -47,23 +47,45 @@ import org.w3c.dom.css.CSSStyleSheet;
 
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 
+
+/**
+ * The Class HTMLLinkElementImpl.
+ */
 public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 		HTMLLinkElement {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(HTMLLinkElementImpl.class.getName());
+	
+	/** The Constant loggableInfo. */
 	private static final boolean loggableInfo = logger.isLoggable(Level.INFO);
+	
+	/** The style sheet. */
 	private CSSStyleSheet styleSheet;
 
+	/**
+	 * Instantiates a new HTML link element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLLinkElementImpl(String name) {
 		super(name);
 	}
 
+	/** The disabled. */
 	private boolean disabled;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#getDisabled()
+	 */
 	public boolean getDisabled() {
 		return this.disabled;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#setDisabled(boolean)
+	 */
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
 		CSSStyleSheet sheet = this.styleSheet;
@@ -72,47 +94,80 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#getHref()
+	 */
 	public String getHref() {
 		String href = this.getAttribute(HtmlAttributeProperties.HREF);
 		return href == null ? "" : Urls.removeControlCharacters(href);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#setHref(java.lang.String)
+	 */
 	public void setHref(String href) {
 		this.setAttribute(HtmlAttributeProperties.HREF, href);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#getHreflang()
+	 */
 	public String getHreflang() {
 		return this.getAttribute(HtmlAttributeProperties.HREFLANG);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#setHreflang(java.lang.String)
+	 */
 	public void setHreflang(String hreflang) {
 		this.setAttribute(HtmlAttributeProperties.HREFLANG, hreflang);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#getMedia()
+	 */
 	public String getMedia() {
 		return this.getAttribute(HtmlAttributeProperties.MEDIA);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#setMedia(java.lang.String)
+	 */
 	public void setMedia(String media) {
 		this.setAttribute(HtmlAttributeProperties.MEDIA, media);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#getRel()
+	 */
 	public String getRel() {
 		return this.getAttribute(HtmlAttributeProperties.REL);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#setRel(java.lang.String)
+	 */
 	public void setRel(String rel) {
 		this.setAttribute(HtmlAttributeProperties.REL, rel);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#getRev()
+	 */
 	public String getRev() {
 		return this.getAttribute(HtmlAttributeProperties.REV);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#setRev(java.lang.String)
+	 */
 	public void setRev(String rev) {
 		this.setAttribute(HtmlAttributeProperties.REV, rev);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#getTarget()
+	 */
 	public String getTarget() {
 		String target = this.getAttribute(HtmlAttributeProperties.TARGET);
 		if (target != null) {
@@ -122,18 +177,30 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 		return doc == null ? null : doc.getDefaultTarget();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#setTarget(java.lang.String)
+	 */
 	public void setTarget(String target) {
 		this.setAttribute(HtmlAttributeProperties.TARGET, target);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#getType()
+	 */
 	public String getType() {
 		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#setType(java.lang.String)
+	 */
 	public void setType(String type) {
 		this.setAttribute(HtmlAttributeProperties.TYPE, type);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setUserData(java.lang.String, java.lang.Object, org.w3c.dom.UserDataHandler)
+	 */
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		if (HtmlParser.MODIFYING_KEY.equals(key)
 				&& data != Boolean.TRUE) {
@@ -238,6 +305,11 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 	
+	/**
+	 * Gets the absolute href.
+	 *
+	 * @return the absolute href
+	 */
 	public String getAbsoluteHref() {
 		HtmlRendererContext rcontext = this.getHtmlRendererContext();
 		if (rcontext != null) {
@@ -254,6 +326,9 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 		return null;
 	}
 
+	/**
+	 * Navigate.
+	 */
 	public void navigate() {
 		if (this.disabled) {
 			return;
@@ -277,6 +352,11 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
+	/**
+	 * Gets the link color.
+	 *
+	 * @return the link color
+	 */
 	private Color getLinkColor() {
 		HTMLDocument doc = (HTMLDocument) this.document;
 		if (doc != null) {
@@ -299,6 +379,9 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 		return Color.BLUE;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		if (this.hasAttribute(HtmlAttributeProperties.HREF)) {
 			prevRenderState = new TextDecorationRenderState(prevRenderState,RenderState.MASK_TEXTDECORATION_UNDERLINE);
@@ -307,6 +390,9 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 		return super.createRenderState(prevRenderState);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#toString()
+	 */
 	public String toString() {
 		// Javascript code often depends on this being exactly href. See
 		// js9.html.
@@ -314,18 +400,27 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 		return this.getHref();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#getRelList()
+	 */
 	@Override
 	public DOMTokenList getRelList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#getSizes()
+	 */
 	@Override
 	public DOMSettableTokenList getSizes() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLLinkElement#setSizes(java.lang.String)
+	 */
 	@Override
 	public void setSizes(String sizes) {
 		this.setAttribute(HtmlAttributeProperties.SIZES, sizes);

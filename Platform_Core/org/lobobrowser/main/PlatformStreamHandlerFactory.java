@@ -25,19 +25,34 @@ import java.net.URLStreamHandlerFactory;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
 /**
  * Global URL stream handler factory used by the browser.
  * 
  * @see PlatformInit#initProtocols()
  */
 public class PlatformStreamHandlerFactory implements URLStreamHandlerFactory {
+	
+	/** The Constant instance. */
 	private static final PlatformStreamHandlerFactory instance = new PlatformStreamHandlerFactory();
+	
+	/** The factories. */
 	private final Collection<URLStreamHandlerFactory> factories = new ArrayList<URLStreamHandlerFactory>();
 
+	/**
+	 * Gets the single instance of PlatformStreamHandlerFactory.
+	 *
+	 * @return single instance of PlatformStreamHandlerFactory
+	 */
 	public static PlatformStreamHandlerFactory getInstance() {
 		return instance;
 	}
 
+	/**
+	 * Adds the factory.
+	 *
+	 * @param factory the factory
+	 */
 	public void addFactory(URLStreamHandlerFactory factory) {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
@@ -49,6 +64,9 @@ public class PlatformStreamHandlerFactory implements URLStreamHandlerFactory {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.net.URLStreamHandlerFactory#createURLStreamHandler(java.lang.String)
+	 */
 	public URLStreamHandler createURLStreamHandler(String protocol) {
 		Collection<URLStreamHandlerFactory> factories = this.factories;
 		synchronized (factories) {

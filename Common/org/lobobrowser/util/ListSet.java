@@ -31,10 +31,21 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
 
+
+/**
+ * The Class ListSet.
+ */
 public class ListSet {
+	
+	/** The list. */
 	private final List list = new ArrayList();
+	
+	/** The set. */
 	private final Set set = new HashSet();
 
+	/**
+	 * Instantiates a new list set.
+	 */
 	public ListSet() {
 		super();
 	}
@@ -43,6 +54,12 @@ public class ListSet {
 	 * (non-Javadoc)
 	 * 
 	 * @see java.util.List#add(int, E)
+	 */
+	/**
+	 * Adds the.
+	 *
+	 * @param index the index
+	 * @param element the element
 	 */
 	public void add(int index, Object element) {
 		if (this.set.add(element)) {
@@ -54,6 +71,12 @@ public class ListSet {
 	 * (non-Javadoc)
 	 * 
 	 * @see java.util.List#add(E)
+	 */
+	/**
+	 * Adds the.
+	 *
+	 * @param o the o
+	 * @return true, if successful
 	 */
 	public boolean add(Object o) {
 		if (this.set.add(o)) {
@@ -67,6 +90,12 @@ public class ListSet {
 	 * (non-Javadoc)
 	 * 
 	 * @see java.util.List#addAll(java.util.Collection)
+	 */
+	/**
+	 * Adds the all.
+	 *
+	 * @param c the c
+	 * @return true, if successful
 	 */
 	public boolean addAll(Collection c) {
 		boolean changed = false;
@@ -84,6 +113,13 @@ public class ListSet {
 	 * (non-Javadoc)
 	 * 
 	 * @see java.util.List#addAll(int, java.util.Collection)
+	 */
+	/**
+	 * Adds the all.
+	 *
+	 * @param index the index
+	 * @param c the c
+	 * @return true, if successful
 	 */
 	public boolean addAll(int index, Collection c) {
 		boolean changed = false;
@@ -104,6 +140,9 @@ public class ListSet {
 	 * 
 	 * @see java.util.List#clear()
 	 */
+	/**
+	 * Clear.
+	 */
 	public void clear() {
 		this.set.clear();
 		this.list.clear();
@@ -114,6 +153,12 @@ public class ListSet {
 	 * 
 	 * @see java.util.List#contains(Object)
 	 */
+	/**
+	 * Contains.
+	 *
+	 * @param o the o
+	 * @return true, if successful
+	 */
 	public boolean contains(Object o) {
 		return this.set.contains(o);
 	}
@@ -122,6 +167,12 @@ public class ListSet {
 	 * (non-Javadoc)
 	 * 
 	 * @see java.util.List#containsAll(java.util.Collection)
+	 */
+	/**
+	 * Contains all.
+	 *
+	 * @param c the c
+	 * @return true, if successful
 	 */
 	public boolean containsAll(Collection c) {
 		return this.set.containsAll(c);
@@ -132,6 +183,12 @@ public class ListSet {
 	 * 
 	 * @see java.util.List#get(int)
 	 */
+	/**
+	 * Gets the.
+	 *
+	 * @param index the index
+	 * @return the object
+	 */
 	public Object get(int index) {
 		return this.list.get(index);
 	}
@@ -140,6 +197,12 @@ public class ListSet {
 	 * (non-Javadoc)
 	 * 
 	 * @see java.util.List#indexOf(Object)
+	 */
+	/**
+	 * Index of.
+	 *
+	 * @param o the o
+	 * @return the int
 	 */
 	public int indexOf(Object o) {
 		return this.list.indexOf(o);
@@ -150,6 +213,11 @@ public class ListSet {
 	 * 
 	 * @see java.util.List#isEmpty()
 	 */
+	/**
+	 * Checks if is empty.
+	 *
+	 * @return true, if is empty
+	 */
 	public boolean isEmpty() {
 		return this.set.isEmpty();
 	}
@@ -158,6 +226,11 @@ public class ListSet {
 	 * (non-Javadoc)
 	 * 
 	 * @see java.util.List#iterator()
+	 */
+	/**
+	 * Iterator.
+	 *
+	 * @return the iterator
 	 */
 	public Iterator iterator() {
 		return this.list.iterator();
@@ -168,6 +241,12 @@ public class ListSet {
 	 * 
 	 * @see java.util.List#lastIndexOf(Object)
 	 */
+	/**
+	 * Last index of.
+	 *
+	 * @param o the o
+	 * @return the int
+	 */
 	public int lastIndexOf(Object o) {
 		return this.list.lastIndexOf(o);
 	}
@@ -176,6 +255,11 @@ public class ListSet {
 	 * (non-Javadoc)
 	 * 
 	 * @see java.util.List#listIterator()
+	 */
+	/**
+	 * List iterator.
+	 *
+	 * @return the list iterator
 	 */
 	public ListIterator listIterator() {
 		return this.list.listIterator();
@@ -186,6 +270,12 @@ public class ListSet {
 	 * 
 	 * @see java.util.List#listIterator(int)
 	 */
+	/**
+	 * List iterator.
+	 *
+	 * @param index the index
+	 * @return the list iterator
+	 */
 	public ListIterator listIterator(int index) {
 		return this.list.listIterator(index);
 	}
@@ -194,6 +284,12 @@ public class ListSet {
 	 * (non-Javadoc)
 	 * 
 	 * @see java.util.List#remove(int)
+	 */
+	/**
+	 * Removes the.
+	 *
+	 * @param index the index
+	 * @return the object
 	 */
 	public Object remove(int index) {
 		Object element = this.list.remove(index);
@@ -207,6 +303,12 @@ public class ListSet {
 	 * (non-Javadoc)
 	 * 
 	 * @see java.util.List#remove(Object)
+	 */
+	/**
+	 * Removes the.
+	 *
+	 * @param o the o
+	 * @return true, if successful
 	 */
 	public boolean remove(Object o) {
 		if (this.set.remove(o)) {
@@ -222,6 +324,12 @@ public class ListSet {
 	 * 
 	 * @see java.util.List#removeAll(java.util.Collection)
 	 */
+	/**
+	 * Removes the all.
+	 *
+	 * @param c the c
+	 * @return true, if successful
+	 */
 	public boolean removeAll(Collection c) {
 		if (this.set.removeAll(c)) {
 			this.list.removeAll(c);
@@ -235,6 +343,12 @@ public class ListSet {
 	 * (non-Javadoc)
 	 * 
 	 * @see java.util.List#retainAll(java.util.Collection)
+	 */
+	/**
+	 * Retain all.
+	 *
+	 * @param c the c
+	 * @return true, if successful
 	 */
 	public boolean retainAll(Collection c) {
 		if (this.set.retainAll(c)) {
@@ -250,6 +364,13 @@ public class ListSet {
 	 * 
 	 * @see java.util.List#set(int, E)
 	 */
+	/**
+	 * Sets the.
+	 *
+	 * @param index the index
+	 * @param element the element
+	 * @return the object
+	 */
 	public Object set(int index, Object element) {
 		this.set.add(element);
 		return this.list.set(index, element);
@@ -260,6 +381,11 @@ public class ListSet {
 	 * 
 	 * @see java.util.List#size()
 	 */
+	/**
+	 * Size.
+	 *
+	 * @return the int
+	 */
 	public int size() {
 		return this.list.size();
 	}
@@ -268,6 +394,13 @@ public class ListSet {
 	 * (non-Javadoc)
 	 * 
 	 * @see java.util.List#subList(int, int)
+	 */
+	/**
+	 * Sub list.
+	 *
+	 * @param fromIndex the from index
+	 * @param toIndex the to index
+	 * @return the list
 	 */
 	public List subList(int fromIndex, int toIndex) {
 		return this.list.subList(fromIndex, toIndex);
@@ -278,6 +411,11 @@ public class ListSet {
 	 * 
 	 * @see java.util.List#toArray()
 	 */
+	/**
+	 * To array.
+	 *
+	 * @return the object[]
+	 */
 	public Object[] toArray() {
 		return this.list.toArray();
 	}
@@ -287,15 +425,27 @@ public class ListSet {
 	 * 
 	 * @see java.util.List#toArray(T[])
 	 */
+	/**
+	 * To array.
+	 *
+	 * @param a the a
+	 * @return the object[]
+	 */
 	public Object[] toArray(Object[] a) {
 		return this.list.toArray(a);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object other) {
 		return other instanceof ListSet
 				&& this.list.equals(((ListSet) other).list);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	public int hashCode() {
 		return this.list.hashCode();
 	}

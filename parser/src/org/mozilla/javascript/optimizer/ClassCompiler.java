@@ -16,6 +16,7 @@ import org.mozilla.javascript.ast.AstRoot;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.ScriptNode;
 
+
 /**
  * Generates class files from script sources.
  *
@@ -25,10 +26,12 @@ import org.mozilla.javascript.ast.ScriptNode;
 
 public class ClassCompiler
 {
+    
     /**
      * Construct ClassCompiler that uses the specified compiler environment
      * when generating classes.
-     * @param compilerEnv
+     *
+     * @param compilerEnv the compiler env
      */
     public ClassCompiler(CompilerEnvirons compilerEnv)
     {
@@ -54,8 +57,9 @@ public class ClassCompiler
 
     /**
      * Get the name of the class for main method implementation.
-     * @see #setMainMethodClass(String)
+     *
      * @return String
+     * @see #setMainMethodClass(String)
      */
     public String getMainMethodClass()
     {
@@ -115,6 +119,10 @@ public class ClassCompiler
      * it will call this function to build the auxiliary class name.
      * The default implementation simply appends auxMarker to mainClassName
      * but this can be overridden.
+     *
+     * @param mainClassName the main class name
+     * @param auxMarker the aux marker
+     * @return the string
      */
     protected String makeAuxiliaryClassName(String mainClassName,
                                             String auxMarker)
@@ -129,10 +137,11 @@ public class ClassCompiler
      * {@link #getTargetImplements()} are not null, then the first compiled
      * class will extend the specified super class and implement
      * specified interfaces.
-     * @param source
-     * @param sourceLocation
-     * @param lineno
-     * @param mainClassName
+     *
+     * @param source the source
+     * @param sourceLocation the source location
+     * @param lineno the lineno
+     * @param mainClassName the main class name
      * @return array where elements with even indexes specifies class name
      *         and the following odd index gives class file body as byte[]
      *         array. The initial element of the array always holds
@@ -194,9 +203,16 @@ public class ClassCompiler
                               scriptClassName, scriptClassBytes };
     }
 
+    /** The main method class name. */
     private String mainMethodClassName;
+    
+    /** The compiler env. */
     private CompilerEnvirons compilerEnv;
+    
+    /** The target extends. */
     private Class<?> targetExtends;
+    
+    /** The target implements. */
     private Class<?>[] targetImplements;
 
 }

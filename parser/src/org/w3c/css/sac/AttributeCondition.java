@@ -13,9 +13,12 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Interface AttributeCondition.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  * @see Condition#SAC_ATTRIBUTE_CONDITION
  * @see Condition#SAC_ONE_OF_ATTRIBUTE_CONDITION
  * @see Condition#SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION
@@ -35,6 +38,8 @@ public interface AttributeCondition extends Condition {
 	 * <li>this attribute condition can match any namespace.
 	 * <li>this attribute is an id attribute.
 	 * </ul>
+	 *
+	 * @return the namespace uri
 	 */
 	public String getNamespaceURI();
 
@@ -59,12 +64,16 @@ public interface AttributeCondition extends Condition {
 	 * <p>
 	 * this attribute is a pseudo-class attribute.
 	 * </ul>
+	 *
+	 * @return the local name
 	 */
 	public String getLocalName();
 
 	/**
 	 * Returns <code>true</code> if the attribute must have an explicit value in
 	 * the original document, <code>false</code> otherwise.
+	 *
+	 * @return the specified
 	 */
 	public boolean getSpecified();
 
@@ -72,6 +81,8 @@ public interface AttributeCondition extends Condition {
 	 * Returns the value of the attribute. If this attribute is a class or a
 	 * pseudo class attribute, you'll get the class name (or psedo class name)
 	 * without the '.' or ':'.
+	 *
+	 * @return the value
 	 */
 	public String getValue();
 }

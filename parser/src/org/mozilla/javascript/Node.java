@@ -17,6 +17,7 @@ import org.mozilla.javascript.ast.NumberLiteral;
 import org.mozilla.javascript.ast.Scope;
 import org.mozilla.javascript.ast.ScriptNode;
 
+
 /**
  * This class implements the root of the intermediate representation.
  *
@@ -25,6 +26,8 @@ import org.mozilla.javascript.ast.ScriptNode;
  */
 public class Node implements Iterable<Node>
 {
+    
+    /** The Constant LAST_PROP. */
     public static final int
         FUNCTION_PROP      =  1,
         LOCAL_PROP         =  2,
@@ -67,43 +70,76 @@ public class Node implements Iterable<Node>
 
     // values of ISNUMBER_PROP to specify
     // which of the children are Number types
+    /** The Constant RIGHT. */
     public static final int
         BOTH = 0,
         LEFT = 1,
         RIGHT = 2;
 
+    /** The Constant SPECIALCALL_WITH. */
     public static final int    // values for SPECIALCALL_PROP
         NON_SPECIALCALL  = 0,
         SPECIALCALL_EVAL = 1,
         SPECIALCALL_WITH = 2;
 
+    /** The Constant POST_FLAG. */
     public static final int   // flags for INCRDECR_PROP
         DECR_FLAG = 0x1,
         POST_FLAG = 0x2;
 
+    /** The Constant DESCENDANTS_FLAG. */
     public static final int   // flags for MEMBER_TYPE_PROP
         PROPERTY_FLAG    = 0x1, // property access: element is valid name
         ATTRIBUTE_FLAG   = 0x2, // x.@y or x..@y
         DESCENDANTS_FLAG = 0x4; // x..y or x..@i
 
+    /**
+     * The Class PropListItem.
+     */
     private static class PropListItem
     {
+        
+        /** The next. */
         PropListItem next;
+        
+        /** The type. */
         int type;
+        
+        /** The int value. */
         int intValue;
+        
+        /** The object value. */
         Object objectValue;
     }
 
+    /**
+     * Instantiates a new node.
+     *
+     * @param nodeType the node type
+     */
     public Node(int nodeType) {
         type = nodeType;
     }
 
+    /**
+     * Instantiates a new node.
+     *
+     * @param nodeType the node type
+     * @param child the child
+     */
     public Node(int nodeType, Node child) {
         type = nodeType;
         first = last = child;
         child.next = null;
     }
 
+    /**
+     * Instantiates a new node.
+     *
+     * @param nodeType the node type
+     * @param left the left
+     * @param right the right
+     */
     public Node(int nodeType, Node left, Node right) {
         type = nodeType;
         first = left;
@@ -112,6 +148,14 @@ public class Node implements Iterable<Node>
         right.next = null;
     }
 
+    /**
+     * Instantiates a new node.
+     *
+     * @param nodeType the node type
+     * @param left the left
+     * @param mid the mid
+     * @param right the right
+     */
     public Node(int nodeType, Node left, Node mid, Node right) {
         type = nodeType;
         first = left;
@@ -121,36 +165,85 @@ public class Node implements Iterable<Node>
         right.next = null;
     }
 
+    /**
+     * Instantiates a new node.
+     *
+     * @param nodeType the node type
+     * @param line the line
+     */
     public Node(int nodeType, int line) {
         type = nodeType;
         lineno = line;
     }
 
+    /**
+     * Instantiates a new node.
+     *
+     * @param nodeType the node type
+     * @param child the child
+     * @param line the line
+     */
     public Node(int nodeType, Node child, int line) {
         this(nodeType, child);
         lineno = line;
     }
 
+    /**
+     * Instantiates a new node.
+     *
+     * @param nodeType the node type
+     * @param left the left
+     * @param right the right
+     * @param line the line
+     */
     public Node(int nodeType, Node left, Node right, int line) {
         this(nodeType, left, right);
         lineno = line;
     }
 
+    /**
+     * Instantiates a new node.
+     *
+     * @param nodeType the node type
+     * @param left the left
+     * @param mid the mid
+     * @param right the right
+     * @param line the line
+     */
     public Node(int nodeType, Node left, Node mid, Node right, int line) {
         this(nodeType, left, mid, right);
         lineno = line;
     }
 
+    /**
+     * New number.
+     *
+     * @param number the number
+     * @return the node
+     */
     public static Node newNumber(double number) {
         NumberLiteral n = new NumberLiteral();
         n.setNumber(number);
         return n;
     }
 
+    /**
+     * New string.
+     *
+     * @param str the str
+     * @return the node
+     */
     public static Node newString(String str) {
         return newString(Token.STRING, str);
     }
 
+    /**
+     * New string.
+     *
+     * @param type the type
+     * @param str the str
+     * @return the node
+     */
     public static Node newString(int type, String str) {
         Name name = new Name();
         name.setIdentifier(str);
@@ -158,12 +251,20 @@ public class Node implements Iterable<Node>
         return name;
     }
 
+    /**
+     * Gets the type.
+     *
+     * @return the type
+     */
     public int getType() {
         return type;
     }
 
     /**
      * Sets the node type and returns this node.
+     *
+     * @param type the type
+     * @return the node
      */
     public Node setType(int type) {
         this.type = type;
@@ -194,27 +295,55 @@ public class Node implements Iterable<Node>
 
     /**
      * Sets the JsDoc comment string attached to this node.
+     *
+     * @param jsdocNode the new js doc node
      */
     public void setJsDocNode(Comment jsdocNode) {
         putProp(JSDOC_PROP, jsdocNode);
     }
 
+    /**
+     * Checks for children.
+     *
+     * @return true, if successful
+     */
     public boolean hasChildren() {
         return first != null;
     }
 
+    /**
+     * Gets the first child.
+     *
+     * @return the first child
+     */
     public Node getFirstChild() {
         return first;
     }
 
+    /**
+     * Gets the last child.
+     *
+     * @return the last child
+     */
     public Node getLastChild() {
         return last;
     }
 
+    /**
+     * Gets the next.
+     *
+     * @return the next
+     */
     public Node getNext() {
         return next;
     }
 
+    /**
+     * Gets the child before.
+     *
+     * @param child the child
+     * @return the child before
+     */
     public Node getChildBefore(Node child) {
         if (child == first)
             return null;
@@ -227,6 +356,11 @@ public class Node implements Iterable<Node>
         return n;
     }
 
+    /**
+     * Gets the last sibling.
+     *
+     * @return the last sibling
+     */
     public Node getLastSibling() {
         Node n = this;
         while (n.next != null) {
@@ -235,6 +369,11 @@ public class Node implements Iterable<Node>
         return n;
     }
 
+    /**
+     * Adds the child to front.
+     *
+     * @param child the child
+     */
     public void addChildToFront(Node child) {
         child.next = first;
         first = child;
@@ -243,6 +382,11 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * Adds the child to back.
+     *
+     * @param child the child
+     */
     public void addChildToBack(Node child) {
         child.next = null;
         if (last == null) {
@@ -253,6 +397,11 @@ public class Node implements Iterable<Node>
         last = child;
     }
 
+    /**
+     * Adds the children to front.
+     *
+     * @param children the children
+     */
     public void addChildrenToFront(Node children) {
         Node lastSib = children.getLastSibling();
         lastSib.next = first;
@@ -262,6 +411,11 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * Adds the children to back.
+     *
+     * @param children the children
+     */
     public void addChildrenToBack(Node children) {
         if (last != null) {
             last.next = children;
@@ -274,6 +428,9 @@ public class Node implements Iterable<Node>
 
     /**
      * Add 'child' before 'node'.
+     *
+     * @param newChild the new child
+     * @param node the node
      */
     public void addChildBefore(Node newChild, Node node) {
         if (newChild.next != null)
@@ -290,6 +447,9 @@ public class Node implements Iterable<Node>
 
     /**
      * Add 'child' after 'node'.
+     *
+     * @param newChild the new child
+     * @param node the node
      */
     public void addChildAfter(Node newChild, Node node) {
         if (newChild.next != null)
@@ -301,6 +461,11 @@ public class Node implements Iterable<Node>
             last = newChild;
     }
 
+    /**
+     * Removes the child.
+     *
+     * @param child the child
+     */
     public void removeChild(Node child) {
         Node prev = getChildBefore(child);
         if (prev == null)
@@ -311,6 +476,12 @@ public class Node implements Iterable<Node>
         child.next = null;
     }
 
+    /**
+     * Replace child.
+     *
+     * @param child the child
+     * @param newChild the new child
+     */
     public void replaceChild(Node child, Node newChild) {
         newChild.next = child.next;
         if (child == first) {
@@ -324,6 +495,12 @@ public class Node implements Iterable<Node>
         child.next = null;
     }
 
+    /**
+     * Replace child after.
+     *
+     * @param prevChild the prev child
+     * @param newChild the new child
+     */
     public void replaceChildAfter(Node prevChild, Node newChild) {
         Node child = prevChild.next;
         newChild.next = child.next;
@@ -333,10 +510,14 @@ public class Node implements Iterable<Node>
         child.next = null;
     }
 
+    /**
+     * Removes the children.
+     */
     public void removeChildren() {
         first = last = null;
     }
 
+    /** The Constant NOT_SET. */
     private static final Node NOT_SET = new Node(Token.ERROR);
 
     /**
@@ -345,19 +526,36 @@ public class Node implements Iterable<Node>
      * finishes, the results are undefined and probably bad.
      */
     public class NodeIterator implements Iterator<Node> {
+        
+        /** The cursor. */
         private Node cursor;  // points to node to be returned next
+        
+        /** The prev. */
         private Node prev = NOT_SET;
+        
+        /** The prev2. */
         private Node prev2;
+        
+        /** The removed. */
         private boolean removed = false;
 
+        /**
+         * Instantiates a new node iterator.
+         */
         public NodeIterator() {
             cursor = Node.this.first;
         }
 
+        /* (non-Javadoc)
+         * @see java.util.Iterator#hasNext()
+         */
         public boolean hasNext() {
             return cursor != null;
         }
 
+        /* (non-Javadoc)
+         * @see java.util.Iterator#next()
+         */
         public Node next() {
             if (cursor == null) {
                 throw new NoSuchElementException();
@@ -369,6 +567,9 @@ public class Node implements Iterable<Node>
             return prev;
         }
 
+        /* (non-Javadoc)
+         * @see java.util.Iterator#remove()
+         */
         public void remove() {
             if (prev == NOT_SET) {
                 throw new IllegalStateException("next() has not been called");
@@ -390,11 +591,19 @@ public class Node implements Iterable<Node>
 
     /**
      * Returns an {@link java.util.Iterator} over the node's children.
+     *
+     * @return the iterator
      */
     public Iterator<Node> iterator() {
         return new NodeIterator();
     }
 
+    /**
+     * Prop to string.
+     *
+     * @param propType the prop type
+     * @return the string
+     */
     private static final String propToString(int propType)
     {
         if (Token.printTrees) {
@@ -434,6 +643,12 @@ public class Node implements Iterable<Node>
         return null;
     }
 
+    /**
+     * Lookup property.
+     *
+     * @param propType the prop type
+     * @return the prop list item
+     */
     private PropListItem lookupProperty(int propType)
     {
         PropListItem x = propListHead;
@@ -443,6 +658,12 @@ public class Node implements Iterable<Node>
         return x;
     }
 
+    /**
+     * Ensure property.
+     *
+     * @param propType the prop type
+     * @return the prop list item
+     */
     private PropListItem ensureProperty(int propType)
     {
         PropListItem item = lookupProperty(propType);
@@ -455,6 +676,11 @@ public class Node implements Iterable<Node>
         return item;
     }
 
+    /**
+     * Removes the prop.
+     *
+     * @param propType the prop type
+     */
     public void removeProp(int propType)
     {
         PropListItem x = propListHead;
@@ -473,6 +699,12 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * Gets the prop.
+     *
+     * @param propType the prop type
+     * @return the prop
+     */
     public Object getProp(int propType)
     {
         PropListItem item = lookupProperty(propType);
@@ -480,6 +712,13 @@ public class Node implements Iterable<Node>
         return item.objectValue;
     }
 
+    /**
+     * Gets the int prop.
+     *
+     * @param propType the prop type
+     * @param defaultValue the default value
+     * @return the int prop
+     */
     public int getIntProp(int propType, int defaultValue)
     {
         PropListItem item = lookupProperty(propType);
@@ -487,6 +726,12 @@ public class Node implements Iterable<Node>
         return item.intValue;
     }
 
+    /**
+     * Gets the existing int prop.
+     *
+     * @param propType the prop type
+     * @return the existing int prop
+     */
     public int getExistingIntProp(int propType)
     {
         PropListItem item = lookupProperty(propType);
@@ -494,6 +739,12 @@ public class Node implements Iterable<Node>
         return item.intValue;
     }
 
+    /**
+     * Put prop.
+     *
+     * @param propType the prop type
+     * @param prop the prop
+     */
     public void putProp(int propType, Object prop)
     {
         if (prop == null) {
@@ -504,6 +755,12 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * Put int prop.
+     *
+     * @param propType the prop type
+     * @param prop the prop
+     */
     public void putIntProp(int propType, int prop)
     {
         PropListItem item = ensureProperty(propType);
@@ -518,36 +775,66 @@ public class Node implements Iterable<Node>
         return lineno;
     }
 
+    /**
+     * Sets the lineno.
+     *
+     * @param lineno the new lineno
+     */
     public void setLineno(int lineno) {
         this.lineno = lineno;
     }
 
-    /** Can only be called when <tt>getType() == Token.NUMBER</tt> */
+    /**
+     *  Can only be called when <tt>getType() == Token.NUMBER</tt>
+     *
+     * @return the double
+     */
     public final double getDouble() {
         return ((NumberLiteral)this).getNumber();
     }
 
+    /**
+     * Sets the double.
+     *
+     * @param number the new double
+     */
     public final void setDouble(double number) {
         ((NumberLiteral)this).setNumber(number);
     }
 
-    /** Can only be called when node has String context. */
+    /**
+     *  Can only be called when node has String context.
+     *
+     * @return the string
+     */
     public final String getString() {
         return ((Name)this).getIdentifier();
     }
 
-    /** Can only be called when node has String context. */
+    /**
+     *  Can only be called when node has String context.
+     *
+     * @param s the new string
+     */
     public final void setString(String s) {
         if (s == null) Kit.codeBug();
         ((Name)this).setIdentifier(s);
     }
 
-    /** Can only be called when node has String context. */
+    /**
+     *  Can only be called when node has String context.
+     *
+     * @return the scope
+     */
     public Scope getScope() {
         return ((Name)this).getScope();
     }
 
-    /** Can only be called when node has String context. */
+    /**
+     *  Can only be called when node has String context.
+     *
+     * @param s the new scope
+     */
     public void setScope(Scope s) {
         if (s == null) Kit.codeBug();
         if (!(this instanceof Name)) {
@@ -556,17 +843,32 @@ public class Node implements Iterable<Node>
         ((Name)this).setScope(s);
     }
 
+    /**
+     * New target.
+     *
+     * @return the node
+     */
     public static Node newTarget()
     {
         return new Node(Token.TARGET);
     }
 
+    /**
+     * Label id.
+     *
+     * @return the int
+     */
     public final int labelId()
     {
         if (type != Token.TARGET && type != Token.YIELD) Kit.codeBug();
         return getIntProp(LABEL_ID_PROP, -1);
     }
 
+    /**
+     * Label id.
+     *
+     * @param labelId the label id
+     */
     public void labelId(int labelId)
     {
         if (type != Token.TARGET  && type != Token.YIELD) Kit.codeBug();
@@ -628,9 +930,17 @@ public class Node implements Iterable<Node>
      * Will be detected as (END_DROPS_OFF | END_RETURN_VALUE) by endCheck()
      */
     public static final int END_UNREACHED = 0;
+    
+    /** The Constant END_DROPS_OFF. */
     public static final int END_DROPS_OFF = 1;
+    
+    /** The Constant END_RETURNS. */
     public static final int END_RETURNS = 2;
+    
+    /** The Constant END_RETURNS_VALUE. */
     public static final int END_RETURNS_VALUE = 4;
+    
+    /** The Constant END_YIELDS. */
     public static final int END_YIELDS = 8;
 
     /**
@@ -914,6 +1224,11 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * Checks for side effects.
+     *
+     * @return true, if successful
+     */
     public boolean hasSideEffects()
     {
         switch (type) {
@@ -1029,6 +1344,9 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * Reset targets_r.
+     */
     private void resetTargets_r()
     {
         if (type == Token.TARGET || type == Token.YIELD) {
@@ -1041,6 +1359,9 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString()
     {
@@ -1052,6 +1373,12 @@ public class Node implements Iterable<Node>
         return String.valueOf(type);
     }
 
+    /**
+     * To string.
+     *
+     * @param printIds the print ids
+     * @param sb the sb
+     */
     private void toString(ObjToIntMap printIds, StringBuilder sb)
     {
         if (Token.printTrees) {
@@ -1210,6 +1537,12 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * To string tree.
+     *
+     * @param treeTop the tree top
+     * @return the string
+     */
     public String toStringTree(ScriptNode treeTop) {
         if (Token.printTrees) {
             StringBuilder sb = new StringBuilder();
@@ -1219,6 +1552,15 @@ public class Node implements Iterable<Node>
         return null;
     }
 
+    /**
+     * To string tree helper.
+     *
+     * @param treeTop the tree top
+     * @param n the n
+     * @param printIds the print ids
+     * @param level the level
+     * @param sb the sb
+     */
     private static void toStringTreeHelper(ScriptNode treeTop, Node n,
                                            ObjToIntMap printIds,
                                            int level, StringBuilder sb)
@@ -1247,6 +1589,12 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * Generate print ids.
+     *
+     * @param n the n
+     * @param map the map
+     */
     private static void generatePrintIds(Node n, ObjToIntMap map)
     {
         if (Token.printTrees) {
@@ -1259,6 +1607,13 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * Append print id.
+     *
+     * @param n the n
+     * @param printIds the print ids
+     * @param sb the sb
+     */
     private static void appendPrintId(Node n, ObjToIntMap printIds,
                                       StringBuilder sb)
     {
@@ -1275,10 +1630,19 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /** The type. */
     protected int type = Token.ERROR; // type of the node, e.g. Token.NAME
+    
+    /** The next. */
     protected Node next;             // next sibling
+    
+    /** The first. */
     protected Node first;    // first element of a linked list of children
+    
+    /** The last. */
     protected Node last;     // last element of a linked list of children
+    
+    /** The lineno. */
     protected int lineno = -1;
 
     /**

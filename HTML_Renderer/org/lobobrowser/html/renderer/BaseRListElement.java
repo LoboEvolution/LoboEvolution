@@ -29,10 +29,28 @@ import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.ListStyle;
 
+
+/**
+ * The Class BaseRListElement.
+ */
 class BaseRListElement extends RBlock {
+	
+	/** The Constant DEFAULT_COUNTER_NAME. */
 	protected static final String DEFAULT_COUNTER_NAME = "$cobra.counter";
+	
+	/** The list style. */
 	protected ListStyle listStyle = null;
 
+	/**
+	 * Instantiates a new base r list element.
+	 *
+	 * @param modelNode the model node
+	 * @param listNesting the list nesting
+	 * @param pcontext the pcontext
+	 * @param rcontext the rcontext
+	 * @param frameContext the frame context
+	 * @param parentContainer the parent container
+	 */
 	public BaseRListElement(DOMNodeImpl modelNode, int listNesting,
 			UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer parentContainer) {
@@ -40,6 +58,9 @@ class BaseRListElement extends RBlock {
 				parentContainer);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#applyStyle(int, int)
+	 */
 	protected void applyStyle(int availWidth, int availHeight) {
 		this.listStyle = null;
 		super.applyStyle(availWidth, availHeight);
@@ -84,6 +105,9 @@ class BaseRListElement extends RBlock {
 		this.listStyle = listStyle;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RBlock#toString()
+	 */
 	public String toString() {
 		return "BaseRListElement[node=" + this.modelNode + "]";
 	}

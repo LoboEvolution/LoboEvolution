@@ -24,6 +24,7 @@ import java.util.Properties;
 
 import org.lobobrowser.ua.NavigatorWindow;
 
+
 /**
  * Factory used to create browser windows. It is used when the JavaScript method
  * Window.open() is invoked, for example.
@@ -31,17 +32,18 @@ import org.lobobrowser.ua.NavigatorWindow;
  * @see NavigatorWindowImpl#setWindowFactory(WindowFactory)
  */
 public interface WindowFactory {
+	
 	/**
 	 * Creates a new navigator window, even if the windowId provided exists. The
 	 * implementation of this method is expected to add the top frame of the
 	 * window context to the new navigator window.
-	 * 
-	 * @param windowId
-	 *            The window ID. It may be <code>null</code>.
-	 * @param windowProperties
-	 *            Window properties, following Window.open() conventions. In
+	 *
+	 * @param windowId            The window ID. It may be <code>null</code>.
+	 * @param windowProperties            Window properties, following Window.open() conventions. In
 	 *            addition, properties <code>title</code> and <code>icon</code>
 	 *            should be supported.
+	 * @param windowContext the window context
+	 * @return the abstract browser window
 	 * @see DefaultBrowserWindow
 	 */
 	public AbstractBrowserWindow createWindow(String windowId,
@@ -49,9 +51,18 @@ public interface WindowFactory {
 
 	/**
 	 * Gets an existing window given a windowId.
+	 *
+	 * @param windowId the window id
+	 * @return the existing window
 	 */
 	public AbstractBrowserWindow getExistingWindow(String windowId);
 
+	/**
+	 * Override properties.
+	 *
+	 * @param window the window
+	 * @param properties the properties
+	 */
 	public void overrideProperties(AbstractBrowserWindow window,
 			Properties properties);
 }

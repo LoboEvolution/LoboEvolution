@@ -36,8 +36,16 @@ import java.util.StringTokenizer;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
+
+/**
+ * The Class Urls.
+ */
 public class Urls {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(Urls.class.getName());
+	
+	/** The Constant PATTERN_RFC1123. */
 	public static final DateFormat PATTERN_RFC1123 = new SimpleDateFormat(
 			"EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
 
@@ -46,11 +54,19 @@ public class Urls {
 		df.setTimeZone(TimeZone.getTimeZone("GMT"));
 	}
 
+	/**
+	 * Instantiates a new urls.
+	 */
 	private Urls() {
 		super();
 	}
 
-	/** Whether the URL refers to a resource in the local file system. */
+	/**
+	 *  Whether the URL refers to a resource in the local file system.
+	 *
+	 * @param url the url
+	 * @return true, if is local
+	 */
 	public static boolean isLocal(URL url) {
 		if (isLocalFile(url)) {
 			return true;
@@ -71,12 +87,23 @@ public class Urls {
 		}
 	}
 
-	/** Whether the URL is a file in the local file system. */
+	/**
+	 *  Whether the URL is a file in the local file system.
+	 *
+	 * @param url the url
+	 * @return true, if is local file
+	 */
 	public static boolean isLocalFile(URL url) {
 		String scheme = url.getProtocol();
 		return "file".equalsIgnoreCase(scheme) && !hasHost(url);
 	}
 
+	/**
+	 * Checks for host.
+	 *
+	 * @param url the url
+	 * @return true, if successful
+	 */
 	public static boolean hasHost(URL url) {
 		String host = url.getHost();
 		return host != null && !"".equals(host);
@@ -84,6 +111,11 @@ public class Urls {
 
 	/**
 	 * Creates an absolute URL in a manner equivalent to major browsers.
+	 *
+	 * @param baseUrl the base url
+	 * @param relativeUrl the relative url
+	 * @return the url
+	 * @throws MalformedURLException the malformed url exception
 	 */
 	public static URL createURL(URL baseUrl, String relativeUrl)
 			throws MalformedURLException {
@@ -94,6 +126,10 @@ public class Urls {
 	 * Returns the time when the document should be considered expired. The time
 	 * will be zero if the document always needs to be revalidated. It will be
 	 * <code>null</code> if no expiration time is specified.
+	 *
+	 * @param connection the connection
+	 * @param baseTime the base time
+	 * @return the expiration
 	 */
 	public static Long getExpiration(URLConnection connection, long baseTime) {
 		String cacheControl = connection.getHeaderField("Cache-Control");
@@ -141,6 +177,12 @@ public class Urls {
 		return null;
 	}
 
+	/**
+	 * Gets the headers.
+	 *
+	 * @param connection the connection
+	 * @return the headers
+	 */
 	public static List<NameValuePair> getHeaders(URLConnection connection) {
 		// Random access index recommended.
 		List<NameValuePair> headers = new ArrayList<NameValuePair>();
@@ -158,6 +200,14 @@ public class Urls {
 		return headers;
 	}
 
+	/**
+	 * Guess url.
+	 *
+	 * @param baseURL the base url
+	 * @param spec the spec
+	 * @return the url
+	 * @throws MalformedURLException the malformed url exception
+	 */
 	public static URL guessURL(URL baseURL, String spec)
 			throws MalformedURLException {
 		URL finalURL;
@@ -211,10 +261,23 @@ public class Urls {
 		return finalURL;
 	}
 
+	/**
+	 * Guess url.
+	 *
+	 * @param spec the spec
+	 * @return the url
+	 * @throws MalformedURLException the malformed url exception
+	 */
 	public static URL guessURL(String spec) throws MalformedURLException {
 		return guessURL(null, spec);
 	}
 
+	/**
+	 * Gets the charset.
+	 *
+	 * @param connection the connection
+	 * @return the charset
+	 */
 	public static String getCharset(URLConnection connection) {
 		String contentType = connection.getContentType();
 		if (contentType == null) {
@@ -238,6 +301,12 @@ public class Urls {
 		return getDefaultCharset(connection);
 	}
 
+	/**
+	 * Gets the default charset.
+	 *
+	 * @param connection the connection
+	 * @return the default charset
+	 */
 	private static String getDefaultCharset(URLConnection connection) {
 		URL url = connection.getURL();
 		if (Urls.isLocalFile(url)) {
@@ -248,6 +317,12 @@ public class Urls {
 		}
 	}
 
+	/**
+	 * Gets the no ref form.
+	 *
+	 * @param url the url
+	 * @return the no ref form
+	 */
 	public static String getNoRefForm(URL url) {
 		String host = url.getHost();
 		int port = url.getPort();
@@ -262,9 +337,10 @@ public class Urls {
 
 	/**
 	 * Comparison that does not consider Ref.
-	 * 
-	 * @param url1
-	 * @param url2
+	 *
+	 * @param url1 the url1
+	 * @param url2 the url2
+	 * @return true, if successful
 	 */
 	public static boolean sameNoRefURL(URL url1, URL url2) {
 		return Objects.equals(url1.getHost(), url2.getHost())

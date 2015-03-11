@@ -20,7 +20,15 @@
 */
 package org.lobobrowser.html.layout;
 
+
+/**
+ * The Class MiscLayout.
+ */
 public class MiscLayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new misc layout.
+	 */
 	public MiscLayout() {
 		super(DISPLAY_INLINE);
 	}

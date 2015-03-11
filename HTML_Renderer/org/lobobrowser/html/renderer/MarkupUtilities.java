@@ -28,9 +28,12 @@ import java.awt.Rectangle;
 
 import org.lobobrowser.util.Diagnostics;
 
+
 //import java.util.logging.*;
 
 /**
+ * The Class MarkupUtilities.
+ *
  * @author J. H. S.
  */
 class MarkupUtilities {
@@ -43,30 +46,68 @@ class MarkupUtilities {
 	// public static final int MODE_RIGHT_OR_AT = 1;
 
 	/**
-	 * 
+	 * Instantiates a new markup utilities.
 	 */
 	private MarkupUtilities() {
 		super();
 	}
 
+	/**
+	 * Find renderable.
+	 *
+	 * @param renderables the renderables
+	 * @param point the point
+	 * @param vertical the vertical
+	 * @return the boundable renderable
+	 */
 	public static BoundableRenderable findRenderable(Renderable[] renderables,
 			Point point, boolean vertical) {
 		return findRenderable(renderables, point, 0, renderables.length,
 				vertical);
 	}
 
+	/**
+	 * Find renderable.
+	 *
+	 * @param renderables the renderables
+	 * @param x the x
+	 * @param y the y
+	 * @param vertical the vertical
+	 * @return the boundable renderable
+	 */
 	public static BoundableRenderable findRenderable(Renderable[] renderables,
 			int x, int y, boolean vertical) {
 		return findRenderable(renderables, x, y, 0, renderables.length,
 				vertical);
 	}
 
+	/**
+	 * Find renderable.
+	 *
+	 * @param renderables the renderables
+	 * @param point the point
+	 * @param firstIndex the first index
+	 * @param length the length
+	 * @param vertical the vertical
+	 * @return the boundable renderable
+	 */
 	private static BoundableRenderable findRenderable(Renderable[] renderables,
 			Point point, int firstIndex, int length, boolean vertical) {
 		return findRenderable(renderables, point.x, point.y, firstIndex,
 				length, vertical);
 	}
 
+	/**
+	 * Find renderable.
+	 *
+	 * @param renderables the renderables
+	 * @param x the x
+	 * @param y the y
+	 * @param firstIndex the first index
+	 * @param length the length
+	 * @param vertical the vertical
+	 * @return the boundable renderable
+	 */
 	private static BoundableRenderable findRenderable(Renderable[] renderables,
 			int x, int y, int firstIndex, int length, boolean vertical) {
 		if (length == 0) {
@@ -118,12 +159,30 @@ class MarkupUtilities {
 		}
 	}
 
+	/**
+	 * Find renderables.
+	 *
+	 * @param renderables the renderables
+	 * @param clipArea the clip area
+	 * @param vertical the vertical
+	 * @return the range
+	 */
 	public static Range findRenderables(Renderable[] renderables,
 			Rectangle clipArea, boolean vertical) {
 		return findRenderables(renderables, clipArea, 0, renderables.length,
 				vertical);
 	}
 
+	/**
+	 * Find renderables.
+	 *
+	 * @param renderables the renderables
+	 * @param clipArea the clip area
+	 * @param firstIndex the first index
+	 * @param length the length
+	 * @param vertical the vertical
+	 * @return the range
+	 */
 	private static Range findRenderables(Renderable[] renderables,
 			Rectangle clipArea, int firstIndex, int length, boolean vertical) {
 		if (length == 0) {
@@ -151,6 +210,16 @@ class MarkupUtilities {
 		return new Range(offset1, offset2 - offset1 + 1);
 	}
 
+	/**
+	 * Find first index.
+	 *
+	 * @param renderables the renderables
+	 * @param clipArea the clip area
+	 * @param index the index
+	 * @param length the length
+	 * @param vertical the vertical
+	 * @return the int
+	 */
 	private static int findFirstIndex(Renderable[] renderables,
 			Rectangle clipArea, int index, int length, boolean vertical) {
 		Diagnostics.Assert(length > 0, "length=" + length);
@@ -217,6 +286,16 @@ class MarkupUtilities {
 		}
 	}
 
+	/**
+	 * Find last index.
+	 *
+	 * @param renderables the renderables
+	 * @param clipArea the clip area
+	 * @param index the index
+	 * @param length the length
+	 * @param vertical the vertical
+	 * @return the int
+	 */
 	private static int findLastIndex(Renderable[] renderables,
 			Rectangle clipArea, int index, int length, boolean vertical) {
 		Diagnostics.Assert(length > 0, "length<=0");
@@ -284,6 +363,14 @@ class MarkupUtilities {
 		}
 	}
 
+	/**
+	 * Intersects.
+	 *
+	 * @param rect1 the rect1
+	 * @param rect2 the rect2
+	 * @param vertical the vertical
+	 * @return true, if successful
+	 */
 	private static boolean intersects(Rectangle rect1, Rectangle rect2,
 			boolean vertical) {
 		if (vertical) {

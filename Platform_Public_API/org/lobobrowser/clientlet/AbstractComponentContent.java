@@ -24,47 +24,85 @@ package org.lobobrowser.clientlet;
 
 import java.awt.Component;
 
+
 /**
  * Abstract implementation of {@link ComponentContent}. It is recommended that
  * <code>ComponentContent</code> implementations extend this class for forward
  * compatibility.
  */
 public abstract class AbstractComponentContent implements ComponentContent {
+	
+	/**
+	 * Instantiates a new abstract component content.
+	 */
 	public AbstractComponentContent() {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#canCopy()
+	 */
 	public boolean canCopy() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#copy()
+	 */
 	public boolean copy() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#getComponent()
+	 */
 	public abstract Component getComponent();
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#getSourceCode()
+	 */
 	public abstract String getSourceCode();
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#getTitle()
+	 */
 	public abstract String getTitle();
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#getDescription()
+	 */
 	public String getDescription() {
 		return "";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#addNotify()
+	 */
 	public void addNotify() {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#removeNotify()
+	 */
 	public void removeNotify() {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#getContentObject()
+	 */
 	public Object getContentObject() {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#getMimeType()
+	 */
 	public String getMimeType() {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#setProperty(java.lang.String, java.lang.Object)
+	 */
 	public void setProperty(String name, Object value) {
 		// NOP
 	}

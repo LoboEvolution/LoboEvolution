@@ -33,21 +33,48 @@ import java.util.jar.JarFile;
 
 import org.lobobrowser.security.LocalSecurityPolicy;
 
+
+/**
+ * The Class TempFileManager.
+ */
 public class TempFileManager {
+	
+	/** The instance. */
 	private static TempFileManager instance;
+	
+	/** The Constant GENERAL_PREFIX. */
 	private static final String GENERAL_PREFIX = "LOBO-";
+	
+	/** The Constant ONE_DAY. */
 	private static final long ONE_DAY = 24L * 60 * 60 * 1000;
+	
+	/** The Constant ONE_MONTH. */
 	private static final long ONE_MONTH = 30L * ONE_DAY;
+	
+	/** The Constant THIRTY_YEARS. */
 	private static final long THIRTY_YEARS = 30L * 365 * ONE_DAY;
+	
+	/** The Constant FILE_PREFIX. */
 	private static final String FILE_PREFIX = GENERAL_PREFIX
 			+ ((System.currentTimeMillis() - THIRTY_YEARS) / 1000) + "-";
 
+	/** The temp directory. */
 	private final File TEMP_DIRECTORY;
+	
+	/** The reference queue. */
 	private final ReferenceQueue<JarFile> REFERENCE_QUEUE = new ReferenceQueue<JarFile>();
+	
+	/** The wr by path. */
 	private final Map<String, LocalWeakReference> wrByPath = new HashMap<String, LocalWeakReference>();
 
+	/** The counter. */
 	private int counter = 0;
 
+	/**
+	 * Gets the single instance of TempFileManager.
+	 *
+	 * @return single instance of TempFileManager
+	 */
 	public static TempFileManager getInstance() {
 		// Do it this way to allow other statics to initialize.
 		if (instance == null) {
@@ -60,6 +87,9 @@ public class TempFileManager {
 		return instance;
 	}
 
+	/**
+	 * Instantiates a new temp file manager.
+	 */
 	private TempFileManager() {
 		Runtime.getRuntime().addShutdownHook(new ShutdownThread());
 		File tempDirectory = new File(LocalSecurityPolicy.STORE_DIRECTORY,
@@ -88,6 +118,9 @@ public class TempFileManager {
 		}
 	}
 
+	/**
+	 * Shutdown cleanup.
+	 */
 	private void shutdownCleanup() {
 		File[] files = TEMP_DIRECTORY.listFiles();
 		if (files != null) {
@@ -116,6 +149,13 @@ public class TempFileManager {
 		}
 	}
 
+	/**
+	 * Creates the jar file.
+	 *
+	 * @param bytes the bytes
+	 * @return the jar file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public JarFile createJarFile(byte[] bytes) throws IOException {
 		// Dequeue and clean up first
 		for (;;) {
@@ -147,6 +187,12 @@ public class TempFileManager {
 		return jarFile;
 	}
 
+	/**
+	 * New temp file.
+	 *
+	 * @return the file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public File newTempFile() throws IOException {
 		synchronized (this) {
 			int newCounter = this.counter++;
@@ -155,9 +201,21 @@ public class TempFileManager {
 		}
 	}
 
+	/**
+	 * The Class LocalWeakReference.
+	 */
 	private static class LocalWeakReference extends WeakReference<JarFile> {
+		
+		/** The canonical path. */
 		public final String canonicalPath;
 
+		/**
+		 * Instantiates a new local weak reference.
+		 *
+		 * @param referent the referent
+		 * @param q the q
+		 * @param canonicalPath the canonical path
+		 */
 		public LocalWeakReference(JarFile referent,
 				ReferenceQueue<? super JarFile> q, String canonicalPath) {
 			super(referent, q);
@@ -165,7 +223,14 @@ public class TempFileManager {
 		}
 	}
 
+	/**
+	 * The Class ShutdownThread.
+	 */
 	private class ShutdownThread extends Thread {
+		
+		/* (non-Javadoc)
+		 * @see java.lang.Thread#run()
+		 */
 		public void run() {
 			shutdownCleanup();
 		}

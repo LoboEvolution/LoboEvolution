@@ -38,15 +38,32 @@ import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.clientlet.SimpleComponentContent;
 import org.lobobrowser.util.gui.CenterLayout;
 
+
+/**
+ * The Class BadVersionClientlet.
+ */
 public class BadVersionClientlet implements Clientlet {
+	
+	/** The feature. */
 	private final String feature;
+	
+	/** The required version. */
 	private final String requiredVersion;
 
+	/**
+	 * Instantiates a new bad version clientlet.
+	 *
+	 * @param feature the feature
+	 * @param requiredVersion the required version
+	 */
 	public BadVersionClientlet(String feature, String requiredVersion) {
 		this.feature = feature;
 		this.requiredVersion = requiredVersion;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.Clientlet#process(org.lobobrowser.clientlet.ClientletContext)
+	 */
 	public void process(ClientletContext context) throws ClientletException {
 		JTextArea textArea = new JTextArea();
 		Border etchedBorder = new EtchedBorder(EtchedBorder.RAISED);

@@ -23,7 +23,15 @@ package org.lobobrowser.html.domfilter;
 import org.lobobrowser.html.w3c.HTMLLinkElement;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class LinkFilter.
+ */
 public class LinkFilter implements NodeFilter {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
 	public boolean accept(Node node) {
 		return node instanceof HTMLLinkElement;
 	}

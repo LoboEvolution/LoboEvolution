@@ -19,27 +19,51 @@ import java.security.SecureClassLoader;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+
 /**
+ * The Class SecureCaller.
+ *
  * @author Attila Szegedi
  */
 public abstract class SecureCaller
 {
+    
+    /** The Constant secureCallerImplBytecode. */
     private static final byte[] secureCallerImplBytecode = loadBytecode();
 
     // We're storing a CodeSource -> (ClassLoader -> SecureRenderer), since we
     // need to have one renderer per class loader. We're using weak hash maps
     // and soft references all the way, since we don't want to interfere with
     // cleanup of either CodeSource or ClassLoader objects.
+    /** The Constant callers. */
     private static final Map<CodeSource,Map<ClassLoader,SoftReference<SecureCaller>>>
     callers =
         new WeakHashMap<CodeSource,Map<ClassLoader,SoftReference<SecureCaller>>>();
 
+    /**
+     * Call.
+     *
+     * @param callable the callable
+     * @param cx the cx
+     * @param scope the scope
+     * @param thisObj the this obj
+     * @param args the args
+     * @return the object
+     */
     public abstract Object call(Callable callable, Context cx,
             Scriptable scope, Scriptable thisObj, Object[] args);
 
     /**
      * Call the specified callable using a protection domain belonging to the
      * specified code source.
+     *
+     * @param codeSource the code source
+     * @param callable the callable
+     * @param cx the cx
+     * @param scope the scope
+     * @param thisObj the this obj
+     * @param args the args
+     * @return the object
      */
     static Object callSecurely(final CodeSource codeSource, Callable callable,
             Context cx, Scriptable scope, Scriptable thisObj, Object[] args)
@@ -108,13 +132,30 @@ public abstract class SecureCaller
         return caller.call(callable, cx, scope, thisObj, args);
     }
 
+    /**
+     * The Class SecureClassLoaderImpl.
+     */
     private static class SecureClassLoaderImpl extends SecureClassLoader
     {
+        
+        /**
+         * Instantiates a new secure class loader impl.
+         *
+         * @param parent the parent
+         */
         SecureClassLoaderImpl(ClassLoader parent)
         {
             super(parent);
         }
 
+        /**
+         * Define and link class.
+         *
+         * @param name the name
+         * @param bytes the bytes
+         * @param cs the cs
+         * @return the class
+         */
         Class<?> defineAndLinkClass(String name, byte[] bytes, CodeSource cs)
         {
             Class<?> cl = defineClass(name, bytes, 0, bytes.length, cs);
@@ -123,6 +164,11 @@ public abstract class SecureCaller
         }
     }
 
+    /**
+     * Load bytecode.
+     *
+     * @return the byte[]
+     */
     private static byte[] loadBytecode()
     {
         return (byte[])AccessController.doPrivileged(new PrivilegedAction<Object>()
@@ -134,6 +180,11 @@ public abstract class SecureCaller
         });
     }
 
+    /**
+     * Load bytecode privileged.
+     *
+     * @return the byte[]
+     */
     private static byte[] loadBytecodePrivileged()
     {
         URL url = SecureCaller.class.getResource("SecureCallerImpl.clazz");

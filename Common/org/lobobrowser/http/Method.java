@@ -21,10 +21,26 @@
 
 package org.lobobrowser.http;
 
+
 /**
+ * The Enum Method.
  *
  * @author rbair
  */
 public enum Method {
-	GET, PUT, POST, DELETE, HEAD, OPTIONS, TRACE
+	
+	/** The get. */
+	GET, 
+ /** The put. */
+ PUT, 
+ /** The post. */
+ POST, 
+ /** The delete. */
+ DELETE, 
+ /** The head. */
+ HEAD, 
+ /** The options. */
+ OPTIONS, 
+ /** The trace. */
+ TRACE
 }

@@ -28,17 +28,32 @@ import javax.swing.border.EtchedBorder;
 import org.lobobrowser.primary.gui.ValidationException;
 import org.lobobrowser.util.gui.WrapperLayout;
 
+
+/**
+ * The Class PreferencesPanel.
+ */
 public class PreferencesPanel extends JPanel {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The ui. */
 	private AbstractSettingsUI ui;
 
+	/**
+	 * Instantiates a new preferences panel.
+	 */
 	public PreferencesPanel() {
 		this.setLayout(WrapperLayout.getInstance());
 		this.setBorder(new CompoundBorder(new EtchedBorder(),
 				new javax.swing.border.EmptyBorder(8, 8, 8, 8)));
 	}
 
+	/**
+	 * Save.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean save() {
 		AbstractSettingsUI ui = this.ui;
 		if (ui != null) {
@@ -52,6 +67,9 @@ public class PreferencesPanel extends JPanel {
 		return true;
 	}
 
+	/**
+	 * Restore defaults.
+	 */
 	public void restoreDefaults() {
 		AbstractSettingsUI ui = this.ui;
 		if (ui != null) {
@@ -59,6 +77,11 @@ public class PreferencesPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Sets the settings ui.
+	 *
+	 * @param ui the new settings ui
+	 */
 	public void setSettingsUI(AbstractSettingsUI ui) {
 		this.ui = ui;
 		this.removeAll();

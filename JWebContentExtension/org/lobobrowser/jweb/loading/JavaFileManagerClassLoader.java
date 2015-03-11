@@ -40,18 +40,34 @@ import javax.tools.StandardLocation;
 
 import org.lobobrowser.util.io.IORoutines;
 
+
+/**
+ * The Class JavaFileManagerClassLoader.
+ */
 public class JavaFileManagerClassLoader extends SecureClassLoader {
 	// TODO: Check for sealing violations?
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(JavaFileManagerClassLoader.class.getName());
+	
+	/** The file manager. */
 	private final JavaFileManager fileManager;
 
+	/**
+	 * Instantiates a new java file manager class loader.
+	 *
+	 * @param parent the parent
+	 * @param fileManager the file manager
+	 */
 	public JavaFileManagerClassLoader(final ClassLoader parent,
 			final JavaFileManager fileManager) {
 		super(parent);
 		this.fileManager = fileManager;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.ClassLoader#findClass(java.lang.String)
+	 */
 	@Override
 	protected Class<?> findClass(String className)
 			throws ClassNotFoundException {
@@ -104,6 +120,9 @@ public class JavaFileManagerClassLoader extends SecureClassLoader {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.ClassLoader#findResource(java.lang.String)
+	 */
 	@Override
 	protected URL findResource(String resourceName) {
 		int slashIdx = resourceName.lastIndexOf('/');
@@ -142,6 +161,9 @@ public class JavaFileManagerClassLoader extends SecureClassLoader {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.ClassLoader#findResources(java.lang.String)
+	 */
 	@Override
 	protected Enumeration<URL> findResources(String name) throws IOException {
 		if (logger.isLoggable(Level.WARNING)) {
@@ -158,6 +180,9 @@ public class JavaFileManagerClassLoader extends SecureClassLoader {
 				.singletonList(url));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.ClassLoader#getResourceAsStream(java.lang.String)
+	 */
 	@Override
 	public InputStream getResourceAsStream(String resourceName) {
 		int slashIdx = resourceName.lastIndexOf('/');
@@ -182,35 +207,66 @@ public class JavaFileManagerClassLoader extends SecureClassLoader {
 		}
 	}
 
+	/**
+	 * The Class ResourceHandler.
+	 */
 	private class ResourceHandler extends URLStreamHandler {
+		
+		/** The file object. */
 		private final FileObject fileObject;
 
+		/**
+		 * Instantiates a new resource handler.
+		 *
+		 * @param fileObject the file object
+		 */
 		public ResourceHandler(final FileObject fileObject) {
 			super();
 			this.fileObject = fileObject;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.net.URLStreamHandler#openConnection(java.net.URL)
+		 */
 		@Override
 		protected URLConnection openConnection(URL u) throws IOException {
 			return new ResourceURLConnection(u, this.fileObject);
 		}
 	}
 
+	/**
+	 * The Class ResourceURLConnection.
+	 */
 	private class ResourceURLConnection extends URLConnection {
+		
+		/** The file object. */
 		private FileObject fileObject;
 
+		/**
+		 * Instantiates a new resource url connection.
+		 *
+		 * @param url the url
+		 * @param fileObject the file object
+		 */
 		public ResourceURLConnection(URL url, FileObject fileObject) {
 			super(url);
 			this.fileObject = fileObject;
 		}
 
+		/** The input stream. */
 		private InputStream inputStream;
 
+		/* (non-Javadoc)
+		 * @see java.net.URLConnection#connect()
+		 */
 		@Override
 		public void connect() throws IOException {
 			this.inputStream = this.fileObject.openInputStream();
 		}
 
+		/* (non-Javadoc)
+		 * @see java.net.URLConnection#getInputStream()
+		 */
 		@Override
 		public InputStream getInputStream() throws IOException {
 			if (this.inputStream == null) {

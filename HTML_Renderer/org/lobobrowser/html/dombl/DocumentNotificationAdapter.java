@@ -22,33 +22,59 @@ package org.lobobrowser.html.dombl;
 
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 
+
 /**
  * An abstract implementation of {@link DocumentNotificationListener} with blank
  * methods, provided for convenience.
  */
 public abstract class DocumentNotificationAdapter implements
 		DocumentNotificationListener {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#allInvalidated()
+	 */
 	public void allInvalidated() {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#externalScriptLoading(org.lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
 	public void externalScriptLoading(DOMNodeImpl node) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#invalidated(org.lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
 	public void invalidated(DOMNodeImpl node) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#lookInvalidated(org.lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
 	public void lookInvalidated(DOMNodeImpl node) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#nodeLoaded(org.lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
 	public void nodeLoaded(DOMNodeImpl node) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#positionInvalidated(org.lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
 	public void positionInvalidated(DOMNodeImpl node) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#sizeInvalidated(org.lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
 	public void sizeInvalidated(DOMNodeImpl node) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#structureInvalidated(org.lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
 	public void structureInvalidated(DOMNodeImpl node) {
 	}
 }

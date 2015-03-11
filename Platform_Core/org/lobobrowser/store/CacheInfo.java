@@ -22,11 +22,28 @@ package org.lobobrowser.store;
 
 import java.util.List;
 
+
+/**
+ * The Class CacheInfo.
+ */
 public class CacheInfo {
+	
+	/** The approximate size. */
 	public final long approximateSize;
+	
+	/** The num entries. */
 	public final int numEntries;
+	
+	/** The entry info list. */
 	public final java.util.List entryInfoList;
 
+	/**
+	 * Instantiates a new cache info.
+	 *
+	 * @param approximateSize the approximate size
+	 * @param numEntries the num entries
+	 * @param entryInfoList the entry info list
+	 */
 	public CacheInfo(final long approximateSize, final int numEntries,
 			final List entryInfoList) {
 		super();

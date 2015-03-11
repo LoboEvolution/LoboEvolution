@@ -23,7 +23,17 @@ package org.lobobrowser.util.gui;
 import java.awt.Frame;
 import java.awt.Graphics;
 
+
+/**
+ * The Class GUITasks.
+ */
 public class GUITasks {
+	
+	/**
+	 * Gets the top frame.
+	 *
+	 * @return the top frame
+	 */
 	public static Frame getTopFrame() {
 		Frame[] frames = Frame.getFrames();
 		for (int i = 0; i < frames.length; i++) {
@@ -37,6 +47,17 @@ public class GUITasks {
 		return null;
 	}
 
+	/**
+	 * Draw dashed.
+	 *
+	 * @param g the g
+	 * @param x1 the x1
+	 * @param y1 the y1
+	 * @param x2 the x2
+	 * @param y2 the y2
+	 * @param dashSize the dash size
+	 * @param gapSize the gap size
+	 */
 	public static void drawDashed(Graphics g, int x1, int y1, int x2, int y2,
 			int dashSize, int gapSize) {
 		if (x2 < x1) {

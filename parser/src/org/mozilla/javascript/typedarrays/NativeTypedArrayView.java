@@ -9,18 +9,34 @@ import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
 
+
+/**
+ * The Class NativeTypedArrayView.
+ */
 public abstract class NativeTypedArrayView
     extends NativeArrayBufferView
 {
-    /** The length, in elements, of the array */
+    
+    /**  The length, in elements, of the array. */
     protected final int length;
 
+    /**
+     * Instantiates a new native typed array view.
+     */
     protected NativeTypedArrayView()
     {
         super();
         length = 0;
     }
 
+    /**
+     * Instantiates a new native typed array view.
+     *
+     * @param ab the ab
+     * @param off the off
+     * @param len the len
+     * @param byteLen the byte len
+     */
     protected NativeTypedArrayView(NativeArrayBuffer ab, int off, int len, int byteLen)
     {
         super(ab, off, byteLen);
@@ -29,29 +45,44 @@ public abstract class NativeTypedArrayView
 
     // Array properties implementation
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#get(int, org.mozilla.javascript.Scriptable)
+     */
     @Override
     public Object get(int index, Scriptable start)
     {
         return js_get(index);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#has(int, org.mozilla.javascript.Scriptable)
+     */
     @Override
     public boolean has(int index, Scriptable start)
     {
         return ((index > 0) && (index < length));
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#put(int, org.mozilla.javascript.Scriptable, java.lang.Object)
+     */
     @Override
     public void put(int index, Scriptable start, Object val)
     {
         js_set(index, val);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#delete(int)
+     */
     @Override
     public void delete(int index)
     {
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getIds()
+     */
     @Override
     public Object[] getIds()
     {
@@ -64,23 +95,82 @@ public abstract class NativeTypedArrayView
 
     // Actual functions
 
+    /**
+     * Check index.
+     *
+     * @param index the index
+     * @return true, if successful
+     */
     protected boolean checkIndex(int index)
     {
        return ((index < 0) || (index >= length));
     }
 
+    /**
+     * Construct.
+     *
+     * @param ab the ab
+     * @param off the off
+     * @param len the len
+     * @return the native typed array view
+     */
     protected abstract NativeTypedArrayView construct(NativeArrayBuffer ab, int off, int len);
+    
+    /**
+     * Js_get.
+     *
+     * @param index the index
+     * @return the object
+     */
     protected abstract Object js_get(int index);
+    
+    /**
+     * Js_set.
+     *
+     * @param index the index
+     * @param c the c
+     * @return the object
+     */
     protected abstract Object js_set(int index, Object c);
+    
+    /**
+     * Gets the bytes per element.
+     *
+     * @return the bytes per element
+     */
     protected abstract int getBytesPerElement();
+    
+    /**
+     * Real this.
+     *
+     * @param thisObj the this obj
+     * @param f the f
+     * @return the native typed array view
+     */
     protected abstract NativeTypedArrayView realThis(Scriptable thisObj, IdFunctionObject f);
 
+    /**
+     * Make array buffer.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param length the length
+     * @return the native array buffer
+     */
     private NativeArrayBuffer makeArrayBuffer(Context cx, Scriptable scope, int length)
     {
         return (NativeArrayBuffer)cx.newObject(scope, NativeArrayBuffer.CLASS_NAME,
                                                new Object[] { length });
     }
 
+    /**
+     * Js_constructor.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param args the args
+     * @return the native typed array view
+     */
     private NativeTypedArrayView js_constructor(Context cx, Scriptable scope, Object[] args)
     {
         if (!isArg(args, 0)) {
@@ -147,6 +237,12 @@ public abstract class NativeTypedArrayView
         }
     }
 
+    /**
+     * Sets the range.
+     *
+     * @param v the v
+     * @param off the off
+     */
     private void setRange(NativeTypedArrayView v, int off)
     {
         if (off >= length) {
@@ -173,6 +269,12 @@ public abstract class NativeTypedArrayView
         }
     }
 
+    /**
+     * Sets the range.
+     *
+     * @param a the a
+     * @param off the off
+     */
     private void setRange(NativeArray a, int off)
     {
         if (off > length) {
@@ -189,6 +291,15 @@ public abstract class NativeTypedArrayView
         }
     }
 
+    /**
+     * Js_subarray.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param s the s
+     * @param e the e
+     * @return the object
+     */
     private Object js_subarray(Context cx, Scriptable scope, int s, int e)
     {
         int start = (s < 0 ? length + s : s);
@@ -207,6 +318,9 @@ public abstract class NativeTypedArrayView
 
     // Dispatcher
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -262,6 +376,9 @@ public abstract class NativeTypedArrayView
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
+     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -279,6 +396,9 @@ public abstract class NativeTypedArrayView
 
     // #string_id_map#
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
+     */
     @Override
     protected int findPrototypeId(String s)
     {
@@ -301,12 +421,14 @@ public abstract class NativeTypedArrayView
     }
 
     // Table of all functions
+    /** The Constant Id_subarray. */
     private static final int
         Id_constructor          = 1,
         Id_get                  = 2,
         Id_set                  = 3,
         Id_subarray             = 4;
 
+    /** The Constant MAX_PROTOTYPE_ID. */
     protected static final int
         MAX_PROTOTYPE_ID        = Id_subarray;
 
@@ -314,7 +436,10 @@ public abstract class NativeTypedArrayView
 
     // Constructor properties
 
-    @Override
+    /* (non-Javadoc)
+ * @see org.mozilla.javascript.IdScriptableObject#fillConstructorProperties(org.mozilla.javascript.IdFunctionObject)
+ */
+@Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
         ctor.put("BYTES_PER_ELEMENT", ctor, ScriptRuntime.wrapInt(getBytesPerElement()));
@@ -322,12 +447,18 @@ public abstract class NativeTypedArrayView
 
     // Property dispatcher
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.typedarrays.NativeArrayBufferView#getMaxInstanceId()
+     */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.typedarrays.NativeArrayBufferView#getInstanceIdName(int)
+     */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -338,6 +469,9 @@ public abstract class NativeTypedArrayView
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.typedarrays.NativeArrayBufferView#getInstanceIdValue(int)
+     */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -353,7 +487,10 @@ public abstract class NativeTypedArrayView
 
 // #string_id_map#
 
-    @Override
+    /* (non-Javadoc)
+ * @see org.mozilla.javascript.typedarrays.NativeArrayBufferView#findInstanceIdInfo(java.lang.String)
+ */
+@Override
     protected int findInstanceIdInfo(String s)
     {
         int id;
@@ -375,6 +512,7 @@ public abstract class NativeTypedArrayView
     /*
      * These must not conflict with ids in the parent since we delegate there for property dispatching.
      */
+    /** The Constant MAX_INSTANCE_ID. */
     private static final int
         Id_length               = 10,
         Id_BYTES_PER_ELEMENT    = 11,

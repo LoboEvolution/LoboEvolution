@@ -8,32 +8,62 @@ package org.mozilla.javascript.v8dtoa;
 
 import java.util.Arrays;
 
+
+/**
+ * The Class FastDtoaBuilder.
+ */
 public class FastDtoaBuilder {
 
     // allocate buffer for generated digits + extra notation + padding zeroes
+    /** The chars. */
     final char[] chars = new char[FastDtoa.kFastDtoaMaximalLength + 8];
+    
+    /** The end. */
     int end = 0;
+    
+    /** The point. */
     int point;
+    
+    /** The formatted. */
     boolean formatted = false;
 
+    /**
+     * Append.
+     *
+     * @param c the c
+     */
     void append(char c) {
         chars[end++] = c;
     }
 
+    /**
+     * Decrease last.
+     */
     void decreaseLast() {
         chars[end - 1]--;
     }
 
+    /**
+     * Reset.
+     */
     public void reset() {
         end = 0;
         formatted = false;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return "[chars:" + new String(chars, 0, end) + ", point:" + point + "]";
     }
 
+    /**
+     * Format.
+     *
+     * @return the string
+     */
     public String format() {
         if (!formatted) {
             // check for minus sign
@@ -50,6 +80,12 @@ public class FastDtoaBuilder {
 
     }
 
+    /**
+     * To fixed format.
+     *
+     * @param firstDigit the first digit
+     * @param decPoint the dec point
+     */
     private void toFixedFormat(int firstDigit, int decPoint) {
         if (point < end) {
             // insert decimal point
@@ -76,6 +112,12 @@ public class FastDtoaBuilder {
         }
     }
 
+    /**
+     * To exponential format.
+     *
+     * @param firstDigit the first digit
+     * @param decPoint the dec point
+     */
     private void toExponentialFormat(int firstDigit, int decPoint) {
         if (end - firstDigit > 1) {
             // insert decimal point if more than one digit was produced
@@ -105,6 +147,7 @@ public class FastDtoaBuilder {
         }
     }
 
+    /** The Constant digits. */
     final static char[] digits = {
         '0' , '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9'
     };

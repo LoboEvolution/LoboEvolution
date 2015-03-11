@@ -24,6 +24,7 @@ package org.lobobrowser.clientlet;
 
 import org.lobobrowser.ua.NavigatorExtensionContext;
 
+
 /**
  * Interface implemented in order to handle web responses, typically by checking
  * the content types.
@@ -31,6 +32,7 @@ import org.lobobrowser.ua.NavigatorExtensionContext;
  * @see NavigatorExtensionContext#addClientletSelector(ClientletSelector)
  */
 public interface ClientletSelector {
+	
 	/**
 	 * This method is invoked after a URL response has been received by the user
 	 * agent. It obtains a <code>Clientlet</code> instance that can handle the
@@ -47,7 +49,9 @@ public interface ClientletSelector {
 	 * registered one or more clientlet selectors. Extensions are invoked in
 	 * descending order of priority. If a extension returns a non-null
 	 * clientlet, the rest of the extensions are not invoked.
-	 * 
+	 *
+	 * @param request the request
+	 * @param response the response
 	 * @return A new <code>Clientlet</code> instance, or <code>null</code> if
 	 *         the clientlet selector does not know how to handle the response.
 	 * @see ClientletResponse#matches(String, String[])
@@ -60,6 +64,10 @@ public interface ClientletSelector {
 	 * <i>ascending</i> order of extension priority. Implementors will generally
 	 * have this method return <code>null</code> unless they would like to allow
 	 * extensions with lower priority to override the selection.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @return the clientlet
 	 */
 	public Clientlet lastResortSelect(ClientletRequest request,
 			ClientletResponse response);

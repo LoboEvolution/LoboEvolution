@@ -8,9 +8,12 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Interface CombinatorCondition.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  * @see Condition#SAC_AND_CONDITION
  * @see Condition#SAC_OR_CONDITION
  */
@@ -18,11 +21,15 @@ public interface CombinatorCondition extends Condition {
 
 	/**
 	 * Returns the first condition.
+	 *
+	 * @return the first condition
 	 */
 	public Condition getFirstCondition();
 
 	/**
 	 * Returns the second condition.
+	 *
+	 * @return the second condition
 	 */
 	public Condition getSecondCondition();
 }

@@ -33,17 +33,35 @@ import java.util.Map;
 
 import org.lobobrowser.util.NameValuePair;
 
+
+/**
+ * The Class MemoryURLConnection.
+ */
 public class MemoryURLConnection extends URLConnection {
+	
+	/** The memory entry. */
 	private final MemoryCacheEntry memoryEntry;
 
+	/**
+	 * Instantiates a new memory url connection.
+	 *
+	 * @param url the url
+	 * @param memoryEntry the memory entry
+	 */
 	public MemoryURLConnection(URL url, final MemoryCacheEntry memoryEntry) {
 		super(url);
 		this.memoryEntry = memoryEntry;
 	}
 
+	/** The input stream. */
 	private InputStream inputStream;
+	
+	/** The headers map. */
 	private final Map<String, List<String>> headersMap = new HashMap<String, List<String>>();
 
+	/* (non-Javadoc)
+	 * @see java.net.URLConnection#connect()
+	 */
 	@Override
 	public void connect() throws IOException {
 		if (!this.connected) {
@@ -54,6 +72,11 @@ public class MemoryURLConnection extends URLConnection {
 		}
 	}
 
+	/**
+	 * Read headers.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void readHeaders() throws IOException {
 		Map<String, List<String>> headersMap = this.headersMap;
 		List origList = this.memoryEntry.headers;
@@ -142,6 +165,9 @@ public class MemoryURLConnection extends URLConnection {
 		return this.headersMap;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.net.URLConnection#getInputStream()
+	 */
 	public InputStream getInputStream() throws IOException {
 		this.connect();
 		return this.inputStream;

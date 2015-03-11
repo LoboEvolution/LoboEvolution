@@ -23,7 +23,15 @@ package org.lobobrowser.html.domfilter;
 import org.lobobrowser.html.w3c.HTMLOptionElement;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class OptionFilter.
+ */
 public class OptionFilter implements NodeFilter {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
 	public boolean accept(Node node) {
 		return node instanceof HTMLOptionElement;
 	}

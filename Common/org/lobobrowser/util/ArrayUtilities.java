@@ -25,27 +25,54 @@ package org.lobobrowser.util;
 
 import java.util.Iterator;
 
+
 /**
+ * The Class ArrayUtilities.
+ *
  * @author J. H. S.
  */
 public class ArrayUtilities {
 
 	/**
-	 * 
+	 * Instantiates a new array utilities.
 	 */
 	private ArrayUtilities() {
 		super();
 	}
 
+	/**
+	 * Iterator.
+	 *
+	 * @param array the array
+	 * @param offset the offset
+	 * @param length the length
+	 * @return the iterator
+	 */
 	public static Iterator iterator(Object[] array, int offset, int length) {
 		return new ArrayIterator(array, offset, length);
 	}
 
+	/**
+	 * The Class ArrayIterator.
+	 */
 	private static class ArrayIterator implements Iterator {
+		
+		/** The array. */
 		private final Object[] array;
+		
+		/** The top. */
 		private final int top;
+		
+		/** The offset. */
 		private int offset;
 
+		/**
+		 * Instantiates a new array iterator.
+		 *
+		 * @param array the array
+		 * @param offset the offset
+		 * @param length the length
+		 */
 		public ArrayIterator(Object[] array, int offset, int length) {
 			this.array = array;
 			this.offset = offset;

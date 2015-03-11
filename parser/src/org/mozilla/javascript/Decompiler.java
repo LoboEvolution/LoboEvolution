@@ -8,6 +8,7 @@ package org.mozilla.javascript;
 
 import org.mozilla.javascript.ast.FunctionNode;
 
+
 /**
  * The following class save decompilation information about the source.
  * Source information is returned from the parser as a String
@@ -71,18 +72,35 @@ public class Decompiler
 
     // Marker to denote the last RC of function so it can be distinguished from
     // the last RC of object literals in case of function expressions
+    /** The Constant FUNCTION_END. */
     private static final int FUNCTION_END = Token.LAST_TOKEN + 1;
 
+    /**
+     * Gets the encoded source.
+     *
+     * @return the encoded source
+     */
     String getEncodedSource()
     {
         return sourceToString(0);
     }
 
+    /**
+     * Gets the current offset.
+     *
+     * @return the current offset
+     */
     int getCurrentOffset()
     {
         return sourceTop;
     }
 
+    /**
+     * Mark function start.
+     *
+     * @param functionType the function type
+     * @return the int
+     */
     int markFunctionStart(int functionType)
     {
         int savedOffset = getCurrentOffset();
@@ -91,6 +109,12 @@ public class Decompiler
         return savedOffset;
     }
 
+    /**
+     * Mark function end.
+     *
+     * @param functionStart the function start
+     * @return the int
+     */
     int markFunctionEnd(int functionStart)
     {
         int offset = getCurrentOffset();
@@ -98,6 +122,11 @@ public class Decompiler
         return offset;
     }
 
+    /**
+     * Adds the token.
+     *
+     * @param token the token
+     */
     void addToken(int token)
     {
         if (!(0 <= token && token <= Token.LAST_TOKEN))
@@ -106,6 +135,11 @@ public class Decompiler
         append((char)token);
     }
 
+    /**
+     * Adds the eol.
+     *
+     * @param token the token
+     */
     void addEOL(int token)
     {
         if (!(0 <= token && token <= Token.LAST_TOKEN))
@@ -115,24 +149,45 @@ public class Decompiler
         append((char)Token.EOL);
     }
 
+    /**
+     * Adds the name.
+     *
+     * @param str the str
+     */
     void addName(String str)
     {
         addToken(Token.NAME);
         appendString(str);
     }
 
+    /**
+     * Adds the string.
+     *
+     * @param str the str
+     */
     void addString(String str)
     {
         addToken(Token.STRING);
         appendString(str);
     }
 
+    /**
+     * Adds the regexp.
+     *
+     * @param regexp the regexp
+     * @param flags the flags
+     */
     void addRegexp(String regexp, String flags)
     {
         addToken(Token.REGEXP);
         appendString('/' + regexp + '/' + flags);
     }
 
+    /**
+     * Adds the number.
+     *
+     * @param n the n
+     */
     void addNumber(double n)
     {
         addToken(Token.NUMBER);
@@ -186,6 +241,11 @@ public class Decompiler
         }
     }
 
+    /**
+     * Append string.
+     *
+     * @param str the str
+     */
     private void appendString(String str)
     {
         int L = str.length();
@@ -209,6 +269,11 @@ public class Decompiler
         sourceTop = nextTop;
     }
 
+    /**
+     * Append.
+     *
+     * @param c the c
+     */
     private void append(char c)
     {
         if (sourceTop == sourceBuffer.length) {
@@ -218,6 +283,11 @@ public class Decompiler
         ++sourceTop;
     }
 
+    /**
+     * Increase source capacity.
+     *
+     * @param minimalCapacity the minimal capacity
+     */
     private void increaseSourceCapacity(int minimalCapacity)
     {
         // Call this only when capacity increase is must
@@ -231,6 +301,12 @@ public class Decompiler
         sourceBuffer = tmp;
     }
 
+    /**
+     * Source to string.
+     *
+     * @param offset the offset
+     * @return the string
+     */
     private String sourceToString(int offset)
     {
         if (offset < 0 || sourceTop < offset) Kit.codeBug();
@@ -247,11 +323,9 @@ public class Decompiler
      * version is done by the parser.
      *
      * @param source encoded source tree presentation
-     *
      * @param flags flags to select output format
-     *
      * @param properties indentation properties
-     *
+     * @return the string
      */
     public static String decompile(String source, int flags,
                                    UintMap properties)
@@ -808,16 +882,40 @@ public class Decompiler
         return result.toString();
     }
 
+    /**
+     * Gets the next.
+     *
+     * @param source the source
+     * @param length the length
+     * @param i the i
+     * @return the next
+     */
     private static int getNext(String source, int length, int i)
     {
         return (i + 1 < length) ? source.charAt(i + 1) : Token.EOF;
     }
 
+    /**
+     * Gets the source string end.
+     *
+     * @param source the source
+     * @param offset the offset
+     * @return the source string end
+     */
     private static int getSourceStringEnd(String source, int offset)
     {
         return printSourceString(source, offset, false, null);
     }
 
+    /**
+     * Prints the source string.
+     *
+     * @param source the source
+     * @param offset the offset
+     * @param asQuotedString the as quoted string
+     * @param sb the sb
+     * @return the int
+     */
     private static int printSourceString(String source, int offset,
                                          boolean asQuotedString,
                                          StringBuilder sb)
@@ -841,6 +939,14 @@ public class Decompiler
         return offset + length;
     }
 
+    /**
+     * Prints the source number.
+     *
+     * @param source the source
+     * @param offset the offset
+     * @param sb the sb
+     * @return the int
+     */
     private static int printSourceNumber(String source, int offset,
                                          StringBuilder sb)
     {
@@ -877,13 +983,16 @@ public class Decompiler
         return offset;
     }
 
+    /** The source buffer. */
     private char[] sourceBuffer = new char[128];
 
 // Per script/function source buffer top: parent source does not include a
 // nested functions source and uses function index as a reference instead.
-    private int sourceTop;
+    /** The source top. */
+private int sourceTop;
 
 // whether to do a debug print of the source information, when decompiling.
-    private static final boolean printSource = false;
+    /** The Constant printSource. */
+private static final boolean printSource = false;
 
 }

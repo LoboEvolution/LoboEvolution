@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Group options together in logical subdivisions. See the OPTGROUP element
  * definition in HTML 4.01.
@@ -40,27 +41,36 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLOptGroupElement extends HTMLElement {
+	
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the disabled
 	 */
 	public boolean getDisabled();
 
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param disabled the new disabled
 	 */
 	public void setDisabled(boolean disabled);
 
 	/**
 	 * Assigns a label to this option group. See the label attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @return the label
 	 */
 	public String getLabel();
 
 	/**
 	 * Assigns a label to this option group. See the label attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @param label the new label
 	 */
 	public void setLabel(String label);
 

@@ -23,73 +23,118 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLEmbedElement;
 
+
+/**
+ * The Class HTMLEmbedElementImpl.
+ */
 public class HTMLEmbedElementImpl extends HTMLElementImpl implements
 		HTMLEmbedElement {
 
+	/**
+	 * Instantiates a new HTML embed element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLEmbedElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLEmbedElement#getSrc()
+	 */
 	@Override
 	public String getSrc() {
 		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLEmbedElement#setSrc(java.lang.String)
+	 */
 	@Override
 	public void setSrc(String src) {
 		this.setAttribute(HtmlAttributeProperties.SRC,src);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLEmbedElement#getType()
+	 */
 	@Override
 	public String getType() {
 		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLEmbedElement#setType(java.lang.String)
+	 */
 	@Override
 	public void setType(String type) {
 		this.setAttribute(HtmlAttributeProperties.TYPE,type);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLEmbedElement#getWidth()
+	 */
 	@Override
 	public String getWidth() {
 		return this.getAttribute(HtmlAttributeProperties.WIDTH);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLEmbedElement#setWidth(java.lang.String)
+	 */
 	@Override
 	public void setWidth(String width) {
 		this.setAttribute(HtmlAttributeProperties.WIDTH,width);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLEmbedElement#getHeight()
+	 */
 	@Override
 	public String getHeight() {
 		return this.getAttribute(HtmlAttributeProperties.HEIGHT);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLEmbedElement#setHeight(java.lang.String)
+	 */
 	@Override
 	public void setHeight(String height) {
 		this.setAttribute(HtmlAttributeProperties.HEIGHT,height);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLEmbedElement#getAlign()
+	 */
 	@Override
 	public String getAlign() {
 		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLEmbedElement#setAlign(java.lang.String)
+	 */
 	@Override
 	public void setAlign(String align) {
 		this.setAttribute(HtmlAttributeProperties.ALIGN,align);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLEmbedElement#getName()
+	 */
 	@Override
 	public String getName() {
 		return this.getAttribute(HtmlAttributeProperties.NAME);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLEmbedElement#setName(java.lang.String)
+	 */
 	@Override
 	public void setName(String name) {
 		this.setAttribute(HtmlAttributeProperties.NAME,name);

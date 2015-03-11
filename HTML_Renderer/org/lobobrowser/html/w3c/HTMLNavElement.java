@@ -20,6 +20,9 @@
  */
 package org.lobobrowser.html.w3c;
 
+/**
+ * The Interface HTMLNavElement.
+ */
 public interface HTMLNavElement extends HTMLElement {
 
 }

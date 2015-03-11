@@ -27,18 +27,30 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
 /**
+ * The Class CacheStoreInfo.
+ *
  * @author J. H. S.
  */
 public class CacheStoreInfo {
+	
+	/** The length. */
 	private long length;
+	
+	/** The file infos. */
 	private final Collection<CacheFileInfo> fileInfos = new ArrayList<CacheFileInfo>();
 
+	/**
+	 * Instantiates a new cache store info.
+	 */
 	public CacheStoreInfo() {
 		super();
 	}
 
 	/**
+	 * Gets the file infos.
+	 *
 	 * @return Returns the fileInfos.
 	 */
 	public CacheFileInfo[] getFileInfos() {
@@ -46,12 +58,19 @@ public class CacheStoreInfo {
 	}
 
 	/**
+	 * Gets the length.
+	 *
 	 * @return Returns the length.
 	 */
 	public long getLength() {
 		return this.length;
 	}
 
+	/**
+	 * Adds the cache file.
+	 *
+	 * @param file the file
+	 */
 	public void addCacheFile(File file) {
 		CacheFileInfo cfi = new CacheFileInfo(file);
 		this.length += cfi.getInitialLength();

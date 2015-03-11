@@ -8,6 +8,7 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
+
 /**
  * AST node for E4X ".@" and ".." expressions, such as
  * {@code foo..bar}, {@code foo..@bar}, {@code @foo.@bar}, and
@@ -22,17 +23,39 @@ public class XmlMemberGet extends InfixExpression {
         type = Token.DOTDOT;
     }
 
+    /**
+     * Instantiates a new xml member get.
+     */
     public XmlMemberGet() {
     }
 
+    /**
+     * Instantiates a new xml member get.
+     *
+     * @param pos the pos
+     */
     public XmlMemberGet(int pos) {
         super(pos);
     }
 
+    /**
+     * Instantiates a new xml member get.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public XmlMemberGet(int pos, int len) {
         super(pos, len);
     }
 
+    /**
+     * Instantiates a new xml member get.
+     *
+     * @param pos the pos
+     * @param len the len
+     * @param target the target
+     * @param ref the ref
+     */
     public XmlMemberGet(int pos, int len, AstNode target, XmlRef ref) {
         super(pos, len, target, ref);
     }
@@ -40,11 +63,21 @@ public class XmlMemberGet extends InfixExpression {
     /**
      * Constructs a new {@code XmlMemberGet} node.
      * Updates bounds to include {@code target} and {@code ref} nodes.
+     *
+     * @param target the target
+     * @param ref the ref
      */
     public XmlMemberGet(AstNode target, XmlRef ref) {
         super(target, ref);
     }
 
+    /**
+     * Instantiates a new xml member get.
+     *
+     * @param target the target
+     * @param ref the ref
+     * @param opPos the op pos
+     */
     public XmlMemberGet(AstNode target, XmlRef ref, int opPos) {
         super(Token.DOTDOT, target, ref, opPos);
     }
@@ -52,6 +85,8 @@ public class XmlMemberGet extends InfixExpression {
     /**
      * Returns the object on which the XML member-ref expression
      * is being evaluated.  Should never be {@code null}.
+     *
+     * @return the target
      */
     public AstNode getTarget() {
         return getLeft();
@@ -59,7 +94,8 @@ public class XmlMemberGet extends InfixExpression {
 
     /**
      * Sets target object, and sets its parent to this node.
-     * @throws IllegalArgumentException if {@code target} is {@code null}
+     *
+     * @param target the new target
      */
     public void setTarget(AstNode target) {
         setLeft(target);
@@ -68,6 +104,8 @@ public class XmlMemberGet extends InfixExpression {
     /**
      * Returns the right-side XML member ref expression.
      * Should never be {@code null} unless the code is malformed.
+     *
+     * @return the member ref
      */
     public XmlRef getMemberRef() {
         return (XmlRef)getRight();
@@ -76,12 +114,16 @@ public class XmlMemberGet extends InfixExpression {
     /**
      * Sets the XML member-ref expression, and sets its parent
      * to this node.
-     * @throws IllegalArgumentException if property is {@code null}
+     *
+     * @param ref the new property
      */
     public void setProperty(XmlRef ref) {
         setRight(ref);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.InfixExpression#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();

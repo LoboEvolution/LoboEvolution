@@ -6,6 +6,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * Generic notion of callable object that can execute some script-related code
  * upon request with specified values for script scope and this objects.

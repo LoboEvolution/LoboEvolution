@@ -31,37 +31,71 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
+/**
+ * The Class FormPanel.
+ */
 public class FormPanel extends JComponent {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The fields. */
 	private final Collection<FormField> fields = new ArrayList<FormField>();
+	
+	/** The fields invalid. */
 	private boolean fieldsInvalid = false;
 
+	/**
+	 * Instantiates a new form panel.
+	 */
 	public FormPanel() {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 
+	/**
+	 * Adds the field.
+	 *
+	 * @param field the field
+	 */
 	public void addField(FormField field) {
 		// Call in GUI thread only.
 		this.fields.add(field);
 		this.fieldsInvalid = true;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#revalidate()
+	 */
 	public void revalidate() {
 		this.fieldsInvalid = true;
 		super.revalidate();
 	}
 
+	/** The min label width. */
 	private int minLabelWidth = 0;
 
+	/**
+	 * Gets the min label width.
+	 *
+	 * @return the min label width
+	 */
 	public int getMinLabelWidth() {
 		return minLabelWidth;
 	}
 
+	/**
+	 * Sets the min label width.
+	 *
+	 * @param minLabelWidth the new min label width
+	 */
 	public void setMinLabelWidth(int minLabelWidth) {
 		this.minLabelWidth = minLabelWidth;
 	}
 
+	/**
+	 * Populate components.
+	 */
 	private void populateComponents() {
 		this.removeAll();
 		int maxWidth = this.minLabelWidth;
@@ -111,6 +145,9 @@ public class FormPanel extends JComponent {
 		this.fieldsInvalid = false;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.Container#doLayout()
+	 */
 	public void doLayout() {
 		if (this.fieldsInvalid) {
 			this.populateComponents();
@@ -118,6 +155,9 @@ public class FormPanel extends JComponent {
 		super.doLayout();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
 	public Dimension getPreferredSize() {
 		if (this.fieldsInvalid) {
 			this.populateComponents();
@@ -125,6 +165,9 @@ public class FormPanel extends JComponent {
 		return super.getPreferredSize();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getMinimumSize()
+	 */
 	public Dimension getMinimumSize() {
 		if (this.fieldsInvalid) {
 			this.populateComponents();
@@ -132,6 +175,9 @@ public class FormPanel extends JComponent {
 		return super.getMinimumSize();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getMaximumSize()
+	 */
 	public Dimension getMaximumSize() {
 		if (this.fieldsInvalid) {
 			this.populateComponents();

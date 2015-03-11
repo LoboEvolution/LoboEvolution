@@ -26,10 +26,19 @@ import java.util.logging.Logger;
 
 import javax.swing.JProgressBar;
 
+
+/**
+ * The Class OpenProgressBar.
+ */
 public class OpenProgressBar extends JProgressBar {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(OpenProgressBar.class
 			.getName());
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		try {

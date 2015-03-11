@@ -33,6 +33,7 @@ import java.util.List;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 
+
 /**
  * Implementation of {@link SelectorList}.
  *
@@ -41,30 +42,56 @@ import org.w3c.css.sac.SelectorList;
  */
 public class SelectorListImpl extends LocatableImpl implements SelectorList, Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 7313376916207026333L;
 
+    /** The selectors_. */
     private List<Selector> selectors_ = new ArrayList<Selector>(10);
 
+    /**
+     * Gets the selectors.
+     *
+     * @return the selectors
+     */
     public List<Selector> getSelectors() {
         return selectors_;
     }
 
+    /**
+     * Sets the selectors.
+     *
+     * @param selectors the new selectors
+     */
     public void setSelectors(final List<Selector> selectors) {
         selectors_ = selectors;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.SelectorList#getLength()
+     */
     public int getLength() {
         return selectors_.size();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.css.sac.SelectorList#item(int)
+     */
     public Selector item(final int index) {
         return selectors_.get(index);
     }
 
+    /**
+     * Adds the.
+     *
+     * @param sel the sel
+     */
     public void add(final Selector sel) {
         selectors_.add(sel);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();

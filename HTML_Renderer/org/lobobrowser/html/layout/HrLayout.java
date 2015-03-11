@@ -24,6 +24,10 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.MarkupLayout;
 import org.lobobrowser.html.renderer.RBlockViewport;
 
+
+/**
+ * The Class HrLayout.
+ */
 public class HrLayout implements MarkupLayout {
 	/*
 	 * (non-Javadoc)

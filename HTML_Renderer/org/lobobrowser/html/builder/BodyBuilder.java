@@ -23,8 +23,15 @@ package org.lobobrowser.html.builder;
 import org.lobobrowser.html.domimpl.HTMLBodyElementImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 
+
+/**
+ * The Class BodyBuilder.
+ */
 public class BodyBuilder extends HTMLElementBuilder{
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
 	@Override
 	protected HTMLElementImpl build(String name) {
 		return new HTMLBodyElementImpl(name);

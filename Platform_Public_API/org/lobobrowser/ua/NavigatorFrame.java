@@ -29,87 +29,83 @@ import java.util.Properties;
 
 import org.lobobrowser.clientlet.ComponentContent;
 
+
 /**
  * Represents a navigator frame. In many ways this interface parallels the
  * JavaScript "Window" object.
  */
 public interface NavigatorFrame {
+	
 	/**
 	 * Opens a URL in a separate window.
-	 * 
-	 * @param urlOrPath
-	 *            The absolute URL or file path to open.
-	 * @throws MalformedURLException
+	 *
+	 * @param urlOrPath            The absolute URL or file path to open.
+	 * @return the navigator frame
+	 * @throws MalformedURLException the malformed url exception
 	 */
 	public NavigatorFrame open(String urlOrPath)
 			throws MalformedURLException;
 
 	/**
 	 * Opens a URL in a separate window.
-	 * 
-	 * @param url
-	 *            The URL to open.
+	 *
+	 * @param url            The URL to open.
+	 * @return the navigator frame
 	 */
 	public NavigatorFrame open(URL url);
 
 	/**
 	 * Opens a URL in a separate window using the properties provided.
-	 * 
-	 * @param url
-	 *            The URL to open.
-	 * @param windowProperties
-	 *            Window properties, following Javascript Window.open()
+	 *
+	 * @param url            The URL to open.
+	 * @param windowProperties            Window properties, following Javascript Window.open()
 	 *            conventions.
-	 * @throws MalformedURLException
+	 * @return the navigator frame
+	 * @throws MalformedURLException the malformed url exception
 	 */
 	public NavigatorFrame open(URL url, Properties windowProperties)
 			throws MalformedURLException;
 
 	/**
 	 * Opens a URL in a separate window.
-	 * 
-	 * @param windowProperties
-	 *            Window properties, following Javascript Window.open()
+	 *
+	 * @param url            The URL to open.
+	 * @param method            The request method, e.g. GET.
+	 * @param pinfo            The URL parameter information.
+	 * @param windowId the window id
+	 * @param windowProperties            Window properties, following Javascript Window.open()
 	 *            conventions.
-	 * @param url
-	 *            The URL to open.
-	 * @param method
-	 *            The request method, e.g. GET.
-	 * @param pinfo
-	 *            The URL parameter information.
+	 * @return the navigator frame
 	 */
 	public NavigatorFrame open(URL url, String method,
 			ParameterInfo pinfo, String windowId, Properties windowProperties);
 
 	/**
 	 * Opens a URL in a separate window.
-	 * 
-	 * @param url
-	 *            The URL to open.
-	 * @param method
-	 *            The request method, e.g. GET.
-	 * @param pinfo
-	 *            The URL parameter information.
+	 *
+	 * @param url            The URL to open.
+	 * @param method            The request method, e.g. GET.
+	 * @param pinfo            The URL parameter information.
+	 * @return the navigator frame
 	 */
 	public NavigatorFrame open(URL url, String method,
 			ParameterInfo pinfo);
 
 	/**
 	 * Navigates to a URL in the current frame.
-	 * 
-	 * @param urlOrPath
-	 *            An <i>absolute</i> URL or file path.
+	 *
+	 * @param urlOrPath            An <i>absolute</i> URL or file path.
+	 * @throws MalformedURLException the malformed url exception
 	 */
 	public void navigate(String urlOrPath)
 			throws MalformedURLException;
 
 	/**
 	 * Navigates to a URL in the current frame.
-	 * 
-	 * @param urlOrPath
-	 *            An <i>absolute</i> URL or file path.
-	 * @param requestType
-	 *            The request type.
+	 *
+	 * @param urlOrPath            An <i>absolute</i> URL or file path.
+	 * @param requestType            The request type.
+	 * @throws MalformedURLException the malformed url exception
 	 */
 	public void navigate(String urlOrPath, RequestType requestType)
 			throws MalformedURLException;
@@ -192,14 +188,13 @@ public interface NavigatorFrame {
 
 	/**
 	 * Closes the current window, if allowed.
-	 * 
-	 * @throws SecurityException
-	 *             If closing the window is now allowed in the current context.
 	 */
 	public void closeWindow();
 
 	/**
 	 * Executes a task later in the event dispatch thread.
+	 *
+	 * @param runnable the runnable
 	 */
 	public void invokeLater(Runnable runnable);
 
@@ -238,7 +233,8 @@ public interface NavigatorFrame {
 	/**
 	 * Gets a component for the current frame which could be serve as the parent
 	 * of pop-up dialogs. This is <i>not</i> the rendered component.
-	 * 
+	 *
+	 * @return the component
 	 * @see #getComponentContent()
 	 */
 	public Component getComponent();
@@ -262,7 +258,8 @@ public interface NavigatorFrame {
 
 	/**
 	 * Gets the most recent progress event.
-	 * 
+	 *
+	 * @return the progress event
 	 * @see #setProgressEvent(NavigatorProgressEvent)
 	 */
 	public NavigatorProgressEvent getProgressEvent();
@@ -270,12 +267,16 @@ public interface NavigatorFrame {
 	/**
 	 * Gets the frame that contains the current one, if any. Returns
 	 * <code>null</code> for the top frame.
+	 *
+	 * @return the parent frame
 	 */
 	public NavigatorFrame getParentFrame();
 
 	/**
 	 * Gets the top-most frame in the window. Returns the current frame if its
 	 * parent is <code>null</code>.
+	 *
+	 * @return the top frame
 	 */
 	public NavigatorFrame getTopFrame();
 
@@ -283,36 +284,102 @@ public interface NavigatorFrame {
 	// public void setItem(String name, Object value);
 	// public Object getItem(String name);
 
+	/**
+	 * Back.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean back();
 
+	/**
+	 * Forward.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean forward();
 
+	/**
+	 * Can forward.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean canForward();
 
+	/**
+	 * Can back.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean canBack();
 
+	/**
+	 * Creates the frame.
+	 *
+	 * @return the navigator frame
+	 */
 	public NavigatorFrame createFrame();
 
+	/**
+	 * Gets the default status.
+	 *
+	 * @return the default status
+	 */
 	public String getDefaultStatus();
 
+	/**
+	 * Sets the default status.
+	 *
+	 * @param value the new default status
+	 */
 	public void setDefaultStatus(String value);
 
+	/**
+	 * Gets the window id.
+	 *
+	 * @return the window id
+	 */
 	public String getWindowId();
 
+	/**
+	 * Gets the opener frame.
+	 *
+	 * @return the opener frame
+	 */
 	public NavigatorFrame getOpenerFrame();
 
+	/**
+	 * Gets the status.
+	 *
+	 * @return the status
+	 */
 	public String getStatus();
 
+	/**
+	 * Checks if is window closed.
+	 *
+	 * @return true, if is window closed
+	 */
 	public boolean isWindowClosed();
 
+	/**
+	 * Sets the status.
+	 *
+	 * @param status the new status
+	 */
 	public void setStatus(String status);
 
+	/**
+	 * Reload.
+	 */
 	public void reload();
 
 	/**
 	 * Replaces the content of the frame.
 	 * Thrown when the caller does not have permission to replace
 	 * the content of the frame.
+	 *
+	 * @param response the response
+	 * @param component the component
 	 * @see org.lobobrowser.clientlet.ClientletContext#setResultingContent(Component)
 	 */
 	public void replaceContent(
@@ -333,17 +400,23 @@ public interface NavigatorFrame {
 	 * Gets source code for content currently showing, if any.
 	 * Thrown when the caller does not have permission to get the
 	 * source code.
+	 *
+	 * @return the source code
 	 */
 	public String getSourceCode();
 
 	/**
 	 * Creates a {@link NetworkRequest} object that can be used to load data
 	 * over HTTP and other network protocols.
+	 *
+	 * @return the network request
 	 */
 	public NetworkRequest createNetworkRequest();
 
 	/**
 	 * Gets the component content currently set in the frame.
+	 *
+	 * @return the component content
 	 */
 	public ComponentContent getComponentContent();
 
@@ -370,11 +443,23 @@ public interface NavigatorFrame {
 	/**
 	 * Gets an object that represents the current navigation entry in the
 	 * frame's history.
+	 *
+	 * @return the current navigation entry
 	 */
 	public NavigationEntry getCurrentNavigationEntry();
 
+	/**
+	 * Gets the previous navigation entry.
+	 *
+	 * @return the previous navigation entry
+	 */
 	public NavigationEntry getPreviousNavigationEntry();
 
+	/**
+	 * Gets the next navigation entry.
+	 *
+	 * @return the next navigation entry
+	 */
 	public NavigationEntry getNextNavigationEntry();
 
 	/**
@@ -397,6 +482,8 @@ public interface NavigatorFrame {
 
 	/**
 	 * Gets the length for the frame's history.
+	 *
+	 * @return the history length
 	 */
 	public int getHistoryLength();
 

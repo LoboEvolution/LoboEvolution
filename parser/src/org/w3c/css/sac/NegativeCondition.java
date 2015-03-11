@@ -8,15 +8,20 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Interface NegativeCondition.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  * @see Condition#SAC_NEGATIVE_CONDITION
  */
 public interface NegativeCondition extends Condition {
 
 	/**
 	 * Returns the condition.
+	 *
+	 * @return the condition
 	 */
 	public Condition getCondition();
 }

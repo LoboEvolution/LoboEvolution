@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Root of an HTML document. See the HTML element definition in HTML 4.01.
  * <p>
@@ -39,15 +40,20 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLHtmlElement extends HTMLElement {
+	
 	/**
 	 * Version information about the document's DTD. See the version attribute
 	 * definition in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the version
 	 */
 	public String getVersion();
 
 	/**
 	 * Version information about the document's DTD. See the version attribute
 	 * definition in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param version the new version
 	 */
 	public void setVersion(String version);
 

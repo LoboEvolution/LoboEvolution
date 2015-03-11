@@ -26,29 +26,56 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLFrameSetElement;
 
+
+/**
+ * The Class HTMLFrameSetElementImpl.
+ */
 public class HTMLFrameSetElementImpl extends HTMLElementImpl implements
 		HTMLFrameSetElement {
 
+	/**
+	 * Instantiates a new HTML frame set element impl.
+	 *
+	 * @param name the name
+	 * @param noStyleSheet the no style sheet
+	 */
 	public HTMLFrameSetElementImpl(String name, boolean noStyleSheet) {
 		super(name, noStyleSheet);
 	}
 
+	/**
+	 * Instantiates a new HTML frame set element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLFrameSetElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFrameSetElement#getCols()
+	 */
 	public String getCols() {
 		return this.getAttribute(HtmlAttributeProperties.COLS);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFrameSetElement#setCols(java.lang.String)
+	 */
 	public void setCols(String cols) {
 		this.setAttribute(HtmlAttributeProperties.COLS, cols);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFrameSetElement#getRows()
+	 */
 	public String getRows() {
 		return this.getAttribute(HtmlAttributeProperties.ROWS);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFrameSetElement#setRows(java.lang.String)
+	 */
 	public void setRows(String rows) {
 		this.setAttribute(HtmlAttributeProperties.ROWS, rows);
 	}

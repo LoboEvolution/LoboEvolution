@@ -15,14 +15,26 @@ import javax.xml.xpath.XPathFunctionException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
 /**
+ * The Class AbstractFunction.
  *
  * @author richardallenbair
  */
 public abstract class AbstractFunction implements XPathFunction {
+    
+    /** The arity. */
     private int arity;
+    
+    /** The name. */
     private String name;
     
+    /**
+     * Instantiates a new abstract function.
+     *
+     * @param name the name
+     * @param arity the arity
+     */
     protected AbstractFunction(String name, int arity) {
         if (name == null) {
             throw new NullPointerException();
@@ -34,14 +46,31 @@ public abstract class AbstractFunction implements XPathFunction {
         this.name = name;
     }
     
+    /**
+     * Gets the arity.
+     *
+     * @return the arity
+     */
     public final int getArity() {
         return arity;
     }
     
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     public final String getName() {
         return name;
     }
     
+    /**
+     * Gets the string param.
+     *
+     * @param o the o
+     * @return the string param
+     * @throws XPathFunctionException the x path function exception
+     */
     protected String getStringParam(Object o) throws XPathFunctionException {
         // perform conversions
         String output = null;
@@ -58,6 +87,13 @@ public abstract class AbstractFunction implements XPathFunction {
         return output;
     }
     
+    /**
+     * Gets the number param.
+     *
+     * @param o the o
+     * @return the number param
+     * @throws XPathFunctionException the x path function exception
+     */
     protected Number getNumberParam(Object o) throws XPathFunctionException {
         // perform conversions
         Number output = null;

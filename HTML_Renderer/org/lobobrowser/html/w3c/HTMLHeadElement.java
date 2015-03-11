@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Document head information. See the HEAD element definition in HTML 4.01.
  * <p>
@@ -39,10 +40,13 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLHeadElement extends HTMLElement {
+	
 	/**
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a metadata profile. See the profile attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return the profile
 	 */
 	public String getProfile();
 
@@ -50,6 +54,8 @@ public interface HTMLHeadElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a metadata profile. See the profile attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param profile the new profile
 	 */
 	public void setProfile(String profile);
 

@@ -34,13 +34,49 @@ package org.lobobrowser.html.w3c;
 
 import org.mozilla.javascript.Function;
 
+
+/**
+ * The Interface MessagePort.
+ */
 public interface MessagePort
 {
     // MessagePort
+    /**
+     * Post message.
+     *
+     * @param message the message
+     */
     public void postMessage(Object message);
+    
+    /**
+     * Post message.
+     *
+     * @param message the message
+     * @param ports the ports
+     */
     public void postMessage(Object message, MessagePort[] ports);
+    
+    /**
+     * Start.
+     */
     public void start();
+    
+    /**
+     * Close.
+     */
     public void close();
+    
+    /**
+     * Gets the onmessage.
+     *
+     * @return the onmessage
+     */
     public Function getOnmessage();
+    
+    /**
+     * Sets the onmessage.
+     *
+     * @param onmessage the new onmessage
+     */
     public void setOnmessage(Function onmessage);
 }

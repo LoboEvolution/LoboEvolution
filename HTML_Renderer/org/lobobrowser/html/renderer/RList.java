@@ -28,7 +28,23 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.ListStyle;
 
+
+/**
+ * The Class RList.
+ */
 class RList extends BaseRListElement {
+	
+	/**
+	 * Instantiates a new r list.
+	 *
+	 * @param modelNode the model node
+	 * @param listNesting the list nesting
+	 * @param pcontext the pcontext
+	 * @param rcontext the rcontext
+	 * @param frameContext the frame context
+	 * @param parentContainer the parent container
+	 * @param parent the parent
+	 */
 	public RList(DOMNodeImpl modelNode, int listNesting,
 			UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer parentContainer,
@@ -38,6 +54,9 @@ class RList extends BaseRListElement {
 		// this.defaultMarginInsets = new java.awt.Insets(5, 0, 5, 0);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseRListElement#applyStyle(int, int)
+	 */
 	protected void applyStyle(int availWidth, int availHeight) {
 		super.applyStyle(availWidth, availHeight);
 		ListStyle listStyle = this.listStyle;
@@ -66,6 +85,9 @@ class RList extends BaseRListElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RBlock#doLayout(int, int, boolean, boolean, org.lobobrowser.html.renderer.FloatingBoundsSource, int, int, boolean)
+	 */
 	public void doLayout(int availWidth, int availHeight, boolean expandWidth,
 			boolean expandHeight, FloatingBoundsSource floatBoundsSource,
 			int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {

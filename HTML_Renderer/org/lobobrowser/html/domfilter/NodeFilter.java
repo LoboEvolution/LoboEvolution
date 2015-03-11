@@ -25,6 +25,17 @@ package org.lobobrowser.html.domfilter;
 
 import org.w3c.dom.Node;
 
+
+/**
+ * The Interface NodeFilter.
+ */
 public interface NodeFilter {
+	
+	/**
+	 * Accept.
+	 *
+	 * @param node the node
+	 * @return true, if successful
+	 */
 	public boolean accept(Node node);
 }

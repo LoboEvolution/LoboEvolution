@@ -8,6 +8,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * Class ImporterTopLevel
  *
@@ -39,33 +40,66 @@ package org.mozilla.javascript;
  * @author Norris Boyd
  */
 public class ImporterTopLevel extends TopLevel {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -9095380847465315412L;
 
+    /** The Constant IMPORTER_TAG. */
     private static final Object IMPORTER_TAG = "Importer";
 
+    /**
+     * Instantiates a new importer top level.
+     */
     public ImporterTopLevel() { }
 
+    /**
+     * Instantiates a new importer top level.
+     *
+     * @param cx the cx
+     */
     public ImporterTopLevel(Context cx) {
         this(cx, false);
     }
 
+    /**
+     * Instantiates a new importer top level.
+     *
+     * @param cx the cx
+     * @param sealed the sealed
+     */
     public ImporterTopLevel(Context cx, boolean sealed)
     {
         initStandardObjects(cx, sealed);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.TopLevel#getClassName()
+     */
     @Override
     public String getClassName()
     {
         return (topScopeFlag) ? "global" : "JavaImporter";
     }
 
+    /**
+     * Inits the.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param sealed the sealed
+     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         ImporterTopLevel obj = new ImporterTopLevel();
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
+    /**
+     * Inits the standard objects.
+     *
+     * @param cx the cx
+     * @param sealed the sealed
+     */
     public void initStandardObjects(Context cx, boolean sealed)
     {
         // Assume that Context.initStandardObjects initialize JavaImporter
@@ -85,12 +119,18 @@ public class ImporterTopLevel extends TopLevel {
         delete("constructor");
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#has(java.lang.String, org.mozilla.javascript.Scriptable)
+     */
     @Override
     public boolean has(String name, Scriptable start) {
         return super.has(name, start)
                || getPackageProperty(name, start) != NOT_FOUND;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#get(java.lang.String, org.mozilla.javascript.Scriptable)
+     */
     @Override
     public Object get(String name, Scriptable start) {
         Object result = super.get(name, start);
@@ -100,6 +140,13 @@ public class ImporterTopLevel extends TopLevel {
         return result;
     }
 
+    /**
+     * Gets the package property.
+     *
+     * @param name the name
+     * @param start the start
+     * @return the package property
+     */
     private Object getPackageProperty(String name, Scriptable start) {
         Object result = NOT_FOUND;
         Object[] elements;
@@ -122,6 +169,12 @@ public class ImporterTopLevel extends TopLevel {
     }
 
     /**
+     * Import package.
+     *
+     * @param cx the cx
+     * @param thisObj the this obj
+     * @param args the args
+     * @param funObj the fun obj
      * @deprecated Kept only for compatibility.
      */
     public void importPackage(Context cx, Scriptable thisObj, Object[] args,
@@ -130,6 +183,13 @@ public class ImporterTopLevel extends TopLevel {
         js_importPackage(args);
     }
 
+    /**
+     * Js_construct.
+     *
+     * @param scope the scope
+     * @param args the args
+     * @return the object
+     */
     private Object js_construct(Scriptable scope, Object[] args)
     {
         ImporterTopLevel result = new ImporterTopLevel();
@@ -154,6 +214,12 @@ public class ImporterTopLevel extends TopLevel {
         return result;
     }
 
+    /**
+     * Js_import class.
+     *
+     * @param args the args
+     * @return the object
+     */
     private Object js_importClass(Object[] args)
     {
         for (int i = 0; i != args.length; i++) {
@@ -167,6 +233,12 @@ public class ImporterTopLevel extends TopLevel {
         return Undefined.instance;
     }
 
+    /**
+     * Js_import package.
+     *
+     * @param args the args
+     * @return the object
+     */
     private Object js_importPackage(Object[] args)
     {
         for (int i = 0; i != args.length; i++) {
@@ -180,6 +252,11 @@ public class ImporterTopLevel extends TopLevel {
         return Undefined.instance;
     }
 
+    /**
+     * Import package.
+     *
+     * @param pkg the pkg
+     */
     private void importPackage(NativeJavaPackage pkg)
     {
         if(pkg == null) {
@@ -195,6 +272,11 @@ public class ImporterTopLevel extends TopLevel {
         }
     }
 
+    /**
+     * Import class.
+     *
+     * @param cl the cl
+     */
     private void importClass(NativeJavaClass cl)
     {
         String s = cl.getClassObject().getName();
@@ -207,6 +289,9 @@ public class ImporterTopLevel extends TopLevel {
         put(n, this, cl);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
+     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -221,6 +306,9 @@ public class ImporterTopLevel extends TopLevel {
         initPrototypeMethod(IMPORTER_TAG, id, s, arity);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -242,6 +330,13 @@ public class ImporterTopLevel extends TopLevel {
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
+    /**
+     * Real this.
+     *
+     * @param thisObj the this obj
+     * @param f the f
+     * @return the importer top level
+     */
     private ImporterTopLevel realThis(Scriptable thisObj, IdFunctionObject f)
     {
         if (topScopeFlag) {
@@ -256,7 +351,10 @@ public class ImporterTopLevel extends TopLevel {
 
 // #string_id_map#
 
-    @Override
+    /* (non-Javadoc)
+ * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
+ */
+@Override
     protected int findPrototypeId(String s)
     {
         int id;
@@ -276,6 +374,7 @@ public class ImporterTopLevel extends TopLevel {
         return id;
     }
 
+    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         Id_constructor          = 1,
         Id_importClass          = 2,
@@ -284,6 +383,9 @@ public class ImporterTopLevel extends TopLevel {
 
 // #/string_id_map#
 
-    private ObjArray importedPackages = new ObjArray();
+    /** The imported packages. */
+private ObjArray importedPackages = new ObjArray();
+    
+    /** The top scope flag. */
     private boolean topScopeFlag;
 }

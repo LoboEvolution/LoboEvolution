@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Directory list. See the DIR element definition in HTML 4.01. This element is
  * deprecated in HTML 4.01.
@@ -40,15 +41,20 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLDirectoryElement extends HTMLElement {
+	
 	/**
 	 * Reduce spacing between list items. See the compact attribute definition
 	 * in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the compact
 	 */
 	public boolean getCompact();
 
 	/**
 	 * Reduce spacing between list items. See the compact attribute definition
 	 * in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param compact the new compact
 	 */
 	public void setCompact(boolean compact);
 

@@ -26,11 +26,22 @@ package org.lobobrowser.util;
 import java.io.IOException;
 import java.io.InputStream;
 
+
+/**
+ * The Class EmptyInputStream.
+ */
 public class EmptyInputStream extends InputStream {
+	
+	/**
+	 * Instantiates a new empty input stream.
+	 */
 	public EmptyInputStream() {
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.io.InputStream#read()
+	 */
 	public int read() throws IOException {
 		return -1;
 	}

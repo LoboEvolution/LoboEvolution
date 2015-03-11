@@ -28,14 +28,30 @@ import org.lobobrowser.jweb.java.JavaSourceClientlet;
 import org.lobobrowser.jweb.javafx.CompiledJavaFXClientlet;
 import org.lobobrowser.util.Strings;
 
+
+/**
+ * The Class JWebClientletSelector.
+ */
 public class JWebClientletSelector implements ClientletSelector {
+	
+	/** The Constant JAVAFX_REQ_VERSION. */
 	private static final String JAVAFX_REQ_VERSION = "1.6.0_10";
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletSelector#lastResortSelect(org.lobobrowser.clientlet.ClientletRequest, org.lobobrowser.clientlet.ClientletResponse)
+	 */
 	public Clientlet lastResortSelect(ClientletRequest request,
 			ClientletResponse response) {
 		return null;
 	}
 
+	/**
+	 * Check java version for j web.
+	 *
+	 * @param missingFeature the missing feature
+	 * @param preferredVersion the preferred version
+	 * @throws InvalidVersionException the invalid version exception
+	 */
 	private void checkJavaVersionForJWeb(String missingFeature,
 			String preferredVersion) throws InvalidVersionException {
 		try {
@@ -53,6 +69,9 @@ public class JWebClientletSelector implements ClientletSelector {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletSelector#select(org.lobobrowser.clientlet.ClientletRequest, org.lobobrowser.clientlet.ClientletResponse)
+	 */
 	public Clientlet select(ClientletRequest request, ClientletResponse response) {
 		try {
 			if (response
@@ -89,21 +108,43 @@ public class JWebClientletSelector implements ClientletSelector {
 		}
 	}
 
+	/**
+	 * The Class InvalidVersionException.
+	 */
 	private static class InvalidVersionException extends Exception {
 
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The preferred version. */
 		private final String preferredVersion;
 
+		/**
+		 * Instantiates a new invalid version exception.
+		 *
+		 * @param missingFeature the missing feature
+		 * @param preferredVersion the preferred version
+		 */
 		public InvalidVersionException(String missingFeature,
 				String preferredVersion) {
 			super(missingFeature);
 			this.preferredVersion = preferredVersion;
 		}
 
+		/**
+		 * Gets the missing feature.
+		 *
+		 * @return the missing feature
+		 */
 		public String getMissingFeature() {
 			return this.getMessage();
 		}
 
+		/**
+		 * Gets the preferred version.
+		 *
+		 * @return the preferred version
+		 */
 		public String getPreferredVersion() {
 			return this.preferredVersion;
 		}

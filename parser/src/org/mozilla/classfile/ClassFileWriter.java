@@ -15,6 +15,7 @@ import org.mozilla.javascript.ObjArray;
 import org.mozilla.javascript.ObjToIntMap;
 import org.mozilla.javascript.UintMap;
 
+
 /**
  * ClassFileWriter
  *
@@ -33,8 +34,14 @@ public class ClassFileWriter {
      */
     public static class ClassFileFormatException extends RuntimeException {
 
+        /** The Constant serialVersionUID. */
         private static final long serialVersionUID = 1263998431033790599L;
 
+        /**
+         * Instantiates a new class file format exception.
+         *
+         * @param message the message
+         */
         ClassFileFormatException(String message) {
             super(message);
         }
@@ -66,6 +73,11 @@ public class ClassFileWriter {
         itsFlags = ACC_PUBLIC | ACC_SUPER;
     }
 
+    /**
+     * Gets the class name.
+     *
+     * @return the class name
+     */
     public final String getClassName()
     {
         return generatedClassName;
@@ -86,6 +98,7 @@ public class ClassFileWriter {
         itsInterfaces.add(Short.valueOf(interfaceIndex));
     }
 
+    /** The Constant ACC_ABSTRACT. */
     public static final short
         ACC_PUBLIC = 0x0001,
         ACC_PRIVATE = 0x0002,
@@ -116,6 +129,12 @@ public class ClassFileWriter {
         itsFlags = flags;
     }
 
+    /**
+     * Gets the slashed form.
+     *
+     * @param name the name
+     * @return the slashed form
+     */
     static String getSlashedForm(String name)
     {
         return name.replace('.', '/');
@@ -125,6 +144,9 @@ public class ClassFileWriter {
      * Convert Java class name in dot notation into
      * "Lname-with-dots-replaced-by-slashes;" form suitable for use as
      * JVM type signatures.
+     *
+     * @param name the name
+     * @return the string
      */
     public static String classNameToSignature(String name)
     {
@@ -744,6 +766,12 @@ public class ClassFileWriter {
 
     }
 
+    /**
+     * Adds the.
+     *
+     * @param theOpCode the the op code
+     * @param className the class name
+     */
     public void add(int theOpCode, String className) {
         if (DEBUGCODE) {
             System.out.println("Add "+bytecodeStr(theOpCode)
@@ -775,6 +803,14 @@ public class ClassFileWriter {
     }
 
 
+    /**
+     * Adds the.
+     *
+     * @param theOpCode the the op code
+     * @param className the class name
+     * @param fieldName the field name
+     * @param fieldType the field type
+     */
     public void add(int theOpCode, String className, String fieldName,
                     String fieldType)
     {
@@ -813,6 +849,14 @@ public class ClassFileWriter {
         }
     }
 
+    /**
+     * Adds the invoke.
+     *
+     * @param theOpCode the the op code
+     * @param className the class name
+     * @param methodName the method name
+     * @param methodType the method type
+     */
     public void addInvoke(int theOpCode, String className, String methodName,
                           String methodType)
     {
@@ -887,6 +931,11 @@ public class ClassFileWriter {
         }
     }
 
+    /**
+     * Adds the push.
+     *
+     * @param k the k
+     */
     public void addPush(boolean k)
     {
         add(k ? ByteCode.ICONST_1 : ByteCode.ICONST_0);
@@ -934,7 +983,7 @@ public class ClassFileWriter {
 
     /**
      * Generate the code to leave on stack the given string even if the
-     * string encoding exeeds the class file limit for single string constant
+     * string encoding exeeds the class file limit for single string constant.
      *
      * @param k the constant
      */
@@ -979,6 +1028,7 @@ public class ClassFileWriter {
      * format.
      *
      * @param k the string constant
+     * @return true, if is under string size limit
      */
     public boolean isUnderStringSizeLimit(String k)
     {
@@ -1093,6 +1143,13 @@ public class ClassFileWriter {
         add(ByteCode.ALOAD_0);
     }
 
+    /**
+     * Xop.
+     *
+     * @param shortOp the short op
+     * @param op the op
+     * @param local the local
+     */
     private void xop(int shortOp, int op, int local)
     {
         switch (local) {
@@ -1113,6 +1170,13 @@ public class ClassFileWriter {
         }
     }
 
+    /**
+     * Adds the table switch.
+     *
+     * @param low the low
+     * @param high the high
+     * @return the int
+     */
     public int addTableSwitch(int low, int high)
     {
         if (DEBUGCODE) {
@@ -1149,6 +1213,11 @@ public class ClassFileWriter {
         return switchStart;
     }
 
+    /**
+     * Mark table switch default.
+     *
+     * @param switchStart the switch start
+     */
     public final void markTableSwitchDefault(int switchStart)
     {
         addSuperBlockStart(itsCodeBufferTop);
@@ -1156,6 +1225,12 @@ public class ClassFileWriter {
         setTableSwitchJump(switchStart, -1, itsCodeBufferTop);
     }
 
+    /**
+     * Mark table switch case.
+     *
+     * @param switchStart the switch start
+     * @param caseIndex the case index
+     */
     public final void markTableSwitchCase(int switchStart, int caseIndex)
     {
         addSuperBlockStart(itsCodeBufferTop);
@@ -1163,6 +1238,13 @@ public class ClassFileWriter {
         setTableSwitchJump(switchStart, caseIndex, itsCodeBufferTop);
     }
 
+    /**
+     * Mark table switch case.
+     *
+     * @param switchStart the switch start
+     * @param caseIndex the case index
+     * @param stackTop the stack top
+     */
     public final void markTableSwitchCase(int switchStart, int caseIndex,
                                           int stackTop)
     {
@@ -1177,6 +1259,10 @@ public class ClassFileWriter {
     /**
      * Set a jump case for a tableswitch instruction. The jump target should
      * be marked as a super block start for stack map generation.
+     *
+     * @param switchStart the switch start
+     * @param caseIndex the case index
+     * @param jumpTarget the jump target
      */
     public void setTableSwitchJump(int switchStart, int caseIndex,
                                    int jumpTarget)
@@ -1215,6 +1301,11 @@ public class ClassFileWriter {
         putInt32(jumpTarget - switchStart, itsCodeBuffer, caseOffset);
     }
 
+    /**
+     * Acquire label.
+     *
+     * @return the int
+     */
     public int acquireLabel()
     {
         int top = itsLabelTableTop;
@@ -1232,6 +1323,11 @@ public class ClassFileWriter {
         return top | 0x80000000;
     }
 
+    /**
+     * Mark label.
+     *
+     * @param label the label
+     */
     public void markLabel(int label)
     {
         if (!(label < 0))
@@ -1248,17 +1344,34 @@ public class ClassFileWriter {
         itsLabelTable[label] = itsCodeBufferTop;
     }
 
+    /**
+     * Mark label.
+     *
+     * @param label the label
+     * @param stackTop the stack top
+     */
     public void markLabel(int label, short stackTop)
     {
         markLabel(label);
         itsStackTop = stackTop;
     }
 
+    /**
+     * Mark handler.
+     *
+     * @param theLabel the the label
+     */
     public void markHandler(int theLabel) {
         itsStackTop = 1;
         markLabel(theLabel);
     }
 
+    /**
+     * Gets the label pc.
+     *
+     * @param label the label
+     * @return the label pc
+     */
     public int getLabelPC(int label)
     {
         if (!(label < 0))
@@ -1269,6 +1382,12 @@ public class ClassFileWriter {
         return itsLabelTable[label];
     }
 
+    /**
+     * Adds the label fixup.
+     *
+     * @param label the label
+     * @param fixupSite the fixup site
+     */
     private void addLabelFixup(int label, int fixupSite)
     {
         if (!(label < 0))
@@ -1290,6 +1409,9 @@ public class ClassFileWriter {
         itsFixupTable[top] = ((long)label << 32) | fixupSite;
     }
 
+    /**
+     * Fix label gotos.
+     */
     private  void fixLabelGotos()
     {
         byte[] codeBuffer = itsCodeBuffer;
@@ -1325,14 +1447,29 @@ public class ClassFileWriter {
         return itsCodeBufferTop;
     }
 
+    /**
+     * Gets the stack top.
+     *
+     * @return the stack top
+     */
     public short getStackTop() {
         return itsStackTop;
     }
 
+    /**
+     * Sets the stack top.
+     *
+     * @param n the new stack top
+     */
     public void setStackTop(short n) {
         itsStackTop = n;
     }
 
+    /**
+     * Adjust stack top.
+     *
+     * @param delta the delta
+     */
     public void adjustStackTop(int delta) {
         int newStack = itsStackTop + delta;
         if (newStack < 0 || Short.MAX_VALUE < newStack) badStack(newStack);
@@ -1344,18 +1481,34 @@ public class ClassFileWriter {
         }
     }
 
+    /**
+     * Adds the to code buffer.
+     *
+     * @param b the b
+     */
     private void addToCodeBuffer(int b)
     {
         int N = addReservedCodeSpace(1);
         itsCodeBuffer[N] = (byte)b;
     }
 
+    /**
+     * Adds the to code int16.
+     *
+     * @param value the value
+     */
     private void addToCodeInt16(int value)
     {
         int N = addReservedCodeSpace(2);
         putInt16(value, itsCodeBuffer, N);
     }
 
+    /**
+     * Adds the reserved code space.
+     *
+     * @param size the size
+     * @return the int
+     */
     private int addReservedCodeSpace(int size)
     {
         if (itsCurrentMethod == null)
@@ -1373,6 +1526,14 @@ public class ClassFileWriter {
         return oldTop;
     }
 
+    /**
+     * Adds the exception handler.
+     *
+     * @param startLabel the start label
+     * @param endLabel the end label
+     * @param handlerLabel the handler label
+     * @param catchClassName the catch class name
+     */
     public void addExceptionHandler(int startLabel, int endLabel,
                                     int handlerLabel, String catchClassName)
     {
@@ -1409,6 +1570,11 @@ public class ClassFileWriter {
 
     }
 
+    /**
+     * Adds the line number entry.
+     *
+     * @param lineNumber the line number
+     */
     public void addLineNumberEntry(short lineNumber) {
         if (itsCurrentMethod == null)
             throw new IllegalArgumentException("No method to stop");
@@ -1432,6 +1598,10 @@ public class ClassFileWriter {
      * for a given super block.
      */
     final class StackMapTable {
+        
+        /**
+         * Instantiates a new stack map table.
+         */
         StackMapTable() {
             superBlocks = null;
             locals = stack = null;
@@ -1444,6 +1614,9 @@ public class ClassFileWriter {
             wide = false;
         }
 
+        /**
+         * Generate.
+         */
         void generate() {
             superBlocks = new SuperBlock[itsSuperBlockStartsTop];
             int[] initialLocals = createInitialLocals();
@@ -1484,6 +1657,12 @@ public class ClassFileWriter {
             }
         }
 
+        /**
+         * Gets the super block from offset.
+         *
+         * @param offset the offset
+         * @return the super block from offset
+         */
         private SuperBlock getSuperBlockFromOffset(int offset) {
             for (int i = 0; i < superBlocks.length; i++) {
                 SuperBlock sb = superBlocks[i];
@@ -1499,6 +1678,9 @@ public class ClassFileWriter {
         /**
          * Determine whether or not an opcode is an actual end to a super
          * block. This includes any returns or unconditional jumps.
+         *
+         * @param opcode the opcode
+         * @return true, if is super block end
          */
         private boolean isSuperBlockEnd(int opcode) {
             switch (opcode) {
@@ -1520,9 +1702,11 @@ public class ClassFileWriter {
 
         /**
          * Calculate partial dependencies for super blocks.
-         *
+         * 
          * This is used as a workaround for dead code that is generated. Only
          * one dependency per super block is given.
+         *
+         * @return the super block dependencies
          */
         private SuperBlock[] getSuperBlockDependencies() {
             SuperBlock[] deps = new SuperBlock[superBlocks.length];
@@ -1551,6 +1735,7 @@ public class ClassFileWriter {
          * Get the target super block of a branch instruction.
          *
          * @param bci the index of the branch instruction in the code buffer
+         * @return the branch target
          */
         private SuperBlock getBranchTarget(int bci) {
             int target;
@@ -1565,6 +1750,9 @@ public class ClassFileWriter {
         /**
          * Determine whether or not an opcode is a conditional or unconditional
          * jump.
+         *
+         * @param opcode the opcode
+         * @return true, if is branch
          */
         private boolean isBranch(int opcode) {
             switch (opcode) {
@@ -1592,14 +1780,24 @@ public class ClassFileWriter {
             }
         }
 
+        /**
+         * Gets the operand.
+         *
+         * @param offset the offset
+         * @return the operand
+         */
         private int getOperand(int offset) {
             return getOperand(offset, 1);
         }
 
         /**
          * Extract a logical operand from the byte code.
-         *
+         * 
          * This is used, for example, to get branch offsets.
+         *
+         * @param start the start
+         * @param size the size
+         * @return the operand
          */
         private int getOperand(int start, int size) {
             int result = 0;
@@ -1639,11 +1837,11 @@ public class ClassFileWriter {
 
         /**
          * Replace the contents of a super block with no-ops.
-         *
+         * 
          * The above description is not strictly true; the last instruction is
          * an athrow instruction. This technique is borrowed from ASM's
          * developer guide: http://asm.ow2.org/doc/developer-guide.html#deadcode
-         *
+         * 
          * The proposed algorithm fills a block with nop, ending it with an
          * athrow. The stack map generated would be empty locals with an
          * exception on the stack. In theory, it shouldn't matter what the
@@ -1651,9 +1849,11 @@ public class ClassFileWriter {
          * However, it turns out that if the code being modified falls into an
          * exception handler, it causes problems. Therefore, if it does, then
          * we steal the locals from the exception block.
-         *
+         * 
          * If the block itself is an exception handler, we remove it from the
          * exception table to simplify block dependencies.
+         *
+         * @param sb the sb
          */
         private void killSuperBlock(SuperBlock sb) {
             int[] locals = new int[0];
@@ -1703,6 +1903,9 @@ public class ClassFileWriter {
             }
         }
 
+        /**
+         * Execute work list.
+         */
         private void executeWorkList() {
             while (workListTop > 0) {
                 SuperBlock work = workList[--workListTop];
@@ -1717,6 +1920,8 @@ public class ClassFileWriter {
 
         /**
          * Simulate the local variable and op stack for a super block.
+         *
+         * @param work the work
          */
         private void executeBlock(SuperBlock work) {
             int bc = 0;
@@ -1832,6 +2037,8 @@ public class ClassFileWriter {
         /**
          * Perform a merge of type state and add the super block to the work
          * list if the merge changed anything.
+         *
+         * @param sb the sb
          */
         private void flowInto(SuperBlock sb) {
             if (sb.merge(locals, localsTop, stack, stackTop, itsConstantPool)) {
@@ -1839,6 +2046,11 @@ public class ClassFileWriter {
             }
         }
 
+        /**
+         * Adds the to work list.
+         *
+         * @param sb the sb
+         */
         private void addToWorkList(SuperBlock sb) {
             if (!sb.isInQueue()) {
                 sb.setInQueue(true);
@@ -2278,6 +2490,11 @@ public class ClassFileWriter {
             return length;
         }
 
+        /**
+         * Execute a load.
+         *
+         * @param localIndex the local index
+         */
         private void executeALoad(int localIndex) {
             int type = getLocal(localIndex);
             int tag = TypeInfo.getTag(type);
@@ -2293,10 +2510,21 @@ public class ClassFileWriter {
             }
         }
 
+        /**
+         * Execute a store.
+         *
+         * @param localIndex the local index
+         */
         private void executeAStore(int localIndex) {
             setLocal(localIndex, pop());
         }
 
+        /**
+         * Execute store.
+         *
+         * @param localIndex the local index
+         * @param typeInfo the type info
+         */
         private void executeStore(int localIndex, int typeInfo) {
             pop();
             setLocal(localIndex, typeInfo);
@@ -2306,12 +2534,23 @@ public class ClassFileWriter {
          * Change an UNINITIALIZED_OBJECT or UNINITIALIZED_THIS to the proper
          * type of the object. This occurs when the proper constructor is
          * invoked.
+         *
+         * @param prevType the prev type
+         * @param newType the new type
          */
         private void initializeTypeInfo(int prevType, int newType) {
             initializeTypeInfo(prevType, newType, locals, localsTop);
             initializeTypeInfo(prevType, newType, stack, stackTop);
         }
 
+        /**
+         * Initialize type info.
+         *
+         * @param prevType the prev type
+         * @param newType the new type
+         * @param data the data
+         * @param dataTop the data top
+         */
         private void initializeTypeInfo(int prevType, int newType, int[] data,
                                         int dataTop) {
             for (int i = 0; i < dataTop; i++) {
@@ -2321,6 +2560,12 @@ public class ClassFileWriter {
             }
         }
 
+        /**
+         * Gets the local.
+         *
+         * @param localIndex the local index
+         * @return the local
+         */
         private int getLocal(int localIndex) {
             if (localIndex < localsTop) {
                 return locals[localIndex];
@@ -2329,6 +2574,12 @@ public class ClassFileWriter {
             }
         }
 
+        /**
+         * Sets the local.
+         *
+         * @param localIndex the local index
+         * @param typeInfo the type info
+         */
         private void setLocal(int localIndex, int typeInfo) {
             if (localIndex >= localsTop) {
                 int[] tmp = new int[localIndex + 1];
@@ -2339,6 +2590,11 @@ public class ClassFileWriter {
             locals[localIndex] = typeInfo;
         }
 
+        /**
+         * Push.
+         *
+         * @param typeInfo the type info
+         */
         private void push(int typeInfo) {
             if (stackTop == stack.length) {
                 int[] tmp = new int[Math.max(stackTop * 2, 4)];
@@ -2348,15 +2604,22 @@ public class ClassFileWriter {
             stack[stackTop++] = typeInfo;
         }
 
+        /**
+         * Pop.
+         *
+         * @return the int
+         */
         private int pop() {
             return stack[--stackTop];
         }
 
         /**
          * Push two words onto the op stack.
-         *
+         * 
          * This is only meant to be used as a complement to pop2(), and both
          * methods are helpers for the more complex DUP operations.
+         *
+         * @param typeInfo the type info
          */
         private void push2(long typeInfo) {
             push((int) (typeInfo & 0xFFFFFF));
@@ -2368,11 +2631,13 @@ public class ClassFileWriter {
 
         /**
          * Pop two words from the op stack.
-         *
+         * 
          * If the top of the stack is a DOUBLE or LONG, then the bottom 32 bits
          * reflects the appropriate type and the top 32 bits are 0. Otherwise,
          * the top 32 bits are the first word on the stack and the lower 32
          * bits are the second word on the stack.
+         *
+         * @return the long
          */
         private long pop2() {
             long type = pop();
@@ -2383,17 +2648,22 @@ public class ClassFileWriter {
             }
         }
 
+        /**
+         * Clear stack.
+         */
         private void clearStack() {
             stackTop = 0;
         }
 
         /**
          * Compute the output size of the stack map table.
-         *
+         * 
          * Because this would share much in common with actual writing of the
          * stack map table, we instead just write the stack map table to a
          * buffer and return the size from it. The buffer is later used in
          * the actual writing of bytecode.
+         *
+         * @return the int
          */
         int computeWriteSize() {
             // Allocate a buffer that can handle the worst case size of the
@@ -2404,6 +2674,13 @@ public class ClassFileWriter {
             return rawStackMapTop + 2;
         }
 
+        /**
+         * Write.
+         *
+         * @param data the data
+         * @param offset the offset
+         * @return the int
+         */
         int write(byte[] data, int offset) {
             offset = putInt32(rawStackMapTop + 2, data, offset);
             offset = putInt16(superBlocks.length - 1, data, offset);
@@ -2481,16 +2758,24 @@ public class ClassFileWriter {
 
         /**
          * Get the worst case write size of the stack map table.
-         *
+         * 
          * This computes how much full frames would take, if each full frame
          * contained the maximum number of locals and stack operands, and each
          * verification type was 3 bytes.
+         *
+         * @return the worst case write size
          */
         private int getWorstCaseWriteSize() {
             return (superBlocks.length - 1) * (7 + itsMaxLocals * 3 +
                                                itsMaxStack * 3);
         }
 
+        /**
+         * Write same frame.
+         *
+         * @param locals the locals
+         * @param offsetDelta the offset delta
+         */
         private void writeSameFrame(int[] locals, int offsetDelta) {
             if (offsetDelta <= 63) {
                 // Output a same_frame frame. Despite the name,
@@ -2506,6 +2791,13 @@ public class ClassFileWriter {
             }
         }
 
+        /**
+         * Write same locals one stack item frame.
+         *
+         * @param locals the locals
+         * @param stack the stack
+         * @param offsetDelta the offset delta
+         */
         private void writeSameLocalsOneStackItemFrame(int[] locals,
                                                       int[] stack,
                                                       int offsetDelta) {
@@ -2525,6 +2817,13 @@ public class ClassFileWriter {
             writeType(stack[0]);
         }
 
+        /**
+         * Write full frame.
+         *
+         * @param locals the locals
+         * @param stack the stack
+         * @param offsetDelta the offset delta
+         */
         private void writeFullFrame(int[] locals, int[] stack,
                                     int offsetDelta) {
             rawStackMap[rawStackMapTop++] = (byte) 255;
@@ -2537,6 +2836,13 @@ public class ClassFileWriter {
             rawStackMapTop = writeTypes(stack);
         }
 
+        /**
+         * Write append frame.
+         *
+         * @param locals the locals
+         * @param localsDelta the locals delta
+         * @param offsetDelta the offset delta
+         */
         private void writeAppendFrame(int[] locals, int localsDelta,
                                       int offsetDelta) {
             int start = locals.length - localsDelta;
@@ -2545,15 +2851,34 @@ public class ClassFileWriter {
             rawStackMapTop = writeTypes(locals, start);
         }
 
+        /**
+         * Write chop frame.
+         *
+         * @param localsDelta the locals delta
+         * @param offsetDelta the offset delta
+         */
         private void writeChopFrame(int localsDelta, int offsetDelta) {
             rawStackMap[rawStackMapTop++] = (byte) (251 - localsDelta);
             rawStackMapTop = putInt16(offsetDelta, rawStackMap, rawStackMapTop);
         }
 
+        /**
+         * Write types.
+         *
+         * @param types the types
+         * @return the int
+         */
         private int writeTypes(int[] types) {
             return writeTypes(types, 0);
         }
 
+        /**
+         * Write types.
+         *
+         * @param types the types
+         * @param start the start
+         * @return the int
+         */
         private int writeTypes(int[] types, int start) {
             int startOffset = rawStackMapTop;
             for (int i = start; i < types.length; i++) {
@@ -2562,6 +2887,12 @@ public class ClassFileWriter {
             return rawStackMapTop;
         }
 
+        /**
+         * Write type.
+         *
+         * @param type the type
+         * @return the int
+         */
         private int writeType(int type) {
             int tag = type & 0xFF;
             rawStackMap[rawStackMapTop++] = (byte) tag;
@@ -2577,27 +2908,48 @@ public class ClassFileWriter {
         // execution of a block, these are initialized to copies of the initial
         // block type state and are modified by the actual stack/local
         // emulation.
+        /** The locals. */
         private int[] locals;
+        
+        /** The locals top. */
         private int localsTop;
+        
+        /** The stack. */
         private int[] stack;
+        
+        /** The stack top. */
         private int stackTop;
 
+        /** The work list. */
         private SuperBlock[] workList;
+        
+        /** The work list top. */
         private int workListTop;
 
+        /** The super blocks. */
         private SuperBlock[] superBlocks;
+        
+        /** The super block deps. */
         private SuperBlock[] superBlockDeps;
 
+        /** The raw stack map. */
         private byte[] rawStackMap;
+        
+        /** The raw stack map top. */
         private int rawStackMapTop;
 
+        /** The wide. */
         private boolean wide;
 
+        /** The Constant DEBUGSTACKMAP. */
         static final boolean DEBUGSTACKMAP = false;
     }
 
     /**
      * Convert a newarray operand into an internal type.
+     *
+     * @param type the type
+     * @return the char
      */
     private static char arrayTypeToName(int type) {
         switch (type) {
@@ -2624,8 +2976,11 @@ public class ClassFileWriter {
 
     /**
      * Convert a class descriptor into an internal name.
-     *
+     * 
      * For example, descriptor Ljava/lang/Object; becomes java/lang/Object.
+     *
+     * @param descriptor the descriptor
+     * @return the string
      */
     private static String classDescriptorToInternalName(String descriptor) {
         return descriptor.substring(1, descriptor.length() - 1);
@@ -2635,6 +2990,7 @@ public class ClassFileWriter {
      * Convert a non-method type descriptor into an internal type.
      *
      * @param descriptor the simple type descriptor to convert
+     * @return the string
      */
     private static String descriptorToInternalName(String descriptor) {
         switch (descriptor.charAt(0)) {
@@ -2659,9 +3015,11 @@ public class ClassFileWriter {
 
     /**
      * Compute the initial local variable array for the current method.
-     *
+     * 
      * Creates an array of the size of the method's max locals, regardless of
      * the number of parameters in the method.
+     *
+     * @return the int[]
      */
     private int[] createInitialLocals() {
         int[] initialLocals = new int[itsMaxLocals];
@@ -2736,6 +3094,11 @@ public class ClassFileWriter {
         oStream.write(array);
     }
 
+    /**
+     * Gets the write size.
+     *
+     * @return the write size
+     */
     private int getWriteSize()
     {
         int size = 0;
@@ -2776,6 +3139,8 @@ public class ClassFileWriter {
 
     /**
      * Get the class file as array of bytesto the OutputStream.
+     *
+     * @return the byte[]
      */
     public byte[] toByteArray()
     {
@@ -2828,12 +3193,25 @@ public class ClassFileWriter {
         return data;
     }
 
+    /**
+     * Put int64.
+     *
+     * @param value the value
+     * @param array the array
+     * @param offset the offset
+     * @return the int
+     */
     static int putInt64(long value, byte[] array, int offset)
     {
         offset = putInt32((int)(value >>> 32), array, offset);
         return putInt32((int)value, array, offset);
     }
 
+    /**
+     * Bad stack.
+     *
+     * @param value the value
+     */
     private static void badStack(int value)
     {
         String s;
@@ -2850,6 +3228,12 @@ public class ClassFileWriter {
         If Java really supported references we wouldn't have to be this
         perverted.
     */
+    /**
+     * Size of parameters.
+     *
+     * @param pString the string
+     * @return the int
+     */
     private static int sizeOfParameters(String pString)
     {
         int length = pString.length();
@@ -2956,6 +3340,14 @@ public class ClassFileWriter {
             "Bad parameter signature: "+pString);
     }
 
+    /**
+     * Put int16.
+     *
+     * @param value the value
+     * @param array the array
+     * @param offset the offset
+     * @return the int
+     */
     static int putInt16(int value, byte[] array, int offset)
     {
         array[offset + 0] = (byte)(value >>> 8);
@@ -2963,6 +3355,14 @@ public class ClassFileWriter {
         return offset + 2;
     }
 
+    /**
+     * Put int32.
+     *
+     * @param value the value
+     * @param array the array
+     * @param offset the offset
+     * @return the int
+     */
     static int putInt32(int value, byte[] array, int offset)
     {
         array[offset + 0] = (byte)(value >>> 24);
@@ -2974,9 +3374,13 @@ public class ClassFileWriter {
 
     /**
      * Size of a bytecode instruction, counting the opcode and its operands.
-     *
+     * 
      * This is different from opcodeCount, since opcodeCount counts logical
      * operands.
+     *
+     * @param opcode the opcode
+     * @param wide the wide
+     * @return the int
      */
     static int opcodeLength(int opcode, boolean wide) {
         switch (opcode) {
@@ -3205,6 +3609,9 @@ public class ClassFileWriter {
 
     /**
      * Number of operands accompanying the opcode.
+     *
+     * @param opcode the opcode
+     * @return the int
      */
     static int opcodeCount(int opcode)
     {
@@ -3425,6 +3832,9 @@ public class ClassFileWriter {
 
     /**
      *  The effect on the operand stack of a given opcode.
+     *
+     * @param opcode the opcode
+     * @return the int
      */
     static int stackChange(int opcode)
     {
@@ -3879,7 +4289,13 @@ public class ClassFileWriter {
         throw new IllegalArgumentException("Bad opcode: "+opcode);
     }
 */
-    private static String bytecodeStr(int code)
+    /**
+         * Bytecode str.
+         *
+         * @param code the code
+         * @return the string
+         */
+        private static String bytecodeStr(int code)
     {
         if (DEBUGSTACK || DEBUGCODE) {
             switch (code) {
@@ -4093,6 +4509,12 @@ public class ClassFileWriter {
         return "";
     }
 
+    /**
+     * Gets the char buffer.
+     *
+     * @param minimalSize the minimal size
+     * @return the char buffer
+     */
     final char[] getCharBuffer(int minimalSize)
     {
         if (minimalSize > tmpCharBuffer.length) {
@@ -4105,12 +4527,14 @@ public class ClassFileWriter {
 
     /**
      * Add a pc as the start of super block.
-     *
+     * 
      * A pc is the beginning of a super block if:
      * - pc == 0
      * - it is the target of a branch instruction
      * - it is the beginning of an exception handler
      * - it is directly after an unconditional jump
+     *
+     * @param pc the pc
      */
     private void addSuperBlockStart(int pc) {
         if (GenerateStackMap) {
@@ -4159,21 +4583,35 @@ public class ClassFileWriter {
         }
     }
 
+    /** The its super block starts. */
     private int[] itsSuperBlockStarts = null;
+    
+    /** The its super block starts top. */
     private int itsSuperBlockStartsTop = 0;
+    
+    /** The Constant SuperBlockStartsSize. */
     private static final int SuperBlockStartsSize = 4;
 
     // Used to find blocks of code with no dependencies (aka dead code).
     // Necessary for generating type information for dead code, which is
     // expected by the Sun verifier. It is only necessary to store a single
     // jump source to determine if a block is reachable or not.
+    /** The its jump froms. */
     private UintMap itsJumpFroms = null;
 
+    /** The Constant LineNumberTableSize. */
     private static final int LineNumberTableSize = 16;
+    
+    /** The Constant ExceptionTableSize. */
     private static final int ExceptionTableSize = 4;
 
+    /** The Constant MajorVersion. */
     private static final int MajorVersion;
+    
+    /** The Constant MinorVersion. */
     private static final int MinorVersion;
+    
+    /** The Constant GenerateStackMap. */
     private static final boolean GenerateStackMap;
 
     static {
@@ -4221,50 +4659,98 @@ public class ClassFileWriter {
         }
     }
 
+    /** The Constant FileHeaderConstant. */
     private final static int FileHeaderConstant = 0xCAFEBABE;
     // Set DEBUG flags to true to get better checking and progress info.
+    /** The Constant DEBUGSTACK. */
     private static final boolean DEBUGSTACK = false;
+    
+    /** The Constant DEBUGLABELS. */
     private static final boolean DEBUGLABELS = false;
+    
+    /** The Constant DEBUGCODE. */
     private static final boolean DEBUGCODE = false;
 
+    /** The generated class name. */
     private String generatedClassName;
 
+    /** The its exception table. */
     private ExceptionTableEntry itsExceptionTable[];
+    
+    /** The its exception table top. */
     private int itsExceptionTableTop;
 
+    /** The its line number table. */
     private int itsLineNumberTable[];   // pack start_pc & line_number together
+    
+    /** The its line number table top. */
     private int itsLineNumberTableTop;
 
+    /** The its code buffer. */
     private byte[] itsCodeBuffer = new byte[256];
+    
+    /** The its code buffer top. */
     private int itsCodeBufferTop;
 
+    /** The its constant pool. */
     private ConstantPool itsConstantPool;
 
+    /** The its current method. */
     private ClassFileMethod itsCurrentMethod;
+    
+    /** The its stack top. */
     private short itsStackTop;
 
+    /** The its max stack. */
     private short itsMaxStack;
+    
+    /** The its max locals. */
     private short itsMaxLocals;
 
+    /** The its methods. */
     private ObjArray itsMethods = new ObjArray();
+    
+    /** The its fields. */
     private ObjArray itsFields = new ObjArray();
+    
+    /** The its interfaces. */
     private ObjArray itsInterfaces = new ObjArray();
 
+    /** The its flags. */
     private short itsFlags;
+    
+    /** The its this class index. */
     private short itsThisClassIndex;
+    
+    /** The its super class index. */
     private short itsSuperClassIndex;
+    
+    /** The its source file name index. */
     private short itsSourceFileNameIndex;
 
+    /** The Constant MIN_LABEL_TABLE_SIZE. */
     private static final int MIN_LABEL_TABLE_SIZE = 32;
+    
+    /** The its label table. */
     private int[] itsLabelTable;
+    
+    /** The its label table top. */
     private int itsLabelTableTop;
 
 // itsFixupTable[i] = (label_index << 32) | fixup_site
-    private static final int MIN_FIXUP_TABLE_SIZE = 40;
+    /** The Constant MIN_FIXUP_TABLE_SIZE. */
+private static final int MIN_FIXUP_TABLE_SIZE = 40;
+    
+    /** The its fixup table. */
     private long[] itsFixupTable;
+    
+    /** The its fixup table top. */
     private int itsFixupTableTop;
+    
+    /** The its var descriptors. */
     private ObjArray itsVarDescriptors;
 
+    /** The tmp char buffer. */
     private char[] tmpCharBuffer = new char[64];
 }
 

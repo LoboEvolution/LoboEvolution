@@ -25,15 +25,19 @@ package org.lobobrowser.ua;
 
 import java.util.EventListener;
 
+
 /**
  * Listener of {@link NetworkRequest} state changes.
  * 
  * @see NetworkRequest#addNetworkRequestListener(NetworkRequestListener)
  */
 public interface NetworkRequestListener extends EventListener {
+	
 	/**
 	 * This method is called when the <code>readyState</code> property of the
 	 * request changes.
+	 *
+	 * @param event the event
 	 */
 	public void readyStateChanged(NetworkRequestEvent event);
 }

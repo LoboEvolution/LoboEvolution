@@ -36,11 +36,23 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.HtmlController;
 import org.lobobrowser.util.gui.WrapperLayout;
 
+
+/**
+ * The Class InputRadioControl.
+ */
 public class InputRadioControl extends BaseInputControl {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The widget. */
 	private final JRadioButton widget;
 
+	/**
+	 * Instantiates a new input radio control.
+	 *
+	 * @param modelNode the model node
+	 */
 	public InputRadioControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		this.setLayout(WrapperLayout.getInstance());
@@ -87,8 +99,12 @@ public class InputRadioControl extends BaseInputControl {
 		});
 	}
 
+	/** The button group. */
 	private ButtonGroup buttonGroup;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#reset(int, int)
+	 */
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 	}
@@ -130,15 +146,27 @@ public class InputRadioControl extends BaseInputControl {
 		this.widget.setEnabled(!disabled);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.InputContext#resetInput()
+	 */
 	public void resetInput() {
 		this.widget.setSelected(this.controlElement
 				.getAttributeAsBoolean("checked"));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#getValue()
+	 */
 	public String getValue() {
 		return this.controlElement.getAttribute(HtmlAttributeProperties.VALUE);
 	}
 	
+	/**
+	 * Direction.
+	 *
+	 * @param dir the dir
+	 * @return the component orientation
+	 */
 	private ComponentOrientation direction(String dir) {
 
 		if ("ltr".equalsIgnoreCase(dir)) {

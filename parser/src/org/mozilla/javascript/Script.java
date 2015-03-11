@@ -8,13 +8,15 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * All compiled scripts implement this interface.
  * <p>
  * This class encapsulates script execution relative to an
  * object scope.
- * @since 1.3
+ *
  * @author Norris Boyd
+ * @since 1.3
  */
 
 public interface Script {

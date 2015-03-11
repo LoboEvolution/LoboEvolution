@@ -23,15 +23,25 @@ package org.lobobrowser.html.renderer;
 
 import java.util.Iterator;
 
+
 /**
  * A {@link Renderable} with children.
  */
 public interface RCollection extends BoundableRenderable {
+	
 	/**
 	 * Gets the collection of {@link Renderable} children.
+	 *
+	 * @return the renderables
 	 */
 	public Iterator getRenderables();
 
+	/**
+	 * Update widget bounds.
+	 *
+	 * @param guiX the gui x
+	 * @param guiY the gui y
+	 */
 	public void updateWidgetBounds(int guiX, int guiY);
 
 	/**
@@ -39,7 +49,13 @@ public interface RCollection extends BoundableRenderable {
 	 */
 	public void invalidateLayoutDeep();
 
+	/**
+	 * Focus.
+	 */
 	public void focus();
 
+	/**
+	 * Blur.
+	 */
 	public void blur();
 }

@@ -8,6 +8,7 @@ package org.mozilla.javascript.arrays;
 
 import java.nio.DoubleBuffer;
 
+
 /**
  * An implementation of the external array using an array of "double"s. Only "number" types may be set in
  * the array.
@@ -18,27 +19,49 @@ import java.nio.DoubleBuffer;
 public final class ExternalDoubleArray
     extends ExternalArray
 {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -773914084068347275L;
 
+    /** The array. */
     private final DoubleBuffer array;
 
+    /**
+     * Instantiates a new external double array.
+     *
+     * @param array the array
+     */
     public ExternalDoubleArray(DoubleBuffer array) {
         this.array = array;
     }
 
+    /**
+     * Gets the array.
+     *
+     * @return the array
+     */
     public DoubleBuffer getArray() {
         return array;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#getElement(int)
+     */
     protected Object getElement(int index) {
         return array.get(array.position() + index);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#putElement(int, java.lang.Object)
+     */
     protected void putElement(int index, Object value) {
         double val = ((Number)value).doubleValue();
         array.put(array.position() + index, val);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#getLength()
+     */
     public int getLength() {
         return array.remaining();
     }

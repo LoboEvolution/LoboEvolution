@@ -24,16 +24,26 @@ package org.lobobrowser.io;
 
 import java.io.IOException;
 
+
 /**
  * This is an <code>IOException</code> thrown when the managed store quota would
  * be exceeded after creating a managed file, a directory, or writing to a
  * managed file.
  */
 public class QuotaExceededException extends IOException {
+	
+	/**
+	 * Instantiates a new quota exceeded exception.
+	 */
 	public QuotaExceededException() {
 		super();
 	}
 
+	/**
+	 * Instantiates a new quota exceeded exception.
+	 *
+	 * @param message the message
+	 */
 	public QuotaExceededException(String message) {
 		super(message);
 	}

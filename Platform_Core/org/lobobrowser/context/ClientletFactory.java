@@ -29,15 +29,28 @@ import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ClientletSelector;
 import org.lobobrowser.security.GenericLocalPermission;
 
+
+/**
+ * A factory for creating Clientlet objects.
+ */
 public class ClientletFactory {
 	// private static final Logger logger =
 	// Logger.getLogger(ClientletFactory.class.getName());
+	/** The instance. */
 	private static ClientletFactory instance;
 
+	/**
+	 * Instantiates a new clientlet factory.
+	 */
 	private ClientletFactory() {
 		this.addClientletSelector(new CoreClientletSelector());
 	}
 
+	/**
+	 * Gets the single instance of ClientletFactory.
+	 *
+	 * @return single instance of ClientletFactory
+	 */
 	public static ClientletFactory getInstance() {
 		if (instance == null) {
 			synchronized (ClientletFactory.class) {
@@ -49,8 +62,14 @@ public class ClientletFactory {
 		return instance;
 	}
 
+	/** The selectors. */
 	private final List<ClientletSelector> selectors = new LinkedList<ClientletSelector>();
 
+	/**
+	 * Adds the clientlet selector.
+	 *
+	 * @param selector the selector
+	 */
 	public void addClientletSelector(ClientletSelector selector) {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
@@ -61,6 +80,13 @@ public class ClientletFactory {
 		}
 	}
 
+	/**
+	 * Gets the clientlet.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @return the clientlet
+	 */
 	public Clientlet getClientlet(ClientletRequest request,
 			ClientletResponse response) {
 		synchronized (this) {

@@ -34,15 +34,39 @@ import org.lobobrowser.util.io.RecordedInputStream;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
+/**
+ * The Class HtmlContent.
+ */
 public class HtmlContent implements ComponentContent {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(HtmlContent.class
 			.getName());
+	
+	/** The document. */
 	private final HTMLDocument document;
+	
+	/** The panel. */
 	private final HtmlPanel panel;
+	
+	/** The ris. */
 	private final RecordedInputStream ris;
+	
+	/** The charset. */
 	private final String charset;
+	
+	/** The source code. */
 	private final String sourceCode;
 
+	/**
+	 * Instantiates a new html content.
+	 *
+	 * @param document the document
+	 * @param panel the panel
+	 * @param ris the ris
+	 * @param charset the charset
+	 */
 	public HtmlContent(final HTMLDocument document, final HtmlPanel panel,
 			RecordedInputStream ris, String charset) {
 		super();
@@ -53,6 +77,13 @@ public class HtmlContent implements ComponentContent {
 		this.sourceCode = null;
 	}
 
+	/**
+	 * Instantiates a new html content.
+	 *
+	 * @param document the document
+	 * @param panel the panel
+	 * @param sourceCode the source code
+	 */
 	public HtmlContent(final HTMLDocument document, final HtmlPanel panel,
 			String sourceCode) {
 		super();
@@ -63,18 +94,30 @@ public class HtmlContent implements ComponentContent {
 		this.sourceCode = sourceCode;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#canCopy()
+	 */
 	public boolean canCopy() {
 		return this.panel.hasSelection();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#copy()
+	 */
 	public boolean copy() {
 		return this.panel.copy();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#getComponent()
+	 */
 	public Component getComponent() {
 		return this.panel;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#getSourceCode()
+	 */
 	public String getSourceCode() {
 		try {
 			RecordedInputStream ris = this.ris;
@@ -93,10 +136,16 @@ public class HtmlContent implements ComponentContent {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#getTitle()
+	 */
 	public String getTitle() {
 		return this.document.getTitle();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#getDescription()
+	 */
 	public String getDescription() {
 		NodeList nodeList = this.document.getElementsByTagName("meta");
 		if (nodeList == null) {
@@ -116,20 +165,35 @@ public class HtmlContent implements ComponentContent {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#addNotify()
+	 */
 	public void addNotify() {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#removeNotify()
+	 */
 	public void removeNotify() {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#getContentObject()
+	 */
 	public Object getContentObject() {
 		return this.document;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#getMimeType()
+	 */
 	public String getMimeType() {
 		return "text/html";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ComponentContent#setProperty(java.lang.String, java.lang.Object)
+	 */
 	public void setProperty(String name, Object value) {
 		if ("defaultMarginInsets".equals(name)
 				&& value instanceof java.awt.Insets) {

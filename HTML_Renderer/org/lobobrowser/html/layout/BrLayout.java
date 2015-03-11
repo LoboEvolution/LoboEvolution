@@ -26,6 +26,10 @@ import org.lobobrowser.html.renderer.LineBreak;
 import org.lobobrowser.html.renderer.MarkupLayout;
 import org.lobobrowser.html.renderer.RBlockViewport;
 
+
+/**
+ * The Class BrLayout.
+ */
 public class BrLayout implements MarkupLayout {
 	/*
 	 * (non-Javadoc)

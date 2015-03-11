@@ -33,20 +33,37 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
+ * The Class Bean.
+ *
  * @author J. H. S.
  */
 public class Bean {
 	// private static final java.util.logging.Logger logger =
 	// Logger.getLogger(Bean.class);
+	/** The clazz. */
 	private final Class clazz;
 
+	/**
+	 * Instantiates a new bean.
+	 *
+	 * @param clazz the clazz
+	 */
 	public Bean(Class clazz) {
 		this.clazz = clazz;
 	}
 
+	/** The property descriptors. */
 	private Map propertyDescriptors = null;
 
+	/**
+	 * Populate descriptors.
+	 *
+	 * @param map the map
+	 * @param clazz the clazz
+	 * @throws IntrospectionException the introspection exception
+	 */
 	private void populateDescriptors(Map map, Class clazz)
 			throws IntrospectionException {
 		BeanInfo beanInfo = Introspector.getBeanInfo(clazz);
@@ -62,6 +79,13 @@ public class Bean {
 		}
 	}
 
+	/**
+	 * Gets the property descriptor.
+	 *
+	 * @param propertyName the property name
+	 * @return the property descriptor
+	 * @throws IntrospectionException the introspection exception
+	 */
 	public PropertyDescriptor getPropertyDescriptor(String propertyName)
 			throws IntrospectionException {
 		synchronized (this) {
@@ -74,6 +98,12 @@ public class Bean {
 		}
 	}
 
+	/**
+	 * Gets the property descriptors map.
+	 *
+	 * @return the property descriptors map
+	 * @throws IntrospectionException the introspection exception
+	 */
 	public Map getPropertyDescriptorsMap() throws IntrospectionException {
 		synchronized (this) {
 			if (this.propertyDescriptors == null) {
@@ -84,6 +114,12 @@ public class Bean {
 		}
 	}
 
+	/**
+	 * Gets the property descriptors.
+	 *
+	 * @return the property descriptors
+	 * @throws IntrospectionException the introspection exception
+	 */
 	public PropertyDescriptor[] getPropertyDescriptors()
 			throws IntrospectionException {
 		synchronized (this) {
@@ -92,6 +128,14 @@ public class Bean {
 		}
 	}
 
+	/**
+	 * Sets the property for fqn.
+	 *
+	 * @param receiver the receiver
+	 * @param fullyQualifiedPropertyName the fully qualified property name
+	 * @param value the value
+	 * @throws Exception the exception
+	 */
 	public void setPropertyForFQN(Object receiver,
 			String fullyQualifiedPropertyName, Object value) throws Exception {
 		int idx = fullyQualifiedPropertyName.indexOf('.');
@@ -128,6 +172,13 @@ public class Bean {
 		}
 	}
 
+	/**
+	 * Convert value.
+	 *
+	 * @param value the value
+	 * @param targetType the target type
+	 * @return the object
+	 */
 	private static Object convertValue(Object value, Class targetType) {
 		boolean targetString = targetType.isAssignableFrom(String.class);
 		if (value instanceof String && targetString) {

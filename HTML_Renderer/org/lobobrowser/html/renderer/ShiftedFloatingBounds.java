@@ -22,22 +22,32 @@ package org.lobobrowser.html.renderer;
 
 import org.lobobrowser.util.Objects;
 
+
+/**
+ * The Class ShiftedFloatingBounds.
+ */
 class ShiftedFloatingBounds implements FloatingBounds {
+	
+	/** The prev bounds. */
 	private final FloatingBounds prevBounds;
+	
+	/** The shift left. */
 	private final int shiftLeft;
+	
+	/** The shift right. */
 	private final int shiftRight;
+	
+	/** The shift y. */
 	private final int shiftY;
 
 	/**
 	 * Constructs the ShiftedFloatingBounds. Floatinb bounds moved up the
 	 * hierarchy of renderables will generally have positive shifts.
-	 * 
-	 * @param prevBounds
-	 *            The baseline floating bounds.
-	 * @param shiftX
-	 *            How much the original bounds have shifted in the X axis.
-	 * @param shiftY
-	 *            How much the original bounds have shifted in the Y axis.
+	 *
+	 * @param prevBounds            The baseline floating bounds.
+	 * @param shiftLeft the shift left
+	 * @param shiftRight the shift right
+	 * @param shiftY            How much the original bounds have shifted in the Y axis.
 	 */
 	public ShiftedFloatingBounds(final FloatingBounds prevBounds,
 			final int shiftLeft, final int shiftRight, final int shiftY) {
@@ -48,34 +58,58 @@ class ShiftedFloatingBounds implements FloatingBounds {
 		this.shiftY = shiftY;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getClearY(int)
+	 */
 	public int getClearY(int y) {
 		return this.prevBounds.getClearY(y - this.shiftY) + this.shiftY;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getFirstClearY(int)
+	 */
 	public int getFirstClearY(int y) {
 		return this.prevBounds.getFirstClearY(y - this.shiftY) + this.shiftY;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getLeft(int)
+	 */
 	public int getLeft(int y) {
 		return this.prevBounds.getLeft(y - this.shiftY) + this.shiftLeft;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getLeftClearY(int)
+	 */
 	public int getLeftClearY(int y) {
 		return this.prevBounds.getLeftClearY(y - this.shiftY) + this.shiftY;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getRight(int)
+	 */
 	public int getRight(int y) {
 		return this.prevBounds.getRight(y - this.shiftY) + this.shiftRight;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getRightClearY(int)
+	 */
 	public int getRightClearY(int y) {
 		return this.prevBounds.getRightClearY(y - this.shiftY) + this.shiftY;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getMaxY()
+	 */
 	public int getMaxY() {
 		return this.prevBounds.getMaxY() + this.shiftY;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object obj) {
 		// Important for layout caching.
 		if (!(obj instanceof ShiftedFloatingBounds)) {
@@ -87,6 +121,9 @@ class ShiftedFloatingBounds implements FloatingBounds {
 				&& Objects.equals(this.prevBounds, other.prevBounds);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	public int hashCode() {
 		return this.shiftY ^ this.shiftLeft ^ this.shiftRight;
 	}

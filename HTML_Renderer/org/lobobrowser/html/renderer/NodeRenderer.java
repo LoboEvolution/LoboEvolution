@@ -25,6 +25,16 @@ package org.lobobrowser.html.renderer;
 
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 
+
+/**
+ * The Interface NodeRenderer.
+ */
 public interface NodeRenderer {
+	
+	/**
+	 * Sets the root node.
+	 *
+	 * @param node the new root node
+	 */
 	public void setRootNode(DOMNodeImpl node);
 }

@@ -47,15 +47,42 @@ import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.RenderThreadState;
 import org.lobobrowser.util.Objects;
 
+
+/**
+ * The Class RTable.
+ */
 class RTable extends BaseElementRenderable {
+	
+	/** The Constant MAX_CACHE_SIZE. */
 	private static final int MAX_CACHE_SIZE = 10;
+	
+	/** The cached layout. */
 	private final Map<LayoutKey, LayoutValue> cachedLayout = new HashMap<LayoutKey, LayoutValue>(5);
+	
+	/** The table matrix. */
 	private final TableMatrix tableMatrix;
+	
+	/** The positioned renderables. */
 	private SortedSet<PositionedRenderable> positionedRenderables;
+	
+	/** The other ordinal. */
 	private int otherOrdinal;
+	
+	/** The last layout key. */
 	private LayoutKey lastLayoutKey = null;
+	
+	/** The last layout value. */
 	private LayoutValue lastLayoutValue = null;
 
+	/**
+	 * Instantiates a new r table.
+	 *
+	 * @param modelNode the model node
+	 * @param pcontext the pcontext
+	 * @param rcontext the rcontext
+	 * @param frameContext the frame context
+	 * @param container the container
+	 */
 	public RTable(HTMLElementImpl modelNode, UserAgentContext pcontext,
 			HtmlRendererContext rcontext, FrameContext frameContext,
 			RenderableContainer container) {
@@ -64,23 +91,38 @@ class RTable extends BaseElementRenderable {
 				frameContext, this, this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RElement#getVAlign()
+	 */
 	public int getVAlign() {
 		// Not used
 		return VALIGN_BASELINE;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#getWidthElement()
+	 */
 	protected int getWidthElement() {
 		return this.width;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#getHeightElement()
+	 */
 	protected int getHeightElement() {
 		return this.tableMatrix.getTableHeightWithoutCaption();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#getStartY()
+	 */
 	protected int getStartY() {
 		return this.tableMatrix.getStartYWithoutCaption();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#paint(java.awt.Graphics)
+	 */
 	public void paint(Graphics g) {
 		RenderState rs = this.modelNode.getRenderState();
 		if (rs != null && rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
@@ -108,6 +150,9 @@ class RTable extends BaseElementRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#doLayout(int, int, boolean)
+	 */
 	public void doLayout(int availWidth, int availHeight, boolean sizeOnly) {
 		Map<LayoutKey, LayoutValue> cachedLayout = this.cachedLayout;
 		RenderState rs = this.modelNode.getRenderState();
@@ -180,6 +225,9 @@ class RTable extends BaseElementRenderable {
 		this.sendDelayedPairsToParent();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#invalidateLayoutLocal()
+	 */
 	public void invalidateLayoutLocal() {
 		super.invalidateLayoutLocal();
 		this.cachedLayout.clear();
@@ -242,6 +290,9 @@ class RTable extends BaseElementRenderable {
 		return this.tableMatrix.onMouseClick(event, x, y);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onDoubleClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
@@ -353,6 +404,9 @@ class RTable extends BaseElementRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.UINode#repaint(org.lobobrowser.html.dombl.ModelNode)
+	 */
 	public void repaint(ModelNode modelNode) {
 		// NOP
 	}
@@ -366,6 +420,13 @@ class RTable extends BaseElementRenderable {
 		return this.container.getPaintedBackgroundColor();
 	}
 
+	/**
+	 * Adds the positioned renderable.
+	 *
+	 * @param renderable the renderable
+	 * @param verticalAlignable the vertical alignable
+	 * @param isFloat the is float
+	 */
 	private final void addPositionedRenderable(BoundableRenderable renderable,
 			boolean verticalAlignable, boolean isFloat) {
 		// Expected to be called only in GUI thread.
@@ -383,24 +444,54 @@ class RTable extends BaseElementRenderable {
 		}
 	}
 
+	/**
+	 * Import delayed pair.
+	 *
+	 * @param pair the pair
+	 */
 	private void importDelayedPair(DelayedPair pair) {
 		BoundableRenderable r = pair.child;
 		r.setOrigin(pair.x, pair.y);
 		this.addPositionedRenderable(r, false, false);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return "RTable[this=" + System.identityHashCode(this) + ",node="
 				+ this.modelNode + "]";
 	}
 
+	/**
+	 * The Class LayoutKey.
+	 */
 	public static class LayoutKey {
+		
+		/** The avail width. */
 		public final int availWidth;
+		
+		/** The avail height. */
 		public final int availHeight;
+		
+		/** The whitespace. */
 		public final int whitespace;
+		
+		/** The font. */
 		public final Font font;
+		
+		/** The override no wrap. */
 		public final boolean overrideNoWrap;
 
+		/**
+		 * Instantiates a new layout key.
+		 *
+		 * @param availWidth the avail width
+		 * @param availHeight the avail height
+		 * @param whitespace the whitespace
+		 * @param font the font
+		 * @param overrideNoWrap the override no wrap
+		 */
 		public LayoutKey(int availWidth, int availHeight, int whitespace,
 				Font font, boolean overrideNoWrap) {
 			super();
@@ -411,6 +502,9 @@ class RTable extends BaseElementRenderable {
 			this.overrideNoWrap = overrideNoWrap;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
 		public boolean equals(Object obj) {
 			if (obj == this) {
 				return true;
@@ -426,6 +520,9 @@ class RTable extends BaseElementRenderable {
 					&& Objects.equals(other.font, this.font);
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#hashCode()
+		 */
 		public int hashCode() {
 			Font font = this.font;
 			return (this.availWidth * 1000 + this.availHeight)
@@ -433,10 +530,23 @@ class RTable extends BaseElementRenderable {
 		}
 	}
 
+	/**
+	 * The Class LayoutValue.
+	 */
 	public static class LayoutValue {
+		
+		/** The width. */
 		public final int width;
+		
+		/** The height. */
 		public final int height;
 
+		/**
+		 * Instantiates a new layout value.
+		 *
+		 * @param width the width
+		 * @param height the height
+		 */
 		public LayoutValue(int width, int height) {
 			this.width = width;
 			this.height = height;

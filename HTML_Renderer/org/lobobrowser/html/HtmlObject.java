@@ -2,17 +2,33 @@ package org.lobobrowser.html;
 
 import java.awt.Component;
 
+
 /**
  * This interface should be implemented to provide OBJECT, EMBED or APPLET
  * functionality.
  */
 public interface HtmlObject {
+	
+	/**
+	 * Gets the component.
+	 *
+	 * @return the component
+	 */
 	public Component getComponent();
 
+	/**
+	 * Suspend.
+	 */
 	public void suspend();
 
+	/**
+	 * Resume.
+	 */
 	public void resume();
 
+	/**
+	 * Destroy.
+	 */
 	public void destroy();
 
 	/**
@@ -20,6 +36,9 @@ public interface HtmlObject {
 	 * or whenever the DOM changes. This is where the object should reset its
 	 * state based on element children or attributes and possibly change its
 	 * preferred size if appropriate.
+	 *
+	 * @param availableWidth the available width
+	 * @param availableHeight the available height
 	 */
 	public void reset(int availableWidth, int availableHeight);
 }

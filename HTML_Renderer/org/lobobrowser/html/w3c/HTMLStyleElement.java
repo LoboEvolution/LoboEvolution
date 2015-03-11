@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Style information. See the STYLE element definition in HTML 4.01, the CSS
  * module [<a
@@ -45,42 +46,65 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLStyleElement extends HTMLElement {
+	
 	/**
 	 * Enables/disables the style sheet.
+	 *
+	 * @return the disabled
 	 */
 	public boolean getDisabled();
 
 	/**
 	 * Enables/disables the style sheet.
+	 *
+	 * @param disabled the new disabled
 	 */
 	public void setDisabled(boolean disabled);
 
 	/**
 	 * Designed for use with one or more target media. See the media attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the media
 	 */
 	public String getMedia();
 
 	/**
 	 * Designed for use with one or more target media. See the media attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param media the new media
 	 */
 	public void setMedia(String media);
 
 	/**
 	 * The content type of the style sheet language. See the type attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the type
 	 */
 	public String getType();
 
 	/**
 	 * The content type of the style sheet language. See the type attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param type the new type
 	 */
 	public void setType(String type);
 
 
+	/**
+	 * Gets the scoped.
+	 *
+	 * @return the scoped
+	 */
 	public boolean getScoped();
 
+	/**
+	 * Sets the scoped.
+	 *
+	 * @param scoped the new scoped
+	 */
 	public void setScoped(boolean scoped);
 }

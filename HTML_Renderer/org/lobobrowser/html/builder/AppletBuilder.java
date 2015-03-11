@@ -23,8 +23,15 @@ package org.lobobrowser.html.builder;
 import org.lobobrowser.html.domimpl.HTMLAppletElementImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 
+
+/**
+ * The Class AppletBuilder.
+ */
 public class AppletBuilder extends HTMLElementBuilder {
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
 	@Override
 	protected HTMLElementImpl build(String name) {
 		return new HTMLAppletElementImpl(name);

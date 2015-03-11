@@ -9,16 +9,16 @@ package org.mozilla.javascript;
 import java.io.IOException;
 import java.io.Reader;
 
+
 /**
  * This class implements the JavaScript scanner.
- *
+ * 
  * It is based on the C source files jsscan.c and jsscan.h
  * in the jsref package.
  *
- * @see org.mozilla.javascript.Parser
- *
  * @author Mike McCabe
  * @author Brendan Eich
+ * @see org.mozilla.javascript.Parser
  */
 
 class TokenStream
@@ -28,11 +28,21 @@ class TokenStream
      * to check.  (And checking EOF by exception is annoying.)
      * Note distinction from EOF token type!
      */
+    /** The Constant EOF_CHAR. */
     private final static int
         EOF_CHAR = -1;
 
+    /** The Constant BYTE_ORDER_MARK. */
     private final static char BYTE_ORDER_MARK = '\uFEFF';
 
+    /**
+     * Instantiates a new token stream.
+     *
+     * @param parser the parser
+     * @param sourceReader the source reader
+     * @param sourceString the source string
+     * @param lineno the lineno
+     */
     TokenStream(Parser parser, Reader sourceReader, String sourceString,
                 int lineno)
     {
@@ -55,6 +65,12 @@ class TokenStream
      * TokenStream; if getToken has been called since the passed token
      * was scanned, the op or string printed may be incorrect.
      */
+    /**
+     * Token to string.
+     *
+     * @param token the token
+     * @return the string
+     */
     String tokenToString(int token)
     {
         if (Token.printTrees) {
@@ -75,11 +91,23 @@ class TokenStream
         return "";
     }
 
+    /**
+     * Checks if is keyword.
+     *
+     * @param s the s
+     * @return true, if is keyword
+     */
     static boolean isKeyword(String s)
     {
         return Token.EOF != stringToKeyword(s);
     }
 
+    /**
+     * String to keyword.
+     *
+     * @param name the name
+     * @return the int
+     */
     private static int stringToKeyword(String name)
     {
 // #string_id_map#
@@ -256,22 +284,70 @@ class TokenStream
         return id & 0xff;
     }
 
+    /**
+     * Gets the source string.
+     *
+     * @return the source string
+     */
     final String getSourceString() { return sourceString; }
 
+    /**
+     * Gets the lineno.
+     *
+     * @return the lineno
+     */
     final int getLineno() { return lineno; }
 
+    /**
+     * Gets the string.
+     *
+     * @return the string
+     */
     final String getString() { return string; }
 
+    /**
+     * Gets the quote char.
+     *
+     * @return the quote char
+     */
     final char getQuoteChar() {
         return (char) quoteChar;
     }
 
+    /**
+     * Gets the number.
+     *
+     * @return the number
+     */
     final double getNumber() { return number; }
+    
+    /**
+     * Checks if is number octal.
+     *
+     * @return true, if is number octal
+     */
     final boolean isNumberOctal() { return isOctal; }
+    
+    /**
+     * Checks if is number hex.
+     *
+     * @return true, if is number hex
+     */
     final boolean isNumberHex() { return isHex; }
 
+    /**
+     * Eof.
+     *
+     * @return true, if successful
+     */
     final boolean eof() { return hitEOF; }
 
+    /**
+     * Gets the token.
+     *
+     * @return the token
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     final int getToken() throws IOException
     {
         int c;
@@ -836,6 +912,12 @@ class TokenStream
         }
     }
 
+    /**
+     * Checks if is alpha.
+     *
+     * @param c the c
+     * @return true, if is alpha
+     */
     private static boolean isAlpha(int c)
     {
         // Use 'Z' < 'a'
@@ -846,6 +928,12 @@ class TokenStream
         }
     }
 
+    /**
+     * Checks if is digit.
+     *
+     * @param c the c
+     * @return true, if is digit
+     */
     static boolean isDigit(int c)
     {
         return '0' <= c && c <= '9';
@@ -854,6 +942,12 @@ class TokenStream
     /* As defined in ECMA.  jsscan.c uses C isspace() (which allows
      * \v, I think.)  note that code in getChar() implicitly accepts
      * '\r' == \u000D as well.
+     */
+    /**
+     * Checks if is JS space.
+     *
+     * @param c the c
+     * @return true, if is JS space
      */
     static boolean isJSSpace(int c)
     {
@@ -865,6 +959,12 @@ class TokenStream
         }
     }
 
+    /**
+     * Checks if is JS format char.
+     *
+     * @param c the c
+     * @return true, if is JS format char
+     */
     private static boolean isJSFormatChar(int c)
     {
         return c > 127 && Character.getType((char)c) == Character.FORMAT;
@@ -872,6 +972,9 @@ class TokenStream
 
     /**
      * Parser calls the method when it gets / or /= in literal context.
+     *
+     * @param startToken the start token
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     void readRegExp(int startToken)
         throws IOException
@@ -930,17 +1033,33 @@ class TokenStream
                                       stringBufferTop - reEnd);
     }
 
+    /**
+     * Read and clear reg exp flags.
+     *
+     * @return the string
+     */
     String readAndClearRegExpFlags() {
         String flags = this.regExpFlags;
         this.regExpFlags = null;
         return flags;
     }
 
+    /**
+     * Checks if is XML attribute.
+     *
+     * @return true, if is XML attribute
+     */
     boolean isXMLAttribute()
     {
         return xmlIsAttribute;
     }
 
+    /**
+     * Gets the first xml token.
+     *
+     * @return the first xml token
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     int getFirstXMLToken() throws IOException
     {
         xmlOpenTagsCount = 0;
@@ -952,6 +1071,12 @@ class TokenStream
         return getNextXMLToken();
     }
 
+    /**
+     * Gets the next xml token.
+     *
+     * @return the next xml token
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     int getNextXMLToken() throws IOException
     {
         tokenBeg = cursor;
@@ -1105,7 +1230,11 @@ class TokenStream
     }
 
     /**
+     * Read quoted string.
      *
+     * @param quote the quote
+     * @return true, if successful
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     private boolean readQuotedString(int quote) throws IOException
     {
@@ -1121,7 +1250,10 @@ class TokenStream
     }
 
     /**
+     * Read xml comment.
      *
+     * @return true, if successful
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     private boolean readXmlComment() throws IOException
     {
@@ -1148,7 +1280,10 @@ class TokenStream
     }
 
     /**
+     * Read cdata.
      *
+     * @return true, if successful
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     private boolean readCDATA() throws IOException
     {
@@ -1175,7 +1310,10 @@ class TokenStream
     }
 
     /**
+     * Read entity.
      *
+     * @return true, if successful
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     private boolean readEntity() throws IOException
     {
@@ -1200,7 +1338,10 @@ class TokenStream
     }
 
     /**
+     * Read pi.
      *
+     * @return true, if successful
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     private boolean readPI() throws IOException
     {
@@ -1219,12 +1360,22 @@ class TokenStream
         return false;
     }
 
+    /**
+     * Gets the string from buffer.
+     *
+     * @return the string from buffer
+     */
     private String getStringFromBuffer()
     {
         tokenEnd = cursor;
         return new String(stringBuffer, 0, stringBufferTop);
     }
 
+    /**
+     * Adds the to string.
+     *
+     * @param c the c
+     */
     private void addToString(int c)
     {
         int N = stringBufferTop;
@@ -1237,10 +1388,20 @@ class TokenStream
         stringBufferTop = N + 1;
     }
 
+    /**
+     * Can unget char.
+     *
+     * @return true, if successful
+     */
     private boolean canUngetChar() {
         return ungetCursor == 0 || ungetBuffer[ungetCursor - 1] != '\n';
     }
 
+    /**
+     * Unget char.
+     *
+     * @param c the c
+     */
     private void ungetChar(int c)
     {
         // can not unread past across line boundary
@@ -1250,6 +1411,13 @@ class TokenStream
         cursor--;
     }
 
+    /**
+     * Match char.
+     *
+     * @param test the test
+     * @return true, if successful
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private boolean matchChar(int test) throws IOException
     {
         int c = getCharIgnoreLineEnd();
@@ -1262,6 +1430,12 @@ class TokenStream
         }
     }
 
+    /**
+     * Peek char.
+     *
+     * @return the int
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private int peekChar() throws IOException
     {
         int c = getChar();
@@ -1269,11 +1443,24 @@ class TokenStream
         return c;
     }
 
+    /**
+     * Gets the char.
+     *
+     * @return the char
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private int getChar() throws IOException
     {
         return getChar(true);
     }
 
+    /**
+     * Gets the char.
+     *
+     * @param skipFormattingChars the skip formatting chars
+     * @return the char
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private int getChar(boolean skipFormattingChars) throws IOException
     {
         if (ungetCursor != 0) {
@@ -1330,6 +1517,12 @@ class TokenStream
         }
     }
 
+    /**
+     * Gets the char ignore line end.
+     *
+     * @return the char ignore line end
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private int getCharIgnoreLineEnd() throws IOException
     {
         if (ungetCursor != 0) {
@@ -1376,12 +1569,22 @@ class TokenStream
         }
     }
 
+    /**
+     * Unget char ignore line end.
+     *
+     * @param c the c
+     */
     private void ungetCharIgnoreLineEnd(int c)
     {
         ungetBuffer[ungetCursor++] = c;
         cursor--;
     }
 
+    /**
+     * Skip line.
+     *
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private void skipLine() throws IOException
     {
         // skip to end of line
@@ -1393,6 +1596,8 @@ class TokenStream
 
     /**
      * Returns the offset into the current line.
+     *
+     * @return the offset
      */
     final int getOffset()
     {
@@ -1401,6 +1606,11 @@ class TokenStream
         return n;
     }
 
+    /**
+     * Gets the line.
+     *
+     * @return the line
+     */
     final String getLine()
     {
         if (sourceString != null) {
@@ -1447,6 +1657,12 @@ class TokenStream
         }
     }
 
+    /**
+     * Fill source buffer.
+     *
+     * @return true, if successful
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private boolean fillSourceBuffer() throws IOException
     {
         if (sourceString != null) Kit.codeBug();
@@ -1474,6 +1690,8 @@ class TokenStream
 
     /**
      * Return the current position of the scanner cursor.
+     *
+     * @return the cursor
      */
     public int getCursor() {
         return cursor;
@@ -1481,6 +1699,8 @@ class TokenStream
 
     /**
      * Return the absolute source offset of the last scanned token.
+     *
+     * @return the token beg
      */
     public int getTokenBeg() {
         return tokenBeg;
@@ -1488,13 +1708,17 @@ class TokenStream
 
     /**
      * Return the absolute source end-offset of the last scanned token.
+     *
+     * @return the token end
      */
     public int getTokenEnd() {
         return tokenEnd;
     }
 
     /**
-     * Return tokenEnd - tokenBeg
+     * Return tokenEnd - tokenBeg.
+     *
+     * @return the token length
      */
     public int getTokenLength() {
         return tokenEnd - tokenBeg;
@@ -1508,10 +1732,18 @@ class TokenStream
         return commentType;
     }
 
+    /**
+     * Mark comment start.
+     */
     private void markCommentStart() {
         markCommentStart("");
     }
 
+    /**
+     * Mark comment start.
+     *
+     * @param prefix the prefix
+     */
     private void markCommentStart(String prefix) {
         if (parser.compilerEnv.isRecordingComments() && sourceReader != null) {
             commentPrefix = prefix;
@@ -1519,10 +1751,20 @@ class TokenStream
         }
     }
 
+    /**
+     * Checks if is marking comment.
+     *
+     * @return true, if is marking comment
+     */
     private boolean isMarkingComment() {
         return commentCursor != -1;
     }
 
+     /**
+      * Gets the and reset current comment.
+      *
+      * @return the and reset current comment
+      */
      final String getAndResetCurrentComment() {
         if (sourceString != null) {
             if (isMarkingComment()) Kit.codeBug();
@@ -1537,6 +1779,12 @@ class TokenStream
         }
     }
 
+    /**
+     * Convert last char to hex.
+     *
+     * @param str the str
+     * @return the string
+     */
     private String convertLastCharToHex(String str) {
       int lastIndex = str.length()-1;
       StringBuffer buf = new StringBuffer(
@@ -1551,64 +1799,110 @@ class TokenStream
     }
 
     // stuff other than whitespace since start of line
+    /** The dirty line. */
     private boolean dirtyLine;
 
+    /** The reg exp flags. */
     String regExpFlags;
 
     // Set this to an initial non-null value so that the Parser has
     // something to retrieve even if an error has occurred and no
     // string is found.  Fosters one class of error, but saves lots of
     // code.
+    /** The string. */
     private String string = "";
+    
+    /** The number. */
     private double number;
+    
+    /** The is octal. */
     private boolean isOctal;
+    
+    /** The is hex. */
     private boolean isHex;
 
     // delimiter for last string literal scanned
+    /** The quote char. */
     private int quoteChar;
 
+    /** The string buffer. */
     private char[] stringBuffer = new char[128];
+    
+    /** The string buffer top. */
     private int stringBufferTop;
+    
+    /** The all strings. */
     private ObjToIntMap allStrings = new ObjToIntMap(50);
 
     // Room to backtrace from to < on failed match of the last - in <!--
+    /** The unget buffer. */
     private final int[] ungetBuffer = new int[3];
+    
+    /** The unget cursor. */
     private int ungetCursor;
 
+    /** The hit eof. */
     private boolean hitEOF = false;
 
+    /** The line start. */
     private int lineStart = 0;
+    
+    /** The line end char. */
     private int lineEndChar = -1;
+    
+    /** The lineno. */
     int lineno;
 
+    /** The source string. */
     private String sourceString;
+    
+    /** The source reader. */
     private Reader sourceReader;
+    
+    /** The source buffer. */
     private char[] sourceBuffer;
+    
+    /** The source end. */
     private int sourceEnd;
 
     // sourceCursor is an index into a small buffer that keeps a
     // sliding window of the source stream.
+    /** The source cursor. */
     int sourceCursor;
 
     // cursor is a monotonically increasing index into the original
     // source stream, tracking exactly how far scanning has progressed.
     // Its value is the index of the next character to be scanned.
+    /** The cursor. */
     int cursor;
 
     // Record start and end positions of last scanned token.
+    /** The token beg. */
     int tokenBeg;
+    
+    /** The token end. */
     int tokenEnd;
 
     // Type of last comment scanned.
+    /** The comment type. */
     Token.CommentType commentType;
 
     // for xml tokenizer
+    /** The xml is attribute. */
     private boolean xmlIsAttribute;
+    
+    /** The xml is tag content. */
     private boolean xmlIsTagContent;
+    
+    /** The xml open tags count. */
     private int xmlOpenTagsCount;
 
+    /** The parser. */
     private Parser parser;
 
+    /** The comment prefix. */
     private String commentPrefix = "";
+    
+    /** The comment cursor. */
     private int commentCursor = -1;
 }

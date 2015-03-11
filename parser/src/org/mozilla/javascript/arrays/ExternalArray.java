@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.mozilla.javascript.ScriptRuntime;
 
+
 /**
  * The abstract base class for the different types of external arrays. Users must construct one of
  * the subclasses before passing it to "ScriptableObject.setExternalArray()".
@@ -12,13 +13,19 @@ import org.mozilla.javascript.ScriptRuntime;
 public abstract class ExternalArray
     implements Serializable
 {
+    
     /**
      * Return the length of the array.
+     *
+     * @return the length
      */
     public abstract int getLength();
 
     /**
      * Return true if the given index is in range. Normally users should not need to use this.
+     *
+     * @param index the index
+     * @return true, if successful
      */
     public boolean inRange(int index) {
         return ((index < getLength()) && (index >= 0));
@@ -26,6 +33,9 @@ public abstract class ExternalArray
 
     /**
      * Return the element at the specified index as an Object.
+     *
+     * @param index the index
+     * @return the object
      */
     public Object get(int index) {
         return getElement(index);
@@ -33,6 +43,9 @@ public abstract class ExternalArray
 
     /**
      * Set the element at the specified index.
+     *
+     * @param index the index
+     * @param value the value
      */
     public void put(int index, Object value) {
         try {
@@ -45,6 +58,9 @@ public abstract class ExternalArray
     /**
      * Copy numeric ids representing the property IDs of each array element to the specified array.
      * Used internally when iterating over the properties of the object.
+     *
+     * @param ids the ids
+     * @return the int
      */
     public int copyIds(Object[] ids) {
         int i;
@@ -57,12 +73,18 @@ public abstract class ExternalArray
     /**
      * Return the value of the element in a form that works for a script. Caller will check bounds --
      * don't do that.
+     *
+     * @param index the index
+     * @return the element
      */
     protected abstract Object getElement(int index);
 
     /**
      * Set the value of the element. Don't check bounds. Blind casting is OK -- caller will handle
      * ClassCastException -- don't add an instanceof check.
+     *
+     * @param index the index
+     * @param value the value
      */
     protected abstract void putElement(int index, Object value);
 }

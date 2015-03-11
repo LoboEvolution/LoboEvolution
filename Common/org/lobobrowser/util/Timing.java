@@ -20,11 +20,28 @@
  */
 package org.lobobrowser.util;
 
+
+/**
+ * The Class Timing.
+ */
 public class Timing {
+	
+	/**
+	 * Round1.
+	 *
+	 * @param value the value
+	 * @return the double
+	 */
 	public static double round1(double value) {
 		return Math.round(value * 10.0) / 10.0;
 	}
 
+	/**
+	 * Gets the elapsed text.
+	 *
+	 * @param elapsedMillis the elapsed millis
+	 * @return the elapsed text
+	 */
 	public static String getElapsedText(long elapsedMillis) {
 		if (elapsedMillis < 60000) {
 			double unit = round1(elapsedMillis / 1000.0);

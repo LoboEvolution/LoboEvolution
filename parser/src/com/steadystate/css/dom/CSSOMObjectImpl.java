@@ -31,6 +31,7 @@ import java.util.Map;
 
 import com.steadystate.css.util.LangUtils;
 
+
 /**
  * Implementation of {@link CSSOMObject}.
  *
@@ -38,10 +39,17 @@ import com.steadystate.css.util.LangUtils;
  */
 public class CSSOMObjectImpl implements CSSOMObject, Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 0L;
 
+    /** The user data map_. */
     private Map<String, Object> userDataMap_;
 
+    /**
+     * Gets the user data map.
+     *
+     * @return the user data map
+     */
     public Map<String, Object> getUserDataMap() {
         if (userDataMap_ == null) {
             userDataMap_ = new Hashtable<String, Object>();
@@ -49,22 +57,39 @@ public class CSSOMObjectImpl implements CSSOMObject, Serializable {
         return userDataMap_;
     }
 
+    /**
+     * Sets the user data map.
+     *
+     * @param userDataMap the user data map
+     */
     public void setUserDataMap(final Map<String, Object> userDataMap) {
         userDataMap_ = userDataMap;
     }
 
+    /**
+     * Instantiates a new CSSOM object impl.
+     */
     public CSSOMObjectImpl() {
         super();
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.dom.CSSOMObject#getUserData(java.lang.String)
+     */
     public Object getUserData(final String key) {
         return getUserDataMap().get(key);
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.dom.CSSOMObject#setUserData(java.lang.String, java.lang.Object)
+     */
     public Object setUserData(final String key, final Object data) {
         return getUserDataMap().put(key, data);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -77,6 +102,9 @@ public class CSSOMObjectImpl implements CSSOMObject, Serializable {
         return LangUtils.equals(userDataMap_, coi.userDataMap_);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode() {
         int hash = LangUtils.HASH_SEED;

@@ -32,14 +32,27 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
+ * The Class ID.
+ *
  * @author J. H. S.
  */
 public class ID {
+	
+	/** The Constant RANDOM1. */
 	private static final Random RANDOM1;
+	
+	/** The Constant RANDOM2. */
 	private static final Random RANDOM2;
+	
+	/** The Constant RANDOM3. */
 	private static final Random RANDOM3;
+	
+	/** The Constant globalProcessID. */
 	private static final long globalProcessID;
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(ID.class.getName());
 
 	static {
@@ -63,18 +76,37 @@ public class ID {
 		RANDOM3 = new Random(addressHashCode ^ freeMemory);
 	}
 
+	/**
+	 * Instantiates a new id.
+	 */
 	private ID() {
 	}
 
+	/**
+	 * Generate long.
+	 *
+	 * @return the long
+	 */
 	public static long generateLong() {
 		return Math.abs(RANDOM1.nextLong() ^ RANDOM2.nextLong()
 				^ RANDOM3.nextLong());
 	}
 
+	/**
+	 * Generate int.
+	 *
+	 * @return the int
+	 */
 	public static int generateInt() {
 		return (int) generateLong();
 	}
 
+	/**
+	 * Gets the m d5 bytes.
+	 *
+	 * @param content the content
+	 * @return the m d5 bytes
+	 */
 	public static byte[] getMD5Bytes(String content) {
 		try {
 			MessageDigest digest = MessageDigest.getInstance("MD5");
@@ -86,6 +118,12 @@ public class ID {
 		}
 	}
 
+	/**
+	 * Gets the hex string.
+	 *
+	 * @param bytes the bytes
+	 * @return the hex string
+	 */
 	public static String getHexString(byte[] bytes) {
 		// This method cannot change even if it's wrong.
 		BigInteger bigInteger = BigInteger.ZERO;
@@ -101,11 +139,20 @@ public class ID {
 
 	/**
 	 * Gets a process ID that is nearly guaranteed to be globally unique.
+	 *
+	 * @return the global process id
 	 */
 	public static long getGlobalProcessID() {
 		return globalProcessID;
 	}
 
+	/**
+	 * Random.
+	 *
+	 * @param min the min
+	 * @param max the max
+	 * @return the int
+	 */
 	public static int random(int min, int max) {
 		if (max <= min) {
 			return min;

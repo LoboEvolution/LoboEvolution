@@ -12,9 +12,10 @@ import java.util.List;
 
 import org.mozilla.javascript.Token;
 
+
 /**
  * Switch statement AST node type.
- * Node type is {@link Token#SWITCH}.<p>
+ * Node type is {@link Token#SWITCH}.
  *
  * <pre><i>SwitchStatement</i> :
  *        <b>switch</b> ( Expression ) CaseBlock
@@ -31,33 +32,57 @@ import org.mozilla.javascript.Token;
  */
 public class SwitchStatement extends Jump {
 
+    /** The Constant NO_CASES. */
     private static final List<SwitchCase> NO_CASES =
         Collections.unmodifiableList(new ArrayList<SwitchCase>());
 
+    /** The expression. */
     private AstNode expression;
+    
+    /** The cases. */
     private List<SwitchCase> cases;
+    
+    /** The lp. */
     private int lp = -1;
+    
+    /** The rp. */
     private int rp = -1;
 
     {
         type = Token.SWITCH;
     }
 
+    /**
+     * Instantiates a new switch statement.
+     */
     public SwitchStatement() {
     }
 
+    /**
+     * Instantiates a new switch statement.
+     *
+     * @param pos the pos
+     */
     public SwitchStatement(int pos) {
         // can't call super (Jump) for historical reasons
         position = pos;
     }
 
+    /**
+     * Instantiates a new switch statement.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public SwitchStatement(int pos, int len) {
         position = pos;
         length = len;
     }
 
     /**
-     * Returns the switch discriminant expression
+     * Returns the switch discriminant expression.
+     *
+     * @return the expression
      */
     public AstNode getExpression() {
         return expression;
@@ -66,7 +91,8 @@ public class SwitchStatement extends Jump {
     /**
      * Sets the switch discriminant expression, and sets its parent
      * to this node.
-     * @throws IllegalArgumentException} if expression is {@code null}
+     *
+     * @param expression the new expression
      */
     public void setExpression(AstNode expression) {
         assertNotNull(expression);
@@ -77,6 +103,8 @@ public class SwitchStatement extends Jump {
     /**
      * Returns case statement list.  If there are no cases,
      * returns an immutable empty list.
+     *
+     * @return the cases
      */
     public List<SwitchCase> getCases() {
         return cases != null ? cases : NO_CASES;
@@ -100,7 +128,8 @@ public class SwitchStatement extends Jump {
 
     /**
      * Adds a switch case statement to the end of the list.
-     * @throws IllegalArgumentException} if switchCase is {@code null}
+     *
+     * @param switchCase the switch case
      */
     public void addCase(SwitchCase switchCase) {
         assertNotNull(switchCase);
@@ -112,41 +141,55 @@ public class SwitchStatement extends Jump {
     }
 
     /**
-     * Returns left paren position, -1 if missing
+     * Returns left paren position, -1 if missing.
+     *
+     * @return the lp
      */
     public int getLp() {
         return lp;
     }
 
     /**
-     * Sets left paren position
+     * Sets left paren position.
+     *
+     * @param lp the new lp
      */
     public void setLp(int lp) {
         this.lp = lp;
     }
 
     /**
-     * Returns right paren position, -1 if missing
+     * Returns right paren position, -1 if missing.
+     *
+     * @return the rp
      */
     public int getRp() {
         return rp;
     }
 
     /**
-     * Sets right paren position
+     * Sets right paren position.
+     *
+     * @param rp the new rp
      */
     public void setRp(int rp) {
         this.rp = rp;
     }
 
     /**
-     * Sets both paren positions
+     * Sets both paren positions.
+     *
+     * @param lp the lp
+     * @param rp the rp
      */
     public void setParens(int lp, int rp) {
         this.lp = lp;
         this.rp = rp;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.Jump#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         String pad = makeIndent(depth);
@@ -166,6 +209,8 @@ public class SwitchStatement extends Jump {
     /**
      * Visits this node, then the switch-expression, then the cases
      * in lexical order.
+     *
+     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

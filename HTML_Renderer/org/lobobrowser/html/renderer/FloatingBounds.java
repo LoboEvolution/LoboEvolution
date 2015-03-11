@@ -20,31 +20,65 @@
  */
 package org.lobobrowser.html.renderer;
 
+
+/**
+ * The Interface FloatingBounds.
+ */
 interface FloatingBounds {
+	
 	/**
 	 * The offset from the left at the given Y, not counting insets.
+	 *
+	 * @param y the y
+	 * @return the left
 	 */
 	public int getLeft(int y);
 
 	/**
 	 * The offset from the right at the given Y, not counting insets.
+	 *
+	 * @param y the y
+	 * @return the right
 	 */
 	public int getRight(int y);
 
 	/**
 	 * The Y at which the float clears starting at the given Y.
+	 *
+	 * @param y the y
+	 * @return the clear y
 	 */
 	public int getClearY(int y);
 
 	/**
 	 * The Y at which the first float clears. It does not recurse to check other
 	 * floats.
+	 *
+	 * @param y the y
+	 * @return the first clear y
 	 */
 	public int getFirstClearY(int y);
 
+	/**
+	 * Gets the left clear y.
+	 *
+	 * @param y the y
+	 * @return the left clear y
+	 */
 	public int getLeftClearY(int y);
 
+	/**
+	 * Gets the right clear y.
+	 *
+	 * @param y the y
+	 * @return the right clear y
+	 */
 	public int getRightClearY(int y);
 
+	/**
+	 * Gets the max y.
+	 *
+	 * @return the max y
+	 */
 	public int getMaxY();
 }

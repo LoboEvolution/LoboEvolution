@@ -13,17 +13,24 @@ import java.util.List;
 
 import javax.xml.xpath.XPathFunctionException;
 
+
 /**
+ * The Class UpperCase.
  *
  * @author richardallenbair
  */
 public class UpperCase extends AbstractFunction {
     
-    /** Creates a new instance of EndsWith */
+    /**
+     *  Creates a new instance of EndsWith.
+     */
     public UpperCase() {
         super("upper-case", 1);
     }
 
+    /* (non-Javadoc)
+     * @see javax.xml.xpath.XPathFunction#evaluate(java.util.List)
+     */
     public Object evaluate(List args) throws XPathFunctionException {
         return getStringParam(args.get(0)).toUpperCase();
     }

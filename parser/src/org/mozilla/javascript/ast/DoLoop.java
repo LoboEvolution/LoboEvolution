@@ -8,34 +8,54 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
+
 /**
- * Do statement.  Node type is {@link Token#DO}.<p>
+ * Do statement.  Node type is {@link Token#DO}.
  *
  * <pre><i>DoLoop</i>:
  * <b>do</b> Statement <b>while</b> <b>(</b> Expression <b>)</b> <b>;</b></pre>
  */
 public class DoLoop extends Loop {
 
+    /** The condition. */
     private AstNode condition;
+    
+    /** The while position. */
     private int whilePosition = -1;
 
     {
         type = Token.DO;
     }
 
+    /**
+     * Instantiates a new do loop.
+     */
     public DoLoop() {
     }
 
+    /**
+     * Instantiates a new do loop.
+     *
+     * @param pos the pos
+     */
     public DoLoop(int pos) {
         super(pos);
     }
 
+    /**
+     * Instantiates a new do loop.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public DoLoop(int pos, int len) {
         super(pos, len);
     }
 
     /**
-     * Returns loop condition
+     * Returns loop condition.
+     *
+     * @return the condition
      */
     public AstNode getCondition() {
         return condition;
@@ -43,7 +63,8 @@ public class DoLoop extends Loop {
 
     /**
      * Sets loop condition, and sets its parent to this node.
-     * @throws IllegalArgumentException if condition is null
+     *
+     * @param condition the new condition
      */
     public void setCondition(AstNode condition) {
         assertNotNull(condition);
@@ -52,19 +73,26 @@ public class DoLoop extends Loop {
     }
 
     /**
-     * Returns source position of "while" keyword
+     * Returns source position of "while" keyword.
+     *
+     * @return the while position
      */
     public int getWhilePosition() {
         return whilePosition;
     }
 
     /**
-     * Sets source position of "while" keyword
+     * Sets source position of "while" keyword.
+     *
+     * @param whilePosition the new while position
      */
     public void setWhilePosition(int whilePosition) {
         this.whilePosition = whilePosition;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.Scope#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -79,6 +107,8 @@ public class DoLoop extends Loop {
 
     /**
      * Visits this node, the body, and then the while-expression.
+     *
+     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

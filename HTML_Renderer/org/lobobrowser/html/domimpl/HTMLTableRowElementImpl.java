@@ -37,16 +37,32 @@ import org.lobobrowser.html.w3c.HTMLTableRowElement;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class HTMLTableRowElementImpl.
+ */
 public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 		HTMLTableRowElement {
+	
+	/**
+	 * Instantiates a new HTML table row element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLTableRowElementImpl(String name) {
 		super(name, true);
 	}
 
+	/**
+	 * Instantiates a new HTML table row element impl.
+	 */
 	public HTMLTableRowElementImpl() {
 		super(HtmlProperties.TR, true);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getRowIndex()
+	 */
 	public int getRowIndex() {
 		DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
 		if (parent == null) {
@@ -72,11 +88,17 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 		return -1;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getSectionRowIndex()
+	 */
 	public int getSectionRowIndex() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getCells()
+	 */
 	public HTMLCollection getCells() {
 		NodeFilter filter = new NodeFilter() {
 			public boolean accept(Node node) {
@@ -86,42 +108,72 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 		return new DescendentHTMLCollection(this, filter, this.getTreeLock(), false);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getAlign()
+	 */
 	public String getAlign() {
 		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#setAlign(java.lang.String)
+	 */
 	public void setAlign(String align) {
 		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getBgColor()
+	 */
 	public String getBgColor() {
 		return this.getAttribute(HtmlAttributeProperties.BGCOLOR);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#setBgColor(java.lang.String)
+	 */
 	public void setBgColor(String bgColor) {
 		this.setAttribute(HtmlAttributeProperties.BGCOLOR, bgColor);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getCh()
+	 */
 	public String getCh() {
 		return this.getAttribute(HtmlAttributeProperties.CH);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#setCh(java.lang.String)
+	 */
 	public void setCh(String ch) {
 		this.setAttribute(HtmlAttributeProperties.CH, ch);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getChOff()
+	 */
 	public String getChOff() {
 		return this.getAttribute(HtmlAttributeProperties.CHOFF);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#setChOff(java.lang.String)
+	 */
 	public void setChOff(String chOff) {
 		this.setAttribute(HtmlAttributeProperties.CHOFF, chOff);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getVAlign()
+	 */
 	public String getVAlign() {
 		return this.getAttribute(HtmlAttributeProperties.VALIGN);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#setVAlign(java.lang.String)
+	 */
 	public void setVAlign(String vAlign) {
 		this.setAttribute(HtmlAttributeProperties.VALIGN, vAlign);
 	}
@@ -141,10 +193,21 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 		return this.insertCell(index, HtmlProperties.TH);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#insertCell(int)
+	 */
 	public HTMLElement insertCell(int index) throws DOMException {
 		return this.insertCell(index, HtmlProperties.TD);
 	}
 
+	/**
+	 * Insert cell.
+	 *
+	 * @param index the index
+	 * @param tagName the tag name
+	 * @return the HTML element
+	 * @throws DOMException the DOM exception
+	 */
 	private HTMLElement insertCell(int index, String tagName)
 			throws DOMException {
 		org.w3c.dom.Document doc = this.document;
@@ -181,6 +244,9 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 				"Index out of range");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#deleteCell(int)
+	 */
 	public void deleteCell(int index) throws DOMException {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -202,6 +268,9 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements
 				"Index out of range");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableRowElement#insertCell()
+	 */
 	@Override
 	public HTMLElement insertCell() {
 		// TODO Auto-generated method stub

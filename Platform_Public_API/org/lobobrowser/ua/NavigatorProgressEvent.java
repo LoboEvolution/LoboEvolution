@@ -24,18 +24,40 @@ package org.lobobrowser.ua;
 
 import java.net.URL;
 
+
 /**
  * An event containing response progress information.
  * 
  * @see NavigatorWindowListener#progressUpdated(NavigatorProgressEvent)
  */
 public class NavigatorProgressEvent extends NavigatorEvent {
+	
+	/** The progress type. */
 	private final ProgressType progressType;
+	
+	/** The url. */
 	private final URL url;
+	
+	/** The method. */
 	private final String method;
+	
+	/** The current value. */
 	private final int currentValue;
+	
+	/** The max value. */
 	private final int maxValue;
 
+	/**
+	 * Instantiates a new navigator progress event.
+	 *
+	 * @param source the source
+	 * @param clientletFrame the clientlet frame
+	 * @param progressType the progress type
+	 * @param url the url
+	 * @param method the method
+	 * @param value the value
+	 * @param max the max
+	 */
 	public NavigatorProgressEvent(Object source, NavigatorFrame clientletFrame,
 			ProgressType progressType, URL url, String method,
 			int value, int max) {
@@ -47,22 +69,47 @@ public class NavigatorProgressEvent extends NavigatorEvent {
 		this.maxValue = max;
 	}
 
+	/**
+	 * Gets the method.
+	 *
+	 * @return the method
+	 */
 	public String getMethod() {
 		return method;
 	}
 
+	/**
+	 * Gets the progress type.
+	 *
+	 * @return the progress type
+	 */
 	public ProgressType getProgressType() {
 		return progressType;
 	}
 
+	/**
+	 * Gets the url.
+	 *
+	 * @return the url
+	 */
 	public URL getUrl() {
 		return url;
 	}
 
+	/**
+	 * Gets the current value.
+	 *
+	 * @return the current value
+	 */
 	public int getCurrentValue() {
 		return currentValue;
 	}
 
+	/**
+	 * Gets the max value.
+	 *
+	 * @return the max value
+	 */
 	public int getMaxValue() {
 		return maxValue;
 	}

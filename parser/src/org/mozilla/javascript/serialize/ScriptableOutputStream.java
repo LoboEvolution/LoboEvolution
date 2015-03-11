@@ -18,6 +18,7 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.UniqueTag;
 
+
 /**
  * Class ScriptableOutputStream is an ObjectOutputStream used
  * to serialize JavaScript objects and functions. Note that
@@ -45,6 +46,7 @@ public class ScriptableOutputStream extends ObjectOutputStream {
      *
      * @param out the OutputStream to write to.
      * @param scope the scope containing the object.
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     public ScriptableOutputStream(OutputStream out, Scriptable scope)
         throws IOException
@@ -57,6 +59,11 @@ public class ScriptableOutputStream extends ObjectOutputStream {
         excludeStandardObjectNames(); // XXX
     }
 
+    /**
+     * Exclude all ids.
+     *
+     * @param ids the ids
+     */
     public void excludeAllIds(Object[] ids) {
         for (Object id: ids) {
             if (id instanceof String &&
@@ -71,11 +78,10 @@ public class ScriptableOutputStream extends ObjectOutputStream {
      * Adds a qualified name to the list of object to be excluded from
      * serialization. Names excluded from serialization are looked up
      * in the new scope and replaced upon deserialization.
+     *
      * @param name a fully qualified name (of the form "a.b.c", where
      *             "a" must be a property of the top-level object). The object
      *             need not exist, in which case the name is ignored.
-     * @throws IllegalArgumentException if the object is not a
-     *         {@link Scriptable}.
      */
     public void addOptionalExcludedName(String name) {
         Object obj = lookupQualifiedName(scope, name);
@@ -94,10 +100,9 @@ public class ScriptableOutputStream extends ObjectOutputStream {
      * Adds a qualified name to the list of objects to be excluded from
      * serialization. Names excluded from serialization are looked up
      * in the new scope and replaced upon deserialization.
+     *
      * @param name a fully qualified name (of the form "a.b.c", where
      *             "a" must be a property of the top-level object)
-     * @throws IllegalArgumentException if the object is not found or is not
-     *         a {@link Scriptable}.
      */
     public void addExcludedName(String name) {
         Object obj = lookupQualifiedName(scope, name);
@@ -110,6 +115,9 @@ public class ScriptableOutputStream extends ObjectOutputStream {
 
     /**
      * Returns true if the name is excluded from serialization.
+     *
+     * @param name the name
+     * @return true, if successful
      */
     public boolean hasExcludedName(String name) {
         return table.get(name) != null;
@@ -117,6 +125,8 @@ public class ScriptableOutputStream extends ObjectOutputStream {
 
     /**
      * Removes a name from the list of names to exclude.
+     *
+     * @param name the name
      */
     public void removeExcludedName(String name) {
         table.remove(name);
@@ -152,6 +162,13 @@ public class ScriptableOutputStream extends ObjectOutputStream {
         }
     }
 
+    /**
+     * Lookup qualified name.
+     *
+     * @param scope the scope
+     * @param qualifiedName the qualified name
+     * @return the object
+     */
     static Object lookupQualifiedName(Scriptable scope,
                                       String qualifiedName)
     {
@@ -166,17 +183,36 @@ public class ScriptableOutputStream extends ObjectOutputStream {
         return result;
     }
 
+    /**
+     * The Class PendingLookup.
+     */
     static class PendingLookup implements Serializable
     {
+        
+        /** The Constant serialVersionUID. */
         static final long serialVersionUID = -2692990309789917727L;
 
+        /**
+         * Instantiates a new pending lookup.
+         *
+         * @param name the name
+         */
         PendingLookup(String name) { this.name = name; }
 
+        /**
+         * Gets the name.
+         *
+         * @return the name
+         */
         String getName() { return name; }
 
+        /** The name. */
         private String name;
     }
 
+    /* (non-Javadoc)
+     * @see java.io.ObjectOutputStream#replaceObject(java.lang.Object)
+     */
     @Override
     protected Object replaceObject(Object obj) throws IOException
     {
@@ -187,6 +223,9 @@ public class ScriptableOutputStream extends ObjectOutputStream {
         return new PendingLookup(name);
     }
 
+    /** The scope. */
     private Scriptable scope;
+    
+    /** The table. */
     private Map<Object,String> table;
 }

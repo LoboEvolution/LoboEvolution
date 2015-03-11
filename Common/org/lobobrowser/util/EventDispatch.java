@@ -27,19 +27,37 @@ import java.util.Collection;
 import java.util.EventObject;
 import java.util.LinkedList;
 
+
 /**
+ * The Class EventDispatch.
+ *
  * @author J. H. S.
  */
 public class EventDispatch {
+	
+	/** The listeners. */
 	private Collection listeners;
 
+	/**
+	 * Instantiates a new event dispatch.
+	 */
 	public EventDispatch() {
 	}
 
+	/**
+	 * Creates the listener collection.
+	 *
+	 * @return the collection
+	 */
 	public Collection createListenerCollection() {
 		return new LinkedList();
 	}
 
+	/**
+	 * Adds the listener.
+	 *
+	 * @param listener the listener
+	 */
 	public final void addListener(GenericEventListener listener) {
 		synchronized (this) {
 			if (this.listeners == null) {
@@ -49,6 +67,11 @@ public class EventDispatch {
 		}
 	}
 
+	/**
+	 * Removes the listener.
+	 *
+	 * @param listener the listener
+	 */
 	public final void removeListener(GenericEventListener listener) {
 		synchronized (this) {
 			if (this.listeners != null) {
@@ -57,6 +80,11 @@ public class EventDispatch {
 		}
 	}
 
+	/**
+	 * Fire event.
+	 *
+	 * @param event the event
+	 */
 	public final void fireEvent(EventObject event) {
 		GenericEventListener[] larray = null;
 		synchronized (this) {

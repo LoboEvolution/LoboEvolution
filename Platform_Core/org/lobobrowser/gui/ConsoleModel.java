@@ -35,29 +35,50 @@ import java.util.logging.Logger;
 import javax.swing.text.PlainDocument;
 import javax.swing.text.Position;
 
+
 /**
  * The Swing document model that is used to store console output.
  */
 public class ConsoleModel extends PlainDocument {
+	
+	/** The Constant MAX_LENGTH. */
 	private static final int MAX_LENGTH = 20000;
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(ConsoleModel.class
 			.getName());
+	
+	/** The output stream. */
 	private final OutputStream outputStream;
 
 	/**
-	 * 
+	 * Instantiates a new console model.
 	 */
 	public ConsoleModel() {
 		super();
 		this.outputStream = new LocalOutputStream();
 	}
 
+	/** The standard. */
 	private static ConsoleModel standard = new ConsoleModel();
 
+	/**
+	 * Gets the standard.
+	 *
+	 * @return the standard
+	 */
 	public static ConsoleModel getStandard() {
 		return standard;
 	}
 
+	/**
+	 * Append.
+	 *
+	 * @param bytes the bytes
+	 * @param offset the offset
+	 * @param length the length
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void append(final byte[] bytes, final int offset, final int length)
 			throws IOException {
 		try {
@@ -75,13 +96,26 @@ public class ConsoleModel extends PlainDocument {
 		}
 	}
 
+	/**
+	 * Gets the prints the stream.
+	 *
+	 * @return the prints the stream
+	 */
 	public PrintStream getPrintStream() {
 		return new PrintStream(this.outputStream);
 	}
 
+	/**
+	 * The Class LocalOutputStream.
+	 */
 	private class LocalOutputStream extends OutputStream implements Runnable {
+		
+		/** The data queue. */
 		private final LinkedList dataQueue = new LinkedList();
 
+		/**
+		 * Instantiates a new local output stream.
+		 */
 		public LocalOutputStream() {
 			Thread t = new Thread(this, "ConsoleOutputStream");
 			t.setDaemon(true);
@@ -133,6 +167,9 @@ public class ConsoleModel extends PlainDocument {
 			this.write(new byte[] { (byte) b }, 0, 1);
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		public void run() {
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 			for (;;) {

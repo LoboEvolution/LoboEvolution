@@ -26,13 +26,27 @@ import java.net.URL;
 
 import org.lobobrowser.clientlet.ClientletResponse;
 
+
 /**
  * An event containing response information.
  */
 public class NavigatorResponseEvent extends NavigatorEvent {
+	
+	/** The response. */
 	private final ClientletResponse response;
+	
+	/** The request type. */
 	private final RequestType requestType;
 
+	/**
+	 * Instantiates a new navigator response event.
+	 *
+	 * @param source the source
+	 * @param eventType the event type
+	 * @param clientletFrame the clientlet frame
+	 * @param response the response
+	 * @param requestType the request type
+	 */
 	public NavigatorResponseEvent(Object source, NavigatorEventType eventType,
 			NavigatorFrame clientletFrame, ClientletResponse response,
 			RequestType requestType) {
@@ -41,23 +55,46 @@ public class NavigatorResponseEvent extends NavigatorEvent {
 		this.requestType = requestType;
 	}
 
+	/**
+	 * Gets the response.
+	 *
+	 * @return the response
+	 */
 	public ClientletResponse getResponse() {
 		return response;
 	}
 
+	/**
+	 * Gets the url.
+	 *
+	 * @return the url
+	 */
 	public URL getUrl() {
 		return this.response == null ? null : this.response.getResponseURL();
 	}
 
+	/**
+	 * Gets the method.
+	 *
+	 * @return the method
+	 */
 	public String getMethod() {
 		return this.response == null ? null : this.response
 				.getLastRequestMethod();
 	}
 
+	/**
+	 * Gets the request type.
+	 *
+	 * @return the request type
+	 */
 	public RequestType getRequestType() {
 		return requestType;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorEvent#toString()
+	 */
 	public String toString() {
 		return "NavigatorWindowEvent[type=" + this.getEventType() + ",url="
 				+ this.getUrl() + "]";

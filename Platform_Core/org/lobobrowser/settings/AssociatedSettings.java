@@ -29,14 +29,21 @@ import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
 import org.lobobrowser.util.LRUCache;
 
+
 /**
  * Settings associated with host names. This is a singleton class with an
  * instance obtained by calling {@link #getInstance()}.
  */
 public class AssociatedSettings implements Serializable {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(AssociatedSettings.class.getName());
+	
+	/** The Constant instance. */
 	private static final AssociatedSettings instance;
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574500005000804L;
 
 	static {
@@ -54,11 +61,16 @@ public class AssociatedSettings implements Serializable {
 		instance = ins;
 	}
 
+	/**
+	 * Instantiates a new associated settings.
+	 */
 	private AssociatedSettings() {
 	}
 
 	/**
 	 * Gets the class singleton.
+	 *
+	 * @return single instance of AssociatedSettings
 	 */
 	public static AssociatedSettings getInstance() {
 		SecurityManager sm = System.getSecurityManager();
@@ -68,6 +80,9 @@ public class AssociatedSettings implements Serializable {
 		return instance;
 	}
 
+	/**
+	 * Save.
+	 */
 	public void save() {
 		try {
 			StorageManager.getInstance().saveSettings(
@@ -78,14 +93,27 @@ public class AssociatedSettings implements Serializable {
 		}
 	}
 
+	/** The user name by host. */
 	private final LRUCache userNameByHost = new LRUCache(500);
 
+	/**
+	 * Gets the user name for host.
+	 *
+	 * @param hostName the host name
+	 * @return the user name for host
+	 */
 	public String getUserNameForHost(String hostName) {
 		synchronized (this) {
 			return (String) this.userNameByHost.get(hostName);
 		}
 	}
 
+	/**
+	 * Sets the user name for host.
+	 *
+	 * @param hostName the host name
+	 * @param userName the user name
+	 */
 	public void setUserNameForHost(String hostName, String userName) {
 		synchronized (this) {
 			this.userNameByHost.put(hostName, userName, 1);

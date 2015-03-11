@@ -30,15 +30,25 @@ import org.w3c.dom.css.CSSValue;
 
 import com.steadystate.css.util.LangUtils;
 
+
 /**
+ * The Class Property.
+ *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
 public class Property extends CSSOMObjectImpl {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 8720637891949104989L;
 
+    /** The name_. */
     private String name_;
+    
+    /** The value_. */
     private CSSValue value_;
+    
+    /** The important_. */
     private boolean important_;
 
     /**

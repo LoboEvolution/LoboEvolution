@@ -6,6 +6,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * Exception thrown by
  * {@link org.mozilla.javascript.Context#executeScriptWithContinuations(Script, Scriptable)}
@@ -17,8 +18,14 @@ package org.mozilla.javascript;
  * @author Norris Boyd
  */
 public class ContinuationPending extends RuntimeException {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 4956008116771118856L;
+    
+    /** The continuation state. */
     private NativeContinuation continuationState;
+    
+    /** The application state. */
     private Object applicationState;
 
     /**
@@ -43,6 +50,8 @@ public class ContinuationPending extends RuntimeException {
     }
 
     /**
+     * Gets the continuation state.
+     *
      * @return internal continuation state
      */
     NativeContinuation getContinuationState() {
@@ -59,6 +68,8 @@ public class ContinuationPending extends RuntimeException {
     }
 
     /**
+     * Gets the application state.
+     *
      * @return arbitrary application state
      */
     public Object getApplicationState() {

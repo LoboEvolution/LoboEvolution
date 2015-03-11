@@ -36,9 +36,17 @@ import org.lobobrowser.clientlet.ClientletContext;
 
 import com.sun.javafx.stage.StageDelegate;
 
+
+/**
+ * The Class ClientletStageDelegate.
+ */
 public class ClientletStageDelegate extends StageDelegate {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(ClientletStageDelegate.class.getName());
+	
+	/** The Constant PANEL_SCENE_TYPE. */
 	private static final FXClassType PANEL_SCENE_TYPE;
 	static {
 		String helperName = "com.sun.javafx.scene.JSGPanelSceneImpl";
@@ -46,9 +54,19 @@ public class ClientletStageDelegate extends StageDelegate {
 		PANEL_SCENE_TYPE = type;
 	}
 
+	/**
+	 * Instantiates a new clientlet stage delegate.
+	 *
+	 * @param context the context
+	 */
 	public ClientletStageDelegate(ClientletContext context) {
 	}
 
+	/**
+	 * Creates the component.
+	 *
+	 * @return the component
+	 */
 	public Component createComponent() {
 		FXClassType stageDelegateType = FXContext.getInstance().findClass(
 				this.getClass().getName());
@@ -68,10 +86,22 @@ public class ClientletStageDelegate extends StageDelegate {
 		return getSceneComponent(sceneValue);
 	}
 
+	/**
+	 * Gets the scene component.
+	 *
+	 * @param scene the scene
+	 * @return the scene component
+	 */
 	public static java.awt.Component getSceneComponent(Scene scene) {
 		return getSceneComponent(FXLocal.getContext().mirrorOf(scene));
 	}
 
+	/**
+	 * Gets the scene component.
+	 *
+	 * @param sceneMirror the scene mirror
+	 * @return the scene component
+	 */
 	public static java.awt.Component getSceneComponent(FXValue sceneMirror) {
 		FXClassType type = PANEL_SCENE_TYPE;
 		if (type == null) {
@@ -86,6 +116,9 @@ public class ClientletStageDelegate extends StageDelegate {
 				.asObject();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.sun.javafx.stage.StageDelegate#close()
+	 */
 	@Override
 	public void close() {
 		if (logger.isLoggable(Level.INFO)) {
@@ -93,6 +126,9 @@ public class ClientletStageDelegate extends StageDelegate {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.sun.javafx.stage.StageDelegate#toBack()
+	 */
 	@Override
 	public void toBack() {
 		if (logger.isLoggable(Level.INFO)) {
@@ -100,6 +136,9 @@ public class ClientletStageDelegate extends StageDelegate {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.sun.javafx.stage.StageDelegate#toFront()
+	 */
 	@Override
 	public void toFront() {
 		if (logger.isLoggable(Level.INFO)) {

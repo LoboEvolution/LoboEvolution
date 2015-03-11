@@ -29,16 +29,29 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 
+
 /**
+ * The Class CenterLayout.
+ *
  * @author J. H. S.
  */
 public class CenterLayout implements LayoutManager {
+	
+	/* (non-Javadoc)
+	 * @see java.awt.LayoutManager#addLayoutComponent(java.lang.String, java.awt.Component)
+	 */
 	public void addLayoutComponent(String arg0, Component arg1) {
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.LayoutManager#removeLayoutComponent(java.awt.Component)
+	 */
 	public void removeLayoutComponent(Component arg0) {
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
+	 */
 	public Dimension preferredLayoutSize(Container arg0) {
 		Insets insets = arg0.getInsets();
 		int count = arg0.getComponentCount();
@@ -110,8 +123,14 @@ public class CenterLayout implements LayoutManager {
 		}
 	}
 
+	/** The instance. */
 	private static CenterLayout instance = new CenterLayout();
 
+	/**
+	 * Gets the single instance of CenterLayout.
+	 *
+	 * @return single instance of CenterLayout
+	 */
 	public static CenterLayout getInstance() {
 		return instance;
 	}

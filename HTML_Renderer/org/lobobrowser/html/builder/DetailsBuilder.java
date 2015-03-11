@@ -23,8 +23,15 @@ package org.lobobrowser.html.builder;
 import org.lobobrowser.html.domimpl.HTMLDetailsElementImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 
+
+/**
+ * The Class DetailsBuilder.
+ */
 public class DetailsBuilder extends HTMLElementBuilder {
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
 	@Override
 	protected HTMLElementImpl build(String name) {
 		return new HTMLDetailsElementImpl(name);

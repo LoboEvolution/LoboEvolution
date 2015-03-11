@@ -32,23 +32,46 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.util.ColorCommon;
 
+
 /**
+ * A factory for creating Color objects.
+ *
  * @author J. H. S.
  */
 public class ColorFactory {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(ColorFactory.class.getName());
+	
+	/** The instance. */
 	private static ColorFactory instance;
+	
+	/** The Constant TRANSPARENT. */
 	public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
+	
+	/** The color map. */
 	private Map<String, Color> colorMap = new HashMap<String, Color>(510);
+	
+	/** The Constant RGB_START. */
 	private static final String RGB_START = "rgb(";
+	
+	/** The Constant RGBA_START. */
 	private static final String RGBA_START = "rgba(";
 
+	/**
+	 * Instantiates a new color factory.
+	 */
 	private ColorFactory() {
 		synchronized (this) {
 			this.colorMap = ColorCommon.mapColor();
 		}
 	}
 
+	/**
+	 * Gets the single instance of ColorFactory.
+	 *
+	 * @return single instance of ColorFactory
+	 */
 	public static final ColorFactory getInstance() {
 		if (instance == null) {
 			synchronized (ColorFactory.class) {
@@ -60,6 +83,12 @@ public class ColorFactory {
 		return instance;
 	}
 
+	/**
+	 * Checks if is color.
+	 *
+	 * @param colorSpec the color spec
+	 * @return true, if is color
+	 */
 	public boolean isColor(String colorSpec) {
 		if (colorSpec.startsWith("#")) {
 			return true;
@@ -76,6 +105,12 @@ public class ColorFactory {
 		}
 	}
 
+	/**
+	 * Gets the color.
+	 *
+	 * @param colorSpec the color spec
+	 * @return the color
+	 */
 	public Color getColor(String colorSpec) {
 		String normalSpec = colorSpec.toLowerCase();
 

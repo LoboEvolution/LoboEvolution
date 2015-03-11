@@ -23,6 +23,10 @@ package org.lobobrowser.html;
 import java.util.Arrays;
 import java.util.List;
 
+
+/**
+ * The Class HtmlCommandMapping.
+ */
 public class HtmlCommandMapping {
 
 	/**

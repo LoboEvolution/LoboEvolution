@@ -29,21 +29,38 @@ import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.ColorFactory;
 
+
+/**
+ * The Class BodyRenderState.
+ */
 public class BodyRenderState extends StyleSheetRenderState {
 	// Note: BODY behaves like an inline element, but the root
 	// block uses the element and treats its properties as those
 	// of a block element.
 
+	/** The i color. */
 	private Color iColor;
 
+	/**
+	 * Instantiates a new body render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param element the element
+	 */
 	public BodyRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#invalidate()
+	 */
 	public void invalidate() {
 		super.invalidate();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getBackgroundInfo()
+	 */
 	public BackgroundInfo getBackgroundInfo() {
 		BackgroundInfo binfo = this.iBackgroundInfo;
 		if (binfo != INVALID_BACKGROUND_INFO) {
@@ -64,6 +81,9 @@ public class BodyRenderState extends StyleSheetRenderState {
 		return binfo;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getColor()
+	 */
 	@Override
 	public Color getColor() {
 		Color c = this.iColor;
@@ -81,6 +101,9 @@ public class BodyRenderState extends StyleSheetRenderState {
 		return c;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getMarginInsets()
+	 */
 	public HtmlInsets getMarginInsets() {
 		HtmlInsets insets = this.marginInsets;
 		if (insets != INVALID_INSETS) {

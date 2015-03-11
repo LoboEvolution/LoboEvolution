@@ -36,15 +36,26 @@ import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.ua.ProgressType;
 import org.lobobrowser.ua.RequestType;
 
+
 /**
+ * The Class RedirectRequestHandler.
+ *
  * @author J. H. S.
  */
 public class RedirectRequestHandler implements RequestHandler {
+	
+	/** The orig handler. */
 	private final RequestHandler origHandler;
+	
+	/** The latest request url. */
 	private final URL latestRequestURL;
 
 	/**
-	 * 
+	 * Instantiates a new redirect request handler.
+	 *
+	 * @param origHandler the orig handler
+	 * @param origConnection the orig connection
+	 * @throws MalformedURLException the malformed url exception
 	 */
 	public RedirectRequestHandler(RequestHandler origHandler,
 			HttpURLConnection origConnection) throws MalformedURLException {
@@ -147,16 +158,26 @@ public class RedirectRequestHandler implements RequestHandler {
 		this.origHandler.processResponse(response);
 	}
 
+	/** The cancelled. */
 	private volatile boolean cancelled;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#cancel()
+	 */
 	public void cancel() {
 		this.cancelled = true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#isCancelled()
+	 */
 	public boolean isCancelled() {
 		return this.cancelled;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#getRequestType()
+	 */
 	public RequestType getRequestType() {
 		return this.origHandler.getRequestType();
 	}

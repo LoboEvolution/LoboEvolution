@@ -35,20 +35,33 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.html.dombl.ModelNode;
 
+
 /**
+ * The Class BaseBoundableRenderable.
+ *
  * @author J. H. S.
  */
 public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		BoundableRenderable {
+	
+	/** The Constant logger. */
 	protected static final Logger logger = Logger
 			.getLogger(BaseBoundableRenderable.class.getName());
+	
+	/** The Constant SELECTION_COLOR. */
 	protected static final Color SELECTION_COLOR = Color.BLUE;
+	
+	/** The Constant SELECTION_XOR. */
 	protected static final Color SELECTION_XOR = Color.LIGHT_GRAY;
 
 	// protected final Rectangle bounds = new Rectangle();
+	/** The container. */
 	protected final RenderableContainer container;
+	
+	/** The model node. */
 	protected final ModelNode modelNode;
 
+	/** The height. */
 	public int x, y, width, height;
 
 	/**
@@ -56,16 +69,28 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 	 */
 	protected boolean layoutUpTreeCanBeInvalidated = true;
 
+	/**
+	 * Mark layout valid.
+	 */
 	public void markLayoutValid() {
 		this.layoutUpTreeCanBeInvalidated = true;
 	}
 
+	/**
+	 * Instantiates a new base boundable renderable.
+	 *
+	 * @param container the container
+	 * @param modelNode the model node
+	 */
 	public BaseBoundableRenderable(RenderableContainer container,
 			ModelNode modelNode) {
 		this.container = container;
 		this.modelNode = modelNode;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getGUIPoint(int, int)
+	 */
 	public java.awt.Point getGUIPoint(int clientX, int clientY) {
 		Renderable parent = this.getParent();
 		if (parent instanceof BoundableRenderable) {
@@ -79,6 +104,9 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getRenderablePoint(int, int)
+	 */
 	public Point getRenderablePoint(int guiX, int guiY) {
 		Renderable parent = this.getParent();
 		if (parent instanceof BoundableRenderable) {
@@ -91,39 +119,70 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getHeight()
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getWidth()
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#setWidth(int)
+	 */
 	public void setWidth(int width) {
 		this.width = width;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getX()
+	 */
 	public int getX() {
 		return x;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getY()
+	 */
 	public int getY() {
 		return y;
 	}
 
+	/**
+	 * Contains.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @return true, if successful
+	 */
 	public boolean contains(int x, int y) {
 		return x >= this.x && y >= this.y && x < this.x + this.width
 				&& y < this.y + this.height;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getBounds()
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle(this.x, this.y, this.width, this.height);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getSize()
+	 */
 	public Dimension getSize() {
 		return new Dimension(this.width, this.height);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.Renderable#getModelNode()
+	 */
 	public ModelNode getModelNode() {
 		return this.modelNode;
 	}
@@ -142,23 +201,38 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		this.height = height;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#setX(int)
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#setY(int)
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#setHeight(int)
+	 */
 	public void setHeight(int height) {
 		this.height = height;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#setOrigin(int, int)
+	 */
 	public void setOrigin(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+	 * Invalidate layout local.
+	 */
 	protected abstract void invalidateLayoutLocal();
 
 	/**
@@ -188,10 +262,21 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		}
 	}
 
+	/**
+	 * Checks if is valid.
+	 *
+	 * @return true, if is valid
+	 */
 	public boolean isValid() {
 		return this.layoutUpTreeCanBeInvalidated;
 	}
 
+	/**
+	 * Relayout impl.
+	 *
+	 * @param invalidateLocal the invalidate local
+	 * @param onlyIfValid the only if valid
+	 */
 	private final void relayoutImpl(boolean invalidateLocal, boolean onlyIfValid) {
 		if (onlyIfValid && !this.layoutUpTreeCanBeInvalidated) {
 			return;
@@ -230,6 +315,9 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		}
 	}
 
+	/**
+	 * Relayout if valid.
+	 */
 	public void relayoutIfValid() {
 		if (EventQueue.isDispatchThread()) {
 			this.relayoutImpl(true, true);
@@ -247,10 +335,16 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 	 */
 	protected RCollection parent;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#setParent(org.lobobrowser.html.renderer.RCollection)
+	 */
 	public void setParent(RCollection parent) {
 		this.parent = parent;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getParent()
+	 */
 	public RCollection getParent() {
 		return this.parent;
 	}
@@ -260,17 +354,25 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 	 */
 	protected RCollection originalParent;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#setOriginalParent(org.lobobrowser.html.renderer.RCollection)
+	 */
 	public void setOriginalParent(RCollection origParent) {
 		this.originalParent = origParent;
 	}
 
 	/**
 	 * This is the parent based on the original element hierarchy.
+	 *
+	 * @return the original parent
 	 */
 	public RCollection getOriginalParent() {
 		return this.originalParent;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getOriginalOrCurrentParent()
+	 */
 	public RCollection getOriginalOrCurrentParent() {
 		RCollection origParent = this.originalParent;
 		if (origParent == null) {
@@ -279,6 +381,9 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		return origParent;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#repaint(int, int, int, int)
+	 */
 	public void repaint(int x, int y, int width, int height) {
 		Renderable parent = this.parent;
 		if (parent instanceof BoundableRenderable) {
@@ -295,14 +400,25 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#repaint()
+	 */
 	public void repaint() {
 		this.repaint(0, 0, this.width, this.height);
 	}
 
+	/**
+	 * Gets the block background color.
+	 *
+	 * @return the block background color
+	 */
 	public Color getBlockBackgroundColor() {
 		return this.container.getPaintedBackgroundColor();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#paintTranslated(java.awt.Graphics)
+	 */
 	public final void paintTranslated(Graphics g) {
 		int x = this.x;
 		int y = this.y;
@@ -314,6 +430,14 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		}
 	}
 
+	/**
+	 * Translate descendent point.
+	 *
+	 * @param descendent the descendent
+	 * @param x the x
+	 * @param y the y
+	 * @return the java.awt. point
+	 */
 	protected final java.awt.Point translateDescendentPoint(
 			BoundableRenderable descendent, int x, int y) {
 		while (descendent != this) {
@@ -328,6 +452,9 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		return new Point(x, y);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseOut(java.awt.event.MouseEvent, int, int, org.lobobrowser.html.dombl.ModelNode)
+	 */
 	public void onMouseOut(MouseEvent event, int x, int y, ModelNode limit) {
 		if (this.isContainedByNode()) {
 			HtmlController.getInstance().onMouseOut(this.modelNode, event, x,
@@ -335,6 +462,9 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseMoved(java.awt.event.MouseEvent, int, int, boolean, org.lobobrowser.html.dombl.ModelNode)
+	 */
 	public void onMouseMoved(MouseEvent event, int x, int y,
 			boolean triggerEvent, ModelNode limit) {
 		if (triggerEvent) {
@@ -345,10 +475,16 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getOrigin()
+	 */
 	public Point getOrigin() {
 		return new Point(this.x, this.y);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getOriginRelativeTo(org.lobobrowser.html.renderer.RCollection)
+	 */
 	public Point getOriginRelativeTo(RCollection ancestor) {
 		int x = this.x;
 		int y = this.y;

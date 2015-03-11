@@ -33,11 +33,32 @@ import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.ListStyle;
 import org.lobobrowser.html.w3c.HTMLElement;
 
+
+/**
+ * The Class RListItem.
+ */
 class RListItem extends BaseRListElement {
+	
+	/** The Constant BULLET_WIDTH. */
 	private static final int BULLET_WIDTH = 5;
+	
+	/** The Constant BULLET_HEIGHT. */
 	private static final int BULLET_HEIGHT = 5;
+	
+	/** The Constant BULLET_RMARGIN. */
 	private static final int BULLET_RMARGIN = 5;
 
+	/**
+	 * Instantiates a new r list item.
+	 *
+	 * @param modelNode the model node
+	 * @param listNesting the list nesting
+	 * @param pcontext the pcontext
+	 * @param rcontext the rcontext
+	 * @param frameContext the frame context
+	 * @param parentContainer the parent container
+	 * @param parent the parent
+	 */
 	public RListItem(DOMNodeImpl modelNode, int listNesting,
 			UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer parentContainer,
@@ -48,18 +69,32 @@ class RListItem extends BaseRListElement {
 		// 0, 0);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RBlock#getViewportListNesting(int)
+	 */
 	public int getViewportListNesting(int blockNesting) {
 		return blockNesting + 1;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RBlock#invalidateLayoutLocal()
+	 */
 	public void invalidateLayoutLocal() {
 		super.invalidateLayoutLocal();
 		this.value = null;
 	}
 
+	/** The Constant UNSET. */
 	private static final Integer UNSET = new Integer(Integer.MIN_VALUE);
+	
+	/** The value. */
 	private Integer value = null;
 
+	/**
+	 * Gets the value.
+	 *
+	 * @return the value
+	 */
 	private Integer getValue() {
 		Integer value = this.value;
 		if (value == null) {
@@ -79,8 +114,12 @@ class RListItem extends BaseRListElement {
 		return value;
 	}
 
+	/** The count. */
 	private int count;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RBlock#doLayout(int, int, boolean, boolean, org.lobobrowser.html.renderer.FloatingBoundsSource, int, int, boolean)
+	 */
 	public void doLayout(int availWidth, int availHeight, boolean expandWidth,
 			boolean expandHeight, FloatingBoundsSource floatBoundsSource,
 			int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
@@ -100,6 +139,9 @@ class RListItem extends BaseRListElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RBlock#paint(java.awt.Graphics)
+	 */
 	public void paint(Graphics g) {
 		super.paint(g);
 		RenderState rs = this.modelNode.getRenderState();

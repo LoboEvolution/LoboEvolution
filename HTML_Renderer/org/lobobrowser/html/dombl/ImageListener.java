@@ -20,8 +20,27 @@
  */
 package org.lobobrowser.html.dombl;
 
+
+/**
+ * The listener interface for receiving image events.
+ * The class that is interested in processing a image
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addImageListener</code> method. When
+ * the image event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see ImageEvent
+ */
 public interface ImageListener extends java.util.EventListener {
+	
+	/** The Constant EMPTY_ARRAY. */
 	public static final ImageListener[] EMPTY_ARRAY = new ImageListener[0];
 
+	/**
+	 * Image loaded.
+	 *
+	 * @param event the event
+	 */
 	public void imageLoaded(ImageEvent event);
 }

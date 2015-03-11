@@ -8,9 +8,12 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Interface ConditionalSelector.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  * @see Selector#SAC_CONDITIONAL_SELECTOR
  */
 public interface ConditionalSelector extends SimpleSelector {
@@ -20,11 +23,15 @@ public interface ConditionalSelector extends SimpleSelector {
 	 * <p>
 	 * The simple selector can't be a <code>ConditionalSelector</code>.
 	 * </p>
+	 *
+	 * @return the simple selector
 	 */
 	public SimpleSelector getSimpleSelector();
 
 	/**
 	 * Returns the condition to be applied on the simple selector.
+	 *
+	 * @return the condition
 	 */
 	public Condition getCondition();
 }

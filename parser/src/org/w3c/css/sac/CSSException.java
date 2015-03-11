@@ -11,12 +11,16 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Class CSSException.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  */
 public class CSSException extends RuntimeException {
 
+	/** The s. */
 	protected String s;
 
 	/**
@@ -24,27 +28,26 @@ public class CSSException extends RuntimeException {
 	 */
 	public static final short SAC_UNSPECIFIED_ERR = 0;
 
-	/**
-	 * If the operation is not supported
-	 */
+	/** If the operation is not supported. */
 	public static final short SAC_NOT_SUPPORTED_ERR = 1;
 
-	/**
-	 * If an invalid or illegal string is specified
-	 */
+	/** If an invalid or illegal string is specified. */
 	public static final short SAC_SYNTAX_ERR = 2;
 
 	/*
 	 * Default message for unspecified error.
 	 */
+	/** The Constant S_SAC_UNSPECIFIED_ERR. */
 	protected static final String S_SAC_UNSPECIFIED_ERR = "unknown error";
 	/*
 	 * Default message for not supported error.
 	 */
+	/** The Constant S_SAC_NOT_SUPPORTED_ERR. */
 	protected static final String S_SAC_NOT_SUPPORTED_ERR = "not supported";
 	/*
 	 * Default message for syntax error.
 	 */
+	/** The Constant S_SAC_SYNTAX_ERR. */
 	protected static final String S_SAC_SYNTAX_ERR = "syntax error";
 
 	/**
@@ -52,16 +55,19 @@ public class CSSException extends RuntimeException {
 	 */
 	protected Exception e;
 
+	/** The code. */
 	protected short code;
 
 	/**
-	 * Creates a new CSSException
+	 * Creates a new CSSException.
 	 */
 	public CSSException() {
 	}
 
 	/**
-	 * Creates a new CSSException
+	 * Creates a new CSSException.
+	 *
+	 * @param s the s
 	 */
 	public CSSException(String s) {
 		this.code = SAC_UNSPECIFIED_ERR;
@@ -92,11 +98,10 @@ public class CSSException extends RuntimeException {
 	/**
 	 * Creates a new CSSException with an embeded exception and a specified
 	 * message.
-	 * 
-	 * @param code
-	 *            the specified code.
-	 * @param e
-	 *            the embeded exception.
+	 *
+	 * @param code            the specified code.
+	 * @param s the s
+	 * @param e            the embeded exception.
 	 */
 	public CSSException(short code, String s, Exception e) {
 		this.code = code;
@@ -131,6 +136,8 @@ public class CSSException extends RuntimeException {
 
 	/**
 	 * returns the error code for this exception.
+	 *
+	 * @return the code
 	 */
 	public short getCode() {
 		return code;
@@ -138,6 +145,8 @@ public class CSSException extends RuntimeException {
 
 	/**
 	 * Returns the internal exception if any, null otherwise.
+	 *
+	 * @return the exception
 	 */
 	public Exception getException() {
 		return e;

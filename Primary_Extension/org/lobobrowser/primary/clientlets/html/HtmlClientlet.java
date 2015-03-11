@@ -58,16 +58,24 @@ import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.RecordedInputStream;
 import org.w3c.dom.Element;
 
+
 /**
+ * The Class HtmlClientlet.
+ *
  * @author J. H. S.
  */
 public class HtmlClientlet implements Clientlet {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(HtmlClientlet.class
 			.getName());
+	
+	/** The Constant NON_VISIBLE_ELEMENTS. */
 	private static final Set<String> NON_VISIBLE_ELEMENTS = new HashSet<String>();
 
 	// Maximum buffer size required to determine if a reload due
 	// to Http-Equiv is necessary.
+	/** The Constant MAX_IS_BUFFER_SIZE. */
 	private static final int MAX_IS_BUFFER_SIZE = 1024 * 100;
 
 	static {
@@ -84,6 +92,9 @@ public class HtmlClientlet implements Clientlet {
 		nve.add("link");
 	}
 
+	/**
+	 * Instantiates a new html clientlet.
+	 */
 	public HtmlClientlet() {
 		super();
 	}
@@ -97,6 +108,14 @@ public class HtmlClientlet implements Clientlet {
 		this.processImpl(cc, null, null);
 	}
 
+	/**
+	 * Process impl.
+	 *
+	 * @param cc the cc
+	 * @param httpEquivData the http equiv data
+	 * @param rin the rin
+	 * @throws ClientletException the clientlet exception
+	 */
 	private void processImpl(final ClientletContext cc,
 			Map<String, String> httpEquivData, RecordedInputStream rin)
 			throws ClientletException {
@@ -255,6 +274,13 @@ public class HtmlClientlet implements Clientlet {
 		}
 	}
 
+	/**
+	 * Extract charset.
+	 *
+	 * @param responseURL the response url
+	 * @param contentType the content type
+	 * @return the string
+	 */
 	private String extractCharset(URL responseURL, String contentType) {
 		StringTokenizer tok = new StringTokenizer(contentType, ";");
 		if (tok.hasMoreTokens()) {
@@ -274,6 +300,12 @@ public class HtmlClientlet implements Clientlet {
 		return null;
 	}
 
+	/**
+	 * Extract locales.
+	 *
+	 * @param contentLanguage the content language
+	 * @return the sets the
+	 */
 	private Set<Locale> extractLocales(String contentLanguage) {
 		Set<Locale> locales = new HashSet<Locale>(3);
 		StringTokenizer tok = new StringTokenizer(contentLanguage, ",");
@@ -284,6 +316,12 @@ public class HtmlClientlet implements Clientlet {
 		return locales;
 	}
 
+	/**
+	 * Gets the default charset.
+	 *
+	 * @param url the url
+	 * @return the default charset
+	 */
 	private String getDefaultCharset(URL url) {
 		if (Urls.isLocalFile(url)) {
 			String charset = System.getProperty("file.encoding");
@@ -293,6 +331,12 @@ public class HtmlClientlet implements Clientlet {
 		}
 	}
 
+	/**
+	 * Extract refresh.
+	 *
+	 * @param refresh the refresh
+	 * @return the refresh info
+	 */
 	private final RefreshInfo extractRefresh(String refresh) {
 		String delayText = null;
 		String urlText = null;
@@ -324,20 +368,63 @@ public class HtmlClientlet implements Clientlet {
 		return new RefreshInfo(delay, urlText);
 	}
 
+	/**
+	 * The listener interface for receiving localDocumentNotification events.
+	 * The class that is interested in processing a localDocumentNotification
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addLocalDocumentNotificationListener</code> method. When
+	 * the localDocumentNotification event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see LocalDocumentNotificationEvent
+	 */
 	private static class LocalDocumentNotificationListener implements
 			DocumentNotificationListener {
+		
+		/** The Constant MAX_WAIT. */
 		private static final int MAX_WAIT = 7000;
+		
+		/** The document. */
 		private final HTMLDocumentImpl document;
+		
+		/** The html panel. */
 		private final HtmlPanel htmlPanel;
+		
+		/** The start timestamp. */
 		private final long startTimestamp;
+		
+		/** The rcontext. */
 		private final HtmlRendererContext rcontext;
+		
+		/** The ccontext. */
 		private final ClientletContext ccontext;
+		
+		/** The content. */
 		private final HtmlContent content;
+		
+		/** The detect http equiv. */
 		private final boolean detectHttpEquiv;
+		
+		/** The has visible elements. */
 		private boolean hasVisibleElements = false;
+		
+		/** The has switched to rendering. */
 		private boolean hasSwitchedToRendering = false;
+		
+		/** The http equiv elements. */
 		private Collection<HTMLElement> httpEquivElements;
 
+		/**
+		 * Instantiates a new local document notification listener.
+		 *
+		 * @param doc the doc
+		 * @param panel the panel
+		 * @param rcontext the rcontext
+		 * @param cc the cc
+		 * @param content the content
+		 * @param detectHttpEquiv the detect http equiv
+		 */
 		public LocalDocumentNotificationListener(HTMLDocumentImpl doc,
 				HtmlPanel panel, HtmlRendererContext rcontext,
 				ClientletContext cc, HtmlContent content,
@@ -351,9 +438,15 @@ public class HtmlClientlet implements Clientlet {
 			this.detectHttpEquiv = detectHttpEquiv;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#allInvalidated()
+		 */
 		public void allInvalidated() {
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#externalScriptLoading(org.lobobrowser.html.domimpl.DOMNodeImpl)
+		 */
 		public void externalScriptLoading(DOMNodeImpl node) {
 			// We can expect this to occur only in the parser thread.
 			if (this.hasVisibleElements) {
@@ -361,12 +454,23 @@ public class HtmlClientlet implements Clientlet {
 			}
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#invalidated(org.lobobrowser.html.domimpl.DOMNodeImpl)
+		 */
 		public void invalidated(DOMNodeImpl node) {
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#lookInvalidated(org.lobobrowser.html.domimpl.DOMNodeImpl)
+		 */
 		public void lookInvalidated(DOMNodeImpl node) {
 		}
 
+		/**
+		 * Adds the http equiv element.
+		 *
+		 * @param element the element
+		 */
 		private void addHttpEquivElement(HTMLElement element) {
 			Collection<HTMLElement> httpEquivElements = this.httpEquivElements;
 			if (httpEquivElements == null) {
@@ -376,6 +480,9 @@ public class HtmlClientlet implements Clientlet {
 			httpEquivElements.add(element);
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#nodeLoaded(org.lobobrowser.html.domimpl.DOMNodeImpl)
+		 */
 		public void nodeLoaded(DOMNodeImpl node) {
 			// We can expect this to occur only in the parser thread.
 			if (this.detectHttpEquiv) {
@@ -415,15 +522,30 @@ public class HtmlClientlet implements Clientlet {
 			}
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#positionInvalidated(org.lobobrowser.html.domimpl.DOMNodeImpl)
+		 */
 		public void positionInvalidated(DOMNodeImpl node) {
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#sizeInvalidated(org.lobobrowser.html.domimpl.DOMNodeImpl)
+		 */
 		public void sizeInvalidated(DOMNodeImpl node) {
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#structureInvalidated(org.lobobrowser.html.domimpl.DOMNodeImpl)
+		 */
 		public void structureInvalidated(DOMNodeImpl node) {
 		}
 
+		/**
+		 * May be visible element.
+		 *
+		 * @param node the node
+		 * @return true, if successful
+		 */
 		private final boolean mayBeVisibleElement(DOMNodeImpl node) {
 			if (node instanceof HTMLElement) {
 				HTMLElement element = (HTMLElement) node;
@@ -439,6 +561,9 @@ public class HtmlClientlet implements Clientlet {
 			}
 		}
 
+		/**
+		 * Ensure switched to rendering.
+		 */
 		public void ensureSwitchedToRendering() {
 			synchronized (this) {
 				if (this.hasSwitchedToRendering) {
@@ -457,6 +582,11 @@ public class HtmlClientlet implements Clientlet {
 			});
 		}
 
+		/**
+		 * Gets the http equiv data.
+		 *
+		 * @return the http equiv data
+		 */
 		private Map<String, String> getHttpEquivData() {
 			Collection<HTMLElement> httpEquivElements = this.httpEquivElements;
 			if (httpEquivElements == null) {
@@ -474,10 +604,23 @@ public class HtmlClientlet implements Clientlet {
 		}
 	}
 
+	/**
+	 * The Class RefreshInfo.
+	 */
 	private static class RefreshInfo {
+		
+		/** The wait seconds. */
 		public final int waitSeconds;
+		
+		/** The destination url. */
 		public final String destinationUrl;
 
+		/**
+		 * Instantiates a new refresh info.
+		 *
+		 * @param waitSeconds the wait seconds
+		 * @param destinationUrl the destination url
+		 */
 		public RefreshInfo(final int waitSeconds, final String destinationUrl) {
 			super();
 			this.waitSeconds = waitSeconds;
@@ -485,16 +628,32 @@ public class HtmlClientlet implements Clientlet {
 		}
 	}
 
+	/**
+	 * The Class HttpEquivRetryException.
+	 */
 	private static class HttpEquivRetryException extends RuntimeException {
 
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The http equiv data. */
 		private final Map<String, String> httpEquivData;
 
+		/**
+		 * Instantiates a new http equiv retry exception.
+		 *
+		 * @param httpEquiv the http equiv
+		 */
 		public HttpEquivRetryException(final Map<String, String> httpEquiv) {
 			super();
 			this.httpEquivData = httpEquiv;
 		}
 
+		/**
+		 * Gets the http equiv data.
+		 *
+		 * @return the http equiv data
+		 */
 		public Map<String, String> getHttpEquivData() {
 			return httpEquivData;
 		}

@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Create a horizontal rule. See the HR element definition in HTML 4.01.
  * <p>
@@ -39,15 +40,20 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLHRElement extends HTMLElement {
+	
 	/**
 	 * Align the rule on the page. See the align attribute definition in HTML
 	 * 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the align
 	 */
 	public String getAlign();
 
 	/**
 	 * Align the rule on the page. See the align attribute definition in HTML
 	 * 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param align the new align
 	 */
 	public void setAlign(String align);
 
@@ -55,6 +61,8 @@ public interface HTMLHRElement extends HTMLElement {
 	 * Indicates to the user agent that there should be no shading in the
 	 * rendering of this element. See the noshade attribute definition in HTML
 	 * 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the no shade
 	 */
 	public boolean getNoShade();
 
@@ -62,34 +70,54 @@ public interface HTMLHRElement extends HTMLElement {
 	 * Indicates to the user agent that there should be no shading in the
 	 * rendering of this element. See the noshade attribute definition in HTML
 	 * 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param noShade the new no shade
 	 */
 	public void setNoShade(boolean noShade);
 
 	/**
 	 * The height of the rule. See the size attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the size
 	 */
 	public String getSize();
 
 	/**
 	 * The height of the rule. See the size attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param size the new size
 	 */
 	public void setSize(String size);
 
 	/**
 	 * The width of the rule. See the width attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the width
 	 */
 	public String getWidth();
 
 	/**
 	 * The width of the rule. See the width attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the color
 	 */
 	public String getColor();
 
+	/**
+	 * Sets the color.
+	 *
+	 * @param color the new color
+	 */
 	public void setColor(String color);
 
+	/**
+	 * Sets the width.
+	 *
+	 * @param width the new width
+	 */
 	public void setWidth(String width);
 }

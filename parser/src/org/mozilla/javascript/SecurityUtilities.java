@@ -10,7 +10,10 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.security.ProtectionDomain;
 
+
 /**
+ * The Class SecurityUtilities.
+ *
  * @author Attila Szegedi
  */
 public class SecurityUtilities
@@ -33,6 +36,12 @@ public class SecurityUtilities
             });
     }
 
+    /**
+     * Gets the protection domain.
+     *
+     * @param clazz the clazz
+     * @return the protection domain
+     */
     public static ProtectionDomain getProtectionDomain(final Class<?> clazz)
     {
         return AccessController.doPrivileged(

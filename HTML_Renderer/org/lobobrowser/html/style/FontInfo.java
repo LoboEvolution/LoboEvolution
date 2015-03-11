@@ -20,10 +20,24 @@
  */
 package org.lobobrowser.html.style;
 
+
+/**
+ * The Class FontInfo.
+ */
 class FontInfo {
+	
+	/** The font family. */
 	public String fontFamily;
+	
+	/** The font style. */
 	public String fontStyle;
+	
+	/** The font variant. */
 	public String fontVariant;
+	
+	/** The font weight. */
 	public String fontWeight;
+	
+	/** The font size. */
 	public String fontSize;
 }

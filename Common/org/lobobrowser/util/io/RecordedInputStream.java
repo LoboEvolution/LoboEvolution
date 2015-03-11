@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
+
 /**
  * Wraps an InputStream and records all of the bytes read. This stream supports
  * mark() and reset().
@@ -38,17 +39,36 @@ import java.io.UnsupportedEncodingException;
  * @author J. H. S.
  */
 public class RecordedInputStream extends InputStream {
+	
+	/** The delegate. */
 	private final InputStream delegate;
+	
+	/** The store. */
 	private final ByteArrayOutputStream store = new ByteArrayOutputStream();
+	
+	/** The max buffer size. */
 	private final int maxBufferSize;
+	
+	/** The has reached eof. */
 	private boolean hasReachedEOF = false;
+	
+	/** The has reached max buffer size. */
 	private boolean hasReachedMaxBufferSize = false;
+	
+	/** The mark position. */
 	private int markPosition = -1;
+	
+	/** The read position. */
 	private int readPosition = -1;
+	
+	/** The reset buffer. */
 	private byte[] resetBuffer = null;
 
 	/**
-	 * 
+	 * Instantiates a new recorded input stream.
+	 *
+	 * @param delegate the delegate
+	 * @param maxBufferSize the max buffer size
 	 */
 	public RecordedInputStream(InputStream delegate, int maxBufferSize) {
 		super();
@@ -110,6 +130,9 @@ public class RecordedInputStream extends InputStream {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.io.InputStream#mark(int)
+	 */
 	public synchronized void mark(int readlimit) {
 		if (this.hasReachedMaxBufferSize) {
 			throw new IllegalStateException(
@@ -118,6 +141,9 @@ public class RecordedInputStream extends InputStream {
 		this.markPosition = this.store.size();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.io.InputStream#reset()
+	 */
 	public synchronized void reset() throws IOException {
 		if (this.hasReachedMaxBufferSize) {
 			throw new IllegalStateException(
@@ -161,6 +187,11 @@ public class RecordedInputStream extends InputStream {
 		}
 	}
 
+	/**
+	 * Consume to eof.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void consumeToEOF() throws IOException {
 		byte[] buffer = new byte[8192];
 		while (this.read(buffer) != -1) {
@@ -168,6 +199,12 @@ public class RecordedInputStream extends InputStream {
 		}
 	}
 
+	/**
+	 * Gets the bytes read.
+	 *
+	 * @return the bytes read
+	 * @throws BufferExceededException the buffer exceeded exception
+	 */
 	public byte[] getBytesRead() throws BufferExceededException {
 		if (this.hasReachedMaxBufferSize) {
 			throw new BufferExceededException();
@@ -175,6 +212,14 @@ public class RecordedInputStream extends InputStream {
 		return this.store.toByteArray();
 	}
 
+	/**
+	 * Gets the string.
+	 *
+	 * @param encoding the encoding
+	 * @return the string
+	 * @throws UnsupportedEncodingException the unsupported encoding exception
+	 * @throws BufferExceededException the buffer exceeded exception
+	 */
 	public String getString(String encoding)
 			throws UnsupportedEncodingException,
 			BufferExceededException {
@@ -185,6 +230,11 @@ public class RecordedInputStream extends InputStream {
 		return new String(bytes, encoding);
 	}
 
+	/**
+	 * Checks for reached eof.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasReachedEOF() {
 		return this.hasReachedEOF;
 	}

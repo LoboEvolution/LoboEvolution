@@ -27,13 +27,26 @@ import java.awt.Graphics;
 
 import org.lobobrowser.html.dombl.ModelNode;
 
+
 /**
  * Represents a renderer (view) node.
  */
 public interface Renderable {
+	
+	/** The Constant EMPTY_ARRAY. */
 	public static final Renderable[] EMPTY_ARRAY = new Renderable[0];
 
+	/**
+	 * Paint.
+	 *
+	 * @param g the g
+	 */
 	public void paint(Graphics g);
 
+	/**
+	 * Gets the model node.
+	 *
+	 * @return the model node
+	 */
 	public ModelNode getModelNode();
 }

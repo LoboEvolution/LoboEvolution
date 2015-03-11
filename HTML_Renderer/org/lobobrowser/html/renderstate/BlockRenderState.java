@@ -24,18 +24,34 @@ package org.lobobrowser.html.renderstate;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 
+
 /**
  * Render state for elements that are displayed as blocks by default.
  */
 public class BlockRenderState extends StyleSheetRenderState {
+	
+	/**
+	 * Instantiates a new block render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param element the element
+	 */
 	public BlockRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/**
+	 * Instantiates a new block render state.
+	 *
+	 * @param document the document
+	 */
 	public BlockRenderState(HTMLDocumentImpl document) {
 		super(document);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getDefaultDisplay()
+	 */
 	public int getDefaultDisplay() {
 		return DISPLAY_BLOCK;
 	}

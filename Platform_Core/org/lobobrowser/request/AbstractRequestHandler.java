@@ -36,12 +36,30 @@ import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.ua.ProgressType;
 import org.lobobrowser.ua.RequestType;
 
+
+/**
+ * The Class AbstractRequestHandler.
+ */
 public abstract class AbstractRequestHandler implements RequestHandler {
+	
+	/** The request. */
 	protected final ClientletRequest request;
+	
+	/** The request type. */
 	protected final RequestType requestType;
+	
+	/** The dialog component. */
 	private final Component dialogComponent;
+	
+	/** The cancelled. */
 	private boolean cancelled = false;
 
+	/**
+	 * Instantiates a new abstract request handler.
+	 *
+	 * @param request the request
+	 * @param dialogComponent the dialog component
+	 */
 	public AbstractRequestHandler(ClientletRequest request,
 			Component dialogComponent) {
 		this.request = request;
@@ -49,48 +67,88 @@ public abstract class AbstractRequestHandler implements RequestHandler {
 		this.dialogComponent = dialogComponent;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#cancel()
+	 */
 	public void cancel() {
 		this.cancelled = true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#getHostnameVerifier()
+	 */
 	public HostnameVerifier getHostnameVerifier() {
 		return new LocalHostnameVerifier();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#getLatestRequestMethod()
+	 */
 	public String getLatestRequestMethod() {
 		return this.request.getMethod();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#getLatestRequestURL()
+	 */
 	public URL getLatestRequestURL() {
 		return this.request.getRequestURL();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#getRequest()
+	 */
 	public ClientletRequest getRequest() {
 		return this.request;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#handleException(org.lobobrowser.clientlet.ClientletResponse, java.lang.Throwable)
+	 */
 	public abstract boolean handleException(ClientletResponse response,
 			Throwable exception) throws ClientletException;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#handleProgress(org.lobobrowser.ua.ProgressType, java.net.URL, java.lang.String, int, int)
+	 */
 	public abstract void handleProgress(ProgressType progressType, URL url,
 			String method, int value, int max);
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#isCancelled()
+	 */
 	public boolean isCancelled() {
 		return this.cancelled;
 	}
 
+	/**
+	 * Checks if is new navigation entry.
+	 *
+	 * @return true, if is new navigation entry
+	 */
 	public boolean isNewNavigationEntry() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#getRequestType()
+	 */
 	public RequestType getRequestType() {
 		return this.requestType;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.RequestHandler#processResponse(org.lobobrowser.clientlet.ClientletResponse)
+	 */
 	public abstract void processResponse(ClientletResponse response)
 			throws ClientletException, IOException;
 
+	/**
+	 * The Class LocalHostnameVerifier.
+	 */
 	private class LocalHostnameVerifier implements HostnameVerifier {
+		
+		/** The verified. */
 		private boolean verified;
 
 		/*

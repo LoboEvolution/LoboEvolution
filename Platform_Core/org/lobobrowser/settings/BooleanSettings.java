@@ -28,14 +28,21 @@ import java.util.logging.Logger;
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
 
+
 /**
  * Miscellaneous settings in the form of boolean values. This is a singleton
  * class with an instance obtained by calling {@link #getInstance()}.
  */
 public class BooleanSettings implements Serializable {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(BooleanSettings.class
 			.getName());
+	
+	/** The Constant instance. */
 	private static final BooleanSettings instance;
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574500900000604L;
 
 	/**
@@ -59,16 +66,24 @@ public class BooleanSettings implements Serializable {
 		instance = ins;
 	}
 
+	/**
+	 * Instantiates a new boolean settings.
+	 */
 	private BooleanSettings() {
 		this.resetDefaults();
 	}
 
+	/**
+	 * Reset defaults.
+	 */
 	private void resetDefaults() {
 		this.httpUseChunkedEncodingPOST = false;
 	}
 
 	/**
 	 * Gets the class singleton.
+	 *
+	 * @return single instance of BooleanSettings
 	 */
 	public static BooleanSettings getInstance() {
 		SecurityManager sm = System.getSecurityManager();
@@ -78,6 +93,9 @@ public class BooleanSettings implements Serializable {
 		return instance;
 	}
 
+	/**
+	 * Save.
+	 */
 	public void save() {
 		try {
 			StorageManager.getInstance().saveSettings(
@@ -88,10 +106,20 @@ public class BooleanSettings implements Serializable {
 		}
 	}
 
+	/**
+	 * Checks if is http use chunked encoding post.
+	 *
+	 * @return true, if is http use chunked encoding post
+	 */
 	public boolean isHttpUseChunkedEncodingPOST() {
 		return httpUseChunkedEncodingPOST;
 	}
 
+	/**
+	 * Sets the http use chunked encoding post.
+	 *
+	 * @param httpUseChunkedEncodingPOST the new http use chunked encoding post
+	 */
 	public void setHttpUseChunkedEncodingPOST(boolean httpUseChunkedEncodingPOST) {
 		this.httpUseChunkedEncodingPOST = httpUseChunkedEncodingPOST;
 	}

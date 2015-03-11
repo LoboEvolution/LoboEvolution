@@ -30,16 +30,32 @@ import java.util.Map;
 import org.lobobrowser.html.style.RenderStateDelegator;
 import org.lobobrowser.html.style.WordInfo;
 
+
+/**
+ * The Class FontNameRenderState.
+ */
 public class FontNameRenderState extends RenderStateDelegator {
+	
+	/** The font name. */
 	private final String fontName;
 
+	/**
+	 * Instantiates a new font name render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param fontName the font name
+	 */
 	public FontNameRenderState(RenderState prevRenderState, String fontName) {
 		super(prevRenderState);
 		this.fontName = fontName;
 	}
 
+	/** The i font. */
 	private Font iFont;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.style.RenderStateDelegator#getFont()
+	 */
 	public Font getFont() {
 		Font f = this.iFont;
 		if (f != null) {
@@ -51,8 +67,12 @@ public class FontNameRenderState extends RenderStateDelegator {
 		return f;
 	}
 
+	/** The i font metrics. */
 	private FontMetrics iFontMetrics;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.style.RenderStateDelegator#getFontMetrics()
+	 */
 	public FontMetrics getFontMetrics() {
 		FontMetrics fm = this.iFontMetrics;
 		if (fm == null) {
@@ -63,6 +83,9 @@ public class FontNameRenderState extends RenderStateDelegator {
 		return fm;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.style.RenderStateDelegator#invalidate()
+	 */
 	public void invalidate() {
 		super.invalidate();
 		this.iFont = null;
@@ -73,8 +96,12 @@ public class FontNameRenderState extends RenderStateDelegator {
 		}
 	}
 
+	/** The i word info map. */
 	Map<String, WordInfo> iWordInfoMap = null;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.style.RenderStateDelegator#getWordInfo(java.lang.String)
+	 */
 	public final WordInfo getWordInfo(String word) {
 		// Expected to be called only in the GUI (rendering) thread.
 		// No synchronization necessary.

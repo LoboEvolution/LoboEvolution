@@ -32,13 +32,29 @@ import javax.swing.JComponent;
 import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
 
+
+/**
+ * The Class ImageScrollable.
+ */
 public class ImageScrollable extends JComponent implements Scrollable {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The image. */
 	private final Image image;
+	
+	/** The image width. */
 	private int imageWidth = -1;
+	
+	/** The image height. */
 	private int imageHeight = -1;
 
+	/**
+	 * Instantiates a new image scrollable.
+	 *
+	 * @param img the img
+	 */
 	public ImageScrollable(Image img) {
 		super();
 		this.image = img;
@@ -48,6 +64,9 @@ public class ImageScrollable extends JComponent implements Scrollable {
 		this.imageHeight = h;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.Component#imageUpdate(java.awt.Image, int, int, int, int, int)
+	 */
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, int w,
 			int h) {
 		if ((infoflags & ImageObserver.ALLBITS) != 0
@@ -60,26 +79,41 @@ public class ImageScrollable extends JComponent implements Scrollable {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Insets insets = this.getInsets();
 		g.drawImage(this.image, insets.left, insets.top, this);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
 	public Dimension getPreferredSize() {
 		int w = this.imageWidth;
 		int h = this.imageHeight;
 		return new Dimension(w == -1 ? 0 : w, h == -1 ? 0 : h);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.Scrollable#getPreferredScrollableViewportSize()
+	 */
 	public Dimension getPreferredScrollableViewportSize() {
 		return this.getPreferredSize();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.Scrollable#getScrollableUnitIncrement(java.awt.Rectangle, int, int)
+	 */
 	public int getScrollableUnitIncrement(Rectangle arg0, int arg1, int arg2) {
 		return 12;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.Scrollable#getScrollableBlockIncrement(java.awt.Rectangle, int, int)
+	 */
 	public int getScrollableBlockIncrement(Rectangle arg0, int orientation,
 			int direction) {
 		if (orientation == SwingConstants.HORIZONTAL) {
@@ -89,10 +123,16 @@ public class ImageScrollable extends JComponent implements Scrollable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.Scrollable#getScrollableTracksViewportWidth()
+	 */
 	public boolean getScrollableTracksViewportWidth() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.Scrollable#getScrollableTracksViewportHeight()
+	 */
 	public boolean getScrollableTracksViewportHeight() {
 		return false;
 	}

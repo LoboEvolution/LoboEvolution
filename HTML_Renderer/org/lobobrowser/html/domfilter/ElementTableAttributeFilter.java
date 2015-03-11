@@ -25,17 +25,28 @@ package org.lobobrowser.html.domfilter;
 
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class ElementTableAttributeFilter.
+ */
 public final class ElementTableAttributeFilter implements NodeFilter {
+	
+	/** The element name. */
 	private final String elementName;
 
 	/**
-	 * @param name
+	 * Instantiates a new element table attribute filter.
+	 *
+	 * @param name the name
 	 */
 	public ElementTableAttributeFilter(String name) {
 		super();
 		elementName = name;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
 	public final boolean accept(Node node) {
 		return this.elementName.equalsIgnoreCase(node.getNodeName());
 	}

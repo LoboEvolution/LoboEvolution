@@ -53,14 +53,30 @@ import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.ua.TargetType;
 import org.w3c.dom.Document;
 
+
+/**
+ * The Class HtmlRendererContextImpl.
+ */
 public class HtmlRendererContextImpl implements HtmlRendererContext {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(HtmlRendererContextImpl.class.getName());
+	
+	/** The Constant weakAssociation. */
 	private static final Map<NavigatorFrame, WeakReference<HtmlRendererContextImpl>> weakAssociation = new WeakHashMap<NavigatorFrame, WeakReference<HtmlRendererContextImpl>>();
 
+	/** The clientlet frame. */
 	private final NavigatorFrame clientletFrame;
+	
+	/** The html panel. */
 	private final HtmlPanel htmlPanel;
 
+	/**
+	 * Instantiates a new html renderer context impl.
+	 *
+	 * @param clientletFrame the clientlet frame
+	 */
 	private HtmlRendererContextImpl(NavigatorFrame clientletFrame) {
 		this.clientletFrame = clientletFrame;
 		this.htmlPanel = new HtmlPanel();
@@ -72,6 +88,12 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	// }
 	// }
 	//
+	/**
+	 * Gets the html renderer context.
+	 *
+	 * @param frame the frame
+	 * @return the html renderer context
+	 */
 	public static HtmlRendererContextImpl getHtmlRendererContext(
 			NavigatorFrame frame) {
 		synchronized (weakAssociation) {
@@ -91,6 +113,11 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		}
 	}
 
+	/**
+	 * Gets the content document.
+	 *
+	 * @return the content document
+	 */
 	public Document getContentDocument() {
 		Object rootNode = this.htmlPanel.getRootNode();
 		if (rootNode instanceof Document) {
@@ -99,34 +126,75 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		return null;
 	}
 
+	/**
+	 * Gets the html panel.
+	 *
+	 * @return the html panel
+	 */
 	public HtmlPanel getHtmlPanel() {
 		return this.htmlPanel;
 	}
 
+	/**
+	 * Warn.
+	 *
+	 * @param message the message
+	 * @param throwable the throwable
+	 */
 	public void warn(String message, Throwable throwable) {
 		logger.log(Level.WARNING, message, throwable);
 	}
 
+	/**
+	 * Error.
+	 *
+	 * @param message the message
+	 * @param throwable the throwable
+	 */
 	public void error(String message, Throwable throwable) {
 		logger.log(Level.SEVERE, message, throwable);
 	}
 
+	/**
+	 * Warn.
+	 *
+	 * @param message the message
+	 */
 	public void warn(String message) {
 		logger.warning(message);
 	}
 
+	/**
+	 * Error.
+	 *
+	 * @param message the message
+	 */
 	public void error(String message) {
 		logger.log(Level.SEVERE, message);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#linkClicked(org.lobobrowser.html.w3c.HTMLElement, java.net.URL, java.lang.String)
+	 */
 	public void linkClicked(HTMLElement linkNode, URL url, String target) {
 		this.navigateImpl(url, target, RequestType.CLICK, linkNode);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#navigate(java.net.URL, java.lang.String)
+	 */
 	public void navigate(URL href, String target) {
 		this.navigateImpl(href, target, RequestType.PROGRAMMATIC, null);
 	}
 
+	/**
+	 * Navigate impl.
+	 *
+	 * @param href the href
+	 * @param target the target
+	 * @param requestType the request type
+	 * @param linkObject the link object
+	 */
 	private void navigateImpl(URL href, String target, RequestType requestType,
 			Object linkObject) {
 		if (logger.isLoggable(Level.INFO)) {
@@ -165,6 +233,12 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		}
 	}
 
+	/**
+	 * Gets the target type.
+	 *
+	 * @param target the target
+	 * @return the target type
+	 */
 	private TargetType getTargetType(String target) {
 		if ("_blank".equalsIgnoreCase(target)) {
 			return TargetType.BLANK;
@@ -177,6 +251,9 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#submitForm(java.lang.String, java.net.URL, java.lang.String, java.lang.String, org.lobobrowser.html.FormInput[])
+	 */
 	public void submitForm(String method, URL url, String target,
 			String enctype, FormInput[] formInputs) {
 		TargetType targetType = this.getTargetType(target);
@@ -185,31 +262,58 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 				RequestType.FORM);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#createBrowserFrame()
+	 */
 	public BrowserFrame createBrowserFrame() {
 		NavigatorFrame newFrame = this.clientletFrame.createFrame();
 		return new BrowserFrameImpl(newFrame, this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#alert(java.lang.String)
+	 */
 	public void alert(String message) {
 		this.clientletFrame.alert(message);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#blur()
+	 */
 	public void blur() {
 		this.clientletFrame.windowToBack();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#close()
+	 */
 	public void close() {
 		this.clientletFrame.closeWindow();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#confirm(java.lang.String)
+	 */
 	public boolean confirm(String message) {
 		return this.clientletFrame.confirm(message);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#focus()
+	 */
 	public void focus() {
 		this.clientletFrame.windowToFront();
 	}
 
+	/**
+	 * Open.
+	 *
+	 * @param url the url
+	 * @param windowName the window name
+	 * @param windowFeatures the window features
+	 * @param replace the replace
+	 * @return the html renderer context
+	 */
 	public HtmlRendererContext open(String url, String windowName,
 			String windowFeatures, boolean replace) {
 		try {
@@ -222,6 +326,9 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#open(java.net.URL, java.lang.String, java.lang.String, boolean)
+	 */
 	public HtmlRendererContext open(URL urlObj, String windowName,
 			String windowFeatures, boolean replace) {
 		Properties windowProperties = windowFeatures == null ? null
@@ -241,30 +348,51 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#prompt(java.lang.String, java.lang.String)
+	 */
 	public String prompt(String message, String inputDefault) {
 		return this.clientletFrame.prompt(message, inputDefault);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#scroll(int, int)
+	 */
 	public void scroll(int x, int y) {
 		this.htmlPanel.scroll(x, y);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#scrollBy(int, int)
+	 */
 	public void scrollBy(int xOffset, int yOffset) {
 		this.htmlPanel.scrollBy(xOffset, yOffset);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#isClosed()
+	 */
 	public boolean isClosed() {
 		return this.clientletFrame.isWindowClosed();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getDefaultStatus()
+	 */
 	public String getDefaultStatus() {
 		return this.clientletFrame.getDefaultStatus();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#setDefaultStatus(java.lang.String)
+	 */
 	public void setDefaultStatus(String value) {
 		this.clientletFrame.setDefaultStatus(value);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getFrames()
+	 */
 	public HTMLCollection getFrames() {
 		Object rootNode = this.htmlPanel.getRootNode();
 		if (rootNode instanceof HTMLDocumentImpl) {
@@ -274,23 +402,37 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		}
 	}
 
+	/**
+	 * Gets the length.
+	 *
+	 * @return the length
+	 */
 	public int getLength() {
 		HTMLCollection frames = this.getFrames();
 		return frames == null ? 0 : frames.getLength();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getName()
+	 */
 	public String getName() {
 		return this.clientletFrame.getWindowId();
 	}
 
 	// private static final String HTML_RENDERER_ITEM = "lobo.html.renderer";
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getParent()
+	 */
 	public HtmlRendererContext getParent() {
 		NavigatorFrame parentFrame = this.clientletFrame.getParentFrame();
 		return parentFrame == null ? null : HtmlRendererContextImpl
 				.getHtmlRendererContext(parentFrame);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getOpener()
+	 */
 	public HtmlRendererContext getOpener() {
 		HtmlRendererContext opener = this.assignedOpener;
 		if (opener != null) {
@@ -301,37 +443,60 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 				.getHtmlRendererContext(openerFrame);
 	}
 
+	/** The assigned opener. */
 	private volatile HtmlRendererContext assignedOpener;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#setOpener(org.lobobrowser.html.HtmlRendererContext)
+	 */
 	public void setOpener(HtmlRendererContext opener) {
 		this.assignedOpener = opener;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getStatus()
+	 */
 	public String getStatus() {
 		return this.clientletFrame.getStatus();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#setStatus(java.lang.String)
+	 */
 	public void setStatus(String message) {
 		this.clientletFrame.setStatus(message);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#reload()
+	 */
 	public void reload() {
 		this.clientletFrame.reload();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getTop()
+	 */
 	public HtmlRendererContext getTop() {
 		NavigatorFrame parentFrame = this.clientletFrame.getTopFrame();
 		return parentFrame == null ? null : HtmlRendererContextImpl
 				.getHtmlRendererContext(parentFrame);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getHtmlObject(org.lobobrowser.html.w3c.HTMLElement)
+	 */
 	public HtmlObject getHtmlObject(HTMLElement element) {
 		// TODO
 		return null;
 	}
 
+	/** The ua context. */
 	private UserAgentContext uaContext;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getUserAgentContext()
+	 */
 	public UserAgentContext getUserAgentContext() {
 		if (this.uaContext == null) {
 			synchronized (this) {
@@ -344,25 +509,40 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		return this.uaContext;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#isVisitedLink(org.lobobrowser.html.w3c.HTMLLinkElement)
+	 */
 	public boolean isVisitedLink(HTMLLinkElement link) {
 		// TODO
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#onContextMenu(org.lobobrowser.html.w3c.HTMLElement, java.awt.event.MouseEvent)
+	 */
 	public boolean onContextMenu(HTMLElement element, MouseEvent event) {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#onMouseOut(org.lobobrowser.html.w3c.HTMLElement, java.awt.event.MouseEvent)
+	 */
 	public void onMouseOut(HTMLElement element, MouseEvent event) {
 		if (element instanceof HTMLLinkElementImpl) {
 			this.clientletFrame.setStatus(null);
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#isImageLoadingEnabled()
+	 */
 	public boolean isImageLoadingEnabled() {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#onMouseOver(org.lobobrowser.html.w3c.HTMLElement, java.awt.event.MouseEvent)
+	 */
 	public void onMouseOver(HTMLElement element, MouseEvent event) {
 		if (element instanceof HTMLLinkElementImpl) {
 			HTMLLinkElementImpl linkElement = (HTMLLinkElementImpl) element;
@@ -370,65 +550,110 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#onDoubleClick(org.lobobrowser.html.w3c.HTMLElement, java.awt.event.MouseEvent)
+	 */
 	public boolean onDoubleClick(HTMLElement element, MouseEvent event) {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#onMouseClick(org.lobobrowser.html.w3c.HTMLElement, java.awt.event.MouseEvent)
+	 */
 	public boolean onMouseClick(HTMLElement element, MouseEvent event) {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#resizeBy(int, int)
+	 */
 	public void resizeBy(int byWidth, int byHeight) {
 		this.clientletFrame.resizeWindowBy(byWidth, byHeight);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#resizeTo(int, int)
+	 */
 	public void resizeTo(int width, int height) {
 		this.clientletFrame.resizeWindowTo(width, height);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#forward()
+	 */
 	public void forward() {
 		this.clientletFrame.forward();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#back()
+	 */
 	public void back() {
 		this.clientletFrame.back();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getCurrentURL()
+	 */
 	public String getCurrentURL() {
 		NavigationEntry entry = this.clientletFrame.getCurrentNavigationEntry();
 		return entry == null ? null : entry.getUrl().toExternalForm();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getHistoryLength()
+	 */
 	public int getHistoryLength() {
 		return this.clientletFrame.getHistoryLength();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getNextURL()
+	 */
 	public String getNextURL() {
 		NavigationEntry entry = this.clientletFrame.getNextNavigationEntry();
 		return entry == null ? null : entry.getUrl().toExternalForm();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getPreviousURL()
+	 */
 	public String getPreviousURL() {
 		NavigationEntry entry = this.clientletFrame
 				.getPreviousNavigationEntry();
 		return entry == null ? null : entry.getUrl().toExternalForm();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#goToHistoryURL(java.lang.String)
+	 */
 	public void goToHistoryURL(String url) {
 		this.clientletFrame.navigateInHistory(url);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#moveInHistory(int)
+	 */
 	public void moveInHistory(int offset) {
 		this.clientletFrame.moveInHistory(offset);
 	}
 
+	/**
+	 * The Class LocalParameterInfo.
+	 */
 	private static class LocalParameterInfo implements ParameterInfo {
+		
+		/** The encoding type. */
 		private final String encodingType;
+		
+		/** The form inputs. */
 		private final FormInput[] formInputs;
 
 		/**
-		 * @param type
-		 * @param inputs
+		 * Instantiates a new local parameter info.
+		 *
+		 * @param type the type
+		 * @param inputs the inputs
 		 */
 		public LocalParameterInfo(String type, FormInput[] inputs) {
 			super();

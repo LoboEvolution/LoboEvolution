@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * This contains generic meta-information about the document. See the META
  * element definition in HTML 4.01.
@@ -40,15 +41,20 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLMetaElement extends HTMLElement {
+	
 	/**
 	 * Associated information. See the content attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return the content
 	 */
 	public String getContent();
 
 	/**
 	 * Associated information. See the content attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param content the new content
 	 */
 	public void setContent(String content);
 
@@ -56,6 +62,8 @@ public interface HTMLMetaElement extends HTMLElement {
 	 * HTTP response header name [<a
 	 * href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC 2616</a>]. See the
 	 * http-equiv attribute definition in HTML 4.01.
+	 *
+	 * @return the http equiv
 	 */
 	public String getHttpEquiv();
 
@@ -63,26 +71,36 @@ public interface HTMLMetaElement extends HTMLElement {
 	 * HTTP response header name [<a
 	 * href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC 2616</a>]. See the
 	 * http-equiv attribute definition in HTML 4.01.
+	 *
+	 * @param httpEquiv the new http equiv
 	 */
 	public void setHttpEquiv(String httpEquiv);
 
 	/**
 	 * Meta information name. See the name attribute definition in HTML 4.01.
+	 *
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * Meta information name. See the name attribute definition in HTML 4.01.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name);
 
 	/**
 	 * Select form of content. See the scheme attribute definition in HTML 4.01.
+	 *
+	 * @return the scheme
 	 */
 	public String getScheme();
 
 	/**
 	 * Select form of content. See the scheme attribute definition in HTML 4.01.
+	 *
+	 * @param scheme the new scheme
 	 */
 	public void setScheme(String scheme);
 }

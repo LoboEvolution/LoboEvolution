@@ -23,11 +23,24 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.renderstate.BlockQuoteRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 
+
+/**
+ * The Class HTMLBlockQuoteElementImpl.
+ */
 public class HTMLBlockQuoteElementImpl extends HTMLAbstractUIElement {
+	
+	/**
+	 * Instantiates a new HTML block quote element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLBlockQuoteElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new BlockQuoteRenderState(prevRenderState, this);
 	}

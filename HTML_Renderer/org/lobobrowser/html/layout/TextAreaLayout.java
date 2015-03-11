@@ -28,11 +28,22 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.renderer.RElement;
 
+
+/**
+ * The Class TextAreaLayout.
+ */
 public class TextAreaLayout extends CommonWidgetLayout {
+	
+	/**
+	 * Instantiates a new text area layout.
+	 */
 	public TextAreaLayout() {
 		super(ADD_INLINE, true);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.lobobrowser.html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
 	protected RElement createRenderable(RBlockViewport bodyLayout,
 			HTMLElementImpl markupElement) {
 		HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;

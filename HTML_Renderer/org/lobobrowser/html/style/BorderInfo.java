@@ -22,16 +22,36 @@ package org.lobobrowser.html.style;
 
 import java.awt.Color;
 
+
+/**
+ * The Class BorderInfo.
+ */
 public class BorderInfo {
+	
+	/** The top style. */
 	public int topStyle;
+	
+	/** The left style. */
 	public int leftStyle;
+	
+	/** The bottom style. */
 	public int bottomStyle;
+	
+	/** The right style. */
 	public int rightStyle;
 
+	/** The top color. */
 	public Color topColor;
+	
+	/** The left color. */
 	public Color leftColor;
+	
+	/** The bottom color. */
 	public Color bottomColor;
+	
+	/** The right color. */
 	public Color rightColor;
 
+	/** The insets. */
 	public HtmlInsets insets;
 }

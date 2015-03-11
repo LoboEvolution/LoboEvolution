@@ -28,21 +28,28 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+
 /**
+ * The Class ArchiveCollection.
+ *
  * @author J. H. S.
  */
 public class ArchiveCollection {
+	
+	/** The archive infos. */
 	private final Collection<Object[]> archiveInfos;
 
 	/**
-	 * 
+	 * Instantiates a new archive collection.
 	 */
 	public ArchiveCollection() {
 		this.archiveInfos = new LinkedList<Object[]>();
 	}
 
 	/**
-	 * 
+	 * Instantiates a new archive collection.
+	 *
+	 * @param archiveInfos the archive infos
 	 */
 	public ArchiveCollection(Collection<Object[]> archiveInfos) {
 		this.archiveInfos = archiveInfos;
@@ -54,8 +61,15 @@ public class ArchiveCollection {
 	// }
 	// }
 
+	/** The class loader. */
 	private ArchiveClassLoader classLoader;
 
+	/**
+	 * Gets the class loader.
+	 *
+	 * @return the class loader
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public ClassLoader getClassLoader() throws IOException {
 		synchronized (this) {
 			if (this.archiveInfos.size() == 0) {
@@ -68,6 +82,11 @@ public class ArchiveCollection {
 		}
 	}
 
+	/**
+	 * Iterator.
+	 *
+	 * @return the iterator
+	 */
 	public Iterator<Object[]> iterator() {
 		return this.archiveInfos.iterator();
 	}

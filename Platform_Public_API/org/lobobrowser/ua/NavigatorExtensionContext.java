@@ -24,18 +24,27 @@ package org.lobobrowser.ua;
 
 import org.lobobrowser.clientlet.ClientletSelector;
 
+
 /**
  * This interface gives extensions access to the platform.
  * 
  * @see NavigatorExtension#init(NavigatorExtensionContext)
  */
 public interface NavigatorExtensionContext {
+	
 	/**
 	 * Adds a clientlet selector. This is how platform extensions register
 	 * additional content handlers.
+	 *
+	 * @param selector the selector
 	 */
 	public void addClientletSelector(ClientletSelector selector);
 
+	/**
+	 * Removes the clientlet selector.
+	 *
+	 * @param selector the selector
+	 */
 	public void removeClientletSelector(ClientletSelector selector);
 
 	/**
@@ -47,15 +56,24 @@ public interface NavigatorExtensionContext {
 	 */
 	public void addConnectionProcessor(ConnectionProcessor processor);
 
+	/**
+	 * Removes the connection processor.
+	 *
+	 * @param processor the processor
+	 */
 	public void removeConnectionProcessor(ConnectionProcessor processor);
 
 	/**
 	 * Adds a listener of navigator events.
+	 *
+	 * @param listener the listener
 	 */
 	public void addNavigatorErrorListener(NavigatorErrorListener listener);
 
 	/**
 	 * Removes a listener of navigation events.
+	 *
+	 * @param listener the listener
 	 */
 	public void removeNavigatorErrorListener(NavigatorErrorListener listener);
 
@@ -67,10 +85,17 @@ public interface NavigatorExtensionContext {
 	 */
 	public void addNavigationListener(NavigationListener listener);
 
+	/**
+	 * Removes the navigation listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void removeNavigationListener(NavigationListener listener);
 
 	/**
 	 * Gets the {@link UserAgent} instance associated with this context.
+	 *
+	 * @return the user agent
 	 */
 	public UserAgent getUserAgent();
 

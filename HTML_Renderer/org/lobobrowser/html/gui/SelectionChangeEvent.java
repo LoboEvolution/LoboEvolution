@@ -23,17 +23,31 @@ package org.lobobrowser.html.gui;
 
 import java.util.EventObject;
 
+
 /**
  * Event associated with {@link SelectionChangeListener}.
  */
 public class SelectionChangeEvent extends EventObject {
+	
+	/** The has selection. */
 	private final boolean hasSelection;
 
+	/**
+	 * Instantiates a new selection change event.
+	 *
+	 * @param source the source
+	 * @param hasSelection the has selection
+	 */
 	public SelectionChangeEvent(Object source, boolean hasSelection) {
 		super(source);
 		this.hasSelection = hasSelection;
 	}
 
+	/**
+	 * Checks if is selection available.
+	 *
+	 * @return true, if is selection available
+	 */
 	public boolean isSelectionAvailable() {
 		return this.hasSelection;
 	}

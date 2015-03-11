@@ -27,12 +27,30 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.w3c.HTMLDocument;
 import org.lobobrowser.html.w3c.HTMLElement;
 
+
+/**
+ * The Class HTMLElementBuilder.
+ */
 public abstract class HTMLElementBuilder {
+	
+	/**
+	 * Creates the.
+	 *
+	 * @param document the document
+	 * @param name the name
+	 * @return the HTML element
+	 */
 	public final HTMLElement create(HTMLDocument document, String name) {
 		HTMLElementImpl element = this.build(name);
 		element.setOwnerDocument(document);
 		return element;
 	}
 
+	/**
+	 * Builds the.
+	 *
+	 * @param name the name
+	 * @return the HTML element impl
+	 */
 	protected abstract HTMLElementImpl build(String name);
 }

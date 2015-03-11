@@ -22,27 +22,45 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.clientlet;
 
+
 /**
  * Thrown when a clientlet requires a newer navigator version than the one
  * running.
  */
 public class NavigatorVersionException extends ClientletException {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The expecting version. */
 	private final String expectingVersion;
 
+	/**
+	 * Instantiates a new navigator version exception.
+	 *
+	 * @param message the message
+	 * @param expectingVersion the expecting version
+	 */
 	public NavigatorVersionException(String message, String expectingVersion) {
 		super(message);
 		this.expectingVersion = expectingVersion;
 	}
 
+	/**
+	 * Gets the expecting version.
+	 *
+	 * @return the expecting version
+	 */
 	public String getExpectingVersion() {
 		return expectingVersion;
 	}
 
 	/**
-	 * @param message
-	 * @param rootCause
+	 * Instantiates a new navigator version exception.
+	 *
+	 * @param message the message
+	 * @param expectingVersion the expecting version
+	 * @param rootCause the root cause
 	 */
 	public NavigatorVersionException(String message, String expectingVersion,
 			Throwable rootCause) {
@@ -51,7 +69,10 @@ public class NavigatorVersionException extends ClientletException {
 	}
 
 	/**
-	 * @param rootCause
+	 * Instantiates a new navigator version exception.
+	 *
+	 * @param expectingVersion the expecting version
+	 * @param rootCause the root cause
 	 */
 	public NavigatorVersionException(String expectingVersion,
 			Throwable rootCause) {

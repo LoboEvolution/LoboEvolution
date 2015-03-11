@@ -34,15 +34,32 @@ import javax.swing.JMenuBar;
 import org.lobobrowser.main.ExtensionManager;
 import org.lobobrowser.ua.NavigatorFrame;
 
+
 /**
  * The default window class used by the browser.
  * 
  * @see WindowFactory
  */
 public class DefaultBrowserWindow extends AbstractBrowserWindow {
+	
+	private static final long serialVersionUID = 1L;
+
+	/** The frame panel. */
 	private final FramePanel framePanel;
+	
+	/** The window context. */
 	private final NavigatorWindowImpl windowContext;
 
+	/**
+	 * Instantiates a new default browser window.
+	 *
+	 * @param hasMenuBar the has menu bar
+	 * @param hasAddressBar the has address bar
+	 * @param hasToolBar the has tool bar
+	 * @param hasStatusBar the has status bar
+	 * @param windowContext the window context
+	 * @throws HeadlessException the headless exception
+	 */
 	public DefaultBrowserWindow(boolean hasMenuBar, boolean hasAddressBar,
 			boolean hasToolBar, boolean hasStatusBar,
 			NavigatorWindowImpl windowContext) throws HeadlessException {
@@ -108,15 +125,26 @@ public class DefaultBrowserWindow extends AbstractBrowserWindow {
 		}
 	}
 
+	/**
+	 * Gets the top frame.
+	 *
+	 * @return the top frame
+	 */
 	public NavigatorFrame getTopFrame() {
 		return this.framePanel;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.AbstractBrowserWindow#getTopFramePanel()
+	 */
 	@Override
 	public FramePanel getTopFramePanel() {
 		return this.framePanel;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.AbstractBrowserWindow#getWindowCallback()
+	 */
 	public WindowCallback getWindowCallback() {
 		return this.windowContext;
 	}
@@ -136,6 +164,9 @@ public class DefaultBrowserWindow extends AbstractBrowserWindow {
 	// return newImage;
 	// }
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JFrame#update(java.awt.Graphics)
+	 */
 	@Override
 	public void update(Graphics g) {
 		if (g instanceof Graphics2D) {

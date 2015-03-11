@@ -27,20 +27,41 @@ import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.w3c.HTMLHeadingElement;
 
+
+/**
+ * The Class HTMLHeadingElementImpl.
+ */
 public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements
 		HTMLHeadingElement {
+	
+	/**
+	 * Instantiates a new HTML heading element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLHeadingElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLHeadingElement#getAlign()
+	 */
 	public String getAlign() {
 		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLHeadingElement#setAlign(java.lang.String)
+	 */
 	public void setAlign(String align) {
 		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
+	/**
+	 * Gets the heading font size.
+	 *
+	 * @return the heading font size
+	 */
 	private final float getHeadingFontSize() {
 		String tagName = this.getTagName();
 		try {
@@ -67,6 +88,11 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements
 		return 14.0f;
 	}
 
+	/**
+	 * Gets the heading font size text.
+	 *
+	 * @return the heading font size text
+	 */
 	private final String getHeadingFontSizeText() {
 		String tagName = this.getTagName();
 		try {
@@ -93,11 +119,17 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements
 		return "14px";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		float fontSize = this.getHeadingFontSize();
 		return new HeadingRenderState(prevRenderState, this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.StringBuffer)
+	 */
 	protected void appendInnerTextImpl(StringBuffer buffer) {
 		int length = buffer.length();
 		int lineBreaks;
@@ -123,6 +155,9 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements
 		buffer.append("\r\n\r\n");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createDefaultStyleSheet()
+	 */
 	protected AbstractCSS2Properties createDefaultStyleSheet() {
 		ComputedCSS2Properties css = new ComputedCSS2Properties(this);
 		css.internalSetLC("font-size", this.getHeadingFontSizeText());

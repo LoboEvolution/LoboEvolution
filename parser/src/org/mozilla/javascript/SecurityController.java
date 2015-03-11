@@ -8,6 +8,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * This class describes the support needed to implement security.
  * <p>
@@ -34,16 +35,25 @@ package org.mozilla.javascript;
  */
 public abstract class SecurityController
 {
+    
+    /** The global. */
     private static SecurityController global;
 
 // The method must NOT be public or protected
-    static SecurityController global()
+    /**
+ * Global.
+ *
+ * @return the security controller
+ */
+static SecurityController global()
     {
         return global;
     }
 
     /**
      * Check if global {@link SecurityController} was already installed.
+     *
+     * @return true, if successful
      * @see #initGlobal(SecurityController controller)
      */
     public static boolean hasGlobal()
@@ -61,6 +71,7 @@ public abstract class SecurityController
      * <p>
      * The method can only be called once.
      *
+     * @param controller the controller
      * @see #hasGlobal()
      */
     public static void initGlobal(SecurityController controller)
@@ -75,10 +86,12 @@ public abstract class SecurityController
     /**
      * Get class loader-like object that can be used
      * to define classes with the given security context.
+     *
      * @param parentLoader parent class loader to delegate search for classes
      *        not defined by the class loader itself
      * @param securityDomain some object specifying the security
      *        context of the code that is defined by the returned class loader.
+     * @return the generated class loader
      */
     public abstract GeneratedClassLoader createClassLoader(
         ClassLoader parentLoader, Object securityDomain);
@@ -95,6 +108,7 @@ public abstract class SecurityController
      * @param parent parent class loader. If null,
      *        {@link Context#getApplicationClassLoader()} will be used.
      * @param staticDomain static security domain.
+     * @return the generated class loader
      */
     public static GeneratedClassLoader createLoader(
         ClassLoader parent, Object staticDomain)
@@ -114,11 +128,21 @@ public abstract class SecurityController
         return loader;
     }
 
+    /**
+     * Gets the static security domain class.
+     *
+     * @return the static security domain class
+     */
     public static Class<?> getStaticSecurityDomainClass() {
         SecurityController sc = Context.getContext().getSecurityController();
         return sc == null ? null : sc.getStaticSecurityDomainClassInternal();
     }
 
+    /**
+     * Gets the static security domain class internal.
+     *
+     * @return the static security domain class internal
+     */
     public Class<?> getStaticSecurityDomainClassInternal()
     {
         return null;
@@ -129,6 +153,9 @@ public abstract class SecurityController
      * by the current Java stack and <i>securityDomain</i>. If
      * <i>securityDomain</i> is null, return domain representing permissions
      * allowed by the current stack.
+     *
+     * @param securityDomain the security domain
+     * @return the dynamic security domain
      */
     public abstract Object getDynamicSecurityDomain(Object securityDomain);
 
@@ -147,6 +174,14 @@ public abstract class SecurityController
      * <p>
      * The method should always be overridden, it is not declared abstract
      * for compatibility reasons.
+     *
+     * @param securityDomain the security domain
+     * @param cx the cx
+     * @param callable the callable
+     * @param scope the scope
+     * @param thisObj the this obj
+     * @param args the args
+     * @return the object
      */
     public Object callWithDomain(Object securityDomain, Context cx,
                                  final Callable callable, Scriptable scope,
@@ -163,6 +198,13 @@ public abstract class SecurityController
     }
 
     /**
+     * Exec with domain.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param script the script
+     * @param securityDomain the security domain
+     * @return the object
      * @deprecated The application should not override this method and instead
      * override
      * {@link #callWithDomain(Object securityDomain, Context cx, Callable callable, Scriptable scope, Scriptable thisObj, Object[] args)}.

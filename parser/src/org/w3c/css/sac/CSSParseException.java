@@ -11,9 +11,10 @@
  */
 package org.w3c.css.sac;
 
+
 /**
  * Encapsulate a CSS parse error or warning.
- *
+ * 
  * <p>
  * This exception will include information for locating the error in the
  * original CSS document. Note that although the application will receive a
@@ -22,19 +23,24 @@ package org.w3c.css.sac;
  * instead, it can simply read the information in it and take a different
  * action.
  * </p>
- *
+ * 
  * <p>
  * Since this exception is a subclass of CSSException, it inherits the ability
  * to wrap another exception.
  * </p>
  *
- * @version $Revision: 477010 $
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  */
 public class CSSParseException extends CSSException {
 
+	/** The uri. */
 	private String uri;
+	
+	/** The line number. */
 	private int lineNumber;
+	
+	/** The column number. */
 	private int columnNumber;
 
 	/**

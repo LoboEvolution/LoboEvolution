@@ -25,8 +25,16 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
+
+/**
+ * The Class Strings.
+ */
 public class Strings {
+	
+	/** The Constant MESSAGE_DIGEST. */
 	private static final MessageDigest MESSAGE_DIGEST;
+	
+	/** The Constant EMPTY_ARRAY. */
 	public static final String[] EMPTY_ARRAY = new String[0];
 
 	static {
@@ -39,9 +47,20 @@ public class Strings {
 		MESSAGE_DIGEST = md;
 	}
 
+	/**
+	 * Instantiates a new strings.
+	 */
 	private Strings() {
 	}
 
+	/**
+	 * Compare versions.
+	 *
+	 * @param version1 the version1
+	 * @param version2 the version2
+	 * @param startsWithDigits the starts with digits
+	 * @return the int
+	 */
 	public static int compareVersions(String version1, String version2,
 			boolean startsWithDigits) {
 		if (version1 == null) {
@@ -91,6 +110,12 @@ public class Strings {
 		}
 	}
 
+	/**
+	 * Leading digits.
+	 *
+	 * @param text the text
+	 * @return the string
+	 */
 	public static String leadingDigits(String text) {
 		int length = text.length();
 		StringBuffer buffer = null;
@@ -107,6 +132,12 @@ public class Strings {
 		return buffer == null ? "" : buffer.toString();
 	}
 
+	/**
+	 * Leading non digits.
+	 *
+	 * @param text the text
+	 * @return the string
+	 */
 	public static String leadingNonDigits(String text) {
 		int length = text.length();
 		StringBuffer buffer = null;
@@ -123,10 +154,22 @@ public class Strings {
 		return buffer == null ? "" : buffer.toString();
 	}
 
+	/**
+	 * Checks if is blank.
+	 *
+	 * @param text the text
+	 * @return true, if is blank
+	 */
 	public static boolean isBlank(String text) {
 		return text == null || "".equals(text);
 	}
 
+	/**
+	 * Count lines.
+	 *
+	 * @param text the text
+	 * @return the int
+	 */
 	public static int countLines(String text) {
 		int startIdx = 0;
 		int lineCount = 1;
@@ -141,6 +184,12 @@ public class Strings {
 		return lineCount;
 	}
 
+	/**
+	 * Checks if is java identifier.
+	 *
+	 * @param id the id
+	 * @return true, if is java identifier
+	 */
 	public static boolean isJavaIdentifier(String id) {
 		if (id == null) {
 			return false;
@@ -160,6 +209,12 @@ public class Strings {
 		return true;
 	}
 
+	/**
+	 * Gets the java string literal.
+	 *
+	 * @param text the text
+	 * @return the java string literal
+	 */
 	public static String getJavaStringLiteral(String text) {
 		StringBuffer buf = new StringBuffer();
 		buf.append('"');
@@ -191,6 +246,12 @@ public class Strings {
 		return buf.toString();
 	}
 
+	/**
+	 * Gets the java identifier.
+	 *
+	 * @param candidateID the candidate id
+	 * @return the java identifier
+	 */
 	public static String getJavaIdentifier(String candidateID) {
 		int len = candidateID.length();
 		StringBuffer buf = new StringBuffer();
@@ -207,8 +268,15 @@ public class Strings {
 		return buf.toString();
 	}
 
+	/** The Constant HEX_CHARS. */
 	private static final String HEX_CHARS = "0123456789ABCDEF";
 
+	/**
+	 * Gets the m d5.
+	 *
+	 * @param source the source
+	 * @return the m d5
+	 */
 	public static String getMD5(String source) {
 		byte[] bytes;
 		try {
@@ -233,18 +301,39 @@ public class Strings {
 		return new String(resChars);
 	}
 
+	/**
+	 * Gets the hash32.
+	 *
+	 * @param source the source
+	 * @return the hash32
+	 * @throws UnsupportedEncodingException the unsupported encoding exception
+	 */
 	public static String getHash32(String source)
 			throws UnsupportedEncodingException {
 		String md5 = getMD5(source);
 		return md5.substring(0, 8);
 	}
 
+	/**
+	 * Gets the hash64.
+	 *
+	 * @param source the source
+	 * @return the hash64
+	 * @throws UnsupportedEncodingException the unsupported encoding exception
+	 */
 	public static String getHash64(String source)
 			throws UnsupportedEncodingException {
 		String md5 = getMD5(source);
 		return md5.substring(0, 16);
 	}
 
+	/**
+	 * Count chars.
+	 *
+	 * @param text the text
+	 * @param ch the ch
+	 * @return the int
+	 */
 	public static int countChars(String text, char ch) {
 		int len = text.length();
 		int count = 0;
@@ -291,6 +380,12 @@ public class Strings {
 	// return text.substring(startIdx, endIdx + 1);
 	// }
 
+	/**
+	 * Unquote.
+	 *
+	 * @param text the text
+	 * @return the string
+	 */
 	public static String unquote(String text) {
 		if (text.startsWith("\"") && text.endsWith("\"")) {
 			// substring works on indices
@@ -299,6 +394,12 @@ public class Strings {
 		return text;
 	}
 
+	/**
+	 * Split.
+	 *
+	 * @param phrase the phrase
+	 * @return the string[]
+	 */
 	public static String[] split(String phrase) {
 		int length = phrase.length();
 		ArrayList wordList = new ArrayList();
@@ -328,6 +429,13 @@ public class Strings {
 		return (String[]) wordList.toArray(EMPTY_ARRAY);
 	}
 
+	/**
+	 * Truncate.
+	 *
+	 * @param text the text
+	 * @param maxLength the max length
+	 * @return the string
+	 */
 	public static String truncate(String text, int maxLength) {
 		if (text == null) {
 			return null;
@@ -338,6 +446,13 @@ public class Strings {
 		return text.substring(0, Math.max(maxLength - 3, 0)) + "...";
 	}
 
+	/**
+	 * Strict html encode.
+	 *
+	 * @param rawText the raw text
+	 * @param quotes the quotes
+	 * @return the string
+	 */
 	public static String strictHtmlEncode(String rawText, boolean quotes) {
 		StringBuffer output = new StringBuffer();
 		int length = rawText.length();
@@ -367,6 +482,12 @@ public class Strings {
 		return output.toString();
 	}
 
+	/**
+	 * Trim for alpha num dash.
+	 *
+	 * @param rawText the raw text
+	 * @return the string
+	 */
 	public static String trimForAlphaNumDash(String rawText) {
 		int length = rawText.length();
 		for (int i = 0; i < length; i++) {
@@ -380,6 +501,12 @@ public class Strings {
 		return rawText;
 	}
 
+	/**
+	 * Gets the CRLF string.
+	 *
+	 * @param original the original
+	 * @return the CRLF string
+	 */
 	public static String getCRLFString(String original) {
 		if (original == null) {
 			return null;

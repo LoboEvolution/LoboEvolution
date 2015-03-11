@@ -32,11 +32,22 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+/**
+ * The Class CookieHandlerImpl.
+ */
 public class CookieHandlerImpl extends CookieHandler {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CookieHandlerImpl.class.getName());
+	
+	/** The cookie store. */
 	private final CookieStore cookieStore = CookieStore.getInstance();
 
 	
+/* (non-Javadoc)
+ * @see java.net.CookieHandler#get(java.net.URI, java.util.Map)
+ */
 @Override
 	public Map<String, List<String>> get(URI uri,Map<String, List<String>> requestHeaders) throws IOException {
 		Map<String, List<String>> resultHeaders = new java.util.HashMap<String, List<String>>(2);
@@ -67,6 +78,9 @@ public class CookieHandlerImpl extends CookieHandler {
 		return resultHeaders;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.net.CookieHandler#put(java.net.URI, java.util.Map)
+	 */
 	@Override
 	public void put(URI uri, Map<String, List<String>> responseHeaders)
 			throws IOException {
@@ -89,6 +103,11 @@ public class CookieHandlerImpl extends CookieHandler {
 		}
 	}
 	
+	/**
+	 * Prints the headers.
+	 *
+	 * @param headers the headers
+	 */
 	private void printHeaders(Map<String, List<String>> headers) {
 		StringWriter swriter = new StringWriter();
 		PrintWriter writer = new PrintWriter(swriter);

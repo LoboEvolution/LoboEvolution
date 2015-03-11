@@ -29,23 +29,32 @@ import java.awt.event.MouseEvent;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.renderstate.RenderState;
 
+
 //import java.util.logging.*;
 
 /**
+ * The Class RStyleChanger.
+ *
  * @author J. H. S.
  */
 final class RStyleChanger extends BaseRenderable implements Renderable {
 	// private final static Logger logger =
 	// Logger.getLogger(RStyleChanger.class);
+	/** The model node. */
 	private final ModelNode modelNode;
 
 	/**
-	 * 
+	 * Instantiates a new r style changer.
+	 *
+	 * @param modelNode the model node
 	 */
 	public RStyleChanger(ModelNode modelNode) {
 		this.modelNode = modelNode;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.Renderable#getModelNode()
+	 */
 	public ModelNode getModelNode() {
 		return this.modelNode;
 	}
@@ -67,17 +76,41 @@ final class RStyleChanger extends BaseRenderable implements Renderable {
 	 * 
 	 * @see org.lobobrowser.html.render.Renderable#invalidate()
 	 */
+	/**
+	 * Invalidate layout up tree.
+	 */
 	public void invalidateLayoutUpTree() {
 	}
 
+	/**
+	 * On mouse click.
+	 *
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
+	 */
 	public void onMouseClick(MouseEvent event, int x, int y) {
 		throw new UnsupportedOperationException("unexpected");
 	}
 
+	/**
+	 * On mouse pressed.
+	 *
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
+	 */
 	public void onMousePressed(MouseEvent event, int x, int y) {
 		throw new UnsupportedOperationException("unexpected");
 	}
 
+	/**
+	 * On mouse released.
+	 *
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
+	 */
 	public void onMouseReleased(MouseEvent event, int x, int y) {
 		throw new UnsupportedOperationException("unexpected");
 	}

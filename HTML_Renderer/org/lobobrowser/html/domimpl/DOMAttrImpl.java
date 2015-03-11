@@ -29,16 +29,35 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
 
+
+/**
+ * The Class DOMAttrImpl.
+ */
 public class DOMAttrImpl extends DOMNodeImpl implements Attr {
+	
+	/** The name. */
 	private String name;
+	
+	/** The value. */
 	private String value;
+	
+	/** The specified. */
 	private boolean specified;
+	
+	/** The owner element. */
 	private Element ownerElement;
+	
+	/** The is id. */
 	private boolean isId;
 
 	/**
-	 * @param name
-	 * @param value
+	 * Instantiates a new DOM attr impl.
+	 *
+	 * @param name the name
+	 * @param value the value
+	 * @param specified the specified
+	 * @param owner the owner
+	 * @param isId the is id
 	 */
 	public DOMAttrImpl(String name, String value, boolean specified,
 			Element owner, boolean isId) {
@@ -51,7 +70,9 @@ public class DOMAttrImpl extends DOMNodeImpl implements Attr {
 	}
 
 	/**
-	 * @param name
+	 * Instantiates a new DOM attr impl.
+	 *
+	 * @param name the name
 	 */
 	public DOMAttrImpl(String name) {
 		super();
@@ -62,59 +83,103 @@ public class DOMAttrImpl extends DOMNodeImpl implements Attr {
 		this.isId = false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getLocalName()
+	 */
 	public String getLocalName() {
 		return this.name;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeName()
+	 */
 	public String getNodeName() {
 		return this.name;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeValue()
+	 */
 	public String getNodeValue() throws DOMException {
 		return this.value;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setNodeValue(java.lang.String)
+	 */
 	public void setNodeValue(String nodeValue) throws DOMException {
 		this.value = nodeValue;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeType()
+	 */
 	public short getNodeType() {
 		return Node.ATTRIBUTE_NODE;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Attr#getName()
+	 */
 	public String getName() {
 		return this.name;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Attr#getSpecified()
+	 */
 	public boolean getSpecified() {
 		return this.specified;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Attr#getValue()
+	 */
 	public String getValue() {
 		return this.value;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Attr#setValue(java.lang.String)
+	 */
 	public void setValue(String value) throws DOMException {
 		this.value = value;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Attr#getOwnerElement()
+	 */
 	public Element getOwnerElement() {
 		return this.ownerElement;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Attr#getSchemaTypeInfo()
+	 */
 	public TypeInfo getSchemaTypeInfo() {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
 				"Namespaces not supported");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Attr#isId()
+	 */
 	public boolean isId() {
 		return this.isId;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param value the new id
+	 */
 	public void setId(boolean value) {
 		this.isId = value;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#createSimilarNode()
+	 */
 	protected Node createSimilarNode() {
 		return new DOMAttrImpl(this.name, this.value, this.specified,
 				this.ownerElement, this.isId);

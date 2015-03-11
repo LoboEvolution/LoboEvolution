@@ -8,15 +8,20 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Interface NegativeSelector.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  * @see Selector#SAC_NEGATIVE_SELECTOR
  */
 public interface NegativeSelector extends SimpleSelector {
 
 	/**
 	 * Returns the simple selector.
+	 *
+	 * @return the simple selector
 	 */
 	public SimpleSelector getSimpleSelector();
 }

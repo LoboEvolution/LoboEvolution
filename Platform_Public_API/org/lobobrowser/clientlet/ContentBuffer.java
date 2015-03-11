@@ -24,11 +24,18 @@ package org.lobobrowser.clientlet;
 
 import java.net.URL;
 
+
 /**
  * Undocumented.
  * 
  * @author J. H. S.
  */
 public interface ContentBuffer {
+	
+	/**
+	 * Gets the url.
+	 *
+	 * @return the url
+	 */
 	public URL getURL();
 }

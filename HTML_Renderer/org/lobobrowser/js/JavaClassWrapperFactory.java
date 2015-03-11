@@ -24,13 +24,29 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+
+/**
+ * A factory for creating JavaClassWrapper objects.
+ */
 public class JavaClassWrapperFactory {
+	
+	/** The instance. */
 	private static JavaClassWrapperFactory instance;
+	
+	/** The class wrappers. */
 	private final Map<Class, WeakReference<JavaClassWrapper>> classWrappers = new WeakHashMap();
 
+	/**
+	 * Instantiates a new java class wrapper factory.
+	 */
 	private JavaClassWrapperFactory() {
 	}
 
+	/**
+	 * Gets the single instance of JavaClassWrapperFactory.
+	 *
+	 * @return single instance of JavaClassWrapperFactory
+	 */
 	public static JavaClassWrapperFactory getInstance() {
 		if (instance == null) {
 			synchronized (JavaClassWrapperFactory.class) {
@@ -42,6 +58,12 @@ public class JavaClassWrapperFactory {
 		return instance;
 	}
 
+	/**
+	 * Gets the class wrapper.
+	 *
+	 * @param clazz the clazz
+	 * @return the class wrapper
+	 */
 	public JavaClassWrapper getClassWrapper(Class clazz) {
 		synchronized (this) {
 			// WeakHashMaps where the value refers to

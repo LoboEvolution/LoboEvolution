@@ -28,11 +28,22 @@ import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.UIControl;
 
+
+/**
+ * The Class ImgLayout.
+ */
 public class ImgLayout extends CommonWidgetLayout {
+	
+	/**
+	 * Instantiates a new img layout.
+	 */
 	public ImgLayout() {
 		super(ADD_INLINE, true);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.lobobrowser.html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
 	protected RElement createRenderable(RBlockViewport bodyLayout,
 			HTMLElementImpl markupElement) {
 		UIControl control = new ImgControl((HTMLImageElementImpl) markupElement);

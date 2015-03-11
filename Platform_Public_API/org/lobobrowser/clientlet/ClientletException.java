@@ -22,12 +22,16 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.clientlet;
 
+
 /**
  * Exception thrown by clientlets.
  */
 public class ClientletException extends Exception {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The source code. */
 	private final String sourceCode;
 
 	/**
@@ -79,6 +83,11 @@ public class ClientletException extends Exception {
 		this.sourceCode = null;
 	}
 
+	/**
+	 * Gets the source code.
+	 *
+	 * @return the source code
+	 */
 	public String getSourceCode() {
 		return sourceCode;
 	}

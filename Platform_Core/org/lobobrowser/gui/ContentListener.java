@@ -22,6 +22,7 @@ package org.lobobrowser.gui;
 
 import java.util.EventListener;
 
+
 /**
  * A listener of content events.
  * 
@@ -29,6 +30,8 @@ import java.util.EventListener;
  * @see FramePanel#getComponentContent()
  */
 public interface ContentListener extends EventListener {
+	
+	/** The Constant EMPTY_ARRAY. */
 	static final ContentListener[] EMPTY_ARRAY = new ContentListener[0];
 
 	/**

@@ -35,15 +35,22 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Document;
 
+
+/**
+ * The Class Executor.
+ */
 public class Executor {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(Executor.class
 			.getName());
 
 	/**
 	 * This method should be invoked instead of <code>Context.enter</code>.
-	 * 
-	 * @param codeSource
-	 * @param ucontext
+	 *
+	 * @param codeSource the code source
+	 * @param ucontext the ucontext
+	 * @return the context
 	 */
 	public static Context createContext(URL codeSource,
 			UserAgentContext ucontext) {
@@ -63,10 +70,27 @@ public class Executor {
 		return ctx;
 	}
 
+	/**
+	 * Execute function.
+	 *
+	 * @param element the element
+	 * @param f the f
+	 * @param event the event
+	 * @return true, if successful
+	 */
 	public static boolean executeFunction(DOMNodeImpl element, Function f, Event event) {
 		return Executor.executeFunction(element, element, f, event);
 	}
 
+	/**
+	 * Execute function.
+	 *
+	 * @param element the element
+	 * @param thisObject the this object
+	 * @param f the f
+	 * @param event the event
+	 * @return true, if successful
+	 */
 	public static boolean executeFunction(DOMNodeImpl element, Object thisObject, Function f, Event event) {
 		Document doc = element.getOwnerDocument();
 		if (doc == null) {
@@ -104,6 +128,15 @@ public class Executor {
 		}
 	}
 
+	/**
+	 * Execute function.
+	 *
+	 * @param thisScope the this scope
+	 * @param f the f
+	 * @param codeSource the code source
+	 * @param ucontext the ucontext
+	 * @return true, if successful
+	 */
 	public static boolean executeFunction(Scriptable thisScope, Function f,
 			URL codeSource, UserAgentContext ucontext) {
 		Context ctx = createContext(codeSource, ucontext);

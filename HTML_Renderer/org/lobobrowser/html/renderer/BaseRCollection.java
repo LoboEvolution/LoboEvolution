@@ -8,17 +8,34 @@ import java.util.Iterator;
 
 import org.lobobrowser.html.dombl.ModelNode;
 
+
+/**
+ * The Class BaseRCollection.
+ */
 abstract class BaseRCollection extends BaseBoundableRenderable implements
 		RCollection {
+	
+	/**
+	 * Instantiates a new base r collection.
+	 *
+	 * @param container the container
+	 * @param modelNode the model node
+	 */
 	public BaseRCollection(RenderableContainer container, ModelNode modelNode) {
 		super(container, modelNode);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RCollection#focus()
+	 */
 	public void focus() {
 		this.container.focus();
 		// TODO: Plus local focus
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RCollection#blur()
+	 */
 	public void blur() {
 		RCollection parent = this.parent;
 		if (parent != null) {
@@ -30,6 +47,9 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements
 
 	/**
 	 * Updates bounds of all descendent's GUI components, based on root bounds.
+	 *
+	 * @param guiX the gui x
+	 * @param guiY the gui y
 	 */
 	public void updateWidgetBounds(int guiX, int guiY) {
 		Iterator i = this.getRenderables();
@@ -45,6 +65,13 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements
 		}
 	}
 
+	/**
+	 * Check start selection.
+	 *
+	 * @param bounds the bounds
+	 * @param selectionPoint the selection point
+	 * @return true, if successful
+	 */
 	private boolean checkStartSelection(Rectangle bounds, Point selectionPoint) {
 		if (bounds.y > selectionPoint.y) {
 			return true;
@@ -57,6 +84,13 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements
 		}
 	}
 
+	/**
+	 * Check end selection.
+	 *
+	 * @param bounds the bounds
+	 * @param selectionPoint the selection point
+	 * @return true, if successful
+	 */
 	private boolean checkEndSelection(Rectangle bounds, Point selectionPoint) {
 		if (bounds.y > selectionPoint.y) {
 			return true;
@@ -69,6 +103,9 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#paintSelection(java.awt.Graphics, boolean, org.lobobrowser.html.renderer.RenderableSpot, org.lobobrowser.html.renderer.RenderableSpot)
+	 */
 	public boolean paintSelection(Graphics g, boolean inSelection,
 			RenderableSpot startPoint, RenderableSpot endPoint) {
 		// TODO: Does this work with renderables that are absolutely positioned?
@@ -147,6 +184,9 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements
 		return inSelection;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#extractSelectionText(java.lang.StringBuffer, boolean, org.lobobrowser.html.renderer.RenderableSpot, org.lobobrowser.html.renderer.RenderableSpot)
+	 */
 	public boolean extractSelectionText(StringBuffer buffer,
 			boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
@@ -220,6 +260,9 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements
 		return inSelection;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RCollection#invalidateLayoutDeep()
+	 */
 	public void invalidateLayoutDeep() {
 		// TODO: May be pretty inefficient in RLine's
 		// if it's true that non-layable components
@@ -236,8 +279,12 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements
 		}
 	}
 
+	/** The renderable with mouse. */
 	private BoundableRenderable renderableWithMouse = null;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseBoundableRenderable#onMouseMoved(java.awt.event.MouseEvent, int, int, boolean, org.lobobrowser.html.dombl.ModelNode)
+	 */
 	public void onMouseMoved(MouseEvent event, int x, int y,
 			boolean triggerEvent, ModelNode limit) {
 		super.onMouseMoved(event, x, y, triggerEvent, limit);
@@ -266,6 +313,9 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseBoundableRenderable#onMouseOut(java.awt.event.MouseEvent, int, int, org.lobobrowser.html.dombl.ModelNode)
+	 */
 	public void onMouseOut(MouseEvent event, int x, int y, ModelNode limit) {
 		super.onMouseOut(event, x, y, limit);
 		BoundableRenderable oldRenderable = this.renderableWithMouse;
@@ -282,6 +332,13 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements
 		}
 	}
 
+	/**
+	 * Gets the renderable.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @return the renderable
+	 */
 	public BoundableRenderable getRenderable(int x, int y) {
 		Iterator i = this.getRenderables();
 		if (i != null) {
@@ -306,6 +363,9 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onRightClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onRightClick(MouseEvent event, int x, int y) {
 		BoundableRenderable br = this.getRenderable(x, y);
 		if (br == null) {

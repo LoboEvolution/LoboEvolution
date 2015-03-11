@@ -34,10 +34,20 @@ import org.lobobrowser.html.dombl.JTextFieldImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.renderer.HtmlController;
 
+
+/**
+ * The Class InputTextControl.
+ */
 public class InputTextControl extends BaseInputTextControl {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instantiates a new input text control.
+	 *
+	 * @param modelNode the model node
+	 */
 	public InputTextControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		JTextFieldImpl text =  (JTextFieldImpl) this.widget;
@@ -69,6 +79,12 @@ public class InputTextControl extends BaseInputTextControl {
 		return new JTextFieldImpl();
 	}
 	
+	/**
+	 * Direction.
+	 *
+	 * @param dir the dir
+	 * @return the component orientation
+	 */
 	private ComponentOrientation direction(String dir) {
 
 		if ("ltr".equalsIgnoreCase(dir)) {

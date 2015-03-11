@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Document base URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC
  * 2396</a>]. See the BASE element definition in HTML 4.01.
@@ -40,27 +41,36 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLBaseElement extends HTMLElement {
+	
 	/**
 	 * The base URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC
 	 * 2396</a>]. See the href attribute definition in HTML 4.01.
+	 *
+	 * @return the href
 	 */
 	public String getHref();
 
 	/**
 	 * The base URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC
 	 * 2396</a>]. See the href attribute definition in HTML 4.01.
+	 *
+	 * @param href the new href
 	 */
 	public void setHref(String href);
 
 	/**
 	 * The default target frame. See the target attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return the target
 	 */
 	public String getTarget();
 
 	/**
 	 * The default target frame. See the target attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param target the new target
 	 */
 	public void setTarget(String target);
 }

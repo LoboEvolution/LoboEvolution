@@ -63,19 +63,40 @@ import org.w3c.dom.css.CSSStyleDeclaration;
 
 import com.steadystate.css.parser.CSSOMParser;
 
+
+/**
+ * The Class HTMLElementImpl.
+ */
 public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2PropertiesContext {
 	
+	/**
+	 * Instantiates a new HTML element impl.
+	 *
+	 * @param name the name
+	 * @param noStyleSheet the no style sheet
+	 */
 	public HTMLElementImpl(String name, boolean noStyleSheet) {
 		super(name);
 	}
 
+	/**
+	 * Instantiates a new HTML element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLElementImpl(String name) {
 		super(name);
 	}
 
+	/** The current style declaration state. */
 	private volatile AbstractCSS2Properties currentStyleDeclarationState;
+	
+	/** The local style declaration state. */
 	private volatile AbstractCSS2Properties localStyleDeclarationState;
 
+	/**
+	 * Forget local style.
+	 */
 	protected final void forgetLocalStyle() {
 		synchronized (this) {
 			this.currentStyleDeclarationState = null;
@@ -84,6 +105,11 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		}
 	}
 
+	/**
+	 * Forget style.
+	 *
+	 * @param deep the deep
+	 */
 	protected final void forgetStyle(boolean deep) {
 		// TODO: OPTIMIZATION: If we had a ComputedStyle map in
 		// window (Mozilla model) the map could be cleared in one shot.
@@ -110,6 +136,8 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	/**
 	 * Gets the style object associated with the . It may return null
 	 * only if the type of element does not handle stylesheets.
+	 *
+	 * @return the current style
 	 */
 	public AbstractCSS2Properties getCurrentStyle() {
 		AbstractCSS2Properties sds;
@@ -149,6 +177,8 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 * object returned only includes properties from the local style attribute.
 	 * It may return null only if the type of element does not handle
 	 * stylesheets.
+	 *
+	 * @return the style
 	 */
 	public AbstractCSS2Properties getStyle() {
 		
@@ -186,13 +216,25 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return sds;
 	}
 
+	/**
+	 * Creates the default style sheet.
+	 *
+	 * @return the abstract cs s2 properties
+	 */
 	protected AbstractCSS2Properties createDefaultStyleSheet() {
 		// Override to provide element defaults.
 		return null;
 	}
 
+	/** The computed styles. */
 	private Map<String, AbstractCSS2Properties> computedStyles;
 
+	/**
+	 * Gets the computed style.
+	 *
+	 * @param pseudoElement the pseudo element
+	 * @return the computed style
+	 */
 	public AbstractCSS2Properties getComputedStyle(String pseudoElement) {
 		if (pseudoElement == null) {
 			pseudoElement = "";
@@ -240,35 +282,69 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return sds;
 	}
 
+	/**
+	 * Sets the style.
+	 *
+	 * @param value the new style
+	 */
 	public void setStyle(String value) {
 		this.setAttribute(HtmlAttributeProperties.STYLE,value);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getClassName()
+	 */
 	public String getClassName() {
 		String className = this.getAttribute(HtmlAttributeProperties.CLASS);
 		return className == null ? "" : className;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#setClassName(java.lang.String)
+	 */
 	public void setClassName(String className) {
 		this.setAttribute(HtmlAttributeProperties.CLASS, className);
 	}
 
+	/**
+	 * Gets the charset.
+	 *
+	 * @return the charset
+	 */
 	public String getCharset() {
 		return this.getAttribute(HtmlAttributeProperties.CHARSET);
 	}
 
+	/**
+	 * Sets the charset.
+	 *
+	 * @param charset the new charset
+	 */
 	public void setCharset(String charset) {
 		this.setAttribute(HtmlAttributeProperties.CHARSET, charset);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#warn(java.lang.String, java.lang.Throwable)
+	 */
 	public void warn(String message, Throwable err) {
 		logger.log(Level.WARNING, message, err);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#warn(java.lang.String)
+	 */
 	public void warn(String message) {
 		logger.log(Level.WARNING, message);
 	}
 
+	/**
+	 * Gets the attribute as int.
+	 *
+	 * @param name the name
+	 * @param defaultValue the default value
+	 * @return the attribute as int
+	 */
 	protected int getAttributeAsInt(String name, int defaultValue) {
 		String value = this.getAttribute(name);
 		try {
@@ -279,10 +355,19 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		}
 	}
 
+	/**
+	 * Gets the attribute as boolean.
+	 *
+	 * @param name the name
+	 * @return the attribute as boolean
+	 */
 	public boolean getAttributeAsBoolean(String name) {
 		return this.getAttribute(name) != null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#assignAttributeField(java.lang.String, java.lang.String)
+	 */
 	protected void assignAttributeField(String normalName, String value) {
 		if (!this.notificationsSuspended) {
 			this.informInvalidAttibute(normalName);
@@ -294,6 +379,12 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		super.assignAttributeField(normalName, value);
 	}
 
+	/**
+	 * Gets the css input source for decl.
+	 *
+	 * @param text the text
+	 * @return the css input source for decl
+	 */
 	protected final InputSource getCssInputSourceForDecl(String text) {
 		java.io.Reader reader = new StringReader("{" + text + "}");
 		InputSource is = new InputSource(reader);
@@ -303,8 +394,10 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	/**
 	 * Adds style sheet declarations applicable to this element. A properties
 	 * object is created if necessary when the one passed is <code>null</code>.
-	 * 
-	 * @param style
+	 *
+	 * @param style the style
+	 * @param pseudoNames the pseudo names
+	 * @return the abstract cs s2 properties
 	 */
 	protected final AbstractCSS2Properties addStyleSheetDeclarations(
 			AbstractCSS2Properties style, Set<String> pseudoNames) {
@@ -351,8 +444,14 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return style;
 	}
 
+	/** The is mouse over. */
 	private boolean isMouseOver = false;
 
+	/**
+	 * Sets the mouse over.
+	 *
+	 * @param mouseOver the new mouse over
+	 */
 	public void setMouseOver(boolean mouseOver) {
 		if (this.isMouseOver != mouseOver) {
 			// Change isMouseOver field before checking to invalidate.
@@ -367,12 +466,20 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		}
 	}
 
+	/**
+	 * Invalidate descendents for hover.
+	 */
 	private void invalidateDescendentsForHover() {
 		synchronized (this.getTreeLock()) {
 			this.invalidateDescendentsForHoverImpl(this);
 		}
 	}
 
+	/**
+	 * Invalidate descendents for hover impl.
+	 *
+	 * @param ancestor the ancestor
+	 */
 	private void invalidateDescendentsForHoverImpl(HTMLElementImpl ancestor) {
 		ArrayList<Node> nodeList = this.nodeList;
 		if (nodeList != null) {
@@ -390,9 +497,17 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		}
 	}
 
+	/** The is hover style. */
 	private Boolean isHoverStyle = null;
+	
+	/** The has hover style by element. */
 	private Map<HTMLElementImpl, Boolean> hasHoverStyleByElement = null;
 
+	/**
+	 * Checks for hover style.
+	 *
+	 * @return true, if successful
+	 */
 	private boolean hasHoverStyle() {
 		Boolean ihs;
 		synchronized (this) {
@@ -422,6 +537,12 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return ihs.booleanValue();
 	}
 
+	/**
+	 * Checks for hover style.
+	 *
+	 * @param ancestor the ancestor
+	 * @return true, if successful
+	 */
 	private boolean hasHoverStyle(HTMLElementImpl ancestor) {
 		Map<HTMLElementImpl, Boolean> ihs;
 		synchronized (this) {
@@ -464,6 +585,8 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 * Gets the pseudo-element lowercase names currently applicable to this
 	 * element. Method must return <code>null</code> if there are no such
 	 * pseudo-elements.
+	 *
+	 * @return the pseudo names
 	 */
 	public Set<String> getPseudoNames() {
 		Set<String> pnset = null;
@@ -476,6 +599,15 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return pnset;
 	}
 
+	/**
+	 * Find style declarations.
+	 *
+	 * @param elementName the element name
+	 * @param id the id
+	 * @param className the class name
+	 * @param pseudoNames the pseudo names
+	 * @return the collection
+	 */
 	protected final Collection<CSSStyleDeclaration> findStyleDeclarations(String elementName,
 			String id, String className, Set<String> pseudoNames) {
 		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
@@ -487,12 +619,20 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 				pseudoNames);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#informInvalid()
+	 */
 	public void informInvalid() {
 		// This is called when an attribute or child changes.
 		this.forgetStyle(false);
 		super.informInvalid();
 	}
 
+	/**
+	 * Inform invalid attibute.
+	 *
+	 * @param normalName the normal name
+	 */
 	public void informInvalidAttibute(String normalName) {
 		// This is called when an attribute changes while
 		// the element is allowing notifications.
@@ -508,12 +648,20 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	/**
 	 * Gets form input due to the current element. It should return
 	 * <code>null</code> except when the element is a form input element.
+	 *
+	 * @return the form inputs
 	 */
 	protected FormInput[] getFormInputs() {
 		// Override in input elements
 		return null;
 	}
 
+	/**
+	 * Class match.
+	 *
+	 * @param classTL the class tl
+	 * @return true, if successful
+	 */
 	private boolean classMatch(String classTL) {
 		String classNames = this.getClassName();
 		if (classNames == null || classNames.length() == 0) {
@@ -532,11 +680,10 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	/**
 	 * Get an ancestor that matches the element tag name given and the style
 	 * class given.
-	 * 
-	 * @param elementTL
-	 *            An tag name in lowercase or an asterisk (*).
-	 * @param classTL
-	 *            A class name in lowercase.
+	 *
+	 * @param elementTL            An tag name in lowercase or an asterisk (*).
+	 * @param classTL            A class name in lowercase.
+	 * @return the ancestor with class
 	 */
 	public HTMLElementImpl getAncestorWithClass(String elementTL, String classTL) {
 		Object nodeObj = this.getParentNode();
@@ -553,6 +700,13 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		}
 	}
 
+	/**
+	 * Gets the parent with class.
+	 *
+	 * @param elementTL the element tl
+	 * @param classTL the class tl
+	 * @return the parent with class
+	 */
 	public HTMLElementImpl getParentWithClass(String elementTL, String classTL) {
 		Object nodeObj = this.getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
@@ -566,6 +720,11 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return null;
 	}
 
+	/**
+	 * Gets the preceeding sibling element.
+	 *
+	 * @return the preceeding sibling element
+	 */
 	public HTMLElementImpl getPreceedingSiblingElement() {
 		Node parentNode = this.getParentNode();
 		if (parentNode == null) {
@@ -589,6 +748,13 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return null;
 	}
 
+	/**
+	 * Gets the preceeding sibling with class.
+	 *
+	 * @param elementTL the element tl
+	 * @param classTL the class tl
+	 * @return the preceeding sibling with class
+	 */
 	public HTMLElementImpl getPreceedingSiblingWithClass(String elementTL,
 			String classTL) {
 		HTMLElementImpl psibling = this.getPreceedingSiblingElement();
@@ -602,6 +768,13 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return null;
 	}
 
+	/**
+	 * Gets the ancestor with id.
+	 *
+	 * @param elementTL the element tl
+	 * @param idTL the id tl
+	 * @return the ancestor with id
+	 */
 	public HTMLElementImpl getAncestorWithId(String elementTL, String idTL) {
 		Object nodeObj = this.getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
@@ -619,6 +792,13 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		}
 	}
 
+	/**
+	 * Gets the parent with id.
+	 *
+	 * @param elementTL the element tl
+	 * @param idTL the id tl
+	 * @return the parent with id
+	 */
 	public HTMLElementImpl getParentWithId(String elementTL, String idTL) {
 		Object nodeObj = this.getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
@@ -634,6 +814,13 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return null;
 	}
 
+	/**
+	 * Gets the preceeding sibling with id.
+	 *
+	 * @param elementTL the element tl
+	 * @param idTL the id tl
+	 * @return the preceeding sibling with id
+	 */
 	public HTMLElementImpl getPreceedingSiblingWithId(String elementTL,
 			String idTL) {
 		HTMLElementImpl psibling = this.getPreceedingSiblingElement();
@@ -649,6 +836,12 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return null;
 	}
 
+	/**
+	 * Gets the ancestor.
+	 *
+	 * @param elementTL the element tl
+	 * @return the ancestor
+	 */
 	public HTMLElementImpl getAncestor(String elementTL) {
 		Object nodeObj = this.getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
@@ -666,6 +859,12 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		}
 	}
 
+	/**
+	 * Gets the parent.
+	 *
+	 * @param elementTL the element tl
+	 * @return the parent
+	 */
 	public HTMLElementImpl getParent(String elementTL) {
 		Object nodeObj = this.getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
@@ -681,6 +880,12 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return null;
 	}
 
+	/**
+	 * Gets the preceeding sibling.
+	 *
+	 * @param elementTL the element tl
+	 * @return the preceeding sibling
+	 */
 	public HTMLElementImpl getPreceedingSibling(String elementTL) {
 		HTMLElementImpl psibling = this.getPreceedingSiblingElement();
 		if (psibling != null) {
@@ -695,6 +900,12 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return null;
 	}
 
+	/**
+	 * Gets the ancestor for java class.
+	 *
+	 * @param javaClass the java class
+	 * @return the ancestor for java class
+	 */
 	protected Object getAncestorForJavaClass(Class javaClass) {
 		Object nodeObj = this.getParentNode();
 		if (nodeObj == null || javaClass.isInstance(nodeObj)) {
@@ -707,6 +918,9 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#setInnerHTML(java.lang.String)
+	 */
 	public void setInnerHTML(String newHtml) {
 		HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
 		if (document == null) {
@@ -735,6 +949,9 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getOuterHTML()
+	 */
 	public String getOuterHTML() {
 		StringBuffer buffer = new StringBuffer();
 		synchronized (this) {
@@ -743,6 +960,11 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return buffer.toString();
 	}
 
+	/**
+	 * Append outer html impl.
+	 *
+	 * @param buffer the buffer
+	 */
 	public void appendOuterHTMLImpl(StringBuffer buffer) {
 		String tagName = this.getTagName();
 		buffer.append('<');
@@ -774,6 +996,9 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		buffer.append('>');
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		// Overrides DOMNodeImpl method
 		// Called in synchronized block already
@@ -783,26 +1008,41 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return new StyleSheetRenderState(prevRenderState, this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getOffsetTop()
+	 */
 	public int getOffsetTop() {
 		UINode uiNode = this.getUINode();
 		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().y;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getOffsetLeft()
+	 */
 	public int getOffsetLeft() {
 		UINode uiNode = this.getUINode();
 		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().x;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getOffsetWidth()
+	 */
 	public int getOffsetWidth() {
 		UINode uiNode = this.getUINode();
 		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().width;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getOffsetHeight()
+	 */
 	public int getOffsetHeight() {
 		UINode uiNode = this.getUINode();
 		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().height;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.style.CSS2PropertiesContext#getParentStyle()
+	 */
 	public AbstractCSS2Properties getParentStyle() {
 		Object parent = this.parentNode;
 		if (parent instanceof HTMLElementImpl) {
@@ -811,6 +1051,9 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.style.CSS2PropertiesContext#getDocumentBaseURI()
+	 */
 	public String getDocumentBaseURI() {
 		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc != null) {
@@ -820,141 +1063,213 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#toString()
+	 */
 	public String toString() {
 		return super.toString() + "[currentStyle=" + this.getCurrentStyle()
 				+ "]";
 	}
 
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#setOuterHTML(java.lang.String)
+	 */
 	@Override
 	public void setOuterHTML(String outerHTML) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#insertAdjacentHTML(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void insertAdjacentHTML(String position, String text) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getClassList()
+	 */
 	@Override
 	public DOMTokenList getClassList() {
 		return new DOMTokenListImpl(this,this.getClassName());
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getDataset()
+	 */
 	@Override
 	public DOMStringMap getDataset() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#click()
+	 */
 	@Override
 	public void click() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#scrollIntoView(boolean)
+	 */
 	@Override
 	public void scrollIntoView(boolean top) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#focus()
+	 */
 	@Override
 	public void focus() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#blur()
+	 */
 	@Override
 	public void blur() {
 		// TODO Auto-generated method stub
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getAccessKeyLabel()
+	 */
 	@Override
 	public String getAccessKeyLabel() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getCommandType()
+	 */
 	@Override
 	public String getCommandType() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getLabel()
+	 */
 	@Override
 	public String getLabel() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getIcon()
+	 */
 	@Override
 	public String getIcon() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getOffsetParent()
+	 */
 	@Override
 	public Element getOffsetParent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getItemRef()
+	 */
 	@Override
 	public DOMSettableTokenList getItemRef() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#setItemRef(java.lang.String)
+	 */
 	@Override
 	public void setItemRef(String itemRef) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getItemProp()
+	 */
 	@Override
 	public DOMSettableTokenList getItemProp() {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#setItemProp(java.lang.String)
+	 */
 	@Override
 	public void setItemProp(String itemProp) {
 		// TODO Auto-generated method stub
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getProperties()
+	 */
 	@Override
 	public HTMLPropertiesCollection getProperties() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getItemValue()
+	 */
 	@Override
 	public Object getItemValue() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#setItemValue(java.lang.Object)
+	 */
 	@Override
 	public void setItemValue(Object itemValue) {
 		// TODO Auto-generated method stub
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#querySelector(java.lang.String)
+	 */
 	@Override
 	public Element querySelector(String selectors) {
 		QuerySelectorImpl qsel = new QuerySelectorImpl();
 		return qsel.documentQuerySelector(this.document, selectors);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#querySelectorAll(java.lang.String)
+	 */
 	@Override
 	public NodeList querySelectorAll(String selectors) {
 		QuerySelectorImpl qsel = new QuerySelectorImpl();
 		return qsel.documentQuerySelectorAll(this.document, selectors);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#addEventListener(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void addEventListener(String script, String function) {
 		JavascriptCommon ut = new JavascriptCommon();
@@ -966,6 +1281,9 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		doc.setElementById(getId(), element);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#removeEventListener(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void removeEventListener(String script, String function) {
 		JavascriptCommon ut = new JavascriptCommon();

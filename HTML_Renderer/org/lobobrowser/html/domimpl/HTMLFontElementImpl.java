@@ -28,40 +28,74 @@ import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.w3c.HTMLFontElement;
 
+
+/**
+ * The Class HTMLFontElementImpl.
+ */
 public class HTMLFontElementImpl extends HTMLAbstractUIElement implements
 		HTMLFontElement {
+	
+	/**
+	 * Instantiates a new HTML font element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLFontElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFontElement#getColor()
+	 */
 	public String getColor() {
 		return this.getAttribute(HtmlAttributeProperties.COLOR);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFontElement#getFace()
+	 */
 	public String getFace() {
 		return this.getAttribute(HtmlAttributeProperties.FACE);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFontElement#getSize()
+	 */
 	public String getSize() {
 		return this.getAttribute(HtmlAttributeProperties.SIZE);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFontElement#setColor(java.lang.String)
+	 */
 	public void setColor(String color) {
 		this.setAttribute(HtmlAttributeProperties.COLOR, color);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFontElement#setFace(java.lang.String)
+	 */
 	public void setFace(String face) {
 		this.setAttribute(HtmlAttributeProperties.FACE, face);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFontElement#setSize(java.lang.String)
+	 */
 	public void setSize(String size) {
 		this.setAttribute(HtmlAttributeProperties.SIZE, size);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return super.createRenderState(prevRenderState);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createDefaultStyleSheet()
+	 */
 	protected AbstractCSS2Properties createDefaultStyleSheet() {
 		String fontFamily = this.getAttribute(HtmlAttributeProperties.FACE);
 		String color = this.getAttribute(HtmlAttributeProperties.COLOR);

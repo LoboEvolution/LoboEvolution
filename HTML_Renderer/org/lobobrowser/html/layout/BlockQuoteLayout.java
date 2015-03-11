@@ -20,7 +20,15 @@
 */
 package org.lobobrowser.html.layout;
 
+
+/**
+ * The Class BlockQuoteLayout.
+ */
 public class BlockQuoteLayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new block quote layout.
+	 */
 	public BlockQuoteLayout() {
 		super(DISPLAY_BLOCK);
 	}

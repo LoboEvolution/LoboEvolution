@@ -8,20 +8,28 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Interface SACMediaList.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  */
 public interface SACMediaList {
 
 	/**
-	 * Returns the length of this media list
+	 * Returns the length of this media list.
+	 *
+	 * @return the length
 	 */
 	public int getLength();
 
 	/**
 	 * Returns the medium at the specified index, or <code>null</code> if this
 	 * is not a valid index.
+	 *
+	 * @param index the index
+	 * @return the string
 	 */
 	public String item(int index);
 }

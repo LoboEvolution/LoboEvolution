@@ -26,25 +26,46 @@ import org.lobobrowser.html.renderstate.BlockRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.w3c.HTMLDivElement;
 
+
+/**
+ * The Class HTMLDivElementImpl.
+ */
 public class HTMLDivElementImpl extends HTMLAbstractUIElement implements
 		HTMLDivElement {
 
+	/**
+	 * Instantiates a new HTML div element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLDivElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDivElement#getAlign()
+	 */
 	public String getAlign() {
 		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDivElement#setAlign(java.lang.String)
+	 */
 	public void setAlign(String align) {
 		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new BlockRenderState(prevRenderState, this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.StringBuffer)
+	 */
 	protected void appendInnerTextImpl(StringBuffer buffer) {
 		int length = buffer.length();
 		int lineBreaks;

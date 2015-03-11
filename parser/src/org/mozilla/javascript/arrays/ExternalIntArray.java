@@ -8,6 +8,7 @@ package org.mozilla.javascript.arrays;
 
 import java.nio.IntBuffer;
 
+
 /**
  * An implementation of the external array using an array of "int"s. From a JavaScript perspective,
  * only "number" types may be set in the array. Valid values are the same as an "int" type in Java,
@@ -19,27 +20,49 @@ import java.nio.IntBuffer;
 public final class ExternalIntArray
     extends ExternalArray
 {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 2944694724181197664L;
 
+    /** The array. */
     private final IntBuffer array;
 
+    /**
+     * Instantiates a new external int array.
+     *
+     * @param array the array
+     */
     public ExternalIntArray(IntBuffer array) {
         this.array = array;
     }
 
+    /**
+     * Gets the array.
+     *
+     * @return the array
+     */
     public IntBuffer getArray() {
         return array;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#getElement(int)
+     */
     protected Object getElement(int index) {
         return array.get(array.position() + index);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#putElement(int, java.lang.Object)
+     */
     protected void putElement(int index, Object value) {
         int val = ((Number)value).intValue();
         array.put(array.position() + index, val);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#getLength()
+     */
     public int getLength() {
         return array.remaining();
     }

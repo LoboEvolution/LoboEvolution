@@ -36,14 +36,22 @@ import org.w3c.dom.stylesheets.StyleSheetList;
 
 import com.steadystate.css.util.LangUtils;
 
+
 /**
  * Implementation of {@link StyleSheetList}.
  *
  * @author <a href="mailto:waldbaer@users.sourceforge.net">Johannes Koch</a>
  */
 public class CSSStyleSheetListImpl implements StyleSheetList {
+    
+    /** The css style sheets_. */
     private List<CSSStyleSheet> cssStyleSheets_;
 
+    /**
+     * Gets the CSS style sheets.
+     *
+     * @return the CSS style sheets
+     */
     public List<CSSStyleSheet> getCSSStyleSheets() {
         if (cssStyleSheets_ == null) {
             cssStyleSheets_ = new ArrayList<CSSStyleSheet>();
@@ -51,22 +59,33 @@ public class CSSStyleSheetListImpl implements StyleSheetList {
         return cssStyleSheets_;
     }
 
+    /**
+     * Sets the CSS style sheets.
+     *
+     * @param cssStyleSheets the new CSS style sheets
+     */
     public void setCSSStyleSheets(final List<CSSStyleSheet> cssStyleSheets) {
         cssStyleSheets_ = cssStyleSheets;
     }
 
     /**
-     * Creates a new instance of CSSStyleSheetListImpl
+     * Creates a new instance of CSSStyleSheetListImpl.
      */
     public CSSStyleSheetListImpl() {
         super();
     }
 
     // start StyleSheetList
+    /* (non-Javadoc)
+     * @see org.w3c.dom.stylesheets.StyleSheetList#getLength()
+     */
     public int getLength() {
         return getCSSStyleSheets().size();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.stylesheets.StyleSheetList#item(int)
+     */
     public StyleSheet item(final int index) {
         return getCSSStyleSheets().get(index);
     }
@@ -101,6 +120,9 @@ public class CSSStyleSheetListImpl implements StyleSheetList {
         return merged;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -113,6 +135,12 @@ public class CSSStyleSheetListImpl implements StyleSheetList {
         return equalsStyleSheets(ssl);
     }
 
+    /**
+     * Equals style sheets.
+     *
+     * @param ssl the ssl
+     * @return true, if successful
+     */
     private boolean equalsStyleSheets(final StyleSheetList ssl) {
         if ((ssl == null) || (getLength() != ssl.getLength())) {
             return false;
@@ -127,6 +155,9 @@ public class CSSStyleSheetListImpl implements StyleSheetList {
         return true;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode() {
         int hash = LangUtils.HASH_SEED;

@@ -61,6 +61,7 @@ import org.lobobrowser.util.EventDispatch2;
 import org.lobobrowser.util.Objects;
 import org.lobobrowser.util.Urls;
 
+
 /**
  * A <code>BrowserPanel</code> contains a {@link FramePanel} along with optional
  * address bar, toolbars, menu bar and status bar.
@@ -72,15 +73,33 @@ import org.lobobrowser.util.Urls;
  */
 public class BrowserPanel extends JPanel implements NavigatorWindow,
 		BrowserWindow, WindowCallback {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(BrowserPanel.class
 			.getName());
+	
+	/** The has address bar. */
 	private final boolean hasAddressBar;
+	
+	/** The has tool bar. */
 	private final boolean hasToolBar;
+	
+	/** The has status bar. */
 	private final boolean hasStatusBar;
+	
+	/** The menu bar. */
 	private final JMenuBar menuBar;
+	
+	/** The frame panel. */
 	private final FramePanel framePanel;
+	
+	/** The address bar panel. */
 	private final AddressBarPanel addressBarPanel;
+	
+	/** The shared tool bar panel. */
 	private final SharedToolBarPanel sharedToolBarPanel;
+	
+	/** The status bar panel. */
 	private final StatusBarPanel statusBarPanel;
 
 	/**
@@ -165,8 +184,9 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 
 	/**
 	 * Navigates to the URL or path provided.
+	 *
 	 * @param urlOrPath An absolute URL or file path.
-	 * @throws java.net.MalformedURLException
+	 * @throws MalformedURLException the malformed url exception
 	 */
 	public void navigate(String urlOrPath)
 			throws MalformedURLException {
@@ -175,14 +195,18 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 
 	/**
 	 * Navigates to the URL provided.
+	 *
 	 * @param url A URL.
-	 * @throws java.net.MalformedURLException
+	 * @throws MalformedURLException the malformed url exception
 	 */
 	public void navigate(URL url)
 			throws MalformedURLException {
 		this.framePanel.navigate(url);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#addAddressBarComponent(java.awt.Component)
+	 */
 	public void addAddressBarComponent(Component addressBarComponent) {
 		AddressBarPanel abp = this.addressBarPanel;
 		if (abp != null) {
@@ -190,8 +214,12 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		}
 	}
 
+	/** The menues by id. */
 	private final Map<String, JMenu> menuesById = new HashMap<String, JMenu>(1);
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#addMenu(java.lang.String, javax.swing.JMenu)
+	 */
 	public void addMenu(String menuId, JMenu menu) {
 		JMenuBar menuBar = this.menuBar;
 		if (menuBar != null) {
@@ -202,12 +230,19 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		}
 	}
 
+	/** The event. */
 	private final EventDispatch2 EVENT = new LocalEventDispatch();
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#addNavigatorWindowListener(org.lobobrowser.ua.NavigatorWindowListener)
+	 */
 	public void addNavigatorWindowListener(NavigatorWindowListener listener) {
 		EVENT.addListener(listener);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#addSharedToolBarComponent(java.awt.Component)
+	 */
 	public void addSharedToolBarComponent(Component toolBarComponent) {
 		SharedToolBarPanel stbp = this.sharedToolBarPanel;
 		if (stbp != null) {
@@ -215,6 +250,9 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#addStatusBarComponent(java.awt.Component)
+	 */
 	public void addStatusBarComponent(Component statusBarComponent) {
 		StatusBarPanel sbp = this.statusBarPanel;
 		if (sbp != null) {
@@ -222,14 +260,21 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#addToolBar(java.awt.Component)
+	 */
 	public void addToolBar(Component toolBar) {
 		if (this.hasToolBar) {
 			this.add(toolBar);
 		}
 	}
 
+	/** The latest accessed frame. */
 	private volatile NavigatorFrame latestAccessedFrame = null;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#back()
+	 */
 	public boolean back() {
 		NavigatorFrame frame = this.latestAccessedFrame;
 		if (frame != null) {
@@ -243,6 +288,9 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		return this.framePanel.back();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#canBack()
+	 */
 	public boolean canBack() {
 		NavigatorFrame frame = this.latestAccessedFrame;
 		if (frame != null) {
@@ -256,10 +304,16 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		return this.framePanel.canBack();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#canCopy()
+	 */
 	public boolean canCopy() {
 		return this.framePanel.canCopy();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#canForward()
+	 */
 	public boolean canForward() {
 		NavigatorFrame frame = this.latestAccessedFrame;
 		if (frame != null) {
@@ -273,34 +327,50 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		return this.framePanel.canForward();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#canReload()
+	 */
 	public boolean canReload() {
 		return this.framePanel.canReload();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#copy()
+	 */
 	public boolean copy() {
 		return this.framePanel.copy();
 	}
 
+	/** The Constant HGAP. */
 	private static final int HGAP = 4;
+	
+	/** The Constant VGAP. */
 	private static final int VGAP = 2;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#createGap()
+	 */
 	public Component createGap() {
 		return Box.createRigidArea(new Dimension(HGAP, VGAP));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#createGlueComponent(java.awt.Component, boolean)
+	 */
 	public Component createGlueComponent(Component wrappedComponent,
 			boolean usingMaxSize) {
 		return new FillerComponent(wrappedComponent, usingMaxSize);
 	}
 
+	/** The close window on dispose. */
 	private boolean closeWindowOnDispose = true;
 
 	/**
 	 * Returns a value indicating whether the parent window is closed when the
 	 * current <code>BrowserPanel</code> is disposed.
-	 * 
-	 * @see #setCloseWindowOnDispose(boolean)
+	 *
 	 * @return boolean
+	 * @see #setCloseWindowOnDispose(boolean)
 	 */
 	public boolean isCloseWindowOnDispose() {
 		return closeWindowOnDispose;
@@ -337,6 +407,9 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#forward()
+	 */
 	public boolean forward() {
 		NavigatorFrame frame = this.latestAccessedFrame;
 		if (frame != null) {
@@ -350,6 +423,9 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		return this.framePanel.forward();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#getAwtWindow()
+	 */
 	public Window getAwtWindow() {
 		Container parent = this.getParent();
 		while (parent != null && !(parent instanceof Window)) {
@@ -358,81 +434,135 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		return (Window) parent;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#getBackNavigationEntries()
+	 */
 	public NavigationEntry[] getBackNavigationEntries() {
 		return this.framePanel.getBackNavigationEntries();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#getCurrentNavigationEntry()
+	 */
 	public NavigationEntry getCurrentNavigationEntry() {
 		return this.framePanel.getCurrentNavigationEntry();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#getForwardNavigationEntries()
+	 */
 	public NavigationEntry[] getForwardNavigationEntries() {
 		return this.framePanel.getForwardNavigationEntries();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#getMenu(java.lang.String)
+	 */
 	public JMenu getMenu(String menuId) {
 		synchronized (this.menuesById) {
 			return this.menuesById.get(menuId);
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#getTopFrame()
+	 */
 	public NavigatorFrame getTopFrame() {
 		return this.framePanel;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#getUserAgent()
+	 */
 	public UserAgent getUserAgent() {
 		return org.lobobrowser.request.UserAgentImpl.getInstance();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#goTo(org.lobobrowser.ua.NavigationEntry)
+	 */
 	public boolean goTo(NavigationEntry entry) {
 		return this.framePanel.goTo(entry);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#hasSource()
+	 */
 	public boolean hasSource() {
 		return this.framePanel.hasSource();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#reload()
+	 */
 	public boolean reload() {
 		this.framePanel.reload();
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#removeNavigatorWindowListener(org.lobobrowser.ua.NavigatorWindowListener)
+	 */
 	public void removeNavigatorWindowListener(NavigatorWindowListener listener) {
 		EVENT.removeListener(listener);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigatorWindow#stop()
+	 */
 	public boolean stop() {
 		org.lobobrowser.request.RequestEngine.getInstance().cancelAllRequests();
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.BrowserWindow#getTopFramePanel()
+	 */
 	public FramePanel getTopFramePanel() {
 		return this.framePanel;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.BrowserWindow#getWindowCallback()
+	 */
 	public WindowCallback getWindowCallback() {
 		return this;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.WindowCallback#getComponent()
+	 */
 	public Component getComponent() {
 		return this;
 	}
 
+	/** The default status. */
 	private String defaultStatus;
+	
+	/** The status. */
 	private String status;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.WindowCallback#getDefaultStatus()
+	 */
 	public String getDefaultStatus() {
 		synchronized (this) {
 			return this.defaultStatus;
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.WindowCallback#getStatus()
+	 */
 	public String getStatus() {
 		synchronized (this) {
 			return this.status;
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.WindowCallback#handleDocumentAccess(org.lobobrowser.ua.NavigatorFrame, org.lobobrowser.clientlet.ClientletResponse)
+	 */
 	public void handleDocumentAccess(NavigatorFrame frame,
 			ClientletResponse response) {
 		final NavigatorWindowEvent event = new NavigatorWindowEvent(this,
@@ -444,6 +574,9 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.WindowCallback#handleDocumentRendering(org.lobobrowser.ua.NavigatorFrame, org.lobobrowser.clientlet.ClientletResponse, org.lobobrowser.clientlet.ComponentContent)
+	 */
 	public void handleDocumentRendering(final NavigatorFrame frame,
 			final ClientletResponse response, final ComponentContent content) {
 		if (EventQueue.isDispatchThread()) {
@@ -458,6 +591,13 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		}
 	}
 
+	/**
+	 * Gets the window title.
+	 *
+	 * @param response the response
+	 * @param content the content
+	 * @return the window title
+	 */
 	protected String getWindowTitle(ClientletResponse response,
 			ComponentContent content) {
 		String title = content == null ? null : content.getTitle();
@@ -468,6 +608,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		return title;
 	}
 
+	/** The document title. */
 	private String documentTitle;
 
 	/**
@@ -478,10 +619,22 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		return documentTitle;
 	}
 
+	/**
+	 * Sets the document title.
+	 *
+	 * @param documentTitle the new document title
+	 */
 	public void setDocumentTitle(String documentTitle) {
 		this.documentTitle = documentTitle;
 	}
 
+	/**
+	 * Handle document rendering impl.
+	 *
+	 * @param frame the frame
+	 * @param response the response
+	 * @param content the content
+	 */
 	private void handleDocumentRenderingImpl(final NavigatorFrame frame,
 			ClientletResponse response, ComponentContent content) {
 		if (frame == this.framePanel) {
@@ -497,6 +650,11 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		}
 	}
 
+	/**
+	 * Gets the safe extension manager.
+	 *
+	 * @return the safe extension manager
+	 */
 	private ExtensionManager getSafeExtensionManager() {
 		return AccessController
 				.doPrivileged(new PrivilegedAction<ExtensionManager>() {
@@ -506,6 +664,9 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 				});
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.WindowCallback#handleError(org.lobobrowser.ua.NavigatorFrame, org.lobobrowser.clientlet.ClientletResponse, java.lang.Throwable)
+	 */
 	public void handleError(NavigatorFrame frame, ClientletResponse response,
 			Throwable exception) {
 		this.getSafeExtensionManager().handleError(frame, response, exception);
@@ -513,6 +674,9 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		this.handleDocumentRendering(frame, response, null);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.WindowCallback#setDefaultStatus(org.lobobrowser.ua.NavigatorFrame, java.lang.String)
+	 */
 	public void setDefaultStatus(NavigatorFrame frame, String defaultStatus) {
 		synchronized (this) {
 			this.defaultStatus = defaultStatus;
@@ -530,6 +694,9 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.WindowCallback#setStatus(org.lobobrowser.ua.NavigatorFrame, java.lang.String)
+	 */
 	public void setStatus(NavigatorFrame frame, String value) {
 		String actualStatus;
 		synchronized (this) {
@@ -548,6 +715,9 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.WindowCallback#updateProgress(org.lobobrowser.ua.NavigatorProgressEvent)
+	 */
 	public void updateProgress(final NavigatorProgressEvent event) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -578,7 +748,14 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		return this.framePanel.getCurrentMimeType();
 	}
 
+	/**
+	 * The Class LocalEventDispatch.
+	 */
 	public static class LocalEventDispatch extends EventDispatch2 {
+		
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.util.EventDispatch2#dispatchEvent(java.util.EventListener, java.util.EventObject)
+		 */
 		@Override
 		protected void dispatchEvent(EventListener listener, EventObject event) {
 			NavigatorEvent ne = (NavigatorEvent) event;
@@ -637,6 +814,11 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		this.framePanel.addContentListener(listener);
 	}
 
+	/**
+	 * Removes the content listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void removeContentListener(ContentListener listener) {
 		this.framePanel.removeContentListener(listener);
 	}
@@ -651,6 +833,11 @@ public class BrowserPanel extends JPanel implements NavigatorWindow,
 		this.framePanel.addResponseListener(listener);
 	}
 
+	/**
+	 * Removes the response listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void removeResponseListener(ResponseListener listener) {
 		this.framePanel.removeResponseListener(listener);
 	}

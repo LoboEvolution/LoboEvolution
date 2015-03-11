@@ -40,20 +40,43 @@ import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.util.Nodes;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class DescendentHTMLCollection.
+ */
 public class DescendentHTMLCollection extends AbstractScriptableDelegate implements HTMLCollection {
+	
+	/** The root node. */
 	private final DOMNodeImpl rootNode;
+	
+	/** The node filter. */
 	private final NodeFilter nodeFilter;
+	
+	/** The tree lock. */
 	private final Object treeLock;
+	
+	/** The nest into matching nodes. */
 	private final boolean nestIntoMatchingNodes;
 
+	/**
+	 * Instantiates a new descendent html collection.
+	 *
+	 * @param node the node
+	 * @param filter the filter
+	 * @param treeLock the tree lock
+	 */
 	public DescendentHTMLCollection(DOMNodeImpl node, NodeFilter filter,
 			Object treeLock) {
 		this(node, filter, treeLock, true);
 	}
 
 	/**
-	 * @param node
-	 * @param filter
+	 * Instantiates a new descendent html collection.
+	 *
+	 * @param node the node
+	 * @param filter the filter
+	 * @param treeLock the tree lock
+	 * @param nestMatchingNodes the nest matching nodes
 	 */
 	public DescendentHTMLCollection(DOMNodeImpl node, NodeFilter filter,
 			Object treeLock, boolean nestMatchingNodes) {
@@ -66,9 +89,15 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 				document, this));
 	}
 
+	/** The items by name. */
 	private Map<String, DOMElementImpl> itemsByName = null;
+	
+	/** The items by index. */
 	private List<DOMNodeImpl> itemsByIndex = null;
 
+	/**
+	 * Ensure populated impl.
+	 */
 	private void ensurePopulatedImpl() {
 		if (this.itemsByName == null) {
 			ArrayList<DOMNodeImpl> descendents = this.rootNode.getDescendents(
@@ -96,6 +125,9 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 		}
 	}
 
+	/**
+	 * Invalidate.
+	 */
 	private void invalidate() {
 		synchronized (this.treeLock) {
 			this.itemsByName = null;
@@ -103,12 +135,20 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 		}
 	}
 
+	/**
+	 * Checks if is valid.
+	 *
+	 * @return true, if is valid
+	 */
 	private boolean isValid() {
 		synchronized (this.treeLock) {
 			return this.itemsByName != null && this.itemsByIndex != null;
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCollection#getLength()
+	 */
 	public int getLength() {
 		synchronized (this.treeLock) {
 			this.ensurePopulatedImpl();
@@ -116,6 +156,9 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCollection#item(int)
+	 */
 	public Node item(int index) {
 		synchronized (this.treeLock) {
 			this.ensurePopulatedImpl();
@@ -127,6 +170,9 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCollection#namedItem(java.lang.String)
+	 */
 	public Node namedItem(String name) {
 		synchronized (this.treeLock) {
 			this.ensurePopulatedImpl();
@@ -134,6 +180,12 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 		}
 	}
 
+	/**
+	 * Index of.
+	 *
+	 * @param node the node
+	 * @return the int
+	 */
 	public int indexOf(Node node) {
 		synchronized (this.treeLock) {
 			this.ensurePopulatedImpl();
@@ -206,13 +258,33 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 	// }
 	// }
 
+	/**
+	 * The listener interface for receiving localNotification events.
+	 * The class that is interested in processing a localNotification
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addLocalNotificationListener</code> method. When
+	 * the localNotification event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see LocalNotificationEvent
+	 */
 	private static class LocalNotificationListener extends
 			DocumentNotificationAdapter {
 		// Needs to be a static class with a weak reference to
 		// the collection object.
+		/** The document. */
 		private final HTMLDocumentImpl document;
+		
+		/** The collection ref. */
 		private final WeakReference<DescendentHTMLCollection> collectionRef;
 
+		/**
+		 * Instantiates a new local notification listener.
+		 *
+		 * @param document the document
+		 * @param collection the collection
+		 */
 		public LocalNotificationListener(final HTMLDocumentImpl document,
 				final DescendentHTMLCollection collection) {
 			super();
@@ -221,6 +293,9 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 					collection);
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.dombl.DocumentNotificationAdapter#structureInvalidated(org.lobobrowser.html.domimpl.DOMNodeImpl)
+		 */
 		public void structureInvalidated(DOMNodeImpl node) {
 			DescendentHTMLCollection collection = (DescendentHTMLCollection) this.collectionRef
 					.get();
@@ -236,6 +311,9 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 			}
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.dombl.DocumentNotificationAdapter#nodeLoaded(org.lobobrowser.html.domimpl.DOMNodeImpl)
+		 */
 		public void nodeLoaded(DOMNodeImpl node) {
 			this.structureInvalidated(node);
 		}

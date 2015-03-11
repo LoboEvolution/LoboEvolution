@@ -20,19 +20,57 @@
  */
 package org.lobobrowser.html.w3c;
 
+
+/**
+ * The Interface UndoManager.
+ */
 public interface UndoManager {
 	// UndoManager
+	/**
+	 * Gets the length.
+	 *
+	 * @return the length
+	 */
 	public int getLength();
 
+	/**
+	 * Item.
+	 *
+	 * @param index the index
+	 * @return the object
+	 */
 	public Object item(int index);
 
+	/**
+	 * Gets the position.
+	 *
+	 * @return the position
+	 */
 	public int getPosition();
 
+	/**
+	 * Adds the.
+	 *
+	 * @param data the data
+	 * @param title the title
+	 * @return the int
+	 */
 	public int add(Object data, String title);
 
+	/**
+	 * Removes the.
+	 *
+	 * @param index the index
+	 */
 	public void remove(int index);
 
+	/**
+	 * Clear undo.
+	 */
 	public void clearUndo();
 
+	/**
+	 * Clear redo.
+	 */
 	public void clearRedo();
 }

@@ -41,11 +41,23 @@ import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.renderer.HtmlController;
 import org.lobobrowser.util.gui.WrapperLayout;
 
+
+/**
+ * The Class InputTextAreaControl.
+ */
 public class InputTextAreaControl extends BaseInputControl {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The widget. */
 	private final JTextAreaImpl widget;
 
+	/**
+	 * Instantiates a new input text area control.
+	 *
+	 * @param modelNode the model node
+	 */
 	public InputTextAreaControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		this.setLayout(WrapperLayout.getInstance());
@@ -90,6 +102,9 @@ public class InputTextAreaControl extends BaseInputControl {
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#reset(int, int)
+	 */
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		DOMElementImpl element = this.controlElement;
@@ -111,6 +126,11 @@ public class InputTextAreaControl extends BaseInputControl {
 		}
 	}
 
+	/**
+	 * Creates the text field.
+	 *
+	 * @return the j text component
+	 */
 	protected JTextComponent createTextField() {
 		return new JTextAreaImpl();
 	}
@@ -133,7 +153,10 @@ public class InputTextAreaControl extends BaseInputControl {
 		return this.rows;
 	}
 
+	/** The cols. */
 	private int cols = -1;
+	
+	/** The rows. */
 	private int rows = -1;
 
 	/*
@@ -160,6 +183,9 @@ public class InputTextAreaControl extends BaseInputControl {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
 	public java.awt.Dimension getPreferredSize() {
 		int pw;
 		int cols = this.cols;
@@ -222,10 +248,19 @@ public class InputTextAreaControl extends BaseInputControl {
 		this.widget.setText(value);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.InputContext#resetInput()
+	 */
 	public void resetInput() {
 		this.widget.setText("");
 	}
 	
+	/**
+	 * Direction.
+	 *
+	 * @param dir the dir
+	 * @return the component orientation
+	 */
 	private ComponentOrientation direction(String dir) {
 
 		if ("ltr".equalsIgnoreCase(dir)) {

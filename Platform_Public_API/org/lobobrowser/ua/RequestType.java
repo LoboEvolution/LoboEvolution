@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.ua;
 
+
 /** Denotes a type of navigation request. */
 public enum RequestType {
 	/** Navigation is due to a user click. */
@@ -60,7 +61,8 @@ public enum RequestType {
 	OPEN_WINDOW_FROM_CLICK,
 	/** Request loads frame content. */
 	FRAME,
-	/** Request is due to form submission */
+	
+	/**  Request is due to form submission. */
 	FORM,
 	/**
 	 * Request is intended to load a page/document element, such as an image or

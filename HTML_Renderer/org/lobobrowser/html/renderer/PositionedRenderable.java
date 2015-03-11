@@ -20,13 +20,35 @@
  */
 package org.lobobrowser.html.renderer;
 
+
+/**
+ * The Class PositionedRenderable.
+ */
 class PositionedRenderable {
+	
+	/** The Constant EMPTY_ARRAY. */
 	public static final PositionedRenderable[] EMPTY_ARRAY = new PositionedRenderable[0];
+	
+	/** The renderable. */
 	public final BoundableRenderable renderable;
+	
+	/** The vertical alignable. */
 	public final boolean verticalAlignable;
+	
+	/** The ordinal. */
 	public final int ordinal;
+	
+	/** The is float. */
 	public final boolean isFloat;
 
+	/**
+	 * Instantiates a new positioned renderable.
+	 *
+	 * @param renderable the renderable
+	 * @param verticalAlignable the vertical alignable
+	 * @param ordinal the ordinal
+	 * @param isFloat the is float
+	 */
 	public PositionedRenderable(final BoundableRenderable renderable,
 			final boolean verticalAlignable, int ordinal, boolean isFloat) {
 		super();

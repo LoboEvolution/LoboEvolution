@@ -11,7 +11,10 @@ import org.w3c.css.sac.SelectorList;
 import org.w3c.css.sac.SimpleSelector;
 
 
+
 /**
+ * The Class SACParserCSS21.
+ *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author waldbaer
  * @author rbri
@@ -19,19 +22,31 @@ import org.w3c.css.sac.SimpleSelector;
  */
 public class SACParserCSS21 extends AbstractSACParser implements Parser, SACParserCSS21Constants {
 
+    /**
+     * Instantiates a new SAC parser cs s21.
+     */
     public SACParserCSS21() {
         this((CharStream) null);
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.parser.AbstractSACParser#getParserVersion()
+     */
     public String getParserVersion() {
         return "http://www.w3.org/TR/CSS21/";
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.parser.AbstractSACParser#getGrammarUri()
+     */
     protected String getGrammarUri()
     {
         return "http://www.w3.org/TR/CSS21/grammar.html";
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.parser.AbstractSACParser#getToken()
+     */
     protected Token getToken()
     {
         return token;
@@ -44,7 +59,10 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //    [ [ ruleset | media | page ] [S|CDO|CDC]* ]*
 //  ;
 //
-  final public void styleSheet() throws ParseException {
+  /* (non-Javadoc)
+ * @see com.steadystate.css.parser.AbstractSACParser#styleSheet()
+ */
+final public void styleSheet() throws ParseException {
     try {
           handleStartDocument();
       styleSheetRuleList();
@@ -54,6 +72,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     }
   }
 
+  /**
+   * Style sheet rule list.
+   *
+   * @throws ParseException the parse exception
+   */
   final public void styleSheetRuleList() throws ParseException {
   boolean ruleFound = false;
     label_1:
@@ -216,7 +239,10 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //
 // This is used by ASTStyleSheet.insertRule to parse a single rule
 //
-  final public void styleSheetRuleSingle() throws ParseException {
+  /* (non-Javadoc)
+ * @see com.steadystate.css.parser.AbstractSACParser#styleSheetRuleSingle()
+ */
+final public void styleSheetRuleSingle() throws ParseException {
     label_5:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -272,6 +298,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     }
   }
 
+  /**
+   * Charset rule.
+   *
+   * @throws ParseException the parse exception
+   */
   final public void charsetRule() throws ParseException {
   Token t;
   Locator locator;
@@ -287,6 +318,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     }
   }
 
+  /**
+   * Unknown at rule.
+   *
+   * @throws ParseException the parse exception
+   */
   final public void unknownAtRule() throws ParseException {
     String s;
     Locator locator;
@@ -306,7 +342,13 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //    [STRING|URI] S* [ medium [ COMMA S* medium]* ]? ';' S*
 //  ;
 //
-  final public void importRule(final boolean nonImportRuleFoundBefore) throws ParseException {
+  /**
+ * Import rule.
+ *
+ * @param nonImportRuleFoundBefore the non import rule found before
+ * @throws ParseException the parse exception
+ */
+final public void importRule(final boolean nonImportRuleFoundBefore) throws ParseException {
     Token t;
     SACMediaListImpl ml = new SACMediaListImpl();
     Locator locator;
@@ -385,7 +427,12 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //  : MEDIA_SYM S* medium [ COMMA S* medium ]* '{' S* ruleset* '}' S*
 //  ;
 //
-  final public void mediaRule() throws ParseException {
+  /**
+ * Media rule.
+ *
+ * @throws ParseException the parse exception
+ */
+final public void mediaRule() throws ParseException {
     boolean start = false;
     SACMediaListImpl ml = new SACMediaListImpl();
     Locator locator;
@@ -452,6 +499,9 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.steadystate.css.parser.AbstractSACParser#mediaList(com.steadystate.css.parser.SACMediaListImpl)
+   */
   final public void mediaList(SACMediaListImpl ml) throws ParseException {
     String s;
     try {
@@ -489,6 +539,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     }
   }
 
+  /**
+   * Media rule list.
+   *
+   * @throws ParseException the parse exception
+   */
   final public void mediaRuleList() throws ParseException {
     label_13:
     while (true) {
@@ -551,7 +606,13 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //   : IDENT S*
 //   ;
 //
-  final public String medium() throws ParseException {
+  /**
+ * Medium.
+ *
+ * @return the string
+ * @throws ParseException the parse exception
+ */
+final public String medium() throws ParseException {
   Token t;
   String medium;
     t = jj_consume_token(IDENT);
@@ -579,7 +640,12 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //    '{' S* declaration [ ';' S* declaration ]* '}' S*
 //  ;
 //
-  final public void pageRule() throws ParseException {
+  /**
+ * Page rule.
+ *
+ * @throws ParseException the parse exception
+ */
+final public void pageRule() throws ParseException {
     String s = null;
     boolean start = false;
     Locator locator;
@@ -696,7 +762,13 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //   : ':' IDENT
 //   ;
 //
-  final public String pseudoPage() throws ParseException {
+  /**
+ * Pseudo page.
+ *
+ * @return the string
+ * @throws ParseException the parse exception
+ */
+final public String pseudoPage() throws ParseException {
   Token t;
     jj_consume_token(COLON);
     t = jj_consume_token(IDENT);
@@ -709,7 +781,14 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //  : '/' S* | COMMA S* | /* empty */
 //  ;
 //
-  final public LexicalUnit operator(LexicalUnit prev) throws ParseException {
+  /**
+ * Operator.
+ *
+ * @param prev the prev
+ * @return the lexical unit
+ * @throws ParseException the parse exception
+ */
+final public LexicalUnit operator(LexicalUnit prev) throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case SLASH:
       jj_consume_token(SLASH);
@@ -758,7 +837,13 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //  | S
 //  ;
 //
-  final public char combinator() throws ParseException {
+  /**
+ * Combinator.
+ *
+ * @return the char
+ * @throws ParseException the parse exception
+ */
+final public char combinator() throws ParseException {
   char c = ' ';
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case PLUS:
@@ -844,7 +929,13 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //  : '-' | PLUS
 //  ;
 //
-  final public char unaryOperator() throws ParseException {
+  /**
+ * Unary operator.
+ *
+ * @return the char
+ * @throws ParseException the parse exception
+ */
+final public char unaryOperator() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case MINUS:
       jj_consume_token(MINUS);
@@ -867,7 +958,13 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //   : IDENT S*
 //   ;
 //
-  final public String property() throws ParseException {
+  /**
+ * Property.
+ *
+ * @return the string
+ * @throws ParseException the parse exception
+ */
+final public String property() throws ParseException {
     Token t;
     t = jj_consume_token(IDENT);
     label_26:
@@ -892,7 +989,12 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //    '{' S* declaration [ ';' S* declaration ]* '}' S*
 //  ;
 //
-  final public void styleRule() throws ParseException {
+  /**
+ * Style rule.
+ *
+ * @throws ParseException the parse exception
+ */
+final public void styleRule() throws ParseException {
     SelectorList selList = null;
     boolean start = false;
     Token t;
@@ -943,6 +1045,9 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.steadystate.css.parser.AbstractSACParser#parseSelectorsInternal()
+   */
   final public SelectorList parseSelectorsInternal() throws ParseException {
     SelectorList selectors;
     label_28:
@@ -963,6 +1068,9 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     throw new Error("Missing return statement in function");
   }
 
+  /* (non-Javadoc)
+   * @see com.steadystate.css.parser.AbstractSACParser#selectorList()
+   */
   final public SelectorList selectorList() throws ParseException {
     SelectorListImpl selList = new SelectorListImpl();
     Selector sel;
@@ -1007,7 +1115,13 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //   : simple_selector [ combinator simple_selector ]*
 //   ;
 //
-  final public Selector selector() throws ParseException {
+  /**
+ * Selector.
+ *
+ * @return the selector
+ * @throws ParseException the parse exception
+ */
+final public Selector selector() throws ParseException {
     Selector sel;
     char comb;
     try {
@@ -1047,7 +1161,15 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //  | [ HASH | class | attrib | pseudo ]+
 //  ;
 //
-  final public Selector simpleSelector(Selector sel, char comb) throws ParseException {
+  /**
+ * Simple selector.
+ *
+ * @param sel the sel
+ * @param comb the comb
+ * @return the selector
+ * @throws ParseException the parse exception
+ */
+final public Selector simpleSelector(Selector sel, char comb) throws ParseException {
     SimpleSelector simpleSel = null;
     Condition c = null;
     SimpleSelector pseudoElementSel = null;
@@ -1179,7 +1301,15 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //   : '.' IDENT
 //   ;
 //
-  final public Condition _class(Condition pred, boolean pseudoElementFound) throws ParseException {
+  /**
+ * _class.
+ *
+ * @param pred the pred
+ * @param pseudoElementFound the pseudo element found
+ * @return the condition
+ * @throws ParseException the parse exception
+ */
+final public Condition _class(Condition pred, boolean pseudoElementFound) throws ParseException {
     Token t;
     Locator locator;
     ParseException pe = null;
@@ -1206,7 +1336,13 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //   : IDENT | '*'
 //   ;
 //
-  final public SimpleSelector elementName() throws ParseException {
+  /**
+ * Element name.
+ *
+ * @return the simple selector
+ * @throws ParseException the parse exception
+ */
+final public SimpleSelector elementName() throws ParseException {
     Token t;
     SimpleSelector sel;
     try {
@@ -1246,7 +1382,15 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //     [ IDENT | STRING ] S* ]? ']'
 //   ;
 //
-  final public Condition attrib(Condition pred, boolean pseudoElementFound) throws ParseException {
+  /**
+ * Attrib.
+ *
+ * @param pred the pred
+ * @param pseudoElementFound the pseudo element found
+ * @return the condition
+ * @throws ParseException the parse exception
+ */
+final public Condition attrib(Condition pred, boolean pseudoElementFound) throws ParseException {
     Token t;
     String name = null;
     String value = null;
@@ -1381,7 +1525,15 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //        ]
 //  ;
 //
-  final public Object pseudo(Condition pred, boolean pseudoElementFound) throws ParseException {
+  /**
+ * Pseudo.
+ *
+ * @param pred the pred
+ * @param pseudoElementFound the pseudo element found
+ * @return the object
+ * @throws ParseException the parse exception
+ */
+final public Object pseudo(Condition pred, boolean pseudoElementFound) throws ParseException {
     SimpleSelector pseudoElementSel = null;
     Condition c = null;
     Token t;
@@ -1511,6 +1663,14 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     throw new Error("Missing return statement in function");
   }
 
+  /**
+   * Hash.
+   *
+   * @param pred the pred
+   * @param pseudoElementFound the pseudo element found
+   * @return the condition
+   * @throws ParseException the parse exception
+   */
   final public Condition hash(Condition pred, boolean pseudoElementFound) throws ParseException {
     Token t;
     ParseException pe = null;
@@ -1530,6 +1690,9 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     throw new Error("Missing return statement in function");
   }
 
+  /* (non-Javadoc)
+   * @see com.steadystate.css.parser.AbstractSACParser#styleDeclaration()
+   */
   final public void styleDeclaration() throws ParseException {
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1587,7 +1750,12 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //   |
 //   ;
 //
-  final public void declaration() throws ParseException {
+  /**
+ * Declaration.
+ *
+ * @throws ParseException the parse exception
+ */
+final public void declaration() throws ParseException {
   String p;
   LexicalUnit e;
   boolean priority = false;
@@ -1648,7 +1816,10 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 // prio
 //   : IMPORTANT_SYM S*
 //   ;
-  final public boolean prio() throws ParseException {
+  /* (non-Javadoc)
+ * @see com.steadystate.css.parser.AbstractSACParser#prio()
+ */
+final public boolean prio() throws ParseException {
     jj_consume_token(IMPORTANT_SYM);
     label_46:
     while (true) {
@@ -1673,7 +1844,10 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //
 // TODO: Deal with the operator
 //
-  final public LexicalUnit expr() throws ParseException {
+  /* (non-Javadoc)
+ * @see com.steadystate.css.parser.AbstractSACParser#expr()
+ */
+final public LexicalUnit expr() throws ParseException {
     LexicalUnit head;
     LexicalUnit body;
     try {
@@ -1742,7 +1916,14 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //  S*
 //  ;
 //
-  final public LexicalUnit term(LexicalUnit prev) throws ParseException {
+  /**
+ * Term.
+ *
+ * @param prev the prev
+ * @return the lexical unit
+ * @throws ParseException the parse exception
+ */
+final public LexicalUnit term(LexicalUnit prev) throws ParseException {
   Token t;
   char op = ' ';
   LexicalUnit value = null;
@@ -1925,7 +2106,14 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //   : FUNCTION S* expr ')' S*
 //   ;
 //
-  final public LexicalUnit function(LexicalUnit prev) throws ParseException {
+  /**
+ * Function.
+ *
+ * @param prev the prev
+ * @return the lexical unit
+ * @throws ParseException the parse exception
+ */
+final public LexicalUnit function(LexicalUnit prev) throws ParseException {
     Token t;
     LexicalUnit params;
     t = jj_consume_token(FUNCTION);
@@ -1952,13 +2140,26 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 //   : HASH S*
 //   ;
 //
-  final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
+  /**
+ * Hexcolor.
+ *
+ * @param prev the prev
+ * @return the lexical unit
+ * @throws ParseException the parse exception
+ */
+final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     Token t;
     t = jj_consume_token(HASH);
         {if (true) return hexcolorInternal(prev, t);}
     throw new Error("Missing return statement in function");
   }
 
+  /**
+   * Skip.
+   *
+   * @return the string
+   * @throws ParseException the parse exception
+   */
   String skip() throws ParseException {
   StringBuilder sb = new StringBuilder();
   int nesting = 0;
@@ -1983,6 +2184,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
   return sb.toString();
   }
 
+  /**
+   * Error_skipblock.
+   *
+   * @throws ParseException the parse exception
+   */
   void error_skipblock() throws ParseException {
     Token t;
     int nesting = 0;
@@ -2005,6 +2211,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     while ((t.kind != RBRACE) || (nesting > 0));
   }
 
+  /**
+   * Error_skipdecl.
+   *
+   * @throws ParseException the parse exception
+   */
   void error_skipdecl() throws ParseException {
     Token t = getToken(1);
     if (t.kind == LBRACE)
@@ -2031,6 +2242,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     }
   }
 
+  /**
+   * Error_skip at rule.
+   *
+   * @throws ParseException the parse exception
+   */
   void error_skipAtRule() throws ParseException {
     Token t = null;
     do
@@ -2040,6 +2256,12 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     while (t.kind != SEMICOLON && t.kind != EOF);
   }
 
+  /**
+   * Jj_2_1.
+   *
+   * @param xla the xla
+   * @return true, if successful
+   */
   private boolean jj_2_1(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_1(); }
@@ -2047,21 +2269,41 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     finally { jj_save(0, xla); }
   }
 
+  /**
+   * Jj_3 r_70.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_70() {
     if (jj_scan_token(LSQUARE)) return true;
     return false;
   }
 
+  /**
+   * Jj_3 r_55.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_55() {
     if (jj_3R_58()) return true;
     return false;
   }
 
+  /**
+   * Jj_3 r_60.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_60() {
     if (jj_scan_token(PLUS)) return true;
     return false;
   }
 
+  /**
+   * Jj_3 r_51.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_51() {
     Token xsp;
     xsp = jj_scanpos;
@@ -2072,6 +2314,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     return false;
   }
 
+  /**
+   * Jj_3 r_57.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_57() {
     Token xsp;
     xsp = jj_scanpos;
@@ -2082,11 +2329,21 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     return false;
   }
 
+  /**
+   * Jj_3 r_71.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_71() {
     if (jj_scan_token(COLON)) return true;
     return false;
   }
 
+  /**
+   * Jj_3 r_54.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_54() {
     if (jj_scan_token(S)) return true;
     Token xsp;
@@ -2095,11 +2352,21 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     return false;
   }
 
+  /**
+   * Jj_3 r_63.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_63() {
     if (jj_scan_token(ASTERISK)) return true;
     return false;
   }
 
+  /**
+   * Jj_3 r_53.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_53() {
     if (jj_scan_token(GREATER)) return true;
     Token xsp;
@@ -2110,6 +2377,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     return false;
   }
 
+  /**
+   * Jj_3 r_52.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_52() {
     if (jj_scan_token(PLUS)) return true;
     Token xsp;
@@ -2120,16 +2392,31 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     return false;
   }
 
+  /**
+   * Jj_3 r_67.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_67() {
     if (jj_3R_71()) return true;
     return false;
   }
 
+  /**
+   * Jj_3 r_66.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_66() {
     if (jj_3R_70()) return true;
     return false;
   }
 
+  /**
+   * Jj_3 r_50.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_50() {
     Token xsp;
     xsp = jj_scanpos;
@@ -2143,16 +2430,31 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     return false;
   }
 
+  /**
+   * Jj_3 r_69.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_69() {
     if (jj_scan_token(DOT)) return true;
     return false;
   }
 
+  /**
+   * Jj_3 r_65.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_65() {
     if (jj_3R_69()) return true;
     return false;
   }
 
+  /**
+   * Jj_3 r_59.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_59() {
     Token xsp;
     xsp = jj_scanpos;
@@ -2169,27 +2471,52 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     return false;
   }
 
+  /**
+   * Jj_3 r_64.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_64() {
     if (jj_3R_68()) return true;
     return false;
   }
 
+  /**
+   * Jj_3_1.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3_1() {
     if (jj_3R_50()) return true;
     if (jj_3R_51()) return true;
     return false;
   }
 
+  /**
+   * Jj_3 r_62.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_62() {
     if (jj_scan_token(IDENT)) return true;
     return false;
   }
 
+  /**
+   * Jj_3 r_68.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_68() {
     if (jj_scan_token(HASH)) return true;
     return false;
   }
 
+  /**
+   * Jj_3 r_56.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_56() {
     Token xsp;
     if (jj_3R_59()) return true;
@@ -2200,6 +2527,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     return false;
   }
 
+  /**
+   * Jj_3 r_58.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_58() {
     Token xsp;
     xsp = jj_scanpos;
@@ -2210,6 +2542,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     return false;
   }
 
+  /**
+   * Jj_3 r_61.
+   *
+   * @return true, if successful
+   */
   private boolean jj_3R_61() {
     if (jj_scan_token(GREATER)) return true;
     return false;
@@ -2221,33 +2558,71 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
   public Token token;
   /** Next token. */
   public Token jj_nt;
+  
+  /** The jj_ntk. */
   private int jj_ntk;
+  
+  /** The jj_lastpos. */
   private Token jj_scanpos, jj_lastpos;
+  
+  /** The jj_la. */
   private int jj_la;
+  
+  /** The jj_gen. */
   private int jj_gen;
+  
+  /** The jj_la1. */
   final private int[] jj_la1 = new int[85];
+  
+  /** The jj_la1_0. */
   static private int[] jj_la1_0;
+  
+  /** The jj_la1_1. */
   static private int[] jj_la1_1;
+  
+  /** The jj_la1_2. */
   static private int[] jj_la1_2;
   static {
       jj_la1_init_0();
       jj_la1_init_1();
       jj_la1_init_2();
    }
+   
+   /**
+    * Jj_la1_init_0.
+    */
    private static void jj_la1_init_0() {
       jj_la1_0 = new int[] {0x2,0x2,0x2,0x2,0x0,0x80000,0x80000,0x80000,0x2,0x2,0x2,0x80000,0x2,0x2,0x400000,0x2,0x80000,0x2,0x2,0x80000,0x0,0x2,0x80000,0x2,0x80000,0x2,0x2,0x2,0x0,0x2,0x80000,0x0,0x2,0x80000,0x2,0x2,0x0,0x2,0x2,0x0,0x2,0x0,0x2,0x0,0x2,0x2,0x1,0x2,0x0,0x2,0x2,0x0,0x0,0x0,0x0,0x80000,0x80000,0x2,0x2,0x0,0x2,0x480000,0x2,0x0,0x2,0x2,0x2,0x2,0x80000,0x80000,0x80000,0x0,0x2,0x80000,0x0,0x2,0x0,0x2,0x4e0000,0x0,0x0,0x20000,0x4e0000,0x2,0x2,};
    }
+   
+   /**
+    * Jj_la1_init_1.
+    */
    private static void jj_la1_init_1() {
       jj_la1_1 = new int[] {0xc00,0xc00,0xc00,0xc00,0x0,0xc2340000,0x42340000,0xc2340000,0xc00,0xc00,0x0,0xc2340000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc2340000,0x20000000,0x0,0xc2340000,0x0,0xc2340000,0x0,0x0,0x0,0x100000,0x0,0x200000,0x80000,0x0,0x200000,0x0,0x0,0x20400000,0x0,0x0,0x18000000,0x0,0x18000000,0x18000000,0x8800000,0x0,0x0,0x8000,0x0,0x20000000,0x0,0x0,0x42140000,0x42140000,0x42140000,0x42140000,0x42340000,0x200000,0x0,0x0,0x1003000,0x0,0x0,0x0,0x1003000,0x0,0x0,0x0,0x0,0x0,0x0,0x200000,0x80000,0x0,0x200000,0x200000,0x0,0x0,0x0,0x68c00000,0x20400000,0x8800000,0x0,0x40000000,0x0,0x0,};
    }
+   
+   /**
+    * Jj_la1_init_2.
+    */
    private static void jj_la1_init_2() {
       jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x4,0x1000003,0x1000003,0x1000003,0x0,0x0,0x0,0x1000007,0x0,0x0,0x200000,0x0,0x0,0x0,0x0,0x1000001,0x0,0x0,0x1000001,0x0,0x1000001,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc00000,0x0,0x0,0x0,0x0,0x0,0x0,0x8,0x0,0xbffff0,0x0,0x0,0x8ffff0,0xbffff0,0x0,0x0,};
    }
+  
+  /** The jj_2_rtns. */
   final private JJCalls[] jj_2_rtns = new JJCalls[1];
+  
+  /** The jj_rescan. */
   private boolean jj_rescan = false;
+  
+  /** The jj_gc. */
   private int jj_gc = 0;
 
-  /** Constructor with user supplied CharStream. */
+  /**
+   *  Constructor with user supplied CharStream.
+   *
+   * @param stream the stream
+   */
   public SACParserCSS21(CharStream stream) {
     token_source = new SACParserCSS21TokenManager(stream);
     token = new Token();
@@ -2257,7 +2632,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  /** Reinitialise. */
+  /**
+   *  Reinitialise.
+   *
+   * @param stream the stream
+   */
   public void ReInit(CharStream stream) {
     token_source.ReInit(stream);
     token = new Token();
@@ -2267,7 +2646,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  /** Constructor with generated Token Manager. */
+  /**
+   *  Constructor with generated Token Manager.
+   *
+   * @param tm the tm
+   */
   public SACParserCSS21(SACParserCSS21TokenManager tm) {
     token_source = tm;
     token = new Token();
@@ -2277,7 +2660,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  /** Reinitialise. */
+  /**
+   *  Reinitialise.
+   *
+   * @param tm the tm
+   */
   public void ReInit(SACParserCSS21TokenManager tm) {
     token_source = tm;
     token = new Token();
@@ -2287,6 +2674,13 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
+  /**
+   * Jj_consume_token.
+   *
+   * @param kind the kind
+   * @return the token
+   * @throws ParseException the parse exception
+   */
   private Token jj_consume_token(int kind) throws ParseException {
     Token oldToken;
     if ((oldToken = token).next != null) token = token.next;
@@ -2311,8 +2705,20 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     throw generateParseException();
   }
 
+  /**
+   * The Class LookaheadSuccess.
+   */
   static private final class LookaheadSuccess extends java.lang.Error { }
+  
+  /** The jj_ls. */
   final private LookaheadSuccess jj_ls = new LookaheadSuccess();
+  
+  /**
+   * Jj_scan_token.
+   *
+   * @param kind the kind
+   * @return true, if successful
+   */
   private boolean jj_scan_token(int kind) {
     if (jj_scanpos == jj_lastpos) {
       jj_la--;
@@ -2335,7 +2741,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
   }
 
 
-/** Get the next Token. */
+/**
+ *  Get the next Token.
+ *
+ * @return the next token
+ */
   final public Token getNextToken() {
     if (token.next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
@@ -2344,7 +2754,12 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     return token;
   }
 
-/** Get the specific Token. */
+/**
+ *  Get the specific Token.
+ *
+ * @param index the index
+ * @return the token
+ */
   final public Token getToken(int index) {
     Token t = token;
     for (int i = 0; i < index; i++) {
@@ -2354,6 +2769,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     return t;
   }
 
+  /**
+   * Jj_ntk.
+   *
+   * @return the int
+   */
   private int jj_ntk() {
     if ((jj_nt=token.next) == null)
       return (jj_ntk = (token.next=token_source.getNextToken()).kind);
@@ -2361,12 +2781,27 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
       return (jj_ntk = jj_nt.kind);
   }
 
+  /** The jj_expentries. */
   private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
+  
+  /** The jj_expentry. */
   private int[] jj_expentry;
+  
+  /** The jj_kind. */
   private int jj_kind = -1;
+  
+  /** The jj_lasttokens. */
   private int[] jj_lasttokens = new int[100];
+  
+  /** The jj_endpos. */
   private int jj_endpos;
 
+  /**
+   * Jj_add_error_token.
+   *
+   * @param kind the kind
+   * @param pos the pos
+   */
   private void jj_add_error_token(int kind, int pos) {
     if (pos >= 100) return;
     if (pos == jj_endpos + 1) {
@@ -2392,7 +2827,11 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     }
   }
 
-  /** Generate ParseException. */
+  /**
+   *  Generate ParseException.
+   *
+   * @return the parses the exception
+   */
   public ParseException generateParseException() {
     jj_expentries.clear();
     boolean[] la1tokens = new boolean[90];
@@ -2440,6 +2879,9 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
   final public void disable_tracing() {
   }
 
+  /**
+   * Jj_rescan_token.
+   */
   private void jj_rescan_token() {
     jj_rescan = true;
     for (int i = 0; i < 1; i++) {
@@ -2459,6 +2901,12 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     jj_rescan = false;
   }
 
+  /**
+   * Jj_save.
+   *
+   * @param index the index
+   * @param xla the xla
+   */
   private void jj_save(int index, int xla) {
     JJCalls p = jj_2_rtns[index];
     while (p.gen > jj_gen) {
@@ -2468,10 +2916,21 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     p.gen = jj_gen + xla - jj_la; p.first = token; p.arg = xla;
   }
 
+  /**
+   * The Class JJCalls.
+   */
   static final class JJCalls {
+    
+    /** The gen. */
     int gen;
+    
+    /** The first. */
     Token first;
+    
+    /** The arg. */
     int arg;
+    
+    /** The next. */
     JJCalls next;
   }
 

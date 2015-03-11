@@ -41,15 +41,39 @@ import org.lobobrowser.primary.gui.FormField;
 import org.lobobrowser.primary.gui.FormPanel;
 import org.lobobrowser.util.Strings;
 
+
+/**
+ * The Class AddBookmarkDialog.
+ */
 public class AddBookmarkDialog extends JDialog {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The url field. */
 	private final FormField urlField = new FormField(FieldType.TEXT, "URL:");
+	
+	/** The title field. */
 	private final FormField titleField = new FormField(FieldType.TEXT, "Title:");
+	
+	/** The description field. */
 	private final FormField descriptionField = new FormField(FieldType.TEXT,
 			"Description:");
+	
+	/** The tags field. */
 	private final FormField tagsField = new FormField(FieldType.TEXT, "Tags:");
+	
+	/** The url. */
 	private final URL url;
 
+	/**
+	 * Instantiates a new adds the bookmark dialog.
+	 *
+	 * @param owner the owner
+	 * @param modal the modal
+	 * @param existingInfo the existing info
+	 * @throws HeadlessException the headless exception
+	 */
 	public AddBookmarkDialog(Frame owner, boolean modal,
 			BookmarkInfo existingInfo) throws HeadlessException {
 		super(owner, modal);
@@ -91,18 +115,29 @@ public class AddBookmarkDialog extends JDialog {
 		contentPane.add(Box.createRigidArea(new Dimension(1, 4)));
 	}
 
+	/** The bookmark info. */
 	private BookmarkInfo bookmarkInfo;
 
+	/**
+	 * Gets the bookmark info.
+	 *
+	 * @return the bookmark info
+	 */
 	public BookmarkInfo getBookmarkInfo() {
 		return this.bookmarkInfo;
 	}
 
+	/**
+	 * The Class OkAction.
+	 */
 	private class OkAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			BookmarkInfo binfo = new BookmarkInfo();
 			binfo.setUrl(url);
@@ -114,12 +149,17 @@ public class AddBookmarkDialog extends JDialog {
 		}
 	}
 
+	/**
+	 * The Class CancelAction.
+	 */
 	private class CancelAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			bookmarkInfo = null;
 			AddBookmarkDialog.this.dispose();

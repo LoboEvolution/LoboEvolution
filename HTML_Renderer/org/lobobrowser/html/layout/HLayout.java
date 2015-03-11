@@ -23,7 +23,17 @@ package org.lobobrowser.html.layout;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.RBlockViewport;
 
+
+/**
+ * The Class HLayout.
+ */
 public class HLayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new h layout.
+	 *
+	 * @param fontSize the font size
+	 */
 	public HLayout(int fontSize) {
 		super(DISPLAY_BLOCK);
 	}

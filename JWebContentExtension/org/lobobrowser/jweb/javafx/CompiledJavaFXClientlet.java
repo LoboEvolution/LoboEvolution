@@ -32,6 +32,10 @@ import org.lobobrowser.jweb.common.BaseCompiledClientlet;
 
 import com.sun.javafx.api.ToolProvider;
 
+
+/**
+ * The Class CompiledJavaFXClientlet.
+ */
 public class CompiledJavaFXClientlet extends BaseCompiledClientlet {
 	// private static JavafxCompiler compilerLocator() {
 	// Iterator<?> iterator;
@@ -80,6 +84,9 @@ public class CompiledJavaFXClientlet extends BaseCompiledClientlet {
 	// return (JavafxCompiler)iterator.next();
 	// }
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.jweb.common.BaseCompiledClientlet#compile(javax.tools.JavaFileManager, javax.tools.DiagnosticListener, java.util.List)
+	 */
 	@Override
 	protected void compile(JavaFileManager fileManager,
 			DiagnosticListener<? super JavaFileObject> diagnosticListener,
@@ -99,6 +106,9 @@ public class CompiledJavaFXClientlet extends BaseCompiledClientlet {
 				compilationUnits).call();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.jweb.common.BaseCompiledClientlet#getExtraPlatformClassPath()
+	 */
 	@Override
 	protected URL[] getExtraPlatformClassPath() {
 		// Return the location of JavaFX runtime classes.

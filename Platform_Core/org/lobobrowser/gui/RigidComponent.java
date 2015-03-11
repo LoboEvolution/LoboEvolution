@@ -25,10 +25,18 @@ import java.awt.Dimension;
 
 import javax.swing.Box.Filler;
 
+
 /**
- * A component used in conjunction with <code>BoxLayout</code>
+ * A component used in conjunction with <code>BoxLayout</code>.
  */
 public class RigidComponent extends Filler {
+	
+	/**
+	 * Instantiates a new rigid component.
+	 *
+	 * @param wrappedComponent the wrapped component
+	 * @param d the d
+	 */
 	public RigidComponent(Component wrappedComponent, Dimension d) {
 		super(d, d, d);
 		this.setLayout(org.lobobrowser.util.gui.WrapperLayout.getInstance());

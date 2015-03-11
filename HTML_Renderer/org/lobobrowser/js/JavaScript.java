@@ -27,22 +27,35 @@ import org.lobobrowser.util.Objects;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
 
+
+/**
+ * The Class JavaScript.
+ */
 public class JavaScript {
+	
+	/** The instance. */
 	private static JavaScript instance = new JavaScript();
 	// objectMap must be a map that uses weak keys
 	// and refers to values using weak references.
 	// Keys are java objects other than ScriptableDelegate instances.
+	/** The java object to wrapper. */
 	private final WeakHashMap<Object, WeakReference<JavaObjectWrapper>> javaObjectToWrapper = new WeakHashMap<Object, WeakReference<JavaObjectWrapper>>();
 
+	/**
+	 * Gets the single instance of JavaScript.
+	 *
+	 * @return single instance of JavaScript
+	 */
 	public static JavaScript getInstance() {
 		return instance;
 	}
 
 	/**
 	 * Returns an object that may be used by the Javascript engine.
-	 * 
-	 * @param raw
-	 * @return
+	 *
+	 * @param raw the raw
+	 * @param scope the scope
+	 * @return the javascript object
 	 */
 	public Object getJavascriptObject(Object raw, Scriptable scope) {
 		if (raw instanceof String || raw instanceof Scriptable) {
@@ -95,6 +108,12 @@ public class JavaScript {
 		}
 	}
 
+	/**
+	 * Gets the string value.
+	 *
+	 * @param object the object
+	 * @return the string value
+	 */
 	private static String getStringValue(Object object) {
 		if (object instanceof Undefined) {
 			return "undefined";
@@ -105,6 +124,13 @@ public class JavaScript {
 		}
 	}
 
+	/**
+	 * Gets the java object.
+	 *
+	 * @param javascriptObject the javascript object
+	 * @param type the type
+	 * @return the java object
+	 */
 	public Object getJavaObject(Object javascriptObject, Class<?> type) {
 		if (javascriptObject instanceof JavaObjectWrapper) {
 			Object rawJavaObject = ((JavaObjectWrapper) javascriptObject)

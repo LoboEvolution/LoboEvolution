@@ -20,15 +20,32 @@ import org.lobobrowser.html.jsimpl.KeyboardEventImpl;
 import org.lobobrowser.html.jsimpl.MouseEventImpl;
 import org.mozilla.javascript.Function;
 
+
+/**
+ * The Class HtmlController.
+ */
 public class HtmlController {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(HtmlController.class.getName());
+	
+	/** The Constant instance. */
 	private static final HtmlController instance = new HtmlController();
 
+	/**
+	 * Gets the single instance of HtmlController.
+	 *
+	 * @return single instance of HtmlController
+	 */
 	public static HtmlController getInstance() {
 		return instance;
 	}
 
 	/**
+	 * On enter pressed.
+	 *
+	 * @param node the node
+	 * @param event the event
 	 * @return True to propagate further and false if the event was consumed.
 	 */
 	public boolean onEnterPressed(ModelNode node, InputEvent event) {
@@ -44,6 +61,12 @@ public class HtmlController {
 	}
 
 	/**
+	 * On mouse click.
+	 *
+	 * @param node the node
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
 	 * @return True to propagate further and false if the event was consumed.
 	 */
 	public boolean onMouseClick(ModelNode node, MouseEvent event, int x, int y) {
@@ -103,6 +126,15 @@ public class HtmlController {
 		return this.onMouseClick(parent, event, x, y);
 	}
 
+	/**
+	 * On context menu.
+	 *
+	 * @param node the node
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
+	 * @return true, if successful
+	 */
 	public boolean onContextMenu(ModelNode node, MouseEvent event, int x, int y) {
 		if (logger.isLoggable(Level.INFO)) {
 			logger.info("onContextMenu(): node=" + node + ",class="
@@ -133,6 +165,15 @@ public class HtmlController {
 		return this.onContextMenu(parent, event, x, y);
 	}
 
+	/**
+	 * On mouse over.
+	 *
+	 * @param node the node
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
+	 * @param limit the limit
+	 */
 	public void onMouseOver(ModelNode node, MouseEvent event, int x, int y,
 			ModelNode limit) {
 		while (node != null) {
@@ -158,6 +199,15 @@ public class HtmlController {
 		}
 	}
 
+	/**
+	 * On mouse out.
+	 *
+	 * @param node the node
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
+	 * @param limit the limit
+	 */
 	public void onMouseOut(ModelNode node, MouseEvent event, int x, int y,
 			ModelNode limit) {
 		while (node != null) {
@@ -184,6 +234,12 @@ public class HtmlController {
 	}
 
 	/**
+	 * On double click.
+	 *
+	 * @param node the node
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
 	 * @return True to propagate further, false if consumed.
 	 */
 	public boolean onDoubleClick(ModelNode node, MouseEvent event, int x, int y) {
@@ -215,6 +271,10 @@ public class HtmlController {
 	}
 
 	/**
+	 * On mouse disarmed.
+	 *
+	 * @param node the node
+	 * @param event the event
 	 * @return True to propagate further, false if consumed.
 	 */
 	public boolean onMouseDisarmed(ModelNode node, MouseEvent event) {
@@ -231,6 +291,12 @@ public class HtmlController {
 	}
 
 	/**
+	 * On mouse down.
+	 *
+	 * @param node the node
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
 	 * @return True to propagate further, false if consumed.
 	 */
 	public boolean onMouseDown(ModelNode node, MouseEvent event, int x, int y) {
@@ -259,6 +325,12 @@ public class HtmlController {
 	}
 
 	/**
+	 * On mouse up.
+	 *
+	 * @param node the node
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
 	 * @return True to propagate further, false if consumed.
 	 */
 	public boolean onMouseUp(ModelNode node, MouseEvent event, int x, int y) {
@@ -287,12 +359,12 @@ public class HtmlController {
 	}
 
 	/**
-	 * @param node
-	 *            The node generating the event.
-	 * @param x
-	 *            For images only, x coordinate of mouse click.
-	 * @param y
-	 *            For images only, y coordinate of mouse click.
+	 * On pressed.
+	 *
+	 * @param node            The node generating the event.
+	 * @param event the event
+	 * @param x            For images only, x coordinate of mouse click.
+	 * @param y            For images only, y coordinate of mouse click.
 	 * @return True to propagate further, false if consumed.
 	 */
 	public boolean onPressed(ModelNode node, InputEvent event, int x, int y) {
@@ -333,6 +405,12 @@ public class HtmlController {
 		return false;
 	}
 
+	/**
+	 * On change.
+	 *
+	 * @param node the node
+	 * @return true, if successful
+	 */
 	public boolean onChange(ModelNode node) {
 		if (node instanceof HTMLSelectElementImpl) {
 			HTMLSelectElementImpl uiElement = (HTMLSelectElementImpl) node;
@@ -348,6 +426,13 @@ public class HtmlController {
 		return false;
 	}
 	
+	/**
+	 * On key down.
+	 *
+	 * @param node the node
+	 * @param event the event
+	 * @return true, if successful
+	 */
 	public boolean onKeyDown(ModelNode node,KeyEvent event) {
 		if (node instanceof HTMLInputElementImpl) {
 			HTMLInputElementImpl uiElement = (HTMLInputElementImpl) node;
@@ -363,6 +448,13 @@ public class HtmlController {
 		return false;
 	}
 	
+	/**
+	 * On key press.
+	 *
+	 * @param node the node
+	 * @param event the event
+	 * @return true, if successful
+	 */
 	public boolean onKeyPress(ModelNode node,KeyEvent event){
 		
 		if (node instanceof HTMLInputElementImpl) {
@@ -379,6 +471,13 @@ public class HtmlController {
 		return false;
 	}
 	
+	/**
+	 * On key up.
+	 *
+	 * @param node the node
+	 * @param event the event
+	 * @return true, if successful
+	 */
 	public boolean onKeyUp(ModelNode node,KeyEvent event) {
 		if (node instanceof HTMLInputElementImpl) {
 			HTMLInputElementImpl uiElement = (HTMLInputElementImpl) node;

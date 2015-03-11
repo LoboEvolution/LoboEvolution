@@ -35,13 +35,35 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.NestingKind;
 import javax.tools.JavaFileObject;
 
+
+/**
+ * The Class OutputJavaFileObject.
+ */
 public class OutputJavaFileObject implements JavaFileObject {
+	
+	/** The file name. */
 	private final String fileName;
+	
+	/** The kind. */
 	private final Kind kind;
+	
+	/** The nesting kind. */
 	private final NestingKind nestingKind;
+	
+	/** The uri. */
 	private final URI uri;
+	
+	/** The create time. */
 	private final long createTime = System.currentTimeMillis();
 
+	/**
+	 * Instantiates a new output java file object.
+	 *
+	 * @param uri the uri
+	 * @param fileName the file name
+	 * @param kind the kind
+	 * @param nestingKind the nesting kind
+	 */
 	public OutputJavaFileObject(URI uri, final String fileName,
 			final Kind kind, final NestingKind nestingKind) {
 		this.fileName = fileName;
@@ -50,39 +72,66 @@ public class OutputJavaFileObject implements JavaFileObject {
 		this.uri = uri;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#getAccessLevel()
+	 */
 	public Modifier getAccessLevel() {
 		return Modifier.PUBLIC;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#getKind()
+	 */
 	public Kind getKind() {
 		return this.kind;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#getNestingKind()
+	 */
 	public NestingKind getNestingKind() {
 		return this.nestingKind;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#isNameCompatible(java.lang.String, javax.tools.JavaFileObject.Kind)
+	 */
 	public boolean isNameCompatible(String simpleName, Kind kind) {
 		return PathManager.isNameCompatible(simpleName, kind);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#delete()
+	 */
 	public boolean delete() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getCharContent(boolean)
+	 */
 	public CharSequence getCharContent(boolean ignoreEncodingErrors)
 			throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getLastModified()
+	 */
 	public long getLastModified() {
 		return this.createTime;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getName()
+	 */
 	public String getName() {
 		return this.fileName;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openInputStream()
+	 */
 	public InputStream openInputStream() throws IOException {
 		synchronized (this) {
 			ByteArrayOutputStream out = this.out;
@@ -94,8 +143,12 @@ public class OutputJavaFileObject implements JavaFileObject {
 		}
 	}
 
+	/** The out. */
 	private ByteArrayOutputStream out;
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openOutputStream()
+	 */
 	public OutputStream openOutputStream() throws IOException {
 		synchronized (this) {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -104,14 +157,23 @@ public class OutputJavaFileObject implements JavaFileObject {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openReader(boolean)
+	 */
 	public Reader openReader(boolean ignoreEncodingErrors) throws IOException {
 		return new InputStreamReader(this.openInputStream());
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openWriter()
+	 */
 	public Writer openWriter() throws IOException {
 		return new OutputStreamWriter(this.openOutputStream());
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#toUri()
+	 */
 	public URI toUri() {
 		return this.uri;
 	}

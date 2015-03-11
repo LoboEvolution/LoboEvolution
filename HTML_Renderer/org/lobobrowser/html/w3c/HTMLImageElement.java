@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Embedded image. See the IMG element definition in HTML 4.01.
  * <p>
@@ -39,13 +40,18 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLImageElement extends HTMLElement {
+	
 	/**
 	 * The name of the element (for backwards compatibility).
+	 *
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * The name of the element (for backwards compatibility).
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name);
 
@@ -53,6 +59,8 @@ public interface HTMLImageElement extends HTMLElement {
 	 * Aligns this object (vertically or horizontally) with respect to its
 	 * surrounding text. See the align attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the align
 	 */
 	public String getAlign();
 
@@ -60,18 +68,24 @@ public interface HTMLImageElement extends HTMLElement {
 	 * Aligns this object (vertically or horizontally) with respect to its
 	 * surrounding text. See the align attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param align the new align
 	 */
 	public void setAlign(String align);
 
 	/**
 	 * Alternate text for user agents not rendering the normal content of this
 	 * element. See the alt attribute definition in HTML 4.01.
+	 *
+	 * @return the alt
 	 */
 	public String getAlt();
 
 	/**
 	 * Alternate text for user agents not rendering the normal content of this
 	 * element. See the alt attribute definition in HTML 4.01.
+	 *
+	 * @param alt the new alt
 	 */
 	public void setAlt(String alt);
 
@@ -81,6 +95,8 @@ public interface HTMLImageElement extends HTMLElement {
 	 * this attribute was <code>DOMString</code> in DOM Level 1 HTML [<a
 	 * href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>] .
+	 *
+	 * @return the border
 	 */
 	public String getBorder();
 
@@ -90,6 +106,8 @@ public interface HTMLImageElement extends HTMLElement {
 	 * this attribute was <code>DOMString</code> in DOM Level 1 HTML [<a
 	 * href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>] .
+	 *
+	 * @param border the new border
 	 */
 	public void setBorder(String border);
 
@@ -99,8 +117,9 @@ public interface HTMLImageElement extends HTMLElement {
 	 * <code>DOMString</code> in DOM Level 1 HTML [<a
 	 * href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the height
 	 */
 	public int getHeight();
 
@@ -110,8 +129,9 @@ public interface HTMLImageElement extends HTMLElement {
 	 * <code>DOMString</code> in DOM Level 1 HTML [<a
 	 * href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param height the new height
 	 */
 	public void setHeight(int height);
 
@@ -122,8 +142,9 @@ public interface HTMLImageElement extends HTMLElement {
 	 * <code>DOMString</code> in DOM Level 1 HTML [<a
 	 * href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the hspace
 	 */
 	public int getHspace();
 
@@ -134,20 +155,25 @@ public interface HTMLImageElement extends HTMLElement {
 	 * <code>DOMString</code> in DOM Level 1 HTML [<a
 	 * href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param hspace the new hspace
 	 */
 	public void setHspace(int hspace);
 
 	/**
 	 * Use server-side image map. See the ismap attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return the checks if is map
 	 */
 	public boolean getIsMap();
 
 	/**
 	 * Use server-side image map. See the ismap attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param isMap the new checks if is map
 	 */
 	public void setIsMap(boolean isMap);
 
@@ -155,6 +181,8 @@ public interface HTMLImageElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a long description of this image or frame. See the longdesc
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @return the long desc
 	 */
 	public String getLongDesc();
 
@@ -162,6 +190,8 @@ public interface HTMLImageElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a long description of this image or frame. See the longdesc
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @param longDesc the new long desc
 	 */
 	public void setLongDesc(String longDesc);
 
@@ -169,6 +199,8 @@ public interface HTMLImageElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating the source of this image. See the src attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return the src
 	 */
 	public String getSrc();
 
@@ -176,18 +208,24 @@ public interface HTMLImageElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating the source of this image. See the src attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param src the new src
 	 */
 	public void setSrc(String src);
 
 	/**
 	 * Use client-side image map. See the usemap attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return the use map
 	 */
 	public String getUseMap();
 
 	/**
 	 * Use client-side image map. See the usemap attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param useMap the new use map
 	 */
 	public void setUseMap(String useMap);
 
@@ -197,8 +235,9 @@ public interface HTMLImageElement extends HTMLElement {
 	 * 4.01. Note that the type of this attribute was "DOMString" in DOM Level 1
 	 * HTML [<a href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM
 	 * Level 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the vspace
 	 */
 	public int getVspace();
 
@@ -208,8 +247,9 @@ public interface HTMLImageElement extends HTMLElement {
 	 * 4.01. Note that the type of this attribute was "DOMString" in DOM Level 1
 	 * HTML [<a href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM
 	 * Level 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param vspace the new vspace
 	 */
 	public void setVspace(int vspace);
 
@@ -219,8 +259,9 @@ public interface HTMLImageElement extends HTMLElement {
 	 * <code>DOMString</code> in DOM Level 1 HTML [<a
 	 * href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the width
 	 */
 	public int getWidth();
 
@@ -230,14 +271,30 @@ public interface HTMLImageElement extends HTMLElement {
 	 * <code>DOMString</code> in DOM Level 1 HTML [<a
 	 * href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param width the new width
 	 */
 	public void setWidth(int width);
 
+	/**
+	 * Gets the natural width.
+	 *
+	 * @return the natural width
+	 */
 	public int getNaturalWidth();
 
+	/**
+	 * Gets the natural height.
+	 *
+	 * @return the natural height
+	 */
 	public int getNaturalHeight();
 
+	/**
+	 * Gets the complete.
+	 *
+	 * @return the complete
+	 */
 	public boolean getComplete();
 }

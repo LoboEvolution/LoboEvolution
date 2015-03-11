@@ -8,6 +8,7 @@
  */
 package org.w3c.css.sac;
 
+
 /**
  * This is a lexical unit for CSS values.
  * <p>
@@ -16,58 +17,45 @@ package org.w3c.css.sac;
  * <p>
  * All examples are CSS2 compliant.
  *
- * @version $Revision: 477010 $
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  */
 public interface LexicalUnit {
 
-	/**
-	 * ,
-	 */
+	/** ,. */
 	public static final short SAC_OPERATOR_COMMA = 0;
-	/**
-	 * +
-	 */
+	
+	/** +. */
 	public static final short SAC_OPERATOR_PLUS = 1;
-	/**
-	 * -
-	 */
+	
+	/** -. */
 	public static final short SAC_OPERATOR_MINUS = 2;
-	/**
-	 * *
-	 */
+	
+	/** *. */
 	public static final short SAC_OPERATOR_MULTIPLY = 3;
-	/**
-	 * /
-	 */
+	
+	/** /. */
 	public static final short SAC_OPERATOR_SLASH = 4;
-	/**
-	 * %
-	 */
+	
+	/** %. */
 	public static final short SAC_OPERATOR_MOD = 5;
-	/**
-	 * ^
-	 */
+	
+	/** ^. */
 	public static final short SAC_OPERATOR_EXP = 6;
-	/**
-	 * &lt;
-	 */
+	
+	/** &lt;. */
 	public static final short SAC_OPERATOR_LT = 7;
-	/**
-	 * &gt;
-	 */
+	
+	/** &gt;. */
 	public static final short SAC_OPERATOR_GT = 8;
-	/**
-	 * &lt;=
-	 */
+	
+	/** &lt;=. */
 	public static final short SAC_OPERATOR_LE = 9;
-	/**
-	 * &gt;=
-	 */
+	
+	/** &gt;=. */
 	public static final short SAC_OPERATOR_GE = 10;
-	/**
-	 * ~
-	 */
+	
+	/** ~. */
 	public static final short SAC_OPERATOR_TILDE = 11;
 
 	/**
@@ -259,8 +247,8 @@ public interface LexicalUnit {
 
 	/**
 	 * sub expressions <code>(a)</code> <code>(a + b)</code>
-	 * <code>(normal/none)</code>
-	 * 
+	 * <code>(normal/none)</code>.
+	 *
 	 * @see #getSubValues
 	 */
 	public static final short SAC_SUB_EXPRESSION = 40;
@@ -282,22 +270,29 @@ public interface LexicalUnit {
 
 	/**
 	 * An integer indicating the type of <code>LexicalUnit</code>.
+	 *
+	 * @return the lexical unit type
 	 */
 	public short getLexicalUnitType();
 
 	/**
 	 * Returns the next value or <code>null</code> if any.
+	 *
+	 * @return the next lexical unit
 	 */
 	public LexicalUnit getNextLexicalUnit();
 
 	/**
 	 * Returns the previous value or <code>null</code> if any.
+	 *
+	 * @return the previous lexical unit
 	 */
 	public LexicalUnit getPreviousLexicalUnit();
 
 	/**
 	 * Returns the integer value.
-	 * 
+	 *
+	 * @return the integer value
 	 * @see #SAC_INTEGER
 	 */
 	public int getIntegerValue();
@@ -310,6 +305,7 @@ public interface LexicalUnit {
 	 * SAC_KILOHERTZ, the value can never be negative.
 	 * </p>
 	 *
+	 * @return the float value
 	 * @see #SAC_REAL
 	 * @see #SAC_DIMENSION
 	 * @see #SAC_EM
@@ -337,7 +333,8 @@ public interface LexicalUnit {
 	 * if this lexical unit represents a float, the dimension is an empty
 	 * string.
 	 * </p>
-	 * 
+	 *
+	 * @return the dimension unit text
 	 * @see #SAC_REAL
 	 * @see #SAC_DIMENSION
 	 * @see #SAC_EM
@@ -361,7 +358,8 @@ public interface LexicalUnit {
 
 	/**
 	 * Returns the name of the function.
-	 * 
+	 *
+	 * @return the function name
 	 * @see #SAC_COUNTER_FUNCTION
 	 * @see #SAC_COUNTERS_FUNCTION
 	 * @see #SAC_RECT_FUNCTION
@@ -374,7 +372,8 @@ public interface LexicalUnit {
 	 * The function parameters including operators (like the comma).
 	 * <code>#000</code> is converted to <code>rgb(0, 0, 0)</code> can return
 	 * <code>null</code> if <code>SAC_FUNCTION</code>.
-	 * 
+	 *
+	 * @return the parameters
 	 * @see #SAC_COUNTER_FUNCTION
 	 * @see #SAC_COUNTERS_FUNCTION
 	 * @see #SAC_RECT_FUNCTION
@@ -392,6 +391,7 @@ public interface LexicalUnit {
 	 * If the type is <code>SAC_ATTR</code>, the return value doesn't contain
 	 * <code>attr(....)</code>.
 	 *
+	 * @return the string value
 	 * @see #SAC_URI
 	 * @see #SAC_ATTR
 	 * @see #SAC_IDENT
@@ -402,7 +402,8 @@ public interface LexicalUnit {
 
 	/**
 	 * Returns a list of values inside the sub expression.
-	 * 
+	 *
+	 * @return the sub values
 	 * @see #SAC_SUB_EXPRESSION
 	 */
 	public LexicalUnit getSubValues();

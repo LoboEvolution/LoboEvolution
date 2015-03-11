@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.ua;
 
+
 /**
  * A listener of navigation events.
  * 
@@ -27,6 +28,8 @@ package org.lobobrowser.ua;
  * @see NavigatorExtensionContext#addNavigationListener(NavigationListener)
  */
 public interface NavigationListener extends java.util.EventListener {
+	
+	/** The Constant EMPTY_ARRAY. */
 	static final NavigationListener[] EMPTY_ARRAY = new NavigationListener[0];
 
 	/**

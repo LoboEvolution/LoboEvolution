@@ -32,10 +32,23 @@ import javax.swing.JComboBox;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+
+/**
+ * The Class AddressField.
+ */
 public class AddressField extends JComboBox<String> {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The component source. */
 	private final ComponentSource componentSource;
 
+	/**
+	 * Instantiates a new address field.
+	 *
+	 * @param cs the cs
+	 */
 	public AddressField(ComponentSource cs) {
 		this.componentSource = cs;
 		this.setEditable(true);
@@ -77,6 +90,11 @@ public class AddressField extends JComboBox<String> {
 		this.onBeforePopupVisible();
 	}
 
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
 	public String getText() {
 		if (this.isEditable()) {
 			return (String) this.getEditor().getItem();
@@ -85,6 +103,11 @@ public class AddressField extends JComboBox<String> {
 		}
 	}
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param text the new text
+	 */
 	public void setText(String text) {
 		JComboBox<String> combo = this;
 		boolean editable = this.isEditable();
@@ -93,20 +116,38 @@ public class AddressField extends JComboBox<String> {
 		}
 	}
 
+	/**
+	 * Sets the url.
+	 *
+	 * @param url the new url
+	 */
 	public void setUrl(URL url) {
 		this.setText(url == null ? "" : url.toExternalForm());
 	}
 
+	/**
+	 * On before popup visible.
+	 */
 	private void onBeforePopupVisible() {
 		if ((comboInvalid || comboHasHeadMatches) && !populatingMatches) {
 			populateCombo(this.getText());
 		}
 	}
 
+	/** The combo invalid. */
 	private boolean comboInvalid = true;
+	
+	/** The combo has head matches. */
 	private boolean comboHasHeadMatches = false;
+	
+	/** The populating matches. */
 	private boolean populatingMatches = false;
 
+	/**
+	 * Populate combo.
+	 *
+	 * @param comboBoxText the combo box text
+	 */
 	private void populateCombo(String comboBoxText) {
 		// Expected to be called in GUI thread.
 		this.populatingMatches = true;
@@ -128,12 +169,22 @@ public class AddressField extends JComboBox<String> {
 		}
 	}
 
+	/**
+	 * On edited.
+	 *
+	 * @param modifiers the modifiers
+	 */
 	private void onEdited(int modifiers) {
 		// if(this.getText().length() != 0) {
 		// this.componentSource.navigateOrSearch();
 		// }
 	}
 
+	/**
+	 * On key released.
+	 *
+	 * @param event the event
+	 */
 	private void onKeyReleased(KeyEvent event) {
 		AddressField urlComboBox = this;
 		char releasedChar = event.getKeyChar();
@@ -168,6 +219,11 @@ public class AddressField extends JComboBox<String> {
 
 	}
 
+	/**
+	 * On key pressed.
+	 *
+	 * @param event the event
+	 */
 	private void onKeyPressed(KeyEvent event) {
 		AddressField urlComboBox = this;
 		if (event.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -178,6 +234,12 @@ public class AddressField extends JComboBox<String> {
 		}
 	}
 
+	/**
+	 * Valid popup char.
+	 *
+	 * @param ch the ch
+	 * @return true, if successful
+	 */
 	private boolean validPopupChar(char ch) {
 		return Character.isLetterOrDigit(ch) || ch == '.' || ch == '/';
 	}

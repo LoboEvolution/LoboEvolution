@@ -23,15 +23,30 @@ package org.lobobrowser.context;
 import org.lobobrowser.clientlet.ClientletContext;
 import org.lobobrowser.clientlet.ClientletThreadGroup;
 
+
+/**
+ * The Class ClientletThreadGroupImpl.
+ */
 public class ClientletThreadGroupImpl extends ThreadGroup implements
 		ClientletThreadGroup {
+	
+	/** The context. */
 	private final ClientletContext context;
 
+	/**
+	 * Instantiates a new clientlet thread group impl.
+	 *
+	 * @param name the name
+	 * @param context the context
+	 */
 	public ClientletThreadGroupImpl(String name, ClientletContext context) {
 		super(name);
 		this.context = context;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletThreadGroup#getClientletContext()
+	 */
 	public ClientletContext getClientletContext() {
 		return this.context;
 	}

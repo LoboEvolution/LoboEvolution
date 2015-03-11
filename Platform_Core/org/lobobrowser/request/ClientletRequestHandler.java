@@ -43,11 +43,18 @@ import org.lobobrowser.ua.ProgressType;
 import org.lobobrowser.util.EventDispatch;
 import org.lobobrowser.util.Urls;
 
+
 /**
+ * The Class ClientletRequestHandler.
+ *
  * @author J. H. S.
  */
 public class ClientletRequestHandler extends AbstractRequestHandler {
+	
+	/** The window callback. */
 	private final WindowCallback windowCallback;
+	
+	/** The frame. */
 	private final FramePanel frame;
 
 	/**
@@ -56,6 +63,13 @@ public class ClientletRequestHandler extends AbstractRequestHandler {
 	 */
 	public final EventDispatch evtProgress = new EventDispatch();
 
+	/**
+	 * Instantiates a new clientlet request handler.
+	 *
+	 * @param request the request
+	 * @param clientletUI the clientlet ui
+	 * @param frame the frame
+	 */
 	public ClientletRequestHandler(ClientletRequest request,
 			WindowCallback clientletUI, FramePanel frame) {
 		super(request, frame.getComponent());
@@ -80,8 +94,14 @@ public class ClientletRequestHandler extends AbstractRequestHandler {
 		}
 	}
 
+	/** The window properties. */
 	private volatile java.util.Properties windowProperties = null;
 
+	/**
+	 * Gets the context window properties.
+	 *
+	 * @return the context window properties
+	 */
 	public java.util.Properties getContextWindowProperties() {
 		return this.windowProperties;
 	}
@@ -150,6 +170,9 @@ public class ClientletRequestHandler extends AbstractRequestHandler {
 		this.frame.informResponseProcessed(response);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.request.AbstractRequestHandler#handleProgress(org.lobobrowser.ua.ProgressType, java.net.URL, java.lang.String, int, int)
+	 */
 	public void handleProgress(ProgressType progressType, URL url,
 			String method, int value, int max) {
 		NavigatorProgressEvent event = new NavigatorProgressEvent(this,
@@ -158,6 +181,13 @@ public class ClientletRequestHandler extends AbstractRequestHandler {
 		this.frame.setProgressEvent(event);
 	}
 
+	/**
+	 * Gets the progress message.
+	 *
+	 * @param progressType the progress type
+	 * @param url the url
+	 * @return the progress message
+	 */
 	public static String getProgressMessage(ProgressType progressType, URL url) {
 		String urlText = url == null ? "[null]" : Urls.getNoRefForm(url);
 		switch (progressType) {

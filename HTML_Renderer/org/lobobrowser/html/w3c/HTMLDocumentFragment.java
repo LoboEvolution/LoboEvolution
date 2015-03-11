@@ -23,7 +23,25 @@ package org.lobobrowser.html.w3c;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+
+/**
+ * The Interface HTMLDocumentFragment.
+ */
 public interface HTMLDocumentFragment {
+	
+	/**
+	 * Query selector.
+	 *
+	 * @param selectors the selectors
+	 * @return the element
+	 */
 	public Element querySelector(String selectors);
+    
+    /**
+     * Query selector all.
+     *
+     * @param selectors the selectors
+     * @return the node list
+     */
     public NodeList querySelectorAll(String selectors);
 }

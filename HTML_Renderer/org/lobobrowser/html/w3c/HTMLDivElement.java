@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Generic block container. See the DIV element definition in HTML 4.01.
  * <p>
@@ -39,15 +40,20 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLDivElement extends HTMLElement {
+	
 	/**
 	 * Horizontal text alignment. See the align attribute definition in HTML
 	 * 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the align
 	 */
 	public String getAlign();
 
 	/**
 	 * Horizontal text alignment. See the align attribute definition in HTML
 	 * 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param align the new align
 	 */
 	public void setAlign(String align);
 

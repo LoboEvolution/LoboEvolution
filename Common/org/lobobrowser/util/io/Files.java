@@ -22,13 +22,24 @@ package org.lobobrowser.util.io;
 
 import java.io.File;
 
+
+/**
+ * The Class Files.
+ */
 public class Files {
+	
+	/**
+	 * Instantiates a new files.
+	 */
 	private Files() {
 	}
 
 	/**
 	 * Guesses the right content-type for a local file, and includes a charset
 	 * if appropriate.
+	 *
+	 * @param file the file
+	 * @return the content type
 	 */
 	public static String getContentType(File file) {
 		// Not very complete at the moment :)

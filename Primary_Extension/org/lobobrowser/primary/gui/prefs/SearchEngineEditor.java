@@ -29,15 +29,33 @@ import org.lobobrowser.primary.settings.SearchEngine;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.WrapperLayout;
 
+
+/**
+ * The Class SearchEngineEditor.
+ */
 public class SearchEngineEditor extends AbstractItemEditor<SearchEngine> {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The form panel. */
 	private final FormPanel formPanel = new FormPanel();
+	
+	/** The name field. */
 	private final FormField nameField = new FormField(FieldType.TEXT);
+	
+	/** The description field. */
 	private final FormField descriptionField = new FormField(FieldType.TEXT);
+	
+	/** The base url field. */
 	private final FormField baseUrlField = new FormField(FieldType.TEXT);
+	
+	/** The query parameter field. */
 	private final FormField queryParameterField = new FormField(FieldType.TEXT);
 
+	/**
+	 * Instantiates a new search engine editor.
+	 */
 	public SearchEngineEditor() {
 		this.nameField.setCaption("Name:");
 		this.descriptionField.setCaption("Description:");
@@ -55,6 +73,9 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngine> {
 		this.add(this.formPanel);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.primary.gui.AbstractItemEditor#getItem()
+	 */
 	@Override
 	public SearchEngine getItem() {
 		return new SearchEngine(this.nameField.getValue(),
@@ -62,6 +83,9 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngine> {
 				this.queryParameterField.getValue());
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.primary.gui.AbstractItemEditor#setItem(java.lang.Object)
+	 */
 	@Override
 	public void setItem(SearchEngine item) {
 		this.nameField.setValue(item.getName());
@@ -71,6 +95,9 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngine> {
 		this.formPanel.revalidate();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.primary.gui.AbstractItemEditor#validateItem()
+	 */
 	@Override
 	public void validateItem() throws ValidationException {
 		if (Strings.isBlank(this.nameField.getValue())

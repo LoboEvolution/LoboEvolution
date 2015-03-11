@@ -23,6 +23,7 @@ package org.lobobrowser.http;
 
 import org.lobobrowser.util.NameValuePair;
 
+
 /**
  * A NameValuePair used as a Parameter to http {@link Request}s.
  * 
@@ -30,6 +31,7 @@ import org.lobobrowser.util.NameValuePair;
  */
 public class Parameter extends NameValuePair {
    
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** 
@@ -49,6 +51,9 @@ public class Parameter extends NameValuePair {
         super(name, value);
     }
     
+    /* (non-Javadoc)
+     * @see org.lobobrowser.util.NameValuePair#clone()
+     */
     @Override public Parameter clone() {
         return new Parameter(getName(), getValue());
     }

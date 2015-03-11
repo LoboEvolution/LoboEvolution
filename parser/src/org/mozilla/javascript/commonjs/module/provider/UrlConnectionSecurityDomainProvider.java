@@ -8,6 +8,7 @@ import java.net.URLConnection;
 
 import org.mozilla.javascript.Context;
 
+
 /**
  * Interface for URL connection based security domain providers. Used by
  * {@link UrlModuleSourceProvider} to create Rhino security domain objects for

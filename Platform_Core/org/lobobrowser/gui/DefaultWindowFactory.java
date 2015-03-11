@@ -47,38 +47,70 @@ import org.lobobrowser.util.EventDispatch;
 import org.lobobrowser.util.ID;
 import org.lobobrowser.util.WeakValueHashMap;
 
+
 /**
  * Browser windows are created by this factory by default.
  */
 public class DefaultWindowFactory implements WindowFactory {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(DefaultWindowFactory.class.getName());
+	
+	/** The instance. */
 	private static DefaultWindowFactory instance = new DefaultWindowFactory();
+	
+	/** The Constant DEFAULT_ICON_URL. */
 	private static final String DEFAULT_ICON_URL = "res:/images/lobo.png";
+	
+	/** The evt window shown. */
 	public final EventDispatch evtWindowShown = new EventDispatch();
 	// TODO: Should use an expiring cache instead of a WeakHashMap.
+	/** The image map. */
 	private final Map<String, ImageIcon> imageMap = new WeakValueHashMap();
+	
+	/** The frames by id. */
 	private final Map<String, DefaultBrowserWindow> framesById = new WeakValueHashMap();
+	
+	/** The frames. */
 	private final Set<Frame> frames = new HashSet<Frame>();
+	
+	/** The general settings. */
 	private final GeneralSettings generalSettings;
 
+	/** The exit when all windows closed. */
 	private volatile boolean exitWhenAllWindowsClosed = false;
 
+	/**
+	 * Instantiates a new default window factory.
+	 */
 	protected DefaultWindowFactory() {
 		// One way to avoid security exceptions
 		this.generalSettings = GeneralSettings.getInstance();
 	}
 
+	/**
+	 * Sets the exit when all windows are closed.
+	 *
+	 * @param flag the new exit when all windows are closed
+	 */
 	public void setExitWhenAllWindowsAreClosed(boolean flag) {
 		this.exitWhenAllWindowsClosed = flag;
 	}
 
+	/**
+	 * Gets the single instance of DefaultWindowFactory.
+	 *
+	 * @return single instance of DefaultWindowFactory
+	 */
 	public static DefaultWindowFactory getInstance() {
 		return instance;
 	}
 
 	/**
 	 * Gets the default image icon for browser windows.
+	 *
+	 * @return the default image icon
 	 */
 	public ImageIcon getDefaultImageIcon() {
 		return this.getImageIcon(DEFAULT_ICON_URL);
@@ -86,9 +118,9 @@ public class DefaultWindowFactory implements WindowFactory {
 
 	/**
 	 * Gets an image icon.
-	 * 
-	 * @param urlOrPath
-	 *            A URL or path.
+	 *
+	 * @param urlOrPath            A URL or path.
+	 * @return the image icon
 	 */
 	private ImageIcon getImageIcon(String urlOrPath) {
 		synchronized (this) {
@@ -109,6 +141,9 @@ public class DefaultWindowFactory implements WindowFactory {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.WindowFactory#getExistingWindow(java.lang.String)
+	 */
 	public AbstractBrowserWindow getExistingWindow(String windowId) {
 		if (windowId == null) {
 			return null;
@@ -122,6 +157,17 @@ public class DefaultWindowFactory implements WindowFactory {
 		return null;
 	}
 
+	/**
+	 * Creates a new DefaultWindow object.
+	 *
+	 * @param windowId the window id
+	 * @param windowContext the window context
+	 * @param hasMenuBar the has menu bar
+	 * @param hasAddressBar the has address bar
+	 * @param hasToolBar the has tool bar
+	 * @param hasStatusBar the has status bar
+	 * @return the abstract browser window
+	 */
 	private AbstractBrowserWindow createBaseWindow(String windowId,
 			NavigatorWindow windowContext, boolean hasMenuBar,
 			boolean hasAddressBar, boolean hasToolBar, boolean hasStatusBar) {
@@ -183,6 +229,14 @@ public class DefaultWindowFactory implements WindowFactory {
 		}
 	}
 
+	/**
+	 * Checks if is property true.
+	 *
+	 * @param properties the properties
+	 * @param name the name
+	 * @param defaultValue the default value
+	 * @return true, if is property true
+	 */
 	private final boolean isPropertyTrue(Properties properties, String name,
 			boolean defaultValue) {
 		if (properties == null) {
@@ -199,6 +253,11 @@ public class DefaultWindowFactory implements WindowFactory {
 	 * Creates, sizes a browser window, and registeres listeners that allow the
 	 * platform to persist window settings and shut itself down when all windows
 	 * are closed.
+	 *
+	 * @param windowId the window id
+	 * @param properties the properties
+	 * @param windowContext the window context
+	 * @return the abstract browser window
 	 */
 	public AbstractBrowserWindow createWindow(String windowId,
 			Properties properties, NavigatorWindow windowContext) {
@@ -280,6 +339,9 @@ public class DefaultWindowFactory implements WindowFactory {
 		return window;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.WindowFactory#overrideProperties(org.lobobrowser.gui.AbstractBrowserWindow, java.util.Properties)
+	 */
 	public void overrideProperties(AbstractBrowserWindow window,
 			Properties properties) {
 		String widthText = properties.getProperty("width");

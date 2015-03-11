@@ -34,34 +34,70 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.WrappedException;
 
+
+/**
+ * The Class JavaFunctionObject.
+ */
 public class JavaFunctionObject extends ScriptableObject implements Function {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(JavaFunctionObject.class.getName());
+	
+	/** The Constant loggableInfo. */
 	private static final boolean loggableInfo = logger.isLoggable(Level.INFO);
+	
+	/** The class name. */
 	private final String className;
+	
+	/** The methods. */
 	private final ArrayList<Method> methods = new ArrayList<Method>();
 
+	/**
+	 * Instantiates a new java function object.
+	 *
+	 * @param name the name
+	 */
 	public JavaFunctionObject(String name) {
 		super();
 		this.className = name;
 	}
 
+	/**
+	 * Adds the method.
+	 *
+	 * @param m the m
+	 */
 	public void addMethod(Method m) {
 		this.methods.add(m);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.ScriptableObject#getClassName()
+	 */
 	public String getClassName() {
 		return this.className;
 	}
 
+	/**
+	 * Gets the type name.
+	 *
+	 * @param object the object
+	 * @return the type name
+	 */
 	private String getTypeName(Object object) {
 		return object == null ? "[null]" : object.getClass().getName();
 	}
 
+	/**
+	 * Gets the best method.
+	 *
+	 * @param args the args
+	 * @return the best method
+	 */
 	private Method getBestMethod(Object[] args) {
 		ArrayList<Method> methods = this.methods;
 		int size = methods.size();
@@ -92,6 +128,9 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 		return matchingMethod;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.Function#call(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+	 */
 	public Object call(Context cx, Scriptable scope, Scriptable thisObj,
 			Object[] args) {
 		JavaObjectWrapper jcw = (JavaObjectWrapper) thisObj;
@@ -150,6 +189,9 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
+	 */
 	public java.lang.Object getDefaultValue(Class hint) {
 		if (loggableInfo) {
 			logger.info("getDefaultValue(): hint=" + hint + ",this=" + this);
@@ -161,6 +203,9 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.Function#construct(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.Object[])
+	 */
 	public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
 		throw new UnsupportedOperationException();
 	}

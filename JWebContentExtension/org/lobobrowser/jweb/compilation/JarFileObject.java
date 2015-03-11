@@ -33,22 +33,45 @@ import java.util.jar.JarFile;
 
 import javax.tools.FileObject;
 
+
+/**
+ * The Class JarFileObject.
+ */
 public class JarFileObject implements FileObject {
+	
+	/** The jar entry. */
 	private final JarEntry jarEntry;
+	
+	/** The jar file. */
 	private final JarFile jarFile;
+	
+	/** The uri. */
 	private final URI uri;
 
+	/**
+	 * Instantiates a new jar file object.
+	 *
+	 * @param jarFile the jar file
+	 * @param file the file
+	 * @param uri the uri
+	 */
 	public JarFileObject(JarFile jarFile, JarEntry file, URI uri) {
 		this.jarFile = jarFile;
 		this.jarEntry = file;
 		this.uri = uri;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#delete()
+	 */
 	public boolean delete() {
 		throw new UnsupportedOperationException(
 				"No deletion in JAR file.");
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getCharContent(boolean)
+	 */
 	public CharSequence getCharContent(boolean ignoreEncodingErrors)
 			throws IOException {
 		InputStream in = this.openInputStream();
@@ -60,31 +83,52 @@ public class JarFileObject implements FileObject {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getLastModified()
+	 */
 	public long getLastModified() {
 		return this.jarEntry.getTime();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getName()
+	 */
 	public String getName() {
 		return this.jarEntry.getName();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openInputStream()
+	 */
 	public InputStream openInputStream() throws IOException {
 		return this.jarFile.getInputStream(this.jarEntry);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openOutputStream()
+	 */
 	public OutputStream openOutputStream() throws IOException {
 		throw new UnsupportedOperationException(
 				"No writing into JAR files.");
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openReader(boolean)
+	 */
 	public Reader openReader(boolean ignoreEncodingErrors) throws IOException {
 		return new InputStreamReader(this.openInputStream());
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openWriter()
+	 */
 	public Writer openWriter() throws IOException {
 		return new OutputStreamWriter(this.openOutputStream());
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#toUri()
+	 */
 	public URI toUri() {
 		return this.uri;
 	}

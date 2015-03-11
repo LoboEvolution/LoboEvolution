@@ -23,6 +23,10 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 package org.lobobrowser.ua;
 
 import java.awt.Component;
+import java.awt.Window;
+
+import javax.swing.JMenu;
+
 
 /**
  * This interface represents a navigator window.
@@ -37,7 +41,7 @@ public interface NavigatorWindow {
 	 *            A JMenu instance.
 	 * @see #getMenu(String)
 	 */
-	public void addMenu(String menuId, javax.swing.JMenu menu);
+	public void addMenu(String menuId, JMenu menu);
 
 	/**
 	 * Gets a menu previously added, typically by another extension with higher
@@ -51,7 +55,7 @@ public interface NavigatorWindow {
 	 *            should be "lobo.page.services".
 	 * @return A JMenu instance.
 	 */
-	public javax.swing.JMenu getMenu(String menuId);
+	public JMenu getMenu(String menuId);
 
 	/**
 	 * Adds a "tool bar" component to the window. The preferred height of the
@@ -61,24 +65,24 @@ public interface NavigatorWindow {
 	 * @param toolBar
 	 *            A AWT or Swing lightweight.
 	 */
-	public void addToolBar(java.awt.Component toolBar);
+	public void addToolBar(Component toolBar);
 
 	/**
 	 * Adds a component to the shared tool bar. The preferred width of the
 	 * component is used, whereas its height will be set roughly to the height
 	 * of the shared tool bar.
-	 * 
-	 * @param toolBarComponent
+	 *
+	 * @param toolBarComponent the tool bar component
 	 * @see #createGlueComponent(Component, boolean)
 	 */
-	public void addSharedToolBarComponent(java.awt.Component toolBarComponent);
+	public void addSharedToolBarComponent(Component toolBarComponent);
 
 	/**
 	 * Adds a component to the status bar. The preferred width of the component
 	 * is used, whereas its height will be set roughly to the height of the
 	 * status bar.
-	 * 
-	 * @param statusBarComponent
+	 *
+	 * @param statusBarComponent the status bar component
 	 * @see #createGlueComponent(Component, boolean)
 	 */
 	public void addStatusBarComponent(java.awt.Component statusBarComponent);
@@ -87,8 +91,8 @@ public interface NavigatorWindow {
 	 * Adds a component to the address bar. The preferred width of the component
 	 * is used, whereas its height will be set roughly to the height of the
 	 * status bar.
-	 * 
-	 * @param addressBarComponent
+	 *
+	 * @param addressBarComponent the address bar component
 	 * @see #createGlueComponent(Component, boolean)
 	 */
 	public void addAddressBarComponent(java.awt.Component addressBarComponent);
@@ -103,14 +107,16 @@ public interface NavigatorWindow {
 
 	/**
 	 * Removes a listener previously added with
-	 * {@link #addNavigatorWindowListener(NavigatorWindowListener)}
-	 * 
-	 * @param listener
+	 * {@link #addNavigatorWindowListener(NavigatorWindowListener)}.
+	 *
+	 * @param listener the listener
 	 */
 	public void removeNavigatorWindowListener(NavigatorWindowListener listener);
 
 	/**
 	 * Gets the top frame of this window.
+	 *
+	 * @return the top frame
 	 */
 	public NavigatorFrame getTopFrame();
 
@@ -119,14 +125,13 @@ public interface NavigatorWindow {
 	 * space. It only works if the parent uses a Swing <code>BoxLayout</code>.
 	 * Examples of components that are wrapped this way are the address combo
 	 * box and the status message component.
-	 * 
-	 * @param wrappedComponent
-	 *            The component that is wrapped by the glue box.
-	 * @param usingMaxSize
-	 *            Whether the adjacent components have a maximum size that the
+	 *
+	 * @param wrappedComponent            The component that is wrapped by the glue box.
+	 * @param usingMaxSize            Whether the adjacent components have a maximum size that the
 	 *            container should try to use. If this argument is
 	 *            <code>false</code>, it is assumed that the adjacent components
 	 *            can be shrunk to their minimum sizes.
+	 * @return the component
 	 */
 	public Component createGlueComponent(Component wrappedComponent,
 			boolean usingMaxSize);
@@ -134,6 +139,8 @@ public interface NavigatorWindow {
 	/**
 	 * Creates a gap component that should be placed between toolbar, address
 	 * bar or status bar components.
+	 *
+	 * @return the component
 	 */
 	public Component createGap();
 
@@ -144,27 +151,79 @@ public interface NavigatorWindow {
 
 	/**
 	 * Gets the navigator for the window.
+	 *
+	 * @return the user agent
 	 */
 	public UserAgent getUserAgent();
 
+	/**
+	 * Can back.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean canBack();
 
+	/**
+	 * Can forward.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean canForward();
 
+	/**
+	 * Back.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean back();
 
+	/**
+	 * Forward.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean forward();
 
+	/**
+	 * Can reload.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean canReload();
 
+	/**
+	 * Reload.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean reload();
 
+	/**
+	 * Stop.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean stop();
 
+	/**
+	 * Can copy.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean canCopy();
 
+	/**
+	 * Copy.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean copy();
 
+	/**
+	 * Checks for source.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasSource();
 
 	/**
@@ -178,16 +237,33 @@ public interface NavigatorWindow {
 	 */
 	public boolean goTo(NavigationEntry entry);
 
+	/**
+	 * Gets the back navigation entries.
+	 *
+	 * @return the back navigation entries
+	 */
 	public NavigationEntry[] getBackNavigationEntries();
 
+	/**
+	 * Gets the forward navigation entries.
+	 *
+	 * @return the forward navigation entries
+	 */
 	public NavigationEntry[] getForwardNavigationEntries();
 
+	/**
+	 * Gets the current navigation entry.
+	 *
+	 * @return the current navigation entry
+	 */
 	public NavigationEntry getCurrentNavigationEntry();
 
 	/**
 	 * Gets the <code>java.awt.Frame</code> instance associated with this
 	 * <code>NavigatorWindow</code>. In most cases this method will return an
 	 * instance of <code>javax.swing.JFrame</code>.
+	 *
+	 * @return the awt window
 	 */
-	public java.awt.Window getAwtWindow();
+	public Window getAwtWindow();
 }

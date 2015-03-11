@@ -10,6 +10,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
 /**
  * An annotation that marks a Java method as JavaScript setter. This can
  * be used as an alternative to the <code>jsSet_</code> prefix desribed in
@@ -19,5 +20,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface JSSetter {
+    
+    /**
+     * Value.
+     *
+     * @return the string
+     */
     String value() default "";
 }

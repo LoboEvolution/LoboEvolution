@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * For the <code>Q</code> and <code>BLOCKQUOTE</code> elements. See the Q
  * element definition in HTML 4.01.
@@ -40,10 +41,13 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLQuoteElement extends HTMLElement {
+	
 	/**
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a source document or message. See the cite attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the cite
 	 */
 	public String getCite();
 
@@ -51,6 +55,8 @@ public interface HTMLQuoteElement extends HTMLElement {
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a source document or message. See the cite attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param cite the new cite
 	 */
 	public void setCite(String cite);
 

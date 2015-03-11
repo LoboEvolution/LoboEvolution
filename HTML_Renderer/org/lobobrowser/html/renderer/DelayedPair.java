@@ -20,12 +20,32 @@
  */
 package org.lobobrowser.html.renderer;
 
+
+/**
+ * The Class DelayedPair.
+ */
 public class DelayedPair {
+	
+	/** The target parent. */
 	public final RenderableContainer targetParent;
+	
+	/** The child. */
 	public final BoundableRenderable child;
+	
+	/** The x. */
 	public final int x;
+	
+	/** The y. */
 	public final int y;
 
+	/**
+	 * Instantiates a new delayed pair.
+	 *
+	 * @param parent the parent
+	 * @param child the child
+	 * @param x the x
+	 * @param y the y
+	 */
 	public DelayedPair(final RenderableContainer parent,
 			final BoundableRenderable child, int x, int y) {
 		super();

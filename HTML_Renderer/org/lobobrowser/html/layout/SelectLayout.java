@@ -28,11 +28,22 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.renderer.RElement;
 
+
+/**
+ * The Class SelectLayout.
+ */
 public class SelectLayout extends CommonWidgetLayout {
+	
+	/**
+	 * Instantiates a new select layout.
+	 */
 	public SelectLayout() {
 		super(ADD_INLINE, true);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.lobobrowser.html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
 	protected RElement createRenderable(RBlockViewport bodyLayout,
 			HTMLElementImpl markupElement) {
 		HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;

@@ -22,12 +22,15 @@ package org.lobobrowser.gui;
 
 import java.util.EventListener;
 
+
 /**
  * A listener of response events.
  * 
  * @see FramePanel#addResponseListener(ResponseListener)
  */
 public interface ResponseListener extends EventListener {
+	
+	/** The Constant EMPTY_ARRAY. */
 	static final ResponseListener[] EMPTY_ARRAY = new ResponseListener[0];
 
 	/**

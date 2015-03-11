@@ -35,14 +35,26 @@ import org.lobobrowser.primary.clientlets.html.HtmlClientlet;
 import org.lobobrowser.primary.clientlets.img.ImageClientlet;
 import org.lobobrowser.primary.clientlets.pdf.PdfClientlet;
 
+
+/**
+ * The Class PrimaryClientletSelector.
+ */
 public class PrimaryClientletSelector implements ClientletSelector {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(PrimaryClientletSelector.class.getName());
 
+	/**
+	 * Instantiates a new primary clientlet selector.
+	 */
 	public PrimaryClientletSelector() {
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletSelector#select(org.lobobrowser.clientlet.ClientletRequest, org.lobobrowser.clientlet.ClientletResponse)
+	 */
 	public Clientlet select(ClientletRequest request, ClientletResponse response) {
 		// Don't try to catch too much here.
 		// Clientlets here are not overriddable.
@@ -85,6 +97,9 @@ public class PrimaryClientletSelector implements ClientletSelector {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletSelector#lastResortSelect(org.lobobrowser.clientlet.ClientletRequest, org.lobobrowser.clientlet.ClientletResponse)
+	 */
 	public Clientlet lastResortSelect(ClientletRequest request,
 			ClientletResponse response) {
 		String mimeType = response.getMimeType();

@@ -43,22 +43,42 @@ import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Document;
 import org.w3c.dom.UserDataHandler;
 
+
+/**
+ * The Class HTMLScriptElementImpl.
+ */
 public class HTMLScriptElementImpl extends HTMLElementImpl implements
 		HTMLScriptElement {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(HTMLScriptElementImpl.class.getName());
+	
+	/** The Constant loggableInfo. */
 	private static final boolean loggableInfo = logger.isLoggable(Level.INFO);
 
+	/**
+	 * Instantiates a new HTML script element impl.
+	 */
 	public HTMLScriptElementImpl() {
 		super(HtmlProperties.SCRIPT, true);
 	}
 
+	/**
+	 * Instantiates a new HTML script element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLScriptElementImpl(String name) {
 		super(name, true);
 	}
 
+	/** The text. */
 	private String text;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLScriptElement#getText()
+	 */
 	public String getText() {
 		String t = this.text;
 		if (t == null) {
@@ -68,52 +88,89 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLScriptElement#setText(java.lang.String)
+	 */
 	public void setText(String text) {
 		this.text = text;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLScriptElement#getHtmlFor()
+	 */
 	public String getHtmlFor() {
 		return this.getAttribute(HtmlAttributeProperties.HTMLFOR);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLScriptElement#setHtmlFor(java.lang.String)
+	 */
 	public void setHtmlFor(String htmlFor) {
 		this.setAttribute(HtmlAttributeProperties.HTMLFOR, htmlFor);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLScriptElement#getEvent()
+	 */
 	public String getEvent() {
 		return this.getAttribute(HtmlAttributeProperties.EVENT);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLScriptElement#setEvent(java.lang.String)
+	 */
 	public void setEvent(String event) {
 		this.setAttribute(HtmlAttributeProperties.EVENT, event);
 	}
 
+	/** The defer. */
 	private boolean defer;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLScriptElement#getDefer()
+	 */
 	public boolean getDefer() {
 		return this.defer;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLScriptElement#setDefer(boolean)
+	 */
 	public void setDefer(boolean defer) {
 		this.defer = defer;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLScriptElement#getSrc()
+	 */
 	public String getSrc() {
 		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLScriptElement#setSrc(java.lang.String)
+	 */
 	public void setSrc(String src) {
 		this.setAttribute(HtmlAttributeProperties.SRC, src);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLScriptElement#getType()
+	 */
 	public String getType() {
 		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLScriptElement#setType(java.lang.String)
+	 */
 	public void setType(String type) {
 		this.setAttribute(HtmlAttributeProperties.TYPE, type);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setUserData(java.lang.String, java.lang.Object, org.w3c.dom.UserDataHandler)
+	 */
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key)
 				&& data != Boolean.TRUE) {
@@ -122,6 +179,9 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements
 		return super.setUserData(key, data, handler);
 	}
 
+	/**
+	 * Process script.
+	 */
 	protected final void processScript() {
 		UserAgentContext bcontext = this.getUserAgentContext();
 		if (bcontext == null) {
@@ -237,6 +297,9 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.StringBuffer)
+	 */
 	protected void appendInnerTextImpl(StringBuffer buffer) {
 		// nop
 	}

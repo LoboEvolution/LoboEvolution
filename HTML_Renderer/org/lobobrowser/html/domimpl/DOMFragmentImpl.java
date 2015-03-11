@@ -31,40 +31,72 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
+/**
+ * The Class DOMFragmentImpl.
+ */
 public class DOMFragmentImpl extends DOMNodeImpl implements DocumentFragment,HTMLDocumentFragment {
+	
+	/**
+	 * Instantiates a new DOM fragment impl.
+	 */
 	public DOMFragmentImpl() {
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getLocalName()
+	 */
 	public String getLocalName() {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeName()
+	 */
 	public String getNodeName() {
 		return "#document-fragment";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeValue()
+	 */
 	public String getNodeValue() throws DOMException {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setNodeValue(java.lang.String)
+	 */
 	public void setNodeValue(String nodeValue) throws DOMException {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeType()
+	 */
 	public short getNodeType() {
 		return org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#createSimilarNode()
+	 */
 	protected Node createSimilarNode() {
 		return new DOMFragmentImpl();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocumentFragment#querySelector(java.lang.String)
+	 */
 	@Override
 	public Element querySelector(String selectors) {
 		QuerySelectorImpl qsel = new QuerySelectorImpl();
 		return qsel.documentQuerySelector(this.document, selectors);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDocumentFragment#querySelectorAll(java.lang.String)
+	 */
 	@Override
 	public NodeList querySelectorAll(String selectors) {
 		QuerySelectorImpl qsel = new QuerySelectorImpl();

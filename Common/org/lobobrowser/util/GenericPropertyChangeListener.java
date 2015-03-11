@@ -27,12 +27,28 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.EventObject;
 
+
 /**
+ * The listener interface for receiving genericPropertyChange events.
+ * The class that is interested in processing a genericPropertyChange
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addGenericPropertyChangeListener</code> method. When
+ * the genericPropertyChange event occurs, that object's appropriate
+ * method is invoked.
+ *
  * @author J. H. S.
  */
 public class GenericPropertyChangeListener implements GenericEventListener {
+	
+	/** The delegate. */
 	private final PropertyChangeListener delegate;
 
+	/**
+	 * Instantiates a new generic property change listener.
+	 *
+	 * @param delegate the delegate
+	 */
 	public GenericPropertyChangeListener(PropertyChangeListener delegate) {
 		this.delegate = delegate;
 	}
@@ -48,12 +64,18 @@ public class GenericPropertyChangeListener implements GenericEventListener {
 		this.delegate.propertyChange((PropertyChangeEvent) event);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object other) {
 		return other instanceof GenericPropertyChangeListener
 				&& ((GenericPropertyChangeListener) other).delegate
 						.equals(this.delegate);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	public int hashCode() {
 		return this.delegate.hashCode();
 	}

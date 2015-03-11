@@ -32,42 +32,78 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+
+/**
+ * The Class WeakValueHashMap.
+ */
 public class WeakValueHashMap implements Map {
+	
+	/** The map. */
 	private final Map map = new HashMap();
+	
+	/** The queue. */
 	private final ReferenceQueue queue = new ReferenceQueue();
 
+	/**
+	 * Instantiates a new weak value hash map.
+	 */
 	public WeakValueHashMap() {
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#size()
+	 */
 	public int size() {
 		return this.map.size();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#isEmpty()
+	 */
 	public boolean isEmpty() {
 		return this.map.isEmpty();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#containsKey(java.lang.Object)
+	 */
 	public boolean containsKey(Object key) {
 		WeakReference wf = (WeakReference) this.map.get(key);
 		return wf != null && wf.get() != null;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#containsValue(java.lang.Object)
+	 */
 	public boolean containsValue(Object value) {
 		throw new UnsupportedOperationException();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#get(java.lang.Object)
+	 */
 	public Object get(Object key) {
 		this.checkQueue();
 		WeakReference wf = (WeakReference) this.map.get(key);
 		return wf == null ? null : wf.get();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#put(java.lang.Object, java.lang.Object)
+	 */
 	public Object put(Object key, Object value) {
 		this.checkQueue();
 		return this.putImpl(key, value);
 	}
 
+	/**
+	 * Put impl.
+	 *
+	 * @param key the key
+	 * @param value the value
+	 * @return the object
+	 */
 	private final Object putImpl(Object key, Object value) {
 		if (value == null) {
 			throw new IllegalArgumentException("null values not accepted");
@@ -77,12 +113,18 @@ public class WeakValueHashMap implements Map {
 		return oldWf == null ? null : oldWf.get();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#remove(java.lang.Object)
+	 */
 	public Object remove(Object key) {
 		this.checkQueue();
 		WeakReference wf = (WeakReference) this.map.remove(key);
 		return wf == null ? null : wf.get();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#putAll(java.util.Map)
+	 */
 	public void putAll(Map t) {
 		this.checkQueue();
 		Iterator i = t.entrySet().iterator();
@@ -92,15 +134,24 @@ public class WeakValueHashMap implements Map {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#clear()
+	 */
 	public void clear() {
 		this.checkQueue();
 		this.map.clear();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#keySet()
+	 */
 	public Set keySet() {
 		return this.map.keySet();
 	}
 
+	/**
+	 * Check queue.
+	 */
 	private final void checkQueue() {
 		ReferenceQueue queue = this.queue;
 		LocalWeakReference ref;
@@ -109,10 +160,16 @@ public class WeakValueHashMap implements Map {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#values()
+	 */
 	public Collection values() {
 		return new FilteredCollection(this.map.values(), new LocalFilter());
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#entrySet()
+	 */
 	public Set entrySet() {
 		throw new UnsupportedOperationException();
 	}

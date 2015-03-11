@@ -22,17 +22,33 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.w3c.DOMTokenList;
 
+
+/**
+ * The Class DOMTokenListImpl.
+ */
 public class DOMTokenListImpl implements DOMTokenList {
 
+	/** The item value. */
 	private String itemValue;
+	
+	/** The element. */
 	private HTMLElementImpl element;
 
+	/**
+	 * Instantiates a new DOM token list impl.
+	 *
+	 * @param element the element
+	 * @param item the item
+	 */
 	public DOMTokenListImpl(HTMLElementImpl element, String item) {
 		this.element = element;
 		this.itemValue = item;
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.DOMTokenList#getLength()
+	 */
 	@Override
 	public int getLength() {
 
@@ -43,6 +59,9 @@ public class DOMTokenListImpl implements DOMTokenList {
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.DOMTokenList#item(int)
+	 */
 	@Override
 	public String item(int index) {
 		if (itemValue != null) {
@@ -57,11 +76,17 @@ public class DOMTokenListImpl implements DOMTokenList {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.DOMTokenList#contains(java.lang.String)
+	 */
 	@Override
 	public boolean contains(String token) {
 		return itemValue.contains(token);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.DOMTokenList#add(java.lang.String)
+	 */
 	@Override
 	public void add(String token) {
 
@@ -72,6 +97,9 @@ public class DOMTokenListImpl implements DOMTokenList {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.DOMTokenList#remove(java.lang.String)
+	 */
 	@Override
 	public void remove(String token) {
 
@@ -87,6 +115,9 @@ public class DOMTokenListImpl implements DOMTokenList {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.DOMTokenList#toggle(java.lang.String)
+	 */
 	@Override
 	public boolean toggle(String token) {
 
@@ -99,6 +130,9 @@ public class DOMTokenListImpl implements DOMTokenList {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.DOMTokenList#toggle(java.lang.String, boolean)
+	 */
 	@Override
 	public boolean toggle(String token, boolean force) {
 

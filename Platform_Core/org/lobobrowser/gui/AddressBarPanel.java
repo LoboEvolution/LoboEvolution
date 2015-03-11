@@ -25,14 +25,22 @@ import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+
 /**
  * The address bar panel of a browser window.
  */
 public class AddressBarPanel extends JPanel {
+	
+	/**
+	 * Instantiates a new address bar panel.
+	 */
 	public AddressBarPanel() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(1, 32);

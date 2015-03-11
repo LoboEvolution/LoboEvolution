@@ -44,21 +44,32 @@ import org.lobobrowser.util.CollectionUtilities;
 import org.lobobrowser.util.GenericURLConnection;
 import org.lobobrowser.util.io.IORoutines;
 
+
 /**
+ * The Class ArchiveClassLoader.
+ *
  * @author J. H. S.
  */
 public class ArchiveClassLoader extends BaseClassLoader {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(ArchiveClassLoader.class.getName());
 
 	/**
+	 * The Class LocalURLStreamHandler.
+	 *
 	 * @author J. H. S.
 	 */
 	public class LocalURLStreamHandler extends java.net.URLStreamHandler {
+		
+		/** The resource name. */
 		private final String resourceName;
 
 		/**
-		 * 
+		 * Instantiates a new local url stream handler.
+		 *
+		 * @param resourceName the resource name
 		 */
 		public LocalURLStreamHandler(String resourceName) {
 			super();
@@ -88,10 +99,14 @@ public class ArchiveClassLoader extends BaseClassLoader {
 		}
 	}
 
+	/** The archive infos. */
 	private final ArchiveInfo[] archiveInfos;
 
 	/**
-	 * @param targetParent
+	 * Instantiates a new archive class loader.
+	 *
+	 * @param archiveInfos the archive infos
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	ArchiveClassLoader(java.util.Collection<Object[]> archiveInfos)
 			throws IOException {
@@ -196,6 +211,12 @@ public class ArchiveClassLoader extends BaseClassLoader {
 		}
 	}
 
+	/**
+	 * Gets the resource as stream impl.
+	 *
+	 * @param resourceName the resource name
+	 * @return the resource as stream impl
+	 */
 	private InputStream getResourceAsStreamImpl(
 			final String resourceName) {
 		ArchiveInfo[] ainfos = this.archiveInfos;

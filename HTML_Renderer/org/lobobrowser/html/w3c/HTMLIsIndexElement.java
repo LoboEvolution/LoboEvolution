@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * This element is used for single-line text input. See the ISINDEX element
  * definition in HTML 4.01. This element is deprecated in HTML 4.01.
@@ -40,21 +41,28 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLIsIndexElement extends HTMLElement {
+	
 	/**
 	 * Returns the <code>FORM</code> element containing this control. Returns
 	 * <code>null</code> if this control is not within the context of a form.
+	 *
+	 * @return the form
 	 */
 	public HTMLFormElement getForm();
 
 	/**
 	 * The prompt message. See the prompt attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the prompt
 	 */
 	public String getPrompt();
 
 	/**
 	 * The prompt message. See the prompt attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param prompt the new prompt
 	 */
 	public void setPrompt(String prompt);
 

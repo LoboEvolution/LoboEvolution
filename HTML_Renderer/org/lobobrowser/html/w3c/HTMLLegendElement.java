@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Provides a caption for a <code>FIELDSET</code> grouping. See the LEGEND
  * element definition in HTML 4.01.
@@ -40,33 +41,44 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLLegendElement extends HTMLElement {
+	
 	/**
 	 * Returns the <code>FORM</code> element containing this control. Returns
 	 * <code>null</code> if this control is not within the context of a form.
+	 *
+	 * @return the form
 	 */
 	public HTMLFormElement getForm();
 
 	/**
 	 * A single character access key to give access to the form control. See the
 	 * accesskey attribute definition in HTML 4.01.
+	 *
+	 * @return the access key
 	 */
 	public String getAccessKey();
 
 	/**
 	 * A single character access key to give access to the form control. See the
 	 * accesskey attribute definition in HTML 4.01.
+	 *
+	 * @param accessKey the new access key
 	 */
 	public void setAccessKey(String accessKey);
 
 	/**
 	 * Text alignment relative to <code>FIELDSET</code>. See the align attribute
 	 * definition in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the align
 	 */
 	public String getAlign();
 
 	/**
 	 * Text alignment relative to <code>FIELDSET</code>. See the align attribute
 	 * definition in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param align the new align
 	 */
 	public void setAlign(String align);
 

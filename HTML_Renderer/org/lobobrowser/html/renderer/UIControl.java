@@ -29,7 +29,17 @@ import java.awt.Graphics;
 
 import org.lobobrowser.html.control.RUIControl;
 
+
+/**
+ * The Interface UIControl.
+ */
 public abstract interface UIControl {
+	
+	/**
+	 * Sets the RUI control.
+	 *
+	 * @param ruicontrol the new RUI control
+	 */
 	public void setRUIControl(RUIControl ruicontrol);
 
 	/**
@@ -37,22 +47,61 @@ public abstract interface UIControl {
 	 * occurs or when the DOM changes. This method should reset its state
 	 * assuming the element has changed, and change its preferred size if
 	 * appropriate.
+	 *
+	 * @param availWidth the avail width
+	 * @param availHeight the avail height
 	 */
 	public void reset(int availWidth, int availHeight);
 
+	/**
+	 * Gets the preferred size.
+	 *
+	 * @return the preferred size
+	 */
 	public Dimension getPreferredSize();
 
+	/**
+	 * Gets the v align.
+	 *
+	 * @return the v align
+	 */
 	public int getVAlign();
 
+	/**
+	 * Sets the bounds.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 */
 	public void setBounds(int x, int y, int width, int height);
 
+	/**
+	 * Invalidate.
+	 */
 	public void invalidate();
 
+	/**
+	 * Gets the background color.
+	 *
+	 * @return the background color
+	 */
 	public Color getBackgroundColor();
 
 	// public boolean paintSelection(Graphics g, boolean inSelection,
 	// RenderableSpot startPoint, RenderableSpot endPoint);
+	/**
+	 * Paint.
+	 *
+	 * @param g the g
+	 */
 	public void paint(Graphics g);
 
+	/**
+	 * Gets the component.
+	 *
+	 * @return the component
+	 */
 	public java.awt.Component getComponent();
 }

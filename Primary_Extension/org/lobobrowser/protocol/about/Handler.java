@@ -29,7 +29,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
 
+
 /**
+ * The Class Handler.
+ *
  * @author J. H. S.
  */
 public class Handler extends URLStreamHandler {

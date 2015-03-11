@@ -29,30 +29,40 @@ import java.net.URL;
 
 import org.w3c.dom.Document;
 
+
 /**
  * The <code>BrowserFrame</code> interface represents a browser frame. A simple
  * implementation of this interface is provided in
  * {@link org.lobobrowser.html.test.SimpleBrowserFrame}.
  */
 public interface BrowserFrame {
+	
 	/**
 	 * Gets the component that renders the frame. This can be a
 	 * {@link org.lobobrowser.html.gui.HtmlPanel}.
+	 *
+	 * @return the component
 	 */
 	public Component getComponent();
 
 	/**
 	 * Loads a URL in the frame.
+	 *
+	 * @param url the url
 	 */
 	public void loadURL(URL url);
 
 	/**
 	 * Gets the content document.
+	 *
+	 * @return the content document
 	 */
 	public Document getContentDocument();
 
 	/**
 	 * Gets the {@link HtmlRendererContext} of the frame.
+	 *
+	 * @return the html renderer context
 	 */
 	public HtmlRendererContext getHtmlRendererContext();
 

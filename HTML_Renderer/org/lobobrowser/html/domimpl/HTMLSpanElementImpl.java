@@ -25,8 +25,18 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.w3c.HTMLElement;
 
+
+/**
+ * The Class HTMLSpanElementImpl.
+ */
 public class HTMLSpanElementImpl extends HTMLAbstractUIElement implements
 		HTMLElement {
+	
+	/**
+	 * Instantiates a new HTML span element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLSpanElementImpl(String name) {
 		super(name);
 	}

@@ -29,11 +29,25 @@ import org.lobobrowser.html.style.BorderInfo;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 
+
+/**
+ * The Class ImageRenderState.
+ */
 public class ImageRenderState extends StyleSheetRenderState {
+	
+	/**
+	 * Instantiates a new image render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param element the element
+	 */
 	public ImageRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getMarginInsets()
+	 */
 	public HtmlInsets getMarginInsets() {
 		HtmlInsets mi = this.marginInsets;
 		if (mi != INVALID_INSETS) {
@@ -83,6 +97,9 @@ public class ImageRenderState extends StyleSheetRenderState {
 		return mi;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getBorderInfo()
+	 */
 	public BorderInfo getBorderInfo() {
 		BorderInfo binfo = this.borderInfo;
 		if (binfo != INVALID_BORDER_INFO) {

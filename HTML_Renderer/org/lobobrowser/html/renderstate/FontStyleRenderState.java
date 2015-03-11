@@ -31,14 +31,35 @@ import org.lobobrowser.html.style.RenderStateDelegator;
 import org.lobobrowser.html.style.WordInfo;
 import org.lobobrowser.util.gui.FontFactory;
 
+
+/**
+ * The Class FontStyleRenderState.
+ */
 public class FontStyleRenderState extends RenderStateDelegator {
+	
+	/** The style. */
 	private final int style;
+	
+	/** The superscript. */
 	private final Integer superscript;
 
+	/**
+	 * Instantiates a new font style render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param style the style
+	 */
 	public FontStyleRenderState(RenderState prevRenderState, int style) {
 		this(prevRenderState, style, null);
 	}
 
+	/**
+	 * Instantiates a new font style render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param style the style
+	 * @param superscript the superscript
+	 */
 	FontStyleRenderState(RenderState prevRenderState, int style,
 			Integer superscript) {
 		super(prevRenderState);
@@ -46,14 +67,25 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		this.superscript = superscript;
 	}
 
+	/**
+	 * Creates the superscript font style render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param superscript the superscript
+	 * @return the font style render state
+	 */
 	public static FontStyleRenderState createSuperscriptFontStyleRenderState(
 			RenderState prevRenderState, Integer superscript) {
 		return new FontStyleRenderState(prevRenderState, prevRenderState
 				.getFont().getStyle(), superscript);
 	}
 
+	/** The i font. */
 	private Font iFont;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.style.RenderStateDelegator#getFont()
+	 */
 	public Font getFont() {
 		Font f = this.iFont;
 		if (f != null) {
@@ -71,8 +103,12 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		return f;
 	}
 
+	/** The i font metrics. */
 	private FontMetrics iFontMetrics;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.style.RenderStateDelegator#getFontMetrics()
+	 */
 	public FontMetrics getFontMetrics() {
 		FontMetrics fm = this.iFontMetrics;
 		if (fm == null) {
@@ -83,6 +119,9 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		return fm;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.style.RenderStateDelegator#invalidate()
+	 */
 	public void invalidate() {
 		this.delegate.invalidate();
 		this.iFont = null;
@@ -93,8 +132,12 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		}
 	}
 
+	/** The i word info map. */
 	Map<String, WordInfo> iWordInfoMap = null;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.style.RenderStateDelegator#getWordInfo(java.lang.String)
+	 */
 	public final WordInfo getWordInfo(String word) {
 		// Expected to be called only in the GUI (rendering) thread.
 		// No synchronization necessary.

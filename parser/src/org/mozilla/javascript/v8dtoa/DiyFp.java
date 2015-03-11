@@ -30,30 +30,56 @@
 
 package org.mozilla.javascript.v8dtoa;
 
+
 // This "Do It Yourself Floating Point" class implements a floating-point number
 // with a uint64 significand and an int exponent. Normalized DiyFp numbers will
 // have the most significant bit of the significand set.
 // Multiplication and Subtraction do not normalize their results.
 // DiyFp are not designed to contain special doubles (NaN and Infinity).
+/**
+ * The Class DiyFp.
+ */
 class DiyFp {
 
+    /** The f. */
     private long f;
+    
+    /** The e. */
     private int e;
 
+    /** The Constant kSignificandSize. */
     static final int kSignificandSize = 64;
+    
+    /** The Constant kUint64MSB. */
     static final long kUint64MSB = 0x8000000000000000L;
 
 
+    /**
+     * Instantiates a new diy fp.
+     */
     DiyFp() {
         this.f = 0;
         this.e = 0;
     }
 
+    /**
+     * Instantiates a new diy fp.
+     *
+     * @param f the f
+     * @param e the e
+     */
     DiyFp(long f, int e) {
         this.f = f;
         this.e = e;
     }
 
+    /**
+     * Uint64_gte.
+     *
+     * @param a the a
+     * @param b the b
+     * @return true, if successful
+     */
     private static boolean uint64_gte(long a, long b) {
         // greater-or-equal for unsigned int64 in java-style...
         return (a == b) || ((a > b) ^ (a < 0) ^ (b < 0));
@@ -63,6 +89,11 @@ class DiyFp {
     // The exponents of both numbers must be the same and the significand of this
     // must be bigger than the significand of other.
     // The result will not be normalized.
+    /**
+     * Subtract.
+     *
+     * @param other the other
+     */
     void subtract(DiyFp other) {
         assert (e == other.e);
         assert uint64_gte(f, other.f);
@@ -72,6 +103,13 @@ class DiyFp {
     // Returns a - b.
     // The exponents of both numbers must be the same and this must be bigger
     // than other. The result will not be normalized.
+    /**
+     * Minus.
+     *
+     * @param a the a
+     * @param b the b
+     * @return the diy fp
+     */
     static DiyFp minus(DiyFp a, DiyFp b) {
         DiyFp result = new DiyFp(a.f, a.e);
         result.subtract(b);
@@ -80,6 +118,11 @@ class DiyFp {
 
 
     // this = this * other.
+    /**
+     * Multiply.
+     *
+     * @param other the other
+     */
     void multiply(DiyFp other) {
         // Simply "emulates" a 128 bit multiplication.
         // However: the resulting number only contains 64 bits. The least
@@ -104,12 +147,22 @@ class DiyFp {
     }
 
     // returns a * b;
+    /**
+     * Times.
+     *
+     * @param a the a
+     * @param b the b
+     * @return the diy fp
+     */
     static DiyFp times(DiyFp a, DiyFp b) {
         DiyFp result = new DiyFp(a.f, a.e);
         result.multiply(b);
         return result;
     }
 
+    /**
+     * Normalize.
+     */
     void normalize() {
         assert(f != 0);
         long f = this.f;
@@ -130,18 +183,49 @@ class DiyFp {
         this.e = e;
     }
 
+    /**
+     * Normalize.
+     *
+     * @param a the a
+     * @return the diy fp
+     */
     static DiyFp normalize(DiyFp a) {
         DiyFp result = new DiyFp(a.f, a.e);
         result.normalize();
         return result;
     }
 
+    /**
+     * F.
+     *
+     * @return the long
+     */
     long f() { return f; }
+    
+    /**
+     * E.
+     *
+     * @return the int
+     */
     int e() { return e; }
 
+    /**
+     * Sets the f.
+     *
+     * @param new_value the new f
+     */
     void setF(long new_value) { f = new_value; }
+    
+    /**
+     * Sets the e.
+     *
+     * @param new_value the new e
+     */
     void setE(int new_value) { e = new_value; }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return "[DiyFp f:" + f + ", e:" + e + "]";

@@ -20,11 +20,22 @@
  */
 package org.lobobrowser.gui;
 
+
+/**
+ * A factory for creating DefaultFramePanel objects.
+ */
 public class DefaultFramePanelFactory implements FramePanelFactory {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.FramePanelFactory#createFramePanel(org.lobobrowser.gui.FramePanel)
+	 */
 	public FramePanel createFramePanel(FramePanel parent) {
 		return new FramePanel(parent);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.FramePanelFactory#createFramePanel(java.lang.String)
+	 */
 	public FramePanel createFramePanel(String windowId) {
 		return new FramePanel(windowId);
 	}

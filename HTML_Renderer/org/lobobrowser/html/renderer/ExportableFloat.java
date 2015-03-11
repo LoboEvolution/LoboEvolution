@@ -20,13 +20,35 @@
  */
 package org.lobobrowser.html.renderer;
 
+
+/**
+ * The Class ExportableFloat.
+ */
 public class ExportableFloat {
+	
+	/** The Constant EMPTY_ARRAY. */
 	public static final ExportableFloat[] EMPTY_ARRAY = new ExportableFloat[0];
+	
+	/** The element. */
 	public final BoundableRenderable element;
+	
+	/** The left float. */
 	public final boolean leftFloat;
+	
+	/** The orig x. */
 	public final int origX;
+	
+	/** The orig y. */
 	public final int origY;
 
+	/**
+	 * Instantiates a new exportable float.
+	 *
+	 * @param element the element
+	 * @param leftFloat the left float
+	 * @param origX the orig x
+	 * @param origY the orig y
+	 */
 	public ExportableFloat(BoundableRenderable element, boolean leftFloat,
 			int origX, int origY) {
 		super();

@@ -16,6 +16,7 @@ import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
+
 /**
  * Wrappper class for Method and Constructor instances to cache
  * getParameterTypes() results, recover from IllegalAccessException
@@ -26,24 +27,48 @@ import java.lang.reflect.Modifier;
 
 final class MemberBox implements Serializable
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 6358550398665688245L;
 
+    /** The member object. */
     private transient Member memberObject;
+    
+    /** The arg types. */
     transient Class<?>[] argTypes;
+    
+    /** The delegate to. */
     transient Object delegateTo;
+    
+    /** The vararg. */
     transient boolean vararg;
 
 
+    /**
+     * Instantiates a new member box.
+     *
+     * @param method the method
+     */
     MemberBox(Method method)
     {
         init(method);
     }
 
+    /**
+     * Instantiates a new member box.
+     *
+     * @param constructor the constructor
+     */
     MemberBox(Constructor<?> constructor)
     {
         init(constructor);
     }
 
+    /**
+     * Inits the.
+     *
+     * @param method the method
+     */
     private void init(Method method)
     {
         this.memberObject = method;
@@ -51,6 +76,11 @@ final class MemberBox implements Serializable
         this.vararg = VMBridge.instance.isVarArgs(method);
     }
 
+    /**
+     * Inits the.
+     *
+     * @param constructor the constructor
+     */
     private void init(Constructor<?> constructor)
     {
         this.memberObject = constructor;
@@ -58,46 +88,91 @@ final class MemberBox implements Serializable
         this.vararg = VMBridge.instance.isVarArgs(constructor);
     }
 
+    /**
+     * Method.
+     *
+     * @return the method
+     */
     Method method()
     {
         return (Method)memberObject;
     }
 
+    /**
+     * Ctor.
+     *
+     * @return the constructor
+     */
     Constructor<?> ctor()
     {
         return (Constructor<?>)memberObject;
     }
 
+    /**
+     * Member.
+     *
+     * @return the member
+     */
     Member member()
     {
         return memberObject;
     }
 
+    /**
+     * Checks if is method.
+     *
+     * @return true, if is method
+     */
     boolean isMethod()
     {
         return memberObject instanceof Method;
     }
 
+    /**
+     * Checks if is ctor.
+     *
+     * @return true, if is ctor
+     */
     boolean isCtor()
     {
         return memberObject instanceof Constructor;
     }
 
+    /**
+     * Checks if is static.
+     *
+     * @return true, if is static
+     */
     boolean isStatic()
     {
         return Modifier.isStatic(memberObject.getModifiers());
     }
 
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     String getName()
     {
         return memberObject.getName();
     }
 
+    /**
+     * Gets the declaring class.
+     *
+     * @return the declaring class
+     */
     Class<?> getDeclaringClass()
     {
         return memberObject.getDeclaringClass();
     }
 
+    /**
+     * To java declaration.
+     *
+     * @return the string
+     */
     String toJavaDeclaration()
     {
         StringBuilder sb = new StringBuilder();
@@ -119,12 +194,22 @@ final class MemberBox implements Serializable
         return sb.toString();
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString()
     {
         return memberObject.toString();
     }
 
+    /**
+     * Invoke.
+     *
+     * @param target the target
+     * @param args the args
+     * @return the object
+     */
     Object invoke(Object target, Object[] args)
     {
         Method method = method();
@@ -158,6 +243,12 @@ final class MemberBox implements Serializable
         }
     }
 
+    /**
+     * New instance.
+     *
+     * @param args the args
+     * @return the object
+     */
     Object newInstance(Object[] args)
     {
         Constructor<?> ctor = ctor();
@@ -175,6 +266,13 @@ final class MemberBox implements Serializable
         }
     }
 
+    /**
+     * Search accessible method.
+     *
+     * @param method the method
+     * @param params the params
+     * @return the method
+     */
     private static Method searchAccessibleMethod(Method method, Class<?>[] params)
     {
         int modifiers = method.getModifiers();
@@ -213,6 +311,13 @@ final class MemberBox implements Serializable
         return null;
     }
 
+    /**
+     * Read object.
+     *
+     * @param in the in
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws ClassNotFoundException the class not found exception
+     */
     private void readObject(ObjectInputStream in)
         throws IOException, ClassNotFoundException
     {
@@ -225,6 +330,12 @@ final class MemberBox implements Serializable
         }
     }
 
+    /**
+     * Write object.
+     *
+     * @param out the out
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private void writeObject(ObjectOutputStream out)
         throws IOException
     {
@@ -234,10 +345,14 @@ final class MemberBox implements Serializable
 
     /**
      * Writes a Constructor or Method object.
-     *
+     * 
      * Methods and Constructors are not serializable, so we must serialize
      * information about the class, the name, and the parameters and
      * recreate upon deserialization.
+     *
+     * @param out the out
+     * @param member the member
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     private static void writeMember(ObjectOutputStream out, Member member)
         throws IOException
@@ -261,6 +376,11 @@ final class MemberBox implements Serializable
 
     /**
      * Reads a Method or a Constructor from the stream.
+     *
+     * @param in the in
+     * @return the member
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws ClassNotFoundException the class not found exception
      */
     private static Member readMember(ObjectInputStream in)
         throws IOException, ClassNotFoundException
@@ -282,6 +402,7 @@ final class MemberBox implements Serializable
         }
     }
 
+    /** The Constant primitives. */
     private static final Class<?>[] primitives = {
         Boolean.TYPE,
         Byte.TYPE,
@@ -296,9 +417,13 @@ final class MemberBox implements Serializable
 
     /**
      * Writes an array of parameter types to the stream.
-     *
+     * 
      * Requires special handling because primitive types cannot be
      * found upon deserialization by the default Java implementation.
+     *
+     * @param out the out
+     * @param parms the parms
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     private static void writeParameters(ObjectOutputStream out, Class<?>[] parms)
         throws IOException
@@ -326,6 +451,11 @@ final class MemberBox implements Serializable
 
     /**
      * Reads an array of parameter types from the stream.
+     *
+     * @param in the in
+     * @return the class[]
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws ClassNotFoundException the class not found exception
      */
     private static Class<?>[] readParameters(ObjectInputStream in)
         throws IOException, ClassNotFoundException

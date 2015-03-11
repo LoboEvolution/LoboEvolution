@@ -40,6 +40,7 @@ import org.w3c.dom.stylesheets.MediaList;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.util.LangUtils;
 
+
 /**
  * Implementation of {@link CSSImportRule}.
  *
@@ -50,19 +51,41 @@ import com.steadystate.css.util.LangUtils;
  */
 public class CSSImportRuleImpl extends AbstractCSSRuleImpl implements CSSImportRule {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 7807829682009179339L;
 
+    /** The href_. */
     private String href_;
+    
+    /** The media_. */
     private MediaList media_;
 
+    /**
+     * Sets the href.
+     *
+     * @param href the new href
+     */
     public void setHref(final String href) {
         href_ = href;
     }
 
+    /**
+     * Sets the media.
+     *
+     * @param media the new media
+     */
     public void setMedia(final MediaList media) {
         media_ = media;
     }
 
+    /**
+     * Instantiates a new CSS import rule impl.
+     *
+     * @param parentStyleSheet the parent style sheet
+     * @param parentRule the parent rule
+     * @param href the href
+     * @param media the media
+     */
     public CSSImportRuleImpl(
             final CSSStyleSheetImpl parentStyleSheet,
             final CSSRule parentRule,
@@ -73,14 +96,23 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl implements CSSImportR
         media_ = media;
     }
 
+    /**
+     * Instantiates a new CSS import rule impl.
+     */
     public CSSImportRuleImpl() {
         super();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSRule#getType()
+     */
     public short getType() {
         return IMPORT_RULE;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSRule#getCssText()
+     */
     public String getCssText() {
         final StringBuilder sb = new StringBuilder();
         sb.append("@import url(")
@@ -93,6 +125,9 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl implements CSSImportR
         return sb.toString();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSRule#setCssText(java.lang.String)
+     */
     public void setCssText(final String cssText) throws DOMException {
         final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
         if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
@@ -131,23 +166,38 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl implements CSSImportR
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSImportRule#getHref()
+     */
     public String getHref() {
         return href_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSImportRule#getMedia()
+     */
     public MediaList getMedia() {
         return media_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSImportRule#getStyleSheet()
+     */
     public CSSStyleSheet getStyleSheet() {
         return null;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return getCssText();
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -162,6 +212,9 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl implements CSSImportR
             && LangUtils.equals(getMedia(), cir.getMedia());
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#hashCode()
+     */
     @Override
     public int hashCode() {
         int hash = super.hashCode();

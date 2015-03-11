@@ -38,19 +38,37 @@ import org.w3c.dom.css.CSSStyleSheet;
 
 import com.steadystate.css.parser.CSSOMParser;
 
+
 /**
  * Tests only the CSS parser.
  */
 public class CssParserTest extends JFrame {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CssParserTest.class
 			.getName());
+	
+	/** The css output. */
 	private final HtmlPanel cssOutput;
+	
+	/** The text area. */
 	private final JTextArea textArea;
 
+	/**
+	 * Instantiates a new css parser test.
+	 *
+	 * @throws HeadlessException the headless exception
+	 */
 	public CssParserTest() throws HeadlessException {
 		this("CSS Parser Test Tool");
 	}
 
+	/**
+	 * Instantiates a new css parser test.
+	 *
+	 * @param title the title
+	 * @throws HeadlessException the headless exception
+	 */
 	public CssParserTest(String title) throws HeadlessException {
 		super(title);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,6 +108,11 @@ public class CssParserTest extends JFrame {
 		});
 	}
 
+	/**
+	 * Process.
+	 *
+	 * @param uri the uri
+	 */
 	private void process(String uri) {
 		try {
 			URL url;
@@ -141,10 +164,18 @@ public class CssParserTest extends JFrame {
 		}
 	}
 
+	/**
+	 * Clear css output.
+	 */
 	private void clearCssOutput() {
 		this.cssOutput.clearDocument();
 	}
 
+	/**
+	 * Show style sheet.
+	 *
+	 * @param styleSheet the style sheet
+	 */
 	private void showStyleSheet(CSSStyleSheet styleSheet) {
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter writer = new PrintWriter(stringWriter);
@@ -166,6 +197,12 @@ public class CssParserTest extends JFrame {
 		this.cssOutput.setHtml(html, "about:css", rcontext);
 	}
 
+	/**
+	 * Write rule info.
+	 *
+	 * @param writer the writer
+	 * @param rule the rule
+	 */
 	private void writeRuleInfo(PrintWriter writer, CSSRule rule) {
 		if (rule instanceof CSSStyleRule) {
 			CSSStyleRule styleRule = (CSSStyleRule) rule;
@@ -180,6 +217,11 @@ public class CssParserTest extends JFrame {
 		}
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		CssParserTest frame = new CssParserTest();
 		frame.setSize(800, 400);

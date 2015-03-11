@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Base font. See the BASEFONT element definition in HTML 4.01. This element is
  * deprecated in HTML 4.01.
@@ -40,43 +41,54 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLBaseFontElement extends HTMLElement {
+	
 	/**
 	 * Font color. See the color attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the color
 	 */
 	public String getColor();
 
 	/**
 	 * Font color. See the color attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param color the new color
 	 */
 	public void setColor(String color);
 
 	/**
 	 * Font face identifier. See the face attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the face
 	 */
 	public String getFace();
 
 	/**
 	 * Font face identifier. See the face attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param face the new face
 	 */
 	public void setFace(String face);
 
 	/**
 	 * Computed font size. See the size attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the size
 	 */
 	public int getSize();
 
 	/**
 	 * Computed font size. See the size attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param size the new size
 	 */
 	public void setSize(int size);
 

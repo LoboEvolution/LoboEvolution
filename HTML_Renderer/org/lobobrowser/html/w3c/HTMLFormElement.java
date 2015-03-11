@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * The <code>FORM</code> element encompasses behavior similar to a collection
  * and an element. It provides direct access to the contained form controls as
@@ -42,47 +43,64 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLFormElement extends HTMLElement {
+	
 	/**
 	 * Returns a collection of all form control elements in the form.
+	 *
+	 * @return the elements
 	 */
 	public HTMLCollection getElements();
 
 	/**
 	 * The number of form controls in the form.
+	 *
+	 * @return the length
 	 */
 	public int getLength();
 
 	/**
 	 * Names the form.
+	 *
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * Names the form.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name);
 
 	/**
 	 * List of character sets supported by the server. See the accept-charset
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @return the accept charset
 	 */
 	public String getAcceptCharset();
 
 	/**
 	 * List of character sets supported by the server. See the accept-charset
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @param acceptCharset the new accept charset
 	 */
 	public void setAcceptCharset(String acceptCharset);
 
 	/**
 	 * Server-side form handler. See the action attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return the action
 	 */
 	public String getAction();
 
 	/**
 	 * Server-side form handler. See the action attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param action the new action
 	 */
 	public void setAction(String action);
 
@@ -92,6 +110,8 @@ public interface HTMLFormElement extends HTMLElement {
 	 * in HTML 4.01. The onsubmit even handler is not guaranteed to be triggered
 	 * when invoking this method. The behavior is inconsistent for historical
 	 * reasons and authors should not rely on a particular one.
+	 *
+	 * @return the enctype
 	 */
 	public String getEnctype();
 
@@ -101,6 +121,8 @@ public interface HTMLFormElement extends HTMLElement {
 	 * in HTML 4.01. The onsubmit even handler is not guaranteed to be triggered
 	 * when invoking this method. The behavior is inconsistent for historical
 	 * reasons and authors should not rely on a particular one.
+	 *
+	 * @param enctype the new enctype
 	 */
 	public void setEnctype(String enctype);
 
@@ -108,6 +130,8 @@ public interface HTMLFormElement extends HTMLElement {
 	 * HTTP method [<a href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC
 	 * 2616</a>] used to submit form. See the method attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return the method
 	 */
 	public String getMethod();
 
@@ -115,18 +139,24 @@ public interface HTMLFormElement extends HTMLElement {
 	 * HTTP method [<a href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC
 	 * 2616</a>] used to submit form. See the method attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param method the new method
 	 */
 	public void setMethod(String method);
 
 	/**
 	 * Frame to render the resource in. See the target attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return the target
 	 */
 	public String getTarget();
 
 	/**
 	 * Frame to render the resource in. See the target attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param target the new target
 	 */
 	public void setTarget(String target);
 
@@ -141,21 +171,64 @@ public interface HTMLFormElement extends HTMLElement {
 	 */
 	public void reset();
 
+	/**
+	 * Gets the autocomplete.
+	 *
+	 * @return the autocomplete
+	 */
 	public boolean getAutocomplete();
 
+	/**
+	 * Sets the autocomplete.
+	 *
+	 * @param autocomplete the new autocomplete
+	 */
 	public void setAutocomplete(boolean autocomplete);
 
+	/**
+	 * Gets the no validate.
+	 *
+	 * @return the no validate
+	 */
 	public boolean getNoValidate();
 
+	/**
+	 * Sets the no validate.
+	 *
+	 * @param noValidate the new no validate
+	 */
 	public void setNoValidate(boolean noValidate);
 
+	/**
+	 * Item.
+	 *
+	 * @param index the index
+	 * @return the object
+	 */
 	public Object item(int index);
 
+	/**
+	 * Named item.
+	 *
+	 * @param name the name
+	 * @return the object
+	 */
 	public Object namedItem(String name);
 
+	/**
+	 * Check validity.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean checkValidity();
 
+	/**
+	 * Dispatch form input.
+	 */
 	public void dispatchFormInput();
 
+	/**
+	 * Dispatch form change.
+	 */
 	public void dispatchFormChange();
 }

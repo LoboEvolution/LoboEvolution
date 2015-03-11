@@ -20,7 +20,15 @@
  */
 package org.lobobrowser.html.layout;
 
+
+/**
+ * The Class DivLayout.
+ */
 public class DivLayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new div layout.
+	 */
 	public DivLayout() {
 		super(DISPLAY_BLOCK);
 	}

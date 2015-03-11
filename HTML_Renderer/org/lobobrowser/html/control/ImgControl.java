@@ -38,20 +38,50 @@ import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.RenderableSpot;
 import org.lobobrowser.html.style.HtmlValues;
 
+
+/**
+ * The Class ImgControl.
+ */
 public class ImgControl extends BaseControl implements ImageListener, MouseMotionListener  {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The image. */
 	private volatile Image image;
+	
+	/** The valign. */
 	private int valign = RElement.VALIGN_BASELINE;
+	
+	/** The preferred size. */
 	private Dimension preferredSize;
+	
+	/** The declared width. */
 	private int declaredWidth;
+	
+	/** The declared height. */
 	private int declaredHeight;
+	
+	/** The last src. */
 	private String lastSrc;
+	
+	/** The align. */
 	private String align;
+	
+	/** The alt. */
 	private String alt;
+	
+	/** The image y. */
 	private int imageX, imageY;
+	
+	/** The image height. */
 	private int imageWidth, imageHeight;
 
+	/**
+	 * Instantiates a new img control.
+	 *
+	 * @param modelNode the model node
+	 */
 	public ImgControl(HTMLImageElementImpl modelNode) {
 		super(modelNode);
 		imageHeight = modelNode.getHeight();
@@ -62,6 +92,9 @@ public class ImgControl extends BaseControl implements ImageListener, MouseMotio
 		addMouseMotionListener(this); 
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Image image = this.image;
@@ -72,6 +105,9 @@ public class ImgControl extends BaseControl implements ImageListener, MouseMotio
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseControl#reset(int, int)
+	 */
 	public void reset(int availWidth, int availHeight) {
 		// Expected in the GUI thread.
 		int dw = HtmlValues.getOldSyntaxPixelSize(String.valueOf(imageWidth), availWidth, -1);
@@ -103,15 +139,28 @@ public class ImgControl extends BaseControl implements ImageListener, MouseMotio
 		this.valign = valign;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseControl#getVAlign()
+	 */
 	public int getVAlign() {
 		return this.valign;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
 	public Dimension getPreferredSize() {
 		Dimension ps = this.preferredSize;
 		return ps == null ? new Dimension(0, 0) : ps;
 	}
 
+	/**
+	 * Creates the preferred size.
+	 *
+	 * @param dw the dw
+	 * @param dh the dh
+	 * @return the dimension
+	 */
 	public Dimension createPreferredSize(int dw, int dh) {
 		Image img = this.image;
 		if (dw == -1) {
@@ -153,6 +202,11 @@ public class ImgControl extends BaseControl implements ImageListener, MouseMotio
 		return new Dimension(dw, dh);
 	}
 
+	/**
+	 * Check preferred size change.
+	 *
+	 * @return true, if successful
+	 */
 	private final boolean checkPreferredSizeChange() {
 		Dimension newPs = this.createPreferredSize(this.declaredWidth,
 				this.declaredHeight);
@@ -197,6 +251,13 @@ public class ImgControl extends BaseControl implements ImageListener, MouseMotio
 	 * @see java.awt.Component#imageUpdate(java.awt.Image, int, int, int, int,
 	 * int)
 	 */
+	/**
+	 * Image update.
+	 *
+	 * @param img the img
+	 * @param w the w
+	 * @param h the h
+	 */
 	public void imageUpdate(Image img, final int w, final int h) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -209,11 +270,23 @@ public class ImgControl extends BaseControl implements ImageListener, MouseMotio
 		});
 	}
 
+	/**
+	 * Paint selection.
+	 *
+	 * @param g the g
+	 * @param inSelection the in selection
+	 * @param startPoint the start point
+	 * @param endPoint the end point
+	 * @return true, if successful
+	 */
 	public boolean paintSelection(Graphics g, boolean inSelection,
 			RenderableSpot startPoint, RenderableSpot endPoint) {
 		return inSelection;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.ImageListener#imageLoaded(org.lobobrowser.html.dombl.ImageEvent)
+	 */
 	public void imageLoaded(ImageEvent event) {
 		// Implementation of ImageListener. Invoked in a request thread most
 		// likely.
@@ -226,10 +299,16 @@ public class ImgControl extends BaseControl implements ImageListener, MouseMotio
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.Component#toString()
+	 */
 	public String toString() {
 		return "ImgControl[src=" + this.lastSrc + "]";
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		imageX = e.getX();
@@ -238,6 +317,9 @@ public class ImgControl extends BaseControl implements ImageListener, MouseMotio
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 		// TODO Auto-generated method stub

@@ -25,17 +25,31 @@ package org.lobobrowser.html.parser;
 
 import org.xml.sax.Locator;
 
+
+/**
+ * The Class LocatorImpl.
+ */
 class LocatorImpl implements Locator {
+	
+	/** The public id. */
 	private final String publicId;
+	
+	/** The system id. */
 	private final String systemId;
+	
+	/** The line number. */
 	private final int lineNumber;
+	
+	/** The column number. */
 	private final int columnNumber;
 
 	/**
-	 * @param pid
-	 * @param sid
-	 * @param lnumber
-	 * @param cnumber
+	 * Instantiates a new locator impl.
+	 *
+	 * @param pid the pid
+	 * @param sid the sid
+	 * @param lnumber the lnumber
+	 * @param cnumber the cnumber
 	 */
 	public LocatorImpl(String pid, String sid, int lnumber, int cnumber) {
 		super();
@@ -45,18 +59,30 @@ class LocatorImpl implements Locator {
 		columnNumber = cnumber;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.xml.sax.Locator#getPublicId()
+	 */
 	public String getPublicId() {
 		return this.publicId;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.xml.sax.Locator#getSystemId()
+	 */
 	public String getSystemId() {
 		return this.systemId;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.xml.sax.Locator#getLineNumber()
+	 */
 	public int getLineNumber() {
 		return this.lineNumber;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.xml.sax.Locator#getColumnNumber()
+	 */
 	public int getColumnNumber() {
 		return this.columnNumber;
 	}

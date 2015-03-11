@@ -49,15 +49,35 @@ import org.lobobrowser.html.renderer.UIControl;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.util.Objects;
 
+
 /**
+ * The Class RUIControl.
+ *
  * @author J. H. S.
  */
 public class RUIControl extends BaseElementRenderable implements RElement {
+	
+	/** The Constant MAX_CACHE_SIZE. */
 	private static final int MAX_CACHE_SIZE = 10;
+	
+	/** The widget. */
 	public final UIControl widget;
+	
+	/** The model node. */
 	protected final ModelNode modelNode;
+	
+	/** The frame context. */
 	private final FrameContext frameContext;
 
+	/**
+	 * Instantiates a new RUI control.
+	 *
+	 * @param me the me
+	 * @param widget the widget
+	 * @param container the container
+	 * @param frameContext the frame context
+	 * @param ucontext the ucontext
+	 */
 	public RUIControl(ModelNode me, UIControl widget,
 			RenderableContainer container, FrameContext frameContext,
 			UserAgentContext ucontext) {
@@ -68,12 +88,18 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		widget.setRUIControl(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseRCollection#focus()
+	 */
 	public void focus() {
 		super.focus();
 		Component c = this.widget.getComponent();
 		c.requestFocus();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#invalidateLayoutLocal()
+	 */
 	public final void invalidateLayoutLocal() {
 		// Invalidate widget (some redundancy)
 		super.invalidateLayoutLocal();
@@ -84,19 +110,28 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		this.lastLayoutValue = null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RElement#getVAlign()
+	 */
 	public int getVAlign() {
 		return this.widget.getVAlign();
 	}
 
+	/**
+	 * Checks for background.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasBackground() {
 		return this.backgroundColor != null || this.backgroundImage != null
 				|| this.lastBackgroundImageUri != null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#paint(java.awt.Graphics)
+	 */
 	public final void paint(Graphics g) {
-		RenderState rs = this.modelNode.getRenderState();
-		System.out.println("paint: " + rs.getVisibility());
-		
+		RenderState rs = this.modelNode.getRenderState();		
 		if (rs != null && rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
 			// Just don't paint it.
 			return;
@@ -115,6 +150,9 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -124,6 +162,9 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onDoubleClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -133,6 +174,9 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMousePressed(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -142,6 +186,9 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseReleased(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -151,6 +198,9 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseDisarmed(java.awt.event.MouseEvent)
+	 */
 	public boolean onMouseDisarmed(MouseEvent event) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -166,6 +216,9 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 	 * @see
 	 * org.lobobrowser.html.render.BoundableRenderable#invalidateState(org.xamjwg
 	 * .html.renderer.RenderableContext)
+	 */
+	/**
+	 * Invalidate render style.
 	 */
 	public void invalidateRenderStyle() {
 		// NOP - No RenderStyle below this node.
@@ -186,6 +239,9 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseRCollection#updateWidgetBounds(int, int)
+	 */
 	public void updateWidgetBounds(int guiX, int guiY) {
 		// Overrides
 		super.updateWidgetBounds(guiX, guiY);
@@ -195,6 +251,9 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 				- insets.bottom);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseBoundableRenderable#getBlockBackgroundColor()
+	 */
 	public Color getBlockBackgroundColor() {
 		return this.widget.getBackgroundColor();
 	}
@@ -226,6 +285,9 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		return inSelection;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseRCollection#extractSelectionText(java.lang.StringBuffer, boolean, org.lobobrowser.html.renderer.RenderableSpot, org.lobobrowser.html.renderer.RenderableSpot)
+	 */
 	public boolean extractSelectionText(StringBuffer buffer,
 			boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
@@ -233,18 +295,33 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		return inSelection;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getLowestRenderableSpot(int, int)
+	 */
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		// Nothing draggable - return self
 		return new RenderableSpot(this, x, y);
 	}
 
+	/** The declared width. */
 	private int declaredWidth = -1;
+	
+	/** The declared height. */
 	private int declaredHeight = -1;
+	
+	/** The last layout key. */
 	private LayoutKey lastLayoutKey = null;
+	
+	/** The last layout value. */
 	private LayoutValue lastLayoutValue = null;
+	
+	/** The cached layout. */
 	private final Map<LayoutKey, LayoutValue> cachedLayout = new HashMap<LayoutKey, LayoutValue>(
 			5);
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#doLayout(int, int, boolean)
+	 */
 	public void doLayout(int availWidth, int availHeight, boolean sizeOnly) {
 		Map<LayoutKey, LayoutValue> cachedLayout = this.cachedLayout;
 		RenderState rs = this.modelNode.getRenderState();
@@ -342,26 +419,56 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RCollection#getRenderables()
+	 */
 	public Iterator<?> getRenderables() {
 		// No children for GUI controls
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RenderableContainer#getPaintedBackgroundColor()
+	 */
 	public Color getPaintedBackgroundColor() {
 		return this.container.getPaintedBackgroundColor();
 	}
 
+	/**
+	 * Gets the foreground color.
+	 *
+	 * @return the foreground color
+	 */
 	public Color getForegroundColor() {
 		RenderState rs = this.modelNode.getRenderState();
 		return rs == null ? null : rs.getColor();
 	}
 
+	/**
+	 * The Class LayoutKey.
+	 */
 	public static class LayoutKey {
+		
+		/** The avail width. */
 		public final int availWidth;
+		
+		/** The avail height. */
 		public final int availHeight;
+		
+		/** The whitespace. */
 		public final int whitespace;
+		
+		/** The font. */
 		public final Font font;
 
+		/**
+		 * Instantiates a new layout key.
+		 *
+		 * @param availWidth the avail width
+		 * @param availHeight the avail height
+		 * @param whitespace the whitespace
+		 * @param font the font
+		 */
 		public LayoutKey(int availWidth, int availHeight, int whitespace,
 				Font font) {
 			this.availWidth = availWidth;
@@ -370,6 +477,9 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 			this.font = font;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
 		public boolean equals(Object obj) {
 			if (obj == this) {
 				return true;
@@ -384,6 +494,9 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 					&& Objects.equals(other.font, this.font);
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#hashCode()
+		 */
 		public int hashCode() {
 			Font font = this.font;
 			return (this.availWidth * 1000 + this.availHeight)
@@ -391,10 +504,23 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		}
 	}
 
+	/**
+	 * The Class LayoutValue.
+	 */
 	public static class LayoutValue {
+		
+		/** The width. */
 		public final int width;
+		
+		/** The height. */
 		public final int height;
 
+		/**
+		 * Instantiates a new layout value.
+		 *
+		 * @param width the width
+		 * @param height the height
+		 */
 		public LayoutValue(int width, int height) {
 			this.width = width;
 			this.height = height;

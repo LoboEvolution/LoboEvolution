@@ -6,18 +6,38 @@
 
 package org.mozilla.javascript;
 
+
+/**
+ * The Class NativeCallSite.
+ */
 public class NativeCallSite extends IdScriptableObject
 {
+    
+    /** The Constant CALLSITE_TAG. */
     private static final String CALLSITE_TAG = "CallSite";
 
+    /** The element. */
     private ScriptStackElement element;
 
+    /**
+     * Inits the.
+     *
+     * @param scope the scope
+     * @param sealed the sealed
+     */
     static void init(Scriptable scope, boolean sealed)
     {
         NativeCallSite cs = new NativeCallSite();
         cs.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
+    /**
+     * Make.
+     *
+     * @param scope the scope
+     * @param ctorObj the ctor obj
+     * @return the native call site
+     */
     static NativeCallSite make(Scriptable scope, Scriptable ctorObj)
     {
         NativeCallSite cs = new NativeCallSite();
@@ -27,21 +47,35 @@ public class NativeCallSite extends IdScriptableObject
         return cs;
     }
 
+    /**
+     * Instantiates a new native call site.
+     */
     private NativeCallSite()
     {
     }
 
+    /**
+     * Sets the element.
+     *
+     * @param elt the new element
+     */
     void setElement(ScriptStackElement elt)
     {
         this.element = elt;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getClassName()
+     */
     @Override
     public String getClassName()
     {
         return "CallSite";
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
+     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -68,6 +102,9 @@ public class NativeCallSite extends IdScriptableObject
         initPrototypeMethod(CALLSITE_TAG, id, s, arity);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
+     */
     @Override
     protected int findPrototypeId(String s)
     {
@@ -119,6 +156,9 @@ public class NativeCallSite extends IdScriptableObject
         return 0;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -163,6 +203,9 @@ public class NativeCallSite extends IdScriptableObject
         }
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString()
     {
@@ -172,6 +215,12 @@ public class NativeCallSite extends IdScriptableObject
         return element.toString();
     }
 
+    /**
+     * Js_to string.
+     *
+     * @param obj the obj
+     * @return the object
+     */
     private Object js_toString(Scriptable obj)
     {
         while(obj != null && !(obj instanceof NativeCallSite)) {
@@ -186,21 +235,42 @@ public class NativeCallSite extends IdScriptableObject
         return sb.toString();
     }
 
+    /**
+     * Gets the undefined.
+     *
+     * @return the undefined
+     */
     private Object getUndefined()
     {
         return Undefined.instance;
     }
 
+    /**
+     * Gets the null.
+     *
+     * @return the null
+     */
     private Object getNull()
     {
         return null;
     }
 
+    /**
+     * Gets the false.
+     *
+     * @return the false
+     */
     private Object getFalse()
     {
         return Boolean.FALSE;
     }
 
+    /**
+     * Gets the function name.
+     *
+     * @param obj the obj
+     * @return the function name
+     */
     private Object getFunctionName(Scriptable obj)
     {
         while(obj != null && !(obj instanceof NativeCallSite)) {
@@ -213,6 +283,12 @@ public class NativeCallSite extends IdScriptableObject
         return (cs.element == null ? null : cs.element.functionName);
     }
 
+    /**
+     * Gets the file name.
+     *
+     * @param obj the obj
+     * @return the file name
+     */
     private Object getFileName(Scriptable obj)
     {
         while(obj != null && !(obj instanceof NativeCallSite)) {
@@ -225,6 +301,12 @@ public class NativeCallSite extends IdScriptableObject
         return (cs.element == null ? null : cs.element.fileName);
     }
 
+    /**
+     * Gets the line number.
+     *
+     * @param obj the obj
+     * @return the line number
+     */
     private Object getLineNumber(Scriptable obj)
     {
         while(obj != null && !(obj instanceof NativeCallSite)) {
@@ -240,6 +322,12 @@ public class NativeCallSite extends IdScriptableObject
         return cs.element.lineNumber;
     }
 
+    /**
+     * Gets the column number.
+     *
+     * @param obj the obj
+     * @return the column number
+     */
     private Object getColumnNumber(Scriptable obj)
     {
         while(obj != null && !(obj instanceof NativeCallSite)) {
@@ -255,6 +343,7 @@ public class NativeCallSite extends IdScriptableObject
         return cs.element.columnNumber;
     }
 
+    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
       Id_constructor = 1,
       Id_getThis = 2,

@@ -14,15 +14,16 @@ package org.w3c.css.sac;
 import java.io.InputStream;
 import java.io.Reader;
 
+
 /**
  * A single input source for a CSS source.
- *
+ * 
  * <p>
  * This class allows a CSS application to encapsulate information about an input
  * source in a single object, which may include a URI, a byte stream (possibly
  * with a specified encoding), and/or a character stream.
  * </p>
- *
+ * 
  * <p>
  * The CSS parser will use the InputSource object to determine how to read CSS
  * input. If there is a character stream available, the parser will read that
@@ -30,22 +31,33 @@ import java.io.Reader;
  * neither a character stream nor a byte stream is available, the parser will
  * attempt to open a URI connection to the resource identified by the URI.
  * </p>
- *
+ * 
  * <p>
  * An InputSource object belongs to the application: the CSS parser shall never
  * modify it in any way (it may modify a copy if necessary).
  * </p>
  *
- * @version $Revision: 477010 $
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  */
 public class InputSource {
 
+	/** The uri. */
 	private String uri;
+	
+	/** The byte stream. */
 	private InputStream byteStream;
+	
+	/** The encoding. */
 	private String encoding;
+	
+	/** The character stream. */
 	private Reader characterStream;
+	
+	/** The title. */
 	private String title;
+	
+	/** The media. */
 	private String media;
 
 	/**
@@ -79,16 +91,17 @@ public class InputSource {
 
 	/**
 	 * Create a new input source with a character stream.
-	 *
+	 * 
 	 * <p>
 	 * Application writers may use setURI() to provide a base for resolving
 	 * relative URIs, and setPublicId to include a public identifier.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * The character stream shall not include a byte order mark.
 	 * </p>
 	 *
+	 * @param characterStream the character stream
 	 * @see #setURI
 	 * @see #setByteStream
 	 * @see #setCharacterStream
@@ -266,6 +279,8 @@ public class InputSource {
 
 	/**
 	 * Returns the title for this input source.
+	 *
+	 * @return the title
 	 */
 	public String getTitle() {
 		return title;

@@ -37,14 +37,36 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 
+
+/**
+ * The Class ItemEditorDialog.
+ *
+ * @param <T> the generic type
+ */
 public class ItemEditorDialog<T> extends JDialog {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The caption label. */
 	private final JLabel captionLabel = new JLabel();
+	
+	/** The ok button. */
 	private final JButton okButton = new JButton();
+	
+	/** The cancel button. */
 	private final JButton cancelButton = new JButton();
+	
+	/** The editor. */
 	private final AbstractItemEditor<T> editor;
 
+	/**
+	 * Instantiates a new item editor dialog.
+	 *
+	 * @param owner the owner
+	 * @param factory the factory
+	 * @throws HeadlessException the headless exception
+	 */
 	public ItemEditorDialog(Dialog owner, ItemEditorFactory<T> factory)
 			throws HeadlessException {
 		super(owner);
@@ -52,6 +74,13 @@ public class ItemEditorDialog<T> extends JDialog {
 		this.init();
 	}
 
+	/**
+	 * Instantiates a new item editor dialog.
+	 *
+	 * @param owner the owner
+	 * @param factory the factory
+	 * @throws HeadlessException the headless exception
+	 */
 	public ItemEditorDialog(Frame owner, ItemEditorFactory<T> factory)
 			throws HeadlessException {
 		super(owner);
@@ -59,6 +88,9 @@ public class ItemEditorDialog<T> extends JDialog {
 		this.init();
 	}
 
+	/**
+	 * Inits the.
+	 */
 	private void init() {
 		this.captionLabel.setPreferredSize(new Dimension(Short.MAX_VALUE, 32));
 		this.captionLabel.setAlignmentX(0.0f);
@@ -81,14 +113,29 @@ public class ItemEditorDialog<T> extends JDialog {
 		contentPane.add(rootBox);
 	}
 
+	/**
+	 * Sets the caption.
+	 *
+	 * @param caption the new caption
+	 */
 	public void setCaption(String caption) {
 		this.captionLabel.setText(caption);
 	}
 
+	/**
+	 * Sets the item.
+	 *
+	 * @param item the new item
+	 */
 	public void setItem(T item) {
 		this.editor.setItem(item);
 	}
 
+	/**
+	 * Creates the button panel.
+	 *
+	 * @return the component
+	 */
 	private Component createButtonPanel() {
 		Box panel = new Box(BoxLayout.X_AXIS);
 		// panel.setBorder(new BevelBorder(BevelBorder.LOWERED));
@@ -101,18 +148,29 @@ public class ItemEditorDialog<T> extends JDialog {
 		return panel;
 	}
 
+	/** The resulting item. */
 	private T resultingItem;
 
+	/**
+	 * Gets the resulting item.
+	 *
+	 * @return the resulting item
+	 */
 	public T getResultingItem() {
 		return this.resultingItem;
 	}
 
+	/**
+	 * The Class OkAction.
+	 */
 	private class OkAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			try {
 				editor.validateItem();
@@ -126,12 +184,17 @@ public class ItemEditorDialog<T> extends JDialog {
 		}
 	}
 
+	/**
+	 * The Class CancelAction.
+	 */
 	private class CancelAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			resultingItem = null;
 			ItemEditorDialog.this.dispose();

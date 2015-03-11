@@ -22,19 +22,25 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.ua;
 
+
 /**
  * Represents the user agent, browser or clientlet engine.
  * 
  * @author J. H. S.
  */
 public interface UserAgent {
+	
 	/**
 	 * Gets the user agent name.
+	 *
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * Gets the user agent version.
+	 *
+	 * @return the version
 	 */
 	public String getVersion();
 
@@ -47,21 +53,29 @@ public interface UserAgent {
 
 	/**
 	 * Gets the internal Java runtime version the user agent runs on.
+	 *
+	 * @return the java version
 	 */
 	public String getJavaVersion();
 
 	/**
 	 * Gets the user agent name followed by the version.
+	 *
+	 * @return the name and version
 	 */
 	public String getNameAndVersion();
 
 	/**
 	 * Optional URL with information about the user agent.
+	 *
+	 * @return the info url
 	 */
 	public String getInfoUrl();
 
 	/**
 	 * Gets the value the User-Agent header should be set to.
+	 *
+	 * @return the user agent string
 	 */
 	public String getUserAgentString();
 

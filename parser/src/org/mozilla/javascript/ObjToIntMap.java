@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+
 /**
  * Map to associate objects to integers.
  * The map does not synchronize any of its operation, so either use
@@ -23,6 +24,8 @@ import java.io.Serializable;
 
 public class ObjToIntMap implements Serializable
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -1542220580748809402L;
 
 // Map implementation via hashtable,
@@ -30,12 +33,27 @@ public class ObjToIntMap implements Serializable
 
 // ObjToIntMap is a copy cat of ObjToIntMap with API adjusted to object keys
 
-    public static class Iterator {
+    /**
+ * The Class Iterator.
+ */
+public static class Iterator {
 
+        /**
+         * Instantiates a new iterator.
+         *
+         * @param master the master
+         */
         Iterator(ObjToIntMap master) {
             this.master = master;
         }
 
+        /**
+         * Inits the.
+         *
+         * @param keys the keys
+         * @param values the values
+         * @param keyCount the key count
+         */
         final void init(Object[] keys, int[] values, int keyCount) {
             this.keys = keys;
             this.values = values;
@@ -43,15 +61,26 @@ public class ObjToIntMap implements Serializable
             this.remaining = keyCount;
         }
 
+        /**
+         * Start.
+         */
         public void start() {
             master.initIterator(this);
             next();
         }
 
+        /**
+         * Done.
+         *
+         * @return true, if successful
+         */
         public boolean done() {
             return remaining < 0;
         }
 
+        /**
+         * Next.
+         */
         public void next() {
             if (remaining == -1) Kit.codeBug();
             if (remaining == 0) {
@@ -68,31 +97,63 @@ public class ObjToIntMap implements Serializable
             }
         }
 
+        /**
+         * Gets the key.
+         *
+         * @return the key
+         */
         public Object getKey() {
             Object key = keys[cursor];
             if (key == UniqueTag.NULL_VALUE) { key = null; }
             return key;
         }
 
+        /**
+         * Gets the value.
+         *
+         * @return the value
+         */
         public int getValue() {
             return values[cursor];
         }
 
+        /**
+         * Sets the value.
+         *
+         * @param value the new value
+         */
         public void setValue(int value) {
             values[cursor] = value;
         }
 
+        /** The master. */
         ObjToIntMap master;
+        
+        /** The cursor. */
         private int cursor;
+        
+        /** The remaining. */
         private int remaining;
+        
+        /** The keys. */
         private Object[] keys;
+        
+        /** The values. */
         private int[] values;
     }
 
+    /**
+     * Instantiates a new obj to int map.
+     */
     public ObjToIntMap() {
         this(4);
     }
 
+    /**
+     * Instantiates a new obj to int map.
+     *
+     * @param keyCountHint the key count hint
+     */
     public ObjToIntMap(int keyCountHint) {
         if (keyCountHint < 0) Kit.codeBug();
         // Table grow when number of stored keys >= 3/4 of max capacity
@@ -103,14 +164,30 @@ public class ObjToIntMap implements Serializable
         if (check && power < 2) Kit.codeBug();
     }
 
+    /**
+     * Checks if is empty.
+     *
+     * @return true, if is empty
+     */
     public boolean isEmpty() {
         return keyCount == 0;
     }
 
+    /**
+     * Size.
+     *
+     * @return the int
+     */
     public int size() {
         return keyCount;
     }
 
+    /**
+     * Checks for.
+     *
+     * @param key the key
+     * @return true, if successful
+     */
     public boolean has(Object key) {
         if (key == null) { key = UniqueTag.NULL_VALUE; }
         return 0 <= findIndex(key);
@@ -118,6 +195,9 @@ public class ObjToIntMap implements Serializable
 
     /**
      * Get integer value assigned with key.
+     *
+     * @param key the key
+     * @param defaultValue the default value
      * @return key integer value or defaultValue if key is absent
      */
     public int get(Object key, int defaultValue) {
@@ -131,8 +211,9 @@ public class ObjToIntMap implements Serializable
 
     /**
      * Get integer value assigned with key.
+     *
+     * @param key the key
      * @return key integer value
-     * @throws RuntimeException if key does not exist
      */
     public int getExisting(Object key) {
         if (key == null) { key = UniqueTag.NULL_VALUE; }
@@ -145,6 +226,12 @@ public class ObjToIntMap implements Serializable
         return 0;
     }
 
+    /**
+     * Put.
+     *
+     * @param key the key
+     * @param value the value
+     */
     public void put(Object key, int value) {
         if (key == null) { key = UniqueTag.NULL_VALUE; }
         int index = ensureIndex(key);
@@ -155,6 +242,9 @@ public class ObjToIntMap implements Serializable
      * If table already contains a key that equals to keyArg, return that key
      * while setting its value to zero, otherwise add keyArg with 0 value to
      * the table and return it.
+     *
+     * @param keyArg the key arg
+     * @return the object
      */
     public Object intern(Object keyArg) {
         boolean nullKey = false;
@@ -167,6 +257,11 @@ public class ObjToIntMap implements Serializable
         return (nullKey) ? null : keys[index];
     }
 
+    /**
+     * Removes the.
+     *
+     * @param key the key
+     */
     public void remove(Object key) {
         if (key == null) { key = UniqueTag.NULL_VALUE; }
         int index = findIndex(key);
@@ -176,6 +271,9 @@ public class ObjToIntMap implements Serializable
         }
     }
 
+    /**
+     * Clear.
+     */
     public void clear() {
         int i = keys.length;
         while (i != 0) {
@@ -185,6 +283,11 @@ public class ObjToIntMap implements Serializable
         occupiedCount = 0;
     }
 
+    /**
+     * New iterator.
+     *
+     * @return the iterator
+     */
     public Iterator newIterator() {
         return new Iterator(this);
     }
@@ -192,17 +295,32 @@ public class ObjToIntMap implements Serializable
     // The sole purpose of the method is to avoid accessing private fields
     // from the Iterator inner class to workaround JDK 1.1 compiler bug which
     // generates code triggering VerifierError on recent JVMs
+    /**
+     * Inits the iterator.
+     *
+     * @param i the i
+     */
     final void initIterator(Iterator i) {
         i.init(keys, values, keyCount);
     }
 
-    /** Return array of present keys */
+    /**
+     *  Return array of present keys.
+     *
+     * @return the keys
+     */
     public Object[] getKeys() {
         Object[] array = new Object[keyCount];
         getKeys(array, 0);
         return array;
     }
 
+    /**
+     * Gets the keys.
+     *
+     * @param array the array
+     * @param offset the offset
+     */
     public void getKeys(Object[] array, int offset) {
         int count = keyCount;
         for (int i = 0; count != 0; ++i) {
@@ -216,6 +334,14 @@ public class ObjToIntMap implements Serializable
         }
     }
 
+    /**
+     * Table lookup step.
+     *
+     * @param fraction the fraction
+     * @param mask the mask
+     * @param power the power
+     * @return the int
+     */
     private static int tableLookupStep(int fraction, int mask, int power) {
         int shift = 32 - 2 * power;
         if (shift >= 0) {
@@ -226,6 +352,12 @@ public class ObjToIntMap implements Serializable
         }
     }
 
+    /**
+     * Find index.
+     *
+     * @param key the key
+     * @return the int
+     */
     private int findIndex(Object key) {
         if (keys != null) {
             int hash = key.hashCode();
@@ -266,7 +398,14 @@ public class ObjToIntMap implements Serializable
 
 // Insert key that is not present to table without deleted entries
 // and enough free space
-    private int insertNewKey(Object key, int hash) {
+    /**
+ * Insert new key.
+ *
+ * @param key the key
+ * @param hash the hash
+ * @return the int
+ */
+private int insertNewKey(Object key, int hash) {
         if (check && occupiedCount != keyCount) Kit.codeBug();
         if (check && keyCount == 1 << power) Kit.codeBug();
         int fraction = hash * A;
@@ -290,6 +429,9 @@ public class ObjToIntMap implements Serializable
         return index;
     }
 
+    /**
+     * Rehash table.
+     */
     private void rehashTable() {
         if (keys == null) {
             if (check && keyCount != 0) Kit.codeBug();
@@ -326,7 +468,13 @@ public class ObjToIntMap implements Serializable
     }
 
 // Ensure key index creating one if necessary
-    private int ensureIndex(Object key) {
+    /**
+ * Ensure index.
+ *
+ * @param key the key
+ * @return the int
+ */
+private int ensureIndex(Object key) {
         int hash = key.hashCode();
         int index = -1;
         int firstDeleted = -1;
@@ -391,6 +539,12 @@ public class ObjToIntMap implements Serializable
         return index;
     }
 
+    /**
+     * Write object.
+     *
+     * @param out the out
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private void writeObject(ObjectOutputStream out)
         throws IOException
     {
@@ -407,6 +561,13 @@ public class ObjToIntMap implements Serializable
         }
     }
 
+    /**
+     * Read object.
+     *
+     * @param in the in
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws ClassNotFoundException the class not found exception
+     */
     private void readObject(ObjectInputStream in)
         throws IOException, ClassNotFoundException
     {
@@ -429,8 +590,10 @@ public class ObjToIntMap implements Serializable
 
 // A == golden_ratio * (1 << 32) = ((sqrt(5) - 1) / 2) * (1 << 32)
 // See Knuth etc.
-    private static final int A = 0x9e3779b9;
+    /** The Constant A. */
+private static final int A = 0x9e3779b9;
 
+    /** The Constant DELETED. */
     private static final Object DELETED = new Object();
 
 // Structure of kyes and values arrays (N == 1 << power):
@@ -438,15 +601,24 @@ public class ObjToIntMap implements Serializable
 // values[0 <= i < N]: value of key at keys[i]
 // values[N <= i < 2*N]: hash code of key at keys[i-N]
 
-    private transient Object[] keys;
+    /** The keys. */
+private transient Object[] keys;
+    
+    /** The values. */
     private transient int[] values;
 
+    /** The power. */
     private int power;
+    
+    /** The key count. */
     private int keyCount;
+    
+    /** The occupied count. */
     private transient int occupiedCount; // == keyCount + deleted_count
 
 // If true, enables consitency checks
-    private static final boolean check = false;
+    /** The Constant check. */
+private static final boolean check = false;
 
 /* TEST START
 

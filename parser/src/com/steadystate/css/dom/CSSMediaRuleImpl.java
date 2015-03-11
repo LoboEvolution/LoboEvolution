@@ -43,6 +43,7 @@ import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.util.LangUtils;
 import com.steadystate.css.util.ThrowCssExceptionErrorHandler;
 
+
 /**
  * Implementation of {@link CSSMediaRule}.
  *
@@ -51,19 +52,40 @@ import com.steadystate.css.util.ThrowCssExceptionErrorHandler;
  */
 public class CSSMediaRuleImpl extends AbstractCSSRuleImpl implements CSSMediaRule {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 6603734096445214651L;
 
+    /** The media_. */
     private MediaList media_;
+    
+    /** The css rules_. */
     private CSSRuleList cssRules_;
 
+    /**
+     * Sets the media.
+     *
+     * @param media the new media
+     */
     public void setMedia(final MediaList media) {
         media_ = media;
     }
 
+    /**
+     * Sets the css rules.
+     *
+     * @param cssRules the new css rules
+     */
     public void setCssRules(final CSSRuleList cssRules) {
         cssRules_ = cssRules;
     }
 
+    /**
+     * Instantiates a new CSS media rule impl.
+     *
+     * @param parentStyleSheet the parent style sheet
+     * @param parentRule the parent rule
+     * @param media the media
+     */
     public CSSMediaRuleImpl(
             final CSSStyleSheetImpl parentStyleSheet,
             final CSSRule parentRule,
@@ -72,14 +94,23 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl implements CSSMediaRul
         media_ = media;
     }
 
+    /**
+     * Instantiates a new CSS media rule impl.
+     */
     public CSSMediaRuleImpl() {
         super();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSRule#getType()
+     */
     public short getType() {
         return MEDIA_RULE;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSRule#getCssText()
+     */
     public String getCssText() {
         final StringBuilder sb = new StringBuilder("@media ");
         sb.append(getMedia().toString()).append(" {");
@@ -91,6 +122,9 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl implements CSSMediaRul
         return sb.toString();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSRule#setCssText(java.lang.String)
+     */
     public void setCssText(final String cssText) throws DOMException {
         final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
         if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
@@ -129,10 +163,16 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl implements CSSMediaRul
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSMediaRule#getMedia()
+     */
     public MediaList getMedia() {
         return media_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSMediaRule#getCssRules()
+     */
     public CSSRuleList getCssRules() {
         if (cssRules_ == null) {
             cssRules_ = new CSSRuleListImpl();
@@ -140,6 +180,9 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl implements CSSMediaRul
         return cssRules_;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSMediaRule#insertRule(java.lang.String, int)
+     */
     public int insertRule(final String rule, final int index) throws DOMException {
         final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
         if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
@@ -182,6 +225,9 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl implements CSSMediaRul
         return index;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSMediaRule#deleteRule(int)
+     */
     public void deleteRule(final int index) throws DOMException {
         final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
         if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
@@ -200,15 +246,26 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl implements CSSMediaRul
         }
     }
 
+    /**
+     * Sets the rule list.
+     *
+     * @param rules the new rule list
+     */
     public void setRuleList(final CSSRuleListImpl rules) {
         cssRules_ = rules;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return getCssText();
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -223,6 +280,9 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl implements CSSMediaRul
             && LangUtils.equals(getCssRules(), cmr.getCssRules());
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#hashCode()
+     */
     @Override
     public int hashCode() {
         int hash = super.hashCode();
@@ -231,11 +291,24 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl implements CSSMediaRul
         return hash;
     }
 
+    /**
+     * Write object.
+     *
+     * @param out the out
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private void writeObject(final ObjectOutputStream out) throws IOException {
         out.writeObject(cssRules_);
         out.writeObject(media_);
     }
 
+    /**
+     * Read object.
+     *
+     * @param in the in
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws ClassNotFoundException the class not found exception
+     */
     private void readObject(final ObjectInputStream in)
         throws IOException, ClassNotFoundException {
 

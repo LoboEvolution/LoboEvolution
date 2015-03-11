@@ -25,24 +25,36 @@ package org.lobobrowser.util;
 
 import java.util.EventObject;
 
+
 /**
+ * The Class InputProgressEvent.
+ *
  * @author J. H. S.
  */
 public class InputProgressEvent extends EventObject {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4768022316827973086L;
+	
+	/** The progress. */
 	private final int progress;
 
 	/**
-	 * @param arg0
+	 * Instantiates a new input progress event.
+	 *
+	 * @param arg0 the arg0
+	 * @param progress the progress
 	 */
 	public InputProgressEvent(Object arg0, int progress) {
 		super(arg0);
 		this.progress = progress;
 	}
 
+	/**
+	 * Gets the progress.
+	 *
+	 * @return the progress
+	 */
 	public int getProgress() {
 		return this.progress;
 	}

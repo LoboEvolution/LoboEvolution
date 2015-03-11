@@ -26,24 +26,36 @@ package org.lobobrowser.async;
 import java.util.Collection;
 import java.util.LinkedList;
 
+
 /**
  * Internal class.
- * 
+ *
  * @author J. H. S.
+ * @param <TResult> the generic type
  */
 public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>,
 		AsyncResultListener<TResult> {
+	
+	/** The ar. */
 	private AsyncResult<TResult> ar;
+	
+	/** The listeners. */
 	private final Collection<AsyncResultListener<TResult>> listeners = new LinkedList<AsyncResultListener<TResult>>();
 
+	/**
+	 * Instantiates a new async result wrapper.
+	 *
+	 * @param ar the ar
+	 */
 	public AsyncResultWrapper(AsyncResult<TResult> ar) {
 		super();
 		this.ar = ar;
 	}
 
 	/**
-	 * @param ar
-	 *            The ar to set.
+	 * Sets the async result.
+	 *
+	 * @param ar            The ar to set.
 	 */
 	public void setAsyncResult(AsyncResult<TResult> ar) {
 		AsyncResult<TResult> oldResult = this.ar;
@@ -56,6 +68,11 @@ public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>,
 		this.ar = ar;
 	}
 
+	/**
+	 * Gets the async result.
+	 *
+	 * @return the async result
+	 */
 	public AsyncResult<TResult> getAsyncResult() {
 		return this.ar;
 	}

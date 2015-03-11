@@ -51,8 +51,17 @@ import org.lobobrowser.html.layout.TableLayout;
 import org.lobobrowser.html.layout.TextAreaLayout;
 import org.lobobrowser.html.layout.ULayout;
 
+
+/**
+ * The Class HtmlLayoutMapping.
+ */
 public class HtmlLayoutMapping {
 
+	/**
+	 * Layout.
+	 *
+	 * @return the map
+	 */
 	public static Map<String, Object> layout() {
 
 		Map<String, Object> el = new HashMap<String, Object>();

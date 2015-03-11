@@ -34,30 +34,54 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.UIControl;
 
+
+/**
+ * The Class BaseControl.
+ */
 abstract class BaseControl extends JComponent implements UIControl {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(BaseControl.class
 			.getName());
+	
+	/** The Constant ZERO_DIMENSION. */
 	protected static final Dimension ZERO_DIMENSION = new Dimension(0, 0);
+	
+	/** The control element. */
 	protected final HTMLElementImpl controlElement;
+	
+	/** The ruicontrol. */
 	protected RUIControl ruicontrol;
 
 	/**
-	 * @param context
+	 * Instantiates a new base control.
+	 *
+	 * @param modelNode the model node
 	 */
 	public BaseControl(HTMLElementImpl modelNode) {
 		this.controlElement = modelNode;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.UIControl#getComponent()
+	 */
 	public Component getComponent() {
 		return this;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.UIControl#setRUIControl(org.lobobrowser.html.control.RUIControl)
+	 */
 	public void setRUIControl(RUIControl ruicontrol) {
 		this.ruicontrol = ruicontrol;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.UIControl#getVAlign()
+	 */
 	public int getVAlign() {
 		return RElement.VALIGN_BASELINE;
 	}
@@ -86,6 +110,9 @@ abstract class BaseControl extends JComponent implements UIControl {
 		return this.getBackground();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.UIControl#reset(int, int)
+	 */
 	public void reset(int availWidth, int availHeight) {
 	}
 }

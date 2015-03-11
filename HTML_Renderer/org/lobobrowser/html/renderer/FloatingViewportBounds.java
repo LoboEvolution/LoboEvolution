@@ -20,21 +20,35 @@
  */
 package org.lobobrowser.html.renderer;
 
+
+/**
+ * The Class FloatingViewportBounds.
+ */
 class FloatingViewportBounds implements FloatingBounds {
+	
+	/** The prev bounds. */
 	private final FloatingBounds prevBounds;
+	
+	/** The left float. */
 	private final boolean leftFloat;
+	
+	/** The y. */
 	private final int y;
+	
+	/** The offset from border. */
 	private final int offsetFromBorder;
+	
+	/** The height. */
 	private final int height;
 
 	/**
-	 * 
-	 * @param prevBounds
-	 * @param leftFloat
-	 * @param y
-	 * @param offsetFromBorder
-	 *            Width of floating box, including padding insets.
-	 * @param height
+	 * Instantiates a new floating viewport bounds.
+	 *
+	 * @param prevBounds the prev bounds
+	 * @param leftFloat the left float
+	 * @param y the y
+	 * @param offsetFromBorder            Width of floating box, including padding insets.
+	 * @param height the height
 	 */
 	public FloatingViewportBounds(FloatingBounds prevBounds, boolean leftFloat,
 			int y, int offsetFromBorder, int height) {
@@ -45,6 +59,9 @@ class FloatingViewportBounds implements FloatingBounds {
 		this.height = height;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getLeft(int)
+	 */
 	public int getLeft(int y) {
 		int left = 0;
 		if (this.leftFloat && y >= this.y && y < this.y + height) {
@@ -62,6 +79,9 @@ class FloatingViewportBounds implements FloatingBounds {
 
 	/**
 	 * The offset from the right edge, not counting padding.
+	 *
+	 * @param y the y
+	 * @return the right
 	 */
 	public int getRight(int y) {
 		int right = 0;
@@ -78,6 +98,9 @@ class FloatingViewportBounds implements FloatingBounds {
 		return right;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getClearY(int)
+	 */
 	public int getClearY(int y) {
 		int cleary = Math.max(y, this.y + this.height);
 		FloatingBounds prev = this.prevBounds;
@@ -90,6 +113,9 @@ class FloatingViewportBounds implements FloatingBounds {
 		return cleary;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getFirstClearY(int)
+	 */
 	public int getFirstClearY(int y) {
 		int clearY = y;
 		FloatingBounds prev = this.prevBounds;
@@ -105,6 +131,9 @@ class FloatingViewportBounds implements FloatingBounds {
 		return clearY;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getLeftClearY(int)
+	 */
 	public int getLeftClearY(int y) {
 		int cleary;
 		if (this.leftFloat) {
@@ -122,6 +151,9 @@ class FloatingViewportBounds implements FloatingBounds {
 		return cleary;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getRightClearY(int)
+	 */
 	public int getRightClearY(int y) {
 		int cleary;
 		if (!this.leftFloat) {
@@ -139,6 +171,9 @@ class FloatingViewportBounds implements FloatingBounds {
 		return cleary;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getMaxY()
+	 */
 	public int getMaxY() {
 		int maxY = this.y + this.height;
 		FloatingBounds prev = this.prevBounds;
@@ -151,6 +186,9 @@ class FloatingViewportBounds implements FloatingBounds {
 		return maxY;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object other) {
 		// Important for layout caching.
 		if (other == this) {
@@ -168,6 +206,9 @@ class FloatingViewportBounds implements FloatingBounds {
 						this.prevBounds);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	public int hashCode() {
 		return (this.leftFloat ? 1 : 0) ^ this.y ^ this.height
 				^ this.offsetFromBorder;

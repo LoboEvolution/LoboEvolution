@@ -8,6 +8,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * Java reflection of JavaScript exceptions.
  * Instances of this class are thrown by the JavaScript 'throw' keyword.
@@ -16,11 +17,15 @@ package org.mozilla.javascript;
  */
 public class JavaScriptException extends RhinoException
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -7666130513694669293L;
 
     /**
-     * @deprecated
-     * Use {@link WrappedException#WrappedException(Throwable)} to report
+     * Instantiates a new java script exception.
+     *
+     * @param value the value
+     * @deprecated Use {@link WrappedException#WrappedException(Throwable)} to report
      * exceptions in Java code.
      */
     public JavaScriptException(Object value)
@@ -29,9 +34,11 @@ public class JavaScriptException extends RhinoException
     }
 
     /**
-     * Create a JavaScript exception wrapping the given JavaScript value
+     * Create a JavaScript exception wrapping the given JavaScript value.
      *
      * @param value the JavaScript value thrown.
+     * @param sourceName the source name
+     * @param lineNumber the line number
      */
     public JavaScriptException(Object value, String sourceName, int lineNumber) {
         recordErrorOrigin(sourceName, lineNumber, null, 0);
@@ -58,6 +65,9 @@ public class JavaScriptException extends RhinoException
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.RhinoException#details()
+     */
     @Override
     public String details()
     {
@@ -79,6 +89,8 @@ public class JavaScriptException extends RhinoException
     }
 
     /**
+     * Gets the value.
+     *
      * @return the value wrapped by this exception
      */
     public Object getValue()
@@ -87,6 +99,9 @@ public class JavaScriptException extends RhinoException
     }
 
     /**
+     * Gets the source name.
+     *
+     * @return the source name
      * @deprecated Use {@link RhinoException#sourceName()} from the super class.
      */
     public String getSourceName()
@@ -95,6 +110,9 @@ public class JavaScriptException extends RhinoException
     }
 
     /**
+     * Gets the line number.
+     *
+     * @return the line number
      * @deprecated Use {@link RhinoException#lineNumber()} from the super class.
      */
     public int getLineNumber()
@@ -102,5 +120,6 @@ public class JavaScriptException extends RhinoException
         return lineNumber();
     }
 
+    /** The value. */
     private Object value;
 }

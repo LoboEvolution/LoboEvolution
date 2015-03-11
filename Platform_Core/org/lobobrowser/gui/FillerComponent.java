@@ -25,11 +25,19 @@ import java.awt.Dimension;
 
 import javax.swing.Box.Filler;
 
+
 /**
  * A component used in conjunction with <code>BoxLayot</code>.
  *
  */
 public class FillerComponent extends Filler {
+	
+	/**
+	 * Instantiates a new filler component.
+	 *
+	 * @param wrappedComponent the wrapped component
+	 * @param forMax the for max
+	 */
 	public FillerComponent(Component wrappedComponent, boolean forMax) {
 		super(new Dimension(0, 0), forMax ? new Dimension(0, 0)
 				: new Dimension(Short.MAX_VALUE, Short.MAX_VALUE),
@@ -38,6 +46,14 @@ public class FillerComponent extends Filler {
 		this.add(wrappedComponent);
 	}
 
+	/**
+	 * Instantiates a new filler component.
+	 *
+	 * @param wrappedComponent the wrapped component
+	 * @param minSize the min size
+	 * @param prefSize the pref size
+	 * @param maxSize the max size
+	 */
 	public FillerComponent(Component wrappedComponent, Dimension minSize,
 			Dimension prefSize, Dimension maxSize) {
 		super(minSize, prefSize, maxSize);

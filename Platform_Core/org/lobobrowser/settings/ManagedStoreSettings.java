@@ -28,10 +28,20 @@ import java.util.logging.Logger;
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
 
+
+/**
+ * The Class ManagedStoreSettings.
+ */
 class ManagedStoreSettings implements Serializable {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(ManagedStoreSettings.class.getName());
+	
+	/** The Constant instance. */
 	private static final ManagedStoreSettings instance;
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574500000020705L;
 
 	static {
@@ -51,11 +61,16 @@ class ManagedStoreSettings implements Serializable {
 		instance = ins;
 	}
 
+	/**
+	 * Instantiates a new managed store settings.
+	 */
 	private ManagedStoreSettings() {
 	}
 
 	/**
 	 * Gets the class singleton.
+	 *
+	 * @return single instance of ManagedStoreSettings
 	 */
 	public static ManagedStoreSettings getInstance() {
 		SecurityManager sm = System.getSecurityManager();
@@ -65,6 +80,9 @@ class ManagedStoreSettings implements Serializable {
 		return instance;
 	}
 
+	/**
+	 * Save.
+	 */
 	public void save() {
 		try {
 			StorageManager.getInstance().saveSettings(

@@ -13,36 +13,63 @@ import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
 
+
+/**
+ * The Class NativeArrayBuffer.
+ */
 public class NativeArrayBuffer
     extends IdScriptableObject
 {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 3110411773054879549L;
 
+    /** The Constant CLASS_NAME. */
     public static final String CLASS_NAME = "ArrayBuffer";
 
+    /** The Constant EMPTY_BUF. */
     private static final byte[] EMPTY_BUF = new byte[0];
 
+    /** The Constant EMPTY_BUFFER. */
     public static final NativeArrayBuffer EMPTY_BUFFER = new NativeArrayBuffer();
 
+    /** The buffer. */
     final byte[] buffer;
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getClassName()
+     */
     @Override
     public String getClassName()
     {
         return CLASS_NAME;
     }
 
+    /**
+     * Inits the.
+     *
+     * @param scope the scope
+     * @param sealed the sealed
+     */
     public static void init(Scriptable scope, boolean sealed)
     {
         NativeArrayBuffer na = new NativeArrayBuffer();
         na.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
+    /**
+     * Instantiates a new native array buffer.
+     */
     public NativeArrayBuffer()
     {
         buffer = EMPTY_BUF;
     }
 
+    /**
+     * Instantiates a new native array buffer.
+     *
+     * @param len the len
+     */
     public NativeArrayBuffer(int len)
     {
         if (len < 0) {
@@ -55,12 +82,24 @@ public class NativeArrayBuffer
         }
     }
 
+    /**
+     * Gets the length.
+     *
+     * @return the length
+     */
     int getLength() {
         return buffer.length;
     }
 
     // Actual implementations of actual code
 
+    /**
+     * Slice.
+     *
+     * @param s the s
+     * @param e the e
+     * @return the native array buffer
+     */
     NativeArrayBuffer slice(int s, int e)
     {
         // Handle negative start and and as relative to start
@@ -76,6 +115,9 @@ public class NativeArrayBuffer
 
     // Function-calling dispatcher
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -101,6 +143,13 @@ public class NativeArrayBuffer
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
+    /**
+     * Real this.
+     *
+     * @param thisObj the this obj
+     * @param f the f
+     * @return the native array buffer
+     */
     private static NativeArrayBuffer realThis(Scriptable thisObj, IdFunctionObject f)
     {
         if (!(thisObj instanceof NativeArrayBuffer))
@@ -108,11 +157,21 @@ public class NativeArrayBuffer
         return (NativeArrayBuffer)thisObj;
     }
 
+    /**
+     * Checks if is arg.
+     *
+     * @param args the args
+     * @param i the i
+     * @return true, if is arg
+     */
     private static boolean isArg(Object[] args, int i)
     {
         return ((args.length > i) && !Undefined.instance.equals(args[i]));
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
+     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -128,7 +187,10 @@ public class NativeArrayBuffer
 
 // #string_id_map#
 
-    @Override
+    /* (non-Javadoc)
+ * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
+ */
+@Override
     protected int findPrototypeId(String s)
     {
         int id;
@@ -146,6 +208,7 @@ public class NativeArrayBuffer
     }
 
     // Table of all functions
+    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         Id_constructor          = 1,
         Id_slice                = 2,
@@ -156,8 +219,12 @@ public class NativeArrayBuffer
 
     // Constructor (aka static) functions here
 
-    private static final int ConstructorId_isView = -Id_isView;
+    /** The Constant ConstructorId_isView. */
+private static final int ConstructorId_isView = -Id_isView;
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#fillConstructorProperties(org.mozilla.javascript.IdFunctionObject)
+     */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -166,12 +233,18 @@ public class NativeArrayBuffer
 
     // Properties here
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#getMaxInstanceId()
+     */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#getInstanceIdName(int)
+     */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -179,6 +252,9 @@ public class NativeArrayBuffer
         return super.getInstanceIdName(id);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#getInstanceIdValue(int)
+     */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -188,6 +264,9 @@ public class NativeArrayBuffer
         return super.getInstanceIdValue(id);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#findInstanceIdInfo(java.lang.String)
+     */
     @Override
     protected int findInstanceIdInfo(String s)
     {
@@ -198,6 +277,7 @@ public class NativeArrayBuffer
     }
 
     // Table of all properties
+    /** The Constant MAX_INSTANCE_ID. */
     private static final int
         Id_byteLength           = 1,
         MAX_INSTANCE_ID         = Id_byteLength;

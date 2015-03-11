@@ -8,7 +8,16 @@
 
 package org.mozilla.javascript;
 
+
 /**
+ * The listener interface for receiving context events.
+ * The class that is interested in processing a context
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addContextListener</code> method. When
+ * the context event occurs, that object's appropriate
+ * method is invoked.
+ *
  * @deprecated Embeddings that wish to customize newly created
  * {@link Context} instances should implement
  * {@link ContextFactory.Listener}.
@@ -17,11 +26,17 @@ public interface ContextListener extends ContextFactory.Listener
 {
 
     /**
+     * Context entered.
+     *
+     * @param cx the cx
      * @deprecated Rhino runtime never calls the method.
      */
     public void contextEntered(Context cx);
 
     /**
+     * Context exited.
+     *
+     * @param cx the cx
      * @deprecated Rhino runtime never calls the method.
      */
     public void contextExited(Context cx);

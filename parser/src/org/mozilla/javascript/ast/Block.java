@@ -9,6 +9,7 @@ package org.mozilla.javascript.ast;
 import org.mozilla.javascript.Node;
 import org.mozilla.javascript.Token;
 
+
 /**
  * A block statement delimited by curly braces.  The node position is the
  * position of the open-curly, and the length extends to the position of
@@ -23,24 +24,43 @@ public class Block extends AstNode {
         this.type = Token.BLOCK;
     }
 
+    /**
+     * Instantiates a new block.
+     */
     public Block() {
     }
 
+    /**
+     * Instantiates a new block.
+     *
+     * @param pos the pos
+     */
     public Block(int pos) {
         super(pos);
     }
 
+    /**
+     * Instantiates a new block.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public Block(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Alias for {@link #addChild}.
+     *
+     * @param statement the statement
      */
     public void addStatement(AstNode statement) {
         addChild(statement);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -54,6 +74,9 @@ public class Block extends AstNode {
         return sb.toString();
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.AstNode#visit(org.mozilla.javascript.ast.NodeVisitor)
+     */
     @Override
     public void visit(NodeVisitor v) {
         if (v.visit(this)) {

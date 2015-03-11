@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Create a grid of frames. See the FRAMESET element definition in HTML 4.01.
  * <p>
@@ -39,27 +40,36 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLFrameSetElement extends HTMLElement {
+	
 	/**
 	 * The number of columns of frames in the frameset. See the cols attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the cols
 	 */
 	public String getCols();
 
 	/**
 	 * The number of columns of frames in the frameset. See the cols attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param cols the new cols
 	 */
 	public void setCols(String cols);
 
 	/**
 	 * The number of rows of frames in the frameset. See the rows attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the rows
 	 */
 	public String getRows();
 
 	/**
 	 * The number of rows of frames in the frameset. See the rows attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param rows the new rows
 	 */
 	public void setRows(String rows);
 

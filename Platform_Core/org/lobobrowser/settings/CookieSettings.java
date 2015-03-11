@@ -27,10 +27,20 @@ import java.util.logging.Logger;
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
 
+
+/**
+ * The Class CookieSettings.
+ */
 class CookieSettings implements Serializable {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CookieSettings.class
 			.getName());
+	
+	/** The Constant instance. */
 	private static final CookieSettings instance;
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574500005000503L;
 
 	static {
@@ -49,11 +59,16 @@ class CookieSettings implements Serializable {
 		instance = ins;
 	}
 
+	/**
+	 * Instantiates a new cookie settings.
+	 */
 	private CookieSettings() {
 	}
 
 	/**
 	 * Gets the class singleton.
+	 *
+	 * @return single instance of CookieSettings
 	 */
 	public static CookieSettings getInstance() {
 		SecurityManager sm = System.getSecurityManager();

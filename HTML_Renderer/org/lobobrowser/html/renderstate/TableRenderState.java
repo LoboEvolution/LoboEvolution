@@ -31,26 +31,50 @@ import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.ColorFactory;
 
+
+/**
+ * The Class TableRenderState.
+ */
 public class TableRenderState extends StyleSheetRenderState {
+	
+	/**
+	 * Instantiates a new table render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param element the element
+	 */
 	public TableRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getTextBackgroundColor()
+	 */
 	public Color getTextBackgroundColor() {
 		return super.getTextBackgroundColor();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getDefaultDisplay()
+	 */
 	protected int getDefaultDisplay() {
 		return DISPLAY_TABLE;
 	}
 
+	/** The background info. */
 	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#invalidate()
+	 */
 	public void invalidate() {
 		super.invalidate();
 		this.backgroundInfo = INVALID_BACKGROUND_INFO;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getBackgroundInfo()
+	 */
 	public BackgroundInfo getBackgroundInfo() {
 		BackgroundInfo binfo = this.backgroundInfo;
 		if (binfo != INVALID_BACKGROUND_INFO) {
@@ -82,6 +106,9 @@ public class TableRenderState extends StyleSheetRenderState {
 		return binfo;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getBorderInfo()
+	 */
 	public BorderInfo getBorderInfo() {
 		BorderInfo binfo = this.borderInfo;
 		if (binfo != INVALID_BORDER_INFO) {

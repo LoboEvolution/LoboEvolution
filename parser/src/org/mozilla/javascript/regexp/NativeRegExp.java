@@ -19,6 +19,7 @@ import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.TopLevel;
 import org.mozilla.javascript.Undefined;
 
+
 /**
  * This class implements the RegExp native object.
  *
@@ -37,79 +38,189 @@ import org.mozilla.javascript.Undefined;
 
 public class NativeRegExp extends IdScriptableObject implements Function
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 4965263491464903264L;
 
+    /** The Constant REGEXP_TAG. */
     private static final Object REGEXP_TAG = new Object();
 
+    /** The Constant JSREG_GLOB. */
     public static final int JSREG_GLOB = 0x1;       // 'g' flag: global
+    
+    /** The Constant JSREG_FOLD. */
     public static final int JSREG_FOLD = 0x2;       // 'i' flag: fold
+    
+    /** The Constant JSREG_MULTILINE. */
     public static final int JSREG_MULTILINE = 0x4;  // 'm' flag: multiline
 
     //type of match to perform
+    /** The Constant TEST. */
     public static final int TEST = 0;
+    
+    /** The Constant MATCH. */
     public static final int MATCH = 1;
+    
+    /** The Constant PREFIX. */
     public static final int PREFIX = 2;
 
+    /** The Constant debug. */
     private static final boolean debug = false;
 
+    /** The Constant REOP_SIMPLE_START. */
     private static final byte REOP_SIMPLE_START  = 1;  /* start of 'simple opcodes' */
+    
+    /** The Constant REOP_EMPTY. */
     private static final byte REOP_EMPTY         = 1;  /* match rest of input against rest of r.e. */
+    
+    /** The Constant REOP_BOL. */
     private static final byte REOP_BOL           = 2;  /* beginning of input (or line if multiline) */
+    
+    /** The Constant REOP_EOL. */
     private static final byte REOP_EOL           = 3;  /* end of input (or line if multiline) */
+    
+    /** The Constant REOP_WBDRY. */
     private static final byte REOP_WBDRY         = 4;  /* match "" at word boundary */
+    
+    /** The Constant REOP_WNONBDRY. */
     private static final byte REOP_WNONBDRY      = 5;  /* match "" at word non-boundary */
+    
+    /** The Constant REOP_DOT. */
     private static final byte REOP_DOT           = 6;  /* stands for any character */
+    
+    /** The Constant REOP_DIGIT. */
     private static final byte REOP_DIGIT         = 7;  /* match a digit char: [0-9] */
+    
+    /** The Constant REOP_NONDIGIT. */
     private static final byte REOP_NONDIGIT      = 8;  /* match a non-digit char: [^0-9] */
+    
+    /** The Constant REOP_ALNUM. */
     private static final byte REOP_ALNUM         = 9;  /* match an alphanumeric char: [0-9a-z_A-Z] */
+    
+    /** The Constant REOP_NONALNUM. */
     private static final byte REOP_NONALNUM      = 10; /* match a non-alphanumeric char: [^0-9a-z_A-Z] */
+    
+    /** The Constant REOP_SPACE. */
     private static final byte REOP_SPACE         = 11; /* match a whitespace char */
+    
+    /** The Constant REOP_NONSPACE. */
     private static final byte REOP_NONSPACE      = 12; /* match a non-whitespace char */
+    
+    /** The Constant REOP_BACKREF. */
     private static final byte REOP_BACKREF       = 13; /* back-reference (e.g., \1) to a parenthetical */
+    
+    /** The Constant REOP_FLAT. */
     private static final byte REOP_FLAT          = 14; /* match a flat string */
+    
+    /** The Constant REOP_FLAT1. */
     private static final byte REOP_FLAT1         = 15; /* match a single char */
+    
+    /** The Constant REOP_FLATi. */
     private static final byte REOP_FLATi         = 16; /* case-independent REOP_FLAT */
+    
+    /** The Constant REOP_FLAT1i. */
     private static final byte REOP_FLAT1i        = 17; /* case-independent REOP_FLAT1 */
+    
+    /** The Constant REOP_UCFLAT1. */
     private static final byte REOP_UCFLAT1       = 18; /* single Unicode char */
+    
+    /** The Constant REOP_UCFLAT1i. */
     private static final byte REOP_UCFLAT1i      = 19; /* case-independent REOP_UCFLAT1 */
 //    private static final byte REOP_UCFLAT        = 20; /* flat Unicode string; len immediate counts chars */
 //    private static final byte REOP_UCFLATi       = 21; /* case-independent REOP_UCFLAT */
-    private static final byte REOP_CLASS         = 22; /* character class with index */
+    /** The Constant REOP_CLASS. */
+private static final byte REOP_CLASS         = 22; /* character class with index */
+    
+    /** The Constant REOP_NCLASS. */
     private static final byte REOP_NCLASS        = 23; /* negated character class with index */
+    
+    /** The Constant REOP_SIMPLE_END. */
     private static final byte REOP_SIMPLE_END    = 23; /* end of 'simple opcodes' */
+    
+    /** The Constant REOP_QUANT. */
     private static final byte REOP_QUANT         = 25; /* quantified atom: atom{1,2} */
+    
+    /** The Constant REOP_STAR. */
     private static final byte REOP_STAR          = 26; /* zero or more occurrences of kid */
+    
+    /** The Constant REOP_PLUS. */
     private static final byte REOP_PLUS          = 27; /* one or more occurrences of kid */
+    
+    /** The Constant REOP_OPT. */
     private static final byte REOP_OPT           = 28; /* optional subexpression in kid */
+    
+    /** The Constant REOP_LPAREN. */
     private static final byte REOP_LPAREN        = 29; /* left paren bytecode: kid is u.num'th sub-regexp */
+    
+    /** The Constant REOP_RPAREN. */
     private static final byte REOP_RPAREN        = 30; /* right paren bytecode */
+    
+    /** The Constant REOP_ALT. */
     private static final byte REOP_ALT           = 31; /* alternative subexpressions in kid and next */
+    
+    /** The Constant REOP_JUMP. */
     private static final byte REOP_JUMP          = 32; /* for deoptimized closure loops */
 //    private static final byte REOP_DOTSTAR       = 33; /* optimize .* to use a single opcode */
 //    private static final byte REOP_ANCHOR        = 34; /* like .* but skips left context to unanchored r.e. */
 //    private static final byte REOP_EOLONLY       = 35; /* $ not preceded by any pattern */
 //    private static final byte REOP_BACKREFi      = 37; /* case-independent REOP_BACKREF */
 //    private static final byte REOP_LPARENNON     = 40; /* non-capturing version of REOP_LPAREN */
-    private static final byte REOP_ASSERT        = 41; /* zero width positive lookahead assertion */
+    /** The Constant REOP_ASSERT. */
+private static final byte REOP_ASSERT        = 41; /* zero width positive lookahead assertion */
+    
+    /** The Constant REOP_ASSERT_NOT. */
     private static final byte REOP_ASSERT_NOT    = 42; /* zero width negative lookahead assertion */
+    
+    /** The Constant REOP_ASSERTTEST. */
     private static final byte REOP_ASSERTTEST    = 43; /* sentinel at end of assertion child */
+    
+    /** The Constant REOP_ASSERTNOTTEST. */
     private static final byte REOP_ASSERTNOTTEST = 44; /* sentinel at end of !assertion child */
+    
+    /** The Constant REOP_MINIMALSTAR. */
     private static final byte REOP_MINIMALSTAR   = 45; /* non-greedy version of * */
+    
+    /** The Constant REOP_MINIMALPLUS. */
     private static final byte REOP_MINIMALPLUS   = 46; /* non-greedy version of + */
+    
+    /** The Constant REOP_MINIMALOPT. */
     private static final byte REOP_MINIMALOPT    = 47; /* non-greedy version of ? */
+    
+    /** The Constant REOP_MINIMALQUANT. */
     private static final byte REOP_MINIMALQUANT  = 48; /* non-greedy version of {} */
+    
+    /** The Constant REOP_ENDCHILD. */
     private static final byte REOP_ENDCHILD      = 49; /* sentinel at end of quantifier child */
+    
+    /** The Constant REOP_REPEAT. */
     private static final byte REOP_REPEAT        = 51; /* directs execution of greedy quantifier */
+    
+    /** The Constant REOP_MINIMALREPEAT. */
     private static final byte REOP_MINIMALREPEAT = 52; /* directs execution of non-greedy quantifier */
+    
+    /** The Constant REOP_ALTPREREQ. */
     private static final byte REOP_ALTPREREQ     = 53; /* prerequisite for ALT, either of two chars */
+    
+    /** The Constant REOP_ALTPREREQi. */
     private static final byte REOP_ALTPREREQi    = 54; /* case-independent REOP_ALTPREREQ */
+    
+    /** The Constant REOP_ALTPREREQ2. */
     private static final byte REOP_ALTPREREQ2    = 55; /* prerequisite for ALT, a char or a class */
 //    private static final byte REOP_ENDALT        = 56; /* end of final alternate */
-    private static final byte REOP_END           = 57;
+    /** The Constant REOP_END. */
+private static final byte REOP_END           = 57;
 
+    /** The Constant ANCHOR_BOL. */
     private static final int ANCHOR_BOL = -2;
 
 
+    /**
+     * Inits the.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param sealed the sealed
+     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
 
@@ -136,6 +247,12 @@ public class NativeRegExp extends IdScriptableObject implements Function
         defineProperty(scope, "RegExp", ctor, ScriptableObject.DONTENUM);
     }
 
+    /**
+     * Instantiates a new native reg exp.
+     *
+     * @param scope the scope
+     * @param regexpCompiled the regexp compiled
+     */
     NativeRegExp(Scriptable scope, RECompiled regexpCompiled)
     {
         this.re = regexpCompiled;
@@ -143,6 +260,9 @@ public class NativeRegExp extends IdScriptableObject implements Function
         ScriptRuntime.setBuiltinProtoAndParent(this, scope, TopLevel.Builtins.RegExp);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getClassName()
+     */
     @Override
     public String getClassName()
     {
@@ -151,8 +271,9 @@ public class NativeRegExp extends IdScriptableObject implements Function
 
     /**
      * Gets the value to be returned by the typeof operator called on this object.
-     * @see org.mozilla.javascript.ScriptableObject#getTypeOf()
+     *
      * @return "object"
+     * @see org.mozilla.javascript.ScriptableObject#getTypeOf()
      */
     @Override
     public String getTypeOf()
@@ -160,17 +281,31 @@ public class NativeRegExp extends IdScriptableObject implements Function
     	return "object";
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Function#call(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
     {
         return execSub(cx, scope, args, MATCH);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Function#construct(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
         return (Scriptable)execSub(cx, scope, args, MATCH);
     }
 
+    /**
+     * Compile.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param args the args
+     * @return the scriptable
+     */
     Scriptable compile(Context cx, Scriptable scope, Object[] args)
     {
         if (args.length > 0 && args[0] instanceof NativeRegExp) {
@@ -194,6 +329,9 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return this;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString()
     {
@@ -215,13 +353,28 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return buf.toString();
     }
 
+    /**
+     * Instantiates a new native reg exp.
+     */
     NativeRegExp() {  }
 
+    /**
+     * Gets the impl.
+     *
+     * @param cx the cx
+     * @return the impl
+     */
     private static RegExpImpl getImpl(Context cx)
     {
         return (RegExpImpl) ScriptRuntime.getRegExpProxy(cx);
     }
 
+    /**
+     * Escape reg exp.
+     *
+     * @param src the src
+     * @return the string
+     */
     private static String escapeRegExp(Object src) {
         String s = ScriptRuntime.toString(src);
         // Escape any naked slashes in regexp source, see bug #510265
@@ -246,6 +399,15 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return s;
     }
 
+    /**
+     * Exec sub.
+     *
+     * @param cx the cx
+     * @param scopeObj the scope obj
+     * @param args the args
+     * @param matchType the match type
+     * @return the object
+     */
     private Object execSub(Context cx, Scriptable scopeObj,
                            Object[] args, int matchType)
     {
@@ -280,6 +442,15 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return rval;
     }
 
+    /**
+     * Compile re.
+     *
+     * @param cx the cx
+     * @param str the str
+     * @param global the global
+     * @param flat the flat
+     * @return the RE compiled
+     */
     static RECompiled compileRE(Context cx, String str, String global, boolean flat)
     {
         RECompiled regexp = new RECompiled(str);
@@ -382,26 +553,56 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return regexp;
     }
 
+    /**
+     * Checks if is digit.
+     *
+     * @param c the c
+     * @return true, if is digit
+     */
     static boolean isDigit(char c)
     {
         return '0' <= c && c <= '9';
     }
 
+    /**
+     * Checks if is word.
+     *
+     * @param c the c
+     * @return true, if is word
+     */
     private static boolean isWord(char c)
     {
         return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || isDigit(c) || c == '_';
     }
 
+    /**
+     * Checks if is control letter.
+     *
+     * @param c the c
+     * @return true, if is control letter
+     */
     private static boolean isControlLetter(char c)
     {
         return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z');
     }
 
+    /**
+     * Checks if is line term.
+     *
+     * @param c the c
+     * @return true, if is line term
+     */
     private static boolean isLineTerm(char c)
     {
         return ScriptRuntime.isJSLineTerminator(c);
     }
 
+    /**
+     * Checks if is RE white space.
+     *
+     * @param c the c
+     * @return true, if is RE white space
+     */
     private static boolean isREWhiteSpace(int c)
     {
         return ScriptRuntime.isJSWhitespaceOrLineTerminator(c);
@@ -418,6 +619,12 @@ public class NativeRegExp extends IdScriptableObject implements Function
      *    code point value is less than decimal 128, then return ch.
      * 6. Return cu.
      */
+    /**
+     * Upcase.
+     *
+     * @param ch the ch
+     * @return the char
+     */
     private static char upcase(char ch)
     {
         if (ch < 128) {
@@ -430,6 +637,12 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return (cu < 128) ? ch : cu;
     }
 
+    /**
+     * Downcase.
+     *
+     * @param ch the ch
+     * @return the char
+     */
     private static char downcase(char ch)
     {
         if (ch < 128) {
@@ -446,7 +659,13 @@ public class NativeRegExp extends IdScriptableObject implements Function
 /*
  * Validates and converts hex ascii value.
  */
-    private static int toASCIIHexDigit(int c)
+    /**
+ * To ascii hex digit.
+ *
+ * @param c the c
+ * @return the int
+ */
+private static int toASCIIHexDigit(int c)
     {
         if (c < '0')
             return -1;
@@ -466,7 +685,13 @@ public class NativeRegExp extends IdScriptableObject implements Function
  *  regexp:     altern                  A regular expression is one or more
  *              altern '|' regexp       alternatives separated by vertical bar.
  */
-    private static boolean parseDisjunction(CompilerState state)
+    /**
+ * Parses the disjunction.
+ *
+ * @param state the state
+ * @return true, if successful
+ */
+private static boolean parseDisjunction(CompilerState state)
     {
         if (!parseAlternative(state))
             return false;
@@ -521,7 +746,13 @@ public class NativeRegExp extends IdScriptableObject implements Function
  *  altern:     item                    An alternative is one or more items,
  *              item altern             concatenated together.
  */
-    private static boolean parseAlternative(CompilerState state)
+    /**
+ * Parses the alternative.
+ *
+ * @param state the state
+ * @return true, if successful
+ */
+private static boolean parseAlternative(CompilerState state)
     {
         RENode headTerm = null;
         RENode tailTerm = null;
@@ -550,6 +781,16 @@ public class NativeRegExp extends IdScriptableObject implements Function
     }
 
     /* calculate the total size of the bitmap required for a class expression */
+    /**
+     * Calculate bitmap size.
+     *
+     * @param state the state
+     * @param target the target
+     * @param src the src
+     * @param index the index
+     * @param end the end
+     * @return true, if successful
+     */
     private static boolean
     calculateBitmapSize(CompilerState state, RENode target, char[] src,
                         int index, int end)
@@ -766,6 +1007,12 @@ public class NativeRegExp extends IdScriptableObject implements Function
      *                                      atom right-hand sides.
      */
 
+    /**
+     * Do flat.
+     *
+     * @param state the state
+     * @param c the c
+     */
     private static void doFlat(CompilerState state, char c)
     {
         state.result = new RENode(REOP_FLAT);
@@ -775,6 +1022,15 @@ public class NativeRegExp extends IdScriptableObject implements Function
         state.progLength += 3;
     }
 
+    /**
+     * Gets the decimal value.
+     *
+     * @param c the c
+     * @param state the state
+     * @param maxValue the max value
+     * @param overflowMessageId the overflow message id
+     * @return the decimal value
+     */
     private static int
     getDecimalValue(char c, CompilerState state, int maxValue,
                     String overflowMessageId)
@@ -805,6 +1061,12 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return value;
     }
 
+    /**
+     * Parses the term.
+     *
+     * @param state the state
+     * @return true, if successful
+     */
     private static boolean
     parseTerm(CompilerState state)
     {
@@ -1196,17 +1458,39 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return true;
     }
 
+    /**
+     * Resolve forward jump.
+     *
+     * @param array the array
+     * @param from the from
+     * @param pc the pc
+     */
     private static void resolveForwardJump(byte[] array, int from, int pc)
     {
         if (from > pc) throw Kit.codeBug();
         addIndex(array, from, pc - from);
     }
 
+    /**
+     * Gets the offset.
+     *
+     * @param array the array
+     * @param pc the pc
+     * @return the offset
+     */
     private static int getOffset(byte[] array, int pc)
     {
         return getIndex(array, pc);
     }
 
+    /**
+     * Adds the index.
+     *
+     * @param array the array
+     * @param pc the pc
+     * @param index the index
+     * @return the int
+     */
     private static int addIndex(byte[] array, int pc, int index)
     {
         if (index < 0) throw Kit.codeBug();
@@ -1217,13 +1501,30 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return pc + 2;
     }
 
+    /**
+     * Gets the index.
+     *
+     * @param array the array
+     * @param pc the pc
+     * @return the index
+     */
     private static int getIndex(byte[] array, int pc)
     {
         return ((array[pc] & 0xFF) << 8) | (array[pc + 1] & 0xFF);
     }
 
+    /** The Constant INDEX_LEN. */
     private static final int INDEX_LEN  = 2;
 
+    /**
+     * Emit re bytecode.
+     *
+     * @param state the state
+     * @param re the re
+     * @param pc the pc
+     * @param t the t
+     * @return the int
+     */
     private static int
     emitREBytecode(CompilerState state, RECompiled re, int pc, RENode t)
     {
@@ -1362,6 +1663,17 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return pc;
     }
 
+    /**
+     * Push prog state.
+     *
+     * @param gData the g data
+     * @param min the min
+     * @param max the max
+     * @param cp the cp
+     * @param backTrackLastToSave the back track last to save
+     * @param continuationOp the continuation op
+     * @param continuationPc the continuation pc
+     */
     private static void
     pushProgState(REGlobalData gData, int min, int max, int cp,
                   REBackTrackData backTrackLastToSave,
@@ -1372,6 +1684,12 @@ public class NativeRegExp extends IdScriptableObject implements Function
                                               continuationOp, continuationPc);
     }
 
+    /**
+     * Pop prog state.
+     *
+     * @param gData the g data
+     * @return the RE prog state
+     */
     private static REProgState
     popProgState(REGlobalData gData)
     {
@@ -1380,6 +1698,13 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return state;
     }
 
+    /**
+     * Push back track state.
+     *
+     * @param gData the g data
+     * @param op the op
+     * @param pc the pc
+     */
     private static void
     pushBackTrackState(REGlobalData gData, byte op, int pc)
     {
@@ -1388,6 +1713,16 @@ public class NativeRegExp extends IdScriptableObject implements Function
                 gData.cp, state.continuationOp, state.continuationPc);
     }
 
+    /**
+     * Push back track state.
+     *
+     * @param gData the g data
+     * @param op the op
+     * @param pc the pc
+     * @param cp the cp
+     * @param continuationOp the continuation op
+     * @param continuationPc the continuation pc
+     */
     private static void
     pushBackTrackState(REGlobalData gData, byte op, int pc,
                        int cp, int continuationOp, int continuationPc)
@@ -1398,6 +1733,16 @@ public class NativeRegExp extends IdScriptableObject implements Function
 
     /*
      *   Consecutive literal characters.
+     */
+    /**
+     * Flat n matcher.
+     *
+     * @param gData the g data
+     * @param matchChars the match chars
+     * @param length the length
+     * @param input the input
+     * @param end the end
+     * @return true, if successful
      */
     private static boolean
     flatNMatcher(REGlobalData gData, int matchChars,
@@ -1414,6 +1759,16 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return true;
     }
 
+    /**
+     * Flat ni matcher.
+     *
+     * @param gData the g data
+     * @param matchChars the match chars
+     * @param length the length
+     * @param input the input
+     * @param end the end
+     * @return true, if successful
+     */
     private static boolean
     flatNIMatcher(REGlobalData gData, int matchChars,
                   int length, String input, int end)
@@ -1455,6 +1810,15 @@ public class NativeRegExp extends IdScriptableObject implements Function
         9. Let y be the State (f, cap).
         10. Call c(y) and return its result.
     */
+    /**
+     * Backref matcher.
+     *
+     * @param gData the g data
+     * @param parenIndex the paren index
+     * @param input the input
+     * @param end the end
+     * @return true, if successful
+     */
     private static boolean
     backrefMatcher(REGlobalData gData, int parenIndex,
                    String input, int end)
@@ -1488,6 +1852,12 @@ public class NativeRegExp extends IdScriptableObject implements Function
 
 
     /* Add a single character to the RECharSet */
+    /**
+     * Adds the character to char set.
+     *
+     * @param cs the cs
+     * @param c the c
+     */
     private static void
     addCharacterToCharSet(RECharSet cs, char c)
     {
@@ -1501,6 +1871,13 @@ public class NativeRegExp extends IdScriptableObject implements Function
 
 
     /* Add a character range, c1 to c2 (inclusive) to the RECharSet */
+    /**
+     * Adds the character range to char set.
+     *
+     * @param cs the cs
+     * @param c1 the c1
+     * @param c2 the c2
+     */
     private static void
     addCharacterRangeToCharSet(RECharSet cs, char c1, char c2)
     {
@@ -1529,6 +1906,12 @@ public class NativeRegExp extends IdScriptableObject implements Function
     }
 
     /* Compile the source of the class into a RECharSet */
+    /**
+     * Process char set.
+     *
+     * @param gData the g data
+     * @param charSet the char set
+     */
     private static void
     processCharSet(REGlobalData gData, RECharSet charSet)
     {
@@ -1541,6 +1924,12 @@ public class NativeRegExp extends IdScriptableObject implements Function
     }
 
 
+    /**
+     * Process char set impl.
+     *
+     * @param gData the g data
+     * @param charSet the char set
+     */
     private static void
     processCharSetImpl(REGlobalData gData, RECharSet charSet)
     {
@@ -1735,6 +2124,14 @@ public class NativeRegExp extends IdScriptableObject implements Function
      *   Initialize the character set if it this is the first call.
      *   Test the bit - if the ^ flag was specified, non-inclusion is a success
      */
+    /**
+     * Class matcher.
+     *
+     * @param gData the g data
+     * @param charSet the char set
+     * @param ch the ch
+     * @return true, if successful
+     */
     private static boolean
     classMatcher(REGlobalData gData, RECharSet charSet, char ch)
     {
@@ -1748,6 +2145,12 @@ public class NativeRegExp extends IdScriptableObject implements Function
                 (charSet.bits[byteIndex] & (1 << (ch & 0x7))) == 0) ^ charSet.sense;
     }
 
+    /**
+     * Reop is simple.
+     *
+     * @param op the op
+     * @return true, if successful
+     */
     private static boolean reopIsSimple(int op) {
         return op >= REOP_SIMPLE_START && op <= REOP_SIMPLE_END;
     }
@@ -1757,6 +2160,18 @@ public class NativeRegExp extends IdScriptableObject implements Function
      *   it's going to match or fail. Return false if we don't
      *   get a match, true if we do and update the state of the
      *   input and pc if the update flag is true.
+     */
+    /**
+     * Simple match.
+     *
+     * @param gData the g data
+     * @param input the input
+     * @param op the op
+     * @param program the program
+     * @param pc the pc
+     * @param end the end
+     * @param updatecp the updatecp
+     * @return the int
      */
     private static int simpleMatch(REGlobalData gData, String input, int op,
                                    byte[] program, int pc, int end, boolean updatecp)
@@ -1937,6 +2352,14 @@ public class NativeRegExp extends IdScriptableObject implements Function
     }
 
 
+    /**
+     * Execute re bytecode.
+     *
+     * @param gData the g data
+     * @param input the input
+     * @param end the end
+     * @return true, if successful
+     */
     private static boolean
     executeREBytecode(REGlobalData gData, String input, int end)
     {
@@ -2358,6 +2781,17 @@ public class NativeRegExp extends IdScriptableObject implements Function
 
     }
 
+    /**
+     * Match reg exp.
+     *
+     * @param gData the g data
+     * @param re the re
+     * @param input the input
+     * @param start the start
+     * @param end the end
+     * @param multiline the multiline
+     * @return true, if successful
+     */
     private static boolean
     matchRegExp(REGlobalData gData, RECompiled re,
                 String input, int start, int end, boolean multiline)
@@ -2423,6 +2857,17 @@ public class NativeRegExp extends IdScriptableObject implements Function
 
     /*
      * indexp is assumed to be an array of length 1
+     */
+    /**
+     * Execute reg exp.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param res the res
+     * @param str the str
+     * @param indexp the indexp
+     * @param matchType the match type
+     * @return the object
      */
     Object executeRegExp(Context cx, Scriptable scope, RegExpImpl res,
                          String str, int indexp[], int matchType)
@@ -2548,11 +2993,23 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return result;
     }
 
+    /**
+     * Gets the flags.
+     *
+     * @return the flags
+     */
     int getFlags()
     {
         return re.flags;
     }
 
+    /**
+     * Report warning.
+     *
+     * @param cx the cx
+     * @param messageId the message id
+     * @param arg the arg
+     */
     private static void reportWarning(Context cx, String messageId, String arg)
     {
         if (cx.hasFeature(Context.FEATURE_STRICT_MODE)) {
@@ -2561,6 +3018,12 @@ public class NativeRegExp extends IdScriptableObject implements Function
         }
     }
 
+    /**
+     * Report error.
+     *
+     * @param messageId the message id
+     * @param arg the arg
+     */
     private static void reportError(String messageId, String arg)
     {
         String msg = ScriptRuntime.getMessage1(messageId, arg);
@@ -2569,7 +3032,8 @@ public class NativeRegExp extends IdScriptableObject implements Function
 
 // #string_id_map#
 
-    private static final int
+    /** The Constant MAX_INSTANCE_ID. */
+private static final int
         Id_lastIndex    = 1,
         Id_source       = 2,
         Id_global       = 3,
@@ -2578,12 +3042,18 @@ public class NativeRegExp extends IdScriptableObject implements Function
 
         MAX_INSTANCE_ID = 5;
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#getMaxInstanceId()
+     */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#findInstanceIdInfo(java.lang.String)
+     */
     @Override
     protected int findInstanceIdInfo(String s)
     {
@@ -2627,6 +3097,9 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return instanceIdInfo(attr, id);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#getInstanceIdName(int)
+     */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -2640,6 +3113,9 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return super.getInstanceIdName(id);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#getInstanceIdValue(int)
+     */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -2658,6 +3134,9 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return super.getInstanceIdValue(id);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#setInstanceIdValue(int, java.lang.Object)
+     */
     @Override
     protected void setInstanceIdValue(int id, Object value)
     {
@@ -2674,6 +3153,9 @@ public class NativeRegExp extends IdScriptableObject implements Function
         super.setInstanceIdValue(id, value);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#setInstanceIdAttributes(int, int)
+     */
     @Override
     protected void setInstanceIdAttributes(int id, int attr) {
         switch (id) {
@@ -2684,6 +3166,9 @@ public class NativeRegExp extends IdScriptableObject implements Function
         super.setInstanceIdAttributes(id, attr);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
+     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -2701,6 +3186,9 @@ public class NativeRegExp extends IdScriptableObject implements Function
         initPrototypeMethod(REGEXP_TAG, id, s, arity);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -2731,6 +3219,13 @@ public class NativeRegExp extends IdScriptableObject implements Function
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
+    /**
+     * Real this.
+     *
+     * @param thisObj the this obj
+     * @param f the f
+     * @return the native reg exp
+     */
     private static NativeRegExp realThis(Scriptable thisObj, IdFunctionObject f)
     {
         if (!(thisObj instanceof NativeRegExp))
@@ -2739,7 +3234,10 @@ public class NativeRegExp extends IdScriptableObject implements Function
     }
 
 // #string_id_map#
-    @Override
+    /* (non-Javadoc)
+ * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
+ */
+@Override
     protected int findPrototypeId(String s)
     {
         int id;
@@ -2764,6 +3262,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return id;
     }
 
+    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         Id_compile       = 1,
         Id_toString      = 2,
@@ -2776,8 +3275,13 @@ public class NativeRegExp extends IdScriptableObject implements Function
 
 // #/string_id_map#
 
-    private RECompiled re;
+    /** The re. */
+private RECompiled re;
+    
+    /** The last index. */
     Object lastIndex = 0d;     /* index after last match, for //g iterator */
+    
+    /** The last index attr. */
     private int lastIndexAttr = DONTENUM | PERMANENT;
 
 }       // class NativeRegExp

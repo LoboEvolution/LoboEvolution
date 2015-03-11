@@ -26,11 +26,22 @@ import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ClientletSelector;
 import org.lobobrowser.main.ExtensionManager;
 
+
+/**
+ * The Class CoreClientletSelector.
+ */
 public class CoreClientletSelector implements ClientletSelector {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletSelector#select(org.lobobrowser.clientlet.ClientletRequest, org.lobobrowser.clientlet.ClientletResponse)
+	 */
 	public Clientlet select(ClientletRequest request, ClientletResponse response) {
 		return ExtensionManager.getInstance().getClientlet(request, response);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletSelector#lastResortSelect(org.lobobrowser.clientlet.ClientletRequest, org.lobobrowser.clientlet.ClientletResponse)
+	 */
 	public Clientlet lastResortSelect(ClientletRequest request,
 			ClientletResponse response) {
 		throw new IllegalStateException("not expected to be called");

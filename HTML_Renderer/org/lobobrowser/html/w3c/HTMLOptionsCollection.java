@@ -35,6 +35,7 @@ package org.lobobrowser.html.w3c;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
+
 /**
  * An <code>HTMLOptionsCollection</code> is a list of nodes representing HTML
  * option element. An individual node may be accessed by either ordinal index or
@@ -48,16 +49,19 @@ import org.w3c.dom.Node;
  * @since DOM Level 2
  */
 public interface HTMLOptionsCollection {
+	
 	/**
 	 * This attribute specifies the length or size of the list.
+	 *
+	 * @return the length
 	 */
 	public int getLength();
 
 	/**
 	 * This attribute specifies the length or size of the list.
-	 * 
-	 * @exception DOMException
-	 *                NOT_SUPPORTED_ERR: if setting the length is not allowed by
+	 *
+	 * @param length the new length
+	 * @exception DOMException                NOT_SUPPORTED_ERR: if setting the length is not allowed by
 	 *                the implementation.
 	 */
 	public void setLength(int length) throws DOMException;
@@ -91,11 +95,33 @@ public interface HTMLOptionsCollection {
 	 */
 	public Node namedItem(String name);
 
+	/**
+	 * Adds the.
+	 *
+	 * @param element the element
+	 */
 	public void add(HTMLElement element);
 
+	/**
+	 * Adds the.
+	 *
+	 * @param element the element
+	 * @param before the before
+	 */
 	public void add(HTMLElement element, HTMLElement before);
 
+	/**
+	 * Adds the.
+	 *
+	 * @param element the element
+	 * @param before the before
+	 */
 	public void add(HTMLElement element, int before);
 
+	/**
+	 * Removes the.
+	 *
+	 * @param index the index
+	 */
 	public void remove(int index);
 }

@@ -25,17 +25,30 @@ package org.lobobrowser.store;
 
 import java.io.File;
 
+
 /**
+ * The Class CacheFileInfo.
+ *
  * @author J. H. S.
  */
 public class CacheFileInfo implements Comparable<Object> {
+	
+	/** The size. */
 	private final long size;
+	
+	/** The path. */
 	private final String path;
+	
+	/** The file. */
 	private final File file;
+	
+	/** The initial last modified. */
 	private final long initialLastModified;
 
 	/**
-	 * 
+	 * Instantiates a new cache file info.
+	 *
+	 * @param file the file
 	 */
 	public CacheFileInfo(File file) {
 		super();
@@ -45,6 +58,11 @@ public class CacheFileInfo implements Comparable<Object> {
 		this.initialLastModified = file.lastModified();
 	}
 
+	/**
+	 * Gets the file.
+	 *
+	 * @return the file
+	 */
 	public File getFile() {
 		return this.file;
 	}
@@ -75,18 +93,34 @@ public class CacheFileInfo implements Comparable<Object> {
 		}
 	}
 
+	/**
+	 * Delete.
+	 */
 	public void delete() {
 		new File(this.path).delete();
 	}
 
+	/**
+	 * Gets the last modified.
+	 *
+	 * @return the last modified
+	 */
 	public long getLastModified() {
 		return this.file.lastModified();
 	}
 
+	/**
+	 * Gets the initial length.
+	 *
+	 * @return the initial length
+	 */
 	public long getInitialLength() {
 		return this.size;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return "CacheFileInfo[path=" + this.path + ",lastModified="
 				+ new java.util.Date(this.initialLastModified) + "]";

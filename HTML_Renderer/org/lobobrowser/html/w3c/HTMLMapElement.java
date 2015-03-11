@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Client-side image map. See the MAP element definition in HTML 4.01.
  * <p>
@@ -39,22 +40,34 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLMapElement extends HTMLElement {
+	
 	/**
 	 * The list of areas defined for the image map.
+	 *
+	 * @return the areas
 	 */
 	public HTMLCollection getAreas();
 
 	/**
 	 * Names the map (for use with <code>usemap</code>). See the name attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * Names the map (for use with <code>usemap</code>). See the name attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name);
 
+	/**
+	 * Gets the images.
+	 *
+	 * @return the images
+	 */
 	public HTMLCollection getImages();
 }

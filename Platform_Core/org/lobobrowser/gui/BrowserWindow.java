@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.gui;
 
+
 /**
  * Whenever {@link FramePanel} is used, browser windows should implement this
  * interface or extend {@link AbstractBrowserWindow}. Note that

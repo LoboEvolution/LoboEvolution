@@ -8,6 +8,7 @@
 
 import java.util.EnumMap;
 
+
 /**
  * A top-level scope object that provides special means to cache and preserve
  * the initial values of the built-in constructor properties for better
@@ -37,6 +38,7 @@ import java.util.EnumMap;
  */
 public class TopLevel extends IdScriptableObject {
 
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -4648046356662472260L;
 
     /**
@@ -61,8 +63,12 @@ public class TopLevel extends IdScriptableObject {
         Error
     }
 
+    /** The ctors. */
     private EnumMap<Builtins, BaseFunction> ctors;
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getClassName()
+     */
     @Override
     public String getClassName() {
         return "global";

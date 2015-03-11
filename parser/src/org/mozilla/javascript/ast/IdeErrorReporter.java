@@ -10,6 +10,7 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.ErrorReporter;
 
+
 /**
  * This is interface defines a protocol for the reporting of
  * errors during JavaScript translation in IDE-mode.

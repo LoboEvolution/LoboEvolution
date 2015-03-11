@@ -24,14 +24,31 @@ package org.lobobrowser.ua;
 
 import java.util.EventObject;
 
+
+/**
+ * The Class NetworkRequestEvent.
+ */
 public class NetworkRequestEvent extends EventObject {
+	
+	/** The new state. */
 	private final int newState;
 
+	/**
+	 * Instantiates a new network request event.
+	 *
+	 * @param source the source
+	 * @param newState the new state
+	 */
 	public NetworkRequestEvent(Object source, int newState) {
 		super(source);
 		this.newState = newState;
 	}
 
+	/**
+	 * Gets the state.
+	 *
+	 * @return the state
+	 */
 	public int getState() {
 		return newState;
 	}

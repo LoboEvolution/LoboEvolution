@@ -36,6 +36,7 @@ import org.w3c.dom.Document;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
+
 /**
  * <p>Represents an http request. A <code>Request</code> is constructed and then
  * passed to a Session for execution. The <code>Session</code> then returns
@@ -122,12 +123,26 @@ public class Request extends AbstractBean {
      * Header keys are stored in a case insensitive manner.
      */
     private Map<String,Header> headers = new HashMap<String,Header>();
+    
+    /** The params. */
     private Map<String,Parameter> params = new HashMap<String,Parameter>();
+    
+    /** The follow redirects. */
     private boolean followRedirects = true;
+    
+    /** The method. */
     private Method method = Method.GET;
+    
+    /** The url. */
     private String url;
+    
+    /** The request body. */
     private InputStream requestBody;
+    
+    /** The username. */
     private String username;
+    
+    /** The password. */
     private char[] password;
     /**
      * Used in the toString() method call only if the body was set as a String.
@@ -154,8 +169,8 @@ public class Request extends AbstractBean {
     /**
      * Creaets a new instance of Request with the specified URL. Other default
      * values are the same as for the default constructor.
-     * 
-     * @param url
+     *
+     * @param url the url
      */
     public Request(String url) {
         this(Method.GET, url);
@@ -330,9 +345,9 @@ public class Request extends AbstractBean {
     /**
      * Creates a Parameter using the given name and value and then
      * adds it to the set of parameters.
-     * 
+     *
      * @param name must not be null
-     * @param value
+     * @param value the value
      */
     public final void setParameter(String name, String value) {
         if (name == null) {
@@ -389,6 +404,8 @@ public class Request extends AbstractBean {
      * redirect). It is possible to encounter infinite redirects.
      * 
      * boolean b whether to automatically follow redirects
+     *
+     * @param b the new follow redirects
      */
     //TODO need to support a count of maximium redirects
     public void setFollowRedirects(boolean b) {
@@ -448,6 +465,11 @@ public class Request extends AbstractBean {
         firePropertyChange("url", old, this.url);
     }
     
+    /**
+     * Sets the url impl.
+     *
+     * @param url the new url impl
+     */
     private void setUrlImpl(String url) {
         this.url = url;
         if (url != null) {
@@ -509,6 +531,9 @@ public class Request extends AbstractBean {
         firePropertyChange("username", old, this.username);
     }
     
+    /**
+     * Reset authentication header.
+     */
     private void resetAuthenticationHeader() {
         try {
             if (username == null) {
@@ -536,8 +561,8 @@ public class Request extends AbstractBean {
      * only used if a username is also specified. For security reasons, the
      * password cannot be retrieved after being set, and no property change
      * event is fired for this property.
-     * 
-     * @param password
+     *
+     * @param password the new password
      */
     public void setPassword(String password) {
         this.password = password == null ? new char[0] : password.toCharArray();
@@ -598,11 +623,17 @@ public class Request extends AbstractBean {
      * by the Session. This method should never be called by client code, and
      * should only be overridden in subclasses where the body is constructed
      * in a manner unique to the request (for example: FormRequest).
+     *
+     * @return the body
+     * @throws Exception the exception
      */
     protected InputStream getBody() throws Exception {
         return requestBody;
     }
     
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append(getMethod());
@@ -615,10 +646,24 @@ public class Request extends AbstractBean {
         return buffer.toString();
     }
 
+    /**
+     * Base64 encode.
+     *
+     * @param s the s
+     * @return the string
+     * @throws Exception the exception
+     */
     private static String base64Encode(String s) throws Exception {
         return new String(new BASE64Encoder().encode(s.getBytes()));
     }
     
+    /**
+     * Base64 decode.
+     *
+     * @param s the s
+     * @return the string
+     * @throws Exception the exception
+     */
     private static String base64Decode(String s) throws Exception {
         return new String(new BASE64Decoder().decodeBuffer(s));
     }

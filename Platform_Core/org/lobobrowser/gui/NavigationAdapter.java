@@ -24,19 +24,30 @@ import org.lobobrowser.ua.NavigationEvent;
 import org.lobobrowser.ua.NavigationListener;
 import org.lobobrowser.ua.NavigationVetoException;
 
+
 /**
  * A convenience abstract implementation of {@link NavigationListener}, with
  * blank methods.
  */
 public abstract class NavigationAdapter implements NavigationListener {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigationListener#beforeLocalNavigate(org.lobobrowser.ua.NavigationEvent)
+	 */
 	public void beforeLocalNavigate(NavigationEvent event)
 			throws NavigationVetoException {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigationListener#beforeNavigate(org.lobobrowser.ua.NavigationEvent)
+	 */
 	public void beforeNavigate(NavigationEvent event)
 			throws NavigationVetoException {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.NavigationListener#beforeWindowOpen(org.lobobrowser.ua.NavigationEvent)
+	 */
 	public void beforeWindowOpen(NavigationEvent event)
 			throws NavigationVetoException {
 	}

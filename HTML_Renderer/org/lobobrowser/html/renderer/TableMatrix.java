@@ -50,37 +50,82 @@ import org.lobobrowser.html.w3c.HTMLTableCellElement;
 import org.lobobrowser.html.w3c.HTMLTableRowElement;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class TableMatrix.
+ */
 class TableMatrix {
 	// private static final NodeFilter ROWS_FILTER = new RowsFilter();
+	/** The Constant COLUMNS_FILTER. */
 	private static final NodeFilter COLUMNS_FILTER = new ColumnsFilter();
+	
+	/** The Constant CAPTION_FILTER. */
 	private static final NodeFilter CAPTION_FILTER = new CaptionFilter();
 
+	/** The rows. */
 	private final ArrayList<ArrayList<VirtualCell>> ROWS = new ArrayList<ArrayList<VirtualCell>>();
+	
+	/** The all cells. */
 	private final ArrayList<BoundableRenderable> ALL_CELLS = new ArrayList<BoundableRenderable>();
+	
+	/** The row elements. */
 	private final ArrayList<HTMLTableRowElementImpl> ROW_ELEMENTS = new ArrayList<HTMLTableRowElementImpl>();
+	
+	/** The caption. */
 	private RTableCaption caption;
+	
+	/** The caption element. */
 	private HTMLTableCaptionElementImpl captionElement;
+	
+	/** The table element. */
 	private final HTMLElementImpl tableElement;
+	
+	/** The parser context. */
 	private final UserAgentContext parserContext;
+	
+	/** The renderer context. */
 	private final HtmlRendererContext rendererContext;
+	
+	/** The frame context. */
 	private final FrameContext frameContext;
+	
+	/** The relement. */
 	private final RElement relement;
+	
+	/** The container. */
 	private final RenderableContainer container;
 
+	/** The column sizes. */
 	private SizeInfo[] columnSizes;
+	
+	/** The row sizes. */
 	private SizeInfo[] rowSizes;
+	
+	/** The caption size. */
 	private CaptionSizeInfo captionSize;
+	
+	/** The table width. */
 	private int tableWidth;
+	
+	/** The table height. */
 	private int tableHeight;
 
 	/*
 	 * This is so that we can draw the lines inside the table that appear when a
 	 * border attribute is used.
 	 */
+	/** The has old style border. */
 	private int hasOldStyleBorder;
 
 	/**
-	 * @param element
+	 * Instantiates a new table matrix.
+	 *
+	 * @param element the element
+	 * @param pcontext the pcontext
+	 * @param rcontext the rcontext
+	 * @param frameContext the frame context
+	 * @param tableAsContainer the table as container
+	 * @param relement the relement
 	 */
 	public TableMatrix(HTMLElementImpl element, UserAgentContext pcontext,
 			HtmlRendererContext rcontext, FrameContext frameContext,
@@ -93,19 +138,34 @@ class TableMatrix {
 		this.container = tableAsContainer;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#finalize()
+	 */
 	public void finalize() throws Throwable {
 		super.finalize();
 	}
 
+	/**
+	 * Gets the num rows.
+	 *
+	 * @return the num rows
+	 */
 	public int getNumRows() {
 		return this.ROWS.size();
 	}
 
+	/**
+	 * Gets the num columns.
+	 *
+	 * @return the num columns
+	 */
 	public int getNumColumns() {
 		return this.columnSizes.length;
 	}
 
 	/**
+	 * Gets the table height.
+	 *
 	 * @return Returns the tableHeight.
 	 */
 	public int getTableHeight() {
@@ -113,12 +173,19 @@ class TableMatrix {
 	}
 
 	/**
+	 * Gets the table width.
+	 *
 	 * @return Returns the tableWidth.
 	 */
 	public int getTableWidth() {
 		return this.tableWidth;
 	}
 
+	/**
+	 * Gets the table height without caption.
+	 *
+	 * @return the table height without caption
+	 */
 	public int getTableHeightWithoutCaption() {
 		if (this.captionSize != null) {
 			return this.tableHeight - this.captionSize.height;
@@ -127,6 +194,11 @@ class TableMatrix {
 		}
 	}
 
+	/**
+	 * Gets the start y without caption.
+	 *
+	 * @return the start y without caption
+	 */
 	public int getStartYWithoutCaption() {
 		if (this.captionSize != null && !isCaptionBotton()) {
 			return this.captionSize.height;
@@ -135,14 +207,27 @@ class TableMatrix {
 	}
 
 	// private int border;
+	/** The cell spacing y. */
 	private int cellSpacingY;
+	
+	/** The cell spacing x. */
 	private int cellSpacingX;
+	
+	/** The widths of extras. */
 	private int widthsOfExtras;
+	
+	/** The heights of extras. */
 	private int heightsOfExtras;
+	
+	/** The table width length. */
 	private HtmlLength tableWidthLength;
 
 	/**
 	 * Called on every relayout. Element children might have changed.
+	 *
+	 * @param insets the insets
+	 * @param availWidth the avail width
+	 * @param availHeight the avail height
 	 */
 	public void reset(Insets insets, int availWidth, int availHeight) {
 		// TODO: Incorporate into build() and calculate
@@ -208,6 +293,13 @@ class TableMatrix {
 		this.hasOldStyleBorder = border > 0 ? 1 : 0;
 	}
 
+	/**
+	 * Builds the.
+	 *
+	 * @param availWidth the avail width
+	 * @param availHeight the avail height
+	 * @param sizeOnly the size only
+	 */
 	public void build(int availWidth, int availHeight, boolean sizeOnly) {
 		int hasBorder = this.hasOldStyleBorder;
 		this.determineColumnSizes(hasBorder, this.cellSpacingX,
@@ -216,6 +308,12 @@ class TableMatrix {
 				sizeOnly);
 	}
 
+	/**
+	 * Gets the parent row.
+	 *
+	 * @param cellNode the cell node
+	 * @return the parent row
+	 */
 	private final HTMLTableRowElementImpl getParentRow(
 			HTMLTableCellElementImpl cellNode) {
 		org.w3c.dom.Node parentNode = cellNode.getParentNode();
@@ -230,6 +328,13 @@ class TableMatrix {
 		}
 	}
 
+	/**
+	 * Gets the width length.
+	 *
+	 * @param element the element
+	 * @param availWidth the avail width
+	 * @return the width length
+	 */
 	private static HtmlLength getWidthLength(HTMLElementImpl element,
 			int availWidth) {
 		try {
@@ -249,6 +354,13 @@ class TableMatrix {
 		}
 	}
 
+	/**
+	 * Gets the height length.
+	 *
+	 * @param element the element
+	 * @param availHeight the avail height
+	 * @return the height length
+	 */
 	private static HtmlLength getHeightLength(HTMLElementImpl element,
 			int availHeight) {
 		try {
@@ -558,12 +670,11 @@ class TableMatrix {
 	 * Columns are layed out again if necessary to determine if they can really
 	 * be shrunk.
 	 * </ol>
-	 * 
-	 * @param renderState
-	 * @param border
-	 * @param cellSpacingX
-	 * @param cellSpacingY
-	 * @param availWidth
+	 *
+	 * @param hasBorder the has border
+	 * @param cellSpacingX the cell spacing x
+	 * @param cellSpacingY the cell spacing y
+	 * @param availWidth the avail width
 	 */
 	private void determineColumnSizes(int hasBorder, int cellSpacingX,
 			int cellSpacingY, int availWidth) {
@@ -613,10 +724,9 @@ class TableMatrix {
 	/**
 	 * This method sets the tentative actual sizes of columns (rows) based on
 	 * specified witdhs (heights) if available.
-	 * 
-	 * @param columnSizes
-	 * @param widthsOfExtras
-	 * @param cellAvailWidth
+	 *
+	 * @param columnSizes the column sizes
+	 * @param cellAvailWidth the cell avail width
 	 */
 	private void determineTentativeSizes(SizeInfo[] columnSizes/*
 																 * , int
@@ -739,6 +849,8 @@ class TableMatrix {
 
 	/**
 	 * Contracts column sizes according to render sizes.
+	 *
+	 * @param columnSizes the column sizes
 	 */
 	private void adjustForRenderWidths(SizeInfo[] columnSizes/*
 															 * , int hasBorder,
@@ -762,6 +874,15 @@ class TableMatrix {
 		}
 	}
 
+	/**
+	 * Layout column.
+	 *
+	 * @param columnSizes the column sizes
+	 * @param colSize the col size
+	 * @param col the col
+	 * @param cellSpacingX the cell spacing x
+	 * @param hasBorder the has border
+	 */
 	private void layoutColumn(SizeInfo[] columnSizes, SizeInfo colSize,
 			int col, int cellSpacingX, int hasBorder) {
 		SizeInfo[] rowSizes = this.rowSizes;
@@ -844,6 +965,16 @@ class TableMatrix {
 		}
 	}
 
+	/**
+	 * Adjust widths for expected max.
+	 *
+	 * @param columnSizes the column sizes
+	 * @param cellAvailWidth the cell avail width
+	 * @param expand the expand
+	 * @param captionWith the caption with
+	 * @param widthOfExtras the width of extras
+	 * @return the int
+	 */
 	private int adjustWidthsForExpectedMax(SizeInfo[] columnSizes,
 			int cellAvailWidth, boolean expand, int captionWith,
 			int widthOfExtras) {
@@ -883,6 +1014,19 @@ class TableMatrix {
 		return currentTotal;
 	}
 
+	/**
+	 * Expand columns.
+	 *
+	 * @param columnSizes the column sizes
+	 * @param cellAvailWidth the cell avail width
+	 * @param expand the expand
+	 * @param hasBorder the has border
+	 * @param cellSpacingX the cell spacing x
+	 * @param currentTotal the current total
+	 * @param numCols the num cols
+	 * @param difference the difference
+	 * @return the int
+	 */
 	private int expandColumns(SizeInfo[] columnSizes, int cellAvailWidth,
 			boolean expand, int hasBorder, int cellSpacingX, int currentTotal,
 			int numCols, int difference) {
@@ -1026,6 +1170,10 @@ class TableMatrix {
 	/**
 	 * This method renders each cell using already set actual column widths. It
 	 * sets minimum row heights based on this.
+	 *
+	 * @param hasBorder the has border
+	 * @param cellSpacingX the cell spacing x
+	 * @param cellSpacingY the cell spacing y
 	 */
 	private final void preLayout(int hasBorder, int cellSpacingX,
 			int cellSpacingY/* , boolean tableWidthKnown */) {
@@ -1146,6 +1294,14 @@ class TableMatrix {
 		}
 	}
 
+	/**
+	 * Determine row sizes.
+	 *
+	 * @param hasBorder the has border
+	 * @param cellSpacing the cell spacing
+	 * @param availHeight the avail height
+	 * @param sizeOnly the size only
+	 */
 	private void determineRowSizes(int hasBorder, int cellSpacing,
 			int availHeight, boolean sizeOnly) {
 		HtmlLength tableHeightLength = TableMatrix.getHeightLength(
@@ -1165,6 +1321,15 @@ class TableMatrix {
 		}
 	}
 
+	/**
+	 * Determine row sizes fixed th.
+	 *
+	 * @param hasBorder the has border
+	 * @param cellSpacing the cell spacing
+	 * @param availHeight the avail height
+	 * @param tableHeight the table height
+	 * @param sizeOnly the size only
+	 */
 	private void determineRowSizesFixedTH(int hasBorder, int cellSpacing,
 			int availHeight, int tableHeight, boolean sizeOnly) {
 		SizeInfo[] rowSizes = this.rowSizes;
@@ -1316,6 +1481,13 @@ class TableMatrix {
 		this.finalRender(hasBorder, cellSpacing, sizeOnly);
 	}
 
+	/**
+	 * Determine row sizes flexible th.
+	 *
+	 * @param hasBorder the has border
+	 * @param cellSpacing the cell spacing
+	 * @param sizeOnly the size only
+	 */
 	private void determineRowSizesFlexibleTH(int hasBorder, int cellSpacing,
 			boolean sizeOnly) {
 		SizeInfo[] rowSizes = this.rowSizes;
@@ -1393,6 +1565,10 @@ class TableMatrix {
 	/**
 	 * This method renders each cell using already set actual column widths. It
 	 * sets minimum row heights based on this.
+	 *
+	 * @param hasBorder the has border
+	 * @param cellSpacing the cell spacing
+	 * @param sizeOnly the size only
 	 */
 	private final void finalRender(int hasBorder, int cellSpacing,
 			boolean sizeOnly) {
@@ -1511,6 +1687,8 @@ class TableMatrix {
 	/**
 	 * Sets bounds of each cell's component, and sumps up table width and
 	 * height.
+	 *
+	 * @param insets the insets
 	 */
 	public final void doLayout(Insets insets) {
 
@@ -1576,6 +1754,11 @@ class TableMatrix {
 		}
 	}
 
+	/**
+	 * Checks if is caption botton.
+	 *
+	 * @return true, if is caption botton
+	 */
 	private boolean isCaptionBotton() {
 		if (this.captionElement != null) {
 			AbstractCSS2Properties props = captionElement.getCurrentStyle();
@@ -1592,6 +1775,12 @@ class TableMatrix {
 		return false;
 	}
 
+	/**
+	 * Paint.
+	 *
+	 * @param g the g
+	 * @param size the size
+	 */
 	public final void paint(Graphics g, Dimension size) {
 		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
 		int numCells = allCells.size();
@@ -1690,6 +1879,13 @@ class TableMatrix {
 	 * @see org.lobobrowser.html.render.BoundableRenderable#getRenderablePoint(int,
 	 * int)
 	 */
+	/**
+	 * Gets the lowest renderable spot.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @return the lowest renderable spot
+	 */
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
 		int numCells = allCells.size();
@@ -1714,6 +1910,14 @@ class TableMatrix {
 	 * org.lobobrowser.html.render.BoundableRenderable#onMouseClick(java.awt.event
 	 * .MouseEvent, int, int)
 	 */
+	/**
+	 * On mouse click.
+	 *
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
+	 * @return true, if successful
+	 */
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
 		int numCells = allCells.size();
@@ -1730,6 +1934,14 @@ class TableMatrix {
 		return true;
 	}
 
+	/**
+	 * On double click.
+	 *
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
+	 * @return true, if successful
+	 */
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
 		int numCells = allCells.size();
@@ -1746,6 +1958,7 @@ class TableMatrix {
 		return true;
 	}
 
+	/** The armed renderable. */
 	private BoundableRenderable armedRenderable;
 
 	/*
@@ -1754,6 +1967,12 @@ class TableMatrix {
 	 * @see
 	 * org.lobobrowser.html.render.BoundableRenderable#onMouseDisarmed(java.awt
 	 * .event.MouseEvent)
+	 */
+	/**
+	 * On mouse disarmed.
+	 *
+	 * @param event the event
+	 * @return true, if successful
 	 */
 	public boolean onMouseDisarmed(MouseEvent event) {
 		BoundableRenderable ar = this.armedRenderable;
@@ -1771,6 +1990,14 @@ class TableMatrix {
 	 * @see
 	 * org.lobobrowser.html.render.BoundableRenderable#onMousePressed(java.awt.
 	 * event.MouseEvent, int, int)
+	 */
+	/**
+	 * On mouse pressed.
+	 *
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
+	 * @return true, if successful
 	 */
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
@@ -1795,6 +2022,14 @@ class TableMatrix {
 	 * @see
 	 * org.lobobrowser.html.render.BoundableRenderable#onMouseReleased(java.awt
 	 * .event.MouseEvent, int, int)
+	 */
+	/**
+	 * On mouse released.
+	 *
+	 * @param event the event
+	 * @param x the x
+	 * @param y the y
+	 * @return true, if successful
 	 */
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
@@ -1826,33 +2061,74 @@ class TableMatrix {
 		return true;
 	}
 
+	/**
+	 * Gets the renderables.
+	 *
+	 * @return the renderables
+	 */
 	public Iterator<BoundableRenderable> getRenderables() {
 		return this.ALL_CELLS.iterator();
 	}
 
+	/**
+	 * The Class ColumnsFilter.
+	 */
 	private static class ColumnsFilter implements NodeFilter {
+		
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+		 */
 		public final boolean accept(Node node) {
 			return (node instanceof HTMLTableCellElement);
 		}
 	}
 
+	/**
+	 * The Class CaptionFilter.
+	 */
 	private static class CaptionFilter implements NodeFilter {
+		
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+		 */
 		public final boolean accept(Node node) {
 			return (node instanceof HTMLTableCaptionElement);
 		}
 	}
 
+	/**
+	 * The Class SizeInfo.
+	 */
 	public static class SizeInfo {
+		
+		/** The html length. */
 		public HtmlLength htmlLength;
+		
+		/** The actual size. */
 		public int actualSize;
+		
+		/** The layout size. */
 		public int layoutSize;
+		
+		/** The min size. */
 		public int minSize;
+		
+		/** The offset. */
 		public int offset;
 	}
 
+	/**
+	 * The Class CaptionSizeInfo.
+	 */
 	public static class CaptionSizeInfo {
+		
+		/** The height. */
 		public int height;
+		
+		/** The height offset. */
 		public int heightOffset;
+		
+		/** The width. */
 		public int width;
 	}
 

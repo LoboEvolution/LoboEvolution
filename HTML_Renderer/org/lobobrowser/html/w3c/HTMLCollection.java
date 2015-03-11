@@ -34,6 +34,7 @@ package org.lobobrowser.html.w3c;
 
 import org.w3c.dom.Node;
 
+
 /**
  * An <code>HTMLCollection</code> is a list of nodes. An individual node may be
  * accessed by either ordinal index or the node's <code>name</code> or
@@ -46,8 +47,11 @@ import org.w3c.dom.Node;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLCollection {
+	
 	/**
 	 * This attribute specifies the length or size of the list.
+	 *
+	 * @return the length
 	 */
 	public int getLength();
 

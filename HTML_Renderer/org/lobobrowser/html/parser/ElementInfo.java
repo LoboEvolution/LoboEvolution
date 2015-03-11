@@ -25,20 +25,41 @@ package org.lobobrowser.html.parser;
 
 import java.util.Set;
 
+
+/**
+ * The Class ElementInfo.
+ */
 public class ElementInfo {
+	
+	/** The end element type. */
 	public final int endElementType;
+	
+	/** The child element ok. */
 	public final boolean childElementOk;
+	
+	/** The stop tags. */
 	public final Set<String> stopTags;
+	
+	/** The no script element. */
 	public final boolean noScriptElement;
+	
+	/** The decode entities. */
 	public final boolean decodeEntities;
 
+	/** The Constant END_ELEMENT_FORBIDDEN. */
 	public static final int END_ELEMENT_FORBIDDEN = 0;
+	
+	/** The Constant END_ELEMENT_OPTIONAL. */
 	public static final int END_ELEMENT_OPTIONAL = 1;
+	
+	/** The Constant END_ELEMENT_REQUIRED. */
 	public static final int END_ELEMENT_REQUIRED = 2;
 
 	/**
-	 * @param ok
-	 * @param type
+	 * Instantiates a new element info.
+	 *
+	 * @param ok the ok
+	 * @param type the type
 	 */
 	public ElementInfo(boolean ok, int type) {
 		this.childElementOk = ok;
@@ -49,8 +70,11 @@ public class ElementInfo {
 	}
 
 	/**
-	 * @param ok
-	 * @param type
+	 * Instantiates a new element info.
+	 *
+	 * @param ok the ok
+	 * @param type the type
+	 * @param stopTags the stop tags
 	 */
 	public ElementInfo(boolean ok, int type, Set<String> stopTags) {
 		this.childElementOk = ok;
@@ -60,6 +84,14 @@ public class ElementInfo {
 		this.decodeEntities = true;
 	}
 
+	/**
+	 * Instantiates a new element info.
+	 *
+	 * @param ok the ok
+	 * @param type the type
+	 * @param stopTags the stop tags
+	 * @param noScriptElement the no script element
+	 */
 	public ElementInfo(boolean ok, int type, Set<String> stopTags,
 			boolean noScriptElement) {
 		this.childElementOk = ok;
@@ -69,6 +101,13 @@ public class ElementInfo {
 		this.decodeEntities = true;
 	}
 
+	/**
+	 * Instantiates a new element info.
+	 *
+	 * @param ok the ok
+	 * @param type the type
+	 * @param decodeEntities the decode entities
+	 */
 	public ElementInfo(boolean ok, int type, boolean decodeEntities) {
 		this.childElementOk = ok;
 		this.endElementType = type;

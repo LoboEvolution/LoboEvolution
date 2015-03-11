@@ -28,10 +28,15 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+
 /**
+ * The Class Domains.
+ *
  * @author J. H. S.
  */
 public class Domains {
+	
+	/** The Constant gTLDs. */
 	private static final Collection<String> gTLDs;
 
 	static {
@@ -53,12 +58,19 @@ public class Domains {
 	}
 
 	/**
-	 * 
+	 * Instantiates a new domains.
 	 */
 	private Domains() {
 		super();
 	}
 
+	/**
+	 * Checks if is valid cookie domain.
+	 *
+	 * @param domain the domain
+	 * @param hostName the host name
+	 * @return true, if is valid cookie domain
+	 */
 	public static boolean isValidCookieDomain(String domain, String hostName) {
 		String plainDomain;
 		if (!domain.startsWith(".")) {
@@ -89,10 +101,10 @@ public class Domains {
 	}
 
 	/**
-	 * 
-	 * @param host
-	 *            A host name in lower case.
-	 * @return
+	 * Ends with gtld.
+	 *
+	 * @param host            A host name in lower case.
+	 * @return true, if successful
 	 */
 	public static boolean endsWithGTLD(String host) {
 		Iterator<String> i = gTLDs.iterator();
@@ -105,6 +117,12 @@ public class Domains {
 		return false;
 	}
 
+	/**
+	 * Checks if is likely host name.
+	 *
+	 * @param name the name
+	 * @return true, if is likely host name
+	 */
 	public static boolean isLikelyHostName(String name) {
 		String nameTL = name.toLowerCase();
 		if (nameTL.startsWith("www.")) {
@@ -121,6 +139,12 @@ public class Domains {
 		return lastDotIdx == nameTL.length() - 3;
 	}
 
+	/**
+	 * Gets the possible domains.
+	 *
+	 * @param hostName the host name
+	 * @return the possible domains
+	 */
 	public static Collection<String> getPossibleDomains(String hostName) {
 		Collection<String> domains = new LinkedList<String>();
 		domains.add(hostName);

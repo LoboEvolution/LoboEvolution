@@ -37,48 +37,88 @@ import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.w3c.HTMLImageElement;
 import org.mozilla.javascript.Function;
 
+
+/**
+ * The Class HTMLImageElementImpl.
+ */
 public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 		HTMLImageElement {
+	
+	/**
+	 * Instantiates a new HTML image element impl.
+	 */
 	public HTMLImageElementImpl() {
 		super(HtmlProperties.IMG);
 	}
 
+	/**
+	 * Instantiates a new HTML image element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLImageElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getName()
+	 */
 	public String getName() {
 		return this.getAttribute(HtmlAttributeProperties.NAME);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#setName(java.lang.String)
+	 */
 	public void setName(String name) {
 		this.setAttribute(HtmlAttributeProperties.NAME, name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getAlign()
+	 */
 	public String getAlign() {
 		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#setAlign(java.lang.String)
+	 */
 	public void setAlign(String align) {
 		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getAlt()
+	 */
 	public String getAlt() {
 		return this.getAttribute(HtmlAttributeProperties.ALT);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#setAlt(java.lang.String)
+	 */
 	public void setAlt(String alt) {
 		this.setAttribute(HtmlAttributeProperties.ALT, alt);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getBorder()
+	 */
 	public String getBorder() {
 		return this.getAttribute(HtmlAttributeProperties.BORDER);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#setBorder(java.lang.String)
+	 */
 	public void setBorder(String border) {
 		this.setAttribute(HtmlAttributeProperties.BORDER, border);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getHeight()
+	 */
 	public int getHeight() {
 		String height = this.getAttribute(HtmlAttributeProperties.HEIGHT);
 		UINode r = this.uiNode;
@@ -89,35 +129,59 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 		return r == null ? 0 : r.getBounds().height;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#setHeight(int)
+	 */
 	public void setHeight(int height) {
 		this.setAttribute(HtmlAttributeProperties.HEIGHT,
 				String.valueOf(height));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getHspace()
+	 */
 	public int getHspace() {
 		return this.getAttributeAsInt(HtmlAttributeProperties.HSPACE, 0);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#setHspace(int)
+	 */
 	public void setHspace(int hspace) {
 		this.setAttribute(HtmlAttributeProperties.HSPACE, String.valueOf(hspace));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getIsMap()
+	 */
 	public boolean getIsMap() {
 		return this.getAttributeAsBoolean(HtmlAttributeProperties.ISMAP);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#setIsMap(boolean)
+	 */
 	public void setIsMap(boolean isMap) {
 		this.setAttribute(HtmlAttributeProperties.ISMAP, isMap ? HtmlAttributeProperties.ISMAP : null);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getLongDesc()
+	 */
 	public String getLongDesc() {
 		return this.getAttribute(HtmlAttributeProperties.LONGDESC);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#setLongDesc(java.lang.String)
+	 */
 	public void setLongDesc(String longDesc) {
 		this.setAttribute(HtmlAttributeProperties.LONGDESC, longDesc);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getSrc()
+	 */
 	public String getSrc() {
 		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
@@ -126,27 +190,44 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 	 * Sets the image URI and starts to load the image. Note that an
 	 * HtmlRendererContext should be available to the HTML document for images
 	 * to be loaded.
+	 *
+	 * @param src the new src
 	 */
 	public void setSrc(String src) {
 		this.setAttribute(HtmlAttributeProperties.SRC, src);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getUseMap()
+	 */
 	public String getUseMap() {
 		return this.getAttribute(HtmlAttributeProperties.USEMAP);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#setUseMap(java.lang.String)
+	 */
 	public void setUseMap(String useMap) {
 		this.setAttribute(HtmlAttributeProperties.USEMAP, useMap);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getVspace()
+	 */
 	public int getVspace() {
 		return this.getAttributeAsInt(HtmlAttributeProperties.VSPACE, 0);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#setVspace(int)
+	 */
 	public void setVspace(int vspace) {
 		this.setAttribute(HtmlAttributeProperties.VSPACE, String.valueOf(vspace));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getWidth()
+	 */
 	public int getWidth() {
 
 		String width = this.getAttribute(HtmlAttributeProperties.WIDTH);
@@ -158,10 +239,16 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 		return r == null ? 0 : r.getBounds().width;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#setWidth(int)
+	 */
 	public void setWidth(int width) {
 		this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#assignAttributeField(java.lang.String, java.lang.String)
+	 */
 	protected void assignAttributeField(String normalName, String value) {
 		super.assignAttributeField(normalName, value);
 		if (HtmlAttributeProperties.SRC.equals(normalName)) {
@@ -169,19 +256,34 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
+	/** The onload. */
 	private Function onload;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#getOnload()
+	 */
 	public Function getOnload() {
 		return this.getEventFunction(this.onload, "onload");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#setOnload(org.mozilla.javascript.Function)
+	 */
 	public void setOnload(Function onload) {
 		this.onload = onload;
 	}
 
+	/** The image. */
 	private Image image = null;
+	
+	/** The image src. */
 	private String imageSrc;
 
+	/**
+	 * Load image.
+	 *
+	 * @param src the src
+	 */
 	private void loadImage(String src) {
 		HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
 		if (document != null) {
@@ -195,20 +297,26 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
+	/**
+	 * Gets the image.
+	 *
+	 * @return the image
+	 */
 	public final Image getImage() {
 		synchronized (this.listeners) {
 			return this.image;
 		}
 	}
 
+	/** The listeners. */
 	private final ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(
 			1);
 
 	/**
 	 * Adds a listener of image loading events. The listener gets called right
 	 * away if there's already an image.
-	 * 
-	 * @param listener
+	 *
+	 * @param listener the listener
 	 */
 	public void addImageListener(ImageListener listener) {
 		ArrayList<ImageListener> l = this.listeners;
@@ -226,6 +334,11 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
+	/**
+	 * Removes the image listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void removeImageListener(ImageListener listener) {
 		ArrayList<ImageListener> l = this.listeners;
 		synchronized (l) {
@@ -233,6 +346,12 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
+	/**
+	 * Dispatch event.
+	 *
+	 * @param expectedImgSrc the expected img src
+	 * @param event the event
+	 */
 	private void dispatchEvent(String expectedImgSrc, ImageEvent event) {
 		ArrayList<ImageListener> l = this.listeners;
 		ImageListener[] listenerArray;
@@ -257,34 +376,67 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new ImageRenderState(prevRenderState, this);
 	}
 
+	/**
+	 * The listener interface for receiving localImage events.
+	 * The class that is interested in processing a localImage
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addLocalImageListener</code> method. When
+	 * the localImage event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see LocalImageEvent
+	 */
 	private class LocalImageListener implements ImageListener {
+		
+		/** The expected img src. */
 		private final String expectedImgSrc;
 
+		/**
+		 * Instantiates a new local image listener.
+		 *
+		 * @param imgSrc the img src
+		 */
 		public LocalImageListener(String imgSrc) {
 			this.expectedImgSrc = imgSrc;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.dombl.ImageListener#imageLoaded(org.lobobrowser.html.dombl.ImageEvent)
+		 */
 		public void imageLoaded(ImageEvent event) {
 			dispatchEvent(this.expectedImgSrc, event);
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getNaturalWidth()
+	 */
 	@Override
 	public int getNaturalWidth() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getNaturalHeight()
+	 */
 	@Override
 	public int getNaturalHeight() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLImageElement#getComplete()
+	 */
 	@Override
 	public boolean getComplete() {
 		// TODO Auto-generated method stub

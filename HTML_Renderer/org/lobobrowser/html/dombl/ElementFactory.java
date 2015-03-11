@@ -34,19 +34,42 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.w3c.dom.DOMException;
 
+
+/**
+ * A factory for creating Element objects.
+ */
 public class ElementFactory {
+	
+	/** The builders. */
 	private Map<String, Object> builders = new HashMap<String, Object>();
 
+	/**
+	 * Instantiates a new element factory.
+	 */
 	private ElementFactory() {
 		this.builders = HtmlMapping.mappingHtml();
 	}
 
+	/** The instance. */
 	private static ElementFactory instance = new ElementFactory();
 
+	/**
+	 * Gets the single instance of ElementFactory.
+	 *
+	 * @return single instance of ElementFactory
+	 */
 	public static ElementFactory getInstance() {
 		return instance;
 	}
 
+	/**
+	 * Creates a new Element object.
+	 *
+	 * @param document the document
+	 * @param name the name
+	 * @return the HTML element
+	 * @throws DOMException the DOM exception
+	 */
 	public final HTMLElement createElement(HTMLDocumentImpl document,String name) throws DOMException {
 		String normalName = name.toUpperCase(Locale.ENGLISH);
 		// No need to synchronize; read-only map at this point.

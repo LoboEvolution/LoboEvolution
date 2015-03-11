@@ -26,15 +26,23 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
+
 /**
  * The status bar component.
  */
 public class StatusBarPanel extends JPanel {
+	
+	/**
+	 * Instantiates a new status bar panel.
+	 */
 	public StatusBarPanel() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.setBorder(new BevelBorder(BevelBorder.LOWERED));
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
 	public Dimension getPreferredSize() {
 		return new Dimension(1, 32);
 	}

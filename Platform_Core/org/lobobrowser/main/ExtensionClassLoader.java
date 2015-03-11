@@ -24,16 +24,39 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLStreamHandlerFactory;
 
+
+/**
+ * The Class ExtensionClassLoader.
+ */
 public class ExtensionClassLoader extends URLClassLoader {
+	
+	/**
+	 * Instantiates a new extension class loader.
+	 *
+	 * @param urls the urls
+	 * @param parent the parent
+	 * @param factory the factory
+	 */
 	public ExtensionClassLoader(URL[] urls, ClassLoader parent,
 			URLStreamHandlerFactory factory) {
 		super(urls, parent, factory);
 	}
 
+	/**
+	 * Instantiates a new extension class loader.
+	 *
+	 * @param urls the urls
+	 * @param parent the parent
+	 */
 	public ExtensionClassLoader(URL[] urls, ClassLoader parent) {
 		super(urls, parent);
 	}
 
+	/**
+	 * Instantiates a new extension class loader.
+	 *
+	 * @param urls the urls
+	 */
 	public ExtensionClassLoader(URL[] urls) {
 		super(urls);
 	}

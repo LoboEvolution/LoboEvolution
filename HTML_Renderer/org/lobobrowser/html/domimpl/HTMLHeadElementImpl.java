@@ -24,17 +24,32 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLHeadElement;
 
+
+/**
+ * The Class HTMLHeadElementImpl.
+ */
 public class HTMLHeadElementImpl extends HTMLAbstractUIElement implements HTMLHeadElement {
 
+	/**
+	 * Instantiates a new HTML head element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLHeadElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLHeadElement#getProfile()
+	 */
 	@Override
 	public String getProfile() {
 		return this.getAttribute(HtmlAttributeProperties.PROFILE);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLHeadElement#setProfile(java.lang.String)
+	 */
 	@Override
 	public void setProfile(String profile) {
 		this.setAttribute(HtmlAttributeProperties.PROFILE, profile);

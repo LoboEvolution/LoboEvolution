@@ -42,16 +42,32 @@ import org.mozilla.javascript.Function;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class HTMLFormElementImpl.
+ */
 public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 		HTMLFormElement {
+	
+	/**
+	 * Instantiates a new HTML form element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLFormElementImpl(String name) {
 		super(name);
 	}
 
+	/**
+	 * Instantiates a new HTML form element impl.
+	 */
 	public HTMLFormElementImpl() {
 		super(HtmlProperties.FORM);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#namedItem(java.lang.String)
+	 */
 	public Object namedItem(final String name) {
 		try {
 			// TODO: This could use document.namedItem.
@@ -70,6 +86,9 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#item(int)
+	 */
 	public Object item(final int index) {
 		try {
 			this.visit(new NodeVisitor() {
@@ -90,8 +109,12 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 		return null;
 	}
 
+	/** The elements. */
 	private HTMLCollection elements;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#getElements()
+	 */
 	public HTMLCollection getElements() {
 		HTMLCollection elements = this.elements;
 		if (elements == null) {
@@ -102,42 +125,72 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 		return elements;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#getLength()
+	 */
 	public int getLength() {
 		return this.getElements().getLength();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#getName()
+	 */
 	public String getName() {
 		return this.getAttribute(HtmlAttributeProperties.NAME);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#setName(java.lang.String)
+	 */
 	public void setName(String name) {
 		this.setAttribute(HtmlAttributeProperties.NAME, name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#getAcceptCharset()
+	 */
 	public String getAcceptCharset() {
 		return this.getAttribute(HtmlAttributeProperties.ACCEPTCHARSET);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#setAcceptCharset(java.lang.String)
+	 */
 	public void setAcceptCharset(String acceptCharset) {
 		this.setAttribute(HtmlAttributeProperties.ACCEPTCHARSET, acceptCharset);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#getAction()
+	 */
 	public String getAction() {
 		return this.getAttribute(HtmlAttributeProperties.ACTION);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#setAction(java.lang.String)
+	 */
 	public void setAction(String action) {
 		this.setAttribute(HtmlAttributeProperties.ACTION, action);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#getEnctype()
+	 */
 	public String getEnctype() {
 		return this.getAttribute(HtmlAttributeProperties.ENCTYPE);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#setEnctype(java.lang.String)
+	 */
 	public void setEnctype(String enctype) {
 		this.setAttribute(HtmlAttributeProperties.ENCTYPE, enctype);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#getMethod()
+	 */
 	public String getMethod() {
 		String method = this.getAttribute(HtmlAttributeProperties.METHOD);
 		if (method == null) {
@@ -146,28 +199,47 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 		return method;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#setMethod(java.lang.String)
+	 */
 	public void setMethod(String method) {
 		this.setAttribute(HtmlAttributeProperties.METHOD, method);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#getTarget()
+	 */
 	public String getTarget() {
 		return this.getAttribute(HtmlAttributeProperties.TARGET);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#setTarget(java.lang.String)
+	 */
 	public void setTarget(String target) {
 		this.setAttribute(HtmlAttributeProperties.TARGET, target);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#submit()
+	 */
 	public void submit() {
 		this.submit(null);
 	}
 
+	/** The onsubmit. */
 	private Function onsubmit;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#setOnsubmit(org.mozilla.javascript.Function)
+	 */
 	public void setOnsubmit(Function value) {
 		this.onsubmit = value;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#getOnsubmit()
+	 */
 	public Function getOnsubmit() {
 		return this.getEventFunction(this.onsubmit, "onsubmit");
 	}
@@ -231,6 +303,9 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#reset()
+	 */
 	public void reset() {
 		this.visit(new NodeVisitor() {
 			public void visit(Node node) {
@@ -241,48 +316,75 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements
 		});
 	}
 
+	/**
+	 * Checks if is input.
+	 *
+	 * @param node the node
+	 * @return true, if is input
+	 */
 	public static boolean isInput(Node node) {
 		String name = node.getNodeName().toLowerCase();
 		return name.equals("input") || name.equals("textarea")
 				|| name.equals("select");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#getAutocomplete()
+	 */
 	@Override
 	public boolean getAutocomplete() {
 		String autocomplete = this.getAttribute(HtmlAttributeProperties.AUTOCOMPLETE);
 		return HtmlAttributeProperties.AUTOCOMPLETE.equalsIgnoreCase(autocomplete);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#setAutocomplete(boolean)
+	 */
 	@Override
 	public void setAutocomplete(boolean autocomplete) {
 		this.setAttribute(HtmlAttributeProperties.AUTOCOMPLETE, autocomplete ? HtmlAttributeProperties.AUTOCOMPLETE : null);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#getNoValidate()
+	 */
 	@Override
 	public boolean getNoValidate() {
 		String noValidate = this.getAttribute(HtmlAttributeProperties.NOVALIDATE);
 		return HtmlAttributeProperties.NOVALIDATE.equalsIgnoreCase(noValidate);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#setNoValidate(boolean)
+	 */
 	@Override
 	public void setNoValidate(boolean noValidate) {
 		this.setAttribute(HtmlAttributeProperties.NOVALIDATE, noValidate ? HtmlAttributeProperties.NOVALIDATE : null);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#checkValidity()
+	 */
 	@Override
 	public boolean checkValidity() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#dispatchFormInput()
+	 */
 	@Override
 	public void dispatchFormInput() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLFormElement#dispatchFormChange()
+	 */
 	@Override
 	public void dispatchFormChange() {
 		// TODO Auto-generated method stub

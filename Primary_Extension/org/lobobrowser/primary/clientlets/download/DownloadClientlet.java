@@ -33,7 +33,15 @@ import org.lobobrowser.primary.gui.download.DownloadDialog;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.Urls;
 
+
+/**
+ * The Class DownloadClientlet.
+ */
 public class DownloadClientlet implements Clientlet {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.Clientlet#process(org.lobobrowser.clientlet.ClientletContext)
+	 */
 	public void process(ClientletContext context) throws ClientletException {
 		ClientletResponse response = context.getResponse();
 		URL url = response.getResponseURL();

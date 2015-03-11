@@ -12,6 +12,7 @@ import java.util.TreeSet;
 import org.mozilla.javascript.Node;
 import org.mozilla.javascript.Token;
 
+
 /**
  * Node for the root of a parse tree.  It contains the statements and functions
  * in the script, and a list of {@link Comment} nodes associated with the script
@@ -24,22 +25,34 @@ import org.mozilla.javascript.Token;
  */
 public class AstRoot extends ScriptNode {
 
+    /** The comments. */
     private SortedSet<Comment> comments;
+    
+    /** The in strict mode. */
     private boolean inStrictMode;
 
     {
         type = Token.SCRIPT;
     }
 
+    /**
+     * Instantiates a new ast root.
+     */
     public AstRoot() {
     }
 
+    /**
+     * Instantiates a new ast root.
+     *
+     * @param pos the pos
+     */
     public AstRoot(int pos) {
         super(pos);
     }
 
     /**
-     * Returns comment set
+     * Returns comment set.
+     *
      * @return comment set, sorted by start position. Can be {@code null}.
      */
     public SortedSet<Comment> getComments() {
@@ -64,8 +77,8 @@ public class AstRoot extends ScriptNode {
 
     /**
      * Add a comment to the comment set.
+     *
      * @param comment the comment node.
-     * @throws IllegalArgumentException if comment is {@code null}
      */
     public void addComment(Comment comment) {
         assertNotNull(comment);
@@ -76,10 +89,20 @@ public class AstRoot extends ScriptNode {
         comment.setParent(this);
     }
 
+    /**
+     * Sets the in strict mode.
+     *
+     * @param inStrictMode the new in strict mode
+     */
     public void setInStrictMode(boolean inStrictMode) {
         this.inStrictMode = inStrictMode;
     }
 
+    /**
+     * Checks if is in strict mode.
+     *
+     * @return true, if is in strict mode
+     */
     public boolean isInStrictMode() {
         return inStrictMode;
     }
@@ -111,6 +134,9 @@ public class AstRoot extends ScriptNode {
         visitComments(visitor);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.Scope#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -122,6 +148,8 @@ public class AstRoot extends ScriptNode {
 
     /**
      * A debug-printer that includes comments (at the end).
+     *
+     * @return the string
      */
     @Override
     public String debugPrint() {
@@ -133,7 +161,6 @@ public class AstRoot extends ScriptNode {
     /**
      * Debugging function to check that the parser has set the parent
      * link for every node in the tree.
-     * @throws IllegalStateException if a parent link is missing
      */
     public void checkParentLinks() {
         this.visit(new NodeVisitor() {

@@ -29,14 +29,21 @@ import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.CacheManager;
 import org.lobobrowser.store.StorageManager;
 
+
 /**
  * Browser cache settings. This is a singleton class with an instance obtained
  * by calling {@link #getInstance()}.
  */
 public class CacheSettings implements Serializable {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CacheSettings.class
 			.getName());
+	
+	/** The Constant instance. */
 	private static final CacheSettings instance;
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574500900000604L;
 
 	static {
@@ -57,6 +64,8 @@ public class CacheSettings implements Serializable {
 
 	/**
 	 * Gets the class singleton.
+	 *
+	 * @return single instance of CacheSettings
 	 */
 	public static CacheSettings getInstance() {
 		SecurityManager sm = System.getSecurityManager();
@@ -66,6 +75,9 @@ public class CacheSettings implements Serializable {
 		return instance;
 	}
 
+	/**
+	 * Save.
+	 */
 	public void save() {
 		try {
 			StorageManager.getInstance().saveSettings(
@@ -76,15 +88,26 @@ public class CacheSettings implements Serializable {
 		}
 	}
 
+	/**
+	 * Instantiates a new cache settings.
+	 */
 	private CacheSettings() {
 		resetDefaults();
 	}
 
+	/**
+	 * Reset defaults.
+	 */
 	public void resetDefaults() {
 		this.setMaxRAMCacheSize(5 * 1024 * 1024);
 		this.setDefaultCacheExpirationOffset(60);
 	}
 
+	/**
+	 * Gets the max ram cache size.
+	 *
+	 * @return the max ram cache size
+	 */
 	public int getMaxRAMCacheSize() {
 		return CacheManager.getInstance().getMaxTransientCacheSize();
 	}
@@ -99,8 +122,14 @@ public class CacheSettings implements Serializable {
 		CacheManager.getInstance().setMaxTransientCacheSize(maxRAMCacheSize);
 	}
 
+	/** The default cache expiration offset. */
 	private int defaultCacheExpirationOffset;
 
+	/**
+	 * Gets the default cache expiration offset.
+	 *
+	 * @return the default cache expiration offset
+	 */
 	public int getDefaultCacheExpirationOffset() {
 		return defaultCacheExpirationOffset;
 	}
@@ -109,6 +138,8 @@ public class CacheSettings implements Serializable {
 	 * Sets the default offset in seconds added to the response cache timestamp
 	 * to get the expiration time of a document. This is used with cacheable
 	 * documents when max-age and the Expires header are missing.
+	 *
+	 * @param defaultCacheExpirationOffset the new default cache expiration offset
 	 */
 	public void setDefaultCacheExpirationOffset(int defaultCacheExpirationOffset) {
 		this.defaultCacheExpirationOffset = defaultCacheExpirationOffset;

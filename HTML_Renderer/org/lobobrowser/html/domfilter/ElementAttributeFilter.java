@@ -28,20 +28,44 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
+/**
+ * The Class ElementAttributeFilter.
+ */
 public class ElementAttributeFilter {
+	
+	/** The attribute. */
 	private final String attribute;
+	
+	/** The node list. */
 	private final NodeList nodeList;
 
+	/**
+	 * Instantiates a new element attribute filter.
+	 *
+	 * @param nodeList the node list
+	 * @param attribute the attribute
+	 */
 	public ElementAttributeFilter(NodeList nodeList, String attribute) {
 		this.attribute = attribute;
 		this.nodeList = nodeList;
 	}
 	
+	/**
+	 * Instantiates a new element attribute filter.
+	 *
+	 * @param attribute the attribute
+	 */
 	public ElementAttributeFilter(String attribute) {
 		this.attribute = attribute;
 		nodeList = null;
 	}
 
+	/**
+	 * Gets the attribute.
+	 *
+	 * @return the attribute
+	 */
 	public String getAttribute() {
 
 		String result = "";
@@ -60,6 +84,12 @@ public class ElementAttributeFilter {
 
 	}
 
+	/**
+	 * Sets the attribute.
+	 *
+	 * @param doc the doc
+	 * @param val the val
+	 */
 	public void setAttribute(HTMLDocumentImpl doc, String val) {
 		boolean result = false;
 		HTMLElement el = doc.getBody();
@@ -83,6 +113,12 @@ public class ElementAttributeFilter {
 		}
 	}
 	
+	/**
+	 * Removes the attribute.
+	 *
+	 * @param doc the doc
+	 * @param val the val
+	 */
 	public void removeAttribute(HTMLDocumentImpl doc,String val) {
 		HTMLElement el = doc.getBody();
 		el.removeAttribute(attribute);

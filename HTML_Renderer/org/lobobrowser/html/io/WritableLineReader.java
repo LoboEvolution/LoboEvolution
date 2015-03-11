@@ -27,17 +27,36 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.Reader;
 
+
+/**
+ * The Class WritableLineReader.
+ */
 public class WritableLineReader extends LineNumberReader {
+	
+	/**
+	 * Instantiates a new writable line reader.
+	 *
+	 * @param reader the reader
+	 * @param bufferSize the buffer size
+	 */
 	public WritableLineReader(Reader reader, int bufferSize) {
 		super(reader, bufferSize);
 	}
 
+	/**
+	 * Instantiates a new writable line reader.
+	 *
+	 * @param reader the reader
+	 */
 	public WritableLineReader(Reader reader) {
 		super(reader);
 	}
 
 	/*
 	 * Note: Not implicitly thread safe.
+	 */
+	/* (non-Javadoc)
+	 * @see java.io.LineNumberReader#read()
 	 */
 	public int read() throws IOException {
 		StringBuffer sb = this.writeBuffer;
@@ -71,6 +90,9 @@ public class WritableLineReader extends LineNumberReader {
 		return super.read(b, off, len);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.io.BufferedReader#ready()
+	 */
 	public boolean ready() throws IOException {
 		StringBuffer sb = this.writeBuffer;
 		if (sb != null && sb.length() > 0) {
@@ -89,13 +111,14 @@ public class WritableLineReader extends LineNumberReader {
 		super.close();
 	}
 
+	/** The write buffer. */
 	private StringBuffer writeBuffer = null;
 
 	/**
 	 * Note: Not implicitly thread safe.
-	 * 
-	 * @param text
-	 * @throws IOException
+	 *
+	 * @param text the text
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void write(String text) throws IOException {
 		// Document overrides this to know that new data is coming.

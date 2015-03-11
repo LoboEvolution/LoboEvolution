@@ -22,14 +22,31 @@ package org.lobobrowser.html.renderer;
 
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 
+
 /**
  * Provides direct access to the GUI component where the document is rendered,
  * typically a browser frame of some sort.
  */
 public interface FrameContext {
+	
+	/**
+	 * Reset selection.
+	 *
+	 * @param rpoint the rpoint
+	 */
 	public void resetSelection(RenderableSpot rpoint);
 
+	/**
+	 * Expand selection.
+	 *
+	 * @param rpoint the rpoint
+	 */
 	public void expandSelection(RenderableSpot rpoint);
 
+	/**
+	 * Delayed relayout.
+	 *
+	 * @param node the node
+	 */
 	public void delayedRelayout(DOMNodeImpl node);
 }

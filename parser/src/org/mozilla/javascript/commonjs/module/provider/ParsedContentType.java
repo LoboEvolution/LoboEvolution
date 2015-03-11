@@ -7,6 +7,7 @@ package org.mozilla.javascript.commonjs.module.provider;
 import java.io.Serializable;
 import java.util.StringTokenizer;
 
+
 /**
  * Breaks a "contentType; charset=encoding" MIME type into content type and
  * encoding parts.
@@ -15,9 +16,14 @@ import java.util.StringTokenizer;
  */
 public final class ParsedContentType implements Serializable
 {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /** The content type. */
     private final String contentType;
+    
+    /** The encoding. */
     private final String encoding;
 
     /**

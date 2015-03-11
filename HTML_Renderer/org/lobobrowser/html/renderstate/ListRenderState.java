@@ -27,11 +27,25 @@ import java.awt.Toolkit;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.style.HtmlInsets;
 
+
+/**
+ * The Class ListRenderState.
+ */
 public class ListRenderState extends AbstractMarginRenderState {
+	
+	/**
+	 * Instantiates a new list render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param element the element
+	 */
 	public ListRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.AbstractMarginRenderState#getDefaultMarginInsets()
+	 */
 	protected HtmlInsets getDefaultMarginInsets() {
 		HtmlInsets insets = new HtmlInsets();
 		RenderState prevRS = this.getPreviousRenderState();
@@ -48,6 +62,9 @@ public class ListRenderState extends AbstractMarginRenderState {
 		return insets;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.BlockRenderState#getDefaultDisplay()
+	 */
 	public int getDefaultDisplay() {
 		return DISPLAY_LIST_ITEM;
 	}

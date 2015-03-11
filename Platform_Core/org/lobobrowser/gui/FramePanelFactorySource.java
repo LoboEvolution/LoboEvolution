@@ -20,19 +20,34 @@
  */
 package org.lobobrowser.gui;
 
+
 /**
  * This class allows trapping the creation of {@link FramePanel} instances. This
  * is useful, for example, if you need to add a listener to every
  * <code>FramePanel</code> that is created (e.g. for IFRAMEs).
  */
 public class FramePanelFactorySource {
+	
+	/** The Constant instance. */
 	private static final FramePanelFactorySource instance = new FramePanelFactorySource();
+	
+	/** The active factory. */
 	private volatile FramePanelFactory activeFactory = new DefaultFramePanelFactory();
 
+	/**
+	 * Gets the single instance of FramePanelFactorySource.
+	 *
+	 * @return single instance of FramePanelFactorySource
+	 */
 	public static FramePanelFactorySource getInstance() {
 		return instance;
 	}
 
+	/**
+	 * Gets the active factory.
+	 *
+	 * @return the active factory
+	 */
 	public FramePanelFactory getActiveFactory() {
 		return activeFactory;
 	}
@@ -41,8 +56,8 @@ public class FramePanelFactorySource {
 	 * Sets a new {@link FramePanelFactory} that is used to create
 	 * <code>FramePanel</code>s as requested by browser content (e.g. IFRAMEs in
 	 * HTML).
-	 * 
-	 * @param activeFactory
+	 *
+	 * @param activeFactory the new active factory
 	 */
 	public void setActiveFactory(FramePanelFactory activeFactory) {
 		if (activeFactory == null) {

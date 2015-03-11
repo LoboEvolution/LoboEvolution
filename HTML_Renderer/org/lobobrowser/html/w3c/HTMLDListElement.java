@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Definition list. See the DL element definition in HTML 4.01.
  * <p>
@@ -39,15 +40,20 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLDListElement extends HTMLElement {
+	
 	/**
 	 * Reduce spacing between list items. See the compact attribute definition
 	 * in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the compact
 	 */
 	public boolean getCompact();
 
 	/**
 	 * Reduce spacing between list items. See the compact attribute definition
 	 * in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param compact the new compact
 	 */
 	public void setCompact(boolean compact);
 

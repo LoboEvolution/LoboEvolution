@@ -52,6 +52,7 @@ import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.RenderThreadState;
 import org.lobobrowser.util.Objects;
 
+
 /**
  * Represents a HTML block in a rendered document, typically a DIV. The root
  * renderer node is of this type as well.
@@ -61,34 +62,76 @@ import org.lobobrowser.util.Objects;
  */
 public class RBlock extends BaseElementRenderable implements
 		RenderableContainer, ImageObserver {
+	
+	/** The Constant logger. */
 	protected static final Logger logger = Logger.getLogger(RBlock.class
 			.getName());
+	
+	/** The Constant loggableInfo. */
 	private static final boolean loggableInfo = logger.isLoggable(Level.INFO);
+	
+	/** The Constant MAX_CACHE_SIZE. */
 	private static final int MAX_CACHE_SIZE = 10;
 
+	/** The frame context. */
 	protected final FrameContext frameContext;
+	
+	/** The list nesting. */
 	protected final int listNesting;
+	
+	/** The renderer context. */
 	protected final HtmlRendererContext rendererContext;
+	
+	/** The body layout. */
 	protected final RBlockViewport bodyLayout;
+	
+	/** The cached layout. */
 	protected final Map<LayoutKey, LayoutValue> cachedLayout = new Hashtable<LayoutKey, LayoutValue>(
 			5);
 
+	/** The start selection. */
 	protected RenderableSpot startSelection;
+	
+	/** The end selection. */
 	protected RenderableSpot endSelection;
+	
+	/** The v scroll bar. */
 	protected JScrollBar vScrollBar;
+	
+	/** The h scroll bar. */
 	protected JScrollBar hScrollBar;
+	
+	/** The has h scroll bar. */
 	protected boolean hasHScrollBar = false;
+	
+	/** The has v scroll bar. */
 	protected boolean hasVScrollBar = false;
 
 	// Validation-dependent variables...
 	// private Dimension layoutSize = null;
 
+	/** The default overflow x. */
 	protected int defaultOverflowX = RenderState.OVERFLOW_NONE;
+	
+	/** The default overflow y. */
 	protected int defaultOverflowY = RenderState.OVERFLOW_NONE;
 
+	/** The last layout value. */
 	private LayoutValue lastLayoutValue = null;
+	
+	/** The last layout key. */
 	private LayoutKey lastLayoutKey = null;
 
+	/**
+	 * Instantiates a new r block.
+	 *
+	 * @param modelNode the model node
+	 * @param listNesting the list nesting
+	 * @param pcontext the pcontext
+	 * @param rcontext the rcontext
+	 * @param frameContext the frame context
+	 * @param parentContainer the parent container
+	 */
 	public RBlock(DOMNodeImpl modelNode, int listNesting,
 			UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer parentContainer) {
@@ -110,20 +153,33 @@ public class RBlock extends BaseElementRenderable implements
 
 	/**
 	 * Gets the width the vertical scrollbar has when shown.
+	 *
+	 * @return the v scroll bar width
 	 */
 	public int getVScrollBarWidth() {
 		return SCROLL_BAR_THICKNESS;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#finalize()
+	 */
 	public void finalize() throws Throwable {
 		super.finalize();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RElement#getVAlign()
+	 */
 	public int getVAlign() {
 		// Not used
 		return VALIGN_BASELINE;
 	}
 
+	/**
+	 * Ensure visible.
+	 *
+	 * @param point the point
+	 */
 	public void ensureVisible(Point point) {
 		RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
@@ -157,6 +213,11 @@ public class RBlock extends BaseElementRenderable implements
 		}
 	}
 
+	/**
+	 * Gets the h scroll bar.
+	 *
+	 * @return the h scroll bar
+	 */
 	private JScrollBar getHScrollBar() {
 		JScrollBar sb = this.hScrollBar;
 		if (sb == null) {
@@ -169,6 +230,11 @@ public class RBlock extends BaseElementRenderable implements
 		return sb;
 	}
 
+	/**
+	 * Gets the v scroll bar.
+	 *
+	 * @return the v scroll bar
+	 */
 	private JScrollBar getVScrollBar() {
 		JScrollBar sb = this.vScrollBar;
 		if (sb == null) {
@@ -188,38 +254,77 @@ public class RBlock extends BaseElementRenderable implements
 	// || overflow == OVERFLOW_VERTICAL || overflow == OVERFLOW_AUTO);
 	// }
 	//
+	/**
+	 * Checks if is overflow visible x.
+	 *
+	 * @return true, if is overflow visible x
+	 */
 	public final boolean isOverflowVisibleX() {
 		int overflow = this.overflowX;
 		return overflow == RenderState.OVERFLOW_NONE
 				|| overflow == RenderState.OVERFLOW_VISIBLE;
 	}
 
+	/**
+	 * Checks if is overflow visible y.
+	 *
+	 * @return true, if is overflow visible y
+	 */
 	public final boolean isOverflowVisibleY() {
 		int overflow = this.overflowY;
 		return overflow == RenderState.OVERFLOW_NONE
 				|| overflow == RenderState.OVERFLOW_VISIBLE;
 	}
 
+	/**
+	 * Gets the first line height.
+	 *
+	 * @return the first line height
+	 */
 	public int getFirstLineHeight() {
 		return this.bodyLayout.getFirstLineHeight();
 	}
 
+	/**
+	 * Gets the first baseline offset.
+	 *
+	 * @return the first baseline offset
+	 */
 	public int getFirstBaselineOffset() {
 		return this.bodyLayout.getFirstBaselineOffset();
 	}
 
+	/**
+	 * Sets the selection end.
+	 *
+	 * @param rpoint the new selection end
+	 */
 	public void setSelectionEnd(RenderableSpot rpoint) {
 		this.endSelection = rpoint;
 	}
 
+	/**
+	 * Sets the selection start.
+	 *
+	 * @param rpoint the new selection start
+	 */
 	public void setSelectionStart(RenderableSpot rpoint) {
 		this.startSelection = rpoint;
 	}
 
+	/**
+	 * Gets the viewport list nesting.
+	 *
+	 * @param blockNesting the block nesting
+	 * @return the viewport list nesting
+	 */
 	public int getViewportListNesting(int blockNesting) {
 		return blockNesting;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#paint(java.awt.Graphics)
+	 */
 	public void paint(Graphics g) {
 		RenderState rs = this.modelNode.getRenderState();
 		if (rs != null && rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
@@ -321,6 +426,17 @@ public class RBlock extends BaseElementRenderable implements
 		}
 	}
 
+	/**
+	 * Layout.
+	 *
+	 * @param availWidth the avail width
+	 * @param availHeight the avail height
+	 * @param expandWidth the expand width
+	 * @param expandHeight the expand height
+	 * @param defaultOverflowX the default overflow x
+	 * @param defaultOverflowY the default overflow y
+	 * @param sizeOnly the size only
+	 */
 	public final void layout(int availWidth, int availHeight,
 			boolean expandWidth, boolean expandHeight, int defaultOverflowX,
 			int defaultOverflowY, boolean sizeOnly) {
@@ -328,6 +444,16 @@ public class RBlock extends BaseElementRenderable implements
 				defaultOverflowX, defaultOverflowY, sizeOnly);
 	}
 
+	/**
+	 * Layout.
+	 *
+	 * @param availWidth the avail width
+	 * @param availHeight the avail height
+	 * @param expandWidth the expand width
+	 * @param expandHeight the expand height
+	 * @param floatBoundsSource the float bounds source
+	 * @param sizeOnly the size only
+	 */
 	public final void layout(int availWidth, int availHeight,
 			boolean expandWidth, boolean expandHeight,
 			FloatingBoundsSource floatBoundsSource, boolean sizeOnly) {
@@ -336,6 +462,18 @@ public class RBlock extends BaseElementRenderable implements
 				this.defaultOverflowY, sizeOnly);
 	}
 
+	/**
+	 * Layout.
+	 *
+	 * @param availWidth the avail width
+	 * @param availHeight the avail height
+	 * @param expandWidth the expand width
+	 * @param expandHeight the expand height
+	 * @param floatBoundsSource the float bounds source
+	 * @param defaultOverflowX the default overflow x
+	 * @param defaultOverflowY the default overflow y
+	 * @param sizeOnly the size only
+	 */
 	public final void layout(int availWidth, int availHeight,
 			boolean expandWidth, boolean expandHeight,
 			FloatingBoundsSource floatBoundsSource, int defaultOverflowX,
@@ -351,12 +489,27 @@ public class RBlock extends BaseElementRenderable implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#doLayout(int, int, boolean)
+	 */
 	public final void doLayout(int availWidth, int availHeight, boolean sizeOnly) {
 		// This is an override of an abstract method.
 		this.doLayout(availWidth, availHeight, true, false, null,
 				this.defaultOverflowX, this.defaultOverflowY, sizeOnly);
 	}
 
+	/**
+	 * Do layout.
+	 *
+	 * @param availWidth the avail width
+	 * @param availHeight the avail height
+	 * @param expandWidth the expand width
+	 * @param expandHeight the expand height
+	 * @param floatBoundsSource the float bounds source
+	 * @param defaultOverflowX the default overflow x
+	 * @param defaultOverflowY the default overflow y
+	 * @param sizeOnly the size only
+	 */
 	public void doLayout(int availWidth, int availHeight, boolean expandWidth,
 			boolean expandHeight, FloatingBoundsSource floatBoundsSource,
 			int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
@@ -369,11 +522,16 @@ public class RBlock extends BaseElementRenderable implements
 	 * Lays out and sets dimensions only if RBlock is invalid (or never before
 	 * layed out), if the parameters passed differ from the last layout, or if
 	 * the current font differs from the font for the last layout.
-	 * 
-	 * @param availWidth
-	 * @param availHeight
-	 * @param useCache
-	 *            For testing. Should always be true.
+	 *
+	 * @param availWidth the avail width
+	 * @param availHeight the avail height
+	 * @param expandWidth the expand width
+	 * @param expandHeight the expand height
+	 * @param floatBoundsSource the float bounds source
+	 * @param defaultOverflowX the default overflow x
+	 * @param defaultOverflowY the default overflow y
+	 * @param sizeOnly the size only
+	 * @param useCache            For testing. Should always be true.
 	 */
 	public void doLayout(int availWidth, int availHeight, boolean expandWidth,
 			boolean expandHeight, FloatingBoundsSource floatBoundsSource,
@@ -432,6 +590,14 @@ public class RBlock extends BaseElementRenderable implements
 		this.sendDelayedPairsToParent();
 	}
 
+	/**
+	 * Correct viewport origin.
+	 *
+	 * @param insets the insets
+	 * @param blockWidth the block width
+	 * @param blockHeight the block height
+	 * @return true, if successful
+	 */
 	private final boolean correctViewportOrigin(Insets insets, int blockWidth,
 			int blockHeight) {
 		RBlockViewport bodyLayout = this.bodyLayout;
@@ -459,15 +625,17 @@ public class RBlock extends BaseElementRenderable implements
 
 	/**
 	 * Lays out the block without checking for prior dimensions.
-	 * 
-	 * @param declaredWidth
-	 *            The declared width of the block.
-	 * @param declaredHeight
-	 *            The declared height of the block.
-	 * @param tentativeWidth
-	 *            Presumed width of the whole block (with margins).
-	 * @param tentativeHeight
-	 * @return
+	 *
+	 * @param renderState the render state
+	 * @param availWidth the avail width
+	 * @param availHeight the avail height
+	 * @param expandWidth the expand width
+	 * @param expandHeight the expand height
+	 * @param blockFloatBoundsSource the block float bounds source
+	 * @param defaultOverflowX the default overflow x
+	 * @param defaultOverflowY the default overflow y
+	 * @param sizeOnly the size only
+	 * @return the layout value
 	 */
 	private final LayoutValue forceLayout(RenderState renderState,
 			int availWidth, int availHeight, boolean expandWidth,
@@ -732,6 +900,12 @@ public class RBlock extends BaseElementRenderable implements
 				vscroll);
 	}
 
+	/**
+	 * Gets the v unit increment.
+	 *
+	 * @param renderState the render state
+	 * @return the v unit increment
+	 */
 	private int getVUnitIncrement(RenderState renderState) {
 		if (renderState != null) {
 			return renderState.getFontMetrics().getHeight();
@@ -740,10 +914,13 @@ public class RBlock extends BaseElementRenderable implements
 		}
 	}
 
+	/** The resetting scroll bars. */
 	private boolean resettingScrollBars = false;
 
 	/**
 	 * Changes scroll bar state to match viewport origin.
+	 *
+	 * @param renderState the render state
 	 */
 	private void resetScrollBars(RenderState renderState) {
 		// Expected to be called only in the GUI thread.
@@ -885,6 +1062,9 @@ public class RBlock extends BaseElementRenderable implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#clearStyle(boolean)
+	 */
 	protected void clearStyle(boolean isRootBlock) {
 		super.clearStyle(isRootBlock);
 		this.overflowX = this.defaultOverflowX;
@@ -915,6 +1095,9 @@ public class RBlock extends BaseElementRenderable implements
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onDoubleClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
@@ -949,6 +1132,7 @@ public class RBlock extends BaseElementRenderable implements
 		}
 	}
 
+	/** The armed renderable. */
 	private BoundableRenderable armedRenderable;
 
 	/*
@@ -1018,6 +1202,9 @@ public class RBlock extends BaseElementRenderable implements
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RenderableContainer#getPaintedBackgroundColor()
+	 */
 	public Color getPaintedBackgroundColor() {
 		return this.backgroundColor;
 	}
@@ -1078,6 +1265,9 @@ public class RBlock extends BaseElementRenderable implements
 	// }
 	// }
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseRCollection#updateWidgetBounds(int, int)
+	 */
 	public void updateWidgetBounds(int guiX, int guiY) {
 		super.updateWidgetBounds(guiX, guiY);
 		boolean hscroll = this.hasHScrollBar;
@@ -1103,6 +1293,11 @@ public class RBlock extends BaseElementRenderable implements
 		}
 	}
 
+	/**
+	 * Scroll horizontal to.
+	 *
+	 * @param newX the new x
+	 */
 	public void scrollHorizontalTo(int newX) {
 		RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
@@ -1123,6 +1318,11 @@ public class RBlock extends BaseElementRenderable implements
 		}
 	}
 
+	/**
+	 * Scroll vertical to.
+	 *
+	 * @param newY the new y
+	 */
 	public void scrollVerticalTo(int newY) {
 		RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
@@ -1144,12 +1344,24 @@ public class RBlock extends BaseElementRenderable implements
 		}
 	}
 
+	/**
+	 * Scroll by units.
+	 *
+	 * @param orientation the orientation
+	 * @param units the units
+	 */
 	public void scrollByUnits(int orientation, int units) {
 		int offset = orientation == JScrollBar.VERTICAL ? this
 				.getVUnitIncrement(null) * units : units;
 		this.scrollBy(orientation, offset);
 	}
 
+	/**
+	 * Scroll by.
+	 *
+	 * @param orientation the orientation
+	 * @param offset the offset
+	 */
 	public void scrollBy(int orientation, int offset) {
 		RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
@@ -1207,6 +1419,12 @@ public class RBlock extends BaseElementRenderable implements
 		}
 	}
 
+	/**
+	 * Scroll to sb value.
+	 *
+	 * @param orientation the orientation
+	 * @param value the value
+	 */
 	private void scrollToSBValue(int orientation, int value) {
 		Insets insets = this.getInsets(this.hasHScrollBar, this.hasVScrollBar);
 		switch (orientation) {
@@ -1221,10 +1439,18 @@ public class RBlock extends BaseElementRenderable implements
 		}
 	}
 
+	/**
+	 * Gets the r block viewport.
+	 *
+	 * @return the r block viewport
+	 */
 	public RBlockViewport getRBlockViewport() {
 		return this.bodyLayout;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseRCollection#extractSelectionText(java.lang.StringBuffer, boolean, org.lobobrowser.html.renderer.RenderableSpot, org.lobobrowser.html.renderer.RenderableSpot)
+	 */
 	public boolean extractSelectionText(StringBuffer buffer,
 			boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
@@ -1240,10 +1466,18 @@ public class RBlock extends BaseElementRenderable implements
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return "RBlock[node=" + this.modelNode + "]";
 	}
 
+	/**
+	 * Gets the exportable floating info.
+	 *
+	 * @return the exportable floating info
+	 */
 	public FloatingInfo getExportableFloatingInfo() {
 		FloatingInfo info = this.bodyLayout.getExportableFloatingInfo();
 		if (info == null) {
@@ -1254,13 +1488,34 @@ public class RBlock extends BaseElementRenderable implements
 				+ insets.top, info.floats);
 	}
 
+	/**
+	 * The listener interface for receiving localAdjustment events.
+	 * The class that is interested in processing a localAdjustment
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addLocalAdjustmentListener</code> method. When
+	 * the localAdjustment event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see LocalAdjustmentEvent
+	 */
 	private class LocalAdjustmentListener implements AdjustmentListener {
+		
+		/** The orientation. */
 		private final int orientation;
 
+		/**
+		 * Instantiates a new local adjustment listener.
+		 *
+		 * @param orientation the orientation
+		 */
 		public LocalAdjustmentListener(int orientation) {
 			this.orientation = orientation;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.AdjustmentListener#adjustmentValueChanged(java.awt.event.AdjustmentEvent)
+		 */
 		public void adjustmentValueChanged(AdjustmentEvent e) {
 			if (RBlock.this.resettingScrollBars) {
 				return;
@@ -1283,35 +1538,94 @@ public class RBlock extends BaseElementRenderable implements
 		}
 	}
 
+	/**
+	 * Gets the default overflow x.
+	 *
+	 * @return the default overflow x
+	 */
 	public int getDefaultOverflowX() {
 		return defaultOverflowX;
 	}
 
+	/**
+	 * Gets the default overflow y.
+	 *
+	 * @return the default overflow y
+	 */
 	public int getDefaultOverflowY() {
 		return defaultOverflowY;
 	}
 
+	/**
+	 * Sets the default overflow x.
+	 *
+	 * @param defaultOverflowX the new default overflow x
+	 */
 	public void setDefaultOverflowX(int defaultOverflowX) {
 		this.defaultOverflowX = defaultOverflowX;
 	}
 
+	/**
+	 * Sets the default overflow y.
+	 *
+	 * @param defaultOverflowY the new default overflow y
+	 */
 	public void setDefaultOverflowY(int defaultOverflowY) {
 		this.defaultOverflowY = defaultOverflowY;
 	}
 
+	/**
+	 * The Class LayoutKey.
+	 */
 	public static class LayoutKey {
+		
+		/** The avail width. */
 		public final int availWidth;
+		
+		/** The avail height. */
 		public final int availHeight;
+		
+		/** The float bounds source. */
 		public final FloatingBoundsSource floatBoundsSource;
+		
+		/** The default overflow x. */
 		public final int defaultOverflowX;
+		
+		/** The default overflow y. */
 		public final int defaultOverflowY;
+		
+		/** The whitespace. */
 		public final int whitespace;
+		
+		/** The font. */
 		public final Font font;
+		
+		/** The expand width. */
 		public final boolean expandWidth;
+		
+		/** The expand height. */
 		public final boolean expandHeight;
+		
+		/** The use declared size. */
 		public final boolean useDeclaredSize;
+		
+		/** The override no wrap. */
 		public final boolean overrideNoWrap;
 
+		/**
+		 * Instantiates a new layout key.
+		 *
+		 * @param availWidth the avail width
+		 * @param availHeight the avail height
+		 * @param expandWidth the expand width
+		 * @param expandHeight the expand height
+		 * @param floatBoundsSource the float bounds source
+		 * @param defaultOverflowX the default overflow x
+		 * @param defaultOverflowY the default overflow y
+		 * @param whitespace the whitespace
+		 * @param font the font
+		 * @param overrideNoWrap the override no wrap
+		 */
 		public LayoutKey(int availWidth, int availHeight, boolean expandWidth,
 				boolean expandHeight, FloatingBoundsSource floatBoundsSource,
 				int defaultOverflowX, int defaultOverflowY, int whitespace,
@@ -1330,6 +1644,9 @@ public class RBlock extends BaseElementRenderable implements
 			this.overrideNoWrap = overrideNoWrap;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
 		public boolean equals(Object obj) {
 			if (obj == this) {
 				return true;
@@ -1352,6 +1669,9 @@ public class RBlock extends BaseElementRenderable implements
 							this.floatBoundsSource);
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#hashCode()
+		 */
 		public int hashCode() {
 			Font font = this.font;
 			return (this.availWidth * 1000 + this.availHeight)

@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Preformatted text. See the PRE element definition in HTML 4.01.
  * <p>
@@ -39,15 +40,20 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLPreElement extends HTMLElement {
+	
 	/**
 	 * Fixed width for content. See the width attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the width
 	 */
 	public int getWidth();
 
 	/**
 	 * Fixed width for content. See the width attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param width the new width
 	 */
 	public void setWidth(int width);
 }

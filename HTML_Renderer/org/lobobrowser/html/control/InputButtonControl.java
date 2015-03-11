@@ -35,11 +35,23 @@ import org.lobobrowser.html.domimpl.HTMLInputElementImpl;
 import org.lobobrowser.html.renderer.HtmlController;
 import org.lobobrowser.util.gui.WrapperLayout;
 
+
+/**
+ * The Class InputButtonControl.
+ */
 public class InputButtonControl extends BaseInputControl {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The widget. */
 	private final JButton widget;
 
+	/**
+	 * Instantiates a new input button control.
+	 *
+	 * @param modelNode the model node
+	 */
 	public InputButtonControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		this.setLayout(WrapperLayout.getInstance());
@@ -61,6 +73,9 @@ public class InputButtonControl extends BaseInputControl {
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#reset(int, int)
+	 */
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		RUIControl ruiControl = this.ruicontrol;
@@ -103,6 +118,9 @@ public class InputButtonControl extends BaseInputControl {
 		return this.widget.getText();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#setDisabled(boolean)
+	 */
 	public void setDisabled(boolean disabled) {
 		super.setDisabled(disabled);
 		this.widget.setEnabled(!disabled);
@@ -117,10 +135,19 @@ public class InputButtonControl extends BaseInputControl {
 		this.widget.setText(value);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.InputContext#resetInput()
+	 */
 	public void resetInput() {
 		// nop
 	}
 	
+	/**
+	 * Direction.
+	 *
+	 * @param dir the dir
+	 * @return the component orientation
+	 */
 	private ComponentOrientation direction(String dir) {
 
 		if ("ltr".equalsIgnoreCase(dir)) {

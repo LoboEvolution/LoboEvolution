@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Regroups the <code>COL</code> and <code>COLGROUP</code> elements. See the COL
  * element definition in HTML 4.01.
@@ -40,73 +41,98 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLTableColElement extends HTMLElement {
+	
 	/**
 	 * Horizontal alignment of cell data in column. See the align attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the align
 	 */
 	public String getAlign();
 
 	/**
 	 * Horizontal alignment of cell data in column. See the align attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param align the new align
 	 */
 	public void setAlign(String align);
 
 	/**
 	 * Alignment character for cells in a column. See the char attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the ch
 	 */
 	public String getCh();
 
 	/**
 	 * Alignment character for cells in a column. See the char attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param ch the new ch
 	 */
 	public void setCh(String ch);
 
 	/**
 	 * Offset of alignment character. See the charoff attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return the ch off
 	 */
 	public String getChOff();
 
 	/**
 	 * Offset of alignment character. See the charoff attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param chOff the new ch off
 	 */
 	public void setChOff(String chOff);
 
 	/**
 	 * Indicates the number of columns in a group or affected by a grouping. See
 	 * the span attribute definition in HTML 4.01.
+	 *
+	 * @return the span
 	 */
 	public int getSpan();
 
 	/**
 	 * Indicates the number of columns in a group or affected by a grouping. See
 	 * the span attribute definition in HTML 4.01.
+	 *
+	 * @param span the new span
 	 */
 	public void setSpan(int span);
 
 	/**
 	 * Vertical alignment of cell data in column. See the valign attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the v align
 	 */
 	public String getVAlign();
 
 	/**
 	 * Vertical alignment of cell data in column. See the valign attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param vAlign the new v align
 	 */
 	public void setVAlign(String vAlign);
 
 	/**
 	 * Default column width. See the width attribute definition in HTML 4.01.
+	 *
+	 * @return the width
 	 */
 	public String getWidth();
 
 	/**
 	 * Default column width. See the width attribute definition in HTML 4.01.
+	 *
+	 * @param width the new width
 	 */
 	public void setWidth(String width);
 

@@ -34,23 +34,42 @@ import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
 import org.lobobrowser.util.io.NetRoutines;
 
+
 /**
  * Connection settings. This is a singleton class with an instance obtained by
  * calling {@link #getInstance()}.
  */
 public class ConnectionSettings implements java.io.Serializable {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(ConnectionSettings.class.getName());
+	
+	/** The Constant instance. */
 	private static final ConnectionSettings instance;
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574500000000301L;
 
+	/** The proxy type. */
 	private Proxy.Type proxyType = Proxy.Type.DIRECT;
+	
+	/** The socket address. */
 	private InetSocketAddress socketAddress = null;
+	
+	/** The user name. */
 	private String userName;
+	
+	/** The password. */
 	private String password;
+	
+	/** The authenticated. */
 	private boolean authenticated;
+	
+	/** The disable proxy for local addresses. */
 	private boolean disableProxyForLocalAddresses;
 
+	/** The proxy. */
 	private transient Proxy proxy;
 
 	static {
@@ -69,10 +88,16 @@ public class ConnectionSettings implements java.io.Serializable {
 		instance = ins;
 	}
 
+	/**
+	 * Instantiates a new connection settings.
+	 */
 	private ConnectionSettings() {
 		restoreDefaults();
 	}
 
+	/**
+	 * Restore defaults.
+	 */
 	public void restoreDefaults() {
 		this.proxyType = Proxy.Type.DIRECT;
 		this.userName = "";
@@ -87,6 +112,8 @@ public class ConnectionSettings implements java.io.Serializable {
 
 	/**
 	 * Gets the class singleton.
+	 *
+	 * @return single instance of ConnectionSettings
 	 */
 	public static ConnectionSettings getInstance() {
 		SecurityManager sm = System.getSecurityManager();
@@ -98,6 +125,9 @@ public class ConnectionSettings implements java.io.Serializable {
 
 	/**
 	 * Gets a non-<code>null</code> <code>Proxy</code> insteance.
+	 *
+	 * @param host the host
+	 * @return the proxy
 	 */
 	public Proxy getProxy(String host) {
 		synchronized (this) {
@@ -119,6 +149,11 @@ public class ConnectionSettings implements java.io.Serializable {
 		}
 	}
 
+	/**
+	 * Gets the password authentication.
+	 *
+	 * @return the password authentication
+	 */
 	public PasswordAuthentication getPasswordAuthentication() {
 		String userName = this.userName;
 		String password = this.password;
@@ -129,6 +164,8 @@ public class ConnectionSettings implements java.io.Serializable {
 	}
 
 	/**
+	 * Checks if is authenticated.
+	 *
 	 * @return Returns the authenticated.
 	 */
 	public boolean isAuthenticated() {
@@ -136,8 +173,9 @@ public class ConnectionSettings implements java.io.Serializable {
 	}
 
 	/**
-	 * @param authenticated
-	 *            The authenticated to set.
+	 * Sets the authenticated.
+	 *
+	 * @param authenticated            The authenticated to set.
 	 */
 	public void setAuthenticated(boolean authenticated) {
 		this.authenticated = authenticated;
@@ -147,6 +185,8 @@ public class ConnectionSettings implements java.io.Serializable {
 	}
 
 	/**
+	 * Gets the password.
+	 *
 	 * @return Returns the password.
 	 */
 	public String getPassword() {
@@ -154,8 +194,9 @@ public class ConnectionSettings implements java.io.Serializable {
 	}
 
 	/**
-	 * @param password
-	 *            The password to set.
+	 * Sets the password.
+	 *
+	 * @param password            The password to set.
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -165,6 +206,8 @@ public class ConnectionSettings implements java.io.Serializable {
 	}
 
 	/**
+	 * Gets the user name.
+	 *
 	 * @return Returns the userName.
 	 */
 	public String getUserName() {
@@ -172,8 +215,9 @@ public class ConnectionSettings implements java.io.Serializable {
 	}
 
 	/**
-	 * @param userName
-	 *            The userName to set.
+	 * Sets the user name.
+	 *
+	 * @param userName            The userName to set.
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -183,6 +227,8 @@ public class ConnectionSettings implements java.io.Serializable {
 	}
 
 	/**
+	 * Gets the proxy type.
+	 *
 	 * @return Returns the proxyType.
 	 */
 	public Proxy.Type getProxyType() {
@@ -190,8 +236,9 @@ public class ConnectionSettings implements java.io.Serializable {
 	}
 
 	/**
-	 * @param proxyType
-	 *            The proxyType to set.
+	 * Sets the proxy type.
+	 *
+	 * @param proxyType            The proxyType to set.
 	 */
 	public void setProxyType(Proxy.Type proxyType) {
 		this.proxyType = proxyType;
@@ -201,6 +248,8 @@ public class ConnectionSettings implements java.io.Serializable {
 	}
 
 	/**
+	 * Gets the inet socket address.
+	 *
 	 * @return Returns the socketAddress.
 	 */
 	public InetSocketAddress getInetSocketAddress() {
@@ -208,8 +257,9 @@ public class ConnectionSettings implements java.io.Serializable {
 	}
 
 	/**
-	 * @param socketAddress
-	 *            The socketAddress to set.
+	 * Sets the inet socket address.
+	 *
+	 * @param socketAddress            The socketAddress to set.
 	 */
 	public void setInetSocketAddress(InetSocketAddress socketAddress) {
 		this.socketAddress = socketAddress;
@@ -218,10 +268,20 @@ public class ConnectionSettings implements java.io.Serializable {
 		}
 	}
 
+	/**
+	 * Checks if is disable proxy for local addresses.
+	 *
+	 * @return true, if is disable proxy for local addresses
+	 */
 	public boolean isDisableProxyForLocalAddresses() {
 		return disableProxyForLocalAddresses;
 	}
 
+	/**
+	 * Sets the disable proxy for local addresses.
+	 *
+	 * @param disableProxyForLocalAddresses the new disable proxy for local addresses
+	 */
 	public void setDisableProxyForLocalAddresses(
 			boolean disableProxyForLocalAddresses) {
 		this.disableProxyForLocalAddresses = disableProxyForLocalAddresses;
@@ -230,6 +290,9 @@ public class ConnectionSettings implements java.io.Serializable {
 		}
 	}
 
+	/**
+	 * Save.
+	 */
 	public void save() {
 		try {
 			StorageManager.getInstance().saveSettings(

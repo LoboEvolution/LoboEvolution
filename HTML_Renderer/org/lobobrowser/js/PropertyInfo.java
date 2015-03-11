@@ -22,37 +22,83 @@ package org.lobobrowser.js;
 
 import java.lang.reflect.Method;
 
+
+/**
+ * The Class PropertyInfo.
+ */
 public class PropertyInfo {
+	
+	/** The name. */
 	private final String name;
+	
+	/** The property type. */
 	private final Class propertyType;
+	
+	/** The setter. */
 	private Method getter, setter;
 
+	/**
+	 * Instantiates a new property info.
+	 *
+	 * @param name the name
+	 * @param propType the prop type
+	 */
 	public PropertyInfo(String name, Class propType) {
 		super();
 		this.name = name;
 		this.propertyType = propType;
 	}
 
+	/**
+	 * Gets the getter.
+	 *
+	 * @return the getter
+	 */
 	public Method getGetter() {
 		return getter;
 	}
 
+	/**
+	 * Sets the getter.
+	 *
+	 * @param getter the new getter
+	 */
 	public void setGetter(Method getter) {
 		this.getter = getter;
 	}
 
+	/**
+	 * Gets the setter.
+	 *
+	 * @return the setter
+	 */
 	public Method getSetter() {
 		return setter;
 	}
 
+	/**
+	 * Sets the setter.
+	 *
+	 * @param setter the new setter
+	 */
 	public void setSetter(Method setter) {
 		this.setter = setter;
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return this.name;
 	}
 
+	/**
+	 * Gets the property type.
+	 *
+	 * @return the property type
+	 */
 	public Class getPropertyType() {
 		return propertyType;
 	}

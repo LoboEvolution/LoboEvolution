@@ -22,6 +22,7 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.ua;
 
+
 /**
  * Enumeration with different the different types of request/response progress
  * qualifiers.
@@ -31,9 +32,11 @@ package org.lobobrowser.ua;
 public enum ProgressType {
 	/** This is the initial state. */
 	NONE,
-	/** The client is attempting to connect to the server */
+	
+	/**  The client is attempting to connect to the server. */
 	CONNECTING,
-	/** The client is sending POST data */
+	
+	/**  The client is sending POST data. */
 	SENDING,
 	/**
 	 * The client is waiting for a response from the server. POST data, if any,

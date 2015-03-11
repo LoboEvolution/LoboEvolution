@@ -44,19 +44,42 @@ import org.lobobrowser.clientlet.ClientletContext;
 import org.lobobrowser.clientlet.ClientletException;
 import org.lobobrowser.util.io.IORoutines;
 
+
+/**
+ * The Class JavaResponseFileManager.
+ */
 public class JavaResponseFileManager implements JavaFileManager {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(JavaResponseFileManager.class.getName());
 
-	/** FileObject's by class name */
+	/**  FileObject's by class name. */
 	private Map<String, JavaFileObject> outFiles = new HashMap<String, JavaFileObject>();
 
+	/** The class path repository. */
 	private final PathRepository classPathRepository;
+	
+	/** The source path repository. */
 	private final PathRepository sourcePathRepository;
+	
+	/** The platform class path repository. */
 	private final PathRepository platformClassPathRepository;
+	
+	/** The context. */
 	private final ClientletContext context;
+	
+	/** The compilation unit. */
 	private JavaFileObject compilationUnit;
 
+	/**
+	 * Instantiates a new java response file manager.
+	 *
+	 * @param context the context
+	 * @param pcpr the pcpr
+	 * @param cpr the cpr
+	 * @param spr the spr
+	 */
 	public JavaResponseFileManager(ClientletContext context,
 			PathRepository pcpr, PathRepository cpr, PathRepository spr) {
 		this.context = context;
@@ -65,21 +88,38 @@ public class JavaResponseFileManager implements JavaFileManager {
 		this.sourcePathRepository = spr;
 	}
 
+	/**
+	 * Sets the compilation unit.
+	 *
+	 * @param cu the new compilation unit
+	 */
 	public void setCompilationUnit(JavaFileObject cu) {
 		this.compilationUnit = cu;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileManager#close()
+	 */
 	public void close() throws IOException {
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileManager#flush()
+	 */
 	public void flush() throws IOException {
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileManager#getClassLoader(javax.tools.JavaFileManager.Location)
+	 */
 	public ClassLoader getClassLoader(Location location) {
 		// No loading of compiler plugins.
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileManager#getFileForInput(javax.tools.JavaFileManager.Location, java.lang.String, java.lang.String)
+	 */
 	public FileObject getFileForInput(Location location, String packageName,
 			String relativeName) throws IOException {
 		if (logger.isLoggable(Level.INFO)) {
@@ -99,6 +139,9 @@ public class JavaResponseFileManager implements JavaFileManager {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileManager#getFileForOutput(javax.tools.JavaFileManager.Location, java.lang.String, java.lang.String, javax.tools.FileObject)
+	 */
 	public FileObject getFileForOutput(Location location, String packageName,
 			String relativeName, FileObject sibling) throws IOException {
 		if (logger.isLoggable(Level.INFO)) {
@@ -110,6 +153,9 @@ public class JavaResponseFileManager implements JavaFileManager {
 				"Not expected to be called");
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileManager#getJavaFileForInput(javax.tools.JavaFileManager.Location, java.lang.String, javax.tools.JavaFileObject.Kind)
+	 */
 	public JavaFileObject getJavaFileForInput(Location location,
 			String className, Kind kind) throws IOException {
 		if (logger.isLoggable(Level.INFO)) {
@@ -144,6 +190,13 @@ public class JavaResponseFileManager implements JavaFileManager {
 		}
 	}
 
+	/**
+	 * Gets the output file uri.
+	 *
+	 * @param fileName the file name
+	 * @return the output file uri
+	 * @throws URISyntaxException the URI syntax exception
+	 */
 	private java.net.URI getOutputFileURI(String fileName)
 			throws URISyntaxException {
 		URL responseURL = this.context.getResponse().getResponseURL();
@@ -159,8 +212,12 @@ public class JavaResponseFileManager implements JavaFileManager {
 				+ outputPath);
 	}
 
+	/** The resulting class name. */
 	private String resultingClassName;
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileManager#getJavaFileForOutput(javax.tools.JavaFileManager.Location, java.lang.String, javax.tools.JavaFileObject.Kind, javax.tools.FileObject)
+	 */
 	public JavaFileObject getJavaFileForOutput(Location location,
 			String className, Kind kind, FileObject sibling) throws IOException {
 		if (logger.isLoggable(Level.INFO)) {
@@ -200,16 +257,25 @@ public class JavaResponseFileManager implements JavaFileManager {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileManager#handleOption(java.lang.String, java.util.Iterator)
+	 */
 	public boolean handleOption(String arg0, Iterator<String> arg1) {
 		// Don't consume any options.
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileManager#hasLocation(javax.tools.JavaFileManager.Location)
+	 */
 	public boolean hasLocation(Location location) {
 		// All locations known?
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileManager#inferBinaryName(javax.tools.JavaFileManager.Location, javax.tools.JavaFileObject)
+	 */
 	public String inferBinaryName(Location location, JavaFileObject file) {
 		String fileName = file.getName();
 		int lastDotIdx = fileName.lastIndexOf('.');
@@ -219,10 +285,16 @@ public class JavaResponseFileManager implements JavaFileManager {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileManager#isSameFile(javax.tools.FileObject, javax.tools.FileObject)
+	 */
 	public boolean isSameFile(FileObject arg0, FileObject arg1) {
 		return arg0.equals(arg1);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileManager#list(javax.tools.JavaFileManager.Location, java.lang.String, java.util.Set, boolean)
+	 */
 	public Iterable<JavaFileObject> list(Location location, String packageName,
 			Set<Kind> kinds, boolean recurse) throws IOException {
 		if (logger.isLoggable(Level.INFO)) {
@@ -246,10 +318,23 @@ public class JavaResponseFileManager implements JavaFileManager {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.OptionChecker#isSupportedOption(java.lang.String)
+	 */
 	public int isSupportedOption(String option) {
 		return 0;
 	}
 
+	/**
+	 * Gets the builds the result.
+	 *
+	 * @param sourceCode the source code
+	 * @param directives the directives
+	 * @return the builds the result
+	 * @throws ClientletException the clientlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException the class not found exception
+	 */
 	public BuildResult getBuildResult(String sourceCode, Properties directives)
 			throws ClientletException, IOException, ClassNotFoundException {
 		String rcn = this.resultingClassName;
@@ -273,6 +358,12 @@ public class JavaResponseFileManager implements JavaFileManager {
 		return new BuildResult(rcn, classBytes, sourceCode, directives);
 	}
 
+	/**
+	 * Sets the persisted build result.
+	 *
+	 * @param buildResult the new persisted build result
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void setPersistedBuildResult(BuildResult buildResult)
 			throws IOException {
 		this.resultingClassName = buildResult.className;

@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Unordered list. See the UL element definition in HTML 4.01.
  * <p>
@@ -39,27 +40,36 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLUListElement extends HTMLElement {
+	
 	/**
 	 * Reduce spacing between list items. See the compact attribute definition
 	 * in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the compact
 	 */
 	public boolean getCompact();
 
 	/**
 	 * Reduce spacing between list items. See the compact attribute definition
 	 * in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param compact the new compact
 	 */
 	public void setCompact(boolean compact);
 
 	/**
 	 * Bullet style. See the type attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the type
 	 */
 	public String getType();
 
 	/**
 	 * Bullet style. See the type attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param type the new type
 	 */
 	public void setType(String type);
 }

@@ -23,17 +23,42 @@ package org.lobobrowser.html.style;
 import java.awt.Color;
 import java.net.URL;
 
+
+/**
+ * The Class BackgroundInfo.
+ */
 public class BackgroundInfo {
+	
+	/** The background color. */
 	public Color backgroundColor;
+	
+	/** The background image. */
 	public URL backgroundImage;
+	
+	/** The background x position absolute. */
 	public boolean backgroundXPositionAbsolute;
+	
+	/** The background x position. */
 	public int backgroundXPosition;
+	
+	/** The background y position absolute. */
 	public boolean backgroundYPositionAbsolute;
+	
+	/** The background y position. */
 	public int backgroundYPosition;
+	
+	/** The background repeat. */
 	public int backgroundRepeat = BR_REPEAT;
 
+	/** The Constant BR_REPEAT. */
 	public static final int BR_REPEAT = 0;
+	
+	/** The Constant BR_NO_REPEAT. */
 	public static final int BR_NO_REPEAT = 1;
+	
+	/** The Constant BR_REPEAT_X. */
 	public static final int BR_REPEAT_X = 2;
+	
+	/** The Constant BR_REPEAT_Y. */
 	public static final int BR_REPEAT_Y = 3;
 }

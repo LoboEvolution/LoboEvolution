@@ -23,19 +23,47 @@ import org.lobobrowser.html.w3c.HTMLOptionElement;
 import org.lobobrowser.html.w3c.HTMLOptionsCollection;
 import org.lobobrowser.util.gui.WrapperLayout;
 
+
+/**
+ * The Class InputSelectControl.
+ */
 public class InputSelectControl extends BaseInputControl {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The combo box. */
 	private final JComboBox<OptionItem> comboBox;
+	
+	/** The list. */
 	private final JList<OptionItem> list;
+	
+	/** The list model. */
 	private final DefaultListModel<OptionItem> listModel;
+	
+	/** The Constant STATE_NONE. */
 	private static final int STATE_NONE = 0;
+	
+	/** The Constant STATE_COMBO. */
 	private static final int STATE_COMBO = 1;
+	
+	/** The Constant STATE_LIST. */
 	private static final int STATE_LIST = 2;
+	
+	/** The state. */
 	private int state = STATE_NONE;
+	
+	/** The suspend selections. */
 	private boolean suspendSelections = false;
+	
+	/** The in selection event. */
 	private boolean inSelectionEvent;
 
+	/**
+	 * Instantiates a new input select control.
+	 *
+	 * @param modelNode the model node
+	 */
 	public InputSelectControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		this.setLayout(WrapperLayout.getInstance());
@@ -119,6 +147,9 @@ public class InputSelectControl extends BaseInputControl {
 		this.resetItemList();
 	}
 
+	/**
+	 * Reset item list.
+	 */
 	private void resetItemList() {
 		HTMLSelectElementImpl selectElement = (HTMLSelectElementImpl) this.controlElement;
 		boolean isMultiple = selectElement.getMultiple();
@@ -241,6 +272,9 @@ public class InputSelectControl extends BaseInputControl {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#reset(int, int)
+	 */
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		// Need to do this here in case element was incomplete
@@ -248,6 +282,9 @@ public class InputSelectControl extends BaseInputControl {
 		this.resetItemList();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#getValue()
+	 */
 	public String getValue() {
 		if (this.state == STATE_COMBO) {
 			OptionItem item = (OptionItem) this.comboBox.getSelectedItem();
@@ -258,12 +295,19 @@ public class InputSelectControl extends BaseInputControl {
 		}
 	}
 
+	/** The selected index. */
 	private int selectedIndex = -1;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#getSelectedIndex()
+	 */
 	public int getSelectedIndex() {
 		return this.selectedIndex;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#setSelectedIndex(int)
+	 */
 	public void setSelectedIndex(int value) {
 		this.selectedIndex = value;
 		boolean prevSuspend = this.suspendSelections;
@@ -301,19 +345,31 @@ public class InputSelectControl extends BaseInputControl {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#getVisibleSize()
+	 */
 	public int getVisibleSize() {
 		return this.comboBox.getMaximumRowCount();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#setVisibleSize(int)
+	 */
 	public void setVisibleSize(int value) {
 		this.comboBox.setMaximumRowCount(value);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.InputContext#resetInput()
+	 */
 	public void resetInput() {
 		this.list.setSelectedIndex(-1);
 		this.comboBox.setSelectedIndex(-1);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#getValues()
+	 */
 	public String[] getValues() {
 		if (this.state == STATE_COMBO) {
 			OptionItem item = (OptionItem) this.comboBox.getSelectedItem();
@@ -332,10 +388,22 @@ public class InputSelectControl extends BaseInputControl {
 		}
 	}
 
+	/**
+	 * The Class OptionItem.
+	 */
 	private static class OptionItem {
+		
+		/** The option. */
 		private final HTMLOptionElement option;
+		
+		/** The caption. */
 		private final String caption;
 
+		/**
+		 * Instantiates a new option item.
+		 *
+		 * @param option the option
+		 */
 		public OptionItem(HTMLOptionElement option) {
 			this.option = option;
 			String label = option.getLabel();
@@ -346,18 +414,36 @@ public class InputSelectControl extends BaseInputControl {
 			}
 		}
 
+		/**
+		 * Sets the selected.
+		 *
+		 * @param value the new selected
+		 */
 		public void setSelected(boolean value) {
 			this.option.setSelected(value);
 		}
 
+		/**
+		 * Checks if is selected.
+		 *
+		 * @return true, if is selected
+		 */
 		public boolean isSelected() {
 			return this.option.getSelected();
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
 		public String toString() {
 			return this.caption;
 		}
 
+		/**
+		 * Gets the value.
+		 *
+		 * @return the value
+		 */
 		public String getValue() {
 			String value = this.option.getValue();
 			if (value == null) {
@@ -367,6 +453,12 @@ public class InputSelectControl extends BaseInputControl {
 		}
 	}
 	
+	/**
+	 * Direction.
+	 *
+	 * @param dir the dir
+	 * @return the component orientation
+	 */
 	private ComponentOrientation direction(String dir) {
 
 		if ("ltr".equalsIgnoreCase(dir)) {

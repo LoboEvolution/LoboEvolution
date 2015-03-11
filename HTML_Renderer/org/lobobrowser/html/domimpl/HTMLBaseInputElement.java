@@ -37,17 +37,41 @@ import org.lobobrowser.html.w3c.HTMLFormElement;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class HTMLBaseInputElement.
+ */
 public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
+	
+	/**
+	 * Instantiates a new HTML base input element.
+	 *
+	 * @param name the name
+	 */
 	public HTMLBaseInputElement(String name) {
 		super(name);
 	}
 
+	/** The input context. */
 	protected InputContext inputContext;
+	
+	/** The deferred value. */
 	protected String deferredValue;
+	
+	/** The deferred checked. */
 	protected Boolean deferredChecked;
+	
+	/** The deferred readonly. */
 	protected Boolean deferredReadonly;
+	
+	/** The deferred disabled. */
 	protected Boolean deferredDisabled;
 
+	/**
+	 * Sets the input context.
+	 *
+	 * @param ic the new input context
+	 */
 	public void setInputContext(InputContext ic) {
 		String dv = null;
 		Boolean defDisabled = null;
@@ -76,14 +100,29 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Gets the default value.
+	 *
+	 * @return the default value
+	 */
 	public String getDefaultValue() {
 		return this.getAttribute(HtmlAttributeProperties.DEFAULTVALUE);
 	}
 
+	/**
+	 * Sets the default value.
+	 *
+	 * @param defaultValue the new default value
+	 */
 	public void setDefaultValue(String defaultValue) {
 		this.setAttribute(HtmlAttributeProperties.DEFAULTVALUE, defaultValue);
 	}
 
+	/**
+	 * Gets the form.
+	 *
+	 * @return the form
+	 */
 	public HTMLFormElement getForm() {
 		Node parent = this.getParentNode();
 		while (parent != null && !(parent instanceof HTMLFormElement)) {
@@ -92,6 +131,11 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		return (HTMLFormElement) parent;
 	}
 
+	/**
+	 * Submit form.
+	 *
+	 * @param extraFormInputs the extra form inputs
+	 */
 	public void submitForm(FormInput[] extraFormInputs) {
 		HTMLFormElementImpl form = (HTMLFormElementImpl) this.getForm();
 		if (form != null) {
@@ -99,6 +143,9 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Reset form.
+	 */
 	public void resetForm() {
 		HTMLFormElement form = this.getForm();
 		if (form != null) {
@@ -106,56 +153,115 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Gets the accept.
+	 *
+	 * @return the accept
+	 */
 	public String getAccept() {
 		return this.getAttribute(HtmlAttributeProperties.ACCEPT);
 	}
 
+	/**
+	 * Sets the accept.
+	 *
+	 * @param accept the new accept
+	 */
 	public void setAccept(String accept) {
 		this.setAttribute(HtmlAttributeProperties.ACCEPT, accept);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#getAccessKey()
+	 */
 	public String getAccessKey() {
 		return this.getAttribute(HtmlAttributeProperties.ACCESSKEY);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#setAccessKey(java.lang.String)
+	 */
 	public void setAccessKey(String accessKey) {
 		this.setAttribute(HtmlAttributeProperties.ACCESSKEY, accessKey);
 	}
 
+	/**
+	 * Gets the align.
+	 *
+	 * @return the align
+	 */
 	public String getAlign() {
 		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
+	/**
+	 * Sets the align.
+	 *
+	 * @param align the new align
+	 */
 	public void setAlign(String align) {
 		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
+	/**
+	 * Gets the alt.
+	 *
+	 * @return the alt
+	 */
 	public String getAlt() {
 		return this.getAttribute(HtmlAttributeProperties.ALT);
 	}
 
+	/**
+	 * Sets the alt.
+	 *
+	 * @param alt the new alt
+	 */
 	public void setAlt(String alt) {
 		this.setAttribute(HtmlAttributeProperties.ALT, alt);
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		// TODO: Should this return value of "id"?
 		return this.getAttribute(HtmlAttributeProperties.NAME);
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		this.setAttribute(HtmlAttributeProperties.NAME, name);
 	}
 	
+	/**
+	 * Gets the placeholder.
+	 *
+	 * @return the placeholder
+	 */
 	public String getPlaceholder() {
 		return this.getAttribute(HtmlAttributeProperties.PLACEHOLDER);
 	}
 
+	/**
+	 * Sets the placeholder.
+	 *
+	 * @param placeholder the new placeholder
+	 */
 	public void setPlaceholder(String placeholder) {
 		this.setAttribute(HtmlAttributeProperties.PLACEHOLDER, placeholder);
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#getDisabled()
+	 */
 	public boolean getDisabled() {
 		InputContext ic = this.inputContext;
 		if (ic == null) {
@@ -166,6 +272,11 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Sets the disabled.
+	 *
+	 * @param disabled the new disabled
+	 */
 	public void setDisabled(boolean disabled) {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
@@ -175,6 +286,11 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Gets the read only.
+	 *
+	 * @return the read only
+	 */
 	public boolean getReadOnly() {
 		InputContext ic = this.inputContext;
 		if (ic == null) {
@@ -185,6 +301,11 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Sets the read only.
+	 *
+	 * @param readOnly the new read only
+	 */
 	public void setReadOnly(boolean readOnly) {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
@@ -194,6 +315,9 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#getChecked()
+	 */
 	public boolean getChecked() {
 		InputContext ic = this.inputContext;
 		if (ic == null) {
@@ -204,6 +328,11 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Sets the checked.
+	 *
+	 * @param value the new checked
+	 */
 	public void setChecked(boolean value) {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
@@ -213,11 +342,17 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#getTabIndex()
+	 */
 	public int getTabIndex() {
 		InputContext ic = this.inputContext;
 		return ic == null ? 0 : ic.getTabIndex();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#setTabIndex(int)
+	 */
 	public void setTabIndex(int tabIndex) {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
@@ -225,6 +360,11 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Gets the value.
+	 *
+	 * @return the value
+	 */
 	public String getValue() {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
@@ -241,6 +381,11 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Gets the file value.
+	 *
+	 * @return the file value
+	 */
 	protected File[] getFileValue() {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
@@ -250,6 +395,11 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Sets the value.
+	 *
+	 * @param value the new value
+	 */
 	public void setValue(String value) {
 		InputContext ic = null;
 		synchronized (this) {
@@ -263,6 +413,9 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#blur()
+	 */
 	public void blur() {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
@@ -270,6 +423,9 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#focus()
+	 */
 	public void focus() {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
@@ -277,6 +433,9 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Select.
+	 */
 	public void select() {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
@@ -307,19 +466,34 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/** The onload. */
 	private Function onload;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#getOnload()
+	 */
 	public Function getOnload() {
 		return this.getEventFunction(this.onload, "onload");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#setOnload(org.mozilla.javascript.Function)
+	 */
 	public void setOnload(Function onload) {
 		this.onload = onload;
 	}
 
+	/** The image. */
 	private Image image = null;
+	
+	/** The image src. */
 	private String imageSrc;
 
+	/**
+	 * Load image.
+	 *
+	 * @param src the src
+	 */
 	private void loadImage(String src) {
 		HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
 		if (document != null) {
@@ -333,20 +507,26 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Gets the image.
+	 *
+	 * @return the image
+	 */
 	public final java.awt.Image getImage() {
 		synchronized (this.imageListeners) {
 			return this.image;
 		}
 	}
 
+	/** The image listeners. */
 	private final ArrayList<ImageListener> imageListeners = new ArrayList<ImageListener>(
 			1);
 
 	/**
 	 * Adds a listener of image loading events. The listener gets called right
 	 * away if there's already an image.
-	 * 
-	 * @param listener
+	 *
+	 * @param listener the listener
 	 */
 	public void addImageListener(ImageListener listener) {
 		ArrayList<ImageListener> l = this.imageListeners;
@@ -364,6 +544,11 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Removes the image listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void removeImageListener(ImageListener listener) {
 		ArrayList<ImageListener> l = this.imageListeners;
 		synchronized (l) {
@@ -371,6 +556,9 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Reset input.
+	 */
 	void resetInput() {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
@@ -378,6 +566,12 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Dispatch event.
+	 *
+	 * @param expectedImgSrc the expected img src
+	 * @param event the event
+	 */
 	private void dispatchEvent(String expectedImgSrc, ImageEvent event) {
 		ArrayList<ImageListener> l = this.imageListeners;
 		ImageListener[] listenerArray;
@@ -402,13 +596,34 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * The listener interface for receiving localImage events.
+	 * The class that is interested in processing a localImage
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addLocalImageListener</code> method. When
+	 * the localImage event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see LocalImageEvent
+	 */
 	private class LocalImageListener implements ImageListener {
+		
+		/** The expected img src. */
 		private final String expectedImgSrc;
 
+		/**
+		 * Instantiates a new local image listener.
+		 *
+		 * @param imgSrc the img src
+		 */
 		public LocalImageListener(String imgSrc) {
 			this.expectedImgSrc = imgSrc;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.html.dombl.ImageListener#imageLoaded(org.lobobrowser.html.dombl.ImageEvent)
+		 */
 		public void imageLoaded(ImageEvent event) {
 			dispatchEvent(this.expectedImgSrc, event);
 		}

@@ -27,11 +27,30 @@ import java.util.Iterator;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.util.CollectionUtilities;
 
+
+/**
+ * The Class RRelative.
+ */
 public class RRelative extends BaseRCollection {
+	
+	/** The child. */
 	private final RElement child;
+	
+	/** The xoffset. */
 	private final int xoffset;
+	
+	/** The yoffset. */
 	private final int yoffset;
 
+	/**
+	 * Instantiates a new r relative.
+	 *
+	 * @param container the container
+	 * @param modelNode the model node
+	 * @param child the child
+	 * @param xoffset the xoffset
+	 * @param yoffset the yoffset
+	 */
 	public RRelative(RenderableContainer container, ModelNode modelNode,
 			final RElement child, final int xoffset, final int yoffset) {
 		super(container, modelNode);
@@ -43,12 +62,20 @@ public class RRelative extends BaseRCollection {
 		this.yoffset = yoffset;
 	}
 
+	/**
+	 * Assign dimension.
+	 */
 	public void assignDimension() {
 		RElement child = this.child;
 		this.width = child.getWidth();
 		this.height = child.getHeight();
 	}
 
+	/**
+	 * Gets the exportable floating info.
+	 *
+	 * @return the exportable floating info
+	 */
 	public FloatingInfo getExportableFloatingInfo() {
 		RElement child = this.child;
 		if (child instanceof RBlock) {
@@ -80,59 +107,104 @@ public class RRelative extends BaseRCollection {
 	// -this.xoffset, this.yoffset);
 	// }
 	//
+	/**
+	 * Gets the element.
+	 *
+	 * @return the element
+	 */
 	public RElement getElement() {
 		return this.child;
 	}
 
+	/**
+	 * Gets the x offset.
+	 *
+	 * @return the x offset
+	 */
 	public int getXOffset() {
 		return xoffset;
 	}
 
+	/**
+	 * Gets the y offset.
+	 *
+	 * @return the y offset
+	 */
 	public int getYOffset() {
 		return yoffset;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.RCollection#getRenderables()
+	 */
 	public Iterator getRenderables() {
 		return CollectionUtilities.singletonIterator(this.child);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseBoundableRenderable#invalidateLayoutLocal()
+	 */
 	protected void invalidateLayoutLocal() {
 		// nop
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getLowestRenderableSpot(int, int)
+	 */
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		return this.child.getLowestRenderableSpot(x - this.xoffset, y
 				- this.yoffset);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#isContainedByNode()
+	 */
 	public boolean isContainedByNode() {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onDoubleClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		return this.child.onDoubleClick(event, x - this.xoffset, y
 				- this.yoffset);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		return this.child.onMouseClick(event, x - this.xoffset, y
 				- this.yoffset);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseDisarmed(java.awt.event.MouseEvent)
+	 */
 	public boolean onMouseDisarmed(MouseEvent event) {
 		return this.child.onMouseDisarmed(event);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMousePressed(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		return this.child.onMousePressed(event, x - this.xoffset, y
 				- this.yoffset);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseReleased(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		return this.child.onMouseReleased(event, x - this.xoffset, y
 				- this.yoffset);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.Renderable#paint(java.awt.Graphics)
+	 */
 	public void paint(Graphics g) {
 		this.child.paintTranslated(g);
 	}

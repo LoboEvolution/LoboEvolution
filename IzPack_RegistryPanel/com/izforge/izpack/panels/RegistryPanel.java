@@ -32,15 +32,27 @@ import com.izforge.izpack.installer.InstallerFrame;
 import com.izforge.izpack.installer.IzPanel;
 import com.izforge.izpack.util.NativeLibraryClient;
 
+
 /**
+ * The Class RegistryPanel.
+ *
  * @author J. H. S.
  */
 public class RegistryPanel extends IzPanel implements NativeLibraryClient {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(RegistryPanel.class
 			.getName());
 
+	/**
+	 * Instantiates a new registry panel.
+	 *
+	 * @param arg0 the arg0
+	 * @param arg1 the arg1
+	 */
 	public RegistryPanel(InstallerFrame arg0, InstallData arg1) {
 		super(arg0, arg1);
 	}
@@ -56,6 +68,9 @@ public class RegistryPanel extends IzPanel implements NativeLibraryClient {
 		this.performRegistryActions();
 	}
 
+	/**
+	 * Perform file actions.
+	 */
 	private void performFileActions() {
 		try {
 			File userHome = new File(System.getProperty("user.home"));
@@ -67,6 +82,11 @@ public class RegistryPanel extends IzPanel implements NativeLibraryClient {
 		}
 	}
 
+	/**
+	 * Delete decoration files.
+	 *
+	 * @param rootDir the root dir
+	 */
 	private void deleteDecorationFiles(File rootDir) {
 		// Deletes decoration files in cache directory
 		File[] files = rootDir.listFiles();
@@ -85,6 +105,9 @@ public class RegistryPanel extends IzPanel implements NativeLibraryClient {
 		}
 	}
 
+	/**
+	 * Perform registry actions.
+	 */
 	private void performRegistryActions() {
 		parent.skipPanel();
 	}

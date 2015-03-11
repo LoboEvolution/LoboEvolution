@@ -34,6 +34,7 @@ package org.lobobrowser.html.w3c;
 
 import org.w3c.dom.Document;
 
+
 /**
  * Inline subwindows. See the IFRAME element definition in HTML 4.01.
  * <p>
@@ -41,10 +42,13 @@ import org.w3c.dom.Document;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLIFrameElement extends HTMLElement {
+	
 	/**
 	 * Aligns this object (vertically or horizontally) with respect to its
 	 * surrounding text. See the align attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the align
 	 */
 	public String getAlign();
 
@@ -52,28 +56,38 @@ public interface HTMLIFrameElement extends HTMLElement {
 	 * Aligns this object (vertically or horizontally) with respect to its
 	 * surrounding text. See the align attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param align the new align
 	 */
 	public void setAlign(String align);
 
 	/**
 	 * Request frame borders. See the frameborder attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return the frame border
 	 */
 	public String getFrameBorder();
 
 	/**
 	 * Request frame borders. See the frameborder attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param frameBorder the new frame border
 	 */
 	public void setFrameBorder(String frameBorder);
 
 	/**
 	 * Frame height. See the height attribute definition in HTML 4.01.
+	 *
+	 * @return the height
 	 */
 	public String getHeight();
 
 	/**
 	 * Frame height. See the height attribute definition in HTML 4.01.
+	 *
+	 * @param height the new height
 	 */
 	public void setHeight(String height);
 
@@ -81,6 +95,8 @@ public interface HTMLIFrameElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a long description of this image or frame. See the longdesc
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @return the long desc
 	 */
 	public String getLongDesc();
 
@@ -88,54 +104,72 @@ public interface HTMLIFrameElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a long description of this image or frame. See the longdesc
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @param longDesc the new long desc
 	 */
 	public void setLongDesc(String longDesc);
 
 	/**
 	 * Frame margin height, in pixels. See the marginheight attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @return the margin height
 	 */
 	public String getMarginHeight();
 
 	/**
 	 * Frame margin height, in pixels. See the marginheight attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @param marginHeight the new margin height
 	 */
 	public void setMarginHeight(String marginHeight);
 
 	/**
 	 * Frame margin width, in pixels. See the marginwidth attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @return the margin width
 	 */
 	public String getMarginWidth();
 
 	/**
 	 * Frame margin width, in pixels. See the marginwidth attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @param marginWidth the new margin width
 	 */
 	public void setMarginWidth(String marginWidth);
 
 	/**
 	 * The frame name (object of the <code>target</code> attribute). See the
 	 * name attribute definition in HTML 4.01.
+	 *
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * The frame name (object of the <code>target</code> attribute). See the
 	 * name attribute definition in HTML 4.01.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name);
 
 	/**
 	 * Specify whether or not the frame should have scrollbars. See the
 	 * scrolling attribute definition in HTML 4.01.
+	 *
+	 * @return the scrolling
 	 */
 	public String getScrolling();
 
 	/**
 	 * Specify whether or not the frame should have scrollbars. See the
 	 * scrolling attribute definition in HTML 4.01.
+	 *
+	 * @param scrolling the new scrolling
 	 */
 	public void setScrolling(String scrolling);
 
@@ -143,6 +177,8 @@ public interface HTMLIFrameElement extends HTMLElement {
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating the initial frame contents. See the src attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @return the src
 	 */
 	public String getSrc();
 
@@ -150,23 +186,30 @@ public interface HTMLIFrameElement extends HTMLElement {
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating the initial frame contents. See the src attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @param src the new src
 	 */
 	public void setSrc(String src);
 
 	/**
 	 * Frame width. See the width attribute definition in HTML 4.01.
+	 *
+	 * @return the width
 	 */
 	public String getWidth();
 
 	/**
 	 * Frame width. See the width attribute definition in HTML 4.01.
+	 *
+	 * @param width the new width
 	 */
 	public void setWidth(String width);
 
 	/**
 	 * The document this frame contains, if there is any and it is available, or
 	 * <code>null</code> otherwise.
-	 * 
+	 *
+	 * @return the content document
 	 * @since DOM Level 2
 	 */
 	public Document getContentDocument();

@@ -64,36 +64,77 @@ import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.util.OS;
 import org.lobobrowser.util.Timing;
 
+
+/**
+ * The Class DownloadDialog.
+ */
 public class DownloadDialog extends JFrame {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(DownloadDialog.class
 			.getName());
 
+	/** The progress bar. */
 	private final JProgressBar progressBar = new JProgressBar();
+	
+	/** The bottom form panel. */
 	private final FormPanel bottomFormPanel = new FormPanel();
+	
+	/** The top form panel. */
 	private final FormPanel topFormPanel = new FormPanel();
+	
+	/** The document field. */
 	private final FormField documentField = new FormField(FieldType.TEXT, false);
+	
+	/** The size field. */
 	private final FormField sizeField = new FormField(FieldType.TEXT, false);
+	
+	/** The destination field. */
 	private final FormField destinationField = new FormField(FieldType.TEXT,
 			false);
+	
+	/** The time left field. */
 	private final FormField timeLeftField = new FormField(FieldType.TEXT, false);
+	
+	/** The mime type field. */
 	private final FormField mimeTypeField = new FormField(FieldType.TEXT, false);
+	
+	/** The transfer rate field. */
 	private final FormField transferRateField = new FormField(FieldType.TEXT,
 			false);
+	
+	/** The transfer size field. */
 	private final FormField transferSizeField = new FormField(FieldType.TEXT,
 			false);
+	
+	/** The save button. */
 	private final JButton saveButton = new JButton();
+	
+	/** The close button. */
 	private final JButton closeButton = new JButton();
+	
+	/** The open folder button. */
 	private final JButton openFolderButton = new JButton();
+	
+	/** The open button. */
 	private final JButton openButton = new JButton();
 
+	/** The url. */
 	private final URL url;
+	
+	/** The known content length. */
 	private final int knownContentLength;
 
+	/**
+	 * Instantiates a new download dialog.
+	 *
+	 * @param response the response
+	 * @param url the url
+	 * @param transferSpeed the transfer speed
+	 */
 	public DownloadDialog(ClientletResponse response, URL url,
 			int transferSpeed) {
 		this.url = url;
@@ -172,6 +213,11 @@ public class DownloadDialog extends JFrame {
 		});
 	}
 
+	/**
+	 * Gets the buttons panel.
+	 *
+	 * @return the buttons panel
+	 */
 	private Component getButtonsPanel() {
 		JButton saveButton = this.saveButton;
 		saveButton.setAction(new SaveAction());
@@ -204,6 +250,9 @@ public class DownloadDialog extends JFrame {
 		return box;
 	}
 
+	/**
+	 * Select file.
+	 */
 	private void selectFile() {
 		String path = this.url.getPath();
 		int lastSlashIdx = path.lastIndexOf('/');
@@ -233,13 +282,29 @@ public class DownloadDialog extends JFrame {
 		}
 	}
 
+	/** The request handler. */
 	private RequestHandler requestHandler;
+	
+	/** The destination file. */
 	private File destinationFile;
+	
+	/** The download base timestamp. */
 	private long downloadBaseTimestamp;
+	
+	/** The last timestamp. */
 	private long lastTimestamp;
+	
+	/** The last progress value. */
 	private long lastProgressValue;
+	
+	/** The last transfer rate. */
 	private double lastTransferRate = Double.NaN;
 
+	/**
+	 * Start download.
+	 *
+	 * @param file the file
+	 */
 	private void startDownload(File file) {
 		this.saveButton.setEnabled(false);
 
@@ -265,6 +330,11 @@ public class DownloadDialog extends JFrame {
 		t.start();
 	}
 
+	/**
+	 * Done with download_ safe.
+	 *
+	 * @param totalSize the total size
+	 */
 	private void doneWithDownload_Safe(final long totalSize) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -273,6 +343,11 @@ public class DownloadDialog extends JFrame {
 		});
 	}
 
+	/**
+	 * Done with download.
+	 *
+	 * @param totalSize the total size
+	 */
 	private void doneWithDownload(long totalSize) {
 		this.requestHandler = null;
 
@@ -308,6 +383,9 @@ public class DownloadDialog extends JFrame {
 		}
 	}
 
+	/**
+	 * Error in download_ safe.
+	 */
 	private void errorInDownload_Safe() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -316,6 +394,9 @@ public class DownloadDialog extends JFrame {
 		});
 	}
 
+	/**
+	 * Error in download.
+	 */
 	private void errorInDownload() {
 		if (this.requestHandler != null) {
 			// If requestHandler is null, it means the download was explicitly
@@ -326,10 +407,22 @@ public class DownloadDialog extends JFrame {
 		}
 	}
 
+	/**
+	 * Round1.
+	 *
+	 * @param value the value
+	 * @return the double
+	 */
 	private static double round1(double value) {
 		return Math.round(value * 10.0) / 10.0;
 	}
 
+	/**
+	 * Gets the size text.
+	 *
+	 * @param numBytes the num bytes
+	 * @return the size text
+	 */
 	private static String getSizeText(long numBytes) {
 		if (numBytes < 1024) {
 			return numBytes + " bytes";
@@ -349,6 +442,13 @@ public class DownloadDialog extends JFrame {
 		}
 	}
 
+	/**
+	 * Update progress_ safe.
+	 *
+	 * @param progressType the progress type
+	 * @param value the value
+	 * @param max the max
+	 */
 	private void updateProgress_Safe(final ProgressType progressType,
 			final int value, final int max) {
 		EventQueue.invokeLater(new Runnable() {
@@ -358,6 +458,13 @@ public class DownloadDialog extends JFrame {
 		});
 	}
 
+	/**
+	 * Update progress.
+	 *
+	 * @param progressType the progress type
+	 * @param value the value
+	 * @param max the max
+	 */
 	private void updateProgress(ProgressType progressType, int value, int max) {
 		String sizeText = getSizeText(value);
 		this.transferSizeField.setValue(sizeText);
@@ -411,21 +518,33 @@ public class DownloadDialog extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class SaveAction.
+	 */
 	private class SaveAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			selectFile();
 		}
 	}
 
+	/**
+	 * The Class OpenFolderAction.
+	 */
 	private class OpenFolderAction extends AbstractAction {
 
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			File file = destinationFile;
 			if (file != null) {
@@ -441,12 +560,17 @@ public class DownloadDialog extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class OpenAction.
+	 */
 	private class OpenAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			File file = destinationFile;
 			if (file != null) {
@@ -463,25 +587,43 @@ public class DownloadDialog extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class CloseAction.
+	 */
 	private class CloseAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			// windowClosedEvent takes care of cancelling download.
 			DownloadDialog.this.dispose();
 		}
 	}
 
+	/**
+	 * The Class DownloadRunnable.
+	 */
 	private class DownloadRunnable implements Runnable {
+		
+		/** The handler. */
 		private final RequestHandler handler;
 
+		/**
+		 * Instantiates a new download runnable.
+		 *
+		 * @param handler the handler
+		 */
 		public DownloadRunnable(RequestHandler handler) {
 			this.handler = handler;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		public void run() {
 			try {
 				RequestEngine.getInstance().inlineRequest(this.handler);
@@ -492,17 +634,36 @@ public class DownloadDialog extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class DownloadRequestHandler.
+	 */
 	private class DownloadRequestHandler extends AbstractRequestHandler {
+		
+		/** The file. */
 		private final File file;
+		
+		/** The download done. */
 		private boolean downloadDone = false;
+		
+		/** The last progress update. */
 		private long lastProgressUpdate = 0;
 
+		/**
+		 * Instantiates a new download request handler.
+		 *
+		 * @param request the request
+		 * @param dialogComponent the dialog component
+		 * @param file the file
+		 */
 		public DownloadRequestHandler(ClientletRequest request,
 				Component dialogComponent, File file) {
 			super(request, dialogComponent);
 			this.file = file;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.request.AbstractRequestHandler#handleException(org.lobobrowser.clientlet.ClientletResponse, java.lang.Throwable)
+		 */
 		@Override
 		public boolean handleException(ClientletResponse response,
 				Throwable exception) throws ClientletException {
@@ -513,6 +674,9 @@ public class DownloadDialog extends JFrame {
 			return true;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.request.AbstractRequestHandler#handleProgress(org.lobobrowser.ua.ProgressType, java.net.URL, java.lang.String, int, int)
+		 */
 		@Override
 		public void handleProgress(ProgressType progressType, URL url,
 				String method, int value, int max) {
@@ -525,6 +689,9 @@ public class DownloadDialog extends JFrame {
 			}
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.request.AbstractRequestHandler#processResponse(org.lobobrowser.clientlet.ClientletResponse)
+		 */
 		@Override
 		public void processResponse(ClientletResponse response)
 				throws ClientletException, IOException {

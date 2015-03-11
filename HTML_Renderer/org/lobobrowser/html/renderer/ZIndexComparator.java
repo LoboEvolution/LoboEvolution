@@ -2,10 +2,17 @@ package org.lobobrowser.html.renderer;
 
 import java.util.Comparator;
 
+
+/**
+ * The Class ZIndexComparator.
+ */
 class ZIndexComparator implements Comparator<Object> {
 	// Note: It is assumed that objects don't change their
 	// z-indexes or ordinals after entering the sorted set.
 	// They may do so after the sorted set is no longer valid.
+	/* (non-Javadoc)
+	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+	 */
 	public int compare(Object object1, Object object2) {
 		PositionedRenderable element1 = (PositionedRenderable) object1;
 		PositionedRenderable element2 = (PositionedRenderable) object2;

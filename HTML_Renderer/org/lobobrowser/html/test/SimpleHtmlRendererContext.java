@@ -59,6 +59,7 @@ import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.BufferExceededException;
 import org.lobobrowser.util.io.RecordedInputStream;
 
+
 /**
  * The <code>SimpleHtmlRendererContext</code> class implements the
  * {@link org.lobobrowser.html.HtmlRendererContext} interface. Note that this
@@ -70,17 +71,22 @@ import org.lobobrowser.util.io.RecordedInputStream;
  * is to invoke {@link #navigate(String)}.
  */
 public class SimpleHtmlRendererContext implements HtmlRendererContext {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(SimpleHtmlRendererContext.class.getName());
 
+	/** The html panel. */
 	private final HtmlPanel htmlPanel;
+	
+	/** The parent rcontext. */
 	private final HtmlRendererContext parentRcontext;
 
 	/**
 	 * Constructs a SimpleHtmlRendererContext.
-	 * 
-	 * @param contextComponent
-	 *            The component that will render HTML.
+	 *
+	 * @param contextComponent            The component that will render HTML.
+	 * @param ucontext the ucontext
 	 * @see SimpleUserAgentContext
 	 */
 	public SimpleHtmlRendererContext(HtmlPanel contextComponent,
@@ -109,14 +115,22 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 				.getUserAgentContext();
 	}
 
+	/**
+	 * Gets the html panel.
+	 *
+	 * @return the html panel
+	 */
 	public HtmlPanel getHtmlPanel() {
 		return this.htmlPanel;
 	}
 
+	/** The source code. */
 	private volatile String sourceCode;
 
 	/**
 	 * Gets the source code of the current HTML document.
+	 *
+	 * @return the source code
 	 */
 	public String getSourceCode() {
 		return this.sourceCode;
@@ -126,6 +140,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * Gets a collection of current document frames, by querying the document
 	 * currently held by the local {@link org.lobobrowser.html.gui.HtmlPanel}
 	 * instance.
+	 *
+	 * @return the frames
 	 */
 	public HTMLCollection getFrames() {
 		Object rootNode = this.htmlPanel.getRootNode();
@@ -155,6 +171,10 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	/**
 	 * Implements the link click handler by invoking
 	 * {@link #navigate(URL, String)}.
+	 *
+	 * @param linkNode the link node
+	 * @param url the url
+	 * @param target the target
 	 */
 	public void linkClicked(HTMLElement linkNode, URL url, String target) {
 		this.navigate(url, target);
@@ -166,6 +186,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * {@link #getUserAgentContext()} returns an instance assignable to
 	 * {@link SimpleUserAgentContext}. The method may be overridden to provide a
 	 * different proxy setting.
+	 *
+	 * @return the proxy
 	 */
 	protected Proxy getProxy() {
 		Object ucontext = this.getUserAgentContext();
@@ -179,6 +201,9 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * Implements simple navigation with incremental rendering by invoking
 	 * {@link #submitForm(String, URL, String, String, FormInput[])} with a
 	 * <code>GET</code> request method.
+	 *
+	 * @param href the href
+	 * @param target the target
 	 */
 	public void navigate(final URL href, String target) {
 		this.submitForm("GET", href, target, null, null);
@@ -187,9 +212,9 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	/**
 	 * Convenience method provided to allow loading a document into the
 	 * renderer.
-	 * 
-	 * @param fullURL
-	 *            The absolute URL of the document.
+	 *
+	 * @param fullURL            The absolute URL of the document.
+	 * @throws MalformedURLException the malformed url exception
 	 * @see #navigate(URL, String)
 	 */
 	public void navigate(String fullURL) throws MalformedURLException {
@@ -217,7 +242,12 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * <li>Navigation is normally asynchronous. See
 	 * {@link #isNavigationAsynchronous()}.
 	 * </ul>
-	 * 
+	 *
+	 * @param method the method
+	 * @param action the action
+	 * @param target the target
+	 * @param enctype the enctype
+	 * @param formInputs the form inputs
 	 * @see #navigate(URL, String)
 	 */
 	public void submitForm(final String method, final URL action,
@@ -296,6 +326,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * Indicates whether navigation (via
 	 * {@link #submitForm(String, URL, String, String, FormInput[])}) should be
 	 * asynchronous. This overridable implementation returns <code>true</code>.
+	 *
+	 * @return true, if is navigation asynchronous
 	 */
 	protected boolean isNavigationAsynchronous() {
 		return true;
@@ -310,19 +342,14 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * Submits a form and/or navigates by making a <i>synchronous</i> request.
 	 * This method is invoked by
 	 * {@link #submitForm(String, URL, String, String, FormInput[])}.
-	 * 
-	 * @param method
-	 *            The request method.
-	 * @param action
-	 *            The action URL.
-	 * @param target
-	 *            The target identifier.
-	 * @param enctype
-	 *            The encoding type.
-	 * @param formInputs
-	 *            The form inputs.
-	 * @throws IOException
-	 * @throws org.xml.sax.SAXException
+	 *
+	 * @param method            The request method.
+	 * @param action            The action URL.
+	 * @param target            The target identifier.
+	 * @param enctype            The encoding type.
+	 * @param formInputs            The form inputs.
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SAXException the SAX exception
 	 * @see #submitForm(String, URL, String, String, FormInput[])
 	 */
 	protected void submitFormSync(final String method,
@@ -512,11 +539,11 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * Creates a blank document instance. This method is invoked whenever
 	 * navigation or form submission occur. It is provided so it can be
 	 * overridden to create specialized document implmentations.
-	 * 
-	 * @param inputSource
-	 *            The document input source.
-	 * @throws IOException
-	 * @throws org.xml.sax.SAXException
+	 *
+	 * @param inputSource            The document input source.
+	 * @return the HTML document impl
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SAXException the SAX exception
 	 */
 	protected HTMLDocumentImpl createDocument(
 			org.xml.sax.InputSource inputSource) throws IOException,
@@ -531,9 +558,9 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * {@link #submitForm(String, URL, String, String, FormInput[])} to
 	 * determine the charset of a document. The charset is determined by looking
 	 * at the <code>Content-Type</code> header.
-	 * 
-	 * @param connection
-	 *            A URL connection.
+	 *
+	 * @param connection            A URL connection.
+	 * @return the document charset
 	 */
 	protected String getDocumentCharset(URLConnection connection) {
 		String encoding = Urls.getCharset(connection);
@@ -544,6 +571,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 
 	/**
 	 * Opens a simple message dialog.
+	 *
+	 * @param message the message
 	 */
 	public void alert(String message) {
 		JOptionPane.showMessageDialog(this.htmlPanel, message);
@@ -567,6 +596,9 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 
 	/**
 	 * Opens a simple confirmation window.
+	 *
+	 * @param message the message
+	 * @return true, if successful
 	 */
 	public boolean confirm(String message) {
 		int retValue = JOptionPane.showConfirmDialog(htmlPanel, message,
@@ -585,17 +617,14 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	/**
 	 * It should open a new browser window. This implementation does nothing and
 	 * should be overridden.
-	 * 
-	 * @param url
-	 *            The requested URL.
-	 * @param windowName
-	 *            A window identifier.
-	 * @param windowFeatures
-	 *            Window features specified in a format equivalent to that of
+	 *
+	 * @param url            The requested URL.
+	 * @param windowName            A window identifier.
+	 * @param windowFeatures            Window features specified in a format equivalent to that of
 	 *            window.open() in Javascript.
-	 * @param replace
-	 *            Whether an existing window with the same name should be
+	 * @param replace            Whether an existing window with the same name should be
 	 *            replaced.
+	 * @return the html renderer context
 	 */
 	public HtmlRendererContext open(URL url, String windowName,
 			String windowFeatures, boolean replace) {
@@ -605,6 +634,10 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 
 	/**
 	 * Shows a simple prompt dialog.
+	 *
+	 * @param message the message
+	 * @param inputDefault the input default
+	 * @return the string
 	 */
 	public String prompt(String message, String inputDefault) {
 		return JOptionPane.showInputDialog(htmlPanel, message);
@@ -626,6 +659,9 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 		this.htmlPanel.scroll(x, y);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#scrollBy(int, int)
+	 */
 	public void scrollBy(int x, int y) {
 		this.htmlPanel.scrollBy(x, y);
 	}
@@ -633,6 +669,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	/**
 	 * Should return true if and only if the current browser window is closed.
 	 * This implementation returns false and should be overridden.
+	 *
+	 * @return true, if is closed
 	 */
 	public boolean isClosed() {
 		this.warn("isClosed(): Not overridden");
@@ -642,6 +680,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	/**
 	 * Should return true if and only if the current browser window is closed.
 	 * This implementation returns false and should be overridden.
+	 *
+	 * @return the default status
 	 */
 	public String getDefaultStatus() {
 		this.warn("getDefaultStatus(): Not overridden");
@@ -652,35 +692,56 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * It should return the name of the browser window, if this renderer context
 	 * is for the top frame in the window. This implementation returns a blank
 	 * string, so it should be overridden.
+	 *
+	 * @return the name
 	 */
 	public String getName() {
 		this.warn("getName(): Not overridden");
 		return "";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getParent()
+	 */
 	public HtmlRendererContext getParent() {
 		return this.parentRcontext;
 	}
 
+	/** The opener. */
 	private volatile HtmlRendererContext opener;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getOpener()
+	 */
 	public HtmlRendererContext getOpener() {
 		return this.opener;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#setOpener(org.lobobrowser.html.HtmlRendererContext)
+	 */
 	public void setOpener(HtmlRendererContext opener) {
 		this.opener = opener;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getStatus()
+	 */
 	public String getStatus() {
 		this.warn("getStatus(): Not overridden");
 		return "";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#setStatus(java.lang.String)
+	 */
 	public void setStatus(String message) {
 		this.warn("setStatus(): Not overridden");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getTop()
+	 */
 	public HtmlRendererContext getTop() {
 		HtmlRendererContext ancestor = this.parentRcontext;
 		if (ancestor == null) {
@@ -689,28 +750,53 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 		return ancestor.getTop();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#createBrowserFrame()
+	 */
 	public BrowserFrame createBrowserFrame() {
 		return new SimpleBrowserFrame(this);
 	}
 
+	/**
+	 * Warn.
+	 *
+	 * @param message the message
+	 * @param throwable the throwable
+	 */
 	public void warn(String message, Throwable throwable) {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING, message, throwable);
 		}
 	}
 
+	/**
+	 * Error.
+	 *
+	 * @param message the message
+	 * @param throwable the throwable
+	 */
 	public void error(String message, Throwable throwable) {
 		if (logger.isLoggable(Level.SEVERE)) {
 			logger.log(Level.SEVERE, message, throwable);
 		}
 	}
 
+	/**
+	 * Warn.
+	 *
+	 * @param message the message
+	 */
 	public void warn(String message) {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING, message);
 		}
 	}
 
+	/**
+	 * Error.
+	 *
+	 * @param message the message
+	 */
 	public void error(String message) {
 		if (logger.isLoggable(Level.SEVERE)) {
 			logger.log(Level.SEVERE, message);
@@ -720,15 +806,22 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	/**
 	 * Returns <code>null</code>. This method should be overridden to provide
 	 * OBJECT, EMBED or APPLET functionality.
+	 *
+	 * @param element the element
+	 * @return the html object
 	 */
 	public HtmlObject getHtmlObject(HTMLElement element) {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#setDefaultStatus(java.lang.String)
+	 */
 	public void setDefaultStatus(String message) {
 		this.warn("setDefaultStatus(): Not overridden.");
 	}
 
+	/** The bcontext. */
 	private UserAgentContext bcontext = null;
 
 	/**
@@ -738,6 +831,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * <p>
 	 * The context returned by this method is used by local request facilities
 	 * and other parts of the renderer.
+	 *
+	 * @return the user agent context
 	 */
 	public UserAgentContext getUserAgentContext() {
 		synchronized (this) {
@@ -751,6 +846,9 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 
 	/**
 	 * Should be overridden to return true if the link has been visited.
+	 *
+	 * @param link the link
+	 * @return true, if is visited link
 	 */
 	public boolean isVisitedLink(HTMLLinkElement link) {
 		return false;
@@ -758,6 +856,10 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 
 	/**
 	 * This method must be overridden to implement a context menu.
+	 *
+	 * @param element the element
+	 * @param event the event
+	 * @return true, if successful
 	 */
 	public boolean onContextMenu(HTMLElement element, MouseEvent event) {
 		return true;
@@ -766,6 +868,9 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	/**
 	 * This method can be overridden to receive notifications when the mouse
 	 * leaves an element.
+	 *
+	 * @param element the element
+	 * @param event the event
 	 */
 	public void onMouseOut(HTMLElement element, MouseEvent event) {
 	}
@@ -773,22 +878,40 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	/**
 	 * This method can be overridden to receive notifications when the mouse
 	 * first enters an element.
+	 *
+	 * @param element the element
+	 * @param event the event
 	 */
 	public void onMouseOver(HTMLElement element, MouseEvent event) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#isImageLoadingEnabled()
+	 */
 	public boolean isImageLoadingEnabled() {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#onDoubleClick(org.lobobrowser.html.w3c.HTMLElement, java.awt.event.MouseEvent)
+	 */
 	public boolean onDoubleClick(HTMLElement element, MouseEvent event) {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#onMouseClick(org.lobobrowser.html.w3c.HTMLElement, java.awt.event.MouseEvent)
+	 */
 	public boolean onMouseClick(HTMLElement element, MouseEvent event) {
 		return true;
 	}
 
+	/**
+	 * Gets the window.
+	 *
+	 * @param c the c
+	 * @return the window
+	 */
 	private static Window getWindow(Component c) {
 		Component current = c;
 		while (current != null && !(current instanceof Window)) {
@@ -797,6 +920,9 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 		return (Window) current;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#resizeBy(int, int)
+	 */
 	public void resizeBy(int byWidth, int byHeight) {
 		Window window = getWindow(this.htmlPanel);
 		if (window != null) {
@@ -805,6 +931,9 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#resizeTo(int, int)
+	 */
 	public void resizeTo(int width, int height) {
 		Window window = getWindow(this.htmlPanel);
 		if (window != null) {
@@ -822,6 +951,9 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#forward()
+	 */
 	public void forward() {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING,
@@ -829,6 +961,9 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getCurrentURL()
+	 */
 	public String getCurrentURL() {
 		Object node = this.htmlPanel.getRootNode();
 		if (node instanceof HTMLDocumentImpl) {
@@ -838,18 +973,30 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getHistoryLength()
+	 */
 	public int getHistoryLength() {
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getNextURL()
+	 */
 	public String getNextURL() {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#getPreviousURL()
+	 */
 	public String getPreviousURL() {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#goToHistoryURL(java.lang.String)
+	 */
 	public void goToHistoryURL(String url) {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING,
@@ -857,6 +1004,9 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.HtmlRendererContext#moveInHistory(int)
+	 */
 	public void moveInHistory(int offset) {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING,

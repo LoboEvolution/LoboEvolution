@@ -6,6 +6,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * This class reflects a single Java constructor into the JavaScript
  * environment.  It satisfies a request for an overloaded constructor,
@@ -22,15 +23,26 @@ package org.mozilla.javascript;
 
 public class NativeJavaConstructor extends BaseFunction
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -8149253217482668463L;
 
+    /** The ctor. */
     MemberBox ctor;
 
+    /**
+     * Instantiates a new native java constructor.
+     *
+     * @param ctor the ctor
+     */
     public NativeJavaConstructor(MemberBox ctor)
     {
         this.ctor = ctor;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.BaseFunction#call(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -38,6 +50,9 @@ public class NativeJavaConstructor extends BaseFunction
         return NativeJavaClass.constructSpecific(cx, scope, args, ctor);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.BaseFunction#getFunctionName()
+     */
     @Override
     public String getFunctionName()
     {
@@ -45,6 +60,9 @@ public class NativeJavaConstructor extends BaseFunction
         return "<init>".concat(sig);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString()
     {

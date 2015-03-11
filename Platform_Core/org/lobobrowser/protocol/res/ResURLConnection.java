@@ -28,10 +28,19 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+
 /**
+ * The Class ResURLConnection.
+ *
  * @author J. H. S.
  */
 public class ResURLConnection extends URLConnection {
+	
+	/**
+	 * Instantiates a new res url connection.
+	 *
+	 * @param url the url
+	 */
 	public ResURLConnection(URL url) {
 		super(url);
 	}

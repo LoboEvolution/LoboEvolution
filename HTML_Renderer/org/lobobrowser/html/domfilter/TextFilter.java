@@ -25,11 +25,22 @@ package org.lobobrowser.html.domfilter;
 
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class TextFilter.
+ */
 public class TextFilter implements NodeFilter {
+	
+	/**
+	 * Instantiates a new text filter.
+	 */
 	public TextFilter() {
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
 	public boolean accept(Node node) {
 		return node instanceof org.w3c.dom.Text;
 	}

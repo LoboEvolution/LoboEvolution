@@ -25,6 +25,10 @@ import java.util.EventObject;
 
 import org.lobobrowser.util.EventDispatch2;
 
+
+/**
+ * The Class SelectionDispatch.
+ */
 public class SelectionDispatch extends EventDispatch2 {
 	/*
 	 * (non-Javadoc)

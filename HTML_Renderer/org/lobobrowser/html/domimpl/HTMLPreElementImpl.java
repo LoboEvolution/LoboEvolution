@@ -28,12 +28,25 @@ import org.lobobrowser.html.renderstate.PreRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.w3c.HTMLPreElement;
 
+
+/**
+ * The Class HTMLPreElementImpl.
+ */
 public class HTMLPreElementImpl extends HTMLAbstractUIElement implements
 		HTMLPreElement {
+	
+	/**
+	 * Instantiates a new HTML pre element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLPreElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLPreElement#getWidth()
+	 */
 	public int getWidth() {
 		String widthText = this.getAttribute(HtmlAttributeProperties.WIDTH);
 		if (widthText == null) {
@@ -46,10 +59,16 @@ public class HTMLPreElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLPreElement#setWidth(int)
+	 */
 	public void setWidth(int width) {
 		this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new PreRenderState(prevRenderState, this);
 	}

@@ -6,32 +6,47 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * The JavaScript Script object.
- *
+ * 
  * Note that the C version of the engine uses XDR as the format used
  * by freeze and thaw. Since this depends on the internal format of
  * structures in the C runtime, we cannot duplicate it.
- *
+ * 
  * Since we cannot replace 'this' as a result of the compile method,
  * will forward requests to execute to the nonnull 'script' field.
  *
- * @since 1.3
  * @author Norris Boyd
+ * @since 1.3
  */
 
 class NativeScript extends BaseFunction
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -6795101161980121700L;
 
+    /** The Constant SCRIPT_TAG. */
     private static final Object SCRIPT_TAG = "Script";
 
+    /**
+     * Inits the.
+     *
+     * @param scope the scope
+     * @param sealed the sealed
+     */
     static void init(Scriptable scope, boolean sealed)
     {
         NativeScript obj = new NativeScript(null);
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
+    /**
+     * Instantiates a new native script.
+     *
+     * @param script the script
+     */
     private NativeScript(Script script)
     {
         this.script = script;
@@ -39,6 +54,8 @@ class NativeScript extends BaseFunction
 
     /**
      * Returns the name of this JavaScript class, "Script".
+     *
+     * @return the class name
      */
     @Override
     public String getClassName()
@@ -46,6 +63,9 @@ class NativeScript extends BaseFunction
         return "Script";
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.BaseFunction#call(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -56,24 +76,36 @@ class NativeScript extends BaseFunction
         return Undefined.instance;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.BaseFunction#construct(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
         throw Context.reportRuntimeError0("msg.script.is.not.constructor");
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.BaseFunction#getLength()
+     */
     @Override
     public int getLength()
     {
         return 0;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.BaseFunction#getArity()
+     */
     @Override
     public int getArity()
     {
         return 0;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.BaseFunction#decompile(int, int)
+     */
     @Override
     String decompile(int indent, int flags)
     {
@@ -83,6 +115,9 @@ class NativeScript extends BaseFunction
         return super.decompile(indent, flags);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.BaseFunction#initPrototypeId(int)
+     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -98,6 +133,9 @@ class NativeScript extends BaseFunction
         initPrototypeMethod(SCRIPT_TAG, id, s, arity);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.BaseFunction#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -139,6 +177,13 @@ class NativeScript extends BaseFunction
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
+    /**
+     * Real this.
+     *
+     * @param thisObj the this obj
+     * @param f the f
+     * @return the native script
+     */
     private static NativeScript realThis(Scriptable thisObj, IdFunctionObject f)
     {
         if (!(thisObj instanceof NativeScript))
@@ -146,6 +191,13 @@ class NativeScript extends BaseFunction
         return (NativeScript)thisObj;
     }
 
+    /**
+     * Compile.
+     *
+     * @param cx the cx
+     * @param source the source
+     * @return the script
+     */
     private static Script compile(Context cx, String source)
     {
         int[] linep = { 0 };
@@ -162,7 +214,10 @@ class NativeScript extends BaseFunction
 
 // #string_id_map#
 
-    @Override
+    /* (non-Javadoc)
+ * @see org.mozilla.javascript.BaseFunction#findPrototypeId(java.lang.String)
+ */
+@Override
     protected int findPrototypeId(String s)
     {
         int id;
@@ -181,6 +236,7 @@ class NativeScript extends BaseFunction
         return id;
     }
 
+    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         Id_constructor    = 1,
         Id_toString       = 2,
@@ -190,6 +246,7 @@ class NativeScript extends BaseFunction
 
 // #/string_id_map#
 
-    private Script script;
+    /** The script. */
+private Script script;
 }
 

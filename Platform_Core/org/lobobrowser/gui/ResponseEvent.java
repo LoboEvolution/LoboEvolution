@@ -24,9 +24,21 @@ import java.util.EventObject;
 
 import org.lobobrowser.clientlet.ClientletResponse;
 
+
+/**
+ * The Class ResponseEvent.
+ */
 public class ResponseEvent extends EventObject {
+	
+	/** The response. */
 	private final ClientletResponse response;
 
+	/**
+	 * Instantiates a new response event.
+	 *
+	 * @param source the source
+	 * @param response the response
+	 */
 	public ResponseEvent(Object source, ClientletResponse response) {
 		super(source);
 		this.response = response;

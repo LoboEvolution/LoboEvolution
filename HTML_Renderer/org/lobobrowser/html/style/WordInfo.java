@@ -25,13 +25,26 @@ package org.lobobrowser.html.style;
 
 import java.awt.FontMetrics;
 
+
 /**
+ * The Class WordInfo.
+ *
  * @author J. H. S.
  */
 public class WordInfo {
+	
+	/** The font metrics. */
 	public FontMetrics fontMetrics;
+	
+	/** The descent. */
 	public int descent;
+	
+	/** The ascent plus leading. */
 	public int ascentPlusLeading;
+	
+	/** The width. */
 	public int width;
+	
+	/** The height. */
 	public int height;
 }

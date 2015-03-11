@@ -28,6 +28,7 @@ import org.mozilla.javascript.v8dtoa.FastDtoa;
 import org.mozilla.javascript.xml.XMLLib;
 import org.mozilla.javascript.xml.XMLObject;
 
+
 /**
  * This is the class that implements the runtime.
  *
@@ -47,6 +48,7 @@ public class ScriptRuntime {
      * Returns representation of the [[ThrowTypeError]] object.
      * See ECMA 5 spec, 13.2.3
      *
+     * @return the base function
      * @deprecated {@link #typeErrorThrower(Context)}
      */
     @Deprecated
@@ -57,7 +59,8 @@ public class ScriptRuntime {
     /**
      * Returns representation of the [[ThrowTypeError]] object.
      * See ECMA 5 spec, 13.2.3
-     * @param cx
+     *
+     * @param cx the cx
      * @return BaseFunction
      */
     public static BaseFunction typeErrorThrower(Context cx) {
@@ -81,10 +84,23 @@ public class ScriptRuntime {
       return cx.typeErrorThrower;
     }
 
+    /**
+     * The Class NoSuchMethodShim.
+     */
     static class NoSuchMethodShim implements Callable {
+        
+        /** The method name. */
         String methodName;
+        
+        /** The no such method method. */
         Callable noSuchMethodMethod;
 
+        /**
+         * Instantiates a new no such method shim.
+         *
+         * @param noSuchMethodMethod the no such method method
+         * @param methodName the method name
+         */
         NoSuchMethodShim(Callable noSuchMethodMethod, String methodName)
         {
             this.noSuchMethodMethod = noSuchMethodMethod;
@@ -120,6 +136,7 @@ public class ScriptRuntime {
      * that they won't cause problems by being loaded early.
      */
 
+    /** The Constant DateClass. */
     public final static Class<?>
         BooleanClass      = Kit.classOrNull("java.lang.Boolean"),
         ByteClass         = Kit.classOrNull("java.lang.Byte"),
@@ -135,6 +152,7 @@ public class ScriptRuntime {
         StringClass       = Kit.classOrNull("java.lang.String"),
         DateClass         = Kit.classOrNull("java.util.Date");
 
+    /** The Constant ScriptableObjectClass. */
     public final static Class<?>
         ContextClass
             = Kit.classOrNull("org.mozilla.javascript.Context"),
@@ -144,14 +162,24 @@ public class ScriptRuntime {
             = Kit.classOrNull("org.mozilla.javascript.Function"),
         ScriptableObjectClass
             = Kit.classOrNull("org.mozilla.javascript.ScriptableObject");
+    
+    /** The Constant ScriptableClass. */
     public static final Class<Scriptable> ScriptableClass =
         Scriptable.class;
 
     // Locale object used to request locale-neutral operations.
+    /** The root locale. */
     public static Locale ROOT_LOCALE = new Locale("");
 
+    /** The Constant LIBRARY_SCOPE_KEY. */
     private static final Object LIBRARY_SCOPE_KEY = "LIBRARY_SCOPE";
 
+    /**
+     * Checks if is rhino runtime type.
+     *
+     * @param cl the cl
+     * @return true, if is rhino runtime type
+     */
     public static boolean isRhinoRuntimeType(Class<?> cl)
     {
         if (cl.isPrimitive()) {
@@ -163,6 +191,14 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Inits the standard objects.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param sealed the sealed
+     * @return the scriptable object
+     */
     public static ScriptableObject initStandardObjects(Context cx,
                                                        ScriptableObject scope,
                                                        boolean sealed)
@@ -266,6 +302,11 @@ public class ScriptRuntime {
         return scope;
     }
     
+    /**
+     * Gets the top package names.
+     *
+     * @return the top package names
+     */
     static String[] getTopPackageNames() {
         // Include "android" top package if running on Android
         return "Dalvik".equals(System.getProperty("java.vm.name")) ?
@@ -273,6 +314,12 @@ public class ScriptRuntime {
             new String[] { "java", "javax", "org", "com", "edu", "net" };
     }
 
+    /**
+     * Gets the library scope or null.
+     *
+     * @param scope the scope
+     * @return the library scope or null
+     */
     public static ScriptableObject getLibraryScopeOrNull(Scriptable scope)
     {
         ScriptableObject libScope;
@@ -282,6 +329,12 @@ public class ScriptRuntime {
     }
 
     // It is public so NativeRegExp can access it.
+    /**
+     * Checks if is JS line terminator.
+     *
+     * @param c the c
+     * @return true, if is JS line terminator
+     */
     public static boolean isJSLineTerminator(int c)
     {
         // Optimization for faster check for eol character:
@@ -292,6 +345,12 @@ public class ScriptRuntime {
         return c == '\n' || c == '\r' || c == 0x2028 || c == 0x2029;
     }
 
+    /**
+     * Checks if is JS whitespace or line terminator.
+     *
+     * @param c the c
+     * @return true, if is JS whitespace or line terminator
+     */
     public static boolean isJSWhitespaceOrLineTerminator(int c) {
       return (isStrWhiteSpaceChar(c) || isJSLineTerminator(c));
     }
@@ -299,17 +358,20 @@ public class ScriptRuntime {
     /**
      * Indicates if the character is a Str whitespace char according to ECMA spec:
      * StrWhiteSpaceChar :::
-      <TAB>
-      <SP>
-      <NBSP>
-      <FF>
-      <VT>
-      <CR>
-      <LF>
-      <LS>
-      <PS>
-      <USP>
-      <BOM>
+     *       <TAB>
+     *       <SP>
+     *       <NBSP>
+     *       <FF>
+     *       <VT>
+     *       <CR>
+     *       <LF>
+     *       <LS>
+     *       <PS>
+     *       <USP>
+     *       <BOM>.
+     *
+     * @param c the c
+     * @return true, if is str white space char
      */
     static boolean isStrWhiteSpaceChar(int c)
     {
@@ -330,16 +392,34 @@ public class ScriptRuntime {
     	}
     }
 
+    /**
+     * Wrap boolean.
+     *
+     * @param b the b
+     * @return the boolean
+     */
     public static Boolean wrapBoolean(boolean b)
     {
         return b ? Boolean.TRUE : Boolean.FALSE;
     }
 
+    /**
+     * Wrap int.
+     *
+     * @param i the i
+     * @return the integer
+     */
     public static Integer wrapInt(int i)
     {
         return Integer.valueOf(i);
     }
 
+    /**
+     * Wrap number.
+     *
+     * @param x the x
+     * @return the number
+     */
     public static Number wrapNumber(double x)
     {
         if (x != x) {
@@ -350,9 +430,10 @@ public class ScriptRuntime {
 
     /**
      * Convert the value to a boolean.
-     *
+     * 
      * See ECMA 9.2.
-     * @param val
+     *
+     * @param val the val
      * @return boolean
      */
     public static boolean toBoolean(Object val)
@@ -391,9 +472,10 @@ public class ScriptRuntime {
 
     /**
      * Convert the value to a number.
-     *
+     * 
      * See ECMA 9.3.
-     * @param val
+     *
+     * @param val the val
      * @return double
      */
     public static double toNumber(Object val)
@@ -422,6 +504,13 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * To number.
+     *
+     * @param args the args
+     * @param index the index
+     * @return the double
+     */
     public static double toNumber(Object[] args, int index) {
         return (index < args.length) ? toNumber(args[index]) : NaN;
     }
@@ -430,17 +519,28 @@ public class ScriptRuntime {
     // versions 2.01 and 3.0P1, that causes some uses (returns at least) of
     // Double.NaN to be converted to 1.0.
     // So we use ScriptRuntime.NaN instead of Double.NaN.
+    /** The Constant NaN. */
     public static final double
         NaN = Double.longBitsToDouble(0x7ff8000000000000L);
 
     // A similar problem exists for negative zero.
+    /** The Constant negativeZero. */
     public static final double
         negativeZero = Double.longBitsToDouble(0x8000000000000000L);
 
+    /** The Constant NaNobj. */
     public static final Double NaNobj = new Double(NaN);
 
     /*
      * Helper function for toNumber, parseInt, and TokenStream.getToken.
+     */
+    /**
+     * String to number.
+     *
+     * @param s the s
+     * @param start the start
+     * @param radix the radix
+     * @return the double
      */
     static double stringToNumber(String s, int start, int radix) {
         char digitMax = '9';
@@ -595,7 +695,8 @@ public class ScriptRuntime {
     /**
      * ToNumber applied to the String type
      * See ECMA 9.3.1
-     * @param s
+     *
+     * @param s the s
      * @return double
      */
     public static double toNumber(String s) {
@@ -671,8 +772,9 @@ public class ScriptRuntime {
      * ECMA function formal arguments are undefined if not supplied;
      * this function pads the argument array out to the expected
      * length, if necessary.
-     * @param  args
-     * @param count
+     *
+     * @param args the args
+     * @param count the count
      * @return Object[]
      */
     public static Object[] padArguments(Object[] args, int count) {
@@ -692,6 +794,12 @@ public class ScriptRuntime {
         return result;
     }
 
+    /**
+     * Escape string.
+     *
+     * @param s the s
+     * @return the string
+     */
     public static String escapeString(String s)
     {
         return escapeString(s, '"');
@@ -700,8 +808,9 @@ public class ScriptRuntime {
     /**
      * For escaping strings printed by object and array literals; not quite
      * the same as 'escape.'
-     * @param s
-     * @param escapeQuote
+     *
+     * @param s the s
+     * @param escapeQuote the escape quote
      * @return String
      */
     public static String escapeString(String s, char escapeQuote)
@@ -766,6 +875,12 @@ public class ScriptRuntime {
         return (sb == null) ? s : sb.toString();
     }
 
+    /**
+     * Checks if is valid identifier name.
+     *
+     * @param s the s
+     * @return true, if is valid identifier name
+     */
     static boolean isValidIdentifierName(String s)
     {
         int L = s.length();
@@ -780,6 +895,12 @@ public class ScriptRuntime {
         return !TokenStream.isKeyword(s);
     }
 
+    /**
+     * To char sequence.
+     *
+     * @param val the val
+     * @return the char sequence
+     */
     public static CharSequence toCharSequence(Object val) {
         if (val instanceof NativeString) {
             return ((NativeString)val).toCharSequence();
@@ -789,9 +910,10 @@ public class ScriptRuntime {
 
     /**
      * Convert the value to a string.
-     *
+     * 
      * See ECMA 9.8.
-     * @param val
+     *
+     * @param val the val
      * @return String
      */
     public static String toString(Object val) {
@@ -824,11 +946,24 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Default object to string.
+     *
+     * @param obj the obj
+     * @return the string
+     */
     static String defaultObjectToString(Scriptable obj)
     {
         return "[object " + obj.getClassName() + ']';
     }
 
+    /**
+     * To string.
+     *
+     * @param args the args
+     * @param index the index
+     * @return the string
+     */
     public static String toString(Object[] args, int index)
     {
         return (index < args.length) ? toString(args[index]) : "undefined";
@@ -836,13 +971,21 @@ public class ScriptRuntime {
 
     /**
      * Optimized version of toString(Object) for numbers.
-     * @param val
+     *
+     * @param val the val
      * @return String
      */
     public static String toString(double val) {
         return numberToString(val, 10);
     }
 
+    /**
+     * Number to string.
+     *
+     * @param d the d
+     * @param base the base
+     * @return the string
+     */
     public static String numberToString(double d, int base) {
         if ((base < 2) || (base > 36)) {
             throw Context.reportRuntimeError1(
@@ -874,6 +1017,14 @@ public class ScriptRuntime {
 
     }
 
+    /**
+     * Uneval.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param value the value
+     * @return the string
+     */
     static String uneval(Context cx, Scriptable scope, Object value)
     {
         if (value == null) {
@@ -917,6 +1068,15 @@ public class ScriptRuntime {
         return value.toString();
     }
 
+    /**
+     * Default object to source.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param thisObj the this obj
+     * @param args the args
+     * @return the string
+     */
     static String defaultObjectToSource(Context cx, Scriptable scope,
                                         Scriptable thisObj, Object[] args)
     {
@@ -986,6 +1146,13 @@ public class ScriptRuntime {
         return result.toString();
     }
 
+    /**
+     * To object.
+     *
+     * @param scope the scope
+     * @param val the val
+     * @return the scriptable
+     */
     public static Scriptable toObject(Scriptable scope, Object val)
     {
         if (val instanceof Scriptable) {
@@ -995,9 +1162,10 @@ public class ScriptRuntime {
     }
 
     /**
-     * Warning: this doesn't allow to resolve primitive prototype properly when many top scopes are involved
-     * @param cx
-     * @param obj
+     * Warning: this doesn't allow to resolve primitive prototype properly when many top scopes are involved.
+     *
+     * @param cx the cx
+     * @param obj the obj
      * @return Scriptable
      */
     public static Scriptable toObjectOrNull(Context cx, Object obj)
@@ -1011,10 +1179,11 @@ public class ScriptRuntime {
     }
 
     /**
-     * @param scope the scope that should be used to resolve primitive prototype
-     * @param cx
-     * @param obj
-     * @param scope
+     * To object or null.
+     *
+     * @param cx the cx
+     * @param obj the obj
+     * @param scope the scope
      * @return Scriptable
      */
     public static Scriptable toObjectOrNull(Context cx, Object obj,
@@ -1029,6 +1198,12 @@ public class ScriptRuntime {
     }
 
     /**
+     * To object.
+     *
+     * @param scope the scope
+     * @param val the val
+     * @param staticClass the static class
+     * @return the scriptable
      * @deprecated Use {@link #toObject(Scriptable, Object)} instead.
      */
     public static Scriptable toObject(Scriptable scope, Object val,
@@ -1042,11 +1217,12 @@ public class ScriptRuntime {
 
     /**
      * Convert the value to an object.
-     *
+     * 
      * See ECMA 9.9.
-     * @param cx
-     * @param scope
-     * @param val
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param val the val
      * @return  Scriptable
      */
     public static Scriptable toObject(Context cx, Scriptable scope, Object val)
@@ -1085,6 +1261,13 @@ public class ScriptRuntime {
     }
 
     /**
+     * To object.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param val the val
+     * @param staticClass the static class
+     * @return the scriptable
      * @deprecated Use {@link #toObject(Context, Scriptable, Object)} instead.
      */
     public static Scriptable toObject(Context cx, Scriptable scope, Object val,
@@ -1094,6 +1277,14 @@ public class ScriptRuntime {
     }
 
     /**
+     * Call.
+     *
+     * @param cx the cx
+     * @param fun the fun
+     * @param thisArg the this arg
+     * @param args the args
+     * @param scope the scope
+     * @return the object
      * @deprecated The method is only present for compatibility.
      */
     public static Object call(Context cx, Object fun, Object thisArg,
@@ -1110,6 +1301,15 @@ public class ScriptRuntime {
         return function.call(cx, scope, thisObj, args);
     }
 
+    /**
+     * New object.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param constructorName the constructor name
+     * @param args the args
+     * @return the scriptable
+     */
     public static Scriptable newObject(Context cx, Scriptable scope,
                                        String constructorName, Object[] args)
     {
@@ -1119,6 +1319,15 @@ public class ScriptRuntime {
         return ctor.construct(cx, scope, args);
     }
 
+    /**
+     * New builtin object.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param type the type
+     * @param args the args
+     * @return the scriptable
+     */
     public static Scriptable newBuiltinObject(Context cx, Scriptable scope,
                                               TopLevel.Builtins type,
                                               Object[] args)
@@ -1130,9 +1339,9 @@ public class ScriptRuntime {
     }
 
     /**
-     *
      * See ECMA 9.4.
-     * @param val
+     *
+     * @param val the val
      * @return double
      */
     public static double toInteger(Object val) {
@@ -1140,6 +1349,12 @@ public class ScriptRuntime {
     }
 
     // convenience method
+    /**
+     * To integer.
+     *
+     * @param d the d
+     * @return the double
+     */
     public static double toInteger(double d) {
         // if it's NaN
         if (d != d)
@@ -1156,14 +1371,21 @@ public class ScriptRuntime {
             return Math.ceil(d);
     }
 
+    /**
+     * To integer.
+     *
+     * @param args the args
+     * @param index the index
+     * @return the double
+     */
     public static double toInteger(Object[] args, int index) {
         return (index < args.length) ? toInteger(args[index]) : +0.0;
     }
 
     /**
-     *
      * See ECMA 9.5.
-     * @param val
+     *
+     * @param val the val
      * @return int
      */
     public static int toInt32(Object val)
@@ -1175,10 +1397,23 @@ public class ScriptRuntime {
         return toInt32(toNumber(val));
     }
 
+    /**
+     * To int32.
+     *
+     * @param args the args
+     * @param index the index
+     * @return the int
+     */
     public static int toInt32(Object[] args, int index) {
         return (index < args.length) ? toInt32(args[index]) : 0;
     }
 
+    /**
+     * To int32.
+     *
+     * @param d the d
+     * @return the int
+     */
     public static int toInt32(double d) {
         int id = (int)d;
         if (id == d) {
@@ -1207,7 +1442,8 @@ public class ScriptRuntime {
 
     /**
      * See ECMA 9.6.
-     * @param d
+     *
+     * @param d the d
      * @return long value representing 32 bits unsigned integer
      */
     public static long toUint32(double d) {
@@ -1233,14 +1469,20 @@ public class ScriptRuntime {
         return l & 0xffffffffL;
     }
 
+    /**
+     * To uint32.
+     *
+     * @param val the val
+     * @return the long
+     */
     public static long toUint32(Object val) {
         return toUint32(toNumber(val));
     }
 
     /**
-     *
      * See ECMA 9.7.
-     * @param val
+     *
+     * @param val the val
      * @return char
      */
     public static char toUint16(Object val) {
@@ -1268,8 +1510,16 @@ public class ScriptRuntime {
 
     // XXX: this is until setDefaultNamespace will learn how to store NS
     // properly and separates namespace form Scriptable.get etc.
+    /** The Constant DEFAULT_NS_TAG. */
     private static final String DEFAULT_NS_TAG = "__default_namespace__";
 
+    /**
+     * Sets the default namespace.
+     *
+     * @param namespace the namespace
+     * @param cx the cx
+     * @return the object
+     */
     public static Object setDefaultNamespace(Object namespace, Context cx)
     {
         Scriptable scope = cx.currentActivationCall;
@@ -1293,6 +1543,12 @@ public class ScriptRuntime {
         return Undefined.instance;
     }
 
+    /**
+     * Search default namespace.
+     *
+     * @param cx the cx
+     * @return the object
+     */
     public static Object searchDefaultNamespace(Context cx)
     {
         Scriptable scope = cx.currentActivationCall;
@@ -1318,11 +1574,26 @@ public class ScriptRuntime {
         return nsObject;
     }
 
+    /**
+     * Gets the top level prop.
+     *
+     * @param scope the scope
+     * @param id the id
+     * @return the top level prop
+     */
     public static Object getTopLevelProp(Scriptable scope, String id) {
         scope = ScriptableObject.getTopLevelScope(scope);
         return ScriptableObject.getProperty(scope, id);
     }
 
+    /**
+     * Gets the existing ctor.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param constructorName the constructor name
+     * @return the existing ctor
+     */
     static Function getExistingCtor(Context cx, Scriptable scope,
                                     String constructorName)
     {
@@ -1343,7 +1614,8 @@ public class ScriptRuntime {
      * Return -1L if str is not an index, or the index value as lower 32
      * bits of the result. Note that the result needs to be cast to an int
      * in order to produce the actual index, which may be negative.
-     * @param str
+     *
+     * @param str the str
      * @return long
      */
     public static long indexFromString(String str)
@@ -1402,7 +1674,8 @@ public class ScriptRuntime {
     /**
      * If str is a decimal presentation of Uint32 value, return it as long.
      * Othewise return -1L;
-     * @param str
+     *
+     * @param str the str
      * @return long
      */
     public static long testUint32String(String str)
@@ -1440,6 +1713,9 @@ public class ScriptRuntime {
     /**
      * If s represents index, then return index value wrapped as Integer
      * and othewise return s.
+     *
+     * @param s the s
+     * @return the index object
      */
     static Object getIndexObject(String s)
     {
@@ -1453,6 +1729,9 @@ public class ScriptRuntime {
     /**
      * If d is exact int value, return its value wrapped as Integer
      * and othewise return d converted to String.
+     *
+     * @param d the d
+     * @return the index object
      */
     static Object getIndexObject(double d)
     {
@@ -1467,6 +1746,10 @@ public class ScriptRuntime {
      * If toString(id) is a decimal presentation of int32 value, then id
      * is index. In this case return null and make the index available
      * as ScriptRuntime.lastIndexResult(cx). Otherwise return toString(id).
+     *
+     * @param cx the cx
+     * @param id the id
+     * @return the string
      */
     static String toStringIdOrIndex(Context cx, Object id)
     {
@@ -1496,9 +1779,10 @@ public class ScriptRuntime {
 
     /**
      * Call obj.[[Get]](id)
-     * @param obj
-     * @param elem
-     * @param cx
+     *
+     * @param obj the obj
+     * @param elem the elem
+     * @param cx the cx
      * @return Object
      */
     public static Object getObjectElem(Object obj, Object elem, Context cx)
@@ -1508,6 +1792,12 @@ public class ScriptRuntime {
 
     /**
      * Call obj.[[Get]](id)
+     *
+     * @param obj the obj
+     * @param elem the elem
+     * @param cx the cx
+     * @param scope the scope
+     * @return the object elem
      */
     public static Object getObjectElem(Object obj, Object elem, Context cx, final Scriptable scope)
     {
@@ -1518,6 +1808,14 @@ public class ScriptRuntime {
         return getObjectElem(sobj, elem, cx);
     }
 
+    /**
+     * Gets the object elem.
+     *
+     * @param obj the obj
+     * @param elem the elem
+     * @param cx the cx
+     * @return the object elem
+     */
     public static Object getObjectElem(Scriptable obj, Object elem,
                                        Context cx)
     {
@@ -1545,6 +1843,11 @@ public class ScriptRuntime {
 
     /**
      * Version of getObjectElem when elem is a valid JS identifier name.
+     *
+     * @param obj the obj
+     * @param property the property
+     * @param cx the cx
+     * @return the object prop
      */
     public static Object getObjectProp(Object obj, String property,
                                        Context cx)
@@ -1557,7 +1860,13 @@ public class ScriptRuntime {
     }
 
     /**
+     * Gets the object prop.
+     *
+     * @param obj the obj
+     * @param property the property
+     * @param cx the cx
      * @param scope the scope that should be used to resolve primitive prototype
+     * @return the object prop
      */
     public static Object getObjectProp(Object obj, String property,
                                        Context cx, final Scriptable scope)
@@ -1569,6 +1878,14 @@ public class ScriptRuntime {
         return getObjectProp(sobj, property, cx);
     }
 
+    /**
+     * Gets the object prop.
+     *
+     * @param obj the obj
+     * @param property the property
+     * @param cx the cx
+     * @return the object prop
+     */
     public static Object getObjectProp(Scriptable obj, String property,
                                        Context cx)
     {
@@ -1585,6 +1902,14 @@ public class ScriptRuntime {
         return result;
     }
 
+    /**
+     * Gets the object prop no warn.
+     *
+     * @param obj the obj
+     * @param property the property
+     * @param cx the cx
+     * @return the object prop no warn
+     */
     public static Object getObjectPropNoWarn(Object obj, String property,
                                              Context cx)
     {
@@ -1603,6 +1928,14 @@ public class ScriptRuntime {
      * A cheaper and less general version of the above for well-known argument
      * types.
      */
+    /**
+     * Gets the object index.
+     *
+     * @param obj the obj
+     * @param dblIndex the dbl index
+     * @param cx the cx
+     * @return the object index
+     */
     public static Object getObjectIndex(Object obj, double dblIndex,
                                         Context cx)
     {
@@ -1620,6 +1953,14 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Gets the object index.
+     *
+     * @param obj the obj
+     * @param index the index
+     * @param cx the cx
+     * @return the object index
+     */
     public static Object getObjectIndex(Scriptable obj, int index,
                                         Context cx)
     {
@@ -1635,6 +1976,15 @@ public class ScriptRuntime {
     /*
      * Call obj.[[Put]](id, value)
      */
+    /**
+     * Sets the object elem.
+     *
+     * @param obj the obj
+     * @param elem the elem
+     * @param value the value
+     * @param cx the cx
+     * @return the object
+     */
     public static Object setObjectElem(Object obj, Object elem, Object value,
                                        Context cx)
     {
@@ -1645,6 +1995,15 @@ public class ScriptRuntime {
         return setObjectElem(sobj, elem, value, cx);
     }
 
+    /**
+     * Sets the object elem.
+     *
+     * @param obj the obj
+     * @param elem the elem
+     * @param value the value
+     * @param cx the cx
+     * @return the object
+     */
     public static Object setObjectElem(Scriptable obj, Object elem,
                                        Object value, Context cx)
     {
@@ -1665,6 +2024,12 @@ public class ScriptRuntime {
 
     /**
      * Version of setObjectElem when elem is a valid JS identifier name.
+     *
+     * @param obj the obj
+     * @param property the property
+     * @param value the value
+     * @param cx the cx
+     * @return the object
      */
     public static Object setObjectProp(Object obj, String property,
                                        Object value, Context cx)
@@ -1676,6 +2041,15 @@ public class ScriptRuntime {
         return setObjectProp(sobj, property, value, cx);
     }
 
+    /**
+     * Sets the object prop.
+     *
+     * @param obj the obj
+     * @param property the property
+     * @param value the value
+     * @param cx the cx
+     * @return the object
+     */
     public static Object setObjectProp(Scriptable obj, String property,
                                        Object value, Context cx)
     {
@@ -1686,6 +2060,15 @@ public class ScriptRuntime {
     /*
      * A cheaper and less general version of the above for well-known argument
      * types.
+     */
+    /**
+     * Sets the object index.
+     *
+     * @param obj the obj
+     * @param dblIndex the dbl index
+     * @param value the value
+     * @param cx the cx
+     * @return the object
      */
     public static Object setObjectIndex(Object obj, double dblIndex,
                                         Object value, Context cx)
@@ -1704,6 +2087,15 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Sets the object index.
+     *
+     * @param obj the obj
+     * @param index the index
+     * @param value the value
+     * @param cx the cx
+     * @return the object
+     */
     public static Object setObjectIndex(Scriptable obj, int index, Object value,
                                         Context cx)
     {
@@ -1711,6 +2103,14 @@ public class ScriptRuntime {
         return value;
     }
 
+    /**
+     * Delete object elem.
+     *
+     * @param target the target
+     * @param elem the elem
+     * @param cx the cx
+     * @return true, if successful
+     */
     public static boolean deleteObjectElem(Scriptable target, Object elem,
                                            Context cx)
     {
@@ -1725,6 +2125,14 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Checks for object elem.
+     *
+     * @param target the target
+     * @param elem the elem
+     * @param cx the cx
+     * @return true, if successful
+     */
     public static boolean hasObjectElem(Scriptable target, Object elem,
                                         Context cx)
     {
@@ -1741,26 +2149,62 @@ public class ScriptRuntime {
         return result;
     }
 
+    /**
+     * Ref get.
+     *
+     * @param ref the ref
+     * @param cx the cx
+     * @return the object
+     */
     public static Object refGet(Ref ref, Context cx)
     {
         return ref.get(cx);
     }
 
+    /**
+     * Ref set.
+     *
+     * @param ref the ref
+     * @param value the value
+     * @param cx the cx
+     * @return the object
+     */
     public static Object refSet(Ref ref, Object value, Context cx)
     {
         return ref.set(cx, value);
     }
 
+    /**
+     * Ref del.
+     *
+     * @param ref the ref
+     * @param cx the cx
+     * @return the object
+     */
     public static Object refDel(Ref ref, Context cx)
     {
         return wrapBoolean(ref.delete(cx));
     }
 
+    /**
+     * Checks if is special property.
+     *
+     * @param s the s
+     * @return true, if is special property
+     */
     static boolean isSpecialProperty(String s)
     {
         return s.equals("__proto__") || s.equals("__parent__");
     }
 
+    /**
+     * Special ref.
+     *
+     * @param obj the obj
+     * @param specialProperty the special property
+     * @param cx the cx
+     * @return the ref
+     */
     public static Ref specialRef(Object obj, String specialProperty,
                                  Context cx)
     {
@@ -1768,7 +2212,13 @@ public class ScriptRuntime {
     }
 
     /**
-     * @deprecated
+     * Delete.
+     *
+     * @param obj the obj
+     * @param id the id
+     * @param cx the cx
+     * @return the object
+     * @deprecated 
      */
     public static Object delete(Object obj, Object id, Context cx)
     {
@@ -1777,14 +2227,20 @@ public class ScriptRuntime {
 
     /**
      * The delete operator
-     *
+     * 
      * See ECMA 11.4.1
-     *
+     * 
      * In ECMA 0.19, the description of the delete operator (11.4.1)
      * assumes that the [[Delete]] method returns a value. However,
      * the definition of the [[Delete]] operator (8.6.2.5) does not
      * define a return value. Here we assume that the [[Delete]]
      * method doesn't return a value.
+     *
+     * @param obj the obj
+     * @param id the id
+     * @param cx the cx
+     * @param isName the is name
+     * @return the object
      */
     public static Object delete(Object obj, Object id, Context cx, boolean isName)
     {
@@ -1801,6 +2257,11 @@ public class ScriptRuntime {
 
     /**
      * Looks up a name in the scope chain and returns its value.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param name the name
+     * @return the object
      */
     public static Object name(Context cx, Scriptable scope, String name)
     {
@@ -1816,6 +2277,16 @@ public class ScriptRuntime {
         return nameOrFunction(cx, scope, parent, name, false);
     }
 
+    /**
+     * Name or function.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param parentScope the parent scope
+     * @param name the name
+     * @param asFunctionCall the as function call
+     * @return the object
+     */
     private static Object nameOrFunction(Context cx, Scriptable scope,
                                          Scriptable parentScope, String name,
                                          boolean asFunctionCall)
@@ -1898,6 +2369,14 @@ public class ScriptRuntime {
         return result;
     }
 
+    /**
+     * Top scope name.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param name the name
+     * @return the object
+     */
     private static Object topScopeName(Context cx, Scriptable scope,
                                        String name)
     {
@@ -1910,7 +2389,7 @@ public class ScriptRuntime {
 
     /**
      * Returns the object in the scope chain that has a given property.
-     *
+     * 
      * The order of evaluation of an assignment expression involves
      * evaluating the lhs to a reference, evaluating the rhs, and then
      * modifying the reference with the rhs value. This method is used
@@ -1918,8 +2397,13 @@ public class ScriptRuntime {
      * so that the side effects of evaluating the rhs do not affect
      * which property is modified.
      * Typically used in conjunction with setName.
-     *
+     * 
      * See ECMA 10.1.4
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param id the id
+     * @return the scriptable
      */
     public static Scriptable bind(Context cx, Scriptable scope, String id)
     {
@@ -1971,6 +2455,16 @@ public class ScriptRuntime {
         return firstXMLObject;
     }
 
+    /**
+     * Sets the name.
+     *
+     * @param bound the bound
+     * @param value the value
+     * @param cx the cx
+     * @param scope the scope
+     * @param id the id
+     * @return the object
+     */
     public static Object setName(Scriptable bound, Object value,
                                  Context cx, Scriptable scope, String id)
     {
@@ -1998,6 +2492,16 @@ public class ScriptRuntime {
         return value;
     }
 
+    /**
+     * Strict set name.
+     *
+     * @param bound the bound
+     * @param value the value
+     * @param cx the cx
+     * @param scope the scope
+     * @param id the id
+     * @return the object
+     */
     public static Object strictSetName(Scriptable bound, Object value,
             Context cx, Scriptable scope, String id) {
         if (bound != null) {
@@ -2018,6 +2522,15 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Sets the const.
+     *
+     * @param bound the bound
+     * @param value the value
+     * @param cx the cx
+     * @param id the id
+     * @return the object
+     */
     public static Object setConst(Scriptable bound, Object value,
                                  Context cx, String id)
     {
@@ -2046,21 +2559,46 @@ public class ScriptRuntime {
      */
     private static class IdEnumeration implements Serializable
     {
+        
+        /** The Constant serialVersionUID. */
         private static final long serialVersionUID = 1L;
+        
+        /** The obj. */
         Scriptable obj;
+        
+        /** The ids. */
         Object[] ids;
+        
+        /** The index. */
         int index;
+        
+        /** The used. */
         ObjToIntMap used;
+        
+        /** The current id. */
         Object currentId;
+        
+        /** The enum type. */
         int enumType; /* one of ENUM_INIT_KEYS, ENUM_INIT_VALUES,
                          ENUM_INIT_ARRAY */
 
         // if true, integer ids will be returned as numbers rather than strings
-        boolean enumNumbers;
+        /** The enum numbers. */
+ boolean enumNumbers;
 
+        /** The iterator. */
         Scriptable iterator;
     }
 
+    /**
+     * To iterator.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param obj the obj
+     * @param keyOnly the key only
+     * @return the scriptable
+     */
     public static Scriptable toIterator(Context cx, Scriptable scope,
                                         Scriptable obj, boolean keyOnly)
     {
@@ -2085,19 +2623,46 @@ public class ScriptRuntime {
     }
 
     // for backwards compatibility with generated class files
+    /**
+     * Enum init.
+     *
+     * @param value the value
+     * @param cx the cx
+     * @param enumValues the enum values
+     * @return the object
+     */
     public static Object enumInit(Object value, Context cx, boolean enumValues)
     {
         return enumInit(value, cx, enumValues ? ENUMERATE_VALUES
                                               : ENUMERATE_KEYS);
     }
 
+    /** The Constant ENUMERATE_KEYS. */
     public static final int ENUMERATE_KEYS = 0;
+    
+    /** The Constant ENUMERATE_VALUES. */
     public static final int ENUMERATE_VALUES = 1;
+    
+    /** The Constant ENUMERATE_ARRAY. */
     public static final int ENUMERATE_ARRAY = 2;
+    
+    /** The Constant ENUMERATE_KEYS_NO_ITERATOR. */
     public static final int ENUMERATE_KEYS_NO_ITERATOR = 3;
+    
+    /** The Constant ENUMERATE_VALUES_NO_ITERATOR. */
     public static final int ENUMERATE_VALUES_NO_ITERATOR = 4;
+    
+    /** The Constant ENUMERATE_ARRAY_NO_ITERATOR. */
     public static final int ENUMERATE_ARRAY_NO_ITERATOR = 5;
 
+    /**
+     * Enum init.
+     *
+     * @param value the value
+     * @param cx the cx
+     * @param enumType the enum type
+     * @return the object
+     */
     public static Object enumInit(Object value, Context cx, int enumType)
     {
         IdEnumeration x = new IdEnumeration();
@@ -2125,10 +2690,22 @@ public class ScriptRuntime {
         return x;
     }
 
+    /**
+     * Sets the enum numbers.
+     *
+     * @param enumObj the enum obj
+     * @param enumNumbers the enum numbers
+     */
     public static void setEnumNumbers(Object enumObj, boolean enumNumbers) {
         ((IdEnumeration)enumObj).enumNumbers = enumNumbers;
     }
 
+    /**
+     * Enum next.
+     *
+     * @param enumObj the enum obj
+     * @return the boolean
+     */
     public static Boolean enumNext(Object enumObj)
     {
         IdEnumeration x = (IdEnumeration)enumObj;
@@ -2178,6 +2755,13 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Enum id.
+     *
+     * @param enumObj the enum obj
+     * @param cx the cx
+     * @return the object
+     */
     public static Object enumId(Object enumObj, Context cx)
     {
         IdEnumeration x = (IdEnumeration)enumObj;
@@ -2200,6 +2784,13 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Enum value.
+     *
+     * @param enumObj the enum obj
+     * @param cx the cx
+     * @return the object
+     */
     public static Object enumValue(Object enumObj, Context cx) {
         IdEnumeration x = (IdEnumeration)enumObj;
 
@@ -2216,6 +2807,11 @@ public class ScriptRuntime {
         return result;
     }
 
+    /**
+     * Enum change object.
+     *
+     * @param x the x
+     */
     private static void enumChangeObject(IdEnumeration x)
     {
         Object[] ids = null;
@@ -2246,6 +2842,11 @@ public class ScriptRuntime {
      * as ScriptRuntime.lastStoredScriptable() for consumption as thisObj.
      * The caller must call ScriptRuntime.lastStoredScriptable() immediately
      * after calling this method.
+     *
+     * @param name the name
+     * @param cx the cx
+     * @param scope the scope
+     * @return the name function and this
      */
     public static Callable getNameFunctionAndThis(String name,
                                                   Context cx,
@@ -2277,6 +2878,11 @@ public class ScriptRuntime {
      * as ScriptRuntime.lastStoredScriptable() for consumption as thisObj.
      * The caller must call ScriptRuntime.lastStoredScriptable() immediately
      * after calling this method.
+     *
+     * @param obj the obj
+     * @param elem the elem
+     * @param cx the cx
+     * @return the elem function and this
      */
     public static Callable getElemFunctionAndThis(Object obj,
                                                   Object elem,
@@ -2310,6 +2916,11 @@ public class ScriptRuntime {
      * after calling this method.
      * Warning: this doesn't allow to resolve primitive prototype properly when
      * many top scopes are involved.
+     *
+     * @param obj the obj
+     * @param property the property
+     * @param cx the cx
+     * @return the prop function and this
      */
     public static Callable getPropFunctionAndThis(Object obj,
                                                   String property,
@@ -2325,6 +2936,12 @@ public class ScriptRuntime {
      * as ScriptRuntime.lastStoredScriptable() for consumption as thisObj.
      * The caller must call ScriptRuntime.lastStoredScriptable() immediately
      * after calling this method.
+     *
+     * @param obj the obj
+     * @param property the property
+     * @param cx the cx
+     * @param scope the scope
+     * @return the prop function and this
      */
     public static Callable getPropFunctionAndThis(Object obj,
                                                   String property,
@@ -2334,6 +2951,15 @@ public class ScriptRuntime {
         return getPropFunctionAndThisHelper(obj, property, cx, thisObj);
     }
 
+    /**
+     * Gets the prop function and this helper.
+     *
+     * @param obj the obj
+     * @param property the property
+     * @param cx the cx
+     * @param thisObj the this obj
+     * @return the prop function and this helper
+     */
     private static Callable getPropFunctionAndThisHelper(Object obj,
           String property, Context cx, Scriptable thisObj)
     {
@@ -2362,6 +2988,10 @@ public class ScriptRuntime {
      * as ScriptRuntime.lastStoredScriptable() for consumption as thisObj.
      * The caller must call ScriptRuntime.lastStoredScriptable() immediately
      * after calling this method.
+     *
+     * @param value the value
+     * @param cx the cx
+     * @return the value function and this
      */
     public static Callable getValueFunctionAndThis(Object value, Context cx)
     {
@@ -2399,6 +3029,12 @@ public class ScriptRuntime {
      * The args array reference should not be stored in any object that is
      * can be GC-reachable after this method returns. If this is necessary,
      * store args.clone(), not args array itself.
+     *
+     * @param function the function
+     * @param thisObj the this obj
+     * @param args the args
+     * @param cx the cx
+     * @return the ref
      */
     public static Ref callRef(Callable function, Scriptable thisObj,
                               Object[] args, Context cx)
@@ -2419,8 +3055,14 @@ public class ScriptRuntime {
 
     /**
      * Operator new.
-     *
+     * 
      * See ECMA 11.2.2
+     *
+     * @param fun the fun
+     * @param cx the cx
+     * @param scope the scope
+     * @param args the args
+     * @return the scriptable
      */
     public static Scriptable newObject(Object fun, Context cx,
                                        Scriptable scope, Object[] args)
@@ -2432,6 +3074,20 @@ public class ScriptRuntime {
         return function.construct(cx, scope, args);
     }
 
+    /**
+     * Call special.
+     *
+     * @param cx the cx
+     * @param fun the fun
+     * @param thisObj the this obj
+     * @param args the args
+     * @param scope the scope
+     * @param callerThis the caller this
+     * @param callType the call type
+     * @param filename the filename
+     * @param lineNumber the line number
+     * @return the object
+     */
     public static Object callSpecial(Context cx, Callable fun,
                                      Scriptable thisObj,
                                      Object[] args, Scriptable scope,
@@ -2455,6 +3111,16 @@ public class ScriptRuntime {
         return fun.call(cx, scope, thisObj, args);
     }
 
+    /**
+     * New special.
+     *
+     * @param cx the cx
+     * @param fun the fun
+     * @param args the args
+     * @param scope the scope
+     * @param callType the call type
+     * @return the object
+     */
     public static Object newSpecial(Context cx, Object fun,
                                     Object[] args, Scriptable scope,
                                     int callType)
@@ -2476,8 +3142,15 @@ public class ScriptRuntime {
 
     /**
      * Function.prototype.apply and Function.prototype.call
-     *
+     * 
      * See Ecma 15.3.4.[34]
+     *
+     * @param isApply the is apply
+     * @param cx the cx
+     * @param scope the scope
+     * @param thisObj the this obj
+     * @param args the args
+     * @return the object
      */
     public static Object applyOrCall(boolean isApply,
                                      Context cx, Scriptable scope,
@@ -2513,6 +3186,13 @@ public class ScriptRuntime {
         return function.call(cx, scope, callThis, callArgs);
     }
 
+    /**
+     * Gets the apply arguments.
+     *
+     * @param cx the cx
+     * @param arg1 the arg1
+     * @return the apply arguments
+     */
     static Object[] getApplyArguments(Context cx, Object arg1)
     {
         if (arg1 == null || arg1 == Undefined.instance) {
@@ -2524,6 +3204,12 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Gets the callable.
+     *
+     * @param thisObj the this obj
+     * @return the callable
+     */
     static Callable getCallable(Scriptable thisObj)
     {
         Callable function;
@@ -2541,8 +3227,16 @@ public class ScriptRuntime {
 
     /**
      * The eval function property of the global object.
-     *
+     * 
      * See ECMA 15.1.2.1
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param thisArg the this arg
+     * @param args the args
+     * @param filename the filename
+     * @param lineNumber the line number
+     * @return the object
      */
     public static Object evalSpecial(Context cx, Scriptable scope,
                                      Object thisArg, Object[] args,
@@ -2592,7 +3286,10 @@ public class ScriptRuntime {
     }
 
     /**
-     * The typeof operator
+     * The typeof operator.
+     *
+     * @param value the value
+     * @return the string
      */
     public static String typeof(Object value)
     {
@@ -2614,7 +3311,11 @@ public class ScriptRuntime {
     }
 
     /**
-     * The typeof operator that correctly handles the undefined case
+     * The typeof operator that correctly handles the undefined case.
+     *
+     * @param scope the scope
+     * @param id the id
+     * @return the string
      */
     public static String typeofName(Scriptable scope, String id)
     {
@@ -2637,6 +3338,14 @@ public class ScriptRuntime {
     // implement the '~' operator inline in the caller
     // as "~toInt32(val)"
 
+    /**
+     * Adds the.
+     *
+     * @param val1 the val1
+     * @param val2 the val2
+     * @param cx the cx
+     * @return the object
+     */
     public static Object add(Object val1, Object val2, Context cx)
     {
         if(val1 instanceof Number && val2 instanceof Number) {
@@ -2668,15 +3377,35 @@ public class ScriptRuntime {
         return new ConsString(toCharSequence(val1), toCharSequence(val2));
     }
 
+    /**
+     * Adds the.
+     *
+     * @param val1 the val1
+     * @param val2 the val2
+     * @return the char sequence
+     */
     public static CharSequence add(CharSequence val1, Object val2) {
         return new ConsString(val1, toCharSequence(val2));
     }
 
+    /**
+     * Adds the.
+     *
+     * @param val1 the val1
+     * @param val2 the val2
+     * @return the char sequence
+     */
     public static CharSequence add(Object val1, CharSequence val2) {
         return new ConsString(toCharSequence(val1), val2);
     }
 
     /**
+     * Name incr decr.
+     *
+     * @param scopeChain the scope chain
+     * @param id the id
+     * @param incrDecrMask the incr decr mask
+     * @return the object
      * @deprecated The method is only present for compatibility.
      */
     public static Object nameIncrDecr(Scriptable scopeChain, String id,
@@ -2685,6 +3414,15 @@ public class ScriptRuntime {
         return nameIncrDecr(scopeChain, id, Context.getContext(), incrDecrMask);
     }
 
+    /**
+     * Name incr decr.
+     *
+     * @param scopeChain the scope chain
+     * @param id the id
+     * @param cx the cx
+     * @param incrDecrMask the incr decr mask
+     * @return the object
+     */
     public static Object nameIncrDecr(Scriptable scopeChain, String id,
                                       Context cx, int incrDecrMask)
     {
@@ -2715,6 +3453,15 @@ public class ScriptRuntime {
                                     incrDecrMask);
     }
 
+    /**
+     * Prop incr decr.
+     *
+     * @param obj the obj
+     * @param id the id
+     * @param cx the cx
+     * @param incrDecrMask the incr decr mask
+     * @return the object
+     */
     public static Object propIncrDecr(Object obj, String id,
                                       Context cx, int incrDecrMask)
     {
@@ -2740,6 +3487,16 @@ public class ScriptRuntime {
                                     incrDecrMask);
     }
 
+    /**
+     * Do scriptable incr decr.
+     *
+     * @param target the target
+     * @param id the id
+     * @param protoChainStart the proto chain start
+     * @param value the value
+     * @param incrDecrMask the incr decr mask
+     * @return the object
+     */
     private static Object doScriptableIncrDecr(Scriptable target,
                                                String id,
                                                Scriptable protoChainStart,
@@ -2771,6 +3528,15 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Elem incr decr.
+     *
+     * @param obj the obj
+     * @param index the index
+     * @param cx the cx
+     * @param incrDecrMask the incr decr mask
+     * @return the object
+     */
     public static Object elemIncrDecr(Object obj, Object index,
                                       Context cx, int incrDecrMask)
     {
@@ -2800,6 +3566,14 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Ref incr decr.
+     *
+     * @param ref the ref
+     * @param cx the cx
+     * @param incrDecrMask the incr decr mask
+     * @return the object
+     */
     public static Object refIncrDecr(Ref ref, Context cx, int incrDecrMask)
     {
         Object value = ref.get(cx);
@@ -2828,10 +3602,23 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * To primitive.
+     *
+     * @param val the val
+     * @return the object
+     */
     public static Object toPrimitive(Object val) {
         return toPrimitive(val, null);
     }
 
+    /**
+     * To primitive.
+     *
+     * @param val the val
+     * @param typeHint the type hint
+     * @return the object
+     */
     public static Object toPrimitive(Object val, Class<?> typeHint)
     {
         if (!(val instanceof Scriptable)) {
@@ -2846,8 +3633,12 @@ public class ScriptRuntime {
 
     /**
      * Equality
-     *
+     * 
      * See ECMA 11.9
+     *
+     * @param x the x
+     * @param y the y
+     * @return true, if successful
      */
     public static boolean eq(Object x, Object y)
     {
@@ -2927,12 +3718,25 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Checks if is primitive.
+     *
+     * @param obj the obj
+     * @return true, if is primitive
+     */
     public static boolean isPrimitive(Object obj) {
         return obj == null || obj == Undefined.instance ||
                 (obj instanceof Number) || (obj instanceof String) ||
                 (obj instanceof Boolean);
     }
 
+    /**
+     * Eq number.
+     *
+     * @param x the x
+     * @param y the y
+     * @return true, if successful
+     */
     static boolean eqNumber(double x, Object y)
     {
         for (;;) {
@@ -2960,6 +3764,13 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Eq string.
+     *
+     * @param x the x
+     * @param y the y
+     * @return true, if successful
+     */
     private static boolean eqString(CharSequence x, Object y)
     {
         for (;;) {
@@ -2987,6 +3798,14 @@ public class ScriptRuntime {
             }
         }
     }
+    
+    /**
+     * Shallow eq.
+     *
+     * @param x the x
+     * @param y the y
+     * @return true, if successful
+     */
     public static boolean shallowEq(Object x, Object y)
     {
         if (x == y) {
@@ -3025,6 +3844,9 @@ public class ScriptRuntime {
     /**
      * The instanceof operator.
      *
+     * @param a the a
+     * @param b the b
+     * @param cx the cx
      * @return a instanceof b
      */
     public static boolean instanceOf(Object a, Object b, Context cx)
@@ -3042,8 +3864,10 @@ public class ScriptRuntime {
     }
 
     /**
-     * Delegates to
+     * Delegates to.
      *
+     * @param lhs the lhs
+     * @param rhs the rhs
      * @return true iff rhs appears in lhs' proto chain
      */
     public static boolean jsDelegatesTo(Scriptable lhs, Scriptable rhs) {
@@ -3059,16 +3883,17 @@ public class ScriptRuntime {
 
     /**
      * The in operator.
-     *
+     * 
      * This is a new JS 1.3 language feature.  The in operator mirrors
      * the operation of the for .. in construct, and tests whether the
      * rhs has the property given by the lhs.  It is different from the
      * for .. in construct in that:
      * <BR> - it doesn't perform ToObject on the right hand side
      * <BR> - it returns true for DontEnum properties.
+     *
      * @param a the left hand operand
      * @param b the right hand operand
-     *
+     * @param cx the cx
      * @return true if property name or element number a is a property of b
      */
     public static boolean in(Object a, Object b, Context cx)
@@ -3080,6 +3905,13 @@ public class ScriptRuntime {
         return hasObjectElem((Scriptable)b, a, cx);
     }
 
+    /**
+     * Cmp_ lt.
+     *
+     * @param val1 the val1
+     * @param val2 the val2
+     * @return true, if successful
+     */
     public static boolean cmp_LT(Object val1, Object val2)
     {
         double d1, d2;
@@ -3100,6 +3932,13 @@ public class ScriptRuntime {
         return d1 < d2;
     }
 
+    /**
+     * Cmp_ le.
+     *
+     * @param val1 the val1
+     * @param val2 the val2
+     * @return true, if successful
+     */
     public static boolean cmp_LE(Object val1, Object val2)
     {
         double d1, d2;
@@ -3124,6 +3963,12 @@ public class ScriptRuntime {
     // Statements
     // ------------------
 
+    /**
+     * Gets the global.
+     *
+     * @param cx the cx
+     * @return the global
+     */
     public static ScriptableObject getGlobal(Context cx) {
         final String GLOBAL_CLASS = "org.mozilla.javascript.tools.shell.Global";
         Class<?> globalClass = Kit.classOrNull(GLOBAL_CLASS);
@@ -3144,11 +3989,23 @@ public class ScriptRuntime {
         return new ImporterTopLevel(cx);
     }
 
+    /**
+     * Checks for top call.
+     *
+     * @param cx the cx
+     * @return true, if successful
+     */
     public static boolean hasTopCall(Context cx)
     {
         return (cx.topCallScope != null);
     }
 
+    /**
+     * Gets the top call scope.
+     *
+     * @param cx the cx
+     * @return the top call scope
+     */
     public static Scriptable getTopCallScope(Context cx)
     {
         Scriptable scope = cx.topCallScope;
@@ -3158,6 +4015,16 @@ public class ScriptRuntime {
         return scope;
     }
 
+    /**
+     * Do top call.
+     *
+     * @param callable the callable
+     * @param cx the cx
+     * @param scope the scope
+     * @param thisObj the this obj
+     * @param args the args
+     * @return the object
+     */
     public static Object doTopCall(Callable callable,
                                    Context cx, Scriptable scope,
                                    Scriptable thisObj, Object[] args)
@@ -3191,6 +4058,10 @@ public class ScriptRuntime {
      * is present on its prototype chain and return <tt>staticTopScope</tt>
      * otherwise.
      * Should only be called when <tt>staticTopScope</tt> is top scope.
+     *
+     * @param possibleDynamicScope the possible dynamic scope
+     * @param staticTopScope the static top scope
+     * @return the scriptable
      */
     static Scriptable checkDynamicScope(Scriptable possibleDynamicScope,
                                         Scriptable staticTopScope)
@@ -3211,6 +4082,12 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Adds the instruction count.
+     *
+     * @param cx the cx
+     * @param instructionsToAdd the instructions to add
+     */
     public static void addInstructionCount(Context cx, int instructionsToAdd)
     {
     	cx.instructionCount += instructionsToAdd;
@@ -3221,6 +4098,15 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Inits the script.
+     *
+     * @param funObj the fun obj
+     * @param thisObj the this obj
+     * @param cx the cx
+     * @param scope the scope
+     * @param evalScript the eval script
+     */
     public static void initScript(NativeFunction funObj, Scriptable thisObj,
                                   Context cx, Scriptable scope,
                                   boolean evalScript)
@@ -3261,6 +4147,14 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Creates the function activation.
+     *
+     * @param funObj the fun obj
+     * @param scope the scope
+     * @param args the args
+     * @return the scriptable
+     */
     public static Scriptable createFunctionActivation(NativeFunction funObj,
                                                       Scriptable scope,
                                                       Object[] args)
@@ -3269,6 +4163,12 @@ public class ScriptRuntime {
     }
 
 
+    /**
+     * Enter activation function.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     */
     public static void enterActivationFunction(Context cx,
                                                Scriptable scope)
     {
@@ -3279,6 +4179,11 @@ public class ScriptRuntime {
         cx.currentActivationCall = call;
     }
 
+    /**
+     * Exit activation function.
+     *
+     * @param cx the cx
+     */
     public static void exitActivationFunction(Context cx)
     {
         NativeCall call = cx.currentActivationCall;
@@ -3286,6 +4191,13 @@ public class ScriptRuntime {
         call.parentActivationCall = null;
     }
 
+    /**
+     * Find function activation.
+     *
+     * @param cx the cx
+     * @param f the f
+     * @return the native call
+     */
     static NativeCall findFunctionActivation(Context cx, Function f)
     {
         NativeCall call = cx.currentActivationCall;
@@ -3297,6 +4209,16 @@ public class ScriptRuntime {
         return null;
     }
 
+    /**
+     * New catch scope.
+     *
+     * @param t the t
+     * @param lastCatchScope the last catch scope
+     * @param exceptionName the exception name
+     * @param cx the cx
+     * @param scope the scope
+     * @return the scriptable
+     */
     public static Scriptable newCatchScope(Throwable t,
                                            Scriptable lastCatchScope,
                                            String exceptionName,
@@ -3343,6 +4265,14 @@ public class ScriptRuntime {
         return catchScopeObject;
     }
 
+    /**
+     * Wrap exception.
+     *
+     * @param t the t
+     * @param scope the scope
+     * @param cx the cx
+     * @return the scriptable
+     */
     public static Scriptable wrapException(Throwable t,
                                            Scriptable scope,
                                            Context cx) {
@@ -3416,12 +4346,27 @@ public class ScriptRuntime {
         return errorObject;
     }
 
+    /**
+     * Checks if is visible.
+     *
+     * @param cx the cx
+     * @param obj the obj
+     * @return true, if is visible
+     */
     private static boolean isVisible(Context cx, Object obj) {
         ClassShutter shutter = cx.getClassShutter();
         return shutter == null ||
             shutter.visibleToScripts(obj.getClass().getName());
     }
 
+    /**
+     * Enter with.
+     *
+     * @param obj the obj
+     * @param cx the cx
+     * @param scope the scope
+     * @return the scriptable
+     */
     public static Scriptable enterWith(Object obj, Context cx,
                                        Scriptable scope)
     {
@@ -3436,12 +4381,25 @@ public class ScriptRuntime {
         return new NativeWith(scope, sobj);
     }
 
+    /**
+     * Leave with.
+     *
+     * @param scope the scope
+     * @return the scriptable
+     */
     public static Scriptable leaveWith(Scriptable scope)
     {
         NativeWith nw = (NativeWith)scope;
         return nw.getParentScope();
     }
 
+    /**
+     * Enter dot query.
+     *
+     * @param value the value
+     * @param scope the scope
+     * @return the scriptable
+     */
     public static Scriptable enterDotQuery(Object value, Scriptable scope)
     {
         if (!(value instanceof XMLObject)) {
@@ -3451,6 +4409,13 @@ public class ScriptRuntime {
         return object.enterDotQuery(scope);
     }
 
+    /**
+     * Update dot query.
+     *
+     * @param value the value
+     * @param scope the scope
+     * @return the object
+     */
     public static Object updateDotQuery(boolean value, Scriptable scope)
     {
         // Return null to continue looping
@@ -3458,12 +4423,24 @@ public class ScriptRuntime {
         return nw.updateDotQuery(value);
     }
 
+    /**
+     * Leave dot query.
+     *
+     * @param scope the scope
+     * @return the scriptable
+     */
     public static Scriptable leaveDotQuery(Scriptable scope)
     {
         NativeWith nw = (NativeWith)scope;
         return nw.getParentScope();
     }
 
+    /**
+     * Sets the function proto and parent.
+     *
+     * @param fn the fn
+     * @param scope the scope
+     */
     public static void setFunctionProtoAndParent(BaseFunction fn,
                                                  Scriptable scope)
     {
@@ -3471,6 +4448,12 @@ public class ScriptRuntime {
         fn.setPrototype(ScriptableObject.getFunctionPrototype(scope));
     }
 
+    /**
+     * Sets the object proto and parent.
+     *
+     * @param object the object
+     * @param scope the scope
+     */
     public static void setObjectProtoAndParent(ScriptableObject object,
                                                Scriptable scope)
     {
@@ -3482,6 +4465,13 @@ public class ScriptRuntime {
         object.setPrototype(proto);
     }
 
+    /**
+     * Sets the builtin proto and parent.
+     *
+     * @param object the object
+     * @param scope the scope
+     * @param type the type
+     */
     public static void setBuiltinProtoAndParent(ScriptableObject object,
                                                 Scriptable scope,
                                                 TopLevel.Builtins type)
@@ -3492,6 +4482,15 @@ public class ScriptRuntime {
     }
 
 
+    /**
+     * Inits the function.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param function the function
+     * @param type the type
+     * @param fromEvalCode the from eval code
+     */
     public static void initFunction(Context cx, Scriptable scope,
                                     NativeFunction function, int type,
                                     boolean fromEvalCode)
@@ -3524,6 +4523,15 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * New array literal.
+     *
+     * @param objects the objects
+     * @param skipIndices the skip indices
+     * @param cx the cx
+     * @param scope the scope
+     * @return the scriptable
+     */
     public static Scriptable newArrayLiteral(Object[] objects,
                                              int[] skipIndices,
                                              Context cx, Scriptable scope)
@@ -3574,6 +4582,12 @@ public class ScriptRuntime {
    * This method is here for backward compat with existing compiled code.  It
    * is called when an object literal is compiled.  The next instance will be
    * the version called from new code.
+   *
+   * @param propertyIds the property ids
+   * @param propertyValues the property values
+   * @param cx the cx
+   * @param scope the scope
+   * @return the scriptable
    * @deprecated This method only present for compatibility.
    */
     public static Scriptable newObjectLiteral(Object[] propertyIds,
@@ -3585,6 +4599,16 @@ public class ScriptRuntime {
 
     }
 
+    /**
+     * New object literal.
+     *
+     * @param propertyIds the property ids
+     * @param propertyValues the property values
+     * @param getterSetters the getter setters
+     * @param cx the cx
+     * @param scope the scope
+     * @return the scriptable
+     */
     public static Scriptable newObjectLiteral(Object[] propertyIds,
                                               Object[] propertyValues,
                                               int [] getterSetters,
@@ -3616,11 +4640,23 @@ public class ScriptRuntime {
         return object;
     }
 
+    /**
+     * Checks if is array object.
+     *
+     * @param obj the obj
+     * @return true, if is array object
+     */
     public static boolean isArrayObject(Object obj)
     {
         return obj instanceof NativeArray || obj instanceof Arguments;
     }
 
+    /**
+     * Gets the array elements.
+     *
+     * @param object the object
+     * @return the array elements
+     */
     public static Object[] getArrayElements(Scriptable object)
     {
         Context cx = Context.getContext();
@@ -3643,6 +4679,12 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Check deprecated.
+     *
+     * @param cx the cx
+     * @param name the name
+     */
     static void checkDeprecated(Context cx, String name) {
         int version = cx.getLanguageVersion();
         if (version >= Context.VERSION_1_4 || version == Context.VERSION_DEFAULT) {
@@ -3654,17 +4696,38 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Gets the message0.
+     *
+     * @param messageId the message id
+     * @return the message0
+     */
     public static String getMessage0(String messageId)
     {
         return getMessage(messageId, null);
     }
 
+    /**
+     * Gets the message1.
+     *
+     * @param messageId the message id
+     * @param arg1 the arg1
+     * @return the message1
+     */
     public static String getMessage1(String messageId, Object arg1)
     {
         Object[] arguments = {arg1};
         return getMessage(messageId, arguments);
     }
 
+    /**
+     * Gets the message2.
+     *
+     * @param messageId the message id
+     * @param arg1 the arg1
+     * @param arg2 the arg2
+     * @return the message2
+     */
     public static String getMessage2(
         String messageId, Object arg1, Object arg2)
     {
@@ -3672,6 +4735,15 @@ public class ScriptRuntime {
         return getMessage(messageId, arguments);
     }
 
+    /**
+     * Gets the message3.
+     *
+     * @param messageId the message id
+     * @param arg1 the arg1
+     * @param arg2 the arg2
+     * @param arg3 the arg3
+     * @return the message3
+     */
     public static String getMessage3(
         String messageId, Object arg1, Object arg2, Object arg3)
     {
@@ -3679,6 +4751,16 @@ public class ScriptRuntime {
         return getMessage(messageId, arguments);
     }
 
+    /**
+     * Gets the message4.
+     *
+     * @param messageId the message id
+     * @param arg1 the arg1
+     * @param arg2 the arg2
+     * @param arg3 the arg3
+     * @param arg4 the arg4
+     * @return the message4
+     */
     public static String getMessage4(
         String messageId, Object arg1, Object arg2, Object arg3, Object arg4)
     {
@@ -3700,12 +4782,21 @@ public class ScriptRuntime {
          *
          * @param messageId the identifier of the message
          * @param arguments the arguments to fill into the message
+         * @return the message
          */
         String getMessage(String messageId, Object[] arguments);
     }
 
+    /** The message provider. */
     public static MessageProvider messageProvider = new DefaultMessageProvider();
 
+    /**
+     * Gets the message.
+     *
+     * @param messageId the message id
+     * @param arguments the arguments
+     * @return the message
+     */
     public static String getMessage(String messageId, Object[] arguments)
     {
         return messageProvider.getMessage(messageId, arguments);
@@ -3715,7 +4806,14 @@ public class ScriptRuntime {
      * make sense to use a ListResourceBundle instead of a properties
      * file to avoid (synchronized) text parsing.
      */
+    /**
+     * The Class DefaultMessageProvider.
+     */
     private static class DefaultMessageProvider implements MessageProvider {
+        
+        /* (non-Javadoc)
+         * @see org.mozilla.javascript.ScriptRuntime.MessageProvider#getMessage(java.lang.String, java.lang.Object[])
+         */
         public String getMessage(String messageId, Object[] arguments) {
             final String defaultResource
                 = "org.mozilla.javascript.resources.Messages";
@@ -3744,6 +4842,13 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Construct error.
+     *
+     * @param error the error
+     * @param message the message
+     * @return the ecma error
+     */
     public static EcmaError constructError(String error, String message)
     {
         int[] linep = new int[1];
@@ -3751,6 +4856,14 @@ public class ScriptRuntime {
         return constructError(error, message, filename, linep[0], null, 0);
     }
 
+    /**
+     * Construct error.
+     *
+     * @param error the error
+     * @param message the message
+     * @param lineNumberDelta the line number delta
+     * @return the ecma error
+     */
     public static EcmaError constructError(String error,
                                            String message,
                                            int lineNumberDelta)
@@ -3763,6 +4876,17 @@ public class ScriptRuntime {
         return constructError(error, message, filename, linep[0], null, 0);
     }
 
+    /**
+     * Construct error.
+     *
+     * @param error the error
+     * @param message the message
+     * @param sourceName the source name
+     * @param lineNumber the line number
+     * @param lineSource the line source
+     * @param columnNumber the column number
+     * @return the ecma error
+     */
     public static EcmaError constructError(String error,
                                            String message,
                                            String sourceName,
@@ -3774,23 +4898,50 @@ public class ScriptRuntime {
                              lineNumber, lineSource, columnNumber);
     }
 
+    /**
+     * Type error.
+     *
+     * @param message the message
+     * @return the ecma error
+     */
     public static EcmaError typeError(String message)
     {
         return constructError("TypeError", message);
     }
 
+    /**
+     * Type error0.
+     *
+     * @param messageId the message id
+     * @return the ecma error
+     */
     public static EcmaError typeError0(String messageId)
     {
         String msg = getMessage0(messageId);
         return typeError(msg);
     }
 
+    /**
+     * Type error1.
+     *
+     * @param messageId the message id
+     * @param arg1 the arg1
+     * @return the ecma error
+     */
     public static EcmaError typeError1(String messageId, String arg1)
     {
         String msg = getMessage1(messageId, arg1);
         return typeError(msg);
     }
 
+    /**
+     * Type error2.
+     *
+     * @param messageId the message id
+     * @param arg1 the arg1
+     * @param arg2 the arg2
+     * @return the ecma error
+     */
     public static EcmaError typeError2(String messageId, String arg1,
                                        String arg2)
     {
@@ -3798,6 +4949,15 @@ public class ScriptRuntime {
         return typeError(msg);
     }
 
+    /**
+     * Type error3.
+     *
+     * @param messageId the message id
+     * @param arg1 the arg1
+     * @param arg2 the arg2
+     * @param arg3 the arg3
+     * @return the ecma error
+     */
     public static EcmaError typeError3(String messageId, String arg1,
                                        String arg2, String arg3)
     {
@@ -3805,16 +4965,38 @@ public class ScriptRuntime {
         return typeError(msg);
     }
 
+    /**
+     * Undef read error.
+     *
+     * @param object the object
+     * @param id the id
+     * @return the runtime exception
+     */
     public static RuntimeException undefReadError(Object object, Object id)
     {
         return typeError2("msg.undef.prop.read", toString(object), toString(id));
     }
 
+    /**
+     * Undef call error.
+     *
+     * @param object the object
+     * @param id the id
+     * @return the runtime exception
+     */
     public static RuntimeException undefCallError(Object object, Object id)
     {
         return typeError2("msg.undef.method.call", toString(object), toString(id));
     }
 
+    /**
+     * Undef write error.
+     *
+     * @param object the object
+     * @param id the id
+     * @param value the value
+     * @return the runtime exception
+     */
     public static RuntimeException undefWriteError(Object object,
                                                    Object id,
                                                    Object value)
@@ -3823,11 +5005,25 @@ public class ScriptRuntime {
                           toString(value));
     }
 
+    /**
+     * Undef delete error.
+     *
+     * @param object the object
+     * @param id the id
+     * @return the runtime exception
+     */
     private static RuntimeException undefDeleteError(Object object, Object id)
     {
         throw typeError2("msg.undef.prop.delete", toString(object), toString(id));
     }
 
+    /**
+     * Not found error.
+     *
+     * @param object the object
+     * @param property the property
+     * @return the runtime exception
+     */
     public static RuntimeException notFoundError(Scriptable object,
                                                  String property)
     {
@@ -3836,11 +5032,24 @@ public class ScriptRuntime {
         throw constructError("ReferenceError", msg);
     }
 
+    /**
+     * Not function error.
+     *
+     * @param value the value
+     * @return the runtime exception
+     */
     public static RuntimeException notFunctionError(Object value)
     {
         return notFunctionError(value, value);
     }
 
+    /**
+     * Not function error.
+     *
+     * @param value the value
+     * @param messageHelper the message helper
+     * @return the runtime exception
+     */
     public static RuntimeException notFunctionError(Object value,
                                                     Object messageHelper)
     {
@@ -3853,6 +5062,14 @@ public class ScriptRuntime {
         return typeError2("msg.isnt.function", msg, typeof(value));
     }
 
+    /**
+     * Not function error.
+     *
+     * @param obj the obj
+     * @param value the value
+     * @param propertyName the property name
+     * @return the runtime exception
+     */
     public static RuntimeException notFunctionError(Object obj, Object value,
             String propertyName)
     {
@@ -3874,11 +5091,22 @@ public class ScriptRuntime {
                           typeof(value));
     }
 
+    /**
+     * Not xml error.
+     *
+     * @param value the value
+     * @return the runtime exception
+     */
     private static RuntimeException notXmlError(Object value)
     {
         throw typeError1("msg.isnt.xml.object", toString(value));
     }
 
+    /**
+     * Warn about non js object.
+     *
+     * @param nonJSObject the non js object
+     */
     private static void warnAboutNonJSObject(Object nonJSObject)
     {
         String message =
@@ -3889,17 +5117,35 @@ public class ScriptRuntime {
         System.err.println(message);
     }
 
+    /**
+     * Gets the reg exp proxy.
+     *
+     * @param cx the cx
+     * @return the reg exp proxy
+     */
     public static RegExpProxy getRegExpProxy(Context cx)
     {
         return cx.getRegExpProxy();
     }
 
+    /**
+     * Sets the reg exp proxy.
+     *
+     * @param cx the cx
+     * @param proxy the proxy
+     */
     public static void setRegExpProxy(Context cx, RegExpProxy proxy)
     {
         if (proxy == null) throw new IllegalArgumentException();
         cx.regExpProxy = proxy;
     }
 
+    /**
+     * Check reg exp proxy.
+     *
+     * @param cx the cx
+     * @return the reg exp proxy
+     */
     public static RegExpProxy checkRegExpProxy(Context cx)
     {
         RegExpProxy result = getRegExpProxy(cx);
@@ -3909,11 +5155,25 @@ public class ScriptRuntime {
         return result;
     }
 
+    /**
+     * Wrap reg exp.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param compiled the compiled
+     * @return the scriptable
+     */
     public static Scriptable wrapRegExp(Context cx, Scriptable scope,
                                         Object compiled) {
         return cx.getRegExpProxy().wrapRegExp(cx, scope, compiled);
     }
 
+    /**
+     * Current xml lib.
+     *
+     * @param cx the cx
+     * @return the XML lib
+     */
     private static XMLLib currentXMLLib(Context cx)
     {
         // Scripts should be running to access this
@@ -3932,9 +5192,10 @@ public class ScriptRuntime {
     }
 
     /**
-     * Escapes the reserved characters in a value of an attribute
+     * Escapes the reserved characters in a value of an attribute.
      *
      * @param value Unescaped text
+     * @param cx the cx
      * @return The escaped text
      */
     public static String escapeAttributeValue(Object value, Context cx)
@@ -3944,9 +5205,10 @@ public class ScriptRuntime {
     }
 
     /**
-     * Escapes the reserved characters in a value of a text node
+     * Escapes the reserved characters in a value of a text node.
      *
      * @param value Unescaped text
+     * @param cx the cx
      * @return The escaped text
      */
     public static String escapeTextValue(Object value, Context cx)
@@ -3955,6 +5217,15 @@ public class ScriptRuntime {
         return xmlLib.escapeTextValue(value);
     }
 
+    /**
+     * Member ref.
+     *
+     * @param obj the obj
+     * @param elem the elem
+     * @param cx the cx
+     * @param memberTypeFlags the member type flags
+     * @return the ref
+     */
     public static Ref memberRef(Object obj, Object elem,
                                 Context cx, int memberTypeFlags)
     {
@@ -3965,6 +5236,16 @@ public class ScriptRuntime {
         return xmlObject.memberRef(cx, elem, memberTypeFlags);
     }
 
+    /**
+     * Member ref.
+     *
+     * @param obj the obj
+     * @param namespace the namespace
+     * @param elem the elem
+     * @param cx the cx
+     * @param memberTypeFlags the member type flags
+     * @return the ref
+     */
     public static Ref memberRef(Object obj, Object namespace, Object elem,
                                 Context cx, int memberTypeFlags)
     {
@@ -3975,6 +5256,15 @@ public class ScriptRuntime {
         return xmlObject.memberRef(cx, namespace, elem, memberTypeFlags);
     }
 
+    /**
+     * Name ref.
+     *
+     * @param name the name
+     * @param cx the cx
+     * @param scope the scope
+     * @param memberTypeFlags the member type flags
+     * @return the ref
+     */
     public static Ref nameRef(Object name, Context cx,
                               Scriptable scope, int memberTypeFlags)
     {
@@ -3982,6 +5272,16 @@ public class ScriptRuntime {
         return xmlLib.nameRef(cx, name, scope, memberTypeFlags);
     }
 
+    /**
+     * Name ref.
+     *
+     * @param namespace the namespace
+     * @param name the name
+     * @param cx the cx
+     * @param scope the scope
+     * @param memberTypeFlags the member type flags
+     * @return the ref
+     */
     public static Ref nameRef(Object namespace, Object name, Context cx,
                               Scriptable scope, int memberTypeFlags)
     {
@@ -3989,16 +5289,34 @@ public class ScriptRuntime {
         return xmlLib.nameRef(cx, namespace, name, scope, memberTypeFlags);
     }
 
+    /**
+     * Store index result.
+     *
+     * @param cx the cx
+     * @param index the index
+     */
     private static void storeIndexResult(Context cx, int index)
     {
         cx.scratchIndex = index;
     }
 
+    /**
+     * Last index result.
+     *
+     * @param cx the cx
+     * @return the int
+     */
     static int lastIndexResult(Context cx)
     {
         return cx.scratchIndex;
     }
 
+    /**
+     * Store uint32 result.
+     *
+     * @param cx the cx
+     * @param value the value
+     */
     public static void storeUint32Result(Context cx, long value)
     {
         if ((value >>> 32) != 0)
@@ -4006,6 +5324,12 @@ public class ScriptRuntime {
         cx.scratchUint32 = value;
     }
 
+    /**
+     * Last uint32 result.
+     *
+     * @param cx the cx
+     * @return the long
+     */
     public static long lastUint32Result(Context cx)
     {
         long value = cx.scratchUint32;
@@ -4014,6 +5338,12 @@ public class ScriptRuntime {
         return value;
     }
 
+    /**
+     * Store scriptable.
+     *
+     * @param cx the cx
+     * @param value the value
+     */
     private static void storeScriptable(Context cx, Scriptable value)
     {
         // The previously stored scratchScriptable should be consumed
@@ -4022,6 +5352,12 @@ public class ScriptRuntime {
         cx.scratchScriptable = value;
     }
 
+    /**
+     * Last stored scriptable.
+     *
+     * @param cx the cx
+     * @return the scriptable
+     */
     public static Scriptable lastStoredScriptable(Context cx)
     {
         Scriptable result = cx.scratchScriptable;
@@ -4029,6 +5365,14 @@ public class ScriptRuntime {
         return result;
     }
 
+    /**
+     * Make url for generated script.
+     *
+     * @param isEval the is eval
+     * @param masterScriptUrl the master script url
+     * @param masterScriptLine the master script line
+     * @return the string
+     */
     static String makeUrlForGeneratedScript
         (boolean isEval, String masterScriptUrl, int masterScriptLine)
     {
@@ -4039,6 +5383,12 @@ public class ScriptRuntime {
         }
     }
 
+    /**
+     * Checks if is generated script.
+     *
+     * @param sourceUrl the source url
+     * @return true, if is generated script
+     */
     static boolean isGeneratedScript(String sourceUrl) {
         // ALERT: this may clash with a valid URL containing (eval) or
         // (Function)
@@ -4046,6 +5396,13 @@ public class ScriptRuntime {
                || sourceUrl.indexOf("(Function)") >= 0;
     }
 
+    /**
+     * Error with class name.
+     *
+     * @param msg the msg
+     * @param val the val
+     * @return the runtime exception
+     */
     private static RuntimeException errorWithClassName(String msg, Object val)
     {
         return Context.reportRuntimeError1(msg, val.getClass().getName());
@@ -4067,7 +5424,10 @@ public class ScriptRuntime {
         return new JavaScriptException(error, filename, linep[0]);
     }
 
+    /** The Constant emptyArgs. */
     public static final Object[] emptyArgs = new Object[0];
+    
+    /** The Constant emptyStrings. */
     public static final String[] emptyStrings = new String[0];
 
 }

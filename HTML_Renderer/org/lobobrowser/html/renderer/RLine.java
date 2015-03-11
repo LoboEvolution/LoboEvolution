@@ -36,14 +36,22 @@ import java.util.Iterator;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.renderstate.RenderState;
 
+
 /**
+ * The Class RLine.
+ *
  * @author J. H. S.
  */
 class RLine extends BaseRCollection {
+	
+	/** The renderables. */
 	private final ArrayList<Renderable> renderables = new ArrayList<Renderable>(
 			8);
 	// private final RenderState startRenderState;
+	/** The base line offset. */
 	private int baseLineOffset;
+	
+	/** The desired max width. */
 	private int desiredMaxWidth;
 
 	/**
@@ -52,9 +60,23 @@ class RLine extends BaseRCollection {
 	 */
 	private int xoffset;
 
+	/** The allow overflow. */
 	private boolean allowOverflow = false;
+	
+	/** The first allow overflow word. */
 	private boolean firstAllowOverflowWord = false;
 
+	/**
+	 * Instantiates a new r line.
+	 *
+	 * @param modelNode the model node
+	 * @param container the container
+	 * @param x the x
+	 * @param y the y
+	 * @param desiredMaxWidth the desired max width
+	 * @param height the height
+	 * @param initialAllowOverflow the initial allow overflow
+	 */
 	public RLine(ModelNode modelNode, RenderableContainer container, int x,
 			int y, int desiredMaxWidth, int height, boolean initialAllowOverflow) {
 		// Note that in the case of RLine, modelNode is the context node
@@ -70,6 +92,11 @@ class RLine extends BaseRCollection {
 		this.allowOverflow = initialAllowOverflow;
 	}
 
+	/**
+	 * Sets the allow overflow.
+	 *
+	 * @param flag the new allow overflow
+	 */
 	public void setAllowOverflow(boolean flag) {
 		if (flag != this.allowOverflow) {
 			this.allowOverflow = flag;
@@ -81,22 +108,38 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Checks if is allow overflow.
+	 *
+	 * @return true, if is allow overflow
+	 */
 	public boolean isAllowOverflow() {
 		return this.allowOverflow;
 	}
 
 	/**
 	 * This method should only be invoked when the line has no items yet.
+	 *
+	 * @param x the x
+	 * @param desiredMaxWidth the desired max width
 	 */
 	public void changeLimits(int x, int desiredMaxWidth) {
 		this.x = x;
 		this.desiredMaxWidth = desiredMaxWidth;
 	}
 
+	/**
+	 * Gets the baseline offset.
+	 *
+	 * @return the baseline offset
+	 */
 	public int getBaselineOffset() {
 		return this.baseLineOffset;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseBoundableRenderable#invalidateLayoutLocal()
+	 */
 	protected void invalidateLayoutLocal() {
 		// Workaround for fact that RBlockViewport does not
 		// get validated or invalidated.
@@ -145,6 +188,9 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseRCollection#extractSelectionText(java.lang.StringBuffer, boolean, org.lobobrowser.html.renderer.RenderableSpot, org.lobobrowser.html.renderer.RenderableSpot)
+	 */
 	public boolean extractSelectionText(StringBuffer buffer,
 			boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
@@ -165,10 +211,20 @@ class RLine extends BaseRCollection {
 		return result;
 	}
 
+	/**
+	 * Adds the style changer.
+	 *
+	 * @param sc the sc
+	 */
 	public final void addStyleChanger(RStyleChanger sc) {
 		this.renderables.add(sc);
 	}
 
+	/**
+	 * Simply add.
+	 *
+	 * @param r the r
+	 */
 	public final void simplyAdd(Renderable r) {
 		this.renderables.add(r);
 	}
@@ -176,9 +232,9 @@ class RLine extends BaseRCollection {
 	/**
 	 * This method adds and positions a renderable in the line, if possible.
 	 * Note that RLine does not set sizes, but only origins.
-	 * 
-	 * @throws OverflowException
-	 *             Thrown if the renderable overflows the line. All overflowing
+	 *
+	 * @param renderable the renderable
+	 * @throws OverflowException             Thrown if the renderable overflows the line. All overflowing
 	 *             renderables are added to the exception.
 	 */
 	public final void add(Renderable renderable) throws OverflowException {
@@ -199,6 +255,12 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * Adds the word.
+	 *
+	 * @param rword the rword
+	 * @throws OverflowException the overflow exception
+	 */
 	public final void addWord(RWord rword) throws OverflowException {
 		// Check if it fits horzizontally
 		int offset = this.xoffset;
@@ -292,6 +354,11 @@ class RLine extends BaseRCollection {
 		rword.setOrigin(x, this.baseLineOffset - rword.ascentPlusLeading);
 	}
 
+	/**
+	 * Adds the blank.
+	 *
+	 * @param rblank the rblank
+	 */
 	public final void addBlank(RBlank rblank) {
 		// NOTE: Blanks may be added without concern for wrapping (?)
 		int x = this.xoffset;
@@ -303,6 +370,11 @@ class RLine extends BaseRCollection {
 		this.xoffset = x + width;
 	}
 
+	/**
+	 * Adds the spacing.
+	 *
+	 * @param rblank the rblank
+	 */
 	public final void addSpacing(RSpacing rblank) {
 		// NOTE: Spacing may be added without concern for wrapping (?)
 		int x = this.xoffset;
@@ -314,12 +386,11 @@ class RLine extends BaseRCollection {
 	}
 
 	/**
-	 * 
-	 * @param relement
-	 * @param x
-	 * @param elementHeight
-	 *            The required new line height.
-	 * @param valign
+	 * Sets the element y.
+	 *
+	 * @param relement the relement
+	 * @param elementHeight            The required new line height.
+	 * @param valign the valign
 	 */
 	private final void setElementY(RElement relement, int elementHeight,
 			int valign) {
@@ -350,6 +421,12 @@ class RLine extends BaseRCollection {
 		relement.setY(yoffset);
 	}
 
+	/**
+	 * Adds the element.
+	 *
+	 * @param relement the relement
+	 * @throws OverflowException the overflow exception
+	 */
 	private final void addElement(RElement relement) throws OverflowException {
 		// Check if it fits horizontally
 		int origXOffset = this.xoffset;
@@ -399,9 +476,10 @@ class RLine extends BaseRCollection {
 	/**
 	 * Rearrange line elements based on a new line height and alignment
 	 * provided. All line elements are expected to have bounds preset.
-	 * 
-	 * @param newHeight
-	 * @param alignmentY
+	 *
+	 * @param newHeight the new height
+	 * @param elementHeight the element height
+	 * @param valign the valign
 	 */
 	private void adjustHeight(int newHeight, int elementHeight, int valign) {
 		// Set new line height
@@ -478,6 +556,9 @@ class RLine extends BaseRCollection {
 		// TODO: Could throw OverflowException when we add floating widgets
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		Renderable[] rarray = (Renderable[]) this.renderables
 				.toArray(Renderable.EMPTY_ARRAY);
@@ -491,6 +572,9 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onDoubleClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		Renderable[] rarray = (Renderable[]) this.renderables
 				.toArray(Renderable.EMPTY_ARRAY);
@@ -504,8 +588,12 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/** The mouse press target. */
 	private BoundableRenderable mousePressTarget;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMousePressed(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		Renderable[] rarray = (Renderable[]) this.renderables
 				.toArray(Renderable.EMPTY_ARRAY);
@@ -520,6 +608,9 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getLowestRenderableSpot(int, int)
+	 */
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		Renderable[] rarray = (Renderable[]) this.renderables
 				.toArray(Renderable.EMPTY_ARRAY);
@@ -533,6 +624,9 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseReleased(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		Renderable[] rarray = (Renderable[]) this.renderables
 				.toArray(Renderable.EMPTY_ARRAY);
@@ -556,6 +650,9 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseDisarmed(java.awt.event.MouseEvent)
+	 */
 	public boolean onMouseDisarmed(MouseEvent event) {
 		BoundableRenderable target = this.mousePressTarget;
 		if (target != null) {
@@ -566,6 +663,9 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseBoundableRenderable#getBlockBackgroundColor()
+	 */
 	public Color getBlockBackgroundColor() {
 		return this.container.getPaintedBackgroundColor();
 	}
@@ -619,20 +719,39 @@ class RLine extends BaseRCollection {
 		return this.renderables.iterator();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#isContainedByNode()
+	 */
 	public boolean isContainedByNode() {
 		return false;
 	}
 
+	/** The line break. */
 	private LineBreak lineBreak;
 
+	/**
+	 * Gets the line break.
+	 *
+	 * @return the line break
+	 */
 	public LineBreak getLineBreak() {
 		return lineBreak;
 	}
 
+	/**
+	 * Sets the line break.
+	 *
+	 * @param lineBreak the new line break
+	 */
 	public void setLineBreak(LineBreak lineBreak) {
 		this.lineBreak = lineBreak;
 	}
 
+	/**
+	 * Checks if is empty.
+	 *
+	 * @return true, if is empty
+	 */
 	public boolean isEmpty() {
 		return this.xoffset == 0;
 	}

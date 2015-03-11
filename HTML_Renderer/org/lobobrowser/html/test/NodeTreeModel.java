@@ -30,32 +30,52 @@ import javax.swing.tree.TreePath;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
+/**
+ * The Class NodeTreeModel.
+ */
 class NodeTreeModel implements TreeModel {
+	
+	/** The root node. */
 	private final Node rootNode;
 
 	/**
-	 * @param node
+	 * Instantiates a new node tree model.
+	 *
+	 * @param node the node
 	 */
 	public NodeTreeModel(Node node) {
 		super();
 		rootNode = node;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.tree.TreeModel#getRoot()
+	 */
 	public Object getRoot() {
 		return this.rootNode;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.tree.TreeModel#getChild(java.lang.Object, int)
+	 */
 	public Object getChild(Object parent, int index) {
 		Node parentNode = (Node) parent;
 		return parentNode == null ? null : parentNode.getChildNodes().item(
 				index);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.tree.TreeModel#getChildCount(java.lang.Object)
+	 */
 	public int getChildCount(Object parent) {
 		Node parentNode = (Node) parent;
 		return parentNode == null ? 0 : parentNode.getChildNodes().getLength();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.tree.TreeModel#isLeaf(java.lang.Object)
+	 */
 	public boolean isLeaf(Object node) {
 		if (node == this.rootNode) {
 			return false;
@@ -65,9 +85,15 @@ class NodeTreeModel implements TreeModel {
 				: domNode.getChildNodes().getLength() == 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.tree.TreeModel#valueForPathChanged(javax.swing.tree.TreePath, java.lang.Object)
+	 */
 	public void valueForPathChanged(TreePath path, Object newValue) {
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.tree.TreeModel#getIndexOfChild(java.lang.Object, java.lang.Object)
+	 */
 	public int getIndexOfChild(Object parent, Object child) {
 		Node parentNode = (Node) parent;
 		NodeList nodeList = parentNode == null ? null : parentNode
@@ -84,10 +110,16 @@ class NodeTreeModel implements TreeModel {
 		return -1;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.tree.TreeModel#addTreeModelListener(javax.swing.event.TreeModelListener)
+	 */
 	public void addTreeModelListener(TreeModelListener l) {
 		// nop
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.tree.TreeModel#removeTreeModelListener(javax.swing.event.TreeModelListener)
+	 */
 	public void removeTreeModelListener(TreeModelListener l) {
 		// nop
 	}

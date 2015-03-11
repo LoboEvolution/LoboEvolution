@@ -26,13 +26,30 @@ import org.lobobrowser.html.renderer.FrameContext;
 import org.lobobrowser.html.renderer.RenderableContainer;
 import org.lobobrowser.html.renderer.UIControl;
 
+
+/**
+ * The Class RImgControl.
+ */
 public class RImgControl extends RUIControl {
+	
+	/**
+	 * Instantiates a new r img control.
+	 *
+	 * @param me the me
+	 * @param widget the widget
+	 * @param container the container
+	 * @param frameContext the frame context
+	 * @param ucontext the ucontext
+	 */
 	public RImgControl(ModelNode me, UIControl widget,
 			RenderableContainer container, FrameContext frameContext,
 			UserAgentContext ucontext) {
 		super(me, widget, container, frameContext, ucontext);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#applyStyle(int, int)
+	 */
 	protected void applyStyle(int availWidth, int availHeight) {
 		super.applyStyle(availWidth, availHeight);
 	}

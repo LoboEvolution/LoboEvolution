@@ -28,6 +28,7 @@ import java.io.Reader;
 
 import org.xml.sax.InputSource;
 
+
 /**
  * The <code>InputSourceImpl</code> class implements the
  * <code>InputSource</code> interface.

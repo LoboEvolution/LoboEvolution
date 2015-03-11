@@ -8,14 +8,20 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Interface ContentCondition.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  * @see Condition#SAC_CONTENT_CONDITION
  */
 public interface ContentCondition extends Condition {
+	
 	/**
 	 * Returns the content.
+	 *
+	 * @return the data
 	 */
 	public String getData();
 }

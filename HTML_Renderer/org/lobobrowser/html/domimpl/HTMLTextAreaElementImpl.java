@@ -31,16 +31,32 @@ import org.lobobrowser.html.w3c.HTMLTextAreaElement;
 import org.lobobrowser.html.w3c.ValidityState;
 import org.w3c.dom.NodeList;
 
+
+/**
+ * The Class HTMLTextAreaElementImpl.
+ */
 public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 		HTMLTextAreaElement {
+	
+	/**
+	 * Instantiates a new HTML text area element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLTextAreaElementImpl(String name) {
 		super(name);
 	}
 
+	/**
+	 * Instantiates a new HTML text area element impl.
+	 */
 	public HTMLTextAreaElementImpl() {
 		super(HtmlProperties.TEXTAREA);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#getFormInputs()
+	 */
 	protected FormInput[] getFormInputs() {
 		String name = this.getName();
 		if (name == null) {
@@ -102,18 +118,27 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getAutofocus()
+	 */
 	@Override
 	public boolean getAutofocus() {
 		String autofocus = this.getAttribute(HtmlAttributeProperties.AUTOFOCUS);
 		return HtmlAttributeProperties.AUTOFOCUS.equalsIgnoreCase(autofocus);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setAutofocus(boolean)
+	 */
 	@Override
 	public void setAutofocus(boolean autofocus) {
 		this.setAttribute(HtmlAttributeProperties.AUTOFOCUS, autofocus ? HtmlAttributeProperties.AUTOFOCUS : null);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getMaxLength()
+	 */
 	@Override
 	public int getMaxLength() {
 		try {
@@ -124,100 +149,151 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setMaxLength(int)
+	 */
 	@Override
 	public void setMaxLength(int maxLength) {
 		this.setAttribute(HtmlAttributeProperties.MAXLENGTH, String.valueOf(maxLength));
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getRequired()
+	 */
 	@Override
 	public boolean getRequired() {
 		String required = this.getAttribute(HtmlAttributeProperties.REQUIRED);
 		return HtmlAttributeProperties.REQUIRED.equalsIgnoreCase(required);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setRequired(boolean)
+	 */
 	@Override
 	public void setRequired(boolean required) {
 		this.setAttribute(HtmlAttributeProperties.REQUIRED, required ? HtmlAttributeProperties.REQUIRED : null);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getWrap()
+	 */
 	@Override
 	public String getWrap() {
 		return this.getAttribute(HtmlAttributeProperties.WRAP);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setWrap(java.lang.String)
+	 */
 	@Override
 	public void setWrap(String wrap) {
 		this.setAttribute(HtmlAttributeProperties.WRAP,wrap);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getTextLength()
+	 */
 	@Override
 	public int getTextLength() {
 		return this.getValue().length();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getWillValidate()
+	 */
 	@Override
 	public boolean getWillValidate() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getValidity()
+	 */
 	@Override
 	public ValidityState getValidity() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getValidationMessage()
+	 */
 	@Override
 	public String getValidationMessage() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#checkValidity()
+	 */
 	@Override
 	public boolean checkValidity() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setCustomValidity(java.lang.String)
+	 */
 	@Override
 	public void setCustomValidity(String error) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getLabels()
+	 */
 	@Override
 	public NodeList getLabels() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getSelectionStart()
+	 */
 	@Override
 	public int getSelectionStart() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setSelectionStart(int)
+	 */
 	@Override
 	public void setSelectionStart(int selectionStart) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getSelectionEnd()
+	 */
 	@Override
 	public int getSelectionEnd() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setSelectionEnd(int)
+	 */
 	@Override
 	public void setSelectionEnd(int selectionEnd) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setSelectionRange(int, int)
+	 */
 	@Override
 	public void setSelectionRange(int start, int end) {
 		// TODO Auto-generated method stub

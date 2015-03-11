@@ -31,17 +31,31 @@ import org.lobobrowser.clientlet.ContentBuffer;
 import org.lobobrowser.util.ID;
 import org.lobobrowser.util.WeakValueHashMap;
 
+
 /**
+ * The Class VolatileContentImpl.
+ *
  * @author J. H. S.
  */
 public class VolatileContentImpl implements ContentBuffer {
+	
+	/** The Constant volatileMap. */
 	private static final Map<Long, ContentBuffer> volatileMap = new WeakValueHashMap();
+	
+	/** The id. */
 	private final long id;
+	
+	/** The content type. */
 	private final String contentType;
+	
+	/** The bytes. */
 	private final byte[] bytes;
 
 	/**
-	 * 
+	 * Instantiates a new volatile content impl.
+	 *
+	 * @param contentType the content type
+	 * @param bytes the bytes
 	 */
 	public VolatileContentImpl(String contentType, byte[] bytes) {
 		super();
@@ -66,6 +80,12 @@ public class VolatileContentImpl implements ContentBuffer {
 		}
 	}
 
+	/**
+	 * Gets the volatile content.
+	 *
+	 * @param id the id
+	 * @return the volatile content
+	 */
 	public static VolatileContentImpl getVolatileContent(long id) {
 		synchronized (volatileMap) {
 			return (VolatileContentImpl) volatileMap.get(new Long(id));
@@ -73,6 +93,8 @@ public class VolatileContentImpl implements ContentBuffer {
 	}
 
 	/**
+	 * Gets the bytes.
+	 *
 	 * @return Returns the bytes.
 	 */
 	public byte[] getBytes() {
@@ -80,6 +102,8 @@ public class VolatileContentImpl implements ContentBuffer {
 	}
 
 	/**
+	 * Gets the content type.
+	 *
 	 * @return Returns the contentType.
 	 */
 	public String getContentType() {

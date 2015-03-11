@@ -49,25 +49,56 @@ import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.BufferExceededException;
 import org.lobobrowser.util.io.RecordedInputStream;
 
+
 /**
+ * The Class ClientletResponseImpl.
+ *
  * @author J. H. S.
  */
 public class ClientletResponseImpl implements ClientletResponse {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(ClientletResponseImpl.class.getName());
+	
+	/** The Constant MAX_CACHE_BUFFER_SIZE. */
 	private static final int MAX_CACHE_BUFFER_SIZE = 10 * 1024 * 1024;
 
+	/** The connection. */
 	private final URLConnection connection;
+	
+	/** The request handler. */
 	private final RequestHandler requestHandler;
+	
+	/** The is cacheable. */
 	private final boolean isCacheable;
+	
+	/** The cache info. */
 	private final CacheInfo cacheInfo;
+	
+	/** The from cache. */
 	private final boolean fromCache;
+	
+	/** The request type. */
 	private final RequestType requestType;
 	// Security note: This URL must be final.
+	/** The response url. */
 	private final URL responseURL;
 
+	/** The input stream. */
 	private InputStream inputStream;
 
+	/**
+	 * Instantiates a new clientlet response impl.
+	 *
+	 * @param rhandler the rhandler
+	 * @param connection the connection
+	 * @param responseURL the response url
+	 * @param fromCache the from cache
+	 * @param cacheInfo the cache info
+	 * @param isCacheable the is cacheable
+	 * @param requestType the request type
+	 */
 	public ClientletResponseImpl(RequestHandler rhandler,
 			URLConnection connection, URL responseURL, boolean fromCache,
 			CacheInfo cacheInfo, boolean isCacheable, RequestType requestType) {
@@ -80,6 +111,18 @@ public class ClientletResponseImpl implements ClientletResponse {
 		this.requestType = requestType;
 	}
 
+	/**
+	 * Instantiates a new clientlet response impl.
+	 *
+	 * @param rhandler the rhandler
+	 * @param url the url
+	 * @param fromCache the from cache
+	 * @param cacheInfo the cache info
+	 * @param isCacheable the is cacheable
+	 * @param requestMethod the request method
+	 * @param requestType the request type
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public ClientletResponseImpl(RequestHandler rhandler, URL url,
 			boolean fromCache, CacheInfo cacheInfo, boolean isCacheable,
 			String requestMethod, RequestType requestType) throws IOException {
@@ -92,12 +135,18 @@ public class ClientletResponseImpl implements ClientletResponse {
 		this.requestType = requestType;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletResponse#isNewNavigationAction()
+	 */
 	public boolean isNewNavigationAction() {
 		RequestType rt = this.requestType;
 		return rt != RequestType.HISTORY && rt != RequestType.SOFT_RELOAD
 				&& rt != RequestType.HARD_RELOAD;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletResponse#matches(java.lang.String, java.lang.String[])
+	 */
 	public boolean matches(String mimeType, String[] fileExtensions) {
 		String responseMimeType = this.getMimeType();
 		if (responseMimeType == null
@@ -124,10 +173,22 @@ public class ClientletResponseImpl implements ClientletResponse {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletResponse#getLastRequestMethod()
+	 */
 	public String getLastRequestMethod() {
 		return this.requestHandler.getLatestRequestMethod();
 	}
 
+	/**
+	 * Handle progress.
+	 *
+	 * @param progressType the progress type
+	 * @param url the url
+	 * @param method the method
+	 * @param value the value
+	 * @param max the max
+	 */
 	public void handleProgress(ProgressType progressType, URL url,
 			String method, int value, int max) {
 		this.requestHandler.handleProgress(progressType, url, method, value,
@@ -143,6 +204,9 @@ public class ClientletResponseImpl implements ClientletResponse {
 		return this.fromCache;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletResponse#isCacheable()
+	 */
 	public boolean isCacheable() {
 		return this.isCacheable;
 	}
@@ -262,10 +326,18 @@ public class ClientletResponseImpl implements ClientletResponse {
 				scIdx).trim();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletResponse#getContentLength()
+	 */
 	public int getContentLength() {
 		return this.connection.getContentLength();
 	}
 
+	/**
+	 * Ensure reached eof.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void ensureReachedEOF() throws IOException {
 		// Don't get cached inputStream - could be null here.
 		InputStream in = this.getInputStream();
@@ -277,6 +349,11 @@ public class ClientletResponseImpl implements ClientletResponse {
 		}
 	}
 
+	/**
+	 * Gets the stored content.
+	 *
+	 * @return the stored content
+	 */
 	public byte[] getStoredContent() {
 		// Should call ensureReachedEOF() which will also ensure
 		// inputStream is not null.
@@ -295,6 +372,11 @@ public class ClientletResponseImpl implements ClientletResponse {
 		return null;
 	}
 
+	/**
+	 * Gets the default charset.
+	 *
+	 * @return the default charset
+	 */
 	private String getDefaultCharset() {
 		URL url = this.getResponseURL();
 		if (Urls.isLocalFile(url)) {
@@ -333,6 +415,9 @@ public class ClientletResponseImpl implements ClientletResponse {
 		return this.getDefaultCharset();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletResponse#isCharsetProvided()
+	 */
 	public boolean isCharsetProvided() {
 		String contentType = this.getContentType();
 		if (contentType == null) {
@@ -381,6 +466,9 @@ public class ClientletResponseImpl implements ClientletResponse {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return "ClientletResponseImpl[url=" + this.responseURL + ",method="
 				+ this.getLastRequestMethod() + ",mimeType="
@@ -388,47 +476,85 @@ public class ClientletResponseImpl implements ClientletResponse {
 				+ ",requestType=" + this.requestType + "]";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletResponse#getPersistentCachedObject(java.lang.ClassLoader)
+	 */
 	public Object getPersistentCachedObject(ClassLoader classLoader) {
 		CacheInfo cacheInfo = this.cacheInfo;
 		return cacheInfo == null ? null : cacheInfo
 				.getPersistentObject(classLoader);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletResponse#getTransientCachedObject()
+	 */
 	public Object getTransientCachedObject() {
 		CacheInfo cacheInfo = this.cacheInfo;
 		return cacheInfo == null ? null : cacheInfo.getTransientObject();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletResponse#getTransientCachedObjectSize()
+	 */
 	public int getTransientCachedObjectSize() {
 		CacheInfo cacheInfo = this.cacheInfo;
 		return cacheInfo == null ? null : cacheInfo.getTransientObjectSize();
 	}
 
+	/** The new peristent cached object. */
 	private Serializable newPeristentCachedObject;
+	
+	/** The new transient cached object. */
 	private Object newTransientCachedObject;
+	
+	/** The new transient object size. */
 	private int newTransientObjectSize;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletResponse#setNewPersistentCachedObject(java.io.Serializable)
+	 */
 	public void setNewPersistentCachedObject(Serializable object) {
 		this.newPeristentCachedObject = object;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletResponse#setNewTransientCachedObject(java.lang.Object, int)
+	 */
 	public void setNewTransientCachedObject(Object object, int approxSize) {
 		this.newTransientCachedObject = object;
 		this.newTransientObjectSize = approxSize;
 	}
 
+	/**
+	 * Gets the new persistent cached object.
+	 *
+	 * @return the new persistent cached object
+	 */
 	public Serializable getNewPersistentCachedObject() {
 		return newPeristentCachedObject;
 	}
 
+	/**
+	 * Gets the new transient cached object.
+	 *
+	 * @return the new transient cached object
+	 */
 	public Object getNewTransientCachedObject() {
 		return newTransientCachedObject;
 	}
 
+	/**
+	 * Gets the new transient object size.
+	 *
+	 * @return the new transient object size
+	 */
 	public int getNewTransientObjectSize() {
 		return newTransientObjectSize;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletResponse#getDate()
+	 */
 	public Date getDate() {
 		String dateText = this.connection.getHeaderField("Date");
 		if (dateText == null) {
@@ -443,6 +569,9 @@ public class ClientletResponseImpl implements ClientletResponse {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.ClientletResponse#getRequestType()
+	 */
 	public RequestType getRequestType() {
 		return this.requestType;
 	}

@@ -29,6 +29,7 @@ import java.net.URL;
 
 import org.w3c.dom.Document;
 
+
 /**
  * The <code>NetworkRequest</code> interface should be implemented to provide
  * network request capabilities.
@@ -70,32 +71,44 @@ public interface NetworkRequest {
 
 	/**
 	 * Gets the request response as text.
+	 *
+	 * @return the response text
 	 */
 	public String getResponseText();
 
 	/**
 	 * Gets the request response as an XML DOM.
+	 *
+	 * @return the response xml
 	 */
 	public Document getResponseXML();
 
 	/**
 	 * Gets the request response as an AWT image, if that's possible.
+	 *
+	 * @return the response image
 	 */
 	public Image getResponseImage();
 
 	/**
 	 * Gets the request response bytes.
+	 *
+	 * @return the response bytes
 	 */
 	public byte[] getResponseBytes();
 
 	/**
 	 * Gets the status of the response. Note that this can be 0 for file
 	 * requests in addition to 200 for successful HTTP requests.
+	 *
+	 * @return the status
 	 */
 	public int getStatus();
 
 	/**
 	 * Gets the status text of the request, e.g. "OK" for 200.
+	 *
+	 * @return the status text
 	 */
 	public String getStatusText();
 
@@ -106,101 +119,89 @@ public interface NetworkRequest {
 
 	/**
 	 * Gets a string with all the response headers.
+	 *
+	 * @return the all response headers
 	 */
 	public String getAllResponseHeaders();
 
 	/**
 	 * Gets a response header value.
-	 * 
-	 * @param headerName
-	 *            The name of the header.
+	 *
+	 * @param headerName            The name of the header.
+	 * @return the response header
 	 */
 	public String getResponseHeader(String headerName);
 
 	/**
 	 * Starts an asynchronous request.
-	 * 
-	 * @param method
-	 *            The request method.
-	 * @param url
-	 *            The destination URL.
+	 *
+	 * @param method            The request method.
+	 * @param url            The destination URL.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void open(String method, String url) throws IOException;
 
 	/**
 	 * Opens an asynchronous request.
-	 * 
-	 * @param method
-	 *            The request method.
-	 * @param url
-	 *            The destination URL.
+	 *
+	 * @param method            The request method.
+	 * @param url            The destination URL.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void open(String method, URL url) throws IOException;
 
 	/**
 	 * Opens an request.
-	 * 
-	 * @param method
-	 *            The request method.
-	 * @param url
-	 *            The destination URL.
-	 * @param asyncFlag
-	 *            Whether the request is asynchronous.
+	 *
+	 * @param method            The request method.
+	 * @param url            The destination URL.
+	 * @param asyncFlag            Whether the request is asynchronous.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void open(String method, URL url, boolean asyncFlag)
 			throws IOException;
 
 	/**
 	 * Opens a request.
-	 * 
-	 * @param method
-	 *            The request method.
-	 * @param url
-	 *            The destination URL.
-	 * @param asyncFlag
-	 *            Whether the request should be asynchronous.
+	 *
+	 * @param method            The request method.
+	 * @param url            The destination URL.
+	 * @param asyncFlag            Whether the request should be asynchronous.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void open(String method, String url, boolean asyncFlag)
 			throws IOException;
 
 	/**
 	 * Opens a request.
-	 * 
-	 * @param method
-	 *            The request method.
-	 * @param url
-	 *            The destination URL.
-	 * @param asyncFlag
-	 *            Whether the request should be asynchronous.
-	 * @param userName
-	 *            The HTTP authentication user name.
+	 *
+	 * @param method            The request method.
+	 * @param url            The destination URL.
+	 * @param asyncFlag            Whether the request should be asynchronous.
+	 * @param userName            The HTTP authentication user name.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void open(String method, URL url, boolean asyncFlag,
 			String userName) throws IOException;
 
 	/**
 	 * Opens a request.
-	 * 
-	 * @param method
-	 *            The request method.
-	 * @param url
-	 *            The destination URL.
-	 * @param asyncFlag
-	 *            Whether the request should be asynchronous.
-	 * @param userName
-	 *            The HTTP authentication user name.
-	 * @param password
-	 *            The HTTP authentication password.
+	 *
+	 * @param method            The request method.
+	 * @param url            The destination URL.
+	 * @param asyncFlag            Whether the request should be asynchronous.
+	 * @param userName            The HTTP authentication user name.
+	 * @param password            The HTTP authentication password.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void open(String method, URL url, boolean asyncFlag,
 			String userName, String password) throws IOException;
 
 	/**
 	 * Sends POST content if any.
-	 * 
-	 * @param content
-	 *            POST content or <code>null</code> for GET requests.
-	 * @throws IOException
+	 *
+	 * @param content            POST content or <code>null</code> for GET requests.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void send(String content) throws IOException;
 

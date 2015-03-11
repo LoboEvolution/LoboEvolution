@@ -21,9 +21,24 @@
 package org.lobobrowser.html.w3c;
 
 
+
+/**
+ * The Interface BarProp.
+ */
 public interface BarProp
 {
     // BarProp
+    /**
+     * Gets the visible.
+     *
+     * @return the visible
+     */
     public boolean getVisible();
+    
+    /**
+     * Sets the visible.
+     *
+     * @param visible the new visible
+     */
     public void setVisible(boolean visible);
 }

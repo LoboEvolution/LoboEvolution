@@ -35,11 +35,22 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.renderer.RElement;
 
+
+/**
+ * The Class InputLayout.
+ */
 public class InputLayout extends CommonWidgetLayout {
+	
+	/**
+	 * Instantiates a new input layout.
+	 */
 	public InputLayout() {
 		super(ADD_INLINE, true);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.lobobrowser.html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
 	protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 		HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
 		BaseInputControl uiControl = createInputControl(bie);
@@ -52,6 +63,12 @@ public class InputLayout extends CommonWidgetLayout {
 				bodyLayout.getUserAgentContext());
 	}
 
+	/**
+	 * Creates the input control.
+	 *
+	 * @param markupElement the markup element
+	 * @return the base input control
+	 */
 	private final BaseInputControl createInputControl(HTMLBaseInputElement markupElement) {
 		String type = markupElement.getAttribute(HtmlAttributeProperties.TYPE);
 		if (type == null) {

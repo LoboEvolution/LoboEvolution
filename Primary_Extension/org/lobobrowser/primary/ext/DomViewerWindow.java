@@ -20,12 +20,24 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
+/**
+ * The Class DomViewerWindow.
+ */
 public class DomViewerWindow extends JFrame implements TreeSelectionListener {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The dom tree. */
 	private JTree domTree;
+	
+	/** The text area. */
 	private JTextArea textArea;
 
+	/**
+	 * Instantiates a new dom viewer window.
+	 */
 	public DomViewerWindow() {
 		super("Lobo DOM Viewer");
 		this.setIconImage(DefaultWindowFactory.getInstance()
@@ -43,22 +55,39 @@ public class DomViewerWindow extends JFrame implements TreeSelectionListener {
 		contentPane.add(splitPane);
 	}
 
+	/**
+	 * Creates the text area.
+	 *
+	 * @return the j text area
+	 */
 	private JTextArea createTextArea() {
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		return textArea;
 	}
 
+	/**
+	 * Sets the document.
+	 *
+	 * @param document the new document
+	 */
 	public void setDocument(HTMLDocument document) {
 		this.domTree.setModel(new DefaultTreeModel(new DomTreeNode(document)));
 	}
 
+	/**
+	 * The Class DomTreeNode.
+	 */
 	private class DomTreeNode extends DefaultMutableTreeNode {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Instantiates a new dom tree node.
+		 *
+		 * @param node the node
+		 */
 		public DomTreeNode(Node node) {
 			super(node);
 			NodeList childNodes = node.getChildNodes();
@@ -74,17 +103,28 @@ public class DomViewerWindow extends JFrame implements TreeSelectionListener {
 			}
 		}
 
+		/* (non-Javadoc)
+		 * @see javax.swing.tree.DefaultMutableTreeNode#toString()
+		 */
 		@Override
 		public String toString() {
 			return getNode().getNodeName();
 		}
 
+		/**
+		 * Gets the node.
+		 *
+		 * @return the node
+		 */
 		public Node getNode() {
 			return (Node) getUserObject();
 		}
 
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.event.TreeSelectionListener#valueChanged(javax.swing.event.TreeSelectionEvent)
+	 */
 	public void valueChanged(TreeSelectionEvent treeselectionevent) {
 		TreePath path = treeselectionevent.getNewLeadSelectionPath();
 		if (path != null) {
@@ -101,6 +141,12 @@ public class DomViewerWindow extends JFrame implements TreeSelectionListener {
 		}
 	}
 
+	/**
+	 * Append node.
+	 *
+	 * @param indent the indent
+	 * @param node the node
+	 */
 	private void appendNode(int indent, Node node) {
 		if (node.getNodeType() == Node.TEXT_NODE) {
 			this.textArea.append(node.getNodeValue());
@@ -128,6 +174,11 @@ public class DomViewerWindow extends JFrame implements TreeSelectionListener {
 		}
 	}
 
+	/**
+	 * Adds the attributes.
+	 *
+	 * @param node the node
+	 */
 	private void addAttributes(Node node) {
 		NamedNodeMap attributes = node.getAttributes();
 		for (int i = 0; i < attributes.getLength(); i++) {
@@ -140,6 +191,11 @@ public class DomViewerWindow extends JFrame implements TreeSelectionListener {
 		}
 	}
 
+	/**
+	 * Adds the indent.
+	 *
+	 * @param indent the indent
+	 */
 	private void addIndent(int indent) {
 		for (int i = 0; i < indent; i++) {
 			this.textArea.append("   ");

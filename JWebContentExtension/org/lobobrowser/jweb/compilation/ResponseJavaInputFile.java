@@ -38,14 +38,36 @@ import javax.tools.JavaFileObject;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.util.Urls;
 
+
+/**
+ * The Class ResponseJavaInputFile.
+ */
 public class ResponseJavaInputFile implements JavaFileObject {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(ResponseJavaInputFile.class.getName());
+	
+	/** The response. */
 	private final ClientletResponse response;
+	
+	/** The file name. */
 	private final String fileName;
+	
+	/** The kind. */
 	private final Kind kind;
+	
+	/** The source code. */
 	private final String sourceCode;
 
+	/**
+	 * Instantiates a new response java input file.
+	 *
+	 * @param response the response
+	 * @param sourceCode the source code
+	 * @param fileName the file name
+	 * @param kind the kind
+	 */
 	public ResponseJavaInputFile(final ClientletResponse response,
 			String sourceCode, final String fileName, final Kind kind) {
 		super();
@@ -55,31 +77,52 @@ public class ResponseJavaInputFile implements JavaFileObject {
 		this.sourceCode = sourceCode;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#getAccessLevel()
+	 */
 	public Modifier getAccessLevel() {
 		return Modifier.FINAL;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#getKind()
+	 */
 	public Kind getKind() {
 		return this.kind;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#getNestingKind()
+	 */
 	public NestingKind getNestingKind() {
 		return NestingKind.TOP_LEVEL;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#isNameCompatible(java.lang.String, javax.tools.JavaFileObject.Kind)
+	 */
 	public boolean isNameCompatible(String simpleName, Kind kind) {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#delete()
+	 */
 	public boolean delete() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getCharContent(boolean)
+	 */
 	public CharSequence getCharContent(boolean ignoreEncodingError)
 			throws IOException {
 		return this.sourceCode;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getLastModified()
+	 */
 	public long getLastModified() {
 		String dateText = this.response.getHeader("Date");
 		if (dateText == null) {
@@ -93,26 +136,44 @@ public class ResponseJavaInputFile implements JavaFileObject {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getName()
+	 */
 	public String getName() {
 		return this.fileName;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openInputStream()
+	 */
 	public InputStream openInputStream() throws IOException {
 		return response.getInputStream();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openOutputStream()
+	 */
 	public OutputStream openOutputStream() throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openReader(boolean)
+	 */
 	public Reader openReader(boolean arg0) throws IOException {
 		return new InputStreamReader(this.openInputStream());
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openWriter()
+	 */
 	public Writer openWriter() throws IOException {
 		throw new UnsupportedOperationException();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#toUri()
+	 */
 	public URI toUri() {
 		try {
 			return this.response.getResponseURL().toURI();
@@ -122,11 +183,17 @@ public class ResponseJavaInputFile implements JavaFileObject {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object other) {
 		return other instanceof ResponseJavaInputFile
 				&& ((ResponseJavaInputFile) other).toUri().equals(this.toUri());
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return "JavaInputFile[name=" + this.getName() + "]";
 	}

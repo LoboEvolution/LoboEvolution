@@ -24,11 +24,24 @@ import org.lobobrowser.html.renderstate.AlignXRenderState;
 import org.lobobrowser.html.renderstate.BlockRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 
+
+/**
+ * The Class HTMLCenterElementImpl.
+ */
 public class HTMLCenterElementImpl extends HTMLAbstractUIElement {
+	
+	/**
+	 * Instantiates a new HTML center element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLCenterElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		prevRenderState = new AlignXRenderState(prevRenderState, 50);
 		return new BlockRenderState(prevRenderState, this);

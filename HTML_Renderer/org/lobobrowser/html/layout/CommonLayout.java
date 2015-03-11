@@ -27,21 +27,45 @@ import org.lobobrowser.html.renderer.MarkupLayout;
 import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.renderstate.RenderState;
 
+
+/**
+ * The Class CommonLayout.
+ */
 public abstract class CommonLayout implements MarkupLayout {
 	
+	/** The Constant DISPLAY_NONE. */
 	protected static final int DISPLAY_NONE = 0;
+	
+	/** The Constant DISPLAY_INLINE. */
 	protected static final int DISPLAY_INLINE = 1;
+	
+	/** The Constant DISPLAY_BLOCK. */
 	protected static final int DISPLAY_BLOCK = 2;
+	
+	/** The Constant DISPLAY_LIST_ITEM. */
 	protected static final int DISPLAY_LIST_ITEM = 3;
+	
+	/** The Constant DISPLAY_TABLE. */
 	protected static final int DISPLAY_TABLE = 6;
+	
+	/** The Constant DISPLAY_INLINE_BLOCK. */
 	protected static final int DISPLAY_INLINE_BLOCK = 8;
 
+	/** The display. */
 	private final int display;
 
+	/**
+	 * Instantiates a new common layout.
+	 *
+	 * @param defaultDisplay the default display
+	 */
 	public CommonLayout(int defaultDisplay) {
 		this.display = defaultDisplay;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.MarkupLayout#layoutMarkup(org.lobobrowser.html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
 	public void layoutMarkup(RBlockViewport bodyLayout,	HTMLElementImpl markupElement) {
 		RenderState rs = markupElement.getRenderState();
 			

@@ -20,7 +20,15 @@
  */
 package org.lobobrowser.html.layout;
 
+
+/**
+ * The Class CanvasLayout.
+ */
 public class CanvasLayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new canvas layout.
+	 */
 	public CanvasLayout() {
 		super(DISPLAY_BLOCK);
 	}

@@ -23,13 +23,27 @@ package org.lobobrowser.primary.ext;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
+
+/**
+ * The Class MenuAdapter.
+ */
 public abstract class MenuAdapter implements MenuListener {
+	
+	/* (non-Javadoc)
+	 * @see javax.swing.event.MenuListener#menuCanceled(javax.swing.event.MenuEvent)
+	 */
 	public void menuCanceled(MenuEvent e) {
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.event.MenuListener#menuDeselected(javax.swing.event.MenuEvent)
+	 */
 	public void menuDeselected(MenuEvent e) {
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.event.MenuListener#menuSelected(javax.swing.event.MenuEvent)
+	 */
 	public void menuSelected(MenuEvent e) {
 	}
 }

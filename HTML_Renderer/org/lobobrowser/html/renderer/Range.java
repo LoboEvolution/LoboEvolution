@@ -23,16 +23,25 @@
  */
 package org.lobobrowser.html.renderer;
 
+
 /**
+ * The Class Range.
+ *
  * @author J. H. S.
  */
 class Range {
+	
+	/** The offset. */
 	public final int offset;
+	
+	/** The length. */
 	public final int length;
 
 	/**
-	 * @param offset
-	 * @param length
+	 * Instantiates a new range.
+	 *
+	 * @param offset the offset
+	 * @param length the length
 	 */
 	public Range(final int offset, final int length) {
 		super();
@@ -40,6 +49,9 @@ class Range {
 		this.length = length;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return "Range[offset=" + this.offset + ",length=" + this.length + "]";
 	}

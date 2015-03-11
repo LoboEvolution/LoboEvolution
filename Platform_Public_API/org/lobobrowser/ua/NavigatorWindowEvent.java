@@ -24,12 +24,23 @@ package org.lobobrowser.ua;
 
 import org.lobobrowser.clientlet.ClientletResponse;
 
+
 /**
  * An event containing information about navigation.
  */
 public class NavigatorWindowEvent extends NavigatorResponseEvent {
+	
+	/** The message. */
 	private final String message;
 
+	/**
+	 * Instantiates a new navigator window event.
+	 *
+	 * @param source the source
+	 * @param eventType the event type
+	 * @param clientletFrame the clientlet frame
+	 * @param response the response
+	 */
 	public NavigatorWindowEvent(Object source, NavigatorEventType eventType,
 			NavigatorFrame clientletFrame, ClientletResponse response) {
 		super(source, eventType, clientletFrame, response, response
@@ -37,6 +48,15 @@ public class NavigatorWindowEvent extends NavigatorResponseEvent {
 		this.message = null;
 	}
 
+	/**
+	 * Instantiates a new navigator window event.
+	 *
+	 * @param source the source
+	 * @param eventType the event type
+	 * @param clientletFrame the clientlet frame
+	 * @param message the message
+	 * @param requestType the request type
+	 */
 	public NavigatorWindowEvent(Object source, NavigatorEventType eventType,
 			NavigatorFrame clientletFrame, String message,
 			RequestType requestType) {
@@ -44,6 +64,11 @@ public class NavigatorWindowEvent extends NavigatorResponseEvent {
 		this.message = message;
 	}
 
+	/**
+	 * Gets the message.
+	 *
+	 * @return the message
+	 */
 	public String getMessage() {
 		return message;
 	}

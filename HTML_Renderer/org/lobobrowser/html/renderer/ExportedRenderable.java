@@ -20,8 +20,16 @@
  */
 package org.lobobrowser.html.renderer;
 
+
+/**
+ * The Class ExportedRenderable.
+ */
 class ExportedRenderable {
+	
+	/** The original target. */
 	public final RBlockViewport originalTarget;
+	
+	/** The renderable. */
 	public final BoundableRenderable renderable;
 
 	/**
@@ -34,6 +42,15 @@ class ExportedRenderable {
 	 */
 	public final int alignment;
 
+	/**
+	 * Instantiates a new exported renderable.
+	 *
+	 * @param originalTarget the original target
+	 * @param renderable the renderable
+	 * @param x the x
+	 * @param y the y
+	 * @param alignment the alignment
+	 */
 	public ExportedRenderable(final RBlockViewport originalTarget,
 			final BoundableRenderable renderable, final int x, final int y,
 			final int alignment) {

@@ -6,11 +6,13 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * Object that can allows assignments to the result of function calls.
  */
 public interface RefCallable extends Callable
 {
+    
     /**
      * Perform function call in reference context.
      * The args array reference should not be stored in any object that is
@@ -21,6 +23,7 @@ public interface RefCallable extends Callable
      * @param cx the current Context for this thread
      * @param thisObj the JavaScript <code>this</code> object
      * @param args the array of arguments
+     * @return the ref
      */
     public Ref refCall(Context cx, Scriptable thisObj, Object[] args);
 }

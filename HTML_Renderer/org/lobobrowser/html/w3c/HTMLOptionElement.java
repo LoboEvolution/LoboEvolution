@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * A selectable choice. See the OPTION element definition in HTML 4.01.
  * <p>
@@ -39,9 +40,12 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLOptionElement extends HTMLElement {
+	
 	/**
 	 * Returns the <code>FORM</code> element containing this control. Returns
 	 * <code>null</code> if this control is not within the context of a form.
+	 *
+	 * @return the form
 	 */
 	public HTMLFormElement getForm();
 
@@ -50,8 +54,9 @@ public interface HTMLOptionElement extends HTMLElement {
 	 * attribute does not change if the state of the corresponding form control,
 	 * in an interactive user agent, changes. See the selected attribute
 	 * definition in HTML 4.01.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the default selected
 	 */
 	public boolean getDefaultSelected();
 
@@ -60,45 +65,57 @@ public interface HTMLOptionElement extends HTMLElement {
 	 * attribute does not change if the state of the corresponding form control,
 	 * in an interactive user agent, changes. See the selected attribute
 	 * definition in HTML 4.01.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param defaultSelected the new default selected
 	 */
 	public void setDefaultSelected(boolean defaultSelected);
 
 	/**
 	 * The text contained within the option element.
+	 *
+	 * @return the text
 	 */
 	public String getText();
 
 	/**
 	 * The index of this <code>OPTION</code> in its parent <code>SELECT</code> ,
 	 * starting from 0.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the index
 	 */
 	public int getIndex();
 
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the disabled
 	 */
 	public boolean getDisabled();
 
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param disabled the new disabled
 	 */
 	public void setDisabled(boolean disabled);
 
 	/**
 	 * Option label for use in hierarchical menus. See the label attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the label
 	 */
 	public String getLabel();
 
 	/**
 	 * Option label for use in hierarchical menus. See the label attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param label the new label
 	 */
 	public void setLabel(String label);
 
@@ -107,6 +124,8 @@ public interface HTMLOptionElement extends HTMLElement {
 	 * interactive user agent. Changing this attribute changes the state of the
 	 * form control, but does not change the value of the HTML selected
 	 * attribute of the element.
+	 *
+	 * @return the selected
 	 */
 	public boolean getSelected();
 
@@ -115,18 +134,24 @@ public interface HTMLOptionElement extends HTMLElement {
 	 * interactive user agent. Changing this attribute changes the state of the
 	 * form control, but does not change the value of the HTML selected
 	 * attribute of the element.
+	 *
+	 * @param selected the new selected
 	 */
 	public void setSelected(boolean selected);
 
 	/**
 	 * The current form control value. See the value attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return the value
 	 */
 	public String getValue();
 
 	/**
 	 * The current form control value. See the value attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param value the new value
 	 */
 	public void setValue(String value);
 

@@ -13,6 +13,7 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.commonjs.module.ModuleScript;
 import org.mozilla.javascript.commonjs.module.ModuleScriptProvider;
 
+
 /**
  * Abstract base class that implements caching of loaded module scripts. It
  * uses a {@link ModuleSourceProvider} to obtain the source text of the
@@ -26,12 +27,21 @@ import org.mozilla.javascript.commonjs.module.ModuleScriptProvider;
 public abstract class CachingModuleScriptProviderBase
 implements ModuleScriptProvider, Serializable
 {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /** The Constant loadConcurrencyLevel. */
     private static final int loadConcurrencyLevel =
         Runtime.getRuntime().availableProcessors() * 8;
+    
+    /** The Constant loadLockShift. */
     private static final int loadLockShift;
+    
+    /** The Constant loadLockMask. */
     private static final int loadLockMask;
+    
+    /** The Constant loadLockCount. */
     private static final int loadLockCount;
     static {
         int sshift = 0;
@@ -44,12 +54,15 @@ implements ModuleScriptProvider, Serializable
         loadLockMask = ssize - 1;
         loadLockCount = ssize;
     }
+    
+    /** The load locks. */
     private final Object[] loadLocks = new Object[loadLockCount]; {
         for(int i = 0; i < loadLocks.length; ++i) {
             loadLocks[i] = new Object();
         }
     }
 
+    /** The module source provider. */
     private final ModuleSourceProvider moduleSourceProvider;
 
     /**
@@ -61,6 +74,9 @@ implements ModuleScriptProvider, Serializable
         this.moduleSourceProvider = moduleSourceProvider;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.commonjs.module.ModuleScriptProvider#getModuleScript(org.mozilla.javascript.Context, java.lang.String, java.net.URI, java.net.URI, org.mozilla.javascript.Scriptable)
+     */
     public ModuleScript getModuleScript(Context cx, String moduleId,
             URI moduleUri, URI baseUri, Scriptable paths) throws Exception
     {
@@ -124,7 +140,11 @@ implements ModuleScriptProvider, Serializable
      * @version $Id: CachingModuleScriptProviderBase.java,v 1.3 2011/04/07 20:26:12 hannes%helma.at Exp $
      */
     public static class CachedModuleScript {
+        
+        /** The module script. */
         private final ModuleScript moduleScript;
+        
+        /** The validator. */
         private final Object validator;
 
         /**
@@ -155,10 +175,23 @@ implements ModuleScriptProvider, Serializable
         }
     }
 
+    /**
+     * Gets the validator.
+     *
+     * @param cachedModule the cached module
+     * @return the validator
+     */
     private static Object getValidator(CachedModuleScript cachedModule) {
         return cachedModule == null ? null : cachedModule.getValidator();
     }
 
+    /**
+     * Equal.
+     *
+     * @param o1 the o1
+     * @param o2 the o2
+     * @return true, if successful
+     */
     private static boolean equal(Object o1, Object o2) {
         return o1 == null ? o2 == null : o1.equals(o2);
     }

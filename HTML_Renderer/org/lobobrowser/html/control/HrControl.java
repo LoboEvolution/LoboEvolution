@@ -32,14 +32,27 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.RenderableSpot;
 import org.lobobrowser.html.renderstate.RenderState;
 
+
+/**
+ * The Class HrControl.
+ */
 public class HrControl extends BaseControl {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instantiates a new hr control.
+	 *
+	 * @param modelNode the model node
+	 */
 	public HrControl(HTMLElementImpl modelNode) {
 		super(modelNode);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Dimension size = this.getSize();
@@ -51,17 +64,33 @@ public class HrControl extends BaseControl {
 		g.drawRect(x, y, width, 0);
 	}
 
+	/**
+	 * Paint selection.
+	 *
+	 * @param g the g
+	 * @param inSelection the in selection
+	 * @param startPoint the start point
+	 * @param endPoint the end point
+	 * @return true, if successful
+	 */
 	public boolean paintSelection(Graphics g, boolean inSelection,
 			RenderableSpot startPoint, RenderableSpot endPoint) {
 		return inSelection;
 	}
 
+	/** The avail width. */
 	private int availWidth;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseControl#reset(int, int)
+	 */
 	public void reset(int availWidth, int availHeight) {
 		this.availWidth = availWidth;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
 	public Dimension getPreferredSize() {
 		RenderState rs = this.controlElement.getRenderState();
 		FontMetrics fm = rs.getFontMetrics();

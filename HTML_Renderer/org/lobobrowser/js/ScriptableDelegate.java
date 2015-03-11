@@ -22,6 +22,7 @@ package org.lobobrowser.js;
 
 import org.mozilla.javascript.Scriptable;
 
+
 /**
  * Java classes used in Javascript should implement this interface. While all
  * classes can be mapped to JavaScript, implementing this interface ensures that
@@ -29,7 +30,18 @@ import org.mozilla.javascript.Scriptable;
  * not garbage collected.
  */
 public interface ScriptableDelegate {
+	
+	/**
+	 * Sets the scriptable.
+	 *
+	 * @param scriptable the new scriptable
+	 */
 	public void setScriptable(Scriptable scriptable);
 
+	/**
+	 * Gets the scriptable.
+	 *
+	 * @return the scriptable
+	 */
 	public Scriptable getScriptable();
 }

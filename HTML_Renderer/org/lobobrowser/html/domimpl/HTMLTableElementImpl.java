@@ -42,125 +42,218 @@ import org.lobobrowser.html.w3c.HTMLTableSectionElement;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class HTMLTableElementImpl.
+ */
 public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 		HTMLTableElement {
 
+	/**
+	 * Instantiates a new HTML table element impl.
+	 */
 	public HTMLTableElementImpl() {
 		super(HtmlProperties.TABLE);
 	}
 
+	/**
+	 * Instantiates a new HTML table element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLTableElementImpl(String name) {
 		super(name);
 	}
 
+	/** The caption. */
 	private HTMLTableCaptionElement caption;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getCaption()
+	 */
 	public HTMLTableCaptionElement getCaption() {
 		return this.caption;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#setCaption(org.lobobrowser.html.w3c.HTMLTableCaptionElement)
+	 */
 	public void setCaption(HTMLTableCaptionElement caption) throws DOMException {
 		this.caption = caption;
 	}
 
+	/** The thead. */
 	private HTMLTableSectionElement thead;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getTHead()
+	 */
 	public HTMLTableSectionElement getTHead() {
 		return this.thead;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#setTHead(org.lobobrowser.html.w3c.HTMLTableSectionElement)
+	 */
 	public void setTHead(HTMLTableSectionElement tHead) throws DOMException {
 		this.thead = tHead;
 	}
 
+	/** The tfoot. */
 	private HTMLTableSectionElement tfoot;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getTFoot()
+	 */
 	public HTMLTableSectionElement getTFoot() {
 		return this.tfoot;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#setTFoot(org.lobobrowser.html.w3c.HTMLTableSectionElement)
+	 */
 	public void setTFoot(HTMLTableSectionElement tFoot) throws DOMException {
 		this.tfoot = tFoot;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getRows()
+	 */
 	public HTMLCollection getRows() {
 		return new DescendentHTMLCollection(this, new ElementTableAttributeFilter(HtmlProperties.TR),
 				this.getTreeLock(), false);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getTBodies()
+	 */
 	public HTMLCollection getTBodies() {
 		return new DescendentHTMLCollection(this, new ElementTableAttributeFilter(HtmlProperties.TBODY),
 				this.getTreeLock(), false);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getAlign()
+	 */
 	public String getAlign() {
 		return this.getAttribute(HtmlAttributeProperties.ALIGN);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#setAlign(java.lang.String)
+	 */
 	public void setAlign(String align) {
 		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getBgColor()
+	 */
 	public String getBgColor() {
 		return this.getAttribute(HtmlAttributeProperties.BGCOLOR);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#setBgColor(java.lang.String)
+	 */
 	public void setBgColor(String bgColor) {
 		this.setAttribute(HtmlAttributeProperties.BGCOLOR, bgColor);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getBorder()
+	 */
 	public String getBorder() {
 		return this.getAttribute(HtmlAttributeProperties.BORDER);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#setBorder(java.lang.String)
+	 */
 	public void setBorder(String border) {
 		this.setAttribute(HtmlAttributeProperties.BORDER, border);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getCellPadding()
+	 */
 	public String getCellPadding() {
 		return this.getAttribute(HtmlAttributeProperties.CELLPADDING);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#setCellPadding(java.lang.String)
+	 */
 	public void setCellPadding(String cellPadding) {
 		this.setAttribute(HtmlAttributeProperties.CELLPADDING, cellPadding);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getCellSpacing()
+	 */
 	public String getCellSpacing() {
 		return this.getAttribute(HtmlAttributeProperties.CELLSPACING);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#setCellSpacing(java.lang.String)
+	 */
 	public void setCellSpacing(String cellSpacing) {
 		this.setAttribute(HtmlAttributeProperties.CELLSPACING, cellSpacing);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getFrame()
+	 */
 	public String getFrame() {
 		return this.getAttribute(HtmlAttributeProperties.FRAME);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#setFrame(java.lang.String)
+	 */
 	public void setFrame(String frame) {
 		this.setAttribute(HtmlAttributeProperties.FRAME, frame);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getRules()
+	 */
 	public String getRules() {
 		return this.getAttribute(HtmlAttributeProperties.RULES);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#setRules(java.lang.String)
+	 */
 	public void setRules(String rules) {
 		this.setAttribute(HtmlAttributeProperties.RULES, rules);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getSummary()
+	 */
 	public String getSummary() {
 		return this.getAttribute(HtmlAttributeProperties.SUMMARY);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#setSummary(java.lang.String)
+	 */
 	public void setSummary(String summary) {
 		this.setAttribute(HtmlAttributeProperties.SUMMARY, summary);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#getWidth()
+	 */
 	public String getWidth() {
 		return this.getAttribute(HtmlAttributeProperties.WIDTH);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#setWidth(java.lang.String)
+	 */
 	public void setWidth(String width) {
 		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
 	}
@@ -169,6 +262,12 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 	 * (non-Javadoc)
 	 * 
 	 * @see org.lobobrowser.html.render.RenderableContext#getHeightLength()
+	 */
+	/**
+	 * Gets the height length.
+	 *
+	 * @param availHeight the avail height
+	 * @return the height length
 	 */
 	public HtmlLength getHeightLength(int availHeight) {
 		try {
@@ -190,6 +289,12 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 	 * 
 	 * @see org.lobobrowser.html.render.RenderableContext#getWidthLength()
 	 */
+	/**
+	 * Gets the width length.
+	 *
+	 * @param availWidth the avail width
+	 * @return the width length
+	 */
 	public HtmlLength getWidthLength(int availWidth) {
 		try {
 			AbstractCSS2Properties props = this.getCurrentStyle();
@@ -205,29 +310,47 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#createTHead()
+	 */
 	public HTMLElement createTHead() {
 		org.w3c.dom.Document doc = this.document;
 		return doc == null ? null : (HTMLElement) doc.createElement("thead");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#deleteTHead()
+	 */
 	public void deleteTHead() {
 		this.removeChildren(new ElementTableAttributeFilter("THEAD"));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#createTFoot()
+	 */
 	public HTMLElement createTFoot() {
 		org.w3c.dom.Document doc = this.document;
 		return doc == null ? null : (HTMLElement) doc.createElement("tfoot");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#deleteTFoot()
+	 */
 	public void deleteTFoot() {
 		this.removeChildren(new ElementTableAttributeFilter("TFOOT"));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#createCaption()
+	 */
 	public HTMLElement createCaption() {
 		org.w3c.dom.Document doc = this.document;
 		return doc == null ? null : (HTMLElement) doc.createElement("caption");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#deleteCaption()
+	 */
 	public void deleteCaption() {
 		this.removeChildren(new ElementTableAttributeFilter("CAPTION"));
 	}
@@ -235,6 +358,10 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 	/**
 	 * Inserts a row at the index given. If <code>index</code> is
 	 * <code>-1</code>, the row is appended as the last row.
+	 *
+	 * @param index the index
+	 * @return the HTML element
+	 * @throws DOMException the DOM exception
 	 */
 	public HTMLElement insertRow(int index) throws DOMException {
 		org.w3c.dom.Document doc = this.document;
@@ -271,6 +398,9 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 				"Index out of range");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#deleteRow(int)
+	 */
 	public void deleteRow(int index) throws DOMException {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -293,10 +423,16 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements
 				"Index out of range");
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new TableRenderState(prevRenderState, this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTableElement#insertRow()
+	 */
 	@Override
 	public HTMLElement insertRow() {
 		// TODO Auto-generated method stub

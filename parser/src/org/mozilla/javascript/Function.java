@@ -8,12 +8,13 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * This is interface that all functions in JavaScript must implement.
  * The interface provides for calling functions and constructors.
  *
- * @see org.mozilla.javascript.Scriptable
  * @author Norris Boyd
+ * @see org.mozilla.javascript.Scriptable
  */
 
 public interface Function extends Scriptable, Callable

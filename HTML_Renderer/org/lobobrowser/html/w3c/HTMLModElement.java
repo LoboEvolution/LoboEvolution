@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Notice of modification to part of a document. See the INS and DEL element
  * definitions in HTML 4.01.
@@ -40,10 +41,13 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLModElement extends HTMLElement {
+	
 	/**
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a document that describes the reason for the change. See the
 	 * cite attribute definition in HTML 4.01.
+	 *
+	 * @return the cite
 	 */
 	public String getCite();
 
@@ -51,18 +55,24 @@ public interface HTMLModElement extends HTMLElement {
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a document that describes the reason for the change. See the
 	 * cite attribute definition in HTML 4.01.
+	 *
+	 * @param cite the new cite
 	 */
 	public void setCite(String cite);
 
 	/**
 	 * The date and time of the change. See the datetime attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return the date time
 	 */
 	public String getDateTime();
 
 	/**
 	 * The date and time of the change. See the datetime attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param dateTime the new date time
 	 */
 	public void setDateTime(String dateTime);
 

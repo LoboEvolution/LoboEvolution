@@ -30,13 +30,25 @@ import org.lobobrowser.util.EventDispatch;
 import org.lobobrowser.util.GenericEventListener;
 import org.lobobrowser.util.Objects;
 
+
 /**
+ * The Class AsyncResultImpl.
+ *
  * @author J. H. S.
+ * @param <TResult> the generic type
  */
 public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
+	
+	/** The evt result. */
 	private final EventDispatch evtResult = new EventDispatch();
+	
+	/** The result. */
 	private TResult result;
+	
+	/** The exception. */
 	private Throwable exception;
+	
+	/** The has result. */
 	private boolean hasResult = false;
 
 	/*
@@ -121,6 +133,11 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 		}
 	}
 
+	/**
+	 * Sets the result.
+	 *
+	 * @param result the new result
+	 */
 	public void setResult(final TResult result) {
 		synchronized (this) {
 			this.result = result;
@@ -135,6 +152,11 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 		}
 	}
 
+	/**
+	 * Sets the exception.
+	 *
+	 * @param exception the new exception
+	 */
 	public void setException(final Throwable exception) {
 		synchronized (this) {
 			this.exception = exception;
@@ -149,18 +171,30 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 		}
 	}
 
+	/**
+	 * The Class EventListenerWrapper.
+	 *
+	 * @param <TR> the generic type
+	 */
 	private static class EventListenerWrapper<TR> implements
 			GenericEventListener {
+		
+		/** The listener. */
 		private final AsyncResultListener<TR> listener;
 
 		/**
-		 * @param listener
+		 * Instantiates a new event listener wrapper.
+		 *
+		 * @param listener the listener
 		 */
 		public EventListenerWrapper(AsyncResultListener<TR> listener) {
 			super();
 			this.listener = listener;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.util.GenericEventListener#processEvent(java.util.EventObject)
+		 */
 		public void processEvent(EventObject event) {
 			// Invoke holding no locks
 			AsyncResultEvent are = (AsyncResultEvent) event;
@@ -171,6 +205,9 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 			}
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
 		public boolean equals(Object other) {
 			if (!(other instanceof EventListenerWrapper)) {
 				return false;
@@ -179,6 +216,9 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 			return Objects.equals(elw.listener, this.listener);
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#hashCode()
+		 */
 		public int hashCode() {
 			return this.listener.hashCode();
 		}

@@ -34,12 +34,24 @@ import org.lobobrowser.primary.gui.SwingTasks;
 import org.lobobrowser.primary.settings.SearchEngine;
 import org.lobobrowser.primary.settings.ToolsSettings;
 
+
+/**
+ * The Class ToolsSettingsUI.
+ */
 public class ToolsSettingsUI extends AbstractSettingsUI {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The settings. */
 	private final ToolsSettings settings = ToolsSettings.getInstance();
+	
+	/** The search engine list control. */
 	private final ItemListControl<SearchEngine> searchEngineListControl;
 
+	/**
+	 * Instantiates a new tools settings ui.
+	 */
 	public ToolsSettingsUI() {
 		ItemEditorFactory<SearchEngine> factory = new ItemEditorFactory<SearchEngine>() {
 			public AbstractItemEditor<SearchEngine> createItemEditor() {
@@ -56,6 +68,11 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		this.loadSettings();
 	}
 
+	/**
+	 * Gets the search engine pane.
+	 *
+	 * @return the search engine pane
+	 */
 	private Component getSearchEnginePane() {
 		Box innerBox = new Box(BoxLayout.X_AXIS);
 		innerBox.add(new JLabel("Search Engines:"));
@@ -65,12 +82,18 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		return groupBox;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.primary.gui.prefs.AbstractSettingsUI#restoreDefaults()
+	 */
 	@Override
 	public void restoreDefaults() {
 		this.settings.restoreDefaults();
 		this.loadSettings();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.primary.gui.prefs.AbstractSettingsUI#save()
+	 */
 	@Override
 	public void save() {
 		ToolsSettings settings = this.settings;
@@ -80,6 +103,9 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		settings.save();
 	}
 
+	/**
+	 * Load settings.
+	 */
 	private void loadSettings() {
 		ToolsSettings settings = this.settings;
 		this.searchEngineListControl.setItems(settings.getSearchEngines());

@@ -8,9 +8,12 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Interface DescendantSelector.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  * @see Selector#SAC_DESCENDANT_SELECTOR
  * @see Selector#SAC_CHILD_SELECTOR
  */
@@ -18,11 +21,18 @@ public interface DescendantSelector extends Selector {
 
 	/**
 	 * Returns the parent selector.
+	 *
+	 * @return the ancestor selector
 	 */
 	public Selector getAncestorSelector();
 
 	/*
 	 * Returns the simple selector.
+	 */
+	/**
+	 * Gets the simple selector.
+	 *
+	 * @return the simple selector
 	 */
 	public SimpleSelector getSimpleSelector();
 }

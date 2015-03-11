@@ -30,21 +30,39 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 
+
+/**
+ * The Class JTextAreaImpl.
+ */
 public class JTextAreaImpl extends JTextArea{
 
 	/* Class from http://lazicbrano.wordpress.com/2013/08/01/jtextfield-placeholder */
 	 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The original font. */
 	private Font originalFont;
+    
+    /** The original foreground. */
     private Color originalForeground;
 	
     /* Grey by default*
     */
-   private Color placeholderForeground = new Color(160, 160, 160);
+   /** The placeholder foreground. */
+    private Color placeholderForeground = new Color(160, 160, 160);
+   
+   /** The text written in. */
    private boolean textWrittenIn;
    
+   /**
+    * Instantiates a new j text area impl.
+    */
    public JTextAreaImpl() {}
 
+   /* (non-Javadoc)
+    * @see javax.swing.JTextArea#setFont(java.awt.Font)
+    */
    @Override
    public void setFont(Font f) {
        super.setFont(f);
@@ -53,6 +71,9 @@ public class JTextAreaImpl extends JTextArea{
        }
    }
 
+   /* (non-Javadoc)
+    * @see javax.swing.JComponent#setForeground(java.awt.Color)
+    */
    @Override
    public void setForeground(Color fg) {
        super.setForeground(fg);
@@ -61,22 +82,47 @@ public class JTextAreaImpl extends JTextArea{
        }
    }
 
+   /**
+    * Gets the placeholder foreground.
+    *
+    * @return the placeholder foreground
+    */
    public Color getPlaceholderForeground() {
        return placeholderForeground;
    }
 
+   /**
+    * Sets the placeholder foreground.
+    *
+    * @param placeholderForeground the new placeholder foreground
+    */
    public void setPlaceholderForeground(Color placeholderForeground) {
        this.placeholderForeground = placeholderForeground;
    }
 
+   /**
+    * Checks if is text written in.
+    *
+    * @return true, if is text written in
+    */
    public boolean isTextWrittenIn() {
        return textWrittenIn;
    }
 
+   /**
+    * Sets the text written in.
+    *
+    * @param textWrittenIn the new text written in
+    */
    public void setTextWrittenIn(boolean textWrittenIn) {
        this.textWrittenIn = textWrittenIn;
    }
 
+   /**
+    * Sets the placeholder.
+    *
+    * @param text the new placeholder
+    */
    public void setPlaceholder(final String text) {
 
        this.customizeText(text);
@@ -127,6 +173,11 @@ public class JTextAreaImpl extends JTextArea{
 
    }
 
+   /**
+    * Customize text.
+    *
+    * @param text the text
+    */
    private void customizeText(String text) {
        setText(text);
        setFont(new Font(getFont().getFamily(), Font.ITALIC, getFont().getSize()));

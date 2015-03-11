@@ -20,7 +20,15 @@
 */
 package org.lobobrowser.html.layout;
 
+
+/**
+ * The Class ListItemLayout.
+ */
 public class ListItemLayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new list item layout.
+	 */
 	public ListItemLayout() {
 		super(DISPLAY_LIST_ITEM);
 	}

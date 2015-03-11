@@ -20,7 +20,18 @@
  */
 package org.lobobrowser.util;
 
+
+/**
+ * The Class Html.
+ */
 public class Html {
+	
+	/**
+	 * Text to html.
+	 *
+	 * @param text the text
+	 * @return the string
+	 */
 	public static String textToHTML(String text) {
 		if (text == null) {
 			return null;

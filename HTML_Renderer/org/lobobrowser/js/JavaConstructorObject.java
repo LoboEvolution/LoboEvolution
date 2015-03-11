@@ -25,19 +25,43 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
+
+/**
+ * The Class JavaConstructorObject.
+ */
 public class JavaConstructorObject extends ScriptableObject implements Function {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The class wrapper. */
 	private final JavaClassWrapper classWrapper;
+	
+	/** The instantiator. */
 	private final JavaInstantiator instantiator;
+	
+	/** The name. */
 	private final String name;
 
+	/**
+	 * Instantiates a new java constructor object.
+	 *
+	 * @param name the name
+	 * @param classWrapper the class wrapper
+	 */
 	public JavaConstructorObject(String name, JavaClassWrapper classWrapper) {
 		this.name = name;
 		this.classWrapper = classWrapper;
 		this.instantiator = new SimpleInstantiator(classWrapper);
 	}
 
+	/**
+	 * Instantiates a new java constructor object.
+	 *
+	 * @param name the name
+	 * @param classWrapper the class wrapper
+	 * @param instantiator the instantiator
+	 */
 	public JavaConstructorObject(String name, JavaClassWrapper classWrapper,
 			JavaInstantiator instantiator) {
 		this.name = name;
@@ -45,15 +69,24 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 		this.instantiator = instantiator;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.ScriptableObject#getClassName()
+	 */
 	public String getClassName() {
 		return this.name;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.Function#call(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+	 */
 	public Object call(Context cx, Scriptable scope, Scriptable thisObj,
 			Object[] args) {
 		throw new UnsupportedOperationException();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.Function#construct(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.Object[])
+	 */
 	public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
 		try {
 			Object javaObject = this.instantiator.newInstance();
@@ -66,6 +99,9 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
+	 */
 	public java.lang.Object getDefaultValue(Class hint) {
 		if (String.class.equals(hint)) {
 			return "function " + this.name;
@@ -74,14 +110,27 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 		}
 	}
 
+	/**
+	 * The Class SimpleInstantiator.
+	 */
 	public static class SimpleInstantiator implements JavaInstantiator {
+		
+		/** The class wrapper. */
 		private final JavaClassWrapper classWrapper;
 
+		/**
+		 * Instantiates a new simple instantiator.
+		 *
+		 * @param classWrapper the class wrapper
+		 */
 		public SimpleInstantiator(final JavaClassWrapper classWrapper) {
 			super();
 			this.classWrapper = classWrapper;
 		}
 
+		/* (non-Javadoc)
+		 * @see org.lobobrowser.js.JavaInstantiator#newInstance()
+		 */
 		public Object newInstance() throws InstantiationException,
 				IllegalAccessException {
 			return this.classWrapper.newInstance();

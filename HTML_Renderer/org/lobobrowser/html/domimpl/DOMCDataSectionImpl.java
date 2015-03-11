@@ -26,12 +26,24 @@ package org.lobobrowser.html.domimpl;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class DOMCDataSectionImpl.
+ */
 public class DOMCDataSectionImpl extends DOMTextImpl implements CDATASection {
 
+	/**
+	 * Instantiates a new DOMC data section impl.
+	 */
 	public DOMCDataSectionImpl() {
 		super();
 	}
 
+	/**
+	 * Instantiates a new DOMC data section impl.
+	 *
+	 * @param text the text
+	 */
 	public DOMCDataSectionImpl(String text) {
 		super(text);
 	}

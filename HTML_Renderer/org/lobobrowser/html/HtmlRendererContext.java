@@ -30,6 +30,7 @@ import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLLinkElement;
 
+
 /**
  * The <code>HtmlRendererContext</code> interface must be implemented in order
  * to use the Cobra HTML renderer. An instance of this interface will be called
@@ -76,6 +77,8 @@ public interface HtmlRendererContext {
 
 	/**
 	 * Gets a collection of frames from the document currently in the context.
+	 *
+	 * @return the frames
 	 */
 	public HTMLCollection getFrames();
 
@@ -100,11 +103,15 @@ public interface HtmlRendererContext {
 
 	/**
 	 * Creates a {@link org.lobobrowser.html.BrowserFrame} instance.
+	 *
+	 * @return the browser frame
 	 */
 	public BrowserFrame createBrowserFrame();
 
 	/**
 	 * Gets the user agent context.
+	 *
+	 * @return the user agent context
 	 */
 	public UserAgentContext getUserAgentContext();
 
@@ -186,6 +193,8 @@ public interface HtmlRendererContext {
 	/**
 	 * This method should return true if and only if image loading needs to be
 	 * enabled.
+	 *
+	 * @return true, if is image loading enabled
 	 */
 	public boolean isImageLoadingEnabled();
 
@@ -231,15 +240,12 @@ public interface HtmlRendererContext {
 
 	/**
 	 * Opens a separate browser window and renders a URL.
-	 * 
-	 * @param url
-	 *            The URL to be rendered.
-	 * @param windowName
-	 *            The name of the new window.
-	 * @param windowFeatures
-	 *            The features of the new window (same as in Javascript open
+	 *
+	 * @param url            The URL to be rendered.
+	 * @param windowName            The name of the new window.
+	 * @param windowFeatures            The features of the new window (same as in Javascript open
 	 *            method).
-	 * @param replace
+	 * @param replace the replace
 	 * @return A new {@link org.lobobrowser.html.HtmlRendererContext} instance.
 	 */
 	public HtmlRendererContext open(URL url, String windowName,
@@ -298,25 +304,43 @@ public interface HtmlRendererContext {
 
 	/**
 	 * Gets a value indicating if the window is closed.
+	 *
+	 * @return true, if is closed
 	 */
 	public boolean isClosed();
 
+	/**
+	 * Gets the default status.
+	 *
+	 * @return the default status
+	 */
 	public String getDefaultStatus();
 
+	/**
+	 * Sets the default status.
+	 *
+	 * @param value the new default status
+	 */
 	public void setDefaultStatus(String value);
 
 	/**
 	 * Gets the window name.
+	 *
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * Gets the parent of the frame/window in the current context.
+	 *
+	 * @return the parent
 	 */
 	public HtmlRendererContext getParent();
 
 	/**
 	 * Gets the opener of the frame/window in the current context.
+	 *
+	 * @return the opener
 	 */
 	public HtmlRendererContext getOpener();
 
@@ -330,6 +354,8 @@ public interface HtmlRendererContext {
 
 	/**
 	 * Gets the window status text.
+	 *
+	 * @return the status
 	 */
 	public String getStatus();
 
@@ -343,11 +369,16 @@ public interface HtmlRendererContext {
 
 	/**
 	 * Gets the top-most browser frame/window.
+	 *
+	 * @return the top
 	 */
 	public HtmlRendererContext getTop();
 
 	/**
 	 * It should return true if the link provided has been visited.
+	 *
+	 * @param link the link
+	 * @return true, if is visited link
 	 */
 	public boolean isVisitedLink(HTMLLinkElement link);
 
@@ -358,21 +389,29 @@ public interface HtmlRendererContext {
 
 	/**
 	 * Gets the number of pages in the history list.
+	 *
+	 * @return the history length
 	 */
 	public int getHistoryLength();
 
 	/**
 	 * Gets the current URL in history.
+	 *
+	 * @return the current url
 	 */
 	public String getCurrentURL();
 
 	/**
 	 * Gets the next URL in the history.
+	 *
+	 * @return the next url
 	 */
 	public String getNextURL();
 
 	/**
 	 * Gets the previous URL in the history.
+	 *
+	 * @return the previous url
 	 */
 	public String getPreviousURL();
 
@@ -392,6 +431,8 @@ public interface HtmlRendererContext {
 
 	/**
 	 * Navigates to a URL in the history list.
+	 *
+	 * @param url the url
 	 */
 	public void goToHistoryURL(String url);
 }

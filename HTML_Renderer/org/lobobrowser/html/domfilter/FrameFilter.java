@@ -22,7 +22,15 @@ package org.lobobrowser.html.domfilter;
 
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class FrameFilter.
+ */
 public class FrameFilter implements NodeFilter {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
 	public boolean accept(Node node) {
 		return node instanceof org.lobobrowser.html.w3c.HTMLFrameElement
 				|| node instanceof org.lobobrowser.html.w3c.HTMLIFrameElement;

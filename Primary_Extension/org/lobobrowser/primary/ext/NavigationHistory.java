@@ -29,14 +29,21 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.store.StorageManager;
 
+
 /**
  * History of navigation locations. Not thread safe.
  */
 public class NavigationHistory extends BaseHistory<Object> implements
 		java.io.Serializable {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2257845000600200100L;
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(NavigationHistory.class.getName());
+	
+	/** The Constant instance. */
 	private static final NavigationHistory instance;
 
 	static {
@@ -55,16 +62,23 @@ public class NavigationHistory extends BaseHistory<Object> implements
 	}
 
 	/**
-	 * @param sequenceCapacity
-	 * @param commonEntriesCapacity
+	 * Instantiates a new navigation history.
 	 */
 	private NavigationHistory() {
 	}
 
+	/**
+	 * Gets the single instance of NavigationHistory.
+	 *
+	 * @return single instance of NavigationHistory
+	 */
 	public static NavigationHistory getInstance() {
 		return instance;
 	}
 
+	/**
+	 * Save.
+	 */
 	public void save() {
 		synchronized (this) {
 			try {

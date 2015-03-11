@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * List item. See the LI element definition in HTML 4.01.
  * <p>
@@ -39,15 +40,20 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLLIElement extends HTMLElement {
+	
 	/**
 	 * List item bullet style. See the type attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return the type
 	 */
 	public String getType();
 
 	/**
 	 * List item bullet style. See the type attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param type the new type
 	 */
 	public void setType(String type);
 
@@ -55,6 +61,8 @@ public interface HTMLLIElement extends HTMLElement {
 	 * Reset sequence number when used in <code>OL</code>. See the value
 	 * attribute definition in HTML 4.01. This attribute is deprecated in HTML
 	 * 4.01.
+	 *
+	 * @return the value
 	 */
 	public int getValue();
 
@@ -62,6 +70,8 @@ public interface HTMLLIElement extends HTMLElement {
 	 * Reset sequence number when used in <code>OL</code>. See the value
 	 * attribute definition in HTML 4.01. This attribute is deprecated in HTML
 	 * 4.01.
+	 *
+	 * @param value the new value
 	 */
 	public void setValue(int value);
 

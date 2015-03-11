@@ -31,12 +31,36 @@ import java.awt.event.MouseEvent;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.renderstate.RenderState;
 
+
+/**
+ * The Class RWord.
+ */
 final class RWord extends BaseBoundableRenderable {
+	
+	/** The shown word. */
 	final String shownWord;
+	
+	/** The font metrics. */
 	public final FontMetrics fontMetrics;
+	
+	/** The descent. */
 	public final int descent;
+	
+	/** The ascent plus leading. */
 	public final int ascentPlusLeading;
 
+	/**
+	 * Instantiates a new r word.
+	 *
+	 * @param me the me
+	 * @param word the word
+	 * @param container the container
+	 * @param fontMetrics the font metrics
+	 * @param descent the descent
+	 * @param ascentPlusLeading the ascent plus leading
+	 * @param height the height
+	 * @param textTransform the text transform
+	 */
 	public RWord(ModelNode me, String word, RenderableContainer container,
 			FontMetrics fontMetrics, int descent, int ascentPlusLeading,
 			int height, int textTransform) {
@@ -53,6 +77,13 @@ final class RWord extends BaseBoundableRenderable {
 		this.width = fontMetrics.stringWidth(renderedWord);
 	}
 
+	/**
+	 * Transform text.
+	 *
+	 * @param word the word
+	 * @param textTransform the text transform
+	 * @return the string
+	 */
 	private String transformText(String word, int textTransform) {
 		String string;
 		switch (textTransform) {
@@ -72,6 +103,9 @@ final class RWord extends BaseBoundableRenderable {
 		return string;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BaseBoundableRenderable#invalidateLayoutLocal()
+	 */
 	protected void invalidateLayoutLocal() {
 	}
 
@@ -132,6 +166,9 @@ final class RWord extends BaseBoundableRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#paintSelection(java.awt.Graphics, boolean, org.lobobrowser.html.renderer.RenderableSpot, org.lobobrowser.html.renderer.RenderableSpot)
+	 */
 	public boolean paintSelection(Graphics g, boolean inSelection,
 			RenderableSpot startPoint, RenderableSpot endPoint) {
 		int startX = -1;
@@ -202,6 +239,9 @@ final class RWord extends BaseBoundableRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#extractSelectionText(java.lang.StringBuffer, boolean, org.lobobrowser.html.renderer.RenderableSpot, org.lobobrowser.html.renderer.RenderableSpot)
+	 */
 	public boolean extractSelectionText(StringBuffer buffer,
 			boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
@@ -271,6 +311,9 @@ final class RWord extends BaseBoundableRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -280,6 +323,9 @@ final class RWord extends BaseBoundableRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onDoubleClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -289,6 +335,9 @@ final class RWord extends BaseBoundableRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMousePressed(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -298,6 +347,9 @@ final class RWord extends BaseBoundableRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseReleased(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -307,6 +359,9 @@ final class RWord extends BaseBoundableRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onMouseDisarmed(java.awt.event.MouseEvent)
+	 */
 	public boolean onMouseDisarmed(MouseEvent event) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -316,14 +371,23 @@ final class RWord extends BaseBoundableRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#getLowestRenderableSpot(int, int)
+	 */
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		return new RenderableSpot(this, x, y);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#isContainedByNode()
+	 */
 	public boolean isContainedByNode() {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.BoundableRenderable#onRightClick(java.awt.event.MouseEvent, int, int)
+	 */
 	public boolean onRightClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
@@ -333,6 +397,9 @@ final class RWord extends BaseBoundableRenderable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return "RWord[word=" + this.shownWord + "]";
 	}

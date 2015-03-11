@@ -36,19 +36,37 @@ import org.lobobrowser.store.CacheManager;
 import org.lobobrowser.store.ClassLoaderObjectInputStream;
 import org.lobobrowser.util.Urls;
 
+
+/**
+ * The Class CacheInfo.
+ */
 public class CacheInfo {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CacheInfo.class
 			.getName());
+	
+	/** The Constant HEADER_REQUEST_TIME. */
 	static final String HEADER_REQUEST_TIME = "X-Request-Time";
+	
+	/** The url. */
 	private final URL url;
 
+	/** The memory entry. */
 	private final MemoryCacheEntry memoryEntry;
+	
+	/** The persistent content. */
 	private final byte[] persistentContent;
 
+	/** The connection. */
 	private URLConnection connection;
 
 	/**
-	 * 
+	 * Instantiates a new cache info.
+	 *
+	 * @param memEntry the mem entry
+	 * @param persContent the pers content
+	 * @param url the url
 	 */
 	public CacheInfo(MemoryCacheEntry memEntry, byte[] persContent, URL url) {
 		super();
@@ -60,6 +78,8 @@ public class CacheInfo {
 	/**
 	 * This method should only be called if the connection is later going to be
 	 * closed.
+	 *
+	 * @return the URL connection
 	 */
 	public final java.net.URLConnection getURLConnection() {
 		if (this.connection == null) {
@@ -90,16 +110,30 @@ public class CacheInfo {
 		}
 	}
 
+	/**
+	 * Checks if is cache connection.
+	 *
+	 * @param connection the connection
+	 * @return true, if is cache connection
+	 */
 	public final boolean isCacheConnection(URLConnection connection) {
 		return connection == this.getURLConnection();
 	}
 
+	/**
+	 * Gets the date as text.
+	 *
+	 * @return the date as text
+	 */
 	public final String getDateAsText() {
 		return this.getURLConnection().getHeaderField("date");
 	}
 
 	/**
 	 * Adds the request time of the cached document to the given offset.
+	 *
+	 * @param offsetSeconds the offset seconds
+	 * @return the expires given offset
 	 */
 	public final Long getExpiresGivenOffset(long offsetSeconds) {
 		MemoryCacheEntry entry = this.memoryEntry;
@@ -120,6 +154,8 @@ public class CacheInfo {
 	 * Gets the timestamp when the cache entry should expire and must be
 	 * revalidated. If <code>null</code>, the browser can use a default. When
 	 * the entry must be revalidated, this method returns zero.
+	 *
+	 * @return the expires
 	 */
 	public final Long getExpires() {
 		MemoryCacheEntry entry = this.memoryEntry;
@@ -142,6 +178,11 @@ public class CacheInfo {
 		}
 	}
 
+	/**
+	 * Gets the request time.
+	 *
+	 * @return the request time
+	 */
 	public long getRequestTime() {
 		MemoryCacheEntry entry = this.memoryEntry;
 		if (entry != null) {
@@ -157,20 +198,41 @@ public class CacheInfo {
 		}
 	}
 
+	/**
+	 * Checks for transient entry.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasTransientEntry() {
 		return this.memoryEntry != null;
 	}
 
+	/**
+	 * Gets the transient object.
+	 *
+	 * @return the transient object
+	 */
 	public Object getTransientObject() {
 		MemoryCacheEntry memEntry = this.memoryEntry;
 		return memEntry != null ? memEntry.altObject : null;
 	}
 
+	/**
+	 * Gets the transient object size.
+	 *
+	 * @return the transient object size
+	 */
 	public int getTransientObjectSize() {
 		MemoryCacheEntry memEntry = this.memoryEntry;
 		return memEntry != null ? memEntry.altObjectSize : 0;
 	}
 
+	/**
+	 * Gets the persistent object.
+	 *
+	 * @param classLoader the class loader
+	 * @return the persistent object
+	 */
 	public Object getPersistentObject(ClassLoader classLoader) {
 		try {
 			byte[] content = CacheManager.getInstance().getPersistent(this.url,
@@ -201,6 +263,9 @@ public class CacheInfo {
 		}
 	}
 
+	/**
+	 * Delete.
+	 */
 	public void delete() {
 		CacheManager cm = CacheManager.getInstance();
 		cm.removeTransient(this.url);
@@ -212,6 +277,11 @@ public class CacheInfo {
 		}
 	}
 
+	/**
+	 * Gets the persistent content.
+	 *
+	 * @return the persistent content
+	 */
 	public byte[] getPersistentContent() {
 		return persistentContent;
 	}

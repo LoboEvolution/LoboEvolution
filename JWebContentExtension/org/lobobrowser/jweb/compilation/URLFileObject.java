@@ -35,11 +35,28 @@ import javax.tools.FileObject;
 import org.lobobrowser.clientlet.ClientletContext;
 import org.lobobrowser.ua.NetworkRequest;
 
+
+/**
+ * The Class URLFileObject.
+ */
 public class URLFileObject implements FileObject {
+	
+	/** The context. */
 	private final ClientletContext context;
+	
+	/** The resource url. */
 	private final URL resourceURL;
+	
+	/** The resource path. */
 	private final String resourcePath;
 
+	/**
+	 * Instantiates a new URL file object.
+	 *
+	 * @param context the context
+	 * @param resourceURL the resource url
+	 * @param resourcePath the resource path
+	 */
 	public URLFileObject(final ClientletContext context, final URL resourceURL,
 			final String resourcePath) {
 		super();
@@ -48,11 +65,17 @@ public class URLFileObject implements FileObject {
 		this.resourcePath = resourcePath;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#delete()
+	 */
 	public boolean delete() {
 		// No deletion of URLs.
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getCharContent(boolean)
+	 */
 	public CharSequence getCharContent(boolean ignoreEncodingErrors)
 			throws IOException {
 		InputStream in = this.openInputStream();
@@ -64,17 +87,27 @@ public class URLFileObject implements FileObject {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getLastModified()
+	 */
 	public long getLastModified() {
 		Date date = this.context.getResponse().getDate();
 		return date == null ? 0 : date.getTime();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getName()
+	 */
 	public String getName() {
 		return this.resourcePath;
 	}
 
+	/** The cached response bytes. */
 	private byte[] cachedResponseBytes;
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openInputStream()
+	 */
 	public InputStream openInputStream() throws IOException {
 		byte[] bytes = this.cachedResponseBytes;
 		if (bytes != null) {
@@ -97,20 +130,32 @@ public class URLFileObject implements FileObject {
 		return new java.io.ByteArrayInputStream(bytes);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openOutputStream()
+	 */
 	public OutputStream openOutputStream() throws IOException {
 		throw new UnsupportedOperationException(
 				"Writing output to URL not supported.");
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openReader(boolean)
+	 */
 	public Reader openReader(boolean ignoreEncodingErrors) throws IOException {
 		return new java.io.InputStreamReader(this.openInputStream());
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openWriter()
+	 */
 	public Writer openWriter() throws IOException {
 		throw new UnsupportedOperationException(
 				"Writing output to URL not supported.");
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#toUri()
+	 */
 	public URI toUri() {
 		try {
 			return this.resourceURL.toURI();
@@ -121,6 +166,9 @@ public class URLFileObject implements FileObject {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		// Relied upon by compiler error messages.
 		return this.resourceURL.toExternalForm();

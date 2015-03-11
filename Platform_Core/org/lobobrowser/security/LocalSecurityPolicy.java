@@ -48,6 +48,10 @@ import javax.net.ssl.SSLPermission;
 
 import org.lobobrowser.util.Domains;
 
+
+/**
+ * The Class LocalSecurityPolicy.
+ */
 public class LocalSecurityPolicy extends Policy {
 	/**
 	 * Directory where Lobo should save files. Any files saved here have
@@ -55,9 +59,16 @@ public class LocalSecurityPolicy extends Policy {
 	 */
 	public static final File STORE_DIRECTORY;
 
+	/** The Constant STORE_DIR_NAME. */
 	private static final String STORE_DIR_NAME = ".lobo";
+	
+	/** The Constant STORE_DIRECTORY_CANONICAL. */
 	private static final String STORE_DIRECTORY_CANONICAL;
+	
+	/** The Constant instance. */
 	private static final LocalSecurityPolicy instance = new LocalSecurityPolicy();
+	
+	/** The Constant BASE_PRIVILEGE. */
 	private static final Collection<Permission> BASE_PRIVILEGE = new LinkedList<Permission>();
 
 	static {
@@ -140,20 +151,37 @@ public class LocalSecurityPolicy extends Policy {
 	}
 
 	/**
-	 * 
+	 * Instantiates a new local security policy.
 	 */
 	private LocalSecurityPolicy() {
 	}
 
+	/**
+	 * Gets the single instance of LocalSecurityPolicy.
+	 *
+	 * @return single instance of LocalSecurityPolicy
+	 */
 	public static LocalSecurityPolicy getInstance() {
 		return instance;
 	}
 
+	/**
+	 * Checks for host.
+	 *
+	 * @param url the url
+	 * @return true, if successful
+	 */
 	public static boolean hasHost(java.net.URL url) {
 		String host = url.getHost();
 		return host != null && !"".equals(host);
 	}
 
+	/**
+	 * Checks if is local.
+	 *
+	 * @param url the url
+	 * @return true, if is local
+	 */
 	public static boolean isLocal(java.net.URL url) {
 		// Should return true only if we are sure
 		// the file has either been downloaded by

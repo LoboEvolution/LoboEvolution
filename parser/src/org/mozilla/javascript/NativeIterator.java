@@ -8,6 +8,7 @@ package org.mozilla.javascript;
 
 import java.util.Iterator;
 
+
 /**
  * This class implements iterator objects. See
  * http://developer.mozilla.org/en/docs/New_in_JavaScript_1.7#Iterators
@@ -15,9 +16,19 @@ import java.util.Iterator;
  * @author Norris Boyd
  */
 public final class NativeIterator extends IdScriptableObject {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -4136968203581667681L;
+    
+    /** The Constant ITERATOR_TAG. */
     private static final Object ITERATOR_TAG = "Iterator";
 
+    /**
+     * Inits the.
+     *
+     * @param scope the scope
+     * @param sealed the sealed
+     */
     static void init(ScriptableObject scope, boolean sealed) {
         // Iterator
         NativeIterator iterator = new NativeIterator();
@@ -45,6 +56,11 @@ public final class NativeIterator extends IdScriptableObject {
     private NativeIterator() {
     }
 
+    /**
+     * Instantiates a new native iterator.
+     *
+     * @param objectIterator the object iterator
+     */
     private NativeIterator(Object objectIterator) {
       this.objectIterator = objectIterator;
     }
@@ -62,12 +78,23 @@ public final class NativeIterator extends IdScriptableObject {
         return ScriptableObject.getTopScopeValue(top, ITERATOR_TAG);
     }
 
+    /** The Constant STOP_ITERATION. */
     private static final String STOP_ITERATION = "StopIteration";
+    
+    /** The Constant ITERATOR_PROPERTY_NAME. */
     public static final String ITERATOR_PROPERTY_NAME = "__iterator__";
 
+    /**
+     * The Class StopIteration.
+     */
     static class StopIteration extends NativeObject {
+        
+        /** The Constant serialVersionUID. */
         private static final long serialVersionUID = 2485151085722377663L;
 
+        /* (non-Javadoc)
+         * @see org.mozilla.javascript.NativeObject#getClassName()
+         */
         @Override
         public String getClassName() {
             return STOP_ITERATION;
@@ -76,17 +103,26 @@ public final class NativeIterator extends IdScriptableObject {
         /* StopIteration has custom instanceof behavior since it
          * doesn't have a constructor.
          */
+        /* (non-Javadoc)
+         * @see org.mozilla.javascript.ScriptableObject#hasInstance(org.mozilla.javascript.Scriptable)
+         */
         @Override
         public boolean hasInstance(Scriptable instance) {
             return instance instanceof StopIteration;
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getClassName()
+     */
     @Override
     public String getClassName() {
         return "Iterator";
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
+     */
     @Override
     protected void initPrototypeId(int id) {
         String s;
@@ -100,6 +136,9 @@ public final class NativeIterator extends IdScriptableObject {
         initPrototypeMethod(ITERATOR_TAG, id, s, arity);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -133,6 +172,15 @@ public final class NativeIterator extends IdScriptableObject {
     }
 
     /* The JavaScript constructor */
+    /**
+     * Js constructor.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param thisObj the this obj
+     * @param args the args
+     * @return the object
+     */
     private static Object jsConstructor(Context cx, Scriptable scope,
                                         Scriptable thisObj, Object[] args)
     {
@@ -181,6 +229,13 @@ public final class NativeIterator extends IdScriptableObject {
         return result;
     }
 
+    /**
+     * Next.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @return the object
+     */
     private Object next(Context cx, Scriptable scope) {
         Boolean b = ScriptRuntime.enumNext(this.objectIterator);
         if (!b.booleanValue()) {
@@ -191,13 +246,28 @@ public final class NativeIterator extends IdScriptableObject {
         return ScriptRuntime.enumId(this.objectIterator, cx);
     }
 
+    /**
+     * The Class WrappedJavaIterator.
+     */
     static public class WrappedJavaIterator
     {
+        
+        /**
+         * Instantiates a new wrapped java iterator.
+         *
+         * @param iterator the iterator
+         * @param scope the scope
+         */
         WrappedJavaIterator(Iterator<?> iterator, Scriptable scope) {
             this.iterator = iterator;
             this.scope = scope;
         }
 
+        /**
+         * Next.
+         *
+         * @return the object
+         */
         public Object next() {
             if (!iterator.hasNext()) {
                 // Out of values. Throw StopIteration.
@@ -207,17 +277,29 @@ public final class NativeIterator extends IdScriptableObject {
             return iterator.next();
         }
 
+        /**
+         * __iterator__.
+         *
+         * @param b the b
+         * @return the object
+         */
         public Object __iterator__(boolean b) {
             return this;
         }
 
+        /** The iterator. */
         private Iterator<?> iterator;
+        
+        /** The scope. */
         private Scriptable scope;
     }
 
 // #string_id_map#
 
-    @Override
+    /* (non-Javadoc)
+ * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
+ */
+@Override
     protected int findPrototypeId(String s) {
         int id;
 // #generated# Last update: 2007-06-11 09:43:19 EDT
@@ -233,6 +315,7 @@ public final class NativeIterator extends IdScriptableObject {
         return id;
     }
 
+    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         Id_constructor           = 1,
         Id_next                  = 2,
@@ -241,6 +324,7 @@ public final class NativeIterator extends IdScriptableObject {
 
 // #/string_id_map#
 
-    private Object objectIterator;
+    /** The object iterator. */
+private Object objectIterator;
 }
 

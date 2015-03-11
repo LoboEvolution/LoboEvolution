@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.UserAgentContext;
 
+
 /**
  * Simple implementation of {@link org.lobobrowser.html.UserAgentContext}. This
  * class is provided for user convenience. Usually this class should be extended
@@ -25,8 +26,12 @@ import org.lobobrowser.html.UserAgentContext;
  * agent defaults.
  */
 public class SimpleUserAgentContext implements UserAgentContext {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(SimpleUserAgentContext.class.getName());
+	
+	/** The Constant mediaNames. */
 	private static final Set mediaNames = new HashSet();
 
 	static {
@@ -41,6 +46,9 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	/**
 	 * This implementation returns true for certain media names, such as
 	 * <code>screen</code>.
+	 *
+	 * @param mediaName the media name
+	 * @return true, if is media
 	 */
 	public boolean isMedia(String mediaName) {
 		return mediaNames.contains(mediaName.toLowerCase());
@@ -52,18 +60,22 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	 * this method is used to load images, scripts, style sheets, and to
 	 * implement the Javascript XMLHttpRequest class. Override if a custom
 	 * mechanism to make requests is needed.
+	 *
+	 * @return the http request
 	 */
 	public HttpRequest createHttpRequest() {
 		return new SimpleHttpRequest(this, this.getProxy());
 	}
 
+	/** The proxy. */
 	private java.net.Proxy proxy = java.net.Proxy.NO_PROXY;
 
 	/**
 	 * Gets the connection proxy used in requests created by
 	 * {@link #createHttpRequest()} by default. This implementation returns the
 	 * value of a local field.
-	 * 
+	 *
+	 * @return the proxy
 	 * @see #setProxy(Proxy)
 	 */
 	protected java.net.Proxy getProxy() {
@@ -80,12 +92,14 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		this.proxy = proxy;
 	}
 
+	/** The app code name. */
 	private String appCodeName = "Cobra";
 
 	/**
 	 * Returns the application "code name." This implementation returns the
 	 * value of a local field.
-	 * 
+	 *
+	 * @return the app code name
 	 * @see #setAppCodeName(String)
 	 */
 	public String getAppCodeName() {
@@ -103,12 +117,14 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		this.appCodeName = appCodeName;
 	}
 
+	/** The app minor version. */
 	private String appMinorVersion = "0";
 
 	/**
 	 * Gets the "minor version" of the application. This implementation returns
 	 * the value of a local field.
-	 * 
+	 *
+	 * @return the app minor version
 	 * @see #setAppMinorVersion(String)
 	 */
 	public String getAppMinorVersion() {
@@ -125,12 +141,14 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		this.appMinorVersion = appMinorVersion;
 	}
 
+	/** The app name. */
 	private String appName = "Cobra";
 
 	/**
 	 * Gets the application name. This implementation returns the value of a
 	 * local field.
-	 * 
+	 *
+	 * @return the app name
 	 * @see #setAppName(String)
 	 */
 	public String getAppName() {
@@ -147,12 +165,14 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		this.appName = appName;
 	}
 
+	/** The app version. */
 	private String appVersion = "1";
 
 	/**
 	 * Gets the major application version. This implementation returns the value
 	 * of a local field.
-	 * 
+	 *
+	 * @return the app version
 	 * @see #setAppVersion(String)
 	 */
 	public String getAppVersion() {
@@ -172,6 +192,8 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	/**
 	 * Get the browser language. This implementation returns the language of the
 	 * default locale. It may be overridden to provide a different value.
+	 *
+	 * @return the browser language
 	 */
 	public String getBrowserLanguage() {
 		return Locale.getDefault().getLanguage();
@@ -180,17 +202,21 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	/**
 	 * Returns the value of Java property <code>os.name</code>. It may be
 	 * overridden to provide a different value.
+	 *
+	 * @return the platform
 	 */
 	public String getPlatform() {
 		return System.getProperty("os.name");
 	}
 
+	/** The user agent. */
 	private String userAgent = "Mozilla/4.0 (compatible; MSIE 6.0;) Cobra/Simple";
 
 	/**
 	 * Gets the User-Agent string. This implementation returns the value of a
 	 * local field.
-	 * 
+	 *
+	 * @return the user agent
 	 * @see #setUserAgent(String)
 	 */
 	public String getUserAgent() {
@@ -212,6 +238,8 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	 * <code>java.net.CookieHandler.getDefault()</code> is returning a non-null
 	 * value. The method may be overridden to provide an alternative means of
 	 * determining cookie enabling state.
+	 *
+	 * @return true, if is cookie enabled
 	 */
 	public boolean isCookieEnabled() {
 		return java.net.CookieHandler.getDefault() != null;
@@ -221,6 +249,9 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	 * This implementation uses the default <code>java.net.CookieHandler</code>,
 	 * if any, to get cookie information for the given URL. If no cookie handler
 	 * is available, this method returns the empty string.
+	 *
+	 * @param url the url
+	 * @return the cookie
 	 */
 	public String getCookie(URL url) {
 		java.net.CookieHandler handler = java.net.CookieHandler.getDefault();
@@ -261,12 +292,14 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		return buffer.toString();
 	}
 
+	/** The scripting enabled. */
 	private boolean scriptingEnabled = true;
 
 	/**
 	 * Determines whether scripting should be enabled. This implementation
 	 * returns the value of a local field defaulting to <code>true</code>.
-	 * 
+	 *
+	 * @return true, if is scripting enabled
 	 * @see #setScriptingEnabled(boolean)
 	 */
 	public boolean isScriptingEnabled() {
@@ -286,6 +319,9 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	/**
 	 * This method uses the default CookieHandler, if one is available, to set a
 	 * cookie value.
+	 *
+	 * @param url the url
+	 * @param cookieSpec the cookie spec
 	 */
 	public void setCookie(URL url, String cookieSpec) {
 		java.net.CookieHandler handler = java.net.CookieHandler.getDefault();
@@ -304,17 +340,21 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	/**
 	 * Returns <code>null</code>. This method must be overridden if JavaScript
 	 * code is untrusted.
+	 *
+	 * @return the security policy
 	 */
 	public Policy getSecurityPolicy() {
 		return null;
 	}
 
+	/** The scripting optimization level. */
 	private int scriptingOptimizationLevel = -1;
 
 	/**
 	 * Gets the Rhino optimization level. This implementation returns the value
 	 * of a local field defaulting to <code>-1</code>.
-	 * 
+	 *
+	 * @return the scripting optimization level
 	 * @see #setScriptingOptimizationLevel(int)
 	 */
 	public int getScriptingOptimizationLevel() {
@@ -332,33 +372,53 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		this.scriptingOptimizationLevel = level;
 	}
 
+	/** The vendor. */
 	private String vendor = "The Lobo Project";
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.UserAgentContext#getVendor()
+	 */
 	public String getVendor() {
 		return this.vendor;
 	}
 
+	/**
+	 * Sets the vendor.
+	 *
+	 * @param vendor the new vendor
+	 */
 	public void setVendor(String vendor) {
 		this.vendor = vendor;
 	}
 
+	/** The product. */
 	private String product = "Cobra";
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.UserAgentContext#getProduct()
+	 */
 	public String getProduct() {
 		return this.product;
 	}
 
+	/**
+	 * Sets the product.
+	 *
+	 * @param product the new product
+	 */
 	public void setProduct(String product) {
 		this.product = product;
 	}
 
+	/** The external css enabled. */
 	private boolean externalCSSEnabled = true;
 
 	/**
 	 * Determines whether loading of CSS files should be enabled. This
 	 * implementation returns the value of a local field defaulting to
 	 * <code>true</code>.
-	 * 
+	 *
+	 * @return true, if is external css enabled
 	 * @see #setExternalCSSEnabled(boolean)
 	 */
 	public boolean isExternalCSSEnabled() {
@@ -375,12 +435,14 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		this.externalCSSEnabled = enabled;
 	}
 
+	/** The internal css enabled. */
 	private boolean internalCSSEnabled = true;
 
 	/**
 	 * Determines whether STYLE tags should be processed. This implementation
 	 * returns the value of a local field defaulting to <code>true</code>.
-	 * 
+	 *
+	 * @return true, if is internal css enabled
 	 * @see #setInternalCSSEnabled(boolean)
 	 */
 	public boolean isInternalCSSEnabled() {

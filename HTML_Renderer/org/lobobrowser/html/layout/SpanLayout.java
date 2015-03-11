@@ -20,7 +20,15 @@
 */
 package org.lobobrowser.html.layout;
 
+
+/**
+ * The Class SpanLayout.
+ */
 public class SpanLayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new span layout.
+	 */
 	public SpanLayout() {
 		super(DISPLAY_INLINE);
 	}

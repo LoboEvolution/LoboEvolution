@@ -8,14 +8,20 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Interface LangCondition.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  * @see Condition#SAC_LANG_CONDITION
  */
 public interface LangCondition extends Condition {
+	
 	/**
-	 * Returns the language
+	 * Returns the language.
+	 *
+	 * @return the lang
 	 */
 	public String getLang();
 }

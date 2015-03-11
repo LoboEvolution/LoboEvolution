@@ -20,11 +20,27 @@
  */
 package org.lobobrowser.jweb.compilation;
 
+
+/**
+ * The Class OutputFileInfo.
+ */
 public class OutputFileInfo implements java.io.Serializable {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574505000001100L;
+	
+	/** The file name. */
 	public final String fileName;
+	
+	/** The bytes. */
 	public final byte[] bytes;
 
+	/**
+	 * Instantiates a new output file info.
+	 *
+	 * @param fileName the file name
+	 * @param bytes the bytes
+	 */
 	public OutputFileInfo(final String fileName, final byte[] bytes) {
 		super();
 		this.fileName = fileName;

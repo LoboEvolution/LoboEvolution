@@ -8,6 +8,7 @@ package org.mozilla.javascript.arrays;
 
 import java.nio.FloatBuffer;
 
+
 /**
  * An implementation of the external array using an array of "float"s. Only "number" types may be set in
  * the array.
@@ -18,27 +19,49 @@ import java.nio.FloatBuffer;
 public final class ExternalFloatArray
     extends ExternalArray
 {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 3786769656861013570L;
 
+    /** The array. */
     private final FloatBuffer array;
 
+    /**
+     * Instantiates a new external float array.
+     *
+     * @param array the array
+     */
     public ExternalFloatArray(FloatBuffer array) {
         this.array = array;
     }
 
+    /**
+     * Gets the array.
+     *
+     * @return the array
+     */
     public FloatBuffer getArray() {
         return array;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#getElement(int)
+     */
     protected Object getElement(int index) {
         return array.get(array.position() + index);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#putElement(int, java.lang.Object)
+     */
     protected void putElement(int index, Object value) {
         float val = ((Number)value).floatValue();
         array.put(array.position() + index, val);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#getLength()
+     */
     public int getLength() {
         return array.remaining();
     }

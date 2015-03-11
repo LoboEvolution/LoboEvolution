@@ -50,25 +50,45 @@ import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.NavigatorWindow;
 import org.lobobrowser.util.JoinableTask;
 
+
 /**
  * Manages platform extensions.
  */
 public class ExtensionManager {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(ExtensionManager.class.getName());
+	
+	/** The Constant instance. */
 	private static final ExtensionManager instance = new ExtensionManager();
+	
+	/** The Constant EXT_DIR_NAME. */
 	private static final String EXT_DIR_NAME = "ext";
 
 	// Note: We do not synchronize around the extensions collection,
 	// given that it is fully built in the constructor.
+	/** The extension by id. */
 	private final Map<String, Extension> extensionById = new HashMap<String, Extension>();
+	
+	/** The extensions. */
 	private final SortedSet<Extension> extensions = new TreeSet<Extension>();
+	
+	/** The libraries. */
 	private final ArrayList<Extension> libraries = new ArrayList<Extension>();
 
+	/**
+	 * Instantiates a new extension manager.
+	 */
 	private ExtensionManager() {
 		this.createExtensions();
 	}
 
+	/**
+	 * Gets the single instance of ExtensionManager.
+	 *
+	 * @return single instance of ExtensionManager
+	 */
 	public static ExtensionManager getInstance() {
 		// This security check should be enough, provided
 		// ExtensionManager instances are not retained.
@@ -79,6 +99,9 @@ public class ExtensionManager {
 		return instance;
 	}
 
+	/**
+	 * Creates the extensions.
+	 */
 	private void createExtensions() {
 		File[] extDirs;
 		File[] extFiles;
@@ -110,6 +133,12 @@ public class ExtensionManager {
 		this.createExtensions(extDirs, extFiles);
 	}
 
+	/**
+	 * Adds the extension.
+	 *
+	 * @param file the file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void addExtension(File file) throws IOException {
 		if (!file.exists()) {
 			logger.warning("addExtension(): File " + file + " does not exist.");
@@ -131,6 +160,12 @@ public class ExtensionManager {
 		}
 	}
 
+	/**
+	 * Creates the extensions.
+	 *
+	 * @param extDirs the ext dirs
+	 * @param extFiles the ext files
+	 */
 	private void createExtensions(File[] extDirs, File[] extFiles) {
 		Collection<Extension> extensions = this.extensions;
 		Collection<Extension> libraries = this.libraries;
@@ -235,6 +270,12 @@ public class ExtensionManager {
 		}
 	}
 
+	/**
+	 * Gets the class loader.
+	 *
+	 * @param extensionId the extension id
+	 * @return the class loader
+	 */
 	public ClassLoader getClassLoader(String extensionId) {
 		Extension ei = this.extensionById.get(extensionId);
 		if (ei != null) {
@@ -244,6 +285,9 @@ public class ExtensionManager {
 		}
 	}
 
+	/**
+	 * Inits the extensions.
+	 */
 	public void initExtensions() {
 		Collection<JoinableTask> tasks = new ArrayList<JoinableTask>();
 		PlatformInit pm = PlatformInit.getInstance();
@@ -271,6 +315,11 @@ public class ExtensionManager {
 		}
 	}
 
+	/**
+	 * Inits the extensions window.
+	 *
+	 * @param context the context
+	 */
 	public void initExtensionsWindow(final NavigatorWindow context) {
 		// This must be done sequentially due to menu lookup infrastructure.
 		for (Extension ei : this.extensions) {
@@ -285,6 +334,11 @@ public class ExtensionManager {
 		}
 	}
 
+	/**
+	 * Shutdown extensions window.
+	 *
+	 * @param context the context
+	 */
 	public void shutdownExtensionsWindow(final NavigatorWindow context) {
 		// This must be done sequentially due to menu lookup infrastructure.
 		for (Extension ei : this.extensions) {
@@ -299,6 +353,13 @@ public class ExtensionManager {
 		}
 	}
 
+	/**
+	 * Gets the clientlet.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @return the clientlet
+	 */
 	public Clientlet getClientlet(ClientletRequest request,
 			ClientletResponse response) {
 		Collection<Extension> extensions = this.extensions;
@@ -332,6 +393,13 @@ public class ExtensionManager {
 		return null;
 	}
 
+	/**
+	 * Handle error.
+	 *
+	 * @param frame the frame
+	 * @param response the response
+	 * @param exception the exception
+	 */
 	public void handleError(NavigatorFrame frame,
 			final ClientletResponse response, final Throwable exception) {
 		final NavigatorExceptionEvent event = new NavigatorExceptionEvent(this,
@@ -355,6 +423,12 @@ public class ExtensionManager {
 		});
 	}
 
+	/**
+	 * Dispatch before navigate.
+	 *
+	 * @param event the event
+	 * @throws NavigationVetoException the navigation veto exception
+	 */
 	public void dispatchBeforeNavigate(NavigationEvent event)
 			throws NavigationVetoException {
 		for (Extension ei : extensions) {
@@ -371,6 +445,12 @@ public class ExtensionManager {
 		}
 	}
 
+	/**
+	 * Dispatch before local navigate.
+	 *
+	 * @param event the event
+	 * @throws NavigationVetoException the navigation veto exception
+	 */
 	public void dispatchBeforeLocalNavigate(NavigationEvent event)
 			throws NavigationVetoException {
 		for (Extension ei : extensions) {
@@ -387,6 +467,12 @@ public class ExtensionManager {
 		}
 	}
 
+	/**
+	 * Dispatch before window open.
+	 *
+	 * @param event the event
+	 * @throws NavigationVetoException the navigation veto exception
+	 */
 	public void dispatchBeforeWindowOpen(NavigationEvent event)
 			throws NavigationVetoException {
 		for (Extension ei : extensions) {
@@ -403,6 +489,12 @@ public class ExtensionManager {
 		}
 	}
 
+	/**
+	 * Dispatch pre connection.
+	 *
+	 * @param connection the connection
+	 * @return the URL connection
+	 */
 	public URLConnection dispatchPreConnection(URLConnection connection) {
 		for (Extension ei : extensions) {
 			try {
@@ -417,6 +509,12 @@ public class ExtensionManager {
 		return connection;
 	}
 
+	/**
+	 * Dispatch post connection.
+	 *
+	 * @param connection the connection
+	 * @return the URL connection
+	 */
 	public URLConnection dispatchPostConnection(URLConnection connection) {
 		for (Extension ei : extensions) {
 			try {
@@ -431,7 +529,14 @@ public class ExtensionManager {
 		return connection;
 	}
 
+	/**
+	 * The Class ExtFileFilter.
+	 */
 	private static class ExtFileFilter implements FileFilter {
+		
+		/* (non-Javadoc)
+		 * @see java.io.FileFilter#accept(java.io.File)
+		 */
 		public boolean accept(File file) {
 			return file.isDirectory()
 					|| file.getName().toLowerCase().endsWith(".jar");

@@ -34,20 +34,45 @@ import org.lobobrowser.util.RemovalEvent;
 import org.lobobrowser.util.RemovalListener;
 import org.lobobrowser.util.Urls;
 
+
+/**
+ * The Class PathManager.
+ */
 public class PathManager implements RemovalListener {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(PathManager.class
 			.getName());
+	
+	/** The Constant instance. */
 	private static final PathManager instance = new PathManager();
+	
+	/** The cache. */
 	private final LRUCache cache = new LRUCache(3);
 
+	/**
+	 * Instantiates a new path manager.
+	 */
 	public PathManager() {
 		this.cache.addRemovalListener(this);
 	}
 
+	/**
+	 * Gets the single instance of PathManager.
+	 *
+	 * @return single instance of PathManager
+	 */
 	public static PathManager getInstance() {
 		return instance;
 	}
 
+	/**
+	 * Gets the path repository.
+	 *
+	 * @param paths the paths
+	 * @param entryList the entry list
+	 * @return the path repository
+	 */
 	public PathRepository getPathRepository(URL[] paths, String[] entryList) {
 		Object key = getKey(paths, entryList);
 		synchronized (this.cache) {
@@ -64,6 +89,13 @@ public class PathManager implements RemovalListener {
 		}
 	}
 
+	/**
+	 * Gets the key.
+	 *
+	 * @param paths the paths
+	 * @param entryList the entry list
+	 * @return the key
+	 */
 	private static Object getKey(URL[] paths, String[] entryList) {
 		// Needs to be a list and not a set, because
 		// order of items in classpath matters.
@@ -80,6 +112,13 @@ public class PathManager implements RemovalListener {
 		return set;
 	}
 
+	/**
+	 * Checks if is name compatible.
+	 *
+	 * @param simpleName the simple name
+	 * @param kind the kind
+	 * @return true, if is name compatible
+	 */
 	public static boolean isNameCompatible(String simpleName, Kind kind) {
 		if (kind == Kind.CLASS) {
 			return simpleName.toLowerCase().endsWith(".class");
@@ -92,6 +131,9 @@ public class PathManager implements RemovalListener {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.util.RemovalListener#removed(org.lobobrowser.util.RemovalEvent)
+	 */
 	public void removed(RemovalEvent event) {
 		try {
 			PathRepository pr = (PathRepository) event.valueRemoved;
@@ -101,6 +143,12 @@ public class PathManager implements RemovalListener {
 		}
 	}
 
+	/**
+	 * Gets the nesting kind for name.
+	 *
+	 * @param fileNameTL the file name tl
+	 * @return the nesting kind for name
+	 */
 	static NestingKind getNestingKindForName(String fileNameTL) {
 		String suffix = ".class";
 		if (!fileNameTL.endsWith(suffix)) {

@@ -28,44 +28,80 @@ import java.security.AccessController;
 import org.lobobrowser.settings.GeneralSettings;
 import org.lobobrowser.ua.UserAgent;
 
+
 /**
+ * The Class UserAgentImpl.
+ *
  * @author J. H. S.
  */
 public class UserAgentImpl implements UserAgent {
+	
+	/** The Constant instance. */
 	private static final UserAgentImpl instance = new UserAgentImpl();
 
 	// private static final Logger logger =
 	// Logger.getLogger(UserAgentImpl.class.getName());
 
+	/**
+	 * Instantiates a new user agent impl.
+	 */
 	private UserAgentImpl() {
 	}
 
+	/**
+	 * Gets the single instance of UserAgentImpl.
+	 *
+	 * @return single instance of UserAgentImpl
+	 */
 	public static UserAgentImpl getInstance() {
 		return instance;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.UserAgent#getName()
+	 */
 	public String getName() {
 		return "Lobo";
 	}
 
+	/**
+	 * Gets the major version.
+	 *
+	 * @return the major version
+	 */
 	public String getMajorVersion() {
 		return "0";
 	}
 
+	/**
+	 * Gets the minor version.
+	 *
+	 * @return the minor version
+	 */
 	public String getMinorVersion() {
 		return "98.6";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.UserAgent#getVersion()
+	 */
 	public String getVersion() {
 		return this.getMajorVersion() + "." + this.getMinorVersion();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.UserAgent#getJavaVersion()
+	 */
 	public String getJavaVersion() {
 		return System.getProperty("java.version");
 	}
 
+	/** The text value. */
 	private volatile String textValue = null;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.UserAgent#getUserAgentString()
+	 */
 	public String getUserAgentString() {
 		String tv = this.textValue;
 		if (tv == null) {
@@ -86,6 +122,9 @@ public class UserAgentImpl implements UserAgent {
 		return tv;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return this.getUserAgentString();
 	}
@@ -106,10 +145,18 @@ public class UserAgentImpl implements UserAgent {
 		return this.getName() + " " + this.getVersion();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.ua.UserAgent#getInfoUrl()
+	 */
 	public String getInfoUrl() {
 		return "http://sourceforge.net/projects/loboevolution/";
 	}
 
+	/**
+	 * Gets the os.
+	 *
+	 * @return the os
+	 */
 	private String getOs() {
 		return System.getProperty("os.name") + " "
 				+ System.getProperty("os.version");

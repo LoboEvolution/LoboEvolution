@@ -26,12 +26,28 @@
 
 package com.steadystate.css.dom;
 
+
 /**
+ * The Interface CSSOMObject.
+ *
  * @author koch
  */
 public interface CSSOMObject {
 
+    /**
+     * Gets the user data.
+     *
+     * @param key the key
+     * @return the user data
+     */
     Object getUserData(String key);
 
+    /**
+     * Sets the user data.
+     *
+     * @param key the key
+     * @param data the data
+     * @return the object
+     */
     Object setUserData(String key, Object data);
 }

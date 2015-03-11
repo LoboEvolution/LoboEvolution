@@ -23,13 +23,25 @@
  */
 package org.lobobrowser.security;
 
+
+/**
+ * The Class LocalSecurityManager.
+ */
 public class LocalSecurityManager extends SecurityManager {
+	
+	/** The Constant threadGroupTL. */
 	private static final ThreadLocal threadGroupTL = new ThreadLocal<ThreadGroup>();
 
+	/**
+	 * Instantiates a new local security manager.
+	 */
 	public LocalSecurityManager() {
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.SecurityManager#getThreadGroup()
+	 */
 	@Override
 	public ThreadGroup getThreadGroup() {
 		ThreadGroup tg = getCurrentThreadGroup();
@@ -40,6 +52,11 @@ public class LocalSecurityManager extends SecurityManager {
 		}
 	}
 
+	/**
+	 * Sets the current thread group.
+	 *
+	 * @param tg the new current thread group
+	 */
 	public static void setCurrentThreadGroup(ThreadGroup tg) {
 		// TODO: Thread group needs to be thought through. It's retained in
 		// memory, and we need to return the right one in the GUI thread as
@@ -47,6 +64,11 @@ public class LocalSecurityManager extends SecurityManager {
 		threadGroupTL.set(tg);
 	}
 
+	/**
+	 * Gets the current thread group.
+	 *
+	 * @return the current thread group
+	 */
 	public static ThreadGroup getCurrentThreadGroup() {
 		return (ThreadGroup) threadGroupTL.get();
 	}

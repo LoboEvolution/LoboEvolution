@@ -30,11 +30,25 @@ import org.lobobrowser.clientlet.ClientletContext;
 import org.lobobrowser.util.gui.CenterLayout;
 import org.lobobrowser.util.gui.WrapperLayout;
 
+
+/**
+ * The Class ComponentWrapper.
+ */
 public class ComponentWrapper extends JPanel {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The context. */
 	private final ClientletContext context;
 
+	/**
+	 * Instantiates a new component wrapper.
+	 *
+	 * @param context the context
+	 * @param component the component
+	 * @param usePreferred the use preferred
+	 */
 	public ComponentWrapper(ClientletContext context, Component component,
 			boolean usePreferred) {
 		super();
@@ -45,6 +59,9 @@ public class ComponentWrapper extends JPanel {
 		this.add(component);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.Container#processEvent(java.awt.AWTEvent)
+	 */
 	@Override
 	protected void processEvent(AWTEvent event) {
 		// This does not work.

@@ -20,7 +20,15 @@
 */
 package org.lobobrowser.html.layout;
 
+
+/**
+ * The Class CommonBlockLayout.
+ */
 public class CommonBlockLayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new common block layout.
+	 */
 	public CommonBlockLayout() {
 		super(DISPLAY_BLOCK);
 	}

@@ -23,14 +23,33 @@ package org.lobobrowser.html.renderstate;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.style.HtmlInsets;
 
+
+/**
+ * The Class AbstractMarginRenderState.
+ */
 public abstract class AbstractMarginRenderState extends BlockRenderState {
+	
+	/**
+	 * Instantiates a new abstract margin render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param element the element
+	 */
 	public AbstractMarginRenderState(RenderState prevRenderState,
 			HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/**
+	 * Gets the default margin insets.
+	 *
+	 * @return the default margin insets
+	 */
 	protected abstract HtmlInsets getDefaultMarginInsets();
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getMarginInsets()
+	 */
 	public HtmlInsets getMarginInsets() {
 		HtmlInsets insets = this.marginInsets;
 		if (insets != INVALID_INSETS) {

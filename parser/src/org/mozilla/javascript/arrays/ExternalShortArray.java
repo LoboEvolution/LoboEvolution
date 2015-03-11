@@ -8,6 +8,7 @@ package org.mozilla.javascript.arrays;
 
 import java.nio.ShortBuffer;
 
+
 /**
  * An implementation of the external array using an array of "short"s. From a JavaScript perspective,
  * only "number" types may be set in the array. Valid values are between -32768 and 32767, inclusive.
@@ -18,27 +19,49 @@ import java.nio.ShortBuffer;
 public final class ExternalShortArray
     extends ExternalArray
 {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -2766378114727057429L;
 
+    /** The array. */
     private final ShortBuffer array;
 
+    /**
+     * Instantiates a new external short array.
+     *
+     * @param array the array
+     */
     public ExternalShortArray(ShortBuffer array) {
         this.array = array;
     }
 
+    /**
+     * Gets the array.
+     *
+     * @return the array
+     */
     public ShortBuffer getArray() {
         return array;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#getElement(int)
+     */
     protected Object getElement(int index) {
         return array.get(array.position() + index);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#putElement(int, java.lang.Object)
+     */
     protected void putElement(int index, Object value) {
         short val = ((Number)value).shortValue();
         array.put(array.position() + index, val);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#getLength()
+     */
     public int getLength() {
         return array.remaining();
     }

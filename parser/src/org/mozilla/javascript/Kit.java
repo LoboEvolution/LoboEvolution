@@ -12,8 +12,9 @@ import java.io.Reader;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+
 /**
- * Collection of utilities
+ * Collection of utilities.
  */
 
 public class Kit
@@ -36,6 +37,12 @@ public class Kit
         }
     }
 
+    /**
+     * Class or null.
+     *
+     * @param className the class name
+     * @return the class
+     */
     public static Class<?> classOrNull(String className)
     {
         try {
@@ -53,6 +60,10 @@ public class Kit
     /**
      * Attempt to load the class of the given name. Note that the type parameter
      * isn't checked.
+     *
+     * @param loader the loader
+     * @param className the class name
+     * @return the class
      */
     public static Class<?> classOrNull(ClassLoader loader, String className)
     {
@@ -68,6 +79,12 @@ public class Kit
         return null;
     }
 
+    /**
+     * New instance or null.
+     *
+     * @param cl the cl
+     * @return the object
+     */
     static Object newInstanceOrNull(Class<?> cl)
     {
         try {
@@ -82,6 +99,9 @@ public class Kit
 
     /**
      * Check that testClass is accessible from the given loader.
+     *
+     * @param loader the loader
+     * @return true, if successful
      */
     static boolean testIfCanLoadRhinoClasses(ClassLoader loader)
     {
@@ -100,6 +120,9 @@ public class Kit
     /**
      * If initCause methods exists in Throwable, call
      * <tt>ex.initCause(cause)</tt> or otherwise do nothing.
+     *
+     * @param ex the ex
+     * @param cause the cause
      * @return The <tt>ex</tt> argument.
      */
     public static RuntimeException initCause(RuntimeException ex,
@@ -120,6 +143,10 @@ public class Kit
      * If character <tt>c</tt> is a hexadecimal digit, return
      * <tt>accumulator</tt> * 16 plus corresponding
      * number. Otherise return -1.
+     *
+     * @param c the c
+     * @param accumulator the accumulator
+     * @return the int
      */
     public static int xDigitToInt(int c, int accumulator)
     {
@@ -153,21 +180,21 @@ public class Kit
      * Usage example:
      * <pre>
      *     private volatile Object changeListeners;
-     *
+     * 
      *     public void addMyListener(PropertyChangeListener l)
      *     {
      *         synchronized (this) {
      *             changeListeners = Kit.addListener(changeListeners, l);
      *         }
      *     }
-     *
+     * 
      *     public void removeTextListener(PropertyChangeListener l)
      *     {
      *         synchronized (this) {
      *             changeListeners = Kit.removeListener(changeListeners, l);
      *         }
      *     }
-     *
+     * 
      *     public void fireChangeEvent(Object oldValue, Object newValue)
      *     {
      *     // Get immune local copy
@@ -185,8 +212,8 @@ public class Kit
      *     }
      * </pre>
      *
-     * @param listener Listener to add to <i>bag</i>
      * @param bag Current collection of listeners.
+     * @param listener Listener to add to <i>bag</i>
      * @return A new bag containing all listeners from <i>bag</i> and
      *          <i>listener</i>.
      * @see #removeListener(Object bag, Object listener)
@@ -224,8 +251,8 @@ public class Kit
      * <p>
      * For usage example, see {@link #addListener(Object bag, Object listener)}.
      *
-     * @param listener Listener to remove from <i>bag</i>
      * @param bag Current collection of listeners.
+     * @param listener Listener to remove from <i>bag</i>
      * @return A new bag containing all listeners from <i>bag</i> except
      *          <i>listener</i>.
      * @see #addListener(Object bag, Object listener)
@@ -309,6 +336,14 @@ public class Kit
         }
     }
 
+    /**
+     * Inits the hash.
+     *
+     * @param h the h
+     * @param key the key
+     * @param initialValue the initial value
+     * @return the object
+     */
     static Object initHash(Map<Object,Object> h, Object key, Object initialValue)
     {
         synchronized (h) {
@@ -322,18 +357,36 @@ public class Kit
         return initialValue;
     }
 
+    /**
+     * The Class ComplexKey.
+     */
     private final static class ComplexKey
     {
+        
+        /** The key1. */
         private Object key1;
+        
+        /** The key2. */
         private Object key2;
+        
+        /** The hash. */
         private int hash;
 
+        /**
+         * Instantiates a new complex key.
+         *
+         * @param key1 the key1
+         * @param key2 the key2
+         */
         ComplexKey(Object key1, Object key2)
         {
             this.key1 = key1;
             this.key2 = key2;
         }
 
+        /* (non-Javadoc)
+         * @see java.lang.Object#equals(java.lang.Object)
+         */
         @Override
         public boolean equals(Object anotherObj)
         {
@@ -343,6 +396,9 @@ public class Kit
             return key1.equals(another.key1) && key2.equals(another.key2);
         }
 
+        /* (non-Javadoc)
+         * @see java.lang.Object#hashCode()
+         */
         @Override
         public int hashCode()
         {
@@ -353,6 +409,13 @@ public class Kit
         }
     }
 
+    /**
+     * Make hash key from pair.
+     *
+     * @param key1 the key1
+     * @param key2 the key2
+     * @return the object
+     */
     public static Object makeHashKeyFromPair(Object key1, Object key2)
     {
         if (key1 == null) throw new IllegalArgumentException();
@@ -360,6 +423,13 @@ public class Kit
         return new ComplexKey(key1, key2);
     }
 
+    /**
+     * Read reader.
+     *
+     * @param r the r
+     * @return the string
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public static String readReader(Reader r)
         throws IOException
     {
@@ -378,6 +448,14 @@ public class Kit
         return new String(buffer, 0, cursor);
     }
 
+    /**
+     * Read stream.
+     *
+     * @param is the is
+     * @param initialBufferCapacity the initial buffer capacity
+     * @return the byte[]
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public static byte[] readStream(InputStream is, int initialBufferCapacity)
         throws IOException
     {
@@ -410,6 +488,9 @@ public class Kit
      * The function never returns and its return type is RuntimeException
      * only to be able to write <tt>throw Kit.codeBug()</tt> if plain
      * <tt>Kit.codeBug()</tt> triggers unreachable code error.
+     *
+     * @return the runtime exception
+     * @throws RuntimeException the runtime exception
      */
     public static RuntimeException codeBug()
         throws RuntimeException
@@ -425,6 +506,10 @@ public class Kit
      * The function never returns and its return type is RuntimeException
      * only to be able to write <tt>throw Kit.codeBug()</tt> if plain
      * <tt>Kit.codeBug()</tt> triggers unreachable code error.
+     *
+     * @param msg the msg
+     * @return the runtime exception
+     * @throws RuntimeException the runtime exception
      */
     public static RuntimeException codeBug(String msg)
         throws RuntimeException

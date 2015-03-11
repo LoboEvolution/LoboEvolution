@@ -28,29 +28,54 @@ import org.lobobrowser.html.renderstate.ListRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.w3c.HTMLUListElement;
 
+
+/**
+ * The Class HTMLUListElementImpl.
+ */
 public class HTMLUListElementImpl extends HTMLAbstractUIElement implements
 		HTMLUListElement {
+	
+	/**
+	 * Instantiates a new HTMLU list element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLUListElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLUListElement#getCompact()
+	 */
 	public boolean getCompact() {
 		String compactText = this.getAttribute(HtmlAttributeProperties.COMPACT);
 		return HtmlAttributeProperties.COMPACT.equalsIgnoreCase(compactText);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLUListElement#setCompact(boolean)
+	 */
 	public void setCompact(boolean compact) {
 		this.setAttribute(HtmlAttributeProperties.COMPACT, compact ? HtmlAttributeProperties.COMPACT : null);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLUListElement#getType()
+	 */
 	public String getType() {
 		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLUListElement#setType(java.lang.String)
+	 */
 	public void setType(String type) {
 		this.setAttribute(HtmlAttributeProperties.TYPE, type);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new ListRenderState(prevRenderState, this);
 	}

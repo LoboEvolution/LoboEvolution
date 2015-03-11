@@ -2,7 +2,18 @@ package org.lobobrowser.util;
 
 import java.util.ArrayList;
 
+
+/**
+ * The Class JavascriptCommon.
+ */
 public class JavascriptCommon {
+	
+	/**
+	 * Map function.
+	 *
+	 * @param script the script
+	 * @return the string
+	 */
 	public String mapFunction(String script) {
 
 		ArrayList<String> list = new ArrayList<String>();

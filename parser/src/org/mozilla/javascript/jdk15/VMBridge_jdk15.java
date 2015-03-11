@@ -15,8 +15,19 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Wrapper;
 
+
+/**
+ * The Class VMBridge_jdk15.
+ */
 public class VMBridge_jdk15 extends org.mozilla.javascript.jdk13.VMBridge_jdk13
 {
+    
+    /**
+     * Instantiates a new VM bridge_jdk15.
+     *
+     * @throws SecurityException the security exception
+     * @throws InstantiationException the instantiation exception
+     */
     public VMBridge_jdk15() throws SecurityException, InstantiationException {
         try {
             // Just try and see if we can access the isVarArgs method.
@@ -30,6 +41,9 @@ public class VMBridge_jdk15 extends org.mozilla.javascript.jdk13.VMBridge_jdk13
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.jdk13.VMBridge_jdk13#isVarArgs(java.lang.reflect.Member)
+     */
     @Override
     public boolean isVarArgs(Member member) {
         if (member instanceof Method)
@@ -44,6 +58,11 @@ public class VMBridge_jdk15 extends org.mozilla.javascript.jdk13.VMBridge_jdk13
      * If "obj" is a java.util.Iterator or a java.lang.Iterable, return a
      * wrapping as a JavaScript Iterator. Otherwise, return null.
      * This method is in VMBridge since Iterable is a JDK 1.5 addition.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param obj the obj
+     * @return the java iterator
      */
     @Override
     public Iterator<?> getJavaIterator(Context cx, Scriptable scope, Object obj) {

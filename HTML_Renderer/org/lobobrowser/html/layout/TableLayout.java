@@ -20,7 +20,15 @@
 */
 package org.lobobrowser.html.layout;
 
+
+/**
+ * The Class TableLayout.
+ */
 public class TableLayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new table layout.
+	 */
 	public TableLayout() {
 		super(DISPLAY_TABLE);
 	}

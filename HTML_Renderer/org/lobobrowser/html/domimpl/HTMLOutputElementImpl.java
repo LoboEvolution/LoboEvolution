@@ -26,103 +26,160 @@ import org.lobobrowser.html.w3c.HTMLOutputElement;
 import org.lobobrowser.html.w3c.ValidityState;
 import org.w3c.dom.NodeList;
 
+
+/**
+ * The Class HTMLOutputElementImpl.
+ */
 public class HTMLOutputElementImpl extends HTMLElementImpl implements
 		HTMLOutputElement {
 
+	/**
+	 * Instantiates a new HTML output element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLOutputElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#getHtmlFor()
+	 */
 	@Override
 	public DOMSettableTokenList getHtmlFor() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#setHtmlFor(java.lang.String)
+	 */
 	@Override
 	public void setHtmlFor(String htmlFor) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#getForm()
+	 */
 	@Override
 	public HTMLFormElement getForm() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#getName()
+	 */
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#setName(java.lang.String)
+	 */
 	@Override
 	public void setName(String name) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#getType()
+	 */
 	@Override
 	public String getType() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#getDefaultValue()
+	 */
 	@Override
 	public String getDefaultValue() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#setDefaultValue(java.lang.String)
+	 */
 	@Override
 	public void setDefaultValue(String defaultValue) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#getValue()
+	 */
 	@Override
 	public String getValue() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#setValue(java.lang.String)
+	 */
 	@Override
 	public void setValue(String value) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#getWillValidate()
+	 */
 	@Override
 	public boolean getWillValidate() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#getValidity()
+	 */
 	@Override
 	public ValidityState getValidity() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#getValidationMessage()
+	 */
 	@Override
 	public String getValidationMessage() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#checkValidity()
+	 */
 	@Override
 	public boolean checkValidity() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#setCustomValidity(java.lang.String)
+	 */
 	@Override
 	public void setCustomValidity(String error) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLOutputElement#getLabels()
+	 */
 	@Override
 	public NodeList getLabels() {
 		// TODO Auto-generated method stub

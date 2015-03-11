@@ -7,6 +7,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  *
  * The class of error objects
@@ -15,12 +16,22 @@ package org.mozilla.javascript;
  */
 final class NativeError extends IdScriptableObject
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -5338413581437645187L;
 
+    /** The Constant ERROR_TAG. */
     private static final Object ERROR_TAG = "Error";
 
+    /** The stack provider. */
     private RhinoException stackProvider;
 
+    /**
+     * Inits the.
+     *
+     * @param scope the scope
+     * @param sealed the sealed
+     */
     static void init(Scriptable scope, boolean sealed)
     {
         NativeError obj = new NativeError();
@@ -33,6 +44,15 @@ final class NativeError extends IdScriptableObject
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
+    /**
+     * Make.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param ctorObj the ctor obj
+     * @param args the args
+     * @return the native error
+     */
     static NativeError make(Context cx, Scriptable scope,
                             IdFunctionObject ctorObj, Object[] args)
     {
@@ -60,12 +80,18 @@ final class NativeError extends IdScriptableObject
         return obj;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getClassName()
+     */
     @Override
     public String getClassName()
     {
         return "Error";
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString()
     {
@@ -74,6 +100,9 @@ final class NativeError extends IdScriptableObject
         return toString instanceof String ? (String) toString : super.toString();
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
+     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -88,6 +117,9 @@ final class NativeError extends IdScriptableObject
         initPrototypeMethod(ERROR_TAG, id, s, arity);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#fillConstructorProperties(org.mozilla.javascript.IdFunctionObject)
+     */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -96,6 +128,9 @@ final class NativeError extends IdScriptableObject
         super.fillConstructorProperties(ctor);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -120,6 +155,11 @@ final class NativeError extends IdScriptableObject
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
+    /**
+     * Sets the stack provider.
+     *
+     * @param re the new stack provider
+     */
     public void setStackProvider(RhinoException re) {
         // We go some extra miles to make sure the stack property is only
         // generated on demand, is cached after the first access, and is
@@ -139,10 +179,21 @@ final class NativeError extends IdScriptableObject
         }
     }
 
+    /**
+     * Gets the stack.
+     *
+     * @return the stack
+     */
     public Object getStack() {
         return getStack(this);
     }
 
+    /**
+     * Gets the stack.
+     *
+     * @param obj the obj
+     * @return the stack
+     */
     public Object getStack(Scriptable obj) {
         while(obj != null && !(obj instanceof NativeError)) {
             obj = obj.getPrototype();
@@ -163,10 +214,21 @@ final class NativeError extends IdScriptableObject
         return value;
     }
 
+    /**
+     * Sets the stack.
+     *
+     * @param value the new stack
+     */
     public void setStack(Object value) {
         setStack(this, value);
     }
 
+    /**
+     * Sets the stack.
+     *
+     * @param obj the obj
+     * @param value the value
+     */
     public void setStack(Scriptable obj, Object value) {
         while ((obj != null) && !(obj instanceof NativeError)) {
             obj = obj.getPrototype();
@@ -181,6 +243,12 @@ final class NativeError extends IdScriptableObject
         }
     }
 
+    /**
+     * Js_to string.
+     *
+     * @param thisObj the this obj
+     * @return the object
+     */
     private static Object js_toString(Scriptable thisObj) {
         Object name = ScriptableObject.getProperty(thisObj, "name");
         if (name == NOT_FOUND || name == Undefined.instance) {
@@ -203,6 +271,14 @@ final class NativeError extends IdScriptableObject
         }
     }
 
+    /**
+     * Js_to source.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param thisObj the this obj
+     * @return the string
+     */
     private static String js_toSource(Context cx, Scriptable scope,
                                       Scriptable thisObj)
     {
@@ -250,6 +326,11 @@ final class NativeError extends IdScriptableObject
      * This is a V8 extension that causes a native Error object to have a stack trace inserted at the point
      * at which it's called. It takes two arguments -- the first is an Error object and the second
      * is an optional function name for trimming the stack trace. We will only implement the first.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param args the args
+     * @return the object
      */
     private static Object js_captureStackTrace(Context cx, Scriptable scope, Object[] args)
     {
@@ -273,6 +354,13 @@ final class NativeError extends IdScriptableObject
         return Undefined.instance;
     }
 
+    /**
+     * Gets the string.
+     *
+     * @param obj the obj
+     * @param id the id
+     * @return the string
+     */
     private static String getString(Scriptable obj, String id)
     {
         Object value = ScriptableObject.getProperty(obj, id);
@@ -280,6 +368,9 @@ final class NativeError extends IdScriptableObject
         return ScriptRuntime.toString(value);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
+     */
     @Override
     protected int findPrototypeId(String s)
     {
@@ -301,6 +392,7 @@ final class NativeError extends IdScriptableObject
         return id;
     }
 
+    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         ConstructorId_captureStackTrace = -1,
         Id_constructor    = 1,

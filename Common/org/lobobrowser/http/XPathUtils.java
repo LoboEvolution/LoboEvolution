@@ -37,6 +37,7 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+
 /**
  * <p>Various utilities for working with XPath. This class uses a static XPath
  * object for most of it's work. This XPath object is preconfigured to use the
@@ -45,7 +46,11 @@ import org.w3c.dom.Node;
  * @author rbair
  */
 public class XPathUtils {
+    
+    /** The Constant xpath. */
     private static final XPath xpath;
+    
+    /** The Constant functionResolver. */
     private static final XPathFunctionResolverImpl functionResolver;
     
     static {
@@ -55,17 +60,20 @@ public class XPathUtils {
         xpath.setXPathFunctionResolver(functionResolver);
     }
     
+    /**
+     * Instantiates a new x path utils.
+     */
     private XPathUtils() {}
     
     /**
      * Returns a {@link SimpleNodeList} containing all the nodes that match the given expression
      * when executed on the given node (as opposed to the dom as a whole).
-     * 
+     *
      * @param expression an XPath expression
      * @param node the contextual node
      * @return SimpleNodeList containing the results from the expression. This will
      *         never be null, but may contain no results.
-     * @throws IllegalArgumentException if the expression does not parse
+     * @throws XPathExpressionException the x path expression exception
      */
     /*public synchronized static NodeList getElements(String expression, Node node) throws XPathExpressionException {
         NodeList nodes = new DOMNodeListImpl((Collection)xpath.evaluate(expression, node, XPathConstants.NODESET));
@@ -79,7 +87,7 @@ public class XPathUtils {
      * @param expression an XPath expression
      * @param node the contextual node
      * @return Node. May be null.
-     * @throws IllegalArgumentException if the expression does not parse
+     * @throws XPathExpressionException if the expression does not parse
      */
     public synchronized static Node getElement(String expression, Node node) throws XPathExpressionException {
         Node n = (Node)xpath.evaluate(expression, node, XPathConstants.NODE);
@@ -89,16 +97,27 @@ public class XPathUtils {
     /**
      * Returns the text content of the Node matching the given expression. 
      * If more than one node matches, the return value is undefined.
-     * 
+     *
      * @param expression an XPath expression
      * @param node the contextual node
      * @return text content of the selected Node. May be null.
-     * @throws IllegalArgumentException if the expression does not parse
+     * @throws XPathExpressionException the x path expression exception
      */
     public synchronized static String getString(String expression, Node node) throws XPathExpressionException {
         Node n = (Node)xpath.evaluate(expression, node, XPathConstants.NODE);
         return n == null ? null : n.getTextContent();
     }
+    
+    /**
+     * Gets the string.
+     *
+     * @param expression the expression
+     * @param node the node
+     * @param namespace the namespace
+     * @param namespacePrefix the namespace prefix
+     * @return the string
+     * @throws XPathExpressionException the x path expression exception
+     */
     public synchronized static String getString(String expression, Node node, String namespace, String namespacePrefix) throws XPathExpressionException {
         functionResolver.addNamespaceMapping(namespacePrefix,namespace);
         Node n = (Node)xpath.evaluate(expression, node, XPathConstants.NODE);
@@ -109,12 +128,12 @@ public class XPathUtils {
     /**
      * Returns a {@link SimpleNodeList} containing all the nodes that match the given expression
      * when executed on the given node (as opposed to the dom as a whole).
-     * 
+     *
      * @param expression an XPath expression
      * @param node the contextual node
      * @return SimpleNodeList containing the results from the expression. This will
      *         never be null, but may contain no results.
-     * @throws IllegalArgumentException if the expression does not parse
+     * @throws XPathExpressionException the x path expression exception
      */
     /*public synchronized static NodeList getElements(XPathExpression expression, Node node) throws XPathExpressionException {
         NodeList nodes = new DOMNodeListImpl((Collection)expression.evaluate(node, XPathConstants.NODESET));
@@ -128,7 +147,7 @@ public class XPathUtils {
      * @param expression an XPath expression
      * @param node the contextual node
      * @return Node. May be null.
-     * @throws IllegalArgumentException if the expression does not parse
+     * @throws XPathExpressionException if the expression does not parse
      */
     public synchronized static Node getElement(XPathExpression expression, Node node) throws XPathExpressionException {
         Node n = (Node)expression.evaluate(node, XPathConstants.NODE);
@@ -138,11 +157,11 @@ public class XPathUtils {
     /**
      * Returns the text content of the Node matching the given expression. 
      * If more than one node matches, the return value is undefined.
-     * 
+     *
      * @param expression an XPath expression
      * @param node the contextual node
      * @return text content of the selected Node. May be null.
-     * @throws IllegalArgumentException if the expression does not parse
+     * @throws XPathExpressionException the x path expression exception
      */
     public synchronized static String getString(XPathExpression expression, Node node) throws XPathExpressionException {
         Node n = (Node)expression.evaluate(node, XPathConstants.NODE);
@@ -163,12 +182,22 @@ public class XPathUtils {
     }
     
     /**
-     * Exports this DOM as a String
+     * Exports this DOM as a String.
+     *
+     * @param dom the dom
+     * @return the string
      */
     public static String toXML(Document dom) {
         return toXML(dom, null);
     }
     
+    /**
+     * To xml.
+     *
+     * @param dom the dom
+     * @param outputProperties the output properties
+     * @return the string
+     */
     public static String toXML(Document dom, Properties outputProperties) {
         try {
             DOMSource source = new DOMSource(dom);

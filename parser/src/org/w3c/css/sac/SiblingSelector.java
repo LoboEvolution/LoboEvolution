@@ -8,29 +8,42 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Interface SiblingSelector.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  * @see Selector#SAC_DIRECT_ADJACENT_SELECTOR
  */
 public interface SiblingSelector extends Selector {
 
+	/** The Constant ANY_NODE. */
 	public static final short ANY_NODE = 201;
 
 	/**
 	 * The node type to considered in the siblings list. All DOM node types are
 	 * supported. In order to support the "any" node type, the code ANY_NODE is
 	 * added to the DOM node types.
+	 *
+	 * @return the node type
 	 */
 	public short getNodeType();
 
 	/**
 	 * Returns the first selector.
+	 *
+	 * @return the selector
 	 */
 	public Selector getSelector();
 
 	/*
 	 * Returns the second selector.
+	 */
+	/**
+	 * Gets the sibling selector.
+	 *
+	 * @return the sibling selector
 	 */
 	public SimpleSelector getSiblingSelector();
 }

@@ -11,9 +11,10 @@
  */
 package org.w3c.css.sac;
 
+
 /**
  * Interface for associating a CSS event with a document location.
- *
+ * 
  * <p>
  * If a SAX parser provides location information to the SAX application, it does
  * so by implementing this interface and then passing an instance to the
@@ -21,13 +22,13 @@ package org.w3c.css.sac;
  * application can use the object to obtain the location of any other document
  * handler event in the CSS source document.
  * </p>
- *
+ * 
  * <p>
  * Note that the results returned by the object will be valid only during the
  * scope of each document handler method: the application will receive
  * unpredictable results if it attempts to use the locator at any other time.
  * </p>
- *
+ * 
  * <p>
  * CSS parsers are not required to supply a locator, but they are very strong
  * encouraged to do so. If the parser supplies a locator, it must do so before
@@ -36,8 +37,8 @@ package org.w3c.css.sac;
  * assume that a locator is not available.
  * </p>
  *
- * @version $Revision: 477010 $
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  */
 public interface Locator {
 

@@ -23,7 +23,15 @@ package org.lobobrowser.html.domfilter;
 import org.lobobrowser.html.HtmlProperties;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class EmbedFilter.
+ */
 public class EmbedFilter implements NodeFilter {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
 	public boolean accept(Node node) {
 		return HtmlProperties.EMBED.equalsIgnoreCase(node.getNodeName());
 	}

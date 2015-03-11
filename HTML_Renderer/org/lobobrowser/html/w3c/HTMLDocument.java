@@ -37,6 +37,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+
 /**
  * An <code>HTMLDocument</code> is the root of the HTML hierarchy and holds the
  * entire content. Besides providing access to the hierarchy, it also provides
@@ -53,15 +54,20 @@ import org.w3c.dom.NodeList;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLDocument extends Document {
+	
 	/**
 	 * The title of a document as specified by the <code>TITLE</code> element in
 	 * the head of the document.
+	 *
+	 * @return the title
 	 */
 	public String getTitle();
 
 	/**
 	 * The title of a document as specified by the <code>TITLE</code> element in
 	 * the head of the document.
+	 *
+	 * @param title the new title
 	 */
 	public void setTitle(String title);
 
@@ -70,18 +76,24 @@ public interface HTMLDocument extends Document {
 	 * 2396</a>] of the page that linked to this page. The value is an empty
 	 * string if the user navigated to the page directly (not through a link,
 	 * but, for example, via a bookmark).
+	 *
+	 * @return the referrer
 	 */
 	public String getReferrer();
 
 	/**
 	 * The domain name of the server that served the document, or
 	 * <code>null</code> if the server cannot be identified by a domain name.
+	 *
+	 * @return the domain
 	 */
 	public String getDomain();
 
 	/**
 	 * The absolute URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC
 	 * 2396</a>] of the document.
+	 *
+	 * @return the url
 	 */
 	public String getURL();
 
@@ -90,6 +102,8 @@ public interface HTMLDocument extends Document {
 	 * <code>BODY</code> contents, returns the <code>BODY</code> element. In
 	 * frameset documents, this returns the outermost <code>FRAMESET</code>
 	 * element.
+	 *
+	 * @return the body
 	 */
 	public HTMLElement getBody();
 
@@ -98,6 +112,8 @@ public interface HTMLDocument extends Document {
 	 * <code>BODY</code> contents, returns the <code>BODY</code> element. In
 	 * frameset documents, this returns the outermost <code>FRAMESET</code>
 	 * element.
+	 *
+	 * @param body the new body
 	 */
 	public void setBody(HTMLElement body);
 
@@ -111,12 +127,16 @@ public interface HTMLDocument extends Document {
 	 * attribute to find the images in the document but
 	 * <code>getElementsByTagName</code> with HTML 4.01 or
 	 * <code>getElementsByTagNameNS</code> with XHTML 1.0.
+	 *
+	 * @return the images
 	 */
 	public HTMLCollection getImages();
 
 	/**
 	 * A collection of all the <code>OBJECT</code> elements that include applets
 	 * and <code>APPLET</code> (deprecated) elements in a document.
+	 *
+	 * @return the applets
 	 */
 	public HTMLCollection getApplets();
 
@@ -124,11 +144,15 @@ public interface HTMLDocument extends Document {
 	 * A collection of all <code>AREA</code> elements and anchor (
 	 * <code>A</code>) elements in a document with a value for the
 	 * <code>href</code> attribute.
+	 *
+	 * @return the links
 	 */
 	public HTMLCollection getLinks();
 
 	/**
 	 * A collection of all the forms of a document.
+	 *
+	 * @return the forms
 	 */
 	public HTMLCollection getForms();
 
@@ -145,6 +169,8 @@ public interface HTMLDocument extends Document {
 	 * href=
 	 * 'http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113'>DOM
 	 * Level 2 Traversal</a>] instead.
+	 *
+	 * @return the anchors
 	 */
 	public HTMLCollection getAnchors();
 
@@ -179,6 +205,8 @@ public interface HTMLDocument extends Document {
 	 * href='http://www.ietf.org/rfc/rfc2965.txt'>IETF RFC 2965</a>] for the
 	 * semantics of persistent state item attribute value pairs. The precise
 	 * nature of a user agent session is not defined by this specification.
+	 *
+	 * @return the cookie
 	 */
 	public String getCookie();
 
@@ -213,9 +241,9 @@ public interface HTMLDocument extends Document {
 	 * href='http://www.ietf.org/rfc/rfc2965.txt'>IETF RFC 2965</a>] for the
 	 * semantics of persistent state item attribute value pairs. The precise
 	 * nature of a user agent session is not defined by this specification.
-	 * 
-	 * @exception DOMException
-	 *                SYNTAX_ERR: If the new value does not adhere to the cookie
+	 *
+	 * @param cookie the new cookie
+	 * @exception DOMException                SYNTAX_ERR: If the new value does not adhere to the cookie
 	 *                syntax specified by [<a
 	 *                href='http://www.ietf.org/rfc/rfc2965.txt'>IETF RFC
 	 *                2965</a>].
@@ -281,82 +309,293 @@ public interface HTMLDocument extends Document {
 
 	// HTMLDocument
 	// public Location getLocation();
+	/**
+	 * Sets the location.
+	 *
+	 * @param location the new location
+	 */
 	public void setLocation(String location);
 
+	/**
+	 * Sets the domain.
+	 *
+	 * @param domain the new domain
+	 */
 	public void setDomain(String domain);
 
+	/**
+	 * Gets the last modified.
+	 *
+	 * @return the last modified
+	 */
 	public String getLastModified();
 
+	/**
+	 * Gets the compat mode.
+	 *
+	 * @return the compat mode
+	 */
 	public String getCompatMode();
 	
+	/**
+	 * Gets the character set.
+	 *
+	 * @return the character set
+	 */
 	public String getCharacterSet();
 
+	/**
+	 * Gets the default charset.
+	 *
+	 * @return the default charset
+	 */
 	public String getDefaultCharset();
 
+	/**
+	 * Gets the ready state.
+	 *
+	 * @return the ready state
+	 */
 	public String getReadyState();
 
+	/**
+	 * Gets the head.
+	 *
+	 * @return the head
+	 */
 	public HTMLHeadElement getHead();
 
+	/**
+	 * Gets the embeds.
+	 *
+	 * @return the embeds
+	 */
 	public HTMLCollection getEmbeds();
 
+	/**
+	 * Gets the plugins.
+	 *
+	 * @return the plugins
+	 */
 	public HTMLCollection getPlugins();
 
+	/**
+	 * Gets the scripts.
+	 *
+	 * @return the scripts
+	 */
 	public HTMLCollection getScripts();
 
+	/**
+	 * Gets the elements by class name.
+	 *
+	 * @param classNames the class names
+	 * @return the elements by class name
+	 */
 	public NodeList getElementsByClassName(String classNames);
 
+	/**
+	 * Gets the inner html.
+	 *
+	 * @return the inner html
+	 */
 	public String getInnerHTML();
 	
+	/**
+	 * Checks for focus.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasFocus();
 
+	/**
+	 * Gets the design mode.
+	 *
+	 * @return the design mode
+	 */
 	public String getDesignMode();
 
+	/**
+	 * Sets the design mode.
+	 *
+	 * @param designMode the new design mode
+	 */
 	public void setDesignMode(String designMode);
 
+	/**
+	 * Exec command.
+	 *
+	 * @param commandId the command id
+	 * @return true, if successful
+	 */
 	public boolean execCommand(String commandId);
 
+	/**
+	 * Exec command.
+	 *
+	 * @param commandId the command id
+	 * @param showUI the show ui
+	 * @return true, if successful
+	 */
 	public boolean execCommand(String commandId, boolean showUI);
 
+	/**
+	 * Exec command.
+	 *
+	 * @param commandId the command id
+	 * @param showUI the show ui
+	 * @param value the value
+	 * @return true, if successful
+	 */
 	public boolean execCommand(String commandId, boolean showUI, String value);
 
+	/**
+	 * Query command enabled.
+	 *
+	 * @param commandId the command id
+	 * @return true, if successful
+	 */
 	public boolean queryCommandEnabled(String commandId);
 
+	/**
+	 * Query command indeterm.
+	 *
+	 * @param commandId the command id
+	 * @return true, if successful
+	 */
 	public boolean queryCommandIndeterm(String commandId);
 
+	/**
+	 * Query command state.
+	 *
+	 * @param commandId the command id
+	 * @return true, if successful
+	 */
 	public boolean queryCommandState(String commandId);
 
+	/**
+	 * Query command supported.
+	 *
+	 * @param commandId the command id
+	 * @return true, if successful
+	 */
 	public boolean queryCommandSupported(String commandId);
 
+	/**
+	 * Query command value.
+	 *
+	 * @param commandId the command id
+	 * @return the string
+	 */
 	public String queryCommandValue(String commandId);
 
+	/**
+	 * Gets the commands.
+	 *
+	 * @return the commands
+	 */
 	public HTMLCollection getCommands();
 
+	/**
+	 * Gets the fg color.
+	 *
+	 * @return the fg color
+	 */
 	public String getFgColor();
 
+	/**
+	 * Sets the fg color.
+	 *
+	 * @param fgColor the new fg color
+	 */
 	public void setFgColor(String fgColor);
 
+	/**
+	 * Gets the bg color.
+	 *
+	 * @return the bg color
+	 */
 	public String getBgColor();
 
+	/**
+	 * Sets the bg color.
+	 *
+	 * @param bgColor the new bg color
+	 */
 	public void setBgColor(String bgColor);
 
+	/**
+	 * Gets the link color.
+	 *
+	 * @return the link color
+	 */
 	public String getLinkColor();
 
+	/**
+	 * Sets the link color.
+	 *
+	 * @param linkColor the new link color
+	 */
 	public void setLinkColor(String linkColor);
 
+	/**
+	 * Gets the vlink color.
+	 *
+	 * @return the vlink color
+	 */
 	public String getVlinkColor();
 
+	/**
+	 * Sets the vlink color.
+	 *
+	 * @param vlinkColor the new vlink color
+	 */
 	public void setVlinkColor(String vlinkColor);
 
+	/**
+	 * Gets the alink color.
+	 *
+	 * @return the alink color
+	 */
 	public String getAlinkColor();
 
+	/**
+	 * Sets the alink color.
+	 *
+	 * @param alinkColor the new alink color
+	 */
 	public void setAlinkColor(String alinkColor);
 		
+	/**
+	 * Adds the event listener.
+	 *
+	 * @param script the script
+	 * @param function the function
+	 */
 	public void addEventListener(String script, String function);
 	
+	/**
+	 * Removes the event listener.
+	 *
+	 * @param script the script
+	 * @param function the function
+	 */
 	public void removeEventListener(String script, String function);
 	
+	/**
+	 * Query selector.
+	 *
+	 * @param selectors the selectors
+	 * @return the element
+	 */
 	public Element querySelector(String selectors);
 	
+	/**
+	 * Query selector all.
+	 *
+	 * @param selectors the selectors
+	 * @return the node list
+	 */
 	public NodeList querySelectorAll(String selectors);
 	
 

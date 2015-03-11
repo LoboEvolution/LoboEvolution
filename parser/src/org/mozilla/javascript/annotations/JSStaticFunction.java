@@ -10,6 +10,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
 /**
  * An annotation that marks a Java method as JavaScript static function. This can
  * be used as an alternative to the <code>jsStaticFunction_</code> prefix desribed in
@@ -19,5 +20,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface JSStaticFunction {
+    
+    /**
+     * Value.
+     *
+     * @return the string
+     */
     String value() default "";
 }

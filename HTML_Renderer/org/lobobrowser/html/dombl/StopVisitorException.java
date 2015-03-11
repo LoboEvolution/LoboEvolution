@@ -23,35 +23,71 @@
  */
 package org.lobobrowser.html.dombl;
 
+
+/**
+ * The Class StopVisitorException.
+ */
 public class StopVisitorException extends RuntimeException {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The tag. */
 	private final Object tag;
 
+	/**
+	 * Instantiates a new stop visitor exception.
+	 */
 	public StopVisitorException() {
 		super();
 		this.tag = null;
 	}
 
+	/**
+	 * Instantiates a new stop visitor exception.
+	 *
+	 * @param message the message
+	 */
 	public StopVisitorException(String message) {
 		super(message);
 		this.tag = null;
 	}
 
+	/**
+	 * Instantiates a new stop visitor exception.
+	 *
+	 * @param message the message
+	 * @param cause the cause
+	 */
 	public StopVisitorException(String message, Throwable cause) {
 		super(message, cause);
 		this.tag = null;
 	}
 
+	/**
+	 * Instantiates a new stop visitor exception.
+	 *
+	 * @param cause the cause
+	 */
 	public StopVisitorException(Throwable cause) {
 		super(cause);
 		this.tag = null;
 	}
 
+	/**
+	 * Instantiates a new stop visitor exception.
+	 *
+	 * @param tag the tag
+	 */
 	public StopVisitorException(Object tag) {
 		this.tag = tag;
 	}
 
+	/**
+	 * Gets the tag.
+	 *
+	 * @return the tag
+	 */
 	public final Object getTag() {
 		return this.tag;
 	}

@@ -41,22 +41,38 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.store.StorageManager;
 
+
 /**
  * Class in charge of allowing mutiple browser launches to share a JVM.
  */
 public class ReuseManager {
+	
+	/**
+	 * Instantiates a new reuse manager.
+	 */
 	private ReuseManager() {
 		super();
 	}
 
+	/** The Constant instance. */
 	private static final ReuseManager instance = new ReuseManager();
 
+	/**
+	 * Gets the single instance of ReuseManager.
+	 *
+	 * @return single instance of ReuseManager
+	 * @throws Exception the exception
+	 */
 	public static ReuseManager getInstance() throws Exception {
 		return instance;
 	}
 
+	/** The Constant PORT_FILE. */
 	private static final String PORT_FILE = "port.dat";
 
+	/**
+	 * Shutdown.
+	 */
 	public void shutdown() {
 		try {
 			java.io.File appHome = StorageManager.getInstance().getAppHome();
@@ -69,6 +85,9 @@ public class ReuseManager {
 
 	/**
 	 * May launch in this VM or a second one.
+	 *
+	 * @param args the args
+	 * @throws Exception the exception
 	 */
 	public void launch(String[] args) throws Exception {
 		boolean launched = false;

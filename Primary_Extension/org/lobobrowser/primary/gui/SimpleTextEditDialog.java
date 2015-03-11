@@ -37,36 +37,77 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+
+/**
+ * The Class SimpleTextEditDialog.
+ */
 public class SimpleTextEditDialog extends JDialog {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The caption label. */
 	private final JLabel captionLabel = new JLabel();
+	
+	/** The text area. */
 	private final JTextArea textArea = new JTextArea();
+	
+	/** The ok button. */
 	private final JButton okButton = new JButton();
+	
+	/** The cancel button. */
 	private final JButton cancelButton = new JButton();
 
+	/**
+	 * Instantiates a new simple text edit dialog.
+	 *
+	 * @param parent the parent
+	 */
 	public SimpleTextEditDialog(Frame parent) {
 		super(parent);
 		this.init();
 	}
 
+	/**
+	 * Instantiates a new simple text edit dialog.
+	 *
+	 * @param parent the parent
+	 */
 	public SimpleTextEditDialog(Dialog parent) {
 		super(parent);
 		this.init();
 	}
 
+	/**
+	 * Sets the caption.
+	 *
+	 * @param text the new caption
+	 */
 	public void setCaption(String text) {
 		this.captionLabel.setText(text);
 	}
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param text the new text
+	 */
 	public void setText(String text) {
 		this.textArea.setText(text);
 	}
 
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
 	public String getText() {
 		return this.textArea.getText();
 	}
 
+	/**
+	 * Inits the.
+	 */
 	private void init() {
 		this.captionLabel.setPreferredSize(new Dimension(Short.MAX_VALUE, 32));
 		this.captionLabel.setAlignmentX(0.0f);
@@ -84,6 +125,11 @@ public class SimpleTextEditDialog extends JDialog {
 		this.cancelButton.setText("Cancel");
 	}
 
+	/**
+	 * Creates the button panel.
+	 *
+	 * @return the component
+	 */
 	private Component createButtonPanel() {
 		Box panel = new Box(BoxLayout.X_AXIS);
 		panel.setPreferredSize(new Dimension(Short.MAX_VALUE, 0));
@@ -96,30 +142,46 @@ public class SimpleTextEditDialog extends JDialog {
 		return panel;
 	}
 
+	/** The resulting text. */
 	private String resultingText;
 
+	/**
+	 * Gets the resulting text.
+	 *
+	 * @return the resulting text
+	 */
 	public String getResultingText() {
 		return this.resultingText;
 	}
 
+	/**
+	 * The Class OkAction.
+	 */
 	private class OkAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			resultingText = textArea.getText();
 			SimpleTextEditDialog.this.dispose();
 		}
 	}
 
+	/**
+	 * The Class CancelAction.
+	 */
 	private class CancelAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			resultingText = null;
 			SimpleTextEditDialog.this.dispose();

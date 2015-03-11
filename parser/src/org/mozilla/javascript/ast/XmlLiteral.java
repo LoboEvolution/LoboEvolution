@@ -11,34 +11,52 @@ import java.util.List;
 
 import org.mozilla.javascript.Token;
 
+
 /**
  * AST node for an E4X (Ecma-357) embedded XML literal.  Node type is
  * {@link Token#XML}.  The parser generates a simple list of strings and
  * expressions.  In the future we may parse the XML and produce a richer set of
  * nodes, but for now it's just a set of expressions evaluated to produce a
- * string to pass to the {@code XML} constructor function.<p>
+ * string to pass to the {@code XML} constructor function.
  */
 public class XmlLiteral extends AstNode {
 
+    /** The fragments. */
     private List<XmlFragment> fragments = new ArrayList<XmlFragment>();
 
     {
         type = Token.XML;
     }
 
+    /**
+     * Instantiates a new xml literal.
+     */
     public XmlLiteral() {
     }
 
+    /**
+     * Instantiates a new xml literal.
+     *
+     * @param pos the pos
+     */
     public XmlLiteral(int pos) {
         super(pos);
     }
 
+    /**
+     * Instantiates a new xml literal.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public XmlLiteral(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns fragment list - a list of expression nodes.
+     *
+     * @return the fragments
      */
     public List<XmlFragment> getFragments() {
         return fragments;
@@ -47,8 +65,8 @@ public class XmlLiteral extends AstNode {
     /**
      * Sets fragment list, removing any existing fragments first.
      * Sets the parent pointer for each fragment in the list to this node.
+     *
      * @param fragments fragment list.  Replaces any existing fragments.
-     * @throws IllegalArgumentException} if {@code fragments} is {@code null}
      */
     public void setFragments(List<XmlFragment> fragments) {
         assertNotNull(fragments);
@@ -59,7 +77,8 @@ public class XmlLiteral extends AstNode {
 
     /**
      * Adds a fragment to the fragment list.  Sets its parent to this node.
-     * @throws IllegalArgumentException} if {@code fragment} is {@code null}
+     *
+     * @param fragment the fragment
      */
     public void addFragment(XmlFragment fragment) {
         assertNotNull(fragment);
@@ -67,6 +86,9 @@ public class XmlLiteral extends AstNode {
         fragment.setParent(this);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder(250);
@@ -78,6 +100,8 @@ public class XmlLiteral extends AstNode {
 
     /**
      * Visits this node, then visits each child fragment in lexical order.
+     *
+     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

@@ -32,13 +32,27 @@ import java.util.Enumeration;
 import org.lobobrowser.jweb.compilation.BuildResult;
 import org.lobobrowser.jweb.compilation.OutputFileInfo;
 
+
+/**
+ * The Class BuildResultClassLoader.
+ */
 public class BuildResultClassLoader extends SecureClassLoader {
 	// TODO: Check for sealing violations?
 	// private static final Logger logger =
 	// Logger.getLogger(BuildResultClassLoader.class.getName());
+	/** The build result. */
 	private final BuildResult buildResult;
+	
+	/** The code location. */
 	private final URL codeLocation;
 
+	/**
+	 * Instantiates a new builds the result class loader.
+	 *
+	 * @param parent the parent
+	 * @param codeLocation the code location
+	 * @param buildResult the build result
+	 */
 	public BuildResultClassLoader(ClassLoader parent, URL codeLocation,
 			BuildResult buildResult) {
 		super(parent);
@@ -46,6 +60,9 @@ public class BuildResultClassLoader extends SecureClassLoader {
 		this.codeLocation = codeLocation;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.ClassLoader#findClass(java.lang.String)
+	 */
 	@Override
 	protected Class<?> findClass(String className)
 			throws ClassNotFoundException {
@@ -60,17 +77,26 @@ public class BuildResultClassLoader extends SecureClassLoader {
 				.defineClass(className, buffer, 0, buffer.length, codeSource);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.ClassLoader#findResource(java.lang.String)
+	 */
 	@Override
 	protected URL findResource(String resourceName) {
 		// No resources in build result
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.ClassLoader#findResources(java.lang.String)
+	 */
 	@Override
 	protected Enumeration<URL> findResources(String name) throws IOException {
 		return java.util.Collections.enumeration(Collections.<URL> emptyList());
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.ClassLoader#getResourceAsStream(java.lang.String)
+	 */
 	@Override
 	public InputStream getResourceAsStream(String resourceName) {
 		// No resources in build result

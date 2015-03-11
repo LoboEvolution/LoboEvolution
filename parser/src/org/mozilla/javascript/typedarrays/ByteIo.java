@@ -1,27 +1,68 @@
 package org.mozilla.javascript.typedarrays;
 
+
+/**
+ * The Class ByteIo.
+ */
 public class ByteIo
 {
+    
+    /**
+     * Read int8.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @return the object
+     */
     public static Object readInt8(byte[] buf, int offset)
     {
         return buf[offset];
     }
 
+    /**
+     * Write int8.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param val the val
+     */
     public static void writeInt8(byte[] buf, int offset, int val)
     {
         buf[offset] = (byte)val;
     }
 
+    /**
+     * Read uint8.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @return the object
+     */
     public static Object readUint8(byte[] buf, int offset)
     {
         return buf[offset] & 0xff;
     }
 
+    /**
+     * Write uint8.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param val the val
+     */
     public static void writeUint8(byte[] buf, int offset, int val)
     {
         buf[offset] = (byte)(val & 0xff);
     }
 
+    /**
+     * Do read int16.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param littleEndian the little endian
+     * @return the short
+     */
     private static short doReadInt16(byte[] buf, int offset, boolean littleEndian)
     {
         // Need to coalesce to short here so that we stay in range
@@ -35,6 +76,14 @@ public class ByteIo
                     (buf[offset + 1] & 0xff));
     }
 
+    /**
+     * Do write int16.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param val the val
+     * @param littleEndian the little endian
+     */
     private static void doWriteInt16(byte[] buf, int offset, int val, boolean littleEndian)
     {
         if (littleEndian) {
@@ -46,26 +95,66 @@ public class ByteIo
         }
     }
 
+    /**
+     * Read int16.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param littleEndian the little endian
+     * @return the object
+     */
     public static Object readInt16(byte[] buf, int offset, boolean littleEndian)
     {
         return doReadInt16(buf, offset, littleEndian);
     }
 
+    /**
+     * Write int16.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param val the val
+     * @param littleEndian the little endian
+     */
     public static void writeInt16(byte[] buf, int offset, int val, boolean littleEndian)
     {
         doWriteInt16(buf, offset, val, littleEndian);
     }
 
+    /**
+     * Read uint16.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param littleEndian the little endian
+     * @return the object
+     */
     public static Object readUint16(byte[] buf, int offset, boolean littleEndian)
     {
         return doReadInt16(buf, offset, littleEndian) & 0xffff;
     }
 
+    /**
+     * Write uint16.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param val the val
+     * @param littleEndian the little endian
+     */
     public static void writeUint16(byte[] buf, int offset, int val, boolean littleEndian)
     {
         doWriteInt16(buf, offset, val & 0xffff, littleEndian);
     }
 
+    /**
+     * Read int32.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param littleEndian the little endian
+     * @return the object
+     */
     public static Object readInt32(byte[] buf, int offset, boolean littleEndian)
     {
         if (littleEndian) {
@@ -82,6 +171,14 @@ public class ByteIo
             (buf[offset + 3]  & 0xff);
     }
 
+    /**
+     * Write int32.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param val the val
+     * @param littleEndian the little endian
+     */
     public static void writeInt32(byte[] buf, int offset, int val, boolean littleEndian)
     {
         if (littleEndian) {
@@ -97,6 +194,14 @@ public class ByteIo
         }
     }
 
+    /**
+     * Read uint32 primitive.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param littleEndian the little endian
+     * @return the long
+     */
     public static long readUint32Primitive(byte[] buf, int offset, boolean littleEndian)
     {
         if (littleEndian) {
@@ -115,6 +220,14 @@ public class ByteIo
              0xffffffffL;
     }
 
+    /**
+     * Write uint32.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param val the val
+     * @param littleEndian the little endian
+     */
     public static void writeUint32(byte[] buf, int offset, long val, boolean littleEndian)
     {
         if (littleEndian) {
@@ -130,11 +243,27 @@ public class ByteIo
         }
     }
 
+    /**
+     * Read uint32.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param littleEndian the little endian
+     * @return the object
+     */
     public static Object readUint32(byte[] buf, int offset, boolean littleEndian)
     {
         return readUint32Primitive(buf, offset, littleEndian);
     }
 
+    /**
+     * Read uint64 primitive.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param littleEndian the little endian
+     * @return the long
+     */
     public static long readUint64Primitive(byte[] buf, int offset, boolean littleEndian)
     {
         if (littleEndian) {
@@ -159,6 +288,14 @@ public class ByteIo
              ((buf[offset + 7] & 0xffL) << 0L));
     }
 
+    /**
+     * Write uint64.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param val the val
+     * @param littleEndian the little endian
+     */
     public static void writeUint64(byte[] buf, int offset, long val, boolean littleEndian)
     {
         if (littleEndian) {
@@ -182,24 +319,56 @@ public class ByteIo
         }
     }
 
+    /**
+     * Read float32.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param littleEndian the little endian
+     * @return the object
+     */
     public static Object readFloat32(byte[] buf, int offset, boolean littleEndian)
     {
         long base = readUint32Primitive(buf, offset, littleEndian);
         return Float.intBitsToFloat((int)base);
     }
 
+    /**
+     * Write float32.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param val the val
+     * @param littleEndian the little endian
+     */
     public static void writeFloat32(byte[] buf, int offset, double val, boolean littleEndian)
     {
         long base = Float.floatToIntBits((float)val);
         writeUint32(buf, offset, base, littleEndian);
     }
 
+    /**
+     * Read float64.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param littleEndian the little endian
+     * @return the object
+     */
     public static Object readFloat64(byte[] buf, int offset, boolean littleEndian)
     {
         long base = readUint64Primitive(buf, offset, littleEndian);
         return Double.longBitsToDouble(base);
     }
 
+    /**
+     * Write float64.
+     *
+     * @param buf the buf
+     * @param offset the offset
+     * @param val the val
+     * @param littleEndian the little endian
+     */
     public static void writeFloat64(byte[] buf, int offset, double val, boolean littleEndian)
     {
         long base = Double.doubleToLongBits(val);

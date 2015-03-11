@@ -8,6 +8,7 @@ package org.mozilla.javascript.arrays;
 
 import java.nio.ByteBuffer;
 
+
 /**
  * An implementation of the external array using an array of bytes. From a JavaScript perspective,
  * only "number" types may be set in the array. Valid values are between -128 and 127, inclusive.
@@ -18,27 +19,49 @@ import java.nio.ByteBuffer;
 public final class ExternalByteArray
     extends ExternalArray
 {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 5377484970217959212L;
 
+    /** The array. */
     private final ByteBuffer array;
 
+    /**
+     * Instantiates a new external byte array.
+     *
+     * @param array the array
+     */
     public ExternalByteArray(ByteBuffer array) {
         this.array = array;
     }
 
+    /**
+     * Gets the array.
+     *
+     * @return the array
+     */
     public ByteBuffer getArray() {
         return array;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#getElement(int)
+     */
     protected Object getElement(int index) {
         return array.get(array.position() + index);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#putElement(int, java.lang.Object)
+     */
     protected void putElement(int index, Object value) {
         Number num = (Number)value;
         array.put(array.position() + index, num.byteValue());
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.arrays.ExternalArray#getLength()
+     */
     public int getLength() {
         return array.remaining();
     }

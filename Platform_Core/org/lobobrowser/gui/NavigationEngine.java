@@ -29,18 +29,29 @@ import java.util.logging.Logger;
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.util.Urls;
 
+
 /**
  * This class stores navigation back/forward state for a frame.
  * <p>
  * Note: This class is not thread safe on its own.
  */
 public class NavigationEngine {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(NavigationEngine.class.getName());
+	
+	/** The history. */
 	private final ArrayList<NavigationEntry> history = new ArrayList<NavigationEntry>();
 
+	/** The current index. */
 	private int currentIndex = -1;
 
+	/**
+	 * Gets the current entry.
+	 *
+	 * @return the current entry
+	 */
 	public NavigationEntry getCurrentEntry() {
 		try {
 			return this.history.get(this.currentIndex);
@@ -49,6 +60,11 @@ public class NavigationEngine {
 		}
 	}
 
+	/**
+	 * Adds the navigation entry.
+	 *
+	 * @param entry the entry
+	 */
 	public void addNavigationEntry(NavigationEntry entry) {
 		if (logger.isLoggable(Level.INFO)) {
 			logger.info("addNavigationEntry(): entry=" + entry);
@@ -70,22 +86,48 @@ public class NavigationEngine {
 		}
 	}
 
+	/**
+	 * Checks for next.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasNext() {
 		return this.currentIndex + 1 < this.history.size();
 	}
 
+	/**
+	 * Checks for prev.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasPrev() {
 		return this.currentIndex > 0;
 	}
 
+	/**
+	 * Checks for next with get.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasNextWithGET() {
 		return this.hasNewEntryWithGET(+1);
 	}
 
+	/**
+	 * Checks for prev with get.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasPrevWithGET() {
 		return this.hasNewEntryWithGET(-1);
 	}
 
+	/**
+	 * Checks for new entry with get.
+	 *
+	 * @param offset the offset
+	 * @return true, if successful
+	 */
 	public boolean hasNewEntryWithGET(int offset) {
 		int nextIndex = this.currentIndex;
 		for (;;) {
@@ -103,14 +145,30 @@ public class NavigationEngine {
 		}
 	}
 
+	/**
+	 * Back.
+	 *
+	 * @return the navigation entry
+	 */
 	public NavigationEntry back() {
 		return this.move(-1);
 	}
 
+	/**
+	 * Forward.
+	 *
+	 * @return the navigation entry
+	 */
 	public NavigationEntry forward() {
 		return this.move(+1);
 	}
 
+	/**
+	 * Move.
+	 *
+	 * @param offset the offset
+	 * @return the navigation entry
+	 */
 	public NavigationEntry move(int offset) {
 		int nextIndex = this.currentIndex + offset;
 		if (nextIndex >= 0 && nextIndex < this.history.size()) {
@@ -121,6 +179,12 @@ public class NavigationEngine {
 		}
 	}
 
+	/**
+	 * Move to.
+	 *
+	 * @param entry the entry
+	 * @return true, if successful
+	 */
 	public boolean moveTo(NavigationEntry entry) {
 		int newIndex = this.history.indexOf(entry);
 		if (newIndex == -1) {
@@ -130,6 +194,11 @@ public class NavigationEngine {
 		return true;
 	}
 
+	/**
+	 * Gets the forward navigation entries.
+	 *
+	 * @return the forward navigation entries
+	 */
 	public NavigationEntry[] getForwardNavigationEntries() {
 		ArrayList<NavigationEntry> entries = new ArrayList<NavigationEntry>();
 		int index = this.currentIndex + 1;
@@ -143,6 +212,8 @@ public class NavigationEngine {
 
 	/**
 	 * Gets prior navigation entries, in descending order.
+	 *
+	 * @return the back navigation entries
 	 */
 	public NavigationEntry[] getBackNavigationEntries() {
 		ArrayList<NavigationEntry> entries = new ArrayList<NavigationEntry>();
@@ -154,6 +225,12 @@ public class NavigationEngine {
 		return entries.toArray(new NavigationEntry[0]);
 	}
 
+	/**
+	 * Find entry.
+	 *
+	 * @param absoluteURL the absolute url
+	 * @return the navigation entry
+	 */
 	public NavigationEntry findEntry(String absoluteURL) {
 		try {
 			URL targetURL = Urls.guessURL(absoluteURL);
@@ -172,6 +249,11 @@ public class NavigationEngine {
 		}
 	}
 
+	/**
+	 * Gets the length.
+	 *
+	 * @return the length
+	 */
 	public int getLength() {
 		return this.history.size();
 	}

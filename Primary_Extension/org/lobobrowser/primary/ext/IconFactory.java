@@ -31,20 +31,43 @@ import javax.swing.ImageIcon;
 
 import org.lobobrowser.util.io.IORoutines;
 
+
+/**
+ * A factory for creating Icon objects.
+ */
 public class IconFactory {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(IconFactory.class
 			.getName());
+	
+	/** The Constant instance. */
 	private static final IconFactory instance = new IconFactory();
 
+	/**
+	 * Instantiates a new icon factory.
+	 */
 	private IconFactory() {
 	}
 
+	/**
+	 * Gets the single instance of IconFactory.
+	 *
+	 * @return single instance of IconFactory
+	 */
 	public static IconFactory getInstance() {
 		return instance;
 	}
 
+	/** The icon map. */
 	private Map<String, ImageIcon> iconMap = new HashMap<String, ImageIcon>();
 
+	/**
+	 * Gets the icon.
+	 *
+	 * @param resourcePath the resource path
+	 * @return the icon
+	 */
 	public ImageIcon getIcon(String resourcePath) {
 		try {
 			synchronized (this) {

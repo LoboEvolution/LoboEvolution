@@ -20,17 +20,30 @@
  */
 package org.lobobrowser.html.style;
 
+
 /**
  * Additional state that may be set during rendering to override state
  * determined from elements.
  */
 public class RenderThreadState {
+	
+	/** The Constant stateTL. */
 	private static final ThreadLocal<RenderThreadState> stateTL = new ThreadLocal<RenderThreadState>();
+	
+	/** The override no wrap. */
 	public boolean overrideNoWrap;
 
+	/**
+	 * Instantiates a new render thread state.
+	 */
 	private RenderThreadState() {
 	}
 
+	/**
+	 * Gets the state.
+	 *
+	 * @return the state
+	 */
 	public static RenderThreadState getState() {
 		RenderThreadState ts = (RenderThreadState) stateTL.get();
 		if (ts == null) {

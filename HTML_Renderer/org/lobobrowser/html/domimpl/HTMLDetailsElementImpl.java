@@ -23,20 +23,35 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLDetailsElement;
 
+
+/**
+ * The Class HTMLDetailsElementImpl.
+ */
 public class HTMLDetailsElementImpl extends HTMLElementImpl implements
 		HTMLDetailsElement {
 
+	/**
+	 * Instantiates a new HTML details element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLDetailsElementImpl(String name) {
 		super(name);
 		// TODO Auto-generated constructor stub
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDetailsElement#getOpen()
+	 */
 	@Override
 	public boolean getOpen() {
 		String open = this.getAttribute(HtmlAttributeProperties.OPEN);
 		return HtmlAttributeProperties.OPEN.equalsIgnoreCase(open);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLDetailsElement#setOpen(boolean)
+	 */
 	@Override
 	public void setOpen(boolean open) {
 		this.setAttribute(HtmlAttributeProperties.OPEN, open ? HtmlAttributeProperties.OPEN : null);

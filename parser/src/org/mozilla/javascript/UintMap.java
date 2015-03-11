@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+
 /**
  * Map to associate non-negative integers to objects or integers.
  * The map does not synchronize any of its operation, so either use
@@ -23,15 +24,25 @@ import java.io.Serializable;
 
 public class UintMap implements Serializable
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 4242698212885848444L;
 
 // Map implementation via hashtable,
 // follows "The Art of Computer Programming" by Donald E. Knuth
 
-    public UintMap() {
+    /**
+ * Instantiates a new uint map.
+ */
+public UintMap() {
         this(4);
     }
 
+    /**
+     * Instantiates a new uint map.
+     *
+     * @param initialCapacity the initial capacity
+     */
     public UintMap(int initialCapacity) {
         if (initialCapacity < 0) Kit.codeBug();
         // Table grow when number of stored keys >= 3/4 of max capacity
@@ -42,14 +53,30 @@ public class UintMap implements Serializable
         if (check && power < 2) Kit.codeBug();
     }
 
+    /**
+     * Checks if is empty.
+     *
+     * @return true, if is empty
+     */
     public boolean isEmpty() {
         return keyCount == 0;
     }
 
+    /**
+     * Size.
+     *
+     * @return the int
+     */
     public int size() {
         return keyCount;
     }
 
+    /**
+     * Checks for.
+     *
+     * @param key the key
+     * @return true, if successful
+     */
     public boolean has(int key) {
         if (key < 0) Kit.codeBug();
         return 0 <= findIndex(key);
@@ -57,6 +84,8 @@ public class UintMap implements Serializable
 
     /**
      * Get object value assigned with key.
+     *
+     * @param key the key
      * @return key object value or null if key is absent
      */
     public Object getObject(int key) {
@@ -72,6 +101,9 @@ public class UintMap implements Serializable
 
     /**
      * Get integer value assigned with key.
+     *
+     * @param key the key
+     * @param defaultValue the default value
      * @return key integer value or defaultValue if key is absent
      */
     public int getInt(int key, int defaultValue) {
@@ -88,9 +120,10 @@ public class UintMap implements Serializable
 
     /**
      * Get integer value assigned with key.
+     *
+     * @param key the key
      * @return key integer value or defaultValue if key does not exist or does
      * not have int value
-     * @throws RuntimeException if key does not exist
      */
     public int getExistingInt(int key) {
         if (key < 0) Kit.codeBug();
@@ -109,6 +142,9 @@ public class UintMap implements Serializable
     /**
      * Set object value of the key.
      * If key does not exist, also set its int value to 0.
+     *
+     * @param key the key
+     * @param value the value
      */
     public void put(int key, Object value) {
         if (key < 0) Kit.codeBug();
@@ -122,6 +158,9 @@ public class UintMap implements Serializable
     /**
      * Set int value of the key.
      * If key does not exist, also set its object value to null.
+     *
+     * @param key the key
+     * @param value the value
      */
     public void put(int key, int value) {
         if (key < 0) Kit.codeBug();
@@ -139,6 +178,11 @@ public class UintMap implements Serializable
         keys[ivaluesShift + index] = value;
     }
 
+    /**
+     * Removes the.
+     *
+     * @param key the key
+     */
     public void remove(int key) {
         if (key < 0) Kit.codeBug();
         int index = findIndex(key);
@@ -152,6 +196,9 @@ public class UintMap implements Serializable
         }
     }
 
+    /**
+     * Clear.
+     */
     public void clear() {
         int N = 1 << power;
         if (keys != null) {
@@ -169,7 +216,11 @@ public class UintMap implements Serializable
         occupiedCount = 0;
     }
 
-    /** Return array of present keys */
+    /**
+     *  Return array of present keys.
+     *
+     * @return the keys
+     */
     public int[] getKeys() {
         int[] keys = this.keys;
         int n = keyCount;
@@ -183,6 +234,14 @@ public class UintMap implements Serializable
         return result;
     }
 
+    /**
+     * Table lookup step.
+     *
+     * @param fraction the fraction
+     * @param mask the mask
+     * @param power the power
+     * @return the int
+     */
     private static int tableLookupStep(int fraction, int mask, int power) {
         int shift = 32 - 2 * power;
         if (shift >= 0) {
@@ -193,6 +252,12 @@ public class UintMap implements Serializable
         }
     }
 
+    /**
+     * Find index.
+     *
+     * @param key the key
+     * @return the int
+     */
     private int findIndex(int key) {
         int[] keys = this.keys;
         if (keys != null) {
@@ -221,7 +286,13 @@ public class UintMap implements Serializable
 
 // Insert key that is not present to table without deleted entries
 // and enough free space
-    private int insertNewKey(int key) {
+    /**
+ * Insert new key.
+ *
+ * @param key the key
+ * @return the int
+ */
+private int insertNewKey(int key) {
         if (check && occupiedCount != keyCount) Kit.codeBug();
         if (check && keyCount == 1 << power) Kit.codeBug();
         int[] keys = this.keys;
@@ -243,6 +314,11 @@ public class UintMap implements Serializable
         return index;
     }
 
+    /**
+     * Rehash table.
+     *
+     * @param ensureIntSpace the ensure int space
+     */
     private void rehashTable(boolean ensureIntSpace) {
         if (keys != null) {
             // Check if removing deleted entries would free enough space
@@ -286,7 +362,14 @@ public class UintMap implements Serializable
     }
 
 // Ensure key index creating one if necessary
-    private int ensureIndex(int key, boolean intType) {
+    /**
+ * Ensure index.
+ *
+ * @param key the key
+ * @param intType the int type
+ * @return the int
+ */
+private int ensureIndex(int key, boolean intType) {
         int index = -1;
         int firstDeleted = -1;
         int[] keys = this.keys;
@@ -335,6 +418,12 @@ public class UintMap implements Serializable
         return index;
     }
 
+    /**
+     * Write object.
+     *
+     * @param out the out
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private void writeObject(ObjectOutputStream out)
         throws IOException
     {
@@ -363,6 +452,13 @@ public class UintMap implements Serializable
         }
     }
 
+    /**
+     * Read object.
+     *
+     * @param in the in
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws ClassNotFoundException the class not found exception
+     */
     private void readObject(ObjectInputStream in)
         throws IOException, ClassNotFoundException
     {
@@ -403,9 +499,13 @@ public class UintMap implements Serializable
 
 // A == golden_ratio * (1 << 32) = ((sqrt(5) - 1) / 2) * (1 << 32)
 // See Knuth etc.
-    private static final int A = 0x9e3779b9;
+    /** The Constant A. */
+private static final int A = 0x9e3779b9;
 
+    /** The Constant EMPTY. */
     private static final int EMPTY = -1;
+    
+    /** The Constant DELETED. */
     private static final int DELETED = -2;
 
 // Structure of kyes and values arrays (N == 1 << power):
@@ -413,19 +513,29 @@ public class UintMap implements Serializable
 // values[0 <= i < N]: value of key at keys[i]
 // keys[N <= i < 2N]: int values of keys at keys[i - N]
 
-    private transient int[] keys;
+    /** The keys. */
+private transient int[] keys;
+    
+    /** The values. */
     private transient Object[] values;
 
+    /** The power. */
     private int power;
+    
+    /** The key count. */
     private int keyCount;
+    
+    /** The occupied count. */
     private transient int occupiedCount; // == keyCount + deleted_count
 
     // If ivaluesShift != 0, keys[ivaluesShift + index] contains integer
     // values associated with keys
+    /** The ivalues shift. */
     private transient int ivaluesShift;
 
 // If true, enables consitency checks
-    private static final boolean check = false;
+    /** The Constant check. */
+private static final boolean check = false;
 
 /* TEST START
 

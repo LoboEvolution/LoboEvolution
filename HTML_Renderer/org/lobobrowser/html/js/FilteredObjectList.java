@@ -29,14 +29,27 @@ import java.util.Iterator;
 import org.lobobrowser.html.domfilter.ObjectFilter;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 
+
+/**
+ * The Class FilteredObjectList.
+ */
 public class FilteredObjectList extends AbstractScriptableDelegate {
+	
+	/** The source node list. */
 	private final Collection sourceNodeList;
+	
+	/** The filter. */
 	private final ObjectFilter filter;
+	
+	/** The lock. */
 	private final Object lock;
 
 	/**
-	 * @param filter
-	 * @param list
+	 * Instantiates a new filtered object list.
+	 *
+	 * @param filter the filter
+	 * @param list the list
+	 * @param lock the lock
 	 */
 	public FilteredObjectList(ObjectFilter filter, Collection list, Object lock) {
 		super();
@@ -45,6 +58,12 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 		this.lock = lock;
 	}
 
+	/**
+	 * Item.
+	 *
+	 * @param index the index
+	 * @return the object
+	 */
 	public Object item(int index) {
 		synchronized (this.lock) {
 			int count = 0;
@@ -62,6 +81,11 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 		}
 	}
 
+	/**
+	 * Gets the length.
+	 *
+	 * @return the length
+	 */
 	public int getLength() {
 		synchronized (this.lock) {
 			int count = 0;

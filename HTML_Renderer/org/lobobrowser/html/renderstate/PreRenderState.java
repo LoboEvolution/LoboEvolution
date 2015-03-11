@@ -23,11 +23,25 @@ package org.lobobrowser.html.renderstate;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 
+
+/**
+ * The Class PreRenderState.
+ */
 public class PreRenderState extends BlockRenderState {
+	
+	/**
+	 * Instantiates a new pre render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param element the element
+	 */
 	public PreRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getWhiteSpace()
+	 */
 	public int getWhiteSpace() {
 		Integer ws = this.iWhiteSpace;
 		if (ws != null) {

@@ -11,16 +11,17 @@
  */
 package org.w3c.css.sac;
 
+
 /**
  * Basic interface for CSS error handlers.
- *
+ * 
  * <p>
  * If a CSS application needs to implement customized error handling, it must
  * implement this interface and then register an instance with the CSS parser
  * using the parser's setErrorHandler method. The parser will then report all
  * errors and warnings through this interface.
  * </p>
- *
+ * 
  * <p>
  * The parser shall use this interface instead of throwing an exception: it is
  * up to the application whether to throw an exception for different types of
@@ -29,7 +30,7 @@ package org.w3c.css.sac;
  * other words, a CSS driver class could catch an exception and report a
  * fatalError).
  * </p>
- *
+ * 
  * <p>
  * The HandlerBase class provides a default implementation of this interface,
  * ignoring warnings and recoverable errors and throwing a SAXParseException for
@@ -37,44 +38,42 @@ package org.w3c.css.sac;
  * the complete interface itself.
  * </p>
  *
- * @version $Revision: 477010 $
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  */
 public interface ErrorHandler {
 
 	/**
 	 * Receive notification of a warning.
-	 *
+	 * 
 	 * <p>
 	 * CSS parsers will use this method to report conditions that are not errors
 	 * or fatal errors as defined by the XML 1.0 recommendation. The default
 	 * behaviour is to take no action.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * The CSS parser must continue to provide normal parsing events after
 	 * invoking this method: it should still be possible for the application to
 	 * process the document through to the end.
 	 * </p>
 	 *
-	 * @param exception
-	 *            The warning information encapsulated in a CSS parse exception.
-	 * @exception CSSException
-	 *                Any CSS exception, possibly wrapping another exception.
+	 * @param exception            The warning information encapsulated in a CSS parse exception.
 	 * @see CSSParseException
+	 * @exception CSSException                Any CSS exception, possibly wrapping another exception.
 	 */
 	public void warning(CSSParseException exception) throws CSSException;
 
 	/**
 	 * Receive notification of a recoverable error.
-	 *
+	 * 
 	 * <p>
 	 * This corresponds to the definition of "error" in section 1.2 of the W3C
 	 * XML 1.0 Recommendation. For example, a validating parser would use this
 	 * callback to report the violation of a validity constraint. The default
 	 * behaviour is to take no action.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * The CSS parser must continue to provide normal parsing events after
 	 * invoking this method: it should still be possible for the application to
@@ -83,23 +82,21 @@ public interface ErrorHandler {
 	 * recommendation does not require it to do so.
 	 * </p>
 	 *
-	 * @param exception
-	 *            The error information encapsulated in a CSS parse exception.
-	 * @exception CSSException
-	 *                Any CSS exception, possibly wrapping another exception.
+	 * @param exception            The error information encapsulated in a CSS parse exception.
 	 * @see CSSParseException
+	 * @exception CSSException                Any CSS exception, possibly wrapping another exception.
 	 */
 	public void error(CSSParseException exception) throws CSSException;
 
 	/**
 	 * Receive notification of a non-recoverable error.
-	 *
+	 * 
 	 * <p>
 	 * This corresponds to the definition of "fatal error" in section 1.2 of the
 	 * W3C XML 1.0 Recommendation. For example, a parser would use this callback
 	 * to report the violation of a well-formedness constraint.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * The application must assume that the document is unusable after the
 	 * parser has invoked this method, and should continue (if at all) only for
@@ -108,11 +105,9 @@ public interface ErrorHandler {
 	 * invoked.
 	 * </p>
 	 *
-	 * @param exception
-	 *            The error information encapsulated in a CSS parse exception.
-	 * @exception CSSException
-	 *                Any CSS exception, possibly wrapping another exception.
+	 * @param exception            The error information encapsulated in a CSS parse exception.
 	 * @see CSSParseException
+	 * @exception CSSException                Any CSS exception, possibly wrapping another exception.
 	 */
 	public void fatalError(CSSParseException exception) throws CSSException;
 

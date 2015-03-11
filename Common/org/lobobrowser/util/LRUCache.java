@@ -29,28 +29,50 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+
 /**
  * A cache with least-recently-used policy. Note that this class is not thread
  * safe by itself.
  */
 public class LRUCache implements java.io.Serializable {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 940427225784212823L;
+	
+	/** The approx max size. */
 	private int approxMaxSize;
 
+	/** The cache map. */
 	private final Map<Object, OrderedValue> cacheMap = new HashMap<Object, OrderedValue>();
+	
+	/** The removal event. */
 	private volatile transient EventDispatch2 removalEvent;
 
 	/**
 	 * Ascending timestamp order. First is least recently used.
 	 */
 	private final TreeSet<OrderedValue> timedSet = new TreeSet<OrderedValue>();
+	
+	/** The current size. */
 	private int currentSize = 0;
 
+	/**
+	 * Instantiates a new LRU cache.
+	 *
+	 * @param approxMaxSize the approx max size
+	 */
 	public LRUCache(int approxMaxSize) {
 		this.approxMaxSize = approxMaxSize;
 		this.removalEvent = new RemovalDispatch();
 	}
 
+	/**
+	 * Read object.
+	 *
+	 * @param in the in
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException the class not found exception
+	 */
 	private void readObject(ObjectInputStream in)
 			throws IOException, ClassNotFoundException {
 		in.defaultReadObject();
@@ -58,14 +80,31 @@ public class LRUCache implements java.io.Serializable {
 		this.removalEvent = new RemovalDispatch();
 	}
 
+	/**
+	 * Gets the approx max size.
+	 *
+	 * @return the approx max size
+	 */
 	public int getApproxMaxSize() {
 		return approxMaxSize;
 	}
 
+	/**
+	 * Sets the approx max size.
+	 *
+	 * @param approxMaxSize the new approx max size
+	 */
 	public void setApproxMaxSize(int approxMaxSize) {
 		this.approxMaxSize = approxMaxSize;
 	}
 
+	/**
+	 * Put.
+	 *
+	 * @param key the key
+	 * @param value the value
+	 * @param approxSize the approx size
+	 */
 	public void put(Object key, Object value, int approxSize) {
 		if (approxSize > this.approxMaxSize) {
 			// Can't be inserted.
@@ -94,6 +133,9 @@ public class LRUCache implements java.io.Serializable {
 		}
 	}
 
+	/**
+	 * Removes the lru.
+	 */
 	private void removeLRU() {
 		OrderedValue ordVal = (OrderedValue) this.timedSet.first();
 		if (ordVal != null) {
@@ -111,6 +153,12 @@ public class LRUCache implements java.io.Serializable {
 		}
 	}
 
+	/**
+	 * Gets the.
+	 *
+	 * @param key the key
+	 * @return the object
+	 */
 	public Object get(Object key) {
 		OrderedValue ordVal = (OrderedValue) this.cacheMap.get(key);
 		if (ordVal != null) {
@@ -123,6 +171,12 @@ public class LRUCache implements java.io.Serializable {
 		}
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param key the key
+	 * @return the object
+	 */
 	public Object remove(Object key) {
 		OrderedValue ordVal = (OrderedValue) this.cacheMap.get(key);
 		if (ordVal != null) {
@@ -135,22 +189,47 @@ public class LRUCache implements java.io.Serializable {
 		}
 	}
 
+	/**
+	 * Adds the removal listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void addRemovalListener(RemovalListener listener) {
 		this.removalEvent.addListener(listener);
 	}
 
+	/**
+	 * Removes the removal listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void removeRemovalListener(RemovalListener listener) {
 		this.removalEvent.removeListener(listener);
 	}
 
+	/**
+	 * Gets the approx size.
+	 *
+	 * @return the approx size
+	 */
 	public int getApproxSize() {
 		return this.currentSize;
 	}
 
+	/**
+	 * Gets the num entries.
+	 *
+	 * @return the num entries
+	 */
 	public int getNumEntries() {
 		return this.cacheMap.size();
 	}
 
+	/**
+	 * Gets the entry info list.
+	 *
+	 * @return the entry info list
+	 */
 	public List<EntryInfo> getEntryInfoList() {
 		List<EntryInfo> list = new ArrayList<EntryInfo>();
 		Iterator<OrderedValue> i = this.cacheMap.values().iterator();
@@ -163,16 +242,32 @@ public class LRUCache implements java.io.Serializable {
 		return list;
 	}
 
+	/**
+	 * The Class EntryInfo.
+	 */
 	public static class EntryInfo {
+		
+		/** The value class. */
 		public final Class<?> valueClass;
+		
+		/** The approximate size. */
 		public final int approximateSize;
 
+		/**
+		 * Instantiates a new entry info.
+		 *
+		 * @param valueClass the value class
+		 * @param approximateSize the approximate size
+		 */
 		public EntryInfo(final Class<?> valueClass, final int approximateSize) {
 			super();
 			this.valueClass = valueClass;
 			this.approximateSize = approximateSize;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
 		public String toString() {
 			Class<?> vc = this.valueClass;
 			String vcName = vc == null ? "<none>" : vc.getName();

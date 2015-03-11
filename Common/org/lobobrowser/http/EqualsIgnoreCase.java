@@ -15,17 +15,24 @@ import javax.xml.xpath.XPathFunctionException;
 
 import org.w3c.dom.NodeList;
 
+
 /**
+ * The Class EqualsIgnoreCase.
  *
  * @author richardallenbair
  */
 public class EqualsIgnoreCase extends AbstractFunction {
     
-    /** Creates a new instance of EndsWith */
+    /**
+     *  Creates a new instance of EndsWith.
+     */
     public EqualsIgnoreCase() {
         super("equals-ignore-case", 2);
     }
 
+    /* (non-Javadoc)
+     * @see javax.xml.xpath.XPathFunction#evaluate(java.util.List)
+     */
     public Object evaluate(List args) throws XPathFunctionException {
         NodeList nodes = (NodeList)args.get(0);
         String s1 = nodes.getLength() > 0 ? nodes.item(0).getLocalName() : "";

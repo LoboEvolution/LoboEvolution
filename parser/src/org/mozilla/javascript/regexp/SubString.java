@@ -6,15 +6,24 @@
 
 package org.mozilla.javascript.regexp;
 
+
 /**
  * A utility class for lazily instantiated substrings.
  */
 public class SubString {
 
+    /**
+     * Instantiates a new sub string.
+     */
     public SubString()
     {
     }
 
+    /**
+     * Instantiates a new sub string.
+     *
+     * @param str the str
+     */
     public SubString(String str)
     {
         this.str = str;
@@ -22,6 +31,13 @@ public class SubString {
         length = str.length();
     }
 
+    /**
+     * Instantiates a new sub string.
+     *
+     * @param source the source
+     * @param start the start
+     * @param len the len
+     */
     public SubString(String source, int start, int len)
     {
         str = source;
@@ -29,6 +45,9 @@ public class SubString {
         length = len;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return str == null
@@ -36,10 +55,16 @@ public class SubString {
                : str.substring(index, index + length);
     }
 
+    /** The Constant emptySubString. */
     public static final SubString emptySubString = new SubString();
 
+    /** The str. */
     String str;
+    
+    /** The index. */
     int    index;
+    
+    /** The length. */
     int    length;
 }
 

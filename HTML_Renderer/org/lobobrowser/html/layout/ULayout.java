@@ -23,7 +23,15 @@ package org.lobobrowser.html.layout;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.RBlockViewport;
 
+
+/**
+ * The Class ULayout.
+ */
 public class ULayout extends CommonLayout {
+	
+	/**
+	 * Instantiates a new u layout.
+	 */
 	public ULayout() {
 		super(DISPLAY_INLINE);
 	}

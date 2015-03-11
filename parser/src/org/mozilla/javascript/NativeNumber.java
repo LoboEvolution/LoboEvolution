@@ -6,6 +6,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * This class implements the Number native object.
  *
@@ -15,29 +16,50 @@ package org.mozilla.javascript;
  */
 final class NativeNumber extends IdScriptableObject
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 3504516769741512101L;
 
+    /** The Constant NUMBER_TAG. */
     private static final Object NUMBER_TAG = "Number";
 
+    /** The Constant MAX_PRECISION. */
     private static final int MAX_PRECISION = 100;
 
+    /**
+     * Inits the.
+     *
+     * @param scope the scope
+     * @param sealed the sealed
+     */
     static void init(Scriptable scope, boolean sealed)
     {
         NativeNumber obj = new NativeNumber(0.0);
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
+    /**
+     * Instantiates a new native number.
+     *
+     * @param number the number
+     */
     NativeNumber(double number)
     {
         doubleValue = number;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ScriptableObject#getClassName()
+     */
     @Override
     public String getClassName()
     {
         return "Number";
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#fillConstructorProperties(org.mozilla.javascript.IdFunctionObject)
+     */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -62,6 +84,9 @@ final class NativeNumber extends IdScriptableObject
         super.fillConstructorProperties(ctor);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
+     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -81,6 +106,9 @@ final class NativeNumber extends IdScriptableObject
         initPrototypeMethod(NUMBER_TAG, id, s, arity);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -170,11 +198,25 @@ final class NativeNumber extends IdScriptableObject
         }
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return ScriptRuntime.numberToString(doubleValue, 10);
     }
 
+    /**
+     * Num_to.
+     *
+     * @param val the val
+     * @param args the args
+     * @param zeroArgMode the zero arg mode
+     * @param oneArgMode the one arg mode
+     * @param precisionMin the precision min
+     * @param precisionOffset the precision offset
+     * @return the string
+     */
     private static String num_to(double val,
                                  Object[] args,
                                  int zeroArgMode, int oneArgMode,
@@ -202,7 +244,10 @@ final class NativeNumber extends IdScriptableObject
 
 // #string_id_map#
 
-    @Override
+    /* (non-Javadoc)
+ * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
+ */
+@Override
     protected int findPrototypeId(String s)
     {
         int id;
@@ -231,6 +276,7 @@ final class NativeNumber extends IdScriptableObject
         return id;
     }
 
+    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         Id_constructor           = 1,
         Id_toString              = 2,
@@ -244,5 +290,6 @@ final class NativeNumber extends IdScriptableObject
 
 // #/string_id_map#
 
-    private double doubleValue;
+    /** The double value. */
+private double doubleValue;
 }

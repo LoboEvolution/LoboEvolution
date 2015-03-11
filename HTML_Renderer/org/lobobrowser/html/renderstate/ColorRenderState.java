@@ -25,14 +25,29 @@ import java.awt.Color;
 
 import org.lobobrowser.html.style.RenderStateDelegator;
 
+
+/**
+ * The Class ColorRenderState.
+ */
 public class ColorRenderState extends RenderStateDelegator {
+	
+	/** The color. */
 	private final Color color;
 
+	/**
+	 * Instantiates a new color render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param color the color
+	 */
 	public ColorRenderState(RenderState prevRenderState, Color color) {
 		super(prevRenderState);
 		this.color = color;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.style.RenderStateDelegator#getColor()
+	 */
 	public Color getColor() {
 		return this.color;
 	}

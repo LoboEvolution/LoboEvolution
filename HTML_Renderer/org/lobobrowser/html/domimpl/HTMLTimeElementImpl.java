@@ -23,35 +23,59 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLTimeElement;
 
+
+/**
+ * The Class HTMLTimeElementImpl.
+ */
 public class HTMLTimeElementImpl extends HTMLElementImpl implements
 		HTMLTimeElement {
 
+	/**
+	 * Instantiates a new HTML time element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLTimeElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTimeElement#getDateTime()
+	 */
 	@Override
 	public String getDateTime() {
 		return this.getAttribute(HtmlAttributeProperties.DATETIME);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTimeElement#setDateTime(java.lang.String)
+	 */
 	@Override
 	public void setDateTime(String dateTime) {
 		this.setAttribute(HtmlAttributeProperties.DATETIME, dateTime);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTimeElement#getPubDate()
+	 */
 	@Override
 	public boolean getPubDate() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTimeElement#setPubDate(boolean)
+	 */
 	@Override
 	public void setPubDate(boolean pubDate) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLTimeElement#getValueAsDate()
+	 */
 	@Override
 	public long getValueAsDate() {
 		// TODO Auto-generated method stub

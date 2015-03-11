@@ -35,6 +35,7 @@ import org.lobobrowser.ua.NetworkRequest;
 import org.lobobrowser.ua.ProgressType;
 import org.lobobrowser.ua.UserAgent;
 
+
 /**
  * The context in which a clientlet processes a web or file response.
  * 
@@ -62,27 +63,43 @@ public interface ClientletContext {
 
 	/**
 	 * Gets the clientlet request.
+	 *
+	 * @return the request
 	 */
 	public ClientletRequest getRequest();
 
 	/**
 	 * Gets the clientlet response.
+	 *
+	 * @return the response
 	 */
 	public ClientletResponse getResponse();
 
 	/**
 	 * Gets a UserAgent instance with information about the current user agent.
+	 *
+	 * @return the user agent
 	 */
 	public UserAgent getUserAgent();
 
 	/**
 	 * Undocumented.
+	 *
+	 * @param contentType the content type
+	 * @param content the content
+	 * @return the org.lobobrowser.clientlet. content buffer
 	 */
 	public org.lobobrowser.clientlet.ContentBuffer createContentBuffer(
 			String contentType, byte[] content);
 
 	/**
 	 * Undocumented.
+	 *
+	 * @param contentType the content type
+	 * @param content the content
+	 * @param encoding the encoding
+	 * @return the org.lobobrowser.clientlet. content buffer
+	 * @throws UnsupportedEncodingException the unsupported encoding exception
 	 */
 	public org.lobobrowser.clientlet.ContentBuffer createContentBuffer(
 			String contentType, String content, String encoding)
@@ -91,7 +108,9 @@ public interface ClientletContext {
 	/**
 	 * Gets a managed store instance (a small file system restricted by a quota)
 	 * corresponding to the host of the clientlet response of this context.
-	 * 
+	 *
+	 * @return the managed store
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see #getManagedStore(String)
 	 */
 	public ManagedStore getManagedStore() throws IOException;
@@ -99,27 +118,29 @@ public interface ClientletContext {
 	/**
 	 * Gets a managed store instance (a small file system restricted by a quota)
 	 * for the host name provided.
-	 * 
-	 * @param hostName
-	 *            A host whose cookies the caller is allowed to access. For
+	 *
+	 * @param hostName            A host whose cookies the caller is allowed to access. For
 	 *            example, if the response host name is
 	 *            <code>test.acme.com</code>, then the <code>hostName</code>
 	 *            parameter can be <code>acme.com</code> but not
 	 *            <code>com</code>.
-	 * @throws  java.io.IOException
-	 *             If the caller doesn't have access to the managed store for
-	 *             the host given.
+	 * @return the managed store
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public ManagedStore getManagedStore(String hostName) throws IOException;
 
 	/**
 	 * Gets the frame interface associated with this context.
+	 *
+	 * @return the navigator frame
 	 */
 	public NavigatorFrame getNavigatorFrame();
 
 	/**
 	 * After processing a response a clientlet should invoke this method to set
 	 * displayable frame content.
+	 *
+	 * @param content the new resulting content
 	 */
 	public void setResultingContent(ComponentContent content);
 
@@ -127,21 +148,25 @@ public interface ClientletContext {
 	 * A simple alternative to {@link #setResultingContent(ComponentContent)}
 	 * provided for convenience. It does not set any properties such as title or
 	 * source code.
+	 *
+	 * @param content the new resulting content
 	 */
 	public void setResultingContent(Component content);
 
 	/**
 	 * Gets content previously set with {@link #setResultingContent(Component)}.
 	 * The return value may be <code>null</code>.
+	 *
+	 * @return the resulting content
 	 */
 	public ComponentContent getResultingContent();
 
 	/**
 	 * Navigates to the URI provided, which may be absolute or relative to the
 	 * response URL.
-	 * 
-	 * @param uri
-	 *            The target URI.
+	 *
+	 * @param uri            The target URI.
+	 * @throws MalformedURLException the malformed url exception
 	 * @see NavigatorFrame#navigate(String)
 	 */
 	public void navigate(String uri) throws MalformedURLException;
@@ -160,12 +185,16 @@ public interface ClientletContext {
 	/**
 	 * Gets window properties previously set with
 	 * {@link #overrideWindowProperties(java.util.Properties)}.
+	 *
+	 * @return the overridding window properties
 	 */
 	public java.util.Properties getOverriddingWindowProperties();
 
 	/**
 	 * Returns <code>true</code> if resulting content has already been set with
 	 * {@link #setResultingContent(ComponentContent)}.
+	 *
+	 * @return true, if is resulting content set
 	 */
 	public boolean isResultingContentSet();
 
@@ -213,7 +242,8 @@ public interface ClientletContext {
 
 	/**
 	 * Gets the progress event most recently set.
-	 * 
+	 *
+	 * @return the progress event
 	 * @see #setProgressEvent(ProgressType, int, int)
 	 * @see NavigatorFrame#setProgressEvent(NavigatorProgressEvent)
 	 */
@@ -222,6 +252,8 @@ public interface ClientletContext {
 	/**
 	 * Creates a {@link NetworkRequest} object that can be used to load data
 	 * over HTTP and other network protocols.
+	 *
+	 * @return the network request
 	 */
 	public NetworkRequest createNetworkRequest();
 
@@ -235,7 +267,8 @@ public interface ClientletContext {
 
 	/**
 	 * Creates a lose navigator frame that may be added to GUI components.
-	 * 
+	 *
+	 * @return the navigator frame
 	 * @see NavigatorFrame#getComponent()
 	 * @see NavigatorFrame#navigate(String)
 	 */

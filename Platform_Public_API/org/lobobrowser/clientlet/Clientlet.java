@@ -22,6 +22,7 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.clientlet;
 
+
 /**
  * A clientlet processes a URL response and creates content renderable by a user
  * agent.

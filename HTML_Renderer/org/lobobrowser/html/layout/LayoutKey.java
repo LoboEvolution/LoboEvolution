@@ -25,19 +25,59 @@ import java.awt.Font;
 import org.lobobrowser.html.renderer.FloatingBoundsSource;
 import org.lobobrowser.util.Objects;
 
+
+/**
+ * The Class LayoutKey.
+ */
 public class LayoutKey {
+	
+	/** The avail width. */
 	public final int availWidth;
+	
+	/** The avail height. */
 	public final int availHeight;
+	
+	/** The float bounds source. */
 	public final FloatingBoundsSource floatBoundsSource;
+	
+	/** The default overflow x. */
 	public final int defaultOverflowX;
+	
+	/** The default overflow y. */
 	public final int defaultOverflowY;
+	
+	/** The whitespace. */
 	public final int whitespace;
+	
+	/** The font. */
 	public final Font font;
+	
+	/** The expand width. */
 	public final boolean expandWidth;
+	
+	/** The expand height. */
 	public final boolean expandHeight;
+	
+	/** The use declared size. */
 	public final boolean useDeclaredSize;
+	
+	/** The override no wrap. */
 	public final boolean overrideNoWrap;
 
+	/**
+	 * Instantiates a new layout key.
+	 *
+	 * @param availWidth the avail width
+	 * @param availHeight the avail height
+	 * @param expandWidth the expand width
+	 * @param expandHeight the expand height
+	 * @param floatBoundsSource the float bounds source
+	 * @param defaultOverflowX the default overflow x
+	 * @param defaultOverflowY the default overflow y
+	 * @param whitespace the whitespace
+	 * @param font the font
+	 * @param overrideNoWrap the override no wrap
+	 */
 	public LayoutKey(int availWidth, int availHeight, boolean expandWidth,
 			boolean expandHeight, FloatingBoundsSource floatBoundsSource,
 			int defaultOverflowX, int defaultOverflowY, int whitespace,
@@ -56,6 +96,9 @@ public class LayoutKey {
 		this.overrideNoWrap = overrideNoWrap;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object obj) {
 		if (obj == this) {
 			return true;
@@ -78,6 +121,9 @@ public class LayoutKey {
 						this.floatBoundsSource);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	public int hashCode() {
 		Font font = this.font;
 		return (this.availWidth * 1000 + this.availHeight)

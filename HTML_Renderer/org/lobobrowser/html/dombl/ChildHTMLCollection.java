@@ -28,26 +28,43 @@ import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class ChildHTMLCollection.
+ */
 public class ChildHTMLCollection extends AbstractScriptableDelegate implements
 		HTMLCollection {
+	
+	/** The root node. */
 	private final DOMNodeImpl rootNode;
 
 	/**
-	 * @param node
+	 * Instantiates a new child html collection.
+	 *
+	 * @param node the node
 	 */
 	public ChildHTMLCollection(DOMNodeImpl node) {
 		super();
 		rootNode = node;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCollection#getLength()
+	 */
 	public int getLength() {
 		return this.rootNode.getChildCount();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCollection#item(int)
+	 */
 	public Node item(int index) {
 		return this.rootNode.getChildAtIndex(index);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCollection#namedItem(java.lang.String)
+	 */
 	public Node namedItem(String name) {
 		org.w3c.dom.Document doc = this.rootNode.getOwnerDocument();
 		if (doc == null) {
@@ -61,6 +78,12 @@ public class ChildHTMLCollection extends AbstractScriptableDelegate implements
 		return null;
 	}
 
+	/**
+	 * Index of.
+	 *
+	 * @param node the node
+	 * @return the int
+	 */
 	public int indexOf(Node node) {
 		return this.rootNode.getChildIndex(node);
 	}

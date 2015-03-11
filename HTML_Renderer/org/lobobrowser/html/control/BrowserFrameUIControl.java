@@ -17,38 +17,75 @@ import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.w3c.HTMLElement;
 
+
+/**
+ * The Class BrowserFrameUIControl.
+ */
 public class BrowserFrameUIControl implements UIControl {
 	// private final BrowserFrame browserFrame;
+	/** The component. */
 	private final Component component;
+	
+	/** The element. */
 	private final HTMLElement element;
+	
+	/** The browser frame. */
 	private final BrowserFrame browserFrame;
+	
+	/** The rui control. */
 	private RUIControl ruiControl;
 
+	/**
+	 * Instantiates a new browser frame ui control.
+	 *
+	 * @param element the element
+	 * @param browserFrame the browser frame
+	 */
 	public BrowserFrameUIControl(HTMLElement element, BrowserFrame browserFrame) {
 		this.component = browserFrame.getComponent();
 		this.browserFrame = browserFrame;
 		this.element = element;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.UIControl#getVAlign()
+	 */
 	public int getVAlign() {
 		return RElement.VALIGN_BASELINE;
 	}
 
+	/**
+	 * Gets the alignment y.
+	 *
+	 * @return the alignment y
+	 */
 	public float getAlignmentY() {
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.UIControl#getBackgroundColor()
+	 */
 	public Color getBackgroundColor() {
 		return this.component.getBackground();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.UIControl#getComponent()
+	 */
 	public Component getComponent() {
 		return this.component;
 	}
 
+	/** The avail width. */
 	private int availWidth;
+	
+	/** The avail height. */
 	private int availHeight;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.UIControl#reset(int, int)
+	 */
 	public void reset(int availWidth, int availHeight) {
 		this.availWidth = availWidth;
 		this.availHeight = availHeight;
@@ -136,6 +173,9 @@ public class BrowserFrameUIControl implements UIControl {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.UIControl#getPreferredSize()
+	 */
 	public Dimension getPreferredSize() {
 		int width = HtmlValues.getOldSyntaxPixelSize(
 				element.getAttribute(HtmlAttributeProperties.WIDTH), this.availWidth, 100);
@@ -144,25 +184,46 @@ public class BrowserFrameUIControl implements UIControl {
 		return new Dimension(width, height);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.UIControl#invalidate()
+	 */
 	public void invalidate() {
 		this.component.invalidate();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.UIControl#paint(java.awt.Graphics)
+	 */
 	public void paint(Graphics g) {
 		// We actually have to paint it.
 		this.component.paint(g);
 	}
 
+	/**
+	 * Paint selection.
+	 *
+	 * @param g the g
+	 * @param inSelection the in selection
+	 * @param startPoint the start point
+	 * @param endPoint the end point
+	 * @return true, if successful
+	 */
 	public boolean paintSelection(Graphics g, boolean inSelection,
 			RenderableSpot startPoint, RenderableSpot endPoint) {
 		// Selection does not cross in here?
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.UIControl#setBounds(int, int, int, int)
+	 */
 	public void setBounds(int x, int y, int width, int height) {
 		this.component.setBounds(x, y, width, height);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.UIControl#setRUIControl(org.lobobrowser.html.control.RUIControl)
+	 */
 	public void setRUIControl(RUIControl ruicontrol) {
 		this.ruiControl = ruicontrol;
 	}

@@ -24,12 +24,15 @@ package org.lobobrowser.ua;
 
 import java.net.URLConnection;
 
+
 /**
  * A connection pre- and post-processor.
  * 
  * @see NavigatorExtensionContext#addConnectionProcessor(ConnectionProcessor)
  */
 public interface ConnectionProcessor {
+	
+	/** The Constant EMPTY_ARRAY. */
 	public static final ConnectionProcessor[] EMPTY_ARRAY = new ConnectionProcessor[0];
 
 	/**

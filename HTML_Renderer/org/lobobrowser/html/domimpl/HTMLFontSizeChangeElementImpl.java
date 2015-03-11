@@ -26,21 +26,36 @@ import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
 
+
 /**
  * This element is used for SMALL and BIG.
  */
 public class HTMLFontSizeChangeElementImpl extends HTMLAbstractUIElement {
+	
+	/** The font change. */
 	private final int fontChange;
 
+	/**
+	 * Instantiates a new HTML font size change element impl.
+	 *
+	 * @param name the name
+	 * @param fontChange the font change
+	 */
 	public HTMLFontSizeChangeElementImpl(String name, int fontChange) {
 		super(name);
 		this.fontChange = fontChange;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return super.createRenderState(prevRenderState);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createDefaultStyleSheet()
+	 */
 	protected AbstractCSS2Properties createDefaultStyleSheet() {
 		ModelNode parentModelNode = this.getParentModelNode();
 		RenderState parentRS = parentModelNode == null ? null : parentModelNode

@@ -33,6 +33,7 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSPrimitiveValue;
 import org.w3c.dom.css.Rect;
 
+
 /**
  * Implementation of {@link Rect}.
  *
@@ -40,11 +41,19 @@ import org.w3c.dom.css.Rect;
  */
 public class RectImpl implements Rect, Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -7031248513917920621L;
 
+    /** The top_. */
     private CSSPrimitiveValue top_;
+    
+    /** The right_. */
     private CSSPrimitiveValue right_;
+    
+    /** The bottom_. */
     private CSSPrimitiveValue bottom_;
+    
+    /** The left_. */
     private CSSPrimitiveValue left_;
 
     /**
@@ -110,6 +119,8 @@ public class RectImpl implements Rect, Serializable {
 
     /**
      * Returns the top part.
+     *
+     * @return the top
      */
     public CSSPrimitiveValue getTop() {
         return top_;
@@ -125,6 +136,8 @@ public class RectImpl implements Rect, Serializable {
 
     /**
      * Returns the right part.
+     *
+     * @return the right
      */
     public CSSPrimitiveValue getRight() {
         return right_;
@@ -140,6 +153,8 @@ public class RectImpl implements Rect, Serializable {
 
     /**
      * Returns the bottom part.
+     *
+     * @return the bottom
      */
     public CSSPrimitiveValue getBottom() {
         return bottom_;
@@ -155,6 +170,8 @@ public class RectImpl implements Rect, Serializable {
 
     /**
      * Returns the left part.
+     *
+     * @return the left
      */
     public CSSPrimitiveValue getLeft() {
         return left_;

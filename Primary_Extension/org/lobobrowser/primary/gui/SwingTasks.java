@@ -31,9 +31,21 @@ import javax.swing.JComponent;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+
+/**
+ * The Class SwingTasks.
+ */
 public class SwingTasks {
+	
+	/** The Constant NESTED_ENABLING. */
 	private static final String NESTED_ENABLING = "$nested.enabling";
 
+	/**
+	 * Sets the nested enabled.
+	 *
+	 * @param component the component
+	 * @param enabled the enabled
+	 */
 	public static void setNestedEnabled(JComponent component, boolean enabled) {
 		Boolean nestedEnabling = (Boolean) component
 				.getClientProperty(NESTED_ENABLING);
@@ -46,6 +58,12 @@ public class SwingTasks {
 		}
 	}
 
+	/**
+	 * Sets the enabled recursive.
+	 *
+	 * @param component the component
+	 * @param enabled the enabled
+	 */
 	private static void setEnabledRecursive(JComponent component,
 			boolean enabled) {
 		component.setEnabled(enabled);
@@ -67,6 +85,11 @@ public class SwingTasks {
 		}
 	}
 
+	/**
+	 * Creates the vertical fill.
+	 *
+	 * @return the component
+	 */
 	public static Component createVerticalFill() {
 		Dimension min = new Dimension(0, 0);
 		Dimension pref = new Dimension(0, Short.MAX_VALUE);
@@ -74,6 +97,11 @@ public class SwingTasks {
 		return new Box.Filler(min, pref, max);
 	}
 
+	/**
+	 * Creates the horizontal fill.
+	 *
+	 * @return the component
+	 */
 	public static Component createHorizontalFill() {
 		Dimension min = new Dimension(0, 0);
 		Dimension pref = new Dimension(Short.MAX_VALUE, 0);
@@ -81,6 +109,12 @@ public class SwingTasks {
 		return new Box.Filler(min, pref, max);
 	}
 
+	/**
+	 * Gets the frame.
+	 *
+	 * @param component the component
+	 * @return the frame
+	 */
 	public static Frame getFrame(Component component) {
 		Container ancestor = component.getParent();
 		while (ancestor != null && !(ancestor instanceof Frame)) {
@@ -89,6 +123,12 @@ public class SwingTasks {
 		return (Frame) ancestor;
 	}
 
+	/**
+	 * Gets the dialog.
+	 *
+	 * @param component the component
+	 * @return the dialog
+	 */
 	public static Dialog getDialog(Component component) {
 		Container ancestor = component.getParent();
 		while (ancestor != null && !(ancestor instanceof Dialog)) {
@@ -97,6 +137,13 @@ public class SwingTasks {
 		return (Dialog) ancestor;
 	}
 
+	/**
+	 * Creates the group box.
+	 *
+	 * @param orientation the orientation
+	 * @param title the title
+	 * @return the box
+	 */
 	public static Box createGroupBox(int orientation, String title) {
 		Box box = new Box(orientation);
 		box.setBorder(new TitledBorder(new EtchedBorder(), title));

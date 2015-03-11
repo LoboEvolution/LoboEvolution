@@ -8,14 +8,31 @@ package org.mozilla.javascript;
 
 import org.mozilla.javascript.debug.DebuggableScript;
 
+
+/**
+ * The Class InterpretedFunction.
+ */
 final class InterpretedFunction extends NativeFunction implements Script
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 541475680333911468L;
 
+    /** The idata. */
     InterpreterData idata;
+    
+    /** The security controller. */
     SecurityController securityController;
+    
+    /** The security domain. */
     Object securityDomain;
 
+    /**
+     * Instantiates a new interpreted function.
+     *
+     * @param idata the idata
+     * @param staticSecurityDomain the static security domain
+     */
     private InterpretedFunction(InterpreterData idata,
                                 Object staticSecurityDomain)
     {
@@ -40,6 +57,12 @@ final class InterpretedFunction extends NativeFunction implements Script
         this.securityDomain = dynamicDomain;
     }
 
+    /**
+     * Instantiates a new interpreted function.
+     *
+     * @param parent the parent
+     * @param index the index
+     */
     private InterpretedFunction(InterpretedFunction parent, int index)
     {
         this.idata = parent.idata.itsNestedFunctions[index];
@@ -49,6 +72,10 @@ final class InterpretedFunction extends NativeFunction implements Script
 
     /**
      * Create script from compiled bytecode.
+     *
+     * @param idata the idata
+     * @param staticSecurityDomain the static security domain
+     * @return the interpreted function
      */
     static InterpretedFunction createScript(InterpreterData idata,
                                             Object staticSecurityDomain)
@@ -60,6 +87,12 @@ final class InterpretedFunction extends NativeFunction implements Script
 
     /**
      * Create function compiled from Function(...) constructor.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param idata the idata
+     * @param staticSecurityDomain the static security domain
+     * @return the interpreted function
      */
     static InterpretedFunction createFunction(Context cx,Scriptable scope,
                                               InterpreterData idata,
@@ -73,6 +106,12 @@ final class InterpretedFunction extends NativeFunction implements Script
 
     /**
      * Create function embedded in script or another function.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     * @param parent the parent
+     * @param index the index
+     * @return the interpreted function
      */
     static InterpretedFunction createFunction(Context cx, Scriptable scope,
                                               InterpretedFunction  parent,
@@ -84,6 +123,9 @@ final class InterpretedFunction extends NativeFunction implements Script
     }
 
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.BaseFunction#getFunctionName()
+     */
     @Override
     public String getFunctionName()
     {
@@ -109,6 +151,9 @@ final class InterpretedFunction extends NativeFunction implements Script
         return Interpreter.interpret(this, cx, scope, thisObj, args);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Script#exec(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable)
+     */
     public Object exec(Context cx, Scriptable scope)
     {
         if (!isScript()) {
@@ -124,22 +169,36 @@ final class InterpretedFunction extends NativeFunction implements Script
             this, cx, scope, scope, ScriptRuntime.emptyArgs);
     }
 
+    /**
+     * Checks if is script.
+     *
+     * @return true, if is script
+     */
     public boolean isScript() {
         return idata.itsFunctionType == 0;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.NativeFunction#getEncodedSource()
+     */
     @Override
     public String getEncodedSource()
     {
         return Interpreter.getEncodedSource(idata);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.NativeFunction#getDebuggableView()
+     */
     @Override
     public DebuggableScript getDebuggableView()
     {
         return idata;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.NativeFunction#resumeGenerator(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, int, java.lang.Object, java.lang.Object)
+     */
     @Override
     public Object resumeGenerator(Context cx, Scriptable scope, int operation,
                                   Object state, Object value)
@@ -147,30 +206,45 @@ final class InterpretedFunction extends NativeFunction implements Script
         return Interpreter.resumeGenerator(cx, scope, operation, state, value);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.NativeFunction#getLanguageVersion()
+     */
     @Override
     protected int getLanguageVersion()
     {
         return idata.languageVersion;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.NativeFunction#getParamCount()
+     */
     @Override
     protected int getParamCount()
     {
         return idata.argCount;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.NativeFunction#getParamAndVarCount()
+     */
     @Override
     protected int getParamAndVarCount()
     {
         return idata.argNames.length;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.NativeFunction#getParamOrVarName(int)
+     */
     @Override
     protected String getParamOrVarName(int index)
     {
         return idata.argNames[index];
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.NativeFunction#getParamOrVarConst(int)
+     */
     @Override
     protected boolean getParamOrVarConst(int index)
     {

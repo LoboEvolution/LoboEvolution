@@ -32,8 +32,19 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
+/**
+ * The Class QuerySelectorImpl.
+ */
 public class QuerySelectorImpl {
 
+	/**
+	 * Document query selector.
+	 *
+	 * @param document the document
+	 * @param selectors the selectors
+	 * @return the element
+	 */
 	public Element documentQuerySelector(Document document, String selectors) {
 
 		HTMLDocumentImpl doc = (HTMLDocumentImpl) document;
@@ -109,6 +120,13 @@ public class QuerySelectorImpl {
 		return element;
 	}
 	
+	/**
+	 * Document query selector all.
+	 *
+	 * @param document the document
+	 * @param selectors the selectors
+	 * @return the node list
+	 */
 	public NodeList documentQuerySelectorAll(Document document, String selectors) {
 		HTMLDocumentImpl doc = (HTMLDocumentImpl) document;
 		ArrayList<Node> listNode = new ArrayList<Node>();

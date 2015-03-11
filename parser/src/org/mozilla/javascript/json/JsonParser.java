@@ -13,6 +13,7 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 
+
 /**
  * This class converts a stream of JSON tokens into a JSON value.
  *
@@ -22,18 +23,39 @@ import org.mozilla.javascript.Scriptable;
  */
 public class JsonParser {
 
+    /** The cx. */
     private Context cx;
+    
+    /** The scope. */
     private Scriptable scope;
 
+    /** The pos. */
     private int pos;
+    
+    /** The length. */
     private int length;
+    
+    /** The src. */
     private String src;
 
+    /**
+     * Instantiates a new json parser.
+     *
+     * @param cx the cx
+     * @param scope the scope
+     */
     public JsonParser(Context cx, Scriptable scope) {
         this.cx = cx;
         this.scope = scope;
     }
 
+    /**
+     * Parses the value.
+     *
+     * @param json the json
+     * @return the object
+     * @throws ParseException the parse exception
+     */
     public synchronized Object parseValue(String json) throws ParseException {
         if (json == null) {
             throw new ParseException("Input string may not be null");
@@ -49,6 +71,12 @@ public class JsonParser {
         return value;
     }
 
+    /**
+     * Read value.
+     *
+     * @return the object
+     * @throws ParseException the parse exception
+     */
     private Object readValue() throws ParseException {
         consumeWhitespace();
         while (pos < length) {
@@ -85,6 +113,12 @@ public class JsonParser {
         throw new ParseException("Empty JSON string");
     }
 
+    /**
+     * Read object.
+     *
+     * @return the object
+     * @throws ParseException the parse exception
+     */
     private Object readObject() throws ParseException {
         consumeWhitespace();
         Scriptable object = cx.newObject(scope);
@@ -135,6 +169,12 @@ public class JsonParser {
         throw new ParseException("Unterminated object literal");
     }
 
+    /**
+     * Read array.
+     *
+     * @return the object
+     * @throws ParseException the parse exception
+     */
     private Object readArray() throws ParseException {
         consumeWhitespace();
         // handle empty array literal case early
@@ -172,6 +212,12 @@ public class JsonParser {
         throw new ParseException("Unterminated array literal");
     }
 
+    /**
+     * Read string.
+     *
+     * @return the string
+     * @throws ParseException the parse exception
+     */
     private String readString() throws ParseException {
         /*
          * Optimization: if the source contains no escaped characters, create the
@@ -260,6 +306,12 @@ public class JsonParser {
         throw new ParseException("Unterminated string literal");
     }
 
+    /**
+     * From hex.
+     *
+     * @param c the c
+     * @return the int
+     */
     private int fromHex(char c) {
         return c >= '0' && c <= '9' ? c - '0'
                 : c >= 'A' && c <= 'F' ? c - 'A' + 10
@@ -267,6 +319,13 @@ public class JsonParser {
                 : -1;
     }
 
+    /**
+     * Read number.
+     *
+     * @param c the c
+     * @return the number
+     * @throws ParseException the parse exception
+     */
     private Number readNumber(char c) throws ParseException {
         assert c == '-' || (c >= '0' && c <= '9');
         final int numberStart = pos - 1;
@@ -316,10 +375,24 @@ public class JsonParser {
         }
     }
 
+    /**
+     * Number error.
+     *
+     * @param start the start
+     * @param end the end
+     * @return the parses the exception
+     */
     private ParseException numberError(int start, int end) {
         return new ParseException("Unsupported number format: " + src.substring(start, end));
     }
 
+    /**
+     * Next or number error.
+     *
+     * @param numberStart the number start
+     * @return the char
+     * @throws ParseException the parse exception
+     */
     private char nextOrNumberError(int numberStart) throws ParseException {
         if (pos >= length) {
             throw numberError(numberStart, length);
@@ -327,6 +400,9 @@ public class JsonParser {
         return src.charAt(pos++);
     }
 
+    /**
+     * Read digits.
+     */
     private void readDigits() {
         for (; pos < length; ++pos) {
             char c = src.charAt(pos);
@@ -336,6 +412,12 @@ public class JsonParser {
         }
     }
 
+    /**
+     * Read true.
+     *
+     * @return the boolean
+     * @throws ParseException the parse exception
+     */
     private Boolean readTrue() throws ParseException {
         if (length - pos < 3
                 || src.charAt(pos) != 'r'
@@ -347,6 +429,12 @@ public class JsonParser {
         return Boolean.TRUE;
     }
 
+    /**
+     * Read false.
+     *
+     * @return the boolean
+     * @throws ParseException the parse exception
+     */
     private Boolean readFalse() throws ParseException {
         if (length - pos < 4
                 || src.charAt(pos) != 'a'
@@ -359,6 +447,12 @@ public class JsonParser {
         return Boolean.FALSE;
     }
 
+    /**
+     * Read null.
+     *
+     * @return the object
+     * @throws ParseException the parse exception
+     */
     private Object readNull() throws ParseException {
         if (length - pos < 3
                 || src.charAt(pos) != 'u'
@@ -370,6 +464,9 @@ public class JsonParser {
         return null;
     }
 
+    /**
+     * Consume whitespace.
+     */
     private void consumeWhitespace() {
         while (pos < length) {
             char c = src.charAt(pos);
@@ -386,6 +483,12 @@ public class JsonParser {
         }
     }
 
+    /**
+     * Consume.
+     *
+     * @param token the token
+     * @throws ParseException the parse exception
+     */
     private void consume(char token) throws ParseException {
         consumeWhitespace();
         if (pos >= length) {
@@ -399,14 +502,28 @@ public class JsonParser {
         }
     }
 
+    /**
+     * The Class ParseException.
+     */
     public static class ParseException extends Exception {
         
+        /** The Constant serialVersionUID. */
         static final long serialVersionUID = 4804542791749920772L;
         
+        /**
+         * Instantiates a new parses the exception.
+         *
+         * @param message the message
+         */
         ParseException(String message) {
             super(message);
         }
 
+        /**
+         * Instantiates a new parses the exception.
+         *
+         * @param cause the cause
+         */
         ParseException(Exception cause) {
             super(cause);
         }

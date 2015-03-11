@@ -35,12 +35,28 @@ import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.ua.TargetType;
 
+
+/**
+ * The Class BrowserFrameImpl.
+ */
 public class BrowserFrameImpl implements BrowserFrame {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(BrowserFrameImpl.class.getName());
+	
+	/** The frame. */
 	private final NavigatorFrame frame;
+	
+	/** The rcontext. */
 	private final HtmlRendererContextImpl rcontext;
 
+	/**
+	 * Instantiates a new browser frame impl.
+	 *
+	 * @param frame the frame
+	 * @param parentrcontext the parentrcontext
+	 */
 	public BrowserFrameImpl(NavigatorFrame frame,
 			HtmlRendererContext parentrcontext) {
 		if (logger.isLoggable(Level.INFO)) {
@@ -51,18 +67,30 @@ public class BrowserFrameImpl implements BrowserFrame {
 		this.rcontext = HtmlRendererContextImpl.getHtmlRendererContext(frame);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.BrowserFrame#getHtmlRendererContext()
+	 */
 	public HtmlRendererContext getHtmlRendererContext() {
 		return this.rcontext;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.BrowserFrame#getComponent()
+	 */
 	public Component getComponent() {
 		return this.frame.getComponent();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.BrowserFrame#getContentDocument()
+	 */
 	public org.w3c.dom.Document getContentDocument() {
 		return this.rcontext.getContentDocument();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.BrowserFrame#loadURL(java.net.URL)
+	 */
 	public void loadURL(URL url) {
 		if (logger.isLoggable(Level.INFO)) {
 			logger.info("loadURL(): frame=" + frame + ",url=" + url);
@@ -71,14 +99,23 @@ public class BrowserFrameImpl implements BrowserFrame {
 				RequestType.FRAME);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.BrowserFrame#setDefaultMarginInsets(java.awt.Insets)
+	 */
 	public void setDefaultMarginInsets(Insets insets) {
 		this.frame.setProperty("defaultMarginInsets", insets);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.BrowserFrame#setDefaultOverflowX(int)
+	 */
 	public void setDefaultOverflowX(int overflowX) {
 		this.frame.setProperty("defaultOverflowX", overflowX);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.BrowserFrame#setDefaultOverflowY(int)
+	 */
 	public void setDefaultOverflowY(int overflowY) {
 		this.frame.setProperty("defaultOverflowY", overflowY);
 	}

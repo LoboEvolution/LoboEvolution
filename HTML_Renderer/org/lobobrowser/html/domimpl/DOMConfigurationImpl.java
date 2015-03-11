@@ -30,30 +30,51 @@ import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DOMStringList;
 
+
+/**
+ * The Class DOMConfigurationImpl.
+ */
 public class DOMConfigurationImpl implements DOMConfiguration {
+	
+	/** The parameters. */
 	private final Map<String, Object> parameters = new HashMap<String, Object>();
 
+	/**
+	 * Instantiates a new DOM configuration impl.
+	 */
 	public DOMConfigurationImpl() {
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.DOMConfiguration#setParameter(java.lang.String, java.lang.Object)
+	 */
 	public void setParameter(String name, Object value) throws DOMException {
 		synchronized (this) {
 			this.parameters.put(name, value);
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.DOMConfiguration#getParameter(java.lang.String)
+	 */
 	public Object getParameter(String name) throws DOMException {
 		synchronized (this) {
 			return this.parameters.get(name);
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.DOMConfiguration#canSetParameter(java.lang.String, java.lang.Object)
+	 */
 	public boolean canSetParameter(String name, Object value) {
 		// TODO
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.DOMConfiguration#getParameterNames()
+	 */
 	public DOMStringList getParameterNames() {
 		synchronized (this) {
 			return new DOMStringListImpl(parameters.keySet());

@@ -36,12 +36,32 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.NestingKind;
 import javax.tools.JavaFileObject;
 
+
+/**
+ * The Class LocalJavaFileObject.
+ */
 public class LocalJavaFileObject implements JavaFileObject {
+	
+	/** The file. */
 	private final File file;
+	
+	/** The full name. */
 	private final String fullName;
+	
+	/** The kind. */
 	private final Kind kind;
+	
+	/** The nesting kind. */
 	private final NestingKind nestingKind;
 
+	/**
+	 * Instantiates a new local java file object.
+	 *
+	 * @param file the file
+	 * @param fullName the full name
+	 * @param kind the kind
+	 * @param nestingKind the nesting kind
+	 */
 	public LocalJavaFileObject(File file, String fullName, Kind kind,
 			NestingKind nestingKind) {
 		this.file = file;
@@ -50,18 +70,30 @@ public class LocalJavaFileObject implements JavaFileObject {
 		this.nestingKind = nestingKind;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#getAccessLevel()
+	 */
 	public Modifier getAccessLevel() {
 		return Modifier.PUBLIC;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#getKind()
+	 */
 	public Kind getKind() {
 		return this.kind;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#getNestingKind()
+	 */
 	public NestingKind getNestingKind() {
 		return this.nestingKind;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.JavaFileObject#isNameCompatible(java.lang.String, javax.tools.JavaFileObject.Kind)
+	 */
 	public boolean isNameCompatible(String simpleName, Kind kind) {
 		if (kind == Kind.CLASS) {
 			return simpleName.toLowerCase().endsWith(".class");
@@ -74,10 +106,16 @@ public class LocalJavaFileObject implements JavaFileObject {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#delete()
+	 */
 	public boolean delete() {
 		return this.file.delete();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getCharContent(boolean)
+	 */
 	public CharSequence getCharContent(boolean ignoreEncodingErrors)
 			throws IOException {
 		InputStream in = this.openInputStream();
@@ -89,30 +127,51 @@ public class LocalJavaFileObject implements JavaFileObject {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getLastModified()
+	 */
 	public long getLastModified() {
 		return this.file.lastModified();
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#getName()
+	 */
 	public String getName() {
 		return this.fullName;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openInputStream()
+	 */
 	public InputStream openInputStream() throws IOException {
 		return new FileInputStream(this.file);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openOutputStream()
+	 */
 	public OutputStream openOutputStream() throws IOException {
 		return new FileOutputStream(this.file);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openReader(boolean)
+	 */
 	public Reader openReader(boolean ignoreEncodingErrors) throws IOException {
 		return new InputStreamReader(this.openInputStream());
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#openWriter()
+	 */
 	public Writer openWriter() throws IOException {
 		return new OutputStreamWriter(this.openOutputStream());
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.tools.FileObject#toUri()
+	 */
 	public URI toUri() {
 		return this.file.toURI();
 	}

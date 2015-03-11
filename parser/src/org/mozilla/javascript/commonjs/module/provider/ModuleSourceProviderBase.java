@@ -15,6 +15,7 @@ import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
+
 /**
  * A base implementation for all module script providers that actually load
  * module scripts. Performs validation of identifiers, allows loading from
@@ -29,8 +30,13 @@ import org.mozilla.javascript.ScriptableObject;
 public abstract class ModuleSourceProviderBase implements
         ModuleSourceProvider, Serializable
 {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.commonjs.module.provider.ModuleSourceProvider#loadSource(java.lang.String, org.mozilla.javascript.Scriptable, java.lang.Object)
+     */
     public ModuleSource loadSource(String moduleId, Scriptable paths,
             Object validator) throws IOException, URISyntaxException
     {
@@ -53,11 +59,23 @@ public abstract class ModuleSourceProviderBase implements
         return loadFromFallbackLocations(moduleId, validator);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.commonjs.module.provider.ModuleSourceProvider#loadSource(java.net.URI, java.net.URI, java.lang.Object)
+     */
     public ModuleSource loadSource(URI uri, URI base, Object validator)
             throws IOException, URISyntaxException {
         return loadFromUri(uri, base, validator);
     }
 
+    /**
+     * Load from path array.
+     *
+     * @param moduleId the module id
+     * @param paths the paths
+     * @param validator the validator
+     * @return the module source
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private ModuleSource loadFromPathArray(String moduleId,
             Scriptable paths, Object validator) throws IOException
     {
@@ -88,6 +106,12 @@ public abstract class ModuleSourceProviderBase implements
         return null;
     }
 
+    /**
+     * Ensure trailing slash.
+     *
+     * @param path the path
+     * @return the string
+     */
     private static String ensureTrailingSlash(String path) {
         return path.endsWith("/") ? path : path.concat("/");
     }

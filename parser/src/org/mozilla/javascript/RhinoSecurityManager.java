@@ -4,6 +4,7 @@
 
 package org.mozilla.javascript;
 
+
 /**
  * A <code>java.lang.SecurityManager</code> subclass that provides access to
  * the current top-most script class on the execution stack. This can be used

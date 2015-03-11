@@ -22,13 +22,36 @@ package org.lobobrowser.html.renderer;
 
 import org.lobobrowser.util.Objects;
 
+
+/**
+ * The Class ParentFloatingBoundsSource.
+ */
 public class ParentFloatingBoundsSource implements FloatingBoundsSource {
+	
+	/** The block shift right. */
 	private final int blockShiftRight;
+	
+	/** The expected block width. */
 	private final int expectedBlockWidth;
+	
+	/** The new x. */
 	private final int newX;
+	
+	/** The new y. */
 	private final int newY;
+	
+	/** The float bounds. */
 	private final FloatingBounds floatBounds;
 
+	/**
+	 * Instantiates a new parent floating bounds source.
+	 *
+	 * @param blockShiftRight the block shift right
+	 * @param expectedWidth the expected width
+	 * @param newX the new x
+	 * @param newY the new y
+	 * @param floatBounds the float bounds
+	 */
 	public ParentFloatingBoundsSource(int blockShiftRight, int expectedWidth,
 			int newX, int newY, FloatingBounds floatBounds) {
 		super();
@@ -39,6 +62,9 @@ public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 		this.floatBounds = floatBounds;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBoundsSource#getChildBlockFloatingBounds(int)
+	 */
 	public FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth) {
 		int actualRightShift = this.blockShiftRight
 				+ (this.expectedBlockWidth - apparentBlockWidth);
@@ -46,6 +72,9 @@ public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 				-actualRightShift, -this.newY);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object obj) {
 		// Important for layout caching.
 		if (!(obj instanceof ParentFloatingBoundsSource)) {
@@ -59,6 +88,9 @@ public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	public int hashCode() {
 		return this.newX ^ this.newY ^ this.blockShiftRight
 				^ this.expectedBlockWidth;

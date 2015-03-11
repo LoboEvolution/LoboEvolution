@@ -64,12 +64,28 @@ import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.w3c.dom.UserDataHandler;
 
+
+/**
+ * The Class DOMNodeImpl.
+ */
 public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements Node, ModelNode {
+	
+	/** The Constant EMPTY_ARRAY. */
 	private static final DOMNodeImpl[] EMPTY_ARRAY = new DOMNodeImpl[0];
+	
+	/** The Constant INVALID_RENDER_STATE. */
 	private static final RenderState INVALID_RENDER_STATE = new StyleSheetRenderState(null);
+	
+	/** The Constant logger. */
 	protected static final Logger logger = Logger.getLogger(DOMNodeImpl.class.getName());
+	
+	/** The ui node. */
 	protected UINode uiNode;
+	
+	/** The node list. */
 	protected ArrayList<Node> nodeList;
+	
+	/** The document. */
 	protected volatile Document document;
 
 	/**
@@ -78,15 +94,28 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	private volatile Object treeLock = this;
 
+	/**
+	 * Instantiates a new DOM node impl.
+	 */
 	public DOMNodeImpl() {
 		super();
 	}
 
+	/**
+	 * Sets the UI node.
+	 *
+	 * @param uiNode the new UI node
+	 */
 	public void setUINode(UINode uiNode) {
 		// Called in GUI thread always.
 		this.uiNode = uiNode;
 	}
 
+	/**
+	 * Gets the UI node.
+	 *
+	 * @return the UI node
+	 */
 	public UINode getUINode() {
 		// Called in GUI thread always.
 		return this.uiNode;
@@ -96,6 +125,8 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 * Tries to get a UINode associated with the current node. Failing that, it
 	 * tries ancestors recursively. This method will return the closest
 	 * <i>block-level</i> renderer node, if any.
+	 *
+	 * @return the UI node
 	 */
 	public UINode findUINode() {
 		// Called in GUI thread always.
@@ -107,6 +138,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		return parentNode == null ? null : parentNode.findUINode();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#appendChild(org.w3c.dom.Node)
+	 */
 	public Node appendChild(Node newChild) throws DOMException {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -126,12 +160,18 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		return newChild;
 	}
 
+	/**
+	 * Removes the all children.
+	 */
 	protected void removeAllChildren() {
 		synchronized (this.getTreeLock()) {
 			this.removeAllChildrenImpl();
 		}
 	}
 
+	/**
+	 * Removes the all children impl.
+	 */
 	protected void removeAllChildrenImpl() {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -145,6 +185,12 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Gets the node list.
+	 *
+	 * @param filter the filter
+	 * @return the node list
+	 */
 	public NodeList getNodeList(NodeFilter filter) {
 		Collection<DOMNodeImpl> collection = new ArrayList<DOMNodeImpl>();
 		synchronized (this.getTreeLock()) {
@@ -153,6 +199,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		return new DOMNodeListImpl(collection);
 	}
 
+	/**
+	 * Gets the children array.
+	 *
+	 * @return the children array
+	 */
 	public DOMNodeImpl[] getChildrenArray() {
 		ArrayList<Node> nl = this.nodeList;
 		synchronized (this.getTreeLock()) {
@@ -161,6 +212,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Gets the child count.
+	 *
+	 * @return the child count
+	 */
 	public int getChildCount() {
 		ArrayList<Node> nl = this.nodeList;
 		synchronized (this.getTreeLock()) {
@@ -168,8 +224,14 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/** The children collection. */
 	private ChildHTMLCollection childrenCollection;
 
+	/**
+	 * Gets the children.
+	 *
+	 * @return the children
+	 */
 	public ChildHTMLCollection getChildren() {
 		// Method required by JavaScript
 		synchronized (this) {
@@ -185,6 +247,10 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	/**
 	 * Creates an <code>ArrayList</code> of descendent nodes that the given
 	 * filter condition.
+	 *
+	 * @param filter the filter
+	 * @param nestIntoMatchingNodes the nest into matching nodes
+	 * @return the descendents
 	 */
 	public ArrayList<DOMNodeImpl> getDescendents(NodeFilter filter,
 			boolean nestIntoMatchingNodes) {
@@ -198,9 +264,10 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	/**
 	 * Extracts all descendents that match the filter, except those descendents
 	 * of nodes that match the filter.
-	 * 
-	 * @param filter
-	 * @param al
+	 *
+	 * @param filter the filter
+	 * @param al the al
+	 * @param nestIntoMatchingNodes the nest into matching nodes
 	 */
 	private void extractDescendentsArrayImpl(NodeFilter filter,
 			ArrayList<DOMNodeImpl> al, boolean nestIntoMatchingNodes) {
@@ -223,6 +290,12 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Append children to collection impl.
+	 *
+	 * @param filter the filter
+	 * @param collection the collection
+	 */
 	private void appendChildrenToCollectionImpl(NodeFilter filter,
 			Collection<DOMNodeImpl> collection) {
 		ArrayList<Node> nl = this.nodeList;
@@ -241,9 +314,14 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	/**
 	 * Should create a node with some cloned properties, like the node name, but
 	 * not attributes or children.
+	 *
+	 * @return the node
 	 */
 	protected abstract Node createSimilarNode();
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#cloneNode(boolean)
+	 */
 	public Node cloneNode(boolean deep) {
 		try {
 			Node newNode = this.createSimilarNode();
@@ -286,11 +364,22 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Gets the node index.
+	 *
+	 * @return the node index
+	 */
 	private int getNodeIndex() {
 		DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
 		return parent == null ? -1 : parent.getChildIndex(this);
 	}
 
+	/**
+	 * Gets the child index.
+	 *
+	 * @param child the child
+	 * @return the child index
+	 */
 	public int getChildIndex(Node child) {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -298,6 +387,12 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Gets the child at index.
+	 *
+	 * @param index the index
+	 * @return the child at index
+	 */
 	public Node getChildAtIndex(int index) {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -311,6 +406,12 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Checks if is ancestor of.
+	 *
+	 * @param other the other
+	 * @return true, if is ancestor of
+	 */
 	private boolean isAncestorOf(Node other) {
 		DOMNodeImpl parent = (DOMNodeImpl) other.getParentNode();
 		if (parent == this) {
@@ -322,6 +423,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#compareDocumentPosition(org.w3c.dom.Node)
+	 */
 	public short compareDocumentPosition(Node other) throws DOMException {
 		Node parent = this.getParentNode();
 		if (!(other instanceof DOMNodeImpl)) {
@@ -348,19 +452,36 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getAttributes()
+	 */
 	public NamedNodeMap getAttributes() {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getOwnerDocument()
+	 */
 	public Document getOwnerDocument() {
 		return this.document;
 	}
 
+	/**
+	 * Sets the owner document.
+	 *
+	 * @param value the new owner document
+	 */
 	public void setOwnerDocument(Document value) {
 		this.document = value;
 		this.setTreeLock(value == null ? this : (Object) value);
 	}
 
+	/**
+	 * Sets the owner document.
+	 *
+	 * @param value the value
+	 * @param deep the deep
+	 */
 	public void setOwnerDocument(Document value, boolean deep) {
 		this.document = value;
 		this.setTreeLock(value == null ? this : (Object) value);
@@ -378,6 +499,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Visit impl.
+	 *
+	 * @param visitor the visitor
+	 */
 	protected void visitImpl(NodeVisitor visitor) {
 		try {
 			visitor.visit(this);
@@ -401,12 +527,20 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Visit.
+	 *
+	 * @param visitor the visitor
+	 */
 	public void visit(NodeVisitor visitor) {
 		synchronized (this.getTreeLock()) {
 			this.visitImpl(visitor);
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#insertBefore(org.w3c.dom.Node, org.w3c.dom.Node)
+	 */
 	public Node insertBefore(Node newChild, Node refChild) throws DOMException {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -426,6 +560,14 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		return newChild;
 	}
 
+	/**
+	 * Insert at.
+	 *
+	 * @param newChild the new child
+	 * @param idx the idx
+	 * @return the node
+	 * @throws DOMException the DOM exception
+	 */
 	protected Node insertAt(Node newChild, int idx) throws DOMException {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -444,6 +586,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		return newChild;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#replaceChild(org.w3c.dom.Node, org.w3c.dom.Node)
+	 */
 	public Node replaceChild(Node newChild, Node oldChild) throws DOMException {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -460,6 +605,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		return newChild;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#removeChild(org.w3c.dom.Node)
+	 */
 	public Node removeChild(Node oldChild) throws DOMException {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -474,6 +622,13 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		return oldChild;
 	}
 
+	/**
+	 * Removes the child at.
+	 *
+	 * @param index the index
+	 * @return the node
+	 * @throws DOMException the DOM exception
+	 */
 	public Node removeChildAt(int index) throws DOMException {
 		try {
 			synchronized (this.getTreeLock()) {
@@ -496,6 +651,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#hasChildNodes()
+	 */
 	public boolean hasChildNodes() {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -503,11 +661,17 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getBaseURI()
+	 */
 	public String getBaseURI() {
 		Document document = this.document;
 		return document == null ? null : document.getBaseURI();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getChildNodes()
+	 */
 	public NodeList getChildNodes() {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -515,6 +679,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getFirstChild()
+	 */
 	public Node getFirstChild() {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -526,6 +693,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getLastChild()
+	 */
 	public Node getLastChild() {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -537,6 +707,12 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Gets the previous to.
+	 *
+	 * @param node the node
+	 * @return the previous to
+	 */
 	private Node getPreviousTo(Node node) {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -553,6 +729,12 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Gets the next to.
+	 *
+	 * @param node the node
+	 * @return the next to
+	 */
 	private Node getNextTo(Node node) {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -569,26 +751,42 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getPreviousSibling()
+	 */
 	public Node getPreviousSibling() {
 		DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
 		return parent == null ? null : parent.getPreviousTo(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getNextSibling()
+	 */
 	public Node getNextSibling() {
 		DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
 		return parent == null ? null : parent.getNextTo(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getFeature(java.lang.String, java.lang.String)
+	 */
 	public Object getFeature(String feature, String version) {
 		// TODO What should this do?
 		return null;
 	}
 
+	/** The user data. */
 	private Map<String, Object> userData;
 	// TODO: Inform handlers on cloning, etc.
+	/** The user data handlers. */
 	private Map<String, UserDataHandler> userDataHandlers;
+	
+	/** The notifications suspended. */
 	protected volatile boolean notificationsSuspended = false;
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#setUserData(java.lang.String, java.lang.Object, org.w3c.dom.UserDataHandler)
+	 */
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key)) {
 			boolean ns = (Boolean.TRUE == data);
@@ -621,6 +819,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getUserData(java.lang.String)
+	 */
 	public Object getUserData(String key) {
 		synchronized (this) {
 			Map<String, Object> ud = this.userData;
@@ -628,36 +829,67 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getLocalName()
+	 */
 	public abstract String getLocalName();
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#hasAttributes()
+	 */
 	public boolean hasAttributes() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getNamespaceURI()
+	 */
 	public String getNamespaceURI() {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getNodeName()
+	 */
 	public abstract String getNodeName();
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getNodeValue()
+	 */
 	public abstract String getNodeValue() throws DOMException;
 
+	/** The prefix. */
 	private volatile String prefix;
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getPrefix()
+	 */
 	public String getPrefix() {
 		return this.prefix;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#setPrefix(java.lang.String)
+	 */
 	public void setPrefix(String prefix) throws DOMException {
 		this.prefix = prefix;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#setNodeValue(java.lang.String)
+	 */
 	public abstract void setNodeValue(String nodeValue) throws DOMException;
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getNodeType()
+	 */
 	public abstract short getNodeType();
 
 	/**
 	 * Gets the text content of this node and its descendents.
+	 *
+	 * @return the text content
+	 * @throws DOMException the DOM exception
 	 */
 	public String getTextContent() throws DOMException {
 		StringBuffer sb = new StringBuffer();
@@ -686,6 +918,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		return sb.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#setTextContent(java.lang.String)
+	 */
 	public void setTextContent(String textContent) throws DOMException {
 		synchronized (this.getTreeLock()) {
 			this.removeChildrenImpl(new TextFilter());
@@ -706,6 +941,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Removes the children.
+	 *
+	 * @param filter the filter
+	 */
 	protected void removeChildren(NodeFilter filter) {
 		synchronized (this.getTreeLock()) {
 			this.removeChildrenImpl(filter);
@@ -715,6 +955,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Removes the children impl.
+	 *
+	 * @param filter the filter
+	 */
 	protected void removeChildrenImpl(NodeFilter filter) {
 		ArrayList<Node> nl = this.nodeList;
 		if (nl != null) {
@@ -728,6 +973,13 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Insert after.
+	 *
+	 * @param newChild the new child
+	 * @param refChild the ref child
+	 * @return the node
+	 */
 	public Node insertAfter(Node newChild, Node refChild) {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -747,6 +999,13 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		return newChild;
 	}
 
+	/**
+	 * Replace adjacent text nodes.
+	 *
+	 * @param node the node
+	 * @param textContent the text content
+	 * @return the text
+	 */
 	public Text replaceAdjacentTextNodes(Text node, String textContent) {
 		try {
 			synchronized (this.getTreeLock()) {
@@ -790,6 +1049,12 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Replace adjacent text nodes.
+	 *
+	 * @param node the node
+	 * @return the text
+	 */
 	public Text replaceAdjacentTextNodes(Text node) {
 		try {
 			synchronized (this.getTreeLock()) {
@@ -836,29 +1101,51 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/** The parent node. */
 	protected volatile Node parentNode;
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getParentNode()
+	 */
 	public Node getParentNode() {
 		// Should it be synchronized? Could have side-effects.
 		return this.parentNode;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#isSameNode(org.w3c.dom.Node)
+	 */
 	public boolean isSameNode(Node other) {
 		return this == other;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#isSupported(java.lang.String, java.lang.String)
+	 */
 	public boolean isSupported(String feature, String version) {
 		return ("HTML".equals(feature) && version.compareTo("4.01") <= 0);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#lookupNamespaceURI(java.lang.String)
+	 */
 	public String lookupNamespaceURI(String prefix) {
 		return null;
 	}
 
+	/**
+	 * Equal attributes.
+	 *
+	 * @param arg the arg
+	 * @return true, if successful
+	 */
 	public boolean equalAttributes(Node arg) {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#isEqualNode(org.w3c.dom.Node)
+	 */
 	public boolean isEqualNode(Node arg) {
 		return arg instanceof DOMNodeImpl
 				&& this.getNodeType() == arg.getNodeType()
@@ -869,14 +1156,23 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 				&& this.equalAttributes(arg);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#isDefaultNamespace(java.lang.String)
+	 */
 	public boolean isDefaultNamespace(String namespaceURI) {
 		return namespaceURI == null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#lookupPrefix(java.lang.String)
+	 */
 	public String lookupPrefix(String namespaceURI) {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#normalize()
+	 */
 	public void normalize() {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
@@ -907,10 +1203,18 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return this.getNodeName();
 	}
 
+	/**
+	 * Gets the user agent context.
+	 *
+	 * @return the user agent context
+	 */
 	public UserAgentContext getUserAgentContext() {
 		Object doc = this.document;
 		if (doc instanceof HTMLDocumentImpl) {
@@ -920,6 +1224,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Gets the html renderer context.
+	 *
+	 * @return the html renderer context
+	 */
 	public HtmlRendererContext getHtmlRendererContext() {
 		Object doc = this.document;
 		if (doc instanceof HTMLDocumentImpl) {
@@ -929,6 +1238,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Sets the parent impl.
+	 *
+	 * @param parent the new parent impl
+	 */
 	protected final void setParentImpl(Node parent) {
 		// Call holding treeLock.
 		this.parentNode = parent;
@@ -941,6 +1255,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 * 
 	 * @see org.lobobrowser.html.render.RenderableContext#getAlignmentX()
 	 */
+	/**
+	 * Gets the alignment x.
+	 *
+	 * @return the alignment x
+	 */
 	public float getAlignmentX() {
 		// TODO: Removable method?
 		return 0.5f;
@@ -950,6 +1269,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 * (non-Javadoc)
 	 * 
 	 * @see org.lobobrowser.html.render.RenderableContext#getAlignmentY()
+	 */
+	/**
+	 * Gets the alignment y.
+	 *
+	 * @return the alignment y
 	 */
 	public float getAlignmentY() {
 		return 0.5f;
@@ -971,6 +1295,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Gets the document url.
+	 *
+	 * @return the document url
+	 */
 	public URL getDocumentURL() {
 		Object doc = this.document;
 		if (doc instanceof HTMLDocumentImpl) {
@@ -1027,18 +1356,32 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.ModelNode#getParentModelNode()
+	 */
 	public final ModelNode getParentModelNode() {
 		return (ModelNode) this.parentNode;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.ModelNode#warn(java.lang.String, java.lang.Throwable)
+	 */
 	public void warn(String message, Throwable err) {
 		logger.log(Level.WARNING, message, err);
 	}
 
+	/**
+	 * Warn.
+	 *
+	 * @param message the message
+	 */
 	public void warn(String message) {
 		logger.log(Level.WARNING, message);
 	}
 
+	/**
+	 * Inform size invalid.
+	 */
 	public void informSizeInvalid() {
 		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc != null) {
@@ -1046,6 +1389,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Inform look invalid.
+	 */
 	public void informLookInvalid() {
 		this.forgetRenderState();
 		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
@@ -1054,6 +1400,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Inform position invalid.
+	 */
 	public void informPositionInvalid() {
 		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc != null) {
@@ -1061,6 +1410,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Inform invalid.
+	 */
 	public void informInvalid() {
 		// This is called when an attribute or child changes.
 		this.forgetRenderState();
@@ -1070,6 +1422,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Inform structure invalid.
+	 */
 	public void informStructureInvalid() {
 		// This is called when an attribute or child changes.
 		this.forgetRenderState();
@@ -1079,6 +1434,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Inform node loaded.
+	 */
 	protected void informNodeLoaded() {
 		// This is called when an attribute or child changes.
 		this.forgetRenderState();
@@ -1088,6 +1446,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Inform external script loading.
+	 */
 	protected void informExternalScriptLoading() {
 		// This is called when an attribute or child changes.
 		this.forgetRenderState();
@@ -1097,6 +1458,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Inform layout invalid.
+	 */
 	public void informLayoutInvalid() {
 		// This is called by the style properties object.
 		this.forgetRenderState();
@@ -1106,6 +1470,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Inform document invalid.
+	 */
 	public void informDocumentInvalid() {
 		// This is called when an attribute or child changes.
 		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
@@ -1114,8 +1481,12 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/** The render state. */
 	private RenderState renderState = INVALID_RENDER_STATE;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.ModelNode#getRenderState()
+	 */
 	public RenderState getRenderState() {
 		// Generally called from the GUI thread, except for
 		// offset properties.
@@ -1139,6 +1510,12 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Gets the parent render state.
+	 *
+	 * @param parent the parent
+	 * @return the parent render state
+	 */
 	protected final RenderState getParentRenderState(Object parent) {
 		if (parent instanceof DOMNodeImpl) {
 			return ((DOMNodeImpl) parent).getRenderState();
@@ -1147,10 +1524,19 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Creates the render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @return the render state
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return prevRenderState;
 	}
 
+	/**
+	 * Forget render state.
+	 */
 	protected void forgetRenderState() {
 		synchronized (this.getTreeLock()) {
 			if (this.renderState != INVALID_RENDER_STATE) {
@@ -1168,6 +1554,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Gets the inner html.
+	 *
+	 * @return the inner html
+	 */
 	public String getInnerHTML() {
 		StringBuffer buffer = new StringBuffer();
 		synchronized (this) {
@@ -1176,6 +1567,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		return buffer.toString();
 	}
 
+	/**
+	 * Append inner html impl.
+	 *
+	 * @param buffer the buffer
+	 */
 	protected void appendInnerHTMLImpl(StringBuffer buffer) {
 		ArrayList<Node> nl = this.nodeList;
 		int size;
@@ -1198,6 +1594,12 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Html encode child text.
+	 *
+	 * @param text the text
+	 * @return the string
+	 */
 	protected String htmlEncodeChildText(String text) {
 		return Strings.strictHtmlEncode(text, false);
 	}
@@ -1205,6 +1607,8 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	/**
 	 * Attempts to convert the subtree starting at this point to a close text
 	 * representation. BR elements are converted to line breaks, and so forth.
+	 *
+	 * @return the inner text
 	 */
 	public String getInnerText() {
 		StringBuffer buffer = new StringBuffer();
@@ -1214,6 +1618,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		return buffer.toString();
 	}
 
+	/**
+	 * Append inner text impl.
+	 *
+	 * @param buffer the buffer
+	 */
 	protected void appendInnerTextImpl(StringBuffer buffer) {
 		ArrayList<Node> nl = this.nodeList;
 		if (nl == null) {
@@ -1236,10 +1645,20 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		}
 	}
 
+	/**
+	 * Gets the tree lock.
+	 *
+	 * @return the tree lock
+	 */
 	public Object getTreeLock() {
 		return treeLock;
 	}
 
+	/**
+	 * Sets the tree lock.
+	 *
+	 * @param treeLock the new tree lock
+	 */
 	public void setTreeLock(Object treeLock) {
 		this.treeLock = treeLock;
 	}

@@ -34,6 +34,7 @@ package org.lobobrowser.html.w3c;
 
 import org.w3c.dom.DOMException;
 
+
 /**
  * The <code>THEAD</code>, <code>TFOOT</code>, and <code>TBODY</code> elements.
  * <p>
@@ -41,56 +42,75 @@ import org.w3c.dom.DOMException;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLTableSectionElement extends HTMLElement {
+	
 	/**
 	 * Horizontal alignment of data in cells. See the <code>align</code>
 	 * attribute for HTMLTheadElement for details.
+	 *
+	 * @return the align
 	 */
 	public String getAlign();
 
 	/**
 	 * Horizontal alignment of data in cells. See the <code>align</code>
 	 * attribute for HTMLTheadElement for details.
+	 *
+	 * @param align the new align
 	 */
 	public void setAlign(String align);
 
 	/**
 	 * Alignment character for cells in a column. See the char attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the ch
 	 */
 	public String getCh();
 
 	/**
 	 * Alignment character for cells in a column. See the char attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param ch the new ch
 	 */
 	public void setCh(String ch);
 
 	/**
 	 * Offset of alignment character. See the charoff attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return the ch off
 	 */
 	public String getChOff();
 
 	/**
 	 * Offset of alignment character. See the charoff attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param chOff the new ch off
 	 */
 	public void setChOff(String chOff);
 
 	/**
 	 * Vertical alignment of data in cells. See the <code>valign</code>
 	 * attribute for HTMLTheadElement for details.
+	 *
+	 * @return the v align
 	 */
 	public String getVAlign();
 
 	/**
 	 * Vertical alignment of data in cells. See the <code>valign</code>
 	 * attribute for HTMLTheadElement for details.
+	 *
+	 * @param vAlign the new v align
 	 */
 	public void setVAlign(String vAlign);
 
 	/**
 	 * The collection of rows in this table section.
+	 *
+	 * @return the rows
 	 */
 	public HTMLCollection getRows();
 
@@ -99,35 +119,36 @@ public interface HTMLTableSectionElement extends HTMLElement {
 	 * before the current <code>index</code>th row in this section. If
 	 * <code>index</code> is -1 or equal to the number of rows in this section,
 	 * the new row is appended.
-	 * 
-	 * @param index
-	 *            The row number where to insert a new row. This index starts
+	 *
+	 * @version DOM Level 2
+	 * @param index            The row number where to insert a new row. This index starts
 	 *            from 0 and is relative only to the rows contained inside this
 	 *            section, not all the rows in the table.
 	 * @return The newly created row.
-	 * @exception DOMException
-	 *                INDEX_SIZE_ERR: Raised if the specified index is greater
+	 * @exception DOMException                INDEX_SIZE_ERR: Raised if the specified index is greater
 	 *                than the number of rows of if the index is a negative
 	 *                number other than -1.
-	 * @version DOM Level 2
 	 */
 	public HTMLElement insertRow(int index) throws DOMException;
 
 	/**
 	 * Delete a row from this section.
-	 * 
-	 * @param index
-	 *            The index of the row to be deleted, or -1 to delete the last
+	 *
+	 * @version DOM Level 2
+	 * @param index            The index of the row to be deleted, or -1 to delete the last
 	 *            row. This index starts from 0 and is relative only to the rows
 	 *            contained inside this section, not all the rows in the table.
-	 * @exception DOMException
-	 *                INDEX_SIZE_ERR: Raised if the specified index is greater
+	 * @exception DOMException                INDEX_SIZE_ERR: Raised if the specified index is greater
 	 *                than or equal to the number of rows or if the index is a
 	 *                negative number other than -1.
-	 * @version DOM Level 2
 	 */
 	public void deleteRow(int index) throws DOMException;
 
 	
+	/**
+	 * Insert row.
+	 *
+	 * @return the HTML element
+	 */
 	public HTMLElement insertRow();
 }

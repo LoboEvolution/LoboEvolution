@@ -26,24 +26,55 @@ import java.util.Map;
 
 import org.mozilla.javascript.Function;
 
+
+/**
+ * The Class JavaClassWrapper.
+ */
 public class JavaClassWrapper {
+	
+	/** The java class. */
 	private final Class javaClass;
+	
+	/** The functions. */
 	private final Map<String, JavaFunctionObject> functions = new HashMap<String, JavaFunctionObject>();
+	
+	/** The properties. */
 	private final Map<String, PropertyInfo> properties = new HashMap<String, PropertyInfo>();
+	
+	/** The name indexer. */
 	private PropertyInfo nameIndexer;
+	
+	/** The integer indexer. */
 	private PropertyInfo integerIndexer;
 
+	/**
+	 * Instantiates a new java class wrapper.
+	 *
+	 * @param class1 the class1
+	 */
 	public JavaClassWrapper(Class class1) {
 		super();
 		this.javaClass = class1;
 		this.scanMethods();
 	}
 
+	/**
+	 * New instance.
+	 *
+	 * @return the object
+	 * @throws InstantiationException the instantiation exception
+	 * @throws IllegalAccessException the illegal access exception
+	 */
 	public Object newInstance() throws InstantiationException,
 			IllegalAccessException {
 		return this.javaClass.newInstance();
 	}
 
+	/**
+	 * Gets the class name.
+	 *
+	 * @return the class name
+	 */
 	public String getClassName() {
 		String className = this.javaClass.getName();
 		int lastDotIdx = className.lastIndexOf('.');
@@ -51,14 +82,29 @@ public class JavaClassWrapper {
 				.substring(lastDotIdx + 1);
 	}
 
+	/**
+	 * Gets the function.
+	 *
+	 * @param name the name
+	 * @return the function
+	 */
 	public Function getFunction(String name) {
 		return (Function) this.functions.get(name);
 	}
 
+	/**
+	 * Gets the property.
+	 *
+	 * @param name the name
+	 * @return the property
+	 */
 	public PropertyInfo getProperty(String name) {
 		return (PropertyInfo) this.properties.get(name);
 	}
 
+	/**
+	 * Scan methods.
+	 */
 	private void scanMethods() {
 		Method[] methods = this.javaClass.getMethods();
 		int len = methods.length;
@@ -84,16 +130,36 @@ public class JavaClassWrapper {
 		}
 	}
 
+	/**
+	 * Checks if is name indexer.
+	 *
+	 * @param name the name
+	 * @param method the method
+	 * @return true, if is name indexer
+	 */
 	private boolean isNameIndexer(String name, Method method) {
 		return ("namedItem".equals(name) && method.getParameterTypes().length == 1)
 				|| ("setNamedItem".equals(name) && method.getParameterTypes().length == 2);
 	}
 
+	/**
+	 * Checks if is integer indexer.
+	 *
+	 * @param name the name
+	 * @param method the method
+	 * @return true, if is integer indexer
+	 */
 	private boolean isIntegerIndexer(String name, Method method) {
 		return ("item".equals(name) && method.getParameterTypes().length == 1)
 				|| ("setItem".equals(name) && method.getParameterTypes().length == 2);
 	}
 
+	/**
+	 * Update name indexer.
+	 *
+	 * @param methodName the method name
+	 * @param method the method
+	 */
 	private void updateNameIndexer(String methodName, Method method) {
 		boolean getter = true;
 		if (methodName.startsWith("set")) {
@@ -111,6 +177,12 @@ public class JavaClassWrapper {
 		}
 	}
 
+	/**
+	 * Update integer indexer.
+	 *
+	 * @param methodName the method name
+	 * @param method the method
+	 */
 	private void updateIntegerIndexer(String methodName, Method method) {
 		boolean getter = true;
 		if (methodName.startsWith("set")) {
@@ -130,14 +202,31 @@ public class JavaClassWrapper {
 		}
 	}
 
+	/**
+	 * Gets the integer indexer.
+	 *
+	 * @return the integer indexer
+	 */
 	public PropertyInfo getIntegerIndexer() {
 		return this.integerIndexer;
 	}
 
+	/**
+	 * Gets the name indexer.
+	 *
+	 * @return the name indexer
+	 */
 	public PropertyInfo getNameIndexer() {
 		return this.nameIndexer;
 	}
 
+	/**
+	 * Checks if is property method.
+	 *
+	 * @param name the name
+	 * @param method the method
+	 * @return true, if is property method
+	 */
 	private boolean isPropertyMethod(String name, Method method) {
 		if (name.startsWith("get") || name.startsWith("is")) {
 			return method.getParameterTypes().length == 0;
@@ -148,6 +237,12 @@ public class JavaClassWrapper {
 		}
 	}
 
+	/**
+	 * Property uncapitalize.
+	 *
+	 * @param text the text
+	 * @return the string
+	 */
 	private String propertyUncapitalize(String text) {
 		try {
 			if (text.length() > 1 && Character.isUpperCase(text.charAt(1))) {
@@ -161,6 +256,12 @@ public class JavaClassWrapper {
 		}
 	}
 
+	/**
+	 * Ensure property known.
+	 *
+	 * @param methodName the method name
+	 * @param method the method
+	 */
 	private void ensurePropertyKnown(String methodName, Method method) {
 		String capPropertyName;
 		String propertyName;
@@ -193,6 +294,9 @@ public class JavaClassWrapper {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return this.javaClass.getName();
 	}

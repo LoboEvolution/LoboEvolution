@@ -20,6 +20,14 @@
  */
 package org.lobobrowser.primary.gui;
 
+
+/**
+ * The Enum FieldType.
+ */
 public enum FieldType {
-	TEXT, PASSWORD
+	
+	/** The text. */
+	TEXT, 
+ /** The password. */
+ PASSWORD
 }

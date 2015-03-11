@@ -20,9 +20,24 @@
  */
 package org.lobobrowser.html.w3c;
 
+
+/**
+ * The Interface StyleMedia.
+ */
 public interface StyleMedia {
 	// StyleMedia
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public String getType();
 
+	/**
+	 * Match medium.
+	 *
+	 * @param mediaquery the mediaquery
+	 * @return true, if successful
+	 */
 	public boolean matchMedium(String mediaquery);
 }

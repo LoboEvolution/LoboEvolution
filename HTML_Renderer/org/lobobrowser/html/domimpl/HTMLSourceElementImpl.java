@@ -24,40 +24,67 @@ import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.w3c.HTMLSourceElement;
 
 
+
+/**
+ * The Class HTMLSourceElementImpl.
+ */
 public class HTMLSourceElementImpl extends HTMLElementImpl implements
 		HTMLSourceElement {
 
+	/**
+	 * Instantiates a new HTML source element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLSourceElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLSourceElement#getSrc()
+	 */
 	@Override
 	public String getSrc() {
 		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLSourceElement#setSrc(java.lang.String)
+	 */
 	@Override
 	public void setSrc(String src) {
 		this.setAttribute(HtmlAttributeProperties.SRC,src);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLSourceElement#getType()
+	 */
 	@Override
 	public String getType() {
 		return this.getAttribute(HtmlAttributeProperties.TYPE);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLSourceElement#setType(java.lang.String)
+	 */
 	@Override
 	public void setType(String type) {
 		this.setAttribute(HtmlAttributeProperties.TYPE,type);
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLSourceElement#getMedia()
+	 */
 	@Override
 	public String getMedia() {
 		return this.getAttribute(HtmlAttributeProperties.MEDIA);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLSourceElement#setMedia(java.lang.String)
+	 */
 	@Override
 	public void setMedia(String media) {
 		this.setAttribute(HtmlAttributeProperties.MEDIA,media);

@@ -45,6 +45,7 @@ import org.w3c.dom.css.CSSStyleRule;
 import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.stylesheets.MediaList;
 
+
 /**
  * Aggregates all style sheets in a document. Every time a new STYLE element is
  * found, it is added to the style sheet aggreagator by means of the
@@ -56,17 +57,36 @@ import org.w3c.dom.stylesheets.MediaList;
  */
 public class StyleSheetAggregator {
 	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(StyleSheetAggregator.class.getName());
 	
+	/** The document. */
 	private final HTMLDocumentImpl document;
+	
+	/** The class maps by element. */
 	private final Map<String, Map> classMapsByElement = new HashMap<String, Map>();
+	
+	/** The id maps by element. */
 	private final Map<String, Map> idMapsByElement = new HashMap<String, Map>();
+	
+	/** The rules by element. */
 	private final Map<String, Collection> rulesByElement = new HashMap<String, Collection>();
 
+	/**
+	 * Instantiates a new style sheet aggregator.
+	 *
+	 * @param document the document
+	 */
 	public StyleSheetAggregator(HTMLDocumentImpl document) {
 		this.document = document;
 	}
 
+	/**
+	 * Adds the style sheets.
+	 *
+	 * @param styleSheets the style sheets
+	 * @throws MalformedURLException the malformed url exception
+	 */
 	public final void addStyleSheets(Collection styleSheets)
 			throws MalformedURLException {
 		Iterator i = styleSheets.iterator();
@@ -76,6 +96,12 @@ public class StyleSheetAggregator {
 		}
 	}
 
+	/**
+	 * Adds the style sheet.
+	 *
+	 * @param styleSheet the style sheet
+	 * @throws MalformedURLException the malformed url exception
+	 */
 	private final void addStyleSheet(CSSStyleSheet styleSheet)
 			throws MalformedURLException {
 		CSSRuleList ruleList = styleSheet.getCssRules();
@@ -86,6 +112,13 @@ public class StyleSheetAggregator {
 		}
 	}
 
+	/**
+	 * Adds the rule.
+	 *
+	 * @param styleSheet the style sheet
+	 * @param rule the rule
+	 * @throws MalformedURLException the malformed url exception
+	 */
 	private final void addRule(CSSStyleSheet styleSheet, CSSRule rule)
 			throws MalformedURLException {
 		HTMLDocumentImpl document = this.document;
@@ -204,6 +237,14 @@ public class StyleSheetAggregator {
 		}
 	}
 	
+	/**
+	 * Adds the class rule.
+	 *
+	 * @param elemtl the elemtl
+	 * @param classtl the classtl
+	 * @param styleRule the style rule
+	 * @param ancestorSelectors the ancestor selectors
+	 */
 	private final void addClassRule(String elemtl, String classtl,
 			CSSStyleRule styleRule, ArrayList<SimpleSelector> ancestorSelectors) {
 		Map<String, Collection> classMap = (Map<String, Collection>) this.classMapsByElement
@@ -221,6 +262,14 @@ public class StyleSheetAggregator {
 		rules.add(new StyleRuleInfo(ancestorSelectors, styleRule));
 	}
 
+	/**
+	 * Adds the id rule.
+	 *
+	 * @param elemtl the elemtl
+	 * @param idtl the idtl
+	 * @param styleRule the style rule
+	 * @param ancestorSelectors the ancestor selectors
+	 */
 	private final void addIdRule(String elemtl, String idtl,
 			CSSStyleRule styleRule, ArrayList<SimpleSelector> ancestorSelectors) {
 		Map<String, Collection> idsMap = (Map<String, Collection>) this.idMapsByElement
@@ -238,6 +287,13 @@ public class StyleSheetAggregator {
 		rules.add(new StyleRuleInfo(ancestorSelectors, styleRule));
 	}
 
+	/**
+	 * Adds the element rule.
+	 *
+	 * @param elemtl the elemtl
+	 * @param styleRule the style rule
+	 * @param ancestorSelectors the ancestor selectors
+	 */
 	private final void addElementRule(String elemtl, CSSStyleRule styleRule,
 			ArrayList<SimpleSelector> ancestorSelectors) {
 		Collection<StyleRuleInfo> rules = (Collection<StyleRuleInfo>) this.rulesByElement
@@ -249,6 +305,16 @@ public class StyleSheetAggregator {
 		rules.add(new StyleRuleInfo(ancestorSelectors, styleRule));
 	}
 
+	/**
+	 * Gets the active style declarations.
+	 *
+	 * @param element the element
+	 * @param elementName the element name
+	 * @param elementId the element id
+	 * @param className the class name
+	 * @param pseudoNames the pseudo names
+	 * @return the active style declarations
+	 */
 	public final Collection<CSSStyleDeclaration> getActiveStyleDeclarations(
 			HTMLElementImpl element, String elementName, String elementId,
 			String className, Set pseudoNames) {
@@ -391,6 +457,17 @@ public class StyleSheetAggregator {
 		return styleDeclarations;
 	}
 
+	/**
+	 * Affected by pseudo name in ancestor.
+	 *
+	 * @param element the element
+	 * @param ancestor the ancestor
+	 * @param elementName the element name
+	 * @param elementId the element id
+	 * @param classArray the class array
+	 * @param pseudoName the pseudo name
+	 * @return true, if successful
+	 */
 	public final boolean affectedByPseudoNameInAncestor(
 			HTMLElementImpl element, HTMLElementImpl ancestor,
 			String elementName, String elementId, String[] classArray,
@@ -523,15 +600,22 @@ public class StyleSheetAggregator {
 		return false;
 	}
 
+	/**
+	 * The Class StyleRuleInfo.
+	 */
 	public static class StyleRuleInfo {
+		
+		/** The style rule. */
 		private final CSSStyleRule styleRule;
+		
+		/** The ancestor selectors. */
 		private final ArrayList<SimpleSelector> ancestorSelectors;
 
 		/**
-		 * @param simpleSelectors
-		 *            A collection of SimpleSelector's.
-		 * @param rule
-		 *            A CSS rule.
+		 * Instantiates a new style rule info.
+		 *
+		 * @param simpleSelectors            A collection of SimpleSelector's.
+		 * @param rule            A CSS rule.
 		 */
 		public StyleRuleInfo(ArrayList<SimpleSelector> simpleSelectors,
 				CSSStyleRule rule) {
@@ -540,6 +624,14 @@ public class StyleSheetAggregator {
 			styleRule = rule;
 		}
 
+		/**
+		 * Affected by pseudo name in ancestor.
+		 *
+		 * @param element the element
+		 * @param ancestor the ancestor
+		 * @param pseudoName the pseudo name
+		 * @return true, if successful
+		 */
 		public final boolean affectedByPseudoNameInAncestor(
 				HTMLElementImpl element, HTMLElementImpl ancestor,
 				String pseudoName) {
@@ -588,11 +680,11 @@ public class StyleSheetAggregator {
 		}
 
 		/**
-		 * 
-		 * @param element
-		 *            The element to test for a match.
-		 * @param pseudoNames
-		 *            A set of pseudo-names in lowercase.
+		 * Checks if is selector match.
+		 *
+		 * @param element            The element to test for a match.
+		 * @param pseudoNames            A set of pseudo-names in lowercase.
+		 * @return true, if is selector match
 		 */
 		private final boolean isSelectorMatch(HTMLElementImpl element,
 				Set pseudoNames) {
@@ -674,21 +766,34 @@ public class StyleSheetAggregator {
 		}
 	}
 
+	/**
+	 * The Class SimpleSelector.
+	 */
 	static class SimpleSelector {
+		
+		/** The Constant ANCESTOR. */
 		public static final int ANCESTOR = 0;
+		
+		/** The Constant PARENT. */
 		public static final int PARENT = 1;
+		
+		/** The Constant PRECEEDING_SIBLING. */
 		public static final int PRECEEDING_SIBLING = 2;
 
+		/** The simple selector text. */
 		public final String simpleSelectorText;
+		
+		/** The pseudo element. */
 		public final String pseudoElement;
+		
+		/** The selector type. */
 		public int selectorType;
 
 		/**
-		 * 
-		 * @param simpleSelectorText
-		 *            Simple selector text in lower case.
-		 * @param pseudoElement
-		 *            The pseudo-element if any.
+		 * Instantiates a new simple selector.
+		 *
+		 * @param simpleSelectorText            Simple selector text in lower case.
+		 * @param pseudoElement            The pseudo-element if any.
 		 */
 		public SimpleSelector(String simpleSelectorText, String pseudoElement) {
 			super();
@@ -697,6 +802,12 @@ public class StyleSheetAggregator {
 			this.selectorType = ANCESTOR;
 		}
 
+		/**
+		 * Matches.
+		 *
+		 * @param element the element
+		 * @return true, if successful
+		 */
 		public final boolean matches(HTMLElementImpl element) {
 			Set names = element.getPseudoNames();
 			if (names == null) {
@@ -707,6 +818,12 @@ public class StyleSheetAggregator {
 			}
 		}
 
+		/**
+		 * Matches.
+		 *
+		 * @param names the names
+		 * @return true, if successful
+		 */
 		public final boolean matches(Set names) {
 			if (names == null) {
 				return this.pseudoElement == null;
@@ -716,6 +833,12 @@ public class StyleSheetAggregator {
 			}
 		}
 
+		/**
+		 * Matches.
+		 *
+		 * @param pseudoName the pseudo name
+		 * @return true, if successful
+		 */
 		public final boolean matches(String pseudoName) {
 			if (pseudoName == null) {
 				return this.pseudoElement == null;
@@ -725,14 +848,30 @@ public class StyleSheetAggregator {
 			}
 		}
 
+		/**
+		 * Checks for pseudo name.
+		 *
+		 * @param pseudoName the pseudo name
+		 * @return true, if successful
+		 */
 		public final boolean hasPseudoName(String pseudoName) {
 			return pseudoName.equals(this.pseudoElement);
 		}
 
+		/**
+		 * Gets the selector type.
+		 *
+		 * @return the selector type
+		 */
 		public int getSelectorType() {
 			return selectorType;
 		}
 
+		/**
+		 * Sets the selector type.
+		 *
+		 * @param selectorType the new selector type
+		 */
 		public void setSelectorType(int selectorType) {
 			this.selectorType = selectorType;
 		}

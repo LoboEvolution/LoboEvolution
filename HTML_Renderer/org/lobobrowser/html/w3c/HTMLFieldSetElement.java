@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Organizes form controls into logical groups. See the FIELDSET element
  * definition in HTML 4.01.
@@ -40,31 +41,87 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLFieldSetElement extends HTMLElement {
+	
 	/**
 	 * Returns the <code>FORM</code> element containing this control. Returns
 	 * <code>null</code> if this control is not within the context of a form.
+	 *
+	 * @return the form
 	 */
 	public HTMLFormElement getForm();
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLElement#getDisabled()
+	 */
 	public boolean getDisabled();
 
+	/**
+	 * Sets the disabled.
+	 *
+	 * @param disabled the new disabled
+	 */
 	public void setDisabled(boolean disabled);
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName();
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name);
 
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public String getType();
 
+	/**
+	 * Gets the elements.
+	 *
+	 * @return the elements
+	 */
 	public HTMLFormControlsCollection getElements();
 
+	/**
+	 * Gets the will validate.
+	 *
+	 * @return the will validate
+	 */
 	public boolean getWillValidate();
 
+	/**
+	 * Gets the validity.
+	 *
+	 * @return the validity
+	 */
 	public ValidityState getValidity();
 
+	/**
+	 * Gets the validation message.
+	 *
+	 * @return the validation message
+	 */
 	public String getValidationMessage();
 
+	/**
+	 * Check validity.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean checkValidity();
 
+	/**
+	 * Sets the custom validity.
+	 *
+	 * @param error the new custom validity
+	 */
 	public void setCustomValidity(String error);
 }

@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * The document title. See the TITLE element definition in HTML 4.01.
  * <p>
@@ -39,13 +40,18 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLTitleElement extends HTMLElement {
+	
 	/**
 	 * The specified title as a string.
+	 *
+	 * @return the text
 	 */
 	public String getText();
 
 	/**
 	 * The specified title as a string.
+	 *
+	 * @param text the new text
 	 */
 	public void setText(String text);
 }

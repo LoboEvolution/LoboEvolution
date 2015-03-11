@@ -50,6 +50,7 @@ import org.w3c.dom.Node;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
+
 /**
  * The <code>HtmlParser</code> class is an HTML DOM parser. This parser provides
  * the functionality for the standard DOM parser implementation
@@ -57,13 +58,26 @@ import org.xml.sax.SAXException;
  * may be used directly when a different DOM implementation is preferred.
  */
 public class HtmlParser {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(HtmlParser.class.getName());
+	
+	/** The document. */
 	private final Document document;
+	
+	/** The ucontext. */
 	private final UserAgentContext ucontext;
+	
+	/** The public id. */
 	private final String publicId;
+	
+	/** The system id. */
 	private final String systemId;
 
+	/** The entities. */
 	private static Map<String, Character> ENTITIES = new HashMap<String, Character>(256);
+	
+	/** The element infos. */
 	private static Map<String, ElementInfo> ELEMENT_INFOS = new HashMap<String, ElementInfo>(35);
 
 	/**
@@ -116,6 +130,12 @@ public class HtmlParser {
 		this.systemId = null;
 	}
 
+	/**
+	 * Checks if is decode entities.
+	 *
+	 * @param elementName the element name
+	 * @return true, if is decode entities
+	 */
 	public static boolean isDecodeEntities(String elementName) {
 		ElementInfo einfo = (ElementInfo) ELEMENT_INFOS.get(elementName
 				.toUpperCase());
@@ -125,13 +145,11 @@ public class HtmlParser {
 	/**
 	 * Parses HTML from an input stream, assuming the character set is
 	 * ISO-8859-1.
-	 * 
-	 * @param in
-	 *            The input stream.
-	 * @throws IOException
-	 *             Thrown when there are errors reading the stream.
-	 * @throws SAXException
-	 *             Thrown when there are parse errors.
+	 *
+	 * @param in            The input stream.
+	 * @throws IOException             Thrown when there are errors reading the stream.
+	 * @throws SAXException             Thrown when there are parse errors.
+	 * @throws UnsupportedEncodingException the unsupported encoding exception
 	 */
 	public void parse(InputStream in) throws IOException, SAXException,
 			UnsupportedEncodingException {
@@ -174,6 +192,13 @@ public class HtmlParser {
 		this.parse(new LineNumberReader(reader));
 	}
 
+	/**
+	 * Parses the.
+	 *
+	 * @param reader the reader
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SAXException the SAX exception
+	 */
 	public void parse(LineNumberReader reader) throws IOException, SAXException {
 		Document doc = this.document;
 		this.parse(reader, doc);
@@ -182,13 +207,11 @@ public class HtmlParser {
 	/**
 	 * This method may be used when the DOM should be built under a given node,
 	 * such as when <code>innerHTML</code> is used in Javascript.
-	 * 
-	 * @param reader
-	 *            A document reader.
-	 * @param parent
-	 *            The root node for the parsed DOM.
-	 * @throws IOException
-	 * @throws SAXException
+	 *
+	 * @param reader            A document reader.
+	 * @param parent            The root node for the parsed DOM.
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SAXException the SAX exception
 	 */
 	public void parse(Reader reader, Node parent) throws IOException,
 			SAXException {
@@ -198,13 +221,11 @@ public class HtmlParser {
 	/**
 	 * This method may be used when the DOM should be built under a given node,
 	 * such as when <code>innerHTML</code> is used in Javascript.
-	 * 
-	 * @param reader
-	 *            A LineNumberReader for the document.
-	 * @param parent
-	 *            The root node for the parsed DOM.
-	 * @throws IOException
-	 * @throws SAXException
+	 *
+	 * @param reader            A LineNumberReader for the document.
+	 * @param parent            The root node for the parsed DOM.
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SAXException the SAX exception
 	 */
 	public void parse(LineNumberReader reader, Node parent) throws IOException,
 			SAXException {
@@ -223,16 +244,34 @@ public class HtmlParser {
 		}
 	}
 
+	/** The Constant TOKEN_EOD. */
 	private static final int TOKEN_EOD = 0;
+	
+	/** The Constant TOKEN_COMMENT. */
 	private static final int TOKEN_COMMENT = 1;
+	
+	/** The Constant TOKEN_TEXT. */
 	private static final int TOKEN_TEXT = 2;
+	
+	/** The Constant TOKEN_BEGIN_ELEMENT. */
 	private static final int TOKEN_BEGIN_ELEMENT = 3;
+	
+	/** The Constant TOKEN_END_ELEMENT. */
 	private static final int TOKEN_END_ELEMENT = 4;
+	
+	/** The Constant TOKEN_FULL_ELEMENT. */
 	private static final int TOKEN_FULL_ELEMENT = 5;
+	
+	/** The Constant TOKEN_BAD. */
 	private static final int TOKEN_BAD = 6;
 
+	/** The normal last tag. */
 	private String normalLastTag = null;
+	
+	/** The just read tag begin. */
 	private boolean justReadTagBegin = false;
+	
+	/** The just read tag end. */
 	private boolean justReadTagEnd = false;
 
 	/**
@@ -242,18 +281,16 @@ public class HtmlParser {
 
 	/**
 	 * Parses text followed by one element.
-	 * 
-	 * @param parent
-	 * @param reader
-	 * @param stopAtTagUC
-	 *            If this tag is encountered, the method throws StopException.
-	 * @param stopTags
-	 *            If tags in this set are encountered, the method throws
+	 *
+	 * @param parent the parent
+	 * @param reader the reader
+	 * @param stopTags            If tags in this set are encountered, the method throws
 	 *            StopException.
-	 * @return
-	 * @throws IOException
-	 * @throws StopException
-	 * @throws SAXException
+	 * @param ancestors the ancestors
+	 * @return the int
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws StopException the stop exception
+	 * @throws SAXException the SAX exception
 	 */
 	private final int parseToken(Node parent, LineNumberReader reader,
 			Set<String> stopTags, LinkedList<String> ancestors) throws IOException,
@@ -504,6 +541,11 @@ public class HtmlParser {
 	/**
 	 * Reads text until the beginning of the next tag. Leaves the reader offset
 	 * past the opening angle bracket. Returns null only on EOF.
+	 *
+	 * @param reader the reader
+	 * @return the string buffer
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SAXException the SAX exception
 	 */
 	private final StringBuffer readUpToTagBegin(LineNumberReader reader)
 			throws IOException, SAXException {
@@ -534,12 +576,15 @@ public class HtmlParser {
 	/**
 	 * Assumes that the content is completely made up of text, and parses until
 	 * an ending tag is found.
-	 * 
-	 * @param parent
-	 * @param reader
-	 * @param tagName
-	 * @return
-	 * @throws IOException
+	 *
+	 * @param parent the parent
+	 * @param reader the reader
+	 * @param tagName the tag name
+	 * @param addTextNode the add text node
+	 * @param decodeEntities the decode entities
+	 * @return the int
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SAXException the SAX exception
 	 */
 	private final int parseForEndTag(Node parent, LineNumberReader reader,
 			String tagName, boolean addTextNode, boolean decodeEntities)
@@ -609,10 +654,12 @@ public class HtmlParser {
 	}
 
 	/**
-	 * The reader offset should be
-	 * 
-	 * @param reader
-	 * @return
+	 * The reader offset should be.
+	 *
+	 * @param parent the parent
+	 * @param reader the reader
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private final String readTag(Node parent, LineNumberReader reader)
 			throws IOException {
@@ -748,6 +795,13 @@ public class HtmlParser {
 		return tag;
 	}
 
+	/**
+	 * Pass end of comment.
+	 *
+	 * @param reader the reader
+	 * @return the string buffer
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private final StringBuffer passEndOfComment(LineNumberReader reader)
 			throws IOException {
 		if (this.justReadTagEnd) {
@@ -818,6 +872,12 @@ public class HtmlParser {
 		return sb;
 	}
 
+	/**
+	 * Pass end of tag.
+	 *
+	 * @param reader the reader
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private final void passEndOfTag(Reader reader) throws IOException {
 		if (this.justReadTagEnd) {
 			return;
@@ -842,6 +902,13 @@ public class HtmlParser {
 		}
 	}
 
+	/**
+	 * Read processing instruction.
+	 *
+	 * @param reader the reader
+	 * @return the string buffer
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private final StringBuffer readProcessingInstruction(LineNumberReader reader)
 			throws IOException {
 		StringBuffer pidata = new StringBuffer();
@@ -857,6 +924,15 @@ public class HtmlParser {
 		return pidata;
 	}
 
+	/**
+	 * Read attribute.
+	 *
+	 * @param reader the reader
+	 * @param element the element
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws SAXException the SAX exception
+	 */
 	private final boolean readAttribute(LineNumberReader reader, Element element)
 			throws IOException, SAXException {
 		if (this.justReadTagEnd) {
@@ -1046,6 +1122,13 @@ public class HtmlParser {
 		return false;
 	}
 
+	/**
+	 * Entity decode.
+	 *
+	 * @param rawText the raw text
+	 * @return the string buffer
+	 * @throws SAXException the SAX exception
+	 */
 	private final StringBuffer entityDecode(StringBuffer rawText)
 			throws org.xml.sax.SAXException {
 		int startIdx = 0;
@@ -1104,6 +1187,12 @@ public class HtmlParser {
 				columnNumber);
 	}*/
 
+	/**
+	 * Gets the entity char.
+	 *
+	 * @param spec the spec
+	 * @return the entity char
+	 */
 	private final int getEntityChar(String spec) {
 		// TODO: Declared entities
 		Character c = (Character) ENTITIES.get(spec);

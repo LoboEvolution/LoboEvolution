@@ -8,6 +8,7 @@ package org.mozilla.javascript;
 
 import java.io.Serializable;
 
+
 /**
  * Class instances represent serializable tags to mark special Object values.
  * <p>
@@ -19,10 +20,17 @@ import java.io.Serializable;
  */
 public final class UniqueTag implements Serializable
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -4320556826714577259L;
 
+    /** The Constant ID_NOT_FOUND. */
     private static final int ID_NOT_FOUND    = 1;
+    
+    /** The Constant ID_NULL_VALUE. */
     private static final int ID_NULL_VALUE   = 2;
+    
+    /** The Constant ID_DOUBLE_MARK. */
     private static final int ID_DOUBLE_MARK  = 3;
 
     /**
@@ -44,13 +52,24 @@ public final class UniqueTag implements Serializable
     public static final UniqueTag
         DOUBLE_MARK = new UniqueTag(ID_DOUBLE_MARK);
 
+    /** The tag id. */
     private final int tagId;
 
+    /**
+     * Instantiates a new unique tag.
+     *
+     * @param tagId the tag id
+     */
     private UniqueTag(int tagId)
     {
         this.tagId = tagId;
     }
 
+    /**
+     * Read resolve.
+     *
+     * @return the object
+     */
     public Object readResolve()
     {
         switch (tagId) {
@@ -65,7 +84,10 @@ public final class UniqueTag implements Serializable
     }
 
 // Overridden for better debug printouts
-    @Override
+    /* (non-Javadoc)
+ * @see java.lang.Object#toString()
+ */
+@Override
     public String toString()
     {
         String name;

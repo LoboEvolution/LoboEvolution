@@ -23,14 +23,24 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.renderstate.FontStyleRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 
+
 /**
  * Element used for B and STRONG.
  */
 public class HTMLStrongElementImpl extends HTMLAbstractUIElement {
+	
+	/**
+	 * Instantiates a new HTML strong element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLStrongElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		prevRenderState = new FontStyleRenderState(prevRenderState,
 				java.awt.Font.BOLD);

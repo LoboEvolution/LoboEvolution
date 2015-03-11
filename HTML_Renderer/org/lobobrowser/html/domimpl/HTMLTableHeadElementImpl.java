@@ -23,14 +23,24 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.renderstate.FontStyleRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 
+
 /**
  * Element used for TH.
  */
 public class HTMLTableHeadElementImpl extends HTMLTableCellElementImpl {
+	
+	/**
+	 * Instantiates a new HTML table head element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLTableHeadElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLTableCellElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		prevRenderState = new FontStyleRenderState(prevRenderState,
 				java.awt.Font.BOLD);

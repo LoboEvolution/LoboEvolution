@@ -25,12 +25,18 @@ package org.lobobrowser.request;
 
 import java.io.IOException;
 
+
 /**
+ * The Class ResponseCodeException.
+ *
  * @author J. H. S.
  */
 public class ResponseCodeException extends IOException {
+	
 	/**
-	 * 
+	 * Instantiates a new response code exception.
+	 *
+	 * @param responseCode the response code
 	 */
 	public ResponseCodeException(int responseCode) {
 		super("Response code: " + responseCode);

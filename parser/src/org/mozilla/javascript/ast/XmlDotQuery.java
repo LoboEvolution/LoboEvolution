@@ -8,6 +8,7 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
+
 /**
  * AST node representing an E4X {@code foo.(bar)} query expression.
  * The node type (operator) is {@link Token#DOTQUERY}.
@@ -22,41 +23,63 @@ import org.mozilla.javascript.Token;
  */
 public class XmlDotQuery extends InfixExpression {
 
+    /** The rp. */
     private int rp = -1;
 
     {
         type = Token.DOTQUERY;
     }
 
+    /**
+     * Instantiates a new xml dot query.
+     */
     public XmlDotQuery() {
     }
 
+    /**
+     * Instantiates a new xml dot query.
+     *
+     * @param pos the pos
+     */
     public XmlDotQuery(int pos) {
         super(pos);
     }
 
+    /**
+     * Instantiates a new xml dot query.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public XmlDotQuery(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns right-paren position, -1 if missing.<p>
-     *
+     * 
      * Note that the left-paren is automatically the character
      * immediately after the "." in the operator - no whitespace is
      * permitted between the dot and lp by the scanner.
+     *
+     * @return the rp
      */
     public int getRp() {
         return rp;
     }
 
     /**
-     * Sets right-paren position
+     * Sets right-paren position.
+     *
+     * @param rp the new rp
      */
     public void setRp(int rp) {
         this.rp = rp;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.InfixExpression#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();

@@ -39,14 +39,31 @@ import org.mozilla.javascript.GeneratedClassLoader;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.SecurityController;
 
+
+/**
+ * The Class SecurityControllerImpl.
+ */
 public class SecurityControllerImpl extends SecurityController {
+	
+	/** The url. */
 	private final URL url;
+	
+	/** The policy. */
 	private final java.security.Policy policy;
+	
+	/** The codesource. */
 	private final CodeSource codesource;
 	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(SecurityControllerImpl.class
 			.getName());
 
+	/**
+	 * Instantiates a new security controller impl.
+	 *
+	 * @param url the url
+	 * @param policy the policy
+	 */
 	public SecurityControllerImpl(URL url, Policy policy) {
 		this.url = url;
 		this.policy = policy;
@@ -54,6 +71,9 @@ public class SecurityControllerImpl extends SecurityController {
 		this.codesource = new CodeSource(this.url, certs);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.SecurityController#callWithDomain(java.lang.Object, org.mozilla.javascript.Context, org.mozilla.javascript.Callable, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
+	 */
 	public Object callWithDomain(Object securityDomain, final Context ctx,
 			final Callable callable, final Scriptable scope,
 			final Scriptable thisObj, final Object[] args) {
@@ -78,11 +98,17 @@ public class SecurityControllerImpl extends SecurityController {
 		return obj;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.SecurityController#createClassLoader(java.lang.ClassLoader, java.lang.Object)
+	 */
 	public GeneratedClassLoader createClassLoader(ClassLoader parent,
 			Object staticDomain) {
 		return new LocalSecureClassLoader(parent,codesource);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.SecurityController#getDynamicSecurityDomain(java.lang.Object)
+	 */
 	public Object getDynamicSecurityDomain(Object securityDomain) {
 		Policy policy = this.policy;
 		if (policy == null) {

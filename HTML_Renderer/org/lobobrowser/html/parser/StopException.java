@@ -25,17 +25,30 @@ package org.lobobrowser.html.parser;
 
 import org.w3c.dom.Element;
 
+
+/**
+ * The Class StopException.
+ */
 class StopException extends Exception {
+	
+	/** The element. */
 	private final Element element;
 
 	/**
-	 * @param element
+	 * Instantiates a new stop exception.
+	 *
+	 * @param element the element
 	 */
 	public StopException(Element element) {
 		super();
 		this.element = element;
 	}
 
+	/**
+	 * Gets the element.
+	 *
+	 * @return the element
+	 */
 	public Element getElement() {
 		return this.element;
 	}

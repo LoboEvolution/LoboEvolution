@@ -28,11 +28,24 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
+
+/**
+ * The Class DOMTextImpl.
+ */
 public class DOMTextImpl extends DOMCharacterDataImpl implements Text {
+	
+	/**
+	 * Instantiates a new DOM text impl.
+	 */
 	public DOMTextImpl() {
 		this("");
 	}
 
+	/**
+	 * Instantiates a new DOM text impl.
+	 *
+	 * @param text the text
+	 */
 	public DOMTextImpl(String text) {
 		this.text = text;
 	}
@@ -144,14 +157,23 @@ public class DOMTextImpl extends DOMCharacterDataImpl implements Text {
 		this.text = nodeValue;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMCharacterDataImpl#setTextContent(java.lang.String)
+	 */
 	public void setTextContent(String textContent) throws DOMException {
 		this.text = textContent;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#createSimilarNode()
+	 */
 	protected Node createSimilarNode() {
 		return new DOMTextImpl(this.text);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.DOMCharacterDataImpl#toString()
+	 */
 	public String toString() {
 		String text = this.text;
 		int textLength = text == null ? 0 : text.length();

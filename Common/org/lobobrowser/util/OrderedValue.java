@@ -1,21 +1,48 @@
 package org.lobobrowser.util;
 
+
+/**
+ * The Class OrderedValue.
+ */
 public class OrderedValue implements Comparable<Object>, java.io.Serializable {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 340227625744215821L;
+	
+	/** The timestamp. */
 	private long timestamp;
+	
+	/** The approximate size. */
 	private int approximateSize;
+	
+	/** The key. */
 	private Object key;
+	
+	/** The value. */
 	private Object value;
 	
+	/**
+	 * Instantiates a new ordered value.
+	 *
+	 * @param key the key
+	 * @param value the value
+	 * @param approxSize the approx size
+	 */
 	public OrderedValue(Object key, Object value, int approxSize) {
 		this.value = value;
 		this.touch();
 	}
 
+	/**
+	 * Touch.
+	 */
 	final void touch() {
 		this.timestamp = System.currentTimeMillis();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	public int compareTo(Object arg0) {
 		if (this == arg0) {
 			return 0;
@@ -36,34 +63,74 @@ public class OrderedValue implements Comparable<Object>, java.io.Serializable {
 		return hc1 - hc2;
 	}
 	
+	/**
+	 * Gets the timestamp.
+	 *
+	 * @return the timestamp
+	 */
 	public long getTimestamp() {
 		return timestamp;
 	}
 
+	/**
+	 * Sets the timestamp.
+	 *
+	 * @param timestamp the new timestamp
+	 */
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
 
+	/**
+	 * Gets the value.
+	 *
+	 * @return the value
+	 */
 	public Object getValue() {
 		return value;
 	}
 
+	/**
+	 * Sets the value.
+	 *
+	 * @param value the new value
+	 */
 	public void setValue(Object value) {
 		this.value = value;
 	}
 	
+	/**
+	 * Gets the key.
+	 *
+	 * @return the key
+	 */
 	public Object getKey() {
 		return key;
 	}
 
+	/**
+	 * Sets the key.
+	 *
+	 * @param key the new key
+	 */
 	public void setKey(Object key) {
 		this.key = key;
 	}
 
+	/**
+	 * Gets the approximate size.
+	 *
+	 * @return the approximate size
+	 */
 	public int getApproximateSize() {
 		return approximateSize;
 	}
 
+	/**
+	 * Sets the approximate size.
+	 *
+	 * @param approximateSize the new approximate size
+	 */
 	public void setApproximateSize(int approximateSize) {
 		this.approximateSize = approximateSize;
 	}

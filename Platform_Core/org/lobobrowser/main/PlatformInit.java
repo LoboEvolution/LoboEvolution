@@ -56,6 +56,7 @@ import org.lobobrowser.util.SimpleThreadPoolTask;
 import org.lobobrowser.util.Urls;
 
 ;
+
 /**
  * A singleton class that is used to initialize a browser session in the current
  * JVM. It can also be used to open a browser window.
@@ -63,10 +64,19 @@ import org.lobobrowser.util.Urls;
  * @see #getInstance()
  */
 public class PlatformInit {
+	
+	/** The Constant NATIVE_DIR_NAME. */
 	private static final String NATIVE_DIR_NAME = "native";
+	
+	/** The thread executor. */
 	private final SimpleThreadPool threadExecutor;
+	
+	/** The general settings. */
 	private final GeneralSettings generalSettings;
 
+	/**
+	 * Instantiates a new platform init.
+	 */
 	private PlatformInit() {
 		this.threadExecutor = new SimpleThreadPool("MainThreadPool", 2, 10,
 				60 * 1000);
@@ -116,6 +126,8 @@ public class PlatformInit {
 
 	/**
 	 * Initializes the Swing look feel.
+	 *
+	 * @throws Exception the exception
 	 */
 	public void initLookAndFeel() throws Exception {
 		try {
@@ -132,6 +144,11 @@ public class PlatformInit {
 
 	}
 
+	/**
+	 * Checks if is code location directory.
+	 *
+	 * @return true, if is code location directory
+	 */
 	public boolean isCodeLocationDirectory() {
 		URL codeLocation = this.getClass().getProtectionDomain()
 				.getCodeSource().getLocation();
@@ -160,10 +177,10 @@ public class PlatformInit {
 	/**
 	 * Initializes platform logging. Note that this method is not implicitly
 	 * called by {@link #init(boolean, boolean)}.
-	 * 
-	 * @param debugOn
-	 *            Debugging mode. This determines which one of two different
+	 *
+	 * @param debugOn            Debugging mode. This determines which one of two different
 	 *            logging configurations is used.
+	 * @throws Exception the exception
 	 */
 	public void initLogging(boolean debugOn) throws Exception {
 		// Set up debugging & console
@@ -209,6 +226,8 @@ public class PlatformInit {
 	/**
 	 * Initializes the default window factory such that the JVM exits when all
 	 * windows created by the factory are closed by the user.
+	 *
+	 * @param exitWhenAllWindowsAreClosed the exit when all windows are closed
 	 */
 	public void initWindowFactory(boolean exitWhenAllWindowsAreClosed) {
 		DefaultWindowFactory.getInstance().setExitWhenAllWindowsAreClosed(
@@ -254,14 +273,13 @@ public class PlatformInit {
 	 * <p>
 	 * Applications that need to install their own security manager and policy
 	 * should not call this method.
-	 * 
-	 * @param exitWhenAllWindowsAreClosed
-	 *            Whether the JVM should exit when all windows created by the
+	 *
+	 * @param exitWhenAllWindowsAreClosed            Whether the JVM should exit when all windows created by the
 	 *            default window factory are closed.
-	 * @param initConsole
-	 *            If this parameter is <code>true</code>, standard output is
+	 * @param initConsole            If this parameter is <code>true</code>, standard output is
 	 *            redirected to a browser console. See
 	 *            {@link org.lobobrowser.gui.ConsoleModel}.
+	 * @throws Exception the exception
 	 * @see #initSecurity()
 	 * @see #initProtocols()
 	 * @see #initExtensions()
@@ -283,10 +301,9 @@ public class PlatformInit {
 
 	/**
 	 * Opens a window and attempts to render the URL or path given.
-	 * 
-	 * @param urlOrPath
-	 *            A URL or file path.
-	 * @throws MalformedURLException
+	 *
+	 * @param urlOrPath            A URL or file path.
+	 * @throws MalformedURLException the malformed url exception
 	 */
 	public void launch(String urlOrPath) throws MalformedURLException {
 		URL url = org.lobobrowser.util.Urls.guessURL(urlOrPath);
@@ -296,9 +313,9 @@ public class PlatformInit {
 	/**
 	 * Opens as many browser windows as there are startup URLs in general
 	 * settings.
-	 * 
+	 *
+	 * @throws MalformedURLException the malformed url exception
 	 * @see org.lobobrowser.settings.GeneralSettings#getStartupURLs()
-	 * @throws MalformedURLException
 	 */
 	public void launch() throws MalformedURLException {
 		SecurityManager sm = System.getSecurityManager();
@@ -312,6 +329,7 @@ public class PlatformInit {
 		}
 	}
 
+	/** The window has been shown. */
 	private boolean windowHasBeenShown = false;
 
 	/**
@@ -320,7 +338,9 @@ public class PlatformInit {
 	 * opened in separate windows. If no arguments are found, the method
 	 * launches URLs from general settings. This method will not return until at
 	 * least one window has been shown.
-	 * 
+	 *
+	 * @param args the args
+	 * @throws MalformedURLException the malformed url exception
 	 * @see org.lobobrowser.settings.GeneralSettings#getStartupURLs()
 	 */
 	public void start(String[] args) throws MalformedURLException {
@@ -359,10 +379,13 @@ public class PlatformInit {
 		}
 	}
 
+	/** The Constant instance. */
 	private static final PlatformInit instance = new PlatformInit();
 
 	/**
 	 * Gets the singleton instance.
+	 *
+	 * @return single instance of PlatformInit
 	 */
 	public static PlatformInit getInstance() {
 		return instance;
@@ -396,12 +419,23 @@ public class PlatformInit {
 		LocalSecurityPolicy.addPrivilegedPermission(permission);
 	}
 
+	/**
+	 * Schedule task.
+	 *
+	 * @param task the task
+	 */
 	public void scheduleTask(SimpleThreadPoolTask task) {
 		this.threadExecutor.schedule(task);
 	}
 
+	/** The application directory. */
 	private File applicationDirectory;
 
+	/**
+	 * Gets the application directory.
+	 *
+	 * @return the application directory
+	 */
 	public File getApplicationDirectory() {
 		File appDir = this.applicationDirectory;
 		if (appDir == null) {
@@ -447,8 +481,15 @@ public class PlatformInit {
 		return appDir;
 	}
 
+	/**
+	 * A factory for creating LocalStreamHandler objects.
+	 */
 	private static class LocalStreamHandlerFactory implements
 			java.net.URLStreamHandlerFactory {
+		
+		/* (non-Javadoc)
+		 * @see java.net.URLStreamHandlerFactory#createURLStreamHandler(java.lang.String)
+		 */
 		public URLStreamHandler createURLStreamHandler(String protocol) {
 			if (protocol.equals("res")) {
 				return new org.lobobrowser.protocol.res.Handler();

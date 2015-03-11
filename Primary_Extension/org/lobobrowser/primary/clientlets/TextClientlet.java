@@ -34,10 +34,21 @@ import org.lobobrowser.clientlet.ClientletContext;
 import org.lobobrowser.clientlet.ClientletException;
 import org.lobobrowser.util.io.IORoutines;
 
+
+/**
+ * The Class TextClientlet.
+ */
 public class TextClientlet implements Clientlet {
+	
+	/**
+	 * Instantiates a new text clientlet.
+	 */
 	public TextClientlet() {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.clientlet.Clientlet#process(org.lobobrowser.clientlet.ClientletContext)
+	 */
 	public void process(ClientletContext context) throws ClientletException {
 		try {
 			InputStream in = context.getResponse().getInputStream();

@@ -71,54 +71,77 @@ import com.sun.pdfview.ThumbPanel;
 import com.sun.pdfview.action.GoToAction;
 import com.sun.pdfview.action.PDFAction;
 
+
+/**
+ * The Class PdfDialog.
+ */
 public class PdfDialog extends JFrame implements KeyListener,
 		TreeSelectionListener, PageChangeListener {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant TITLE. */
 	public final static String TITLE = "SwingLabs PDF Viewer";
-	/** The current PDFFile */
+	
+	/**  The current PDFFile. */
 	PDFFile curFile;
-	/** the name of the current document */
+	
+	/**  the name of the current document. */
 	String docName;
-	/** The split between thumbs and page */
+	
+	/**  The split between thumbs and page. */
 	JSplitPane split;
-	/** The thumbnail scroll pane */
+	
+	/**  The thumbnail scroll pane. */
 	JScrollPane thumbscroll;
-	/** The thumbnail display */
+	
+	/**  The thumbnail display. */
 	ThumbPanel thumbs;
-	/** The page display */
+	
+	/**  The page display. */
 	PagePanel page;
-	/** The full screen page display, or null if not in full screen mode */
+	
+	/**  The full screen page display, or null if not in full screen mode. */
 	PagePanel fspp;
 	// Thread anim;
-	/** The current page number (starts at 0), or -1 if no page */
+	/**  The current page number (starts at 0), or -1 if no page. */
 	int curpage = -1;
-	/** the full screen button */
+	
+	/**  the full screen button. */
 	JToggleButton fullScreenButton;
-	/** the current page number text field */
+	
+	/**  the current page number text field. */
 	JTextField pageField;
-	/** the full screen window, or null if not in full screen mode */
+	
+	/**  the full screen window, or null if not in full screen mode. */
 	FullScreenWindow fullScreen;
-	/** the root of the outline, or null if there is no outline */
+	
+	/**  the root of the outline, or null if there is no outline. */
 	OutlineNode outline = null;
-	/** The page format for printing */
+	
+	/**  The page format for printing. */
 	PageFormat pformat = PrinterJob.getPrinterJob().defaultPage();
-	/** true if the thumb panel should exist at all */
+	
+	/**  true if the thumb panel should exist at all. */
 	boolean doThumb = true;
-	/** flag to indicate when a newly added document has been announced */
+	
+	/**  flag to indicate when a newly added document has been announced. */
 	Flag docWaiter;
-	/** a thread that pre-loads the next page for faster response */
+	
+	/**  a thread that pre-loads the next page for faster response. */
 	PagePreparer pagePrep;
-	/** the window containing the pdf outline, or null if one doesn't exist */
+	
+	/**  the window containing the pdf outline, or null if one doesn't exist. */
 	JDialog olf;
-	/** the document menu */
+	
+	/**  the document menu. */
 	JMenu docMenu;
 
 	/**
-	 * utility method to get an icon from the resources of this class
-	 * 
-	 * @param name
-	 *            the name of the icon
+	 * utility method to get an icon from the resources of this class.
+	 *
+	 * @param name            the name of the icon
 	 * @return the icon, or null if the icon wasn't found.
 	 */
 	public Icon getIcon(String name) {
@@ -137,6 +160,7 @@ public class PdfDialog extends JFrame implements KeyListener,
 
 	// / FILE MENU
 	
+	/** The page setup action. */
 	Action pageSetupAction = new AbstractAction("Page setup...") {
 
 		private static final long serialVersionUID = 1L;
@@ -145,6 +169,8 @@ public class PdfDialog extends JFrame implements KeyListener,
 			doPageSetup();
 		}
 	};
+	
+	/** The print action. */
 	Action printAction = new AbstractAction("Print...", getIcon("/toolbarButtonGraphics/general/Print16.gif")) {
 
 		private static final long serialVersionUID = 1L;
@@ -153,6 +179,8 @@ public class PdfDialog extends JFrame implements KeyListener,
 			doPrint();
 		}
 	};
+	
+	/** The close action. */
 	Action closeAction = new AbstractAction("Close") {
 
 		private static final long serialVersionUID = 1L;
@@ -161,6 +189,8 @@ public class PdfDialog extends JFrame implements KeyListener,
 			doClose();
 		}
 	};
+	
+	/** The quit action. */
 	Action quitAction = new AbstractAction("Quit") {
 
 		private static final long serialVersionUID = 1L;
@@ -170,6 +200,7 @@ public class PdfDialog extends JFrame implements KeyListener,
 		}
 	};
 
+	/** The zoom tool action. */
 	Action zoomToolAction = new AbstractAction("", getIcon("/toolbarButtonGraphics/general/ZoomIn16.gif")) {
 
 		private static final long serialVersionUID = 1L;
@@ -178,6 +209,8 @@ public class PdfDialog extends JFrame implements KeyListener,
 			doZoomTool();
 		}
 	};
+	
+	/** The fit in window action. */
 	Action fitInWindowAction = new AbstractAction("Fit in window", getIcon("/toolbarButtonGraphics/general/ZoomOut16.gif")) {
 
 		private static final long serialVersionUID = 1L;
@@ -187,15 +220,27 @@ public class PdfDialog extends JFrame implements KeyListener,
 		}
 	};
 
+	/**
+	 * The Class ThumbAction.
+	 */
 	class ThumbAction extends AbstractAction implements PropertyChangeListener {
 
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The is open. */
 		boolean isOpen = true;
 
+		/**
+		 * Instantiates a new thumb action.
+		 */
 		public ThumbAction() {
 			super("Hide thumbnails");
 		}
 
+		/* (non-Javadoc)
+		 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+		 */
 		public void propertyChange(PropertyChangeEvent evt) {
 			int v = ((Integer) evt.getNewValue()).intValue();
 			if (v <= 1) {
@@ -209,12 +254,18 @@ public class PdfDialog extends JFrame implements KeyListener,
 			}
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent evt) {
 			doThumbs(!isOpen);
 		}
 	}
 
+	/** The thumb action. */
 	ThumbAction thumbAction = new ThumbAction();
+	
+	/** The full screen action. */
 	Action fullScreenAction = new AbstractAction("Full screen", getIcon("/toolbarButtonGraphics/media/Play16.gif")) {
 		
 		private static final long serialVersionUID = 1L;
@@ -223,6 +274,8 @@ public class PdfDialog extends JFrame implements KeyListener,
 			doFullScreen((evt.getModifiers() & ActionEvent.SHIFT_MASK) != 0);
 		}
 	};
+	
+	/** The next action. */
 	Action nextAction = new AbstractAction("Next", getIcon("/toolbarButtonGraphics/navigation/Forward16.gif")) {
 		/**
 		 * 
@@ -234,6 +287,7 @@ public class PdfDialog extends JFrame implements KeyListener,
 		}
 	};
 
+	/** The prev action. */
 	Action prevAction = new AbstractAction("Prev", getIcon("/toolbarButtonGraphics/navigation/Back16.gif")) {
 		/**
 		 * 
@@ -413,10 +467,14 @@ public class PdfDialog extends JFrame implements KeyListener,
 	}
 
 	/**
-	 * A class to pre-cache the next page for better UI response
+	 * A class to pre-cache the next page for better UI response.
 	 */
 	class PagePreparer extends Thread {
+		
+		/** The waitfor page. */
 		int waitforPage;
+		
+		/** The prep page. */
 		int prepPage;
 
 		/**
@@ -432,10 +490,16 @@ public class PdfDialog extends JFrame implements KeyListener,
 			this.prepPage = waitforPage + 1;
 		}
 
+		/**
+		 * Quit.
+		 */
 		public void quit() {
 			waitforPage = -1;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Thread#run()
+		 */
 		public void run() {
 			Dimension size = null;
 			Rectangle2D clip = null;
@@ -491,8 +555,8 @@ public class PdfDialog extends JFrame implements KeyListener,
 	 * open a URL to a PDF file. The file is read in and processed with an
 	 * in-memory buffer.
 	 *
-	 * @param url
-	 * @throws java.io.IOException
+	 * @param url the url
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void openFile(URL url) throws IOException {
 		URLConnection urlConnection = url.openConnection();
@@ -520,14 +584,13 @@ public class PdfDialog extends JFrame implements KeyListener,
 	 * Open a specific pdf file. Creates a DocumentInfo from the file, and opens
 	 * that.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * <b>Note:</b> Mapping the file locks the file until the PDFFile is closed.
 	 * </p>
 	 *
-	 * @param file
-	 *            the file to open
-	 * @throws IOException
+	 * @param file            the file to open
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void openFile(File file) throws IOException {
 		// first open the file for random access
@@ -546,14 +609,14 @@ public class PdfDialog extends JFrame implements KeyListener,
 	 * Open a specific pdf file. Creates a DocumentInfo from the file, and opens
 	 * that.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * <b>Note:</b> By not memory mapping the file its contents are not locked
 	 * down while PDFFile is open.
 	 * </p>
 	 *
-	 * @param file
-	 *            the file to open
+	 * @param file            the file to open
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void openFileUnMapped(File file) throws IOException {
 		DataInputStream istr = null;
@@ -597,8 +660,9 @@ public class PdfDialog extends JFrame implements KeyListener,
 	/**
 	 * open the ByteBuffer data as a PDFFile and start to process it.
 	 *
-	 * @param buf
-	 * @param path
+	 * @param buf the buf
+	 * @param path the path
+	 * @param name the name
 	 */
 	private void openPDFByteBuffer(ByteBuffer buf, String path, String name) {
 		// create a PDFFile from the data
@@ -654,6 +718,8 @@ public class PdfDialog extends JFrame implements KeyListener,
 
 	/**
 	 * Display a dialog indicating an error.
+	 *
+	 * @param message the message
 	 */
 	public void openError(String message) {
 		JOptionPane.showMessageDialog(split, message, "Error opening file",
@@ -672,10 +738,12 @@ public class PdfDialog extends JFrame implements KeyListener,
 			return "Choose a PDF file";
 		}
 	};
+	
+	/** The prev dir choice. */
 	private File prevDirChoice;
 
 	/**
-	 * Ask the user for a PDF file to open from the local file system
+	 * Ask the user for a PDF file to open from the local file system.
 	 */
 	public void doOpen() {
 		try {
@@ -703,10 +771,9 @@ public class PdfDialog extends JFrame implements KeyListener,
 	}
 
 	/**
-	 * Open a local file, given a string filename
-	 * 
-	 * @param name
-	 *            the name of the file to open
+	 * Open a local file, given a string filename.
+	 *
+	 * @param name            the name of the file to open
 	 */
 	public void doOpen(String name) {
 		try {
@@ -722,7 +789,7 @@ public class PdfDialog extends JFrame implements KeyListener,
 	}
 
 	/**
-	 * Posts the Page Setup dialog
+	 * Posts the Page Setup dialog.
 	 */
 	public void doPageSetup() {
 		PrinterJob pjob = PrinterJob.getPrinterJob();
@@ -733,15 +800,28 @@ public class PdfDialog extends JFrame implements KeyListener,
 	 * A thread for printing in.
 	 */
 	class PrintThread extends Thread {
+		
+		/** The pt pages. */
 		PDFPrintPage ptPages;
+		
+		/** The pt pjob. */
 		PrinterJob ptPjob;
 
+		/**
+		 * Instantiates a new prints the thread.
+		 *
+		 * @param pages the pages
+		 * @param pjob the pjob
+		 */
 		public PrintThread(PDFPrintPage pages, PrinterJob pjob) {
 			ptPages = pages;
 			ptPjob = pjob;
 			setName(getClass().getName());
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Thread#run()
+		 */
 		public void run() {
 			try {
 				ptPages.show(ptPjob);
@@ -802,7 +882,7 @@ public class PdfDialog extends JFrame implements KeyListener,
 	}
 
 	/**
-	 * Turns on zooming
+	 * Turns on zooming.
 	 */
 	public void doZoomTool() {
 		if (fspp == null) {
@@ -811,7 +891,7 @@ public class PdfDialog extends JFrame implements KeyListener,
 	}
 
 	/**
-	 * Turns off zooming; makes the page fit in the window
+	 * Turns off zooming; makes the page fit in the window.
 	 */
 	public void doFitInWindow() {
 		if (fspp == null) {
@@ -821,7 +901,9 @@ public class PdfDialog extends JFrame implements KeyListener,
 	}
 
 	/**
-	 * Shows or hides the thumbnails by moving the split pane divider
+	 * Shows or hides the thumbnails by moving the split pane divider.
+	 *
+	 * @param show the show
 	 */
 	public void doThumbs(boolean show) {
 		if (show) {
@@ -833,10 +915,9 @@ public class PdfDialog extends JFrame implements KeyListener,
 	}
 
 	/**
-	 * Enter full screen mode
-	 * 
-	 * @param force
-	 *            true if the user should be prompted for a screen to use in a
+	 * Enter full screen mode.
+	 *
+	 * @param force            true if the user should be prompted for a screen to use in a
 	 *            multiple-monitor setup. If false, the user will only be
 	 *            prompted once.
 	 */
@@ -844,41 +925,46 @@ public class PdfDialog extends JFrame implements KeyListener,
 		setFullScreenMode(fullScreen == null, force);
 	}
 
+	/**
+	 * Do zoom.
+	 *
+	 * @param factor the factor
+	 */
 	public void doZoom(double factor) {
 	}
 
 	// public void doOpenMeetingDoc(DocumentInfo doc) {
 	// }
 	/**
-	 * Goes to the next page
+	 * Goes to the next page.
 	 */
 	public void doNext() {
 		gotoPage(curpage + 1);
 	}
 
 	/**
-	 * Goes to the previous page
+	 * Goes to the previous page.
 	 */
 	public void doPrev() {
 		gotoPage(curpage - 1);
 	}
 
 	/**
-	 * Goes to the first page
+	 * Goes to the first page.
 	 */
 	public void doFirst() {
 		gotoPage(0);
 	}
 
 	/**
-	 * Goes to the last page
+	 * Goes to the last page.
 	 */
 	public void doLast() {
 		gotoPage(curFile.getNumPages() - 1);
 	}
 
 	/**
-	 * Goes to the page that was typed in the page number text field
+	 * Goes to the page that was typed in the page number text field.
 	 */
 	public void doPageTyped() {
 		int pagenum = -1;
@@ -899,15 +985,25 @@ public class PdfDialog extends JFrame implements KeyListener,
 	}
 
 	/**
-	 * Runs the FullScreenMode change in another thread
+	 * Runs the FullScreenMode change in another thread.
 	 */
 	class PerformFullScreenMode implements Runnable {
+		
+		/** The force. */
 		boolean force;
 
+		/**
+		 * Instantiates a new perform full screen mode.
+		 *
+		 * @param forcechoice the forcechoice
+		 */
 		public PerformFullScreenMode(boolean forcechoice) {
 			force = forcechoice;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		public void run() {
 			fspp = new PagePanel();
 			fspp.setBackground(Color.black);
@@ -945,7 +1041,9 @@ public class PdfDialog extends JFrame implements KeyListener,
 	}
 
 	/**
-	 * Handle a key press for navigation
+	 * Handle a key press for navigation.
+	 *
+	 * @param evt the evt
 	 */
 	public void keyPressed(KeyEvent evt) {
 		int code = evt.getKeyCode();
@@ -976,12 +1074,24 @@ public class PdfDialog extends JFrame implements KeyListener,
 	 * Combines numeric key presses to build a multi-digit page number.
 	 */
 	class PageBuilder implements Runnable {
+		
+		/** The value. */
 		int value = 0;
+		
+		/** The timeout. */
 		long timeout;
+		
+		/** The anim. */
 		Thread anim;
+		
+		/** The Constant TIMEOUT. */
 		static final long TIMEOUT = 500;
 
-		/** add the digit to the page number and start the timeout thread */
+		/**
+		 *  add the digit to the page number and start the timeout thread.
+		 *
+		 * @param keyval the keyval
+		 */
 		public synchronized void keyTyped(int keyval) {
 			value = value * 10 + keyval;
 			timeout = System.currentTimeMillis() + TIMEOUT;
@@ -994,7 +1104,7 @@ public class PdfDialog extends JFrame implements KeyListener,
 
 		/**
 		 * waits for the timeout, and if time expires, go to the specified page
-		 * number
+		 * number.
 		 */
 		public void run() {
 			long now, then;
@@ -1020,13 +1130,19 @@ public class PdfDialog extends JFrame implements KeyListener,
 		}
 	}
 
+	/** The pb. */
 	PageBuilder pb = new PageBuilder();
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+	 */
 	public void keyReleased(KeyEvent evt) {
 	}
 
 	/**
-	 * gets key presses and tries to build a page if they're numeric
+	 * gets key presses and tries to build a page if they're numeric.
+	 *
+	 * @param evt the evt
 	 */
 	public void keyTyped(KeyEvent evt) {
 		char key = evt.getKeyChar();
@@ -1038,6 +1154,8 @@ public class PdfDialog extends JFrame implements KeyListener,
 
 	/**
 	 * Someone changed the selection of the outline tree. Go to the new page.
+	 *
+	 * @param e the e
 	 */
 	public void valueChanged(TreeSelectionEvent e) {
 		if (e.isAddedPath()) {

@@ -47,6 +47,7 @@ import com.steadystate.css.parser.LexicalUnitImpl;
 import com.steadystate.css.userdata.UserDataConstants;
 import com.steadystate.css.util.LangUtils;
 
+
 /**
  * The <code>CSSValueImpl</code> class can represent either a
  * <code>CSSPrimitiveValue</code> or a <code>CSSValueList</code> so that
@@ -61,20 +62,35 @@ import com.steadystate.css.util.LangUtils;
  */
 public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, CSSValueList {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 406281136418322579L;
 
+    /** The value_. */
     private Object value_;
 
+    /**
+     * Gets the value.
+     *
+     * @return the value
+     */
     public Object getValue() {
         return value_;
     }
 
+    /**
+     * Sets the value.
+     *
+     * @param value the new value
+     */
     public void setValue(final Object value) {
         value_ = value;
     }
 
     /**
-     * Constructor
+     * Constructor.
+     *
+     * @param value the value
+     * @param forcePrimitive the force primitive
      */
     public CSSValueImpl(final LexicalUnit value, final boolean forcePrimitive) {
         LexicalUnit parameters = null;
@@ -122,10 +138,19 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
         }
     }
 
+    /**
+     * Instantiates a new CSS value impl.
+     */
     public CSSValueImpl() {
         super();
     }
 
+    /**
+     * Gets the values.
+     *
+     * @param value the value
+     * @return the values
+     */
     private List<CSSValueImpl> getValues(final LexicalUnit value) {
         // We need to be a CSSValueList
         // Values in an "expr" can be seperated by "operator"s, which are
@@ -142,10 +167,18 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
         return values;
     }
 
+    /**
+     * Instantiates a new CSS value impl.
+     *
+     * @param value the value
+     */
     public CSSValueImpl(final LexicalUnit value) {
         this(value, false);
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSValue#getCssText()
+     */
     public String getCssText() {
         if (getCssValueType() == CSS_VALUE_LIST) {
 
@@ -185,6 +218,9 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
         return value_ != null ? value_.toString() : "";
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSValue#setCssText(java.lang.String)
+     */
     public void setCssText(final String cssText) throws DOMException {
         try {
             final InputSource is = new InputSource(new StringReader(cssText));
@@ -201,6 +237,9 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSValue#getCssValueType()
+     */
     public short getCssValueType() {
         if (value_ instanceof List) {
             return CSS_VALUE_LIST;
@@ -212,6 +251,9 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
         return CSS_PRIMITIVE_VALUE;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSPrimitiveValue#getPrimitiveType()
+     */
     public short getPrimitiveType() {
         if (value_ instanceof LexicalUnit) {
             final LexicalUnit lu = (LexicalUnit) value_;
@@ -290,10 +332,16 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
         return CSS_UNKNOWN;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSPrimitiveValue#setFloatValue(short, float)
+     */
     public void setFloatValue(final short unitType, final float floatValue) throws DOMException {
         value_ = LexicalUnitImpl.createNumber(null, floatValue);
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSPrimitiveValue#getFloatValue(short)
+     */
     public float getFloatValue(final short unitType) throws DOMException {
         if (value_ instanceof LexicalUnit) {
             final LexicalUnit lu = (LexicalUnit) value_;
@@ -307,6 +355,9 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
         // return 0;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSPrimitiveValue#setStringValue(short, java.lang.String)
+     */
     public void setStringValue(final short stringType, final String stringValue) throws DOMException {
         switch (stringType) {
             case CSS_STRING:
@@ -332,7 +383,10 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
     }
 
     /**
-     * TODO: return a value for a list type
+     * TODO: return a value for a list type.
+     *
+     * @return the string value
+     * @throws DOMException the DOM exception
      */
     public String getStringValue() throws DOMException {
         if (value_ instanceof LexicalUnit) {
@@ -354,6 +408,9 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
             DOMExceptionImpl.STRING_ERROR);
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSPrimitiveValue#getCounterValue()
+     */
     public Counter getCounterValue() throws DOMException {
         if (value_ instanceof Counter) {
             return (Counter) value_;
@@ -364,6 +421,9 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
                 DOMExceptionImpl.COUNTER_ERROR);
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSPrimitiveValue#getRectValue()
+     */
     public Rect getRectValue() throws DOMException {
         if (value_ instanceof Rect) {
             return (Rect) value_;
@@ -374,6 +434,9 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
                 DOMExceptionImpl.RECT_ERROR);
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSPrimitiveValue#getRGBColorValue()
+     */
     public RGBColor getRGBColorValue() throws DOMException {
         if (value_ instanceof RGBColor) {
             return (RGBColor) value_;
@@ -384,6 +447,9 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
             DOMExceptionImpl.RGBCOLOR_ERROR);
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSValueList#getLength()
+     */
     @SuppressWarnings("unchecked")
     public int getLength() {
         if (value_ instanceof List) {
@@ -392,6 +458,9 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
         return 0;
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSValueList#item(int)
+     */
     @SuppressWarnings("unchecked")
     public CSSValue item(final int index) {
         if (value_ instanceof List) {
@@ -401,11 +470,17 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
         return null;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return getCssText();
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.dom.CSSOMObjectImpl#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -421,6 +496,9 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
             && LangUtils.equals(getCssText(), cv.getCssText());
     }
 
+    /* (non-Javadoc)
+     * @see com.steadystate.css.dom.CSSOMObjectImpl#hashCode()
+     */
     @Override
     public int hashCode() {
         int hash = super.hashCode();

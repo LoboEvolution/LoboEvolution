@@ -26,16 +26,31 @@ import org.lobobrowser.html.renderstate.BlockRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.w3c.HTMLCanvasElement;
 
+
+/**
+ * The Class HTMLCanvasElementImpl.
+ */
 public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements HTMLCanvasElement {
 
+	/**
+	 * Instantiates a new HTML canvas element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLCanvasElementImpl(String name) {
 		super(name);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new BlockRenderState(prevRenderState, this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCanvasElement#getWidth()
+	 */
 	@Override
 	public int getWidth() {
 		String widthText = this.getAttribute(HtmlAttributeProperties.WIDTH);
@@ -49,11 +64,17 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements HTML
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCanvasElement#setWidth(int)
+	 */
 	@Override
 	public void setWidth(int width) {
 		this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCanvasElement#getHeight()
+	 */
 	@Override
 	public int getHeight() {
 		String heightText = this.getAttribute(HtmlAttributeProperties.HEIGHT);
@@ -67,23 +88,35 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements HTML
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCanvasElement#setHeight(int)
+	 */
 	@Override
 	public void setHeight(int height) {
 		this.setAttribute(HtmlAttributeProperties.HEIGHT, String.valueOf(height));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCanvasElement#toDataURL()
+	 */
 	@Override
 	public String toDataURL() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCanvasElement#toDataURL(java.lang.String, java.lang.Object[])
+	 */
 	@Override
 	public String toDataURL(String type, Object... args) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCanvasElement#getContext(java.lang.String)
+	 */
 	@Override
 	public Object getContext(String contextId) {	
 		return null;

@@ -28,13 +28,20 @@ import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.UIControl;
 import org.lobobrowser.html.renderer.UIControlWrapper;
 
+
+/**
+ * The Class ObjectLayout.
+ */
 public class ObjectLayout  extends CommonWidgetLayout {
+	
+	/** The try to render content. */
 	private boolean tryToRenderContent;
 
 	/**
-	 * @param tryToRenderContent
-	 *            If the object is unknown, content is rendered as HTML.
-	 * @param usesAlignAttribute
+	 * Instantiates a new object layout.
+	 *
+	 * @param tryToRenderContent            If the object is unknown, content is rendered as HTML.
+	 * @param usesAlignAttribute the uses align attribute
 	 */
 	public ObjectLayout(boolean tryToRenderContent,
 			boolean usesAlignAttribute) {
@@ -48,6 +55,9 @@ public class ObjectLayout  extends CommonWidgetLayout {
 	 */
 	private final ThreadLocal<HtmlObject> htmlObject = new ThreadLocal<HtmlObject>();
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.layout.CommonWidgetLayout#layoutMarkup(org.lobobrowser.html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
 	public void layoutMarkup(RBlockViewport bodyLayout,
 			HTMLElementImpl markupElement) {
 		HtmlObject ho = bodyLayout.getRendererContext().getHtmlObject(markupElement);
@@ -60,6 +70,9 @@ public class ObjectLayout  extends CommonWidgetLayout {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.lobobrowser.html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
 	protected RElement createRenderable(RBlockViewport bodyLayout,HTMLElementImpl markupElement) {
 		HtmlObject ho = (HtmlObject) this.htmlObject.get();
 		UIControl uiControl = new UIControlWrapper(ho);

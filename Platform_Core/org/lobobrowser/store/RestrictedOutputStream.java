@@ -26,15 +26,26 @@ package org.lobobrowser.store;
 import java.io.IOException;
 import java.io.OutputStream;
 
+
 /**
+ * The Class RestrictedOutputStream.
+ *
  * @author J. H. S.
  */
 public class RestrictedOutputStream extends OutputStream {
+	
+	/** The out. */
 	private final OutputStream out;
+	
+	/** The quota source. */
 	private final QuotaSource quotaSource;
 
 	/**
-	 * 
+	 * Instantiates a new restricted output stream.
+	 *
+	 * @param out the out
+	 * @param quotaSource the quota source
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public RestrictedOutputStream(OutputStream out, QuotaSource quotaSource)
 			throws IOException {

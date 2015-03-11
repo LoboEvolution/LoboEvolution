@@ -31,12 +31,22 @@ import java.net.URLConnection;
 
 import org.lobobrowser.context.VolatileContentImpl;
 
+
 /**
+ * The Class VcURLConnection.
+ *
  * @author J. H. S.
  */
 public class VcURLConnection extends URLConnection {
+	
+	/** The vc. */
 	private final VolatileContentImpl vc;
 
+	/**
+	 * Instantiates a new vc url connection.
+	 *
+	 * @param url the url
+	 */
 	public VcURLConnection(URL url) {
 		super(url);
 		String file = url.getPath();

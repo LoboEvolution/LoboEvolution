@@ -52,14 +52,35 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
+/**
+ * The Class PathRepository.
+ */
 public class PathRepository {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(PathRepository.class
 			.getName());
+	
+	/** The directory paths. */
 	private final Collection<URL> directoryPaths;
+	
+	/** The jar files. */
 	private final Collection<JarInfo> jarFiles;
+	
+	/** The entry list. */
 	private final String[] entryList;
+	
+	/** The use listing xml. */
 	private final boolean useListingXML;
 
+	/**
+	 * Instantiates a new path repository.
+	 *
+	 * @param paths the paths
+	 * @param useListingXML the use listing xml
+	 * @param entryList the entry list
+	 */
 	public PathRepository(final URL[] paths, boolean useListingXML,
 			String[] entryList) {
 		this.useListingXML = useListingXML;
@@ -99,6 +120,13 @@ public class PathRepository {
 		}
 	}
 
+	/**
+	 * Gets the file.
+	 *
+	 * @param url the url
+	 * @return the file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private static java.io.File getFile(URL url) throws IOException {
 		try {
 			return new java.io.File(url.toURI());
@@ -112,6 +140,16 @@ public class PathRepository {
 		}
 	}
 
+	/**
+	 * Creates the jar file.
+	 *
+	 * @param context the context
+	 * @param url the url
+	 * @param isLocalFile the is local file
+	 * @param file the file
+	 * @return the jar file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private JarFile createJarFile(ClientletContext context, URL url,
 			boolean isLocalFile, java.io.File file) throws IOException {
 		if (isLocalFile) {
@@ -135,6 +173,15 @@ public class PathRepository {
 		}
 	}
 
+	/**
+	 * Gets the java file for input.
+	 *
+	 * @param context the context
+	 * @param className the class name
+	 * @param kind the kind
+	 * @return the java file for input
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public JavaFileObject getJavaFileForInput(ClientletContext context,
 			String className, Kind kind) throws IOException {
 		String suffix;
@@ -164,6 +211,15 @@ public class PathRepository {
 				+ ",kind=" + kind);
 	}
 
+	/**
+	 * Gets the file for input.
+	 *
+	 * @param context the context
+	 * @param packageName the package name
+	 * @param resourceName the resource name
+	 * @return the file for input
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public FileObject getFileForInput(ClientletContext context,
 			String packageName, String resourceName) throws IOException {
 		String resourceAsPath = packageName.replace(".", "/") + "/"
@@ -185,6 +241,15 @@ public class PathRepository {
 				+ ",resourceName=" + resourceName);
 	}
 
+	/**
+	 * Gets the java file for input.
+	 *
+	 * @param context the context
+	 * @param dirURL the dir url
+	 * @param classAsPath the class as path
+	 * @param kind the kind
+	 * @return the java file for input
+	 */
 	private JavaFileObject getJavaFileForInput(ClientletContext context,
 			URL dirURL, String classAsPath, Kind kind) {
 		try {
@@ -202,6 +267,14 @@ public class PathRepository {
 		}
 	}
 
+	/**
+	 * Gets the file for input.
+	 *
+	 * @param context the context
+	 * @param dirURL the dir url
+	 * @param resourcePath the resource path
+	 * @return the file for input
+	 */
 	private FileObject getFileForInput(ClientletContext context, URL dirURL,
 			String resourcePath) {
 		try {
@@ -218,6 +291,16 @@ public class PathRepository {
 		}
 	}
 
+	/**
+	 * List.
+	 *
+	 * @param context the context
+	 * @param packageName the package name
+	 * @param kinds the kinds
+	 * @param recurse the recurse
+	 * @return the list
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public List<JavaFileObject> list(ClientletContext context,
 			String packageName, Set<Kind> kinds, boolean recurse)
 			throws IOException {
@@ -239,6 +322,15 @@ public class PathRepository {
 		return list;
 	}
 
+	/**
+	 * Populate from directory.
+	 *
+	 * @param list the list
+	 * @param directory the directory
+	 * @param packagePath the package path
+	 * @param kinds the kinds
+	 * @param recurse the recurse
+	 */
 	private void populateFromDirectory(List<JavaFileObject> list,
 			java.io.File directory, String packagePath, Set<Kind> kinds,
 			boolean recurse) {
@@ -275,6 +367,17 @@ public class PathRepository {
 		}
 	}
 
+	/**
+	 * Populate from entry list.
+	 *
+	 * @param context the context
+	 * @param list the list
+	 * @param dirURL the dir url
+	 * @param entryList the entry list
+	 * @param packagePath the package path
+	 * @param kinds the kinds
+	 * @param recurse the recurse
+	 */
 	private void populateFromEntryList(ClientletContext context,
 			List<JavaFileObject> list, URL dirURL, String[] entryList,
 			String packagePath, Set<Kind> kinds, boolean recurse) {
@@ -307,6 +410,16 @@ public class PathRepository {
 		}
 	}
 
+	/**
+	 * Populate from listing xml.
+	 *
+	 * @param context the context
+	 * @param list the list
+	 * @param dirURL the dir url
+	 * @param packagePath the package path
+	 * @param kinds the kinds
+	 * @param recurse the recurse
+	 */
 	private void populateFromListingXML(ClientletContext context,
 			List<JavaFileObject> list, URL dirURL, String packagePath,
 			Set<Kind> kinds, boolean recurse) {
@@ -384,6 +497,16 @@ public class PathRepository {
 		}
 	}
 
+	/**
+	 * Populate from url.
+	 *
+	 * @param context the context
+	 * @param list the list
+	 * @param dirURL the dir url
+	 * @param packagePath the package path
+	 * @param kinds the kinds
+	 * @param recurse the recurse
+	 */
 	private void populateFromURL(ClientletContext context,
 			List<JavaFileObject> list, URL dirURL, String packagePath,
 			Set<Kind> kinds, boolean recurse) {
@@ -407,6 +530,12 @@ public class PathRepository {
 		}
 	}
 
+	/**
+	 * Gets the kind.
+	 *
+	 * @param name the name
+	 * @return the kind
+	 */
 	private static Kind getKind(String name) {
 		if (name.endsWith(".class")) {
 			return Kind.CLASS;
@@ -430,6 +559,14 @@ public class PathRepository {
 		}
 	}
 
+	/**
+	 * Creates the jar entry uri.
+	 *
+	 * @param jarURL the jar url
+	 * @param entryName the entry name
+	 * @return the uri
+	 * @throws URISyntaxException the URI syntax exception
+	 */
 	private static URI createJarEntryURI(URL jarURL, String entryName)
 			throws URISyntaxException {
 		if (!entryName.startsWith("/")) {
@@ -444,6 +581,14 @@ public class PathRepository {
 		return new URI("jar:" + jarURLText + "!" + entryName);
 	}
 
+	/**
+	 * Creates the jar entry uri.
+	 *
+	 * @param jarURLText the jar url text
+	 * @param entryName the entry name
+	 * @return the uri
+	 * @throws URISyntaxException the URI syntax exception
+	 */
 	private static URI createJarEntryURI(String jarURLText, String entryName)
 			throws URISyntaxException {
 		if (!entryName.startsWith("/")) {
@@ -452,17 +597,38 @@ public class PathRepository {
 		return new URI("jar:" + jarURLText + "!" + entryName);
 	}
 
+	/**
+	 * The Class JarInfo.
+	 */
 	static class JarInfo {
+		
+		/** The jar url. */
 		public final URL jarURL;
+		
+		/** The entries by package path. */
 		private final Map<String, List<EntryInfo>> entriesByPackagePath = new HashMap<String, List<EntryInfo>>();
+		
+		/** The cached jar file. */
 		private JarFile cachedJarFile;
+		
+		/** The populated. */
 		private boolean populated = false;
 
+		/**
+		 * Instantiates a new jar info.
+		 *
+		 * @param jarURL the jar url
+		 */
 		public JarInfo(URL jarURL) {
 			super();
 			this.jarURL = jarURL;
 		}
 
+		/**
+		 * Close.
+		 *
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		public void close() throws IOException {
 			JarFile jarFile = this.cachedJarFile;
 			if (jarFile != null) {
@@ -470,6 +636,13 @@ public class PathRepository {
 			}
 		}
 
+		/**
+		 * Gets the jar file.
+		 *
+		 * @param context the context
+		 * @return the jar file
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		private JarFile getJarFile(ClientletContext context)
 				throws IOException {
 			JarFile jf;
@@ -511,6 +684,15 @@ public class PathRepository {
 			return jf;
 		}
 
+		/**
+		 * Gets the java file for input.
+		 *
+		 * @param context the context
+		 * @param classAsPath the class as path
+		 * @param kind the kind
+		 * @return the java file for input
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		public JavaFileObject getJavaFileForInput(ClientletContext context,
 				String classAsPath, Kind kind) throws IOException {
 			JarFile jarFile = this.getJarFile(context);
@@ -529,6 +711,14 @@ public class PathRepository {
 			}
 		}
 
+		/**
+		 * Gets the file for input.
+		 *
+		 * @param context the context
+		 * @param resourcePath the resource path
+		 * @return the file for input
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		public FileObject getFileForInput(ClientletContext context,
 				String resourcePath) throws IOException {
 			JarFile jarFile = this.getJarFile(context);
@@ -546,6 +736,13 @@ public class PathRepository {
 			}
 		}
 
+		/**
+		 * Populate.
+		 *
+		 * @param context the context
+		 * @param jarFile the jar file
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		private void populate(ClientletContext context, JarFile jarFile)
 				throws IOException {
 			Map<String, List<EntryInfo>> entriesByPackagePath = this.entriesByPackagePath;
@@ -566,6 +763,16 @@ public class PathRepository {
 			}
 		}
 
+		/**
+		 * Populate list.
+		 *
+		 * @param context the context
+		 * @param list the list
+		 * @param packagePath the package path
+		 * @param kinds the kinds
+		 * @param recurse the recurse
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 		public void populateList(ClientletContext context,
 				List<JavaFileObject> list, String packagePath, Set<Kind> kinds,
 				boolean recurse) throws IOException {
@@ -634,10 +841,23 @@ public class PathRepository {
 		}
 	}
 
+	/**
+	 * The Class EntryInfo.
+	 */
 	static class EntryInfo {
+		
+		/** The kind. */
 		public final Kind kind;
+		
+		/** The jar entry. */
 		public final JarEntry jarEntry;
 
+		/**
+		 * Instantiates a new entry info.
+		 *
+		 * @param jarEntry the jar entry
+		 * @param kind the kind
+		 */
 		public EntryInfo(final JarEntry jarEntry, final Kind kind) {
 			this.kind = kind;
 			this.jarEntry = jarEntry;

@@ -35,6 +35,7 @@ package org.lobobrowser.html.w3c;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.NodeList;
 
+
 /**
  * The select element allows the selection of an option. The contained options
  * can be directly accessed through the select element as a collection. See the
@@ -44,10 +45,13 @@ import org.w3c.dom.NodeList;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLSelectElement extends HTMLElement {
+	
 	/**
 	 * The type of this form control. This is the string "select-multiple" when
 	 * the multiple attribute is <code>true</code> and the string "select-one"
 	 * when <code>false</code>.
+	 *
+	 * @return the type
 	 */
 	public String getType();
 
@@ -55,6 +59,8 @@ public interface HTMLSelectElement extends HTMLElement {
 	 * The ordinal index of the selected option, starting from 0. The value -1
 	 * is returned if no element is selected. If multiple options are selected,
 	 * the index of the first selected option is returned.
+	 *
+	 * @return the selected index
 	 */
 	public int getSelectedIndex();
 
@@ -62,6 +68,8 @@ public interface HTMLSelectElement extends HTMLElement {
 	 * The ordinal index of the selected option, starting from 0. The value -1
 	 * is returned if no element is selected. If multiple options are selected,
 	 * the index of the first selected option is returned.
+	 *
+	 * @param selectedIndex the new selected index
 	 */
 	public void setSelectedIndex(int selectedIndex);
 
@@ -69,6 +77,8 @@ public interface HTMLSelectElement extends HTMLElement {
 	 * The current form control value (i.e. the value of the currently selected
 	 * option), if multiple options are selected this is the value of the first
 	 * selected option.
+	 *
+	 * @return the value
 	 */
 	public String getValue();
 
@@ -76,94 +86,120 @@ public interface HTMLSelectElement extends HTMLElement {
 	 * The current form control value (i.e. the value of the currently selected
 	 * option), if multiple options are selected this is the value of the first
 	 * selected option.
+	 *
+	 * @param value the new value
 	 */
 	public void setValue(String value);
 
 	/**
 	 * The number of options in this <code>SELECT</code>.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the length
 	 */
 	public int getLength();
 
 	/**
 	 * The number of options in this <code>SELECT</code>.
-	 * 
-	 * @exception DOMException
-	 *                NOT_SUPPORTED_ERR: if setting the length is not allowed by
-	 *                the implementation.
+	 *
 	 * @version DOM Level 2
+	 * @param length the new length
+	 * @exception DOMException                NOT_SUPPORTED_ERR: if setting the length is not allowed by
+	 *                the implementation.
 	 */
 	public void setLength(int length) throws DOMException;
 
 	/**
 	 * Returns the <code>FORM</code> element containing this control. Returns
 	 * <code>null</code> if this control is not within the context of a form.
+	 *
+	 * @return the form
 	 */
 	public HTMLFormElement getForm();
 
 	/**
 	 * The collection of <code>OPTION</code> elements contained by this element.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return the options
 	 */
 	public HTMLOptionsCollection getOptions();
 
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the disabled
 	 */
 	public boolean getDisabled();
 
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param disabled the new disabled
 	 */
 	public void setDisabled(boolean disabled);
 
 	/**
 	 * If true, multiple <code>OPTION</code> elements may be selected in this
 	 * <code>SELECT</code>. See the multiple attribute definition in HTML 4.01.
+	 *
+	 * @return the multiple
 	 */
 	public boolean getMultiple();
 
 	/**
 	 * If true, multiple <code>OPTION</code> elements may be selected in this
 	 * <code>SELECT</code>. See the multiple attribute definition in HTML 4.01.
+	 *
+	 * @param multiple the new multiple
 	 */
 	public void setMultiple(boolean multiple);
 
 	/**
 	 * Form control or object name when submitted with a form. See the name
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * Form control or object name when submitted with a form. See the name
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name);
 
 	/**
 	 * Number of visible rows. See the size attribute definition in HTML 4.01.
+	 *
+	 * @return the size
 	 */
 	public int getSize();
 
 	/**
 	 * Number of visible rows. See the size attribute definition in HTML 4.01.
+	 *
+	 * @param size the new size
 	 */
 	public void setSize(int size);
 
 	/**
 	 * Index that represents the element's position in the tabbing order. See
 	 * the tabindex attribute definition in HTML 4.01.
+	 *
+	 * @return the tab index
 	 */
 	public int getTabIndex();
 
 	/**
 	 * Index that represents the element's position in the tabbing order. See
 	 * the tabindex attribute definition in HTML 4.01.
+	 *
+	 * @param tabIndex the new tab index
 	 */
 	public void setTabIndex(int tabIndex);
 
@@ -175,15 +211,10 @@ public interface HTMLSelectElement extends HTMLElement {
 	 * the <code>insertBefore</code> method on the parent of <code>before</code>
 	 * in all other cases. This method may have no effect if the new element is
 	 * not an <code>OPTION</code> or an <code>OPTGROUP</code>.
-	 * 
-	 * @param element
-	 *            The element to add.
-	 * @param before
-	 *            The element to insert before, or <code>null</code> for the
+	 *
+	 * @param element            The element to add.
+	 * @param before            The element to insert before, or <code>null</code> for the
 	 *            tail of the list.
-	 * @exception DOMException
-	 *                NOT_FOUND_ERR: Raised if <code>before</code> is not a
-	 *                descendant of the <code>SELECT</code> element.
 	 */
 	public void add(HTMLElement element, HTMLElement before);
 
@@ -206,29 +237,97 @@ public interface HTMLSelectElement extends HTMLElement {
 	 */
 	public void focus();
 
+	/**
+	 * Gets the autofocus.
+	 *
+	 * @return the autofocus
+	 */
 	public boolean getAutofocus();
 
+	/**
+	 * Sets the autofocus.
+	 *
+	 * @param autofocus the new autofocus
+	 */
 	public void setAutofocus(boolean autofocus);
 
+	/**
+	 * Item.
+	 *
+	 * @param index the index
+	 * @return the object
+	 */
 	public Object item(int index);
 
+	/**
+	 * Named item.
+	 *
+	 * @param name the name
+	 * @return the object
+	 */
 	public Object namedItem(String name);
 
+	/**
+	 * Adds the.
+	 *
+	 * @param element the element
+	 */
 	public void add(HTMLElement element);
 
+	/**
+	 * Adds the.
+	 *
+	 * @param element the element
+	 * @param before the before
+	 */
 	public void add(HTMLElement element, int before);
 
+	/**
+	 * Gets the selected options.
+	 *
+	 * @return the selected options
+	 */
 	public HTMLCollection getSelectedOptions();
 
+	/**
+	 * Gets the will validate.
+	 *
+	 * @return the will validate
+	 */
 	public boolean getWillValidate();
 
+	/**
+	 * Gets the validity.
+	 *
+	 * @return the validity
+	 */
 	public ValidityState getValidity();
 
+	/**
+	 * Gets the validation message.
+	 *
+	 * @return the validation message
+	 */
 	public String getValidationMessage();
 
+	/**
+	 * Check validity.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean checkValidity();
 
+	/**
+	 * Sets the custom validity.
+	 *
+	 * @param error the new custom validity
+	 */
 	public void setCustomValidity(String error);
 
+	/**
+	 * Gets the labels.
+	 *
+	 * @return the labels
+	 */
 	public NodeList getLabels();
 }

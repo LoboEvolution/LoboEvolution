@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 
 import org.mozilla.javascript.Scriptable;
 
+
 /**
  * Implemented by objects that can provide the source text for the script. The
  * design of the interface supports cache revalidation.
@@ -38,6 +39,7 @@ public interface ModuleSourceProvider
      * return a {@link ModuleSource} object with the actual source text of the
      * module, preferrably a validator for it, and a security domain, where
      * applicable.
+     *
      * @param moduleId the ID of the module. An implementation must only accept
      * an absolute ID, starting with a term.
      * @param paths the value of the require() function's "paths" attribute. If
@@ -54,8 +56,6 @@ public interface ModuleSourceProvider
      * the module (the currently cached module script).
      * @throws IOException if there was an I/O problem reading the script
      * @throws URISyntaxException if the final URI could not be constructed.
-     * @throws IllegalArgumentException if the module ID is syntactically not a
-     * valid absolute module identifier.
      */
     public ModuleSource loadSource(String moduleId, Scriptable paths, Object validator)
             throws IOException, URISyntaxException;

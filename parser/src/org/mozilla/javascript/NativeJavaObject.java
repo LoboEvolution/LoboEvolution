@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Map;
 
+
 /**
  * This class reflects non-Array Java objects into the JavaScript environment.  It
  * reflect fields directly, and uses NativeJavaMethod objects to reflect (possibly
@@ -29,16 +30,36 @@ import java.util.Map;
 
 public class NativeJavaObject implements Scriptable, Wrapper, Serializable
 {
+    
+    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -6948590651130498591L;
 
+    /**
+     * Instantiates a new native java object.
+     */
     public NativeJavaObject() { }
 
+    /**
+     * Instantiates a new native java object.
+     *
+     * @param scope the scope
+     * @param javaObject the java object
+     * @param staticType the static type
+     */
     public NativeJavaObject(Scriptable scope, Object javaObject,
                             Class<?> staticType)
     {
         this(scope, javaObject, staticType, false);
     }
 
+    /**
+     * Instantiates a new native java object.
+     *
+     * @param scope the scope
+     * @param javaObject the java object
+     * @param staticType the static type
+     * @param isAdapter the is adapter
+     */
     public NativeJavaObject(Scriptable scope, Object javaObject,
                             Class<?> staticType, boolean isAdapter)
     {
@@ -49,6 +70,9 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
         initMembers();
     }
 
+    /**
+     * Inits the members.
+     */
     protected void initMembers() {
         Class<?> dynamicType;
         if (javaObject != null) {
@@ -62,14 +86,23 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
             = members.getFieldAndMethodsObjects(this, javaObject, false);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Scriptable#has(java.lang.String, org.mozilla.javascript.Scriptable)
+     */
     public boolean has(String name, Scriptable start) {
         return members.has(name, false);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Scriptable#has(int, org.mozilla.javascript.Scriptable)
+     */
     public boolean has(int index, Scriptable start) {
         return false;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Scriptable#get(java.lang.String, org.mozilla.javascript.Scriptable)
+     */
     public Object get(String name, Scriptable start) {
         if (fieldAndMethods != null) {
             Object result = fieldAndMethods.get(name);
@@ -82,10 +115,16 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
         return members.get(this, name, javaObject, false);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Scriptable#get(int, org.mozilla.javascript.Scriptable)
+     */
     public Object get(int index, Scriptable start) {
         throw members.reportMemberNotFound(Integer.toString(index));
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Scriptable#put(java.lang.String, org.mozilla.javascript.Scriptable, java.lang.Object)
+     */
     public void put(String name, Scriptable start, Object value) {
         // We could be asked to modify the value of a property in the
         // prototype. Since we can't add a property to a Java object,
@@ -96,21 +135,36 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
             prototype.put(name, prototype, value);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Scriptable#put(int, org.mozilla.javascript.Scriptable, java.lang.Object)
+     */
     public void put(int index, Scriptable start, Object value) {
         throw members.reportMemberNotFound(Integer.toString(index));
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Scriptable#hasInstance(org.mozilla.javascript.Scriptable)
+     */
     public boolean hasInstance(Scriptable value) {
         // This is an instance of a Java class, so always return false
         return false;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Scriptable#delete(java.lang.String)
+     */
     public void delete(String name) {
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Scriptable#delete(int)
+     */
     public void delete(int index) {
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Scriptable#getPrototype()
+     */
     public Scriptable getPrototype() {
         if (prototype == null && javaObject instanceof String) {
             return TopLevel.getBuiltinPrototype(
@@ -122,6 +176,8 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
 
     /**
      * Sets the prototype of the object.
+     *
+     * @param m the new prototype
      */
     public void setPrototype(Scriptable m) {
         prototype = m;
@@ -129,6 +185,8 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
 
     /**
      * Returns the parent (enclosing) scope of the object.
+     *
+     * @return the parent scope
      */
     public Scriptable getParentScope() {
         return parent;
@@ -136,33 +194,53 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
 
     /**
      * Sets the parent (enclosing) scope of the object.
+     *
+     * @param m the new parent scope
      */
     public void setParentScope(Scriptable m) {
         parent = m;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Scriptable#getIds()
+     */
     public Object[] getIds() {
         return members.getIds(false);
     }
 
 /**
-@deprecated Use {@link Context#getWrapFactory()} together with calling {@link
-WrapFactory#wrap(Context, Scriptable, Object, Class)}
-*/
+ * Wrap.
+ *
+ * @param scope the scope
+ * @param obj the obj
+ * @param staticType the static type
+ * @return the object
+ * @deprecated Use {@link Context#getWrapFactory()} together with calling {@link
+ * WrapFactory#wrap(Context, Scriptable, Object, Class)}
+ */
     public static Object wrap(Scriptable scope, Object obj, Class<?> staticType) {
 
         Context cx = Context.getContext();
         return cx.getWrapFactory().wrap(cx, scope, obj, staticType);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Wrapper#unwrap()
+     */
     public Object unwrap() {
         return javaObject;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Scriptable#getClassName()
+     */
     public String getClassName() {
         return "JavaObject";
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.Scriptable#getDefaultValue(java.lang.Class)
+     */
     public Object getDefaultValue(Class<?> hint)
     {
         Object value;
@@ -205,6 +283,10 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
      * Determine whether we can/should convert between the given type and the
      * desired one.  This should be superceded by a conversion-cost calculation
      * function, but for now I'll hide behind precedent.
+     *
+     * @param fromObj the from obj
+     * @param to the to
+     * @return true, if successful
      */
     public static boolean canConvert(Object fromObj, Class<?> to) {
         int weight = getConversionWeight(fromObj, to);
@@ -212,18 +294,40 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
         return (weight < CONVERSION_NONE);
     }
 
+    /** The Constant JSTYPE_UNDEFINED. */
     private static final int JSTYPE_UNDEFINED   = 0; // undefined type
+    
+    /** The Constant JSTYPE_NULL. */
     private static final int JSTYPE_NULL        = 1; // null
+    
+    /** The Constant JSTYPE_BOOLEAN. */
     private static final int JSTYPE_BOOLEAN     = 2; // boolean
+    
+    /** The Constant JSTYPE_NUMBER. */
     private static final int JSTYPE_NUMBER      = 3; // number
+    
+    /** The Constant JSTYPE_STRING. */
     private static final int JSTYPE_STRING      = 4; // string
+    
+    /** The Constant JSTYPE_JAVA_CLASS. */
     private static final int JSTYPE_JAVA_CLASS  = 5; // JavaClass
+    
+    /** The Constant JSTYPE_JAVA_OBJECT. */
     private static final int JSTYPE_JAVA_OBJECT = 6; // JavaObject
+    
+    /** The Constant JSTYPE_JAVA_ARRAY. */
     private static final int JSTYPE_JAVA_ARRAY  = 7; // JavaArray
+    
+    /** The Constant JSTYPE_OBJECT. */
     private static final int JSTYPE_OBJECT      = 8; // Scriptable
 
+    /** The Constant CONVERSION_TRIVIAL. */
     static final byte CONVERSION_TRIVIAL      = 1;
+    
+    /** The Constant CONVERSION_NONTRIVIAL. */
     static final byte CONVERSION_NONTRIVIAL   = 0;
+    
+    /** The Constant CONVERSION_NONE. */
     static final byte CONVERSION_NONE         = 99;
 
     /**
@@ -234,6 +338,10 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
      * Based on
      * <a href="http://www.mozilla.org/js/liveconnect/lc3_method_overloading.html">
      * "preferred method conversions" from Live Connect 3</a>
+     *
+     * @param fromObj the from obj
+     * @param to the to
+     * @return the conversion weight
      */
     static int getConversionWeight(Object fromObj, Class<?> to) {
         int fromCode = getJSTypeCode(fromObj);
@@ -381,6 +489,12 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
         return CONVERSION_NONE;
     }
 
+    /**
+     * Gets the size rank.
+     *
+     * @param aType the a type
+     * @return the size rank
+     */
     static int getSizeRank(Class<?> aType) {
         if (aType == Double.TYPE) {
             return 1;
@@ -411,6 +525,12 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
         }
     }
 
+    /**
+     * Gets the JS type code.
+     *
+     * @param value the value
+     * @return the JS type code
+     */
     private static int getJSTypeCode(Object value) {
         if (value == null) {
             return JSTYPE_NULL;
@@ -458,8 +578,12 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
     /**
      * Not intended for public use. Callers should use the
      * public API Context.toType.
-     * @deprecated as of 1.5 Release 4
+     *
+     * @param type the type
+     * @param value the value
+     * @return the object
      * @see org.mozilla.javascript.Context#jsToJava(Object, Class)
+     * @deprecated as of 1.5 Release 4
      */
     public static Object coerceType(Class<?> type, Object value)
     {
@@ -469,6 +593,10 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
     /**
      * Type-munging for field setting and method invocation.
      * Conforms to LC3 specification
+     *
+     * @param type the type
+     * @param value the value
+     * @return the object
      */
     static Object coerceTypeImpl(Class<?> type, Object value)
     {
@@ -655,6 +783,13 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
         return value;
     }
 
+    /**
+     * Creates the interface adapter.
+     *
+     * @param type the type
+     * @param so the so
+     * @return the object
+     */
     protected static Object createInterfaceAdapter(Class<?>type, ScriptableObject so) {
         // XXX: Currently only instances of ScriptableObject are
         // supported since the resulting interface proxies should
@@ -675,6 +810,13 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
         return glue;
     }
 
+    /**
+     * Coerce to number.
+     *
+     * @param type the type
+     * @param value the value
+     * @return the object
+     */
     private static Object coerceToNumber(Class<?> type, Object value)
     {
         Class<?> valueClass = value.getClass();
@@ -786,6 +928,12 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
     }
 
 
+    /**
+     * To double.
+     *
+     * @param value the value
+     * @return the double
+     */
     private static double toDouble(Object value)
     {
         if (value instanceof Number) {
@@ -833,6 +981,15 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
         }
     }
 
+    /**
+     * To integer.
+     *
+     * @param value the value
+     * @param type the type
+     * @param min the min
+     * @param max the max
+     * @return the long
+     */
     private static long toInteger(Object value, Class<?> type,
                                   double min, double max)
     {
@@ -857,6 +1014,12 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
         return (long)d;
     }
 
+    /**
+     * Report conversion error.
+     *
+     * @param value the value
+     * @param type the type
+     */
     static void reportConversionError(Object value, Class<?> type)
     {
         // It uses String.valueOf(value), not value.toString() since
@@ -867,6 +1030,12 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
             JavaMembers.javaSignature(type));
     }
 
+    /**
+     * Write object.
+     *
+     * @param out the out
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private void writeObject(ObjectOutputStream out)
         throws IOException
     {
@@ -894,6 +1063,13 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
         }
     }
 
+    /**
+     * Read object.
+     *
+     * @param in the in
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws ClassNotFoundException the class not found exception
+     */
     private void readObject(ObjectInputStream in)
         throws IOException, ClassNotFoundException
     {
@@ -933,15 +1109,28 @@ WrapFactory#wrap(Context, Scriptable, Object, Class)}
      */
     protected Scriptable parent;
 
+    /** The java object. */
     protected transient Object javaObject;
 
+    /** The static type. */
     protected transient Class<?> staticType;
+    
+    /** The members. */
     protected transient JavaMembers members;
+    
+    /** The field and methods. */
     private transient Map<String,FieldAndMethods> fieldAndMethods;
+    
+    /** The is adapter. */
     protected transient boolean isAdapter;
 
+    /** The Constant COERCED_INTERFACE_KEY. */
     private static final Object COERCED_INTERFACE_KEY = "Coerced Interface";
+    
+    /** The adapter_write adapter object. */
     private static Method adapter_writeAdapterObject;
+    
+    /** The adapter_read adapter object. */
     private static Method adapter_readAdapterObject;
 
     static {

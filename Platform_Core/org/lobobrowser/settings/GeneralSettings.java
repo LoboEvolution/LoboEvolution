@@ -33,21 +33,39 @@ import org.lobobrowser.request.UserAgentImpl;
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
 
+
 /**
  * General browser settings. This is a singleton class with an instance obtained
  * by calling {@link #getInstance()}.
  */
 public class GeneralSettings implements java.io.Serializable {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(GeneralSettings.class
 			.getName());
+	
+	/** The Constant DEFAULT_STARTUP. */
 	private static final String DEFAULT_STARTUP = "";
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574500070000402L;
+	
+	/** The Constant instance. */
 	private static final GeneralSettings instance;
 
+	/** The startup ur ls. */
 	private volatile Collection<String> startupURLs;
+	
+	/** The spoof ie. */
 	private volatile boolean spoofIE;
+	
+	/** The ie version. */
 	private volatile String ieVersion;
+	
+	/** The moz version. */
 	private volatile String mozVersion;
+	
+	/** The initial window bounds. */
 	private volatile Rectangle initialWindowBounds;
 
 	static {
@@ -68,6 +86,8 @@ public class GeneralSettings implements java.io.Serializable {
 
 	/**
 	 * Gets the class singleton.
+	 *
+	 * @return single instance of GeneralSettings
 	 */
 	public static GeneralSettings getInstance() {
 		SecurityManager sm = System.getSecurityManager();
@@ -77,11 +97,17 @@ public class GeneralSettings implements java.io.Serializable {
 		return instance;
 	}
 
+	/**
+	 * Instantiates a new general settings.
+	 */
 	private GeneralSettings() {
 		// Only called if not persisted
 		this.restoreDefaults();
 	}
 
+	/**
+	 * Save.
+	 */
 	public void save() {
 		try {
 			this.saveChecked();
@@ -90,6 +116,9 @@ public class GeneralSettings implements java.io.Serializable {
 		}
 	}
 
+	/**
+	 * Restore defaults.
+	 */
 	public void restoreDefaults() {
 		this.startupURLs = Collections.singletonList(DEFAULT_STARTUP);
 		this.spoofIE = true;
@@ -97,6 +126,11 @@ public class GeneralSettings implements java.io.Serializable {
 		this.mozVersion = "32.0";
 	}
 
+	/**
+	 * Save checked.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void saveChecked() throws IOException {
 		StorageManager.getInstance().saveSettings(
 				this.getClass().getSimpleName(), this);
@@ -104,7 +138,8 @@ public class GeneralSettings implements java.io.Serializable {
 
 	/**
 	 * Gets URLs that the browser should open when it starts up.
-	 * 
+	 *
+	 * @return the startup ur ls
 	 * @see #setStartupURLs(String[])
 	 */
 	public String[] getStartupURLs() {
@@ -116,10 +151,20 @@ public class GeneralSettings implements java.io.Serializable {
 		return urls.toArray(new String[0]);
 	}
 
+	/**
+	 * Sets the startup ur ls.
+	 *
+	 * @param urls the new startup ur ls
+	 */
 	public void setStartupURLs(String[] urls) {
 		this.startupURLs = Arrays.asList(urls);
 	}
 
+	/**
+	 * Gets the initial window bounds.
+	 *
+	 * @return the initial window bounds
+	 */
 	public Rectangle getInitialWindowBounds() {
 		Rectangle bounds = initialWindowBounds;
 		if (bounds == null) {
@@ -134,32 +179,67 @@ public class GeneralSettings implements java.io.Serializable {
 		return bounds;
 	}
 
+	/**
+	 * Sets the initial window bounds.
+	 *
+	 * @param initialWindowBounds the new initial window bounds
+	 */
 	public void setInitialWindowBounds(Rectangle initialWindowBounds) {
 		this.initialWindowBounds = initialWindowBounds;
 	}
 
+	/**
+	 * Gets the ie version.
+	 *
+	 * @return the ie version
+	 */
 	public String getIeVersion() {
 		return ieVersion;
 	}
 
+	/**
+	 * Sets the ie version.
+	 *
+	 * @param ieVersion the new ie version
+	 */
 	public void setIeVersion(String ieVersion) {
 		this.ieVersion = ieVersion;
 		UserAgentImpl.getInstance().invalidateUserAgent();
 	}
 
+	/**
+	 * Checks if is spoof ie.
+	 *
+	 * @return true, if is spoof ie
+	 */
 	public boolean isSpoofIE() {
 		return spoofIE;
 	}
 
+	/**
+	 * Sets the spoof ie.
+	 *
+	 * @param spoofIE the new spoof ie
+	 */
 	public void setSpoofIE(boolean spoofIE) {
 		this.spoofIE = spoofIE;
 		UserAgentImpl.getInstance().invalidateUserAgent();
 	}
 
+	/**
+	 * Gets the moz version.
+	 *
+	 * @return the moz version
+	 */
 	public String getMozVersion() {
 		return mozVersion;
 	}
 
+	/**
+	 * Sets the moz version.
+	 *
+	 * @param mozVersion the new moz version
+	 */
 	public void setMozVersion(String mozVersion) {
 		this.mozVersion = mozVersion;
 		UserAgentImpl.getInstance().invalidateUserAgent();

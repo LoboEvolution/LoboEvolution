@@ -20,11 +20,16 @@
  */
 package org.lobobrowser.gui;
 
+
 /**
  * A convenience abstract implementation of {@link ContentListener}, with blank
  * methods.
  */
 public abstract class ContentAdapter implements ContentListener {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.gui.ContentListener#contentSet(org.lobobrowser.gui.ContentEvent)
+	 */
 	public void contentSet(ContentEvent event) {
 	}
 }

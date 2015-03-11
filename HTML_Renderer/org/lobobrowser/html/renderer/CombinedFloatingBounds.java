@@ -22,10 +22,24 @@ package org.lobobrowser.html.renderer;
 
 import org.lobobrowser.util.Objects;
 
+
+/**
+ * The Class CombinedFloatingBounds.
+ */
 class CombinedFloatingBounds implements FloatingBounds {
+	
+	/** The float bounds1. */
 	private final FloatingBounds floatBounds1;
+	
+	/** The float bounds2. */
 	private final FloatingBounds floatBounds2;
 
+	/**
+	 * Instantiates a new combined floating bounds.
+	 *
+	 * @param floatBounds1 the float bounds1
+	 * @param floatBounds2 the float bounds2
+	 */
 	public CombinedFloatingBounds(final FloatingBounds floatBounds1,
 			final FloatingBounds floatBounds2) {
 		super();
@@ -33,41 +47,65 @@ class CombinedFloatingBounds implements FloatingBounds {
 		this.floatBounds2 = floatBounds2;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getClearY(int)
+	 */
 	public int getClearY(int y) {
 		return Math.max(this.floatBounds1.getClearY(y),
 				this.floatBounds2.getClearY(y));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getFirstClearY(int)
+	 */
 	public int getFirstClearY(int y) {
 		return Math.max(this.floatBounds1.getFirstClearY(y),
 				this.floatBounds2.getFirstClearY(y));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getLeft(int)
+	 */
 	public int getLeft(int y) {
 		return Math.max(this.floatBounds1.getLeft(y),
 				this.floatBounds2.getLeft(y));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getLeftClearY(int)
+	 */
 	public int getLeftClearY(int y) {
 		return Math.max(this.floatBounds1.getLeftClearY(y),
 				this.floatBounds2.getLeftClearY(y));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getMaxY()
+	 */
 	public int getMaxY() {
 		return Math.max(this.floatBounds1.getMaxY(),
 				this.floatBounds2.getMaxY());
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getRight(int)
+	 */
 	public int getRight(int y) {
 		return Math.max(this.floatBounds1.getRight(y),
 				this.floatBounds2.getRight(y));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.FloatingBounds#getRightClearY(int)
+	 */
 	public int getRightClearY(int y) {
 		return Math.max(this.floatBounds1.getRightClearY(y),
 				this.floatBounds2.getRightClearY(y));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object obj) {
 		// Important for layout caching.
 		if (!(obj instanceof CombinedFloatingBounds)) {
@@ -78,6 +116,9 @@ class CombinedFloatingBounds implements FloatingBounds {
 				&& Objects.equals(other.floatBounds2, this.floatBounds2);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	public int hashCode() {
 		FloatingBounds fbounds1 = this.floatBounds1;
 		FloatingBounds fbounds2 = this.floatBounds2;

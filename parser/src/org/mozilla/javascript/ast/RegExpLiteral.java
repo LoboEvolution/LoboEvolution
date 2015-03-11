@@ -8,40 +8,61 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
+
 /**
  * AST node for a RegExp literal.
- * Node type is {@link Token#REGEXP}.<p>
+ * Node type is {@link Token#REGEXP}.
  */
 public class RegExpLiteral extends AstNode {
 
+    /** The value. */
     private String value;
+    
+    /** The flags. */
     private String flags;
 
     {
         type = Token.REGEXP;
     }
 
+    /**
+     * Instantiates a new reg exp literal.
+     */
     public RegExpLiteral() {
     }
 
+    /**
+     * Instantiates a new reg exp literal.
+     *
+     * @param pos the pos
+     */
     public RegExpLiteral(int pos) {
         super(pos);
     }
 
+    /**
+     * Instantiates a new reg exp literal.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public RegExpLiteral(int pos, int len) {
         super(pos, len);
     }
 
     /**
-     * Returns the regexp string without delimiters
+     * Returns the regexp string without delimiters.
+     *
+     * @return the value
      */
     public String getValue() {
         return value;
     }
 
     /**
-     * Sets the regexp string without delimiters
-     * @throws IllegalArgumentException} if value is {@code null}
+     * Sets the regexp string without delimiters.
+     *
+     * @param value the new value
      */
     public void setValue(String value) {
         assertNotNull(value);
@@ -49,7 +70,9 @@ public class RegExpLiteral extends AstNode {
     }
 
     /**
-     * Returns regexp flags, {@code null} or "" if no flags specified
+     * Returns regexp flags, {@code null} or "" if no flags specified.
+     *
+     * @return the flags
      */
     public String getFlags() {
         return flags;
@@ -57,11 +80,16 @@ public class RegExpLiteral extends AstNode {
 
     /**
      * Sets regexp flags.  Can be {@code null} or "".
+     *
+     * @param flags the new flags
      */
     public void setFlags(String flags) {
         this.flags = flags;
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         return makeIndent(depth) + "/" + value + "/"
@@ -70,6 +98,8 @@ public class RegExpLiteral extends AstNode {
 
     /**
      * Visits this node.  There are no children to visit.
+     *
+     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

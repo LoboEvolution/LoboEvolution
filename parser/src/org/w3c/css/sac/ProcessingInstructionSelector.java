@@ -8,12 +8,13 @@
  */
 package org.w3c.css.sac;
 
+
 /**
  * This simple matches a <a
  * href="http://www.w3.org/TR/REC-xml#sec-pi">processing instruction</a>.
  *
- * @version $Revision: 477010 $
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  * @see Selector#SAC_PROCESSING_INSTRUCTION_NODE_SELECTOR
  */
 public interface ProcessingInstructionSelector extends SimpleSelector {
@@ -21,11 +22,15 @@ public interface ProcessingInstructionSelector extends SimpleSelector {
 	/**
 	 * Returns the <a href="http://www.w3.org/TR/REC-xml#NT-PITarget">target</a>
 	 * of the processing instruction.
+	 *
+	 * @return the target
 	 */
 	public String getTarget();
 
 	/**
 	 * Returns the character data.
+	 *
+	 * @return the data
 	 */
 	public String getData();
 }

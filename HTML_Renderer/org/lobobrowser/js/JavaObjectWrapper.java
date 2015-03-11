@@ -30,15 +30,35 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.WrappedException;
 
+
+/**
+ * The Class JavaObjectWrapper.
+ */
 public class JavaObjectWrapper extends ScriptableObject {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger
 			.getLogger(JavaObjectWrapper.class.getName());
+	
+	/** The Constant loggableInfo. */
 	private static final boolean loggableInfo = logger.isLoggable(Level.INFO);
+	
+	/** The delegate. */
 	private final Object delegate;
+	
+	/** The class wrapper. */
 	private final JavaClassWrapper classWrapper;
 
+	/**
+	 * Instantiates a new java object wrapper.
+	 *
+	 * @param classWrapper the class wrapper
+	 * @throws InstantiationException the instantiation exception
+	 * @throws IllegalAccessException the illegal access exception
+	 */
 	public JavaObjectWrapper(JavaClassWrapper classWrapper)
 			throws InstantiationException, IllegalAccessException {
 		this.classWrapper = classWrapper;
@@ -49,6 +69,12 @@ public class JavaObjectWrapper extends ScriptableObject {
 		this.delegate = delegate;
 	}
 
+	/**
+	 * Instantiates a new java object wrapper.
+	 *
+	 * @param classWrapper the class wrapper
+	 * @param delegate the delegate
+	 */
 	public JavaObjectWrapper(JavaClassWrapper classWrapper, Object delegate) {
 		if (delegate == null) {
 			throw new IllegalArgumentException(
@@ -71,10 +97,16 @@ public class JavaObjectWrapper extends ScriptableObject {
 		return this.delegate;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.ScriptableObject#getClassName()
+	 */
 	public String getClassName() {
 		return this.classWrapper.getClassName();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.ScriptableObject#get(int, org.mozilla.javascript.Scriptable)
+	 */
 	public Object get(int index, Scriptable start) {
 		PropertyInfo pinfo = this.classWrapper.getIntegerIndexer();
 		if (pinfo == null) {
@@ -105,6 +137,9 @@ public class JavaObjectWrapper extends ScriptableObject {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.ScriptableObject#get(java.lang.String, org.mozilla.javascript.Scriptable)
+	 */
 	public Object get(String name, Scriptable start) {
 		PropertyInfo pinfo = this.classWrapper.getProperty(name);
 		if (pinfo != null) {
@@ -170,6 +205,9 @@ public class JavaObjectWrapper extends ScriptableObject {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.ScriptableObject#put(int, org.mozilla.javascript.Scriptable, java.lang.Object)
+	 */
 	public void put(int index, Scriptable start, Object value) {
 		PropertyInfo pinfo = this.classWrapper.getIntegerIndexer();
 		if (pinfo == null) {
@@ -191,6 +229,9 @@ public class JavaObjectWrapper extends ScriptableObject {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.ScriptableObject#put(java.lang.String, org.mozilla.javascript.Scriptable, java.lang.Object)
+	 */
 	public void put(String name, Scriptable start, Object value) {
 		if (value instanceof org.mozilla.javascript.Undefined) {
 			super.put(name, start, value);
@@ -242,17 +283,37 @@ public class JavaObjectWrapper extends ScriptableObject {
 		}
 	}
 
+	/**
+	 * Gets the constructor.
+	 *
+	 * @param className the class name
+	 * @param classWrapper the class wrapper
+	 * @param scope the scope
+	 * @return the constructor
+	 */
 	public static Function getConstructor(String className,
 			JavaClassWrapper classWrapper, Scriptable scope) {
 		return new JavaConstructorObject(className, classWrapper);
 	}
 
+	/**
+	 * Gets the constructor.
+	 *
+	 * @param className the class name
+	 * @param classWrapper the class wrapper
+	 * @param scope the scope
+	 * @param instantiator the instantiator
+	 * @return the constructor
+	 */
 	public static Function getConstructor(String className,
 			JavaClassWrapper classWrapper, Scriptable scope,
 			JavaInstantiator instantiator) {
 		return new JavaConstructorObject(className, classWrapper, instantiator);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
+	 */
 	public java.lang.Object getDefaultValue(Class hint) {
 		if (loggableInfo) {
 			logger.info("getDefaultValue(): hint=" + hint + ",this="
@@ -279,6 +340,9 @@ public class JavaObjectWrapper extends ScriptableObject {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		Object javaObject = this.getJavaObject();
 		String type = javaObject == null ? "<null>" : javaObject.getClass()

@@ -13,9 +13,12 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * The Interface ElementSelector.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  * @see Selector#SAC_ELEMENT_NODE_SELECTOR
  */
 public interface ElementSelector extends SimpleSelector {
@@ -27,6 +30,8 @@ public interface ElementSelector extends SimpleSelector {
 	 * <p>
 	 * <code>NULL</code> if this element selector can match any namespace.
 	 * </p>
+	 *
+	 * @return the namespace uri
 	 */
 	public String getNamespaceURI();
 
@@ -38,6 +43,8 @@ public interface ElementSelector extends SimpleSelector {
 	 * <p>
 	 * <code>NULL</code> if this element selector can match any element.
 	 * </p>
+	 *
+	 * @return the local name
 	 */
 	public String getLocalName();
 }

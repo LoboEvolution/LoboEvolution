@@ -25,7 +25,15 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.MarkupLayout;
 import org.lobobrowser.html.renderer.RBlockViewport;
 
+
+/**
+ * The Class NoScriptLayout.
+ */
 public class NoScriptLayout implements MarkupLayout {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.MarkupLayout#layoutMarkup(org.lobobrowser.html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
 	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 		UserAgentContext ucontext = bodyLayout.getUserAgentContext();
 		if (!ucontext.isScriptingEnabled()) {

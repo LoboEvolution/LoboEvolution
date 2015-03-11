@@ -22,6 +22,24 @@ package org.lobobrowser.util;
 
 import java.util.EventListener;
 
+
+/**
+ * The listener interface for receiving removal events.
+ * The class that is interested in processing a removal
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addRemovalListener</code> method. When
+ * the removal event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see RemovalEvent
+ */
 public interface RemovalListener extends EventListener {
+	
+	/**
+	 * Removed.
+	 *
+	 * @param event the event
+	 */
 	public void removed(RemovalEvent event);
 }

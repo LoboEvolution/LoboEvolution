@@ -31,15 +31,28 @@ import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
+/**
+ * The Class FilteredNodeListImpl.
+ */
 class FilteredNodeListImpl extends AbstractScriptableDelegate implements
 		NodeList {
+	
+	/** The source node list. */
 	private final Collection sourceNodeList;
+	
+	/** The filter. */
 	private final NodeFilter filter;
+	
+	/** The lock. */
 	private final Object lock;
 
 	/**
-	 * @param filter
-	 * @param list
+	 * Instantiates a new filtered node list impl.
+	 *
+	 * @param filter the filter
+	 * @param list the list
+	 * @param lock the lock
 	 */
 	public FilteredNodeListImpl(NodeFilter filter, Collection list, Object lock) {
 		super();
@@ -48,6 +61,9 @@ class FilteredNodeListImpl extends AbstractScriptableDelegate implements
 		this.lock = lock;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.NodeList#item(int)
+	 */
 	public Node item(int index) {
 		synchronized (this.lock) {
 			int count = 0;
@@ -65,6 +81,9 @@ class FilteredNodeListImpl extends AbstractScriptableDelegate implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.NodeList#getLength()
+	 */
 	public int getLength() {
 		synchronized (this.lock) {
 			int count = 0;

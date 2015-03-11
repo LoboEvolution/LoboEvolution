@@ -39,23 +39,43 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+
 /**
  * Dialog used in HTTP and proxy authentication.
  */
 public class AuthenticationDialog extends JDialog {
+	
+	/** The user name field. */
 	private final JTextField userNameField = new JTextField();
+	
+	/** The password field. */
 	private final JPasswordField passwordField = new JPasswordField();
 
+	/**
+	 * Instantiates a new authentication dialog.
+	 *
+	 * @param owner the owner
+	 * @throws HeadlessException the headless exception
+	 */
 	public AuthenticationDialog(Frame owner) throws HeadlessException {
 		super(owner);
 		this.init();
 	}
 
+	/**
+	 * Instantiates a new authentication dialog.
+	 *
+	 * @param owner the owner
+	 * @throws HeadlessException the headless exception
+	 */
 	public AuthenticationDialog(Dialog owner) throws HeadlessException {
 		super(owner);
 		this.init();
 	}
 
+	/**
+	 * Inits the.
+	 */
 	private void init() {
 		Container contentPane = this.getContentPane();
 		contentPane.setLayout(new FlowLayout());
@@ -105,18 +125,36 @@ public class AuthenticationDialog extends JDialog {
 		contentPane.add(rootBox);
 	}
 
+	/**
+	 * Sets the user name.
+	 *
+	 * @param userName the new user name
+	 */
 	public void setUserName(String userName) {
 		this.userNameField.setText(userName);
 		this.passwordField.grabFocus();
 	}
 
+	/** The authentication. */
 	private PasswordAuthentication authentication;
 
+	/**
+	 * Gets the authentication.
+	 *
+	 * @return the authentication
+	 */
 	public PasswordAuthentication getAuthentication() {
 		return this.authentication;
 	}
 
+	/**
+	 * The Class OkAction.
+	 */
 	private class OkAction extends AbstractAction {
+		
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			authentication = new PasswordAuthentication(
 					userNameField.getText(), passwordField.getPassword());
@@ -124,7 +162,14 @@ public class AuthenticationDialog extends JDialog {
 		}
 	}
 
+	/**
+	 * The Class CancelAction.
+	 */
 	private class CancelAction extends AbstractAction {
+		
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			authentication = null;
 			AuthenticationDialog.this.dispose();

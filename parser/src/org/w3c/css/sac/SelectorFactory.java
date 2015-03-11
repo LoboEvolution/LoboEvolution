@@ -13,9 +13,12 @@
  */
 package org.w3c.css.sac;
 
+
 /**
- * @version $Revision: 477010 $
+ * A factory for creating Selector objects.
+ *
  * @author Philippe Le Hegaret
+ * @version $Revision: 477010 $
  * @see org.w3c.css.sac.Selector
  */
 public interface SelectorFactory {
@@ -134,13 +137,12 @@ public interface SelectorFactory {
 
 	/**
 	 * Creates a pseudo element selector.
-	 * @param namespaceURI
-	 * @param pseudoName
-	 *            the pseudo element name. <code>NULL</code> if this element
+	 *
+	 * @param namespaceURI the namespace uri
+	 * @param pseudoName            the pseudo element name. <code>NULL</code> if this element
 	 *            selector can match any pseudo element.
 	 * @return the element selector
-	 * @exception CSSException
-	 *                If this selector is not supported.
+	 * @exception CSSException                If this selector is not supported.
 	 */
 	ElementSelector createPseudoElementSelector(String namespaceURI,
 			String pseudoName) throws CSSException;

@@ -21,13 +21,25 @@
 package org.lobobrowser.js;
 import org.mozilla.javascript.Scriptable;
 
+
+/**
+ * The Class AbstractScriptableDelegate.
+ */
 public abstract class AbstractScriptableDelegate implements ScriptableDelegate {
+	
+	/** The scriptable. */
 	private Scriptable scriptable;
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.js.ScriptableDelegate#getScriptable()
+	 */
 	public Scriptable getScriptable() {
 		return this.scriptable;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.js.ScriptableDelegate#setScriptable(org.mozilla.javascript.Scriptable)
+	 */
 	public void setScriptable(Scriptable scriptable) {
 		this.scriptable = scriptable;
 	}

@@ -25,13 +25,25 @@ import org.lobobrowser.html.w3c.HTMLFormElement;
 import org.lobobrowser.html.w3c.HTMLProgressElement;
 import org.w3c.dom.NodeList;
 
+
+/**
+ * The Class HTMLProgressElementImpl.
+ */
 public class HTMLProgressElementImpl extends HTMLElementImpl implements
 		HTMLProgressElement {
 
+	/**
+	 * Instantiates a new HTML progress element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLProgressElementImpl(String name) {
 		super(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLProgressElement#getValue()
+	 */
 	@Override
 	public float getValue() {
 		try {
@@ -42,6 +54,9 @@ public class HTMLProgressElementImpl extends HTMLElementImpl implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLProgressElement#setValue(float)
+	 */
 	@Override
 	public void setValue(float value) {
 		this.setAttribute(HtmlAttributeProperties.VALUE,String.valueOf(value));
@@ -50,6 +65,9 @@ public class HTMLProgressElementImpl extends HTMLElementImpl implements
 	
 	
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLProgressElement#getMax()
+	 */
 	@Override
 	public float getMax() {
 		try {
@@ -60,23 +78,35 @@ public class HTMLProgressElementImpl extends HTMLElementImpl implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLProgressElement#setMax(float)
+	 */
 	@Override
 	public void setMax(float max) {
 		this.setAttribute(HtmlAttributeProperties.VALUE,String.valueOf(max));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLProgressElement#getPosition()
+	 */
 	@Override
 	public float getPosition() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLProgressElement#getForm()
+	 */
 	@Override
 	public HTMLFormElement getForm() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLProgressElement#getLabels()
+	 */
 	@Override
 	public NodeList getLabels() {
 		// TODO Auto-generated method stub

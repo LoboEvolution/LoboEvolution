@@ -8,6 +8,7 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
+
 /**
  * AST node for the '.' operator.  Node type is {@link Token#GETPROP}.
  */
@@ -17,17 +18,39 @@ public class PropertyGet extends InfixExpression {
         type = Token.GETPROP;
     }
 
+    /**
+     * Instantiates a new property get.
+     */
     public PropertyGet() {
     }
 
+    /**
+     * Instantiates a new property get.
+     *
+     * @param pos the pos
+     */
     public PropertyGet(int pos) {
         super(pos);
     }
 
+    /**
+     * Instantiates a new property get.
+     *
+     * @param pos the pos
+     * @param len the len
+     */
     public PropertyGet(int pos, int len) {
         super(pos, len);
     }
 
+    /**
+     * Instantiates a new property get.
+     *
+     * @param pos the pos
+     * @param len the len
+     * @param target the target
+     * @param property the property
+     */
     public PropertyGet(int pos, int len, AstNode target, Name property) {
         super(pos, len, target, property);
     }
@@ -35,11 +58,21 @@ public class PropertyGet extends InfixExpression {
     /**
      * Constructor.  Updates bounds to include left ({@code target}) and
      * right ({@code property}) nodes.
+     *
+     * @param target the target
+     * @param property the property
      */
     public PropertyGet(AstNode target, Name property) {
         super(target, property);
     }
 
+    /**
+     * Instantiates a new property get.
+     *
+     * @param target the target
+     * @param property the property
+     * @param dotPosition the dot position
+     */
     public PropertyGet(AstNode target, Name property, int dotPosition) {
         super(Token.GETPROP, target, property, dotPosition);
     }
@@ -47,6 +80,8 @@ public class PropertyGet extends InfixExpression {
     /**
      * Returns the object on which the property is being fetched.
      * Should never be {@code null}.
+     *
+     * @return the target
      */
     public AstNode getTarget() {
         return getLeft();
@@ -54,9 +89,9 @@ public class PropertyGet extends InfixExpression {
 
     /**
      * Sets target object, and sets its parent to this node.
+     *
      * @param target expression evaluating to the object upon which
      * to do the property lookup
-     * @throws IllegalArgumentException} if {@code target} is {@code null}
      */
     public void setTarget(AstNode target) {
         setLeft(target);
@@ -64,6 +99,8 @@ public class PropertyGet extends InfixExpression {
 
     /**
      * Returns the property being accessed.
+     *
+     * @return the property
      */
     public Name getProperty() {
         return (Name)getRight();
@@ -71,12 +108,16 @@ public class PropertyGet extends InfixExpression {
 
     /**
      * Sets the property being accessed, and sets its parent to this node.
-     * @throws IllegalArgumentException} if {@code property} is {@code null}
+     *
+     * @param property the new property
      */
     public void setProperty(Name property) {
         setRight(property);
     }
 
+    /* (non-Javadoc)
+     * @see org.mozilla.javascript.ast.InfixExpression#toSource(int)
+     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -89,6 +130,8 @@ public class PropertyGet extends InfixExpression {
 
     /**
      * Visits this node, the target expression, and the property name.
+     *
+     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

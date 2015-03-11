@@ -28,22 +28,38 @@ import java.util.List;
 import org.lobobrowser.util.NameValuePair;
 import org.lobobrowser.util.io.IORoutines;
 
+
+/**
+ * The Class MemoryCacheEntry.
+ */
 public class MemoryCacheEntry {
+	
+	/** The content. */
 	public final byte[] content;
+	
+	/** The headers. */
 	public final List<NameValuePair> headers;
+	
+	/** The expiration. */
 	public final Long expiration;
+	
+	/** The alt object. */
 	public final Object altObject;
+	
+	/** The request time. */
 	public final long requestTime;
+	
+	/** The alt object size. */
 	public final int altObjectSize;
 
 	/**
-	 * 
-	 * @param content
-	 *            The content of the document without headers.
-	 * @param headers
-	 * @param expiration
-	 * @param altObject
-	 * @param altObjectSize
+	 * Instantiates a new memory cache entry.
+	 *
+	 * @param content            The content of the document without headers.
+	 * @param headers the headers
+	 * @param expiration the expiration
+	 * @param altObject the alt object
+	 * @param altObjectSize the alt object size
 	 */
 	public MemoryCacheEntry(final byte[] content,
 			final List<NameValuePair> headers, final Long expiration,
@@ -57,11 +73,14 @@ public class MemoryCacheEntry {
 	}
 
 	/**
-	 * 
-	 * @param rawContent
-	 *            The content of the document, including headers.
-	 * @param altObject
-	 * @param altObjectSize
+	 * Instantiates a new memory cache entry.
+	 *
+	 * @param rawContent            The content of the document, including headers.
+	 * @param expires the expires
+	 * @param requestTime the request time
+	 * @param altObject the alt object
+	 * @param altObjectSize the alt object size
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public MemoryCacheEntry(final byte[] rawContent, final Long expires,
 			final long requestTime, final Object altObject,

@@ -23,7 +23,18 @@ package org.lobobrowser.util.io;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+
+/**
+ * The Class NetRoutines.
+ */
 public class NetRoutines {
+	
+	/**
+	 * Checks if is local address.
+	 *
+	 * @param host the host
+	 * @return true, if is local address
+	 */
 	public static boolean isLocalAddress(String host) {
 		try {
 			InetAddress address = InetAddress.getByName(host);

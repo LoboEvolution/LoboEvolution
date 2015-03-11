@@ -23,8 +23,25 @@
  */
 package org.lobobrowser.util;
 
+
+/**
+ * The Interface ObjectFilter.
+ */
 public interface ObjectFilter {
+	
+	/**
+	 * Decode.
+	 *
+	 * @param source the source
+	 * @return the object
+	 */
 	public Object decode(Object source);
 
+	/**
+	 * Encode.
+	 *
+	 * @param source the source
+	 * @return the object
+	 */
 	public Object encode(Object source);
 }

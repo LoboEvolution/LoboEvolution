@@ -25,23 +25,41 @@ package org.lobobrowser.html.dombl;
 
 import java.awt.Rectangle;
 
+
 /**
  * A UI node abstraction that is used to send notifications back to the UI and
  * to obtain information the DOM needs from the UI (such as image dimensions).
  */
 public interface UINode {
+	
 	/**
-	 * Called
-	 * 
-	 * @param modelNode
+	 * Called.
+	 *
+	 * @param modelNode the model node
 	 */
 	public void repaint(ModelNode modelNode);
 
+	/**
+	 * Gets the bounds.
+	 *
+	 * @return the bounds
+	 */
 	public Rectangle getBounds();
 
+	/**
+	 * Gets the bounds relative to block.
+	 *
+	 * @return the bounds relative to block
+	 */
 	public Rectangle getBoundsRelativeToBlock();
 
+	/**
+	 * Focus.
+	 */
 	public void focus();
 
+	/**
+	 * Blur.
+	 */
 	public void blur();
 }

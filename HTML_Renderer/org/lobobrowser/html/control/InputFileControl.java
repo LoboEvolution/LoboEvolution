@@ -33,13 +33,29 @@ import javax.swing.JTextField;
 
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 
+
+/**
+ * The Class InputFileControl.
+ */
 public class InputFileControl extends BaseInputControl {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The text field. */
 	private final JTextField textField = new JTextField();
+	
+	/** The browse button. */
 	private final JButton browseButton = new JButton();
+	
+	/** The files value. */
 	private File[] filesValue;
 
+	/**
+	 * Instantiates a new input file control.
+	 *
+	 * @param modelNode the model node
+	 */
 	public InputFileControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -60,20 +76,34 @@ public class InputFileControl extends BaseInputControl {
 		this.add(browseButton);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#getValue()
+	 */
 	public String getValue() {
 		// This is the way browsers behave, even
 		// though this value is not submitted.
 		return this.textField.getText();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#setDisabled(boolean)
+	 */
 	public void setDisabled(boolean disabled) {
 		this.browseButton.setEnabled(!disabled);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#setValue(java.lang.String)
+	 */
 	public void setValue(String value) {
 		// nop - security
 	}
 
+	/**
+	 * Sets the file value.
+	 *
+	 * @param files the new file value
+	 */
 	private void setFileValue(File[] files) {
 		this.filesValue = files;
 		if (files == null) {
@@ -89,20 +119,31 @@ public class InputFileControl extends BaseInputControl {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#getFileValue()
+	 */
 	public File[] getFileValue() {
 		return this.filesValue;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.InputContext#resetInput()
+	 */
 	public void resetInput() {
 		this.setFileValue(null);
 	}
 
+	/**
+	 * The Class BrowseAction.
+	 */
 	private class BrowseAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			JFileChooser chooser = new JFileChooser();
 			chooser.setMultiSelectionEnabled(true);
@@ -114,6 +155,12 @@ public class InputFileControl extends BaseInputControl {
 		}
 	}
 	
+	/**
+	 * Direction.
+	 *
+	 * @param dir the dir
+	 * @return the component orientation
+	 */
 	private ComponentOrientation direction(String dir) {
 
 		if ("ltr".equalsIgnoreCase(dir)) {

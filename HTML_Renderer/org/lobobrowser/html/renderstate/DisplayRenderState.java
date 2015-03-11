@@ -22,15 +22,31 @@ package org.lobobrowser.html.renderstate;
 
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 
+
+/**
+ * The Class DisplayRenderState.
+ */
 public class DisplayRenderState extends StyleSheetRenderState {
+	
+	/** The default display. */
 	private final int defaultDisplay;
 
+	/**
+	 * Instantiates a new display render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param element the element
+	 * @param defaultDisplay the default display
+	 */
 	public DisplayRenderState(RenderState prevRenderState,
 			HTMLElementImpl element, final int defaultDisplay) {
 		super(prevRenderState, element);
 		this.defaultDisplay = defaultDisplay;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getDefaultDisplay()
+	 */
 	public int getDefaultDisplay() {
 		return this.defaultDisplay;
 	}

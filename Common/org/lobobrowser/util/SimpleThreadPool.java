@@ -7,25 +7,57 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  * A thread pool that allows cancelling all running tasks without shutting down
  * the thread pool.
  */
 public class SimpleThreadPool {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(SimpleThreadPool.class.getName());
+	
+	/** The task list. */
 	private final LinkedList taskList = new LinkedList();
+	
+	/** The running set. */
 	private final Set runningSet = new HashSet();
+	
+	/** The min threads. */
 	private final int minThreads;
+	
+	/** The max threads. */
 	private final int maxThreads;
+	
+	/** The name. */
 	private final String name;
+	
+	/** The idle alive millis. */
 	private final int idleAliveMillis;
+	
+	/** The task monitor. */
 	private final Object taskMonitor = new Object();
+	
+	/** The thread group. */
 	private final ThreadGroup threadGroup;
 
+	/** The num threads. */
 	private int numThreads = 0;
+	
+	/** The num idle threads. */
 	private int numIdleThreads = 0;
+	
+	/** The thread number. */
 	private int threadNumber = 0;
 
+	/**
+	 * Instantiates a new simple thread pool.
+	 *
+	 * @param name the name
+	 * @param minShrinkToThreads the min shrink to threads
+	 * @param maxThreads the max threads
+	 * @param idleAliveMillis the idle alive millis
+	 */
 	public SimpleThreadPool(String name, int minShrinkToThreads,
 			int maxThreads, int idleAliveMillis) {
 		this.minThreads = minShrinkToThreads;
@@ -40,6 +72,11 @@ public class SimpleThreadPool {
 		this.threadGroup = null; // new ThreadGroup(name);
 	}
 
+	/**
+	 * Schedule.
+	 *
+	 * @param task the task
+	 */
 	public void schedule(SimpleThreadPoolTask task) {
 		if (task == null) {
 			throw new IllegalArgumentException("null task");
@@ -54,6 +91,11 @@ public class SimpleThreadPool {
 		}
 	}
 
+	/**
+	 * Cancel.
+	 *
+	 * @param task the task
+	 */
 	public void cancel(SimpleThreadPoolTask task) {
 		synchronized (this.taskMonitor) {
 			this.taskList.remove(task);
@@ -61,6 +103,9 @@ public class SimpleThreadPool {
 		task.cancel();
 	}
 
+	/**
+	 * Adds the thread impl.
+	 */
 	private void addThreadImpl() {
 		if (this.numThreads < this.maxThreads) {
 			Thread t = new Thread(this.threadGroup, new ThreadRunnable(),
@@ -84,7 +129,14 @@ public class SimpleThreadPool {
 		}
 	}
 
+	/**
+	 * The Class ThreadRunnable.
+	 */
 	private class ThreadRunnable implements Runnable {
+		
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		public void run() {
 			Object monitor = taskMonitor;
 			LinkedList tl = taskList;

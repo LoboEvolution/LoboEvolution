@@ -34,11 +34,23 @@ import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.renderer.HtmlController;
 import org.lobobrowser.util.gui.WrapperLayout;
 
+
+/**
+ * The Class InputCheckboxControl.
+ */
 public class InputCheckboxControl extends BaseInputControl {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The widget. */
 	private final JCheckBox widget;
 
+	/**
+	 * Instantiates a new input checkbox control.
+	 *
+	 * @param modelNode the model node
+	 */
 	public InputCheckboxControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		this.setLayout(WrapperLayout.getInstance());
@@ -63,6 +75,9 @@ public class InputCheckboxControl extends BaseInputControl {
 		this.add(checkBox);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#reset(int, int)
+	 */
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 	}
@@ -104,15 +119,27 @@ public class InputCheckboxControl extends BaseInputControl {
 		this.widget.setEnabled(!disabled);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.dombl.InputContext#resetInput()
+	 */
 	public void resetInput() {
 		this.widget.setSelected(this.controlElement
 				.getAttributeAsBoolean("checked"));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.control.BaseInputControl#getValue()
+	 */
 	public String getValue() {
 		return this.controlElement.getAttribute(HtmlAttributeProperties.VALUE);
 	}
 	
+	/**
+	 * Direction.
+	 *
+	 * @param dir the dir
+	 * @return the component orientation
+	 */
 	private ComponentOrientation direction(String dir) {
 
 		if ("ltr".equalsIgnoreCase(dir)) {

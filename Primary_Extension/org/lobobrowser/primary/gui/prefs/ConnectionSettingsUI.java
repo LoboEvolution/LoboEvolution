@@ -41,24 +41,58 @@ import org.lobobrowser.primary.gui.SwingTasks;
 import org.lobobrowser.primary.gui.ValidationException;
 import org.lobobrowser.settings.ConnectionSettings;
 
+
+/**
+ * The Class ConnectionSettingsUI.
+ */
 public class ConnectionSettingsUI extends AbstractSettingsUI {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The settings. */
 	private final ConnectionSettings settings = ConnectionSettings
 			.getInstance();
+	
+	/** The no proxy radio button. */
 	private final JRadioButton noProxyRadioButton = new JRadioButton();
+	
+	/** The http proxy radio button. */
 	private final JRadioButton httpProxyRadioButton = new JRadioButton();
+	
+	/** The socks proxy radio button. */
 	private final JRadioButton socksProxyRadioButton = new JRadioButton();
+	
+	/** The authenticated check box. */
 	private final JCheckBox authenticatedCheckBox = new JCheckBox();
+	
+	/** The bypass local check box. */
 	private final JCheckBox bypassLocalCheckBox = new JCheckBox();
+	
+	/** The proxy host area. */
 	private final Box proxyHostArea = new Box(BoxLayout.Y_AXIS);
+	
+	/** The authentication panel. */
 	private final FormPanel authenticationPanel = new FormPanel();
+	
+	/** The user name field. */
 	private final FormField userNameField = new FormField(FieldType.TEXT);
+	
+	/** The password field. */
 	private final FormField passwordField = new FormField(FieldType.PASSWORD);
+	
+	/** The host port panel. */
 	private final FormPanel hostPortPanel = new FormPanel();
+	
+	/** The host field. */
 	private final FormField hostField = new FormField(FieldType.TEXT);
+	
+	/** The port field. */
 	private final FormField portField = new FormField(FieldType.TEXT);
 
+	/**
+	 * Instantiates a new connection settings ui.
+	 */
 	public ConnectionSettingsUI() {
 		this.noProxyRadioButton.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -96,6 +130,9 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 		this.updateEnabling();
 	}
 
+	/**
+	 * Update enabling.
+	 */
 	private void updateEnabling() {
 		SwingTasks.setNestedEnabled(this.proxyHostArea,
 				!this.noProxyRadioButton.isSelected());
@@ -103,6 +140,11 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 				this.authenticatedCheckBox.isSelected());
 	}
 
+	/**
+	 * Gets the proxy box.
+	 *
+	 * @return the proxy box
+	 */
 	private Component getProxyBox() {
 		Box radioBox = new Box(BoxLayout.Y_AXIS);
 		radioBox.setPreferredSize(new Dimension(600, 200));
@@ -120,6 +162,11 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 		return box;
 	}
 
+	/**
+	 * Gets the proxy host area.
+	 *
+	 * @return the proxy host area
+	 */
 	private Component getProxyHostArea() {
 		Box checkBoxBox = new Box(BoxLayout.Y_AXIS);
 		checkBoxBox.setPreferredSize(new Dimension(600, 200));
@@ -138,12 +185,18 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 		return box;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.primary.gui.prefs.AbstractSettingsUI#restoreDefaults()
+	 */
 	@Override
 	public void restoreDefaults() {
 		this.settings.restoreDefaults();
 		this.loadSettings();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.primary.gui.prefs.AbstractSettingsUI#save()
+	 */
 	@Override
 	public void save() throws ValidationException {
 		ConnectionSettings settings = this.settings;
@@ -183,6 +236,9 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 		settings.save();
 	}
 
+	/**
+	 * Load settings.
+	 */
 	private void loadSettings() {
 		ConnectionSettings settings = this.settings;
 		switch (settings.getProxyType()) {

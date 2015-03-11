@@ -25,12 +25,26 @@ import java.awt.FontMetrics;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.style.HtmlInsets;
 
+
+/**
+ * The Class HeadingRenderState.
+ */
 public class HeadingRenderState extends AbstractMarginRenderState {
+	
+	/**
+	 * Instantiates a new heading render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param element the element
+	 */
 	public HeadingRenderState(RenderState prevRenderState,
 			HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.AbstractMarginRenderState#getDefaultMarginInsets()
+	 */
 	protected HtmlInsets getDefaultMarginInsets() {
 		HtmlInsets insets = new HtmlInsets();
 		RenderState prevRS = this.getPreviousRenderState();

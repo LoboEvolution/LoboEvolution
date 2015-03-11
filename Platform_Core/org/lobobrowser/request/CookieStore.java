@@ -46,20 +46,37 @@ import org.lobobrowser.store.StorageManager;
 import org.lobobrowser.util.Domains;
 import org.lobobrowser.util.Strings;
 
+
 /**
+ * The Class CookieStore.
+ *
  * @author J. H. S.
  */
 public class CookieStore {
+	
+	/** The Constant COOKIE_PATH_PREFIX. */
 	private static final String COOKIE_PATH_PREFIX = ".W$Cookies/";
+	
+	/** The Constant COOKIE_PATH_PATTERN. */
 	private static final String COOKIE_PATH_PATTERN = "\\.W\\$Cookies/.*";
+	
+	/** The Constant EXPIRES_FORMAT. */
 	private static final DateFormat EXPIRES_FORMAT;
+	
+	/** The Constant EXPIRES_FORMAT_BAK1. */
 	private static final DateFormat EXPIRES_FORMAT_BAK1;
+	
+	/** The Constant EXPIRES_FORMAT_BAK2. */
 	private static final DateFormat EXPIRES_FORMAT_BAK2;
+	
+	/** The Constant instance. */
 	private static final CookieStore instance = new CookieStore();
 
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CookieStore.class
 			.getName());
 
+	/** The transient map by host. */
 	private final Map<String, Map<String, CookieValue>> transientMapByHost = new HashMap<String, Map<String, CookieValue>>();
 
 	static {
@@ -81,17 +98,37 @@ public class CookieStore {
 		EXPIRES_FORMAT_BAK2 = ef3;
 	}
 
+	/**
+	 * Instantiates a new cookie store.
+	 */
 	private CookieStore() {
 	}
 
+	/**
+	 * Gets the single instance of CookieStore.
+	 *
+	 * @return single instance of CookieStore
+	 */
 	public static CookieStore getInstance() {
 		return instance;
 	}
 
+	/**
+	 * Save cookie.
+	 *
+	 * @param url the url
+	 * @param cookieSpec the cookie spec
+	 */
 	public void saveCookie(URL url, String cookieSpec) {
 		this.saveCookie(url.getHost(), cookieSpec);
 	}
 
+	/**
+	 * Save cookie.
+	 *
+	 * @param urlHostName the url host name
+	 * @param cookieSpec the cookie spec
+	 */
 	public void saveCookie(String urlHostName, String cookieSpec) {
 		// TODO: SECURITY
 		if (logger.isLoggable(Level.INFO)) {
@@ -196,6 +233,15 @@ public class CookieStore {
 		this.saveCookie(domain, path, cookieName, expiresDate, cookieValue);
 	}
 
+	/**
+	 * Save cookie.
+	 *
+	 * @param domain the domain
+	 * @param path the path
+	 * @param name the name
+	 * @param expires the expires
+	 * @param value the value
+	 */
 	public void saveCookie(String domain, String path, String name, Date expires, String value) {
 		// TODO: SECURITY
 		if (logger.isLoggable(Level.INFO)) {
@@ -226,10 +272,22 @@ public class CookieStore {
 		}
 	}
 
+	/**
+	 * Gets the path from cookie name.
+	 *
+	 * @param cookieName the cookie name
+	 * @return the path from cookie name
+	 */
 	private String getPathFromCookieName(String cookieName) {
 		return COOKIE_PATH_PREFIX + cookieName;
 	}
 
+	/**
+	 * Gets the cookie name from path.
+	 *
+	 * @param path the path
+	 * @return the cookie name from path
+	 */
 	private String getCookieNameFromPath(String path) {
 		if (!path.startsWith(COOKIE_PATH_PREFIX)) {
 			throw new IllegalArgumentException("Invalid path: " + path);
@@ -240,6 +298,10 @@ public class CookieStore {
 	/**
 	 * Gets cookies belonging exactly to the host name given, not to a broader
 	 * domain.
+	 *
+	 * @param hostName the host name
+	 * @param path the path
+	 * @return the cookies strict
 	 */
 	private Collection<Cookie> getCookiesStrict(String hostName, String path) {
 		if (path == null || path.length() == 0) {
@@ -344,6 +406,13 @@ public class CookieStore {
 		return cookies;
 	}
 
+	/**
+	 * Gets the cookies.
+	 *
+	 * @param hostName the host name
+	 * @param path the path
+	 * @return the cookies
+	 */
 	public Collection<Cookie> getCookies(String hostName, String path) {
 		// Security provided by RestrictedStore.
 		Collection<String> possibleDomains = Domains

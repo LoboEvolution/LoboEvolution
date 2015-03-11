@@ -24,24 +24,51 @@ package org.lobobrowser.request;
 import java.util.HashSet;
 import java.util.Set;
 
+
+/**
+ * The Class VerifiedHostsStore.
+ */
 public class VerifiedHostsStore {
+	
+	/** The Constant instance. */
 	private static final VerifiedHostsStore instance = new VerifiedHostsStore();
+	
+	/** The hosts. */
 	private final Set hosts = new HashSet();
 
+	/**
+	 * Gets the single instance of VerifiedHostsStore.
+	 *
+	 * @return single instance of VerifiedHostsStore
+	 */
 	public static VerifiedHostsStore getInstance() {
 		return instance;
 	}
 
+	/**
+	 * Instantiates a new verified hosts store.
+	 */
 	public VerifiedHostsStore() {
 		super();
 	}
 
+	/**
+	 * Contains.
+	 *
+	 * @param host the host
+	 * @return true, if successful
+	 */
 	public boolean contains(String host) {
 		synchronized (this.hosts) {
 			return this.hosts.contains(host);
 		}
 	}
 
+	/**
+	 * Adds the.
+	 *
+	 * @param host the host
+	 */
 	public void add(String host) {
 		synchronized (this.hosts) {
 			this.hosts.add(host);

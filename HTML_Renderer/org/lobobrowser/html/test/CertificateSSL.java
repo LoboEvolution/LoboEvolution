@@ -33,8 +33,18 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+
+/**
+ * The Class CertificateSSL.
+ */
 public class CertificateSSL {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws Exception the exception
+	 */
 	public static void main(String[] args) throws Exception {
 		/*
 		 * fix for Exception in thread "main"

@@ -25,11 +25,27 @@ package org.lobobrowser.store;
 
 import java.io.IOException;
 
+
 /**
+ * The Interface QuotaSource.
+ *
  * @author J. H. S.
  */
 public interface QuotaSource {
+	
+	/**
+	 * Gets the space left.
+	 *
+	 * @return the space left
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public long getSpaceLeft() throws IOException;
 
+	/**
+	 * Adds the used bytes.
+	 *
+	 * @param total the total
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void addUsedBytes(long total) throws IOException;
 }

@@ -34,12 +34,28 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
+
+/**
+ * The Class ItemListControl.
+ *
+ * @param <T> the generic type
+ */
 public class ItemListControl<T> extends JComponent {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The combo box. */
 	private final JComboBox<T> comboBox;
+	
+	/** The item editor factory. */
 	private final ItemEditorFactory<T> itemEditorFactory;
 
+	/**
+	 * Instantiates a new item list control.
+	 *
+	 * @param ief the ief
+	 */
 	public ItemListControl(ItemEditorFactory<T> ief) {
 		this.itemEditorFactory = ief;
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -61,6 +77,11 @@ public class ItemListControl<T> extends JComponent {
 		this.add(removeButton);
 	}
 
+	/**
+	 * Sets the items.
+	 *
+	 * @param items the new items
+	 */
 	public void setItems(Collection<T> items) {
 		JComboBox<T> comboBox = this.comboBox;
 		comboBox.removeAllItems();
@@ -69,16 +90,31 @@ public class ItemListControl<T> extends JComponent {
 		}
 	}
 
+	/**
+	 * Gets the selected item.
+	 *
+	 * @return the selected item
+	 */
 	@SuppressWarnings("unchecked")
 	private T getSelectedItem() {
 		return (T) this.comboBox.getSelectedItem();
 	}
 
+	/**
+	 * Adds the item.
+	 *
+	 * @param item the item
+	 */
 	private void addItem(T item) {
 		this.comboBox.addItem(item);
 		this.comboBox.setSelectedItem(item);
 	}
 
+	/**
+	 * Replace selected item.
+	 *
+	 * @param item the item
+	 */
 	private void replaceSelectedItem(T item) {
 		int index = this.comboBox.getSelectedIndex();
 		if (index != -1) {
@@ -88,6 +124,9 @@ public class ItemListControl<T> extends JComponent {
 		this.comboBox.setSelectedItem(item);
 	}
 
+	/**
+	 * Removes the selected item.
+	 */
 	private void removeSelectedItem() {
 		int index = this.comboBox.getSelectedIndex();
 		if (index != -1) {
@@ -95,6 +134,11 @@ public class ItemListControl<T> extends JComponent {
 		}
 	}
 
+	/**
+	 * Gets the items.
+	 *
+	 * @return the items
+	 */
 	public Collection<T> getItems() {
 		Collection<T> items = new ArrayList<T>();
 		int count = this.comboBox.getItemCount();
@@ -104,18 +148,29 @@ public class ItemListControl<T> extends JComponent {
 		return items;
 	}
 
+	/** The edit list caption. */
 	private String editListCaption;
 
+	/**
+	 * Sets the editor caption.
+	 *
+	 * @param caption the new editor caption
+	 */
 	public void setEditorCaption(String caption) {
 		this.editListCaption = caption;
 	}
 
+	/**
+	 * The Class RemoveAction.
+	 */
 	private class RemoveAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			if (JOptionPane.showConfirmDialog(ItemListControl.this,
 					"Are you sure you want to remove the selected item?",
@@ -125,17 +180,29 @@ public class ItemListControl<T> extends JComponent {
 		}
 	}
 
+	/**
+	 * The Class EditAction.
+	 */
 	private class EditAction extends AbstractAction {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The add. */
 		private final boolean add;
 
+		/**
+		 * Instantiates a new edits the action.
+		 *
+		 * @param add the add
+		 */
 		public EditAction(boolean add) {
 			this.add = add;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent e) {
 			Frame parentFrame = SwingTasks.getFrame(ItemListControl.this);
 			ItemEditorDialog<T> dialog;

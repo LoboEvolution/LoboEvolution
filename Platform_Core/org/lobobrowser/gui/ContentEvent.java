@@ -25,10 +25,25 @@ import java.util.EventObject;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ComponentContent;
 
+
+/**
+ * The Class ContentEvent.
+ */
 public class ContentEvent extends EventObject {
+	
+	/** The content. */
 	private final ComponentContent content;
+	
+	/** The response. */
 	private final ClientletResponse response;
 
+	/**
+	 * Instantiates a new content event.
+	 *
+	 * @param source the source
+	 * @param content the content
+	 * @param response the response
+	 */
 	public ContentEvent(Object source, ComponentContent content,
 			ClientletResponse response) {
 		super(source);
@@ -36,10 +51,20 @@ public class ContentEvent extends EventObject {
 		this.response = response;
 	}
 
+	/**
+	 * Gets the content.
+	 *
+	 * @return the content
+	 */
 	public ComponentContent getContent() {
 		return content;
 	}
 
+	/**
+	 * Gets the response.
+	 *
+	 * @return the response
+	 */
 	public ClientletResponse getResponse() {
 		return response;
 	}

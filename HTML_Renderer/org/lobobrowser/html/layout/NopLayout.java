@@ -24,7 +24,15 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.MarkupLayout;
 import org.lobobrowser.html.renderer.RBlockViewport;
 
+
+/**
+ * The Class NopLayout.
+ */
 public class NopLayout implements MarkupLayout {
+	
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderer.MarkupLayout#layoutMarkup(org.lobobrowser.html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
 	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 	}
 }

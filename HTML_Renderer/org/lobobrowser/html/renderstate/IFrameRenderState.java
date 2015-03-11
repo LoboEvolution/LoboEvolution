@@ -28,12 +28,26 @@ import org.lobobrowser.html.style.BorderInfo;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 
+
+/**
+ * The Class IFrameRenderState.
+ */
 public class IFrameRenderState extends StyleSheetRenderState {
+	
+	/**
+	 * Instantiates a new i frame render state.
+	 *
+	 * @param prevRenderState the prev render state
+	 * @param element the element
+	 */
 	public IFrameRenderState(RenderState prevRenderState,
 			HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getOverflowX()
+	 */
 	public int getOverflowX() {
 		int overflow = this.overflowX;
 		if (overflow != -1) {
@@ -60,6 +74,9 @@ public class IFrameRenderState extends StyleSheetRenderState {
 		return overflow;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getOverflowY()
+	 */
 	public int getOverflowY() {
 		int overflow = this.overflowY;
 		if (overflow != -1) {
@@ -86,6 +103,9 @@ public class IFrameRenderState extends StyleSheetRenderState {
 		return overflow;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getBorderInfo()
+	 */
 	public BorderInfo getBorderInfo() {
 		BorderInfo binfo = this.borderInfo;
 		if (binfo != INVALID_BORDER_INFO) {

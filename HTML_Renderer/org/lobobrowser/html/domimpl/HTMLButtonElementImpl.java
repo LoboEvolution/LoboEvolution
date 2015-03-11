@@ -20,7 +20,17 @@
  */
 package org.lobobrowser.html.domimpl;
 
+
+/**
+ * The Class HTMLButtonElementImpl.
+ */
 public class HTMLButtonElementImpl extends HTMLInputElementImpl {
+	
+	/**
+	 * Instantiates a new HTML button element impl.
+	 *
+	 * @param name the name
+	 */
 	public HTMLButtonElementImpl(String name) {
 		super(name);
 	}

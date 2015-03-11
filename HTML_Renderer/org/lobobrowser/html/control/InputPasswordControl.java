@@ -33,10 +33,20 @@ import javax.swing.text.JTextComponent;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.renderer.HtmlController;
 
+
+/**
+ * The Class InputPasswordControl.
+ */
 public class InputPasswordControl extends BaseInputTextControl {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instantiates a new input password control.
+	 *
+	 * @param modelNode the model node
+	 */
 	public InputPasswordControl(final HTMLBaseInputElement modelNode) {super(modelNode);
 	JPasswordField pwd =  (JPasswordField) this.widget;
 	
@@ -65,6 +75,12 @@ public class InputPasswordControl extends BaseInputTextControl {
 		return new JPasswordField();
 	}
 	
+	/**
+	 * Direction.
+	 *
+	 * @param dir the dir
+	 * @return the component orientation
+	 */
 	private ComponentOrientation direction(String dir) {
 
 		if ("ltr".equalsIgnoreCase(dir)) {

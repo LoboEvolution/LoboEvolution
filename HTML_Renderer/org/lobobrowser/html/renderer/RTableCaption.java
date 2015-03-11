@@ -24,9 +24,20 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLTableCaptionElementImpl;
 
+
+/**
+ * The Class RTableCaption.
+ */
 public class RTableCaption extends RBlock {
+	
 	/**
-	 * @param element
+	 * Instantiates a new r table caption.
+	 *
+	 * @param element the element
+	 * @param pcontext the pcontext
+	 * @param rcontext the rcontext
+	 * @param frameContext the frame context
+	 * @param tableAsContainer the table as container
 	 */
 	public RTableCaption(HTMLTableCaptionElementImpl element,
 			UserAgentContext pcontext, HtmlRendererContext rcontext,

@@ -25,15 +25,24 @@ package org.lobobrowser.util;
 
 import java.util.Collection;
 
+
 /**
+ * The Class MultiplexClassLoader.
+ *
  * @author J. H. S.
  */
 public abstract class MultiplexClassLoader extends BaseClassLoader {
+	
+	/** The Constant EMPTY_CLASS_LOADERS. */
 	private static final BaseClassLoader[] EMPTY_CLASS_LOADERS = new BaseClassLoader[0];
+	
+	/** The parent loaders. */
 	private final BaseClassLoader[] parentLoaders;
 
 	/**
-	 * @param classLoaders
+	 * Instantiates a new multiplex class loader.
+	 *
+	 * @param classLoaders the class loaders
 	 */
 	public MultiplexClassLoader(Collection classLoaders) {
 		super(null);

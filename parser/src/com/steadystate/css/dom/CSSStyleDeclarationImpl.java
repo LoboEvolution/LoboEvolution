@@ -40,6 +40,7 @@ import org.w3c.dom.css.CSSValue;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.util.LangUtils;
 
+
 /**
  * Implementation of {@link CSSStyleDeclaration}.
  *
@@ -49,33 +50,65 @@ import com.steadystate.css.util.LangUtils;
  */
 public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, Serializable
 {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -2373755821317100189L;
 
+    /** The Constant PRIORITY_IMPORTANT. */
     private static final String PRIORITY_IMPORTANT = "important";
 
+    /** The parent rule_. */
     private CSSRule parentRule_;
+    
+    /** The properties_. */
     private List<Property> properties_ = new ArrayList<Property>();
 
+    /**
+     * Sets the parent rule.
+     *
+     * @param parentRule the new parent rule
+     */
     public void setParentRule(final CSSRule parentRule) {
         parentRule_ = parentRule;
     }
 
+    /**
+     * Gets the properties.
+     *
+     * @return the properties
+     */
     public List<Property> getProperties() {
         return properties_;
     }
 
+    /**
+     * Sets the properties.
+     *
+     * @param properties the new properties
+     */
     public void setProperties(final List<Property> properties) {
         properties_ = properties;
     }
 
+    /**
+     * Instantiates a new CSS style declaration impl.
+     *
+     * @param parentRule the parent rule
+     */
     public CSSStyleDeclarationImpl(final CSSRule parentRule) {
         parentRule_ = parentRule;
     }
 
+    /**
+     * Instantiates a new CSS style declaration impl.
+     */
     public CSSStyleDeclarationImpl() {
         // Empty.
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSStyleDeclaration#getCssText()
+     */
     public String getCssText() {
         final StringBuilder sb = new StringBuilder();
         for (int i = 0; i < properties_.size(); ++i) {
@@ -90,6 +123,9 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, Serializabl
         return sb.toString();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSStyleDeclaration#setCssText(java.lang.String)
+     */
     public void setCssText(final String cssText) throws DOMException {
         try {
             final InputSource is = new InputSource(new StringReader(cssText));
@@ -105,16 +141,25 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, Serializabl
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSStyleDeclaration#getPropertyValue(java.lang.String)
+     */
     public String getPropertyValue(final String propertyName) {
         final Property p = getPropertyDeclaration(propertyName);
         return (p == null || p.getValue() == null) ? "" : p.getValue().toString();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSStyleDeclaration#getPropertyCSSValue(java.lang.String)
+     */
     public CSSValue getPropertyCSSValue(final String propertyName) {
         final Property p = getPropertyDeclaration(propertyName);
         return (p == null) ? null : p.getValue();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSStyleDeclaration#removeProperty(java.lang.String)
+     */
     public String removeProperty(final String propertyName) throws DOMException {
         if (null == propertyName) {
             return "";
@@ -129,6 +174,9 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, Serializabl
         return "";
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSStyleDeclaration#getPropertyPriority(java.lang.String)
+     */
     public String getPropertyPriority(final String propertyName) {
         final Property p = getPropertyDeclaration(propertyName);
         if (p == null) {
@@ -137,6 +185,9 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, Serializabl
         return p.isImportant() ? PRIORITY_IMPORTANT : "";
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSStyleDeclaration#setProperty(java.lang.String, java.lang.String, java.lang.String)
+     */
     public void setProperty(
             final String propertyName,
             final String value,
@@ -167,23 +218,43 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, Serializabl
         }
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSStyleDeclaration#getLength()
+     */
     public int getLength() {
         return properties_.size();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSStyleDeclaration#item(int)
+     */
     public String item(final int index) {
         final Property p = properties_.get(index);
         return (p == null) ? "" : p.getName();
     }
 
+    /* (non-Javadoc)
+     * @see org.w3c.dom.css.CSSStyleDeclaration#getParentRule()
+     */
     public CSSRule getParentRule() {
         return parentRule_;
     }
 
+    /**
+     * Adds the property.
+     *
+     * @param p the p
+     */
     public void addProperty(final Property p) {
         properties_.add(p);
     }
 
+    /**
+     * Gets the property declaration.
+     *
+     * @param propertyName the property name
+     * @return the property declaration
+     */
     public Property getPropertyDeclaration(final String propertyName) {
         if (null == propertyName) {
             return null;
@@ -197,11 +268,17 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, Serializabl
         return null;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return getCssText();
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -217,6 +294,12 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, Serializabl
         return equalsProperties(csd);
     }
 
+    /**
+     * Equals properties.
+     *
+     * @param csd the csd
+     * @return true, if successful
+     */
     private boolean equalsProperties(final CSSStyleDeclaration csd) {
         if ((csd == null) || (getLength() != csd.getLength())) {
             return false;
@@ -239,6 +322,9 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, Serializabl
         return true;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode() {
         int hash = LangUtils.HASH_SEED;

@@ -2,6 +2,10 @@ package org.lobobrowser.util;
 
 import java.lang.ref.WeakReference;
 
+
+/**
+ * The Class LocalFilter.
+ */
 public class LocalFilter implements ObjectFilter {
 	/*
 	 * (non-Javadoc)

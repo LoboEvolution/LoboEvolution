@@ -25,22 +25,37 @@ package org.lobobrowser.util;
 
 import java.io.IOException;
 
+
 /**
+ * The Class OS.
+ *
  * @author J. H. S.
  */
 public class OS {
+	
 	/**
-	 * 
+	 * Instantiates a new os.
 	 */
 	private OS() {
 		super();
 	}
 
+	/**
+	 * Checks if is windows.
+	 *
+	 * @return true, if is windows
+	 */
 	public static boolean isWindows() {
 		String osName = System.getProperty("os.name");
 		return osName.indexOf("Windows") != -1;
 	}
 
+	/**
+	 * Launch browser.
+	 *
+	 * @param url the url
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void launchBrowser(String url) throws IOException {
 		String cmdLine;
 		if (isWindows()) {
@@ -57,6 +72,9 @@ public class OS {
 
 	/**
 	 * Opens a file a directory with an appropriate program.
+	 *
+	 * @param path the path
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static void launchPath(String path) throws IOException {
 		if (isWindows()) {
@@ -68,6 +86,11 @@ public class OS {
 		}
 	}
 
+	/**
+	 * Supports launch path.
+	 *
+	 * @return true, if successful
+	 */
 	public static boolean supportsLaunchPath() {
 		return isWindows();
 	}

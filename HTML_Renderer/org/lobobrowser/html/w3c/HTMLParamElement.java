@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.w3c;
 
+
 /**
  * Parameters fed to the <code>OBJECT</code> element. See the PARAM element
  * definition in HTML 4.01.
@@ -40,15 +41,20 @@ package org.lobobrowser.html.w3c;
  * Object Model (DOM) Level 2 HTML Specification</p>.
  */
 public interface HTMLParamElement extends HTMLElement {
+	
 	/**
 	 * The name of a run-time parameter. See the name attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
 	 * The name of a run-time parameter. See the name attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name);
 
@@ -56,6 +62,8 @@ public interface HTMLParamElement extends HTMLElement {
 	 * Content type for the <code>value</code> attribute when
 	 * <code>valuetype</code> has the value "ref". See the type attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return the type
 	 */
 	public String getType();
 
@@ -63,30 +71,40 @@ public interface HTMLParamElement extends HTMLElement {
 	 * Content type for the <code>value</code> attribute when
 	 * <code>valuetype</code> has the value "ref". See the type attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param type the new type
 	 */
 	public void setType(String type);
 
 	/**
 	 * The value of a run-time parameter. See the value attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return the value
 	 */
 	public String getValue();
 
 	/**
 	 * The value of a run-time parameter. See the value attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param value the new value
 	 */
 	public void setValue(String value);
 
 	/**
 	 * Information about the meaning of the <code>value</code> attribute value.
 	 * See the valuetype attribute definition in HTML 4.01.
+	 *
+	 * @return the value type
 	 */
 	public String getValueType();
 
 	/**
 	 * Information about the meaning of the <code>value</code> attribute value.
 	 * See the valuetype attribute definition in HTML 4.01.
+	 *
+	 * @param valueType the new value type
 	 */
 	public void setValueType(String valueType);
 

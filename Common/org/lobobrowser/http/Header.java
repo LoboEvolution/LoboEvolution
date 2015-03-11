@@ -30,6 +30,7 @@ import javax.xml.ws.Response;
 
 import org.lobobrowser.util.NameValuePair;
 
+
 /**
  * Represents a header field in an http {@link Request} or {@link Response}.
  * 
@@ -37,8 +38,13 @@ import org.lobobrowser.util.NameValuePair;
  */
 public class Header extends NameValuePair {
     
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The pcs. */
 	private transient PropertyChangeSupport pcs;
+	
+	/** The elements. */
 	private List<Element> elements = new ArrayList<Element>();
     
     /**
@@ -99,6 +105,9 @@ public class Header extends NameValuePair {
         firePropertyChange("elements", old, getElements());
     }
     
+    /* (non-Javadoc)
+     * @see org.lobobrowser.util.NameValuePair#toString()
+     */
     @Override
     public String toString() {
         return getName() + ": " + getValue();
@@ -108,6 +117,8 @@ public class Header extends NameValuePair {
      * A representation of an Element within a Header.
      */
     public static final class Element {
+        
+        /** The params. */
         private Parameter[] params = new Parameter[0];
         
         /**

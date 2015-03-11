@@ -24,26 +24,42 @@ import org.lobobrowser.html.w3c.HTMLPropertiesCollection;
 import org.w3c.dom.DOMStringList;
 import org.w3c.dom.Node;
 
+
+/**
+ * The Class HTMLPropertiesCollectionImpl.
+ */
 public class HTMLPropertiesCollectionImpl implements HTMLPropertiesCollection{
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCollection#getLength()
+	 */
 	@Override
 	public int getLength() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLCollection#item(int)
+	 */
 	@Override
 	public Node item(int index) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLPropertiesCollection#namedItem(java.lang.String)
+	 */
 	@Override
 	public Node namedItem(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.lobobrowser.html.w3c.HTMLPropertiesCollection#getNames()
+	 */
 	@Override
 	public DOMStringList getNames() {
 		// TODO Auto-generated method stub

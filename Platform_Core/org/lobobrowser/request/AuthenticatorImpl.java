@@ -32,10 +32,21 @@ import org.lobobrowser.settings.AssociatedSettings;
 import org.lobobrowser.settings.ConnectionSettings;
 import org.lobobrowser.util.gui.GUITasks;
 
+
+/**
+ * The Class AuthenticatorImpl.
+ */
 public class AuthenticatorImpl extends Authenticator {
+	
+	/** The connection settings. */
 	private final ConnectionSettings connectionSettings;
+	
+	/** The associated settings. */
 	private final AssociatedSettings associatedSettings;
 
+	/**
+	 * Instantiates a new authenticator impl.
+	 */
 	public AuthenticatorImpl() {
 		super();
 		// This is one way to avoid potential security exceptions.
