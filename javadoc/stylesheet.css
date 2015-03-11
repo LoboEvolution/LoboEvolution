@@ -93,7 +93,7 @@ Document title and Copyright styles
 }
 .tab {
     background-color:#0066FF;
-    background-image:url(resources/titlebar.gif);
+    background-image:url(titlebar.gif);
     background-position:left top;
     background-repeat:no-repeat;
     color:#ffffff;
@@ -105,7 +105,7 @@ Document title and Copyright styles
 Navigation bar styles
 */
 .bar {
-    background-image:url(resources/background.gif);
+    background-image:url(background.gif);
     background-repeat:repeat-x;
     color:#FFFFFF;
     padding:.8em .5em .4em .8em;
@@ -114,7 +114,7 @@ Navigation bar styles
     margin:0;
 }
 .topNav {
-    background-image:url(resources/background.gif);
+    background-image:url(background.gif);
     background-repeat:repeat-x;
     color:#FFFFFF;
     float:left;
@@ -127,7 +127,7 @@ Navigation bar styles
 }
 .bottomNav {
     margin-top:10px;
-    background-image:url(resources/background.gif);
+    background-image:url(background.gif);
     background-repeat:repeat-x;
     color:#FFFFFF;
     float:left;
@@ -174,7 +174,7 @@ ul.subNavList li{
     color:#bb7a2a;
 }
 .navBarCell1Rev {
-    background-image:url(resources/tab.gif);
+    background-image:url(tab.gif);
     background-color:#a88834;
     color:#FFFFFF;
     margin: auto 5px;
@@ -379,12 +379,12 @@ caption a:link, caption a:hover, caption a:active, caption a:visited {
     padding-left:8px;
     display:block;
     float:left;
-    background-image:url(resources/titlebar.gif);
+    background-image:url(titlebar.gif);
     height:18px;
 }
 .overviewSummary .tabEnd, .packageSummary .tabEnd, .contentContainer ul.blockList li.blockList .tabEnd, .summary .tabEnd, .classUseContainer .tabEnd, .constantValuesContainer .tabEnd {
     width:10px;
-    background-image:url(resources/titlebar_end.gif);
+    background-image:url(titlebar_end.gif);
     background-repeat:no-repeat;
     background-position:top right;
     position:relative;
