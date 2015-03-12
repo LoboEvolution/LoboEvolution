@@ -20,10 +20,8 @@
  */
 package org.lobobrowser.primary.action;
 
-import javax.swing.Action;
-
 /**
- * The interface EnableableAction.
+ * The Interface EnableableAction.
  */
 public interface EnableableAction {
 

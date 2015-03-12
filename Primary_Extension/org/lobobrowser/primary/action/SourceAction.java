@@ -28,14 +28,13 @@ import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigatorWindow;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class SourceAction.
  */
 public class SourceAction extends AbstractAction implements EnableableAction {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** The window. */
@@ -44,6 +43,7 @@ public class SourceAction extends AbstractAction implements EnableableAction {
 	/** The component source. */
 	private ComponentSource componentSource;
 	
+	/** The action. */
 	private ActionPool action;
 
 	/**

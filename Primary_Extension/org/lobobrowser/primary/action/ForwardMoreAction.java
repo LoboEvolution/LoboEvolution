@@ -21,11 +21,7 @@
 package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeListener;
-
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-
 import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigatorWindow;
@@ -35,9 +31,13 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class ForwardMoreAction extends AbstractAction implements EnableableAction {
 
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
 	/** The window. */
 	private NavigatorWindow window;
 	
+	/** The action. */
 	private ActionPool action;
 
 	/**

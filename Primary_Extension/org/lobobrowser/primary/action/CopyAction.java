@@ -28,19 +28,19 @@ import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigatorWindow;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CopyAction.
  */
 public class CopyAction  extends AbstractAction implements EnableableAction {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** The window. */
 	private NavigatorWindow window;
 	
+	/** The action. */
 	private ActionPool action;
 
 	/**

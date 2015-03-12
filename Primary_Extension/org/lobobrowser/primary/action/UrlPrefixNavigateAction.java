@@ -21,23 +21,24 @@
 package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeListener;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-
 import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigatorWindow;
 import org.lobobrowser.ua.RequestType;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class UrlPrefixNavigateAction.
  */
 public class UrlPrefixNavigateAction extends AbstractAction implements EnableableAction {
+
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
 	/** The url prefix. */
 	private String urlPrefix;
@@ -51,6 +52,7 @@ public class UrlPrefixNavigateAction extends AbstractAction implements Enableabl
 	/** The window. */
 	private NavigatorWindow window;
 	
+	/** The action. */
 	private ActionPool action;
 
 	/**
