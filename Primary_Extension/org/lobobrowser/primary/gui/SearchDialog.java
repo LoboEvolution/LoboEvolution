@@ -24,9 +24,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -35,6 +32,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.lobobrowser.primary.action.SearchCancelAction;
+import org.lobobrowser.primary.action.SearchOkAction;
 
 /**
  * The Class SearchDialog.
@@ -45,8 +44,10 @@ public class SearchDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	/** The tags field. */
-	private final FormField tagsField = new FormField(FieldType.TEXT,
-			"Keywords:");
+	private final FormField tagsField = new FormField(FieldType.TEXT,"Keywords:");
+	
+	/** The search keywords. */
+	private String searchKeywords = null;
 
 	/**
 	 * Instantiates a new search dialog.
@@ -70,10 +71,10 @@ public class SearchDialog extends JDialog {
 		JComponent buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
 		JButton okButton = new JButton();
-		okButton.setAction(new OkAction());
+		okButton.setAction(new SearchOkAction(tagsField, this));
 		okButton.setText("Search");
 		JButton cancelButton = new JButton();
-		cancelButton.setAction(new CancelAction());
+		cancelButton.setAction(new SearchCancelAction(this));
 		cancelButton.setText("Cancel");
 		buttonsPanel.add(Box.createHorizontalGlue());
 		buttonsPanel.add(okButton);
@@ -84,9 +85,6 @@ public class SearchDialog extends JDialog {
 		contentPane.add(Box.createRigidArea(new Dimension(1, 4)));
 	}
 
-	/** The search keywords. */
-	private String searchKeywords = null;
-
 	/**
 	 * Gets the search keywords.
 	 *
@@ -95,38 +93,8 @@ public class SearchDialog extends JDialog {
 	public String getSearchKeywords() {
 		return this.searchKeywords;
 	}
-
-	/**
-	 * The Class OkAction.
-	 */
-	private class OkAction extends AbstractAction {
-		
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/* (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
-		public void actionPerformed(ActionEvent e) {
-			searchKeywords = tagsField.getValue();
-			SearchDialog.this.dispose();
-		}
-	}
-
-	/**
-	 * The Class CancelAction.
-	 */
-	private class CancelAction extends AbstractAction {
-		
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/* (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
-		public void actionPerformed(ActionEvent e) {
-			searchKeywords = null;
-			SearchDialog.this.dispose();
-		}
+	
+	public String setSearchKeywords(String searchKeywords) {
+		return this.searchKeywords = searchKeywords;
 	}
 }

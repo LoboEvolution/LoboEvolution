@@ -20,20 +20,17 @@
  */
 package org.lobobrowser.primary.gui;
 
-import java.awt.Dialog;
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 
-import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+
+import org.lobobrowser.primary.action.EditAction;
 
 
 /**
@@ -46,6 +43,9 @@ public class StringListControl extends JComponent {
 	
 	/** The combo box. */
 	private final JComboBox<String> comboBox;
+	
+	/** The edit list caption. */
+	private String editListCaption;
 
 	/**
 	 * Instantiates a new string list control.
@@ -55,7 +55,7 @@ public class StringListControl extends JComponent {
 		this.comboBox = new JComboBox<String>();
 		this.comboBox.setEditable(false);
 		JButton editButton = new JButton();
-		editButton.setAction(new EditAction());
+		editButton.setAction(new EditAction(this));
 		editButton.setText("Edit List");
 		this.add(this.comboBox);
 		this.add(editButton);
@@ -125,8 +125,14 @@ public class StringListControl extends JComponent {
 		}
 	}
 
-	/** The edit list caption. */
-	private String editListCaption;
+	/**
+	 * Gets the edit list caption.
+	 *
+	 * @return the edit list caption
+	 */
+	public String getEditListCaption() {
+		return editListCaption;
+	}
 
 	/**
 	 * Sets the edits the list caption.
@@ -135,40 +141,5 @@ public class StringListControl extends JComponent {
 	 */
 	public void setEditListCaption(String caption) {
 		this.editListCaption = caption;
-	}
-
-	/**
-	 * The Class EditAction.
-	 */
-	private class EditAction extends AbstractAction {
-		
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/* (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
-		public void actionPerformed(ActionEvent e) {
-			Frame parentFrame = SwingTasks.getFrame(StringListControl.this);
-			SimpleTextEditDialog dialog;
-			if (parentFrame != null) {
-				dialog = new SimpleTextEditDialog(parentFrame);
-			} else {
-				Dialog parentDialog = SwingTasks
-						.getDialog(StringListControl.this);
-				dialog = new SimpleTextEditDialog(parentDialog);
-			}
-			dialog.setModal(true);
-			dialog.setTitle("Edit List");
-			dialog.setCaption(editListCaption);
-			dialog.setSize(new Dimension(400, 300));
-			dialog.setLocationByPlatform(true);
-			dialog.setText(getStringsAsText());
-			dialog.setVisible(true);
-			String text = dialog.getResultingText();
-			if (text != null) {
-				setStringsFromText(text);
-			}
-		}
 	}
 }

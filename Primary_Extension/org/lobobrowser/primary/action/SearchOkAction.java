@@ -15,35 +15,27 @@
 package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
-import java.net.MalformedURLException;
-
-import org.lobobrowser.primary.ext.ActionPool;
-import org.lobobrowser.primary.ext.ComponentSource;
-import org.lobobrowser.ua.NavigatorWindow;
+import javax.swing.AbstractAction;
+import org.lobobrowser.primary.gui.FormField;
+import org.lobobrowser.primary.gui.SearchDialog;
 
 /**
- * The Class ShowBookmarksAction.
+ * The Class SearchOkAction.
  */
-public class ShowBookmarksAction extends ActionPool {
+public class SearchOkAction extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The window. */
-	private NavigatorWindow window;
+	/** The tags field. */
+	private final FormField tagsField;
 
-	/**
-	 * Instantiates a new show bookmarks action.
-	 *
-	 * @param componentSource
-	 *            the component source
-	 * @param window
-	 *            the window
-	 */
-	public ShowBookmarksAction(ComponentSource componentSource,
-			NavigatorWindow window) {
-		super(componentSource, window);
-		this.window = window;
+	/** The search. */
+	private SearchDialog search;
+
+	public SearchOkAction(FormField tagsField,SearchDialog search) {
+		this.tagsField = tagsField;
+		this.search = search;
 	}
 
 	/*
@@ -52,11 +44,7 @@ public class ShowBookmarksAction extends ActionPool {
 	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	public void actionPerformed(ActionEvent e) {
-		try {
-			window.getTopFrame().navigate("about:bookmarks");
-		} catch (MalformedURLException mfu) {
-			throw new IllegalStateException("not expected", mfu);
-		}
+		search.setSearchKeywords(tagsField.getValue());
+		search.dispose();
 	}
-
 }

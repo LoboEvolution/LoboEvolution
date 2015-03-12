@@ -15,35 +15,30 @@
 package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
-import java.net.MalformedURLException;
 
-import org.lobobrowser.primary.ext.ActionPool;
-import org.lobobrowser.primary.ext.ComponentSource;
-import org.lobobrowser.ua.NavigatorWindow;
+import javax.swing.AbstractAction;
+import javax.swing.JTextArea;
+
+import org.lobobrowser.primary.gui.SimpleTextEditDialog;
 
 /**
- * The Class ShowBookmarksAction.
+ * The Class TextEditOkAction.
  */
-public class ShowBookmarksAction extends ActionPool {
+public class TextEditOkAction extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The text area. */
+	private final JTextArea textArea;
 
-	/** The window. */
-	private NavigatorWindow window;
+	/** The search. */
+	private SimpleTextEditDialog search;
 
-	/**
-	 * Instantiates a new show bookmarks action.
-	 *
-	 * @param componentSource
-	 *            the component source
-	 * @param window
-	 *            the window
-	 */
-	public ShowBookmarksAction(ComponentSource componentSource,
-			NavigatorWindow window) {
-		super(componentSource, window);
-		this.window = window;
+	public TextEditOkAction(JTextArea textArea,
+			SimpleTextEditDialog search) {
+		this.textArea = textArea;
+		this.search = search;
 	}
 
 	/*
@@ -52,11 +47,7 @@ public class ShowBookmarksAction extends ActionPool {
 	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	public void actionPerformed(ActionEvent e) {
-		try {
-			window.getTopFrame().navigate("about:bookmarks");
-		} catch (MalformedURLException mfu) {
-			throw new IllegalStateException("not expected", mfu);
-		}
+		search.setResultingText(textArea.getText());
+		search.dispose();
 	}
-
 }
