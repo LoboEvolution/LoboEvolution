@@ -26,8 +26,6 @@ import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigatorWindow;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class ExitAction.
  */

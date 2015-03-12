@@ -20,32 +20,12 @@
  */
 package org.lobobrowser.primary.action;
 
-import org.lobobrowser.primary.ext.ActionPool;
-import org.lobobrowser.primary.ext.ComponentSource;
-import org.lobobrowser.ua.NavigatorWindow;
+import javax.swing.Action;
 
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class EnableableAction.
+ * The interface EnableableAction.
  */
-public abstract class EnableableAction extends ActionPool {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Instantiates a new enableable action.
-	 *
-	 * @param componentSource
-	 *            the component source
-	 * @param window
-	 *            the window
-	 */
-	public EnableableAction(ComponentSource componentSource,
-			NavigatorWindow window) {
-		super(componentSource, window);
-	}
+public interface EnableableAction {
 
 	/**
 	 * Update enabling.

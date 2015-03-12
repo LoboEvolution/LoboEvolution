@@ -22,19 +22,27 @@ package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
 
+import javax.swing.AbstractAction;
+
+import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigatorWindow;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class ClonedWindowAction.
  */
-public class ClonedWindowAction extends EnableableAction {
+public class ClonedWindowAction extends AbstractAction implements EnableableAction {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/** The window. */
 	private NavigatorWindow window;
+	
+	private ActionPool action;
 
 	/**
 	 * Instantiates a new cloned window action.
@@ -45,13 +53,10 @@ public class ClonedWindowAction extends EnableableAction {
 	 *            the window
 	 */
 	public ClonedWindowAction(ComponentSource componentSource,
-			NavigatorWindow window) {
-		super(componentSource, window);
+			NavigatorWindow window,ActionPool action) {
+		this.action = action;
 		this.window = window;
 	}
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
 	/*
 	 * (non-Javadoc)
@@ -61,7 +66,7 @@ public class ClonedWindowAction extends EnableableAction {
 	@Override
 	public void updateEnabling() {
 		NavigationEntry entry = window.getCurrentNavigationEntry();
-		this.setEnabled(entry != null && entry.getMethod().equals("GET"));
+		action.setEnabled(entry != null && entry.getMethod().equals("GET"));
 	}
 
 	/*

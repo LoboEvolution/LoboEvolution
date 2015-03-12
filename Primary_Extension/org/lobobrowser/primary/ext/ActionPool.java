@@ -82,13 +82,13 @@ public class ActionPool extends AbstractAction {
 		this.window = window;
 		Collection<EnableableAction> actions = new LinkedList<EnableableAction>();
 		this.enableableActions = actions;
-		actions.add(new BackAction(componentSource, window));
-		actions.add(new ForwardAction(componentSource, window));
-		actions.add(new ReloadAction(componentSource, window));
-		actions.add(new BackMoreAction(componentSource, window));
-		actions.add(new ForwardMoreAction(componentSource, window));
-		actions.add(new RecentHostsAction(componentSource, window));
-		actions.add(new SourceAction(componentSource, window));
+		actions.add(new BackAction(componentSource, window, this));
+		actions.add(new ForwardAction(componentSource, window, this));
+		actions.add(new ReloadAction(componentSource, window, this));
+		actions.add(new BackMoreAction(componentSource, window, this));
+		actions.add(new ForwardMoreAction(componentSource, window, this));
+		actions.add(new RecentHostsAction(componentSource, window, this));
+		actions.add(new SourceAction(componentSource, window, this));
 	}
 
 	/**
@@ -170,8 +170,7 @@ public class ActionPool extends AbstractAction {
 	 * @return the action
 	 */
 	public Action addUrlPrefixNavigateAction(String urlPrefix, boolean urlEncode) {
-		UrlPrefixNavigateAction urlPrefixNav = new UrlPrefixNavigateAction(
-				componentSource, window);
+		UrlPrefixNavigateAction urlPrefixNav = new UrlPrefixNavigateAction(componentSource, window,this);
 		urlPrefixNav.setUrlPrefix(urlPrefix);
 		urlPrefixNav.setUrlEncode(urlEncode);
 		this.enableableActions.add(urlPrefixNav);

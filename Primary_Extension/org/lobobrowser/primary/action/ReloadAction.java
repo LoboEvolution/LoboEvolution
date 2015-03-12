@@ -22,18 +22,26 @@ package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
 
+import javax.swing.AbstractAction;
+
+import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigatorWindow;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class ReloadAction.
  */
-public class ReloadAction extends EnableableAction {
+public class ReloadAction extends AbstractAction implements EnableableAction {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/** The window. */
 	private NavigatorWindow window;
+	
+	private ActionPool action;
 
 	/**
 	 * Instantiates a new reload action.
@@ -43,13 +51,10 @@ public class ReloadAction extends EnableableAction {
 	 * @param window
 	 *            the window
 	 */
-	public ReloadAction(ComponentSource componentSource, NavigatorWindow window) {
-		super(componentSource, window);
+	public ReloadAction(ComponentSource componentSource, NavigatorWindow window,ActionPool action) {
+		this.action = action;
 		this.window = window;
 	}
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
 	/*
 	 * (non-Javadoc)
@@ -58,7 +63,7 @@ public class ReloadAction extends EnableableAction {
 	 */
 	@Override
 	public void updateEnabling() {
-		this.setEnabled(window.canReload());
+		action.setEnabled(window.canReload());
 	}
 
 	/*

@@ -165,7 +165,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		});
 		JMenu backMoreMenu = new JMenu();
 		// BackMoreAction only used for enabling
-		backMoreMenu.setAction(new BackMoreAction(this, window));
+		backMoreMenu.setAction((Action) new BackMoreAction(this, window,actionPool));
 		backMoreMenu.addMenuListener(new MenuAdapter() {
 			public void menuSelected(MenuEvent e) {
 				populateBackMore();
@@ -175,7 +175,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		backMoreMenu.setText("Back To");
 		JMenu forwardMoreMenu = new JMenu();
 		// ForwardMoreAction only used for enabling
-		forwardMoreMenu.setAction(new ForwardMoreAction(this, window));
+		forwardMoreMenu.setAction(new ForwardMoreAction(this, window, actionPool));
 		forwardMoreMenu.addMenuListener(new MenuAdapter() {
 			public void menuSelected(MenuEvent e) {
 				populateForwardMore();
@@ -190,7 +190,7 @@ public class ComponentSource implements NavigatorWindowListener {
 			}
 		});
 		this.recentHostsMenu = recentHostsMenu;
-		recentHostsMenu.setAction(new RecentHostsAction(this, window));
+		recentHostsMenu.setAction(new RecentHostsAction(this, window, actionPool));
 		recentHostsMenu.setText("Recent Hosts");
 		JMenu searchersMenu = new JMenu();
 		searchersMenu.addMenuListener(new MenuAdapter() {
@@ -249,7 +249,7 @@ public class ComponentSource implements NavigatorWindowListener {
 				new BlankWindowAction(this, window)));
 		menu.addSeparator();
 		menu.add(menuItem("Cloned Window", 'C',
-				new ClonedWindowAction(this, window)));
+				new ClonedWindowAction(this, window, actionPool)));
 		menu.addSeparator();
 		menu.add(menuItem("File...", 'F', "ctrl O",
 				new OpenFileAction(this, window)));
@@ -267,7 +267,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	public JMenu getEditMenu() {
 		JMenu menu = new JMenu("Edit");
 		menu.setMnemonic('E');
-		menu.add(menuItem("Copy", 'C', "ctrl C", new CopyAction(this, window)));
+		menu.add(menuItem("Copy", 'C', "ctrl C", new CopyAction(this, window, actionPool)));
 		return menu;
 	}
 
@@ -279,7 +279,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	public JMenu getViewMenu() {
 		JMenu menu = new JMenu("View");
 		menu.setMnemonic('V');
-		menu.add(menuItem("Page Source", 'S', new SourceAction(this, window)));
+		menu.add(menuItem("Page Source", 'S', new SourceAction(this, window, actionPool)));
 		menu.add(menuItem("Console", 'C', new ConsoleAction(this, window)));
 		menu.add(this.recentHostsMenu);
 		menu.add(this.searchPageSource.getSearchMenu());
@@ -315,14 +315,14 @@ public class ComponentSource implements NavigatorWindowListener {
 		JMenu menu = new JMenu("Navigation");
 		menu.setMnemonic('N');
 
-		menu.add(menuItem("Back", 'B', "ctrl B", new BackAction(this, window)));
-		menu.add(menuItem("Forward", 'F', new ForwardAction(this, window)));
+		menu.add(menuItem("Back", 'B', "ctrl B", new BackAction(this, window, actionPool)));
+		menu.add(menuItem("Forward", 'F', new ForwardAction(this, window, actionPool)));
 		menu.add(menuItem("Stop", 'S',
 				KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
 				new StopAction(this, window)));
 		menu.add(menuItem("Reload", 'R',
 				KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0),
-				new ReloadAction(this, window)));
+				new ReloadAction(this, window, actionPool)));
 		menu.addSeparator();
 		menu.add(this.backMoreMenu);
 		menu.add(this.forwardMoreMenu);
@@ -397,7 +397,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 */
 	private Component getBackButton() {
 		JButton button = new JButton();
-		button.setAction(new BackAction(this, window));
+		button.setAction(new BackAction(this, window, actionPool));
 		button.setIcon(IconFactory.getInstance().getIcon(
 				"/toolbarButtonGraphics/navigation/Back16.gif"));
 		button.setToolTipText("Back");
@@ -411,7 +411,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 */
 	private Component getForwardButton() {
 		JButton button = new JButton();
-		button.setAction(new ForwardAction(this, window));
+		button.setAction(new ForwardAction(this, window, actionPool));
 		button.setIcon(IconFactory.getInstance().getIcon(
 				"/toolbarButtonGraphics/navigation/Forward16.gif"));
 		button.setToolTipText("Forward");
@@ -439,7 +439,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 */
 	private Component getRefreshButton() {
 		JButton button = new JButton();
-		button.setAction(new ReloadAction(this, window));
+		button.setAction(new ReloadAction(this, window, actionPool));
 		button.setIcon(IconFactory.getInstance().getIcon(
 				"/toolbarButtonGraphics/general/Refresh16.gif"));
 		button.setToolTipText("Refresh");

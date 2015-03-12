@@ -22,18 +22,26 @@ package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
 
+import javax.swing.AbstractAction;
+
+import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigatorWindow;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class RecentHostsAction.
  */
-public class RecentHostsAction extends EnableableAction {
+public class RecentHostsAction extends AbstractAction implements EnableableAction {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/** The component source. */
 	private ComponentSource componentSource;
+	
+	private ActionPool action;
 
 	/**
 	 * Instantiates a new recent hosts action.
@@ -44,13 +52,10 @@ public class RecentHostsAction extends EnableableAction {
 	 *            the window
 	 */
 	public RecentHostsAction(ComponentSource componentSource,
-			NavigatorWindow window) {
-		super(componentSource, window);
+			NavigatorWindow window,ActionPool action) {
+		this.action = action;
 		this.componentSource = componentSource;
 	}
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
 	/*
 	 * (non-Javadoc)
@@ -59,7 +64,7 @@ public class RecentHostsAction extends EnableableAction {
 	 */
 	@Override
 	public void updateEnabling() {
-		this.setEnabled(componentSource.hasRecentEntries());
+		action.setEnabled(componentSource.hasRecentEntries());
 	}
 
 	/*

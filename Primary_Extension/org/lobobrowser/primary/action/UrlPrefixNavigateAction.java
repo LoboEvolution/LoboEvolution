@@ -21,23 +21,23 @@
 package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+
+import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigatorWindow;
 import org.lobobrowser.ua.RequestType;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class UrlPrefixNavigateAction.
  */
-public class UrlPrefixNavigateAction extends EnableableAction {
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class UrlPrefixNavigateAction extends AbstractAction implements EnableableAction {
 
 	/** The url prefix. */
 	private String urlPrefix;
@@ -50,6 +50,8 @@ public class UrlPrefixNavigateAction extends EnableableAction {
 
 	/** The window. */
 	private NavigatorWindow window;
+	
+	private ActionPool action;
 
 	/**
 	 * Instantiates a new url prefix navigate action.
@@ -60,8 +62,8 @@ public class UrlPrefixNavigateAction extends EnableableAction {
 	 *            the window
 	 */
 	public UrlPrefixNavigateAction(ComponentSource componentSource,
-			NavigatorWindow window) {
-		super(componentSource, window);
+			NavigatorWindow window,ActionPool action) {
+		this.action = action;
 		this.window = window;
 		this.componentSource = componentSource;
 	}
@@ -74,7 +76,7 @@ public class UrlPrefixNavigateAction extends EnableableAction {
 	@Override
 	public void updateEnabling() {
 		NavigationEntry entry = window.getCurrentNavigationEntry();
-		this.setEnabled(entry != null
+		action.setEnabled(entry != null
 				&& !entry.getUrl().toExternalForm().startsWith(this.urlPrefix));
 	}
 

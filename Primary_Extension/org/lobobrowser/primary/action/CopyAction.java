@@ -22,18 +22,26 @@ package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
 
+import javax.swing.AbstractAction;
+
+import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigatorWindow;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class CopyAction.
  */
-public class CopyAction extends EnableableAction {
+public class CopyAction  extends AbstractAction implements EnableableAction {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/** The window. */
 	private NavigatorWindow window;
+	
+	private ActionPool action;
 
 	/**
 	 * Instantiates a new copy action.
@@ -43,14 +51,11 @@ public class CopyAction extends EnableableAction {
 	 * @param window
 	 *            the window
 	 */
-	public CopyAction(ComponentSource componentSource, NavigatorWindow window) {
-		super(componentSource, window);
+	public CopyAction(ComponentSource componentSource, NavigatorWindow window,ActionPool action) {
+		this.action = action;
 		this.window = window;
 	}
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -58,7 +63,7 @@ public class CopyAction extends EnableableAction {
 	 */
 	@Override
 	public void updateEnabling() {
-		this.setEnabled(window.canCopy());
+		action.setEnabled(window.canCopy());
 	}
 
 	/*

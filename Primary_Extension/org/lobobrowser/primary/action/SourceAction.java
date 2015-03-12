@@ -22,17 +22,20 @@ package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
 
+import javax.swing.AbstractAction;
+
+import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigatorWindow;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class SourceAction.
  */
-public class SourceAction extends EnableableAction {
+public class SourceAction extends AbstractAction implements EnableableAction {
 
-	/** The Constant serialVersionUID. */
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/** The window. */
@@ -40,6 +43,8 @@ public class SourceAction extends EnableableAction {
 
 	/** The component source. */
 	private ComponentSource componentSource;
+	
+	private ActionPool action;
 
 	/**
 	 * Instantiates a new source action.
@@ -49,8 +54,8 @@ public class SourceAction extends EnableableAction {
 	 * @param window
 	 *            the window
 	 */
-	public SourceAction(ComponentSource componentSource, NavigatorWindow window) {
-		super(componentSource, window);
+	public SourceAction(ComponentSource componentSource, NavigatorWindow window,ActionPool action) {
+		this.action = action;
 		this.window = window;
 		this.componentSource = componentSource;
 	}
@@ -61,7 +66,7 @@ public class SourceAction extends EnableableAction {
 	 */
 	@Override
 	public void updateEnabling() {
-		this.setEnabled(window.hasSource());
+		action.setEnabled(window.hasSource());
 	}
 
 	/*

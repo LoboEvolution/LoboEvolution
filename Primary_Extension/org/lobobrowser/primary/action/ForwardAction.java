@@ -22,18 +22,26 @@ package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
 
+import javax.swing.AbstractAction;
+
+import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigatorWindow;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class ForwardAction.
  */
-public class ForwardAction extends EnableableAction {
+public class ForwardAction extends AbstractAction implements EnableableAction {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/** The window. */
 	private NavigatorWindow window;
+	
+	private ActionPool action;
 
 	/**
 	 * Instantiates a new forward action.
@@ -43,13 +51,10 @@ public class ForwardAction extends EnableableAction {
 	 * @param window
 	 *            the window
 	 */
-	public ForwardAction(ComponentSource componentSource, NavigatorWindow window) {
-		super(componentSource, window);
+	public ForwardAction(ComponentSource componentSource, NavigatorWindow window, ActionPool action) {
 		this.window = window;
+		this.action = action;
 	}
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
 	/*
 	 * (non-Javadoc)
@@ -58,7 +63,7 @@ public class ForwardAction extends EnableableAction {
 	 */
 	@Override
 	public void updateEnabling() {
-		this.setEnabled(window.canForward());
+		action.setEnabled(window.canForward());
 	}
 
 	/*

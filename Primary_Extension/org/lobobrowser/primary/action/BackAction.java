@@ -22,18 +22,26 @@ package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
 
+import javax.swing.AbstractAction;
+
+import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigatorWindow;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class BackAction.
  */
-public class BackAction extends EnableableAction {
+public class BackAction extends AbstractAction implements EnableableAction{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/** The window. */
 	private NavigatorWindow window;
+	
+	private ActionPool action;
 
 	/**
 	 * Instantiates a new back action.
@@ -43,13 +51,10 @@ public class BackAction extends EnableableAction {
 	 * @param window
 	 *            the window
 	 */
-	public BackAction(ComponentSource componentSource, NavigatorWindow window) {
-		super(componentSource, window);
+	public BackAction(ComponentSource componentSource, NavigatorWindow window,ActionPool action) {
 		this.window = window;
+		this.action = action;
 	}
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
 	/*
 	 * (non-Javadoc)
@@ -58,7 +63,7 @@ public class BackAction extends EnableableAction {
 	 */
 	@Override
 	public void updateEnabling() {
-		this.setEnabled(window.canBack());
+		action.setEnabled(window.canBack());
 	}
 
 	/*
