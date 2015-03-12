@@ -22,7 +22,6 @@ import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigatorWindow;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class BackMoreAction.
  */
@@ -44,6 +43,8 @@ public class BackMoreAction extends AbstractAction implements EnableableAction {
 	 *            the component source
 	 * @param window
 	 *            the window
+	 * @param action
+	 *            the action
 	 */
 	public BackMoreAction(ComponentSource componentSource,
 			NavigatorWindow window, ActionPool action) {

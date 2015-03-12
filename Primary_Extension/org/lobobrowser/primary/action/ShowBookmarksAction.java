@@ -10,8 +10,6 @@ import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigatorWindow;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class ShowBookmarksAction.
  */
@@ -19,7 +17,7 @@ public class ShowBookmarksAction extends ActionPool {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The window. */
 	private NavigatorWindow window;
 

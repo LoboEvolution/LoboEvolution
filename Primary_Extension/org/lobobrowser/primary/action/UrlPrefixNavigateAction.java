@@ -1,22 +1,16 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 2 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
-
-    You should have received a copy of the GNU General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either verion 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.primary.action;
 
@@ -31,11 +25,11 @@ import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigatorWindow;
 import org.lobobrowser.ua.RequestType;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UrlPrefixNavigateAction.
  */
-public class UrlPrefixNavigateAction extends AbstractAction implements EnableableAction {
+public class UrlPrefixNavigateAction extends AbstractAction implements
+		EnableableAction {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -51,7 +45,7 @@ public class UrlPrefixNavigateAction extends AbstractAction implements Enableabl
 
 	/** The window. */
 	private NavigatorWindow window;
-	
+
 	/** The action. */
 	private ActionPool action;
 
@@ -62,9 +56,11 @@ public class UrlPrefixNavigateAction extends AbstractAction implements Enableabl
 	 *            the component source
 	 * @param window
 	 *            the window
+	 * @param action
+	 *            the action
 	 */
 	public UrlPrefixNavigateAction(ComponentSource componentSource,
-			NavigatorWindow window,ActionPool action) {
+			NavigatorWindow window, ActionPool action) {
 		this.action = action;
 		this.window = window;
 		this.componentSource = componentSource;
@@ -115,7 +111,8 @@ public class UrlPrefixNavigateAction extends AbstractAction implements Enableabl
 	/**
 	 * Sets the url prefix.
 	 *
-	 * @param urlPrefix the new url prefix
+	 * @param urlPrefix
+	 *            the new url prefix
 	 */
 	public void setUrlPrefix(String urlPrefix) {
 		this.urlPrefix = urlPrefix;
@@ -133,7 +130,8 @@ public class UrlPrefixNavigateAction extends AbstractAction implements Enableabl
 	/**
 	 * Sets the url encode.
 	 *
-	 * @param urlEncode the new url encode
+	 * @param urlEncode
+	 *            the new url encode
 	 */
 	public void setUrlEncode(boolean urlEncode) {
 		this.urlEncode = urlEncode;
