@@ -91,6 +91,11 @@ import org.lobobrowser.util.gui.WrapperLayout;
  */
 public class FramePanel extends JPanel implements NavigatorFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(FramePanel.class
 			.getName());

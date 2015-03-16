@@ -32,6 +32,11 @@ import javax.swing.JPanel;
 public class SharedToolBarPanel extends JPanel {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Instantiates a new shared tool bar panel.
 	 */
 	public SharedToolBarPanel() {

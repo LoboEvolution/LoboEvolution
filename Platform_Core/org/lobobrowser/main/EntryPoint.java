@@ -37,6 +37,11 @@ import javax.swing.JOptionPane;
 public class EntryPoint extends Canvas {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Launches a browser window. If a browser instance is found to already
 	 * exist, the new browser window is opened in the running application.
 	 * <p>

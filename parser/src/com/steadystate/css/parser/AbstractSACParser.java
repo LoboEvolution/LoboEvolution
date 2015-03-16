@@ -210,7 +210,7 @@ abstract class AbstractSACParser implements Parser {
                     getLocale());
             }
             catch (final MissingResourceException e) {
-                e.printStackTrace();
+                System.out.print("Missing Resource");
             }
         }
         return sacParserMessages_;

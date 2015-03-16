@@ -44,10 +44,10 @@ public final class ParsedContentType implements Serializable
                         encoding = param.substring(8).trim();
                         int l = encoding.length();
                         if(l > 0) {
-                            if(encoding.charAt(0) == '"') {
+                            if(encoding != null && encoding.charAt(0) == '"') {
                                 encoding = encoding.substring(1);
                             }
-                            if(encoding.charAt(l - 1) == '"') {
+                            if(encoding != null && encoding.charAt(l - 1) == '"') {
                                 encoding = encoding.substring(0, l - 1);
                             }
                         }

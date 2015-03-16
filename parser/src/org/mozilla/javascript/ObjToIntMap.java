@@ -161,7 +161,10 @@ public static class Iterator {
         int i;
         for (i = 2; (1 << i) < minimalCapacity; ++i) { }
         power = i;
-        if (check && power < 2) Kit.codeBug();
+        if (check) {
+			if (power < 2)
+				Kit.codeBug();
+		}
     }
 
     /**
@@ -406,8 +409,13 @@ public static class Iterator {
  * @return the int
  */
 private int insertNewKey(Object key, int hash) {
-        if (check && occupiedCount != keyCount) Kit.codeBug();
-        if (check && keyCount == 1 << power) Kit.codeBug();
+        if (check) {
+			if (occupiedCount != keyCount)
+				Kit.codeBug();
+			
+			if (keyCount == 1 << power)
+				Kit.codeBug();
+		}
         int fraction = hash * A;
         int index = fraction >>> (32 - power);
         int N = 1 << power;
@@ -416,9 +424,15 @@ private int insertNewKey(Object key, int hash) {
             int step = tableLookupStep(fraction, mask, power);
             int firstIndex = index;
             do {
-                if (check && keys[index] == DELETED) Kit.codeBug();
+                if (check) {
+					if (keys[index] == DELETED)
+						Kit.codeBug();
+				}
                 index = (index + step) & mask;
-                if (check && firstIndex == index) Kit.codeBug();
+                if (check) {					
+					if (firstIndex == index)
+						Kit.codeBug();
+				}
             } while (keys[index] != null);
         }
         keys[index] = key;
@@ -434,8 +448,13 @@ private int insertNewKey(Object key, int hash) {
      */
     private void rehashTable() {
         if (keys == null) {
-            if (check && keyCount != 0) Kit.codeBug();
-            if (check && occupiedCount != 0) Kit.codeBug();
+            if (check) {
+				if (keyCount != 0)
+					Kit.codeBug();
+				
+				if (occupiedCount != 0)
+					Kit.codeBug();
+			}
             int N = 1 << power;
             keys = new Object[N];
             values = new int[2 * N];
@@ -519,8 +538,10 @@ private int ensureIndex(Object key) {
             }
         }
         // Inserting of new key
-        if (check && keys != null && keys[index] != null)
-            Kit.codeBug();
+        if (check) {
+			if (keys != null && keys[index] != null)
+				Kit.codeBug();
+		}
         if (firstDeleted >= 0) {
             index = firstDeleted;
         }

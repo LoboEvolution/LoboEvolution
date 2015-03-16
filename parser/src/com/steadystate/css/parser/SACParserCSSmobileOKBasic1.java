@@ -19,6 +19,7 @@ import org.w3c.css.sac.SimpleSelector;
  * @author rbri
  * @version $Id: SACParserCSSmobileOKBasic1.jj,v 1.5 2010-05-19 13:26:51 waldbaer Exp $
  */
+@SuppressWarnings("unused")
 public class SACParserCSSmobileOKBasic1 extends AbstractSACParser implements Parser, SACParserCSSmobileOKBasic1Constants {
 
     /**
@@ -1973,7 +1974,8 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
   /**
    * The Class LookaheadSuccess.
    */
-  static private final class LookaheadSuccess extends java.lang.Error { }
+  static private final class LookaheadSuccess extends java.lang.Error {
+	private static final long serialVersionUID = 1L; }
   
   /** The jj_ls. */
   final private LookaheadSuccess jj_ls = new LookaheadSuccess();

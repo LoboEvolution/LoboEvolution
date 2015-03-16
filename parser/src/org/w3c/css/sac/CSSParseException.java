@@ -34,6 +34,11 @@ package org.w3c.css.sac;
  */
 public class CSSParseException extends CSSException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The uri. */
 	private String uri;
 	

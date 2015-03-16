@@ -28,6 +28,11 @@ package org.lobobrowser.ua;
  */
 public class NavigatorEvent extends java.util.EventObject {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The clientlet frame. */
 	private final NavigatorFrame clientletFrame;
 	

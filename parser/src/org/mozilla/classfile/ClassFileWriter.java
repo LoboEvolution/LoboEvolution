@@ -447,7 +447,6 @@ public class ClassFileWriter {
         if (stackMapTableLength > 0) {
             int stackMapTableAttrIndex =
                     itsConstantPool.addUtf8("StackMapTable");
-            int start = index;
             index = putInt16(stackMapTableAttrIndex, codeAttribute, index);
             index = stackMap.write(codeAttribute, index);
         }
@@ -1642,7 +1641,7 @@ public class ClassFileWriter {
                 }
             }
 
-            superBlockDeps = getSuperBlockDependencies();
+            getSuperBlockDependencies();
 
             verify();
 
@@ -2880,7 +2879,6 @@ public class ClassFileWriter {
          * @return the int
          */
         private int writeTypes(int[] types, int start) {
-            int startOffset = rawStackMapTop;
             for (int i = start; i < types.length; i++) {
                 rawStackMapTop = writeType(types[i]);
             }
@@ -2929,9 +2927,6 @@ public class ClassFileWriter {
         /** The super blocks. */
         private SuperBlock[] superBlocks;
         
-        /** The super block deps. */
-        private SuperBlock[] superBlockDeps;
-
         /** The raw stack map. */
         private byte[] rawStackMap;
         
@@ -4295,7 +4290,8 @@ public class ClassFileWriter {
          * @param code the code
          * @return the string
          */
-        private static String bytecodeStr(int code)
+        @SuppressWarnings("unused")
+		private static String bytecodeStr(int code)
     {
         if (DEBUGSTACK || DEBUGCODE) {
             switch (code) {

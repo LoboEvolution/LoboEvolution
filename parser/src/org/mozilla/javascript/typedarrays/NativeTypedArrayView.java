@@ -17,7 +17,12 @@ public abstract class NativeTypedArrayView
     extends NativeArrayBufferView
 {
     
-    /**  The length, in elements, of the array. */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**  The length, in elements, of the array. */
     protected final int length;
 
     /**

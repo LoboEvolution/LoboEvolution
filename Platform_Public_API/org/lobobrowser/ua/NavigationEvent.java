@@ -31,6 +31,11 @@ import java.net.URL;
  */
 public class NavigationEvent extends java.util.EventObject {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The u rl. */
 	private final URL uRL;
 	

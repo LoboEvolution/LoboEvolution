@@ -30,6 +30,11 @@ public abstract class AbstractBrowserWindow extends JFrame implements
 		BrowserWindow {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Gets the root {@link FramePanel} of the window.
 	 *
 	 * @return the top frame panel

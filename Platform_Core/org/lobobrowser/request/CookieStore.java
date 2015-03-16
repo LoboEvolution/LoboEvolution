@@ -1,22 +1,16 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 2 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
-
-    You should have received a copy of the GNU General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either verion 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Jun 1, 2005
@@ -46,29 +40,28 @@ import org.lobobrowser.store.StorageManager;
 import org.lobobrowser.util.Domains;
 import org.lobobrowser.util.Strings;
 
-
 /**
  * The Class CookieStore.
  *
  * @author J. H. S.
  */
 public class CookieStore {
-	
+
 	/** The Constant COOKIE_PATH_PREFIX. */
 	private static final String COOKIE_PATH_PREFIX = ".W$Cookies/";
-	
+
 	/** The Constant COOKIE_PATH_PATTERN. */
 	private static final String COOKIE_PATH_PATTERN = "\\.W\\$Cookies/.*";
-	
+
 	/** The Constant EXPIRES_FORMAT. */
 	private static final DateFormat EXPIRES_FORMAT;
-	
+
 	/** The Constant EXPIRES_FORMAT_BAK1. */
 	private static final DateFormat EXPIRES_FORMAT_BAK1;
-	
+
 	/** The Constant EXPIRES_FORMAT_BAK2. */
 	private static final DateFormat EXPIRES_FORMAT_BAK2;
-	
+
 	/** The Constant instance. */
 	private static final CookieStore instance = new CookieStore();
 
@@ -116,8 +109,10 @@ public class CookieStore {
 	/**
 	 * Save cookie.
 	 *
-	 * @param url the url
-	 * @param cookieSpec the cookie spec
+	 * @param url
+	 *            the url
+	 * @param cookieSpec
+	 *            the cookie spec
 	 */
 	public void saveCookie(URL url, String cookieSpec) {
 		this.saveCookie(url.getHost(), cookieSpec);
@@ -126,8 +121,10 @@ public class CookieStore {
 	/**
 	 * Save cookie.
 	 *
-	 * @param urlHostName the url host name
-	 * @param cookieSpec the cookie spec
+	 * @param urlHostName
+	 *            the url host name
+	 * @param cookieSpec
+	 *            the cookie spec
 	 */
 	public void saveCookie(String urlHostName, String cookieSpec) {
 		// TODO: SECURITY
@@ -147,8 +144,10 @@ public class CookieStore {
 		while (tok.hasMoreTokens()) {
 			String token = tok.nextToken();
 			int idx = token.indexOf('=');
-			String name = idx == -1 ? token.trim() : token.substring(0, idx).trim();
-			String value = idx == -1 ? "" : Strings.unquote(token.substring(idx + 1).trim());
+			String name = idx == -1 ? token.trim() : token.substring(0, idx)
+					.trim();
+			String value = idx == -1 ? "" : Strings.unquote(token.substring(
+					idx + 1).trim());
 			if (!hasCookieName) {
 				cookieName = name;
 				cookieValue = value;
@@ -177,7 +176,8 @@ public class CookieStore {
 			path = "/";
 		}
 		if (domain != null) {
-			if (expires == null && maxAge == null && logger.isLoggable(Level.INFO)) {
+			if (expires == null && maxAge == null
+					&& logger.isLoggable(Level.INFO)) {
 				logger.log(Level.INFO,
 						"saveCookie(): Not rejecting transient cookie that specifies domain '"
 								+ domain + "'.");
@@ -236,23 +236,31 @@ public class CookieStore {
 	/**
 	 * Save cookie.
 	 *
-	 * @param domain the domain
-	 * @param path the path
-	 * @param name the name
-	 * @param expires the expires
-	 * @param value the value
+	 * @param domain
+	 *            the domain
+	 * @param path
+	 *            the path
+	 * @param name
+	 *            the name
+	 * @param expires
+	 *            the expires
+	 * @param value
+	 *            the value
 	 */
-	public void saveCookie(String domain, String path, String name, Date expires, String value) {
+	public void saveCookie(String domain, String path, String name,
+			Date expires, String value) {
 		// TODO: SECURITY
 		if (logger.isLoggable(Level.INFO)) {
 			logger.info("saveCookie(): domain=" + domain + ",name=" + name
 					+ ",expires=" + expires + ",value=[" + value + "].");
 		}
 		Long expiresLong = expires == null ? null : expires.getTime();
-		CookieValue cookieValue = new CookieValue(value, path, domain,expiresLong);
+		CookieValue cookieValue = new CookieValue(value, path, domain,
+				expiresLong);
 		synchronized (this) {
 			// Always save a transient cookie. It acts as a cache.
-			Map<String, CookieValue> hostMap = this.transientMapByHost.get(domain);
+			Map<String, CookieValue> hostMap = this.transientMapByHost
+					.get(domain);
 			if (hostMap == null) {
 				hostMap = new HashMap<String, CookieValue>(2);
 				this.transientMapByHost.put(domain, hostMap);
@@ -275,7 +283,8 @@ public class CookieStore {
 	/**
 	 * Gets the path from cookie name.
 	 *
-	 * @param cookieName the cookie name
+	 * @param cookieName
+	 *            the cookie name
 	 * @return the path from cookie name
 	 */
 	private String getPathFromCookieName(String cookieName) {
@@ -285,7 +294,8 @@ public class CookieStore {
 	/**
 	 * Gets the cookie name from path.
 	 *
-	 * @param path the path
+	 * @param path
+	 *            the path
 	 * @return the cookie name from path
 	 */
 	private String getCookieNameFromPath(String path) {
@@ -299,16 +309,20 @@ public class CookieStore {
 	 * Gets cookies belonging exactly to the host name given, not to a broader
 	 * domain.
 	 *
-	 * @param hostName the host name
-	 * @param path the path
+	 * @param hostName
+	 *            the host name
+	 * @param path
+	 *            the path
 	 * @return the cookies strict
 	 */
 	private Collection<Cookie> getCookiesStrict(String hostName, String path) {
+
 		if (path == null || path.length() == 0) {
 			path = "/";
 		}
 		boolean liflag = logger.isLoggable(Level.INFO);
 		Collection<Cookie> cookies = new LinkedList<Cookie>();
+		Cookie cookie = new Cookie();
 		Set<String> transientCookieNames = new HashSet<String>();
 		synchronized (this) {
 			Map<String, CookieValue> hostMap = this.transientMapByHost
@@ -329,7 +343,11 @@ public class CookieStore {
 						if (path.startsWith(cookieValue.getPath())) {
 							String cookieName = entry.getKey();
 							transientCookieNames.add(cookieName);
-							cookies.add(new Cookie(cookieName, cookieValue.getValue(),cookieValue.getPath(),cookieValue.getDomain(),cookieValue.getExpires()));
+							cookie.setName(cookieName);
+							cookie.setValue(cookieValue.getValue());
+							cookie.setPath(cookieValue.getPath());
+							cookie.setDomain(cookieValue.getDomain());
+							cookies.add(cookie);
 						} else {
 							if (liflag) {
 								logger.info("getCookiesStrict(): Skipping cookie "
@@ -379,7 +397,11 @@ public class CookieStore {
 										hostMap.put(cookieName, cookieValue);
 									}
 									// Now add cookie to the collection.
-									cookies.add(new Cookie(cookieName, cookieValue.getValue(),cookieValue.getPath(),cookieValue.getDomain(),cookieValue.getExpires()));
+									cookie.setName(cookieName);
+									cookie.setValue(cookieValue.getValue());
+									cookie.setPath(cookieValue.getPath());
+									cookie.setDomain(cookieValue.getDomain());
+									cookies.add(cookie);
 								} else {
 									if (logger.isLoggable(Level.INFO)) {
 										logger.info("getCookiesStrict(): Skipping cookie "
@@ -409,8 +431,10 @@ public class CookieStore {
 	/**
 	 * Gets the cookies.
 	 *
-	 * @param hostName the host name
-	 * @param path the path
+	 * @param hostName
+	 *            the host name
+	 * @param path
+	 *            the path
 	 * @return the cookies
 	 */
 	public Collection<Cookie> getCookies(String hostName, String path) {

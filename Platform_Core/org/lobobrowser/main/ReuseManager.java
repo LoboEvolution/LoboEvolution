@@ -104,10 +104,11 @@ public class ReuseManager {
 				int port = -1;
 				try {
 					InputStream in = new FileInputStream(portFile);
+					DataInputStream din = new DataInputStream(in);
 					try {
-						DataInputStream din = new DataInputStream(in);
 						port = din.readInt();
 					} finally {
+						din.close();
 						in.close();
 					}
 				} catch (EOFException eofe) {
@@ -117,8 +118,8 @@ public class ReuseManager {
 					// Likely not running
 				}
 				if (port != -1) {
+					Socket s = new Socket(bindHost, port);
 					try {
-						Socket s = new Socket(bindHost, port);
 						s.setTcpNoDelay(true);
 						OutputStream out = s.getOutputStream();
 						try {
@@ -155,6 +156,8 @@ public class ReuseManager {
 										"Another instance of the application must have been running but was not shut down properly.",
 										ioe);
 						portFile.delete();
+					}finally{
+						s.close();
 					}
 				}
 				if (launched) {
@@ -168,11 +171,12 @@ public class ReuseManager {
 					continue OUTER;
 				}
 				OutputStream out = new FileOutputStream(portFile);
+				DataOutputStream dout = new DataOutputStream(out);
 				try {
-					DataOutputStream dout = new DataOutputStream(out);
 					dout.writeInt(port);
 					dout.flush();
 				} finally {
+					dout.close();
 					out.close();
 				}
 				break OUTER;

@@ -30,6 +30,10 @@ import org.lobobrowser.clientlet.ClientletResponse;
  */
 public class NavigatorWindowEvent extends NavigatorResponseEvent {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** The message. */
 	private final String message;
 

@@ -49,6 +49,11 @@ import org.lobobrowser.ua.NavigatorProgressEvent;
  */
 public class ProgressWindow extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The status progress bar. */
 	private final OpenProgressBar statusProgressBar;
 	

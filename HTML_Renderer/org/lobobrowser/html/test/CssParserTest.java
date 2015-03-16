@@ -44,6 +44,11 @@ import com.steadystate.css.parser.CSSOMParser;
  */
 public class CssParserTest extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CssParserTest.class
 			.getName());

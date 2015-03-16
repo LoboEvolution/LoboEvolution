@@ -33,6 +33,11 @@ import java.io.IOException;
 public class QuotaExceededException extends IOException {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Instantiates a new quota exceeded exception.
 	 */
 	public QuotaExceededException() {

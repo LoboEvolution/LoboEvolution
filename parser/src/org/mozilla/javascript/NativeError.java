@@ -354,20 +354,6 @@ final class NativeError extends IdScriptableObject
         return Undefined.instance;
     }
 
-    /**
-     * Gets the string.
-     *
-     * @param obj the obj
-     * @param id the id
-     * @return the string
-     */
-    private static String getString(Scriptable obj, String id)
-    {
-        Object value = ScriptableObject.getProperty(obj, id);
-        if (value == NOT_FOUND) return "";
-        return ScriptRuntime.toString(value);
-    }
-
     /* (non-Javadoc)
      * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
      */

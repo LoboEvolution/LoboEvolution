@@ -94,40 +94,6 @@ public final class NativeGenerator extends IdScriptableObject {
         return "Generator";
     }
 
-    /**
-     * The Class CloseGeneratorAction.
-     */
-    private static class CloseGeneratorAction implements ContextAction {
-        
-        /** The generator. */
-        private NativeGenerator generator;
-
-        /**
-         * Instantiates a new close generator action.
-         *
-         * @param generator the generator
-         */
-        CloseGeneratorAction(NativeGenerator generator) {
-            this.generator = generator;
-        }
-
-        /* (non-Javadoc)
-         * @see org.mozilla.javascript.ContextAction#run(org.mozilla.javascript.Context)
-         */
-        public Object run(Context cx) {
-            Scriptable scope = ScriptableObject.getTopLevelScope(generator);
-            Callable closeGenerator = new Callable() {
-                public Object call(Context cx, Scriptable scope,
-                                   Scriptable thisObj, Object[] args) {
-                     return ((NativeGenerator)thisObj).resume(cx, scope,
-                             GENERATOR_CLOSE, new GeneratorClosedException());
-                }
-            };
-            return ScriptRuntime.doTopCall(closeGenerator, cx, scope,
-                                           generator, null);
-        }
-    }
-
     /* (non-Javadoc)
      * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
      */

@@ -26,9 +26,6 @@ import java.io.InputStream;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.xml.ws.Response;
-
 import org.lobobrowser.http.Header.Element;
 import org.lobobrowser.util.AbstractBean;
 import org.w3c.dom.Document;

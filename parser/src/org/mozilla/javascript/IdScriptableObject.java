@@ -36,7 +36,11 @@ public abstract class IdScriptableObject extends ScriptableObject
     implements IdFunctionCall
 {
     
-    /** The prototype values. */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/** The prototype values. */
     private transient PrototypeValues prototypeValues;
 
     /**

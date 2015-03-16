@@ -374,6 +374,7 @@ public class DefaultWindowFactory implements WindowFactory {
 			}
 		}
 		window.setResizable(isResizable);
+		window.setTitle(title);
 		window.setSize(width == -1 ? window.getWidth() : width,
 				height == -1 ? window.getHeight() : height);
 	}

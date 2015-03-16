@@ -58,20 +58,16 @@ import org.lobobrowser.html.gui.SelectionChangeListener;
  */
 public class TestFrame extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(TestFrame.class.getName());
 	
 	/** The rcontext. */
 	private final SimpleHtmlRendererContext rcontext;
-	
-	/** The tree. */
-	private final JTree tree;
-	
-	/** The html panel. */
-	private final HtmlPanel htmlPanel;
-	
-	/** The text area. */
-	private final JTextArea textArea;
 	
 	/** The address field. */
 	private final JTextField addressField;
@@ -107,8 +103,6 @@ public class TestFrame extends JFrame {
 		final JTree tree = new JTree();
 		final JScrollPane scrollPane = new JScrollPane(tree);
 
-		this.tree = tree;
-
 		contentPane.add(topPanel, BorderLayout.NORTH);
 		contentPane.add(bottomPanel, BorderLayout.CENTER);
 
@@ -127,12 +121,10 @@ public class TestFrame extends JFrame {
 				}
 			}
 		});
-		this.htmlPanel = panel;
 		UserAgentContext ucontext = new SimpleUserAgentContext();
 		this.rcontext = new LocalHtmlRendererContext(panel, ucontext);
 
 		final JTextArea textArea = new JTextArea();
-		this.textArea = textArea;
 		textArea.setEditable(false);
 		final JScrollPane textAreaSp = new JScrollPane(textArea);
 

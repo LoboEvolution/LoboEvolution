@@ -32,6 +32,11 @@ import java.net.URL;
  */
 public class NavigatorProgressEvent extends NavigatorEvent {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The progress type. */
 	private final ProgressType progressType;
 	

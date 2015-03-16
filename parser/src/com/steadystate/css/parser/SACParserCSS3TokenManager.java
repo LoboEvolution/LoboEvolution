@@ -7060,9 +7060,6 @@ private StringBuilder image = jjimage;
 /** The jjimage len. */
 private int jjimageLen;
 
-/** The length of match. */
-private int lengthOfMatch;
-
 /** The cur char. */
 protected char curChar;
 
@@ -7309,75 +7306,75 @@ void TokenLexicalActions(Token matchedToken)
    switch(jjmatchedKind)
    {
       case 22 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                                                   matchedToken.image = trimBy(image, 1, 1);
          break;
       case 76 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                          matchedToken.image = trimBy(image, 0, 2);
          break;
       case 77 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                          matchedToken.image = trimBy(image, 0, 2);
          break;
       case 78 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                                matchedToken.image = trimBy(image, 0, 2);
          break;
       case 79 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                                matchedToken.image = trimBy(image, 0, 2);
          break;
       case 80 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                                matchedToken.image = trimBy(image, 0, 2);
          break;
       case 81 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                                matchedToken.image = trimBy(image, 0, 2);
          break;
       case 82 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                                matchedToken.image = trimBy(image, 0, 2);
          break;
       case 83 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                                matchedToken.image = trimBy(image, 0, 2);
          break;
       case 84 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                                           matchedToken.image = trimBy(image, 0, 3);
          break;
       case 85 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                                           matchedToken.image = trimBy(image, 0, 3);
          break;
       case 86 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                                                       matchedToken.image = trimBy(image, 0, 4);
          break;
       case 87 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                              matchedToken.image = trimBy(image, 0, 2);
          break;
       case 88 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                  matchedToken.image = trimBy(image, 0, 1);
          break;
       case 89 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                              matchedToken.image = trimBy(image, 0, 2);
          break;
       case 90 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                                          matchedToken.image = trimBy(image, 0, 3);
          break;
       case 91 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                               matchedToken.image = trimBy(image, 0, 1);
          break;
       case 93 :
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+        image.append(input_stream.GetSuffix(jjimageLen + (jjmatchedPos + 1)));
                                                                             matchedToken.image = trimUrl(image);
          break;
       default :

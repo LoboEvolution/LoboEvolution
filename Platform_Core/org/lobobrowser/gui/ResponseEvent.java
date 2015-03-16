@@ -30,6 +30,10 @@ import org.lobobrowser.clientlet.ClientletResponse;
  */
 public class ResponseEvent extends EventObject {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** The response. */
 	private final ClientletResponse response;
 

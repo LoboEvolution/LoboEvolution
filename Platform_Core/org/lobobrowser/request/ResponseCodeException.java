@@ -34,6 +34,11 @@ import java.io.IOException;
 public class ResponseCodeException extends IOException {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Instantiates a new response code exception.
 	 *
 	 * @param responseCode the response code

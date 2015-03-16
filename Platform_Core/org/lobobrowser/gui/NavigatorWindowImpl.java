@@ -843,6 +843,8 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 			case DEFAULT_STATUS_UPDATED:
 				nwl.defaultStatusUpdated((NavigatorWindowEvent) ne);
 				break;
+			default:
+				break;
 			}
 		}
 	}

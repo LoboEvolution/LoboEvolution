@@ -15,6 +15,11 @@ public abstract class ExternalArray
 {
     
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Return the length of the array.
      *
      * @return the length

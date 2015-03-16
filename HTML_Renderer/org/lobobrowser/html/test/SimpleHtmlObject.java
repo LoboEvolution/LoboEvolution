@@ -15,6 +15,10 @@ import org.lobobrowser.html.w3c.HTMLElement;
  */
 public class SimpleHtmlObject extends JComponent implements HtmlObject {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** The element. */
 	protected final HTMLElement element;
 

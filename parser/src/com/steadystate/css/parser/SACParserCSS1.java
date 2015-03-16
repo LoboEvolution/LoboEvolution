@@ -19,6 +19,7 @@ import org.w3c.css.sac.SimpleSelector;
  * @author rbri
  * @version $Id: SACParserCSS1.jj,v 1.6 2010-05-19 13:26:51 waldbaer Exp $
  */
+@SuppressWarnings("unused")
 public class SACParserCSS1 extends AbstractSACParser implements Parser, SACParserCSS1Constants {
 
     /**
@@ -344,6 +345,7 @@ final public void importRule(final boolean nonImportRuleFoundBefore) throws Pars
  * @return the string
  * @throws ParseException the parse exception
  */
+
 final public String medium() throws ParseException {
   Token t;
     t = jj_consume_token(IDENT);
@@ -1720,7 +1722,8 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
   /**
    * The Class LookaheadSuccess.
    */
-  static private final class LookaheadSuccess extends java.lang.Error { }
+  static private final class LookaheadSuccess extends java.lang.Error {
+	private static final long serialVersionUID = 1L; }
   
   /** The jj_ls. */
   final private LookaheadSuccess jj_ls = new LookaheadSuccess();

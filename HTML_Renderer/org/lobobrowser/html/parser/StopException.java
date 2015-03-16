@@ -31,6 +31,10 @@ import org.w3c.dom.Element;
  */
 class StopException extends Exception {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** The element. */
 	private final Element element;
 

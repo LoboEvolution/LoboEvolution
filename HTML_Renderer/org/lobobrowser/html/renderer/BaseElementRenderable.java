@@ -389,12 +389,10 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		// Ensures that parent has all the components
 		// below this renderer node. (Parent expected to have removed them).
 		Collection<Component> gc = this.guiComponents;
-		int count = 0;
 		if (gc != null) {
 			RenderableContainer rc = this.container;
 			Iterator<Component> i = gc.iterator();
 			while (i.hasNext()) {
-				count++;
 				rc.addComponent((Component) i.next());
 			}
 		}
@@ -626,9 +624,6 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 								.getAWTInsets(dmtop, dmleft, dmbottom, dmright,
 										availWidth, availHeight, autoMarginX,
 										autoMarginY));
-				if (paddingInsets == null) {
-					paddingInsets = RBlockViewport.ZERO_INSETS;
-				}
 				if (regularMarginInsets == null) {
 					regularMarginInsets = RBlockViewport.ZERO_INSETS;
 				}
@@ -683,7 +678,6 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 	 * @param imageURL the image url
 	 */
 	protected void loadBackgroundImage(final URL imageURL) {
-		ModelNode rc = this.modelNode;
 		UserAgentContext ctx = this.userAgentContext;
 		if (ctx != null) {
 			final HttpRequest request = ctx.createHttpRequest();
@@ -1058,7 +1052,6 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 	 * @return the insets
 	 */
 	public Insets getInsets(boolean hscroll, boolean vscroll) {
-		RenderState rs = this.modelNode.getRenderState();
 		Insets mi = this.marginInsets;
 		Insets bi = this.borderInsets;
 		int top = 0;

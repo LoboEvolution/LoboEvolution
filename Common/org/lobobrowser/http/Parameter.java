@@ -32,6 +32,7 @@ import org.lobobrowser.util.NameValuePair;
 public class Parameter extends NameValuePair {
    
 	/** The Constant serialVersionUID. */
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	/** 

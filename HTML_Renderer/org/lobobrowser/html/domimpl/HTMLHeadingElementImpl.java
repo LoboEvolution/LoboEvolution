@@ -123,7 +123,6 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements
 	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
 	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		float fontSize = this.getHeadingFontSize();
 		return new HeadingRenderState(prevRenderState, this);
 	}
 

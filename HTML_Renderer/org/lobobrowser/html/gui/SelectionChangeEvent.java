@@ -29,6 +29,10 @@ import java.util.EventObject;
  */
 public class SelectionChangeEvent extends EventObject {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** The has selection. */
 	private final boolean hasSelection;
 

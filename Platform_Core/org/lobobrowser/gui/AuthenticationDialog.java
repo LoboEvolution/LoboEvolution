@@ -45,6 +45,11 @@ import javax.swing.border.EmptyBorder;
  */
 public class AuthenticationDialog extends JDialog {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The user name field. */
 	private final JTextField userNameField = new JTextField();
 	
@@ -152,6 +157,11 @@ public class AuthenticationDialog extends JDialog {
 	 */
 	private class OkAction extends AbstractAction {
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		/* (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
@@ -167,6 +177,11 @@ public class AuthenticationDialog extends JDialog {
 	 */
 	private class CancelAction extends AbstractAction {
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		/* (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */

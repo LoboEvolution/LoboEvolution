@@ -241,11 +241,11 @@ public class CacheInfo {
 				return null;
 			}
 			InputStream in = new ByteArrayInputStream(content);
+			ObjectInputStream oin = new ClassLoaderObjectInputStream(in, classLoader);
 			try {
-				ObjectInputStream oin = new ClassLoaderObjectInputStream(in,
-						classLoader);
 				return oin.readObject();
 			} finally {
+				oin.close();
 				in.close();
 			}
 		} catch (IOException ioe) {

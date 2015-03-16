@@ -32,6 +32,10 @@ import org.lobobrowser.clientlet.ClientletResponse;
  */
 public class NavigatorExceptionEvent extends NavigatorResponseEvent {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** The exception. */
 	private final Throwable exception;
 

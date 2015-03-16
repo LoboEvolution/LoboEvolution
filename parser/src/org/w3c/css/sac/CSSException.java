@@ -20,6 +20,11 @@ package org.w3c.css.sac;
  */
 public class CSSException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The s. */
 	protected String s;
 

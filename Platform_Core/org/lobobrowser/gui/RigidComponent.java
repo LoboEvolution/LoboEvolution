@@ -32,6 +32,11 @@ import javax.swing.Box.Filler;
 public class RigidComponent extends Filler {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Instantiates a new rigid component.
 	 *
 	 * @param wrappedComponent the wrapped component

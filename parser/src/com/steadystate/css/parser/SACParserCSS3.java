@@ -21,6 +21,7 @@ import org.w3c.css.sac.SimpleSelector;
  * @author rbri
  * @version $Id: SACParserCSS21.jj,v 1.9 2010-05-19 13:26:51 waldbaer Exp $
  */
+@SuppressWarnings("unused")
 public class SACParserCSS3 extends AbstractSACParser implements Parser, SACParserCSS3Constants {
 
     /**
@@ -3165,7 +3166,8 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
   /**
    * The Class LookaheadSuccess.
    */
-  static private final class LookaheadSuccess extends java.lang.Error { }
+  static private final class LookaheadSuccess extends java.lang.Error {
+	  private static final long serialVersionUID = 1L; }
   
   /** The jj_ls. */
   final private LookaheadSuccess jj_ls = new LookaheadSuccess();

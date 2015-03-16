@@ -32,6 +32,11 @@ import javax.swing.JPanel;
 public class AddressBarPanel extends JPanel {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Instantiates a new address bar panel.
 	 */
 	public AddressBarPanel() {

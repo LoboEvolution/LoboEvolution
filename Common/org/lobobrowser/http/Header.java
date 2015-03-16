@@ -38,12 +38,6 @@ import org.lobobrowser.util.NameValuePair;
  */
 public class Header extends NameValuePair {
     
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The pcs. */
-	private transient PropertyChangeSupport pcs;
-	
 	/** The elements. */
 	private List<Element> elements = new ArrayList<Element>();
     

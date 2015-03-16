@@ -41,6 +41,11 @@ import org.w3c.dom.Document;
  * @see HtmlRendererContext#createBrowserFrame()
  */
 public class SimpleBrowserFrame extends HtmlPanel implements BrowserFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The {@link HtmlRendererContext} associated with the browser frame. */
 	private final HtmlRendererContext rcontext;
 	

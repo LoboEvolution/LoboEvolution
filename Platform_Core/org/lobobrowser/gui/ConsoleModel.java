@@ -41,6 +41,11 @@ import javax.swing.text.Position;
  */
 public class ConsoleModel extends PlainDocument {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The Constant MAX_LENGTH. */
 	private static final int MAX_LENGTH = 20000;
 	

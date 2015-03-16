@@ -30,6 +30,10 @@ import java.util.EventObject;
  */
 public class NetworkRequestEvent extends EventObject {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** The new state. */
 	private final int newState;
 

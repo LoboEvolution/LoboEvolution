@@ -32,6 +32,10 @@ import javax.swing.JProgressBar;
  */
 public class OpenProgressBar extends JProgressBar {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(OpenProgressBar.class
 			.getName());

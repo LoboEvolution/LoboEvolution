@@ -13,7 +13,12 @@ package org.mozilla.javascript;
 public class NativeCallSite extends IdScriptableObject
 {
     
-    /** The Constant CALLSITE_TAG. */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** The Constant CALLSITE_TAG. */
     private static final String CALLSITE_TAG = "CallSite";
 
     /** The element. */

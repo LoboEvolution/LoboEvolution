@@ -36,6 +36,11 @@ import org.w3c.dom.Document;
  */
 public class ParserTest extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(ParserTest.class
 			.getName());

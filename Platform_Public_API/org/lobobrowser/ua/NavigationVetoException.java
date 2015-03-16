@@ -30,6 +30,11 @@ package org.lobobrowser.ua;
 public class NavigationVetoException extends Exception {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Instantiates a new navigation veto exception.
 	 */
 	public NavigationVetoException() {
