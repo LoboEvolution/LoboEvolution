@@ -210,23 +210,23 @@ public class HtmlValues {
 	public static void populateBorderInsets(BorderInfo binfo,
 			CSS2Properties cssProperties, RenderState renderState) {
 		HtmlInsets insets = null;
-		if (binfo.topStyle != HtmlValues.BORDER_STYLE_NONE) {
+		if (binfo.getTopStyle() != HtmlValues.BORDER_STYLE_NONE) {
 			String topText = cssProperties.getBorderTopWidth();
 			insets = updateTopInset(insets, topText, renderState);
 		}
-		if (binfo.leftStyle != HtmlValues.BORDER_STYLE_NONE) {
+		if (binfo.getLeftStyle() != HtmlValues.BORDER_STYLE_NONE) {
 			String leftText = cssProperties.getBorderLeftWidth();
 			insets = updateLeftInset(insets, leftText, renderState);
 		}
-		if (binfo.bottomStyle != HtmlValues.BORDER_STYLE_NONE) {
+		if (binfo.getBottomStyle() != HtmlValues.BORDER_STYLE_NONE) {
 			String bottomText = cssProperties.getBorderBottomWidth();
 			insets = updateBottomInset(insets, bottomText, renderState);
 		}
-		if (binfo.rightStyle != HtmlValues.BORDER_STYLE_NONE) {
+		if (binfo.getRightStyle() != HtmlValues.BORDER_STYLE_NONE) {
 			String rightText = cssProperties.getBorderRightWidth();
 			insets = updateRightInset(insets, rightText, renderState);
 		}
-		binfo.insets = insets;
+		binfo.setInsets(insets);
 	}
 
 	/**
@@ -1159,27 +1159,27 @@ public class HtmlValues {
 			RenderState renderState) {
 		BorderInfo binfo = new BorderInfo();
 
-		binfo.topStyle = getBorderStyle(properties.getBorderTopStyle());
-		binfo.rightStyle = getBorderStyle(properties.getBorderRightStyle());
-		binfo.bottomStyle = getBorderStyle(properties.getBorderBottomStyle());
-		binfo.leftStyle = getBorderStyle(properties.getBorderLeftStyle());
+		binfo.setTopStyle(getBorderStyle(properties.getBorderTopStyle()));
+		binfo.setRightStyle(getBorderStyle(properties.getBorderRightStyle()));
+		binfo.setBottomStyle(getBorderStyle(properties.getBorderBottomStyle()));
+		binfo.setLeftStyle(getBorderStyle(properties.getBorderLeftStyle()));
 
 		ColorFactory cf = ColorFactory.getInstance();
 		String topColorSpec = properties.getBorderTopColor();
 		if (topColorSpec != null) {
-			binfo.topColor = cf.getColor(topColorSpec);
+			binfo.setTopColor(cf.getColor(topColorSpec));
 		}
 		String rightColorSpec = properties.getBorderRightColor();
 		if (rightColorSpec != null) {
-			binfo.rightColor = cf.getColor(rightColorSpec);
+			binfo.setRightColor(cf.getColor(rightColorSpec));
 		}
 		String bottomColorSpec = properties.getBorderBottomColor();
 		if (bottomColorSpec != null) {
-			binfo.bottomColor = cf.getColor(bottomColorSpec);
+			binfo.setBottomColor(cf.getColor(bottomColorSpec));
 		}
 		String leftColorSpec = properties.getBorderLeftColor();
 		if (leftColorSpec != null) {
-			binfo.leftColor = cf.getColor(leftColorSpec);
+			binfo.setLeftColor(cf.getColor(leftColorSpec));
 		}
 
 		HtmlValues.populateBorderInsets(binfo, properties, renderState);

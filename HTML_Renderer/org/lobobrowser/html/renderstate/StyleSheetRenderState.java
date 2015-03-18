@@ -624,12 +624,12 @@ public class StyleSheetRenderState implements RenderState {
 			return wi;
 		}
 		wi = new WordInfo();
-		FontMetrics fm = this.getFontMetrics();
-		wi.fontMetrics = fm;
-		wi.ascentPlusLeading = fm.getAscent() + fm.getLeading();
-		wi.descent = fm.getDescent();
-		wi.height = fm.getHeight();
-		wi.width = fm.stringWidth(word);
+		FontMetrics fm = this.getFontMetrics();		
+		wi.setFontMetrics(fm);
+		wi.setAscentPlusLeading(fm.getAscent() + fm.getLeading());
+		wi.setDescent(fm.getDescent());
+		wi.setHeight(fm.getHeight());
+		wi.setWidth(fm.stringWidth(word));
 		map.put(word, wi);
 		return wi;
 	}

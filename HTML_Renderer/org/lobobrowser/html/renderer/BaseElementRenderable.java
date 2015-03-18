@@ -35,6 +35,7 @@ import java.security.PrivilegedAction;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.logging.Level;
 
 import org.lobobrowser.html.HttpRequest;
@@ -554,7 +555,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		} else {
 			BorderInfo borderInfo = rs.getBorderInfo();
 			this.borderInfo = borderInfo;
-			HtmlInsets binsets = borderInfo == null ? null : borderInfo.insets;
+			HtmlInsets binsets = borderInfo == null ? null : borderInfo.getInsets();
 			HtmlInsets minsets = rs.getMarginInsets();
 			HtmlInsets pinsets = rs.getPaddingInsets();
 			Insets defaultMarginInsets = this.defaultMarginInsets;
@@ -642,10 +643,10 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 										autoMarginY));
 			}
 			if (borderInfo != null) {
-				this.borderTopColor = borderInfo.topColor;
-				this.borderLeftColor = borderInfo.leftColor;
-				this.borderBottomColor = borderInfo.bottomColor;
-				this.borderRightColor = borderInfo.rightColor;
+				this.borderTopColor = borderInfo.getTopColor();
+				this.borderLeftColor = borderInfo.getLeftColor();
+				this.borderBottomColor = borderInfo.getBottomColor();
+				this.borderRightColor = borderInfo.getRightColor();
 			} else {
 				this.borderTopColor = null;
 				this.borderLeftColor = null;
@@ -853,7 +854,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 				if (btop > 0) {
 					g.setColor(this.getBorderTopColor());
 					int borderStyle = borderInfo == null ? HtmlValues.BORDER_STYLE_SOLID
-							: borderInfo.topStyle;
+							: borderInfo.getTopStyle();
 					for (int i = 0; i < btop; i++) {
 						int leftOffset = (i * bleft) / btop;
 						int rightOffset = (i * bright) / btop;
@@ -869,7 +870,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 				}
 				if (bright > 0) {
 					int borderStyle = borderInfo == null ? HtmlValues.BORDER_STYLE_SOLID
-							: borderInfo.rightStyle;
+							: borderInfo.getRightStyle();
 					g.setColor(this.getBorderRightColor());
 					int lastX = startX + totalWidth - 1;
 					for (int i = 0; i < bright; i++) {
@@ -889,7 +890,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 				}
 				if (bbottom > 0) {
 					int borderStyle = borderInfo == null ? HtmlValues.BORDER_STYLE_SOLID
-							: borderInfo.bottomStyle;
+							: borderInfo.getBottomStyle();
 					g.setColor(this.getBorderBottomColor());
 					int lastY = startY + totalHeight - 1;
 					for (int i = 0; i < bbottom; i++) {
@@ -907,7 +908,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 				}
 				if (bleft > 0) {
 					int borderStyle = borderInfo == null ? HtmlValues.BORDER_STYLE_SOLID
-							: borderInfo.leftStyle;
+							: borderInfo.getLeftStyle();
 					g.setColor(this.getBorderLeftColor());
 					for (int i = 0; i < bleft; i++) {
 						int topOffset = (i * btop) / bleft;
@@ -1131,7 +1132,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 			// Sequence is important.
 			// TODO: But possibly added multiple
 			// times in table layout?
-			gc = new java.util.LinkedList();
+			gc = new LinkedList();
 			this.delayedPairs = gc;
 		}
 		gc.add(pair);

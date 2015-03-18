@@ -2991,25 +2991,25 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 				FontInfo fontInfo = (FontInfo) HtmlValues.SYSTEM_FONTS
 						.get(fontSpecTL);
 				if (fontInfo != null) {
-					if (fontInfo.fontFamily != null) {
+					if (fontInfo.getFontFamily() != null) {
 						properties.setPropertyValueLCAlt(FONT_FAMILY,
-								fontInfo.fontFamily, important);
+								fontInfo.getFontFamily(), important);
 					}
-					if (fontInfo.fontSize != null) {
+					if (fontInfo.getFontSize() != null) {
 						properties.setPropertyValueLCAlt(FONT_SIZE,
-								fontInfo.fontSize, important);
+								fontInfo.getFontSize(), important);
 					}
-					if (fontInfo.fontStyle != null) {
+					if (fontInfo.getFontStyle() != null) {
 						properties.setPropertyValueLCAlt(FONT_STYLE,
-								fontInfo.fontStyle, important);
+								fontInfo.getFontStyle(), important);
 					}
-					if (fontInfo.fontVariant != null) {
+					if (fontInfo.getFontVariant() != null) {
 						properties.setPropertyValueLCAlt(FONT_VARIANT,
-								fontInfo.fontVariant, important);
+								fontInfo.getFontVariant(), important);
 					}
-					if (fontInfo.fontWeight != null) {
+					if (fontInfo.getFontWeight() != null) {
 						properties.setPropertyValueLCAlt(FONT_WEIGHT,
-								fontInfo.fontWeight, important);
+								fontInfo.getFontWeight(), important);
 					}
 					return;
 				}

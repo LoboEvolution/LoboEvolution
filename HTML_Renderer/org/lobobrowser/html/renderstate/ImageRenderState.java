@@ -107,9 +107,10 @@ public class ImageRenderState extends StyleSheetRenderState {
 		}
 		binfo = super.getBorderInfo();
 		if (binfo == null
-				|| (binfo.topStyle == HtmlValues.BORDER_STYLE_NONE
-						&& binfo.bottomStyle == HtmlValues.BORDER_STYLE_NONE
-						&& binfo.leftStyle == HtmlValues.BORDER_STYLE_NONE && binfo.rightStyle == HtmlValues.BORDER_STYLE_NONE)) {
+				|| (binfo.getTopStyle() == HtmlValues.BORDER_STYLE_NONE
+						&& binfo.getBottomStyle() == HtmlValues.BORDER_STYLE_NONE
+						&& binfo.getLeftStyle() == HtmlValues.BORDER_STYLE_NONE 
+						&& binfo.getRightStyle() == HtmlValues.BORDER_STYLE_NONE)) {
 			if (binfo == null) {
 				binfo = new BorderInfo();
 			}
@@ -139,21 +140,24 @@ public class ImageRenderState extends StyleSheetRenderState {
 					HtmlInsets borderInsets = new HtmlInsets();
 					borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value;
 					borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = valueType;
-					binfo.insets = borderInsets;
-					if (binfo.topColor == null) {
-						binfo.topColor = Color.BLACK;
+					binfo.setInsets(borderInsets);
+					if (binfo.getTopColor() == null) {
+						binfo.setTopColor(Color.BLACK);
 					}
-					if (binfo.leftColor == null) {
-						binfo.leftColor = Color.BLACK;
+					if (binfo.getLeftColor() == null) {
+						binfo.setLeftColor(Color.BLACK);
 					}
-					if (binfo.rightColor == null) {
-						binfo.rightColor = Color.BLACK;
+					if (binfo.getRightColor() == null) {
+						binfo.setRightColor(Color.BLACK);
 					}
-					if (binfo.bottomColor == null) {
-						binfo.bottomColor = Color.BLACK;
+					if (binfo.getBottomColor() == null) {
+						binfo.setBottomColor(Color.BLACK);
 					}
 					if (value != 0) {
-						binfo.topStyle = binfo.leftStyle = binfo.rightStyle = binfo.bottomStyle = HtmlValues.BORDER_STYLE_SOLID;
+						binfo.setTopStyle(HtmlValues.BORDER_STYLE_SOLID);
+						binfo.setLeftStyle(HtmlValues.BORDER_STYLE_SOLID);
+						binfo.setRightStyle(HtmlValues.BORDER_STYLE_SOLID);
+						binfo.setBottomStyle(HtmlValues.BORDER_STYLE_SOLID);
 					}
 				}
 			}
