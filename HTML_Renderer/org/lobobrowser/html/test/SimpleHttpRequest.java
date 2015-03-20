@@ -552,4 +552,16 @@ public class SimpleHttpRequest implements HttpRequest {
             }
         }
     }
+
+	@Override
+	public HttpRequest trustAllCerts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HttpRequest trustAllHosts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

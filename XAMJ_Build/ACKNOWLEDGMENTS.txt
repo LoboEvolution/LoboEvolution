@@ -14,4 +14,6 @@ The following open source externals are used by this project:
 * [http://grepcode.com/snapshot/repo1.maven.org/maven2/net.java.openjfx.backport/openjfx-78-backport/1.8.0-ea-b96.1] backport of OpenJFX 8 to run on Java 7
 
 * [https://github.com/sabren/java-XmlHttpRequest] Java implementation of the W3C's XmlHttpRequest API.
+
+* [https://github.com/kevinsawicki/http-request] A simple convenience library for using a HttpURLConnection to make requests and access the response.
   

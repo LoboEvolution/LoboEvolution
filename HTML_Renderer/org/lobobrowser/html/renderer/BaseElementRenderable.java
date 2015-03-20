@@ -682,6 +682,8 @@ public abstract class BaseElementRenderable extends BaseRCollection implements
 		UserAgentContext ctx = this.userAgentContext;
 		if (ctx != null) {
 			final HttpRequest request = ctx.createHttpRequest();
+			request.trustAllCerts();
+			request.trustAllHosts();
 			request.addReadyStateChangeListener(new ReadyStateChangeListener() {
 				public void readyStateChanged() {
 					int readyState = request.getReadyState();

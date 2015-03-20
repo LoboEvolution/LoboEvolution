@@ -1,22 +1,16 @@
 /*
-    GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
+ * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
+ * can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version. This
+ * library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Nov 13, 2005
@@ -26,9 +20,7 @@ package org.lobobrowser.html;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
-
 import org.w3c.dom.Document;
-
 
 /**
  * The <code>HttpRequest</code> interface should be implemented to provide web
@@ -68,6 +60,8 @@ public interface HttpRequest {
 	 */
 	public static final int STATE_COMPLETE = 4;
 
+	public static ConnectionFactory CONNECTION_FACTORY = ConnectionFactory.DEFAULT;
+
 	/**
 	 * Gets the state of the request, a value between 0 and 4.
 	 * 
@@ -93,8 +87,10 @@ public interface HttpRequest {
 	/**
 	 * Set the request header.
 	 *
-	 * @param header the header
-	 * @param value the value
+	 * @param header
+	 *            the header
+	 * @param value
+	 *            the value
 	 */
 
 	public void setRequestHeader(String header, String value);
@@ -143,7 +139,8 @@ public interface HttpRequest {
 	/**
 	 * Gets a response header value.
 	 *
-	 * @param headerName            The name of the header.
+	 * @param headerName
+	 *            The name of the header.
 	 * @return the response header
 	 */
 	public String getResponseHeader(String headerName);
@@ -151,28 +148,38 @@ public interface HttpRequest {
 	/**
 	 * Starts an asynchronous request.
 	 *
-	 * @param method            The request method.
-	 * @param url            The destination URL.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param method
+	 *            The request method.
+	 * @param url
+	 *            The destination URL.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void open(String method, String url) throws IOException;
 
 	/**
 	 * Opens an asynchronous request.
 	 *
-	 * @param method            The request method.
-	 * @param url            The destination URL.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param method
+	 *            The request method.
+	 * @param url
+	 *            The destination URL.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void open(String method, URL url) throws IOException;
 
 	/**
 	 * Opens an request.
 	 *
-	 * @param method            The request method.
-	 * @param url            The destination URL.
-	 * @param asyncFlag            Whether the request is asynchronous.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param method
+	 *            The request method.
+	 * @param url
+	 *            The destination URL.
+	 * @param asyncFlag
+	 *            Whether the request is asynchronous.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void open(String method, URL url, boolean asyncFlag)
 			throws IOException;
@@ -180,10 +187,14 @@ public interface HttpRequest {
 	/**
 	 * Opens a request.
 	 *
-	 * @param method            The request method.
-	 * @param url            The destination URL.
-	 * @param asyncFlag            Whether the request should be asynchronous.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param method
+	 *            The request method.
+	 * @param url
+	 *            The destination URL.
+	 * @param asyncFlag
+	 *            Whether the request should be asynchronous.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void open(String method, String url, boolean asyncFlag)
 			throws IOException;
@@ -191,24 +202,35 @@ public interface HttpRequest {
 	/**
 	 * Opens a request.
 	 *
-	 * @param method            The request method.
-	 * @param url            The destination URL.
-	 * @param asyncFlag            Whether the request should be asynchronous.
-	 * @param userName            The HTTP authentication user name.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param method
+	 *            The request method.
+	 * @param url
+	 *            The destination URL.
+	 * @param asyncFlag
+	 *            Whether the request should be asynchronous.
+	 * @param userName
+	 *            The HTTP authentication user name.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	public void open(String method, URL url, boolean asyncFlag,
-			String userName) throws IOException;
+	public void open(String method, URL url, boolean asyncFlag, String userName)
+			throws IOException;
 
 	/**
 	 * Opens a request.
 	 *
-	 * @param method            The request method.
-	 * @param url            The destination URL.
-	 * @param asyncFlag            Whether the request should be asynchronous.
-	 * @param userName            The HTTP authentication user name.
-	 * @param password            The HTTP authentication password.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param method
+	 *            The request method.
+	 * @param url
+	 *            The destination URL.
+	 * @param asyncFlag
+	 *            Whether the request should be asynchronous.
+	 * @param userName
+	 *            The HTTP authentication user name.
+	 * @param password
+	 *            The HTTP authentication password.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void open(String method, URL url, boolean asyncFlag,
 			String userName, String password) throws IOException;
@@ -216,8 +238,10 @@ public interface HttpRequest {
 	/**
 	 * Sends POST content if any.
 	 *
-	 * @param content            POST content or <code>null</code> for GET requests.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param content
+	 *            POST content or <code>null</code> for GET requests.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void send(String content) throws IOException;
 
@@ -230,4 +254,24 @@ public interface HttpRequest {
 	 *            {@link org.lobobrowser.html.ReadyStateChangeListener}
 	 */
 	public void addReadyStateChangeListener(ReadyStateChangeListener listener);
+
+	/**
+	 * Configure HTTPS connection to trust all certificates
+	 * <p>
+	 * This method does nothing if the current request is not a HTTPS request
+	 *
+	 * @return this request
+	 */
+	public HttpRequest trustAllCerts();
+
+	/**
+	 * Configure HTTPS connection to trust all hosts using a custom
+	 * {@link HostnameVerifier} that always returns <code>true</code> for each
+	 * host verified
+	 * <p>
+	 * This method does nothing if the current request is not a HTTPS request
+	 *
+	 * @return this request
+	 */
+	public HttpRequest trustAllHosts();
 }

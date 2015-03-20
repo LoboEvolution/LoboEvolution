@@ -1325,6 +1325,8 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				if (sm == null) {
 					try {
 						httpRequest.open("GET", url, true);
+						httpRequest.trustAllCerts();
+						httpRequest.trustAllHosts();
 						httpRequest.send(null);
 					} catch (IOException thrown) {
 						logger.log(Level.WARNING, "loadImage()", thrown);
@@ -1337,6 +1339,8 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 									// items from elsewhere.
 									try {
 										httpRequest.open("GET", url, true);
+										httpRequest.trustAllCerts();
+										httpRequest.trustAllHosts();
 										httpRequest.send(null);
 									} catch (IOException thrown) {
 										logger.log(Level.WARNING,
