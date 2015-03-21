@@ -3,14 +3,13 @@ package org.lobobrowser.protocol.data;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.util.HashMap;
-
 import sun.misc.BASE64Decoder;
 
-public class DataURLConnection extends URLConnection {
+public class DataURLConnection extends HttpURLConnection {
 
 	/** The header map. */
 	private HashMap<String, String> headerMap = new HashMap<String, String>();
@@ -136,5 +135,13 @@ public class DataURLConnection extends URLConnection {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void disconnect() {}
+
+	@Override
+	public boolean usingProxy() {
+		return false;
 	}
 }
