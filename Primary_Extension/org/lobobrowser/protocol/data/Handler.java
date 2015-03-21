@@ -1,8 +1,8 @@
 package org.lobobrowser.protocol.data;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLStreamHandler;
 
 /**
@@ -14,7 +14,7 @@ public class Handler extends URLStreamHandler {
 	 * @see java.net.URLStreamHandler#openConnection(java.net.URL)
 	 */
 	@Override
-	protected URLConnection openConnection(URL url) throws IOException {
+	protected HttpURLConnection openConnection(URL url) throws IOException {
 		return new DataURLConnection(url);
 	}
 
