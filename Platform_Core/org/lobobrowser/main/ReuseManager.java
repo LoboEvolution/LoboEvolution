@@ -75,8 +75,8 @@ public class ReuseManager {
 	 */
 	public void shutdown() {
 		try {
-			java.io.File appHome = StorageManager.getInstance().getAppHome();
-			java.io.File portFile = new File(appHome, PORT_FILE);
+			File appHome = StorageManager.getInstance().getAppHome();
+			File portFile = new File(appHome, PORT_FILE);
 			portFile.delete();
 		} catch (IOException ioe) {
 			// ignore
@@ -97,8 +97,8 @@ public class ReuseManager {
 			// only be accessed locally.
 			InetAddress bindHost = InetAddress.getByAddress(new byte[] {
 					(byte) 127, (byte) 0, (byte) 0, (byte) 1 });
-			java.io.File appHome = StorageManager.getInstance().getAppHome();
-			java.io.File portFile = new File(appHome, PORT_FILE);
+			File appHome = StorageManager.getInstance().getAppHome();
+			File portFile = new File(appHome, PORT_FILE);
 			OUTER: for (int tries = 0; tries < 5; tries++) {
 				// Look for running VM
 				int port = -1;
@@ -181,8 +181,8 @@ public class ReuseManager {
 				}
 				break OUTER;
 			}
-		}finally{
-			
+		}catch(Throwable e){
+			e.printStackTrace();
 		}
 		if (!launched) {
 			PlatformInit entry = PlatformInit.getInstance();
