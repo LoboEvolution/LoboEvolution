@@ -225,18 +225,13 @@ public class HttpRequestImpl implements HttpRequest {
 
 		NetworkRequestImpl request = (NetworkRequestImpl) networkRequest;
 		HttpURLConnection connection = null;
-		
+		String url = request.getReq().getUrl();
 		try {
-
-			if (request.getReq().getUrl() != null) {
-				/*
-				 * if (httpProxyHost != null) //TODO connection =
-				 * CONNECTION_FACTORY.create(url, createProxy()); else
-				 */
-				connection = CONNECTION_FACTORY.create(new URL(request.getReq()
-						.getUrl()));
-				connection
-						.setRequestMethod(request.getReq().getMethod().name());
+			if (url != null) {
+				if (!url.contains("file:")) {
+					connection = CONNECTION_FACTORY.create(new URL(url));
+					connection.setRequestMethod(request.getReq().getMethod().name());
+				}
 			}
 			return connection;
 		} catch (IOException e) {
@@ -258,18 +253,22 @@ public class HttpRequestImpl implements HttpRequest {
 	@Override
 	public HttpRequest trustAllCerts() {
 		final HttpURLConnection connection = getConnection();
-		if (connection instanceof HttpsURLConnection)
-			((HttpsURLConnection) connection)
-					.setSSLSocketFactory(SSLCertificate.getTrustedFactory());
+		if (connection != null) {
+			if (connection instanceof HttpsURLConnection)
+				((HttpsURLConnection) connection)
+						.setSSLSocketFactory(SSLCertificate.getTrustedFactory());
+		}
 		return this;
 	}
 
 	@Override
 	public HttpRequest trustAllHosts() {
 		final HttpURLConnection connection = getConnection();
-		if (connection instanceof HttpsURLConnection)
-			((HttpsURLConnection) connection)
-					.setHostnameVerifier(SSLCertificate.getTrustedVerifier());
+		if (connection != null) {
+			if (connection instanceof HttpsURLConnection)
+				((HttpsURLConnection) connection)
+						.setSSLSocketFactory(SSLCertificate.getTrustedFactory());
+		}
 		return this;
 	}
 
