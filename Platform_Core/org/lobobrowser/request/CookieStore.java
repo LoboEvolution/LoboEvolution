@@ -76,12 +76,9 @@ public class CookieStore {
 		// Note: Using yy in case years are given as two digits.
 		// Note: Must use US locale for cookie dates.
 		Locale locale = Locale.US;
-		SimpleDateFormat ef1 = new SimpleDateFormat(
-				"EEE, dd MMM yy HH:mm:ss 'GMT'", locale);
-		SimpleDateFormat ef2 = new SimpleDateFormat(
-				"EEE, dd-MMM-yy HH:mm:ss 'GMT'", locale);
-		SimpleDateFormat ef3 = new SimpleDateFormat(
-				"EEE MMM dd HH:mm:ss yy 'GMT'", locale);
+		SimpleDateFormat ef1 = new SimpleDateFormat("EEE, dd MMM yy HH:mm:ss 'GMT'", locale);
+		SimpleDateFormat ef2 = new SimpleDateFormat("EEE, dd-MMM-yy HH:mm:ss 'GMT'", locale);
+		SimpleDateFormat ef3 = new SimpleDateFormat("EEE, dd-MMM-yyyy HH:mm:ss 'UTC'", locale);
 		TimeZone gmtTimeZone = TimeZone.getTimeZone("GMT");
 		ef1.setTimeZone(gmtTimeZone);
 		ef2.setTimeZone(gmtTimeZone);
