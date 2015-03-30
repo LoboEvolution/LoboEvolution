@@ -28,6 +28,7 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.style.CSSUtilities;
+import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.util.io.IORoutines;
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.css.CSSImportRule;
@@ -134,6 +135,7 @@ public class CssParserTest extends JFrame {
 			}
 			logger.info("process(): Loading URI=[" + uri + "].");
 			long time0 = System.currentTimeMillis();
+			SSLCertificate.setCertificate();
 			URLConnection connection = url.openConnection();
 			connection.setRequestProperty("User-Agent",
 					"Mozilla/4.0 (compatible;) Cobra/0.96.1+");

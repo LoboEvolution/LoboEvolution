@@ -47,6 +47,7 @@ import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.http.Header;
 import org.lobobrowser.http.Method;
 import org.lobobrowser.http.Request;
+import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.util.EventDispatch;
 import org.lobobrowser.util.GenericEventListener;
 import org.lobobrowser.util.Urls;
@@ -290,6 +291,7 @@ public class SimpleHttpRequest implements HttpRequest {
 	public void open(final String method, final URL url,boolean asyncFlag, final String userName, final String password) throws IOException {
 		this.abort();
 		Proxy proxy = this.proxy;
+		SSLCertificate.setCertificate();
 		URLConnection c = proxy == null || proxy == Proxy.NO_PROXY ? url.openConnection() : url.openConnection(proxy);
 		synchronized (this) {
 			this.connection = c;
@@ -552,16 +554,4 @@ public class SimpleHttpRequest implements HttpRequest {
             }
         }
     }
-
-	@Override
-	public HttpRequest trustAllCerts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public HttpRequest trustAllHosts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

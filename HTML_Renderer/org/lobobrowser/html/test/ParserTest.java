@@ -27,6 +27,7 @@ import javax.swing.JTree;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
+import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.util.io.IORoutines;
 import org.w3c.dom.Document;
 
@@ -129,6 +130,7 @@ public class ParserTest extends JFrame {
 			}
 			logger.info("process(): Loading URI=[" + uri + "].");
 			long time0 = System.currentTimeMillis();
+			SSLCertificate.setCertificate();
 			URLConnection connection = url.openConnection();
 			connection.setRequestProperty("User-Agent",
 					"Mozilla/4.0 (compatible;) Cobra/0.96.1+");

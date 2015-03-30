@@ -59,9 +59,7 @@ public interface HttpRequest {
 	 * The complete request state. All operations are finished.
 	 */
 	public static final int STATE_COMPLETE = 4;
-
-	public static ConnectionFactory CONNECTION_FACTORY = ConnectionFactory.DEFAULT;
-
+	
 	/**
 	 * Gets the state of the request, a value between 0 and 4.
 	 * 
@@ -254,24 +252,4 @@ public interface HttpRequest {
 	 *            {@link org.lobobrowser.html.ReadyStateChangeListener}
 	 */
 	public void addReadyStateChangeListener(ReadyStateChangeListener listener);
-
-	/**
-	 * Configure HTTPS connection to trust all certificates
-	 * <p>
-	 * This method does nothing if the current request is not a HTTPS request
-	 *
-	 * @return this request
-	 */
-	public HttpRequest trustAllCerts();
-
-	/**
-	 * Configure HTTPS connection to trust all hosts using a custom
-	 * {@link HostnameVerifier} that always returns <code>true</code> for each
-	 * host verified
-	 * <p>
-	 * This method does nothing if the current request is not a HTTPS request
-	 *
-	 * @return this request
-	 */
-	public HttpRequest trustAllHosts();
 }

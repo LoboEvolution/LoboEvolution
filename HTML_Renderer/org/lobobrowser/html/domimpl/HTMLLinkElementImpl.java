@@ -234,12 +234,11 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 							boolean liflag = loggableInfo;
 							long time1 = liflag ? System.currentTimeMillis() : 0;
 							try {
-
+								
 								ArrayList<String> arrText = CSSUtilities.cssText(this.getHref(), doc,
 										doc.getBaseURI());
 
 								String text = "";
-								
 								for (int i = 0; i < arrText.size(); i++) {
 									
 									text = arrText.get(i);

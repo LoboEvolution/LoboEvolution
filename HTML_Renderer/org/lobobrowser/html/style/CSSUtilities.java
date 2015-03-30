@@ -265,8 +265,6 @@ public class CSSUtilities {
 		if (sm == null) {
 			try {
 				request.open("GET", scriptURI, false);
-				request.trustAllCerts();
-				request.trustAllHosts();
 				request.send(null);
 			} catch (IOException thrown) {
 				logger.log(Level.WARNING, "parse()", thrown);
@@ -278,8 +276,6 @@ public class CSSUtilities {
 				public Object run() {
 					try {
 						request.open("GET", scriptURI, false);
-						request.trustAllCerts();
-						request.trustAllHosts();
 						request.send(null);
 					} catch (IOException thrown) {
 						logger.log(Level.WARNING, "parse()", thrown);

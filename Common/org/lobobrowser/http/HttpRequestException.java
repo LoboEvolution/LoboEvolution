@@ -1,4 +1,4 @@
-package org.lobobrowser.security;
+package org.lobobrowser.http;
 
 import java.io.IOException;
 

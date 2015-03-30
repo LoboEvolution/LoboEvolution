@@ -215,8 +215,6 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements
 					if (sm == null) {
 						try {
 							request.open("GET", scriptURI, false);
-							request.trustAllCerts();
-							request.trustAllHosts();
 							request.send(null);
 						} catch (IOException thrown) {
 							logger.log(Level.WARNING, "processScript()", thrown);
@@ -230,8 +228,6 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements
 										// items from elsewhere.
 										try {
 											request.open("GET", scriptURI,false);
-											request.trustAllCerts();
-											request.trustAllHosts();
 											request.send(null);
 										} catch (IOException thrown) {
 											logger.log(Level.WARNING,

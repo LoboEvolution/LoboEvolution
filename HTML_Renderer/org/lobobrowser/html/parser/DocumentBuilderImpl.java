@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -37,6 +38,8 @@ import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.DOMImplementationImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.io.WritableLineReader;
+import org.lobobrowser.http.SSLCertificate;
+import org.lobobrowser.util.Urls;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.xml.sax.EntityResolver;
@@ -168,13 +171,11 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 			if (in != null) {
 				wis = new WritableLineReader(new InputStreamReader(in, charset));
 			} else if (uri != null) {
-				// To comply with the InputSource documentation, we need
-				// to do this:
-				java.net.URLConnection connection = new URL(uri)
-						.openConnection();
+				SSLCertificate.setCertificate();
+				URLConnection connection = new URL(uri).openConnection();
 				in = connection.getInputStream();
 				if (encoding == null) {
-					charset = org.lobobrowser.util.Urls.getCharset(connection);
+					charset = Urls.getCharset(connection);
 				}
 				wis = new WritableLineReader(new InputStreamReader(in, charset));
 			} else {

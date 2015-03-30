@@ -55,6 +55,7 @@ import org.lobobrowser.html.parser.InputSourceImpl;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLLinkElement;
+import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.BufferExceededException;
 import org.lobobrowser.util.io.RecordedInputStream;
@@ -418,6 +419,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 		// Using potentially different URL for loading.
 		Proxy proxy = SimpleHtmlRendererContext.this.getProxy();
 		boolean isPost = "POST".equals(actualMethod);
+		SSLCertificate.setCertificate();
 		URLConnection connection = proxy == null || proxy == Proxy.NO_PROXY ? urlForLoading
 				.openConnection() : urlForLoading.openConnection(proxy);
 		this.currentConnection = connection;

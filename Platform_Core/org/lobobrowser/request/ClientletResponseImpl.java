@@ -39,6 +39,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 import org.lobobrowser.clientlet.ClientletResponse;
+import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.ua.ProgressType;
 import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.util.GenericEventListener;
@@ -126,6 +127,7 @@ public class ClientletResponseImpl implements ClientletResponse {
 	public ClientletResponseImpl(RequestHandler rhandler, URL url,
 			boolean fromCache, CacheInfo cacheInfo, boolean isCacheable,
 			String requestMethod, RequestType requestType) throws IOException {
+		SSLCertificate.setCertificate();
 		this.connection = url.openConnection();
 		this.responseURL = url;
 		this.requestHandler = rhandler;

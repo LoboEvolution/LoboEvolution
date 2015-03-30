@@ -19,14 +19,10 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import javax.net.ssl.HttpsURLConnection;
-
 import org.lobobrowser.context.NetworkRequestImpl;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.ReadyStateChangeListener;
 import org.lobobrowser.http.Header;
-import org.lobobrowser.security.HttpRequestException;
-import org.lobobrowser.security.SSLCertificate;
 import org.lobobrowser.ua.NetworkRequest;
 import org.lobobrowser.ua.NetworkRequestEvent;
 import org.lobobrowser.ua.NetworkRequestListener;
@@ -215,62 +211,6 @@ public class HttpRequestImpl implements HttpRequest {
 		});
 	}
 
-	/**
-	 * create connection
-	 *
-	 * @return connection
-	 */
-
-	private HttpURLConnection createConnection() {
-
-		NetworkRequestImpl request = (NetworkRequestImpl) networkRequest;
-		HttpURLConnection connection = null;
-		String url = request.getReq().getUrl();
-		try {
-			if (url != null) {
-				if (!url.contains("file:")) {
-					connection = CONNECTION_FACTORY.create(new URL(url));
-					connection.setRequestMethod(request.getReq().getMethod().name());
-				}
-			}
-			return connection;
-		} catch (IOException e) {
-			throw new HttpRequestException(e);
-		}
-	}
-
-	/**
-	 * Gets the connection.
-	 *
-	 * @return the connection
-	 */
-	public HttpURLConnection getConnection() {
-		if (connection == null)
-			connection = createConnection();
-		return connection;
-	}
-
-	@Override
-	public HttpRequest trustAllCerts() {
-		final HttpURLConnection connection = getConnection();
-		if (connection != null) {
-			if (connection instanceof HttpsURLConnection)
-				((HttpsURLConnection) connection)
-						.setSSLSocketFactory(SSLCertificate.getTrustedFactory());
-		}
-		return this;
-	}
-
-	@Override
-	public HttpRequest trustAllHosts() {
-		final HttpURLConnection connection = getConnection();
-		if (connection != null) {
-			if (connection instanceof HttpsURLConnection)
-				((HttpsURLConnection) connection)
-						.setSSLSocketFactory(SSLCertificate.getTrustedFactory());
-		}
-		return this;
-	}
 
 	@Override
 	public void setRequestHeader(String header, String value) {

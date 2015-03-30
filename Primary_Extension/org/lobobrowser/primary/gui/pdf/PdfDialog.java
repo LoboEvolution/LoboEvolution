@@ -57,6 +57,8 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileFilter;
 
+import org.lobobrowser.http.SSLCertificate;
+
 import com.sun.pdfview.Flag;
 import com.sun.pdfview.FullScreenWindow;
 import com.sun.pdfview.OutlineNode;
@@ -559,6 +561,7 @@ public class PdfDialog extends JFrame implements KeyListener,
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void openFile(URL url) throws IOException {
+		SSLCertificate.setCertificate();
 		URLConnection urlConnection = url.openConnection();
 		int contentLength = urlConnection.getContentLength();
 		InputStream istr = urlConnection.getInputStream();

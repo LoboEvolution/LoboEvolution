@@ -1,22 +1,16 @@
 /*
- GNU GENERAL PUBLIC LICENSE
- Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public
- License as published by the Free Software Foundation; either
- verion 2 of the License, or (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- General Public License for more details.
-
- You should have received a copy of the GNU General Public
- License along with this library; if not, write to the Free Software
- Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
- Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either verion 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.request;
 
@@ -59,8 +53,8 @@ import org.lobobrowser.clientlet.ClientletException;
 import org.lobobrowser.clientlet.ClientletRequest;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.http.Header;
+import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.main.ExtensionManager;
-import org.lobobrowser.security.SSLCertificate;
 import org.lobobrowser.settings.BooleanSettings;
 import org.lobobrowser.settings.CacheSettings;
 import org.lobobrowser.settings.ConnectionSettings;
@@ -80,34 +74,33 @@ import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.Files;
 import org.lobobrowser.util.io.IORoutines;
 
-
 /**
  * The Class RequestEngine.
  */
 public final class RequestEngine {
-	
+
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(RequestEngine.class
 			.getName());
-	
+
 	/** The Constant loggerInfo. */
 	private static final boolean loggerInfo = logger.isLoggable(Level.INFO);
 
 	/** The thread pool. */
 	private final SimpleThreadPool threadPool;
-	
+
 	/** The processing requests. */
 	private final Collection<RequestInfo> processingRequests = new HashSet<RequestInfo>();
-	
+
 	/** The cookie store. */
 	private final CookieStore cookieStore = CookieStore.getInstance();
-	
+
 	/** The cache settings. */
 	private final CacheSettings cacheSettings;
-	
+
 	/** The boolean settings. */
 	private final BooleanSettings booleanSettings;
-	
+
 	/** The connection settings. */
 	private final ConnectionSettings connectionSettings;
 
@@ -142,7 +135,8 @@ public final class RequestEngine {
 	/**
 	 * Gets the cookie.
 	 *
-	 * @param url the url
+	 * @param url
+	 *            the url
 	 * @return the cookie
 	 */
 	public String getCookie(URL url) {
@@ -164,8 +158,10 @@ public final class RequestEngine {
 	/**
 	 * Sets the cookie.
 	 *
-	 * @param url the url
-	 * @param cookieSpec the cookie spec
+	 * @param url
+	 *            the url
+	 * @param cookieSpec
+	 *            the cookie spec
 	 */
 	public void setCookie(URL url, String cookieSpec) {
 		this.cookieStore.saveCookie(url, cookieSpec);
@@ -174,8 +170,10 @@ public final class RequestEngine {
 	/**
 	 * Sets the cookie.
 	 *
-	 * @param urlHostName the url host name
-	 * @param cookieSpec the cookie spec
+	 * @param urlHostName
+	 *            the url host name
+	 * @param cookieSpec
+	 *            the cookie spec
 	 */
 	public void setCookie(String urlHostName, String cookieSpec) {
 		this.cookieStore.saveCookie(urlHostName, cookieSpec);
@@ -191,7 +189,8 @@ public final class RequestEngine {
 	/**
 	 * Cancel request.
 	 *
-	 * @param rhToDelete the rh to delete
+	 * @param rhToDelete
+	 *            the rh to delete
 	 */
 	public void cancelRequest(RequestHandler rhToDelete) {
 		this.threadPool.cancel(new RequestHandlerTask(rhToDelete));
@@ -201,7 +200,8 @@ public final class RequestEngine {
 	/**
 	 * Cancel request if running.
 	 *
-	 * @param rhToDelete the rh to delete
+	 * @param rhToDelete
+	 *            the rh to delete
 	 */
 	public void cancelRequestIfRunning(RequestHandler rhToDelete) {
 		rhToDelete.cancel();
@@ -225,7 +225,8 @@ public final class RequestEngine {
 	/**
 	 * Schedule request.
 	 *
-	 * @param handler the handler
+	 * @param handler
+	 *            the handler
 	 */
 	public void scheduleRequest(RequestHandler handler) {
 		// Note: Important to create task with current access context if there's
@@ -242,10 +243,14 @@ public final class RequestEngine {
 	/**
 	 * Post data.
 	 *
-	 * @param connection the connection
-	 * @param pinfo the pinfo
-	 * @param altPostData the alt post data
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param connection
+	 *            the connection
+	 * @param pinfo
+	 *            the pinfo
+	 * @param altPostData
+	 *            the alt post data
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private void postData(URLConnection connection, ParameterInfo pinfo,
 			String altPostData) throws IOException {
@@ -318,19 +323,25 @@ public final class RequestEngine {
 						Parameter parameter = parameters[i];
 						String name = parameter.getName();
 						if (parameter.isText()) {
-							writer.writeText(name, parameter.getTextValue(),"UTF-8");
+							writer.writeText(name, parameter.getTextValue(),
+									"UTF-8");
 						} else if (parameter.isFile()) {
 							File[] file = parameter.getFileValue();
-							
-							for(int f=0;f<file.length;f++){
-							
-							FileInputStream in = new FileInputStream(file[f]);
-							try {
-								BufferedInputStream bin = new BufferedInputStream(in, 8192);
-								writer.writeFileData(name, file[f].getName(), Files.getContentType(file[f]), bin);
-							} finally {
-								in.close();
-							}}
+
+							for (int f = 0; f < file.length; f++) {
+
+								FileInputStream in = new FileInputStream(
+										file[f]);
+								try {
+									BufferedInputStream bin = new BufferedInputStream(
+											in, 8192);
+									writer.writeFileData(name,
+											file[f].getName(),
+											Files.getContentType(file[f]), bin);
+								} finally {
+									in.close();
+								}
+							}
 						} else {
 							logger.warning("postData(): Skipping parameter "
 									+ name
@@ -367,11 +378,15 @@ public final class RequestEngine {
 	/**
 	 * Complete get url.
 	 *
-	 * @param baseURL the base url
-	 * @param pinfo the pinfo
-	 * @param ref the ref
+	 * @param baseURL
+	 *            the base url
+	 * @param pinfo
+	 *            the pinfo
+	 * @param ref
+	 *            the ref
 	 * @return the string
-	 * @throws Exception the exception
+	 * @throws Exception
+	 *             the exception
 	 */
 	private String completeGetUrl(String baseURL, ParameterInfo pinfo,
 			String ref) throws Exception {
@@ -408,12 +423,18 @@ public final class RequestEngine {
 	/**
 	 * Adds the request properties.
 	 *
-	 * @param connection the connection
-	 * @param request the request
-	 * @param cacheInfo the cache info
-	 * @param requestMethod the request method
-	 * @param lastRequestURL the last request url
-	 * @throws ProtocolException the protocol exception
+	 * @param connection
+	 *            the connection
+	 * @param request
+	 *            the request
+	 * @param cacheInfo
+	 *            the cache info
+	 * @param requestMethod
+	 *            the request method
+	 * @param lastRequestURL
+	 *            the last request url
+	 * @throws ProtocolException
+	 *             the protocol exception
 	 */
 	private void addRequestProperties(URLConnection connection,
 			ClientletRequest request, CacheInfo cacheInfo,
@@ -461,10 +482,13 @@ public final class RequestEngine {
 	/**
 	 * Gets the cache info.
 	 *
-	 * @param rhandler the rhandler
-	 * @param url the url
+	 * @param rhandler
+	 *            the rhandler
+	 * @param url
+	 *            the url
 	 * @return the cache info
-	 * @throws Exception the exception
+	 * @throws Exception
+	 *             the exception
 	 */
 	private CacheInfo getCacheInfo(final RequestHandler rhandler, final URL url)
 			throws Exception {
@@ -502,13 +526,20 @@ public final class RequestEngine {
 	/**
 	 * Cache.
 	 *
-	 * @param rhandler the rhandler
-	 * @param url the url
-	 * @param connection the connection
-	 * @param content the content
-	 * @param altPersistentObject the alt persistent object
-	 * @param altObject the alt object
-	 * @param approxAltObjectSize the approx alt object size
+	 * @param rhandler
+	 *            the rhandler
+	 * @param url
+	 *            the url
+	 * @param connection
+	 *            the connection
+	 * @param content
+	 *            the content
+	 * @param altPersistentObject
+	 *            the alt persistent object
+	 * @param altObject
+	 *            the alt object
+	 * @param approxAltObjectSize
+	 *            the approx alt object size
 	 */
 	private void cache(final RequestHandler rhandler, final URL url,
 			final URLConnection connection, final byte[] content,
@@ -639,7 +670,8 @@ public final class RequestEngine {
 	/**
 	 * May be cached.
 	 *
-	 * @param connection the connection
+	 * @param connection
+	 *            the connection
 	 * @return true, if successful
 	 */
 	private boolean mayBeCached(HttpURLConnection connection) {
@@ -659,7 +691,8 @@ public final class RequestEngine {
 	/**
 	 * Prints the request headers.
 	 *
-	 * @param connection the connection
+	 * @param connection
+	 *            the connection
 	 */
 	private void printRequestHeaders(URLConnection connection) {
 		Map<String, List<String>> headers = connection.getRequestProperties();
@@ -675,7 +708,8 @@ public final class RequestEngine {
 	/**
 	 * Inline request.
 	 *
-	 * @param rhandler the rhandler
+	 * @param rhandler
+	 *            the rhandler
 	 */
 	public void inlineRequest(RequestHandler rhandler) {
 		// Security checked by low-level APIs in this case.
@@ -685,9 +719,11 @@ public final class RequestEngine {
 	/**
 	 * Load bytes.
 	 *
-	 * @param urlOrPath the url or path
+	 * @param urlOrPath
+	 *            the url or path
 	 * @return the byte[]
-	 * @throws Exception the exception
+	 * @throws Exception
+	 *             the exception
 	 */
 	public byte[] loadBytes(String urlOrPath) throws Exception {
 		return this.loadBytes(Urls.guessURL(urlOrPath));
@@ -696,9 +732,11 @@ public final class RequestEngine {
 	/**
 	 * Load bytes.
 	 *
-	 * @param url the url
+	 * @param url
+	 *            the url
 	 * @return the byte[]
-	 * @throws Exception the exception
+	 * @throws Exception
+	 *             the exception
 	 */
 	public byte[] loadBytes(final URL url) throws Exception {
 		final BoxedObject boxed = new BoxedObject();
@@ -726,9 +764,11 @@ public final class RequestEngine {
 	/**
 	 * Load bytes async.
 	 *
-	 * @param urlOrPath the url or path
+	 * @param urlOrPath
+	 *            the url or path
 	 * @return the async result
-	 * @throws MalformedURLException the malformed url exception
+	 * @throws MalformedURLException
+	 *             the malformed url exception
 	 */
 	public AsyncResult<byte[]> loadBytesAsync(final String urlOrPath)
 			throws MalformedURLException {
@@ -738,7 +778,8 @@ public final class RequestEngine {
 	/**
 	 * Load bytes async.
 	 *
-	 * @param url the url
+	 * @param url
+	 *            the url
 	 * @return the async result
 	 */
 	public AsyncResult<byte[]> loadBytesAsync(final URL url) {
@@ -765,8 +806,10 @@ public final class RequestEngine {
 	 * Whether possibly cached request should always be revalidated, i.e. any
 	 * expiration information is ignored.
 	 *
-	 * @param connectionUrl the connection url
-	 * @param requestType the request type
+	 * @param connectionUrl
+	 *            the connection url
+	 * @param requestType
+	 *            the request type
 	 * @return true, if successful
 	 */
 	private static boolean shouldRevalidateAlways(URL connectionUrl,
@@ -778,7 +821,8 @@ public final class RequestEngine {
 	 * Whether the request type should always be obtained from cache if it is
 	 * there.
 	 *
-	 * @param requestType the request type
+	 * @param requestType
+	 *            the request type
 	 * @return true, if successful
 	 */
 	private static boolean doesNotExpire(RequestType requestType) {
@@ -802,14 +846,21 @@ public final class RequestEngine {
 	/**
 	 * Gets the URL connection.
 	 *
-	 * @param connectionUrl the connection url
-	 * @param request the request
-	 * @param protocol the protocol
-	 * @param method the method
-	 * @param rhandler the rhandler
-	 * @param cacheInfo the cache info
+	 * @param connectionUrl
+	 *            the connection url
+	 * @param request
+	 *            the request
+	 * @param protocol
+	 *            the protocol
+	 * @param method
+	 *            the method
+	 * @param rhandler
+	 *            the rhandler
+	 * @param cacheInfo
+	 *            the cache info
 	 * @return the URL connection
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private URLConnection getURLConnection(URL connectionUrl,
 			ClientletRequest request, String protocol, String method,
@@ -877,6 +928,7 @@ public final class RequestEngine {
 		boolean isPost = "POST".equalsIgnoreCase(method);
 		final String host = connectionUrl.getHost();
 		boolean isResURL = "res".equalsIgnoreCase(protocol);
+		SSLCertificate.setCertificate();
 		if (isResURL || host == null || host.length() == 0) {
 			connection = connectionUrl.openConnection();
 		} else {
@@ -928,7 +980,8 @@ public final class RequestEngine {
 	/**
 	 * Checks if is OK to retrieve from cache.
 	 *
-	 * @param requestType the request type
+	 * @param requestType
+	 *            the request type
 	 * @return true, if is OK to retrieve from cache
 	 */
 	private static boolean isOKToRetrieveFromCache(RequestType requestType) {
@@ -940,9 +993,12 @@ public final class RequestEngine {
 	/**
 	 * Process handler.
 	 *
-	 * @param rhandler the rhandler
-	 * @param recursionLevel the recursion level
-	 * @param trackRequestInfo the track request info
+	 * @param rhandler
+	 *            the rhandler
+	 * @param recursionLevel
+	 *            the recursion level
+	 * @param trackRequestInfo
+	 *            the track request info
 	 */
 	private void processHandler(final RequestHandler rhandler,
 			final int recursionLevel, final boolean trackRequestInfo) {
@@ -986,7 +1042,7 @@ public final class RequestEngine {
 				cacheInfo = this.getCacheInfo(rhandler, connectionUrl);
 			}
 			try {
-				
+
 				SSLCertificate.setCertificate();
 				URLConnection connection = this.getURLConnection(connectionUrl,
 						request, protocol, method, rhandler, cacheInfo);
@@ -1007,8 +1063,80 @@ public final class RequestEngine {
 					boolean isContentCached = cacheInfo != null
 							&& cacheInfo.isCacheConnection(connection);
 					boolean isCacheable = false;
-					if (connection instanceof HttpURLConnection
+
+					if (connection instanceof HttpsURLConnection
 							&& !isContentCached) {
+
+						HttpsURLConnection hconnection = (HttpsURLConnection) connection;
+						hconnection.setInstanceFollowRedirects(true);
+						int responseCode = hconnection.getResponseCode();
+
+						if (linfo) {
+							logger.info("run(): ResponseCode=" + responseCode
+									+ " for url=" + connectionUrl);
+						}
+						if (responseCode == HttpURLConnection.HTTP_OK) {
+							if (linfo) {
+								logger.info("run(): FROM-HTTP: "
+										+ connectionUrl);
+							}
+							if (this.mayBeCached(hconnection)) {
+								isCacheable = true;
+							} else {
+								if (linfo) {
+									logger.info("run(): NOT CACHEABLE: "
+											+ connectionUrl);
+								}
+								if (cacheInfo != null) {
+									cacheInfo.delete();
+								}
+							}
+							responseIn = connection.getInputStream();
+							rinfo.setConnection(connection, responseIn);
+						} else if (responseCode == HttpURLConnection.HTTP_NOT_MODIFIED) {
+							if (cacheInfo == null) {
+								throw new IllegalStateException(
+										"Cache info missing but it is necessary to process response code "
+												+ responseCode + ".");
+							}
+							if (linfo) {
+								logger.info("run(): FROM-VALIDATION: "
+										+ connectionUrl);
+							}
+							// Disconnect the HTTP connection.
+							hconnection.disconnect();
+							isContentCached = true;
+							// Even though the response is actually from the
+							// cache,
+							// we need to cache it again, if only to update the
+							// request time (used to calculate default
+							// expiration).
+							isCacheable = true;
+							connection = cacheInfo.getURLConnection();
+							responseIn = connection.getInputStream();
+							rinfo.setConnection(connection, responseIn);
+						} else if (responseCode == HttpURLConnection.HTTP_MOVED_PERM
+								|| responseCode == HttpURLConnection.HTTP_MOVED_TEMP
+								|| responseCode == HttpURLConnection.HTTP_SEE_OTHER) {
+							if (linfo) {
+								logger.info("run(): REDIRECTING: ResponseCode="
+										+ responseCode + " for url=" + url);
+							}
+							RequestHandler newHandler = new RedirectRequestHandler(
+									rhandler, hconnection);
+							Thread.yield();
+							if (recursionLevel > 5) {
+								throw new ClientletException(
+										"Exceeded redirect recursion limit.");
+							}
+							this.processHandler(newHandler, recursionLevel + 1,
+									trackRequestInfo);
+							return;
+						}
+
+					} else if (connection instanceof HttpURLConnection
+							&& !isContentCached) {
+
 						HttpURLConnection hconnection = (HttpURLConnection) connection;
 						hconnection.setInstanceFollowRedirects(false);
 						int responseCode = hconnection.getResponseCode();
@@ -1212,24 +1340,26 @@ public final class RequestEngine {
 	 * The Class RequestInfo.
 	 */
 	private static class RequestInfo {
-		
+
 		/** The request handler. */
 		private final RequestHandler requestHandler;
 
 		/** The is aborted. */
 		private volatile boolean isAborted = false;
-		
+
 		/** The input stream. */
 		private volatile InputStream inputStream;
-		
+
 		/** The connection. */
 		private volatile URLConnection connection;
 
 		/**
 		 * Instantiates a new request info.
 		 *
-		 * @param connection the connection
-		 * @param rhandler the rhandler
+		 * @param connection
+		 *            the connection
+		 * @param rhandler
+		 *            the rhandler
 		 */
 		RequestInfo(URLConnection connection, RequestHandler rhandler) {
 			this.connection = connection;
@@ -1275,8 +1405,10 @@ public final class RequestEngine {
 		/**
 		 * Sets the connection.
 		 *
-		 * @param connection the connection
-		 * @param in the in
+		 * @param connection
+		 *            the connection
+		 * @param in
+		 *            the in
 		 */
 		void setConnection(URLConnection connection, InputStream in) {
 			this.connection = connection;
@@ -1288,7 +1420,7 @@ public final class RequestEngine {
 	 * The Class RequestHandlerTask.
 	 */
 	private class RequestHandlerTask implements SimpleThreadPoolTask {
-		
+
 		/** The handler. */
 		private final RequestHandler handler;
 
@@ -1298,8 +1430,10 @@ public final class RequestEngine {
 		/**
 		 * Instantiates a new request handler task.
 		 *
-		 * @param handler the handler
-		 * @param accessContext the access context
+		 * @param handler
+		 *            the handler
+		 * @param accessContext
+		 *            the access context
 		 */
 		private RequestHandlerTask(RequestHandler handler,
 				AccessControlContext accessContext) {
@@ -1310,14 +1444,16 @@ public final class RequestEngine {
 		/**
 		 * Instantiates a new request handler task.
 		 *
-		 * @param handler the handler
+		 * @param handler
+		 *            the handler
 		 */
 		private RequestHandlerTask(RequestHandler handler) {
 			this.handler = handler;
 			this.accessContext = null;
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
 		 * @see java.lang.Runnable#run()
 		 */
 		public void run() {
@@ -1338,21 +1474,24 @@ public final class RequestEngine {
 			}
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
 		 * @see org.lobobrowser.util.SimpleThreadPoolTask#cancel()
 		 */
 		public void cancel() {
 			cancelRequestIfRunning(this.handler);
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */
 		public int hashCode() {
 			return this.handler.hashCode();
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
 		public boolean equals(Object other) {
@@ -1361,7 +1500,8 @@ public final class RequestEngine {
 							.equals(this.handler);
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
 		public String toString() {
@@ -1373,7 +1513,8 @@ public final class RequestEngine {
 	/**
 	 * Checks if is file.
 	 *
-	 * @param url the url
+	 * @param url
+	 *            the url
 	 * @return true, if is file
 	 */
 	public boolean isFile(String url) {

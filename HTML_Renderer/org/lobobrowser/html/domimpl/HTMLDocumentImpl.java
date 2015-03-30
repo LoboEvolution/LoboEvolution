@@ -98,6 +98,7 @@ import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLHeadElement;
 import org.lobobrowser.html.w3c.events.DocumentEvent;
 import org.lobobrowser.html.w3c.events.Event;
+import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.util.Domains;
 import org.lobobrowser.util.JavascriptCommon;
 import org.lobobrowser.util.Urls;
@@ -1325,8 +1326,6 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				if (sm == null) {
 					try {
 						httpRequest.open("GET", url, true);
-						httpRequest.trustAllCerts();
-						httpRequest.trustAllHosts();
 						httpRequest.send(null);
 					} catch (IOException thrown) {
 						logger.log(Level.WARNING, "loadImage()", thrown);
@@ -1339,8 +1338,6 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 									// items from elsewhere.
 									try {
 										httpRequest.open("GET", url, true);
-										httpRequest.trustAllCerts();
-										httpRequest.trustAllHosts();
 										httpRequest.send(null);
 									} catch (IOException thrown) {
 										logger.log(Level.WARNING,
@@ -1797,6 +1794,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 
 		String result = "";
 		try {
+			SSLCertificate.setCertificate();
 			URL docURL = new URL(documentURI);
 			URLConnection connection = docURL.openConnection();
 			result = connection.getHeaderField("Last-Modified");
