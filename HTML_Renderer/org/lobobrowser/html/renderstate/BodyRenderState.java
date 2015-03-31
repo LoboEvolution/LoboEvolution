@@ -21,6 +21,8 @@
 package org.lobobrowser.html.renderstate;
 
 import java.awt.Color;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
@@ -69,12 +71,20 @@ public class BodyRenderState extends StyleSheetRenderState {
 		binfo = super.getBackgroundInfo();
 		if (binfo == null || binfo.backgroundColor == null) {
 			String bgcolor = this.element.getAttribute(HtmlAttributeProperties.BGCOLOR);
+			String background = this.element.getAttribute(HtmlAttributeProperties.BACKGROUND);
+
 			if (bgcolor != null && bgcolor.length() != 0) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}
-				binfo.backgroundColor = ColorFactory.getInstance().getColor(
-						bgcolor);
+				binfo.backgroundColor = ColorFactory.getInstance().getColor(bgcolor);
+			}
+			
+			if (background != null && background.length() != 0) {
+				if (binfo == null) {
+					binfo = new BackgroundInfo();
+				}
+				binfo.backgroundImage = this.document.getFullURL(background);
 			}
 		}
 		this.iBackgroundInfo = binfo;
