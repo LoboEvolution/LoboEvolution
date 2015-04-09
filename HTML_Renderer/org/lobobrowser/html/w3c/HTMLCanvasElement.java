@@ -1,60 +1,78 @@
+/*
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either verion 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
+ */
 package org.lobobrowser.html.w3c;
-
 
 /**
  * The Interface HTMLCanvasElement.
  */
 public interface HTMLCanvasElement extends HTMLElement {
-	
-	/**
-	 * Gets the width.
-	 *
-	 * @return the width
-	 */
-	public int getWidth();
 
-	/**
-	 * Sets the width.
-	 *
-	 * @param width the new width
-	 */
-	public void setWidth(int width);
+    /**
+     * Gets the width.
+     *
+     * @return the width
+     */
+    int getWidth();
 
-	/**
-	 * Gets the height.
-	 *
-	 * @return the height
-	 */
-	public int getHeight();
+    /**
+     * Sets the width.
+     *
+     * @param width
+     *            the new width
+     */
+    void setWidth(int width);
 
-	/**
-	 * Sets the height.
-	 *
-	 * @param height the new height
-	 */
-	public void setHeight(int height);
+    /**
+     * Gets the height.
+     *
+     * @return the height
+     */
+    int getHeight();
 
-	/**
-	 * To data url.
-	 *
-	 * @return the string
-	 */
-	public String toDataURL();
+    /**
+     * Sets the height.
+     *
+     * @param height
+     *            the new height
+     */
+    void setHeight(int height);
 
-	/**
-	 * To data url.
-	 *
-	 * @param type the type
-	 * @param args the args
-	 * @return the string
-	 */
-	public String toDataURL(String type, Object... args);
+    /**
+     * To data url.
+     *
+     * @return the string
+     */
+    String toDataURL();
 
-	/**
-	 * Gets the context.
-	 *
-	 * @param contextId the context id
-	 * @return the context
-	 */
-	public Object getContext(String contextId);
+    /**
+     * To data url.
+     *
+     * @param type
+     *            the type
+     * @param args
+     *            the args
+     * @return the string
+     */
+    String toDataURL(String type, Object... args);
+
+    /**
+     * Gets the context.
+     *
+     * @param contextId
+     *            the context id
+     * @return the context
+     */
+    CanvasRenderingContext getContext(String contextId);
 }
