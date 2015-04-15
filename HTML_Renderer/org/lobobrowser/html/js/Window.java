@@ -66,7 +66,6 @@ import org.w3c.dom.css.CSS2Properties;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Window.
  */
@@ -152,14 +151,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
     /** The onchange. */
     private Function onchange;
 
-    /** The onclick. */
-    private Function onclick;
-
     /** The oncontextmenu. */
     private Function oncontextmenu;
-
-    /** The ondblclick. */
-    private Function ondblclick;
 
     /** The ondrag. */
     private Function ondrag;
@@ -212,15 +205,6 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
     /** The oninvalid. */
     private Function oninvalid;
 
-    /** The onkeydown. */
-    private Function onkeydown;
-
-    /** The onkeypress. */
-    private Function onkeypress;
-
-    /** The onkeyup. */
-    private Function onkeyup;
-
     /** The onloadeddata. */
     private Function onloadeddata;
 
@@ -233,9 +217,6 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
     /** The onmessage. */
     private Function onmessage;
 
-    /** The onmousedown. */
-    private Function onmousedown;
-
     /** The onmousemove. */
     private Function onmousemove;
 
@@ -244,9 +225,6 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 
     /** The onmouseover. */
     private Function onmouseover;
-
-    /** The onmouseup. */
-    private Function onmouseup;
 
     /** The onmousewheel. */
     private Function onmousewheel;
@@ -1655,8 +1633,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      * @param function
      *            the function
      */
-    public void addEventListener(String script, String function) {
-        // TODO Auto-generated method stub
+    public void addEventListener(String script, Function function) {
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            ((HTMLDocumentImpl) doc).addEventListener(script, function);
+        }
+    }
+    
+    public void removeEventListener(String script, Function function) {
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            ((HTMLDocumentImpl) doc).removeEventListener(script, function);
+        }
     }
 
     /**
@@ -2031,7 +2019,13 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      * @return the onclick
      */
     public Function getOnclick() {
-        return onclick;
+
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            return ((HTMLDocumentImpl) doc).getOnclick();
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -2039,7 +2033,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      *            the onclick to set
      */
     public void setOnclick(Function onclick) {
-        this.onclick = onclick;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            ((HTMLDocumentImpl) doc).setOnclick(onclick);
+
+        }
     }
 
     /**
@@ -2061,7 +2059,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      * @return the ondblclick
      */
     public Function getOndblclick() {
-        return ondblclick;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            return ((HTMLDocumentImpl) doc).getOndblclick();
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -2069,7 +2072,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      *            the ondblclick to set
      */
     public void setOndblclick(Function ondblclick) {
-        this.ondblclick = ondblclick;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            ((HTMLDocumentImpl) doc).setOndblclick(ondblclick);
+
+        }
     }
 
     /**
@@ -2331,7 +2338,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      * @return the onkeydown
      */
     public Function getOnkeydown() {
-        return onkeydown;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            return ((HTMLDocumentImpl) doc).getOnkeydown();
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -2339,14 +2351,22 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      *            the onkeydown to set
      */
     public void setOnkeydown(Function onkeydown) {
-        this.onkeydown = onkeydown;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            ((HTMLDocumentImpl) doc).setOnkeydown(onkeydown);
+        }
     }
 
     /**
      * @return the onkeypress
      */
     public Function getOnkeypress() {
-        return onkeypress;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            return ((HTMLDocumentImpl) doc).getOnkeypress();
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -2354,14 +2374,22 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      *            the onkeypress to set
      */
     public void setOnkeypress(Function onkeypress) {
-        this.onkeypress = onkeypress;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            ((HTMLDocumentImpl) doc).setOnkeypress(onkeypress);
+        }
     }
 
     /**
      * @return the onkeyup
      */
     public Function getOnkeyup() {
-        return onkeyup;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            return ((HTMLDocumentImpl) doc).getOnkeyup();
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -2369,7 +2397,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      *            the onkeyup to set
      */
     public void setOnkeyup(Function onkeyup) {
-        this.onkeyup = onkeyup;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            ((HTMLDocumentImpl) doc).setOnkeyup(onkeyup);
+        }
     }
 
     /**
@@ -2436,7 +2467,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      * @return the onmousedown
      */
     public Function getOnmousedown() {
-        return onmousedown;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            return ((HTMLDocumentImpl) doc).getOnmousedown();
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -2444,7 +2480,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      *            the onmousedown to set
      */
     public void setOnmousedown(Function onmousedown) {
-        this.onmousedown = onmousedown;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            ((HTMLDocumentImpl) doc).setOnmousedown(onmousedown);
+        }
     }
 
     /**
@@ -2481,7 +2520,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      * @return the onmouseover
      */
     public Function getOnmouseover() {
-        return onmouseover;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            return ((HTMLDocumentImpl) doc).getOnmouseover();
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -2489,14 +2533,22 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      *            the onmouseover to set
      */
     public void setOnmouseover(Function onmouseover) {
-        this.onmouseover = onmouseover;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            ((HTMLDocumentImpl) doc).setOnmouseover(onmouseover);
+        }
     }
 
     /**
      * @return the onmouseup
      */
     public Function getOnmouseup() {
-        return onmouseup;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            return ((HTMLDocumentImpl) doc).getOnmouseup();
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -2504,7 +2556,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      *            the onmouseup to set
      */
     public void setOnmouseup(Function onmouseup) {
-        this.onmouseup = onmouseup;
+        Document doc = this.document;
+        if (doc instanceof HTMLDocumentImpl) {
+            ((HTMLDocumentImpl) doc).setOnmouseup(onmouseup);
+        }
     }
 
     /**
