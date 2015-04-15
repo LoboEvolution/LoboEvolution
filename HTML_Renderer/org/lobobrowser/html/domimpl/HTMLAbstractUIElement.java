@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
+import org.lobobrowser.html.HtmlJsAttributeProperties;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.js.Executor;
@@ -186,7 +187,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onafterprint
      */
     public Function getOnafterprint() {
-        return this.getEventFunction(onafterprint, "onafterprint");
+        return this.getEventFunction(onafterprint,
+                HtmlJsAttributeProperties.ONAFTERPRINT);
     }
 
     /**
@@ -205,7 +207,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onbeforeprint
      */
     public Function getOnbeforeprint() {
-        return this.getEventFunction(onbeforeprint, "onbeforeprint");
+        return this.getEventFunction(onbeforeprint,
+                HtmlJsAttributeProperties.ONBEFOREPRINT);
     }
 
     /**
@@ -224,7 +227,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onbeforeunload
      */
     public Function getOnbeforeunload() {
-        return this.getEventFunction(onbeforeunload, "onbeforeunload");
+        return this.getEventFunction(onbeforeunload,
+                HtmlJsAttributeProperties.ONBEFOREUNLOAD);
     }
 
     /**
@@ -243,7 +247,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onerror
      */
     public Function getOnerror() {
-        return this.getEventFunction(onerror, "onerror");
+        return this
+                .getEventFunction(onerror, HtmlJsAttributeProperties.ONERROR);
     }
 
     /**
@@ -262,7 +267,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onhashchange
      */
     public Function getOnhashchange() {
-        return this.getEventFunction(onhashchange, "onhashchange");
+        return this.getEventFunction(onhashchange,
+                HtmlJsAttributeProperties.ONHASHCHANGE);
     }
 
     /**
@@ -281,7 +287,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onmessage
      */
     public Function getOnmessage() {
-        return this.getEventFunction(onmessage, "onmessage");
+        return this.getEventFunction(onmessage,
+                HtmlJsAttributeProperties.ONMESSAGE);
     }
 
     /**
@@ -300,7 +307,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onoffline
      */
     public Function getOnoffline() {
-        return this.getEventFunction(onoffline, "onoffline");
+        return this.getEventFunction(onoffline,
+                HtmlJsAttributeProperties.ONOFFLINE);
     }
 
     /**
@@ -319,7 +327,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the ononline
      */
     public Function getOnonline() {
-        return this.getEventFunction(ononline, "ononline");
+        return this.getEventFunction(ononline,
+                HtmlJsAttributeProperties.ONONLINE);
     }
 
     /**
@@ -338,7 +347,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onpopstate
      */
     public Function getOnpopstate() {
-        return this.getEventFunction(onpopstate, "onpopstate");
+        return this.getEventFunction(onpopstate,
+                HtmlJsAttributeProperties.ONPOPSTATE);
     }
 
     /**
@@ -357,7 +367,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onpagehide
      */
     public Function getOnpagehide() {
-        return this.getEventFunction(onpagehide, "onpagehide");
+        return this.getEventFunction(onpagehide,
+                HtmlJsAttributeProperties.ONPAGEHIDE);
     }
 
     /**
@@ -376,7 +387,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onpageshow
      */
     public Function getOnpageshow() {
-        return this.getEventFunction(onpageshow, "onpageshow");
+        return this.getEventFunction(onpageshow,
+                HtmlJsAttributeProperties.ONPAGESHOW);
     }
 
     /**
@@ -395,7 +407,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onredo
      */
     public Function getOnredo() {
-        return this.getEventFunction(onredo, "onredo");
+        return this.getEventFunction(onredo, HtmlJsAttributeProperties.ONREDO);
     }
 
     /**
@@ -414,7 +426,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onresize
      */
     public Function getOnresize() {
-        return this.getEventFunction(onresize, "onresize");
+        return this.getEventFunction(onresize,
+                HtmlJsAttributeProperties.ONRESIZE);
     }
 
     /**
@@ -433,7 +446,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onstorage
      */
     public Function getOnstorage() {
-        return this.getEventFunction(onstorage, "onstorage");
+        return this.getEventFunction(onstorage,
+                HtmlJsAttributeProperties.ONSTORAGE);
     }
 
     /**
@@ -452,7 +466,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onundo
      */
     public Function getOnundo() {
-        return this.getEventFunction(onundo, "onundo");
+        return this.getEventFunction(onundo, HtmlJsAttributeProperties.ONUNDO);
     }
 
     /**
@@ -471,7 +485,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onunload
      */
     public Function getOnunload() {
-        return this.getEventFunction(onunload, "onunload");
+        return this.getEventFunction(onunload,
+                HtmlJsAttributeProperties.ONUNLOAD);
     }
 
     /**
@@ -500,7 +515,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onfinish
      */
     public Function getOnfinish() {
-        return this.getEventFunction(onfinish, "onfinish");
+        return this
+                .getEventFunction(onfinish, HtmlJsAttributeProperties.FINISH);
     }
 
     /**
@@ -519,7 +535,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onstart
      */
     public Function getOnstart() {
-        return this.getEventFunction(onstart, "onstart");
+        return this.getEventFunction(onstart, HtmlJsAttributeProperties.START);
     }
 
     /**
@@ -538,7 +554,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onbounce
      */
     public Function getOnbounce() {
-        return this.getEventFunction(onbounce, "onbounce");
+        return this
+                .getEventFunction(onbounce, HtmlJsAttributeProperties.BOUNCE);
     }
 
     /**
@@ -557,7 +574,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onblur
      */
     public Function getOnblur() {
-        return this.getEventFunction(onblur, "onblur");
+        return this.getEventFunction(onblur, HtmlJsAttributeProperties.BLUR);
     }
 
     /**
@@ -576,7 +593,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onclick
      */
     public Function getOnclick() {
-        return this.getEventFunction(onclick, "onclick");
+        return this.getEventFunction(onclick, HtmlJsAttributeProperties.CLICK);
     }
 
     /**
@@ -595,7 +612,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the ondblclick
      */
     public Function getOndblclick() {
-        return this.getEventFunction(ondblclick, "ondblclick");
+        return this.getEventFunction(ondblclick,
+                HtmlJsAttributeProperties.DBLCLICK);
     }
 
     /**
@@ -614,7 +632,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onfocus
      */
     public Function getOnfocus() {
-        return this.getEventFunction(onfocus, "onfocus");
+        return this.getEventFunction(onfocus, HtmlJsAttributeProperties.FOCUS);
     }
 
     /**
@@ -633,8 +651,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onkeydown
      */
     public Function getOnkeydown() {
-        System.out.println("1");
-        return this.getEventFunction(onkeydown, "onkeydown");
+        return this.getEventFunction(onkeydown,
+                HtmlJsAttributeProperties.KEYDOWN);
     }
 
     /**
@@ -644,7 +662,6 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      *            the new onkeydown
      */
     public void setOnkeydown(Function onkeydown) {
-        System.out.println("2");
         this.onkeydown = onkeydown;
     }
 
@@ -654,7 +671,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onkeypress
      */
     public Function getOnkeypress() {
-        return this.getEventFunction(onkeypress, "onkeypress");
+        return this.getEventFunction(onkeypress,
+                HtmlJsAttributeProperties.KEYPRESS);
     }
 
     /**
@@ -673,7 +691,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onkeyup
      */
     public Function getOnkeyup() {
-        return this.getEventFunction(onkeyup, "onkeyup");
+        return this.getEventFunction(onkeyup, HtmlJsAttributeProperties.KEYUP);
     }
 
     /**
@@ -692,7 +710,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onmousedown
      */
     public Function getOnmousedown() {
-        return this.getEventFunction(onmousedown, "onmousedown");
+        return this.getEventFunction(onmousedown,
+                HtmlJsAttributeProperties.MOUSEDOWN);
     }
 
     /**
@@ -711,7 +730,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onmousemove
      */
     public Function getOnmousemove() {
-        return this.getEventFunction(onmousemove, "onmousemove");
+        return this.getEventFunction(onmousemove,
+                HtmlJsAttributeProperties.MOUSEMOVE);
     }
 
     /**
@@ -730,7 +750,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onmouseout
      */
     public Function getOnmouseout() {
-        return this.getEventFunction(onmouseout, "onmouseout");
+        return this.getEventFunction(onmouseout,
+                HtmlJsAttributeProperties.MOUSEOUT);
     }
 
     /**
@@ -749,7 +770,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onmouseover
      */
     public Function getOnmouseover() {
-        return this.getEventFunction(onmouseover, "onmouseover");
+        return this.getEventFunction(onmouseover,
+                HtmlJsAttributeProperties.MOUSEOVER);
     }
 
     /**
@@ -768,7 +790,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onmouseup
      */
     public Function getOnmouseup() {
-        return this.getEventFunction(onmouseup, "onmouseup");
+        return this.getEventFunction(onmouseup,
+                HtmlJsAttributeProperties.MOUSEUP);
     }
 
     /**
@@ -787,7 +810,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the oncontextmenu
      */
     public Function getOncontextmenu() {
-        return this.getEventFunction(oncontextmenu, "oncontextmenu");
+        return this.getEventFunction(oncontextmenu,
+                HtmlJsAttributeProperties.CTEXTMENU);
     }
 
     /**
@@ -806,7 +830,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onabort
      */
     public Function getOnabort() {
-        return this.getEventFunction(onabort, "onabort");
+        return this.getEventFunction(onabort, HtmlJsAttributeProperties.ABORT);
     }
 
     /**
@@ -825,7 +849,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onplay
      */
     public Function getOnplay() {
-        return this.getEventFunction(onplay, "onplay");
+        return this.getEventFunction(onplay, HtmlJsAttributeProperties.PLAY);
     }
 
     /**
@@ -844,7 +868,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onplaying
      */
     public Function getOnplaying() {
-        return this.getEventFunction(onplaying, "onplaying");
+        return this.getEventFunction(onplaying,
+                HtmlJsAttributeProperties.PLAYING);
     }
 
     /**
@@ -863,7 +888,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onprogress
      */
     public Function getOnprogress() {
-        return this.getEventFunction(onprogress, "onprogress");
+        return this.getEventFunction(onprogress,
+                HtmlJsAttributeProperties.PROGRESS);
     }
 
     /**
@@ -882,7 +908,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onratechange
      */
     public Function getOnratechange() {
-        return this.getEventFunction(onprogress, "onprogress");
+        return this.getEventFunction(onprogress,
+                HtmlJsAttributeProperties.PROGRESS);
     }
 
     /**
@@ -900,7 +927,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onreadystatechange
      */
     public Function getOnreadystatechange() {
-        return this.getEventFunction(onreadystatechange, "onreadystatechange");
+        return this.getEventFunction(onreadystatechange,
+                HtmlJsAttributeProperties.READYSTATECHANGE);
     }
 
     /**
@@ -919,7 +947,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onscroll
      */
     public Function getOnscroll() {
-        return this.getEventFunction(onscroll, "onscroll");
+        return this
+                .getEventFunction(onscroll, HtmlJsAttributeProperties.SCROLL);
     }
 
     /**
@@ -938,7 +967,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onseeked
      */
     public Function getOnseeked() {
-        return this.getEventFunction(onseeked, "onseeked");
+        return this
+                .getEventFunction(onseeked, HtmlJsAttributeProperties.SEEKED);
     }
 
     /**
@@ -957,7 +987,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onseeking
      */
     public Function getOnseeking() {
-        return this.getEventFunction(onseeking, "onseeking");
+        return this.getEventFunction(onseeking,
+                HtmlJsAttributeProperties.SEEKING);
     }
 
     /**
@@ -976,7 +1007,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onselect
      */
     public Function getOnselect() {
-        return this.getEventFunction(onselect, "onselect");
+        return this
+                .getEventFunction(onselect, HtmlJsAttributeProperties.SELECT);
     }
 
     /**
@@ -995,7 +1027,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onshow
      */
     public Function getOnshow() {
-        return this.getEventFunction(onshow, "onshow");
+        return this.getEventFunction(onshow, HtmlJsAttributeProperties.SHOW);
     }
 
     /**
@@ -1014,7 +1046,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onstalled
      */
     public Function getOnstalled() {
-        return this.getEventFunction(onstalled, "onstalled");
+        return this.getEventFunction(onstalled,
+                HtmlJsAttributeProperties.STALLED);
     }
 
     /**
@@ -1033,7 +1066,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onsubmit
      */
     public Function getOnsubmit() {
-        return this.getEventFunction(onsubmit, "onsubmit");
+        return this
+                .getEventFunction(onsubmit, HtmlJsAttributeProperties.SUBMIT);
     }
 
     /**
@@ -1052,7 +1086,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onsuspend
      */
     public Function getOnsuspend() {
-        return this.getEventFunction(onsuspend, "onsuspend");
+        return this.getEventFunction(onsuspend,
+                HtmlJsAttributeProperties.SUSPEND);
     }
 
     /**
@@ -1071,7 +1106,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the ontimeupdate
      */
     public Function getOntimeupdate() {
-        return this.getEventFunction(ontimeupdate, "ontimeupdate");
+        return this.getEventFunction(ontimeupdate,
+                HtmlJsAttributeProperties.TIMEUPDATE);
     }
 
     /**
@@ -1090,7 +1126,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onvolumechange
      */
     public Function getOnvolumechange() {
-        return this.getEventFunction(onvolumechange, "onvolumechange");
+        return this.getEventFunction(onvolumechange,
+                HtmlJsAttributeProperties.VOLUMECHANGE);
     }
 
     /**
@@ -1109,7 +1146,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onwaiting
      */
     public Function getOnwaiting() {
-        return this.getEventFunction(onwaiting, "onwaiting");
+        return this.getEventFunction(onwaiting,
+                HtmlJsAttributeProperties.WAITING);
     }
 
     /**
@@ -1128,7 +1166,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
      * @return the onload
      */
     public Function getOnload() {
-        return this.getEventFunction(onload, "onload");
+        return this.getEventFunction(onload, HtmlJsAttributeProperties.LOAD);
     }
 
     /**
@@ -1159,6 +1197,95 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 
     /** The function by attribute. */
     private Map<String, Function> functionByAttribute = null;
+
+    /*
+ * public void addEventListener(String script, String function) {
+ * HtmlJsAttributeProperties ut = new HtmlJsAttributeProperties();
+ * HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document; if (getId() == null)
+ * { NodeList elements = doc.getElementsByTagName(getTagName()); String rpl =
+ * function.replace("\n", ""); for (int i = 0; i < elements.getLength(); i++) {
+ * Element el = (Element) elements.item(i);
+ * el.setAttribute(ut.mapFunction(script), rpl); } } else { Element element =
+ * doc.getElementById(getId()); String[] split = function.split("\\{"); function
+ * = split[1].replace("}", "").trim();
+ * element.setAttribute(ut.mapFunction(script), function);
+ * doc.setElementById(getId(), element); } } public void
+ * removeEventListener(String script, String function) {
+ * HtmlJsAttributeProperties ut = new HtmlJsAttributeProperties();
+ * HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document; Element element =
+ * doc.getElementById(getId()); element.removeAttribute(ut.mapFunction(script));
+ * doc.setElementById(getId(), element); }
+ */
+
+    public void addEventListener(String script, Function function) {
+
+        String key = script.toLowerCase();
+
+        switch (key) {
+        case HtmlJsAttributeProperties.CLICK:
+            setOnclick(function);
+            break;
+        case HtmlJsAttributeProperties.DBLCLICK:
+            setOndblclick(function);
+            break;
+        case HtmlJsAttributeProperties.MOUSEUP:
+            setOnmouseup(function);
+            break;
+        case HtmlJsAttributeProperties.MOUSEDOWN:
+            setOnmousedown(function);
+            break;
+        case HtmlJsAttributeProperties.KEYPRESS:
+            setOnkeypress(function);
+            break;
+        case HtmlJsAttributeProperties.KEYUP:
+            setOnkeyup(function);
+            break;
+        case HtmlJsAttributeProperties.KEYDOWN:
+            setOnkeydown(function);
+            break;
+        case HtmlJsAttributeProperties.LOAD:
+            setOnload(function);
+            break;
+
+        default:
+            break;
+        }
+
+    }
+
+    public void removeEventListener(String script, Function function) {
+        String key = script.toLowerCase();
+
+        switch (key) {
+        case HtmlJsAttributeProperties.CLICK:
+            setOnclick(null);
+            break;
+        case HtmlJsAttributeProperties.DBLCLICK:
+            setOndblclick(null);
+            break;
+        case HtmlJsAttributeProperties.MOUSEUP:
+            setOnmouseup(null);
+            break;
+        case HtmlJsAttributeProperties.MOUSEDOWN:
+            setOnmousedown(null);
+            break;
+        case HtmlJsAttributeProperties.KEYPRESS:
+            setOnkeypress(null);
+            break;
+        case HtmlJsAttributeProperties.KEYUP:
+            setOnkeyup(null);
+            break;
+        case HtmlJsAttributeProperties.KEYDOWN:
+            setOnkeydown(null);
+            break;
+        case HtmlJsAttributeProperties.LOAD:
+            setOnload(null);
+            break;
+
+        default:
+            break;
+        }
+    }
 
     /**
      * Gets the event function.
