@@ -41,6 +41,7 @@ import java.util.logging.Logger;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlCommandMapping;
 import org.lobobrowser.html.HtmlEventProperties;
+import org.lobobrowser.html.HtmlJsAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.HttpRequest;
@@ -95,7 +96,6 @@ import org.lobobrowser.html.w3c.events.DocumentEvent;
 import org.lobobrowser.html.w3c.events.Event;
 import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.util.Domains;
-import org.lobobrowser.util.JavascriptCommon;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.WeakValueHashMap;
 import org.lobobrowser.util.io.EmptyReader;
@@ -277,8 +277,15 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /** The onunload. */
     private Function onunload;
+    
+    /** The onmouseout. */
+    private Function onmouseout;
 
-    /**
+    /** The onmouseover. */
+    private Function onmouseover;
+
+
+  /**
      * Instantiates a new HTML document impl.
      *
      * @param rcontext
@@ -2382,21 +2389,48 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
                 HtmlAttributeProperties.ALINK);
         attr.setAttribute(this, alinkColor);
     }
-
-    /*
- * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#addEventListener(java.lang.String,
- * java.lang.String)
- */
+    
     @Override
-    public void addEventListener(String script, String function) {
+   public void addEventListener(String script, Function function) {
 
-        JavascriptCommon ut = new JavascriptCommon();
-        ElementAttributeFilter attr = new ElementAttributeFilter(
-                ut.mapFunction(script));
-        String[] split = function.split("\\{");
-        function = split[1].replace("}", "").trim();
-        attr.setAttribute(this, function);
+        String key = script.toLowerCase();
+        
+        switch (key) {
+        case HtmlJsAttributeProperties.CLICK:
+            setOnclick(function);
+            break;
+        case HtmlJsAttributeProperties.DBLCLICK:
+            setOndblclick(function);
+            break;
+        case HtmlJsAttributeProperties.MOUSEUP:
+            setOnmouseup(function);
+            break;
+        case HtmlJsAttributeProperties.MOUSEDOWN:
+            setOnmousedown(function);
+            break;
+        case HtmlJsAttributeProperties.MOUSEOVER:
+            setOnmouseover(function);
+            break;
+        case HtmlJsAttributeProperties.MOUSEOUT:
+            setOnmouseout(function);
+            break;
+        case HtmlJsAttributeProperties.KEYPRESS:
+            setOnkeypress(function);
+            break;
+        case HtmlJsAttributeProperties.KEYUP:
+            setOnkeyup(function);
+            break;
+        case HtmlJsAttributeProperties.KEYDOWN:
+            setOnkeydown(function);
+            break;
+        case HtmlJsAttributeProperties.LOAD:
+            setOnloadHandler(function);
+            break;
+
+        default:
+            break;
+        }
+
     }
 
     /*
@@ -2406,13 +2440,44 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
  * java.lang.String)
  */
     @Override
-    public void removeEventListener(String script, String function) {
-        JavascriptCommon ut = new JavascriptCommon();
-        ElementAttributeFilter attr = new ElementAttributeFilter(
-                ut.mapFunction(script));
-        String[] split = function.split("\\{");
-        function = split[1].replace("}", "").trim();
-        attr.removeAttribute(this, function);
+    public void removeEventListener(String script, Function function) {
+       String key = script.toLowerCase();
+        
+			      switch (key) {
+        case HtmlJsAttributeProperties.CLICK:
+            setOnclick(null);
+            break;
+        case HtmlJsAttributeProperties.DBLCLICK:
+            setOndblclick(null);
+            break;
+        case HtmlJsAttributeProperties.MOUSEUP:
+            setOnmouseup(null);
+            break;
+        case HtmlJsAttributeProperties.MOUSEDOWN:
+            setOnmousedown(null);
+            break;
+        case HtmlJsAttributeProperties.MOUSEOVER:
+            setOnmouseover(null);
+            break;
+        case HtmlJsAttributeProperties.MOUSEOUT:
+            setOnmouseout(null);
+            break;
+        case HtmlJsAttributeProperties.KEYPRESS:
+            setOnkeypress(null);
+            break;
+        case HtmlJsAttributeProperties.KEYUP:
+            setOnkeyup(null);
+            break;
+        case HtmlJsAttributeProperties.KEYDOWN:
+            setOnkeydown(null);
+            break;
+        case HtmlJsAttributeProperties.LOAD:
+            setOnloadHandler(null);
+            break;
+
+        default:
+            break;
+        }
     }
 
     /**
@@ -2565,6 +2630,36 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
      */
     public void setOnkeyup(Function onkeyup) {
         this.onkeyup = onkeyup;
+    }
+
+    /**
+     * @return the onmouseout
+     */
+    public Function getOnmouseout() {
+        return onmouseout;
+    }
+
+    /**
+     * @param onmouseout
+     *            the onmouseout to set
+     */
+    public void setOnmouseout(Function onmouseout) {
+        this.onmouseout = onmouseout;
+    }
+
+    /**
+     * @return the onmouseover
+     */
+    public Function getOnmouseover() {
+        return onmouseover;
+    }
+
+    /**
+     * @param onmouseover
+     *            the onmouseover to set
+     */
+    public void setOnmouseover(Function onmouseover) {
+        this.onmouseover = onmouseover;
     }
 
 }
