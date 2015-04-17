@@ -2,9 +2,6 @@
 /* JavaCCOptions:STATIC=false,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package com.steadystate.css.parser;
 
-import java.io.IOException;
-
-
 /**
  * An implementation of interface CharStream.
  * There is no processing of escaping in this class because the escaping is
@@ -17,55 +14,28 @@ public final class CssCharStream implements CharStream
   /** Whether parser is static. */
   public static final boolean staticFlag = false;
 
-  /** The Constant BUFFER_SIZE. */
   private static final int BUFFER_SIZE = 2048;
 
-  /** The bufsize. */
   int bufsize;
-  
-  /** The available. */
   int available;
-  
-  /** The token begin. */
   int tokenBegin;
   /** Position in buffer. */
   public int bufpos = -1;
-  
-  /** The bufline. */
   private int bufline[];
-  
-  /** The bufcolumn. */
   private int bufcolumn[];
 
-  /** The column. */
   private int column = 0;
-  
-  /** The line. */
   private int line = 1;
 
-  /** The prev char is cr. */
   private boolean prevCharIsCR = false;
-  
-  /** The prev char is lf. */
   private boolean prevCharIsLF = false;
 
-  /** The input stream. */
   private java.io.Reader inputStream;
 
-  /** The buffer. */
   private char[] buffer;
-  
-  /** The max next char ind. */
   private int maxNextCharInd = 0;
-  
-  /** The in buf. */
   private int inBuf = 0;
 
-  /**
-   * Expand buff.
-   *
-   * @param wrapAround the wrap around
-   */
   private void ExpandBuff(boolean wrapAround)
   {
     char[] newbuffer = new char[bufsize + BUFFER_SIZE];
@@ -114,11 +84,6 @@ public final class CssCharStream implements CharStream
     tokenBegin = 0;
   }
 
-  /**
-   * Fill buff.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
-   */
   private final void FillBuff() throws java.io.IOException
   {
     if (maxNextCharInd == available)
@@ -163,13 +128,8 @@ public final class CssCharStream implements CharStream
     }
   }
 
-  /**
-   *  Start.
-   *
-   * @return the char
-   * @throws IOException Signals that an I/O exception has occurred.
-   */
-  public final char BeginToken() throws IOException
+  /** Start. */
+  public final char BeginToken() throws java.io.IOException
   {
     tokenBegin = -1;
     char c = readChar();
@@ -178,11 +138,6 @@ public final class CssCharStream implements CharStream
     return c;
   }
 
-  /**
-   * Update line column.
-   *
-   * @param c the c
-   */
   private final void UpdateLineColumn(char c)
   {
     column++;
@@ -223,13 +178,8 @@ public final class CssCharStream implements CharStream
     bufcolumn[bufpos] = column;
   }
 
-  /**
-   *  Read a character.
-   *
-   * @return the char
-   * @throws IOException Signals that an I/O exception has occurred.
-   */
-  public final char readChar() throws IOException
+  /** Read a character. */
+  public final char readChar() throws java.io.IOException
   {
     if (inBuf > 0)
     {
@@ -250,9 +200,6 @@ public final class CssCharStream implements CharStream
     return c;
   }
 
-  /* (non-Javadoc)
-   * @see com.steadystate.css.parser.CharStream#getColumn()
-   */
   @Deprecated
   /**
    * @deprecated
@@ -262,9 +209,6 @@ public final class CssCharStream implements CharStream
     return bufcolumn[bufpos];
   }
 
-  /* (non-Javadoc)
-   * @see com.steadystate.css.parser.CharStream#getLine()
-   */
   @Deprecated
   /**
    * @deprecated
@@ -274,61 +218,34 @@ public final class CssCharStream implements CharStream
     return bufline[bufpos];
   }
 
-  /**
-   *  Get token end column number.
-   *
-   * @return the end column
-   */
+  /** Get token end column number. */
   public final int getEndColumn() {
     return bufcolumn[bufpos];
   }
 
-  /**
-   *  Get token end line number.
-   *
-   * @return the end line
-   */
+  /** Get token end line number. */
   public final int getEndLine() {
     return bufline[bufpos];
   }
 
-  /**
-   *  Get token beginning column number.
-   *
-   * @return the begin column
-   */
+  /** Get token beginning column number. */
   public final int getBeginColumn() {
     return bufcolumn[tokenBegin];
   }
 
-  /**
-   *  Get token beginning line number.
-   *
-   * @return the begin line
-   */
+  /** Get token beginning line number. */
   public final int getBeginLine() {
     return bufline[tokenBegin];
   }
 
-  /**
-   *  Backup a number of characters.
-   *
-   * @param amount the amount
-   */
+  /** Backup a number of characters. */
   public final void backup(int amount) {
     inBuf += amount;
     if ((bufpos -= amount) < 0)
       bufpos += bufsize;
   }
 
-  /**
-   *  Constructor.
-   *
-   * @param dstream the dstream
-   * @param startline the startline
-   * @param startcolumn the startcolumn
-   * @param buffersize the buffersize
-   */
+  /** Constructor. */
   public CssCharStream(java.io.Reader dstream, int startline, int startcolumn, int buffersize)
   {
     inputStream = dstream;
@@ -341,24 +258,14 @@ public final class CssCharStream implements CharStream
     bufcolumn = new int[buffersize];
   }
 
-  /**
-   *  Constructor.
-   *
-   * @param dstream the dstream
-   * @param startline the startline
-   * @param startcolumn the startcolumn
-   */
+  /** Constructor. */
   public CssCharStream(java.io.Reader dstream, int startline,
                                                           int startcolumn)
   {
     this(dstream, startline, startcolumn, 4096);
   }
 
-  /**
-   *  Get token literal value.
-   *
-   * @return the string
-   */
+  /** Get token literal value. */
   public final String GetImage()
   {
     if (bufpos >= tokenBegin)
@@ -366,12 +273,7 @@ public final class CssCharStream implements CharStream
     return new String(buffer, tokenBegin, bufsize - tokenBegin) + new String(buffer, 0, bufpos + 1);
   }
 
-  /**
-   *  Get the suffix.
-   *
-   * @param len the len
-   * @return the char[]
-   */
+  /** Get the suffix. */
   public final char[] GetSuffix(int len)
   {
     char[] ret = new char[len];
@@ -397,9 +299,6 @@ public final class CssCharStream implements CharStream
 
   /**
    * Method to adjust line and column numbers for the start of a token.
-   *
-   * @param newLine the new line
-   * @param newCol the new col
    */
   public void adjustBeginLineColumn(int newLine, int newCol)
   {

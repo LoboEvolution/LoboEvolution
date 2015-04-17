@@ -1,22 +1,16 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    version 2 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
-
-    You should have received a copy of the GNU General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.jweb.javafx;
 
@@ -36,113 +30,118 @@ import org.lobobrowser.clientlet.ClientletContext;
 
 import com.sun.javafx.stage.StageDelegate;
 
-
 /**
  * The Class ClientletStageDelegate.
  */
 public class ClientletStageDelegate extends StageDelegate {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger
-			.getLogger(ClientletStageDelegate.class.getName());
-	
-	/** The Constant PANEL_SCENE_TYPE. */
-	private static final FXClassType PANEL_SCENE_TYPE;
-	static {
-		String helperName = "com.sun.javafx.scene.JSGPanelSceneImpl";
-		FXClassType type = FXContext.getInstance().findClass(helperName);
-		PANEL_SCENE_TYPE = type;
-	}
 
-	/**
-	 * Instantiates a new clientlet stage delegate.
-	 *
-	 * @param context the context
-	 */
-	public ClientletStageDelegate(ClientletContext context) {
-	}
+    /** The Constant logger. */
+    private static final Logger logger = Logger
+            .getLogger(ClientletStageDelegate.class.getName());
 
-	/**
-	 * Creates the component.
-	 *
-	 * @return the component
-	 */
-	public Component createComponent() {
-		FXClassType stageDelegateType = FXContext.getInstance().findClass(
-				this.getClass().getName());
-		FXObjectValue thisValue = FXLocal.getContext().mirrorOf(this);
-		FXValue stageValue = stageDelegateType.getVariable("stage").getValue(
-				thisValue);
-		if (stageValue == null) {
-			throw new IllegalStateException("Delegate has no stage!");
-		}
-		FXClassType stageType = FXContext.getInstance().findClass(
-				Stage.class.getName());
-		FXValue sceneValue = stageType.getVariable("scene").getValue(
-				(FXObjectValue) stageValue);
-		if (sceneValue == null) {
-			throw new IllegalStateException("Stage has no scene.");
-		}
-		return getSceneComponent(sceneValue);
-	}
+    /** The Constant PANEL_SCENE_TYPE. */
+    private static final FXClassType PANEL_SCENE_TYPE;
+    static {
+        String helperName = "com.sun.javafx.scene.JSGPanelSceneImpl";
+        FXClassType type = FXContext.getInstance().findClass(helperName);
+        PANEL_SCENE_TYPE = type;
+    }
 
-	/**
-	 * Gets the scene component.
-	 *
-	 * @param scene the scene
-	 * @return the scene component
-	 */
-	public static java.awt.Component getSceneComponent(Scene scene) {
-		return getSceneComponent(FXLocal.getContext().mirrorOf(scene));
-	}
+    /**
+     * Instantiates a new clientlet stage delegate.
+     *
+     * @param context
+     *            the context
+     */
+    public ClientletStageDelegate(ClientletContext context) {
+    }
 
-	/**
-	 * Gets the scene component.
-	 *
-	 * @param sceneMirror the scene mirror
-	 * @return the scene component
-	 */
-	public static java.awt.Component getSceneComponent(FXValue sceneMirror) {
-		FXClassType type = PANEL_SCENE_TYPE;
-		if (type == null) {
-			throw new IllegalStateException("JSGPanelSceneImpl type not set.");
-		}
-		FXObjectValue panelSceneImpl = type.allocate();
-		panelSceneImpl.initVar("scene", sceneMirror);
-		panelSceneImpl.initialize();
-		FXValue jsgPanelV = type.getVariable("jsgPanel").getValue(
-				panelSceneImpl);
-		return (java.awt.Component) ((FXLocal.ObjectValue) jsgPanelV)
-				.asObject();
-	}
+    /**
+     * Creates the component.
+     *
+     * @return the component
+     */
+    public Component createComponent() {
+        FXClassType stageDelegateType = FXContext.getInstance().findClass(
+                this.getClass().getName());
+        FXObjectValue thisValue = FXLocal.getContext().mirrorOf(this);
+        FXValue stageValue = stageDelegateType.getVariable("stage").getValue(
+                thisValue);
+        if (stageValue == null) {
+            throw new IllegalStateException("Delegate has no stage!");
+        }
+        FXClassType stageType = FXContext.getInstance().findClass(
+                Stage.class.getName());
+        FXValue sceneValue = stageType.getVariable("scene").getValue(
+                (FXObjectValue) stageValue);
+        if (sceneValue == null) {
+            throw new IllegalStateException("Stage has no scene.");
+        }
+        return getSceneComponent(sceneValue);
+    }
 
-	/* (non-Javadoc)
-	 * @see com.sun.javafx.stage.StageDelegate#close()
-	 */
-	@Override
-	public void close() {
-		if (logger.isLoggable(Level.INFO)) {
-			logger.info("close(): Ignored.");
-		}
-	}
+    /**
+     * Gets the scene component.
+     *
+     * @param scene
+     *            the scene
+     * @return the scene component
+     */
+    public static java.awt.Component getSceneComponent(Scene scene) {
+        return getSceneComponent(FXLocal.getContext().mirrorOf(scene));
+    }
 
-	/* (non-Javadoc)
-	 * @see com.sun.javafx.stage.StageDelegate#toBack()
-	 */
-	@Override
-	public void toBack() {
-		if (logger.isLoggable(Level.INFO)) {
-			logger.info("toBack(): Ignored.");
-		}
-	}
+    /**
+     * Gets the scene component.
+     *
+     * @param sceneMirror
+     *            the scene mirror
+     * @return the scene component
+     */
+    public static java.awt.Component getSceneComponent(FXValue sceneMirror) {
+        FXClassType type = PANEL_SCENE_TYPE;
+        if (type == null) {
+            throw new IllegalStateException("JSGPanelSceneImpl type not set.");
+        }
+        FXObjectValue panelSceneImpl = type.allocate();
+        panelSceneImpl.initVar("scene", sceneMirror);
+        panelSceneImpl.initialize();
+        FXValue jsgPanelV = type.getVariable("jsgPanel").getValue(
+                panelSceneImpl);
+        return (java.awt.Component) ((FXLocal.ObjectValue) jsgPanelV)
+                .asObject();
+    }
 
-	/* (non-Javadoc)
-	 * @see com.sun.javafx.stage.StageDelegate#toFront()
-	 */
-	@Override
-	public void toFront() {
-		if (logger.isLoggable(Level.INFO)) {
-			logger.info("toFront(): Ignored.");
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * @see com.sun.javafx.stage.StageDelegate#close()
+     */
+    @Override
+    public void close() {
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("close(): Ignored.");
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see com.sun.javafx.stage.StageDelegate#toBack()
+     */
+    @Override
+    public void toBack() {
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("toBack(): Ignored.");
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see com.sun.javafx.stage.StageDelegate#toFront()
+     */
+    @Override
+    public void toFront() {
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("toFront(): Ignored.");
+        }
+    }
 }

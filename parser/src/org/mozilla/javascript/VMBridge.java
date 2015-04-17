@@ -8,25 +8,15 @@
 
 package org.mozilla.javascript;
 
-import java.lang.reflect.Member;
 import java.lang.reflect.Method;
+import java.lang.reflect.Member;
 import java.util.Iterator;
 
-
-/**
- * The Class VMBridge.
- */
 public abstract class VMBridge
 {
 
-    /** The Constant instance. */
     static final VMBridge instance = makeInstance();
 
-    /**
-     * Make instance.
-     *
-     * @return the VM bridge
-     */
     private static VMBridge makeInstance()
     {
         String[] classNames = {
@@ -56,8 +46,6 @@ public abstract class VMBridge
      * {@link #setContext(Object contextHelper, Context cx)} methods.
      * In this way the implementation can use the helper to cache
      * information about current thread to make {@link Context} access faster.
-     *
-     * @return the thread context helper
      */
     protected abstract Object getThreadContextHelper();
 
@@ -67,7 +55,6 @@ public abstract class VMBridge
      *
      * @param contextHelper The result of {@link #getThreadContextHelper()}
      *                      called from the current thread.
-     * @return the context
      */
     protected abstract Context getContext(Object contextHelper);
 
@@ -77,14 +64,11 @@ public abstract class VMBridge
      *
      * @param contextHelper The result of {@link #getThreadContextHelper()}
      *                      called from the current thread.
-     * @param cx the cx
      */
     protected abstract void setContext(Object contextHelper, Context cx);
 
     /**
      * Return the ClassLoader instance associated with the current thread.
-     *
-     * @return the current thread class loader
      */
     protected abstract ClassLoader getCurrentThreadClassLoader();
 
@@ -96,7 +80,6 @@ public abstract class VMBridge
      * The implementation is responsible to catch all possible exceptions
      * like SecurityException if the workaround is not available.
      *
-     * @param accessibleObject the accessible object
      * @return true if it was possible to make method accessible
      *         or false otherwise.
      */
@@ -111,9 +94,7 @@ public abstract class VMBridge
      *         java.lang.reflect.InvocationHandler.class });
      * </pre>
      *
-     * @param cf the cf
      * @param interfaces Array with one or more interface class objects.
-     * @return the interface proxy helper
      */
     protected Object getInterfaceProxyHelper(ContextFactory cf,
                                              Class<?>[] interfaces)
@@ -131,11 +112,6 @@ public abstract class VMBridge
      *
      * @param proxyHelper The result of the previous call to
      *        {@link #getInterfaceProxyHelper(ContextFactory, Class[])}.
-     * @param cf the cf
-     * @param adapter the adapter
-     * @param target the target
-     * @param topScope the top scope
-     * @return the object
      */
     protected Object newInterfaceProxy(Object proxyHelper,
                                        ContextFactory cf,
@@ -152,9 +128,6 @@ public abstract class VMBridge
      * has variable arguments.
      * Variable argument methods have only been supported in Java since
      * JDK 1.5.
-     *
-     * @param member the member
-     * @return true, if is var args
      */
     protected abstract boolean isVarArgs(Member member);
 
@@ -162,11 +135,6 @@ public abstract class VMBridge
      * If "obj" is a java.util.Iterator or a java.lang.Iterable, return a
      * wrapping as a JavaScript Iterator. Otherwise, return null.
      * This method is in VMBridge since Iterable is a JDK 1.5 addition.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param obj the obj
-     * @return the java iterator
      */
     public Iterator<?> getJavaIterator(Context cx, Scriptable scope, Object obj) {
         if (obj instanceof Wrapper) {

@@ -6,100 +6,37 @@
 
 package org.mozilla.javascript;
 
+import org.mozilla.javascript.ast.*;  // we use basically every class
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.mozilla.javascript.ast.ArrayComprehension;
-import org.mozilla.javascript.ast.ArrayComprehensionLoop;
-import org.mozilla.javascript.ast.ArrayLiteral;
-import org.mozilla.javascript.ast.Assignment;
-import org.mozilla.javascript.ast.AstNode;
-import org.mozilla.javascript.ast.AstRoot;  // we use basically every class
-import org.mozilla.javascript.ast.Block;
-import org.mozilla.javascript.ast.BreakStatement;
-import org.mozilla.javascript.ast.CatchClause;
-import org.mozilla.javascript.ast.Comment;
-import org.mozilla.javascript.ast.ConditionalExpression;
-import org.mozilla.javascript.ast.ContinueStatement;
-import org.mozilla.javascript.ast.DestructuringForm;
-import org.mozilla.javascript.ast.DoLoop;
-import org.mozilla.javascript.ast.ElementGet;
-import org.mozilla.javascript.ast.EmptyExpression;
-import org.mozilla.javascript.ast.EmptyStatement;
-import org.mozilla.javascript.ast.ErrorNode;
-import org.mozilla.javascript.ast.ExpressionStatement;
-import org.mozilla.javascript.ast.ForInLoop;
-import org.mozilla.javascript.ast.ForLoop;
-import org.mozilla.javascript.ast.FunctionCall;
-import org.mozilla.javascript.ast.FunctionNode;
-import org.mozilla.javascript.ast.GeneratorExpression;
-import org.mozilla.javascript.ast.GeneratorExpressionLoop;
-import org.mozilla.javascript.ast.IdeErrorReporter;
-import org.mozilla.javascript.ast.IfStatement;
-import org.mozilla.javascript.ast.InfixExpression;
-import org.mozilla.javascript.ast.Jump;
-import org.mozilla.javascript.ast.KeywordLiteral;
-import org.mozilla.javascript.ast.Label;
-import org.mozilla.javascript.ast.LabeledStatement;
-import org.mozilla.javascript.ast.LetNode;
-import org.mozilla.javascript.ast.Loop;
-import org.mozilla.javascript.ast.Name;
-import org.mozilla.javascript.ast.NewExpression;
-import org.mozilla.javascript.ast.NumberLiteral;
-import org.mozilla.javascript.ast.ObjectLiteral;
-import org.mozilla.javascript.ast.ObjectProperty;
-import org.mozilla.javascript.ast.ParenthesizedExpression;
-import org.mozilla.javascript.ast.PropertyGet;
-import org.mozilla.javascript.ast.RegExpLiteral;
-import org.mozilla.javascript.ast.ReturnStatement;
-import org.mozilla.javascript.ast.Scope;
-import org.mozilla.javascript.ast.ScriptNode;
-import org.mozilla.javascript.ast.StringLiteral;
-import org.mozilla.javascript.ast.SwitchCase;
-import org.mozilla.javascript.ast.SwitchStatement;
-import org.mozilla.javascript.ast.Symbol;
-import org.mozilla.javascript.ast.ThrowStatement;
-import org.mozilla.javascript.ast.TryStatement;
-import org.mozilla.javascript.ast.UnaryExpression;
-import org.mozilla.javascript.ast.VariableDeclaration;
-import org.mozilla.javascript.ast.VariableInitializer;
-import org.mozilla.javascript.ast.WhileLoop;
-import org.mozilla.javascript.ast.WithStatement;
-import org.mozilla.javascript.ast.XmlDotQuery;
-import org.mozilla.javascript.ast.XmlElemRef;
-import org.mozilla.javascript.ast.XmlExpression;
-import org.mozilla.javascript.ast.XmlLiteral;
-import org.mozilla.javascript.ast.XmlMemberGet;
-import org.mozilla.javascript.ast.XmlPropRef;
-import org.mozilla.javascript.ast.XmlRef;
-import org.mozilla.javascript.ast.XmlString;
-import org.mozilla.javascript.ast.Yield;
-
+import java.util.HashSet;
 
 /**
  * This class implements the JavaScript parser.<p>
- * 
+ *
  * It is based on the SpiderMonkey C source files jsparse.c and jsparse.h in the
  * jsref package.<p>
- * 
+ *
  * The parser generates an {@link AstRoot} parse tree representing the source
  * code.  No tree rewriting is permitted at this stage, so that the parse tree
  * is a faithful representation of the source for frontend processing tools and
  * IDEs.<p>
- * 
+ *
  * This parser implementation is not intended to be reused after a parse
  * finishes, and will throw an IllegalStateException() if invoked again.<p>
  *
+ * @see TokenStream
+ *
  * @author Mike McCabe
  * @author Brendan Eich
- * @see TokenStream
  */
 public class Parser
 {
@@ -111,132 +48,65 @@ public class Parser
 
     // TokenInformation flags : currentFlaggedToken stores them together
     // with token type
-    /** The Constant TI_CHECK_LABEL. */
     final static int
         CLEAR_TI_MASK    = 0xFFFF,  // mask to clear token information bits
         TI_AFTER_EOL     = 1 << 16, // first token of the source line
         TI_CHECK_LABEL   = 1 << 17; // indicates to check for label
 
-    /** The compiler env. */
     CompilerEnvirons compilerEnv;
-    
-    /** The error reporter. */
     private ErrorReporter errorReporter;
-    
-    /** The error collector. */
     private IdeErrorReporter errorCollector;
-    
-    /** The source uri. */
     private String sourceURI;
-    
-    /** The source chars. */
     private char[] sourceChars;
 
-    /** The called by compile function. */
     boolean calledByCompileFunction;  // ugly - set directly by Context
-    
-    /** The parse finished. */
     private boolean parseFinished;  // set when finished to prevent reuse
 
-    /** The ts. */
     private TokenStream ts;
-    
-    /** The current flagged token. */
     private int currentFlaggedToken = Token.EOF;
-    
-    /** The current token. */
     private int currentToken;
-    
-    /** The syntax error count. */
     private int syntaxErrorCount;
 
-    /** The scanned comments. */
     private List<Comment> scannedComments;
-    
-    /** The current js doc comment. */
     private Comment currentJsDocComment;
 
-    /** The nesting of function. */
     protected int nestingOfFunction;
-    
-    /** The current label. */
     private LabeledStatement currentLabel;
-    
-    /** The in destructuring assignment. */
     private boolean inDestructuringAssignment;
-    
-    /** The in use strict directive. */
     protected boolean inUseStrictDirective;
 
     // The following are per function variables and should be saved/restored
     // during function parsing.  See PerFunctionVariables class below.
-    /** The current script or fn. */
     ScriptNode currentScriptOrFn;
-    
-    /** The current scope. */
     Scope currentScope;
-    
-    /** The end flags. */
     private int endFlags;
-    
-    /** The in for init. */
     private boolean inForInit;  // bound temporarily during forStatement()
-    
-    /** The label set. */
     private Map<String,LabeledStatement> labelSet;
-    
-    /** The loop set. */
     private List<Loop> loopSet;
-    
-    /** The loop and switch set. */
     private List<Jump> loopAndSwitchSet;
     // end of per function variables
 
     // Lacking 2-token lookahead, labels become a problem.
     // These vars store the token info of the last matched name,
     // iff it wasn't the last matched token.
-    /** The prev name token start. */
     private int prevNameTokenStart;
-    
-    /** The prev name token string. */
     private String prevNameTokenString = "";
-    
-    /** The prev name token lineno. */
     private int prevNameTokenLineno;
 
     // Exception to unwind
-    /**
-     * The Class ParserException.
-     */
     private static class ParserException extends RuntimeException
     {
-        
-        /** The Constant serialVersionUID. */
         static final long serialVersionUID = 5882582646773765630L;
     }
 
-    /**
-     * Instantiates a new parser.
-     */
     public Parser() {
         this(new CompilerEnvirons());
     }
 
-    /**
-     * Instantiates a new parser.
-     *
-     * @param compilerEnv the compiler env
-     */
     public Parser(CompilerEnvirons compilerEnv) {
         this(compilerEnv, compilerEnv.getErrorReporter());
     }
 
-    /**
-     * Instantiates a new parser.
-     *
-     * @param compilerEnv the compiler env
-     * @param errorReporter the error reporter
-     */
     public Parser(CompilerEnvirons compilerEnv, ErrorReporter errorReporter) {
         this.compilerEnv = compilerEnv;
         this.errorReporter = errorReporter;
@@ -246,12 +116,6 @@ public class Parser
     }
 
     // Add a strict warning on the last matched token.
-    /**
-     * Adds the strict warning.
-     *
-     * @param messageId the message id
-     * @param messageArg the message arg
-     */
     void addStrictWarning(String messageId, String messageArg) {
         int beg = -1, end = -1;
         if (ts != null) {
@@ -261,26 +125,12 @@ public class Parser
         addStrictWarning(messageId, messageArg, beg, end);
     }
 
-    /**
-     * Adds the strict warning.
-     *
-     * @param messageId the message id
-     * @param messageArg the message arg
-     * @param position the position
-     * @param length the length
-     */
     void addStrictWarning(String messageId, String messageArg,
                           int position, int length) {
         if (compilerEnv.isStrictMode())
             addWarning(messageId, messageArg, position, length);
     }
 
-    /**
-     * Adds the warning.
-     *
-     * @param messageId the message id
-     * @param messageArg the message arg
-     */
     void addWarning(String messageId, String messageArg) {
         int beg = -1, end = -1;
         if (ts != null) {
@@ -290,25 +140,10 @@ public class Parser
         addWarning(messageId, messageArg, beg, end);
     }
 
-    /**
-     * Adds the warning.
-     *
-     * @param messageId the message id
-     * @param position the position
-     * @param length the length
-     */
     void addWarning(String messageId, int position, int length) {
         addWarning(messageId, null, position, length);
     }
 
-    /**
-     * Adds the warning.
-     *
-     * @param messageId the message id
-     * @param messageArg the message arg
-     * @param position the position
-     * @param length the length
-     */
     void addWarning(String messageId, String messageArg,
                     int position, int length)
     {
@@ -323,45 +158,19 @@ public class Parser
         }
     }
 
-    /**
-     * Adds the error.
-     *
-     * @param messageId the message id
-     */
     void addError(String messageId) {
         addError(messageId, ts.tokenBeg, ts.tokenEnd - ts.tokenBeg);
     }
 
-    /**
-     * Adds the error.
-     *
-     * @param messageId the message id
-     * @param position the position
-     * @param length the length
-     */
     void addError(String messageId, int position, int length) {
         addError(messageId, null, position, length);
     }
 
-    /**
-     * Adds the error.
-     *
-     * @param messageId the message id
-     * @param messageArg the message arg
-     */
     void addError(String messageId, String messageArg) {
         addError(messageId, messageArg, ts.tokenBeg,
                  ts.tokenEnd - ts.tokenBeg);
     }
 
-    /**
-     * Adds the error.
-     *
-     * @param messageId the message id
-     * @param messageArg the message arg
-     * @param position the position
-     * @param length the length
-     */
     void addError(String messageId, String messageArg, int position, int length)
     {
         ++syntaxErrorCount;
@@ -380,44 +189,53 @@ public class Parser
         }
     }
 
-    /**
-     * Lookup message.
-     *
-     * @param messageId the message id
-     * @return the string
-     */
+    private void addStrictWarning(String messageId, String messageArg,
+                                  int position, int length,
+                                  int line, String lineSource, int lineOffset) {
+        if (compilerEnv.isStrictMode()) {
+            addWarning(messageId, messageArg, position, length, line, lineSource, lineOffset);
+        }
+    }
+
+    private void addWarning(String messageId, String messageArg,
+                            int position, int length,
+                            int line, String lineSource, int lineOffset) {
+        String message = lookupMessage(messageId, messageArg);
+        if (compilerEnv.reportWarningAsError()) {
+            addError(messageId, messageArg, position, length, line, lineSource, lineOffset);
+        } else if (errorCollector != null) {
+            errorCollector.warning(message, sourceURI, position, length);
+        } else {
+            errorReporter.warning(message, sourceURI, line, lineSource, lineOffset);
+        }
+    }
+
+    private void addError(String messageId, String messageArg,
+                          int position, int length,
+                          int line, String lineSource, int lineOffset) {
+        ++syntaxErrorCount;
+        String message = lookupMessage(messageId, messageArg);
+        if (errorCollector != null) {
+            errorCollector.error(message, sourceURI, position, length);
+        } else {
+            errorReporter.error(message, sourceURI, line, lineSource, lineOffset);
+        }
+    }
+
     String lookupMessage(String messageId) {
         return lookupMessage(messageId, null);
     }
 
-    /**
-     * Lookup message.
-     *
-     * @param messageId the message id
-     * @param messageArg the message arg
-     * @return the string
-     */
     String lookupMessage(String messageId, String messageArg) {
         return messageArg == null
             ? ScriptRuntime.getMessage0(messageId)
             : ScriptRuntime.getMessage1(messageId, messageArg);
     }
 
-    /**
-     * Report error.
-     *
-     * @param messageId the message id
-     */
     void reportError(String messageId) {
         reportError(messageId, null);
     }
 
-    /**
-     * Report error.
-     *
-     * @param messageId the message id
-     * @param messageArg the message arg
-     */
     void reportError(String messageId, String messageArg) {
         if (ts == null) {  // happens in some regression tests
             reportError(messageId, messageArg, 1, 1);
@@ -427,26 +245,11 @@ public class Parser
         }
     }
 
-    /**
-     * Report error.
-     *
-     * @param messageId the message id
-     * @param position the position
-     * @param length the length
-     */
     void reportError(String messageId, int position, int length)
     {
         reportError(messageId, null, position, length);
     }
 
-    /**
-     * Report error.
-     *
-     * @param messageId the message id
-     * @param messageArg the message arg
-     * @param position the position
-     * @param length the length
-     */
     void reportError(String messageId, String messageArg, int position,
                      int length)
     {
@@ -460,22 +263,10 @@ public class Parser
     // Computes the absolute end offset of node N.
     // Use with caution!  Assumes n.getPosition() is -absolute-, which
     // is only true before the node is added to its parent.
-    /**
-     * Gets the node end.
-     *
-     * @param n the n
-     * @return the node end
-     */
     private int getNodeEnd(AstNode n) {
         return n.getPosition() + n.getLength();
     }
 
-    /**
-     * Record comment.
-     *
-     * @param lineno the lineno
-     * @param comment the comment
-     */
     private void recordComment(int lineno, String comment) {
         if (scannedComments == null) {
             scannedComments = new ArrayList<Comment>();
@@ -492,11 +283,6 @@ public class Parser
         scannedComments.add(commentNode);
     }
 
-    /**
-     * Gets the and reset js doc.
-     *
-     * @return the and reset js doc
-     */
     private Comment getAndResetJsDoc() {
         Comment saved = currentJsDocComment;
         currentJsDocComment = null;
@@ -504,12 +290,6 @@ public class Parser
     }
 
 
-    /**
-     * Gets the number of eols.
-     *
-     * @param comment the comment
-     * @return the number of eols
-     */
     private int getNumberOfEols(String comment) {
       int lines = 0;
       for (int i = comment.length()-1; i >= 0; i--) {
@@ -536,12 +316,6 @@ public class Parser
     //
     // Note that this function always returned the un-flagged token!
     // The flags, if any, are saved in currentFlaggedToken.
-    /**
-     * Peek token.
-     *
-     * @return the int
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private int peekToken()
         throws IOException
     {
@@ -577,12 +351,6 @@ public class Parser
         return currentToken;  // return unflagged token
     }
 
-    /**
-     * Peek flagged token.
-     *
-     * @return the int
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private int peekFlaggedToken()
         throws IOException
     {
@@ -590,19 +358,10 @@ public class Parser
         return currentFlaggedToken;
     }
 
-    /**
-     * Consume token.
-     */
     private void consumeToken() {
         currentFlaggedToken = Token.EOF;
     }
 
-    /**
-     * Next token.
-     *
-     * @return the int
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private int nextToken()
         throws IOException
     {
@@ -611,12 +370,6 @@ public class Parser
         return tt;
     }
 
-    /**
-     * Next flagged token.
-     *
-     * @return the int
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private int nextFlaggedToken()
         throws IOException
     {
@@ -626,13 +379,6 @@ public class Parser
         return ttFlagged;
     }
 
-    /**
-     * Match token.
-     *
-     * @param toMatch the to match
-     * @return true, if successful
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private boolean matchToken(int toMatch)
         throws IOException
     {
@@ -648,12 +394,6 @@ public class Parser
     // token types valid if they are preceded by a newline.  One example is the
     // postfix ++ or -- operator, which has to be on the same line as its
     // operand.
-    /**
-     * Peek token or eol.
-     *
-     * @return the int
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private int peekTokenOrEOL()
         throws IOException
     {
@@ -665,14 +405,6 @@ public class Parser
         return tt;
     }
 
-    /**
-     * Must match token.
-     *
-     * @param toMatch the to match
-     * @param messageId the message id
-     * @return true, if successful
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private boolean mustMatchToken(int toMatch, String messageId)
         throws IOException
     {
@@ -680,16 +412,6 @@ public class Parser
                               ts.tokenEnd - ts.tokenBeg);
     }
 
-    /**
-     * Must match token.
-     *
-     * @param toMatch the to match
-     * @param msgId the msg id
-     * @param pos the pos
-     * @param len the len
-     * @return true, if successful
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private boolean mustMatchToken(int toMatch, String msgId, int pos, int len)
         throws IOException
     {
@@ -700,38 +422,20 @@ public class Parser
         return false;
     }
 
-    /**
-     * Must have xml.
-     */
     private void mustHaveXML() {
         if (!compilerEnv.isXmlAvailable()) {
             reportError("msg.XML.not.available");
         }
     }
 
-    /**
-     * Eof.
-     *
-     * @return true, if successful
-     */
     public boolean eof() {
         return ts.eof();
     }
 
-    /**
-     * Inside function.
-     *
-     * @return true, if successful
-     */
     boolean insideFunction() {
         return nestingOfFunction != 0;
     }
 
-    /**
-     * Push scope.
-     *
-     * @param scope the scope
-     */
     void pushScope(Scope scope) {
         Scope parent = scope.getParentScope();
         // During codegen, parent scope chain may already be initialized,
@@ -745,18 +449,10 @@ public class Parser
         currentScope = scope;
     }
 
-    /**
-     * Pop scope.
-     */
     void popScope() {
         currentScope = currentScope.getParentScope();
     }
 
-    /**
-     * Enter loop.
-     *
-     * @param loop the loop
-     */
     private void enterLoop(Loop loop) {
         if (loopSet == null)
             loopSet = new ArrayList<Loop>();
@@ -776,9 +472,6 @@ public class Parser
         }
     }
 
-    /**
-     * Exit loop.
-     */
     private void exitLoop() {
         Loop loop = loopSet.remove(loopSet.size() - 1);
         loopAndSwitchSet.remove(loopAndSwitchSet.size() - 1);
@@ -788,20 +481,12 @@ public class Parser
         popScope();
     }
 
-    /**
-     * Enter switch.
-     *
-     * @param node the node
-     */
     private void enterSwitch(SwitchStatement node) {
         if (loopAndSwitchSet == null)
             loopAndSwitchSet = new ArrayList<Jump>();
         loopAndSwitchSet.add(node);
     }
 
-    /**
-     * Exit switch.
-     */
     private void exitSwitch() {
         loopAndSwitchSet.remove(loopAndSwitchSet.size() - 1);
     }
@@ -809,9 +494,6 @@ public class Parser
     /**
      * Builds a parse tree from the given source string.
      *
-     * @param sourceString the source string
-     * @param sourceURI the source uri
-     * @param lineno the lineno
      * @return an {@link AstRoot} object representing the parsed program.  If
      * the parse fails, {@code null} will be returned.  (The parse failure will
      * result in a call to the {@link ErrorReporter} from
@@ -837,13 +519,8 @@ public class Parser
 
     /**
      * Builds a parse tree from the given sourcereader.
-     *
-     * @param sourceReader the source reader
-     * @param sourceURI the source uri
-     * @param lineno the lineno
-     * @return the ast root
-     * @throws IOException if the {@link Reader} encounters an error
      * @see #parse(String,String,int)
+     * @throws IOException if the {@link Reader} encounters an error
      */
     public AstRoot parse(Reader sourceReader, String sourceURI, int lineno)
         throws IOException
@@ -861,12 +538,6 @@ public class Parser
         }
     }
 
-    /**
-     * Parses the.
-     *
-     * @return the ast root
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstRoot parse() throws IOException
     {
         int pos = 0;
@@ -950,12 +621,6 @@ public class Parser
         return root;
     }
 
-    /**
-     * Parses the function body.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode parseFunctionBody()
         throws IOException
     {
@@ -1028,12 +693,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Gets the directive.
-     *
-     * @param n the n
-     * @return the directive
-     */
     private String getDirective(AstNode n) {
         if (n instanceof ExpressionStatement) {
             AstNode e = ((ExpressionStatement) n).getExpression();
@@ -1044,12 +703,6 @@ public class Parser
         return null;
     }
 
-    /**
-     * Parses the function params.
-     *
-     * @param fnNode the fn node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private void  parseFunctionParams(FunctionNode fnNode)
         throws IOException
     {
@@ -1114,13 +767,6 @@ public class Parser
         }
     }
 
-    /**
-     * Function.
-     *
-     * @param type the type
-     * @return the function node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private FunctionNode function(int type)
         throws IOException
     {
@@ -1231,13 +877,6 @@ public class Parser
     // to be relative to the parent node.  All children of this block
     // node are given relative start positions and correct lengths.
 
-    /**
-     * Statements.
-     *
-     * @param parent the parent
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode statements(AstNode parent) throws IOException {
         if (currentToken != Token.LC  // assertion can be invalid in bad code
             && !compilerEnv.isIdeMode()) codeBug();
@@ -1253,38 +892,17 @@ public class Parser
         return block;
     }
 
-    /**
-     * Statements.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode statements() throws IOException {
         return statements(null);
     }
 
-    /**
-     * The Class ConditionData.
-     */
     private static class ConditionData {
-        
-        /** The condition. */
         AstNode condition;
-        
-        /** The lp. */
         int lp = -1;
-        
-        /** The rp. */
         int rp = -1;
     }
 
     // parse and return a parenthesized expression
-    /**
-     * Condition.
-     *
-     * @return the condition data
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private ConditionData condition()
         throws IOException
     {
@@ -1308,12 +926,6 @@ public class Parser
         return data;
     }
 
-    /**
-     * Statement.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode statement()
         throws IOException
     {
@@ -1353,12 +965,6 @@ public class Parser
         return new EmptyStatement(pos, ts.tokenBeg - pos);
     }
 
-    /**
-     * Statement helper.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode statementHelper()
         throws IOException
     {
@@ -1472,12 +1078,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Auto insert semicolon.
-     *
-     * @param pn the pn
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private void autoInsertSemicolon(AstNode pn) throws IOException {
         int ttFlagged = peekFlaggedToken();
         int pos = pn.getPosition();
@@ -1505,12 +1105,6 @@ public class Parser
         }
     }
 
-    /**
-     * If statement.
-     *
-     * @return the if statement
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private IfStatement ifStatement()
         throws IOException
     {
@@ -1534,12 +1128,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Switch statement.
-     *
-     * @return the switch statement
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private SwitchStatement switchStatement()
         throws IOException
     {
@@ -1613,12 +1201,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * While loop.
-     *
-     * @return the while loop
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private WhileLoop whileLoop()
         throws IOException
     {
@@ -1641,12 +1223,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Do loop.
-     *
-     * @return the do loop
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private DoLoop doLoop()
         throws IOException
     {
@@ -1678,12 +1254,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * For loop.
-     *
-     * @return the loop
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private Loop forLoop()
         throws IOException
     {
@@ -1791,13 +1361,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * For loop init.
-     *
-     * @param tt the tt
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode forLoopInit(int tt) throws IOException {
         try {
             inForInit = true;  // checked by variables() and relExpr()
@@ -1818,12 +1381,6 @@ public class Parser
         }
     }
 
-    /**
-     * Try statement.
-     *
-     * @return the try statement
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private TryStatement tryStatement()
         throws IOException
     {
@@ -1923,12 +1480,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Throw statement.
-     *
-     * @return the throw statement
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private ThrowStatement throwStatement()
         throws IOException
     {
@@ -1952,12 +1503,6 @@ public class Parser
     // the peeked token was not a name.  Side effect:  sets scanner token
     // information for the label identifier (tokenBeg, tokenEnd, etc.)
 
-    /**
-     * Match jump label name.
-     *
-     * @return the labeled statement
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private LabeledStatement matchJumpLabelName()
         throws IOException
     {
@@ -1976,12 +1521,6 @@ public class Parser
         return label;
     }
 
-    /**
-     * Break statement.
-     *
-     * @return the break statement
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private BreakStatement breakStatement()
         throws IOException
     {
@@ -2018,12 +1557,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Continue statement.
-     *
-     * @return the continue statement
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private ContinueStatement continueStatement()
         throws IOException
     {
@@ -2060,12 +1593,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * With statement.
-     *
-     * @return the with statement
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private WithStatement withStatement()
         throws IOException
     {
@@ -2094,12 +1621,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Let statement.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode letStatement()
         throws IOException
     {
@@ -2128,14 +1649,6 @@ public class Parser
         return ((before & mask) != mask) && ((after & mask) == mask);
     }
 
-    /**
-     * Return or yield.
-     *
-     * @param tt the tt
-     * @param exprContext the expr context
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode returnOrYield(int tt, boolean exprContext)
         throws IOException
     {
@@ -2195,12 +1708,6 @@ public class Parser
         return ret;
     }
 
-    /**
-     * Block.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode block()
         throws IOException
     {
@@ -2220,12 +1727,6 @@ public class Parser
         }
     }
 
-    /**
-     * Default xml namespace.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode defaultXmlNamespace()
         throws IOException
     {
@@ -2255,13 +1756,6 @@ public class Parser
         return es;
     }
 
-    /**
-     * Record label.
-     *
-     * @param label the label
-     * @param bundle the bundle
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private void recordLabel(Label label, LabeledStatement bundle)
         throws IOException
     {
@@ -2292,9 +1786,6 @@ public class Parser
      * up any following labels and the next non-label statement into a
      * {@link LabeledStatement} "bundle" and return that.  Otherwise we parse
      * an expression and return it wrapped in an {@link ExpressionStatement}.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     private AstNode nameOrLabel()
         throws IOException
@@ -2354,15 +1845,12 @@ public class Parser
     /**
      * Parse a 'var' or 'const' statement, or a 'var' init list in a for
      * statement.
-     *
      * @param declType A token value: either VAR, CONST, or LET depending on
      * context.
      * @param pos the position where the node should start.  It's sometimes
      * the var/const/let keyword, and other times the beginning of the first
      * token in the first variable declaration.
-     * @param isStatement the is statement
      * @return the parsed variable list
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     private VariableDeclaration variables(int declType, int pos, boolean isStatement)
         throws IOException
@@ -2440,14 +1928,6 @@ public class Parser
     }
 
     // have to pass in 'let' kwd position to compute kid offsets properly
-    /**
-     * Let.
-     *
-     * @param isStatement the is statement
-     * @param pos the pos
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode let(boolean isStatement, int pos)
         throws IOException
     {
@@ -2491,23 +1971,10 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Define symbol.
-     *
-     * @param declType the decl type
-     * @param name the name
-     */
     void defineSymbol(int declType, String name) {
         defineSymbol(declType, name, false);
     }
 
-    /**
-     * Define symbol.
-     *
-     * @param declType the decl type
-     * @param name the name
-     * @param ignoreNotInBlock the ignore not in block
-     */
     void defineSymbol(int declType, String name, boolean ignoreNotInBlock) {
         if (name == null) {
             if (compilerEnv.isIdeMode()) {  // be robust in IDE-mode
@@ -2572,12 +2039,6 @@ public class Parser
         }
     }
 
-    /**
-     * Expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode expr()
         throws IOException
     {
@@ -2595,12 +2056,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Assign expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode assignExpr()
         throws IOException
     {
@@ -2634,12 +2089,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Cond expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode condExpr()
         throws IOException
     {
@@ -2676,12 +2125,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Or expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode orExpr()
         throws IOException
     {
@@ -2693,12 +2136,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * And expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode andExpr()
         throws IOException
     {
@@ -2710,12 +2147,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Bit or expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode bitOrExpr()
         throws IOException
     {
@@ -2727,12 +2158,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Bit xor expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode bitXorExpr()
         throws IOException
     {
@@ -2744,12 +2169,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Bit and expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode bitAndExpr()
         throws IOException
     {
@@ -2761,12 +2180,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Eq expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode eqExpr()
         throws IOException
     {
@@ -2795,12 +2208,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Rel expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode relExpr()
         throws IOException
     {
@@ -2826,12 +2233,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Shift expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode shiftExpr()
         throws IOException
     {
@@ -2851,12 +2252,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Adds the expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode addExpr()
         throws IOException
     {
@@ -2873,12 +2268,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Mul expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode mulExpr()
         throws IOException
     {
@@ -2898,12 +2287,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Unary expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode unaryExpr()
         throws IOException
     {
@@ -2978,12 +2361,6 @@ public class Parser
         }
     }
 
-    /**
-     * Xml initializer.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode xmlInitializer()
         throws IOException
     {
@@ -3024,12 +2401,6 @@ public class Parser
         }
     }
 
-    /**
-     * Argument list.
-     *
-     * @return the list
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private List<AstNode> argumentList()
         throws IOException
     {
@@ -3068,10 +2439,7 @@ public class Parser
     /**
      * Parse a new-expression, or if next token isn't {@link Token#NEW},
      * a primary expression.
-     *
      * @param allowCallSyntax passed down to {@link #memberExprTail}
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     private AstNode memberExpr(boolean allowCallSyntax)
         throws IOException
@@ -3123,12 +2491,9 @@ public class Parser
     /**
      * Parse any number of "(expr)", "[expr]" ".expr", "..expr",
      * or ".(expr)" constructs trailing the passed expression.
-     *
-     * @param allowCallSyntax the allow call syntax
      * @param pn the non-null parent node
      * @return the outermost (lexically last occurring) expression,
      * which will have the passed parent node as a descendant
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     private AstNode memberExprTail(boolean allowCallSyntax, AstNode pn)
         throws IOException
@@ -3218,11 +2583,8 @@ public class Parser
 
     /**
      * Handles any construct following a "." or ".." operator.
-     *
-     * @param tt the tt
      * @param pn the left-hand side (target) of the operator.  Never null.
      * @return a PropertyGet, XmlMemberGet, or ErrorNode
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     private AstNode propertyAccess(int tt, AstNode pn)
             throws IOException
@@ -3311,9 +2673,6 @@ public class Parser
      *   {@code @*}, {@code @*::attr}, {@code @*::*}, {@code @ns::[expr]},
      *   {@code @*::[expr]}, {@code @[expr]} <p>
      * Called if we peeked an '@' token.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     private AstNode attributeAccess()
         throws IOException
@@ -3344,14 +2703,16 @@ public class Parser
      * Check if :: follows name in which case it becomes a qualified name.
      *
      * @param atPos a natural number if we just read an '@' token, else -1
+     *
      * @param s the name or string that was matched (an identifier, "throw" or
      * "*").
+     *
      * @param memberTypeFlags flags tracking whether we're a '.' or '..' child
+     *
      * @return an XmlRef node if it's an attribute access, a child of a
      * '..' operator, or the name is followed by ::.  For a plain name,
      * returns a Name node.  Returns an ErrorNode for malformed XML
      * expressions.  (For now - might change to return a partial XmlRef.)
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     private AstNode propertyName(int atPos, String s, int memberTypeFlags)
         throws IOException
@@ -3402,12 +2763,6 @@ public class Parser
 
     /**
      * Parse the [expr] portion of an xml element reference, e.g.
-     *
-     * @param atPos the at pos
-     * @param namespace the namespace
-     * @param colonPos the colon pos
-     * @return the xml elem ref
-     * @throws IOException Signals that an I/O exception has occurred.
      * @[expr], @*::[expr], or ns::[expr].
      */
     private XmlElemRef xmlElemRef(int atPos, Name namespace, int colonPos)
@@ -3429,13 +2784,6 @@ public class Parser
         return ref;
     }
 
-    /**
-     * Destructuring primary expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     * @throws ParserException the parser exception
-     */
     private AstNode destructuringPrimaryExpr()
         throws IOException, ParserException
     {
@@ -3447,12 +2795,6 @@ public class Parser
         }
     }
 
-    /**
-     * Primary expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode primaryExpr()
         throws IOException
     {
@@ -3538,12 +2880,6 @@ public class Parser
         return makeErrorNode();
     }
 
-    /**
-     * Paren expr.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode parenExpr() throws IOException {
         boolean wasInForInit = inForInit;
         inForInit = false;
@@ -3571,14 +2907,6 @@ public class Parser
         }
     }
 
-    /**
-     * Name.
-     *
-     * @param ttFlagged the tt flagged
-     * @param tt the tt
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode name(int ttFlagged, int tt) throws IOException {
         String nameString = ts.getString();
         int namePos = ts.tokenBeg, nameLineno = ts.lineno;
@@ -3604,9 +2932,6 @@ public class Parser
 
     /**
      * May return an {@link ArrayLiteral} or {@link ArrayComprehension}.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     private AstNode arrayLiteral()
         throws IOException
@@ -3667,11 +2992,9 @@ public class Parser
 
     /**
      * Parse a JavaScript 1.7 Array comprehension.
-     *
      * @param result the first expression after the opening left-bracket
      * @param pos start of LB token that begins the array comprehension
      * @return the array comprehension or an error node
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     private AstNode arrayComprehension(AstNode result, int pos)
         throws IOException
@@ -3701,12 +3024,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Array comprehension loop.
-     *
-     * @return the array comprehension loop
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private ArrayComprehensionLoop arrayComprehensionLoop()
         throws IOException
     {
@@ -3769,29 +3086,12 @@ public class Parser
         }
     }
 
-    /**
-     * Generator expression.
-     *
-     * @param result the result
-     * @param pos the pos
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode generatorExpression(AstNode result, int pos)
         throws IOException
     {
         return generatorExpression(result, pos, false);
     }
     
-    /**
-     * Generator expression.
-     *
-     * @param result the result
-     * @param pos the pos
-     * @param inFunctionParams the in function params
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode generatorExpression(AstNode result, int pos, boolean inFunctionParams)
         throws IOException
     {
@@ -3823,12 +3123,6 @@ public class Parser
         return pn;
     }
         
-    /**
-     * Generator expression loop.
-     *
-     * @return the generator expression loop
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private GeneratorExpressionLoop generatorExpressionLoop()
         throws IOException
     {
@@ -3882,21 +3176,10 @@ public class Parser
         }
     }
 
-    /** The Constant PROP_ENTRY. */
     private static final int PROP_ENTRY = 1;
-    
-    /** The Constant GET_ENTRY. */
     private static final int GET_ENTRY  = 2;
-    
-    /** The Constant SET_ENTRY. */
     private static final int SET_ENTRY  = 4;
 
-    /**
-     * Object literal.
-     *
-     * @return the object literal
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private ObjectLiteral objectLiteral()
         throws IOException
     {
@@ -4021,12 +3304,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Objliteral property.
-     *
-     * @return the ast node
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private AstNode objliteralProperty() throws IOException {
         AstNode pname;
         int tt = peekToken();
@@ -4059,14 +3336,6 @@ public class Parser
         return pname;
     }
 
-    /**
-     * Plain property.
-     *
-     * @param property the property
-     * @param ptt the ptt
-     * @return the object property
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private ObjectProperty plainProperty(AstNode property, int ptt)
         throws IOException
     {
@@ -4091,15 +3360,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Gets the ter setter property.
-     *
-     * @param pos the pos
-     * @param propName the prop name
-     * @param isGetter the is getter
-     * @return the ter setter property
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private ObjectProperty getterSetterProperty(int pos, AstNode propName,
                                                 boolean isGetter)
         throws IOException
@@ -4125,11 +3385,6 @@ public class Parser
         return pn;
     }
 
-    /**
-     * Creates the name node.
-     *
-     * @return the name
-     */
     private Name createNameNode() {
         return createNameNode(false, Token.NAME);
     }
@@ -4140,10 +3395,6 @@ public class Parser
      * a name node, or we lost the name token information by peeking.
      * If the {@code token} parameter is not {@link Token#NAME}, then
      * we use token info saved in instance vars.
-     *
-     * @param checkActivation the check activation
-     * @param token the token
-     * @return the name
      */
     private Name createNameNode(boolean checkActivation, int token) {
         int beg = ts.tokenBeg;
@@ -4172,11 +3423,6 @@ public class Parser
         return name;
     }
 
-    /**
-     * Creates the string literal.
-     *
-     * @return the string literal
-     */
     private StringLiteral createStringLiteral() {
         int pos = ts.tokenBeg, end = ts.tokenEnd;
         StringLiteral s = new StringLiteral(pos, end - pos);
@@ -4186,12 +3432,6 @@ public class Parser
         return s;
     }
 
-    /**
-     * Check activation name.
-     *
-     * @param name the name
-     * @param token the token
-     */
     protected void checkActivationName(String name, int token) {
         if (!insideFunction()) {
             return;
@@ -4215,20 +3455,12 @@ public class Parser
         }
     }
 
-    /**
-     * Sets the requires activation.
-     */
     protected void setRequiresActivation() {
         if (insideFunction()) {
             ((FunctionNode)currentScriptOrFn).setRequiresActivation();
         }
     }
 
-    /**
-     * Check call requires activation.
-     *
-     * @param pn the pn
-     */
     private void checkCallRequiresActivation(AstNode pn) {
         if ((pn.getType() == Token.NAME
              && "eval".equals(((Name)pn).getIdentifier()))
@@ -4237,20 +3469,12 @@ public class Parser
             setRequiresActivation();
     }
 
-    /**
-     * Sets the is generator.
-     */
     protected void setIsGenerator() {
         if (insideFunction()) {
             ((FunctionNode)currentScriptOrFn).setIsGenerator();
         }
     }
 
-    /**
-     * Check bad inc dec.
-     *
-     * @param expr the expr
-     */
     private void checkBadIncDec(UnaryExpression expr) {
         AstNode op = removeParens(expr.getOperand());
         int tt = op.getType();
@@ -4264,11 +3488,6 @@ public class Parser
                         : "msg.bad.decr");
     }
 
-    /**
-     * Make error node.
-     *
-     * @return the error node
-     */
     private ErrorNode makeErrorNode() {
         ErrorNode pn = new ErrorNode(ts.tokenBeg, ts.tokenEnd - ts.tokenBeg);
         pn.setLineno(ts.lineno);
@@ -4276,23 +3495,10 @@ public class Parser
     }
 
     // Return end of node.  Assumes node does NOT have a parent yet.
-    /**
-     * Node end.
-     *
-     * @param node the node
-     * @return the int
-     */
     private int nodeEnd(AstNode node) {
         return node.getPosition() + node.getLength();
     }
 
-    /**
-     * Save name token data.
-     *
-     * @param pos the pos
-     * @param name the name
-     * @param lineno the lineno
-     */
     private void saveNameTokenData(int pos, String name, int lineno) {
         prevNameTokenStart = pos;
         prevNameTokenString = name;
@@ -4325,39 +3531,36 @@ public class Parser
         }
         while (--pos >= 0) {
             char c = buf[pos];
-            if (c == '\n' || c == '\r') {
+            if (ScriptRuntime.isJSLineTerminator(c)) {
                 return pos + 1; // want position after the newline
             }
         }
         return 0;
     }
 
-    /**
-     * Warn missing semi.
-     *
-     * @param pos the pos
-     * @param end the end
-     */
     private void warnMissingSemi(int pos, int end) {
         // Should probably change this to be a CompilerEnvirons setting,
         // with an enum Never, Always, Permissive, where Permissive means
         // don't warn for 1-line functions like function (s) {return x+2}
         if (compilerEnv.isStrictMode()) {
-            int beg = Math.max(pos, lineBeginningFor(end));
-            if (end == -1)
-                end = ts.cursor;
-            addStrictWarning("msg.missing.semi", "",
-                             beg, end - beg);
+            int[] linep = new int[2];
+            String line = ts.getLine(end, linep);
+            // this code originally called lineBeginningFor() and in order to
+            // preserve its different line-offset handling, we need to special
+            // case ide-mode here
+            int beg = compilerEnv.isIdeMode()
+                      ? Math.max(pos, end - linep[1])
+                      : pos;
+            if (line != null) {
+                addStrictWarning("msg.missing.semi", "", beg, end - beg,
+                                 linep[0], line, linep[1]);
+            } else {
+                // no line information available, report warning at current line
+                addStrictWarning("msg.missing.semi", "", beg, end - beg);
+            }
         }
     }
 
-    /**
-     * Warn trailing comma.
-     *
-     * @param pos the pos
-     * @param elems the elems
-     * @param commaPos the comma pos
-     */
     private void warnTrailingComma(int pos, List<?> elems, int commaPos) {
         if (compilerEnv.getWarnTrailingComma()) {
             // back up from comma to beginning of line or array/objlit
@@ -4370,13 +3573,6 @@ public class Parser
     }
 
 
-    /**
-     * Read fully.
-     *
-     * @param reader the reader
-     * @return the string
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private String readFully(Reader reader) throws IOException {
         BufferedReader in = new BufferedReader(reader);
         try {
@@ -4393,38 +3589,16 @@ public class Parser
     }
 
     // helps reduce clutter in the already-large function() method
-    /**
-     * The Class PerFunctionVariables.
-     */
     protected class PerFunctionVariables
     {
-        
-        /** The saved current script or fn. */
         private ScriptNode savedCurrentScriptOrFn;
-        
-        /** The saved current scope. */
         private Scope savedCurrentScope;
-        
-        /** The saved end flags. */
         private int savedEndFlags;
-        
-        /** The saved in for init. */
         private boolean savedInForInit;
-        
-        /** The saved label set. */
         private Map<String,LabeledStatement> savedLabelSet;
-        
-        /** The saved loop set. */
         private List<Loop> savedLoopSet;
-        
-        /** The saved loop and switch set. */
         private List<Jump> savedLoopAndSwitchSet;
 
-        /**
-         * Instantiates a new per function variables.
-         *
-         * @param fnNode the fn node
-         */
         PerFunctionVariables(FunctionNode fnNode) {
             savedCurrentScriptOrFn = Parser.this.currentScriptOrFn;
             Parser.this.currentScriptOrFn = fnNode;
@@ -4448,9 +3622,6 @@ public class Parser
             Parser.this.inForInit = false;
         }
 
-        /**
-         * Restore.
-         */
         void restore() {
             Parser.this.currentScriptOrFn = savedCurrentScriptOrFn;
             Parser.this.currentScope = savedCurrentScope;
@@ -4484,15 +3655,6 @@ public class Parser
         return result;
     }
 
-    /**
-     * Destructuring assignment helper.
-     *
-     * @param variableType the variable type
-     * @param left the left
-     * @param right the right
-     * @param tempName the temp name
-     * @return the node
-     */
     Node destructuringAssignmentHelper(int variableType, Node left,
                                        Node right, String tempName)
     {
@@ -4541,16 +3703,6 @@ public class Parser
         return result;
     }
 
-    /**
-     * Destructuring array.
-     *
-     * @param array the array
-     * @param variableType the variable type
-     * @param tempName the temp name
-     * @param parent the parent
-     * @param destructuringNames the destructuring names
-     * @return true, if successful
-     */
     boolean destructuringArray(ArrayLiteral array,
                                int variableType,
                                String tempName,
@@ -4592,16 +3744,6 @@ public class Parser
         return empty;
     }
 
-    /**
-     * Destructuring object.
-     *
-     * @param node the node
-     * @param variableType the variable type
-     * @param tempName the temp name
-     * @param parent the parent
-     * @param destructuringNames the destructuring names
-     * @return true, if successful
-     */
     boolean destructuringObject(ObjectLiteral node,
                                 int variableType,
                                 String tempName,
@@ -4657,25 +3799,11 @@ public class Parser
         return empty;
     }
 
-    /**
-     * Creates the name.
-     *
-     * @param name the name
-     * @return the node
-     */
     protected Node createName(String name) {
         checkActivationName(name, Token.NAME);
         return Node.newString(Token.NAME, name);
     }
 
-    /**
-     * Creates the name.
-     *
-     * @param type the type
-     * @param name the name
-     * @param child the child
-     * @return the node
-     */
     protected Node createName(int type, String name, Node child) {
         Node result = createName(name);
         result.setType(type);
@@ -4684,12 +3812,6 @@ public class Parser
         return result;
     }
 
-    /**
-     * Creates the number.
-     *
-     * @param number the number
-     * @return the node
-     */
     protected Node createNumber(double number) {
         return Node.newNumber(number);
     }
@@ -4731,13 +3853,6 @@ public class Parser
     // to the object) so that it's always the same object, regardless of
     // side effects in the RHS.
 
-    /**
-     * Simple assignment.
-     *
-     * @param left the left
-     * @param right the right
-     * @return the node
-     */
     protected Node simpleAssignment(Node left, Node right) {
         int nodeType = left.getType();
         switch (nodeType) {
@@ -4793,11 +3908,6 @@ public class Parser
         throw codeBug();
     }
 
-    /**
-     * Check mutable reference.
-     *
-     * @param n the n
-     */
     protected void checkMutableReference(Node n) {
         int memberTypeFlags = n.getIntProp(Node.MEMBER_TYPE_PROP, 0);
         if ((memberTypeFlags & Node.DESCENDANTS_FLAG) != 0) {
@@ -4806,12 +3916,6 @@ public class Parser
     }
 
     // remove any ParenthesizedExpression wrappers
-    /**
-     * Removes the parens.
-     *
-     * @param node the node
-     * @return the ast node
-     */
     protected AstNode removeParens(AstNode node) {
         while (node instanceof ParenthesizedExpression) {
             node = ((ParenthesizedExpression)node).getExpression();
@@ -4819,11 +3923,6 @@ public class Parser
         return node;
     }
 
-    /**
-     * Mark destructuring.
-     *
-     * @param node the node
-     */
     void markDestructuring(AstNode node) {
         if (node instanceof DestructuringForm) {
             ((DestructuringForm)node).setIsDestructuring(true);
@@ -4833,12 +3932,6 @@ public class Parser
     }
 
     // throw a failed-assertion with some helpful debugging info
-    /**
-     * Code bug.
-     *
-     * @return the runtime exception
-     * @throws RuntimeException the runtime exception
-     */
     private RuntimeException codeBug()
         throws RuntimeException
     {

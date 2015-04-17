@@ -6,11 +6,10 @@
 
 package org.mozilla.javascript;
 
+import java.io.Serializable;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
 
 /**
  * Map to associate objects to integers.
@@ -24,8 +23,6 @@ import java.io.Serializable;
 
 public class ObjToIntMap implements Serializable
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -1542220580748809402L;
 
 // Map implementation via hashtable,
@@ -33,27 +30,12 @@ public class ObjToIntMap implements Serializable
 
 // ObjToIntMap is a copy cat of ObjToIntMap with API adjusted to object keys
 
-    /**
- * The Class Iterator.
- */
-public static class Iterator {
+    public static class Iterator {
 
-        /**
-         * Instantiates a new iterator.
-         *
-         * @param master the master
-         */
         Iterator(ObjToIntMap master) {
             this.master = master;
         }
 
-        /**
-         * Inits the.
-         *
-         * @param keys the keys
-         * @param values the values
-         * @param keyCount the key count
-         */
         final void init(Object[] keys, int[] values, int keyCount) {
             this.keys = keys;
             this.values = values;
@@ -61,26 +43,15 @@ public static class Iterator {
             this.remaining = keyCount;
         }
 
-        /**
-         * Start.
-         */
         public void start() {
             master.initIterator(this);
             next();
         }
 
-        /**
-         * Done.
-         *
-         * @return true, if successful
-         */
         public boolean done() {
             return remaining < 0;
         }
 
-        /**
-         * Next.
-         */
         public void next() {
             if (remaining == -1) Kit.codeBug();
             if (remaining == 0) {
@@ -97,63 +68,31 @@ public static class Iterator {
             }
         }
 
-        /**
-         * Gets the key.
-         *
-         * @return the key
-         */
         public Object getKey() {
             Object key = keys[cursor];
             if (key == UniqueTag.NULL_VALUE) { key = null; }
             return key;
         }
 
-        /**
-         * Gets the value.
-         *
-         * @return the value
-         */
         public int getValue() {
             return values[cursor];
         }
 
-        /**
-         * Sets the value.
-         *
-         * @param value the new value
-         */
         public void setValue(int value) {
             values[cursor] = value;
         }
 
-        /** The master. */
         ObjToIntMap master;
-        
-        /** The cursor. */
         private int cursor;
-        
-        /** The remaining. */
         private int remaining;
-        
-        /** The keys. */
         private Object[] keys;
-        
-        /** The values. */
         private int[] values;
     }
 
-    /**
-     * Instantiates a new obj to int map.
-     */
     public ObjToIntMap() {
         this(4);
     }
 
-    /**
-     * Instantiates a new obj to int map.
-     *
-     * @param keyCountHint the key count hint
-     */
     public ObjToIntMap(int keyCountHint) {
         if (keyCountHint < 0) Kit.codeBug();
         // Table grow when number of stored keys >= 3/4 of max capacity
@@ -161,36 +100,17 @@ public static class Iterator {
         int i;
         for (i = 2; (1 << i) < minimalCapacity; ++i) { }
         power = i;
-        if (check) {
-			if (power < 2)
-				Kit.codeBug();
-		}
+        if (check && power < 2) Kit.codeBug();
     }
 
-    /**
-     * Checks if is empty.
-     *
-     * @return true, if is empty
-     */
     public boolean isEmpty() {
         return keyCount == 0;
     }
 
-    /**
-     * Size.
-     *
-     * @return the int
-     */
     public int size() {
         return keyCount;
     }
 
-    /**
-     * Checks for.
-     *
-     * @param key the key
-     * @return true, if successful
-     */
     public boolean has(Object key) {
         if (key == null) { key = UniqueTag.NULL_VALUE; }
         return 0 <= findIndex(key);
@@ -198,9 +118,6 @@ public static class Iterator {
 
     /**
      * Get integer value assigned with key.
-     *
-     * @param key the key
-     * @param defaultValue the default value
      * @return key integer value or defaultValue if key is absent
      */
     public int get(Object key, int defaultValue) {
@@ -214,9 +131,8 @@ public static class Iterator {
 
     /**
      * Get integer value assigned with key.
-     *
-     * @param key the key
      * @return key integer value
+     * @throws RuntimeException if key does not exist
      */
     public int getExisting(Object key) {
         if (key == null) { key = UniqueTag.NULL_VALUE; }
@@ -229,12 +145,6 @@ public static class Iterator {
         return 0;
     }
 
-    /**
-     * Put.
-     *
-     * @param key the key
-     * @param value the value
-     */
     public void put(Object key, int value) {
         if (key == null) { key = UniqueTag.NULL_VALUE; }
         int index = ensureIndex(key);
@@ -245,9 +155,6 @@ public static class Iterator {
      * If table already contains a key that equals to keyArg, return that key
      * while setting its value to zero, otherwise add keyArg with 0 value to
      * the table and return it.
-     *
-     * @param keyArg the key arg
-     * @return the object
      */
     public Object intern(Object keyArg) {
         boolean nullKey = false;
@@ -260,11 +167,6 @@ public static class Iterator {
         return (nullKey) ? null : keys[index];
     }
 
-    /**
-     * Removes the.
-     *
-     * @param key the key
-     */
     public void remove(Object key) {
         if (key == null) { key = UniqueTag.NULL_VALUE; }
         int index = findIndex(key);
@@ -274,9 +176,6 @@ public static class Iterator {
         }
     }
 
-    /**
-     * Clear.
-     */
     public void clear() {
         int i = keys.length;
         while (i != 0) {
@@ -286,11 +185,6 @@ public static class Iterator {
         occupiedCount = 0;
     }
 
-    /**
-     * New iterator.
-     *
-     * @return the iterator
-     */
     public Iterator newIterator() {
         return new Iterator(this);
     }
@@ -298,32 +192,17 @@ public static class Iterator {
     // The sole purpose of the method is to avoid accessing private fields
     // from the Iterator inner class to workaround JDK 1.1 compiler bug which
     // generates code triggering VerifierError on recent JVMs
-    /**
-     * Inits the iterator.
-     *
-     * @param i the i
-     */
     final void initIterator(Iterator i) {
         i.init(keys, values, keyCount);
     }
 
-    /**
-     *  Return array of present keys.
-     *
-     * @return the keys
-     */
+    /** Return array of present keys */
     public Object[] getKeys() {
         Object[] array = new Object[keyCount];
         getKeys(array, 0);
         return array;
     }
 
-    /**
-     * Gets the keys.
-     *
-     * @param array the array
-     * @param offset the offset
-     */
     public void getKeys(Object[] array, int offset) {
         int count = keyCount;
         for (int i = 0; count != 0; ++i) {
@@ -337,14 +216,6 @@ public static class Iterator {
         }
     }
 
-    /**
-     * Table lookup step.
-     *
-     * @param fraction the fraction
-     * @param mask the mask
-     * @param power the power
-     * @return the int
-     */
     private static int tableLookupStep(int fraction, int mask, int power) {
         int shift = 32 - 2 * power;
         if (shift >= 0) {
@@ -355,12 +226,6 @@ public static class Iterator {
         }
     }
 
-    /**
-     * Find index.
-     *
-     * @param key the key
-     * @return the int
-     */
     private int findIndex(Object key) {
         if (keys != null) {
             int hash = key.hashCode();
@@ -401,21 +266,9 @@ public static class Iterator {
 
 // Insert key that is not present to table without deleted entries
 // and enough free space
-    /**
- * Insert new key.
- *
- * @param key the key
- * @param hash the hash
- * @return the int
- */
-private int insertNewKey(Object key, int hash) {
-        if (check) {
-			if (occupiedCount != keyCount)
-				Kit.codeBug();
-			
-			if (keyCount == 1 << power)
-				Kit.codeBug();
-		}
+    private int insertNewKey(Object key, int hash) {
+        if (check && occupiedCount != keyCount) Kit.codeBug();
+        if (check && keyCount == 1 << power) Kit.codeBug();
         int fraction = hash * A;
         int index = fraction >>> (32 - power);
         int N = 1 << power;
@@ -424,15 +277,9 @@ private int insertNewKey(Object key, int hash) {
             int step = tableLookupStep(fraction, mask, power);
             int firstIndex = index;
             do {
-                if (check) {
-					if (keys[index] == DELETED)
-						Kit.codeBug();
-				}
+                if (check && keys[index] == DELETED) Kit.codeBug();
                 index = (index + step) & mask;
-                if (check) {					
-					if (firstIndex == index)
-						Kit.codeBug();
-				}
+                if (check && firstIndex == index) Kit.codeBug();
             } while (keys[index] != null);
         }
         keys[index] = key;
@@ -443,18 +290,10 @@ private int insertNewKey(Object key, int hash) {
         return index;
     }
 
-    /**
-     * Rehash table.
-     */
     private void rehashTable() {
         if (keys == null) {
-            if (check) {
-				if (keyCount != 0)
-					Kit.codeBug();
-				
-				if (occupiedCount != 0)
-					Kit.codeBug();
-			}
+            if (check && keyCount != 0) Kit.codeBug();
+            if (check && occupiedCount != 0) Kit.codeBug();
             int N = 1 << power;
             keys = new Object[N];
             values = new int[2 * N];
@@ -487,13 +326,7 @@ private int insertNewKey(Object key, int hash) {
     }
 
 // Ensure key index creating one if necessary
-    /**
- * Ensure index.
- *
- * @param key the key
- * @return the int
- */
-private int ensureIndex(Object key) {
+    private int ensureIndex(Object key) {
         int hash = key.hashCode();
         int index = -1;
         int firstDeleted = -1;
@@ -538,10 +371,8 @@ private int ensureIndex(Object key) {
             }
         }
         // Inserting of new key
-        if (check) {
-			if (keys != null && keys[index] != null)
-				Kit.codeBug();
-		}
+        if (check && keys != null && keys[index] != null)
+            Kit.codeBug();
         if (firstDeleted >= 0) {
             index = firstDeleted;
         }
@@ -560,12 +391,6 @@ private int ensureIndex(Object key) {
         return index;
     }
 
-    /**
-     * Write object.
-     *
-     * @param out the out
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private void writeObject(ObjectOutputStream out)
         throws IOException
     {
@@ -582,13 +407,6 @@ private int ensureIndex(Object key) {
         }
     }
 
-    /**
-     * Read object.
-     *
-     * @param in the in
-     * @throws IOException Signals that an I/O exception has occurred.
-     * @throws ClassNotFoundException the class not found exception
-     */
     private void readObject(ObjectInputStream in)
         throws IOException, ClassNotFoundException
     {
@@ -611,10 +429,8 @@ private int ensureIndex(Object key) {
 
 // A == golden_ratio * (1 << 32) = ((sqrt(5) - 1) / 2) * (1 << 32)
 // See Knuth etc.
-    /** The Constant A. */
-private static final int A = 0x9e3779b9;
+    private static final int A = 0x9e3779b9;
 
-    /** The Constant DELETED. */
     private static final Object DELETED = new Object();
 
 // Structure of kyes and values arrays (N == 1 << power):
@@ -622,24 +438,15 @@ private static final int A = 0x9e3779b9;
 // values[0 <= i < N]: value of key at keys[i]
 // values[N <= i < 2*N]: hash code of key at keys[i-N]
 
-    /** The keys. */
-private transient Object[] keys;
-    
-    /** The values. */
+    private transient Object[] keys;
     private transient int[] values;
 
-    /** The power. */
     private int power;
-    
-    /** The key count. */
     private int keyCount;
-    
-    /** The occupied count. */
     private transient int occupiedCount; // == keyCount + deleted_count
 
 // If true, enables consitency checks
-    /** The Constant check. */
-private static final boolean check = false;
+    private static final boolean check = false;
 
 /* TEST START
 

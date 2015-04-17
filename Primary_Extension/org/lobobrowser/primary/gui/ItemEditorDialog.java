@@ -1,22 +1,16 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 2 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
-
-    You should have received a copy of the GNU General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either verion 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.primary.gui;
 
@@ -37,167 +31,181 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 
-
 /**
  * The Class ItemEditorDialog.
  *
- * @param <T> the generic type
+ * @param <T>
+ *            the generic type
  */
 public class ItemEditorDialog<T> extends JDialog {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The caption label. */
-	private final JLabel captionLabel = new JLabel();
-	
-	/** The ok button. */
-	private final JButton okButton = new JButton();
-	
-	/** The cancel button. */
-	private final JButton cancelButton = new JButton();
-	
-	/** The editor. */
-	private final AbstractItemEditor<T> editor;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new item editor dialog.
-	 *
-	 * @param owner the owner
-	 * @param factory the factory
-	 * @throws HeadlessException the headless exception
-	 */
-	public ItemEditorDialog(Dialog owner, ItemEditorFactory<T> factory)
-			throws HeadlessException {
-		super(owner);
-		this.editor = factory.createItemEditor();
-		this.init();
-	}
+    /** The caption label. */
+    private final JLabel captionLabel = new JLabel();
 
-	/**
-	 * Instantiates a new item editor dialog.
-	 *
-	 * @param owner the owner
-	 * @param factory the factory
-	 * @throws HeadlessException the headless exception
-	 */
-	public ItemEditorDialog(Frame owner, ItemEditorFactory<T> factory)
-			throws HeadlessException {
-		super(owner);
-		this.editor = factory.createItemEditor();
-		this.init();
-	}
+    /** The ok button. */
+    private final JButton okButton = new JButton();
 
-	/**
-	 * Inits the.
-	 */
-	private void init() {
-		this.captionLabel.setPreferredSize(new Dimension(Short.MAX_VALUE, 32));
-		this.captionLabel.setAlignmentX(0.0f);
-		this.captionLabel.setBorder(new EmptyBorder(8, 0, 8, 0));
-		this.okButton.setAction(new OkAction());
-		this.okButton.setText("OK");
-		this.cancelButton.setAction(new CancelAction());
-		this.cancelButton.setText("Cancel");
+    /** The cancel button. */
+    private final JButton cancelButton = new JButton();
 
-		// this.editor.setBorder(new BevelBorder(BevelBorder.RAISED));
+    /** The editor. */
+    private final AbstractItemEditor<T> editor;
 
-		Box rootBox = new Box(BoxLayout.Y_AXIS);
-		rootBox.setBorder(new EmptyBorder(4, 4, 4, 4));
-		rootBox.add(this.captionLabel);
-		rootBox.add(this.editor);
-		rootBox.add(this.createButtonPanel());
+    /**
+     * Instantiates a new item editor dialog.
+     *
+     * @param owner
+     *            the owner
+     * @param factory
+     *            the factory
+     * @throws HeadlessException
+     *             the headless exception
+     */
+    public ItemEditorDialog(Dialog owner, ItemEditorFactory<T> factory)
+            throws HeadlessException {
+        super(owner);
+        this.editor = factory.createItemEditor();
+        this.init();
+    }
 
-		Container contentPane = this.getContentPane();
-		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-		contentPane.add(rootBox);
-	}
+    /**
+     * Instantiates a new item editor dialog.
+     *
+     * @param owner
+     *            the owner
+     * @param factory
+     *            the factory
+     * @throws HeadlessException
+     *             the headless exception
+     */
+    public ItemEditorDialog(Frame owner, ItemEditorFactory<T> factory)
+            throws HeadlessException {
+        super(owner);
+        this.editor = factory.createItemEditor();
+        this.init();
+    }
 
-	/**
-	 * Sets the caption.
-	 *
-	 * @param caption the new caption
-	 */
-	public void setCaption(String caption) {
-		this.captionLabel.setText(caption);
-	}
+    /**
+     * Inits the.
+     */
+    private void init() {
+        this.captionLabel.setPreferredSize(new Dimension(Short.MAX_VALUE, 32));
+        this.captionLabel.setAlignmentX(0.0f);
+        this.captionLabel.setBorder(new EmptyBorder(8, 0, 8, 0));
+        this.okButton.setAction(new OkAction());
+        this.okButton.setText("OK");
+        this.cancelButton.setAction(new CancelAction());
+        this.cancelButton.setText("Cancel");
 
-	/**
-	 * Sets the item.
-	 *
-	 * @param item the new item
-	 */
-	public void setItem(T item) {
-		this.editor.setItem(item);
-	}
+        // this.editor.setBorder(new BevelBorder(BevelBorder.RAISED));
 
-	/**
-	 * Creates the button panel.
-	 *
-	 * @return the component
-	 */
-	private Component createButtonPanel() {
-		Box panel = new Box(BoxLayout.X_AXIS);
-		// panel.setBorder(new BevelBorder(BevelBorder.LOWERED));
-		panel.setBorder(new EmptyBorder(4, 4, 4, 4));
-		panel.add(Box.createGlue());
-		panel.add(this.okButton);
-		panel.add(Box.createRigidArea(new Dimension(4, 1)));
-		panel.add(this.cancelButton);
-		panel.add(Box.createGlue());
-		return panel;
-	}
+        Box rootBox = new Box(BoxLayout.Y_AXIS);
+        rootBox.setBorder(new EmptyBorder(4, 4, 4, 4));
+        rootBox.add(this.captionLabel);
+        rootBox.add(this.editor);
+        rootBox.add(this.createButtonPanel());
 
-	/** The resulting item. */
-	private T resultingItem;
+        Container contentPane = this.getContentPane();
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+        contentPane.add(rootBox);
+    }
 
-	/**
-	 * Gets the resulting item.
-	 *
-	 * @return the resulting item
-	 */
-	public T getResultingItem() {
-		return this.resultingItem;
-	}
+    /**
+     * Sets the caption.
+     *
+     * @param caption
+     *            the new caption
+     */
+    public void setCaption(String caption) {
+        this.captionLabel.setText(caption);
+    }
 
-	/**
-	 * The Class OkAction.
-	 */
-	private class OkAction extends AbstractAction {
-		
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
+    /**
+     * Sets the item.
+     *
+     * @param item
+     *            the new item
+     */
+    public void setItem(T item) {
+        this.editor.setItem(item);
+    }
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
-		public void actionPerformed(ActionEvent e) {
-			try {
-				editor.validateItem();
-			} catch (ValidationException ve) {
-				JOptionPane.showMessageDialog(ItemEditorDialog.this,
-						ve.getMessage());
-				return;
-			}
-			resultingItem = editor.getItem();
-			ItemEditorDialog.this.dispose();
-		}
-	}
+    /**
+     * Creates the button panel.
+     *
+     * @return the component
+     */
+    private Component createButtonPanel() {
+        Box panel = new Box(BoxLayout.X_AXIS);
+        // panel.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        panel.setBorder(new EmptyBorder(4, 4, 4, 4));
+        panel.add(Box.createGlue());
+        panel.add(this.okButton);
+        panel.add(Box.createRigidArea(new Dimension(4, 1)));
+        panel.add(this.cancelButton);
+        panel.add(Box.createGlue());
+        return panel;
+    }
 
-	/**
-	 * The Class CancelAction.
-	 */
-	private class CancelAction extends AbstractAction {
-		
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
+    /** The resulting item. */
+    private T resultingItem;
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
-		public void actionPerformed(ActionEvent e) {
-			resultingItem = null;
-			ItemEditorDialog.this.dispose();
-		}
-	}
+    /**
+     * Gets the resulting item.
+     *
+     * @return the resulting item
+     */
+    public T getResultingItem() {
+        return this.resultingItem;
+    }
+
+    /**
+     * The Class OkAction.
+     */
+    private class OkAction extends AbstractAction {
+
+        /** The Constant serialVersionUID. */
+        private static final long serialVersionUID = 1L;
+
+        /*
+         * (non-Javadoc)
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                editor.validateItem();
+            } catch (ValidationException ve) {
+                JOptionPane.showMessageDialog(ItemEditorDialog.this,
+                        ve.getMessage());
+                return;
+            }
+            resultingItem = editor.getItem();
+            ItemEditorDialog.this.dispose();
+        }
+    }
+
+    /**
+     * The Class CancelAction.
+     */
+    private class CancelAction extends AbstractAction {
+
+        /** The Constant serialVersionUID. */
+        private static final long serialVersionUID = 1L;
+
+        /*
+         * (non-Javadoc)
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            resultingItem = null;
+            ItemEditorDialog.this.dispose();
+        }
+    }
 }

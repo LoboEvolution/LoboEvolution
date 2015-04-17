@@ -50,7 +50,6 @@ import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.util.LangUtils;
 import com.steadystate.css.util.ThrowCssExceptionErrorHandler;
 
-
 /**
  * Implementation of {@link CSSStyleSheet}.
  *
@@ -59,83 +58,39 @@ import com.steadystate.css.util.ThrowCssExceptionErrorHandler;
  */
 public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -2300541300646796363L;
 
-    /** The disabled_. */
     private boolean disabled_;
-    
-    /** The owner node_. */
     private Node ownerNode_;
-    
-    /** The parent style sheet_. */
     private StyleSheet parentStyleSheet_;
-    
-    /** The href_. */
     private String href_;
-    
-    /** The title_. */
     private String title_;
-    
-    /** The media_. */
     private MediaList media_;
-    
-    /** The owner rule_. */
     private CSSRule ownerRule_;
-    
-    /** The read only_. */
     private boolean readOnly_;
-    
-    /** The css rules_. */
     private CSSRuleList cssRules_;
-    
-    /** The base uri_. */
     private String baseUri_;
 
-    /**
-     * Sets the media.
-     *
-     * @param media the new media
-     */
     public void setMedia(final MediaList media) {
         media_ = media;
     }
 
-    /**
-     * Gets the base uri.
-     *
-     * @return the base uri
-     */
     private String getBaseUri() {
         return baseUri_;
     }
 
-    /**
-     * Sets the base uri.
-     *
-     * @param baseUri the new base uri
-     */
     public void setBaseUri(final String baseUri) {
         baseUri_ = baseUri;
     }
 
-    /**
-     * Instantiates a new CSS style sheet impl.
-     */
     public CSSStyleSheetImpl() {
         super();
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.stylesheets.StyleSheet#getType()
-     */
     public String getType() {
         return "text/css";
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.stylesheets.StyleSheet#getDisabled()
-     */
     public boolean getDisabled() {
         return disabled_;
     }
@@ -143,58 +98,35 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
     /**
      * We will need to respond more fully if a stylesheet is disabled, probably
      * by generating an event for the main application.
-     *
-     * @param disabled the new disabled
      */
     public void setDisabled(final boolean disabled) {
         disabled_ = disabled;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.stylesheets.StyleSheet#getOwnerNode()
-     */
     public Node getOwnerNode() {
         return ownerNode_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.stylesheets.StyleSheet#getParentStyleSheet()
-     */
     public StyleSheet getParentStyleSheet() {
         return parentStyleSheet_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.stylesheets.StyleSheet#getHref()
-     */
     public String getHref() {
         return href_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.stylesheets.StyleSheet#getTitle()
-     */
     public String getTitle() {
         return title_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.stylesheets.StyleSheet#getMedia()
-     */
     public MediaList getMedia() {
         return media_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSStyleSheet#getOwnerRule()
-     */
     public CSSRule getOwnerRule() {
         return ownerRule_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSStyleSheet#getCssRules()
-     */
     public CSSRuleList getCssRules() {
         if (cssRules_ == null) {
             cssRules_ = new CSSRuleListImpl();
@@ -202,9 +134,6 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
         return cssRules_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSStyleSheet#insertRule(java.lang.String, int)
-     */
     public int insertRule(final String rule, final int index) throws DOMException {
         if (readOnly_) {
             throw new DOMExceptionImpl(
@@ -295,9 +224,6 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
         return index;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSStyleSheet#deleteRule(int)
-     */
     public void deleteRule(final int index) throws DOMException {
         if (readOnly_) {
             throw new DOMExceptionImpl(
@@ -316,65 +242,30 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
         }
     }
 
-    /**
-     * Checks if is read only.
-     *
-     * @return true, if is read only
-     */
     public boolean isReadOnly() {
         return readOnly_;
     }
 
-    /**
-     * Sets the read only.
-     *
-     * @param b the new read only
-     */
     public void setReadOnly(final boolean b) {
         readOnly_ = b;
     }
 
-    /**
-     * Sets the owner node.
-     *
-     * @param ownerNode the new owner node
-     */
     public void setOwnerNode(final Node ownerNode) {
         ownerNode_ = ownerNode;
     }
 
-    /**
-     * Sets the parent style sheet.
-     *
-     * @param parentStyleSheet the new parent style sheet
-     */
     public void setParentStyleSheet(final StyleSheet parentStyleSheet) {
         parentStyleSheet_ = parentStyleSheet;
     }
 
-    /**
-     * Sets the href.
-     *
-     * @param href the new href
-     */
     public void setHref(final String href) {
         href_ = href;
     }
 
-    /**
-     * Sets the title.
-     *
-     * @param title the new title
-     */
     public void setTitle(final String title) {
         title_ = title;
     }
 
-    /**
-     * Sets the media text.
-     *
-     * @param mediaText the new media text
-     */
     public void setMediaText(final String mediaText) {
         final InputSource source = new InputSource(new StringReader(mediaText));
         try {
@@ -387,35 +278,19 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
         }
     }
 
-    /**
-     * Sets the owner rule.
-     *
-     * @param ownerRule the new owner rule
-     */
     public void setOwnerRule(final CSSRule ownerRule) {
         ownerRule_ = ownerRule;
     }
 
-    /**
-     * Sets the css rules.
-     *
-     * @param rules the new css rules
-     */
     public void setCssRules(final CSSRuleList rules) {
         cssRules_ = rules;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return getCssRules().toString();
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -437,9 +312,6 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
         return eq;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode() {
         int hash = LangUtils.HASH_SEED;
@@ -456,12 +328,6 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
         return hash;
     }
 
-    /**
-     * Write object.
-     *
-     * @param out the out
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private void writeObject(final ObjectOutputStream out) throws IOException {
         out.writeObject(baseUri_);
         out.writeObject(cssRules_);
@@ -474,13 +340,6 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
         out.writeObject(title_);
     }
 
-    /**
-     * Read object.
-     *
-     * @param in the in
-     * @throws IOException Signals that an I/O exception has occurred.
-     * @throws ClassNotFoundException the class not found exception
-     */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         baseUri_ = (String) in.readObject();
         cssRules_ = (CSSRuleList) in.readObject();
@@ -506,7 +365,6 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
      *
      * @param recursive <code>true</code> if the import should be done
      *   recursively, <code>false</code> otherwise
-     * @throws DOMException the DOM exception
      */
     public void importImports(final boolean recursive) throws DOMException {
         for (int i = 0; i < getCssRules().getLength(); i++) {

@@ -9,7 +9,6 @@ import java.net.URI;
 
 import org.mozilla.javascript.Script;
 
-
 /**
  * Represents a compiled CommonJS module script. The {@link Require} functions
  * use them and obtain them through a {@link ModuleScriptProvider}. Instances
@@ -19,17 +18,10 @@ import org.mozilla.javascript.Script;
  */
 public class ModuleScript implements Serializable
 {
-    
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** The script. */
     private final Script script;
-    
-    /** The uri. */
     private final URI uri;
-    
-    /** The base. */
     private final URI base;
 
     /**

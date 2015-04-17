@@ -1,48 +1,67 @@
-package org.lobobrowser.html;
+/*
+    GNU GENERAL PUBLIC LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
 
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ */
+package org.lobobrowser.html;
 
 /**
  * The Interface HtmlEventProperties.
  */
 public interface HtmlEventProperties {
 
-	/** The uievent. */
-	public final String UIEVENT = "UIEvent";
-	
-	/** The uievents. */
-	public final String UIEVENTS = "UIEvents";
-	
-	/** The mouseevent. */
-	public final String MOUSEEVENT = "MouseEvent";
-	
-	/** The mouseevents. */
-	public final String MOUSEEVENTS = "MouseEvents";
-	
-	/** The mutationevent. */
-	public final String MUTATIONEVENT = "MutationEvent";
-	
-	/** The mutationevents. */
-	public final String MUTATIONEVENTS = "MutationEvents";
-	
-	/** The mutationnameevent. */
-	public final String MUTATIONNAMEEVENT = "MutationNameEvent";
-	
-	/** The textevent. */
-	public final String TEXTEVENT = "TextEvent";
-	
-	/** The keyboardevent. */
-	public final String KEYBOARDEVENT = "KeyboardEvent";
-	
-	/** The customevent. */
-	public final String CUSTOMEVENT = "CustomEvent";
-	
-	/** The event. */
-	public final String EVENT = "Event";
-	
-	/** The svgevents. */
-	public final String SVGEVENTS = "SVGEvents";
-	
-	/** The svgzoomevents. */
-	public final String SVGZOOMEVENTS = "SVGZoomEvents";
+    /** The uievent. */
+    String UIEVENT = "UIEvent";
+
+    /** The uievents. */
+    String UIEVENTS = "UIEvents";
+
+    /** The mouseevent. */
+    String MOUSEEVENT = "MouseEvent";
+
+    /** The mouseevents. */
+    String MOUSEEVENTS = "MouseEvents";
+
+    /** The mutationevent. */
+    String MUTATIONEVENT = "MutationEvent";
+
+    /** The mutationevents. */
+    String MUTATIONEVENTS = "MutationEvents";
+
+    /** The mutationnameevent. */
+    String MUTATIONNAMEEVENT = "MutationNameEvent";
+
+    /** The textevent. */
+    String TEXTEVENT = "TextEvent";
+
+    /** The keyboardevent. */
+    String KEYBOARDEVENT = "KeyboardEvent";
+
+    /** The customevent. */
+    String CUSTOMEVENT = "CustomEvent";
+
+    /** The event. */
+    String EVENT = "Event";
+
+    /** The svgevents. */
+    String SVGEVENTS = "SVGEvents";
+
+    /** The svgzoomevents. */
+    String SVGZOOMEVENTS = "SVGZoomEvents";
 
 }

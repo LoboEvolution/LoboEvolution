@@ -1,22 +1,16 @@
 /*
-    GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
+ * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
+ * can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version. This
+ * library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Jan 15, 2006
@@ -34,65 +28,70 @@ import org.lobobrowser.html.dombl.JTextFieldImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.renderer.HtmlController;
 
-
 /**
  * The Class InputTextControl.
  */
 public class InputTextControl extends BaseInputTextControl {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new input text control.
-	 *
-	 * @param modelNode the model node
-	 */
-	public InputTextControl(final HTMLBaseInputElement modelNode) {
-		super(modelNode);
-		JTextFieldImpl text =  (JTextFieldImpl) this.widget;
-		
-		if(modelNode.getTitle() != null)
-			text.setToolTipText(modelNode.getTitle());
-		
-		text.setVisible(modelNode.getHidden());
-		text.applyComponentOrientation(direction(modelNode.getDir()));
-		text.setEditable(new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
-		text.setEnabled(!modelNode.getDisabled());
-		text.setPlaceholder(modelNode.getPlaceholder());
-		text.setSelectionColor(Color.BLUE);
-		text.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				HtmlController.getInstance().onEnterPressed(modelNode, null);
-			}
-		});
-	}
+    /**
+     * Instantiates a new input text control.
+     *
+     * @param modelNode
+     *            the model node
+     */
+    public InputTextControl(final HTMLBaseInputElement modelNode) {
+        super(modelNode);
+        JTextFieldImpl text = (JTextFieldImpl) this.widget;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.lobobrowser.html.render.BaseInputTextControl#createTextField(java.lang
-	 * .String)
-	 */
-	protected JTextComponent createTextField() {
-		return new JTextFieldImpl();
-	}
-	
-	/**
-	 * Direction.
-	 *
-	 * @param dir the dir
-	 * @return the component orientation
-	 */
-	private ComponentOrientation direction(String dir) {
+        if (modelNode.getTitle() != null) {
+            text.setToolTipText(modelNode.getTitle());
+        }
 
-		if ("ltr".equalsIgnoreCase(dir)) {
-			return ComponentOrientation.LEFT_TO_RIGHT;
-		} else if ("rtl".equalsIgnoreCase(dir)) {
-			return ComponentOrientation.RIGHT_TO_LEFT;
-		} else {
-			return ComponentOrientation.UNKNOWN;
-		}
-	}
+        text.setVisible(modelNode.getHidden());
+        text.applyComponentOrientation(direction(modelNode.getDir()));
+        text.setEditable(new Boolean(
+                modelNode.getContentEditable() == null ? "true" : modelNode
+                        .getContentEditable()));
+        text.setEnabled(!modelNode.getDisabled());
+        text.setPlaceholder(modelNode.getPlaceholder());
+        text.setSelectionColor(Color.BLUE);
+        text.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                HtmlController.getInstance().onEnterPressed(modelNode, null);
+            }
+        });
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.lobobrowser.html.render.BaseInputTextControl#createTextField(java.lang
+     * .String)
+     */
+    @Override
+    protected JTextComponent createTextField() {
+        return new JTextFieldImpl();
+    }
+
+    /**
+     * Direction.
+     *
+     * @param dir
+     *            the dir
+     * @return the component orientation
+     */
+    private ComponentOrientation direction(String dir) {
+
+        if ("ltr".equalsIgnoreCase(dir)) {
+            return ComponentOrientation.LEFT_TO_RIGHT;
+        } else if ("rtl".equalsIgnoreCase(dir)) {
+            return ComponentOrientation.RIGHT_TO_LEFT;
+        } else {
+            return ComponentOrientation.UNKNOWN;
+        }
+    }
 }

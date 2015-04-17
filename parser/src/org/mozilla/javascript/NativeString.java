@@ -8,7 +8,6 @@ package org.mozilla.javascript;
 
 import java.text.Collator;
 
-
 /**
  * This class implements the String native object.
  *
@@ -23,59 +22,35 @@ import java.text.Collator;
  */
 final class NativeString extends IdScriptableObject
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 920268368584188687L;
 
-    /** The Constant STRING_TAG. */
     private static final Object STRING_TAG = "String";
 
-    /**
-     * Inits the.
-     *
-     * @param scope the scope
-     * @param sealed the sealed
-     */
     static void init(Scriptable scope, boolean sealed)
     {
         NativeString obj = new NativeString("");
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
-    /**
-     * Instantiates a new native string.
-     *
-     * @param s the s
-     */
     NativeString(CharSequence s) {
         string = s;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
-     */
     @Override
     public String getClassName() {
         return "String";
     }
 
-    /** The Constant MAX_INSTANCE_ID. */
     private static final int
         Id_length                    =  1,
         MAX_INSTANCE_ID              =  1;
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#getMaxInstanceId()
-     */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#findInstanceIdInfo(java.lang.String)
-     */
     @Override
     protected int findInstanceIdInfo(String s)
     {
@@ -85,9 +60,6 @@ final class NativeString extends IdScriptableObject
         return super.findInstanceIdInfo(s);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#getInstanceIdName(int)
-     */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -95,9 +67,6 @@ final class NativeString extends IdScriptableObject
         return super.getInstanceIdName(id);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#getInstanceIdValue(int)
-     */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -107,9 +76,6 @@ final class NativeString extends IdScriptableObject
         return super.getInstanceIdValue(id);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#fillConstructorProperties(org.mozilla.javascript.IdFunctionObject)
-     */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -152,9 +118,6 @@ final class NativeString extends IdScriptableObject
         super.fillConstructorProperties(ctor);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
-     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -205,9 +168,6 @@ final class NativeString extends IdScriptableObject
         initPrototypeMethod(STRING_TAG, id, s, arity);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -237,14 +197,14 @@ final class NativeString extends IdScriptableObject
               case ConstructorId_localeCompare:
               case ConstructorId_toLocaleLowerCase: {
                 if (args.length > 0) {
-                    thisObj = ScriptRuntime.toObject(scope,
+                    thisObj = ScriptRuntime.toObject(cx, scope,
                             ScriptRuntime.toCharSequence(args[0]));
                     Object[] newArgs = new Object[args.length-1];
                     for (int i=0; i < newArgs.length; i++)
                         newArgs[i] = args[i+1];
                     args = newArgs;
                 } else {
-                    thisObj = ScriptRuntime.toObject(scope,
+                    thisObj = ScriptRuntime.toObject(cx, scope,
                             ScriptRuntime.toCharSequence(thisObj));
                 }
                 id = -id;
@@ -468,13 +428,6 @@ final class NativeString extends IdScriptableObject
         }
     }
 
-    /**
-     * Real this.
-     *
-     * @param thisObj the this obj
-     * @param f the f
-     * @return the native string
-     */
     private static NativeString realThis(Scriptable thisObj, IdFunctionObject f)
     {
         if (!(thisObj instanceof NativeString))
@@ -484,15 +437,6 @@ final class NativeString extends IdScriptableObject
 
     /*
      * HTML composition aids.
-     */
-    /**
-     * Tagify.
-     *
-     * @param thisObj the this obj
-     * @param tag the tag
-     * @param attribute the attribute
-     * @param args the args
-     * @return the string
      */
     private static String tagify(Object thisObj, String tag,
                                  String attribute, Object[] args)
@@ -516,18 +460,10 @@ final class NativeString extends IdScriptableObject
         return result.toString();
     }
 
-    /**
-     * To char sequence.
-     *
-     * @return the char sequence
-     */
     public CharSequence toCharSequence() {
         return string;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return string instanceof String ? (String)string : string.toString();
@@ -535,9 +471,6 @@ final class NativeString extends IdScriptableObject
 
     /* Make array-style property lookup work for strings.
      * XXX is this ECMA?  A version check is probably needed. In js too.
-     */
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#get(int, org.mozilla.javascript.Scriptable)
      */
     @Override
     public Object get(int index, Scriptable start) {
@@ -547,9 +480,6 @@ final class NativeString extends IdScriptableObject
         return super.get(index, start);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#put(int, org.mozilla.javascript.Scriptable, java.lang.Object)
-     */
     @Override
     public void put(int index, Scriptable start, Object value) {
         if (0 <= index && index < string.length()) {
@@ -562,13 +492,6 @@ final class NativeString extends IdScriptableObject
      *
      * See ECMA 15.5.4.6.  Uses Java String.indexOf()
      * OPT to add - BMH searching from jsstr.c.
-     */
-    /**
-     * Js_index of.
-     *
-     * @param target the target
-     * @param args the args
-     * @return the int
      */
     private static int js_indexOf(String target, Object[] args) {
         String search = ScriptRuntime.toString(args, 0);
@@ -588,13 +511,6 @@ final class NativeString extends IdScriptableObject
      * See ECMA 15.5.4.7
      *
      */
-    /**
-     * Js_last index of.
-     *
-     * @param target the target
-     * @param args the args
-     * @return the int
-     */
     private static int js_lastIndexOf(String target, Object[] args) {
         String search = ScriptRuntime.toString(args, 0);
         double end = ScriptRuntime.toNumber(args, 1);
@@ -610,14 +526,6 @@ final class NativeString extends IdScriptableObject
 
     /*
      * See ECMA 15.5.4.15
-     */
-    /**
-     * Js_substring.
-     *
-     * @param cx the cx
-     * @param target the target
-     * @param args the args
-     * @return the char sequence
      */
     private static CharSequence js_substring(Context cx, CharSequence target,
                                        Object[] args)
@@ -655,24 +563,12 @@ final class NativeString extends IdScriptableObject
         return target.subSequence((int)start, (int)end);
     }
 
-    /**
-     * Gets the length.
-     *
-     * @return the length
-     */
     int getLength() {
         return string.length();
     }
 
     /*
      * Non-ECMA methods.
-     */
-    /**
-     * Js_substr.
-     *
-     * @param target the target
-     * @param args the args
-     * @return the char sequence
      */
     private static CharSequence js_substr(CharSequence target, Object[] args) {
         if (args.length < 1)
@@ -707,13 +603,6 @@ final class NativeString extends IdScriptableObject
     /*
      * Python-esque sequence operations.
      */
-    /**
-     * Js_concat.
-     *
-     * @param target the target
-     * @param args the args
-     * @return the string
-     */
     private static String js_concat(String target, Object[] args) {
         int N = args.length;
         if (N == 0) { return target; }
@@ -740,13 +629,6 @@ final class NativeString extends IdScriptableObject
         return result.toString();
     }
 
-    /**
-     * Js_slice.
-     *
-     * @param target the target
-     * @param args the args
-     * @return the char sequence
-     */
     private static CharSequence js_slice(CharSequence target, Object[] args) {
         double begin = args.length < 1 ? 0 : ScriptRuntime.toInteger(args[0]);
         double end;
@@ -778,14 +660,11 @@ final class NativeString extends IdScriptableObject
 
 // #string_id_map#
 
-    /* (non-Javadoc)
- * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
- */
-@Override
+    @Override
     protected int findPrototypeId(String s)
     {
         int id;
-// #generated# Last update: 2009-07-23 07:32:39 EST
+// #generated# Last update: 2015-02-09 17:30:54 PST
         L0: { id = 0; String X = null; int c;
             L: switch (s.length()) {
             case 3: c=s.charAt(2);
@@ -821,12 +700,12 @@ final class NativeString extends IdScriptableObject
                 case 'n': X="indexOf";id=Id_indexOf; break L;
                 case 't': X="italics";id=Id_italics; break L;
                 } break L;
-            case 8: c=s.charAt(4);
-                if (c=='r') { X="toString";id=Id_toString; }
-                else if (c=='s') { X="fontsize";id=Id_fontsize; }
-                else if (c=='u') { X="toSource";id=Id_toSource; }
-                else if (c=='L') { X="trimLeft";id=Id_trimLeft; }
-                break L;
+            case 8: switch (s.charAt(4)) {
+                case 'L': X="trimLeft";id=Id_trimLeft; break L;
+                case 'r': X="toString";id=Id_toString; break L;
+                case 's': X="fontsize";id=Id_fontsize; break L;
+                case 'u': X="toSource";id=Id_toSource; break L;
+                } break L;
             case 9: c=s.charAt(0);
                 if (c=='f') { X="fontcolor";id=Id_fontcolor; }
                 else if (c=='s') { X="substring";id=Id_substring; }
@@ -853,7 +732,6 @@ final class NativeString extends IdScriptableObject
         return id;
     }
 
-    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         ConstructorId_fromCharCode   = -1,
 
@@ -900,8 +778,7 @@ final class NativeString extends IdScriptableObject
 
 // #/string_id_map#
 
-    /** The Constant ConstructorId_toLocaleLowerCase. */
-private static final int
+    private static final int
         ConstructorId_charAt         = -Id_charAt,
         ConstructorId_charCodeAt     = -Id_charCodeAt,
         ConstructorId_indexOf        = -Id_indexOf,
@@ -920,7 +797,6 @@ private static final int
         ConstructorId_localeCompare  = -Id_localeCompare,
         ConstructorId_toLocaleLowerCase = -Id_toLocaleLowerCase;
 
-    /** The string. */
     private CharSequence string;
 }
 

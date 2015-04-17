@@ -22,7 +22,7 @@ import org.lobobrowser.html.w3c.HTMLCanvasElement;
  * The Class HTMLCanvasElementImpl.
  */
 public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
-        HTMLCanvasElement {
+HTMLCanvasElement {
 
     /**
      * Instantiates a new HTML canvas element impl.
@@ -32,7 +32,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
      */
     public HTMLCanvasElementImpl(String name) {
         super(name);
-        System.out.println("HTMLCanvasElementImpl");
     }
 
     @Override
@@ -53,7 +52,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
         this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
     }
 
-
     @Override
     public int getHeight() {
         String heightText = this.getAttribute(HtmlAttributeProperties.HEIGHT);
@@ -73,13 +71,11 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
                 String.valueOf(height));
     }
 
-
     @Override
     public String toDataURL() {
         // TODO Auto-generated method stub
         return null;
     }
-
 
     @Override
     public String toDataURL(String type, Object... args) {

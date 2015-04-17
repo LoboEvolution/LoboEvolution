@@ -30,14 +30,9 @@
 
 package org.mozilla.javascript.v8dtoa;
 
-
-/**
- * The Class FastDtoa.
- */
 public class FastDtoa {
 
     // FastDtoa will produce at most kFastDtoaMaximalLength digits.
-    /** The Constant kFastDtoaMaximalLength. */
     static final int kFastDtoaMaximalLength = 17;
 
 
@@ -47,10 +42,7 @@ public class FastDtoa {
     //
     // A different range might be chosen on a different platform, to optimize digit
     // generation, but a smaller range requires more powers of ten to be cached.
-    /** The Constant minimal_target_exponent. */
     static final int minimal_target_exponent = -60;
-    
-    /** The Constant maximal_target_exponent. */
     static final int maximal_target_exponent = -32;
 
 
@@ -68,17 +60,6 @@ public class FastDtoa {
     // Output: returns true if the buffer is guaranteed to contain the closest
     //    representable number to the input.
     //  Modifies the generated digits in the buffer to approach (round towards) w.
-    /**
-     * Round weed.
-     *
-     * @param buffer the buffer
-     * @param distance_too_high_w the distance_too_high_w
-     * @param unsafe_interval the unsafe_interval
-     * @param rest the rest
-     * @param ten_kappa the ten_kappa
-     * @param unit the unit
-     * @return true, if successful
-     */
     static boolean roundWeed(FastDtoaBuilder buffer,
                              long distance_too_high_w,
                              long unsafe_interval,
@@ -184,22 +165,11 @@ public class FastDtoa {
 
 
 
-    /** The Constant kTen4. */
     static final int kTen4 = 10000;
-    
-    /** The Constant kTen5. */
     static final int kTen5 = 100000;
-    
-    /** The Constant kTen6. */
     static final int kTen6 = 1000000;
-    
-    /** The Constant kTen7. */
     static final int kTen7 = 10000000;
-    
-    /** The Constant kTen8. */
     static final int kTen8 = 100000000;
-    
-    /** The Constant kTen9. */
     static final int kTen9 = 1000000000;
 
     // Returns the biggest power of ten that is less than or equal than the given
@@ -207,13 +177,6 @@ public class FastDtoa {
     // If number_bits == 0 then 0^-1 is returned
     // The number of bits must be <= 32.
     // Precondition: (1 << number_bits) <= number < (1 << (number_bits + 1)).
-    /**
-     * Biggest power ten.
-     *
-     * @param number the number
-     * @param number_bits the number_bits
-     * @return the long
-     */
     static long biggestPowerTen(int number,
                                 int number_bits) {
         int power, exponent;
@@ -313,13 +276,6 @@ public class FastDtoa {
         return ((long)power << 32) | (0xffffffffL & exponent);
     }
 
-    /**
-     * Uint64_lte.
-     *
-     * @param a the a
-     * @param b the b
-     * @return true, if successful
-     */
     private static boolean uint64_lte(long a, long b) {
         // less-or-equal for unsigned int64 in java-style...
         return (a == b) || ((a < b) ^ (a < 0) ^ (b < 0));
@@ -367,16 +323,6 @@ public class FastDtoa {
     // represent 'w' we can stop. Everything inside the interval low - high
     // represents w. However we have to pay attention to low, high and w's
     // imprecision.
-    /**
-     * Digit gen.
-     *
-     * @param low the low
-     * @param w the w
-     * @param high the high
-     * @param buffer the buffer
-     * @param mk the mk
-     * @return true, if successful
-     */
     static boolean digitGen(DiyFp low,
                      DiyFp w,
                      DiyFp high,
@@ -490,13 +436,6 @@ public class FastDtoa {
     // The last digit will be closest to the actual v. That is, even if several
     // digits might correctly yield 'v' when read again, the closest will be
     // computed.
-    /**
-     * Grisu3.
-     *
-     * @param v the v
-     * @param buffer the buffer
-     * @return true, if successful
-     */
     static boolean grisu3(double v, FastDtoaBuilder buffer) {
         long bits = Double.doubleToLongBits(v);
         DiyFp w = DoubleHelper.asNormalizedDiyFp(bits);
@@ -545,13 +484,6 @@ public class FastDtoa {
     }
 
 
-    /**
-     * Dtoa.
-     *
-     * @param v the v
-     * @param buffer the buffer
-     * @return true, if successful
-     */
     public static boolean dtoa(double v, FastDtoaBuilder buffer) {
         assert(v > 0);
         assert(!Double.isNaN(v));
@@ -560,24 +492,11 @@ public class FastDtoa {
         return grisu3(v, buffer);
     }
 
-    /**
-     * Number to string.
-     *
-     * @param v the v
-     * @return the string
-     */
     public static String numberToString(double v) {
         FastDtoaBuilder buffer = new FastDtoaBuilder();
         return numberToString(v, buffer) ? buffer.format() : null;
     }
 
-    /**
-     * Number to string.
-     *
-     * @param v the v
-     * @param buffer the buffer
-     * @return true, if successful
-     */
     public static boolean numberToString(double v, FastDtoaBuilder buffer) {
         buffer.reset();
         if (v < 0) {

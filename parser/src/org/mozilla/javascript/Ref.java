@@ -8,7 +8,6 @@ package org.mozilla.javascript;
 
 import java.io.Serializable;
 
-
 /**
  * Generic notion of reference object that know how to query/modify the
  * target objects based on some property/index.
@@ -16,43 +15,26 @@ import java.io.Serializable;
 public abstract class Ref implements Serializable
 {
     
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 4044540354730911424L;
     
-    /**
-     * Checks for.
-     *
-     * @param cx the cx
-     * @return true, if successful
-     */
     public boolean has(Context cx)
     {
         return true;
     }
 
-    /**
-     * Gets the.
-     *
-     * @param cx the cx
-     * @return the object
-     */
     public abstract Object get(Context cx);
 
     /**
-     * Sets the.
-     *
-     * @param cx the cx
-     * @param value the value
-     * @return the object
+     * @deprecated Use {@link #set(Context, Scriptable, Object)} instead
      */
+    @Deprecated
     public abstract Object set(Context cx, Object value);
 
-    /**
-     * Delete.
-     *
-     * @param cx the cx
-     * @return true, if successful
-     */
+    public Object set(Context cx, Scriptable scope, Object value)
+    {
+        return set(cx, value);
+    }
+
     public boolean delete(Context cx)
     {
         return false;

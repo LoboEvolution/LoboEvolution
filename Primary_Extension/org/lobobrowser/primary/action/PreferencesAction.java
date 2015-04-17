@@ -27,50 +27,51 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class PreferencesAction extends ActionPool {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-	/** The window. */
-	private NavigatorWindow window;
+    /** The window. */
+    private NavigatorWindow window;
 
-	/**
-	 * Instantiates a new preferences action.
-	 *
-	 * @param componentSource
-	 *            the component source
-	 * @param window
-	 *            the window
-	 */
-	public PreferencesAction(ComponentSource componentSource,
-			NavigatorWindow window) {
-		super(componentSource, window);
-		this.window = window;
-	}
+    /**
+     * Instantiates a new preferences action.
+     *
+     * @param componentSource
+     *            the component source
+     * @param window
+     *            the window
+     */
+    public PreferencesAction(ComponentSource componentSource,
+            NavigatorWindow window) {
+        super(componentSource, window);
+        this.window = window;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
-	public void actionPerformed(ActionEvent e) {
-		showPreferences();
-	}
+    /*
+     * (non-Javadoc)
+     * @see
+     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        showPreferences();
+    }
 
-	/**
-	 * Show preferences.
-	 */
-	private void showPreferences() {
-		java.awt.Window awtWindow = window.getAwtWindow();
-		if (!(awtWindow instanceof Frame)) {
-			throw new IllegalStateException(
-					"Preferences dialog only supported when an AWT Frame is available.");
-		}
-		PreferencesDialog dialog = new PreferencesDialog((Frame) awtWindow);
-		dialog.setTitle("Preferences");
-		dialog.setLocationByPlatform(true);
-		dialog.setResizable(false);
-		dialog.setSize(new java.awt.Dimension(600, 400));
-		dialog.setVisible(true);
-	}
+    /**
+     * Show preferences.
+     */
+    private void showPreferences() {
+        java.awt.Window awtWindow = window.getAwtWindow();
+        if (!(awtWindow instanceof Frame)) {
+            throw new IllegalStateException(
+                    "Preferences dialog only supported when an AWT Frame is available.");
+        }
+        PreferencesDialog dialog = new PreferencesDialog((Frame) awtWindow);
+        dialog.setTitle("Preferences");
+        dialog.setLocationByPlatform(true);
+        dialog.setResizable(false);
+        dialog.setSize(new java.awt.Dimension(600, 400));
+        dialog.setVisible(true);
+    }
 
 }

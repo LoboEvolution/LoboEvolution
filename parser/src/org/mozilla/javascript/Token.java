@@ -6,44 +6,27 @@
 
 package org.mozilla.javascript;
 
-
 /**
  * This class implements the JavaScript scanner.
- * 
+ *
  * It is based on the C source files jsscan.c and jsscan.h
  * in the jsref package.
  *
+ * @see org.mozilla.javascript.Parser
+ *
  * @author Mike McCabe
  * @author Brendan Eich
- * @see org.mozilla.javascript.Parser
  */
 
 public class Token
 {
-    
-    /**
-     * The Enum CommentType.
-     */
     public static enum CommentType {
-        
-        /** The line. */
-        LINE, 
- /** The block comment. */
- BLOCK_COMMENT, 
- /** The jsdoc. */
- JSDOC, 
- /** The html. */
- HTML
+        LINE, BLOCK_COMMENT, JSDOC, HTML
     }
 
     // debug flags
-    /** The Constant printTrees. */
     public static final boolean printTrees = false;
-    
-    /** The Constant printICode. */
     static final boolean printICode = false;
-    
-    /** The Constant printNames. */
     static final boolean printNames = printTrees || printICode;
 
     /**
@@ -143,8 +126,7 @@ public class Token
         REF_NS_NAME    = 80; // Reference for ns::y, @ns::y@[y] etc.
 
         // End of interpreter bytecodes
-    /** The Constant ASSIGN_MOD. */
-        public final static int
+    public final static int
         LAST_BYTECODE_TOKEN    = REF_NS_NAME,
 
         TRY            = 81,
@@ -170,7 +152,6 @@ public class Token
         ASSIGN_DIV     = 100,  // /=
         ASSIGN_MOD     = 101;  // %=
 
-    /** The Constant LAST_TOKEN. */
     public final static int
         FIRST_ASSIGN   = ASSIGN,
         LAST_ASSIGN    = ASSIGN_MOD,
@@ -253,9 +234,6 @@ public class Token
      * Returns a name for the token.  If Rhino is compiled with certain
      * hardcoded debugging flags in this file, it calls {@code #typeToName};
      * otherwise it returns a string whose value is the token number.
-     *
-     * @param token the token
-     * @return the string
      */
     public static String name(int token)
     {

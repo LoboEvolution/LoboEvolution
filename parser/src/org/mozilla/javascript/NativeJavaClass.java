@@ -6,10 +6,8 @@
 
 package org.mozilla.javascript;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.Map;
-
 
 /**
  * This class reflects Java classes into the JavaScript environment, mainly
@@ -29,44 +27,22 @@ import java.util.Map;
 
 public class NativeJavaClass extends NativeJavaObject implements Function
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -6460763940409461664L;
 
     // Special property for getting the underlying Java class object.
-    /** The Constant javaClassPropertyName. */
     static final String javaClassPropertyName = "__javaObject__";
 
-    /**
-     * Instantiates a new native java class.
-     */
     public NativeJavaClass() {
     }
 
-    /**
-     * Instantiates a new native java class.
-     *
-     * @param scope the scope
-     * @param cl the cl
-     */
     public NativeJavaClass(Scriptable scope, Class<?> cl) {
         this(scope, cl, false);
     }
 
-    /**
-     * Instantiates a new native java class.
-     *
-     * @param scope the scope
-     * @param cl the cl
-     * @param isAdapter the is adapter
-     */
     public NativeJavaClass(Scriptable scope, Class<?> cl, boolean isAdapter) {
         super(scope, cl, null, isAdapter);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.NativeJavaObject#initMembers()
-     */
     @Override
     protected void initMembers() {
         Class<?> cl = (Class<?>)javaObject;
@@ -74,25 +50,16 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         staticFieldAndMethods = members.getFieldAndMethodsObjects(this, cl, true);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.NativeJavaObject#getClassName()
-     */
     @Override
     public String getClassName() {
         return "JavaClass";
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.NativeJavaObject#has(java.lang.String, org.mozilla.javascript.Scriptable)
-     */
     @Override
     public boolean has(String name, Scriptable start) {
         return members.has(name, true) || javaClassPropertyName.equals(name);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.NativeJavaObject#get(java.lang.String, org.mozilla.javascript.Scriptable)
-     */
     @Override
     public Object get(String name, Scriptable start) {
         // When used as a constructor, ScriptRuntime.newObject() asks
@@ -134,34 +101,20 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         throw members.reportMemberNotFound(name);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.NativeJavaObject#put(java.lang.String, org.mozilla.javascript.Scriptable, java.lang.Object)
-     */
     @Override
     public void put(String name, Scriptable start, Object value) {
         members.put(this, name, javaObject, value, true);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.NativeJavaObject#getIds()
-     */
     @Override
     public Object[] getIds() {
         return members.getIds(true);
     }
 
-    /**
-     * Gets the class object.
-     *
-     * @return the class object
-     */
     public Class<?> getClassObject() {
         return (Class<?>) super.unwrap();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.NativeJavaObject#getDefaultValue(java.lang.Class)
-     */
     @Override
     public Object getDefaultValue(Class<?> hint) {
         if (hint == null || hint == ScriptRuntime.StringClass)
@@ -173,9 +126,6 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         return this;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Function#call(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
     {
@@ -197,9 +147,6 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         return construct(cx, scope, args);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Function#construct(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
         Class<?> classObject = getClassObject();
@@ -252,15 +199,6 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         }
     }
 
-    /**
-     * Construct specific.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param args the args
-     * @param ctor the ctor
-     * @return the scriptable
-     */
     static Scriptable constructSpecific(Context cx, Scriptable scope,
                                         Object[] args, MemberBox ctor)
     {
@@ -271,13 +209,6 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         return cx.getWrapFactory().wrapNewObject(cx, topLevel, instance);
     }
 
-    /**
-     * Construct internal.
-     *
-     * @param args the args
-     * @param ctor the ctor
-     * @return the object
-     */
     static Object constructInternal(Object[] args, MemberBox ctor)
     {
         Class<?>[] argTypes = ctor.argTypes;
@@ -335,9 +266,6 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         return ctor.newInstance(args);
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return "[JavaClass " + getClassObject().getName() + "]";
@@ -350,9 +278,6 @@ public class NativeJavaClass extends NativeJavaObject implements Function
      * considered an instance of the Java class; this forestalls any
      * name conflicts between java.lang.Class's methods and the
      * static methods exposed by a JavaNativeClass.
-     *
-     * @param value the value
-     * @return true, if successful
      */
     @Override
     public boolean hasInstance(Scriptable value) {
@@ -368,13 +293,6 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         return false;
     }
 
-    /**
-     * Find nested class.
-     *
-     * @param parentClass the parent class
-     * @param name the name
-     * @return the class
-     */
     private static Class<?> findNestedClass(Class<?> parentClass, String name) {
         String nestedClassName = parentClass.getName() + '$' + name;
         ClassLoader loader = parentClass.getClassLoader();
@@ -389,6 +307,5 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         }
     }
 
-    /** The static field and methods. */
     private Map<String,FieldAndMethods> staticFieldAndMethods;
 }

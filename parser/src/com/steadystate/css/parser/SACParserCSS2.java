@@ -10,43 +10,27 @@ import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 import org.w3c.css.sac.SimpleSelector;
 
-
 /**
- * The Class SACParserCSS2.
- *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author waldbaer
  * @author rbri
  * @version $Id: SACParserCSS2.jj,v 1.8 2010-05-19 13:26:51 waldbaer Exp $
  */
-@SuppressWarnings("unused")
 public class SACParserCSS2 extends AbstractSACParser implements Parser, SACParserCSS2Constants {
 
-    /**
-     * Instantiates a new SAC parser cs s2.
-     */
     public SACParserCSS2() {
         this((CharStream) null);
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.parser.AbstractSACParser#getParserVersion()
-     */
     public String getParserVersion() {
         return "http://www.w3.org/TR/REC-CSS2/";
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.parser.AbstractSACParser#getGrammarUri()
-     */
     protected String getGrammarUri()
     {
         return "http://www.w3.org/TR/REC-CSS2/grammar.html";
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.parser.AbstractSACParser#getToken()
-     */
     protected Token getToken()
     {
         return token;
@@ -59,10 +43,7 @@ public class SACParserCSS2 extends AbstractSACParser implements Parser, SACParse
 //    [ [ ruleset | media | page | font_face ] [S|CDO|CDC]* ]*
 //  ;
 //
-  /* (non-Javadoc)
- * @see com.steadystate.css.parser.AbstractSACParser#styleSheet()
- */
-final public void styleSheet() throws ParseException {
+  final public void styleSheet() throws ParseException {
     try {
           handleStartDocument();
       styleSheetRuleList();
@@ -72,11 +53,6 @@ final public void styleSheet() throws ParseException {
     }
   }
 
-  /**
-   * Style sheet rule list.
-   *
-   * @throws ParseException the parse exception
-   */
   final public void styleSheetRuleList() throws ParseException {
   boolean ruleFound = false;
     label_1:
@@ -244,10 +220,7 @@ final public void styleSheet() throws ParseException {
 //
 // This is used by ASTStyleSheet.insertRule to parse a single rule
 //
-  /* (non-Javadoc)
- * @see com.steadystate.css.parser.AbstractSACParser#styleSheetRuleSingle()
- */
-final public void styleSheetRuleSingle() throws ParseException {
+  final public void styleSheetRuleSingle() throws ParseException {
     label_5:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -294,11 +267,6 @@ final public void styleSheetRuleSingle() throws ParseException {
     }
   }
 
-  /**
-   * Charset rule.
-   *
-   * @throws ParseException the parse exception
-   */
   final public void charsetRule() throws ParseException {
   Token t;
   Locator locator;
@@ -337,11 +305,6 @@ final public void styleSheetRuleSingle() throws ParseException {
     }
   }
 
-  /**
-   * Unknown at rule.
-   *
-   * @throws ParseException the parse exception
-   */
   final public void unknownAtRule() throws ParseException {
     String s;
     Locator locator;
@@ -361,13 +324,7 @@ final public void styleSheetRuleSingle() throws ParseException {
 //    [STRING|URI] S* [ medium [ ',' S* medium]* ]? ';' S*
 //  ;
 //
-  /**
- * Import rule.
- *
- * @param nonImportRuleFoundBefore the non import rule found before
- * @throws ParseException the parse exception
- */
-final public void importRule(final boolean nonImportRuleFoundBefore) throws ParseException {
+  final public void importRule(final boolean nonImportRuleFoundBefore) throws ParseException {
     Token t;
     SACMediaListImpl ml = new SACMediaListImpl();
     Locator locator;
@@ -441,12 +398,7 @@ final public void importRule(final boolean nonImportRuleFoundBefore) throws Pars
 //  : MEDIA_SYM S* medium [ ',' S* medium ]* '{' S* ruleset* '}' S*
 //  ;
 //
-  /**
- * Media rule.
- *
- * @throws ParseException the parse exception
- */
-final public void mediaRule() throws ParseException {
+  final public void mediaRule() throws ParseException {
     boolean start = false;
     SACMediaListImpl ml = new SACMediaListImpl();
     Locator locator;
@@ -512,9 +464,6 @@ final public void mediaRule() throws ParseException {
     }
   }
 
-  /* (non-Javadoc)
-   * @see com.steadystate.css.parser.AbstractSACParser#mediaList(com.steadystate.css.parser.SACMediaListImpl)
-   */
   final public void mediaList(SACMediaListImpl ml) throws ParseException {
     String s;
     try {
@@ -552,11 +501,6 @@ final public void mediaRule() throws ParseException {
     }
   }
 
-  /**
-   * Media rule list.
-   *
-   * @throws ParseException the parse exception
-   */
   final public void mediaRuleList() throws ParseException {
     label_14:
     while (true) {
@@ -615,13 +559,7 @@ final public void mediaRule() throws ParseException {
 //   : IDENT S*
 //   ;
 //
-  /**
- * Medium.
- *
- * @return the string
- * @throws ParseException the parse exception
- */
-final public String medium() throws ParseException {
+  final public String medium() throws ParseException {
   Token t;
     t = jj_consume_token(IDENT);
     label_16:
@@ -647,12 +585,7 @@ final public String medium() throws ParseException {
 //    '{' S* declaration [ ';' S* declaration ]* '}' S*
 //  ;
 //
-  /**
- * Page rule.
- *
- * @throws ParseException the parse exception
- */
-final public void pageRule() throws ParseException {
+  final public void pageRule() throws ParseException {
     Token t = null;
     String s = null;
     boolean start = false;
@@ -803,17 +736,11 @@ final public void pageRule() throws ParseException {
 //   : ':' IDENT
 //   ;
 //
-  /**
- * Pseudo page.
- *
- * @return the string
- * @throws ParseException the parse exception
- */
-final public String pseudoPage() throws ParseException {
+  final public String pseudoPage() throws ParseException {
   Token t;
     jj_consume_token(COLON);
     t = jj_consume_token(IDENT);
-                        {if (true) return t.image;}
+                        {if (true) return unescape(t.image, false);}
     throw new Error("Missing return statement in function");
   }
 
@@ -823,12 +750,7 @@ final public String pseudoPage() throws ParseException {
 //    '{' S* declaration [ ';' S* declaration ]* '}' S*
 //  ;
 //
-  /**
- * Font face rule.
- *
- * @throws ParseException the parse exception
- */
-final public void fontFaceRule() throws ParseException {
+  final public void fontFaceRule() throws ParseException {
     boolean start = false;
     Locator locator;
     try {
@@ -915,14 +837,7 @@ final public void fontFaceRule() throws ParseException {
 //  : '/' S* | ',' S* |
 //  ;
 //
-  /**
- * Operator.
- *
- * @param prev the prev
- * @return the lexical unit
- * @throws ParseException the parse exception
- */
-final public LexicalUnit operator(LexicalUnit prev) throws ParseException {
+  final public LexicalUnit operator(LexicalUnit prev) throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case SLASH:
       jj_consume_token(SLASH);
@@ -969,13 +884,7 @@ final public LexicalUnit operator(LexicalUnit prev) throws ParseException {
 //  : '+' S* | '>' S* |
 //  ;
 //
-  /**
- * Combinator.
- *
- * @return the char
- * @throws ParseException the parse exception
- */
-final public char combinator() throws ParseException {
+  final public char combinator() throws ParseException {
   char c = ' ';
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case PLUS:
@@ -1061,13 +970,7 @@ final public char combinator() throws ParseException {
 //  : '-' | '+'
 //  ;
 //
-  /**
- * Unary operator.
- *
- * @return the char
- * @throws ParseException the parse exception
- */
-final public char unaryOperator() throws ParseException {
+  final public char unaryOperator() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case MINUS:
       jj_consume_token(MINUS);
@@ -1090,13 +993,7 @@ final public char unaryOperator() throws ParseException {
 //   : IDENT S*
 //   ;
 //
-  /**
- * Property.
- *
- * @return the string
- * @throws ParseException the parse exception
- */
-final public String property() throws ParseException {
+  final public String property() throws ParseException {
     Token t;
     t = jj_consume_token(IDENT);
     label_33:
@@ -1121,12 +1018,7 @@ final public String property() throws ParseException {
 //    '{' S* declaration [ ';' S* declaration ]* '}' S*
 //  ;
 //
-  /**
- * Style rule.
- *
- * @throws ParseException the parse exception
- */
-final public void styleRule() throws ParseException {
+  final public void styleRule() throws ParseException {
     SelectorList selList = null;
     boolean start = false;
     Token t;
@@ -1166,9 +1058,6 @@ final public void styleRule() throws ParseException {
     }
   }
 
-  /* (non-Javadoc)
-   * @see com.steadystate.css.parser.AbstractSACParser#parseSelectorsInternal()
-   */
   final public SelectorList parseSelectorsInternal() throws ParseException {
     SelectorList selectors;
     label_35:
@@ -1189,9 +1078,6 @@ final public void styleRule() throws ParseException {
     throw new Error("Missing return statement in function");
   }
 
-  /* (non-Javadoc)
-   * @see com.steadystate.css.parser.AbstractSACParser#selectorList()
-   */
   final public SelectorList selectorList() throws ParseException {
     SelectorListImpl selList = new SelectorListImpl();
     Selector sel;
@@ -1236,13 +1122,7 @@ final public void styleRule() throws ParseException {
 //   : simple_selector [ combinator simple_selector ]*
 //   ;
 //
-  /**
- * Selector.
- *
- * @return the selector
- * @throws ParseException the parse exception
- */
-final public Selector selector() throws ParseException {
+  final public Selector selector() throws ParseException {
     Selector sel;
     char comb;
     try {
@@ -1282,15 +1162,7 @@ final public Selector selector() throws ParseException {
 //  : element_name? [ HASH | class | attrib | pseudo ]* S*
 //  ;
 //
-  /**
- * Simple selector.
- *
- * @param sel the sel
- * @param comb the comb
- * @return the selector
- * @throws ParseException the parse exception
- */
-final public Selector simpleSelector(Selector sel, char comb) throws ParseException {
+  final public Selector simpleSelector(Selector sel, char comb) throws ParseException {
     SimpleSelector simpleSel = null;
     Condition c = null;
     SimpleSelector pseudoElementSel = null;
@@ -1422,15 +1294,7 @@ final public Selector simpleSelector(Selector sel, char comb) throws ParseExcept
 //   : '.' IDENT
 //   ;
 //
-  /**
- * _class.
- *
- * @param pred the pred
- * @param pseudoElementFound the pseudo element found
- * @return the condition
- * @throws ParseException the parse exception
- */
-final public Condition _class(Condition pred, boolean pseudoElementFound) throws ParseException {
+  final public Condition _class(Condition pred, boolean pseudoElementFound) throws ParseException {
     Token t;
     Locator locator;
     ParseException pe = null;
@@ -1457,13 +1321,7 @@ final public Condition _class(Condition pred, boolean pseudoElementFound) throws
 //   : IDENT | '*'
 //   ;
 //
-  /**
- * Element name.
- *
- * @return the simple selector
- * @throws ParseException the parse exception
- */
-final public SimpleSelector elementName() throws ParseException {
+  final public SimpleSelector elementName() throws ParseException {
     Token t;
     SimpleSelector sel;
     try {
@@ -1503,15 +1361,7 @@ final public SimpleSelector elementName() throws ParseException {
 //     [ IDENT | STRING ] S* ]? ']'
 //   ;
 //
-  /**
- * Attrib.
- *
- * @param pred the pred
- * @param pseudoElementFound the pseudo element found
- * @return the condition
- * @throws ParseException the parse exception
- */
-final public Condition attrib(Condition pred, boolean pseudoElementFound) throws ParseException {
+  final public Condition attrib(Condition pred, boolean pseudoElementFound) throws ParseException {
     Token t;
     String name = null;
     String value = null;
@@ -1646,15 +1496,7 @@ final public Condition attrib(Condition pred, boolean pseudoElementFound) throws
 //        ]
 //  ;
 //
-  /**
- * Pseudo.
- *
- * @param pred the pred
- * @param pseudoElementFound the pseudo element found
- * @return the object
- * @throws ParseException the parse exception
- */
-final public Object pseudo(Condition pred, boolean pseudoElementFound) throws ParseException {
+  final public Object pseudo(Condition pred, boolean pseudoElementFound) throws ParseException {
     SimpleSelector pseudoElementSel = null;
     Condition c = null;
     Token t;
@@ -1667,8 +1509,8 @@ final public Object pseudo(Condition pred, boolean pseudoElementFound) throws Pa
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case IDENT:
         t = jj_consume_token(IDENT);
-                if (pseudoElementFound) { {if (true) throw toCSSParseException("duplicatePseudo", new String[] { t.image }, locator);} }
-                String s = t.image;
+                String s = unescape(t.image, false);
+                if (pseudoElementFound) { {if (true) throw toCSSParseException("duplicatePseudo", new String[] { s }, locator);} }
                 if ("first-line".equals(s)
                     || "first-letter".equals(s)
                     || "before".equals(s)
@@ -1777,14 +1619,6 @@ final public Object pseudo(Condition pred, boolean pseudoElementFound) throws Pa
     throw new Error("Missing return statement in function");
   }
 
-  /**
-   * Hash.
-   *
-   * @param pred the pred
-   * @param pseudoElementFound the pseudo element found
-   * @return the condition
-   * @throws ParseException the parse exception
-   */
   final public Condition hash(Condition pred, boolean pseudoElementFound) throws ParseException {
     Token t;
     ParseException pe = null;
@@ -1804,9 +1638,6 @@ final public Object pseudo(Condition pred, boolean pseudoElementFound) throws Pa
     throw new Error("Missing return statement in function");
   }
 
-  /* (non-Javadoc)
-   * @see com.steadystate.css.parser.AbstractSACParser#styleDeclaration()
-   */
   final public void styleDeclaration() throws ParseException {
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1862,12 +1693,7 @@ final public Object pseudo(Condition pred, boolean pseudoElementFound) throws Pa
 //   |
 //   ;
 //
-  /**
- * Declaration.
- *
- * @throws ParseException the parse exception
- */
-final public void declaration() throws ParseException {
+  final public void declaration() throws ParseException {
   String p;
   LexicalUnit e;
   boolean priority = false;
@@ -1913,10 +1739,7 @@ final public void declaration() throws ParseException {
 // prio
 //   : IMPORTANT_SYM S*
 //   ;
-  /* (non-Javadoc)
- * @see com.steadystate.css.parser.AbstractSACParser#prio()
- */
-final public boolean prio() throws ParseException {
+  final public boolean prio() throws ParseException {
     jj_consume_token(IMPORTANT_SYM);
     label_53:
     while (true) {
@@ -1941,10 +1764,7 @@ final public boolean prio() throws ParseException {
 //
 // TODO: Deal with the operator
 //
-  /* (non-Javadoc)
- * @see com.steadystate.css.parser.AbstractSACParser#expr()
- */
-final public LexicalUnit expr() throws ParseException {
+  final public LexicalUnit expr() throws ParseException {
     LexicalUnit head;
     LexicalUnit body;
     try {
@@ -2015,14 +1835,7 @@ final public LexicalUnit expr() throws ParseException {
 //  S*
 //  ;
 //
-  /**
- * Term.
- *
- * @param prev the prev
- * @return the lexical unit
- * @throws ParseException the parse exception
- */
-final public LexicalUnit term(LexicalUnit prev) throws ParseException {
+  final public LexicalUnit term(LexicalUnit prev) throws ParseException {
   Token t;
   char op = ' ';
   LexicalUnit value = null;
@@ -2150,7 +1963,7 @@ final public LexicalUnit term(LexicalUnit prev) throws ParseException {
       break;
     case IDENT:
       t = jj_consume_token(IDENT);
-                              value = LexicalUnitImpl.createIdent(prev, t.image);
+                              value = LexicalUnitImpl.createIdent(prev, unescape(t.image, false));
       break;
     case URI:
       t = jj_consume_token(URI);
@@ -2212,14 +2025,7 @@ final public LexicalUnit term(LexicalUnit prev) throws ParseException {
 //   : FUNCTION S* expr ')' S*
 //   ;
 //
-  /**
- * Function.
- *
- * @param prev the prev
- * @return the lexical unit
- * @throws ParseException the parse exception
- */
-final public LexicalUnit function(LexicalUnit prev) throws ParseException {
+  final public LexicalUnit function(LexicalUnit prev) throws ParseException {
     Token t;
     LexicalUnit params;
     t = jj_consume_token(FUNCTION);
@@ -2246,14 +2052,7 @@ final public LexicalUnit function(LexicalUnit prev) throws ParseException {
 //   : RGB S* expr ')' S*
 //   ;
 //
-  /**
- * Rgb.
- *
- * @param prev the prev
- * @return the lexical unit
- * @throws ParseException the parse exception
- */
-final public LexicalUnit rgb(LexicalUnit prev) throws ParseException {
+  final public LexicalUnit rgb(LexicalUnit prev) throws ParseException {
     LexicalUnit params;
     jj_consume_token(RGB);
     label_57:
@@ -2279,26 +2078,13 @@ final public LexicalUnit rgb(LexicalUnit prev) throws ParseException {
 //   : HASH S*
 //   ;
 //
-  /**
- * Hexcolor.
- *
- * @param prev the prev
- * @return the lexical unit
- * @throws ParseException the parse exception
- */
-final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
+  final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     Token t;
     t = jj_consume_token(HASH);
         {if (true) return hexcolorInternal(prev, t);}
     throw new Error("Missing return statement in function");
   }
 
-  /**
-   * Skip.
-   *
-   * @return the string
-   * @throws ParseException the parse exception
-   */
   String skip() throws ParseException {
   StringBuilder sb = new StringBuilder();
   int nesting = 0;
@@ -2323,11 +2109,6 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
   return sb.toString();
   }
 
-  /**
-   * Error_skipblock.
-   *
-   * @throws ParseException the parse exception
-   */
   void error_skipblock() throws ParseException {
     Token t;
     int nesting = 0;
@@ -2350,11 +2131,6 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     while ((t.kind != RBRACE) || (nesting > 0));
   }
 
-  /**
-   * Error_skipdecl.
-   *
-   * @throws ParseException the parse exception
-   */
   void error_skipdecl() throws ParseException {
     Token t = getToken(1);
     if (t.kind == LBRACE)
@@ -2376,11 +2152,6 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     }
   }
 
-  /**
-   * Error_skip at rule.
-   *
-   * @throws ParseException the parse exception
-   */
   void error_skipAtRule() throws ParseException {
     Token t = null;
     do
@@ -2390,12 +2161,6 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     while (t.kind != SEMICOLON && t.kind != EOF);
   }
 
-  /**
-   * Jj_2_1.
-   *
-   * @param xla the xla
-   * @return true, if successful
-   */
   private boolean jj_2_1(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_1(); }
@@ -2403,12 +2168,6 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     finally { jj_save(0, xla); }
   }
 
-  /**
-   * Jj_2_2.
-   *
-   * @param xla the xla
-   * @return true, if successful
-   */
   private boolean jj_2_2(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_2(); }
@@ -2416,61 +2175,31 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     finally { jj_save(1, xla); }
   }
 
-  /**
-   * Jj_3 r_76.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_76() {
     if (jj_3R_80()) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_75.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_75() {
     if (jj_3R_79()) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_78.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_78() {
     if (jj_scan_token(DOT)) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_74.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_74() {
     if (jj_3R_78()) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_73.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_73() {
     if (jj_3R_77()) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_68.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_68() {
     Token xsp;
     xsp = jj_scanpos;
@@ -2487,42 +2216,22 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     return false;
   }
 
-  /**
-   * Jj_3_2.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3_2() {
     if (jj_3R_59()) return true;
     if (jj_3R_60()) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_71.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_71() {
     if (jj_scan_token(IDENT)) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_77.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_77() {
     if (jj_scan_token(HASH)) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_65.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_65() {
     Token xsp;
     if (jj_3R_68()) return true;
@@ -2533,31 +2242,16 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     return false;
   }
 
-  /**
-   * Jj_3 r_58.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_58() {
     if (jj_scan_token(COLON)) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_70.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_70() {
     if (jj_scan_token(GT)) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_67.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_67() {
     Token xsp;
     xsp = jj_scanpos;
@@ -2568,41 +2262,21 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     return false;
   }
 
-  /**
-   * Jj_3 r_79.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_79() {
     if (jj_scan_token(LSQUARE)) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_64.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_64() {
     if (jj_3R_67()) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_69.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_69() {
     if (jj_scan_token(PLUS)) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_66.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_66() {
     Token xsp;
     xsp = jj_scanpos;
@@ -2613,11 +2287,6 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     return false;
   }
 
-  /**
-   * Jj_3 r_60.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_60() {
     Token xsp;
     xsp = jj_scanpos;
@@ -2628,32 +2297,17 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     return false;
   }
 
-  /**
-   * Jj_3 r_80.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_80() {
     if (jj_scan_token(COLON)) return true;
     return false;
   }
 
-  /**
-   * Jj_3_1.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3_1() {
     if (jj_scan_token(IDENT)) return true;
     if (jj_3R_58()) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_63.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_63() {
     if (jj_scan_token(S)) return true;
     Token xsp;
@@ -2662,11 +2316,6 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     return false;
   }
 
-  /**
-   * Jj_3 r_62.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_62() {
     if (jj_scan_token(GT)) return true;
     Token xsp;
@@ -2677,21 +2326,11 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     return false;
   }
 
-  /**
-   * Jj_3 r_72.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_72() {
     if (jj_scan_token(ASTERISK)) return true;
     return false;
   }
 
-  /**
-   * Jj_3 r_61.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_61() {
     if (jj_scan_token(PLUS)) return true;
     Token xsp;
@@ -2702,11 +2341,6 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     return false;
   }
 
-  /**
-   * Jj_3 r_59.
-   *
-   * @return true, if successful
-   */
   private boolean jj_3R_59() {
     Token xsp;
     xsp = jj_scanpos;
@@ -2726,71 +2360,33 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
   public Token token;
   /** Next token. */
   public Token jj_nt;
-  
-  /** The jj_ntk. */
   private int jj_ntk;
-  
-  /** The jj_lastpos. */
   private Token jj_scanpos, jj_lastpos;
-  
-  /** The jj_la. */
   private int jj_la;
-  
-  /** The jj_gen. */
   private int jj_gen;
-  
-  /** The jj_la1. */
   final private int[] jj_la1 = new int[93];
-  
-  /** The jj_la1_0. */
   static private int[] jj_la1_0;
-  
-  /** The jj_la1_1. */
   static private int[] jj_la1_1;
-  
-  /** The jj_la1_2. */
   static private int[] jj_la1_2;
   static {
       jj_la1_init_0();
       jj_la1_init_1();
       jj_la1_init_2();
    }
-   
-   /**
-    * Jj_la1_init_0.
-    */
    private static void jj_la1_init_0() {
       jj_la1_0 = new int[] {0x6000002,0x6000002,0x6000002,0x6000002,0x0,0xe0141a00,0xc0141a00,0xe0141a00,0x6000002,0x6000002,0x2,0xe0141a00,0x2,0x2,0x2,0x1200000,0x2,0x0,0x2,0x2,0x40141a00,0x100,0x2,0x40141a00,0x2,0x40141a00,0x2,0x2,0x2,0x2,0x2,0x800,0x800,0x2,0x0,0x400,0x2,0x0,0x2,0x2,0x0,0x400,0x2,0x0,0x2,0x2,0x2100,0x2,0x2,0x24000,0x2,0x24000,0x24002,0xc000,0x2,0x2,0x2,0x100,0x2,0x2,0x140a00,0x140a00,0x140a00,0x140a00,0x141a00,0x1000,0x2,0x2,0x18010000,0x2,0x200000,0x2,0x18010000,0x2,0x2,0x2,0x2,0x0,0x0,0x400,0x2,0x0,0x2,0x0,0x2,0x130e100,0x2100,0xc000,0x0,0x1300000,0x2,0x2,0x2,};
    }
-   
-   /**
-    * Jj_la1_init_1.
-    */
    private static void jj_la1_init_1() {
       jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x2,0x4000005,0x4000005,0x4000005,0x0,0x0,0x0,0x4000007,0x0,0x0,0x0,0x0,0x0,0x4000000,0x0,0x0,0x4000004,0x0,0x0,0x4000004,0x0,0x4000004,0x0,0x0,0x0,0x0,0x0,0x4000000,0x4000000,0x0,0x4000000,0x0,0x0,0x4000000,0x0,0x0,0x4000000,0x0,0x0,0x4000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4000000,0x4000000,0x0,0x0,0x0,0x0,0x4000000,0x0,0x0,0x0,0x0,0x0,0x0,0x7000000,0x4000000,0x0,0x0,0x4000000,0x0,0x8,0x0,0x26fffff0,0x0,0x0,0x25fffe0,0x26fffff0,0x0,0x0,0x0,};
    }
-   
-   /**
-    * Jj_la1_init_2.
-    */
    private static void jj_la1_init_2() {
       jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
-  
-  /** The jj_2_rtns. */
   final private JJCalls[] jj_2_rtns = new JJCalls[2];
-  
-  /** The jj_rescan. */
   private boolean jj_rescan = false;
-  
-  /** The jj_gc. */
   private int jj_gc = 0;
 
-  /**
-   *  Constructor with user supplied CharStream.
-   *
-   * @param stream the stream
-   */
+  /** Constructor with user supplied CharStream. */
   public SACParserCSS2(CharStream stream) {
     token_source = new SACParserCSS2TokenManager(stream);
     token = new Token();
@@ -2800,11 +2396,7 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  /**
-   *  Reinitialise.
-   *
-   * @param stream the stream
-   */
+  /** Reinitialise. */
   public void ReInit(CharStream stream) {
     token_source.ReInit(stream);
     token = new Token();
@@ -2814,11 +2406,7 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  /**
-   *  Constructor with generated Token Manager.
-   *
-   * @param tm the tm
-   */
+  /** Constructor with generated Token Manager. */
   public SACParserCSS2(SACParserCSS2TokenManager tm) {
     token_source = tm;
     token = new Token();
@@ -2828,11 +2416,7 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  /**
-   *  Reinitialise.
-   *
-   * @param tm the tm
-   */
+  /** Reinitialise. */
   public void ReInit(SACParserCSS2TokenManager tm) {
     token_source = tm;
     token = new Token();
@@ -2842,13 +2426,6 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  /**
-   * Jj_consume_token.
-   *
-   * @param kind the kind
-   * @return the token
-   * @throws ParseException the parse exception
-   */
   private Token jj_consume_token(int kind) throws ParseException {
     Token oldToken;
     if ((oldToken = token).next != null) token = token.next;
@@ -2873,21 +2450,8 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     throw generateParseException();
   }
 
-  /**
-   * The Class LookaheadSuccess.
-   */
-  static private final class LookaheadSuccess extends java.lang.Error {
-	  private static final long serialVersionUID = 1L; }
-  
-  /** The jj_ls. */
+  static private final class LookaheadSuccess extends java.lang.Error { }
   final private LookaheadSuccess jj_ls = new LookaheadSuccess();
-  
-  /**
-   * Jj_scan_token.
-   *
-   * @param kind the kind
-   * @return true, if successful
-   */
   private boolean jj_scan_token(int kind) {
     if (jj_scanpos == jj_lastpos) {
       jj_la--;
@@ -2910,11 +2474,7 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
   }
 
 
-/**
- *  Get the next Token.
- *
- * @return the next token
- */
+/** Get the next Token. */
   final public Token getNextToken() {
     if (token.next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
@@ -2923,12 +2483,7 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     return token;
   }
 
-/**
- *  Get the specific Token.
- *
- * @param index the index
- * @return the token
- */
+/** Get the specific Token. */
   final public Token getToken(int index) {
     Token t = token;
     for (int i = 0; i < index; i++) {
@@ -2938,11 +2493,6 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     return t;
   }
 
-  /**
-   * Jj_ntk.
-   *
-   * @return the int
-   */
   private int jj_ntk() {
     if ((jj_nt=token.next) == null)
       return (jj_ntk = (token.next=token_source.getNextToken()).kind);
@@ -2950,27 +2500,12 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
       return (jj_ntk = jj_nt.kind);
   }
 
-  /** The jj_expentries. */
   private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
-  
-  /** The jj_expentry. */
   private int[] jj_expentry;
-  
-  /** The jj_kind. */
   private int jj_kind = -1;
-  
-  /** The jj_lasttokens. */
   private int[] jj_lasttokens = new int[100];
-  
-  /** The jj_endpos. */
   private int jj_endpos;
 
-  /**
-   * Jj_add_error_token.
-   *
-   * @param kind the kind
-   * @param pos the pos
-   */
   private void jj_add_error_token(int kind, int pos) {
     if (pos >= 100) return;
     if (pos == jj_endpos + 1) {
@@ -2996,11 +2531,7 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     }
   }
 
-  /**
-   *  Generate ParseException.
-   *
-   * @return the parses the exception
-   */
+  /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
     boolean[] la1tokens = new boolean[80];
@@ -3048,9 +2579,6 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
   final public void disable_tracing() {
   }
 
-  /**
-   * Jj_rescan_token.
-   */
   private void jj_rescan_token() {
     jj_rescan = true;
     for (int i = 0; i < 2; i++) {
@@ -3071,12 +2599,6 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     jj_rescan = false;
   }
 
-  /**
-   * Jj_save.
-   *
-   * @param index the index
-   * @param xla the xla
-   */
   private void jj_save(int index, int xla) {
     JJCalls p = jj_2_rtns[index];
     while (p.gen > jj_gen) {
@@ -3086,21 +2608,10 @@ final public LexicalUnit hexcolor(LexicalUnit prev) throws ParseException {
     p.gen = jj_gen + xla - jj_la; p.first = token; p.arg = xla;
   }
 
-  /**
-   * The Class JJCalls.
-   */
   static final class JJCalls {
-    
-    /** The gen. */
     int gen;
-    
-    /** The first. */
     Token first;
-    
-    /** The arg. */
     int arg;
-    
-    /** The next. */
     JJCalls next;
   }
 

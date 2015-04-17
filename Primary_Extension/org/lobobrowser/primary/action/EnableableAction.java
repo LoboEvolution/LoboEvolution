@@ -19,9 +19,9 @@ package org.lobobrowser.primary.action;
  */
 public interface EnableableAction {
 
-	/**
-	 * Update enabling.
-	 */
-	public abstract void updateEnabling();
+    /**
+     * Update enabling.
+     */
+    abstract void updateEnabling();
 
 }

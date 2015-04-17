@@ -8,33 +8,22 @@
 
 package org.mozilla.javascript.debug;
 
-
 /**
  * This interface exposes debugging information from executable
  * code (either functions or top-level scripts).
  */
 public interface DebuggableScript
 {
-    
-    /**
-     * Checks if is top level.
-     *
-     * @return true, if is top level
-     */
     public boolean isTopLevel();
 
     /**
      * Returns true if this is a function, false if it is a script.
-     *
-     * @return true, if is function
      */
     public boolean isFunction();
 
     /**
      * Get name of the function described by this script.
      * Return null or an empty string if this script is not a function.
-     *
-     * @return the function name
      */
     public String getFunctionName();
 
@@ -42,7 +31,6 @@ public interface DebuggableScript
      * Get number of declared parameters in the function.
      * Return 0 if this script is not a function.
      *
-     * @return the param count
      * @see #getParamAndVarCount()
      * @see #getParamOrVarName(int index)
      */
@@ -53,7 +41,6 @@ public interface DebuggableScript
      * Return number of declared global variables if this script is not a
      * function.
      *
-     * @return the param and var count
      * @see #getParamCount()
      * @see #getParamOrVarName(int index)
      */
@@ -67,17 +54,12 @@ public interface DebuggableScript
      * of variable.
      * If this script is not function, return the name of the declared
      * global variable.
-     *
-     * @param index the index
-     * @return the param or var name
      */
     public String getParamOrVarName(int index);
 
     /**
      * Get the name of the source (usually filename or URL)
      * of the script.
-     *
-     * @return the source name
      */
     public String getSourceName();
 
@@ -85,40 +67,20 @@ public interface DebuggableScript
      * Returns true if this script or function were runtime-generated
      * from JavaScript using <tt>eval</tt> function or <tt>Function</tt>
      * or <tt>Script</tt> constructors.
-     *
-     * @return true, if is generated script
      */
     public boolean isGeneratedScript();
 
     /**
      * Get array containing the line numbers that
-     * that can be passed to <code>DebugFrame.onLineChange()</code>.
+     * that can be passed to <code>DebugFrame.onLineChange()<code>.
      * Note that line order in the resulting array is arbitrary
-     *
-     * @return the line numbers
      */
     public int[] getLineNumbers();
 
-    /**
-     * Gets the function count.
-     *
-     * @return the function count
-     */
     public int getFunctionCount();
 
-    /**
-     * Gets the function.
-     *
-     * @param index the index
-     * @return the function
-     */
     public DebuggableScript getFunction(int index);
 
-    /**
-     * Gets the parent.
-     *
-     * @return the parent
-     */
     public DebuggableScript getParent();
 
 }

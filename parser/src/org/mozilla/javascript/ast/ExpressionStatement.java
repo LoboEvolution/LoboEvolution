@@ -8,7 +8,6 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
-
 /**
  * AST node representing an expression in a statement context.  The node type is
  * {@link Token#EXPR_VOID} if inside a function, or else
@@ -16,7 +15,6 @@ import org.mozilla.javascript.Token;
  */
 public class ExpressionStatement extends AstNode {
 
-    /** The expr. */
     private AstNode expr;
 
     {
@@ -31,9 +29,6 @@ public class ExpressionStatement extends AstNode {
         type = Token.EXPR_RESULT;
     }
 
-    /**
-     * Instantiates a new expression statement.
-     */
     public ExpressionStatement() {
     }
 
@@ -64,24 +59,16 @@ public class ExpressionStatement extends AstNode {
         this(expr.getPosition(), expr.getLength(), expr);
     }
 
-    /**
-     * Instantiates a new expression statement.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public ExpressionStatement(int pos, int len) {
         super(pos, len);
     }
 
     /**
-     * Constructs a new {@code ExpressionStatement}.
-     *
-     * @param pos the pos
-     * @param len the len
+     * Constructs a new {@code ExpressionStatement}
      * @param expr the wrapped {@link AstNode}.
      * The {@code ExpressionStatement}'s bounds are set to those of expr,
      * and expr's parent is set to this node.
+     * @throws IllegalArgumentException if {@code expr} is null
      */
     public ExpressionStatement(int pos, int len, AstNode expr) {
         super(pos, len);
@@ -89,9 +76,7 @@ public class ExpressionStatement extends AstNode {
     }
 
     /**
-     * Returns the wrapped expression.
-     *
-     * @return the expression
+     * Returns the wrapped expression
      */
     public AstNode getExpression() {
         return expr;
@@ -99,8 +84,7 @@ public class ExpressionStatement extends AstNode {
 
     /**
      * Sets the wrapped expression, and sets its parent to this node.
-     *
-     * @param expression the new expression
+     * @throws IllegalArgumentException} if expression is {@code null}
      */
     public void setExpression(AstNode expression) {
         assertNotNull(expression);
@@ -110,18 +94,15 @@ public class ExpressionStatement extends AstNode {
     }
 
     /**
-     * Returns true if this node has side effects.
-     *
-     * @return true, if successful
+     * Returns true if this node has side effects
+     * @throws IllegalStateException if expression has not yet
+     * been set.
      */
     @Override
     public boolean hasSideEffects() {
         return type == Token.EXPR_RESULT || expr.hasSideEffects();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -132,8 +113,6 @@ public class ExpressionStatement extends AstNode {
 
     /**
      * Visits this node, then the wrapped statement.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

@@ -18,7 +18,6 @@ import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
-
 /**
  * Implements the require() function as defined by
  * <a href="http://wiki.commonjs.org/wiki/Modules/1.1">Common JS modules</a>.
@@ -41,44 +40,23 @@ import org.mozilla.javascript.ScriptableObject;
  */
 public class Require extends BaseFunction
 {
-    
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** The module script provider. */
     private final ModuleScriptProvider moduleScriptProvider;
-    
-    /** The native scope. */
     private final Scriptable nativeScope;
-    
-    /** The paths. */
     private final Scriptable paths;
-    
-    /** The sandboxed. */
     private final boolean sandboxed;
-    
-    /** The pre exec. */
     private final Script preExec;
-    
-    /** The post exec. */
     private final Script postExec;
-    
-    /** The main module id. */
     private String mainModuleId = null;
-    
-    /** The main exports. */
     private Scriptable mainExports;
 
     // Modules that completed loading; visible to all threads
-    /** The exported module interfaces. */
     private final Map<String, Scriptable> exportedModuleInterfaces =
         new ConcurrentHashMap<String, Scriptable>();
-    
-    /** The load lock. */
     private final Object loadLock = new Object();
     // Modules currently being loaded on the thread. Used to resolve circular
     // dependencies while loading.
-    /** The Constant loadingModuleInterfaces. */
     private static final ThreadLocal<Map<String, Scriptable>>
         loadingModuleInterfaces = new ThreadLocal<Map<String,Scriptable>>();
 
@@ -128,10 +106,12 @@ public class Require extends BaseFunction
      * that the main module will execute in its own scope and not in the global
      * scope. Since all other modules see the global scope, executing the main
      * module in the global scope would open it for tampering by other modules.
-     *
      * @param cx the current context
      * @param mainModuleId the ID of the main module
      * @return the "exports" property of the main module
+     * @throws IllegalStateException if the main module is already loaded when
+     * required, or if this require() instance already has a different main
+     * module set.
      */
     public Scriptable requireMain(Context cx, String mainModuleId) {
         if(this.mainModuleId != null) {
@@ -193,9 +173,7 @@ public class Require extends BaseFunction
         ScriptableObject.putProperty(scope, "require", this);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#call(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
+    @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
             Object[] args)
     {
@@ -241,24 +219,12 @@ public class Require extends BaseFunction
         return getExportedModuleInterface(cx, id, uri, base, false);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#construct(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
+    @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
         throw ScriptRuntime.throwError(cx, scope,
                 "require() can not be invoked as a constructor");
     }
 
-    /**
-     * Gets the exported module interface.
-     *
-     * @param cx the cx
-     * @param id the id
-     * @param uri the uri
-     * @param base the base
-     * @param isMain the is main
-     * @return the exported module interface
-     */
     private Scriptable getExportedModuleInterface(Context cx, String id,
             URI uri, URI base, boolean isMain)
     {
@@ -349,16 +315,6 @@ public class Require extends BaseFunction
         return exports;
     }
 
-    /**
-     * Execute module script.
-     *
-     * @param cx the cx
-     * @param id the id
-     * @param exports the exports
-     * @param moduleScript the module script
-     * @param isMain the is main
-     * @return the scriptable
-     */
     private Scriptable executeModuleScript(Context cx, String id,
             Scriptable exports, ModuleScript moduleScript, boolean isMain)
     {
@@ -385,17 +341,10 @@ public class Require extends BaseFunction
         executeOptionalScript(preExec, cx, executionScope);
         moduleScript.getScript().exec(cx, executionScope);
         executeOptionalScript(postExec, cx, executionScope);
-        return ScriptRuntime.toObject(nativeScope,
+        return ScriptRuntime.toObject(cx, nativeScope,
                 ScriptableObject.getProperty(moduleObject, "exports"));
     }
 
-    /**
-     * Execute optional script.
-     *
-     * @param script the script
-     * @param cx the cx
-     * @param executionScope the execution scope
-     */
     private static void executeOptionalScript(Script script, Context cx,
             Scriptable executionScope)
     {
@@ -404,13 +353,6 @@ public class Require extends BaseFunction
         }
     }
 
-    /**
-     * Define read only property.
-     *
-     * @param obj the obj
-     * @param name the name
-     * @param value the value
-     */
     private static void defineReadOnlyProperty(ScriptableObject obj,
             String name, Object value) {
         ScriptableObject.putProperty(obj, name, value);
@@ -418,15 +360,6 @@ public class Require extends BaseFunction
                 ScriptableObject.PERMANENT);
     }
 
-    /**
-     * Gets the module.
-     *
-     * @param cx the cx
-     * @param id the id
-     * @param uri the uri
-     * @param base the base
-     * @return the module
-     */
     private ModuleScript getModule(Context cx, String id, URI uri, URI base) {
         try {
             final ModuleScript moduleScript =
@@ -445,25 +378,16 @@ public class Require extends BaseFunction
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getFunctionName()
-     */
     @Override
     public String getFunctionName() {
         return "require";
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getArity()
-     */
     @Override
     public int getArity() {
         return 1;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getLength()
-     */
     @Override
     public int getLength() {
         return 1;

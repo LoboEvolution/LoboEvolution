@@ -1,13 +1,13 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * GNU GENERAL LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
  * 2014 - 2015 Lobo Evolution This program is free software; you can
  * redistribute it and/or modify it under the terms of the GNU General Public
  * License as published by the Free Software Foundation; either verion 2 of the
  * License, or (at your option) any later version. This program is distributed
  * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
  * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
+ * See the GNU General License for more details. You should have received
+ * a copy of the GNU General License along with this library; if not,
  * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
  * ivan.difrancesco@yahoo.it
@@ -17,7 +17,7 @@ package org.lobobrowser.html.w3c;
 import java.awt.Font;
 
 /**
- * The Interface CanvasRenderingContext2D.
+ * The public interface CanvasRenderingContext2D.
  */
 public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 
@@ -253,8 +253,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 
     void beginPath();
 
-    void bezierCurveTo(int cp1x, int cp1y, int cp2x, int cp2y, int x,
-            int y);
+    void bezierCurveTo(int cp1x, int cp1y, int cp2x, int cp2y, int x, int y);
 
     void clearRect(int x, int y, int width, int height);
 
@@ -270,32 +269,29 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 
     CanvasPattern createPattern(HTMLImageElement image, String repetitionType);
 
-    CanvasGradient createRadialGradient(int x0, int y0, int r0, int x1,
-            int y1, int r1);
+    CanvasGradient createRadialGradient(int x0, int y0, int r0, int x1, int y1,
+            int r1);
 
     void drawImage(HTMLImageElement image, int x, int y);
 
-    void drawImage(HTMLImageElement image, int x, int y, int width,
-            int height);
+    void drawImage(HTMLImageElement image, int x, int y, int width, int height);
 
-    void drawImage(HTMLImageElement image, int sx, int sy, int sw,
-            int sh, int dx, int dy, int dw, int dh);
+    void drawImage(HTMLImageElement image, int sx, int sy, int sw, int sh,
+            int dx, int dy, int dw, int dh);
 
     void drawImage(HTMLCanvasElement canvas, int x, int y);
 
-    void drawImage(HTMLCanvasElement canvas, int x, int y, int width,
-            int height);
+    void drawImage(HTMLCanvasElement canvas, int x, int y, int width, int height);
 
-    void drawImage(HTMLCanvasElement canvas, int sx, int sy, int sw,
-            int sh, int dx, int dy, int dw, int dh);
+    void drawImage(HTMLCanvasElement canvas, int sx, int sy, int sw, int sh,
+            int dx, int dy, int dw, int dh);
 
     void drawImage(HTMLVideoElement video, int x, int y);
 
-    void drawImage(HTMLVideoElement video, int x, int y, int width,
-            int height);
+    void drawImage(HTMLVideoElement video, int x, int y, int width, int height);
 
-    void drawImage(HTMLVideoElement video, int sx, int sy, int sw,
-            int sh, int dx, int dy, int dw, int dh);
+    void drawImage(HTMLVideoElement video, int sx, int sy, int sw, int sh,
+            int dx, int dy, int dw, int dh);
 
     void drawImageFromRect(HTMLImageElement image);
 
@@ -305,24 +301,23 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 
     void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw);
 
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy,
-            int sw, int sh);
+    void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
+            int sh);
 
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy,
-            int sw, int sh, int dx);
+    void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
+            int sh, int dx);
 
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy,
-            int sw, int sh, int dx, int dy);
+    void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
+            int sh, int dx, int dy);
 
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy,
-            int sw, int sh, int dx, int dy, int dw);
+    void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
+            int sh, int dx, int dy, int dw);
 
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy,
-            int sw, int sh, int dx, int dy, int dw, int dh);
+    void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
+            int sh, int dx, int dy, int dw, int dh);
 
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy,
-            int sw, int sh, int dx, int dy, int dw, int dh,
-            String compositeOperation);
+    void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
+            int sh, int dx, int dy, int dw, int dh, String compositeOperation);
 
     void fill();
 
@@ -344,8 +339,8 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 
     void putImageData(CanvasImageData imagedata, int dx, int dy);
 
-    void putImageData(CanvasImageData imagedata, int dx, int dy,
-            int dirtyX, int dirtyY, int dirtyWidth, int dirtyHeight);
+    void putImageData(CanvasImageData imagedata, int dx, int dy, int dirtyX,
+            int dirtyY, int dirtyWidth, int dirtyHeight);
 
     void quadraticCurveTo(int cpx, int cpy, int x, int y);
 
@@ -403,19 +398,16 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 
     void setShadow(int width, int height, int blur, String color);
 
-    void setShadow(int width, int height, int blur, String color,
-            int alpha);
+    void setShadow(int width, int height, int blur, String color, int alpha);
 
     void setShadow(int width, int height, int blur, int grayLevel);
 
-    void setShadow(int width, int height, int blur, int grayLevel,
-            int alpha);
+    void setShadow(int width, int height, int blur, int grayLevel, int alpha);
 
-    void setShadow(int width, int height, int blur, int r, int g,
-            int b, int a);
+    void setShadow(int width, int height, int blur, int r, int g, int b, int a);
 
-    void setShadow(int width, int height, int blur, int c, int m,
-            int y, int k, int a);
+    void setShadow(int width, int height, int blur, int c, int m, int y, int k,
+            int a);
 
     /**
      * Sets the stroke color.
@@ -441,8 +433,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 
     void setStrokeColor(int c, int m, int y, int k, int a);
 
-    void setTransform(int m11, int m12, int m21, int m22, int dx,
-            int dy);
+    void setTransform(int m11, int m12, int m21, int m22, int dx, int dy);
 
     void stroke();
 
@@ -454,8 +445,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 
     void strokeText(String text, int x, int y, int maxWidth);
 
-    void transform(int m11, int m12, int m21, int m22, int dx,
-            int dy);
+    void transform(int m11, int m12, int m21, int m22, int dx, int dy);
 
     void translate(int tx, int ty);
 

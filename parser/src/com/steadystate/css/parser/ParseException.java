@@ -2,7 +2,6 @@
 /* JavaCCOptions:KEEP_LINE_COL=null */
 package com.steadystate.css.parser;
 
-
 /**
  * This exception is thrown when parse errors are encountered.
  * You can explicitly create objects of this exception type by
@@ -26,10 +25,6 @@ public class ParseException extends Exception {
    * in the generated parser.  Calling this constructor generates
    * a new object of this type with the fields "currentToken",
    * "expectedTokenSequences", and "tokenImage" set.
-   *
-   * @param currentTokenVal the current token val
-   * @param expectedTokenSequencesVal the expected token sequences val
-   * @param tokenImageVal the token image val
    */
   public ParseException(Token currentTokenVal,
                         int[][] expectedTokenSequencesVal,
@@ -56,11 +51,7 @@ public class ParseException extends Exception {
     super();
   }
 
-  /**
-   *  Constructor with message.
-   *
-   * @param message the message
-   */
+  /** Constructor with message. */
   public ParseException(String message) {
     super(message);
   }
@@ -93,11 +84,6 @@ public class ParseException extends Exception {
    * due to a parse error, and you do not catch it (it gets thrown
    * from the parser) the correct error message
    * gets displayed.
-   *
-   * @param currentToken the current token
-   * @param expectedTokenSequences the expected token sequences
-   * @param tokenImage the token image
-   * @return the string
    */
   private static String initialise(Token currentToken,
                            int[][] expectedTokenSequences,
@@ -151,9 +137,6 @@ public class ParseException extends Exception {
    * Used to convert raw characters to their escaped version
    * when these raw version cannot be used as part of an ASCII
    * string literal.
-   *
-   * @param str the str
-   * @return the string
    */
   static String add_escapes(String str) {
       StringBuffer retval = new StringBuffer();
@@ -201,4 +184,4 @@ public class ParseException extends Exception {
    }
 
 }
-/* JavaCC - OriginalChecksum=275972629db4e84216ac9458a4e0a583 (do not edit this line) */
+/* JavaCC - OriginalChecksum=fbf8629339ade9c5b606fe8e66171115 (do not edit this line) */

@@ -1,22 +1,16 @@
 /*
-    GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
+ * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
+ * can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version. This
+ * library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Oct 8, 2005
@@ -28,220 +22,244 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-
 /**
  * The Class FilteredCollection.
  */
 public class FilteredCollection implements Collection {
-	
-	/** The filter. */
-	private final ObjectFilter filter;
-	
-	/** The source collection. */
-	private final Collection sourceCollection;
+    /** The filter. */
+    private final ObjectFilter filter;
+    /** The source collection. */
+    private final Collection sourceCollection;
 
-	/**
-	 * Instantiates a new filtered collection.
-	 *
-	 * @param sourceCollection the source collection
-	 * @param filter the filter
-	 */
-	public FilteredCollection(Collection sourceCollection, ObjectFilter filter) {
-		this.filter = filter;
-		this.sourceCollection = sourceCollection;
-	}
+    /**
+     * Instantiates a new filtered collection.
+     *
+     * @param sourceCollection
+     *            the source collection
+     * @param filter
+     *            the filter
+     */
+    public FilteredCollection(Collection sourceCollection, ObjectFilter filter) {
+        this.filter = filter;
+        this.sourceCollection = sourceCollection;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Collection#size()
-	 */
-	public int size() {
-		int count = 0;
-		Iterator i = this.sourceCollection.iterator();
-		while (i.hasNext()) {
-			if (this.filter.decode(i.next()) != null) {
-				count++;
-			}
-		}
-		return count;
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.util.Collection#size()
+     */
+    @Override
+    public int size() {
+        int count = 0;
+        Iterator i = this.sourceCollection.iterator();
+        while (i.hasNext()) {
+            if (this.filter.decode(i.next()) != null) {
+                count++;
+            }
+        }
+        return count;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Collection#isEmpty()
-	 */
-	public boolean isEmpty() {
-		Iterator i = this.sourceCollection.iterator();
-		while (i.hasNext()) {
-			if (this.filter.decode(i.next()) != null) {
-				return false;
-			}
-		}
-		return true;
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.util.Collection#isEmpty()
+     */
+    @Override
+    public boolean isEmpty() {
+        Iterator i = this.sourceCollection.iterator();
+        while (i.hasNext()) {
+            if (this.filter.decode(i.next()) != null) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Collection#contains(java.lang.Object)
-	 */
-	public boolean contains(Object o) {
-		return this.sourceCollection.contains(this.filter.encode(o));
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.util.Collection#contains(java.lang.Object)
+     */
+    @Override
+    public boolean contains(Object o) {
+        return this.sourceCollection.contains(this.filter.encode(o));
+    }
 
-	public Iterator iterator() {
-		final Iterator sourceIterator = this.sourceCollection.iterator();
-		return new Iterator() {
-			private Boolean hasNext;
-			private Object next;
+    @Override
+    public Iterator iterator() {
+        final Iterator sourceIterator = this.sourceCollection.iterator();
+        return new Iterator() {
+            private Boolean hasNext;
+            private Object next;
 
-			private void scanNext() {
-				while (sourceIterator.hasNext()) {
-					Object item = filter.decode(sourceIterator.next());
-					if (item != null) {
-						hasNext = Boolean.TRUE;
-						this.next = item;
-					}
-				}
-				hasNext = Boolean.FALSE;
-			}
+            private void scanNext() {
+                while (sourceIterator.hasNext()) {
+                    Object item = filter.decode(sourceIterator.next());
+                    if (item != null) {
+                        hasNext = Boolean.TRUE;
+                        this.next = item;
+                    }
+                }
+                hasNext = Boolean.FALSE;
+            }
 
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see java.util.Iterator#hasNext()
-			 */
-			public boolean hasNext() {
-				if (this.hasNext == null) {
-					scanNext();
-				}
-				return this.hasNext.booleanValue();
-			}
+            /*
+             * (non-Javadoc)
+             * @see java.util.Iterator#hasNext()
+             */
+            @Override
+            public boolean hasNext() {
+                if (this.hasNext == null) {
+                    scanNext();
+                }
+                return this.hasNext.booleanValue();
+            }
 
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see java.util.Iterator#next()
-			 */
-			public Object next() {
-				if (this.hasNext == null) {
-					scanNext();
-				}
-				if (Boolean.FALSE.equals(this.hasNext)) {
-					throw new NoSuchElementException();
-				}
-				Object next = this.next;
-				this.hasNext = null;
-				return next;
-			}
+            /*
+             * (non-Javadoc)
+             * @see java.util.Iterator#next()
+             */
+            @Override
+            public Object next() {
+                if (this.hasNext == null) {
+                    scanNext();
+                }
+                if (Boolean.FALSE.equals(this.hasNext)) {
+                    throw new NoSuchElementException();
+                }
+                Object next = this.next;
+                this.hasNext = null;
+                return next;
+            }
 
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see java.util.Iterator#remove()
-			 */
-			public void remove() {
-				throw new UnsupportedOperationException();
-			}
-		};
-	}
+            /*
+             * (non-Javadoc)
+             * @see java.util.Iterator#remove()
+             */
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Collection#toArray()
-	 */
-	public Object[] toArray() {
-		return this.toArray(new Object[0]);
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.util.Collection#toArray()
+     */
+    @Override
+    public Object[] toArray() {
+        return this.toArray(new Object[0]);
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Collection#toArray(java.lang.Object[])
-	 */
-	public Object[] toArray(Object[] a) {
-		Collection bucket = new ArrayList();
-		Iterator i = this.sourceCollection.iterator();
-		while (i.hasNext()) {
-			Object item = this.filter.decode(i.next());
-			if (item != null) {
-				bucket.add(item);
-			}
-		}
-		return bucket.toArray(a);
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.util.Collection#toArray(java.lang.Object[])
+     */
+    @Override
+    public Object[] toArray(Object[] a) {
+        Collection bucket = new ArrayList();
+        Iterator i = this.sourceCollection.iterator();
+        while (i.hasNext()) {
+            Object item = this.filter.decode(i.next());
+            if (item != null) {
+                bucket.add(item);
+            }
+        }
+        return bucket.toArray(a);
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Collection#add(java.lang.Object)
-	 */
-	public boolean add(Object o) {
-		return this.sourceCollection.add(this.filter.encode(o));
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.util.Collection#add(java.lang.Object)
+     */
+    @Override
+    public boolean add(Object o) {
+        return this.sourceCollection.add(this.filter.encode(o));
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Collection#remove(java.lang.Object)
-	 */
-	public boolean remove(Object o) {
-		return this.sourceCollection.remove(this.filter.encode(o));
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.util.Collection#remove(java.lang.Object)
+     */
+    @Override
+    public boolean remove(Object o) {
+        return this.sourceCollection.remove(this.filter.encode(o));
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Collection#containsAll(java.util.Collection)
-	 */
-	public boolean containsAll(Collection c) {
-		Iterator i = c.iterator();
-		while (i.hasNext()) {
-			if (!this.contains(i.next())) {
-				return false;
-			}
-		}
-		return true;
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.util.Collection#containsAll(java.util.Collection)
+     */
+    @Override
+    public boolean containsAll(Collection c) {
+        Iterator i = c.iterator();
+        while (i.hasNext()) {
+            if (!this.contains(i.next())) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Collection#addAll(java.util.Collection)
-	 */
-	public boolean addAll(Collection c) {
-		boolean result = false;
-		Iterator i = c.iterator();
-		while (i.hasNext()) {
-			if (this.add(i.next())) {
-				result = true;
-			}
-		}
-		return result;
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.util.Collection#addAll(java.util.Collection)
+     */
+    @Override
+    public boolean addAll(Collection c) {
+        boolean result = false;
+        Iterator i = c.iterator();
+        while (i.hasNext()) {
+            if (this.add(i.next())) {
+                result = true;
+            }
+        }
+        return result;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Collection#removeAll(java.util.Collection)
-	 */
-	public boolean removeAll(Collection c) {
-		boolean result = false;
-		Iterator i = c.iterator();
-		while (i.hasNext()) {
-			if (this.remove(i.next())) {
-				result = true;
-			}
-		}
-		return result;
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.util.Collection#removeAll(java.util.Collection)
+     */
+    @Override
+    public boolean removeAll(Collection c) {
+        boolean result = false;
+        Iterator i = c.iterator();
+        while (i.hasNext()) {
+            if (this.remove(i.next())) {
+                result = true;
+            }
+        }
+        return result;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Collection#retainAll(java.util.Collection)
-	 */
-	public boolean retainAll(Collection c) {
-		boolean result = false;
-		Object[] values = this.toArray();
-		for (int i = 0; i < values.length; i++) {
-			if (!c.contains(values[i])) {
-				if (this.remove(values[i])) {
-					result = true;
-				}
-			}
-		}
-		return result;
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.util.Collection#retainAll(java.util.Collection)
+     */
+    @Override
+    public boolean retainAll(Collection c) {
+        boolean result = false;
+        Object[] values = this.toArray();
+        for (int i = 0; i < values.length; i++) {
+            if (!c.contains(values[i])) {
+                if (this.remove(values[i])) {
+                    result = true;
+                }
+            }
+        }
+        return result;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Collection#clear()
-	 */
-	public void clear() {
-		Object[] values = this.toArray();
-		for (int i = 0; i < values.length; i++) {
-			this.sourceCollection.remove(this.filter.encode(values[i]));
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.util.Collection#clear()
+     */
+    @Override
+    public void clear() {
+        Object[] values = this.toArray();
+        for (int i = 0; i < values.length; i++) {
+            this.sourceCollection.remove(this.filter.encode(values[i]));
+        }
+    }
 }

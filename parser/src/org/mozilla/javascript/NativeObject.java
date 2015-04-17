@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-
 /**
  * This class implements the Object native object.
  * See ECMA 15.2.
@@ -22,46 +21,28 @@ import java.util.Set;
  */
 public class NativeObject extends IdScriptableObject implements Map
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -6345305608474346996L;
 
-    /** The Constant OBJECT_TAG. */
     private static final Object OBJECT_TAG = "Object";
 
-    /**
-     * Inits the.
-     *
-     * @param scope the scope
-     * @param sealed the sealed
-     */
     static void init(Scriptable scope, boolean sealed)
     {
         NativeObject obj = new NativeObject();
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
-     */
     @Override
     public String getClassName()
     {
         return "Object";
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {
         return ScriptRuntime.defaultObjectToString(this);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#fillConstructorProperties(org.mozilla.javascript.IdFunctionObject)
-     */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -94,9 +75,6 @@ public class NativeObject extends IdScriptableObject implements Map
         super.fillConstructorProperties(ctor);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
-     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -125,9 +103,6 @@ public class NativeObject extends IdScriptableObject implements Map
         initPrototypeMethod(OBJECT_TAG, id, s, arity);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -448,9 +423,6 @@ public class NativeObject extends IdScriptableObject implements Map
 
     // methods implementing java.util.Map
 
-    /* (non-Javadoc)
-     * @see java.util.Map#containsKey(java.lang.Object)
-     */
     public boolean containsKey(Object key) {
         if (key instanceof String) {
             return has((String) key, this);
@@ -460,9 +432,6 @@ public class NativeObject extends IdScriptableObject implements Map
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see java.util.Map#containsValue(java.lang.Object)
-     */
     public boolean containsValue(Object value) {
         for (Object obj : values()) {
             if (value == obj ||
@@ -473,9 +442,6 @@ public class NativeObject extends IdScriptableObject implements Map
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see java.util.Map#remove(java.lang.Object)
-     */
     public Object remove(Object key) {
         Object value = get(key);
         if (key instanceof String) {
@@ -487,57 +453,32 @@ public class NativeObject extends IdScriptableObject implements Map
     }
 
 
-    /* (non-Javadoc)
-     * @see java.util.Map#keySet()
-     */
     public Set<Object> keySet() {
         return new KeySet();
     }
 
-    /* (non-Javadoc)
-     * @see java.util.Map#values()
-     */
     public Collection<Object> values() {
         return new ValueCollection();
     }
 
-    /* (non-Javadoc)
-     * @see java.util.Map#entrySet()
-     */
     public Set<Map.Entry<Object, Object>> entrySet() {
         return new EntrySet();
     }
 
-    /* (non-Javadoc)
-     * @see java.util.Map#put(java.lang.Object, java.lang.Object)
-     */
     public Object put(Object key, Object value) {
         throw new UnsupportedOperationException();
     }
 
-    /* (non-Javadoc)
-     * @see java.util.Map#putAll(java.util.Map)
-     */
     public void putAll(Map m) {
         throw new UnsupportedOperationException();
     }
 
-    /* (non-Javadoc)
-     * @see java.util.Map#clear()
-     */
     public void clear() {
         throw new UnsupportedOperationException();
     }
 
 
-    /**
-     * The Class EntrySet.
-     */
     class EntrySet extends AbstractSet<Entry<Object, Object>> {
-        
-        /* (non-Javadoc)
-         * @see java.util.AbstractCollection#iterator()
-         */
         @Override
         public Iterator<Entry<Object, Object>> iterator() {
             return new Iterator<Map.Entry<Object, Object>>() {
@@ -565,20 +506,23 @@ public class NativeObject extends IdScriptableObject implements Map
                             throw new UnsupportedOperationException();
                         }
 
+                        @Override
                         public boolean equals(Object other) {
                             if (!(other instanceof Map.Entry)) {
                                 return false;
                             }
-                            Map.Entry e = (Map.Entry) other;
+                            Map.Entry<?, ?> e = (Map.Entry<?, ?>) other;
                             return (ekey == null ? e.getKey() == null : ekey.equals(e.getKey()))
                                 && (value == null ? e.getValue() == null : value.equals(e.getValue()));
                         }
 
+                        @Override
                         public int hashCode() {
                             return (ekey == null ? 0 : ekey.hashCode()) ^
                                    (value == null ? 0 : value.hashCode());
                         }
 
+                        @Override
                         public String toString() {
                             return ekey + "=" + value;
                         }
@@ -595,31 +539,19 @@ public class NativeObject extends IdScriptableObject implements Map
             };
         }
 
-        /* (non-Javadoc)
-         * @see java.util.AbstractCollection#size()
-         */
         @Override
         public int size() {
             return NativeObject.this.size();
         }
     }
 
-    /**
-     * The Class KeySet.
-     */
     class KeySet extends AbstractSet<Object> {
 
-        /* (non-Javadoc)
-         * @see java.util.AbstractCollection#contains(java.lang.Object)
-         */
         @Override
         public boolean contains(Object key) {
             return containsKey(key);
         }
 
-        /* (non-Javadoc)
-         * @see java.util.AbstractCollection#iterator()
-         */
         @Override
         public Iterator<Object> iterator() {
             return new Iterator<Object>() {
@@ -650,23 +582,14 @@ public class NativeObject extends IdScriptableObject implements Map
            };
         }
 
-        /* (non-Javadoc)
-         * @see java.util.AbstractCollection#size()
-         */
         @Override
         public int size() {
             return NativeObject.this.size();
         }
     }
 
-    /**
-     * The Class ValueCollection.
-     */
     class ValueCollection extends AbstractCollection<Object> {
 
-        /* (non-Javadoc)
-         * @see java.util.AbstractCollection#iterator()
-         */
         @Override
         public Iterator<Object> iterator() {
             return new Iterator<Object>() {
@@ -692,9 +615,6 @@ public class NativeObject extends IdScriptableObject implements Map
             };
         }
 
-        /* (non-Javadoc)
-         * @see java.util.AbstractCollection#size()
-         */
         @Override
         public int size() {
             return NativeObject.this.size();
@@ -704,10 +624,7 @@ public class NativeObject extends IdScriptableObject implements Map
 
 // #string_id_map#
 
-    /* (non-Javadoc)
- * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
- */
-@Override
+    @Override
     protected int findPrototypeId(String s)
     {
         int id;
@@ -746,7 +663,6 @@ public class NativeObject extends IdScriptableObject implements Map
         return id;
     }
 
-    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         ConstructorId_getPrototypeOf = -1,
         ConstructorId_keys = -2,

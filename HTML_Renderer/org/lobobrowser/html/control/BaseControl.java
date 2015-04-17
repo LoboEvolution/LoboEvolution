@@ -1,22 +1,16 @@
 /*
-    GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
+ * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
+ * can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version. This
+ * library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Oct 23, 2005
@@ -34,85 +28,95 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.UIControl;
 
-
 /**
  * The Class BaseControl.
  */
 abstract class BaseControl extends JComponent implements UIControl {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(BaseControl.class
-			.getName());
-	
-	/** The Constant ZERO_DIMENSION. */
-	protected static final Dimension ZERO_DIMENSION = new Dimension(0, 0);
-	
-	/** The control element. */
-	protected final HTMLElementImpl controlElement;
-	
-	/** The ruicontrol. */
-	protected RUIControl ruicontrol;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new base control.
-	 *
-	 * @param modelNode the model node
-	 */
-	public BaseControl(HTMLElementImpl modelNode) {
-		this.controlElement = modelNode;
-	}
+    /** The Constant logger. */
+    private static final Logger logger = Logger.getLogger(BaseControl.class
+            .getName());
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.renderer.UIControl#getComponent()
-	 */
-	public Component getComponent() {
-		return this;
-	}
+    /** The Constant ZERO_DIMENSION. */
+    protected static final Dimension ZERO_DIMENSION = new Dimension(0, 0);
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.renderer.UIControl#setRUIControl(org.lobobrowser.html.control.RUIControl)
-	 */
-	public void setRUIControl(RUIControl ruicontrol) {
-		this.ruicontrol = ruicontrol;
-	}
+    /** The control element. */
+    protected final HTMLElementImpl controlElement;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.renderer.UIControl#getVAlign()
-	 */
-	public int getVAlign() {
-		return RElement.VALIGN_BASELINE;
-	}
+    /** The ruicontrol. */
+    protected RUIControl ruicontrol;
 
-	/**
-	 * Method invoked when image changes size. It's expected to be called
-	 * outside the GUI thread.
-	 */
-	protected void invalidateAndRepaint() {
-		RUIControl rc = this.ruicontrol;
-		if (rc == null) {
-			logger.severe("invalidateAndPaint(): RUIControl not set.");
-			return;
-		}
-		if (rc.isValid()) {
-			rc.relayout();
-		}
-	}
+    /**
+     * Instantiates a new base control.
+     *
+     * @param modelNode
+     *            the model node
+     */
+    public BaseControl(HTMLElementImpl modelNode) {
+        this.controlElement = modelNode;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.lobobrowser.html.render.UIControl#getBackgroundColor()
-	 */
-	public Color getBackgroundColor() {
-		return this.getBackground();
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.renderer.UIControl#getComponent()
+     */
+    @Override
+    public Component getComponent() {
+        return this;
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.renderer.UIControl#reset(int, int)
-	 */
-	public void reset(int availWidth, int availHeight) {
-	}
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.lobobrowser.html.renderer.UIControl#setRUIControl(org.lobobrowser.html
+     * .control.RUIControl)
+     */
+    @Override
+    public void setRUIControl(RUIControl ruicontrol) {
+        this.ruicontrol = ruicontrol;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.renderer.UIControl#getVAlign()
+     */
+    @Override
+    public int getVAlign() {
+        return RElement.VALIGN_BASELINE;
+    }
+
+    /**
+     * Method invoked when image changes size. It's expected to be called
+     * outside the GUI thread.
+     */
+    protected void invalidateAndRepaint() {
+        RUIControl rc = this.ruicontrol;
+        if (rc == null) {
+            logger.severe("invalidateAndPaint(): RUIControl not set.");
+            return;
+        }
+        if (rc.isValid()) {
+            rc.relayout();
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.render.UIControl#getBackgroundColor()
+     */
+    @Override
+    public Color getBackgroundColor() {
+        return this.getBackground();
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.renderer.UIControl#reset(int, int)
+     */
+    @Override
+    public void reset(int availWidth, int availHeight) {
+    }
 }

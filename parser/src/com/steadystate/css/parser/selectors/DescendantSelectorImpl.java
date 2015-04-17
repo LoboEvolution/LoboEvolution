@@ -35,29 +35,17 @@ import org.w3c.css.sac.SimpleSelector;
 import com.steadystate.css.parser.Locatable;
 import com.steadystate.css.parser.LocatableImpl;
 
-
 /**
- * The Class DescendantSelectorImpl.
- *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
 public class DescendantSelectorImpl extends LocatableImpl implements DescendantSelector, Serializable {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -3620467847449531232L;
 
-    /** The ancestor selector_. */
     private Selector ancestorSelector_;
-    
-    /** The simple selector_. */
     private SimpleSelector simpleSelector_;
 
-    /**
-     * Sets the ancestor selector.
-     *
-     * @param ancestorSelector the new ancestor selector
-     */
     public void setAncestorSelector(final Selector ancestorSelector) {
         ancestorSelector_ = ancestorSelector;
         if (ancestorSelector instanceof Locatable) {
@@ -68,50 +56,27 @@ public class DescendantSelectorImpl extends LocatableImpl implements DescendantS
         }
     }
 
-    /**
-     * Sets the simple selector.
-     *
-     * @param simpleSelector the new simple selector
-     */
     public void setSimpleSelector(final SimpleSelector simpleSelector) {
         simpleSelector_ = simpleSelector;
     }
 
-    /**
-     * Instantiates a new descendant selector impl.
-     *
-     * @param parent the parent
-     * @param simpleSelector the simple selector
-     */
     public DescendantSelectorImpl(final Selector parent, final SimpleSelector simpleSelector) {
         setAncestorSelector(parent);
         setSimpleSelector(simpleSelector);
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.Selector#getSelectorType()
-     */
     public short getSelectorType() {
         return Selector.SAC_DESCENDANT_SELECTOR;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.DescendantSelector#getAncestorSelector()
-     */
     public Selector getAncestorSelector() {
         return ancestorSelector_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.DescendantSelector#getSimpleSelector()
-     */
     public SimpleSelector getSimpleSelector() {
         return simpleSelector_;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         final StringBuilder result = new StringBuilder(getAncestorSelector().toString());

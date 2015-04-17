@@ -6,19 +6,18 @@
 
 package org.mozilla.javascript.ast;
 
+import org.mozilla.javascript.Node;
+import org.mozilla.javascript.Token;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.mozilla.javascript.Node;
-import org.mozilla.javascript.Token;
-
-
 /**
  * A JavaScript function declaration or expression.<p>
- * Node type is {@link Token#FUNCTION}.
+ * Node type is {@link Token#FUNCTION}.<p>
  *
  * <pre><i>FunctionDeclaration</i> :
  *        <b>function</b> Identifier ( FormalParameterListopt ) { FunctionBody }
@@ -59,101 +58,51 @@ public class FunctionNode extends ScriptNode {
      * top-level expression in an expression statement.<p>
      *
      * The three types of functions have different treatment and must be
-     * distinguished.
-     * */
+     * distinguished.<p>
+     */
     public static final int FUNCTION_STATEMENT            = 1;
-    
-    /** The Constant FUNCTION_EXPRESSION. */
     public static final int FUNCTION_EXPRESSION           = 2;
-    
-    /** The Constant FUNCTION_EXPRESSION_STATEMENT. */
     public static final int FUNCTION_EXPRESSION_STATEMENT = 3;
 
-    /**
-     * The Enum Form.
-     */
-    public static enum Form { /** The function. */
- FUNCTION, /** The getter. */
- GETTER, /** The setter. */
- SETTER }
+    public static enum Form { FUNCTION, GETTER, SETTER }
 
-    /** The Constant NO_PARAMS. */
     private static final List<AstNode> NO_PARAMS =
         Collections.unmodifiableList(new ArrayList<AstNode>());
 
-    /** The function name. */
     private Name functionName;
-    
-    /** The params. */
     private List<AstNode> params;
-    
-    /** The body. */
     private AstNode body;
-    
-    /** The is expression closure. */
     private boolean isExpressionClosure;
-    
-    /** The function form. */
     private Form functionForm = Form.FUNCTION;
-    
-    /** The lp. */
     private int lp = -1;
-    
-    /** The rp. */
     private int rp = -1;
 
     // codegen variables
-    /** The function type. */
     private int functionType;
-    
-    /** The needs activation. */
     private boolean needsActivation;
-    
-    /** The is generator. */
     private boolean isGenerator;
-    
-    /** The generator resume points. */
     private List<Node> generatorResumePoints;
-    
-    /** The live locals. */
     private Map<Node,int[]> liveLocals;
-    
-    /** The member expr node. */
     private AstNode memberExprNode;
 
     {
         type = Token.FUNCTION;
     }
 
-    /**
-     * Instantiates a new function node.
-     */
     public FunctionNode() {
     }
 
-    /**
-     * Instantiates a new function node.
-     *
-     * @param pos the pos
-     */
     public FunctionNode(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new function node.
-     *
-     * @param pos the pos
-     * @param name the name
-     */
     public FunctionNode(int pos, Name name) {
         super(pos);
         setFunctionName(name);
     }
 
     /**
-     * Returns function name.
-     *
+     * Returns function name
      * @return function name, {@code null} for anonymous functions
      */
     public Name getFunctionName() {
@@ -171,8 +120,7 @@ public class FunctionNode extends ScriptNode {
     }
 
     /**
-     * Returns the function name as a string.
-     *
+     * Returns the function name as a string
      * @return the function name, {@code ""} if anonymous
      */
     public String getName() {
@@ -180,8 +128,7 @@ public class FunctionNode extends ScriptNode {
     }
 
     /**
-     * Returns the function parameter list.
-     *
+     * Returns the function parameter list
      * @return the function parameter list.  Returns an immutable empty
      *         list if there are no parameters.
      */
@@ -208,8 +155,8 @@ public class FunctionNode extends ScriptNode {
     /**
      * Adds a parameter to the function parameter list.
      * Sets the parent of the param node to this node.
-     *
      * @param param the parameter
+     * @throws IllegalArgumentException if param is {@code null}
      */
     public void addParam(AstNode param) {
         assertNotNull(param);
@@ -224,9 +171,6 @@ public class FunctionNode extends ScriptNode {
      * Returns true if the specified {@link AstNode} node is a parameter
      * of this Function node.  This provides a way during AST traversal
      * to disambiguate the function name node from the parameter nodes.
-     *
-     * @param node the node
-     * @return true, if is param
      */
     public boolean isParam(AstNode node) {
         return params == null ? false : params.contains(node);
@@ -250,6 +194,8 @@ public class FunctionNode extends ScriptNode {
      *
      * @param body function body.  Its parent is set to this node, and its
      * position is updated to be relative to this node.
+     *
+     * @throws IllegalArgumentException if body is {@code null}
      */
     public void setBody(AstNode body) {
         assertNotNull(body);
@@ -264,46 +210,35 @@ public class FunctionNode extends ScriptNode {
     }
 
     /**
-     * Returns left paren position, -1 if missing.
-     *
-     * @return the lp
+     * Returns left paren position, -1 if missing
      */
     public int getLp() {
         return lp;
     }
 
     /**
-     * Sets left paren position.
-     *
-     * @param lp the new lp
+     * Sets left paren position
      */
     public void setLp(int lp) {
         this.lp = lp;
     }
 
     /**
-     * Returns right paren position, -1 if missing.
-     *
-     * @return the rp
+     * Returns right paren position, -1 if missing
      */
     public int getRp() {
         return rp;
     }
 
     /**
-     * Sets right paren position.
-     *
-     * @param rp the new rp
+     * Sets right paren position
      */
     public void setRp(int rp) {
         this.rp = rp;
     }
 
     /**
-     * Sets both paren positions.
-     *
-     * @param lp the lp
-     * @param rp the rp
+     * Sets both paren positions
      */
     public void setParens(int lp, int rp) {
         this.lp = lp;
@@ -312,8 +247,6 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Returns whether this is a 1.8 function closure
-     *
-     * @return true, if is expression closure
      */
     public boolean isExpressionClosure() {
         return isExpressionClosure;
@@ -321,8 +254,6 @@ public class FunctionNode extends ScriptNode {
 
     /**
      * Sets whether this is a 1.8 function closure
-     *
-     * @param isExpressionClosure the new checks if is expression closure
      */
     public void setIsExpressionClosure(boolean isExpressionClosure) {
         this.isExpressionClosure = isExpressionClosure;
@@ -342,73 +273,38 @@ public class FunctionNode extends ScriptNode {
         return needsActivation;
     }
 
-    /**
-     * Sets the requires activation.
-     */
     public void setRequiresActivation() {
         needsActivation = true;
     }
 
-    /**
-     * Checks if is generator.
-     *
-     * @return true, if is generator
-     */
     public boolean isGenerator() {
       return isGenerator;
     }
 
-    /**
-     * Sets the is generator.
-     */
     public void setIsGenerator() {
         isGenerator = true;
     }
 
-    /**
-     * Adds the resumption point.
-     *
-     * @param target the target
-     */
     public void addResumptionPoint(Node target) {
         if (generatorResumePoints == null)
             generatorResumePoints = new ArrayList<Node>();
         generatorResumePoints.add(target);
     }
 
-    /**
-     * Gets the resumption points.
-     *
-     * @return the resumption points
-     */
     public List<Node> getResumptionPoints() {
         return generatorResumePoints;
     }
 
-    /**
-     * Gets the live locals.
-     *
-     * @return the live locals
-     */
     public Map<Node,int[]> getLiveLocals() {
         return liveLocals;
     }
 
-    /**
-     * Adds the live locals.
-     *
-     * @param node the node
-     * @param locals the locals
-     */
     public void addLiveLocals(Node node, int[] locals) {
         if (liveLocals == null)
             liveLocals = new HashMap<Node,int[]>();
         liveLocals.put(node, locals);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.ScriptNode#addFunction(org.mozilla.javascript.ast.FunctionNode)
-     */
     @Override
     public int addFunction(FunctionNode fnNode) {
         int result = super.addFunction(fnNode);
@@ -419,60 +315,32 @@ public class FunctionNode extends ScriptNode {
     }
 
     /**
-     * Returns the function type (statement, expr, statement expr).
-     *
-     * @return the function type
+     * Returns the function type (statement, expr, statement expr)
      */
     public int getFunctionType() {
         return functionType;
     }
 
-    /**
-     * Sets the function type.
-     *
-     * @param type the new function type
-     */
     public void setFunctionType(int type) {
         functionType = type;
     }
 
-    /**
-     * Checks if is getter or setter.
-     *
-     * @return true, if is getter or setter
-     */
     public boolean isGetterOrSetter() {
         return functionForm == Form.GETTER || functionForm == Form.SETTER;
     }
 
-    /**
-     * Checks if is getter.
-     *
-     * @return true, if is getter
-     */
     public boolean isGetter() {
         return functionForm == Form.GETTER;
     }
 
-    /**
-     * Checks if is setter.
-     *
-     * @return true, if is setter
-     */
     public boolean isSetter() {
         return functionForm == Form.SETTER;
     }
 
-    /**
-     * Sets the function is getter.
-     */
     public void setFunctionIsGetter() {
         functionForm = Form.GETTER;
     }
 
-    /**
-     * Sets the function is setter.
-     */
     public void setFunctionIsSetter() {
         functionForm = Form.SETTER;
     }
@@ -486,8 +354,6 @@ public class FunctionNode extends ScriptNode {
      * <p>
      * This extension is only available by setting the CompilerEnv option
      * "isAllowMemberExprAsFunctionName" in the Parser.
-     *
-     * @param node the new member expr node
      */
     public void setMemberExprNode(AstNode node) {
         memberExprNode = node;
@@ -495,23 +361,17 @@ public class FunctionNode extends ScriptNode {
             node.setParent(this);
     }
 
-    /**
-     * Gets the member expr node.
-     *
-     * @return the member expr node
-     */
     public AstNode getMemberExprNode() {
         return memberExprNode;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.Scope#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
-        sb.append(makeIndent(depth));
-        sb.append("function");
+        if (!isGetterOrSetter()) {
+            sb.append(makeIndent(depth));
+            sb.append("function");
+        }
         if (functionName != null) {
             sb.append(" ");
             sb.append(functionName.toSource(0));
@@ -540,7 +400,7 @@ public class FunctionNode extends ScriptNode {
         } else {
             sb.append(getBody().toSource(depth).trim());
         }
-        if (functionType == FUNCTION_STATEMENT) {
+        if (functionType == FUNCTION_STATEMENT || isGetterOrSetter()) {
             sb.append("\n");
         }
         return sb.toString();
@@ -550,8 +410,6 @@ public class FunctionNode extends ScriptNode {
      * Visits this node, the function name node if supplied,
      * the parameters, and the body.  If there is a member-expr node,
      * it is visited last.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

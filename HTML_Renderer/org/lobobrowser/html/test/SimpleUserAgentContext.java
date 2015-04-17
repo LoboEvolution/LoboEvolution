@@ -1,3 +1,23 @@
+/*
+    GNU GENERAL PUBLIC LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ */
 package org.lobobrowser.html.test;
 
 import java.net.Proxy;
@@ -17,7 +37,6 @@ import java.util.logging.Logger;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.UserAgentContext;
 
-
 /**
  * Simple implementation of {@link org.lobobrowser.html.UserAgentContext}. This
  * class is provided for user convenience. Usually this class should be extended
@@ -26,436 +45,463 @@ import org.lobobrowser.html.UserAgentContext;
  * agent defaults.
  */
 public class SimpleUserAgentContext implements UserAgentContext {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger
-			.getLogger(SimpleUserAgentContext.class.getName());
-	
-	/** The Constant mediaNames. */
-	private static final Set mediaNames = new HashSet();
 
-	static {
-		// Media names claimed by this context.
-		Set mn = mediaNames;
-		mn.add("screen");
-		mn.add("tv");
-		mn.add("tty");
-		mn.add("all");
-	}
+    /** The Constant logger. */
+    private static final Logger logger = Logger
+            .getLogger(SimpleUserAgentContext.class.getName());
 
-	/**
-	 * This implementation returns true for certain media names, such as
-	 * <code>screen</code>.
-	 *
-	 * @param mediaName the media name
-	 * @return true, if is media
-	 */
-	public boolean isMedia(String mediaName) {
-		return mediaNames.contains(mediaName.toLowerCase());
-	}
+    /** The Constant mediaNames. */
+    private static final Set mediaNames = new HashSet();
 
-	/**
-	 * Creates a {@link org.lobobrowser.html.test.SimpleHttpRequest} instance.
-	 * The {@link org.lobobrowser.html.HttpRequest} object returned by
-	 * this method is used to load images, scripts, style sheets, and to
-	 * implement the Javascript XMLHttpRequest class. Override if a custom
-	 * mechanism to make requests is needed.
-	 *
-	 * @return the http request
-	 */
-	public HttpRequest createHttpRequest() {
-		return new SimpleHttpRequest(this, this.getProxy());
-	}
+    static {
+        // Media names claimed by this context.
+        Set mn = mediaNames;
+        mn.add("screen");
+        mn.add("tv");
+        mn.add("tty");
+        mn.add("all");
+    }
 
-	/** The proxy. */
-	private java.net.Proxy proxy = java.net.Proxy.NO_PROXY;
+    /**
+     * This implementation returns true for certain media names, such as
+     * <code>screen</code>.
+     *
+     * @param mediaName
+     *            the media name
+     * @return true, if is media
+     */
+    @Override
+    public boolean isMedia(String mediaName) {
+        return mediaNames.contains(mediaName.toLowerCase());
+    }
 
-	/**
-	 * Gets the connection proxy used in requests created by
-	 * {@link #createHttpRequest()} by default. This implementation returns the
-	 * value of a local field.
-	 *
-	 * @return the proxy
-	 * @see #setProxy(Proxy)
-	 */
-	protected java.net.Proxy getProxy() {
-		return this.proxy;
-	}
+    /**
+     * Creates a {@link org.lobobrowser.html.test.SimpleHttpRequest} instance.
+     * The {@link org.lobobrowser.html.HttpRequest} object returned by this
+     * method is used to load images, scripts, style sheets, and to implement
+     * the Javascript XMLHttpRequest class. Override if a custom mechanism to
+     * make requests is needed.
+     *
+     * @return the http request
+     */
+    @Override
+    public HttpRequest createHttpRequest() {
+        return new SimpleHttpRequest(this, this.getProxy());
+    }
 
-	/**
-	 * Sets the value of the proxy normally returned by {@link #getProxy()}.
-	 * 
-	 * @param proxy
-	 *            A <code>java.net.Proxy</code> instance.
-	 */
-	public void setProxy(Proxy proxy) {
-		this.proxy = proxy;
-	}
+    /** The proxy. */
+    private java.net.Proxy proxy = java.net.Proxy.NO_PROXY;
 
-	/** The app code name. */
-	private String appCodeName = "Cobra";
+    /**
+     * Gets the connection proxy used in requests created by
+     * {@link #createHttpRequest()} by default. This implementation returns the
+     * value of a local field.
+     *
+     * @return the proxy
+     * @see #setProxy(Proxy)
+     */
+    protected java.net.Proxy getProxy() {
+        return this.proxy;
+    }
 
-	/**
-	 * Returns the application "code name." This implementation returns the
-	 * value of a local field.
-	 *
-	 * @return the app code name
-	 * @see #setAppCodeName(String)
-	 */
-	public String getAppCodeName() {
-		return this.appCodeName;
-	}
+    /**
+     * Sets the value of the proxy normally returned by {@link #getProxy()}.
+     *
+     * @param proxy
+     *            A <code>java.net.Proxy</code> instance.
+     */
+    public void setProxy(Proxy proxy) {
+        this.proxy = proxy;
+    }
 
-	/**
-	 * Sets the application code name normally returned by
-	 * {@link #getAppCodeName()}.
-	 * 
-	 * @param appCodeName
-	 *            An application "code name."
-	 */
-	public void setAppCodeName(String appCodeName) {
-		this.appCodeName = appCodeName;
-	}
+    /** The app code name. */
+    private String appCodeName = "Cobra";
 
-	/** The app minor version. */
-	private String appMinorVersion = "0";
+    /**
+     * Returns the application "code name." This implementation returns the
+     * value of a local field.
+     *
+     * @return the app code name
+     * @see #setAppCodeName(String)
+     */
+    @Override
+    public String getAppCodeName() {
+        return this.appCodeName;
+    }
 
-	/**
-	 * Gets the "minor version" of the application. This implementation returns
-	 * the value of a local field.
-	 *
-	 * @return the app minor version
-	 * @see #setAppMinorVersion(String)
-	 */
-	public String getAppMinorVersion() {
-		return this.appMinorVersion;
-	}
+    /**
+     * Sets the application code name normally returned by
+     * {@link #getAppCodeName()}.
+     *
+     * @param appCodeName
+     *            An application "code name."
+     */
+    public void setAppCodeName(String appCodeName) {
+        this.appCodeName = appCodeName;
+    }
 
-	/**
-	 * Sets the value normally returned by {@link #getAppMinorVersion()}.
-	 * 
-	 * @param appMinorVersion
-	 *            The application's "minor version."
-	 */
-	public void setAppMinorVersion(String appMinorVersion) {
-		this.appMinorVersion = appMinorVersion;
-	}
+    /** The app minor version. */
+    private String appMinorVersion = "0";
 
-	/** The app name. */
-	private String appName = "Cobra";
+    /**
+     * Gets the "minor version" of the application. This implementation returns
+     * the value of a local field.
+     *
+     * @return the app minor version
+     * @see #setAppMinorVersion(String)
+     */
+    @Override
+    public String getAppMinorVersion() {
+        return this.appMinorVersion;
+    }
 
-	/**
-	 * Gets the application name. This implementation returns the value of a
-	 * local field.
-	 *
-	 * @return the app name
-	 * @see #setAppName(String)
-	 */
-	public String getAppName() {
-		return this.appName;
-	}
+    /**
+     * Sets the value normally returned by {@link #getAppMinorVersion()}.
+     *
+     * @param appMinorVersion
+     *            The application's "minor version."
+     */
+    public void setAppMinorVersion(String appMinorVersion) {
+        this.appMinorVersion = appMinorVersion;
+    }
 
-	/**
-	 * Sets the value normally returned by {@link #getAppName()}.
-	 * 
-	 * @param appName
-	 *            The application name.
-	 */
-	public void setAppName(String appName) {
-		this.appName = appName;
-	}
+    /** The app name. */
+    private String appName = "Cobra";
 
-	/** The app version. */
-	private String appVersion = "1";
+    /**
+     * Gets the application name. This implementation returns the value of a
+     * local field.
+     *
+     * @return the app name
+     * @see #setAppName(String)
+     */
+    @Override
+    public String getAppName() {
+        return this.appName;
+    }
 
-	/**
-	 * Gets the major application version. This implementation returns the value
-	 * of a local field.
-	 *
-	 * @return the app version
-	 * @see #setAppVersion(String)
-	 */
-	public String getAppVersion() {
-		return this.appVersion;
-	}
+    /**
+     * Sets the value normally returned by {@link #getAppName()}.
+     *
+     * @param appName
+     *            The application name.
+     */
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
 
-	/**
-	 * Sets the value normally returned by {@link #getAppVersion()}.
-	 * 
-	 * @param appVersion
-	 *            The application version.
-	 */
-	public void setAppVersion(String appVersion) {
-		this.appVersion = appVersion;
-	}
+    /** The app version. */
+    private String appVersion = "1";
 
-	/**
-	 * Get the browser language. This implementation returns the language of the
-	 * default locale. It may be overridden to provide a different value.
-	 *
-	 * @return the browser language
-	 */
-	public String getBrowserLanguage() {
-		return Locale.getDefault().getLanguage();
-	}
+    /**
+     * Gets the major application version. This implementation returns the value
+     * of a local field.
+     *
+     * @return the app version
+     * @see #setAppVersion(String)
+     */
+    @Override
+    public String getAppVersion() {
+        return this.appVersion;
+    }
 
-	/**
-	 * Returns the value of Java property <code>os.name</code>. It may be
-	 * overridden to provide a different value.
-	 *
-	 * @return the platform
-	 */
-	public String getPlatform() {
-		return System.getProperty("os.name");
-	}
+    /**
+     * Sets the value normally returned by {@link #getAppVersion()}.
+     *
+     * @param appVersion
+     *            The application version.
+     */
+    public void setAppVersion(String appVersion) {
+        this.appVersion = appVersion;
+    }
 
-	/** The user agent. */
-	private String userAgent = "Mozilla/4.0 (compatible; MSIE 6.0;) Cobra/Simple";
+    /**
+     * Get the browser language. This implementation returns the language of the
+     * default locale. It may be overridden to provide a different value.
+     *
+     * @return the browser language
+     */
+    @Override
+    public String getBrowserLanguage() {
+        return Locale.getDefault().getLanguage();
+    }
 
-	/**
-	 * Gets the User-Agent string. This implementation returns the value of a
-	 * local field.
-	 *
-	 * @return the user agent
-	 * @see #setUserAgent(String)
-	 */
-	public String getUserAgent() {
-		return this.userAgent;
-	}
+    /**
+     * Returns the value of Java property <code>os.name</code>. It may be
+     * overridden to provide a different value.
+     *
+     * @return the platform
+     */
+    @Override
+    public String getPlatform() {
+        return System.getProperty("os.name");
+    }
 
-	/**
-	 * Sets the value normally returned by {@link #getUserAgent()}.
-	 * 
-	 * @param userAgent
-	 *            A User-Agent string.
-	 */
-	public void setUserAgent(String userAgent) {
-		this.userAgent = userAgent;
-	}
+    /** The user agent. */
+    private String userAgent = "Mozilla/4.0 (compatible; MSIE 6.0;) Cobra/Simple";
 
-	/**
-	 * This implementation returns true if and only if
-	 * <code>java.net.CookieHandler.getDefault()</code> is returning a non-null
-	 * value. The method may be overridden to provide an alternative means of
-	 * determining cookie enabling state.
-	 *
-	 * @return true, if is cookie enabled
-	 */
-	public boolean isCookieEnabled() {
-		return java.net.CookieHandler.getDefault() != null;
-	}
+    /**
+     * Gets the User-Agent string. This implementation returns the value of a
+     * local field.
+     *
+     * @return the user agent
+     * @see #setUserAgent(String)
+     */
+    @Override
+    public String getUserAgent() {
+        return this.userAgent;
+    }
 
-	/**
-	 * This implementation uses the default <code>java.net.CookieHandler</code>,
-	 * if any, to get cookie information for the given URL. If no cookie handler
-	 * is available, this method returns the empty string.
-	 *
-	 * @param url the url
-	 * @return the cookie
-	 */
-	public String getCookie(URL url) {
-		java.net.CookieHandler handler = java.net.CookieHandler.getDefault();
-		if (handler == null) {
-			return "";
-		}
-		Map results;
-		try {
-			results = handler.get(url.toURI(), new HashMap());
-		} catch (Exception err) {
-			logger.log(Level.WARNING, "getCookie()", err);
-			return "";
-		}
-		if (results == null) {
-			return "";
-		}
-		StringBuffer buffer = new StringBuffer();
-		Iterator i = results.entrySet().iterator();
-		boolean firstTime = true;
-		while (i.hasNext()) {
-			Map.Entry entry = (Map.Entry) i.next();
-			String key = (String) entry.getKey();
-			if ("Cookie".equalsIgnoreCase(key)
-					|| "Cookie2".equalsIgnoreCase(key)) {
-				List list = (List) entry.getValue();
-				Iterator li = list.iterator();
-				while (li.hasNext()) {
-					String value = (String) li.next();
-					if (firstTime) {
-						firstTime = false;
-					} else {
-						buffer.append("; ");
-					}
-					buffer.append(value);
-				}
-			}
-		}
-		return buffer.toString();
-	}
+    /**
+     * Sets the value normally returned by {@link #getUserAgent()}.
+     *
+     * @param userAgent
+     *            A User-Agent string.
+     */
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
 
-	/** The scripting enabled. */
-	private boolean scriptingEnabled = true;
+    /**
+     * This implementation returns true if and only if
+     * <code>java.net.CookieHandler.getDefault()</code> is returning a non-null
+     * value. The method may be overridden to provide an alternative means of
+     * determining cookie enabling state.
+     *
+     * @return true, if is cookie enabled
+     */
+    @Override
+    public boolean isCookieEnabled() {
+        return java.net.CookieHandler.getDefault() != null;
+    }
 
-	/**
-	 * Determines whether scripting should be enabled. This implementation
-	 * returns the value of a local field defaulting to <code>true</code>.
-	 *
-	 * @return true, if is scripting enabled
-	 * @see #setScriptingEnabled(boolean)
-	 */
-	public boolean isScriptingEnabled() {
-		return this.scriptingEnabled;
-	}
+    /**
+     * This implementation uses the default <code>java.net.CookieHandler</code>,
+     * if any, to get cookie information for the given URL. If no cookie handler
+     * is available, this method returns the empty string.
+     *
+     * @param url
+     *            the url
+     * @return the cookie
+     */
+    @Override
+    public String getCookie(URL url) {
+        java.net.CookieHandler handler = java.net.CookieHandler.getDefault();
+        if (handler == null) {
+            return "";
+        }
+        Map results;
+        try {
+            results = handler.get(url.toURI(), new HashMap());
+        } catch (Exception err) {
+            logger.log(Level.WARNING, "getCookie()", err);
+            return "";
+        }
+        if (results == null) {
+            return "";
+        }
+        StringBuffer buffer = new StringBuffer();
+        Iterator i = results.entrySet().iterator();
+        boolean firstTime = true;
+        while (i.hasNext()) {
+            Map.Entry entry = (Map.Entry) i.next();
+            String key = (String) entry.getKey();
+            if ("Cookie".equalsIgnoreCase(key)
+                    || "Cookie2".equalsIgnoreCase(key)) {
+                List list = (List) entry.getValue();
+                Iterator li = list.iterator();
+                while (li.hasNext()) {
+                    String value = (String) li.next();
+                    if (firstTime) {
+                        firstTime = false;
+                    } else {
+                        buffer.append("; ");
+                    }
+                    buffer.append(value);
+                }
+            }
+        }
+        return buffer.toString();
+    }
 
-	/**
-	 * Sets the value normally returned by {@link #isScriptingEnabled()}.
-	 * 
-	 * @param enable
-	 *            A boolean value.
-	 */
-	public void setScriptingEnabled(boolean enable) {
-		this.scriptingEnabled = enable;
-	}
+    /** The scripting enabled. */
+    private boolean scriptingEnabled = true;
 
-	/**
-	 * This method uses the default CookieHandler, if one is available, to set a
-	 * cookie value.
-	 *
-	 * @param url the url
-	 * @param cookieSpec the cookie spec
-	 */
-	public void setCookie(URL url, String cookieSpec) {
-		java.net.CookieHandler handler = java.net.CookieHandler.getDefault();
-		if (handler == null) {
-			return;
-		}
-		Map headers = new HashMap(2);
-		headers.put("Set-Cookie", Collections.singletonList(cookieSpec));
-		try {
-			handler.put(url.toURI(), headers);
-		} catch (Exception err) {
-			logger.log(Level.WARNING, "setCookie()", err);
-		}
-	}
+    /**
+     * Determines whether scripting should be enabled. This implementation
+     * returns the value of a local field defaulting to <code>true</code>.
+     *
+     * @return true, if is scripting enabled
+     * @see #setScriptingEnabled(boolean)
+     */
+    @Override
+    public boolean isScriptingEnabled() {
+        return this.scriptingEnabled;
+    }
 
-	/**
-	 * Returns <code>null</code>. This method must be overridden if JavaScript
-	 * code is untrusted.
-	 *
-	 * @return the security policy
-	 */
-	public Policy getSecurityPolicy() {
-		return null;
-	}
+    /**
+     * Sets the value normally returned by {@link #isScriptingEnabled()}.
+     *
+     * @param enable
+     *            A boolean value.
+     */
+    public void setScriptingEnabled(boolean enable) {
+        this.scriptingEnabled = enable;
+    }
 
-	/** The scripting optimization level. */
-	private int scriptingOptimizationLevel = -1;
+    /**
+     * This method uses the default CookieHandler, if one is available, to set a
+     * cookie value.
+     *
+     * @param url
+     *            the url
+     * @param cookieSpec
+     *            the cookie spec
+     */
+    @Override
+    public void setCookie(URL url, String cookieSpec) {
+        java.net.CookieHandler handler = java.net.CookieHandler.getDefault();
+        if (handler == null) {
+            return;
+        }
+        Map headers = new HashMap(2);
+        headers.put("Set-Cookie", Collections.singletonList(cookieSpec));
+        try {
+            handler.put(url.toURI(), headers);
+        } catch (Exception err) {
+            logger.log(Level.WARNING, "setCookie()", err);
+        }
+    }
 
-	/**
-	 * Gets the Rhino optimization level. This implementation returns the value
-	 * of a local field defaulting to <code>-1</code>.
-	 *
-	 * @return the scripting optimization level
-	 * @see #setScriptingOptimizationLevel(int)
-	 */
-	public int getScriptingOptimizationLevel() {
-		return this.scriptingOptimizationLevel;
-	}
+    /**
+     * Returns <code>null</code>. This method must be overridden if JavaScript
+     * code is untrusted.
+     *
+     * @return the security policy
+     */
+    @Override
+    public Policy getSecurityPolicy() {
+        return null;
+    }
 
-	/**
-	 * Sets the value normally returned by
-	 * {@link #getScriptingOptimizationLevel()}.
-	 * 
-	 * @param level
-	 *            A Rhino optimization level.
-	 */
-	public void setScriptingOptimizationLevel(int level) {
-		this.scriptingOptimizationLevel = level;
-	}
+    /** The scripting optimization level. */
+    private int scriptingOptimizationLevel = -1;
 
-	/** The vendor. */
-	private String vendor = "The Lobo Project";
+    /**
+     * Gets the Rhino optimization level. This implementation returns the value
+     * of a local field defaulting to <code>-1</code>.
+     *
+     * @return the scripting optimization level
+     * @see #setScriptingOptimizationLevel(int)
+     */
+    @Override
+    public int getScriptingOptimizationLevel() {
+        return this.scriptingOptimizationLevel;
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.UserAgentContext#getVendor()
-	 */
-	public String getVendor() {
-		return this.vendor;
-	}
+    /**
+     * Sets the value normally returned by
+     * {@link #getScriptingOptimizationLevel()}.
+     *
+     * @param level
+     *            A Rhino optimization level.
+     */
+    public void setScriptingOptimizationLevel(int level) {
+        this.scriptingOptimizationLevel = level;
+    }
 
-	/**
-	 * Sets the vendor.
-	 *
-	 * @param vendor the new vendor
-	 */
-	public void setVendor(String vendor) {
-		this.vendor = vendor;
-	}
+    /** The vendor. */
+    private String vendor = "The Lobo Project";
 
-	/** The product. */
-	private String product = "Cobra";
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.UserAgentContext#getVendor()
+     */
+    @Override
+    public String getVendor() {
+        return this.vendor;
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.UserAgentContext#getProduct()
-	 */
-	public String getProduct() {
-		return this.product;
-	}
+    /**
+     * Sets the vendor.
+     *
+     * @param vendor
+     *            the new vendor
+     */
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
+    }
 
-	/**
-	 * Sets the product.
-	 *
-	 * @param product the new product
-	 */
-	public void setProduct(String product) {
-		this.product = product;
-	}
+    /** The product. */
+    private String product = "Cobra";
 
-	/** The external css enabled. */
-	private boolean externalCSSEnabled = true;
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.UserAgentContext#getProduct()
+     */
+    @Override
+    public String getProduct() {
+        return this.product;
+    }
 
-	/**
-	 * Determines whether loading of CSS files should be enabled. This
-	 * implementation returns the value of a local field defaulting to
-	 * <code>true</code>.
-	 *
-	 * @return true, if is external css enabled
-	 * @see #setExternalCSSEnabled(boolean)
-	 */
-	public boolean isExternalCSSEnabled() {
-		return this.externalCSSEnabled;
-	}
+    /**
+     * Sets the product.
+     *
+     * @param product
+     *            the new product
+     */
+    public void setProduct(String product) {
+        this.product = product;
+    }
 
-	/**
-	 * Sets the value normally returned by {@link #isExternalCSSEnabled()}.
-	 * 
-	 * @param enabled
-	 *            A boolean value.
-	 */
-	public void setExternalCSSEnabled(boolean enabled) {
-		this.externalCSSEnabled = enabled;
-	}
+    /** The external css enabled. */
+    private boolean externalCSSEnabled = true;
 
-	/** The internal css enabled. */
-	private boolean internalCSSEnabled = true;
+    /**
+     * Determines whether loading of CSS files should be enabled. This
+     * implementation returns the value of a local field defaulting to
+     * <code>true</code>.
+     *
+     * @return true, if is external css enabled
+     * @see #setExternalCSSEnabled(boolean)
+     */
+    @Override
+    public boolean isExternalCSSEnabled() {
+        return this.externalCSSEnabled;
+    }
 
-	/**
-	 * Determines whether STYLE tags should be processed. This implementation
-	 * returns the value of a local field defaulting to <code>true</code>.
-	 *
-	 * @return true, if is internal css enabled
-	 * @see #setInternalCSSEnabled(boolean)
-	 */
-	public boolean isInternalCSSEnabled() {
-		return internalCSSEnabled;
-	}
+    /**
+     * Sets the value normally returned by {@link #isExternalCSSEnabled()}.
+     *
+     * @param enabled
+     *            A boolean value.
+     */
+    public void setExternalCSSEnabled(boolean enabled) {
+        this.externalCSSEnabled = enabled;
+    }
 
-	/**
-	 * Sets the value normally returned by {@link #isInternalCSSEnabled()}.
-	 * 
-	 * @param internalCSSEnabled
-	 *            A boolean value.
-	 */
-	public void setInternalCSSEnabled(boolean internalCSSEnabled) {
-		this.internalCSSEnabled = internalCSSEnabled;
-	}
+    /** The internal css enabled. */
+    private boolean internalCSSEnabled = true;
+
+    /**
+     * Determines whether STYLE tags should be processed. This implementation
+     * returns the value of a local field defaulting to <code>true</code>.
+     *
+     * @return true, if is internal css enabled
+     * @see #setInternalCSSEnabled(boolean)
+     */
+    @Override
+    public boolean isInternalCSSEnabled() {
+        return internalCSSEnabled;
+    }
+
+    /**
+     * Sets the value normally returned by {@link #isInternalCSSEnabled()}.
+     *
+     * @param internalCSSEnabled
+     *            A boolean value.
+     */
+    public void setInternalCSSEnabled(boolean internalCSSEnabled) {
+        this.internalCSSEnabled = internalCSSEnabled;
+    }
 }

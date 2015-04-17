@@ -1,24 +1,22 @@
 /*
-Copyright 1994-2006 The Lobo Project. Copyright 2014 Lobo Evolution. All rights reserved.
-
-Redistribution and use in source and binary forms, with or without modification, 
-are permitted provided that the following conditions are met:
-
-Redistributions of source code must retain the above copyright notice, this list 
-of conditions and the following disclaimer. Redistributions in binary form must 
-reproduce the above copyright notice, this list of conditions and the following 
-disclaimer in the documentation and/or other materials provided with the distribution.
- 
-THIS SOFTWARE IS PROVIDED BY THE LOBO PROJECT ``AS IS'' AND ANY EXPRESS OR IMPLIED 
-WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
-MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO 
-EVENT SHALL THE FREEBSD PROJECT OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
-OF THE POSSIBILITY OF SUCH DAMAGE.
+ * Copyright 1994-2006 The Lobo Project. Copyright 2014 Lobo Evolution. All
+ * rights reserved. Redistribution and use in source and binary forms, with or
+ * without modification, are permitted provided that the following conditions
+ * are met: Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer. Redistributions
+ * in binary form must reproduce the above copyright notice, this list of
+ * conditions and the following disclaimer in the documentation and/or other
+ * materials provided with the distribution. THIS SOFTWARE IS PROVIDED BY THE
+ * LOBO PROJECT ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
+ * NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+ * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE FREEBSD PROJECT OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package org.lobobrowser.clientlet;
 
@@ -31,224 +29,229 @@ import java.util.Iterator;
 
 import org.lobobrowser.ua.RequestType;
 
-
 /**
  * Represents a URL response such as an HTTP or file protocol response.
  */
 public interface ClientletResponse {
-	
-	/**
-	 * Gets the response URL. This may be different to the request URL in the
-	 * case of a redirect.
-	 *
-	 * @return the response url
-	 */
-	public URL getResponseURL();
 
-	/**
-	 * Gets the request method for the response URL. This may be different to
-	 * the original request method in case of a redirect.
-	 *
-	 * @return the last request method
-	 */
-	public String getLastRequestMethod();
+    /**
+     * Gets the response URL. This may be different to the request URL in the
+     * case of a redirect.
+     *
+     * @return the response url
+     */
+    URL getResponseURL();
 
-	/**
-	 * Gets a response header.
-	 *
-	 * @param name            The header name.
-	 * @return the header
-	 */
-	public String getHeader(String name);
+    /**
+     * Gets the request method for the response URL. This may be different to
+     * the original request method in case of a redirect.
+     *
+     * @return the last request method
+     */
+    String getLastRequestMethod();
 
-	/**
-	 * Gets all values for a particular header.
-	 *
-	 * @param name            The header name.
-	 * @return the headers
-	 */
-	public String[] getHeaders(String name);
+    /**
+     * Gets a response header.
+     *
+     * @param name
+     *            The header name.
+     * @return the header
+     */
+    String getHeader(String name);
 
-	/**
-	 * Gets an iterator of response header names.
-	 *
-	 * @return the header names
-	 */
-	public Iterator getHeaderNames();
+    /**
+     * Gets all values for a particular header.
+     *
+     * @param name
+     *            The header name.
+     * @return the headers
+     */
+    String[] getHeaders(String name);
 
-	/**
-	 * Gets the response stream.
-	 *
-	 * @return the input stream
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public InputStream getInputStream() throws IOException;
+    /**
+     * Gets an iterator of response header names.
+     *
+     * @return the header names
+     */
+    Iterator getHeaderNames();
 
-	/**
-	 * Gets the response content type. This can also contain a character
-	 * encoding, e.g. <em>text/html; charset=ISO-8859-1</em>.
-	 *
-	 * @return the content type
-	 * @see #getMimeType()
-	 */
-	public String getContentType();
+    /**
+     * Gets the response stream.
+     *
+     * @return the input stream
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    InputStream getInputStream() throws IOException;
 
-	/**
-	 * Gets only the mime-type part of the content type, e.g. <em>text/html</em>
-	 * .
-	 *
-	 * @return the mime type
-	 * @see #getContentType()
-	 */
-	public String getMimeType();
+    /**
+     * Gets the response content type. This can also contain a character
+     * encoding, e.g. <em>text/html; charset=ISO-8859-1</em>.
+     *
+     * @return the content type
+     * @see #getMimeType()
+     */
+    String getContentType();
 
-	/**
-	 * A convenience method used to match parameters provided against the
-	 * response mime-type or the "file extension" of the response URL's file
-	 * path. The file extension is matched only when the mime type of the
-	 * response is either <code>application/octet-stream</code>,
-	 * <code>content/unknown</code>, or not provided.
-	 * 
-	 * @param mimeType
-	 *            A mime type, e.g. <em>application/x-acme</em>.
-	 * @param fileExtension
-	 *            A collection of file extensions, each starting with a dot,
-	 *            e.g. <em>new String[] { ".acme", ".acm" }</em>.
-	 * @return True if the navigator considers there is a match.
-	 */
-	public boolean matches(String mimeType, String[] fileExtension);
+    /**
+     * Gets only the mime-type part of the content type, e.g. <em>text/html</em>
+     * .
+     *
+     * @return the mime type
+     * @see #getContentType()
+     */
+    String getMimeType();
 
-	/**
-	 * Gets the content length of the reponse. This may be -1 if the content
-	 * length is not known.
-	 *
-	 * @return the content length
-	 */
-	public int getContentLength();
+    /**
+     * A convenience method used to match parameters provided against the
+     * response mime-type or the "file extension" of the response URL's file
+     * path. The file extension is matched only when the mime type of the
+     * response is either <code>application/octet-stream</code>,
+     * <code>content/unknown</code>, or not provided.
+     *
+     * @param mimeType
+     *            A mime type, e.g. <em>application/x-acme</em>.
+     * @param fileExtension
+     *            A collection of file extensions, each starting with a dot,
+     *            e.g. <em>new String[] {".acme", ".acm"}</em>.
+     * @return True if the navigator considers there is a match.
+     */
+    boolean matches(String mimeType, String[] fileExtension);
 
-	/**
-	 * Returns true only if the response comes from a local cache.
-	 *
-	 * @return true, if is from cache
-	 */
-	public boolean isFromCache();
+    /**
+     * Gets the content length of the reponse. This may be -1 if the content
+     * length is not known.
+     *
+     * @return the content length
+     */
+    int getContentLength();
 
-	/**
-	 * Gets the charset specified with the content type. If no such charset has
-	 * been provided, the implementation may recommend a default.
-	 *
-	 * @return the charset
-	 */
-	public String getCharset();
+    /**
+     * Returns true only if the response comes from a local cache.
+     *
+     * @return true, if is from cache
+     */
+    boolean isFromCache();
 
-	/**
-	 * Determines whether a charset has been provided with the Content-Type
-	 * header.
-	 *
-	 * @return true, if is charset provided
-	 */
-	public boolean isCharsetProvided();
+    /**
+     * Gets the charset specified with the content type. If no such charset has
+     * been provided, the implementation may recommend a default.
+     *
+     * @return the charset
+     */
+    String getCharset();
 
-	/**
-	 * Gets the HTTP response or status code.
-	 *
-	 * @return the response code
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public int getResponseCode() throws IOException;
+    /**
+     * Determines whether a charset has been provided with the Content-Type
+     * header.
+     *
+     * @return true, if is charset provided
+     */
+    boolean isCharsetProvided();
 
-	/**
-	 * Gets the HTTP response message.
-	 *
-	 * @return the response message
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public String getResponseMessage() throws IOException;
+    /**
+     * Gets the HTTP response or status code.
+     *
+     * @return the response code
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    int getResponseCode() throws IOException;
 
-	/**
-	 * Returns true only if the response is allowed to be cached.
-	 *
-	 * @return true, if is cacheable
-	 */
-	public boolean isCacheable();
+    /**
+     * Gets the HTTP response message.
+     *
+     * @return the response message
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    String getResponseMessage() throws IOException;
 
-	/**
-	 * Returns true only if the response does not result from a reload, forward
-	 * or back. Generally, this method indicates that a response is not related
-	 * to an entry already in the navigation history.
-	 *
-	 * @return true, if is new navigation action
-	 */
-	public boolean isNewNavigationAction();
+    /**
+     * Returns true only if the response is allowed to be cached.
+     *
+     * @return true, if is cacheable
+     */
+    boolean isCacheable();
 
-	/**
-	 * If available, gets an object previously persisted along with the cached
-	 * document.
-	 *
-	 * @param classLoader            A class loader that can load an object of the type expected.
-	 * @return the persistent cached object
-	 * @see #setNewPersistentCachedObject(Serializable)
-	 */
-	public Object getPersistentCachedObject(ClassLoader classLoader);
+    /**
+     * Returns true only if the response does not result from a reload, forward
+     * or back. Generally, this method indicates that a response is not related
+     * to an entry already in the navigation history.
+     *
+     * @return true, if is new navigation action
+     */
+    boolean isNewNavigationAction();
 
-	/**
-	 * Caches the object provided in persistent memory and associates it with
-	 * the reponse URL, if caching is allowed.
-	 * 
-	 * @param object
-	 *            A <code>Serializable</code> object.
-	 */
-	public void setNewPersistentCachedObject(Serializable object);
+    /**
+     * If available, gets an object previously persisted along with the cached
+     * document.
+     *
+     * @param classLoader
+     *            A class loader that can load an object of the type expected.
+     * @return the persistent cached object
+     * @see #setNewPersistentCachedObject(Serializable)
+     */
+    Object getPersistentCachedObject(ClassLoader classLoader);
 
-	/**
-	 * If available, gets an object previously cached in main memory associated
-	 * with the response URL.
-	 * <p>
-	 * <b>Note</b>: Most callers should only use the persistent cached object if
-	 * {@link #isFromCache()} returns true.
-	 *
-	 * @return the transient cached object
-	 * @see #setNewTransientCachedObject(Object, int)
-	 */
-	public Object getTransientCachedObject();
+    /**
+     * Caches the object provided in persistent memory and associates it with
+     * the reponse URL, if caching is allowed.
+     *
+     * @param object
+     *            A <code>Serializable</code> object.
+     */
+    void setNewPersistentCachedObject(Serializable object);
 
-	/**
-	 * Caches an object in main memory, provided caching is allowed and there's
-	 * enough memory to do so. The object is associated with the current
-	 * response URL.
-	 * 
-	 * @param object
-	 *            An object.
-	 * @param approxSize
-	 *            The approximate byte size the object occupies in memory. Note
-	 *            that values less than the size of the response in bytes are
-	 *            assumed to be in error.
-	 */
-	public void setNewTransientCachedObject(Object object, int approxSize);
+    /**
+     * If available, gets an object previously cached in main memory associated
+     * with the response URL.
+     * <p>
+     * <b>Note</b>: Most callers should only use the persistent cached object if
+     * {@link #isFromCache()} returns true.
+     *
+     * @return the transient cached object
+     * @see #setNewTransientCachedObject(Object, int)
+     */
+    Object getTransientCachedObject();
 
-	/**
-	 * Gets the approximate size in bytes of the transient cached object
-	 * previously associated with the response.
-	 * <p>
-	 * <b>Note</b>: Most callers should only use the transient cached object if
-	 * {@link #isFromCache()} returns true.
-	 *
-	 * @return the transient cached object size
-	 */
-	public int getTransientCachedObjectSize();
+    /**
+     * Caches an object in main memory, provided caching is allowed and there's
+     * enough memory to do so. The object is associated with the current
+     * response URL.
+     *
+     * @param object
+     *            An object.
+     * @param approxSize
+     *            The approximate byte size the object occupies in memory. Note
+     *            that values less than the size of the response in bytes are
+     *            assumed to be in error.
+     */
+    void setNewTransientCachedObject(Object object, int approxSize);
 
-	/**
-	 * Gets the value of the "Date" header. This method returns
-	 * <code>null</code> if the header is not available.
-	 *
-	 * @return the date
-	 */
-	public Date getDate();
+    /**
+     * Gets the approximate size in bytes of the transient cached object
+     * previously associated with the response.
+     * <p>
+     * <b>Note</b>: Most callers should only use the transient cached object if
+     * {@link #isFromCache()} returns true.
+     *
+     * @return the transient cached object size
+     */
+    int getTransientCachedObjectSize();
 
-	/**
-	 * Gets the type of request.
-	 *
-	 * @return the request type
-	 */
-	public RequestType getRequestType();
+    /**
+     * Gets the value of the "Date" header. This method returns
+     * <code>null</code> if the header is not available.
+     *
+     * @return the date
+     */
+    Date getDate();
+
+    /**
+     * Gets the type of request.
+     *
+     * @return the request type
+     */
+    RequestType getRequestType();
 }

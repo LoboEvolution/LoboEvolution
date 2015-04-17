@@ -1,22 +1,16 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 2 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
-
-    You should have received a copy of the GNU General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either verion 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.context;
 
@@ -29,76 +23,78 @@ import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ClientletSelector;
 import org.lobobrowser.security.GenericLocalPermission;
 
-
 /**
  * A factory for creating Clientlet objects.
  */
 public class ClientletFactory {
-	// private static final Logger logger =
-	// Logger.getLogger(ClientletFactory.class.getName());
-	/** The instance. */
-	private static ClientletFactory instance;
+    // private static final Logger logger =
+    // Logger.getLogger(ClientletFactory.class.getName());
+    /** The instance. */
+    private static ClientletFactory instance;
 
-	/**
-	 * Instantiates a new clientlet factory.
-	 */
-	private ClientletFactory() {
-		this.addClientletSelector(new CoreClientletSelector());
-	}
+    /**
+     * Instantiates a new clientlet factory.
+     */
+    private ClientletFactory() {
+        this.addClientletSelector(new CoreClientletSelector());
+    }
 
-	/**
-	 * Gets the single instance of ClientletFactory.
-	 *
-	 * @return single instance of ClientletFactory
-	 */
-	public static ClientletFactory getInstance() {
-		if (instance == null) {
-			synchronized (ClientletFactory.class) {
-				if (instance == null) {
-					instance = new ClientletFactory();
-				}
-			}
-		}
-		return instance;
-	}
+    /**
+     * Gets the single instance of ClientletFactory.
+     *
+     * @return single instance of ClientletFactory
+     */
+    public static ClientletFactory getInstance() {
+        if (instance == null) {
+            synchronized (ClientletFactory.class) {
+                if (instance == null) {
+                    instance = new ClientletFactory();
+                }
+            }
+        }
+        return instance;
+    }
 
-	/** The selectors. */
-	private final List<ClientletSelector> selectors = new LinkedList<ClientletSelector>();
+    /** The selectors. */
+    private final List<ClientletSelector> selectors = new LinkedList<ClientletSelector>();
 
-	/**
-	 * Adds the clientlet selector.
-	 *
-	 * @param selector the selector
-	 */
-	public void addClientletSelector(ClientletSelector selector) {
-		SecurityManager sm = System.getSecurityManager();
-		if (sm != null) {
-			sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
-		}
-		synchronized (this) {
-			this.selectors.add(0, selector);
-		}
-	}
+    /**
+     * Adds the clientlet selector.
+     *
+     * @param selector
+     *            the selector
+     */
+    public void addClientletSelector(ClientletSelector selector) {
+        SecurityManager sm = System.getSecurityManager();
+        if (sm != null) {
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
+        }
+        synchronized (this) {
+            this.selectors.add(0, selector);
+        }
+    }
 
-	/**
-	 * Gets the clientlet.
-	 *
-	 * @param request the request
-	 * @param response the response
-	 * @return the clientlet
-	 */
-	public Clientlet getClientlet(ClientletRequest request,
-			ClientletResponse response) {
-		synchronized (this) {
-			for (ClientletSelector selector : this.selectors) {
-				Clientlet clientlet = selector.select(request, response);
-				if (clientlet == null) {
-					continue;
-				}
-				return clientlet;
-			}
-		}
-		throw new IllegalStateException("No clientlets found for response: "
-				+ response + ".");
-	}
+    /**
+     * Gets the clientlet.
+     *
+     * @param request
+     *            the request
+     * @param response
+     *            the response
+     * @return the clientlet
+     */
+    public Clientlet getClientlet(ClientletRequest request,
+            ClientletResponse response) {
+        synchronized (this) {
+            for (ClientletSelector selector : this.selectors) {
+                Clientlet clientlet = selector.select(request, response);
+                if (clientlet == null) {
+                    continue;
+                }
+                return clientlet;
+            }
+        }
+        throw new IllegalStateException("No clientlets found for response: "
+                + response + ".");
+    }
 }

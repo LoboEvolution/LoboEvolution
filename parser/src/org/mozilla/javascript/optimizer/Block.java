@@ -4,37 +4,22 @@
 
 package org.mozilla.javascript.optimizer;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import org.mozilla.javascript.*;
+import org.mozilla.javascript.ast.Jump;
+
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.mozilla.javascript.Node;
-import org.mozilla.javascript.ObjArray;
-import org.mozilla.javascript.ObjToIntMap;
-import org.mozilla.javascript.Token;
-import org.mozilla.javascript.ast.Jump;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
-
-/**
- * The Class Block.
- */
 class Block
 {
 
-    /**
-     * The Class FatBlock.
-     */
     private static class FatBlock
     {
 
-        /**
-         * Reduce to array.
-         *
-         * @param map the map
-         * @return the block[]
-         */
         private static Block[] reduceToArray(ObjToIntMap map)
         {
             Block[] result = null;
@@ -50,63 +35,26 @@ class Block
             return result;
         }
 
-        /**
-         * Adds the successor.
-         *
-         * @param b the b
-         */
         void addSuccessor(FatBlock b)  { successors.put(b, 0); }
-        
-        /**
-         * Adds the predecessor.
-         *
-         * @param b the b
-         */
         void addPredecessor(FatBlock b)  { predecessors.put(b, 0); }
 
-        /**
-         * Gets the successors.
-         *
-         * @return the successors
-         */
         Block[] getSuccessors() { return reduceToArray(successors); }
-        
-        /**
-         * Gets the predecessors.
-         *
-         * @return the predecessors
-         */
         Block[] getPredecessors() { return reduceToArray(predecessors); }
 
         // all the Blocks that come immediately after this
-        /** The successors. */
         private ObjToIntMap successors = new ObjToIntMap();
         // all the Blocks that come immediately before this
-        /** The predecessors. */
         private ObjToIntMap predecessors = new ObjToIntMap();
 
-        /** The real block. */
         Block realBlock;
     }
 
-    /**
-     * Instantiates a new block.
-     *
-     * @param startNodeIndex the start node index
-     * @param endNodeIndex the end node index
-     */
     Block(int startNodeIndex, int endNodeIndex)
     {
         itsStartNodeIndex = startNodeIndex;
         itsEndNodeIndex = endNodeIndex;
     }
 
-    /**
-     * Run flow analyzes.
-     *
-     * @param fn the fn
-     * @param statementNodes the statement nodes
-     */
     static void runFlowAnalyzes(OptFunctionNode fn, Node[] statementNodes)
     {
         int paramCount = fn.fnode.getParamCount();
@@ -153,12 +101,6 @@ class Block
 
     }
 
-    /**
-     * Builds the blocks.
-     *
-     * @param statementNodes the statement nodes
-     * @return the block[]
-     */
     private static Block[] buildBlocks(Node[] statementNodes)
     {
         // a mapping from each target node to the block it begins
@@ -247,13 +189,6 @@ class Block
         return result;
     }
 
-    /**
-     * New fat block.
-     *
-     * @param startNodeIndex the start node index
-     * @param endNodeIndex the end node index
-     * @return the fat block
-     */
     private static FatBlock newFatBlock(int startNodeIndex, int endNodeIndex)
     {
         FatBlock fb = new FatBlock();
@@ -261,13 +196,6 @@ class Block
         return fb;
     }
 
-    /**
-     * To string.
-     *
-     * @param blockList the block list
-     * @param statementNodes the statement nodes
-     * @return the string
-     */
     private static String toString(Block[] blockList, Node[] statementNodes)
     {
         if (!DEBUG) return null;
@@ -307,14 +235,6 @@ class Block
         return sw.toString();
     }
 
-    /**
-     * Reaching def data flow.
-     *
-     * @param fn the fn
-     * @param statementNodes the statement nodes
-     * @param theBlocks the the blocks
-     * @param varTypes the var types
-     */
     private static void reachingDefDataFlow(OptFunctionNode fn, Node[] statementNodes,
                                             Block theBlocks[], int[] varTypes)
     {
@@ -371,14 +291,6 @@ class Block
         theBlocks[0].markAnyTypeVariables(varTypes);
     }
 
-    /**
-     * Type flow.
-     *
-     * @param fn the fn
-     * @param statementNodes the statement nodes
-     * @param theBlocks the the blocks
-     * @param varTypes the var types
-     */
     private static void typeFlow(OptFunctionNode fn, Node[] statementNodes,
                                  Block theBlocks[], int[] varTypes)
     {
@@ -416,25 +328,12 @@ class Block
         }
     }
 
-    /**
-     * Assign type.
-     *
-     * @param varTypes the var types
-     * @param index the index
-     * @param type the type
-     * @return true, if successful
-     */
     private static boolean assignType(int[] varTypes, int index, int type)
     {
         int prev = varTypes[index];
         return prev != (varTypes[index] |= type);
     }
 
-    /**
-     * Mark any type variables.
-     *
-     * @param varTypes the var types
-     */
     private void markAnyTypeVariables(int[] varTypes)
     {
         for (int i = 0; i != varTypes.length; i++) {
@@ -453,12 +352,6 @@ class Block
         The itsNotDefSet is built reversed then flipped later.
 
     */
-    /**
-     * Look for variable access.
-     *
-     * @param fn the fn
-     * @param n the n
-     */
     private void lookForVariableAccess(OptFunctionNode fn, Node n)
     {
         switch (n.getType()) {
@@ -516,12 +409,6 @@ class Block
         Then walk the trees looking for defs/uses of variables
         and build the def and useBeforeDef sets.
     */
-    /**
-     * Inits the live on entry sets.
-     *
-     * @param fn the fn
-     * @param statementNodes the statement nodes
-     */
     private void initLiveOnEntrySets(OptFunctionNode fn, Node[] statementNodes)
     {
         int listLength = fn.getVarCount();
@@ -542,11 +429,6 @@ class Block
         liveOnEntry = liveOnExit - defsInThisBlock + useBeforeDefsInThisBlock
 
     */
-    /**
-     * Do reached use data flow.
-     *
-     * @return true, if successful
-     */
     private boolean doReachedUseDataFlow()
     {
         itsLiveOnExitSet.clear();
@@ -559,15 +441,6 @@ class Block
                               itsUseBeforeDefSet, itsNotDefSet);
     }
 
-    /**
-     * Update entry set.
-     *
-     * @param entrySet the entry set
-     * @param exitSet the exit set
-     * @param useBeforeDef the use before def
-     * @param notDef the not def
-     * @return true, if successful
-     */
     private boolean updateEntrySet(BitSet entrySet, BitSet exitSet,
                                    BitSet useBeforeDef, BitSet notDef) {
         int card = entrySet.cardinality();
@@ -583,14 +456,6 @@ class Block
             Literals,
             Arithmetic operations - always return a Number
     */
-    /**
-     * Find expression type.
-     *
-     * @param fn the fn
-     * @param n the n
-     * @param varTypes the var types
-     * @return the int
-     */
     private static int findExpressionType(OptFunctionNode fn, Node n,
                                           int[] varTypes)
     {
@@ -702,14 +567,6 @@ class Block
         return Optimizer.AnyType;
     }
 
-    /**
-     * Find def points.
-     *
-     * @param fn the fn
-     * @param n the n
-     * @param varTypes the var types
-     * @return true, if successful
-     */
     private static boolean findDefPoints(OptFunctionNode fn, Node n,
                                          int[] varTypes)
     {
@@ -744,14 +601,6 @@ class Block
         return result;
     }
 
-    /**
-     * Do type flow.
-     *
-     * @param fn the fn
-     * @param statementNodes the statement nodes
-     * @param varTypes the var types
-     * @return true, if successful
-     */
     private boolean doTypeFlow(OptFunctionNode fn, Node[] statementNodes,
                                int[] varTypes)
     {
@@ -767,11 +616,6 @@ class Block
         return changed;
     }
 
-    /**
-     * Prints the live on entry set.
-     *
-     * @param fn the fn
-     */
     private void printLiveOnEntrySet(OptFunctionNode fn)
     {
         if (DEBUG) {
@@ -790,38 +634,22 @@ class Block
     }
 
     // all the Blocks that come immediately after this
-    /** The its successors. */
     private Block[] itsSuccessors;
     // all the Blocks that come immediately before this
-    /** The its predecessors. */
     private Block[] itsPredecessors;
 
-    /** The its start node index. */
     private int itsStartNodeIndex;       // the Node at the start of the block
-    
-    /** The its end node index. */
     private int itsEndNodeIndex;         // the Node at the end of the block
 
-    /** The its block id. */
     private int itsBlockID;               // a unique index for each block
 
     // reaching def bit sets -
-    /** The its live on entry set. */
     private BitSet itsLiveOnEntrySet;
-    
-    /** The its live on exit set. */
     private BitSet itsLiveOnExitSet;
-    
-    /** The its use before def set. */
     private BitSet itsUseBeforeDefSet;
-    
-    /** The its not def set. */
     private BitSet itsNotDefSet;
 
-    /** The Constant DEBUG. */
     static final boolean DEBUG = false;
-    
-    /** The debug_block count. */
     private static int debug_blockCount;
 
 }

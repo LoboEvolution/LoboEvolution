@@ -27,25 +27,14 @@ package com.steadystate.css.parser;
 
 import org.w3c.css.sac.Locator;
 
-
 /**
- * An object that provides a SAC locator.
+ * An object that provides a SAC locator
  *
  * @author <a href="mailto:waldbaer@users.sourceforge.net">Johannes Koch</a>
  */
 public interface Locatable {
 
-    /**
-     * Gets the locator.
-     *
-     * @return the locator
-     */
     Locator getLocator();
 
-    /**
-     * Sets the locator.
-     *
-     * @param locator the new locator
-     */
     void setLocator(Locator locator);
 }

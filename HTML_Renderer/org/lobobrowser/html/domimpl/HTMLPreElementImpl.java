@@ -1,22 +1,16 @@
 /*
-    GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
+ * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
+ * can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version. This
+ * library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Feb 12, 2006
@@ -28,48 +22,56 @@ import org.lobobrowser.html.renderstate.PreRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.w3c.HTMLPreElement;
 
-
 /**
  * The Class HTMLPreElementImpl.
  */
 public class HTMLPreElementImpl extends HTMLAbstractUIElement implements
-		HTMLPreElement {
-	
-	/**
-	 * Instantiates a new HTML pre element impl.
-	 *
-	 * @param name the name
-	 */
-	public HTMLPreElementImpl(String name) {
-		super(name);
-	}
+HTMLPreElement {
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.HTMLPreElement#getWidth()
-	 */
-	public int getWidth() {
-		String widthText = this.getAttribute(HtmlAttributeProperties.WIDTH);
-		if (widthText == null) {
-			return 0;
-		}
-		try {
-			return Integer.parseInt(widthText);
-		} catch (NumberFormatException nfe) {
-			return 0;
-		}
-	}
+    /**
+     * Instantiates a new HTML pre element impl.
+     *
+     * @param name
+     *            the name
+     */
+    public HTMLPreElementImpl(String name) {
+        super(name);
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.HTMLPreElement#setWidth(int)
-	 */
-	public void setWidth(int width) {
-		this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.HTMLPreElement#getWidth()
+     */
+    @Override
+    public int getWidth() {
+        String widthText = this.getAttribute(HtmlAttributeProperties.WIDTH);
+        if (widthText == null) {
+            return 0;
+        }
+        try {
+            return Integer.parseInt(widthText);
+        } catch (NumberFormatException nfe) {
+            return 0;
+        }
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser.html.renderstate.RenderState)
-	 */
-	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new PreRenderState(prevRenderState, this);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.HTMLPreElement#setWidth(int)
+     */
+    @Override
+    public void setWidth(int width) {
+        this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
+     * .html.renderstate.RenderState)
+     */
+    @Override
+    protected RenderState createRenderState(RenderState prevRenderState) {
+        return new PreRenderState(prevRenderState, this);
+    }
 }

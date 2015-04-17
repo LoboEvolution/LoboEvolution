@@ -8,24 +8,11 @@
 
 package org.mozilla.javascript;
 
-
-/**
- * The Class IdFunctionObject.
- */
 public class IdFunctionObject extends BaseFunction
 {
 
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -5332312783643935019L;
 
-    /**
-     * Instantiates a new id function object.
-     *
-     * @param idcall the idcall
-     * @param tag the tag
-     * @param id the id
-     * @param arity the arity
-     */
     public IdFunctionObject(IdFunctionCall idcall, Object tag, int id, int arity)
     {
         if (arity < 0)
@@ -38,16 +25,6 @@ public class IdFunctionObject extends BaseFunction
         if (arity < 0) throw new IllegalArgumentException();
     }
 
-    /**
-     * Instantiates a new id function object.
-     *
-     * @param idcall the idcall
-     * @param tag the tag
-     * @param id the id
-     * @param name the name
-     * @param arity the arity
-     * @param scope the scope
-     */
     public IdFunctionObject(IdFunctionCall idcall, Object tag, int id,
                             String name, int arity, Scriptable scope)
     {
@@ -65,12 +42,6 @@ public class IdFunctionObject extends BaseFunction
         this.functionName = name;
     }
 
-    /**
-     * Inits the function.
-     *
-     * @param name the name
-     * @param scope the scope
-     */
     public void initFunction(String name, Scriptable scope)
     {
         if (name == null) throw new IllegalArgumentException();
@@ -79,60 +50,33 @@ public class IdFunctionObject extends BaseFunction
         setParentScope(scope);
     }
 
-    /**
-     * Checks for tag.
-     *
-     * @param tag the tag
-     * @return true, if successful
-     */
     public final boolean hasTag(Object tag)
     {
         return tag == null ? this.tag == null : tag.equals(this.tag);
     }
 
-    /**
-     * Method id.
-     *
-     * @return the int
-     */
     public final int methodId()
     {
         return methodId;
     }
 
-    /**
-     * Mark as constructor.
-     *
-     * @param prototypeProperty the prototype property
-     */
     public final void markAsConstructor(Scriptable prototypeProperty)
     {
         useCallAsConstructor = true;
         setImmunePrototypeProperty(prototypeProperty);
     }
 
-    /**
-     * Adds the as property.
-     *
-     * @param target the target
-     */
     public final void addAsProperty(Scriptable target)
     {
         ScriptableObject.defineProperty(target, functionName, this,
                                         ScriptableObject.DONTENUM);
     }
 
-    /**
-     * Export as scope property.
-     */
     public void exportAsScopeProperty()
     {
         addAsProperty(getParentScope());
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getPrototype()
-     */
     @Override
     public Scriptable getPrototype()
     {
@@ -146,9 +90,6 @@ public class IdFunctionObject extends BaseFunction
         return proto;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#call(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -156,9 +97,6 @@ public class IdFunctionObject extends BaseFunction
         return idcall.execIdCall(this, cx, scope, thisObj, args);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#createObject(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable)
-     */
     @Override
     public Scriptable createObject(Context cx, Scriptable scope)
     {
@@ -172,9 +110,6 @@ public class IdFunctionObject extends BaseFunction
         throw ScriptRuntime.typeError1("msg.not.ctor", functionName);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#decompile(int, int)
-     */
     @Override
     String decompile(int indent, int flags)
     {
@@ -198,35 +133,21 @@ public class IdFunctionObject extends BaseFunction
         return sb.toString();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getArity()
-     */
     @Override
     public int getArity()
     {
         return arity;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getLength()
-     */
     @Override
     public int getLength() { return getArity(); }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getFunctionName()
-     */
     @Override
     public String getFunctionName()
     {
         return (functionName == null) ? "" : functionName;
     }
 
-    /**
-     * Unknown.
-     *
-     * @return the runtime exception
-     */
     public final RuntimeException unknown()
     {
         // It is program error to call id-like methods for unknown function
@@ -234,21 +155,10 @@ public class IdFunctionObject extends BaseFunction
             "BAD FUNCTION ID="+methodId+" MASTER="+idcall);
     }
 
-    /** The idcall. */
     private final IdFunctionCall idcall;
-    
-    /** The tag. */
     private final Object tag;
-    
-    /** The method id. */
     private final int methodId;
-    
-    /** The arity. */
     private int arity;
-    
-    /** The use call as constructor. */
     private boolean useCallAsConstructor;
-    
-    /** The function name. */
     private String functionName;
 }

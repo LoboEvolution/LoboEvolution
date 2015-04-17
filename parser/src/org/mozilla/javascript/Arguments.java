@@ -6,29 +6,20 @@
 
 package org.mozilla.javascript;
 
-
 /**
  * This class implements the "arguments" object.
- * 
+ *
  * See ECMA 10.1.8
  *
- * @author Norris Boyd
  * @see org.mozilla.javascript.NativeCall
+ * @author Norris Boyd
  */
 final class Arguments extends IdScriptableObject
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 4275508002492040609L;
 
-    /** The Constant FTAG. */
     private static final String FTAG = "Arguments";
 
-    /**
-     * Instantiates a new arguments.
-     *
-     * @param activation the activation
-     */
     public Arguments(NativeCall activation)
     {
         this.activation = activation;
@@ -53,21 +44,12 @@ final class Arguments extends IdScriptableObject
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
-     */
     @Override
     public String getClassName()
     {
         return FTAG;
     }
 
-    /**
-     * Arg.
-     *
-     * @param index the index
-     * @return the object
-     */
     private Object arg(int index) {
       if (index < 0 || args.length <= index) return NOT_FOUND;
       return args[index];
@@ -75,34 +57,16 @@ final class Arguments extends IdScriptableObject
 
     // the following helper methods assume that 0 < index < args.length
 
-    /**
-     * Put into activation.
-     *
-     * @param index the index
-     * @param value the value
-     */
     private void putIntoActivation(int index, Object value) {
         String argName = activation.function.getParamOrVarName(index);
         activation.put(argName, activation, value);
     }
 
-    /**
-     * Gets the from activation.
-     *
-     * @param index the index
-     * @return the from activation
-     */
     private Object getFromActivation(int index) {
         String argName = activation.function.getParamOrVarName(index);
         return activation.get(argName, activation);
     }
 
-    /**
-     * Replace arg.
-     *
-     * @param index the index
-     * @param value the value
-     */
     private void replaceArg(int index, Object value) {
       if (sharedWithActivation(index)) {
         putIntoActivation(index, value);
@@ -115,11 +79,6 @@ final class Arguments extends IdScriptableObject
       }
     }
 
-    /**
-     * Removes the arg.
-     *
-     * @param index the index
-     */
     private void removeArg(int index) {
       synchronized (this) {
         if (args[index] != NOT_FOUND) {
@@ -133,9 +92,6 @@ final class Arguments extends IdScriptableObject
 
     // end helpers
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#has(int, org.mozilla.javascript.Scriptable)
-     */
     @Override
     public boolean has(int index, Scriptable start)
     {
@@ -145,9 +101,6 @@ final class Arguments extends IdScriptableObject
         return super.has(index, start);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#get(int, org.mozilla.javascript.Scriptable)
-     */
     @Override
     public Object get(int index, Scriptable start)
     {
@@ -163,12 +116,6 @@ final class Arguments extends IdScriptableObject
       }
     }
 
-    /**
-     * Shared with activation.
-     *
-     * @param index the index
-     * @return true, if successful
-     */
     private boolean sharedWithActivation(int index)
     {
         NativeFunction f = activation.function;
@@ -189,9 +136,6 @@ final class Arguments extends IdScriptableObject
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#put(int, org.mozilla.javascript.Scriptable, java.lang.Object)
-     */
     @Override
     public void put(int index, Scriptable start, Object value)
     {
@@ -202,9 +146,6 @@ final class Arguments extends IdScriptableObject
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#delete(int)
-     */
     @Override
     public void delete(int index)
     {
@@ -216,26 +157,19 @@ final class Arguments extends IdScriptableObject
 
 // #string_id_map#
 
-    /** The Constant MAX_INSTANCE_ID. */
-private static final int
+    private static final int
         Id_callee           = 1,
         Id_length           = 2,
         Id_caller           = 3,
 
         MAX_INSTANCE_ID     = Id_caller;
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#getMaxInstanceId()
-     */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#findInstanceIdInfo(java.lang.String)
-     */
     @Override
     protected int findInstanceIdInfo(String s)
     {
@@ -274,10 +208,7 @@ private static final int
 
 // #/string_id_map#
 
-    /* (non-Javadoc)
- * @see org.mozilla.javascript.IdScriptableObject#getInstanceIdName(int)
- */
-@Override
+    @Override
     protected String getInstanceIdName(int id)
     {
         switch (id) {
@@ -288,9 +219,6 @@ private static final int
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#getInstanceIdValue(int)
-     */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -312,9 +240,6 @@ private static final int
         return super.getInstanceIdValue(id);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#setInstanceIdValue(int, java.lang.Object)
-     */
     @Override
     protected void setInstanceIdValue(int id, Object value)
     {
@@ -328,9 +253,6 @@ private static final int
         super.setInstanceIdValue(id, value);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#setInstanceIdAttributes(int, int)
-     */
     @Override
     protected void setInstanceIdAttributes(int id, int attr)
     {
@@ -342,9 +264,6 @@ private static final int
         super.setInstanceIdAttributes(id, attr);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#getIds(boolean)
-     */
     @Override
     Object[] getIds(boolean getAll)
     {
@@ -389,9 +308,6 @@ private static final int
         return ids;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#getOwnPropertyDescriptor(org.mozilla.javascript.Context, java.lang.Object)
-     */
     @Override
     protected ScriptableObject getOwnPropertyDescriptor(Context cx, Object id) {
       double d = ScriptRuntime.toNumber(id);
@@ -417,9 +333,6 @@ private static final int
       }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#defineOwnProperty(org.mozilla.javascript.Context, java.lang.Object, org.mozilla.javascript.ScriptableObject, boolean)
-     */
     @Override
     protected void defineOwnProperty(Context cx, Object id,
                                      ScriptableObject desc,
@@ -453,30 +366,18 @@ private static final int
 // In addition if callerObj == NULL_VALUE, it tags null for scripts, as
 // initial callerObj == null means access to caller arguments available
 // only in JS <= 1.3 scripts
-    /** The caller obj. */
-private Object callerObj;
-    
-    /** The callee obj. */
+    private Object callerObj;
     private Object calleeObj;
-    
-    /** The length obj. */
     private Object lengthObj;
 
-    /** The caller attr. */
     private int callerAttr = DONTENUM;
-    
-    /** The callee attr. */
     private int calleeAttr = DONTENUM;
-    
-    /** The length attr. */
     private int lengthAttr = DONTENUM;
 
-    /** The activation. */
     private NativeCall activation;
 
 // Initially args holds activation.getOriginalArgs(), but any modification
 // of its elements triggers creation of a copy. If its element holds NOT_FOUND,
 // it indicates deleted index, in which case super class is queried.
-    /** The args. */
-private Object[] args;
+    private Object[] args;
 }

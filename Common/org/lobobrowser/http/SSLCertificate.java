@@ -30,58 +30,56 @@ import javax.net.ssl.X509TrustManager;
  * The Class SSLCertificate.
  */
 public class SSLCertificate {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger
-			.getLogger(SSLCertificate.class.getName());
+    /** The Constant logger. */
+    private static final Logger logger = Logger.getLogger(SSLCertificate.class
+            .getName());
 
-	/**
-	 * Sets the certificate fix for Exception in thread "main"
-	 * javax.net.ssl.SSLHandshakeException:
-	 * sun.security.validator.ValidatorException: PKIX path building failed:
-	 * sun.security.provider.certpath.SunCertPathBuilderException: unable to
-	 * find valid certification path to requested target
-	 */
-	public static void setCertificate() {
+    /**
+     * Sets the certificate fix for Exception in thread "main"
+     * javax.net.ssl.SSLHandshakeException:
+     * sun.security.validator.ValidatorException: PKIX path building failed:
+     * sun.security.provider.certpath.SunCertPathBuilderException: unable to
+     * find valid certification path to requested target
+     */
+    public static void setCertificate() {
+        TrustManager[] trustAllCerts = new TrustManager[] {new X509TrustManager()
+        {
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
 
-		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
-			public X509Certificate[] getAcceptedIssuers() {
-				return null;
-			}
+            @Override
+            public void checkClientTrusted(X509Certificate[] certs,
+                    String authType) {
+            }
 
-			public void checkClientTrusted(X509Certificate[] certs,
-					String authType) {
-			}
-
-			public void checkServerTrusted(X509Certificate[] certs,
-					String authType) {
-			}
-
-		} };
-
-		try {
-			SSLContext sc = SSLContext.getInstance("SSL");
-
-			sc.init(null, trustAllCerts, new SecureRandom());
-			HttpsURLConnection
-					.setDefaultSSLSocketFactory(sc.getSocketFactory());
-
-			// Create all-trusting host name verifier
-			HostnameVerifier allHostsValid = new HostnameVerifier() {
-				public boolean verify(String hostname, SSLSession session) {
-					return true;
-				}
-			};
-			// Install the all-trusting host verifier
-			HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
-			/*
-			 * end of the fix
-			 */
-		} catch (KeyManagementException e) {
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-
-	}
+            @Override
+            public void checkServerTrusted(X509Certificate[] certs,
+                    String authType) {
+            }
+        } };
+        try {
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection
+            .setDefaultSSLSocketFactory(sc.getSocketFactory());
+            // Create all-trusting host name verifier
+            HostnameVerifier allHostsValid = new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            };
+            // Install the all-trusting host verifier
+            HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+            /*
+             * end of the fix
+             */
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+    }
 }

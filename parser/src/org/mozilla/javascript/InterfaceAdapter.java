@@ -8,15 +8,12 @@ package org.mozilla.javascript;
 
 import java.lang.reflect.Method;
 
-
 /**
  * Adapter to use JS function as implementation of Java interfaces with
  * single method or multiple methods with the same signature.
  */
 public class InterfaceAdapter
 {
-    
-    /** The proxy helper. */
     private final Object proxyHelper;
 
     /**
@@ -24,9 +21,6 @@ public class InterfaceAdapter
      * call the supplied JS function when called.
      * Only interfaces were all methods have the same signature is supported.
      *
-     * @param cx the cx
-     * @param cl the cl
-     * @param object the object
      * @return The glue object or null if <tt>cl</tt> is not interface or
      *         has methods with different signatures.
      */
@@ -69,12 +63,6 @@ public class InterfaceAdapter
             adapter.proxyHelper, cf, adapter, object, topScope);
     }
 
-    /**
-     * Instantiates a new interface adapter.
-     *
-     * @param cf the cf
-     * @param cl the cl
-     */
     private InterfaceAdapter(ContextFactory cf, Class<?> cl)
     {
         this.proxyHelper
@@ -82,17 +70,6 @@ public class InterfaceAdapter
                 cf, new Class[] { cl });
     }
 
-    /**
-     * Invoke.
-     *
-     * @param cf the cf
-     * @param target the target
-     * @param topScope the top scope
-     * @param thisObject the this object
-     * @param method the method
-     * @param args the args
-     * @return the object
-     */
     public Object invoke(ContextFactory cf,
                          final Object target,
                          final Scriptable topScope,
@@ -109,17 +86,6 @@ public class InterfaceAdapter
         return cf.call(action);
     }
 
-    /**
-     * Invoke impl.
-     *
-     * @param cx the cx
-     * @param target the target
-     * @param topScope the top scope
-     * @param thisObject the this object
-     * @param method the method
-     * @param args the args
-     * @return the object
-     */
     Object invokeImpl(Context cx,
                       Object target,
                       Scriptable topScope,

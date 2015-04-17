@@ -8,7 +8,6 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.net.URI;
 
-
 /**
  * Represents the source text of the module as a tuple of a reader, a URI, a
  * security domain, and a cache validator.
@@ -33,33 +32,20 @@ import java.net.URI;
  */
 public class ModuleSource implements Serializable
 {
-    
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** The reader. */
     private final Reader reader;
-    
-    /** The security domain. */
     private final Object securityDomain;
-    
-    /** The uri. */
     private final URI uri;
-    
-    /** The base. */
     private final URI base;
-    
-    /** The validator. */
     private final Object validator;
 
     /**
      * Creates a new module source.
-     *
      * @param reader the reader returning the source text of the module.
      * @param securityDomain the object representing the security domain for
      * the module's source (passed to Rhino script compiler).
      * @param uri the URI of the module's source text
-     * @param base the base
      * @param validator a validator that can be used for subsequent cache
      * validation of the source text.
      */

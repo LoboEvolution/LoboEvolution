@@ -6,122 +6,37 @@
 
 package org.mozilla.javascript;
 
-import java.util.ArrayList;
+import org.mozilla.javascript.ast.*;
+
 import java.util.List;
-
-import org.mozilla.javascript.ast.ArrayComprehension;
-import org.mozilla.javascript.ast.ArrayComprehensionLoop;
-import org.mozilla.javascript.ast.ArrayLiteral;
-import org.mozilla.javascript.ast.Assignment;
-import org.mozilla.javascript.ast.AstNode;
-import org.mozilla.javascript.ast.AstRoot;
-import org.mozilla.javascript.ast.Block;
-import org.mozilla.javascript.ast.BreakStatement;
-import org.mozilla.javascript.ast.CatchClause;
-import org.mozilla.javascript.ast.ConditionalExpression;
-import org.mozilla.javascript.ast.ContinueStatement;
-import org.mozilla.javascript.ast.DestructuringForm;
-import org.mozilla.javascript.ast.DoLoop;
-import org.mozilla.javascript.ast.ElementGet;
-import org.mozilla.javascript.ast.EmptyExpression;
-import org.mozilla.javascript.ast.ExpressionStatement;
-import org.mozilla.javascript.ast.ForInLoop;
-import org.mozilla.javascript.ast.ForLoop;
-import org.mozilla.javascript.ast.FunctionCall;
-import org.mozilla.javascript.ast.FunctionNode;
-import org.mozilla.javascript.ast.GeneratorExpression;
-import org.mozilla.javascript.ast.GeneratorExpressionLoop;
-import org.mozilla.javascript.ast.IfStatement;
-import org.mozilla.javascript.ast.InfixExpression;
-import org.mozilla.javascript.ast.Jump;
-import org.mozilla.javascript.ast.Label;
-import org.mozilla.javascript.ast.LabeledStatement;
-import org.mozilla.javascript.ast.LetNode;
-import org.mozilla.javascript.ast.Loop;
-import org.mozilla.javascript.ast.Name;
-import org.mozilla.javascript.ast.NewExpression;
-import org.mozilla.javascript.ast.NumberLiteral;
-import org.mozilla.javascript.ast.ObjectLiteral;
-import org.mozilla.javascript.ast.ObjectProperty;
-import org.mozilla.javascript.ast.ParenthesizedExpression;
-import org.mozilla.javascript.ast.PropertyGet;
-import org.mozilla.javascript.ast.RegExpLiteral;
-import org.mozilla.javascript.ast.ReturnStatement;
-import org.mozilla.javascript.ast.Scope;
-import org.mozilla.javascript.ast.ScriptNode;
-import org.mozilla.javascript.ast.StringLiteral;
-import org.mozilla.javascript.ast.SwitchCase;
-import org.mozilla.javascript.ast.SwitchStatement;
-import org.mozilla.javascript.ast.Symbol;
-import org.mozilla.javascript.ast.ThrowStatement;
-import org.mozilla.javascript.ast.TryStatement;
-import org.mozilla.javascript.ast.UnaryExpression;
-import org.mozilla.javascript.ast.VariableDeclaration;
-import org.mozilla.javascript.ast.VariableInitializer;
-import org.mozilla.javascript.ast.WhileLoop;
-import org.mozilla.javascript.ast.WithStatement;
-import org.mozilla.javascript.ast.XmlDotQuery;
-import org.mozilla.javascript.ast.XmlElemRef;
-import org.mozilla.javascript.ast.XmlExpression;
-import org.mozilla.javascript.ast.XmlFragment;
-import org.mozilla.javascript.ast.XmlLiteral;
-import org.mozilla.javascript.ast.XmlMemberGet;
-import org.mozilla.javascript.ast.XmlPropRef;
-import org.mozilla.javascript.ast.XmlRef;
-import org.mozilla.javascript.ast.XmlString;
-import org.mozilla.javascript.ast.Yield;
-
+import java.util.ArrayList;
 
 /**
  * This class rewrites the parse tree into an IR suitable for codegen.
  *
+ * @see Node
  * @author Mike McCabe
  * @author Norris Boyd
- * @see Node
  */
 public final class IRFactory extends Parser
 {
-    
-    /** The Constant LOOP_DO_WHILE. */
     private static final int LOOP_DO_WHILE = 0;
-    
-    /** The Constant LOOP_WHILE. */
     private static final int LOOP_WHILE    = 1;
-    
-    /** The Constant LOOP_FOR. */
     private static final int LOOP_FOR      = 2;
 
-    /** The Constant ALWAYS_TRUE_BOOLEAN. */
     private static final int ALWAYS_TRUE_BOOLEAN = 1;
-    
-    /** The Constant ALWAYS_FALSE_BOOLEAN. */
     private static final int ALWAYS_FALSE_BOOLEAN = -1;
 
-    /** The decompiler. */
     private Decompiler decompiler = new Decompiler();
 
-    /**
-     * Instantiates a new IR factory.
-     */
     public IRFactory() {
         super();
     }
 
-    /**
-     * Instantiates a new IR factory.
-     *
-     * @param env the env
-     */
     public IRFactory(CompilerEnvirons env) {
         this(env, env.getErrorReporter());
     }
 
-    /**
-     * Instantiates a new IR factory.
-     *
-     * @param env the env
-     * @param errorReporter the error reporter
-     */
     public IRFactory(CompilerEnvirons env, ErrorReporter errorReporter) {
         super(env, errorReporter);
     }
@@ -129,9 +44,6 @@ public final class IRFactory extends Parser
     /**
      * Transforms the tree into a lower-level IR suitable for codegen.
      * Optionally generates the encoded source.
-     *
-     * @param root the root
-     * @return the script node
      */
     public ScriptNode transformTree(AstRoot root) {
         currentScriptOrFn = root;
@@ -160,12 +72,6 @@ public final class IRFactory extends Parser
     // functions into the AstNode subclasses.  OTOH that would make
     // IR transformation part of the public AST API - desirable?
     // Another possibility:  create AstTransformer interface and adapter.
-    /**
-     * Transform.
-     *
-     * @param node the node
-     * @return the node
-     */
     public Node transform(AstNode node) {
         switch (node.getType()) {
           case Token.ARRAYCOMP:
@@ -276,12 +182,6 @@ public final class IRFactory extends Parser
         }
     }
 
-    /**
-     * Transform array comp.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformArrayComp(ArrayComprehension node) {
         // An array comprehension expression such as
         //
@@ -326,13 +226,6 @@ public final class IRFactory extends Parser
         }
     }
 
-    /**
-     * Array comp transform helper.
-     *
-     * @param node the node
-     * @param arrayName the array name
-     * @return the node
-     */
     private Node arrayCompTransformHelper(ArrayComprehension node,
                                           String arrayName) {
         decompiler.addToken(Token.LB);
@@ -428,12 +321,6 @@ public final class IRFactory extends Parser
         return body;
     }
 
-    /**
-     * Transform array literal.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformArrayLiteral(ArrayLiteral node) {
         if (node.isDestructuring()) {
             return node;
@@ -467,12 +354,6 @@ public final class IRFactory extends Parser
         return array;
     }
 
-    /**
-     * Transform assignment.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformAssignment(Assignment node) {
         AstNode left = removeParens(node.getLeft());
         Node target = null;
@@ -488,12 +369,6 @@ public final class IRFactory extends Parser
                                 transform(node.getRight()));
     }
 
-    /**
-     * Transform block.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformBlock(AstNode node) {
         if (node instanceof Scope) {
             pushScope((Scope)node);
@@ -515,12 +390,6 @@ public final class IRFactory extends Parser
         }
     }
 
-    /**
-     * Transform break.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformBreak(BreakStatement node) {
         decompiler.addToken(Token.BREAK);
         if (node.getBreakLabel() != null) {
@@ -530,12 +399,6 @@ public final class IRFactory extends Parser
         return node;
     }
 
-    /**
-     * Transform cond expr.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformCondExpr(ConditionalExpression node) {
         Node test = transform(node.getTestExpression());
         decompiler.addToken(Token.HOOK);
@@ -545,12 +408,6 @@ public final class IRFactory extends Parser
         return createCondExpr(test, ifTrue, ifFalse);
     }
 
-    /**
-     * Transform continue.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformContinue(ContinueStatement node) {
         decompiler.addToken(Token.CONTINUE);
         if (node.getLabel() != null) {
@@ -560,12 +417,6 @@ public final class IRFactory extends Parser
         return node;
     }
 
-    /**
-     * Transform do loop.
-     *
-     * @param loop the loop
-     * @return the node
-     */
     private Node transformDoLoop(DoLoop loop) {
         loop.setType(Token.LOOP);
         pushScope(loop);
@@ -586,12 +437,6 @@ public final class IRFactory extends Parser
         }
     }
 
-    /**
-     * Transform element get.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformElementGet(ElementGet node) {
         // OPT: could optimize to createPropertyGet
         // iff elem is string that can not be number
@@ -602,24 +447,12 @@ public final class IRFactory extends Parser
         return new Node(Token.GETELEM, target, element);
     }
 
-    /**
-     * Transform expr stmt.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformExprStmt(ExpressionStatement node) {
         Node expr = transform(node.getExpression());
         decompiler.addEOL(Token.SEMI);
         return new Node(node.getType(), expr, node.getLineno());
     }
 
-    /**
-     * Transform for in loop.
-     *
-     * @param loop the loop
-     * @return the node
-     */
     private Node transformForInLoop(ForInLoop loop) {
         decompiler.addToken(Token.FOR);
         if (loop.isForEach())
@@ -648,12 +481,6 @@ public final class IRFactory extends Parser
         }
     }
 
-    /**
-     * Transform for loop.
-     *
-     * @param loop the loop
-     * @return the node
-     */
     private Node transformForLoop(ForLoop loop) {
         decompiler.addToken(Token.FOR);
         decompiler.addToken(Token.LP);
@@ -678,12 +505,6 @@ public final class IRFactory extends Parser
         }
     }
 
-    /**
-     * Transform function.
-     *
-     * @param fn the fn
-     * @return the node
-     */
     private Node transformFunction(FunctionNode fn) {
         int functionType = fn.getFunctionType();
         int start = decompiler.markFunctionStart(functionType);
@@ -733,12 +554,6 @@ public final class IRFactory extends Parser
         }
     }
 
-    /**
-     * Transform function call.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformFunctionCall(FunctionCall node) {
         Node call = createCallOrNew(Token.CALL, transform(node.getTarget()));
         call.setLineno(node.getLineno());
@@ -755,12 +570,6 @@ public final class IRFactory extends Parser
         return call;
     }
     
-    /**
-     * Transform gen expr.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformGenExpr(GeneratorExpression node) {
         Node pn;
         
@@ -822,12 +631,6 @@ public final class IRFactory extends Parser
         return call;
     }
     
-    /**
-     * Gen expr transform helper.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node genExprTransformHelper(GeneratorExpression node) {
         decompiler.addToken(Token.LP);
         int lineno = node.getLineno();
@@ -913,12 +716,6 @@ public final class IRFactory extends Parser
         return body;
     }
 
-    /**
-     * Transform if.
-     *
-     * @param n the n
-     * @return the node
-     */
     private Node transformIf(IfStatement n) {
         decompiler.addToken(Token.IF);
         decompiler.addToken(Token.LP);
@@ -937,12 +734,6 @@ public final class IRFactory extends Parser
         return createIf(cond, ifTrue, ifFalse, n.getLineno());
     }
 
-    /**
-     * Transform infix.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformInfix(InfixExpression node) {
         Node left = transform(node.getLeft());
         decompiler.addToken(node.getType());
@@ -953,12 +744,6 @@ public final class IRFactory extends Parser
         return createBinary(node.getType(), left, right);
     }
 
-    /**
-     * Transform labeled statement.
-     *
-     * @param ls the ls
-     * @return the node
-     */
     private Node transformLabeledStatement(LabeledStatement ls) {
         Label label = ls.getFirstLabel();
         List<Label> labels = ls.getLabels();
@@ -991,12 +776,6 @@ public final class IRFactory extends Parser
         return block;
     }
 
-    /**
-     * Transform let node.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformLetNode(LetNode node) {
         pushScope(node);
         try {
@@ -1023,34 +802,16 @@ public final class IRFactory extends Parser
         }
     }
 
-    /**
-     * Transform literal.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformLiteral(AstNode node) {
         decompiler.addToken(node.getType());
         return node;
     }
 
-    /**
-     * Transform name.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformName(Name node) {
         decompiler.addName(node.getIdentifier());
         return node;
     }
 
-    /**
-     * Transform new expr.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformNewExpr(NewExpression node) {
         decompiler.addToken(Token.NEW);
         Node nx = createCallOrNew(Token.NEW, transform(node.getTarget()));
@@ -1071,23 +832,11 @@ public final class IRFactory extends Parser
         return nx;
     }
 
-    /**
-     * Transform number.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformNumber(NumberLiteral node) {
         decompiler.addNumber(node.getNumber());
         return node;
     }
 
-    /**
-     * Transform object literal.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformObjectLiteral(ObjectLiteral node) {
         if (node.isDestructuring()) {
             return node;
@@ -1137,12 +886,6 @@ public final class IRFactory extends Parser
         return object;
     }
 
-    /**
-     * Gets the prop key.
-     *
-     * @param id the id
-     * @return the prop key
-     */
     private Object getPropKey(Node id) {
         Object key;
         if (id instanceof Name) {
@@ -1163,12 +906,6 @@ public final class IRFactory extends Parser
         return key;
     }
 
-    /**
-     * Transform paren expr.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformParenExpr(ParenthesizedExpression node) {
         AstNode expr = node.getExpression();
         decompiler.addToken(Token.LP);
@@ -1186,12 +923,6 @@ public final class IRFactory extends Parser
         return result;
     }
 
-    /**
-     * Transform property get.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformPropertyGet(PropertyGet node) {
         Node target = transform(node.getTarget());
         String name = node.getProperty().getIdentifier();
@@ -1200,24 +931,12 @@ public final class IRFactory extends Parser
         return createPropertyGet(target, null, name, 0);
     }
 
-    /**
-     * Transform reg exp.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformRegExp(RegExpLiteral node) {
         decompiler.addRegexp(node.getValue(), node.getFlags());
         currentScriptOrFn.addRegExp(node);
         return node;
     }
 
-    /**
-     * Transform return.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformReturn(ReturnStatement node) {
         boolean expClosure = Boolean.TRUE.equals(node.getProp(Node.EXPRESSION_CLOSURE_PROP));
         if (expClosure) {
@@ -1233,12 +952,6 @@ public final class IRFactory extends Parser
             : new Node(Token.RETURN, value, node.getLineno());
     }
 
-    /**
-     * Transform script.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformScript(ScriptNode node) {
         decompiler.addToken(Token.SCRIPT);
         if (currentScope != null) Kit.codeBug();
@@ -1255,23 +968,11 @@ public final class IRFactory extends Parser
         return node;
     }
 
-    /**
-     * Transform string.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformString(StringLiteral node) {
         decompiler.addString(node.getValue());
         return Node.newString(node.getValue());
     }
 
-    /**
-     * Transform switch.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformSwitch(SwitchStatement node) {
         // The switch will be rewritten from:
         //
@@ -1347,12 +1048,6 @@ public final class IRFactory extends Parser
         return block;
     }
 
-    /**
-     * Transform throw.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformThrow(ThrowStatement node) {
         decompiler.addToken(Token.THROW);
         Node value = transform(node.getExpression());
@@ -1360,12 +1055,6 @@ public final class IRFactory extends Parser
         return new Node(Token.THROW, value, node.getLineno());
     }
 
-    /**
-     * Transform try.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformTry(TryStatement node) {
         decompiler.addToken(Token.TRY);
         decompiler.addEOL(Token.LC);
@@ -1409,12 +1098,6 @@ public final class IRFactory extends Parser
                                      finallyBlock, node.getLineno());
     }
 
-    /**
-     * Transform unary.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformUnary(UnaryExpression node) {
         int type = node.getType();
         if (type == Token.DEFAULTNAMESPACE) {
@@ -1433,12 +1116,6 @@ public final class IRFactory extends Parser
         return createUnary(type, child);
     }
 
-    /**
-     * Transform variables.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformVariables(VariableDeclaration node) {
         decompiler.addToken(node.getType());
         transformVariableInitializers(node);
@@ -1453,12 +1130,6 @@ public final class IRFactory extends Parser
         return node;
     }
 
-    /**
-     * Transform variable initializers.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformVariableInitializers(VariableDeclaration node) {
         List<VariableInitializer> vars = node.getVariables();
         int size = vars.size(), i = 0;
@@ -1501,12 +1172,6 @@ public final class IRFactory extends Parser
         return node;
     }
 
-    /**
-     * Transform while loop.
-     *
-     * @param loop the loop
-     * @return the node
-     */
     private Node transformWhileLoop(WhileLoop loop) {
         decompiler.addToken(Token.WHILE);
         loop.setType(Token.LOOP);
@@ -1524,12 +1189,6 @@ public final class IRFactory extends Parser
         }
     }
 
-    /**
-     * Transform with.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformWith(WithStatement node) {
         decompiler.addToken(Token.WITH);
         decompiler.addToken(Token.LP);
@@ -1541,12 +1200,6 @@ public final class IRFactory extends Parser
         return createWith(expr, stmt, node.getLineno());
     }
 
-    /**
-     * Transform yield.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformYield(Yield node) {
         decompiler.addToken(Token.YIELD);
         Node kid = node.getValue() == null ? null : transform(node.getValue());
@@ -1556,12 +1209,6 @@ public final class IRFactory extends Parser
             return new Node(Token.YIELD, node.getLineno());
     }
 
-    /**
-     * Transform xml literal.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformXmlLiteral(XmlLiteral node) {
         // a literal like <foo>{bar}</foo> is rewritten as
         //   new XML("<foo>" + bar + "</foo>");
@@ -1614,12 +1261,6 @@ public final class IRFactory extends Parser
         return pnXML;
     }
 
-    /**
-     * Transform xml member get.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformXmlMemberGet(XmlMemberGet node) {
         XmlRef ref = node.getMemberRef();
         Node pn = transform(node.getLeft());
@@ -1634,26 +1275,12 @@ public final class IRFactory extends Parser
     }
 
     // We get here if we weren't a child of a . or .. infix node
-    /**
-     * Transform xml ref.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformXmlRef(XmlRef node) {
         int memberTypeFlags = node.isAttributeAccess()
             ? Node.ATTRIBUTE_FLAG : 0;
         return transformXmlRef(null, node, memberTypeFlags);
     }
 
-    /**
-     * Transform xml ref.
-     *
-     * @param pn the pn
-     * @param node the node
-     * @param memberTypeFlags the member type flags
-     * @return the node
-     */
     private Node transformXmlRef(Node pn, XmlRef node, int memberTypeFlags) {
         if ((memberTypeFlags & Node.ATTRIBUTE_FLAG) != 0)
             decompiler.addToken(Token.XMLATTR);
@@ -1675,12 +1302,6 @@ public final class IRFactory extends Parser
         }
     }
 
-    /**
-     * Transform default xml namepace.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node transformDefaultXmlNamepace(UnaryExpression node) {
         decompiler.addToken(Token.DEFAULT);
         decompiler.addName(" xml");
@@ -1692,10 +1313,6 @@ public final class IRFactory extends Parser
 
     /**
      * If caseExpression argument is null it indicates a default label.
-     *
-     * @param switchBlock the switch block
-     * @param caseExpression the case expression
-     * @param statements the statements
      */
     private void addSwitchCase(Node switchBlock, Node caseExpression,
                                Node statements)
@@ -1716,11 +1333,6 @@ public final class IRFactory extends Parser
         switchBlock.addChildToBack(statements);
     }
 
-    /**
-     * Close switch.
-     *
-     * @param switchBlock the switch block
-     */
     private void closeSwitch(Node switchBlock)
     {
         if (switchBlock.getType() != Token.BLOCK) throw Kit.codeBug();
@@ -1742,36 +1354,21 @@ public final class IRFactory extends Parser
         switchBlock.addChildToBack(switchBreakTarget);
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param expr the expr
-     * @param lineno the lineno
-     * @return the node
-     */
     private Node createExprStatementNoReturn(Node expr, int lineno) {
         return new Node(Token.EXPR_VOID, expr, lineno);
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param string the string
-     * @return the node
-     */
     private Node createString(String string) {
         return Node.newString(string);
     }
 
     /**
-     * Catch clause of try/catch/finally.
-     *
+     * Catch clause of try/catch/finally
      * @param varName the name of the variable to bind to the exception
      * @param catchCond the condition under which to catch the exception.
      *                  May be null if no condition is given.
      * @param stmts the statements in the catch clause
      * @param lineno the starting line number of the catch clause
-     * @return the node
      */
     private Node createCatch(String varName, Node catchCond, Node stmts,
                              int lineno) {
@@ -1782,15 +1379,6 @@ public final class IRFactory extends Parser
                         catchCond, stmts, lineno);
     }
 
-    /**
-     * Inits the function.
-     *
-     * @param fnNode the fn node
-     * @param functionIndex the function index
-     * @param statements the statements
-     * @param functionType the function type
-     * @return the node
-     */
     private Node initFunction(FunctionNode fnNode, int functionIndex,
                               Node statements, int functionType) {
         fnNode.setFunctionType(functionType);
@@ -1838,10 +1426,6 @@ public final class IRFactory extends Parser
      * Create loop node. The code generator will later call
      * createWhile|createDoWhile|createFor|createForIn
      * to finish loop generation.
-     *
-     * @param loopLabel the loop label
-     * @param lineno the lineno
-     * @return the scope
      */
     private Scope createLoopNode(Node loopLabel, int lineno) {
         Scope result = createScopeNode(Token.LOOP, lineno);
@@ -1851,16 +1435,6 @@ public final class IRFactory extends Parser
         return result;
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param loop the loop
-     * @param init the init
-     * @param test the test
-     * @param incr the incr
-     * @param body the body
-     * @return the node
-     */
     private Node createFor(Scope loop, Node init,
                            Node test, Node incr, Node body) {
         if (init.getType() == Token.LET) {
@@ -1877,17 +1451,6 @@ public final class IRFactory extends Parser
         return createLoop(loop, LOOP_FOR, body, test, init, incr);
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param loop the loop
-     * @param loopType the loop type
-     * @param body the body
-     * @param cond the cond
-     * @param init the init
-     * @param incr the incr
-     * @return the node
-     */
     private Node createLoop(Jump loop, int loopType, Node body,
                             Node cond, Node init, Node incr)
     {
@@ -1941,14 +1504,6 @@ public final class IRFactory extends Parser
 
     /**
      * Generate IR for a for..in loop.
-     *
-     * @param declType the decl type
-     * @param loop the loop
-     * @param lhs the lhs
-     * @param obj the obj
-     * @param body the body
-     * @param isForEach the is for each
-     * @return the node
      */
     private Node createForIn(int declType, Node loop, Node lhs,
                              Node obj, Node body, boolean isForEach)
@@ -2027,24 +1582,18 @@ public final class IRFactory extends Parser
 
     /**
      * Try/Catch/Finally
-     * 
+     *
      * The IRFactory tries to express as much as possible in the tree;
      * the responsibilities remaining for Codegen are to add the Java
      * handlers: (Either (but not both) of TARGET and FINALLY might not
      * be defined)
-     * 
+     *
      * - a catch handler for javascript exceptions that unwraps the
      * exception onto the stack and GOTOes to the catch target
-     * 
-     * - a finally handler
-     * 
-     * ... and a goto to GOTO around these handlers.
      *
-     * @param tryBlock the try block
-     * @param catchBlocks the catch blocks
-     * @param finallyBlock the finally block
-     * @param lineno the lineno
-     * @return the node
+     * - a finally handler
+     *
+     * ... and a goto to GOTO around these handlers.
      */
     private Node createTryCatchFinally(Node tryBlock, Node catchBlocks,
                                        Node finallyBlock, int lineno)
@@ -2214,14 +1763,6 @@ public final class IRFactory extends Parser
         return handlerBlock;
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param obj the obj
-     * @param body the body
-     * @param lineno the lineno
-     * @return the node
-     */
     private Node createWith(Node obj, Node body, int lineno) {
         setRequiresActivation();
         Node result = new Node(Token.BLOCK, lineno);
@@ -2232,15 +1773,6 @@ public final class IRFactory extends Parser
         return result;
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param cond the cond
-     * @param ifTrue the if true
-     * @param ifFalse the if false
-     * @param lineno the lineno
-     * @return the node
-     */
     private Node createIf(Node cond, Node ifTrue, Node ifFalse, int lineno)
     {
         int condStatus = isAlwaysDefinedBoolean(cond);
@@ -2275,14 +1807,6 @@ public final class IRFactory extends Parser
         return result;
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param cond the cond
-     * @param ifTrue the if true
-     * @param ifFalse the if false
-     * @return the node
-     */
     private Node createCondExpr(Node cond, Node ifTrue, Node ifFalse) {
         int condStatus = isAlwaysDefinedBoolean(cond);
         if (condStatus == ALWAYS_TRUE_BOOLEAN) {
@@ -2293,13 +1817,6 @@ public final class IRFactory extends Parser
         return new Node(Token.HOOK, cond, ifTrue, ifFalse);
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param nodeType the node type
-     * @param child the child
-     * @return the node
-     */
     private Node createUnary(int nodeType, Node child)
     {
         int childType = child.getType();
@@ -2371,13 +1888,6 @@ public final class IRFactory extends Parser
         return new Node(nodeType, child);
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param nodeType the node type
-     * @param child the child
-     * @return the node
-     */
     private Node createCallOrNew(int nodeType, Node child) {
         int type = Node.NON_SPECIALCALL;
         if (child.getType() == Token.NAME) {
@@ -2402,14 +1912,6 @@ public final class IRFactory extends Parser
         return node;
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param nodeType the node type
-     * @param post the post
-     * @param child the child
-     * @return the node
-     */
     private Node createIncDec(int nodeType, boolean post, Node child)
     {
         child = makeReference(child);
@@ -2435,15 +1937,6 @@ public final class IRFactory extends Parser
         throw Kit.codeBug();
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param target the target
-     * @param namespace the namespace
-     * @param name the name
-     * @param memberTypeFlags the member type flags
-     * @return the node
-     */
     private Node createPropertyGet(Node target, String namespace, String name,
                                    int memberTypeFlags)
     {
@@ -2465,13 +1958,10 @@ public final class IRFactory extends Parser
     }
 
     /**
-     * Creates a new IR object.
-     *
      * @param target the node before the LB
      * @param namespace optional namespace
      * @param elem the node in the brackets
      * @param memberTypeFlags E4X flags
-     * @return the node
      */
     private Node createElementGet(Node target, String namespace, Node elem,
                                   int memberTypeFlags)
@@ -2487,15 +1977,6 @@ public final class IRFactory extends Parser
         return createMemberRefGet(target, namespace, elem, memberTypeFlags);
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param target the target
-     * @param namespace the namespace
-     * @param elem the elem
-     * @param memberTypeFlags the member type flags
-     * @return the node
-     */
     private Node createMemberRefGet(Node target, String namespace, Node elem,
                                     int memberTypeFlags)
     {
@@ -2528,14 +2009,6 @@ public final class IRFactory extends Parser
         return new Node(Token.GET_REF, ref);
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param nodeType the node type
-     * @param left the left
-     * @param right the right
-     * @return the node
-     */
     private Node createBinary(int nodeType, Node left, Node right) {
         switch (nodeType) {
 
@@ -2665,14 +2138,6 @@ public final class IRFactory extends Parser
         return new Node(nodeType, left, right);
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param assignType the assign type
-     * @param left the left
-     * @param right the right
-     * @return the node
-     */
     private Node createAssignment(int assignType, Node left, Node right)
     {
         Node ref = makeReference(left);
@@ -2741,12 +2206,6 @@ public final class IRFactory extends Parser
         throw Kit.codeBug();
     }
 
-    /**
-     * Creates a new IR object.
-     *
-     * @param localBlock the local block
-     * @return the node
-     */
     private Node createUseLocal(Node localBlock) {
         if (Token.LOCAL_BLOCK != localBlock.getType()) throw Kit.codeBug();
         Node result = new Node(Token.LOCAL_LOAD);
@@ -2754,25 +2213,12 @@ public final class IRFactory extends Parser
         return result;
     }
 
-    /**
-     * Make jump.
-     *
-     * @param type the type
-     * @param target the target
-     * @return the jump
-     */
     private Jump makeJump(int type, Node target) {
         Jump n = new Jump(type);
         n.target = target;
         return n;
     }
 
-    /**
-     * Make reference.
-     *
-     * @param node the node
-     * @return the node
-     */
     private Node makeReference(Node node) {
         int type = node.getType();
         switch (type) {
@@ -2790,12 +2236,6 @@ public final class IRFactory extends Parser
     }
 
     // Check if Node always mean true or false in boolean context
-    /**
-     * Checks if is always defined boolean.
-     *
-     * @param node the node
-     * @return the int
-     */
     private static int isAlwaysDefinedBoolean(Node node) {
         switch (node.getType()) {
           case Token.FALSE:
@@ -2816,23 +2256,11 @@ public final class IRFactory extends Parser
     }
 
     // Check if node is the target of a destructuring bind.
-    /**
-     * Checks if is destructuring.
-     *
-     * @param n the n
-     * @return true, if is destructuring
-     */
     boolean isDestructuring(Node n) {
         return n instanceof DestructuringForm
             && ((DestructuringForm)n).isDestructuring();
     }
 
-    /**
-     * Decompile function header.
-     *
-     * @param fn the fn
-     * @return the node
-     */
     Node decompileFunctionHeader(FunctionNode fn) {
         Node mexpr = null;
         if (fn.getFunctionName() != null) {
@@ -2855,11 +2283,6 @@ public final class IRFactory extends Parser
         return mexpr;
     }
 
-    /**
-     * Decompile.
-     *
-     * @param node the node
-     */
     void decompile(AstNode node) {
         switch (node.getType()) {
           case Token.ARRAYLIT:
@@ -2895,11 +2318,6 @@ public final class IRFactory extends Parser
     }
 
     // used for destructuring forms, since we don't transform() them
-    /**
-     * Decompile array literal.
-     *
-     * @param node the node
-     */
     void decompileArrayLiteral(ArrayLiteral node) {
         decompiler.addToken(Token.LB);
         List<AstNode> elems = node.getElements();
@@ -2915,11 +2333,6 @@ public final class IRFactory extends Parser
     }
 
     // only used for destructuring forms
-    /**
-     * Decompile object literal.
-     *
-     * @param node the node
-     */
     void decompileObjectLiteral(ObjectLiteral node) {
         decompiler.addToken(Token.LC);
         List<ObjectProperty> props = node.getElements();
@@ -2941,11 +2354,6 @@ public final class IRFactory extends Parser
     }
 
     // only used for destructuring forms
-    /**
-     * Decompile property get.
-     *
-     * @param node the node
-     */
     void decompilePropertyGet(PropertyGet node) {
         decompile(node.getTarget());
         decompiler.addToken(Token.DOT);
@@ -2953,11 +2361,6 @@ public final class IRFactory extends Parser
     }
 
     // only used for destructuring forms
-    /**
-     * Decompile element get.
-     *
-     * @param node the node
-     */
     void decompileElementGet(ElementGet node) {
         decompile(node.getTarget());
         decompiler.addToken(Token.LB);

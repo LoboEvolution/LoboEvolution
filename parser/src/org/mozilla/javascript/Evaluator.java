@@ -6,10 +6,9 @@
 
 package org.mozilla.javascript;
 
-import java.util.List;
-
 import org.mozilla.javascript.ast.ScriptNode;
 
+import java.util.List;
 
 /**
  * Abstraction of evaluation, which can be implemented either by an
@@ -65,7 +64,7 @@ public interface Evaluator {
     /**
      * Get the source position information by examining the stack.
      * @param cx Context
-     * @param linep Array object of <code>length &gt;= 1;</code> getSourcePositionFromStack
+     * @param linep Array object of length >= 1; getSourcePositionFromStack
      *              will assign the line number to linep[0].
      * @return the name of the file or other source container
      */
@@ -73,8 +72,7 @@ public interface Evaluator {
 
     /**
      * Given a native stack trace, patch it with script-specific source
-     * and line information.
-     *
+     * and line information
      * @param ex exception
      * @param nativeStackTrace the native stack trace
      * @return patched stack trace
@@ -83,8 +81,7 @@ public interface Evaluator {
                                   String nativeStackTrace);
 
     /**
-     * Get the script stack for the given exception.
-     *
+     * Get the script stack for the given exception
      * @param ex exception from execution
      * @return list of strings for the stack trace
      */

@@ -32,7 +32,6 @@ import org.w3c.css.sac.Locator;
 
 import com.steadystate.css.util.LangUtils;
 
-
 /**
  * Implementation of {@link Locator}.
  *
@@ -40,21 +39,14 @@ import com.steadystate.css.util.LangUtils;
  */
 public class LocatorImpl implements Locator, Serializable {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 2240824537064705530L;
 
-    /** The uri_. */
     private String uri_;
-    
-    /** The line number_. */
     private int lineNumber_;
-    
-    /** The column number_. */
     private int columnNumber_;
 
     /**
-     * Creates new LocatorImpl.
-     *
+     * Creates new LocatorImpl
      * @param uri the uri
      * @param line the lineNumber
      * @param column the columnNumber
@@ -79,9 +71,7 @@ public class LocatorImpl implements Locator, Serializable {
     }
 
     /**
-     * Gets the uri.
-     * @return String
-     * @see #getURI()
+     * @return @see #getURI()
      */
     public String getUri() {
         return uri_;
@@ -89,9 +79,8 @@ public class LocatorImpl implements Locator, Serializable {
 
     /**
      * Set the uri to a new value.
-     *
-     * @param uri the new uri
      * @see #getURI()
+     * @param uri the new uri
      */
     public void setUri(final String uri) {
         uri_ = uri;
@@ -136,9 +125,6 @@ public class LocatorImpl implements Locator, Serializable {
         lineNumber_ = line;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -153,9 +139,6 @@ public class LocatorImpl implements Locator, Serializable {
             && LangUtils.equals(getURI(), l.getURI());
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode() {
         int hash = LangUtils.HASH_SEED;
@@ -165,9 +148,6 @@ public class LocatorImpl implements Locator, Serializable {
         return hash;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return new StringBuilder().append(getUri()).append(" (")

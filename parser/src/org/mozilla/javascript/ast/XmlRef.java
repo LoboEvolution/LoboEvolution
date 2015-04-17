@@ -6,14 +6,13 @@
 
 package org.mozilla.javascript.ast;
 
-
 /**
  * Base class for E4X XML attribute-access or property-get expressions.
  * Such expressions can take a variety of forms. The general syntax has
- * three parts:
+ * three parts:<p>
  *
  * <ol>
- *  <li>optional: an {@code @}  (specifying an attribute access)</li>
+ *  <li>optional: an {@code @}</li>  (specifying an attribute access)</li>
  *  <li>optional: a namespace (a {@code Name}) and double-colon</li>
  *  <li>required:  either a {@code Name} or a bracketed [expression]</li>
  * </ol>
@@ -30,48 +29,27 @@ package org.mozilla.javascript.ast;
  * is valid in certain expression contexts such as
  * {@code company..employee.(@id &lt; 100)} - in this case, the {@code @id}
  * is an {@code XmlRef} that is part of an infix '&lt;' expression
- * whose parent is an {@code XmlDotQuery} node.
+ * whose parent is an {@code XmlDotQuery} node.<p>
  */
 public abstract class XmlRef extends AstNode {
 
-    /** The namespace. */
     protected Name namespace;
-    
-    /** The at pos. */
     protected int atPos = -1;
-    
-    /** The colon pos. */
     protected int colonPos = -1;
 
-    /**
-     * Instantiates a new xml ref.
-     */
     public XmlRef() {
     }
 
-    /**
-     * Instantiates a new xml ref.
-     *
-     * @param pos the pos
-     */
     public XmlRef(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new xml ref.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public XmlRef(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Return the namespace.  May be {@code @null}.
-     *
-     * @return the namespace
      */
     public Name getNamespace() {
         return namespace;
@@ -80,8 +58,6 @@ public abstract class XmlRef extends AstNode {
     /**
      * Sets namespace, and sets its parent to this node.
      * Can be {@code null}.
-     *
-     * @param namespace the new namespace
      */
     public void setNamespace(Name namespace) {
         this.namespace = namespace;
@@ -91,8 +67,6 @@ public abstract class XmlRef extends AstNode {
 
     /**
      * Returns {@code true} if this expression began with an {@code @}-token.
-     *
-     * @return true, if is attribute access
      */
     public boolean isAttributeAccess() {
         return atPos >= 0;
@@ -101,17 +75,13 @@ public abstract class XmlRef extends AstNode {
     /**
      * Returns position of {@code @}-token, or -1 if this is not
      * an attribute-access expression.
-     *
-     * @return the at pos
      */
     public int getAtPos() {
         return atPos;
     }
 
     /**
-     * Sets position of {@code @}-token, or -1.
-     *
-     * @param atPos the new at pos
+     * Sets position of {@code @}-token, or -1
      */
     public void setAtPos(int atPos) {
         this.atPos = atPos;
@@ -120,17 +90,13 @@ public abstract class XmlRef extends AstNode {
     /**
      * Returns position of {@code ::} token, or -1 if not present.
      * It will only be present if the namespace node is non-{@code null}.
-     *
-     * @return the colon pos
      */
     public int getColonPos() {
         return colonPos;
     }
 
     /**
-     * Sets position of {@code ::} token, or -1 if not present.
-     *
-     * @param colonPos the new colon pos
+     * Sets position of {@code ::} token, or -1 if not present
      */
     public void setColonPos(int colonPos) {
         this.colonPos = colonPos;

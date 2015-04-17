@@ -6,41 +6,18 @@
 
 package org.mozilla.javascript;
 
-
-/**
- * The Class SpecialRef.
- */
 class SpecialRef extends Ref
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -7521596632456797847L;
 
-    /** The Constant SPECIAL_NONE. */
     private static final int SPECIAL_NONE = 0;
-    
-    /** The Constant SPECIAL_PROTO. */
     private static final int SPECIAL_PROTO = 1;
-    
-    /** The Constant SPECIAL_PARENT. */
     private static final int SPECIAL_PARENT = 2;
 
-    /** The target. */
     private Scriptable target;
-    
-    /** The type. */
     private int type;
-    
-    /** The name. */
     private String name;
 
-    /**
-     * Instantiates a new special ref.
-     *
-     * @param target the target
-     * @param type the type
-     * @param name the name
-     */
     private SpecialRef(Scriptable target, int type, String name)
     {
         this.target = target;
@@ -48,17 +25,10 @@ class SpecialRef extends Ref
         this.name = name;
     }
 
-    /**
-     * Creates the special.
-     *
-     * @param cx the cx
-     * @param object the object
-     * @param name the name
-     * @return the ref
-     */
-    static Ref createSpecial(Context cx, Object object, String name)
+    static Ref createSpecial(Context cx, Scriptable scope, Object object,
+                             String name)
     {
-        Scriptable target = ScriptRuntime.toObjectOrNull(cx, object);
+        Scriptable target = ScriptRuntime.toObjectOrNull(cx, object, scope);
         if (target == null) {
             throw ScriptRuntime.undefReadError(object, name);
         }
@@ -80,9 +50,6 @@ class SpecialRef extends Ref
         return new SpecialRef(target, type, name);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Ref#get(org.mozilla.javascript.Context)
-     */
     @Override
     public Object get(Context cx)
     {
@@ -98,11 +65,14 @@ class SpecialRef extends Ref
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Ref#set(org.mozilla.javascript.Context, java.lang.Object)
-     */
     @Override
-    public Object set(Context cx, Object value)
+    @Deprecated
+    public Object set(Context cx, Object value) {
+        throw new IllegalStateException();
+    }
+
+    @Override
+    public Object set(Context cx, Scriptable scope, Object value)
     {
         switch (type) {
           case SPECIAL_NONE:
@@ -110,7 +80,7 @@ class SpecialRef extends Ref
           case SPECIAL_PROTO:
           case SPECIAL_PARENT:
             {
-                Scriptable obj = ScriptRuntime.toObjectOrNull(cx, value);
+                Scriptable obj = ScriptRuntime.toObjectOrNull(cx, value, scope);
                 if (obj != null) {
                     // Check that obj does not contain on its prototype/scope
                     // chain to prevent cycles
@@ -139,9 +109,6 @@ class SpecialRef extends Ref
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Ref#has(org.mozilla.javascript.Context)
-     */
     @Override
     public boolean has(Context cx)
     {
@@ -151,9 +118,6 @@ class SpecialRef extends Ref
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Ref#delete(org.mozilla.javascript.Context)
-     */
     @Override
     public boolean delete(Context cx)
     {

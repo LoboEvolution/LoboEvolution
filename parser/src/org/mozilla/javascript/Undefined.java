@@ -8,31 +8,19 @@ package org.mozilla.javascript;
 
 import java.io.Serializable;
 
-
 /**
  * This class implements the Undefined value in JavaScript.
  */
 public class Undefined implements Serializable
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 9195680630202616767L;
 
-    /** The Constant instance. */
     public static final Object instance = new Undefined();
 
-    /**
-     * Instantiates a new undefined.
-     */
     private Undefined()
     {
     }
 
-    /**
-     * Read resolve.
-     *
-     * @return the object
-     */
     public Object readResolve()
     {
         return instance;

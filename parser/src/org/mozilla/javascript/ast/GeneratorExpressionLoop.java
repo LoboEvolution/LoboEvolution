@@ -6,41 +6,23 @@
 
 package org.mozilla.javascript.ast;
 
-
 /**
- * The Class GeneratorExpressionLoop.
  */
 public class GeneratorExpressionLoop extends ForInLoop {
     
-    /**
-     * Instantiates a new generator expression loop.
-     */
     public GeneratorExpressionLoop() {
     }
 
-    /**
-     * Instantiates a new generator expression loop.
-     *
-     * @param pos the pos
-     */
     public GeneratorExpressionLoop(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new generator expression loop.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public GeneratorExpressionLoop(int pos, int len) {
         super(pos, len);
     }
     
     /**
-     * Returns whether the loop is a for-each loop.
-     *
-     * @return true, if is for each
+     * Returns whether the loop is a for-each loop
      */
     @Override
     public boolean isForEach() {
@@ -48,18 +30,13 @@ public class GeneratorExpressionLoop extends ForInLoop {
     }
 
     /**
-     * Sets whether the loop is a for-each loop.
-     *
-     * @param isForEach the new checks if is for each
+     * Sets whether the loop is a for-each loop
      */
     @Override
     public void setIsForEach(boolean isForEach) {
         throw new UnsupportedOperationException("this node type does not support for each");
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.ForInLoop#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         return makeIndent(depth)
@@ -75,8 +52,6 @@ public class GeneratorExpressionLoop extends ForInLoop {
     /**
      * Visits the iterator expression and the iterated object expression.
      * There is no body-expression for this loop type.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

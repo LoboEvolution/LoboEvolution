@@ -33,263 +33,280 @@ import org.w3c.dom.Document;
  */
 public class HttpRequestImpl implements HttpRequest {
 
-	/** The network request. */
-	private NetworkRequest networkRequest;
+    /** The network request. */
+    private NetworkRequest networkRequest;
 
-	/** The connection. */
-	private HttpURLConnection connection = null;
+    /** The connection. */
+    private HttpURLConnection connection = null;
 
-	/**
-	 * Instantiates a new http request impl.
-	 *
-	 * @param networkRequest
-	 *            the network request
-	 */
-	public HttpRequestImpl(final NetworkRequest networkRequest) {
-		super();
-		this.networkRequest = networkRequest;
-	}
+    /**
+     * Instantiates a new http request impl.
+     *
+     * @param networkRequest
+     *            the network request
+     */
+    public HttpRequestImpl(final NetworkRequest networkRequest) {
+        super();
+        this.networkRequest = networkRequest;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#abort()
-	 */
-	public void abort() {
-		networkRequest.abort();
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#abort()
+     */
+    @Override
+    public void abort() {
+        networkRequest.abort();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getAllResponseHeaders()
-	 */
-	public String getAllResponseHeaders() {
-		return networkRequest.getAllResponseHeaders();
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getAllResponseHeaders()
+     */
+    @Override
+    public String getAllResponseHeaders() {
+        return networkRequest.getAllResponseHeaders();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getReadyState()
-	 */
-	public int getReadyState() {
-		return networkRequest.getReadyState();
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getReadyState()
+     */
+    @Override
+    public int getReadyState() {
+        return networkRequest.getReadyState();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getResponseBytes()
-	 */
-	public byte[] getResponseBytes() {
-		return networkRequest.getResponseBytes();
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getResponseBytes()
+     */
+    @Override
+    public byte[] getResponseBytes() {
+        return networkRequest.getResponseBytes();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getResponseHeader(java.lang.String)
-	 */
-	public String getResponseHeader(String headerName) {
-		return networkRequest.getResponseHeader(headerName);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getResponseHeader(java.lang.String)
+     */
+    @Override
+    public String getResponseHeader(String headerName) {
+        return networkRequest.getResponseHeader(headerName);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getResponseImage()
-	 */
-	public Image getResponseImage() {
-		return networkRequest.getResponseImage();
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getResponseImage()
+     */
+    @Override
+    public Image getResponseImage() {
+        return networkRequest.getResponseImage();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getResponseText()
-	 */
-	public String getResponseText() {
-		return networkRequest.getResponseText();
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getResponseText()
+     */
+    @Override
+    public String getResponseText() {
+        return networkRequest.getResponseText();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getResponseXML()
-	 */
-	public Document getResponseXML() {
-		return networkRequest.getResponseXML();
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getResponseXML()
+     */
+    @Override
+    public Document getResponseXML() {
+        return networkRequest.getResponseXML();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getStatus()
-	 */
-	public int getStatus() {
-		return networkRequest.getStatus();
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getStatus()
+     */
+    @Override
+    public int getStatus() {
+        return networkRequest.getStatus();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getStatusText()
-	 */
-	public String getStatusText() {
-		return networkRequest.getStatusText();
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getStatusText()
+     */
+    @Override
+    public String getStatusText() {
+        return networkRequest.getStatusText();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String,
-	 * java.lang.String, boolean)
-	 */
-	public void open(String method, String url, boolean asyncFlag)
-			throws IOException {
-		networkRequest.open(method, url, asyncFlag);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#open(java.lang.String,
+     * java.lang.String, boolean)
+     */
+    @Override
+    public void open(String method, String url, boolean asyncFlag)
+            throws IOException {
+        networkRequest.open(method, url, asyncFlag);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String,
-	 * java.lang.String)
-	 */
-	public void open(String method, String url) throws IOException {
-		networkRequest.open(method, url);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#open(java.lang.String,
+     * java.lang.String)
+     */
+    @Override
+    public void open(String method, String url) throws IOException {
+        networkRequest.open(method, url);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String,
-	 * java.net.URL, boolean, java.lang.String, java.lang.String)
-	 */
-	public void open(String method, URL url, boolean asyncFlag,
-			String userName, String password) throws IOException {
-		networkRequest.open(method, url, asyncFlag, userName, password);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL,
+     * boolean, java.lang.String, java.lang.String)
+     */
+    @Override
+    public void open(String method, URL url, boolean asyncFlag,
+            String userName, String password) throws IOException {
+        networkRequest.open(method, url, asyncFlag, userName, password);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String,
-	 * java.net.URL, boolean, java.lang.String)
-	 */
-	public void open(String method, URL url, boolean asyncFlag, String userName)
-			throws IOException {
-		networkRequest.open(method, url, asyncFlag, userName);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL,
+     * boolean, java.lang.String)
+     */
+    @Override
+    public void open(String method, URL url, boolean asyncFlag, String userName)
+            throws IOException {
+        networkRequest.open(method, url, asyncFlag, userName);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String,
-	 * java.net.URL, boolean)
-	 */
-	public void open(String method, URL url, boolean asyncFlag)
-			throws IOException {
-		networkRequest.open(method, url, asyncFlag);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL,
+     * boolean)
+     */
+    @Override
+    public void open(String method, URL url, boolean asyncFlag)
+            throws IOException {
+        networkRequest.open(method, url, asyncFlag);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String,
-	 * java.net.URL)
-	 */
-	public void open(String method, URL url) throws IOException {
-		networkRequest.open(method, url);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL)
+     */
+    @Override
+    public void open(String method, URL url) throws IOException {
+        networkRequest.open(method, url);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#send(java.lang.String)
-	 */
-	public void send(String content) throws IOException {
-		networkRequest.send(content);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#send(java.lang.String)
+     */
+    @Override
+    public void send(String content) throws IOException {
+        networkRequest.send(content);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.lobobrowser.html.HttpRequest#addReadyStateChangeListener(org.lobobrowser
-	 * .html.ReadyStateChangeListener)
-	 */
-	public void addReadyStateChangeListener(
-			final ReadyStateChangeListener listener) {
-		networkRequest.addNetworkRequestListener(new NetworkRequestListener() {
-			public void readyStateChanged(NetworkRequestEvent event) {
-				listener.readyStateChanged();
-			}
-		});
-	}
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.lobobrowser.html.HttpRequest#addReadyStateChangeListener(org.lobobrowser
+     * .html.ReadyStateChangeListener)
+     */
+    @Override
+    public void addReadyStateChangeListener(
+            final ReadyStateChangeListener listener) {
+        networkRequest.addNetworkRequestListener(new NetworkRequestListener() {
+            @Override
+            public void readyStateChanged(NetworkRequestEvent event) {
+                listener.readyStateChanged();
+            }
+        });
+    }
 
+    @Override
+    public void setRequestHeader(String header, String value) {
 
-	@Override
-	public void setRequestHeader(String header, String value) {
+        NetworkRequestImpl nr = new NetworkRequestImpl();
 
-		NetworkRequestImpl nr = new NetworkRequestImpl();
+        if (getReadyState() != HttpRequest.STATE_LOADING) {
+            throw new IllegalStateException(
+                    "The AsyncHttpRequest must be opened prior to "
+                            + "setting a request header");
+        }
 
-		if (getReadyState() != HttpRequest.STATE_LOADING) {
-			throw new IllegalStateException(
-					"The AsyncHttpRequest must be opened prior to "
-							+ "setting a request header");
-		}
+        if ((header == null) || (value == null)) {
+            throw new IllegalArgumentException(
+                    "Neither the header, nor value, may be null");
+        }
 
-		if (header == null || value == null) {
-			throw new IllegalArgumentException(
-					"Neither the header, nor value, may be null");
-		}
+        if (header.equalsIgnoreCase("Accept-Charset")
+                || header.equalsIgnoreCase("Accept-Encoding")
+                || header.equalsIgnoreCase("Content-Length")
+                || header.equalsIgnoreCase("Expect")
+                || header.equalsIgnoreCase("Date")
+                || header.equalsIgnoreCase("Host")
+                || header.equalsIgnoreCase("Keep-Alive")
+                || header.equalsIgnoreCase("Referer")
+                || header.equalsIgnoreCase("TE")
+                || header.equalsIgnoreCase("Trailer")
+                || header.equalsIgnoreCase("Transfer-Encoding")
+                || header.equalsIgnoreCase("Upgrade")) {
 
-		if (header.equalsIgnoreCase("Accept-Charset")
-				|| header.equalsIgnoreCase("Accept-Encoding")
-				|| header.equalsIgnoreCase("Content-Length")
-				|| header.equalsIgnoreCase("Expect")
-				|| header.equalsIgnoreCase("Date")
-				|| header.equalsIgnoreCase("Host")
-				|| header.equalsIgnoreCase("Keep-Alive")
-				|| header.equalsIgnoreCase("Referer")
-				|| header.equalsIgnoreCase("TE")
-				|| header.equalsIgnoreCase("Trailer")
-				|| header.equalsIgnoreCase("Transfer-Encoding")
-				|| header.equalsIgnoreCase("Upgrade")) {
+            return;
+        }
 
-			return;
-		}
+        if (header.equalsIgnoreCase("Authorization")
+                || header.equalsIgnoreCase("Content-Base")
+                || header.equalsIgnoreCase("Content-Location")
+                || header.equalsIgnoreCase("Content-MD5")
+                || header.equalsIgnoreCase("Content-Range")
+                || header.equalsIgnoreCase("Content-Type")
+                || header.equalsIgnoreCase("Content-Version")
+                || header.equalsIgnoreCase("Delta-Base")
+                || header.equalsIgnoreCase("Depth")
+                || header.equalsIgnoreCase("Destination")
+                || header.equalsIgnoreCase("ETag")
+                || header.equalsIgnoreCase("Expect")
+                || header.equalsIgnoreCase("From")
+                || header.equalsIgnoreCase("If-Modified-Since")
+                || header.equalsIgnoreCase("If-Range")
+                || header.equalsIgnoreCase("If-Unmodified-Since")
+                || header.equalsIgnoreCase("Max-Forwards")
+                || header.equalsIgnoreCase("MIME-Version")
+                || header.equalsIgnoreCase("Overwrite")
+                || header.equalsIgnoreCase("Proxy-Authorization")
+                || header.equalsIgnoreCase("SOAPAction")
+                || header.equalsIgnoreCase("Timeout")) {
 
-		if (header.equalsIgnoreCase("Authorization")
-				|| header.equalsIgnoreCase("Content-Base")
-				|| header.equalsIgnoreCase("Content-Location")
-				|| header.equalsIgnoreCase("Content-MD5")
-				|| header.equalsIgnoreCase("Content-Range")
-				|| header.equalsIgnoreCase("Content-Type")
-				|| header.equalsIgnoreCase("Content-Version")
-				|| header.equalsIgnoreCase("Delta-Base")
-				|| header.equalsIgnoreCase("Depth")
-				|| header.equalsIgnoreCase("Destination")
-				|| header.equalsIgnoreCase("ETag")
-				|| header.equalsIgnoreCase("Expect")
-				|| header.equalsIgnoreCase("From")
-				|| header.equalsIgnoreCase("If-Modified-Since")
-				|| header.equalsIgnoreCase("If-Range")
-				|| header.equalsIgnoreCase("If-Unmodified-Since")
-				|| header.equalsIgnoreCase("Max-Forwards")
-				|| header.equalsIgnoreCase("MIME-Version")
-				|| header.equalsIgnoreCase("Overwrite")
-				|| header.equalsIgnoreCase("Proxy-Authorization")
-				|| header.equalsIgnoreCase("SOAPAction")
-				|| header.equalsIgnoreCase("Timeout")) {
+            // replace the current header, if any
+            for (Header h : nr.getReq().getHeaders()) {
+                if (h.getName().equalsIgnoreCase(header)) {
+                    nr.getReq().removeHeader(h);
+                    nr.getReq().setHeader(new Header(header, value));
+                    break;
+                }
+            }
+        } else {
 
-			// replace the current header, if any
-			for (Header h : nr.getReq().getHeaders()) {
-				if (h.getName().equalsIgnoreCase(header)) {
-					nr.getReq().removeHeader(h);
-					nr.getReq().setHeader(new Header(header, value));
-					break;
-				}
-			}
-		} else {
-
-			boolean appended = false;
-			for (Header h : nr.getReq().getHeaders()) {
-				if (h.getName().equalsIgnoreCase(header)) {
-					nr.getReq().removeHeader(h);
-					nr.getReq().setHeader(
-							new Header(header, h.getValue() + ", " + value));
-					appended = true;
-					break;
-				}
-			}
-			if (!appended) {
-				nr.getReq().setHeader(new Header(header, value));
-			}
-		}
-	}
+            boolean appended = false;
+            for (Header h : nr.getReq().getHeaders()) {
+                if (h.getName().equalsIgnoreCase(header)) {
+                    nr.getReq().removeHeader(h);
+                    nr.getReq().setHeader(
+                            new Header(header, h.getValue() + ", " + value));
+                    appended = true;
+                    break;
+                }
+            }
+            if (!appended) {
+                nr.getReq().setHeader(new Header(header, value));
+            }
+        }
+    }
 }

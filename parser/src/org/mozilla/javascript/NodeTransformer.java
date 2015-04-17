@@ -6,38 +6,29 @@
 
 package org.mozilla.javascript;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.mozilla.javascript.ast.AstRoot;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.Jump;
 import org.mozilla.javascript.ast.Scope;
 import org.mozilla.javascript.ast.ScriptNode;
 
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class transforms a tree to a lower-level representation for codegen.
  *
- * @author Norris Boyd
  * @see Node
+ * @author Norris Boyd
  */
 
 public class NodeTransformer
 {
 
-    /**
-     * Instantiates a new node transformer.
-     */
     public NodeTransformer()
     {
     }
 
-    /**
-     * Transform.
-     *
-     * @param tree the tree
-     */
     public final void transform(ScriptNode tree)
     {
         transformCompilationUnit(tree);
@@ -47,11 +38,6 @@ public class NodeTransformer
         }
     }
 
-    /**
-     * Transform compilation unit.
-     *
-     * @param tree the tree
-     */
     private void transformCompilationUnit(ScriptNode tree)
     {
         loops = new ObjArray();
@@ -73,15 +59,6 @@ public class NodeTransformer
                                    inStrictMode);
     }
 
-    /**
-     * Transform compilation unit_r.
-     *
-     * @param tree the tree
-     * @param parent the parent
-     * @param scope the scope
-     * @param createScopeObjects the create scope objects
-     * @param inStrictMode the in strict mode
-     */
     private void transformCompilationUnit_r(final ScriptNode tree,
                                             final Node parent,
                                             Scope scope,
@@ -425,33 +402,12 @@ public class NodeTransformer
         }
     }
 
-    /**
-     * Visit new.
-     *
-     * @param node the node
-     * @param tree the tree
-     */
     protected void visitNew(Node node, ScriptNode tree) {
     }
 
-    /**
-     * Visit call.
-     *
-     * @param node the node
-     * @param tree the tree
-     */
     protected void visitCall(Node node, ScriptNode tree) {
     }
 
-    /**
-     * Visit let.
-     *
-     * @param createWith the create with
-     * @param parent the parent
-     * @param previous the previous
-     * @param scopeNode the scope node
-     * @return the node
-     */
     protected Node visitLet(boolean createWith, Node parent, Node previous,
                             Node scopeNode)
     {
@@ -564,15 +520,6 @@ public class NodeTransformer
         return result;
     }
 
-    /**
-     * Adds the before current.
-     *
-     * @param parent the parent
-     * @param previous the previous
-     * @param current the current
-     * @param toAdd the to add
-     * @return the node
-     */
     private static Node addBeforeCurrent(Node parent, Node previous,
                                          Node current, Node toAdd)
     {
@@ -586,15 +533,6 @@ public class NodeTransformer
         return toAdd;
     }
 
-    /**
-     * Replace current.
-     *
-     * @param parent the parent
-     * @param previous the previous
-     * @param current the current
-     * @param replacement the replacement
-     * @return the node
-     */
     private static Node replaceCurrent(Node parent, Node previous,
                                        Node current, Node replacement)
     {
@@ -611,12 +549,7 @@ public class NodeTransformer
         return replacement;
     }
 
-    /** The loops. */
     private ObjArray loops;
-    
-    /** The loop ends. */
     private ObjArray loopEnds;
-    
-    /** The has finally. */
     private boolean hasFinally;
 }

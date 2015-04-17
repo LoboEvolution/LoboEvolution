@@ -8,64 +8,39 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
-
 /**
  * AST node for JavaScript 1.7 {@code yield} expression or statement.
- * Node type is {@link Token#YIELD}.
+ * Node type is {@link Token#YIELD}.<p>
  *
  * <pre><i>Yield</i> :
  *   <b>yield</b> [<i>no LineTerminator here</i>] [non-paren Expression] ;</pre>
  */
 public class Yield extends AstNode {
 
-    /** The value. */
     private AstNode value;
 
     {
         type = Token.YIELD;
     }
 
-    /**
-     * Instantiates a new yield.
-     */
     public Yield() {
     }
 
-    /**
-     * Instantiates a new yield.
-     *
-     * @param pos the pos
-     */
     public Yield(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new yield.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public Yield(int pos, int len) {
         super(pos, len);
     }
 
-    /**
-     * Instantiates a new yield.
-     *
-     * @param pos the pos
-     * @param len the len
-     * @param value the value
-     */
     public Yield(int pos, int len, AstNode value) {
         super(pos, len);
         setValue(value);
     }
 
     /**
-     * Returns yielded expression, {@code null} if none.
-     *
-     * @return the value
+     * Returns yielded expression, {@code null} if none
      */
     public AstNode getValue() {
         return value;
@@ -81,9 +56,6 @@ public class Yield extends AstNode {
             expr.setParent(this);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         return value == null
@@ -93,8 +65,6 @@ public class Yield extends AstNode {
 
     /**
      * Visits this node, and if present, the yielded value.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

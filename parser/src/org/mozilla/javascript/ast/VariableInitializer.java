@@ -8,21 +8,17 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
-
 /**
  * A variable declaration or initializer, part of a {@link VariableDeclaration}
  * expression.  The variable "target" can be a simple name or a destructuring
  * form.  The initializer, if present, can be any expression.<p>
  *
  * Node type is one of {@link Token#VAR}, {@link Token#CONST}, or
- * {@link Token#LET}.
+ * {@link Token#LET}.<p>
  */
 public class VariableInitializer extends AstNode {
 
-    /** The target. */
     private AstNode target;
-    
-    /** The initializer. */
     private AstNode initializer;
 
     {
@@ -31,8 +27,8 @@ public class VariableInitializer extends AstNode {
 
     /**
      * Sets the node type.
-     *
-     * @param nodeType the new node type
+     * @throws IllegalArgumentException if {@code nodeType} is not one of
+     * {@link Token#VAR}, {@link Token#CONST}, or {@link Token#LET}
      */
     public void setNodeType(int nodeType) {
         if (nodeType != Token.VAR
@@ -42,27 +38,13 @@ public class VariableInitializer extends AstNode {
         setType(nodeType);
     }
 
-    /**
-     * Instantiates a new variable initializer.
-     */
     public VariableInitializer() {
     }
 
-    /**
-     * Instantiates a new variable initializer.
-     *
-     * @param pos the pos
-     */
     public VariableInitializer(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new variable initializer.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public VariableInitializer(int pos, int len) {
         super(pos, len);
     }
@@ -79,9 +61,7 @@ public class VariableInitializer extends AstNode {
     }
 
     /**
-     * Returns the variable name or destructuring form.
-     *
-     * @return the target
+     * Returns the variable name or destructuring form
      */
     public AstNode getTarget() {
         return target;
@@ -90,8 +70,7 @@ public class VariableInitializer extends AstNode {
     /**
      * Sets the variable name or destructuring form, and sets
      * its parent to this node.
-     *
-     * @param target the new target
+     * @throws IllegalArgumentException if target is {@code null}
      */
     public void setTarget(AstNode target) {
         // Don't throw exception if target is an "invalid" node type.
@@ -103,9 +82,7 @@ public class VariableInitializer extends AstNode {
     }
 
     /**
-     * Returns the initial value, or {@code null} if not provided.
-     *
-     * @return the initializer
+     * Returns the initial value, or {@code null} if not provided
      */
     public AstNode getInitializer() {
         return initializer;
@@ -121,9 +98,6 @@ public class VariableInitializer extends AstNode {
             initializer.setParent(this);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -139,8 +113,6 @@ public class VariableInitializer extends AstNode {
     /**
      * Visits this node, then the target expression, then the initializer
      * expression if present.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

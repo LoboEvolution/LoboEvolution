@@ -8,16 +8,9 @@
 
 package org.mozilla.javascript.serialize;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectStreamClass;
+import java.io.*;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.Undefined;
-import org.mozilla.javascript.UniqueTag;
-
+import org.mozilla.javascript.*;
 
 /**
  * Class ScriptableInputStream is used to read in a JavaScript
@@ -33,10 +26,8 @@ public class ScriptableInputStream extends ObjectInputStream {
 
     /**
      * Create a ScriptableInputStream.
-     *
      * @param in the InputStream to read from.
      * @param scope the top-level scope to create the object in.
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     public ScriptableInputStream(InputStream in, Scriptable scope)
         throws IOException
@@ -50,9 +41,6 @@ public class ScriptableInputStream extends ObjectInputStream {
         }
     }
 
-    /* (non-Javadoc)
-     * @see java.io.ObjectInputStream#resolveClass(java.io.ObjectStreamClass)
-     */
     @Override
     protected Class<?> resolveClass(ObjectStreamClass desc)
         throws IOException, ClassNotFoundException
@@ -68,9 +56,6 @@ public class ScriptableInputStream extends ObjectInputStream {
         return super.resolveClass(desc);
     }
 
-    /* (non-Javadoc)
-     * @see java.io.ObjectInputStream#resolveObject(java.lang.Object)
-     */
     @Override
     protected Object resolveObject(Object obj)
         throws IOException
@@ -90,9 +75,6 @@ public class ScriptableInputStream extends ObjectInputStream {
         return obj;
     }
 
-    /** The scope. */
     private Scriptable scope;
-    
-    /** The class loader. */
     private ClassLoader classLoader;
 }

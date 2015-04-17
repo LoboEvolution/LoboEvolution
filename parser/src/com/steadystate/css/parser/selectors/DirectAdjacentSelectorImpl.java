@@ -35,41 +35,22 @@ import org.w3c.css.sac.SimpleSelector;
 import com.steadystate.css.parser.Locatable;
 import com.steadystate.css.parser.LocatableImpl;
 
-
 /**
- * The Class DirectAdjacentSelectorImpl.
- *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
 public class DirectAdjacentSelectorImpl extends LocatableImpl implements SiblingSelector, Serializable {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -7328602345833826516L;
 
-    /** The node type_. */
     private short nodeType_;
-    
-    /** The selector_. */
     private Selector selector_;  // child
-    
-    /** The sibling selector_. */
     private SimpleSelector siblingSelector_; // direct adjacent
 
-    /**
-     * Sets the node type.
-     *
-     * @param nodeType the new node type
-     */
     public void setNodeType(final short nodeType) {
         nodeType_ = nodeType;
     }
 
-    /**
-     * Sets the selector.
-     *
-     * @param child the new selector
-     */
     public void setSelector(final Selector child) {
         selector_ = child;
         if (child instanceof Locatable) {
@@ -80,22 +61,10 @@ public class DirectAdjacentSelectorImpl extends LocatableImpl implements Sibling
         }
     }
 
-    /**
-     * Sets the sibling selector.
-     *
-     * @param directAdjacent the new sibling selector
-     */
     public void setSiblingSelector(final SimpleSelector directAdjacent) {
         siblingSelector_ = directAdjacent;
     }
 
-    /**
-     * Instantiates a new direct adjacent selector impl.
-     *
-     * @param nodeType the node type
-     * @param child the child
-     * @param directAdjacent the direct adjacent
-     */
     public DirectAdjacentSelectorImpl(final short nodeType,
             final Selector child, final SimpleSelector directAdjacent) {
         setNodeType(nodeType);
@@ -103,37 +72,22 @@ public class DirectAdjacentSelectorImpl extends LocatableImpl implements Sibling
         setSiblingSelector(directAdjacent);
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.SiblingSelector#getNodeType()
-     */
     public short getNodeType() {
         return nodeType_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.Selector#getSelectorType()
-     */
     public short getSelectorType() {
         return Selector.SAC_DIRECT_ADJACENT_SELECTOR;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.SiblingSelector#getSelector()
-     */
     public Selector getSelector() {
         return selector_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.SiblingSelector#getSiblingSelector()
-     */
     public SimpleSelector getSiblingSelector() {
         return siblingSelector_;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return selector_.toString() + " + " + siblingSelector_.toString();

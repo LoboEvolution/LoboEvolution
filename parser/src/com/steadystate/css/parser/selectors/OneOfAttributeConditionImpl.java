@@ -33,105 +33,56 @@ import org.w3c.css.sac.Condition;
 
 import com.steadystate.css.parser.LocatableImpl;
 
-
 /**
- * The Class OneOfAttributeConditionImpl.
- *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
 public class OneOfAttributeConditionImpl extends LocatableImpl implements AttributeCondition, Serializable {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1371164446179830634L;
 
-    /** The local name_. */
     private String localName_;
-    
-    /** The value_. */
     private String value_;
-    
-    /** The specified_. */
     private boolean specified_;
 
-    /**
-     * Sets the local name.
-     *
-     * @param localName the new local name
-     */
     public void setLocalName(final String localName) {
         localName_ = localName;
     }
 
-    /**
-     * Sets the value.
-     *
-     * @param value the new value
-     */
     public void setValue(final String value) {
         value_ = value;
     }
 
-    /**
-     * Sets the specified.
-     *
-     * @param specified the new specified
-     */
     public void setSpecified(final boolean specified) {
         specified_ = specified;
     }
 
-    /**
-     * Instantiates a new one of attribute condition impl.
-     *
-     * @param localName the local name
-     * @param value the value
-     * @param specified the specified
-     */
     public OneOfAttributeConditionImpl(final String localName, final String value, final boolean specified) {
         setLocalName(localName);
         setValue(value);
         setSpecified(specified);
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.Condition#getConditionType()
-     */
     public short getConditionType() {
         return Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.AttributeCondition#getNamespaceURI()
-     */
     public String getNamespaceURI() {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.AttributeCondition#getLocalName()
-     */
     public String getLocalName() {
         return localName_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.AttributeCondition#getSpecified()
-     */
     public boolean getSpecified() {
         return specified_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.AttributeCondition#getValue()
-     */
     public String getValue() {
         return value_;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         final String value = getValue();

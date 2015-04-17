@@ -1,22 +1,16 @@
 /*
-    GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
+ * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
+ * can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version. This
+ * library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Apr 16, 2005
@@ -27,26 +21,26 @@ import java.awt.Graphics;
 
 import org.lobobrowser.html.dombl.ModelNode;
 
-
 /**
  * Represents a renderer (view) node.
  */
 public interface Renderable {
-	
-	/** The Constant EMPTY_ARRAY. */
-	public static final Renderable[] EMPTY_ARRAY = new Renderable[0];
 
-	/**
-	 * Paint.
-	 *
-	 * @param g the g
-	 */
-	public void paint(Graphics g);
+    /** The Constant EMPTY_ARRAY. */
+    static final Renderable[] EMPTY_ARRAY = new Renderable[0];
 
-	/**
-	 * Gets the model node.
-	 *
-	 * @return the model node
-	 */
-	public ModelNode getModelNode();
+    /**
+     * Paint.
+     *
+     * @param g
+     *            the g
+     */
+    void paint(Graphics g);
+
+    /**
+     * Gets the model node.
+     *
+     * @return the model node
+     */
+    ModelNode getModelNode();
 }

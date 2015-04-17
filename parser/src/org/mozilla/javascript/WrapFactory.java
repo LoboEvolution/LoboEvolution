@@ -8,7 +8,6 @@
 
 package org.mozilla.javascript;
 
-
 /**
  * Embeddings that wish to provide their own custom wrappings for Java
  * objects may extend this class and call
@@ -130,7 +129,7 @@ public class WrapFactory
      * @since 1.7R3
      */
     public Scriptable wrapJavaClass(Context cx, Scriptable scope,
-                                    Class javaClass)
+                                    Class<?> javaClass)
     {
         return new NativeJavaClass(scope, javaClass);
     }
@@ -145,8 +144,6 @@ public class WrapFactory
      * <code>Character</code> should be wrapped as any other Java object and
      * scripts can access any Java method available in these objects.
      * Use {@link #setJavaPrimitiveWrap(boolean)} to change this.
-     *
-     * @return true, if is java primitive wrap
      */
     public final boolean isJavaPrimitiveWrap()
     {
@@ -154,9 +151,6 @@ public class WrapFactory
     }
 
     /**
-     * Sets the java primitive wrap.
-     *
-     * @param value the new java primitive wrap
      * @see #isJavaPrimitiveWrap()
      */
     public final void setJavaPrimitiveWrap(boolean value)
@@ -168,7 +162,6 @@ public class WrapFactory
         javaPrimitiveWrap = value;
     }
 
-    /** The java primitive wrap. */
     private boolean javaPrimitiveWrap = true;
 
 }

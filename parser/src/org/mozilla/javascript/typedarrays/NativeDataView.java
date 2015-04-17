@@ -1,3 +1,9 @@
+/* -*- Mode: java; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 package org.mozilla.javascript.typedarrays;
 
 import org.mozilla.javascript.Context;
@@ -6,67 +12,41 @@ import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
 
-
 /**
- * The Class NativeDataView.
+ * This class represents the JavaScript "DataView" interface, which allows direct manipulations of the
+ * bytes in a NativeArrayBuffer. Java programmers would be best off getting the underling "byte[]" array
+ * from the NativeArrayBuffer and manipulating it directly, perhaps using the "ByteIo" class as a helper.
  */
+
 public class NativeDataView
     extends NativeArrayBufferView
 {
-    
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1427967607557438968L;
 
-    /** The Constant CLASS_NAME. */
     public static final String CLASS_NAME = "DataView";
 
-    /**
-     * Instantiates a new native data view.
-     */
     public NativeDataView()
     {
         super();
     }
 
-    /**
-     * Instantiates a new native data view.
-     *
-     * @param ab the ab
-     * @param offset the offset
-     * @param length the length
-     */
     public NativeDataView(NativeArrayBuffer ab, int offset, int length)
     {
         super(ab, offset, length);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
-     */
     @Override
     public String getClassName()
     {
         return CLASS_NAME;
     }
 
-    /**
-     * Inits the.
-     *
-     * @param scope the scope
-     * @param sealed the sealed
-     */
-    public static void init(Scriptable scope, boolean sealed)
+    public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         NativeDataView dv = new NativeDataView();
         dv.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
-    /**
-     * Range check.
-     *
-     * @param offset the offset
-     * @param len the len
-     */
     private void rangeCheck(int offset, int len)
     {
         if ((offset < 0) || ((offset + len) > byteLength)) {
@@ -74,12 +54,6 @@ public class NativeDataView
         }
     }
 
-    /**
-     * Check offset.
-     *
-     * @param args the args
-     * @param pos the pos
-     */
     private void checkOffset(Object[] args, int pos)
     {
         if (args.length <= pos) {
@@ -90,12 +64,6 @@ public class NativeDataView
         }
     }
 
-    /**
-     * Check value.
-     *
-     * @param args the args
-     * @param pos the pos
-     */
     private void checkValue(Object[] args, int pos)
     {
         if (args.length <= pos) {
@@ -106,13 +74,6 @@ public class NativeDataView
         }
     }
 
-    /**
-     * Real this.
-     *
-     * @param thisObj the this obj
-     * @param f the f
-     * @return the native data view
-     */
     private static NativeDataView realThis(Scriptable thisObj, IdFunctionObject f)
     {
         if (!(thisObj instanceof NativeDataView))
@@ -120,14 +81,6 @@ public class NativeDataView
         return (NativeDataView)thisObj;
     }
 
-    /**
-     * Js_constructor.
-     *
-     * @param ab the ab
-     * @param offset the offset
-     * @param length the length
-     * @return the native data view
-     */
     private NativeDataView js_constructor(NativeArrayBuffer ab, int offset, int length)
     {
         if (length < 0) {
@@ -139,14 +92,6 @@ public class NativeDataView
         return new NativeDataView(ab, offset, length);
     }
 
-    /**
-     * Js_get int.
-     *
-     * @param bytes the bytes
-     * @param signed the signed
-     * @param args the args
-     * @return the object
-     */
     private Object js_getInt(int bytes, boolean signed, Object[] args)
     {
         checkOffset(args, 0);
@@ -172,13 +117,6 @@ public class NativeDataView
         }
     }
 
-    /**
-     * Js_get float.
-     *
-     * @param bytes the bytes
-     * @param args the args
-     * @return the object
-     */
     private Object js_getFloat(int bytes, Object[] args)
     {
         checkOffset(args, 0);
@@ -199,13 +137,6 @@ public class NativeDataView
         }
     }
 
-    /**
-     * Js_set int.
-     *
-     * @param bytes the bytes
-     * @param signed the signed
-     * @param args the args
-     */
     private void js_setInt(int bytes, boolean signed, Object[] args)
     {
         checkOffset(args, 0);
@@ -244,12 +175,6 @@ public class NativeDataView
         }
     }
 
-    /**
-     * Js_set float.
-     *
-     * @param bytes the bytes
-     * @param args the args
-     */
     private void js_setFloat(int bytes, Object[] args)
     {
         checkOffset(args, 0);
@@ -276,9 +201,6 @@ public class NativeDataView
 
     // Function dispatcher
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -341,9 +263,6 @@ public class NativeDataView
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
-     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -374,10 +293,7 @@ public class NativeDataView
 
 // #string_id_map#
 
-    /* (non-Javadoc)
- * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
- */
-@Override
+    @Override
     protected int findPrototypeId(String s)
     {
         int id;
@@ -438,7 +354,6 @@ public class NativeDataView
         return id;
     }
 
-    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         Id_constructor     = 1,
         Id_getInt8         = 2,

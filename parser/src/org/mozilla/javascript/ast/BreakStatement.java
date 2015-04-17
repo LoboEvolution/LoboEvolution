@@ -8,55 +8,36 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
-
 /**
- * A break statement.  Node type is {@link Token#BREAK}.
+ * A break statement.  Node type is {@link Token#BREAK}.<p>
  *
  * <pre><i>BreakStatement</i> :
  *   <b>break</b> [<i>no LineTerminator here</i>] [Identifier] ;</pre>
  */
 public class BreakStatement extends Jump {
 
-    /** The break label. */
     private Name breakLabel;
-    
-    /** The target. */
     private AstNode target;
 
     {
         type = Token.BREAK;
     }
 
-    /**
-     * Instantiates a new break statement.
-     */
     public BreakStatement() {
     }
 
-    /**
-     * Instantiates a new break statement.
-     *
-     * @param pos the pos
-     */
     public BreakStatement(int pos) {
         // can't call super (Jump) for historical reasons
         position = pos;
     }
 
-    /**
-     * Instantiates a new break statement.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public BreakStatement(int pos, int len) {
         position = pos;
         length = len;
     }
 
     /**
-     * Returns the intended label of this break statement.
-     *
+     * Returns the intended label of this break statement
      * @return the break label.  {@code null} if the source code did
      * not specify a specific break label via "break &lt;target&gt;".
      */
@@ -77,8 +58,7 @@ public class BreakStatement extends Jump {
     }
 
     /**
-     * Returns the statement to break to.
-     *
+     * Returns the statement to break to
      * @return the break target.  Only {@code null} if the source
      * code has an error in it.
      */
@@ -88,8 +68,8 @@ public class BreakStatement extends Jump {
 
     /**
      * Sets the statement to break to.
-     *
      * @param target the statement to break to
+     * @throws IllegalArgumentException if target is {@code null}
      */
     public void setBreakTarget(Jump target) {
         assertNotNull(target);
@@ -97,9 +77,6 @@ public class BreakStatement extends Jump {
         setJumpStatement(target);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.Jump#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -115,8 +92,6 @@ public class BreakStatement extends Jump {
 
     /**
      * Visits this node, then visits the break label if non-{@code null}.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

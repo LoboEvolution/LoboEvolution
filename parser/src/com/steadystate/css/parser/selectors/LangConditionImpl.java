@@ -33,56 +33,33 @@ import org.w3c.css.sac.LangCondition;
 
 import com.steadystate.css.parser.LocatableImpl;
 
-
 /**
- * The Class LangConditionImpl.
  *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
 public class LangConditionImpl extends LocatableImpl implements LangCondition, Serializable {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1701599531953055387L;
 
-    /** The lang_. */
     private String lang_;
 
-    /**
-     * Sets the lang.
-     *
-     * @param lang the new lang
-     */
     public void setLang(final String lang) {
         lang_ = lang;
     }
 
-    /**
-     * Instantiates a new lang condition impl.
-     *
-     * @param lang the lang
-     */
     public LangConditionImpl(final String lang) {
         setLang(lang);
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.Condition#getConditionType()
-     */
     public short getConditionType() {
         return Condition.SAC_LANG_CONDITION;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.LangCondition#getLang()
-     */
     public String getLang() {
         return lang_;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return ":lang(" + getLang() + ")";

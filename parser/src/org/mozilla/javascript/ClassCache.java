@@ -6,10 +6,9 @@
 
 package org.mozilla.javascript;
 
-import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
+import java.io.Serializable;
 
 /**
  * Cache of generated classes and data structures to access Java runtime
@@ -21,29 +20,13 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ClassCache implements Serializable
 {
-    
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -8866246036237312215L;
-    
-    /** The Constant AKEY. */
     private static final Object AKEY = "ClassCache";
-    
-    /** The caching is enabled. */
     private volatile boolean cachingIsEnabled = true;
-    
-    /** The class table. */
     private transient Map<Class<?>,JavaMembers> classTable;
-    
-    /** The class adapter cache. */
     private transient Map<JavaAdapter.JavaAdapterSignature,Class<?>> classAdapterCache;
-    
-    /** The interface adapter cache. */
     private transient Map<Class<?>,Object> interfaceAdapterCache;
-    
-    /** The generated class serial. */
     private int generatedClassSerial;
-    
-    /** The associated scope. */
     private Scriptable associatedScope;
 
     /**
@@ -107,8 +90,6 @@ public class ClassCache implements Serializable
     /**
      * Check if generated Java classes and Java reflection information
      * is cached.
-     *
-     * @return true, if is caching enabled
      */
     public final boolean isCachingEnabled()
     {
@@ -143,8 +124,6 @@ public class ClassCache implements Serializable
     }
 
     /**
-     * Gets the class cache map.
-     *
      * @return a map from classes to associated JavaMembers objects
      */
     Map<Class<?>,JavaMembers> getClassCacheMap() {
@@ -156,11 +135,6 @@ public class ClassCache implements Serializable
         return classTable;
     }
 
-    /**
-     * Gets the interface adapter cache map.
-     *
-     * @return the interface adapter cache map
-     */
     Map<JavaAdapter.JavaAdapterSignature,Class<?>> getInterfaceAdapterCacheMap()
     {
         if (classAdapterCache == null) {
@@ -170,22 +144,39 @@ public class ClassCache implements Serializable
     }
 
     /**
+     * @deprecated
+     * The method always returns false.
+     * @see #setInvokerOptimizationEnabled(boolean enabled)
+     */
+    @Deprecated
+    public boolean isInvokerOptimizationEnabled()
+    {
+        return false;
+    }
+
+    /**
+     * @deprecated
+     * The method does nothing.
+     * Invoker optimization is no longer used by Rhino.
+     * On modern JDK like 1.4 or 1.5 the disadvantages of the optimization
+     * like increased memory usage or longer initialization time overweight
+     * small speed increase that can be gained using generated proxy class
+     * to replace reflection.
+     */
+    @Deprecated
+    public synchronized void setInvokerOptimizationEnabled(boolean enabled)
+    {
+    }
+
+    /**
      * Internal engine method to return serial number for generated classes
      * to ensure name uniqueness.
-     *
-     * @return the int
      */
     public final synchronized int newClassSerialNumber()
     {
         return ++generatedClassSerial;
     }
 
-    /**
-     * Gets the interface adapter.
-     *
-     * @param cl the cl
-     * @return the interface adapter
-     */
     Object getInterfaceAdapter(Class<?> cl)
     {
         return interfaceAdapterCache == null
@@ -193,12 +184,6 @@ public class ClassCache implements Serializable
                     : interfaceAdapterCache.get(cl);
     }
 
-    /**
-     * Cache interface adapter.
-     *
-     * @param cl the cl
-     * @param iadapter the iadapter
-     */
     synchronized void cacheInterfaceAdapter(Class<?> cl, Object iadapter)
     {
         if (cachingIsEnabled) {
@@ -209,11 +194,6 @@ public class ClassCache implements Serializable
         }
     }
 
-    /**
-     * Gets the associated scope.
-     *
-     * @return the associated scope
-     */
     Scriptable getAssociatedScope() {
         return associatedScope;
     }

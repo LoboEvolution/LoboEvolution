@@ -5,61 +5,37 @@
 
 package org.mozilla.javascript.optimizer;
 
-import java.util.Map;
-
-import org.mozilla.javascript.Kit;
-import org.mozilla.javascript.Node;
-import org.mozilla.javascript.NodeTransformer;
-import org.mozilla.javascript.ObjArray;
-import org.mozilla.javascript.Token;
+import org.mozilla.javascript.*;
 import org.mozilla.javascript.ast.ScriptNode;
-
+import java.util.Map;
 
 /**
  * This class performs node transforms to prepare for optimization.
  *
- * @author Norris Boyd
  * @see NodeTransformer
+ * @author Norris Boyd
  */
 
 class OptTransformer extends NodeTransformer {
 
-    /**
-     * Instantiates a new opt transformer.
-     *
-     * @param possibleDirectCalls the possible direct calls
-     * @param directCallTargets the direct call targets
-     */
     OptTransformer(Map<String,OptFunctionNode> possibleDirectCalls, ObjArray directCallTargets)
     {
         this.possibleDirectCalls = possibleDirectCalls;
         this.directCallTargets = directCallTargets;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.NodeTransformer#visitNew(org.mozilla.javascript.Node, org.mozilla.javascript.ast.ScriptNode)
-     */
     @Override
     protected void visitNew(Node node, ScriptNode tree) {
         detectDirectCall(node, tree);
         super.visitNew(node, tree);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.NodeTransformer#visitCall(org.mozilla.javascript.Node, org.mozilla.javascript.ast.ScriptNode)
-     */
     @Override
     protected void visitCall(Node node, ScriptNode tree) {
         detectDirectCall(node, tree);
         super.visitCall(node, tree);
     }
 
-    /**
-     * Detect direct call.
-     *
-     * @param node the node
-     * @param tree the tree
-     */
     private void detectDirectCall(Node node, ScriptNode tree)
     {
         if (tree.getType() == Token.FUNCTION) {
@@ -122,9 +98,6 @@ class OptTransformer extends NodeTransformer {
         }
     }
 
-    /** The possible direct calls. */
     private Map<String,OptFunctionNode> possibleDirectCalls;
-    
-    /** The direct call targets. */
     private ObjArray directCallTargets;
 }

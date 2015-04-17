@@ -8,15 +8,14 @@
 
 package org.mozilla.javascript;
 
-
 /**
- * Embeddings that wish to filter Java classes that are visible to scripts
- * through the LiveConnect, should implement this interface.
- *
- * @author Norris Boyd
- * @see Context#setClassShutter(ClassShutter)
- * @since 1.5 Release 4
- */
+Embeddings that wish to filter Java classes that are visible to scripts
+through the LiveConnect, should implement this interface.
+
+@see Context#setClassShutter(ClassShutter)
+@since 1.5 Release 4
+@author Norris Boyd
+*/
 
  public interface ClassShutter {
 

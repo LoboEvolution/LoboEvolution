@@ -6,13 +6,7 @@
 
 package org.mozilla.javascript.regexp;
 
-import org.mozilla.javascript.BaseFunction;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.ScriptRuntime;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.TopLevel;
-import org.mozilla.javascript.Undefined;
-
+import org.mozilla.javascript.*;
 
 /**
  * This class implements the RegExp constructor native object.
@@ -29,45 +23,28 @@ import org.mozilla.javascript.Undefined;
  */
 class NativeRegExpCtor extends BaseFunction
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -5733330028285400526L;
 
-    /**
-     * Instantiates a new native reg exp ctor.
-     */
     NativeRegExpCtor()
     {
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getFunctionName()
-     */
     @Override
     public String getFunctionName()
     {
         return "RegExp";
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getLength()
-     */
     @Override
     public int getLength() {
         return 2;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getArity()
-     */
     @Override
     public int getArity() {
         return 2;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#call(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -80,9 +57,6 @@ class NativeRegExpCtor extends BaseFunction
         return construct(cx, scope, args);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#construct(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
@@ -92,11 +66,6 @@ class NativeRegExpCtor extends BaseFunction
         return re;
     }
 
-    /**
-     * Gets the impl.
-     *
-     * @return the impl
-     */
     private static RegExpImpl getImpl()
     {
         Context cx = Context.getCurrentContext();
@@ -105,8 +74,7 @@ class NativeRegExpCtor extends BaseFunction
 
 // #string_id_map#
 
-    /** The Constant DOLLAR_ID_BASE. */
-private static final int
+    private static final int
         Id_multiline     = 1,
         Id_STAR          = 2,  // #string=$*#
 
@@ -127,7 +95,6 @@ private static final int
 
         DOLLAR_ID_BASE   = 12;
 
-    /** The Constant MAX_INSTANCE_ID. */
     private static final int
         Id_DOLLAR_1 = DOLLAR_ID_BASE + 1, // #string=$1#
         Id_DOLLAR_2 = DOLLAR_ID_BASE + 2, // #string=$2#
@@ -141,18 +108,12 @@ private static final int
 
         MAX_INSTANCE_ID = DOLLAR_ID_BASE + 9;
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getMaxInstanceId()
-     */
     @Override
     protected int getMaxInstanceId()
     {
         return super.getMaxInstanceId() + MAX_INSTANCE_ID;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#findInstanceIdInfo(java.lang.String)
-     */
     @Override
     protected int findInstanceIdInfo(String s) {
         int id;
@@ -215,10 +176,7 @@ private static final int
 
 // #/string_id_map#
 
-    /* (non-Javadoc)
- * @see org.mozilla.javascript.BaseFunction#getInstanceIdName(int)
- */
-@Override
+    @Override
     protected String getInstanceIdName(int id)
     {
         int shifted = id - super.getMaxInstanceId();
@@ -250,9 +208,6 @@ private static final int
         return super.getInstanceIdName(id);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getInstanceIdValue(int)
-     */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -303,9 +258,6 @@ private static final int
         return super.getInstanceIdValue(id);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#setInstanceIdValue(int, java.lang.Object)
-     */
     @Override
     protected void setInstanceIdValue(int id, Object value)
     {
@@ -339,9 +291,6 @@ private static final int
         super.setInstanceIdValue(id, value);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#setInstanceIdAttributes(int, int)
-     */
     @Override
     protected void setInstanceIdAttributes(int id, int attr) {
         int shifted = id - super.getMaxInstanceId();
@@ -379,15 +328,8 @@ private static final int
         super.setInstanceIdAttributes(id, attr);
     }
 
-    /** The multiline attr. */
     private int multilineAttr = PERMANENT;
-    
-    /** The star attr. */
     private int starAttr = PERMANENT;
-    
-    /** The input attr. */
     private int inputAttr = PERMANENT;
-    
-    /** The underscore attr. */
     private int underscoreAttr = PERMANENT;
 }

@@ -40,7 +40,6 @@ import org.w3c.dom.css.CSSStyleRule;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.util.LangUtils;
 
-
 /**
  * Implementation of {@link CSSStyleRule}.
  *
@@ -49,63 +48,33 @@ import com.steadystate.css.util.LangUtils;
  */
 public class CSSStyleRuleImpl extends AbstractCSSRuleImpl implements CSSStyleRule {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -697009251364657426L;
 
-    /** The selectors_. */
     private SelectorList selectors_;
-    
-    /** The style_. */
     private CSSStyleDeclaration style_;
 
-    /**
-     * Gets the selectors.
-     *
-     * @return the selectors
-     */
     public SelectorList getSelectors() {
         return selectors_;
     }
 
-    /**
-     * Sets the selectors.
-     *
-     * @param selectors the new selectors
-     */
     public void setSelectors(final SelectorList selectors) {
         selectors_ = selectors;
     }
 
-    /**
-     * Instantiates a new CSS style rule impl.
-     *
-     * @param parentStyleSheet the parent style sheet
-     * @param parentRule the parent rule
-     * @param selectors the selectors
-     */
     public CSSStyleRuleImpl(final CSSStyleSheetImpl parentStyleSheet,
         final CSSRule parentRule, final SelectorList selectors) {
         super(parentStyleSheet, parentRule);
         selectors_ = selectors;
     }
 
-    /**
-     * Instantiates a new CSS style rule impl.
-     */
     public CSSStyleRuleImpl() {
         super();
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#getType()
-     */
     public short getType() {
         return STYLE_RULE;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#getCssText()
-     */
     public String getCssText() {
         final String styleText = getStyle().getCssText();
         if (null == styleText || styleText.length() == 0) {
@@ -114,9 +83,6 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl implements CSSStyleRul
         return getSelectorText() + " { " + getStyle().getCssText() + " }";
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#setCssText(java.lang.String)
-     */
     public void setCssText(final String cssText) throws DOMException {
         final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
         if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
@@ -155,16 +121,10 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl implements CSSStyleRul
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSStyleRule#getSelectorText()
-     */
     public String getSelectorText() {
         return selectors_.toString();
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSStyleRule#setSelectorText(java.lang.String)
-     */
     public void setSelectorText(final String selectorText) throws DOMException {
         final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
         if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
@@ -192,33 +152,19 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl implements CSSStyleRul
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSStyleRule#getStyle()
-     */
     public CSSStyleDeclaration getStyle() {
         return style_;
     }
 
-    /**
-     * Sets the style.
-     *
-     * @param style the new style
-     */
     public void setStyle(final CSSStyleDeclaration style) {
         style_ = style;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return getCssText();
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -233,9 +179,6 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl implements CSSStyleRul
             && LangUtils.equals(getStyle(), csr.getStyle());
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#hashCode()
-     */
     @Override
     public int hashCode() {
         int hash = super.hashCode();

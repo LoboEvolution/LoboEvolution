@@ -1,22 +1,16 @@
 /*
-    GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
+ * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
+ * can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version. This
+ * library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Jun 9, 2005
@@ -29,133 +23,143 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
-
 /**
  * The Class CollectionUtilities.
  *
  * @author J. H. S.
  */
 public class CollectionUtilities {
-	
-	/**
-	 * Instantiates a new collection utilities.
-	 */
-	private CollectionUtilities() {
-		super();
-	}
+    /**
+     * Instantiates a new collection utilities.
+     */
+    private CollectionUtilities() {
+        super();
+    }
 
-	/**
-	 * Gets the iterator enumeration.
-	 *
-	 * @param i the i
-	 * @return the iterator enumeration
-	 */
-	public static Enumeration getIteratorEnumeration(final Iterator i) {
-		return new Enumeration() {
-			public boolean hasMoreElements() {
-				return i.hasNext();
-			}
+    /**
+     * Gets the iterator enumeration.
+     *
+     * @param i
+     *            the i
+     * @return the iterator enumeration
+     */
+    public static Enumeration getIteratorEnumeration(final Iterator i) {
+        return new Enumeration() {
+            @Override
+            public boolean hasMoreElements() {
+                return i.hasNext();
+            }
 
-			public Object nextElement() {
-				return i.next();
-			}
-		};
-	}
+            @Override
+            public Object nextElement() {
+                return i.next();
+            }
+        };
+    }
 
-	/**
-	 * Iterator union.
-	 *
-	 * @param iterators the iterators
-	 * @return the iterator
-	 */
-	public static Iterator iteratorUnion(final Iterator[] iterators) {
-		return new Iterator() {
-			private int iteratorIndex = 0;
-			private Iterator current = iterators.length > 0 ? iterators[0]
-					: null;
+    /**
+     * Iterator union.
+     *
+     * @param iterators
+     *            the iterators
+     * @return the iterator
+     */
+    public static Iterator iteratorUnion(final Iterator[] iterators) {
+        return new Iterator() {
+            private int iteratorIndex = 0;
+            private Iterator current = iterators.length > 0 ? iterators[0]
+                    : null;
 
-			public boolean hasNext() {
-				for (;;) {
-					if (current == null) {
-						return false;
-					}
-					if (current.hasNext()) {
-						return true;
-					}
-					iteratorIndex++;
-					current = iteratorIndex >= iterators.length ? null
-							: iterators[iteratorIndex];
-				}
-			}
+            @Override
+            public boolean hasNext() {
+                for (;;) {
+                    if (current == null) {
+                        return false;
+                    }
+                    if (current.hasNext()) {
+                        return true;
+                    }
+                    iteratorIndex++;
+                    current = iteratorIndex >= iterators.length ? null
+                            : iterators[iteratorIndex];
+                }
+            }
 
-			public Object next() {
-				for (;;) {
-					if (this.current == null) {
-						throw new NoSuchElementException();
-					}
-					try {
-						return this.current.next();
-					} catch (NoSuchElementException nse) {
-						this.iteratorIndex++;
-						this.current = this.iteratorIndex >= iterators.length ? null
-								: iterators[this.iteratorIndex];
-					}
-				}
-			}
+            @Override
+            public Object next() {
+                for (;;) {
+                    if (this.current == null) {
+                        throw new NoSuchElementException();
+                    }
+                    try {
+                        return this.current.next();
+                    } catch (NoSuchElementException nse) {
+                        this.iteratorIndex++;
+                        this.current = this.iteratorIndex >= iterators.length ? null
+                                : iterators[this.iteratorIndex];
+                    }
+                }
+            }
 
-			public void remove() {
-				if (this.current == null) {
-					throw new NoSuchElementException();
-				}
-				this.current.remove();
-			}
-		};
-	}
+            @Override
+            public void remove() {
+                if (this.current == null) {
+                    throw new NoSuchElementException();
+                }
+                this.current.remove();
+            }
+        };
+    }
 
-	/**
-	 * Reverse.
-	 *
-	 * @param collection the collection
-	 * @return the collection
-	 */
-	public static Collection reverse(Collection collection) {
-		LinkedList newCollection = new LinkedList();
-		Iterator i = collection.iterator();
-		while (i.hasNext()) {
-			newCollection.addFirst(i.next());
-		}
-		return newCollection;
-	}
+    /**
+     * Reverse.
+     *
+     * @param collection
+     *            the collection
+     * @return the collection
+     */
+    public static Collection reverse(Collection collection) {
+        LinkedList newCollection = new LinkedList();
+        Iterator i = collection.iterator();
+        while (i.hasNext()) {
+            newCollection.addFirst(i.next());
+        }
+        return newCollection;
+    }
 
-	/**
-	 * Singleton iterator.
-	 *
-	 * @param item the item
-	 * @return the iterator
-	 */
-	public static Iterator singletonIterator(final Object item) {
-		return new Iterator() {
-			private boolean gotItem = false;
+    /**
+     * Singleton iterator.
+     *
+     * @param item
+     *            the item
+     * @return the iterator
+     */
+    public static Iterator singletonIterator(final Object item) {
+        return new Iterator() {
+            private boolean gotItem = false;
 
-			public boolean hasNext() {
-				return !this.gotItem;
-			}
+            @Override
+            public boolean hasNext() {
+                return !this.gotItem;
+            }
 
-			public Object next() {
-				if (this.gotItem) {
-					throw new NoSuchElementException();
-				}
-				this.gotItem = true;
-				return item;
-			}
+            @Override
+            public Object next() {
+                if (this.gotItem) {
+                    throw new NoSuchElementException();
+                }
+                this.gotItem = true;
+                return item;
+            }
 
-			public void remove() {
-				if (!this.gotItem) {
-					this.gotItem = true;
-				} else {
-					throw new NoSuchElementException();
-				}
-			}
-		};
-	}
+            @Override
+            public void remove() {
+                if (!this.gotItem) {
+                    this.gotItem = true;
+                } else {
+                    throw new NoSuchElementException();
+                }
+            }
+        };
+    }
 }

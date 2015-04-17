@@ -22,8 +22,7 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 public class CanvasBuilder extends HTMLElementBuilder {
     /*
      * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+     * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
      */
     @Override
     protected HTMLElementImpl build(String name) {

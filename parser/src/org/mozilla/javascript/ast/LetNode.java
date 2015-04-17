@@ -8,10 +8,9 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
-
 /**
  * AST node for let statements and expressions.
- * Node type is {@link Token#LET} or {@link Token#LETEXPR}.
+ * Node type is {@link Token#LET} or {@link Token#LETEXPR}.<p>
  *
  * <pre> <i>LetStatement</i>:
  *     <b>let</b> ( VariableDeclarationList ) Block
@@ -21,55 +20,32 @@ import org.mozilla.javascript.Token;
  * Note that standalone let-statements with no parens or body block,
  * such as {@code let x=6, y=7;}, are represented as a
  * {@link VariableDeclaration} node of type {@code Token.LET},
- * wrapped with an {@link ExpressionStatement}.
+ * wrapped with an {@link ExpressionStatement}.<p>
  */
 public class LetNode extends Scope {
 
-    /** The variables. */
     private VariableDeclaration variables;
-    
-    /** The body. */
     private AstNode body;
-    
-    /** The lp. */
     private int lp = -1;
-    
-    /** The rp. */
     private int rp = -1;
 
     {
         type = Token.LETEXPR;
     }
 
-    /**
-     * Instantiates a new let node.
-     */
     public LetNode() {
     }
 
-    /**
-     * Instantiates a new let node.
-     *
-     * @param pos the pos
-     */
     public LetNode(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new let node.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public LetNode(int pos, int len) {
         super(pos, len);
     }
 
     /**
-     * Returns variable list.
-     *
-     * @return the variables
+     * Returns variable list
      */
     public VariableDeclaration getVariables() {
         return variables;
@@ -77,8 +53,7 @@ public class LetNode extends Scope {
 
     /**
      * Sets variable list.  Sets list parent to this node.
-     *
-     * @param variables the new variables
+     * @throws IllegalArgumentException if variables is {@code null}
      */
     public void setVariables(VariableDeclaration variables) {
         assertNotNull(variables);
@@ -111,55 +86,41 @@ public class LetNode extends Scope {
     }
 
     /**
-     * Returns left paren position, -1 if missing.
-     *
-     * @return the lp
+     * Returns left paren position, -1 if missing
      */
     public int getLp() {
         return lp;
     }
 
     /**
-     * Sets left paren position.
-     *
-     * @param lp the new lp
+     * Sets left paren position
      */
     public void setLp(int lp) {
         this.lp = lp;
     }
 
     /**
-     * Returns right paren position, -1 if missing.
-     *
-     * @return the rp
+     * Returns right paren position, -1 if missing
      */
     public int getRp() {
         return rp;
     }
 
     /**
-     * Sets right paren position.
-     *
-     * @param rp the new rp
+     * Sets right paren position
      */
     public void setRp(int rp) {
         this.rp = rp;
     }
 
     /**
-     * Sets both paren positions.
-     *
-     * @param lp the lp
-     * @param rp the rp
+     * Sets both paren positions
      */
     public void setParens(int lp, int rp) {
         this.lp = lp;
         this.rp = rp;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.Scope#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         String pad = makeIndent(depth);
@@ -177,8 +138,6 @@ public class LetNode extends Scope {
     /**
      * Visits this node, the variable list, and if present, the body
      * expression or statement.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

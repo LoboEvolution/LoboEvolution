@@ -6,7 +6,6 @@
 
 package org.mozilla.classfile;
 
-
 /**
  * This class provides opcode values expected by the JVM in Java class files.
  *

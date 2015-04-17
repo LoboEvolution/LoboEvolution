@@ -8,12 +8,11 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
-
 /**
  * AST node for a single name:value entry in an Object literal.
  * For simple entries, the node type is {@link Token#COLON}, and
  * the name (left side expression) is either a {@link Name}, a
- * {@link StringLiteral} or a {@link NumberLiteral}.
+ * {@link StringLiteral} or a {@link NumberLiteral}.<p>
  *
  * This node type is also used for getter/setter properties in object
  * literals.  In this case the node bounds include the "get" or "set"
@@ -22,7 +21,7 @@ import org.mozilla.javascript.Token;
  * {@link Token#SET}, as appropriate.<p>
  *
  * The {@code operatorPosition} field is meaningless if the node is
- * a getter or setter.
+ * a getter or setter.<p>
  *
  * <pre><i>ObjectProperty</i> :
  *       PropertyName <b>:</b> AssignmentExpression
@@ -40,8 +39,7 @@ public class ObjectProperty extends InfixExpression {
     /**
      * Sets the node type.  Must be one of
      * {@link Token#COLON}, {@link Token#GET}, or {@link Token#SET}.
-     *
-     * @param nodeType the new node type
+     * @throws IllegalArgumentException if {@code nodeType} is invalid
      */
     public void setNodeType(int nodeType) {
         if (nodeType != Token.COLON
@@ -52,27 +50,13 @@ public class ObjectProperty extends InfixExpression {
         setType(nodeType);
     }
 
-    /**
-     * Instantiates a new object property.
-     */
     public ObjectProperty() {
     }
 
-    /**
-     * Instantiates a new object property.
-     *
-     * @param pos the pos
-     */
     public ObjectProperty(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new object property.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public ObjectProperty(int pos, int len) {
         super(pos, len);
     }
@@ -86,8 +70,6 @@ public class ObjectProperty extends InfixExpression {
 
     /**
      * Returns true if this is a getter function.
-     *
-     * @return true, if is getter
      */
     public boolean isGetter() {
         return type == Token.GET;
@@ -102,30 +84,26 @@ public class ObjectProperty extends InfixExpression {
 
     /**
      * Returns true if this is a setter function.
-     *
-     * @return true, if is setter
      */
     public boolean isSetter() {
         return type == Token.SET;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.InfixExpression#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
-        sb.append(makeIndent(depth));
+        sb.append("\n");
+        sb.append(makeIndent(depth+1));
         if (isGetter()) {
             sb.append("get ");
         } else if (isSetter()) {
             sb.append("set ");
         }
-        sb.append(left.toSource(0));
+        sb.append(left.toSource(getType()==Token.COLON ? 0 : depth));
         if (type == Token.COLON) {
             sb.append(": ");
         }
-        sb.append(right.toSource(0));
+        sb.append(right.toSource(getType()==Token.COLON ? 0 : depth+1));
         return sb.toString();
     }
 }

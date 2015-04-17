@@ -1,22 +1,16 @@
 /*
- GNU GENERAL PUBLIC LICENSE
- Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public
- License as published by the Free Software Foundation; either
- verion 2 of the License, or (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- General Public License for more details.
-
- You should have received a copy of the GNU General Public
- License along with this library; if not, write to the Free Software
- Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
- Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either verion 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.primary.ext;
 
@@ -32,312 +26,327 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-
 /**
  * The Class BaseHistory.
  *
- * @param <T> the generic type
+ * @param <T>
+ *            the generic type
  */
 public abstract class BaseHistory<T> implements java.io.Serializable {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 2257845020000200400L;
 
-	/**
-	 * Instantiates a new base history.
-	 */
-	protected BaseHistory() {
-		super();
-	}
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 2257845020000200400L;
 
-	/** The history sorted set. */
-	private final SortedSet<String> historySortedSet = new TreeSet<String>();
-	
-	/** The history map. */
-	private final Map<String, TimedEntry> historyMap = new HashMap<String, TimedEntry>();
-	
-	/** The history timed set. */
-	private final SortedSet<TimedEntry> historyTimedSet = new TreeSet<TimedEntry>();
+    /**
+     * Instantiates a new base history.
+     */
+    protected BaseHistory() {
+        super();
+    }
 
-	/** The common entries capacity. */
-	private final int commonEntriesCapacity = 1000;
+    /** The history sorted set. */
+    private final SortedSet<String> historySortedSet = new TreeSet<String>();
 
-	/**
-	 * Checks for recent entries.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean hasRecentEntries() {
-		synchronized (this) {
-			return this.historyTimedSet.size() > 0;
-		}
-	}
+    /** The history map. */
+    private final Map<String, TimedEntry> historyMap = new HashMap<String, TimedEntry>();
 
-	/**
-	 * Gets the recent items.
-	 *
-	 * @param maxNumItems the max num items
-	 * @return the recent items
-	 */
-	public Collection<String> getRecentItems(int maxNumItems) {
-		synchronized (this) {
-			Collection<String> items = new LinkedList<String>();
-			Iterator<TimedEntry> i = this.historyTimedSet.iterator();
-			int count = 0;
-			while (i.hasNext() && count++ < maxNumItems) {
-				TimedEntry entry = (TimedEntry) i.next();
-				items.add(entry.value);
-			}
-			return items;
-		}
-	}
+    /** The history timed set. */
+    private final SortedSet<TimedEntry> historyTimedSet = new TreeSet<TimedEntry>();
 
-	/**
-	 * Gets the recent item info.
-	 *
-	 * @param maxNumItems the max num items
-	 * @return the recent item info
-	 */
-	public Collection<T> getRecentItemInfo(int maxNumItems) {
-		synchronized (this) {
-			Collection<T> items = new LinkedList<T>();
-			Iterator<TimedEntry> i = this.historyTimedSet.iterator();
-			int count = 0;
-			while (i.hasNext() && count++ < maxNumItems) {
-				TimedEntry entry = (TimedEntry) i.next();
-				items.add(entry.itemInfo);
-			}
-			return items;
-		}
-	}
+    /** The common entries capacity. */
+    private final int commonEntriesCapacity = 1000;
 
-	/**
-	 * Gets the recent host entries.
-	 *
-	 * @param maxNumItems the max num items
-	 * @return the recent host entries
-	 */
-	public Collection<HostEntry> getRecentHostEntries(int maxNumItems) {
-		synchronized (this) {
-			Collection<HostEntry> items = new LinkedList<HostEntry>();
-			Iterator<TimedEntry> i = this.historyTimedSet.iterator();
-			Set<String> hosts = new HashSet<String>();
-			while (i.hasNext()) {
-				TimedEntry entry = (TimedEntry) i.next();
-				String host = entry.url.getHost();
-				if (host != null && host.length() != 0) {
-					if (!hosts.contains(host)) {
-						hosts.add(host);
-						if (hosts.size() >= maxNumItems) {
-							break;
-						}
-						items.add(new HostEntry(host, entry.timestamp));
-					}
-				}
-			}
-			return items;
-		}
-	}
+    /**
+     * Checks for recent entries.
+     *
+     * @return true, if successful
+     */
+    public boolean hasRecentEntries() {
+        synchronized (this) {
+            return this.historyTimedSet.size() > 0;
+        }
+    }
 
-	/**
-	 * Gets the all entries.
-	 *
-	 * @return the all entries
-	 */
-	public Collection<HistoryEntry<T>> getAllEntries() {
-		synchronized (this) {
-			Collection<HistoryEntry<T>> items = new LinkedList<HistoryEntry<T>>();
-			Iterator<TimedEntry> i = this.historyTimedSet.iterator();
-			while (i.hasNext()) {
-				TimedEntry entry = (TimedEntry) i.next();
-				items.add(new HistoryEntry<T>(entry.url, entry.timestamp,
-						entry.itemInfo));
-			}
-			return items;
-		}
-	}
+    /**
+     * Gets the recent items.
+     *
+     * @param maxNumItems
+     *            the max num items
+     * @return the recent items
+     */
+    public Collection<String> getRecentItems(int maxNumItems) {
+        synchronized (this) {
+            Collection<String> items = new LinkedList<String>();
+            Iterator<TimedEntry> i = this.historyTimedSet.iterator();
+            int count = 0;
+            while (i.hasNext() && (count++ < maxNumItems)) {
+                TimedEntry entry = i.next();
+                items.add(entry.value);
+            }
+            return items;
+        }
+    }
 
-	/**
-	 * Gets the recent entries.
-	 *
-	 * @param maxNumItems the max num items
-	 * @return the recent entries
-	 */
-	public Collection<HistoryEntry<T>> getRecentEntries(int maxNumItems) {
-		synchronized (this) {
-			Collection<HistoryEntry<T>> items = new LinkedList<HistoryEntry<T>>();
-			Iterator<TimedEntry> i = this.historyTimedSet.iterator();
-			while (i.hasNext()) {
-				TimedEntry entry = (TimedEntry) i.next();
-				if (items.size() >= maxNumItems) {
-					break;
-				}
-				items.add(new HistoryEntry<T>(entry.url, entry.timestamp,
-						entry.itemInfo));
-			}
-			return items;
-		}
-	}
+    /**
+     * Gets the recent item info.
+     *
+     * @param maxNumItems
+     *            the max num items
+     * @return the recent item info
+     */
+    public Collection<T> getRecentItemInfo(int maxNumItems) {
+        synchronized (this) {
+            Collection<T> items = new LinkedList<T>();
+            Iterator<TimedEntry> i = this.historyTimedSet.iterator();
+            int count = 0;
+            while (i.hasNext() && (count++ < maxNumItems)) {
+                TimedEntry entry = i.next();
+                items.add(entry.itemInfo);
+            }
+            return items;
+        }
+    }
 
-	/**
-	 * Gets the head match items.
-	 *
-	 * @param itemPrefix the item prefix
-	 * @param maxNumItems the max num items
-	 * @return the head match items
-	 */
-	public Collection<String> getHeadMatchItems(String itemPrefix,
-			int maxNumItems) {
-		synchronized (this) {
-			Object[] array = this.historySortedSet.toArray();
-			int idx = Arrays.binarySearch(array, itemPrefix);
-			int startIdx = idx >= 0 ? idx : (-idx - 1);
-			int count = 0;
-			Collection<String> items = new LinkedList<String>();
-			for (int i = startIdx; i < array.length && (count++ < maxNumItems); i++) {
-				String potentialItem = (String) array[i];
-				if (potentialItem.startsWith(itemPrefix)) {
-					items.add(potentialItem);
-				} else {
-					break;
-				}
-			}
-			return items;
-		}
-	}
+    /**
+     * Gets the recent host entries.
+     *
+     * @param maxNumItems
+     *            the max num items
+     * @return the recent host entries
+     */
+    public Collection<HostEntry> getRecentHostEntries(int maxNumItems) {
+        synchronized (this) {
+            Collection<HostEntry> items = new LinkedList<HostEntry>();
+            Iterator<TimedEntry> i = this.historyTimedSet.iterator();
+            Set<String> hosts = new HashSet<String>();
+            while (i.hasNext()) {
+                TimedEntry entry = i.next();
+                String host = entry.url.getHost();
+                if ((host != null) && (host.length() != 0)) {
+                    if (!hosts.contains(host)) {
+                        hosts.add(host);
+                        if (hosts.size() >= maxNumItems) {
+                            break;
+                        }
+                        items.add(new HostEntry(host, entry.timestamp));
+                    }
+                }
+            }
+            return items;
+        }
+    }
 
-	/**
-	 * Adds the as recent.
-	 *
-	 * @param url the url
-	 * @param itemInfo the item info
-	 */
-	public void addAsRecent(URL url, T itemInfo) {
-		String item = url.toExternalForm();
-		synchronized (this) {
-			TimedEntry entry = (TimedEntry) this.historyMap.get(item);
-			if (entry != null) {
-				this.historyTimedSet.remove(entry);
-				entry.touch();
-				entry.itemInfo = itemInfo;
-				this.historyTimedSet.add(entry);
-			} else {
-				entry = new TimedEntry(url, item, itemInfo);
-				this.historyTimedSet.add(entry);
-				this.historyMap.put(item, entry);
-				this.historySortedSet.add(item);
-				while (this.historyTimedSet.size() > this.commonEntriesCapacity) {
-					// Most outdated goes last
-					TimedEntry entryToRemove = (TimedEntry) this.historyTimedSet
-							.last();
-					this.historyMap.remove(entryToRemove.value);
-					this.historySortedSet.remove(entryToRemove.value);
-					this.historyTimedSet.remove(entryToRemove);
-				}
-			}
-		}
-	}
+    /**
+     * Gets the all entries.
+     *
+     * @return the all entries
+     */
+    public Collection<HistoryEntry<T>> getAllEntries() {
+        synchronized (this) {
+            Collection<HistoryEntry<T>> items = new LinkedList<HistoryEntry<T>>();
+            Iterator<TimedEntry> i = this.historyTimedSet.iterator();
+            while (i.hasNext()) {
+                TimedEntry entry = i.next();
+                items.add(new HistoryEntry<T>(entry.url, entry.timestamp,
+                        entry.itemInfo));
+            }
+            return items;
+        }
+    }
 
-	/**
-	 * Touch.
-	 *
-	 * @param url the url
-	 */
-	public void touch(URL url) {
-		String item = url.toExternalForm();
-		synchronized (this) {
-			TimedEntry entry = (TimedEntry) this.historyMap.get(item);
-			if (entry != null) {
-				this.historyTimedSet.remove(entry);
-				entry.touch();
-				this.historyTimedSet.add(entry);
-			}
-		}
-	}
+    /**
+     * Gets the recent entries.
+     *
+     * @param maxNumItems
+     *            the max num items
+     * @return the recent entries
+     */
+    public Collection<HistoryEntry<T>> getRecentEntries(int maxNumItems) {
+        synchronized (this) {
+            Collection<HistoryEntry<T>> items = new LinkedList<HistoryEntry<T>>();
+            Iterator<TimedEntry> i = this.historyTimedSet.iterator();
+            while (i.hasNext()) {
+                TimedEntry entry = i.next();
+                if (items.size() >= maxNumItems) {
+                    break;
+                }
+                items.add(new HistoryEntry<T>(entry.url, entry.timestamp,
+                        entry.itemInfo));
+            }
+            return items;
+        }
+    }
 
-	/**
-	 * Gets the existing info.
-	 *
-	 * @param item the item
-	 * @return the existing info
-	 */
-	public T getExistingInfo(String item) {
-		TimedEntry entry = this.historyMap.get(item);
-		return entry == null ? null : entry.itemInfo;
-	}
+    /**
+     * Gets the head match items.
+     *
+     * @param itemPrefix
+     *            the item prefix
+     * @param maxNumItems
+     *            the max num items
+     * @return the head match items
+     */
+    public Collection<String> getHeadMatchItems(String itemPrefix,
+            int maxNumItems) {
+        synchronized (this) {
+            Object[] array = this.historySortedSet.toArray();
+            int idx = Arrays.binarySearch(array, itemPrefix);
+            int startIdx = idx >= 0 ? idx : (-idx - 1);
+            int count = 0;
+            Collection<String> items = new LinkedList<String>();
+            for (int i = startIdx; (i < array.length)
+                    && (count++ < maxNumItems); i++) {
+                String potentialItem = (String) array[i];
+                if (potentialItem.startsWith(itemPrefix)) {
+                    items.add(potentialItem);
+                } else {
+                    break;
+                }
+            }
+            return items;
+        }
+    }
 
-	/**
-	 * The Class TimedEntry.
-	 */
-	private class TimedEntry implements Comparable<Object>,
-			java.io.Serializable {
-		
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 2257845000000000200L;
-		
-		/** The timestamp. */
-		private long timestamp = System.currentTimeMillis();
-		
-		/** The url. */
-		private final URL url;
-		
-		/** The value. */
-		private final String value;
-		
-		/** The item info. */
-		private T itemInfo;
+    /**
+     * Adds the as recent.
+     *
+     * @param url
+     *            the url
+     * @param itemInfo
+     *            the item info
+     */
+    public void addAsRecent(URL url, T itemInfo) {
+        String item = url.toExternalForm();
+        synchronized (this) {
+            TimedEntry entry = this.historyMap.get(item);
+            if (entry != null) {
+                this.historyTimedSet.remove(entry);
+                entry.touch();
+                entry.itemInfo = itemInfo;
+                this.historyTimedSet.add(entry);
+            } else {
+                entry = new TimedEntry(url, item, itemInfo);
+                this.historyTimedSet.add(entry);
+                this.historyMap.put(item, entry);
+                this.historySortedSet.add(item);
+                while (this.historyTimedSet.size() > this.commonEntriesCapacity) {
+                    // Most outdated goes last
+                    TimedEntry entryToRemove = this.historyTimedSet.last();
+                    this.historyMap.remove(entryToRemove.value);
+                    this.historySortedSet.remove(entryToRemove.value);
+                    this.historyTimedSet.remove(entryToRemove);
+                }
+            }
+        }
+    }
 
-		/**
-		 * Instantiates a new timed entry.
-		 *
-		 * @param url the url
-		 * @param textValue the text value
-		 * @param itemInfo the item info
-		 */
-		public TimedEntry(URL url, String textValue, T itemInfo) {
-			this.itemInfo = itemInfo;
-			this.value = textValue;
-			this.url = url;
-		}
+    /**
+     * Touch.
+     *
+     * @param url
+     *            the url
+     */
+    public void touch(URL url) {
+        String item = url.toExternalForm();
+        synchronized (this) {
+            TimedEntry entry = this.historyMap.get(item);
+            if (entry != null) {
+                this.historyTimedSet.remove(entry);
+                entry.touch();
+                this.historyTimedSet.add(entry);
+            }
+        }
+    }
 
-		/**
-		 * Touch.
-		 */
-		public void touch() {
-			this.timestamp = System.currentTimeMillis();
-		}
+    /**
+     * Gets the existing info.
+     *
+     * @param item
+     *            the item
+     * @return the existing info
+     */
+    public T getExistingInfo(String item) {
+        TimedEntry entry = this.historyMap.get(item);
+        return entry == null ? null : entry.itemInfo;
+    }
 
-		/* (non-Javadoc)
-		 * @see java.lang.Object#equals(java.lang.Object)
-		 */
-		public boolean equals(Object obj) {
-			@SuppressWarnings("unchecked")
-			TimedEntry other = (TimedEntry) obj;
-			return other.value.equals(this.value);
-		}
+    /**
+     * The Class TimedEntry.
+     */
+    private class TimedEntry implements Comparable<Object>,
+    java.io.Serializable {
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.lang.Comparable#compareTo(Object)
-		 */
-		public int compareTo(Object arg0) {
-			if (this.equals(arg0)) {
-				return 0;
-			}
-			@SuppressWarnings("unchecked")
-			TimedEntry other = (TimedEntry) arg0;
-			long time1 = this.timestamp;
-			long time2 = other.timestamp;
-			if (time1 > time2) {
-				// More recent goes first
-				return -1;
-			} else if (time2 > time1) {
-				return +1;
-			} else {
-				return this.value.compareTo(other.value);
-			}
-		}
-	}
+        /** The Constant serialVersionUID. */
+        private static final long serialVersionUID = 2257845000000000200L;
+
+        /** The timestamp. */
+        private long timestamp = System.currentTimeMillis();
+
+        /** The url. */
+        private final URL url;
+
+        /** The value. */
+        private final String value;
+
+        /** The item info. */
+        private T itemInfo;
+
+        /**
+         * Instantiates a new timed entry.
+         *
+         * @param url
+         *            the url
+         * @param textValue
+         *            the text value
+         * @param itemInfo
+         *            the item info
+         */
+        public TimedEntry(URL url, String textValue, T itemInfo) {
+            this.itemInfo = itemInfo;
+            this.value = textValue;
+            this.url = url;
+        }
+
+        /**
+         * Touch.
+         */
+        public void touch() {
+            this.timestamp = System.currentTimeMillis();
+        }
+
+        /*
+         * (non-Javadoc)
+         * @see java.lang.Object#equals(java.lang.Object)
+         */
+        @Override
+        public boolean equals(Object obj) {
+            @SuppressWarnings("unchecked")
+            TimedEntry other = (TimedEntry) obj;
+            return other.value.equals(this.value);
+        }
+
+        /*
+         * (non-Javadoc)
+         * @see java.lang.Comparable#compareTo(Object)
+         */
+        @Override
+        public int compareTo(Object arg0) {
+            if (this.equals(arg0)) {
+                return 0;
+            }
+            @SuppressWarnings("unchecked")
+            TimedEntry other = (TimedEntry) arg0;
+            long time1 = this.timestamp;
+            long time2 = other.timestamp;
+            if (time1 > time2) {
+                // More recent goes first
+                return -1;
+            } else if (time2 > time1) {
+                return +1;
+            } else {
+                return this.value.compareTo(other.value);
+            }
+        }
+    }
 
 }

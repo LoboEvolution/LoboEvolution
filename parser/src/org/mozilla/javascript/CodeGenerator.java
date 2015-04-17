@@ -7,87 +7,46 @@
 package org.mozilla.javascript;
 
 import org.mozilla.javascript.ast.AstRoot;
-import org.mozilla.javascript.ast.FunctionNode;
-import org.mozilla.javascript.ast.Jump;
 import org.mozilla.javascript.ast.ScriptNode;
-
+import org.mozilla.javascript.ast.Jump;
+import org.mozilla.javascript.ast.FunctionNode;
 
 /**
  * Generates bytecode for the Interpreter.
  */
 class CodeGenerator extends Icode {
 
-    /** The Constant MIN_LABEL_TABLE_SIZE. */
     private static final int MIN_LABEL_TABLE_SIZE = 32;
-    
-    /** The Constant MIN_FIXUP_TABLE_SIZE. */
     private static final int MIN_FIXUP_TABLE_SIZE = 40;
 
-    /** The compiler env. */
     private CompilerEnvirons compilerEnv;
 
-    /** The its in function flag. */
     private boolean itsInFunctionFlag;
-    
-    /** The its in try flag. */
     private boolean itsInTryFlag;
 
-    /** The its data. */
     private InterpreterData itsData;
 
-    /** The script or fn. */
     private ScriptNode scriptOrFn;
-    
-    /** The i code top. */
     private int iCodeTop;
-    
-    /** The stack depth. */
     private int stackDepth;
-    
-    /** The line number. */
     private int lineNumber;
-    
-    /** The double table top. */
     private int doubleTableTop;
 
-    /** The strings. */
     private ObjToIntMap strings = new ObjToIntMap(20);
-    
-    /** The local top. */
     private int localTop;
-    
-    /** The label table. */
     private int[] labelTable;
-    
-    /** The label table top. */
     private int labelTableTop;
 
     // fixupTable[i] = (label_index << 32) | fixup_site
-    /** The fixup table. */
     private long[] fixupTable;
-    
-    /** The fixup table top. */
     private int fixupTableTop;
-    
-    /** The literal ids. */
     private ObjArray literalIds = new ObjArray();
 
-    /** The exception table top. */
     private int exceptionTableTop;
 
     // ECF_ or Expression Context Flags constants: for now only TAIL
-    /** The Constant ECF_TAIL. */
     private static final int ECF_TAIL = 1 << 0;
 
-    /**
-     * Compile.
-     *
-     * @param compilerEnv the compiler env
-     * @param tree the tree
-     * @param encodedSource the encoded source
-     * @param returnFunction the return function
-     * @return the interpreter data
-     */
     public InterpreterData compile(CompilerEnvirons compilerEnv,
                                    ScriptNode tree,
                                    String encodedSource,
@@ -126,9 +85,6 @@ class CodeGenerator extends Icode {
         return itsData;
     }
 
-    /**
-     * Generate function i code.
-     */
     private void generateFunctionICode()
     {
         itsInFunctionFlag = true;
@@ -148,11 +104,6 @@ class CodeGenerator extends Icode {
         generateICodeFromTree(theFunction.getLastChild());
     }
 
-    /**
-     * Generate i code from tree.
-     *
-     * @param tree the tree
-     */
     private void generateICodeFromTree(Node tree)
     {
         generateNestedFunctions();
@@ -223,9 +174,6 @@ class CodeGenerator extends Icode {
         if (Token.printICode) Interpreter.dumpICode(itsData);
     }
 
-    /**
-     * Generate nested functions.
-     */
     private void generateNestedFunctions()
     {
         int functionCount = scriptOrFn.getFunctionCount();
@@ -244,9 +192,6 @@ class CodeGenerator extends Icode {
         itsData.itsNestedFunctions = array;
     }
 
-    /**
-     * Generate reg exp literals.
-     */
     private void generateRegExpLiterals()
     {
         int N = scriptOrFn.getRegexpCount();
@@ -263,11 +208,6 @@ class CodeGenerator extends Icode {
         itsData.itsRegExpLiterals = array;
     }
 
-    /**
-     * Update line number.
-     *
-     * @param node the node
-     */
     private void updateLineNumber(Node node)
     {
         int lineno = node.getLineno();
@@ -281,23 +221,11 @@ class CodeGenerator extends Icode {
         }
     }
 
-    /**
-     * Bad tree.
-     *
-     * @param node the node
-     * @return the runtime exception
-     */
     private RuntimeException badTree(Node node)
     {
         throw new RuntimeException(node.toString());
     }
 
-    /**
-     * Visit statement.
-     *
-     * @param node the node
-     * @param initialStackDepth the initial stack depth
-     */
     private void visitStatement(Node node, int initialStackDepth)
     {
         int type = node.getType();
@@ -564,12 +492,6 @@ class CodeGenerator extends Icode {
         }
     }
 
-    /**
-     * Visit expression.
-     *
-     * @param node the node
-     * @param contextFlags the context flags
-     */
     private void visitExpression(Node node, int contextFlags)
     {
         int type = node.getType();
@@ -1047,11 +969,6 @@ class CodeGenerator extends Icode {
         }
     }
 
-    /**
-     * Generate call fun and this.
-     *
-     * @param left the left
-     */
     private void generateCallFunAndThis(Node left)
     {
         // Generate code to place on stack function and thisObj
@@ -1092,12 +1009,6 @@ class CodeGenerator extends Icode {
     }
 
 
-    /**
-     * Visit inc dec.
-     *
-     * @param node the node
-     * @param child the child
-     */
     private void visitIncDec(Node node, Node child)
     {
         int incrDecrMask = node.getExistingIntProp(Node.INCRDECR_PROP);
@@ -1149,12 +1060,6 @@ class CodeGenerator extends Icode {
         }
     }
 
-    /**
-     * Visit literal.
-     *
-     * @param node the node
-     * @param child the child
-     */
     private void visitLiteral(Node node, Node child)
     {
         int type = node.getType();
@@ -1205,13 +1110,6 @@ class CodeGenerator extends Icode {
         stackChange(-1);
     }
 
-    /**
-     * Visit array comprehension.
-     *
-     * @param node the node
-     * @param initStmt the init stmt
-     * @param expr the expr
-     */
     private void visitArrayComprehension(Node node, Node initStmt, Node expr)
     {
         // A bit of a hack: array comprehensions are implemented using
@@ -1223,24 +1121,12 @@ class CodeGenerator extends Icode {
         visitExpression(expr, 0);
     }
 
-    /**
-     * Gets the local block ref.
-     *
-     * @param node the node
-     * @return the local block ref
-     */
     private int getLocalBlockRef(Node node)
     {
         Node localBlock = (Node)node.getProp(Node.LOCAL_BLOCK_PROP);
         return localBlock.getExistingIntProp(Node.LOCAL_PROP);
     }
 
-    /**
-     * Gets the target label.
-     *
-     * @param target the target
-     * @return the target label
-     */
     private int getTargetLabel(Node target)
     {
         int label = target.labelId();
@@ -1264,11 +1150,6 @@ class CodeGenerator extends Icode {
         return label;
     }
 
-    /**
-     * Mark target label.
-     *
-     * @param target the target
-     */
     private void markTargetLabel(Node target)
     {
         int label = getTargetLabel(target);
@@ -1279,12 +1160,6 @@ class CodeGenerator extends Icode {
         labelTable[label] = iCodeTop;
     }
 
-    /**
-     * Adds the goto.
-     *
-     * @param target the target
-     * @param gotoOp the goto op
-     */
     private void addGoto(Node target, int gotoOp)
     {
         int label = getTargetLabel(target);
@@ -1311,9 +1186,6 @@ class CodeGenerator extends Icode {
         }
     }
 
-    /**
-     * Fix label gotos.
-     */
     private void fixLabelGotos()
     {
         for (int i = 0; i < fixupTableTop; i++) {
@@ -1330,12 +1202,6 @@ class CodeGenerator extends Icode {
         fixupTableTop = 0;
     }
 
-    /**
-     * Adds the backward goto.
-     *
-     * @param gotoOp the goto op
-     * @param jumpPC the jump pc
-     */
     private void addBackwardGoto(int gotoOp, int jumpPC)
     {
         int fromPC = iCodeTop;
@@ -1345,11 +1211,6 @@ class CodeGenerator extends Icode {
         resolveGoto(fromPC, jumpPC);
     }
 
-    /**
-     * Resolve forward goto.
-     *
-     * @param fromPC the from pc
-     */
     private void resolveForwardGoto(int fromPC)
     {
         // Ensure that forward jump skips at least self bytecode
@@ -1357,12 +1218,6 @@ class CodeGenerator extends Icode {
         resolveGoto(fromPC, iCodeTop);
     }
 
-    /**
-     * Resolve goto.
-     *
-     * @param fromPC the from pc
-     * @param jumpPC the jump pc
-     */
     private void resolveGoto(int fromPC, int jumpPC)
     {
         int offset = jumpPC - fromPC;
@@ -1381,22 +1236,12 @@ class CodeGenerator extends Icode {
         array[offsetSite + 1] = (byte)offset;
     }
 
-    /**
-     * Adds the token.
-     *
-     * @param token the token
-     */
     private void addToken(int token)
     {
         if (!Icode.validTokenCode(token)) throw Kit.codeBug();
         addUint8(token);
     }
 
-    /**
-     * Adds the icode.
-     *
-     * @param icode the icode
-     */
     private void addIcode(int icode)
     {
         if (!Icode.validIcode(icode)) throw Kit.codeBug();
@@ -1404,11 +1249,6 @@ class CodeGenerator extends Icode {
         addUint8(icode & 0xFF);
     }
 
-    /**
-     * Adds the uint8.
-     *
-     * @param value the value
-     */
     private void addUint8(int value)
     {
         if ((value & ~0xFF) != 0) throw Kit.codeBug();
@@ -1421,11 +1261,6 @@ class CodeGenerator extends Icode {
         iCodeTop = top + 1;
     }
 
-    /**
-     * Adds the uint16.
-     *
-     * @param value the value
-     */
     private void addUint16(int value)
     {
         if ((value & ~0xFFFF) != 0) throw Kit.codeBug();
@@ -1439,11 +1274,6 @@ class CodeGenerator extends Icode {
         iCodeTop = top + 2;
     }
 
-    /**
-     * Adds the int.
-     *
-     * @param i the i
-     */
     private void addInt(int i)
     {
         byte[] array = itsData.itsICode;
@@ -1458,12 +1288,6 @@ class CodeGenerator extends Icode {
         iCodeTop = top + 4;
     }
 
-    /**
-     * Gets the double index.
-     *
-     * @param num the num
-     * @return the double index
-     */
     private int getDoubleIndex(double num)
     {
         int index = doubleTableTop;
@@ -1479,11 +1303,6 @@ class CodeGenerator extends Icode {
         return index;
     }
 
-    /**
-     * Adds the goto op.
-     *
-     * @param gotoOp the goto op
-     */
     private void addGotoOp(int gotoOp)
     {
         byte[] array = itsData.itsICode;
@@ -1496,12 +1315,6 @@ class CodeGenerator extends Icode {
         iCodeTop = top + 1 + 2;
     }
 
-    /**
-     * Adds the var op.
-     *
-     * @param op the op
-     * @param varIndex the var index
-     */
     private void addVarOp(int op, int varIndex)
     {
         switch (op) {
@@ -1528,12 +1341,6 @@ class CodeGenerator extends Icode {
         throw Kit.codeBug();
     }
 
-    /**
-     * Adds the string op.
-     *
-     * @param op the op
-     * @param str the str
-     */
     private void addStringOp(int op, String str)
     {
         addStringPrefix(str);
@@ -1544,12 +1351,6 @@ class CodeGenerator extends Icode {
         }
     }
 
-    /**
-     * Adds the index op.
-     *
-     * @param op the op
-     * @param index the index
-     */
     private void addIndexOp(int op, int index)
     {
         addIndexPrefix(index);
@@ -1560,11 +1361,6 @@ class CodeGenerator extends Icode {
         }
     }
 
-    /**
-     * Adds the string prefix.
-     *
-     * @param str the str
-     */
     private void addStringPrefix(String str)
     {
         int index = strings.get(str, -1);
@@ -1586,11 +1382,6 @@ class CodeGenerator extends Icode {
         }
     }
 
-    /**
-     * Adds the index prefix.
-     *
-     * @param index the index
-     */
     private void addIndexPrefix(int index)
     {
         if (index < 0) Kit.codeBug();
@@ -1608,16 +1399,6 @@ class CodeGenerator extends Icode {
         }
     }
 
-    /**
-     * Adds the exception handler.
-     *
-     * @param icodeStart the icode start
-     * @param icodeEnd the icode end
-     * @param handlerStart the handler start
-     * @param isFinally the is finally
-     * @param exceptionObjectLocal the exception object local
-     * @param scopeLocal the scope local
-     */
     private void addExceptionHandler(int icodeStart, int icodeEnd,
                                      int handlerStart, boolean isFinally,
                                      int exceptionObjectLocal, int scopeLocal)
@@ -1643,12 +1424,6 @@ class CodeGenerator extends Icode {
         exceptionTableTop = top + Interpreter.EXCEPTION_SLOT_SIZE;
     }
 
-    /**
-     * Increase i code capacity.
-     *
-     * @param extraSize the extra size
-     * @return the byte[]
-     */
     private byte[] increaseICodeCapacity(int extraSize)
     {
         int capacity = itsData.itsICode.length;
@@ -1664,11 +1439,6 @@ class CodeGenerator extends Icode {
         return array;
     }
 
-    /**
-     * Stack change.
-     *
-     * @param change the change
-     */
     private void stackChange(int change)
     {
         if (change <= 0) {
@@ -1682,11 +1452,6 @@ class CodeGenerator extends Icode {
         }
     }
 
-    /**
-     * Alloc local.
-     *
-     * @return the int
-     */
     private int allocLocal()
     {
         int localSlot = localTop;
@@ -1697,11 +1462,6 @@ class CodeGenerator extends Icode {
         return localSlot;
     }
 
-    /**
-     * Release local.
-     *
-     * @param localSlot the local slot
-     */
     private void releaseLocal(int localSlot)
     {
         --localTop;

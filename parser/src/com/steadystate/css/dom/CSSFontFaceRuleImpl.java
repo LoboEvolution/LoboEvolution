@@ -39,7 +39,6 @@ import org.w3c.dom.css.CSSStyleDeclaration;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.util.LangUtils;
 
-
 /**
  * Implementation of {@link CSSFontFaceRule}.
  *
@@ -48,46 +47,26 @@ import com.steadystate.css.util.LangUtils;
  */
 public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl implements CSSFontFaceRule {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -3604191834588759088L;
 
-    /** The style_. */
     private CSSStyleDeclarationImpl style_;
 
-    /**
-     * Instantiates a new CSS font face rule impl.
-     *
-     * @param parentStyleSheet the parent style sheet
-     * @param parentRule the parent rule
-     */
     public CSSFontFaceRuleImpl(final CSSStyleSheetImpl parentStyleSheet, final CSSRule parentRule) {
         super(parentStyleSheet, parentRule);
     }
 
-    /**
-     * Instantiates a new CSS font face rule impl.
-     */
     public CSSFontFaceRuleImpl() {
         super();
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#getType()
-     */
     public short getType() {
         return FONT_FACE_RULE;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#getCssText()
-     */
     public String getCssText() {
         return "@font-face {" + getStyle().getCssText() + "}";
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#setCssText(java.lang.String)
-     */
     public void setCssText(final String cssText) throws DOMException {
         final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
         if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
@@ -125,25 +104,14 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl implements CSSFontF
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSFontFaceRule#getStyle()
-     */
     public CSSStyleDeclaration getStyle() {
         return style_;
     }
 
-    /**
-     * Sets the style.
-     *
-     * @param style the new style
-     */
     public void setStyle(final CSSStyleDeclarationImpl style) {
         style_ = style;
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -157,9 +125,6 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl implements CSSFontF
             && LangUtils.equals(getStyle(), cffr.getStyle());
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#hashCode()
-     */
     @Override
     public int hashCode() {
         int hash = super.hashCode();
@@ -167,9 +132,6 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl implements CSSFontF
         return hash;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return getCssText();

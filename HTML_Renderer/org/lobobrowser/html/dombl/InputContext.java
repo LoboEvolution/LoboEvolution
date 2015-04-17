@@ -1,22 +1,16 @@
 /*
-    GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU LESSER GENERAL LICENSE Copyright (C) 2006 The Lobo Project.
+ * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
+ * can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version. This
+ * library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Jan 15, 2006
@@ -25,216 +19,227 @@ package org.lobobrowser.html.dombl;
 
 import java.io.File;
 
-
 /**
  * The Interface InputContext.
  */
 public interface InputContext {
-	
-	/**
-	 * Gets the checked.
-	 *
-	 * @return the checked
-	 */
-	public boolean getChecked();
 
-	/**
-	 * Sets the checked.
-	 *
-	 * @param checked the new checked
-	 */
-	public void setChecked(boolean checked);
+    /**
+     * Gets the checked.
+     *
+     * @return the checked
+     */
+    boolean getChecked();
 
-	/**
-	 * Gets the disabled.
-	 *
-	 * @return the disabled
-	 */
-	public boolean getDisabled();
+    /**
+     * Sets the checked.
+     *
+     * @param checked
+     *            the new checked
+     */
+    void setChecked(boolean checked);
 
-	/**
-	 * Sets the disabled.
-	 *
-	 * @param disabled the new disabled
-	 */
-	public void setDisabled(boolean disabled);
+    /**
+     * Gets the disabled.
+     *
+     * @return the disabled
+     */
+    boolean getDisabled();
 
-	/**
-	 * Gets the max length.
-	 *
-	 * @return the max length
-	 */
-	public int getMaxLength();
+    /**
+     * Sets the disabled.
+     *
+     * @param disabled
+     *            the new disabled
+     */
+    void setDisabled(boolean disabled);
 
-	/**
-	 * Sets the max length.
-	 *
-	 * @param maxLength the new max length
-	 */
-	public void setMaxLength(int maxLength);
+    /**
+     * Gets the max length.
+     *
+     * @return the max length
+     */
+    int getMaxLength();
 
-	/**
-	 * Gets the name.
-	 *
-	 * @return the name
-	 */
-	public String getName();
+    /**
+     * Sets the max length.
+     *
+     * @param maxLength
+     *            the new max length
+     */
+    void setMaxLength(int maxLength);
 
-	/**
-	 * Sets the name.
-	 *
-	 * @param name the new name
-	 */
-	public void setName(String name);
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
+    String getName();
 
-	/**
-	 * Gets the read only.
-	 *
-	 * @return the read only
-	 */
-	public boolean getReadOnly();
+    /**
+     * Sets the name.
+     *
+     * @param name
+     *            the new name
+     */
+    void setName(String name);
 
-	/**
-	 * Sets the read only.
-	 *
-	 * @param readOnly the new read only
-	 */
-	public void setReadOnly(boolean readOnly);
+    /**
+     * Gets the read only.
+     *
+     * @return the read only
+     */
+    boolean getReadOnly();
 
-	/**
-	 * Gets the control size.
-	 *
-	 * @return the control size
-	 */
-	public int getControlSize();
+    /**
+     * Sets the read only.
+     *
+     * @param readOnly
+     *            the new read only
+     */
+    void setReadOnly(boolean readOnly);
 
-	/**
-	 * Sets the control size.
-	 *
-	 * @param size the new control size
-	 */
-	public void setControlSize(int size);
+    /**
+     * Gets the control size.
+     *
+     * @return the control size
+     */
+    int getControlSize();
 
-	/**
-	 * Gets the tab index.
-	 *
-	 * @return the tab index
-	 */
-	public int getTabIndex();
+    /**
+     * Sets the control size.
+     *
+     * @param size
+     *            the new control size
+     */
+    void setControlSize(int size);
 
-	/**
-	 * Sets the tab index.
-	 *
-	 * @param tabIndex the new tab index
-	 */
-	public void setTabIndex(int tabIndex);
+    /**
+     * Gets the tab index.
+     *
+     * @return the tab index
+     */
+    int getTabIndex();
 
-	/**
-	 * Gets the value.
-	 *
-	 * @return the value
-	 */
-	public String getValue();
+    /**
+     * Sets the tab index.
+     *
+     * @param tabIndex
+     *            the new tab index
+     */
+    void setTabIndex(int tabIndex);
 
-	/**
-	 * Gets the values.
-	 *
-	 * @return the values
-	 */
-	public String[] getValues();
+    /**
+     * Gets the value.
+     *
+     * @return the value
+     */
+    String getValue();
 
-	/**
-	 * Sets the value.
-	 *
-	 * @param value the new value
-	 */
-	public void setValue(String value);
+    /**
+     * Gets the values.
+     *
+     * @return the values
+     */
+    String[] getValues();
 
-	/**
-	 * Blur.
-	 */
-	public void blur();
+    /**
+     * Sets the value.
+     *
+     * @param value
+     *            the new value
+     */
+    void setValue(String value);
 
-	/**
-	 * Focus.
-	 */
-	public void focus();
+    /**
+     * Blur.
+     */
+    void blur();
 
-	/**
-	 * Select.
-	 */
-	public void select();
+    /**
+     * Focus.
+     */
+    void focus();
 
-	/**
-	 * Click.
-	 */
-	public void click();
+    /**
+     * Select.
+     */
+    void select();
 
-	/**
-	 * Gets the rows.
-	 *
-	 * @return the rows
-	 */
-	public int getRows();
+    /**
+     * Click.
+     */
+    void click();
 
-	/**
-	 * Gets the cols.
-	 *
-	 * @return the cols
-	 */
-	public int getCols();
+    /**
+     * Gets the rows.
+     *
+     * @return the rows
+     */
+    int getRows();
 
-	/**
-	 * Sets the rows.
-	 *
-	 * @param rows the new rows
-	 */
-	public void setRows(int rows);
+    /**
+     * Gets the cols.
+     *
+     * @return the cols
+     */
+    int getCols();
 
-	/**
-	 * Sets the cols.
-	 *
-	 * @param cols the new cols
-	 */
-	public void setCols(int cols);
+    /**
+     * Sets the rows.
+     *
+     * @param rows
+     *            the new rows
+     */
+    void setRows(int rows);
 
-	/**
-	 * Gets the selected index.
-	 *
-	 * @return the selected index
-	 */
-	public int getSelectedIndex();
+    /**
+     * Sets the cols.
+     *
+     * @param cols
+     *            the new cols
+     */
+    void setCols(int cols);
 
-	/**
-	 * Sets the selected index.
-	 *
-	 * @param value the new selected index
-	 */
-	public void setSelectedIndex(int value);
+    /**
+     * Gets the selected index.
+     *
+     * @return the selected index
+     */
+    int getSelectedIndex();
 
-	/**
-	 * Gets the visible size.
-	 *
-	 * @return the visible size
-	 */
-	public int getVisibleSize();
+    /**
+     * Sets the selected index.
+     *
+     * @param value
+     *            the new selected index
+     */
+    void setSelectedIndex(int value);
 
-	/**
-	 * Sets the visible size.
-	 *
-	 * @param value the new visible size
-	 */
-	public void setVisibleSize(int value);
+    /**
+     * Gets the visible size.
+     *
+     * @return the visible size
+     */
+    int getVisibleSize();
 
-	/**
-	 * Gets the file value.
-	 *
-	 * @return the file value
-	 */
-	public File[] getFileValue();
+    /**
+     * Sets the visible size.
+     *
+     * @param value
+     *            the new visible size
+     */
+    void setVisibleSize(int value);
 
-	/**
-	 * Reset input.
-	 */
-	public void resetInput();
+    /**
+     * Gets the file value.
+     *
+     * @return the file value
+     */
+    File[] getFileValue();
+
+    /**
+     * Reset input.
+     */
+    void resetInput();
 }

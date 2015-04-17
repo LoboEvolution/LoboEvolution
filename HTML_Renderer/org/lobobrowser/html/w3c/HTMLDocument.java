@@ -596,6 +596,24 @@ public interface HTMLDocument extends Document {
     /**
      * Removes the event listener.
      *
+     * @param script the script
+     * @param function the function
+     * @param bool the bool
+     */
+    void removeEventListener(String script, Function function,boolean bool);
+    
+    /**
+     * Adds the event listener.
+     *
+     * @param script the script
+     * @param function the function
+     * @param bool the bool
+     */
+    void addEventListener(String script, Function function,boolean bool);
+
+    /**
+     * Removes the event listener.
+     *
      * @param script
      *            the script
      * @param function

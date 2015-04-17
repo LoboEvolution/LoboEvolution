@@ -8,21 +8,11 @@
 
 package org.mozilla.javascript;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Member;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
+import java.io.*;
 
-
-/**
- * The Class FunctionObject.
- */
 public class FunctionObject extends BaseFunction
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -5332312783643935019L;
 
     /**
@@ -163,9 +153,6 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
-     * Gets the type tag.
-     *
-     * @param type the type
      * @return One of <tt>JAVA_*_TYPE</tt> constants to indicate desired type
      *         or {@link #JAVA_UNSUPPORTED_TYPE} if the convertion is not
      *         possible
@@ -191,15 +178,6 @@ public class FunctionObject extends BaseFunction
         return JAVA_UNSUPPORTED_TYPE;
     }
 
-    /**
-     * Convert arg.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param arg the arg
-     * @param typeTag the type tag
-     * @return the object
-     */
     public static Object convertArg(Context cx, Scriptable scope,
                                     Object arg, int typeTag)
     {
@@ -234,8 +212,6 @@ public class FunctionObject extends BaseFunction
      * Return the value defined by  the method used to construct the object
      * (number of parameters of the method, or 1 if the method is a "varargs"
      * form).
-     *
-     * @return the arity
      */
     @Override
     public int getArity() {
@@ -244,17 +220,12 @@ public class FunctionObject extends BaseFunction
 
     /**
      * Return the same value as {@link #getArity()}.
-     *
-     * @return the length
      */
     @Override
     public int getLength() {
         return getArity();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getFunctionName()
-     */
     @Override
     public String getFunctionName()
     {
@@ -263,8 +234,6 @@ public class FunctionObject extends BaseFunction
 
     /**
      * Get Java method or constructor this function represent.
-     *
-     * @return the method or constructor
      */
     public Member getMethodOrConstructor()
     {
@@ -275,13 +244,6 @@ public class FunctionObject extends BaseFunction
         }
     }
 
-    /**
-     * Find single method.
-     *
-     * @param methods the methods
-     * @param name the name
-     * @return the method
-     */
     static Method findSingleMethod(Method[] methods, String name)
     {
         Method found = null;
@@ -364,12 +326,6 @@ public class FunctionObject extends BaseFunction
                        this, ScriptableObject.DONTENUM);
     }
 
-    /**
-     * Inits the as constructor.
-     *
-     * @param scope the scope
-     * @param prototype the prototype
-     */
     void initAsConstructor(Scriptable scope, Scriptable prototype)
     {
         ScriptRuntime.setFunctionProtoAndParent(this, scope);
@@ -385,17 +341,11 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
-     * Convert arg.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param arg the arg
-     * @param desired the desired
-     * @return the object
      * @deprecated Use {@link #getTypeTag(Class)}
      * and {@link #convertArg(Context, Scriptable, Object, int)}
      * for type conversion.
      */
+    @Deprecated
     public static Object convertArg(Context cx, Scriptable scope,
                                     Object arg, Class<?> desired)
     {
@@ -413,11 +363,6 @@ public class FunctionObject extends BaseFunction
      * <p>
      * Implements Function.call.
      *
-     * @param cx the cx
-     * @param scope the scope
-     * @param thisObj the this obj
-     * @param args the args
-     * @return the object
      * @see org.mozilla.javascript.Function#call(
      *          Context, Scriptable, Scriptable, Object[])
      */
@@ -530,10 +475,6 @@ public class FunctionObject extends BaseFunction
      * constructor for the class of the underlying Java method.
      * Return null to indicate that the call method should be used to create
      * new objects.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @return the scriptable
      */
     @Override
     public Scriptable createObject(Context cx, Scriptable scope) {
@@ -552,31 +493,14 @@ public class FunctionObject extends BaseFunction
         return result;
     }
 
-    /**
-     * Checks if is var args method.
-     *
-     * @return true, if is var args method
-     */
     boolean isVarArgsMethod() {
         return parmsLength == VARARGS_METHOD;
     }
 
-    /**
-     * Checks if is var args constructor.
-     *
-     * @return true, if is var args constructor
-     */
     boolean isVarArgsConstructor() {
         return parmsLength == VARARGS_CTOR;
     }
 
-    /**
-     * Read object.
-     *
-     * @param in the in
-     * @throws IOException Signals that an I/O exception has occurred.
-     * @throws ClassNotFoundException the class not found exception
-     */
     private void readObject(ObjectInputStream in)
         throws IOException, ClassNotFoundException
     {
@@ -599,54 +523,24 @@ public class FunctionObject extends BaseFunction
         }
     }
 
-    /** The Constant VARARGS_METHOD. */
     private static final short VARARGS_METHOD = -1;
-    
-    /** The Constant VARARGS_CTOR. */
     private static final short VARARGS_CTOR =   -2;
 
-    /** The saw security exception. */
     private static boolean sawSecurityException;
 
-    /** The Constant JAVA_UNSUPPORTED_TYPE. */
     public static final int JAVA_UNSUPPORTED_TYPE = 0;
-    
-    /** The Constant JAVA_STRING_TYPE. */
     public static final int JAVA_STRING_TYPE      = 1;
-    
-    /** The Constant JAVA_INT_TYPE. */
     public static final int JAVA_INT_TYPE         = 2;
-    
-    /** The Constant JAVA_BOOLEAN_TYPE. */
     public static final int JAVA_BOOLEAN_TYPE     = 3;
-    
-    /** The Constant JAVA_DOUBLE_TYPE. */
     public static final int JAVA_DOUBLE_TYPE      = 4;
-    
-    /** The Constant JAVA_SCRIPTABLE_TYPE. */
     public static final int JAVA_SCRIPTABLE_TYPE  = 5;
-    
-    /** The Constant JAVA_OBJECT_TYPE. */
     public static final int JAVA_OBJECT_TYPE      = 6;
 
-    /** The member. */
     MemberBox member;
-    
-    /** The function name. */
     private String functionName;
-    
-    /** The type tags. */
     private transient byte[] typeTags;
-    
-    /** The parms length. */
     private int parmsLength;
-    
-    /** The has void return. */
     private transient boolean hasVoidReturn;
-    
-    /** The return type tag. */
     private transient int returnTypeTag;
-    
-    /** The is static. */
     private boolean isStatic;
 }

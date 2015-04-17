@@ -6,12 +6,9 @@
 
 package org.mozilla.javascript;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
-
 
 /**
  * This class reflects Java methods into the JavaScript environment and
@@ -25,71 +22,37 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class NativeJavaMethod extends BaseFunction
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -3440381785576412928L;
 
-    /**
-     * Instantiates a new native java method.
-     *
-     * @param methods the methods
-     */
     NativeJavaMethod(MemberBox[] methods)
     {
         this.functionName = methods[0].getName();
         this.methods = methods;
     }
 
-    /**
-     * Instantiates a new native java method.
-     *
-     * @param methods the methods
-     * @param name the name
-     */
     NativeJavaMethod(MemberBox[] methods, String name)
     {
         this.functionName = name;
         this.methods = methods;
     }
 
-    /**
-     * Instantiates a new native java method.
-     *
-     * @param method the method
-     * @param name the name
-     */
     NativeJavaMethod(MemberBox method, String name)
     {
         this.functionName = name;
         this.methods = new MemberBox[] { method };
     }
 
-    /**
-     * Instantiates a new native java method.
-     *
-     * @param method the method
-     * @param name the name
-     */
     public NativeJavaMethod(Method method, String name)
     {
         this(new MemberBox(method), name);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getFunctionName()
-     */
     @Override
     public String getFunctionName()
     {
         return functionName;
     }
 
-    /**
-     * Script signature.
-     *
-     * @param values the values
-     * @return the string
-     */
     static String scriptSignature(Object[] values)
     {
         StringBuilder sig = new StringBuilder();
@@ -128,9 +91,6 @@ public class NativeJavaMethod extends BaseFunction
         return sig.toString();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#decompile(int, int)
-     */
     @Override
     String decompile(int indent, int flags)
     {
@@ -147,9 +107,6 @@ public class NativeJavaMethod extends BaseFunction
         return sb.toString();
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {
@@ -170,9 +127,6 @@ public class NativeJavaMethod extends BaseFunction
         return sb.toString();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#call(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -294,13 +248,6 @@ public class NativeJavaMethod extends BaseFunction
         return wrapped;
     }
 
-    /**
-     * Find cached function.
-     *
-     * @param cx the cx
-     * @param args the args
-     * @return the int
-     */
     int findCachedFunction(Context cx, Object[] args) {
         if (methods.length > 1) {
             if (overloadCache != null) {
@@ -332,11 +279,6 @@ public class NativeJavaMethod extends BaseFunction
      * Find the index of the correct function to call given the set of methods
      * or constructors and the arguments.
      * If no function can be found to call, return -1.
-     *
-     * @param cx the cx
-     * @param methodsOrCtors the methods or ctors
-     * @param args the args
-     * @return the int
      */
     static int findFunction(Context cx,
                             MemberBox[] methodsOrCtors, Object[] args)
@@ -529,29 +471,17 @@ public class NativeJavaMethod extends BaseFunction
         }
     }
 
-    /**  Types are equal. */
+    /** Types are equal */
     private static final int PREFERENCE_EQUAL      = 0;
-    
-    /** The Constant PREFERENCE_FIRST_ARG. */
     private static final int PREFERENCE_FIRST_ARG  = 1;
-    
-    /** The Constant PREFERENCE_SECOND_ARG. */
     private static final int PREFERENCE_SECOND_ARG = 2;
-    
-    /**  No clear "easy" conversion. */
+    /** No clear "easy" conversion */
     private static final int PREFERENCE_AMBIGUOUS  = 3;
 
     /**
      * Determine which of two signatures is the closer fit.
      * Returns one of PREFERENCE_EQUAL, PREFERENCE_FIRST_ARG,
      * PREFERENCE_SECOND_ARG, or PREFERENCE_AMBIGUOUS.
-     *
-     * @param args the args
-     * @param sig1 the sig1
-     * @param vararg1 the vararg1
-     * @param sig2 the sig2
-     * @param vararg2 the vararg2
-     * @return the int
      */
     private static int preferSignature(Object[] args,
                                        Class<?>[] sig1,
@@ -603,16 +533,8 @@ public class NativeJavaMethod extends BaseFunction
     }
 
 
-    /** The Constant debug. */
     private static final boolean debug = false;
 
-    /**
-     * Prints the debug.
-     *
-     * @param msg the msg
-     * @param member the member
-     * @param args the args
-     */
     private static void printDebug(String msg, MemberBox member,
                                    Object[] args)
     {
@@ -633,13 +555,8 @@ public class NativeJavaMethod extends BaseFunction
         }
     }
 
-    /** The methods. */
     MemberBox[] methods;
-    
-    /** The function name. */
     private String functionName;
-    
-    /** The overload cache. */
     private transient CopyOnWriteArrayList<ResolvedOverload> overloadCache;
 }
 

@@ -6,43 +6,23 @@
 
 package org.mozilla.javascript;
 
-
 /**
- * The Class NativeCallSite.
+ * This class is used by the V8 extension "Error.prepareStackTrace." It is passed to
+ * that function, which may then use it to format the stack as it sees fit.
  */
+
 public class NativeCallSite extends IdScriptableObject
 {
-    
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/** The Constant CALLSITE_TAG. */
     private static final String CALLSITE_TAG = "CallSite";
 
-    /** The element. */
     private ScriptStackElement element;
 
-    /**
-     * Inits the.
-     *
-     * @param scope the scope
-     * @param sealed the sealed
-     */
     static void init(Scriptable scope, boolean sealed)
     {
         NativeCallSite cs = new NativeCallSite();
         cs.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
-    /**
-     * Make.
-     *
-     * @param scope the scope
-     * @param ctorObj the ctor obj
-     * @return the native call site
-     */
     static NativeCallSite make(Scriptable scope, Scriptable ctorObj)
     {
         NativeCallSite cs = new NativeCallSite();
@@ -52,35 +32,21 @@ public class NativeCallSite extends IdScriptableObject
         return cs;
     }
 
-    /**
-     * Instantiates a new native call site.
-     */
     private NativeCallSite()
     {
     }
 
-    /**
-     * Sets the element.
-     *
-     * @param elt the new element
-     */
     void setElement(ScriptStackElement elt)
     {
         this.element = elt;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
-     */
     @Override
     public String getClassName()
     {
         return "CallSite";
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
-     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -107,63 +73,6 @@ public class NativeCallSite extends IdScriptableObject
         initPrototypeMethod(CALLSITE_TAG, id, s, arity);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
-     */
-    @Override
-    protected int findPrototypeId(String s)
-    {
-        if ("constructor".equals(s)) {
-            return Id_constructor;
-        }
-        if ("getThis".equals(s)) {
-            return Id_getThis;
-        }
-        if ("getTypeName".equals(s)) {
-            return Id_getTypeName;
-        }
-        if ("getFunction".equals(s)) {
-            return Id_getFunction;
-        }
-        if ("getFunctionName".equals(s)) {
-            return Id_getFunctionName;
-        }
-        if ("getMethodName".equals(s)) {
-            return Id_getMethodName;
-        }
-        if ("getFileName".equals(s)) {
-            return Id_getFileName;
-        }
-        if ("getLineNumber".equals(s)) {
-            return Id_getLineNumber;
-        }
-        if ("getColumnNumber".equals(s)) {
-            return Id_getColumnNumber;
-        }
-        if ("getEvalOrigin".equals(s)) {
-            return Id_getEvalOrigin;
-        }
-        if ("isToplevel".equals(s)) {
-            return Id_isToplevel;
-        }
-        if ("isEval".equals(s)) {
-            return Id_isEval;
-        }
-        if ("isNative".equals(s)) {
-            return Id_isNative;
-        }
-        if ("isConstructor".equals(s)) {
-            return Id_isConstructor;
-        }
-        if ("toString".equals(s)) {
-            return Id_toString;
-        }
-        return 0;
-    }
-
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -175,30 +84,21 @@ public class NativeCallSite extends IdScriptableObject
         switch (id) {
         case Id_constructor:
             return make(scope, f);
-        case Id_getThis:
-            return getUndefined();
-        case Id_getTypeName:
-            return getUndefined();
-        case Id_getFunction:
-            return getUndefined();
         case Id_getFunctionName:
             return getFunctionName(thisObj);
-        case Id_getMethodName:
-            return getNull();
         case Id_getFileName:
             return getFileName(thisObj);
         case Id_getLineNumber:
             return getLineNumber(thisObj);
+        case Id_getThis:
+        case Id_getTypeName:
+        case Id_getFunction:
         case Id_getColumnNumber:
-            return getColumnNumber(thisObj);
+            return getUndefined();
+        case Id_getMethodName:
+            return getNull();
         case Id_getEvalOrigin:
-            return getFalse();
-        case Id_isToplevel:
-            return getFalse();
         case Id_isEval:
-            return getFalse();
-        case Id_isNative:
-            return getFalse();
         case Id_isConstructor:
             return getFalse();
         case Id_toString:
@@ -208,9 +108,6 @@ public class NativeCallSite extends IdScriptableObject
         }
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {
@@ -220,12 +117,6 @@ public class NativeCallSite extends IdScriptableObject
         return element.toString();
     }
 
-    /**
-     * Js_to string.
-     *
-     * @param obj the obj
-     * @return the object
-     */
     private Object js_toString(Scriptable obj)
     {
         while(obj != null && !(obj instanceof NativeCallSite)) {
@@ -236,46 +127,25 @@ public class NativeCallSite extends IdScriptableObject
         }
         NativeCallSite cs = (NativeCallSite)obj;
         StringBuilder sb = new StringBuilder();
-        cs.element.renderLocation(sb);
+        cs.element.renderJavaStyle(sb);
         return sb.toString();
     }
 
-    /**
-     * Gets the undefined.
-     *
-     * @return the undefined
-     */
     private Object getUndefined()
     {
         return Undefined.instance;
     }
 
-    /**
-     * Gets the null.
-     *
-     * @return the null
-     */
     private Object getNull()
     {
         return null;
     }
 
-    /**
-     * Gets the false.
-     *
-     * @return the false
-     */
     private Object getFalse()
     {
         return Boolean.FALSE;
     }
 
-    /**
-     * Gets the function name.
-     *
-     * @param obj the obj
-     * @return the function name
-     */
     private Object getFunctionName(Scriptable obj)
     {
         while(obj != null && !(obj instanceof NativeCallSite)) {
@@ -288,12 +158,6 @@ public class NativeCallSite extends IdScriptableObject
         return (cs.element == null ? null : cs.element.functionName);
     }
 
-    /**
-     * Gets the file name.
-     *
-     * @param obj the obj
-     * @return the file name
-     */
     private Object getFileName(Scriptable obj)
     {
         while(obj != null && !(obj instanceof NativeCallSite)) {
@@ -306,12 +170,6 @@ public class NativeCallSite extends IdScriptableObject
         return (cs.element == null ? null : cs.element.fileName);
     }
 
-    /**
-     * Gets the line number.
-     *
-     * @param obj the obj
-     * @return the line number
-     */
     private Object getLineNumber(Scriptable obj)
     {
         while(obj != null && !(obj instanceof NativeCallSite)) {
@@ -327,28 +185,46 @@ public class NativeCallSite extends IdScriptableObject
         return cs.element.lineNumber;
     }
 
-    /**
-     * Gets the column number.
-     *
-     * @param obj the obj
-     * @return the column number
-     */
-    private Object getColumnNumber(Scriptable obj)
+// #string_id_map#
+
+    @Override
+    protected int findPrototypeId(String s)
     {
-        while(obj != null && !(obj instanceof NativeCallSite)) {
-            obj = obj.getPrototype();
+        int id;
+// #generated# Last update: 2015-03-02 23:42:12 PST
+        L0: { id = 0; String X = null; int c;
+            L: switch (s.length()) {
+            case 6: X="isEval";id=Id_isEval; break L;
+            case 7: X="getThis";id=Id_getThis; break L;
+            case 8: c=s.charAt(0);
+                if (c=='i') { X="isNative";id=Id_isNative; }
+                else if (c=='t') { X="toString";id=Id_toString; }
+                break L;
+            case 10: X="isToplevel";id=Id_isToplevel; break L;
+            case 11: switch (s.charAt(4)) {
+                case 'i': X="getFileName";id=Id_getFileName; break L;
+                case 't': X="constructor";id=Id_constructor; break L;
+                case 'u': X="getFunction";id=Id_getFunction; break L;
+                case 'y': X="getTypeName";id=Id_getTypeName; break L;
+                } break L;
+            case 13: switch (s.charAt(3)) {
+                case 'E': X="getEvalOrigin";id=Id_getEvalOrigin; break L;
+                case 'L': X="getLineNumber";id=Id_getLineNumber; break L;
+                case 'M': X="getMethodName";id=Id_getMethodName; break L;
+                case 'o': X="isConstructor";id=Id_isConstructor; break L;
+                } break L;
+            case 15: c=s.charAt(3);
+                if (c=='C') { X="getColumnNumber";id=Id_getColumnNumber; }
+                else if (c=='F') { X="getFunctionName";id=Id_getFunctionName; }
+                break L;
+            }
+            if (X!=null && X!=s && !X.equals(s)) id = 0;
+            break L0;
         }
-        if (obj == null) {
-            return NOT_FOUND;
-        }
-        NativeCallSite cs = (NativeCallSite)obj;
-        if ((cs.element == null) || (cs.element.columnNumber < 0)) {
-            return Undefined.instance;
-        }
-        return cs.element.columnNumber;
+// #/generated#
+        return id;
     }
 
-    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
       Id_constructor = 1,
       Id_getThis = 2,
@@ -366,4 +242,5 @@ public class NativeCallSite extends IdScriptableObject
       Id_isConstructor = 14,
       Id_toString = 15,
       MAX_PROTOTYPE_ID = 15;
+// #/string_id_map#
 }

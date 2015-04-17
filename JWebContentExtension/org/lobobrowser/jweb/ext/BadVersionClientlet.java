@@ -1,22 +1,16 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 2 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
-
-    You should have received a copy of the GNU General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either verion 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.jweb.ext;
 
@@ -38,57 +32,61 @@ import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.clientlet.SimpleComponentContent;
 import org.lobobrowser.util.gui.CenterLayout;
 
-
 /**
  * The Class BadVersionClientlet.
  */
 public class BadVersionClientlet implements Clientlet {
-	
-	/** The feature. */
-	private final String feature;
-	
-	/** The required version. */
-	private final String requiredVersion;
 
-	/**
-	 * Instantiates a new bad version clientlet.
-	 *
-	 * @param feature the feature
-	 * @param requiredVersion the required version
-	 */
-	public BadVersionClientlet(String feature, String requiredVersion) {
-		this.feature = feature;
-		this.requiredVersion = requiredVersion;
-	}
+    /** The feature. */
+    private final String feature;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.clientlet.Clientlet#process(org.lobobrowser.clientlet.ClientletContext)
-	 */
-	public void process(ClientletContext context) throws ClientletException {
-		JTextArea textArea = new JTextArea();
-		Border etchedBorder = new EtchedBorder(EtchedBorder.RAISED);
-		Border cborder1 = new CompoundBorder(new EmptyBorder(10, 10, 10, 10),
-				etchedBorder);
-		Border cborder2 = new CompoundBorder(cborder1, new EmptyBorder(10, 10,
-				10, 10));
-		textArea.setBorder(cborder2);
-		textArea.setBackground(new Color(255, 200, 180));
-		textArea.setEditable(false);
-		textArea.setWrapStyleWord(false);
-		textArea.setFont(new Font("Arial", Font.BOLD, 16));
-		textArea.setText("ERROR: A JRE supporting "
-				+ feature
-				+ " is required to process this document"
-				+ (this.requiredVersion != null ? ", that is, JRE "
-						+ this.requiredVersion + ".\r\n" : ".\r\n")
-				+ "The current Java version is "
-				+ System.getProperty("java.version") + ".\r\n");
-		JScrollPane spane = new JScrollPane(textArea);
-		JPanel resultingPanel = new JPanel();
-		resultingPanel.setLayout(CenterLayout.getInstance());
-		resultingPanel.add(spane);
-		ComponentContent content = new SimpleComponentContent(resultingPanel,
-				"Version Error", "");
-		context.setResultingContent(content);
-	}
+    /** The required version. */
+    private final String requiredVersion;
+
+    /**
+     * Instantiates a new bad version clientlet.
+     *
+     * @param feature
+     *            the feature
+     * @param requiredVersion
+     *            the required version
+     */
+    public BadVersionClientlet(String feature, String requiredVersion) {
+        this.feature = feature;
+        this.requiredVersion = requiredVersion;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.clientlet.Clientlet#process(org.lobobrowser.clientlet.
+     * ClientletContext)
+     */
+    @Override
+    public void process(ClientletContext context) throws ClientletException {
+        JTextArea textArea = new JTextArea();
+        Border etchedBorder = new EtchedBorder(EtchedBorder.RAISED);
+        Border cborder1 = new CompoundBorder(new EmptyBorder(10, 10, 10, 10),
+                etchedBorder);
+        Border cborder2 = new CompoundBorder(cborder1, new EmptyBorder(10, 10,
+                10, 10));
+        textArea.setBorder(cborder2);
+        textArea.setBackground(new Color(255, 200, 180));
+        textArea.setEditable(false);
+        textArea.setWrapStyleWord(false);
+        textArea.setFont(new Font("Arial", Font.BOLD, 16));
+        textArea.setText("ERROR: A JRE supporting "
+                + feature
+                + " is required to process this document"
+                + (this.requiredVersion != null ? ", that is, JRE "
+                        + this.requiredVersion + ".\r\n" : ".\r\n")
+                        + "The current Java version is "
+                        + System.getProperty("java.version") + ".\r\n");
+        JScrollPane spane = new JScrollPane(textArea);
+        JPanel resultingPanel = new JPanel();
+        resultingPanel.setLayout(CenterLayout.getInstance());
+        resultingPanel.add(spane);
+        ComponentContent content = new SimpleComponentContent(resultingPanel,
+                "Version Error", "");
+        context.setResultingContent(content);
+    }
 }

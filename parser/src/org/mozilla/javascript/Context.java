@@ -17,11 +17,11 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.HashSet;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 import org.mozilla.javascript.ast.AstRoot;
 import org.mozilla.javascript.ast.ScriptNode;
@@ -29,28 +29,27 @@ import org.mozilla.javascript.debug.DebuggableScript;
 import org.mozilla.javascript.debug.Debugger;
 import org.mozilla.javascript.xml.XMLLib;
 
-
 /**
  * This class represents the runtime context of an executing script.
- * 
+ *
  * Before executing a script, an instance of Context must be created
  * and associated with the thread that will be executing the script.
  * The Context will be used to store information about the executing
  * of the script such as the call stack. Contexts are associated with
  * the current thread  using the {@link #call(ContextAction)}
  * or {@link #enter()} methods.<p>
- * 
+ *
  * Different forms of script execution are supported. Scripts may be
  * evaluated from the source directly, or first compiled and then later
  * executed. Interactive execution is also supported.<p>
- * 
+ *
  * Some aspects of script execution, such as type conversions and
  * object creation, may be accessed directly through methods of
  * Context.
  *
+ * @see Scriptable
  * @author Norris Boyd
  * @author Brendan Eich
- * @see Scriptable
  */
 
 public class Context
@@ -119,7 +118,7 @@ public class Context
     /**
      * Controls behaviour of <tt>Date.prototype.getYear()</tt>.
      * If <tt>hasFeature(FEATURE_NON_ECMA_GET_YEAR)</tt> returns true,
-     * Date.prototype.getYear subtructs 1900 only if 1900 &lt;= date &lt; 2000.
+     * Date.prototype.getYear subtructs 1900 only if 1900 <= date < 2000.
      * The default behavior of {@link #hasFeature(int)} is always to subtruct
      * 1900 as rquired by ECMAScript B.2.4.
      */
@@ -179,12 +178,11 @@ public class Context
      */
     public static final int FEATURE_PARENT_PROTO_PROPERTIES = 5;
 
-        /**
-         * The Constant FEATURE_PARENT_PROTO_PROPRTIES.
-         *
-         * @deprecated In previous releases, this name was given to
-         * FEATURE_PARENT_PROTO_PROPERTIES.
-         */
+    /**
+     * @deprecated In previous releases, this name was given to
+     * FEATURE_PARENT_PROTO_PROPERTIES.
+     */
+    @Deprecated
     public static final int FEATURE_PARENT_PROTO_PROPRTIES = 5;
 
     /**
@@ -293,10 +291,7 @@ public class Context
      */
     public static final int FEATURE_V8_EXTENSIONS = 14;
 
-    /** The Constant languageVersionProperty. */
     public static final String languageVersionProperty = "language version";
-    
-    /** The Constant errorReporterProperty. */
     public static final String errorReporterProperty   = "error reporter";
 
     /**
@@ -317,6 +312,7 @@ public class Context
      * this class, consider using {@link #Context(ContextFactory)} constructor
      * instead in the subclasses' constructors.
      */
+    @Deprecated
     public Context()
     {
         this(ContextFactory.getGlobal());
@@ -325,11 +321,11 @@ public class Context
     /**
      * Creates a new context. Provided as a preferred super constructor for
      * subclasses in place of the deprecated default public constructor.
-     *
      * @param factory the context factory associated with this context (most
      * likely, the one that created the context). Can not be null. The context
      * features are inherited from the factory, and the context will also
      * otherwise use its factory's services.
+     * @throws IllegalArgumentException if factory parameter is null.
      */
     protected Context(ContextFactory factory)
     {
@@ -381,26 +377,19 @@ public class Context
      * is associated with the current thread and returned if
      * the current thread has no associated context and <code>cx</code>
      * is not associated with any other thread.
-     *
      * @param cx a Context to associate with the thread if possible
      * @return a Context associated with the current thread
-     * @see ContextFactory#enterContext(Context)
-     * @see ContextFactory#call(ContextAction)
      * @deprecated use {@link ContextFactory#enterContext(Context)} instead as
      * this method relies on usage of a static singleton "global" ContextFactory.
+     * @see ContextFactory#enterContext(Context)
+     * @see ContextFactory#call(ContextAction)
      */
+    @Deprecated
     public static Context enter(Context cx)
     {
         return enter(cx, ContextFactory.getGlobal());
     }
 
-    /**
-     * Enter.
-     *
-     * @param cx the cx
-     * @param factory the factory
-     * @return the context
-     */
     static final Context enter(Context cx, ContextFactory factory)
     {
         Object helper = VMBridge.instance.getThreadContextHelper();
@@ -462,13 +451,12 @@ public class Context
      * construct new Context instance. The instance will be temporary
      * associated with the thread during call to
      * {@link ContextAction#run(Context)}.
-     *
-     * @param action the action
-     * @return The result of {@link ContextAction#run(Context)}.
      * @deprecated use {@link ContextFactory#call(ContextAction)} instead as
      * this method relies on usage of a static singleton "global"
      * ContextFactory.
+     * @return The result of {@link ContextAction#run(Context)}.
      */
+    @Deprecated
     public static Object call(ContextAction action)
     {
         return call(ContextFactory.getGlobal(), action);
@@ -487,13 +475,6 @@ public class Context
      * It is allowed but not advisable to use null for <tt>factory</tt>
      * argument in which case the global static singleton ContextFactory
      * instance will be used to create new context instances.
-     *
-     * @param factory the factory
-     * @param callable the callable
-     * @param scope the scope
-     * @param thisObj the this obj
-     * @param args the args
-     * @return the object
      * @see ContextFactory#call(ContextAction)
      */
     public static Object call(ContextFactory factory, final Callable callable,
@@ -512,10 +493,6 @@ public class Context
 
     /**
      * The method implements {@link ContextFactory#call(ContextAction)} logic.
-     *
-     * @param factory the factory
-     * @param action the action
-     * @return the object
      */
     static Object call(ContextFactory factory, ContextAction action) {
         Context cx = enter(null, factory);
@@ -528,13 +505,11 @@ public class Context
     }
 
     /**
-     * Adds the context listener.
-     *
-     * @param listener the listener
+     * @deprecated
      * @see ContextFactory#addListener(org.mozilla.javascript.ContextFactory.Listener)
      * @see ContextFactory#getGlobal()
-     * @deprecated 
      */
+    @Deprecated
     public static void addContextListener(ContextListener listener)
     {
         // Special workaround for the debugger
@@ -560,13 +535,11 @@ public class Context
     }
 
     /**
-     * Removes the context listener.
-     *
-     * @param listener the listener
+     * @deprecated
      * @see ContextFactory#removeListener(org.mozilla.javascript.ContextFactory.Listener)
      * @see ContextFactory#getGlobal()
-     * @deprecated 
      */
+    @Deprecated
     public static void removeContextListener(ContextListener listener)
     {
         ContextFactory.getGlobal().addListener(listener);
@@ -574,8 +547,6 @@ public class Context
 
     /**
      * Return {@link ContextFactory} instance used to create this Context.
-     *
-     * @return the factory
      */
     public final ContextFactory getFactory()
     {
@@ -586,8 +557,6 @@ public class Context
      * Checks if this is a sealed Context. A sealed Context instance does not
      * allow to modify any of its properties and will throw an exception
      * on any such attempt.
-     *
-     * @return true, if is sealed
      * @see #seal(Object sealKey)
      */
     public final boolean isSealed()
@@ -604,7 +573,6 @@ public class Context
      * {@link #unseal(Object sealKey)} with the same key unseals
      * the object. If <tt>sealKey</tt> is null, unsealing is no longer possible.
      *
-     * @param sealKey the seal key
      * @see #isSealed()
      * @see #unseal(Object)
      */
@@ -621,7 +589,6 @@ public class Context
      * <tt>sealKey</tt> suplied with the last call to
      * {@link #seal(Object)} or an exception will be thrown.
      *
-     * @param sealKey the seal key
      * @see #isSealed()
      * @see #seal(Object sealKey)
      */
@@ -634,9 +601,6 @@ public class Context
         this.sealKey = null;
     }
 
-    /**
-     * On sealed mutation.
-     */
     static void onSealedMutation()
     {
         throw new IllegalStateException();
@@ -678,12 +642,6 @@ public class Context
         this.version = version;
     }
 
-    /**
-     * Checks if is valid language version.
-     *
-     * @param version the version
-     * @return true, if is valid language version
-     */
     public static boolean isValidLanguageVersion(int version)
     {
         switch (version) {
@@ -702,11 +660,6 @@ public class Context
         return false;
     }
 
-    /**
-     * Check language version.
-     *
-     * @param version the version
-     */
     public static void checkLanguageVersion(int version)
     {
         if (isValidLanguageVersion(version)) {
@@ -746,7 +699,6 @@ public class Context
     /**
      * Get the current error reporter.
      *
-     * @return the error reporter
      * @see org.mozilla.javascript.ErrorReporter
      */
     public final ErrorReporter getErrorReporter()
@@ -760,7 +712,6 @@ public class Context
     /**
      * Change the current error reporter.
      *
-     * @param reporter the reporter
      * @return the previous error reporter
      * @see org.mozilla.javascript.ErrorReporter
      */
@@ -785,7 +736,6 @@ public class Context
      * Get the current locale.  Returns the default locale if none has
      * been set.
      *
-     * @return the locale
      * @see java.util.Locale
      */
 
@@ -799,8 +749,6 @@ public class Context
     /**
      * Set the current locale.
      *
-     * @param loc the loc
-     * @return the locale
      * @see java.util.Locale
      */
     public final Locale setLocale(Locale loc)
@@ -813,11 +761,10 @@ public class Context
 
     /**
      * Register an object to receive notifications when a bound property
-     * has changed.
-     *
-     * @param l the listener
+     * has changed
      * @see java.beans.PropertyChangeEvent
      * @see #removePropertyChangeListener(java.beans.PropertyChangeListener)
+     * @param l the listener
      */
     public final void addPropertyChangeListener(PropertyChangeListener l)
     {
@@ -827,11 +774,10 @@ public class Context
 
     /**
      * Remove an object from the list of objects registered to receive
-     * notification of changes to a bounded property.
-     *
-     * @param l the listener
+     * notification of changes to a bounded property
      * @see java.beans.PropertyChangeEvent
      * @see #addPropertyChangeListener(java.beans.PropertyChangeListener)
+     * @param l the listener
      */
     public final void removePropertyChangeListener(PropertyChangeListener l)
     {
@@ -840,15 +786,14 @@ public class Context
     }
 
     /**
-     * Notify any registered listeners that a bounded property has changed.
-     *
-     * @param property the property
-     * @param oldValue the old value
-     * @param newValue the new value
+     * Notify any registered listeners that a bounded property has changed
      * @see #addPropertyChangeListener(java.beans.PropertyChangeListener)
      * @see #removePropertyChangeListener(java.beans.PropertyChangeListener)
      * @see java.beans.PropertyChangeListener
      * @see java.beans.PropertyChangeEvent
+     * @param  property  the bound property
+     * @param  oldValue  the old value
+     * @param  newValue   the new value
      */
     final void firePropertyChange(String property, Object oldValue,
                                   Object newValue)
@@ -859,14 +804,6 @@ public class Context
         }
     }
 
-    /**
-     * Fire property change impl.
-     *
-     * @param listeners the listeners
-     * @param property the property
-     * @param oldValue the old value
-     * @param newValue the new value
-     */
     private void firePropertyChangeImpl(Object listeners, String property,
                                         Object oldValue, Object newValue)
     {
@@ -917,12 +854,6 @@ public class Context
         Context.reportWarning(message, filename, linep[0], null, 0);
     }
 
-    /**
-     * Report warning.
-     *
-     * @param message the message
-     * @param t the t
-     */
     public static void reportWarning(String message, Throwable t)
     {
         int[] linep = { 0 };
@@ -1001,25 +932,12 @@ public class Context
         }
     }
 
-    /**
-     * Report runtime error0.
-     *
-     * @param messageId the message id
-     * @return the evaluator exception
-     */
     static EvaluatorException reportRuntimeError0(String messageId)
     {
         String msg = ScriptRuntime.getMessage0(messageId);
         return reportRuntimeError(msg);
     }
 
-    /**
-     * Report runtime error1.
-     *
-     * @param messageId the message id
-     * @param arg1 the arg1
-     * @return the evaluator exception
-     */
     static EvaluatorException reportRuntimeError1(String messageId,
                                                   Object arg1)
     {
@@ -1027,14 +945,6 @@ public class Context
         return reportRuntimeError(msg);
     }
 
-    /**
-     * Report runtime error2.
-     *
-     * @param messageId the message id
-     * @param arg1 the arg1
-     * @param arg2 the arg2
-     * @return the evaluator exception
-     */
     static EvaluatorException reportRuntimeError2(String messageId,
                                                   Object arg1, Object arg2)
     {
@@ -1042,15 +952,6 @@ public class Context
         return reportRuntimeError(msg);
     }
 
-    /**
-     * Report runtime error3.
-     *
-     * @param messageId the message id
-     * @param arg1 the arg1
-     * @param arg2 the arg2
-     * @param arg3 the arg3
-     * @return the evaluator exception
-     */
     static EvaluatorException reportRuntimeError3(String messageId,
                                                   Object arg1, Object arg2,
                                                   Object arg3)
@@ -1059,16 +960,6 @@ public class Context
         return reportRuntimeError(msg);
     }
 
-    /**
-     * Report runtime error4.
-     *
-     * @param messageId the message id
-     * @param arg1 the arg1
-     * @param arg2 the arg2
-     * @param arg3 the arg3
-     * @param arg4 the arg4
-     * @return the evaluator exception
-     */
     static EvaluatorException reportRuntimeError4(String messageId,
                                                   Object arg1, Object arg2,
                                                   Object arg3, Object arg4)
@@ -1082,7 +973,6 @@ public class Context
      * Report a runtime error using the error reporter for the current thread.
      *
      * @param message the error message to report
-     * @return the evaluator exception
      * @see org.mozilla.javascript.ErrorReporter
      */
     public static EvaluatorException reportRuntimeError(String message)
@@ -1112,6 +1002,33 @@ public class Context
     }
 
     /**
+     * Initialize the standard objects, leaving out those that offer access directly
+     * to Java classes. This sets up "scope" to have access to all the standard
+     * JavaScript classes, but does not create global objects for any top-level
+     * Java packages. In addition, the "Packages," "JavaAdapter," and
+     * "JavaImporter" classes, and the "getClass" function, are not
+     * initialized.
+     *
+     * The result of this function is a scope that may be safely used in a "sandbox"
+     * environment where it is not desirable to give access to Java code from JavaScript.
+     *
+     * Creates instances of the standard objects and their constructors
+     * (Object, String, Number, Date, etc.), setting up 'scope' to act
+     * as a global object as in ECMA 15.1.<p>
+     *
+     * This method must be called to initialize a scope before scripts
+     * can be evaluated in that scope.<p>
+     *
+     * This method does not affect the Context it is called upon.
+     *
+     * @return the initialized scope
+     */
+    public final ScriptableObject initSafeStandardObjects()
+    {
+        return initSafeStandardObjects(null, false);
+    }
+
+    /**
      * Initialize the standard objects.
      *
      * Creates instances of the standard objects and their constructors
@@ -1132,6 +1049,37 @@ public class Context
     public final Scriptable initStandardObjects(ScriptableObject scope)
     {
         return initStandardObjects(scope, false);
+    }
+
+    /**
+     * Initialize the standard objects, leaving out those that offer access directly
+     * to Java classes. This sets up "scope" to have access to all the standard
+     * JavaScript classes, but does not create global objects for any top-level
+     * Java packages. In addition, the "Packages," "JavaAdapter," and
+     * "JavaImporter" classes, and the "getClass" function, are not
+     * initialized.
+     *
+     * The result of this function is a scope that may be safely used in a "sandbox"
+     * environment where it is not desirable to give access to Java code from JavaScript.
+     *
+     * Creates instances of the standard objects and their constructors
+     * (Object, String, Number, Date, etc.), setting up 'scope' to act
+     * as a global object as in ECMA 15.1.<p>
+     *
+     * This method must be called to initialize a scope before scripts
+     * can be evaluated in that scope.<p>
+     *
+     * This method does not affect the Context it is called upon.
+     *
+     * @param scope the scope to initialize, or null, in which case a new
+     *        object will be created to serve as the scope
+     * @return the initialized scope. The method returns the value of the scope
+     *         argument if it is not null or newly allocated scope object which
+     *         is an instance {@link ScriptableObject}.
+     */
+    public final Scriptable initSafeStandardObjects(ScriptableObject scope)
+    {
+        return initSafeStandardObjects(scope, false);
     }
 
     /**
@@ -1168,9 +1116,48 @@ public class Context
     }
 
     /**
-     * Get the singleton object that represents the JavaScript Undefined value.
+     * Initialize the standard objects, leaving out those that offer access directly
+     * to Java classes. This sets up "scope" to have access to all the standard
+     * JavaScript classes, but does not create global objects for any top-level
+     * Java packages. In addition, the "Packages," "JavaAdapter," and
+     * "JavaImporter" classes, and the "getClass" function, are not
+     * initialized.
      *
-     * @return the undefined value
+     * The result of this function is a scope that may be safely used in a "sandbox"
+     * environment where it is not desirable to give access to Java code from JavaScript.
+     *
+     * Creates instances of the standard objects and their constructors
+     * (Object, String, Number, Date, etc.), setting up 'scope' to act
+     * as a global object as in ECMA 15.1.<p>
+     *
+     * This method must be called to initialize a scope before scripts
+     * can be evaluated in that scope.<p>
+     *
+     * This method does not affect the Context it is called upon.<p>
+     *
+     * This form of the method also allows for creating "sealed" standard
+     * objects. An object that is sealed cannot have properties added, changed,
+     * or removed. This is useful to create a "superglobal" that can be shared
+     * among several top-level objects. Note that sealing is not allowed in
+     * the current ECMA/ISO language specification, but is likely for
+     * the next version.
+     *
+     * @param scope the scope to initialize, or null, in which case a new
+     *        object will be created to serve as the scope
+     * @param sealed whether or not to create sealed standard objects that
+     *        cannot be modified.
+     * @return the initialized scope. The method returns the value of the scope
+     *         argument if it is not null or newly allocated scope object.
+     * @since 1.7.6
+     */
+    public ScriptableObject initSafeStandardObjects(ScriptableObject scope,
+                                                    boolean sealed)
+    {
+        return ScriptRuntime.initSafeStandardObjects(this, scope, sealed);
+    }
+
+    /**
+     * Get the singleton object that represents the JavaScript Undefined value.
      */
     public static Object getUndefinedValue()
     {
@@ -1243,11 +1230,9 @@ public class Context
      * Caller must be prepared to catch a ContinuationPending exception
      * and resume execution by calling
      * {@link #resumeContinuation(Object, Scriptable, Object)}.
-     *
      * @param script The script to execute. Script must have been compiled
      *      with interpreted mode (optimization level -1)
      * @param scope The scope to execute the script against
-     * @return the object
      * @throws ContinuationPending if the script calls a function that results
      *      in a call to {@link #captureContinuation()}
      * @since 1.7 Release 2
@@ -1272,12 +1257,10 @@ public class Context
      * Caller must be prepared to catch a ContinuationPending exception
      * and resume execution by calling
      * {@link #resumeContinuation(Object, Scriptable, Object)}.
-     *
      * @param function The function to call. The function must have been
      *      compiled with interpreted mode (optimization level -1)
      * @param scope The scope to execute the script against
      * @param args The arguments for the function
-     * @return the object
      * @throws ContinuationPending if the script calls a function that results
      *      in a call to {@link #captureContinuation()}
      * @since 1.7 Release 2
@@ -1327,13 +1310,10 @@ public class Context
      * Execution of the script will either conclude normally and the
      * result returned, another continuation will be captured and
      * thrown, or the script will terminate abnormally and throw an exception.
-     *
      * @param continuation The value returned by
      * {@link ContinuationPending#getContinuation()}
-     * @param scope the scope
      * @param functionResult This value will appear to the code being resumed
      *      as the result of the function that captured the continuation
-     * @return the object
      * @throws ContinuationPending if another continuation is captured before
      *      the code terminates
      * @since 1.7 Release 2
@@ -1388,19 +1368,11 @@ public class Context
     }
 
     /**
-     * Compile reader.
-     *
-     * @param scope the scope
-     * @param in the in
-     * @param sourceName the source name
-     * @param lineno the lineno
-     * @param securityDomain the security domain
-     * @return the script
-     * @throws IOException Signals that an I/O exception has occurred.
+     * @deprecated
      * @see #compileReader(Reader in, String sourceName, int lineno,
      *                     Object securityDomain)
-     * @deprecated 
      */
+    @Deprecated
     public final Script compileReader(Scriptable scope, Reader in,
                                       String sourceName, int lineno,
                                       Object securityDomain)
@@ -1423,8 +1395,8 @@ public class Context
      *        implementations that don't care about security, this value
      *        may be null.
      * @return a script that may later be executed
-     * @see org.mozilla.javascript.Script
      * @exception IOException if an IOException was generated by the Reader
+     * @see org.mozilla.javascript.Script
      */
     public final Script compileReader(Reader in, String sourceName,
                                       int lineno, Object securityDomain)
@@ -1466,17 +1438,6 @@ public class Context
                              securityDomain);
     }
 
-    /**
-     * Compile string.
-     *
-     * @param source the source
-     * @param compiler the compiler
-     * @param compilationErrorReporter the compilation error reporter
-     * @param sourceName the source name
-     * @param lineno the lineno
-     * @param securityDomain the security domain
-     * @return the script
-     */
     final Script compileString(String source,
                                Evaluator compiler,
                                ErrorReporter compilationErrorReporter,
@@ -1518,18 +1479,6 @@ public class Context
                                securityDomain);
     }
 
-    /**
-     * Compile function.
-     *
-     * @param scope the scope
-     * @param source the source
-     * @param compiler the compiler
-     * @param compilationErrorReporter the compilation error reporter
-     * @param sourceName the source name
-     * @param lineno the lineno
-     * @param securityDomain the security domain
-     * @return the function
-     */
     final Function compileFunction(Scriptable scope, String source,
                                    Evaluator compiler,
                                    ErrorReporter compilationErrorReporter,
@@ -1789,15 +1738,10 @@ public class Context
     }
 
     /**
-     * To object.
-     *
-     * @param value the value
-     * @param scope the scope
-     * @param staticType the static type
-     * @return the scriptable
+     * @deprecated
      * @see #toObject(Object, Scriptable)
-     * @deprecated 
      */
+    @Deprecated
     public static Scriptable toObject(Object value, Scriptable scope,
                                       Class<?> staticType)
     {
@@ -1864,17 +1808,13 @@ public class Context
     }
 
     /**
-     * To type.
-     *
-     * @param value the value
-     * @param desiredType the desired type
-     * @return the object
+     * @deprecated
+     * @see #jsToJava(Object, Class)
      * @throws IllegalArgumentException if the conversion cannot be performed.
      *         Note that {@link #jsToJava(Object, Class)} throws
      *         {@link EvaluatorException} instead.
-     * @see #jsToJava(Object, Class)
-     * @deprecated 
      */
+    @Deprecated
     public static Object toType(Object value, Class<?> desiredType)
         throws IllegalArgumentException
     {
@@ -1902,9 +1842,8 @@ public class Context
      * throw Context.throwAsScriptRuntimeEx(ex);
      * </pre>
      * to indicate that code after the method is unreachable.
-     *
-     * @param e the e
-     * @return the runtime exception
+     * @throws EvaluatorException
+     * @throws EcmaError
      */
     public static RuntimeException throwAsScriptRuntimeEx(Throwable e)
     {
@@ -1928,8 +1867,6 @@ public class Context
 
     /**
      * Tell whether debug information is being generated.
-     *
-     * @return true, if is generating debug
      * @since 1.3
      */
     public final boolean isGeneratingDebug()
@@ -1942,8 +1879,6 @@ public class Context
      * <p>
      * Setting the generation of debug information on will set the
      * optimization level to zero.
-     *
-     * @param generatingDebug the new generating debug
      * @since 1.3
      */
     public final void setGeneratingDebug(boolean generatingDebug)
@@ -1957,8 +1892,6 @@ public class Context
 
     /**
      * Tell whether source information is being generated.
-     *
-     * @return true, if is generating source
      * @since 1.3
      */
     public final boolean isGeneratingSource()
@@ -1974,8 +1907,6 @@ public class Context
      * the body of the function.
      * Note that code generated without source is not fully ECMA
      * conformant.
-     *
-     * @param generatingSource the new generating source
      * @since 1.3
      */
     public final void setGeneratingSource(boolean generatingSource)
@@ -1989,9 +1920,8 @@ public class Context
      * <p>
      * The optimization level is expressed as an integer between -1 and
      * 9.
-     *
-     * @return the optimization level
      * @since 1.3
+     *
      */
     public final int getOptimizationLevel()
     {
@@ -2028,22 +1958,11 @@ public class Context
         this.optimizationLevel = optimizationLevel;
     }
 
-    /**
-     * Checks if is valid optimization level.
-     *
-     * @param optimizationLevel the optimization level
-     * @return true, if is valid optimization level
-     */
     public static boolean isValidOptimizationLevel(int optimizationLevel)
     {
         return -1 <= optimizationLevel && optimizationLevel <= 9;
     }
 
-    /**
-     * Check optimization level.
-     *
-     * @param optimizationLevel the optimization level
-     */
     public static void checkOptimizationLevel(int optimizationLevel)
     {
         if (isValidOptimizationLevel(optimizationLevel)) {
@@ -2085,6 +2004,9 @@ public class Context
      * setting helps prevent such situations.
      *
      * @param max the new maximum interpreter stack depth
+     * @throws IllegalStateException if this context's optimization level is not
+     * -1
+     * @throws IllegalArgumentException if the new depth is not at least 1
      */
     public final void setMaximumInterpreterStackDepth(int max)
     {
@@ -2103,8 +2025,9 @@ public class Context
      * <p> SecurityController may only be set if it is currently null
      * and {@link SecurityController#hasGlobal()} is <tt>false</tt>.
      * Otherwise a SecurityException is thrown.
-     *
      * @param controller a SecurityController object
+     * @throws SecurityException if there is already a SecurityController
+     *         object for this Context or globally installed.
      * @see SecurityController#initGlobal(SecurityController controller)
      * @see SecurityController#hasGlobal()
      */
@@ -2125,8 +2048,9 @@ public class Context
      * Set the LiveConnect access filter for this context.
      * <p> {@link ClassShutter} may only be set if it is currently null.
      * Otherwise a SecurityException is thrown.
-     *
      * @param shutter a ClassShutter object
+     * @throws SecurityException if there is already a ClassShutter
+     *         object for this Context
      */
     public synchronized final void setClassShutter(ClassShutter shutter)
     {
@@ -2140,41 +2064,16 @@ public class Context
         hasClassShutter = true;
     }
 
-    /**
-     * Gets the class shutter.
-     *
-     * @return the class shutter
-     */
     final synchronized ClassShutter getClassShutter()
     {
         return classShutter;
     }
 
-    /**
-     * The Interface ClassShutterSetter.
-     */
     public interface ClassShutterSetter {
-        
-        /**
-         * Sets the class shutter.
-         *
-         * @param shutter the new class shutter
-         */
         public void setClassShutter(ClassShutter shutter);
-        
-        /**
-         * Gets the class shutter.
-         *
-         * @return the class shutter
-         */
         public ClassShutter getClassShutter();
     }
 
-    /**
-     * Gets the class shutter setter.
-     *
-     * @return the class shutter setter
-     */
     public final synchronized ClassShutterSetter getClassShutterSetter() {
         if (hasClassShutter)
             return null;
@@ -2239,13 +2138,11 @@ public class Context
     }
 
     /**
-     * Sets the caching enabled.
-     *
-     * @param cachingEnabled the new caching enabled
+     * @deprecated
      * @see ClassCache#get(Scriptable)
      * @see ClassCache#setCachingEnabled(boolean)
-     * @deprecated 
      */
+    @Deprecated
     public static void setCachingEnabled(boolean cachingEnabled)
     {
     }
@@ -2255,8 +2152,6 @@ public class Context
      * <p>
      * The WrapFactory allows custom object wrapping behavior for
      * Java object manipulated with JavaScript.
-     *
-     * @param wrapFactory the new wrap factory
      * @see WrapFactory
      * @since 1.5 Release 4
      */
@@ -2269,8 +2164,6 @@ public class Context
 
     /**
      * Return the current WrapFactory, or null if none is defined.
-     *
-     * @return the wrap factory
      * @see WrapFactory
      * @since 1.5 Release 4
      */
@@ -2318,9 +2211,6 @@ public class Context
      * Return DebuggableScript instance if any associated with the script.
      * If callable supports DebuggableScript implementation, the method
      * returns it. Otherwise null is returned.
-     *
-     * @param script the script
-     * @return the debuggable view
      */
     public static DebuggableScript getDebuggableView(Script script)
     {
@@ -2384,8 +2274,6 @@ public class Context
      * otherwise each time the run-time executes at least the threshold value
      * of script instructions, <code>observeInstructionCount()</code> will
      * be called.
-     *
-     * @return the instruction observer threshold
      */
     public final int getInstructionObserverThreshold()
     {
@@ -2393,12 +2281,12 @@ public class Context
     }
 
     /**
-     * <p>Set threshold of executed instructions counter that triggers call to
+     * Set threshold of executed instructions counter that triggers call to
      * <code>observeInstructionCount()</code>.
      * When the threshold is zero, instruction counting is disabled,
      * otherwise each time the run-time executes at least the threshold value
      * of script instructions, <code>observeInstructionCount()</code> will
-     * be called.</p>
+     * be called.<p/>
      * Note that the meaning of "instruction" is not guaranteed to be
      * consistent between compiled and interpretive modes: executing a given
      * script or function in the different modes will result in different
@@ -2446,6 +2334,7 @@ public class Context
      *
      * @param instructionCount amount of script instruction executed since
      * last call to <code>observeInstructionCount</code>
+     * @throws Error to terminate the script
      * @see #setOptimizationLevel(int)
      */
     protected void observeInstructionCount(int instructionCount)
@@ -2458,9 +2347,6 @@ public class Context
      * Create class loader for generated classes.
      * The method calls {@link ContextFactory#createClassLoader(ClassLoader)}
      * using the result of {@link #getFactory()}.
-     *
-     * @param parent the parent
-     * @return the generated class loader
      */
     public GeneratedClassLoader createClassLoader(ClassLoader parent)
     {
@@ -2468,11 +2354,6 @@ public class Context
         return f.createClassLoader(parent);
     }
 
-    /**
-     * Gets the application class loader.
-     *
-     * @return the application class loader
-     */
     public final ClassLoader getApplicationClassLoader()
     {
         if (applicationClassLoader == null) {
@@ -2505,11 +2386,6 @@ public class Context
         return applicationClassLoader;
     }
 
-    /**
-     * Sets the application class loader.
-     *
-     * @param loader the new application class loader
-     */
     public final void setApplicationClassLoader(ClassLoader loader)
     {
         if (sealed) onSealedMutation();
@@ -2525,11 +2401,7 @@ public class Context
         applicationClassLoader = loader;
     }
 
-    /**
-     * ******** end of API *********.
-     *
-     * @return the context
-     */
+    /********** end of API **********/
 
     /**
      * Internal method that reports an error for missing calls to
@@ -2545,21 +2417,6 @@ public class Context
         return cx;
     }
 
-    /**
-     * Compile impl.
-     *
-     * @param scope the scope
-     * @param sourceReader the source reader
-     * @param sourceString the source string
-     * @param sourceName the source name
-     * @param lineno the lineno
-     * @param securityDomain the security domain
-     * @param returnFunction the return function
-     * @param compiler the compiler
-     * @param compilationErrorReporter the compilation error reporter
-     * @return the object
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private Object compileImpl(Scriptable scope,
                                Reader sourceReader, String sourceString,
                                String sourceName, int lineno,
@@ -2652,13 +2509,6 @@ public class Context
         return result;
     }
 
-    /**
-     * Notify debugger_r.
-     *
-     * @param cx the cx
-     * @param dscript the dscript
-     * @param debugSource the debug source
-     */
     private static void notifyDebugger_r(Context cx, DebuggableScript dscript,
                                          String debugSource)
     {
@@ -2668,19 +2518,11 @@ public class Context
         }
     }
 
-    /** The codegen class. */
     private static Class<?> codegenClass = Kit.classOrNull(
                              "org.mozilla.javascript.optimizer.Codegen");
-    
-    /** The interpreter class. */
     private static Class<?> interpreterClass = Kit.classOrNull(
                              "org.mozilla.javascript.Interpreter");
 
-    /**
-     * Creates the compiler.
-     *
-     * @return the evaluator
-     */
     private Evaluator createCompiler()
     {
         Evaluator result = null;
@@ -2693,22 +2535,11 @@ public class Context
         return result;
     }
 
-    /**
-     * Creates the interpreter.
-     *
-     * @return the evaluator
-     */
     static Evaluator createInterpreter()
     {
         return (Evaluator)Kit.newInstanceOrNull(interpreterClass);
     }
 
-    /**
-     * Gets the source position from stack.
-     *
-     * @param linep the linep
-     * @return the source position from stack
-     */
     static String getSourcePositionFromStack(int[] linep)
     {
         Context cx = getCurrentContext();
@@ -2738,11 +2569,6 @@ public class Context
         return null;
     }
 
-    /**
-     * Gets the reg exp proxy.
-     *
-     * @return the reg exp proxy
-     */
     RegExpProxy getRegExpProxy()
     {
         if (regExpProxy == null) {
@@ -2755,23 +2581,13 @@ public class Context
         return regExpProxy;
     }
 
-    /**
-     * Checks if is version ecm a1.
-     *
-     * @return true, if is version ecm a1
-     */
     final boolean isVersionECMA1()
     {
         return version == VERSION_DEFAULT || version >= VERSION_1_3;
     }
 
 // The method must NOT be public or protected
-    /**
- * Gets the security controller.
- *
- * @return the security controller
- */
-SecurityController getSecurityController()
+    SecurityController getSecurityController()
     {
         SecurityController global = SecurityController.global();
         if (global != null) {
@@ -2780,11 +2596,6 @@ SecurityController getSecurityController()
         return securityController;
     }
 
-    /**
-     * Checks if is generating debug changed.
-     *
-     * @return true, if is generating debug changed
-     */
     public final boolean isGeneratingDebugChanged()
     {
         return generatingDebugChanged;
@@ -2830,100 +2641,45 @@ SecurityController getSecurityController()
             activationNames.remove(name);
     }
 
-    /** The implementation version. */
     private static String implementationVersion;
 
-    /** The factory. */
     private final ContextFactory factory;
-    
-    /** The sealed. */
     private boolean sealed;
-    
-    /** The seal key. */
     private Object sealKey;
 
-    /** The top call scope. */
     Scriptable topCallScope;
-    
-    /** The is continuations top call. */
     boolean isContinuationsTopCall;
-    
-    /** The current activation call. */
     NativeCall currentActivationCall;
-    
-    /** The cached xml lib. */
     XMLLib cachedXMLLib;
-    
-    /** The type error thrower. */
     BaseFunction typeErrorThrower;
 
     // for Objects, Arrays to tag themselves as being printed out,
     // so they don't print themselves out recursively.
     // Use ObjToIntMap instead of java.util.HashSet for JDK 1.1 compatibility
-    /** The iterating. */
     ObjToIntMap iterating;
 
-    /** The interpreter security domain. */
     Object interpreterSecurityDomain;
 
-    /** The version. */
     int version;
 
-    /** The security controller. */
     private SecurityController securityController;
-    
-    /** The has class shutter. */
     private boolean hasClassShutter;
-    
-    /** The class shutter. */
     private ClassShutter classShutter;
-    
-    /** The error reporter. */
     private ErrorReporter errorReporter;
-    
-    /** The reg exp proxy. */
     RegExpProxy regExpProxy;
-    
-    /** The locale. */
     private Locale locale;
-    
-    /** The generating debug. */
     private boolean generatingDebug;
-    
-    /** The generating debug changed. */
     private boolean generatingDebugChanged;
-    
-    /** The generating source. */
     private boolean generatingSource=true;
-    
-    /** The use dynamic scope. */
     boolean useDynamicScope;
-    
-    /** The optimization level. */
     private int optimizationLevel;
-    
-    /** The maximum interpreter stack depth. */
     private int maximumInterpreterStackDepth;
-    
-    /** The wrap factory. */
     private WrapFactory wrapFactory;
-    
-    /** The debugger. */
     Debugger debugger;
-    
-    /** The debugger data. */
     private Object debuggerData;
-    
-    /** The enter count. */
     private int enterCount;
-    
-    /** The property listeners. */
     private Object propertyListeners;
-    
-    /** The thread local map. */
     private Map<Object,Object> threadLocalMap;
-    
-    /** The application class loader. */
     private ClassLoader applicationClassLoader;
 
     /**
@@ -2933,34 +2689,25 @@ SecurityController getSecurityController()
     Set<String> activationNames;
 
     // For the interpreter to store the last frame for error reports etc.
-    /** The last interpreter frame. */
     Object lastInterpreterFrame;
 
     // For the interpreter to store information about previous invocations
     // interpreter invocations
-    /** The previous interpreter invocations. */
     ObjArray previousInterpreterInvocations;
 
     // For instruction counting (interpreter only)
-    /** The instruction count. */
     int instructionCount;
-    
-    /** The instruction threshold. */
     int instructionThreshold;
 
     // It can be used to return the second index-like result from function
-    /** The scratch index. */
     int scratchIndex;
 
     // It can be used to return the second uint32 result from function
-    /** The scratch uint32. */
     long scratchUint32;
 
     // It can be used to return the second Scriptable result from function
-    /** The scratch scriptable. */
     Scriptable scratchScriptable;
 
     // Generate an observer count on compiled code
-    /** The generate observer count. */
     public boolean generateObserverCount = false;
 }

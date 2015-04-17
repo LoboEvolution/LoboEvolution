@@ -6,16 +6,15 @@
 
 package org.mozilla.javascript.ast;
 
+import org.mozilla.javascript.Kit;
+import org.mozilla.javascript.Node;
+import org.mozilla.javascript.Token;
+
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.mozilla.javascript.Kit;
-import org.mozilla.javascript.Node;
-import org.mozilla.javascript.Token;
-
 
 /**
  * Base class for AST node types.  The goal of the AST is to represent the
@@ -56,24 +55,18 @@ import org.mozilla.javascript.Token;
  * elements that are always set.  Property lists are intended for user-defined
  * annotations to the tree.  The Rhino code generator acts as a client and
  * uses node properties extensively.  You are welcome to use the property-list
- * API for anything your client needs.
+ * API for anything your client needs.<p>
  *
  * This hierarchy does not have separate branches for expressions and
  * statements, as the distinction in JavaScript is not as clear-cut as in
- * Java or C++.
+ * Java or C++. <p>
  */
 public abstract class AstNode extends Node implements Comparable<AstNode> {
 
-    /** The position. */
     protected int position = -1;
-    
-    /** The length. */
     protected int length = 1;
-    
-    /** The parent. */
     protected AstNode parent;
 
-    /** The operator names. */
     private static Map<Integer,String> operatorNames =
             new HashMap<Integer,String>();
 
@@ -126,38 +119,25 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
         operatorNames.put(Token.VOID, "void");
     }
 
-    /**
-     * The Class PositionComparator.
-     */
     public static class PositionComparator implements Comparator<AstNode>, Serializable {
-        
-        /** The Constant serialVersionUID. */
         private static final long serialVersionUID = 1L;
 
         /**
          * Sorts nodes by (relative) start position.  The start positions are
          * relative to their parent, so this comparator is only meaningful for
          * comparing siblings.
-         *
-         * @param n1 the n1
-         * @param n2 the n2
-         * @return the int
          */
         public int compare(AstNode n1, AstNode n2) {
             return n1.position - n2.position;
         }
     }
 
-    /**
-     * Instantiates a new ast node.
-     */
     public AstNode() {
         super(Token.ERROR);
     }
 
     /**
-     * Constructs a new AstNode.
-     *
+     * Constructs a new AstNode
      * @param pos the start position
      */
     public AstNode(int pos) {
@@ -166,8 +146,7 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     }
 
     /**
-     * Constructs a new AstNode.
-     *
+     * Constructs a new AstNode
      * @param pos the start position
      * @param len the number of characters spanned by the node in the source
      * text
@@ -179,18 +158,14 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     }
 
     /**
-     * Returns relative position in parent.
-     *
-     * @return the position
+     * Returns relative position in parent
      */
     public int getPosition() {
         return position;
     }
 
     /**
-     * Sets relative position in parent.
-     *
-     * @param position the new position
+     * Sets relative position in parent
      */
     public void setPosition(int position) {
         this.position = position;
@@ -200,8 +175,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
      * Returns the absolute document position of the node.
      * Computes it by adding the node's relative position
      * to the relative positions of all its parents.
-     *
-     * @return the absolute position
      */
     public int getAbsolutePosition() {
         int pos = position;
@@ -214,18 +187,14 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     }
 
     /**
-     * Returns node length.
-     *
-     * @return the length
+     * Returns node length
      */
     public int getLength() {
         return length;
     }
 
     /**
-     * Sets node length.
-     *
-     * @param length the new length
+     * Sets node length
      */
     public void setLength(int length) {
         this.length = length;
@@ -234,9 +203,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     /**
      * Sets the node start and end positions.
      * Computes the length as ({@code end} - {@code position}).
-     *
-     * @param position the position
-     * @param end the end
      */
     public void setBounds(int position, int end) {
         setPosition(position);
@@ -255,9 +221,7 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     }
 
     /**
-     * Returns the node parent, or {@code null} if it has none.
-     *
-     * @return the parent
+     * Returns the node parent, or {@code null} if it has none
      */
     public AstNode getParent() {
         return parent;
@@ -289,8 +253,8 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
      * Sets the parent of the child to this node, and fixes up
      * the start position of the child to be relative to this node.
      * Sets the length of this node to include the new child.
-     *
      * @param kid the child
+     * @throws IllegalArgumentException if kid is {@code null}
      */
     public void addChild(AstNode kid) {
         assertNotNull(kid);
@@ -316,7 +280,7 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     /**
      * Emits source code for this node.  Callee is responsible for calling this
      * function recursively on children, incrementing indent as appropriate.<p>
-     * 
+     *
      * Note: if the parser was in error-recovery mode, some AST nodes may have
      * {@code null} children that are expected to be non-{@code null}
      * when no errors are present.  In this situation, the behavior of the
@@ -326,14 +290,11 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
      *
      * @param depth the current recursion depth, typically beginning at 0
      * when called on the root node.
-     * @return the string
      */
     public abstract String toSource(int depth);
 
     /**
      * Prints the source indented to depth 0.
-     *
-     * @return the string
      */
     public String toSource() {
         return this.toSource(0);
@@ -341,9 +302,7 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
 
     /**
      * Constructs an indentation string.
-     *
      * @param indent the number of indentation steps
-     * @return the string
      */
     public String makeIndent(int indent) {
         StringBuilder sb = new StringBuilder();
@@ -356,8 +315,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     /**
      * Returns a short, descriptive name for the node, such as
      * "ArrayComprehension".
-     *
-     * @return the string
      */
     public String shortName() {
         String classname = getClass().getName();
@@ -397,9 +354,7 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     public abstract void visit(NodeVisitor visitor);
 
     // subclasses with potential side effects should override this
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Node#hasSideEffects()
-     */
+    @Override
     public boolean hasSideEffects()
     {
         switch (getType()) {
@@ -479,8 +434,8 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
 
     /**
      * Bounces an IllegalArgumentException up if arg is {@code null}.
-     *
      * @param arg any method argument
+     * @throws IllegalArgumentException if the argument is {@code null}
      */
     protected void assertNotNull(Object arg) {
         if (arg == null)
@@ -489,8 +444,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
 
     /**
      * Prints a comma-separated item list into a {@link StringBuilder}.
-     *
-     * @param <T> the generic type
      * @param items a list to print
      * @param sb a {@link StringBuilder} into which to print
      */
@@ -509,10 +462,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     }
 
     /**
-     * Code bug.
-     *
-     * @return the runtime exception
-     * @throws RuntimeException the runtime exception
      * @see Kit#codeBug
      */
     public static RuntimeException codeBug()
@@ -594,39 +543,16 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
         return parent == null ? 0 : 1 + parent.depth();
     }
 
-    /**
-     * The Class DebugPrintVisitor.
-     */
     protected static class DebugPrintVisitor implements NodeVisitor {
-        
-        /** The buffer. */
         private StringBuilder buffer;
-        
-        /** The Constant DEBUG_INDENT. */
         private static final int DEBUG_INDENT = 2;
-        
-        /**
-         * Instantiates a new debug print visitor.
-         *
-         * @param buf the buf
-         */
         public DebugPrintVisitor(StringBuilder buf) {
             buffer = buf;
         }
-        
-        /* (non-Javadoc)
-         * @see java.lang.Object#toString()
-         */
+        @Override
         public String toString() {
             return buffer.toString();
         }
-        
-        /**
-         * Make indent.
-         *
-         * @param depth the depth
-         * @return the string
-         */
         private String makeIndent(int depth) {
             StringBuilder sb = new StringBuilder(DEBUG_INDENT * depth);
             for (int i = 0; i < (DEBUG_INDENT * depth); i++) {
@@ -634,10 +560,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
             }
             return sb.toString();
         }
-        
-        /* (non-Javadoc)
-         * @see org.mozilla.javascript.ast.NodeVisitor#visit(org.mozilla.javascript.ast.AstNode)
-         */
         public boolean visit(AstNode node) {
             int tt = node.getType();
             String name = Token.typeToName(tt);

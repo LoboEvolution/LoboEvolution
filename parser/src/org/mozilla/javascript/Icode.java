@@ -6,13 +6,11 @@
 
 package org.mozilla.javascript;
 
-
 /**
- * Additional interpreter-specific codes.
+ * Additional interpreter-specific codes
  */
 abstract class Icode {
 
-    /** The Constant MIN_ICODE. */
     static final int
 
     // delete operator used on a name
@@ -140,12 +138,6 @@ abstract class Icode {
        // Last icode
         MIN_ICODE                       = -64;
 
-    /**
-     * Bytecode name.
-     *
-     * @param bytecode the bytecode
-     * @return the string
-     */
     static String bytecodeName(int bytecode)
     {
         if (!validBytecode(bytecode)) {
@@ -231,35 +223,17 @@ abstract class Icode {
         throw new IllegalStateException(String.valueOf(bytecode));
     }
 
-    /**
-     * Valid icode.
-     *
-     * @param icode the icode
-     * @return true, if successful
-     */
     static boolean validIcode(int icode)
     {
         return MIN_ICODE <= icode && icode <= 0;
     }
 
-    /**
-     * Valid token code.
-     *
-     * @param token the token
-     * @return true, if successful
-     */
     static boolean validTokenCode(int token)
     {
         return Token.FIRST_BYTECODE_TOKEN <= token
                && token <= Token.LAST_BYTECODE_TOKEN;
     }
 
-    /**
-     * Valid bytecode.
-     *
-     * @param bytecode the bytecode
-     * @return true, if successful
-     */
     static boolean validBytecode(int bytecode)
     {
         return validIcode(bytecode) || validTokenCode(bytecode);

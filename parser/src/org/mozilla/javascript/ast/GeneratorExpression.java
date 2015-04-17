@@ -8,67 +8,37 @@ package org.mozilla.javascript.ast;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.mozilla.javascript.Token;
 
-
 /**
- * The Class GeneratorExpression.
  */
 public class GeneratorExpression extends Scope {
     
-    /** The result. */
     private AstNode result;
-    
-    /** The loops. */
     private List<GeneratorExpressionLoop> loops =
         new ArrayList<GeneratorExpressionLoop>();
-    
-    /** The filter. */
     private AstNode filter;
-    
-    /** The if position. */
     private int ifPosition = -1;
-    
-    /** The lp. */
     private int lp = -1;
-    
-    /** The rp. */
     private int rp = -1;
     
     {
         type = Token.GENEXPR;
     }
 
-    /**
-     * Instantiates a new generator expression.
-     */
     public GeneratorExpression() {
     }
 
-    /**
-     * Instantiates a new generator expression.
-     *
-     * @param pos the pos
-     */
     public GeneratorExpression(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new generator expression.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public GeneratorExpression(int pos, int len) {
         super(pos, len);
     }
     
     /**
-     * Returns result expression node (just after opening bracket).
-     *
-     * @return the result
+     * Returns result expression node (just after opening bracket)
      */
     public AstNode getResult() {
         return result;
@@ -76,8 +46,7 @@ public class GeneratorExpression extends Scope {
 
     /**
      * Sets result expression, and sets its parent to this node.
-     *
-     * @param result the new result
+     * @throws IllegalArgumentException if result is {@code null}
      */
     public void setResult(AstNode result) {
         assertNotNull(result);
@@ -86,18 +55,15 @@ public class GeneratorExpression extends Scope {
     }
 
     /**
-     * Returns loop list.
-     *
-     * @return the loops
+     * Returns loop list
      */
     public List<GeneratorExpressionLoop> getLoops() {
         return loops;
     }
 
     /**
-     * Sets loop list.
-     *
-     * @param loops the new loops
+     * Sets loop list
+     * @throws IllegalArgumentException if loops is {@code null}
      */
     public void setLoops(List<GeneratorExpressionLoop> loops) {
         assertNotNull(loops);
@@ -109,8 +75,7 @@ public class GeneratorExpression extends Scope {
 
     /**
      * Adds a child loop node, and sets its parent to this node.
-     *
-     * @param acl the acl
+     * @throws IllegalArgumentException if acl is {@code null}
      */
     public void addLoop(GeneratorExpressionLoop acl) {
         assertNotNull(acl);
@@ -119,9 +84,7 @@ public class GeneratorExpression extends Scope {
     }
     
     /**
-     * Returns filter expression, or {@code null} if not present.
-     *
-     * @return the filter
+     * Returns filter expression, or {@code null} if not present
      */
     public AstNode getFilter() {
         return filter;
@@ -130,8 +93,6 @@ public class GeneratorExpression extends Scope {
     /**
      * Sets filter expression, and sets its parent to this node.
      * Can be {@code null}.
-     *
-     * @param filter the new filter
      */
     public void setFilter(AstNode filter) {
         this.filter = filter;
@@ -140,62 +101,47 @@ public class GeneratorExpression extends Scope {
     }
 
     /**
-     * Returns position of 'if' keyword, -1 if not present.
-     *
-     * @return the if position
+     * Returns position of 'if' keyword, -1 if not present
      */
     public int getIfPosition() {
         return ifPosition;
     }
 
     /**
-     * Sets position of 'if' keyword.
-     *
-     * @param ifPosition the new if position
+     * Sets position of 'if' keyword
      */
     public void setIfPosition(int ifPosition) {
         this.ifPosition = ifPosition;
     }
 
     /**
-     * Returns filter left paren position, or -1 if no filter.
-     *
-     * @return the filter lp
+     * Returns filter left paren position, or -1 if no filter
      */
     public int getFilterLp() {
         return lp;
     }
 
     /**
-     * Sets filter left paren position, or -1 if no filter.
-     *
-     * @param lp the new filter lp
+     * Sets filter left paren position, or -1 if no filter
      */
     public void setFilterLp(int lp) {
         this.lp = lp;
     }
 
     /**
-     * Returns filter right paren position, or -1 if no filter.
-     *
-     * @return the filter rp
+     * Returns filter right paren position, or -1 if no filter
      */
     public int getFilterRp() {
         return rp;
     }
 
     /**
-     * Sets filter right paren position, or -1 if no filter.
-     *
-     * @param rp the new filter rp
+     * Sets filter right paren position, or -1 if no filter
      */
     public void setFilterRp(int rp) {
         this.rp = rp;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.Scope#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder(250);
@@ -216,8 +162,6 @@ public class GeneratorExpression extends Scope {
     /**
      * Visits this node, the result expression, the loops, and the optional
      * filter.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

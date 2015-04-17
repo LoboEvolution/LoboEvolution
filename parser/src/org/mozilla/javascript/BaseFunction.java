@@ -6,7 +6,6 @@
 
 package org.mozilla.javascript;
 
-
 /**
  * The base class for Function objects
  * See ECMA 15.3.
@@ -15,18 +14,10 @@ package org.mozilla.javascript;
 public class BaseFunction extends IdScriptableObject implements Function
 {
 
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 5311394446546053859L;
 
-    /** The Constant FUNCTION_TAG. */
     private static final Object FUNCTION_TAG = "Function";
 
-    /**
-     * Inits the.
-     *
-     * @param scope the scope
-     * @param sealed the sealed
-     */
     static void init(Scriptable scope, boolean sealed)
     {
         BaseFunction obj = new BaseFunction();
@@ -35,27 +26,15 @@ public class BaseFunction extends IdScriptableObject implements Function
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
-    /**
-     * Instantiates a new base function.
-     */
     public BaseFunction()
     {
     }
 
-    /**
-     * Instantiates a new base function.
-     *
-     * @param scope the scope
-     * @param prototype the prototype
-     */
     public BaseFunction(Scriptable scope, Scriptable prototype)
     {
         super(scope, prototype);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
-     */
     @Override
     public String getClassName() {
         return "Function";
@@ -63,9 +42,8 @@ public class BaseFunction extends IdScriptableObject implements Function
 
     /**
      * Gets the value returned by calling the typeof operator on this object.
-     *
-     * @return "function" or "undefined" if {@link #avoidObjectDetection()} returns <code>true</code>
      * @see org.mozilla.javascript.ScriptableObject#getTypeOf()
+     * @return "function" or "undefined" if {@link #avoidObjectDetection()} returns <code>true</code>
      */
     @Override
     public String getTypeOf()
@@ -100,8 +78,7 @@ public class BaseFunction extends IdScriptableObject implements Function
 
 // #string_id_map#
 
-    /** The Constant MAX_INSTANCE_ID. */
-private static final int
+    private static final int
         Id_length       = 1,
         Id_arity        = 2,
         Id_name         = 3,
@@ -110,18 +87,12 @@ private static final int
 
         MAX_INSTANCE_ID = 5;
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#getMaxInstanceId()
-     */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#findInstanceIdInfo(java.lang.String)
-     */
     @Override
     protected int findInstanceIdInfo(String s)
     {
@@ -167,9 +138,6 @@ private static final int
         return instanceIdInfo(attr, id);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#getInstanceIdName(int)
-     */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -183,9 +151,6 @@ private static final int
         return super.getInstanceIdName(id);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#getInstanceIdValue(int)
-     */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -199,9 +164,6 @@ private static final int
         return super.getInstanceIdValue(id);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#setInstanceIdValue(int, java.lang.Object)
-     */
     @Override
     protected void setInstanceIdValue(int id, Object value)
     {
@@ -231,9 +193,6 @@ private static final int
         super.setInstanceIdValue(id, value);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#setInstanceIdAttributes(int, int)
-     */
     @Override
     protected void setInstanceIdAttributes(int id, int attr)
     {
@@ -248,9 +207,6 @@ private static final int
         super.setInstanceIdAttributes(id, attr);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#fillConstructorProperties(org.mozilla.javascript.IdFunctionObject)
-     */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -261,9 +217,6 @@ private static final int
         super.fillConstructorProperties(ctor);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
-     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -281,22 +234,10 @@ private static final int
         initPrototypeMethod(FUNCTION_TAG, id, s, arity);
     }
 
-    /**
-     * Checks if is apply.
-     *
-     * @param f the f
-     * @return true, if is apply
-     */
     static boolean isApply(IdFunctionObject f) {
         return f.hasTag(FUNCTION_TAG) && f.methodId() == Id_apply;
     }
 
-    /**
-     * Checks if is apply or call.
-     *
-     * @param f the f
-     * @return true, if is apply or call
-     */
     static boolean isApplyOrCall(IdFunctionObject f) {
         if(f.hasTag(FUNCTION_TAG)) {
             switch(f.methodId()) {
@@ -308,9 +249,6 @@ private static final int
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -370,13 +308,6 @@ private static final int
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
-    /**
-     * Real function.
-     *
-     * @param thisObj the this obj
-     * @param f the f
-     * @return the base function
-     */
     private BaseFunction realFunction(Scriptable thisObj, IdFunctionObject f)
     {
         Object x = thisObj.getDefaultValue(ScriptRuntime.FunctionClass);
@@ -392,9 +323,7 @@ private static final int
 
     /**
      * Make value as DontEnum, DontDelete, ReadOnly
-     * prototype property of this Function object.
-     *
-     * @param value the new immune prototype property
+     * prototype property of this Function object
      */
     public void setImmunePrototypeProperty(Object value)
     {
@@ -405,11 +334,6 @@ private static final int
         prototypePropertyAttributes = DONTENUM | PERMANENT | READONLY;
     }
 
-    /**
-     * Gets the class prototype.
-     *
-     * @return the class prototype
-     */
     protected Scriptable getClassPrototype()
     {
         Object protoVal = getPrototypeProperty();
@@ -421,12 +345,6 @@ private static final int
 
     /**
      * Should be overridden.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param thisObj the this obj
-     * @param args the args
-     * @return the object
      */
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -434,9 +352,6 @@ private static final int
         return Undefined.instance;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Function#construct(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
         Scriptable result = createObject(cx, scope);
@@ -480,10 +395,6 @@ private static final int
      * {@link #call} will create a new object itself. In this case
      * {@link #construct} will set scope and prototype on the result
      * {@link #call} unless they are already set.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @return the scriptable
      */
     public Scriptable createObject(Context cx, Scriptable scope)
     {
@@ -498,8 +409,8 @@ private static final int
      * function/script back into a string.
      *
      * @param indent How much to indent the decompiled result.
+     *
      * @param flags Flags specifying format of decompilation output.
-     * @return the string
      */
     String decompile(int indent, int flags)
     {
@@ -519,43 +430,18 @@ private static final int
         return sb.toString();
     }
 
-    /**
-     * Gets the arity.
-     *
-     * @return the arity
-     */
     public int getArity() { return 0; }
 
-    /**
-     * Gets the length.
-     *
-     * @return the length
-     */
     public int getLength() { return 0; }
 
-    /**
-     * Gets the function name.
-     *
-     * @return the function name
-     */
     public String getFunctionName() {
         return "";
     }
 
-    /**
-     * Checks for prototype property.
-     *
-     * @return true, if successful
-     */
     protected boolean hasPrototypeProperty() {
         return prototypeProperty != null || this instanceof NativeFunction;
     }
 
-    /**
-     * Gets the prototype property.
-     *
-     * @return the prototype property
-     */
     protected Object getPrototypeProperty() {
         Object result = prototypeProperty;
         if (result == null) {
@@ -572,11 +458,6 @@ private static final int
         return result;
     }
 
-    /**
-     * Setup default prototype.
-     *
-     * @return the object
-     */
     private synchronized Object setupDefaultPrototype() {
         if (prototypeProperty != null) {
             return prototypeProperty;
@@ -596,11 +477,6 @@ private static final int
         return obj;
     }
 
-    /**
-     * Gets the arguments.
-     *
-     * @return the arguments
-     */
     private Object getArguments()
     {
       // <Function name>.arguments is deprecated, so we use a slow
@@ -622,14 +498,6 @@ private static final int
              : activation.get("arguments", activation);
     }
 
-    /**
-     * Js constructor.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param args the args
-     * @return the object
-     */
     private static Object jsConstructor(Context cx, Scriptable scope,
                                         Object[] args)
     {
@@ -691,9 +559,6 @@ private static final int
                                   sourceURI, 1, null);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
-     */
     @Override
     protected int findPrototypeId(String s)
     {
@@ -720,7 +585,6 @@ private static final int
         return id;
     }
 
-    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         Id_constructor    = 1,
         Id_toString       = 2,
@@ -733,19 +597,13 @@ private static final int
 
 // #/string_id_map#
 
-    /** The prototype property. */
-private Object prototypeProperty;
-    
-    /** The arguments obj. */
+    private Object prototypeProperty;
     private Object argumentsObj = NOT_FOUND;
 
     // For function object instances, attributes are
     //  {configurable:false, enumerable:false};
     // see ECMA 15.3.5.2
-    /** The prototype property attributes. */
     private int prototypePropertyAttributes = PERMANENT|DONTENUM;
-    
-    /** The arguments attributes. */
     private int argumentsAttributes = PERMANENT|DONTENUM;
 }
 

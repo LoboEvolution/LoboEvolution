@@ -6,15 +6,14 @@
 
 package org.mozilla.javascript;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
-
 import org.mozilla.javascript.json.JsonParser;
 
+import java.util.Stack;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Arrays;
+import java.util.List;
+import java.util.LinkedList;
 
 /**
  * This class implements the JSON native object.
@@ -23,22 +22,12 @@ import org.mozilla.javascript.json.JsonParser;
  */
 public final class NativeJSON extends IdScriptableObject
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -4567599697595654984L;
 
-    /** The Constant JSON_TAG. */
     private static final Object JSON_TAG = "JSON";
 
-    /** The Constant MAX_STRINGIFY_GAP_LENGTH. */
     private static final int MAX_STRINGIFY_GAP_LENGTH = 10;
 
-    /**
-     * Inits the.
-     *
-     * @param scope the scope
-     * @param sealed the sealed
-     */
     static void init(Scriptable scope, boolean sealed)
     {
         NativeJSON obj = new NativeJSON();
@@ -50,22 +39,13 @@ public final class NativeJSON extends IdScriptableObject
                                         ScriptableObject.DONTENUM);
     }
 
-    /**
-     * Instantiates a new native json.
-     */
     private NativeJSON()
     {
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
-     */
     @Override
     public String getClassName() { return "JSON"; }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
-     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -84,9 +64,6 @@ public final class NativeJSON extends IdScriptableObject
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -128,14 +105,6 @@ public final class NativeJSON extends IdScriptableObject
         }
     }
 
-    /**
-     * Parses the.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param jtext the jtext
-     * @return the object
-     */
     private static Object parse(Context cx, Scriptable scope, String jtext) {
       try {
         return new JsonParser(cx, scope).parseValue(jtext);
@@ -144,15 +113,6 @@ public final class NativeJSON extends IdScriptableObject
       }
     }
 
-    /**
-     * Parses the.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param jtext the jtext
-     * @param reviver the reviver
-     * @return the object
-     */
     public static Object parse(Context cx, Scriptable scope, String jtext,
                                Callable reviver)
     {
@@ -162,16 +122,6 @@ public final class NativeJSON extends IdScriptableObject
       return walk(cx, scope, reviver, root, "");
     }
 
-    /**
-     * Walk.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param reviver the reviver
-     * @param holder the holder
-     * @param name the name
-     * @return the object
-     */
     private static Object walk(Context cx, Scriptable scope, Callable reviver,
                                Scriptable holder, Object name)
     {
@@ -228,35 +178,13 @@ public final class NativeJSON extends IdScriptableObject
         return reviver.call(cx, scope, holder, new Object[] { name, property });
     }
 
-    /**
-     * Repeat.
-     *
-     * @param c the c
-     * @param count the count
-     * @return the string
-     */
     private static String repeat(char c, int count) {
       char chars[] = new char[count];
       Arrays.fill(chars, c);
       return new String(chars);
     }
 
-    /**
-     * The Class StringifyState.
-     */
     private static class StringifyState {
-        
-        /**
-         * Instantiates a new stringify state.
-         *
-         * @param cx the cx
-         * @param scope the scope
-         * @param indent the indent
-         * @param gap the gap
-         * @param replacer the replacer
-         * @param propertyList the property list
-         * @param space the space
-         */
         StringifyState(Context cx, Scriptable scope, String indent, String gap,
                        Callable replacer, List<Object> propertyList,
                        Object space)
@@ -271,41 +199,17 @@ public final class NativeJSON extends IdScriptableObject
             this.space = space;
         }
 
-        /** The stack. */
         Stack<Scriptable> stack = new Stack<Scriptable>();
-        
-        /** The indent. */
         String indent;
-        
-        /** The gap. */
         String gap;
-        
-        /** The replacer. */
         Callable replacer;
-        
-        /** The property list. */
         List<Object> propertyList;
-        
-        /** The space. */
         Object space;
 
-        /** The cx. */
         Context cx;
-        
-        /** The scope. */
         Scriptable scope;
     }
 
-    /**
-     * Stringify.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param value the value
-     * @param replacer the replacer
-     * @param space the space
-     * @return the object
-     */
     public static Object stringify(Context cx, Scriptable scope, Object value,
                                    Object replacer, Object space)
     {
@@ -362,14 +266,6 @@ public final class NativeJSON extends IdScriptableObject
         return str("", wrapper, state);
     }
 
-    /**
-     * Str.
-     *
-     * @param key the key
-     * @param holder the holder
-     * @param state the state
-     * @return the object
-     */
     private static Object str(Object key, Scriptable holder,
                               StringifyState state)
     {
@@ -431,13 +327,6 @@ public final class NativeJSON extends IdScriptableObject
         return Undefined.instance;
     }
 
-    /**
-     * Join.
-     *
-     * @param objs the objs
-     * @param delimiter the delimiter
-     * @return the string
-     */
     private static String join(Collection<Object> objs, String delimiter) {
         if (objs == null || objs.isEmpty()) {
             return "";
@@ -451,13 +340,6 @@ public final class NativeJSON extends IdScriptableObject
         return builder.toString();
     }
 
-    /**
-     * Jo.
-     *
-     * @param value the value
-     * @param state the state
-     * @return the string
-     */
     private static String jo(Scriptable value, StringifyState state) {
         if (state.stack.search(value) != -1) {
             throw ScriptRuntime.typeError0("msg.cyclic.value");
@@ -507,13 +389,6 @@ public final class NativeJSON extends IdScriptableObject
         return finalValue;
     }
 
-    /**
-     * Ja.
-     *
-     * @param value the value
-     * @param state the state
-     * @return the string
-     */
     private static String ja(NativeArray value, StringifyState state) {
         if (state.stack.search(value) != -1) {
             throw ScriptRuntime.typeError0("msg.cyclic.value");
@@ -558,12 +433,6 @@ public final class NativeJSON extends IdScriptableObject
         return finalValue;
     }
 
-    /**
-     * Quote.
-     *
-     * @param string the string
-     * @return the string
-     */
     private static String quote(String string) {
         StringBuilder product = new StringBuilder(string.length()+2); // two extra chars for " on either side
         product.append('"');
@@ -610,10 +479,7 @@ public final class NativeJSON extends IdScriptableObject
 
 // #string_id_map#
 
-    /* (non-Javadoc)
- * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
- */
-@Override
+    @Override
     protected int findPrototypeId(String s)
     {
         int id;
@@ -630,7 +496,6 @@ public final class NativeJSON extends IdScriptableObject
         return id;
     }
 
-    /** The Constant MAX_ID. */
     private static final int
         Id_toSource     = 1,
         Id_parse        = 2,

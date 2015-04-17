@@ -4,7 +4,6 @@
 
 package org.mozilla.javascript;
 
-
 /**
  * A <code>java.lang.SecurityManager</code> subclass that provides access to
  * the current top-most script class on the execution stack. This can be used
@@ -20,9 +19,9 @@ public class RhinoSecurityManager extends SecurityManager {
      * @return The class of the top-most script in the current stack,
      *         or null if no script is currently running
      */
-    protected Class getCurrentScriptClass() {
-        Class[] context = getClassContext();
-        for (Class c : context) {
+    protected Class<?> getCurrentScriptClass() {
+        Class<?>[] context = getClassContext();
+        for (Class<?> c : context) {
             if (c != InterpretedFunction.class && NativeFunction.class.isAssignableFrom(c) ||
                     PolicySecurityController.SecureCaller.class.isAssignableFrom(c)) {
                 return c;

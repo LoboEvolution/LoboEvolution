@@ -16,16 +16,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 /**
  * The class of exceptions thrown by the JavaScript engine.
  */
 public abstract class RhinoException extends RuntimeException
 {
+    private static final Pattern JAVA_STACK_PATTERN = Pattern.compile("_c_(.*)_\\d+");
 
-    /**
-     * Instantiates a new rhino exception.
-     */
     RhinoException()
     {
         Evaluator e = Context.createInterpreter();
@@ -33,11 +30,6 @@ public abstract class RhinoException extends RuntimeException
             e.captureStackInfo(this);
     }
 
-    /**
-     * Instantiates a new rhino exception.
-     *
-     * @param details the details
-     */
     RhinoException(String details)
     {
         super(details);
@@ -46,9 +38,6 @@ public abstract class RhinoException extends RuntimeException
             e.captureStackInfo(this);
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Throwable#getMessage()
-     */
     @Override
     public final String getMessage()
     {
@@ -69,11 +58,6 @@ public abstract class RhinoException extends RuntimeException
         return buf.toString();
     }
 
-    /**
-     * Details.
-     *
-     * @return the string
-     */
     public String details()
     {
         return super.getMessage();
@@ -82,8 +66,6 @@ public abstract class RhinoException extends RuntimeException
     /**
      * Get the uri of the script source containing the error, or null
      * if that information is not available.
-     *
-     * @return the string
      */
     public final String sourceName()
     {
@@ -95,6 +77,8 @@ public abstract class RhinoException extends RuntimeException
      *
      * @param sourceName the uri of the script source responsible for the error.
      *                   It should not be <tt>null</tt>.
+     *
+     * @throws IllegalStateException if the method is called more then once.
      */
     public final void initSourceName(String sourceName)
     {
@@ -106,8 +90,6 @@ public abstract class RhinoException extends RuntimeException
     /**
      * Returns the line number of the statement causing the error,
      * or zero if not available.
-     *
-     * @return the int
      */
     public final int lineNumber()
     {
@@ -119,6 +101,8 @@ public abstract class RhinoException extends RuntimeException
      *
      * @param lineNumber the line number in the script source.
      *                   It should be positive number.
+     *
+     * @throws IllegalStateException if the method is called more then once.
      */
     public final void initLineNumber(int lineNumber)
     {
@@ -129,8 +113,6 @@ public abstract class RhinoException extends RuntimeException
 
     /**
      * The column number of the location of the error, or zero if unknown.
-     *
-     * @return the int
      */
     public final int columnNumber()
     {
@@ -142,6 +124,8 @@ public abstract class RhinoException extends RuntimeException
      *
      * @param columnNumber the column number in the script source.
      *                     It should be positive number.
+     *
+     * @throws IllegalStateException if the method is called more then once.
      */
     public final void initColumnNumber(int columnNumber)
     {
@@ -152,8 +136,6 @@ public abstract class RhinoException extends RuntimeException
 
     /**
      * The source text of the line causing the error, or null if unknown.
-     *
-     * @return the string
      */
     public final String lineSource()
     {
@@ -165,6 +147,8 @@ public abstract class RhinoException extends RuntimeException
      *
      * @param lineSource the text of the source line responsible for the error.
      *                   It should not be <tt>null</tt>.
+     *
+     * @throws IllegalStateException if the method is called more then once.
      */
     public final void initLineSource(String lineSource)
     {
@@ -173,14 +157,6 @@ public abstract class RhinoException extends RuntimeException
         this.lineSource = lineSource;
     }
 
-    /**
-     * Record error origin.
-     *
-     * @param sourceName the source name
-     * @param lineNumber the line number
-     * @param lineSource the line source
-     * @param columnNumber the column number
-     */
     final void recordErrorOrigin(String sourceName, int lineNumber,
                                  String lineSource, int columnNumber)
     {
@@ -203,11 +179,6 @@ public abstract class RhinoException extends RuntimeException
         }
     }
 
-    /**
-     * Generate stack trace.
-     *
-     * @return the string
-     */
     private String generateStackTrace()
     {
         // Get stable reference to work properly with concurrent access
@@ -230,57 +201,67 @@ public abstract class RhinoException extends RuntimeException
      */
     public String getScriptStackTrace()
     {
+        return getScriptStackTrace(NativeError.DEFAULT_STACK_LIMIT, null);
+    }
+
+    /**
+     * Get a string representing the script stack of this exception.
+     * If optimization is enabled, this includes java stack elements
+     * whose source and method names suggest they have been generated
+     * by the Rhino script compiler.
+     * The optional "limit" parameter limits the number of stack frames returned.
+     * The "functionName" parameter will exclude any stack frames "below" the
+     * specified function on the stack.
+     *
+     * @param limit the number of stack frames returned
+     * @param functionName the name of a function on the stack -- frames below it will be ignored
+     * @return a script stack dump
+     * @since 1.8.0
+     */
+    public String getScriptStackTrace(int limit, String functionName)
+    {
+        ScriptStackElement[] stack = getScriptStack(limit, functionName);
+        return formatStackTrace(stack, details());
+    }
+
+    static String formatStackTrace(ScriptStackElement[] stack, String message)
+    {
         StringBuilder buffer = new StringBuilder();
         String lineSeparator = SecurityUtilities.getSystemProperty("line.separator");
-        ScriptStackElement[] stack = getScriptStack();
+
+        if ((stackStyle == StackStyle.V8) && !"null".equals(message)) {
+            // V8 Actually puts the error message at the top of "stack."
+            buffer.append(message);
+            buffer.append(lineSeparator);
+        }
+
         for (ScriptStackElement elem : stack) {
-            elem.render(buffer);
+            switch (stackStyle) {
+            case MOZILLA:
+                elem.renderMozillaStyle(buffer);
+                break;
+            case V8:
+                elem.renderV8Style(buffer);
+                break;
+            case RHINO:
+                elem.renderJavaStyle(buffer);
+                break;
+            }
             buffer.append(lineSeparator);
         }
         return buffer.toString();
     }
 
     /**
-     * Get a string representing the script stack in a way that is compatible with V8.
-     * If the function "Error.prepareStackTrace" is defined, then call that function,
-     * passing it an array of CallSite objects. Otherwise, behave as if "getScriptStackTrace"
-     * was called instead.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param err the err
-     * @return the prepared script stack trace
-     * @since 1.7R5
-     */
-    public Object getPreparedScriptStackTrace(Context cx, Scriptable scope, Scriptable err)
-    {
-        Scriptable top = ScriptableObject.getTopLevelScope(scope);
-        Scriptable error = TopLevel.getBuiltinCtor(cx, top, TopLevel.Builtins.Error);
-        Object prepare = error.get("prepareStackTrace", error);
-        if (prepare instanceof Function) {
-            Function prepareFunc = (Function)prepare;
-            ScriptStackElement[] elts = getScriptStack();
-
-            Object[] rawStack = new Object[elts.length];
-            for (int i = 0; i < elts.length; i++) {
-                rawStack[i] = cx.newObject(top, "CallSite");
-                ((NativeCallSite)rawStack[i]).setElement(elts[i]);
-            }
-            return prepareFunc.call(cx, scope, null, new Object[] { err, cx.newArray(top, rawStack) });
-        }
-        return getScriptStackTrace();
-    }
-
-    /**
      * Get a string representing the script stack of this exception.
-     *
-     * @param filter ignored
-     * @return a script stack dump
-     * @since 1.6R6
      * @deprecated the filter argument is ignored as we are able to
      * recognize script stack elements by our own. Use
      * #getScriptStackTrace() instead.
+     * @param filter ignored
+     * @return a script stack dump
+     * @since 1.6R6
      */
+    @Deprecated
     public String getScriptStackTrace(FilenameFilter filter)
     {
         return getScriptStackTrace();
@@ -296,6 +277,22 @@ public abstract class RhinoException extends RuntimeException
      * @since 1.7R3
      */
     public ScriptStackElement[] getScriptStack() {
+        return getScriptStack(-1, null);
+    }
+
+    /**
+     * Get the script stack of this exception as an array of
+     * {@link ScriptStackElement}s.
+     * If optimization is enabled, this includes java stack elements
+     * whose source and method names suggest they have been generated
+     * by the Rhino script compiler.
+     *
+     * @param limit the number of stack frames returned, or -1 for unlimited
+     * @param hideFunction the name of a function on the stack -- frames below it will be ignored, or null
+     * @return the script stack for this exception
+     * @since 1.8.0
+     */
+    public ScriptStackElement[] getScriptStack(int limit, String hideFunction) {
         List<ScriptStackElement> list = new ArrayList<ScriptStackElement>();
         ScriptStackElement[][] interpreterStack = null;
         if (interpreterStackInfo != null) {
@@ -303,12 +300,15 @@ public abstract class RhinoException extends RuntimeException
             if (interpreter instanceof Interpreter)
                 interpreterStack = ((Interpreter) interpreter).getScriptStackElements(this);
         }
+
         int interpreterStackIndex = 0;
         StackTraceElement[] stack = getStackTrace();
+        int count = 0;
+        boolean printStarted = (hideFunction == null);
+
         // Pattern to recover function name from java method name -
         // see Codegen.getBodyMethodName()
         // kudos to Marc Guillemot for coming up with this
-        Pattern pattern = Pattern.compile("_c_(.*)_\\d+");
         for (StackTraceElement e : stack) {
             String fileName = e.getFileName();
             if (e.getMethodName().startsWith("_c_")
@@ -316,18 +316,31 @@ public abstract class RhinoException extends RuntimeException
                     && fileName != null
                     && !fileName.endsWith(".java")) {
                 String methodName = e.getMethodName();
-                Matcher match = pattern.matcher(methodName);
+                Matcher match = JAVA_STACK_PATTERN.matcher(methodName);
                 // the method representing the main script is always "_c_script_0" -
                 // at least we hope so
                 methodName = !"_c_script_0".equals(methodName) && match.find() ?
                         match.group(1) : null;
-                list.add(new ScriptStackElement(fileName, methodName, e.getLineNumber()));
+
+                if (!printStarted && hideFunction.equals(methodName)) {
+                    printStarted = true;
+                } else if (printStarted && ((limit < 0) || (count < limit))) {
+                    list.add(new ScriptStackElement(fileName, methodName, e.getLineNumber()));
+                    count++;
+                }
+
             } else if ("org.mozilla.javascript.Interpreter".equals(e.getClassName())
                     && "interpretLoop".equals(e.getMethodName())
                     && interpreterStack != null
                     && interpreterStack.length > interpreterStackIndex) {
+
                 for (ScriptStackElement elem : interpreterStack[interpreterStackIndex++]) {
-                    list.add(elem);
+                    if (!printStarted && hideFunction.equals(elem.functionName)) {
+                        printStarted = true;
+                    } else if (printStarted && ((limit < 0) || (count < limit))) {
+                        list.add(elem);
+                        count++;
+                    }
                 }
             }
         }
@@ -335,9 +348,6 @@ public abstract class RhinoException extends RuntimeException
     }
 
 
-    /* (non-Javadoc)
-     * @see java.lang.Throwable#printStackTrace(java.io.PrintWriter)
-     */
     @Override
     public void printStackTrace(PrintWriter s)
     {
@@ -348,9 +358,6 @@ public abstract class RhinoException extends RuntimeException
         }
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Throwable#printStackTrace(java.io.PrintStream)
-     */
     @Override
     public void printStackTrace(PrintStream s)
     {
@@ -366,7 +373,7 @@ public abstract class RhinoException extends RuntimeException
      * use the Mozilla/Firefox style of rendering script stacks
      * (<code>functionName()@fileName:lineNumber</code>)
      * instead of Rhino's own Java-inspired format
-     * (<code> at fileName:lineNumber (functionName)</code>).
+     * (<code>    at fileName:lineNumber (functionName)</code>).
      * @return true if stack is rendered in Mozilla/Firefox style
      * @see ScriptStackElement
      * @since 1.7R3
@@ -380,9 +387,8 @@ public abstract class RhinoException extends RuntimeException
      * use the Mozilla/Firefox style of rendering script stacks
      * (<code>functionName()@fileName:lineNumber</code>)
      * instead of Rhino's own Java-inspired format
-     * (<code>at fileName:lineNumber (functionName)</code>)
-     * Calling this with "true" is the equivalent of calling:
-     * <code>setStackStyle(StackStyle.MOZILLA);</code>
+     * (<code>    at fileName:lineNumber (functionName)</code>).
+     * Use "setStackStyle" to select between more than just the "Mozilla" and "Rhino" formats.
      * @param flag whether to render stacks in Mozilla/Firefox style
      * @see ScriptStackElement
      * @since 1.7R3
@@ -392,47 +398,48 @@ public abstract class RhinoException extends RuntimeException
     }
 
     /**
-     * Return the stack trace style currently in use.
-     *
-     * @return the stack style
-     * @since 1.7R5
-     */
-    public static StackStyle getStackStyle() {
-        return stackStyle;
-    }
-
-    /**
-     * Set the stack trace style to use. This replaces "useMozillaStackStyle" since there are now
-     * more than two different formats. See "StackStyle" for documentation.
-     *
-     * @param style the new stack style
-     * @since 1.7R5
+     * Specify the stack style to use from between three different formats: "Rhino" (the default),
+     * "Mozilla", and "V8." See StackStyle for information about each.
+     * @param style the style to select -- an instance of the StackStyle class
+     * @see StackStyle
+     * @since 1.8.0
      */
     public static void setStackStyle(StackStyle style) {
         stackStyle = style;
     }
 
-    /** The Constant serialVersionUID. */
+    /**
+     * Return the current stack style in use.
+     * Return the current stack style in use.
+     */
+    public static StackStyle getStackStyle() {
+        return stackStyle;
+    }
+
     static final long serialVersionUID = 1883500631321581169L;
 
-    /** The stack style. */
+    // Just for testing!
     private static StackStyle stackStyle = StackStyle.RHINO;
 
-    /** The source name. */
     private String sourceName;
-    
-    /** The line number. */
     private int lineNumber;
-    
-    /** The line source. */
     private String lineSource;
-    
-    /** The column number. */
     private int columnNumber;
 
-    /** The interpreter stack info. */
     Object interpreterStackInfo;
-    
-    /** The interpreter line data. */
     int[] interpreterLineData;
+
+    // Allow us to override default stack style for debugging.
+    static {
+        String style = System.getProperty("rhino.stack.style");
+        if (style != null) {
+            if ("Rhino".equalsIgnoreCase(style)) {
+                stackStyle = StackStyle.RHINO;
+            } else if ("Mozilla".equalsIgnoreCase(style)) {
+                stackStyle = StackStyle.MOZILLA;
+            } else if ("V8".equalsIgnoreCase(style)) {
+                stackStyle = StackStyle.V8;
+            }
+        }
+    }
 }

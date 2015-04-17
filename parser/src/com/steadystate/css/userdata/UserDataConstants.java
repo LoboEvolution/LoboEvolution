@@ -26,21 +26,11 @@
 
 package com.steadystate.css.userdata;
 
-
-/**
- * The Class UserDataConstants.
- */
 public final class UserDataConstants {
 
-    /** The Constant KEY_PREFIX. */
     private static final String KEY_PREFIX = UserDataConstants.class.getPackage().getName();
-    
-    /** The Constant KEY_LOCATOR. */
     public static final String KEY_LOCATOR = KEY_PREFIX + ".locator";
 
-    /**
-     * Instantiates a new user data constants.
-     */
     private UserDataConstants() {
     }
 }

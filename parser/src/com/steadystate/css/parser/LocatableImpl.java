@@ -27,27 +27,19 @@ package com.steadystate.css.parser;
 
 import org.w3c.css.sac.Locator;
 
-
 /**
- * Implementation of {@link Locatable}.
+ * Implementation of {@link Locatable}
  *
  * @author <a href="mailto:waldbaer@users.sourceforge.net">Johannes Koch</a>
  */
 public class LocatableImpl implements Locatable {
 
-    /** The locator_. */
     private Locator locator_;
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.parser.Locatable#getLocator()
-     */
     public Locator getLocator() {
         return locator_;
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.parser.Locatable#setLocator(org.w3c.css.sac.Locator)
-     */
     public void setLocator(final Locator locator) {
         locator_ = locator;
     }

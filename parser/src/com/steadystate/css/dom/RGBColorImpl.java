@@ -33,7 +33,6 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSPrimitiveValue;
 import org.w3c.dom.css.RGBColor;
 
-
 /**
  * Implementation of {@link RGBColor}.
  *
@@ -41,16 +40,9 @@ import org.w3c.dom.css.RGBColor;
  */
 public class RGBColorImpl implements RGBColor, Serializable {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 8152675334081993160L;
-    
-    /** The red_. */
     private CSSPrimitiveValue red_;
-    
-    /** The green_. */
     private CSSPrimitiveValue green_;
-    
-    /** The blue_. */
     private CSSPrimitiveValue blue_;
 
     /**
@@ -102,8 +94,6 @@ public class RGBColorImpl implements RGBColor, Serializable {
 
     /**
      * Returns the red part.
-     *
-     * @return the red
      */
     public CSSPrimitiveValue getRed() {
         return red_;
@@ -119,8 +109,6 @@ public class RGBColorImpl implements RGBColor, Serializable {
 
     /**
      * Returns the green part.
-     *
-     * @return the green
      */
     public CSSPrimitiveValue getGreen() {
         return green_;
@@ -136,8 +124,6 @@ public class RGBColorImpl implements RGBColor, Serializable {
 
     /**
      * Returns the blue part.
-     *
-     * @return the blue
      */
     public CSSPrimitiveValue getBlue() {
         return blue_;

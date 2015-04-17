@@ -17,6 +17,7 @@ package org.lobobrowser.primary.action;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+
 import org.lobobrowser.primary.gui.SearchDialog;
 
 /**
@@ -24,23 +25,24 @@ import org.lobobrowser.primary.gui.SearchDialog;
  */
 public class SearchCancelAction extends AbstractAction {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The search. */
-	private SearchDialog search;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-	public SearchCancelAction(SearchDialog search) {
-		this.search = search;
-	}
+    /** The search. */
+    private SearchDialog search;
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
-	public void actionPerformed(ActionEvent e) {
-		search.setSearchKeywords(null);
-		search.dispose();
-	}
+    public SearchCancelAction(SearchDialog search) {
+        this.search = search;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        search.setSearchKeywords(null);
+        search.dispose();
+    }
 }

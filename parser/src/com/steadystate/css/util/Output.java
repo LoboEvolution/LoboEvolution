@@ -30,27 +30,17 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-
 /**
  * A simple helper to write formated to a writer.
  *
  * @author rbri
  */
 public final class Output {
-    
-    /** The Constant NEW_LINE. */
     private static final String NEW_LINE = System.getProperty("line.separator");
 
-    /** The writer_. */
     private Writer writer_;
-    
-    /** The current indent_. */
     private StringBuffer currentIndent_;
-    
-    /** The after new line_. */
     private boolean afterNewLine_;
-    
-    /** The indent_. */
     private final String indent_;
 
     /**

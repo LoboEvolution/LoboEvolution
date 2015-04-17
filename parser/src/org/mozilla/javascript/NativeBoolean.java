@@ -6,7 +6,6 @@
 
 package org.mozilla.javascript;
 
-
 /**
  * This class implements the Boolean native object.
  * See ECMA 15.6.
@@ -14,47 +13,27 @@ package org.mozilla.javascript;
  */
 final class NativeBoolean extends IdScriptableObject
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -3716996899943880933L;
 
-    /** The Constant BOOLEAN_TAG. */
     private static final Object BOOLEAN_TAG = "Boolean";
 
-    /**
-     * Inits the.
-     *
-     * @param scope the scope
-     * @param sealed the sealed
-     */
     static void init(Scriptable scope, boolean sealed)
     {
         NativeBoolean obj = new NativeBoolean(false);
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
-    /**
-     * Instantiates a new native boolean.
-     *
-     * @param b the b
-     */
     NativeBoolean(boolean b)
     {
         booleanValue = b;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
-     */
     @Override
     public String getClassName()
     {
         return "Boolean";
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
-     */
     @Override
     public Object getDefaultValue(Class<?> typeHint) {
         // This is actually non-ECMA, but will be proposed
@@ -64,9 +43,6 @@ final class NativeBoolean extends IdScriptableObject
         return super.getDefaultValue(typeHint);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
-     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -82,9 +58,6 @@ final class NativeBoolean extends IdScriptableObject
         initPrototypeMethod(BOOLEAN_TAG, id, s, arity);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -134,10 +107,7 @@ final class NativeBoolean extends IdScriptableObject
 
 // #string_id_map#
 
-    /* (non-Javadoc)
- * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
- */
-@Override
+    @Override
     protected int findPrototypeId(String s)
     {
         int id;
@@ -158,7 +128,6 @@ final class NativeBoolean extends IdScriptableObject
         return id;
     }
 
-    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
         Id_constructor          = 1,
         Id_toString             = 2,
@@ -168,6 +137,5 @@ final class NativeBoolean extends IdScriptableObject
 
 // #/string_id_map#
 
-    /** The boolean value. */
-private boolean booleanValue;
+    private boolean booleanValue;
 }

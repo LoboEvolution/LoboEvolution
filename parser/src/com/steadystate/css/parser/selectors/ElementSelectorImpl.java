@@ -33,63 +33,36 @@ import org.w3c.css.sac.Selector;
 
 import com.steadystate.css.parser.LocatableImpl;
 
-
 /**
- * The Class ElementSelectorImpl.
- *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
 public class ElementSelectorImpl extends LocatableImpl implements ElementSelector, Serializable {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 7507121069969409061L;
 
-    /** The local name_. */
     private String localName_;
 
-    /**
-     * Sets the local name.
-     *
-     * @param localName the new local name
-     */
     public void setLocalName(final String localName) {
         localName_ = localName;
     }
 
-    /**
-     * Instantiates a new element selector impl.
-     *
-     * @param localName the local name
-     */
     public ElementSelectorImpl(final String localName) {
         setLocalName(localName);
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.Selector#getSelectorType()
-     */
     public short getSelectorType() {
         return Selector.SAC_ELEMENT_NODE_SELECTOR;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.ElementSelector#getNamespaceURI()
-     */
     public String getNamespaceURI() {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.ElementSelector#getLocalName()
-     */
     public String getLocalName() {
         return localName_;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return (getLocalName() != null) ? getLocalName() : "*";

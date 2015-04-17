@@ -1,114 +1,142 @@
+/*
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ */
 package org.lobobrowser.html.w3c.events;
 
-
 /**
- * The Interface Event.
+ * The public interface Event.
  */
 public interface Event {
-	// Event
-	/** The Constant CAPTURING_PHASE. */
-	public static final short CAPTURING_PHASE = 1;
-	
-	/** The Constant AT_TARGET. */
-	public static final short AT_TARGET = 2;
-	
-	/** The Constant BUBBLING_PHASE. */
-	public static final short BUBBLING_PHASE = 3;
+    // Event
+    /** The Constant CAPTURING_PHASE. */
+    short CAPTURING_PHASE = 1;
 
-	/**
-	 * Gets the type.
-	 *
-	 * @return the type
-	 */
-	public String getType();
+    /** The Constant AT_TARGET. */
+    short AT_TARGET = 2;
 
-	/**
-	 * Gets the target.
-	 *
-	 * @return the target
-	 */
-	public EventTarget getTarget();
+    /** The Constant BUBBLING_PHASE. */
+    short BUBBLING_PHASE = 3;
 
-	/**
-	 * Gets the current target.
-	 *
-	 * @return the current target
-	 */
-	public EventTarget getCurrentTarget();
+    /**
+     * Gets the type.
+     *
+     * @return the type
+     */
+    String getType();
 
-	/**
-	 * Gets the event phase.
-	 *
-	 * @return the event phase
-	 */
-	public short getEventPhase();
+    /**
+     * Gets the target.
+     *
+     * @return the target
+     */
+    EventTarget getTarget();
 
-	/**
-	 * Gets the bubbles.
-	 *
-	 * @return the bubbles
-	 */
-	public boolean getBubbles();
+    /**
+     * Gets the current target.
+     *
+     * @return the current target
+     */
+    EventTarget getCurrentTarget();
 
-	/**
-	 * Gets the cancelable.
-	 *
-	 * @return the cancelable
-	 */
-	public boolean getCancelable();
+    /**
+     * Gets the event phase.
+     *
+     * @return the event phase
+     */
+    short getEventPhase();
 
-	/**
-	 * Gets the time stamp.
-	 *
-	 * @return the time stamp
-	 */
-	public long getTimeStamp();
+    /**
+     * Gets the bubbles.
+     *
+     * @return the bubbles
+     */
+    boolean getBubbles();
 
-	/**
-	 * Stop propagation.
-	 */
-	public void stopPropagation();
+    /**
+     * Gets the cancelable.
+     *
+     * @return the cancelable
+     */
+    boolean getCancelable();
 
-	/**
-	 * Prevent default.
-	 */
-	public void preventDefault();
+    /**
+     * Gets the time stamp.
+     *
+     * @return the time stamp
+     */
+    long getTimeStamp();
 
-	/**
-	 * Inits the event.
-	 *
-	 * @param eventTypeArg the event type arg
-	 * @param canBubbleArg the can bubble arg
-	 * @param cancelableArg the cancelable arg
-	 */
-	public void initEvent(String eventTypeArg, boolean canBubbleArg, boolean cancelableArg);
-	
-	/**
-	 * Inits the event ns.
-	 *
-	 * @param namespaceURIArg the namespace uri arg
-	 * @param eventTypeArg the event type arg
-	 * @param canBubbleArg the can bubble arg
-	 * @param cancelableArg the cancelable arg
-	 */
-	public void initEventNS(String namespaceURIArg, String eventTypeArg,boolean canBubbleArg, boolean cancelableArg);
+    /**
+     * Stop propagation.
+     */
+    void stopPropagation();
 
-	/**
-	 * Stop immediate propagation.
-	 */
-	public void stopImmediatePropagation();
+    /**
+     * Prevent default.
+     */
+    void preventDefault();
 
-	/**
-	 * Gets the default prevented.
-	 *
-	 * @return the default prevented
-	 */
-	public boolean getDefaultPrevented();
+    /**
+     * Inits the event.
+     *
+     * @param eventTypeArg
+     *            the event type arg
+     * @param canBubbleArg
+     *            the can bubble arg
+     * @param cancelableArg
+     *            the cancelable arg
+     */
+    void initEvent(String eventTypeArg, boolean canBubbleArg,
+            boolean cancelableArg);
 
-	/**
-	 * Gets the trusted.
-	 *
-	 * @return the trusted
-	 */
-	public boolean getTrusted();
+    /**
+     * Inits the event ns.
+     *
+     * @param namespaceURIArg
+     *            the namespace uri arg
+     * @param eventTypeArg
+     *            the event type arg
+     * @param canBubbleArg
+     *            the can bubble arg
+     * @param cancelableArg
+     *            the cancelable arg
+     */
+    void initEventNS(String namespaceURIArg, String eventTypeArg,
+            boolean canBubbleArg, boolean cancelableArg);
+
+    /**
+     * Stop immediate propagation.
+     */
+    void stopImmediatePropagation();
+
+    /**
+     * Gets the default prevented.
+     *
+     * @return the default prevented
+     */
+    boolean getDefaultPrevented();
+
+    /**
+     * Gets the trusted.
+     *
+     * @return the trusted
+     */
+    boolean getTrusted();
 }

@@ -20,7 +20,6 @@ import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.commonjs.module.ModuleScript;
 
-
 /**
  * A module script provider that uses a module source provider to load modules
  * and caches the loaded modules. It softly references the loaded modules'
@@ -32,15 +31,11 @@ import org.mozilla.javascript.commonjs.module.ModuleScript;
  */
 public class SoftCachingModuleScriptProvider extends CachingModuleScriptProviderBase
 {
-    
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** The script ref queue. */
     private transient ReferenceQueue<Script> scriptRefQueue =
         new ReferenceQueue<Script>();
 
-    /** The scripts. */
     private transient ConcurrentMap<String, ScriptReference> scripts =
         new ConcurrentHashMap<String, ScriptReference>(16, .75f,
                 getConcurrencyLevel());
@@ -55,9 +50,6 @@ public class SoftCachingModuleScriptProvider extends CachingModuleScriptProvider
         super(moduleSourceProvider);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.commonjs.module.provider.CachingModuleScriptProviderBase#getModuleScript(org.mozilla.javascript.Context, java.lang.String, java.net.URI, java.net.URI, org.mozilla.javascript.Scriptable)
-     */
     @Override
     public ModuleScript getModuleScript(Context cx, String moduleId,
             URI uri, URI base, Scriptable paths)
@@ -75,18 +67,12 @@ public class SoftCachingModuleScriptProvider extends CachingModuleScriptProvider
         return super.getModuleScript(cx, moduleId, uri, base, paths);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.commonjs.module.provider.CachingModuleScriptProviderBase#getLoadedModule(java.lang.String)
-     */
     @Override
     protected CachedModuleScript getLoadedModule(String moduleId) {
         final ScriptReference scriptRef = scripts.get(moduleId);
         return scriptRef != null ? scriptRef.getCachedModuleScript() : null;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.commonjs.module.provider.CachingModuleScriptProviderBase#putLoadedModule(java.lang.String, org.mozilla.javascript.commonjs.module.ModuleScript, java.lang.Object)
-     */
     @Override
     protected void putLoadedModule(String moduleId, ModuleScript moduleScript,
             Object validator)
@@ -96,33 +82,12 @@ public class SoftCachingModuleScriptProvider extends CachingModuleScriptProvider
                 validator, scriptRefQueue));
     }
 
-    /**
-     * The Class ScriptReference.
-     */
     private static class ScriptReference extends SoftReference<Script> {
-        
-        /** The module id. */
         private final String moduleId;
-        
-        /** The uri. */
         private final URI uri;
-        
-        /** The base. */
         private final URI base;
-        
-        /** The validator. */
         private final Object validator;
 
-        /**
-         * Instantiates a new script reference.
-         *
-         * @param script the script
-         * @param moduleId the module id
-         * @param uri the uri
-         * @param base the base
-         * @param validator the validator
-         * @param refQueue the ref queue
-         */
         ScriptReference(Script script, String moduleId, URI uri, URI base,
                 Object validator, ReferenceQueue<Script> refQueue) {
             super(script, refQueue);
@@ -132,11 +97,6 @@ public class SoftCachingModuleScriptProvider extends CachingModuleScriptProvider
             this.validator = validator;
         }
 
-        /**
-         * Gets the cached module script.
-         *
-         * @return the cached module script
-         */
         CachedModuleScript getCachedModuleScript() {
             final Script script = get();
             if(script == null) {
@@ -146,23 +106,11 @@ public class SoftCachingModuleScriptProvider extends CachingModuleScriptProvider
                     validator);
         }
 
-        /**
-         * Gets the module id.
-         *
-         * @return the module id
-         */
         String getModuleId() {
             return moduleId;
         }
     }
 
-    /**
-     * Read object.
-     *
-     * @param in the in
-     * @throws IOException Signals that an I/O exception has occurred.
-     * @throws ClassNotFoundException the class not found exception
-     */
     private void readObject(ObjectInputStream in) throws IOException,
     ClassNotFoundException
     {
@@ -176,12 +124,6 @@ public class SoftCachingModuleScriptProvider extends CachingModuleScriptProvider
         }
     }
 
-    /**
-     * Write object.
-     *
-     * @param out the out
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private void writeObject(ObjectOutputStream out) throws IOException {
         final Map<String, CachedModuleScript> serScripts =
             new HashMap<String, CachedModuleScript>();

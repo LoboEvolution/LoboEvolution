@@ -1,37 +1,28 @@
 /*
-    GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU LESSER GENERAL LICENSE Copyright (C) 2006 The Lobo Project.
+ * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
+ * can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version. This
+ * library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
- * Copyright (c) 2003 World Wide Web Consortium,
- * (Massachusetts Institute of Technology, Institut National de
- * Recherche en Informatique et en Automatique, Keio University). All
- * Rights Reserved. This program is distributed under the W3C's Software
- * Intellectual Property License. This program is distributed in the
- * hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
- * PURPOSE.
- * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+ * Copyright (c) 2003 World Wide Web Consortium, (Massachusetts Institute of
+ * Technology, Institut National de Recherche en Informatique et en Automatique,
+ * Keio University). All Rights Reserved. This program is distributed under the
+ * W3C's Software Intellectual Property License. This program is distributed in
+ * the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * W3C License http://www.w3.org/Consortium/Legal/ for more details.
  */
 
 package org.lobobrowser.html.w3c;
-
 
 /**
  * The <code>FORM</code> element encompasses behavior similar to a collection
@@ -39,196 +30,207 @@ package org.lobobrowser.html.w3c;
  * well as the attributes of the form element. See the FORM element definition
  * in HTML 4.01.
  * <p>
- * See also the
- * Object Model (DOM) Level 2 HTML Specification</p>.
+ * See also the Object Model (DOM) Level 2 HTML Specification
+ * </p>
+ * .
  */
 public interface HTMLFormElement extends HTMLElement {
-	
-	/**
-	 * Returns a collection of all form control elements in the form.
-	 *
-	 * @return the elements
-	 */
-	public HTMLCollection getElements();
 
-	/**
-	 * The number of form controls in the form.
-	 *
-	 * @return the length
-	 */
-	public int getLength();
+    /**
+     * Returns a collection of all form control elements in the form.
+     *
+     * @return the elements
+     */
+    HTMLCollection getElements();
 
-	/**
-	 * Names the form.
-	 *
-	 * @return the name
-	 */
-	public String getName();
+    /**
+     * The number of form controls in the form.
+     *
+     * @return the length
+     */
+    int getLength();
 
-	/**
-	 * Names the form.
-	 *
-	 * @param name the new name
-	 */
-	public void setName(String name);
+    /**
+     * Names the form.
+     *
+     * @return the name
+     */
+    String getName();
 
-	/**
-	 * List of character sets supported by the server. See the accept-charset
-	 * attribute definition in HTML 4.01.
-	 *
-	 * @return the accept charset
-	 */
-	public String getAcceptCharset();
+    /**
+     * Names the form.
+     *
+     * @param name
+     *            the new name
+     */
+    void setName(String name);
 
-	/**
-	 * List of character sets supported by the server. See the accept-charset
-	 * attribute definition in HTML 4.01.
-	 *
-	 * @param acceptCharset the new accept charset
-	 */
-	public void setAcceptCharset(String acceptCharset);
+    /**
+     * List of character sets supported by the server. See the accept-charset
+     * attribute definition in HTML 4.01.
+     *
+     * @return the accept charset
+     */
+    String getAcceptCharset();
 
-	/**
-	 * Server-side form handler. See the action attribute definition in HTML
-	 * 4.01.
-	 *
-	 * @return the action
-	 */
-	public String getAction();
+    /**
+     * List of character sets supported by the server. See the accept-charset
+     * attribute definition in HTML 4.01.
+     *
+     * @param acceptCharset
+     *            the new accept charset
+     */
+    void setAcceptCharset(String acceptCharset);
 
-	/**
-	 * Server-side form handler. See the action attribute definition in HTML
-	 * 4.01.
-	 *
-	 * @param action the new action
-	 */
-	public void setAction(String action);
+    /**
+     * Server-side form handler. See the action attribute definition in HTML
+     * 4.01.
+     *
+     * @return the action
+     */
+    String getAction();
 
-	/**
-	 * The content type of the submitted form, generally
-	 * "application/x-www-form-urlencoded". See the enctype attribute definition
-	 * in HTML 4.01. The onsubmit even handler is not guaranteed to be triggered
-	 * when invoking this method. The behavior is inconsistent for historical
-	 * reasons and authors should not rely on a particular one.
-	 *
-	 * @return the enctype
-	 */
-	public String getEnctype();
+    /**
+     * Server-side form handler. See the action attribute definition in HTML
+     * 4.01.
+     *
+     * @param action
+     *            the new action
+     */
+    void setAction(String action);
 
-	/**
-	 * The content type of the submitted form, generally
-	 * "application/x-www-form-urlencoded". See the enctype attribute definition
-	 * in HTML 4.01. The onsubmit even handler is not guaranteed to be triggered
-	 * when invoking this method. The behavior is inconsistent for historical
-	 * reasons and authors should not rely on a particular one.
-	 *
-	 * @param enctype the new enctype
-	 */
-	public void setEnctype(String enctype);
+    /**
+     * The content type of the submitted form, generally
+     * "application/x-www-form-urlencoded". See the enctype attribute definition
+     * in HTML 4.01. The onsubmit even handler is not guaranteed to be triggered
+     * when invoking this method. The behavior is inconsistent for historical
+     * reasons and authors should not rely on a particular one.
+     *
+     * @return the enctype
+     */
+    String getEnctype();
 
-	/**
-	 * HTTP method [<a href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC
-	 * 2616</a>] used to submit form. See the method attribute definition in
-	 * HTML 4.01.
-	 *
-	 * @return the method
-	 */
-	public String getMethod();
+    /**
+     * The content type of the submitted form, generally
+     * "application/x-www-form-urlencoded". See the enctype attribute definition
+     * in HTML 4.01. The onsubmit even handler is not guaranteed to be triggered
+     * when invoking this method. The behavior is inconsistent for historical
+     * reasons and authors should not rely on a particular one.
+     *
+     * @param enctype
+     *            the new enctype
+     */
+    void setEnctype(String enctype);
 
-	/**
-	 * HTTP method [<a href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC
-	 * 2616</a>] used to submit form. See the method attribute definition in
-	 * HTML 4.01.
-	 *
-	 * @param method the new method
-	 */
-	public void setMethod(String method);
+    /**
+     * HTTP method [<a href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC
+     * 2616</a>] used to submit form. See the method attribute definition in
+     * HTML 4.01.
+     *
+     * @return the method
+     */
+    String getMethod();
 
-	/**
-	 * Frame to render the resource in. See the target attribute definition in
-	 * HTML 4.01.
-	 *
-	 * @return the target
-	 */
-	public String getTarget();
+    /**
+     * HTTP method [<a href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC
+     * 2616</a>] used to submit form. See the method attribute definition in
+     * HTML 4.01.
+     *
+     * @param method
+     *            the new method
+     */
+    void setMethod(String method);
 
-	/**
-	 * Frame to render the resource in. See the target attribute definition in
-	 * HTML 4.01.
-	 *
-	 * @param target the new target
-	 */
-	public void setTarget(String target);
+    /**
+     * Frame to render the resource in. See the target attribute definition in
+     * HTML 4.01.
+     *
+     * @return the target
+     */
+    String getTarget();
 
-	/**
-	 * Submits the form. It performs the same action as a submit button.
-	 */
-	public void submit();
+    /**
+     * Frame to render the resource in. See the target attribute definition in
+     * HTML 4.01.
+     *
+     * @param target
+     *            the new target
+     */
+    void setTarget(String target);
 
-	/**
-	 * Restores a form element's default values. It performs the same action as
-	 * a reset button.
-	 */
-	public void reset();
+    /**
+     * Submits the form. It performs the same action as a submit button.
+     */
+    void submit();
 
-	/**
-	 * Gets the autocomplete.
-	 *
-	 * @return the autocomplete
-	 */
-	public boolean getAutocomplete();
+    /**
+     * Restores a form element's default values. It performs the same action as
+     * a reset button.
+     */
+    void reset();
 
-	/**
-	 * Sets the autocomplete.
-	 *
-	 * @param autocomplete the new autocomplete
-	 */
-	public void setAutocomplete(boolean autocomplete);
+    /**
+     * Gets the autocomplete.
+     *
+     * @return the autocomplete
+     */
+    boolean getAutocomplete();
 
-	/**
-	 * Gets the no validate.
-	 *
-	 * @return the no validate
-	 */
-	public boolean getNoValidate();
+    /**
+     * Sets the autocomplete.
+     *
+     * @param autocomplete
+     *            the new autocomplete
+     */
+    void setAutocomplete(boolean autocomplete);
 
-	/**
-	 * Sets the no validate.
-	 *
-	 * @param noValidate the new no validate
-	 */
-	public void setNoValidate(boolean noValidate);
+    /**
+     * Gets the no validate.
+     *
+     * @return the no validate
+     */
+    boolean getNoValidate();
 
-	/**
-	 * Item.
-	 *
-	 * @param index the index
-	 * @return the object
-	 */
-	public Object item(int index);
+    /**
+     * Sets the no validate.
+     *
+     * @param noValidate
+     *            the new no validate
+     */
+    void setNoValidate(boolean noValidate);
 
-	/**
-	 * Named item.
-	 *
-	 * @param name the name
-	 * @return the object
-	 */
-	public Object namedItem(String name);
+    /**
+     * Item.
+     *
+     * @param index
+     *            the index
+     * @return the object
+     */
+    Object item(int index);
 
-	/**
-	 * Check validity.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean checkValidity();
+    /**
+     * Named item.
+     *
+     * @param name
+     *            the name
+     * @return the object
+     */
+    Object namedItem(String name);
 
-	/**
-	 * Dispatch form input.
-	 */
-	public void dispatchFormInput();
+    /**
+     * Check validity.
+     *
+     * @return true, if successful
+     */
+    boolean checkValidity();
 
-	/**
-	 * Dispatch form change.
-	 */
-	public void dispatchFormChange();
+    /**
+     * Dispatch form input.
+     */
+    void dispatchFormInput();
+
+    /**
+     * Dispatch form change.
+     */
+    void dispatchFormChange();
 }

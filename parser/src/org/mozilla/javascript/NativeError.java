@@ -4,9 +4,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-
 package org.mozilla.javascript;
 
+import java.io.Serializable;
+import java.lang.reflect.Method;
 
 /**
  *
@@ -16,22 +17,31 @@ package org.mozilla.javascript;
  */
 final class NativeError extends IdScriptableObject
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -5338413581437645187L;
 
-    /** The Constant ERROR_TAG. */
     private static final Object ERROR_TAG = "Error";
 
-    /** The stack provider. */
+    private static final Method ERROR_DELEGATE_GET_STACK;
+    private static final Method ERROR_DELEGATE_SET_STACK;
+
+    static {
+        try {
+            // Pre-cache methods to be called via reflection
+            ERROR_DELEGATE_GET_STACK = NativeError.class.getMethod("getStackDelegated", Scriptable.class);
+            ERROR_DELEGATE_SET_STACK = NativeError.class.getMethod("setStackDelegated", Scriptable.class, Object.class);
+        } catch (NoSuchMethodException nsm) {
+            throw new RuntimeException(nsm);
+        }
+    }
+
+    /** Default stack limit is set to "Infinity", here represented as a negative int */
+    public static final int DEFAULT_STACK_LIMIT = -1;
+
+    // This is used by "captureStackTrace"
+    private static final String STACK_HIDE_KEY = "_stackHide";
+
     private RhinoException stackProvider;
 
-    /**
-     * Inits the.
-     *
-     * @param scope the scope
-     * @param sealed the sealed
-     */
     static void init(Scriptable scope, boolean sealed)
     {
         NativeError obj = new NativeError();
@@ -42,17 +52,9 @@ final class NativeError extends IdScriptableObject
         obj.setAttributes("name", ScriptableObject.DONTENUM);
         obj.setAttributes("message", ScriptableObject.DONTENUM);
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
+        NativeCallSite.init(obj, sealed);
     }
 
-    /**
-     * Make.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param ctorObj the ctor obj
-     * @param args the args
-     * @return the native error
-     */
     static NativeError make(Context cx, Scriptable scope,
                             IdFunctionObject ctorObj, Object[] args)
     {
@@ -80,18 +82,33 @@ final class NativeError extends IdScriptableObject
         return obj;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
-     */
+    @Override
+    protected void fillConstructorProperties(IdFunctionObject ctor)
+    {
+        addIdFunctionProperty(ctor, ERROR_TAG, ConstructorId_captureStackTrace,
+                                  "captureStackTrace", 2);
+
+        // This is running on the global "Error" object. Associate an object there that can store
+        // default stack trace, etc.
+        // This prevents us from having to add two additional fields to every Error object.
+        ProtoProps protoProps = new ProtoProps();
+        associateValue(ProtoProps.KEY, protoProps);
+
+        // Define constructor properties that delegate to the ProtoProps object.
+        ctor.defineProperty("stackTraceLimit", protoProps,
+                            ProtoProps.GET_STACK_LIMIT, ProtoProps.SET_STACK_LIMIT, 0);
+        ctor.defineProperty("prepareStackTrace", protoProps,
+                            ProtoProps.GET_PREPARE_STACK, ProtoProps.SET_PREPARE_STACK, 0);
+
+        super.fillConstructorProperties(ctor);
+    }
+
     @Override
     public String getClassName()
     {
         return "Error";
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString()
     {
@@ -100,9 +117,6 @@ final class NativeError extends IdScriptableObject
         return toString instanceof String ? (String) toString : super.toString();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
-     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -117,20 +131,6 @@ final class NativeError extends IdScriptableObject
         initPrototypeMethod(ERROR_TAG, id, s, arity);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#fillConstructorProperties(org.mozilla.javascript.IdFunctionObject)
-     */
-    @Override
-    protected void fillConstructorProperties(IdFunctionObject ctor)
-    {
-        addIdFunctionProperty(ctor, ERROR_TAG,
-                              ConstructorId_captureStackTrace, "captureStackTrace", 2);
-        super.fillConstructorProperties(ctor);
-    }
-
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -140,9 +140,6 @@ final class NativeError extends IdScriptableObject
         }
         int id = f.methodId();
         switch (id) {
-          case ConstructorId_captureStackTrace:
-            return js_captureStackTrace(cx, scope, args);
-
           case Id_constructor:
             return make(cx, scope, f, args);
 
@@ -151,15 +148,14 @@ final class NativeError extends IdScriptableObject
 
           case Id_toSource:
             return js_toSource(cx, scope, thisObj);
+
+          case ConstructorId_captureStackTrace:
+            js_captureStackTrace(cx, thisObj, args);
+            return Undefined.instance;
         }
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
-    /**
-     * Sets the stack provider.
-     *
-     * @param re the new stack provider
-     */
     public void setStackProvider(RhinoException re) {
         // We go some extra miles to make sure the stack property is only
         // generated on demand, is cached after the first access, and is
@@ -167,88 +163,68 @@ final class NativeError extends IdScriptableObject
         // the getter and setter below.
         if (stackProvider == null) {
             stackProvider = re;
-            try {
-                defineProperty("stack", this,
-                        NativeError.class.getMethod("getStack", Scriptable.class),
-                        NativeError.class.getMethod("setStack", Scriptable.class, Object.class),
-                        DONTENUM);
-            } catch (NoSuchMethodException nsm) {
-                // should not happen
-                throw new RuntimeException(nsm);
-            }
+            defineProperty("stack", this,
+                           ERROR_DELEGATE_GET_STACK, ERROR_DELEGATE_SET_STACK,
+                           DONTENUM);
         }
     }
 
-    /**
-     * Gets the stack.
-     *
-     * @return the stack
-     */
-    public Object getStack() {
-        return getStack(this);
-    }
-
-    /**
-     * Gets the stack.
-     *
-     * @param obj the obj
-     * @return the stack
-     */
-    public Object getStack(Scriptable obj) {
-        while(obj != null && !(obj instanceof NativeError)) {
-            obj = obj.getPrototype();
-        }
-        if (obj == null) {
+    public Object getStackDelegated(Scriptable target) {
+        if (stackProvider == null) {
             return NOT_FOUND;
         }
 
-        NativeError er = (NativeError) obj;
-        if (er.stackProvider == null) {
-            return NOT_FOUND;
+        // Get the object where prototype stuff is stored.
+        int limit = DEFAULT_STACK_LIMIT;
+        Function prepare = null;
+        NativeError cons = (NativeError)getPrototype();
+        ProtoProps pp = (ProtoProps)cons.getAssociatedValue(ProtoProps.KEY);
+
+        if (pp != null) {
+            limit = pp.getStackTraceLimit();
+            prepare = pp.getPrepareStackTrace();
         }
 
-        Object value = er.stackProvider.getPreparedScriptStackTrace(Context.getCurrentContext(), this, this);
+        // This key is only set by captureStackTrace
+        String hideFunc = (String)getAssociatedValue(STACK_HIDE_KEY);
+        ScriptStackElement[] stack = stackProvider.getScriptStack(limit, hideFunc);
+
+        // Determine whether to format the stack trace ourselves, or call the user's code to do it
+        Object value;
+        if (prepare == null) {
+            value = RhinoException.formatStackTrace(stack, stackProvider.details());
+        } else {
+            value = callPrepareStack(prepare, stack);
+        }
+
         // We store the stack as local property both to cache it
         // and to make the property writable
-        setStack(obj, value);
+        setStackDelegated(target, value);
         return value;
     }
 
-    /**
-     * Sets the stack.
-     *
-     * @param value the new stack
-     */
-    public void setStack(Object value) {
-        setStack(this, value);
+    public void setStackDelegated(Scriptable target, Object value) {
+        target.delete("stack");
+        stackProvider = null;
+        target.put("stack", target, value);
     }
 
-    /**
-     * Sets the stack.
-     *
-     * @param obj the obj
-     * @param value the value
-     */
-    public void setStack(Scriptable obj, Object value) {
-        while ((obj != null) && !(obj instanceof NativeError)) {
-            obj = obj.getPrototype();
+    private Object callPrepareStack(Function prepare, ScriptStackElement[] stack)
+    {
+        Context cx = Context.getCurrentContext();
+        Object[] elts = new Object[stack.length];
+
+        // The "prepareStackTrace" function takes an array of CallSite objects.
+        for (int i = 0; i < stack.length; i++) {
+            NativeCallSite site = (NativeCallSite)cx.newObject(this, "CallSite");
+            site.setElement(stack[i]);
+            elts[i] = site;
         }
-        if (obj != null) {
-            NativeError er = (NativeError) obj;
-            if (er.stackProvider != null) {
-                er.stackProvider = null;
-            }
-            er.delete("stack");
-            er.put("stack", er, value);
-        }
+
+        Scriptable eltArray = cx.newArray(this, elts);
+        return prepare.call(cx, prepare, this, new Object[] { this, eltArray });
     }
 
-    /**
-     * Js_to string.
-     *
-     * @param thisObj the this obj
-     * @return the object
-     */
     private static Object js_toString(Scriptable thisObj) {
         Object name = ScriptableObject.getProperty(thisObj, "name");
         if (name == NOT_FOUND || name == Undefined.instance) {
@@ -271,14 +247,6 @@ final class NativeError extends IdScriptableObject
         }
     }
 
-    /**
-     * Js_to source.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param thisObj the this obj
-     * @return the string
-     */
     private static String js_toSource(Context cx, Scriptable scope,
                                       Scriptable thisObj)
     {
@@ -322,41 +290,34 @@ final class NativeError extends IdScriptableObject
         return sb.toString();
     }
 
-    /**
-     * This is a V8 extension that causes a native Error object to have a stack trace inserted at the point
-     * at which it's called. It takes two arguments -- the first is an Error object and the second
-     * is an optional function name for trimming the stack trace. We will only implement the first.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param args the args
-     * @return the object
-     */
-    private static Object js_captureStackTrace(Context cx, Scriptable scope, Object[] args)
+    private static void js_captureStackTrace(Context cx, Scriptable thisObj, Object[] args)
     {
-        if (args.length < 1) {
-            throw ScriptRuntime.typeError("first argument must be an Object");
-        }
-        Scriptable obj;
-        try {
-            obj = (Scriptable)args[0];
-        } catch (ClassCastException cce) {
-            throw ScriptRuntime.typeError("err must be an Object");
+        ScriptableObject obj = (ScriptableObject)ScriptRuntime.toObjectOrNull(cx, args[0], thisObj);
+        Function func = null;
+        if (args.length > 1) {
+            func = (Function)ScriptRuntime.toObjectOrNull(cx, args[1], thisObj);
         }
 
-        EvaluatorException exc = new EvaluatorException(null);
-        exc.fillInStackTrace();
+        // Create a new error that will have the correct prototype so we can re-use "getStackTrace"
+        NativeError err = (NativeError)cx.newObject(thisObj, "Error");
+        // Wire it up so that it will have an actual exception with a stack trace
+        err.setStackProvider(new EvaluatorException("[object Object]"));
 
-        Object stack = exc.getPreparedScriptStackTrace(cx, scope, obj);
-        obj.delete("stack");
-        obj.put("stack", obj, stack);
+        // Figure out if they passed a function used to hide part of the stack
+        if (func != null) {
+            Object funcName = func.get("name", func);
+            if ((funcName != null) && !Undefined.instance.equals(funcName)) {
+                err.associateValue(STACK_HIDE_KEY, Context.toString(funcName));
+            }
+        }
 
-        return Undefined.instance;
+        // Define a property on the specified object to get that stack
+        // that delegates to our new error. Build the stack trace lazily
+        // using the "getStack" code from NativeError.
+        obj.defineProperty("stack", err,
+                           ERROR_DELEGATE_GET_STACK, ERROR_DELEGATE_SET_STACK, 0);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
-     */
     @Override
     protected int findPrototypeId(String s)
     {
@@ -378,14 +339,83 @@ final class NativeError extends IdScriptableObject
         return id;
     }
 
-    /** The Constant MAX_PROTOTYPE_ID. */
     private static final int
-        ConstructorId_captureStackTrace = -1,
         Id_constructor    = 1,
         Id_toString       = 2,
         Id_toSource       = 3,
+        ConstructorId_captureStackTrace = -1,
 
         MAX_PROTOTYPE_ID  = 3;
 
 // #/string_id_map#
+
+    /**
+     * We will attch this object to the constructor and use it solely to store the constructor properties
+     * that are "global." We can't make them static because there can be many contexts in the same JVM.
+     */
+    private static final class ProtoProps
+        implements Serializable
+    {
+        static final String KEY = "_ErrorPrototypeProps";
+
+        static final Method GET_STACK_LIMIT;
+        static final Method SET_STACK_LIMIT;
+        static final Method GET_PREPARE_STACK;
+        static final Method SET_PREPARE_STACK;
+
+        static {
+            try {
+                GET_STACK_LIMIT = ProtoProps.class.getMethod("getStackTraceLimit", Scriptable.class);
+                SET_STACK_LIMIT = ProtoProps.class.getMethod("setStackTraceLimit", Scriptable.class, Object.class);
+                GET_PREPARE_STACK = ProtoProps.class.getMethod("getPrepareStackTrace", Scriptable.class);
+                SET_PREPARE_STACK = ProtoProps.class.getMethod("setPrepareStackTrace", Scriptable.class, Object.class);
+            } catch (NoSuchMethodException nsm) {
+                throw new RuntimeException(nsm);
+            }
+        }
+
+        private static final long serialVersionUID = 1907180507775337939L;
+
+        private int stackTraceLimit = DEFAULT_STACK_LIMIT;
+        private Function prepareStackTrace;
+
+        public Object getStackTraceLimit(Scriptable thisObj) {
+            if (stackTraceLimit >= 0) {
+                return stackTraceLimit;
+            } else {
+                return Double.POSITIVE_INFINITY;
+            }
+        }
+
+        public int getStackTraceLimit() {
+            return stackTraceLimit;
+        }
+
+        public void setStackTraceLimit(Scriptable thisObj, Object value) {
+            double limit = Context.toNumber(value);
+            if (Double.isNaN(limit) || Double.isInfinite(limit)) {
+                stackTraceLimit = -1;
+            } else {
+                stackTraceLimit = (int)limit;
+            }
+        }
+
+        public Object getPrepareStackTrace(Scriptable thisObj)
+        {
+            Object ps = getPrepareStackTrace();
+            return (ps == null ? Undefined.instance : ps);
+        }
+
+        public Function getPrepareStackTrace() {
+            return prepareStackTrace;
+        }
+
+        public void setPrepareStackTrace(Scriptable thisObj, Object value) {
+            if ((value == null) || Undefined.instance.equals(value)) {
+                prepareStackTrace = null;
+            } else if (value instanceof Function) {
+                prepareStackTrace = (Function)value;
+            }
+        }
+    }
 }

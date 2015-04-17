@@ -8,7 +8,6 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
-
 /**
  * AST node for keyword literals:  currently, {@code this},
  * {@code null}, {@code true}, {@code false}, and {@code debugger}.
@@ -21,36 +20,19 @@ import org.mozilla.javascript.Token;
  */
 public class KeywordLiteral extends AstNode {
 
-    /**
-     * Instantiates a new keyword literal.
-     */
     public KeywordLiteral() {
     }
 
-    /**
-     * Instantiates a new keyword literal.
-     *
-     * @param pos the pos
-     */
     public KeywordLiteral(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new keyword literal.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public KeywordLiteral(int pos, int len) {
         super(pos, len);
     }
 
     /**
-     * Constructs a new KeywordLiteral.
-     *
-     * @param pos the pos
-     * @param len the len
+     * Constructs a new KeywordLiteral
      * @param nodeType the token type
      */
     public KeywordLiteral(int pos, int len, int nodeType) {
@@ -59,10 +41,8 @@ public class KeywordLiteral extends AstNode {
     }
 
     /**
-     * Sets node token type.
-     *
-     * @param nodeType the node type
-     * @return the keyword literal
+     * Sets node token type
+     * @throws IllegalArgumentException if {@code nodeType} is unsupported
      */
     @Override
     public KeywordLiteral setType(int nodeType) {
@@ -80,16 +60,11 @@ public class KeywordLiteral extends AstNode {
     /**
      * Returns true if the token type is {@link Token#TRUE} or
      * {@link Token#FALSE}.
-     *
-     * @return true, if is boolean literal
      */
     public boolean isBooleanLiteral() {
         return type == Token.TRUE || type == Token.FALSE;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -119,8 +94,6 @@ public class KeywordLiteral extends AstNode {
 
     /**
      * Visits this node.  There are no children to visit.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

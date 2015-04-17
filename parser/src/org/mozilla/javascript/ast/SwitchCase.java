@@ -6,16 +6,15 @@
 
 package org.mozilla.javascript.ast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.mozilla.javascript.Token;
 
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Switch-case AST node type.  The switch case is always part of a
  * switch statement.
- * Node type is {@link Token#CASE}.
+ * Node type is {@link Token#CASE}.<p>
  *
  * <pre><i>CaseBlock</i> :
  *        { [CaseClauses] }
@@ -30,45 +29,26 @@ import org.mozilla.javascript.Token;
  */
 public class SwitchCase extends AstNode {
 
-    /** The expression. */
     private AstNode expression;
-    
-    /** The statements. */
     private List<AstNode> statements;
 
     {
         type = Token.CASE;
     }
 
-    /**
-     * Instantiates a new switch case.
-     */
     public SwitchCase() {
     }
 
-    /**
-     * Instantiates a new switch case.
-     *
-     * @param pos the pos
-     */
     public SwitchCase(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new switch case.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public SwitchCase(int pos, int len) {
         super(pos, len);
     }
 
     /**
-     * Returns the case expression, {@code null} for default case.
-     *
-     * @return the expression
+     * Returns the case expression, {@code null} for default case
      */
     public AstNode getExpression() {
         return expression;
@@ -80,8 +60,6 @@ public class SwitchCase extends AstNode {
      * a case expression.  In {@code case 0: case 1: break;} the
      * first case has an {@code expression} that is a
      * {@link NumberLiteral} with value {@code 0}.
-     *
-     * @param expression the new expression
      */
     public void setExpression(AstNode expression) {
         this.expression = expression;
@@ -99,8 +77,6 @@ public class SwitchCase extends AstNode {
 
     /**
      * Returns statement list, which may be {@code null}.
-     *
-     * @return the statements
      */
     public List<AstNode> getStatements() {
         return statements;
@@ -109,8 +85,6 @@ public class SwitchCase extends AstNode {
     /**
      * Sets statement list.  May be {@code null}.  Replaces any existing
      * statements.  Each element in the list has its parent set to this node.
-     *
-     * @param statements the new statements
      */
     public void setStatements(List<AstNode> statements) {
         if (this.statements != null) {
@@ -128,6 +102,7 @@ public class SwitchCase extends AstNode {
      * length of this node to include the new child.
      *
      * @param statement a child statement
+     * @throws IllegalArgumentException} if statement is {@code null}
      */
     public void addStatement(AstNode statement) {
         assertNotNull(statement);
@@ -140,9 +115,6 @@ public class SwitchCase extends AstNode {
         statement.setParent(this);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -165,8 +137,6 @@ public class SwitchCase extends AstNode {
     /**
      * Visits this node, then the case expression if present, then
      * each statement (if any are specified).
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

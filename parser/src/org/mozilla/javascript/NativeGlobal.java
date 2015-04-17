@@ -6,14 +6,12 @@
 
 package org.mozilla.javascript;
 
-import static org.mozilla.javascript.ScriptableObject.DONTENUM;
-import static org.mozilla.javascript.ScriptableObject.PERMANENT;
-import static org.mozilla.javascript.ScriptableObject.READONLY;
-
 import java.io.Serializable;
 
 import org.mozilla.javascript.xml.XMLLib;
-
+import static org.mozilla.javascript.ScriptableObject.DONTENUM;
+import static org.mozilla.javascript.ScriptableObject.READONLY;
+import static org.mozilla.javascript.ScriptableObject.PERMANENT;
 
 /**
  * This class implements the global native object (function and value
@@ -26,17 +24,8 @@ import org.mozilla.javascript.xml.XMLLib;
 
 public class NativeGlobal implements Serializable, IdFunctionCall
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 6080442165748707530L;
 
-    /**
-     * Inits the.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param sealed the sealed
-     */
     public static void init(Context cx, Scriptable scope, boolean sealed) {
         NativeGlobal obj = new NativeGlobal();
 
@@ -106,26 +95,19 @@ public class NativeGlobal implements Serializable, IdFunctionCall
             scope, "undefined", Undefined.instance,
             READONLY|DONTENUM|PERMANENT);
 
-        String[] errorMethods = {
-                "ConversionError",
-                "EvalError",
-                "RangeError",
-                "ReferenceError",
-                "SyntaxError",
-                "TypeError",
-                "URIError",
-                "InternalError",
-                "JavaException"
-        };
-
         /*
             Each error constructor gets its own Error object as a prototype,
             with the 'name' property set to the name of the error.
         */
-        for (int i = 0; i < errorMethods.length; i++) {
-            String name = errorMethods[i];
+        for (TopLevel.NativeErrors error : TopLevel.NativeErrors.values()) {
+            if (error == TopLevel.NativeErrors.Error) {
+                // Error is initialized elsewhere and we should not overwrite it.
+                continue;
+            }
+            String name = error.name();
             ScriptableObject errorProto =
-              (ScriptableObject) ScriptRuntime.newObject(cx, scope, "Error",
+              (ScriptableObject) ScriptRuntime.newBuiltinObject(cx, scope,
+                                                  TopLevel.Builtins.Error,
                                                   ScriptRuntime.emptyArgs);
             errorProto.put("name", errorProto, name);
             errorProto.put("message", errorProto, "");
@@ -143,9 +125,6 @@ public class NativeGlobal implements Serializable, IdFunctionCall
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdFunctionCall#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
     {
@@ -229,9 +208,6 @@ public class NativeGlobal implements Serializable, IdFunctionCall
 
     /**
      * The global method parseInt, as per ECMA-262 15.1.2.2.
-     *
-     * @param args the args
-     * @return the object
      */
     private Object js_parseInt(Object[] args) {
         String s = ScriptRuntime.toString(args, 0);
@@ -287,7 +263,6 @@ public class NativeGlobal implements Serializable, IdFunctionCall
      * The global method parseFloat, as per ECMA-262 15.1.2.3.
      *
      * @param args the arguments to parseFloat, ignoring args[>=1]
-     * @return the object
      */
     private Object js_parseFloat(Object[] args)
     {
@@ -392,12 +367,10 @@ public class NativeGlobal implements Serializable, IdFunctionCall
 
     /**
      * The global method escape, as per ECMA-262 15.1.2.4.
+
      * Includes code for the 'mask' argument supported by the C escape
      * method, which used to be part of the browser imbedding.  Blame
      * for the strange constant names should be directed there.
-     *
-     * @param args the args
-     * @return the object
      */
 
     private Object js_escape(Object[] args) {
@@ -465,9 +438,6 @@ public class NativeGlobal implements Serializable, IdFunctionCall
 
     /**
      * The global unescape method, as per ECMA-262 15.1.2.5.
-     *
-     * @param args the args
-     * @return the object
      */
 
     private Object js_unescape(Object[] args)
@@ -512,11 +482,6 @@ public class NativeGlobal implements Serializable, IdFunctionCall
     /**
      * This is an indirect call to eval, and thus uses the global environment.
      * Direct calls are executed via ScriptRuntime.callSpecial().
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param args the args
-     * @return the object
      */
     private Object js_eval(Context cx, Scriptable scope, Object[] args)
     {
@@ -524,12 +489,6 @@ public class NativeGlobal implements Serializable, IdFunctionCall
         return ScriptRuntime.evalSpecial(cx, global, global, args, "eval code", 1);
     }
 
-    /**
-     * Checks if is eval function.
-     *
-     * @param functionObj the function obj
-     * @return true, if is eval function
-     */
     static boolean isEvalFunction(Object functionObj)
     {
         if (functionObj instanceof IdFunctionObject) {
@@ -542,16 +501,10 @@ public class NativeGlobal implements Serializable, IdFunctionCall
     }
 
     /**
-     * Construct error.
-     *
-     * @param cx the cx
-     * @param error the error
-     * @param message the message
-     * @param scope the scope
-     * @return the ecma error
      * @deprecated Use {@link ScriptRuntime#constructError(String,String)}
      * instead.
      */
+    @Deprecated
     public static EcmaError constructError(Context cx,
                                            String error,
                                            String message,
@@ -561,21 +514,11 @@ public class NativeGlobal implements Serializable, IdFunctionCall
     }
 
     /**
-     * Construct error.
-     *
-     * @param cx the cx
-     * @param error the error
-     * @param message the message
-     * @param scope the scope
-     * @param sourceName the source name
-     * @param lineNumber the line number
-     * @param columnNumber the column number
-     * @param lineSource the line source
-     * @return the ecma error
      * @deprecated Use
      * {@link ScriptRuntime#constructError(String,String,String,int,String,int)}
      * instead.
      */
+    @Deprecated
     public static EcmaError constructError(Context cx,
                                            String error,
                                            String message,
@@ -597,13 +540,6 @@ public class NativeGlobal implements Serializable, IdFunctionCall
     *   given in the ECMA specification for the hidden functions
     *   'Encode' and 'Decode'.
     */
-    /**
-     * Encode.
-     *
-     * @param str the str
-     * @param fullUri the full uri
-     * @return the string
-     */
     private static String encode(String str, boolean fullUri) {
         byte[] utf8buf = null;
         StringBuilder sb = null;
@@ -650,23 +586,11 @@ public class NativeGlobal implements Serializable, IdFunctionCall
         return (sb == null) ? str : sb.toString();
     }
 
-    /**
-     * To hex char.
-     *
-     * @param i the i
-     * @return the char
-     */
     private static char toHexChar(int i) {
         if (i >> 4 != 0) Kit.codeBug();
         return (char)((i < 10) ? i + '0' : i - 10 + 'A');
     }
 
-    /**
-     * Un hex.
-     *
-     * @param c the c
-     * @return the int
-     */
     private static int unHex(char c) {
         if ('A' <= c && c <= 'F') {
             return c - 'A' + 10;
@@ -679,13 +603,6 @@ public class NativeGlobal implements Serializable, IdFunctionCall
         }
     }
 
-    /**
-     * Un hex.
-     *
-     * @param c1 the c1
-     * @param c2 the c2
-     * @return the int
-     */
     private static int unHex(char c1, char c2) {
         int i1 = unHex(c1);
         int i2 = unHex(c2);
@@ -695,13 +612,6 @@ public class NativeGlobal implements Serializable, IdFunctionCall
         return -1;
     }
 
-    /**
-     * Decode.
-     *
-     * @param str the str
-     * @param fullUri the full uri
-     * @return the string
-     */
     private static String decode(String str, boolean fullUri) {
         char[] buf = null;
         int bufTop = 0;
@@ -797,13 +707,6 @@ public class NativeGlobal implements Serializable, IdFunctionCall
         return (buf == null) ? str : new String(buf, 0, bufTop);
     }
 
-    /**
-     * Encode unescaped.
-     *
-     * @param c the c
-     * @param fullUri the full uri
-     * @return true, if successful
-     */
     private static boolean encodeUnescaped(char c, boolean fullUri) {
         if (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z')
                 || ('0' <= c && c <= '9')) {
@@ -818,32 +721,17 @@ public class NativeGlobal implements Serializable, IdFunctionCall
         return false;
     }
 
-    /**
-     * Uri error.
-     *
-     * @return the ecma error
-     */
     private static EcmaError uriError() {
         return ScriptRuntime.constructError("URIError",
                 ScriptRuntime.getMessage0("msg.bad.uri"));
     }
 
-    /** The Constant URI_DECODE_RESERVED. */
     private static final String URI_DECODE_RESERVED = ";/?:@&=+$,#";
-    
-    /** The Constant INVALID_UTF8. */
     private static final int INVALID_UTF8 = Integer.MAX_VALUE;
 
     /* Convert one UCS-4 char and write it into a UTF-8 buffer, which must be
     * at least 6 bytes long.  Return the number of UTF-8 bytes of data written.
     */
-    /**
-     * One ucs4 to utf8 char.
-     *
-     * @param utf8Buffer the utf8 buffer
-     * @param ucs4Char the ucs4 char
-     * @return the int
-     */
     private static int oneUcs4ToUtf8Char(byte[] utf8Buffer, int ucs4Char) {
         int utf8Length = 1;
 
@@ -868,10 +756,8 @@ public class NativeGlobal implements Serializable, IdFunctionCall
         return utf8Length;
     }
 
-    /** The Constant FTAG. */
     private static final Object FTAG = "Global";
 
-    /** The Constant Id_new_CommonError. */
     private static final int
         Id_decodeURI           =  1,
         Id_decodeURIComponent  =  2,

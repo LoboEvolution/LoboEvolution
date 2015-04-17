@@ -8,7 +8,6 @@
 
 package org.mozilla.javascript;
 
-
 /**
  * Java reflection of JavaScript exceptions.
  * Instances of this class are thrown by the JavaScript 'throw' keyword.
@@ -17,57 +16,44 @@ package org.mozilla.javascript;
  */
 public class JavaScriptException extends RhinoException
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -7666130513694669293L;
 
     /**
-     * Instantiates a new java script exception.
-     *
-     * @param value the value
-     * @deprecated Use {@link WrappedException#WrappedException(Throwable)} to report
+     * @deprecated
+     * Use {@link WrappedException#WrappedException(Throwable)} to report
      * exceptions in Java code.
      */
+    @Deprecated
     public JavaScriptException(Object value)
     {
         this(value, "", 0);
     }
 
     /**
-     * Create a JavaScript exception wrapping the given JavaScript value.
+     * Create a JavaScript exception wrapping the given JavaScript value
      *
      * @param value the JavaScript value thrown.
-     * @param sourceName the source name
-     * @param lineNumber the line number
      */
-    public JavaScriptException(Object value, String sourceName, int lineNumber) {
+    public JavaScriptException(Object value, String sourceName, int lineNumber)
+    {
         recordErrorOrigin(sourceName, lineNumber, null, 0);
         this.value = value;
         // Fill in fileName and lineNumber automatically when not specified
         // explicitly, see Bugzilla issue #342807
-
-        if (value instanceof Scriptable && Context.getContext().hasFeature(Context.FEATURE_LOCATION_INFORMATION_IN_ERROR)) {
-            Scriptable obj = (Scriptable) value;
-            while(obj != null && !(obj instanceof NativeError)) {
-                obj = obj.getPrototype();
+        if (value instanceof NativeError && Context.getContext()
+                .hasFeature(Context.FEATURE_LOCATION_INFORMATION_IN_ERROR)) {
+            NativeError error = (NativeError) value;
+            if (!error.has("fileName", error)) {
+                error.put("fileName", error, sourceName);
             }
-            if (obj != null) {
-                NativeError error = (NativeError) obj;
-                if (!error.has("fileName", error)) {
-                    error.put("fileName", error, sourceName);
-                }
-                if (!error.has("lineNumber", error)) {
-                    error.put("lineNumber", error, Integer.valueOf(lineNumber));
-                }
-                // set stack property, see bug #549604
-                error.setStackProvider(this);
+            if (!error.has("lineNumber", error)) {
+                error.put("lineNumber", error, Integer.valueOf(lineNumber));
             }
+            // set stack property, see bug #549604
+            error.setStackProvider(this);
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.RhinoException#details()
-     */
     @Override
     public String details()
     {
@@ -89,8 +75,6 @@ public class JavaScriptException extends RhinoException
     }
 
     /**
-     * Gets the value.
-     *
      * @return the value wrapped by this exception
      */
     public Object getValue()
@@ -99,27 +83,22 @@ public class JavaScriptException extends RhinoException
     }
 
     /**
-     * Gets the source name.
-     *
-     * @return the source name
      * @deprecated Use {@link RhinoException#sourceName()} from the super class.
      */
+    @Deprecated
     public String getSourceName()
     {
         return sourceName();
     }
 
     /**
-     * Gets the line number.
-     *
-     * @return the line number
      * @deprecated Use {@link RhinoException#lineNumber()} from the super class.
      */
+    @Deprecated
     public int getLineNumber()
     {
         return lineNumber();
     }
 
-    /** The value. */
     private Object value;
 }

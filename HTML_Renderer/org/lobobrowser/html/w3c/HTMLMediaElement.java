@@ -1,282 +1,312 @@
+/*
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ */
 package org.lobobrowser.html.w3c;
 
-
 /**
- * The Interface HTMLMediaElement.
+ * The public interface HTMLMediaElement.
  */
 public interface HTMLMediaElement extends HTMLElement {
-	// HTMLMediaElement
-	/**
-	 * Gets the error.
-	 *
-	 * @return the error
-	 */
-	public MediaError getError();
+    // HTMLMediaElement
+    /**
+     * Gets the error.
+     *
+     * @return the error
+     */
+    MediaError getError();
 
-	/**
-	 * Gets the src.
-	 *
-	 * @return the src
-	 */
-	public String getSrc();
+    /**
+     * Gets the src.
+     *
+     * @return the src
+     */
+    String getSrc();
 
-	/**
-	 * Sets the src.
-	 *
-	 * @param src the new src
-	 */
-	public void setSrc(String src);
+    /**
+     * Sets the src.
+     *
+     * @param src
+     *            the new src
+     */
+    void setSrc(String src);
 
-	/**
-	 * Gets the current src.
-	 *
-	 * @return the current src
-	 */
-	public String getCurrentSrc();
+    /**
+     * Gets the current src.
+     *
+     * @return the current src
+     */
+    String getCurrentSrc();
 
-	/** The Constant NETWORK_EMPTY. */
-	public static final short NETWORK_EMPTY = 0;
-	
-	/** The Constant NETWORK_IDLE. */
-	public static final short NETWORK_IDLE = 1;
-	
-	/** The Constant NETWORK_LOADING. */
-	public static final short NETWORK_LOADING = 2;
-	
-	/** The Constant NETWORK_NO_SOURCE. */
-	public static final short NETWORK_NO_SOURCE = 3;
+    /** The Constant NETWORK_EMPTY. */
+    short NETWORK_EMPTY = 0;
 
-	/**
-	 * Gets the network state.
-	 *
-	 * @return the network state
-	 */
-	public short getNetworkState();
+    /** The Constant NETWORK_IDLE. */
+    short NETWORK_IDLE = 1;
 
-	/**
-	 * Gets the preload.
-	 *
-	 * @return the preload
-	 */
-	public String getPreload();
+    /** The Constant NETWORK_LOADING. */
+    short NETWORK_LOADING = 2;
 
-	/**
-	 * Sets the preload.
-	 *
-	 * @param preload the new preload
-	 */
-	public void setPreload(String preload);
+    /** The Constant NETWORK_NO_SOURCE. */
+    short NETWORK_NO_SOURCE = 3;
 
-	/**
-	 * Gets the buffered.
-	 *
-	 * @return the buffered
-	 */
-	public TimeRanges getBuffered();
+    /**
+     * Gets the network state.
+     *
+     * @return the network state
+     */
+    short getNetworkState();
 
-	/**
-	 * Load.
-	 */
-	public void load();
+    /**
+     * Gets the preload.
+     *
+     * @return the preload
+     */
+    String getPreload();
 
-	/**
-	 * Can play type.
-	 *
-	 * @param type the type
-	 * @return the string
-	 */
-	public String canPlayType(String type);
+    /**
+     * Sets the preload.
+     *
+     * @param preload
+     *            the new preload
+     */
+    void setPreload(String preload);
 
-	/** The Constant HAVE_NOTHING. */
-	public static final short HAVE_NOTHING = 0;
-	
-	/** The Constant HAVE_METADATA. */
-	public static final short HAVE_METADATA = 1;
-	
-	/** The Constant HAVE_CURRENT_DATA. */
-	public static final short HAVE_CURRENT_DATA = 2;
-	
-	/** The Constant HAVE_FUTURE_DATA. */
-	public static final short HAVE_FUTURE_DATA = 3;
-	
-	/** The Constant HAVE_ENOUGH_DATA. */
-	public static final short HAVE_ENOUGH_DATA = 4;
+    /**
+     * Gets the buffered.
+     *
+     * @return the buffered
+     */
+    TimeRanges getBuffered();
 
-	/**
-	 * Gets the ready state.
-	 *
-	 * @return the ready state
-	 */
-	public short getReadyState();
+    /**
+     * Load.
+     */
+    void load();
 
-	/**
-	 * Gets the seeking.
-	 *
-	 * @return the seeking
-	 */
-	public boolean getSeeking();
+    /**
+     * Can play type.
+     *
+     * @param type
+     *            the type
+     * @return the string
+     */
+    String canPlayType(String type);
 
-	/**
-	 * Gets the current time.
-	 *
-	 * @return the current time
-	 */
-	public float getCurrentTime();
+    /** The Constant HAVE_NOTHING. */
+    short HAVE_NOTHING = 0;
 
-	/**
-	 * Sets the current time.
-	 *
-	 * @param currentTime the new current time
-	 */
-	public void setCurrentTime(float currentTime);
+    /** The Constant HAVE_METADATA. */
+    short HAVE_METADATA = 1;
 
-	/**
-	 * Gets the start time.
-	 *
-	 * @return the start time
-	 */
-	public float getStartTime();
+    /** The Constant HAVE_CURRENT_DATA. */
+    short HAVE_CURRENT_DATA = 2;
 
-	/**
-	 * Gets the duration.
-	 *
-	 * @return the duration
-	 */
-	public float getDuration();
+    /** The Constant HAVE_FUTURE_DATA. */
+    short HAVE_FUTURE_DATA = 3;
 
-	/**
-	 * Gets the paused.
-	 *
-	 * @return the paused
-	 */
-	public boolean getPaused();
+    /** The Constant HAVE_ENOUGH_DATA. */
+    short HAVE_ENOUGH_DATA = 4;
 
-	/**
-	 * Gets the default playback rate.
-	 *
-	 * @return the default playback rate
-	 */
-	public float getDefaultPlaybackRate();
+    /**
+     * Gets the ready state.
+     *
+     * @return the ready state
+     */
+    short getReadyState();
 
-	/**
-	 * Sets the default playback rate.
-	 *
-	 * @param defaultPlaybackRate the new default playback rate
-	 */
-	public void setDefaultPlaybackRate(float defaultPlaybackRate);
+    /**
+     * Gets the seeking.
+     *
+     * @return the seeking
+     */
+    boolean getSeeking();
 
-	/**
-	 * Gets the playback rate.
-	 *
-	 * @return the playback rate
-	 */
-	public float getPlaybackRate();
+    /**
+     * Gets the current time.
+     *
+     * @return the current time
+     */
+    float getCurrentTime();
 
-	/**
-	 * Sets the playback rate.
-	 *
-	 * @param playbackRate the new playback rate
-	 */
-	public void setPlaybackRate(float playbackRate);
+    /**
+     * Sets the current time.
+     *
+     * @param currentTime
+     *            the new current time
+     */
+    void setCurrentTime(float currentTime);
 
-	/**
-	 * Gets the played.
-	 *
-	 * @return the played
-	 */
-	public TimeRanges getPlayed();
+    /**
+     * Gets the start time.
+     *
+     * @return the start time
+     */
+    float getStartTime();
 
-	/**
-	 * Gets the seekable.
-	 *
-	 * @return the seekable
-	 */
-	public TimeRanges getSeekable();
+    /**
+     * Gets the duration.
+     *
+     * @return the duration
+     */
+    float getDuration();
 
-	/**
-	 * Gets the ended.
-	 *
-	 * @return the ended
-	 */
-	public boolean getEnded();
+    /**
+     * Gets the paused.
+     *
+     * @return the paused
+     */
+    boolean getPaused();
 
-	/**
-	 * Gets the autoplay.
-	 *
-	 * @return the autoplay
-	 */
-	public boolean getAutoplay();
+    /**
+     * Gets the default playback rate.
+     *
+     * @return the default playback rate
+     */
+    float getDefaultPlaybackRate();
 
-	/**
-	 * Sets the autoplay.
-	 *
-	 * @param autoplay the new autoplay
-	 */
-	public void setAutoplay(boolean autoplay);
+    /**
+     * Sets the default playback rate.
+     *
+     * @param defaultPlaybackRate
+     *            the new default playback rate
+     */
+    void setDefaultPlaybackRate(float defaultPlaybackRate);
 
-	/**
-	 * Gets the loop.
-	 *
-	 * @return the loop
-	 */
-	public boolean getLoop();
+    /**
+     * Gets the playback rate.
+     *
+     * @return the playback rate
+     */
+    float getPlaybackRate();
 
-	/**
-	 * Sets the loop.
-	 *
-	 * @param loop the new loop
-	 */
-	public void setLoop(boolean loop);
+    /**
+     * Sets the playback rate.
+     *
+     * @param playbackRate
+     *            the new playback rate
+     */
+    void setPlaybackRate(float playbackRate);
 
-	/**
-	 * Play.
-	 */
-	public void play();
+    /**
+     * Gets the played.
+     *
+     * @return the played
+     */
+    TimeRanges getPlayed();
 
-	/**
-	 * Pause.
-	 */
-	public void pause();
+    /**
+     * Gets the seekable.
+     *
+     * @return the seekable
+     */
+    TimeRanges getSeekable();
 
-	/**
-	 * Gets the controls.
-	 *
-	 * @return the controls
-	 */
-	public boolean getControls();
+    /**
+     * Gets the ended.
+     *
+     * @return the ended
+     */
+    boolean getEnded();
 
-	/**
-	 * Sets the controls.
-	 *
-	 * @param controls the new controls
-	 */
-	public void setControls(boolean controls);
+    /**
+     * Gets the autoplay.
+     *
+     * @return the autoplay
+     */
+    boolean getAutoplay();
 
-	/**
-	 * Gets the volume.
-	 *
-	 * @return the volume
-	 */
-	public float getVolume();
+    /**
+     * Sets the autoplay.
+     *
+     * @param autoplay
+     *            the new autoplay
+     */
+    void setAutoplay(boolean autoplay);
 
-	/**
-	 * Sets the volume.
-	 *
-	 * @param volume the new volume
-	 */
-	public void setVolume(float volume);
+    /**
+     * Gets the loop.
+     *
+     * @return the loop
+     */
+    boolean getLoop();
 
-	/**
-	 * Gets the muted.
-	 *
-	 * @return the muted
-	 */
-	public boolean getMuted();
+    /**
+     * Sets the loop.
+     *
+     * @param loop
+     *            the new loop
+     */
+    void setLoop(boolean loop);
 
-	/**
-	 * Sets the muted.
-	 *
-	 * @param muted the new muted
-	 */
-	public void setMuted(boolean muted);
+    /**
+     * Play.
+     */
+    void play();
+
+    /**
+     * Pause.
+     */
+    void pause();
+
+    /**
+     * Gets the controls.
+     *
+     * @return the controls
+     */
+    boolean getControls();
+
+    /**
+     * Sets the controls.
+     *
+     * @param controls
+     *            the new controls
+     */
+    void setControls(boolean controls);
+
+    /**
+     * Gets the volume.
+     *
+     * @return the volume
+     */
+    float getVolume();
+
+    /**
+     * Sets the volume.
+     *
+     * @param volume
+     *            the new volume
+     */
+    void setVolume(float volume);
+
+    /**
+     * Gets the muted.
+     *
+     * @return the muted
+     */
+    boolean getMuted();
+
+    /**
+     * Sets the muted.
+     *
+     * @param muted
+     *            the new muted
+     */
+    void setMuted(boolean muted);
 }

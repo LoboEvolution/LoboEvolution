@@ -6,67 +6,42 @@
 
 package org.mozilla.javascript.ast;
 
+import org.mozilla.javascript.Token;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.mozilla.javascript.Token;
-
-
 /**
- * AST node for a function call.  Node type is {@link Token#CALL}.
+ * AST node for a function call.  Node type is {@link Token#CALL}.<p>
  */
 public class FunctionCall extends AstNode {
 
-    /** The Constant NO_ARGS. */
     protected static final List<AstNode> NO_ARGS =
         Collections.unmodifiableList(new ArrayList<AstNode>());
 
-    /** The target. */
     protected AstNode target;
-    
-    /** The arguments. */
     protected List<AstNode> arguments;
-    
-    /** The lp. */
     protected int lp = -1;
-    
-    /** The rp. */
     protected int rp = -1;
 
     {
         type = Token.CALL;
     }
 
-    /**
-     * Instantiates a new function call.
-     */
     public FunctionCall() {
     }
 
-    /**
-     * Instantiates a new function call.
-     *
-     * @param pos the pos
-     */
     public FunctionCall(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new function call.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public FunctionCall(int pos, int len) {
         super(pos, len);
     }
 
     /**
-     * Returns node evaluating to the function to call.
-     *
-     * @return the target
+     * Returns node evaluating to the function to call
      */
     public AstNode getTarget() {
         return target;
@@ -75,8 +50,8 @@ public class FunctionCall extends AstNode {
     /**
      * Sets node evaluating to the function to call, and sets
      * its parent to this node.
-     *
      * @param target node evaluating to the function to call.
+     * @throws IllegalArgumentException} if target is {@code null}
      */
     public void setTarget(AstNode target) {
         assertNotNull(target);
@@ -85,8 +60,7 @@ public class FunctionCall extends AstNode {
     }
 
     /**
-     * Returns function argument list.
-     *
+     * Returns function argument list
      * @return function argument list, or an empty immutable list if
      *         there are no arguments.
      */
@@ -95,8 +69,7 @@ public class FunctionCall extends AstNode {
     }
 
     /**
-     * Sets function argument list.
-     *
+     * Sets function argument list
      * @param arguments function argument list.  Can be {@code null},
      *        in which case any existing args are removed.
      */
@@ -114,8 +87,8 @@ public class FunctionCall extends AstNode {
 
     /**
      * Adds an argument to the list, and sets its parent to this node.
-     *
      * @param arg the argument node to add to the list
+     * @throws IllegalArgumentException} if arg is {@code null}
      */
     public void addArgument(AstNode arg) {
         assertNotNull(arg);
@@ -127,17 +100,14 @@ public class FunctionCall extends AstNode {
     }
 
     /**
-     * Returns left paren position, -1 if missing.
-     *
-     * @return the lp
+     * Returns left paren position, -1 if missing
      */
     public int getLp() {
         return lp;
     }
 
     /**
-     * Sets left paren position.
-     *
+     * Sets left paren position
      * @param lp left paren position
      */
     public void setLp(int lp) {
@@ -145,37 +115,27 @@ public class FunctionCall extends AstNode {
     }
 
     /**
-     * Returns right paren position, -1 if missing.
-     *
-     * @return the rp
+     * Returns right paren position, -1 if missing
      */
     public int getRp() {
         return rp;
     }
 
     /**
-     * Sets right paren position.
-     *
-     * @param rp the new rp
+     * Sets right paren position
      */
     public void setRp(int rp) {
         this.rp = rp;
     }
 
     /**
-     * Sets both paren positions.
-     *
-     * @param lp the lp
-     * @param rp the rp
+     * Sets both paren positions
      */
     public void setParens(int lp, int rp) {
         this.lp = lp;
         this.rp = rp;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -191,8 +151,6 @@ public class FunctionCall extends AstNode {
 
     /**
      * Visits this node, the target object, and the arguments.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

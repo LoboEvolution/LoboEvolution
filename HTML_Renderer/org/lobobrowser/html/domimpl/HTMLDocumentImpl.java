@@ -2433,12 +2433,6 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     }
 
-    /*
- * (non-Javadoc)
- * @see
- * org.lobobrowser.html.w3c.HTMLDocument#removeEventListener(java.lang.String,
- * java.lang.String)
- */
     @Override
     public void removeEventListener(String script, Function function) {
        String key = script.toLowerCase();
@@ -2478,6 +2472,17 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
         default:
             break;
         }
+    }
+
+    @Override
+    public void addEventListener(String script, Function function, boolean bool) {
+        addEventListener(script, function);
+    }
+
+    @Override
+    public void removeEventListener(String script, Function function,
+            boolean bool) {
+        removeEventListener(script, function);
     }
 
     /**

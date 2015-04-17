@@ -1,22 +1,16 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 2 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
-
-    You should have received a copy of the GNU General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either verion 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Feb 5, 2006
@@ -35,88 +29,104 @@ import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.ua.TargetType;
 
-
 /**
  * The Class BrowserFrameImpl.
  */
 public class BrowserFrameImpl implements BrowserFrame {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger
-			.getLogger(BrowserFrameImpl.class.getName());
-	
-	/** The frame. */
-	private final NavigatorFrame frame;
-	
-	/** The rcontext. */
-	private final HtmlRendererContextImpl rcontext;
 
-	/**
-	 * Instantiates a new browser frame impl.
-	 *
-	 * @param frame the frame
-	 * @param parentrcontext the parentrcontext
-	 */
-	public BrowserFrameImpl(NavigatorFrame frame,
-			HtmlRendererContext parentrcontext) {
-		if (logger.isLoggable(Level.INFO)) {
-			logger.info("BrowserFrameImpl(): frame=" + frame
-					+ ",parentrcontext=" + parentrcontext);
-		}
-		this.frame = frame;
-		this.rcontext = HtmlRendererContextImpl.getHtmlRendererContext(frame);
-	}
+    /** The Constant logger. */
+    private static final Logger logger = Logger
+            .getLogger(BrowserFrameImpl.class.getName());
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.BrowserFrame#getHtmlRendererContext()
-	 */
-	public HtmlRendererContext getHtmlRendererContext() {
-		return this.rcontext;
-	}
+    /** The frame. */
+    private final NavigatorFrame frame;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.BrowserFrame#getComponent()
-	 */
-	public Component getComponent() {
-		return this.frame.getComponent();
-	}
+    /** The rcontext. */
+    private final HtmlRendererContextImpl rcontext;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.BrowserFrame#getContentDocument()
-	 */
-	public org.w3c.dom.Document getContentDocument() {
-		return this.rcontext.getContentDocument();
-	}
+    /**
+     * Instantiates a new browser frame impl.
+     *
+     * @param frame
+     *            the frame
+     * @param parentrcontext
+     *            the parentrcontext
+     */
+    public BrowserFrameImpl(NavigatorFrame frame,
+            HtmlRendererContext parentrcontext) {
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("BrowserFrameImpl(): frame=" + frame
+                    + ",parentrcontext=" + parentrcontext);
+        }
+        this.frame = frame;
+        this.rcontext = HtmlRendererContextImpl.getHtmlRendererContext(frame);
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.BrowserFrame#loadURL(java.net.URL)
-	 */
-	public void loadURL(URL url) {
-		if (logger.isLoggable(Level.INFO)) {
-			logger.info("loadURL(): frame=" + frame + ",url=" + url);
-		}
-		this.frame.navigate(url, "GET", null, TargetType.SELF,
-				RequestType.FRAME);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.BrowserFrame#getHtmlRendererContext()
+     */
+    @Override
+    public HtmlRendererContext getHtmlRendererContext() {
+        return this.rcontext;
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.BrowserFrame#setDefaultMarginInsets(java.awt.Insets)
-	 */
-	public void setDefaultMarginInsets(Insets insets) {
-		this.frame.setProperty("defaultMarginInsets", insets);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.BrowserFrame#getComponent()
+     */
+    @Override
+    public Component getComponent() {
+        return this.frame.getComponent();
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.BrowserFrame#setDefaultOverflowX(int)
-	 */
-	public void setDefaultOverflowX(int overflowX) {
-		this.frame.setProperty("defaultOverflowX", overflowX);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.BrowserFrame#getContentDocument()
+     */
+    @Override
+    public org.w3c.dom.Document getContentDocument() {
+        return this.rcontext.getContentDocument();
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.BrowserFrame#setDefaultOverflowY(int)
-	 */
-	public void setDefaultOverflowY(int overflowY) {
-		this.frame.setProperty("defaultOverflowY", overflowY);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.BrowserFrame#loadURL(java.net.URL)
+     */
+    @Override
+    public void loadURL(URL url) {
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("loadURL(): frame=" + frame + ",url=" + url);
+        }
+        this.frame.navigate(url, "GET", null, TargetType.SELF,
+                RequestType.FRAME);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.lobobrowser.html.BrowserFrame#setDefaultMarginInsets(java.awt.Insets)
+     */
+    @Override
+    public void setDefaultMarginInsets(Insets insets) {
+        this.frame.setProperty("defaultMarginInsets", insets);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.BrowserFrame#setDefaultOverflowX(int)
+     */
+    @Override
+    public void setDefaultOverflowX(int overflowX) {
+        this.frame.setProperty("defaultOverflowX", overflowX);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.BrowserFrame#setDefaultOverflowY(int)
+     */
+    @Override
+    public void setDefaultOverflowY(int overflowY) {
+        this.frame.setProperty("defaultOverflowY", overflowY);
+    }
 }

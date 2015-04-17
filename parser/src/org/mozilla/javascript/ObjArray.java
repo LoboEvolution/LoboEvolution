@@ -6,11 +6,10 @@
 
 package org.mozilla.javascript;
 
+import java.io.Serializable;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
 
 /**
 Implementation of resizable array with focus on minimizing memory usage by storing few initial array elements in object fields. Can also be used as a stack.
@@ -18,58 +17,30 @@ Implementation of resizable array with focus on minimizing memory usage by stori
 
 public class ObjArray implements Serializable
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 4174889037736658296L;
 
-    /**
-     * Instantiates a new obj array.
-     */
     public ObjArray() { }
 
-    /**
-     * Checks if is sealed.
-     *
-     * @return true, if is sealed
-     */
     public final boolean isSealed()
     {
         return sealed;
     }
 
-    /**
-     * Seal.
-     */
     public final void seal()
     {
         sealed = true;
     }
 
-    /**
-     * Checks if is empty.
-     *
-     * @return true, if is empty
-     */
     public final boolean isEmpty()
     {
         return size == 0;
     }
 
-    /**
-     * Size.
-     *
-     * @return the int
-     */
     public final int size()
     {
         return size;
     }
 
-    /**
-     * Sets the size.
-     *
-     * @param newSize the new size
-     */
     public final void setSize(int newSize)
     {
         if (newSize < 0) throw new IllegalArgumentException();
@@ -87,24 +58,12 @@ public class ObjArray implements Serializable
         size = newSize;
     }
 
-    /**
-     * Gets the.
-     *
-     * @param index the index
-     * @return the object
-     */
     public final Object get(int index)
     {
         if (!(0 <= index && index < size)) throw onInvalidIndex(index, size);
         return getImpl(index);
     }
 
-    /**
-     * Sets the.
-     *
-     * @param index the index
-     * @param value the value
-     */
     public final void set(int index, Object value)
     {
         if (!(0 <= index && index < size)) throw onInvalidIndex(index, size);
@@ -112,12 +71,6 @@ public class ObjArray implements Serializable
         setImpl(index, value);
     }
 
-    /**
-     * Gets the impl.
-     *
-     * @param index the index
-     * @return the impl
-     */
     private Object getImpl(int index)
     {
         switch (index) {
@@ -130,12 +83,6 @@ public class ObjArray implements Serializable
         return data[index - FIELDS_STORE_SIZE];
     }
 
-    /**
-     * Sets the impl.
-     *
-     * @param index the index
-     * @param value the value
-     */
     private void setImpl(int index, Object value)
     {
         switch (index) {
@@ -149,12 +96,6 @@ public class ObjArray implements Serializable
 
     }
 
-    /**
-     * Index of.
-     *
-     * @param obj the obj
-     * @return the int
-     */
     public int indexOf(Object obj)
     {
         int N = size;
@@ -167,12 +108,6 @@ public class ObjArray implements Serializable
         return -1;
     }
 
-    /**
-     * Last index of.
-     *
-     * @param obj the obj
-     * @return the int
-     */
     public int lastIndexOf(Object obj)
     {
         for (int i = size; i != 0;) {
@@ -185,11 +120,6 @@ public class ObjArray implements Serializable
         return -1;
     }
 
-    /**
-     * Peek.
-     *
-     * @return the object
-     */
     public final Object peek()
     {
         int N = size;
@@ -197,11 +127,6 @@ public class ObjArray implements Serializable
         return getImpl(N - 1);
     }
 
-    /**
-     * Pop.
-     *
-     * @return the object
-     */
     public final Object pop()
     {
         if (sealed) throw onSeledMutation();
@@ -223,21 +148,11 @@ public class ObjArray implements Serializable
         return top;
     }
 
-    /**
-     * Push.
-     *
-     * @param value the value
-     */
     public final void push(Object value)
     {
         add(value);
     }
 
-    /**
-     * Adds the.
-     *
-     * @param value the value
-     */
     public final void add(Object value)
     {
         if (sealed) throw onSeledMutation();
@@ -249,12 +164,6 @@ public class ObjArray implements Serializable
         setImpl(N, value);
     }
 
-    /**
-     * Adds the.
-     *
-     * @param index the index
-     * @param value the value
-     */
     public final void add(int index, Object value)
     {
         int N = size;
@@ -291,11 +200,6 @@ public class ObjArray implements Serializable
         size = N + 1;
     }
 
-    /**
-     * Removes the.
-     *
-     * @param index the index
-     */
     public final void remove(int index)
     {
         int N = size;
@@ -331,9 +235,6 @@ public class ObjArray implements Serializable
         size = N;
     }
 
-    /**
-     * Clear.
-     */
     public final void clear()
     {
         if (sealed) throw onSeledMutation();
@@ -344,11 +245,6 @@ public class ObjArray implements Serializable
         size = 0;
     }
 
-    /**
-     * To array.
-     *
-     * @return the object[]
-     */
     public final Object[] toArray()
     {
         Object[] array = new Object[size];
@@ -356,22 +252,11 @@ public class ObjArray implements Serializable
         return array;
     }
 
-    /**
-     * To array.
-     *
-     * @param array the array
-     */
     public final void toArray(Object[] array)
     {
         toArray(array, 0);
     }
 
-    /**
-     * To array.
-     *
-     * @param array the array
-     * @param offset the offset
-     */
     public final void toArray(Object[] array, int offset)
     {
         int N = size;
@@ -388,11 +273,6 @@ public class ObjArray implements Serializable
         }
     }
 
-    /**
-     * Ensure capacity.
-     *
-     * @param minimalCapacity the minimal capacity
-     */
     private void ensureCapacity(int minimalCapacity)
     {
         int required = minimalCapacity - FIELDS_STORE_SIZE;
@@ -424,13 +304,6 @@ public class ObjArray implements Serializable
         }
     }
 
-    /**
-     * On invalid index.
-     *
-     * @param index the index
-     * @param upperBound the upper bound
-     * @return the runtime exception
-     */
     private static RuntimeException onInvalidIndex(int index, int upperBound)
     {
         // \u2209 is "NOT ELEMENT OF"
@@ -438,32 +311,16 @@ public class ObjArray implements Serializable
         throw new IndexOutOfBoundsException(msg);
     }
 
-    /**
-     * On empty stack top read.
-     *
-     * @return the runtime exception
-     */
     private static RuntimeException onEmptyStackTopRead()
     {
         throw new RuntimeException("Empty stack");
     }
 
-    /**
-     * On seled mutation.
-     *
-     * @return the runtime exception
-     */
     private static RuntimeException onSeledMutation()
     {
         throw new IllegalStateException("Attempt to modify sealed array");
     }
 
-    /**
-     * Write object.
-     *
-     * @param os the os
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     private void writeObject(ObjectOutputStream os) throws IOException
     {
         os.defaultWriteObject();
@@ -474,13 +331,6 @@ public class ObjArray implements Serializable
         }
     }
 
-    /**
-     * Read object.
-     *
-     * @param is the is
-     * @throws IOException Signals that an I/O exception has occurred.
-     * @throws ClassNotFoundException the class not found exception
-     */
     private void readObject(ObjectInputStream is)
         throws IOException, ClassNotFoundException
     {
@@ -496,18 +346,11 @@ public class ObjArray implements Serializable
     }
 
 // Number of data elements
-    /** The size. */
-private int size;
+    private int size;
 
-    /** The sealed. */
     private boolean sealed;
 
-    /** The Constant FIELDS_STORE_SIZE. */
     private static final int FIELDS_STORE_SIZE = 5;
-    
-    /** The f4. */
     private transient Object f0, f1, f2, f3, f4;
-    
-    /** The data. */
     private transient Object[] data;
 }

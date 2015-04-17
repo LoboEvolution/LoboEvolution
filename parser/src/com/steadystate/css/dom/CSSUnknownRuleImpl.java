@@ -32,7 +32,6 @@ import org.w3c.dom.css.CSSUnknownRule;
 
 import com.steadystate.css.util.LangUtils;
 
-
 /**
  * Implementation of {@link CSSUnknownRule}.
  *
@@ -43,37 +42,18 @@ import com.steadystate.css.util.LangUtils;
  */
 public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements CSSUnknownRule {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -268104019127675990L;
 
-    /** The text_. */
     private String text_;
 
-    /**
-     * Gets the text.
-     *
-     * @return the text
-     */
     public String getText() {
         return text_;
     }
 
-    /**
-     * Sets the text.
-     *
-     * @param text the new text
-     */
     public void setText(final String text) {
         text_ = text;
     }
 
-    /**
-     * Instantiates a new CSS unknown rule impl.
-     *
-     * @param parentStyleSheet the parent style sheet
-     * @param parentRule the parent rule
-     * @param text the text
-     */
     public CSSUnknownRuleImpl(
             final CSSStyleSheetImpl parentStyleSheet,
             final CSSRule parentRule,
@@ -82,30 +62,18 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements CSSUnknow
         text_ = text;
     }
 
-    /**
-     * Instantiates a new CSS unknown rule impl.
-     */
     public CSSUnknownRuleImpl() {
         super();
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#getType()
-     */
     public short getType() {
         return UNKNOWN_RULE;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#getCssText()
-     */
     public String getCssText() {
         return text_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#setCssText(java.lang.String)
-     */
     public void setCssText(final String cssText) throws DOMException {
 /*
         if( _parentStyleSheet != null && _parentStyleSheet.isReadOnly() )
@@ -157,17 +125,11 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements CSSUnknow
 //        return parentRule;
 //    }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return getCssText();
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -181,9 +143,6 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements CSSUnknow
             && LangUtils.equals(getCssText(), cur.getCssText());
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#hashCode()
-     */
     @Override
     public int hashCode() {
         int hash = super.hashCode();

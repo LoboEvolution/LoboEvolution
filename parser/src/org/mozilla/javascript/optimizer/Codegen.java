@@ -7,44 +7,21 @@
 
 package org.mozilla.javascript.optimizer;
 
+import org.mozilla.javascript.*;
+import org.mozilla.javascript.ast.FunctionNode;
+import org.mozilla.javascript.ast.Jump;
+import org.mozilla.javascript.ast.Name;
+import org.mozilla.javascript.ast.ScriptNode;
+import org.mozilla.classfile.*;
+
+import java.util.*;
+import java.lang.reflect.Constructor;
+
 import static org.mozilla.classfile.ClassFileWriter.ACC_FINAL;
 import static org.mozilla.classfile.ClassFileWriter.ACC_PRIVATE;
 import static org.mozilla.classfile.ClassFileWriter.ACC_PUBLIC;
 import static org.mozilla.classfile.ClassFileWriter.ACC_STATIC;
 import static org.mozilla.classfile.ClassFileWriter.ACC_VOLATILE;
-
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-
-import org.mozilla.classfile.ByteCode;
-import org.mozilla.classfile.ClassFileWriter;
-import org.mozilla.javascript.CompilerEnvirons;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Evaluator;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.GeneratedClassLoader;
-import org.mozilla.javascript.Kit;
-import org.mozilla.javascript.NativeFunction;
-import org.mozilla.javascript.NativeGenerator;
-import org.mozilla.javascript.Node;
-import org.mozilla.javascript.ObjArray;
-import org.mozilla.javascript.ObjToIntMap;
-import org.mozilla.javascript.RhinoException;
-import org.mozilla.javascript.Script;
-import org.mozilla.javascript.ScriptRuntime;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.SecurityController;
-import org.mozilla.javascript.Token;
-import org.mozilla.javascript.ast.FunctionNode;
-import org.mozilla.javascript.ast.Jump;
-import org.mozilla.javascript.ast.Name;
-import org.mozilla.javascript.ast.ScriptNode;
-
 
 /**
  * This class generates code for a given IR tree.
@@ -55,45 +32,26 @@ import org.mozilla.javascript.ast.ScriptNode;
 
 public class Codegen implements Evaluator
 {
-    
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#captureStackInfo(org.mozilla.javascript.RhinoException)
-     */
     public void captureStackInfo(RhinoException ex) {
         throw new UnsupportedOperationException();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#getSourcePositionFromStack(org.mozilla.javascript.Context, int[])
-     */
     public String getSourcePositionFromStack(Context cx, int[] linep) {
         throw new UnsupportedOperationException();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#getPatchedStack(org.mozilla.javascript.RhinoException, java.lang.String)
-     */
     public String getPatchedStack(RhinoException ex, String nativeStackTrace) {
         throw new UnsupportedOperationException();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#getScriptStack(org.mozilla.javascript.RhinoException)
-     */
     public List<String> getScriptStack(RhinoException ex) {
         throw new UnsupportedOperationException();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#setEvalScriptFlag(org.mozilla.javascript.Script)
-     */
     public void setEvalScriptFlag(Script script) {
         throw new UnsupportedOperationException();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#compile(org.mozilla.javascript.CompilerEnvirons, org.mozilla.javascript.ast.ScriptNode, java.lang.String, boolean)
-     */
     public Object compile(CompilerEnvirons compilerEnv,
                           ScriptNode tree,
                           String encodedSource,
@@ -121,9 +79,6 @@ public class Codegen implements Evaluator
         return new Object[] { mainClassName, mainClassBytes };
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#createScriptObject(java.lang.Object, java.lang.Object)
-     */
     public Script createScriptObject(Object bytecode,
                                      Object staticSecurityDomain)
     {
@@ -139,9 +94,6 @@ public class Codegen implements Evaluator
         return script;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#createFunctionObject(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.Object, java.lang.Object)
-     */
     public Function createFunctionObject(Context cx, Scriptable scope,
                                          Object bytecode,
                                          Object staticSecurityDomain)
@@ -160,13 +112,6 @@ public class Codegen implements Evaluator
         return f;
     }
 
-    /**
-     * Define class.
-     *
-     * @param bytecode the bytecode
-     * @param staticSecurityDomain the static security domain
-     * @return the class
-     */
     private Class<?> defineClass(Object bytecode,
                                  Object staticSecurityDomain)
     {
@@ -193,16 +138,6 @@ public class Codegen implements Evaluator
         throw new RuntimeException("Malformed optimizer package " + e);
     }
 
-    /**
-     * Compile to class file.
-     *
-     * @param compilerEnv the compiler env
-     * @param mainClassName the main class name
-     * @param scriptOrFn the script or fn
-     * @param encodedSource the encoded source
-     * @param returnFunction the return function
-     * @return the byte[]
-     */
     public byte[] compileToClassFile(CompilerEnvirons compilerEnv,
                                      String mainClassName,
                                      ScriptNode scriptOrFn,
@@ -234,13 +169,6 @@ public class Codegen implements Evaluator
         }
     }
 
-    /**
-     * Report class file format exception.
-     *
-     * @param scriptOrFn the script or fn
-     * @param message the message
-     * @return the runtime exception
-     */
     private RuntimeException reportClassFileFormatException(
         ScriptNode scriptOrFn,
         String message)
@@ -253,11 +181,6 @@ public class Codegen implements Evaluator
             scriptOrFn.getLineno(), null, 0);
     }
 
-    /**
-     * Transform.
-     *
-     * @param tree the tree
-     */
     private void transform(ScriptNode tree)
     {
         initOptFunctions_r(tree);
@@ -303,11 +226,6 @@ public class Codegen implements Evaluator
         }
     }
 
-    /**
-     * Inits the opt functions_r.
-     *
-     * @param scriptOrFn the script or fn
-     */
     private static void initOptFunctions_r(ScriptNode scriptOrFn)
     {
         for (int i = 0, N = scriptOrFn.getFunctionCount(); i != N; ++i) {
@@ -317,11 +235,6 @@ public class Codegen implements Evaluator
         }
     }
 
-    /**
-     * Inits the script nodes data.
-     *
-     * @param scriptOrFn the script or fn
-     */
     private void initScriptNodesData(ScriptNode scriptOrFn)
     {
         ObjArray x = new ObjArray();
@@ -337,12 +250,6 @@ public class Codegen implements Evaluator
         }
     }
 
-    /**
-     * Collect script nodes_r.
-     *
-     * @param n the n
-     * @param x the x
-     */
     private static void collectScriptNodes_r(ScriptNode n,
                                                  ObjArray x)
     {
@@ -353,12 +260,6 @@ public class Codegen implements Evaluator
         }
     }
 
-    /**
-     * Generate code.
-     *
-     * @param encodedSource the encoded source
-     * @return the byte[]
-     */
     private byte[] generateCode(String encodedSource)
     {
         boolean hasScript = (scriptOrFnNodes[0].getType() == Token.SCRIPT);
@@ -422,12 +323,6 @@ public class Codegen implements Evaluator
         return cfw.toByteArray();
     }
 
-    /**
-     * Emit direct constructor.
-     *
-     * @param cfw the cfw
-     * @param ofn the ofn
-     */
     private void emitDirectConstructor(ClassFileWriter cfw,
                                        OptFunctionNode ofn)
     {
@@ -488,12 +383,6 @@ public class Codegen implements Evaluator
         cfw.stopMethod((short)(firstLocal + 1));
     }
 
-    /**
-     * Checks if is generator.
-     *
-     * @param node the node
-     * @return true, if is generator
-     */
     static boolean isGenerator(ScriptNode node)
     {
         return (node.getType() == Token.FUNCTION ) &&
@@ -512,11 +401,6 @@ public class Codegen implements Evaluator
     // method corresponding to the generator body. As a matter of convention
     // the generator body is given the name of the generator activation function
     // appended by "_gen".
-    /**
-     * Generate resume generator.
-     *
-     * @param cfw the cfw
-     */
     private void generateResumeGenerator(ClassFileWriter cfw)
     {
         boolean hasGenerators = false;
@@ -581,11 +465,6 @@ public class Codegen implements Evaluator
         cfw.stopMethod((short)6);
     }
 
-    /**
-     * Generate call method.
-     *
-     * @param cfw the cfw
-     */
     private void generateCallMethod(ClassFileWriter cfw)
     {
         cfw.startMethod("call",
@@ -696,11 +575,6 @@ public class Codegen implements Evaluator
         // 5: this, cx, scope, js this, args[]
     }
 
-    /**
-     * Generate main.
-     *
-     * @param cfw the cfw
-     */
     private void generateMain(ClassFileWriter cfw)
     {
         cfw.startMethod("main", "([Ljava/lang/String;)V",
@@ -723,11 +597,6 @@ public class Codegen implements Evaluator
         cfw.stopMethod((short)1);
     }
 
-    /**
-     * Generate execute.
-     *
-     * @param cfw the cfw
-     */
     private void generateExecute(ClassFileWriter cfw)
     {
         cfw.startMethod("exec",
@@ -758,11 +627,6 @@ public class Codegen implements Evaluator
         cfw.stopMethod((short)3);
     }
 
-    /**
-     * Generate script ctor.
-     *
-     * @param cfw the cfw
-     */
     private void generateScriptCtor(ClassFileWriter cfw)
     {
         cfw.startMethod("<init>", "()V", ACC_PUBLIC);
@@ -780,11 +644,6 @@ public class Codegen implements Evaluator
         cfw.stopMethod((short)1);
     }
 
-    /**
-     * Generate function constructor.
-     *
-     * @param cfw the cfw
-     */
     private void generateFunctionConstructor(ClassFileWriter cfw)
     {
         final int SCOPE_ARG = 1;
@@ -840,12 +699,6 @@ public class Codegen implements Evaluator
         cfw.stopMethod((short)4);
     }
 
-    /**
-     * Generate function init.
-     *
-     * @param cfw the cfw
-     * @param ofn the ofn
-     */
     private void generateFunctionInit(ClassFileWriter cfw,
                                       OptFunctionNode ofn)
     {
@@ -878,12 +731,6 @@ public class Codegen implements Evaluator
         cfw.stopMethod((short)3);
     }
 
-    /**
-     * Generate native function overrides.
-     *
-     * @param cfw the cfw
-     * @param encodedSource the encoded source
-     */
     private void generateNativeFunctionOverrides(ClassFileWriter cfw,
                                                  String encodedSource)
     {
@@ -1103,11 +950,6 @@ public class Codegen implements Evaluator
         }
     }
 
-    /**
-     * Emit reg exp init.
-     *
-     * @param cfw the cfw
-     */
     private void emitRegExpInit(ClassFileWriter cfw)
     {
         // precompile all regexp literals
@@ -1176,11 +1018,6 @@ public class Codegen implements Evaluator
         cfw.stopMethod((short)2);
     }
 
-    /**
-     * Emit constant dude initializers.
-     *
-     * @param cfw the cfw
-     */
     private void emitConstantDudeInitializers(ClassFileWriter cfw)
     {
         int N = itsConstantListSize;
@@ -1213,12 +1050,6 @@ public class Codegen implements Evaluator
         cfw.stopMethod((short)0);
     }
 
-    /**
-     * Push number as object.
-     *
-     * @param cfw the cfw
-     * @param num the num
-     */
     void pushNumberAsObject(ClassFileWriter cfw, double num)
     {
         if (num == 0.0) {
@@ -1283,11 +1114,6 @@ public class Codegen implements Evaluator
         }
     }
 
-    /**
-     * Adds the double wrap.
-     *
-     * @param cfw the cfw
-     */
     private static void addDoubleWrap(ClassFileWriter cfw)
     {
         cfw.addInvoke(ByteCode.INVOKESTATIC,
@@ -1295,12 +1121,6 @@ public class Codegen implements Evaluator
                       "wrapDouble", "(D)Ljava/lang/Double;");
     }
 
-    /**
-     * Gets the static constant wrapper type.
-     *
-     * @param num the num
-     * @return the static constant wrapper type
-     */
     private static String getStaticConstantWrapperType(double num)
     {
         int inum = (int)num;
@@ -1310,56 +1130,29 @@ public class Codegen implements Evaluator
             return "Ljava/lang/Double;";
         }
     }
-    
-    /**
-     * Push undefined.
-     *
-     * @param cfw the cfw
-     */
     static void pushUndefined(ClassFileWriter cfw)
     {
         cfw.add(ByteCode.GETSTATIC, "org/mozilla/javascript/Undefined",
                 "instance", "Ljava/lang/Object;");
     }
 
-    /**
-     * Gets the index.
-     *
-     * @param n the n
-     * @return the index
-     */
     int getIndex(ScriptNode n)
     {
         return scriptOrFnIndexes.getExisting(n);
     }
 
-    /**
-     * Gets the direct ctor name.
-     *
-     * @param n the n
-     * @return the direct ctor name
-     */
     String getDirectCtorName(ScriptNode n)
     {
         return "_n" + getIndex(n);
     }
 
-    /**
-     * Gets the body method name.
-     *
-     * @param n the n
-     * @return the body method name
-     */
     String getBodyMethodName(ScriptNode n)
     {
         return "_c_" + cleanName(n) + "_" + getIndex(n);
     }
 
     /**
-     * Gets a Java-compatible "informative" name for the the ScriptOrFnNode.
-     *
-     * @param n the n
-     * @return the string
+     * Gets a Java-compatible "informative" name for the the ScriptOrFnNode
      */
     String cleanName(final ScriptNode n)
     {
@@ -1377,12 +1170,6 @@ public class Codegen implements Evaluator
       return result;
     }
 
-    /**
-     * Gets the body method signature.
-     *
-     * @param n the n
-     * @return the body method signature
-     */
     String getBodyMethodSignature(ScriptNode n)
     {
         StringBuilder sb = new StringBuilder();
@@ -1404,109 +1191,62 @@ public class Codegen implements Evaluator
         return sb.toString();
     }
 
-    /**
-     * Gets the function init method name.
-     *
-     * @param ofn the ofn
-     * @return the function init method name
-     */
     String getFunctionInitMethodName(OptFunctionNode ofn)
     {
         return "_i"+getIndex(ofn.fnode);
     }
 
-    /**
-     * Gets the compiled regexp name.
-     *
-     * @param n the n
-     * @param regexpIndex the regexp index
-     * @return the compiled regexp name
-     */
     String getCompiledRegexpName(ScriptNode n, int regexpIndex)
     {
         return "_re"+getIndex(n)+"_"+regexpIndex;
     }
 
-    /**
-     * Bad tree.
-     *
-     * @return the runtime exception
-     */
     static RuntimeException badTree()
     {
         throw new RuntimeException("Bad tree in codegen");
     }
 
-     /**
-      * Sets the main method class.
-      *
-      * @param className the new main method class
-      */
      public void setMainMethodClass(String className)
      {
          mainMethodClass = className;
      }
 
-     /** The Constant DEFAULT_MAIN_METHOD_CLASS. */
      static final String DEFAULT_MAIN_METHOD_CLASS
         = "org.mozilla.javascript.optimizer.OptRuntime";
 
-    /** The Constant SUPER_CLASS_NAME. */
     private static final String SUPER_CLASS_NAME
         = "org.mozilla.javascript.NativeFunction";
 
-    /** The Constant ID_FIELD_NAME. */
     static final String ID_FIELD_NAME = "_id";
 
-    /** The Constant REGEXP_INIT_METHOD_NAME. */
     static final String REGEXP_INIT_METHOD_NAME = "_reInit";
-    
-    /** The Constant REGEXP_INIT_METHOD_SIGNATURE. */
     static final String REGEXP_INIT_METHOD_SIGNATURE
         =  "(Lorg/mozilla/javascript/Context;)V";
 
-    /** The Constant FUNCTION_INIT_SIGNATURE. */
     static final String FUNCTION_INIT_SIGNATURE
         =  "(Lorg/mozilla/javascript/Context;"
            +"Lorg/mozilla/javascript/Scriptable;"
            +")V";
 
-   /** The Constant FUNCTION_CONSTRUCTOR_SIGNATURE. */
    static final String FUNCTION_CONSTRUCTOR_SIGNATURE
         = "(Lorg/mozilla/javascript/Scriptable;"
           +"Lorg/mozilla/javascript/Context;I)V";
 
-    /** The Constant globalLock. */
     private static final Object globalLock = new Object();
-    
-    /** The global serial class counter. */
     private static int globalSerialClassCounter;
 
-    /** The compiler env. */
     private CompilerEnvirons compilerEnv;
 
-    /** The direct call targets. */
     private ObjArray directCallTargets;
-    
-    /** The script or fn nodes. */
     ScriptNode[] scriptOrFnNodes;
-    
-    /** The script or fn indexes. */
     private ObjToIntMap scriptOrFnIndexes;
 
-    /** The main method class. */
     private String mainMethodClass = DEFAULT_MAIN_METHOD_CLASS;
 
-    /** The main class name. */
     String mainClassName;
-    
-    /** The main class signature. */
     String mainClassSignature;
 
-    /** The its constant list. */
     private double[] itsConstantList;
-    
-    /** The its constant list size. */
     private int itsConstantListSize;
 }
 
@@ -2261,6 +2001,7 @@ class BodyCodegen
               case Token.ENUM_INIT_ARRAY:
                 generateExpression(child, node);
                 cfw.addALoad(contextLocal);
+                cfw.addALoad(variableObjectLocal);
                 int enumType = type == Token.ENUM_INIT_KEYS
                                    ? ScriptRuntime.ENUMERATE_KEYS :
                                type == Token.ENUM_INIT_VALUES
@@ -2270,6 +2011,7 @@ class BodyCodegen
                 addScriptRuntimeInvoke("enumInit",
                                        "(Ljava/lang/Object;"
                                        +"Lorg/mozilla/javascript/Context;"
+                                       +"Lorg/mozilla/javascript/Scriptable;"
                                        +"I"
                                        +")Ljava/lang/Object;");
                 cfw.addAStore(getLocalBlockRegister(node));
@@ -2873,11 +2615,13 @@ class BodyCodegen
                     }
                     generateExpression(child, node);
                     cfw.addALoad(contextLocal);
+                    cfw.addALoad(variableObjectLocal);
                     addScriptRuntimeInvoke(
                         "refSet",
                         "(Lorg/mozilla/javascript/Ref;"
                         +"Ljava/lang/Object;"
                         +"Lorg/mozilla/javascript/Context;"
+                        +"Lorg/mozilla/javascript/Scriptable;"
                         +")Ljava/lang/Object;");
                 }
                 break;
@@ -2934,11 +2678,13 @@ class BodyCodegen
                     generateExpression(child, node);
                     cfw.addPush(special);
                     cfw.addALoad(contextLocal);
+                    cfw.addALoad(variableObjectLocal);
                     addScriptRuntimeInvoke(
                         "specialRef",
                         "(Ljava/lang/Object;"
                         +"Ljava/lang/String;"
                         +"Lorg/mozilla/javascript/Context;"
+                        +"Lorg/mozilla/javascript/Scriptable;"
                         +")Lorg/mozilla/javascript/Ref;");
                 }
                 break;
@@ -3906,11 +3652,13 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
                 if (node.getIntProp(Node.ISNUMBER_PROP, -1) != -1)
                     addDoubleWrap();
                 cfw.addALoad(contextLocal);
+                cfw.addALoad(variableObjectLocal);
                 addScriptRuntimeInvoke(
                     "getElemFunctionAndThis",
                     "(Ljava/lang/Object;"
                     +"Ljava/lang/Object;"
                     +"Lorg/mozilla/javascript/Context;"
+                    +"Lorg/mozilla/javascript/Scriptable;"
                     +")Lorg/mozilla/javascript/Callable;");
             }
             break;
@@ -4148,7 +3896,7 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
         cfw.addALoad(savedVariableObject);
         cfw.addAStore(variableObjectLocal);
 
-        exceptionTypeToName(exceptionType);
+        String exceptionName = exceptionTypeToName(exceptionType);
 
         cfw.add(ByteCode.GOTO, catchLabel);
     }
@@ -4241,7 +3989,7 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
          */
         void setHandlers(int[] handlerLabels, int startLabel)
         {
-            getTop();
+            ExceptionInfo top = getTop();
             for (int i = 0; i < handlerLabels.length; i++) {
                 if (handlerLabels[i] != 0) {
                     addHandler(i, handlerLabels[i], startLabel);
@@ -4382,12 +4130,14 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
         {
             ExceptionInfo(Jump node, Node finallyBlock)
             {
+                this.node = node;
                 this.finallyBlock = finallyBlock;
                 handlerLabels = new int[EXCEPTION_MAX];
                 exceptionStarts = new int[EXCEPTION_MAX];
                 currentFinally = null;
             }
 
+            Jump node;
             Node finallyBlock;
             int[] handlerLabels;
             int[] exceptionStarts;
@@ -4721,11 +4471,13 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
             generateExpression(getPropChild, node);
             generateExpression(getPropChild.getNext(), node);
             cfw.addALoad(contextLocal);
+            cfw.addALoad(variableObjectLocal);
             cfw.addPush(incrDecrMask);
             addScriptRuntimeInvoke("propIncrDecr",
                                    "(Ljava/lang/Object;"
                                    +"Ljava/lang/String;"
                                    +"Lorg/mozilla/javascript/Context;"
+                                   +"Lorg/mozilla/javascript/Scriptable;"
                                    +"I)Ljava/lang/Object;");
             break;
           }
@@ -4734,12 +4486,14 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
             generateExpression(elemChild, node);
             generateExpression(elemChild.getNext(), node);
             cfw.addALoad(contextLocal);
+            cfw.addALoad(variableObjectLocal);
             cfw.addPush(incrDecrMask);
             if (elemChild.getNext().getIntProp(Node.ISNUMBER_PROP, -1) != -1) {
               addOptRuntimeInvoke("elemIncrDecr",
                   "(Ljava/lang/Object;"
                   +"D"
                   +"Lorg/mozilla/javascript/Context;"
+                  +"Lorg/mozilla/javascript/Scriptable;"
                   +"I"
                   +")Ljava/lang/Object;");
             } else {
@@ -4747,6 +4501,7 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
                   "(Ljava/lang/Object;"
                   +"Ljava/lang/Object;"
                   +"Lorg/mozilla/javascript/Context;"
+                  +"Lorg/mozilla/javascript/Scriptable;"
                   +"I"
                   +")Ljava/lang/Object;");
             }
@@ -4756,11 +4511,13 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
             Node refChild = child.getFirstChild();
             generateExpression(refChild, node);
             cfw.addALoad(contextLocal);
+            cfw.addALoad(variableObjectLocal);
             cfw.addPush(incrDecrMask);
             addScriptRuntimeInvoke(
                 "refIncrDecr",
                 "(Lorg/mozilla/javascript/Ref;"
                 +"Lorg/mozilla/javascript/Context;"
+                +"Lorg/mozilla/javascript/Scriptable;"
                 +"I)Ljava/lang/Object;");
             break;
           }
@@ -5301,11 +5058,13 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
         generateExpression(nameChild, node);  // the name
         if (node.getType() == Token.GETPROPNOWARN) {
             cfw.addALoad(contextLocal);
+            cfw.addALoad(variableObjectLocal);
             addScriptRuntimeInvoke(
                 "getObjectPropNoWarn",
                 "(Ljava/lang/Object;"
                 +"Ljava/lang/String;"
                 +"Lorg/mozilla/javascript/Context;"
+                +"Lorg/mozilla/javascript/Scriptable;"
                 +")Ljava/lang/Object;");
             return;
         }
@@ -5363,22 +5122,26 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
                     +")Ljava/lang/Object;");
             } else {
                 cfw.addALoad(contextLocal);
+                cfw.addALoad(variableObjectLocal);
                 addScriptRuntimeInvoke(
                     "getObjectProp",
                     "(Ljava/lang/Object;"
                     +"Ljava/lang/String;"
                     +"Lorg/mozilla/javascript/Context;"
+                    +"Lorg/mozilla/javascript/Scriptable;"
                     +")Ljava/lang/Object;");
             }
         }
         generateExpression(child, node);
         cfw.addALoad(contextLocal);
+        cfw.addALoad(variableObjectLocal);
         addScriptRuntimeInvoke(
             "setObjectProp",
             "(Ljava/lang/Object;"
             +"Ljava/lang/String;"
             +"Ljava/lang/Object;"
             +"Lorg/mozilla/javascript/Context;"
+            +"Lorg/mozilla/javascript/Scriptable;"
             +")Ljava/lang/Object;");
     }
 
@@ -5398,26 +5161,31 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
                 //        -> ... object number object number
                 cfw.add(ByteCode.DUP2_X1);
                 cfw.addALoad(contextLocal);
-                addOptRuntimeInvoke(
+                cfw.addALoad(variableObjectLocal);
+                addScriptRuntimeInvoke(
                     "getObjectIndex",
                     "(Ljava/lang/Object;D"
                     +"Lorg/mozilla/javascript/Context;"
+                    +"Lorg/mozilla/javascript/Scriptable;"
                     +")Ljava/lang/Object;");
             } else {
                 // stack: ... object object indexObject
                 //        -> ... object indexObject object indexObject
                 cfw.add(ByteCode.DUP_X1);
                 cfw.addALoad(contextLocal);
+                cfw.addALoad(variableObjectLocal);
                 addScriptRuntimeInvoke(
                     "getObjectElem",
                     "(Ljava/lang/Object;"
                     +"Ljava/lang/Object;"
                     +"Lorg/mozilla/javascript/Context;"
+                    +"Lorg/mozilla/javascript/Scriptable;"
                     +")Ljava/lang/Object;");
             }
         }
         generateExpression(child, node);
         cfw.addALoad(contextLocal);
+        cfw.addALoad(variableObjectLocal);
         if (indexIsNumber) {
             addScriptRuntimeInvoke(
                 "setObjectIndex",
@@ -5425,6 +5193,7 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
                 +"D"
                 +"Ljava/lang/Object;"
                 +"Lorg/mozilla/javascript/Context;"
+                +"Lorg/mozilla/javascript/Scriptable;"
                 +")Ljava/lang/Object;");
         } else {
             addScriptRuntimeInvoke(
@@ -5433,6 +5202,7 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
                 +"Ljava/lang/Object;"
                 +"Ljava/lang/Object;"
                 +"Lorg/mozilla/javascript/Context;"
+                +"Lorg/mozilla/javascript/Scriptable;"
                 +")Ljava/lang/Object;");
         }
     }

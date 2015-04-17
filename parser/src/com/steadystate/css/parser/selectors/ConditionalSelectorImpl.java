@@ -36,29 +36,18 @@ import org.w3c.css.sac.SimpleSelector;
 import com.steadystate.css.parser.Locatable;
 import com.steadystate.css.parser.LocatableImpl;
 
-
 /**
- * The Class ConditionalSelectorImpl.
  *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
 public class ConditionalSelectorImpl extends LocatableImpl implements ConditionalSelector, Serializable {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 7217145899707580586L;
 
-    /** The simple selector_. */
     private SimpleSelector simpleSelector_;
-    
-    /** The condition_. */
     private Condition condition_;
 
-    /**
-     * Sets the simple selector.
-     *
-     * @param simpleSelector the new simple selector
-     */
     public void setSimpleSelector(final SimpleSelector simpleSelector) {
         simpleSelector_ = simpleSelector;
         if (simpleSelector instanceof Locatable) {
@@ -69,11 +58,6 @@ public class ConditionalSelectorImpl extends LocatableImpl implements Conditiona
         }
     }
 
-    /**
-     * Sets the condition.
-     *
-     * @param condition the new condition
-     */
     public void setCondition(final Condition condition) {
         condition_ = condition;
         if (getLocator() == null) {
@@ -86,41 +70,23 @@ public class ConditionalSelectorImpl extends LocatableImpl implements Conditiona
         }
     }
 
-    /**
-     * Instantiates a new conditional selector impl.
-     *
-     * @param simpleSelector the simple selector
-     * @param condition the condition
-     */
     public ConditionalSelectorImpl(final SimpleSelector simpleSelector, final Condition condition) {
         setSimpleSelector(simpleSelector);
         setCondition(condition);
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.Selector#getSelectorType()
-     */
     public short getSelectorType() {
         return Selector.SAC_CONDITIONAL_SELECTOR;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.ConditionalSelector#getSimpleSelector()
-     */
     public SimpleSelector getSimpleSelector() {
         return simpleSelector_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.ConditionalSelector#getCondition()
-     */
     public Condition getCondition() {
         return condition_;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return simpleSelector_.toString() + condition_.toString();

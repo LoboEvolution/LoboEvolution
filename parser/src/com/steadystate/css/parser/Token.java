@@ -2,7 +2,6 @@
 /* JavaCCOptions:TOKEN_EXTENDS=,KEEP_LINE_COL=null,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package com.steadystate.css.parser;
 
-
 /**
  * Describes the input token stream.
  */
@@ -68,22 +67,18 @@ public class Token implements java.io.Serializable {
    * interpreter. This attribute value is often different from the image.
    * Any subclass of Token that actually wants to return a non-null value can
    * override this method as appropriate.
-   *
-   * @return the value
    */
   public Object getValue() {
     return null;
   }
 
   /**
-   * No-argument constructor.
+   * No-argument constructor
    */
   public Token() {}
 
   /**
    * Constructs a new token for the specified Image.
-   *
-   * @param kind the kind
    */
   public Token(int kind)
   {
@@ -92,9 +87,6 @@ public class Token implements java.io.Serializable {
 
   /**
    * Constructs a new token for the specified Image and Kind.
-   *
-   * @param kind the kind
-   * @param image the image
    */
   public Token(int kind, String image)
   {
@@ -104,8 +96,6 @@ public class Token implements java.io.Serializable {
 
   /**
    * Returns the image.
-   *
-   * @return the string
    */
   public String toString()
   {
@@ -118,15 +108,11 @@ public class Token implements java.io.Serializable {
    * Simply add the cases to the switch for all those special cases.
    * For example, if you have a subclass of Token called IDToken that
    * you want to create if ofKind is ID, simply add something like :
-   * 
+   *
    *    case MyParserConstants.ID : return new IDToken(ofKind, image);
-   * 
+   *
    * to the following switch statement. Then you can cast matchedToken
    * variable to the appropriate type and use sit in your lexical actions.
-   *
-   * @param ofKind the of kind
-   * @param image the image
-   * @return the token
    */
   public static Token newToken(int ofKind, String image)
   {
@@ -136,16 +122,10 @@ public class Token implements java.io.Serializable {
     }
   }
 
-  /**
-   * New token.
-   *
-   * @param ofKind the of kind
-   * @return the token
-   */
   public static Token newToken(int ofKind)
   {
     return newToken(ofKind, null);
   }
 
 }
-/* JavaCC - OriginalChecksum=83e179d49a8e12b7070e5822a053bf43 (do not edit this line) */
+/* JavaCC - OriginalChecksum=69edde50f807417d4e42ee066db8261d (do not edit this line) */

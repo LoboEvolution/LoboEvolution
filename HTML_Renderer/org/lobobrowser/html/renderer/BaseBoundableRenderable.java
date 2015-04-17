@@ -503,7 +503,7 @@ BoundableRenderable {
      *            the y
      * @return the java.awt. point
      */
-    protected final java.awt.Point translateDescendentPoint(
+    protected final Point translateDescendentPoint(
             BoundableRenderable descendent, int x, int y) {
         while (descendent != this) {
             if (descendent == null) {

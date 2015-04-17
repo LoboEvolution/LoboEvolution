@@ -6,48 +6,31 @@
 
 package org.mozilla.javascript;
 
-import static org.mozilla.javascript.UniqueTag.DOUBLE_MARK;
-
 import java.io.PrintStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
-import org.mozilla.javascript.ScriptRuntime.NoSuchMethodShim;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.ScriptNode;
+import org.mozilla.javascript.ScriptRuntime.NoSuchMethodShim;
 import org.mozilla.javascript.debug.DebugFrame;
 
+import static org.mozilla.javascript.UniqueTag.DOUBLE_MARK;
 
-/**
- * The Class Interpreter.
- */
 public final class Interpreter extends Icode implements Evaluator
 {
     // data for parsing
-    /** The its data. */
     InterpreterData itsData;
 
-    /** The Constant EXCEPTION_TRY_START_SLOT. */
     static final int EXCEPTION_TRY_START_SLOT  = 0;
-    
-    /** The Constant EXCEPTION_TRY_END_SLOT. */
     static final int EXCEPTION_TRY_END_SLOT    = 1;
-    
-    /** The Constant EXCEPTION_HANDLER_SLOT. */
     static final int EXCEPTION_HANDLER_SLOT    = 2;
-    
-    /** The Constant EXCEPTION_TYPE_SLOT. */
     static final int EXCEPTION_TYPE_SLOT       = 3;
-    
-    /** The Constant EXCEPTION_LOCAL_SLOT. */
     static final int EXCEPTION_LOCAL_SLOT      = 4;
-    
-    /** The Constant EXCEPTION_SCOPE_SLOT. */
     static final int EXCEPTION_SCOPE_SLOT      = 5;
     // SLOT_SIZE: space for try start/end, handler, start, handler type,
     //            exception local and scope local
-    /** The Constant EXCEPTION_SLOT_SIZE. */
     static final int EXCEPTION_SLOT_SIZE       = 6;
 
     /**
@@ -55,23 +38,15 @@ public final class Interpreter extends Icode implements Evaluator
      */
     private static class CallFrame implements Cloneable, Serializable
     {
-        
-        /** The Constant serialVersionUID. */
         static final long serialVersionUID = -2843792508994958978L;
 
-        /** The parent frame. */
         CallFrame parentFrame;
         // amount of stack frames before this one on the interpretation stack
-        /** The frame index. */
         int frameIndex;
         // If true indicates read-only frame that is a part of continuation
-        /** The frozen. */
         boolean frozen;
 
-        /** The fn or script. */
         InterpretedFunction fnOrScript;
-        
-        /** The idata. */
         InterpreterData idata;
 
 // Stack structure
@@ -80,70 +55,32 @@ public final class Interpreter extends Icode implements Evaluator
 // stack[emptyStackTop < i < stack.length]: stack data
 // sDbl[i]: if stack[i] is UniqueTag.DOUBLE_MARK, sDbl[i] holds the number value
 
-        /** The stack. */
-Object[] stack;
-        
-        /** The stack attributes. */
+        Object[] stack;
         int[] stackAttributes;
-        
-        /** The s dbl. */
         double[] sDbl;
-        
-        /** The var source. */
         CallFrame varSource; // defaults to this unless continuation frame
-        
-        /** The local shift. */
         int localShift;
-        
-        /** The empty stack top. */
         int emptyStackTop;
 
-        /** The debugger frame. */
         DebugFrame debuggerFrame;
-        
-        /** The use activation. */
         boolean useActivation;
-        
-        /** The is continuations top frame. */
         boolean isContinuationsTopFrame;
 
-        /** The this obj. */
         Scriptable thisObj;
 
 // The values that change during interpretation
 
-        /** The result. */
-Object result;
-        
-        /** The result dbl. */
+        Object result;
         double resultDbl;
-        
-        /** The pc. */
         int pc;
-        
-        /** The pc prev branch. */
         int pcPrevBranch;
-        
-        /** The pc source line start. */
         int pcSourceLineStart;
-        
-        /** The scope. */
         Scriptable scope;
 
-        /** The saved stack top. */
         int savedStackTop;
-        
-        /** The saved call op. */
         int savedCallOp;
-        
-        /** The throwable. */
         Object throwable;
 
-        /**
-         * Clone frozen.
-         *
-         * @return the call frame
-         */
         CallFrame cloneFrozen()
         {
             if (!frozen) Kit.codeBug();
@@ -167,33 +104,15 @@ Object result;
         }
     }
 
-    /**
-     * The Class ContinuationJump.
-     */
     private static final class ContinuationJump implements Serializable
     {
-        
-        /** The Constant serialVersionUID. */
         static final long serialVersionUID = 7687739156004308247L;
 
-        /** The captured frame. */
         CallFrame capturedFrame;
-        
-        /** The branch frame. */
         CallFrame branchFrame;
-        
-        /** The result. */
         Object result;
-        
-        /** The result dbl. */
         double resultDbl;
 
-        /**
-         * Instantiates a new continuation jump.
-         *
-         * @param c the c
-         * @param current the current
-         */
         ContinuationJump(NativeContinuation c, CallFrame current)
         {
             this.capturedFrame = (CallFrame)c.getImplementation();
@@ -239,12 +158,6 @@ Object result;
         }
     }
 
-    /**
-     * Capture frame for generator.
-     *
-     * @param frame the frame
-     * @return the call frame
-     */
     private static CallFrame captureFrameForGenerator(CallFrame frame) {
       frame.frozen = true;
       CallFrame result = frame.cloneFrozen();
@@ -257,9 +170,21 @@ Object result;
       return result;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#compile(org.mozilla.javascript.CompilerEnvirons, org.mozilla.javascript.ast.ScriptNode, java.lang.String, boolean)
-     */
+    static {
+        // Checks for byte code consistencies, good compiler can eliminate them
+
+        if (Token.LAST_BYTECODE_TOKEN > 127) {
+            String str = "Violation of Token.LAST_BYTECODE_TOKEN <= 127";
+            System.err.println(str);
+            throw new IllegalStateException(str);
+        }
+        if (MIN_ICODE < -128) {
+            String str = "Violation of Interpreter.MIN_ICODE >= -128";
+            System.err.println(str);
+            throw new IllegalStateException(str);
+        }
+    }
+
     public Object compile(CompilerEnvirons compilerEnv,
                           ScriptNode tree,
                           String encodedSource,
@@ -270,9 +195,6 @@ Object result;
         return itsData;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#createScriptObject(java.lang.Object, java.lang.Object)
-     */
     public Script createScriptObject(Object bytecode, Object staticSecurityDomain)
     {
         if(bytecode != itsData)
@@ -283,17 +205,11 @@ Object result;
                                                 staticSecurityDomain);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#setEvalScriptFlag(org.mozilla.javascript.Script)
-     */
     public void setEvalScriptFlag(Script script) {
         ((InterpretedFunction)script).idata.evalScriptFlag = true;
     }
 
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#createFunctionObject(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.Object, java.lang.Object)
-     */
     public Function createFunctionObject(Context cx, Scriptable scope,
             Object bytecode, Object staticSecurityDomain)
     {
@@ -305,47 +221,19 @@ Object result;
                                                   staticSecurityDomain);
     }
 
-    /**
-     * Gets the short.
-     *
-     * @param iCode the i code
-     * @param pc the pc
-     * @return the short
-     */
     private static int getShort(byte[] iCode, int pc) {
         return (iCode[pc] << 8) | (iCode[pc + 1] & 0xFF);
     }
 
-    /**
-     * Gets the index.
-     *
-     * @param iCode the i code
-     * @param pc the pc
-     * @return the index
-     */
     private static int getIndex(byte[] iCode, int pc) {
         return ((iCode[pc] & 0xFF) << 8) | (iCode[pc + 1] & 0xFF);
     }
 
-    /**
-     * Gets the int.
-     *
-     * @param iCode the i code
-     * @param pc the pc
-     * @return the int
-     */
     private static int getInt(byte[] iCode, int pc) {
         return (iCode[pc] << 24) | ((iCode[pc + 1] & 0xFF) << 16)
                | ((iCode[pc + 2] & 0xFF) << 8) | (iCode[pc + 3] & 0xFF);
     }
 
-    /**
-     * Gets the exception handler.
-     *
-     * @param frame the frame
-     * @param onlyFinally the only finally
-     * @return the exception handler
-     */
     private static int getExceptionHandler(CallFrame frame,
                                            boolean onlyFinally)
     {
@@ -389,11 +277,6 @@ Object result;
         return best;
     }
 
-    /**
-     * Dump i code.
-     *
-     * @param idata the idata
-     */
     static void dumpICode(InterpreterData idata)
     {
         if (!Token.printICode) {
@@ -594,6 +477,7 @@ Object result;
                 int handlerStart   = table[i + EXCEPTION_HANDLER_SLOT];
                 int type           = table[i + EXCEPTION_TYPE_SLOT];
                 int exceptionLocal = table[i + EXCEPTION_LOCAL_SLOT];
+                int scopeLocal     = table[i + EXCEPTION_SCOPE_SLOT];
 
                 out.println(" tryStart="+tryStart+" tryEnd="+tryEnd
                             +" handlerStart="+handlerStart
@@ -604,12 +488,6 @@ Object result;
         out.flush();
     }
 
-    /**
-     * Bytecode span.
-     *
-     * @param bytecode the bytecode
-     * @return the int
-     */
     private static int bytecodeSpan(int bytecode)
     {
         switch (bytecode) {
@@ -693,12 +571,6 @@ Object result;
         return 1;
     }
 
-    /**
-     * Gets the line numbers.
-     *
-     * @param data the data
-     * @return the line numbers
-     */
     static int[] getLineNumbers(InterpreterData data)
     {
         UintMap presentLines = new UintMap();
@@ -719,9 +591,6 @@ Object result;
         return presentLines.getKeys();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#captureStackInfo(org.mozilla.javascript.RhinoException)
-     */
     public void captureStackInfo(RhinoException ex)
     {
         Context cx = Context.getCurrentContext();
@@ -777,9 +646,6 @@ Object result;
         ex.interpreterLineData = linePC;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#getSourcePositionFromStack(org.mozilla.javascript.Context, int[])
-     */
     public String getSourcePositionFromStack(Context cx, int[] linep)
     {
         CallFrame frame = (CallFrame)cx.lastInterpreterFrame;
@@ -792,9 +658,6 @@ Object result;
         return idata.itsSourceFile;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#getPatchedStack(org.mozilla.javascript.RhinoException, java.lang.String)
-     */
     public String getPatchedStack(RhinoException ex,
                                   String nativeStackTrace)
     {
@@ -854,9 +717,6 @@ Object result;
         return sb.toString();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.Evaluator#getScriptStack(org.mozilla.javascript.RhinoException)
-     */
     public List<String> getScriptStack(RhinoException ex) {
         ScriptStackElement[][] stack = getScriptStackElements(ex);
         List<String> list = new ArrayList<String>(stack.length);
@@ -873,12 +733,6 @@ Object result;
         return list;
     }
 
-    /**
-     * Gets the script stack elements.
-     *
-     * @param ex the ex
-     * @return the script stack elements
-     */
     public ScriptStackElement[][] getScriptStackElements(RhinoException ex)
     {
         if (ex.interpreterStackInfo == null) {
@@ -917,12 +771,6 @@ Object result;
         return list.toArray(new ScriptStackElement[list.size()][]);
     }
 
-    /**
-     * Gets the encoded source.
-     *
-     * @param idata the idata
-     * @return the encoded source
-     */
     static String getEncodedSource(InterpreterData idata)
     {
         if (idata.encodedSource == null) {
@@ -932,14 +780,6 @@ Object result;
                                              idata.encodedSourceEnd);
     }
 
-    /**
-     * Inits the function.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param parent the parent
-     * @param index the index
-     */
     private static void initFunction(Context cx, Scriptable scope,
                                      InterpretedFunction parent, int index)
     {
@@ -949,16 +789,6 @@ Object result;
                                    parent.idata.evalScriptFlag);
     }
 
-    /**
-     * Interpret.
-     *
-     * @param ifun the ifun
-     * @param cx the cx
-     * @param scope the scope
-     * @param thisObj the this obj
-     * @param args the args
-     * @return the object
-     */
     static Object interpret(InterpretedFunction ifun,
                             Context cx, Scriptable scope,
                             Scriptable thisObj, Object[] args)
@@ -985,42 +815,16 @@ Object result;
         return interpretLoop(cx, frame, null);
     }
 
-    /**
-     * The Class GeneratorState.
-     */
     static class GeneratorState {
-        
-        /**
-         * Instantiates a new generator state.
-         *
-         * @param operation the operation
-         * @param value the value
-         */
         GeneratorState(int operation, Object value) {
             this.operation = operation;
             this.value = value;
         }
-        
-        /** The operation. */
         int operation;
-        
-        /** The value. */
         Object value;
-        
-        /** The returned exception. */
         RuntimeException returnedException;
     }
 
-    /**
-     * Resume generator.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param operation the operation
-     * @param savedState the saved state
-     * @param value the value
-     * @return the object
-     */
     public static Object resumeGenerator(Context cx,
                                          Scriptable scope,
                                          int operation,
@@ -1045,15 +849,6 @@ Object result;
       return result;
     }
 
-    /**
-     * Restart continuation.
-     *
-     * @param c the c
-     * @param cx the cx
-     * @param scope the scope
-     * @param args the args
-     * @return the object
-     */
     public static Object restartContinuation(NativeContinuation c, Context cx,
                                              Scriptable scope, Object[] args)
     {
@@ -1080,14 +875,6 @@ Object result;
         return interpretLoop(cx, null, cjump);
     }
 
-    /**
-     * Interpret loop.
-     *
-     * @param cx the cx
-     * @param frame the frame
-     * @param throwable the throwable
-     * @return the object
-     */
     private static Object interpretLoop(Context cx, CallFrame frame,
                                         Object throwable)
     {
@@ -1437,19 +1224,21 @@ switch (op) {
     }
     case Token.DELPROP :
     case Icode_DELNAME : {
-        stackTop = doDelName(cx, op, stack, sDbl, stackTop);
+        stackTop = doDelName(cx, frame, op, stack, sDbl, stackTop);
         continue Loop;
     }
     case Token.GETPROPNOWARN : {
         Object lhs = stack[stackTop];
         if (lhs == DBL_MRK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-        stack[stackTop] = ScriptRuntime.getObjectPropNoWarn(lhs, stringReg, cx);
+        stack[stackTop] = ScriptRuntime.getObjectPropNoWarn(lhs, stringReg,
+                                                            cx, frame.scope);
         continue Loop;
     }
     case Token.GETPROP : {
         Object lhs = stack[stackTop];
         if (lhs == DBL_MRK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-        stack[stackTop] = ScriptRuntime.getObjectProp(lhs, stringReg, cx, frame.scope);
+        stack[stackTop] = ScriptRuntime.getObjectProp(lhs, stringReg,
+                                                      cx, frame.scope);
         continue Loop;
     }
     case Token.SETPROP : {
@@ -1458,14 +1247,16 @@ switch (op) {
         --stackTop;
         Object lhs = stack[stackTop];
         if (lhs == DBL_MRK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-        stack[stackTop] = ScriptRuntime.setObjectProp(lhs, stringReg, rhs, cx);
+        stack[stackTop] = ScriptRuntime.setObjectProp(lhs, stringReg, rhs,
+                                                      cx, frame.scope);
         continue Loop;
     }
     case Icode_PROP_INC_DEC : {
         Object lhs = stack[stackTop];
         if (lhs == DBL_MRK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
         stack[stackTop] = ScriptRuntime.propIncrDecr(lhs, stringReg,
-                                                     cx, iCode[frame.pc]);
+                                                     cx, frame.scope,
+                                                     iCode[frame.pc]);
         ++frame.pc;
         continue Loop;
     }
@@ -1474,7 +1265,7 @@ switch (op) {
         continue Loop;
     }
     case Token.SETELEM : {
-        stackTop = doSetElem(cx, stack, sDbl, stackTop);
+        stackTop = doSetElem(cx, frame, stack, sDbl, stackTop);
         continue Loop;
     }
     case Icode_ELEM_INC_DEC: {
@@ -1491,7 +1282,7 @@ switch (op) {
         if (value == DBL_MRK) value = ScriptRuntime.wrapNumber(sDbl[stackTop]);
         --stackTop;
         Ref ref = (Ref)stack[stackTop];
-        stack[stackTop] = ScriptRuntime.refSet(ref, value, cx);
+        stack[stackTop] = ScriptRuntime.refSet(ref, value, cx, frame.scope);
         continue Loop;
     }
     case Token.DEL_REF : {
@@ -1501,7 +1292,8 @@ switch (op) {
     }
     case Icode_REF_INC_DEC : {
         Ref ref = (Ref)stack[stackTop];
-        stack[stackTop] = ScriptRuntime.refIncrDecr(ref, cx, iCode[frame.pc]);
+        stack[stackTop] = ScriptRuntime.refIncrDecr(ref, cx, frame.scope,
+                                                    iCode[frame.pc]);
         ++frame.pc;
         continue Loop;
     }
@@ -1538,7 +1330,8 @@ switch (op) {
         if (obj == DBL_MRK) obj = ScriptRuntime.wrapNumber(sDbl[stackTop - 1]);
         Object id = stack[stackTop];
         if (id == DBL_MRK) id = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-        stack[stackTop - 1] = ScriptRuntime.getElemFunctionAndThis(obj, id, cx);
+        stack[stackTop - 1] = ScriptRuntime.getElemFunctionAndThis(obj, id, cx,
+                                                                   frame.scope);
         stack[stackTop] = ScriptRuntime.lastStoredScriptable(cx);
         continue Loop;
     }
@@ -1865,7 +1658,7 @@ switch (op) {
                        op == Token.ENUM_INIT_VALUES
                          ? ScriptRuntime.ENUMERATE_VALUES :
                        ScriptRuntime.ENUMERATE_ARRAY;
-        stack[indexReg] = ScriptRuntime.enumInit(lhs, cx, enumType);
+        stack[indexReg] = ScriptRuntime.enumInit(lhs, cx, frame.scope, enumType);
         continue Loop;
     }
     case Token.ENUM_NEXT :
@@ -1882,7 +1675,8 @@ switch (op) {
         //stringReg: name of special property
         Object obj = stack[stackTop];
         if (obj == DBL_MRK) obj = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-        stack[stackTop] = ScriptRuntime.specialRef(obj, stringReg, cx);
+        stack[stackTop] = ScriptRuntime.specialRef(obj, stringReg,
+                                                   cx, frame.scope);
         continue Loop;
     }
     case Token.REF_MEMBER: {
@@ -2294,16 +2088,6 @@ switch (op) {
                : ScriptRuntime.wrapNumber(interpreterResultDbl);
     }
 
-    /**
-     * Do in or instanceof.
-     *
-     * @param cx the cx
-     * @param op the op
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @return the int
-     */
     private static int doInOrInstanceof(Context cx, int op, Object[] stack,
                                         double[] sDbl, int stackTop) {
         Object rhs = stack[stackTop];
@@ -2321,16 +2105,6 @@ switch (op) {
         return stackTop;
     }
 
-    /**
-     * Do compare.
-     *
-     * @param frame the frame
-     * @param op the op
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @return the int
-     */
     private static int doCompare(CallFrame frame, int op, Object[] stack,
                                  double[] sDbl, int stackTop) {
         --stackTop;
@@ -2389,16 +2163,6 @@ switch (op) {
         return stackTop;
     }
 
-    /**
-     * Do bit op.
-     *
-     * @param frame the frame
-     * @param op the op
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @return the int
-     */
     private static int doBitOp(CallFrame frame, int op, Object[] stack,
                                double[] sDbl, int stackTop) {
         int lIntValue = stack_int32(frame, stackTop - 1);
@@ -2425,37 +2189,18 @@ switch (op) {
         return stackTop;
     }
 
-    /**
-     * Do del name.
-     *
-     * @param cx the cx
-     * @param op the op
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @return the int
-     */
-    private static int doDelName(Context cx, int op, Object[] stack,
-                                 double[] sDbl, int stackTop) {
+    private static int doDelName(Context cx, CallFrame frame, int op,
+                                 Object[] stack, double[] sDbl, int stackTop) {
         Object rhs = stack[stackTop];
         if (rhs == DOUBLE_MARK) rhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
         --stackTop;
         Object lhs = stack[stackTop];
         if (lhs == DOUBLE_MARK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-        stack[stackTop] = ScriptRuntime.delete(lhs, rhs, cx, op == Icode_DELNAME);
+        stack[stackTop] = ScriptRuntime.delete(lhs, rhs, cx, frame.scope,
+                                               op == Icode_DELNAME);
         return stackTop;
     }
 
-    /**
-     * Do get elem.
-     *
-     * @param cx the cx
-     * @param frame the frame
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @return the int
-     */
     private static int doGetElem(Context cx, CallFrame frame, Object[] stack,
                                  double[] sDbl, int stackTop) {
         --stackTop;
@@ -2469,23 +2214,14 @@ switch (op) {
             value = ScriptRuntime.getObjectElem(lhs, id, cx, frame.scope);
         } else {
             double d = sDbl[stackTop + 1];
-            value = ScriptRuntime.getObjectIndex(lhs, d, cx);
+            value = ScriptRuntime.getObjectIndex(lhs, d, cx, frame.scope);
         }
         stack[stackTop] = value;
         return stackTop;
     }
 
-    /**
-     * Do set elem.
-     *
-     * @param cx the cx
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @return the int
-     */
-    private static int doSetElem(Context cx, Object[] stack, double[] sDbl,
-                                 int stackTop) {
+    private static int doSetElem(Context cx, CallFrame frame, Object[] stack,
+                                 double[] sDbl, int stackTop) {
         stackTop -= 2;
         Object rhs = stack[stackTop + 2];
         if (rhs == DOUBLE_MARK) {
@@ -2498,26 +2234,15 @@ switch (op) {
         Object value;
         Object id = stack[stackTop + 1];
         if (id != DOUBLE_MARK) {
-            value = ScriptRuntime.setObjectElem(lhs, id, rhs, cx);
+            value = ScriptRuntime.setObjectElem(lhs, id, rhs, cx, frame.scope);
         } else {
             double d = sDbl[stackTop + 1];
-            value = ScriptRuntime.setObjectIndex(lhs, d, rhs, cx);
+            value = ScriptRuntime.setObjectIndex(lhs, d, rhs, cx, frame.scope);
         }
         stack[stackTop] = value;
         return stackTop;
     }
 
-    /**
-     * Do elem inc dec.
-     *
-     * @param cx the cx
-     * @param frame the frame
-     * @param iCode the i code
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @return the int
-     */
     private static int doElemIncDec(Context cx, CallFrame frame, byte[] iCode,
                                     Object[] stack, double[] sDbl, int stackTop) {
         Object rhs = stack[stackTop];
@@ -2525,24 +2250,12 @@ switch (op) {
         --stackTop;
         Object lhs = stack[stackTop];
         if (lhs == DOUBLE_MARK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-        stack[stackTop] = ScriptRuntime.elemIncrDecr(lhs, rhs, cx,
+        stack[stackTop] = ScriptRuntime.elemIncrDecr(lhs, rhs, cx, frame.scope,
                                                      iCode[frame.pc]);
         ++frame.pc;
         return stackTop;
     }
 
-    /**
-     * Do call special.
-     *
-     * @param cx the cx
-     * @param frame the frame
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @param iCode the i code
-     * @param indexReg the index reg
-     * @return the int
-     */
     private static int doCallSpecial(Context cx, CallFrame frame,
                                      Object[] stack, double[] sDbl,
                                      int stackTop, byte[] iCode,
@@ -2582,19 +2295,6 @@ switch (op) {
         return stackTop;
     }
 
-    /**
-     * Do set const var.
-     *
-     * @param frame the frame
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @param vars the vars
-     * @param varDbls the var dbls
-     * @param varAttributes the var attributes
-     * @param indexReg the index reg
-     * @return the int
-     */
     private static int doSetConstVar(CallFrame frame, Object[] stack,
                                      double[] sDbl, int stackTop,
                                      Object[] vars, double[] varDbls,
@@ -2624,19 +2324,6 @@ switch (op) {
         return stackTop;
     }
 
-    /**
-     * Do set var.
-     *
-     * @param frame the frame
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @param vars the vars
-     * @param varDbls the var dbls
-     * @param varAttributes the var attributes
-     * @param indexReg the index reg
-     * @return the int
-     */
     private static int doSetVar(CallFrame frame, Object[] stack,
                                 double[] sDbl, int stackTop,
                                 Object[] vars, double[] varDbls,
@@ -2655,18 +2342,6 @@ switch (op) {
         return stackTop;
     }
 
-    /**
-     * Do get var.
-     *
-     * @param frame the frame
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @param vars the vars
-     * @param varDbls the var dbls
-     * @param indexReg the index reg
-     * @return the int
-     */
     private static int doGetVar(CallFrame frame, Object[] stack,
                                 double[] sDbl, int stackTop,
                                 Object[] vars, double[] varDbls,
@@ -2682,20 +2357,6 @@ switch (op) {
         return stackTop;
     }
 
-    /**
-     * Do var inc dec.
-     *
-     * @param cx the cx
-     * @param frame the frame
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @param vars the vars
-     * @param varDbls the var dbls
-     * @param varAttributes the var attributes
-     * @param indexReg the index reg
-     * @return the int
-     */
     private static int doVarIncDec(Context cx, CallFrame frame,
                                    Object[] stack, double[] sDbl,
                                    int stackTop, Object[] vars,
@@ -2739,16 +2400,6 @@ switch (op) {
         return stackTop;
     }
 
-    /**
-     * Do ref member.
-     *
-     * @param cx the cx
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @param flags the flags
-     * @return the int
-     */
     private static int doRefMember(Context cx, Object[] stack, double[] sDbl,
                                    int stackTop, int flags) {
         Object elem = stack[stackTop];
@@ -2760,16 +2411,6 @@ switch (op) {
         return stackTop;
     }
 
-    /**
-     * Do ref ns member.
-     *
-     * @param cx the cx
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @param flags the flags
-     * @return the int
-     */
     private static int doRefNsMember(Context cx, Object[] stack, double[] sDbl,
                                      int stackTop, int flags) {
         Object elem = stack[stackTop];
@@ -2784,17 +2425,6 @@ switch (op) {
         return stackTop;
     }
 
-    /**
-     * Do ref ns name.
-     *
-     * @param cx the cx
-     * @param frame the frame
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @param flags the flags
-     * @return the int
-     */
     private static int doRefNsName(Context cx, CallFrame frame,
                                    Object[] stack, double[] sDbl,
                                    int stackTop, int flags) {
@@ -2809,19 +2439,6 @@ switch (op) {
 
     /**
      * Call __noSuchMethod__.
-     *
-     * @param cx the cx
-     * @param frame the frame
-     * @param indexReg the index reg
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @param op the op
-     * @param funThisObj the fun this obj
-     * @param calleeScope the callee scope
-     * @param noSuchMethodShim the no such method shim
-     * @param ifun the ifun
-     * @return the call frame
      */
     private static CallFrame initFrameForNoSuchMethod(Context cx,
             CallFrame frame, int indexReg, Object[] stack, double[] sDbl,
@@ -2863,14 +2480,6 @@ switch (op) {
         return calleeFrame;
     }
 
-    /**
-     * Do equals.
-     *
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @return true, if successful
-     */
     private static boolean doEquals(Object[] stack, double[] sDbl,
                                     int stackTop) {
         Object rhs = stack[stackTop + 1];
@@ -2890,14 +2499,6 @@ switch (op) {
         }
     }
 
-    /**
-     * Do shallow equals.
-     *
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @return true, if successful
-     */
     private static boolean doShallowEquals(Object[] stack, double[] sDbl,
                                            int stackTop)
     {
@@ -2927,16 +2528,6 @@ switch (op) {
         return (ldbl == rdbl);
     }
 
-    /**
-     * Process throwable.
-     *
-     * @param cx the cx
-     * @param throwable the throwable
-     * @param frame the frame
-     * @param indexReg the index reg
-     * @param instructionCounting the instruction counting
-     * @return the call frame
-     */
     private static CallFrame processThrowable(Context cx, Object throwable,
                                               CallFrame frame, int indexReg,
                                               boolean instructionCounting)
@@ -3033,15 +2624,6 @@ switch (op) {
         return frame;
     }
 
-    /**
-     * Freeze generator.
-     *
-     * @param cx the cx
-     * @param frame the frame
-     * @param stackTop the stack top
-     * @param generatorState the generator state
-     * @return the object
-     */
     private static Object freezeGenerator(Context cx, CallFrame frame,
                                           int stackTop,
                                           GeneratorState generatorState)
@@ -3062,15 +2644,6 @@ switch (op) {
               : ScriptRuntime.wrapNumber(frame.resultDbl);
     }
 
-    /**
-     * Thaw generator.
-     *
-     * @param frame the frame
-     * @param stackTop the stack top
-     * @param generatorState the generator state
-     * @param op the op
-     * @return the object
-     */
     private static Object thawGenerator(CallFrame frame, int stackTop,
                                         GeneratorState generatorState, int op)
     {
@@ -3095,21 +2668,6 @@ switch (op) {
           return Scriptable.NOT_FOUND;
     }
 
-    /**
-     * Inits the frame for apply or call.
-     *
-     * @param cx the cx
-     * @param frame the frame
-     * @param indexReg the index reg
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @param op the op
-     * @param calleeScope the callee scope
-     * @param ifun the ifun
-     * @param iApplyCallable the i apply callable
-     * @return the call frame
-     */
     private static CallFrame initFrameForApplyOrCall(Context cx, CallFrame frame,
             int indexReg, Object[] stack, double[] sDbl, int stackTop, int op,
             Scriptable calleeScope, IdFunctionObject ifun,
@@ -3120,7 +2678,7 @@ switch (op) {
             Object obj = stack[stackTop + 2];
             if (obj == DOUBLE_MARK)
                 obj = ScriptRuntime.wrapNumber(sDbl[stackTop + 2]);
-            applyThis = ScriptRuntime.toObjectOrNull(cx, obj);
+            applyThis = ScriptRuntime.toObjectOrNull(cx, obj, frame.scope);
         }
         else {
             applyThis = null;
@@ -3159,20 +2717,6 @@ switch (op) {
         return frame;
     }
 
-    /**
-     * Inits the frame.
-     *
-     * @param cx the cx
-     * @param callerScope the caller scope
-     * @param thisObj the this obj
-     * @param args the args
-     * @param argsDbl the args dbl
-     * @param argShift the arg shift
-     * @param argCount the arg count
-     * @param fnOrScript the fn or script
-     * @param parentFrame the parent frame
-     * @param frame the frame
-     */
     private static void initFrame(Context cx, Scriptable callerScope,
                                   Scriptable thisObj,
                                   Object[] args, double[] argsDbl,
@@ -3313,25 +2857,11 @@ switch (op) {
         enterFrame(cx, frame, args, false);
     }
 
-    /**
-     * Checks if is frame enter exit required.
-     *
-     * @param frame the frame
-     * @return true, if is frame enter exit required
-     */
     private static boolean isFrameEnterExitRequired(CallFrame frame)
     {
         return frame.debuggerFrame != null || frame.idata.itsNeedsActivation;
     }
 
-    /**
-     * Enter frame.
-     *
-     * @param cx the cx
-     * @param frame the frame
-     * @param args the args
-     * @param continuationRestart the continuation restart
-     */
     private static void enterFrame(Context cx, CallFrame frame, Object[] args,
                                    boolean continuationRestart)
     {
@@ -3381,13 +2911,6 @@ switch (op) {
         }
     }
 
-    /**
-     * Exit frame.
-     *
-     * @param cx the cx
-     * @param frame the frame
-     * @param throwable the throwable
-     */
     private static void exitFrame(Context cx, CallFrame frame,
                                   Object throwable)
     {
@@ -3426,13 +2949,6 @@ switch (op) {
         }
     }
 
-    /**
-     * Sets the call result.
-     *
-     * @param frame the frame
-     * @param callResult the call result
-     * @param callResultDbl the call result dbl
-     */
     private static void setCallResult(CallFrame frame,
                                       Object callResult,
                                       double callResultDbl)
@@ -3453,12 +2969,6 @@ switch (op) {
         frame.savedCallOp = 0;
     }
 
-    /**
-     * Capture continuation.
-     *
-     * @param cx the cx
-     * @return the native continuation
-     */
     public static NativeContinuation captureContinuation(Context cx) {
         if (cx.lastInterpreterFrame == null ||
             !(cx.lastInterpreterFrame instanceof CallFrame))
@@ -3468,14 +2978,6 @@ switch (op) {
         return captureContinuation(cx, (CallFrame)cx.lastInterpreterFrame, true);
     }
 
-    /**
-     * Capture continuation.
-     *
-     * @param cx the cx
-     * @param frame the frame
-     * @param requireContinuationsTopFrame the require continuations top frame
-     * @return the native continuation
-     */
     private static NativeContinuation captureContinuation(Context cx, CallFrame frame,
         boolean requireContinuationsTopFrame)
     {
@@ -3523,13 +3025,6 @@ switch (op) {
         return c;
     }
 
-    /**
-     * Stack_int32.
-     *
-     * @param frame the frame
-     * @param i the i
-     * @return the int
-     */
     private static int stack_int32(CallFrame frame, int i)
     {
         Object x = frame.stack[i];
@@ -3540,13 +3035,6 @@ switch (op) {
         }
     }
 
-    /**
-     * Stack_double.
-     *
-     * @param frame the frame
-     * @param i the i
-     * @return the double
-     */
     private static double stack_double(CallFrame frame, int i)
     {
         Object x = frame.stack[i];
@@ -3557,13 +3045,6 @@ switch (op) {
         }
     }
 
-    /**
-     * Stack_boolean.
-     *
-     * @param frame the frame
-     * @param i the i
-     * @return true, if successful
-     */
     private static boolean stack_boolean(CallFrame frame, int i)
     {
         Object x = frame.stack[i];
@@ -3586,14 +3067,6 @@ switch (op) {
         }
     }
 
-    /**
-     * Do add.
-     *
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @param cx the cx
-     */
     private static void doAdd(Object[] stack, double[] sDbl, int stackTop,
                               Context cx)
     {
@@ -3657,16 +3130,6 @@ switch (op) {
         }
     }
 
-    /**
-     * Do arithmetic.
-     *
-     * @param frame the frame
-     * @param op the op
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param stackTop the stack top
-     * @return the int
-     */
     private static int doArithmetic(CallFrame frame, int op, Object[] stack,
                                     double[] sDbl, int stackTop) {
         double rDbl = stack_double(frame, stackTop);
@@ -3691,15 +3154,6 @@ switch (op) {
         return stackTop;
     }
 
-    /**
-     * Gets the args array.
-     *
-     * @param stack the stack
-     * @param sDbl the s dbl
-     * @param shift the shift
-     * @param count the count
-     * @return the args array
-     */
     private static Object[] getArgsArray(Object[] stack, double[] sDbl,
                                          int shift, int count)
     {
@@ -3717,13 +3171,6 @@ switch (op) {
         return args;
     }
 
-    /**
-     * Adds the instruction count.
-     *
-     * @param cx the cx
-     * @param frame the frame
-     * @param extra the extra
-     */
     private static void addInstructionCount(Context cx, CallFrame frame,
                                             int extra)
     {

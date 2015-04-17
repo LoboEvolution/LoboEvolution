@@ -238,16 +238,11 @@ public class HtmlController {
                 break;
             } //TODO
             
-            System.out.println("onMouseOver");
-            System.out.println("node: " + node);
-            
             if (node instanceof HTMLDocumentImpl) {
-                System.out.println("HTMLDocumentImpl");
                 HTMLDocumentImpl uiDoc = (HTMLDocumentImpl) node;
                 Function f = uiDoc.getOnmouseover();
                 Executor.executeFunction(uiDoc, f, null);
             } else if (node instanceof HTMLAbstractUIElement) {
-                System.out.println("HTMLAbstractUIElement");
                 HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
                 uiElement.setMouseOver(true);
                 Function f = uiElement.getOnmouseover();

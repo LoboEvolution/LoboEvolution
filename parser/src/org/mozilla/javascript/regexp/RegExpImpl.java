@@ -6,48 +6,28 @@
 
 package org.mozilla.javascript.regexp;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.Kit;
-import org.mozilla.javascript.RegExpProxy;
-import org.mozilla.javascript.ScriptRuntime;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
-import org.mozilla.javascript.Undefined;
-
+import org.mozilla.javascript.*;
 
 /**
- * The Class RegExpImpl.
+ *
  */
 public class RegExpImpl implements RegExpProxy {
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.RegExpProxy#isRegExp(org.mozilla.javascript.Scriptable)
-     */
     public boolean isRegExp(Scriptable obj) {
         return obj instanceof NativeRegExp;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.RegExpProxy#compileRegExp(org.mozilla.javascript.Context, java.lang.String, java.lang.String)
-     */
     public Object compileRegExp(Context cx, String source, String flags)
     {
         return NativeRegExp.compileRE(cx, source, flags, false);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.RegExpProxy#wrapRegExp(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.Object)
-     */
     public Scriptable wrapRegExp(Context cx, Scriptable scope,
                                  Object compiled)
     {
         return new NativeRegExp(scope, (RECompiled) compiled);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.RegExpProxy#action(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[], int)
-     */
     public Object action(Context cx, Scriptable scope,
                          Scriptable thisObj, Object[] args,
                          int actionType)
@@ -139,16 +119,6 @@ public class RegExpImpl implements RegExpProxy {
         }
     }
 
-    /**
-     * Creates the reg exp.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param args the args
-     * @param optarg the optarg
-     * @param forceFlat the force flat
-     * @return the native reg exp
-     */
     private static NativeRegExp createRegExp(Context cx, Scriptable scope,
                                              Object[] args, int optarg,
                                              boolean forceFlat)
@@ -177,15 +147,6 @@ public class RegExpImpl implements RegExpProxy {
 
     /**
      * Analog of C match_or_replace.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param thisObj the this obj
-     * @param args the args
-     * @param reImpl the re impl
-     * @param data the data
-     * @param re the re
-     * @return the object
      */
     private static Object matchOrReplace(Context cx, Scriptable scope,
                                          Scriptable thisObj, Object[] args,
@@ -238,9 +199,6 @@ public class RegExpImpl implements RegExpProxy {
 
 
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.RegExpProxy#find_split(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.String, java.lang.String, org.mozilla.javascript.Scriptable, int[], int[], boolean[], java.lang.String[][])
-     */
     public int find_split(Context cx, Scriptable scope, String target,
                           String separator, Scriptable reObj,
                           int[] ip, int[] matchlen,
@@ -315,9 +273,6 @@ public class RegExpImpl implements RegExpProxy {
     /**
      * Analog of REGEXP_PAREN_SUBSTRING in C jsregexp.h.
      * Assumes zero-based; i.e., for $3, i==2
-     *
-     * @param i the i
-     * @return the paren sub string
      */
     SubString getParenSubString(int i)
     {
@@ -333,15 +288,6 @@ public class RegExpImpl implements RegExpProxy {
     /*
      * Analog of match_glob() in jsstr.c
      */
-    /**
-     * Match_glob.
-     *
-     * @param mdata the mdata
-     * @param cx the cx
-     * @param scope the scope
-     * @param count the count
-     * @param reImpl the re impl
-     */
     private static void match_glob(GlobData mdata, Context cx,
                                    Scriptable scope, int count,
                                    RegExpImpl reImpl)
@@ -356,16 +302,6 @@ public class RegExpImpl implements RegExpProxy {
 
     /*
      * Analog of replace_glob() in jsstr.c
-     */
-    /**
-     * Replace_glob.
-     *
-     * @param rdata the rdata
-     * @param cx the cx
-     * @param scope the scope
-     * @param reImpl the re impl
-     * @param leftIndex the left index
-     * @param leftlen the leftlen
      */
     private static void replace_glob(GlobData rdata, Context cx,
                                      Scriptable scope, RegExpImpl reImpl,
@@ -444,16 +380,6 @@ public class RegExpImpl implements RegExpProxy {
         }
     }
 
-    /**
-     * Interpret dollar.
-     *
-     * @param cx the cx
-     * @param res the res
-     * @param da the da
-     * @param dp the dp
-     * @param skip the skip
-     * @return the sub string
-     */
     private static SubString interpretDollar(Context cx, RegExpImpl res,
                                              String da, int dp, int[] skip)
     {
@@ -546,10 +472,6 @@ public class RegExpImpl implements RegExpProxy {
 
     /**
      * Analog of do_replace in jsstr.c
-     *
-     * @param rdata the rdata
-     * @param cx the cx
-     * @param regExpImpl the reg exp impl
      */
     private static void do_replace(GlobData rdata, Context cx,
                                    RegExpImpl regExpImpl)
@@ -590,9 +512,6 @@ public class RegExpImpl implements RegExpProxy {
      * a limit argument and accepts a regular expression as the split
      * argument.
      */
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.RegExpProxy#js_split(org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, java.lang.String, java.lang.Object[])
-     */
     public Object js_split(Context cx, Scriptable scope,
                                    String target, Object[] args)
     {
@@ -610,9 +529,7 @@ public class RegExpImpl implements RegExpProxy {
         }
 
         // return an array consisting of the target if no separator given
-        // don't check against undefined, because we want
-        // 'fooundefinedbar'.split(void 0) to split to ['foo', 'bar']
-        if (args.length < 1) {
+        if (args.length < 1 || args[0] == Undefined.instance) {
             result.put(0, result, target);
             return result;
         }
@@ -699,22 +616,6 @@ public class RegExpImpl implements RegExpProxy {
      * Return -1 on end of string, >= 0 for a valid index of the next
      * separator occurrence if found, or the string length if no
      * separator is found.
-     */
-    /**
-     * Find_split.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param target the target
-     * @param separator the separator
-     * @param version the version
-     * @param reProxy the re proxy
-     * @param re the re
-     * @param ip the ip
-     * @param matchlen the matchlen
-     * @param matched the matched
-     * @param parensp the parensp
-     * @return the int
      */
     private static int find_split(Context cx, Scriptable scope, String target,
                                   String separator, int version,
@@ -823,25 +724,13 @@ public class RegExpImpl implements RegExpProxy {
         return (i != -1) ? i : length;
     }
 
-    /** The input. */
     protected String          input;         /* input string to match (perl $_, GC root) */
-    
-    /** The multiline. */
     protected boolean         multiline;     /* whether input contains newlines (perl $*) */
-    
-    /** The parens. */
     protected SubString[]     parens;        /* Vector of SubString; last set of parens
                                       matched (perl $1, $2) */
-    /** The last match. */
-        protected SubString       lastMatch;     /* last string matched (perl $&) */
-    
-    /** The last paren. */
+    protected SubString       lastMatch;     /* last string matched (perl $&) */
     protected SubString       lastParen;     /* last paren matched (perl $+) */
-    
-    /** The left context. */
     protected SubString       leftContext;   /* input to left of last match (perl $`) */
-    
-    /** The right context. */
     protected SubString       rightContext;  /* input to right of last match (perl $') */
 }
 

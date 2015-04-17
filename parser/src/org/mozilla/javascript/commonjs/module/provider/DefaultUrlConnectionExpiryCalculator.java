@@ -7,7 +7,6 @@ package org.mozilla.javascript.commonjs.module.provider;
 import java.io.Serializable;
 import java.net.URLConnection;
 
-
 /**
  * The default heuristic for calculating cache expiry of URL-based resources.
  * It is simply configured with a default relative expiry, and each invocation
@@ -19,11 +18,8 @@ import java.net.URLConnection;
 public class DefaultUrlConnectionExpiryCalculator
 implements UrlConnectionExpiryCalculator, Serializable
 {
-    
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** The relative expiry. */
     private final long relativeExpiry;
 
     /**
@@ -45,9 +41,6 @@ implements UrlConnectionExpiryCalculator, Serializable
         this.relativeExpiry = relativeExpiry;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.commonjs.module.provider.UrlConnectionExpiryCalculator#calculateExpiry(java.net.URLConnection)
-     */
     public long calculateExpiry(URLConnection urlConnection) {
         return System.currentTimeMillis() + relativeExpiry;
     }

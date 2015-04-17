@@ -8,69 +8,44 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
-
 /**
- * With statement.  Node type is {@link Token#WITH}.
+ * With statement.  Node type is {@link Token#WITH}.<p>
  *
  * <pre><i>WithStatement</i> :
  *      <b>with</b> ( Expression ) Statement ;</pre>
  */
 public class WithStatement extends AstNode {
 
-    /** The expression. */
     private AstNode expression;
-    
-    /** The statement. */
     private AstNode statement;
-    
-    /** The lp. */
     private int lp = -1;
-    
-    /** The rp. */
     private int rp = -1;
 
     {
         type = Token.WITH;
     }
 
-    /**
-     * Instantiates a new with statement.
-     */
     public WithStatement() {
     }
 
-    /**
-     * Instantiates a new with statement.
-     *
-     * @param pos the pos
-     */
     public WithStatement(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new with statement.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public WithStatement(int pos, int len) {
         super(pos, len);
     }
 
     /**
-     * Returns object expression.
-     *
-     * @return the expression
+     * Returns object expression
      */
     public AstNode getExpression() {
         return expression;
     }
 
     /**
-     * Sets object expression (and its parent link).
-     *
-     * @param expression the new expression
+     * Sets object expression (and its parent link)
+     * @throws IllegalArgumentException} if expression is {@code null}
      */
     public void setExpression(AstNode expression) {
         assertNotNull(expression);
@@ -79,18 +54,15 @@ public class WithStatement extends AstNode {
     }
 
     /**
-     * Returns the statement or block.
-     *
-     * @return the statement
+     * Returns the statement or block
      */
     public AstNode getStatement() {
         return statement;
     }
 
     /**
-     * Sets the statement (and sets its parent link).
-     *
-     * @param statement the new statement
+     * Sets the statement (and sets its parent link)
+     * @throws IllegalArgumentException} if statement is {@code null}
      */
     public void setStatement(AstNode statement) {
         assertNotNull(statement);
@@ -99,55 +71,41 @@ public class WithStatement extends AstNode {
     }
 
     /**
-     * Returns left paren offset.
-     *
-     * @return the lp
+     * Returns left paren offset
      */
     public int getLp() {
       return lp;
     }
 
     /**
-     * Sets left paren offset.
-     *
-     * @param lp the new lp
+     * Sets left paren offset
      */
     public void setLp(int lp) {
       this.lp = lp;
     }
 
     /**
-     * Returns right paren offset.
-     *
-     * @return the rp
+     * Returns right paren offset
      */
     public int getRp() {
       return rp;
     }
 
     /**
-     * Sets right paren offset.
-     *
-     * @param rp the new rp
+     * Sets right paren offset
      */
     public void setRp(int rp) {
       this.rp = rp;
     }
 
     /**
-     * Sets both paren positions.
-     *
-     * @param lp the lp
-     * @param rp the rp
+     * Sets both paren positions
      */
     public void setParens(int lp, int rp) {
         this.lp = lp;
         this.rp = rp;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -166,8 +124,6 @@ public class WithStatement extends AstNode {
 
     /**
      * Visits this node, then the with-object, then the body statement.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

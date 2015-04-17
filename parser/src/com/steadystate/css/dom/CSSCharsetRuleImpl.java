@@ -38,7 +38,6 @@ import org.w3c.dom.css.CSSRule;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.util.LangUtils;
 
-
 /**
  * Implementation of {@link CSSCharsetRule}.
  *
@@ -47,19 +46,10 @@ import com.steadystate.css.util.LangUtils;
  */
 public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl implements CSSCharsetRule {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -2472209213089007127L;
 
-    /** The encoding_. */
     private String encoding_;
 
-    /**
-     * Instantiates a new CSS charset rule impl.
-     *
-     * @param parentStyleSheet the parent style sheet
-     * @param parentRule the parent rule
-     * @param encoding the encoding
-     */
     public CSSCharsetRuleImpl(
             final CSSStyleSheetImpl parentStyleSheet,
             final CSSRule parentRule,
@@ -68,30 +58,18 @@ public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl implements CSSCharse
         encoding_ = encoding;
     }
 
-    /**
-     * Instantiates a new CSS charset rule impl.
-     */
     public CSSCharsetRuleImpl() {
         super();
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#getType()
-     */
     public short getType() {
         return CHARSET_RULE;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#getCssText()
-     */
     public String getCssText() {
         return "@charset \"" + getEncoding() + "\";";
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#setCssText(java.lang.String)
-     */
     public void setCssText(final String cssText) throws DOMException {
         final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
         if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
@@ -129,23 +107,14 @@ public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl implements CSSCharse
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSCharsetRule#getEncoding()
-     */
     public String getEncoding() {
         return encoding_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSCharsetRule#setEncoding(java.lang.String)
-     */
     public void setEncoding(final String encoding) throws DOMException {
         encoding_ = encoding;
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -159,9 +128,6 @@ public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl implements CSSCharse
             && LangUtils.equals(getEncoding(), ccr.getEncoding());
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#hashCode()
-     */
     @Override
     public int hashCode() {
         int hash = super.hashCode();
@@ -169,9 +135,6 @@ public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl implements CSSCharse
         return hash;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return getCssText();

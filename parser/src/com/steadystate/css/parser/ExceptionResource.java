@@ -28,7 +28,6 @@ package com.steadystate.css.parser;
 
 import java.util.ListResourceBundle;
 
-
 /**
  * ExceptionResource.
  *
@@ -37,15 +36,11 @@ import java.util.ListResourceBundle;
  */
 public class ExceptionResource extends ListResourceBundle {
 
-    /* (non-Javadoc)
-     * @see java.util.ListResourceBundle#getContents()
-     */
     @Override
     public Object[][] getContents() {
         return contents;
     }
 
-    /** The Constant contents. */
     static final Object[][] contents = {
         {"s0", "Syntax error"},
         {"s1", "Index out of bounds error"},

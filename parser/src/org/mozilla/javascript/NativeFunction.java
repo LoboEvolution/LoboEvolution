@@ -8,7 +8,6 @@ package org.mozilla.javascript;
 
 import org.mozilla.javascript.debug.DebuggableScript;
 
-
 /**
  * This class implements the Function native object.
  * See ECMA 15.3.
@@ -17,26 +16,17 @@ import org.mozilla.javascript.debug.DebuggableScript;
 public abstract class NativeFunction extends BaseFunction
 {
 
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 8713897114082216401L;
     
-    /**
-     * Inits the script function.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     */
     public final void initScriptFunction(Context cx, Scriptable scope)
     {
         ScriptRuntime.setFunctionProtoAndParent(this, scope);
     }
 
     /**
-     * Decompile.
-     *
      * @param indent How much to indent the decompiled result
+     *
      * @param flags Flags specifying format of decompilation output
-     * @return the string
      */
     @Override
     final String decompile(int indent, int flags)
@@ -51,9 +41,6 @@ public abstract class NativeFunction extends BaseFunction
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getLength()
-     */
     @Override
     public int getLength()
     {
@@ -69,9 +56,6 @@ public abstract class NativeFunction extends BaseFunction
         return activation.originalArgs.length;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.BaseFunction#getArity()
-     */
     @Override
     public int getArity()
     {
@@ -79,13 +63,11 @@ public abstract class NativeFunction extends BaseFunction
     }
 
     /**
-     * Js get_name.
-     *
-     * @return the string
      * @deprecated Use {@link BaseFunction#getFunctionName()} instead.
      * For backwards compatibility keep an old method name used by
      * Batik and possibly others.
      */
+    @Deprecated
     public String jsGet_name()
     {
         return getFunctionName();
@@ -93,19 +75,12 @@ public abstract class NativeFunction extends BaseFunction
 
     /**
      * Get encoded source string.
-     *
-     * @return the encoded source
      */
     public String getEncodedSource()
     {
         return null;
     }
 
-    /**
-     * Gets the debuggable view.
-     *
-     * @return the debuggable view
-     */
     public DebuggableScript getDebuggableView()
     {
         return null;
@@ -127,25 +102,16 @@ public abstract class NativeFunction extends BaseFunction
     }
 
 
-    /**
-     * Gets the language version.
-     *
-     * @return the language version
-     */
     protected abstract int getLanguageVersion();
 
     /**
      * Get number of declared parameters. It should be 0 for scripts.
-     *
-     * @return the param count
      */
     protected abstract int getParamCount();
 
     /**
      * Get number of declared parameters and variables defined through var
      * statements.
-     *
-     * @return the param and var count
      */
     protected abstract int getParamAndVarCount();
 
@@ -153,9 +119,6 @@ public abstract class NativeFunction extends BaseFunction
      * Get parameter or variable name.
      * If <tt>index < {@link #getParamCount()}</tt>, then return the name of the
      * corresponding parameter. Otherwise return the name of variable.
-     *
-     * @param index the index
-     * @return the param or var name
      */
     protected abstract String getParamOrVarName(int index);
 
@@ -164,9 +127,6 @@ public abstract class NativeFunction extends BaseFunction
      * If <tt>index < {@link #getParamCount()}</tt>, then return the const-ness
      * of the corresponding parameter. Otherwise return whether the variable is
      * const.
-     *
-     * @param index the index
-     * @return the param or var const
      */
     protected boolean getParamOrVarConst(int index)
     {

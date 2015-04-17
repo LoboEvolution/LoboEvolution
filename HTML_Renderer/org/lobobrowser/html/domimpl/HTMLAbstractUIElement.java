@@ -180,6 +180,9 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 
     /** The onunload. */
     private Function onunload;
+    
+    /** The function by attribute. */
+    private Map<String, Function> functionByAttribute = null;
 
     /**
      * Gets the onafterprint.
@@ -1195,28 +1198,34 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
         }
     }
 
-    /** The function by attribute. */
-    private Map<String, Function> functionByAttribute = null;
-
-    /*
- * public void addEventListener(String script, String function) {
- * HtmlJsAttributeProperties ut = new HtmlJsAttributeProperties();
- * HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document; if (getId() == null)
- * { NodeList elements = doc.getElementsByTagName(getTagName()); String rpl =
- * function.replace("\n", ""); for (int i = 0; i < elements.getLength(); i++) {
- * Element el = (Element) elements.item(i);
- * el.setAttribute(ut.mapFunction(script), rpl); } } else { Element element =
- * doc.getElementById(getId()); String[] split = function.split("\\{"); function
- * = split[1].replace("}", "").trim();
- * element.setAttribute(ut.mapFunction(script), function);
- * doc.setElementById(getId(), element); } } public void
- * removeEventListener(String script, String function) {
- * HtmlJsAttributeProperties ut = new HtmlJsAttributeProperties();
- * HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document; Element element =
- * doc.getElementById(getId()); element.removeAttribute(ut.mapFunction(script));
- * doc.setElementById(getId(), element); }
- */
-
+    /**
+     * Adds the event listener.
+     *
+     * @param script the script
+     * @param function the function
+     * @param bool the bool
+     */
+    public void addEventListener(String script, Function function, boolean bool) {
+        addEventListener(script, function);
+    }
+    
+    /**
+     * Removes the event listener.
+     *
+     * @param script the script
+     * @param function the function
+     * @param bool the bool
+     */
+    public void removeEventListener(String script, Function function, boolean bool) {
+        removeEventListener(script, function);
+    }
+    
+    /**
+     * Adds the event listener.
+     *
+     * @param script the script
+     * @param function the function
+     */
     public void addEventListener(String script, Function function) {
 
         String key = script.toLowerCase();
@@ -1253,6 +1262,12 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 
     }
 
+    /**
+     * Removes the event listener.
+     *
+     * @param script the script
+     * @param function the function
+     */
     public void removeEventListener(String script, Function function) {
         String key = script.toLowerCase();
 

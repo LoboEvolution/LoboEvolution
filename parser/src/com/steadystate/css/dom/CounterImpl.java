@@ -32,7 +32,6 @@ import org.w3c.css.sac.LexicalUnit;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.css.Counter;
 
-
 /**
  * Implementation of {@link Counter}.
  *
@@ -41,51 +40,26 @@ import org.w3c.dom.css.Counter;
  */
 public class CounterImpl implements Counter, Serializable {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 7996279151817598904L;
 
-    /** The identifier_. */
     private String identifier_;
-    
-    /** The list style_. */
     private String listStyle_;
-    
-    /** The separator_. */
     private String separator_;
 
-    /**
-     * Sets the identifier.
-     *
-     * @param identifier the new identifier
-     */
     public void setIdentifier(final String identifier) {
         identifier_ = identifier;
     }
 
-    /**
-     * Sets the list style.
-     *
-     * @param listStyle the new list style
-     */
     public void setListStyle(final String listStyle) {
         listStyle_ = listStyle;
     }
 
-    /**
-     * Sets the separator.
-     *
-     * @param separator the new separator
-     */
     public void setSeparator(final String separator) {
         separator_ = separator;
     }
 
     /**
-     * Creates new CounterImpl.
-     *
-     * @param separatorSpecified the separator specified
-     * @param lu the lu
-     * @throws DOMException the DOM exception
+     * Creates new CounterImpl
      */
     public CounterImpl(final boolean separatorSpecified, final LexicalUnit lu) throws DOMException {
         LexicalUnit next = lu;
@@ -122,37 +96,22 @@ public class CounterImpl implements Counter, Serializable {
         }
     }
 
-    /**
-     * Instantiates a new counter impl.
-     */
     public CounterImpl() {
         super();
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.Counter#getIdentifier()
-     */
     public String getIdentifier() {
         return identifier_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.Counter#getListStyle()
-     */
     public String getListStyle() {
         return listStyle_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.Counter#getSeparator()
-     */
     public String getSeparator() {
         return separator_;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();

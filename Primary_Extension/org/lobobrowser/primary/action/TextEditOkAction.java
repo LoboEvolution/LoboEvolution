@@ -26,28 +26,28 @@ import org.lobobrowser.primary.gui.SimpleTextEditDialog;
  */
 public class TextEditOkAction extends AbstractAction {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The text area. */
-	private final JTextArea textArea;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-	/** The search. */
-	private SimpleTextEditDialog search;
+    /** The text area. */
+    private final JTextArea textArea;
 
-	public TextEditOkAction(JTextArea textArea,
-			SimpleTextEditDialog search) {
-		this.textArea = textArea;
-		this.search = search;
-	}
+    /** The search. */
+    private SimpleTextEditDialog search;
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
-	public void actionPerformed(ActionEvent e) {
-		search.setResultingText(textArea.getText());
-		search.dispose();
-	}
+    public TextEditOkAction(JTextArea textArea, SimpleTextEditDialog search) {
+        this.textArea = textArea;
+        this.search = search;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        search.setResultingText(textArea.getText());
+        search.dispose();
+    }
 }

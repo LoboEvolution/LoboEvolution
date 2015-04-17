@@ -1,47 +1,44 @@
+/* -*- Mode: java; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 package org.mozilla.javascript.typedarrays;
 
-import java.util.List;
-
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.ExternalArrayData;
 import org.mozilla.javascript.IdFunctionObject;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
 
+import java.lang.reflect.Array;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.RandomAccess;
 
 /**
- * The Class NativeTypedArrayView.
+ * This class is the abstract parent for all of the various typed arrays. Each one
+ * shows a view of a specific NativeArrayBuffer, and modifications here will affect the rest.
  */
-public abstract class NativeTypedArrayView
-    extends NativeArrayBufferView
-{
-    
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/**  The length, in elements, of the array. */
+public abstract class NativeTypedArrayView<T>
+    extends NativeArrayBufferView
+    implements List<T>, RandomAccess, ExternalArrayData
+{
+    /** The length, in elements, of the array */
     protected final int length;
 
-    /**
-     * Instantiates a new native typed array view.
-     */
     protected NativeTypedArrayView()
     {
         super();
         length = 0;
     }
 
-    /**
-     * Instantiates a new native typed array view.
-     *
-     * @param ab the ab
-     * @param off the off
-     * @param len the len
-     * @param byteLen the byte len
-     */
     protected NativeTypedArrayView(NativeArrayBuffer ab, int off, int len, int byteLen)
     {
         super(ab, off, byteLen);
@@ -50,44 +47,29 @@ public abstract class NativeTypedArrayView
 
     // Array properties implementation
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#get(int, org.mozilla.javascript.Scriptable)
-     */
     @Override
     public Object get(int index, Scriptable start)
     {
         return js_get(index);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#has(int, org.mozilla.javascript.Scriptable)
-     */
     @Override
     public boolean has(int index, Scriptable start)
     {
         return ((index > 0) && (index < length));
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#put(int, org.mozilla.javascript.Scriptable, java.lang.Object)
-     */
     @Override
     public void put(int index, Scriptable start, Object val)
     {
         js_set(index, val);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#delete(int)
-     */
     @Override
     public void delete(int index)
     {
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getIds()
-     */
     @Override
     public Object[] getIds()
     {
@@ -100,82 +82,28 @@ public abstract class NativeTypedArrayView
 
     // Actual functions
 
-    /**
-     * Check index.
-     *
-     * @param index the index
-     * @return true, if successful
-     */
     protected boolean checkIndex(int index)
     {
        return ((index < 0) || (index >= length));
     }
 
     /**
-     * Construct.
-     *
-     * @param ab the ab
-     * @param off the off
-     * @param len the len
-     * @return the native typed array view
+     * Return the number of bytes represented by each element in the array. This can be useful
+     * when wishing to manipulate the byte array directly from Java.
      */
+    public abstract int getBytesPerElement();
+
     protected abstract NativeTypedArrayView construct(NativeArrayBuffer ab, int off, int len);
-    
-    /**
-     * Js_get.
-     *
-     * @param index the index
-     * @return the object
-     */
     protected abstract Object js_get(int index);
-    
-    /**
-     * Js_set.
-     *
-     * @param index the index
-     * @param c the c
-     * @return the object
-     */
     protected abstract Object js_set(int index, Object c);
-    
-    /**
-     * Gets the bytes per element.
-     *
-     * @return the bytes per element
-     */
-    protected abstract int getBytesPerElement();
-    
-    /**
-     * Real this.
-     *
-     * @param thisObj the this obj
-     * @param f the f
-     * @return the native typed array view
-     */
     protected abstract NativeTypedArrayView realThis(Scriptable thisObj, IdFunctionObject f);
 
-    /**
-     * Make array buffer.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param length the length
-     * @return the native array buffer
-     */
     private NativeArrayBuffer makeArrayBuffer(Context cx, Scriptable scope, int length)
     {
         return (NativeArrayBuffer)cx.newObject(scope, NativeArrayBuffer.CLASS_NAME,
                                                new Object[] { length });
     }
 
-    /**
-     * Js_constructor.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param args the args
-     * @return the native typed array view
-     */
     private NativeTypedArrayView js_constructor(Context cx, Scriptable scope, Object[] args)
     {
         if (!isArg(args, 0)) {
@@ -242,12 +170,6 @@ public abstract class NativeTypedArrayView
         }
     }
 
-    /**
-     * Sets the range.
-     *
-     * @param v the v
-     * @param off the off
-     */
     private void setRange(NativeTypedArrayView v, int off)
     {
         if (off >= length) {
@@ -274,12 +196,6 @@ public abstract class NativeTypedArrayView
         }
     }
 
-    /**
-     * Sets the range.
-     *
-     * @param a the a
-     * @param off the off
-     */
     private void setRange(NativeArray a, int off)
     {
         if (off > length) {
@@ -296,15 +212,6 @@ public abstract class NativeTypedArrayView
         }
     }
 
-    /**
-     * Js_subarray.
-     *
-     * @param cx the cx
-     * @param scope the scope
-     * @param s the s
-     * @param e the e
-     * @return the object
-     */
     private Object js_subarray(Context cx, Scriptable scope, int s, int e)
     {
         int start = (s < 0 ? length + s : s);
@@ -318,14 +225,11 @@ public abstract class NativeTypedArrayView
 
         return
             cx.newObject(scope, getClassName(),
-                         new Object[] { arrayBuffer, byteOff, len });
+                         new Object[]{arrayBuffer, byteOff, len});
     }
 
     // Dispatcher
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -381,9 +285,6 @@ public abstract class NativeTypedArrayView
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
-     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -401,9 +302,6 @@ public abstract class NativeTypedArrayView
 
     // #string_id_map#
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
-     */
     @Override
     protected int findPrototypeId(String s)
     {
@@ -426,14 +324,12 @@ public abstract class NativeTypedArrayView
     }
 
     // Table of all functions
-    /** The Constant Id_subarray. */
     private static final int
         Id_constructor          = 1,
         Id_get                  = 2,
         Id_set                  = 3,
         Id_subarray             = 4;
 
-    /** The Constant MAX_PROTOTYPE_ID. */
     protected static final int
         MAX_PROTOTYPE_ID        = Id_subarray;
 
@@ -441,10 +337,7 @@ public abstract class NativeTypedArrayView
 
     // Constructor properties
 
-    /* (non-Javadoc)
- * @see org.mozilla.javascript.IdScriptableObject#fillConstructorProperties(org.mozilla.javascript.IdFunctionObject)
- */
-@Override
+    @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
         ctor.put("BYTES_PER_ELEMENT", ctor, ScriptRuntime.wrapInt(getBytesPerElement()));
@@ -452,18 +345,12 @@ public abstract class NativeTypedArrayView
 
     // Property dispatcher
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.typedarrays.NativeArrayBufferView#getMaxInstanceId()
-     */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.typedarrays.NativeArrayBufferView#getInstanceIdName(int)
-     */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -474,9 +361,6 @@ public abstract class NativeTypedArrayView
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.typedarrays.NativeArrayBufferView#getInstanceIdValue(int)
-     */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -492,10 +376,7 @@ public abstract class NativeTypedArrayView
 
 // #string_id_map#
 
-    /* (non-Javadoc)
- * @see org.mozilla.javascript.typedarrays.NativeArrayBufferView#findInstanceIdInfo(java.lang.String)
- */
-@Override
+    @Override
     protected int findInstanceIdInfo(String s)
     {
         int id;
@@ -517,11 +398,223 @@ public abstract class NativeTypedArrayView
     /*
      * These must not conflict with ids in the parent since we delegate there for property dispatching.
      */
-    /** The Constant MAX_INSTANCE_ID. */
     private static final int
         Id_length               = 10,
         Id_BYTES_PER_ELEMENT    = 11,
         MAX_INSTANCE_ID         = Id_BYTES_PER_ELEMENT;
 
 // #/string_id_map#
+
+    // External Array implementation
+
+    @Override
+    public Object getArrayElement(int index)
+    {
+        return js_get(index);
+    }
+
+    @Override
+    public void setArrayElement(int index, Object value)
+    {
+        js_set(index, value);
+    }
+
+    @Override
+    public int getArrayLength() {
+        return length;
+    }
+
+    // Abstract List implementation
+
+    @SuppressWarnings("unused")
+    public int size()
+    {
+        return length;
+    }
+
+    @SuppressWarnings("unused")
+    public boolean isEmpty()
+    {
+        return (length == 0);
+    }
+
+    @SuppressWarnings("unused")
+    public boolean contains(Object o)
+    {
+        return (indexOf(o) >= 0);
+    }
+
+    @SuppressWarnings("unused")
+    public boolean containsAll(Collection<?> objects)
+    {
+        for (Object o : objects) {
+            if (!contains(o)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @SuppressWarnings("unused")
+    public int indexOf(Object o)
+    {
+        for (int i = 0; i < length; i++) {
+            if (o.equals(js_get(i))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    @SuppressWarnings("unused")
+    public int lastIndexOf(Object o)
+    {
+        for (int i = length - 1; i >= 0; i--) {
+            if (o.equals(js_get(i))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    @SuppressWarnings("unused")
+    public Object[] toArray()
+    {
+        Object[] a = new Object[length];
+        for (int i = 0; i < length; i++) {
+            a[i] = js_get(i);
+        }
+        return a;
+    }
+
+    @SuppressWarnings("unused")
+    public <U> U[] toArray(U[] ts)
+    {
+        U[] a;
+
+        if (ts.length >= length) {
+            a = ts;
+        } else {
+            a = (U[])Array.newInstance(ts.getClass().getComponentType(), length);
+        }
+
+        for (int i = 0; i < length; i++) {
+            try {
+                a[i] = (U)js_get(i);
+            } catch (ClassCastException cce) {
+                throw new ArrayStoreException();
+            }
+        }
+        return a;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        try {
+            NativeTypedArrayView<T> v = (NativeTypedArrayView<T>)o;
+            if (length != v.length) {
+                return false;
+            }
+            for (int i = 0; i < length; i++) {
+                if (!js_get(i).equals(v.js_get(i))) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (ClassCastException cce) {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hc = 0;
+        for (int i = 0; i < length; i++) {
+            hc += js_get(i).hashCode();
+        }
+        return 0;
+    }
+
+    @SuppressWarnings("unused")
+    public Iterator<T> iterator()
+    {
+        return new NativeTypedArrayIterator<T>(this, 0);
+    }
+
+    @SuppressWarnings("unused")
+    public ListIterator<T> listIterator()
+    {
+        return new NativeTypedArrayIterator<T>(this, 0);
+    }
+
+    @SuppressWarnings("unused")
+    public ListIterator<T> listIterator(int start)
+    {
+        if (checkIndex(start)) {
+            throw new IndexOutOfBoundsException();
+        }
+        return new NativeTypedArrayIterator<T>(this, start);
+    }
+
+    @SuppressWarnings("unused")
+    public List<T> subList(int i, int i2)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @SuppressWarnings("unused")
+    public boolean add(T aByte)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @SuppressWarnings("unused")
+    public void add(int i, T aByte)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @SuppressWarnings("unused")
+    public boolean addAll(Collection<? extends T> bytes)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @SuppressWarnings("unused")
+    public boolean addAll(int i, Collection<? extends T> bytes)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @SuppressWarnings("unused")
+    public void clear()
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @SuppressWarnings("unused")
+    public T remove(int i)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @SuppressWarnings("unused")
+    public boolean remove(Object o)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @SuppressWarnings("unused")
+    public boolean removeAll(Collection<?> objects)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    @SuppressWarnings("unused")
+    public boolean retainAll(Collection<?> objects)
+    {
+        throw new UnsupportedOperationException();
+    }
 }

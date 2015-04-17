@@ -6,16 +6,10 @@
 
 package org.mozilla.javascript.optimizer;
 
-import org.mozilla.javascript.CompilerEnvirons;
-import org.mozilla.javascript.IRFactory;
-import org.mozilla.javascript.JavaAdapter;
-import org.mozilla.javascript.ObjToIntMap;
-import org.mozilla.javascript.Parser;
-import org.mozilla.javascript.ScriptRuntime;
+import org.mozilla.javascript.*;
 import org.mozilla.javascript.ast.AstRoot;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.ScriptNode;
-
 
 /**
  * Generates class files from script sources.
@@ -26,12 +20,9 @@ import org.mozilla.javascript.ast.ScriptNode;
 
 public class ClassCompiler
 {
-    
     /**
      * Construct ClassCompiler that uses the specified compiler environment
      * when generating classes.
-     *
-     * @param compilerEnv the compiler env
      */
     public ClassCompiler(CompilerEnvirons compilerEnv)
     {
@@ -46,8 +37,7 @@ public class ClassCompiler
      * <tt>public static void main(Script sc, String[] args)</tt>, it will be
      * called when <tt>main(String[] args)</tt> is called in the generated
      * class. The class name should be fully qulified name and include the
-     * package name like in <tt>org.foo.Bar</tt>.
-     * @param className the name of class
+     * package name like in <tt>org.foo.Bar<tt>.
      */
     public void setMainMethodClass(String className)
     {
@@ -57,8 +47,6 @@ public class ClassCompiler
 
     /**
      * Get the name of the class for main method implementation.
-     *
-     * @return String
      * @see #setMainMethodClass(String)
      */
     public String getMainMethodClass()
@@ -68,7 +56,6 @@ public class ClassCompiler
 
     /**
      * Get the compiler environment the compiler uses.
-     * @return CompilerEnvirons
      */
     public CompilerEnvirons getCompilerEnv()
     {
@@ -77,7 +64,6 @@ public class ClassCompiler
 
     /**
      * Get the class that the generated target will extend.
-     * @return Class
      */
     public Class<?> getTargetExtends()
     {
@@ -86,6 +72,7 @@ public class ClassCompiler
 
     /**
      * Set the class that the generated target will extend.
+     *
      * @param extendsClass the class it extends
      */
     public void setTargetExtends(Class<?> extendsClass)
@@ -95,7 +82,6 @@ public class ClassCompiler
 
     /**
      * Get the interfaces that the generated target will implement.
-     * @return Class
      */
     public Class<?>[] getTargetImplements()
     {
@@ -119,10 +105,6 @@ public class ClassCompiler
      * it will call this function to build the auxiliary class name.
      * The default implementation simply appends auxMarker to mainClassName
      * but this can be overridden.
-     *
-     * @param mainClassName the main class name
-     * @param auxMarker the aux marker
-     * @return the string
      */
     protected String makeAuxiliaryClassName(String mainClassName,
                                             String auxMarker)
@@ -138,10 +120,6 @@ public class ClassCompiler
      * class will extend the specified super class and implement
      * specified interfaces.
      *
-     * @param source the source
-     * @param sourceLocation the source location
-     * @param lineno the lineno
-     * @param mainClassName the main class name
      * @return array where elements with even indexes specifies class name
      *         and the following odd index gives class file body as byte[]
      *         array. The initial element of the array always holds
@@ -203,16 +181,9 @@ public class ClassCompiler
                               scriptClassName, scriptClassBytes };
     }
 
-    /** The main method class name. */
     private String mainMethodClassName;
-    
-    /** The compiler env. */
     private CompilerEnvirons compilerEnv;
-    
-    /** The target extends. */
     private Class<?> targetExtends;
-    
-    /** The target implements. */
     private Class<?>[] targetImplements;
 
 }

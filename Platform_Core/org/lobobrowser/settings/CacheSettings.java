@@ -1,22 +1,16 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 2 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
-
-    You should have received a copy of the GNU General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either verion 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.settings;
 
@@ -29,119 +23,119 @@ import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.CacheManager;
 import org.lobobrowser.store.StorageManager;
 
-
 /**
  * Browser cache settings. This is a singleton class with an instance obtained
  * by calling {@link #getInstance()}.
  */
 public class CacheSettings implements Serializable {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(CacheSettings.class
-			.getName());
-	
-	/** The Constant instance. */
-	private static final CacheSettings instance;
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 22574500900000604L;
 
-	static {
-		CacheSettings ins = null;
-		try {
-			ins = (CacheSettings) StorageManager.getInstance()
-					.retrieveSettings(CacheSettings.class.getSimpleName(),
-							CacheSettings.class.getClassLoader());
-		} catch (Exception err) {
-			logger.log(Level.WARNING,
-					"getInstance(): Unable to retrieve settings.", err);
-		}
-		if (ins == null) {
-			ins = new CacheSettings();
-		}
-		instance = ins;
-	}
+    /** The Constant logger. */
+    private static final Logger logger = Logger.getLogger(CacheSettings.class
+            .getName());
 
-	/**
-	 * Gets the class singleton.
-	 *
-	 * @return single instance of CacheSettings
-	 */
-	public static CacheSettings getInstance() {
-		SecurityManager sm = System.getSecurityManager();
-		if (sm != null) {
-			sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
-		}
-		return instance;
-	}
+    /** The Constant instance. */
+    private static final CacheSettings instance;
 
-	/**
-	 * Save.
-	 */
-	public void save() {
-		try {
-			StorageManager.getInstance().saveSettings(
-					this.getClass().getSimpleName(), this);
-		} catch (IOException ioe) {
-			logger.log(Level.WARNING, "Unable to save settings: "
-					+ this.getClass().getSimpleName() + ".", ioe);
-		}
-	}
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 22574500900000604L;
 
-	/**
-	 * Instantiates a new cache settings.
-	 */
-	private CacheSettings() {
-		resetDefaults();
-	}
+    static {
+        CacheSettings ins = null;
+        try {
+            ins = (CacheSettings) StorageManager.getInstance()
+                    .retrieveSettings(CacheSettings.class.getSimpleName(),
+                            CacheSettings.class.getClassLoader());
+        } catch (Exception err) {
+            logger.log(Level.WARNING,
+                    "getInstance(): Unable to retrieve settings.", err);
+        }
+        if (ins == null) {
+            ins = new CacheSettings();
+        }
+        instance = ins;
+    }
 
-	/**
-	 * Reset defaults.
-	 */
-	public void resetDefaults() {
-		this.setMaxRAMCacheSize(5 * 1024 * 1024);
-		this.setDefaultCacheExpirationOffset(60);
-	}
+    /**
+     * Gets the class singleton.
+     *
+     * @return single instance of CacheSettings
+     */
+    public static CacheSettings getInstance() {
+        SecurityManager sm = System.getSecurityManager();
+        if (sm != null) {
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
+        }
+        return instance;
+    }
 
-	/**
-	 * Gets the max ram cache size.
-	 *
-	 * @return the max ram cache size
-	 */
-	public int getMaxRAMCacheSize() {
-		return CacheManager.getInstance().getMaxTransientCacheSize();
-	}
+    /**
+     * Save.
+     */
+    public void save() {
+        try {
+            StorageManager.getInstance().saveSettings(
+                    this.getClass().getSimpleName(), this);
+        } catch (IOException ioe) {
+            logger.log(Level.WARNING, "Unable to save settings: "
+                    + this.getClass().getSimpleName() + ".", ioe);
+        }
+    }
 
-	/**
-	 * Sets the approximate maximum RAM cache size.
-	 * 
-	 * @param maxRAMCacheSize
-	 *            The maximum cache size in bytes.
-	 */
-	public void setMaxRAMCacheSize(int maxRAMCacheSize) {
-		CacheManager.getInstance().setMaxTransientCacheSize(maxRAMCacheSize);
-	}
+    /**
+     * Instantiates a new cache settings.
+     */
+    private CacheSettings() {
+        resetDefaults();
+    }
 
-	/** The default cache expiration offset. */
-	private int defaultCacheExpirationOffset;
+    /**
+     * Reset defaults.
+     */
+    public void resetDefaults() {
+        this.setMaxRAMCacheSize(5 * 1024 * 1024);
+        this.setDefaultCacheExpirationOffset(60);
+    }
 
-	/**
-	 * Gets the default cache expiration offset.
-	 *
-	 * @return the default cache expiration offset
-	 */
-	public int getDefaultCacheExpirationOffset() {
-		return defaultCacheExpirationOffset;
-	}
+    /**
+     * Gets the max ram cache size.
+     *
+     * @return the max ram cache size
+     */
+    public int getMaxRAMCacheSize() {
+        return CacheManager.getInstance().getMaxTransientCacheSize();
+    }
 
-	/**
-	 * Sets the default offset in seconds added to the response cache timestamp
-	 * to get the expiration time of a document. This is used with cacheable
-	 * documents when max-age and the Expires header are missing.
-	 *
-	 * @param defaultCacheExpirationOffset the new default cache expiration offset
-	 */
-	public void setDefaultCacheExpirationOffset(int defaultCacheExpirationOffset) {
-		this.defaultCacheExpirationOffset = defaultCacheExpirationOffset;
-	}
+    /**
+     * Sets the approximate maximum RAM cache size.
+     *
+     * @param maxRAMCacheSize
+     *            The maximum cache size in bytes.
+     */
+    public void setMaxRAMCacheSize(int maxRAMCacheSize) {
+        CacheManager.getInstance().setMaxTransientCacheSize(maxRAMCacheSize);
+    }
+
+    /** The default cache expiration offset. */
+    private int defaultCacheExpirationOffset;
+
+    /**
+     * Gets the default cache expiration offset.
+     *
+     * @return the default cache expiration offset
+     */
+    public int getDefaultCacheExpirationOffset() {
+        return defaultCacheExpirationOffset;
+    }
+
+    /**
+     * Sets the default offset in seconds added to the response cache timestamp
+     * to get the expiration time of a document. This is used with cacheable
+     * documents when max-age and the Expires header are missing.
+     *
+     * @param defaultCacheExpirationOffset
+     *            the new default cache expiration offset
+     */
+    public void setDefaultCacheExpirationOffset(int defaultCacheExpirationOffset) {
+        this.defaultCacheExpirationOffset = defaultCacheExpirationOffset;
+    }
 }

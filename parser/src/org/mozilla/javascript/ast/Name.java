@@ -8,10 +8,9 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
-
 /**
  * AST node for a simple name.  A simple name is an identifier that is
- * not a keyword. Node type is {@link Token#NAME}.
+ * not a keyword. Node type is {@link Token#NAME}.<p>
  *
  * This node type is also used to represent certain non-identifier names that
  * are part of the language syntax.  It's used for the "get" and "set"
@@ -20,44 +19,26 @@ import org.mozilla.javascript.Token;
  */
 public class Name extends AstNode {
 
-    /** The identifier. */
     private String identifier;
-    
-    /** The scope. */
     private Scope scope;
 
     {
         type = Token.NAME;
     }
 
-    /**
-     * Instantiates a new name.
-     */
     public Name() {
     }
 
-    /**
-     * Instantiates a new name.
-     *
-     * @param pos the pos
-     */
     public Name(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new name.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public Name(int pos, int len) {
         super(pos, len);
     }
 
     /**
-     * Constructs a new {@link Name}.
-     *
+     * Constructs a new {@link Name}
      * @param pos node start position
      * @param len node length
      * @param name the identifier associated with this {@code Name} node
@@ -67,12 +48,6 @@ public class Name extends AstNode {
         setIdentifier(name);
     }
 
-    /**
-     * Instantiates a new name.
-     *
-     * @param pos the pos
-     * @param name the name
-     */
     public Name(int pos, String name) {
         super(pos);
         setIdentifier(name);
@@ -80,18 +55,15 @@ public class Name extends AstNode {
     }
 
     /**
-     * Returns the node's identifier.
-     *
-     * @return the identifier
+     * Returns the node's identifier
      */
     public String getIdentifier() {
         return identifier;
     }
 
     /**
-     * Sets the node's identifier.
-     *
-     * @param identifier the new identifier
+     * Sets the node's identifier
+     * @throws IllegalArgumentException if identifier is null
      */
     public void setIdentifier(String identifier) {
         assertNotNull(identifier);
@@ -109,6 +81,7 @@ public class Name extends AstNode {
      * @param s the scope.  Can be null.  Doesn't set any fields in the
      * scope.
      */
+    @Override
     public void setScope(Scope s) {
         scope = s;
     }
@@ -119,9 +92,8 @@ public class Name extends AstNode {
      * be null in frontend AST-processing code.  Use {@link #getDefiningScope}
      * to find the lexical {@code Scope} in which this {@code Name} is defined,
      * if any.
-     *
-     * @return the scope
      */
+    @Override
     public Scope getScope() {
         return scope;
     }
@@ -160,16 +132,11 @@ public class Name extends AstNode {
      * it's a {@link String}.  Don't confuse this method with the
      * {@link AstNode#getLength} method, which returns the range of
      * characters that this node overlaps in the source input.
-     *
-     * @return the int
      */
     public int length() {
         return identifier == null ? 0 : identifier.length();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         return makeIndent(depth) + (identifier == null ? "<null>" : identifier);
@@ -177,8 +144,6 @@ public class Name extends AstNode {
 
     /**
      * Visits this node.  There are no children to visit.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

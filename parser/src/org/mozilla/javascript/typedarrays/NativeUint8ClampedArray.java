@@ -6,85 +6,62 @@
 
 package org.mozilla.javascript.typedarrays;
 
+import org.mozilla.javascript.Context;
 import org.mozilla.javascript.IdFunctionObject;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
 
-
 /**
- * The Class NativeUint8ClampedArray.
+ * An array view that stores 8-bit quantities and implements the JavaScript "Uint8ClampedArray" interface.
+ * It also implements List<Integer> for direct manipulation in Java. Bytes inserted that fall out of the range
+ * (0 <= X < 256) will be adjusted so that they match before insertion.
  */
+
 public class NativeUint8ClampedArray
-    extends NativeTypedArrayView
+    extends NativeTypedArrayView<Integer>
 {
-    
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -3349419704390398895L;
 
-    /** The Constant CLASS_NAME. */
     private static final String CLASS_NAME = "Uint8ClampedArray";
 
-    /**
-     * Instantiates a new native uint8 clamped array.
-     */
     public NativeUint8ClampedArray()
     {
     }
 
-    /**
-     * Instantiates a new native uint8 clamped array.
-     *
-     * @param ab the ab
-     * @param off the off
-     * @param len the len
-     */
     public NativeUint8ClampedArray(NativeArrayBuffer ab, int off, int len)
     {
         super(ab, off, len, len);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
-     */
+    public NativeUint8ClampedArray(int len)
+    {
+        this(new NativeArrayBuffer(len), 0, len);
+    }
+
     @Override
     public String getClassName()
     {
         return CLASS_NAME;
     }
 
-    /**
-     * Inits the.
-     *
-     * @param scope the scope
-     * @param sealed the sealed
-     */
-    public static void init(Scriptable scope, boolean sealed)
+    public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         NativeUint8ClampedArray a = new NativeUint8ClampedArray();
         a.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.typedarrays.NativeTypedArrayView#construct(org.mozilla.javascript.typedarrays.NativeArrayBuffer, int, int)
-     */
     @Override
     protected NativeTypedArrayView construct(NativeArrayBuffer ab, int off, int len)
     {
         return new NativeUint8ClampedArray(ab, off, len);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.typedarrays.NativeTypedArrayView#getBytesPerElement()
-     */
     @Override
-    protected int getBytesPerElement()
+    public int getBytesPerElement()
     {
         return 1;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.typedarrays.NativeTypedArrayView#realThis(org.mozilla.javascript.Scriptable, org.mozilla.javascript.IdFunctionObject)
-     */
     @Override
     protected NativeTypedArrayView realThis(Scriptable thisObj, IdFunctionObject f)
     {
@@ -94,9 +71,6 @@ public class NativeUint8ClampedArray
         return (NativeUint8ClampedArray)thisObj;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.typedarrays.NativeTypedArrayView#js_get(int)
-     */
     @Override
     protected Object js_get(int index)
     {
@@ -106,9 +80,6 @@ public class NativeUint8ClampedArray
         return ByteIo.readUint8(arrayBuffer.buffer, index + offset);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.typedarrays.NativeTypedArrayView#js_set(int, java.lang.Object)
-     */
     @Override
     protected Object js_set(int index, Object c)
     {
@@ -118,5 +89,23 @@ public class NativeUint8ClampedArray
         int val = Conversions.toUint8Clamp(c);
         ByteIo.writeUint8(arrayBuffer.buffer, index + offset, val);
         return null;
+    }
+
+    @Override
+    public Integer get(int i)
+    {
+        if (checkIndex(i)) {
+            throw new IndexOutOfBoundsException();
+        }
+        return (Integer)js_get(i);
+    }
+
+    @Override
+    public Integer set(int i, Integer aByte)
+    {
+        if (checkIndex(i)) {
+            throw new IndexOutOfBoundsException();
+        }
+        return (Integer)js_set(i, aByte);
     }
 }

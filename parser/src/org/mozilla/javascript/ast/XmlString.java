@@ -6,7 +6,6 @@
 
 package org.mozilla.javascript.ast;
 
-
 /**
  * AST node for an XML-text-only component of an XML literal expression.  This
  * node differs from a {@link StringLiteral} in that it does not have quotes for
@@ -14,30 +13,15 @@ package org.mozilla.javascript.ast;
  */
 public class XmlString extends XmlFragment {
 
-    /** The xml. */
     private String xml;
 
-    /**
-     * Instantiates a new xml string.
-     */
     public XmlString() {
     }
 
-    /**
-     * Instantiates a new xml string.
-     *
-     * @param pos the pos
-     */
     public XmlString(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new xml string.
-     *
-     * @param pos the pos
-     * @param s the s
-     */
     public XmlString(int pos, String s) {
         super(pos);
         setXml(s);
@@ -46,8 +30,8 @@ public class XmlString extends XmlFragment {
     /**
      * Sets the string for this XML component.  Sets the length of the
      * component to the length of the passed string.
-     *
      * @param s a string of xml text
+     * @throws IllegalArgumentException} if {@code s} is {@code null}
      */
     public void setXml(String s) {
         assertNotNull(s);
@@ -58,16 +42,11 @@ public class XmlString extends XmlFragment {
     /**
      * Returns the xml string for this component.
      * Note that it may not be well-formed XML; it is a fragment.
-     *
-     * @return the xml
      */
     public String getXml() {
         return xml;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         return makeIndent(depth) + xml;
@@ -75,8 +54,6 @@ public class XmlString extends XmlFragment {
 
     /**
      * Visits this node.  There are no children to visit.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

@@ -1,22 +1,16 @@
 /*
-    GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
+ * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
+ * can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version. This
+ * library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Nov 19, 2005
@@ -54,427 +48,489 @@ import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.IORoutines;
 import org.w3c.dom.Document;
 
-
 /**
  * The <code>SimpleHttpRequest</code> class implements the
  * {@link org.lobobrowser.html.HttpRequest} interface. The
  * <code>HttpRequest</code> implementation provided by this class is simple,
  * with no caching. It creates a new thread for each new asynchronous request.
- * 
+ *
  * @author J. H. S.
  */
 public class SimpleHttpRequest implements HttpRequest {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(SimpleHttpRequest.class.getName());
-	
-	/** The ready state. */
-	private int readyState;
-	
-	/** The status. */
-	private int status;
-	
-	/** The status text. */
-	private String statusText;
-	
-	/** The response bytes. */
-	private byte[] responseBytes;
-	
-	/** The context. */
-	private final UserAgentContext context;
-	
-	/** The proxy. */
-	private final Proxy proxy;
-	
-	/** The req. */
-	private Request req;
-	
-	/** The is async. */
-	private boolean isAsync;
 
-	/**
-	 * The <code>URLConnection</code> is assigned to this field while it is
-	 * ongoing.
-	 */
-	protected URLConnection connection;
+    /** The Constant logger. */
+    private static final Logger logger = Logger
+            .getLogger(SimpleHttpRequest.class.getName());
 
-	/**
-	 * Response headers are set in this map after a response is received.
-	 */
-	protected Map responseHeadersMap;
+    /** The ready state. */
+    private int readyState;
 
-	/**
-	 * Response headers are set in this string after a response is received.
-	 */
-	protected String responseHeaders;
+    /** The status. */
+    private int status;
 
-	/**
-	 * Instantiates a new simple http request.
-	 *
-	 * @param context the context
-	 * @param proxy the proxy
-	 */
-	public SimpleHttpRequest(UserAgentContext context, Proxy proxy) {
-		super();
-		this.context = context;
-		this.proxy = proxy;
-		req = new Request();
-	}
+    /** The status text. */
+    private String statusText;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getReadyState()
-	 */
-	public synchronized int getReadyState() {
-		return this.readyState;
-	}
+    /** The response bytes. */
+    private byte[] responseBytes;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getResponseText()
-	 */
-	public synchronized String getResponseText() {
-		byte[] bytes = this.responseBytes;
-		java.net.URLConnection connection = this.connection;
-		String encoding = connection == null ? "ISO-8859-1" : Urls
-				.getCharset(connection);
-		if (encoding == null) {
-			encoding = "ISO-8859-1";
-		}
-		try {
-			return bytes == null ? null : new String(bytes, encoding);
-		} catch (UnsupportedEncodingException uee) {
-			logger.log(Level.WARNING, "getResponseText(): Charset '" + encoding
-					+ "' did not work. Retrying with ISO-8859-1.", uee);
-			try {
-				return new String(bytes, "ISO-8859-1");
-			} catch (UnsupportedEncodingException uee2) {
-				// Ignore this time
-				return null;
-			}
-		}
-	}
+    /** The context. */
+    private final UserAgentContext context;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getResponseXML()
-	 */
-	public synchronized Document getResponseXML() {
-		byte[] bytes = this.responseBytes;
-		if (bytes == null) {
-			return null;
-		}
-		InputStream in = new ByteArrayInputStream(bytes);
-		try {
-			return DocumentBuilderFactory.newInstance().newDocumentBuilder()
-					.parse(in);
-		} catch (Exception err) {
-			logger.log(Level.WARNING, "Unable to parse response as XML.", err);
-			return null;
-		}
-	}
+    /** The proxy. */
+    private final Proxy proxy;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getResponseBytes()
-	 */
-	public synchronized byte[] getResponseBytes() {
-		return this.responseBytes;
-	}
+    /** The req. */
+    private Request req;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.lobobrowser.html.HttpRequest#getResponseImage()
-	 */
-	public synchronized Image getResponseImage() {
-		byte[] bytes = this.responseBytes;
-		if (bytes == null) {
-			return null;
-		}
-		return Toolkit.getDefaultToolkit().createImage(bytes);
-	}
+    /** The is async. */
+    private boolean isAsync;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getStatus()
-	 */
-	public synchronized int getStatus() {
-		return this.status;
-	}
+    /**
+     * The <code>URLConnection</code> is assigned to this field while it is
+     * ongoing.
+     */
+    protected URLConnection connection;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getStatusText()
-	 */
-	public synchronized String getStatusText() {
-		return this.statusText;
-	}
+    /**
+     * Response headers are set in this map after a response is received.
+     */
+    protected Map responseHeadersMap;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#abort()
-	 */
-	public void abort() {
-		URLConnection c;
-		synchronized (this) {
-			c = this.connection;
-		}
-		if (c instanceof HttpURLConnection) {
-			((HttpURLConnection) c).disconnect();
-		} else if (c != null) {
-			try {
-				c.getInputStream().close();
-			} catch (IOException ioe) {
-				ioe.printStackTrace();
-			}
-		}
-	}
+    /**
+     * Response headers are set in this string after a response is received.
+     */
+    protected String responseHeaders;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getAllResponseHeaders()
-	 */
-	public synchronized String getAllResponseHeaders() {
-		return this.responseHeaders;
-	}
+    /**
+     * Instantiates a new simple http request.
+     *
+     * @param context
+     *            the context
+     * @param proxy
+     *            the proxy
+     */
+    public SimpleHttpRequest(UserAgentContext context, Proxy proxy) {
+        super();
+        this.context = context;
+        this.proxy = proxy;
+        req = new Request();
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#getResponseHeader(java.lang.String)
-	 */
-	public synchronized String getResponseHeader(String headerName) {
-		Map headers = this.responseHeadersMap;
-		return headers == null ? null : (String) headers.get(headerName);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getReadyState()
+     */
+    @Override
+    public synchronized int getReadyState() {
+        return this.readyState;
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.lang.String)
-	 */
-	public void open(String method, String url) throws IOException {
-		this.open(method, url, true);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getResponseText()
+     */
+    @Override
+    public synchronized String getResponseText() {
+        byte[] bytes = this.responseBytes;
+        java.net.URLConnection connection = this.connection;
+        String encoding = connection == null ? "ISO-8859-1" : Urls
+                .getCharset(connection);
+        if (encoding == null) {
+            encoding = "ISO-8859-1";
+        }
+        try {
+            return bytes == null ? null : new String(bytes, encoding);
+        } catch (UnsupportedEncodingException uee) {
+            logger.log(Level.WARNING, "getResponseText(): Charset '" + encoding
+                    + "' did not work. Retrying with ISO-8859-1.", uee);
+            try {
+                return new String(bytes, "ISO-8859-1");
+            } catch (UnsupportedEncodingException uee2) {
+                // Ignore this time
+                return null;
+            }
+        }
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL)
-	 */
-	public void open(String method, URL url) throws IOException {
-		this.open(method, url, true, null, null);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getResponseXML()
+     */
+    @Override
+    public synchronized Document getResponseXML() {
+        byte[] bytes = this.responseBytes;
+        if (bytes == null) {
+            return null;
+        }
+        InputStream in = new ByteArrayInputStream(bytes);
+        try {
+            return DocumentBuilderFactory.newInstance().newDocumentBuilder()
+                    .parse(in);
+        } catch (Exception err) {
+            logger.log(Level.WARNING, "Unable to parse response as XML.", err);
+            return null;
+        }
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL, boolean)
-	 */
-	public void open(String method, URL url, boolean asyncFlag)
-			throws IOException {
-		this.open(method, url, asyncFlag, null, null);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getResponseBytes()
+     */
+    @Override
+    public synchronized byte[] getResponseBytes() {
+        return this.responseBytes;
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.lang.String, boolean)
-	 */
-	public void open(String method, String url, boolean asyncFlag)
-			throws IOException {
-		URL urlObj = Urls.createURL(null, url);
-		this.open(method, urlObj, asyncFlag, null);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getResponseImage()
+     */
+    @Override
+    public synchronized Image getResponseImage() {
+        byte[] bytes = this.responseBytes;
+        if (bytes == null) {
+            return null;
+        }
+        return Toolkit.getDefaultToolkit().createImage(bytes);
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL, boolean, java.lang.String)
-	 */
-	public void open(String method, URL url, boolean asyncFlag,
-			String userName) throws IOException {
-		this.open(method, url, asyncFlag, userName, null);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getStatus()
+     */
+    @Override
+    public synchronized int getStatus() {
+        return this.status;
+    }
 
-	/**
-	 * Opens the request. Call {@link #send(String)} to complete it.
-	 *
-	 * @param method            The request method.
-	 * @param url            The request URL.
-	 * @param asyncFlag            Whether the request should be asynchronous.
-	 * @param userName            The user name of the request (not supported.)
-	 * @param password            The password of the request (not supported.)
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public void open(final String method, final URL url,boolean asyncFlag, final String userName, final String password) throws IOException {
-		this.abort();
-		Proxy proxy = this.proxy;
-		SSLCertificate.setCertificate();
-		URLConnection c = proxy == null || proxy == Proxy.NO_PROXY ? url.openConnection() : url.openConnection(proxy);
-		synchronized (this) {
-			this.connection = c;
-			this.isAsync = asyncFlag;
-			
-			req.setUsername(userName);
-			req.setPassword(password);
-			req.setUrl(url.toString());
-			
-			if(method.equalsIgnoreCase(Method.GET.name()))
-				req.setMethod(Method.GET);
-			else
-				req.setMethod(Method.POST);
-		}
-		this.changeState(HttpRequest.STATE_LOADING, 0, null, null);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getStatusText()
+     */
+    @Override
+    public synchronized String getStatusText() {
+        return this.statusText;
+    }
 
-	/**
-	 * Sends POST content, if any, and causes the request to proceed.
-	 * <p>
-	 * In the case of asynchronous requests, a new thread is created.
-	 *
-	 * @param content            POST content or <code>null</code> if there's no such content.
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public void send(final String content) throws IOException {
-		final URL url = new URL(req.getUrl());
-	
-		if (this.isAsync) {
-			// Should use a thread pool instead
-			new Thread("SimpleHttpRequest-" + url.getHost()) {
-				public void run() {
-					try {
-						sendSync(content);
-					} catch (Throwable thrown) {
-						logger.log(Level.WARNING,
-								"send(): Error in asynchronous request on "
-										+ url, thrown);
-					}
-				}
-			}.start();
-		} else {
-			sendSync(content);
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#abort()
+     */
+    @Override
+    public void abort() {
+        URLConnection c;
+        synchronized (this) {
+            c = this.connection;
+        }
+        if (c instanceof HttpURLConnection) {
+            ((HttpURLConnection) c).disconnect();
+        } else if (c != null) {
+            try {
+                c.getInputStream().close();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+    }
 
-	/**
-	 * This is the charset used to post data provided to {@link #send(String)}.
-	 * It returns "UTF-8" unless overridden.
-	 *
-	 * @return the post charset
-	 */
-	protected String getPostCharset() {
-		return "UTF-8";
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getAllResponseHeaders()
+     */
+    @Override
+    public synchronized String getAllResponseHeaders() {
+        return this.responseHeaders;
+    }
 
-	/**
-	 * This is a synchronous implementation of {@link #send(String)} method
-	 * functionality. It may be overridden to change the behavior of the class.
-	 *
-	 * @param content            POST content if any. It may be <code>null</code>.
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	protected void sendSync(String content) throws IOException {
-		try {
-			// FireFox posts a "loading" state twice as well.
-			this.changeState(HttpRequest.STATE_LOADING, 0, null, null);
-			URLConnection c;
-			synchronized (this) {
-				c = this.connection;
-			}
-			c.setRequestProperty("User-Agent", this.context.getUserAgent());
-			int istatus;
-			String istatusText;
-			InputStream err;
-			if (c instanceof HttpURLConnection) {
-				HttpURLConnection hc = (HttpURLConnection) c;
-				String method = req.getMethod().name();
-				if (method == null) {
-					throw new java.io.IOException("Null method.");
-				}
-				method = method.toUpperCase();
-				hc.setRequestMethod(method);
-				if ("POST".equals(method) && content != null) {
-					hc.setDoOutput(true);
-					byte[] contentBytes = content.getBytes(this
-							.getPostCharset());
-					hc.setFixedLengthStreamingMode(contentBytes.length);
-					OutputStream out = hc.getOutputStream();
-					try {
-						out.write(contentBytes);
-					} finally {
-						out.flush();
-					}
-				}
-				istatus = hc.getResponseCode();
-				istatusText = hc.getResponseMessage();
-				err = hc.getErrorStream();
-			} else {
-				istatus = 0;
-				istatusText = "";
-				err = null;
-			}
-			synchronized (this) {
-				this.responseHeaders = this.getAllResponseHeaders(c);
-				this.responseHeadersMap = c.getHeaderFields();
-			}
-			this.changeState(HttpRequest.STATE_LOADED, istatus, istatusText,
-					null);
-			InputStream in = err == null ? c.getInputStream() : err;
-			int contentLength = c.getContentLength();
-			this.changeState(HttpRequest.STATE_INTERACTIVE, istatus,
-					istatusText, null);
-			byte[] bytes = IORoutines.load(in, contentLength == -1 ? 4096
-					: contentLength);
-			this.changeState(HttpRequest.STATE_COMPLETE, istatus, istatusText,
-					bytes);
-		} finally {
-			synchronized (this) {
-				this.connection = null;
-			}
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#getResponseHeader(java.lang.String)
+     */
+    @Override
+    public synchronized String getResponseHeader(String headerName) {
+        Map headers = this.responseHeadersMap;
+        return headers == null ? null : (String) headers.get(headerName);
+    }
 
-	/** The ready event. */
-	private final EventDispatch readyEvent = new EventDispatch();
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#open(java.lang.String,
+     * java.lang.String)
+     */
+    @Override
+    public void open(String method, String url) throws IOException {
+        this.open(method, url, true);
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#addReadyStateChangeListener(org.lobobrowser.html.ReadyStateChangeListener)
-	 */
-	public void addReadyStateChangeListener(
-			final ReadyStateChangeListener listener) {
-		readyEvent.addListener(new GenericEventListener() {
-			public void processEvent(EventObject event) {
-				listener.readyStateChanged();
-			}
-		});
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL)
+     */
+    @Override
+    public void open(String method, URL url) throws IOException {
+        this.open(method, url, true, null, null);
+    }
 
-	/**
-	 * Change state.
-	 *
-	 * @param readyState the ready state
-	 * @param status the status
-	 * @param statusMessage the status message
-	 * @param bytes the bytes
-	 */
-	private void changeState(int readyState, int status, String statusMessage,
-			byte[] bytes) {
-		synchronized (this) {
-			this.readyState = readyState;
-			this.status = status;
-			this.statusText = statusMessage;
-			this.responseBytes = bytes;
-		}
-		this.readyEvent.fireEvent(null);
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL,
+     * boolean)
+     */
+    @Override
+    public void open(String method, URL url, boolean asyncFlag)
+            throws IOException {
+        this.open(method, url, asyncFlag, null, null);
+    }
 
-	/**
-	 * Gets the all response headers.
-	 *
-	 * @param c the c
-	 * @return the all response headers
-	 */
-	private String getAllResponseHeaders(URLConnection c) {
-		int idx = 0;
-		String value;
-		StringBuffer buf = new StringBuffer();
-		while ((value = c.getHeaderField(idx)) != null) {
-			String key = c.getHeaderFieldKey(idx);
-			buf.append(key);
-			buf.append(": ");
-			buf.append(value);
-			idx++;
-		}
-		return buf.toString();
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#open(java.lang.String,
+     * java.lang.String, boolean)
+     */
+    @Override
+    public void open(String method, String url, boolean asyncFlag)
+            throws IOException {
+        URL urlObj = Urls.createURL(null, url);
+        this.open(method, urlObj, asyncFlag, null);
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.HttpRequest#setRequestHeader(java.lang.String, java.lang.String)
-	 */
-	@Override
-	/**
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#open(java.lang.String, java.net.URL,
+     * boolean, java.lang.String)
+     */
+    @Override
+    public void open(String method, URL url, boolean asyncFlag, String userName)
+            throws IOException {
+        this.open(method, url, asyncFlag, userName, null);
+    }
+
+    /**
+     * Opens the request. Call {@link #send(String)} to complete it.
+     *
+     * @param method
+     *            The request method.
+     * @param url
+     *            The request URL.
+     * @param asyncFlag
+     *            Whether the request should be asynchronous.
+     * @param userName
+     *            The user name of the request (not supported.)
+     * @param password
+     *            The password of the request (not supported.)
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    @Override
+    public void open(final String method, final URL url, boolean asyncFlag,
+            final String userName, final String password) throws IOException {
+        this.abort();
+        Proxy proxy = this.proxy;
+        SSLCertificate.setCertificate();
+        URLConnection c = (proxy == null) || (proxy == Proxy.NO_PROXY) ? url
+                .openConnection() : url.openConnection(proxy);
+                synchronized (this) {
+                    this.connection = c;
+                    this.isAsync = asyncFlag;
+
+                    req.setUsername(userName);
+                    req.setPassword(password);
+                    req.setUrl(url.toString());
+
+                    if (method.equalsIgnoreCase(Method.GET.name())) {
+                        req.setMethod(Method.GET);
+                    } else {
+                        req.setMethod(Method.POST);
+                    }
+                }
+                this.changeState(HttpRequest.STATE_LOADING, 0, null, null);
+    }
+
+    /**
+     * Sends POST content, if any, and causes the request to proceed.
+     * <p>
+     * In the case of asynchronous requests, a new thread is created.
+     *
+     * @param content
+     *            POST content or <code>null</code> if there's no such content.
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    @Override
+    public void send(final String content) throws IOException {
+        final URL url = new URL(req.getUrl());
+
+        if (this.isAsync) {
+            // Should use a thread pool instead
+            new Thread("SimpleHttpRequest-" + url.getHost()) {
+                @Override
+                public void run() {
+                    try {
+                        sendSync(content);
+                    } catch (Throwable thrown) {
+                        logger.log(Level.WARNING,
+                                "send(): Error in asynchronous request on "
+                                        + url, thrown);
+                    }
+                }
+            }.start();
+        } else {
+            sendSync(content);
+        }
+    }
+
+    /**
+     * This is the charset used to post data provided to {@link #send(String)}.
+     * It returns "UTF-8" unless overridden.
+     *
+     * @return the post charset
+     */
+    protected String getPostCharset() {
+        return "UTF-8";
+    }
+
+    /**
+     * This is a synchronous implementation of {@link #send(String)} method
+     * functionality. It may be overridden to change the behavior of the class.
+     *
+     * @param content
+     *            POST content if any. It may be <code>null</code>.
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    protected void sendSync(String content) throws IOException {
+        try {
+            // FireFox posts a "loading" state twice as well.
+            this.changeState(HttpRequest.STATE_LOADING, 0, null, null);
+            URLConnection c;
+            synchronized (this) {
+                c = this.connection;
+            }
+            c.setRequestProperty("User-Agent", this.context.getUserAgent());
+            int istatus;
+            String istatusText;
+            InputStream err;
+            if (c instanceof HttpURLConnection) {
+                HttpURLConnection hc = (HttpURLConnection) c;
+                String method = req.getMethod().name();
+                if (method == null) {
+                    throw new java.io.IOException("Null method.");
+                }
+                method = method.toUpperCase();
+                hc.setRequestMethod(method);
+                if ("POST".equals(method) && (content != null)) {
+                    hc.setDoOutput(true);
+                    byte[] contentBytes = content.getBytes(this
+                            .getPostCharset());
+                    hc.setFixedLengthStreamingMode(contentBytes.length);
+                    OutputStream out = hc.getOutputStream();
+                    try {
+                        out.write(contentBytes);
+                    } finally {
+                        out.flush();
+                    }
+                }
+                istatus = hc.getResponseCode();
+                istatusText = hc.getResponseMessage();
+                err = hc.getErrorStream();
+            } else {
+                istatus = 0;
+                istatusText = "";
+                err = null;
+            }
+            synchronized (this) {
+                this.responseHeaders = this.getAllResponseHeaders(c);
+                this.responseHeadersMap = c.getHeaderFields();
+            }
+            this.changeState(HttpRequest.STATE_LOADED, istatus, istatusText,
+                    null);
+            InputStream in = err == null ? c.getInputStream() : err;
+            int contentLength = c.getContentLength();
+            this.changeState(HttpRequest.STATE_INTERACTIVE, istatus,
+                    istatusText, null);
+            byte[] bytes = IORoutines.load(in, contentLength == -1 ? 4096
+                    : contentLength);
+            this.changeState(HttpRequest.STATE_COMPLETE, istatus, istatusText,
+                    bytes);
+        } finally {
+            synchronized (this) {
+                this.connection = null;
+            }
+        }
+    }
+
+    /** The ready event. */
+    private final EventDispatch readyEvent = new EventDispatch();
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.lobobrowser.html.HttpRequest#addReadyStateChangeListener(org.lobobrowser
+     * .html.ReadyStateChangeListener)
+     */
+    @Override
+    public void addReadyStateChangeListener(
+            final ReadyStateChangeListener listener) {
+        readyEvent.addListener(new GenericEventListener() {
+            @Override
+            public void processEvent(EventObject event) {
+                listener.readyStateChanged();
+            }
+        });
+    }
+
+    /**
+     * Change state.
+     *
+     * @param readyState
+     *            the ready state
+     * @param status
+     *            the status
+     * @param statusMessage
+     *            the status message
+     * @param bytes
+     *            the bytes
+     */
+    private void changeState(int readyState, int status, String statusMessage,
+            byte[] bytes) {
+        synchronized (this) {
+            this.readyState = readyState;
+            this.status = status;
+            this.statusText = statusMessage;
+            this.responseBytes = bytes;
+        }
+        this.readyEvent.fireEvent(null);
+    }
+
+    /**
+     * Gets the all response headers.
+     *
+     * @param c
+     *            the c
+     * @return the all response headers
+     */
+    private String getAllResponseHeaders(URLConnection c) {
+        int idx = 0;
+        String value;
+        StringBuffer buf = new StringBuffer();
+        while ((value = c.getHeaderField(idx)) != null) {
+            String key = c.getHeaderFieldKey(idx);
+            buf.append(key);
+            buf.append(": ");
+            buf.append(value);
+            idx++;
+        }
+        return buf.toString();
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.HttpRequest#setRequestHeader(java.lang.String,
+     * java.lang.String)
+     */
+    @Override
+    /**
      * Specifies a request header for the HTTP request.
      *
      * @param header
@@ -482,54 +538,56 @@ public class SimpleHttpRequest implements HttpRequest {
      */
     public void setRequestHeader(String header, String value) {
         if (getReadyState() != HttpRequest.STATE_LOADING) {
-            throw new IllegalStateException("The AsyncHttpRequest must be opened prior to " +
-                    "setting a request header");
+            throw new IllegalStateException(
+                    "The AsyncHttpRequest must be opened prior to "
+                            + "setting a request header");
         }
-        
-        if (header == null || value == null) {
-            throw new IllegalArgumentException("Neither the header, nor value, may be null");
+
+        if ((header == null) || (value == null)) {
+            throw new IllegalArgumentException(
+                    "Neither the header, nor value, may be null");
         }
-        
-        if (header.equalsIgnoreCase("Accept-Charset") ||
-            header.equalsIgnoreCase("Accept-Encoding") ||
-            header.equalsIgnoreCase("Content-Length") ||
-            header.equalsIgnoreCase("Expect") ||
-            header.equalsIgnoreCase("Date") ||
-            header.equalsIgnoreCase("Host") ||
-            header.equalsIgnoreCase("Keep-Alive") ||
-            header.equalsIgnoreCase("Referer") ||
-            header.equalsIgnoreCase("TE") ||
-            header.equalsIgnoreCase("Trailer") ||
-            header.equalsIgnoreCase("Transfer-Encoding") ||
-            header.equalsIgnoreCase("Upgrade")) {
-            
+
+        if (header.equalsIgnoreCase("Accept-Charset")
+                || header.equalsIgnoreCase("Accept-Encoding")
+                || header.equalsIgnoreCase("Content-Length")
+                || header.equalsIgnoreCase("Expect")
+                || header.equalsIgnoreCase("Date")
+                || header.equalsIgnoreCase("Host")
+                || header.equalsIgnoreCase("Keep-Alive")
+                || header.equalsIgnoreCase("Referer")
+                || header.equalsIgnoreCase("TE")
+                || header.equalsIgnoreCase("Trailer")
+                || header.equalsIgnoreCase("Transfer-Encoding")
+                || header.equalsIgnoreCase("Upgrade")) {
+
             return;
         }
-        
-        if (header.equalsIgnoreCase("Authorization") ||
-            header.equalsIgnoreCase("Content-Base") ||
-            header.equalsIgnoreCase("Content-Location") ||
-            header.equalsIgnoreCase("Content-MD5") ||
-            header.equalsIgnoreCase("Content-Range") ||
-            header.equalsIgnoreCase("Content-Type") ||
-            header.equalsIgnoreCase("Content-Version") ||
-            header.equalsIgnoreCase("Delta-Base") ||
-            header.equalsIgnoreCase("Depth") ||
-            header.equalsIgnoreCase("Destination") ||
-            header.equalsIgnoreCase("ETag") ||
-            header.equalsIgnoreCase("Expect") ||
-            header.equalsIgnoreCase("From") ||
-            header.equalsIgnoreCase("If-Modified-Since") ||
-            header.equalsIgnoreCase("If-Range") ||
-            header.equalsIgnoreCase("If-Unmodified-Since") ||
-            header.equalsIgnoreCase("Max-Forwards") ||
-            header.equalsIgnoreCase("MIME-Version") ||
-            header.equalsIgnoreCase("Overwrite") ||
-            header.equalsIgnoreCase("Proxy-Authorization") ||
-            header.equalsIgnoreCase("SOAPAction") ||
-            header.equalsIgnoreCase("Timeout")) {
-            
-            //replace the current header, if any
+
+        if (header.equalsIgnoreCase("Authorization")
+                || header.equalsIgnoreCase("Content-Base")
+                || header.equalsIgnoreCase("Content-Location")
+                || header.equalsIgnoreCase("Content-MD5")
+                || header.equalsIgnoreCase("Content-Range")
+                || header.equalsIgnoreCase("Content-Type")
+                || header.equalsIgnoreCase("Content-Version")
+                || header.equalsIgnoreCase("Delta-Base")
+                || header.equalsIgnoreCase("Depth")
+                || header.equalsIgnoreCase("Destination")
+                || header.equalsIgnoreCase("ETag")
+                || header.equalsIgnoreCase("Expect")
+                || header.equalsIgnoreCase("From")
+                || header.equalsIgnoreCase("If-Modified-Since")
+                || header.equalsIgnoreCase("If-Range")
+                || header.equalsIgnoreCase("If-Unmodified-Since")
+                || header.equalsIgnoreCase("Max-Forwards")
+                || header.equalsIgnoreCase("MIME-Version")
+                || header.equalsIgnoreCase("Overwrite")
+                || header.equalsIgnoreCase("Proxy-Authorization")
+                || header.equalsIgnoreCase("SOAPAction")
+                || header.equalsIgnoreCase("Timeout")) {
+
+            // replace the current header, if any
             for (Header h : req.getHeaders()) {
                 if (h.getName().equalsIgnoreCase(header)) {
                     req.removeHeader(h);
@@ -538,13 +596,15 @@ public class SimpleHttpRequest implements HttpRequest {
                 }
             }
         } else {
-            //append the value to the header, if one is already specified. Else,
-            //just add it as a new header
+            // append the value to the header, if one is already specified.
+            // Else,
+            // just add it as a new header
             boolean appended = false;
             for (Header h : req.getHeaders()) {
                 if (h.getName().equalsIgnoreCase(header)) {
                     req.removeHeader(h);
-                    req.setHeader(new Header(header, h.getValue() + ", " + value));
+                    req.setHeader(new Header(header, h.getValue() + ", "
+                            + value));
                     appended = true;
                     break;
                 }

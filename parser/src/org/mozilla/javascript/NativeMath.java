@@ -6,7 +6,6 @@
 
 package org.mozilla.javascript;
 
-
 /**
  * This class implements the Math native object.
  * See ECMA 15.8.
@@ -15,19 +14,10 @@ package org.mozilla.javascript;
 
 final class NativeMath extends IdScriptableObject
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = -8838847185801131569L;
 
-    /** The Constant MATH_TAG. */
     private static final Object MATH_TAG = "Math";
 
-    /**
-     * Inits the.
-     *
-     * @param scope the scope
-     * @param sealed the sealed
-     */
     static void init(Scriptable scope, boolean sealed)
     {
         NativeMath obj = new NativeMath();
@@ -39,22 +29,13 @@ final class NativeMath extends IdScriptableObject
                                         ScriptableObject.DONTENUM);
     }
 
-    /**
-     * Instantiates a new native math.
-     */
     private NativeMath()
     {
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
-     */
     @Override
     public String getClassName() { return "Math"; }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#initPrototypeId(int)
-     */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -103,9 +84,6 @@ final class NativeMath extends IdScriptableObject
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#execIdCall(org.mozilla.javascript.IdFunctionObject, org.mozilla.javascript.Context, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -246,13 +224,6 @@ final class NativeMath extends IdScriptableObject
     }
 
     // See Ecma 15.8.2.13
-    /**
-     * Js_pow.
-     *
-     * @param x the x
-     * @param y the y
-     * @return the double
-     */
     private double js_pow(double x, double y) {
         double result;
         if (y != y) {
@@ -309,10 +280,7 @@ final class NativeMath extends IdScriptableObject
 
 // #string_id_map#
 
-    /* (non-Javadoc)
- * @see org.mozilla.javascript.IdScriptableObject#findPrototypeId(java.lang.String)
- */
-@Override
+    @Override
     protected int findPrototypeId(String s)
     {
         int id;
@@ -363,7 +331,6 @@ final class NativeMath extends IdScriptableObject
         return id;
     }
 
-    /** The Constant LAST_METHOD_ID. */
     private static final int
         Id_toSource     =  1,
         Id_abs          =  2,
@@ -387,7 +354,6 @@ final class NativeMath extends IdScriptableObject
 
         LAST_METHOD_ID  = 19;
 
-    /** The Constant MAX_ID. */
     private static final int
         Id_E            = LAST_METHOD_ID + 1,
         Id_PI           = LAST_METHOD_ID + 2,

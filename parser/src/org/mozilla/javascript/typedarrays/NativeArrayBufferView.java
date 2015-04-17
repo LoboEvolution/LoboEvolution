@@ -1,32 +1,32 @@
+/* -*- Mode: java; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 package org.mozilla.javascript.typedarrays;
 
 import org.mozilla.javascript.IdScriptableObject;
 import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Undefined;
 
-
 /**
- * The Class NativeArrayBufferView.
+ * This class is the abstract parent for all views of the array. It shows a view of the underlying
+ * NativeArrayBuffer. Many views may simultaneously share the same buffer, and changes to one will affect all.
  */
+
 public abstract class NativeArrayBufferView
     extends IdScriptableObject
 {
-    
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 6884475582973958419L;
 
-    /**  Many view objects can share the same backing array. */
+    /** Many view objects can share the same backing array */
     protected final NativeArrayBuffer arrayBuffer;
-    
-    /**  The offset, in bytes, from the start of the backing array. */
+    /** The offset, in bytes, from the start of the backing array */
     protected final int offset;
-    
-    /**  The length, in bytes, of the portion of the backing array that we use. */
+    /** The length, in bytes, of the portion of the backing array that we use */
     protected final int byteLength;
 
-    /**
-     * Instantiates a new native array buffer view.
-     */
     public NativeArrayBufferView()
     {
         arrayBuffer = NativeArrayBuffer.EMPTY_BUFFER;
@@ -34,13 +34,6 @@ public abstract class NativeArrayBufferView
         byteLength = 0;
     }
 
-    /**
-     * Instantiates a new native array buffer view.
-     *
-     * @param ab the ab
-     * @param offset the offset
-     * @param byteLength the byte length
-     */
     protected NativeArrayBufferView(NativeArrayBuffer ab, int offset, int byteLength)
     {
         this.offset = offset;
@@ -49,12 +42,26 @@ public abstract class NativeArrayBufferView
     }
 
     /**
-     * Checks if is arg.
-     *
-     * @param args the args
-     * @param i the i
-     * @return true, if is arg
+     * Return the buffer that backs this view.
      */
+    public NativeArrayBuffer getBuffer() {
+        return arrayBuffer;
+    }
+
+    /**
+     * Return the offset in bytes from the start of the buffer that this view represents.
+     */
+    public int getByteOffset() {
+        return offset;
+    }
+
+    /**
+     * Return the length, in bytes, of the part of the buffer that this view represents.
+     */
+    public int getByteLength() {
+        return byteLength;
+    }
+
     protected static boolean isArg(Object[] args, int i)
     {
         return ((args.length > i) && !Undefined.instance.equals(args[i]));
@@ -62,18 +69,12 @@ public abstract class NativeArrayBufferView
 
     // Property dispatcher
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#getMaxInstanceId()
-     */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#getInstanceIdName(int)
-     */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -85,9 +86,6 @@ public abstract class NativeArrayBufferView
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.IdScriptableObject#getInstanceIdValue(int)
-     */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -105,10 +103,7 @@ public abstract class NativeArrayBufferView
 
 // #string_id_map#
 
-    /* (non-Javadoc)
- * @see org.mozilla.javascript.IdScriptableObject#findInstanceIdInfo(java.lang.String)
- */
-@Override
+    @Override
     protected int findInstanceIdInfo(String s)
     {
         int id;
@@ -131,7 +126,6 @@ public abstract class NativeArrayBufferView
         return instanceIdInfo(READONLY | PERMANENT, id);
     }
 
-    /** The Constant MAX_INSTANCE_ID. */
     private static final int
         Id_buffer               = 1,
         Id_byteOffset           = 2,

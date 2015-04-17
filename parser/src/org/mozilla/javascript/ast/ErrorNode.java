@@ -8,66 +8,43 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
-
 /**
  * AST node representing a parse error or a warning.  Node type is
- * {@link Token#ERROR}.
+ * {@link Token#ERROR}.<p>
  */
 public class ErrorNode extends AstNode {
 
-    /** The message. */
     private String message;
 
     {
         type = Token.ERROR;
     }
 
-    /**
-     * Instantiates a new error node.
-     */
     public ErrorNode() {
     }
 
-    /**
-     * Instantiates a new error node.
-     *
-     * @param pos the pos
-     */
     public ErrorNode(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new error node.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public ErrorNode(int pos, int len) {
         super(pos, len);
     }
 
     /**
-     * Returns error message key.
-     *
-     * @return the message
+     * Returns error message key
      */
     public String getMessage() {
         return message;
     }
 
     /**
-     * Sets error message key.
-     *
-     * @param message the new message
+     * Sets error message key
      */
     public void setMessage(String message) {
         this.message = message;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         return "";
@@ -76,8 +53,6 @@ public class ErrorNode extends AstNode {
     /**
      * Error nodes are not visited during normal visitor traversals,
      * but comply with the {@link AstNode#visit} interface.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

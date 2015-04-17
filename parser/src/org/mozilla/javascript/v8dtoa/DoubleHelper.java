@@ -30,43 +30,20 @@
 
 package org.mozilla.javascript.v8dtoa;
 
-
 // Helper functions for doubles.
-/**
- * The Class DoubleHelper.
- */
 public class DoubleHelper {
 
-    /** The Constant kSignMask. */
     static final long kSignMask = 0x8000000000000000L;
-    
-    /** The Constant kExponentMask. */
     static final long kExponentMask = 0x7FF0000000000000L;
-    
-    /** The Constant kSignificandMask. */
     static final long kSignificandMask = 0x000FFFFFFFFFFFFFL;
-    
-    /** The Constant kHiddenBit. */
     static final long kHiddenBit = 0x0010000000000000L;
 
-    /**
-     * As diy fp.
-     *
-     * @param d64 the d64
-     * @return the diy fp
-     */
     static DiyFp asDiyFp(long d64) {
         assert(!isSpecial(d64));
         return new DiyFp(significand(d64), exponent(d64));
     }
 
     // this->Significand() must not be 0.
-    /**
-     * As normalized diy fp.
-     *
-     * @param d64 the d64
-     * @return the diy fp
-     */
     static DiyFp asNormalizedDiyFp(long d64) {
         long f = significand(d64);
         int e = exponent(d64);
@@ -84,12 +61,6 @@ public class DoubleHelper {
         return new DiyFp(f, e);
     }
 
-    /**
-     * Exponent.
-     *
-     * @param d64 the d64
-     * @return the int
-     */
     static int exponent(long d64) {
         if (isDenormal(d64)) return kDenormalExponent;
 
@@ -97,12 +68,6 @@ public class DoubleHelper {
         return biased_e - kExponentBias;
     }
 
-    /**
-     * Significand.
-     *
-     * @param d64 the d64
-     * @return the long
-     */
     static long significand(long d64) {
         long significand = d64 & kSignificandMask;
         if (!isDenormal(d64)) {
@@ -113,58 +78,28 @@ public class DoubleHelper {
     }
 
     // Returns true if the double is a denormal.
-    /**
-     * Checks if is denormal.
-     *
-     * @param d64 the d64
-     * @return true, if is denormal
-     */
     static boolean isDenormal(long d64) {
         return (d64 & kExponentMask) == 0L;
     }
 
     // We consider denormals not to be special.
     // Hence only Infinity and NaN are special.
-    /**
-     * Checks if is special.
-     *
-     * @param d64 the d64
-     * @return true, if is special
-     */
     static boolean isSpecial(long d64) {
         return (d64 & kExponentMask) == kExponentMask;
     }
 
-    /**
-     * Checks if is nan.
-     *
-     * @param d64 the d64
-     * @return true, if is nan
-     */
     static boolean isNan(long d64) {
         return ((d64 & kExponentMask) == kExponentMask) &&
                 ((d64 & kSignificandMask) != 0L);
     }
 
 
-    /**
-     * Checks if is infinite.
-     *
-     * @param d64 the d64
-     * @return true, if is infinite
-     */
     static boolean isInfinite(long d64) {
         return ((d64 & kExponentMask) == kExponentMask) &&
                 ((d64 & kSignificandMask) == 0L);
     }
 
 
-    /**
-     * Sign.
-     *
-     * @param d64 the d64
-     * @return the int
-     */
     static int sign(long d64) {
         return (d64 & kSignMask) == 0L? 1: -1;
     }
@@ -173,13 +108,6 @@ public class DoubleHelper {
     // Returns the two boundaries of first argument.
     // The bigger boundary (m_plus) is normalized. The lower boundary has the same
     // exponent as m_plus.
-    /**
-     * Normalized boundaries.
-     *
-     * @param d64 the d64
-     * @param m_minus the m_minus
-     * @param m_plus the m_plus
-     */
     static void normalizedBoundaries(long d64, DiyFp m_minus, DiyFp m_plus) {
         DiyFp v = asDiyFp(d64);
         boolean significand_is_zero = (v.f() == kHiddenBit);
@@ -203,13 +131,8 @@ public class DoubleHelper {
         m_minus.setE(m_plus.e());
     }
 
-    /** The Constant kSignificandSize. */
     private static final int kSignificandSize = 52;  // Excludes the hidden bit.
-    
-    /** The Constant kExponentBias. */
     private static final int kExponentBias = 0x3FF + kSignificandSize;
-    
-    /** The Constant kDenormalExponent. */
     private static final int kDenormalExponent = -kExponentBias + 1;
 
 }

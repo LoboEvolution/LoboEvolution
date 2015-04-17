@@ -29,52 +29,53 @@ import org.lobobrowser.ua.RequestType;
  */
 public class OpenFileAction extends ActionPool {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
-	/** The component source. */
-	private ComponentSource componentSource;
+    /** The component source. */
+    private ComponentSource componentSource;
 
-	/** The window. */
-	private NavigatorWindow window;
+    /** The window. */
+    private NavigatorWindow window;
 
-	/**
-	 * Instantiates a new open file action.
-	 *
-	 * @param componentSource
-	 *            the component source
-	 * @param window
-	 *            the window
-	 */
-	public OpenFileAction(ComponentSource componentSource,
-			NavigatorWindow window) {
-		super(componentSource, window);
-		this.componentSource = componentSource;
-		this.window = window;
-	}
+    /**
+     * Instantiates a new open file action.
+     *
+     * @param componentSource
+     *            the component source
+     * @param window
+     *            the window
+     */
+    public OpenFileAction(ComponentSource componentSource,
+            NavigatorWindow window) {
+        super(componentSource, window);
+        this.componentSource = componentSource;
+        this.window = window;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
-	public void actionPerformed(ActionEvent e) {
-		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		ToolsSettings settings = ToolsSettings.getInstance();
-		java.io.File directory = settings.getOpenFileDirectory();
-		if (directory != null) {
-			fileChooser.setSelectedFile(directory);
-		}
-		int returnValue = fileChooser.showOpenDialog(window.getTopFrame()
-				.getComponent());
-		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			java.io.File selectedFile = fileChooser.getSelectedFile();
-			componentSource.navigate(selectedFile.toURI().toString(),
-					RequestType.PROGRAMMATIC);
-			settings.setOpenFileDirectory(selectedFile);
-			settings.save();
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * @see
+     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        ToolsSettings settings = ToolsSettings.getInstance();
+        java.io.File directory = settings.getOpenFileDirectory();
+        if (directory != null) {
+            fileChooser.setSelectedFile(directory);
+        }
+        int returnValue = fileChooser.showOpenDialog(window.getTopFrame()
+                .getComponent());
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            java.io.File selectedFile = fileChooser.getSelectedFile();
+            componentSource.navigate(selectedFile.toURI().toString(),
+                    RequestType.PROGRAMMATIC);
+            settings.setOpenFileDirectory(selectedFile);
+            settings.save();
+        }
+    }
 
 }

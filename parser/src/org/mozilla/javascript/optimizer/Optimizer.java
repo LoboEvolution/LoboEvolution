@@ -6,34 +6,18 @@
 
 package org.mozilla.javascript.optimizer;
 
-import org.mozilla.javascript.Node;
-import org.mozilla.javascript.ObjArray;
-import org.mozilla.javascript.Token;
+import org.mozilla.javascript.*;
 import org.mozilla.javascript.ast.ScriptNode;
 
-
-/**
- * The Class Optimizer.
- */
 class Optimizer
 {
 
-    /** The Constant NoType. */
     static final int NoType = 0;
-    
-    /** The Constant NumberType. */
     static final int NumberType = 1;
-    
-    /** The Constant AnyType. */
     static final int AnyType = 3;
 
     // It is assumed that (NumberType | AnyType) == AnyType
 
-    /**
-     * Optimize.
-     *
-     * @param scriptOrFn the script or fn
-     */
     void optimize(ScriptNode scriptOrFn)
     {
         //  run on one function at a time for now
@@ -44,11 +28,6 @@ class Optimizer
         }
     }
 
-    /**
-     * Optimize function.
-     *
-     * @param theFunction the the function
-     */
     private void optimizeFunction(OptFunctionNode theFunction)
     {
         if (theFunction.fnode.requiresActivation()) return;
@@ -112,12 +91,7 @@ class Optimizer
         was a double value). If the node is a parameter in a directCall
         function, mark it as being referenced in this context.
 */
-    /**
- * Mark dcp number context.
- *
- * @param n the n
- */
-private void markDCPNumberContext(Node n)
+    private void markDCPNumberContext(Node n)
     {
         if (inDirectCallFunction && n.getType() == Token.GETVAR) {
             int varIndex = theFunction.getVarIndex(n);
@@ -127,12 +101,6 @@ private void markDCPNumberContext(Node n)
         }
     }
 
-    /**
-     * Convert parameter.
-     *
-     * @param n the n
-     * @return true, if successful
-     */
     private boolean convertParameter(Node n)
     {
         if (inDirectCallFunction && n.getType() == Token.GETVAR) {
@@ -145,13 +113,6 @@ private void markDCPNumberContext(Node n)
         return false;
     }
 
-    /**
-     * Rewrite for number variables.
-     *
-     * @param n the n
-     * @param desired the desired
-     * @return the int
-     */
     private int rewriteForNumberVariables(Node n, int desired)
     {
         switch (n.getType()) {
@@ -472,12 +433,6 @@ private void markDCPNumberContext(Node n)
         }
     }
 
-    /**
-     * Rewrite as object children.
-     *
-     * @param n the n
-     * @param child the child
-     */
     private void rewriteAsObjectChildren(Node n, Node child)
     {
         // Force optimized children to be objects
@@ -498,12 +453,6 @@ private void markDCPNumberContext(Node n)
         }
     }
 
-    /**
-     * Builds the statement list_r.
-     *
-     * @param node the node
-     * @param statements the statements
-     */
     private static void buildStatementList_r(Node node, ObjArray statements)
     {
         int type = node.getType();
@@ -522,12 +471,7 @@ private void markDCPNumberContext(Node n)
         }
     }
 
-    /** The in direct call function. */
     private boolean inDirectCallFunction;
-    
-    /** The function. */
     OptFunctionNode theFunction;
-    
-    /** The parameter used in number context. */
     private boolean parameterUsedInNumberContext;
 }

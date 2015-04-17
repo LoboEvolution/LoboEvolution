@@ -8,89 +8,51 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
-
 /**
  * A continue statement.
- * Node type is {@link Token#CONTINUE}.
+ * Node type is {@link Token#CONTINUE}.<p>
  *
  * <pre><i>ContinueStatement</i> :
  *   <b>continue</b> [<i>no LineTerminator here</i>] [Identifier] ;</pre>
  */
 public class ContinueStatement extends Jump {
 
-    /** The label. */
     private Name label;
-    
-    /** The target. */
     private Loop target;
 
     {
         type = Token.CONTINUE;
     }
 
-    /**
-     * Instantiates a new continue statement.
-     */
     public ContinueStatement() {
     }
 
-    /**
-     * Instantiates a new continue statement.
-     *
-     * @param pos the pos
-     */
     public ContinueStatement(int pos) {
         this(pos, -1);
     }
 
-    /**
-     * Instantiates a new continue statement.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public ContinueStatement(int pos, int len) {
         // can't call super (Jump) for historical reasons
         position = pos;
         length = len;
     }
 
-    /**
-     * Instantiates a new continue statement.
-     *
-     * @param label the label
-     */
     public ContinueStatement(Name label) {
         setLabel(label);
     }
 
-    /**
-     * Instantiates a new continue statement.
-     *
-     * @param pos the pos
-     * @param label the label
-     */
     public ContinueStatement(int pos, Name label) {
         this(pos);
         setLabel(label);
     }
 
-    /**
-     * Instantiates a new continue statement.
-     *
-     * @param pos the pos
-     * @param len the len
-     * @param label the label
-     */
     public ContinueStatement(int pos, int len, Name label) {
         this(pos, len);
         setLabel(label);
     }
 
     /**
-     * Returns continue target.
-     *
-     * @return the target
+     * Returns continue target
      */
     public Loop getTarget() {
         return target;
@@ -99,8 +61,8 @@ public class ContinueStatement extends Jump {
     /**
      * Sets continue target.  Does NOT set the parent of the target node:
      * the target node is an ancestor of this node.
-     *
      * @param target continue target
+     * @throws IllegalArgumentException if target is {@code null}
      */
     public void setTarget(Loop target) {
         assertNotNull(target);
@@ -109,8 +71,7 @@ public class ContinueStatement extends Jump {
     }
 
     /**
-     * Returns the intended label of this continue statement.
-     *
+     * Returns the intended label of this continue statement
      * @return the continue label.  Will be {@code null} if the statement
      * consisted only of the keyword "continue".
      */
@@ -129,9 +90,6 @@ public class ContinueStatement extends Jump {
             label.setParent(this);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.Jump#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -147,8 +105,6 @@ public class ContinueStatement extends Jump {
 
     /**
      * Visits this node, then visits the label if non-{@code null}.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

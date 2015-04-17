@@ -6,42 +6,21 @@
 
 package org.mozilla.javascript.ast;
 
-
 /**
  * Encapsulates information for a JavaScript parse error or warning.
  */
 public class ParseProblem {
 
-    /**
-     * The Enum Type.
-     */
-    public static enum Type {/** The Error. */
-Error, /** The Warning. */
- Warning}
+    public static enum Type {Error, Warning}
 
-    /** The type. */
     private Type type;
-    
-    /** The message. */
     private String message;
-    
-    /** The source name. */
     private String sourceName;
-    
-    /** The offset. */
     private int offset;
-    
-    /** The length. */
     private int length;
 
     /**
      * Constructs a new ParseProblem.
-     *
-     * @param type the type
-     * @param message the message
-     * @param sourceName the source name
-     * @param offset the offset
-     * @param length the length
      */
     public ParseProblem(ParseProblem.Type type, String message,
                         String sourceName, int offset, int length) {
@@ -52,99 +31,46 @@ Error, /** The Warning. */
         setLength(length);
     }
 
-    /**
-     * Gets the type.
-     *
-     * @return the type
-     */
     public ParseProblem.Type getType() {
         return type;
     }
 
-    /**
-     * Sets the type.
-     *
-     * @param type the new type
-     */
     public void setType(ParseProblem.Type type) {
         this.type = type;
     }
 
-    /**
-     * Gets the message.
-     *
-     * @return the message
-     */
     public String getMessage() {
         return message;
     }
 
-    /**
-     * Sets the message.
-     *
-     * @param msg the new message
-     */
     public void setMessage(String msg) {
         this.message = msg;
     }
 
-    /**
-     * Gets the source name.
-     *
-     * @return the source name
-     */
     public String getSourceName() {
         return sourceName;
     }
 
-    /**
-     * Sets the source name.
-     *
-     * @param name the new source name
-     */
     public void setSourceName(String name) {
         this.sourceName = name;
     }
 
-    /**
-     * Gets the file offset.
-     *
-     * @return the file offset
-     */
     public int getFileOffset() {
         return offset;
     }
 
-    /**
-     * Sets the file offset.
-     *
-     * @param offset the new file offset
-     */
     public void setFileOffset(int offset) {
         this.offset = offset;
     }
 
-    /**
-     * Gets the length.
-     *
-     * @return the length
-     */
     public int getLength() {
         return length;
     }
 
-    /**
-     * Sets the length.
-     *
-     * @param length the new length
-     */
     public void setLength(int length) {
         this.length = length;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(200);

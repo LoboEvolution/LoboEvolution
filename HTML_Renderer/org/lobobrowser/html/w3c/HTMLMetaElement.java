@@ -1,106 +1,102 @@
 /*
-    GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU LESSER GENERAL LICENSE Copyright (C) 2006 The Lobo Project.
+ * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
+ * can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version. This
+ * library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
- * Copyright (c) 2003 World Wide Web Consortium,
- * (Massachusetts Institute of Technology, Institut National de
- * Recherche en Informatique et en Automatique, Keio University). All
- * Rights Reserved. This program is distributed under the W3C's Software
- * Intellectual Property License. This program is distributed in the
- * hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
- * PURPOSE.
- * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+ * Copyright (c) 2003 World Wide Web Consortium, (Massachusetts Institute of
+ * Technology, Institut National de Recherche en Informatique et en Automatique,
+ * Keio University). All Rights Reserved. This program is distributed under the
+ * W3C's Software Intellectual Property License. This program is distributed in
+ * the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+ * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+ * W3C License http://www.w3.org/Consortium/Legal/ for more details.
  */
 
 package org.lobobrowser.html.w3c;
-
 
 /**
  * This contains generic meta-information about the document. See the META
  * element definition in HTML 4.01.
  * <p>
- * See also the
- * Object Model (DOM) Level 2 HTML Specification</p>.
+ * See also the Object Model (DOM) Level 2 HTML Specification
+ * </p>
+ * .
  */
 public interface HTMLMetaElement extends HTMLElement {
-	
-	/**
-	 * Associated information. See the content attribute definition in HTML
-	 * 4.01.
-	 *
-	 * @return the content
-	 */
-	public String getContent();
 
-	/**
-	 * Associated information. See the content attribute definition in HTML
-	 * 4.01.
-	 *
-	 * @param content the new content
-	 */
-	public void setContent(String content);
+    /**
+     * Associated information. See the content attribute definition in HTML
+     * 4.01.
+     *
+     * @return the content
+     */
+    String getContent();
 
-	/**
-	 * HTTP response header name [<a
-	 * href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC 2616</a>]. See the
-	 * http-equiv attribute definition in HTML 4.01.
-	 *
-	 * @return the http equiv
-	 */
-	public String getHttpEquiv();
+    /**
+     * Associated information. See the content attribute definition in HTML
+     * 4.01.
+     *
+     * @param content
+     *            the new content
+     */
+    void setContent(String content);
 
-	/**
-	 * HTTP response header name [<a
-	 * href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC 2616</a>]. See the
-	 * http-equiv attribute definition in HTML 4.01.
-	 *
-	 * @param httpEquiv the new http equiv
-	 */
-	public void setHttpEquiv(String httpEquiv);
+    /**
+     * HTTP response header name [<a
+     * href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC 2616</a>]. See the
+     * http-equiv attribute definition in HTML 4.01.
+     *
+     * @return the http equiv
+     */
+    String getHttpEquiv();
 
-	/**
-	 * Meta information name. See the name attribute definition in HTML 4.01.
-	 *
-	 * @return the name
-	 */
-	public String getName();
+    /**
+     * HTTP response header name [<a
+     * href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC 2616</a>]. See the
+     * http-equiv attribute definition in HTML 4.01.
+     *
+     * @param httpEquiv
+     *            the new http equiv
+     */
+    void setHttpEquiv(String httpEquiv);
 
-	/**
-	 * Meta information name. See the name attribute definition in HTML 4.01.
-	 *
-	 * @param name the new name
-	 */
-	public void setName(String name);
+    /**
+     * Meta information name. See the name attribute definition in HTML 4.01.
+     *
+     * @return the name
+     */
+    String getName();
 
-	/**
-	 * Select form of content. See the scheme attribute definition in HTML 4.01.
-	 *
-	 * @return the scheme
-	 */
-	public String getScheme();
+    /**
+     * Meta information name. See the name attribute definition in HTML 4.01.
+     *
+     * @param name
+     *            the new name
+     */
+    void setName(String name);
 
-	/**
-	 * Select form of content. See the scheme attribute definition in HTML 4.01.
-	 *
-	 * @param scheme the new scheme
-	 */
-	public void setScheme(String scheme);
+    /**
+     * Select form of content. See the scheme attribute definition in HTML 4.01.
+     *
+     * @return the scheme
+     */
+    String getScheme();
+
+    /**
+     * Select form of content. See the scheme attribute definition in HTML 4.01.
+     *
+     * @param scheme
+     *            the new scheme
+     */
+    void setScheme(String scheme);
 }

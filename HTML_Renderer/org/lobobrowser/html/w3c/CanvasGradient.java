@@ -1,10 +1,10 @@
 /**
- * 
+ *
  */
 package org.lobobrowser.html.w3c;
 
 /**
- * The Interface CanvasGradient.
+ * The public interface CanvasGradient.
  */
 public interface CanvasGradient {
 

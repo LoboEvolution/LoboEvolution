@@ -8,10 +8,6 @@
 
 package org.mozilla.javascript;
 
-
-/**
- * The Interface ConstProperties.
- */
 public interface ConstProperties {
     /**
      * Sets a named const property in this object.
@@ -33,7 +29,7 @@ public interface ConstProperties {
      * object's responsibility to modify <i>o</i>. <p>
      * This design allows properties to be defined in prototypes and implemented
      * in terms of getters and setters of Java values without consuming slots
-     * in each instance.
+     * in each instance.<p>
      * <p>
      * The values that may be set are limited to the following:
      * <UL>
@@ -73,8 +69,7 @@ public interface ConstProperties {
 
     /**
      * Returns true if the named property is defined as a const on this object.
-     *
-     * @param name the name
+     * @param name
      * @return true if the named property is defined as a const, false
      * otherwise.
      */

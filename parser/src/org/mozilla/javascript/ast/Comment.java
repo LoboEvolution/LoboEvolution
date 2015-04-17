@@ -8,25 +8,23 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
-
 /**
  * Node representing comments.
- * Node type is {@link Token#COMMENT}.
+ * Node type is {@link Token#COMMENT}.<p>
  *
- *JavaScript effectively has five comment types:
+ * <p>JavaScript effectively has five comment types:
  *   <ol>
- *     <li> line comments</li>
- *     <li>
- *     		<span class="none">block comments</span>
- *     </li>
- *     <li>
- *     		<span class="none">jsdoc comments</span>
- *     </li>
+ *     <li>// line comments</li>
+ *     <li>/<span class="none">* block comments *\/</li>
+ *     <li>/<span class="none">** jsdoc comments *\/</li>
+ *     <li>&lt;!-- html-open line comments</li>
+ *     <li>^\\s*--&gt; html-close line comments</li>
  *   </ol>
+ *
  * <p>The first three should be familiar to Java programmers.  JsDoc comments
  * are really just block comments with some conventions about the formatting
  * within the comment delimiters.  Line and block comments are described in the
- * Ecma-262 specification.
+ * Ecma-262 specification. <p>
  *
  * <p>SpiderMonkey and Rhino also support HTML comment syntax, but somewhat
  * counterintuitively, the syntax does not produce a block comment.  Instead,
@@ -42,10 +40,7 @@ import org.mozilla.javascript.Token;
  */
 public class Comment extends AstNode {
 
-    /** The value. */
     private String value;
-    
-    /** The comment type. */
     private Token.CommentType commentType;
 
     {
@@ -53,8 +48,7 @@ public class Comment extends AstNode {
     }
 
     /**
-     * Constructs a new Comment.
-     *
+     * Constructs a new Comment
      * @param pos the start position
      * @param len the length including delimiter(s)
      * @param type the comment type
@@ -67,17 +61,14 @@ public class Comment extends AstNode {
     }
 
     /**
-     * Returns the comment style.
-     *
-     * @return the comment type
+     * Returns the comment style
      */
     public Token.CommentType getCommentType() {
         return commentType;
     }
 
     /**
-     * Sets the comment style.
-     *
+     * Sets the comment style
      * @param type the comment style, a
      * {@link org.mozilla.javascript.Token.CommentType}
      */
@@ -87,16 +78,11 @@ public class Comment extends AstNode {
 
     /**
      * Returns a string of the comment value.
-     *
-     * @return the value
      */
     public String getValue() {
         return value;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.AstNode#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder(getLength() + 10);
@@ -108,8 +94,6 @@ public class Comment extends AstNode {
     /**
      * Comment nodes are not visited during normal visitor traversals,
      * but comply with the {@link AstNode#visit} interface.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

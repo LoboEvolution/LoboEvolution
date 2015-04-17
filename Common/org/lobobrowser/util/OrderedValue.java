@@ -1,137 +1,160 @@
-package org.lobobrowser.util;
+/*
+    GNU GENERAL PUBLIC LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
 
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ */
+package org.lobobrowser.util;
 
 /**
  * The Class OrderedValue.
  */
 public class OrderedValue implements Comparable<Object>, java.io.Serializable {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 340227625744215821L;
-	
-	/** The timestamp. */
-	private long timestamp;
-	
-	/** The approximate size. */
-	private int approximateSize;
-	
-	/** The key. */
-	private Object key;
-	
-	/** The value. */
-	private Object value;
-	
-	/**
-	 * Instantiates a new ordered value.
-	 *
-	 * @param key the key
-	 * @param value the value
-	 * @param approxSize the approx size
-	 */
-	public OrderedValue(Object key, Object value, int approxSize) {
-		this.value = value;
-		this.touch();
-	}
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 340227625744215821L;
+    /** The timestamp. */
+    private long timestamp;
+    /** The approximate size. */
+    private int approximateSize;
+    /** The key. */
+    private Object key;
+    /** The value. */
+    private Object value;
 
-	/**
-	 * Touch.
-	 */
-	final void touch() {
-		this.timestamp = System.currentTimeMillis();
-	}
+    /**
+     * Instantiates a new ordered value.
+     *
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @param approxSize
+     *            the approx size
+     */
+    public OrderedValue(Object key, Object value, int approxSize) {
+        this.value = value;
+        this.touch();
+    }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
-	 */
-	public int compareTo(Object arg0) {
-		if (this == arg0) {
-			return 0;
-		}
-		OrderedValue other = (OrderedValue) arg0;
-		long diff = this.timestamp - other.timestamp;
-		if (diff > 0) {
-			return +1;
-		} else if (diff < 0) {
-			return -1;
-		}
-		int hc1 = System.identityHashCode(this);
-		int hc2 = System.identityHashCode(other);
-		if (hc1 == hc2) {
-			hc1 = System.identityHashCode(this.value);
-			hc2 = System.identityHashCode(other.value);
-		}
-		return hc1 - hc2;
-	}
-	
-	/**
-	 * Gets the timestamp.
-	 *
-	 * @return the timestamp
-	 */
-	public long getTimestamp() {
-		return timestamp;
-	}
+    /**
+     * Touch.
+     */
+    final void touch() {
+        this.timestamp = System.currentTimeMillis();
+    }
 
-	/**
-	 * Sets the timestamp.
-	 *
-	 * @param timestamp the new timestamp
-	 */
-	public void setTimestamp(long timestamp) {
-		this.timestamp = timestamp;
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(Object arg0) {
+        if (this == arg0) {
+            return 0;
+        }
+        OrderedValue other = (OrderedValue) arg0;
+        long diff = this.timestamp - other.timestamp;
+        if (diff > 0) {
+            return +1;
+        } else if (diff < 0) {
+            return -1;
+        }
+        int hc1 = System.identityHashCode(this);
+        int hc2 = System.identityHashCode(other);
+        if (hc1 == hc2) {
+            hc1 = System.identityHashCode(this.value);
+            hc2 = System.identityHashCode(other.value);
+        }
+        return hc1 - hc2;
+    }
 
-	/**
-	 * Gets the value.
-	 *
-	 * @return the value
-	 */
-	public Object getValue() {
-		return value;
-	}
+    /**
+     * Gets the timestamp.
+     *
+     * @return the timestamp
+     */
+    public long getTimestamp() {
+        return timestamp;
+    }
 
-	/**
-	 * Sets the value.
-	 *
-	 * @param value the new value
-	 */
-	public void setValue(Object value) {
-		this.value = value;
-	}
-	
-	/**
-	 * Gets the key.
-	 *
-	 * @return the key
-	 */
-	public Object getKey() {
-		return key;
-	}
+    /**
+     * Sets the timestamp.
+     *
+     * @param timestamp
+     *            the new timestamp
+     */
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 
-	/**
-	 * Sets the key.
-	 *
-	 * @param key the new key
-	 */
-	public void setKey(Object key) {
-		this.key = key;
-	}
+    /**
+     * Gets the value.
+     *
+     * @return the value
+     */
+    public Object getValue() {
+        return value;
+    }
 
-	/**
-	 * Gets the approximate size.
-	 *
-	 * @return the approximate size
-	 */
-	public int getApproximateSize() {
-		return approximateSize;
-	}
+    /**
+     * Sets the value.
+     *
+     * @param value
+     *            the new value
+     */
+    public void setValue(Object value) {
+        this.value = value;
+    }
 
-	/**
-	 * Sets the approximate size.
-	 *
-	 * @param approximateSize the new approximate size
-	 */
-	public void setApproximateSize(int approximateSize) {
-		this.approximateSize = approximateSize;
-	}
+    /**
+     * Gets the key.
+     *
+     * @return the key
+     */
+    public Object getKey() {
+        return key;
+    }
+
+    /**
+     * Sets the key.
+     *
+     * @param key
+     *            the new key
+     */
+    public void setKey(Object key) {
+        this.key = key;
+    }
+
+    /**
+     * Gets the approximate size.
+     *
+     * @return the approximate size
+     */
+    public int getApproximateSize() {
+        return approximateSize;
+    }
+
+    /**
+     * Sets the approximate size.
+     *
+     * @param approximateSize
+     *            the new approximate size
+     */
+    public void setApproximateSize(int approximateSize) {
+        this.approximateSize = approximateSize;
+    }
 }

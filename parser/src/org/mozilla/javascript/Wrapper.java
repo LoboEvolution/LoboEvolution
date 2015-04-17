@@ -8,7 +8,6 @@
 
 package org.mozilla.javascript;
 
-
 /**
  * Objects that can wrap other values for reflection in the JS environment
  * will implement Wrapper.

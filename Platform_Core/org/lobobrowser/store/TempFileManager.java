@@ -1,22 +1,16 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    version 2 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
-
-    You should have received a copy of the GNU General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.store;
 
@@ -33,206 +27,212 @@ import java.util.jar.JarFile;
 
 import org.lobobrowser.security.LocalSecurityPolicy;
 
-
 /**
  * The Class TempFileManager.
  */
 public class TempFileManager {
-	
-	/** The instance. */
-	private static TempFileManager instance;
-	
-	/** The Constant GENERAL_PREFIX. */
-	private static final String GENERAL_PREFIX = "LOBO-";
-	
-	/** The Constant ONE_DAY. */
-	private static final long ONE_DAY = 24L * 60 * 60 * 1000;
-	
-	/** The Constant ONE_MONTH. */
-	private static final long ONE_MONTH = 30L * ONE_DAY;
-	
-	/** The Constant THIRTY_YEARS. */
-	private static final long THIRTY_YEARS = 30L * 365 * ONE_DAY;
-	
-	/** The Constant FILE_PREFIX. */
-	private static final String FILE_PREFIX = GENERAL_PREFIX
-			+ ((System.currentTimeMillis() - THIRTY_YEARS) / 1000) + "-";
 
-	/** The temp directory. */
-	private final File TEMP_DIRECTORY;
-	
-	/** The reference queue. */
-	private final ReferenceQueue<JarFile> REFERENCE_QUEUE = new ReferenceQueue<JarFile>();
-	
-	/** The wr by path. */
-	private final Map<String, LocalWeakReference> wrByPath = new HashMap<String, LocalWeakReference>();
+    /** The instance. */
+    private static TempFileManager instance;
 
-	/** The counter. */
-	private int counter = 0;
+    /** The Constant GENERAL_PREFIX. */
+    private static final String GENERAL_PREFIX = "LOBO-";
 
-	/**
-	 * Gets the single instance of TempFileManager.
-	 *
-	 * @return single instance of TempFileManager
-	 */
-	public static TempFileManager getInstance() {
-		// Do it this way to allow other statics to initialize.
-		if (instance == null) {
-			synchronized (TempFileManager.class) {
-				if (instance == null) {
-					instance = new TempFileManager();
-				}
-			}
-		}
-		return instance;
-	}
+    /** The Constant ONE_DAY. */
+    private static final long ONE_DAY = 24L * 60 * 60 * 1000;
 
-	/**
-	 * Instantiates a new temp file manager.
-	 */
-	private TempFileManager() {
-		Runtime.getRuntime().addShutdownHook(new ShutdownThread());
-		File tempDirectory = new File(LocalSecurityPolicy.STORE_DIRECTORY,
-				"tmp");
-		TEMP_DIRECTORY = tempDirectory;
-		if (!tempDirectory.exists()) {
-			tempDirectory.mkdirs();
-		}
-		File[] files = tempDirectory.listFiles();
-		if (files != null) {
-			// Cleanup files theoretically left by previously running instance.
-			for (int i = 0; i < files.length; i++) {
-				String name = files[i].getName();
-				if (name.startsWith(GENERAL_PREFIX)
-						&& !name.startsWith(FILE_PREFIX)) {
-					// We can't really assume only one instance of the
-					// application
-					// is running. Need to be a little lenient about deleting
-					// these.
-					if (files[i].lastModified() < System.currentTimeMillis()
-							- ONE_MONTH) {
-						files[i].delete();
-					}
-				}
-			}
-		}
-	}
+    /** The Constant ONE_MONTH. */
+    private static final long ONE_MONTH = 30L * ONE_DAY;
 
-	/**
-	 * Shutdown cleanup.
-	 */
-	private void shutdownCleanup() {
-		File[] files = TEMP_DIRECTORY.listFiles();
-		if (files != null) {
-			for (int i = 0; i < files.length; i++) {
-				try {
-					File file = files[i];
-					String name = file.getName();
-					if (name.startsWith(FILE_PREFIX)) {
-						String canonical = file.getCanonicalPath();
-						synchronized (this) {
-							// Need to close these JAR files, otherwise
-							// deletion does not happen in Windows.
-							LocalWeakReference wr = this.wrByPath
-									.get(canonical);
-							JarFile jarFile = wr.get();
-							if (jarFile != null) {
-								jarFile.close();
-							}
-						}
-						file.delete();
-					}
-				} catch (IOException ioe) {
-					// ignore
-				}
-			}
-		}
-	}
+    /** The Constant THIRTY_YEARS. */
+    private static final long THIRTY_YEARS = 30L * 365 * ONE_DAY;
 
-	/**
-	 * Creates the jar file.
-	 *
-	 * @param bytes the bytes
-	 * @return the jar file
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public JarFile createJarFile(byte[] bytes) throws IOException {
-		// Dequeue and clean up first
-		for (;;) {
-			Reference<? extends JarFile> ref = REFERENCE_QUEUE.poll();
-			if (ref == null) {
-				break;
-			}
-			String canonical = ((LocalWeakReference) ref).canonicalPath;
-			new File(canonical).delete();
-			synchronized (this) {
-				this.wrByPath.remove(canonical);
-			}
-		}
-		File file = this.newTempFile();
-		OutputStream out = new FileOutputStream(file);
-		try {
-			out.write(bytes);
-		} finally {
-			out.close();
-		}
-		JarFile jarFile = new JarFile(file);
-		String canonical = file.getCanonicalPath();
-		LocalWeakReference wr = new LocalWeakReference(jarFile,
-				REFERENCE_QUEUE, canonical);
-		synchronized (this) {
-			// This serves simply to retain the weak reference.
-			this.wrByPath.put(canonical, wr);
-		}
-		return jarFile;
-	}
+    /** The Constant FILE_PREFIX. */
+    private static final String FILE_PREFIX = GENERAL_PREFIX
+            + ((System.currentTimeMillis() - THIRTY_YEARS) / 1000) + "-";
 
-	/**
-	 * New temp file.
-	 *
-	 * @return the file
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	public File newTempFile() throws IOException {
-		synchronized (this) {
-			int newCounter = this.counter++;
-			File file = new File(this.TEMP_DIRECTORY, FILE_PREFIX + newCounter);
-			return file;
-		}
-	}
+    /** The temp directory. */
+    private final File TEMP_DIRECTORY;
 
-	/**
-	 * The Class LocalWeakReference.
-	 */
-	private static class LocalWeakReference extends WeakReference<JarFile> {
-		
-		/** The canonical path. */
-		public final String canonicalPath;
+    /** The reference queue. */
+    private final ReferenceQueue<JarFile> REFERENCE_QUEUE = new ReferenceQueue<JarFile>();
 
-		/**
-		 * Instantiates a new local weak reference.
-		 *
-		 * @param referent the referent
-		 * @param q the q
-		 * @param canonicalPath the canonical path
-		 */
-		public LocalWeakReference(JarFile referent,
-				ReferenceQueue<? super JarFile> q, String canonicalPath) {
-			super(referent, q);
-			this.canonicalPath = canonicalPath;
-		}
-	}
+    /** The wr by path. */
+    private final Map<String, LocalWeakReference> wrByPath = new HashMap<String, LocalWeakReference>();
 
-	/**
-	 * The Class ShutdownThread.
-	 */
-	private class ShutdownThread extends Thread {
-		
-		/* (non-Javadoc)
-		 * @see java.lang.Thread#run()
-		 */
-		public void run() {
-			shutdownCleanup();
-		}
-	}
+    /** The counter. */
+    private int counter = 0;
+
+    /**
+     * Gets the single instance of TempFileManager.
+     *
+     * @return single instance of TempFileManager
+     */
+    public static TempFileManager getInstance() {
+        // Do it this way to allow other statics to initialize.
+        if (instance == null) {
+            synchronized (TempFileManager.class) {
+                if (instance == null) {
+                    instance = new TempFileManager();
+                }
+            }
+        }
+        return instance;
+    }
+
+    /**
+     * Instantiates a new temp file manager.
+     */
+    private TempFileManager() {
+        Runtime.getRuntime().addShutdownHook(new ShutdownThread());
+        File tempDirectory = new File(LocalSecurityPolicy.STORE_DIRECTORY,
+                "tmp");
+        TEMP_DIRECTORY = tempDirectory;
+        if (!tempDirectory.exists()) {
+            tempDirectory.mkdirs();
+        }
+        File[] files = tempDirectory.listFiles();
+        if (files != null) {
+            // Cleanup files theoretically left by previously running instance.
+            for (int i = 0; i < files.length; i++) {
+                String name = files[i].getName();
+                if (name.startsWith(GENERAL_PREFIX)
+                        && !name.startsWith(FILE_PREFIX)) {
+                    // We can't really assume only one instance of the
+                    // application
+                    // is running. Need to be a little lenient about deleting
+                    // these.
+                    if (files[i].lastModified() < (System.currentTimeMillis() - ONE_MONTH)) {
+                        files[i].delete();
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Shutdown cleanup.
+     */
+    private void shutdownCleanup() {
+        File[] files = TEMP_DIRECTORY.listFiles();
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                try {
+                    File file = files[i];
+                    String name = file.getName();
+                    if (name.startsWith(FILE_PREFIX)) {
+                        String canonical = file.getCanonicalPath();
+                        synchronized (this) {
+                            // Need to close these JAR files, otherwise
+                            // deletion does not happen in Windows.
+                            LocalWeakReference wr = this.wrByPath
+                                    .get(canonical);
+                            JarFile jarFile = wr.get();
+                            if (jarFile != null) {
+                                jarFile.close();
+                            }
+                        }
+                        file.delete();
+                    }
+                } catch (IOException ioe) {
+                    // ignore
+                }
+            }
+        }
+    }
+
+    /**
+     * Creates the jar file.
+     *
+     * @param bytes
+     *            the bytes
+     * @return the jar file
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    public JarFile createJarFile(byte[] bytes) throws IOException {
+        // Dequeue and clean up first
+        for (;;) {
+            Reference<? extends JarFile> ref = REFERENCE_QUEUE.poll();
+            if (ref == null) {
+                break;
+            }
+            String canonical = ((LocalWeakReference) ref).canonicalPath;
+            new File(canonical).delete();
+            synchronized (this) {
+                this.wrByPath.remove(canonical);
+            }
+        }
+        File file = this.newTempFile();
+        OutputStream out = new FileOutputStream(file);
+        try {
+            out.write(bytes);
+        } finally {
+            out.close();
+        }
+        JarFile jarFile = new JarFile(file);
+        String canonical = file.getCanonicalPath();
+        LocalWeakReference wr = new LocalWeakReference(jarFile,
+                REFERENCE_QUEUE, canonical);
+        synchronized (this) {
+            // This serves simply to retain the weak reference.
+            this.wrByPath.put(canonical, wr);
+        }
+        return jarFile;
+    }
+
+    /**
+     * New temp file.
+     *
+     * @return the file
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    public File newTempFile() throws IOException {
+        synchronized (this) {
+            int newCounter = this.counter++;
+            File file = new File(this.TEMP_DIRECTORY, FILE_PREFIX + newCounter);
+            return file;
+        }
+    }
+
+    /**
+     * The Class LocalWeakReference.
+     */
+    private static class LocalWeakReference extends WeakReference<JarFile> {
+
+        /** The canonical path. */
+        public final String canonicalPath;
+
+        /**
+         * Instantiates a new local weak reference.
+         *
+         * @param referent
+         *            the referent
+         * @param q
+         *            the q
+         * @param canonicalPath
+         *            the canonical path
+         */
+        public LocalWeakReference(JarFile referent,
+                ReferenceQueue<? super JarFile> q, String canonicalPath) {
+            super(referent, q);
+            this.canonicalPath = canonicalPath;
+        }
+    }
+
+    /**
+     * The Class ShutdownThread.
+     */
+    private class ShutdownThread extends Thread {
+
+        /*
+         * (non-Javadoc)
+         * @see java.lang.Thread#run()
+         */
+        @Override
+        public void run() {
+            shutdownCleanup();
+        }
+    }
 }

@@ -11,7 +11,6 @@ import java.io.ObjectInputStream;
 import java.util.HashSet;
 import java.util.Set;
 
-
 /**
  * This class reflects Java packages into the JavaScript environment.  We
  * lazily reflect classes and subpackages, and use a caching/sharing
@@ -27,17 +26,8 @@ import java.util.Set;
 
 public class NativeJavaPackage extends ScriptableObject
 {
-    
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 7445054382212031523L;
 
-    /**
-     * Instantiates a new native java package.
-     *
-     * @param internalUsage the internal usage
-     * @param packageName the package name
-     * @param classLoader the class loader
-     */
     NativeJavaPackage(boolean internalUsage, String packageName,
                       ClassLoader classLoader)
     {
@@ -46,80 +36,54 @@ public class NativeJavaPackage extends ScriptableObject
     }
 
     /**
-     * Instantiates a new native java package.
-     *
-     * @param packageName the package name
-     * @param classLoader the class loader
      * @deprecated NativeJavaPackage is an internal class, do not use
      * it directly.
      */
+    @Deprecated
     public NativeJavaPackage(String packageName, ClassLoader classLoader) {
         this(false, packageName, classLoader);
     }
 
     /**
-     * Instantiates a new native java package.
-     *
-     * @param packageName the package name
      * @deprecated NativeJavaPackage is an internal class, do not use
      * it directly.
      */
+    @Deprecated
     public NativeJavaPackage(String packageName) {
         this(false, packageName,
              Context.getCurrentContext().getApplicationClassLoader());
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
-     */
     @Override
     public String getClassName() {
         return "JavaPackage";
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#has(java.lang.String, org.mozilla.javascript.Scriptable)
-     */
     @Override
     public boolean has(String id, Scriptable start) {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#has(int, org.mozilla.javascript.Scriptable)
-     */
     @Override
     public boolean has(int index, Scriptable start) {
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#put(java.lang.String, org.mozilla.javascript.Scriptable, java.lang.Object)
-     */
     @Override
     public void put(String id, Scriptable start, Object value) {
         // Can't add properties to Java packages.  Sorry.
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#put(int, org.mozilla.javascript.Scriptable, java.lang.Object)
-     */
     @Override
     public void put(int index, Scriptable start, Object value) {
         throw Context.reportRuntimeError0("msg.pkg.int");
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#get(java.lang.String, org.mozilla.javascript.Scriptable)
-     */
     @Override
     public Object get(String id, Scriptable start) {
         return getPkgProperty(id, start, true);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#get(int, org.mozilla.javascript.Scriptable)
-     */
     @Override
     public Object get(int index, Scriptable start) {
         return NOT_FOUND;
@@ -127,13 +91,6 @@ public class NativeJavaPackage extends ScriptableObject
 
     // set up a name which is known to be a package so we don't
     // need to look for a class by that name
-    /**
-     * Force package.
-     *
-     * @param name the name
-     * @param scope the scope
-     * @return the native java package
-     */
     NativeJavaPackage forcePackage(String name, Scriptable scope)
     {
         Object cached = super.get(name, this);
@@ -150,14 +107,6 @@ public class NativeJavaPackage extends ScriptableObject
         }
     }
 
-    /**
-     * Gets the pkg property.
-     *
-     * @param name the name
-     * @param start the start
-     * @param createPkg the create pkg
-     * @return the pkg property
-     */
     synchronized Object getPkgProperty(String name, Scriptable start,
                                        boolean createPkg)
     {
@@ -208,37 +157,21 @@ public class NativeJavaPackage extends ScriptableObject
         return newValue;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
-     */
     @Override
     public Object getDefaultValue(Class<?> ignored) {
         return toString();
     }
 
-    /**
-     * Read object.
-     *
-     * @param in the in
-     * @throws IOException Signals that an I/O exception has occurred.
-     * @throws ClassNotFoundException the class not found exception
-     */
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         this.classLoader = Context.getCurrentContext().getApplicationClassLoader();
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return "[JavaPackage " + packageName + "]";
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof NativeJavaPackage) {
@@ -249,21 +182,13 @@ public class NativeJavaPackage extends ScriptableObject
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode() {
         return packageName.hashCode() ^
                (classLoader == null ? 0 : classLoader.hashCode());
     }
 
-    /** The package name. */
     private String packageName;
-    
-    /** The class loader. */
     private transient ClassLoader classLoader;
-    
-    /** The negative cache. */
     private Set<String> negativeCache = null;
 }

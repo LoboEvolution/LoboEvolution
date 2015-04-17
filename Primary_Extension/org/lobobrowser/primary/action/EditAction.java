@@ -30,40 +30,42 @@ import org.lobobrowser.primary.gui.SwingTasks;
  * The Class EditAction.
  */
 public class EditAction extends AbstractAction {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The control. */
-	private StringListControl control;
-	
-	public EditAction(StringListControl control){
-		this.control = control;
-	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
-	public void actionPerformed(ActionEvent e) {
-		Frame parentFrame = SwingTasks.getFrame(control);
-		SimpleTextEditDialog dialog;
-		if (parentFrame != null) {
-			dialog = new SimpleTextEditDialog(parentFrame);
-		} else {
-			Dialog parentDialog = SwingTasks
-					.getDialog(control);
-			dialog = new SimpleTextEditDialog(parentDialog);
-		}
-		dialog.setModal(true);
-		dialog.setTitle("Edit List");
-		dialog.setCaption(control.getEditListCaption());
-		dialog.setSize(new Dimension(400, 300));
-		dialog.setLocationByPlatform(true);
-		dialog.setText(control.getStringsAsText());
-		dialog.setVisible(true);
-		String text = dialog.getResultingText();
-		if (text != null) {
-			control.setStringsFromText(text);
-		}
-	}
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
+
+    /** The control. */
+    private StringListControl control;
+
+    public EditAction(StringListControl control) {
+        this.control = control;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Frame parentFrame = SwingTasks.getFrame(control);
+        SimpleTextEditDialog dialog;
+        if (parentFrame != null) {
+            dialog = new SimpleTextEditDialog(parentFrame);
+        } else {
+            Dialog parentDialog = SwingTasks.getDialog(control);
+            dialog = new SimpleTextEditDialog(parentDialog);
+        }
+        dialog.setModal(true);
+        dialog.setTitle("Edit List");
+        dialog.setCaption(control.getEditListCaption());
+        dialog.setSize(new Dimension(400, 300));
+        dialog.setLocationByPlatform(true);
+        dialog.setText(control.getStringsAsText());
+        dialog.setVisible(true);
+        String text = dialog.getResultingText();
+        if (text != null) {
+            control.setStringsFromText(text);
+        }
+    }
 }

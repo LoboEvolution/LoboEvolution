@@ -14,13 +14,9 @@
 package org.lobobrowser.html.layout;
 
 import org.lobobrowser.html.control.CanvasControl;
-import org.lobobrowser.html.control.ImgControl;
 import org.lobobrowser.html.control.RCanvasControl;
-import org.lobobrowser.html.control.RImgControl;
-import org.lobobrowser.html.control.RUIControl;
 import org.lobobrowser.html.domimpl.HTMLCanvasElementImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.UIControl;
@@ -31,13 +27,14 @@ import org.lobobrowser.html.renderer.UIControl;
 public class CanvasLayout extends CommonWidgetLayout {
 
     public CanvasLayout() {
-        super(ADD_AS_BLOCK,true);
+        super(ADD_AS_BLOCK, true);
     }
 
     @Override
     protected RElement createRenderable(RBlockViewport bodyLayout,
             HTMLElementImpl markupElement) {
-        UIControl control = new CanvasControl((HTMLCanvasElementImpl) markupElement);
+        UIControl control = new CanvasControl(
+                (HTMLCanvasElementImpl) markupElement);
         return new RCanvasControl(markupElement, control,
                 bodyLayout.getContainer(), bodyLayout.getFrameContext(),
                 bodyLayout.getUserAgentContext());

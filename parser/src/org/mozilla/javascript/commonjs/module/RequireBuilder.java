@@ -10,7 +10,6 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Script;
 import org.mozilla.javascript.Scriptable;
 
-
 /**
  * A builder for {@link Require} instances. Useful when you're creating many
  * instances of {@link Require} that are identical except for their top-level
@@ -23,20 +22,11 @@ import org.mozilla.javascript.Scriptable;
  */
 public class RequireBuilder implements Serializable
 {
-    
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** The sandboxed. */
     private boolean sandboxed = true;
-    
-    /** The module script provider. */
     private ModuleScriptProvider moduleScriptProvider;
-    
-    /** The pre exec. */
     private Script preExec;
-    
-    /** The post exec. */
     private Script postExec;
 
     /**

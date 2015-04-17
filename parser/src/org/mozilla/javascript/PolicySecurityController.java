@@ -19,7 +19,6 @@ import java.util.WeakHashMap;
 import org.mozilla.classfile.ByteCode;
 import org.mozilla.classfile.ClassFileWriter;
 
-
 /**
  * A security controller relying on Java {@link Policy} in effect. When you use
  * this security controller, your securityDomain objects must be instances of
@@ -33,69 +32,43 @@ import org.mozilla.classfile.ClassFileWriter;
  */
 public class PolicySecurityController extends SecurityController
 {
-    
-    /** The Constant secureCallerImplBytecode. */
     private static final byte[] secureCallerImplBytecode = loadBytecode();
 
     // We're storing a CodeSource -> (ClassLoader -> SecureRenderer), since we
     // need to have one renderer per class loader. We're using weak hash maps
     // and soft references all the way, since we don't want to interfere with
     // cleanup of either CodeSource or ClassLoader objects.
-    /** The Constant callers. */
     private static final Map<CodeSource,Map<ClassLoader,SoftReference<SecureCaller>>>
         callers =
             new WeakHashMap<CodeSource,Map<ClassLoader,SoftReference<SecureCaller>>>();
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.SecurityController#getStaticSecurityDomainClassInternal()
-     */
     @Override
     public Class<?> getStaticSecurityDomainClassInternal() {
         return CodeSource.class;
     }
 
-    /**
-     * The Class Loader.
-     */
     private static class Loader extends SecureClassLoader
     implements GeneratedClassLoader
     {
-        
-        /** The code source. */
         private final CodeSource codeSource;
 
-        /**
-         * Instantiates a new loader.
-         *
-         * @param parent the parent
-         * @param codeSource the code source
-         */
         Loader(ClassLoader parent, CodeSource codeSource)
         {
             super(parent);
             this.codeSource = codeSource;
         }
 
-        /* (non-Javadoc)
-         * @see org.mozilla.javascript.GeneratedClassLoader#defineClass(java.lang.String, byte[])
-         */
         public Class<?> defineClass(String name, byte[] data)
         {
             return defineClass(name, data, 0, data.length, codeSource);
         }
 
-        /* (non-Javadoc)
-         * @see org.mozilla.javascript.GeneratedClassLoader#linkClass(java.lang.Class)
-         */
         public void linkClass(Class<?> cl)
         {
             resolveClass(cl);
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.SecurityController#createClassLoader(java.lang.ClassLoader, java.lang.Object)
-     */
     @Override
     public GeneratedClassLoader createClassLoader(final ClassLoader parent,
             final Object securityDomain)
@@ -110,9 +83,6 @@ public class PolicySecurityController extends SecurityController
             });
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.SecurityController#getDynamicSecurityDomain(java.lang.Object)
-     */
     @Override
     public Object getDynamicSecurityDomain(Object securityDomain)
     {
@@ -121,9 +91,6 @@ public class PolicySecurityController extends SecurityController
         return securityDomain;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.SecurityController#callWithDomain(java.lang.Object, org.mozilla.javascript.Context, org.mozilla.javascript.Callable, org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
     @Override
     public Object callWithDomain(final Object securityDomain, final Context cx,
             Callable callable, Scriptable scope, Scriptable thisObj,
@@ -184,32 +151,13 @@ public class PolicySecurityController extends SecurityController
         return caller.call(callable, cx, scope, thisObj, args);
     }
 
-    /**
-     * The Class SecureCaller.
-     */
     public abstract static class SecureCaller
     {
-        
-        /**
-         * Call.
-         *
-         * @param callable the callable
-         * @param cx the cx
-         * @param scope the scope
-         * @param thisObj the this obj
-         * @param args the args
-         * @return the object
-         */
         public abstract Object call(Callable callable, Context cx, Scriptable scope,
                 Scriptable thisObj, Object[] args);
     }
 
 
-    /**
-     * Load bytecode.
-     *
-     * @return the byte[]
-     */
     private static byte[] loadBytecode()
     {
         String secureCallerClassName = SecureCaller.class.getName();

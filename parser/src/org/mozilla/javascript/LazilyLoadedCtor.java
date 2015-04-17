@@ -6,10 +6,9 @@
 
 package org.mozilla.javascript;
 
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.*;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
-
 
 /**
  * Avoid loading classes unless they are used.
@@ -17,63 +16,26 @@ import java.security.PrivilegedAction;
  * <p> This improves startup time and average memory usage.
  */
 public final class LazilyLoadedCtor implements java.io.Serializable {
-	
-	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-    /** The Constant STATE_BEFORE_INIT. */
     private static final int STATE_BEFORE_INIT = 0;
-    
-    /** The Constant STATE_INITIALIZING. */
     private static final int STATE_INITIALIZING = 1;
-    
-    /** The Constant STATE_WITH_VALUE. */
     private static final int STATE_WITH_VALUE = 2;
 
-    /** The scope. */
     private final ScriptableObject scope;
-    
-    /** The property name. */
     private final String propertyName;
-    
-    /** The class name. */
     private final String className;
-    
-    /** The sealed. */
     private final boolean sealed;
-    
-    /** The privileged. */
     private final boolean privileged;
-    
-    /** The initialized value. */
     private Object initializedValue;
-    
-    /** The state. */
     private int state;
 
-    /**
-     * Instantiates a new lazily loaded ctor.
-     *
-     * @param scope the scope
-     * @param propertyName the property name
-     * @param className the class name
-     * @param sealed the sealed
-     */
     public LazilyLoadedCtor(ScriptableObject scope, String propertyName,
             String className, boolean sealed)
     {
         this(scope, propertyName, className, sealed, false);
     }
 
-    /**
-     * Instantiates a new lazily loaded ctor.
-     *
-     * @param scope the scope
-     * @param propertyName the property name
-     * @param className the class name
-     * @param sealed the sealed
-     * @param privileged the privileged
-     */
     LazilyLoadedCtor(ScriptableObject scope, String propertyName,
             String className, boolean sealed, boolean privileged)
     {
@@ -89,9 +51,6 @@ public final class LazilyLoadedCtor implements java.io.Serializable {
                 ScriptableObject.DONTENUM);
     }
 
-    /**
-     * Inits the.
-     */
     void init()
     {
         synchronized (this) {
@@ -113,11 +72,6 @@ public final class LazilyLoadedCtor implements java.io.Serializable {
         }
     }
 
-    /**
-     * Gets the value.
-     *
-     * @return the value
-     */
     Object getValue()
     {
         if (state != STATE_WITH_VALUE)
@@ -125,11 +79,6 @@ public final class LazilyLoadedCtor implements java.io.Serializable {
         return initializedValue;
     }
 
-    /**
-     * Builds the value.
-     *
-     * @return the object
-     */
     private Object buildValue()
     {
         if(privileged)
@@ -148,11 +97,6 @@ public final class LazilyLoadedCtor implements java.io.Serializable {
         }
     }
 
-    /**
-     * Builds the value0.
-     *
-     * @return the object
-     */
     private Object buildValue0()
     {
         Class<? extends Scriptable> cl = cast(Kit.classOrNull(className));
@@ -184,12 +128,6 @@ public final class LazilyLoadedCtor implements java.io.Serializable {
         return Scriptable.NOT_FOUND;
     }
 
-    /**
-     * Cast.
-     *
-     * @param cl the cl
-     * @return the class<? extends scriptable>
-     */
     @SuppressWarnings({"unchecked"})
     private Class<? extends Scriptable> cast(Class<?> cl) {
         return (Class<? extends Scriptable>)cl;

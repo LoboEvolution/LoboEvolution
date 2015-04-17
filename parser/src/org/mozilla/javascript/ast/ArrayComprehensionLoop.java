@@ -8,61 +8,44 @@ package org.mozilla.javascript.ast;
 
 import org.mozilla.javascript.Token;
 
-
 /**
  * AST node for a single 'for (foo in bar)' loop construct in a JavaScript 1.7
  * Array comprehension.  This node type is almost equivalent to a
  * {@link ForInLoop}, except that it has no body statement.
- * Node type is {@link Token#FOR}.
+ * Node type is {@link Token#FOR}.<p>
  */
 public class ArrayComprehensionLoop extends ForInLoop {
 
-    /**
-     * Instantiates a new array comprehension loop.
-     */
     public ArrayComprehensionLoop() {
     }
 
-    /**
-     * Instantiates a new array comprehension loop.
-     *
-     * @param pos the pos
-     */
     public ArrayComprehensionLoop(int pos) {
         super(pos);
     }
 
-    /**
-     * Instantiates a new array comprehension loop.
-     *
-     * @param pos the pos
-     * @param len the len
-     */
     public ArrayComprehensionLoop(int pos, int len) {
         super(pos, len);
     }
     
     /**
-     * Returns {@code null} for loop body.
-     *
+     * Returns {@code null} for loop body
      * @return loop body (always {@code null} for this node type)
      */
+    @Override
     public AstNode getBody() {
         return null;
     }
 
     /**
      * Throws an exception on attempts to set the loop body.
-     *
      * @param body loop body
+     * @throws UnsupportedOperationException
      */
+    @Override
     public void setBody(AstNode body) {
         throw new UnsupportedOperationException("this node type has no body");
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.ast.ForInLoop#toSource(int)
-     */
     @Override
     public String toSource(int depth) {
         return makeIndent(depth)
@@ -78,8 +61,6 @@ public class ArrayComprehensionLoop extends ForInLoop {
     /**
      * Visits the iterator expression and the iterated object expression.
      * There is no body-expression for this loop type.
-     *
-     * @param v the v
      */
     @Override
     public void visit(NodeVisitor v) {

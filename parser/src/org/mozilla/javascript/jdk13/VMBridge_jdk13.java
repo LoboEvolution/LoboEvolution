@@ -10,30 +10,16 @@ import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Member;
 import java.lang.reflect.Method;
+import java.lang.reflect.Member;
 import java.lang.reflect.Proxy;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.ContextFactory;
-import org.mozilla.javascript.InterfaceAdapter;
-import org.mozilla.javascript.Kit;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.VMBridge;
+import org.mozilla.javascript.*;
 
-
-/**
- * The Class VMBridge_jdk13.
- */
 public class VMBridge_jdk13 extends VMBridge
 {
-    
-    /** The context local. */
     private ThreadLocal<Object[]> contextLocal = new ThreadLocal<Object[]>();
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.VMBridge#getThreadContextHelper()
-     */
     @Override
     protected Object getThreadContextHelper()
     {
@@ -54,9 +40,6 @@ public class VMBridge_jdk13 extends VMBridge
         return storage;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.VMBridge#getContext(java.lang.Object)
-     */
     @Override
     protected Context getContext(Object contextHelper)
     {
@@ -64,9 +47,6 @@ public class VMBridge_jdk13 extends VMBridge
         return (Context)storage[0];
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.VMBridge#setContext(java.lang.Object, org.mozilla.javascript.Context)
-     */
     @Override
     protected void setContext(Object contextHelper, Context cx)
     {
@@ -74,18 +54,12 @@ public class VMBridge_jdk13 extends VMBridge
         storage[0] = cx;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.VMBridge#getCurrentThreadClassLoader()
-     */
     @Override
     protected ClassLoader getCurrentThreadClassLoader()
     {
         return Thread.currentThread().getContextClassLoader();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.VMBridge#tryToMakeAccessible(java.lang.Object)
-     */
     @Override
     protected boolean tryToMakeAccessible(Object accessibleObject)
     {
@@ -103,9 +77,6 @@ public class VMBridge_jdk13 extends VMBridge
         return accessible.isAccessible();
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.VMBridge#getInterfaceProxyHelper(org.mozilla.javascript.ContextFactory, java.lang.Class[])
-     */
     @Override
     protected Object getInterfaceProxyHelper(ContextFactory cf,
                                              Class<?>[] interfaces)
@@ -124,9 +95,6 @@ public class VMBridge_jdk13 extends VMBridge
         return c;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.VMBridge#newInterfaceProxy(java.lang.Object, org.mozilla.javascript.ContextFactory, org.mozilla.javascript.InterfaceAdapter, java.lang.Object, org.mozilla.javascript.Scriptable)
-     */
     @Override
     protected Object newInterfaceProxy(Object proxyHelper,
                                        final ContextFactory cf,
@@ -179,9 +147,6 @@ public class VMBridge_jdk13 extends VMBridge
         return proxy;
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.VMBridge#isVarArgs(java.lang.reflect.Member)
-     */
     @Override
     protected boolean isVarArgs(Member member) {
       return false;

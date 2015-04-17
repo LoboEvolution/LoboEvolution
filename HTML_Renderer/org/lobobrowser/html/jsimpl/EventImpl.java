@@ -1,22 +1,16 @@
 /*
-    GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The XAMJ Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The XAMJ Project.
+ * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
+ * can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version. This
+ * library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.html.jsimpl;
 
@@ -30,705 +24,769 @@ import org.lobobrowser.html.w3c.events.EventTarget;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.views.AbstractView;
 
-
 /**
  * The Class EventImpl.
  */
 public class EventImpl extends AbstractScriptableDelegate implements Event {
-	
-	
-	/** The ctrl key. */
-	private Boolean ctrlKey = null; 
-	
-	/** The alt key. */
-	private Boolean altKey = null; ;
-	
-	/** The shift key. */
-	private Boolean shiftKey = null; ;
-	
-	/** The meta key. */
-	private boolean metaKey; 
-	
-	/** The can bubble. */
-	private boolean canBubble;
-	
-	/** The return value. */
-	private boolean returnValue;
-	
-	/** The bubbles. */
-	private boolean bubbles;
-	
-	/** The cancelable. */
-	private boolean cancelable;
-	
-	/** The default prevented. */
-	private boolean defaultPrevented;
-	
-	/** The is trusted. */
-	private boolean isTrusted;
-	
-	/** The cancelled. */
-	private boolean cancelled;
-	
-	/** The detail. */
-	private int detail;
-	
-	/** The screen x. */
-	private int screenX; 
-	
-	/** The screen y. */
-	private int screenY; 
-	
-	/** The client x. */
-	private int clientX; 
-	
-	/** The client y. */
-	private int clientY;
-	
-	/** The button. */
-	private int button;
-	
-	/** The leaf x. */
-	private int leafX;
-	
-	/** The leaf y. */
-	private int leafY;
-	
-	/** The event phase. */
-	private short eventPhase;
-	
-	/** The time stamp. */
-	private long timeStamp;
-	
-	/** The type. */
-	private String type;
-	
-	/** The namespace uri. */
-	private String namespaceURI;
-	
-	/** The from element. */
-	private HTMLElement fromElement;
-	
-	/** The to element. */
-	private HTMLElement toElement;
-	
-	/** The src element. */
-	private HTMLElement srcElement;
-	
-	/** The view. */
-	private AbstractView view;
-	
-	/** The input event. */
-	private InputEvent inputEvent;
-	
-	/** The target. */
-	private EventTarget target;
-	
-	/** The current target. */
-	private EventTarget currentTarget;
-	
-	/**
-	 * Instantiates a new event impl.
-	 */
-	public EventImpl(){}
 
-	/**
-	 * Instantiates a new event impl.
-	 *
-	 * @param type the type
-	 * @param srcElement the src element
-	 * @param mouseEvent the mouse event
-	 * @param leafX the leaf x
-	 * @param leafY the leaf y
-	 */
-	public EventImpl(String type, HTMLElement srcElement,
-			InputEvent mouseEvent, int leafX, int leafY) {
-		this.type = type;
-		this.srcElement = srcElement;
-		this.leafX = leafX;
-		this.leafY = leafY;
-		this.inputEvent = mouseEvent;
-		initEvent(type, false, false);
-	}
+    /** The ctrl key. */
+    private Boolean ctrlKey = null;
 
-	/**
-	 * Instantiates a new event impl.
-	 *
-	 * @param type the type
-	 * @param srcElement the src element
-	 * @param keyEvent the key event
-	 */
-	public EventImpl(String type, HTMLElement srcElement, KeyEvent keyEvent) {
-		this.type = type;
-		this.srcElement = srcElement;
-		this.inputEvent = keyEvent;
-		initEvent(type, false, false);
-	}
+    /** The alt key. */
+    private Boolean altKey = null;;
 
-	/**
-	 * Instantiates a new event impl.
-	 *
-	 * @param type the type
-	 * @param srcElement the src element
-	 */
-	public EventImpl(String type, HTMLElement srcElement) {
-		this.type = type;
-		this.srcElement = srcElement;
-		this.inputEvent = null;
-		initEvent(type, false, false);
-	}
+    /** The shift key. */
+    private Boolean shiftKey = null;;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#initEvent(java.lang.String, boolean, boolean)
-	 */
-	@Override
-	public void initEvent(String type, boolean bubbles, boolean cancelable) {
-		this.type = type;
-		this.bubbles = bubbles;
-		this.cancelable = cancelable;
-		this.timeStamp = System.currentTimeMillis();
-		this.eventPhase = Event.AT_TARGET;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#initEventNS(java.lang.String, java.lang.String, boolean, boolean)
-	 */
-	public void initEventNS(String namespaceURI, String type, boolean bubbles, boolean cancelable) {
-		this.namespaceURI = namespaceURI;
-		this.type = type;
-		this.bubbles = bubbles;
-		this.cancelable = cancelable;
-	}
+    /** The meta key. */
+    private boolean metaKey;
 
-	/**
-	 * Gets the alt key.
-	 *
-	 * @return the alt key
-	 */
-	public boolean getAltKey() {
-		if (altKey != null)
-			return altKey;
+    /** The can bubble. */
+    private boolean canBubble;
 
-		InputEvent ie = this.inputEvent;
-		return ie == null ? false : ie.isAltGraphDown();
-	}
+    /** The return value. */
+    private boolean returnValue;
 
-	/**
-	 * Gets the shift key.
-	 *
-	 * @return the shift key
-	 */
-	public boolean getShiftKey() {
-		if (shiftKey != null)
-			return shiftKey;
+    /** The bubbles. */
+    private boolean bubbles;
 
-		InputEvent ie = this.inputEvent;
-		return ie == null ? false : ie.isShiftDown();
-	}
+    /** The cancelable. */
+    private boolean cancelable;
 
-	/**
-	 * Gets the ctrl key.
-	 *
-	 * @return the ctrl key
-	 */
-	public boolean getCtrlKey() {
-		if (ctrlKey != null)
-			return ctrlKey;
+    /** The default prevented. */
+    private boolean defaultPrevented;
 
-		InputEvent ie = this.inputEvent;
-		return ie == null ? false : ie.isControlDown();
-	}
+    /** The is trusted. */
+    private boolean isTrusted;
 
-	/**
-	 * Gets the button.
-	 *
-	 * @return the button
-	 */
-	public int getButton() {
-		InputEvent ie = this.inputEvent;
-		if (ie instanceof MouseEvent) {
-			return ((MouseEvent) ie).getButton();
-		} else {
-			return button;
-		}
-	}
+    /** The cancelled. */
+    private boolean cancelled;
 
-	/**
-	 * Checks if is can bubble.
-	 *
-	 * @return true, if is can bubble
-	 */
-	public boolean isCanBubble() {
-		return canBubble;
-	}
+    /** The detail. */
+    private int detail;
 
-	/**
-	 * Sets the can bubble.
-	 *
-	 * @param canBubble the new can bubble
-	 */
-	public void setCanBubble(boolean canBubble) {
-		this.canBubble = canBubble;
-	}
+    /** The screen x. */
+    private int screenX;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#getType()
-	 */
-	public String getType() {
-		return type;
-	}
+    /** The screen y. */
+    private int screenY;
 
-	/**
-	 * Sets the type.
-	 *
-	 * @param type the new type
-	 */
-	public void setType(String type) {
-		this.type = type;
-	}
+    /** The client x. */
+    private int clientX;
 
-	/**
-	 * Gets the client x.
-	 *
-	 * @return the client x
-	 */
-	public int getClientX() {
-		InputEvent ie = this.inputEvent;
-		if (ie instanceof MouseEvent) {
-			return ((MouseEvent) ie).getX();
-		} else {
-			return clientX;
-		}
-	}
+    /** The client y. */
+    private int clientY;
 
-	/**
-	 * Gets the client y.
-	 *
-	 * @return the client y
-	 */
-	public int getClientY() {
-		InputEvent ie = this.inputEvent;
-		if (ie instanceof MouseEvent) {
-			return ((MouseEvent) ie).getY();
-		} else {
-			return clientY;
-		}
-	}
+    /** The button. */
+    private int button;
 
-	/**
-	 * Gets the key code.
-	 *
-	 * @return the key code
-	 */
-	public int getKeyCode() {
-		InputEvent ie = this.inputEvent;
-		if (ie instanceof KeyEvent) {
-			return ((KeyEvent) ie).getKeyCode();
-		} else {
-			return 0;
-		}
-	}
+    /** The leaf x. */
+    private int leafX;
 
-	/**
-	 * Checks if is return value.
-	 *
-	 * @return true, if is return value
-	 */
-	public boolean isReturnValue() {
-		return returnValue;
-	}
+    /** The leaf y. */
+    private int leafY;
 
-	/**
-	 * Sets the return value.
-	 *
-	 * @param returnValue the new return value
-	 */
-	public void setReturnValue(boolean returnValue) {
-		this.returnValue = returnValue;
-	}
+    /** The event phase. */
+    private short eventPhase;
 
-	/**
-	 * Gets the src element.
-	 *
-	 * @return the src element
-	 */
-	public HTMLElement getSrcElement() {
-		return srcElement;
-	}
+    /** The time stamp. */
+    private long timeStamp;
 
-	/**
-	 * Sets the src element.
-	 *
-	 * @param srcElement the new src element
-	 */
-	public void setSrcElement(HTMLElement srcElement) {
-		this.srcElement = srcElement;
-	}
+    /** The type. */
+    private String type;
 
-	/**
-	 * Gets the from element.
-	 *
-	 * @return the from element
-	 */
-	public HTMLElement getFromElement() {
-		return fromElement;
-	}
+    /** The namespace uri. */
+    private String namespaceURI;
 
-	/**
-	 * Sets the from element.
-	 *
-	 * @param fromElement the new from element
-	 */
-	public void setFromElement(HTMLElement fromElement) {
-		this.fromElement = fromElement;
-	}
+    /** The from element. */
+    private HTMLElement fromElement;
 
-	/**
-	 * Gets the to element.
-	 *
-	 * @return the to element
-	 */
-	public HTMLElement getToElement() {
-		return toElement;
-	}
+    /** The to element. */
+    private HTMLElement toElement;
 
-	/**
-	 * Sets the to element.
-	 *
-	 * @param toElement the new to element
-	 */
-	public void setToElement(HTMLElement toElement) {
-		this.toElement = toElement;
-	}
+    /** The src element. */
+    private HTMLElement srcElement;
 
-	/**
-	 * Gets the leaf x.
-	 *
-	 * @return the leaf x
-	 */
-	public int getLeafX() {
-		return leafX;
-	}
+    /** The view. */
+    private AbstractView view;
 
-	/**
-	 * Sets the leaf x.
-	 *
-	 * @param leafX the new leaf x
-	 */
-	public void setLeafX(int leafX) {
-		this.leafX = leafX;
-	}
+    /** The input event. */
+    private InputEvent inputEvent;
 
-	/**
-	 * Gets the leaf y.
-	 *
-	 * @return the leaf y
-	 */
-	public int getLeafY() {
-		return leafY;
-	}
+    /** The target. */
+    private EventTarget target;
 
-	/**
-	 * Sets the leaf y.
-	 *
-	 * @param leafY the new leaf y
-	 */
-	public void setLeafY(int leafY) {
-		this.leafY = leafY;
-	}
+    /** The current target. */
+    private EventTarget currentTarget;
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#preventDefault()
-	 */
-	public void preventDefault() {
-		if (this.cancelable) {
-			this.defaultPrevented = true;
-		}
-	}
+    /**
+     * Instantiates a new event impl.
+     */
+    public EventImpl() {
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#stopPropagation()
-	 */
-	public void stopPropagation() {
-		if (this.bubbles) {
-			this.canBubble = true;
-		}
-	}
+    /**
+     * Instantiates a new event impl.
+     *
+     * @param type
+     *            the type
+     * @param srcElement
+     *            the src element
+     * @param mouseEvent
+     *            the mouse event
+     * @param leafX
+     *            the leaf x
+     * @param leafY
+     *            the leaf y
+     */
+    public EventImpl(String type, HTMLElement srcElement,
+            InputEvent mouseEvent, int leafX, int leafY) {
+        this.type = type;
+        this.srcElement = srcElement;
+        this.leafX = leafX;
+        this.leafY = leafY;
+        this.inputEvent = mouseEvent;
+        initEvent(type, false, false);
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#stopImmediatePropagation()
-	 */
-	public void stopImmediatePropagation() {
-		if (this.bubbles) {
-			this.canBubble = true;
-		}
-		this.cancelled = true;
-	}
+    /**
+     * Instantiates a new event impl.
+     *
+     * @param type
+     *            the type
+     * @param srcElement
+     *            the src element
+     * @param keyEvent
+     *            the key event
+     */
+    public EventImpl(String type, HTMLElement srcElement, KeyEvent keyEvent) {
+        this.type = type;
+        this.srcElement = srcElement;
+        this.inputEvent = keyEvent;
+        initEvent(type, false, false);
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#getTarget()
-	 */
-	public EventTarget getTarget() {
-		return target;
-	}
+    /**
+     * Instantiates a new event impl.
+     *
+     * @param type
+     *            the type
+     * @param srcElement
+     *            the src element
+     */
+    public EventImpl(String type, HTMLElement srcElement) {
+        this.type = type;
+        this.srcElement = srcElement;
+        this.inputEvent = null;
+        initEvent(type, false, false);
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#getCurrentTarget()
-	 */
-	public EventTarget getCurrentTarget() {
-		return currentTarget;
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#initEvent(java.lang.String,
+     * boolean, boolean)
+     */
+    @Override
+    public void initEvent(String type, boolean bubbles, boolean cancelable) {
+        this.type = type;
+        this.bubbles = bubbles;
+        this.cancelable = cancelable;
+        this.timeStamp = System.currentTimeMillis();
+        this.eventPhase = Event.AT_TARGET;
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#getEventPhase()
-	 */
-	public short getEventPhase() {
-		return eventPhase;
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#initEventNS(java.lang.String,
+     * java.lang.String, boolean, boolean)
+     */
+    @Override
+    public void initEventNS(String namespaceURI, String type, boolean bubbles,
+            boolean cancelable) {
+        this.namespaceURI = namespaceURI;
+        this.type = type;
+        this.bubbles = bubbles;
+        this.cancelable = cancelable;
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#getBubbles()
-	 */
-	public boolean getBubbles() {
-		return bubbles;
-	}
+    /**
+     * Gets the alt key.
+     *
+     * @return the alt key
+     */
+    public boolean getAltKey() {
+        if (altKey != null) {
+            return altKey;
+        }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#getCancelable()
-	 */
-	public boolean getCancelable() {
-		return cancelable;
-	}
-	
-	/**
-	 * Sets the cancelable.
-	 *
-	 * @param cancelable the new cancelable
-	 */
-	public void setCancelable(boolean cancelable) {
-		this.cancelable = cancelable;
-	}
+        InputEvent ie = this.inputEvent;
+        return ie == null ? false : ie.isAltGraphDown();
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#getTimeStamp()
-	 */
-	public long getTimeStamp() {
-		return timeStamp;
-	}
+    /**
+     * Gets the shift key.
+     *
+     * @return the shift key
+     */
+    public boolean getShiftKey() {
+        if (shiftKey != null) {
+            return shiftKey;
+        }
 
-	/**
-	 * Sets the target.
-	 *
-	 * @param target the new target
-	 */
-	public void setTarget(EventTarget target) {
-		this.target = target;
-	}
+        InputEvent ie = this.inputEvent;
+        return ie == null ? false : ie.isShiftDown();
+    }
 
-	/**
-	 * Sets the current target.
-	 *
-	 * @param currentTarget the new current target
-	 */
-	public void setCurrentTarget(EventTarget currentTarget) {
-		this.currentTarget = currentTarget;
-	}
+    /**
+     * Gets the ctrl key.
+     *
+     * @return the ctrl key
+     */
+    public boolean getCtrlKey() {
+        if (ctrlKey != null) {
+            return ctrlKey;
+        }
 
-	/**
-	 * Sets the event phase.
-	 *
-	 * @param eventPhase the new event phase
-	 */
-	public void setEventPhase(short eventPhase) {
-		this.eventPhase = eventPhase;
-	}
+        InputEvent ie = this.inputEvent;
+        return ie == null ? false : ie.isControlDown();
+    }
 
-	/**
-	 * Cancelled.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean cancelled() {
-		return cancelled;
-	}
-	
-	/**
-	 * Gets the meta key.
-	 *
-	 * @return the meta key
-	 */
-	public boolean getMetaKey() {
-		return metaKey;
-	}
+    /**
+     * Gets the button.
+     *
+     * @return the button
+     */
+    public int getButton() {
+        InputEvent ie = this.inputEvent;
+        if (ie instanceof MouseEvent) {
+            return ((MouseEvent) ie).getButton();
+        } else {
+            return button;
+        }
+    }
 
-	/**
-	 * Sets the meta key.
-	 *
-	 * @param metaKey the new meta key
-	 */
-	public void setMetaKey(boolean metaKey) {
-		this.metaKey = metaKey;
-	}
+    /**
+     * Checks if is can bubble.
+     *
+     * @return true, if is can bubble
+     */
+    public boolean isCanBubble() {
+        return canBubble;
+    }
 
-	/**
-	 * Gets the detail.
-	 *
-	 * @return the detail
-	 */
-	public int getDetail() {
-		return detail;
-	}
+    /**
+     * Sets the can bubble.
+     *
+     * @param canBubble
+     *            the new can bubble
+     */
+    public void setCanBubble(boolean canBubble) {
+        this.canBubble = canBubble;
+    }
 
-	/**
-	 * Sets the detail.
-	 *
-	 * @param detail the new detail
-	 */
-	public void setDetail(int detail) {
-		this.detail = detail;
-	}
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#getType()
+     */
+    @Override
+    public String getType() {
+        return type;
+    }
 
-	/**
-	 * Gets the screen x.
-	 *
-	 * @return the screen x
-	 */
-	public int getScreenX() {
-		return screenX;
-	}
+    /**
+     * Sets the type.
+     *
+     * @param type
+     *            the new type
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	/**
-	 * Sets the screen x.
-	 *
-	 * @param screenX the new screen x
-	 */
-	public void setScreenX(int screenX) {
-		this.screenX = screenX;
-	}
+    /**
+     * Gets the client x.
+     *
+     * @return the client x
+     */
+    public int getClientX() {
+        InputEvent ie = this.inputEvent;
+        if (ie instanceof MouseEvent) {
+            return ((MouseEvent) ie).getX();
+        } else {
+            return clientX;
+        }
+    }
 
-	/**
-	 * Gets the screen y.
-	 *
-	 * @return the screen y
-	 */
-	public int getScreenY() {
-		return screenY;
-	}
+    /**
+     * Gets the client y.
+     *
+     * @return the client y
+     */
+    public int getClientY() {
+        InputEvent ie = this.inputEvent;
+        if (ie instanceof MouseEvent) {
+            return ((MouseEvent) ie).getY();
+        } else {
+            return clientY;
+        }
+    }
 
-	/**
-	 * Sets the screen y.
-	 *
-	 * @param screenY the new screen y
-	 */
-	public void setScreenY(int screenY) {
-		this.screenY = screenY;
-	}
+    /**
+     * Gets the key code.
+     *
+     * @return the key code
+     */
+    public int getKeyCode() {
+        InputEvent ie = this.inputEvent;
+        if (ie instanceof KeyEvent) {
+            return ((KeyEvent) ie).getKeyCode();
+        } else {
+            return 0;
+        }
+    }
 
-	/**
-	 * Gets the view.
-	 *
-	 * @return the view
-	 */
-	public AbstractView getView() {
-		return view;
-	}
+    /**
+     * Checks if is return value.
+     *
+     * @return true, if is return value
+     */
+    public boolean isReturnValue() {
+        return returnValue;
+    }
 
-	/**
-	 * Sets the view.
-	 *
-	 * @param view the new view
-	 */
-	public void setView(AbstractView view) {
-		this.view = view;
-	}
+    /**
+     * Sets the return value.
+     *
+     * @param returnValue
+     *            the new return value
+     */
+    public void setReturnValue(boolean returnValue) {
+        this.returnValue = returnValue;
+    }
 
-	/**
-	 * Sets the ctrl key.
-	 *
-	 * @param ctrlKey the new ctrl key
-	 */
-	public void setCtrlKey(boolean ctrlKey) {
-		this.ctrlKey = ctrlKey;
-	}
+    /**
+     * Gets the src element.
+     *
+     * @return the src element
+     */
+    public HTMLElement getSrcElement() {
+        return srcElement;
+    }
 
-	/**
-	 * Sets the alt key.
-	 *
-	 * @param altKey the new alt key
-	 */
-	public void setAltKey(boolean altKey) {
-		this.altKey = altKey;
-	}
+    /**
+     * Sets the src element.
+     *
+     * @param srcElement
+     *            the new src element
+     */
+    public void setSrcElement(HTMLElement srcElement) {
+        this.srcElement = srcElement;
+    }
 
-	/**
-	 * Sets the shift key.
-	 *
-	 * @param shiftKey the new shift key
-	 */
-	public void setShiftKey(boolean shiftKey) {
-		this.shiftKey = shiftKey;
-	}
+    /**
+     * Gets the from element.
+     *
+     * @return the from element
+     */
+    public HTMLElement getFromElement() {
+        return fromElement;
+    }
 
-	/**
-	 * Sets the client x.
-	 *
-	 * @param clientX the new client x
-	 */
-	public void setClientX(int clientX) {
-		this.clientX = clientX;
-	}
+    /**
+     * Sets the from element.
+     *
+     * @param fromElement
+     *            the new from element
+     */
+    public void setFromElement(HTMLElement fromElement) {
+        this.fromElement = fromElement;
+    }
 
-	/**
-	 * Sets the client y.
-	 *
-	 * @param clientY the new client y
-	 */
-	public void setClientY(int clientY) {
-		this.clientY = clientY;
-	}
+    /**
+     * Gets the to element.
+     *
+     * @return the to element
+     */
+    public HTMLElement getToElement() {
+        return toElement;
+    }
 
-	/**
-	 * Sets the button.
-	 *
-	 * @param button the new button
-	 */
-	public void setButton(int button) {
-		this.button = button;
-	}
-	
-	/**
-	 * Gets the namespace uri.
-	 *
-	 * @return the namespace uri
-	 */
-	public String getNamespaceURI() {
-		return namespaceURI;
-	}
+    /**
+     * Sets the to element.
+     *
+     * @param toElement
+     *            the new to element
+     */
+    public void setToElement(HTMLElement toElement) {
+        this.toElement = toElement;
+    }
 
-	/**
-	 * Sets the namespace uri.
-	 *
-	 * @param namespaceURI the new namespace uri
-	 */
-	public void setNamespaceURI(String namespaceURI) {
-		this.namespaceURI = namespaceURI;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#getDefaultPrevented()
-	 */
-	@Override
-	public boolean getDefaultPrevented() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    /**
+     * Gets the leaf x.
+     *
+     * @return the leaf x
+     */
+    public int getLeafX() {
+        return leafX;
+    }
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.html.w3c.events.Event#getTrusted()
-	 */
-	@Override
-	public boolean getTrusted() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    /**
+     * Sets the leaf x.
+     *
+     * @param leafX
+     *            the new leaf x
+     */
+    public void setLeafX(int leafX) {
+        this.leafX = leafX;
+    }
+
+    /**
+     * Gets the leaf y.
+     *
+     * @return the leaf y
+     */
+    public int getLeafY() {
+        return leafY;
+    }
+
+    /**
+     * Sets the leaf y.
+     *
+     * @param leafY
+     *            the new leaf y
+     */
+    public void setLeafY(int leafY) {
+        this.leafY = leafY;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#preventDefault()
+     */
+    @Override
+    public void preventDefault() {
+        if (this.cancelable) {
+            this.defaultPrevented = true;
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#stopPropagation()
+     */
+    @Override
+    public void stopPropagation() {
+        if (this.bubbles) {
+            this.canBubble = true;
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#stopImmediatePropagation()
+     */
+    @Override
+    public void stopImmediatePropagation() {
+        if (this.bubbles) {
+            this.canBubble = true;
+        }
+        this.cancelled = true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#getTarget()
+     */
+    @Override
+    public EventTarget getTarget() {
+        return target;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#getCurrentTarget()
+     */
+    @Override
+    public EventTarget getCurrentTarget() {
+        return currentTarget;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#getEventPhase()
+     */
+    @Override
+    public short getEventPhase() {
+        return eventPhase;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#getBubbles()
+     */
+    @Override
+    public boolean getBubbles() {
+        return bubbles;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#getCancelable()
+     */
+    @Override
+    public boolean getCancelable() {
+        return cancelable;
+    }
+
+    /**
+     * Sets the cancelable.
+     *
+     * @param cancelable
+     *            the new cancelable
+     */
+    public void setCancelable(boolean cancelable) {
+        this.cancelable = cancelable;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#getTimeStamp()
+     */
+    @Override
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    /**
+     * Sets the target.
+     *
+     * @param target
+     *            the new target
+     */
+    public void setTarget(EventTarget target) {
+        this.target = target;
+    }
+
+    /**
+     * Sets the current target.
+     *
+     * @param currentTarget
+     *            the new current target
+     */
+    public void setCurrentTarget(EventTarget currentTarget) {
+        this.currentTarget = currentTarget;
+    }
+
+    /**
+     * Sets the event phase.
+     *
+     * @param eventPhase
+     *            the new event phase
+     */
+    public void setEventPhase(short eventPhase) {
+        this.eventPhase = eventPhase;
+    }
+
+    /**
+     * Cancelled.
+     *
+     * @return true, if successful
+     */
+    public boolean cancelled() {
+        return cancelled;
+    }
+
+    /**
+     * Gets the meta key.
+     *
+     * @return the meta key
+     */
+    public boolean getMetaKey() {
+        return metaKey;
+    }
+
+    /**
+     * Sets the meta key.
+     *
+     * @param metaKey
+     *            the new meta key
+     */
+    public void setMetaKey(boolean metaKey) {
+        this.metaKey = metaKey;
+    }
+
+    /**
+     * Gets the detail.
+     *
+     * @return the detail
+     */
+    public int getDetail() {
+        return detail;
+    }
+
+    /**
+     * Sets the detail.
+     *
+     * @param detail
+     *            the new detail
+     */
+    public void setDetail(int detail) {
+        this.detail = detail;
+    }
+
+    /**
+     * Gets the screen x.
+     *
+     * @return the screen x
+     */
+    public int getScreenX() {
+        return screenX;
+    }
+
+    /**
+     * Sets the screen x.
+     *
+     * @param screenX
+     *            the new screen x
+     */
+    public void setScreenX(int screenX) {
+        this.screenX = screenX;
+    }
+
+    /**
+     * Gets the screen y.
+     *
+     * @return the screen y
+     */
+    public int getScreenY() {
+        return screenY;
+    }
+
+    /**
+     * Sets the screen y.
+     *
+     * @param screenY
+     *            the new screen y
+     */
+    public void setScreenY(int screenY) {
+        this.screenY = screenY;
+    }
+
+    /**
+     * Gets the view.
+     *
+     * @return the view
+     */
+    public AbstractView getView() {
+        return view;
+    }
+
+    /**
+     * Sets the view.
+     *
+     * @param view
+     *            the new view
+     */
+    public void setView(AbstractView view) {
+        this.view = view;
+    }
+
+    /**
+     * Sets the ctrl key.
+     *
+     * @param ctrlKey
+     *            the new ctrl key
+     */
+    public void setCtrlKey(boolean ctrlKey) {
+        this.ctrlKey = ctrlKey;
+    }
+
+    /**
+     * Sets the alt key.
+     *
+     * @param altKey
+     *            the new alt key
+     */
+    public void setAltKey(boolean altKey) {
+        this.altKey = altKey;
+    }
+
+    /**
+     * Sets the shift key.
+     *
+     * @param shiftKey
+     *            the new shift key
+     */
+    public void setShiftKey(boolean shiftKey) {
+        this.shiftKey = shiftKey;
+    }
+
+    /**
+     * Sets the client x.
+     *
+     * @param clientX
+     *            the new client x
+     */
+    public void setClientX(int clientX) {
+        this.clientX = clientX;
+    }
+
+    /**
+     * Sets the client y.
+     *
+     * @param clientY
+     *            the new client y
+     */
+    public void setClientY(int clientY) {
+        this.clientY = clientY;
+    }
+
+    /**
+     * Sets the button.
+     *
+     * @param button
+     *            the new button
+     */
+    public void setButton(int button) {
+        this.button = button;
+    }
+
+    /**
+     * Gets the namespace uri.
+     *
+     * @return the namespace uri
+     */
+    public String getNamespaceURI() {
+        return namespaceURI;
+    }
+
+    /**
+     * Sets the namespace uri.
+     *
+     * @param namespaceURI
+     *            the new namespace uri
+     */
+    public void setNamespaceURI(String namespaceURI) {
+        this.namespaceURI = namespaceURI;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#getDefaultPrevented()
+     */
+    @Override
+    public boolean getDefaultPrevented() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.lobobrowser.html.w3c.events.Event#getTrusted()
+     */
+    @Override
+    public boolean getTrusted() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

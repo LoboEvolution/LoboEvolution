@@ -65,29 +65,19 @@ import com.steadystate.css.dom.Property;
 import com.steadystate.css.sac.DocumentHandlerExt;
 import com.steadystate.css.userdata.UserDataConstants;
 
-
 /**
- * The Class CSSOMParser.
- *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  */
 public class CSSOMParser {
 
-    /** The Constant DEFAULT_PARSER. */
     private static final String DEFAULT_PARSER = "com.steadystate.css.parser.SACParserCSS21";
 
-    /** The Last failed_. */
     private static String LastFailed_;
 
-    /** The parser_. */
     private Parser parser_;
-    
-    /** The parent style sheet_. */
     private CSSStyleSheetImpl parentStyleSheet_;
 
-    /**
-     *  Creates new CSSOMParser.
-     */
+    /** Creates new CSSOMParser */
     public CSSOMParser() {
         this (null);
     }
@@ -132,11 +122,6 @@ public class CSSOMParser {
         }
     }
 
-    /**
-     * Sets the error handler.
-     *
-     * @param eh the new error handler
-     */
     public void setErrorHandler(final ErrorHandler eh) {
         parser_.setErrorHandler(eh);
     }
@@ -179,13 +164,6 @@ public class CSSOMParser {
         return sd;
     }
 
-    /**
-     * Parses the style declaration.
-     *
-     * @param sd the sd
-     * @param source the source
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     public void parseStyleDeclaration(final CSSStyleDeclaration sd, final InputSource source) throws IOException {
         final Stack<Object> nodeStack = new Stack<Object>();
         nodeStack.push(sd);
@@ -194,13 +172,6 @@ public class CSSOMParser {
         parser_.parseStyleDeclaration(source);
     }
 
-    /**
-     * Parses the property value.
-     *
-     * @param source the source
-     * @return the CSS value
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     public CSSValue parsePropertyValue(final InputSource source) throws IOException {
         final CSSOMHandler handler = new CSSOMHandler();
         parser_.setDocumentHandler(handler);
@@ -211,13 +182,6 @@ public class CSSOMParser {
         return new CSSValueImpl(lu);
     }
 
-    /**
-     * Parses the rule.
-     *
-     * @param source the source
-     * @return the CSS rule
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     public CSSRule parseRule(final InputSource source) throws IOException {
         final CSSOMHandler handler = new CSSOMHandler();
         parser_.setDocumentHandler(handler);
@@ -225,26 +189,12 @@ public class CSSOMParser {
         return (CSSRule) handler.getRoot();
     }
 
-    /**
-     * Parses the selectors.
-     *
-     * @param source the source
-     * @return the selector list
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     public SelectorList parseSelectors(final InputSource source) throws IOException {
         final HandlerBase handler = new HandlerBase();
         parser_.setDocumentHandler(handler);
         return parser_.parseSelectors(source);
     }
 
-    /**
-     * Parses the media.
-     *
-     * @param source the source
-     * @return the SAC media list
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     public SACMediaList parseMedia(final InputSource source) throws IOException {
         final HandlerBase handler = new HandlerBase();
         parser_.setDocumentHandler(handler);
@@ -254,105 +204,48 @@ public class CSSOMParser {
         return null;
     }
 
-    /**
-     * Sets the parent style sheet.
-     *
-     * @param parentStyleSheet the new parent style sheet
-     */
     public void setParentStyleSheet(final CSSStyleSheetImpl parentStyleSheet) {
         parentStyleSheet_ = parentStyleSheet;
     }
 
-    /**
-     * Gets the parent style sheet.
-     *
-     * @return the parent style sheet
-     */
     protected CSSStyleSheetImpl getParentStyleSheet() {
         return parentStyleSheet_;
     }
 
-    /**
-     * The Class CSSOMHandler.
-     */
     class CSSOMHandler implements DocumentHandlerExt {
-        
-        /** The node stack_. */
         private Stack<Object> nodeStack_;
-        
-        /** The root_. */
         private Object root_;
-        
-        /** The owner node_. */
         private Node ownerNode_;
-        
-        /** The href_. */
         private String href_;
 
-        /**
-         * Gets the owner node.
-         *
-         * @return the owner node
-         */
         private Node getOwnerNode() {
             return ownerNode_;
         }
 
-        /**
-         * Sets the owner node.
-         *
-         * @param ownerNode the new owner node
-         */
         private void setOwnerNode(final Node ownerNode) {
             ownerNode_ = ownerNode;
         }
 
-        /**
-         * Gets the href.
-         *
-         * @return the href
-         */
         private String getHref() {
             return href_;
         }
 
-        /**
-         * Sets the href.
-         *
-         * @param href the new href
-         */
         private void setHref(final String href) {
             href_ = href;
         }
 
-        /**
-         * Instantiates a new CSSOM handler.
-         *
-         * @param nodeStack the node stack
-         */
         public CSSOMHandler(final Stack<Object> nodeStack) {
             nodeStack_ = nodeStack;
         }
 
-        /**
-         * Instantiates a new CSSOM handler.
-         */
         public CSSOMHandler() {
             nodeStack_ = new Stack<Object>();
         }
 
-        /**
-         * Gets the root.
-         *
-         * @return the root
-         */
         public Object getRoot() {
             return root_;
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#startDocument(org.w3c.css.sac.InputSource)
-         */
         public void startDocument(final InputSource source) throws CSSException {
             if (nodeStack_.empty()) {
                 final CSSStyleSheetImpl ss = new CSSStyleSheetImpl();
@@ -373,32 +266,20 @@ public class CSSOMParser {
             }
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#endDocument(org.w3c.css.sac.InputSource)
-         */
         public void endDocument(final InputSource source) throws CSSException {
             // Pop the rule list and style sheet nodes
             nodeStack_.pop();
             root_ = nodeStack_.pop();
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#comment(java.lang.String)
-         */
         public void comment(final String text) throws CSSException {
             // empty default impl
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#ignorableAtRule(java.lang.String)
-         */
         public void ignorableAtRule(final String atRule) throws CSSException {
             ignorableAtRule(atRule, null);
         }
 
-        /* (non-Javadoc)
-         * @see com.steadystate.css.sac.DocumentHandlerExt#ignorableAtRule(java.lang.String, org.w3c.css.sac.Locator)
-         */
         public void ignorableAtRule(final String atRule, final Locator locator) throws CSSException {
             // Create the unknown rule and add it to the rule list
             final CSSUnknownRuleImpl ir = new CSSUnknownRuleImpl(
@@ -414,16 +295,10 @@ public class CSSOMParser {
             }
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#namespaceDeclaration(java.lang.String, java.lang.String)
-         */
         public void namespaceDeclaration(final String prefix, final String uri) throws CSSException {
             // empty default impl
         }
 
-        /* (non-Javadoc)
-         * @see com.steadystate.css.sac.DocumentHandlerExt#charset(java.lang.String, org.w3c.css.sac.Locator)
-         */
         public void charset(final String characterEncoding, final Locator locator)
             throws CSSException {
             final CSSCharsetRuleImpl cr = new CSSCharsetRuleImpl(
@@ -439,9 +314,6 @@ public class CSSOMParser {
             }
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#importStyle(java.lang.String, org.w3c.css.sac.SACMediaList, java.lang.String)
-         */
         public void importStyle(
                 final String uri,
                 final SACMediaList media,
@@ -449,9 +321,6 @@ public class CSSOMParser {
             importStyle(uri, media, defaultNamespaceURI, null);
         }
 
-        /* (non-Javadoc)
-         * @see com.steadystate.css.sac.DocumentHandlerExt#importStyle(java.lang.String, org.w3c.css.sac.SACMediaList, java.lang.String, org.w3c.css.sac.Locator)
-         */
         public void importStyle(final String uri, final SACMediaList media,
             final String defaultNamespaceURI, final Locator locator) throws CSSException {
             // Create the import rule and add it to the rule list
@@ -469,16 +338,10 @@ public class CSSOMParser {
             }
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#startMedia(org.w3c.css.sac.SACMediaList)
-         */
         public void startMedia(final SACMediaList media) throws CSSException {
             startMedia(media, null);
         }
 
-        /* (non-Javadoc)
-         * @see com.steadystate.css.sac.DocumentHandlerExt#startMedia(org.w3c.css.sac.SACMediaList, org.w3c.css.sac.Locator)
-         */
         public void startMedia(final SACMediaList media, final Locator locator) throws CSSException {
             final MediaListImpl ml = new MediaListImpl(media);
             // Create the media rule and add it to the rule list
@@ -498,25 +361,16 @@ public class CSSOMParser {
             nodeStack_.push(rules);
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#endMedia(org.w3c.css.sac.SACMediaList)
-         */
         public void endMedia(final SACMediaList media) throws CSSException {
             // Pop the rule list and media rule nodes
             nodeStack_.pop();
             root_ = nodeStack_.pop();
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#startPage(java.lang.String, java.lang.String)
-         */
         public void startPage(final String name, final String pseudoPage) throws CSSException {
             startPage(name, pseudoPage, null);
         }
 
-        /* (non-Javadoc)
-         * @see com.steadystate.css.sac.DocumentHandlerExt#startPage(java.lang.String, java.lang.String, org.w3c.css.sac.Locator)
-         */
         public void startPage(final String name, final String pseudoPage, final Locator locator)
             throws CSSException {
             // Create the page rule and add it to the rule list
@@ -535,25 +389,16 @@ public class CSSOMParser {
             nodeStack_.push(decl);
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#endPage(java.lang.String, java.lang.String)
-         */
         public void endPage(final String name, final String pseudoPage) throws CSSException {
             // Pop both the style declaration and the page rule nodes
             nodeStack_.pop();
             root_ = nodeStack_.pop();
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#startFontFace()
-         */
         public void startFontFace() throws CSSException {
             startFontFace(null);
         }
 
-        /* (non-Javadoc)
-         * @see com.steadystate.css.sac.DocumentHandlerExt#startFontFace(org.w3c.css.sac.Locator)
-         */
         public void startFontFace(final Locator locator) throws CSSException {
             // Create the font face rule and add it to the rule list
             final CSSFontFaceRuleImpl ffr = new CSSFontFaceRuleImpl(
@@ -571,25 +416,16 @@ public class CSSOMParser {
             nodeStack_.push(decl);
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#endFontFace()
-         */
         public void endFontFace() throws CSSException {
             // Pop both the style declaration and the font face rule nodes
             nodeStack_.pop();
             root_ = nodeStack_.pop();
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#startSelector(org.w3c.css.sac.SelectorList)
-         */
         public void startSelector(final SelectorList selectors) throws CSSException {
             startSelector(selectors, null);
         }
 
-        /* (non-Javadoc)
-         * @see com.steadystate.css.sac.DocumentHandlerExt#startSelector(org.w3c.css.sac.SelectorList, org.w3c.css.sac.Locator)
-         */
         public void startSelector(final SelectorList selectors, final Locator locator) throws CSSException {
             // Create the style rule and add it to the rule list
             final CSSStyleRuleImpl sr = new CSSStyleRuleImpl(
@@ -608,25 +444,16 @@ public class CSSOMParser {
             nodeStack_.push(decl);
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#endSelector(org.w3c.css.sac.SelectorList)
-         */
         public void endSelector(final SelectorList selectors) throws CSSException {
             // Pop both the style declaration and the style rule nodes
             nodeStack_.pop();
             root_ = nodeStack_.pop();
         }
 
-        /* (non-Javadoc)
-         * @see org.w3c.css.sac.DocumentHandler#property(java.lang.String, org.w3c.css.sac.LexicalUnit, boolean)
-         */
         public void property(final String name, final LexicalUnit value, final boolean important) throws CSSException {
             property(name, value, important, null);
         }
 
-        /* (non-Javadoc)
-         * @see com.steadystate.css.sac.DocumentHandlerExt#property(java.lang.String, org.w3c.css.sac.LexicalUnit, boolean, org.w3c.css.sac.Locator)
-         */
         public void property(final String name, final LexicalUnit value, final boolean important,
                                 final Locator locator) {
             final CSSStyleDeclarationImpl decl =
@@ -641,11 +468,6 @@ public class CSSOMParser {
             }
         }
 
-        /**
-         * Gets the parent rule.
-         *
-         * @return the parent rule
-         */
         private CSSRule getParentRule() {
             if (!nodeStack_.empty() && nodeStack_.size() > 1) {
                 final Object node = nodeStack_.get(nodeStack_.size() - 2);
@@ -656,12 +478,6 @@ public class CSSOMParser {
             return null;
         }
 
-        /**
-         * Adds the locator.
-         *
-         * @param locator the locator
-         * @param cssomObject the cssom object
-         */
         private void addLocator(Locator locator, final CSSOMObject cssomObject) {
             if (locator == null) {
                 final Parser parser = CSSOMParser.this.parser_;

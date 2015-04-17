@@ -1,3 +1,23 @@
+/*
+    GNU GENERAL PUBLIC LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ */
 package org.lobobrowser.primary.settings;
 
 import java.io.File;
@@ -11,244 +31,247 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.store.StorageManager;
 
-
 /**
  * The Class ToolsSettings.
  */
 public class ToolsSettings implements Serializable {
-	
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ToolsSettings.class
-			.getName());
-	
-	/** The Constant instance. */
-	private static final ToolsSettings instance;
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 22574500006000800L;
 
-	/** The search engines. */
-	private Collection<SearchEngine> searchEngines;
-	
-	/** The selected search engine. */
-	private SearchEngine selectedSearchEngine;
-	
-	/** The download directory. */
-	private File downloadDirectory;
-	
-	/** The open file directory. */
-	private File openFileDirectory;
+    /** The Constant logger. */
+    private static final Logger logger = Logger.getLogger(ToolsSettings.class
+            .getName());
 
-	static {
-		ToolsSettings ins = null;
-		try {
-			ins = (ToolsSettings) StorageManager.getInstance()
-					.retrieveSettings(ToolsSettings.class.getSimpleName(),
-							ToolsSettings.class.getClassLoader());
-		} catch (Exception err) {
-			logger.log(Level.WARNING,
-					"getInstance(): Unable to retrieve settings.", err);
-		}
-		if (ins == null) {
-			ins = new ToolsSettings();
-		}
-		instance = ins;
-	}
+    /** The Constant instance. */
+    private static final ToolsSettings instance;
 
-	/**
-	 * Instantiates a new tools settings.
-	 */
-	private ToolsSettings() {
-		this.restoreDefaults();
-	}
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 22574500006000800L;
 
-	/**
-	 * Restore defaults.
-	 */
-	public void restoreDefaults() {
-		List<SearchEngine> searchEngines = this.getDefaultSearchEngines();
-		this.searchEngines = searchEngines;
-		this.selectedSearchEngine = searchEngines.get(0);
-		String userHome = System.getProperty("user.home");
-		File userHomeDirectory = new File(userHome);
-		this.downloadDirectory = new File(userHomeDirectory, "download");
-		if (!this.downloadDirectory.exists()) {
-			this.downloadDirectory.mkdirs();
-		}
-	}
+    /** The search engines. */
+    private Collection<SearchEngine> searchEngines;
 
-	/**
-	 * Gets the single instance of ToolsSettings.
-	 *
-	 * @return single instance of ToolsSettings
-	 */
-	public static ToolsSettings getInstance() {
-		return instance;
-	}
+    /** The selected search engine. */
+    private SearchEngine selectedSearchEngine;
 
-	/**
-	 * Gets the default search engines.
-	 *
-	 * @return the default search engines
-	 */
-	private List<SearchEngine> getDefaultSearchEngines() {
-		List<SearchEngine> searchEngines = new ArrayList<SearchEngine>();
-		searchEngines.add(this.googleWebSearch());
-		searchEngines.add(this.yahooWebSearch());
-		searchEngines.add(this.wikipediaSearch());
-		searchEngines.add(this.googleBlogSearch());
-		searchEngines.add(this.googleCodeSearch());
-		searchEngines.add(this.googleScholarSearch());
-		return searchEngines;
-	}
+    /** The download directory. */
+    private File downloadDirectory;
 
-	/**
-	 * Google web search.
-	 *
-	 * @return the search engine
-	 */
-	private SearchEngine googleWebSearch() {
-		return new SearchEngine("Google Web Search",
-				"Google's main search engine.", "http://google.com/search", "q");
-	}
+    /** The open file directory. */
+    private File openFileDirectory;
 
-	/**
-	 * Yahoo web search.
-	 *
-	 * @return the search engine
-	 */
-	private SearchEngine yahooWebSearch() {
-		return new SearchEngine("Yahoo! Web Search",
-				"Yahoo's web search engine.", "http://search.yahoo.com/search",
-				"p");
-	}
+    static {
+        ToolsSettings ins = null;
+        try {
+            ins = (ToolsSettings) StorageManager.getInstance()
+                    .retrieveSettings(ToolsSettings.class.getSimpleName(),
+                            ToolsSettings.class.getClassLoader());
+        } catch (Exception err) {
+            logger.log(Level.WARNING,
+                    "getInstance(): Unable to retrieve settings.", err);
+        }
+        if (ins == null) {
+            ins = new ToolsSettings();
+        }
+        instance = ins;
+    }
 
-	/**
-	 * Wikipedia search.
-	 *
-	 * @return the search engine
-	 */
-	private SearchEngine wikipediaSearch() {
-		return new SearchEngine("Wikipedia",
-				"English Wikipedia article search.",
-				"http://en.wikipedia.org/wiki/Special:Search", "search");
-	}
+    /**
+     * Instantiates a new tools settings.
+     */
+    private ToolsSettings() {
+        this.restoreDefaults();
+    }
 
-	/**
-	 * Google blog search.
-	 *
-	 * @return the search engine
-	 */
-	private SearchEngine googleBlogSearch() {
-		return new SearchEngine("Google Blog Search",
-				"Google's blog search engine.",
-				"http://blogsearch.google.com/blogsearch", "q");
-	}
+    /**
+     * Restore defaults.
+     */
+    public void restoreDefaults() {
+        List<SearchEngine> searchEngines = this.getDefaultSearchEngines();
+        this.searchEngines = searchEngines;
+        this.selectedSearchEngine = searchEngines.get(0);
+        String userHome = System.getProperty("user.home");
+        File userHomeDirectory = new File(userHome);
+        this.downloadDirectory = new File(userHomeDirectory, "download");
+        if (!this.downloadDirectory.exists()) {
+            this.downloadDirectory.mkdirs();
+        }
+    }
 
-	/**
-	 * Google code search.
-	 *
-	 * @return the search engine
-	 */
-	private SearchEngine googleCodeSearch() {
-		return new SearchEngine("Google Code Search",
-				"Google's program source code search engine.",
-				"http://google.com/codesearch?lr=", "q");
-	}
+    /**
+     * Gets the single instance of ToolsSettings.
+     *
+     * @return single instance of ToolsSettings
+     */
+    public static ToolsSettings getInstance() {
+        return instance;
+    }
 
-	/**
-	 * Google scholar search.
-	 *
-	 * @return the search engine
-	 */
-	private SearchEngine googleScholarSearch() {
-		return new SearchEngine("Google Scholar Search",
-				"Google's search engine for scholarly literature.",
-				"http://scholar.google.com/scholar", "q");
-	}
+    /**
+     * Gets the default search engines.
+     *
+     * @return the default search engines
+     */
+    private List<SearchEngine> getDefaultSearchEngines() {
+        List<SearchEngine> searchEngines = new ArrayList<SearchEngine>();
+        searchEngines.add(this.googleWebSearch());
+        searchEngines.add(this.yahooWebSearch());
+        searchEngines.add(this.wikipediaSearch());
+        searchEngines.add(this.googleBlogSearch());
+        searchEngines.add(this.googleCodeSearch());
+        searchEngines.add(this.googleScholarSearch());
+        return searchEngines;
+    }
 
-	/**
-	 * Save.
-	 */
-	public void save() {
-		try {
-			StorageManager.getInstance().saveSettings(
-					this.getClass().getSimpleName(), this);
-		} catch (IOException ioe) {
-			logger.log(Level.WARNING, "Unable to save settings: "
-					+ this.getClass().getSimpleName() + ".", ioe);
-		}
-	}
+    /**
+     * Google web search.
+     *
+     * @return the search engine
+     */
+    private SearchEngine googleWebSearch() {
+        return new SearchEngine("Google Web Search",
+                "Google's main search engine.", "http://google.com/search", "q");
+    }
 
-	/**
-	 * Gets the search engines.
-	 *
-	 * @return the search engines
-	 */
-	public Collection<SearchEngine> getSearchEngines() {
-		return this.searchEngines;
-	}
+    /**
+     * Yahoo web search.
+     *
+     * @return the search engine
+     */
+    private SearchEngine yahooWebSearch() {
+        return new SearchEngine("Yahoo! Web Search",
+                "Yahoo's web search engine.", "http://search.yahoo.com/search",
+                "p");
+    }
 
-	/**
-	 * Sets the search engines.
-	 *
-	 * @param searchEngines the new search engines
-	 */
-	public void setSearchEngines(Collection<SearchEngine> searchEngines) {
-		this.searchEngines = searchEngines;
-	}
+    /**
+     * Wikipedia search.
+     *
+     * @return the search engine
+     */
+    private SearchEngine wikipediaSearch() {
+        return new SearchEngine("Wikipedia",
+                "English Wikipedia article search.",
+                "http://en.wikipedia.org/wiki/Special:Search", "search");
+    }
 
-	/**
-	 * Gets the selected search engine.
-	 *
-	 * @return the selected search engine
-	 */
-	public SearchEngine getSelectedSearchEngine() {
-		return selectedSearchEngine;
-	}
+    /**
+     * Google blog search.
+     *
+     * @return the search engine
+     */
+    private SearchEngine googleBlogSearch() {
+        return new SearchEngine("Google Blog Search",
+                "Google's blog search engine.",
+                "http://blogsearch.google.com/blogsearch", "q");
+    }
 
-	/**
-	 * Sets the selected search engine.
-	 *
-	 * @param selectedSearchEngine the new selected search engine
-	 */
-	public void setSelectedSearchEngine(SearchEngine selectedSearchEngine) {
-		this.selectedSearchEngine = selectedSearchEngine;
-	}
+    /**
+     * Google code search.
+     *
+     * @return the search engine
+     */
+    private SearchEngine googleCodeSearch() {
+        return new SearchEngine("Google Code Search",
+                "Google's program source code search engine.",
+                "http://google.com/codesearch?lr=", "q");
+    }
 
-	/**
-	 * Gets the download directory.
-	 *
-	 * @return the download directory
-	 */
-	public File getDownloadDirectory() {
-		return downloadDirectory;
-	}
+    /**
+     * Google scholar search.
+     *
+     * @return the search engine
+     */
+    private SearchEngine googleScholarSearch() {
+        return new SearchEngine("Google Scholar Search",
+                "Google's search engine for scholarly literature.",
+                "http://scholar.google.com/scholar", "q");
+    }
 
-	/**
-	 * Sets the download directory.
-	 *
-	 * @param downloadDirectory the new download directory
-	 */
-	public void setDownloadDirectory(File downloadDirectory) {
-		this.downloadDirectory = downloadDirectory;
-	}
+    /**
+     * Save.
+     */
+    public void save() {
+        try {
+            StorageManager.getInstance().saveSettings(
+                    this.getClass().getSimpleName(), this);
+        } catch (IOException ioe) {
+            logger.log(Level.WARNING, "Unable to save settings: "
+                    + this.getClass().getSimpleName() + ".", ioe);
+        }
+    }
 
-	/**
-	 * Gets the open file directory.
-	 *
-	 * @return the open file directory
-	 */
-	public File getOpenFileDirectory() {
-		return openFileDirectory;
-	}
+    /**
+     * Gets the search engines.
+     *
+     * @return the search engines
+     */
+    public Collection<SearchEngine> getSearchEngines() {
+        return this.searchEngines;
+    }
 
-	/**
-	 * Sets the open file directory.
-	 *
-	 * @param openFileDirectory the new open file directory
-	 */
-	public void setOpenFileDirectory(File openFileDirectory) {
-		this.openFileDirectory = openFileDirectory;
-	}
+    /**
+     * Sets the search engines.
+     *
+     * @param searchEngines
+     *            the new search engines
+     */
+    public void setSearchEngines(Collection<SearchEngine> searchEngines) {
+        this.searchEngines = searchEngines;
+    }
+
+    /**
+     * Gets the selected search engine.
+     *
+     * @return the selected search engine
+     */
+    public SearchEngine getSelectedSearchEngine() {
+        return selectedSearchEngine;
+    }
+
+    /**
+     * Sets the selected search engine.
+     *
+     * @param selectedSearchEngine
+     *            the new selected search engine
+     */
+    public void setSelectedSearchEngine(SearchEngine selectedSearchEngine) {
+        this.selectedSearchEngine = selectedSearchEngine;
+    }
+
+    /**
+     * Gets the download directory.
+     *
+     * @return the download directory
+     */
+    public File getDownloadDirectory() {
+        return downloadDirectory;
+    }
+
+    /**
+     * Sets the download directory.
+     *
+     * @param downloadDirectory
+     *            the new download directory
+     */
+    public void setDownloadDirectory(File downloadDirectory) {
+        this.downloadDirectory = downloadDirectory;
+    }
+
+    /**
+     * Gets the open file directory.
+     *
+     * @return the open file directory
+     */
+    public File getOpenFileDirectory() {
+        return openFileDirectory;
+    }
+
+    /**
+     * Sets the open file directory.
+     *
+     * @param openFileDirectory
+     *            the new open file directory
+     */
+    public void setOpenFileDirectory(File openFileDirectory) {
+        this.openFileDirectory = openFileDirectory;
+    }
 }

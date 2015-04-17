@@ -9,7 +9,6 @@ package org.mozilla.javascript.ast;
 import org.mozilla.javascript.Node;
 import org.mozilla.javascript.Token;
 
-
 /**
  * Represents a symbol-table entry.
  */
@@ -17,33 +16,19 @@ public class Symbol {
 
     // One of Token.FUNCTION, Token.LP (for parameters), Token.VAR,
     // Token.LET, or Token.CONST
-    /** The decl type. */
     private int declType;
-    
-    /** The index. */
     private int index = -1;
-    
-    /** The name. */
     private String name;
-    
-    /** The node. */
     private Node node;
-    
-    /** The containing table. */
     private Scope containingTable;
 
-    /**
-     * Instantiates a new symbol.
-     */
     public Symbol() {
     }
 
     /**
-     * Constructs a new Symbol with a specific name and declaration type.
-     *
+     * Constructs a new Symbol with a specific name and declaration type
      * @param declType {@link Token#FUNCTION}, {@link Token#LP}
      * (for params), {@link Token#VAR}, {@link Token#LET} or {@link Token#CONST}
-     * @param name the name
      */
     public Symbol(int declType, String name) {
         setName(name);
@@ -51,18 +36,14 @@ public class Symbol {
     }
 
     /**
-     * Returns symbol declaration type.
-     *
-     * @return the decl type
+     * Returns symbol declaration type
      */
     public int getDeclType() {
         return declType;
     }
 
     /**
-     * Sets symbol declaration type.
-     *
-     * @param declType the new decl type
+     * Sets symbol declaration type
      */
     public void setDeclType(int declType) {
         if (!(declType == Token.FUNCTION
@@ -75,89 +56,65 @@ public class Symbol {
     }
 
     /**
-     * Returns symbol name.
-     *
-     * @return the name
+     * Returns symbol name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Sets symbol name.
-     *
-     * @param name the new name
+     * Sets symbol name
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Returns the node associated with this identifier.
-     *
-     * @return the node
+     * Returns the node associated with this identifier
      */
     public Node getNode() {
         return node;
     }
 
     /**
-     * Returns symbol's index in its scope.
-     *
-     * @return the index
+     * Returns symbol's index in its scope
      */
     public int getIndex() {
         return index;
     }
 
     /**
-     * Sets symbol's index in its scope.
-     *
-     * @param index the new index
+     * Sets symbol's index in its scope
      */
     public void setIndex(int index) {
         this.index = index;
     }
 
     /**
-     * Sets the node associated with this identifier.
-     *
-     * @param node the new node
+     * Sets the node associated with this identifier
      */
     public void setNode(Node node) {
         this.node = node;
     }
 
     /**
-     * Returns the Scope in which this symbol is entered.
-     *
-     * @return the containing table
+     * Returns the Scope in which this symbol is entered
      */
     public Scope getContainingTable() {
         return containingTable;
     }
 
     /**
-     * Sets this symbol's Scope.
-     *
-     * @param containingTable the new containing table
+     * Sets this symbol's Scope
      */
     public void setContainingTable(Scope containingTable) {
         this.containingTable = containingTable;
     }
 
-    /**
-     * Gets the decl type name.
-     *
-     * @return the decl type name
-     */
     public String getDeclTypeName() {
         return Token.typeToName(declType);
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();

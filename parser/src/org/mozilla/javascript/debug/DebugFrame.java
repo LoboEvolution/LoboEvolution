@@ -11,7 +11,6 @@ package org.mozilla.javascript.debug;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
-
 /**
 Interface to implement if the application is interested in receiving debug
 information during execution of a particular script or function.

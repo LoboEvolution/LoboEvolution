@@ -34,29 +34,18 @@ import org.w3c.css.sac.Condition;
 import com.steadystate.css.parser.Locatable;
 import com.steadystate.css.parser.LocatableImpl;
 
-
 /**
- * The Class AndConditionImpl.
  *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
 public class AndConditionImpl extends LocatableImpl implements CombinatorCondition, Serializable {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -3180583860092672742L;
 
-    /** The first condition_. */
     private Condition firstCondition_;
-    
-    /** The second condition_. */
     private Condition secondCondition_;
 
-    /**
-     * Sets the first condition.
-     *
-     * @param c1 the new first condition
-     */
     public void setFirstCondition(final Condition c1) {
         firstCondition_ = c1;
         if (c1 instanceof Locatable) {
@@ -67,50 +56,27 @@ public class AndConditionImpl extends LocatableImpl implements CombinatorConditi
         }
     }
 
-    /**
-     * Sets the second condition.
-     *
-     * @param c2 the new second condition
-     */
     public void setSecondCondition(final Condition c2) {
         secondCondition_ = c2;
     }
 
-    /**
-     * Instantiates a new and condition impl.
-     *
-     * @param c1 the c1
-     * @param c2 the c2
-     */
     public AndConditionImpl(final Condition c1, final Condition c2) {
         setFirstCondition(c1);
         setSecondCondition(c2);
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.Condition#getConditionType()
-     */
     public short getConditionType() {
         return Condition.SAC_AND_CONDITION;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.CombinatorCondition#getFirstCondition()
-     */
     public Condition getFirstCondition() {
         return firstCondition_;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.css.sac.CombinatorCondition#getSecondCondition()
-     */
     public Condition getSecondCondition() {
         return secondCondition_;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return getFirstCondition().toString() + getSecondCondition().toString();

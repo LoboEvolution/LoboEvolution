@@ -1,22 +1,16 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 2 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
-
-    You should have received a copy of the GNU General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either verion 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.gui;
 
@@ -37,157 +31,168 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
 
 /**
  * Dialog used in HTTP and proxy authentication.
  */
 public class AuthenticationDialog extends JDialog {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
-	/** The user name field. */
-	private final JTextField userNameField = new JTextField();
-	
-	/** The password field. */
-	private final JPasswordField passwordField = new JPasswordField();
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new authentication dialog.
-	 *
-	 * @param owner the owner
-	 * @throws HeadlessException the headless exception
-	 */
-	public AuthenticationDialog(Frame owner) throws HeadlessException {
-		super(owner);
-		this.init();
-	}
+    /** The user name field. */
+    private final JTextField userNameField = new JTextField();
 
-	/**
-	 * Instantiates a new authentication dialog.
-	 *
-	 * @param owner the owner
-	 * @throws HeadlessException the headless exception
-	 */
-	public AuthenticationDialog(Dialog owner) throws HeadlessException {
-		super(owner);
-		this.init();
-	}
+    /** The password field. */
+    private final JPasswordField passwordField = new JPasswordField();
 
-	/**
-	 * Inits the.
-	 */
-	private void init() {
-		Container contentPane = this.getContentPane();
-		contentPane.setLayout(new FlowLayout());
+    /**
+     * Instantiates a new authentication dialog.
+     *
+     * @param owner
+     *            the owner
+     * @throws HeadlessException
+     *             the headless exception
+     */
+    public AuthenticationDialog(Frame owner) throws HeadlessException {
+        super(owner);
+        this.init();
+    }
 
-		Box rootBox = new Box(BoxLayout.Y_AXIS);
-		rootBox.setBorder(new EmptyBorder(4, 4, 4, 4));
+    /**
+     * Instantiates a new authentication dialog.
+     *
+     * @param owner
+     *            the owner
+     * @throws HeadlessException
+     *             the headless exception
+     */
+    public AuthenticationDialog(Dialog owner) throws HeadlessException {
+        super(owner);
+        this.init();
+    }
 
-		Box userNameBox = new Box(BoxLayout.X_AXIS);
-		JLabel userNameLabel = new JLabel("User name:");
-		int unph = userNameLabel.getPreferredSize().height;
-		userNameLabel.setPreferredSize(new Dimension(100, unph));
-		userNameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		userNameBox.add(userNameLabel);
-		userNameBox.add(Box.createRigidArea(new Dimension(4, 1)));
-		userNameBox.add(this.userNameField);
-		userNameBox.setPreferredSize(new Dimension(300, unph + 4));
+    /**
+     * Inits the.
+     */
+    private void init() {
+        Container contentPane = this.getContentPane();
+        contentPane.setLayout(new FlowLayout());
 
-		Box passwordBox = new Box(BoxLayout.X_AXIS);
-		JLabel passwordLabel = new JLabel("Password:");
-		int pwph = passwordLabel.getPreferredSize().height;
-		passwordLabel.setPreferredSize(new Dimension(100, pwph));
-		passwordLabel.setHorizontalAlignment(JLabel.RIGHT);
-		passwordBox.add(passwordLabel);
-		passwordBox.add(Box.createRigidArea(new Dimension(4, 1)));
-		passwordBox.add(this.passwordField);
-		passwordBox.setPreferredSize(new Dimension(300, pwph + 4));
+        Box rootBox = new Box(BoxLayout.Y_AXIS);
+        rootBox.setBorder(new EmptyBorder(4, 4, 4, 4));
 
-		Box buttonBox = new Box(BoxLayout.X_AXIS);
-		JButton okButton = new JButton();
-		okButton.setAction(new OkAction());
-		okButton.setText("OK");
-		JButton cancelButton = new JButton();
-		cancelButton.setAction(new CancelAction());
-		cancelButton.setText("Cancel");
-		buttonBox.add(Box.createHorizontalGlue());
-		buttonBox.add(okButton);
-		buttonBox.add(Box.createHorizontalStrut(4));
-		buttonBox.add(cancelButton);
-		buttonBox.add(Box.createHorizontalGlue());
+        Box userNameBox = new Box(BoxLayout.X_AXIS);
+        JLabel userNameLabel = new JLabel("User name:");
+        int unph = userNameLabel.getPreferredSize().height;
+        userNameLabel.setPreferredSize(new Dimension(100, unph));
+        userNameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        userNameBox.add(userNameLabel);
+        userNameBox.add(Box.createRigidArea(new Dimension(4, 1)));
+        userNameBox.add(this.userNameField);
+        userNameBox.setPreferredSize(new Dimension(300, unph + 4));
 
-		rootBox.add(userNameBox);
-		rootBox.add(Box.createVerticalStrut(2));
-		rootBox.add(passwordBox);
-		rootBox.add(Box.createVerticalStrut(4));
-		rootBox.add(buttonBox);
+        Box passwordBox = new Box(BoxLayout.X_AXIS);
+        JLabel passwordLabel = new JLabel("Password:");
+        int pwph = passwordLabel.getPreferredSize().height;
+        passwordLabel.setPreferredSize(new Dimension(100, pwph));
+        passwordLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        passwordBox.add(passwordLabel);
+        passwordBox.add(Box.createRigidArea(new Dimension(4, 1)));
+        passwordBox.add(this.passwordField);
+        passwordBox.setPreferredSize(new Dimension(300, pwph + 4));
 
-		contentPane.add(rootBox);
-	}
+        Box buttonBox = new Box(BoxLayout.X_AXIS);
+        JButton okButton = new JButton();
+        okButton.setAction(new OkAction());
+        okButton.setText("OK");
+        JButton cancelButton = new JButton();
+        cancelButton.setAction(new CancelAction());
+        cancelButton.setText("Cancel");
+        buttonBox.add(Box.createHorizontalGlue());
+        buttonBox.add(okButton);
+        buttonBox.add(Box.createHorizontalStrut(4));
+        buttonBox.add(cancelButton);
+        buttonBox.add(Box.createHorizontalGlue());
 
-	/**
-	 * Sets the user name.
-	 *
-	 * @param userName the new user name
-	 */
-	public void setUserName(String userName) {
-		this.userNameField.setText(userName);
-		this.passwordField.grabFocus();
-	}
+        rootBox.add(userNameBox);
+        rootBox.add(Box.createVerticalStrut(2));
+        rootBox.add(passwordBox);
+        rootBox.add(Box.createVerticalStrut(4));
+        rootBox.add(buttonBox);
 
-	/** The authentication. */
-	private PasswordAuthentication authentication;
+        contentPane.add(rootBox);
+    }
 
-	/**
-	 * Gets the authentication.
-	 *
-	 * @return the authentication
-	 */
-	public PasswordAuthentication getAuthentication() {
-		return this.authentication;
-	}
+    /**
+     * Sets the user name.
+     *
+     * @param userName
+     *            the new user name
+     */
+    public void setUserName(String userName) {
+        this.userNameField.setText(userName);
+        this.passwordField.grabFocus();
+    }
 
-	/**
-	 * The Class OkAction.
-	 */
-	private class OkAction extends AbstractAction {
-		
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
+    /** The authentication. */
+    private PasswordAuthentication authentication;
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
-		public void actionPerformed(ActionEvent e) {
-			authentication = new PasswordAuthentication(
-					userNameField.getText(), passwordField.getPassword());
-			AuthenticationDialog.this.dispose();
-		}
-	}
+    /**
+     * Gets the authentication.
+     *
+     * @return the authentication
+     */
+    public PasswordAuthentication getAuthentication() {
+        return this.authentication;
+    }
 
-	/**
-	 * The Class CancelAction.
-	 */
-	private class CancelAction extends AbstractAction {
-		
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
+    /**
+     * The Class OkAction.
+     */
+    private class OkAction extends AbstractAction {
 
-		/* (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
-		public void actionPerformed(ActionEvent e) {
-			authentication = null;
-			AuthenticationDialog.this.dispose();
-		}
-	}
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
+
+        /*
+         * (non-Javadoc)
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            authentication = new PasswordAuthentication(
+                    userNameField.getText(), passwordField.getPassword());
+            AuthenticationDialog.this.dispose();
+        }
+    }
+
+    /**
+     * The Class CancelAction.
+     */
+    private class CancelAction extends AbstractAction {
+
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
+
+        /*
+         * (non-Javadoc)
+         * @see
+         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            authentication = null;
+            AuthenticationDialog.this.dispose();
+        }
+    }
 }

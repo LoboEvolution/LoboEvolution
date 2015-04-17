@@ -6,12 +6,7 @@
 
 package org.mozilla.javascript.xml;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.IdScriptableObject;
-import org.mozilla.javascript.NativeWith;
-import org.mozilla.javascript.Ref;
-import org.mozilla.javascript.Scriptable;
-
+import org.mozilla.javascript.*;
 
 /**
  *  This Interface describes what all XML objects (XML, XMLList) should have in common.
@@ -20,22 +15,12 @@ import org.mozilla.javascript.Scriptable;
 public abstract class XMLObject extends IdScriptableObject
 {
     
-    /** The Constant serialVersionUID. */
     static final long serialVersionUID = 8455156490438576500L;
     
-    /**
-     * Instantiates a new XML object.
-     */
     public XMLObject()
     {
     }
 
-    /**
-     * Instantiates a new XML object.
-     *
-     * @param scope the scope
-     * @param prototype the prototype
-     */
     public XMLObject(Scriptable scope, Scriptable prototype)
     {
         super(scope, prototype);
@@ -43,104 +28,54 @@ public abstract class XMLObject extends IdScriptableObject
 
     /**
      * Implementation of ECMAScript [[Has]].
-     *
-     * @param cx the cx
-     * @param id the id
-     * @return true, if successful
      */
     public abstract boolean has(Context cx, Object id);
 
     /**
      * Implementation of ECMAScript [[Get]].
-     *
-     * @param cx the cx
-     * @param id the id
-     * @return the object
      */
     public abstract Object get(Context cx, Object id);
 
     /**
      * Implementation of ECMAScript [[Put]].
-     *
-     * @param cx the cx
-     * @param id the id
-     * @param value the value
      */
     public abstract void put(Context cx, Object id, Object value);
 
     /**
      * Implementation of ECMAScript [[Delete]].
-     *
-     * @param cx the cx
-     * @param id the id
-     * @return true, if successful
      */
     public abstract boolean delete(Context cx, Object id);
 
 
-    /**
-     * Gets the function property.
-     *
-     * @param cx the cx
-     * @param name the name
-     * @return the function property
-     */
     public abstract Object getFunctionProperty(Context cx, String name);
 
-    /**
-     * Gets the function property.
-     *
-     * @param cx the cx
-     * @param id the id
-     * @return the function property
-     */
     public abstract Object getFunctionProperty(Context cx, int id);
 
     /**
      * Return an additional object to look for methods that runtime should
      * consider during method search. Return null if no such object available.
-     *
-     * @param cx the cx
-     * @return the extra method source
      */
     public abstract Scriptable getExtraMethodSource(Context cx);
 
     /**
      * Generic reference to implement x.@y, x..y etc.
-     *
-     * @param cx the cx
-     * @param elem the elem
-     * @param memberTypeFlags the member type flags
-     * @return the ref
      */
     public abstract Ref memberRef(Context cx, Object elem,
                                   int memberTypeFlags);
 
     /**
      * Generic reference to implement x::ns, x.@ns::y, x..@ns::y etc.
-     *
-     * @param cx the cx
-     * @param namespace the namespace
-     * @param elem the elem
-     * @param memberTypeFlags the member type flags
-     * @return the ref
      */
     public abstract Ref memberRef(Context cx, Object namespace, Object elem,
                                   int memberTypeFlags);
 
     /**
      * Wrap this object into NativeWith to implement the with statement.
-     *
-     * @param scope the scope
-     * @return the native with
      */
     public abstract NativeWith enterWith(Scriptable scope);
 
     /**
      * Wrap this object into NativeWith to implement the .() query.
-     *
-     * @param scope the scope
-     * @return the native with
      */
     public abstract NativeWith enterDotQuery(Scriptable scope);
 
@@ -157,7 +92,6 @@ public abstract class XMLObject extends IdScriptableObject
      * @param thisIsLeft if true, the object should calculate this + value
      *                   if false, the object should calculate value + this.
      * @param value the second argument for addition operation.
-     * @return the object
      */
     public Object addValues(Context cx, boolean thisIsLeft, Object value)
     {
@@ -166,9 +100,8 @@ public abstract class XMLObject extends IdScriptableObject
 
     /**
      * Gets the value returned by calling the typeof operator on this object.
-     *
-     * @return "xml" or "undefined" if {@link #avoidObjectDetection()} returns <code>true</code>
      * @see org.mozilla.javascript.ScriptableObject#getTypeOf()
+     * @return "xml" or "undefined" if {@link #avoidObjectDetection()} returns <code>true</code>
      */
     @Override
     public String getTypeOf()

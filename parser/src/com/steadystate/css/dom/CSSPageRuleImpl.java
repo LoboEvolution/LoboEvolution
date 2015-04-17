@@ -39,7 +39,6 @@ import org.w3c.dom.css.CSSStyleDeclaration;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.util.LangUtils;
 
-
 /**
  * Implementation of {@link CSSPageRule}.
  *
@@ -50,26 +49,12 @@ import com.steadystate.css.util.LangUtils;
  */
 public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -6007519872104320812L;
 
-    /** The ident_. */
     private String ident_;
-    
-    /** The pseudo page_. */
     private String pseudoPage_;
-    
-    /** The style_. */
     private CSSStyleDeclaration style_;
 
-    /**
-     * Instantiates a new CSS page rule impl.
-     *
-     * @param parentStyleSheet the parent style sheet
-     * @param parentRule the parent rule
-     * @param ident the ident
-     * @param pseudoPage the pseudo page
-     */
     public CSSPageRuleImpl(
             final CSSStyleSheetImpl parentStyleSheet,
             final CSSRule parentRule,
@@ -80,23 +65,14 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
         pseudoPage_ = pseudoPage;
     }
 
-    /**
-     * Instantiates a new CSS page rule impl.
-     */
     public CSSPageRuleImpl() {
         super();
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#getType()
-     */
     public short getType() {
         return PAGE_RULE;
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#getCssText()
-     */
     public String getCssText() {
         final String sel = getSelectorText();
         return "@page "
@@ -106,9 +82,6 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
             + "}";
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSRule#setCssText(java.lang.String)
-     */
     public void setCssText(final String cssText) throws DOMException {
         final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
         if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
@@ -148,57 +121,30 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
         }
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSPageRule#getSelectorText()
-     */
     public String getSelectorText() {
         return ((ident_ != null) ? ident_ : "")
             + ((pseudoPage_ != null) ? ":" + pseudoPage_ : "");
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSPageRule#setSelectorText(java.lang.String)
-     */
     public void setSelectorText(final String selectorText) throws DOMException {
     }
 
-    /* (non-Javadoc)
-     * @see org.w3c.dom.css.CSSPageRule#getStyle()
-     */
     public CSSStyleDeclaration getStyle() {
         return style_;
     }
 
-    /**
-     * Sets the ident.
-     *
-     * @param ident the new ident
-     */
     public void setIdent(final String ident) {
         ident_ = ident;
     }
 
-    /**
-     * Sets the pseudo page.
-     *
-     * @param pseudoPage the new pseudo page
-     */
     public void setPseudoPage(final String pseudoPage) {
         pseudoPage_ = pseudoPage;
     }
 
-    /**
-     * Sets the style.
-     *
-     * @param style the new style
-     */
     public void setStyle(final CSSStyleDeclarationImpl style) {
         style_ = style;
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -213,9 +159,6 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
             && LangUtils.equals(getStyle(), cpr.getStyle());
     }
 
-    /* (non-Javadoc)
-     * @see com.steadystate.css.dom.AbstractCSSRuleImpl#hashCode()
-     */
     @Override
     public int hashCode() {
         int hash = super.hashCode();
@@ -225,9 +168,6 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
         return hash;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return getCssText();

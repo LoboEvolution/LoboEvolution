@@ -9,7 +9,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.mozilla.javascript.commonjs.module.ModuleScript;
 
-
 /**
  * A module script provider that uses a module source provider to load modules
  * and caches the loaded modules. It strongly references the loaded modules,
@@ -20,11 +19,8 @@ import org.mozilla.javascript.commonjs.module.ModuleScript;
  */
 public class StrongCachingModuleScriptProvider extends CachingModuleScriptProviderBase
 {
-    
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** The modules. */
     private final Map<String, CachedModuleScript> modules =
         new ConcurrentHashMap<String, CachedModuleScript>(16, .75f, getConcurrencyLevel());
 
@@ -38,17 +34,11 @@ public class StrongCachingModuleScriptProvider extends CachingModuleScriptProvid
         super(moduleSourceProvider);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.commonjs.module.provider.CachingModuleScriptProviderBase#getLoadedModule(java.lang.String)
-     */
     @Override
     protected CachedModuleScript getLoadedModule(String moduleId) {
         return modules.get(moduleId);
     }
 
-    /* (non-Javadoc)
-     * @see org.mozilla.javascript.commonjs.module.provider.CachingModuleScriptProviderBase#putLoadedModule(java.lang.String, org.mozilla.javascript.commonjs.module.ModuleScript, java.lang.Object)
-     */
     @Override
     protected void putLoadedModule(String moduleId, ModuleScript moduleScript,
             Object validator) {

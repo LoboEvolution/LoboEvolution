@@ -30,37 +30,16 @@
 
 package org.mozilla.javascript.v8dtoa;
 
-
-/**
- * The Class CachedPowers.
- */
 public class CachedPowers {
 
 
-    /** The Constant kD_1_LOG2_10. */
     static final double kD_1_LOG2_10 = 0.30102999566398114;  //  1 / lg(10)
 
-    /**
-     * The Class CachedPower.
-     */
     static class CachedPower {
-        
-        /** The significand. */
         long significand;
-        
-        /** The binary exponent. */
         short binaryExponent;
-        
-        /** The decimal exponent. */
         short decimalExponent;
 
-        /**
-         * Instantiates a new cached power.
-         *
-         * @param significand the significand
-         * @param binaryExponent the binary exponent
-         * @param decimalExponent the decimal exponent
-         */
         CachedPower(long significand, short binaryExponent, short decimalExponent) {
             this.significand = significand;
             this.binaryExponent = binaryExponent;
@@ -69,15 +48,6 @@ public class CachedPowers {
     }
 
 
-    /**
-     * Gets the cached power.
-     *
-     * @param e the e
-     * @param alpha the alpha
-     * @param gamma the gamma
-     * @param c_mk the c_mk
-     * @return the cached power
-     */
     static int getCachedPower(int e, int alpha, int gamma, DiyFp c_mk) {
         int kQ = DiyFp.kSignificandSize;
         double k = Math.ceil((alpha - e + kQ - 1) * kD_1_LOG2_10);
@@ -95,10 +65,8 @@ public class CachedPowers {
     // \{GRISU_UINT64_C\((\w+), (\w+)\), (\-?\d+), (\-?\d+)\}
 
     // interval between entries  of the powers cache below
-    /** The Constant CACHED_POWERS_SPACING. */
     static final int CACHED_POWERS_SPACING = 8;
 
-    /** The Constant CACHED_POWERS. */
     static final CachedPower[] CACHED_POWERS = {
             new CachedPower(0xe61acf033d1a45dfL, (short)-1087, (short)-308),
             new CachedPower(0xab70fe17c79ac6caL, (short)-1060, (short)-300),
@@ -184,11 +152,9 @@ public class CachedPowers {
             new CachedPower(0xaf87023b9bf0ee6bL, (short)1066, (short)340)
     };
 
-    /** The Constant GRISU_CACHE_MAX_DISTANCE. */
     static final int GRISU_CACHE_MAX_DISTANCE = 27;
     // nb elements (8): 82
 
-    /** The Constant GRISU_CACHE_OFFSET. */
     static final int GRISU_CACHE_OFFSET = 308;
 
 

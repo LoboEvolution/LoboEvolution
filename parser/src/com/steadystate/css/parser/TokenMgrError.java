@@ -2,7 +2,6 @@
 /* JavaCCOptions: */
 package com.steadystate.css.parser;
 
-
 /** Token Manager Error. */
 public class TokenMgrError extends Error
 {
@@ -46,10 +45,7 @@ public class TokenMgrError extends Error
 
   /**
    * Replaces unprintable characters by their escaped (or unicode escaped)
-   * equivalents in the given string.
-   *
-   * @param str the str
-   * @return the string
+   * equivalents in the given string
    */
   protected static final String addEscapes(String str) {
     StringBuffer retval = new StringBuffer();
@@ -107,14 +103,6 @@ public class TokenMgrError extends Error
    *    errorAfter  : prefix that was seen before this error occurred
    *    curchar     : the offending character
    * Note: You can customize the lexical error message by modifying this method.
-   *
-   * @param EOFSeen the EOF seen
-   * @param lexState the lex state
-   * @param errorLine the error line
-   * @param errorColumn the error column
-   * @param errorAfter the error after
-   * @param curChar the cur char
-   * @return the string
    */
   protected static String LexicalError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar) {
     return("Lexical error at line " +
@@ -128,12 +116,10 @@ public class TokenMgrError extends Error
    * You can also modify the body of this method to customize your error messages.
    * For example, cases like LOOP_DETECTED and INVALID_LEXICAL_STATE are not
    * of end-users concern, so you can return something like :
-   * 
-   *     "Internal Error : Please file a bug report .... "
-   * 
-   * from this method for such cases in the release version of your parser.
    *
-   * @return the message
+   *     "Internal Error : Please file a bug report .... "
+   *
+   * from this method for such cases in the release version of your parser.
    */
   public String getMessage() {
     return super.getMessage();
@@ -147,30 +133,15 @@ public class TokenMgrError extends Error
   public TokenMgrError() {
   }
 
-  /**
-   *  Constructor with message and reason.
-   *
-   * @param message the message
-   * @param reason the reason
-   */
+  /** Constructor with message and reason. */
   public TokenMgrError(String message, int reason) {
     super(message);
     errorCode = reason;
   }
 
-  /**
-   *  Full Constructor.
-   *
-   * @param EOFSeen the EOF seen
-   * @param lexState the lex state
-   * @param errorLine the error line
-   * @param errorColumn the error column
-   * @param errorAfter the error after
-   * @param curChar the cur char
-   * @param reason the reason
-   */
+  /** Full Constructor. */
   public TokenMgrError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar, int reason) {
     this(LexicalError(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
   }
 }
-/* JavaCC - OriginalChecksum=0fca2ea3b7aa64f172622ade9b5d9b48 (do not edit this line) */
+/* JavaCC - OriginalChecksum=6447476b04c31f90e1dd60657d876567 (do not edit this line) */

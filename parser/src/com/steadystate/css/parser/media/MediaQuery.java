@@ -33,45 +33,22 @@ import java.util.List;
 import com.steadystate.css.dom.Property;
 import com.steadystate.css.parser.LocatableImpl;
 
-
 /**
- * The Class MediaQuery.
- *
  * @author rbri
  */
 public class MediaQuery extends LocatableImpl implements Serializable {
 
-    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 456776383828897471L;
 
-    /** The media_. */
     private String media_;
-    
-    /** The properties_. */
     private List<Property> properties_;
-    
-    /** The is only_. */
     private boolean isOnly_;
-    
-    /** The is not_. */
     private boolean isNot_;
 
-    /**
-     * Instantiates a new media query.
-     *
-     * @param media the media
-     */
     public MediaQuery(final String media) {
         this(media, false, false);
     }
 
-    /**
-     * Instantiates a new media query.
-     *
-     * @param media the media
-     * @param isOnly the is only
-     * @param isNot the is not
-     */
     public MediaQuery(final String media, final boolean isOnly, final boolean isNot) {
         setMedia(media);
         properties_ = new ArrayList<Property>(10);
@@ -79,45 +56,22 @@ public class MediaQuery extends LocatableImpl implements Serializable {
         isNot_ = isNot;
     }
 
-    /**
-     * Gets the media.
-     *
-     * @return the media
-     */
     public String getMedia() {
         return media_;
     }
 
-    /**
-     * Sets the media.
-     *
-     * @param media the new media
-     */
     public void setMedia(final String media) {
         media_ = media;
     }
 
-    /**
-     * Gets the properties.
-     *
-     * @return the properties
-     */
     public List<Property> getProperties() {
         return properties_;
     }
 
-    /**
-     * Adds the media property.
-     *
-     * @param mp the mp
-     */
     public void addMediaProperty(final Property mp) {
         properties_.add(mp);
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         final StringBuilder result = new StringBuilder();
