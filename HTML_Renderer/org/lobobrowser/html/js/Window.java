@@ -40,6 +40,7 @@ import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.domimpl.HTMLOptionElementImpl;
 import org.lobobrowser.html.domimpl.HTMLScriptElementImpl;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
+import org.lobobrowser.html.jsimpl.ConsoleImpl;
 import org.lobobrowser.html.w3c.ApplicationCache;
 import org.lobobrowser.html.w3c.BarProp;
 import org.lobobrowser.html.w3c.HTMLCollection;
@@ -741,6 +742,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
                 windowScope = (ScriptableObject) JavaScript.getInstance()
                         .getJavascriptObject(this, null);
                 ctx.initStandardObjects(windowScope);
+                Object consoleJSObj = JavaScript.getInstance().getJavascriptObject(new ConsoleImpl(), windowScope);
+                ScriptableObject.putProperty(windowScope, "console", consoleJSObj);
                 this.windowScope = windowScope;
                 return windowScope;
             } finally {
