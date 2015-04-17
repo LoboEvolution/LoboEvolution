@@ -1,22 +1,16 @@
 /*
-    GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU LESSER GENERAL LICENSE Copyright (C) 2006 The Lobo Project.
+ * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
+ * can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version. This
+ * library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Lesser General License for more
+ * details. You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Apr 16, 2005
@@ -24,363 +18,379 @@
 package org.lobobrowser.html.renderstate;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.util.Optional;
 
 import org.lobobrowser.html.style.BackgroundInfo;
 import org.lobobrowser.html.style.BorderInfo;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.WordInfo;
 
-
 /**
  * The Interface RenderState.
- *
- * @author J. H. S.
  */
 public interface RenderState {
-	
-	/** The Constant MASK_TEXTDECORATION_UNDERLINE. */
-	public static final int MASK_TEXTDECORATION_UNDERLINE = 1;
-	
-	/** The Constant MASK_TEXTDECORATION_OVERLINE. */
-	public static final int MASK_TEXTDECORATION_OVERLINE = 2;
-	
-	/** The Constant MASK_TEXTDECORATION_LINE_THROUGH. */
-	public static final int MASK_TEXTDECORATION_LINE_THROUGH = 4;
-	
-	/** The Constant MASK_TEXTDECORATION_BLINK. */
-	public static final int MASK_TEXTDECORATION_BLINK = 8;
 
-	/** The Constant TEXTTRANSFORM_NONE. */
-	public static final int TEXTTRANSFORM_NONE = 0;
-	
-	/** The Constant TEXTTRANSFORM_CAPITALIZE. */
-	public static final int TEXTTRANSFORM_CAPITALIZE = 1;
-	
-	/** The Constant TEXTTRANSFORM_UPPERCASE. */
-	public static final int TEXTTRANSFORM_UPPERCASE = 2;
-	
-	/** The Constant TEXTTRANSFORM_LOWERCASE. */
-	public static final int TEXTTRANSFORM_LOWERCASE = 4;
-	// TODO how to handle style cascading?
-	// public static final int TEXTTRANSFORM_INHERIT = 8;
+    /** The mask textdecoration underline. */
+    int MASK_TEXTDECORATION_UNDERLINE = 1;
 
-	/** The Constant DISPLAY_NONE. */
-	public static final int DISPLAY_NONE = 0;
-	
-	/** The Constant DISPLAY_INLINE. */
-	public static final int DISPLAY_INLINE = 1;
-	
-	/** The Constant DISPLAY_BLOCK. */
-	public static final int DISPLAY_BLOCK = 2;
-	
-	/** The Constant DISPLAY_LIST_ITEM. */
-	public static final int DISPLAY_LIST_ITEM = 3;
-	
-	/** The Constant DISPLAY_TABLE_ROW. */
-	public static final int DISPLAY_TABLE_ROW = 4;
-	
-	/** The Constant DISPLAY_TABLE_CELL. */
-	public static final int DISPLAY_TABLE_CELL = 5;
-	
-	/** The Constant DISPLAY_TABLE. */
-	public static final int DISPLAY_TABLE = 6;
-	
-	/** The Constant DISPLAY_TABLE_CAPTION. */
-	public static final int DISPLAY_TABLE_CAPTION = 7;
-	
-	/** The Constant DISPLAY_INLINE_BLOCK. */
-	public static final int DISPLAY_INLINE_BLOCK = 8;
+    /** The mask textdecoration overline. */
+    int MASK_TEXTDECORATION_OVERLINE = 2;
 
-	/** The Constant WS_NORMAL. */
-	public static final int WS_NORMAL = 0;
-	
-	/** The Constant WS_PRE. */
-	public static final int WS_PRE = 1;
-	
-	/** The Constant WS_NOWRAP. */
-	public static final int WS_NOWRAP = 2;
+    /** The mask textdecoration line through. */
+    int MASK_TEXTDECORATION_LINE_THROUGH = 4;
 
-	/** The Constant VISIBILITY_VISIBLE. */
-	public static final int VISIBILITY_VISIBLE = 0;
-	
-	/** The Constant VISIBILITY_HIDDEN. */
-	public static final int VISIBILITY_HIDDEN = 1;
-	
-	/** The Constant VISIBILITY_COLLAPSE. */
-	public static final int VISIBILITY_COLLAPSE = 2;
+    /** The mask textdecoration blink. */
+    int MASK_TEXTDECORATION_BLINK = 8;
 
-	/** The Constant POSITION_STATIC. */
-	public static final int POSITION_STATIC = 0;
-	
-	/** The Constant POSITION_ABSOLUTE. */
-	public static final int POSITION_ABSOLUTE = 1;
-	
-	/** The Constant POSITION_RELATIVE. */
-	public static final int POSITION_RELATIVE = 2;
-	
-	/** The Constant POSITION_FIXED. */
-	public static final int POSITION_FIXED = 3;
+    /** The texttransform none. */
+    int TEXTTRANSFORM_NONE = 0;
 
-	/** The Constant FLOAT_NONE. */
-	public static final int FLOAT_NONE = 0;
-	
-	/** The Constant FLOAT_LEFT. */
-	public static final int FLOAT_LEFT = 1;
-	
-	/** The Constant FLOAT_RIGHT. */
-	public static final int FLOAT_RIGHT = 2;
+    /** The texttransform capitalize. */
+    int TEXTTRANSFORM_CAPITALIZE = 1;
 
-	/** The Constant OVERFLOW_NONE. */
-	public static final int OVERFLOW_NONE = 0;
-	
-	/** The Constant OVERFLOW_SCROLL. */
-	public static final int OVERFLOW_SCROLL = 1;
-	
-	/** The Constant OVERFLOW_AUTO. */
-	public static final int OVERFLOW_AUTO = 2;
-	
-	/** The Constant OVERFLOW_HIDDEN. */
-	public static final int OVERFLOW_HIDDEN = 3;
-	
-	/** The Constant OVERFLOW_VISIBLE. */
-	public static final int OVERFLOW_VISIBLE = 4;
+    /** The texttransform uppercase. */
+    int TEXTTRANSFORM_UPPERCASE = 2;
 
-	/**
-	 * Gets the position.
-	 *
-	 * @return the position
-	 */
-	public int getPosition();
+    /** The texttransform lowercase. */
+    int TEXTTRANSFORM_LOWERCASE = 4;
+    // TODO how to handle style cascading?
+    // int TEXTTRANSFORM_INHERIT = 8;
 
-	/**
-	 * Gets the float.
-	 *
-	 * @return the float
-	 */
-	public int getFloat();
+    /** The display none. */
+    int DISPLAY_NONE = 0;
 
-	/**
-	 * Gets the visibility.
-	 *
-	 * @return the visibility
-	 */
-	public int getVisibility();
+    /** The display inline. */
+    int DISPLAY_INLINE = 1;
 
-	/**
-	 * Gets the font.
-	 *
-	 * @return the font
-	 */
-	public Font getFont();
+    /** The display block. */
+    int DISPLAY_BLOCK = 2;
 
-	/**
-	 * Gets the font base.
-	 *
-	 * @return the font base
-	 */
-	public int getFontBase();
+    /** The display list item. */
+    int DISPLAY_LIST_ITEM = 3;
 
-	/**
-	 * Gets the word info.
-	 *
-	 * @param word the word
-	 * @return the word info
-	 */
-	public WordInfo getWordInfo(String word);
+    /** The display table row. */
+    int DISPLAY_TABLE_ROW = 4;
 
-	/**
-	 * Gets the color.
-	 *
-	 * @return the color
-	 */
-	public Color getColor();
+    /** The display table cell. */
+    int DISPLAY_TABLE_CELL = 5;
 
-	/**
-	 * Gets the background color.
-	 *
-	 * @return the background color
-	 */
-	public Color getBackgroundColor();
+    /** The display table. */
+    int DISPLAY_TABLE = 6;
 
-	/**
-	 * Gets the text background color.
-	 *
-	 * @return the text background color
-	 */
-	public Color getTextBackgroundColor();
+    /** The display table caption. */
+    int DISPLAY_TABLE_CAPTION = 7;
 
-	/**
-	 * Gets the background info.
-	 *
-	 * @return the background info
-	 */
-	public BackgroundInfo getBackgroundInfo();
+    /** The display inline block. */
+    int DISPLAY_INLINE_BLOCK = 8;
 
-	/**
-	 * Gets the overlay color.
-	 *
-	 * @return the overlay color
-	 */
-	public Color getOverlayColor();
+    /** The ws normal. */
+    int WS_NORMAL = 0;
 
-	/**
-	 * Gets the text transform.
-	 *
-	 * @return the text transform
-	 */
-	public int getTextTransform();
+    /** The ws pre. */
+    int WS_PRE = 1;
 
-	/**
-	 * Gets the text decoration mask.
-	 *
-	 * @return the text decoration mask
-	 */
-	public int getTextDecorationMask();
+    /** The ws nowrap. */
+    int WS_NOWRAP = 2;
 
-	/**
-	 * Gets the font metrics.
-	 *
-	 * @return the font metrics
-	 */
-	public FontMetrics getFontMetrics();
+    /** The visibility visible. */
+    int VISIBILITY_VISIBLE = 0;
 
-	/**
-	 * Gets the blank width.
-	 *
-	 * @return the blank width
-	 */
-	public int getBlankWidth();
+    /** The visibility hidden. */
+    int VISIBILITY_HIDDEN = 1;
 
-	/**
-	 * Checks if is highlight.
-	 *
-	 * @return true, if is highlight
-	 */
-	public boolean isHighlight();
+    /** The visibility collapse. */
+    int VISIBILITY_COLLAPSE = 2;
 
-	/**
-	 * Sets the highlight.
-	 *
-	 * @param highlight the new highlight
-	 */
-	public void setHighlight(boolean highlight);
+    /** The position static. */
+    int POSITION_STATIC = 0;
 
-	/**
-	 * Gets the previous render state.
-	 *
-	 * @return the previous render state
-	 */
-	public RenderState getPreviousRenderState();
+    /** The position absolute. */
+    int POSITION_ABSOLUTE = 1;
 
-	/**
-	 * Gets the align x percent.
-	 *
-	 * @return the align x percent
-	 */
-	public int getAlignXPercent();
+    /** The position relative. */
+    int POSITION_RELATIVE = 2;
 
-	/**
-	 * Gets the align y percent.
-	 *
-	 * @return the align y percent
-	 */
-	public int getAlignYPercent();
+    /** The position fixed. */
+    int POSITION_FIXED = 3;
 
-	/**
-	 * Gets the count.
-	 *
-	 * @param counter the counter
-	 * @param nesting the nesting
-	 * @return the count
-	 */
-	public int getCount(String counter, int nesting);
+    /** The float none. */
+    int FLOAT_NONE = 0;
 
-	/**
-	 * Gets the display.
-	 *
-	 * @return the display
-	 */
-	public int getDisplay();
+    /** The float left. */
+    int FLOAT_LEFT = 1;
 
-	/**
-	 * Reset count.
-	 *
-	 * @param counter the counter
-	 * @param nesting the nesting
-	 * @param value the value
-	 */
-	public void resetCount(String counter, int nesting, int value);
+    /** The float right. */
+    int FLOAT_RIGHT = 2;
 
-	/**
-	 * Increment count.
-	 *
-	 * @param counter the counter
-	 * @param nesting the nesting
-	 * @return the int
-	 */
-	public int incrementCount(String counter, int nesting);
+    /** The overflow none. */
+    int OVERFLOW_NONE = 0;
 
-	/**
-	 * Gets the text indent.
-	 *
-	 * @param availWidth the avail width
-	 * @return the text indent
-	 */
-	public int getTextIndent(int availWidth);
+    /** The overflow scroll. */
+    int OVERFLOW_SCROLL = 1;
 
-	/**
-	 * Gets the text indent text.
-	 *
-	 * @return the text indent text
-	 */
-	public String getTextIndentText();
+    /** The overflow auto. */
+    int OVERFLOW_AUTO = 2;
 
-	/**
-	 * Gets the white space.
-	 *
-	 * @return the white space
-	 */
-	public int getWhiteSpace();
+    /** The overflow hidden. */
+    int OVERFLOW_HIDDEN = 3;
 
-	/**
-	 * Gets the margin insets.
-	 *
-	 * @return the margin insets
-	 */
-	public HtmlInsets getMarginInsets();
+    /** The overflow visible. */
+    int OVERFLOW_VISIBLE = 4;
 
-	/**
-	 * Gets the padding insets.
-	 *
-	 * @return the padding insets
-	 */
-	public HtmlInsets getPaddingInsets();
+    /**
+     * Gets the position.
+     *
+     * @return the position
+     */
+    int getPosition();
 
-	/**
-	 * Gets the overflow x.
-	 *
-	 * @return the overflow x
-	 */
-	public int getOverflowX();
+    /**
+     * Gets the float.
+     *
+     * @return the float
+     */
+    int getFloat();
 
-	/**
-	 * Gets the overflow y.
-	 *
-	 * @return the overflow y
-	 */
-	public int getOverflowY();
+    /**
+     * Gets the visibility.
+     *
+     * @return the visibility
+     */
+    int getVisibility();
 
-	/**
-	 * Invalidate.
-	 */
-	public void invalidate();
+    /**
+     * Gets the font.
+     *
+     * @return the font
+     */
+    Font getFont();
 
-	/**
-	 * Gets the border info.
-	 *
-	 * @return the border info
-	 */
-	public BorderInfo getBorderInfo();
+    /**
+     * Gets the font base.
+     *
+     * @return the font base
+     */
+    int getFontBase();
+
+    /**
+     * Gets the word info.
+     *
+     * @param word
+     *            the word
+     * @return the word info
+     */
+    WordInfo getWordInfo(String word);
+
+    /**
+     * Gets the color.
+     *
+     * @return the color
+     */
+    Color getColor();
+
+    /**
+     * Gets the background color.
+     *
+     * @return the background color
+     */
+    Color getBackgroundColor();
+
+    /**
+     * Gets the text background color.
+     *
+     * @return the text background color
+     */
+    Color getTextBackgroundColor();
+
+    /**
+     * Gets the background info.
+     *
+     * @return the background info
+     */
+    BackgroundInfo getBackgroundInfo();
+
+    /**
+     * Gets the overlay color.
+     *
+     * @return the overlay color
+     */
+    Color getOverlayColor();
+
+    /**
+     * Gets the text transform.
+     *
+     * @return the text transform
+     */
+    int getTextTransform();
+
+    /**
+     * Gets the text decoration mask.
+     *
+     * @return the text decoration mask
+     */
+    int getTextDecorationMask();
+
+    /**
+     * Gets the font metrics.
+     *
+     * @return the font metrics
+     */
+    FontMetrics getFontMetrics();
+
+    /**
+     * Gets the blank width.
+     *
+     * @return the blank width
+     */
+    int getBlankWidth();
+
+    /**
+     * Checks if is highlight.
+     *
+     * @return true, if is highlight
+     */
+    boolean isHighlight();
+
+    /**
+     * Sets the highlight.
+     *
+     * @param highlight the new highlight
+     */
+    void setHighlight(boolean highlight);
+
+    /**
+     * Gets the previous render state.
+     *
+     * @return the previous render state
+     */
+    RenderState getPreviousRenderState();
+
+    /**
+     * Gets the align x percent.
+     *
+     * @return the align x percent
+     */
+    int getAlignXPercent();
+
+    /**
+     * Gets the align y percent.
+     *
+     * @return the align y percent
+     */
+    int getAlignYPercent();
+
+    /**
+     * Gets the count.
+     *
+     * @param counter
+     *            the counter
+     * @param nesting
+     *            the nesting
+     * @return the count
+     */
+    int getCount(String counter, int nesting);
+
+    /**
+     * Gets the display.
+     *
+     * @return the display
+     */
+    int getDisplay();
+
+    /**
+     * Reset count.
+     *
+     * @param counter
+     *            the counter
+     * @param nesting
+     *            the nesting
+     * @param value
+     *            the value
+     */
+    void resetCount(String counter, int nesting, int value);
+
+    /**
+     * Increment count.
+     *
+     * @param counter
+     *            the counter
+     * @param nesting
+     *            the nesting
+     * @return the int
+     */
+    int incrementCount(String counter, int nesting);
+
+    /**
+     * Gets the text indent.
+     *
+     * @param availWidth
+     *            the avail width
+     * @return the text indent
+     */
+    int getTextIndent(int availWidth);
+
+    /**
+     * Gets the text indent text.
+     *
+     * @return the text indent text
+     */
+    String getTextIndentText();
+
+    /**
+     * Gets the white space.
+     *
+     * @return the white space
+     */
+    int getWhiteSpace();
+
+    /**
+     * Gets the margin insets.
+     *
+     * @return the margin insets
+     */
+    HtmlInsets getMarginInsets();
+
+    /**
+     * Gets the padding insets.
+     *
+     * @return the padding insets
+     */
+    HtmlInsets getPaddingInsets();
+
+    /**
+     * Gets the overflow x.
+     *
+     * @return the overflow x
+     */
+    int getOverflowX();
+
+    /**
+     * Gets the overflow y.
+     *
+     * @return the overflow y
+     */
+    int getOverflowY();
+
+    /**
+     * Invalidate.
+     */
+    void invalidate();
+
+    /**
+     * Gets the border info.
+     *
+     * @return the border info
+     */
+    BorderInfo getBorderInfo();
+
+    /**
+     * Gets the cursor.
+     *
+     * @return the cursor
+     */
+    Optional<Cursor> getCursor();
+    
 }
