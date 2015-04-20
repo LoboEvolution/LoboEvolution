@@ -21,12 +21,8 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.ImageObserver;
 
-import org.lobobrowser.html.dombl.ImageEvent;
-import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.RenderableSpot;
@@ -35,8 +31,7 @@ import org.lobobrowser.html.style.HtmlValues;
 /**
  * The Class ImgControl.
  */
-public class ImgControl extends BaseControl implements ImageListener,
-MouseMotionListener {
+public class ImgControl extends BaseControl {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
@@ -70,7 +65,7 @@ MouseMotionListener {
 
     /** The image height. */
     private int imageWidth, imageHeight;
-
+    
     /**
      * Instantiates a new img control.
      *
@@ -79,12 +74,21 @@ MouseMotionListener {
      */
     public ImgControl(HTMLImageElementImpl modelNode) {
         super(modelNode);
-        imageHeight = modelNode.getHeight();
-        imageWidth = modelNode.getWidth();
+        
+        if(modelNode.getHeight()>0){
+            imageHeight = modelNode.getHeight();
+        }else{
+            imageHeight = 100;
+        }
+        
+        if(modelNode.getHeight()>0){
+            imageWidth = modelNode.getWidth();
+        }else{
+            imageWidth = 100;
+        }
+        
         align = modelNode.getAlign();
         alt = modelNode.getAlt();
-        modelNode.addImageListener(this);
-        addMouseMotionListener(this);
     }
 
     /*
@@ -299,52 +303,10 @@ MouseMotionListener {
 
     /*
      * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.dombl.ImageListener#imageLoaded(org.lobobrowser.html
-     * .dombl.ImageEvent)
-     */
-    @Override
-    public void imageLoaded(ImageEvent event) {
-        // Implementation of ImageListener. Invoked in a request thread most
-        // likely.
-        Image image = event.image;
-        this.image = image;
-        int width = image.getWidth(this);
-        int height = image.getHeight(this);
-        if ((width != -1) && (height != -1)) {
-            this.imageUpdate(image, width, height);
-        }
-    }
-
-    /*
-     * (non-Javadoc)
      * @see java.awt.Component#toString()
      */
     @Override
     public String toString() {
         return "ImgControl[src=" + this.lastSrc + "]";
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent)
-     */
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        imageX = e.getX();
-        imageY = e.getY();
-        repaint();
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
-     */
-    @Override
-    public void mouseMoved(MouseEvent arg0) {
-        // TODO Auto-generated method stub
-
     }
 }
