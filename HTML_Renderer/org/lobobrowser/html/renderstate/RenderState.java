@@ -393,4 +393,11 @@ public interface RenderState {
      */
     Optional<Cursor> getCursor();
     
+    /**
+     * Gets the cursor.
+     *
+     * @return the cursor
+     */
+    void setCursor(Optional<Cursor> cursor);
+    
 }

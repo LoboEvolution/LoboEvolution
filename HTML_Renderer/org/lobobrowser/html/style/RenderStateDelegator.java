@@ -212,4 +212,9 @@ public abstract class RenderStateDelegator implements RenderState {
     public Optional<Cursor> getCursor() {
         return this.delegate.getCursor();
       }
+    
+    @Override
+    public void setCursor(Optional<Cursor> cursor) {
+        this.delegate.setCursor(cursor);
+      }
 }

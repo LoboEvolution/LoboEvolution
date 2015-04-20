@@ -15,9 +15,11 @@
 package org.lobobrowser.html.domimpl;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +28,7 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.renderstate.ColorRenderState;
+import org.lobobrowser.html.renderstate.CursorRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.renderstate.TextDecorationRenderState;
 import org.lobobrowser.html.style.CSSUtilities;
@@ -413,12 +416,6 @@ HTMLLinkElement {
         return Color.BLUE;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
-     * .html.renderstate.RenderState)
-     */
     @Override
     protected RenderState createRenderState(RenderState prevRenderState) {
         if (this.hasAttribute(HtmlAttributeProperties.HREF)) {
@@ -426,6 +423,8 @@ HTMLLinkElement {
                     RenderState.MASK_TEXTDECORATION_UNDERLINE);
             prevRenderState = new ColorRenderState(prevRenderState,
                     this.getLinkColor());
+            prevRenderState = new CursorRenderState(prevRenderState,
+                    Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)));
         }
         return super.createRenderState(prevRenderState);
     }
@@ -436,9 +435,6 @@ HTMLLinkElement {
      */
     @Override
     public String toString() {
-        // Javascript code often depends on this being exactly href. See
-        // js9.html.
-        // To change, perhaps add method to AbstractScriptableDelegate.
         return this.getHref();
     }
 

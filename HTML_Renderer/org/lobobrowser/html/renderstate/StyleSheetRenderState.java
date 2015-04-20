@@ -111,6 +111,8 @@ public class StyleSheetRenderState implements RenderState {
 
     /** The i highlight. */
     private boolean iHighlight;
+    
+    private Optional<Cursor> cursor;
 
     /** The i background info. */
     protected BackgroundInfo iBackgroundInfo = INVALID_BACKGROUND_INFO;
@@ -1344,35 +1346,53 @@ public class StyleSheetRenderState implements RenderState {
         this.borderInfo = binfo;
         return binfo;
     }
+    
+    @Override
+    public void setCursor(Optional<Cursor> cursor) {
+       this.cursor = cursor;
+        
+    }
 
    @Override
-   public Optional<Cursor> getCursor() {
-       Optional<Cursor> prevCursorOpt = Optional.empty();
-       AbstractCSS2Properties props = this.getCssProperties();
-       if (props == null) {
-         return prevCursorOpt;
-       } else {
-         String cursor = props.getPropertyValue("cursor");
-         if (cursor == null) {
-           return prevCursorOpt;
-         } else {
-           String cursorTL = cursor.toLowerCase();
-           if ("default".equals(cursorTL)) {
-             return Optional.of(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-           } else if ("pointer".equals(cursorTL)) {
-             return Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-           } else if ("crosshair".equals(cursorTL)) {
-             return Optional.of(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
-           } else if ("move".equals(cursorTL)) {
-             return Optional.of(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
-           } else if ("text".equals(cursorTL)) {
-             return Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-           } else if ("wait".equals(cursorTL)) {
-             return Optional.of(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-           } else {
-             return prevCursorOpt;
-           }
-         }
-       }
-     }
+    public Optional<Cursor> getCursor() {
+
+        Optional<Cursor> prevCursorOpt = Optional.empty();
+        AbstractCSS2Properties props = this.getCssProperties();
+
+        if (this.cursor != null) {
+            prevCursorOpt = this.cursor;
+        }
+
+        if (props == null) {
+            return prevCursorOpt;
+        } else {
+            String cursor = props.getPropertyValue("cursor");
+            if (cursor == null) {
+                return prevCursorOpt;
+            } else {
+                String cursorTL = cursor.toLowerCase();
+                if ("default".equals(cursorTL)) {
+                    return Optional.of(Cursor
+                            .getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+                } else if ("pointer".equals(cursorTL)) {
+                    return Optional.of(Cursor
+                            .getPredefinedCursor(Cursor.HAND_CURSOR));
+                } else if ("crosshair".equals(cursorTL)) {
+                    return Optional.of(Cursor
+                            .getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+                } else if ("move".equals(cursorTL)) {
+                    return Optional.of(Cursor
+                            .getPredefinedCursor(Cursor.MOVE_CURSOR));
+                } else if ("text".equals(cursorTL)) {
+                    return Optional.of(Cursor
+                            .getPredefinedCursor(Cursor.TEXT_CURSOR));
+                } else if ("wait".equals(cursorTL)) {
+                    return Optional.of(Cursor
+                            .getPredefinedCursor(Cursor.WAIT_CURSOR));
+                } else {
+                    return prevCursorOpt;
+                }
+            }
+        }
+    }
 }
