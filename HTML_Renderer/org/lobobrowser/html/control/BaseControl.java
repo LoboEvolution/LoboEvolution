@@ -59,30 +59,16 @@ abstract class BaseControl extends JComponent implements UIControl {
         this.controlElement = modelNode;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderer.UIControl#getComponent()
-     */
     @Override
     public Component getComponent() {
         return this;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.renderer.UIControl#setRUIControl(org.lobobrowser.html
-     * .control.RUIControl)
-     */
     @Override
     public void setRUIControl(RUIControl ruicontrol) {
         this.ruicontrol = ruicontrol;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderer.UIControl#getVAlign()
-     */
     @Override
     public int getVAlign() {
         return RElement.VALIGN_BASELINE;
@@ -103,19 +89,11 @@ abstract class BaseControl extends JComponent implements UIControl {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.render.UIControl#getBackgroundColor()
-     */
     @Override
     public Color getBackgroundColor() {
         return this.getBackground();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderer.UIControl#reset(int, int)
-     */
     @Override
     public void reset(int availWidth, int availHeight) {
     }

@@ -22,6 +22,10 @@ import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.ImageObserver;
+import java.io.IOException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
 
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.renderer.RElement;
@@ -60,57 +64,64 @@ public class ImgControl extends BaseControl {
     /** The alt. */
     private String alt;
 
-    /** The image y. */
-    private int imageX, imageY;
-
     /** The image height. */
     private int imageWidth, imageHeight;
-    
+
     /**
      * Instantiates a new img control.
      *
      * @param modelNode
      *            the model node
+     * @throws IOException
      */
     public ImgControl(HTMLImageElementImpl modelNode) {
         super(modelNode);
-        
-        if(modelNode.getHeight()>0){
-            imageHeight = modelNode.getHeight();
-        }else{
-            imageHeight = 100;
+
+        try {
+            URL url = new URL(modelNode.getSrc());
+            image = ImageIO.read(url);
+
+            if (modelNode.getHeight() > 0) {
+                imageHeight = modelNode.getHeight();
+            } else {
+                imageHeight = image.getHeight(this);
+            }
+
+            if (modelNode.getWidth() > 0) {
+                imageWidth = modelNode.getWidth();
+            } else {
+                imageWidth = image.getWidth(this);
+            }
+
+            align = modelNode.getAlign();
+            alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
+            
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        
-        if(modelNode.getHeight()>0){
-            imageWidth = modelNode.getWidth();
-        }else{
-            imageWidth = 100;
-        }
-        
-        align = modelNode.getAlign();
-        alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
     }
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-     */
     @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Image image = this.image;
-        if (image != null) {
-            g.drawImage(image, imageX, imageY, imageWidth, imageHeight, this);
+    public Dimension getPreferredSize() {
+        if (image == null) {
+            return super.getPreferredSize();
         } else {
-            
+            return new Dimension(imageWidth, imageHeight);
+        }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (image != null) {
+            int x = (getWidth() - imageWidth) / 2;
+            int y = (getHeight() - imageHeight) / 2;
+            g.drawImage(image, x, y, imageWidth, imageHeight, this);
+        } else {
             g.drawString(alt, 10, 10);
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.control.BaseControl#reset(int, int)
-     */
     @Override
     public void reset(int availWidth, int availHeight) {
         // Expected in the GUI thread.
@@ -145,23 +156,9 @@ public class ImgControl extends BaseControl {
         this.valign = valign;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.control.BaseControl#getVAlign()
-     */
     @Override
     public int getVAlign() {
         return this.valign;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.JComponent#getPreferredSize()
-     */
-    @Override
-    public Dimension getPreferredSize() {
-        Dimension ps = this.preferredSize;
-        return ps == null ? new Dimension(0, 0) : ps;
     }
 
     /**
@@ -234,10 +231,6 @@ public class ImgControl extends BaseControl {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see java.awt.Component#imageUpdate(java.awt.Image, int, int, int, int, int)
-     */
     @Override
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
             final int w, final int h) {
@@ -257,10 +250,6 @@ public class ImgControl extends BaseControl {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see java.awt.Component#imageUpdate(java.awt.Image, int, int, int, int, int)
-     */
     /**
      * Image update.
      *
@@ -302,10 +291,6 @@ public class ImgControl extends BaseControl {
         return inSelection;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see java.awt.Component#toString()
-     */
     @Override
     public String toString() {
         return "ImgControl[src=" + this.lastSrc + "]";
