@@ -88,7 +88,7 @@ public class ImgControl extends BaseControl {
         }
         
         align = modelNode.getAlign();
-        alt = modelNode.getAlt();
+        alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
     }
 
     /*
@@ -102,6 +102,7 @@ public class ImgControl extends BaseControl {
         if (image != null) {
             g.drawImage(image, imageX, imageY, imageWidth, imageHeight, this);
         } else {
+            
             g.drawString(alt, 10, 10);
         }
     }
