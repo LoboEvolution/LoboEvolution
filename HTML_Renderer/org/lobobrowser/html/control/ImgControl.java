@@ -17,17 +17,23 @@
  */
 package org.lobobrowser.html.control;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+import org.lobobrowser.html.dombl.ImageEvent;
+import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
+import org.lobobrowser.html.renderer.HtmlController;
 import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.RenderableSpot;
 import org.lobobrowser.html.style.HtmlValues;
@@ -35,7 +41,7 @@ import org.lobobrowser.html.style.HtmlValues;
 /**
  * The Class ImgControl.
  */
-public class ImgControl extends BaseControl {
+public class ImgControl extends BaseControl implements ImageListener {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
@@ -67,6 +73,9 @@ public class ImgControl extends BaseControl {
     /** The image height. */
     private int imageWidth, imageHeight;
 
+    /** The mouse being pressed. */
+    private boolean mouseBeingPressed;
+
     /**
      * Instantiates a new img control.
      *
@@ -76,6 +85,26 @@ public class ImgControl extends BaseControl {
      */
     public ImgControl(HTMLImageElementImpl modelNode) {
         super(modelNode);
+
+        align = modelNode.getAlign();
+        alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
+
+        modelNode.addImageListener(this);
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                mouseBeingPressed = true;
+                repaint();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                mouseBeingPressed = false;
+                repaint();
+                HtmlController.getInstance().onPressed(modelNode, e, e.getX(),
+                        e.getY());
+            }
+        });
 
         try {
             URL url = new URL(modelNode.getSrc());
@@ -93,20 +122,8 @@ public class ImgControl extends BaseControl {
                 imageWidth = image.getWidth(this);
             }
 
-            align = modelNode.getAlign();
-            alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
-            
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    @Override
-    public Dimension getPreferredSize() {
-        if (image == null) {
-            return super.getPreferredSize();
-        } else {
-            return new Dimension(imageWidth, imageHeight);
         }
     }
 
@@ -119,6 +136,28 @@ public class ImgControl extends BaseControl {
             g.drawImage(image, x, y, imageWidth, imageHeight, this);
         } else {
             g.drawString(alt, 10, 10);
+        }
+
+        if (this.mouseBeingPressed) {
+            Color over = new Color(255, 100, 100, 64);
+            if (over != null) {
+                Color oldColor = g.getColor();
+                try {
+                    g.setColor(over);
+                    g.fillRect(0, 0, imageWidth, imageHeight);
+                } finally {
+                    g.setColor(oldColor);
+                }
+            }
+        }
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        if (image == null) {
+            return super.getPreferredSize();
+        } else {
+            return new Dimension(imageWidth, imageHeight);
         }
     }
 
@@ -291,6 +330,17 @@ public class ImgControl extends BaseControl {
         return inSelection;
     }
 
+    @Override
+    public void imageLoaded(ImageEvent event) {
+        Image image = event.image;
+        this.image = image;
+        int width = image.getWidth(this);
+        int height = image.getHeight(this);
+        if ((width != -1) && (height != -1)) {
+            this.imageUpdate(image, width, height);
+        }
+    }
+    
     @Override
     public String toString() {
         return "ImgControl[src=" + this.lastSrc + "]";
