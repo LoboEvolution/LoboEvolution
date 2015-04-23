@@ -106,9 +106,9 @@ public class ImgControl extends BaseControl implements ImageListener {
             }
         });
 
-        try {
-            URL url = new URL(modelNode.getSrc());
-            image = ImageIO.read(url);
+        //try {
+          //  URL url = new URL(modelNode.getSrc());
+           // image = ImageIO.read(url);
 
             if (modelNode.getHeight() > 0) {
                 imageHeight = modelNode.getHeight();
@@ -122,9 +122,9 @@ public class ImgControl extends BaseControl implements ImageListener {
                 imageWidth = image.getWidth(this);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //} catch (IOException e) {
+         //   e.printStackTrace();
+        //}
     }
 
     @Override
