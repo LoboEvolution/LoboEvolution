@@ -1,0 +1,34 @@
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+            "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<body>
+<strong>Lobo 0.98.3 makes these boxes smaller than they need to be. 
+The actual width of a box should be declared width + padding +
+margin + border, apparently. 
+<table border="1">
+<tr>
+  <th>Increasing Margin</th>
+  <th>Increasing Border</th>
+  <th>Increasing Padding</th>
+</tr>
+<tr>
+  <td>
+  <div style="width: 10px;height: 10px; border: 10px solid blue; margin: 10px; padding: 10px;"></div>
+  <div style="width: 10px;height: 10px; border: 10px solid blue; margin: 20px; padding: 10px;"></div>
+  <div style="width: 10px;height: 10px; border: 10px solid blue; margin: 50px; padding: 10px;"></div>
+  </td>
+  <td>
+  <div style="width: 10px;height: 10px; border: 10px solid blue; margin: 10px; padding: 10px;"></div>
+  <div style="width: 10px;height: 10px; border: 20px solid blue; margin: 10px; padding: 10px;"></div>
+  <div style="width: 10px;height: 10px; border: 50px solid blue; margin: 10px; padding: 10px;"></div>  
+  </td>
+  <td>
+  <div style="width: 10px;height: 10px; border: 10px solid blue; margin: 10px; padding: 10px;"></div>
+  <div style="width: 10px;height: 10px; border: 10px solid blue; margin: 10px; padding: 20px;"></div>
+  <div style="width: 10px;height: 10px; border: 10px solid blue; margin: 10px; padding: 50px;"></div>
+  </td>
+</tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<SELECT ID="myselect" onchange="alert('' + this.selectedIndex); if(this.selectedIndex == 3) { this.multiple = !this.multiple; } return false;" multiple>
+  <option ID="option0">0
+  <option ID="option1">1
+  <option ID="option2">2
+  <option>3
+</SELECT>
+<script>
+   iSelect = document.getElementById('myselect');
+   iOption1 = document.getElementById('option1');
+   iOption2 = document.getElementById('option2');
+</script>
+<input type="submit" value="Change1" onclick="iSelect.selectedIndex = 1; alert('option1=' + iOption1.selected);">
+<input type="submit" value="Change2" onclick="iSelect.selectedIndex = 2; alert('option2=' + iOption2.selected);">
+<input type="submit" value="Change3" onclick="iOption1.selected = true; alert('selectedIndex=' + iSelect.selectedIndex);">

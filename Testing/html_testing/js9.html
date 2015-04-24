@@ -1,0 +1,20 @@
+<body>
+<img src="test1.gif"><br>
+<a id="myanchor" href="http://lobobrowser.org" onclick="performclick(this);return false;">link</a>
+<br>
+<script>
+function performclick(theanchor) {
+	location.href = theanchor;
+}
+
+alert(document.URL);
+alert(document.images[0]);
+alert(document.images[1]);
+alert(document.thisisundefined);
+alert(performclick);
+var myanchor = document.getElementById('myanchor');
+alert('anchor=' + myanchor);
+
+</script>
+</body>
+

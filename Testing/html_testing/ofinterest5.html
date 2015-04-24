@@ -1,0 +1,93 @@
+<body>
+<style>
+   .link {
+      text-decoration: none;
+   }
+   .link:hover {
+      text-decoration: underline;
+   }
+</style>
+<div><strong>Lobo 0.98.3 does not handle one box aligned left and one right properly</strong></div>
+<table><tr><td>
+<div style="width: 500px; border: blue solid 2px;">
+   <div style="float: right; width: 100px; border: green solid 2px; height: 100px;">
+   </div>
+   <div style="float: left; border: cyan dashed 1px;">
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   </div>
+</div>
+<div>Multiple on the right</div>
+<div style="width: 500px; border: blue solid 2px;">
+   <div style="float: right; width: 100px; border: green solid 2px; height: 100px;">
+   </div>
+   <div style="float: right; width: 100px; border: green solid 2px; height: 100px;">
+   </div>
+   <div style="float: right; width: 100px; border: green solid 2px; height: 100px;">
+   </div>
+   <div style="float: right; width: 100px; border: green solid 2px; height: 100px;">
+   </div>
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+</div>
+<div>Two boxes with same text</div>
+<div style="width: 500px; border: blue solid 2px;">
+   <div style="float: right; border: green solid 2px;">
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   </div>
+   <div style="float: left; border: green solid 2px;">
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   </div>
+</div>
+<div>Two boxes with declared widths</div>
+<div style="width: 500px; border: blue solid 2px;">
+   <div style="float: right; border: green solid 2px; width: 260px;">
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   </div>
+   <div style="float: left; border: green solid 2px; width: 260px;">
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   simple text
+   </div>
+</div>
+
+</td></tr></table>
+</body>

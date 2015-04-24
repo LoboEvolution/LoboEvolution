@@ -1,0 +1,55 @@
+<body>
+<strong>Note: Lobo 0.98.3 would not word-wrap in this scenario.</strong>
+<div style="border: red solid 1px; width: 300px;">
+<span style="white-space:nowrap;">A***************</span>
+<span style="white-space:nowrap;">B***************</span>
+<span style="white-space:nowrap;">C***************</span>
+<span style="white-space:nowrap;">D***************</span>
+<span style="white-space:nowrap;">E***************</span>
+<span style="white-space:nowrap;">F***************</span>
+<span style="white-space:nowrap;">G***************</span>
+<span style="white-space:nowrap;">H***************</span>
+<span style="white-space:nowrap;">I***************</span>
+<span style="white-space:nowrap;">J***************</span>
+<span style="white-space:nowrap;">K***************</span>
+<span style="white-space:nowrap;">L***************</span>
+<span style="white-space:nowrap;">M***************</span>
+<span style="white-space:nowrap;">N***************</span>
+</div>
+<div style="border: green solid 2px; width: 200px; white-space: nowrap;">
+Sanity check: This one should not wrap.
+<span style="white-space:nowrap;">A***************</span>
+<span style="white-space:nowrap;">B***************</span>
+<span style="white-space:nowrap;">C***************</span>
+<span style="white-space:nowrap;">D***************</span>
+<span style="white-space:nowrap;">E***************</span>
+<span style="white-space:nowrap;">F***************</span>
+</div>
+<div style="border: green solid 2px; width: 200px;">
+One where SPANs are contiguous. FireFox 2 does not allow
+wrapping. IE does. Chrome doesn't wrap.   
+<span style="white-space:nowrap;">A******</span><span style="white-space:nowrap;">B*******</span><span style="white-space:nowrap;">C***************</span><span style="white-space:nowrap;">D***************</span><span style="white-space:nowrap;">E***************</span><span style="white-space:nowrap;">F***************</span>
+</div>
+<div style="border: green solid 2px; width: 200px;">
+What if the nowrap box is followed by a long word?
+Here IE doesn't wrap on the first long word, and IE
+is probably correct. Adjacent SPANs are considered
+a continuation of the same word. (Lobo behavior after 0.98.4).
+<span style="white-space:nowrap;">A***************</span>WORD**********1************2*********3**********4***********5 SEDONDWORD
+</div>
+<div style="border: green solid 2px; width: 200px;">
+What about a nowrap span that begins with a blank?<span style="white-space:nowrap;"> A******************1************2*********3**********4***********5</span>
+</div>
+<div style="border: green solid 2px; width: 200px;">
+<span style="white-space:nowrap;"> 
+A PRE in a nowrap block follows next below.
+<pre>
+first    line
+second    line 
+third    line
+</pre>
+A PRE in a nowrap block follows next below.
+</span>
+</div>
+
+</body>

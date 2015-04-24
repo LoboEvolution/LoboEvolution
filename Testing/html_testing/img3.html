@@ -1,0 +1,39 @@
+<head>
+<script>
+function showMessage(message) {
+   document.getElementById('messagediv').innerText = message;	
+}
+
+function bodyOnLoad() {
+   showMessage('bodyOnLoad');
+}
+
+function divOnLoad() {
+   alert('divOnLoad!');
+}
+
+function imageOnLoad() {
+   showMessage('imageOnLoad');   
+}
+
+function loadImage() {
+    showMessage('loading...');
+    var imgDiv = document.getElementById('imagediv');    
+    var img = new Image();
+    img.onload = imageOnLoad;
+    img.src = 'http://html.xamjwg.org/images/screenshot30p.gif?' + (new Date()).getTime();
+    imgDiv.innerHTML = '';
+    imgDiv.appendChild(img);
+}
+
+</script>
+</head>
+<body onload="bodyOnLoad();">
+<div onload="divOnLoad();">
+<input type="submit" value="Load Image" onclick="loadImage(); return false;">
+<div id=imagediv style="border: blue solid;">
+</div>   
+<div id=messagediv style="border: green solid;">
+</div>   
+</div>
+</body>

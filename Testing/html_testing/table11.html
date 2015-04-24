@@ -1,0 +1,81 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+</HEAD>
+<BODY>
+<table width=100% border=1><td>table width 100%</td></table>
+<p>
+<div style="border: blue solid 2px; padding: 5px;">
+      <TABLE id=2 cellSpacing=0 cellPadding=0 border=4 width="462">
+        <TBODY>
+        <TR>
+          <TD id=TD2>FIXME: Nested table (width=100%) cell<br>should not be this wide.</TD>
+          <TD id=TD3>01234567890ABCDEFGHIJKLMNOPQ</TD>
+        </TR>
+        </TBODY>
+      </TABLE>
+</div>
+<p>
+<TABLE id=1 cellSpacing=0 cellPadding=5 border=1>
+  <TBODY>
+  <TR>
+    <TD id=TD1>
+      <TABLE id=2 cellSpacing=0 cellPadding=0 width="100%" border=4>
+        <TBODY>
+        <TR>
+          <TD id=TD2>FIXME: Nested table (width=100%) cell<br>should not be this wide.</TD>
+          <TD id=TD3>01234567890ABCDEFGHIJKLMNOPQ</TD>
+        </TR>
+        </TBODY>
+      </TABLE>
+    </TD>
+   </TR>
+  </TBODY>
+</TABLE>
+<p>
+<table border=1><tr><td>
+<table border=2><tr><td>
+This is a simple nested table
+</td></tr>
+</td></tr>
+</table>
+<p>
+<table border="1"><tr><td><div>FIXME: Table with DIV<br>shoult not be this<br>this wide</div></td></tr></table>
+<p>
+<TABLE id=1 cellSpacing=0 cellPadding=0 width=250 border=1>
+  <TBODY>
+  <TR>
+    <TD id=TD1>
+      <TABLE id=2 cellSpacing=0 cellPadding=0 width="100%" border=4>
+        <TBODY>
+        <TR>
+          <TD id=TD2>A</TD>
+          <TD id=TD3>01234567890ABCDEFGHIJKLMNOPQ 
+  </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P>
+<TABLE id=2 cellSpacing=0 cellPadding=0 border=4>
+  <TBODY>
+  <TR>
+    <TD id=TD2>A</TD>
+    <TD id=TD3>01234567890ABCDEFGHIJKLMNOPQ </TD></TR></TBODY></TABLE>
+<p>
+<TABLE width="100%" border=2>
+  <TBODY>
+  <TR>
+    <TD colSpan=2>Cell with colspan=2 in table, 
+width=100%</TD></TR></TBODY></TABLE></P>
+
+
+<div nowrap style="width: 50px; border: green solid 5px dashed;">
+This is a small div with no wrapping
+</div>
+<table style="width: 50px; border: magenta solid 5px dashed;" border="5">
+<td nowrap>This is a small table with no wrapping.
+</table>
+<p>
+before<span style="white-space: pre; border: solid blue;">
+This   is   text
+with   white-space set to "pre".
+Does it behave as pre in span?
+</span>after
+
+</BODY></HTML>

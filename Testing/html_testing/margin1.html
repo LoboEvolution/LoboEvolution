@@ -1,0 +1,25 @@
+<body>
+<p id="p1" style="width: 300px; border: blue solid 1px; margin: auto;">paragraph</p>
+<blockquote id="p2">blockquote</blockquote>
+<p id="p3" style="text-align: center; border: green solid 1px;">paragraph</p>
+<div id="p4">div</div>
+<ul id="list1"><il id="listItem1">listItem</li></ul>
+<script>
+	var p1 = document.getElementById('p1');
+	var p2 = document.getElementById('p2');
+	var p3 = document.getElementById('p3');
+	var p4 = document.getElementById('p4');
+	var list1 = document.getElementById('list1');
+	var listItem1 = document.getElementById('listItem1');
+	var text = 'p1.margin-top=' + p1.currentStyle.marginTop + ',' +
+    		   'p3.margin-top=' + p3.currentStyle.marginTop + ',' +
+    		   'p3.margin-bottom=' + p3.currentStyle.marginBottom + ',' +
+    		   'p3.margin-left=' + p3.currentStyle.marginLeft + ',' +
+    		   'p4.margin-left=' + p4.currentStyle.marginLeft + ',' +
+	           'p2.margin-left=' + p2.currentStyle.marginLeft + ',' +
+	           'list1.margin-top=' + list1.currentStyle.marginTop + ',' +
+	           'list1.margin-left=' + list1.currentStyle.marginLeft + ',' +
+	           'listItem1.margin-left=' + listItem1.currentStyle.marginLeft + ',';
+    alert(text);
+</script>
+</body>

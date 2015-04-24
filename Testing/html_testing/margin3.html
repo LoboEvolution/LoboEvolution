@@ -1,0 +1,26 @@
+<body>
+<p style="border: blue solid 1px;">
+ <p style="border: green solid 1px;">
+  <p style="border: red solid 1px;">
+  p1
+  </p>
+ </p>
+</p>
+<p style="border: magenta solid 4px;">
+ <div style="border: green solid 1px;">
+  <p style="border: red solid 1px;">
+  p2
+  </p> 
+ </div>
+</p>
+<!--  FIX: margin should be here -->
+<p style="border: blue solid 1px; margin-top: 0px; margin-bottom: 0px;">p3</p>
+<p style="border: blue solid 1px; margin-top: 0px; margin-bottom: 0px;">p4</p>
+<table border="1" cellpadding="0" cellspacing="0"><tr><td>
+<!--  FIX: Margins in table should get collapsed -->
+<p>Paragraph in table with no padding</p>
+</td></tr></table>
+<table border="1" cellpadding="2" cellspacing="0"><tr><td>
+<p>Paragraph in table with padding=2</p>
+</td></tr></table>
+</body>

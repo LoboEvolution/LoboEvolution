@@ -1,0 +1,31 @@
+<html>
+<head>
+<style> 
+  body {
+     BACKGROUND-color: magenta;
+     color: blue;
+  }
+</style>
+</head>
+<body style="color: black;">
+  <div style="border: brown 2px solid;" id="div1"></div>
+  <div style="font-size: 10px;">
+	  <div style="font-size: 30pt; width: 15em; height: 400px; left: 10ex; bottom: 20pt; background: white; color: blue; border: dashed green 1px;" id="div2"></div>
+  </div>	 
+  <script>
+     var thebody = document.body;
+     var thediv1 = document.getElementById('div1');
+     try {
+ 	    thediv1.innerText = 'style.color=' + thebody.style.color + ',style.backgroundColor=' + thebody.style.backgroundColor + ',currentStyle.backgroundColor=' + thebody.currentStyle.backgroundColor + ',currentStyle.color=' + thebody.currentStyle.color;
+     } catch(err) {
+        thediv1.innerText = err.toString();
+     } 
+     var thediv2 = document.getElementById('div2');
+	 thediv2.innerHTML = 'offsetWidth=' + thediv2.offsetWidth + '<br>' +
+						 'offsetHeight=' + thediv2.offsetHeight + '<br>' +
+	                     'offsetLeft=' + thediv2.offsetLeft + '<br>' +
+	                     'offsetRight=' + thediv2.offsetRight + '<br>' +
+	                     'offsetBottom=' + thediv2.offsetBottom + '<br>';     
+	                     
+  </script>
+</body>

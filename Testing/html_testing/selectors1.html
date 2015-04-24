@@ -1,0 +1,45 @@
+<body>
+<style>
+  .class1 > .class2 {
+  	background: magenta;
+  	font-family: Helvetica;
+  }
+  .class1 .class2 {
+  	text-decoration: underline;
+  	font-family: Verdana;  	
+  }
+  .class1 + .class2 {
+  	foreground: red;
+  	font-weight: bolder;
+  	font-size: 14pt;
+  	font-family: Arial;
+  }
+</style>
+<div class="class1">
+   <div class="dummy">
+       <div class="class2">
+           matches second rule only?
+       </div>
+   </div>
+</div>
+<div class="class1">
+       <div class="class2">
+           matches first and second rule?
+       </div>
+</div>
+<div class="dummy">
+       <div class="class1">
+       </div>
+       <div class="class2">
+           matches third rule only?
+       </div>
+</div>
+<div class="dummy">
+       <div class="class1">
+       </div>
+       <div class="dumy"></div>
+       <div class="class2">
+           No match at all?
+       </div>
+</div>
+</body>

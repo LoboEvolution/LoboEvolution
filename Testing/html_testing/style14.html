@@ -1,0 +1,61 @@
+<body>
+  <style>
+     .myclass {
+        border-top: green cyan dashed 3px;
+     }
+  </style>
+  <div id="mydiv" style="border-right: magenta solid 3px;" class="myclass">
+  div
+  </div>
+  <script>
+     var myDiv = document.getElementById("mydiv");
+     myDiv.style.borderLeft = "blue solid 2px";
+     alert('style.borderTop:' + myDiv.style.borderTop);
+     alert('style.borderRightColor:' + myDiv.style.borderRightColor);
+     if(window.getComputedStyle) {
+		alert('computedStyle.borderTopColor=' + document.defaultView.getComputedStyle(myDiv,'').borderTopColor);
+     }
+     else {
+		alert('currentStyle.borderTopColor=' + myDiv.currentStyle.borderTopColor);
+     }
+     setTimeout("action1()", 1500);
+     setTimeout("action2()", 3000);
+     setTimeout("action3()", 4500);
+     
+     function action1() {
+        var myDiv = document.getElementById("mydiv");
+     	myDiv.style.width = "60%";
+        alert('action1() done');
+     }
+     
+     function action2() {
+        var myDiv = document.getElementById("mydiv");
+     	//myDiv.currentStyle.width = "40%";
+        alert('action2() done: ' + myDiv.currentStyle.width);
+     }
+
+     function action3() {
+        var myDiv = document.getElementById("mydiv");
+     	myDiv.setAttribute("style", "background: yellow; width: 50%");
+        alert('action3() done: ' + myDiv.getAttribute("style"));
+     }
+  </script>
+  
+  <!-- Findings
+  
+  - Properties on currentStyle or equivalent cannot be set. 
+    This is not allowed in either IE or FireFox.
+   
+  - setAttribute on "style" property works in FireFox
+    and clears only style due to the "style" property.
+  - The "style" attribute overrides the "class" attribute,
+    but only on a property by property basis.
+  - IE uses "currentStyle" whereas FireFox has
+    "window.getComputedStyle(element,pseudoElement)",
+    generally called as
+    "document.defaultView.getComputedStyle..." 
+    
+    
+        
+  -->
+</body>

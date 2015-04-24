@@ -1,0 +1,25 @@
+<script>
+//document.onload = documentOnLoad;
+window.onload = windowOnLoad;
+window.onunload = windowOnUnload;
+
+function bodyOnLoad() {
+    alert('bodyOnLoad');
+}
+
+function windowOnLoad() {
+    alert('windowOnLoad');
+}
+
+function windowOnUnload() {
+    alert('windowOnUnload');
+}
+
+function documentOnLoad() {
+    alert('documentOnLoad');
+}
+</script>
+<script>
+alert('script: body=' + document.body);
+</script>
+blah

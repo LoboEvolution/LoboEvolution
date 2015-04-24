@@ -1,0 +1,39 @@
+<html>
+<body>
+blah blah
+<div style="visibility: hidden; width: 100px; height: 50px;">
+invisible div 100x50
+</div>
+blah blah
+<div style="visibility: hidden; width: 100px; height: 100px;">
+invisible div 100x100
+</div>
+blah blah
+<div id="mydiv" style="visibility: collapse; width: 100px; height: 100px; background: magenta; border: red solid 3px;">
+collapse div 100x100
+<div style="border: black dashed 4px;">
+internal div
+</div>
+</div>
+blah blah
+<table border="1">
+<tr><td>1,1</td><td>2,1</td></tr>
+<tr><td>1,2</td><td>2,2</td></tr>
+<tr><td>1,3</td><td style="visibility: collapse;">2,3</td></tr>
+<tr><td>1,4</td><td>2,4</td></tr>
+<tr><td style="visibility: hidden;">1,5</td><td>2,5</td></tr>
+</table>
+<input type="submit" onclick="toggleVisibility(); return false;" value="Toggle Visibility">
+
+<script>
+	function toggleVisibility() {
+	    var myDiv = document.getElementById('mydiv');
+	    var visib = myDiv.style.visibility;
+		if(visib == 'collapse' || visib == 'hidden') {
+			myDiv.style.visibility = 'visible';
+		}
+		else {
+			myDiv.style.visibility = 'hidden'
+		}
+	}
+</script>

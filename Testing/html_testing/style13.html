@@ -1,0 +1,71 @@
+<!-- Test positioning of elements -->
+<html>
+<head>
+<STYLE><!--
+  sPAN.spanDIV {
+     display: block;
+     position: absolute;
+     WIDTH: 300;
+     HEIGHT: 50;
+     background-COLOR: red;
+     Right: 50;
+     boTTOM: 100;
+  }
+  //-->
+</style>
+</head>
+<body>
+	<div style="position: ABSOLUTE; Left: 25; Top: 10; background-color: #FFC0C0; WIDTH: 700; height: 300; z-index: 3;"> 
+	    <!-- This little DIV does not show in Firefox because of z-index. -->
+	    <!-- Absolute is relative to parent -->
+	    <div style="position: absolute; left:4; top:4; width: 15; height: 4; background-color: #8080A0; z-index: -1;">&nbsp;</div>
+        This<br>
+        is<br>
+        <div style="position: static; lefT: 500; right: 500;background-color:green;">[fixed]</div>
+        a test of positioning.<span style="width: 300; align: center;">test1.</span><span style="width: 300; align: right;">test2.</span>
+        <!-- Firefox does do background-color on B tag as block, but IE 6 does not -->
+        <b onclick="spanOnClick(this);" style="display: block; position: absolute; left: 400; top:80; width: 200; height: 100; background-color: grey;">bold text in block?</b>
+        <div style="position: relative; left: 5; toP: 20; background-color: yellow; width: 150; height: 100; z-index: 2;" onclick="spanOnClick(this);">[relative]<br><input type="submit"></div>
+        <div style="position: fixed; left: 55; top: 5; BACKGROUND-color: magenta; width: 200; height: 150;"/>
+        <!-- In IE: If bottom is defined here, then Javascript sees the value, otherwise it does not -->  
+        <span class="spandiv" style="bottom: 100; right: 50;" onclick="spanOnClick(this);">this is a [spandiv]<div style="margin: 5px 5px 5px 5px; float:right;width:60;height:8;background-color:cyan;">&nbsp;</div> with an inner box that floats right. this is a [spandiv] with an inner box that floats right. this is a [spandiv] with an inner box that floats right.</span>
+        
+        <ul>
+        <!-- list-item requires to be in list to work -->
+        <span style="display: list-item;">list item #1</span>
+        <!-- display: static is ignored in LI by browsers -->
+        <LI style="display: static; foreground-color: green;">Static LI</LI>
+        <span style="display: list-item;">list item #3</span>
+        <span>not a list item # 1</span>
+        <span>not a list item # 2</span>
+        <span style="display: list-item;">list item #4</span>
+        <span style="display: list-item;">list item #5</span>
+        </ul>
+        <!-- Table works in Firefox, but in IE it goes outside the DIV -->
+        <span style="display: table; z-index: 2; background-color: white; position: absolute; left: 400: top: 100; width:300; height: 150; border: 2px solid black;">
+           <span style="display: table-row">
+             <span style="display: table-cell; background-color: blue;">cell # 1</span>
+             <span style="display: table-cell">cell # 2</span>
+           </span>
+           <tr><td span="2" bgcolor="yellow">regular cell in regular row</td></tr>
+           <span style="display: table-row">
+             <span style="display: table-cell;">cell # 1</span>
+             <span style="display: table-cell; border: solid 2px brown; background-color: cyan;">cell # 2</span>
+           </span>
+        </span>
+    </div>
+    <script><!--
+       function spanOnClick(spanObject) {
+          var topText = spanObject.style.top;
+          if(!topText) {
+              alert('top not defined, bottom=' + spanObject.style.bottom);
+              spanObject.style.top = '20px';
+              return;
+          }
+          var topInt = parseInt(topText);
+          spanObject.style.top = (topInt + 3) + "px";
+       }
+       //-->
+    </script>
+</body>
+</html>

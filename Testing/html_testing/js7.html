@@ -1,0 +1,76 @@
+<html>
+<body>
+<style><!--
+
+a {
+  color: green;
+  font-size: 10pt;
+}
+
+h2:hover, div a:hover {
+  color: blue;
+  font-size: 20pt; 
+  font-weight: bolder;
+  font-style: italic;
+}
+
+div:hover a {
+  font-size: 15pt;
+  text-decoration: none;
+}
+
+topdiv {
+   border: blue dashed 1;
+}
+
+//-->
+</style>
+<script>
+var mouseOverCounter = 0;
+var mouseOverCounter2 = 0;
+
+function updateCounter() {
+	var counter = document.getElementById('counter');
+	counter.innerHTML = '' + mouseOverCounter;
+}
+
+function updateCounter2() {
+	var counter = document.getElementById('counter2');
+	counter.innerHTML = '' + mouseOverCounter2;
+}
+
+function mouseOverHandler() {
+    mouseOverCounter++;
+    updateCounter();
+}
+
+function mouseOverHandler2() {
+    mouseOverCounter2++;
+    updateCounter2();
+}
+
+function mouseOutHandler() {
+	mouseOverCounter--;
+	updateCounter();
+}
+
+function mouseOutHandler2() {
+	mouseOverCounter2--;
+	updateCounter2();
+}
+
+</script>
+
+<div id="topdiv">
+Hover mouse <div id="innerdiv" style="border: solid red 1px;" onmouseover="mouseOverHandler2();" onmouseout="mouseOutHandler2();">OUT<a id="changable" href="#" onmouseover="mouseOverHandler(); return false;" onmouseout="mouseOutHandler()">here</a> and <a href="#" onmouseover="mouseOverHandler(); return false;" onmouseout="mouseOutHandler()"><small>here</small></a>OUT</div>.<br>
+<span oncontextmenu="alert('menu!'); return false;">Counter # 1: </span><span id="counter"></span><br>
+<span oncontextmenu="window.status = 'context!'; return true;">Counter # 2: </span><span id="counter2"></span><br>
+</div>
+
+<script>
+  document.writeln('</script>');
+  document.writeln('test<br>');
+</script>
+</body>
+</html>
+

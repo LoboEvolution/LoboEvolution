@@ -1,0 +1,36 @@
+<html>
+<body>
+  <a id="link1" href="http://html.xamjwg.org">link # 1 with 
+     <!-- Does not propagate to link -->
+     <i onclick="alert('clickedi'); return false;">clickable</i> and
+     <!-- Propagates to link -->
+     <b onclick="alert('clickedb'); return true;">clickable</b>
+  </a>
+  <br>
+  <a id="link2" href="http://google.com" onclick="alert('clicked2'); return true;">link # 2</a>
+  <br>
+  <a id="link3" href="http://xamjwg.org" ondblclick="alert('dlbclick');return false;" onclick=" return false;" onmouseup="showMessage('mouseup'); return true;" onmousedown="showMessage('mosedown'); return true;">link # 3</a>
+  <br>
+  <a id="link4" href="http://xamjwg.org" ondblclick="alert('dblclick intercepted?'); return false;">link # 4</a>
+  <br>
+  <form action="/foobar">
+  <input type="submit" onclick="alert('submit'); return false;">
+  </form>
+  <div id="messageArea" style="background-color: yellow;"></div>
+  
+  <script><!--
+  	var myLink2 = document.getElementById('link2');
+  	var onclickFunction = myLink2.onclick;
+  	myLink2.onclick = myNewHandler;
+  	
+  	function myNewHandler() {
+		alert('intercepted handler');
+		onclickFunction();	
+  	}
+
+        function showMessage(aMsg) {
+		document.getElementById('messageArea').innerHTML = aMsg;
+	}
+    //-->
+  </script>
+</body>
