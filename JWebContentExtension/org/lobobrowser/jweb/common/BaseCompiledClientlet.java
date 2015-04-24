@@ -247,14 +247,7 @@ public abstract class BaseCompiledClientlet implements Clientlet {
             NoSuchMethodException {
         ClientletStageDelegate csd = new ClientletStageDelegate(context);
         synchronized (STAGE_DELEGATE_MONITOR) {
-            // This $appletDelegate hack is required so that the Stage doesn't
-            // use a JFrame.
-            Stage.$appletDelegate.set(csd);
-            // This $stages hack is needed so that it doesn't keep adding
-            // to the collection of stages. When it finds there had been
-            // some stages previously, it opens a new window. This could
-            // have a side-effect in the wrap() method.
-            Stage.$stages.setDefault();
+            
             try {
                 for (int level = 0; level < 3; level++) {
                     if (logger.isLoggable(Level.INFO)) {
@@ -263,10 +256,10 @@ public abstract class BaseCompiledClientlet implements Clientlet {
                     }
                     if (tentative instanceof Stage) {
                         Stage stage = (Stage) tentative;
-                        csd.get$stage().setFromLiteral(stage);
+                        csd.get$stage().setFromLiteral(csd.$stage.get());
                         csd.initialize$();
                         return new ResponseObject(csd.createComponent(), stage
-                                .get$title().get(), stage);
+                                .getTitle(), stage);
                     } else if ((tentative instanceof Scene)
                             || (tentative instanceof Node)) {
                         break;
@@ -295,7 +288,7 @@ public abstract class BaseCompiledClientlet implements Clientlet {
                     }
                 }
             } finally {
-                Stage.$appletDelegate.set(null);
+                csd.$stage.set(null);
             }
         }
         return new ResponseObject(tentative, null, null);
