@@ -26,10 +26,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
-
 import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
@@ -106,25 +102,19 @@ public class ImgControl extends BaseControl implements ImageListener {
             }
         });
 
-        //try {
-          //  URL url = new URL(modelNode.getSrc());
-           // image = ImageIO.read(url);
-
-            if (modelNode.getHeight() > 0) {
-                imageHeight = modelNode.getHeight();
-            } else {
+        if (modelNode.getHeight() > 0) {
+            imageHeight = modelNode.getHeight();
+        } else {
+            if (image != null)
                 imageHeight = image.getHeight(this);
-            }
+        }
 
-            if (modelNode.getWidth() > 0) {
-                imageWidth = modelNode.getWidth();
-            } else {
+        if (modelNode.getWidth() > 0) {
+            imageWidth = modelNode.getWidth();
+        } else {
+            if (image != null)
                 imageWidth = image.getWidth(this);
-            }
-
-        //} catch (IOException e) {
-         //   e.printStackTrace();
-        //}
+        }
     }
 
     @Override
@@ -340,7 +330,7 @@ public class ImgControl extends BaseControl implements ImageListener {
             this.imageUpdate(image, width, height);
         }
     }
-    
+
     @Override
     public String toString() {
         return "ImgControl[src=" + this.lastSrc + "]";
