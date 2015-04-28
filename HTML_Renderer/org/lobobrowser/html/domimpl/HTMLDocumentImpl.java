@@ -347,16 +347,15 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
         Window window;
         if (rcontext != null) {
             window = Window.getWindow(rcontext);
+            window.setDocument(this);
+            // Set up Javascript scope
+            this.setUserData(Executor.SCOPE_KEY, window.getWindowScope(), null);
         } else {
             // Plain parsers may use Javascript too.
             window = null;// new Window(null, ucontext);
         }
-        // Window must be retained or it will be garbage collected.
         this.window = window;
-        window.setDocument(this);
-        // Set up Javascript scope
-        this.setUserData(Executor.SCOPE_KEY, window.getWindowScope(), null);
-    }
+    	}
 
     /*
  * (non-Javadoc)
