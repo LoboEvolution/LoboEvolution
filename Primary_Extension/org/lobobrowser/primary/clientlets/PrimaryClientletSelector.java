@@ -56,12 +56,13 @@ public class PrimaryClientletSelector implements ClientletSelector {
         // Clientlets here are not overriddable.
 
         String mimeType = response.getMimeType();
+       
+        System.out.println("mimeType: " + mimeType);
 
         if (logger.isLoggable(Level.INFO)) {
             logger.info("select(): mimeType=" + mimeType);
         }
         String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
-        System.out.println(mimeTypeTL);
         if ("text/html".equals(mimeTypeTL)) {
             // TODO: XHTML needs its own clientlet.
             return new HtmlClientlet();
@@ -107,14 +108,13 @@ public class PrimaryClientletSelector implements ClientletSelector {
         System.out.println("mtttl2: " + mimeTypeTL);
         if ((mimeTypeTL != null) && mimeTypeTL.startsWith("text/")) {
             return new TextClientlet();
-        } else if ("application/xhtml+xml".equals(mimeTypeTL)) {
+        } else if ("application/xml".equals(mimeTypeTL)) {
             // TODO: XHTML needs its own clientlet.
             return new HtmlClientlet();
         } else {
             String path = response.getResponseURL().getPath();
             int lastDotIdx = path.lastIndexOf('.');
-            String extension = lastDotIdx == -1 ? "" : path
-                    .substring(lastDotIdx + 1);
+            String extension = lastDotIdx == -1 ? "" : path.substring(lastDotIdx + 1);
             String extensionTL = extension.toLowerCase();
             if ("xhtml".equals(extensionTL)) {
                 return new HtmlClientlet();
