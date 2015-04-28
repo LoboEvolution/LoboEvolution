@@ -59,7 +59,7 @@ Author: J. H. S.
     	</zip>
 	</target>
 
-	<target name="directory_structure" depends="cobra_no_commons,primary_extension,jweb_extension,lobo_jar,public_jar">
+	<target name="directory_structure" depends="cobra_no_commons,primary_extension,lobo_jar,public_jar">
 		<mkdir dir="${lobo.dir}"/>
 		<delete>
 			<fileset dir="${lobo.dir}">
@@ -74,7 +74,6 @@ Author: J. H. S.
 	 		<fileset dir="../XAMJ_Build/ext" includes="*.jar"/>
 	 		<fileset dir="${build.dir}" includes="cobra-no-commons.jar"/>
 	 		<fileset dir="${build.dir}" includes="primary.jar"/>
-	 		<fileset dir="${build.dir}" includes="jweb-ext.jar"/>
 		</copy>				
 		<copy todir="${lobo.dir}/doc/platform-api">
 			 <fileset dir="/opt/html_xamjwg_org/platform-api/" includes="**/*.html,**/*.css,**/*.gif"/>
@@ -106,13 +105,6 @@ Author: J. H. S.
     	/>
 	</target>
 
-	<target name="jweb_extension" depends="jweb_classfiles">
-    	<jar  destfile="${build.dir}/jweb-ext.jar"
-    		 basedir="../JWebContentExtension"
-    		 includes="**/*.class,**/*.xml,**/*.xamj,**/.xami,**/*.gif,**/*.png,**/*.jpg,**/*.properties"
-    	/>
-	</target>
-
     <target name="public_jar" depends="public_classfiles">
     	<jar destfile="${build.dir}/lobo-pub.jar"
  		 basedir="../Platform_Public_API"
@@ -140,7 +132,7 @@ Author: J. H. S.
 		/>        
     </target>
 
-	<target name="jweb_classfiles">
+	<!--target name="jweb_classfiles">
 		<javac srcdir="../JWebContentExtension"
 		 source="1.8"
          destdir="../JWebContentExtension"
@@ -148,7 +140,7 @@ Author: J. H. S.
          debug="on"
 		 includeantruntime="false"
 		/>        
-    </target>
+    </target-->
 
     <target name="lobo_jar" depends="lobo_classfiles,common_classfiles">
     	<jar  destfile="${build.dir}/lobo.jar"

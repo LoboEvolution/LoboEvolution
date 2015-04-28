@@ -64,16 +64,8 @@
             <file src="lobo-pub.jar" targetdir="$INSTALL_PATH"/>
             <file src="ext/cobra-no-commons.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/primary.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/jweb-ext.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/jlfgr-1_0.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/PDFrenderer.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/javafxc.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/javafxrt.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/Scenario.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/javafx-swing.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/jmc.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/websvc.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/javafxgui.jar" targetdir="$INSTALL_PATH/ext"/>
+            <file src="ext/jlfgr-1_0.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="lobo.jar" targetdir="$INSTALL_PATH"/>
             <executable targetfile="$INSTALL_PATH/lobo.jar"/>
         </pack>
@@ -81,11 +73,5 @@
     
     <!-- Needed for shortcuts -->
     <native type="izpack" name="ShellLink.dll" os="windows"/>
-    
-    <!-- Needed for registry -->
-    <!-- (not currently used)
-    <native type="3rdparty" name="jRegistryKey.dll" os="windows"/>
-    <jar src="../jRegistryKey.jar" os="windows"/>
-    -->
     <jar src="../RegistryPanel.jar"/>
 </installation>
