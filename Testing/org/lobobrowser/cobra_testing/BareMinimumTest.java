@@ -34,6 +34,6 @@ public class BareMinimumTest {
         window.setSize(400, 400);
         window.setVisible(true);
         new SimpleHtmlRendererContext(panel, new SimpleUserAgentContext())
-                .navigate("http://lobobrowser.org/browser/home.jsp");
+                .navigate("http://www.google.com");
     }
 }

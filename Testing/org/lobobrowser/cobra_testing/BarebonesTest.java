@@ -32,7 +32,7 @@ import org.lobobrowser.html.parser.*;
 import org.lobobrowser.html.test.*;
 import org.lobobrowser.html.w3c.HTMLElement;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class BarebonesTest.
  */
@@ -42,7 +42,7 @@ public class BarebonesTest {
         Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
 
         // Open a connection on the URL we want to render first.
-        String uri = "http://lobobrowser.org/browser/home.jsp";
+        String uri = "http://www.google.com";
         URL url = new URL(uri);
         URLConnection connection = url.openConnection();
         InputStream in = connection.getInputStream();

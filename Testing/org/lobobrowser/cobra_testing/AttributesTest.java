@@ -28,14 +28,13 @@ import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.test.SimpleUserAgentContext;
 import org.w3c.dom.Document;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AttributesTest.
  */
 public class AttributesTest {
 
     /** The Constant TEST_URI. */
-    private static final String TEST_URI = "http://lobobrowser.org/contact.jsp";
+    private static final String TEST_URI = "http://www.google.com";
 
     /**
      * @param args

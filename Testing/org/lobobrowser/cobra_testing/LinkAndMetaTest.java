@@ -28,14 +28,14 @@ import org.lobobrowser.html.parser.*;
 import org.lobobrowser.html.test.SimpleUserAgentContext;
 import org.w3c.dom.*;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class LinkAndMetaTest.
  */
 public class LinkAndMetaTest {
 
     /** The Constant TEST_URI. */
-    private static final String TEST_URI = "http://lobobrowser.org/";
+    private static final String TEST_URI = "http://sourceforge.net/projects/loboevolution/";
 
     /**
      * @param args

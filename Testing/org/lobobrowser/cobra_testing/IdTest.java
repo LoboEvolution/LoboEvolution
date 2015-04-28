@@ -14,11 +14,7 @@
 package org.lobobrowser.cobra_testing;
 
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URL;
-import javax.xml.xpath.*;
-import javax.xml.parsers.*;
 import java.util.logging.*;
 
 import org.lobobrowser.html.UserAgentContext;
@@ -29,14 +25,13 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class IdTest.
  */
 public class IdTest {
 
     /** The Constant TEST_URI. */
-    private static final String TEST_URI = "http://usps.com";
+    private static final String TEST_URI = "file:///C:/Users/Administrator/Desktop/1.html";
 
     public static void main(String[] args) throws Exception {
         Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
@@ -48,7 +43,7 @@ public class IdTest {
             InputSourceImpl is = new InputSourceImpl(in, TEST_URI, "ISO-8859-1");
             Document document = builder.parse(is);
             HTMLDocumentImpl doc = (HTMLDocumentImpl) document;
-            Element element = doc.getElementById("trackField");
+            Element element = doc.getElementById("1div");
             System.out.println("##Element=" + element);
             NodeList nodeList = doc.getElementsByTagName("input");
             int length = nodeList.getLength();

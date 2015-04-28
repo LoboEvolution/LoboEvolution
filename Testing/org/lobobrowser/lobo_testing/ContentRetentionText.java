@@ -23,7 +23,7 @@ import org.lobobrowser.clientlet.*;
 import java.awt.Component;
 import java.io.*;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class ContentRetentionText.
  */

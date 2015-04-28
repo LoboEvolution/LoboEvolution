@@ -19,7 +19,7 @@ import org.lobobrowser.util.*;
 import org.lobobrowser.context.*;
 import org.lobobrowser.store.*;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class TextRetentionTest.
  */

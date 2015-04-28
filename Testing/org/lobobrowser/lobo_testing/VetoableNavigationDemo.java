@@ -29,7 +29,7 @@ import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.ua.*;
 import org.lobobrowser.main.PlatformInit;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class VetoableNavigationDemo.
  */
@@ -58,7 +58,7 @@ public class VetoableNavigationDemo extends JFrame {
         // Create a BrowserPanel and set a default home page.
         final BrowserPanel bp = new BrowserPanel();
         this.browserPanel = bp;
-        bp.navigate("http://lobobrowser.org/browser/home.jsp");
+        bp.navigate("http://www.google.com");
 
         // Add a navigation listener.
         bp.addNavigationListener(new LocalNavigationListener());

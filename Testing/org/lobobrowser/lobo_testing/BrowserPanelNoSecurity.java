@@ -47,7 +47,7 @@ public class BrowserPanelNoSecurity extends JFrame {
         final BrowserPanel bp = new BrowserPanel();
         bp.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(
                 EtchedBorder.RAISED), "Embedded browser"));
-        bp.navigate("http://lobobrowser.org/browser/home.jsp");
+        bp.navigate("http://www.google.com");
         this.getContentPane().add(bp);
 
         this.addWindowListener(new java.awt.event.WindowAdapter() {

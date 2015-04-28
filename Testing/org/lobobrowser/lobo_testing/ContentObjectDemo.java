@@ -64,7 +64,7 @@ public class ContentObjectDemo extends JFrame {
         // The response listener will tell us when a page
         // has finished loading.
         bp.addResponseListener(new LocalResponseListener());
-        bp.navigate("http://lobobrowser.org/browser/home.jsp");
+        bp.navigate("http://www.google.com");
 
         // Create a links panel containing a combo box and a button.
         JPanel linksPanel = new JPanel();

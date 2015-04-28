@@ -23,14 +23,14 @@ import org.w3c.dom.*;
 import java.net.*;
 import java.io.*;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class ParseImagesTest.
  */
 public class ParseImagesTest {
 
     /** The Constant TEST_URI. */
-    private static final String TEST_URI = "http://lobobrowser.org";
+    private static final String TEST_URI = "http://sourceforge.net/projects/loboevolution";
 
     public static void main(String[] args) throws Exception {
         UserAgentContext uacontext = new SimpleUserAgentContext();

@@ -21,7 +21,7 @@ import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.test.SimpleHtmlRendererContext;
 import org.lobobrowser.html.test.SimpleUserAgentContext;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class BrowserFrameCallback.
  */

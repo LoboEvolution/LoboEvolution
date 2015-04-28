@@ -18,7 +18,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import org.lobobrowser.gui.*;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class TestWindow.
  */

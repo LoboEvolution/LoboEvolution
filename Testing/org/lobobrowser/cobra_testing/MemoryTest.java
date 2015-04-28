@@ -38,7 +38,7 @@ import javax.swing.*;
 
 import java.awt.*;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class MemoryTest.
  */

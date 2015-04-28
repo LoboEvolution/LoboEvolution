@@ -39,6 +39,6 @@ public class LoboTestFrame extends JFrame {
     public LoboTestFrame() throws Exception {
         FramePanel framePanel = new FramePanel();
         this.getContentPane().add(framePanel);
-        framePanel.navigate("http://lobobrowser.org/browser/home.jsp");
+        framePanel.navigate("www.google.com");
     }
 }

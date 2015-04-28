@@ -28,14 +28,13 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ParseAnchorsTest.
  */
 public class ParseAnchorsTest {
 
     /** The Constant TEST_URI. */
-    private static final String TEST_URI = "http://lobobrowser.org";
+    private static final String TEST_URI = "http://sourceforge.net/projects/loboevolution/";
 
     public static void main(String[] args) throws Exception {
         Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);

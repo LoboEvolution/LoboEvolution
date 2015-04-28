@@ -19,7 +19,7 @@ import org.lobobrowser.main.*;
 import org.lobobrowser.context.*;
 import org.lobobrowser.store.*;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class JavaCompilationLoop1.
  */

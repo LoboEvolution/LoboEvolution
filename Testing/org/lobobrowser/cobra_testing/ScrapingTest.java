@@ -35,7 +35,7 @@ import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
 import org.lobobrowser.html.test.*;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class ScrapingTest.
  */
