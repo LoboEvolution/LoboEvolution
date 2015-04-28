@@ -20,12 +20,11 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.bind.DatatypeConverter;
+
 import org.lobobrowser.http.Header.Element;
 import org.lobobrowser.util.AbstractBean;
 import org.w3c.dom.Document;
-
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 /**
  * <p>
@@ -723,7 +722,7 @@ public class Request extends AbstractBean {
      *             the exception
      */
     private static String base64Encode(String s) throws Exception {
-        return new String(new BASE64Encoder().encode(s.getBytes()));
+        return new String(DatatypeConverter.printBase64Binary(s.getBytes()));
     }
 
     /**
@@ -736,6 +735,6 @@ public class Request extends AbstractBean {
      *             the exception
      */
     private static String base64Decode(String s) throws Exception {
-        return new String(new BASE64Decoder().decodeBuffer(s));
+        return new String(DatatypeConverter.parseBase64Binary(s));
     }
 }

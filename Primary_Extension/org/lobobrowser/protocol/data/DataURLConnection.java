@@ -28,7 +28,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
 
-import sun.misc.BASE64Decoder;
+import javax.xml.bind.DatatypeConverter;
 
 public class DataURLConnection extends HttpURLConnection {
 
@@ -148,7 +148,7 @@ public class DataURLConnection extends HttpURLConnection {
             }
 
             if (base64) {
-                this.content = new BASE64Decoder().decodeBuffer(value);
+                this.content = DatatypeConverter.parseBase64Binary(value);
             } else {
                 value = URLDecoder.decode(value, charset);
                 this.content = value.getBytes();
