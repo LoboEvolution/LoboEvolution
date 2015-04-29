@@ -1,43 +1,42 @@
-<?xml version="1.0"?>	
+<?xml version="1.0"?>
 <!-- ====================================================================== 
 Gen 04, 2015 17:15                                                        
-
 The Lobo Evolution
 Author: J. H. S.
 ====================================================================== -->
 <project name="project" default="default">
-    
-	<mkdir dir="\opt\XAMJ_Project"/>
-	<mkdir dir="\opt\XAMJ_Project\Common"/>
-	<mkdir dir="\opt\XAMJ_Project\parser"/>
-	<mkdir dir="\opt\html_xamjwg_org\cobra-api"/>
-	<mkdir dir="\opt\html_xamjwg_org\platform-api"/>
-	<mkdir dir="\opt\html_xamjwg_org\public-api"/>
-	<mkdir dir="\opt\IzPack\lib"/>
-	<copy file="compiler.jar" todir="C:\opt\IzPack\lib"/>
-	<copy file="install.xml" todir="C:\opt\XAMJ_Project\XAMJ_Build"/>
-	<taskdef name="izpack" classpath="/opt/IzPack/lib/compiler.jar" 
+
+	<mkdir dir="\tmp\XAMJ_Project"/>
+	<mkdir dir="\tmp\XAMJ_Project\Common"/>
+	<mkdir dir="\tmp\XAMJ_Project\parser"/>
+	<mkdir dir="\tmp\html_xamjwg_org\cobra-api"/>
+	<mkdir dir="\tmp\html_xamjwg_org\platform-api"/>
+	<mkdir dir="\tmp\html_xamjwg_org\public-api"/>
+	<mkdir dir="\tmp\IzPack\lib"/>
+	<copy file="compiler.jar" todir="C:\tmp\IzPack\lib"/>
+	<copy file="install.xml" todir="C:\tmp\XAMJ_Project\XAMJ_Build"/>
+	<taskdef name="izpack" classpath="/tmp/IzPack/lib/compiler.jar" 
 			 classname="com.izforge.izpack.ant.IzPackTask"/>
-	
+
 	<property name="lobo.version" value=" 0.98.6"/>
 	<property name="build.dir" value="/tmp/lobo-build/"/>
 	<property name="lobo.dir" value="${build.dir}/lobo-${lobo.version}"/>
-	<!-- Install IzPack under /opt/ directory -->
-	<property name="izpack.home" value="/opt/IzPack/"/>
-	
-    <description>
+	<!-- Install IzPack under /tmp/ directory -->
+	<property name="izpack.home" value="/tmp/IzPack/"/>
+
+	<description>
     	Lobo Project
     </description>
 
-    <target name="default" depends="builddir,distros">
-    </target>
+	<target name="default" depends="builddir,distros">
+	</target>
 
 	<target name="distros" depends="cobra,installer,lobo_zip"/>
-	
+
 	<target name="builddir">
-	   <mkdir dir="${build.dir}"/>
+		<mkdir dir="${build.dir}"/>
 	</target>
-		
+
 	<target name="installer" depends="izpackext_jar,directory_structure">
 		<copy todir="${build.dir}">
 			<fileset dir="../XAMJ_Build" includes="jRegistryKey.jar"/>
@@ -45,209 +44,174 @@ Author: J. H. S.
 		<copy todir="${izpack.home}/bin/panels">
 			<fileset dir="${build.dir}" includes="RegistryPanel.jar"/>
 		</copy>
-		<izpack input="/opt/XAMJ_Project/XAMJ_Build/install.xml"
+		<izpack input="/tmp/XAMJ_Project/XAMJ_Build/install.xml"
 			    output="${build.dir}/install-lobo-${lobo.version}.jar"
 			    installerType="standard"
 				basedir="${lobo.dir}"
 			    izPackDir="${izpack.home}"
-		/>			    
+		/>
 	</target>
-	
+
 	<target name="lobo_zip" depends="directory_structure">
-    	<zip destfile="${build.dir}/lobo-distro-${lobo.version}.zip">
- 		   <zipfileset dir="${lobo.dir}" includes="**" prefix="lobo-distro-${lobo.version}"/>
-    	</zip>
+		<zip destfile="${build.dir}/lobo-distro-${lobo.version}.zip">
+			<zipfileset dir="${lobo.dir}" includes="**" prefix="lobo-distro-${lobo.version}"/>
+		</zip>
 	</target>
 
 	<target name="directory_structure" depends="cobra_no_commons,primary_extension,lobo_jar,public_jar">
 		<mkdir dir="${lobo.dir}"/>
 		<delete>
 			<fileset dir="${lobo.dir}">
-			    <include name="**"/>
+				<include name="**"/>
 			</fileset>
-	    </delete>
+		</delete>
 		<copy todir="${lobo.dir}">
 			<fileset dir="../XAMJ_Build" includes="LICENSE.txt,ACKNOWLEDGMENTS.txt,README.txt,*.xml,*.ico,*.gif,*.png,*.jpg,*.htln"/>
 			<fileset dir="${build.dir}" includes="lobo.jar,lobo-pub.jar"/>
 		</copy>
 		<copy todir="${lobo.dir}/ext">
-	 		<fileset dir="../XAMJ_Build/ext" includes="*.jar"/>
-	 		<fileset dir="${build.dir}" includes="cobra-no-commons.jar"/>
-	 		<fileset dir="${build.dir}" includes="primary.jar"/>
-		</copy>				
+			<fileset dir="../XAMJ_Build/ext" includes="*.jar"/>
+			<fileset dir="${build.dir}" includes="cobra-no-commons.jar"/>
+			<fileset dir="${build.dir}" includes="primary.jar"/>
+		</copy>
 		<copy todir="${lobo.dir}/doc/platform-api">
-			 <fileset dir="/opt/html_xamjwg_org/platform-api/" includes="**/*.html,**/*.css,**/*.gif"/>
+			<fileset dir="/tmp/html_xamjwg_org/platform-api/" includes="**/*.html,**/*.css,**/*.gif"/>
 		</copy>
 		<copy todir="${lobo.dir}/doc/public-api">
-			 <fileset dir="/opt/html_xamjwg_org/public-api/" includes="**/*.html,**/*.css,**/*.gif"/>
+			<fileset dir="/tmp/html_xamjwg_org/public-api/" includes="**/*.html,**/*.css,**/*.gif"/>
 		</copy>
 		<copy todir="${lobo.dir}/doc">
-			 <fileset dir="../XAMJ_Build/lobo-docs" includes="**/*.html,**/*.css,**/*.gif"/>
+			<fileset dir="../XAMJ_Build/lobo-docs" includes="**/*.html,**/*.css,**/*.gif"/>
 		</copy>
 	</target>
 
 	<target name="cobra_no_commons" depends="html_classfiles,parser_classfiles">
-    	<jar  destfile="${build.dir}/cobra-no-commons.jar"
-    		 basedir="../HTML_Renderer"
+		<jar destfile="${build.dir}/cobra-no-commons.jar"
+    		 basedir="../HTML_Renderer/bin/"
     		 includes="**/*.class,**/*.xml,**/*.xamj,**/.xami,**/*.gif,**/*.png,**/*.jpg"
     	/>
-    	<jar destfile="${build.dir}/cobra-no-commons.jar"
-    		 basedir="../parser/src"
+		<jar destfile="${build.dir}/cobra-no-commons.jar"
+    		 basedir="../parser/bin/"
     		 includes="**/*.class,**/*.xml,**/*.xamj,**/.xami,**/*.gif,**/*.png,**/*.jpg"
     		 update="true"
-    	/>				
+    	/>
 	</target>
-	
+
 	<target name="primary_extension" depends="primary_extension_classfiles">
-    	<jar  destfile="${build.dir}/primary.jar"
-    		 basedir="../Primary_Extension"
+		<jar  destfile="${build.dir}/primary.jar"
+    		 basedir="../Primary_Extension/bin/"
     		 includes="**/*.class,**/*.xml,**/*.xamj,**/.xami,**/*.gif,**/*.png,**/*.jpg,**/*.properties"
     	/>
 	</target>
 
-    <target name="public_jar" depends="public_classfiles">
-    	<jar destfile="${build.dir}/lobo-pub.jar"
- 		 basedir="../Platform_Public_API"
+	<target name="public_jar" depends="public_classfiles">
+		<jar destfile="${build.dir}/lobo-pub.jar"
+ 		 basedir="../Platform_Public_API/bin/"
     		 includes="**/*.class,**/*.xml,**/*.xamj,**/.xami,**/*.gif,**/*.png,**/*.jpg"
     	/>
-    </target>
+	</target>
 
 	<target name="public_classfiles">
-		<javac srcdir="../Platform_Public_API"
+		<javac srcdir="../Platform_Public_API/bin/"
 		 source="1.8"
-         destdir="../Platform_Public_API"
+         destdir="../Platform_Public_API/bin/"
          classpath=""
          debug="on"
 	     includeantruntime="false"		 
-		/>        
-    </target>
+		/>
+	</target>
 
 	<target name="primary_extension_classfiles">
-		<javac srcdir="../Primary_Extension"
+		<javac srcdir="../Primary_Extension/bin/"
 		 source="1.8"
-         destdir="../Primary_Extension"
+         destdir="../Primary_Extension/bin/"
          classpath=""
          debug="on"
 		 includeantruntime="false"
-		/>        
-    </target>
+		/>
+	</target>
 
-	<!--target name="jweb_classfiles">
-		<javac srcdir="../JWebContentExtension"
-		 source="1.8"
-         destdir="../JWebContentExtension"
-         classpath=""
-         debug="on"
-		 includeantruntime="false"
-		/>        
-    </target-->
-
-    <target name="lobo_jar" depends="lobo_classfiles,common_classfiles">
-    	<jar  destfile="${build.dir}/lobo.jar"
-    		 basedir="../Platform_Core"
-    		 includes="**/*.class,**/*.xml,**/*.xamj,**/.xami,**/*.gif,**/*.png,**/*.jpg,**/*.properties"
+	<target name="lobo_jar" depends="lobo_classfiles,common_classfiles">
+		<jar destfile="${build.dir}/lobo.jar"
+    		 basedir="../Platform_Core/bin/"
+    		 includes="**/*.class"
     		 manifest="../XAMJ_Build/re_manifest.mf"
     	/>
-    	<jar destfile="${build.dir}/lobo.jar"
-    		 basedir="../Common"
-    		 includes="**/*.class,**/*.xml,**/*.xamj,**/.xami,**/*.gif,**/*.png,**/*.jpg"
+		<jar destfile="${build.dir}/lobo.jar"
+    		 basedir="../Common/bin/"
+    		 includes="**/*.class"
     		 update="true"
-    	/>		
-    </target>
-
-   	<target name="lobo_classfiles" depends="public_classfiles,common_classfiles">
-		<javac srcdir="../Platform_Core"
-		 source="1.8"
-         destdir="../Platform_Core"
-         classpath="Common:Platform_Public_API"
-         debug="on"
-		 includeantruntime="false"
-		/>        
-    </target>
-	
-   	<target name="common_classfiles" depends="">
-		<javac srcdir="../Common"
-	     source="1.8"
-         destdir="../Common"
-         classpath=""
-         debug="on"
-		 includeantruntime="false"
-		/>        
-    </target>
-	
-   	<target name="html_classfiles" depends="common_classfiles,parser_classfiles">
-		<javac srcdir="../HTML_Renderer"
-	     source="1.8"
-         destdir="../HTML_Renderer"
-         classpath="Common:parser/src:XAMJ_Build/ext/js.jar"
-         debug="on"
-		 includeantruntime="false"
-		/>        
-    </target>
-
-   	<target name="parser_classfiles">
-		<javac srcdir="../parser/src"
-		 source="1.8"
-         destdir="../parser/src"
-         classpath=""
-         debug="on"
-		 includeantruntime="false"	
-		/>        
-    </target>
-
-	<target name="console_jar" depends="console_classfiles">
-    	<jar destfile="XAMJ_Build/console.jar"
-    		 basedir="../Console"
-    		 includes="**/*.class,**/*.xml,**/*.xamj,**/.xami,**/*.gif,**/*.png,**/*.jpg"
-    		 manifest="XAMJ_Build/console_manifest.mf"
     	/>
-    </target>
+		<jar destfile="${build.dir}/lobo.jar"
+    		 basedir="../Platform_Core/src/main/resources/"
+    		 includes="**/*.properties"
+    		 update="true"
+		/>
+		<jar destfile="${build.dir}/lobo.jar"
+    		 basedir="../Platform_Core/"
+    		 includes="**/*.png"
+    		 update="true"
+		/>
+	</target>
 
-   	<target name="console_classfiles">
-		<javac srcdir="../Console"
+	<target name="lobo_classfiles" depends="public_classfiles,common_classfiles">
+		<javac srcdir="../Platform_Core/bin/"
 		 source="1.8"
-         destdir="../Console"
-         classpath="XAMJ_Reference_Engine:XAMJ_Security"
+         destdir="../Platform_Core/bin/"
+         classpath="Common/bin/:Platform_Public_API/bin/"
          debug="on"
-		 includeantruntime="false"	
-		/>        
-    </target>
+		 includeantruntime="false"
+		/>
+	</target>
 
-	<target name="detect_jar" depends="detect_classfiles">
-    	<jar destfile="XAMJ_Build/lobo-detect.jar"
-    		 basedir="../Detect_Ext"
-    		 includes="**/*.class,**/*.xml,**/*.xamj,**/.xami,**/*.gif,**/*.png,**/*.jpg"
-    	/>
-    </target>
+	<target name="common_classfiles" depends="">
+		<javac srcdir="../Common/bin/"
+	     source="1.8"
+         destdir="../Common/bin/"
+         classpath=""
+         debug="on"
+		 includeantruntime="false"
+		/>
+	</target>
 
-   	<target name="detect_classfiles">
-		<javac srcdir="../Detect_Ext"
-		  source="1.8"
-         destdir="../Detect_Ext"
+	<target name="html_classfiles" depends="common_classfiles,parser_classfiles">
+		<javac srcdir="../HTML_Renderer/bin/"
+	     source="1.8"
+         destdir="../HTML_Renderer/bin/"
+         classpath="Common:parser/bin/"
+         debug="on"
+		 includeantruntime="false"
+		/>
+	</target>
+
+	<target name="parser_classfiles">
+		<javac srcdir="../parser/bin/"
+		 source="1.8"
+         destdir="../parser/bin/"
          classpath=""
          debug="on"
 		 includeantruntime="false"	
-		/>        
-    </target>
-	
+		/>
+	</target>
+
 	<target name="izpackext_jar" depends="izpackext_classfiles">
-    	<jar destfile="${build.dir}/RegistryPanel.jar" basedir="../IzPack_RegistryPanel"
+		<jar destfile="${build.dir}/RegistryPanel.jar" 
+			  basedir="../IzPack_RegistryPanel/bin/"
     		 includes="**/*.class,**/*.xml,**/*.xamj,**/.xami,**/*.gif,**/*.png,**/*.jpg"
     	/>
-    </target>
+	</target>
 
 	<target name="izpackext_classfiles">
-		<javac srcdir="../IzPack_RegistryPanel"
+		<javac srcdir="../IzPack_RegistryPanel/bin/"
 	     source="1.8"
-         destdir="../IzPack_RegistryPanel"
-         classpath=""
+         destdir="../IzPack_RegistryPanel/bin/"
+         classpath="XAMJ_Build/installer.jar"
          debug="on"
 		 includeantruntime="false"
-		/>        
-    </target>
-	
-	<target name="cobra">		
+		/>
+	</target>
+
+	<target name="cobra">
 		<ant antfile="../HTML_Renderer/build.xml" target="default"/>
 	</target>
 </project>
-

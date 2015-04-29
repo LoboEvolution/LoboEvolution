@@ -5,8 +5,8 @@ May 29, 2005 1:42:43 PM
 Cobra HTML Toolkit Project
 Author: J. H. S.
 ====================================================================== -->
-<project name="project" default="default" basedir="/opt/XAMJ_Project">
-	<property name="cobra.version" value="0.98.5"/>
+<project name="project" default="default" basedir="/tmp/XAMJ_Project">
+	<property name="cobra.version" value="0.98.6"/>
 	<property name="cobra.name" value="cobra-${cobra.version}"/>
 
 	<description>
@@ -27,7 +27,7 @@ Author: J. H. S.
 			<zipfileset dir="../Common" includes="org/**/*.java,org/**/*.xml,org/**/*.html" prefix="${cobra.name}/src"/>
 			<zipfileset dir="../parser/src" includes="org/**/*.java,org/**/*.xml,org/**/*.html" prefix="${cobra.name}/src"/>
 			<zipfileset dir="../parser/src" includes="com/**/*.java,com/**/*.xml,com/**/*.html" prefix="${cobra.name}/src"/>
-			<zipfileset dir="/opt/html_xamjwg_org/cobra-api/" includes="**/*.html,**/*.css,**/*.gif" prefix="${cobra.name}/doc/api"/>
+			<zipfileset dir="/tmp/html_xamjwg_org/cobra-api/" includes="**/*.html,**/*.css,**/*.gif" prefix="${cobra.name}/doc/api"/>
 		</zip>
 	</target>
 
@@ -52,7 +52,7 @@ Author: J. H. S.
 			source="1.8" 
 			includeantruntime="false" />
 
-		<javac srcdir="../parser/src"
+		<javac srcdir="../parser/src/"
          destdir="/tmp/cobra-build"
          classpath=""
          debug="on"

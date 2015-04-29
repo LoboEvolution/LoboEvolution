@@ -9,7 +9,7 @@ This module is released under the GPL license.
 These are the *VM* arguments currently (5/20/2007) needed
 to run Lobo from source (in Eclipse at least):
 
--Dext.dirs=/opt/XAMJ_Project/XAMJ_Build/ext -Dext.files=/opt/XAMJ_Project/Primary_Extension,/opt/XAMJ_Project/Common,/opt/XAMJ_Project/HTML_Renderer,/opt/XAMJ_Project/cssparser/bin,/opt/XAMJ_Project/JWebContentExtension
+-Dext.dirs=/tmp/XAMJ_Project/XAMJ_Build/ext -Dext.files=/tmp/XAMJ_Project/Primary_Extension,/tmp/XAMJ_Project/Common,/tmp/XAMJ_Project/HTML_Renderer,/tmp/XAMJ_Project/cssparser/bin,/tmp/XAMJ_Project/JWebContentExtension
 
 The following are recommended *program* arguments to run
 from source:
