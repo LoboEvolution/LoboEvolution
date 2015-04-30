@@ -15,7 +15,10 @@
         The gui preferences indication.
         Sets the installer window to 640x480. It will not be able to change the size.
     -->
-    <guiprefs width="640" height="480" resizable="no"/>
+    <guiprefs width="640" height="480" resizable="no">
+    	<modifier key="headingPanelCounter" value="progressbar"/>
+  		<modifier key="headingPanelCounterPos" value="inNavigationPanel"/>
+    </guiprefs>
     
     <!-- 
         The locale section.
@@ -30,6 +33,7 @@
     -->
     <resources>
         <res id="LicencePanel.licence" src="LICENSE.txt"/>
+        <res id="InfoPanel.info" src="ACKNOWLEDGMENTS.txt"/>
         <res id="Unix_shortcutSpec.xml" src="default-shortcut-spec.xml"/>
         <res id="shortcutSpec.xml" src="windows-shortcut-spec.xml"/>
         <res id="ProcessPanel.Spec.xml" src="process-panel.xml"/>
@@ -42,6 +46,7 @@
     <panels>
         <panel classname="HelloPanel"/>
         <panel classname="LicencePanel"/>
+        <panel classname="InfoPanel"/>
         <panel classname="TargetPanel"/> 
         <panel classname="InstallPanel"/>
         <panel classname="ShortcutPanel"/>
