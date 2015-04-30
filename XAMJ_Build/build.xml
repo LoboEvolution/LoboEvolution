@@ -15,7 +15,7 @@ Author: J. H. S.
 	<mkdir dir="\tmp\IzPack\lib"/>
 	<copy file="compiler.jar" todir="C:\tmp\IzPack\lib"/>
 	<copy file="install.xml" todir="C:\tmp\XAMJ_Project\XAMJ_Build"/>
-	<taskdef name="izpack" classpath="/tmp/IzPack/lib/compiler.jar" 
+	<taskdef name="izpack" classpath="compiler.jar" 
 			 classname="com.izforge.izpack.ant.IzPackTask"/>
 
 	<property name="lobo.version" value=" 0.98.6"/>
