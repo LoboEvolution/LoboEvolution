@@ -1,41 +1,23 @@
 <?xml version="1.0"?>
-<!-- ====================================================================== 
-Gen 04, 2015 17:15                                                        
+<!-- ======================================================================                                                     
 The Lobo Evolution
-Author: J. H. S.
 ====================================================================== -->
 <project name="project" default="default">
 
-	<mkdir dir="\tmp\XAMJ_Project"/>
-	<mkdir dir="\tmp\XAMJ_Project\Common"/>
-	<mkdir dir="\tmp\XAMJ_Project\parser"/>
-	<mkdir dir="\tmp\html_xamjwg_org\cobra-api"/>
-	<mkdir dir="\tmp\html_xamjwg_org\platform-api"/>
-	<mkdir dir="\tmp\html_xamjwg_org\public-api"/>
-	<mkdir dir="\tmp\IzPack\lib"/>
-	<copy file="compiler.jar" todir="C:\tmp\IzPack\lib"/>
-	<copy file="install.xml" todir="C:\tmp\XAMJ_Project\XAMJ_Build"/>
-	<taskdef name="izpack" classpath="compiler.jar" 
-			 classname="com.izforge.izpack.ant.IzPackTask"/>
+	<description> Lobo Evolution</description>
 
 	<property name="lobo.version" value=" 0.98.6"/>
 	<property name="build.dir" value="/tmp/lobo-build/"/>
 	<property name="lobo.dir" value="${build.dir}/lobo-${lobo.version}"/>
-	<!-- Install IzPack under /tmp/ directory -->
 	<property name="izpack.home" value="/tmp/IzPack/"/>
 
-	<description>
-    	Lobo Project
-    </description>
+	<taskdef name="izpack" classpath="compiler.jar" 
+			 classname="com.izforge.izpack.ant.IzPackTask"/>
 
-	<target name="default" depends="builddir,distros">
-	</target>
+	<target name="default" depends="builddir,distros"/>
+	<target name="distros" depends="installer,lobo_zip"/>
 
-	<target name="distros" depends="cobra,installer,lobo_zip"/>
-
-	<target name="builddir">
-		<mkdir dir="${build.dir}"/>
-	</target>
+	<target name="builddir"><mkdir dir="${build.dir}"/></target>
 
 	<target name="installer" depends="izpackext_jar,directory_structure">
 		<copy todir="${build.dir}">
@@ -44,7 +26,7 @@ Author: J. H. S.
 		<copy todir="${izpack.home}/bin/panels">
 			<fileset dir="${build.dir}" includes="RegistryPanel.jar"/>
 		</copy>
-		<izpack input="/tmp/XAMJ_Project/XAMJ_Build/install.xml"
+		<izpack input="install.xml"
 			    output="${build.dir}/install-lobo-${lobo.version}.jar"
 			    installerType="standard"
 				basedir="${lobo.dir}"
@@ -73,12 +55,6 @@ Author: J. H. S.
 			<fileset dir="../XAMJ_Build/ext" includes="*.jar"/>
 			<fileset dir="${build.dir}" includes="cobra-no-commons.jar"/>
 			<fileset dir="${build.dir}" includes="primary.jar"/>
-		</copy>
-		<copy todir="${lobo.dir}/doc/platform-api">
-			<fileset dir="/tmp/html_xamjwg_org/platform-api/" includes="**/*.html,**/*.css,**/*.gif"/>
-		</copy>
-		<copy todir="${lobo.dir}/doc/public-api">
-			<fileset dir="/tmp/html_xamjwg_org/public-api/" includes="**/*.html,**/*.css,**/*.gif"/>
 		</copy>
 		<copy todir="${lobo.dir}/doc">
 			<fileset dir="../XAMJ_Build/lobo-docs" includes="**/*.html,**/*.css,**/*.gif"/>
@@ -209,9 +185,5 @@ Author: J. H. S.
          debug="on"
 		 includeantruntime="false"
 		/>
-	</target>
-
-	<target name="cobra">
-		<ant antfile="../HTML_Renderer/build.xml" target="default"/>
 	</target>
 </project>
