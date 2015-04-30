@@ -20,13 +20,19 @@ import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import org.apache.batik.transcoder.TranscoderException;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
+import org.lobobrowser.html.dombl.SVGRasterizer;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.HtmlController;
@@ -91,6 +97,18 @@ ImageListener {
                         e.getY());
             }
         });
+        
+        if (modelNode.getSrc().contains("svg")) {
+
+			try {
+				URL u = new URL(modelNode.getSrc());
+				SVGRasterizer r = new SVGRasterizer(u);
+				image = r.bufferedImageToImage();
+				
+			} catch (MalformedURLException | TranscoderException e1) {
+				e1.printStackTrace();
+			}
+		}
     }
 
     /*

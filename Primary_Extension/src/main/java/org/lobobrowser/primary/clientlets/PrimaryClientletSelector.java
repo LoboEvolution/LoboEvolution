@@ -69,7 +69,8 @@ public class PrimaryClientletSelector implements ClientletSelector {
         } else if ("image/jpeg".equals(mimeTypeTL)
                 || "image/jpg".equals(mimeTypeTL)
                 || "image/gif".equals(mimeTypeTL)
-                || "image/png".equals(mimeTypeTL)) {
+                || "image/png".equals(mimeTypeTL)
+                || "image/svg+xml".equals(mimeTypeTL)) {
             return new ImageClientlet();
         } else if ((mimeType == null)
                 || "application/octet-stream".equals(mimeTypeTL)
@@ -84,7 +85,7 @@ public class PrimaryClientletSelector implements ClientletSelector {
                     || (extensionTL.length() == 0)) {
                 return new HtmlClientlet();
             } else if ("gif".equals(extensionTL) || "jpg".equals(extensionTL)
-                    || "png".equals(extensionTL)) {
+                    || "png".equals(extensionTL) || "svg".equals(extensionTL)) {
                 return new ImageClientlet();
             } else {
                 return null;
@@ -119,9 +120,8 @@ public class PrimaryClientletSelector implements ClientletSelector {
             if ("xhtml".equals(extensionTL)) {
                 return new HtmlClientlet();
             } else if ("txt".equals(extensionTL) || "xml".equals(extensionTL)
-                    || "svg".equals(extensionTL) || "rss".equals(extensionTL)
-                    || "xaml".equals(extensionTL) || "css".equals(extensionTL)
-                    || "js".equals(extensionTL)) {
+                    || "js".equals(extensionTL) || "rss".equals(extensionTL)
+                    || "xaml".equals(extensionTL) || "css".equals(extensionTL)) {
                 return new TextClientlet();
             } else if ("pdf".equals(extensionTL)) {
                 return new PdfClientlet();

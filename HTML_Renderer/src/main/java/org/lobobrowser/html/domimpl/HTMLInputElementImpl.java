@@ -163,24 +163,6 @@ HTMLInputElement {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getSrc()
-     */
-    @Override
-    public String getSrc() {
-        return this.getAttribute(HtmlAttributeProperties.SRC);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setSrc(java.lang.String)
-     */
-    @Override
-    public void setSrc(String src) {
-        this.setAttribute(HtmlAttributeProperties.SRC, src);
-    }
-
     /**
      * Gets input type in lowercase.
      *

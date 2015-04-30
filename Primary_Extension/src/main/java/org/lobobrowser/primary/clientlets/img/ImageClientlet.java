@@ -20,6 +20,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,6 +31,7 @@ import org.lobobrowser.clientlet.ClientletContext;
 import org.lobobrowser.clientlet.ClientletException;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ComponentContent;
+import org.lobobrowser.html.dombl.SVGRasterizer;
 import org.lobobrowser.util.io.IORoutines;
 
 /**
@@ -38,9 +40,8 @@ import org.lobobrowser.util.io.IORoutines;
 public class ImageClientlet implements Clientlet {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(ImageClientlet.class
-            .getName());
-
+    private static final Logger logger = Logger.getLogger(ImageClientlet.class.getName());
+    
     /**
      * Instantiates a new image clientlet.
      */
@@ -54,27 +55,41 @@ public class ImageClientlet implements Clientlet {
      * ClientletContext)
      */
     @Override
-    public void process(ClientletContext context) throws ClientletException {
-        ClientletResponse response = context.getResponse();
-        String mimeType = response.getMimeType();
-        int contentLength = response.getContentLength();
-        byte[] imageBytes;
-        try {
-            InputStream in = response.getInputStream();
-            if (contentLength == -1) {
-                imageBytes = IORoutines.load(in);
-            } else {
-                imageBytes = IORoutines.loadExact(in, contentLength);
-            }
-        } catch (IOException ioe) {
-            throw new ClientletException(ioe);
-        }
-        if (logger.isLoggable(Level.INFO)) {
-            logger.info("process(): Loaded " + imageBytes.length + " bytes.");
-        }
-        Image image = Toolkit.getDefaultToolkit().createImage(imageBytes);
-        context.setResultingContent(new ImageContent(image, mimeType));
-    }
+	public void process(ClientletContext context) throws ClientletException {
+		ClientletResponse response = context.getResponse();
+		String mimeType = response.getMimeType();
+		int contentLength = response.getContentLength();
+		URL url = response.getResponseURL();
+		Image image = null;
+				
+		if (url != null && url.toString().contains("svg")) {
+
+			SVGRasterizer r = new SVGRasterizer(url);
+			image  = Toolkit.getDefaultToolkit().createImage(r.createBufferedImage().getSource());
+		
+		} else {
+
+			byte[] imageBytes;
+			try {
+				InputStream in = response.getInputStream();
+				if (contentLength == -1) {
+					imageBytes = IORoutines.load(in);
+				} else {
+					imageBytes = IORoutines.loadExact(in, contentLength);
+				}
+			} catch (IOException ioe) {
+				throw new ClientletException(ioe);
+			}
+			if (logger.isLoggable(Level.INFO)) {
+				logger.info("process(): Loaded " + imageBytes.length
+						+ " bytes.");
+			}
+			image = Toolkit.getDefaultToolkit().createImage(imageBytes);
+
+		}
+
+		context.setResultingContent(new ImageContent(image, mimeType));
+	}
 
     /**
      * The Class ImageContent.

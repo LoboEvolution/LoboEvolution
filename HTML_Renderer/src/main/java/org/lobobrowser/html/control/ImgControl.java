@@ -26,8 +26,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.apache.batik.transcoder.TranscoderException;
 import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
+import org.lobobrowser.html.dombl.SVGRasterizer;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.renderer.HtmlController;
 import org.lobobrowser.html.renderer.RElement;
@@ -77,6 +82,8 @@ public class ImgControl extends BaseControl implements ImageListener {
      *
      * @param modelNode
      *            the model node
+     * @throws MalformedURLException 
+     * @throws TranscoderException 
      * @throws IOException
      */
     public ImgControl(HTMLImageElementImpl modelNode) {
@@ -101,6 +108,19 @@ public class ImgControl extends BaseControl implements ImageListener {
                         e.getY());
             }
         });
+        
+        
+		if (modelNode.getSrc().contains("svg")) {
+
+			try {
+				URL u = new URL(modelNode.getSrc());
+				SVGRasterizer r = new SVGRasterizer(u);
+				image = r.bufferedImageToImage();
+				
+			} catch (MalformedURLException | TranscoderException e1) {
+				e1.printStackTrace();
+			}
+		}
 
         if (modelNode.getHeight() > 0) {
             imageHeight = modelNode.getHeight();

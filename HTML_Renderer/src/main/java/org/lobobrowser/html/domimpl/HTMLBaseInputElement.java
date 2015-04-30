@@ -265,6 +265,14 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
         this.setAttribute(HtmlAttributeProperties.PLACEHOLDER, placeholder);
 
     }
+   
+    public String getSrc() {
+        return this.getAttribute(HtmlAttributeProperties.SRC);
+    }
+
+    public void setSrc(String src) {
+        this.setAttribute(HtmlAttributeProperties.SRC, src);
+    }
 
     /*
      * (non-Javadoc)

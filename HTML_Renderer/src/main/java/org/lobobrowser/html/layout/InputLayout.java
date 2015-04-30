@@ -67,8 +67,7 @@ public class InputLayout extends CommonWidgetLayout {
      *            the markup element
      * @return the base input control
      */
-    private final BaseInputControl createInputControl(
-            HTMLBaseInputElement markupElement) {
+    private final BaseInputControl createInputControl(HTMLBaseInputElement markupElement) {
         String type = markupElement.getAttribute(HtmlAttributeProperties.TYPE);
         if (type == null) {
             return new InputTextControl(markupElement);
