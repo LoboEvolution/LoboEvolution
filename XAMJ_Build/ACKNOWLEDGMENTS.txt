@@ -1,19 +1,18 @@
 The following open source externals are used by this project:
 
-* [izforge.com] IzPack Installer (Apache License 2.0)
-  That's how we build the Warrior installer. 
+* [izforge.com] IzPack Installer That's how we build the Warrior installer. 
 
 * [http://sourceforge.net/projects/jregistrykey/] jRegistryKey
   
-* [https://github.com/apigee/rhino] Rhino - Javascript for Java 
+* [https://github.com/mozilla/rhino] Rhino - Javascript for Java 
   
 * [http://cssparser.sourceforge.net/] Cssparser
 
 * [http://java.sun.com] Java(TM) Look and Feel Graphics Repository 1.0
-  
-* [http://grepcode.com/snapshot/repo1.maven.org/maven2/net.java.openjfx.backport/openjfx-78-backport/1.8.0-ea-b96.1] backport of OpenJFX 8 to run on Java 7
 
 * [https://github.com/sabren/java-XmlHttpRequest] Java implementation of the W3C's XmlHttpRequest API.
 
 * [https://github.com/kevinsawicki/http-request] A simple convenience library for using a HttpURLConnection to make requests and access the response.
+
+* [https://xmlgraphics.apache.org/batik/] A java-based toolkit for applications or applets that want to use images in the Scalable Vector Graphics (SVG)
   
