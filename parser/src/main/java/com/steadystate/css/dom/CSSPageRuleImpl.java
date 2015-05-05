@@ -51,17 +51,14 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
 
     private static final long serialVersionUID = -6007519872104320812L;
 
-    private String ident_;
     private String pseudoPage_;
     private CSSStyleDeclaration style_;
 
     public CSSPageRuleImpl(
             final CSSStyleSheetImpl parentStyleSheet,
             final CSSRule parentRule,
-            final String ident,
             final String pseudoPage) {
         super(parentStyleSheet, parentRule);
-        ident_ = ident;
         pseudoPage_ = pseudoPage;
     }
 
@@ -74,12 +71,22 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
     }
 
     public String getCssText() {
+        final StringBuilder result = new StringBuilder();
+
         final String sel = getSelectorText();
-        return "@page "
-            + sel + ((sel.length() > 0) ? " " : "")
-            + "{"
-            + getStyle().getCssText()
-            + "}";
+        result.append("@page ").append(sel);
+
+        if ((sel.length() > 0)) {
+            result.append(" ");
+        }
+        result.append("{");
+
+        final CSSStyleDeclaration style = getStyle();
+        if (null != style) {
+            result.append(style.getCssText());
+        }
+        result.append("}");
+        return result.toString();
     }
 
     public void setCssText(final String cssText) throws DOMException {
@@ -97,7 +104,6 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
 
             // The rule must be a page rule
             if (r.getType() == CSSRule.PAGE_RULE) {
-                ident_ = ((CSSPageRuleImpl) r).ident_;
                 pseudoPage_ = ((CSSPageRuleImpl) r).pseudoPage_;
                 style_ = ((CSSPageRuleImpl) r).style_;
             }
@@ -122,8 +128,12 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
     }
 
     public String getSelectorText() {
-        return ((ident_ != null) ? ident_ : "")
-            + ((pseudoPage_ != null) ? ":" + pseudoPage_ : "");
+        final StringBuilder result = new StringBuilder();
+
+        if ((null != pseudoPage_)) {
+            result.append(":").append(pseudoPage_);
+        }
+        return result.toString();
     }
 
     public void setSelectorText(final String selectorText) throws DOMException {
@@ -131,10 +141,6 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
 
     public CSSStyleDeclaration getStyle() {
         return style_;
-    }
-
-    public void setIdent(final String ident) {
-        ident_ = ident;
     }
 
     public void setPseudoPage(final String pseudoPage) {
@@ -162,7 +168,6 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
     @Override
     public int hashCode() {
         int hash = super.hashCode();
-        hash = LangUtils.hashCode(hash, ident_);
         hash = LangUtils.hashCode(hash, pseudoPage_);
         hash = LangUtils.hashCode(hash, style_);
         return hash;

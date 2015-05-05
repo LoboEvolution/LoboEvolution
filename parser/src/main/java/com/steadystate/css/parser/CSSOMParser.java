@@ -376,7 +376,7 @@ public class CSSOMParser {
             // Create the page rule and add it to the rule list
             final CSSPageRuleImpl pr = new CSSPageRuleImpl(
                 CSSOMParser.this.getParentStyleSheet(),
-                getParentRule(), name, pseudoPage);
+                getParentRule(), pseudoPage);
             addLocator(locator, pr);
             if (!nodeStack_.empty()) {
                 ((CSSRuleListImpl) nodeStack_.peek()).add(pr);

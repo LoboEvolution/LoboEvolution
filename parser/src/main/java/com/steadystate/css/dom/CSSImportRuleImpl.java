@@ -83,10 +83,15 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl implements CSSImportR
 
     public String getCssText() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("@import url(")
-            .append(getHref())
-            .append(")");
-        if (getMedia().getLength() > 0) {
+        sb.append("@import");
+
+        final String href = getHref();
+        if (null != href) {
+            sb.append(" url(").append(href).append(")");
+        }
+
+        final MediaList ml = getMedia();
+        if (null != ml && ml.getLength() > 0) {
             sb.append(" ").append(getMedia().toString());
         }
         sb.append(";");

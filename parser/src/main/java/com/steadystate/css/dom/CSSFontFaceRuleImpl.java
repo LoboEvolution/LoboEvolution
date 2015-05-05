@@ -64,7 +64,15 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl implements CSSFontF
     }
 
     public String getCssText() {
-        return "@font-face {" + getStyle().getCssText() + "}";
+        final StringBuilder result = new StringBuilder();
+        result.append("@font-face {");
+
+        final CSSStyleDeclaration style = getStyle();
+        if (null != style) {
+            result.append(style.getCssText());
+        }
+        result.append("}");
+        return result.toString();
     }
 
     public void setCssText(final String cssText) throws DOMException {

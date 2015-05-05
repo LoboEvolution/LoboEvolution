@@ -619,8 +619,12 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Seria
 
     private String getTrimedFloatValue() {
         final float f = getFloatValue();
-        final String s = Float.toString(f);
-        return (f - (int) f != 0) ? s : s.substring(0, s.length() - 2);
+        final int i = (int) f;
+
+        if (f - i == 0) {
+            return Integer.toString((int) f);
+        }
+        return Float.toString(f);
     }
 
     public static LexicalUnit createNumber(final LexicalUnit prev, final int i) {

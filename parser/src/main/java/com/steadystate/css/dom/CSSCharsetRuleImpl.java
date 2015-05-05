@@ -67,7 +67,16 @@ public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl implements CSSCharse
     }
 
     public String getCssText() {
-        return "@charset \"" + getEncoding() + "\";";
+        final StringBuilder result = new StringBuilder();
+
+        result.append("@charset \"");
+
+        final String enc = getEncoding();
+        if (null != enc) {
+            result.append(enc);
+        }
+        result.append("\";");
+        return result.toString();
     }
 
     public void setCssText(final String cssText) throws DOMException {
@@ -139,5 +148,4 @@ public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl implements CSSCharse
     public String toString() {
         return getCssText();
     }
-
 }
