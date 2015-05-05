@@ -1397,6 +1397,7 @@ public class ColorCommon {
         colorMap.put("navajowhite1", new Color(NAVAJOWHITE1));
         colorMap.put("navajowhite2", new Color(NAVAJOWHITE2));
         colorMap.put("navajowhite3", new Color(NAVAJOWHITE3));
+        colorMap.put("navy", new Color(NAVYBLUE));
         colorMap.put("navyblue", new Color(NAVYBLUE));
         colorMap.put("oldlace", new Color(OLDLACE));
         colorMap.put("olive", new Color(OLIVE));
