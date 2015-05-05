@@ -27,12 +27,6 @@ import org.lobobrowser.util.gui.ColorFactory;
  * The Class BodyRenderState.
  */
 public class BodyRenderState extends StyleSheetRenderState {
-    // Note: BODY behaves like an inline element, but the root
-    // block uses the element and treats its properties as those
-    // of a block element.
-
-    /** The i color. */
-    private Color iColor;
 
     /**
      * Instantiates a new body render state.
@@ -98,7 +92,7 @@ public class BodyRenderState extends StyleSheetRenderState {
      */
     @Override
     public Color getColor() {
-        Color c = this.iColor;
+        Color c = super.getColor();
         if (c != null) {
             return c;
         }
