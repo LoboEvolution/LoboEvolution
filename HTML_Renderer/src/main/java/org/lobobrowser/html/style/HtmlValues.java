@@ -15,6 +15,7 @@
 
 package org.lobobrowser.html.style;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
@@ -1218,45 +1219,16 @@ public class HtmlValues {
 			RenderState renderState) {
 
 		BorderInfo binfo = new BorderInfo();
-		ColorFactory cf = ColorFactory.getInstance();
-
+		
 		binfo.setTopStyle(getBorderStyle(properties.getBorderTopStyle()));
 		binfo.setRightStyle(getBorderStyle(properties.getBorderRightStyle()));
 		binfo.setBottomStyle(getBorderStyle(properties.getBorderBottomStyle()));
 		binfo.setLeftStyle(getBorderStyle(properties.getBorderLeftStyle()));
 
-		String topColorSpec = properties.getBorderTopColor();
-		String leftColorSpec = properties.getBorderLeftColor();
-		String rightColorSpec = properties.getBorderRightColor();
-		String bottomColorSpec = properties.getBorderBottomColor();
-
-		if (topColorSpec != null && properties.getColor() == null) {
-			binfo.setTopColor(cf.getColor(topColorSpec));
-		} else {
-			if (properties.getColor() != null)
-				binfo.setTopColor(cf.getColor(properties.getColor()));
-		}
-
-		if (rightColorSpec != null && properties.getColor() == null) {
-			binfo.setRightColor(cf.getColor(rightColorSpec));
-		} else {
-			if (properties.getColor() != null)
-				binfo.setRightColor(cf.getColor(properties.getColor()));
-		}
-
-		if (bottomColorSpec != null && properties.getColor() == null) {
-			binfo.setBottomColor(cf.getColor(bottomColorSpec));
-		} else {
-			if (properties.getColor() != null)
-				binfo.setBottomColor(cf.getColor(properties.getColor()));
-		}
-
-		if (leftColorSpec != null && properties.getColor() == null) {
-			binfo.setLeftColor(cf.getColor(leftColorSpec));
-		} else {
-			if (properties.getColor() != null)
-				binfo.setLeftColor(cf.getColor(properties.getColor()));
-		}
+		binfo.setTopColor(getBorderColor(properties.getBorderTopColor(),properties,binfo));
+		binfo.setLeftColor(getBorderColor(properties.getBorderLeftColor(),properties,binfo));
+		binfo.setRightColor(getBorderColor(properties.getBorderRightColor(),properties,binfo));
+		binfo.setBottomColor(getBorderColor(properties.getBorderBottomColor(),properties,binfo));
 
 		HtmlValues.populateBorderInsets(binfo, properties, renderState);
 
@@ -1314,6 +1286,37 @@ public class HtmlValues {
             return BORDER_STYLE_NONE;
         }
     }
+    
+    
+    /**
+     * Gets the border color.
+     *
+     * @param color the color
+     * @param properties the properties
+     * @param binfo the binfo
+     * @return the border color
+     */
+    private static Color getBorderColor(String color,CSS2Properties properties, BorderInfo binfo) {
+    	
+    	ColorFactory cf = ColorFactory.getInstance();
+    	
+    	if(color!= null && properties.getBorderColor() == null && properties.getColor() == null)
+    		return cf.getColor(color);
+    	
+    	if(color!= null && properties.getColor() != null)
+    		return cf.getColor(properties.getColor());
+    	
+    	if(color!= null && properties.getBorderColor() != null)
+    		return cf.getColor(properties.getBorderColor());
+    	
+    	return Color.BLACK;
+    
+    }
+    
+    
+    
+    
+    
 
     /**
      * Checks if is background repeat.
