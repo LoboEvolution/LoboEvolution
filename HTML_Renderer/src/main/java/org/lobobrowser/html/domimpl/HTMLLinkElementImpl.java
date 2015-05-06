@@ -375,9 +375,7 @@ HTMLLinkElement {
                 String target = this.getTarget();
                 try {
                     URL url = this.getFullURL(href);
-                    if (url == null) {
-                        this.warn("Unable to resolve URI: [" + href + "].");
-                    } else {
+                    if (url != null) {
                         rcontext.linkClicked(this, url, target);
                     }
                 } catch (MalformedURLException mfu) {

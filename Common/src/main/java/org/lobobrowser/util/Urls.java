@@ -124,8 +124,12 @@ public class Urls {
             byte[] asBytes = Base64.getDecoder().decode(relativeUrl);
             relativeUrl = new String(asBytes, "utf-8");
        }
-        
-        return new URL(baseUrl, relativeUrl);
+       
+       if(relativeUrl.contains("javascript:void")){
+           return  null;
+       }
+       
+       return new URL(baseUrl, relativeUrl);
     }
 
     /**
