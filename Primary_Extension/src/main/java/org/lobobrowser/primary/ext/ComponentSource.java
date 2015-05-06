@@ -268,8 +268,7 @@ public class ComponentSource implements NavigatorWindowListener {
     public JMenu getEditMenu() {
         JMenu menu = new JMenu("Edit");
         menu.setMnemonic('E');
-        menu.add(menuItem("Copy", 'C', "ctrl C", new CopyAction(this, window,
-                actionPool)));
+        menu.add(menuItem("Copy", 'C', "ctrl C", new CopyAction(this, window, actionPool)));
         return menu;
     }
 
@@ -959,23 +958,23 @@ public class ComponentSource implements NavigatorWindowListener {
         if (sourceCode == null) {
             sourceCode = "";
         }
-        TextViewerWindow window = new TextViewerWindow();
-        window.setText(sourceCode);
-        window.setSize(new Dimension(600, 400));
-        window.setLocationByPlatform(true);
-        window.setVisible(true);
+        TextViewerWindow textViewer = new TextViewerWindow(window);
+        textViewer.setText(sourceCode);
+        textViewer.setSize(new Dimension(600, 400));
+        textViewer.setLocationByPlatform(true);
+        textViewer.setVisible(true);
     }
 
     /**
      * Show console.
      */
     public void showConsole() {
-        TextViewerWindow window = new TextViewerWindow();
-        window.setScrollsOnAppends(true);
-        window.setSwingDocument(ConsoleModel.getStandard());
-        window.setSize(new Dimension(600, 400));
-        window.setLocationByPlatform(true);
-        window.setVisible(true);
+        TextViewerWindow textViewer = new TextViewerWindow(window);
+        textViewer.setScrollsOnAppends(true);
+        textViewer.setSwingDocument(ConsoleModel.getStandard());
+        textViewer.setSize(new Dimension(600, 400));
+        textViewer.setLocationByPlatform(true);
+        textViewer.setVisible(true);
     }
 
     /**

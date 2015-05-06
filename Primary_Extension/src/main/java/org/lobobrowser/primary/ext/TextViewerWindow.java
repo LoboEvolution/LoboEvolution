@@ -17,7 +17,7 @@ package org.lobobrowser.primary.ext;
 import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
@@ -30,6 +30,11 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 
 import org.lobobrowser.gui.DefaultWindowFactory;
+import org.lobobrowser.primary.action.TextViewerCloseAction;
+import org.lobobrowser.primary.action.TextViewerCopyAction;
+import org.lobobrowser.primary.action.TextViewerFindAction;
+import org.lobobrowser.primary.action.TextViewerSelectAllAction;
+import org.lobobrowser.ua.NavigatorWindow;
 import org.lobobrowser.util.gui.WrapperLayout;
 
 /**
@@ -39,20 +44,22 @@ public class TextViewerWindow extends JFrame {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
+    
+    private NavigatorWindow window;
 
     /** The text area. */
     private final JTextArea textArea;
 
-    /** The scrolls on appends. */
+	/** The scrolls on appends. */
     private boolean scrollsOnAppends;
 
     /**
      * Instantiates a new text viewer window.
      */
-    public TextViewerWindow() {
+    public TextViewerWindow(NavigatorWindow window) {
         super("Lobo Text Viewer");
-        this.setIconImage(DefaultWindowFactory.getInstance()
-                .getDefaultImageIcon().getImage());
+        this.window = window;
+        this.setIconImage(DefaultWindowFactory.getInstance().getDefaultImageIcon().getImage());
         JMenuBar menuBar = this.createMenuBar();
         this.setJMenuBar(menuBar);
         Container contentPane = this.getContentPane();
@@ -60,7 +67,7 @@ public class TextViewerWindow extends JFrame {
         this.textArea = textArea;
         contentPane.setLayout(WrapperLayout.getInstance());
         contentPane.add(new JScrollPane(textArea));
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 DocumentListener cl = cachedListener;
@@ -120,8 +127,7 @@ public class TextViewerWindow extends JFrame {
      */
     public void setSwingDocument(javax.swing.text.Document document) {
         Document prevDocument = this.textArea.getDocument();
-        javax.swing.event.DocumentListener listener = this
-                .getDocumentListener();
+        DocumentListener listener = this.getDocumentListener();
         if (prevDocument != null) {
             prevDocument.removeDocumentListener(listener);
         }
@@ -160,7 +166,7 @@ public class TextViewerWindow extends JFrame {
     private JMenu createFileMenu() {
         JMenu fileMenu = new JMenu("File");
         fileMenu.setMnemonic('F');
-        fileMenu.add(ComponentSource.menuItem("Close", 'C', new CloseAction()));
+        fileMenu.add(ComponentSource.menuItem("Close", 'C', new TextViewerCloseAction(this)));
         return fileMenu;
     }
 
@@ -172,71 +178,21 @@ public class TextViewerWindow extends JFrame {
     private JMenu createEditMenu() {
         JMenu fileMenu = new JMenu("Edit");
         fileMenu.setMnemonic('E');
-        fileMenu.add(ComponentSource.menuItem("Copy", 'C', "ctrl c",
-                new CopyAction()));
-        fileMenu.add(ComponentSource.menuItem("Select All", 'A',
-                new SelectAllAction()));
+        fileMenu.add(ComponentSource.menuItem("Copy", 'C', "ctrl c", new TextViewerCopyAction(this)));
+        fileMenu.add(ComponentSource.menuItem("Select All", 'A',"ctrl a", new TextViewerSelectAllAction(this)));
+        fileMenu.add(ComponentSource.menuItem("Find", 'F', "ctrl f", new TextViewerFindAction(this,window)));
         return fileMenu;
     }
 
-    /**
-     * The Class CloseAction.
-     */
-    private class CloseAction extends javax.swing.AbstractAction {
-
-        /** The Constant serialVersionUID. */
-        private static final long serialVersionUID = 1L;
-
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            TextViewerWindow.this.dispose();
-        }
-    }
 
     /**
-     * The Class CopyAction.
-     */
-    private class CopyAction extends javax.swing.AbstractAction {
+	 * @return the textArea
+	 */
+	public JTextArea getTextArea() {
+		return textArea;
+	}
 
-        /** The Constant serialVersionUID. */
-        private static final long serialVersionUID = 1L;
-
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            textArea.copy();
-        }
-    }
-
-    /**
-     * The Class SelectAllAction.
-     */
-    private class SelectAllAction extends javax.swing.AbstractAction {
-
-        /** The Constant serialVersionUID. */
-        private static final long serialVersionUID = 1L;
-
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            textArea.selectAll();
-        }
-    }
-
-    /**
+	/**
      * The listener interface for receiving localDocument events. The class that
      * is interested in processing a localDocument event implements this
      * interface, and the object created with that class is registered with a
@@ -248,23 +204,11 @@ public class TextViewerWindow extends JFrame {
      */
     private class LocalDocumentListener implements DocumentListener {
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * javax.swing.event.DocumentListener#changedUpdate(javax.swing.event.DocumentEvent
-         * )
-         */
         @Override
         public void changedUpdate(DocumentEvent e) {
             // nop
         }
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * javax.swing.event.DocumentListener#insertUpdate(javax.swing.event.DocumentEvent
-         * )
-         */
         @Override
         public void insertUpdate(DocumentEvent e) {
             EventQueue.invokeLater(new Runnable() {
@@ -280,12 +224,6 @@ public class TextViewerWindow extends JFrame {
             });
         }
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * javax.swing.event.DocumentListener#removeUpdate(javax.swing.event.DocumentEvent
-         * )
-         */
         @Override
         public void removeUpdate(DocumentEvent e) {
             // nop

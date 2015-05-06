@@ -25,7 +25,6 @@ import org.lobobrowser.primary.gui.SimpleTextEditDialog;
 import org.lobobrowser.primary.gui.StringListControl;
 import org.lobobrowser.primary.gui.SwingTasks;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class EditAction.
  */
