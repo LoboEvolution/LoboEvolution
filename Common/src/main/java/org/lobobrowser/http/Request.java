@@ -17,6 +17,7 @@ package org.lobobrowser.http;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -529,28 +530,25 @@ public class Request extends AbstractBean {
             if (index >= 0) {
                 this.url = url.substring(0, index);
                 String[] parts = url.substring(index + 1).split("&");
-                for (String part : parts) {
-                    String key = null;
-                    String value = null;
-                    index = part.indexOf("=");
-                    if (index < 0) {
-                        // no value, just a key
-                        key = part;
-                    } else {
-                        key = part.substring(0, index);
-                        value = part.substring(index + 1);
-                    }
-                    // now that I have a key and value, I need to URL unencode
-                    // them
-                    // and set them as parameters
-                    try {
-                        key = URLDecoder.decode(key, "UTF-8");
-                        value = URLDecoder.decode(value, "UTF-8");
+                try {
+                    for (String part : parts) {
+                        String key = null;
+                        String value = null;
+                        index = part.indexOf("=");
+                        if (index < 0) {
+                            // no value, just a key
+                            key = part;
+                            key = URLDecoder.decode(key, "UTF-8");
+                        } else {
+                            key = part.substring(0, index);
+                            value = part.substring(index + 1);
+                            key = URLDecoder.decode(key, "UTF-8");
+                            value = URLDecoder.decode(value, "UTF-8");
+                        }
                         setParameter(key, value);
-                    } catch (Exception e) {
-                        e.printStackTrace(); // shouldn't happen because they
-                        // should all be UTF-8
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -721,7 +719,7 @@ public class Request extends AbstractBean {
      *             the exception
      */
     private static String base64Encode(String s) throws Exception {
-        return Base64.getEncoder().encodeToString(s.getBytes("utf-8"));
+        return new String(Base64.getEncoder().encode(s.getBytes(StandardCharsets.UTF_8)));
     }
 
     /**
