@@ -22,6 +22,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -120,16 +121,14 @@ public class Urls {
     public static URL createURL(URL baseUrl, String relativeUrl)
             throws MalformedURLException, UnsupportedEncodingException {
         
-       if(relativeUrl.contains("base64")){
-            byte[] asBytes = Base64.getDecoder().decode(relativeUrl);
-            relativeUrl = new String(asBytes, "utf-8");
-       }
-       
-       if(relativeUrl.contains("javascript:void")){
-           return  null;
-       }
-       
-       return new URL(baseUrl, relativeUrl);
+        if (relativeUrl.contains("base64")) {
+            relativeUrl = new String(Base64.getEncoder().encode(
+                    relativeUrl.getBytes(StandardCharsets.UTF_8)));
+        }
+        if (relativeUrl.contains("javascript:void")) {
+            return null;
+        }
+        return new URL(baseUrl, relativeUrl);
     }
 
     /**
