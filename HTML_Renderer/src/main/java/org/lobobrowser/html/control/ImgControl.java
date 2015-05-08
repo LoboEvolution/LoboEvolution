@@ -110,7 +110,7 @@ public class ImgControl extends BaseControl implements ImageListener {
         });
         
         
-		if (modelNode.getSrc()!= null && modelNode.getSrc().contains("svg")) {
+		if (modelNode.getSrc()!= null && modelNode.getSrc().endsWith(".svg")) {
 
 			try {
 				URL u = new URL(modelNode.getSrc());
