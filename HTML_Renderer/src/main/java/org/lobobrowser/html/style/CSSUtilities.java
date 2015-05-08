@@ -402,40 +402,45 @@ public class CSSUtilities {
      *            the css
      * @return the string
      */
-    private static String fixString(String css) {
+	private static String fixString(String css) {
 
-        String stringFixed = "";
-        String result = "";
+		String stringFixed = "";
+		String result = "";
 
-        String[] b = css.split("\\{");
+		String[] b = css.split("\\{");
 
-        if (b.length != 1) {
+		if (b.length != 1) {
 
-            String str = b[1];
+			String str = b[1];
 
-            String[] strSpli = str.split(";");
+			String[] strSpli = str.split(";");
 
-            for (int i = 0; i < strSpli.length; i++) {
+			for (int i = 0; i < strSpli.length; i++) {
 
-                String split = strSpli[i];
+				String split = strSpli[i];
 
-                if (!split.startsWith("filter:") && !split.startsWith("-ms")
-                        && !split.startsWith("-moz")) {
-                    stringFixed += split.replace("\\", "").replace("/", "")
-                            .trim();
-                    if (!stringFixed.endsWith("}")) {
-                        stringFixed += ";";
-                    }
-                } else if (split.endsWith("}")) {
-                    stringFixed += "}";
-                }
+				if (!split.startsWith("filter:") && !split.startsWith("-ms")
+						&& !split.startsWith("-moz")) {
+					if (split.contains("url(")) {
+						stringFixed += split.replace("\\", "").trim();
+					} else {
+						stringFixed += split.replace("\\", "").replace("/", "")
+								.trim();
+					}
 
-            }
-            result = b[0] + "{" + stringFixed.trim();
-        }
+					if (!stringFixed.endsWith("}")) {
+						stringFixed += ";";
+					}
+				} else if (split.endsWith("}")) {
+					stringFixed += "}";
+				}
 
-        return result;
-    }
+			}
+			result = b[0] + "{" + stringFixed.trim();
+		}
+
+		return result;
+	}
 
     /**
      * Count char.
