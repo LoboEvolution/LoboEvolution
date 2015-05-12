@@ -107,6 +107,15 @@ public class ImgControl extends BaseControl implements ImageListener {
                 HtmlController.getInstance().onPressed(modelNode, e, e.getX(),
                         e.getY());
             }
+            
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				if (e.getButton() == MouseEvent.BUTTON3) {
+					HtmlController.getInstance().onContextMenu(modelNode, e,
+							e.getX(), e.getY());
+				}
+			}
         });
         
         
