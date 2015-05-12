@@ -18,10 +18,8 @@ package org.lobobrowser.primary.clientlets.img;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
-
 import javax.swing.JComponent;
 import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
@@ -31,121 +29,88 @@ import javax.swing.SwingConstants;
  */
 public class ImageScrollable extends JComponent implements Scrollable {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The image. */
-    private final Image image;
+	/** The image. */
+	private final Image image;
 
-    /** The image width. */
-    private int imageWidth = -1;
+	/** The image width. */
+	private int imageWidth = -1;
 
-    /** The image height. */
-    private int imageHeight = -1;
+	/** The image height. */
+	private int imageHeight = -1;
 
-    /**
-     * Instantiates a new image scrollable.
-     *
-     * @param img
-     *            the img
-     */
-    public ImageScrollable(Image img) {
-        super();
-        this.image = img;
-        int w = img.getWidth(this);
-        int h = img.getHeight(this);
-        this.imageWidth = w;
-        this.imageHeight = h;
-    }
+	/**
+	 * Instantiates a new image scrollable.
+	 *
+	 * @param img
+	 *            the img
+	 */
+	public ImageScrollable(Image img) {
+		super();
+		this.image = img;
+		int w = img.getWidth(this);
+		int h = img.getHeight(this);
+		this.imageWidth = w;
+		this.imageHeight = h;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.awt.Component#imageUpdate(java.awt.Image, int, int, int, int, int)
-     */
-    @Override
-    public boolean imageUpdate(Image img, int infoflags, int x, int y, int w,
-            int h) {
-        if (((infoflags & ImageObserver.ALLBITS) != 0)
-                || ((infoflags & ImageObserver.FRAMEBITS) != 0)) {
-            this.imageWidth = img.getWidth(this);
-            this.imageHeight = img.getHeight(this);
-            this.revalidate();
-            this.repaint();
-        }
-        return true;
-    }
+	@Override
+	public boolean imageUpdate(Image img, int infoflags, int x, int y, int w,
+			int h) {
+		if (((infoflags & ImageObserver.ALLBITS) != 0)
+				|| ((infoflags & ImageObserver.FRAMEBITS) != 0)) {
+			this.imageWidth = img.getWidth(this);
+			this.imageHeight = img.getHeight(this);
+			this.revalidate();
+			this.repaint();
+		}
+		return true;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-     */
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Insets insets = this.getInsets();
-        g.drawImage(this.image, insets.left, insets.top, this);
-    }
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		int x = (getWidth() - imageWidth) / 2;
+		int y = (getHeight() - imageHeight) / 2;
+		g.drawImage(image, x, y, imageWidth, imageHeight, this);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.JComponent#getPreferredSize()
-     */
-    @Override
-    public Dimension getPreferredSize() {
-        int w = this.imageWidth;
-        int h = this.imageHeight;
-        return new Dimension(w == -1 ? 0 : w, h == -1 ? 0 : h);
-    }
+	@Override
+	public Dimension getPreferredSize() {
+		int w = this.imageWidth;
+		int h = this.imageHeight;
+		return new Dimension(w == -1 ? 0 : w, h == -1 ? 0 : h);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.Scrollable#getPreferredScrollableViewportSize()
-     */
-    @Override
-    public Dimension getPreferredScrollableViewportSize() {
-        return this.getPreferredSize();
-    }
+	@Override
+	public Dimension getPreferredScrollableViewportSize() {
+		return this.getPreferredSize();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.Scrollable#getScrollableUnitIncrement(java.awt.Rectangle,
-     * int, int)
-     */
-    @Override
-    public int getScrollableUnitIncrement(Rectangle arg0, int arg1, int arg2) {
-        return 12;
-    }
+	@Override
+	public int getScrollableUnitIncrement(Rectangle arg0, int arg1, int arg2) {
+		return 12;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.Scrollable#getScrollableBlockIncrement(java.awt.Rectangle,
-     * int, int)
-     */
-    @Override
-    public int getScrollableBlockIncrement(Rectangle arg0, int orientation,
-            int direction) {
-        if (orientation == SwingConstants.HORIZONTAL) {
-            return arg0.width;
-        } else {
-            return arg0.height;
-        }
-    }
+	@Override
+	public int getScrollableBlockIncrement(Rectangle arg0, int orientation,
+			int direction) {
+		if (orientation == SwingConstants.HORIZONTAL) {
+			return arg0.width;
+		} else {
+			return arg0.height;
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.Scrollable#getScrollableTracksViewportWidth()
-     */
-    @Override
-    public boolean getScrollableTracksViewportWidth() {
-        return false;
-    }
+	@Override
+	public boolean getScrollableTracksViewportWidth() {
+		return false;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.Scrollable#getScrollableTracksViewportHeight()
-     */
-    @Override
-    public boolean getScrollableTracksViewportHeight() {
-        return false;
-    }
+	@Override
+	public boolean getScrollableTracksViewportHeight() {
+		return false;
+	}
 }

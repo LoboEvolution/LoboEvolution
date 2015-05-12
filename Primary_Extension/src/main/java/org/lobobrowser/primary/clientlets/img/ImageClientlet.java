@@ -15,7 +15,6 @@
 
 package org.lobobrowser.primary.clientlets.img;
 
-import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -24,13 +23,10 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.JScrollPane;
-
 import org.lobobrowser.clientlet.Clientlet;
 import org.lobobrowser.clientlet.ClientletContext;
 import org.lobobrowser.clientlet.ClientletException;
 import org.lobobrowser.clientlet.ClientletResponse;
-import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.html.dombl.SVGRasterizer;
 import org.lobobrowser.util.io.IORoutines;
 
@@ -49,11 +45,6 @@ public class ImageClientlet implements Clientlet {
         super();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.Clientlet#process(org.lobobrowser.clientlet.
-     * ClientletContext)
-     */
     @Override
 	public void process(ClientletContext context) throws ClientletException {
 		ClientletResponse response = context.getResponse();
@@ -62,7 +53,7 @@ public class ImageClientlet implements Clientlet {
 		URL url = response.getResponseURL();
 		Image image = null;
 				
-		if (url != null && url.toString().contains("svg")) {
+		if (url != null && url.toString().endsWith(".svg")) {
 
 			SVGRasterizer r = new SVGRasterizer(url);
 			image  = Toolkit.getDefaultToolkit().createImage(r.createBufferedImage().getSource());
@@ -90,135 +81,4 @@ public class ImageClientlet implements Clientlet {
 
 		context.setResultingContent(new ImageContent(image, mimeType));
 	}
-
-    /**
-     * The Class ImageContent.
-     */
-    private static class ImageContent implements ComponentContent {
-
-        /** The image. */
-        private final Image image;
-
-        /** The mime type. */
-        private final String mimeType;
-
-        /** The scroll pane. */
-        private final JScrollPane scrollPane;
-
-        /**
-         * Instantiates a new image content.
-         *
-         * @param image
-         *            the image
-         * @param mimeType
-         *            the mime type
-         */
-        public ImageContent(Image image, String mimeType) {
-            ImageScrollable is = new ImageScrollable(image);
-            JScrollPane sp = new JScrollPane(is);
-            this.scrollPane = sp;
-            this.image = image;
-            this.mimeType = mimeType;
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.clientlet.ComponentContent#addNotify()
-         */
-        @Override
-        public void addNotify() {
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.clientlet.ComponentContent#canCopy()
-         */
-        @Override
-        public boolean canCopy() {
-            // TODO: Support image copy?
-            return false;
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.clientlet.ComponentContent#copy()
-         */
-        @Override
-        public boolean copy() {
-            return false;
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.clientlet.ComponentContent#getComponent()
-         */
-        @Override
-        public Component getComponent() {
-            return this.scrollPane;
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.clientlet.ComponentContent#getContentObject()
-         */
-        @Override
-        public Object getContentObject() {
-            return this.image;
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.clientlet.ComponentContent#getDescription()
-         */
-        @Override
-        public String getDescription() {
-            return this.image.toString();
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.clientlet.ComponentContent#getMimeType()
-         */
-        @Override
-        public String getMimeType() {
-            return this.mimeType;
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.clientlet.ComponentContent#getSourceCode()
-         */
-        @Override
-        public String getSourceCode() {
-            return null;
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.clientlet.ComponentContent#getTitle()
-         */
-        @Override
-        public String getTitle() {
-            return null;
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.clientlet.ComponentContent#removeNotify()
-         */
-        @Override
-        public void removeNotify() {
-            this.image.flush();
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.clientlet.ComponentContent#setProperty(java.lang.String,
-         * java.lang.Object)
-         */
-        @Override
-        public void setProperty(String name, Object value) {
-            // NOP
-        }
-    }
 }
