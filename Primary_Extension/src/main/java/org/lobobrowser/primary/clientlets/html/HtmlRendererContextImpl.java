@@ -12,14 +12,11 @@
  * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
  * ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Feb 4, 2006
- */
+
 package org.lobobrowser.primary.clientlets.html;
 
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.Map;
@@ -29,13 +26,18 @@ import java.util.WeakHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JPopupMenu;
+
+import org.lobobrowser.gui.NavigatorWindowImpl;
 import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlObject;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.FrameNode;
+import org.lobobrowser.html.domimpl.HTMLAbstractUIElement;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.w3c.HTMLCollection;
@@ -43,7 +45,6 @@ import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLLinkElement;
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigatorFrame;
-import org.lobobrowser.ua.Parameter;
 import org.lobobrowser.ua.ParameterInfo;
 import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.ua.TargetType;
@@ -78,12 +79,6 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
         this.htmlPanel = new HtmlPanel();
     }
 
-    // public static void clearFrameAssociations() {
-    // synchronized(weakAssociation) {
-    // weakAssociation.clear();
-    //}
-    //}
-    //
     /**
      * Gets the html renderer context.
      *
@@ -176,22 +171,11 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
         logger.log(Level.SEVERE, message);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.HtmlRendererContext#linkClicked(org.lobobrowser.html
-     * .w3c.HTMLElement, java.net.URL, java.lang.String)
-     */
     @Override
     public void linkClicked(HTMLElement linkNode, URL url, String target) {
         this.navigateImpl(url, target, RequestType.CLICK, linkNode);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#navigate(java.net.URL,
-     * java.lang.String)
-     */
     @Override
     public void navigate(URL href, String target) {
         this.navigateImpl(href, target, RequestType.PROGRAMMATIC, null);
@@ -265,77 +249,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
             return TargetType.SELF;
         }
     }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#submitForm(java.lang.String,
-     * java.net.URL, java.lang.String, java.lang.String,
-     * org.lobobrowser.html.FormInput[])
-     */
-    @Override
-    public void submitForm(String method, URL url, String target,
-            String enctype, FormInput[] formInputs) {
-        TargetType targetType = this.getTargetType(target);
-        ParameterInfo pinfo = new LocalParameterInfo(enctype, formInputs);
-        this.clientletFrame.navigate(url, method, pinfo, targetType,
-                RequestType.FORM);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#createBrowserFrame()
-     */
-    @Override
-    public BrowserFrame createBrowserFrame() {
-        NavigatorFrame newFrame = this.clientletFrame.createFrame();
-        return new BrowserFrameImpl(newFrame, this);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#alert(java.lang.String)
-     */
-    @Override
-    public void alert(String message) {
-        this.clientletFrame.alert(message);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#blur()
-     */
-    @Override
-    public void blur() {
-        this.clientletFrame.windowToBack();
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#close()
-     */
-    @Override
-    public void close() {
-        this.clientletFrame.closeWindow();
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#confirm(java.lang.String)
-     */
-    @Override
-    public boolean confirm(String message) {
-        return this.clientletFrame.confirm(message);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#focus()
-     */
-    @Override
-    public void focus() {
-        this.clientletFrame.windowToFront();
-    }
-
+    
     /**
      * Open.
      *
@@ -360,18 +274,69 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
             return null;
         }
     }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#open(java.net.URL,
-     * java.lang.String, java.lang.String, boolean)
+    
+    /**
+     * Gets the length.
+     *
+     * @return the length
      */
+    public int getLength() {
+        HTMLCollection frames = this.getFrames();
+        return frames == null ? 0 : frames.getLength();
+    }
+    
+    /**
+	 * @return the clientletFrame
+	 */
+	public NavigatorFrame getClientletFrame() {
+		return clientletFrame;
+	}
+
+    @Override
+    public void submitForm(String method, URL url, String target,
+            String enctype, FormInput[] formInputs) {
+        TargetType targetType = this.getTargetType(target);
+        ParameterInfo pinfo = new LocalParameterInfo(enctype, formInputs);
+        this.clientletFrame.navigate(url, method, pinfo, targetType,
+                RequestType.FORM);
+    }
+
+    @Override
+    public BrowserFrame createBrowserFrame() {
+        NavigatorFrame newFrame = this.clientletFrame.createFrame();
+        return new BrowserFrameImpl(newFrame, this);
+    }
+
+    @Override
+    public void alert(String message) {
+        this.clientletFrame.alert(message);
+    }
+
+    @Override
+    public void blur() {
+        this.clientletFrame.windowToBack();
+    }
+
+    @Override
+    public void close() {
+        this.clientletFrame.closeWindow();
+    }
+
+    @Override
+    public boolean confirm(String message) {
+        return this.clientletFrame.confirm(message);
+    }
+    
+    @Override
+    public void focus() {
+        this.clientletFrame.windowToFront();
+    }
+
     @Override
     public HtmlRendererContext open(URL urlObj, String windowName,
             String windowFeatures, boolean replace) {
         Properties windowProperties = windowFeatures == null ? null
-                : org.lobobrowser.gui.NavigatorWindowImpl
-                .getPropertiesFromWindowFeatures(windowFeatures);
+                : NavigatorWindowImpl.getPropertiesFromWindowFeatures(windowFeatures);
         try {
             NavigatorFrame newFrame = this.clientletFrame.open(urlObj, "GET",
                     null, windowName, windowProperties);
@@ -386,66 +351,36 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#prompt(java.lang.String,
-     * java.lang.String)
-     */
     @Override
     public String prompt(String message, String inputDefault) {
         return this.clientletFrame.prompt(message, inputDefault);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#scroll(int, int)
-     */
     @Override
     public void scroll(int x, int y) {
         this.htmlPanel.scroll(x, y);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#scrollBy(int, int)
-     */
     @Override
     public void scrollBy(int xOffset, int yOffset) {
         this.htmlPanel.scrollBy(xOffset, yOffset);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#isClosed()
-     */
     @Override
     public boolean isClosed() {
         return this.clientletFrame.isWindowClosed();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#getDefaultStatus()
-     */
     @Override
     public String getDefaultStatus() {
         return this.clientletFrame.getDefaultStatus();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.HtmlRendererContext#setDefaultStatus(java.lang.String)
-     */
     @Override
     public void setDefaultStatus(String value) {
         this.clientletFrame.setDefaultStatus(value);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#getFrames()
-     */
     @Override
     public HTMLCollection getFrames() {
         Object rootNode = this.htmlPanel.getRootNode();
@@ -456,31 +391,11 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
         }
     }
 
-    /**
-     * Gets the length.
-     *
-     * @return the length
-     */
-    public int getLength() {
-        HTMLCollection frames = this.getFrames();
-        return frames == null ? 0 : frames.getLength();
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#getName()
-     */
     @Override
     public String getName() {
         return this.clientletFrame.getWindowId();
     }
 
-    // private static final String HTML_RENDERER_ITEM = "lobo.html.renderer";
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#getParent()
-     */
     @Override
     public HtmlRendererContext getParent() {
         NavigatorFrame parentFrame = this.clientletFrame.getParentFrame();
@@ -488,10 +403,6 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
                 .getHtmlRendererContext(parentFrame);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#getOpener()
-     */
     @Override
     public HtmlRendererContext getOpener() {
         HtmlRendererContext opener = this.assignedOpener;
@@ -506,47 +417,27 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
     /** The assigned opener. */
     private volatile HtmlRendererContext assignedOpener;
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#setOpener(org.lobobrowser.html.
-     * HtmlRendererContext)
-     */
+  
     @Override
     public void setOpener(HtmlRendererContext opener) {
         this.assignedOpener = opener;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#getStatus()
-     */
     @Override
     public String getStatus() {
         return this.clientletFrame.getStatus();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#setStatus(java.lang.String)
-     */
     @Override
     public void setStatus(String message) {
         this.clientletFrame.setStatus(message);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#reload()
-     */
     @Override
     public void reload() {
         this.clientletFrame.reload();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#getTop()
-     */
     @Override
     public HtmlRendererContext getTop() {
         NavigatorFrame parentFrame = this.clientletFrame.getTopFrame();
@@ -554,12 +445,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
                 .getHtmlRendererContext(parentFrame);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.HtmlRendererContext#getHtmlObject(org.lobobrowser.html
-     * .w3c.HTMLElement)
-     */
+
     @Override
     public HtmlObject getHtmlObject(HTMLElement element) {
         // TODO
@@ -569,52 +455,52 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
     /** The ua context. */
     private UserAgentContext uaContext;
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#getUserAgentContext()
-     */
+
     @Override
     public UserAgentContext getUserAgentContext() {
         if (this.uaContext == null) {
             synchronized (this) {
                 if (this.uaContext == null) {
                     this.uaContext = new UserAgentContextImpl(
-                            this.clientletFrame);
+                            this.getClientletFrame());
                 }
             }
         }
         return this.uaContext;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.HtmlRendererContext#isVisitedLink(org.lobobrowser.html
-     * .w3c.HTMLLinkElement)
-     */
+
     @Override
     public boolean isVisitedLink(HTMLLinkElement link) {
         // TODO
         return false;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.HtmlRendererContext#onContextMenu(org.lobobrowser.html
-     * .w3c.HTMLElement, java.awt.event.MouseEvent)
-     */
-    @Override
-    public boolean onContextMenu(HTMLElement element, MouseEvent event) {
-        return true;
-    }
+	@Override
+	public boolean onContextMenu(HTMLElement element, MouseEvent event) {
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.HtmlRendererContext#onMouseOut(org.lobobrowser.html.
-     * w3c.HTMLElement, java.awt.event.MouseEvent)
-     */
+		HtmlContextMenu imageMenu = new HtmlContextMenu(element, this);
+		
+		if (element instanceof HTMLImageElementImpl) {
+
+			JPopupMenu popupMenuImage = imageMenu.popupMenuImage();
+			popupMenuImage.show(event.getComponent(), event.getX(),
+					event.getY());
+			return false;
+		}else if (element instanceof HTMLLinkElementImpl) {
+
+			JPopupMenu popupMenuImage = imageMenu.popupMenuLink();
+			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
+			return false;
+		} else if (element instanceof HTMLAbstractUIElement){
+			JPopupMenu popupMenuImage = imageMenu.popupMenuAbstractUI();
+			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
+			return false;
+		}
+		
+		return true;
+	}
+
     @Override
     public void onMouseOut(HTMLElement element, MouseEvent event) {
         if (element instanceof HTMLLinkElementImpl) {
@@ -622,21 +508,11 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#isImageLoadingEnabled()
-     */
     @Override
     public boolean isImageLoadingEnabled() {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.HtmlRendererContext#onMouseOver(org.lobobrowser.html
-     * .w3c.HTMLElement, java.awt.event.MouseEvent)
-     */
     @Override
     public void onMouseOver(HTMLElement element, MouseEvent event) {
         if (element instanceof HTMLLinkElementImpl) {
@@ -645,118 +521,65 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.HtmlRendererContext#onDoubleClick(org.lobobrowser.html
-     * .w3c.HTMLElement, java.awt.event.MouseEvent)
-     */
     @Override
     public boolean onDoubleClick(HTMLElement element, MouseEvent event) {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.HtmlRendererContext#onMouseClick(org.lobobrowser.html
-     * .w3c.HTMLElement, java.awt.event.MouseEvent)
-     */
     @Override
     public boolean onMouseClick(HTMLElement element, MouseEvent event) {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#resizeBy(int, int)
-     */
     @Override
     public void resizeBy(int byWidth, int byHeight) {
         this.clientletFrame.resizeWindowBy(byWidth, byHeight);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#resizeTo(int, int)
-     */
     @Override
     public void resizeTo(int width, int height) {
         this.clientletFrame.resizeWindowTo(width, height);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#forward()
-     */
     @Override
     public void forward() {
         this.clientletFrame.forward();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#back()
-     */
     @Override
     public void back() {
         this.clientletFrame.back();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#getCurrentURL()
-     */
     @Override
     public String getCurrentURL() {
         NavigationEntry entry = this.clientletFrame.getCurrentNavigationEntry();
         return entry == null ? null : entry.getUrl().toExternalForm();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#getHistoryLength()
-     */
     @Override
     public int getHistoryLength() {
         return this.clientletFrame.getHistoryLength();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#getNextURL()
-     */
     @Override
     public String getNextURL() {
         NavigationEntry entry = this.clientletFrame.getNextNavigationEntry();
         return entry == null ? null : entry.getUrl().toExternalForm();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#getPreviousURL()
-     */
     @Override
     public String getPreviousURL() {
-        NavigationEntry entry = this.clientletFrame
+        NavigationEntry entry = this.getClientletFrame()
                 .getPreviousNavigationEntry();
         return entry == null ? null : entry.getUrl().toExternalForm();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.HtmlRendererContext#goToHistoryURL(java.lang.String)
-     */
     @Override
     public void goToHistoryURL(String url) {
         this.clientletFrame.navigateInHistory(url);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.HtmlRendererContext#moveInHistory(int)
-     */
     @Override
     public void moveInHistory(int offset) {
         this.clientletFrame.moveInHistory(offset);
@@ -766,80 +589,5 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
     public void setCursor(Optional<Cursor> cursorOpt) {
         Cursor cursor = cursorOpt.orElse(Cursor.getDefaultCursor());
         htmlPanel.setCursor(cursor);
-    }
-
-    /**
-     * The Class LocalParameterInfo.
-     */
-    private static class LocalParameterInfo implements ParameterInfo {
-
-        /** The encoding type. */
-        private final String encodingType;
-
-        /** The form inputs. */
-        private final FormInput[] formInputs;
-
-        /**
-         * Instantiates a new local parameter info.
-         *
-         * @param type
-         *            the type
-         * @param inputs
-         *            the inputs
-         */
-        public LocalParameterInfo(String type, FormInput[] inputs) {
-            super();
-            encodingType = type;
-            formInputs = inputs;
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see org.xamjwg.clientlet.ParameterInfo#getEncoding()
-         */
-        @Override
-        public String getEncoding() {
-            return this.encodingType;
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see org.xamjwg.clientlet.ParameterInfo#getParameters()
-         */
-        @Override
-        public Parameter[] getParameters() {
-            final FormInput[] formInputs = this.formInputs;
-            Parameter[] params = new Parameter[formInputs.length];
-            for (int i = 0; i < params.length; i++) {
-                final int index = i;
-                params[i] = new Parameter() {
-                    @Override
-                    public String getName() {
-                        return formInputs[index].getName();
-                    }
-
-                    @Override
-                    public File[] getFileValue() {
-                        return formInputs[index].getFileValue();
-                    }
-
-                    @Override
-                    public String getTextValue() {
-                        return formInputs[index].getTextValue();
-                    }
-
-                    @Override
-                    public boolean isFile() {
-                        return formInputs[index].isFile();
-                    }
-
-                    @Override
-                    public boolean isText() {
-                        return formInputs[index].isText();
-                    }
-                };
-            }
-            return params;
-        }
     }
 }
