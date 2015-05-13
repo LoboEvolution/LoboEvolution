@@ -119,25 +119,7 @@ public class HtmlController {
                 }
             }
 
-        } else if (node instanceof HTMLAbstractUIElement) {
-            HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
-            Function f = uiElement.getOnclick();
-            
-            if (f != null) {
-                MouseEventImpl jsEvent = new MouseEventImpl("click", uiElement,
-                        event, x, y);
-                if (!Executor.executeFunction(uiElement, f, jsEvent)) {
-                    return false;
-                }
-            }
-            HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-            if (rcontext != null) {
-                if (!rcontext.onMouseClick(uiElement, event)) {
-                    return false;
-                }
-            }
-        }
-        if (node instanceof HTMLLinkElementImpl) {
+        } else if (node instanceof HTMLLinkElementImpl) {
             ((HTMLLinkElementImpl) node).navigate();
             return false;
         } else if (node instanceof HTMLButtonElementImpl) {
@@ -165,7 +147,25 @@ public class HtmlController {
                 // NOP for "button"!
             }
             return false;
+        } else if (node instanceof HTMLAbstractUIElement) {
+            HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
+            Function f = uiElement.getOnclick();
+            
+            if (f != null) {
+                MouseEventImpl jsEvent = new MouseEventImpl("click", uiElement,
+                        event, x, y);
+                if (!Executor.executeFunction(uiElement, f, jsEvent)) {
+                    return false;
+                }
+            }
+            HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
+            if (rcontext != null) {
+                if (!rcontext.onMouseClick(uiElement, event)) {
+                    return false;
+                }
+            }
         }
+        
         ModelNode parent = node.getParentModelNode();
         if (parent == null) {
             return true;
