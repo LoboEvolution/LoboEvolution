@@ -224,9 +224,6 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
     /** The onmouseout. */
     private Function onmouseout;
 
-    /** The onmouseover. */
-    private Function onmouseover;
-
     /** The onmousewheel. */
     private Function onmousewheel;
 
@@ -826,8 +823,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      *            the replace
      * @return the window
      */
-    public Window open(String relativeUrl, String windowName,
-            String windowFeatures, boolean replace) {
+    public void open(String relativeUrl, String windowName, String windowFeatures, boolean replace) {
         HtmlRendererContext rcontext = this.rcontext;
         if (rcontext != null) {
             URL url;
@@ -842,21 +838,15 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
                             + relativeUrl);
                 }
             }
-            HtmlRendererContext newContext = rcontext.open(url, windowName,
-                    windowFeatures, replace);
-            return getWindow(newContext);
-        } else {
-            return null;
+            rcontext.open(url, windowName, windowFeatures, replace);
         }
     }
 
     /**
      * Open.
-     *
-     * @return the window
      */
-    public Window open() {
-        return this.open("", "window:" + String.valueOf(ID.generateLong()));
+    public void open() {
+        this.open("", "window:" + String.valueOf(ID.generateLong()));
     }
 
     /**
@@ -864,10 +854,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      *
      * @param url
      *            the url
-     * @return the window
      */
-    public Window open(String url) {
-        return this.open(url, "window:" + String.valueOf(ID.generateLong()));
+    public void open(String url) {
+        this.open(url, "window:" + String.valueOf(ID.generateLong()));
     }
 
     /**
@@ -877,10 +866,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      *            the url
      * @param windowName
      *            the window name
-     * @return the window
      */
-    public Window open(String url, String windowName) {
-        return this.open(url, windowName, "", false);
+    public void open(String url, String windowName) {
+        this.open(url, windowName, null, false);
     }
 
     /**
@@ -892,10 +880,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
      *            the window name
      * @param windowFeatures
      *            the window features
-     * @return the window
      */
-    public Window open(String url, String windowName, String windowFeatures) {
-        return this.open(url, windowName, windowFeatures, false);
+    public void open(String url, String windowName, String windowFeatures) {
+        this.open(url, windowName, windowFeatures, false);
     }
 
     /**
