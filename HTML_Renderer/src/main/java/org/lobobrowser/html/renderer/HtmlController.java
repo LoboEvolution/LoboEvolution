@@ -25,10 +25,10 @@ import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.domimpl.HTMLAbstractUIElement;
+import org.lobobrowser.html.domimpl.HTMLAnchorElementImpl;
 import org.lobobrowser.html.domimpl.HTMLButtonElementImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLInputElementImpl;
-import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.jsimpl.KeyboardEventImpl;
@@ -119,8 +119,8 @@ public class HtmlController {
                 }
             }
 
-        } else if (node instanceof HTMLLinkElementImpl) {
-            ((HTMLLinkElementImpl) node).navigate();
+        } else if (node instanceof HTMLAnchorElementImpl) {
+            ((HTMLAnchorElementImpl) node).navigate();
             return false;
         } else if (node instanceof HTMLButtonElementImpl) {
             HTMLButtonElementImpl button = (HTMLButtonElementImpl) node;
@@ -376,8 +376,8 @@ public class HtmlController {
      * @return True to propagate further, false if consumed.
      */
     public boolean onMouseDisarmed(ModelNode node, MouseEvent event) {
-        if (node instanceof HTMLLinkElementImpl) {
-            ((HTMLLinkElementImpl) node).getCurrentStyle()
+        if (node instanceof HTMLAnchorElementImpl) {
+            ((HTMLAnchorElementImpl) node).getCurrentStyle()
                     .setOverlayColor(null);
             return false;
         }
@@ -456,8 +456,8 @@ public class HtmlController {
                 pass = Executor.executeFunction(uiElement, f, jsEvent);
             }
         }
-        if (node instanceof HTMLLinkElementImpl) {
-            ((HTMLLinkElementImpl) node).getCurrentStyle().setOverlayColor(
+        if (node instanceof HTMLAnchorElementImpl) {
+            ((HTMLAnchorElementImpl) node).getCurrentStyle().setOverlayColor(
                     "#9090FF80");
             return false;
         }
@@ -539,8 +539,8 @@ public class HtmlController {
                 pass = Executor.executeFunction(uiElement, f, jsEvent);
             }
         }
-        if (node instanceof HTMLLinkElementImpl) {
-            ((HTMLLinkElementImpl) node).getCurrentStyle()
+        if (node instanceof HTMLAnchorElementImpl) {
+            ((HTMLAnchorElementImpl) node).getCurrentStyle()
                     .setOverlayColor(null);
             return false;
         }

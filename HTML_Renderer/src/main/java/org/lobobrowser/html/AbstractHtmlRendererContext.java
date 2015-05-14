@@ -17,6 +17,7 @@ package org.lobobrowser.html;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 
+import org.lobobrowser.html.w3c.HTMLAnchorElement;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLLinkElement;
@@ -197,7 +198,7 @@ HtmlRendererContext {
      * @return true, if is visited link
      */
     @Override
-    public boolean isVisitedLink(HTMLLinkElement link) {
+    public boolean isVisitedLink(HTMLAnchorElement link) {
         return false;
     }
 

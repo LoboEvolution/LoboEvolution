@@ -36,13 +36,13 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.FrameNode;
 import org.lobobrowser.html.domimpl.HTMLAbstractUIElement;
+import org.lobobrowser.html.domimpl.HTMLAnchorElementImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
-import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
+import org.lobobrowser.html.w3c.HTMLAnchorElement;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.HTMLLinkElement;
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.ParameterInfo;
@@ -471,7 +471,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 
     @Override
-    public boolean isVisitedLink(HTMLLinkElement link) {
+    public boolean isVisitedLink(HTMLAnchorElement link) {
         // TODO
         return false;
     }
@@ -487,7 +487,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			popupMenuImage.show(event.getComponent(), event.getX(),
 					event.getY());
 			return false;
-		}else if (element instanceof HTMLLinkElementImpl) {
+		}else if (element instanceof HTMLAnchorElementImpl) {
 
 			JPopupMenu popupMenuImage = imageMenu.popupMenuLink();
 			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
@@ -503,7 +503,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
     @Override
     public void onMouseOut(HTMLElement element, MouseEvent event) {
-        if (element instanceof HTMLLinkElementImpl) {
+        if (element instanceof HTMLAnchorElementImpl) {
             this.clientletFrame.setStatus(null);
         }
     }
@@ -515,8 +515,8 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
     @Override
     public void onMouseOver(HTMLElement element, MouseEvent event) {
-        if (element instanceof HTMLLinkElementImpl) {
-            HTMLLinkElementImpl linkElement = (HTMLLinkElementImpl) element;
+        if (element instanceof HTMLAnchorElementImpl) {
+        	HTMLAnchorElementImpl linkElement = (HTMLAnchorElementImpl) element;
             this.clientletFrame.setStatus(linkElement.getAbsoluteHref());
         }
     }

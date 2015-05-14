@@ -13,8 +13,8 @@
  */
 package org.lobobrowser.html.builder;
 
+import org.lobobrowser.html.domimpl.HTMLAnchorElementImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
 
 /**
  * The Class AnchorBuilder.
@@ -27,6 +27,6 @@ public class AnchorBuilder extends HTMLElementBuilder {
      */
     @Override
     protected HTMLElementImpl build(String name) {
-        return new HTMLLinkElementImpl(name);
+        return new HTMLAnchorElementImpl(name);
     }
 }

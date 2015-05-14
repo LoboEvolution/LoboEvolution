@@ -49,6 +49,7 @@ import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
+import org.lobobrowser.html.w3c.HTMLAnchorElement;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLLinkElement;
@@ -930,7 +931,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
      * @return true, if is visited link
      */
     @Override
-    public boolean isVisitedLink(HTMLLinkElement link) {
+    public boolean isVisitedLink(HTMLAnchorElement link) {
         return false;
     }
 

@@ -22,9 +22,9 @@ import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.Optional;
 
+import org.lobobrowser.html.w3c.HTMLAnchorElement;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.HTMLLinkElement;
 
 /**
  * The Interface HtmlRendererContext.
@@ -360,7 +360,7 @@ public interface HtmlRendererContext {
      *            the link
      * @return true, if is visited link
      */
-    boolean isVisitedLink(HTMLLinkElement link);
+    boolean isVisitedLink(HTMLAnchorElement link);
 
     /**
      * Reloads the current document.

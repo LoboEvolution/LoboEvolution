@@ -35,8 +35,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.lobobrowser.html.domimpl.HTMLAnchorElementImpl;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
-import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.primary.ext.IconFactory;
 
@@ -170,7 +170,7 @@ public class HtmlContextMenu {
 	public JPopupMenu popupMenuLink() {
 
 		JPopupMenu popupMenu = new JPopupMenu();
-		HTMLLinkElementImpl link = (HTMLLinkElementImpl) element;
+		HTMLAnchorElementImpl link = (HTMLAnchorElementImpl) element;
 		JMenuItem menuItem = new JMenuItem("Open link in new window");
 		menuItem.setIcon(IconFactory.getInstance().getIcon(SEARCH));
 		menuItem.addActionListener(e -> {

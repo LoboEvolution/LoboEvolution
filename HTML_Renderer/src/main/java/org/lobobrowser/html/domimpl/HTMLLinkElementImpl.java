@@ -14,12 +14,9 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import java.awt.Color;
-import java.awt.Cursor;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,18 +24,11 @@ import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.parser.HtmlParser;
-import org.lobobrowser.html.renderstate.ColorRenderState;
-import org.lobobrowser.html.renderstate.CursorRenderState;
-import org.lobobrowser.html.renderstate.RenderState;
-import org.lobobrowser.html.renderstate.TextDecorationRenderState;
 import org.lobobrowser.html.style.CSSUtilities;
 import org.lobobrowser.html.w3c.DOMSettableTokenList;
 import org.lobobrowser.html.w3c.DOMTokenList;
-import org.lobobrowser.html.w3c.HTMLBodyElement;
-import org.lobobrowser.html.w3c.HTMLDocument;
 import org.lobobrowser.html.w3c.HTMLLinkElement;
 import org.lobobrowser.util.Urls;
-import org.lobobrowser.util.gui.ColorFactory;
 import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.css.CSSStyleSheet;
 
@@ -59,6 +49,9 @@ HTMLLinkElement {
 
     /** The style sheet. */
     private CSSStyleSheet styleSheet;
+    
+    /** The disabled. */
+    private boolean disabled;
 
     /**
      * Instantiates a new HTML link element impl.
@@ -70,22 +63,11 @@ HTMLLinkElement {
         super(name);
     }
 
-    /** The disabled. */
-    private boolean disabled;
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMElementImpl#getDisabled()
-     */
     @Override
     public boolean getDisabled() {
         return this.disabled;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#setDisabled(boolean)
-     */
     @Override
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
@@ -95,101 +77,57 @@ HTMLLinkElement {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#getHref()
-     */
     @Override
     public String getHref() {
         String href = this.getAttribute(HtmlAttributeProperties.HREF);
         return href == null ? "" : Urls.removeControlCharacters(href);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#setHref(java.lang.String)
-     */
     @Override
     public void setHref(String href) {
         this.setAttribute(HtmlAttributeProperties.HREF, href);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#getHreflang()
-     */
     @Override
     public String getHreflang() {
         return this.getAttribute(HtmlAttributeProperties.HREFLANG);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#setHreflang(java.lang.String)
-     */
     @Override
     public void setHreflang(String hreflang) {
         this.setAttribute(HtmlAttributeProperties.HREFLANG, hreflang);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#getMedia()
-     */
     @Override
     public String getMedia() {
         return this.getAttribute(HtmlAttributeProperties.MEDIA);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#setMedia(java.lang.String)
-     */
     @Override
     public void setMedia(String media) {
         this.setAttribute(HtmlAttributeProperties.MEDIA, media);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#getRel()
-     */
     @Override
     public String getRel() {
         return this.getAttribute(HtmlAttributeProperties.REL);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#setRel(java.lang.String)
-     */
     @Override
     public void setRel(String rel) {
         this.setAttribute(HtmlAttributeProperties.REL, rel);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#getRev()
-     */
     @Override
     public String getRev() {
         return this.getAttribute(HtmlAttributeProperties.REV);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#setRev(java.lang.String)
-     */
     @Override
     public void setRev(String rev) {
         this.setAttribute(HtmlAttributeProperties.REV, rev);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#getTarget()
-     */
     @Override
     public String getTarget() {
         String target = this.getAttribute(HtmlAttributeProperties.TARGET);
@@ -200,38 +138,20 @@ HTMLLinkElement {
         return doc == null ? null : doc.getDefaultTarget();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#setTarget(java.lang.String)
-     */
     @Override
     public void setTarget(String target) {
         this.setAttribute(HtmlAttributeProperties.TARGET, target);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#getType()
-     */
     @Override
     public String getType() {
         return this.getAttribute(HtmlAttributeProperties.TYPE);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#setType(java.lang.String)
-     */
     @Override
     public void setType(String type) {
         this.setAttribute(HtmlAttributeProperties.TYPE, type);
     }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setUserData(java.lang.String,
-     * java.lang.Object, org.w3c.dom.UserDataHandler)
-     */
     @Override
     public Object setUserData(String key, Object data, UserDataHandler handler) {
         if (HtmlParser.MODIFYING_KEY.equals(key) && (data != Boolean.TRUE)) {
@@ -360,106 +280,24 @@ HTMLLinkElement {
         }
         return null;
     }
-
-    /**
-     * Navigate.
-     */
-    public void navigate() {
-        if (this.disabled) {
-            return;
-        }
-        HtmlRendererContext rcontext = this.getHtmlRendererContext();
-        if (rcontext != null) {
-            String href = this.getHref();
-            if ((href != null) && (href.length() > 0)) {
-                String target = this.getTarget();
-                try {
-                    URL url = this.getFullURL(href);
-                    if (url != null) {
-                        rcontext.linkClicked(this, url, target);
-                    }
-                } catch (MalformedURLException mfu) {
-                    this.warn("Malformed URI: [" + href + "].", mfu);
-                }
-            }
-        }
-    }
-
-    /**
-     * Gets the link color.
-     *
-     * @return the link color
-     */
-    private Color getLinkColor() {
-        HTMLDocument doc = (HTMLDocument) this.document;
-        if (doc != null) {
-            HTMLBodyElement body = (HTMLBodyElement) doc.getBody();
-            if (body != null) {
-                String vlink = body.getVLink();
-                String link = body.getLink();
-                if ((vlink != null) || (link != null)) {
-                    HtmlRendererContext rcontext = this
-                            .getHtmlRendererContext();
-                    if (rcontext != null) {
-                        boolean visited = rcontext.isVisitedLink(this);
-                        String colorText = visited ? vlink : link;
-                        if (colorText != null) {
-                            return ColorFactory.getInstance().getColor(
-                                    colorText);
-                        }
-                    }
-                }
-            }
-        }
-        return Color.BLUE;
-    }
-
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        if (this.hasAttribute(HtmlAttributeProperties.HREF)) {
-            prevRenderState = new TextDecorationRenderState(prevRenderState,
-                    RenderState.MASK_TEXTDECORATION_UNDERLINE);
-            prevRenderState = new ColorRenderState(prevRenderState,
-                    this.getLinkColor());
-            prevRenderState = new CursorRenderState(prevRenderState,
-                    Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)));
-        }
-        return super.createRenderState(prevRenderState);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.HTMLElementImpl#toString()
-     */
+    
     @Override
     public String toString() {
         return this.getHref();
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#getRelList()
-     */
     @Override
     public DOMTokenList getRelList() {
         // TODO Auto-generated method stub
         return null;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#getSizes()
-     */
     @Override
     public DOMSettableTokenList getSizes() {
         // TODO Auto-generated method stub
         return null;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLinkElement#setSizes(java.lang.String)
-     */
     @Override
     public void setSizes(String sizes) {
         this.setAttribute(HtmlAttributeProperties.SIZES, sizes);
