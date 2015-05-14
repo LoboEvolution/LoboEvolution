@@ -27,10 +27,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import javax.xml.bind.DatatypeConverter;
 
 public class DataURLConnection extends HttpURLConnection {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = Logger.getLogger(DataURLConnection.class.getName());
 
     /** The header map. */
     private HashMap<String, String> headerMap = new HashMap<String, String>();
@@ -154,7 +158,7 @@ public class DataURLConnection extends HttpURLConnection {
                 this.content = value.getBytes();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.severe(e.getMessage());
         }
     }
 

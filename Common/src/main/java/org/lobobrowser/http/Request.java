@@ -21,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.lobobrowser.http.Header.Element;
 import org.lobobrowser.util.AbstractBean;
@@ -143,6 +144,10 @@ public class Request extends AbstractBean {
     /**
      * Header keys are stored in a case insensitive manner.
      */
+    
+    /** The Constant logger. */
+    private static final Logger logger = Logger.getLogger(Request.class.getName());
+            
     private Map<String, Header> headers = new HashMap<String, Header>();
     /** The params. */
     private Map<String, Parameter> params = new HashMap<String, Parameter>();
@@ -548,7 +553,7 @@ public class Request extends AbstractBean {
                         setParameter(key, value);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.severe(e.getMessage());
                 }
             }
         }
@@ -592,7 +597,7 @@ public class Request extends AbstractBean {
                                 + base64Encode(username + ":" + getPassword())));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.severe(e.getMessage());
         }
     }
 

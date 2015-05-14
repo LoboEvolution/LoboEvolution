@@ -39,6 +39,9 @@ import org.lobobrowser.store.StorageManager;
  * Class in charge of allowing mutiple browser launches to share a JVM.
  */
 public class ReuseManager {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = Logger.getLogger(ReuseManager.class.getName());
 
     /**
      * Instantiates a new reuse manager.
@@ -178,7 +181,7 @@ public class ReuseManager {
                 break OUTER;
             }
         } catch (Throwable e) {
-            e.printStackTrace();
+            logger.severe(e.getMessage());
         }
         if (!launched) {
             PlatformInit entry = PlatformInit.getInstance();

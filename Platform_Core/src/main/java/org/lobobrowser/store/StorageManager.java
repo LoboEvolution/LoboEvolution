@@ -297,7 +297,7 @@ public class StorageManager implements Runnable {
             try {
                 return (Serializable) ois.readObject();
             } catch (InvalidClassException ice) {
-                ice.printStackTrace();
+                logger.severe(ice.getMessage());
                 return null;
             }
         } finally {

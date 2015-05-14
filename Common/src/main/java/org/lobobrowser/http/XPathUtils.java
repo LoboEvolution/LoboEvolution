@@ -16,6 +16,7 @@ package org.lobobrowser.http;
 
 import java.io.StringWriter;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -40,23 +41,29 @@ import org.w3c.dom.Node;
  * @author rbair
  */
 public class XPathUtils {
+    
+    /** The Constant logger. */
+    private static final Logger logger = Logger.getLogger(XPathUtils.class.getName());
+    
     /** The Constant xpath. */
     private static final XPath xpath;
+    
     /** The Constant functionResolver. */
     private static final XPathFunctionResolverImpl functionResolver;
+    
     static {
         xpath = XPathFactory.newInstance().newXPath();
         functionResolver = new XPathFunctionResolverImpl();
         xpath.setNamespaceContext(functionResolver);
         xpath.setXPathFunctionResolver(functionResolver);
     }
-
+    
     /**
      * Instantiates a new x path utils.
      */
     private XPathUtils() {
     }
-
+    
     /**
      * Returns a {@link SimpleNodeList} containing all the nodes that match the
      * given expression when executed on the given node (as opposed to the dom
@@ -94,7 +101,7 @@ public class XPathUtils {
         Node n = (Node) xpath.evaluate(expression, node, XPathConstants.NODE);
         return n;
     }
-
+    
     /**
      * Returns the text content of the Node matching the given expression. If
      * more than one node matches, the return value is undefined.
@@ -112,7 +119,7 @@ public class XPathUtils {
         Node n = (Node) xpath.evaluate(expression, node, XPathConstants.NODE);
         return n == null ? null : n.getTextContent();
     }
-
+    
     /**
      * Gets the string.
      *
@@ -130,13 +137,13 @@ public class XPathUtils {
      */
     public synchronized static String getString(String expression, Node node,
             String namespace, String namespacePrefix)
-                    throws XPathExpressionException {
+            throws XPathExpressionException {
         functionResolver.addNamespaceMapping(namespacePrefix, namespace);
         Node n = (Node) xpath.evaluate(expression, node, XPathConstants.NODE);
         functionResolver.removeNamespaceMapping(namespacePrefix);
         return n == null ? null : n.getTextContent();
     }
-
+    
     /**
      * Returns a {@link SimpleNodeList} containing all the nodes that match the
      * given expression when executed on the given node (as opposed to the dom
@@ -174,7 +181,7 @@ public class XPathUtils {
         Node n = (Node) expression.evaluate(node, XPathConstants.NODE);
         return n;
     }
-
+    
     /**
      * Returns the text content of the Node matching the given expression. If
      * more than one node matches, the return value is undefined.
@@ -192,7 +199,7 @@ public class XPathUtils {
         Node n = (Node) expression.evaluate(node, XPathConstants.NODE);
         return n == null ? null : n.getTextContent();
     }
-
+    
     /**
      * Compiles the given expression, using the internal XPath instance of this
      * class and returns the XPathExpression.
@@ -207,7 +214,7 @@ public class XPathUtils {
             throws XPathExpressionException {
         return xpath.compile(expression);
     }
-
+    
     /**
      * Exports this DOM as a String.
      *
@@ -218,7 +225,7 @@ public class XPathUtils {
     public static String toXML(Document dom) {
         return toXML(dom, null);
     }
-
+    
     /**
      * To xml.
      *
@@ -242,7 +249,7 @@ public class XPathUtils {
             writer.close();
             return s;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.severe(e.getMessage());
             return null;
         }
     }

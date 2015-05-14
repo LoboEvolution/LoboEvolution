@@ -1998,7 +1998,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
             URLConnection connection = docURL.openConnection();
             result = connection.getHeaderField("Last-Modified");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.severe(e.getMessage());
         }
 
         return result;

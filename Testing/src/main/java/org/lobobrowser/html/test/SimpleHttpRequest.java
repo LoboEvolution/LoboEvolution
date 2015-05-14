@@ -229,7 +229,7 @@ public class SimpleHttpRequest implements HttpRequest {
             try {
                 c.getInputStream().close();
             } catch (IOException ioe) {
-                ioe.printStackTrace();
+                logger.severe(ioe.getMessage());
             }
         }
     }

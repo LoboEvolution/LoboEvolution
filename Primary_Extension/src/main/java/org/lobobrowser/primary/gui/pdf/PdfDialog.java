@@ -99,6 +99,10 @@ import com.sun.pdfview.action.PDFAction;
  */
 public class PdfDialog extends JFrame implements KeyListener,
 TreeSelectionListener, PageChangeListener {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = Logger.getLogger(PdfDialog.class
+            .getName());
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
@@ -176,7 +180,7 @@ TreeSelectionListener, PageChangeListener {
         } catch (Exception e) {
             System.out.println("Couldn't find " + getClass().getName() + "/"
                     + name);
-            e.printStackTrace();
+            logger.severe(e.getMessage());
         }
         return icon;
     }
@@ -700,10 +704,10 @@ TreeSelectionListener, PageChangeListener {
             ByteBuffer buf = ByteBuffer.allocate(contentLength);
             buf.put(byteBuf);
             openPDFByteBuffer(buf, file.getPath(), file.getName());
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+        } catch (FileNotFoundException e) {
+            logger.severe(e.getMessage());
+        } catch (IOException e) {
+            logger.severe(e.getMessage());
         } finally {
             if (istr != null) {
                 try {
@@ -820,8 +824,8 @@ TreeSelectionListener, PageChangeListener {
                 try {
                     prevDirChoice = fc.getSelectedFile();
                     openFile(fc.getSelectedFile());
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
+                } catch (IOException e) {
+                    logger.severe(e.getMessage());
                 }
             }
         } catch (Exception e) {
@@ -830,7 +834,7 @@ TreeSelectionListener, PageChangeListener {
                             + "disk is not available\nfrom the "
                             + "Java Web Start version of this " + "program.\n",
                             "Error opening directory", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+            logger.severe(e.getMessage());
         }
     }
 
@@ -1269,7 +1273,7 @@ TreeSelectionListener, PageChangeListener {
                     }
                 }
             } catch (IOException ioe) {
-                ioe.printStackTrace();
+                logger.severe(ioe.getMessage());
             }
         }
     }

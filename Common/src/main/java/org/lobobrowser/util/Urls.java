@@ -268,7 +268,7 @@ public class Urls {
                         throw mfu;
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        logger.severe(e.getMessage());
                     }
                 }
             }

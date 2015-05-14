@@ -106,7 +106,7 @@ import java.beans.VetoableChangeSupport;
  *       }
  *        a.setFoo("red");
  *     } catch (Exception e) {
- *        e.printStackTrace(); // this will be executed
+ *        logger.severe(e.getMessage()); // this will be executed
  *     }
  *   }
  * }

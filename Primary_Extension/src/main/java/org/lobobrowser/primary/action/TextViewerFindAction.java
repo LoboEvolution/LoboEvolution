@@ -19,6 +19,7 @@ import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.text.Document;
@@ -34,6 +35,9 @@ public class TextViewerFindAction extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant logger. */
+    private static final Logger logger = Logger.getLogger(TextViewerFindAction.class.getName());
 
 	/** The text. */
 	private TextViewerWindow text;
@@ -119,7 +123,7 @@ public class TextViewerFindAction extends AbstractAction {
 					}
 
 				} catch (Exception exp) {
-					exp.printStackTrace();
+					logger.severe(exp.getMessage());
 				}
 
 			}
