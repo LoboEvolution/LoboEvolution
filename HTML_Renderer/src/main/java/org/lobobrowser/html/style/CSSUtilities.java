@@ -375,7 +375,8 @@ public class CSSUtilities {
             String split = b[i];
 
             if (!split.startsWith("filter:") && !split.startsWith("-ms")
-                    && !split.startsWith("-moz") && (app == 0)) {
+                    && !split.startsWith("-moz") && !split.startsWith("*") 
+                    && !split.startsWith("-webkit") && (app == 0)) {
                 app = 0;
                 stringFixed += " " + b[i];
             } else if (app == 1) {
@@ -420,7 +421,8 @@ public class CSSUtilities {
 				String split = strSpli[i];
 
 				if (!split.startsWith("filter:") && !split.startsWith("-ms")
-						&& !split.startsWith("-moz")) {
+						&& !split.startsWith("-moz") && !split.startsWith("*") 
+						&& !split.startsWith("-webkit")) {
 					if (split.contains("url(")) {
 						stringFixed += split.replace("\\", "").trim();
 					} else {
