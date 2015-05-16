@@ -68,7 +68,10 @@ public class CSSRuleListImpl implements CSSRuleList, Serializable {
     }
 
     public CSSRule item(final int index) {
-        return getRules().get(index);
+        if (index < 0 || null == rules_ || index >= rules_.size()) {
+            return null;
+        }
+        return rules_.get(index);
     }
 
     public void add(final CSSRule rule) {
@@ -86,8 +89,12 @@ public class CSSRuleListImpl implements CSSRuleList, Serializable {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < getLength(); i++) {
-            sb.append(item(i).toString()).append("\r\n");
+        if (0 < getLength()) {
+            sb.append(item(0).toString());
+        }
+        for (int i = 1; i < getLength(); i++) {
+            sb.append("\r\n");
+            sb.append(item(i).toString());
         }
         return sb.toString();
     }

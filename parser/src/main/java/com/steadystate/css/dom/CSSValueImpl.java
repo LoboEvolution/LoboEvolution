@@ -147,6 +147,17 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
     }
 
     public String getCssText() {
+        return getCssText(null);
+    }
+
+    /**
+     * Returns a string representation of the rule based on the given format.
+     * If provided format is null, the result is the same as getCssText()
+     *
+     * @param format the formating rules
+     * @return the formated string
+     */
+    public String getCssText(final CSSFormat format) {
         if (getCssValueType() == CSS_VALUE_LIST) {
 
             // Create the string from the LexicalUnits so we include the correct
@@ -403,7 +414,7 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
 
     @Override
     public String toString() {
-        return getCssText();
+        return getCssText(null);
     }
 
     @Override

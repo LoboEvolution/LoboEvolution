@@ -77,6 +77,17 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements CSSUnknow
     }
 
     public String getCssText() {
+        return getCssText(null);
+    }
+
+    /**
+     * Returns a string representation of the rule based on the given format.
+     * If provided format is null, the result is the same as getCssText()
+     *
+     * @param format the formating rules
+     * @return the formated string
+     */
+    public String getCssText(final CSSFormat format) {
         return text_;
     }
 
@@ -119,7 +130,7 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements CSSUnknow
 
     @Override
     public String toString() {
-        return getCssText();
+        return getCssText(null);
     }
 
     @Override

@@ -71,12 +71,23 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
     }
 
     public String getCssText() {
+        return getCssText(null);
+    }
+
+    /**
+     * Returns a string representation of the rule based on the given format.
+     * If provided format is null, the result is the same as getCssText()
+     *
+     * @param format the formating rules
+     * @return the formated string
+     */
+    public String getCssText(final CSSFormat format) {
         final StringBuilder result = new StringBuilder();
 
         final String sel = getSelectorText();
         result.append("@page ").append(sel);
 
-        if ((sel.length() > 0)) {
+        if (sel.length() > 0) {
             result.append(" ");
         }
         result.append("{");
@@ -130,7 +141,7 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
     public String getSelectorText() {
         final StringBuilder result = new StringBuilder();
 
-        if ((null != pseudoPage_)) {
+        if (null != pseudoPage_) {
             result.append(":").append(pseudoPage_);
         }
         return result.toString();
@@ -175,6 +186,6 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
 
     @Override
     public String toString() {
-        return getCssText();
+        return getCssText(null);
     }
 }

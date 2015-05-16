@@ -82,6 +82,17 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl implements CSSImportR
     }
 
     public String getCssText() {
+        return getCssText(null);
+    }
+
+    /**
+     * Returns a string representation of the rule based on the given format.
+     * If provided format is null, the result is the same as getCssText()
+     *
+     * @param format the formating rules
+     * @return the formated string
+     */
+    public String getCssText(final CSSFormat format) {
         final StringBuilder sb = new StringBuilder();
         sb.append("@import");
 
@@ -150,7 +161,7 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl implements CSSImportR
 
     @Override
     public String toString() {
-        return getCssText();
+        return getCssText(null);
     }
 
     @Override

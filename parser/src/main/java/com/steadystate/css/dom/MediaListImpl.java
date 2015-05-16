@@ -83,6 +83,17 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
     }
 
     public String getMediaText() {
+        return getMediaText(null);
+    }
+
+    /**
+     * Returns a string representation of the rule based on the given format.
+     * If provided format is null, the result is the same as getCssText()
+     *
+     * @param format the formating rules
+     * @return the formated string
+     */
+    public String getMediaText(final CSSFormat format) {
         final StringBuilder sb = new StringBuilder("");
         boolean isNotFirst = false;
         for (MediaQuery mediaQuery : mediaQueries_) {
@@ -119,7 +130,9 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
 
     public String item(final int index) {
         final MediaQuery mq = mediaQuery(index);
-        if (null == mq) { return null; }
+        if (null == mq) {
+            return null;
+        }
 
         return mq.getMedia();
     }
@@ -148,7 +161,7 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
 
     @Override
     public String toString() {
-        return getMediaText();
+        return getMediaText(null);
     }
 
     public void setMedia(final List<String> media) {

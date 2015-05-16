@@ -49,7 +49,7 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, Seria
     private LexicalUnit parameters_;
     private String stringValue_;
 
-    /** cache **/
+    /** cache */
     private transient String toString_;
 
     public void setLexicalUnitType(final short type) {
