@@ -3950,6 +3950,11 @@ public class ScriptRuntime {
                              lineNumber, lineSource, columnNumber);
     }
 
+    public static EcmaError rangeError(String message)
+    {
+        return constructError("RangeError", message);
+    }
+
     public static EcmaError typeError(String message)
     {
         return constructError("TypeError", message);
@@ -3961,14 +3966,14 @@ public class ScriptRuntime {
         return typeError(msg);
     }
 
-    public static EcmaError typeError1(String messageId, String arg1)
+    public static EcmaError typeError1(String messageId, Object arg1)
     {
         String msg = getMessage1(messageId, arg1);
         return typeError(msg);
     }
 
-    public static EcmaError typeError2(String messageId, String arg1,
-                                       String arg2)
+    public static EcmaError typeError2(String messageId, Object arg1,
+                                       Object arg2)
     {
         String msg = getMessage2(messageId, arg1, arg2);
         return typeError(msg);
@@ -4245,5 +4250,14 @@ public class ScriptRuntime {
 
     public static final Object[] emptyArgs = new Object[0];
     public static final String[] emptyStrings = new String[0];
+
+
+    public static Scriptable requireObjectCoercible(Scriptable val, IdFunctionObject idFuncObj) {
+        Scriptable val1 = val.getParentScope() != null ? val : null;
+        if (val1 == null || val1 == Undefined.instance)
+            throw ScriptRuntime.typeError2("msg.called.null.or.undefined", idFuncObj.getTag(), idFuncObj.getFunctionName());
+
+        return val1;
+    }
 
 }
