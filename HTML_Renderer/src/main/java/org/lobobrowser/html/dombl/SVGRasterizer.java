@@ -1,6 +1,5 @@
 package org.lobobrowser.html.dombl;
 
-import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Paint;
 import java.awt.Toolkit;
@@ -10,9 +9,6 @@ import java.io.Reader;
 import java.net.URL;
 import java.util.Map;
 import java.util.logging.Logger;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
@@ -236,20 +232,5 @@ public class SVGRasterizer {
 				throws TranscoderException {
 			SVGRasterizer.this.img = img;
 		}
-	}
-
-	// debug
-	public static void main(String[] args) throws Exception {
-		URL u = new URL("file:///C://Users//Administrator//Desktop//batik-bin-1.8//batik-1.8//samples//tests//spec12//text//flowText2.svg");
-		
-		
-		SVGRasterizer r = new SVGRasterizer(u);
-		r.setBackgroundColor(java.awt.Color.white);
-		BufferedImage img = r.createBufferedImage();
-		JFrame f = new JFrame();
-		f.getContentPane().add(new javax.swing.JLabel(new ImageIcon(img)),
-				BorderLayout.CENTER);
-		f.pack();
-		f.show();
 	}
 }
