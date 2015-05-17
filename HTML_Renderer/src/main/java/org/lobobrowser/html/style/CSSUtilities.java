@@ -288,11 +288,14 @@ public class CSSUtilities {
 		// Perform a synchronous request
 		SecurityManager sm = System.getSecurityManager();
 		if (sm == null) {
-			System.out.println("SecurityManager");
+			try {
+					request.open("GET", scriptURI, false);
+					request.send(null);
+				} catch (IOException thrown) {
+					logger.log(Level.WARNING, "processScript()", thrown);
+				}
 
 		} else {
-
-			System.out.println("AccessController");
 			// Code might have restrictions on loading items from elsewhere.
 			AccessController.doPrivileged(new PrivilegedAction<Object>() {
 				@Override
