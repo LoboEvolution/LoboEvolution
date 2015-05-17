@@ -165,7 +165,8 @@ public class JavaObjectWrapper extends ScriptableObject {
                 return JavaScript.getInstance().getJavascriptObject(val,
                         start.getParentScope());
             } catch (Exception err) {
-                throw new WrappedException(err);
+            	err.printStackTrace();
+            	return new Object();
             }
         } else {
             Function f = this.classWrapper.getFunction(name);

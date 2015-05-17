@@ -17,7 +17,10 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -261,12 +264,11 @@ HTMLScriptElement {
                     }
                     int status = request.getStatus();
                     if ((status != 200) && (status != 0)) {
-                        this.warn("Script at [" + scriptURI
-                                + "] failed to load; HTTP status: " + status
-                                + ".");
-                        return;
+                    	text = httpURLConnection(scriptURI);
+                    }else{
+                    	text = request.getResponseText();
                     }
-                    text = request.getResponseText();
+                    
                 } finally {
                     if (liflag) {
                         long time2 = System.currentTimeMillis();
@@ -295,6 +297,7 @@ HTMLScriptElement {
                         throw new IllegalStateException(
                                 "Script source is null: " + this + ".");
                     }
+                    
                     ctx.evaluateString(scope, text, scriptURI, baseLineNumber,
                             null);
                     if (liflag) {
@@ -318,6 +321,40 @@ HTMLScriptElement {
             }
         }
     }
+    
+    /**
+	 * Http url connection.
+	 *
+	 * @param url the url
+	 * @return the string
+	 */
+	private static String httpURLConnection(String url) {
+
+		URL obj;
+		StringBuffer response = new StringBuffer();
+		int responseCode = -1;
+		try {
+			obj = new URL(url);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			con.setRequestMethod("GET");
+			responseCode = con.getResponseCode();
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String inputLine;
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+		} catch (Exception e) {
+			logger.warning("Unable to parse script. URI=[" + url
+					+ "]. Response status was " + responseCode + ".");
+			return "";
+		}
+		return response.toString();
+	}
 
     /*
      * (non-Javadoc)

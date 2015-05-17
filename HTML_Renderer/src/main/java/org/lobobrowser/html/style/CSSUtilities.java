@@ -17,8 +17,10 @@ package org.lobobrowser.html.style;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.AccessController;
@@ -264,57 +266,90 @@ public class CSSUtilities {
      *             the malformed url exception
      * @throws UnsupportedEncodingException 
      */
-    public static ArrayList<String> cssText(String href, HTMLDocumentImpl doc,
-            String baseUri) throws MalformedURLException, UnsupportedEncodingException {
+	public static ArrayList<String> cssText(String href, HTMLDocumentImpl doc,
+			String baseUri) throws MalformedURLException,
+			UnsupportedEncodingException {
 
-        UserAgentContext bcontext = doc.getUserAgentContext();
-        final HttpRequest request = bcontext.createHttpRequest();
-        URL baseURL = new URL(baseUri);
-        URL scriptURL = Urls.createURL(baseURL, href);
+		UserAgentContext bcontext = doc.getUserAgentContext();
+		final HttpRequest request = bcontext.createHttpRequest();
+		URL baseURL = new URL(baseUri);
+		URL scriptURL = Urls.createURL(baseURL, href);
+		String responseText = "";
 
-        String script = scriptURL == null ? href : scriptURL.toExternalForm();
+		String script = scriptURL == null ? href : scriptURL.toExternalForm();
 
-        if ((script != null)
-                && (script.contains(".com") || script.contains(".it"))) {
-            script = script.replace("file://", "http://");
-        }
+		if ((script != null)
+				&& (script.contains(".com") || script.contains(".it"))) {
+			script = script.replace("file://", "http://");
+		}
 
-        final String scriptURI = script;
+		final String scriptURI = script;
 
-        // Perform a synchronous request
-        SecurityManager sm = System.getSecurityManager();
-        if (sm == null) {
-            try {
-                request.open("GET", scriptURI, false);
-                request.send(null);
-            } catch (IOException thrown) {
-                logger.log(Level.WARNING, "parse()", thrown);
-            }
+		// Perform a synchronous request
+		SecurityManager sm = System.getSecurityManager();
+		if (sm == null) {
+			System.out.println("SecurityManager");
 
-        } else {
-            // Code might have restrictions on loading items from elsewhere.
-            AccessController.doPrivileged(new PrivilegedAction<Object>() {
-                @Override
-                public Object run() {
-                    try {
-                        request.open("GET", scriptURI, false);
-                        request.send(null);
-                    } catch (IOException thrown) {
-                        logger.log(Level.WARNING, "parse()", thrown);
-                    }
-                    return null;
-                }
-            });
-        }
-        int status = request.getStatus();
-        if ((status != 200) && (status != 0)) {
-            logger.warning("Unable to parse CSS. URI=[" + scriptURI
-                    + "]. Response status was " + status + ".");
-            return null;
-        }
+		} else {
 
-        return cssText(request.getResponseText());
-    }
+			System.out.println("AccessController");
+			// Code might have restrictions on loading items from elsewhere.
+			AccessController.doPrivileged(new PrivilegedAction<Object>() {
+				@Override
+				public Object run() {
+					try {
+						request.open("GET", scriptURI, false);
+						request.send(null);
+					} catch (IOException thrown) {
+						logger.log(Level.WARNING, "parse()", thrown);
+					}
+					return null;
+				}
+			});
+		}
+
+		int status = request.getStatus();
+		if ((status != 200) && (status != 0)) {
+			responseText = httpURLConnection(scriptURI);
+		} else {
+			responseText = request.getResponseText();
+		}
+		return cssText(responseText);
+	}
+
+	/**
+	 * Http url connection.
+	 *
+	 * @param url the url
+	 * @return the string
+	 */
+	private static String httpURLConnection(String url) {
+
+		URL obj;
+		StringBuffer response = new StringBuffer();
+		int responseCode = -1;
+		try {
+			obj = new URL(url);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			con.setRequestMethod("GET");
+			responseCode = con.getResponseCode();
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String inputLine;
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+		} catch (Exception e) {
+			logger.warning("Unable to parse CSS. URI=[" + url
+					+ "]. Response status was " + responseCode + ".");
+			return "";
+		}
+		return response.toString();
+	}
 
     /**
      * Css text.
