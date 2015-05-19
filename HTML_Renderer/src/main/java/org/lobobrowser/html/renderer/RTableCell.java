@@ -22,20 +22,20 @@ import java.awt.Dimension;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
+import org.lobobrowser.html.info.SizeInfo;
 import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.html.style.HtmlLength;
 
 /**
  * The Class RTableCell.
  */
-class RTableCell extends RBlock {
+public class RTableCell extends RBlock {
 
     /** The cell element. */
     private final HTMLTableCellElementImpl cellElement;
 
     /** The top left virtual cell. */
     private VirtualCell topLeftVirtualCell;
-
-    // private int cellPadding;
 
     /**
      * Instantiates a new r table cell.
@@ -55,7 +55,7 @@ class RTableCell extends RBlock {
             UserAgentContext pcontext, HtmlRendererContext rcontext,
             FrameContext frameContext, RenderableContainer tableAsContainer) {
         super(element, 0, pcontext, rcontext, frameContext, tableAsContainer);
-        this.cellElement = element;
+        this.cellElement = element;        
     }
 
     /**
@@ -100,10 +100,26 @@ class RTableCell extends RBlock {
             boolean expandWidth, boolean expandHeight, boolean sizeOnly,
             boolean useCache) {
         try {
-            this.doLayout(width, height, expandWidth, expandHeight, null,
+        	
+        	int cellWidth = 0;
+        	
+        	if(cellElement.getWidth()!= null && cellElement.getWidth().length()>0){
+        		cellWidth = new HtmlLength(cellElement.getWidth()).getLength(0);
+        	}else {
+        		cellWidth = width;
+			}
+        	
+        	int cellHeight = 0;
+        	
+        	if(cellElement.getHeight()!= null && cellElement.getHeight().length()>0){
+        		cellHeight = new HtmlLength(cellElement.getHeight()).getLength(0);
+        	}else {
+        		cellHeight = height;
+			}
+        	this.doLayout(cellWidth, cellHeight, expandWidth, expandHeight, null,
                     RenderState.OVERFLOW_NONE, RenderState.OVERFLOW_NONE,
                     sizeOnly, useCache);
-            this.layout(width, height, expandWidth, expandHeight, null,
+            this.layout(cellWidth, cellHeight, expandWidth, expandHeight, null,
                     sizeOnly);
             return new Dimension(this.width, this.height);
         } finally {
@@ -119,10 +135,6 @@ class RTableCell extends RBlock {
         // test method
         this.cachedLayout.clear();
     }
-
-    // public void setCellPadding(int value) {
-    // this.cellPadding = value;
-    //}
 
     /*
      * (non-Javadoc)
@@ -264,14 +276,6 @@ class RTableCell extends RBlock {
         return this.cellElement.getWidth();
     }
 
-    // public Dimension layoutMinWidth() {
-    //
-    // return this.panel.layoutMinWidth();
-    //
-    //}
-    //
-    //
-
     /**
      * Sets the cell bounds.
      *
@@ -286,13 +290,13 @@ class RTableCell extends RBlock {
      * @param cellSpacingY
      *            the cell spacing y
      */
-    public void setCellBounds(TableMatrix.SizeInfo[] colSizes,
-            TableMatrix.SizeInfo[] rowSizes, int hasBorder, int cellSpacingX,
+    public void setCellBounds(SizeInfo[] colSizes,
+            SizeInfo[] rowSizes, int hasBorder, int cellSpacingX,
             int cellSpacingY) {
         int vcol = this.getVirtualColumn();
         int vrow = this.getVirtualRow();
-        TableMatrix.SizeInfo colSize = colSizes[vcol];
-        TableMatrix.SizeInfo rowSize = rowSizes[vrow];
+        SizeInfo colSize = colSizes[vcol];
+        SizeInfo rowSize = rowSizes[vrow];
         int x = colSize.offset;
         int y = rowSize.offset;
         int width;
