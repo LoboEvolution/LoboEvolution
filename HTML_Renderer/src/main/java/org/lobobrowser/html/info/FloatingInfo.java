@@ -12,15 +12,20 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-package org.lobobrowser.html.renderer;
+package org.lobobrowser.html.info;
+
+import org.lobobrowser.html.renderer.ExportableFloat;
 
 /**
  * The Class FloatingInfo.
  */
 public class FloatingInfo {
 
+    /** The shift x. */
+    public final int shiftX;
+    
     /** The shift y. */
-    public final int shiftX, shiftY;
+    public final int shiftY;
 
     /** The floats. */
     public final ExportableFloat[] floats;

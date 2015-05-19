@@ -42,6 +42,7 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
+import org.lobobrowser.html.info.FloatingInfo;
 import org.lobobrowser.html.layout.LayoutValue;
 import org.lobobrowser.html.renderstate.BlockRenderState;
 import org.lobobrowser.html.renderstate.RenderState;

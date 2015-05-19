@@ -46,6 +46,7 @@ import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
+import org.lobobrowser.html.info.FloatingInfo;
 import org.lobobrowser.html.layout.MiscLayout;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;

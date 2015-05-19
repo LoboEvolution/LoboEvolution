@@ -20,6 +20,7 @@ import java.awt.event.MouseEvent;
 import java.util.Iterator;
 
 import org.lobobrowser.html.dombl.ModelNode;
+import org.lobobrowser.html.info.FloatingInfo;
 import org.lobobrowser.util.CollectionUtilities;
 
 /**
