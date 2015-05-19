@@ -28,28 +28,29 @@ import java.util.Map;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
+import org.lobobrowser.html.domfilter.CaptionFilter;
+import org.lobobrowser.html.domfilter.ColumnsFilter;
 import org.lobobrowser.html.domfilter.NodeFilter;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCaptionElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableRowElementImpl;
+import org.lobobrowser.html.info.CaptionSizeInfo;
+import org.lobobrowser.html.info.SizeInfo;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderThreadState;
-import org.lobobrowser.html.w3c.HTMLTableCaptionElement;
-import org.lobobrowser.html.w3c.HTMLTableCellElement;
 import org.lobobrowser.html.w3c.HTMLTableRowElement;
-import org.w3c.dom.Node;
 
 /**
  * The Class TableMatrix.
  */
-class TableMatrix {
-    // private static final NodeFilter ROWS_FILTER = new RowsFilter();
-    /** The Constant COLUMNS_FILTER. */
+public class TableMatrix {
+    
+	/** The Constant COLUMNS_FILTER. */
     private static final NodeFilter COLUMNS_FILTER = new ColumnsFilter();
 
     /** The Constant CAPTION_FILTER. */
@@ -714,16 +715,9 @@ class TableMatrix {
             // tableWidth += (-cellAvailWidth);
             cellAvailWidth = 0;
         }
-
-        // Determine tentative column widths based on specified cell widths
-
-        this.determineTentativeSizes(columnSizes, /* widthsOfExtras, */
-                cellAvailWidth/* , widthKnown */);
-
-        // Pre-render cells. This will give the minimum width of each cell,
-        // in addition to the minimum height.
-
-        this.preLayout(hasBorder, cellSpacingX, cellSpacingY/* , widthKnown */);
+        
+        this.determineTentativeSizes(columnSizes, cellAvailWidth);
+        this.preLayout(hasBorder, cellSpacingX, cellSpacingY);
 
         // Increases column widths if they are less than minimums of each cell.
         // por stupid finction maybe actualSize set in previous function - not
@@ -746,9 +740,7 @@ class TableMatrix {
      * @param cellAvailWidth
      *            the cell avail width
      */
-    private void determineTentativeSizes(SizeInfo[] columnSizes/*
-     * , int widthsOfExtras
-     */ , int cellAvailWidth/* , boolean setNoWidthColumns */) {
+    private void determineTentativeSizes(SizeInfo[] columnSizes, int cellAvailWidth) {
         int numCols = columnSizes.length;
 
         // Look at percentages first
@@ -780,29 +772,7 @@ class TableMatrix {
                 numNoWidthColumns++;
             }
         }
-
-        // Tentative width of all columns without a declared
-        // width is set to zero. The pre-render will determine
-        // a better size.
-
-        // // Assign all columns without widths now
-        // int widthUsedByUnspecified = 0;
-        // if(setNoWidthColumns) {
-        // int remainingWidth = cellAvailWidth - widthUsedByAbsolute -
-        // widthUsedByPercent;
-        // if(remainingWidth > 0) {
-        // for(int i = 0; i < numCols; i++) {
-        // SizeInfo colSizeInfo = columnSizes[i];
-        // HtmlLength widthLength = colSizeInfo.htmlLength;
-        // if(widthLength == null) {
-        // int actualSizeInt = remainingWidth / numNoWidthColumns;
-        // widthUsedByUnspecified += actualSizeInt;
-        // colSizeInfo.actualSize = actualSizeInt;
-        //}
-        //}
-        //}
-        //}
-
+        
         // Contract if necessary. This is done again later, but this is
         // an optimization, as it may prevent re-layout. It is only done
         // if all columns have some kind of declared width.
@@ -876,13 +846,6 @@ class TableMatrix {
             if (si.actualSize < si.layoutSize) {
                 si.actualSize = si.layoutSize;
             }
-            // else if(si.htmlLength == null) {
-            // // For cells without a declared width, see if
-            // // their tentative width is a bit too big.
-            // if(si.actualSize > si.layoutSize) {
-            // si.actualSize = si.layoutSize;
-            //}
-            //}
         }
     }
 
@@ -931,6 +894,7 @@ class TableMatrix {
                             vcActualWidth += columnSizes[firstCol + x].actualSize;
                         }
                         // TODO: better height possible
+                        
                         Dimension size = ac.doCellLayout(vcActualWidth, 0,
                                 true, true, true);
                         int vcRenderWidth = size.width;
@@ -956,7 +920,7 @@ class TableMatrix {
                             }
                         }
                     } else {
-                        // TODO: better height possible
+                    	// TODO: better height possible
                         Dimension size = ac.doCellLayout(actualSize, 0, true,
                                 true, true);
                         if (size.width > colSize.layoutSize) {
@@ -1594,11 +1558,7 @@ class TableMatrix {
                 rowSizeInfo.actualSize = actualSizeInt;
             }
         }
-
-        // Set width of table
-        // this.tableHeight = heightUsedByAbsolute + heightUsedByNoSize +
-        // heightUsedByPercent + heightsOfExtras;
-
+        
         // Do a final render to set actual cell sizes
         this.finalRender(hasBorder, cellSpacing, sizeOnly);
     }
@@ -1648,6 +1608,7 @@ class TableMatrix {
             } else {
                 totalCellHeight = rowSizes[row].actualSize;
             }
+            
             Dimension size = cell.doCellLayout(totalCellWidth, totalCellHeight,
                     true, true, sizeOnly);
             if (size.width > totalCellWidth) {
@@ -1672,63 +1633,6 @@ class TableMatrix {
                     sizeOnly, true);
         }
     }
-
-    // public final void adjust() {
-    // // finalRender needs to adjust actualSize of columns and rows
-    // // given that things might change as we render one last time.
-    // int hasBorder = this.hasOldStyleBorder;
-    // int cellSpacingX = this.cellSpacingX;
-    // int cellSpacingY = this.cellSpacingY;
-    // ArrayList allCells = this.ALL_CELLS;
-    // SizeInfo[] colSizes = this.columnSizes;
-    // SizeInfo[] rowSizes = this.rowSizes;
-    // int numCells = allCells.size();
-    // for(int i = 0; i < numCells; i++) {
-    // RTableCell cell = (RTableCell) allCells.get(i);
-    // int col = cell.getVirtualColumn();
-    // int colSpan = cell.getColSpan();
-    // int totalCellWidth;
-    // if(colSpan > 1) {
-    // totalCellWidth = (colSpan - 1) * (cellSpacingX + 2 * hasBorder);
-    // for(int x = 0; x < colSpan; x++) {
-    // totalCellWidth += colSizes[col + x].actualSize;
-    //}
-    //}
-    // else {
-    // totalCellWidth = colSizes[col].actualSize;
-    //}
-    // int row = cell.getVirtualRow();
-    // int rowSpan = cell.getRowSpan();
-    // int totalCellHeight;
-    // if(rowSpan > 1) {
-    // totalCellHeight = (rowSpan - 1) * (cellSpacingY + 2 * hasBorder);
-    // for(int y = 0; y < rowSpan; y++) {
-    // totalCellHeight += rowSizes[row + y].actualSize;
-    //}
-    //}
-    // else {
-    // totalCellHeight = rowSizes[row].actualSize;
-    //}
-    // cell.adjust();
-    // Dimension size = cell.getSize();
-    // if(size.width > totalCellWidth) {
-    // if(colSpan == 1) {
-    // colSizes[col].actualSize = size.width;
-    //}
-    // else {
-    // colSizes[col].actualSize += (size.width - totalCellWidth);
-    //}
-    //}
-    // if(size.height > totalCellHeight) {
-    // if(rowSpan == 1) {
-    // rowSizes[row].actualSize = size.height;
-    //}
-    // else {
-    // rowSizes[row].actualSize += (size.height - totalCellHeight);
-    //}
-    //}
-    //}
-    //}
 
     /**
      * Sets bounds of each cell's component, and sumps up table width and
@@ -1781,9 +1685,7 @@ class TableMatrix {
             xoffset += colSizeInfo.actualSize;
             xoffset += hasBorder;
         }
-        // int tableWidthByCells = xoffset + cellSpacingX + insets.right;
-        // this.tableWidth = tableWidthByCells <
-        // captionSizeWidth.actualSize?captionSizeWidth.actualSize:tableWidthByCells;
+
         this.tableWidth = xoffset + cellSpacingX + insets.right;
 
         // Set offsets of each cell
@@ -1856,21 +1758,8 @@ class TableMatrix {
         }
 
         if (this.hasOldStyleBorder > 0) {
-            // // Paint table border
-            //
-            // int tableWidth = this.tableWidth;
-            // int tableHeight = this.tableHeight;
-            // g.setColor(Color.BLACK); //TODO: Actual border color
-            // int x = insets.left;
-            // int y = insets.top;
-            // for(int i = 0; i < border; i++) {
-            // g.drawRect(x + i, y + i, tableWidth - i * 2 - 1, tableHeight - i
-            // * 2 - 1);
-            //}
-
-            // Paint cell borders
-
-            g.setColor(Color.GRAY);
+           
+        	g.setColor(Color.GRAY);
             for (int i = 0; i < numCells; i++) {
                 RTableCell cell = (RTableCell) allCells.get(i);
                 int cx = cell.getX() - 1;
@@ -1881,46 +1770,6 @@ class TableMatrix {
             }
         }
     }
-
-    // public boolean paintSelection(Graphics g, boolean inSelection,
-    // RenderableSpot startPoint, RenderableSpot endPoint) {
-    // ArrayList allCells = this.ALL_CELLS;
-    // int numCells = allCells.size();
-    // for(int i = 0; i < numCells; i++) {
-    // RTableCell cell = (RTableCell) allCells.get(i);
-    // Rectangle bounds = cell.getBounds();
-    // int offsetX = bounds.x;
-    // int offsetY = bounds.y;
-    // g.translate(offsetX, offsetY);
-    // try {
-    // boolean newInSelection = cell.paintSelection(g, inSelection, startPoint,
-    // endPoint);
-    // if(inSelection && !newInSelection) {
-    // return false;
-    //}
-    // inSelection = newInSelection;
-    //} finally {
-    // g.translate(-offsetX, -offsetY);
-    //}
-    //}
-    // return inSelection;
-    //}
-    //
-    // public boolean extractSelectionText(StringBuffer buffer, boolean
-    // inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
-    // ArrayList allCells = this.ALL_CELLS;
-    // int numCells = allCells.size();
-    // for(int i = 0; i < numCells; i++) {
-    // RTableCell cell = (RTableCell) allCells.get(i);
-    // boolean newInSelection = cell.extractSelectionText(buffer, inSelection,
-    // startPoint, endPoint);
-    // if(inSelection && !newInSelection) {
-    // return false;
-    //}
-    // inSelection = newInSelection;
-    //}
-    // return inSelection;
-    //}
 
     /*
      * (non-Javadoc)
@@ -2126,71 +1975,4 @@ class TableMatrix {
     public Iterator<BoundableRenderable> getRenderables() {
         return this.ALL_CELLS.iterator();
     }
-
-    /**
-     * The Class ColumnsFilter.
-     */
-    private static class ColumnsFilter implements NodeFilter {
-
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
-         */
-        @Override
-        public final boolean accept(Node node) {
-            return (node instanceof HTMLTableCellElement);
-        }
-    }
-
-    /**
-     * The Class CaptionFilter.
-     */
-    private static class CaptionFilter implements NodeFilter {
-
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
-         */
-        @Override
-        public final boolean accept(Node node) {
-            return (node instanceof HTMLTableCaptionElement);
-        }
-    }
-
-    /**
-     * The Class SizeInfo.
-     */
-    public static class SizeInfo {
-
-        /** The html length. */
-        public HtmlLength htmlLength;
-
-        /** The actual size. */
-        public int actualSize;
-
-        /** The layout size. */
-        public int layoutSize;
-
-        /** The min size. */
-        public int minSize;
-
-        /** The offset. */
-        public int offset;
-    }
-
-    /**
-     * The Class CaptionSizeInfo.
-     */
-    public static class CaptionSizeInfo {
-
-        /** The height. */
-        public int height;
-
-        /** The height offset. */
-        public int heightOffset;
-
-        /** The width. */
-        public int width;
-    }
-
 }
