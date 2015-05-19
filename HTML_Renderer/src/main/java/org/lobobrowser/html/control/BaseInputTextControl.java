@@ -18,6 +18,7 @@
 package org.lobobrowser.html.control;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Insets;
@@ -27,6 +28,7 @@ import java.awt.event.KeyListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
+import javax.swing.text.PlainDocument;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.DOMElementImpl;
@@ -37,7 +39,7 @@ import org.lobobrowser.util.gui.WrapperLayout;
 /**
  * The Class BaseInputTextControl.
  */
-abstract class BaseInputTextControl extends BaseInputControl {
+public abstract class BaseInputTextControl extends BaseInputControl {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
@@ -47,6 +49,12 @@ abstract class BaseInputTextControl extends BaseInputControl {
 
     /** The widget. */
     protected final JTextComponent widget;
+    
+    /** Creates the text field. */
+    protected abstract JTextComponent createTextField();
+
+    /** The max length. */
+    private int maxLength = -1;
 
     /**
      * Instantiates a new base input text control.
@@ -61,12 +69,9 @@ abstract class BaseInputTextControl extends BaseInputControl {
         Font font = widget.getFont();
         widget.setFont(font.deriveFont(DEFAULT_FONT_SIZE));
         widget.setDocument(new LimitedDocument());
-
-        DOMElementImpl element = this.controlElement;
-        String value = element.getAttribute(HtmlAttributeProperties.VALUE);
         widget.setSelectionColor(Color.BLUE);
-        widget.setText(value);
-
+        DOMElementImpl element = this.controlElement;
+        widget.setText(element.getAttribute(HtmlAttributeProperties.VALUE));
         widget.addKeyListener(new KeyListener() {
 
             @Override
@@ -108,16 +113,6 @@ abstract class BaseInputTextControl extends BaseInputControl {
         }
 
     }
-
-    /**
-     * Creates the text field.
-     *
-     * @return the j text component
-     */
-    protected abstract JTextComponent createTextField();
-
-    /** The max length. */
-    private int maxLength = -1;
 
     /*
      * (non-Javadoc)
@@ -197,19 +192,19 @@ abstract class BaseInputTextControl extends BaseInputControl {
      * @see javax.swing.JComponent#getPreferredSize()
      */
     @Override
-    public java.awt.Dimension getPreferredSize() {
+    public Dimension getPreferredSize() {
         int size = this.size;
         JTextComponent widget = this.widget;
         FontMetrics fm = widget.getFontMetrics(widget.getFont());
         Insets insets = widget.getInsets();
-        int pw, ph;
+        int pw, ph;        
         if (size == -1) {
-            pw = 100;
+            pw = 200;
         } else {
             pw = insets.left + insets.right + (fm.charWidth('0') * size);
-        }
-        ph = fm.getHeight() + insets.top + insets.bottom;
-        return new java.awt.Dimension(pw, ph);
+        } 
+        ph = fm.getHeight() + insets.top;
+        return new Dimension(pw, ph);
     }
 
     /*
@@ -224,7 +219,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
     /**
      * Implements maxlength functionality.
      */
-    private class LimitedDocument extends javax.swing.text.PlainDocument {
+    private class LimitedDocument extends PlainDocument {
 
         /** The Constant serialVersionUID. */
         private static final long serialVersionUID = 1L;
