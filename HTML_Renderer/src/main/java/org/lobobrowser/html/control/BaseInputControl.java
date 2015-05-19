@@ -25,6 +25,7 @@ import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.RenderableSpot;
+import org.lobobrowser.html.style.HtmlLength;
 
 /**
  * The Class BaseInputControl.
@@ -37,6 +38,9 @@ InputContext {
 
     /** The value. */
     protected String value;
+    
+    /** The size. */
+    protected int size = -1;
 
     /**
      * Instantiates a new base input control.
@@ -47,7 +51,11 @@ InputContext {
     public BaseInputControl(HTMLBaseInputElement modelNode) {
         super(modelNode);
         this.setOpaque(false);
-    }
+        String sizeText = this.controlElement.getAttribute(HtmlAttributeProperties.SIZE);
+		if (sizeText != null) {
+			setControlSize(new HtmlLength(sizeText).getLength(0));
+		}
+	}
 
     /*
      * (non-Javadoc)
@@ -75,9 +83,6 @@ InputContext {
     public int getVAlign() {
         return RElement.VALIGN_ABSBOTTOM;
     }
-
-    /** The size. */
-    protected int size = -1;
 
     /*
      * (non-Javadoc)
