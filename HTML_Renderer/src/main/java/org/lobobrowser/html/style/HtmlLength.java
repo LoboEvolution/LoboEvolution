@@ -68,7 +68,7 @@ public final class HtmlLength {
             }
         } else {
             this.lengthType = PIXELS;
-            parseable = spec;
+            parseable = spec.substring(0, length - 2).trim();
         }
         this.value = Integer.parseInt(parseable);
     }
