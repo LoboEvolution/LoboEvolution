@@ -36,17 +36,7 @@ import org.w3c.dom.Node;
  */
 public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 
-    /**
-     * Instantiates a new HTML base input element.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLBaseInputElement(String name) {
-        super(name);
-    }
-
-    /** The input context. */
+	/** The input context. */
     protected InputContext inputContext;
 
     /** The deferred value. */
@@ -60,6 +50,16 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 
     /** The deferred disabled. */
     protected Boolean deferredDisabled;
+    
+    /**
+     * Instantiates a new HTML base input element.
+     *
+     * @param name
+     *            the name
+     */
+    public HTMLBaseInputElement(String name) {
+        super(name);
+    }
 
     /**
      * Sets the input context.
