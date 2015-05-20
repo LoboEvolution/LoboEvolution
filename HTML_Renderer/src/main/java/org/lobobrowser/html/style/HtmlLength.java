@@ -66,9 +66,12 @@ public final class HtmlLength {
             } else {
                 parseable = spec.substring(0, length - 1).trim();
             }
-        } else {
+        } else if (spec.endsWith("px")) {
             this.lengthType = PIXELS;
             parseable = spec.substring(0, length - 2).trim();
+        } else{
+        	this.lengthType = PIXELS;
+        	parseable = spec;
         }
         this.value = Integer.parseInt(parseable);
     }
