@@ -14,51 +14,113 @@
  */
 package org.lobobrowser.html.control;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.util.ArrayList;
 
-import org.lobobrowser.html.domimpl.DomCanvasImpl;
 import org.lobobrowser.html.domimpl.HTMLCanvasElementImpl;
+import org.lobobrowser.html.w3c.HTMLCanvasElement;
 
 /**
  * The Class CanvasControl.
  */
 public class CanvasControl extends BaseControl {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The width. */
-    private int width;
+	/** The width. */
+	private int width;
 
-    /** The height. */
-    private int height;
+	/** The height. */
+	private int height;
 
-    private DomCanvasImpl context;
+	/** The list rect values. */
+	private ArrayList<int[]> listRectValues;
+	
+	/** The list stroke rect values. */
+	private ArrayList<int[]> listStrokeRectValues;
+	
+	/** The list text values. */
+	private ArrayList<Object[]> listTextValues;
 
-    public CanvasControl(HTMLCanvasElementImpl modelNode) {
-        super(modelNode);
-        width = modelNode.getWidth();
-        height = modelNode.getHeight();
+	/** The method. */
+	private int method;
 
-        System.out.println(width);
-        System.out.println(height);
+	/**
+	 * Instantiates a new canvas control.
+	 *
+	 * @param modelNode the model node
+	 */
+	public CanvasControl(HTMLCanvasElementImpl modelNode) {
+		super(modelNode);
+		width = modelNode.getWidth();
+		height = modelNode.getHeight();
+		listRectValues = modelNode.getListRectValues();
+		listTextValues = modelNode.getListTextValues();
+		listStrokeRectValues = modelNode.getListStrokeRectValues();
+		method = modelNode.getMethod();
+	}
 
-        System.out.println("controll");
-        // context = (DomCanvasImpl)modelNode.getContext("2d");
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
+	 */
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.drawRect(0, 0, new Integer(width), new Integer(height));
 
-        // System.out.println("context: " + context);
+		switch (method) {
+		case HTMLCanvasElement.FILL_RECT:
+			fillRect(g2d);
+			break;
+		case HTMLCanvasElement.FILL_TEXT:
+			fillText(g2d);
+			break;
+		case HTMLCanvasElement.STROKE_RECT:
+			strokeRect(g2d);
+			break;
+		default:
+			break;
+		}
+	}
 
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        g.drawRect(0, 0, new Integer(width), new Integer(height));
-
-        System.out.println("paint");
-
-        // context.fillRect(0, 0, 0, 0);
-
-        // System.out.println("method: " + context.getMethod());
-    }
+	/**
+	 * Fill rect.
+	 *
+	 * @param g the g
+	 */
+	private void fillRect(Graphics2D g) {
+		for (int i = 0; i < listRectValues.size(); i++) {
+			int[] val = listRectValues.get(i);
+			g.fillRect(val[0], val[1], val[2], val[3]);
+		}
+	}
+	
+	/**
+	 * Fill text.
+	 *
+	 * @param g the g
+	 */
+	private void fillText(Graphics2D g) {
+		for (int i = 0; i < listTextValues.size(); i++) {
+			Object[] val = listTextValues.get(i);
+			g.drawString((String)val[0], (Integer)val[1], (Integer)val[2]);
+		}
+	}
+	
+	/**
+	 * Stroke rect.
+	 *
+	 * @param g the g
+	 */
+	private void strokeRect(Graphics2D g) {
+		for (int i = 0; i < listStrokeRectValues.size(); i++) {
+			int[] val = listStrokeRectValues.get(i);
+			g.setStroke(new BasicStroke(val[4]));
+			g.drawRect(val[0], val[1], val[2],val[3]);
+		}
+	}
 }

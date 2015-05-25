@@ -246,112 +246,488 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      */
     void setTextBaseline(String arg);
 
+    /**
+     * Arc.
+     *
+     * @param x the x
+     * @param y the y
+     * @param radius the radius
+     * @param startAngle the start angle
+     * @param endAngle the end angle
+     * @param anticlockwise the anticlockwise
+     */
     void arc(int x, int y, int radius, int startAngle, int endAngle,
             boolean anticlockwise);
 
+    /**
+     * Arc to.
+     *
+     * @param x1 the x1
+     * @param y1 the y1
+     * @param x2 the x2
+     * @param y2 the y2
+     * @param radius the radius
+     */
     void arcTo(int x1, int y1, int x2, int y2, int radius);
 
+    /**
+     * Begin path.
+     */
     void beginPath();
 
+    /**
+     * Bezier curve to.
+     *
+     * @param cp1x the cp1x
+     * @param cp1y the cp1y
+     * @param cp2x the cp2x
+     * @param cp2y the cp2y
+     * @param x the x
+     * @param y the y
+     */
     void bezierCurveTo(int cp1x, int cp1y, int cp2x, int cp2y, int x, int y);
 
+    /**
+     * Clear rect.
+     *
+     * @param x the x
+     * @param y the y
+     * @param width the width
+     * @param height the height
+     */
     void clearRect(int x, int y, int width, int height);
 
+    /**
+     * Clear shadow.
+     */
     void clearShadow();
 
+    /**
+     * Clip.
+     */
     void clip();
 
+    /**
+     * Close path.
+     */
     void closePath();
 
+    /**
+     * Creates the linear gradient.
+     *
+     * @param x0 the x0
+     * @param y0 the y0
+     * @param x1 the x1
+     * @param y1 the y1
+     * @return the canvas gradient
+     */
     CanvasGradient createLinearGradient(int x0, int y0, int x1, int y1);
 
+    /**
+     * Creates the pattern.
+     *
+     * @param canvas the canvas
+     * @param repetitionType the repetition type
+     * @return the canvas pattern
+     */
     CanvasPattern createPattern(HTMLCanvasElement canvas, String repetitionType);
 
+    /**
+     * Creates the pattern.
+     *
+     * @param image the image
+     * @param repetitionType the repetition type
+     * @return the canvas pattern
+     */
     CanvasPattern createPattern(HTMLImageElement image, String repetitionType);
 
+    /**
+     * Creates the radial gradient.
+     *
+     * @param x0 the x0
+     * @param y0 the y0
+     * @param r0 the r0
+     * @param x1 the x1
+     * @param y1 the y1
+     * @param r1 the r1
+     * @return the canvas gradient
+     */
     CanvasGradient createRadialGradient(int x0, int y0, int r0, int x1, int y1,
             int r1);
 
+    /**
+     * Draw image.
+     *
+     * @param image the image
+     * @param x the x
+     * @param y the y
+     */
     void drawImage(HTMLImageElement image, int x, int y);
 
+    /**
+     * Draw image.
+     *
+     * @param image the image
+     * @param x the x
+     * @param y the y
+     * @param width the width
+     * @param height the height
+     */
     void drawImage(HTMLImageElement image, int x, int y, int width, int height);
 
+    /**
+     * Draw image.
+     *
+     * @param image the image
+     * @param sx the sx
+     * @param sy the sy
+     * @param sw the sw
+     * @param sh the sh
+     * @param dx the dx
+     * @param dy the dy
+     * @param dw the dw
+     * @param dh the dh
+     */
     void drawImage(HTMLImageElement image, int sx, int sy, int sw, int sh,
             int dx, int dy, int dw, int dh);
 
+    /**
+     * Draw image.
+     *
+     * @param canvas the canvas
+     * @param x the x
+     * @param y the y
+     */
     void drawImage(HTMLCanvasElement canvas, int x, int y);
 
+    /**
+     * Draw image.
+     *
+     * @param canvas the canvas
+     * @param x the x
+     * @param y the y
+     * @param width the width
+     * @param height the height
+     */
     void drawImage(HTMLCanvasElement canvas, int x, int y, int width, int height);
 
+    /**
+     * Draw image.
+     *
+     * @param canvas the canvas
+     * @param sx the sx
+     * @param sy the sy
+     * @param sw the sw
+     * @param sh the sh
+     * @param dx the dx
+     * @param dy the dy
+     * @param dw the dw
+     * @param dh the dh
+     */
     void drawImage(HTMLCanvasElement canvas, int sx, int sy, int sw, int sh,
             int dx, int dy, int dw, int dh);
 
+    /**
+     * Draw image.
+     *
+     * @param video the video
+     * @param x the x
+     * @param y the y
+     */
     void drawImage(HTMLVideoElement video, int x, int y);
 
+    /**
+     * Draw image.
+     *
+     * @param video the video
+     * @param x the x
+     * @param y the y
+     * @param width the width
+     * @param height the height
+     */
     void drawImage(HTMLVideoElement video, int x, int y, int width, int height);
 
+    /**
+     * Draw image.
+     *
+     * @param video the video
+     * @param sx the sx
+     * @param sy the sy
+     * @param sw the sw
+     * @param sh the sh
+     * @param dx the dx
+     * @param dy the dy
+     * @param dw the dw
+     * @param dh the dh
+     */
     void drawImage(HTMLVideoElement video, int sx, int sy, int sw, int sh,
             int dx, int dy, int dw, int dh);
 
+    /**
+     * Draw image from rect.
+     *
+     * @param image the image
+     */
     void drawImageFromRect(HTMLImageElement image);
 
+    /**
+     * Draw image from rect.
+     *
+     * @param image the image
+     * @param sx the sx
+     */
     void drawImageFromRect(HTMLImageElement image, int sx);
 
+    /**
+     * Draw image from rect.
+     *
+     * @param image the image
+     * @param sx the sx
+     * @param sy the sy
+     */
     void drawImageFromRect(HTMLImageElement image, int sx, int sy);
 
+    /**
+     * Draw image from rect.
+     *
+     * @param image the image
+     * @param sx the sx
+     * @param sy the sy
+     * @param sw the sw
+     */
     void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw);
 
+    /**
+     * Draw image from rect.
+     *
+     * @param image the image
+     * @param sx the sx
+     * @param sy the sy
+     * @param sw the sw
+     * @param sh the sh
+     */
     void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
             int sh);
 
+    /**
+     * Draw image from rect.
+     *
+     * @param image the image
+     * @param sx the sx
+     * @param sy the sy
+     * @param sw the sw
+     * @param sh the sh
+     * @param dx the dx
+     */
     void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
             int sh, int dx);
 
+    /**
+     * Draw image from rect.
+     *
+     * @param image the image
+     * @param sx the sx
+     * @param sy the sy
+     * @param sw the sw
+     * @param sh the sh
+     * @param dx the dx
+     * @param dy the dy
+     */
     void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
             int sh, int dx, int dy);
 
+    /**
+     * Draw image from rect.
+     *
+     * @param image the image
+     * @param sx the sx
+     * @param sy the sy
+     * @param sw the sw
+     * @param sh the sh
+     * @param dx the dx
+     * @param dy the dy
+     * @param dw the dw
+     */
     void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
             int sh, int dx, int dy, int dw);
 
+    /**
+     * Draw image from rect.
+     *
+     * @param image the image
+     * @param sx the sx
+     * @param sy the sy
+     * @param sw the sw
+     * @param sh the sh
+     * @param dx the dx
+     * @param dy the dy
+     * @param dw the dw
+     * @param dh the dh
+     */
     void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
             int sh, int dx, int dy, int dw, int dh);
 
+    /**
+     * Draw image from rect.
+     *
+     * @param image the image
+     * @param sx the sx
+     * @param sy the sy
+     * @param sw the sw
+     * @param sh the sh
+     * @param dx the dx
+     * @param dy the dy
+     * @param dw the dw
+     * @param dh the dh
+     * @param compositeOperation the composite operation
+     */
     void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
             int sh, int dx, int dy, int dw, int dh, String compositeOperation);
 
+    /**
+     * Fill.
+     */
     void fill();
 
+    /**
+     * Fill rect.
+     *
+     * @param x the x
+     * @param y the y
+     * @param width the width
+     * @param height the height
+     */
     void fillRect(int x, int y, int width, int height);
 
+    /**
+     * Fill text.
+     *
+     * @param text the text
+     * @param x the x
+     * @param y the y
+     */
     void fillText(String text, int x, int y);
 
+    /**
+     * Fill text.
+     *
+     * @param text the text
+     * @param x the x
+     * @param y the y
+     * @param maxWidth the max width
+     */
     void fillText(String text, int x, int y, int maxWidth);
 
+    /**
+     * Gets the image data.
+     *
+     * @param sx the sx
+     * @param sy the sy
+     * @param sw the sw
+     * @param sh the sh
+     * @return the image data
+     */
     CanvasImageData getImageData(int sx, int sy, int sw, int sh);
 
+    /**
+     * Checks if is point in path.
+     *
+     * @param x the x
+     * @param y the y
+     * @return true, if is point in path
+     */
     boolean isPointInPath(int x, int y);
 
+    /**
+     * Line to.
+     *
+     * @param x the x
+     * @param y the y
+     */
     void lineTo(int x, int y);
 
+    /**
+     * Measure text.
+     *
+     * @param text the text
+     * @return the object
+     */
     Object measureText(String text);
 
+    /**
+     * Move to.
+     *
+     * @param x the x
+     * @param y the y
+     */
     void moveTo(int x, int y);
 
+    /**
+     * Put image data.
+     *
+     * @param imagedata the imagedata
+     * @param dx the dx
+     * @param dy the dy
+     */
     void putImageData(CanvasImageData imagedata, int dx, int dy);
 
+    /**
+     * Put image data.
+     *
+     * @param imagedata the imagedata
+     * @param dx the dx
+     * @param dy the dy
+     * @param dirtyX the dirty x
+     * @param dirtyY the dirty y
+     * @param dirtyWidth the dirty width
+     * @param dirtyHeight the dirty height
+     */
     void putImageData(CanvasImageData imagedata, int dx, int dy, int dirtyX,
             int dirtyY, int dirtyWidth, int dirtyHeight);
 
+    /**
+     * Quadratic curve to.
+     *
+     * @param cpx the cpx
+     * @param cpy the cpy
+     * @param x the x
+     * @param y the y
+     */
     void quadraticCurveTo(int cpx, int cpy, int x, int y);
 
+    /**
+     * Rect.
+     *
+     * @param x the x
+     * @param y the y
+     * @param width the width
+     * @param height the height
+     */
     void rect(int x, int y, int width, int height);
 
+    /**
+     * Restore.
+     */
     void restore();
 
+    /**
+     * Rotate.
+     *
+     * @param angle the angle
+     */
     void rotate(int angle);
 
+    /**
+     * Save.
+     */
     void save();
 
+    /**
+     * Scale.
+     *
+     * @param sx the sx
+     * @param sy the sy
+     */
     void scale(int sx, int sy);
 
     /**
@@ -378,6 +754,12 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      */
     void setFillColor(String color);
 
+    /**
+     * Sets the fill color.
+     *
+     * @param color the color
+     * @param alpha the alpha
+     */
     void setFillColor(String color, int alpha);
 
     /**
@@ -388,65 +770,189 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      */
     void setFillColor(int grayLevel);
 
+    /**
+     * Sets the fill color.
+     *
+     * @param grayLevel the gray level
+     * @param alpha the alpha
+     */
     void setFillColor(int grayLevel, int alpha);
 
+    /**
+     * Sets the fill color.
+     *
+     * @param r the r
+     * @param g the g
+     * @param b the b
+     * @param a the a
+     */
     void setFillColor(int r, int g, int b, int a);
 
+    /**
+     * Sets the fill color.
+     *
+     * @param c the c
+     * @param m the m
+     * @param y the y
+     * @param k the k
+     * @param a the a
+     */
     void setFillColor(int c, int m, int y, int k, int a);
 
+    /**
+     * Sets the shadow.
+     *
+     * @param width the width
+     * @param height the height
+     * @param blur the blur
+     */
     void setShadow(int width, int height, int blur);
 
+    /**
+     * Sets the shadow.
+     *
+     * @param width the width
+     * @param height the height
+     * @param blur the blur
+     * @param color the color
+     */
     void setShadow(int width, int height, int blur, String color);
 
+    /**
+     * Sets the shadow.
+     *
+     * @param width the width
+     * @param height the height
+     * @param blur the blur
+     * @param color the color
+     * @param alpha the alpha
+     */
     void setShadow(int width, int height, int blur, String color, int alpha);
 
+    /**
+     * Sets the shadow.
+     *
+     * @param width the width
+     * @param height the height
+     * @param blur the blur
+     * @param grayLevel the gray level
+     */
     void setShadow(int width, int height, int blur, int grayLevel);
 
+    /**
+     * Sets the shadow.
+     *
+     * @param width the width
+     * @param height the height
+     * @param blur the blur
+     * @param grayLevel the gray level
+     * @param alpha the alpha
+     */
     void setShadow(int width, int height, int blur, int grayLevel, int alpha);
 
+    /**
+     * Sets the shadow.
+     *
+     * @param width the width
+     * @param height the height
+     * @param blur the blur
+     * @param r the r
+     * @param g the g
+     * @param b the b
+     * @param a the a
+     */
     void setShadow(int width, int height, int blur, int r, int g, int b, int a);
 
+    /**
+     * Sets the shadow.
+     *
+     * @param width the width
+     * @param height the height
+     * @param blur the blur
+     * @param c the c
+     * @param m the m
+     * @param y the y
+     * @param k the k
+     * @param a the a
+     */
     void setShadow(int width, int height, int blur, int c, int m, int y, int k,
             int a);
 
     /**
-     * Sets the stroke color.
+     * Sets the transform.
      *
-     * @param color
-     *            the new stroke color
+     * @param m11 the m11
+     * @param m12 the m12
+     * @param m21 the m21
+     * @param m22 the m22
+     * @param dx the dx
+     * @param dy the dy
      */
-    void setStrokeColor(String color);
-
-    void setStrokeColor(String color, int alpha);
-
-    /**
-     * Sets the stroke color.
-     *
-     * @param grayLevel
-     *            the new stroke color
-     */
-    void setStrokeColor(int grayLevel);
-
-    void setStrokeColor(int grayLevel, int alpha);
-
-    void setStrokeColor(int r, int g, int b, int a);
-
-    void setStrokeColor(int c, int m, int y, int k, int a);
-
     void setTransform(int m11, int m12, int m21, int m22, int dx, int dy);
 
+    /**
+     * Stroke.
+     */
     void stroke();
 
+    /**
+     * Stroke rect.
+     *
+     * @param x the x
+     * @param y the y
+     * @param width the width
+     * @param height the height
+     */
     void strokeRect(int x, int y, int width, int height);
 
+    /**
+     * Stroke rect.
+     *
+     * @param x the x
+     * @param y the y
+     * @param width the width
+     * @param height the height
+     * @param lineWidth the line width
+     */
     void strokeRect(int x, int y, int width, int height, int lineWidth);
 
+    /**
+     * Stroke text.
+     *
+     * @param text the text
+     * @param x the x
+     * @param y the y
+     */
     void strokeText(String text, int x, int y);
 
+    /**
+     * Stroke text.
+     *
+     * @param text the text
+     * @param x the x
+     * @param y the y
+     * @param maxWidth the max width
+     */
     void strokeText(String text, int x, int y, int maxWidth);
 
+    /**
+     * Transform.
+     *
+     * @param m11 the m11
+     * @param m12 the m12
+     * @param m21 the m21
+     * @param m22 the m22
+     * @param dx the dx
+     * @param dy the dy
+     */
     void transform(int m11, int m12, int m21, int m22, int dx, int dy);
 
+    /**
+     * Translate.
+     *
+     * @param tx the tx
+     * @param ty the ty
+     */
     void translate(int tx, int ty);
 
 }

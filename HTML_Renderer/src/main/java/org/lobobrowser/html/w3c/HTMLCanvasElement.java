@@ -18,6 +18,19 @@ package org.lobobrowser.html.w3c;
  * The public interface HTMLCanvasElement.
  */
 public interface HTMLCanvasElement extends HTMLElement {
+	
+	
+	/** The fill rect. */
+	int FILL_RECT = 1;
+	
+	/** The fill text. */
+	int FILL_TEXT = 2;
+	
+	/** The stroke rect. */
+	int STROKE_RECT = 3;
+	
+	/** The curve. */
+	int CURVE = 4;
 
     /**
      * Gets the width.

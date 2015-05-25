@@ -15,6 +15,7 @@
 package org.lobobrowser.html.domimpl;
 
 import java.awt.Font;
+import java.util.ArrayList;
 
 import org.lobobrowser.html.w3c.CanvasGradient;
 import org.lobobrowser.html.w3c.CanvasImageData;
@@ -25,14 +26,49 @@ import org.lobobrowser.html.w3c.HTMLImageElement;
 import org.lobobrowser.html.w3c.HTMLVideoElement;
 
 public class DomCanvasImpl implements CanvasRenderingContext2D {
+	
+	/** The canvas. */
+	private HTMLCanvasElementImpl canvas;
+	
+	/** The list rect values. */
+	private ArrayList<int[]> listRectValues;
+	
+	/** The list stroke rect values. */
+	private ArrayList<int[]> listStrokeRectValues;
+	
+	/** The list text values. */
+	private ArrayList<Object[]> listTextValues;
+	
+	/** The rect values. */
+	private int[] rectValues;
+	
+	/** The line width. */
+	private int lineWidth;	
 
-    public DomCanvasImpl() {
-    }
+	/**
+	 * Instantiates a new dom canvas impl.
+	 *
+	 * @param canvas the canvas
+	 */
+	public DomCanvasImpl(HTMLCanvasElementImpl canvas) {
+		this.canvas = canvas;
+		this.lineWidth = 0;
+		if (listRectValues == null) {
+			listRectValues = new ArrayList<int[]>();
+		}
+		
+		if (listStrokeRectValues == null) {
+			listStrokeRectValues = new ArrayList<int[]>();
+		}
+		
+		if (listTextValues == null) {
+			listTextValues = new ArrayList<Object[]>();
+		}	
+	}
 
     @Override
     public HTMLCanvasElement getCanvas() {
-        // TODO Auto-generated method stub
-        return null;
+        return canvas;
     }
 
     @Override
@@ -109,13 +145,12 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 
     @Override
     public int getLineWidth() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.lineWidth;
     }
 
     @Override
-    public void setLineWidth(int arg) {
-        // TODO Auto-generated method stub
+    public void setLineWidth(int lineWidth) {
+        this.lineWidth = lineWidth;
 
     }
 
@@ -131,10 +166,6 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.CanvasRenderingContext2D#getShadowBlur()
-     */
     @Override
     public int getShadowBlur() {
         // TODO Auto-generated method stub
@@ -239,10 +270,8 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
     }
 
     @Override
-    public void bezierCurveTo(int cp1x, int cp1y, int cp2x, int cp2y, int x,
-            int y) {
-        // TODO Auto-generated method stub
-
+    public void bezierCurveTo(int cp1x, int cp1y, int cp2x, int cp2y, int x, int y) {
+    	// TODO Auto-generated method stub
     }
 
     @Override
@@ -425,27 +454,35 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 
     @Override
     public void fill() {
-        // TODO Auto-generated method stub
-
+    	fillRect(rectValues[0], rectValues[1], rectValues[2], rectValues[3]);
     }
 
     @Override
     public void fillRect(int x, int y, int width, int height) {
-
-        System.out.println("fillRect");
-        // TODO Auto-generated method stub
-
+    	
+    	int[] intArray = new int[4];
+    	intArray[0] = x; intArray[1] = y;
+    	intArray[2] = width; intArray[3] = height;
+    	    	
+    	listRectValues.add(intArray);
+    	canvas.setListRectValues(listRectValues);
+    	canvas.setMethod(HTMLCanvasElement.FILL_RECT);
     }
 
     @Override
     public void fillText(String text, int x, int y) {
-        // TODO Auto-generated method stub
-
+    	fillText(text, x, y, 0);
     }
 
     @Override
     public void fillText(String text, int x, int y, int maxWidth) {
-        // TODO Auto-generated method stub
+    	Object[] objArray = new Object[4];
+    	objArray[0] = text; objArray[1] = x;
+    	objArray[2] = y; objArray[3] = maxWidth;
+    	
+    	listTextValues.add(objArray);
+    	canvas.setListTextValues(listTextValues);
+    	canvas.setMethod(HTMLCanvasElement.FILL_TEXT);
 
     }
 
@@ -463,7 +500,7 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 
     @Override
     public void lineTo(int x, int y) {
-        // TODO Auto-generated method stub
+    	// TODO Auto-generated method stub
 
     }
 
@@ -475,8 +512,7 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 
     @Override
     public void moveTo(int x, int y) {
-        // TODO Auto-generated method stub
-
+    	// TODO Auto-generated method stub
     }
 
     @Override
@@ -500,8 +536,9 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 
     @Override
     public void rect(int x, int y, int width, int height) {
-        // TODO Auto-generated method stub
-
+    	rectValues = new int[4];
+    	rectValues[0] = x; rectValues[1] = y;
+    	rectValues[2] = width; rectValues[3] = height;
     }
 
     @Override
@@ -623,62 +660,35 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
     }
 
     @Override
-    public void setStrokeColor(String color) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setStrokeColor(String color, int alpha) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setStrokeColor(int grayLevel) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setStrokeColor(int grayLevel, int alpha) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setStrokeColor(int r, int g, int b, int a) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setStrokeColor(int c, int m, int y, int k, int a) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void setTransform(int m11, int m12, int m21, int m22, int dx, int dy) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void stroke() {
-        // TODO Auto-generated method stub
-
-    }
+	public void stroke() {
+		if (HTMLCanvasElement.STROKE_RECT == canvas.getMethod()) {
+			strokeRect(rectValues[0], rectValues[1], rectValues[2],
+					rectValues[3], lineWidth);
+		}
+	}
 
     @Override
     public void strokeRect(int x, int y, int width, int height) {
-        // TODO Auto-generated method stub
+    	strokeRect(x, y, width, height, 0);
 
     }
 
     @Override
     public void strokeRect(int x, int y, int width, int height, int lineWidth) {
-        // TODO Auto-generated method stub
+    	int[] intArray = new int[5];
+    	intArray[0] = x; intArray[1] = y;
+    	intArray[2] = width; intArray[3] = height;
+    	intArray[4] = lineWidth;
+    	    	
+    	listStrokeRectValues.add(intArray);
+    	canvas.setListStrokeRectValues(listStrokeRectValues);
+    	canvas.setMethod(HTMLCanvasElement.STROKE_RECT);
 
     }
 
