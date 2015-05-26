@@ -28,12 +28,35 @@ import org.lobobrowser.html.w3c.HTMLCanvasElement;
 public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		HTMLCanvasElement {
 
+	/** The list rect values. */
 	private ArrayList<int[]> listRectValues;
+
+	/** The list stroke rect values. */
 	private ArrayList<int[]> listStrokeRectValues;
+
+	/** The list text values. */
 	private ArrayList<Object[]> listTextValues;
+
+	/** The linear values. */
+	private Double[] linearValues;
+
+	/** The fractions. */
+	private float[] fractions;
+
+	/** The colors. */
+	private Color[] colors;
+
+	/** The path. */
 	private GeneralPath path;
+
+	/** The color. */
 	private Color color;
+
+	/** The method. */
 	private int method;
+
+	/** The line width. */
+	private int lineWidth;
 
 	/**
 	 * Instantiates a new HTML canvas element impl.
@@ -43,6 +66,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	 */
 	public HTMLCanvasElementImpl(String name) {
 		super(name);
+		lineWidth = 1;
 	}
 
 	@Override
@@ -96,10 +120,12 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 	@Override
 	public CanvasRenderingContext getContext(String contextId) {
-		return new DomCanvasImpl(this);
+		return new DOMCanvasImpl(this);
 	}
 
 	/**
+	 * Gets the list rect values.
+	 *
 	 * @return the listRectValues
 	 */
 	public ArrayList<int[]> getListRectValues() {
@@ -107,6 +133,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
+	 * Sets the list rect values.
+	 *
 	 * @param listRectValues
 	 *            the listRectValues to set
 	 */
@@ -115,6 +143,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
+	 * Gets the list stroke rect values.
+	 *
 	 * @return the listStrokeRectValues
 	 */
 	public ArrayList<int[]> getListStrokeRectValues() {
@@ -122,6 +152,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
+	 * Sets the list stroke rect values.
+	 *
 	 * @param listStrokeRectValues
 	 *            the listStrokeRectValues to set
 	 */
@@ -130,6 +162,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
+	 * Gets the list text values.
+	 *
 	 * @return the listTextValues
 	 */
 	public ArrayList<Object[]> getListTextValues() {
@@ -137,6 +171,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
+	 * Sets the list text values.
+	 *
 	 * @param listTextValues
 	 *            the listTextValues to set
 	 */
@@ -145,6 +181,27 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
+	 * Gets the linear values.
+	 *
+	 * @return the linearValues
+	 */
+	public Double[] getLinearValues() {
+		return linearValues;
+	}
+
+	/**
+	 * Sets the linear values.
+	 *
+	 * @param linearValues
+	 *            the linearValues to set
+	 */
+	public void setLinearValues(Double[] linearValues) {
+		this.linearValues = linearValues;
+	}
+
+	/**
+	 * Gets the method.
+	 *
 	 * @return the method
 	 */
 	public int getMethod() {
@@ -152,6 +209,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
+	 * Sets the method.
+	 *
 	 * @param method
 	 *            the method to set
 	 */
@@ -160,6 +219,27 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
+	 * Gets the line width.
+	 *
+	 * @return the lineWidth
+	 */
+	public int getLineWidth() {
+		return lineWidth;
+	}
+
+	/**
+	 * Sets the line width.
+	 *
+	 * @param lineWidth
+	 *            the lineWidth to set
+	 */
+	public void setLineWidth(int lineWidth) {
+		this.lineWidth = lineWidth;
+	}
+
+	/**
+	 * Gets the path.
+	 *
 	 * @return the path
 	 */
 	public GeneralPath getPath() {
@@ -167,6 +247,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
+	 * Sets the path.
+	 *
 	 * @param path
 	 *            the path to set
 	 */
@@ -175,6 +257,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
+	 * Gets the color.
+	 *
 	 * @return the color
 	 */
 	public Color getColor() {
@@ -182,11 +266,51 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
+	 * Sets the color.
+	 *
 	 * @param color
 	 *            the color to set
 	 */
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	/**
+	 * Gets the colors.
+	 *
+	 * @return the colors
+	 */
+	public Color[] getColors() {
+		return colors;
+	}
+
+	/**
+	 * Sets the colors.
+	 *
+	 * @param colors
+	 *            the colors to set
+	 */
+	public void setColors(Color[] colors) {
+		this.colors = colors;
+	}
+
+	/**
+	 * Gets the fractions.
+	 *
+	 * @return the fractions
+	 */
+	public float[] getFractions() {
+		return fractions;
+	}
+
+	/**
+	 * Sets the fractions.
+	 *
+	 * @param fractions
+	 *            the fractions to set
+	 */
+	public void setFractions(float[] fractions) {
+		this.fractions = fractions;
 	}
 
 }

@@ -29,9 +29,13 @@ public interface HTMLCanvasElement extends HTMLElement {
 	/** The stroke rect. */
 	int STROKE_RECT = 3;
 	
-	/** The curve. */
-	int CURVE = 4;
-
+	/** The circle. */
+	int CIRCLE = 4;
+	
+	/** The stroke. */
+	int STROKE = 5;
+	
+	
     /**
      * Gets the width.
      *

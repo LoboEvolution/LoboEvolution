@@ -321,7 +321,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      * @param y1 the y1
      * @return the canvas gradient
      */
-    CanvasGradient createLinearGradient(int x0, int y0, int x1, int y1);
+    CanvasGradient createLinearGradient(Object x0, Object y0, Object x1, Object y1);
 
     /**
      * Creates the pattern.
@@ -652,7 +652,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      * @param text the text
      * @return the object
      */
-    Object measureText(String text);
+    TextMetrics measureText(String text);
 
     /**
      * Move to.
@@ -745,59 +745,6 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      *            the new composite operation
      */
     void setCompositeOperation(String compositeOperation);
-
-    /**
-     * Sets the fill color.
-     *
-     * @param color
-     *            the new fill color
-     */
-    void setFillColor(String color);
-
-    /**
-     * Sets the fill color.
-     *
-     * @param color the color
-     * @param alpha the alpha
-     */
-    void setFillColor(String color, int alpha);
-
-    /**
-     * Sets the fill color.
-     *
-     * @param grayLevel
-     *            the new fill color
-     */
-    void setFillColor(int grayLevel);
-
-    /**
-     * Sets the fill color.
-     *
-     * @param grayLevel the gray level
-     * @param alpha the alpha
-     */
-    void setFillColor(int grayLevel, int alpha);
-
-    /**
-     * Sets the fill color.
-     *
-     * @param r the r
-     * @param g the g
-     * @param b the b
-     * @param a the a
-     */
-    void setFillColor(int r, int g, int b, int a);
-
-    /**
-     * Sets the fill color.
-     *
-     * @param c the c
-     * @param m the m
-     * @param y the y
-     * @param k the k
-     * @param a the a
-     */
-    void setFillColor(int c, int m, int y, int k, int a);
 
     /**
      * Sets the shadow.

@@ -15,9 +15,13 @@
 package org.lobobrowser.html.control;
 
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.LinearGradientPaint;
+import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.lobobrowser.html.domimpl.HTMLCanvasElementImpl;
 import org.lobobrowser.html.w3c.HTMLCanvasElement;
@@ -44,9 +48,20 @@ public class CanvasControl extends BaseControl {
 	
 	/** The list text values. */
 	private ArrayList<Object[]> listTextValues;
+	
+	private float[] fractions;
+	private Color[] colors;
+	private Double[] linearValues;
 
 	/** The method. */
 	private int method;
+	
+	private GeneralPath path;
+	
+	/** The method. */
+	private int lineWidth;
+	
+	private Color color;
 
 	/**
 	 * Instantiates a new canvas control.
@@ -61,6 +76,12 @@ public class CanvasControl extends BaseControl {
 		listTextValues = modelNode.getListTextValues();
 		listStrokeRectValues = modelNode.getListStrokeRectValues();
 		method = modelNode.getMethod();
+		path = modelNode.getPath();
+		lineWidth = modelNode.getLineWidth();
+		color = modelNode.getColor();
+		linearValues = modelNode.getLinearValues();
+		colors = modelNode.getColors();
+		fractions = modelNode.getFractions();
 	}
 
 	/* (non-Javadoc)
@@ -82,6 +103,9 @@ public class CanvasControl extends BaseControl {
 		case HTMLCanvasElement.STROKE_RECT:
 			strokeRect(g2d);
 			break;
+		case HTMLCanvasElement.STROKE:
+			stroke(g2d);
+			break;
 		default:
 			break;
 		}
@@ -95,6 +119,8 @@ public class CanvasControl extends BaseControl {
 	private void fillRect(Graphics2D g) {
 		for (int i = 0; i < listRectValues.size(); i++) {
 			int[] val = listRectValues.get(i);
+			g.setColor(color);
+			paint(g);
 			g.fillRect(val[0], val[1], val[2], val[3]);
 		}
 	}
@@ -107,6 +133,8 @@ public class CanvasControl extends BaseControl {
 	private void fillText(Graphics2D g) {
 		for (int i = 0; i < listTextValues.size(); i++) {
 			Object[] val = listTextValues.get(i);
+			g.setColor(color);
+			paint(g);
 			g.drawString((String)val[0], (Integer)val[1], (Integer)val[2]);
 		}
 	}
@@ -120,7 +148,31 @@ public class CanvasControl extends BaseControl {
 		for (int i = 0; i < listStrokeRectValues.size(); i++) {
 			int[] val = listStrokeRectValues.get(i);
 			g.setStroke(new BasicStroke(val[4]));
+			g.setColor(color);
+			paint(g);
 			g.drawRect(val[0], val[1], val[2],val[3]);
 		}
 	}
+	
+	private void stroke(Graphics2D g) {
+		if (path != null) {
+			g.setStroke(new BasicStroke(lineWidth));
+			g.setColor(color);
+			paint(g);
+			g.draw(path);
+		}
+	}
+	
+	private void paint(Graphics2D g) {
+
+		if (colors != null) {
+			Arrays.sort(fractions);
+			LinearGradientPaint paint = new LinearGradientPaint(
+					linearValues[0].floatValue(), linearValues[1].floatValue(),
+					linearValues[2].floatValue(), linearValues[3].floatValue(),
+					fractions, colors);
+			g.setPaint(paint);
+		}
+	}
+	
 }

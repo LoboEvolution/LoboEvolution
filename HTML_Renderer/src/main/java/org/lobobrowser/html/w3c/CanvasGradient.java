@@ -8,5 +8,5 @@ package org.lobobrowser.html.w3c;
  */
 public interface CanvasGradient {
 
-    void addColorStop(float offset, String color);
+    void addColorStop(String offset, String color);
 }
