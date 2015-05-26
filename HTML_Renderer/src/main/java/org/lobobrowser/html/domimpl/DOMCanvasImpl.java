@@ -14,7 +14,9 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.w3c.CanvasGradient;
@@ -24,8 +26,10 @@ import org.lobobrowser.html.w3c.CanvasRenderingContext2D;
 import org.lobobrowser.html.w3c.HTMLCanvasElement;
 import org.lobobrowser.html.w3c.HTMLImageElement;
 import org.lobobrowser.html.w3c.HTMLVideoElement;
+import org.lobobrowser.html.w3c.TextMetrics;
+import org.lobobrowser.util.gui.ColorFactory;
 
-public class DomCanvasImpl implements CanvasRenderingContext2D {
+public class DOMCanvasImpl implements CanvasRenderingContext2D, CanvasGradient, CanvasPattern {
 	
 	/** The canvas. */
 	private HTMLCanvasElementImpl canvas;
@@ -42,17 +46,18 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 	/** The rect values. */
 	private int[] rectValues;
 	
-	/** The line width. */
-	private int lineWidth;	
-
+	private float[] fractions;
+	private Color[] colors;
+	
+	private GeneralPath path;
+	
 	/**
 	 * Instantiates a new dom canvas impl.
 	 *
 	 * @param canvas the canvas
 	 */
-	public DomCanvasImpl(HTMLCanvasElementImpl canvas) {
+	public DOMCanvasImpl(HTMLCanvasElementImpl canvas) {
 		this.canvas = canvas;
-		this.lineWidth = 0;
 		if (listRectValues == null) {
 			listRectValues = new ArrayList<int[]>();
 		}
@@ -63,7 +68,19 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 		
 		if (listTextValues == null) {
 			listTextValues = new ArrayList<Object[]>();
-		}	
+		}
+		
+		if (path == null) {
+			path = new GeneralPath();
+		}
+		
+		if (fractions == null) {
+			fractions = new float[3];
+		}
+		
+		if (colors == null) {
+			colors = new Color[3];
+		}
 	}
 
     @Override
@@ -73,13 +90,12 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 
     @Override
     public Object getFillStyle() {
-        // TODO Auto-generated method stub
-        return null;
+        return canvas.getColor();
     }
 
     @Override
     public void setFillStyle(Object arg) {
-        // TODO Auto-generated method stub
+    	canvas.setColor(ColorFactory.getInstance().getColor(arg.toString()));
 
     }
 
@@ -145,12 +161,12 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 
     @Override
     public int getLineWidth() {
-        return this.lineWidth;
+        return canvas.getLineWidth();
     }
 
     @Override
     public void setLineWidth(int lineWidth) {
-        this.lineWidth = lineWidth;
+        canvas.setLineWidth(lineWidth);
 
     }
 
@@ -216,15 +232,18 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 
     @Override
     public Object getStrokeStyle() {
-        // TODO Auto-generated method stub
-        return null;
+        return canvas.getColor();
     }
 
     @Override
-    public void setStrokeStyle(Object arg) {
-        // TODO Auto-generated method stub
-
-    }
+	public void setStrokeStyle(Object arg) {
+		if (arg instanceof CanvasGradient) {
+			canvas.setFractions(fractions);
+			canvas.setColors(colors);
+		} else {
+			canvas.setColor(ColorFactory.getInstance().getColor(arg.toString()));
+		}
+	}
 
     @Override
     public String getTextAlign() {
@@ -271,7 +290,7 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 
     @Override
     public void bezierCurveTo(int cp1x, int cp1y, int cp2x, int cp2y, int x, int y) {
-    	// TODO Auto-generated method stub
+    	path.curveTo(cp1x, cp1y, cp2x, cp2y, x, y);
     }
 
     @Override
@@ -294,35 +313,37 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 
     @Override
     public void closePath() {
-        // TODO Auto-generated method stub
+        path.closePath();
 
     }
 
     @Override
-    public CanvasGradient createLinearGradient(int x0, int y0, int x1, int y1) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public CanvasGradient createLinearGradient(Object x0, Object y0, Object x1,
+			Object y1) {
+		Double[] val = { new Double(x0.toString()), new Double(y0.toString()),
+				new Double(x1.toString()), new Double(y1.toString()) };
+		canvas.setLinearValues(val);
+		return this;
+	}
 
     @Override
     public CanvasPattern createPattern(HTMLCanvasElement canvas,
             String repetitionType) {
         // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
     public CanvasPattern createPattern(HTMLImageElement image,
             String repetitionType) {
         // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
-    public CanvasGradient createRadialGradient(int x0, int y0, int r0, int x1,
-            int y1, int r1) {
+    public CanvasGradient createRadialGradient(int x0, int y0, int r0, int x1, int y1, int r1) {
         // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
@@ -482,8 +503,8 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
     	
     	listTextValues.add(objArray);
     	canvas.setListTextValues(listTextValues);
+    	canvas.setColor(Color.BLACK);
     	canvas.setMethod(HTMLCanvasElement.FILL_TEXT);
-
     }
 
     @Override
@@ -500,19 +521,17 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 
     @Override
     public void lineTo(int x, int y) {
-    	// TODO Auto-generated method stub
-
+    	path.lineTo(x, y);
     }
 
     @Override
-    public Object measureText(String text) {
-        // TODO Auto-generated method stub
-        return null;
+    public TextMetrics measureText(String text) {
+        return new DOMTextMetricsImpl(text);
     }
 
     @Override
     public void moveTo(int x, int y) {
-    	// TODO Auto-generated method stub
+    	path.moveTo(x, y);
     }
 
     @Override
@@ -576,43 +595,7 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
         // TODO Auto-generated method stub
 
     }
-
-    @Override
-    public void setFillColor(String color) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setFillColor(String color, int alpha) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setFillColor(int grayLevel) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setFillColor(int grayLevel, int alpha) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setFillColor(int r, int g, int b, int a) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setFillColor(int c, int m, int y, int k, int a) {
-        // TODO Auto-generated method stub
-
-    }
-
+    
     @Override
     public void setShadow(int width, int height, int blur) {
         // TODO Auto-generated method stub
@@ -669,13 +652,16 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
 	public void stroke() {
 		if (HTMLCanvasElement.STROKE_RECT == canvas.getMethod()) {
 			strokeRect(rectValues[0], rectValues[1], rectValues[2],
-					rectValues[3], lineWidth);
+					rectValues[3], canvas.getLineWidth());
+		}else{
+			canvas.setMethod(HTMLCanvasElement.STROKE);
+			canvas.setPath(path);
 		}
 	}
 
     @Override
     public void strokeRect(int x, int y, int width, int height) {
-    	strokeRect(x, y, width, height, 0);
+    	strokeRect(x, y, width, height, canvas.getLineWidth());
 
     }
 
@@ -715,5 +701,23 @@ public class DomCanvasImpl implements CanvasRenderingContext2D {
         // TODO Auto-generated method stub
 
     }
+
+	@Override
+	public void addColorStop(String offset, String color) {
+		
+		for (int i = 0; i < fractions.length; i++) {
+			if(fractions[i] == 0){
+				fractions[i] = new Float(offset);
+				break;
+			}
+		}
+		
+		for (int i = 0; i < colors.length; i++) {
+			if( colors[i] == null){
+				 colors[i] = ColorFactory.getInstance().getColor(color);
+				break;
+			}
+		}
+	}
 
 }
