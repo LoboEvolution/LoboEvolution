@@ -72,16 +72,16 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	private double rotate = 0.0;
 	
 	/** The Scale x. */
-	private int scaleX;
+	private int scaleX = 1;
 	
 	/** The Scale Y. */
-	private int scaleY;
+	private int scaleY = 1;
 	
 	/** The Translate x. */
-	private int translateX;
+	private int translateX = 0;
 		
 	/** The Translate Y. */
-	private int translateY;
+	private int translateY = 0;
 
 	/**
 	 * Instantiates a new HTML canvas element impl.
