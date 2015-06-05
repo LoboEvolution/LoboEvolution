@@ -37,6 +37,8 @@ import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.css.CSSValue;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.util.LangUtils;
 
@@ -47,7 +49,7 @@ import com.steadystate.css.util.LangUtils;
  * @author rbri
  * @author Ahmed Ashour
  */
-public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, Serializable
+public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, CSSFormatable, Serializable
 {
     private static final long serialVersionUID = -2373755821317100189L;
 
@@ -76,12 +78,22 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, Serializabl
         // Empty.
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String getCssText() {
+        return getCssText(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
         final StringBuilder sb = new StringBuilder();
         for (int i = 0; i < properties_.size(); ++i) {
             final Property p = properties_.get(i);
             if (p != null) {
-                sb.append(p.toString());
+                sb.append(p.getCssText(format));
             }
             if (i < properties_.size() - 1) {
                 sb.append("; ");

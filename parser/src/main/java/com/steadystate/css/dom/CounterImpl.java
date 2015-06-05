@@ -32,13 +32,16 @@ import org.w3c.css.sac.LexicalUnit;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.css.Counter;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
+
 /**
  * Implementation of {@link Counter}.
  *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class CounterImpl implements Counter, Serializable {
+public class CounterImpl implements Counter, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = 7996279151817598904L;
 
@@ -112,8 +115,19 @@ public class CounterImpl implements Counter, Serializable {
         return separator_;
     }
 
-    @Override
-    public String toString() {
+    /**
+     * Same as {@link #getCssText(CSSFormat)} but using the default format.
+     *
+     * @return the formated string
+     */
+    public String getCssText() {
+        return getCssText(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
         final StringBuilder sb = new StringBuilder();
         if (separator_ == null) {
             // This is a 'counter()' function
@@ -132,5 +146,10 @@ public class CounterImpl implements Counter, Serializable {
         }
         sb.append(")");
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        return getCssText(null);
     }
 }

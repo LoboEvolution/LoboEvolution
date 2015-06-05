@@ -27,13 +27,14 @@
 package com.steadystate.css.dom;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.util.LangUtils;
 
 /**
@@ -42,7 +43,7 @@ import com.steadystate.css.util.LangUtils;
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class CSSRuleListImpl implements CSSRuleList, Serializable {
+public class CSSRuleListImpl implements CSSRuleList, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = -1269068897476453290L;
 
@@ -86,17 +87,39 @@ public class CSSRuleListImpl implements CSSRuleList, Serializable {
         getRules().remove(index);
     }
 
-    @Override
-    public String toString() {
+    /**
+     * Same as {@link #getCssText(CSSFormat)} but using the default format.
+     *
+     * @return the formated string
+     */
+    public String getCssText() {
+        return getCssText(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
         final StringBuilder sb = new StringBuilder();
-        if (0 < getLength()) {
-            sb.append(item(0).toString());
-        }
-        for (int i = 1; i < getLength(); i++) {
-            sb.append("\r\n");
-            sb.append(item(i).toString());
+        for (int i = 0; i < getLength(); i++) {
+            if (i > 0) {
+                sb.append("\r\n");
+            }
+
+            final CSSRule rule = item(i);
+            if (rule instanceof CSSFormatable) {
+                sb.append(((CSSFormatable) rule).getCssText(format));
+            }
+            else {
+                sb.append(rule.toString());
+            }
         }
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        return getCssText(null);
     }
 
     @Override

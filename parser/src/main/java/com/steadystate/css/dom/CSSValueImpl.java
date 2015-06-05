@@ -42,6 +42,8 @@ import org.w3c.dom.css.Counter;
 import org.w3c.dom.css.RGBColor;
 import org.w3c.dom.css.Rect;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.LexicalUnitImpl;
 import com.steadystate.css.userdata.UserDataConstants;
@@ -59,7 +61,7 @@ import com.steadystate.css.util.LangUtils;
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, CSSValueList {
+public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, CSSValueList, CSSFormatable {
 
     private static final long serialVersionUID = 406281136418322579L;
 
@@ -151,11 +153,7 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
     }
 
     /**
-     * Returns a string representation of the rule based on the given format.
-     * If provided format is null, the result is the same as getCssText()
-     *
-     * @param format the formating rules
-     * @return the formated string
+     * {@inheritDoc}
      */
     public String getCssText(final CSSFormat format) {
         if (getCssValueType() == CSS_VALUE_LIST) {
@@ -168,7 +166,23 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
             while (it.hasNext()) {
                 final Object o = it.next();
                 final CSSValueImpl cssValue = (CSSValueImpl) o;
-                if (cssValue.value_ instanceof LexicalUnit) {
+                if (cssValue.value_ instanceof LexicalUnitImpl) {
+                    LexicalUnitImpl lu = (LexicalUnitImpl) cssValue.value_;
+                    sb.append(lu.getCssText(format));
+
+                    // Step to the next lexical unit, determining what spacing we
+                    // need to put around the operators
+                    final LexicalUnit prev = lu;
+                    lu = (LexicalUnitImpl) lu.getNextLexicalUnit();
+                    if ((lu != null)
+                            && ((lu.getLexicalUnitType() == LexicalUnit.SAC_OPERATOR_COMMA)
+                            || (lu.getLexicalUnitType() == LexicalUnit.SAC_OPERATOR_SLASH)
+                            || (prev.getLexicalUnitType() == LexicalUnit.SAC_OPERATOR_SLASH)
+                        )) {
+                        sb.append(lu.getCssText(format));
+                    }
+                }
+                else if (cssValue.value_ instanceof LexicalUnit) {
                     LexicalUnit lu = (LexicalUnit) cssValue.value_;
                     sb.append(lu.toString());
 
@@ -184,6 +198,9 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
                         sb.append(lu.toString());
                     }
                 }
+                else if (cssValue.value_ instanceof CSSFormatable) {
+                    sb.append(((CSSFormatable) o).getCssText(format));
+                }
                 else {
                     sb.append(o);
                 }
@@ -192,6 +209,9 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
                 }
             }
             return sb.toString();
+        }
+        if (value_ instanceof CSSFormatable) {
+            return ((CSSFormatable) value_).getCssText(format);
         }
         return value_ != null ? value_.toString() : "";
     }

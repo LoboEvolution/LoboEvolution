@@ -46,6 +46,8 @@ import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.stylesheets.MediaList;
 import org.w3c.dom.stylesheets.StyleSheet;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.util.LangUtils;
 import com.steadystate.css.util.ThrowCssExceptionErrorHandler;
@@ -56,7 +58,7 @@ import com.steadystate.css.util.ThrowCssExceptionErrorHandler;
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
+public class CSSStyleSheetImpl implements CSSStyleSheet, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = -2300541300646796363L;
 
@@ -286,9 +288,29 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
         cssRules_ = rules;
     }
 
+    /**
+     * Same as {@link #getCssText(CSSFormat)} but using the default format.
+     *
+     * @return the formated string
+     */
+    public String getCssText() {
+        return getCssText(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
+        final CSSRuleList rules = getCssRules();
+        if (rules instanceof CSSFormatable) {
+            return ((CSSRuleListImpl) rules).getCssText(format);
+        }
+        return getCssRules().toString();
+    }
+
     @Override
     public String toString() {
-        return getCssRules().toString();
+        return getCssText(null);
     }
 
     @Override

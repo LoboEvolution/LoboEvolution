@@ -29,11 +29,14 @@ package com.steadystate.css.dom;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSStyleSheet;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
+
 /**
  * @author koch
  * @author rbri
  */
-public abstract class AbstractCSSRuleImpl extends CSSOMObjectImpl {
+public abstract class AbstractCSSRuleImpl extends CSSOMObjectImpl implements CSSFormatable {
 
     private static final long serialVersionUID = 7829784704712797815L;
 
@@ -68,6 +71,20 @@ public abstract class AbstractCSSRuleImpl extends CSSOMObjectImpl {
 
     public CSSRule getParentRule() {
         return parentRule_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public abstract String getCssText(final CSSFormat format);
+
+    /**
+     * Same as {@link #getCssText(CSSFormat)} but using the default format.
+     *
+     * @return the formated string
+     */
+    public String getCssText() {
+        return getCssText(null);
     }
 
     @Override

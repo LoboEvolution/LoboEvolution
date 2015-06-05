@@ -33,12 +33,15 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSPrimitiveValue;
 import org.w3c.dom.css.Rect;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
+
 /**
  * Implementation of {@link Rect}.
  *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  */
-public class RectImpl implements Rect, Serializable {
+public class RectImpl implements Rect, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = -7031248513917920621L;
 
@@ -169,14 +172,30 @@ public class RectImpl implements Rect, Serializable {
     }
 
     /**
+     * Same as {@link #getCssText(CSSFormat)} but using the default format.
+     *
+     * @return the formated string
+     */
+    public String getCssText() {
+        return getCssText(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
+        return new StringBuilder("rect(")
+        .append(top_).append(", ")
+        .append(right_).append(", ")
+        .append(bottom_).append(", ")
+        .append(left_).append(")").toString();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return new StringBuilder("rect(")
-            .append(top_).append(", ")
-            .append(right_).append(", ")
-            .append(bottom_).append(", ")
-            .append(left_).append(")").toString();
+        return getCssText(null);
     }
 }

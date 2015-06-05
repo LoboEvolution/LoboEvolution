@@ -35,6 +35,7 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSUnknownRule;
 
+import com.steadystate.css.format.CSSFormat;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.util.LangUtils;
 
@@ -76,18 +77,14 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements CSSUnknow
         return UNKNOWN_RULE;
     }
 
-    public String getCssText() {
-        return getCssText(null);
-    }
-
     /**
-     * Returns a string representation of the rule based on the given format.
-     * If provided format is null, the result is the same as getCssText()
-     *
-     * @param format the formating rules
-     * @return the formated string
+     * {@inheritDoc}
      */
+    @Override
     public String getCssText(final CSSFormat format) {
+        if (null == text_) {
+            return "";
+        }
         return text_;
     }
 

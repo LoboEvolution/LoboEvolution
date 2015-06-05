@@ -39,6 +39,7 @@ import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
 import org.w3c.dom.stylesheets.MediaList;
 
+import com.steadystate.css.format.CSSFormat;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.util.LangUtils;
 import com.steadystate.css.util.ThrowCssExceptionErrorHandler;
@@ -80,7 +81,11 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl implements CSSMediaRul
         return MEDIA_RULE;
     }
 
-    public String getCssText() {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getCssText(final CSSFormat format) {
         final StringBuilder sb = new StringBuilder("@media ");
         sb.append(getMedia().toString()).append(" {");
         for (int i = 0; i < getCssRules().getLength(); i++) {

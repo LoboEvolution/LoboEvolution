@@ -28,13 +28,15 @@ package com.steadystate.css.dom;
 
 import org.w3c.dom.css.CSSValue;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.util.LangUtils;
 
 /**
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class Property extends CSSOMObjectImpl {
+public class Property extends CSSOMObjectImpl implements CSSFormatable {
     private static final long serialVersionUID = 8720637891949104989L;
 
     private String name_;
@@ -110,21 +112,42 @@ public class Property extends CSSOMObjectImpl {
     }
 
     /**
+     * Same as {@link #getCssText(CSSFormat)} but using the default format.
+     *
+     * @return the formated string
+     */
+    public String getCssText() {
+        return getCssText(null);
+    }
+
+    /**
      * {@inheritDoc}
      */
-    @Override
-    public String toString() {
+    public String getCssText(final CSSFormat format) {
         final StringBuilder result = new StringBuilder();
         result.append(name_);
         result.append(":");
         if (null != value_) {
             result.append(" ");
-            result.append(value_.toString());
+            if (value_ instanceof CSSFormatable) {
+                result.append(((CSSFormatable) value_).getCssText(format));
+            }
+            else {
+                result.append(value_.toString());
+            }
         }
         if (important_) {
             result.append(" !important");
         }
         return result.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return getCssText(null);
     }
 
     /**

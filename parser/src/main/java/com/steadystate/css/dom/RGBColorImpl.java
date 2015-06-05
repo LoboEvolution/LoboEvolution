@@ -33,12 +33,16 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSPrimitiveValue;
 import org.w3c.dom.css.RGBColor;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
+
 /**
  * Implementation of {@link RGBColor}.
  *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author rbri
  */
-public class RGBColorImpl implements RGBColor, Serializable {
+public class RGBColorImpl implements RGBColor, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = 8152675334081993160L;
     private CSSPrimitiveValue red_;
@@ -138,13 +142,48 @@ public class RGBColorImpl implements RGBColor, Serializable {
     }
 
     /**
+     * Same as {@link #getCssText(CSSFormat)} but using the default format.
+     *
+     * @return the formated string
+     */
+    public String getCssText() {
+        return getCssText(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
+        final StringBuilder result = new StringBuilder();
+        if (null != format && format.isRgbAsHex()) {
+            result
+                .append("#")
+                .append(getColorAsHex(red_))
+                .append(getColorAsHex(green_))
+                .append(getColorAsHex(blue_));
+            return result.toString();
+        }
+
+        result
+            .append("rgb(")
+            .append(red_)
+            .append(", ")
+            .append(green_)
+            .append(", ")
+            .append(blue_)
+            .append(")");
+        return result.toString();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return new StringBuilder("rgb(")
-            .append(red_).append(", ")
-            .append(green_).append(", ")
-            .append(blue_).append(")").toString();
+        return getCssText(null);
+    }
+
+    private String getColorAsHex(final CSSPrimitiveValue color) {
+        return String.format("%02x", Math.round(color.getFloatValue(LexicalUnit.SAC_INTEGER)));
     }
 }
