@@ -56,7 +56,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      *
      * @return the global alpha
      */
-    int getGlobalAlpha();
+    Double getGlobalAlpha();
 
     /**
      * Sets the global alpha.
@@ -64,7 +64,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      * @param arg
      *            the new global alpha
      */
-    void setGlobalAlpha(int arg);
+    void setGlobalAlpha(Double arg);
 
     /**
      * Gets the global composite operation.
@@ -462,128 +462,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      */
     void drawImage(HTMLVideoElement video, int sx, int sy, int sw, int sh,
             int dx, int dy, int dw, int dh);
-
-    /**
-     * Draw image from rect.
-     *
-     * @param image the image
-     */
-    void drawImageFromRect(HTMLImageElement image);
-
-    /**
-     * Draw image from rect.
-     *
-     * @param image the image
-     * @param sx the sx
-     */
-    void drawImageFromRect(HTMLImageElement image, int sx);
-
-    /**
-     * Draw image from rect.
-     *
-     * @param image the image
-     * @param sx the sx
-     * @param sy the sy
-     */
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy);
-
-    /**
-     * Draw image from rect.
-     *
-     * @param image the image
-     * @param sx the sx
-     * @param sy the sy
-     * @param sw the sw
-     */
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw);
-
-    /**
-     * Draw image from rect.
-     *
-     * @param image the image
-     * @param sx the sx
-     * @param sy the sy
-     * @param sw the sw
-     * @param sh the sh
-     */
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
-            int sh);
-
-    /**
-     * Draw image from rect.
-     *
-     * @param image the image
-     * @param sx the sx
-     * @param sy the sy
-     * @param sw the sw
-     * @param sh the sh
-     * @param dx the dx
-     */
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
-            int sh, int dx);
-
-    /**
-     * Draw image from rect.
-     *
-     * @param image the image
-     * @param sx the sx
-     * @param sy the sy
-     * @param sw the sw
-     * @param sh the sh
-     * @param dx the dx
-     * @param dy the dy
-     */
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
-            int sh, int dx, int dy);
-
-    /**
-     * Draw image from rect.
-     *
-     * @param image the image
-     * @param sx the sx
-     * @param sy the sy
-     * @param sw the sw
-     * @param sh the sh
-     * @param dx the dx
-     * @param dy the dy
-     * @param dw the dw
-     */
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
-            int sh, int dx, int dy, int dw);
-
-    /**
-     * Draw image from rect.
-     *
-     * @param image the image
-     * @param sx the sx
-     * @param sy the sy
-     * @param sw the sw
-     * @param sh the sh
-     * @param dx the dx
-     * @param dy the dy
-     * @param dw the dw
-     * @param dh the dh
-     */
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
-            int sh, int dx, int dy, int dw, int dh);
-
-    /**
-     * Draw image from rect.
-     *
-     * @param image the image
-     * @param sx the sx
-     * @param sy the sy
-     * @param sw the sw
-     * @param sh the sh
-     * @param dx the dx
-     * @param dy the dy
-     * @param dw the dw
-     * @param dh the dh
-     * @param compositeOperation the composite operation
-     */
-    void drawImageFromRect(HTMLImageElement image, int sx, int sy, int sw,
-            int sh, int dx, int dy, int dw, int dh, String compositeOperation);
-
+    
     /**
      * Fill.
      */
@@ -715,7 +594,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      *
      * @param angle the angle
      */
-    void rotate(int angle);
+    void rotate(double angle);
 
     /**
      * Save.
@@ -745,85 +624,6 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      *            the new composite operation
      */
     void setCompositeOperation(String compositeOperation);
-
-    /**
-     * Sets the shadow.
-     *
-     * @param width the width
-     * @param height the height
-     * @param blur the blur
-     */
-    void setShadow(int width, int height, int blur);
-
-    /**
-     * Sets the shadow.
-     *
-     * @param width the width
-     * @param height the height
-     * @param blur the blur
-     * @param color the color
-     */
-    void setShadow(int width, int height, int blur, String color);
-
-    /**
-     * Sets the shadow.
-     *
-     * @param width the width
-     * @param height the height
-     * @param blur the blur
-     * @param color the color
-     * @param alpha the alpha
-     */
-    void setShadow(int width, int height, int blur, String color, int alpha);
-
-    /**
-     * Sets the shadow.
-     *
-     * @param width the width
-     * @param height the height
-     * @param blur the blur
-     * @param grayLevel the gray level
-     */
-    void setShadow(int width, int height, int blur, int grayLevel);
-
-    /**
-     * Sets the shadow.
-     *
-     * @param width the width
-     * @param height the height
-     * @param blur the blur
-     * @param grayLevel the gray level
-     * @param alpha the alpha
-     */
-    void setShadow(int width, int height, int blur, int grayLevel, int alpha);
-
-    /**
-     * Sets the shadow.
-     *
-     * @param width the width
-     * @param height the height
-     * @param blur the blur
-     * @param r the r
-     * @param g the g
-     * @param b the b
-     * @param a the a
-     */
-    void setShadow(int width, int height, int blur, int r, int g, int b, int a);
-
-    /**
-     * Sets the shadow.
-     *
-     * @param width the width
-     * @param height the height
-     * @param blur the blur
-     * @param c the c
-     * @param m the m
-     * @param y the y
-     * @param k the k
-     * @param a the a
-     */
-    void setShadow(int width, int height, int blur, int c, int m, int y, int k,
-            int a);
 
     /**
      * Sets the transform.

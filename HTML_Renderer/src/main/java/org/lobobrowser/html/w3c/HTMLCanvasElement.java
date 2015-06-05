@@ -20,20 +20,26 @@ package org.lobobrowser.html.w3c;
 public interface HTMLCanvasElement extends HTMLElement {
 	
 	
+	/** The fill. */
+	int FILL = 0;
+	
 	/** The fill rect. */
 	int FILL_RECT = 1;
 	
 	/** The fill text. */
 	int FILL_TEXT = 2;
 	
-	/** The stroke rect. */
-	int STROKE_RECT = 3;
-	
 	/** The circle. */
-	int CIRCLE = 4;
+	int CIRCLE = 3;
 	
 	/** The stroke. */
-	int STROKE = 5;
+	int STROKE = 4;
+	
+	/** The stroke rect. */
+	int STROKE_RECT = 5;
+	
+	/** The stroke text. */
+	int STROKE_TEXT = 6;
 	
 	
     /**

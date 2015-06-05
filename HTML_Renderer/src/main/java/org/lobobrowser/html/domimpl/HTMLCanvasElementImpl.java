@@ -15,6 +15,7 @@
 package org.lobobrowser.html.domimpl;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 
@@ -37,6 +38,9 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	/** The list text values. */
 	private ArrayList<Object[]> listTextValues;
 
+	/** The list stroke text values. */
+	private ArrayList<Object[]> listStrokeTextValues;
+
 	/** The linear values. */
 	private Double[] linearValues;
 
@@ -52,11 +56,32 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	/** The color. */
 	private Color color;
 
+	/** The color. */
+	private Font font;
+
+	/** The global alpha. */
+	private Double globalAlpha = 0.5;
+
 	/** The method. */
 	private int method;
 
 	/** The line width. */
 	private int lineWidth;
+	
+	/** The rotate. */
+	private double rotate = 0.0;
+	
+	/** The Scale x. */
+	private int scaleX;
+	
+	/** The Scale Y. */
+	private int scaleY;
+	
+	/** The Translate x. */
+	private int translateX;
+		
+	/** The Translate Y. */
+	private int translateY;
 
 	/**
 	 * Instantiates a new HTML canvas element impl.
@@ -124,8 +149,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
-	 * Gets the list rect values.
-	 *
 	 * @return the listRectValues
 	 */
 	public ArrayList<int[]> getListRectValues() {
@@ -133,8 +156,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
-	 * Sets the list rect values.
-	 *
 	 * @param listRectValues
 	 *            the listRectValues to set
 	 */
@@ -143,8 +164,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
-	 * Gets the list stroke rect values.
-	 *
 	 * @return the listStrokeRectValues
 	 */
 	public ArrayList<int[]> getListStrokeRectValues() {
@@ -152,8 +171,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
-	 * Sets the list stroke rect values.
-	 *
 	 * @param listStrokeRectValues
 	 *            the listStrokeRectValues to set
 	 */
@@ -162,8 +179,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
-	 * Gets the list text values.
-	 *
 	 * @return the listTextValues
 	 */
 	public ArrayList<Object[]> getListTextValues() {
@@ -171,8 +186,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
-	 * Sets the list text values.
-	 *
 	 * @param listTextValues
 	 *            the listTextValues to set
 	 */
@@ -181,8 +194,21 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
-	 * Gets the linear values.
-	 *
+	 * @return the listStrokeTextValues
+	 */
+	public ArrayList<Object[]> getListStrokeTextValues() {
+		return listStrokeTextValues;
+	}
+
+	/**
+	 * @param listStrokeTextValues
+	 *            the listStrokeTextValues to set
+	 */
+	public void setListStrokeTextValues(ArrayList<Object[]> listStrokeTextValues) {
+		this.listStrokeTextValues = listStrokeTextValues;
+	}
+
+	/**
 	 * @return the linearValues
 	 */
 	public Double[] getLinearValues() {
@@ -190,8 +216,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
-	 * Sets the linear values.
-	 *
 	 * @param linearValues
 	 *            the linearValues to set
 	 */
@@ -200,84 +224,21 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
-	 * Gets the method.
-	 *
-	 * @return the method
+	 * @return the fractions
 	 */
-	public int getMethod() {
-		return method;
+	public float[] getFractions() {
+		return fractions;
 	}
 
 	/**
-	 * Sets the method.
-	 *
-	 * @param method
-	 *            the method to set
+	 * @param fractions
+	 *            the fractions to set
 	 */
-	public void setMethod(int method) {
-		this.method = method;
+	public void setFractions(float[] fractions) {
+		this.fractions = fractions;
 	}
 
 	/**
-	 * Gets the line width.
-	 *
-	 * @return the lineWidth
-	 */
-	public int getLineWidth() {
-		return lineWidth;
-	}
-
-	/**
-	 * Sets the line width.
-	 *
-	 * @param lineWidth
-	 *            the lineWidth to set
-	 */
-	public void setLineWidth(int lineWidth) {
-		this.lineWidth = lineWidth;
-	}
-
-	/**
-	 * Gets the path.
-	 *
-	 * @return the path
-	 */
-	public GeneralPath getPath() {
-		return path;
-	}
-
-	/**
-	 * Sets the path.
-	 *
-	 * @param path
-	 *            the path to set
-	 */
-	public void setPath(GeneralPath path) {
-		this.path = path;
-	}
-
-	/**
-	 * Gets the color.
-	 *
-	 * @return the color
-	 */
-	public Color getColor() {
-		return color;
-	}
-
-	/**
-	 * Sets the color.
-	 *
-	 * @param color
-	 *            the color to set
-	 */
-	public void setColor(Color color) {
-		this.color = color;
-	}
-
-	/**
-	 * Gets the colors.
-	 *
 	 * @return the colors
 	 */
 	public Color[] getColors() {
@@ -285,8 +246,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
-	 * Sets the colors.
-	 *
 	 * @param colors
 	 *            the colors to set
 	 */
@@ -295,22 +254,164 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
-	 * Gets the fractions.
-	 *
-	 * @return the fractions
+	 * @return the path
 	 */
-	public float[] getFractions() {
-		return fractions;
+	public GeneralPath getPath() {
+		return path;
 	}
 
 	/**
-	 * Sets the fractions.
-	 *
-	 * @param fractions
-	 *            the fractions to set
+	 * @param path
+	 *            the path to set
 	 */
-	public void setFractions(float[] fractions) {
-		this.fractions = fractions;
+	public void setPath(GeneralPath path) {
+		this.path = path;
 	}
 
+	/**
+	 * @return the color
+	 */
+	public Color getColor() {
+		return color;
+	}
+
+	/**
+	 * @param color
+	 *            the color to set
+	 */
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	/**
+	 * @return the font
+	 */
+	public Font getFont() {
+		return font;
+	}
+
+	/**
+	 * @param font
+	 *            the font to set
+	 */
+	public void setFont(Font font) {
+		this.font = font;
+	}
+
+	/**
+	 * @return the globalAlpha
+	 */
+	public Double getGlobalAlpha() {
+		return globalAlpha;
+	}
+
+	/**
+	 * @param globalAlpha
+	 *            the globalAlpha to set
+	 */
+	public void setGlobalAlpha(Double globalAlpha) {
+		this.globalAlpha = globalAlpha;
+	}
+
+	/**
+	 * @return the method
+	 */
+	public int getMethod() {
+		return method;
+	}
+
+	/**
+	 * @param method
+	 *            the method to set
+	 */
+	public void setMethod(int method) {
+		this.method = method;
+	}
+
+	/**
+	 * @return the lineWidth
+	 */
+	public int getLineWidth() {
+		return lineWidth;
+	}
+
+	/**
+	 * @param lineWidth
+	 *            the lineWidth to set
+	 */
+	public void setLineWidth(int lineWidth) {
+		this.lineWidth = lineWidth;
+	}
+	
+	/**
+	 * @return the rotate
+	 */
+	public double getRotate() {
+		return rotate;
+	}
+
+	/**
+	 * @param rotate the rotate to set
+	 */
+	public void setRotate(double rotate) {
+		this.rotate = rotate;
+	}
+	
+	/**
+	 * @return the scaleX
+	 */
+	public int getScaleX() {
+		return scaleX;
+	}
+
+	/**
+	 * @param scaleX the scaleX to set
+	 */
+	public void setScaleX(int scaleX) {
+		this.scaleX = scaleX;
+	}
+
+	/**
+	 * @return the scaleY
+	 */
+	public int getScaleY() {
+		return scaleY;
+	}
+
+	/**
+	 * @param scaleY the scaleY to set
+	 */
+	public void setScaleY(int scaleY) {
+		this.scaleY = scaleY;
+	}
+	
+	/**
+	 * @return the translateX
+	 */
+	public int getTranslateX() {
+		return translateX;
+	}
+
+	/**
+	 * @param translateX the translateX to set
+	 */
+	public void setTranslateX(int translateX) {
+		this.translateX = translateX;
+	}
+
+	/**
+	 * @return the translateY
+	 */
+	public int getTranslateY() {
+		return translateY;
+	}
+
+	/**
+	 * @param translateY the translateY to set
+	 */
+	public void setTranslateY(int translateY) {
+		this.translateY = translateY;
+	}
+
+	
 }
