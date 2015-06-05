@@ -507,7 +507,7 @@ public class DOMCanvasImpl implements CanvasRenderingContext2D, CanvasGradient,
 
 	@Override
 	public void quadraticCurveTo(int cpx, int cpy, int x, int y) {
-		// TODO Auto-generated method stub
+		path.quadTo(cpx, cpy, x, y);
 
 	}
 
