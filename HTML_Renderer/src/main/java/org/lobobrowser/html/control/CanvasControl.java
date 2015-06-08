@@ -110,6 +110,15 @@ public class CanvasControl extends BaseControl {
 	/** The Translate Y. */
 	private int translateY;
 	
+	/** The Line Cap. */
+	private String lineCap; 
+	
+	/** The Line Join. */
+	private String lineJoin;
+	
+	/** The Miter Limit. */
+	private int miterLimit;
+	
 
 	/**
 	 * Instantiates a new canvas control.
@@ -127,6 +136,9 @@ public class CanvasControl extends BaseControl {
 		method = modelNode.getMethod();
 		path = modelNode.getPath();
 		lineWidth = modelNode.getLineWidth();
+		lineCap = modelNode.getLineCap();
+		lineJoin = modelNode.getLineJoin();
+		miterLimit = modelNode.getMiterLimit();
 		color = modelNode.getColor();
 		font = modelNode.getFont();
 		linearValues = modelNode.getLinearValues();
@@ -227,7 +239,23 @@ public class CanvasControl extends BaseControl {
 	 */
 	private void stroke(Graphics2D g) {
 		if (path != null) {
-			g.setStroke(new BasicStroke(lineWidth));
+			int intLineCap = BasicStroke.CAP_BUTT;
+			int intlineJoin = BasicStroke.JOIN_BEVEL;
+			
+			if ("round".equals(lineCap)) {
+				intLineCap = BasicStroke.CAP_ROUND;
+
+			} else if ("square".equals(lineCap)) {
+				intLineCap = BasicStroke.CAP_SQUARE;
+			}
+			if ("round".equals(lineJoin)) {
+				intlineJoin = BasicStroke.JOIN_ROUND;
+
+			} else if ("miter".equals(lineJoin)) {
+				intlineJoin = BasicStroke.JOIN_MITER;
+			}
+			
+			g.setStroke(new BasicStroke(lineWidth,intLineCap,intlineJoin,miterLimit));
 			g.setColor(color);
 			paint(g);
 			g.draw(path);
@@ -246,6 +274,7 @@ public class CanvasControl extends BaseControl {
 			g.setStroke(new BasicStroke(val[4]));
 			g.setColor(color);
 			paint(g);
+			
 			g.rotate(rotate);
 			g.scale(scaleX, scaleY);
 			g.translate(translateX, translateY);

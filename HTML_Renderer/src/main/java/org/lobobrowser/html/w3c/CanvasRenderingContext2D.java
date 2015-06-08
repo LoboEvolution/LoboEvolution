@@ -609,13 +609,6 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      */
     void scale(int sx, int sy);
 
-    /**
-     * Sets the alpha.
-     *
-     * @param alpha
-     *            the new alpha
-     */
-    void setAlpha(int alpha);
 
     /**
      * Sets the composite operation.

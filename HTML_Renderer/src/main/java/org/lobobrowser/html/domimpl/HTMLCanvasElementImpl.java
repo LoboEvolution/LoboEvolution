@@ -60,7 +60,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	private Font font;
 
 	/** The global alpha. */
-	private Double globalAlpha = 0.5;
+	private Double globalAlpha;
 
 	/** The method. */
 	private int method;
@@ -69,19 +69,28 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	private int lineWidth;
 	
 	/** The rotate. */
-	private double rotate = 0.0;
+	private double rotate;
 	
 	/** The Scale x. */
-	private int scaleX = 1;
+	private int scaleX;
 	
 	/** The Scale Y. */
-	private int scaleY = 1;
+	private int scaleY;
 	
 	/** The Translate x. */
-	private int translateX = 0;
+	private int translateX;
 		
 	/** The Translate Y. */
-	private int translateY = 0;
+	private int translateY;
+	
+	/** The Line Cap. */
+	private String lineCap; 
+	
+	/** The Line Join. */
+	private String lineJoin;
+	
+	/** The Miter Limit. */
+	private int miterLimit;
 
 	/**
 	 * Instantiates a new HTML canvas element impl.
@@ -92,6 +101,13 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	public HTMLCanvasElementImpl(String name) {
 		super(name);
 		lineWidth = 1;
+		globalAlpha = 0.5;
+		rotate = 0.0;
+		scaleX = 1;
+		scaleY = 1;
+		translateX = 0;
+		translateY = 0;
+		miterLimit = 0;
 	}
 
 	@Override
@@ -412,6 +428,29 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	public void setTranslateY(int translateY) {
 		this.translateY = translateY;
 	}
-
 	
+	public String getLineCap() {
+		return lineCap;
+	}
+
+	public void setLineCap(String lineCap) {
+		this.lineCap = lineCap;
+	}
+
+	public String getLineJoin() {  
+		return lineJoin;
+	}
+
+	public void setLineJoin(String lineJoin) {
+		this.lineJoin = lineJoin;
+
+	}
+	
+	public int getMiterLimit() {
+		return miterLimit;
+	}
+
+	public void setMiterLimit(int miterLimit) {
+		this.miterLimit = miterLimit;
+	}	
 }

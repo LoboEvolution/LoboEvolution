@@ -150,26 +150,23 @@ public class DOMCanvasImpl implements CanvasRenderingContext2D, CanvasGradient,
 
 	@Override
 	public String getLineCap() {
-		// TODO Auto-generated method stub
-		return null;
+		return canvas.getLineCap();
 	}
 
 	@Override
-	public void setLineCap(String arg) {
-		// TODO Auto-generated method stub
+	public void setLineCap(String lineCap) {
+		canvas.setLineCap(lineCap);
 
 	}
 
 	@Override
 	public String getLineJoin() {
-		// TODO Auto-generated method stub
-		return null;
+		return canvas.getLineJoin();
 	}
 
 	@Override
-	public void setLineJoin(String arg) {
-		// TODO Auto-generated method stub
-
+	public void setLineJoin(String lineJoin) {
+		canvas.setLineJoin(lineJoin);
 	}
 
 	@Override
@@ -185,13 +182,12 @@ public class DOMCanvasImpl implements CanvasRenderingContext2D, CanvasGradient,
 
 	@Override
 	public int getMiterLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return canvas.getMiterLimit();
 	}
 
 	@Override
-	public void setMiterLimit(int arg) {
-		// TODO Auto-generated method stub
+	public void setMiterLimit(int miterLimit) {
+		canvas.setMiterLimit(miterLimit);
 
 	}
 
@@ -427,6 +423,7 @@ public class DOMCanvasImpl implements CanvasRenderingContext2D, CanvasGradient,
 			fillRect(rectValues[0], rectValues[1], rectValues[2], rectValues[3]);
 		} else {
 			canvas.setMethod(HTMLCanvasElement.FILL);
+			canvas.setColor(Color.BLACK);
 			canvas.setPath(path);
 		}
 	}
@@ -545,12 +542,6 @@ public class DOMCanvasImpl implements CanvasRenderingContext2D, CanvasGradient,
 	}
 
 	@Override
-	public void setAlpha(int alpha) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void setCompositeOperation(String compositeOperation) {
 		// TODO Auto-generated method stub
 
@@ -569,6 +560,7 @@ public class DOMCanvasImpl implements CanvasRenderingContext2D, CanvasGradient,
 					rectValues[3], canvas.getLineWidth());
 		} else {
 			canvas.setMethod(HTMLCanvasElement.STROKE);
+			canvas.setColor(Color.BLACK);
 			canvas.setPath(path);
 		}
 	}
