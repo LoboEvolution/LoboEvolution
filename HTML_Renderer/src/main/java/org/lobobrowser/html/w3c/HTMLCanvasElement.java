@@ -41,6 +41,9 @@ public interface HTMLCanvasElement extends HTMLElement {
 	/** The stroke text. */
 	int STROKE_TEXT = 6;
 	
+	/** The rect. */
+	int RECT = 7; 
+	
 	
     /**
      * Gets the width.

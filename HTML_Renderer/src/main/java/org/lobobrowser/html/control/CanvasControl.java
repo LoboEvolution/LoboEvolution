@@ -17,7 +17,6 @@ package org.lobobrowser.html.control;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LinearGradientPaint;
@@ -30,9 +29,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.lobobrowser.html.domimpl.HTMLCanvasElementImpl;
-import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.html.info.CanvasInfo;
 import org.lobobrowser.html.w3c.HTMLCanvasElement;
-import org.lobobrowser.util.gui.FontFactory;
 
 /**
  * The Class CanvasControl.
@@ -41,14 +39,6 @@ public class CanvasControl extends BaseControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
-	/** The Constant FONT_FACTORY. */
-    private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
-	
-	 /** The Constant DEFAULT_FONT. */
-    private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(
-            Font.SANS_SERIF, null, null, null, HtmlValues.DEFAULT_FONT_SIZE,
-            null, null);
 
 	/** The width. */
 	private int width;
@@ -57,73 +47,41 @@ public class CanvasControl extends BaseControl {
 	private int height;
 
 	/** The list rect values. */
-	private ArrayList<int[]> listRectValues;
-	
+	private ArrayList<CanvasInfo> listRectValues;
+
 	/** The list stroke rect values. */
-	private ArrayList<int[]> listStrokeRectValues;
-	
+	private ArrayList<CanvasInfo> listStrokeRectValues;
+
 	/** The list text values. */
-	private ArrayList<Object[]> listTextValues;
-	
+	private ArrayList<CanvasInfo> listTextValues;
+
 	/** The list stroke text values. */
-	private ArrayList<Object[]> listStrokeTextValues;
-	
+	private ArrayList<CanvasInfo> listStrokeTextValues;
+
 	/** The fractions. */
-	private float[] fractions;
-	
+	private ArrayList<Float> fractions;
+
 	/** The colors. */
-	private Color[] colors;
-	
+	private ArrayList<Color> colors;
+
 	/** The linear values. */
-	private Double[] linearValues;
+	private CanvasInfo linearValues;
 
 	/** The method. */
 	private int method;
-	
+
 	/** The path. */
 	private GeneralPath path;
 	
-	/** The method. */
-	private int lineWidth;
-	
-	/** The color. */
-	private Color color;
-	
-	/** The font. */
-	private Font font;
-	
-	/** The global alpha. */
-	private Double globalAlpha;
-	
-	/** The rotate. */
-	private Double rotate;
-	
-	/** The Scale x. */
-	private int scaleX;
-	
-	/** The Scale Y. */
-	private int scaleY;
-	
-	/** The Translate x. */
-	private int translateX;
-		
-	/** The Translate Y. */
-	private int translateY;
-	
-	/** The Line Cap. */
-	private String lineCap; 
-	
-	/** The Line Join. */
-	private String lineJoin;
-	
-	/** The Miter Limit. */
-	private int miterLimit;
+	/** The canvas info. */
+	private CanvasInfo canvasInfo;
 	
 
 	/**
 	 * Instantiates a new canvas control.
 	 *
-	 * @param modelNode the model node
+	 * @param modelNode
+	 *            the model node
 	 */
 	public CanvasControl(HTMLCanvasElementImpl modelNode) {
 		super(modelNode);
@@ -135,21 +93,10 @@ public class CanvasControl extends BaseControl {
 		listStrokeRectValues = modelNode.getListStrokeRectValues();
 		method = modelNode.getMethod();
 		path = modelNode.getPath();
-		lineWidth = modelNode.getLineWidth();
-		lineCap = modelNode.getLineCap();
-		lineJoin = modelNode.getLineJoin();
-		miterLimit = modelNode.getMiterLimit();
-		color = modelNode.getColor();
-		font = modelNode.getFont();
 		linearValues = modelNode.getLinearValues();
 		colors = modelNode.getColors();
 		fractions = modelNode.getFractions();
-		globalAlpha = modelNode.getGlobalAlpha();
-		rotate = modelNode.getRotate();
-		scaleX = modelNode.getScaleX();
-		scaleY = modelNode.getScaleY();
-		translateX = modelNode.getTranslateX();
-		translateY = modelNode.getTranslateY();
+		canvasInfo = modelNode.getCanvasInfo();
 	}
 
 	@Override
@@ -181,16 +128,16 @@ public class CanvasControl extends BaseControl {
 			break;
 		}
 	}
-	
-	
+
 	/**
 	 * Fill.
 	 *
-	 * @param g the g
+	 * @param g
+	 *            the g
 	 */
 	private void fill(Graphics2D g) {
 		if (path != null) {
-			g.setColor(color);
+			g.setColor(canvasInfo.getFillStyle());
 			paint(g);
 			g.fill(path);
 		}
@@ -199,152 +146,161 @@ public class CanvasControl extends BaseControl {
 	/**
 	 * Fill rect.
 	 *
-	 * @param g the g
+	 * @param g
+	 *            the g
 	 */
 	private void fillRect(Graphics2D g) {
 		for (int i = 0; i < listRectValues.size(); i++) {
-			int[] val = listRectValues.get(i);
-			g.setColor(color);
-			g.setComposite(opacity());
+			CanvasInfo val = listRectValues.get(i);
+			g.setColor(val.getFillStyle());
+			g.setComposite(opacity(val.getGlobalAlpha()));
 			paint(g);
-			g.rotate(rotate);
-			g.scale(scaleX, scaleY);
-			g.translate(translateX, translateY);
-			g.fillRect(val[0], val[1], val[2], val[3]);
+			g.rotate(val.getRotate());
+			g.scale(val.getScaleX(), val.getScaleY());
+			g.translate(val.getTranslateX(), val.getTranslateY());
+			g.fillRect(val.getX(), val.getY(), val.getWidth(), val.getHeight());
 		}
 	}
-	
+
 	/**
 	 * Fill text.
 	 *
-	 * @param g the g
+	 * @param g
+	 *            the g
 	 */
 	private void fillText(Graphics2D g) {
 		for (int i = 0; i < listTextValues.size(); i++) {
-			Object[] val = listTextValues.get(i);
-			g.setColor(color);
-			font(g);
+			CanvasInfo val = listTextValues.get(i);
+			g.setColor(val.getFillStyle());
+			g.setFont(val.getFont());
 			paint(g);
-			g.rotate(rotate);
-			g.scale(scaleX, scaleY);
-			g.translate(translateX, translateY);
-			g.drawString((String)val[0], (Integer)val[1], (Integer)val[2]);
+			g.rotate(val.getRotate());
+			g.scale(val.getScaleX(), val.getScaleY());
+			g.translate(val.getTranslateX(), val.getTranslateY());
+			g.drawString(val.getText(), val.getX(), val.getY());
 		}
 	}
-	
+
 	/**
 	 * Stroke.
 	 *
-	 * @param g the g
+	 * @param g
+	 *            the g
 	 */
 	private void stroke(Graphics2D g) {
 		if (path != null) {
 			int intLineCap = BasicStroke.CAP_BUTT;
 			int intlineJoin = BasicStroke.JOIN_BEVEL;
-			
-			if ("round".equals(lineCap)) {
+
+			if ("round".equals(canvasInfo.getLineCap())) {
 				intLineCap = BasicStroke.CAP_ROUND;
 
-			} else if ("square".equals(lineCap)) {
+			} else if ("square".equals(canvasInfo.getLineCap())) {
 				intLineCap = BasicStroke.CAP_SQUARE;
 			}
-			if ("round".equals(lineJoin)) {
+			if ("round".equals(canvasInfo.getLineJoin())) {
 				intlineJoin = BasicStroke.JOIN_ROUND;
 
-			} else if ("miter".equals(lineJoin)) {
+			} else if ("miter".equals(canvasInfo.getLineJoin())) {
 				intlineJoin = BasicStroke.JOIN_MITER;
 			}
-			
-			g.setStroke(new BasicStroke(lineWidth,intLineCap,intlineJoin,miterLimit));
-			g.setColor(color);
+
+			g.setStroke(new BasicStroke(canvasInfo.getLineWidth(), intLineCap, intlineJoin, canvasInfo.getMiterLimit()));
+			g.setColor(canvasInfo.getStrokeStyle());
 			paint(g);
 			g.draw(path);
 		}
 	}
-	
+
 	/**
 	 * Stroke rect.
 	 *
-	 * @param g the g
+	 * @param g
+	 *            the g
 	 */
 	private void strokeRect(Graphics2D g) {
 		for (int i = 0; i < listStrokeRectValues.size(); i++) {
-			int[] val = listStrokeRectValues.get(i);
-			g.setComposite(opacity());
-			g.setStroke(new BasicStroke(val[4]));
-			g.setColor(color);
+			CanvasInfo val = listStrokeRectValues.get(i);
+			g.setComposite(opacity(val.getGlobalAlpha()));
+			g.setStroke(new BasicStroke(val.getLineWidth()));
+			g.setColor(val.getStrokeStyle());
 			paint(g);
-			
-			g.rotate(rotate);
-			g.scale(scaleX, scaleY);
-			g.translate(translateX, translateY);
-			g.drawRect(val[0], val[1], val[2],val[3]);
+			g.rotate(val.getRotate());
+			g.scale(val.getScaleX(), val.getScaleY());
+			g.translate(val.getTranslateX(), val.getTranslateY());
+			g.drawRect(val.getX(), val.getY(), val.getWidth(), val.getHeight());
 		}
 	}
-	
+
 	/**
 	 * Stroke text.
 	 *
-	 * @param g the g
+	 * @param g
+	 *            the g
 	 */
 	private void strokeText(Graphics2D g) {
 		for (int i = 0; i < listStrokeTextValues.size(); i++) {
-			Object[] val = listStrokeTextValues.get(i);
+			CanvasInfo val = listStrokeTextValues.get(i);
 			FontRenderContext frc = new FontRenderContext(null, false, false);
 
-			TextLayout tl = new TextLayout((String) val[0], font, frc);
+			TextLayout tl = new TextLayout(val.getText(), val.getFont(), frc);
 			AffineTransform textAt = new AffineTransform();
-			textAt.translate((Integer) val[1], (Integer) val[2]);
+			textAt.translate(val.getX(), val.getY());
 			Shape outline = tl.getOutline(textAt);
-			g.setColor(color);
-			font(g);
+			g.setColor(val.getStrokeStyle());
+			g.setFont(val.getFont());
 			paint(g);
-			g.rotate(rotate);
-			g.scale(scaleX, scaleY);
-			g.translate(translateX, translateY);
+			g.rotate(val.getRotate());
+			g.scale(val.getScaleX(), val.getScaleY());
+			g.translate(val.getTranslateX(), val.getTranslateY());
 			BasicStroke wideStroke = new BasicStroke(2);
 			g.setStroke(wideStroke);
 			g.draw(outline);
 		}
 	}
-	
-	
+
 	/**
 	 * Paint.
 	 *
-	 * @param g the g
+	 * @param g
+	 *            the g
 	 */
 	private void paint(Graphics2D g) {
 
-		if (colors != null) {
-			Arrays.sort(fractions);
-			LinearGradientPaint paint = new LinearGradientPaint(
-					linearValues[0].floatValue(), linearValues[1].floatValue(),
-					linearValues[2].floatValue(), linearValues[3].floatValue(),
-					fractions, colors);
+		if (colors != null && linearValues.getLinearX() != null) {
+
+			float[] floatArray = new float[fractions.size()];
+			int i = 0;
+
+			for (Float f : fractions) {
+				floatArray[i++] = (f != null ? f : Float.NaN);
+			}
+
+			Color[] colorArray = new Color[colors.size()];
+			int a = 0;
+
+			for (Color c : colors) {
+				colorArray[a++] = c;
+			}
+
+			Arrays.sort(floatArray);
+
+			LinearGradientPaint paint = new LinearGradientPaint(linearValues
+					.getLinearX().floatValue(), linearValues.getLinearY()
+					.floatValue(), linearValues.getLinearX1().floatValue(),
+					linearValues.getLinearY1().floatValue(), floatArray,
+					colorArray);
 			g.setPaint(paint);
 		}
 	}
-	
+
 	/**
 	 * Opacity.
 	 *
 	 * @return the alpha composite
 	 */
-	private AlphaComposite opacity(){
-		return AlphaComposite.getInstance(AlphaComposite.SRC_OVER, globalAlpha.floatValue());
-	} 
-	
-	/**
-	 * Font.
-	 *
-	 * @param g the g
-	 */
-	private void font(Graphics2D g){
-		if(font!= null){
-			g.setFont(font);
-		}else{
-			g.setFont(DEFAULT_FONT);
-		}
+	private AlphaComposite opacity(Double globalAlpha) {
+		return AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+				globalAlpha.floatValue());
 	}
 }
