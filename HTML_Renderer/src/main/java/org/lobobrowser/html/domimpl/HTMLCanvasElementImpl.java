@@ -89,9 +89,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	/** The method. */
 	private int method;
 
-	/** The line width. */
-	private int lineWidth;
-
 	/** The rotate. */
 	private double rotate;
 
@@ -118,7 +115,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	 */
 	public HTMLCanvasElementImpl(String name) {
 		super(name);
-		lineWidth = 1;
 		globalAlpha = 1.0;
 		rotate = 0.0;
 		scaleX = 1;
@@ -573,6 +569,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		ci.setY(y);
 		ci.setMaxWidth(maxWidth);
 		ci.setFillStyle(getFillStyle());
+		ci.setRotate(rotate);
 		ci.setScaleX(scaleX);
 		ci.setScaleY(scaleY);
 		ci.setTranslateX(translateX);
@@ -962,7 +959,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	 * @return the lineWidth
 	 */
 	public int getLineWidth() {
-		return lineWidth;
+		return canvasInfo.getLineWidth();
 	}
 
 	/**
@@ -970,6 +967,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	 *            the lineWidth to set
 	 */
 	public void setLineWidth(int lineWidth) {
-		this.lineWidth = lineWidth;
+		canvasInfo.setLineWidth(lineWidth);
 	}
 }

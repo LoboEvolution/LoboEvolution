@@ -204,7 +204,7 @@ public class CanvasControl extends BaseControl {
 			} else if ("miter".equals(canvasInfo.getLineJoin())) {
 				intlineJoin = BasicStroke.JOIN_MITER;
 			}
-
+			
 			g.setStroke(new BasicStroke(canvasInfo.getLineWidth(), intLineCap, intlineJoin, canvasInfo.getMiterLimit()));
 			g.setColor(canvasInfo.getStrokeStyle());
 			paint(g);
