@@ -42,7 +42,13 @@ public interface HTMLCanvasElement extends HTMLElement {
 	int STROKE_TEXT = 6;
 	
 	/** The rect. */
-	int RECT = 7; 
+	int RECT = 7;
+	
+	/** The image. */
+	int IMAGE = 8;
+	
+	/** The image clip. */
+	int IMAGE_CLIP = 9;
 	
 	
     /**

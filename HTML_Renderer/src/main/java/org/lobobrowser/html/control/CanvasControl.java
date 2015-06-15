@@ -19,14 +19,22 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.LinearGradientPaint;
 import java.awt.Shape;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
+import java.awt.image.CropImageFilter;
+import java.awt.image.FilteredImageSource;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import javax.imageio.ImageIO;
 
 import org.lobobrowser.html.domimpl.HTMLCanvasElementImpl;
 import org.lobobrowser.html.info.CanvasInfo;
@@ -67,9 +75,6 @@ public class CanvasControl extends BaseControl {
 	/** The linear values. */
 	private CanvasInfo linearValues;
 
-	/** The method. */
-	private int method;
-
 	/** The path. */
 	private GeneralPath path;
 	
@@ -91,7 +96,6 @@ public class CanvasControl extends BaseControl {
 		listTextValues = modelNode.getListTextValues();
 		listStrokeTextValues = modelNode.getListStrokeTextValues();
 		listStrokeRectValues = modelNode.getListStrokeRectValues();
-		method = modelNode.getMethod();
 		path = modelNode.getPath();
 		linearValues = modelNode.getLinearValues();
 		colors = modelNode.getColors();
@@ -104,8 +108,8 @@ public class CanvasControl extends BaseControl {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawRect(0, 0, new Integer(width), new Integer(height));
-
-		switch (method) {
+		
+		switch (canvasInfo.getMethod()) {
 		case HTMLCanvasElement.FILL:
 			fill(g2d);
 			break;
@@ -123,6 +127,12 @@ public class CanvasControl extends BaseControl {
 			break;
 		case HTMLCanvasElement.STROKE_TEXT:
 			strokeText(g2d);
+			break;
+		case HTMLCanvasElement.IMAGE:
+			image(g2d);
+			break;
+		case HTMLCanvasElement.IMAGE_CLIP:
+			imageClip(g2d);
 			break;
 		default:
 			break;
@@ -256,6 +266,52 @@ public class CanvasControl extends BaseControl {
 			BasicStroke wideStroke = new BasicStroke(2);
 			g.setStroke(wideStroke);
 			g.draw(outline);
+		}
+	}
+	
+	
+	/**
+	 * Image.
+	 *
+	 * @param g the g
+	 */
+	private void image(Graphics2D g) {
+		URL u;
+		try {
+			u = new URL(canvasInfo.getImage().getSrc());
+			Image img = ImageIO.read(u);
+			
+			g.drawImage(img,canvasInfo.getX(),canvasInfo.getY(),canvasInfo.getWidth(), canvasInfo.getHeight(),this);		
+			g.finalize();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Image clip.
+	 *
+	 * @param g the g
+	 */
+	private void imageClip(Graphics2D g) {
+		URL u;
+		try {
+			u = new URL(canvasInfo.getImage().getSrc());
+			Image img = ImageIO.read(u);
+			img = createImage(new FilteredImageSource(img.getSource(),
+					new CropImageFilter(canvasInfo.getSx(), canvasInfo.getSy(),
+							canvasInfo.getSw(), canvasInfo.getSh())));
+
+			g.drawImage(img, canvasInfo.getDx(), canvasInfo.getDy(),
+					canvasInfo.getDw(), canvasInfo.getDh(), this);
+
+			g.finalize();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

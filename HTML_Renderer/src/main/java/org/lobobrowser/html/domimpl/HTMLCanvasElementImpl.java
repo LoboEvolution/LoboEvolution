@@ -86,9 +86,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	/** The global alpha. */
 	private Double globalAlpha;
 
-	/** The method. */
-	private int method;
-
 	/** The rotate. */
 	private double rotate;
 
@@ -468,21 +465,38 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 	@Override
 	public void drawImage(HTMLImageElement image, int x, int y) {
-		// TODO Auto-generated method stub
-
+		canvasInfo.setImage(image);
+		canvasInfo.setX(x);
+		canvasInfo.setY(y);
+		canvasInfo.setWidth(getWidth());
+		canvasInfo.setHeight(getHeight());
+		canvasInfo.setMethod(IMAGE);
 	}
 
 	@Override
 	public void drawImage(HTMLImageElement image, int x, int y, int width,
 			int height) {
-		// TODO Auto-generated method stub
-
+		canvasInfo.setImage(image);
+		canvasInfo.setX(x);
+		canvasInfo.setY(y);
+		canvasInfo.setWidth(width);
+		canvasInfo.setHeight(height);
+		canvasInfo.setMethod(IMAGE);
 	}
 
 	@Override
 	public void drawImage(HTMLImageElement image, int sx, int sy, int sw,
 			int sh, int dx, int dy, int dw, int dh) {
-		// TODO Auto-generated method stub
+		canvasInfo.setImage(image);
+		canvasInfo.setSx(sx);
+		canvasInfo.setSy(sy);
+		canvasInfo.setSw(sw);
+		canvasInfo.setSh(sh);
+		canvasInfo.setDx(dx);
+		canvasInfo.setDy(dy);
+		canvasInfo.setDw(dw);
+		canvasInfo.setDh(dh);
+		canvasInfo.setMethod(IMAGE_CLIP);
 
 	}
 
@@ -528,10 +542,10 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 	@Override
 	public void fill() {
-		if (HTMLCanvasElement.RECT == getMethod()) {
+		if (RECT == canvasInfo.getMethod()) {
 			fillRect(rectValues[0], rectValues[1], rectValues[2], rectValues[3]);
 		} else {
-			setMethod(HTMLCanvasElement.FILL);
+			canvasInfo.setMethod(FILL);
 			canvasInfo.setFillStyle(color);
 			setPath(path);
 		}
@@ -553,7 +567,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		ci.setTranslateY(translateY);
 		ci.setGlobalAlpha(globalAlpha);
 		listRectValues.add(ci);
-		setMethod(HTMLCanvasElement.FILL_RECT);
+		canvasInfo.setMethod(FILL_RECT);
 	}
 
 	@Override
@@ -577,7 +591,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		ci.setFont(font);
 
 		listTextValues.add(ci);
-		setMethod(HTMLCanvasElement.FILL_TEXT);
+		canvasInfo.setMethod(FILL_TEXT);
 	}
 
 	@Override
@@ -633,7 +647,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		rectValues[1] = y;
 		rectValues[2] = width;
 		rectValues[3] = height;
-		setMethod(HTMLCanvasElement.RECT);
+		canvasInfo.setMethod(RECT);
 	}
 
 	@Override
@@ -674,11 +688,11 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 	@Override
 	public void stroke() {
-		if (HTMLCanvasElement.RECT == getMethod()) {
+		if (RECT == canvasInfo.getMethod()) {
 			strokeRect(rectValues[0], rectValues[1], rectValues[2],
 					rectValues[3], getLineWidth());
 		} else {
-			setMethod(HTMLCanvasElement.STROKE);
+			canvasInfo.setMethod(STROKE);
 			canvasInfo.setStrokeStyle(color);
 			setPath(path);
 		}
@@ -708,7 +722,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		ci.setGlobalAlpha(globalAlpha);
 
 		listStrokeRectValues.add(ci);
-		setMethod(HTMLCanvasElement.STROKE_RECT);
+		canvasInfo.setMethod(STROKE_RECT);
 
 	}
 
@@ -734,7 +748,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		ci.setFont(font);
 
 		listStrokeTextValues.add(ci);
-		setMethod(HTMLCanvasElement.STROKE_TEXT);
+		canvasInfo.setMethod(STROKE_TEXT);
 
 	}
 
@@ -939,22 +953,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	public void setPath(GeneralPath path) {
 		this.path = path;
 	}
-
-	/**
-	 * @return the method
-	 */
-	public int getMethod() {
-		return method;
-	}
-
-	/**
-	 * @param method
-	 *            the method to set
-	 */
-	public void setMethod(int method) {
-		this.method = method;
-	}
-
+	
 	/**
 	 * @return the lineWidth
 	 */
