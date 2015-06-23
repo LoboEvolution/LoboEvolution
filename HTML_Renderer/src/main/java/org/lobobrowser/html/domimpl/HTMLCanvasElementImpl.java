@@ -48,31 +48,82 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	/** The Constant FONT_FACTORY. */
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
 
+	/** The list canvas info. */
 	private ArrayList<CanvasInfo> listCanvasInfo;
+
+	/** The fill style. */
 	private Color fillStyle;
+
+	/** The stroke style. */
 	private Color strokeStyle;
+
+	/** The line width. */
 	private int lineWidth;
+
+	/** The global alpha. */
 	private Float globalAlpha;
+
+	/** The translate x. */
 	private int translateX;
+
+	/** The translate y. */
 	private int translateY;
+
+	/** The rotate. */
 	private Double rotate;
+
+	/** The scale x. */
 	private int scaleX;
+
+	/** The scale y. */
 	private int scaleY;
+
+	/** The font. */
 	private Font font;
+
+	/** The rect x. */
 	private int rectX;
+
+	/** The rect y. */
 	private int rectY;
+
+	/** The rect width. */
 	private int rectWidth;
+
+	/** The rect height. */
 	private int rectHeight;
+
+	/** The int line cap. */
 	private int intLineCap;
+
+	/** The intline join. */
 	private int intlineJoin;
+
+	/** The miter limit. */
 	private int miterLimit;
+
+	/** The path. */
 	private GeneralPath path;
+
+	/** The linear gradient. */
 	private LinearGradientPaint linearGradient;
+
+	/** The fractions. */
 	private ArrayList<Float> fractions;
+
+	/** The colors. */
 	private ArrayList<Color> colors;
+
+	/** The linear x. */
 	private Double linearX;
+
+	/** The linear x1. */
 	private Double linearX1;
+
+	/** The linear y. */
 	private Double linearY;
+
+	/** The linear y1. */
 	private Double linearY1;
 
 	/**
@@ -790,6 +841,11 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 	}
 
+	/**
+	 * Linear gradient.
+	 *
+	 * @return the linear gradient paint
+	 */
 	private LinearGradientPaint linearGradient() {
 
 		float[] floatArray = new float[fractions.size()];
@@ -814,6 +870,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
+	 * Gets the list canvas info.
+	 *
 	 * @return the listCanvasInfo
 	 */
 	public ArrayList<CanvasInfo> getListCanvasInfo() {
@@ -821,6 +879,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	/**
+	 * Sets the list canvas info.
+	 *
 	 * @param listCanvasInfo
 	 *            the listCanvasInfo to set
 	 */

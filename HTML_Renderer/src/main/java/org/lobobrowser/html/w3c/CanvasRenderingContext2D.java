@@ -212,8 +212,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
     /**
      * Sets the stroke style.
      *
-     * @param String
-     *            the new stroke style
+     * @param style the new stroke style
      */
     void setStrokeStyle(Object style);
 

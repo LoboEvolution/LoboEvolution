@@ -117,7 +117,7 @@ public class CanvasInfo {
 	/** The Genearl path. */
 	private GeneralPath path;
 	
-	
+	/** The linear gradient. */
 	private LinearGradientPaint linearGradient;
 
 	/**
@@ -672,6 +672,8 @@ public class CanvasInfo {
 	}
 
 	/**
+	 * Gets the path.
+	 *
 	 * @return the path
 	 */
 	public GeneralPath getPath() {
@@ -679,14 +681,17 @@ public class CanvasInfo {
 	}
 
 	/**
-	 * @param path
-	 *            the path to set
+	 * Sets the path.
+	 *
+	 * @param path            the path to set
 	 */
 	public void setPath(GeneralPath path) {
 		this.path = path;
 	}
 
 	/**
+	 * Gets the linear gradient.
+	 *
 	 * @return the linearGradient
 	 */
 	public LinearGradientPaint getLinearGradient() {
@@ -694,6 +699,8 @@ public class CanvasInfo {
 	}
 
 	/**
+	 * Sets the linear gradient.
+	 *
 	 * @param linearGradient the linearGradient to set
 	 */
 	public void setLinearGradient(LinearGradientPaint linearGradient) {
