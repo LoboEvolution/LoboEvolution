@@ -14,6 +14,7 @@
  */
 package org.lobobrowser.html.w3c;
 
+import java.awt.Color;
 import java.awt.Font;
 
 /**
@@ -26,15 +27,15 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      *
      * @return the fill style
      */
-    Object getFillStyle();
+	Color getFillStyle();
 
     /**
      * Sets the fill style.
      *
-     * @param arg
+     * @param style
      *            the new fill style
      */
-    void setFillStyle(Object arg);
+    void setFillStyle(Object style);
 
     /**
      * Gets the font.
@@ -206,15 +207,15 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      *
      * @return the stroke style
      */
-    Object getStrokeStyle();
+    Color getStrokeStyle();
 
     /**
      * Sets the stroke style.
      *
-     * @param arg
+     * @param String
      *            the new stroke style
      */
-    void setStrokeStyle(Object arg);
+    void setStrokeStyle(Object style);
 
     /**
      * Gets the text align.
@@ -362,7 +363,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      * @param x the x
      * @param y the y
      */
-    void drawImage(HTMLImageElement image, int x, int y);
+    void drawImage(Object image, Integer x, Integer y);
 
     /**
      * Draw image.
@@ -373,7 +374,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      * @param width the width
      * @param height the height
      */
-    void drawImage(HTMLImageElement image, int x, int y, int width, int height);
+    void drawImage(Object image, Integer x, Integer y, Integer width, Integer height);
 
     /**
      * Draw image.
@@ -388,80 +389,8 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      * @param dw the dw
      * @param dh the dh
      */
-    void drawImage(HTMLImageElement image, int sx, int sy, int sw, int sh,
-            int dx, int dy, int dw, int dh);
-
-    /**
-     * Draw image.
-     *
-     * @param canvas the canvas
-     * @param x the x
-     * @param y the y
-     */
-    void drawImage(HTMLCanvasElement canvas, int x, int y);
-
-    /**
-     * Draw image.
-     *
-     * @param canvas the canvas
-     * @param x the x
-     * @param y the y
-     * @param width the width
-     * @param height the height
-     */
-    void drawImage(HTMLCanvasElement canvas, int x, int y, int width, int height);
-
-    /**
-     * Draw image.
-     *
-     * @param canvas the canvas
-     * @param sx the sx
-     * @param sy the sy
-     * @param sw the sw
-     * @param sh the sh
-     * @param dx the dx
-     * @param dy the dy
-     * @param dw the dw
-     * @param dh the dh
-     */
-    void drawImage(HTMLCanvasElement canvas, int sx, int sy, int sw, int sh,
-            int dx, int dy, int dw, int dh);
-
-    /**
-     * Draw image.
-     *
-     * @param video the video
-     * @param x the x
-     * @param y the y
-     */
-    void drawImage(HTMLVideoElement video, int x, int y);
-
-    /**
-     * Draw image.
-     *
-     * @param video the video
-     * @param x the x
-     * @param y the y
-     * @param width the width
-     * @param height the height
-     */
-    void drawImage(HTMLVideoElement video, int x, int y, int width, int height);
-
-    /**
-     * Draw image.
-     *
-     * @param video the video
-     * @param sx the sx
-     * @param sy the sy
-     * @param sw the sw
-     * @param sh the sh
-     * @param dx the dx
-     * @param dy the dy
-     * @param dw the dw
-     * @param dh the dh
-     */
-    void drawImage(HTMLVideoElement video, int sx, int sy, int sw, int sh,
-            int dx, int dy, int dw, int dh);
+    void drawImage(Object image, Integer sx, Integer sy, Integer sw, Integer sh,
+    		Integer dx, Integer dy, Integer dw, Integer dh);
     
     /**
      * Fill.

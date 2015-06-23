@@ -50,6 +50,9 @@ public interface HTMLCanvasElement extends HTMLElement {
 	/** The image clip. */
 	int IMAGE_CLIP = 9;
 	
+	/** The clear rect. */
+	int CLEAR_RECT = 10;
+	
 	
     /**
      * Gets the width.
