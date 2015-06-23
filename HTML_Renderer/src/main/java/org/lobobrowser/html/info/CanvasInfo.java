@@ -14,8 +14,11 @@
  */
 package org.lobobrowser.html.info;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.LinearGradientPaint;
+import java.awt.geom.GeneralPath;
 
 import org.lobobrowser.html.w3c.HTMLImageElement;
 
@@ -84,23 +87,11 @@ public class CanvasInfo {
 	/** The dh. */
 	private int dh;
 
-	/** The linear x. */
-	private Double linearX;
-
-	/** The linear y. */
-	private Double linearY;
-
-	/** The linear x1. */
-	private Double linearX1;
-
-	/** The linear y1. */
-	private Double linearY1;
-
 	/** The rotate. */
 	private Double rotate;
 
 	/** The global alpha. */
-	private Double globalAlpha;
+	private AlphaComposite globalAlpha;
 
 	/** The text. */
 	private String text;
@@ -122,6 +113,12 @@ public class CanvasInfo {
 
 	/** The html image element. */
 	private HTMLImageElement image;
+
+	/** The Genearl path. */
+	private GeneralPath path;
+	
+	
+	private LinearGradientPaint linearGradient;
 
 	/**
 	 * Gets the x.
@@ -504,82 +501,6 @@ public class CanvasInfo {
 	}
 
 	/**
-	 * Gets the linear x.
-	 *
-	 * @return the linearX
-	 */
-	public Double getLinearX() {
-		return linearX;
-	}
-
-	/**
-	 * Sets the linear x.
-	 *
-	 * @param linearX
-	 *            the linearX to set
-	 */
-	public void setLinearX(Double linearX) {
-		this.linearX = linearX;
-	}
-
-	/**
-	 * Gets the linear y.
-	 *
-	 * @return the linearY
-	 */
-	public Double getLinearY() {
-		return linearY;
-	}
-
-	/**
-	 * Sets the linear y.
-	 *
-	 * @param linearY
-	 *            the linearY to set
-	 */
-	public void setLinearY(Double linearY) {
-		this.linearY = linearY;
-	}
-
-	/**
-	 * Gets the linear x1.
-	 *
-	 * @return the linearX1
-	 */
-	public Double getLinearX1() {
-		return linearX1;
-	}
-
-	/**
-	 * Sets the linear x1.
-	 *
-	 * @param linearX1
-	 *            the linearX1 to set
-	 */
-	public void setLinearX1(Double linearX1) {
-		this.linearX1 = linearX1;
-	}
-
-	/**
-	 * Gets the linear y1.
-	 *
-	 * @return the linearY1
-	 */
-	public Double getLinearY1() {
-		return linearY1;
-	}
-
-	/**
-	 * Sets the linear y1.
-	 *
-	 * @param linearY1
-	 *            the linearY1 to set
-	 */
-	public void setLinearY1(Double linearY1) {
-		this.linearY1 = linearY1;
-	}
-
-	/**
 	 * Gets the rotate.
 	 *
 	 * @return the rotate
@@ -603,7 +524,7 @@ public class CanvasInfo {
 	 *
 	 * @return the globalAlpha
 	 */
-	public Double getGlobalAlpha() {
+	public AlphaComposite getGlobalAlpha() {
 		return globalAlpha;
 	}
 
@@ -613,7 +534,7 @@ public class CanvasInfo {
 	 * @param globalAlpha
 	 *            the globalAlpha to set
 	 */
-	public void setGlobalAlpha(Double globalAlpha) {
+	public void setGlobalAlpha(AlphaComposite globalAlpha) {
 		this.globalAlpha = globalAlpha;
 	}
 
@@ -748,6 +669,35 @@ public class CanvasInfo {
 	 */
 	public void setImage(HTMLImageElement image) {
 		this.image = image;
+	}
+
+	/**
+	 * @return the path
+	 */
+	public GeneralPath getPath() {
+		return path;
+	}
+
+	/**
+	 * @param path
+	 *            the path to set
+	 */
+	public void setPath(GeneralPath path) {
+		this.path = path;
+	}
+
+	/**
+	 * @return the linearGradient
+	 */
+	public LinearGradientPaint getLinearGradient() {
+		return linearGradient;
+	}
+
+	/**
+	 * @param linearGradient the linearGradient to set
+	 */
+	public void setLinearGradient(LinearGradientPaint linearGradient) {
+		this.linearGradient = linearGradient;
 	}
 
 }
