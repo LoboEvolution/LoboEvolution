@@ -352,8 +352,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      * @param r1 the r1
      * @return the canvas gradient
      */
-    CanvasGradient createRadialGradient(int x0, int y0, int r0, int x1, int y1,
-            int r1);
+    CanvasGradient createRadialGradient(Object x0, Object y0, Object r0, Object x1, Object y1, Object r1);
 
     /**
      * Draw image.

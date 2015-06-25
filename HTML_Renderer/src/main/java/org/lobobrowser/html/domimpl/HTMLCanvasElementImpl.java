@@ -42,8 +42,7 @@ import org.lobobrowser.util.gui.FontFactory;
  * The Class HTMLCanvasElementImpl.
  */
 public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
-		HTMLCanvasElement, CanvasRenderingContext2D, CanvasGradient,
-		CanvasPattern {
+		HTMLCanvasElement, CanvasRenderingContext2D, CanvasPattern {
 
 	/** The Constant FONT_FACTORY. */
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
@@ -106,25 +105,10 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	private GeneralPath path;
 
 	/** The linear gradient. */
-	private LinearGradientPaint linearGradient;
-
-	/** The fractions. */
-	private ArrayList<Float> fractions;
-
-	/** The colors. */
-	private ArrayList<Color> colors;
-
-	/** The linear x. */
-	private Double linearX;
-
-	/** The linear x1. */
-	private Double linearX1;
-
-	/** The linear y. */
-	private Double linearY;
-
-	/** The linear y1. */
-	private Double linearY1;
+	private LinearGradientPaint fillLinearGradient;
+	
+	/** The linear gradient. */
+	private LinearGradientPaint strokeLinearGradient;
 
 	/**
 	 * Instantiates a new HTML canvas element impl.
@@ -209,12 +193,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public void addColorStop(String offset, String color) {
-		fractions.add(new Float(offset));
-		colors.add(ColorFactory.getInstance().getColor(color));
-	}
-
-	@Override
 	public Color getFillStyle() {
 		return fillStyle;
 	}
@@ -222,7 +200,12 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	@Override
 	public void setFillStyle(Object style) {
 		if (style instanceof CanvasGradient) {
-			linearGradient = linearGradient();
+
+			CanvasGradientImpl cgi = (CanvasGradientImpl) style;
+			
+			fillLinearGradient = linearGradient(cgi.getFractions(),
+					cgi.getColors(), cgi.getLinearX(), cgi.getLinearX1(),
+					cgi.getLinearY(), cgi.getLinearY1());
 		} else {
 			fillStyle = ColorFactory.getInstance().getColor(style.toString());
 		}
@@ -385,7 +368,10 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	@Override
 	public void setStrokeStyle(Object style) {
 		if (style instanceof CanvasGradient) {
-			linearGradient = linearGradient();
+			CanvasGradientImpl cgi = (CanvasGradientImpl) style;
+			strokeLinearGradient = linearGradient(cgi.getFractions(),
+					cgi.getColors(), cgi.getLinearX(), cgi.getLinearX1(),
+					cgi.getLinearY(), cgi.getLinearY1());
 		} else {
 			strokeStyle = ColorFactory.getInstance().getColor(style.toString());
 		}
@@ -473,14 +459,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	@Override
 	public CanvasGradient createLinearGradient(Object x0, Object y0, Object x1,
 			Object y1) {
-
-		fractions = new ArrayList<Float>();
-		colors = new ArrayList<Color>();
-		linearX = new Double(x0.toString());
-		linearX1 = new Double(y0.toString());
-		linearY = new Double(x1.toString());
-		linearY1 = new Double(y1.toString());
-		return this;
+		return new CanvasGradientImpl(x0, y0, x1, y1);
 	}
 
 	@Override
@@ -498,8 +477,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public CanvasGradient createRadialGradient(int x0, int y0, int r0, int x1,
-			int y1, int r1) {
+	public CanvasGradient createRadialGradient(Object x0, Object y0, Object r0, Object x1, Object y1, Object r1) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -587,7 +565,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		fillrect.setRotate(rotate);
 		fillrect.setScaleX(scaleX);
 		fillrect.setScaleY(scaleY);
-		fillrect.setLinearGradient(linearGradient);
+		fillrect.setLinearGradient(fillLinearGradient);
 		fillrect.setMethod(FILL_RECT);
 		listCanvasInfo.add(fillrect);
 	}
@@ -613,6 +591,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		fillText.setScaleX(scaleX);
 		fillText.setScaleY(scaleY);
 		fillText.setMaxWidth(maxWidth);
+		fillText.setLinearGradient(fillLinearGradient);
 		listCanvasInfo.add(fillText);
 
 	}
@@ -750,6 +729,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		strokeRect.setRotate(rotate);
 		strokeRect.setScaleX(scaleX);
 		strokeRect.setScaleY(scaleY);
+		strokeRect.setLinearGradient(strokeLinearGradient);
 		strokeRect.setMethod(STROKE_RECT);
 		listCanvasInfo.add(strokeRect);
 	}
@@ -774,6 +754,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		strokeText.setScaleX(scaleX);
 		strokeText.setScaleY(scaleY);
 		strokeText.setMaxWidth(maxWidth);
+		strokeText.setLinearGradient(strokeLinearGradient);
 		listCanvasInfo.add(strokeText);
 
 	}
@@ -846,7 +827,9 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	 *
 	 * @return the linear gradient paint
 	 */
-	private LinearGradientPaint linearGradient() {
+	private LinearGradientPaint linearGradient(ArrayList<Float> fractions,
+			ArrayList<Color> colors, Double linearX, Double linearX1,
+			Double linearY, Double linearY1) {
 
 		float[] floatArray = new float[fractions.size()];
 		int i = 0;
@@ -863,7 +846,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		}
 
 		Arrays.sort(floatArray);
-
+		
 		return new LinearGradientPaint(linearX.floatValue(),
 				linearX1.floatValue(), linearY.floatValue(),
 				linearY1.floatValue(), floatArray, colorArray);
