@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import org.lobobrowser.html.w3c.CanvasGradient;
 import org.lobobrowser.util.gui.ColorFactory;
 
-public class CanvasGradientImpl implements CanvasGradient {
+public class DOMCanvasGradientImpl implements CanvasGradient {
 
 	/** The fractions. */
 	private ArrayList<Float> fractions;
@@ -29,7 +29,7 @@ public class CanvasGradientImpl implements CanvasGradient {
 	/** The linear y1. */
 	private Double linearY1;
 
-	public CanvasGradientImpl(Object x0, Object y0, Object x1, Object y1) {
+	public DOMCanvasGradientImpl(Object x0, Object y0, Object x1, Object y1) {
 		fractions = new ArrayList<Float>();
 		colors = new ArrayList<Color>();
 		setLinearX(new Double(x0.toString()));

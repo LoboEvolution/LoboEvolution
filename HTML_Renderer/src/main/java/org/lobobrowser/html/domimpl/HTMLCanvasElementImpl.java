@@ -201,7 +201,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	public void setFillStyle(Object style) {
 		if (style instanceof CanvasGradient) {
 
-			CanvasGradientImpl cgi = (CanvasGradientImpl) style;
+			DOMCanvasGradientImpl cgi = (DOMCanvasGradientImpl) style;
 			
 			fillLinearGradient = linearGradient(cgi.getFractions(),
 					cgi.getColors(), cgi.getLinearX(), cgi.getLinearX1(),
@@ -368,7 +368,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	@Override
 	public void setStrokeStyle(Object style) {
 		if (style instanceof CanvasGradient) {
-			CanvasGradientImpl cgi = (CanvasGradientImpl) style;
+			DOMCanvasGradientImpl cgi = (DOMCanvasGradientImpl) style;
 			strokeLinearGradient = linearGradient(cgi.getFractions(),
 					cgi.getColors(), cgi.getLinearX(), cgi.getLinearX1(),
 					cgi.getLinearY(), cgi.getLinearY1());
@@ -459,7 +459,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	@Override
 	public CanvasGradient createLinearGradient(Object x0, Object y0, Object x1,
 			Object y1) {
-		return new CanvasGradientImpl(x0, y0, x1, y1);
+		return new DOMCanvasGradientImpl(x0, y0, x1, y1);
 	}
 
 	@Override
