@@ -555,7 +555,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      * @param dx the dx
      * @param dy the dy
      */
-    void setTransform(int m11, int m12, int m21, int m22, int dx, int dy);
+    void setTransform(Double m11, Double m12, Double m21, Double m22, Double dx, Double dy);
 
     /**
      * Stroke.
@@ -612,7 +612,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
      * @param dx the dx
      * @param dy the dy
      */
-    void transform(int m11, int m12, int m21, int m22, int dx, int dy);
+    void transform(Double m11, Double m12, Double m21, Double m22, Double dx, Double dy);
 
     /**
      * Translate.

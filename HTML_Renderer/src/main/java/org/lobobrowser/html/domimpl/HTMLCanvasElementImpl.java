@@ -19,6 +19,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.LinearGradientPaint;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,7 +110,10 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	
 	/** The linear gradient. */
 	private LinearGradientPaint strokeLinearGradient;
-
+	
+	/** The Affine Transform. */
+	private AffineTransform affineTransform;
+	
 	/**
 	 * Instantiates a new HTML canvas element impl.
 	 *
@@ -129,6 +133,9 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		miterLimit = 1;
 		intLineCap = BasicStroke.CAP_BUTT;
 		intlineJoin = BasicStroke.JOIN_BEVEL;
+		fillStyle = Color.BLACK;
+		strokeStyle = Color.BLACK;
+		affineTransform = new AffineTransform(1,0,0,1,0,0);
 		font = FONT_FACTORY.getFont(Font.SANS_SERIF, null, null, null,
 				HtmlValues.DEFAULT_FONT_SIZE, null, null);
 	}
@@ -384,9 +391,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public void setTextAlign(String arg) {
+	public void setTextAlign(String textAlign) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -566,6 +572,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		fillrect.setScaleX(scaleX);
 		fillrect.setScaleY(scaleY);
 		fillrect.setLinearGradient(fillLinearGradient);
+		fillrect.setAffineTransform(affineTransform);
 		fillrect.setMethod(FILL_RECT);
 		listCanvasInfo.add(fillrect);
 	}
@@ -685,9 +692,13 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public void setTransform(int m11, int m12, int m21, int m22, int dx, int dy) {
-		// TODO Auto-generated method stub
-
+	public void setTransform(Double m11, Double m12, Double m21, Double m22, Double dx, Double dy) {
+		transform(m11, m12, m21, m22, dx, dy);
+	}
+	
+	@Override
+	public void transform(Double m11, Double m12, Double m21, Double m22, Double dx, Double dy) {
+		affineTransform = new AffineTransform(m11, m12, m21, m22, dx, dy);
 	}
 
 	@Override
@@ -730,6 +741,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		strokeRect.setScaleX(scaleX);
 		strokeRect.setScaleY(scaleY);
 		strokeRect.setLinearGradient(strokeLinearGradient);
+		strokeRect.setAffineTransform(affineTransform);
 		strokeRect.setMethod(STROKE_RECT);
 		listCanvasInfo.add(strokeRect);
 	}
@@ -756,12 +768,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		strokeText.setMaxWidth(maxWidth);
 		strokeText.setLinearGradient(strokeLinearGradient);
 		listCanvasInfo.add(strokeText);
-
-	}
-
-	@Override
-	public void transform(int m11, int m12, int m21, int m22, int dx, int dy) {
-		// TODO Auto-generated method stub
 
 	}
 

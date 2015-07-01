@@ -18,6 +18,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.LinearGradientPaint;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 
 import org.lobobrowser.html.w3c.HTMLImageElement;
@@ -119,6 +120,9 @@ public class CanvasInfo {
 	
 	/** The linear gradient. */
 	private LinearGradientPaint linearGradient;
+	
+	/** The Affine Transform. */
+	private AffineTransform affineTransform;
 
 	/**
 	 * Gets the x.
@@ -707,4 +711,17 @@ public class CanvasInfo {
 		this.linearGradient = linearGradient;
 	}
 
+	/**
+	 * @return the affineTransform
+	 */
+	public AffineTransform getAffineTransform() {
+		return affineTransform;
+	}
+
+	/**
+	 * @param affineTransform the affineTransform to set
+	 */
+	public void setAffineTransform(AffineTransform affineTransform) {
+		this.affineTransform = affineTransform;
+	}
 }

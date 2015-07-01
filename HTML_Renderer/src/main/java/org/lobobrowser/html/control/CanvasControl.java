@@ -147,6 +147,7 @@ public class CanvasControl extends BaseControl {
 		g.rotate(ci.getRotate());
 		g.scale(ci.getScaleX(), ci.getScaleY());
 		g.translate(ci.getTranslateX(), ci.getTranslateY());
+		g.transform(ci.getAffineTransform());
 		g.fillRect(ci.getX(), ci.getY(), ci.getWidth(), ci.getHeight());
 	}
 
@@ -221,6 +222,7 @@ public class CanvasControl extends BaseControl {
 		g.setStroke(new BasicStroke(ci.getLineWidth()));
 		g.scale(ci.getScaleX(), ci.getScaleY());
 		g.translate(ci.getTranslateX(), ci.getTranslateY());
+		g.transform(ci.getAffineTransform());
 		g.drawRect(ci.getX(), ci.getY(), ci.getWidth(), ci.getHeight());
 	}
 
