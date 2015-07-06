@@ -1988,21 +1988,24 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
  * (non-Javadoc)
  * @see org.lobobrowser.html.w3c.HTMLDocument#getLastModified()
  */
-    @Override
-    public String getLastModified() {
+	@Override
+	public String getLastModified() {
 
-        String result = "";
-        try {
-            SSLCertificate.setCertificate();
-            URL docURL = new URL(documentURI);
-            URLConnection connection = docURL.openConnection();
-            result = connection.getHeaderField("Last-Modified");
-        } catch (Exception e) {
-            logger.severe(e.getMessage());
-        }
+		String result = "";
+		try {
+			SSLCertificate.setCertificate();
+			URL docURL = new URL(documentURI);
+			System.out.println(documentURI);
+			URLConnection connection = docURL.openConnection();
+			result = connection.getHeaderField("Last-Modified");
+		} catch (NullPointerException npe) {
+			logger.severe("Header not found");
+		} catch (Exception e) {
+			logger.severe("Connection error: " + e);
+		}
 
-        return result;
-    }
+		return result;
+	}
 
     /*
  * (non-Javadoc)
@@ -2041,8 +2044,21 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
  */
     @Override
     public String getReadyState() {
-        // TODO Auto-generated method stub
-        return null;
+    	 HtmlRendererContext rcontext = this.getHtmlRendererContext();
+    	 UserAgentContext uac = rcontext.getUserAgentContext();
+    	 HttpRequest httpRequest = uac.createHttpRequest();
+    	if(httpRequest.getReadyState() == HttpRequest.STATE_UNINITIALIZED)
+    		return "uninitialized";
+    	else if(httpRequest.getReadyState() == HttpRequest.STATE_LOADING)
+    		return "loading";
+    	else if(httpRequest.getReadyState() == HttpRequest.STATE_LOADED)
+    		return "loaded";
+    	else if(httpRequest.getReadyState() == HttpRequest.STATE_INTERACTIVE)
+    		return "interactive";
+    	else if(httpRequest.getReadyState() == HttpRequest.STATE_COMPLETE)
+    		return "complete";
+    	else
+    		return "";
     }
 
     /*
