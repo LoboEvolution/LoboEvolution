@@ -1369,7 +1369,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
                                             + ecmaError.lineNumber() + ": "
                                             + ecmaError.getMessage(), ecmaError);
                             f = null;
-                        } catch (Throwable err) {
+                        } catch (Exception err) {
                             logger.log(Level.WARNING,
                                     "Unable to evaluate Javascript code", err);
                             f = null;

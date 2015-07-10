@@ -549,7 +549,7 @@ public final class IRFactory extends Parser
             return pn;
 
         } finally {
-            --nestingOfFunction;
+           --nestingOfFunction;
             savedVars.restore();
         }
     }
@@ -620,7 +620,7 @@ public final class IRFactory extends Parser
                 }
             }
         } finally {
-            --nestingOfFunction;
+           --nestingOfFunction;
             savedVars.restore();
         }
        
@@ -2095,7 +2095,7 @@ public final class IRFactory extends Parser
             if (right.type == Token.NUMBER) {
                 double rd = right.getDouble();
                 if (left.type == Token.NUMBER) {
-                    // both constants -- just divide, trust Java to handle x/0
+                    // both constants--just divide, trust Java to handle x/0
                     left.setDouble(left.getDouble() / rd);
                     return left;
                } else if (rd == 1.0) {

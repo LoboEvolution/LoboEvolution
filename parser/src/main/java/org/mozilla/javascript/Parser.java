@@ -392,7 +392,7 @@ public class Parser
     // Returns Token.EOL if the current token follows a newline, else returns
     // the current token.  Used in situations where we don't consider certain
     // token types valid if they are preceded by a newline.  One example is the
-    // postfix ++ or -- operator, which has to be on the same line as its
+    // postfix ++ or--operator, which has to be on the same line as its
     // operand.
     private int peekTokenOrEOL()
         throws IOException
@@ -681,7 +681,7 @@ public class Parser
         } catch (ParserException e) {
             // Ignore it
         } finally {
-            --nestingOfFunction;
+           --nestingOfFunction;
             inUseStrictDirective = savedStrictMode;
         }
 

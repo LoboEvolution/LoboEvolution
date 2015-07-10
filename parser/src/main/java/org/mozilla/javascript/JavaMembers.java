@@ -187,7 +187,7 @@ class JavaMembers
                 StringBuilder sb = new StringBuilder(length);
                 sb.append(name);
                 while (arrayDimension != 0) {
-                    --arrayDimension;
+                   --arrayDimension;
                     sb.append(suffix);
                 }
                 return sb.toString();

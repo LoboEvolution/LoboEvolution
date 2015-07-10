@@ -317,6 +317,12 @@ public class CSSUtilities {
 		} else {
 			responseText = request.getResponseText();
 		}
+		
+		if(responseText == null){
+			responseText = "";
+			logger.severe("No css at uri: " + scriptURI);
+		}
+		
 		return cssText(responseText);
 	}
 

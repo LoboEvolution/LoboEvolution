@@ -696,7 +696,7 @@ public class Context
                 return null;
             }
 
-            // There will be many manifests in the world -- enumerate all of them until we find the right one.
+            // There will be many manifests in the world--enumerate all of them until we find the right one.
             while (urls.hasMoreElements()) {
                 URL metaUrl = urls.nextElement();
                 InputStream is = null;

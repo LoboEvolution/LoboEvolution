@@ -433,7 +433,7 @@ CSS2PropertiesContext {
             String id = this.getId();
             String elementName = this.getTagName();
             String[] classNameArray = Strings.split(classNames);
-            for (int i = classNameArray.length; --i >= 0;) {
+            for (int i = classNameArray.length;--i >= 0;) {
                 String className = classNameArray[i];
                 Collection<CSSStyleDeclaration> sds = this
                         .findStyleDeclarations(elementName, id, className,

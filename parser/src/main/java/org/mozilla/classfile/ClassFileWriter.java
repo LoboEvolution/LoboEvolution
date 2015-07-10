@@ -1131,7 +1131,7 @@ public class ClassFileWriter {
         itsCodeBuffer[N++] = (byte)ByteCode.TABLESWITCH;
         while (padSize != 0) {
             itsCodeBuffer[N++] = 0;
-            --padSize;
+           --padSize;
         }
         N += 4; // skip default offset
         N = putInt32(low, itsCodeBuffer, N);
@@ -2868,7 +2868,7 @@ public class ClassFileWriter {
                         break stringLoop;
                     case 'J' :
                     case 'D' :
-                        --stackDiff;
+                       --stackDiff;
                         // fall thru
                     case 'B' :
                     case 'S' :
@@ -2876,7 +2876,7 @@ public class ClassFileWriter {
                     case 'I' :
                     case 'Z' :
                     case 'F' :
-                        --stackDiff;
+                       --stackDiff;
                         ++count;
                         ++index;
                         continue;
@@ -2899,7 +2899,7 @@ public class ClassFileWriter {
                             case 'I' :
                             case 'Z' :
                             case 'F' :
-                                --stackDiff;
+                               --stackDiff;
                                 ++count;
                                 ++index;
                                 continue;
@@ -2908,7 +2908,7 @@ public class ClassFileWriter {
                         }
                           // fall thru
                     case 'L' : {
-                        --stackDiff;
+                       --stackDiff;
                         ++count;
                         ++index;
                         int semicolon = pString.indexOf(';',  index);
@@ -4522,7 +4522,7 @@ final class ConstantPool
         for (int i = start; i != end; i++) {
             int c = s.charAt(i);
             if (0 != c && c <= 0x7F) {
-                --limit;
+               --limit;
             } else if (c < 0x7FF) {
                 limit -= 2;
             } else {

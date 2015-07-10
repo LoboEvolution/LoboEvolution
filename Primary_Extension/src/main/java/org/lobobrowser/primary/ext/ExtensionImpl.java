@@ -143,7 +143,7 @@ public class ExtensionImpl implements NavigatorExtension {
                     Level.WARNING,
                     "showError(): An error occurred trying to process document "
                             + (response == null ? "[null]" : response
-                                    .getResponseURL()), exception);
+                                    .getResponseURL()), exception.getCause());
         }
         ComponentContent errorComponent = getErrorComponent(frame, response,
                 exception);

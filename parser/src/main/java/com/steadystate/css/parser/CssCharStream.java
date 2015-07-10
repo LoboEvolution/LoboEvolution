@@ -120,7 +120,7 @@ public final class CssCharStream implements CharStream
       return;
     }
     catch(java.io.IOException e) {
-      --bufpos;
+     --bufpos;
       backup(0);
       if (tokenBegin == -1)
         tokenBegin = bufpos;
@@ -183,7 +183,7 @@ public final class CssCharStream implements CharStream
   {
     if (inBuf > 0)
     {
-      --inBuf;
+     --inBuf;
 
       if (++bufpos == bufsize)
         bufpos = 0;

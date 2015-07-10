@@ -61,7 +61,7 @@ public class UnaryExpression extends AstNode {
                            AstNode operand, boolean postFix) {
         assertNotNull(operand);
         int beg = postFix ? operand.getPosition() : operatorPosition;
-        // JavaScript only has ++ and -- postfix operators, so length is 2
+        // JavaScript only has ++ and--postfix operators, so length is 2
         int end = postFix
                   ? operatorPosition + 2
                   : operand.getPosition() + operand.getLength();

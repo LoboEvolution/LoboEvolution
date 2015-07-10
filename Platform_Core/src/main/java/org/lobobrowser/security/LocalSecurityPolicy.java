@@ -235,6 +235,16 @@ public class LocalSecurityPolicy extends Policy {
      */
     @Override
     public PermissionCollection getPermissions(CodeSource codesource) {
+    
+    	if(codesource==null){
+    		 Permissions permissions = new Permissions();
+    		for (Permission p : BASE_PRIVILEGE) {
+                permissions.add(p);
+            }
+    		return permissions;
+    	}
+    	
+    	
         URL location = codesource.getLocation();
         if (location == null) {
             throw new AccessControlException("No location for coodesource="

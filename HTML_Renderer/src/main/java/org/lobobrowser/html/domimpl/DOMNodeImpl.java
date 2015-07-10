@@ -1046,7 +1046,7 @@ Node, ModelNode {
         ArrayList<Node> nl = this.nodeList;
         if (nl != null) {
             int len = nl.size();
-            for (int i = len; --i >= 0;) {
+            for (int i = len;--i >= 0;) {
                 Node node = nl.get(i);
                 if (filter.accept(node)) {
                     nl.remove(i);
@@ -1107,7 +1107,7 @@ Node, ModelNode {
                 }
                 int firstIdx = idx;
                 List<Object> toDelete = new LinkedList<Object>();
-                for (int adjIdx = idx; --adjIdx >= 0;) {
+                for (int adjIdx = idx;--adjIdx >= 0;) {
                     Object child = this.nodeList.get(adjIdx);
                     if (child instanceof Text) {
                         firstIdx = adjIdx;
@@ -1158,7 +1158,7 @@ Node, ModelNode {
                 StringBuffer textBuffer = new StringBuffer();
                 int firstIdx = idx;
                 List<Object> toDelete = new LinkedList<Object>();
-                for (int adjIdx = idx; --adjIdx >= 0;) {
+                for (int adjIdx = idx;--adjIdx >= 0;) {
                     Object child = this.nodeList.get(adjIdx);
                     if (child instanceof Text) {
                         firstIdx = adjIdx;
@@ -1355,7 +1355,7 @@ Node, ModelNode {
         this.parentNode = parent;
     }
 
-    // ----- ModelNode implementation
+    //-----ModelNode implementation
 
     /*
      * (non-Javadoc)

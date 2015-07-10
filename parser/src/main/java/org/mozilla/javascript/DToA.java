@@ -1,4 +1,4 @@
-/* -*- Mode: java; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+/*  - * -  Mode: java; tab - width: 8; indent - tabs - mode: nil; c - basic - offset: 4  - * - 
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -31,12 +31,12 @@ class DToA {
 
 
     private static char BASEDIGIT(int digit) {
-        return (char)((digit >= 10) ? 'a' - 10 + digit : '0' + digit);
+        return (char)((digit >= 10) ? 'a'  -  10 + digit : '0' + digit);
     }
 
     static final int
-        DTOSTR_STANDARD = 0,              /* Either fixed or exponential format; round-trip */
-        DTOSTR_STANDARD_EXPONENTIAL = 1,  /* Always exponential format; round-trip */
+        DTOSTR_STANDARD = 0,              /* Either fixed or exponential format; round - trip */
+        DTOSTR_STANDARD_EXPONENTIAL = 1,  /* Always exponential format; round - trip */
         DTOSTR_FIXED = 2,                 /* Round to <precision> digits after the decimal point; exponential if number is large */
         DTOSTR_EXPONENTIAL = 3,           /* Always exponential format; <precision> significant digits */
         DTOSTR_PRECISION = 4;             /* Either fixed or exponential format; <precision> significant digits */
@@ -175,7 +175,7 @@ class DToA {
             k = lo0bits(y);
             y >>>= k;
             if (k != 0) {
-                stuffBits(dbl_bits, 4, y | z << (32 - k));
+                stuffBits(dbl_bits, 4, y | z << (32  -  k));
                 z >>= k;
             }
             else
@@ -193,12 +193,12 @@ class DToA {
             i = 1;
         }
         if (de != 0) {
-            e[0] = de - Bias - (P-1) + k;
-            bits[0] = P - k;
+            e[0] = de  -  Bias  -  (P - 1) + k;
+            bits[0] = P  -  k;
         }
         else {
-            e[0] = de - Bias - (P-1) + 1 + k;
-            bits[0] = 32*i - hi0bits(z);
+            e[0] = de  -  Bias  -  (P - 1) + 1 + k;
+            bits[0] = 32*i  -  hi0bits(z);
         }
         return new BigInteger(dbl_bits);
     }
@@ -212,9 +212,9 @@ class DToA {
         if (Double.isNaN(d)) {
             return "NaN";
         } else if (Double.isInfinite(d)) {
-            return (d > 0.0) ? "Infinity" : "-Infinity";
+            return (d > 0.0) ? "Infinity" : " - Infinity";
         } else if (d == 0) {
-            // ALERT: should it distinguish -0.0 from +0.0 ?
+            // ALERT: should it distinguish  - 0.0 from +0.0 ?
             return "0";
         }
 
@@ -223,17 +223,17 @@ class DToA {
             negative = false;
         } else {
             negative = true;
-            d = -d;
+            d =  - d;
         }
 
-        /* Get the integer part of d including '-' sign. */
+        /* Get the integer part of d including ' - ' sign. */
         String intDigits;
 
         double dfloor = Math.floor(d);
         long lfloor = (long)dfloor;
         if (lfloor == dfloor) {
             // int part fits long
-            intDigits = Long.toString((negative) ? -lfloor : lfloor, base);
+            intDigits = Long.toString((negative) ?  - lfloor : lfloor, base);
         } else {
             // BigInteger should be used
             long floorBits = Double.doubleToLongBits(dfloor);
@@ -245,14 +245,14 @@ class DToA {
                 mantissa = (floorBits & Frac_maskL) | Exp_msk1L;
             }
             if (negative) {
-                mantissa = -mantissa;
+                mantissa =  - mantissa;
             }
-            exp -= 1075;
+            exp  -= 1075;
             BigInteger x = BigInteger.valueOf(mantissa);
             if (exp > 0) {
                 x = x.shiftLeft(exp);
             } else if (exp < 0) {
-                x = x.shiftRight(-exp);
+                x = x.shiftRight( - exp);
             }
             intDigits = x.toString(base);
         }
@@ -270,7 +270,7 @@ class DToA {
 
             buffer = new StringBuilder();
             buffer.append(intDigits).append('.');
-            df = d - dfloor;
+            df = d  -  dfloor;
 
             long dBits = Double.doubleToLongBits(d);
             int word0 = (int)(dBits >> 32);
@@ -283,12 +283,12 @@ class DToA {
 //            JS_ASSERT(e < 0);
             /* At this point df = b * 2^e.  e must be less than zero because 0 < df < 1. */
 
-            int s2 = -(word0 >>> Exp_shift1 & Exp_mask >> Exp_shift1);
+            int s2 =  - (word0 >>> Exp_shift1 & Exp_mask >> Exp_shift1);
             if (s2 == 0)
-                s2 = -1;
+                s2 =  - 1;
             s2 += Bias + P;
-            /* 1/2^s2 = (nextDouble(d) - d)/2 */
-//            JS_ASSERT(-s2 < e);
+            /* 1/2^s2 = (nextDouble(d)  -  d)/2 */
+//            JS_ASSERT( - s2 < e);
             BigInteger mlo = BigInteger.valueOf(1);
             BigInteger mhi = mlo;
             if ((word1 == 0) && ((word0 & Bndry_mask) == 0)
@@ -305,8 +305,8 @@ class DToA {
             /* At this point we have the following:
              *   s = 2^s2;
              *   1 > df = b/2^s2 > 0;
-             *   (d - prevDouble(d))/2 = mlo/2^s2;
-             *   (nextDouble(d) - d)/2 = mhi/2^s2. */
+             *   (d  -  prevDouble(d))/2 = mlo/2^s2;
+             *   (nextDouble(d)  -  d)/2 = mhi/2^s2. */
             BigInteger bigBase = BigInteger.valueOf(base);
 
             boolean done = false;
@@ -327,7 +327,7 @@ class DToA {
                 /* j is b/2^s2 compared with mlo/2^s2. */
                 BigInteger delta = s.subtract(mhi);
                 int j1 = (delta.signum() <= 0) ? 1 : b.compareTo(delta);
-                /* j1 is b/2^s2 compared with 1 - mhi/2^s2. */
+                /* j1 is b/2^s2 compared with 1  -  mhi/2^s2. */
                 if (j1 == 0 && ((word1 & 1) == 0)) {
                     if (j > 0)
                         digit++;
@@ -359,8 +359,8 @@ class DToA {
 
     /* dtoa for IEEE arithmetic (dmg): convert double to ASCII string.
      *
-     * Inspired by "How to Print Floating-Point Numbers Accurately" by
-     * Guy L. Steele, Jr. and Jon L. White [Proc. ACM SIGPLAN '90, pp. 92-101].
+     * Inspired by "How to Print Floating - Point Numbers Accurately" by
+     * Guy L. Steele, Jr. and Jon L. White [Proc. ACM SIGPLAN '90, pp. 92 - 101].
      *
      * Modifications:
      *  1. Rather than iterating, we use a simple numeric overestimate
@@ -373,21 +373,21 @@ class DToA {
      *  3. Under the assumption that input will be rounded nearest,
      *     mode 0 renders 1e23 as 1e23 rather than 9.999999999999999e22.
      *     That is, we allow equality in stopping tests when the
-     *     round-nearest rule will give the same floating-point value
+     *     round - nearest rule will give the same floating - point value
      *     as would satisfaction of the stopping test with strict
      *     inequality.
      *  4. We remove common factors of powers of 2 from relevant
      *     quantities.
-     *  5. When converting floating-point integers less than 1e16,
-     *     we use floating-point arithmetic rather than resorting
-     *     to multiple-precision integers.
+     *  5. When converting floating - point integers less than 1e16,
+     *     we use floating - point arithmetic rather than resorting
+     *     to multiple - precision integers.
      *  6. When asked to produce fewer than 15 digits, we first try
-     *     to get by with floating-point arithmetic; we resort to
-     *     multiple-precision integer arithmetic only if we cannot
-     *     guarantee that the floating-point calculation has given
+     *     to get by with floating - point arithmetic; we resort to
+     *     multiple - precision integer arithmetic only if we cannot
+     *     guarantee that the floating - point calculation has given
      *     the correctly rounded result.  For k requested digits and
      *     "uniformly" distributed input, the probability is
-     *     something like 10^(k-15) that we must resort to the Long
+     *     something like 10^(k - 15) that we must resort to the Long
      *     calculation.
      */
 
@@ -421,7 +421,7 @@ class DToA {
     {
         int i = buf.length();
         while (i != 0) {
-            --i;
+           --i;
             char c = buf.charAt(i);
             if (c != '9') {
                 buf.setCharAt(i, (char)(c + 1));
@@ -447,7 +447,7 @@ class DToA {
         /*  Arguments ndigits, decpt, sign are similar to those
             of ecvt and fcvt; trailing zeros are suppressed from
             the returned string.  If not null, *rve is set to point
-            to the end of the return value.  If d is +-Infinity or NaN,
+            to the end of the return value.  If d is + - Infinity or NaN,
             then *decpt is set to 9999.
 
             mode:
@@ -463,16 +463,16 @@ class DToA {
             gives a return value similar to that from fcvt,
             except that trailing zeros are suppressed, and
             ndigits can be negative.
-            4-9 should give the same return values as 2-3, i.e.,
+            4 - 9 should give the same return values as 2 - 3, i.e.,
             4 <= mode <= 9 ==> same return as mode
             2 + (mode & 1).  These modes are mainly for
             debugging; often they run slower but sometimes
-            faster than modes 2-3.
-            4,5,8,9 ==> left-to-right digit generation.
-            6-9 ==> don't try fast floating-point estimate
+            faster than modes 2 - 3.
+            4,5,8,9 ==> left - to - right digit generation.
+            6 - 9 ==> don't try fast floating - point estimate
             (if applicable).
 
-            Values of mode other than 0-9 are treated as mode 0.
+            Values of mode other than 0 - 9 are treated as mode 0.
 
             Sufficient space is allocated to the return value
             to hold the suppressed trailing zeros.
@@ -513,44 +513,44 @@ class DToA {
         b = d2b(d, be, bbits);
         if ((i = (word0(d) >>> Exp_shift1 & (Exp_mask>>Exp_shift1))) != 0) {
             d2 = setWord0(d, (word0(d) & Frac_mask1) | Exp_11);
-            /* log(x)   ~=~ log(1.5) + (x-1.5)/1.5
+            /* log(x)   ~=~ log(1.5) + (x - 1.5)/1.5
              * log10(x)  =  log(x) / log(10)
-             *      ~=~ log(1.5)/log(10) + (x-1.5)/(1.5*log(10))
-             * log10(d) = (i-Bias)*log(2)/log(10) + log10(d2)
+             *      ~=~ log(1.5)/log(10) + (x - 1.5)/(1.5*log(10))
+             * log10(d) = (i - Bias)*log(2)/log(10) + log10(d2)
              *
              * This suggests computing an approximation k to log10(d) by
              *
-             * k = (i - Bias)*0.301029995663981
-             *  + ( (d2-1.5)*0.289529654602168 + 0.176091259055681 );
+             * k = (i  -  Bias)*0.301029995663981
+             *  + ( (d2 - 1.5)*0.289529654602168 + 0.176091259055681 );
              *
              * We want k to be too large rather than too small.
-             * The error in the first-order Taylor series approximation
+             * The error in the first - order Taylor series approximation
              * is in our favor, so we just round up the constant enough
              * to compensate for any error in the multiplication of
-             * (i - Bias) by 0.301029995663981; since |i - Bias| <= 1077,
-             * and 1077 * 0.30103 * 2^-52 ~=~ 7.2e-14,
-             * adding 1e-13 to the constant term more than suffices.
+             * (i  -  Bias) by 0.301029995663981; since |i  -  Bias| <= 1077,
+             * and 1077 * 0.30103 * 2^ - 52 ~=~ 7.2e - 14,
+             * adding 1e - 13 to the constant term more than suffices.
              * Hence we adjust the constant term to 0.1760912590558.
              * (We could get a more accurate k by invoking log10,
              *  but this is probably not worthwhile.)
              */
-            i -= Bias;
+            i  -= Bias;
             denorm = false;
         }
         else {
             /* d is denormalized */
-            i = bbits[0] + be[0] + (Bias + (P-1) - 1);
+            i = bbits[0] + be[0] + (Bias + (P - 1)  -  1);
             x = (i > 32)
-                    ? ((long) word0(d)) << (64 - i) | word1(d) >>> (i - 32)
-                    : ((long) word1(d)) << (32 - i);
+                    ? ((long) word0(d)) << (64  -  i) | word1(d) >>> (i  -  32)
+                    : ((long) word1(d)) << (32  -  i);
 //            d2 = x;
-//            word0(d2) -= 31*Exp_msk1; /* adjust exponent */
-            d2 = setWord0(x, word0(x) - 31*Exp_msk1);
-            i -= (Bias + (P-1) - 1) + 1;
+//            word0(d2)  -= 31*Exp_msk1; /* adjust exponent */
+            d2 = setWord0(x, word0(x)  -  31*Exp_msk1);
+            i  -= (Bias + (P - 1)  -  1) + 1;
             denorm = true;
         }
         /* At this point d = f*2^i, where 1 <= f < 2.  d2 is an approximation of f. */
-        ds = (d2-1.5)*0.289529654602168 + 0.1760912590558 + i*0.301029995663981;
+        ds = (d2 - 1.5)*0.289529654602168 + 0.1760912590558 + i*0.301029995663981;
         k = (int)ds;
         if (ds < 0.0 && ds != k)
             k--;    /* want k = floor(ds) */
@@ -562,14 +562,14 @@ class DToA {
         }
         /* At this point floor(log10(d)) <= k <= floor(log10(d))+1.
            If k_check is zero, we're guaranteed that k = floor(log10(d)). */
-        j = bbits[0] - i - 1;
+        j = bbits[0]  -  i  -  1;
         /* At this point d = b/2^j, where b is an odd integer. */
         if (j >= 0) {
             b2 = 0;
             s2 = j;
         }
         else {
-            b2 = -j;
+            b2 =  - j;
             s2 = 0;
         }
         if (k >= 0) {
@@ -578,8 +578,8 @@ class DToA {
             s2 += k;
         }
         else {
-            b2 -= k;
-            b5 = -k;
+            b2  -= k;
+            b5 =  - k;
             s5 = 0;
         }
         /* At this point d/10^k = (b * 2^b2 * 5^b5) / (2^s2 * 5^s5), where b is an odd integer,
@@ -588,7 +588,7 @@ class DToA {
             mode = 0;
         try_quick = true;
         if (mode > 5) {
-            mode -= 4;
+            mode  -= 4;
             try_quick = false;
         }
         leftright = true;
@@ -596,7 +596,7 @@ class DToA {
         switch(mode) {
             case 0:
             case 1:
-                ilim = ilim1 = -1;
+                ilim = ilim1 =  - 1;
                 i = 18;
                 ndigits = 0;
                 break;
@@ -614,7 +614,7 @@ class DToA {
             case 5:
                 i = ndigits + k + 1;
                 ilim = i;
-                ilim1 = i - 1;
+                ilim1 = i  -  1;
                 if (i <= 0)
                     i = 1;
         }
@@ -625,7 +625,7 @@ class DToA {
         boolean fast_failed = false;
         if (ilim >= 0 && ilim <= Quick_max && try_quick) {
 
-            /* Try to get by with floating-point arithmetic. */
+            /* Try to get by with floating - point arithmetic. */
 
             i = 0;
             d2 = d;
@@ -638,8 +638,8 @@ class DToA {
                 j = k >> 4;
                 if ((j & Bletch) != 0) {
                     /* prevent overflows */
-                    j &= Bletch - 1;
-                    d /= bigtens[n_bigtens-1];
+                    j &= Bletch  -  1;
+                    d /= bigtens[n_bigtens - 1];
                     ieps++;
                 }
                 for(; (j != 0); j >>= 1, i++)
@@ -649,7 +649,7 @@ class DToA {
                     }
                 d /= ds;
             }
-            else if ((j1 = -k) != 0) {
+            else if ((j1 =  - k) != 0) {
                 d *= tens[j1 & 0xf];
                 for(j = j1 >> 4; (j != 0); j >>= 1, i++)
                     if ((j & 1) != 0) {
@@ -670,18 +670,18 @@ class DToA {
             }
             /* eps bounds the cumulative error. */
 //            eps = ieps*d + 7.0;
-//            word0(eps) -= (P-1)*Exp_msk1;
+//            word0(eps)  -= (P - 1)*Exp_msk1;
             eps = ieps*d + 7.0;
-            eps = setWord0(eps, word0(eps) - (P-1)*Exp_msk1);
+            eps = setWord0(eps, word0(eps)  -  (P - 1)*Exp_msk1);
             if (ilim == 0) {
                 S = mhi = null;
-                d -= 5.0;
+                d  -= 5.0;
                 if (d > eps) {
                     buf.append('1');
                     k++;
                     return k + 1;
                 }
-                if (d < -eps) {
+                if (d <  - eps) {
                     buf.setLength(0);
                     buf.append('0');        /* copy "0" to buffer */
                     return 1;
@@ -694,20 +694,20 @@ class DToA {
                     /* Use Steele & White method of only
                      * generating digits needed.
                      */
-                    eps = 0.5/tens[ilim-1] - eps;
+                    eps = 0.5/tens[ilim - 1]  -  eps;
                     for(i = 0;;) {
                         L = (long)d;
-                        d -= L;
+                        d  -= L;
                         buf.append((char)('0' + L));
                         if (d < eps) {
                             return k + 1;
                         }
-                        if (1.0 - d < eps) {
+                        if (1.0  -  d < eps) {
 //                            goto bump_up;
                                 char lastCh;
                                 while (true) {
-                                    lastCh = buf.charAt(buf.length() - 1);
-                                    buf.setLength(buf.length() - 1);
+                                    lastCh = buf.charAt(buf.length()  -  1);
+                                    buf.setLength(buf.length()  -  1);
                                     if (lastCh != '9') break;
                                     if (buf.length() == 0) {
                                         k++;
@@ -726,18 +726,18 @@ class DToA {
                 }
                 else {
                     /* Generate ilim digits, then fix them up. */
-                    eps *= tens[ilim-1];
+                    eps *= tens[ilim - 1];
                     for(i = 1;; i++, d *= 10.0) {
                         L = (long)d;
-                        d -= L;
+                        d  -= L;
                         buf.append((char)('0' + L));
                         if (i == ilim) {
                             if (d > 0.5 + eps) {
 //                                goto bump_up;
                                 char lastCh;
                                 while (true) {
-                                    lastCh = buf.charAt(buf.length() - 1);
-                                    buf.setLength(buf.length() - 1);
+                                    lastCh = buf.charAt(buf.length()  -  1);
+                                    buf.setLength(buf.length()  -  1);
                                     if (lastCh != '9') break;
                                     if (buf.length() == 0) {
                                         k++;
@@ -749,7 +749,7 @@ class DToA {
                                 return k + 1;
                             }
                             else
-                                if (d < 0.5 - eps) {
+                                if (d < 0.5  -  eps) {
                                     stripTrailingZeroes(buf);
 //                                    while(*--s == '0') ;
 //                                    s++;
@@ -786,7 +786,7 @@ class DToA {
             }
             for(i = 1;; i++) {
                 L = (long) (d / ds);
-                d -= L*ds;
+                d  -= L*ds;
                 buf.append((char)('0' + L));
                 if (i == ilim) {
                     d += d;
@@ -801,8 +801,8 @@ class DToA {
 //                        ++*s++;
                         char lastCh;
                         while (true) {
-                            lastCh = buf.charAt(buf.length() - 1);
-                            buf.setLength(buf.length() - 1);
+                            lastCh = buf.charAt(buf.length()  -  1);
+                            buf.setLength(buf.length()  -  1);
                             if (lastCh != '9') break;
                             if (buf.length() == 0) {
                                 k++;
@@ -826,38 +826,38 @@ class DToA {
         mhi = mlo = null;
         if (leftright) {
             if (mode < 2) {
-                i = (denorm) ? be[0] + (Bias + (P-1) - 1 + 1) : 1 + P - bbits[0];
+                i = (denorm) ? be[0] + (Bias + (P - 1)  -  1 + 1) : 1 + P  -  bbits[0];
                 /* i is 1 plus the number of trailing zero bits in d's significand. Thus,
                    (2^m2 * 5^m5) / (2^(s2+i) * 5^s5) = (1/2 lsb of d)/10^k. */
             }
             else {
-                j = ilim - 1;
+                j = ilim  -  1;
                 if (m5 >= j)
-                    m5 -= j;
+                    m5  -= j;
                 else {
-                    s5 += j -= m5;
+                    s5 += j  -= m5;
                     b5 += j;
                     m5 = 0;
                 }
                 if ((i = ilim) < 0) {
-                    m2 -= i;
+                    m2  -= i;
                     i = 0;
                 }
-                /* (2^m2 * 5^m5) / (2^(s2+i) * 5^s5) = (1/2 * 10^(1-ilim))/10^k. */
+                /* (2^m2 * 5^m5) / (2^(s2+i) * 5^s5) = (1/2 * 10^(1 - ilim))/10^k. */
             }
             b2 += i;
             s2 += i;
             mhi = BigInteger.valueOf(1);
-            /* (mhi * 2^m2 * 5^m5) / (2^s2 * 5^s5) = one-half of last printed (when mode >= 2) or
+            /* (mhi * 2^m2 * 5^m5) / (2^s2 * 5^s5) = one - half of last printed (when mode >= 2) or
                input (when mode < 2) significant digit, divided by 10^k. */
         }
         /* We still have d/10^k = (b * 2^b2 * 5^b5) / (2^s2 * 5^s5).  Reduce common factors in
            b2, m2, and s2 without changing the equalities. */
         if (m2 > 0 && s2 > 0) {
             i = (m2 < s2) ? m2 : s2;
-            b2 -= i;
-            m2 -= i;
-            s2 -= i;
+            b2  -= i;
+            m2  -= i;
+            s2  -= i;
         }
 
         /* Fold b5 into b and m5 into mhi. */
@@ -868,20 +868,20 @@ class DToA {
                     b1 = mhi.multiply(b);
                     b = b1;
                 }
-                if ((j = b5 - m5) != 0)
+                if ((j = b5  -  m5) != 0)
                     b = pow5mult(b, j);
             }
             else
                 b = pow5mult(b, b5);
         }
         /* Now we have d/10^k = (b * 2^b2) / (2^s2 * 5^s5) and
-           (mhi * 2^m2) / (2^s2 * 5^s5) = one-half of last printed or input significant digit, divided by 10^k. */
+           (mhi * 2^m2) / (2^s2 * 5^s5) = one - half of last printed or input significant digit, divided by 10^k. */
 
         S = BigInteger.valueOf(1);
         if (s5 > 0)
             S = pow5mult(S, s5);
         /* Now we have d/10^k = (b * 2^b2) / (S * 2^s2) and
-           (mhi * 2^m2) / (S * 2^s2) = one-half of last printed or input significant digit, divided by 10^k. */
+           (mhi * 2^m2) / (S * 2^s2) = one - half of last printed or input significant digit, divided by 10^k. */
 
         /* Check for special case that d is a normalized power of 2. */
         spec_case = false;
@@ -911,11 +911,11 @@ class DToA {
             if (idx < S_bytes.length)
                 S_hiWord |= (S_bytes[idx] & 0xFF);
         }
-        if ((i = (((s5 != 0) ? 32 - hi0bits(S_hiWord) : 1) + s2) & 0x1f) != 0)
-            i = 32 - i;
+        if ((i = (((s5 != 0) ? 32  -  hi0bits(S_hiWord) : 1) + s2) & 0x1f) != 0)
+            i = 32  -  i;
         /* i is the number of leading zero bits in the most significant word of S*2^s2. */
         if (i > 4) {
-            i -= 4;
+            i  -= 4;
             b2 += i;
             m2 += i;
             s2 += i;
@@ -945,7 +945,7 @@ class DToA {
         /* At this point 1 <= d/10^k = b/S < 10. */
 
         if (ilim <= 0 && mode > 2) {
-            /* We're doing fixed-mode output and d is less than the minimum nonzero output in this mode.
+            /* We're doing fixed - mode output and d is less than the minimum nonzero output in this mode.
                Output either zero or the minimum nonzero output depending on which is closer to d. */
             if ((ilim < 0 )
                     || ((i = b.compareTo(S = S.multiply(BigInteger.valueOf(5)))) < 0)
@@ -953,7 +953,7 @@ class DToA {
             /* Always emit at least one digit.  If the number appears to be zero
                using the current mode, then emit one '0' digit and set decpt to 1. */
             /*no_digits:
-                k = -1 - ndigits;
+                k =  - 1  -  ndigits;
                 goto ret; */
                 buf.setLength(0);
                 buf.append('0');        /* copy "0" to buffer */
@@ -969,7 +969,7 @@ class DToA {
             if (m2 > 0)
                 mhi = mhi.shiftLeft(m2);
 
-            /* Compute mlo -- check for special case
+            /* Compute mlo-- check for special case
              * that d is a normalized power of 2.
              */
 
@@ -992,7 +992,7 @@ class DToA {
                 /* j is b/S compared with mlo/S. */
                 delta = S.subtract(mhi);
                 j1 = (delta.signum() <= 0) ? 1 : b.compareTo(delta);
-                /* j1 is b/S compared with 1 - mhi/S. */
+                /* j1 is b/S compared with 1  -  mhi/S. */
                 if ((j1 == 0) && (mode == 0) && ((word1(d) & 1) == 0)) {
                     if (dig == '9') {
                         buf.append('9');
@@ -1120,7 +1120,7 @@ class DToA {
         buf.setLength(bl + 1);
     }
 
-    /* Mapping of JSDToStrMode -> JS_dtoa mode */
+    /* Mapping of JSDToStrMode  - > JS_dtoa mode */
     private static final int dtoaModes[] = {
         0,   /* DTOSTR_STANDARD */
         0,   /* DTOSTR_STANDARD_EXPONENTIAL, */
@@ -1138,13 +1138,13 @@ class DToA {
 //        JS_ASSERT(bufferSize >= (size_t)(mode <= DTOSTR_STANDARD_EXPONENTIAL ? DTOSTR_STANDARD_BUFFER_SIZE :
 //                DTOSTR_VARIABLE_BUFFER_SIZE(precision)));
 
-        if (mode == DTOSTR_FIXED && (d >= 1e21 || d <= -1e21))
+        if (mode == DTOSTR_FIXED && (d >= 1e21 || d <=  - 1e21))
             mode = DTOSTR_STANDARD; /* Change mode here rather than below because the buffer may not be large enough to hold a large integer. */
 
         decPt = JS_dtoa(d, dtoaModes[mode], mode >= DTOSTR_FIXED, precision, sign, buffer);
         nDigits = buffer.length();
 
-        /* If Infinity, -Infinity, or NaN, return the string regardless of the mode. */
+        /* If Infinity,  - Infinity, or NaN, return the string regardless of the mode. */
         if (decPt != 9999) {
             boolean exponentialNotation = false;
             int minNDigits = 0;         /* Minimum number of significand digits required by mode and precision */
@@ -1152,7 +1152,7 @@ class DToA {
 
             switch (mode) {
                 case DTOSTR_STANDARD:
-                    if (decPt < -5 || decPt > 21)
+                    if (decPt <  - 5 || decPt > 21)
                         exponentialNotation = true;
                     else
                         minNDigits = decPt;
@@ -1176,7 +1176,7 @@ class DToA {
                 case DTOSTR_PRECISION:
 //                    JS_ASSERT(precision > 0);
                     minNDigits = precision;
-                    if (decPt < -5 || decPt > precision)
+                    if (decPt <  - 5 || decPt > precision)
                         exponentialNotation = true;
                     break;
             }
@@ -1196,10 +1196,10 @@ class DToA {
                     buffer.insert(1, '.');
                 }
                 buffer.append('e');
-                if ((decPt - 1) >= 0)
+                if ((decPt  -  1) >= 0)
                     buffer.append('+');
-                buffer.append(decPt - 1);
-//                JS_snprintf(numEnd, bufferSize - (numEnd - buffer), "e%+d", decPt-1);
+                buffer.append(decPt  -  1);
+//                JS_snprintf(numEnd, bufferSize  -  (numEnd  -  buffer), "e%+d", decPt - 1);
             } else if (decPt != nDigits) {
                 /* Some kind of a fraction in fixed notation */
 //                JS_ASSERT(decPt <= nDigits);
@@ -1208,14 +1208,14 @@ class DToA {
                     buffer.insert(decPt, '.');
                 } else {
                     /* 0 . 00...00dd...dd */
-                    for (int i = 0; i < 1 - decPt; i++)
+                    for (int i = 0; i < 1  -  decPt; i++)
                         buffer.insert(0, '0');
                     buffer.insert(1, '.');
                 }
             }
         }
 
-        /* If negative and neither -0.0 nor NaN, output a leading '-'. */
+        /* If negative and neither  - 0.0 nor NaN, output a leading ' - '. */
         if (sign[0] &&
                 !(word0(d) == Sign_bit && word1(d) == 0) &&
                 !((word0(d) & Exp_mask) == Exp_mask &&

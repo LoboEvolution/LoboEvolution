@@ -125,11 +125,11 @@ public class Executor {
                     return true;
                 }
                 return ((Boolean) result).booleanValue();
-            } catch (Throwable thrown) {
+            } catch (Exception ex) {
                 logger.log(
                         Level.WARNING,
                         "executeFunction(): There was an error in Javascript code.",
-                        thrown);
+                        ex);
                 return true;
             }
         } finally {
@@ -162,9 +162,7 @@ public class Executor {
                 }
                 return ((Boolean) result).booleanValue();
             } catch (Throwable err) {
-                logger.log(Level.WARNING,
-                        "executeFunction(): Unable to execute Javascript function "
-                                + f.getClassName() + ".", err);
+            	err.getCause();
                 return true;
             }
         } finally {

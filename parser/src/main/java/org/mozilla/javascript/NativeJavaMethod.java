@@ -228,7 +228,7 @@ public class NativeJavaMethod extends BaseFunction
         if (debug) {
             Class<?> actualType = (retval == null) ? null
                                                 : retval.getClass();
-            System.err.println(" ----- Returned " + retval +
+            System.err.println("-----Returned " + retval +
                                " actual = " + actualType +
                                " expect = " + staticType);
         }
@@ -238,7 +238,7 @@ public class NativeJavaMethod extends BaseFunction
         if (debug) {
             Class<?> actualType = (wrapped == null) ? null
                                                  : wrapped.getClass();
-            System.err.println(" ----- Wrapped as " + wrapped +
+            System.err.println("-----Wrapped as " + wrapped +
                                " class = " + actualType);
         }
 
@@ -540,7 +540,7 @@ public class NativeJavaMethod extends BaseFunction
     {
         if (debug) {
             StringBuilder sb = new StringBuilder();
-            sb.append(" ----- ");
+            sb.append("-----");
             sb.append(msg);
             sb.append(member.getDeclaringClass().getName());
             sb.append('.');

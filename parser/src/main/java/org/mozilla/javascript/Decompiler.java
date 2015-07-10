@@ -385,7 +385,7 @@ public class Decompiler
                 break;
 
             case Token.RC: {
-                --braceNesting;
+               --braceNesting;
                 /* don't print the closing RC if it closes the
                  * toplevel function and we're called from
                  * decompileFunctionBody.

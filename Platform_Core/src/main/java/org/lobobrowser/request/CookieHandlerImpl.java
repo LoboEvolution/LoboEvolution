@@ -71,7 +71,7 @@ public class CookieHandlerImpl extends CookieHandler {
             }
         }
         if (logger.isLoggable(Level.FINE)) {
-            logger.info("get(): ---- Cookie headers for uri=[" + uri + "].");
+            logger.info("get():----Cookie headers for uri=[" + uri + "].");
             this.printHeaders(resultHeaders);
         }
         return resultHeaders;
@@ -85,7 +85,7 @@ public class CookieHandlerImpl extends CookieHandler {
     public void put(URI uri, Map<String, List<String>> responseHeaders)
             throws IOException {
         if (logger.isLoggable(Level.FINE)) {
-            logger.info("put(): ---- Response headers for uri=[" + uri + "].");
+            logger.info("put():----Response headers for uri=[" + uri + "].");
             this.printHeaders(responseHeaders);
         }
         CookieStore store = this.cookieStore;

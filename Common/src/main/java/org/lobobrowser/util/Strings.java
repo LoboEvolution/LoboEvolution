@@ -378,7 +378,7 @@ public class Strings {
     //}
     //}
     // int endIdx;
-    // for(endIdx = len; --endIdx > startIdx; ) {
+    // for(endIdx = len;--endIdx > startIdx; ) {
     // char ch = text.charAt(endIdx);
     // if(!isTrimmable(ch)) {
     // break;

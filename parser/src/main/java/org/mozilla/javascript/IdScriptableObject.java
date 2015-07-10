@@ -467,7 +467,7 @@ public abstract class IdScriptableObject extends ScriptableObject
             Object[] ids = null;
             int count = 0;
 
-            for (int id = maxInstanceId; id != 0; --id) {
+            for (int id = maxInstanceId; id != 0;--id) {
                 String name = getInstanceIdName(id);
                 int info = findInstanceIdInfo(name);
                 if (info != 0) {

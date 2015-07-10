@@ -240,7 +240,7 @@ public class RegExpImpl implements RegExpProxy {
                 if (i == ip[0]) {
                     /*
                      * "Bump-along" to avoid sticking at an empty
-                     * match, but don't bump past end of string --
+                     * match, but don't bump past end of string--
                      * our caller must do that by adding
                      * sep->length to our return value.
                      */
@@ -699,7 +699,7 @@ public class RegExpImpl implements RegExpProxy {
          * substring.
          *
          * For 1.2 compatibility, at the end of the string, we return the length as
-         * the result, and set the separator length to 1 -- this allows the caller
+         * the result, and set the separator length to 1--this allows the caller
          * to include an additional null string at the end of the substring list.
          */
         if (separator.length() == 0) {

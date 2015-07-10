@@ -675,7 +675,7 @@ implements CSS2Properties {
         this.setPropertyValueLC(FLOAT, value);
     }
 
-    // ---------- Implemented properties
+    //----------Implemented properties
 
     /*
      * (non-Javadoc)

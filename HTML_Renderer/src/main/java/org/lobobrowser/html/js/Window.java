@@ -1517,7 +1517,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
                 Executor.executeFunction(window.getWindowScope(), function,
                         doc.getDocumentURL(), window.getUserAgentContext());
             } catch (Throwable err) {
-                logger.log(Level.WARNING, "actionPerformed()", err);
+                logger.log(Level.WARNING, "actionPerformed()", err.getCause());
             }
         }
     }
@@ -1584,7 +1584,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
                 }
                 window.eval(this.expression);
             } catch (Throwable err) {
-                logger.log(Level.WARNING, "actionPerformed()", err);
+                logger.log(Level.WARNING, "actionPerformed()", err.getCause());
             }
         }
     }

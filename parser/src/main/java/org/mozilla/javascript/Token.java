@@ -160,7 +160,7 @@ public class Token
         COLON          = 103,
         OR             = 104, // logical or (||)
         AND            = 105, // logical and (&&)
-        INC            = 106, // increment/decrement (++ --)
+        INC            = 106, // increment/decrement (++--)
         DEC            = 107,
         DOT            = 108, // member operator (.)
         FUNCTION       = 109, // function keyword
@@ -208,7 +208,7 @@ public class Token
         DOTDOT         = 143,  // member operator (..)
         COLONCOLON     = 144,  // namespace::name
         XML            = 145,  // XML type
-        DOTQUERY       = 146,  // .() -- e.g., x.emps.emp.(name == "terry")
+        DOTQUERY       = 146,  // .()--e.g., x.emps.emp.(name == "terry")
         XMLATTR        = 147,  // @
         XMLEND         = 148,
 

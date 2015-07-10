@@ -1396,7 +1396,7 @@ class TokenStream
     final int getOffset()
     {
         int n = sourceCursor - lineStart;
-        if (lineEndChar >= 0) { --n; }
+        if (lineEndChar >= 0) {--n; }
         return n;
     }
 
@@ -1468,7 +1468,7 @@ class TokenStream
         }
         // read back until position
         int end = 0, lines = 0;
-        for (; delta > 0; --delta, --cur) {
+        for (; delta > 0;--delta,--cur) {
             assert cur > 0;
             int c = charAt(cur - 1);
             if (ScriptRuntime.isJSLineTerminator(c)) {
@@ -1483,7 +1483,7 @@ class TokenStream
         }
         // read back until line start
         int start = 0, offset = 0;
-        for (; cur > 0; --cur, ++offset) {
+        for (; cur > 0;--cur, ++offset) {
             int c = charAt(cur - 1);
             if (ScriptRuntime.isJSLineTerminator(c)) {
                 start = cur;

@@ -206,121 +206,122 @@ HTMLScriptElement {
     /**
      * Process script.
      */
-    protected final void processScript() {
-        UserAgentContext bcontext = this.getUserAgentContext();
-        if (bcontext == null) {
-            throw new IllegalStateException("No user agent context.");
-        }
-        if (bcontext.isScriptingEnabled()) {
-            String text;
-            final String scriptURI;
-            int baseLineNumber;
-            String src = this.getSrc();
-            Document doc = this.document;
-            if (!(doc instanceof HTMLDocumentImpl)) {
-                throw new IllegalStateException("no valid document");
-            }
-            boolean liflag = loggableInfo;
-            if (src == null) {
-                text = this.getText();
-                scriptURI = doc.getBaseURI();
-                baseLineNumber = 1; // TODO: Line number of inner text??
-            } else {
-                this.informExternalScriptLoading();
-                URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
-                scriptURI = scriptURL == null ? src : scriptURL
-                        .toExternalForm();
-                long time1 = liflag ? System.currentTimeMillis() : 0;
-                try {
-                    final HttpRequest request = bcontext.createHttpRequest();
-                    // Perform a synchronous request
-                    SecurityManager sm = System.getSecurityManager();
-                    if (sm == null) {
-                        try {
-                            request.open("GET", scriptURI, false);
-                            request.send(null);
-                        } catch (IOException thrown) {
-                            logger.log(Level.WARNING, "processScript()", thrown);
-                        }
-                    } else {
-                        AccessController
-                        .doPrivileged(new PrivilegedAction<Object>() {
-                            @Override
-                            public Object run() {
-                                // Code might have restrictions on
-                                // accessing
-                                // items from elsewhere.
-                                try {
-                                    request.open("GET", scriptURI,
-                                            false);
-                                    request.send(null);
-                                } catch (IOException thrown) {
-                                    logger.log(Level.WARNING,
-                                            "processScript()", thrown);
-                                }
-                                return null;
-                            }
-                        });
-                    }
-                    int status = request.getStatus();
-                    if ((status != 200) && (status != 0)) {
-                    	text = httpURLConnection(scriptURI);
-                    }else{
-                    	text = request.getResponseText();
-                    }
-                    
-                } finally {
-                    if (liflag) {
-                        long time2 = System.currentTimeMillis();
-                        logger.info("processScript(): Loaded external Javascript from URI=["
-                                + scriptURI
-                                + "] in "
-                                + (time2 - time1)
-                                + " ms.");
-                    }
-                }
-                baseLineNumber = 1;
-            }
-            Context ctx = Executor.createContext(this.getDocumentURL(),
-                    bcontext);
-            try {
-                Scriptable scope = (Scriptable) doc
-                        .getUserData(Executor.SCOPE_KEY);
-                if (scope == null) {
-                    throw new IllegalStateException(
-                            "Scriptable (scope) instance was expected to be keyed as UserData to document using "
-                                    + Executor.SCOPE_KEY);
-                }
-                try {
-                    long time1 = liflag ? System.currentTimeMillis() : 0;
-                    if (text == null) {
-                        throw new IllegalStateException(
-                                "Script source is null: " + this + ".");
-                    }
-                    
-                    ctx.evaluateString(scope, text, scriptURI, baseLineNumber,
-                            null);
-                    if (liflag) {
-                        long time2 = System.currentTimeMillis();
-                        logger.info("addNotify(): Evaluated (or attempted to evaluate) Javascript in "
-                                + (time2 - time1) + " ms.");
-                    }
-                } catch (EcmaError ecmaError) {
-                    logger.log(Level.WARNING,
-                            "Javascript error at " + ecmaError.sourceName()
-                            + ":" + ecmaError.columnNumber() + ": "
-                            + ecmaError.getMessage(), ecmaError);
-                } catch (MissingResourceException err) {
-                    logger.log(Level.WARNING, "Missing Resource");
-                } catch (Throwable err) {
-                    logger.log(Level.WARNING,
-                            "Unable to evaluate Javascript code", err);
-                }
-            } finally {
-                Context.exit();
-            }
-        }
-    }
+	protected final void processScript() {
+		UserAgentContext bcontext = this.getUserAgentContext();
+		if (bcontext != null && bcontext.isScriptingEnabled()) {
+			String text;
+			final String scriptURI;
+			int baseLineNumber;
+			String src = this.getSrc();
+			Document doc = this.document;
+			if (doc instanceof HTMLDocumentImpl) {
+
+				boolean liflag = loggableInfo;
+				if (src == null) {
+					text = this.getText();
+					scriptURI = doc.getBaseURI();
+					baseLineNumber = 1; // TODO: Line number of inner text??
+				} else {
+					this.informExternalScriptLoading();
+					URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
+					scriptURI = scriptURL == null ? src : scriptURL
+							.toExternalForm();
+					long time1 = liflag ? System.currentTimeMillis() : 0;
+					try {
+						final HttpRequest request = bcontext
+								.createHttpRequest();
+						// Perform a synchronous request
+						SecurityManager sm = System.getSecurityManager();
+						if (sm == null) {
+							try {
+								request.open("GET", scriptURI, false);
+								request.send(null);
+							} catch (IOException thrown) {
+								logger.log(Level.WARNING, "processScript()",
+										thrown);
+							}
+						} else {
+							AccessController
+									.doPrivileged(new PrivilegedAction<Object>() {
+										@Override
+										public Object run() {
+											// Code might have restrictions on
+											// accessing
+											// items from elsewhere.
+											try {
+												request.open("GET", scriptURI,
+														false);
+												request.send(null);
+											} catch (IOException thrown) {
+												logger.log(Level.WARNING,
+														"processScript()",
+														thrown);
+											}
+											return null;
+										}
+									});
+						}
+						int status = request.getStatus();
+						if ((status != 200) && (status != 0)) {
+							text = httpURLConnection(scriptURI);
+						} else {
+							text = request.getResponseText();
+						}
+
+					} finally {
+						if (liflag) {
+							long time2 = System.currentTimeMillis();
+							logger.info("processScript(): Loaded external Javascript from URI=["
+									+ scriptURI
+									+ "] in "
+									+ (time2 - time1)
+									+ " ms.");
+						}
+					}
+					baseLineNumber = 1;
+				}
+				Context ctx = Executor.createContext(this.getDocumentURL(),
+						bcontext);
+				try {
+					Scriptable scope = (Scriptable) doc
+							.getUserData(Executor.SCOPE_KEY);
+					if (scope != null) {
+
+						long time1 = liflag ? System.currentTimeMillis() : 0;
+						if (text != null) {
+							ctx.evaluateString(scope, text, scriptURI,
+									baseLineNumber, null);
+							if (liflag) {
+								long time2 = System.currentTimeMillis();
+								logger.info("addNotify(): Evaluated (or attempted to evaluate) Javascript in "
+										+ (time2 - time1) + " ms.");
+							}
+						} else {
+							logger.severe("No Script at uri "  + scriptURI);
+						}
+					} else {
+						logger.severe("No Scope");
+					}
+
+				} catch (EcmaError ecmaError) {
+					logger.log(Level.WARNING,
+							"Javascript error at " + ecmaError.sourceName()
+									+ ":" + ecmaError.columnNumber() + ": "
+									+ ecmaError.getMessage(), ecmaError);
+				} catch (MissingResourceException err) {
+					logger.log(Level.WARNING, "Missing Resource");
+				} catch (Exception err) {
+					logger.severe("scriptURI: " + scriptURI);
+					logger.log(Level.WARNING,
+							"Unable to evaluate Javascript code", err);
+				} finally {
+					Context.exit();
+				}
+			}
+		} else {
+			logger.severe("No user agent context");
+		}
+	}
     
     /**
 	 * Http url connection.

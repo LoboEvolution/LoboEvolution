@@ -117,7 +117,7 @@ public class ID {
         // This method cannot change even if it's wrong.
         BigInteger bigInteger = BigInteger.ZERO;
         int shift = 0;
-        for (int i = bytes.length; --i >= 0;) {
+        for (int i = bytes.length;--i >= 0;) {
             BigInteger contrib = BigInteger.valueOf(bytes[i] & 0xFF);
             contrib = contrib.shiftLeft(shift);
             bigInteger = bigInteger.add(contrib);

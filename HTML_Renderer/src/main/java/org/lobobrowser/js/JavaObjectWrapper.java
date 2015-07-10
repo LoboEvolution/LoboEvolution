@@ -22,7 +22,6 @@ import org.mozilla.javascript.EvaluatorException;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
-import org.mozilla.javascript.WrappedException;
 
 /**
  * The Class JavaObjectWrapper.
@@ -109,36 +108,35 @@ public class JavaObjectWrapper extends ScriptableObject {
      * @see org.mozilla.javascript.ScriptableObject#get(int,
      * org.mozilla.javascript.Scriptable)
      */
-    @Override
-    public Object get(int index, Scriptable start) {
-        PropertyInfo pinfo = this.classWrapper.getIntegerIndexer();
-        if (pinfo == null) {
-            return super.get(index, start);
-        } else {
-            try {
-                Method getter = pinfo.getGetter();
-                if (getter == null) {
-                    throw new EvaluatorException("Indexer is write-only");
-                }
-                // Cannot retain delegate with a strong reference.
-                Object javaObject = this.getJavaObject();
-                if (javaObject == null) {
-                    throw new IllegalStateException("Java object (class="
-                            + this.classWrapper + ") is null.");
-                }
-                Object raw = getter.invoke(javaObject,
-                        new Object[] {new Integer(index) });
-                if (raw == null) {
-                    // Return this instead of null.
-                    return Scriptable.NOT_FOUND;
-                }
-                return JavaScript.getInstance().getJavascriptObject(raw,
-                        this.getParentScope());
-            } catch (Exception err) {
-                throw new WrappedException(err);
-            }
-        }
-    }
+	@Override
+	public Object get(int index, Scriptable start) {
+		PropertyInfo pinfo = this.classWrapper.getIntegerIndexer();
+		if (pinfo == null) {
+			return super.get(index, start);
+		} else {
+			try {
+				Method getter = pinfo.getGetter();
+				if (getter == null) {
+					throw new EvaluatorException("Indexer is write-only");
+				}
+				// Cannot retain delegate with a strong reference.
+				Object javaObject = this.getJavaObject();
+				if (javaObject == null) {
+					throw new IllegalStateException("Java object (class="
+							+ this.classWrapper + ") is null.");
+				}
+				Object raw = getter.invoke(javaObject,
+						new Object[] { new Integer(index) });
+				if (raw != null) {
+					return JavaScript.getInstance().getJavascriptObject(raw,
+							this.getParentScope());
+				}
+			} catch (Exception err) {
+				err.getCause();
+			}
+		}
+		return Scriptable.NOT_FOUND;
+	}
 
     /*
      * (non-Javadoc)
@@ -165,7 +163,7 @@ public class JavaObjectWrapper extends ScriptableObject {
                 return JavaScript.getInstance().getJavascriptObject(val,
                         start.getParentScope());
             } catch (Exception err) {
-            	err.printStackTrace();
+            	err.getCause();
             	return new Object();
             }
         } else {
@@ -203,7 +201,7 @@ public class JavaObjectWrapper extends ScriptableObject {
                                                 start.getParentScope());
                             }
                         } catch (Exception err) {
-                            throw new WrappedException(err);
+                        	err.getCause();
                         }
                     }
                 }
@@ -234,7 +232,7 @@ public class JavaObjectWrapper extends ScriptableObject {
                 setter.invoke(this.getJavaObject(), new Object[] {
                     new Integer(index), actualValue });
             } catch (Exception err) {
-                throw new WrappedException(err);
+            	err.getCause();
             }
         }
     }
@@ -264,13 +262,9 @@ public class JavaObjectWrapper extends ScriptableObject {
                     setter.invoke(this.getJavaObject(),
                             new Object[] {actualValue });
                 } catch (IllegalArgumentException iae) {
-                    Exception newException = new IllegalArgumentException(
-                            "Property named '" + name
-                            + "' could not be set with value " + value
-                            + ".", iae);
-                    throw new WrappedException(newException);
+                	iae.getCause();
                 } catch (Exception err) {
-                    throw new WrappedException(err);
+                	err.getCause();
                 }
             } else {
                 PropertyInfo ni = this.classWrapper.getNameIndexer();
@@ -284,7 +278,7 @@ public class JavaObjectWrapper extends ScriptableObject {
                             setter.invoke(this.getJavaObject(), new Object[] {
                                 name, actualValue });
                         } catch (Exception err) {
-                            throw new WrappedException(err);
+                        	err.getCause();
                         }
                     } else {
                         super.put(name, start, value);

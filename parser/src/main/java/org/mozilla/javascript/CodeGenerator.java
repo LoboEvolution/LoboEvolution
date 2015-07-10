@@ -1467,7 +1467,7 @@ class CodeGenerator extends Icode {
 
     private void releaseLocal(int localSlot)
     {
-        --localTop;
+       --localTop;
         if (localSlot != localTop) Kit.codeBug();
     }
 }

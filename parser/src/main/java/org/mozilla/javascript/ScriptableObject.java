@@ -3003,7 +3003,7 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
         int tableSize = newSlots.length;
         int i = oldSlots.length;
         for (;;) {
-            --i;
+           --i;
             Slot slot = oldSlots[i];
             while (slot != null) {
                 int insertPos = getSlotIndex(tableSize, slot.indexOrHash);

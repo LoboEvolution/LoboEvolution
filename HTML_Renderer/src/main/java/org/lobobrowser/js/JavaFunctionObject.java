@@ -26,7 +26,6 @@ import org.mozilla.javascript.EvaluatorException;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
-import org.mozilla.javascript.WrappedException;
 
 /**
  * The Class JavaFunctionObject.
@@ -167,29 +166,27 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
             }
             actualArgs[i] = actualArg;
         }
-        try {
-            Object raw = method.invoke(jcw.getJavaObject(), actualArgs);
-            return manager.getJavascriptObject(raw, scope);
-        } catch (IllegalAccessException iae) {
-            throw new IllegalStateException("Unable to call " + this.className
-                    + ".", iae);
-        } catch (InvocationTargetException ite) {
-            throw new WrappedException(new InvocationTargetException(
-                    ite.getCause(), "Unable to call " + this.className + " on "
-                            + jcw.getJavaObject() + "."));
-        } catch (IllegalArgumentException iae) {
-            StringBuffer argTypes = new StringBuffer();
-            for (int i = 0; i < actualArgs.length; i++) {
-                if (i > 0) {
-                    argTypes.append(", ");
-                }
-                argTypes.append(actualArgs[i] == null ? "<null>"
-                        : actualArgs[i].getClass().getName());
-            }
-            throw new WrappedException(new IllegalArgumentException(
-                    "Unable to call " + this.className + ". Argument types: "
-                            + argTypes + ".", iae));
-        }
+		try {
+			Object raw = method.invoke(jcw.getJavaObject(), actualArgs);
+			return manager.getJavascriptObject(raw, scope);
+		} catch (IllegalAccessException iae) {
+			logger.severe("Unable to call " + this.className + ".");
+		} catch (InvocationTargetException ite) {
+			logger.severe("Unable to call " + this.className + " on "
+					+ jcw.getJavaObject() + ".");
+		} catch (IllegalArgumentException iae) {
+			StringBuffer argTypes = new StringBuffer();
+			for (int i = 0; i < actualArgs.length; i++) {
+				if (i > 0) {
+					argTypes.append(", ");
+				}
+				argTypes.append(actualArgs[i] == null ? "<null>"
+						: actualArgs[i].getClass().getName());
+			}
+			logger.severe("Unable to call " + this.className
+					+ ". Argument types: " + argTypes + ".");
+		}
+		return manager;
     }
 
     /*

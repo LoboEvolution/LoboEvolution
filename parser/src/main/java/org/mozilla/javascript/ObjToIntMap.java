@@ -61,7 +61,7 @@ public class ObjToIntMap implements Serializable
                 for (++cursor; ; ++cursor) {
                     Object key = keys[cursor];
                     if (key != null && key != DELETED) {
-                        --remaining;
+                       --remaining;
                         break;
                     }
                 }
@@ -172,7 +172,7 @@ public class ObjToIntMap implements Serializable
         int index = findIndex(key);
         if (0 <= index) {
             keys[index] = DELETED;
-            --keyCount;
+           --keyCount;
         }
     }
 
@@ -211,7 +211,7 @@ public class ObjToIntMap implements Serializable
                 if (key == UniqueTag.NULL_VALUE) { key = null; }
                 array[offset] = key;
                 ++offset;
-                --count;
+               --count;
             }
         }
     }
@@ -319,7 +319,7 @@ public class ObjToIntMap implements Serializable
                     int keyHash = oldValues[oldN + i];
                     int index = insertNewKey(key, keyHash);
                     values[index] = oldValues[i];
-                    --remaining;
+                   --remaining;
                 }
             }
         }
@@ -400,7 +400,7 @@ public class ObjToIntMap implements Serializable
         for (int i = 0; count != 0; ++i) {
             Object key = keys[i];
             if (key != null && key != DELETED) {
-                --count;
+               --count;
                 out.writeObject(key);
                 out.writeInt(values[i]);
             }
@@ -634,7 +634,7 @@ public class ObjToIntMap implements Serializable
     private static int intSqrt(int i) {
         int approx = (int)Math.sqrt(i) + 1;
         while (approx * approx > i) {
-            --approx;
+           --approx;
         }
         return approx;
     }

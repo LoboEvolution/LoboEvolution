@@ -669,7 +669,7 @@ public class StyleSheetAggregator {
             HTMLElementImpl currentElement = element;
             int size = as.size();
             boolean first = true;
-            for (int i = size; --i >= 0;) {
+            for (int i = size;--i >= 0;) {
                 SimpleSelector simpleSelector = as.get(i);
                 if (first) {
                     if (ancestor == element) {
@@ -724,7 +724,7 @@ public class StyleSheetAggregator {
             HTMLElementImpl currentElement = element;
             int size = as.size();
             boolean first = true;
-            for (int i = size; --i >= 0;) {
+            for (int i = size;--i >= 0;) {
                 SimpleSelector simpleSelector = as.get(i);
                 if (first) {
                     if (!simpleSelector.matches(pseudoNames)) {

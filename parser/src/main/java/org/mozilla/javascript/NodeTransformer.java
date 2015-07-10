@@ -221,7 +221,7 @@ public class NodeTransformer
                         // which should be found
                         throw Kit.codeBug();
                     }
-                    --i;
+                   --i;
                     Node n = (Node) loops.get(i);
                     if (n == jumpStatement) {
                         break;

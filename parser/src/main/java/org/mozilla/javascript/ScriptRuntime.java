@@ -546,7 +546,7 @@ public class ScriptRuntime {
                     switch (state) {
                       case SKIP_LEADING_ZEROS:
                           if (bit) {
-                            --exactBitsLimit;
+                           --exactBitsLimit;
                             sum = 1.0;
                             state = FIRST_EXACT_53_BITS;
                         }
@@ -555,7 +555,7 @@ public class ScriptRuntime {
                            sum *= 2.0;
                         if (bit)
                             sum += 1.0;
-                        --exactBitsLimit;
+                       --exactBitsLimit;
                         if (exactBitsLimit == 0) {
                             bit53 = bit;
                             state = AFTER_BIT_53;
@@ -2847,7 +2847,7 @@ public class ScriptRuntime {
         if ((incrDecrMask & Node.DECR_FLAG) == 0) {
             ++number;
         } else {
-            --number;
+           --number;
         }
         Number result = wrapNumber(number);
         target.put(id, protoChainStart, result);
@@ -2887,7 +2887,7 @@ public class ScriptRuntime {
         if ((incrDecrMask & Node.DECR_FLAG) == 0) {
             ++number;
         } else {
-            --number;
+           --number;
         }
         Number result = wrapNumber(number);
         setObjectElem(obj, index, result, cx, scope);
@@ -2925,7 +2925,7 @@ public class ScriptRuntime {
         if ((incrDecrMask & Node.DECR_FLAG) == 0) {
             ++number;
         } else {
-            --number;
+           --number;
         }
         Number result = wrapNumber(number);
         ref.set(cx, scope, result);
@@ -3228,9 +3228,9 @@ public class ScriptRuntime {
         return d1 <= d2;
     }
 
-    // ------------------
+    //------------------
     // Statements
-    // ------------------
+    //------------------
 
     public static ScriptableObject getGlobal(Context cx) {
         final String GLOBAL_CLASS = "org.mozilla.javascript.tools.shell.Global";
@@ -3346,7 +3346,7 @@ public class ScriptRuntime {
                 varScope = varScope.getParentScope();
             }
 
-            for (int i = varCount; i-- != 0;) {
+            for (int i = varCount; i--!= 0;) {
                 String name = funObj.getParamOrVarName(i);
                 boolean isConst = funObj.getParamOrVarConst(i);
                 // Don't overwrite existing def if already defined in object

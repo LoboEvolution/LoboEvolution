@@ -1754,7 +1754,7 @@ public class RBlockViewport extends BaseRCollection {
             int px = pointx;
             int py = pointy;
             // Must go in reverse order
-            for (index = size; --index >= 0;) {
+            for (index = size;--index >= 0;) {
                 PositionedRenderable pr = otherArray[index];
                 BoundableRenderable r = pr.renderable;
                 if (r.getZIndex() < 0) {
@@ -2104,7 +2104,7 @@ public class RBlockViewport extends BaseRCollection {
         return 0;
     }
 
-    // ----------------------------------------------------------------
+    //----------------------------------------------------------------
 
     /*
  * (non-Javadoc)

@@ -300,7 +300,7 @@ public class RLine extends BaseRCollection {
             // is the usefulness of RBlank.)
             int newOffset = offset;
             int newWidth = offset;
-            for (int i = renderables.size(); --i >= 0;) {
+            for (int i = renderables.size();--i >= 0;) {
                 Renderable renderable = renderables.get(i);
                 if ((renderable instanceof RWord)
                         || !(renderable instanceof BoundableRenderable)) {

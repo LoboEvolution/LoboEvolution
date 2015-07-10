@@ -144,7 +144,7 @@ public class UintMap implements Serializable
         int index = findIndex(key);
         if (0 <= index) {
             keys[index] = DELETED;
-            --keyCount;
+           --keyCount;
             // Allow to GC value and make sure that new key with the deleted
             // slot shall get proper default values
             if (values != null) { values[index] = null; }
@@ -279,7 +279,7 @@ public class UintMap implements Serializable
                     if (oldShift != 0) {
                         keys[ivaluesShift + index] = old[oldShift + i];
                     }
-                    --remaining;
+                   --remaining;
                 }
             }
         }
@@ -350,7 +350,7 @@ public class UintMap implements Serializable
             for (int i = 0; count != 0; ++i) {
                 int key = keys[i];
                 if (key != EMPTY && key != DELETED) {
-                    --count;
+                   --count;
                     out.writeInt(key);
                     if (hasIntValues) {
                         out.writeInt(keys[ivaluesShift + i]);

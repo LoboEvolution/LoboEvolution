@@ -175,7 +175,7 @@ public interface HtmlRendererContext {
      */
     boolean isImageLoadingEnabled();
 
-    // ------ Methods useful for Window implementation:
+    //------Methods useful for Window implementation:
 
     /**
      * Opens an alert dialog.
