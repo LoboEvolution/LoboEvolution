@@ -55,7 +55,7 @@ public class AboutAction extends ActionPool {
         String userAgent = window.getUserAgent().getNameAndVersion();
         window.getTopFrame().alert(
                 "This is " + userAgent + ", a pure Java web browser.\r\n"
-                        + "Copyright (c) 2014 The " + name + " Evolution.\r\n"
+                        + "Copyright (c) 2015 The " + name + " Evolution.\r\n"
                         + window.getUserAgent().getInfoUrl());
 
     }
