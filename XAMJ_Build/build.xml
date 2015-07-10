@@ -6,7 +6,7 @@ The Lobo Evolution
 
 	<description> Lobo Evolution</description>
 
-	<property name="lobo.version" value=" 0.98.6"/>
+	<property name="lobo.version" value=" 0.98.7"/>
 	<property name="build.dir" value="/tmp/lobo-build/"/>
 	<property name="lobo.dir" value="${build.dir}/lobo-${lobo.version}"/>
 	<property name="izpack.home" value="/tmp/IzPack/"/>

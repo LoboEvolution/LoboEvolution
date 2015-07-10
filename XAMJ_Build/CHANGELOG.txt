@@ -1,3 +1,105 @@
+Version 0.98.7
+--------------
+- Add PDF suppurt
+- Add Canvas support
+- Add Image support
+- Add SVG image support
+- Add color "navy"
+- Add right click context menu
+- Add image right button even
+- Add text cursor over words
+- Add hand cursor over href
+- Add Action "Find" in Page Source and Console
+- Add table attributes width and height
+- Add input attribute size
+- Add color to blue text selection
+- Add Cookies properties domain, expires, path, secure, version, maxage
+
+- Add javascript event:  
+	01. CompositionEvent
+	02. CustomEvent
+	03. Event
+	04. FocusEvent
+	05. KeyboardEvent
+	06. MouseEvent
+	07. MutationEvent
+	08. MutationNameEvent
+	09. ProgressEvent
+	10. TextEven
+	11. UIEvent
+	12. WheelEvent
+	13. TextEvent 
+
+- Add Document javascript methods: 
+	01. querySelector
+	02. querySelectorAll
+	03. queryCommandSupported 
+	04. queryCommandEnabled
+	05. createEvent
+	06. addEventListener
+	07. removeEventListener
+	08. readystate
+ 
+- Add DocumentFragment javascript methods: 
+	01. querySelector
+	02. querySelectorAll
+
+- Add Element javascript methods:
+	01. querySelector
+	02. querySelectorAll
+	03. style
+	04. addEventListener 
+	05. removeEventListener
+
+- Add Window javascript methods:
+	01. ondblclick
+	02. onclick
+	03. onmouseup
+	04. onmousedown
+	05. onkeypress
+	06. onkeyup
+	07. onkeydown
+	08. addEventListener
+	09. removeEventListener
+	10. getComputedStyle
+ 
+- Add Input and textarea javascript methods:
+	01. onKeyPress
+	02. onKeyUp
+	03. onKeyDown
+ 
+- Add Console javascript methods:
+	01. log
+	02. debug
+	03. info
+	04. warn
+	05. error
+	06. time
+	07. timeEnd
+
+- Fix default div border size and color
+- Fix border color style 
+- Fix body color style
+- Fix body background
+- Fix href="javascript:void(0)"
+- Fix background-image: url()
+- Fix setparameter with value null 
+- Fix window open
+- Fix size pixel definition
+- Fix size definition without character "px"
+- Fix XMLHttpRequest/HttpRequest
+- Fix Https
+- Fix Hr rendering
+- Fix Button rendering
+
+ LIBRARIES:
+ 
+- Add Batik 1.8
+- Add PDFRender
+- Update CSSParser to 0.9.16
+- Update Mozilla Rhino to 1.7.7
+- Remove javafx library.
+ 
 Version 0.98.6
 --------------
 
