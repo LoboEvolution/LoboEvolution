@@ -35,6 +35,7 @@ import org.lobobrowser.clientlet.Clientlet;
 import org.lobobrowser.clientlet.ClientletRequest;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ClientletSelector;
+import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.ua.ConnectionProcessor;
 import org.lobobrowser.ua.NavigationEvent;
 import org.lobobrowser.ua.NavigationListener;
@@ -376,7 +377,7 @@ public class Extension implements Comparable, NavigatorExtensionContext {
     public void addClientletSelector(ClientletSelector cs) {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             this.clientletSelectors.add(cs);
@@ -561,7 +562,7 @@ public class Extension implements Comparable, NavigatorExtensionContext {
     public void addConnectionProcessor(ConnectionProcessor processor) {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             this.connectionProcessors.add(processor);
@@ -577,7 +578,7 @@ public class Extension implements Comparable, NavigatorExtensionContext {
     public void addNavigationListener(NavigationListener listener) {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             this.navigationListeners.add(listener);
@@ -594,7 +595,7 @@ public class Extension implements Comparable, NavigatorExtensionContext {
     public void removeClientletSelector(ClientletSelector selector) {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             this.clientletSelectors.remove(selector);
@@ -611,7 +612,7 @@ public class Extension implements Comparable, NavigatorExtensionContext {
     public void removeConnectionProcessor(ConnectionProcessor processor) {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             this.connectionProcessors.remove(processor);
@@ -628,7 +629,7 @@ public class Extension implements Comparable, NavigatorExtensionContext {
     public void removeNavigationListener(NavigationListener listener) {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             this.navigationListeners.remove(listener);

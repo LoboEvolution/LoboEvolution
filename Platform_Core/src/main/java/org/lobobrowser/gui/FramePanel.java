@@ -188,7 +188,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
     public void addNavigationListener(NavigationListener listener) {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             this.navigationListeners.add(listener);
@@ -205,7 +205,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
     public void removeNavigationListener(NavigationListener listener) {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             this.navigationListeners.remove(listener);
@@ -222,7 +222,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
     public void addContentListener(ContentListener listener) {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             this.contentListeners.add(listener);
@@ -239,7 +239,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
     public void removeContentListener(ContentListener listener) {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             this.contentListeners.remove(listener);
@@ -255,7 +255,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
     public void addResponseListener(ResponseListener listener) {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             this.responseListeners.add(listener);
@@ -272,7 +272,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
     public void removeResponseListener(ResponseListener listener) {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             this.responseListeners.remove(listener);
@@ -523,7 +523,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
     public NavigationEntry[] getBackNavigationEntries() {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             return this.navigationEngine.getBackNavigationEntries();
@@ -539,7 +539,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
     public NavigationEntry[] getForwardNavigationEntries() {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         synchronized (this) {
             return this.navigationEngine.getForwardNavigationEntries();

@@ -36,6 +36,7 @@ import java.util.logging.Logger;
 import org.lobobrowser.clientlet.Clientlet;
 import org.lobobrowser.clientlet.ClientletRequest;
 import org.lobobrowser.clientlet.ClientletResponse;
+import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.ua.NavigationEvent;
 import org.lobobrowser.ua.NavigationVetoException;
 import org.lobobrowser.ua.NavigatorEventType;
@@ -87,7 +88,7 @@ public class ExtensionManager {
         // ExtensionManager instances are not retained.
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(org.lobobrowser.security.GenericLocalPermission.EXT_GENERIC);
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         return instance;
     }

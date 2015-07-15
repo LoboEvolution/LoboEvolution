@@ -36,6 +36,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.security.LocalSecurityPolicy;
 import org.lobobrowser.security.StoreHostPermission;
 
@@ -185,7 +186,7 @@ public class StorageManager implements Runnable {
             final boolean createIfNotExists) throws IOException {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
-            sm.checkPermission(StoreHostPermission.forHost(hostName));
+            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         if ((hostName == null) || "".equals(hostName)) {
             hostName = NO_HOST;

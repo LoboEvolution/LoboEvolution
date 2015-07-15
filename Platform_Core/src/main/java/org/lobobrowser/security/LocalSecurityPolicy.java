@@ -37,6 +37,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.PropertyPermission;
+import java.util.logging.LoggingPermission;
 
 import javax.net.ssl.SSLPermission;
 
@@ -78,24 +79,16 @@ public class LocalSecurityPolicy extends Policy {
 
         Collection<Permission> permissions = BASE_PRIVILEGE;
 
-        // //Note: This means extensions have access to private field values at
-        // the moment.
-        // //Required by JavaFX runtime at the time of this writing.
-        // permissions.add(new
-        // java.lang.reflect.ReflectPermission("suppressAccessChecks"));
-
         permissions.add(new PropertyPermission("*", "read,write"));
         permissions.add(new AWTPermission("*"));
         permissions.add(new HistoryPermission());
-        permissions.add(new SocketPermission("*",
-                "connect,resolve,listen,accept"));
+        permissions.add(new SocketPermission("*","connect,resolve,listen,accept"));
         permissions.add(new RuntimePermission("createClassLoader"));
         permissions.add(new RuntimePermission("getClassLoader"));
         permissions.add(new RuntimePermission("exitVM"));
         permissions.add(new RuntimePermission("setIO"));
         permissions.add(new RuntimePermission("setContextClassLoader"));
-        permissions.add(new RuntimePermission(
-                "enableContextClassLoaderOverride"));
+        permissions.add(new RuntimePermission("enableContextClassLoaderOverride"));
         permissions.add(new RuntimePermission("setFactory"));
         permissions.add(new RuntimePermission("accessClassInPackage.*"));
         permissions.add(new RuntimePermission("defineClassInPackage.*"));
@@ -108,8 +101,8 @@ public class LocalSecurityPolicy extends Policy {
         permissions.add(new RuntimePermission("modifyThread"));
         permissions.add(new RuntimePermission("queuePrintJob"));
         permissions.add(new RuntimePermission("com.sun.media.jmc.accessMedia"));
-        // loadLibrary necessary in Java 6, in particular loadLibrary.sunmscapi.
         permissions.add(new RuntimePermission("loadLibrary.*"));
+        permissions.add(new RuntimePermission("createSecurityManager"));
         permissions.add(new NetPermission("setDefaultAuthenticator"));
         permissions.add(new NetPermission("setCookieHandler"));
         permissions.add(new NetPermission("specifyStreamHandler"));
@@ -118,14 +111,9 @@ public class LocalSecurityPolicy extends Policy {
         permissions.add(new SecurityPermission("putProviderProperty.*"));
         permissions.add(new SecurityPermission("insertProvider.*"));
         permissions.add(new SecurityPermission("removeProvider.*"));
-        permissions
-        .add(new java.util.logging.LoggingPermission("control", null));
+        permissions.add(new LoggingPermission("control", null));
         permissions.add(GenericLocalPermission.EXT_GENERIC);
-
-        // Note: execute needed to launch external browser.
-
-        permissions.add(new FilePermission("<<ALL FILES>>",
-                "read,write,delete,execute"));
+        permissions.add(new FilePermission("<<ALL FILES>>","read,write,delete,execute"));
     }
 
     /**
@@ -258,20 +246,12 @@ public class LocalSecurityPolicy extends Policy {
             }
             // Custom permissions
             permissions.add(StoreHostPermission.forURL(location));
-            permissions.add(new RuntimePermission(
-                    "com.sun.media.jmc.accessMedia"));
+            permissions.add(new RuntimePermission("com.sun.media.jmc.accessMedia"));
         } else {
             permissions.add(new PropertyPermission("java.version", "read"));
             permissions.add(new PropertyPermission("os.name", "read"));
             permissions.add(new PropertyPermission("line.separator", "read"));
-            permissions.add(new SocketPermission(location.getHost(),
-                    "connect,resolve"));
-
-            // TODO: Security: This permission should not be given, but it's
-            // required
-            // by compiled JavaFX runtime at the moment (2/20/2008).
-            permissions.add(new AWTPermission("accessEventQueue"));
-
+            permissions.add(new SocketPermission(location.getHost(),"connect,resolve"));
             String hostName = location.getHost();
             // Get possible cookie domains for current location
             // and allow managed store access there.

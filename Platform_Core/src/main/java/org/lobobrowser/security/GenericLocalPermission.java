@@ -15,6 +15,7 @@
 package org.lobobrowser.security;
 
 import java.security.BasicPermission;
+import java.security.Permission;
 
 /**
  * The Class GenericLocalPermission.
@@ -26,8 +27,7 @@ public class GenericLocalPermission extends BasicPermission {
     // public static final java.security.Permission FRAME_PARENT = new
     // GenericLocalPermission("frame-parent");
     /** The Constant EXT_GENERIC. */
-    public static final java.security.Permission EXT_GENERIC = new GenericLocalPermission(
-            "extension");
+    public static final Permission EXT_GENERIC = new GenericLocalPermission("extension");
 
     /**
      * Instantiates a new generic local permission.
