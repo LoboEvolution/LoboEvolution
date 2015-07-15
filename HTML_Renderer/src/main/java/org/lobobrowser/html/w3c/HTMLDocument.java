@@ -1,12 +1,12 @@
 /*
- * GNU LESSER GENERAL LICENSE Copyright (C) 2006 The Lobo Project.
+ * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
  * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
  * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General License as published by the Free Software Foundation; either
+ * General Public License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version. This
  * library is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General License for more
+ * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details. You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
@@ -24,10 +24,14 @@
 
 package org.lobobrowser.html.w3c;
 
+import org.lobobrowser.html.w3c.xpath.XPathExpression;
+import org.lobobrowser.html.w3c.xpath.XPathNSResolver;
+import org.lobobrowser.html.w3c.xpath.XPathResult;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -638,5 +642,49 @@ public interface HTMLDocument extends Document {
      * @return the node list
      */
     NodeList querySelectorAll(String selectors);
+    
+    /**
+     * Creates the expression.
+     *
+     * @param expression the expression
+     * @param resolver the resolver
+     * @return the x path expression
+     */
+    public XPathExpression createExpression(String expression,
+			XPathNSResolver resolver);
+    
+	/**
+	 * Creates the ns resolver.
+	 *
+	 * @param nodeResolver the node resolver
+	 * @return the x path ns resolver
+	 */
+	public XPathNSResolver createNSResolver(Node nodeResolver);
+
+	/**
+	 * Evaluate.
+	 *
+	 * @param expression the expression
+	 * @param contextNode the context node
+	 * @param resolver the resolver
+	 * @param type the type
+	 * @param result the result
+	 * @return the object
+	 */
+	public XPathResult evaluate(String expression, Node contextNode,
+			XPathNSResolver resolver, short type, Object result);
+	
+	/**
+	 * Evaluate.
+	 *
+	 * @param expression the expression
+	 * @param contextNode the context node
+	 * @param resolver the resolver
+	 * @param type the type
+	 * @param result the result
+	 * @return the object
+	 */
+	public XPathResult evaluate(String expression, HTMLElement contextNode,
+			XPathNSResolver resolver, Short type, Object result);
 
 }

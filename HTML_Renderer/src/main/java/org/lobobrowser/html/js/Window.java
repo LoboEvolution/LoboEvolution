@@ -49,6 +49,7 @@ import org.lobobrowser.html.w3c.MessagePort;
 import org.lobobrowser.html.w3c.Selection;
 import org.lobobrowser.html.w3c.StyleMedia;
 import org.lobobrowser.html.w3c.UndoManager;
+import org.lobobrowser.html.xpath.XPathResultImpl;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.js.JavaClassWrapper;
 import org.lobobrowser.js.JavaClassWrapperFactory;
@@ -736,11 +737,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
             Context ctx = Context.enter();
             try {
                 // Window scope needs to be top-most scope.
-                windowScope = (ScriptableObject) JavaScript.getInstance()
-                        .getJavascriptObject(this, null);
+                windowScope = (ScriptableObject) JavaScript.getInstance().getJavascriptObject(this, null);
                 ctx.initStandardObjects(windowScope);
                 Object consoleJSObj = JavaScript.getInstance().getJavascriptObject(new ConsoleImpl(), windowScope);
                 ScriptableObject.putProperty(windowScope, "console", consoleJSObj);
+                Object xpathresult = JavaScript.getInstance().getJavascriptObject(new XPathResultImpl(), windowScope);
+                ScriptableObject.putProperty(windowScope, "XPathResult", xpathresult);
                 this.windowScope = windowScope;
                 return windowScope;
             } finally {

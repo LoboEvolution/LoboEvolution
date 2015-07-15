@@ -16,3 +16,4 @@ The following open source externals are used by this project:
 
 * [https://xmlgraphics.apache.org/batik/] A java-based toolkit for applications or applets that want to use images in the Scalable Vector Graphics (SVG)
   
+* [https://xml.apache.org/xalan-j/] Xalan-Java is an XSLT processor for transforming XML documents into HTML, text, or other XML document types

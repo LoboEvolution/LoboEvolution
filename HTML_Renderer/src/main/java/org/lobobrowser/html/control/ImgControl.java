@@ -300,7 +300,8 @@ public class ImgControl extends BaseControl implements ImageListener {
                     if (!checkPreferredSizeChange()) {
                         repaint();
                     } else {
-                        ruicontrol.preferredSizeInvalidated();
+                    	if(ruicontrol!=null)
+                    		ruicontrol.preferredSizeInvalidated();
                     }
                 }
             });
@@ -325,7 +326,8 @@ public class ImgControl extends BaseControl implements ImageListener {
                 if (!checkPreferredSizeChange()) {
                     repaint();
                 } else {
-                    ruicontrol.preferredSizeInvalidated();
+                	if(ruicontrol!=null)
+                		ruicontrol.preferredSizeInvalidated();
                 }
             }
         });

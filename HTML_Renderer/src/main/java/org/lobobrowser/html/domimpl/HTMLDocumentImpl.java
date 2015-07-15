@@ -94,6 +94,10 @@ import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.html.w3c.HTMLHeadElement;
 import org.lobobrowser.html.w3c.events.DocumentEvent;
 import org.lobobrowser.html.w3c.events.Event;
+import org.lobobrowser.html.w3c.xpath.XPathExpression;
+import org.lobobrowser.html.w3c.xpath.XPathNSResolver;
+import org.lobobrowser.html.w3c.xpath.XPathResult;
+import org.lobobrowser.html.xpath.XPathEvaluatorImpl;
 import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.util.Domains;
 import org.lobobrowser.util.Urls;
@@ -2681,5 +2685,67 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
     public void setOnmouseover(Function onmouseover) {
         this.onmouseover = onmouseover;
     }
+    
+    /**
+	 * Evaluate.
+	 *
+	 * @param expression the expression
+	 * @param contextNode the context node
+	 * @param resolver the resolver
+	 * @param type the type
+	 * @param result the result
+	 */
+	public void evaluate(String expression, HTMLDocumentImpl contextNode,
+			XPathNSResolver resolver, short type, Object result) {	
+		 evaluate(expression, contextNode, resolver, type, result);
+	}
+	
+	
+	@Override
+	public XPathExpression createExpression(String expression,
+			XPathNSResolver resolver) {
+		XPathEvaluatorImpl evaluator = new XPathEvaluatorImpl(document);
+		return evaluator.createExpression(expression, resolver);
+	}
 
+	@Override
+	public XPathNSResolver createNSResolver(Node nodeResolver) {
+		XPathEvaluatorImpl evaluator = new XPathEvaluatorImpl(document);
+		return evaluator.createNSResolver(nodeResolver);
+	}
+
+	@Override
+	public XPathResult evaluate(String expression, Node contextNode,
+			XPathNSResolver resolver, short type, Object result) {
+		return eval(expression, contextNode, resolver, type, result);
+	}
+	
+	@Override
+	public XPathResult evaluate(String expression, HTMLElement contextNode,
+			XPathNSResolver resolver, Short type, Object result) {	
+		return eval(expression, contextNode, resolver, type, result);
+	}
+	
+	/**
+	 * Eval.
+	 *
+	 * @param expression
+	 *            the expression
+	 * @param contextNode
+	 *            the context node
+	 * @param resolver
+	 *            the resolver
+	 * @param type
+	 *            the type
+	 * @param result
+	 *            the result
+	 * @return the x path result
+	 */
+	private XPathResult eval(String expression, Node contextNode,
+			XPathNSResolver resolver, short type, Object result) {
+		XPathEvaluatorImpl evaluator = new XPathEvaluatorImpl(document);
+		return (XPathResult) evaluator.evaluate(expression, contextNode,
+				resolver, type, result);
+
+	}
 }
