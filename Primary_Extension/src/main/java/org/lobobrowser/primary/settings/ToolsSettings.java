@@ -115,9 +115,7 @@ public class ToolsSettings implements Serializable {
         searchEngines.add(this.googleWebSearch());
         searchEngines.add(this.yahooWebSearch());
         searchEngines.add(this.wikipediaSearch());
-        searchEngines.add(this.googleBlogSearch());
-        searchEngines.add(this.googleCodeSearch());
-        searchEngines.add(this.googleScholarSearch());
+        searchEngines.add(this.bingSearch());
         return searchEngines;
     }
 
@@ -154,36 +152,14 @@ public class ToolsSettings implements Serializable {
     }
 
     /**
-     * Google blog search.
+     * Bing search.
      *
      * @return the search engine
      */
-    private SearchEngine googleBlogSearch() {
-        return new SearchEngine("Google Blog Search",
-                "Google's blog search engine.",
-                "http://blogsearch.google.com/blogsearch", "q");
-    }
-
-    /**
-     * Google code search.
-     *
-     * @return the search engine
-     */
-    private SearchEngine googleCodeSearch() {
-        return new SearchEngine("Google Code Search",
-                "Google's program source code search engine.",
-                "http://google.com/codesearch?lr=", "q");
-    }
-
-    /**
-     * Google scholar search.
-     *
-     * @return the search engine
-     */
-    private SearchEngine googleScholarSearch() {
-        return new SearchEngine("Google Scholar Search",
-                "Google's search engine for scholarly literature.",
-                "http://scholar.google.com/scholar", "q");
+    private SearchEngine bingSearch() {
+        return new SearchEngine("Bing Search",
+                "Bing web search engine.",
+                "http://www.bing.com/search?q", "q");
     }
 
     /**
