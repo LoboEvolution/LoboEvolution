@@ -349,24 +349,6 @@ public class ComponentSource implements NavigatorWindowListener {
     }
 
     /**
-     * Gets the page services menu.
-     *
-     * @return the page services menu
-     */
-    public JMenu getPageServicesMenu() {
-        JMenu menu = new JMenu("Page Services");
-        menu.setMnemonic('P');
-        menu.add(menuItem("Java",
-                this.actionPool.createNavigateAction("http://www.java.com")));
-        menu.addSeparator();
-        menu.add(menuItem("Eclipse",
-                this.actionPool.createNavigateAction("http://www.eclipse.org/")));
-        menu.addSeparator();
-
-        return menu;
-    }
-
-    /**
      * Gets the help menu.
      *
      * @return the help menu
@@ -377,19 +359,12 @@ public class ComponentSource implements NavigatorWindowListener {
 
         menu.add(menuItem("About Lobo", 'A', new AboutAction(this, window)));
         menu.addSeparator();
-        menu.add(menuItem(
-                "Project Home Page",
-                this.actionPool
-                .createNavigateAction("http://sourceforge.net/projects/loboevolution/")));
+        menu.add(menuItem("Project Home Page", this.actionPool.createNavigateAction("http://sourceforge.net/projects/loboevolution/")));
+        menu.add(menuItem("Development Home Page",this.actionPool.createNavigateAction("https://github.com/oswetto/Loboevolution/")));
+        menu.add(menuItem("Bug tracking",this.actionPool.createNavigateAction("https://github.com/oswetto/Loboevolution/issues/")));
         menu.addSeparator();
-        menu.add(menuItem(
-                "Wiki",
-                this.actionPool
-                .createNavigateAction("http://sourceforge.net/p/loboevolution/wiki/Home/")));
-        menu.add(menuItem(
-                "Discussion Forum",
-                this.actionPool
-                .createNavigateAction("http://sourceforge.net/p/loboevolution/discussion/")));
+        menu.add(menuItem("Wiki",this.actionPool.createNavigateAction("http://sourceforge.net/p/loboevolution/wiki/Home/")));
+        menu.add(menuItem("Discussion Forum",this.actionPool.createNavigateAction("http://sourceforge.net/p/loboevolution/discussion/")));
 
         return menu;
     }

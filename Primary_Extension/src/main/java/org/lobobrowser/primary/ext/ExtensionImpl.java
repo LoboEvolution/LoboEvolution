@@ -117,7 +117,6 @@ public class ExtensionImpl implements NavigatorExtension {
         wcontext.addMenu("lobo.view", cs.getViewMenu());
         wcontext.addMenu("lobo.navigation", cs.getNavigationMenu());
         wcontext.addMenu("lobo.bookmarks", cs.getBookmarksMenu());
-        wcontext.addMenu("lobo.page.services", cs.getPageServicesMenu());
         wcontext.addMenu("lobo.tools", cs.getToolsMenu());
         // wcontext.addMenu("lobo.extensions", cs.getExtensionsMenu());
         wcontext.addMenu("lobo.help", cs.getHelpMenu());
