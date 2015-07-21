@@ -26,8 +26,8 @@ import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableRowElementImpl;
+import org.lobobrowser.html.info.BackgroundInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
-import org.lobobrowser.html.style.BackgroundInfo;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.RenderThreadState;
 import org.lobobrowser.html.w3c.HTMLElement;
@@ -207,7 +207,7 @@ public class TableCellRenderState extends DisplayRenderState {
         if (parentNode instanceof HTMLTableRowElementImpl) {
             rowElement = (HTMLTableRowElementImpl) parentNode;
         }
-        if ((binfo == null) || (binfo.backgroundColor == null)) {
+        if ((binfo == null) || (binfo.getBackgroundColor() == null)) {
             String bgColor = element.getBgColor();
             if ((bgColor == null) || "".equals(bgColor)) {
                 if (rowElement != null) {
@@ -219,17 +219,17 @@ public class TableCellRenderState extends DisplayRenderState {
                 if (binfo == null) {
                     binfo = new BackgroundInfo();
                 }
-                binfo.backgroundColor = bgc;
+                binfo.setBackgroundColor(bgc);
             }
         }
-        if ((binfo == null) || (binfo.backgroundImage == null)) {
+        if ((binfo == null) || (binfo.getBackgroundImage() == null)) {
             String background = element
                     .getAttribute(HtmlAttributeProperties.BACKGROUND);
             if ((background != null) && !"".equals(background)) {
                 if (binfo == null) {
                     binfo = new BackgroundInfo();
                 }
-                binfo.backgroundImage = this.document.getFullURL(background);
+                binfo.setBackgroundImage(this.document.getFullURL(background));
             }
         }
         this.backgroundInfo = binfo;

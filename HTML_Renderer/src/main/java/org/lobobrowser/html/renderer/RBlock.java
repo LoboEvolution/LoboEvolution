@@ -1532,8 +1532,8 @@ public class RBlock extends BaseElementRenderable implements
             return null;
         }
         Insets insets = this.getInsets(this.hasHScrollBar, this.hasVScrollBar);
-        return new FloatingInfo(info.shiftX + insets.left, info.shiftY
-                + insets.top, info.floats);
+        return new FloatingInfo(info.getShiftX() + insets.left, info.getShiftY()
+                + insets.top, info.getFloats());
     }
 
     /**

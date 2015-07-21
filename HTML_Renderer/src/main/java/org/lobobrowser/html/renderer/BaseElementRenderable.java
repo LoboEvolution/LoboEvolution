@@ -39,10 +39,10 @@ import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.info.BackgroundInfo;
+import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
-import org.lobobrowser.html.style.BackgroundInfo;
-import org.lobobrowser.html.style.BorderInfo;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.Strings;
@@ -567,8 +567,8 @@ RElement, RenderableContainer, ImageObserver {
                     + rootElement + "; parent=" + rootElement.getParentNode());
         }
         BackgroundInfo binfo = rs.getBackgroundInfo();
-        this.backgroundColor = binfo == null ? null : binfo.backgroundColor;
-        URL backgroundImageUri = binfo == null ? null : binfo.backgroundImage;
+        this.backgroundColor = binfo == null ? null : binfo.getBackgroundColor();
+        URL backgroundImageUri = binfo == null ? null : binfo.getBackgroundImage();
         if (backgroundImageUri == null) {
             this.backgroundImage = null;
             this.lastBackgroundImageUri = null;
@@ -996,26 +996,26 @@ RElement, RenderableContainer, ImageObserver {
                                 : binfo.backgroundRepeat) {
                                 case BackgroundInfo.BR_NO_REPEAT: {
                                     int imageX;
-                                    if (binfo.backgroundXPositionAbsolute) {
-                                        imageX = binfo.backgroundXPosition;
+                                    if (binfo.isBackgroundXPositionAbsolute()) {
+                                        imageX = binfo.getBackgroundXPosition();
                                     } else {
-                                        imageX = (binfo.backgroundXPosition * (totalWidth - w)) / 100;
+                                        imageX = (binfo.getBackgroundXPosition() * (totalWidth - w)) / 100;
                                     }
                                     int imageY;
-                                    if (binfo.backgroundYPositionAbsolute) {
-                                        imageY = binfo.backgroundYPosition;
+                                    if (binfo.isBackgroundYPositionAbsolute()) {
+                                        imageY = binfo.getBackgroundYPosition();
                                     } else {
-                                        imageY = (binfo.backgroundYPosition * (totalHeight - h)) / 100;
+                                        imageY = (binfo.getBackgroundYPosition() * (totalHeight - h)) / 100;
                                     }
                                     clientG.drawImage(image, imageX, imageY, w, h, this);
                                     break;
                                 }
                                 case BackgroundInfo.BR_REPEAT_X: {
                                     int imageY;
-                                    if (binfo.backgroundYPositionAbsolute) {
-                                        imageY = binfo.backgroundYPosition;
+                                    if (binfo.isBackgroundYPositionAbsolute()) {
+                                        imageY = binfo.getBackgroundYPosition();
                                     } else {
-                                        imageY = (binfo.backgroundYPosition * (totalHeight - h)) / 100;
+                                        imageY = (binfo.getBackgroundYPosition() * (totalHeight - h)) / 100;
                                     }
                                     // Modulate starting x.
                                     int x = (bkgBounds.x / w) * w;
@@ -1027,10 +1027,10 @@ RElement, RenderableContainer, ImageObserver {
                                 }
                                 case BackgroundInfo.BR_REPEAT_Y: {
                                     int imageX;
-                                    if (binfo.backgroundXPositionAbsolute) {
-                                        imageX = binfo.backgroundXPosition;
+                                    if (binfo.isBackgroundXPositionAbsolute()) {
+                                        imageX = binfo.getBackgroundXPosition();
                                     } else {
-                                        imageX = (binfo.backgroundXPosition * (totalWidth - w)) / 100;
+                                        imageX = (binfo.getBackgroundXPosition() * (totalWidth - w)) / 100;
                                     }
                                     // Modulate starting y.
                                     int y = (bkgBounds.y / h) * h;

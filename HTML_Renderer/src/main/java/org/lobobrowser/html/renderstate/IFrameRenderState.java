@@ -18,7 +18,7 @@ import java.awt.Color;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.style.BorderInfo;
+import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 

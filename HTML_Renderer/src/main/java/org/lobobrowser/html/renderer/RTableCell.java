@@ -297,8 +297,8 @@ public class RTableCell extends RBlock {
         int vrow = this.getVirtualRow();
         SizeInfo colSize = colSizes[vcol];
         SizeInfo rowSize = rowSizes[vrow];
-        int x = colSize.offset;
-        int y = rowSize.offset;
+        int x = colSize.getOffset();
+        int y = rowSize.getOffset();
         int width;
         int height;
         int colSpan = this.getColSpan();
@@ -306,26 +306,26 @@ public class RTableCell extends RBlock {
             width = 0;
             for (int i = 0; i < colSpan; i++) {
                 int vc = vcol + i;
-                width += colSizes[vc].actualSize;
+                width += colSizes[vc].getActualSize();
                 if ((i + 1) < colSpan) {
                     width += cellSpacingX + (hasBorder * 2);
                 }
             }
         } else {
-            width = colSizes[vcol].actualSize;
+            width = colSizes[vcol].getActualSize();
         }
         int rowSpan = this.getRowSpan();
         if (rowSpan > 1) {
             height = 0;
             for (int i = 0; i < rowSpan; i++) {
                 int vr = vrow + i;
-                height += rowSizes[vr].actualSize;
+                height += rowSizes[vr].getActualSize();
                 if ((i + 1) < rowSpan) {
                     height += cellSpacingY + (hasBorder * 2);
                 }
             }
         } else {
-            height = rowSizes[vrow].actualSize;
+            height = rowSizes[vrow].getActualSize();
         }
         this.setBounds(x, y, width, height);
     }

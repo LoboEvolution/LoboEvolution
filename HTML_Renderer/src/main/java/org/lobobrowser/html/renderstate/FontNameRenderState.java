@@ -21,8 +21,8 @@ import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.lobobrowser.html.info.WordInfo;
 import org.lobobrowser.html.style.RenderStateDelegator;
-import org.lobobrowser.html.style.WordInfo;
 
 /**
  * The Class FontNameRenderState.

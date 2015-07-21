@@ -20,13 +20,16 @@ import java.awt.Font;
 import java.awt.LinearGradientPaint;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
+import java.io.Serializable;
 
 import org.lobobrowser.html.w3c.HTMLImageElement;
 
 /**
  * The Class CanvasInfo.
  */
-public class CanvasInfo {
+public class CanvasInfo implements Serializable {
+
+	private static final long serialVersionUID = -4173240031155753085L;
 
 	/** The x. */
 	private int x;
@@ -117,10 +120,10 @@ public class CanvasInfo {
 
 	/** The Genearl path. */
 	private GeneralPath path;
-	
+
 	/** The linear gradient. */
 	private LinearGradientPaint linearGradient;
-	
+
 	/** The Affine Transform. */
 	private AffineTransform affineTransform;
 
@@ -687,7 +690,8 @@ public class CanvasInfo {
 	/**
 	 * Sets the path.
 	 *
-	 * @param path            the path to set
+	 * @param path
+	 *            the path to set
 	 */
 	public void setPath(GeneralPath path) {
 		this.path = path;
@@ -705,7 +709,8 @@ public class CanvasInfo {
 	/**
 	 * Sets the linear gradient.
 	 *
-	 * @param linearGradient the linearGradient to set
+	 * @param linearGradient
+	 *            the linearGradient to set
 	 */
 	public void setLinearGradient(LinearGradientPaint linearGradient) {
 		this.linearGradient = linearGradient;
@@ -719,7 +724,8 @@ public class CanvasInfo {
 	}
 
 	/**
-	 * @param affineTransform the affineTransform to set
+	 * @param affineTransform
+	 *            the affineTransform to set
 	 */
 	public void setAffineTransform(AffineTransform affineTransform) {
 		this.affineTransform = affineTransform;

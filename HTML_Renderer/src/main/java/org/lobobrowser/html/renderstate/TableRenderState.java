@@ -19,8 +19,8 @@ import java.awt.Color;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
-import org.lobobrowser.html.style.BackgroundInfo;
-import org.lobobrowser.html.style.BorderInfo;
+import org.lobobrowser.html.info.BackgroundInfo;
+import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.ColorFactory;
@@ -90,24 +90,24 @@ public class TableRenderState extends StyleSheetRenderState {
         // Apply style based on deprecated attributes.
         binfo = super.getBackgroundInfo();
         HTMLTableElementImpl element = (HTMLTableElementImpl) this.element;
-        if ((binfo == null) || (binfo.backgroundColor == null)) {
+        if ((binfo == null) || (binfo.getBackgroundColor() == null)) {
             String bgColor = element.getBgColor();
             if ((bgColor != null) && !"".equals(bgColor)) {
                 Color bgc = ColorFactory.getInstance().getColor(bgColor);
                 if (binfo == null) {
                     binfo = new BackgroundInfo();
                 }
-                binfo.backgroundColor = bgc;
+                binfo.setBackgroundColor(bgc);
             }
         }
-        if ((binfo == null) || (binfo.backgroundImage == null)) {
+        if ((binfo == null) || (binfo.getBackgroundImage() == null)) {
             String background = element
                     .getAttribute(HtmlAttributeProperties.BACKGROUND);
             if ((background != null) && !"".equals(background)) {
                 if (binfo == null) {
                     binfo = new BackgroundInfo();
                 }
-                binfo.backgroundImage = this.document.getFullURL(background);
+                binfo.setBackgroundImage(this.document.getFullURL(background));
             }
         }
         this.backgroundInfo = binfo;

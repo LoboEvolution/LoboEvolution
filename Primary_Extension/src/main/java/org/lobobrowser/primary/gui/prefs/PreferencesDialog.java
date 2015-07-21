@@ -35,6 +35,8 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
+import org.lobobrowser.primary.info.SettingsInfo;
+
 /**
  * The Class PreferencesDialog.
  */

@@ -31,6 +31,7 @@ import java.util.logging.Logger;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.info.StyleRuleInfo;
 import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSMediaRule;
 import org.w3c.dom.css.CSSRule;
@@ -343,7 +344,7 @@ public class StyleSheetAggregator {
             while (i.hasNext()) {
                 StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
                 if (styleRuleInfo.isSelectorMatch(element, pseudoNames)) {
-                    CSSStyleRule styleRule = styleRuleInfo.styleRule;
+                    CSSStyleRule styleRule = styleRuleInfo.getStyleRule();
                     CSSStyleSheet styleSheet = styleRule.getParentStyleSheet();
                     if ((styleSheet != null) && styleSheet.getDisabled()) {
                         continue;
@@ -362,7 +363,7 @@ public class StyleSheetAggregator {
             while (i.hasNext()) {
                 StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
                 if (styleRuleInfo.isSelectorMatch(element, pseudoNames)) {
-                    CSSStyleRule styleRule = styleRuleInfo.styleRule;
+                    CSSStyleRule styleRule = styleRuleInfo.getStyleRule();
                     CSSStyleSheet styleSheet = styleRule.getParentStyleSheet();
                     if ((styleSheet != null) && styleSheet.getDisabled()) {
                         continue;
@@ -384,7 +385,7 @@ public class StyleSheetAggregator {
                     while (i.hasNext()) {
                         StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
                         if (styleRuleInfo.isSelectorMatch(element, pseudoNames)) {
-                            CSSStyleRule styleRule = styleRuleInfo.styleRule;
+                            CSSStyleRule styleRule = styleRuleInfo.getStyleRule();
                             CSSStyleSheet styleSheet = styleRule
                                     .getParentStyleSheet();
                             if ((styleSheet != null)
@@ -407,7 +408,7 @@ public class StyleSheetAggregator {
                     while (i.hasNext()) {
                         StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
                         if (styleRuleInfo.isSelectorMatch(element, pseudoNames)) {
-                            CSSStyleRule styleRule = styleRuleInfo.styleRule;
+                            CSSStyleRule styleRule = styleRuleInfo.getStyleRule();
                             CSSStyleSheet styleSheet = styleRule
                                     .getParentStyleSheet();
                             if ((styleSheet != null)
@@ -433,7 +434,7 @@ public class StyleSheetAggregator {
                     while (i.hasNext()) {
                         StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
                         if (styleRuleInfo.isSelectorMatch(element, pseudoNames)) {
-                            CSSStyleRule styleRule = styleRuleInfo.styleRule;
+                            CSSStyleRule styleRule = styleRuleInfo.getStyleRule();
                             CSSStyleSheet styleSheet = styleRule
                                     .getParentStyleSheet();
                             if ((styleSheet != null)
@@ -457,7 +458,7 @@ public class StyleSheetAggregator {
                     while (i.hasNext()) {
                         StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
                         if (styleRuleInfo.isSelectorMatch(element, pseudoNames)) {
-                            CSSStyleRule styleRule = styleRuleInfo.styleRule;
+                            CSSStyleRule styleRule = styleRuleInfo.getStyleRule();
                             CSSStyleSheet styleSheet = styleRule
                                     .getParentStyleSheet();
                             if ((styleSheet != null)
@@ -503,7 +504,7 @@ public class StyleSheetAggregator {
             Iterator i = elementRules.iterator();
             while (i.hasNext()) {
                 StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
-                CSSStyleSheet styleSheet = styleRuleInfo.styleRule
+                CSSStyleSheet styleSheet = styleRuleInfo.getStyleRule()
                         .getParentStyleSheet();
                 if ((styleSheet != null) && styleSheet.getDisabled()) {
                     continue;
@@ -519,7 +520,7 @@ public class StyleSheetAggregator {
             Iterator i = elementRules.iterator();
             while (i.hasNext()) {
                 StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
-                CSSStyleSheet styleSheet = styleRuleInfo.styleRule
+                CSSStyleSheet styleSheet = styleRuleInfo.getStyleRule()
                         .getParentStyleSheet();
                 if ((styleSheet != null) && styleSheet.getDisabled()) {
                     continue;
@@ -543,7 +544,7 @@ public class StyleSheetAggregator {
                         while (i.hasNext()) {
                             StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i
                                     .next();
-                            CSSStyleSheet styleSheet = styleRuleInfo.styleRule
+                            CSSStyleSheet styleSheet = styleRuleInfo.getStyleRule()
                                     .getParentStyleSheet();
                             if ((styleSheet != null)
                                     && styleSheet.getDisabled()) {
@@ -565,7 +566,7 @@ public class StyleSheetAggregator {
                         while (i.hasNext()) {
                             StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i
                                     .next();
-                            CSSStyleSheet styleSheet = styleRuleInfo.styleRule
+                            CSSStyleSheet styleSheet = styleRuleInfo.getStyleRule()
                                     .getParentStyleSheet();
                             if ((styleSheet != null)
                                     && styleSheet.getDisabled()) {
@@ -589,7 +590,7 @@ public class StyleSheetAggregator {
                     Iterator i = idRules.iterator();
                     while (i.hasNext()) {
                         StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
-                        CSSStyleSheet styleSheet = styleRuleInfo.styleRule
+                        CSSStyleSheet styleSheet = styleRuleInfo.getStyleRule()
                                 .getParentStyleSheet();
                         if ((styleSheet != null) && styleSheet.getDisabled()) {
                             continue;
@@ -609,7 +610,7 @@ public class StyleSheetAggregator {
                     Iterator i = idRules.iterator();
                     while (i.hasNext()) {
                         StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
-                        CSSStyleSheet styleSheet = styleRuleInfo.styleRule
+                        CSSStyleSheet styleSheet = styleRuleInfo.getStyleRule()
                                 .getParentStyleSheet();
                         if ((styleSheet != null) && styleSheet.getDisabled()) {
                             continue;
@@ -623,296 +624,5 @@ public class StyleSheetAggregator {
             }
         }
         return false;
-    }
-
-    /**
-     * The Class StyleRuleInfo.
-     */
-    public static class StyleRuleInfo {
-
-        /** The style rule. */
-        private final CSSStyleRule styleRule;
-
-        /** The ancestor selectors. */
-        private final ArrayList<SimpleSelector> ancestorSelectors;
-
-        /**
-         * Instantiates a new style rule info.
-         *
-         * @param simpleSelectors
-         *            A collection of SimpleSelector's.
-         * @param rule
-         *            A CSS rule.
-         */
-        public StyleRuleInfo(ArrayList<SimpleSelector> simpleSelectors,
-                CSSStyleRule rule) {
-            super();
-            ancestorSelectors = simpleSelectors;
-            styleRule = rule;
-        }
-
-        /**
-         * Affected by pseudo name in ancestor.
-         *
-         * @param element
-         *            the element
-         * @param ancestor
-         *            the ancestor
-         * @param pseudoName
-         *            the pseudo name
-         * @return true, if successful
-         */
-        public final boolean affectedByPseudoNameInAncestor(
-                HTMLElementImpl element, HTMLElementImpl ancestor,
-                String pseudoName) {
-            ArrayList<SimpleSelector> as = this.ancestorSelectors;
-            HTMLElementImpl currentElement = element;
-            int size = as.size();
-            boolean first = true;
-            for (int i = size;--i >= 0;) {
-                SimpleSelector simpleSelector = as.get(i);
-                if (first) {
-                    if (ancestor == element) {
-                        return simpleSelector.hasPseudoName(pseudoName);
-                    }
-                    first = false;
-                    continue;
-                }
-                String selectorText = simpleSelector.simpleSelectorText;
-                int dotIdx = selectorText.indexOf('.');
-                HTMLElementImpl newElement;
-                if (dotIdx != -1) {
-                    String elemtl = selectorText.substring(0, dotIdx);
-                    String classtl = selectorText.substring(dotIdx + 1);
-                    newElement = currentElement.getAncestorWithClass(elemtl,
-                            classtl);
-                } else {
-                    int poundIdx = selectorText.indexOf('#');
-                    if (poundIdx != -1) {
-                        String elemtl = selectorText.substring(0, poundIdx);
-                        String idtl = selectorText.substring(poundIdx + 1);
-                        newElement = currentElement.getAncestorWithId(elemtl,
-                                idtl);
-                    } else {
-                        String elemtl = selectorText;
-                        newElement = currentElement.getAncestor(elemtl);
-                    }
-                }
-                if (newElement == null) {
-                    return false;
-                }
-                currentElement = newElement;
-                if (currentElement == ancestor) {
-                    return simpleSelector.hasPseudoName(pseudoName);
-                }
-            }
-            return false;
-        }
-
-        /**
-         * Checks if is selector match.
-         *
-         * @param element
-         *            The element to test for a match.
-         * @param pseudoNames
-         *            A set of pseudo-names in lowercase.
-         * @return true, if is selector match
-         */
-        private final boolean isSelectorMatch(HTMLElementImpl element,
-                Set pseudoNames) {
-            ArrayList<SimpleSelector> as = this.ancestorSelectors;
-            HTMLElementImpl currentElement = element;
-            int size = as.size();
-            boolean first = true;
-            for (int i = size;--i >= 0;) {
-                SimpleSelector simpleSelector = as.get(i);
-                if (first) {
-                    if (!simpleSelector.matches(pseudoNames)) {
-                        return false;
-                    }
-                    first = false;
-                    continue;
-                }
-                String selectorText = simpleSelector.simpleSelectorText;
-                int dotIdx = selectorText.indexOf('.');
-                int selectorType = simpleSelector.selectorType;
-                HTMLElementImpl priorElement;
-                if (dotIdx != -1) {
-                    String elemtl = selectorText.substring(0, dotIdx);
-                    String classtl = selectorText.substring(dotIdx + 1);
-                    if (selectorType == SimpleSelector.ANCESTOR) {
-                        priorElement = currentElement.getAncestorWithClass(
-                                elemtl, classtl);
-                    } else if (selectorType == SimpleSelector.PARENT) {
-                        priorElement = currentElement.getParentWithClass(
-                                elemtl, classtl);
-                    } else if (selectorType == SimpleSelector.PRECEEDING_SIBLING) {
-                        priorElement = currentElement
-                                .getPreceedingSiblingWithClass(elemtl, classtl);
-                    } else {
-                        throw new IllegalStateException("selectorType="
-                                + selectorType);
-                    }
-                } else {
-                    int poundIdx = selectorText.indexOf('#');
-                    if (poundIdx != -1) {
-                        String elemtl = selectorText.substring(0, poundIdx);
-                        String idtl = selectorText.substring(poundIdx + 1);
-                        if (selectorType == SimpleSelector.ANCESTOR) {
-                            priorElement = currentElement.getAncestorWithId(
-                                    elemtl, idtl);
-                        } else if (selectorType == SimpleSelector.PARENT) {
-                            priorElement = currentElement.getParentWithId(
-                                    elemtl, idtl);
-                        } else if (selectorType == SimpleSelector.PRECEEDING_SIBLING) {
-                            priorElement = currentElement
-                                    .getPreceedingSiblingWithId(elemtl, idtl);
-                        } else {
-                            throw new IllegalStateException("selectorType="
-                                    + selectorType);
-                        }
-                    } else {
-                        String elemtl = selectorText;
-                        if (selectorType == SimpleSelector.ANCESTOR) {
-                            priorElement = currentElement.getAncestor(elemtl);
-                        } else if (selectorType == SimpleSelector.PARENT) {
-                            priorElement = currentElement.getParent(elemtl);
-                        } else if (selectorType == SimpleSelector.PRECEEDING_SIBLING) {
-                            priorElement = currentElement
-                                    .getPreceedingSibling(elemtl);
-                        } else {
-                            throw new IllegalStateException("selectorType="
-                                    + selectorType);
-                        }
-                    }
-                }
-                if (priorElement == null) {
-                    return false;
-                }
-                if (!simpleSelector.matches(priorElement)) {
-                    return false;
-                }
-                currentElement = priorElement;
-            }
-            return true;
-        }
-    }
-
-    /**
-     * The Class SimpleSelector.
-     */
-    static class SimpleSelector {
-
-        /** The Constant ANCESTOR. */
-        public static final int ANCESTOR = 0;
-
-        /** The Constant PARENT. */
-        public static final int PARENT = 1;
-
-        /** The Constant PRECEEDING_SIBLING. */
-        public static final int PRECEEDING_SIBLING = 2;
-
-        /** The simple selector text. */
-        public final String simpleSelectorText;
-
-        /** The pseudo element. */
-        public final String pseudoElement;
-
-        /** The selector type. */
-        public int selectorType;
-
-        /**
-         * Instantiates a new simple selector.
-         *
-         * @param simpleSelectorText
-         *            Simple selector text in lower case.
-         * @param pseudoElement
-         *            The pseudo-element if any.
-         */
-        public SimpleSelector(String simpleSelectorText, String pseudoElement) {
-            super();
-            this.simpleSelectorText = simpleSelectorText;
-            this.pseudoElement = pseudoElement;
-            this.selectorType = ANCESTOR;
-        }
-
-        /**
-         * Matches.
-         *
-         * @param element
-         *            the element
-         * @return true, if successful
-         */
-        public final boolean matches(HTMLElementImpl element) {
-            Set names = element.getPseudoNames();
-            if (names == null) {
-                return this.pseudoElement == null;
-            } else {
-                String pe = this.pseudoElement;
-                return (pe == null) || names.contains(pe);
-            }
-        }
-
-        /**
-         * Matches.
-         *
-         * @param names
-         *            the names
-         * @return true, if successful
-         */
-        public final boolean matches(Set names) {
-            if (names == null) {
-                return this.pseudoElement == null;
-            } else {
-                String pe = this.pseudoElement;
-                return (pe == null) || names.contains(pe);
-            }
-        }
-
-        /**
-         * Matches.
-         *
-         * @param pseudoName
-         *            the pseudo name
-         * @return true, if successful
-         */
-        public final boolean matches(String pseudoName) {
-            if (pseudoName == null) {
-                return this.pseudoElement == null;
-            } else {
-                String pe = this.pseudoElement;
-                return (pe == null) || pseudoName.equals(pe);
-            }
-        }
-
-        /**
-         * Checks for pseudo name.
-         *
-         * @param pseudoName
-         *            the pseudo name
-         * @return true, if successful
-         */
-        public final boolean hasPseudoName(String pseudoName) {
-            return pseudoName.equals(this.pseudoElement);
-        }
-
-        /**
-         * Gets the selector type.
-         *
-         * @return the selector type
-         */
-        public int getSelectorType() {
-            return selectorType;
-        }
-
-        /**
-         * Sets the selector type.
-         *
-         * @param selectorType
-         *            the new selector type
-         */
-        public void setSelectorType(int selectorType) {
-            this.selectorType = selectorType;
-        }
     }
 }

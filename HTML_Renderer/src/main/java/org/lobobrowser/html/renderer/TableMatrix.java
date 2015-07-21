@@ -190,7 +190,7 @@ public class TableMatrix {
      */
     public int getTableHeightWithoutCaption() {
         if (this.captionSize != null) {
-            return this.tableHeight - this.captionSize.height;
+            return this.tableHeight - this.captionSize.getHeight();
         } else {
             return this.tableHeight;
         }
@@ -203,7 +203,7 @@ public class TableMatrix {
      */
     public int getStartYWithoutCaption() {
         if ((this.captionSize != null) && !isCaptionBotton()) {
-            return this.captionSize.height;
+            return this.captionSize.getHeight();
         }
         return 0;
     }
@@ -584,7 +584,7 @@ public class TableMatrix {
                 }
             }
             if (rowHeightLength != null) {
-                rowSizeInfo.htmlLength = rowHeightLength;
+                rowSizeInfo.setHtmlLength(rowHeightLength);
             } else {
                 HtmlLength bestHeightLength = null;
                 for (int x = 0; x < rs; x++) {
@@ -598,7 +598,7 @@ public class TableMatrix {
                         }
                     }
                 }
-                rowSizeInfo.htmlLength = bestHeightLength;
+                rowSizeInfo.setHtmlLength(bestHeightLength);
             }
         }
 
@@ -652,16 +652,11 @@ public class TableMatrix {
                 }
             }
             SizeInfo colSizeInfo = new SizeInfo();
-            colSizeInfo.htmlLength = bestWidthLength;
+            colSizeInfo.setHtmlLength(bestWidthLength);
             columnSizes[i] = colSizeInfo;
         }
 
         if (this.caption != null) {
-            // POR
-            // SizeInfo captionSize = new SizeInfo();
-            // captionSize.htmlLength = this.tableWidthLength;
-            // /CaptionSizeInfo info = new CaptionSizeInfo();
-            // info.width = captionSize;
             this.captionSize = new CaptionSizeInfo();
         }
     }
@@ -727,7 +722,7 @@ public class TableMatrix {
         // Adjust for expected total width
 
         this.adjustWidthsForExpectedMax(columnSizes, cellAvailWidth,
-                widthKnown, captionSize != null ? captionSize.width : 0,
+                widthKnown, captionSize != null ? captionSize.getWidth() : 0,
                         widthsOfExtras);
     }
 
@@ -747,12 +742,12 @@ public class TableMatrix {
         int widthUsedByPercent = 0;
         for (int i = 0; i < numCols; i++) {
             SizeInfo colSizeInfo = columnSizes[i];
-            HtmlLength widthLength = colSizeInfo.htmlLength;
+            HtmlLength widthLength = colSizeInfo.getHtmlLength();
             if ((widthLength != null)
                     && (widthLength.getLengthType() == HtmlLength.LENGTH)) {
                 int actualSizeInt = widthLength.getLength(cellAvailWidth);
                 widthUsedByPercent += actualSizeInt;
-                colSizeInfo.actualSize = actualSizeInt;
+                colSizeInfo.setActualSize(actualSizeInt);
             }
         }
 
@@ -761,13 +756,13 @@ public class TableMatrix {
         int numNoWidthColumns = 0;
         for (int i = 0; i < numCols; i++) {
             SizeInfo colSizeInfo = columnSizes[i];
-            HtmlLength widthLength = colSizeInfo.htmlLength;
+            HtmlLength widthLength = colSizeInfo.getHtmlLength();
             if ((widthLength != null)
                     && (widthLength.getLengthType() != HtmlLength.LENGTH)) {
                 // TODO: MULTI-LENGTH not supported
                 int actualSizeInt = widthLength.getRawValue();
                 widthUsedByAbsolute += actualSizeInt;
-                colSizeInfo.actualSize = actualSizeInt;
+                colSizeInfo.setActualSize(actualSizeInt);
             } else if (widthLength == null) {
                 numNoWidthColumns++;
             }
@@ -792,13 +787,13 @@ public class TableMatrix {
                             / widthUsedByAbsolute;
                     for (int i = 0; i < numCols; i++) {
                         SizeInfo sizeInfo = columnSizes[i];
-                        HtmlLength widthLength = columnSizes[i].htmlLength;
+                        HtmlLength widthLength = columnSizes[i].getHtmlLength();
                         if ((widthLength != null)
                                 && (widthLength.getLengthType() != HtmlLength.LENGTH)) {
-                            int oldActualSize = sizeInfo.actualSize;
+                            int oldActualSize = sizeInfo.getActualSize();
                             int newActualSize = (int) Math.round(oldActualSize
                                     * ratio);
-                            sizeInfo.actualSize = newActualSize;
+                            sizeInfo.setActualSize(newActualSize);
                             totalWidthUsed += (newActualSize - oldActualSize);
                         }
                     }
@@ -817,13 +812,13 @@ public class TableMatrix {
                                 / widthUsedByPercent;
                         for (int i = 0; i < numCols; i++) {
                             SizeInfo sizeInfo = columnSizes[i];
-                            HtmlLength widthLength = columnSizes[i].htmlLength;
+                            HtmlLength widthLength = columnSizes[i].getHtmlLength();
                             if ((widthLength != null)
                                     && (widthLength.getLengthType() == HtmlLength.LENGTH)) {
-                                int oldActualSize = sizeInfo.actualSize;
+                                int oldActualSize = sizeInfo.getActualSize();
                                 int newActualSize = (int) Math
                                         .round(oldActualSize * ratio);
-                                sizeInfo.actualSize = newActualSize;
+                                sizeInfo.setActualSize(newActualSize);
                                 totalWidthUsed += (newActualSize - oldActualSize);
                             }
                         }
@@ -843,8 +838,8 @@ public class TableMatrix {
         int numCols = columnSizes.length;
         for (int i = 0; i < numCols; i++) {
             SizeInfo si = columnSizes[i];
-            if (si.actualSize < si.layoutSize) {
-                si.actualSize = si.layoutSize;
+            if (si.getActualSize() < si.getLayoutSize()) {
+                si.setActualSize(si.getLayoutSize());
             }
         }
     }
@@ -868,8 +863,8 @@ public class TableMatrix {
         SizeInfo[] rowSizes = this.rowSizes;
         ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
         int numRows = rows.size();
-        int actualSize = colSize.actualSize;
-        colSize.layoutSize = 0;
+        int actualSize = colSize.getActualSize();
+        colSize.setLayoutSize(0);
         for (int row = 0; row < numRows;) {
             // SizeInfo rowSize = rowSizes[row];
             ArrayList<?> columns = rows.get(row);
@@ -891,7 +886,7 @@ public class TableMatrix {
                                 * (cellSpacingX + (2 * hasBorder));
                         int vcActualWidth = cellExtras;
                         for (int x = 0; x < colSpan; x++) {
-                            vcActualWidth += columnSizes[firstCol + x].actualSize;
+                            vcActualWidth += columnSizes[firstCol + x].getActualSize();
                         }
                         // TODO: better height possible
                         
@@ -908,30 +903,30 @@ public class TableMatrix {
                             newTentativeCellWidth = (vcRenderWidth - cellExtras)
                                     / colSpan;
                         }
-                        if (newTentativeCellWidth > colSize.layoutSize) {
-                            colSize.layoutSize = newTentativeCellWidth;
+                        if (newTentativeCellWidth > colSize.getLayoutSize()) {
+                            colSize.setLayoutSize(newTentativeCellWidth);
                         }
                         int rowSpan = ac.getRowSpan();
                         int vch = (size.height - ((rowSpan - 1) * (this.cellSpacingY + (2 * hasBorder))))
                                 / rowSpan;
                         for (int y = 0; y < rowSpan; y++) {
-                            if (rowSizes[row + y].minSize < vch) {
-                                rowSizes[row + y].minSize = vch;
+                            if (rowSizes[row + y].getMinSize() < vch) {
+                                rowSizes[row + y].setMinSize(vch);
                             }
                         }
                     } else {
                     	// TODO: better height possible
                         Dimension size = ac.doCellLayout(actualSize, 0, true,
                                 true, true);
-                        if (size.width > colSize.layoutSize) {
-                            colSize.layoutSize = size.width;
+                        if (size.width > colSize.getLayoutSize()) {
+                            colSize.setLayoutSize(size.width);
                         }
                         int rowSpan = ac.getRowSpan();
                         int vch = (size.height - ((rowSpan - 1) * (this.cellSpacingY + (2 * hasBorder))))
                                 / rowSpan;
                         for (int y = 0; y < rowSpan; y++) {
-                            if (rowSizes[row + y].minSize < vch) {
-                                rowSizes[row + y].minSize = vch;
+                            if (rowSizes[row + y].getMinSize() < vch) {
+                                rowSizes[row + y].setMinSize(vch);
                             }
                         }
                     }
@@ -966,7 +961,7 @@ public class TableMatrix {
         int currentTotal = 0;
         int numCols = columnSizes.length;
         for (int i = 0; i < numCols; i++) {
-            currentTotal += columnSizes[i].actualSize;
+            currentTotal += columnSizes[i].getActualSize();
         }
         int difference = currentTotal - cellAvailWidth;
         if ((difference > 0) || ((difference < 0) && expand)) {
@@ -983,10 +978,10 @@ public class TableMatrix {
                             expand, hasBorder, cellSpacingX, currentTotal,
                             numCols, differenceCaption);
                 }
-                this.captionSize.width = currentTotal + widthOfExtras;
+                this.captionSize.setWidth(currentTotal + widthOfExtras);
             } else {
                 if ((currentTotal + widthOfExtras) > captionWith) {
-                    this.captionSize.width = currentTotal + widthOfExtras;
+                    this.captionSize.setWidth(currentTotal + widthOfExtras);
                 } else {
                     currentTotal = expandColumns(columnSizes, captionWith
                             - widthOfExtras, expand, hasBorder, cellSpacingX,
@@ -1024,9 +1019,9 @@ public class TableMatrix {
         int noWidthTotal = 0;
         int numNoWidth = 0;
         for (int i = 0; i < numCols; i++) {
-            if (columnSizes[i].htmlLength == null) {
+            if (columnSizes[i].getHtmlLength() == null) {
                 numNoWidth++;
-                noWidthTotal += columnSizes[i].actualSize;
+                noWidthTotal += columnSizes[i].getActualSize();
             }
         }
         if (noWidthTotal > 0) {
@@ -1039,8 +1034,8 @@ public class TableMatrix {
             int noWidthCount = 0;
             for (int i = 0; i < numCols; i++) {
                 SizeInfo sizeInfo = columnSizes[i];
-                if (sizeInfo.htmlLength == null) {
-                    int oldActualSize = sizeInfo.actualSize;
+                if (sizeInfo.getHtmlLength() == null) {
+                    int oldActualSize = sizeInfo.getActualSize();
                     int newActualSize;
                     if (++noWidthCount == numNoWidth) {
                         // Last column without a width.
@@ -1052,15 +1047,15 @@ public class TableMatrix {
                     } else {
                         newActualSize = (int) Math.round(oldActualSize * ratio);
                     }
-                    sizeInfo.actualSize = newActualSize;
-                    if (newActualSize < sizeInfo.layoutSize) {
+                    sizeInfo.setActualSize(newActualSize);
+                    if (newActualSize < sizeInfo.getLayoutSize()) {
                         // See if it actually fits.
                         this.layoutColumn(columnSizes, sizeInfo, i,
                                 cellSpacingX, hasBorder);
-                        if (newActualSize < sizeInfo.layoutSize) {
+                        if (newActualSize < sizeInfo.getLayoutSize()) {
                             // Didn't fit.
-                            newActualSize = sizeInfo.layoutSize;
-                            sizeInfo.actualSize = newActualSize;
+                            newActualSize = sizeInfo.getLayoutSize();
+                            sizeInfo.setActualSize(newActualSize);
                         }
                     }
                     currentTotal += (newActualSize - oldActualSize);
@@ -1073,10 +1068,10 @@ public class TableMatrix {
         if ((difference > 0) || ((difference < 0) && expand)) {
             int absoluteWidthTotal = 0;
             for (int i = 0; i < numCols; i++) {
-                HtmlLength widthLength = columnSizes[i].htmlLength;
+                HtmlLength widthLength = columnSizes[i].getHtmlLength();
                 if ((widthLength != null)
                         && (widthLength.getLengthType() != HtmlLength.LENGTH)) {
-                    absoluteWidthTotal += columnSizes[i].actualSize;
+                    absoluteWidthTotal += columnSizes[i].getActualSize();
                 }
             }
             if (absoluteWidthTotal > 0) {
@@ -1089,21 +1084,21 @@ public class TableMatrix {
                         / absoluteWidthTotal;
                 for (int i = 0; i < numCols; i++) {
                     SizeInfo sizeInfo = columnSizes[i];
-                    HtmlLength widthLength = columnSizes[i].htmlLength;
+                    HtmlLength widthLength = columnSizes[i].getHtmlLength();
                     if ((widthLength != null)
                             && (widthLength.getLengthType() != HtmlLength.LENGTH)) {
-                        int oldActualSize = sizeInfo.actualSize;
+                        int oldActualSize = sizeInfo.getActualSize();
                         int newActualSize = (int) Math.round(oldActualSize
                                 * ratio);
-                        sizeInfo.actualSize = newActualSize;
-                        if (newActualSize < sizeInfo.layoutSize) {
+                        sizeInfo.setActualSize(newActualSize);
+                        if (newActualSize < sizeInfo.getLayoutSize()) {
                             // See if it actually fits.
                             this.layoutColumn(columnSizes, sizeInfo, i,
                                     cellSpacingX, hasBorder);
-                            if (newActualSize < sizeInfo.layoutSize) {
+                            if (newActualSize < sizeInfo.getLayoutSize()) {
                                 // Didn't fit.
-                                newActualSize = sizeInfo.layoutSize;
-                                sizeInfo.actualSize = newActualSize;
+                                newActualSize = sizeInfo.getLayoutSize();
+                                sizeInfo.setActualSize(newActualSize);
                             }
                         }
                         currentTotal += (newActualSize - oldActualSize);
@@ -1116,10 +1111,10 @@ public class TableMatrix {
             if ((difference > 0) || ((difference < 0) && expand)) {
                 int percentWidthTotal = 0;
                 for (int i = 0; i < numCols; i++) {
-                    HtmlLength widthLength = columnSizes[i].htmlLength;
+                    HtmlLength widthLength = columnSizes[i].getHtmlLength();
                     if ((widthLength != null)
                             && (widthLength.getLengthType() == HtmlLength.LENGTH)) {
-                        percentWidthTotal += columnSizes[i].actualSize;
+                        percentWidthTotal += columnSizes[i].getActualSize();
                     }
                 }
                 if (percentWidthTotal > 0) {
@@ -1132,21 +1127,21 @@ public class TableMatrix {
                             / percentWidthTotal;
                     for (int i = 0; i < numCols; i++) {
                         SizeInfo sizeInfo = columnSizes[i];
-                        HtmlLength widthLength = columnSizes[i].htmlLength;
+                        HtmlLength widthLength = columnSizes[i].getHtmlLength();
                         if ((widthLength != null)
                                 && (widthLength.getLengthType() == HtmlLength.LENGTH)) {
-                            int oldActualSize = sizeInfo.actualSize;
+                            int oldActualSize = sizeInfo.getActualSize();
                             int newActualSize = (int) Math.round(oldActualSize
                                     * ratio);
-                            sizeInfo.actualSize = newActualSize;
-                            if (newActualSize < sizeInfo.layoutSize) {
+                            sizeInfo.setActualSize(newActualSize);
+                            if (newActualSize < sizeInfo.getLayoutSize()) {
                                 // See if it actually fits.
                                 this.layoutColumn(columnSizes, sizeInfo, i,
                                         cellSpacingX, hasBorder);
-                                if (newActualSize < sizeInfo.layoutSize) {
+                                if (newActualSize < sizeInfo.getLayoutSize()) {
                                     // Didn't fit.
-                                    newActualSize = sizeInfo.layoutSize;
-                                    sizeInfo.actualSize = newActualSize;
+                                    newActualSize = sizeInfo.getLayoutSize();
+                                    sizeInfo.setActualSize(newActualSize);
                                 }
                             }
                             currentTotal += (newActualSize - oldActualSize);
@@ -1182,21 +1177,21 @@ public class TableMatrix {
         // Initialize minSize in rows
         int numRows = rowSizes.length;
         for (int i = 0; i < numRows; i++) {
-            rowSizes[i].minSize = 0;
+            rowSizes[i].setMinSize(0);
         }
 
         // Initialize layoutSize in columns
         int numCols = colSizes.length;
         for (int i = 0; i < numCols; i++) {
-            colSizes[i].layoutSize = 0;
+            colSizes[i].setLayoutSize(0);
         }
 
         ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
         int numCells = allCells.size();
         if (caption != null) {
             caption.doLayout(0, 0, true, true, null, 0, 0, true, true);
-            captionSize.height = caption.height;
-            captionSize.width = caption.width;
+            captionSize.setHeight(caption.height);
+            captionSize.setWidth(caption.width);
         }
         for (int i = 0; i < numCells; i++) {
             RTableCell cell = (RTableCell) allCells.get(i);
@@ -1209,19 +1204,19 @@ public class TableMatrix {
                 cellsUsedWidth = 0;
                 for (int x = 0; x < colSpan; x++) {
                     SizeInfo colSize = colSizes[col + x];
-                    if (colSize.htmlLength != null) {
+                    if (colSize.getHtmlLength() != null) {
                         widthDeclared = true;
                     }
-                    cellsUsedWidth += colSize.actualSize;
+                    cellsUsedWidth += colSize.getActualSize();
                 }
                 cellsTotalWidth = cellsUsedWidth
                         + ((colSpan - 1) * (cellSpacingX + (2 * hasBorder)));
             } else {
                 SizeInfo colSize = colSizes[col];
-                if (colSize.htmlLength != null) {
+                if (colSize.getHtmlLength() != null) {
                     widthDeclared = true;
                 }
-                cellsUsedWidth = cellsTotalWidth = colSize.actualSize;
+                cellsUsedWidth = cellsTotalWidth = colSize.getActualSize();
             }
 
             // TODO: A tentative height could be used here: Height of
@@ -1245,25 +1240,25 @@ public class TableMatrix {
                     double ratio = (double) cellLayoutWidth / cellsUsedWidth;
                     for (int x = 0; x < colSpan; x++) {
                         SizeInfo si = colSizes[col + x];
-                        int newLayoutSize = (int) Math.round(si.actualSize
+                        int newLayoutSize = (int) Math.round(si.getActualSize()
                                 * ratio);
-                        if (si.layoutSize < newLayoutSize) {
-                            si.layoutSize = newLayoutSize;
+                        if (si.getLayoutSize() < newLayoutSize) {
+                            si.setLayoutSize(newLayoutSize);
                         }
                     }
                 } else {
                     int newLayoutSize = cellLayoutWidth / colSpan;
                     for (int x = 0; x < colSpan; x++) {
                         SizeInfo si = colSizes[col + x];
-                        if (si.layoutSize < newLayoutSize) {
-                            si.layoutSize = newLayoutSize;
+                        if (si.getLayoutSize() < newLayoutSize) {
+                            si.setLayoutSize(newLayoutSize);
                         }
                     }
                 }
             } else {
                 SizeInfo colSizeInfo = colSizes[col];
-                if (colSizeInfo.layoutSize < cellLayoutWidth) {
-                    colSizeInfo.layoutSize = cellLayoutWidth;
+                if (colSizeInfo.getLayoutSize() < cellLayoutWidth) {
+                    colSizeInfo.setLayoutSize(cellLayoutWidth);
                 }
             }
 
@@ -1275,13 +1270,13 @@ public class TableMatrix {
                 int vch = (actualCellHeight - ((rowSpan - 1) * (cellSpacingY + (2 * hasBorder))))
                         / rowSpan;
                 for (int y = 0; y < rowSpan; y++) {
-                    if (rowSizes[row + y].minSize < vch) {
-                        rowSizes[row + y].minSize = vch;
+                    if (rowSizes[row + y].getMinSize() < vch) {
+                        rowSizes[row + y].setMinSize(vch);
                     }
                 }
             } else {
-                if (rowSizes[row].minSize < actualCellHeight) {
-                    rowSizes[row].minSize = actualCellHeight;
+                if (rowSizes[row].getMinSize() < actualCellHeight) {
+                    rowSizes[row].setMinSize(actualCellHeight);
                 }
             }
         }
@@ -1348,17 +1343,17 @@ public class TableMatrix {
         int otherMinSize = 0;
         for (int i = 0; i < numRows; i++) {
             SizeInfo rowSizeInfo = rowSizes[i];
-            HtmlLength heightLength = rowSizeInfo.htmlLength;
+            HtmlLength heightLength = rowSizeInfo.getHtmlLength();
             if ((heightLength != null)
                     && (heightLength.getLengthType() == HtmlLength.LENGTH)) {
                 int actualSizeInt = heightLength.getLength(cellAvailHeight);
-                if (actualSizeInt < rowSizeInfo.minSize) {
-                    actualSizeInt = rowSizeInfo.minSize;
+                if (actualSizeInt < rowSizeInfo.getMinSize()) {
+                    actualSizeInt = rowSizeInfo.getMinSize();
                 }
                 heightUsedbyPercent += actualSizeInt;
-                rowSizeInfo.actualSize = actualSizeInt;
+                rowSizeInfo.setActualSize(actualSizeInt);
             } else {
-                otherMinSize += rowSizeInfo.minSize;
+                otherMinSize += rowSizeInfo.getMinSize();
             }
         }
 
@@ -1369,18 +1364,18 @@ public class TableMatrix {
                     / heightUsedbyPercent;
             for (int i = 0; i < numRows; i++) {
                 SizeInfo rowSizeInfo = rowSizes[i];
-                HtmlLength heightLength = rowSizeInfo.htmlLength;
+                HtmlLength heightLength = rowSizeInfo.getHtmlLength();
                 if ((heightLength != null)
                         && (heightLength.getLengthType() == HtmlLength.LENGTH)) {
-                    int actualSize = rowSizeInfo.actualSize;
+                    int actualSize = rowSizeInfo.getActualSize();
                     int prevActualSize = actualSize;
                     int newActualSize = (int) Math
                             .round(prevActualSize * ratio);
-                    if (newActualSize < rowSizeInfo.minSize) {
-                        newActualSize = rowSizeInfo.minSize;
+                    if (newActualSize < rowSizeInfo.getMinSize()) {
+                        newActualSize = rowSizeInfo.getMinSize();
                     }
                     heightUsedbyPercent += (newActualSize - prevActualSize);
-                    rowSizeInfo.actualSize = newActualSize;
+                    rowSizeInfo.setActualSize(newActualSize);
                 }
             }
         }
@@ -1392,19 +1387,19 @@ public class TableMatrix {
         int numNoHeightColumns = 0;
         for (int i = 0; i < numRows; i++) {
             SizeInfo rowSizeInfo = rowSizes[i];
-            HtmlLength heightLength = rowSizeInfo.htmlLength;
+            HtmlLength heightLength = rowSizeInfo.getHtmlLength();
             if ((heightLength != null)
                     && (heightLength.getLengthType() != HtmlLength.LENGTH)) {
                 // TODO: MULTI-LENGTH not supported
                 int actualSizeInt = heightLength.getRawValue();
-                if (actualSizeInt < rowSizeInfo.minSize) {
-                    actualSizeInt = rowSizeInfo.minSize;
+                if (actualSizeInt < rowSizeInfo.getMinSize()) {
+                    actualSizeInt = rowSizeInfo.getMinSize();
                 }
                 heightUsedByAbsolute += actualSizeInt;
-                rowSizeInfo.actualSize = actualSizeInt;
+                rowSizeInfo.setActualSize(actualSizeInt);
             } else if (heightLength == null) {
                 numNoHeightColumns++;
-                noHeightMinSize += rowSizeInfo.minSize;
+                noHeightMinSize += rowSizeInfo.getMinSize();
             }
         }
         // numNoHeightColumns++;
@@ -1417,18 +1412,18 @@ public class TableMatrix {
                     / heightUsedByAbsolute;
             for (int i = 0; i < numRows; i++) {
                 SizeInfo rowSizeInfo = rowSizes[i];
-                HtmlLength heightLength = rowSizeInfo.htmlLength;
+                HtmlLength heightLength = rowSizeInfo.getHtmlLength();
                 if ((heightLength != null)
                         && (heightLength.getLengthType() != HtmlLength.LENGTH)) {
-                    int actualSize = rowSizeInfo.actualSize;
+                    int actualSize = rowSizeInfo.getActualSize();
                     int prevActualSize = actualSize;
                     int newActualSize = (int) Math
                             .round(prevActualSize * ratio);
-                    if (newActualSize < rowSizeInfo.minSize) {
-                        newActualSize = rowSizeInfo.minSize;
+                    if (newActualSize < rowSizeInfo.getMinSize()) {
+                        newActualSize = rowSizeInfo.getMinSize();
                     }
                     heightUsedByAbsolute += (newActualSize - prevActualSize);
-                    rowSizeInfo.actualSize = newActualSize;
+                    rowSizeInfo.setActualSize(newActualSize);
                 }
             }
         }
@@ -1441,19 +1436,19 @@ public class TableMatrix {
 
         for (int i = 0; i < numRows; i++) {
             SizeInfo rowSizeInfo = rowSizes[i];
-            HtmlLength heightLength = rowSizeInfo.htmlLength;
+            HtmlLength heightLength = rowSizeInfo.getHtmlLength();
             if (heightLength == null) {
                 int actualSizeInt = remainingHeight / numNoHeightColumns;
-                if (actualSizeInt < rowSizeInfo.minSize) {
-                    actualSizeInt = rowSizeInfo.minSize;
+                if (actualSizeInt < rowSizeInfo.getMinSize()) {
+                    actualSizeInt = rowSizeInfo.getMinSize();
                 }
                 heightUsedByRemaining += actualSizeInt;
-                rowSizeInfo.actualSize = actualSizeInt;
+                rowSizeInfo.setActualSize(actualSizeInt);
             }
         }
         if (captionSize != null /* && captionSize.height.htmlLength == null */) {
             // captionSize.height.actualSize = captionSize.height.minSize;
-            heightUsedByRemaining += captionSize.height;
+            heightUsedByRemaining += captionSize.getHeight();
         }
 
         // Calculate actual table width
@@ -1467,8 +1462,8 @@ public class TableMatrix {
             double ratio = (double) cellAvailHeight / totalUsed;
             for (int i = 0; i < numRows; i++) {
                 SizeInfo rowSizeInfo = rowSizes[i];
-                int actualSize = rowSizeInfo.actualSize;
-                rowSizeInfo.actualSize = (int) Math.round(actualSize * ratio);
+                int actualSize = rowSizeInfo.getActualSize();
+                rowSizeInfo.setActualSize((int) Math.round(actualSize * ratio));
             }
             this.tableHeight = tableHeight;
         }
@@ -1505,16 +1500,16 @@ public class TableMatrix {
         int percentSum = 0;
         for (int i = 0; i < numRows; i++) {
             SizeInfo rowSizeInfo = rowSizes[i];
-            HtmlLength heightLength = rowSizeInfo.htmlLength;
+            HtmlLength heightLength = rowSizeInfo.getHtmlLength();
             if ((heightLength != null)
                     && (heightLength.getLengthType() == HtmlLength.PIXELS)) {
                 // TODO: MULTI-LENGTH not supported
                 int actualSizeInt = heightLength.getRawValue();
-                if (actualSizeInt < rowSizeInfo.minSize) {
-                    actualSizeInt = rowSizeInfo.minSize;
+                if (actualSizeInt < rowSizeInfo.getMinSize()) {
+                    actualSizeInt = rowSizeInfo.getMinSize();
                 }
                 heightUsedByAbsolute += actualSizeInt;
-                rowSizeInfo.actualSize = actualSizeInt;
+                rowSizeInfo.setActualSize(actualSizeInt);
             } else if ((heightLength != null)
                     && (heightLength.getLengthType() == HtmlLength.LENGTH)) {
                 percentSum += heightLength.getRawValue();
@@ -1527,11 +1522,11 @@ public class TableMatrix {
         // Set sizes to in row height
         for (int i = 0; i < numRows; i++) {
             SizeInfo rowSizeInfo = rowSizes[i];
-            HtmlLength widthLength = rowSizeInfo.htmlLength;
+            HtmlLength widthLength = rowSizeInfo.getHtmlLength();
             if (widthLength == null) {
-                int actualSizeInt = rowSizeInfo.minSize;
+                int actualSizeInt = rowSizeInfo.getMinSize();
                 heightUsedByNoSize += actualSizeInt;
-                rowSizeInfo.actualSize = actualSizeInt;
+                rowSizeInfo.setActualSize(actualSizeInt);
             }
         }
         /*
@@ -1547,15 +1542,15 @@ public class TableMatrix {
 
         for (int i = 0; i < numRows; i++) {
             SizeInfo rowSizeInfo = rowSizes[i];
-            HtmlLength heightLength = rowSizeInfo.htmlLength;
+            HtmlLength heightLength = rowSizeInfo.getHtmlLength();
             if ((heightLength != null)
                     && (heightLength.getLengthType() == HtmlLength.LENGTH)) {
                 int actualSizeInt = heightLength
                         .getLength(expectedTotalCellHeight);
-                if (actualSizeInt < rowSizeInfo.minSize) {
-                    actualSizeInt = rowSizeInfo.minSize;
+                if (actualSizeInt < rowSizeInfo.getMinSize()) {
+                    actualSizeInt = rowSizeInfo.getMinSize();
                 }
-                rowSizeInfo.actualSize = actualSizeInt;
+                rowSizeInfo.setActualSize(actualSizeInt);
             }
         }
         
@@ -1591,10 +1586,10 @@ public class TableMatrix {
                 totalCellWidth = (colSpan - 1)
                         * (cellSpacing + (2 * hasBorder));
                 for (int x = 0; x < colSpan; x++) {
-                    totalCellWidth += colSizes[col + x].actualSize;
+                    totalCellWidth += colSizes[col + x].getActualSize();
                 }
             } else {
-                totalCellWidth = colSizes[col].actualSize;
+                totalCellWidth = colSizes[col].getActualSize();
             }
             int row = cell.getVirtualRow();
             int rowSpan = cell.getRowSpan();
@@ -1603,32 +1598,32 @@ public class TableMatrix {
                 totalCellHeight = (rowSpan - 1)
                         * (cellSpacing + (2 * hasBorder));
                 for (int y = 0; y < rowSpan; y++) {
-                    totalCellHeight += rowSizes[row + y].actualSize;
+                    totalCellHeight += rowSizes[row + y].getActualSize();
                 }
             } else {
-                totalCellHeight = rowSizes[row].actualSize;
+                totalCellHeight = rowSizes[row].getActualSize();
             }
             
             Dimension size = cell.doCellLayout(totalCellWidth, totalCellHeight,
                     true, true, sizeOnly);
             if (size.width > totalCellWidth) {
                 if (colSpan == 1) {
-                    colSizes[col].actualSize = size.width;
+                    colSizes[col].setActualSize(size.width);
                 } else {
-                    colSizes[col].actualSize += (size.width - totalCellWidth);
+                    colSizes[col].setActualSize(colSizes[col].getActualSize() + (size.width - totalCellWidth));
                 }
             }
             if (size.height > totalCellHeight) {
                 if (rowSpan == 1) {
-                    rowSizes[row].actualSize = size.height;
+                    rowSizes[row].setActualSize(size.width);
                 } else {
-                    rowSizes[row].actualSize += (size.height - totalCellHeight);
+                    rowSizes[row].setActualSize(colSizes[col].getActualSize() + (size.width - totalCellWidth));
                 }
             }
         }
         if (this.captionSize != null) {
-            this.caption.doLayout(this.captionSize.width,
-                    this.captionSize.height, true, true, null,
+            this.caption.doLayout(this.captionSize.getWidth(),
+                    this.captionSize.getHeight(), true, true, null,
                     RenderState.OVERFLOW_NONE, RenderState.OVERFLOW_NONE,
                     sizeOnly, true);
         }
@@ -1652,20 +1647,20 @@ public class TableMatrix {
         int hasBorder = this.hasOldStyleBorder;
 
         if ((this.captionSize != null) && !isCaptionBotton()) {
-            yoffset += this.captionSize.height;
+            yoffset += this.captionSize.getHeight();
             yoffset += hasBorder;
         }
         for (int i = 0; i < numRows; i++) {
             yoffset += cellSpacingY;
             yoffset += hasBorder;
             SizeInfo rowSizeInfo = rowSizes[i];
-            rowSizeInfo.offset = yoffset;
-            yoffset += rowSizeInfo.actualSize;
+            rowSizeInfo.setOffset(yoffset);
+            yoffset += rowSizeInfo.getActualSize();
             yoffset += hasBorder;
         }
         if ((this.captionSize != null) && isCaptionBotton()) {
-            this.captionSize.heightOffset = yoffset + insets.bottom;
-            yoffset += this.captionSize.height;
+            this.captionSize.setHeightOffset(yoffset + insets.bottom);
+            yoffset += this.captionSize.getHeight();
             yoffset += hasBorder;
         }
 
@@ -1681,8 +1676,8 @@ public class TableMatrix {
             xoffset += cellSpacingX;
             xoffset += hasBorder;
             SizeInfo colSizeInfo = colSizes[i];
-            colSizeInfo.offset = xoffset;
-            xoffset += colSizeInfo.actualSize;
+            colSizeInfo.setOffset(xoffset);
+            xoffset += colSizeInfo.getActualSize();
             xoffset += hasBorder;
         }
 
@@ -1698,8 +1693,8 @@ public class TableMatrix {
                     cellSpacingY);
         }
         if (this.caption != null) {
-            this.caption.setBounds(0, this.captionSize.heightOffset,
-                    this.tableWidth, this.captionSize.height);
+            this.caption.setBounds(0, this.captionSize.getHeightOffset(),
+                    this.tableWidth, this.captionSize.getHeight());
         }
     }
 

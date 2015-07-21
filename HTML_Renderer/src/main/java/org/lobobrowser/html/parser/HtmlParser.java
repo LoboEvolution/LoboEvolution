@@ -36,6 +36,7 @@ import java.util.logging.Logger;
 import org.lobobrowser.html.HtmlMapping;
 import org.lobobrowser.html.HtmlMappingChar;
 import org.lobobrowser.html.UserAgentContext;
+import org.lobobrowser.html.info.ElementInfo;
 import org.lobobrowser.html.io.WritableLineReader;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;

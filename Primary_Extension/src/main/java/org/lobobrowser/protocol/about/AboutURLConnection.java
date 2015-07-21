@@ -30,9 +30,9 @@ import java.util.Collection;
 import java.util.Properties;
 import java.util.TreeSet;
 
-import org.lobobrowser.primary.ext.BookmarkInfo;
 import org.lobobrowser.primary.ext.BookmarksHistory;
 import org.lobobrowser.primary.ext.HistoryEntry;
+import org.lobobrowser.primary.info.BookmarkInfo;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.Timing;
 

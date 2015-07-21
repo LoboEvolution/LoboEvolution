@@ -18,7 +18,7 @@ import java.awt.Color;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.style.BackgroundInfo;
+import org.lobobrowser.html.info.BackgroundInfo;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.ColorFactory;
@@ -61,7 +61,7 @@ public class BodyRenderState extends StyleSheetRenderState {
             return binfo;
         }
         binfo = super.getBackgroundInfo();
-        if ((binfo == null) || (binfo.backgroundColor == null)) {
+        if ((binfo == null) || (binfo.getBackgroundColor() == null)) {
             String bgcolor = this.element
                     .getAttribute(HtmlAttributeProperties.BGCOLOR);
             String background = this.element
@@ -71,15 +71,15 @@ public class BodyRenderState extends StyleSheetRenderState {
                 if (binfo == null) {
                     binfo = new BackgroundInfo();
                 }
-                binfo.backgroundColor = ColorFactory.getInstance().getColor(
-                        bgcolor);
+                binfo.setBackgroundColor(ColorFactory.getInstance().getColor(
+                        bgcolor));
             }
 
             if ((background != null) && (background.length() != 0)) {
                 if (binfo == null) {
                     binfo = new BackgroundInfo();
                 }
-                binfo.backgroundImage = this.document.getFullURL(background);
+                binfo.setBackgroundImage(this.document.getFullURL(background));
             }
         }
         this.iBackgroundInfo = binfo;

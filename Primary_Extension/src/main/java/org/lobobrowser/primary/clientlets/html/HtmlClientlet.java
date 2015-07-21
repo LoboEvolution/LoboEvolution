@@ -44,6 +44,7 @@ import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
 import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.primary.info.RefreshInfo;
 import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.util.Strings;
@@ -235,7 +236,7 @@ public class HtmlClientlet implements Clientlet {
                 panel.scrollToElement(ref);
             }
             if (refresh != null) {
-                String destUri = refresh.destinationUrl;
+                String destUri = refresh.getDestinationUrl();
                 URL currentURL = response.getResponseURL();
                 URL destURL;
                 if (destUri == null) {
@@ -258,7 +259,7 @@ public class HtmlClientlet implements Clientlet {
                         }
                     }
                 };
-                int waitMillis = refresh.waitSeconds * 1000;
+                int waitMillis = refresh.getWaitSeconds() * 1000;
                 if (waitMillis <= 0) {
                     waitMillis = 1;
                 }
@@ -641,32 +642,6 @@ public class HtmlClientlet implements Clientlet {
                 }
             }
             return httpEquivData;
-        }
-    }
-
-    /**
-     * The Class RefreshInfo.
-     */
-    private static class RefreshInfo {
-
-        /** The wait seconds. */
-        public final int waitSeconds;
-
-        /** The destination url. */
-        public final String destinationUrl;
-
-        /**
-         * Instantiates a new refresh info.
-         *
-         * @param waitSeconds
-         *            the wait seconds
-         * @param destinationUrl
-         *            the destination url
-         */
-        public RefreshInfo(final int waitSeconds, final String destinationUrl) {
-            super();
-            this.waitSeconds = waitSeconds;
-            this.destinationUrl = destinationUrl;
         }
     }
 

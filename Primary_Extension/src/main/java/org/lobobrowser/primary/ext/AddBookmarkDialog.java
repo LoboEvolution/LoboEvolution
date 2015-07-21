@@ -33,6 +33,7 @@ import javax.swing.border.EmptyBorder;
 import org.lobobrowser.primary.gui.FieldType;
 import org.lobobrowser.primary.gui.FormField;
 import org.lobobrowser.primary.gui.FormPanel;
+import org.lobobrowser.primary.info.BookmarkInfo;
 import org.lobobrowser.util.Strings;
 
 /**

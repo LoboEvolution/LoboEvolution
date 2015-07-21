@@ -43,6 +43,7 @@ import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.w3c.HTMLAnchorElement;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.primary.info.LocalParameterInfo;
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.ParameterInfo;

@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.primary.info.BookmarkInfo;
 import org.lobobrowser.store.StorageManager;
 
 /**

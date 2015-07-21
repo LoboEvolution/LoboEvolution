@@ -14,36 +14,85 @@
  */
 package org.lobobrowser.html.info;
 
+import java.io.Serializable;
+
 import org.lobobrowser.html.renderer.ExportableFloat;
 
 /**
  * The Class FloatingInfo.
  */
-public class FloatingInfo {
+public class FloatingInfo implements Serializable {
 
-    /** The shift x. */
-    public final int shiftX;
-    
-    /** The shift y. */
-    public final int shiftY;
+	private static final long serialVersionUID = -6300332715805068001L;
 
-    /** The floats. */
-    public final ExportableFloat[] floats;
+	/** The shift x. */
+	private int shiftX;
 
-    /**
-     * Instantiates a new floating info.
-     *
-     * @param shiftX
-     *            the shift x
-     * @param shiftY
-     *            the shift y
-     * @param floats
-     *            the floats
-     */
-    public FloatingInfo(int shiftX, int shiftY, ExportableFloat[] floats) {
-        super();
-        this.shiftX = shiftX;
-        this.shiftY = shiftY;
-        this.floats = floats;
-    }
+	/** The shift y. */
+	private int shiftY;
+
+	/** The floats. */
+	private ExportableFloat[] floats;
+
+	/**
+	 * Instantiates a new floating info.
+	 *
+	 * @param shiftX
+	 *            the shift x
+	 * @param shiftY
+	 *            the shift y
+	 * @param floats
+	 *            the floats
+	 */
+	public FloatingInfo(int shiftX, int shiftY, ExportableFloat[] floats) {
+		super();
+		this.shiftX = shiftX;
+		this.shiftY = shiftY;
+		this.floats = floats;
+	}
+
+	/**
+	 * @return the shiftX
+	 */
+	public int getShiftX() {
+		return shiftX;
+	}
+
+	/**
+	 * @param shiftX
+	 *            the shiftX to set
+	 */
+	public void setShiftX(int shiftX) {
+		this.shiftX = shiftX;
+	}
+
+	/**
+	 * @return the shiftY
+	 */
+	public int getShiftY() {
+		return shiftY;
+	}
+
+	/**
+	 * @param shiftY
+	 *            the shiftY to set
+	 */
+	public void setShiftY(int shiftY) {
+		this.shiftY = shiftY;
+	}
+
+	/**
+	 * @return the floats
+	 */
+	public ExportableFloat[] getFloats() {
+		return floats;
+	}
+
+	/**
+	 * @param floats
+	 *            the floats to set
+	 */
+	public void setFloats(ExportableFloat[] floats) {
+		this.floats = floats;
+	}
 }

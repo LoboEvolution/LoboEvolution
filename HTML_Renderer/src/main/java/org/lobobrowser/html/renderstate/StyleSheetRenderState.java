@@ -34,13 +34,13 @@ import java.util.StringTokenizer;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.info.BackgroundInfo;
+import org.lobobrowser.html.info.BorderInfo;
+import org.lobobrowser.html.info.WordInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
-import org.lobobrowser.html.style.BackgroundInfo;
-import org.lobobrowser.html.style.BorderInfo;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderThreadState;
-import org.lobobrowser.html.style.WordInfo;
 import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.util.gui.FontFactory;
@@ -425,7 +425,7 @@ public class StyleSheetRenderState implements RenderState {
         }
         Color localColor;
         BackgroundInfo binfo = this.getBackgroundInfo();
-        localColor = binfo == null ? null : binfo.backgroundColor;
+        localColor = binfo == null ? null : binfo.getBackgroundColor();
         if ((localColor == null) && (this.getDisplay() == DISPLAY_INLINE)) {
             RenderState prs = this.prevRenderState;
             if (prs != null) {
@@ -456,7 +456,7 @@ public class StyleSheetRenderState implements RenderState {
             localColor = null;
         } else {
             BackgroundInfo binfo = this.getBackgroundInfo();
-            localColor = binfo == null ? null : binfo.backgroundColor;
+            localColor = binfo == null ? null : binfo.getBackgroundColor();
             if (localColor == null) {
                 RenderState prs = this.prevRenderState;
                 if (prs != null) {
@@ -823,8 +823,8 @@ public class StyleSheetRenderState implements RenderState {
                 if (binfo == null) {
                     binfo = new BackgroundInfo();
                 }
-                binfo.backgroundColor = ColorFactory.getInstance().getColor(
-                        backgroundColorText);
+                binfo.setBackgroundColor(ColorFactory.getInstance().getColor(
+                        backgroundColorText));
             }
             String backgroundImageText = props.getBackgroundImage();
             if ((backgroundImageText != null)
@@ -835,7 +835,7 @@ public class StyleSheetRenderState implements RenderState {
                     if (binfo == null) {
                         binfo = new BackgroundInfo();
                     }
-                    binfo.backgroundImage = backgroundImage;
+                    binfo.setBackgroundImage(backgroundImage);
                 }
             }
             String backgroundRepeatText = props.getBackgroundRepeat();
@@ -997,34 +997,34 @@ public class StyleSheetRenderState implements RenderState {
     private void applyBackgroundHorizontalPositon(BackgroundInfo binfo,
             String xposition) {
         if (xposition.endsWith("%")) {
-            binfo.backgroundXPositionAbsolute = false;
+            binfo.setBackgroundXPositionAbsolute(false);
             try {
-                binfo.backgroundXPosition = (int) Double.parseDouble(xposition
-                        .substring(0, xposition.length() - 1).trim());
+                binfo.setBackgroundXPosition((int) Double.parseDouble(xposition
+                        .substring(0, xposition.length() - 1).trim()));
             } catch (NumberFormatException nfe) {
-                binfo.backgroundXPosition = 0;
+                binfo.setBackgroundXPosition(0);
             }
         } else if ("center".equalsIgnoreCase(xposition)) {
-            binfo.backgroundXPositionAbsolute = false;
-            binfo.backgroundXPosition = 50;
+            binfo.setBackgroundXPositionAbsolute(false);
+            binfo.setBackgroundXPosition(50);
         } else if ("right".equalsIgnoreCase(xposition)) {
-            binfo.backgroundXPositionAbsolute = false;
-            binfo.backgroundXPosition = 100;
+            binfo.setBackgroundXPositionAbsolute(false);
+            binfo.setBackgroundXPosition(100);
         } else if ("left".equalsIgnoreCase(xposition)) {
-            binfo.backgroundXPositionAbsolute = false;
-            binfo.backgroundXPosition = 0;
+            binfo.setBackgroundXPositionAbsolute(false);
+            binfo.setBackgroundXPosition(0);
         } else if ("bottom".equalsIgnoreCase(xposition)) {
             // Can happen
-            binfo.backgroundYPositionAbsolute = false;
-            binfo.backgroundYPosition = 100;
+            binfo.setBackgroundYPositionAbsolute(false);
+            binfo.setBackgroundYPosition(100);
         } else if ("top".equalsIgnoreCase(xposition)) {
             // Can happen
-            binfo.backgroundYPositionAbsolute = false;
-            binfo.backgroundYPosition = 0;
+            binfo.setBackgroundYPositionAbsolute(false);
+            binfo.setBackgroundYPosition(0);
         } else {
-            binfo.backgroundXPositionAbsolute = true;
-            binfo.backgroundXPosition = HtmlValues.getPixelSize(xposition,
-                    this, 0);
+            binfo.setBackgroundXPositionAbsolute(true);
+            binfo.setBackgroundXPosition(HtmlValues.getPixelSize(xposition,
+                    this, 0));
         }
     }
 
@@ -1039,34 +1039,34 @@ public class StyleSheetRenderState implements RenderState {
     private void applyBackgroundVerticalPosition(BackgroundInfo binfo,
             String yposition) {
         if (yposition.endsWith("%")) {
-            binfo.backgroundYPositionAbsolute = false;
+            binfo.setBackgroundYPositionAbsolute(false);
             try {
-                binfo.backgroundYPosition = (int) Double.parseDouble(yposition
-                        .substring(0, yposition.length() - 1).trim());
+                binfo.setBackgroundYPosition((int) Double.parseDouble(yposition
+                        .substring(0, yposition.length() - 1).trim()));
             } catch (NumberFormatException nfe) {
-                binfo.backgroundYPosition = 0;
+                binfo.setBackgroundYPosition(0);
             }
         } else if ("center".equalsIgnoreCase(yposition)) {
-            binfo.backgroundYPositionAbsolute = false;
-            binfo.backgroundYPosition = 50;
+            binfo.setBackgroundYPositionAbsolute(false);
+            binfo.setBackgroundYPosition(50);
         } else if ("bottom".equalsIgnoreCase(yposition)) {
-            binfo.backgroundYPositionAbsolute = false;
-            binfo.backgroundYPosition = 100;
+            binfo.setBackgroundYPositionAbsolute(false);
+            binfo.setBackgroundYPosition(100);
         } else if ("top".equalsIgnoreCase(yposition)) {
-            binfo.backgroundYPositionAbsolute = false;
-            binfo.backgroundYPosition = 0;
+            binfo.setBackgroundYPositionAbsolute(false);
+            binfo.setBackgroundYPosition(0);
         } else if ("right".equalsIgnoreCase(yposition)) {
             // Can happen
-            binfo.backgroundXPositionAbsolute = false;
-            binfo.backgroundXPosition = 100;
+            binfo.setBackgroundXPositionAbsolute(false);
+            binfo.setBackgroundXPosition(100);
         } else if ("left".equalsIgnoreCase(yposition)) {
             // Can happen
-            binfo.backgroundXPositionAbsolute = false;
-            binfo.backgroundXPosition = 0;
+            binfo.setBackgroundXPositionAbsolute(false);
+            binfo.setBackgroundXPosition(0);
         } else {
-            binfo.backgroundYPositionAbsolute = true;
-            binfo.backgroundYPosition = HtmlValues.getPixelSize(yposition,
-                    this, 0);
+            binfo.setBackgroundYPositionAbsolute(true);
+            binfo.setBackgroundYPosition(HtmlValues.getPixelSize(yposition,
+                    this, 0));
         }
     }
 
@@ -1079,10 +1079,10 @@ public class StyleSheetRenderState implements RenderState {
      *            the position
      */
     private void applyBackgroundPosition(BackgroundInfo binfo, String position) {
-        binfo.backgroundXPositionAbsolute = false;
-        binfo.backgroundYPositionAbsolute = false;
-        binfo.backgroundXPosition = 50;
-        binfo.backgroundYPosition = 50;
+        binfo.setBackgroundXPositionAbsolute(false);
+        binfo.setBackgroundYPositionAbsolute(false);
+        binfo.setBackgroundXPosition(50);
+        binfo.setBackgroundYPosition(50);
         StringTokenizer tok = new StringTokenizer(position, " \t\r\n");
         if (tok.hasMoreTokens()) {
             String xposition = tok.nextToken();

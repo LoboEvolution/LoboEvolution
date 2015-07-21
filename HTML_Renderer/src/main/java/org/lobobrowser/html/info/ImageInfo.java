@@ -11,40 +11,46 @@
  * to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
  * MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net
  */
-package org.lobobrowser.html.dombl;
+package org.lobobrowser.html.info;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+
+import org.lobobrowser.html.dombl.ImageEvent;
+import org.lobobrowser.html.dombl.ImageListener;
 
 /**
  * The Class ImageInfo.
  */
-public class ImageInfo {
-    // Access to this class is synchronized on imageInfos.
-    /** The image event. */
-    public ImageEvent imageEvent;
+public class ImageInfo implements Serializable {
 
-    /** The loaded. */
-    public boolean loaded;
+	private static final long serialVersionUID = -7078463952419036104L;
 
-    /** The listeners. */
-    private ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
+	/** The image event. */
+	public ImageEvent imageEvent;
 
-    /**
-     * Adds the listener.
-     *
-     * @param listener
-     *            the listener
-     */
-    public void addListener(ImageListener listener) {
-        this.listeners.add(listener);
-    }
+	/** The loaded. */
+	public boolean loaded;
 
-    /**
-     * Gets the listeners.
-     *
-     * @return the listeners
-     */
-    public ImageListener[] getListeners() {
-        return this.listeners.toArray(ImageListener.EMPTY_ARRAY);
-    }
+	/** The listeners. */
+	private ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
+
+	/**
+	 * Adds the listener.
+	 *
+	 * @param listener
+	 *            the listener
+	 */
+	public void addListener(ImageListener listener) {
+		this.listeners.add(listener);
+	}
+
+	/**
+	 * Gets the listeners.
+	 *
+	 * @return the listeners
+	 */
+	public ImageListener[] getListeners() {
+		return this.listeners.toArray(ImageListener.EMPTY_ARRAY);
+	}
 }

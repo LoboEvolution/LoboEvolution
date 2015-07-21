@@ -12,7 +12,7 @@
  * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
  * ivan.difrancesco@yahoo.it
  */
-package org.lobobrowser.primary.clientlets.html;
+package org.lobobrowser.primary.info;
 
 import java.io.File;
 

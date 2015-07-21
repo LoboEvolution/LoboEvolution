@@ -19,9 +19,9 @@ import java.net.URL;
 
 import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.AddBookmarkDialog;
-import org.lobobrowser.primary.ext.BookmarkInfo;
 import org.lobobrowser.primary.ext.BookmarksHistory;
 import org.lobobrowser.primary.ext.ComponentSource;
+import org.lobobrowser.primary.info.BookmarkInfo;
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigatorWindow;
 

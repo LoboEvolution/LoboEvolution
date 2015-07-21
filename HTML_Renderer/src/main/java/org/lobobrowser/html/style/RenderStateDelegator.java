@@ -20,6 +20,9 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.util.Optional;
 
+import org.lobobrowser.html.info.BackgroundInfo;
+import org.lobobrowser.html.info.BorderInfo;
+import org.lobobrowser.html.info.WordInfo;
 import org.lobobrowser.html.renderstate.RenderState;
 
 /**

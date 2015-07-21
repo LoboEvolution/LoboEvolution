@@ -61,6 +61,7 @@ import org.lobobrowser.primary.action.SearchBookmarksAction;
 import org.lobobrowser.primary.action.ShowBookmarksAction;
 import org.lobobrowser.primary.action.SourceAction;
 import org.lobobrowser.primary.action.StopAction;
+import org.lobobrowser.primary.info.BookmarkInfo;
 import org.lobobrowser.primary.settings.SearchEngine;
 import org.lobobrowser.primary.settings.ToolsSettings;
 import org.lobobrowser.request.ClientletRequestHandler;

@@ -2584,9 +2584,9 @@ public class RBlockViewport extends BaseRCollection {
      */
     private void importFloatingInfo(FloatingInfo floatingInfo,
             BoundableRenderable block) {
-        int shiftX = floatingInfo.shiftX + block.getX();
-        int shiftY = floatingInfo.shiftY + block.getY();
-        ExportableFloat[] floats = floatingInfo.floats;
+        int shiftX = floatingInfo.getShiftX() + block.getX();
+        int shiftY = floatingInfo.getShiftY() + block.getY();
+        ExportableFloat[] floats = floatingInfo.getFloats();
         int length = floats.length;
         for (int i = 0; i < length; i++) {
             ExportableFloat ef = floats[i];

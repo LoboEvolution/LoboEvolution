@@ -80,7 +80,7 @@ import org.lobobrowser.html.builder.TtBuilder;
 import org.lobobrowser.html.builder.UlBuilder;
 import org.lobobrowser.html.builder.UnderlineBuilder;
 import org.lobobrowser.html.builder.VideoBuilder;
-import org.lobobrowser.html.parser.ElementInfo;
+import org.lobobrowser.html.info.ElementInfo;
 
 /**
  * The Class HtmlMapping.
