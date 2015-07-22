@@ -134,18 +134,18 @@ public class SimpleHttpRequest implements HttpRequest {
     public synchronized String getResponseText() {
         byte[] bytes = this.responseBytes;
         java.net.URLConnection connection = this.connection;
-        String encoding = connection == null ? "ISO-8859-1" : Urls
+        String encoding = connection == null ? "UTF-8" : Urls
                 .getCharset(connection);
         if (encoding == null) {
-            encoding = "ISO-8859-1";
+            encoding = "UTF-8";
         }
         try {
             return bytes == null ? null : new String(bytes, encoding);
         } catch (UnsupportedEncodingException uee) {
             logger.log(Level.WARNING, "getResponseText(): Charset '" + encoding
-                    + "' did not work. Retrying with ISO-8859-1.", uee);
+                    + "' did not work. Retrying with UTF-8.", uee);
             try {
-                return new String(bytes, "ISO-8859-1");
+                return new String(bytes, "UTF-8");
             } catch (UnsupportedEncodingException uee2) {
                 // Ignore this time
                 return null;

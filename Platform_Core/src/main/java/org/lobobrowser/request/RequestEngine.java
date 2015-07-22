@@ -608,25 +608,25 @@ public final class RequestEngine {
                                     || (headerKey.length() == 0) ? ""
                                             : headerKey + ": ";
                             byte[] headerBytes = (headerPrefix + headerValue + "\r\n")
-                                    .getBytes("ISO-8859-1");
+                                    .getBytes("UTF-8");
                             out.write(headerBytes);
                         }
                         if (!hadDate) {
                             String currentDate = Urls.PATTERN_RFC1123
                                     .format(new java.util.Date());
                             byte[] headerBytes = ("Date: " + currentDate + "\r\n")
-                                    .getBytes("ISO-8859-1");
+                                    .getBytes("UTF-8");
                             out.write(headerBytes);
                         }
                         if (!hadContentLength) {
                             byte[] headerBytes = ("Content-Length: "
                                     + content.length + "\r\n")
-                                    .getBytes("ISO-8859-1");
+                                    .getBytes("UTF-8");
                             out.write(headerBytes);
                         }
                         byte[] rtHeaderBytes = (CacheInfo.HEADER_REQUEST_TIME
                                 + ": " + currentTime + "\r\n")
-                                .getBytes("ISO-8859-1");
+                                .getBytes("UTF-8");
                         out.write(rtHeaderBytes);
                         out.write(IORoutines.LINE_BREAK_BYTES);
                         out.write(content);

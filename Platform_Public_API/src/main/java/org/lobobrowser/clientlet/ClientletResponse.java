@@ -86,7 +86,7 @@ public interface ClientletResponse {
 
     /**
      * Gets the response content type. This can also contain a character
-     * encoding, e.g. <em>text/html; charset=ISO-8859-1</em>.
+     * encoding, e.g. <em>text/html; charset=UTF-8</em>.
      *
      * @return the content type
      * @see #getMimeType()

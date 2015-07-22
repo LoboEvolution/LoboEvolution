@@ -173,7 +173,7 @@ public class ParserTest extends JFrame {
             } finally {
                 in.close();
             }
-            String source = new String(content, "ISO-8859-1");
+            String source = new String(content, "UTF-8");
 
             this.textArea.setText(source);
             long time1 = System.currentTimeMillis();
@@ -184,7 +184,7 @@ public class ParserTest extends JFrame {
             String actualURI = url.toExternalForm();
             // Should change to use proper charset.
             Document document = builder.parse(new InputSourceImpl(bin,
-                    actualURI, "ISO-8859-1"));
+                    actualURI, "UTF-8"));
             long time2 = System.currentTimeMillis();
             logger.info("Parsed URI=[" + uri + "]: Parse elapsed: "
                     + (time2 - time1) + " ms. Load elapsed: " + (time1 - time0)

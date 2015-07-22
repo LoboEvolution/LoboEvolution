@@ -409,9 +409,9 @@ public class ClientletResponseImpl implements ClientletResponse {
         URL url = this.getResponseURL();
         if (Urls.isLocalFile(url)) {
             String charset = System.getProperty("file.encoding");
-            return charset == null ? "ISO-8859-1" : charset;
+            return charset == null ? "UTF-8" : charset;
         } else {
-            return "ISO-8859-1";
+            return "UTF-8";
         }
     }
 

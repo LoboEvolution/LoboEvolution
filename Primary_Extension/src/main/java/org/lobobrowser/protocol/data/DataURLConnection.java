@@ -65,7 +65,7 @@ public class DataURLConnection extends HttpURLConnection {
     public String getContentType() {
         String type = headerMap.get("Content-Type");
         if (type == null) {
-            return "Content-Type: text/plain; charset=US-ASCII";
+            return "Content-Type: text/plain; charset=UTF-8";
         }
         return type;
     }

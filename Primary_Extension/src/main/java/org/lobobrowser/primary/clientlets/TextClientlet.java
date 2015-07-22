@@ -49,7 +49,7 @@ public class TextClientlet implements Clientlet {
         try {
             InputStream in = context.getResponse().getInputStream();
             try {
-                String text = IORoutines.loadAsText(in, "ISO-8859-1");
+                String text = IORoutines.loadAsText(in, "UTF-8");
                 JTextArea textArea = new JTextArea(text);
                 textArea.setEditable(false);
                 JScrollPane pane = new JScrollPane(textArea);

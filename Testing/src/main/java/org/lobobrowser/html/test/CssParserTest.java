@@ -178,7 +178,7 @@ public class CssParserTest extends JFrame {
             } finally {
                 in.close();
             }
-            String source = new String(content, "ISO-8859-1");
+            String source = new String(content, "UTF-8");
             this.textArea.setText(source);
             long time1 = System.currentTimeMillis();
             CSSOMParser parser = new CSSOMParser();

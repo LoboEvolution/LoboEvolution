@@ -182,7 +182,7 @@ public class HtmlClientlet implements Clientlet {
                 charset = response.getCharset();
             }
             if (charset == null) {
-                charset = "ISO-8859-1";
+                charset = "UTF-8";
             }
             if (logger.isLoggable(Level.INFO)) {
                 logger.info("process(): charset=" + charset + " for URI=["
@@ -328,9 +328,9 @@ public class HtmlClientlet implements Clientlet {
     private String getDefaultCharset(URL url) {
         if (Urls.isLocalFile(url)) {
             String charset = System.getProperty("file.encoding");
-            return charset == null ? "ISO-8859-1" : charset;
+            return charset == null ? "UTF-8" : charset;
         } else {
-            return "ISO-8859-1";
+            return "UTF-8";
         }
     }
 

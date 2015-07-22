@@ -578,7 +578,7 @@ public class NetworkRequestImpl implements NetworkRequest {
             } catch (UnsupportedEncodingException uee) {
                 logger.log(Level.WARNING, "getResponseText()", uee);
                 try {
-                    responseText = new String(bytes, "ISO-8859-1");
+                    responseText = new String(bytes, "UTF-8");
                 } catch (UnsupportedEncodingException uee2) {
                     // ignore
                     responseText = null;

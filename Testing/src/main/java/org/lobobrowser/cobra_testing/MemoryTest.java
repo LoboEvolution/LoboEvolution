@@ -85,7 +85,7 @@ public class MemoryTest {
         } finally {
             in.close();
         }
-        // String source = new String(content, "ISO-8859-1");
+        // String source = new String(content, "UTF-8");
         // long time1 = System.currentTimeMillis();
         logger.info("Content size: " + content.length + " bytes.");
         UserAgentContext context = new SimpleUserAgentContext();
@@ -95,7 +95,7 @@ public class MemoryTest {
                     + Runtime.getRuntime().freeMemory());
             InputStream bin = new ByteArrayInputStream(content);
             Document document = builder.parse(new InputSourceImpl(bin, url
-                    .toExternalForm(), "ISO-8859-1"));
+                    .toExternalForm(), "UTF-8"));
             logger.info("Finished parsing: freeMemory="
                     + Runtime.getRuntime().freeMemory() + ",document="
                     + document);
@@ -126,7 +126,7 @@ public class MemoryTest {
         } finally {
             in.close();
         }
-        // String source = new String(content, "ISO-8859-1");
+        // String source = new String(content, "UTF-8");
         // long time1 = System.currentTimeMillis();
         logger.info("Content size: " + content.length + " bytes.");
         final UserAgentContext ucontext = new SimpleUserAgentContext();
@@ -143,7 +143,7 @@ public class MemoryTest {
                     + Runtime.getRuntime().freeMemory());
             bin = new ByteArrayInputStream(content);
             Document document = builder.parse(new InputSourceImpl(bin, url
-                    .toExternalForm(), "ISO-8859-1"));
+                    .toExternalForm(), "UTF-8"));
             logger.info("Finished parsing: freeMemory="
                     + Runtime.getRuntime().freeMemory());
             {
@@ -187,7 +187,7 @@ public class MemoryTest {
         } finally {
             in.close();
         }
-        // String source = new String(content, "ISO-8859-1");
+        // String source = new String(content, "UTF-8");
         // long time1 = System.currentTimeMillis();
         logger.info("Content size: " + content.length + " bytes.");
         final UserAgentContext ucontext = new SimpleUserAgentContext();
@@ -208,7 +208,7 @@ public class MemoryTest {
                     + Runtime.getRuntime().freeMemory());
             bin = new ByteArrayInputStream(content);
             Document document = builder.parse(new InputSourceImpl(bin, url
-                    .toExternalForm(), "ISO-8859-1"));
+                    .toExternalForm(), "UTF-8"));
             logger.info("Finished parsing: freeMemory="
                     + Runtime.getRuntime().freeMemory());
             panel.setDocument(document, rcontext);

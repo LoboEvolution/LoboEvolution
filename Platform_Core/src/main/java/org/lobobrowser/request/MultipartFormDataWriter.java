@@ -71,7 +71,7 @@ public class MultipartFormDataWriter {
                 + "\"; filename=\"" + fileName + "\"\r\n" + "Content-Type: "
                 + contentType + "\r\n" + "\r\n";
         OutputStream out = this.out;
-        out.write(headers.getBytes("ISO-8859-1"));
+        out.write(headers.getBytes("UTF-8"));
         byte[] buffer = new byte[4096];
         int numRead;
         while ((numRead = in.read(buffer)) != -1) {
@@ -99,7 +99,7 @@ public class MultipartFormDataWriter {
                 + "Content-Type: text/plain; charset=\"" + charset + "\"\r\n"
                 + "\r\n";
         OutputStream out = this.out;
-        out.write(headers.getBytes("ISO-8859-1"));
+        out.write(headers.getBytes("UTF-8"));
         out.write(value.getBytes(charset));
         out.write(LINE_BREAK_BYTES);
     }
@@ -113,7 +113,7 @@ public class MultipartFormDataWriter {
     public final void send() throws IOException {
         String finalDelimiter = "--" + this.boundary + "--\r\n";
         OutputStream out = this.out;
-        out.write(finalDelimiter.getBytes("ISO-8859-1"));
+        out.write(finalDelimiter.getBytes("UTF-8"));
         out.flush();
     }
 }

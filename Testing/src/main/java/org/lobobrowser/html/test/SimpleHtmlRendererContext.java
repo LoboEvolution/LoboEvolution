@@ -550,7 +550,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
                         }
                         try {
                             SimpleHtmlRendererContext.this.sourceCode = rin
-                                    .getString("ISO-8859-1");
+                                    .getString("UTF-8");
                         } catch (BufferExceededException bee) {
                             SimpleHtmlRendererContext.this.sourceCode = "[TOO BIG]";
                         }
@@ -595,7 +595,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
      */
     protected String getDocumentCharset(URLConnection connection) {
         String encoding = Urls.getCharset(connection);
-        return encoding == null ? "ISO-8859-1" : encoding;
+        return encoding == null ? "UTF-8" : encoding;
     }
 
     // Methods useful to Window below:

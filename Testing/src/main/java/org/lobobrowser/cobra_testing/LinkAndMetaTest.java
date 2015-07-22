@@ -47,7 +47,7 @@ public class LinkAndMetaTest {
         URL url = new URL(TEST_URI);
         InputStream in = url.openConnection().getInputStream();
         try {
-            Reader reader = new InputStreamReader(in, "ISO-8859-1");
+            Reader reader = new InputStreamReader(in, "UTF-8");
             DocumentBuilderImpl builder = new DocumentBuilderImpl(uacontext);
             InputSourceImpl is = new InputSourceImpl(reader,
                     url.toExternalForm());

@@ -40,7 +40,7 @@ public class IdTest {
         InputStream in = url.openConnection().getInputStream();
         try {
             DocumentBuilderImpl builder = new DocumentBuilderImpl(uacontext);
-            InputSourceImpl is = new InputSourceImpl(in, TEST_URI, "ISO-8859-1");
+            InputSourceImpl is = new InputSourceImpl(in, TEST_URI, "UTF-8");
             Document document = builder.parse(is);
             HTMLDocumentImpl doc = (HTMLDocumentImpl) document;
             Element element = doc.getElementById("1div");

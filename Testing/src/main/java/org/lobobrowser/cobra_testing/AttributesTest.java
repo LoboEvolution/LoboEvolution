@@ -49,7 +49,7 @@ public class AttributesTest {
         URL url = new URL(TEST_URI);
         InputStream in = url.openConnection().getInputStream();
         try {
-            Reader reader = new InputStreamReader(in, "ISO-8859-1");
+            Reader reader = new InputStreamReader(in, "UTF-8");
             Document document = builder.newDocument();
             // Here is where we use Cobra's HTML parser.
             HtmlParser parser = new HtmlParser(uacontext, document);

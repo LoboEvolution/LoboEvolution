@@ -141,7 +141,7 @@ public class HtmlParser {
 
     /**
      * Parses HTML from an input stream, assuming the character set is
-     * ISO-8859-1.
+     * UTF-8.
      *
      * @param in
      *            The input stream.
@@ -154,7 +154,7 @@ public class HtmlParser {
      */
     public void parse(InputStream in) throws IOException, SAXException,
     UnsupportedEncodingException {
-        this.parse(in, "ISO-8859-1");
+        this.parse(in, "UTF-8");
     }
 
     /**

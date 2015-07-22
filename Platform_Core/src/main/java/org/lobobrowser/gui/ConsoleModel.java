@@ -84,7 +84,7 @@ public class ConsoleModel extends PlainDocument {
     private void append(final byte[] bytes, final int offset, final int length)
             throws IOException {
         try {
-            String text = new String(bytes, offset, length, "ISO-8859-1");
+            String text = new String(bytes, offset, length, "UTF-8");
             Position endPosition = getEndPosition();
             insertString(endPosition.getOffset(), text, null);
             int overflow = getLength() - MAX_LENGTH;

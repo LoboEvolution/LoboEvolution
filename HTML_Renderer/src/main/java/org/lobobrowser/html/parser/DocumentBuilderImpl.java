@@ -156,7 +156,7 @@ public class DocumentBuilderImpl extends DocumentBuilder {
         String encoding = is.getEncoding();
         String charset = encoding;
         if (charset == null) {
-            charset = "US-ASCII";
+            charset = "UTF-8";
         }
         String uri = is.getSystemId();
         if (uri == null) {

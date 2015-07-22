@@ -38,7 +38,7 @@ public class ParseImagesTest {
         URL url = new URL(TEST_URI);
         InputStream in = url.openConnection().getInputStream();
         try {
-            Reader reader = new InputStreamReader(in, "ISO-8859-1");
+            Reader reader = new InputStreamReader(in, "UTF-8");
             InputSourceImpl inputSource = new InputSourceImpl(reader, TEST_URI);
             Document d = builder.parse(inputSource);
             HTMLDocumentImpl document = (HTMLDocumentImpl) d;
