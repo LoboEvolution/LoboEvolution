@@ -617,6 +617,9 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 	@Override
 	public void lineTo(int x, int y) {
+		if(path == null)
+			path = new GeneralPath();
+		
 		path.lineTo(x, y);
 
 	}
@@ -629,6 +632,9 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 	@Override
 	public void moveTo(int x, int y) {
+		if(path == null)
+			path = new GeneralPath();
+		
 		path.moveTo(x, y);
 
 	}
