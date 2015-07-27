@@ -132,12 +132,11 @@ public class LRUCache implements java.io.Serializable {
      * Removes the lru.
      */
     private void removeLRU() {
-        
-        if (this.timedSet != null) {
+        if (this.timedSet != null && this.timedSet.size() > 0) {
             OrderedValue ordVal = this.timedSet.first();
             if (ordVal != null) {
-                this.removalEvent.fireEvent(new RemovalEvent(this, ordVal
-                        .getValue()));
+                this.removalEvent
+                        .fireEvent(new RemovalEvent(this, ordVal.getValue()));
                 if (this.timedSet.remove(ordVal)) {
                     this.cacheMap.remove(ordVal.getKey());
                     this.currentSize -= ordVal.getApproximateSize();
