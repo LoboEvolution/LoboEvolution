@@ -30,7 +30,6 @@ import java.nio.charset.Charset;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -47,7 +46,6 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.ReadyStateChangeListener;
 import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.dombl.CSSStyleSheetList;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.dombl.DocumentNotificationListener;
 import org.lobobrowser.html.dombl.ElementFactory;
@@ -120,10 +118,13 @@ import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.css.CSSStyleSheet;
+import org.w3c.dom.stylesheets.StyleSheetList;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
+
+import com.steadystate.css.dom.CSSStyleSheetListImpl;
 
 /**
  * The Class HTMLDocumentImpl.
@@ -155,7 +156,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
             0);
 
     /** The style sheets. */
-    private final Collection styleSheets = new CSSStyleSheetList();
+    private final CSSStyleSheetListImpl styleSheets = new CSSStyleSheetListImpl();
 
     /** The image infos. */
     private final Map<String, ImageInfo> imageInfos = new HashMap<String, ImageInfo>(
@@ -478,7 +479,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
             this.setTitle(null);
             this.setBaseURI(null);
             this.setDefaultTarget(null);
-            this.styleSheets.clear();
+            this.styleSheets.getCSSStyleSheets().clear();
             this.styleSheetAggregator = null;
             reader = this.reader;
         }
@@ -1105,7 +1106,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
      *
      * @return the style sheets
      */
-    public Collection<CSSStyleSheet> getStyleSheets() {
+    public StyleSheetList getStyleSheets() {
         return this.styleSheets;
     }
 
@@ -1120,7 +1121,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
             if (ssa == null) {
                 ssa = new StyleSheetAggregator(this);
                 try {
-                    ssa.addStyleSheets(this.styleSheets);
+                    ssa.addStyleSheets(this.styleSheets.getCSSStyleSheets());
                 } catch (MalformedURLException | UnsupportedEncodingException mfu) {
                     logger.log(Level.WARNING, "getStyleSheetAggregator()", mfu);
                 }

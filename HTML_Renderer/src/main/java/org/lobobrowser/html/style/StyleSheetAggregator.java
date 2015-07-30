@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -86,7 +87,7 @@ public class StyleSheetAggregator {
      *             the malformed url exception
      * @throws UnsupportedEncodingException 
      */
-    public final void addStyleSheets(Collection styleSheets)
+    public final void addStyleSheets(List<CSSStyleSheet> styleSheets)
             throws MalformedURLException, UnsupportedEncodingException {
         Iterator i = styleSheets.iterator();
         while (i.hasNext()) {
