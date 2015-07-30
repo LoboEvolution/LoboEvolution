@@ -33,6 +33,7 @@ import java.util.List;
 
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.css.CSS2Properties;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.css.CSSValue;
@@ -50,7 +51,7 @@ import com.steadystate.css.util.LangUtils;
  * @author rbri
  * @author Ahmed Ashour
  */
-public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, CSSFormatable,CSSProperties, Serializable
+public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, CSSFormatable,CSS2Properties,CSSProperties, Serializable
 {
     private static final long serialVersionUID = -2373755821317100189L;
 
@@ -956,11 +957,6 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, CSSFormatab
 
 	}
 
-	/*
-	 * 
-	 * BorderTopColor(java.lang.String)
-	 */
-
 	public void setBorderTopColor(String borderTopColor) {
 		this.setProperty(BORDER_TOP_COLOR, borderTopColor);
 
@@ -1060,11 +1056,6 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, CSSFormatab
 	public void setEmptyCells(String emptyCells) {
 		this.setProperty(EMPTY_CELLS, emptyCells);
 	}
-
-	/*
-	 * 
-	 * Font(java.lang.String)
-	 */
 
 	public void setFont(String font) {
 
@@ -1424,6 +1415,17 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, CSSFormatab
 	public void setZIndex(String zIndex) {
 		this.setProperty(Z_INDEX, zIndex);
 
+	}
+
+	@Override
+	public void setBackgroundImage(String backgroundImage) throws DOMException {
+		this.setProperty(BACKGROUND_IMAGE,backgroundImage);
+		
+	}
+
+	@Override
+	public void setBorder(String border) throws DOMException {
+		this.setProperty(BORDER, border);
 	}
 
 }
