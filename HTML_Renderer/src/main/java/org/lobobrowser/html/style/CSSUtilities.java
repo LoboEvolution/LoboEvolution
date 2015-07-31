@@ -116,6 +116,9 @@ public class CSSUtilities {
 		CSSOMParser parser = new CSSOMParser();
 		
 		try {
+			if (href.startsWith("//")) {
+				href = "http:" + href;
+			}
 			url = new URL(href);
 		} catch (MalformedURLException mfu) {
 			int idx = href.indexOf(':');
