@@ -1044,6 +1044,17 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
         this.putAndStartTask(timeIDInt, timer, function);
         return timeID;
     }
+    
+    /**
+     * Sets the timeout.
+     *
+     * @param expr
+     *            the expr
+     * @return the int
+     */
+    public int setTimeout(final String expr) {
+    	return setTimeout(expr, 0);
+    }
 
     /**
      * Checks if is closed.
