@@ -16,8 +16,6 @@ package org.lobobrowser.html.domimpl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
@@ -43,9 +41,6 @@ HTMLLinkElement {
     /** The Constant logger. */
     private static final Logger logger = Logger
             .getLogger(HTMLLinkElementImpl.class.getName());
-
-    /** The Constant loggableInfo. */
-    private static final boolean loggableInfo = logger.isLoggable(Level.INFO);
 
     /** The style sheet. */
     private CSSStyleSheet styleSheet;
@@ -179,82 +174,39 @@ HTMLLinkElement {
                 UserAgentContext uacontext = this.getUserAgentContext();
                 if (uacontext.isExternalCSSEnabled()) {
                     String media = this.getMedia();
-                    if (CSSUtilities.matchesMedia(media, uacontext)) {
-                        HTMLDocumentImpl doc = (HTMLDocumentImpl) this
-                                .getOwnerDocument();
-                        try {
-                            boolean liflag = loggableInfo;
-                            long time1 = liflag ? System.currentTimeMillis()
-                                    : 0;
-                            try {
+					if (CSSUtilities.matchesMedia(media, uacontext)) {
+						HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getOwnerDocument();
+						try {
+							
+							CSSStyleSheet sheet = CSSUtilities.parse(this.getHref(), doc);
+							
+							if (sheet != null) {
+								doc.addStyleSheet(sheet);
+								this.styleSheet = sheet;
+								if (sheet instanceof CSSStyleSheetImpl) {
+									CSSStyleSheetImpl sheetImpl = (CSSStyleSheetImpl) sheet;
+									if (isAltStyleSheet) {
+										sheetImpl.setDisabled(true);
+									} else {
+										sheetImpl.setDisabled(disabled);
+									}
+								} else {
+									if (isAltStyleSheet) {
+										sheet.setDisabled(true);
+									} else {
+										sheet.setDisabled(this.disabled);
+									}
+								}
+								doc.addStyleSheet(sheet);
+							}
 
-                                ArrayList<String> arrText = CSSUtilities
-                                        .cssText(this.getHref(), doc,
-                                                doc.getBaseURI());
-
-                                String text = "";
-                                for (int i = 0; i < arrText.size(); i++) {
-
-                                    text = arrText.get(i);
-
-                                    if ((text.length() > 0)
-                                            && !text.startsWith("/*")) {
-
-                                        CSSStyleSheet sheet = null;
-
-                                        try {
-                                            sheet = CSSUtilities.parse(this,
-                                                    this.getHref(), text,
-                                                    doc.getBaseURI(), false);
-                                        } catch (Throwable e) {
-                                            logger.log(Level.WARNING,
-                                                    "Unable to parse CSS: "
-                                                            + text);
-                                        }
-
-                                        if (sheet != null) {
-                                            doc.addStyleSheet(sheet);
-                                            this.styleSheet = sheet;
-                                            if (sheet instanceof CSSStyleSheetImpl) {
-                                                CSSStyleSheetImpl sheetImpl = (CSSStyleSheetImpl) sheet;
-                                                if (isAltStyleSheet) {
-                                                    sheetImpl.setDisabled(true);
-                                                } else {
-                                                    sheetImpl
-                                                    .setDisabled(disabled);
-                                                }
-                                            } else {
-                                                if (isAltStyleSheet) {
-                                                    sheet.setDisabled(true);
-                                                } else {
-                                                    sheet.setDisabled(this.disabled);
-                                                }
-                                            }
-                                            doc.addStyleSheet(sheet);
-                                        }
-                                    }
-                                }
-                            } finally {
-                                if (liflag) {
-                                    long time2 = System.currentTimeMillis();
-                                    logger.info("processLink(): Loaded and parsed CSS (or attempted to) at URI=["
-                                            + this.getHref()
-                                            + "] in "
-                                            + (time2 - time1) + " ms.");
-                                }
-                            }
-
-                        } catch (MalformedURLException mfe) {
-                            this.warn("Will not parse CSS. URI=["
-                                    + this.getHref() + "] with BaseURI=["
-                                    + doc.getBaseURI()
-                                    + "] does not appear to be a valid URI.");
-                        } catch (Throwable err) {
-                            this.warn(
-                                    "Unable to parse CSS. URI=["
-                                            + this.getHref() + "].", err);
-                        }
-                    }
+						} catch (MalformedURLException mfe) {
+							this.warn("Will not parse CSS. URI=[" + this.getHref() + "] with BaseURI=["
+									+ doc.getBaseURI() + "] does not appear to be a valid URI.");
+						} catch (Throwable err) {
+							this.warn("Unable to parse CSS. URI=[" + this.getHref() + "].", err);
+						}
+					}
                 }
             }
         }
@@ -302,5 +254,14 @@ HTMLLinkElement {
     public void setSizes(String sizes) {
         this.setAttribute(HtmlAttributeProperties.SIZES, sizes);
 
+    }
+    
+    /**
+     * Gets the style sheets.
+     *
+     * @return the style sheets
+     */
+    public CSSStyleSheet getSheet() {
+        return this.styleSheet;
     }
 }

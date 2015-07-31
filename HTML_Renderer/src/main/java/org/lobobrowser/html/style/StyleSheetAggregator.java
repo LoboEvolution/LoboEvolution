@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.lobobrowser.html.UserAgentContext;
@@ -197,38 +196,21 @@ public class StyleSheetAggregator {
             UserAgentContext uacontext = document.getUserAgentContext();
             if (uacontext.isExternalCSSEnabled()) {
                 CSSImportRule importRule = (CSSImportRule) rule;
-                if (CSSUtilities.matchesMedia(importRule.getMedia(), uacontext)) {
+				if (CSSUtilities.matchesMedia(importRule.getMedia(), uacontext)) {
 
-                    String href = importRule.getHref();
+					String href = importRule.getHref();
 
-                    ArrayList<String> listext = CSSUtilities.cssText(href,
-                            document, document.getBaseURI());
+					CSSStyleSheet sheet = null;
+					try {
+						sheet = CSSUtilities.parse(href, document);
+					} catch (Exception err) {
+						logger.severe("Unable to parse CSS. URI=[" + href + "]." + err);
+					}
 
-                    String text = "";
-
-                    for (int i = 0; i < listext.size(); i++) {
-                        text = listext.get(i);
-
-                        if ((text.length() > 0) && !text.startsWith("/*")) {
-
-                            CSSStyleSheet sheet = null;
-
-                            try {
-                                sheet = CSSUtilities.parse(
-                                        styleSheet.getOwnerNode(), href, text,
-                                        document.getBaseURI(), false);
-
-                            } catch (Throwable e) {
-                                logger.log(Level.WARNING,
-                                        "Unable to parse CSS: " + text);
-                            }
-
-                            if (sheet != null) {
-                                this.addStyleSheet(sheet);
-                            }
-                        }
-                    }
-                }
+					if (sheet != null) {
+						this.addStyleSheet(sheet);
+					}
+				}
             }
         } else if (rule instanceof CSSMediaRule) {
             CSSMediaRule mrule = (CSSMediaRule) rule;
