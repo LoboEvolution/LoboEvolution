@@ -68,7 +68,7 @@ The Lobo Evolution
     	/>
 		<jar destfile="${build.dir}/cobra-no-commons.jar"
     		 basedir="../parser/bin/"
-    		 includes="**/*.class,**/*.xml,**/*.xamj,**/.xami,**/*.gif,**/*.png,**/*.jpg"
+    		 includes="**/*.class,**/*.xml,**/*.xamj,**/.xami,**/*.gif,**/*.png,**/*.jpg,**/*.properties"
     		 update="true"
     	/>
 	</target>
