@@ -20,10 +20,6 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.parser.*;
 import org.lobobrowser.html.test.SimpleUserAgentContext;
 import org.w3c.dom.*;

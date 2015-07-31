@@ -18,7 +18,6 @@
 package org.lobobrowser.main;
 
 import java.io.File;
-import java.io.InputStream;
 import java.net.Authenticator;
 import java.net.CookieHandler;
 import java.net.MalformedURLException;

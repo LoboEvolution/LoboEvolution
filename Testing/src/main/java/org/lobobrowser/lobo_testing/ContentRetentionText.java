@@ -15,13 +15,11 @@ package org.lobobrowser.lobo_testing;
 
 import org.lobobrowser.gui.*;
 import org.lobobrowser.main.*;
-import org.lobobrowser.util.*;
 import org.lobobrowser.context.*;
 import org.lobobrowser.store.*;
 import org.lobobrowser.clientlet.*;
 
 import java.awt.Component;
-import java.io.*;
 
 
 /**

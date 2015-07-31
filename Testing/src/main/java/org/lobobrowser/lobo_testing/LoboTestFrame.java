@@ -21,7 +21,10 @@ import javax.swing.*;
  * The Class LoboTestFrame.
  */
 public class LoboTestFrame extends JFrame {
-    public static void main(String[] args) throws Exception {
+    
+	private static final long serialVersionUID = 1L;
+
+	public static void main(String[] args) throws Exception {
         // This optional step initializes logging so only warnings
         // are printed out.
         PlatformInit.getInstance().initLogging(false);

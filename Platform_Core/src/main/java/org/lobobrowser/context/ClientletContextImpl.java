@@ -17,7 +17,6 @@ package org.lobobrowser.context;
 import java.awt.Component;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;

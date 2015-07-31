@@ -15,14 +15,11 @@ package org.lobobrowser.lobo_testing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
-import javax.swing.event.*;
-
 import org.lobobrowser.gui.*;
 import org.lobobrowser.ua.*;
 import org.lobobrowser.main.PlatformInit;
@@ -35,7 +32,9 @@ import org.lobobrowser.html.w3c.HTMLElement;
  */
 public class ContentObjectDemo extends JFrame {
     
-    /** The links combo box. */
+	private static final long serialVersionUID = 1L;
+
+	/** The links combo box. */
     private final JComboBox linksComboBox;
     
     /** The browser panel. */
@@ -143,7 +142,12 @@ public class ContentObjectDemo extends JFrame {
      * The Class LinksAction.
      */
     private class LinksAction extends AbstractAction {
-        public void actionPerformed(ActionEvent e) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public void actionPerformed(ActionEvent e) {
             LocationItem item = (LocationItem) linksComboBox.getSelectedItem();
             if (item != null) {
                 try {

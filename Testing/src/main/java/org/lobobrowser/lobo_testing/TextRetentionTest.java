@@ -13,11 +13,11 @@
  */
 package org.lobobrowser.lobo_testing;
 
-import org.lobobrowser.gui.*;
-import org.lobobrowser.main.*;
-import org.lobobrowser.util.*;
-import org.lobobrowser.context.*;
-import org.lobobrowser.store.*;
+import org.lobobrowser.context.VolatileContentImpl;
+import org.lobobrowser.gui.BrowserPanel;
+import org.lobobrowser.main.PlatformInit;
+import org.lobobrowser.store.CacheInfo;
+import org.lobobrowser.store.CacheManager;
 
 
 /**
