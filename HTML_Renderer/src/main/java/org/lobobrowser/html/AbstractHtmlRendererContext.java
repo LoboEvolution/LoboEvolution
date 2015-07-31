@@ -20,7 +20,6 @@ import java.net.URL;
 import org.lobobrowser.html.w3c.HTMLAnchorElement;
 import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.HTMLLinkElement;
 
 /**
  * Abstract implementation of the {@link HtmlRendererContext} interface with
