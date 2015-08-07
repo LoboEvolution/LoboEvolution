@@ -57,6 +57,7 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
 import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.parser.SACParserCSS3;
 
 /**
  * The Class HTMLElementImpl.
@@ -192,7 +193,7 @@ CSS2PropertiesContext {
             String style = this.getAttribute(HtmlAttributeProperties.STYLE);
 
             if ((style != null) && (style.length() != 0)) {
-                CSSOMParser parser = new CSSOMParser();
+                CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
                 InputSource inputSource = this.getCssInputSourceForDecl(style);
                 try {
                     CSSStyleDeclaration sd = parser

@@ -29,6 +29,7 @@ import org.w3c.dom.css.CSSStyleSheet;
 
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.parser.SACParserCSS3;
 
 /**
  * The Class HTMLStyleElementImpl.
@@ -119,7 +120,7 @@ HTMLStyleElement {
 
 					try {
 
-						CSSOMParser parser = new CSSOMParser();
+						CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
 
 						InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(text, doc.getBaseURI());
 						CSSStyleSheet sheet = parser.parseStyleSheet(is, null, null);

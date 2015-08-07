@@ -30,12 +30,14 @@ import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.util.Strings;
+import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.IORoutines;
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.stylesheets.MediaList;
 
 import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.parser.SACParserCSS3;
 
 /**
  * The Class CSSUtilities.
@@ -106,6 +108,7 @@ public class CSSUtilities {
 
 	/**
 	 * @param href
+	 * @param href
 	 * @param doc
 	 * @return
 	 * @throws Exception
@@ -113,23 +116,28 @@ public class CSSUtilities {
 	public static CSSStyleSheet parse(String href, HTMLDocumentImpl doc) throws Exception {
 
 		URL url = null;
-		CSSOMParser parser = new CSSOMParser();
+		CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
 		
-		try {
-			if (href.startsWith("//")) {
-				href = "http:" + href;
+		
+		URL baseURL = new URL(doc.getBaseURI());
+        URL scriptURL = Urls.createURL(baseURL, href);
+        String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
+        
+        try {
+			if (scriptURI.startsWith("//")) {
+				scriptURI = "http:" + scriptURI;
 			}
-			url = new URL(href);
+			url = new URL(scriptURI);
 		} catch (MalformedURLException mfu) {
-			int idx = href.indexOf(':');
+			int idx = scriptURI.indexOf(':');
 			if ((idx == -1) || (idx == 1)) {
 				// try file
-				url = new URL("file:" + href);
+				url = new URL("file:" + scriptURI);
 			} else {
 				throw mfu;
 			}
 		}
-		logger.info("process(): Loading URI=[" + href + "].");
+		logger.info("process(): Loading URI=[" + scriptURI + "].");
 		SSLCertificate.setCertificate();
 		URLConnection connection = url.openConnection();
 		connection.setRequestProperty("User-Agent", "Mozilla/5.0 (compatible;) Cobra/0.97+");
