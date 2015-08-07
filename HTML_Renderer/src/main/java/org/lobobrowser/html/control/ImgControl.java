@@ -22,12 +22,15 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import javax.imageio.ImageIO;
 
 import org.apache.batik.transcoder.TranscoderException;
 import org.lobobrowser.html.dombl.ImageEvent;
@@ -38,6 +41,8 @@ import org.lobobrowser.html.renderer.HtmlController;
 import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.RenderableSpot;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.http.SSLCertificate;
+import org.lobobrowser.util.Urls;
 
 /**
  * The Class ImgControl.
@@ -119,14 +124,27 @@ public class ImgControl extends BaseControl implements ImageListener {
         });
         
         
-		if (modelNode.getSrc()!= null && modelNode.getSrc().endsWith(".svg")) {
-
+		if (modelNode.getSrc() != null) {
 			try {
-				URL u = new URL(modelNode.getSrc());
-				SVGRasterizer r = new SVGRasterizer(u);
-				image = r.bufferedImageToImage();
+				URL baseURL = new URL(modelNode.getOwnerDocument().getBaseURI());
+				URL scriptURL = Urls.createURL(baseURL, modelNode.getSrc());
+				String scriptURI = scriptURL == null ? modelNode.getSrc() : scriptURL.toExternalForm();
 				
-			} catch (MalformedURLException | TranscoderException e1) {
+				if (scriptURI.endsWith(".svg")) {
+
+					URL u = new URL(scriptURI);
+					SVGRasterizer r = new SVGRasterizer(u);
+					image = r.bufferedImageToImage();
+
+				}
+
+				if (scriptURI.startsWith("https")) {
+					SSLCertificate.setCertificate();
+					URL u = new URL(scriptURI);
+					image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(u).getSource());
+				}
+
+			} catch (TranscoderException | IOException e1) {
 				e1.printStackTrace();
 			}
 		}
@@ -353,7 +371,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 
     @Override
     public void imageLoaded(ImageEvent event) {
-        Image image = event.image;
+    	Image image = event.image;
         this.image = image;
         int width = image.getWidth(this);
         int height = image.getHeight(this);
