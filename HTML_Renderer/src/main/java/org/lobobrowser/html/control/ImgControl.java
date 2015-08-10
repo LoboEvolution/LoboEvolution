@@ -25,12 +25,14 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import org.apache.batik.transcoder.TranscoderException;
 import org.lobobrowser.html.dombl.ImageEvent;
@@ -81,6 +83,8 @@ public class ImgControl extends BaseControl implements ImageListener {
 
     /** The mouse being pressed. */
     private boolean mouseBeingPressed;
+    
+    private BufferedImage bufferImage;
 
     /**
      * Instantiates a new img control.
@@ -96,6 +100,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 
         align = modelNode.getAlign();
         alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
+        bufferImage = null;
 
         modelNode.addImageListener(this);
         this.addMouseListener(new MouseAdapter() {
@@ -126,22 +131,25 @@ public class ImgControl extends BaseControl implements ImageListener {
         
 		if (modelNode.getSrc() != null) {
 			try {
+				SSLCertificate.setCertificate();
 				URL baseURL = new URL(modelNode.getOwnerDocument().getBaseURI());
 				URL scriptURL = Urls.createURL(baseURL, modelNode.getSrc());
 				String scriptURI = scriptURL == null ? modelNode.getSrc() : scriptURL.toExternalForm();
-				
+				URL u = new URL(scriptURI);
 				if (scriptURI.endsWith(".svg")) {
-
-					URL u = new URL(scriptURI);
 					SVGRasterizer r = new SVGRasterizer(u);
 					image = r.bufferedImageToImage();
-
-				}
-
-				if (scriptURI.startsWith("https")) {
+				} else if (scriptURI.startsWith("https")) {
 					SSLCertificate.setCertificate();
-					URL u = new URL(scriptURI);
 					image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(u).getSource());
+				} else if (scriptURI.endsWith(".gif")) {
+					image = new ImageIcon(u).getImage();					
+				} else if (scriptURI.endsWith(".bmp")){
+					try {
+						image = ImageIO.read(u);
+					} catch (IOException e) {
+						System.out.println("read error: " + e.getMessage());
+					}
 				}
 
 			} catch (TranscoderException | IOException e1) {
@@ -170,7 +178,11 @@ public class ImgControl extends BaseControl implements ImageListener {
         if (image != null) {
             int x = (getWidth() - imageWidth) / 2;
             int y = (getHeight() - imageHeight) / 2;
-            g.drawImage(image, x, y, imageWidth, imageHeight, this);
+			if (bufferImage == null) {
+				g.drawImage(image, x, y, imageWidth, imageHeight, this);
+			} else {
+				g.drawImage(bufferImage, x, y, imageWidth, imageHeight, this);
+			}
         } else {
             g.drawString(alt, 10, 10);
         }
