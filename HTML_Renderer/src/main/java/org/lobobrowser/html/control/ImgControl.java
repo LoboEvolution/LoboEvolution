@@ -140,7 +140,6 @@ public class ImgControl extends BaseControl implements ImageListener {
 					SVGRasterizer r = new SVGRasterizer(u);
 					image = r.bufferedImageToImage();
 				} else if (scriptURI.startsWith("https")) {
-					SSLCertificate.setCertificate();
 					image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(u).getSource());
 				} else if (scriptURI.endsWith(".gif")) {
 					image = new ImageIcon(u).getImage();					
