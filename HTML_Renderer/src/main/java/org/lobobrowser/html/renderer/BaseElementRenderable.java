@@ -22,21 +22,23 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.net.URL;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.logging.Level;
 
-import org.lobobrowser.html.HttpRequest;
-import org.lobobrowser.html.ReadyStateChangeListener;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
+import org.apache.batik.transcoder.TranscoderException;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ModelNode;
+import org.lobobrowser.html.dombl.SVGRasterizer;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.BackgroundInfo;
@@ -45,6 +47,7 @@ import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.GUITasks;
 import org.w3c.dom.css.CSS2Properties;
@@ -67,8 +70,6 @@ RElement, RenderableContainer, ImageObserver {
      * A list of absolute positioned or float parent-child pairs.
      */
     protected Collection<DelayedPair> delayedPairs = null;
-
-    // protected boolean renderStyleCanBeInvalidated = true;
 
     /**
      * Background color which may be different to that from RenderState in the
@@ -707,57 +708,31 @@ RElement, RenderableContainer, ImageObserver {
      * @param imageURL
      *            the image url
      */
-    protected void loadBackgroundImage(final URL imageURL) {
-        UserAgentContext ctx = this.userAgentContext;
-        if (ctx != null) {
-            final HttpRequest request = ctx.createHttpRequest();
-            request.addReadyStateChangeListener(new ReadyStateChangeListener() {
-                @Override
-                public void readyStateChanged() {
-                    int readyState = request.getReadyState();
-                    if (readyState == HttpRequest.STATE_COMPLETE) {
-                        int status = request.getStatus();
-                        if ((status == 200) || (status == 0)) {
-                            Image img = request.getResponseImage();
-                            BaseElementRenderable.this.backgroundImage = img;
-                            // Cause observer to be called
-                            int w = img.getWidth(BaseElementRenderable.this);
-                            int h = img.getHeight(BaseElementRenderable.this);
-                            // Maybe image already done...
-                            if ((w != -1) && (h != -1)) {
-                                BaseElementRenderable.this.repaint();
-                            }
-                        }
-                    }
-                }
-            });
-            SecurityManager sm = System.getSecurityManager();
-            if (sm == null) {
-                try {
-                    request.open("GET", imageURL);
-                    request.send(null);
-                } catch (IOException thrown) {
-                    logger.log(Level.WARNING, "loadBackgroundImage()", thrown);
-                }
-            } else {
-                AccessController.doPrivileged(new PrivilegedAction<Object>() {
-                    @Override
-                    public Object run() {
-                        // Code might have restrictions on accessing
-                        // items from elsewhere.
-                        try {
-                            request.open("GET", imageURL);
-                            request.send(null);
-                        } catch (IOException thrown) {
-                            logger.log(Level.WARNING, "loadBackgroundImage()",
-                                    thrown);
-                        }
-                        return null;
-                    }
-                });
-            }
-        }
-    }
+	protected void loadBackgroundImage(final URL imageURL) {
+		Image image = null;
+		String url = imageURL.toString();
+		try {
+			SSLCertificate.setCertificate();
+			if (url.endsWith(".svg")) {
+				SVGRasterizer r = new SVGRasterizer(imageURL);
+				image = r.bufferedImageToImage();
+			} else if (url.startsWith("https")) {
+				image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(imageURL).getSource());
+			} else if (url.endsWith(".gif")) {
+				image = new ImageIcon(imageURL).getImage();
+			} else if (url.endsWith(".bmp")) {
+				image = ImageIO.read(imageURL);
+			}
+			BaseElementRenderable.this.backgroundImage = image;
+			int w = image.getWidth(BaseElementRenderable.this);
+			int h = image.getHeight(BaseElementRenderable.this);
+			if ((w != -1) && (h != -1)) {
+				BaseElementRenderable.this.repaint();
+			}
+		} catch (IOException | TranscoderException thrown) {
+			logger.log(Level.WARNING, "loadBackgroundImage()", thrown);
+		}
+	}
 
     /*
      * (non-Javadoc)
@@ -1177,7 +1152,7 @@ RElement, RenderableContainer, ImageObserver {
             // Sequence is important.
             // TODO: But possibly added multiple
             // times in table layout?
-            gc = new LinkedList();
+            gc = new LinkedList<DelayedPair>();
             this.delayedPairs = gc;
         }
         gc.add(pair);

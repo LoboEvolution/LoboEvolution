@@ -179,25 +179,32 @@ HTMLLinkElement {
 						try {
 							
 							CSSStyleSheet sheet = CSSUtilities.parse(this.getHref(), doc);
-							
+							CSSStyleSheetImpl sheetImpl = null;
 							if (sheet != null) {
 								doc.addStyleSheet(sheet);
 								this.styleSheet = sheet;
 								if (sheet instanceof CSSStyleSheetImpl) {
-									CSSStyleSheetImpl sheetImpl = (CSSStyleSheetImpl) sheet;
+									sheetImpl = (CSSStyleSheetImpl) sheet;
 									if (isAltStyleSheet) {
 										sheetImpl.setDisabled(true);
 									} else {
 										sheetImpl.setDisabled(disabled);
 									}
+									
+									URL baseURL = new URL(doc.getBaseURI());
+							        URL scriptURL = Urls.createURL(baseURL, getHref());
+							        if(scriptURL!= null)
+							        	sheetImpl.setHref(scriptURL.toString());
+									doc.addStyleSheet(sheetImpl);
 								} else {
 									if (isAltStyleSheet) {
 										sheet.setDisabled(true);
 									} else {
 										sheet.setDisabled(this.disabled);
 									}
+									doc.addStyleSheet(sheet);
 								}
-								doc.addStyleSheet(sheet);
+								
 							}
 
 						} catch (MalformedURLException mfe) {
