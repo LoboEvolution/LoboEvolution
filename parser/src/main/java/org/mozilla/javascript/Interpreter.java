@@ -6,17 +6,17 @@
 
 package org.mozilla.javascript;
 
-import static org.mozilla.javascript.UniqueTag.DOUBLE_MARK;
-
 import java.io.PrintStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
-import org.mozilla.javascript.ScriptRuntime.NoSuchMethodShim;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.ScriptNode;
+import org.mozilla.javascript.ScriptRuntime.NoSuchMethodShim;
 import org.mozilla.javascript.debug.DebugFrame;
+
+import static org.mozilla.javascript.UniqueTag.DOUBLE_MARK;
 
 public final class Interpreter extends Icode implements Evaluator
 {
@@ -615,7 +615,7 @@ public final class Interpreter extends Icode implements Evaluator
                 // frame was pushed to cx.previousInterpreterInvocations
                 // but before assignment to cx.lastInterpreterFrame.
                 // In this case frames has to be ignored.
-               --previousCount;
+                --previousCount;
             }
             array = new CallFrame[previousCount + 1];
             cx.previousInterpreterInvocations.toArray(array);
@@ -632,10 +632,10 @@ public final class Interpreter extends Icode implements Evaluator
         // Start from the most nested frame
         int linePCIndex = interpreterFrameCount;
         for (int i = array.length; i != 0;) {
-           --i;
+            --i;
             CallFrame frame = array[i];
             while (frame != null) {
-               --linePCIndex;
+                --linePCIndex;
                 linePC[linePCIndex] = frame.pcSourceLineStart;
                 frame = frame.parentFrame;
             }
@@ -671,7 +671,7 @@ public final class Interpreter extends Icode implements Evaluator
         int linePCIndex = linePC.length;
         int offset = 0;
         while (arrayIndex != 0) {
-           --arrayIndex;
+            --arrayIndex;
             int pos = nativeStackTrace.indexOf(tag, offset);
             if (pos < 0) {
                 break;
@@ -692,7 +692,7 @@ public final class Interpreter extends Icode implements Evaluator
             CallFrame frame = array[arrayIndex];
             while (frame != null) {
                 if (linePCIndex == 0) Kit.codeBug();
-               --linePCIndex;
+                --linePCIndex;
                 InterpreterData idata = frame.idata;
                 sb.append(lineSeparator);
                 sb.append("\tat script");
@@ -746,12 +746,12 @@ public final class Interpreter extends Icode implements Evaluator
         int arrayIndex = array.length;
         int linePCIndex = linePC.length;
         while (arrayIndex != 0) {
-           --arrayIndex;
+            --arrayIndex;
             CallFrame frame = array[arrayIndex];
             List<ScriptStackElement> group = new ArrayList<ScriptStackElement>();
             while (frame != null) {
                 if (linePCIndex == 0) Kit.codeBug();
-               --linePCIndex;
+                --linePCIndex;
                 InterpreterData idata = frame.idata;
                 String fileName = idata.itsSourceFile;
                 String functionName = null;
@@ -1012,7 +1012,7 @@ switch (op) {
     case Token.THROW: {
         Object value = stack[stackTop];
         if (value == DBL_MRK) value = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
 
         int sourceLine = getIndex(iCode, frame.pc);
         throwable = new JavaScriptException(value,
@@ -1039,7 +1039,7 @@ switch (op) {
     }
     case Token.EQ :
     case Token.NE : {
-       --stackTop;
+        --stackTop;
         boolean valBln = doEquals(stack, sDbl, stackTop);
         valBln ^= (op == Token.NE);
         stack[stackTop] = ScriptRuntime.wrapBoolean(valBln);
@@ -1047,7 +1047,7 @@ switch (op) {
     }
     case Token.SHEQ :
     case Token.SHNE : {
-       --stackTop;
+        --stackTop;
         boolean valBln = doShallowEquals(stack, sDbl, stackTop);
         valBln ^= (op == Token.SHNE);
         stack[stackTop] = ScriptRuntime.wrapBoolean(valBln);
@@ -1085,7 +1085,7 @@ switch (op) {
             indexReg += frame.localShift;
             stack[indexReg] = stack[stackTop];
             sDbl[indexReg] = sDbl[stackTop];
-           --stackTop;
+            --stackTop;
         } else {
             // Call from exception handler: exception object is already stored
             // in the local
@@ -1119,7 +1119,7 @@ switch (op) {
         frame.result = stack[stackTop];
         frame.resultDbl = sDbl[stackTop];
         stack[stackTop] = null;
-       --stackTop;
+        --stackTop;
         continue Loop;
     case Icode_DUP :
         stack[stackTop + 1] = stack[stackTop];
@@ -1145,7 +1145,7 @@ switch (op) {
     case Token.RETURN :
         frame.result = stack[stackTop];
         frame.resultDbl = sDbl[stackTop];
-       --stackTop;
+        --stackTop;
         break Loop;
     case Token.RETURN_RESULT :
         break Loop;
@@ -1184,7 +1184,7 @@ switch (op) {
         continue Loop;
     }
     case Token.ADD :
-       --stackTop;
+        --stackTop;
         doAdd(stack, sDbl, stackTop, cx);
         continue Loop;
     case Token.SUB :
@@ -1205,7 +1205,7 @@ switch (op) {
     case Token.SETNAME : {
         Object rhs = stack[stackTop];
         if (rhs == DBL_MRK) rhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         Scriptable lhs = (Scriptable)stack[stackTop];
         stack[stackTop] = op == Token.SETNAME ?
                 ScriptRuntime.setName(lhs, rhs, cx,
@@ -1217,7 +1217,7 @@ switch (op) {
     case Icode_SETCONST: {
         Object rhs = stack[stackTop];
         if (rhs == DBL_MRK) rhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         Scriptable lhs = (Scriptable)stack[stackTop];
         stack[stackTop] = ScriptRuntime.setConst(lhs, rhs, cx, stringReg);
         continue Loop;
@@ -1244,7 +1244,7 @@ switch (op) {
     case Token.SETPROP : {
         Object rhs = stack[stackTop];
         if (rhs == DBL_MRK) rhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         Object lhs = stack[stackTop];
         if (lhs == DBL_MRK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
         stack[stackTop] = ScriptRuntime.setObjectProp(lhs, stringReg, rhs,
@@ -1280,7 +1280,7 @@ switch (op) {
     case Token.SET_REF : {
         Object value = stack[stackTop];
         if (value == DBL_MRK) value = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         Ref ref = (Ref)stack[stackTop];
         stack[stackTop] = ScriptRuntime.refSet(ref, value, cx, frame.scope);
         continue Loop;
@@ -1439,7 +1439,7 @@ switch (op) {
                         frame.parentFrame, false);
                 continue Loop;
             }
-            // Bug 405654--make best effort to keep Function.apply and
+            // Bug 405654 -- make best effort to keep Function.apply and
             // Function.call within this interpreter loop invocation
             if (BaseFunction.isApplyOrCall(ifun)) {
                 Callable applyCallable = ScriptRuntime.getCallable(funThisObj);
@@ -1455,7 +1455,7 @@ switch (op) {
             }
         }
 
-        // Bug 447697--make best effort to keep __noSuchMethod__ within this
+        // Bug 447697 -- make best effort to keep __noSuchMethod__ within this
         // interpreter loop invocation
         if (fun instanceof NoSuchMethodShim) {
             // get the shim and the actual method
@@ -1618,7 +1618,7 @@ switch (op) {
     case Token.ENTERWITH : {
         Object lhs = stack[stackTop];
         if (lhs == DBL_MRK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         frame.scope = ScriptRuntime.enterWith(lhs, cx, frame.scope);
         continue Loop;
     }
@@ -1629,7 +1629,7 @@ switch (op) {
         // stack top: exception object
         // stringReg: name of exception variable
         // indexReg: local for exception scope
-       --stackTop;
+        --stackTop;
         indexReg += frame.localShift;
 
         boolean afterFirstScope =  (frame.idata.itsICode[frame.pc] != 0);
@@ -1648,15 +1648,18 @@ switch (op) {
     }
     case Token.ENUM_INIT_KEYS :
     case Token.ENUM_INIT_VALUES :
-    case Token.ENUM_INIT_ARRAY : {
+    case Token.ENUM_INIT_ARRAY :
+    case Token.ENUM_INIT_VALUES_IN_ORDER : {
         Object lhs = stack[stackTop];
         if (lhs == DBL_MRK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         indexReg += frame.localShift;
         int enumType = op == Token.ENUM_INIT_KEYS
                          ? ScriptRuntime.ENUMERATE_KEYS :
                        op == Token.ENUM_INIT_VALUES
                          ? ScriptRuntime.ENUMERATE_VALUES :
+                       op == Token.ENUM_INIT_VALUES_IN_ORDER
+                         ? ScriptRuntime.ENUMERATE_VALUES_IN_ORDER :
                        ScriptRuntime.ENUMERATE_ARRAY;
         stack[indexReg] = ScriptRuntime.enumInit(lhs, cx, frame.scope, enumType);
         continue Loop;
@@ -1711,9 +1714,14 @@ switch (op) {
         stack[indexReg] = frame.scope;
         continue Loop;
     case Icode_CLOSURE_EXPR :
-        stack[++stackTop] = InterpretedFunction.createFunction(cx, frame.scope,
-                                                               frame.fnOrScript,
-                                                               indexReg);
+        InterpretedFunction fn = InterpretedFunction.createFunction(cx, frame.scope,
+                                                                    frame.fnOrScript,
+                                                                    indexReg);
+        if (fn.idata.itsFunctionType == FunctionNode.ARROW_FUNCTION) {
+            stack[++stackTop] = new ArrowFunction(cx, frame.scope, fn, frame.thisObj);
+        } else {
+            stack[++stackTop] = fn;
+        }
         continue Loop;
     case Icode_CLOSURE_STMT :
         initFunction(cx, frame.scope, frame.fnOrScript, indexReg);
@@ -1733,7 +1741,7 @@ switch (op) {
     case Icode_LITERAL_SET : {
         Object value = stack[stackTop];
         if (value == DBL_MRK) value = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         int i = (int)sDbl[stackTop];
         ((Object[])stack[stackTop])[i] = value;
         sDbl[stackTop] = i + 1;
@@ -1741,7 +1749,7 @@ switch (op) {
     }
     case Icode_LITERAL_GETTER : {
         Object value = stack[stackTop];
-       --stackTop;
+        --stackTop;
         int i = (int)sDbl[stackTop];
         ((Object[])stack[stackTop])[i] = value;
         ((int[])stack[stackTop - 1])[i] = -1;
@@ -1750,7 +1758,7 @@ switch (op) {
     }
     case Icode_LITERAL_SETTER : {
         Object value = stack[stackTop];
-       --stackTop;
+        --stackTop;
         int i = (int)sDbl[stackTop];
         ((Object[])stack[stackTop])[i] = value;
         ((int[])stack[stackTop - 1])[i] = +1;
@@ -1761,7 +1769,7 @@ switch (op) {
     case Icode_SPARE_ARRAYLIT :
     case Token.OBJECTLIT : {
         Object[] data = (Object[])stack[stackTop];
-       --stackTop;
+        --stackTop;
         int[] getterSetters = (int[])stack[stackTop];
         Object val;
         if (op == Token.OBJECTLIT) {
@@ -1782,7 +1790,7 @@ switch (op) {
     case Icode_ENTERDQ : {
         Object lhs = stack[stackTop];
         if (lhs == DBL_MRK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         frame.scope = ScriptRuntime.enterDotQuery(lhs, frame.scope);
         continue Loop;
     }
@@ -1796,7 +1804,7 @@ switch (op) {
             continue Loop;
         }
         // reset stack and PC to code after ENTERDQ
-       --stackTop;
+        --stackTop;
         break jumplessRun;
     }
     case Token.DEFAULTNAMESPACE : {
@@ -2092,7 +2100,7 @@ switch (op) {
                                         double[] sDbl, int stackTop) {
         Object rhs = stack[stackTop];
         if (rhs == DOUBLE_MARK) rhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         Object lhs = stack[stackTop];
         if (lhs == DOUBLE_MARK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
         boolean valBln;
@@ -2107,7 +2115,7 @@ switch (op) {
 
     private static int doCompare(CallFrame frame, int op, Object[] stack,
                                  double[] sDbl, int stackTop) {
-       --stackTop;
+        --stackTop;
         Object rhs = stack[stackTop + 1];
         Object lhs = stack[stackTop];
         boolean valBln;
@@ -2193,7 +2201,7 @@ switch (op) {
                                  Object[] stack, double[] sDbl, int stackTop) {
         Object rhs = stack[stackTop];
         if (rhs == DOUBLE_MARK) rhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         Object lhs = stack[stackTop];
         if (lhs == DOUBLE_MARK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
         stack[stackTop] = ScriptRuntime.delete(lhs, rhs, cx, frame.scope,
@@ -2203,7 +2211,7 @@ switch (op) {
 
     private static int doGetElem(Context cx, CallFrame frame, Object[] stack,
                                  double[] sDbl, int stackTop) {
-       --stackTop;
+        --stackTop;
         Object lhs = stack[stackTop];
         if (lhs == DOUBLE_MARK) {
             lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
@@ -2247,7 +2255,7 @@ switch (op) {
                                     Object[] stack, double[] sDbl, int stackTop) {
         Object rhs = stack[stackTop];
         if (rhs == DOUBLE_MARK) rhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         Object lhs = stack[stackTop];
         if (lhs == DOUBLE_MARK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
         stack[stackTop] = ScriptRuntime.elemIncrDecr(lhs, rhs, cx, frame.scope,
@@ -2404,7 +2412,7 @@ switch (op) {
                                    int stackTop, int flags) {
         Object elem = stack[stackTop];
         if (elem == DOUBLE_MARK) elem = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         Object obj = stack[stackTop];
         if (obj == DOUBLE_MARK) obj = ScriptRuntime.wrapNumber(sDbl[stackTop]);
         stack[stackTop] = ScriptRuntime.memberRef(obj, elem, cx, flags);
@@ -2415,10 +2423,10 @@ switch (op) {
                                      int stackTop, int flags) {
         Object elem = stack[stackTop];
         if (elem == DOUBLE_MARK) elem = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         Object ns = stack[stackTop];
         if (ns == DOUBLE_MARK) ns = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         Object obj = stack[stackTop];
         if (obj == DOUBLE_MARK) obj = ScriptRuntime.wrapNumber(sDbl[stackTop]);
         stack[stackTop] = ScriptRuntime.memberRef(obj, ns, elem, cx, flags);
@@ -2430,7 +2438,7 @@ switch (op) {
                                    int stackTop, int flags) {
         Object name = stack[stackTop];
         if (name == DOUBLE_MARK) name = ScriptRuntime.wrapNumber(sDbl[stackTop]);
-       --stackTop;
+        --stackTop;
         Object ns = stack[stackTop];
         if (ns == DOUBLE_MARK) ns = ScriptRuntime.wrapNumber(sDbl[stackTop]);
         stack[stackTop] = ScriptRuntime.nameRef(ns, name, cx, frame.scope, flags);
@@ -2607,7 +2615,7 @@ switch (op) {
                 // execute enter: walk enterFrames in the reverse
                 // order since they were stored starting from
                 // the capturedFrame, not branchFrame
-               --enterCount;
+                --enterCount;
                 x = enterFrames[enterCount];
                 enterFrame(cx, x, ScriptRuntime.emptyArgs, true);
             }
@@ -2750,8 +2758,11 @@ switch (op) {
             scope = fnOrScript.getParentScope();
 
             if (useActivation) {
-                scope = ScriptRuntime.createFunctionActivation(
-                            fnOrScript, scope, args);
+                if (idata.itsFunctionType == FunctionNode.ARROW_FUNCTION) {
+                    scope = ScriptRuntime.createArrowFunctionActivation(fnOrScript, scope, args);
+                } else {
+                    scope = ScriptRuntime.createFunctionActivation(fnOrScript, scope, args);
+                }
             }
         } else {
             scope = callerScope;
@@ -3133,7 +3144,7 @@ switch (op) {
     private static int doArithmetic(CallFrame frame, int op, Object[] stack,
                                     double[] sDbl, int stackTop) {
         double rDbl = stack_double(frame, stackTop);
-       --stackTop;
+        --stackTop;
         double lDbl = stack_double(frame, stackTop);
         stack[stackTop] = DOUBLE_MARK;
         switch (op) {

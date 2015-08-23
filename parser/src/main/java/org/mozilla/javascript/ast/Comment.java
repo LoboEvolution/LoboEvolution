@@ -17,7 +17,7 @@ import org.mozilla.javascript.Token;
  *     <li>// line comments</li>
  *     <li>/<span class="none">* block comments *\/</li>
  *     <li>/<span class="none">** jsdoc comments *\/</li>
- *     <li>&lt;!--html-open line comments</li>
+ *     <li>&lt;!-- html-open line comments</li>
  *     <li>^\\s*--&gt; html-close line comments</li>
  *   </ol>
  *
@@ -28,8 +28,8 @@ import org.mozilla.javascript.Token;
  *
  * <p>SpiderMonkey and Rhino also support HTML comment syntax, but somewhat
  * counterintuitively, the syntax does not produce a block comment.  Instead,
- * everything from the string &lt;!--through the end of the line is considered
- * a comment, and if the token--&gt; is the first non-whitespace on the line,
+ * everything from the string &lt;!-- through the end of the line is considered
+ * a comment, and if the token --&gt; is the first non-whitespace on the line,
  * then the line is considered a line comment.  This is to support parsing
  * JavaScript in &lt;script&gt; HTML tags that has been "hidden" from very old
  * browsers by surrounding it with HTML comment delimiters. <p>

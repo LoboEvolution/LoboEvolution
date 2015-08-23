@@ -10,16 +10,11 @@ import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Member;
 import java.lang.reflect.Method;
+import java.lang.reflect.Member;
 import java.lang.reflect.Proxy;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.ContextFactory;
-import org.mozilla.javascript.InterfaceAdapter;
-import org.mozilla.javascript.Kit;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.VMBridge;
+import org.mozilla.javascript.*;
 
 public class VMBridge_jdk13 extends VMBridge
 {

@@ -6,9 +6,6 @@
 
 package org.mozilla.javascript;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 import org.mozilla.javascript.ast.Comment;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.Jump;
@@ -16,6 +13,9 @@ import org.mozilla.javascript.ast.Name;
 import org.mozilla.javascript.ast.NumberLiteral;
 import org.mozilla.javascript.ast.Scope;
 import org.mozilla.javascript.ast.ScriptNode;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * This class implements the root of the intermediate representation.
@@ -63,7 +63,8 @@ public class Node implements Iterable<Node>
         JSDOC_PROP           = 24,
         EXPRESSION_CLOSURE_PROP = 25, // JS 1.8 expression closure pseudo-return
         DESTRUCTURING_SHORTHAND = 26, // JS 1.8 destructuring shorthand
-        LAST_PROP            = 26;
+        ARROW_FUNCTION_PROP  = 27,
+        LAST_PROP            = 27;
 
     // values of ISNUMBER_PROP to specify
     // which of the children are Number types

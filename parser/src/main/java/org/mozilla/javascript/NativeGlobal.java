@@ -6,13 +6,12 @@
 
 package org.mozilla.javascript;
 
-import static org.mozilla.javascript.ScriptableObject.DONTENUM;
-import static org.mozilla.javascript.ScriptableObject.PERMANENT;
-import static org.mozilla.javascript.ScriptableObject.READONLY;
-
 import java.io.Serializable;
 
 import org.mozilla.javascript.xml.XMLLib;
+import static org.mozilla.javascript.ScriptableObject.DONTENUM;
+import static org.mozilla.javascript.ScriptableObject.READONLY;
+import static org.mozilla.javascript.ScriptableObject.PERMANENT;
 
 /**
  * This class implements the global native object (function and value
@@ -331,7 +330,7 @@ public class NativeGlobal implements Serializable, IdFunctionCall
                 if (exponent != i-1) {
                     break;
                 } else if (i == len - 1) {
-                   --i;
+                    --i;
                     break;
                 }
                 continue;

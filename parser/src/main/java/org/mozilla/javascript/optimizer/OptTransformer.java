@@ -5,14 +5,9 @@
 
 package org.mozilla.javascript.optimizer;
 
-import java.util.Map;
-
-import org.mozilla.javascript.Kit;
-import org.mozilla.javascript.Node;
-import org.mozilla.javascript.NodeTransformer;
-import org.mozilla.javascript.ObjArray;
-import org.mozilla.javascript.Token;
+import org.mozilla.javascript.*;
 import org.mozilla.javascript.ast.ScriptNode;
+import java.util.Map;
 
 /**
  * This class performs node transforms to prepare for optimization.
@@ -61,7 +56,7 @@ class OptTransformer extends NodeTransformer {
             /*
              * Optimize a call site by converting call("a", b, c) into :
              *
-             *  FunctionObjectFor"a" <--instance variable init'd by constructor
+             *  FunctionObjectFor"a" <-- instance variable init'd by constructor
              *
              *  // this is a DIRECTCALL node
              *  fn = GetProp(tmp = GetBase("a"), "a");

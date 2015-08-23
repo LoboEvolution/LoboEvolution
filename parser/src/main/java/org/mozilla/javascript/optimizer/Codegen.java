@@ -7,43 +7,21 @@
 
 package org.mozilla.javascript.optimizer;
 
+import org.mozilla.javascript.*;
+import org.mozilla.javascript.ast.FunctionNode;
+import org.mozilla.javascript.ast.Jump;
+import org.mozilla.javascript.ast.Name;
+import org.mozilla.javascript.ast.ScriptNode;
+import org.mozilla.classfile.*;
+
+import java.util.*;
+import java.lang.reflect.Constructor;
+
 import static org.mozilla.classfile.ClassFileWriter.ACC_FINAL;
 import static org.mozilla.classfile.ClassFileWriter.ACC_PRIVATE;
 import static org.mozilla.classfile.ClassFileWriter.ACC_PUBLIC;
 import static org.mozilla.classfile.ClassFileWriter.ACC_STATIC;
 import static org.mozilla.classfile.ClassFileWriter.ACC_VOLATILE;
-
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-
-import org.mozilla.classfile.ByteCode;
-import org.mozilla.classfile.ClassFileWriter;
-import org.mozilla.javascript.CompilerEnvirons;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Evaluator;
-import org.mozilla.javascript.Function;
-import org.mozilla.javascript.GeneratedClassLoader;
-import org.mozilla.javascript.Kit;
-import org.mozilla.javascript.NativeFunction;
-import org.mozilla.javascript.NativeGenerator;
-import org.mozilla.javascript.Node;
-import org.mozilla.javascript.ObjArray;
-import org.mozilla.javascript.ObjToIntMap;
-import org.mozilla.javascript.RhinoException;
-import org.mozilla.javascript.Script;
-import org.mozilla.javascript.ScriptRuntime;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.SecurityController;
-import org.mozilla.javascript.Token;
-import org.mozilla.javascript.ast.FunctionNode;
-import org.mozilla.javascript.ast.Jump;
-import org.mozilla.javascript.ast.Name;
-import org.mozilla.javascript.ast.ScriptNode;
 
 /**
  * This class generates code for a given IR tree.
@@ -1639,12 +1617,17 @@ class BodyCodegen
 
 
         String debugVariableName;
+        boolean isArrow = false;
+        if (scriptOrFn instanceof FunctionNode) {
+            isArrow = ((FunctionNode)scriptOrFn).getFunctionType() == FunctionNode.ARROW_FUNCTION;
+        }
         if (fnCurrent != null) {
             debugVariableName = "activation";
             cfw.addALoad(funObjLocal);
             cfw.addALoad(variableObjectLocal);
             cfw.addALoad(argsLocal);
-            addScriptRuntimeInvoke("createFunctionActivation",
+            String methodName = isArrow ? "createArrowFunctionActivation" : "createFunctionActivation";
+            addScriptRuntimeInvoke(methodName,
                                    "(Lorg/mozilla/javascript/NativeFunction;"
                                    +"Lorg/mozilla/javascript/Scriptable;"
                                    +"[Ljava/lang/Object;"
@@ -2021,6 +2004,7 @@ class BodyCodegen
               case Token.ENUM_INIT_KEYS:
               case Token.ENUM_INIT_VALUES:
               case Token.ENUM_INIT_ARRAY:
+              case Token.ENUM_INIT_VALUES_IN_ORDER:
                 generateExpression(child, node);
                 cfw.addALoad(contextLocal);
                 cfw.addALoad(variableObjectLocal);
@@ -2028,6 +2012,8 @@ class BodyCodegen
                                    ? ScriptRuntime.ENUMERATE_KEYS :
                                type == Token.ENUM_INIT_VALUES
                                    ? ScriptRuntime.ENUMERATE_VALUES :
+                               type == Token.ENUM_INIT_VALUES_IN_ORDER
+                                   ? ScriptRuntime.ENUMERATE_VALUES_IN_ORDER :
                                ScriptRuntime.ENUMERATE_ARRAY;
                 cfw.addPush(enumType);
                 addScriptRuntimeInvoke("enumInit",
@@ -2194,7 +2180,8 @@ class BodyCodegen
                     OptFunctionNode ofn = OptFunctionNode.get(scriptOrFn,
                                                              fnIndex);
                     int t = ofn.fnode.getFunctionType();
-                    if (t != FunctionNode.FUNCTION_EXPRESSION) {
+                    if (t != FunctionNode.FUNCTION_EXPRESSION &&
+                        t != FunctionNode.ARROW_FUNCTION) {
                         throw Codegen.badTree();
                     }
                     visitFunction(ofn, t);
@@ -2982,7 +2969,20 @@ class BodyCodegen
         cfw.addInvoke(ByteCode.INVOKESPECIAL, codegen.mainClassName,
                       "<init>", Codegen.FUNCTION_CONSTRUCTOR_SIGNATURE);
 
-        if (functionType == FunctionNode.FUNCTION_EXPRESSION) {
+        if (functionType == FunctionNode.ARROW_FUNCTION) {
+            cfw.addALoad(contextLocal);           // load 'cx'
+            cfw.addALoad(variableObjectLocal);
+            cfw.addALoad(thisObjLocal);
+            addOptRuntimeInvoke("bindThis",
+                                "(Lorg/mozilla/javascript/NativeFunction;"
+                                +"Lorg/mozilla/javascript/Context;"
+                                +"Lorg/mozilla/javascript/Scriptable;"
+                                +"Lorg/mozilla/javascript/Scriptable;"
+                                +")Lorg/mozilla/javascript/Function;");
+        }
+
+        if (functionType == FunctionNode.FUNCTION_EXPRESSION ||
+            functionType == FunctionNode.ARROW_FUNCTION) {
             // Leave closure object on stack and do not pass it to
             // initFunction which suppose to connect statements to scope
             return;

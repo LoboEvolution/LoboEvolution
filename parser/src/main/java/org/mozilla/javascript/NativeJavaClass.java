@@ -6,8 +6,7 @@
 
 package org.mozilla.javascript;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.Map;
 
 /**

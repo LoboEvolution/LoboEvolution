@@ -6,10 +6,10 @@
 
 package org.mozilla.javascript;
 
+import java.io.Serializable;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 /**
 Implementation of resizable array with focus on minimizing memory usage by storing few initial array elements in object fields. Can also be used as a stack.
@@ -111,7 +111,7 @@ public class ObjArray implements Serializable
     public int lastIndexOf(Object obj)
     {
         for (int i = size; i != 0;) {
-           --i;
+            --i;
             Object current = getImpl(i);
             if (current == obj || (current != null && current.equals(obj))) {
                 return i;
@@ -131,7 +131,7 @@ public class ObjArray implements Serializable
     {
         if (sealed) throw onSeledMutation();
         int N = size;
-       --N;
+        --N;
         Object top;
         switch (N) {
             case -1: throw onEmptyStackTopRead();
@@ -205,7 +205,7 @@ public class ObjArray implements Serializable
         int N = size;
         if (!(0 <= index && index < N)) throw onInvalidIndex(index, N);
         if (sealed) throw onSeledMutation();
-       --N;
+        --N;
         switch (index) {
             case 0:
                 if (N == 0) { f0 = null; break; }

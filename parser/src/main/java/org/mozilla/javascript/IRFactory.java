@@ -6,70 +6,10 @@
 
 package org.mozilla.javascript;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.mozilla.javascript.ast.*;
 
-import org.mozilla.javascript.ast.ArrayComprehension;
-import org.mozilla.javascript.ast.ArrayComprehensionLoop;
-import org.mozilla.javascript.ast.ArrayLiteral;
-import org.mozilla.javascript.ast.Assignment;
-import org.mozilla.javascript.ast.AstNode;
-import org.mozilla.javascript.ast.AstRoot;
-import org.mozilla.javascript.ast.Block;
-import org.mozilla.javascript.ast.BreakStatement;
-import org.mozilla.javascript.ast.CatchClause;
-import org.mozilla.javascript.ast.ConditionalExpression;
-import org.mozilla.javascript.ast.ContinueStatement;
-import org.mozilla.javascript.ast.DestructuringForm;
-import org.mozilla.javascript.ast.DoLoop;
-import org.mozilla.javascript.ast.ElementGet;
-import org.mozilla.javascript.ast.EmptyExpression;
-import org.mozilla.javascript.ast.ExpressionStatement;
-import org.mozilla.javascript.ast.ForInLoop;
-import org.mozilla.javascript.ast.ForLoop;
-import org.mozilla.javascript.ast.FunctionCall;
-import org.mozilla.javascript.ast.FunctionNode;
-import org.mozilla.javascript.ast.GeneratorExpression;
-import org.mozilla.javascript.ast.GeneratorExpressionLoop;
-import org.mozilla.javascript.ast.IfStatement;
-import org.mozilla.javascript.ast.InfixExpression;
-import org.mozilla.javascript.ast.Jump;
-import org.mozilla.javascript.ast.Label;
-import org.mozilla.javascript.ast.LabeledStatement;
-import org.mozilla.javascript.ast.LetNode;
-import org.mozilla.javascript.ast.Loop;
-import org.mozilla.javascript.ast.Name;
-import org.mozilla.javascript.ast.NewExpression;
-import org.mozilla.javascript.ast.NumberLiteral;
-import org.mozilla.javascript.ast.ObjectLiteral;
-import org.mozilla.javascript.ast.ObjectProperty;
-import org.mozilla.javascript.ast.ParenthesizedExpression;
-import org.mozilla.javascript.ast.PropertyGet;
-import org.mozilla.javascript.ast.RegExpLiteral;
-import org.mozilla.javascript.ast.ReturnStatement;
-import org.mozilla.javascript.ast.Scope;
-import org.mozilla.javascript.ast.ScriptNode;
-import org.mozilla.javascript.ast.StringLiteral;
-import org.mozilla.javascript.ast.SwitchCase;
-import org.mozilla.javascript.ast.SwitchStatement;
-import org.mozilla.javascript.ast.Symbol;
-import org.mozilla.javascript.ast.ThrowStatement;
-import org.mozilla.javascript.ast.TryStatement;
-import org.mozilla.javascript.ast.UnaryExpression;
-import org.mozilla.javascript.ast.VariableDeclaration;
-import org.mozilla.javascript.ast.VariableInitializer;
-import org.mozilla.javascript.ast.WhileLoop;
-import org.mozilla.javascript.ast.WithStatement;
-import org.mozilla.javascript.ast.XmlDotQuery;
-import org.mozilla.javascript.ast.XmlElemRef;
-import org.mozilla.javascript.ast.XmlExpression;
-import org.mozilla.javascript.ast.XmlFragment;
-import org.mozilla.javascript.ast.XmlLiteral;
-import org.mozilla.javascript.ast.XmlMemberGet;
-import org.mozilla.javascript.ast.XmlPropRef;
-import org.mozilla.javascript.ast.XmlRef;
-import org.mozilla.javascript.ast.XmlString;
-import org.mozilla.javascript.ast.Yield;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This class rewrites the parse tree into an IR suitable for codegen.
@@ -330,7 +270,11 @@ public final class IRFactory extends Parser
             defineSymbol(Token.LET, name, false);
             iterators[i] = init;
 
-            decompiler.addToken(Token.IN);
+            if (acl.isForOf()) {
+                decompiler.addName("of ");
+            } else {
+                decompiler.addToken(Token.IN);
+            }
             iteratedObjs[i] = transform(acl.getIteratedObject());
             decompiler.addToken(Token.RP);
         }
@@ -365,7 +309,8 @@ public final class IRFactory extends Parser
                                    iterators[i],
                                    iteratedObjs[i],
                                    body,
-                                   acl.isForEach());
+                                   acl.isForEach(),
+                                   acl.isForOf());
             }
         } finally {
             for (int i = 0; i < pushed; i++) {
@@ -528,14 +473,18 @@ public final class IRFactory extends Parser
                 declType = ((VariableDeclaration)iter).getType();
             }
             Node lhs = transform(iter);
-            decompiler.addToken(Token.IN);
+            if (loop.isForOf()) {
+                decompiler.addName("of ");
+            } else {
+                decompiler.addToken(Token.IN);
+            }
             Node obj = transform(loop.getIteratedObject());
             decompiler.addToken(Token.RP);
             decompiler.addEOL(Token.LC);
             Node body = transform(loop.getBody());
             decompiler.addEOL(Token.RC);
             return createForIn(declType, loop, lhs, obj, body,
-                               loop.isForEach());
+                               loop.isForEach(), loop.isForOf());
         } finally {
             popScope();
         }
@@ -609,7 +558,7 @@ public final class IRFactory extends Parser
             return pn;
 
         } finally {
-           --nestingOfFunction;
+            --nestingOfFunction;
             savedVars.restore();
         }
     }
@@ -680,7 +629,7 @@ public final class IRFactory extends Parser
                 }
             }
         } finally {
-           --nestingOfFunction;
+            --nestingOfFunction;
             savedVars.restore();
         }
        
@@ -731,7 +680,11 @@ public final class IRFactory extends Parser
             defineSymbol(Token.LET, name, false);
             iterators[i] = init;
 
-            decompiler.addToken(Token.IN);
+            if (acl.isForOf()) {
+                decompiler.addName("of ");
+            } else {
+                decompiler.addToken(Token.IN);
+            }
             iteratedObjs[i] = transform(acl.getIteratedObject());
             decompiler.addToken(Token.RP);
         }
@@ -763,7 +716,8 @@ public final class IRFactory extends Parser
                                    iterators[i],
                                    iteratedObjs[i],
                                    body,
-                                   acl.isForEach());
+                                   acl.isForEach(),
+                                   acl.isForOf());
             }
         } finally {
             for (int i = 0; i < pushed; i++) {
@@ -1003,8 +957,11 @@ public final class IRFactory extends Parser
 
     private Node transformReturn(ReturnStatement node) {
         boolean expClosure = Boolean.TRUE.equals(node.getProp(Node.EXPRESSION_CLOSURE_PROP));
+        boolean isArrow = Boolean.TRUE.equals(node.getProp(Node.ARROW_FUNCTION_PROP));
         if (expClosure) {
-            decompiler.addName(" ");
+            if (!isArrow) {
+                decompiler.addName(" ");
+            }
         } else {
             decompiler.addToken(Token.RETURN);
         }
@@ -1570,7 +1527,7 @@ public final class IRFactory extends Parser
      * Generate IR for a for..in loop.
      */
     private Node createForIn(int declType, Node loop, Node lhs,
-                             Node obj, Node body, boolean isForEach)
+                             Node obj, Node body, boolean isForEach, boolean isForOf)
     {
         int destructuring = -1;
         int destructuringLen = 0;
@@ -1608,6 +1565,7 @@ public final class IRFactory extends Parser
 
         Node localBlock = new Node(Token.LOCAL_BLOCK);
         int initType = isForEach ? Token.ENUM_INIT_VALUES
+                       : isForOf ? Token.ENUM_INIT_VALUES_IN_ORDER
                                  : (destructuring != -1
                                     ? Token.ENUM_INIT_ARRAY
                                     : Token.ENUM_INIT_KEYS);
@@ -1622,8 +1580,9 @@ public final class IRFactory extends Parser
         Node assign;
         if (destructuring != -1) {
             assign = createDestructuringAssignment(declType, lvalue, id);
-            if (!isForEach && (destructuring == Token.OBJECTLIT ||
-                               destructuringLen != 2))
+            if (!isForEach && !isForOf &&
+                (destructuring == Token.OBJECTLIT ||
+                 destructuringLen != 2))
             {
                 // destructuring assignment is only allowed in for..each or
                 // with an array type of length 2 (to hold key and value)
@@ -2155,7 +2114,7 @@ public final class IRFactory extends Parser
             if (right.type == Token.NUMBER) {
                 double rd = right.getDouble();
                 if (left.type == Token.NUMBER) {
-                    // both constants--just divide, trust Java to handle x/0
+                    // both constants -- just divide, trust Java to handle x/0
                     left.setDouble(left.getDouble() / rd);
                     return left;
                } else if (rd == 1.0) {
@@ -2332,7 +2291,11 @@ public final class IRFactory extends Parser
         } else if (fn.getMemberExprNode() != null) {
             mexpr = transform(fn.getMemberExprNode());
         }
-        decompiler.addToken(Token.LP);
+        boolean isArrow = fn.getFunctionType() == FunctionNode.ARROW_FUNCTION;
+        boolean noParen = isArrow && fn.getLp() == -1;
+        if (!noParen) {
+            decompiler.addToken(Token.LP);
+        }
         List<AstNode> params = fn.getParams();
         for (int i = 0; i < params.size(); i++) {
             decompile(params.get(i));
@@ -2340,7 +2303,12 @@ public final class IRFactory extends Parser
                 decompiler.addToken(Token.COMMA);
             }
         }
-        decompiler.addToken(Token.RP);
+        if (!noParen) {
+            decompiler.addToken(Token.RP);
+        }
+        if (isArrow) {
+            decompiler.addToken(Token.ARROW);
+        }
         if (!fn.isExpressionClosure()) {
             decompiler.addEOL(Token.LC);
         }

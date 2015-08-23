@@ -601,7 +601,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
                     if ((index < end) && isControlLetter(src[index]))
                         localMax = (char)(src[index++] & 0x1F);
                     else
-                       --index;
+                        --index;
                         localMax = '\\';
                     break;
                 case 'u':
@@ -940,7 +940,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
                         c = (char)(src[state.cp++] & 0x1F);
                     else {
                         /* back off to accepting the original '\' as a literal */
-                       --state.cp;
+                        --state.cp;
                         c = '\\';
                     }
                     doFlat(state, c);
@@ -1041,7 +1041,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
                 return false;
             }
             ++state.cp;
-           --state.parenNesting;
+            --state.parenNesting;
             if (result != null) {
                 result.kid = state.result;
                 state.result = result;
@@ -1233,7 +1233,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
             program[pc++] = t.op;
             switch (t.op) {
             case REOP_EMPTY:
-               --pc;
+                --pc;
                 break;
             case REOP_ALTPREREQ:
             case REOP_ALTPREREQi:
@@ -1595,7 +1595,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
                     if ((src < end) && isControlLetter(gData.regexp.source[src]))
                         thisCh = (char)(gData.regexp.source[src++] & 0x1F);
                     else {
-                       --src;
+                        --src;
                         thisCh = '\\';
                     }
                     break;

@@ -6,10 +6,10 @@
 
 package org.mozilla.javascript;
 
+import java.io.Serializable;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 /**
  * Map to associate objects to integers.
@@ -61,7 +61,7 @@ public class ObjToIntMap implements Serializable
                 for (++cursor; ; ++cursor) {
                     Object key = keys[cursor];
                     if (key != null && key != DELETED) {
-                       --remaining;
+                        --remaining;
                         break;
                     }
                 }
@@ -100,10 +100,7 @@ public class ObjToIntMap implements Serializable
         int i;
         for (i = 2; (1 << i) < minimalCapacity; ++i) { }
         power = i;
-        if (check) {
-			if (power < 2)
-				Kit.codeBug();
-		}
+        if (check && power < 2) Kit.codeBug();
     }
 
     public boolean isEmpty() {
@@ -175,7 +172,7 @@ public class ObjToIntMap implements Serializable
         int index = findIndex(key);
         if (0 <= index) {
             keys[index] = DELETED;
-           --keyCount;
+            --keyCount;
         }
     }
 
@@ -214,7 +211,7 @@ public class ObjToIntMap implements Serializable
                 if (key == UniqueTag.NULL_VALUE) { key = null; }
                 array[offset] = key;
                 ++offset;
-               --count;
+                --count;
             }
         }
     }
@@ -270,14 +267,8 @@ public class ObjToIntMap implements Serializable
 // Insert key that is not present to table without deleted entries
 // and enough free space
     private int insertNewKey(Object key, int hash) {
-        if (check) {
-			if (occupiedCount != keyCount)
-				Kit.codeBug();
-		}
-        if (check) {
-			if (keyCount == 1 << power)
-				Kit.codeBug();
-		}
+        if (check && occupiedCount != keyCount) Kit.codeBug();
+        if (check && keyCount == 1 << power) Kit.codeBug();
         int fraction = hash * A;
         int index = fraction >>> (32 - power);
         int N = 1 << power;
@@ -286,15 +277,9 @@ public class ObjToIntMap implements Serializable
             int step = tableLookupStep(fraction, mask, power);
             int firstIndex = index;
             do {
-                if (check) {
-					if (keys[index] == DELETED)
-						Kit.codeBug();
-				}
+                if (check && keys[index] == DELETED) Kit.codeBug();
                 index = (index + step) & mask;
-                if (check) {
-					if (firstIndex == index)
-						Kit.codeBug();
-				}
+                if (check && firstIndex == index) Kit.codeBug();
             } while (keys[index] != null);
         }
         keys[index] = key;
@@ -307,14 +292,8 @@ public class ObjToIntMap implements Serializable
 
     private void rehashTable() {
         if (keys == null) {
-            if (check) {
-				if (keyCount != 0)
-					Kit.codeBug();
-			}
-            if (check) {
-				if (occupiedCount != 0)
-					Kit.codeBug();
-			}
+            if (check && keyCount != 0) Kit.codeBug();
+            if (check && occupiedCount != 0) Kit.codeBug();
             int N = 1 << power;
             keys = new Object[N];
             values = new int[2 * N];
@@ -340,7 +319,7 @@ public class ObjToIntMap implements Serializable
                     int keyHash = oldValues[oldN + i];
                     int index = insertNewKey(key, keyHash);
                     values[index] = oldValues[i];
-                   --remaining;
+                    --remaining;
                 }
             }
         }
@@ -392,10 +371,8 @@ public class ObjToIntMap implements Serializable
             }
         }
         // Inserting of new key
-        if (check) {
-			if (keys != null && keys[index] != null)
-				Kit.codeBug();
-		}
+        if (check && keys != null && keys[index] != null)
+            Kit.codeBug();
         if (firstDeleted >= 0) {
             index = firstDeleted;
         }
@@ -423,7 +400,7 @@ public class ObjToIntMap implements Serializable
         for (int i = 0; count != 0; ++i) {
             Object key = keys[i];
             if (key != null && key != DELETED) {
-               --count;
+                --count;
                 out.writeObject(key);
                 out.writeInt(values[i]);
             }
@@ -657,7 +634,7 @@ public class ObjToIntMap implements Serializable
     private static int intSqrt(int i) {
         int approx = (int)Math.sqrt(i) + 1;
         while (approx * approx > i) {
-           --approx;
+            --approx;
         }
         return approx;
     }

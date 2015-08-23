@@ -8,15 +8,9 @@
 
 package org.mozilla.javascript.serialize;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectStreamClass;
+import java.io.*;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.Undefined;
-import org.mozilla.javascript.UniqueTag;
+import org.mozilla.javascript.*;
 
 /**
  * Class ScriptableInputStream is used to read in a JavaScript

@@ -6,9 +6,10 @@
 
 package org.mozilla.javascript;
 
+import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.TimeZone;
 
 /**
@@ -495,7 +496,7 @@ final class NativeDate extends IdScriptableObject
         if (IsLeapYear(year)) {
             if (d == 0)
                 return 1; // 29 February
-           --d;
+            --d;
         }
 
         // d: date count from 1 March
@@ -532,7 +533,7 @@ final class NativeDate extends IdScriptableObject
         if (IsLeapYear(year)) {
             if (d == 0)
                 return 29; // 29 February
-           --d;
+            --d;
         }
 
         // d: date count from 1 March
@@ -1337,13 +1338,13 @@ final class NativeDate extends IdScriptableObject
     {
         if (i < 0) Kit.codeBug();
         int scale = 1;
-       --minWidth;
+        --minWidth;
         if (i >= 10) {
             if (i < 1000 * 1000 * 1000) {
                 for (;;) {
                     int newScale = scale * 10;
                     if (i < newScale) { break; }
-                   --minWidth;
+                    --minWidth;
                     scale = newScale;
                 }
             } else {
@@ -1354,7 +1355,7 @@ final class NativeDate extends IdScriptableObject
         }
         while (minWidth > 0) {
             sb.append('0');
-           --minWidth;
+            --minWidth;
         }
         while (scale != 1) {
             sb.append((char)('0' + (i / scale)));

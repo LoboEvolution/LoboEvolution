@@ -23,12 +23,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import org.mozilla.javascript.debug.DebuggableObject;
 import org.mozilla.javascript.annotations.JSConstructor;
 import org.mozilla.javascript.annotations.JSFunction;
 import org.mozilla.javascript.annotations.JSGetter;
 import org.mozilla.javascript.annotations.JSSetter;
 import org.mozilla.javascript.annotations.JSStaticFunction;
-import org.mozilla.javascript.debug.DebuggableObject;
 
 /**
  * This is the default implementation of the Scriptable interface. This
@@ -242,6 +242,7 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
             ScriptRuntime.setBuiltinProtoAndParent(desc, scope, TopLevel.Builtins.Object);
             desc.defineProperty("enumerable", (attr & DONTENUM) == 0, EMPTY);
             desc.defineProperty("configurable", (attr & PERMANENT) == 0, EMPTY);
+            desc.defineProperty("writable", (attr & READONLY) == 0, EMPTY);
             if (getter != null) desc.defineProperty("get", getter, EMPTY);
             if (setter != null) desc.defineProperty("set", setter, EMPTY);
             return desc;
@@ -3003,7 +3004,7 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
         int tableSize = newSlots.length;
         int i = oldSlots.length;
         for (;;) {
-           --i;
+            --i;
             Slot slot = oldSlots[i];
             while (slot != null) {
                 int insertPos = getSlotIndex(tableSize, slot.indexOrHash);

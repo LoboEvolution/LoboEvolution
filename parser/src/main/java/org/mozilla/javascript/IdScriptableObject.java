@@ -6,10 +6,7 @@
 
 package org.mozilla.javascript;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 
 /**
 Base class for native object implementation that uses IdFunctionObject to export its methods to script via <class-name>.prototype object.
@@ -470,7 +467,7 @@ public abstract class IdScriptableObject extends ScriptableObject
             Object[] ids = null;
             int count = 0;
 
-            for (int id = maxInstanceId; id != 0;--id) {
+            for (int id = maxInstanceId; id != 0; --id) {
                 String name = getInstanceIdName(id);
                 int info = findInstanceIdInfo(name);
                 if (info != 0) {
@@ -617,9 +614,15 @@ public abstract class IdScriptableObject extends ScriptableObject
     public final void initPrototypeMethod(Object tag, int id, String name,
                                           int arity)
     {
+		initPrototypeMethod(tag, id, name, name, arity);
+    }
+
+    public final void initPrototypeMethod(Object tag, int id, String propertyName, String functionName,
+                                          int arity)
+    {
         Scriptable scope = ScriptableObject.getTopLevelScope(this);
-        IdFunctionObject f = newIdFunction(tag, id, name, arity, scope);
-        prototypeValues.initValue(id, name, f, DONTENUM);
+        IdFunctionObject f = newIdFunction(tag, id, functionName, arity, scope);
+        prototypeValues.initValue(id, propertyName, f, DONTENUM);
     }
 
     public final void initPrototypeConstructor(IdFunctionObject f)

@@ -252,7 +252,7 @@ public class Kit
             } else {
                 int i = L;
                 do {
-                   --i;
+                    --i;
                     if (array[i] == listener) {
                         Object[] tmp = new Object[L - 1];
                         System.arraycopy(array, 0, tmp, 0, i);

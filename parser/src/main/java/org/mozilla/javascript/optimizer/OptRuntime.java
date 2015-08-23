@@ -5,19 +5,7 @@
 
 package org.mozilla.javascript.optimizer;
 
-import org.mozilla.javascript.Callable;
-import org.mozilla.javascript.ConsString;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.ContextAction;
-import org.mozilla.javascript.ContextFactory;
-import org.mozilla.javascript.JavaScriptException;
-import org.mozilla.javascript.NativeFunction;
-import org.mozilla.javascript.NativeGenerator;
-import org.mozilla.javascript.NativeIterator;
-import org.mozilla.javascript.Script;
-import org.mozilla.javascript.ScriptRuntime;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
+import org.mozilla.javascript.*;
 
 public final class OptRuntime extends ScriptRuntime
 {
@@ -143,6 +131,11 @@ public final class OptRuntime extends ScriptRuntime
                                     Scriptable scope, Context cx)
     {
         ScriptRuntime.initFunction(cx, scope, fn, functionType, false);
+    }
+
+    public static Function bindThis(NativeFunction fn, Context cx, Scriptable scope, Scriptable thisObj)
+    {
+        return new ArrowFunction(cx, scope, fn, thisObj);
     }
 
     public static Object callSpecial(Context cx, Callable fun,

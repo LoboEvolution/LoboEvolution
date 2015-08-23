@@ -19,7 +19,7 @@ public interface NodeVisitor {
      * since the {@code AstRoot} is where the visiting begins.
      * @return {@code true} if the children should be visited.
      * If {@code false}, the subtree rooted at this node is skipped.
-     * The {@code node} argument should <em>never</em> be {@code null}--
+     * The {@code node} argument should <em>never</em> be {@code null} --
      * the individual {@link AstNode} classes should skip any children
      * that are not present in the source when they invoke this method.
      */

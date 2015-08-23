@@ -6,10 +6,10 @@
 
 package org.mozilla.javascript;
 
+import java.io.Serializable;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 /**
  * Map to associate non-negative integers to objects or integers.
@@ -39,10 +39,7 @@ public class UintMap implements Serializable
         int i;
         for (i = 2; (1 << i) < minimalCapacity; ++i) { }
         power = i;
-        if (check) {
-			if (power < 2)
-				Kit.codeBug();
-		}
+        if (check && power < 2) Kit.codeBug();
     }
 
     public boolean isEmpty() {
@@ -147,7 +144,7 @@ public class UintMap implements Serializable
         int index = findIndex(key);
         if (0 <= index) {
             keys[index] = DELETED;
-           --keyCount;
+            --keyCount;
             // Allow to GC value and make sure that new key with the deleted
             // slot shall get proper default values
             if (values != null) { values[index] = null; }
@@ -225,14 +222,8 @@ public class UintMap implements Serializable
 // Insert key that is not present to table without deleted entries
 // and enough free space
     private int insertNewKey(int key) {
-        if (check) {
-			if (occupiedCount != keyCount)
-				Kit.codeBug();
-		}
-        if (check) {
-			if (keyCount == 1 << power)
-				Kit.codeBug();
-		}
+        if (check && occupiedCount != keyCount) Kit.codeBug();
+        if (check && keyCount == 1 << power) Kit.codeBug();
         int[] keys = this.keys;
         int fraction = key * A;
         int index = fraction >>> (32 - power);
@@ -241,15 +232,9 @@ public class UintMap implements Serializable
             int step = tableLookupStep(fraction, mask, power);
             int firstIndex = index;
             do {
-                if (check) {
-					if (keys[index] == DELETED)
-						Kit.codeBug();
-				}
+                if (check && keys[index] == DELETED) Kit.codeBug();
                 index = (index + step) & mask;
-                if (check) {
-					if (firstIndex == index)
-						Kit.codeBug();
-				}
+                if (check && firstIndex == index) Kit.codeBug();
             } while (keys[index] != EMPTY);
         }
         keys[index] = key;
@@ -294,7 +279,7 @@ public class UintMap implements Serializable
                     if (oldShift != 0) {
                         keys[ivaluesShift + index] = old[oldShift + i];
                     }
-                   --remaining;
+                    --remaining;
                 }
             }
         }
@@ -331,10 +316,8 @@ public class UintMap implements Serializable
             }
         }
         // Inserting of new key
-        if (check) {
-			if (keys != null && keys[index] != EMPTY)
-				Kit.codeBug();
-		}
+        if (check && keys != null && keys[index] != EMPTY)
+            Kit.codeBug();
         if (firstDeleted >= 0) {
             index = firstDeleted;
         }
@@ -367,7 +350,7 @@ public class UintMap implements Serializable
             for (int i = 0; count != 0; ++i) {
                 int key = keys[i];
                 if (key != EMPTY && key != DELETED) {
-                   --count;
+                    --count;
                     out.writeInt(key);
                     if (hasIntValues) {
                         out.writeInt(keys[ivaluesShift + i]);

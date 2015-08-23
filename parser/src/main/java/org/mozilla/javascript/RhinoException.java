@@ -214,7 +214,7 @@ public abstract class RhinoException extends RuntimeException
      * specified function on the stack.
      *
      * @param limit the number of stack frames returned
-     * @param functionName the name of a function on the stack--frames below it will be ignored
+     * @param functionName the name of a function on the stack -- frames below it will be ignored
      * @return a script stack dump
      * @since 1.8.0
      */
@@ -288,7 +288,7 @@ public abstract class RhinoException extends RuntimeException
      * by the Rhino script compiler.
      *
      * @param limit the number of stack frames returned, or -1 for unlimited
-     * @param hideFunction the name of a function on the stack--frames below it will be ignored, or null
+     * @param hideFunction the name of a function on the stack -- frames below it will be ignored, or null
      * @return the script stack for this exception
      * @since 1.8.0
      */
@@ -400,7 +400,7 @@ public abstract class RhinoException extends RuntimeException
     /**
      * Specify the stack style to use from between three different formats: "Rhino" (the default),
      * "Mozilla", and "V8." See StackStyle for information about each.
-     * @param style the style to select--an instance of the StackStyle class
+     * @param style the style to select -- an instance of the StackStyle class
      * @see StackStyle
      * @since 1.8.0
      */

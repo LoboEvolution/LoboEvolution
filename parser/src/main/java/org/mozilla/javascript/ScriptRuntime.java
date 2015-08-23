@@ -7,7 +7,7 @@
 package org.mozilla.javascript;
 
 import java.io.Serializable;
-import java.lang.reflect.Constructor;
+import java.lang.reflect.*;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -15,8 +15,8 @@ import java.util.ResourceBundle;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.v8dtoa.DoubleConversion;
 import org.mozilla.javascript.v8dtoa.FastDtoa;
-import org.mozilla.javascript.xml.XMLLib;
 import org.mozilla.javascript.xml.XMLObject;
+import org.mozilla.javascript.xml.XMLLib;
 
 /**
  * This is the class that implements the runtime.
@@ -198,6 +198,9 @@ public class ScriptRuntime {
 
         NativeIterator.init(scope, sealed); // Also initializes NativeGenerator
 
+        NativeArrayIterator.init(scope, sealed);
+        NativeStringIterator.init(scope, sealed);
+
         boolean withXml = cx.hasFeature(Context.FEATURE_E4X) &&
                           cx.getE4xImplementationFactory() != null;
 
@@ -253,7 +256,15 @@ public class ScriptRuntime {
                                  "org.mozilla.javascript.typedarrays.NativeDataView",
                                  sealed, true);
         }
-     
+
+        if (cx.getLanguageVersion() >= Context.VERSION_ES6) {
+            new LazilyLoadedCtor(scope, NativeSymbol.CLASS_NAME,
+                NativeSymbol.class.getName(),
+                sealed, true);
+
+        }
+
+
         if (scope instanceof TopLevel) {
             ((TopLevel)scope).cacheBuiltins();
         }
@@ -283,7 +294,7 @@ public class ScriptRuntime {
 
         return s;
     }
-    
+
     static String[] getTopPackageNames() {
         // Include "android" top package if running on Android
         return "Dalvik".equals(System.getProperty("java.vm.name")) ?
@@ -546,7 +557,7 @@ public class ScriptRuntime {
                     switch (state) {
                       case SKIP_LEADING_ZEROS:
                           if (bit) {
-                           --exactBitsLimit;
+                            --exactBitsLimit;
                             sum = 1.0;
                             state = FIRST_EXACT_53_BITS;
                         }
@@ -555,7 +566,7 @@ public class ScriptRuntime {
                            sum *= 2.0;
                         if (bit)
                             sum += 1.0;
-                       --exactBitsLimit;
+                        --exactBitsLimit;
                         if (exactBitsLimit == 0) {
                             bit53 = bit;
                             state = AFTER_BIT_53;
@@ -804,7 +815,7 @@ public class ScriptRuntime {
             if (val == null) {
                 return "null";
             }
-            if (val == Undefined.instance) {
+            if (val == Undefined.instance || val == Undefined.SCRIPTABLE_UNDEFINED) {
                 return "undefined";
             }
             if (val instanceof String) {
@@ -2093,7 +2104,7 @@ public class ScriptRuntime {
         ObjToIntMap used;
         Object currentId;
         int enumType; /* one of ENUM_INIT_KEYS, ENUM_INIT_VALUES,
-                         ENUM_INIT_ARRAY */
+                         ENUM_INIT_ARRAY, ENUMERATE_VALUES_IN_ORDER */
 
         // if true, integer ids will be returned as numbers rather than strings
         boolean enumNumbers;
@@ -2142,6 +2153,7 @@ public class ScriptRuntime {
     public static final int ENUMERATE_KEYS_NO_ITERATOR = 3;
     public static final int ENUMERATE_VALUES_NO_ITERATOR = 4;
     public static final int ENUMERATE_ARRAY_NO_ITERATOR = 5;
+    public static final int ENUMERATE_VALUES_IN_ORDER = 6;
 
     /**
      * @deprecated Use {@link #enumInit(Object, Context, Scriptable, int)} instead
@@ -2157,6 +2169,12 @@ public class ScriptRuntime {
     {
         IdEnumeration x = new IdEnumeration();
         x.obj = toObjectOrNull(cx, value, scope);
+        // "for of" loop
+        if (enumType == ENUMERATE_VALUES_IN_ORDER) {
+            x.enumType = enumType;
+            x.iterator = null;
+            return enumInitInOrder(cx, x);
+        }
         if (x.obj == null) {
             // null or undefined do not cause errors but rather lead to empty
             // "for in" loop
@@ -2180,6 +2198,25 @@ public class ScriptRuntime {
         return x;
     }
 
+    private static Object enumInitInOrder(Context cx, IdEnumeration x) {
+        if (x.obj == null || !ScriptableObject.hasProperty(x.obj, NativeSymbol.ITERATOR_PROPERTY)) {
+            throw typeError1("msg.not.iterable", toString(x.obj));
+        }
+        Object iterator = ScriptableObject.getProperty(x.obj, NativeSymbol.ITERATOR_PROPERTY);
+        if (!(iterator instanceof Callable)) {
+            throw typeError1("msg.not.iterable", toString(x.obj));
+        }
+        Callable f = (Callable) iterator;
+        Scriptable scope = x.obj.getParentScope();
+        Object[] args = new Object[] {};
+        Object v = f.call(cx, scope, x.obj, args);
+        if (!(v instanceof Scriptable)) {
+            throw typeError1("msg.not.iterable", toString(x.obj));
+        }
+        x.iterator = (Scriptable) v;
+        return x;
+    }
+
     public static void setEnumNumbers(Object enumObj, boolean enumNumbers) {
         ((IdEnumeration)enumObj).enumNumbers = enumNumbers;
     }
@@ -2188,6 +2225,9 @@ public class ScriptRuntime {
     {
         IdEnumeration x = (IdEnumeration)enumObj;
         if (x.iterator != null) {
+            if (x.enumType == ENUMERATE_VALUES_IN_ORDER) {
+                return enumNextInOrder(x);
+            }
             Object v = ScriptableObject.getProperty(x.iterator, "next");
             if (!(v instanceof Callable))
                 return Boolean.FALSE;
@@ -2199,7 +2239,7 @@ public class ScriptRuntime {
                 return Boolean.TRUE;
             } catch (JavaScriptException e) {
                 if (e.getValue() instanceof NativeIterator.StopIteration) {
-                  return Boolean.FALSE;
+                    return Boolean.FALSE;
                 }
                 throw e;
             }
@@ -2231,6 +2271,25 @@ public class ScriptRuntime {
             }
             return Boolean.TRUE;
         }
+    }
+
+    private static Boolean enumNextInOrder(IdEnumeration enumObj)
+    {
+        Object v = ScriptableObject.getProperty(enumObj.iterator, ES6Iterator.NEXT_METHOD);
+        if (!(v instanceof Callable)) {
+            throw notFunctionError(enumObj.iterator, ES6Iterator.NEXT_METHOD);
+        }
+        Callable f = (Callable) v;
+        Context cx = Context.getContext();
+        Scriptable scope = enumObj.iterator.getParentScope();
+        Object r = f.call(cx, scope, enumObj.iterator, emptyArgs);
+        Scriptable iteratorResult = toObject(cx, scope, r);
+        Object done = ScriptableObject.getProperty(iteratorResult, ES6Iterator.DONE_PROPERTY);
+        if (done != ScriptableObject.NOT_FOUND && toBoolean(done)) {
+            return Boolean.FALSE;
+        }
+        enumObj.currentId = ScriptableObject.getProperty(iteratorResult, ES6Iterator.VALUE_PROPERTY);
+        return Boolean.TRUE;
     }
 
     public static Object enumId(Object enumObj, Context cx)
@@ -2561,11 +2620,14 @@ public class ScriptRuntime {
 
         Scriptable callThis = null;
         if (L != 0) {
-            callThis = toObjectOrNull(cx, args[0], scope);
+            if  (cx.hasFeature(Context.FEATURE_OLD_UNDEF_NULL_THIS)) {
+                callThis = toObjectOrNull(cx, args[0], scope);
+            } else {
+                callThis = args[0] == Undefined.instance ? Undefined.SCRIPTABLE_UNDEFINED : toObjectOrNull(cx, args[0], scope);
+            }
         }
-        if (callThis == null) {
-            // This covers the case of args[0] == (null|undefined) as well.
-            callThis = getTopCallScope(cx);
+        if (callThis == null && cx.hasFeature(Context.FEATURE_OLD_UNDEF_NULL_THIS)) {
+            callThis = getTopCallScope(cx); // This covers the case of args[0] == (null|undefined) as well.
         }
 
         Object[] callArgs;
@@ -2847,7 +2909,7 @@ public class ScriptRuntime {
         if ((incrDecrMask & Node.DECR_FLAG) == 0) {
             ++number;
         } else {
-           --number;
+            --number;
         }
         Number result = wrapNumber(number);
         target.put(id, protoChainStart, result);
@@ -2887,7 +2949,7 @@ public class ScriptRuntime {
         if ((incrDecrMask & Node.DECR_FLAG) == 0) {
             ++number;
         } else {
-           --number;
+            --number;
         }
         Number result = wrapNumber(number);
         setObjectElem(obj, index, result, cx, scope);
@@ -2925,7 +2987,7 @@ public class ScriptRuntime {
         if ((incrDecrMask & Node.DECR_FLAG) == 0) {
             ++number;
         } else {
-           --number;
+            --number;
         }
         Number result = wrapNumber(number);
         ref.set(cx, scope, result);
@@ -3105,7 +3167,9 @@ public class ScriptRuntime {
             double d = ((Number)x).doubleValue();
             return d == d;
         }
-        if (x == null || x == Undefined.instance) {
+        if (x == null || x == Undefined.instance || x == Undefined.SCRIPTABLE_UNDEFINED) {
+            if ((x == Undefined.instance && y == Undefined.SCRIPTABLE_UNDEFINED)
+                || (x == Undefined.SCRIPTABLE_UNDEFINED && y == Undefined.instance)) return true;
             return false;
         } else if (x instanceof Number) {
             if (y instanceof Number) {
@@ -3228,9 +3292,9 @@ public class ScriptRuntime {
         return d1 <= d2;
     }
 
-    //------------------
+    // ------------------
     // Statements
-    //------------------
+    // ------------------
 
     public static ScriptableObject getGlobal(Context cx) {
         final String GLOBAL_CLASS = "org.mozilla.javascript.tools.shell.Global";
@@ -3346,7 +3410,7 @@ public class ScriptRuntime {
                 varScope = varScope.getParentScope();
             }
 
-            for (int i = varCount; i--!= 0;) {
+            for (int i = varCount; i-- != 0;) {
                 String name = funObj.getParamOrVarName(i);
                 boolean isConst = funObj.getParamOrVarConst(i);
                 // Don't overwrite existing def if already defined in object
@@ -3376,6 +3440,12 @@ public class ScriptRuntime {
         return new NativeCall(funObj, scope, args);
     }
 
+    public static Scriptable createArrowFunctionActivation(NativeFunction funObj,
+                                                           Scriptable scope,
+                                                           Object[] args)
+    {
+        return new NativeCall(funObj, scope, args, true);
+    }
 
     public static void enterActivationFunction(Context cx,
                                                Scriptable scope)
@@ -3740,7 +3810,7 @@ public class ScriptRuntime {
                 ++skip;
                 continue;
             }
-            ScriptableObject.putProperty(array, i, objects[j]);
+            array.put(i, array, objects[j]);
             ++j;
         }
         return array;
@@ -4270,13 +4340,5 @@ public class ScriptRuntime {
     public static final Object[] emptyArgs = new Object[0];
     public static final String[] emptyStrings = new String[0];
 
-
-    public static Scriptable requireObjectCoercible(Scriptable val, IdFunctionObject idFuncObj) {
-        Scriptable val1 = val.getParentScope() != null ? val : null;
-        if (val1 == null || val1 == Undefined.instance)
-            throw ScriptRuntime.typeError2("msg.called.null.or.undefined", idFuncObj.getTag(), idFuncObj.getFunctionName());
-
-        return val1;
-    }
 
 }

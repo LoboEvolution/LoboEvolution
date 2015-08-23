@@ -53,7 +53,7 @@ public class Conversions
             return 255;
         }
 
-        // Complex rounding behavior--see 7.1.11
+        // Complex rounding behavior -- see 7.1.11
         double f = Math.floor(d);
         if ((f + 0.5) < d) {
             return (int)(f + 1.0);

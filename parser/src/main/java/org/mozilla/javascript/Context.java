@@ -10,21 +10,12 @@ package org.mozilla.javascript;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URI;
 import java.net.URL;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
@@ -300,6 +291,9 @@ public class Context
      * @since 1.7 Release 3
      */
     public static final int FEATURE_V8_EXTENSIONS = 14;
+
+
+    public static final int FEATURE_OLD_UNDEF_NULL_THIS = 15;
 
     public static final String languageVersionProperty = "language version";
     public static final String errorReporterProperty   = "error reporter";
@@ -705,7 +699,7 @@ public class Context
                 return null;
             }
 
-            // There will be many manifests in the world--enumerate all of them until we find the right one.
+            // There will be many manifests in the world -- enumerate all of them until we find the right one.
             while (urls.hasMoreElements()) {
                 URL metaUrl = urls.nextElement();
                 InputStream is = null;
