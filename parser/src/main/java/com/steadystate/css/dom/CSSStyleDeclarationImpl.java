@@ -104,7 +104,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, CSSFormatab
         return sb.toString();
     }
 
-    public void setCssText(final String cssText)  {
+    public void setCssText(final String cssText) throws DOMException {
         try {
             final InputSource is = new InputSource(new StringReader(cssText));
             final CSSOMParser parser = new CSSOMParser();
@@ -129,7 +129,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, CSSFormatab
         return (p == null) ? null : p.getValue();
     }
 
-    public String removeProperty(final String propertyName)  {
+    public String removeProperty(final String propertyName) throws DOMException {
         if (null == propertyName) {
             return "";
         }
@@ -154,7 +154,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, CSSFormatab
     public void setProperty(
             final String propertyName,
             final String value,
-            final String priority)  {
+            final String priority) throws DOMException {
         try {
             CSSValue expr = null;
             if (!value.isEmpty()) {
@@ -219,12 +219,12 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, CSSFormatab
         return null;
     }
 
-    
+    @Override
     public String toString() {
         return getCssText();
     }
 
-    
+    @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
@@ -261,7 +261,7 @@ public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, CSSFormatab
         return true;
     }
 
-    
+    @Override
     public int hashCode() {
         int hash = LangUtils.HASH_SEED;
         // don't use parentRule in hashCode()

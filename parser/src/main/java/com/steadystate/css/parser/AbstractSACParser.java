@@ -28,6 +28,7 @@ package com.steadystate.css.parser;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -409,10 +410,19 @@ abstract class AbstractSACParser implements Parser {
             return new CssCharStream(source.getCharacterStream(), 1, 1);
         }
         if (source.getByteStream() != null) {
-            return new CssCharStream(new InputStreamReader(source.getByteStream()), 1, 1);
+            final InputStreamReader reader;
+            final String encoding = source.getEncoding();
+            if (encoding == null || encoding.length() < 1) {
+                reader = new InputStreamReader(source.getByteStream(), Charset.defaultCharset());
+            }
+            else {
+                reader = new InputStreamReader(source.getByteStream(), encoding);
+            }
+            return new CssCharStream(reader, 1, 1);
         }
         if (source.getURI() != null) {
-            return new CssCharStream(new InputStreamReader(new URL(source.getURI()).openStream()), 1, 1);
+            final InputStreamReader reader = new InputStreamReader(new URL(source.getURI()).openStream());
+            return new CssCharStream(reader, 1, 1);
         }
         return null;
     }
@@ -767,7 +777,7 @@ abstract class AbstractSACParser implements Parser {
     }
 
     private static int hexval(final char c) {
-        switch(c) {
+        switch (c) {
             case '0' :
                 return 0;
             case '1' :
