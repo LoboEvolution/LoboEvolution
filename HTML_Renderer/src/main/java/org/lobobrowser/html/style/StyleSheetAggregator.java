@@ -32,6 +32,8 @@ import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.StyleRuleInfo;
+import org.w3c.dom.Attr;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSMediaRule;
 import org.w3c.dom.css.CSSRule;
@@ -57,18 +59,41 @@ public class StyleSheetAggregator {
 
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(StyleSheetAggregator.class.getName());
+	
+	/** The attribute. */
+	private String attribute;
+	
+	/** The attributeValue. */
+	private String attributeValue;
+	
+	/** The attributeOperator. */
+	private String attributeOperator = "";
+	
+	/** The element. */
+	private String htmlElement;
 
 	/** The document. */
 	private final HTMLDocumentImpl document;
 
 	/** The class maps by element. */
 	private final Map<String, Map<String, Collection<StyleRuleInfo>>> classMapsByElement = new HashMap<String, Map<String, Collection<StyleRuleInfo>>>();
+	
+	/** The attr maps by element. */
+	private final Map<String, Map<String, Collection<StyleRuleInfo>>> attrMapsByElement = new HashMap<String, Map<String, Collection<StyleRuleInfo>>>();
 
 	/** The id maps by element. */
 	private final Map<String, Map<String, Collection<StyleRuleInfo>>> idMapsByElement = new HashMap<String, Map<String, Collection<StyleRuleInfo>>>();
 
 	/** The rules by element. */
 	private final Map<String, Collection<StyleRuleInfo>> rulesByElement = new HashMap<String, Collection<StyleRuleInfo>>();
+	
+	private final String OP_EQUAL = "=";
+	private final String OP_TILDE_EQUAL = "~=";
+	private final String OP_PIPE_EQUAL = "|=";
+	private final String OP_DOLLAR_EQUAL = "$=";
+	private final String OP_CIRCUMFLEX_EQUAL = "^=";
+	private final String OP_STAR_EQUAL = "*=";
+	private final String OP_ALL="ALL";
 
 	/**
 	 * Instantiates a new style sheet aggregator.
@@ -186,7 +211,48 @@ public class StyleSheetAggregator {
 					}
 				}
 			}
-			// TODO Attribute Selector
+			
+			if (selectorList.contains("[") && selectorList.endsWith("]")) {
+				String selector = selectorList.replace("\"", "");
+				int quadIdx =  selector.indexOf("[") +1;				
+				htmlElement = selector.substring(0,selector.indexOf("["));				
+				if(selectorList.contains(OP_PIPE_EQUAL)){
+					int eqIdx = selector.indexOf(OP_PIPE_EQUAL);
+					attribute = selector.substring(quadIdx,eqIdx);
+					attributeValue = selector.substring(eqIdx+2, selector.length()-1);
+					attributeOperator = OP_PIPE_EQUAL;
+				}else if(selectorList.contains(OP_CIRCUMFLEX_EQUAL)){
+					int eqIdx = selector.indexOf(OP_CIRCUMFLEX_EQUAL);
+					attribute = selector.substring(quadIdx,eqIdx);
+					attributeValue = selector.substring(eqIdx+2, selector.length()-1);
+					attributeOperator = OP_CIRCUMFLEX_EQUAL;
+				} else if(selectorList.contains(OP_TILDE_EQUAL)){
+					int eqIdx = selector.indexOf(OP_TILDE_EQUAL);
+					attribute = selector.substring(quadIdx,eqIdx);
+					attributeValue = selector.substring(eqIdx+2, selector.length()-1);
+					attributeOperator = OP_TILDE_EQUAL;
+				} else if(selectorList.contains(OP_DOLLAR_EQUAL)){
+					int eqIdx = selector.indexOf(OP_DOLLAR_EQUAL);
+					attribute = selector.substring(quadIdx,eqIdx);
+					attributeValue = selector.substring(eqIdx+2, selector.length()-1);
+					attributeOperator = OP_DOLLAR_EQUAL;
+				} else if(selectorList.contains(OP_STAR_EQUAL)){
+					int eqIdx = selector.indexOf(OP_STAR_EQUAL);
+					attribute = selector.substring(quadIdx,eqIdx);
+					attributeValue = selector.substring(eqIdx+2, selector.length()-1);
+					attributeOperator = OP_STAR_EQUAL;
+				} else if(selectorList.contains(OP_EQUAL)){
+					int eqIdx = selector.indexOf(OP_EQUAL);
+					attribute = selector.substring(quadIdx,eqIdx);
+					attributeValue = selector.substring(eqIdx+1, selector.length()-1);
+					attributeOperator = OP_EQUAL;
+		        } else{
+		        	attribute = selector.substring(quadIdx,selector.length()-1);
+					attributeValue = "-";
+					attributeOperator = OP_ALL;
+		        }
+				this.addAttributeRule(htmlElement, attributeValue, sr, new ArrayList<SimpleSelector>());
+			}
 		} else if (rule instanceof CSSImportRule) {
 			UserAgentContext uacontext = document.getUserAgentContext();
 			if (uacontext.isExternalCSSEnabled()) {
@@ -240,6 +306,32 @@ public class StyleSheetAggregator {
 		if (rules == null) {
 			rules = new LinkedList<StyleRuleInfo>();
 			classMap.put(classtl, rules);
+		}
+		rules.add(new StyleRuleInfo(ancestorSelectors, styleRule));
+	}
+	
+	/**
+	 * Adds the class rule.
+	 *
+	 * @param elemtl
+	 *            the elemtl
+	 * @param classtl
+	 *            the classtl
+	 * @param styleRule
+	 *            the style rule
+	 * @param ancestorSelectors
+	 *            the ancestor selectors
+	 */
+	private final void addAttributeRule(String elemtl, String attrtl, CSSStyleRule styleRule, ArrayList<SimpleSelector> ancestorSelectors) {
+		Map<String, Collection<StyleRuleInfo>> attrMap = this.attrMapsByElement.get(elemtl);
+		if (attrMap == null) {
+			attrMap = new HashMap<String, Collection<StyleRuleInfo>>();
+			this.attrMapsByElement.put(elemtl, attrMap);
+		}
+		Collection<StyleRuleInfo> rules = attrMap.get(attrtl);
+		if (rules == null) {
+			rules = new LinkedList<StyleRuleInfo>();
+			attrMap.put(attrtl, rules);
 		}
 		rules.add(new StyleRuleInfo(ancestorSelectors, styleRule));
 	}
@@ -307,7 +399,8 @@ public class StyleSheetAggregator {
 	 * @return the active style declarations
 	 */
 	public final Collection<CSSStyleDeclaration> getActiveStyleDeclarations(HTMLElementImpl element, String elementName,
-			String elementId, String className, Set pseudoNames) {
+			String elementId, String className, Set pseudoNames,NamedNodeMap attributes) {
+		
 		Collection<CSSStyleDeclaration> styleDeclarations = null;
 		String elementTL = elementName.toLowerCase();
 		Collection<StyleRuleInfo> elementRules = this.rulesByElement.get(elementTL);
@@ -328,7 +421,7 @@ public class StyleSheetAggregator {
 					styleDeclarations = putStyleDeclarations(classRules, styleDeclarations, element, pseudoNames);
 				}
 			}
-			classMaps = this.classMapsByElement.get("*");
+			classMaps = this.classMapsByElement.get("*");	
 			if (classMaps != null) {
 				Collection<StyleRuleInfo> classRules = (Collection<StyleRuleInfo>) classMaps.get(classNameTL);
 				if (classRules != null) {
@@ -354,6 +447,21 @@ public class StyleSheetAggregator {
 				}
 			}
 		}
+		
+		if (attributes != null && attributes.getLength() > 0) {
+			for (int i = 0; i < attributes.getLength(); i++) {
+				Attr attr = (Attr) attributes.item(i);
+				if (isAttributeOperator(attr,element)) {
+					Map<String, Collection<StyleRuleInfo>> classMaps = this.attrMapsByElement.get(htmlElement);
+					if (classMaps != null) {
+						Collection<StyleRuleInfo> attrRules = (Collection<StyleRuleInfo>) classMaps.get(attributeValue);
+						if (attrRules != null) {
+							styleDeclarations = putStyleDeclarations(attrRules, styleDeclarations, element, pseudoNames);
+						}
+					}
+				}
+			}
+		}	
 		return styleDeclarations;
 	}
 
@@ -437,15 +545,17 @@ public class StyleSheetAggregator {
 	 */
 	private boolean isAffectedByPseudoNameInAncestor(Collection<StyleRuleInfo> elementRules, HTMLElementImpl ancestor,
 			HTMLElementImpl element, String pseudoName) {
-		Iterator<StyleRuleInfo> i = elementRules.iterator();
-		while (i.hasNext()) {
-			StyleRuleInfo styleRuleInfo = i.next();
-			CSSStyleSheet styleSheet = styleRuleInfo.getStyleRule().getParentStyleSheet();
-			if ((styleSheet != null) && styleSheet.getDisabled()) {
-				continue;
-			}
-			if (styleRuleInfo.affectedByPseudoNameInAncestor(element, ancestor, pseudoName)) {
-				return true;
+		if (elementRules != null) { // TODO null?!?
+			Iterator<StyleRuleInfo> i = elementRules.iterator();
+			while (i.hasNext()) {
+				StyleRuleInfo styleRuleInfo = i.next();
+				CSSStyleSheet styleSheet = styleRuleInfo.getStyleRule().getParentStyleSheet();
+				if ((styleSheet != null) && styleSheet.getDisabled()) {
+					continue;
+				}
+				if (styleRuleInfo.affectedByPseudoNameInAncestor(element, ancestor, pseudoName)) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -478,5 +588,64 @@ public class StyleSheetAggregator {
 			}
 		}
 		return styleDeclarations;
+	}
+	
+	/**
+	 * is attribute operator
+	 * 
+	 * @param attr
+	 * @return
+	 */
+	private boolean isAttributeOperator(Attr attr, HTMLElementImpl element) {
+		
+	switch (attributeOperator) {
+		case OP_EQUAL:
+			if (attr.getName().equals(attribute) && attr.getValue().equals(attributeValue) && "*".equals(htmlElement)) {
+				return true;
+			} else if (attr.getName().equals(attribute) && attr.getValue().equals(attributeValue)
+					&& element.getNodeName().equals(htmlElement)) {
+				return true;
+			}
+			break;
+		case OP_TILDE_EQUAL:
+		case OP_STAR_EQUAL:
+			if (attr.getName().equals(attribute) && attr.getValue().contains(attributeValue)
+					&& "*".equals(htmlElement)) {
+				return true;
+			} else if (attr.getName().equals(attribute) && attr.getValue().contains(attributeValue)
+					&& element.getNodeName().equals(htmlElement)) {
+				return true;
+			}
+			break;
+		case OP_PIPE_EQUAL:
+		case OP_CIRCUMFLEX_EQUAL:
+			if (attr.getName().equals(attribute) && attr.getValue().startsWith(attributeValue)
+					&& "*".equals(htmlElement)) {
+				return true;
+			} else if (attr.getName().equals(attribute) && attr.getValue().startsWith(attributeValue)
+					&& element.getNodeName().equals(htmlElement)) {
+				return true;
+			}
+			break;
+		case OP_DOLLAR_EQUAL:
+			if (attr.getName().equals(attribute) && attr.getValue().endsWith(attributeValue)
+					&& "*".equals(htmlElement)) {
+				return true;
+			} else if (attr.getName().equals(attribute) && attr.getValue().endsWith(attributeValue)
+					&& element.getNodeName().equals(htmlElement)) {
+				return true;
+			}
+			break;
+		case OP_ALL:
+			if (attr.getName().equals(attribute) && "*".equals(htmlElement)) {
+				return true;
+			} else if (attr.getName().equals(attribute) && element.getNodeName().equals(htmlElement)) {
+				return true;
+			}
+			break;
+		default:
+			break;
+		}
+		return false;
 	}
 }

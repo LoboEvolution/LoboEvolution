@@ -52,6 +52,7 @@ import org.lobobrowser.html.w3c.HTMLPropertiesCollection;
 import org.lobobrowser.util.Strings;
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.css.CSSStyleDeclaration;
@@ -647,9 +648,9 @@ CSS2PropertiesContext {
         if (doc == null) {
             return null;
         }
+        
         StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
-        return ssa.getActiveStyleDeclarations(this, elementName, id, className,
-                pseudoNames);
+        return ssa.getActiveStyleDeclarations(this, elementName, id, className,pseudoNames,getAttributes());
     }
 
     /*
