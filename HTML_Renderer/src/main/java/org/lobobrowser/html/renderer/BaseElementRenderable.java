@@ -722,6 +722,8 @@ RElement, RenderableContainer, ImageObserver {
 				image = new ImageIcon(imageURL).getImage();
 			} else if (url.endsWith(".bmp")) {
 				image = ImageIO.read(imageURL);
+			}else{
+				image = ImageIO.read(imageURL);
 			}
 			BaseElementRenderable.this.backgroundImage = image;
 			int w = image.getWidth(BaseElementRenderable.this);
@@ -731,6 +733,9 @@ RElement, RenderableContainer, ImageObserver {
 			}
 		} catch (IOException | TranscoderException thrown) {
 			logger.log(Level.WARNING, "loadBackgroundImage()", thrown);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
