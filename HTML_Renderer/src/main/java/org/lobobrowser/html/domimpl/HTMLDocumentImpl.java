@@ -75,6 +75,7 @@ import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.js.Location;
 import org.lobobrowser.html.js.Window;
 import org.lobobrowser.html.jsimpl.CustomEventImpl;
+import org.lobobrowser.html.jsimpl.EventException;
 import org.lobobrowser.html.jsimpl.EventImpl;
 import org.lobobrowser.html.jsimpl.KeyboardEventImpl;
 import org.lobobrowser.html.jsimpl.MouseEventImpl;
@@ -86,21 +87,27 @@ import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.renderstate.StyleSheetRenderState;
 import org.lobobrowser.html.style.StyleSheetAggregator;
-import org.lobobrowser.html.w3c.HTMLCollection;
-import org.lobobrowser.html.w3c.HTMLDocument;
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.HTMLHeadElement;
-import org.lobobrowser.html.w3c.events.DocumentEvent;
-import org.lobobrowser.html.w3c.events.Event;
-import org.lobobrowser.html.w3c.xpath.XPathExpression;
-import org.lobobrowser.html.w3c.xpath.XPathNSResolver;
-import org.lobobrowser.html.w3c.xpath.XPathResult;
 import org.lobobrowser.html.xpath.XPathEvaluatorImpl;
+import org.lobobrowser.html.xpath.XPathNSResolverImpl;
+import org.lobobrowser.html.xpath.XPathResultImpl;
 import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.util.Domains;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.WeakValueHashMap;
 import org.lobobrowser.util.io.EmptyReader;
+import org.lobobrowser.w3c.events.DocumentEvent;
+import org.lobobrowser.w3c.events.Event;
+import org.lobobrowser.w3c.events.EventListener;
+import org.lobobrowser.w3c.html.DOMElementMap;
+import org.lobobrowser.w3c.html.HTMLAllCollection;
+import org.lobobrowser.w3c.html.HTMLCollection;
+import org.lobobrowser.w3c.html.HTMLDocument;
+import org.lobobrowser.w3c.html.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLHeadElement;
+import org.lobobrowser.w3c.xpath.XPathEvaluator;
+import org.lobobrowser.w3c.xpath.XPathExpression;
+import org.lobobrowser.w3c.xpath.XPathNSResolver;
+import org.lobobrowser.w3c.xpath.XPathResult;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
@@ -130,7 +137,7 @@ import com.steadystate.css.dom.CSSStyleSheetListImpl;
  * The Class HTMLDocumentImpl.
  */
 public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
-        DocumentView, DocumentEvent {
+        DocumentView, DocumentEvent, XPathEvaluator {
 
     /** The Constant logger. */
     private static final Logger logger = Logger
@@ -364,7 +371,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getCookie()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getCookie()
  */
     @Override
     public String getCookie() {
@@ -393,7 +400,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#setCookie(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#setCookie(java.lang.String)
  */
     @Override
     public void setCookie(final String cookie) throws DOMException {
@@ -419,7 +426,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#open()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#open()
  */
     @Override
     public void open() {
@@ -509,7 +516,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#close()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#close()
  */
     @Override
     public void close() {
@@ -530,7 +537,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#write(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#write(java.lang.String)
  */
     @Override
     public void write(String text) {
@@ -548,7 +555,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#writeln(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#writeln(java.lang.String)
  */
     @Override
     public void writeln(String text) {
@@ -763,7 +770,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
     /*
  * (non-Javadoc)
  * @see
- * org.lobobrowser.html.w3c.events.DocumentEvent#createEvent(java.lang.String)
+ * org.lobobrowser.w3c.events.DocumentEvent#createEvent(java.lang.String)
  */
     @Override
     public Event createEvent(String eventType) throws DOMException {
@@ -1028,7 +1035,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#setLocation(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#setLocation(java.lang.String)
  */
     @Override
     public void setLocation(String location) {
@@ -1037,7 +1044,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getURL()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getURL()
  */
     @Override
     public String getURL() {
@@ -1557,7 +1564,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getBody()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getBody()
  */
     @Override
     public HTMLElement getBody() {
@@ -1568,7 +1575,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#setBody(org.lobobrowser.html.w3c.
+ * @see org.lobobrowser.w3c.html.HTMLDocument#setBody(org.lobobrowser.w3c.html.
  * HTMLElement)
  */
     @Override
@@ -1580,7 +1587,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getReferrer()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getReferrer()
  */
     @Override
     public String getReferrer() {
@@ -1599,7 +1606,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getDomain()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getDomain()
  */
     @Override
     public String getDomain() {
@@ -1608,7 +1615,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#setDomain(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#setDomain(java.lang.String)
  */
     @Override
     public void setDomain(String domain) {
@@ -1624,7 +1631,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getImages()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getImages()
  */
     @Override
     public HTMLCollection getImages() {
@@ -1639,7 +1646,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getApplets()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getApplets()
  */
     @Override
     public HTMLCollection getApplets() {
@@ -1654,7 +1661,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getLinks()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getLinks()
  */
     @Override
     public HTMLCollection getLinks() {
@@ -1669,7 +1676,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getForms()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getForms()
  */
     @Override
     public HTMLCollection getForms() {
@@ -1699,7 +1706,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getAnchors()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getAnchors()
  */
     @Override
     public HTMLCollection getAnchors() {
@@ -1929,7 +1936,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getTitle()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getTitle()
  */
     @Override
     public String getTitle() {
@@ -1938,7 +1945,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#setTitle(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#setTitle(java.lang.String)
  */
     @Override
     public void setTitle(String title) {
@@ -1991,7 +1998,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getLastModified()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getLastModified()
  */
 	@Override
 	public String getLastModified() {
@@ -2014,7 +2021,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getCompatMode()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getCompatMode()
  */
     @Override
     public String getCompatMode() {
@@ -2024,7 +2031,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getCharacterSet()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getCharacterSet()
  */
     @Override
     public String getCharacterSet() {
@@ -2036,7 +2043,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getDefaultCharset()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getDefaultCharset()
  */
     @Override
     public String getDefaultCharset() {
@@ -2045,7 +2052,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getReadyState()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getReadyState()
  */
     @Override
     public String getReadyState() {
@@ -2068,7 +2075,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getHead()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getHead()
  */
     @Override
     public HTMLHeadElement getHead() {
@@ -2078,7 +2085,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getEmbeds()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getEmbeds()
  */
     @Override
     public HTMLCollection getEmbeds() {
@@ -2093,7 +2100,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getPlugins()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getPlugins()
  */
     @Override
     public HTMLCollection getPlugins() {
@@ -2108,7 +2115,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getScripts()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getScripts()
  */
     @Override
     public HTMLCollection getScripts() {
@@ -2124,7 +2131,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
     /*
  * (non-Javadoc)
  * @see
- * org.lobobrowser.html.w3c.HTMLDocument#getElementsByClassName(java.lang.String
+ * org.lobobrowser.w3c.html.HTMLDocument#getElementsByClassName(java.lang.String
  * )
  */
     @Override
@@ -2134,7 +2141,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#hasFocus()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#hasFocus()
  */
     @Override
     public boolean hasFocus() {
@@ -2144,7 +2151,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getDesignMode()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getDesignMode()
  */
     @Override
     public String getDesignMode() {
@@ -2154,7 +2161,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#setDesignMode(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#setDesignMode(java.lang.String)
  */
     @Override
     public void setDesignMode(String designMode) {
@@ -2164,7 +2171,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#execCommand(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#execCommand(java.lang.String)
  */
     @Override
     public boolean execCommand(String commandId) {
@@ -2174,7 +2181,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#execCommand(java.lang.String,
+ * @see org.lobobrowser.w3c.html.HTMLDocument#execCommand(java.lang.String,
  * boolean)
  */
     @Override
@@ -2185,7 +2192,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#execCommand(java.lang.String,
+ * @see org.lobobrowser.w3c.html.HTMLDocument#execCommand(java.lang.String,
  * boolean, java.lang.String)
  */
     @Override
@@ -2197,7 +2204,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
     /*
  * (non-Javadoc)
  * @see
- * org.lobobrowser.html.w3c.HTMLDocument#queryCommandEnabled(java.lang.String)
+ * org.lobobrowser.w3c.html.HTMLDocument#queryCommandEnabled(java.lang.String)
  */
     @Override
     public boolean queryCommandEnabled(String commandId) {
@@ -2213,7 +2220,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
     /*
  * (non-Javadoc)
  * @see
- * org.lobobrowser.html.w3c.HTMLDocument#queryCommandIndeterm(java.lang.String)
+ * org.lobobrowser.w3c.html.HTMLDocument#queryCommandIndeterm(java.lang.String)
  */
     @Override
     public boolean queryCommandIndeterm(String commandId) {
@@ -2224,7 +2231,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
     /*
  * (non-Javadoc)
  * @see
- * org.lobobrowser.html.w3c.HTMLDocument#queryCommandState(java.lang.String)
+ * org.lobobrowser.w3c.html.HTMLDocument#queryCommandState(java.lang.String)
  */
     @Override
     public boolean queryCommandState(String commandId) {
@@ -2235,7 +2242,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
     /*
  * (non-Javadoc)
  * @see
- * org.lobobrowser.html.w3c.HTMLDocument#queryCommandSupported(java.lang.String)
+ * org.lobobrowser.w3c.html.HTMLDocument#queryCommandSupported(java.lang.String)
  */
     @Override
     public boolean queryCommandSupported(String commandId) {
@@ -2251,7 +2258,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
     /*
  * (non-Javadoc)
  * @see
- * org.lobobrowser.html.w3c.HTMLDocument#queryCommandValue(java.lang.String)
+ * org.lobobrowser.w3c.html.HTMLDocument#queryCommandValue(java.lang.String)
  */
     @Override
     public String queryCommandValue(String commandId) {
@@ -2261,7 +2268,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#querySelector(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#querySelector(java.lang.String)
  */
     @Override
     public Element querySelector(String selectors) {
@@ -2271,7 +2278,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#querySelectorAll(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#querySelectorAll(java.lang.String)
  */
     @Override
     public NodeList querySelectorAll(String selectors) {
@@ -2281,7 +2288,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getCommands()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getCommands()
  */
     @Override
     public HTMLCollection getCommands() {
@@ -2296,7 +2303,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getFgColor()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getFgColor()
  */
     @Override
     public String getFgColor() {
@@ -2308,7 +2315,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#setFgColor(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#setFgColor(java.lang.String)
  */
     @Override
     public void setFgColor(String fgColor) {
@@ -2319,7 +2326,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getBgColor()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getBgColor()
  */
     @Override
     public String getBgColor() {
@@ -2331,7 +2338,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#setBgColor(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#setBgColor(java.lang.String)
  */
     @Override
     public void setBgColor(String bgColor) {
@@ -2342,7 +2349,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getLinkColor()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getLinkColor()
  */
     @Override
     public String getLinkColor() {
@@ -2354,7 +2361,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#setLinkColor(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#setLinkColor(java.lang.String)
  */
     @Override
     public void setLinkColor(String linkColor) {
@@ -2365,7 +2372,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getVlinkColor()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getVlinkColor()
  */
     @Override
     public String getVlinkColor() {
@@ -2377,7 +2384,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#setVlinkColor(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#setVlinkColor(java.lang.String)
  */
     @Override
     public void setVlinkColor(String vlinkColor) {
@@ -2389,7 +2396,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#getAlinkColor()
+ * @see org.lobobrowser.w3c.html.HTMLDocument#getAlinkColor()
  */
     @Override
     public String getAlinkColor() {
@@ -2401,7 +2408,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLDocument#setAlinkColor(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLDocument#setAlinkColor(java.lang.String)
  */
     @Override
     public void setAlinkColor(String alinkColor) {
@@ -2722,8 +2729,8 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 	}
 	
 	@Override
-	public XPathResult evaluate(String expression, HTMLElement contextNode,
-			XPathNSResolver resolver, Short type, Object result) {	
+	public XPathResultImpl evaluate(String expression, HTMLElement contextNode,
+			XPathNSResolverImpl resolver, Short type, Object result) {	
 		return eval(expression, contextNode, resolver, type, result);
 	}
 	
@@ -2742,11 +2749,642 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument,
 	 *            the result
 	 * @return the x path result
 	 */
-	private XPathResult eval(String expression, Node contextNode,
+	private XPathResultImpl eval(String expression, Node contextNode,
 			XPathNSResolver resolver, short type, Object result) {
 		XPathEvaluatorImpl evaluator = new XPathEvaluatorImpl(document);
-		return (XPathResult) evaluator.evaluate(expression, contextNode,
+		return (XPathResultImpl) evaluator.evaluate(expression, contextNode,
 				resolver, type, result);
 
+	}
+
+	@Override
+	public void addEventListener(String type, EventListener listener, boolean useCapture) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeEventListener(String type, EventListener listener, boolean useCapture) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean dispatchEvent(Event evt) throws EventException, DOMException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public Object getElement(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDir() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDir(String dir) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public DOMElementMap getCssElementMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setInnerHTML(String innerHTML) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HTMLDocument open(String type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HTMLDocument open(String type, String replace) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void open(String url, String name, String features) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void open(String url, String name, String features, boolean replace) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public Element getActiveElement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Function getOnabort() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnabort(Function onabort) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnblur() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnblur(Function onblur) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOncanplay() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOncanplay(Function oncanplay) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOncanplaythrough() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOncanplaythrough(Function oncanplaythrough) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnchange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnchange(Function onchange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOncontextmenu() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOncontextmenu(Function oncontextmenu) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOncuechange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOncuechange(Function oncuechange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndrag() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndrag(Function ondrag) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragend() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragend(Function ondragend) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragenter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragenter(Function ondragenter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragleave() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragleave(Function ondragleave) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragover() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragover(Function ondragover) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragstart() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragstart(Function ondragstart) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndrop() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndrop(Function ondrop) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndurationchange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndurationchange(Function ondurationchange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnemptied() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnemptied(Function onemptied) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnended() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnended(Function onended) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnerror() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnerror(Function onerror) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnfocus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnfocus(Function onfocus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOninput() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOninput(Function oninput) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOninvalid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOninvalid(Function oninvalid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnload() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnload(Function onload) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnloadeddata() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnloadeddata(Function onloadeddata) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnloadedmetadata() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnloadedmetadata(Function onloadedmetadata) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnloadstart() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnloadstart(Function onloadstart) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmousemove() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmousemove(Function onmousemove) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmousewheel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmousewheel(Function onmousewheel) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnpause() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnpause(Function onpause) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnplay() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnplay(Function onplay) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnplaying() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnplaying(Function onplaying) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnprogress() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnprogress(Function onprogress) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnratechange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnratechange(Function onratechange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnreadystatechange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnreadystatechange(Function onreadystatechange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnreset() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnreset(Function onreset) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnscroll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnscroll(Function onscroll) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnseeked() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnseeked(Function onseeked) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnseeking() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnseeking(Function onseeking) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnselect() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnselect(Function onselect) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnshow() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnshow(Function onshow) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnstalled() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnstalled(Function onstalled) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnsubmit() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnsubmit(Function onsubmit) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnsuspend() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnsuspend(Function onsuspend) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOntimeupdate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOntimeupdate(Function ontimeupdate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnvolumechange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnvolumechange(Function onvolumechange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnwaiting() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnwaiting(Function onwaiting) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HTMLAllCollection getAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

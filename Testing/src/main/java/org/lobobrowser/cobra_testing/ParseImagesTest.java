@@ -15,7 +15,7 @@ package org.lobobrowser.cobra_testing;
 
 import org.lobobrowser.html.*;
 import org.lobobrowser.html.test.*;
-import org.lobobrowser.html.w3c.HTMLCollection;
+import org.lobobrowser.w3c.html.HTMLCollection;
 import org.lobobrowser.html.parser.*;
 import org.lobobrowser.html.domimpl.*;
 import org.w3c.dom.*;

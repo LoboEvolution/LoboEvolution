@@ -22,7 +22,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.io.Serializable;
 
-import org.lobobrowser.html.w3c.HTMLImageElement;
+import org.lobobrowser.w3c.html.HTMLImageElement;
 
 /**
  * The Class CanvasInfo.

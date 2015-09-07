@@ -14,9 +14,9 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.w3c.HTMLFormElement;
-import org.lobobrowser.html.w3c.HTMLKeygenElement;
-import org.lobobrowser.html.w3c.ValidityState;
+import org.lobobrowser.w3c.html.HTMLFormElement;
+import org.lobobrowser.w3c.html.HTMLKeygenElement;
+import org.lobobrowser.w3c.html.ValidityState;
 import org.w3c.dom.NodeList;
 
 /**
@@ -37,7 +37,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#getAutofocus()
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#getAutofocus()
      */
     @Override
     public boolean getAutofocus() {
@@ -47,7 +47,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#setAutofocus(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#setAutofocus(boolean)
      */
     @Override
     public void setAutofocus(boolean autofocus) {
@@ -57,7 +57,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#getChallenge()
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#getChallenge()
      */
     @Override
     public String getChallenge() {
@@ -67,7 +67,7 @@ HTMLKeygenElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLKeygenElement#setChallenge(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLKeygenElement#setChallenge(java.lang.String)
      */
     @Override
     public void setChallenge(String challenge) {
@@ -77,7 +77,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#setDisabled(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#setDisabled(boolean)
      */
     @Override
     public void setDisabled(boolean disabled) {
@@ -87,7 +87,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#getForm()
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#getForm()
      */
     @Override
     public HTMLFormElement getForm() {
@@ -97,7 +97,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#getKeytype()
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#getKeytype()
      */
     @Override
     public String getKeytype() {
@@ -106,7 +106,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#setKeytype(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#setKeytype(java.lang.String)
      */
     @Override
     public void setKeytype(String keytype) {
@@ -116,7 +116,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#getName()
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#getName()
      */
     @Override
     public String getName() {
@@ -125,7 +125,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#setName(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#setName(java.lang.String)
      */
     @Override
     public void setName(String name) {
@@ -135,7 +135,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#getType()
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#getType()
      */
     @Override
     public String getType() {
@@ -145,7 +145,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#getWillValidate()
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#getWillValidate()
      */
     @Override
     public boolean getWillValidate() {
@@ -155,7 +155,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#getValidity()
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#getValidity()
      */
     @Override
     public ValidityState getValidity() {
@@ -165,7 +165,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#getValidationMessage()
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#getValidationMessage()
      */
     @Override
     public String getValidationMessage() {
@@ -175,7 +175,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#checkValidity()
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#checkValidity()
      */
     @Override
     public boolean checkValidity() {
@@ -186,7 +186,7 @@ HTMLKeygenElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLKeygenElement#setCustomValidity(java.lang.String
+     * org.lobobrowser.w3c.html.HTMLKeygenElement#setCustomValidity(java.lang.String
      * )
      */
     @Override
@@ -197,7 +197,7 @@ HTMLKeygenElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLKeygenElement#getLabels()
+     * @see org.lobobrowser.w3c.html.HTMLKeygenElement#getLabels()
      */
     @Override
     public NodeList getLabels() {

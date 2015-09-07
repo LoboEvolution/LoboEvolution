@@ -25,11 +25,11 @@ import java.util.ArrayList;
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.InputContext;
-import org.lobobrowser.html.w3c.HTMLCollection;
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.HTMLOptionsCollection;
-import org.lobobrowser.html.w3c.HTMLSelectElement;
-import org.lobobrowser.html.w3c.ValidityState;
+import org.lobobrowser.w3c.html.HTMLCollection;
+import org.lobobrowser.w3c.html.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLOptionsCollection;
+import org.lobobrowser.w3c.html.HTMLSelectElement;
+import org.lobobrowser.w3c.html.ValidityState;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.NodeList;
@@ -52,8 +52,8 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#add(org.lobobrowser.html.w3c.
-     * HTMLElement, org.lobobrowser.html.w3c.HTMLElement)
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#add(org.lobobrowser.w3c.html.
+     * HTMLElement, org.lobobrowser.w3c.html.HTMLElement)
      */
     @Override
     public void add(HTMLElement element, HTMLElement before)
@@ -63,7 +63,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#getLength()
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getLength()
      */
     @Override
     public int getLength() {
@@ -75,7 +75,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#getMultiple()
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getMultiple()
      */
     @Override
     public boolean getMultiple() {
@@ -91,7 +91,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#getOptions()
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getOptions()
      */
     @Override
     public HTMLOptionsCollection getOptions() {
@@ -105,7 +105,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#getSelectedIndex()
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getSelectedIndex()
      */
     @Override
     public int getSelectedIndex() {
@@ -119,7 +119,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#getSize()
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getSize()
      */
     @Override
     public int getSize() {
@@ -133,7 +133,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#getType()
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getType()
      */
     @Override
     public String getType() {
@@ -142,7 +142,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#remove(int)
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#remove(int)
      */
     @Override
     public void remove(int index) {
@@ -156,7 +156,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#setLength(int)
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#setLength(int)
      */
     @Override
     public void setLength(int length) throws DOMException {
@@ -165,7 +165,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#setMultiple(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#setMultiple(boolean)
      */
     @Override
     public void setMultiple(boolean multiple) {
@@ -181,7 +181,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#setSelectedIndex(int)
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#setSelectedIndex(int)
      */
     @Override
     public void setSelectedIndex(int selectedIndex) {
@@ -212,7 +212,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#setSize(int)
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#setSize(int)
      */
     @Override
     public void setSize(int size) {
@@ -299,7 +299,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#getAutofocus()
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getAutofocus()
      */
     @Override
     public boolean getAutofocus() {
@@ -309,7 +309,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#setAutofocus(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#setAutofocus(boolean)
      */
     @Override
     public void setAutofocus(boolean autofocus) {
@@ -320,7 +320,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#item(int)
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#item(int)
      */
     @Override
     public Object item(int index) {
@@ -330,7 +330,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#namedItem(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#namedItem(java.lang.String)
      */
     @Override
     public Object namedItem(String name) {
@@ -340,7 +340,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#add(org.lobobrowser.html.w3c.
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#add(org.lobobrowser.w3c.html.
      * HTMLElement)
      */
     @Override
@@ -351,7 +351,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#add(org.lobobrowser.html.w3c.
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#add(org.lobobrowser.w3c.html.
      * HTMLElement, int)
      */
     @Override
@@ -362,7 +362,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#getSelectedOptions()
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getSelectedOptions()
      */
     @Override
     public HTMLCollection getSelectedOptions() {
@@ -372,7 +372,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#getWillValidate()
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getWillValidate()
      */
     @Override
     public boolean getWillValidate() {
@@ -382,7 +382,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#getValidity()
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getValidity()
      */
     @Override
     public ValidityState getValidity() {
@@ -392,7 +392,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#getValidationMessage()
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getValidationMessage()
      */
     @Override
     public String getValidationMessage() {
@@ -402,7 +402,7 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#checkValidity()
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#checkValidity()
      */
     @Override
     public boolean checkValidity() {
@@ -413,7 +413,7 @@ HTMLSelectElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLSelectElement#setCustomValidity(java.lang.String
+     * org.lobobrowser.w3c.html.HTMLSelectElement#setCustomValidity(java.lang.String
      * )
      */
     @Override
@@ -424,11 +424,23 @@ HTMLSelectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSelectElement#getLabels()
+     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getLabels()
      */
     @Override
     public NodeList getLabels() {
         // TODO Auto-generated method stub
         return null;
     }
+
+	@Override
+	public boolean getRequired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setRequired(boolean required) {
+		// TODO Auto-generated method stub
+		
+	}
 }

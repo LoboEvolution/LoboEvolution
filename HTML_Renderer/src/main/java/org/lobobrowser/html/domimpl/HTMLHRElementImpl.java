@@ -21,7 +21,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.w3c.HTMLHRElement;
+import org.lobobrowser.w3c.html.HTMLHRElement;
 
 /**
  * The Class HTMLHRElementImpl.
@@ -41,7 +41,7 @@ HTMLHRElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHRElement#getAlign()
+     * @see org.lobobrowser.w3c.html.HTMLHRElement#getAlign()
      */
     @Override
     public String getAlign() {
@@ -50,7 +50,7 @@ HTMLHRElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHRElement#getNoShade()
+     * @see org.lobobrowser.w3c.html.HTMLHRElement#getNoShade()
      */
     @Override
     public boolean getNoShade() {
@@ -60,7 +60,7 @@ HTMLHRElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHRElement#getSize()
+     * @see org.lobobrowser.w3c.html.HTMLHRElement#getSize()
      */
     @Override
     public String getSize() {
@@ -69,7 +69,7 @@ HTMLHRElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHRElement#getWidth()
+     * @see org.lobobrowser.w3c.html.HTMLHRElement#getWidth()
      */
     @Override
     public String getWidth() {
@@ -78,7 +78,7 @@ HTMLHRElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHRElement#setAlign(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLHRElement#setAlign(java.lang.String)
      */
     @Override
     public void setAlign(String align) {
@@ -87,7 +87,7 @@ HTMLHRElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHRElement#setNoShade(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLHRElement#setNoShade(boolean)
      */
     @Override
     public void setNoShade(boolean noShade) {
@@ -97,7 +97,7 @@ HTMLHRElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHRElement#setSize(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLHRElement#setSize(java.lang.String)
      */
     @Override
     public void setSize(String size) {
@@ -106,7 +106,7 @@ HTMLHRElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHRElement#setWidth(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLHRElement#setWidth(java.lang.String)
      */
     @Override
     public void setWidth(String width) {
@@ -115,7 +115,7 @@ HTMLHRElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHRElement#getColor()
+     * @see org.lobobrowser.w3c.html.HTMLHRElement#getColor()
      */
     @Override
     public String getColor() {
@@ -124,7 +124,7 @@ HTMLHRElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHRElement#setColor(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLHRElement#setColor(java.lang.String)
      */
     @Override
     public void setColor(String color) {

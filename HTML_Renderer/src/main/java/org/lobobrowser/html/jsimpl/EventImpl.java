@@ -18,10 +18,10 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.events.Event;
-import org.lobobrowser.html.w3c.events.EventTarget;
 import org.lobobrowser.js.AbstractScriptableDelegate;
+import org.lobobrowser.w3c.events.Event;
+import org.lobobrowser.w3c.events.EventTarget;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.views.AbstractView;
 
 /**
@@ -183,7 +183,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#initEvent(java.lang.String,
+     * @see org.lobobrowser.w3c.events.Event#initEvent(java.lang.String,
      * boolean, boolean)
      */
     @Override
@@ -197,7 +197,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#initEventNS(java.lang.String,
+     * @see org.lobobrowser.w3c.events.Event#initEventNS(java.lang.String,
      * java.lang.String, boolean, boolean)
      */
     @Override
@@ -286,7 +286,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#getType()
+     * @see org.lobobrowser.w3c.events.Event#getType()
      */
     @Override
     public String getType() {
@@ -461,7 +461,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#preventDefault()
+     * @see org.lobobrowser.w3c.events.Event#preventDefault()
      */
     @Override
     public void preventDefault() {
@@ -472,7 +472,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#stopPropagation()
+     * @see org.lobobrowser.w3c.events.Event#stopPropagation()
      */
     @Override
     public void stopPropagation() {
@@ -483,7 +483,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#stopImmediatePropagation()
+     * @see org.lobobrowser.w3c.events.Event#stopImmediatePropagation()
      */
     @Override
     public void stopImmediatePropagation() {
@@ -495,7 +495,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#getTarget()
+     * @see org.lobobrowser.w3c.events.Event#getTarget()
      */
     @Override
     public EventTarget getTarget() {
@@ -504,7 +504,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#getCurrentTarget()
+     * @see org.lobobrowser.w3c.events.Event#getCurrentTarget()
      */
     @Override
     public EventTarget getCurrentTarget() {
@@ -513,7 +513,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#getEventPhase()
+     * @see org.lobobrowser.w3c.events.Event#getEventPhase()
      */
     @Override
     public short getEventPhase() {
@@ -522,7 +522,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#getBubbles()
+     * @see org.lobobrowser.w3c.events.Event#getBubbles()
      */
     @Override
     public boolean getBubbles() {
@@ -531,7 +531,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#getCancelable()
+     * @see org.lobobrowser.w3c.events.Event#getCancelable()
      */
     @Override
     public boolean getCancelable() {
@@ -550,7 +550,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#getTimeStamp()
+     * @see org.lobobrowser.w3c.events.Event#getTimeStamp()
      */
     @Override
     public long getTimeStamp() {
@@ -772,7 +772,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#getDefaultPrevented()
+     * @see org.lobobrowser.w3c.events.Event#getDefaultPrevented()
      */
     @Override
     public boolean getDefaultPrevented() {
@@ -782,7 +782,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.Event#getTrusted()
+     * @see org.lobobrowser.w3c.events.Event#getTrusted()
      */
     @Override
     public boolean getTrusted() {

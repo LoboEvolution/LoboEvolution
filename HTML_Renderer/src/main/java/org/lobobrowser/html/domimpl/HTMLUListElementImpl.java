@@ -20,7 +20,7 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.renderstate.ListRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
-import org.lobobrowser.html.w3c.HTMLUListElement;
+import org.lobobrowser.w3c.html.HTMLUListElement;
 
 /**
  * The Class HTMLUListElementImpl.
@@ -40,7 +40,7 @@ HTMLUListElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLUListElement#getCompact()
+     * @see org.lobobrowser.w3c.html.HTMLUListElement#getCompact()
      */
     @Override
     public boolean getCompact() {
@@ -50,7 +50,7 @@ HTMLUListElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLUListElement#setCompact(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLUListElement#setCompact(boolean)
      */
     @Override
     public void setCompact(boolean compact) {
@@ -60,7 +60,7 @@ HTMLUListElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLUListElement#getType()
+     * @see org.lobobrowser.w3c.html.HTMLUListElement#getType()
      */
     @Override
     public String getType() {
@@ -69,7 +69,7 @@ HTMLUListElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLUListElement#setType(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLUListElement#setType(java.lang.String)
      */
     @Override
     public void setType(String type) {

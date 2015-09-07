@@ -15,7 +15,7 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.renderstate.NavRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
-import org.lobobrowser.html.w3c.HTMLNavElement;
+import org.lobobrowser.w3c.html.HTMLNavElement;
 
 /**
  * The Class HTMLNavElementImpl.

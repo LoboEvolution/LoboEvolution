@@ -43,13 +43,13 @@ import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
-import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.primary.info.RefreshInfo;
 import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.RecordedInputStream;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.Element;
 
 /**

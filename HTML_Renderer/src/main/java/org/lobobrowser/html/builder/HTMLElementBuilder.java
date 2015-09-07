@@ -18,8 +18,8 @@
 package org.lobobrowser.html.builder;
 
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.w3c.HTMLDocument;
-import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLDocument;
+import org.lobobrowser.w3c.html.HTMLElement;
 
 /**
  * The Class HTMLElementBuilder.

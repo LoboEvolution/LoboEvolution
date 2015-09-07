@@ -18,7 +18,7 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.renderstate.BlockRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
-import org.lobobrowser.html.w3c.HTMLDivElement;
+import org.lobobrowser.w3c.html.HTMLDivElement;
 
 /**
  * The Class HTMLDivElementImpl.
@@ -38,7 +38,7 @@ HTMLDivElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLDivElement#getAlign()
+     * @see org.lobobrowser.w3c.html.HTMLDivElement#getAlign()
      */
     @Override
     public String getAlign() {
@@ -47,7 +47,7 @@ HTMLDivElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLDivElement#setAlign(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLDivElement#setAlign(java.lang.String)
      */
     @Override
     public void setAlign(String align) {

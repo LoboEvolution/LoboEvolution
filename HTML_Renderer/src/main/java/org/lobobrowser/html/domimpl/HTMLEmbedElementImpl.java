@@ -14,7 +14,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.w3c.HTMLEmbedElement;
+import org.lobobrowser.w3c.html.HTMLEmbedElement;
 
 /**
  * The Class HTMLEmbedElementImpl.
@@ -34,7 +34,7 @@ HTMLEmbedElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLEmbedElement#getSrc()
+     * @see org.lobobrowser.w3c.html.HTMLEmbedElement#getSrc()
      */
     @Override
     public String getSrc() {
@@ -43,7 +43,7 @@ HTMLEmbedElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLEmbedElement#setSrc(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLEmbedElement#setSrc(java.lang.String)
      */
     @Override
     public void setSrc(String src) {
@@ -53,7 +53,7 @@ HTMLEmbedElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLEmbedElement#getType()
+     * @see org.lobobrowser.w3c.html.HTMLEmbedElement#getType()
      */
     @Override
     public String getType() {
@@ -62,7 +62,7 @@ HTMLEmbedElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLEmbedElement#setType(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLEmbedElement#setType(java.lang.String)
      */
     @Override
     public void setType(String type) {
@@ -72,7 +72,7 @@ HTMLEmbedElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLEmbedElement#getWidth()
+     * @see org.lobobrowser.w3c.html.HTMLEmbedElement#getWidth()
      */
     @Override
     public String getWidth() {
@@ -81,7 +81,7 @@ HTMLEmbedElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLEmbedElement#setWidth(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLEmbedElement#setWidth(java.lang.String)
      */
     @Override
     public void setWidth(String width) {
@@ -91,7 +91,7 @@ HTMLEmbedElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLEmbedElement#getHeight()
+     * @see org.lobobrowser.w3c.html.HTMLEmbedElement#getHeight()
      */
     @Override
     public String getHeight() {
@@ -100,7 +100,7 @@ HTMLEmbedElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLEmbedElement#setHeight(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLEmbedElement#setHeight(java.lang.String)
      */
     @Override
     public void setHeight(String height) {
@@ -110,7 +110,7 @@ HTMLEmbedElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLEmbedElement#getAlign()
+     * @see org.lobobrowser.w3c.html.HTMLEmbedElement#getAlign()
      */
     @Override
     public String getAlign() {
@@ -119,7 +119,7 @@ HTMLEmbedElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLEmbedElement#setAlign(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLEmbedElement#setAlign(java.lang.String)
      */
     @Override
     public void setAlign(String align) {
@@ -129,7 +129,7 @@ HTMLEmbedElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLEmbedElement#getName()
+     * @see org.lobobrowser.w3c.html.HTMLEmbedElement#getName()
      */
     @Override
     public String getName() {
@@ -138,7 +138,7 @@ HTMLEmbedElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLEmbedElement#setName(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLEmbedElement#setName(java.lang.String)
      */
     @Override
     public void setName(String name) {

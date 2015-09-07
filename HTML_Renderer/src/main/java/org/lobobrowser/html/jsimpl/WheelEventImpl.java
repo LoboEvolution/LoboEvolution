@@ -23,9 +23,9 @@ package org.lobobrowser.html.jsimpl;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.events.EventTarget;
-import org.lobobrowser.html.w3c.events.WheelEvent;
+import org.lobobrowser.w3c.events.EventTarget;
+import org.lobobrowser.w3c.events.WheelEvent;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.views.AbstractView;
 
 /**
@@ -99,9 +99,9 @@ public class WheelEventImpl extends MouseEventImpl implements WheelEvent {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.events.WheelEvent#initWheelEvent(java.lang.String,
+     * org.lobobrowser.w3c.events.WheelEvent#initWheelEvent(java.lang.String,
      * boolean, boolean, org.w3c.dom.views.AbstractView, int, int, int, int, int,
-     * short, org.lobobrowser.html.w3c.events.EventTarget, java.lang.String, int,
+     * short, org.lobobrowser.w3c.events.EventTarget, java.lang.String, int,
      * int, int, int)
      */
     @Override
@@ -129,7 +129,7 @@ public class WheelEventImpl extends MouseEventImpl implements WheelEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.WheelEvent#getDeltaX()
+     * @see org.lobobrowser.w3c.events.WheelEvent#getDeltaX()
      */
     @Override
     public int getDeltaX() {
@@ -138,7 +138,7 @@ public class WheelEventImpl extends MouseEventImpl implements WheelEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.WheelEvent#getDeltaY()
+     * @see org.lobobrowser.w3c.events.WheelEvent#getDeltaY()
      */
     @Override
     public int getDeltaY() {
@@ -147,7 +147,7 @@ public class WheelEventImpl extends MouseEventImpl implements WheelEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.WheelEvent#getDeltaZ()
+     * @see org.lobobrowser.w3c.events.WheelEvent#getDeltaZ()
      */
     @Override
     public int getDeltaZ() {
@@ -156,7 +156,7 @@ public class WheelEventImpl extends MouseEventImpl implements WheelEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.WheelEvent#getDeltaMode()
+     * @see org.lobobrowser.w3c.events.WheelEvent#getDeltaMode()
      */
     @Override
     public int getDeltaMode() {

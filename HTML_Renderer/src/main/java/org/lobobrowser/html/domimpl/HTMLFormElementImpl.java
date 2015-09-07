@@ -30,8 +30,8 @@ import org.lobobrowser.html.dombl.NodeVisitor;
 import org.lobobrowser.html.dombl.StopVisitorException;
 import org.lobobrowser.html.domfilter.InputFilter;
 import org.lobobrowser.html.js.Executor;
-import org.lobobrowser.html.w3c.HTMLCollection;
-import org.lobobrowser.html.w3c.HTMLFormElement;
+import org.lobobrowser.w3c.html.HTMLCollection;
+import org.lobobrowser.w3c.html.HTMLFormElement;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -61,7 +61,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#namedItem(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#namedItem(java.lang.String)
      */
     @Override
     public Object namedItem(final String name) {
@@ -86,7 +86,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#item(int)
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#item(int)
      */
     @Override
     public Object item(final int index) {
@@ -115,7 +115,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#getElements()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#getElements()
      */
     @Override
     public HTMLCollection getElements() {
@@ -130,7 +130,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#getLength()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#getLength()
      */
     @Override
     public int getLength() {
@@ -139,7 +139,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#getName()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#getName()
      */
     @Override
     public String getName() {
@@ -148,7 +148,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#setName(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#setName(java.lang.String)
      */
     @Override
     public void setName(String name) {
@@ -157,7 +157,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#getAcceptCharset()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#getAcceptCharset()
      */
     @Override
     public String getAcceptCharset() {
@@ -167,7 +167,7 @@ HTMLFormElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLFormElement#setAcceptCharset(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLFormElement#setAcceptCharset(java.lang.String)
      */
     @Override
     public void setAcceptCharset(String acceptCharset) {
@@ -176,7 +176,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#getAction()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#getAction()
      */
     @Override
     public String getAction() {
@@ -185,7 +185,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#setAction(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#setAction(java.lang.String)
      */
     @Override
     public void setAction(String action) {
@@ -194,7 +194,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#getEnctype()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#getEnctype()
      */
     @Override
     public String getEnctype() {
@@ -203,7 +203,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#setEnctype(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#setEnctype(java.lang.String)
      */
     @Override
     public void setEnctype(String enctype) {
@@ -212,7 +212,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#getMethod()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#getMethod()
      */
     @Override
     public String getMethod() {
@@ -225,7 +225,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#setMethod(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#setMethod(java.lang.String)
      */
     @Override
     public void setMethod(String method) {
@@ -234,7 +234,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#getTarget()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#getTarget()
      */
     @Override
     public String getTarget() {
@@ -243,7 +243,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#setTarget(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#setTarget(java.lang.String)
      */
     @Override
     public void setTarget(String target) {
@@ -252,7 +252,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#submit()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#submit()
      */
     @Override
     public void submit() {
@@ -343,7 +343,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#reset()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#reset()
      */
     @Override
     public void reset() {
@@ -372,7 +372,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#getAutocomplete()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#getAutocomplete()
      */
     @Override
     public boolean getAutocomplete() {
@@ -384,7 +384,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#setAutocomplete(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#setAutocomplete(boolean)
      */
     @Override
     public void setAutocomplete(boolean autocomplete) {
@@ -395,7 +395,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#getNoValidate()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#getNoValidate()
      */
     @Override
     public boolean getNoValidate() {
@@ -406,7 +406,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#setNoValidate(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#setNoValidate(boolean)
      */
     @Override
     public void setNoValidate(boolean noValidate) {
@@ -417,7 +417,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#checkValidity()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#checkValidity()
      */
     @Override
     public boolean checkValidity() {
@@ -427,7 +427,7 @@ HTMLFormElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#dispatchFormInput()
+     * @see org.lobobrowser.w3c.html.HTMLFormElement#dispatchFormInput()
      */
     @Override
     public void dispatchFormInput() {
@@ -435,13 +435,33 @@ HTMLFormElement {
 
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFormElement#dispatchFormChange()
-     */
-    @Override
-    public void dispatchFormChange() {
-        // TODO Auto-generated method stub
+	@Override
+	public void setAutocomplete(String autocomplete) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    }
+	@Override
+	public String getEncoding() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setEncoding(String encoding) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Object getElement(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getElement(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

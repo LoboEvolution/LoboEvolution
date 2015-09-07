@@ -23,9 +23,9 @@ package org.lobobrowser.html.jsimpl;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.events.EventTarget;
-import org.lobobrowser.html.w3c.events.FocusEvent;
+import org.lobobrowser.w3c.events.EventTarget;
+import org.lobobrowser.w3c.events.FocusEvent;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.views.AbstractView;
 
 /**
@@ -90,9 +90,9 @@ public class FocusEventImpl extends UIEventImpl implements FocusEvent {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.events.FocusEvent#initFocusEvent(java.lang.String,
+     * org.lobobrowser.w3c.events.FocusEvent#initFocusEvent(java.lang.String,
      * boolean, boolean, org.w3c.dom.views.AbstractView, int,
-     * org.lobobrowser.html.w3c.events.EventTarget)
+     * org.lobobrowser.w3c.events.EventTarget)
      */
     @Override
     public void initFocusEvent(String type, boolean canBubble,
@@ -109,7 +109,7 @@ public class FocusEventImpl extends UIEventImpl implements FocusEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.FocusEvent#getRelatedTarget()
+     * @see org.lobobrowser.w3c.events.FocusEvent#getRelatedTarget()
      */
     @Override
     public EventTarget getRelatedTarget() {

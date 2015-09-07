@@ -26,7 +26,7 @@ public class FrameFilter implements NodeFilter {
      */
     @Override
     public boolean accept(Node node) {
-        return (node instanceof org.lobobrowser.html.w3c.HTMLFrameElement)
-                || (node instanceof org.lobobrowser.html.w3c.HTMLIFrameElement);
+        return (node instanceof org.lobobrowser.w3c.html.HTMLFrameElement)
+                || (node instanceof org.lobobrowser.w3c.html.HTMLIFrameElement);
     }
 }

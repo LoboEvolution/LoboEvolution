@@ -23,8 +23,8 @@ package org.lobobrowser.html.jsimpl;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.events.MutationEvent;
+import org.lobobrowser.w3c.events.MutationEvent;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.Node;
 
 /**
@@ -102,7 +102,7 @@ public class MutationEventImpl extends EventImpl implements MutationEvent {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.events.MutationEvent#initMutationEvent(java.lang
+     * org.lobobrowser.w3c.events.MutationEvent#initMutationEvent(java.lang
      * .String, boolean, boolean, org.w3c.dom.Node, java.lang.String,
      * java.lang.String, java.lang.String, short)
      */
@@ -124,7 +124,7 @@ public class MutationEventImpl extends EventImpl implements MutationEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MutationEvent#getRelatedNode()
+     * @see org.lobobrowser.w3c.events.MutationEvent#getRelatedNode()
      */
     @Override
     public Node getRelatedNode() {
@@ -133,7 +133,7 @@ public class MutationEventImpl extends EventImpl implements MutationEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MutationEvent#getPrevValue()
+     * @see org.lobobrowser.w3c.events.MutationEvent#getPrevValue()
      */
     @Override
     public String getPrevValue() {
@@ -142,7 +142,7 @@ public class MutationEventImpl extends EventImpl implements MutationEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MutationEvent#getNewValue()
+     * @see org.lobobrowser.w3c.events.MutationEvent#getNewValue()
      */
     @Override
     public String getNewValue() {
@@ -151,7 +151,7 @@ public class MutationEventImpl extends EventImpl implements MutationEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MutationEvent#getAttrName()
+     * @see org.lobobrowser.w3c.events.MutationEvent#getAttrName()
      */
     @Override
     public String getAttrName() {
@@ -160,7 +160,7 @@ public class MutationEventImpl extends EventImpl implements MutationEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MutationEvent#getAttrChange()
+     * @see org.lobobrowser.w3c.events.MutationEvent#getAttrChange()
      */
     @Override
     public short getAttrChange() {

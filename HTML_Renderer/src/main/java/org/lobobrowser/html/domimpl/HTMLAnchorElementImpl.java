@@ -27,12 +27,12 @@ import org.lobobrowser.html.renderstate.ColorRenderState;
 import org.lobobrowser.html.renderstate.CursorRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.renderstate.TextDecorationRenderState;
-import org.lobobrowser.html.w3c.DOMTokenList;
-import org.lobobrowser.html.w3c.HTMLAnchorElement;
-import org.lobobrowser.html.w3c.HTMLBodyElement;
-import org.lobobrowser.html.w3c.HTMLDocument;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.gui.ColorFactory;
+import org.lobobrowser.w3c.html.DOMTokenList;
+import org.lobobrowser.w3c.html.HTMLAnchorElement;
+import org.lobobrowser.w3c.html.HTMLBodyElement;
+import org.lobobrowser.w3c.html.HTMLDocument;
 
 /**
  * The Class HTMLAnchorElementImpl.
@@ -361,5 +361,11 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	public void setHash(String hash) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public String getPing() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

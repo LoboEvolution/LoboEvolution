@@ -39,9 +39,9 @@ import javax.swing.event.ListSelectionEvent;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
 import org.lobobrowser.html.renderer.HtmlController;
-import org.lobobrowser.html.w3c.HTMLOptionElement;
-import org.lobobrowser.html.w3c.HTMLOptionsCollection;
 import org.lobobrowser.util.gui.WrapperLayout;
+import org.lobobrowser.w3c.html.HTMLOptionElement;
+import org.lobobrowser.w3c.html.HTMLOptionsCollection;
 
 /**
  * The Class InputSelectControl.

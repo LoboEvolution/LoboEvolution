@@ -44,15 +44,15 @@ import org.lobobrowser.html.style.CSS2PropertiesContext;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.style.LocalCSS2Properties;
 import org.lobobrowser.html.style.StyleSheetAggregator;
-import org.lobobrowser.html.w3c.DOMSettableTokenList;
-import org.lobobrowser.html.w3c.DOMStringMap;
-import org.lobobrowser.html.w3c.DOMTokenList;
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.HTMLPropertiesCollection;
 import org.lobobrowser.util.Strings;
+import org.lobobrowser.w3c.html.DOMSettableTokenList;
+import org.lobobrowser.w3c.html.DOMStringMap;
+import org.lobobrowser.w3c.html.DOMTokenList;
+import org.lobobrowser.w3c.html.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLPropertiesCollection;
+import org.mozilla.javascript.Function;
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.css.CSSStyleDeclaration;
@@ -297,7 +297,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getClassName()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getClassName()
      */
     @Override
     public String getClassName() {
@@ -307,7 +307,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#setClassName(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLElement#setClassName(java.lang.String)
      */
     @Override
     public void setClassName(String className) {
@@ -974,7 +974,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#setInnerHTML(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLElement#setInnerHTML(java.lang.String)
      */
     @Override
     public void setInnerHTML(String newHtml) {
@@ -1007,7 +1007,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getOuterHTML()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getOuterHTML()
      */
     @Override
     public String getOuterHTML() {
@@ -1074,7 +1074,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getOffsetTop()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getOffsetTop()
      */
     @Override
     public int getOffsetTop() {
@@ -1084,7 +1084,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getOffsetLeft()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getOffsetLeft()
      */
     @Override
     public int getOffsetLeft() {
@@ -1094,7 +1094,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getOffsetWidth()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getOffsetWidth()
      */
     @Override
     public int getOffsetWidth() {
@@ -1104,7 +1104,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getOffsetHeight()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getOffsetHeight()
      */
     @Override
     public int getOffsetHeight() {
@@ -1151,7 +1151,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#setOuterHTML(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLElement#setOuterHTML(java.lang.String)
      */
     @Override
     public void setOuterHTML(String outerHTML) {
@@ -1162,7 +1162,7 @@ CSS2PropertiesContext {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLElement#insertAdjacentHTML(java.lang.String,
+     * org.lobobrowser.w3c.html.HTMLElement#insertAdjacentHTML(java.lang.String,
      * java.lang.String)
      */
     @Override
@@ -1173,7 +1173,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getClassList()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getClassList()
      */
     @Override
     public DOMTokenList getClassList() {
@@ -1182,7 +1182,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getDataset()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getDataset()
      */
     @Override
     public DOMStringMap getDataset() {
@@ -1192,7 +1192,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#click()
+     * @see org.lobobrowser.w3c.html.HTMLElement#click()
      */
     @Override
     public void click() {
@@ -1202,17 +1202,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#scrollIntoView(boolean)
-     */
-    @Override
-    public void scrollIntoView(boolean top) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#focus()
+     * @see org.lobobrowser.w3c.html.HTMLElement#focus()
      */
     @Override
     public void focus() {
@@ -1222,7 +1212,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#blur()
+     * @see org.lobobrowser.w3c.html.HTMLElement#blur()
      */
     @Override
     public void blur() {
@@ -1232,7 +1222,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getAccessKeyLabel()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getAccessKeyLabel()
      */
     @Override
     public String getAccessKeyLabel() {
@@ -1242,7 +1232,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getCommandType()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getCommandType()
      */
     @Override
     public String getCommandType() {
@@ -1252,7 +1242,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getLabel()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getLabel()
      */
     @Override
     public String getLabel() {
@@ -1262,7 +1252,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getIcon()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getIcon()
      */
     @Override
     public String getIcon() {
@@ -1272,7 +1262,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getOffsetParent()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getOffsetParent()
      */
     @Override
     public Element getOffsetParent() {
@@ -1282,7 +1272,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getItemRef()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getItemRef()
      */
     @Override
     public DOMSettableTokenList getItemRef() {
@@ -1292,7 +1282,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#setItemRef(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLElement#setItemRef(java.lang.String)
      */
     @Override
     public void setItemRef(String itemRef) {
@@ -1302,7 +1292,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getItemProp()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getItemProp()
      */
     @Override
     public DOMSettableTokenList getItemProp() {
@@ -1311,7 +1301,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#setItemProp(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLElement#setItemProp(java.lang.String)
      */
     @Override
     public void setItemProp(String itemProp) {
@@ -1320,7 +1310,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getProperties()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getProperties()
      */
     @Override
     public HTMLPropertiesCollection getProperties() {
@@ -1330,7 +1320,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#getItemValue()
+     * @see org.lobobrowser.w3c.html.HTMLElement#getItemValue()
      */
     @Override
     public Object getItemValue() {
@@ -1340,7 +1330,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#setItemValue(java.lang.Object)
+     * @see org.lobobrowser.w3c.html.HTMLElement#setItemValue(java.lang.Object)
      */
     @Override
     public void setItemValue(Object itemValue) {
@@ -1350,7 +1340,7 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#querySelector(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLElement#querySelector(java.lang.String)
      */
     @Override
     public Element querySelector(String selectors) {
@@ -1360,11 +1350,689 @@ CSS2PropertiesContext {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLElement#querySelectorAll(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLElement#querySelectorAll(java.lang.String)
      */
     @Override
     public NodeList querySelectorAll(String selectors) {
         QuerySelectorImpl qsel = new QuerySelectorImpl();
         return qsel.documentQuerySelectorAll(this.document, selectors);
     }
+
+	@Override
+	public NodeList getElementsByClassName(String classNames) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public DOMSettableTokenList getDropzone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDropzone(String dropzone) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpellcheck(boolean spellcheck) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnabort() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnabort(Function onabort) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnblur() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnblur(Function onblur) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOncanplay() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOncanplay(Function oncanplay) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOncanplaythrough() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOncanplaythrough(Function oncanplaythrough) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnchange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnchange(Function onchange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnclick() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnclick(Function onclick) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOncontextmenu() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOncontextmenu(Function oncontextmenu) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOncuechange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOncuechange(Function oncuechange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndblclick() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndblclick(Function ondblclick) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndrag() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndrag(Function ondrag) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragend() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragend(Function ondragend) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragenter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragenter(Function ondragenter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragleave() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragleave(Function ondragleave) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragover() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragover(Function ondragover) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndragstart() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndragstart(Function ondragstart) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndrop() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndrop(Function ondrop) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOndurationchange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOndurationchange(Function ondurationchange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnemptied() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnemptied(Function onemptied) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnended() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnended(Function onended) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnerror() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnerror(Function onerror) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnfocus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnfocus(Function onfocus) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOninput() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOninput(Function oninput) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOninvalid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOninvalid(Function oninvalid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnkeydown() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnkeydown(Function onkeydown) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnkeypress() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnkeypress(Function onkeypress) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnkeyup() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnkeyup(Function onkeyup) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnload() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnload(Function onload) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnloadeddata() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnloadeddata(Function onloadeddata) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnloadedmetadata() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnloadedmetadata(Function onloadedmetadata) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnloadstart() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnloadstart(Function onloadstart) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmousedown() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmousedown(Function onmousedown) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmousemove() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmousemove(Function onmousemove) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmouseout() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmouseout(Function onmouseout) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmouseover() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmouseover(Function onmouseover) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmouseup() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmouseup(Function onmouseup) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnmousewheel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnmousewheel(Function onmousewheel) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnpause() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnpause(Function onpause) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnplay() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnplay(Function onplay) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnplaying() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnplaying(Function onplaying) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnprogress() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnprogress(Function onprogress) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnratechange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnratechange(Function onratechange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnreadystatechange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnreadystatechange(Function onreadystatechange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnreset() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnreset(Function onreset) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnscroll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnscroll(Function onscroll) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnseeked() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnseeked(Function onseeked) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnseeking() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnseeking(Function onseeking) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnselect() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnselect(Function onselect) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnshow() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnshow(Function onshow) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnstalled() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnstalled(Function onstalled) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnsubmit() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnsubmit(Function onsubmit) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnsuspend() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnsuspend(Function onsuspend) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOntimeupdate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOntimeupdate(Function ontimeupdate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnvolumechange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnvolumechange(Function onvolumechange) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnwaiting() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnwaiting(Function onwaiting) {
+		// TODO Auto-generated method stub
+		
+	}
 }

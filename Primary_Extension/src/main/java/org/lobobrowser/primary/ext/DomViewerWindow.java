@@ -34,8 +34,8 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 import org.lobobrowser.gui.DefaultWindowFactory;
-import org.lobobrowser.html.w3c.HTMLDocument;
 import org.lobobrowser.util.gui.WrapperLayout;
+import org.lobobrowser.w3c.html.HTMLDocument;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

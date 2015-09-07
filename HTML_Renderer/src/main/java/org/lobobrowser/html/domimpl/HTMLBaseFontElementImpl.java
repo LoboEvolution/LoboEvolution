@@ -21,7 +21,7 @@ import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.html.w3c.HTMLBaseFontElement;
+import org.lobobrowser.w3c.html.HTMLBaseFontElement;
 
 /**
  * The Class HTMLBaseFontElementImpl.
@@ -41,7 +41,7 @@ HTMLBaseFontElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLBaseFontElement#getColor()
+     * @see org.lobobrowser.w3c.html.HTMLBaseFontElement#getColor()
      */
     @Override
     public String getColor() {
@@ -50,7 +50,7 @@ HTMLBaseFontElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLBaseFontElement#getFace()
+     * @see org.lobobrowser.w3c.html.HTMLBaseFontElement#getFace()
      */
     @Override
     public String getFace() {
@@ -59,7 +59,7 @@ HTMLBaseFontElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLBaseFontElement#setColor(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLBaseFontElement#setColor(java.lang.String)
      */
     @Override
     public void setColor(String color) {
@@ -68,7 +68,7 @@ HTMLBaseFontElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLBaseFontElement#setFace(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLBaseFontElement#setFace(java.lang.String)
      */
     @Override
     public void setFace(String face) {
@@ -77,7 +77,7 @@ HTMLBaseFontElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLBaseFontElement#getSize()
+     * @see org.lobobrowser.w3c.html.HTMLBaseFontElement#getSize()
      */
     @Override
     public int getSize() {
@@ -93,7 +93,7 @@ HTMLBaseFontElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLBaseFontElement#setSize(int)
+     * @see org.lobobrowser.w3c.html.HTMLBaseFontElement#setSize(int)
      */
     @Override
     public void setSize(int size) {

@@ -23,10 +23,10 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.CSSUtilities;
-import org.lobobrowser.html.w3c.DOMSettableTokenList;
-import org.lobobrowser.html.w3c.DOMTokenList;
-import org.lobobrowser.html.w3c.HTMLLinkElement;
 import org.lobobrowser.util.Urls;
+import org.lobobrowser.w3c.html.DOMSettableTokenList;
+import org.lobobrowser.w3c.html.DOMTokenList;
+import org.lobobrowser.w3c.html.HTMLLinkElement;
 import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.css.CSSStyleSheet;
 

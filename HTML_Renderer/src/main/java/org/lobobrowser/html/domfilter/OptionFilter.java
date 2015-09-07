@@ -13,7 +13,7 @@
  */
 package org.lobobrowser.html.domfilter;
 
-import org.lobobrowser.html.w3c.HTMLOptionElement;
+import org.lobobrowser.w3c.html.HTMLOptionElement;
 import org.w3c.dom.Node;
 
 /**

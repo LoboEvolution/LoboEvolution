@@ -35,7 +35,7 @@ import org.lobobrowser.html.renderer.UIControl;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLElement;
 
 /**
  * The Class BrowserFrameUIControl.

@@ -22,7 +22,7 @@
 package org.lobobrowser.html.xpath;
 
 import org.apache.xml.utils.PrefixResolverDefault;
-import org.lobobrowser.html.w3c.xpath.XPathNSResolver;
+import org.lobobrowser.w3c.xpath.XPathNSResolver;
 import org.w3c.dom.Node;
 
 /**

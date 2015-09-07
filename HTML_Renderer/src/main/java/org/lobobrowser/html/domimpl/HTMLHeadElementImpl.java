@@ -16,7 +16,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.w3c.HTMLHeadElement;
+import org.lobobrowser.w3c.html.HTMLHeadElement;
 
 /**
  * The Class HTMLHeadElementImpl.
@@ -36,7 +36,7 @@ HTMLHeadElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHeadElement#getProfile()
+     * @see org.lobobrowser.w3c.html.HTMLHeadElement#getProfile()
      */
     @Override
     public String getProfile() {
@@ -45,7 +45,7 @@ HTMLHeadElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHeadElement#setProfile(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLHeadElement#setProfile(java.lang.String)
      */
     @Override
     public void setProfile(String profile) {

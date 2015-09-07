@@ -23,8 +23,8 @@ package org.lobobrowser.html.jsimpl;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.events.MutationNameEvent;
+import org.lobobrowser.w3c.events.MutationNameEvent;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.Node;
 
 /**
@@ -94,7 +94,7 @@ MutationNameEvent {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.events.MutationNameEvent#initMutationNameEvent(java
+     * org.lobobrowser.w3c.events.MutationNameEvent#initMutationNameEvent(java
      * .lang.String, boolean, boolean, org.w3c.dom.Node, java.lang.String,
      * java.lang.String)
      */
@@ -112,7 +112,7 @@ MutationNameEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MutationNameEvent#getPrevNamespaceURI()
+     * @see org.lobobrowser.w3c.events.MutationNameEvent#getPrevNamespaceURI()
      */
     @Override
     public String getPrevNamespaceURI() {
@@ -121,7 +121,7 @@ MutationNameEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MutationNameEvent#getPrevNodeName()
+     * @see org.lobobrowser.w3c.events.MutationNameEvent#getPrevNodeName()
      */
     @Override
     public String getPrevNodeName() {

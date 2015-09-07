@@ -21,8 +21,8 @@ import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.InputContext;
-import org.lobobrowser.html.w3c.HTMLTextAreaElement;
-import org.lobobrowser.html.w3c.ValidityState;
+import org.lobobrowser.w3c.html.HTMLTextAreaElement;
+import org.lobobrowser.w3c.html.ValidityState;
 import org.w3c.dom.NodeList;
 
 /**
@@ -63,7 +63,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getCols()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getCols()
      */
     @Override
     public int getCols() {
@@ -73,7 +73,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getRows()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getRows()
      */
     @Override
     public int getRows() {
@@ -83,7 +83,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getType()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getType()
      */
     @Override
     public String getType() {
@@ -92,7 +92,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setCols(int)
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#setCols(int)
      */
     @Override
     public void setCols(int cols) {
@@ -104,7 +104,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setRows(int)
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#setRows(int)
      */
     @Override
     public void setRows(int rows) {
@@ -116,7 +116,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getAutofocus()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getAutofocus()
      */
     @Override
     public boolean getAutofocus() {
@@ -126,7 +126,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setAutofocus(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#setAutofocus(boolean)
      */
     @Override
     public void setAutofocus(boolean autofocus) {
@@ -137,7 +137,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getMaxLength()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getMaxLength()
      */
     @Override
     public int getMaxLength() {
@@ -153,7 +153,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setMaxLength(int)
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#setMaxLength(int)
      */
     @Override
     public void setMaxLength(int maxLength) {
@@ -164,7 +164,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getRequired()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getRequired()
      */
     @Override
     public boolean getRequired() {
@@ -174,7 +174,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setRequired(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#setRequired(boolean)
      */
     @Override
     public void setRequired(boolean required) {
@@ -185,7 +185,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getWrap()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getWrap()
      */
     @Override
     public String getWrap() {
@@ -194,7 +194,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setWrap(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#setWrap(java.lang.String)
      */
     @Override
     public void setWrap(String wrap) {
@@ -204,7 +204,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getTextLength()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getTextLength()
      */
     @Override
     public int getTextLength() {
@@ -213,7 +213,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getWillValidate()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getWillValidate()
      */
     @Override
     public boolean getWillValidate() {
@@ -223,7 +223,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getValidity()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getValidity()
      */
     @Override
     public ValidityState getValidity() {
@@ -233,7 +233,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getValidationMessage()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getValidationMessage()
      */
     @Override
     public String getValidationMessage() {
@@ -243,7 +243,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#checkValidity()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#checkValidity()
      */
     @Override
     public boolean checkValidity() {
@@ -254,7 +254,7 @@ HTMLTextAreaElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLTextAreaElement#setCustomValidity(java.lang.
+     * org.lobobrowser.w3c.html.HTMLTextAreaElement#setCustomValidity(java.lang.
      * String)
      */
     @Override
@@ -265,7 +265,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getLabels()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getLabels()
      */
     @Override
     public NodeList getLabels() {
@@ -275,7 +275,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getSelectionStart()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getSelectionStart()
      */
     @Override
     public int getSelectionStart() {
@@ -285,7 +285,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setSelectionStart(int)
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#setSelectionStart(int)
      */
     @Override
     public void setSelectionStart(int selectionStart) {
@@ -295,7 +295,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#getSelectionEnd()
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#getSelectionEnd()
      */
     @Override
     public int getSelectionEnd() {
@@ -305,7 +305,7 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setSelectionEnd(int)
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#setSelectionEnd(int)
      */
     @Override
     public void setSelectionEnd(int selectionEnd) {
@@ -315,11 +315,41 @@ HTMLTextAreaElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTextAreaElement#setSelectionRange(int, int)
+     * @see org.lobobrowser.w3c.html.HTMLTextAreaElement#setSelectionRange(int, int)
      */
     @Override
     public void setSelectionRange(int start, int end) {
         // TODO Auto-generated method stub
 
     }
+
+	@Override
+	public String getDirName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDirName(String dirName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getSelectionDirection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSelectionDirection(String selectionDirection) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSelectionRange(int start, int end, String direction) {
+		// TODO Auto-generated method stub
+		
+	}
 }

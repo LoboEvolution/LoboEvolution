@@ -23,7 +23,7 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.renderstate.ParagraphRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
-import org.lobobrowser.html.w3c.HTMLParagraphElement;
+import org.lobobrowser.w3c.html.HTMLParagraphElement;
 
 /**
  * The Class HTMLPElementImpl.
@@ -43,7 +43,7 @@ HTMLParagraphElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLParagraphElement#getAlign()
+     * @see org.lobobrowser.w3c.html.HTMLParagraphElement#getAlign()
      */
     @Override
     public String getAlign() {
@@ -52,7 +52,7 @@ HTMLParagraphElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLParagraphElement#setAlign(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLParagraphElement#setAlign(java.lang.String)
      */
     @Override
     public void setAlign(String align) {

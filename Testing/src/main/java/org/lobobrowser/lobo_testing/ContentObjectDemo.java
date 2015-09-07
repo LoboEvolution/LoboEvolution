@@ -22,10 +22,10 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import org.lobobrowser.gui.*;
 import org.lobobrowser.ua.*;
+import org.lobobrowser.w3c.html.HTMLCollection;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.lobobrowser.main.PlatformInit;
 import org.lobobrowser.html.domimpl.*;
-import org.lobobrowser.html.w3c.HTMLCollection;
-import org.lobobrowser.html.w3c.HTMLElement;
 
 /**
  * The Class ContentObjectDemo.

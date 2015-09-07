@@ -26,9 +26,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.w3c.HTMLMenuElement;
 import org.lobobrowser.util.Objects;
 import org.lobobrowser.util.Strings;
+import org.lobobrowser.w3c.html.HTMLMenuElement;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;

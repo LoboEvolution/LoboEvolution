@@ -14,7 +14,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.w3c.HTMLTimeElement;
+import org.lobobrowser.w3c.html.HTMLTimeElement;
 
 /**
  * The Class HTMLTimeElementImpl.
@@ -34,7 +34,7 @@ HTMLTimeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTimeElement#getDateTime()
+     * @see org.lobobrowser.w3c.html.HTMLTimeElement#getDateTime()
      */
     @Override
     public String getDateTime() {
@@ -43,7 +43,7 @@ HTMLTimeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTimeElement#setDateTime(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLTimeElement#setDateTime(java.lang.String)
      */
     @Override
     public void setDateTime(String dateTime) {
@@ -52,7 +52,7 @@ HTMLTimeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTimeElement#getPubDate()
+     * @see org.lobobrowser.w3c.html.HTMLTimeElement#getPubDate()
      */
     @Override
     public boolean getPubDate() {
@@ -62,7 +62,7 @@ HTMLTimeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTimeElement#setPubDate(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLTimeElement#setPubDate(boolean)
      */
     @Override
     public void setPubDate(boolean pubDate) {
@@ -72,7 +72,7 @@ HTMLTimeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTimeElement#getValueAsDate()
+     * @see org.lobobrowser.w3c.html.HTMLTimeElement#getValueAsDate()
      */
     @Override
     public long getValueAsDate() {

@@ -25,7 +25,7 @@ import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.ListStyle;
-import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLElement;
 
 /**
  * The Class RListItem.

@@ -14,7 +14,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.w3c.HTMLSourceElement;
+import org.lobobrowser.w3c.html.HTMLSourceElement;
 
 /**
  * The Class HTMLSourceElementImpl.
@@ -34,7 +34,7 @@ HTMLSourceElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSourceElement#getSrc()
+     * @see org.lobobrowser.w3c.html.HTMLSourceElement#getSrc()
      */
     @Override
     public String getSrc() {
@@ -43,7 +43,7 @@ HTMLSourceElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSourceElement#setSrc(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLSourceElement#setSrc(java.lang.String)
      */
     @Override
     public void setSrc(String src) {
@@ -53,7 +53,7 @@ HTMLSourceElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSourceElement#getType()
+     * @see org.lobobrowser.w3c.html.HTMLSourceElement#getType()
      */
     @Override
     public String getType() {
@@ -62,7 +62,7 @@ HTMLSourceElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSourceElement#setType(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLSourceElement#setType(java.lang.String)
      */
     @Override
     public void setType(String type) {
@@ -72,7 +72,7 @@ HTMLSourceElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSourceElement#getMedia()
+     * @see org.lobobrowser.w3c.html.HTMLSourceElement#getMedia()
      */
     @Override
     public String getMedia() {
@@ -81,7 +81,7 @@ HTMLSourceElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLSourceElement#setMedia(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLSourceElement#setMedia(java.lang.String)
      */
     @Override
     public void setMedia(String media) {

@@ -13,7 +13,8 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.w3c.HTMLMarqueeElement;
+import org.lobobrowser.w3c.html.HTMLMarqueeElement;
+import org.mozilla.javascript.Function;
 
 /**
  * The Class HTMLMarqueeElementImpl.
@@ -34,7 +35,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#getBehavior()
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#getBehavior()
      */
     @Override
     public String getBehavior() {
@@ -45,7 +46,7 @@ HTMLMarqueeElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLMarqueeElement#setBehavior(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLMarqueeElement#setBehavior(java.lang.String)
      */
     @Override
     public void setBehavior(String behavior) {
@@ -55,7 +56,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#getBgColor()
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#getBgColor()
      */
     @Override
     public String getBgColor() {
@@ -65,7 +66,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#setBgColor(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#setBgColor(java.lang.String)
      */
     @Override
     public void setBgColor(String bgColor) {
@@ -75,7 +76,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#getDirection()
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#getDirection()
      */
     @Override
     public String getDirection() {
@@ -86,7 +87,7 @@ HTMLMarqueeElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLMarqueeElement#setDirection(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLMarqueeElement#setDirection(java.lang.String)
      */
     @Override
     public void setDirection(String direction) {
@@ -96,7 +97,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#getHeight()
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#getHeight()
      */
     @Override
     public String getHeight() {
@@ -106,7 +107,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#setHeight(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#setHeight(java.lang.String)
      */
     @Override
     public void setHeight(String height) {
@@ -116,7 +117,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#getHspace()
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#getHspace()
      */
     @Override
     public int getHspace() {
@@ -126,7 +127,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#setHspace(int)
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#setHspace(int)
      */
     @Override
     public void setHspace(int hspace) {
@@ -136,7 +137,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#getLoop()
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#getLoop()
      */
     @Override
     public int getLoop() {
@@ -146,7 +147,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#setLoop(int)
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#setLoop(int)
      */
     @Override
     public void setLoop(int loop) {
@@ -156,7 +157,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#getScrollAmount()
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#getScrollAmount()
      */
     @Override
     public int getScrollAmount() {
@@ -166,7 +167,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#setScrollAmount(int)
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#setScrollAmount(int)
      */
     @Override
     public void setScrollAmount(int scrollAmount) {
@@ -176,7 +177,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#getScrollDelay()
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#getScrollDelay()
      */
     @Override
     public int getScrollDelay() {
@@ -186,7 +187,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#setScrollDelay(int)
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#setScrollDelay(int)
      */
     @Override
     public void setScrollDelay(int scrollDelay) {
@@ -196,28 +197,28 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#getTrueSpeed()
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#getTrueSpeed()
      */
     @Override
-    public String getTrueSpeed() {
+    public boolean getTrueSpeed() {
         // TODO Auto-generated method stub
-        return null;
+        return false;
     }
 
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLMarqueeElement#setTrueSpeed(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLMarqueeElement#setTrueSpeed(java.lang.String)
      */
     @Override
-    public void setTrueSpeed(String trueSpeed) {
+    public void setTrueSpeed(boolean trueSpeed) {
         // TODO Auto-generated method stub
 
     }
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#getVspace()
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#getVspace()
      */
     @Override
     public int getVspace() {
@@ -227,7 +228,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#setVspace(int)
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#setVspace(int)
      */
     @Override
     public void setVspace(int vspace) {
@@ -237,7 +238,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#getWidth()
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#getWidth()
      */
     @Override
     public String getWidth() {
@@ -247,7 +248,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#setWidth(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#setWidth(java.lang.String)
      */
     @Override
     public void setWidth(String width) {
@@ -257,7 +258,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#start()
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#start()
      */
     @Override
     public void start() {
@@ -267,7 +268,7 @@ HTMLMarqueeElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMarqueeElement#stop()
+     * @see org.lobobrowser.w3c.html.HTMLMarqueeElement#stop()
      */
     @Override
     public void stop() {
@@ -275,4 +276,39 @@ HTMLMarqueeElement {
 
     }
 
+	@Override
+	public Function getOnbounce() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnbounce(Function onbounce) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnfinish() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnfinish(Function onfinish) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Function getOnstart() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setOnstart(Function onstart) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -14,7 +14,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.w3c.TextMetrics;
+import org.lobobrowser.w3c.html.TextMetrics;
 
 public class DOMTextMetricsImpl implements TextMetrics {
 

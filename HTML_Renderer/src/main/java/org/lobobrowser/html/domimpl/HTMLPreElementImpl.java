@@ -20,7 +20,7 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.renderstate.PreRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
-import org.lobobrowser.html.w3c.HTMLPreElement;
+import org.lobobrowser.w3c.html.HTMLPreElement;
 
 /**
  * The Class HTMLPreElementImpl.
@@ -40,7 +40,7 @@ HTMLPreElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLPreElement#getWidth()
+     * @see org.lobobrowser.w3c.html.HTMLPreElement#getWidth()
      */
     @Override
     public int getWidth() {
@@ -57,7 +57,7 @@ HTMLPreElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLPreElement#setWidth(int)
+     * @see org.lobobrowser.w3c.html.HTMLPreElement#setWidth(int)
      */
     @Override
     public void setWidth(int width) {

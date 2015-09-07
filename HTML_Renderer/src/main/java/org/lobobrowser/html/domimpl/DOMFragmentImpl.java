@@ -18,7 +18,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.dombl.QuerySelectorImpl;
-import org.lobobrowser.html.w3c.HTMLDocumentFragment;
+import org.lobobrowser.w3c.html.HTMLDocumentFragment;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
@@ -94,7 +94,7 @@ HTMLDocumentFragment {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLDocumentFragment#querySelector(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLDocumentFragment#querySelector(java.lang.String)
      */
     @Override
     public Element querySelector(String selectors) {
@@ -105,7 +105,7 @@ HTMLDocumentFragment {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLDocumentFragment#querySelectorAll(java.lang.
+     * org.lobobrowser.w3c.html.HTMLDocumentFragment#querySelectorAll(java.lang.
      * String)
      */
     @Override

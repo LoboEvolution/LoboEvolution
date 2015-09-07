@@ -24,8 +24,8 @@ import org.apache.xpath.XPath;
 import org.apache.xpath.objects.XObject;
 import org.apache.xpath.res.XPATHErrorResources;
 import org.apache.xpath.res.XPATHMessages;
-import org.lobobrowser.html.w3c.xpath.XPathException;
-import org.lobobrowser.html.w3c.xpath.XPathResult;
+import org.lobobrowser.w3c.xpath.XPathException;
+import org.lobobrowser.w3c.xpath.XPathResult;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -34,7 +34,6 @@ import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
 import org.w3c.dom.traversal.NodeIterator;
 
-// TODO: Auto-generated Javadoc
 /**
  *
  * The class provides an implementation XPathResult according to the DOM L3

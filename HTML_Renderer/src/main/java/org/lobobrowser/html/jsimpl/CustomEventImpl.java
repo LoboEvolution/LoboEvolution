@@ -23,8 +23,8 @@ package org.lobobrowser.html.jsimpl;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.events.CustomEvent;
+import org.lobobrowser.w3c.events.CustomEvent;
+import org.lobobrowser.w3c.html.HTMLElement;
 
 /**
  * The Class CustomEventImpl.
@@ -86,7 +86,7 @@ public class CustomEventImpl extends EventImpl implements CustomEvent {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.events.CustomEvent#initCustomEvent(java.lang.String,
+     * org.lobobrowser.w3c.events.CustomEvent#initCustomEvent(java.lang.String,
      * boolean, boolean, int)
      */
     @Override

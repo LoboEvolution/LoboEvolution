@@ -33,7 +33,7 @@ import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.HttpRequest;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.js.Executor;
-import org.lobobrowser.html.w3c.HTMLScriptElement;
+import org.lobobrowser.w3c.html.HTMLScriptElement;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.Scriptable;
@@ -75,7 +75,7 @@ HTMLScriptElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLScriptElement#getText()
+     * @see org.lobobrowser.w3c.html.HTMLScriptElement#getText()
      */
     @Override
     public String getText() {
@@ -89,7 +89,7 @@ HTMLScriptElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLScriptElement#setText(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLScriptElement#setText(java.lang.String)
      */
     @Override
     public void setText(String text) {
@@ -98,7 +98,7 @@ HTMLScriptElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLScriptElement#getHtmlFor()
+     * @see org.lobobrowser.w3c.html.HTMLScriptElement#getHtmlFor()
      */
     @Override
     public String getHtmlFor() {
@@ -107,7 +107,7 @@ HTMLScriptElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLScriptElement#setHtmlFor(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLScriptElement#setHtmlFor(java.lang.String)
      */
     @Override
     public void setHtmlFor(String htmlFor) {
@@ -116,7 +116,7 @@ HTMLScriptElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLScriptElement#getEvent()
+     * @see org.lobobrowser.w3c.html.HTMLScriptElement#getEvent()
      */
     @Override
     public String getEvent() {
@@ -125,7 +125,7 @@ HTMLScriptElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLScriptElement#setEvent(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLScriptElement#setEvent(java.lang.String)
      */
     @Override
     public void setEvent(String event) {
@@ -137,7 +137,7 @@ HTMLScriptElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLScriptElement#getDefer()
+     * @see org.lobobrowser.w3c.html.HTMLScriptElement#getDefer()
      */
     @Override
     public boolean getDefer() {
@@ -146,7 +146,7 @@ HTMLScriptElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLScriptElement#setDefer(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLScriptElement#setDefer(boolean)
      */
     @Override
     public void setDefer(boolean defer) {
@@ -155,7 +155,7 @@ HTMLScriptElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLScriptElement#getSrc()
+     * @see org.lobobrowser.w3c.html.HTMLScriptElement#getSrc()
      */
     @Override
     public String getSrc() {
@@ -164,7 +164,7 @@ HTMLScriptElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLScriptElement#setSrc(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLScriptElement#setSrc(java.lang.String)
      */
     @Override
     public void setSrc(String src) {
@@ -173,7 +173,7 @@ HTMLScriptElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLScriptElement#getType()
+     * @see org.lobobrowser.w3c.html.HTMLScriptElement#getType()
      */
     @Override
     public String getType() {
@@ -182,7 +182,7 @@ HTMLScriptElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLScriptElement#setType(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLScriptElement#setType(java.lang.String)
      */
     @Override
     public void setType(String type) {
@@ -366,4 +366,16 @@ HTMLScriptElement {
     protected void appendInnerTextImpl(StringBuffer buffer) {
         // nop
     }
+
+	@Override
+	public boolean getAsync() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setAsync(boolean async) {
+		// TODO Auto-generated method stub
+		
+	}
 }

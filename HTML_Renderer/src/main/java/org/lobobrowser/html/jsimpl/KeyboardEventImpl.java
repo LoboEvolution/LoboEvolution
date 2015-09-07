@@ -22,8 +22,8 @@ package org.lobobrowser.html.jsimpl;
 
 import java.awt.event.KeyEvent;
 
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.events.KeyboardEvent;
+import org.lobobrowser.w3c.events.KeyboardEvent;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.views.AbstractView;
 
 /**
@@ -71,7 +71,7 @@ public class KeyboardEventImpl extends UIEventImpl implements KeyboardEvent {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.events.KeyboardEvent#initKeyboardEvent(java.lang
+     * org.lobobrowser.w3c.events.KeyboardEvent#initKeyboardEvent(java.lang
      * .String, boolean, boolean, org.w3c.dom.views.AbstractView, java.lang.String,
      * int, java.lang.String, boolean)
      */
@@ -91,7 +91,7 @@ public class KeyboardEventImpl extends UIEventImpl implements KeyboardEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.KeyboardEvent#getKey()
+     * @see org.lobobrowser.w3c.events.KeyboardEvent#getKey()
      */
     @Override
     public String getKey() {
@@ -104,7 +104,7 @@ public class KeyboardEventImpl extends UIEventImpl implements KeyboardEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.KeyboardEvent#getLocation()
+     * @see org.lobobrowser.w3c.events.KeyboardEvent#getLocation()
      */
     @Override
     public int getLocation() {
@@ -126,7 +126,7 @@ public class KeyboardEventImpl extends UIEventImpl implements KeyboardEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.KeyboardEvent#getRepeat()
+     * @see org.lobobrowser.w3c.events.KeyboardEvent#getRepeat()
      */
     @Override
     public boolean getRepeat() {
@@ -136,7 +136,7 @@ public class KeyboardEventImpl extends UIEventImpl implements KeyboardEvent {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.events.KeyboardEvent#getModifierState(java.lang.
+     * org.lobobrowser.w3c.events.KeyboardEvent#getModifierState(java.lang.
      * String)
      */
     @Override

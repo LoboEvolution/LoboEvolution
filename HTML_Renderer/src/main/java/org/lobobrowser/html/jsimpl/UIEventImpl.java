@@ -25,8 +25,8 @@ import java.awt.event.KeyEvent;
 
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.events.UIEvent;
+import org.lobobrowser.w3c.events.UIEvent;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.views.AbstractView;
 
 /**
@@ -90,7 +90,7 @@ public class UIEventImpl extends EventImpl implements UIEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.UIEvent#initUIEvent(java.lang.String,
+     * @see org.lobobrowser.w3c.events.UIEvent#initUIEvent(java.lang.String,
      * boolean, boolean, org.w3c.dom.views.AbstractView, int)
      */
     @Override

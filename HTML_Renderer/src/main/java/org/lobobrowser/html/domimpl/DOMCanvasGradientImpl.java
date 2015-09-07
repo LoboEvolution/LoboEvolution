@@ -6,8 +6,8 @@ package org.lobobrowser.html.domimpl;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import org.lobobrowser.html.w3c.CanvasGradient;
 import org.lobobrowser.util.gui.ColorFactory;
+import org.lobobrowser.w3c.html.CanvasGradient;
 
 public class DOMCanvasGradientImpl implements CanvasGradient {
 

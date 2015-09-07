@@ -36,7 +36,6 @@ import org.lobobrowser.clientlet.JavaVersionException;
 import org.lobobrowser.clientlet.NavigatorVersionException;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.gui.HtmlPanel;
-import org.lobobrowser.html.w3c.HTMLDocument;
 import org.lobobrowser.primary.clientlets.PrimaryClientletSelector;
 import org.lobobrowser.primary.clientlets.html.HtmlContent;
 import org.lobobrowser.primary.clientlets.html.HtmlRendererContextImpl;
@@ -50,6 +49,7 @@ import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.NavigatorWindow;
 import org.lobobrowser.util.Html;
 import org.lobobrowser.util.Strings;
+import org.lobobrowser.w3c.html.HTMLDocument;
 
 /**
  * The Class ExtensionImpl.

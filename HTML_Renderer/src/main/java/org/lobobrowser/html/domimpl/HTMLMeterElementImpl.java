@@ -14,8 +14,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.w3c.HTMLFormElement;
-import org.lobobrowser.html.w3c.HTMLMeterElement;
+import org.lobobrowser.w3c.html.HTMLMeterElement;
 import org.w3c.dom.NodeList;
 
 /**
@@ -37,10 +36,10 @@ HTMLMeterElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#getValue()
+     * @see org.lobobrowser.w3c.html.HTMLMeterElement#getValue()
      */
     @Override
-    public float getValue() {
+    public double getValue() {
         try {
             return Integer.parseInt(this
                     .getAttribute(HtmlAttributeProperties.VALUE));
@@ -53,20 +52,20 @@ HTMLMeterElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#setValue(float)
+     * @see org.lobobrowser.w3c.html.HTMLMeterElement#setValue(double)
      */
     @Override
-    public void setValue(float value) {
+    public void setValue(double value) {
         this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(value));
 
     }
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#getMin()
+     * @see org.lobobrowser.w3c.html.HTMLMeterElement#getMin()
      */
     @Override
-    public float getMin() {
+    public double getMin() {
         try {
             return Integer.parseInt(this
                     .getAttribute(HtmlAttributeProperties.MIN));
@@ -79,20 +78,20 @@ HTMLMeterElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#setMin(float)
+     * @see org.lobobrowser.w3c.html.HTMLMeterElement#setMin(double)
      */
     @Override
-    public void setMin(float min) {
+    public void setMin(double min) {
         this.setAttribute(HtmlAttributeProperties.MIN, String.valueOf(min));
 
     }
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#getMax()
+     * @see org.lobobrowser.w3c.html.HTMLMeterElement#getMax()
      */
     @Override
-    public float getMax() {
+    public double getMax() {
         try {
             return Integer.parseInt(this
                     .getAttribute(HtmlAttributeProperties.MAX));
@@ -105,20 +104,20 @@ HTMLMeterElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#setMax(float)
+     * @see org.lobobrowser.w3c.html.HTMLMeterElement#setMax(double)
      */
     @Override
-    public void setMax(float max) {
+    public void setMax(double max) {
         this.setAttribute(HtmlAttributeProperties.MAX, String.valueOf(max));
 
     }
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#getLow()
+     * @see org.lobobrowser.w3c.html.HTMLMeterElement#getLow()
      */
     @Override
-    public float getLow() {
+    public double getLow() {
         try {
             return Integer.parseInt(this
                     .getAttribute(HtmlAttributeProperties.LOW));
@@ -131,20 +130,20 @@ HTMLMeterElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#setLow(float)
+     * @see org.lobobrowser.w3c.html.HTMLMeterElement#setLow(double)
      */
     @Override
-    public void setLow(float low) {
+    public void setLow(double low) {
         this.setAttribute(HtmlAttributeProperties.LOW, String.valueOf(low));
 
     }
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#getHigh()
+     * @see org.lobobrowser.w3c.html.HTMLMeterElement#getHigh()
      */
     @Override
-    public float getHigh() {
+    public double getHigh() {
         try {
             return Integer.parseInt(this
                     .getAttribute(HtmlAttributeProperties.HEIGHT));
@@ -157,20 +156,20 @@ HTMLMeterElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#setHigh(float)
+     * @see org.lobobrowser.w3c.html.HTMLMeterElement#setHigh(double)
      */
     @Override
-    public void setHigh(float high) {
+    public void setHigh(double high) {
         this.setAttribute(HtmlAttributeProperties.HEIGHT, String.valueOf(high));
 
     }
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#getOptimum()
+     * @see org.lobobrowser.w3c.html.HTMLMeterElement#getOptimum()
      */
     @Override
-    public float getOptimum() {
+    public double getOptimum() {
         try {
             return Integer.parseInt(this
                     .getAttribute(HtmlAttributeProperties.OPTINUM));
@@ -183,10 +182,10 @@ HTMLMeterElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#setOptimum(float)
+     * @see org.lobobrowser.w3c.html.HTMLMeterElement#setOptimum(double)
      */
     @Override
-    public void setOptimum(float optimum) {
+    public void setOptimum(double optimum) {
         this.setAttribute(HtmlAttributeProperties.OPTINUM,
                 String.valueOf(optimum));
 
@@ -194,17 +193,7 @@ HTMLMeterElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#getForm()
-     */
-    @Override
-    public HTMLFormElement getForm() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLMeterElement#getLabels()
+     * @see org.lobobrowser.w3c.html.HTMLMeterElement#getLabels()
      */
     @Override
     public NodeList getLabels() {

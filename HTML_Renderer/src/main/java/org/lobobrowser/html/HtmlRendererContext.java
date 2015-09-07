@@ -22,9 +22,9 @@ import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.Optional;
 
-import org.lobobrowser.html.w3c.HTMLAnchorElement;
-import org.lobobrowser.html.w3c.HTMLCollection;
-import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLAnchorElement;
+import org.lobobrowser.w3c.html.HTMLCollection;
+import org.lobobrowser.w3c.html.HTMLElement;
 
 /**
  * The Interface HtmlRendererContext.
@@ -54,7 +54,7 @@ public interface HtmlRendererContext {
      *            Same as the target attribute in the HTML anchor tag, i.e.
      *            _top, _blank, etc.
      */
-    void linkClicked(org.lobobrowser.html.w3c.HTMLElement linkNode,
+    void linkClicked(org.lobobrowser.w3c.html.HTMLElement linkNode,
             URL url, String target);
 
     /**

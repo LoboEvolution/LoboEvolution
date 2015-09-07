@@ -13,7 +13,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.w3c.DOMStringMap;
+import org.lobobrowser.w3c.html.DOMStringMap;
 
 /**
  * The Class DOMStringMapImpl.
@@ -22,7 +22,7 @@ public class DOMStringMapImpl implements DOMStringMap {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.DOMStringMap#getElement(java.lang.String)
+     * @see org.lobobrowser.w3c.html.DOMStringMap#getElement(java.lang.String)
      */
     @Override
     public String getElement(String name) {
@@ -32,7 +32,7 @@ public class DOMStringMapImpl implements DOMStringMap {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.DOMStringMap#setElement(java.lang.String,
+     * @see org.lobobrowser.w3c.html.DOMStringMap#setElement(java.lang.String,
      * java.lang.String)
      */
     @Override
@@ -43,7 +43,7 @@ public class DOMStringMapImpl implements DOMStringMap {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.DOMStringMap#createElement(java.lang.String,
+     * @see org.lobobrowser.w3c.html.DOMStringMap#createElement(java.lang.String,
      * java.lang.String)
      */
     @Override
@@ -54,7 +54,7 @@ public class DOMStringMapImpl implements DOMStringMap {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.DOMStringMap#deleteElement(java.lang.String)
+     * @see org.lobobrowser.w3c.html.DOMStringMap#deleteElement(java.lang.String)
      */
     @Override
     public void deleteElement(String name) {

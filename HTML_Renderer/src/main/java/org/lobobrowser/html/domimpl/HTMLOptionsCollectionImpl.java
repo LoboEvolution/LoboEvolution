@@ -23,8 +23,8 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.domfilter.NodeFilter;
 import org.lobobrowser.html.domfilter.OptionFilter;
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.HTMLOptionsCollection;
+import org.lobobrowser.w3c.html.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLOptionsCollection;
 import org.w3c.dom.DOMException;
 
 /**
@@ -48,7 +48,7 @@ implements HTMLOptionsCollection {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOptionsCollection#setLength(int)
+     * @see org.lobobrowser.w3c.html.HTMLOptionsCollection#setLength(int)
      */
     @Override
     public void setLength(int length) throws DOMException {
@@ -58,7 +58,7 @@ implements HTMLOptionsCollection {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLOptionsCollection#add(org.lobobrowser.html.w3c
+     * org.lobobrowser.w3c.html.HTMLOptionsCollection#add(org.lobobrowser.w3c.html
      * .HTMLElement)
      */
     @Override
@@ -70,8 +70,8 @@ implements HTMLOptionsCollection {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLOptionsCollection#add(org.lobobrowser.html.w3c
-     * .HTMLElement, org.lobobrowser.html.w3c.HTMLElement)
+     * org.lobobrowser.w3c.html.HTMLOptionsCollection#add(org.lobobrowser.w3c.html
+     * .HTMLElement, org.lobobrowser.w3c.html.HTMLElement)
      */
     @Override
     public void add(HTMLElement element, HTMLElement before) {
@@ -82,7 +82,7 @@ implements HTMLOptionsCollection {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLOptionsCollection#add(org.lobobrowser.html.w3c
+     * org.lobobrowser.w3c.html.HTMLOptionsCollection#add(org.lobobrowser.w3c.html
      * .HTMLElement, int)
      */
     @Override
@@ -93,11 +93,23 @@ implements HTMLOptionsCollection {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOptionsCollection#remove(int)
+     * @see org.lobobrowser.w3c.html.HTMLOptionsCollection#remove(int)
      */
     @Override
     public void remove(int index) {
         // TODO Auto-generated method stub
 
     }
+
+	@Override
+	public int getSelectedIndex() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setSelectedIndex(int selectedIndex) {
+		// TODO Auto-generated method stub
+		
+	}
 }

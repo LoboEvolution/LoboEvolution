@@ -28,7 +28,7 @@ import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.renderstate.ImageRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
-import org.lobobrowser.html.w3c.HTMLImageElement;
+import org.lobobrowser.w3c.html.HTMLImageElement;
 import org.mozilla.javascript.Function;
 
 /**
@@ -387,4 +387,16 @@ HTMLImageElement {
             dispatchEvent(this.expectedImgSrc, event);
         }
     }
+
+	@Override
+	public String getCrossOrigin() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCrossOrigin(String crossOrigin) {
+		// TODO Auto-generated method stub
+		
+	}
 }

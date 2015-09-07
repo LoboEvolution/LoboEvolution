@@ -25,9 +25,9 @@ import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.dombl.NodeVisitor;
 import org.lobobrowser.html.dombl.StopVisitorException;
 import org.lobobrowser.html.domfilter.NodeFilter;
-import org.lobobrowser.html.w3c.HTMLCollection;
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.HTMLTableRowElement;
+import org.lobobrowser.w3c.html.HTMLCollection;
+import org.lobobrowser.w3c.html.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLTableRowElement;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
@@ -56,7 +56,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getRowIndex()
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#getRowIndex()
      */
     @Override
     public int getRowIndex() {
@@ -87,7 +87,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getSectionRowIndex()
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#getSectionRowIndex()
      */
     @Override
     public int getSectionRowIndex() {
@@ -97,7 +97,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getCells()
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#getCells()
      */
     @Override
     public HTMLCollection getCells() {
@@ -113,7 +113,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getAlign()
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#getAlign()
      */
     @Override
     public String getAlign() {
@@ -122,7 +122,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#setAlign(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#setAlign(java.lang.String)
      */
     @Override
     public void setAlign(String align) {
@@ -131,7 +131,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getBgColor()
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#getBgColor()
      */
     @Override
     public String getBgColor() {
@@ -141,7 +141,7 @@ HTMLTableRowElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLTableRowElement#setBgColor(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLTableRowElement#setBgColor(java.lang.String)
      */
     @Override
     public void setBgColor(String bgColor) {
@@ -150,7 +150,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getCh()
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#getCh()
      */
     @Override
     public String getCh() {
@@ -159,7 +159,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#setCh(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#setCh(java.lang.String)
      */
     @Override
     public void setCh(String ch) {
@@ -168,7 +168,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getChOff()
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#getChOff()
      */
     @Override
     public String getChOff() {
@@ -177,7 +177,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#setChOff(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#setChOff(java.lang.String)
      */
     @Override
     public void setChOff(String chOff) {
@@ -186,7 +186,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#getVAlign()
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#getVAlign()
      */
     @Override
     public String getVAlign() {
@@ -195,7 +195,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#setVAlign(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#setVAlign(java.lang.String)
      */
     @Override
     public void setVAlign(String vAlign) {
@@ -219,7 +219,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#insertCell(int)
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#insertCell(int)
      */
     @Override
     public HTMLElement insertCell(int index) throws DOMException {
@@ -256,7 +256,7 @@ HTMLTableRowElement {
                 int trcount = 0;
                 for (int i = 0; i < size; i++) {
                     Node node = nl.get(i);
-                    if (node instanceof org.lobobrowser.html.w3c.HTMLTableCellElement) {
+                    if (node instanceof org.lobobrowser.w3c.html.HTMLTableCellElement) {
                         if (trcount == index) {
                             this.insertAt(cellElement, i);
                             return cellElement;
@@ -275,7 +275,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#deleteCell(int)
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#deleteCell(int)
      */
     @Override
     public void deleteCell(int index) throws DOMException {
@@ -286,7 +286,7 @@ HTMLTableRowElement {
                 int trcount = 0;
                 for (int i = 0; i < size; i++) {
                     Node node = nl.get(i);
-                    if (node instanceof org.lobobrowser.html.w3c.HTMLTableCellElement) {
+                    if (node instanceof org.lobobrowser.w3c.html.HTMLTableCellElement) {
                         if (trcount == index) {
                             this.removeChildAt(index);
                         }
@@ -301,7 +301,7 @@ HTMLTableRowElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableRowElement#insertCell()
+     * @see org.lobobrowser.w3c.html.HTMLTableRowElement#insertCell()
      */
     @Override
     public HTMLElement insertCell() {

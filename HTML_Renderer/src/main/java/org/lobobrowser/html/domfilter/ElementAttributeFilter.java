@@ -15,7 +15,7 @@ package org.lobobrowser.html.domfilter;
 
 import org.lobobrowser.html.domimpl.DOMAttrImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
-import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;

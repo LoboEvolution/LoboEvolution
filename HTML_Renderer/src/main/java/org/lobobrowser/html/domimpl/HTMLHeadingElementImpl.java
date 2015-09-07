@@ -19,7 +19,7 @@ import org.lobobrowser.html.renderstate.HeadingRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
-import org.lobobrowser.html.w3c.HTMLHeadingElement;
+import org.lobobrowser.w3c.html.HTMLHeadingElement;
 
 /**
  * The Class HTMLHeadingElementImpl.
@@ -39,7 +39,7 @@ HTMLHeadingElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHeadingElement#getAlign()
+     * @see org.lobobrowser.w3c.html.HTMLHeadingElement#getAlign()
      */
     @Override
     public String getAlign() {
@@ -48,7 +48,7 @@ HTMLHeadingElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHeadingElement#setAlign(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLHeadingElement#setAlign(java.lang.String)
      */
     @Override
     public void setAlign(String align) {

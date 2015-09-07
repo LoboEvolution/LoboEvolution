@@ -20,7 +20,7 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.renderstate.ListRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
-import org.lobobrowser.html.w3c.HTMLOListElement;
+import org.lobobrowser.w3c.html.HTMLOListElement;
 
 /**
  * The Class HTMLOListElementImpl.
@@ -40,7 +40,7 @@ HTMLOListElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOListElement#getCompact()
+     * @see org.lobobrowser.w3c.html.HTMLOListElement#getCompact()
      */
     @Override
     public boolean getCompact() {
@@ -50,7 +50,7 @@ HTMLOListElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOListElement#setCompact(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLOListElement#setCompact(boolean)
      */
     @Override
     public void setCompact(boolean compact) {
@@ -60,7 +60,7 @@ HTMLOListElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOListElement#getStart()
+     * @see org.lobobrowser.w3c.html.HTMLOListElement#getStart()
      */
     @Override
     public int getStart() {
@@ -77,7 +77,7 @@ HTMLOListElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOListElement#setStart(int)
+     * @see org.lobobrowser.w3c.html.HTMLOListElement#setStart(int)
      */
     @Override
     public void setStart(int start) {
@@ -86,7 +86,7 @@ HTMLOListElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOListElement#getType()
+     * @see org.lobobrowser.w3c.html.HTMLOListElement#getType()
      */
     @Override
     public String getType() {
@@ -95,7 +95,7 @@ HTMLOListElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOListElement#setType(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLOListElement#setType(java.lang.String)
      */
     @Override
     public void setType(String type) {
@@ -115,7 +115,7 @@ HTMLOListElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOListElement#getReversed()
+     * @see org.lobobrowser.w3c.html.HTMLOListElement#getReversed()
      */
     @Override
     public boolean getReversed() {
@@ -125,7 +125,7 @@ HTMLOListElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOListElement#setReversed(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLOListElement#setReversed(boolean)
      */
     @Override
     public void setReversed(boolean reversed) {

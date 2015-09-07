@@ -14,8 +14,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.w3c.HTMLFormElement;
-import org.lobobrowser.html.w3c.HTMLProgressElement;
+import org.lobobrowser.w3c.html.HTMLProgressElement;
 import org.w3c.dom.NodeList;
 
 /**
@@ -36,10 +35,10 @@ HTMLProgressElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLProgressElement#getValue()
+     * @see org.lobobrowser.w3c.html.HTMLProgressElement#getValue()
      */
     @Override
-    public float getValue() {
+    public double getValue() {
         try {
             return Integer.parseInt(this
                     .getAttribute(HtmlAttributeProperties.VALUE));
@@ -52,20 +51,20 @@ HTMLProgressElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLProgressElement#setValue(float)
+     * @see org.lobobrowser.w3c.html.HTMLProgressElement#setValue(double)
      */
     @Override
-    public void setValue(float value) {
+    public void setValue(double value) {
         this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(value));
 
     }
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLProgressElement#getMax()
+     * @see org.lobobrowser.w3c.html.HTMLProgressElement#getMax()
      */
     @Override
-    public float getMax() {
+    public double getMax() {
         try {
             return Integer.parseInt(this
                     .getAttribute(HtmlAttributeProperties.MAX));
@@ -78,36 +77,26 @@ HTMLProgressElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLProgressElement#setMax(float)
+     * @see org.lobobrowser.w3c.html.HTMLProgressElement#setMax(double)
      */
     @Override
-    public void setMax(float max) {
+    public void setMax(double max) {
         this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(max));
     }
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLProgressElement#getPosition()
+     * @see org.lobobrowser.w3c.html.HTMLProgressElement#getPosition()
      */
     @Override
-    public float getPosition() {
+    public double getPosition() {
         // TODO Auto-generated method stub
         return 0;
     }
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLProgressElement#getForm()
-     */
-    @Override
-    public HTMLFormElement getForm() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLProgressElement#getLabels()
+     * @see org.lobobrowser.w3c.html.HTMLProgressElement#getLabels()
      */
     @Override
     public NodeList getLabels() {

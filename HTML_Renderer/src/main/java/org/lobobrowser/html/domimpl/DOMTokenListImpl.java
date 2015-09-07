@@ -13,7 +13,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.w3c.DOMTokenList;
+import org.lobobrowser.w3c.html.DOMTokenList;
 
 /**
  * The Class DOMTokenListImpl.
@@ -42,7 +42,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.DOMTokenList#getLength()
+     * @see org.lobobrowser.w3c.html.DOMTokenList#getLength()
      */
     @Override
     public int getLength() {
@@ -56,7 +56,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.DOMTokenList#item(int)
+     * @see org.lobobrowser.w3c.html.DOMTokenList#item(int)
      */
     @Override
     public String item(int index) {
@@ -74,7 +74,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.DOMTokenList#contains(java.lang.String)
+     * @see org.lobobrowser.w3c.html.DOMTokenList#contains(java.lang.String)
      */
     @Override
     public boolean contains(String token) {
@@ -83,7 +83,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.DOMTokenList#add(java.lang.String)
+     * @see org.lobobrowser.w3c.html.DOMTokenList#add(java.lang.String)
      */
     @Override
     public void add(String token) {
@@ -97,7 +97,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.DOMTokenList#remove(java.lang.String)
+     * @see org.lobobrowser.w3c.html.DOMTokenList#remove(java.lang.String)
      */
     @Override
     public void remove(String token) {
@@ -117,7 +117,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.DOMTokenList#toggle(java.lang.String)
+     * @see org.lobobrowser.w3c.html.DOMTokenList#toggle(java.lang.String)
      */
     @Override
     public boolean toggle(String token) {
@@ -133,7 +133,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.DOMTokenList#toggle(java.lang.String, boolean)
+     * @see org.lobobrowser.w3c.html.DOMTokenList#toggle(java.lang.String, boolean)
      */
     @Override
     public boolean toggle(String token, boolean force) {

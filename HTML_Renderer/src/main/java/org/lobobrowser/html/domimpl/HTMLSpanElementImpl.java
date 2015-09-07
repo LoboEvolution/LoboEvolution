@@ -17,7 +17,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLElement;
 
 /**
  * The Class HTMLSpanElementImpl.

@@ -13,7 +13,7 @@
  */
 package org.lobobrowser.html.domfilter;
 
-import org.lobobrowser.html.w3c.HTMLTableCaptionElement;
+import org.lobobrowser.w3c.html.HTMLTableCaptionElement;
 import org.w3c.dom.Node;
 
 /**

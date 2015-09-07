@@ -23,9 +23,9 @@ package org.lobobrowser.html.jsimpl;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.events.EventTarget;
-import org.lobobrowser.html.w3c.events.MouseEvent;
+import org.lobobrowser.w3c.events.EventTarget;
+import org.lobobrowser.w3c.events.MouseEvent;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.views.AbstractView;
 
 /**
@@ -87,10 +87,10 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.events.MouseEvent#initMouseEvent(java.lang.String,
+     * org.lobobrowser.w3c.events.MouseEvent#initMouseEvent(java.lang.String,
      * boolean, boolean, org.w3c.dom.views.AbstractView, int, int, int, int, int,
      * boolean, boolean, boolean, boolean, int,
-     * org.lobobrowser.html.w3c.events.EventTarget)
+     * org.lobobrowser.w3c.events.EventTarget)
      */
     @Override
     public void initMouseEvent(String type, boolean canBubble,
@@ -108,10 +108,10 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.events.MouseEvent#initMouseEventNS(java.lang.String,
+     * org.lobobrowser.w3c.events.MouseEvent#initMouseEventNS(java.lang.String,
      * java.lang.String, boolean, boolean, org.w3c.dom.views.AbstractView, int, int,
      * int, int, int, boolean, boolean, boolean, boolean, int,
-     * org.lobobrowser.html.w3c.events.EventTarget)
+     * org.lobobrowser.w3c.events.EventTarget)
      */
     @Override
     public void initMouseEventNS(String namespaceURI, String type,
@@ -140,7 +140,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MouseEvent#getRelatedTarget()
+     * @see org.lobobrowser.w3c.events.MouseEvent#getRelatedTarget()
      */
     @Override
     public HTMLElement getRelatedTarget() {
@@ -150,7 +150,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.events.MouseEvent#getModifierState(java.lang.String)
+     * org.lobobrowser.w3c.events.MouseEvent#getModifierState(java.lang.String)
      */
     @Override
     public boolean getModifierState(String key) {
@@ -160,7 +160,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MouseEvent#getPageX()
+     * @see org.lobobrowser.w3c.events.MouseEvent#getPageX()
      */
     @Override
     public int getPageX() {
@@ -170,7 +170,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MouseEvent#getPageY()
+     * @see org.lobobrowser.w3c.events.MouseEvent#getPageY()
      */
     @Override
     public int getPageY() {
@@ -180,7 +180,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MouseEvent#getX()
+     * @see org.lobobrowser.w3c.events.MouseEvent#getX()
      */
     @Override
     public int getX() {
@@ -190,7 +190,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MouseEvent#getY()
+     * @see org.lobobrowser.w3c.events.MouseEvent#getY()
      */
     @Override
     public int getY() {
@@ -200,7 +200,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MouseEvent#getOffsetX()
+     * @see org.lobobrowser.w3c.events.MouseEvent#getOffsetX()
      */
     @Override
     public int getOffsetX() {
@@ -210,7 +210,7 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.MouseEvent#getOffsetY()
+     * @see org.lobobrowser.w3c.events.MouseEvent#getOffsetY()
      */
     @Override
     public int getOffsetY() {

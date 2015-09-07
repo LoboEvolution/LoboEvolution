@@ -22,6 +22,7 @@
 
 package org.lobobrowser.html.xpath;
 
+import org.lobobrowser.w3c.xpath.XPathNamespace;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -29,8 +30,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.xpath.XPathNamespace;
-
 import org.w3c.dom.UserDataHandler;
 
 /**

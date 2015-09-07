@@ -21,7 +21,7 @@ import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.FrameNode;
 import org.lobobrowser.html.js.Window;
-import org.lobobrowser.html.w3c.HTMLFrameElement;
+import org.lobobrowser.w3c.html.HTMLFrameElement;
 import org.w3c.dom.Document;
 
 /**
@@ -77,7 +77,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#getFrameBorder()
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getFrameBorder()
      */
     @Override
     public String getFrameBorder() {
@@ -87,7 +87,7 @@ HTMLFrameElement, FrameNode {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLFrameElement#setFrameBorder(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLFrameElement#setFrameBorder(java.lang.String)
      */
     @Override
     public void setFrameBorder(String frameBorder) {
@@ -96,7 +96,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#getLongDesc()
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getLongDesc()
      */
     @Override
     public String getLongDesc() {
@@ -105,7 +105,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#setLongDesc(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#setLongDesc(java.lang.String)
      */
     @Override
     public void setLongDesc(String longDesc) {
@@ -114,7 +114,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#getMarginHeight()
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getMarginHeight()
      */
     @Override
     public String getMarginHeight() {
@@ -124,7 +124,7 @@ HTMLFrameElement, FrameNode {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLFrameElement#setMarginHeight(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLFrameElement#setMarginHeight(java.lang.String)
      */
     @Override
     public void setMarginHeight(String marginHeight) {
@@ -133,7 +133,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#getMarginWidth()
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getMarginWidth()
      */
     @Override
     public String getMarginWidth() {
@@ -143,7 +143,7 @@ HTMLFrameElement, FrameNode {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLFrameElement#setMarginWidth(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLFrameElement#setMarginWidth(java.lang.String)
      */
     @Override
     public void setMarginWidth(String marginWidth) {
@@ -152,7 +152,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#getName()
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getName()
      */
     @Override
     public String getName() {
@@ -161,7 +161,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#setName(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#setName(java.lang.String)
      */
     @Override
     public void setName(String name) {
@@ -173,7 +173,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#getNoResize()
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getNoResize()
      */
     @Override
     public boolean getNoResize() {
@@ -182,7 +182,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#setNoResize(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#setNoResize(boolean)
      */
     @Override
     public void setNoResize(boolean noResize) {
@@ -191,7 +191,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#getScrolling()
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getScrolling()
      */
     @Override
     public String getScrolling() {
@@ -200,7 +200,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#setScrolling(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#setScrolling(java.lang.String)
      */
     @Override
     public void setScrolling(String scrolling) {
@@ -209,7 +209,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#getSrc()
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getSrc()
      */
     @Override
     public String getSrc() {
@@ -218,7 +218,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#setSrc(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#setSrc(java.lang.String)
      */
     @Override
     public void setSrc(String src) {
@@ -227,7 +227,7 @@ HTMLFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFrameElement#getContentDocument()
+     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getContentDocument()
      */
     @Override
     public Document getContentDocument() {

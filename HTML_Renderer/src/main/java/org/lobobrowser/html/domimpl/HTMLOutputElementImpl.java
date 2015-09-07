@@ -13,10 +13,10 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.w3c.DOMSettableTokenList;
-import org.lobobrowser.html.w3c.HTMLFormElement;
-import org.lobobrowser.html.w3c.HTMLOutputElement;
-import org.lobobrowser.html.w3c.ValidityState;
+import org.lobobrowser.w3c.html.DOMSettableTokenList;
+import org.lobobrowser.w3c.html.HTMLFormElement;
+import org.lobobrowser.w3c.html.HTMLOutputElement;
+import org.lobobrowser.w3c.html.ValidityState;
 import org.w3c.dom.NodeList;
 
 /**
@@ -37,7 +37,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#getHtmlFor()
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#getHtmlFor()
      */
     @Override
     public DOMSettableTokenList getHtmlFor() {
@@ -47,7 +47,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#setHtmlFor(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#setHtmlFor(java.lang.String)
      */
     @Override
     public void setHtmlFor(String htmlFor) {
@@ -57,7 +57,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#getForm()
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#getForm()
      */
     @Override
     public HTMLFormElement getForm() {
@@ -67,7 +67,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#getName()
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#getName()
      */
     @Override
     public String getName() {
@@ -77,7 +77,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#setName(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#setName(java.lang.String)
      */
     @Override
     public void setName(String name) {
@@ -87,7 +87,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#getType()
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#getType()
      */
     @Override
     public String getType() {
@@ -97,7 +97,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#getDefaultValue()
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#getDefaultValue()
      */
     @Override
     public String getDefaultValue() {
@@ -108,7 +108,7 @@ HTMLOutputElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLOutputElement#setDefaultValue(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLOutputElement#setDefaultValue(java.lang.String)
      */
     @Override
     public void setDefaultValue(String defaultValue) {
@@ -118,7 +118,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#getValue()
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#getValue()
      */
     @Override
     public String getValue() {
@@ -128,7 +128,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#setValue(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#setValue(java.lang.String)
      */
     @Override
     public void setValue(String value) {
@@ -138,7 +138,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#getWillValidate()
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#getWillValidate()
      */
     @Override
     public boolean getWillValidate() {
@@ -148,7 +148,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#getValidity()
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#getValidity()
      */
     @Override
     public ValidityState getValidity() {
@@ -158,7 +158,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#getValidationMessage()
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#getValidationMessage()
      */
     @Override
     public String getValidationMessage() {
@@ -168,7 +168,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#checkValidity()
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#checkValidity()
      */
     @Override
     public boolean checkValidity() {
@@ -179,7 +179,7 @@ HTMLOutputElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLOutputElement#setCustomValidity(java.lang.String
+     * org.lobobrowser.w3c.html.HTMLOutputElement#setCustomValidity(java.lang.String
      * )
      */
     @Override
@@ -190,7 +190,7 @@ HTMLOutputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOutputElement#getLabels()
+     * @see org.lobobrowser.w3c.html.HTMLOutputElement#getLabels()
      */
     @Override
     public NodeList getLabels() {

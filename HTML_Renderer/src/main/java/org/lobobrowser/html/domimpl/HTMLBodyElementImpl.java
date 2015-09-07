@@ -20,8 +20,8 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.renderstate.BodyRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
-import org.lobobrowser.html.w3c.HTMLBodyElement;
-import org.lobobrowser.html.w3c.HTMLDocument;
+import org.lobobrowser.w3c.html.HTMLBodyElement;
+import org.lobobrowser.w3c.html.HTMLDocument;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Document;
 
@@ -71,7 +71,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLBodyElement#getALink()
+ * @see org.lobobrowser.w3c.html.HTMLBodyElement#getALink()
  */
     @Override
     public String getALink() {
@@ -80,7 +80,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLBodyElement#setALink(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLBodyElement#setALink(java.lang.String)
  */
     @Override
     public void setALink(String aLink) {
@@ -89,7 +89,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLBodyElement#getBackground()
+ * @see org.lobobrowser.w3c.html.HTMLBodyElement#getBackground()
  */
     @Override
     public String getBackground() {
@@ -98,7 +98,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLBodyElement#setBackground(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLBodyElement#setBackground(java.lang.String)
  */
     @Override
     public void setBackground(String background) {
@@ -107,7 +107,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLBodyElement#getBgColor()
+ * @see org.lobobrowser.w3c.html.HTMLBodyElement#getBgColor()
  */
     @Override
     public String getBgColor() {
@@ -116,7 +116,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLBodyElement#setBgColor(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLBodyElement#setBgColor(java.lang.String)
  */
     @Override
     public void setBgColor(String bgColor) {
@@ -125,7 +125,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLBodyElement#getLink()
+ * @see org.lobobrowser.w3c.html.HTMLBodyElement#getLink()
  */
     @Override
     public String getLink() {
@@ -134,7 +134,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLBodyElement#setLink(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLBodyElement#setLink(java.lang.String)
  */
     @Override
     public void setLink(String link) {
@@ -143,7 +143,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLBodyElement#getText()
+ * @see org.lobobrowser.w3c.html.HTMLBodyElement#getText()
  */
     @Override
     public String getText() {
@@ -152,7 +152,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLBodyElement#setText(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLBodyElement#setText(java.lang.String)
  */
     @Override
     public void setText(String text) {
@@ -161,7 +161,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLBodyElement#getVLink()
+ * @see org.lobobrowser.w3c.html.HTMLBodyElement#getVLink()
  */
     @Override
     public String getVLink() {
@@ -170,7 +170,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements
 
     /*
  * (non-Javadoc)
- * @see org.lobobrowser.html.w3c.HTMLBodyElement#setVLink(java.lang.String)
+ * @see org.lobobrowser.w3c.html.HTMLBodyElement#setVLink(java.lang.String)
  */
     @Override
     public void setVLink(String vLink) {

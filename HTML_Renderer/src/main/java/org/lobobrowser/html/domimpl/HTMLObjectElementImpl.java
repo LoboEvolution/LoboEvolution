@@ -21,9 +21,10 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.w3c.HTMLFormElement;
-import org.lobobrowser.html.w3c.HTMLObjectElement;
-import org.lobobrowser.html.w3c.ValidityState;
+import org.lobobrowser.html.js.Window;
+import org.lobobrowser.w3c.html.HTMLFormElement;
+import org.lobobrowser.w3c.html.HTMLObjectElement;
+import org.lobobrowser.w3c.html.ValidityState;
 import org.w3c.dom.Document;
 
 /**
@@ -44,7 +45,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getAlign()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getAlign()
      */
     @Override
     public String getAlign() {
@@ -62,7 +63,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getArchive()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getArchive()
      */
     @Override
     public String getArchive() {
@@ -71,7 +72,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getCode()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getCode()
      */
     @Override
     public String getCode() {
@@ -80,7 +81,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getCodeBase()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getCodeBase()
      */
     @Override
     public String getCodeBase() {
@@ -89,7 +90,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getHeight()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getHeight()
      */
     @Override
     public String getHeight() {
@@ -98,7 +99,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getName()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getName()
      */
     @Override
     public String getName() {
@@ -116,7 +117,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getWidth()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getWidth()
      */
     @Override
     public String getWidth() {
@@ -125,7 +126,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setAlign(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setAlign(java.lang.String)
      */
     @Override
     public void setAlign(String align) {
@@ -144,7 +145,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setArchive(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setArchive(java.lang.String)
      */
     @Override
     public void setArchive(String archive) {
@@ -153,7 +154,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setCode(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setCode(java.lang.String)
      */
     @Override
     public void setCode(String code) {
@@ -162,7 +163,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setCodeBase(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setCodeBase(java.lang.String)
      */
     @Override
     public void setCodeBase(String codeBase) {
@@ -171,7 +172,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setHeight(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setHeight(java.lang.String)
      */
     @Override
     public void setHeight(String height) {
@@ -180,7 +181,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setName(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setName(java.lang.String)
      */
     @Override
     public void setName(String name) {
@@ -199,7 +200,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setWidth(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setWidth(java.lang.String)
      */
     @Override
     public void setWidth(String width) {
@@ -208,7 +209,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getBorder()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getBorder()
      */
     @Override
     public String getBorder() {
@@ -217,7 +218,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getCodeType()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getCodeType()
      */
     @Override
     public String getCodeType() {
@@ -226,7 +227,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getContentDocument()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getContentDocument()
      */
     @Override
     public Document getContentDocument() {
@@ -235,7 +236,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getData()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getData()
      */
     @Override
     public String getData() {
@@ -244,7 +245,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getDeclare()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getDeclare()
      */
     @Override
     public boolean getDeclare() {
@@ -254,7 +255,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getForm()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getForm()
      */
     @Override
     public HTMLFormElement getForm() {
@@ -264,7 +265,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getHspace()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getHspace()
      */
     @Override
     public int getHspace() {
@@ -278,7 +279,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getStandby()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getStandby()
      */
     @Override
     public String getStandby() {
@@ -301,7 +302,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getType()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getType()
      */
     @Override
     public String getType() {
@@ -310,7 +311,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getUseMap()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getUseMap()
      */
     @Override
     public String getUseMap() {
@@ -319,7 +320,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getVspace()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getVspace()
      */
     @Override
     public int getVspace() {
@@ -333,7 +334,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setBorder(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setBorder(java.lang.String)
      */
     @Override
     public void setBorder(String border) {
@@ -342,7 +343,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setCodeType(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setCodeType(java.lang.String)
      */
     @Override
     public void setCodeType(String codeType) {
@@ -351,7 +352,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setData(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setData(java.lang.String)
      */
     @Override
     public void setData(String data) {
@@ -360,7 +361,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setDeclare(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setDeclare(boolean)
      */
     @Override
     public void setDeclare(boolean declare) {
@@ -370,7 +371,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setHspace(int)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setHspace(int)
      */
     @Override
     public void setHspace(int hspace) {
@@ -380,7 +381,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setStandby(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setStandby(java.lang.String)
      */
     @Override
     public void setStandby(String standby) {
@@ -399,7 +400,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setType(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setType(java.lang.String)
      */
     @Override
     public void setType(String type) {
@@ -408,7 +409,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setUseMap(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setUseMap(java.lang.String)
      */
     @Override
     public void setUseMap(String useMap) {
@@ -417,7 +418,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#setVspace(int)
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#setVspace(int)
      */
     @Override
     public void setVspace(int vspace) {
@@ -427,7 +428,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getWillValidate()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getWillValidate()
      */
     @Override
     public boolean getWillValidate() {
@@ -437,7 +438,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getValidity()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getValidity()
      */
     @Override
     public ValidityState getValidity() {
@@ -447,7 +448,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#getValidationMessage()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#getValidationMessage()
      */
     @Override
     public String getValidationMessage() {
@@ -457,7 +458,7 @@ HTMLObjectElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLObjectElement#checkValidity()
+     * @see org.lobobrowser.w3c.html.HTMLObjectElement#checkValidity()
      */
     @Override
     public boolean checkValidity() {
@@ -468,7 +469,7 @@ HTMLObjectElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLObjectElement#setCustomValidity(java.lang.String
+     * org.lobobrowser.w3c.html.HTMLObjectElement#setCustomValidity(java.lang.String
      * )
      */
     @Override
@@ -476,4 +477,22 @@ HTMLObjectElement {
         // TODO Auto-generated method stub
 
     }
+
+	@Override
+	public boolean getTypeMustMatch() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setTypeMustMatch(boolean typeMustMatch) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Window getContentWindow() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

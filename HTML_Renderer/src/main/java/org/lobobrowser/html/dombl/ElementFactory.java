@@ -25,7 +25,7 @@ import org.lobobrowser.html.HtmlMapping;
 import org.lobobrowser.html.builder.HTMLElementBuilder;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.DOMException;
 
 /**

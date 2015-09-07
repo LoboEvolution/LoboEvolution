@@ -13,7 +13,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.w3c.DOMSettableTokenList;
+import org.lobobrowser.w3c.html.DOMSettableTokenList;
 
 /**
  * The Class DOMSettableTokenListImpl.
@@ -35,7 +35,7 @@ DOMSettableTokenList {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.DOMSettableTokenList#getValue()
+     * @see org.lobobrowser.w3c.html.DOMSettableTokenList#getValue()
      */
     @Override
     public String getValue() {
@@ -45,7 +45,7 @@ DOMSettableTokenList {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.DOMSettableTokenList#setValue(java.lang.String)
+     * @see org.lobobrowser.w3c.html.DOMSettableTokenList#setValue(java.lang.String)
      */
     @Override
     public void setValue(String value) {

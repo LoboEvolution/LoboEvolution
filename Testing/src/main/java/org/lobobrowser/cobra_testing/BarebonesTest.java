@@ -30,7 +30,7 @@ import org.lobobrowser.html.*;
 import org.lobobrowser.html.gui.*;
 import org.lobobrowser.html.parser.*;
 import org.lobobrowser.html.test.*;
-import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLElement;
 
 
 /**

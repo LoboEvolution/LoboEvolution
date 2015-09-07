@@ -19,7 +19,7 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
-import org.lobobrowser.html.w3c.HTMLHtmlElement;
+import org.lobobrowser.w3c.html.HTMLHtmlElement;
 
 /**
  * The Class HTMLHtmlElementImpl.
@@ -46,7 +46,7 @@ HTMLHtmlElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHtmlElement#getVersion()
+     * @see org.lobobrowser.w3c.html.HTMLHtmlElement#getVersion()
      */
     @Override
     public String getVersion() {
@@ -55,7 +55,7 @@ HTMLHtmlElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLHtmlElement#setVersion(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLHtmlElement#setVersion(java.lang.String)
      */
     @Override
     public void setVersion(String version) {

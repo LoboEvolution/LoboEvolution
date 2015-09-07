@@ -17,9 +17,9 @@ package org.lobobrowser.html;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 
-import org.lobobrowser.html.w3c.HTMLAnchorElement;
-import org.lobobrowser.html.w3c.HTMLCollection;
-import org.lobobrowser.html.w3c.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLAnchorElement;
+import org.lobobrowser.w3c.html.HTMLCollection;
+import org.lobobrowser.w3c.html.HTMLElement;
 
 /**
  * Abstract implementation of the {@link HtmlRendererContext} interface with

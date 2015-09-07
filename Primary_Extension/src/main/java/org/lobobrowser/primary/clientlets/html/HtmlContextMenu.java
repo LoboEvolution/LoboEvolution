@@ -38,8 +38,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.lobobrowser.html.domimpl.HTMLAnchorElementImpl;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
-import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.primary.ext.IconFactory;
+import org.lobobrowser.w3c.html.HTMLElement;
 
 /**
  * The Class HtmlContextMenu.

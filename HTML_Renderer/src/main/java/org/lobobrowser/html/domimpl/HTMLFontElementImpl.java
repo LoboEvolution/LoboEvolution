@@ -20,7 +20,7 @@ import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.html.w3c.HTMLFontElement;
+import org.lobobrowser.w3c.html.HTMLFontElement;
 
 /**
  * The Class HTMLFontElementImpl.
@@ -40,7 +40,7 @@ HTMLFontElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFontElement#getColor()
+     * @see org.lobobrowser.w3c.html.HTMLFontElement#getColor()
      */
     @Override
     public String getColor() {
@@ -49,7 +49,7 @@ HTMLFontElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFontElement#getFace()
+     * @see org.lobobrowser.w3c.html.HTMLFontElement#getFace()
      */
     @Override
     public String getFace() {
@@ -58,7 +58,7 @@ HTMLFontElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFontElement#getSize()
+     * @see org.lobobrowser.w3c.html.HTMLFontElement#getSize()
      */
     @Override
     public String getSize() {
@@ -67,7 +67,7 @@ HTMLFontElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFontElement#setColor(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLFontElement#setColor(java.lang.String)
      */
     @Override
     public void setColor(String color) {
@@ -76,7 +76,7 @@ HTMLFontElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFontElement#setFace(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLFontElement#setFace(java.lang.String)
      */
     @Override
     public void setFace(String face) {
@@ -85,7 +85,7 @@ HTMLFontElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLFontElement#setSize(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLFontElement#setSize(java.lang.String)
      */
     @Override
     public void setSize(String size) {

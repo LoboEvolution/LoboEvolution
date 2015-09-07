@@ -29,9 +29,9 @@ import org.lobobrowser.html.domfilter.NodeFilter;
 import org.lobobrowser.html.domimpl.DOMElementImpl;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
-import org.lobobrowser.html.w3c.HTMLCollection;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.util.Nodes;
+import org.lobobrowser.w3c.html.HTMLCollection;
 import org.w3c.dom.Node;
 
 /**
@@ -151,7 +151,7 @@ implements HTMLCollection {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLCollection#getLength()
+     * @see org.lobobrowser.w3c.html.HTMLCollection#getLength()
      */
     @Override
     public int getLength() {
@@ -163,7 +163,7 @@ implements HTMLCollection {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLCollection#item(int)
+     * @see org.lobobrowser.w3c.html.HTMLCollection#item(int)
      */
     @Override
     public Node item(int index) {
@@ -179,7 +179,7 @@ implements HTMLCollection {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLCollection#namedItem(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLCollection#namedItem(java.lang.String)
      */
     @Override
     public Node namedItem(String name) {

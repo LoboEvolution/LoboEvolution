@@ -18,7 +18,7 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.renderstate.TableCaptionRenderState;
-import org.lobobrowser.html.w3c.HTMLTableCaptionElement;
+import org.lobobrowser.w3c.html.HTMLTableCaptionElement;
 
 /**
  * The Class HTMLTableCaptionElementImpl.
@@ -38,7 +38,7 @@ implements HTMLTableCaptionElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLTableCaptionElement#getAlign()
+     * @see org.lobobrowser.w3c.html.HTMLTableCaptionElement#getAlign()
      */
     @Override
     public String getAlign() {
@@ -48,7 +48,7 @@ implements HTMLTableCaptionElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLTableCaptionElement#setAlign(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLTableCaptionElement#setAlign(java.lang.String)
      */
     @Override
     public void setAlign(String align) {

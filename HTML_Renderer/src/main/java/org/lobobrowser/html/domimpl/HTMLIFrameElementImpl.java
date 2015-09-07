@@ -28,7 +28,8 @@ import org.lobobrowser.html.dombl.FrameNode;
 import org.lobobrowser.html.js.Window;
 import org.lobobrowser.html.renderstate.IFrameRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
-import org.lobobrowser.html.w3c.HTMLIFrameElement;
+import org.lobobrowser.w3c.html.DOMSettableTokenList;
+import org.lobobrowser.w3c.html.HTMLIFrameElement;
 import org.w3c.dom.Document;
 
 /**
@@ -83,7 +84,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#getAlign()
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#getAlign()
      */
     @Override
     public String getAlign() {
@@ -92,7 +93,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#getContentDocument()
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#getContentDocument()
      */
     @Override
     public Document getContentDocument() {
@@ -121,7 +122,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#getFrameBorder()
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#getFrameBorder()
      */
     @Override
     public String getFrameBorder() {
@@ -130,7 +131,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#getHeight()
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#getHeight()
      */
     @Override
     public String getHeight() {
@@ -139,7 +140,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#getLongDesc()
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#getLongDesc()
      */
     @Override
     public String getLongDesc() {
@@ -148,7 +149,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#getMarginHeight()
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#getMarginHeight()
      */
     @Override
     public String getMarginHeight() {
@@ -157,7 +158,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#getMarginWidth()
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#getMarginWidth()
      */
     @Override
     public String getMarginWidth() {
@@ -166,7 +167,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#getName()
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#getName()
      */
     @Override
     public String getName() {
@@ -175,7 +176,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#getScrolling()
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#getScrolling()
      */
     @Override
     public String getScrolling() {
@@ -184,7 +185,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#getSrc()
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#getSrc()
      */
     @Override
     public String getSrc() {
@@ -193,7 +194,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#getWidth()
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#getWidth()
      */
     @Override
     public String getWidth() {
@@ -202,7 +203,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#setAlign(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#setAlign(java.lang.String)
      */
     @Override
     public void setAlign(String align) {
@@ -212,7 +213,7 @@ HTMLIFrameElement, FrameNode {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLIFrameElement#setFrameBorder(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLIFrameElement#setFrameBorder(java.lang.String)
      */
     @Override
     public void setFrameBorder(String frameBorder) {
@@ -221,7 +222,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#setHeight(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#setHeight(java.lang.String)
      */
     @Override
     public void setHeight(String height) {
@@ -230,7 +231,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#setLongDesc(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#setLongDesc(java.lang.String)
      */
     @Override
     public void setLongDesc(String longDesc) {
@@ -240,7 +241,7 @@ HTMLIFrameElement, FrameNode {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLIFrameElement#setMarginHeight(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLIFrameElement#setMarginHeight(java.lang.String)
      */
     @Override
     public void setMarginHeight(String marginHeight) {
@@ -250,7 +251,7 @@ HTMLIFrameElement, FrameNode {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLIFrameElement#setMarginWidth(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLIFrameElement#setMarginWidth(java.lang.String)
      */
     @Override
     public void setMarginWidth(String marginWidth) {
@@ -259,7 +260,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#setName(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#setName(java.lang.String)
      */
     @Override
     public void setName(String name) {
@@ -269,7 +270,7 @@ HTMLIFrameElement, FrameNode {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLIFrameElement#setScrolling(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLIFrameElement#setScrolling(java.lang.String)
      */
     @Override
     public void setScrolling(String scrolling) {
@@ -278,7 +279,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#setSrc(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#setSrc(java.lang.String)
      */
     @Override
     public void setSrc(String src) {
@@ -287,7 +288,7 @@ HTMLIFrameElement, FrameNode {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLIFrameElement#setWidth(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLIFrameElement#setWidth(java.lang.String)
      */
     @Override
     public void setWidth(String width) {
@@ -328,4 +329,40 @@ HTMLIFrameElement, FrameNode {
     protected RenderState createRenderState(RenderState prevRenderState) {
         return new IFrameRenderState(prevRenderState, this);
     }
+
+	@Override
+	public String getSrcdoc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSrcdoc(String srcdoc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public DOMSettableTokenList getSandbox() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSandbox(String sandbox) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getSeamless() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setSeamless(boolean seamless) {
+		// TODO Auto-generated method stub
+		
+	}
 }

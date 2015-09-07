@@ -20,8 +20,8 @@ import java.util.logging.Logger;
 
 import javax.swing.*;
 import org.lobobrowser.gui.*;
-import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.ua.*;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.lobobrowser.main.PlatformInit;
 
 

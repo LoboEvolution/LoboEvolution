@@ -13,7 +13,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.w3c.HTMLCommandElement;
+import org.lobobrowser.w3c.html.HTMLCommandElement;
 
 /**
  * The Class HTMLCommandElementImpl.
@@ -34,7 +34,7 @@ HTMLCommandElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLCommandElement#getType()
+     * @see org.lobobrowser.w3c.html.HTMLCommandElement#getType()
      */
     @Override
     public String getType() {
@@ -44,7 +44,7 @@ HTMLCommandElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLCommandElement#setType(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLCommandElement#setType(java.lang.String)
      */
     @Override
     public void setType(String type) {
@@ -54,7 +54,7 @@ HTMLCommandElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLCommandElement#setLabel(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLCommandElement#setLabel(java.lang.String)
      */
     @Override
     public void setLabel(String label) {
@@ -64,7 +64,7 @@ HTMLCommandElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLCommandElement#setIcon(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLCommandElement#setIcon(java.lang.String)
      */
     @Override
     public void setIcon(String icon) {
@@ -74,7 +74,7 @@ HTMLCommandElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLCommandElement#setDisabled(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLCommandElement#setDisabled(boolean)
      */
     @Override
     public void setDisabled(boolean disabled) {
@@ -84,7 +84,7 @@ HTMLCommandElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLCommandElement#setChecked(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLCommandElement#setChecked(boolean)
      */
     @Override
     public void setChecked(boolean checked) {
@@ -94,7 +94,7 @@ HTMLCommandElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLCommandElement#getRadiogroup()
+     * @see org.lobobrowser.w3c.html.HTMLCommandElement#getRadiogroup()
      */
     @Override
     public String getRadiogroup() {
@@ -105,7 +105,7 @@ HTMLCommandElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLCommandElement#setRadiogroup(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLCommandElement#setRadiogroup(java.lang.String)
      */
     @Override
     public void setRadiogroup(String radiogroup) {

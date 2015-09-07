@@ -20,7 +20,7 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.renderstate.DisplayRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
-import org.lobobrowser.html.w3c.HTMLLIElement;
+import org.lobobrowser.w3c.html.HTMLLIElement;
 
 /**
  * The Class HTMLLIElementImpl.
@@ -40,7 +40,7 @@ HTMLLIElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLIElement#getType()
+     * @see org.lobobrowser.w3c.html.HTMLLIElement#getType()
      */
     @Override
     public String getType() {
@@ -49,7 +49,7 @@ HTMLLIElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLIElement#setType(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLLIElement#setType(java.lang.String)
      */
     @Override
     public void setType(String type) {
@@ -58,7 +58,7 @@ HTMLLIElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLIElement#getValue()
+     * @see org.lobobrowser.w3c.html.HTMLLIElement#getValue()
      */
     @Override
     public int getValue() {
@@ -75,7 +75,7 @@ HTMLLIElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLLIElement#setValue(int)
+     * @see org.lobobrowser.w3c.html.HTMLLIElement#setValue(int)
      */
     @Override
     public void setValue(int value) {

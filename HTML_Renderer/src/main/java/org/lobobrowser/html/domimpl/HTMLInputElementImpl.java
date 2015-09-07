@@ -23,11 +23,12 @@ import java.util.logging.Level;
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.InputContext;
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.HTMLInputElement;
-import org.lobobrowser.html.w3c.HTMLOptionElement;
-import org.lobobrowser.html.w3c.ValidityState;
+import org.lobobrowser.w3c.html.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLInputElement;
+import org.lobobrowser.w3c.html.HTMLOptionElement;
+import org.lobobrowser.w3c.html.ValidityState;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.css.CSSStyleDeclaration;
 
 /**
  * The Class HTMLInputElementImpl.
@@ -77,7 +78,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getDefaultChecked()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getDefaultChecked()
      */
     @Override
     public boolean getDefaultChecked() {
@@ -86,7 +87,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setDefaultChecked(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setDefaultChecked(boolean)
      */
     @Override
     public void setDefaultChecked(boolean defaultChecked) {
@@ -121,7 +122,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getMaxLength()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getMaxLength()
      */
     @Override
     public int getMaxLength() {
@@ -131,7 +132,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setMaxLength(int)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setMaxLength(int)
      */
     @Override
     public void setMaxLength(int maxLength) {
@@ -143,7 +144,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getSize()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getSize()
      */
     @Override
     public int getSize() {
@@ -153,7 +154,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setSize(int)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setSize(int)
      */
     @Override
     public void setSize(int size) {
@@ -176,7 +177,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setType(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setType(java.lang.String)
      */
     @Override
     public void setType(String type) {
@@ -185,7 +186,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getUseMap()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getUseMap()
      */
     @Override
     public String getUseMap() {
@@ -194,7 +195,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setUseMap(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setUseMap(java.lang.String)
      */
     @Override
     public void setUseMap(String useMap) {
@@ -328,7 +329,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getAutocomplete()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getAutocomplete()
      */
     @Override
     public boolean getAutocomplete() {
@@ -339,7 +340,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setAutocomplete(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setAutocomplete(boolean)
      */
     @Override
     public void setAutocomplete(boolean autocomplete) {
@@ -350,7 +351,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getAutofocus()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getAutofocus()
      */
     @Override
     public boolean getAutofocus() {
@@ -360,7 +361,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setAutofocus(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setAutofocus(boolean)
      */
     @Override
     public void setAutofocus(boolean autofocus) {
@@ -371,7 +372,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getFiles()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getFiles()
      */
     @Override
     public File[] getFiles() {
@@ -381,7 +382,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getFormAction()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getFormAction()
      */
     @Override
     public String getFormAction() {
@@ -391,7 +392,7 @@ HTMLInputElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLInputElement#setFormAction(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLInputElement#setFormAction(java.lang.String)
      */
     @Override
     public void setFormAction(String formAction) {
@@ -401,7 +402,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getFormEnctype()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getFormEnctype()
      */
     @Override
     public String getFormEnctype() {
@@ -411,7 +412,7 @@ HTMLInputElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLInputElement#setFormEnctype(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLInputElement#setFormEnctype(java.lang.String)
      */
     @Override
     public void setFormEnctype(String formEnctype) {
@@ -421,7 +422,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getFormMethod()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getFormMethod()
      */
     @Override
     public String getFormMethod() {
@@ -431,7 +432,7 @@ HTMLInputElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLInputElement#setFormMethod(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLInputElement#setFormMethod(java.lang.String)
      */
     @Override
     public void setFormMethod(String formMethod) {
@@ -440,7 +441,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getFormNoValidate()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getFormNoValidate()
      */
     @Override
     public boolean getFormNoValidate() {
@@ -452,7 +453,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setFormNoValidate(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setFormNoValidate(boolean)
      */
     @Override
     public void setFormNoValidate(boolean formNoValidate) {
@@ -462,7 +463,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getFormTarget()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getFormTarget()
      */
     @Override
     public String getFormTarget() {
@@ -472,7 +473,7 @@ HTMLInputElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLInputElement#setFormTarget(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLInputElement#setFormTarget(java.lang.String)
      */
     @Override
     public void setFormTarget(String formTarget) {
@@ -482,7 +483,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getHeight()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getHeight()
      */
     @Override
     public String getHeight() {
@@ -491,7 +492,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setHeight(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setHeight(java.lang.String)
      */
     @Override
     public void setHeight(String height) {
@@ -501,7 +502,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getIndeterminate()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getIndeterminate()
      */
     @Override
     public boolean getIndeterminate() {
@@ -511,7 +512,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setIndeterminate(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setIndeterminate(boolean)
      */
     @Override
     public void setIndeterminate(boolean indeterminate) {
@@ -521,7 +522,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getList()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getList()
      */
     @Override
     public HTMLElement getList() {
@@ -531,7 +532,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getMax()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getMax()
      */
     @Override
     public String getMax() {
@@ -540,7 +541,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setMax(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setMax(java.lang.String)
      */
     @Override
     public void setMax(String max) {
@@ -549,7 +550,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getMin()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getMin()
      */
     @Override
     public String getMin() {
@@ -558,7 +559,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setMin(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setMin(java.lang.String)
      */
     @Override
     public void setMin(String min) {
@@ -568,7 +569,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getMultiple()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getMultiple()
      */
     @Override
     public boolean getMultiple() {
@@ -578,7 +579,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setMultiple(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setMultiple(boolean)
      */
     @Override
     public void setMultiple(boolean multiple) {
@@ -589,7 +590,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getPattern()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getPattern()
      */
     @Override
     public String getPattern() {
@@ -598,7 +599,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setPattern(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setPattern(java.lang.String)
      */
     @Override
     public void setPattern(String pattern) {
@@ -608,7 +609,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getRequired()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getRequired()
      */
     @Override
     public boolean getRequired() {
@@ -618,7 +619,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setRequired(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setRequired(boolean)
      */
     @Override
     public void setRequired(boolean required) {
@@ -629,7 +630,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getStep()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getStep()
      */
     @Override
     public String getStep() {
@@ -638,7 +639,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setStep(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setStep(java.lang.String)
      */
     @Override
     public void setStep(String step) {
@@ -647,7 +648,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getValueAsDate()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getValueAsDate()
      */
     @Override
     public long getValueAsDate() {
@@ -657,7 +658,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setValueAsDate(long)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setValueAsDate(long)
      */
     @Override
     public void setValueAsDate(long valueAsDate) {
@@ -667,27 +668,17 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getValueAsNumber()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getValueAsNumber()
      */
     @Override
-    public float getValueAsNumber() {
+    public double getValueAsNumber() {
         // TODO Auto-generated method stub
         return 0;
     }
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setValueAsNumber(float)
-     */
-    @Override
-    public void setValueAsNumber(float valueAsNumber) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getSelectedOption()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getSelectedOption()
      */
     @Override
     public HTMLOptionElement getSelectedOption() {
@@ -697,7 +688,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getWidth()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getWidth()
      */
     @Override
     public String getWidth() {
@@ -710,7 +701,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setWidth(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setWidth(java.lang.String)
      */
     @Override
     public void setWidth(String width) {
@@ -721,7 +712,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#stepUp()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#stepUp()
      */
     @Override
     public void stepUp() {
@@ -731,7 +722,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#stepUp(int)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#stepUp(int)
      */
     @Override
     public void stepUp(int n) {
@@ -741,7 +732,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#stepDown()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#stepDown()
      */
     @Override
     public void stepDown() {
@@ -751,7 +742,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#stepDown(int)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#stepDown(int)
      */
     @Override
     public void stepDown(int n) {
@@ -761,7 +752,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getWillValidate()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getWillValidate()
      */
     @Override
     public boolean getWillValidate() {
@@ -771,7 +762,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getValidity()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getValidity()
      */
     @Override
     public ValidityState getValidity() {
@@ -781,7 +772,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getValidationMessage()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getValidationMessage()
      */
     @Override
     public String getValidationMessage() {
@@ -791,7 +782,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#checkValidity()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#checkValidity()
      */
     @Override
     public boolean checkValidity() {
@@ -802,7 +793,7 @@ HTMLInputElement {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLInputElement#setCustomValidity(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLInputElement#setCustomValidity(java.lang.String)
      */
     @Override
     public void setCustomValidity(String error) {
@@ -812,7 +803,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getLabels()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getLabels()
      */
     @Override
     public NodeList getLabels() {
@@ -822,7 +813,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getSelectionStart()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getSelectionStart()
      */
     @Override
     public int getSelectionStart() {
@@ -832,7 +823,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setSelectionStart(int)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setSelectionStart(int)
      */
     @Override
     public void setSelectionStart(int selectionStart) {
@@ -842,7 +833,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#getSelectionEnd()
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#getSelectionEnd()
      */
     @Override
     public int getSelectionEnd() {
@@ -852,7 +843,7 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setSelectionEnd(int)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setSelectionEnd(int)
      */
     @Override
     public void setSelectionEnd(int selectionEnd) {
@@ -862,11 +853,53 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLInputElement#setSelectionRange(int, int)
+     * @see org.lobobrowser.w3c.html.HTMLInputElement#setSelectionRange(int, int)
      */
     @Override
     public void setSelectionRange(int start, int end) {
         // TODO Auto-generated method stub
 
     }
+    
+	@Override
+	public void setAutocomplete(String autocomplete) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getDirName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDirName(String dirName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setValueAsNumber(double valueAsNumber) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getSelectionDirection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSelectionDirection(String selectionDirection) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSelectionRange(int start, int end, String direction) {
+		// TODO Auto-generated method stub
+		
+	}
 }

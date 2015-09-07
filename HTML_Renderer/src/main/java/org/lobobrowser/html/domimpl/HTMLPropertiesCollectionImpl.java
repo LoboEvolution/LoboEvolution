@@ -13,7 +13,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.w3c.HTMLPropertiesCollection;
+import org.lobobrowser.w3c.html.HTMLPropertiesCollection;
 import org.w3c.dom.DOMStringList;
 import org.w3c.dom.Node;
 
@@ -24,7 +24,7 @@ public class HTMLPropertiesCollectionImpl implements HTMLPropertiesCollection {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLCollection#getLength()
+     * @see org.lobobrowser.w3c.html.HTMLCollection#getLength()
      */
     @Override
     public int getLength() {
@@ -34,7 +34,7 @@ public class HTMLPropertiesCollectionImpl implements HTMLPropertiesCollection {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLCollection#item(int)
+     * @see org.lobobrowser.w3c.html.HTMLCollection#item(int)
      */
     @Override
     public Node item(int index) {
@@ -45,7 +45,7 @@ public class HTMLPropertiesCollectionImpl implements HTMLPropertiesCollection {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.HTMLPropertiesCollection#namedItem(java.lang.String)
+     * org.lobobrowser.w3c.html.HTMLPropertiesCollection#namedItem(java.lang.String)
      */
     @Override
     public Node namedItem(String name) {
@@ -55,7 +55,7 @@ public class HTMLPropertiesCollectionImpl implements HTMLPropertiesCollection {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLPropertiesCollection#getNames()
+     * @see org.lobobrowser.w3c.html.HTMLPropertiesCollection#getNames()
      */
     @Override
     public DOMStringList getNames() {

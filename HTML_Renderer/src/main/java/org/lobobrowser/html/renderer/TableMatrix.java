@@ -43,7 +43,7 @@ import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderThreadState;
-import org.lobobrowser.html.w3c.HTMLTableRowElement;
+import org.lobobrowser.w3c.html.HTMLTableRowElement;
 
 /**
  * The Class TableMatrix.

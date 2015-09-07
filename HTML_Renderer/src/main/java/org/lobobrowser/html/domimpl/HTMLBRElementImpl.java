@@ -21,7 +21,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.w3c.HTMLBRElement;
+import org.lobobrowser.w3c.html.HTMLBRElement;
 
 /**
  * The Class HTMLBRElementImpl.
@@ -40,7 +40,7 @@ public class HTMLBRElementImpl extends HTMLElementImpl implements HTMLBRElement 
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLBRElement#getClear()
+     * @see org.lobobrowser.w3c.html.HTMLBRElement#getClear()
      */
     @Override
     public String getClear() {
@@ -49,7 +49,7 @@ public class HTMLBRElementImpl extends HTMLElementImpl implements HTMLBRElement 
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLBRElement#setClear(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLBRElement#setClear(java.lang.String)
      */
     @Override
     public void setClear(String clear) {

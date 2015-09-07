@@ -27,7 +27,7 @@ import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.js.Executor;
-import org.lobobrowser.html.w3c.HTMLFormElement;
+import org.lobobrowser.w3c.html.HTMLFormElement;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Node;
 

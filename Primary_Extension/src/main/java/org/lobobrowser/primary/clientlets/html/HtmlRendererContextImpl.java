@@ -40,15 +40,15 @@ import org.lobobrowser.html.domimpl.HTMLAnchorElementImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
-import org.lobobrowser.html.w3c.HTMLAnchorElement;
-import org.lobobrowser.html.w3c.HTMLCollection;
-import org.lobobrowser.html.w3c.HTMLElement;
 import org.lobobrowser.primary.info.LocalParameterInfo;
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.ParameterInfo;
 import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.ua.TargetType;
+import org.lobobrowser.w3c.html.HTMLAnchorElement;
+import org.lobobrowser.w3c.html.HTMLCollection;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.Document;
 
 /**

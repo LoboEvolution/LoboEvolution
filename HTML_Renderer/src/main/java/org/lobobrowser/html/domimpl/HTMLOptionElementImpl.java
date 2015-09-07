@@ -21,9 +21,9 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.w3c.HTMLFormElement;
-import org.lobobrowser.html.w3c.HTMLOptionElement;
-import org.lobobrowser.html.w3c.HTMLSelectElement;
+import org.lobobrowser.w3c.html.HTMLFormElement;
+import org.lobobrowser.w3c.html.HTMLOptionElement;
+import org.lobobrowser.w3c.html.HTMLSelectElement;
 
 /**
  * The Class HTMLOptionElementImpl.
@@ -43,7 +43,7 @@ HTMLOptionElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOptionElement#getDefaultSelected()
+     * @see org.lobobrowser.w3c.html.HTMLOptionElement#getDefaultSelected()
      */
     @Override
     public boolean getDefaultSelected() {
@@ -61,7 +61,7 @@ HTMLOptionElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOptionElement#getForm()
+     * @see org.lobobrowser.w3c.html.HTMLOptionElement#getForm()
      */
     @Override
     public HTMLFormElement getForm() {
@@ -70,7 +70,7 @@ HTMLOptionElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOptionElement#getIndex()
+     * @see org.lobobrowser.w3c.html.HTMLOptionElement#getIndex()
      */
     @Override
     public int getIndex() {
@@ -95,7 +95,7 @@ HTMLOptionElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOptionElement#getSelected()
+     * @see org.lobobrowser.w3c.html.HTMLOptionElement#getSelected()
      */
     @Override
     public boolean getSelected() {
@@ -104,7 +104,7 @@ HTMLOptionElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOptionElement#getText()
+     * @see org.lobobrowser.w3c.html.HTMLOptionElement#getText()
      */
     @Override
     public String getText() {
@@ -123,7 +123,7 @@ HTMLOptionElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOptionElement#getValue()
+     * @see org.lobobrowser.w3c.html.HTMLOptionElement#getValue()
      */
     @Override
     public String getValue() {
@@ -132,7 +132,7 @@ HTMLOptionElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOptionElement#setDefaultSelected(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLOptionElement#setDefaultSelected(boolean)
      */
     @Override
     public void setDefaultSelected(boolean defaultSelected) {
@@ -142,7 +142,7 @@ HTMLOptionElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOptionElement#setDisabled(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLOptionElement#setDisabled(boolean)
      */
     @Override
     public void setDisabled(boolean disabled) {
@@ -151,7 +151,7 @@ HTMLOptionElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOptionElement#setLabel(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLOptionElement#setLabel(java.lang.String)
      */
     @Override
     public void setLabel(String label) {
@@ -173,7 +173,7 @@ HTMLOptionElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOptionElement#setSelected(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLOptionElement#setSelected(boolean)
      */
     @Override
     public void setSelected(boolean selected) {
@@ -199,7 +199,7 @@ HTMLOptionElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLOptionElement#setValue(java.lang.String)
+     * @see org.lobobrowser.w3c.html.HTMLOptionElement#setValue(java.lang.String)
      */
     @Override
     public void setValue(String value) {

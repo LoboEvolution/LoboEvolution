@@ -46,7 +46,7 @@ public class DOMTextImpl extends DOMCharacterDataImpl implements Text {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.Text#isElementContentWhitespace()
+     * @see org.lobobrowser.w3c.html.Text#isElementContentWhitespace()
      */
     @Override
     public boolean isElementContentWhitespace() {
@@ -56,7 +56,7 @@ public class DOMTextImpl extends DOMCharacterDataImpl implements Text {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.Text#replaceWholeText(String)
+     * @see org.lobobrowser.w3c.html.Text#replaceWholeText(String)
      */
     @Override
     public Text replaceWholeText(String content) throws DOMException {
@@ -70,7 +70,7 @@ public class DOMTextImpl extends DOMCharacterDataImpl implements Text {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.Text#splitText(int)
+     * @see org.lobobrowser.w3c.html.Text#splitText(int)
      */
     @Override
     public Text splitText(int offset) throws DOMException {
@@ -94,7 +94,7 @@ public class DOMTextImpl extends DOMCharacterDataImpl implements Text {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.Text#getwholeText()
+     * @see org.lobobrowser.w3c.html.Text#getwholeText()
      */
     @Override
     public String getWholeText() {

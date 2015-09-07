@@ -23,8 +23,8 @@ package org.lobobrowser.html.jsimpl;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.events.CompositionEvent;
+import org.lobobrowser.w3c.events.CompositionEvent;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.views.AbstractView;
 
 /**
@@ -91,7 +91,7 @@ CompositionEvent {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.events.CompositionEvent#initCompositionEvent(java
+     * org.lobobrowser.w3c.events.CompositionEvent#initCompositionEvent(java
      * .lang.String, boolean, boolean, org.w3c.dom.views.AbstractView,
      * java.lang.String)
      */
@@ -107,7 +107,7 @@ CompositionEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.CompositionEvent#getData()
+     * @see org.lobobrowser.w3c.events.CompositionEvent#getData()
      */
     @Override
     public String getData() {

@@ -14,7 +14,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.w3c.HTMLDetailsElement;
+import org.lobobrowser.w3c.html.HTMLDetailsElement;
 
 /**
  * The Class HTMLDetailsElementImpl.
@@ -35,7 +35,7 @@ HTMLDetailsElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLDetailsElement#getOpen()
+     * @see org.lobobrowser.w3c.html.HTMLDetailsElement#getOpen()
      */
     @Override
     public boolean getOpen() {
@@ -45,7 +45,7 @@ HTMLDetailsElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.HTMLDetailsElement#setOpen(boolean)
+     * @see org.lobobrowser.w3c.html.HTMLDetailsElement#setOpen(boolean)
      */
     @Override
     public void setOpen(boolean open) {

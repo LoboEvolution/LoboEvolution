@@ -23,8 +23,8 @@ package org.lobobrowser.html.jsimpl;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.events.TextEvent;
+import org.lobobrowser.w3c.events.TextEvent;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.views.AbstractView;
 
 /**
@@ -89,7 +89,7 @@ public class TextEventImpl extends UIEventImpl implements TextEvent {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.events.TextEvent#initTextEvent(java.lang.String,
+     * org.lobobrowser.w3c.events.TextEvent#initTextEvent(java.lang.String,
      * boolean, boolean, org.w3c.dom.views.AbstractView, java.lang.String)
      */
     @Override
@@ -108,7 +108,7 @@ public class TextEventImpl extends UIEventImpl implements TextEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.TextEvent#getData()
+     * @see org.lobobrowser.w3c.events.TextEvent#getData()
      */
     @Override
     public String getData() {

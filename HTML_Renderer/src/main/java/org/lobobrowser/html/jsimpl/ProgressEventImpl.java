@@ -23,8 +23,8 @@ package org.lobobrowser.html.jsimpl;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.events.ProgressEvent;
+import org.lobobrowser.w3c.events.ProgressEvent;
+import org.lobobrowser.w3c.html.HTMLElement;
 
 /**
  * The Class ProgressEventImpl.
@@ -92,7 +92,7 @@ public class ProgressEventImpl extends EventImpl implements ProgressEvent {
     /*
      * (non-Javadoc)
      * @see
-     * org.lobobrowser.html.w3c.events.ProgressEvent#initProgressEvent(java.lang
+     * org.lobobrowser.w3c.events.ProgressEvent#initProgressEvent(java.lang
      * .String, boolean, boolean, boolean, int, int)
      */
     @Override
@@ -109,7 +109,7 @@ public class ProgressEventImpl extends EventImpl implements ProgressEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.ProgressEvent#getLengthComputable()
+     * @see org.lobobrowser.w3c.events.ProgressEvent#getLengthComputable()
      */
     @Override
     public boolean getLengthComputable() {
@@ -118,7 +118,7 @@ public class ProgressEventImpl extends EventImpl implements ProgressEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.ProgressEvent#getLoaded()
+     * @see org.lobobrowser.w3c.events.ProgressEvent#getLoaded()
      */
     @Override
     public int getLoaded() {
@@ -127,7 +127,7 @@ public class ProgressEventImpl extends EventImpl implements ProgressEvent {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.html.w3c.events.ProgressEvent#getTotal()
+     * @see org.lobobrowser.w3c.events.ProgressEvent#getTotal()
      */
     @Override
     public int getTotal() {

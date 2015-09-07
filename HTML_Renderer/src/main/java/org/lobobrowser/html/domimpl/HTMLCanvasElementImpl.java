@@ -28,16 +28,17 @@ import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.info.CanvasInfo;
 import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.html.w3c.CanvasGradient;
-import org.lobobrowser.html.w3c.CanvasImageData;
-import org.lobobrowser.html.w3c.CanvasPattern;
-import org.lobobrowser.html.w3c.CanvasRenderingContext;
-import org.lobobrowser.html.w3c.CanvasRenderingContext2D;
-import org.lobobrowser.html.w3c.HTMLCanvasElement;
-import org.lobobrowser.html.w3c.HTMLImageElement;
-import org.lobobrowser.html.w3c.TextMetrics;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.util.gui.FontFactory;
+import org.lobobrowser.w3c.file.FileCallback;
+import org.lobobrowser.w3c.html.CanvasGradient;
+import org.lobobrowser.w3c.html.CanvasImageData;
+import org.lobobrowser.w3c.html.CanvasPattern;
+import org.lobobrowser.w3c.html.CanvasRenderingContext;
+import org.lobobrowser.w3c.html.CanvasRenderingContext2D;
+import org.lobobrowser.w3c.html.HTMLCanvasElement;
+import org.lobobrowser.w3c.html.HTMLImageElement;
+import org.lobobrowser.w3c.html.TextMetrics;
 
 /**
  * The Class HTMLCanvasElementImpl.
@@ -193,7 +194,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	public CanvasRenderingContext getContext(String contextId) {
 		return this;
 	}
-
+	
 	@Override
 	public HTMLCanvasElement getCanvas() {
 		return this;
@@ -881,5 +882,17 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	 */
 	public void setListCanvasInfo(ArrayList<CanvasInfo> listCanvasInfo) {
 		this.listCanvasInfo = listCanvasInfo;
+	}
+
+	@Override
+	public void toBlob(FileCallback callback) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void toBlob(FileCallback callback, String type, Object... args) {
+		// TODO Auto-generated method stub
+		
 	}
 }

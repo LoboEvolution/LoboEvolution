@@ -33,7 +33,7 @@ import javax.imageio.ImageIO;
 
 import org.lobobrowser.html.domimpl.HTMLCanvasElementImpl;
 import org.lobobrowser.html.info.CanvasInfo;
-import org.lobobrowser.html.w3c.HTMLCanvasElement;
+import org.lobobrowser.w3c.html.HTMLCanvasElement;
 
 /**
  * The Class CanvasControl.

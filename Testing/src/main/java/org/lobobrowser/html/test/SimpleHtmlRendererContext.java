@@ -49,14 +49,15 @@ import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
-import org.lobobrowser.html.w3c.HTMLAnchorElement;
-import org.lobobrowser.html.w3c.HTMLCollection;
-import org.lobobrowser.html.w3c.HTMLElement;
-import org.lobobrowser.html.w3c.HTMLLinkElement;
 import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.BufferExceededException;
 import org.lobobrowser.util.io.RecordedInputStream;
+import org.lobobrowser.w3c.html.HTMLAnchorElement;
+import org.lobobrowser.w3c.html.HTMLCollection;
+import org.lobobrowser.w3c.html.HTMLElement;
+import org.lobobrowser.w3c.html.HTMLLinkElement;
+import org.w3c.dom.Node;
 
 /**
  * The <code>SimpleHtmlRendererContext</code> class implements the
@@ -277,7 +278,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
             HtmlRendererContext topCtx = this.getTop();
             HTMLCollection frames = topCtx.getFrames();
             if (frames != null) {
-                org.w3c.dom.Node frame = frames.namedItem(target);
+                Node frame = frames.namedItem(target);
                 if (logger.isLoggable(Level.INFO)) {
                     logger.info("submitForm(): Frame matching target=" + target
                             + " is " + frame);
