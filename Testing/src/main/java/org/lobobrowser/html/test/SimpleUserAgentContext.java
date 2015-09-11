@@ -51,11 +51,11 @@ public class SimpleUserAgentContext implements UserAgentContext {
             .getLogger(SimpleUserAgentContext.class.getName());
 
     /** The Constant mediaNames. */
-    private static final Set mediaNames = new HashSet();
+    private static final Set<String> mediaNames = new HashSet<String>();
 
     static {
         // Media names claimed by this context.
-        Set mn = mediaNames;
+        Set<String> mn = mediaNames;
         mn.add("screen");
         mn.add("tv");
         mn.add("tty");
@@ -290,9 +290,9 @@ public class SimpleUserAgentContext implements UserAgentContext {
         if (handler == null) {
             return "";
         }
-        Map results;
+        Map<?, ?> results;
         try {
-            results = handler.get(url.toURI(), new HashMap());
+            results = handler.get(url.toURI(), new HashMap<String, List<String>>());
         } catch (Exception err) {
             logger.log(Level.WARNING, "getCookie()", err);
             return "";
@@ -301,15 +301,15 @@ public class SimpleUserAgentContext implements UserAgentContext {
             return "";
         }
         StringBuffer buffer = new StringBuffer();
-        Iterator i = results.entrySet().iterator();
+        Iterator<?> i = results.entrySet().iterator();
         boolean firstTime = true;
         while (i.hasNext()) {
             Map.Entry entry = (Map.Entry) i.next();
             String key = (String) entry.getKey();
             if ("Cookie".equalsIgnoreCase(key)
                     || "Cookie2".equalsIgnoreCase(key)) {
-                List list = (List) entry.getValue();
-                Iterator li = list.iterator();
+                List<?> list = (List<?>) entry.getValue();
+                Iterator<?> li = list.iterator();
                 while (li.hasNext()) {
                     String value = (String) li.next();
                     if (firstTime) {
@@ -364,7 +364,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
         if (handler == null) {
             return;
         }
-        Map headers = new HashMap(2);
+        Map<String, List<String>> headers = new HashMap<String, List<String>>(2);
         headers.put("Set-Cookie", Collections.singletonList(cookieSpec));
         try {
             handler.put(url.toURI(), headers);

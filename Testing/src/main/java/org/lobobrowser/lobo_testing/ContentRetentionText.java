@@ -50,9 +50,6 @@ public class ContentRetentionText {
         System.out.println("### RAM cache size: " + cacheInfo.approximateSize);
     }
 
-    /** The retain vc. */
-    private static Object retainVc;
-
     /**
      * Gets the new url.
      *
@@ -61,7 +58,6 @@ public class ContentRetentionText {
     public static String getNewURL() {
         VolatileContentImpl vc = new VolatileContentImpl("text/html",
                 new byte[0]);
-        retainVc = vc;
         return vc.getURL().toExternalForm();
     }
 
@@ -99,9 +95,6 @@ public class ContentRetentionText {
      */
     private static class LocalComponentContent extends AbstractComponentContent {
         
-        /** The balderdash. */
-        private final byte[] balderdash = new byte[5000000];
-
         /* (non-Javadoc)
          * @see org.lobobrowser.clientlet.AbstractComponentContent#getComponent()
          */

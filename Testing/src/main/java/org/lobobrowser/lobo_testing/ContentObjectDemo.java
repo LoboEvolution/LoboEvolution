@@ -35,7 +35,7 @@ public class ContentObjectDemo extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/** The links combo box. */
-    private final JComboBox linksComboBox;
+    private final JComboBox<LocationItem> linksComboBox;
     
     /** The browser panel. */
     private final BrowserPanel browserPanel;
@@ -69,7 +69,7 @@ public class ContentObjectDemo extends JFrame {
         JPanel linksPanel = new JPanel();
         linksPanel.setBorder(new EtchedBorder(EtchedBorder.RAISED));
         linksPanel.setLayout(new BoxLayout(linksPanel, BoxLayout.X_AXIS));
-        JComboBox linksComboBox = new JComboBox();
+        JComboBox<LocationItem> linksComboBox = new JComboBox<LocationItem>();
         this.linksComboBox = linksComboBox;
         JButton linksButton = new JButton();
         linksButton.setAction(new LinksAction());
@@ -93,7 +93,7 @@ public class ContentObjectDemo extends JFrame {
     }
 
     private void updateLinks() {
-        JComboBox comboBox = this.linksComboBox;
+        JComboBox<LocationItem> comboBox = this.linksComboBox;
         comboBox.removeAllItems();
         // The content object should be of type HTMLDocumentImpl
         // when we're rendering a HTML page.

@@ -44,9 +44,6 @@ public class JavaCompilationLoop1 {
         System.out.println("### RAM cache size: " + cacheInfo.approximateSize);
     }
 
-    /** The retain vc. */
-    private static Object retainVc;
-
     /**
      * Gets the new url.
      *
@@ -57,7 +54,6 @@ public class JavaCompilationLoop1 {
         byte[] content = getNewContent();
         VolatileContentImpl vc = new VolatileContentImpl(
                 "text/x-java-source; charset=UTF-8", content);
-        retainVc = vc;
         return vc.getURL().toExternalForm();
     }
 

@@ -24,7 +24,10 @@ import org.lobobrowser.main.PlatformInit;
  * The Class BrowserPanelNoSecurity.
  */
 public class BrowserPanelNoSecurity extends JFrame {
-    public static void main(String[] args) throws Exception {
+    
+	private static final long serialVersionUID = 1L;
+
+	public static void main(String[] args) throws Exception {
         // Set Locale to Chinese.
         Locale.setDefault(Locale.CHINESE);
 

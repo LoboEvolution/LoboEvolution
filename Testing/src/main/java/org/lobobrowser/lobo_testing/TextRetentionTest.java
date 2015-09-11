@@ -46,9 +46,6 @@ public class TextRetentionTest {
         System.out.println("### RAM cache size: " + cacheInfo.approximateSize);
     }
 
-    /** The retain vc. */
-    private static Object retainVc;
-
     /**
      * Gets the new url.
      *
@@ -65,7 +62,6 @@ public class TextRetentionTest {
         buffer.append("</body>");
         byte[] content = buffer.toString().getBytes();
         VolatileContentImpl vc = new VolatileContentImpl("text/html", content);
-        retainVc = vc;
         return vc.getURL().toExternalForm();
     }
 }

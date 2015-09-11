@@ -24,7 +24,9 @@ import org.lobobrowser.gui.*;
  */
 public class TestWindow extends JFrame {
     
-    /** The browser panel. */
+    
+	private static final long serialVersionUID = 1L;
+	/** The browser panel. */
     private final BrowserPanel browserPanel;
 
     public TestWindow() {

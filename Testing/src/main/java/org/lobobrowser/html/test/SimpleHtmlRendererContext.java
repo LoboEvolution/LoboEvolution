@@ -56,7 +56,6 @@ import org.lobobrowser.util.io.RecordedInputStream;
 import org.lobobrowser.w3c.html.HTMLAnchorElement;
 import org.lobobrowser.w3c.html.HTMLCollection;
 import org.lobobrowser.w3c.html.HTMLElement;
-import org.lobobrowser.w3c.html.HTMLLinkElement;
 import org.w3c.dom.Node;
 
 /**

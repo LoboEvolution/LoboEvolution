@@ -31,10 +31,7 @@ import org.lobobrowser.main.PlatformInit;
 public class VetoableNavigationDemo extends JFrame {
     
     private static final long serialVersionUID = 1L;
-	/** The browser panel. */
-    private final BrowserPanel browserPanel;
-
-    public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
         // We'll disable all logging but WARNING.
         Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
 
@@ -53,7 +50,6 @@ public class VetoableNavigationDemo extends JFrame {
 
         // Create a BrowserPanel and set a default home page.
         final BrowserPanel bp = new BrowserPanel();
-        this.browserPanel = bp;
         bp.navigate("http://www.google.com");
 
         // Add a navigation listener.

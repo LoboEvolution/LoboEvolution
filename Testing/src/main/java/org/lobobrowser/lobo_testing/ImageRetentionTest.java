@@ -59,9 +59,6 @@ public class ImageRetentionTest {
     /** The Constant REMOTE_IMAGE_URL. */
     private static final String REMOTE_IMAGE_URL = "http://lobobrowser.org/images/LoboLogo32.png";
     
-    /** The retain vc. */
-    private static Object retainVc;
-
     private static void addImages(StringBuffer buffer, int count, String baseURL) {
         for (int i = 0; i < count; i++) {
             buffer.append("<img width=40 height=30 hspace=4 vspace=4 src=\"");
@@ -84,7 +81,6 @@ public class ImageRetentionTest {
         buffer.append("</body>");
         byte[] content = buffer.toString().getBytes();
         VolatileContentImpl vc = new VolatileContentImpl("text/html", content);
-        retainVc = vc;
         return vc.getURL().toExternalForm();
     }
 }
