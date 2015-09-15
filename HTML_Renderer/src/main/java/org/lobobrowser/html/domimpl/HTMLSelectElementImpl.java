@@ -29,10 +29,8 @@ import org.lobobrowser.w3c.html.HTMLCollection;
 import org.lobobrowser.w3c.html.HTMLElement;
 import org.lobobrowser.w3c.html.HTMLOptionsCollection;
 import org.lobobrowser.w3c.html.HTMLSelectElement;
-import org.lobobrowser.w3c.html.ValidityState;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.DOMException;
-import org.w3c.dom.NodeList;
 
 /**
  * The Class HTMLSelectElementImpl.
@@ -318,120 +316,6 @@ HTMLSelectElement {
 
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSelectElement#item(int)
-     */
-    @Override
-    public Object item(int index) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSelectElement#namedItem(java.lang.String)
-     */
-    @Override
-    public Object namedItem(String name) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSelectElement#add(org.lobobrowser.w3c.html.
-     * HTMLElement)
-     */
-    @Override
-    public void add(HTMLElement element) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSelectElement#add(org.lobobrowser.w3c.html.
-     * HTMLElement, int)
-     */
-    @Override
-    public void add(HTMLElement element, int before) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getSelectedOptions()
-     */
-    @Override
-    public HTMLCollection getSelectedOptions() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getWillValidate()
-     */
-    @Override
-    public boolean getWillValidate() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getValidity()
-     */
-    @Override
-    public ValidityState getValidity() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getValidationMessage()
-     */
-    @Override
-    public String getValidationMessage() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSelectElement#checkValidity()
-     */
-    @Override
-    public boolean checkValidity() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.w3c.html.HTMLSelectElement#setCustomValidity(java.lang.String
-     * )
-     */
-    @Override
-    public void setCustomValidity(String error) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSelectElement#getLabels()
-     */
-    @Override
-    public NodeList getLabels() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 	@Override
 	public boolean getRequired() {
 		// TODO Auto-generated method stub
@@ -442,5 +326,35 @@ HTMLSelectElement {
 	public void setRequired(boolean required) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Object item(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object namedItem(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void add(HTMLElement element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void add(HTMLElement element, int before) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HTMLCollection getSelectedOptions() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -12,9 +12,6 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Jan 15, 2006
- */
 package org.lobobrowser.html.domimpl;
 
 import java.io.File;
@@ -23,12 +20,7 @@ import java.util.logging.Level;
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.InputContext;
-import org.lobobrowser.w3c.html.HTMLElement;
 import org.lobobrowser.w3c.html.HTMLInputElement;
-import org.lobobrowser.w3c.html.HTMLOptionElement;
-import org.lobobrowser.w3c.html.ValidityState;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.css.CSSStyleDeclaration;
 
 /**
  * The Class HTMLInputElementImpl.
@@ -499,37 +491,7 @@ HTMLInputElement {
         this.setAttribute(HtmlAttributeProperties.HEIGHT, height);
 
     }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#getIndeterminate()
-     */
-    @Override
-    public boolean getIndeterminate() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#setIndeterminate(boolean)
-     */
-    @Override
-    public void setIndeterminate(boolean indeterminate) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#getList()
-     */
-    @Override
-    public HTMLElement getList() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
+    
     /*
      * (non-Javadoc)
      * @see org.lobobrowser.w3c.html.HTMLInputElement#getMax()
@@ -648,46 +610,6 @@ HTMLInputElement {
 
     /*
      * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#getValueAsDate()
-     */
-    @Override
-    public long getValueAsDate() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#setValueAsDate(long)
-     */
-    @Override
-    public void setValueAsDate(long valueAsDate) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#getValueAsNumber()
-     */
-    @Override
-    public double getValueAsNumber() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#getSelectedOption()
-     */
-    @Override
-    public HTMLOptionElement getSelectedOption() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
      * @see org.lobobrowser.w3c.html.HTMLInputElement#getWidth()
      */
     @Override
@@ -709,196 +631,9 @@ HTMLInputElement {
             this.setAttribute(HtmlAttributeProperties.WIDTH, width);
         }
     }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#stepUp()
-     */
-    @Override
-    public void stepUp() {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#stepUp(int)
-     */
-    @Override
-    public void stepUp(int n) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#stepDown()
-     */
-    @Override
-    public void stepDown() {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#stepDown(int)
-     */
-    @Override
-    public void stepDown(int n) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#getWillValidate()
-     */
+    
     @Override
     public boolean getWillValidate() {
         return true;
     }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#getValidity()
-     */
-    @Override
-    public ValidityState getValidity() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#getValidationMessage()
-     */
-    @Override
-    public String getValidationMessage() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#checkValidity()
-     */
-    @Override
-    public boolean checkValidity() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.w3c.html.HTMLInputElement#setCustomValidity(java.lang.String)
-     */
-    @Override
-    public void setCustomValidity(String error) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#getLabels()
-     */
-    @Override
-    public NodeList getLabels() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#getSelectionStart()
-     */
-    @Override
-    public int getSelectionStart() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#setSelectionStart(int)
-     */
-    @Override
-    public void setSelectionStart(int selectionStart) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#getSelectionEnd()
-     */
-    @Override
-    public int getSelectionEnd() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#setSelectionEnd(int)
-     */
-    @Override
-    public void setSelectionEnd(int selectionEnd) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLInputElement#setSelectionRange(int, int)
-     */
-    @Override
-    public void setSelectionRange(int start, int end) {
-        // TODO Auto-generated method stub
-
-    }
-    
-	@Override
-	public void setAutocomplete(String autocomplete) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getDirName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setDirName(String dirName) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setValueAsNumber(double valueAsNumber) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getSelectionDirection() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setSelectionDirection(String selectionDirection) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setSelectionRange(int start, int end, String direction) {
-		// TODO Auto-generated method stub
-		
-	}
 }
