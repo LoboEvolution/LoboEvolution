@@ -217,8 +217,7 @@ HTMLTextAreaElement {
      */
     @Override
     public boolean getWillValidate() {
-        // TODO Auto-generated method stub
-        return false;
+    	 return true;
     }
 
     /*
