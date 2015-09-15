@@ -27,9 +27,13 @@ import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.js.Executor;
+import org.lobobrowser.w3c.html.HTMLElement;
 import org.lobobrowser.w3c.html.HTMLFormElement;
+import org.lobobrowser.w3c.html.HTMLOptionElement;
+import org.lobobrowser.w3c.html.ValidityState;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * The Class HTMLBaseInputElement.
@@ -37,640 +41,806 @@ import org.w3c.dom.Node;
 public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 
 	/** The input context. */
-    protected InputContext inputContext;
+	protected InputContext inputContext;
 
-    /** The deferred value. */
-    protected String deferredValue;
+	/** The deferred value. */
+	protected String deferredValue;
 
-    /** The deferred checked. */
-    protected Boolean deferredChecked;
+	/** The deferred checked. */
+	protected Boolean deferredChecked;
 
-    /** The deferred readonly. */
-    protected Boolean deferredReadonly;
+	/** The deferred readonly. */
+	protected Boolean deferredReadonly;
 
-    /** The deferred disabled. */
-    protected Boolean deferredDisabled;
-    
-    /**
-     * Instantiates a new HTML base input element.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLBaseInputElement(String name) {
-        super(name);
-    }
+	/** The deferred disabled. */
+	protected Boolean deferredDisabled;
 
-    /**
-     * Sets the input context.
-     *
-     * @param ic
-     *            the new input context
-     */
-    public void setInputContext(InputContext ic) {
-        String dv = null;
-        Boolean defDisabled = null;
-        Boolean defReadonly = null;
-        Boolean defChecked = null;
-        synchronized (this) {
-            this.inputContext = ic;
-            if (ic != null) {
-                dv = this.deferredValue;
-                defDisabled = this.deferredDisabled;
-                defReadonly = this.deferredReadonly;
-                defChecked = this.deferredChecked;
-            }
-        }
-        if (dv != null) {
-            ic.setValue(dv);
-        }
-        if (defDisabled != null) {
-            ic.setDisabled(defDisabled.booleanValue());
-        }
-        if (defReadonly != null) {
-            ic.setDisabled(defReadonly.booleanValue());
-        }
-        if (defChecked != null) {
-            ic.setDisabled(defChecked.booleanValue());
-        }
-    }
+	/**
+	 * Instantiates a new HTML base input element.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLBaseInputElement(String name) {
+		super(name);
+	}
 
-    /**
-     * Gets the default value.
-     *
-     * @return the default value
-     */
-    public String getDefaultValue() {
-        return this.getAttribute(HtmlAttributeProperties.DEFAULTVALUE);
-    }
+	/**
+	 * Sets the input context.
+	 *
+	 * @param ic
+	 *            the new input context
+	 */
+	public void setInputContext(InputContext ic) {
+		String dv = null;
+		Boolean defDisabled = null;
+		Boolean defReadonly = null;
+		Boolean defChecked = null;
+		synchronized (this) {
+			this.inputContext = ic;
+			if (ic != null) {
+				dv = this.deferredValue;
+				defDisabled = this.deferredDisabled;
+				defReadonly = this.deferredReadonly;
+				defChecked = this.deferredChecked;
+			}
+		}
+		if (dv != null) {
+			ic.setValue(dv);
+		}
+		if (defDisabled != null) {
+			ic.setDisabled(defDisabled.booleanValue());
+		}
+		if (defReadonly != null) {
+			ic.setDisabled(defReadonly.booleanValue());
+		}
+		if (defChecked != null) {
+			ic.setDisabled(defChecked.booleanValue());
+		}
+	}
 
-    /**
-     * Sets the default value.
-     *
-     * @param defaultValue
-     *            the new default value
-     */
-    public void setDefaultValue(String defaultValue) {
-        this.setAttribute(HtmlAttributeProperties.DEFAULTVALUE, defaultValue);
-    }
+	/**
+	 * Gets the default value.
+	 *
+	 * @return the default value
+	 */
+	public String getDefaultValue() {
+		return this.getAttribute(HtmlAttributeProperties.DEFAULTVALUE);
+	}
 
-    /**
-     * Gets the form.
-     *
-     * @return the form
-     */
-    public HTMLFormElement getForm() {
-        Node parent = this.getParentNode();
-        while ((parent != null) && !(parent instanceof HTMLFormElement)) {
-            parent = parent.getParentNode();
-        }
-        return (HTMLFormElement) parent;
-    }
+	/**
+	 * Sets the default value.
+	 *
+	 * @param defaultValue
+	 *            the new default value
+	 */
+	public void setDefaultValue(String defaultValue) {
+		this.setAttribute(HtmlAttributeProperties.DEFAULTVALUE, defaultValue);
+	}
 
-    /**
-     * Submit form.
-     *
-     * @param extraFormInputs
-     *            the extra form inputs
-     */
-    public void submitForm(FormInput[] extraFormInputs) {
-        HTMLFormElementImpl form = (HTMLFormElementImpl) this.getForm();
-        if (form != null) {
-            form.submit(extraFormInputs);
-        }
-    }
+	/**
+	 * Gets the form.
+	 *
+	 * @return the form
+	 */
+	public HTMLFormElement getForm() {
+		Node parent = this.getParentNode();
+		while ((parent != null) && !(parent instanceof HTMLFormElement)) {
+			parent = parent.getParentNode();
+		}
+		return (HTMLFormElement) parent;
+	}
 
-    /**
-     * Reset form.
-     */
-    public void resetForm() {
-        HTMLFormElement form = this.getForm();
-        if (form != null) {
-            form.reset();
-        }
-    }
+	/**
+	 * Submit form.
+	 *
+	 * @param extraFormInputs
+	 *            the extra form inputs
+	 */
+	public void submitForm(FormInput[] extraFormInputs) {
+		HTMLFormElementImpl form = (HTMLFormElementImpl) this.getForm();
+		if (form != null) {
+			form.submit(extraFormInputs);
+		}
+	}
 
-    /**
-     * Gets the accept.
-     *
-     * @return the accept
-     */
-    public String getAccept() {
-        return this.getAttribute(HtmlAttributeProperties.ACCEPT);
-    }
+	/**
+	 * Reset form.
+	 */
+	public void resetForm() {
+		HTMLFormElement form = this.getForm();
+		if (form != null) {
+			form.reset();
+		}
+	}
 
-    /**
-     * Sets the accept.
-     *
-     * @param accept
-     *            the new accept
-     */
-    public void setAccept(String accept) {
-        this.setAttribute(HtmlAttributeProperties.ACCEPT, accept);
-    }
+	/**
+	 * Gets the accept.
+	 *
+	 * @return the accept
+	 */
+	public String getAccept() {
+		return this.getAttribute(HtmlAttributeProperties.ACCEPT);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMElementImpl#getAccessKey()
-     */
-    @Override
-    public String getAccessKey() {
-        return this.getAttribute(HtmlAttributeProperties.ACCESSKEY);
-    }
+	/**
+	 * Sets the accept.
+	 *
+	 * @param accept
+	 *            the new accept
+	 */
+	public void setAccept(String accept) {
+		this.setAttribute(HtmlAttributeProperties.ACCEPT, accept);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.DOMElementImpl#setAccessKey(java.lang.String)
-     */
-    @Override
-    public void setAccessKey(String accessKey) {
-        this.setAttribute(HtmlAttributeProperties.ACCESSKEY, accessKey);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#getAccessKey()
+	 */
 
-    /**
-     * Gets the align.
-     *
-     * @return the align
-     */
-    public String getAlign() {
-        return this.getAttribute(HtmlAttributeProperties.ALIGN);
-    }
+	public String getAccessKey() {
+		return this.getAttribute(HtmlAttributeProperties.ACCESSKEY);
+	}
 
-    /**
-     * Sets the align.
-     *
-     * @param align
-     *            the new align
-     */
-    public void setAlign(String align) {
-        this.setAttribute(HtmlAttributeProperties.ALIGN, align);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#setAccessKey(java.lang.
+	 * String)
+	 */
 
-    /**
-     * Gets the alt.
-     *
-     * @return the alt
-     */
-    public String getAlt() {
-        return this.getAttribute(HtmlAttributeProperties.ALT);
-    }
+	public void setAccessKey(String accessKey) {
+		this.setAttribute(HtmlAttributeProperties.ACCESSKEY, accessKey);
+	}
 
-    /**
-     * Sets the alt.
-     *
-     * @param alt
-     *            the new alt
-     */
-    public void setAlt(String alt) {
-        this.setAttribute(HtmlAttributeProperties.ALT, alt);
-    }
+	/**
+	 * Gets the align.
+	 *
+	 * @return the align
+	 */
+	public String getAlign() {
+		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+	}
 
-    /**
-     * Gets the name.
-     *
-     * @return the name
-     */
-    public String getName() {
-        // TODO: Should this return value of "id"?
-        return this.getAttribute(HtmlAttributeProperties.NAME);
-    }
+	/**
+	 * Sets the align.
+	 *
+	 * @param align
+	 *            the new align
+	 */
+	public void setAlign(String align) {
+		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+	}
 
-    /**
-     * Sets the name.
-     *
-     * @param name
-     *            the new name
-     */
-    public void setName(String name) {
-        this.setAttribute(HtmlAttributeProperties.NAME, name);
-    }
+	/**
+	 * Gets the alt.
+	 *
+	 * @return the alt
+	 */
+	public String getAlt() {
+		return this.getAttribute(HtmlAttributeProperties.ALT);
+	}
 
-    /**
-     * Gets the placeholder.
-     *
-     * @return the placeholder
-     */
-    public String getPlaceholder() {
-        return this.getAttribute(HtmlAttributeProperties.PLACEHOLDER);
-    }
+	/**
+	 * Sets the alt.
+	 *
+	 * @param alt
+	 *            the new alt
+	 */
+	public void setAlt(String alt) {
+		this.setAttribute(HtmlAttributeProperties.ALT, alt);
+	}
 
-    /**
-     * Sets the placeholder.
-     *
-     * @param placeholder
-     *            the new placeholder
-     */
-    public void setPlaceholder(String placeholder) {
-        this.setAttribute(HtmlAttributeProperties.PLACEHOLDER, placeholder);
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
+	public String getName() {
+		// TODO: Should this return value of "id"?
+		return this.getAttribute(HtmlAttributeProperties.NAME);
+	}
 
-    }
-   
-    public String getSrc() {
-        return this.getAttribute(HtmlAttributeProperties.SRC);
-    }
+	/**
+	 * Sets the name.
+	 *
+	 * @param name
+	 *            the new name
+	 */
+	public void setName(String name) {
+		this.setAttribute(HtmlAttributeProperties.NAME, name);
+	}
 
-    public void setSrc(String src) {
-        this.setAttribute(HtmlAttributeProperties.SRC, src);
-    }
+	/**
+	 * Gets the placeholder.
+	 *
+	 * @return the placeholder
+	 */
+	public String getPlaceholder() {
+		return this.getAttribute(HtmlAttributeProperties.PLACEHOLDER);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMElementImpl#getDisabled()
-     */
-    @Override
-    public boolean getDisabled() {
-        InputContext ic = this.inputContext;
-        if (ic == null) {
-            Boolean db = this.deferredDisabled;
-            return db == null ? false : db.booleanValue();
-        } else {
-            return ic.getDisabled();
-        }
-    }
+	/**
+	 * Sets the placeholder.
+	 *
+	 * @param placeholder
+	 *            the new placeholder
+	 */
+	public void setPlaceholder(String placeholder) {
+		this.setAttribute(HtmlAttributeProperties.PLACEHOLDER, placeholder);
 
-    /**
-     * Sets the disabled.
-     *
-     * @param disabled
-     *            the new disabled
-     */
-    public void setDisabled(boolean disabled) {
-        InputContext ic = this.inputContext;
-        if (ic != null) {
-            ic.setDisabled(disabled);
-        } else {
-            this.deferredDisabled = Boolean.valueOf(disabled);
-        }
-    }
+	}
 
-    /**
-     * Gets the read only.
-     *
-     * @return the read only
-     */
-    public boolean getReadOnly() {
-        InputContext ic = this.inputContext;
-        if (ic == null) {
-            Boolean db = this.deferredReadonly;
-            return db == null ? false : db.booleanValue();
-        } else {
-            return ic.getReadOnly();
-        }
-    }
+	public String getSrc() {
+		return this.getAttribute(HtmlAttributeProperties.SRC);
+	}
 
-    /**
-     * Sets the read only.
-     *
-     * @param readOnly
-     *            the new read only
-     */
-    public void setReadOnly(boolean readOnly) {
-        InputContext ic = this.inputContext;
-        if (ic != null) {
-            ic.setReadOnly(readOnly);
-        } else {
-            this.deferredReadonly = Boolean.valueOf(readOnly);
-        }
-    }
+	public void setSrc(String src) {
+		this.setAttribute(HtmlAttributeProperties.SRC, src);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMElementImpl#getChecked()
-     */
-    @Override
-    public boolean getChecked() {
-        InputContext ic = this.inputContext;
-        if (ic == null) {
-            Boolean db = this.deferredChecked;
-            return db == null ? false : db.booleanValue();
-        } else {
-            return ic.getChecked();
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#getDisabled()
+	 */
 
-    /**
-     * Sets the checked.
-     *
-     * @param value
-     *            the new checked
-     */
-    public void setChecked(boolean value) {
-        InputContext ic = this.inputContext;
-        if (ic != null) {
-            ic.setChecked(value);
-        } else {
-            this.deferredChecked = Boolean.valueOf(value);
-        }
-    }
+	public boolean getDisabled() {
+		InputContext ic = this.inputContext;
+		if (ic == null) {
+			Boolean db = this.deferredDisabled;
+			return db == null ? false : db.booleanValue();
+		} else {
+			return ic.getDisabled();
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMElementImpl#getTabIndex()
-     */
-    @Override
-    public int getTabIndex() {
-        InputContext ic = this.inputContext;
-        return ic == null ? 0 : ic.getTabIndex();
-    }
+	/**
+	 * Sets the disabled.
+	 *
+	 * @param disabled
+	 *            the new disabled
+	 */
+	public void setDisabled(boolean disabled) {
+		InputContext ic = this.inputContext;
+		if (ic != null) {
+			ic.setDisabled(disabled);
+		} else {
+			this.deferredDisabled = Boolean.valueOf(disabled);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMElementImpl#setTabIndex(int)
-     */
-    @Override
-    public void setTabIndex(int tabIndex) {
-        InputContext ic = this.inputContext;
-        if (ic != null) {
-            ic.setTabIndex(tabIndex);
-        }
-    }
+	/**
+	 * Gets the read only.
+	 *
+	 * @return the read only
+	 */
+	public boolean getReadOnly() {
+		InputContext ic = this.inputContext;
+		if (ic == null) {
+			Boolean db = this.deferredReadonly;
+			return db == null ? false : db.booleanValue();
+		} else {
+			return ic.getReadOnly();
+		}
+	}
 
-    /**
-     * Gets the value.
-     *
-     * @return the value
-     */
-    public String getValue() {
-        InputContext ic = this.inputContext;
-        if (ic != null) {
-            // Note: Per HTML Spec, setValue does not set attribute.
-            return ic.getValue();
-        } else {
-            String dv = this.deferredValue;
-            if (dv != null) {
-                return dv;
-            } else {
-                String val = this.getAttribute(HtmlAttributeProperties.VALUE);
-                return val == null ? "" : val;
-            }
-        }
-    }
+	/**
+	 * Sets the read only.
+	 *
+	 * @param readOnly
+	 *            the new read only
+	 */
+	public void setReadOnly(boolean readOnly) {
+		InputContext ic = this.inputContext;
+		if (ic != null) {
+			ic.setReadOnly(readOnly);
+		} else {
+			this.deferredReadonly = Boolean.valueOf(readOnly);
+		}
+	}
 
-    /**
-     * Gets the file value.
-     *
-     * @return the file value
-     */
-    protected File[] getFileValue() {
-        InputContext ic = this.inputContext;
-        if (ic != null) {
-            return ic.getFileValue();
-        } else {
-            return null;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#getChecked()
+	 */
 
-    /**
-     * Sets the value.
-     *
-     * @param value
-     *            the new value
-     */
-    public void setValue(String value) {
-        InputContext ic = null;
-        synchronized (this) {
-            ic = this.inputContext;
-            if (ic == null) {
-                this.deferredValue = value;
-            }
-        }
-        if (ic != null) {
-            ic.setValue(value);
-        }
-    }
+	public boolean getChecked() {
+		InputContext ic = this.inputContext;
+		if (ic == null) {
+			Boolean db = this.deferredChecked;
+			return db == null ? false : db.booleanValue();
+		} else {
+			return ic.getChecked();
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#blur()
-     */
-    @Override
-    public void blur() {
-        InputContext ic = this.inputContext;
-        if (ic != null) {
-            ic.blur();
-        }
-    }
+	/**
+	 * Sets the checked.
+	 *
+	 * @param value
+	 *            the new checked
+	 */
+	public void setChecked(boolean value) {
+		InputContext ic = this.inputContext;
+		if (ic != null) {
+			ic.setChecked(value);
+		} else {
+			this.deferredChecked = Boolean.valueOf(value);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#focus()
-     */
-    @Override
-    public void focus() {
-        InputContext ic = this.inputContext;
-        if (ic != null) {
-            ic.focus();
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#getTabIndex()
+	 */
 
-    /**
-     * Select.
-     */
-    public void select() {
-        InputContext ic = this.inputContext;
-        if (ic != null) {
-            ic.select();
-        }
-    }
+	public int getTabIndex() {
+		InputContext ic = this.inputContext;
+		return ic == null ? 0 : ic.getTabIndex();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.dombl.HTMLElementImpl#assignAttributeField(java.lang
-     * .String, java.lang.String)
-     */
-    @Override
-    public void assignAttributeField(String normalName, String value) {
-        if (HtmlAttributeProperties.VALUE.equals(normalName)) {
-            this.setValue(value);
-        } else if ("checked".equals(normalName)) {
-            this.setChecked(value != null);
-        } else if ("disabled".equals(normalName)) {
-            this.setDisabled(value != null);
-        } else if ("readonly".equals(normalName)) {
-            this.setReadOnly(value != null);
-        } else if (HtmlAttributeProperties.SRC.equals(normalName)) {
-            this.loadImage(value);
-        } else {
-            super.assignAttributeField(normalName, value);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMElementImpl#setTabIndex(int)
+	 */
 
-    /** The onload. */
-    private Function onload;
+	public void setTabIndex(int tabIndex) {
+		InputContext ic = this.inputContext;
+		if (ic != null) {
+			ic.setTabIndex(tabIndex);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#getOnload()
-     */
-    @Override
-    public Function getOnload() {
-        return this.getEventFunction(this.onload, "onload");
-    }
+	/**
+	 * Gets the value.
+	 *
+	 * @return the value
+	 */
+	public String getValue() {
+		InputContext ic = this.inputContext;
+		if (ic != null) {
+			// Note: Per HTML Spec, setValue does not set attribute.
+			return ic.getValue();
+		} else {
+			String dv = this.deferredValue;
+			if (dv != null) {
+				return dv;
+			} else {
+				String val = this.getAttribute(HtmlAttributeProperties.VALUE);
+				return val == null ? "" : val;
+			}
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLAbstractUIElement#setOnload(org.mozilla.
-     * javascript.Function)
-     */
-    @Override
-    public void setOnload(Function onload) {
-        this.onload = onload;
-    }
+	/**
+	 * Gets the file value.
+	 *
+	 * @return the file value
+	 */
+	protected File[] getFileValue() {
+		InputContext ic = this.inputContext;
+		if (ic != null) {
+			return ic.getFileValue();
+		} else {
+			return null;
+		}
+	}
 
-    /** The image. */
-    private Image image = null;
+	/**
+	 * Sets the value.
+	 *
+	 * @param value
+	 *            the new value
+	 */
+	public void setValue(String value) {
+		InputContext ic = null;
+		synchronized (this) {
+			ic = this.inputContext;
+			if (ic == null) {
+				this.deferredValue = value;
+			}
+		}
+		if (ic != null) {
+			ic.setValue(value);
+		}
+	}
 
-    /** The image src. */
-    private String imageSrc;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#blur()
+	 */
 
-    /**
-     * Load image.
-     *
-     * @param src
-     *            the src
-     */
-    private void loadImage(String src) {
-        HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
-        if (document != null) {
-            synchronized (this.imageListeners) {
-                this.imageSrc = src;
-                this.image = null;
-            }
-            if (src != null) {
-                document.loadImage(src, new LocalImageListener(src));
-            }
-        }
-    }
+	public void blur() {
+		InputContext ic = this.inputContext;
+		if (ic != null) {
+			ic.blur();
+		}
+	}
 
-    /**
-     * Gets the image.
-     *
-     * @return the image
-     */
-    public final java.awt.Image getImage() {
-        synchronized (this.imageListeners) {
-            return this.image;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#focus()
+	 */
 
-    /** The image listeners. */
-    private final ArrayList<ImageListener> imageListeners = new ArrayList<ImageListener>(
-            1);
+	public void focus() {
+		InputContext ic = this.inputContext;
+		if (ic != null) {
+			ic.focus();
+		}
+	}
 
-    /**
-     * Adds a listener of image loading events. The listener gets called right
-     * away if there's already an image.
-     *
-     * @param listener
-     *            the listener
-     */
-    public void addImageListener(ImageListener listener) {
-        ArrayList<ImageListener> l = this.imageListeners;
-        java.awt.Image currentImage;
-        synchronized (l) {
-            currentImage = this.image;
-            l.add(listener);
-        }
-        if (currentImage != null) {
-            // Call listener right away if there's already an
-            // image; holding no locks.
-            listener.imageLoaded(new ImageEvent(this, currentImage));
-            // Should not call onload handler here. That's taken
-            // care of otherwise.
-        }
-    }
+	/**
+	 * Select.
+	 */
+	public void select() {
+		InputContext ic = this.inputContext;
+		if (ic != null) {
+			ic.select();
+		}
+	}
 
-    /**
-     * Removes the image listener.
-     *
-     * @param listener
-     *            the listener
-     */
-    public void removeImageListener(ImageListener listener) {
-        ArrayList<ImageListener> l = this.imageListeners;
-        synchronized (l) {
-            l.remove(l);
-        }
-    }
+	public void setAutocomplete(String autocomplete) {
+		// TODO Auto-generated method stub
 
-    /**
-     * Reset input.
-     */
-    void resetInput() {
-        InputContext ic = this.inputContext;
-        if (ic != null) {
-            ic.resetInput();
-        }
-    }
+	}
 
-    /**
-     * Dispatch event.
-     *
-     * @param expectedImgSrc
-     *            the expected img src
-     * @param event
-     *            the event
-     */
-    private void dispatchEvent(String expectedImgSrc, ImageEvent event) {
-        ArrayList<ImageListener> l = this.imageListeners;
-        ImageListener[] listenerArray;
-        synchronized (l) {
-            if (!expectedImgSrc.equals(this.imageSrc)) {
-                return;
-            }
-            this.image = event.image;
-            // Get array of listeners while holding lock.
-            listenerArray = l.toArray(ImageListener.EMPTY_ARRAY);
-        }
-        int llength = listenerArray.length;
-        for (int i = 0; i < llength; i++) {
-            // Inform listener, holding no lock.
-            listenerArray[i].imageLoaded(event);
-        }
-        Function onload = this.getOnload();
-        if (onload != null) {
-            // TODO: onload event object?
-            Executor.executeFunction(HTMLBaseInputElement.this, onload, null);
-        }
-    }
+	public boolean getIndeterminate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-    /**
-     * The listener interface for receiving localImage events. The class that is
-     * interested in processing a localImage event implements this interface,
-     * and the object created with that class is registered with a component
-     * using the component's <code>addLocalImageListener</code> method. When the
-     * localImage event occurs, that object's appropriate method is invoked.
-     *
-     * @see LocalImageEvent
-     */
-    private class LocalImageListener implements ImageListener {
+	public void setIndeterminate(boolean indeterminate) {
+		// TODO Auto-generated method stub
 
-        /** The expected img src. */
-        private final String expectedImgSrc;
+	}
 
-        /**
-         * Instantiates a new local image listener.
-         *
-         * @param imgSrc
-         *            the img src
-         */
-        public LocalImageListener(String imgSrc) {
-            this.expectedImgSrc = imgSrc;
-        }
+	public HTMLElement getList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * org.lobobrowser.html.dombl.ImageListener#imageLoaded(org.lobobrowser.html
-         * .dombl.ImageEvent)
-         */
-        @Override
-        public void imageLoaded(ImageEvent event) {
-            dispatchEvent(this.expectedImgSrc, event);
-        }
-    }
+	public long getValueAsDate() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void setValueAsDate(long valueAsDate) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public double getValueAsNumber() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void setValueAsNumber(double valueAsNumber) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public HTMLOptionElement getSelectedOption() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void stepUp() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void stepUp(int n) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void stepDown() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void stepDown(int n) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public String getDirName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setDirName(String dirName) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public String getPattern() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setPattern(String pattern) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public boolean getWillValidate() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public ValidityState getValidity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getValidationMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean checkValidity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setCustomValidity(String error) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public NodeList getLabels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getSelectionStart() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void setSelectionStart(int selectionStart) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public int getSelectionEnd() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void setSelectionEnd(int selectionEnd) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public String getSelectionDirection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setSelectionDirection(String selectionDirection) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setSelectionRange(int start, int end) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setSelectionRange(int start, int end, String direction) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.dombl.HTMLElementImpl#assignAttributeField(java.lang
+	 * .String, java.lang.String)
+	 */
+
+	public void assignAttributeField(String normalName, String value) {
+		if (HtmlAttributeProperties.VALUE.equals(normalName)) {
+			this.setValue(value);
+		} else if ("checked".equals(normalName)) {
+			this.setChecked(value != null);
+		} else if ("disabled".equals(normalName)) {
+			this.setDisabled(value != null);
+		} else if ("readonly".equals(normalName)) {
+			this.setReadOnly(value != null);
+		} else if (HtmlAttributeProperties.SRC.equals(normalName)) {
+			this.loadImage(value);
+		} else {
+			super.assignAttributeField(normalName, value);
+		}
+	}
+
+	/** The onload. */
+	private Function onload;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLAbstractUIElement#getOnload()
+	 */
+
+	public Function getOnload() {
+		return this.getEventFunction(this.onload, "onload");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.domimpl.HTMLAbstractUIElement#setOnload(org.mozilla.
+	 * javascript.Function)
+	 */
+
+	public void setOnload(Function onload) {
+		this.onload = onload;
+	}
+
+	/** The image. */
+	private Image image = null;
+
+	/** The image src. */
+	private String imageSrc;
+
+	/**
+	 * Load image.
+	 *
+	 * @param src
+	 *            the src
+	 */
+	private void loadImage(String src) {
+		HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
+		if (document != null) {
+			synchronized (this.imageListeners) {
+				this.imageSrc = src;
+				this.image = null;
+			}
+			if (src != null) {
+				document.loadImage(src, new LocalImageListener(src));
+			}
+		}
+	}
+
+	/**
+	 * Gets the image.
+	 *
+	 * @return the image
+	 */
+	public final java.awt.Image getImage() {
+		synchronized (this.imageListeners) {
+			return this.image;
+		}
+	}
+
+	/** The image listeners. */
+	private final ArrayList<ImageListener> imageListeners = new ArrayList<ImageListener>(1);
+
+	/**
+	 * Adds a listener of image loading events. The listener gets called right
+	 * away if there's already an image.
+	 *
+	 * @param listener
+	 *            the listener
+	 */
+	public void addImageListener(ImageListener listener) {
+		ArrayList<ImageListener> l = this.imageListeners;
+		java.awt.Image currentImage;
+		synchronized (l) {
+			currentImage = this.image;
+			l.add(listener);
+		}
+		if (currentImage != null) {
+			// Call listener right away if there's already an
+			// image; holding no locks.
+			listener.imageLoaded(new ImageEvent(this, currentImage));
+			// Should not call onload handler here. That's taken
+			// care of otherwise.
+		}
+	}
+
+	/**
+	 * Removes the image listener.
+	 *
+	 * @param listener
+	 *            the listener
+	 */
+	public void removeImageListener(ImageListener listener) {
+		ArrayList<ImageListener> l = this.imageListeners;
+		synchronized (l) {
+			l.remove(l);
+		}
+	}
+
+	/**
+	 * Reset input.
+	 */
+	void resetInput() {
+		InputContext ic = this.inputContext;
+		if (ic != null) {
+			ic.resetInput();
+		}
+	}
+
+	/**
+	 * Dispatch event.
+	 *
+	 * @param expectedImgSrc
+	 *            the expected img src
+	 * @param event
+	 *            the event
+	 */
+	private void dispatchEvent(String expectedImgSrc, ImageEvent event) {
+		ArrayList<ImageListener> l = this.imageListeners;
+		ImageListener[] listenerArray;
+		synchronized (l) {
+			if (!expectedImgSrc.equals(this.imageSrc)) {
+				return;
+			}
+			this.image = event.image;
+			// Get array of listeners while holding lock.
+			listenerArray = l.toArray(ImageListener.EMPTY_ARRAY);
+		}
+		int llength = listenerArray.length;
+		for (int i = 0; i < llength; i++) {
+			// Inform listener, holding no lock.
+			listenerArray[i].imageLoaded(event);
+		}
+		Function onload = this.getOnload();
+		if (onload != null) {
+			// TODO: onload event object?
+			Executor.executeFunction(HTMLBaseInputElement.this, onload, null);
+		}
+	}
+
+	/**
+	 * The listener interface for receiving localImage events. The class that is
+	 * interested in processing a localImage event implements this interface,
+	 * and the object created with that class is registered with a component
+	 * using the component's <code>addLocalImageListener</code> method. When the
+	 * localImage event occurs, that object's appropriate method is invoked.
+	 *
+	 * @see LocalImageEvent
+	 */
+	private class LocalImageListener implements ImageListener {
+
+		/** The expected img src. */
+		private final String expectedImgSrc;
+
+		/**
+		 * Instantiates a new local image listener.
+		 *
+		 * @param imgSrc
+		 *            the img src
+		 */
+		public LocalImageListener(String imgSrc) {
+			this.expectedImgSrc = imgSrc;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.lobobrowser.html.dombl.ImageListener#imageLoaded(org.lobobrowser.
+		 * html .dombl.ImageEvent)
+		 */
+
+		public void imageLoaded(ImageEvent event) {
+			dispatchEvent(this.expectedImgSrc, event);
+		}
+	}
 
 }
