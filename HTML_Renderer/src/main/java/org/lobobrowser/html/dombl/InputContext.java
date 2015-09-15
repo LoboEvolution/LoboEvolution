@@ -242,4 +242,17 @@ public interface InputContext {
      * Reset input.
      */
     void resetInput();
+    
+    
+    void setMin(int value);
+
+    int getMin();
+    
+    void setMax(int value);
+
+    int getMax();
+    
+    void setPattern(String value);
+
+    String getPattern();
 }

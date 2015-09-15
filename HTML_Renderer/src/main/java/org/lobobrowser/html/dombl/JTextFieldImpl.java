@@ -17,8 +17,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyListener;
 
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -82,6 +84,11 @@ public class JTextFieldImpl extends JTextField {
         if (!isTextWrittenIn()) {
             originalForeground = fg;
         }
+    }
+    
+    @Override
+    public void setBorder(Border border) {
+    	super.setBorder(border);
     }
 
     /**
@@ -176,6 +183,11 @@ public class JTextFieldImpl extends JTextField {
 
         });
 
+    }
+    
+    @Override
+    public synchronized void addKeyListener(KeyListener l) {
+    	super.addKeyListener(l);
     }
 
     /**
