@@ -569,7 +569,7 @@ public class HtmlController {
 						HTMLInputElementImpl input = (HTMLInputElementImpl) n;
 						String name = input.getName();
 						if (name == null) {
-							formInputs = null;
+							formInputs[i] = new FormInput("", "");
 						} else {
 							String value = "";
 							if (input != null) {
@@ -591,7 +591,7 @@ public class HtmlController {
 						HTMLInputElementImpl input = (HTMLInputElementImpl) n;
 						String inputName = input.getName();
 						if (inputName == null) {
-							formInputs = null;
+							formInputs[i] = new FormInput("", "");
 						} else {
 							String value = "";
 							if (input != null) {
