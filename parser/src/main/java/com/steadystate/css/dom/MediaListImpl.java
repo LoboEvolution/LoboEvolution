@@ -104,7 +104,7 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
             else {
                 isNotFirst = true;
             }
-            sb.append(mediaQuery.getMedia());
+            sb.append(mediaQuery.toString());
         }
         return sb.toString();
     }
