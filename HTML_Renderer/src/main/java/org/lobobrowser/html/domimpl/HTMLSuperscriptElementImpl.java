@@ -29,33 +29,32 @@ import org.lobobrowser.html.renderstate.RenderState;
 
 public class HTMLSuperscriptElementImpl extends HTMLAbstractUIElement {
 
-    /** The superscript. */
-    private int superscript;
+	/** The superscript. */
+	private int superscript;
 
-    /**
-     * Instantiates a new HTML superscript element impl.
-     *
-     * @param name
-     *            the name
-     * @param superscript
-     *            the superscript
-     */
-    public HTMLSuperscriptElementImpl(String name, int superscript) {
-        super(name);
-        this.superscript = superscript;
-    }
+	/**
+	 * Instantiates a new HTML superscript element impl.
+	 *
+	 * @param name
+	 *            the name
+	 * @param superscript
+	 *            the superscript
+	 */
+	public HTMLSuperscriptElementImpl(String name, int superscript) {
+		super(name);
+		this.superscript = superscript;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
-     * .html.renderstate.RenderState)
-     */
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        prevRenderState = FontStyleRenderState
-                .createSuperscriptFontStyleRenderState(prevRenderState,
-                        new Integer(this.superscript));
-        return super.createRenderState(prevRenderState);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
+	 * lobobrowser .html.renderstate.RenderState)
+	 */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		prevRenderState = FontStyleRenderState.createSuperscriptFontStyleRenderState(prevRenderState,
+				new Integer(this.superscript));
+		return super.createRenderState(prevRenderState);
+	}
 }

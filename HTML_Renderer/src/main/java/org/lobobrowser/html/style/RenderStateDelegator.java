@@ -30,194 +30,192 @@ import org.lobobrowser.html.renderstate.RenderState;
  */
 public abstract class RenderStateDelegator implements RenderState {
 
-    /** The delegate. */
-    protected final RenderState delegate;
+	/** The delegate. */
+	protected final RenderState delegate;
 
-    /**
-     * Instantiates a new render state delegator.
-     *
-     * @param delegate
-     *            the delegate
-     */
-    public RenderStateDelegator(final RenderState delegate) {
-        super();
-        this.delegate = delegate;
-    }
+	/**
+	 * Instantiates a new render state delegator.
+	 *
+	 * @param delegate
+	 *            the delegate
+	 */
+	public RenderStateDelegator(final RenderState delegate) {
+		super();
+		this.delegate = delegate;
+	}
 
-    @Override
-    public RenderState getPreviousRenderState() {
-        return this.delegate;
-    }
+	@Override
+	public RenderState getPreviousRenderState() {
+		return this.delegate;
+	}
 
-    @Override
-    public int getAlignXPercent() {
-        return delegate.getAlignXPercent();
-    }
+	@Override
+	public int getAlignXPercent() {
+		return delegate.getAlignXPercent();
+	}
 
+	@Override
+	public int getAlignYPercent() {
+		return delegate.getAlignYPercent();
+	}
 
-    @Override
-    public int getAlignYPercent() {
-        return delegate.getAlignYPercent();
-    }
+	@Override
+	public int getBlankWidth() {
+		return delegate.getBlankWidth();
+	}
 
-    @Override
-    public int getBlankWidth() {
-        return delegate.getBlankWidth();
-    }
+	@Override
+	public Color getColor() {
+		return delegate.getColor();
+	}
 
-    @Override
-    public Color getColor() {
-        return delegate.getColor();
-    }
+	@Override
+	public Font getFont() {
+		return delegate.getFont();
+	}
 
-    @Override
-    public Font getFont() {
-        return delegate.getFont();
-    }
+	@Override
+	public int getFontBase() {
+		return delegate.getFontBase();
+	}
 
-    @Override
-    public int getFontBase() {
-        return delegate.getFontBase();
-    }
+	@Override
+	public FontMetrics getFontMetrics() {
+		return delegate.getFontMetrics();
+	}
 
-    @Override
-    public FontMetrics getFontMetrics() {
-        return delegate.getFontMetrics();
-    }
+	@Override
+	public Color getOverlayColor() {
+		return delegate.getOverlayColor();
+	}
 
-    @Override
-    public Color getOverlayColor() {
-        return delegate.getOverlayColor();
-    }
+	@Override
+	public Color getBackgroundColor() {
+		return delegate.getBackgroundColor();
+	}
 
-    @Override
-    public Color getBackgroundColor() {
-        return delegate.getBackgroundColor();
-    }
+	@Override
+	public int getTextDecorationMask() {
+		return delegate.getTextDecorationMask();
+	}
 
-    @Override
-    public int getTextDecorationMask() {
-        return delegate.getTextDecorationMask();
-    }
+	@Override
+	public int getTextTransform() {
+		return delegate.getTextTransform();
+	}
 
-    @Override
-    public int getTextTransform() {
-        return delegate.getTextTransform();
-    }
+	@Override
+	public WordInfo getWordInfo(String word) {
+		return delegate.getWordInfo(word);
+	}
 
-    @Override
-    public WordInfo getWordInfo(String word) {
-        return delegate.getWordInfo(word);
-    }
+	@Override
+	public void invalidate() {
+		delegate.invalidate();
+	}
 
-    @Override
-    public void invalidate() {
-        delegate.invalidate();
-    }
+	@Override
+	public boolean isHighlight() {
+		return delegate.isHighlight();
+	}
 
-    @Override
-    public boolean isHighlight() {
-        return delegate.isHighlight();
-    }
+	@Override
+	public void setHighlight(boolean highlight) {
+		delegate.setHighlight(highlight);
+	}
 
-    @Override
-    public void setHighlight(boolean highlight) {
-        delegate.setHighlight(highlight);
-    }
+	@Override
+	public int getCount(String counter, int nesting) {
+		return this.delegate.getCount(counter, nesting);
+	}
 
-    @Override
-    public int getCount(String counter, int nesting) {
-        return this.delegate.getCount(counter, nesting);
-    }
+	@Override
+	public void resetCount(String counter, int nesting, int value) {
+		this.delegate.resetCount(counter, nesting, value);
+	}
 
-    @Override
-    public void resetCount(String counter, int nesting, int value) {
-        this.delegate.resetCount(counter, nesting, value);
-    }
+	@Override
+	public int incrementCount(String counter, int nesting) {
+		return this.delegate.incrementCount(counter, nesting);
+	}
 
-    @Override
-    public int incrementCount(String counter, int nesting) {
-        return this.delegate.incrementCount(counter, nesting);
-    }
+	@Override
+	public BackgroundInfo getBackgroundInfo() {
+		return this.delegate.getBackgroundInfo();
+	}
 
-    @Override
-    public BackgroundInfo getBackgroundInfo() {
-        return this.delegate.getBackgroundInfo();
-    }
+	@Override
+	public int getDisplay() {
+		return this.delegate.getDisplay();
+	}
 
-    @Override
-    public int getDisplay() {
-        return this.delegate.getDisplay();
-    }
+	@Override
+	public Color getTextBackgroundColor() {
+		return this.delegate.getTextBackgroundColor();
+	}
 
-    @Override
-    public Color getTextBackgroundColor() {
-        return this.delegate.getTextBackgroundColor();
-    }
+	@Override
+	public int getTextIndent(int availWidth) {
+		return this.delegate.getTextIndent(availWidth);
+	}
 
-    @Override
-    public int getTextIndent(int availWidth) {
-        return this.delegate.getTextIndent(availWidth);
-    }
+	@Override
+	public String getTextIndentText() {
+		return this.delegate.getTextIndentText();
+	}
 
-    @Override
-    public String getTextIndentText() {
-        return this.delegate.getTextIndentText();
-    }
+	@Override
+	public int getWhiteSpace() {
+		return this.delegate.getWhiteSpace();
+	}
 
-    @Override
-    public int getWhiteSpace() {
-        return this.delegate.getWhiteSpace();
-    }
+	@Override
+	public HtmlInsets getMarginInsets() {
+		return this.delegate.getMarginInsets();
+	}
 
-    @Override
-    public HtmlInsets getMarginInsets() {
-        return this.delegate.getMarginInsets();
-    }
+	@Override
+	public HtmlInsets getPaddingInsets() {
+		return this.delegate.getPaddingInsets();
+	}
 
-    @Override
-    public HtmlInsets getPaddingInsets() {
-        return this.delegate.getPaddingInsets();
-    }
+	@Override
+	public int getVisibility() {
+		return this.delegate.getVisibility();
+	}
 
-    @Override
-    public int getVisibility() {
-        return this.delegate.getVisibility();
-    }
+	@Override
+	public int getPosition() {
+		return this.delegate.getPosition();
+	}
 
-    @Override
-    public int getPosition() {
-        return this.delegate.getPosition();
-    }
+	@Override
+	public int getFloat() {
+		return this.delegate.getFloat();
+	}
 
-    @Override
-    public int getFloat() {
-        return this.delegate.getFloat();
-    }
-    
-    @Override
-    public int getOverflowX() {
-        return this.delegate.getOverflowX();
-    }
+	@Override
+	public int getOverflowX() {
+		return this.delegate.getOverflowX();
+	}
 
-    @Override
-    public int getOverflowY() {
-        return this.delegate.getOverflowY();
-    }
+	@Override
+	public int getOverflowY() {
+		return this.delegate.getOverflowY();
+	}
 
-    
-    @Override
-    public BorderInfo getBorderInfo() {
-        return this.delegate.getBorderInfo();
-    }
-    
-    @Override
-    public Optional<Cursor> getCursor() {
-        return this.delegate.getCursor();
-      }
-    
-    @Override
-    public void setCursor(Optional<Cursor> cursor) {
-        this.delegate.setCursor(cursor);
-      }
+	@Override
+	public BorderInfo getBorderInfo() {
+		return this.delegate.getBorderInfo();
+	}
+
+	@Override
+	public Optional<Cursor> getCursor() {
+		return this.delegate.getCursor();
+	}
+
+	@Override
+	public void setCursor(Optional<Cursor> cursor) {
+		this.delegate.setCursor(cursor);
+	}
 }

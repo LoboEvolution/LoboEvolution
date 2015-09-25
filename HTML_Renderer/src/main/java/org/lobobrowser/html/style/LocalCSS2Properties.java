@@ -19,13 +19,13 @@ package org.lobobrowser.html.style;
  */
 public class LocalCSS2Properties extends AbstractCSS2Properties {
 
-    /**
-     * Instantiates a new local cs s2 properties.
-     *
-     * @param context
-     *            the context
-     */
-    public LocalCSS2Properties(CSS2PropertiesContext context) {
-        super(context);
-    }
+	/**
+	 * Instantiates a new local cs s2 properties.
+	 *
+	 * @param context
+	 *            the context
+	 */
+	public LocalCSS2Properties(CSS2PropertiesContext context) {
+		super(context);
+	}
 }

@@ -28,16 +28,18 @@ import org.lobobrowser.html.style.RenderStateDelegator;
 /**
  * The Class CursorRenderState.
  */
-public class CursorRenderState extends RenderStateDelegator{
-    
-    /**
-     * Instantiates a new cursor render state.
-     *
-     * @param prevRenderState the prev render state
-     * @param cursor the cursor
-     */
-    public CursorRenderState(RenderState prevRenderState, Optional<Cursor> cursor) {
-        super(prevRenderState);
-        prevRenderState.setCursor(cursor);
-    }
+public class CursorRenderState extends RenderStateDelegator {
+
+	/**
+	 * Instantiates a new cursor render state.
+	 *
+	 * @param prevRenderState
+	 *            the prev render state
+	 * @param cursor
+	 *            the cursor
+	 */
+	public CursorRenderState(RenderState prevRenderState, Optional<Cursor> cursor) {
+		super(prevRenderState);
+		prevRenderState.setCursor(cursor);
+	}
 }

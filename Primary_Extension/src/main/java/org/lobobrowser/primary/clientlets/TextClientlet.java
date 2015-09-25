@@ -33,32 +33,34 @@ import org.lobobrowser.util.io.IORoutines;
  */
 public class TextClientlet implements Clientlet {
 
-    /**
-     * Instantiates a new text clientlet.
-     */
-    public TextClientlet() {
-    }
+	/**
+	 * Instantiates a new text clientlet.
+	 */
+	public TextClientlet() {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.Clientlet#process(org.lobobrowser.clientlet.
-     * ClientletContext)
-     */
-    @Override
-    public void process(ClientletContext context) throws ClientletException {
-        try {
-            InputStream in = context.getResponse().getInputStream();
-            try {
-                String text = IORoutines.loadAsText(in, "UTF-8");
-                JTextArea textArea = new JTextArea(text);
-                textArea.setEditable(false);
-                JScrollPane pane = new JScrollPane(textArea);
-                context.setResultingContent(pane);
-            } finally {
-                in.close();
-            }
-        } catch (IOException ioe) {
-            throw new ClientletException(ioe);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.clientlet.Clientlet#process(org.lobobrowser.clientlet.
+	 * ClientletContext)
+	 */
+	@Override
+	public void process(ClientletContext context) throws ClientletException {
+		try {
+			InputStream in = context.getResponse().getInputStream();
+			try {
+				String text = IORoutines.loadAsText(in, "UTF-8");
+				JTextArea textArea = new JTextArea(text);
+				textArea.setEditable(false);
+				JScrollPane pane = new JScrollPane(textArea);
+				context.setResultingContent(pane);
+			} finally {
+				in.close();
+			}
+		} catch (IOException ioe) {
+			throw new ClientletException(ioe);
+		}
+	}
 }

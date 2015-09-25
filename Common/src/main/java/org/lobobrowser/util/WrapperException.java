@@ -23,14 +23,14 @@ package org.lobobrowser.util;
 public class WrapperException extends RuntimeException {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1873416786560593951L;
-
+    
     /**
      * Instantiates a new wrapper exception.
      */
     public WrapperException() {
         super();
     }
-
+    
     /**
      * Instantiates a new wrapper exception.
      *
@@ -40,7 +40,7 @@ public class WrapperException extends RuntimeException {
     public WrapperException(String message) {
         super(message);
     }
-
+    
     /**
      * Instantiates a new wrapper exception.
      *
@@ -52,7 +52,7 @@ public class WrapperException extends RuntimeException {
     public WrapperException(String message, Throwable cause) {
         super(message, cause);
     }
-
+    
     /**
      * Instantiates a new wrapper exception.
      *

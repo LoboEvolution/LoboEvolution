@@ -19,42 +19,42 @@ package org.lobobrowser.html.style;
  */
 public interface CSS2PropertiesContext {
 
-    /**
-     * Inform look invalid.
-     */
-    void informLookInvalid();
+	/**
+	 * Inform look invalid.
+	 */
+	void informLookInvalid();
 
-    /**
-     * Inform size invalid.
-     */
-    void informSizeInvalid();
+	/**
+	 * Inform size invalid.
+	 */
+	void informSizeInvalid();
 
-    /**
-     * Inform position invalid.
-     */
-    void informPositionInvalid();
+	/**
+	 * Inform position invalid.
+	 */
+	void informPositionInvalid();
 
-    /**
-     * Inform layout invalid.
-     */
-    void informLayoutInvalid();
+	/**
+	 * Inform layout invalid.
+	 */
+	void informLayoutInvalid();
 
-    /**
-     * Inform invalid.
-     */
-    void informInvalid();
+	/**
+	 * Inform invalid.
+	 */
+	void informInvalid();
 
-    /**
-     * Gets the parent style.
-     *
-     * @return the parent style
-     */
-    AbstractCSS2Properties getParentStyle();
+	/**
+	 * Gets the parent style.
+	 *
+	 * @return the parent style
+	 */
+	AbstractCSS2Properties getParentStyle();
 
-    /**
-     * Gets the document base uri.
-     *
-     * @return the document base uri
-     */
-    String getDocumentBaseURI();
+	/**
+	 * Gets the document base uri.
+	 *
+	 * @return the document base uri
+	 */
+	String getDocumentBaseURI();
 }

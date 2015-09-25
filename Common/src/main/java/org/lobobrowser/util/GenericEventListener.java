@@ -32,7 +32,7 @@ import java.util.EventObject;
 public interface GenericEventListener extends EventListener {
     /** The Constant EMPTY_ARRAY. */
     GenericEventListener[] EMPTY_ARRAY = new GenericEventListener[0];
-
+    
     /**
      * Process event.
      *

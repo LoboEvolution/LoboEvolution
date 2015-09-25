@@ -26,25 +26,24 @@ import org.lobobrowser.html.renderer.UIControl;
  */
 public class ImgLayout extends CommonWidgetLayout {
 
-    /**
-     * Instantiates a new img layout.
-     */
-    public ImgLayout() {
-        super(ADD_INLINE, true);
-    }
+	/**
+	 * Instantiates a new img layout.
+	 */
+	public ImgLayout() {
+		super(ADD_INLINE, true);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.lobobrowser
-     * .html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
-     */
-    @Override
-    protected RElement createRenderable(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-        UIControl control = new ImgControl((HTMLImageElementImpl) markupElement);
-        return new RImgControl(markupElement, control,
-                bodyLayout.getContainer(), bodyLayout.getFrameContext(),
-                bodyLayout.getUserAgentContext());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.
+	 * lobobrowser .html.renderer.RBlockViewport,
+	 * org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
+	@Override
+	protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		UIControl control = new ImgControl((HTMLImageElementImpl) markupElement);
+		return new RImgControl(markupElement, control, bodyLayout.getContainer(), bodyLayout.getFrameContext(),
+				bodyLayout.getUserAgentContext());
+	}
 }

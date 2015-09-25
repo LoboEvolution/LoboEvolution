@@ -39,192 +39,187 @@ import org.lobobrowser.w3c.html.HTMLDocument;
  */
 public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTMLAnchorElement {
 
-    /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(HTMLAnchorElementImpl.class.getName());
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(HTMLAnchorElementImpl.class.getName());
 
-    /**
-     * Instantiates a new HTML link element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLAnchorElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML link element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLAnchorElementImpl(String name) {
+		super(name);
+	}
 
-    @Override
-    public String getHref() {
-        String href = this.getAttribute(HtmlAttributeProperties.HREF);
-        return href == null ? "" : Urls.removeControlCharacters(href);
-    }
+	@Override
+	public String getHref() {
+		String href = this.getAttribute(HtmlAttributeProperties.HREF);
+		return href == null ? "" : Urls.removeControlCharacters(href);
+	}
 
-    @Override
-    public void setHref(String href) {
-        this.setAttribute(HtmlAttributeProperties.HREF, href);
-    }
+	@Override
+	public void setHref(String href) {
+		this.setAttribute(HtmlAttributeProperties.HREF, href);
+	}
 
-    @Override
-    public String getHreflang() {
-        return this.getAttribute(HtmlAttributeProperties.HREFLANG);
-    }
+	@Override
+	public String getHreflang() {
+		return this.getAttribute(HtmlAttributeProperties.HREFLANG);
+	}
 
-    @Override
-    public void setHreflang(String hreflang) {
-        this.setAttribute(HtmlAttributeProperties.HREFLANG, hreflang);
-    }
+	@Override
+	public void setHreflang(String hreflang) {
+		this.setAttribute(HtmlAttributeProperties.HREFLANG, hreflang);
+	}
 
-    @Override
-    public String getMedia() {
-        return this.getAttribute(HtmlAttributeProperties.MEDIA);
-    }
+	@Override
+	public String getMedia() {
+		return this.getAttribute(HtmlAttributeProperties.MEDIA);
+	}
 
-    @Override
-    public void setMedia(String media) {
-        this.setAttribute(HtmlAttributeProperties.MEDIA, media);
-    }
+	@Override
+	public void setMedia(String media) {
+		this.setAttribute(HtmlAttributeProperties.MEDIA, media);
+	}
 
-    @Override
-    public String getRel() {
-        return this.getAttribute(HtmlAttributeProperties.REL);
-    }
+	@Override
+	public String getRel() {
+		return this.getAttribute(HtmlAttributeProperties.REL);
+	}
 
-    @Override
-    public void setRel(String rel) {
-        this.setAttribute(HtmlAttributeProperties.REL, rel);
-    }
+	@Override
+	public void setRel(String rel) {
+		this.setAttribute(HtmlAttributeProperties.REL, rel);
+	}
 
-    @Override
-    public String getRev() {
-        return this.getAttribute(HtmlAttributeProperties.REV);
-    }
+	@Override
+	public String getRev() {
+		return this.getAttribute(HtmlAttributeProperties.REV);
+	}
 
-    @Override
-    public void setRev(String rev) {
-        this.setAttribute(HtmlAttributeProperties.REV, rev);
-    }
+	@Override
+	public void setRev(String rev) {
+		this.setAttribute(HtmlAttributeProperties.REV, rev);
+	}
 
-    @Override
-    public String getTarget() {
-        String target = this.getAttribute(HtmlAttributeProperties.TARGET);
-        if (target != null) {
-            return target;
-        }
-        HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-        return doc == null ? null : doc.getDefaultTarget();
-    }
+	@Override
+	public String getTarget() {
+		String target = this.getAttribute(HtmlAttributeProperties.TARGET);
+		if (target != null) {
+			return target;
+		}
+		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		return doc == null ? null : doc.getDefaultTarget();
+	}
 
-    @Override
-    public void setTarget(String target) {
-        this.setAttribute(HtmlAttributeProperties.TARGET, target);
-    }
+	@Override
+	public void setTarget(String target) {
+		this.setAttribute(HtmlAttributeProperties.TARGET, target);
+	}
 
-    @Override
-    public String getType() {
-        return this.getAttribute(HtmlAttributeProperties.TYPE);
-    }
+	@Override
+	public String getType() {
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
+	}
 
-    @Override
-    public void setType(String type) {
-        this.setAttribute(HtmlAttributeProperties.TYPE, type);
-    }
+	@Override
+	public void setType(String type) {
+		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+	}
 
-   /**
-     * Gets the absolute href.
-     *
-     * @return the absolute href
-     */
-    public String getAbsoluteHref() {
-        HtmlRendererContext rcontext = this.getHtmlRendererContext();
-        if (rcontext != null) {
-            String href = this.getHref();
-            if ((href != null) && (href.length() > 0)) {
-                try {
-                    URL url = this.getFullURL(href);
-                    return url == null ? null : url.toExternalForm();
-                } catch (MalformedURLException mfu) {
-                    this.warn("Malformed URI: [" + href + "].", mfu);
-                }
-            }
-        }
-        return null;
-    }
+	/**
+	 * Gets the absolute href.
+	 *
+	 * @return the absolute href
+	 */
+	public String getAbsoluteHref() {
+		HtmlRendererContext rcontext = this.getHtmlRendererContext();
+		if (rcontext != null) {
+			String href = this.getHref();
+			if ((href != null) && (href.length() > 0)) {
+				try {
+					URL url = this.getFullURL(href);
+					return url == null ? null : url.toExternalForm();
+				} catch (MalformedURLException mfu) {
+					this.warn("Malformed URI: [" + href + "].", mfu);
+				}
+			}
+		}
+		return null;
+	}
 
-    /**
-     * Navigate.
-     */
-    public void navigate() {
+	/**
+	 * Navigate.
+	 */
+	public void navigate() {
 
-        HtmlRendererContext rcontext = this.getHtmlRendererContext();
-        if (rcontext != null) {
-            String href = this.getHref();
-            if ((href != null) && (href.length() > 0)) {
-                String target = this.getTarget();
-                try {
-                    URL url = this.getFullURL(href);
-                    if (url != null) {
-                        rcontext.linkClicked(this, url, target);
-                    }
-                } catch (MalformedURLException mfu) {
-                    this.warn("Malformed URI: [" + href + "].", mfu);
-                }
-            }
-        }
-    }
+		HtmlRendererContext rcontext = this.getHtmlRendererContext();
+		if (rcontext != null) {
+			String href = this.getHref();
+			if ((href != null) && (href.length() > 0)) {
+				String target = this.getTarget();
+				try {
+					URL url = this.getFullURL(href);
+					if (url != null) {
+						rcontext.linkClicked(this, url, target);
+					}
+				} catch (MalformedURLException mfu) {
+					this.warn("Malformed URI: [" + href + "].", mfu);
+				}
+			}
+		}
+	}
 
-    /**
-     * Gets the link color.
-     *
-     * @return the link color
-     */
-    private Color getLinkColor() {
-        HTMLDocument doc = (HTMLDocument) this.document;
-        if (doc != null) {
-            HTMLBodyElement body = (HTMLBodyElement) doc.getBody();
-            if (body != null) {
-                String vlink = body.getVLink();
-                String link = body.getLink();
-                if ((vlink != null) || (link != null)) {
-                    HtmlRendererContext rcontext = this
-                            .getHtmlRendererContext();
-                    if (rcontext != null) {
-                        boolean visited = rcontext.isVisitedLink(this);
-                        String colorText = visited ? vlink : link;
-                        if (colorText != null) {
-                            return ColorFactory.getInstance().getColor(
-                                    colorText);
-                        }
-                    }
-                }
-            }
-        }
-        return Color.BLUE;
-    }
+	/**
+	 * Gets the link color.
+	 *
+	 * @return the link color
+	 */
+	private Color getLinkColor() {
+		HTMLDocument doc = (HTMLDocument) this.document;
+		if (doc != null) {
+			HTMLBodyElement body = (HTMLBodyElement) doc.getBody();
+			if (body != null) {
+				String vlink = body.getVLink();
+				String link = body.getLink();
+				if ((vlink != null) || (link != null)) {
+					HtmlRendererContext rcontext = this.getHtmlRendererContext();
+					if (rcontext != null) {
+						boolean visited = rcontext.isVisitedLink(this);
+						String colorText = visited ? vlink : link;
+						if (colorText != null) {
+							return ColorFactory.getInstance().getColor(colorText);
+						}
+					}
+				}
+			}
+		}
+		return Color.BLUE;
+	}
 
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        if (this.hasAttribute(HtmlAttributeProperties.HREF)) {
-            prevRenderState = new TextDecorationRenderState(prevRenderState,
-                    RenderState.MASK_TEXTDECORATION_UNDERLINE);
-            prevRenderState = new ColorRenderState(prevRenderState,
-                    this.getLinkColor());
-            prevRenderState = new CursorRenderState(prevRenderState,
-                    Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)));
-        }
-        return super.createRenderState(prevRenderState);
-    }
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		if (this.hasAttribute(HtmlAttributeProperties.HREF)) {
+			prevRenderState = new TextDecorationRenderState(prevRenderState, RenderState.MASK_TEXTDECORATION_UNDERLINE);
+			prevRenderState = new ColorRenderState(prevRenderState, this.getLinkColor());
+			prevRenderState = new CursorRenderState(prevRenderState,
+					Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)));
+		}
+		return super.createRenderState(prevRenderState);
+	}
 
-    @Override
-    public String toString() {
-        return this.getHref();
-    }
+	@Override
+	public String toString() {
+		return this.getHref();
+	}
 
-    @Override
-    public DOMTokenList getRelList() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
+	@Override
+	public DOMTokenList getRelList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public String getCoords() {
 		// TODO Auto-generated method stub
@@ -234,7 +229,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public void setCoords(String coords) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -246,7 +241,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public void setName(String name) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -258,13 +253,13 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public void setShape(String shape) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setPing(String ping) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -276,7 +271,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public void setText(String text) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -288,7 +283,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public void setProtocol(String protocol) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -300,7 +295,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public void setHost(String host) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -312,7 +307,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public void setHostname(String hostname) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -324,7 +319,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public void setPort(String port) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -336,7 +331,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public void setPathname(String pathname) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -348,7 +343,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public void setSearch(String search) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -360,7 +355,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public void setHash(String hash) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

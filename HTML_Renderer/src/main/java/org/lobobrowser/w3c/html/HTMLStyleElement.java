@@ -4,6 +4,7 @@ package org.lobobrowser.w3c.html;
 
 public interface HTMLStyleElement extends HTMLElement {
 	// HTMLStyleElement
+	@Override
 	public boolean getDisabled();
 
 	public void setDisabled(boolean disabled);

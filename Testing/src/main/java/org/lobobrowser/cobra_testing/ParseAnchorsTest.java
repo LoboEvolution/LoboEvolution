@@ -17,54 +17,57 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
-import javax.xml.xpath.*;
-import javax.xml.parsers.*;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.parser.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+
+import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.test.SimpleUserAgentContext;
-import org.w3c.dom.NodeList;
+import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 /**
  * The Class ParseAnchorsTest.
  */
 public class ParseAnchorsTest {
 
-    /** The Constant TEST_URI. */
-    private static final String TEST_URI = "http://sourceforge.net/projects/loboevolution/";
+	/** The Constant TEST_URI. */
+	private static final String TEST_URI = "http://sourceforge.net/projects/loboevolution/";
 
-    public static void main(String[] args) throws Exception {
-        Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
-        UserAgentContext uacontext = new SimpleUserAgentContext();
-        // In this case we will use a standard XML document
-        // as opposed to Cobra's HTML DOM implementation.
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        URL url = new URL(TEST_URI);
-        InputStream in = url.openConnection().getInputStream();
-        try {
-            Reader reader = new InputStreamReader(in, "UTF-8");
-            Document document = builder.newDocument();
-            // Here is where we use Cobra's HTML parser.
-            HtmlParser parser = new HtmlParser(uacontext, document);
-            parser.parse(reader);
-            // Now we use XPath to locate "a" elements that are
-            // descendents of any "html" element.
-            XPath xpath = XPathFactory.newInstance().newXPath();
-            NodeList nodeList = (NodeList) xpath.evaluate("html//a", document,
-                    XPathConstants.NODESET);
-            int length = nodeList.getLength();
-            for (int i = 0; i < length; i++) {
-                Element element = (Element) nodeList.item(i);
-                System.out.println("## Anchor # " + (i + 1) + ": "
-                        + element.getAttribute("href"));
-            }
-        } finally {
-            in.close();
-        }
-    }
+	public static void main(String[] args) throws Exception {
+		Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
+		UserAgentContext uacontext = new SimpleUserAgentContext();
+		// In this case we will use a standard XML document
+		// as opposed to Cobra's HTML DOM implementation.
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		URL url = new URL(TEST_URI);
+		InputStream in = url.openConnection().getInputStream();
+		try {
+			Reader reader = new InputStreamReader(in, "UTF-8");
+			Document document = builder.newDocument();
+			// Here is where we use Cobra's HTML parser.
+			HtmlParser parser = new HtmlParser(uacontext, document);
+			parser.parse(reader);
+			// Now we use XPath to locate "a" elements that are
+			// descendents of any "html" element.
+			XPath xpath = XPathFactory.newInstance().newXPath();
+			NodeList nodeList = (NodeList) xpath.evaluate("html//a", document, XPathConstants.NODESET);
+			int length = nodeList.getLength();
+			for (int i = 0; i < length; i++) {
+				Element element = (Element) nodeList.item(i);
+				System.out.println("## Anchor # " + (i + 1) + ": " + element.getAttribute("href"));
+			}
+		} finally {
+			in.close();
+		}
+	}
 
 }

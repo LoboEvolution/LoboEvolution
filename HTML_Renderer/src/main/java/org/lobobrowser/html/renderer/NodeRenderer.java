@@ -24,11 +24,11 @@ import org.lobobrowser.html.domimpl.DOMNodeImpl;
  */
 public interface NodeRenderer {
 
-    /**
-     * Sets the root node.
-     *
-     * @param node
-     *            the new root node
-     */
-    void setRootNode(DOMNodeImpl node);
+	/**
+	 * Sets the root node.
+	 *
+	 * @param node
+	 *            the new root node
+	 */
+	void setRootNode(DOMNodeImpl node);
 }

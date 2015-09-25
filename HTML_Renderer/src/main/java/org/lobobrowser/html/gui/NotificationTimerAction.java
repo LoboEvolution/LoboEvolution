@@ -21,14 +21,15 @@ import java.awt.event.ActionListener;
  */
 public class NotificationTimerAction implements ActionListener {
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        HtmlPanel html = new HtmlPanel();
-        html.processNotifications();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		HtmlPanel html = new HtmlPanel();
+		html.processNotifications();
+	}
 }

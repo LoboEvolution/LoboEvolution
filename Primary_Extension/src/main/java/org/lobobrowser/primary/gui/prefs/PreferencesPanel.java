@@ -27,61 +27,60 @@ import org.lobobrowser.util.gui.WrapperLayout;
  */
 public class PreferencesPanel extends JPanel {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The ui. */
-    private AbstractSettingsUI ui;
+	/** The ui. */
+	private AbstractSettingsUI ui;
 
-    /**
-     * Instantiates a new preferences panel.
-     */
-    public PreferencesPanel() {
-        this.setLayout(WrapperLayout.getInstance());
-        this.setBorder(new CompoundBorder(new EtchedBorder(),
-                new javax.swing.border.EmptyBorder(8, 8, 8, 8)));
-    }
+	/**
+	 * Instantiates a new preferences panel.
+	 */
+	public PreferencesPanel() {
+		this.setLayout(WrapperLayout.getInstance());
+		this.setBorder(new CompoundBorder(new EtchedBorder(), new javax.swing.border.EmptyBorder(8, 8, 8, 8)));
+	}
 
-    /**
-     * Save.
-     *
-     * @return true, if successful
-     */
-    public boolean save() {
-        AbstractSettingsUI ui = this.ui;
-        if (ui != null) {
-            try {
-                ui.save();
-            } catch (ValidationException ve) {
-                JOptionPane.showMessageDialog(this, ve.getMessage());
-                return false;
-            }
-        }
-        return true;
-    }
+	/**
+	 * Save.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean save() {
+		AbstractSettingsUI ui = this.ui;
+		if (ui != null) {
+			try {
+				ui.save();
+			} catch (ValidationException ve) {
+				JOptionPane.showMessageDialog(this, ve.getMessage());
+				return false;
+			}
+		}
+		return true;
+	}
 
-    /**
-     * Restore defaults.
-     */
-    public void restoreDefaults() {
-        AbstractSettingsUI ui = this.ui;
-        if (ui != null) {
-            ui.restoreDefaults();
-        }
-    }
+	/**
+	 * Restore defaults.
+	 */
+	public void restoreDefaults() {
+		AbstractSettingsUI ui = this.ui;
+		if (ui != null) {
+			ui.restoreDefaults();
+		}
+	}
 
-    /**
-     * Sets the settings ui.
-     *
-     * @param ui
-     *            the new settings ui
-     */
-    public void setSettingsUI(AbstractSettingsUI ui) {
-        this.ui = ui;
-        this.removeAll();
-        if (ui != null) {
-            this.add(ui);
-        }
-        this.revalidate();
-    }
+	/**
+	 * Sets the settings ui.
+	 *
+	 * @param ui
+	 *            the new settings ui
+	 */
+	public void setSettingsUI(AbstractSettingsUI ui) {
+		this.ui = ui;
+		this.removeAll();
+		if (ui != null) {
+			this.add(ui);
+		}
+		this.revalidate();
+	}
 }

@@ -28,7 +28,7 @@ public class Timing {
     public static double round1(double value) {
         return Math.round(value * 10.0) / 10.0;
     }
-
+    
     /**
      * Gets the elapsed text.
      *

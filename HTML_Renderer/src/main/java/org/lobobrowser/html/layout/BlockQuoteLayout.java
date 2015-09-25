@@ -18,10 +18,10 @@ package org.lobobrowser.html.layout;
  */
 public class BlockQuoteLayout extends CommonLayout {
 
-    /**
-     * Instantiates a new block quote layout.
-     */
-    public BlockQuoteLayout() {
-        super(DISPLAY_BLOCK);
-    }
+	/**
+	 * Instantiates a new block quote layout.
+	 */
+	public BlockQuoteLayout() {
+		super(DISPLAY_BLOCK);
+	}
 }

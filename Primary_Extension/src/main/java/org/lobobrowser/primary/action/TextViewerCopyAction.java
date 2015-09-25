@@ -23,25 +23,26 @@ import org.lobobrowser.primary.ext.TextViewerWindow;
 /**
  * The Class TextViewerCopyAction.
  */
-public class TextViewerCopyAction extends AbstractAction{
-	
-	/** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-    
-    /** The text. */
-    private TextViewerWindow text;
-    
-    /**
-     * Instantiates a new text viewer close action.
-     *
-     * @param text the text
-     */
-    public TextViewerCopyAction(TextViewerWindow text){
-    	this.text = text;
-    }
+public class TextViewerCopyAction extends AbstractAction {
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    	text.getTextArea().copy();
-    }
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/** The text. */
+	private TextViewerWindow text;
+
+	/**
+	 * Instantiates a new text viewer close action.
+	 *
+	 * @param text
+	 *            the text
+	 */
+	public TextViewerCopyAction(TextViewerWindow text) {
+		this.text = text;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		text.getTextArea().copy();
+	}
 }

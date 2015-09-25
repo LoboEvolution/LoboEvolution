@@ -21,14 +21,15 @@ import org.lobobrowser.html.renderer.RBlockViewport;
  * The Class HrLayout.
  */
 public class HrLayout implements MarkupLayout {
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.render.MarkupLayout#layoutMarkup(java.awt.Container
-     * , java.awt.Insets, org.lobobrowser.html.dombl.HTMLElementImpl)
-     */
-    @Override
-    public void layoutMarkup(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-        bodyLayout.layoutHr(markupElement);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.render.MarkupLayout#layoutMarkup(java.awt.Container
+	 * , java.awt.Insets, org.lobobrowser.html.dombl.HTMLElementImpl)
+	 */
+	@Override
+	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		bodyLayout.layoutHr(markupElement);
+	}
 }

@@ -27,18 +27,18 @@ import org.lobobrowser.html.BrowserFrame;
  */
 public interface FrameNode {
 
-    /**
-     * Gets the browser frame.
-     *
-     * @return the browser frame
-     */
-    BrowserFrame getBrowserFrame();
+	/**
+	 * Gets the browser frame.
+	 *
+	 * @return the browser frame
+	 */
+	BrowserFrame getBrowserFrame();
 
-    /**
-     * Sets the browser frame.
-     *
-     * @param frame
-     *            the new browser frame
-     */
-    void setBrowserFrame(BrowserFrame frame);
+	/**
+	 * Sets the browser frame.
+	 *
+	 * @param frame
+	 *            the new browser frame
+	 */
+	void setBrowserFrame(BrowserFrame frame);
 }

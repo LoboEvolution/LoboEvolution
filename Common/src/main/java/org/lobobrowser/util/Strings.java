@@ -27,6 +27,7 @@ public class Strings {
     private static final MessageDigest MESSAGE_DIGEST;
     /** The Constant EMPTY_ARRAY. */
     public static final String[] EMPTY_ARRAY = new String[0];
+    
     static {
         MessageDigest md;
         try {
@@ -36,13 +37,13 @@ public class Strings {
         }
         MESSAGE_DIGEST = md;
     }
-
+    
     /**
      * Instantiates a new strings.
      */
     private Strings() {
     }
-
+    
     /**
      * Compare versions.
      *
@@ -102,7 +103,7 @@ public class Strings {
             return diff;
         }
     }
-
+    
     /**
      * Leading digits.
      *
@@ -125,7 +126,7 @@ public class Strings {
         }
         return buffer == null ? "" : buffer.toString();
     }
-
+    
     /**
      * Leading non digits.
      *
@@ -148,7 +149,7 @@ public class Strings {
         }
         return buffer == null ? "" : buffer.toString();
     }
-
+    
     /**
      * Checks if is blank.
      *
@@ -159,7 +160,7 @@ public class Strings {
     public static boolean isBlank(String text) {
         return (text == null) || "".equals(text);
     }
-
+    
     /**
      * Count lines.
      *
@@ -180,7 +181,7 @@ public class Strings {
         }
         return lineCount;
     }
-
+    
     /**
      * Checks if is java identifier.
      *
@@ -206,7 +207,7 @@ public class Strings {
         }
         return true;
     }
-
+    
     /**
      * Gets the java string literal.
      *
@@ -244,7 +245,7 @@ public class Strings {
         buf.append('"');
         return buf.toString();
     }
-
+    
     /**
      * Gets the java identifier.
      *
@@ -267,10 +268,10 @@ public class Strings {
         }
         return buf.toString();
     }
-
+    
     /** The Constant HEX_CHARS. */
     private static final String HEX_CHARS = "0123456789ABCDEF";
-
+    
     /**
      * Gets the m d5.
      *
@@ -296,12 +297,12 @@ public class Strings {
             byte b = result[i];
             int lo4 = b & 0x0F;
             int hi4 = (b & 0xF0) >> 4;
-        resChars[i * 2] = HEX_CHARS.charAt(hi4);
-        resChars[(i * 2) + 1] = HEX_CHARS.charAt(lo4);
+            resChars[i * 2] = HEX_CHARS.charAt(hi4);
+            resChars[(i * 2) + 1] = HEX_CHARS.charAt(lo4);
         }
         return new String(resChars);
     }
-
+    
     /**
      * Gets the hash32.
      *
@@ -316,7 +317,7 @@ public class Strings {
         String md5 = getMD5(source);
         return md5.substring(0, 8);
     }
-
+    
     /**
      * Gets the hash64.
      *
@@ -331,7 +332,7 @@ public class Strings {
         String md5 = getMD5(source);
         return md5.substring(0, 16);
     }
-
+    
     /**
      * Count chars.
      *
@@ -351,7 +352,7 @@ public class Strings {
         }
         return count;
     }
-
+    
     // public static boolean isTrimmable(char ch) {
     // switch(ch) {
     // case ' ':
@@ -359,9 +360,9 @@ public class Strings {
     // case '\r':
     // case '\n':
     // return true;
-    //}
+    // }
     // return false;
-    //}
+    // }
     //
     // /**
     // * Trims blanks, line breaks and tabs.
@@ -375,17 +376,17 @@ public class Strings {
     // char ch = text.charAt(startIdx);
     // if(!isTrimmable(ch)) {
     // break;
-    //}
-    //}
+    // }
+    // }
     // int endIdx;
     // for(endIdx = len;--endIdx > startIdx; ) {
     // char ch = text.charAt(endIdx);
     // if(!isTrimmable(ch)) {
     // break;
-    //}
-    //}
+    // }
+    // }
     // return text.substring(startIdx, endIdx + 1);
-    //}
+    // }
     /**
      * Unquote.
      *
@@ -400,7 +401,7 @@ public class Strings {
         }
         return text;
     }
-
+    
     /**
      * Split.
      *
@@ -410,7 +411,7 @@ public class Strings {
      */
     public static String[] split(String phrase) {
         int length = phrase.length();
-        ArrayList wordList = new ArrayList();
+        ArrayList<String> wordList = new ArrayList<String>();
         StringBuffer word = null;
         for (int i = 0; i < length; i++) {
             char ch = phrase.charAt(i);
@@ -436,7 +437,7 @@ public class Strings {
         }
         return (String[]) wordList.toArray(EMPTY_ARRAY);
     }
-
+    
     /**
      * Truncate.
      *
@@ -455,7 +456,7 @@ public class Strings {
         }
         return text.substring(0, Math.max(maxLength - 3, 0)) + "...";
     }
-
+    
     /**
      * Strict html encode.
      *
@@ -493,7 +494,7 @@ public class Strings {
         }
         return output.toString();
     }
-
+    
     /**
      * Trim for alpha num dash.
      *
@@ -513,7 +514,7 @@ public class Strings {
         }
         return rawText;
     }
-
+    
     /**
      * Gets the CRLF string.
      *

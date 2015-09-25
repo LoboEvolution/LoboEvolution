@@ -25,207 +25,206 @@ import javax.swing.text.JTextComponent;
  */
 public class FormField {
 
-    /** The type. */
-    public final FieldType type;
+	/** The type. */
+	public final FieldType type;
 
-    /**
-     * Instantiates a new form field.
-     *
-     * @param type
-     *            the type
-     */
-    public FormField(final FieldType type) {
-        this(FieldType.TEXT, "");
-    }
+	/**
+	 * Instantiates a new form field.
+	 *
+	 * @param type
+	 *            the type
+	 */
+	public FormField(final FieldType type) {
+		this(FieldType.TEXT, "");
+	}
 
-    /**
-     * Instantiates a new form field.
-     *
-     * @param type
-     *            the type
-     * @param caption
-     *            the caption
-     */
-    public FormField(final FieldType type, String caption) {
-        this(type, caption, true);
-    }
+	/**
+	 * Instantiates a new form field.
+	 *
+	 * @param type
+	 *            the type
+	 * @param caption
+	 *            the caption
+	 */
+	public FormField(final FieldType type, String caption) {
+		this(type, caption, true);
+	}
 
-    /**
-     * Instantiates a new form field.
-     *
-     * @param type
-     *            the type
-     * @param caption
-     *            the caption
-     * @param editable
-     *            the editable
-     */
-    public FormField(final FieldType type, final String caption,
-            final boolean editable) {
-        this.type = type;
-        this.setCaption(caption);
-        this.setEditable(editable);
-    }
+	/**
+	 * Instantiates a new form field.
+	 *
+	 * @param type
+	 *            the type
+	 * @param caption
+	 *            the caption
+	 * @param editable
+	 *            the editable
+	 */
+	public FormField(final FieldType type, final String caption, final boolean editable) {
+		this.type = type;
+		this.setCaption(caption);
+		this.setEditable(editable);
+	}
 
-    /**
-     * Instantiates a new form field.
-     *
-     * @param type
-     *            the type
-     * @param editable
-     *            the editable
-     */
-    public FormField(final FieldType type, final boolean editable) {
-        this.type = type;
-        this.setEditable(editable);
-    }
+	/**
+	 * Instantiates a new form field.
+	 *
+	 * @param type
+	 *            the type
+	 * @param editable
+	 *            the editable
+	 */
+	public FormField(final FieldType type, final boolean editable) {
+		this.type = type;
+		this.setEditable(editable);
+	}
 
-    /**
-     * Gets the caption.
-     *
-     * @return the caption
-     */
-    public String getCaption() {
-        return this.getLabel().getText();
-    }
+	/**
+	 * Gets the caption.
+	 *
+	 * @return the caption
+	 */
+	public String getCaption() {
+		return this.getLabel().getText();
+	}
 
-    /**
-     * Checks if is editable.
-     *
-     * @return true, if is editable
-     */
-    public boolean isEditable() {
-        JComponent fe = this.getFieldEditor();
-        if (fe instanceof JTextComponent) {
-            return ((JTextComponent) fe).isEditable();
-        } else {
-            return false;
-        }
-    }
+	/**
+	 * Checks if is editable.
+	 *
+	 * @return true, if is editable
+	 */
+	public boolean isEditable() {
+		JComponent fe = this.getFieldEditor();
+		if (fe instanceof JTextComponent) {
+			return ((JTextComponent) fe).isEditable();
+		} else {
+			return false;
+		}
+	}
 
-    /**
-     * Gets the type.
-     *
-     * @return the type
-     */
-    public FieldType getType() {
-        return type;
-    }
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
+	public FieldType getType() {
+		return type;
+	}
 
-    /**
-     * Gets the value.
-     *
-     * @return the value
-     */
-    public String getValue() {
-        JComponent fe = this.getFieldEditor();
-        if (fe instanceof JTextComponent) {
-            return ((JTextComponent) fe).getText();
-        } else {
-            return null;
-        }
-    }
+	/**
+	 * Gets the value.
+	 *
+	 * @return the value
+	 */
+	public String getValue() {
+		JComponent fe = this.getFieldEditor();
+		if (fe instanceof JTextComponent) {
+			return ((JTextComponent) fe).getText();
+		} else {
+			return null;
+		}
+	}
 
-    /**
-     * Sets the value.
-     *
-     * @param value
-     *            the new value
-     */
-    public void setValue(String value) {
-        JComponent fe = this.getFieldEditor();
-        if (fe instanceof JTextComponent) {
-            ((JTextComponent) fe).setText(value);
-        }
-    }
+	/**
+	 * Sets the value.
+	 *
+	 * @param value
+	 *            the new value
+	 */
+	public void setValue(String value) {
+		JComponent fe = this.getFieldEditor();
+		if (fe instanceof JTextComponent) {
+			((JTextComponent) fe).setText(value);
+		}
+	}
 
-    /**
-     * Gets the tool tip.
-     *
-     * @return the tool tip
-     */
-    public String getToolTip() {
-        return this.getFieldEditor().getToolTipText();
-    }
+	/**
+	 * Gets the tool tip.
+	 *
+	 * @return the tool tip
+	 */
+	public String getToolTip() {
+		return this.getFieldEditor().getToolTipText();
+	}
 
-    /**
-     * Sets the tool tip.
-     *
-     * @param tooltip
-     *            the new tool tip
-     */
-    public void setToolTip(String tooltip) {
-        this.getFieldEditor().setToolTipText(tooltip);
-    }
+	/**
+	 * Sets the tool tip.
+	 *
+	 * @param tooltip
+	 *            the new tool tip
+	 */
+	public void setToolTip(String tooltip) {
+		this.getFieldEditor().setToolTipText(tooltip);
+	}
 
-    /**
-     * Sets the editable.
-     *
-     * @param editable
-     *            the new editable
-     */
-    public void setEditable(boolean editable) {
-        JComponent fe = this.getFieldEditor();
-        if (fe instanceof JTextComponent) {
-            ((JTextComponent) fe).setEditable(editable);
-        }
-    }
+	/**
+	 * Sets the editable.
+	 *
+	 * @param editable
+	 *            the new editable
+	 */
+	public void setEditable(boolean editable) {
+		JComponent fe = this.getFieldEditor();
+		if (fe instanceof JTextComponent) {
+			((JTextComponent) fe).setEditable(editable);
+		}
+	}
 
-    /**
-     * Sets the caption.
-     *
-     * @param caption
-     *            the new caption
-     */
-    public void setCaption(String caption) {
-        this.getLabel().setText(caption);
-    }
+	/**
+	 * Sets the caption.
+	 *
+	 * @param caption
+	 *            the new caption
+	 */
+	public void setCaption(String caption) {
+		this.getLabel().setText(caption);
+	}
 
-    /** The label. */
-    private JLabel label;
+	/** The label. */
+	private JLabel label;
 
-    /**
-     * Gets the label.
-     *
-     * @return the label
-     */
-    public JLabel getLabel() {
-        JLabel label = this.label;
-        if (label != null) {
-            return label;
-        }
-        label = new JLabel();
-        this.label = label;
-        return label;
-    }
+	/**
+	 * Gets the label.
+	 *
+	 * @return the label
+	 */
+	public JLabel getLabel() {
+		JLabel label = this.label;
+		if (label != null) {
+			return label;
+		}
+		label = new JLabel();
+		this.label = label;
+		return label;
+	}
 
-    /** The field editor. */
-    private JComponent fieldEditor;
+	/** The field editor. */
+	private JComponent fieldEditor;
 
-    /**
-     * Gets the field editor.
-     *
-     * @return the field editor
-     */
-    public JComponent getFieldEditor() {
-        JComponent fe = this.fieldEditor;
-        if (fe != null) {
-            return fe;
-        }
-        switch (this.type) {
-        case TEXT:
-            final JTextField textField = new JTextField();
-            fe = textField;
-            break;
-        case PASSWORD:
-            final JPasswordField pwdField = new JPasswordField();
-            pwdField.setEchoChar('*');
-            fe = pwdField;
-            break;
-        default:
-            throw new IllegalArgumentException("type=" + this.type);
-        }
-        this.fieldEditor = fe;
-        return fe;
-    }
+	/**
+	 * Gets the field editor.
+	 *
+	 * @return the field editor
+	 */
+	public JComponent getFieldEditor() {
+		JComponent fe = this.fieldEditor;
+		if (fe != null) {
+			return fe;
+		}
+		switch (this.type) {
+		case TEXT:
+			final JTextField textField = new JTextField();
+			fe = textField;
+			break;
+		case PASSWORD:
+			final JPasswordField pwdField = new JPasswordField();
+			pwdField.setEchoChar('*');
+			fe = pwdField;
+			break;
+		default:
+			throw new IllegalArgumentException("type=" + this.type);
+		}
+		this.fieldEditor = fe;
+		return fe;
+	}
 }

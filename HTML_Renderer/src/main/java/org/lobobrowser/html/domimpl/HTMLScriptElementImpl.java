@@ -30,9 +30,10 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
-import org.lobobrowser.html.HttpRequest;
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.js.Executor;
+import org.lobobrowser.http.HttpRequest;
+import org.lobobrowser.http.Method;
+import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.w3c.html.HTMLScriptElement;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EcmaError;
@@ -234,8 +235,8 @@ HTMLScriptElement {
 						SecurityManager sm = System.getSecurityManager();
 						if (sm == null) {
 							try {
-								request.open("GET", scriptURI, false);
-								request.send(null);
+								request.open(Method.GET, getFullURL(scriptURI), false);
+								request.send();
 							} catch (IOException thrown) {
 								logger.log(Level.WARNING, "processScript()",
 										thrown);
@@ -249,9 +250,8 @@ HTMLScriptElement {
 											// accessing
 											// items from elsewhere.
 											try {
-												request.open("GET", scriptURI,
-														false);
-												request.send(null);
+												request.open(Method.GET, getFullURL(scriptURI), false);
+												request.send();
 											} catch (IOException thrown) {
 												logger.log(Level.WARNING,
 														"processScript()",

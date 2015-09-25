@@ -19,8 +19,8 @@ import java.util.MissingResourceException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
+import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.js.JavaScript;
 import org.lobobrowser.w3c.events.Event;
 import org.mozilla.javascript.Context;

@@ -16,106 +16,102 @@ package org.lobobrowser.html.renderer;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.ListStyle;
+import org.lobobrowser.http.UserAgentContext;
 
 /**
  * The Class RList.
  */
 class RList extends BaseRListElement {
 
-    /**
-     * Instantiates a new r list.
-     *
-     * @param modelNode
-     *            the model node
-     * @param listNesting
-     *            the list nesting
-     * @param pcontext
-     *            the pcontext
-     * @param rcontext
-     *            the rcontext
-     * @param frameContext
-     *            the frame context
-     * @param parentContainer
-     *            the parent container
-     * @param parent
-     *            the parent
-     */
-    public RList(DOMNodeImpl modelNode, int listNesting,
-            UserAgentContext pcontext, HtmlRendererContext rcontext,
-            FrameContext frameContext, RenderableContainer parentContainer,
-            RCollection parent) {
-        super(modelNode, listNesting, pcontext, rcontext, frameContext,
-                parentContainer);
-        // this.defaultMarginInsets = new java.awt.Insets(5, 0, 5, 0);
-    }
+	/**
+	 * Instantiates a new r list.
+	 *
+	 * @param modelNode
+	 *            the model node
+	 * @param listNesting
+	 *            the list nesting
+	 * @param pcontext
+	 *            the pcontext
+	 * @param rcontext
+	 *            the rcontext
+	 * @param frameContext
+	 *            the frame context
+	 * @param parentContainer
+	 *            the parent container
+	 * @param parent
+	 *            the parent
+	 */
+	public RList(DOMNodeImpl modelNode, int listNesting, UserAgentContext pcontext, HtmlRendererContext rcontext,
+			FrameContext frameContext, RenderableContainer parentContainer, RCollection parent) {
+		super(modelNode, listNesting, pcontext, rcontext, frameContext, parentContainer);
+		// this.defaultMarginInsets = new java.awt.Insets(5, 0, 5, 0);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderer.BaseRListElement#applyStyle(int, int)
-     */
-    @Override
-    protected void applyStyle(int availWidth, int availHeight) {
-        super.applyStyle(availWidth, availHeight);
-        ListStyle listStyle = this.listStyle;
-        if ((listStyle == null) || (listStyle.type == ListStyle.TYPE_UNSET)) {
-            Object rootNode = this.modelNode;
-            if (!(rootNode instanceof HTMLElementImpl)) {
-                return;
-            }
-            HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-            if (listStyle == null) {
-                listStyle = new ListStyle();
-                this.listStyle = listStyle;
-            }
-            if ("ul".equalsIgnoreCase(rootElement.getTagName())) {
-                int listNesting = this.listNesting;
-                if (listNesting == 0) {
-                    listStyle.type = ListStyle.TYPE_DISC;
-                } else if (listNesting == 1) {
-                    listStyle.type = ListStyle.TYPE_CIRCLE;
-                } else {
-                    listStyle.type = ListStyle.TYPE_SQUARE;
-                }
-            } else {
-                listStyle.type = ListStyle.TYPE_DECIMAL;
-            }
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.renderer.BaseRListElement#applyStyle(int, int)
+	 */
+	@Override
+	protected void applyStyle(int availWidth, int availHeight) {
+		super.applyStyle(availWidth, availHeight);
+		ListStyle listStyle = this.listStyle;
+		if ((listStyle == null) || (listStyle.type == ListStyle.TYPE_UNSET)) {
+			Object rootNode = this.modelNode;
+			if (!(rootNode instanceof HTMLElementImpl)) {
+				return;
+			}
+			HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
+			if (listStyle == null) {
+				listStyle = new ListStyle();
+				this.listStyle = listStyle;
+			}
+			if ("ul".equalsIgnoreCase(rootElement.getTagName())) {
+				int listNesting = this.listNesting;
+				if (listNesting == 0) {
+					listStyle.type = ListStyle.TYPE_DISC;
+				} else if (listNesting == 1) {
+					listStyle.type = ListStyle.TYPE_CIRCLE;
+				} else {
+					listStyle.type = ListStyle.TYPE_SQUARE;
+				}
+			} else {
+				listStyle.type = ListStyle.TYPE_DECIMAL;
+			}
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderer.RBlock#doLayout(int, int, boolean,
-     * boolean, org.lobobrowser.html.renderer.FloatingBoundsSource, int, int,
-     * boolean)
-     */
-    @Override
-    public void doLayout(int availWidth, int availHeight, boolean expandWidth,
-            boolean expandHeight, FloatingBoundsSource floatBoundsSource,
-            int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
-        RenderState renderState = this.modelNode.getRenderState();
-        int counterStart = 1;
-        Object rootNode = this.modelNode;
-        if (!(rootNode instanceof HTMLElementImpl)) {
-            return;
-        }
-        HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-        String startText = rootElement
-                .getAttribute(HtmlAttributeProperties.START);
-        if (startText != null) {
-            try {
-                counterStart = Integer.parseInt(startText);
-            } catch (NumberFormatException nfe) {
-                // ignore
-            }
-        }
-        renderState.resetCount(DEFAULT_COUNTER_NAME, this.listNesting,
-                counterStart);
-        super.doLayout(availWidth, availHeight, expandWidth, expandHeight,
-                floatBoundsSource, defaultOverflowX, defaultOverflowY, sizeOnly);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.renderer.RBlock#doLayout(int, int, boolean,
+	 * boolean, org.lobobrowser.html.renderer.FloatingBoundsSource, int, int,
+	 * boolean)
+	 */
+	@Override
+	public void doLayout(int availWidth, int availHeight, boolean expandWidth, boolean expandHeight,
+			FloatingBoundsSource floatBoundsSource, int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
+		RenderState renderState = this.modelNode.getRenderState();
+		int counterStart = 1;
+		Object rootNode = this.modelNode;
+		if (!(rootNode instanceof HTMLElementImpl)) {
+			return;
+		}
+		HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
+		String startText = rootElement.getAttribute(HtmlAttributeProperties.START);
+		if (startText != null) {
+			try {
+				counterStart = Integer.parseInt(startText);
+			} catch (NumberFormatException nfe) {
+				// ignore
+			}
+		}
+		renderState.resetCount(DEFAULT_COUNTER_NAME, this.listNesting, counterStart);
+		super.doLayout(availWidth, availHeight, expandWidth, expandHeight, floatBoundsSource, defaultOverflowX,
+				defaultOverflowY, sizeOnly);
+	}
 }

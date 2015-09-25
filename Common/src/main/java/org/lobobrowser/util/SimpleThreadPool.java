@@ -1,22 +1,16 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 2 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
-
-    You should have received a copy of the GNU General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
+ * 2014 - 2015 Lobo Evolution This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either verion 2 of the
+ * License, or (at your option) any later version. This program is distributed
+ * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received
+ * a copy of the GNU General Public License along with this library; if not,
+ * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
+ * ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.util;
 
@@ -36,9 +30,9 @@ public class SimpleThreadPool {
     private static final Logger logger = Logger
             .getLogger(SimpleThreadPool.class.getName());
     /** The task list. */
-    private final LinkedList taskList = new LinkedList();
+    private final LinkedList<SimpleThreadPoolTask> taskList = new LinkedList<SimpleThreadPoolTask>();
     /** The running set. */
-    private final Set runningSet = new HashSet();
+    private final Set<SimpleThreadPoolTask> runningSet = new HashSet<SimpleThreadPoolTask>();
     /** The min threads. */
     private final int minThreads;
     /** The max threads. */
@@ -57,7 +51,7 @@ public class SimpleThreadPool {
     private int numIdleThreads = 0;
     /** The thread number. */
     private int threadNumber = 0;
-
+    
     /**
      * Instantiates a new simple thread pool.
      *
@@ -70,8 +64,8 @@ public class SimpleThreadPool {
      * @param idleAliveMillis
      *            the idle alive millis
      */
-    public SimpleThreadPool(String name, int minShrinkToThreads,
-            int maxThreads, int idleAliveMillis) {
+    public SimpleThreadPool(String name, int minShrinkToThreads, int maxThreads,
+            int idleAliveMillis) {
         this.minThreads = minShrinkToThreads;
         this.maxThreads = maxThreads;
         this.idleAliveMillis = idleAliveMillis;
@@ -83,7 +77,7 @@ public class SimpleThreadPool {
         // well.
         this.threadGroup = null; // new ThreadGroup(name);
     }
-
+    
     /**
      * Schedule.
      *
@@ -103,7 +97,7 @@ public class SimpleThreadPool {
             monitor.notify();
         }
     }
-
+    
     /**
      * Cancel.
      *
@@ -116,7 +110,7 @@ public class SimpleThreadPool {
         }
         task.cancel();
     }
-
+    
     /**
      * Adds the thread impl.
      */
@@ -129,7 +123,7 @@ public class SimpleThreadPool {
             this.numThreads++;
         }
     }
-
+    
     /**
      * Cancels all waiting tasks and any currently running task.
      */
@@ -142,7 +136,7 @@ public class SimpleThreadPool {
             }
         }
     }
-
+    
     /**
      * The Class ThreadRunnable.
      */
@@ -155,7 +149,7 @@ public class SimpleThreadPool {
         public void run() {
             Object monitor = taskMonitor;
             LinkedList tl = taskList;
-            Set rs = runningSet;
+            Set<SimpleThreadPoolTask> rs = runningSet;
             int iam = idleAliveMillis;
             SimpleThreadPoolTask task = null;
             for (;;) {
@@ -168,8 +162,8 @@ public class SimpleThreadPool {
                         try {
                             long waitBase = System.currentTimeMillis();
                             INNER: while (tl.isEmpty()) {
-                                long maxWait = iam
-                                        - (System.currentTimeMillis() - waitBase);
+                                long maxWait = iam - (System.currentTimeMillis()
+                                        - waitBase);
                                 if (maxWait <= 0) {
                                     if (numThreads > minThreads) {
                                         // Should be only way to exit thread.
@@ -192,8 +186,8 @@ public class SimpleThreadPool {
                     String baseName = currentThread.getName();
                     try {
                         try {
-                            currentThread.setName(baseName + ":"
-                                    + task.toString());
+                            currentThread
+                                    .setName(baseName + ":" + task.toString());
                         } catch (Throwable thrown) {
                             logger.log(Level.WARNING,
                                     "run(): Unable to set task name.", thrown);
@@ -201,8 +195,9 @@ public class SimpleThreadPool {
                         try {
                             task.run();
                         } catch (Throwable thrown) {
-                            logger.log(Level.SEVERE, "run(): Error in task: "
-                                    + task + ".", thrown);
+                            logger.log(Level.SEVERE,
+                                    "run(): Error in task: " + task + ".",
+                                    thrown);
                         }
                     } finally {
                         currentThread.setName(baseName);

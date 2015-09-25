@@ -31,7 +31,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.lobobrowser.html.HtmlRendererContext;
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ChildHTMLCollection;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.dombl.NodeVisitor;
@@ -42,6 +41,7 @@ import org.lobobrowser.html.domfilter.NodeFilter;
 import org.lobobrowser.html.domfilter.TextFilter;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.renderstate.StyleSheetRenderState;
+import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.util.Objects;
 import org.lobobrowser.util.Strings;

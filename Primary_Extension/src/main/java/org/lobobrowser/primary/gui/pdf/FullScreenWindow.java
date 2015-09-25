@@ -46,11 +46,11 @@ import javax.swing.JFrame;
 public class FullScreenWindow {
 
 	/**
-	 * 
+	 *
 	 * The screen that the user last chose for displaying a
-	 * 
+	 *
 	 * FullScreenWindow
-	 * 
+	 *
 	 */
 
 	private static GraphicsDevice defaultScreen;
@@ -64,32 +64,32 @@ public class FullScreenWindow {
 	private JFrame jf;
 
 	/**
-	 * 
+	 *
 	 * Whether this FullScreenWindow has been used. Each FullScreenWindow
-	 * 
+	 *
 	 * can only be displayed once.
-	 * 
+	 *
 	 */
 
 	private boolean dead = false;
 
 	/**
-	 * 
+	 *
 	 * Create a full screen window containing a JComponent, and ask the
-	 * 
+	 *
 	 * user which screen they'd like to use if more than one is present.
-	 * 
+	 *
 	 * @param part
 	 *            the JComponent to display
-	 * 
+	 *
 	 * @param forcechoice
 	 *            true if you want force the display of the screen
-	 * 
+	 *
 	 *            choice buttons. If false, buttons will only display if the
 	 *            user
-	 * 
+	 *
 	 *            hasn't previously picked a screen.
-	 * 
+	 *
 	 */
 
 	public FullScreenWindow(JComponent part, boolean forcechoice) {
@@ -101,16 +101,16 @@ public class FullScreenWindow {
 	}
 
 	/**
-	 * 
+	 *
 	 * Create a full screen window containing a JComponent. The user
-	 * 
+	 *
 	 * will only be asked which screen to display on if there are multiple
-	 * 
+	 *
 	 * monitors attached and the user hasn't already made a choice.
-	 * 
+	 *
 	 * @param part
 	 *            the JComponent to display
-	 * 
+	 *
 	 */
 
 	public FullScreenWindow(JComponent part) {
@@ -122,11 +122,11 @@ public class FullScreenWindow {
 	}
 
 	/**
-	 * 
+	 *
 	 * Close the full screen window. This particular FullScreenWindow
-	 * 
+	 *
 	 * object cannot be used again.
-	 * 
+	 *
 	 */
 
 	public void close() {
@@ -149,7 +149,7 @@ public class FullScreenWindow {
 	 * Create the window, asking for which screen to use if there are multiple
 	 * monitors and either forcechoice is true, or the user hasn't already
 	 * picked a screen.
-	 * 
+	 *
 	 * @param part
 	 *            the JComponent to display
 	 * @param forcechoice
@@ -232,11 +232,15 @@ public class FullScreenWindow {
 
 	class PickMe extends JFrame {
 
+		/**
+		 *
+		 */
+		private static final long serialVersionUID = -658915481325845436L;
 		GraphicsDevice mygd;
 
 		/**
 		 * Creates the PickMe button on a particular display.
-		 * 
+		 *
 		 * @param gd
 		 *            the GraphicsDevice (display) to use for this button
 		 */
@@ -301,11 +305,11 @@ public class FullScreenWindow {
 	private GraphicsDevice pickedDevice;
 
 	/**
-	 * 
+	 *
 	 * Select a particular screen for display of this window, and set
-	 * 
+	 *
 	 * the flag.
-	 * 
+	 *
 	 */
 
 	private void pickDevice(GraphicsDevice gd) {
@@ -317,16 +321,16 @@ public class FullScreenWindow {
 	}
 
 	/**
-	 * 
+	 *
 	 * Displays a button on each attached monitor, and returns the
-	 * 
+	 *
 	 * GraphicsDevice object associated with that monitor.
-	 * 
+	 *
 	 * @param scrns
 	 *            a list of GraphicsDevices on which to display buttons
-	 * 
+	 *
 	 * @return the GraphicsDevice selected.
-	 * 
+	 *
 	 */
 
 	private GraphicsDevice pickScreen(GraphicsDevice scrns[]) {

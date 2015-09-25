@@ -28,80 +28,79 @@ import org.lobobrowser.util.gui.WrapperLayout;
  */
 public class SearchEngineEditor extends AbstractItemEditor<SearchEngine> {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The form panel. */
-    private final FormPanel formPanel = new FormPanel();
+	/** The form panel. */
+	private final FormPanel formPanel = new FormPanel();
 
-    /** The name field. */
-    private final FormField nameField = new FormField(FieldType.TEXT);
+	/** The name field. */
+	private final FormField nameField = new FormField(FieldType.TEXT);
 
-    /** The description field. */
-    private final FormField descriptionField = new FormField(FieldType.TEXT);
+	/** The description field. */
+	private final FormField descriptionField = new FormField(FieldType.TEXT);
 
-    /** The base url field. */
-    private final FormField baseUrlField = new FormField(FieldType.TEXT);
+	/** The base url field. */
+	private final FormField baseUrlField = new FormField(FieldType.TEXT);
 
-    /** The query parameter field. */
-    private final FormField queryParameterField = new FormField(FieldType.TEXT);
+	/** The query parameter field. */
+	private final FormField queryParameterField = new FormField(FieldType.TEXT);
 
-    /**
-     * Instantiates a new search engine editor.
-     */
-    public SearchEngineEditor() {
-        this.nameField.setCaption("Name:");
-        this.descriptionField.setCaption("Description:");
-        this.baseUrlField.setCaption("Base URL:");
-        this.baseUrlField
-        .setToolTip("The search URL, excluding the query parameter.");
-        this.queryParameterField.setCaption("Query Parameter:");
-        this.queryParameterField
-        .setToolTip("The name of the URL query parameter that is assigned the search string.");
-        this.formPanel.addField(this.nameField);
-        this.formPanel.addField(this.descriptionField);
-        this.formPanel.addField(this.baseUrlField);
-        this.formPanel.addField(this.queryParameterField);
-        this.setLayout(WrapperLayout.getInstance());
-        this.add(this.formPanel);
-    }
+	/**
+	 * Instantiates a new search engine editor.
+	 */
+	public SearchEngineEditor() {
+		this.nameField.setCaption("Name:");
+		this.descriptionField.setCaption("Description:");
+		this.baseUrlField.setCaption("Base URL:");
+		this.baseUrlField.setToolTip("The search URL, excluding the query parameter.");
+		this.queryParameterField.setCaption("Query Parameter:");
+		this.queryParameterField.setToolTip("The name of the URL query parameter that is assigned the search string.");
+		this.formPanel.addField(this.nameField);
+		this.formPanel.addField(this.descriptionField);
+		this.formPanel.addField(this.baseUrlField);
+		this.formPanel.addField(this.queryParameterField);
+		this.setLayout(WrapperLayout.getInstance());
+		this.add(this.formPanel);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.primary.gui.AbstractItemEditor#getItem()
-     */
-    @Override
-    public SearchEngine getItem() {
-        return new SearchEngine(this.nameField.getValue(),
-                this.descriptionField.getValue(), this.baseUrlField.getValue(),
-                this.queryParameterField.getValue());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.primary.gui.AbstractItemEditor#getItem()
+	 */
+	@Override
+	public SearchEngine getItem() {
+		return new SearchEngine(this.nameField.getValue(), this.descriptionField.getValue(),
+				this.baseUrlField.getValue(), this.queryParameterField.getValue());
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.primary.gui.AbstractItemEditor#setItem(java.lang.Object)
-     */
-    @Override
-    public void setItem(SearchEngine item) {
-        this.nameField.setValue(item.getName());
-        this.descriptionField.setValue(item.getDescription());
-        this.baseUrlField.setValue(item.getBaseUrl());
-        this.queryParameterField.setValue(item.getQueryParameter());
-        this.formPanel.revalidate();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.primary.gui.AbstractItemEditor#setItem(java.lang.Object)
+	 */
+	@Override
+	public void setItem(SearchEngine item) {
+		this.nameField.setValue(item.getName());
+		this.descriptionField.setValue(item.getDescription());
+		this.baseUrlField.setValue(item.getBaseUrl());
+		this.queryParameterField.setValue(item.getQueryParameter());
+		this.formPanel.revalidate();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.primary.gui.AbstractItemEditor#validateItem()
-     */
-    @Override
-    public void validateItem() throws ValidationException {
-        if (Strings.isBlank(this.nameField.getValue())
-                || Strings.isBlank(this.baseUrlField.getValue())
-                || Strings.isBlank(this.queryParameterField.getValue())) {
-            throw new ValidationException(
-                    "Name, base URL and query parameter are required.");
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.primary.gui.AbstractItemEditor#validateItem()
+	 */
+	@Override
+	public void validateItem() throws ValidationException {
+		if (Strings.isBlank(this.nameField.getValue()) || Strings.isBlank(this.baseUrlField.getValue())
+				|| Strings.isBlank(this.queryParameterField.getValue())) {
+			throw new ValidationException("Name, base URL and query parameter are required.");
+		}
+	}
 
 }

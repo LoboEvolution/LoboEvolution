@@ -21,13 +21,14 @@ import org.w3c.dom.Node;
  */
 public class ScriptFilter implements NodeFilter {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
-     */
-    @Override
-    public boolean accept(Node node) {
-        return HtmlProperties.SCRIPT.equalsIgnoreCase(node.getNodeName());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
+	@Override
+	public boolean accept(Node node) {
+		return HtmlProperties.SCRIPT.equalsIgnoreCase(node.getNodeName());
+	}
 
 }

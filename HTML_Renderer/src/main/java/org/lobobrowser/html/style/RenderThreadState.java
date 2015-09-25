@@ -20,29 +20,29 @@ package org.lobobrowser.html.style;
  */
 public class RenderThreadState {
 
-    /** The Constant stateTL. */
-    private static final ThreadLocal<RenderThreadState> stateTL = new ThreadLocal<RenderThreadState>();
+	/** The Constant stateTL. */
+	private static final ThreadLocal<RenderThreadState> stateTL = new ThreadLocal<RenderThreadState>();
 
-    /** The override no wrap. */
-    public boolean overrideNoWrap;
+	/** The override no wrap. */
+	public boolean overrideNoWrap;
 
-    /**
-     * Instantiates a new render thread state.
-     */
-    private RenderThreadState() {
-    }
+	/**
+	 * Instantiates a new render thread state.
+	 */
+	private RenderThreadState() {
+	}
 
-    /**
-     * Gets the state.
-     *
-     * @return the state
-     */
-    public static RenderThreadState getState() {
-        RenderThreadState ts = stateTL.get();
-        if (ts == null) {
-            ts = new RenderThreadState();
-            stateTL.set(ts);
-        }
-        return ts;
-    }
+	/**
+	 * Gets the state.
+	 *
+	 * @return the state
+	 */
+	public static RenderThreadState getState() {
+		RenderThreadState ts = stateTL.get();
+		if (ts == null) {
+			ts = new RenderThreadState();
+			stateTL.set(ts);
+		}
+		return ts;
+	}
 }

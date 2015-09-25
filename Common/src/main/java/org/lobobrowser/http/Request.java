@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import org.lobobrowser.http.Header.Element;
-import org.lobobrowser.util.AbstractBean;
+import org.lobobrowser.xpath.XPathUtils;
 import org.w3c.dom.Document;
 
 /**
@@ -144,17 +144,16 @@ public class Request extends AbstractBean {
     /**
      * Header keys are stored in a case insensitive manner.
      */
-    
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(Request.class.getName());
-            
+    private static final Logger logger = Logger
+            .getLogger(Request.class.getName());
     private Map<String, Header> headers = new HashMap<String, Header>();
     /** The params. */
     private Map<String, Parameter> params = new HashMap<String, Parameter>();
     /** The follow redirects. */
     private boolean followRedirects = true;
     /** The method. */
-    private Method method = Method.GET;
+    private String method = Method.GET;
     /** The url. */
     private String url;
     /** The request body. */
@@ -168,7 +167,7 @@ public class Request extends AbstractBean {
      * If set as an InputStream or as bytes then this will be null.
      */
     private String stringBody;
-
+    
     /**
      * Creates a new instance of Request. The following default values are used:
      * <ul>
@@ -183,7 +182,7 @@ public class Request extends AbstractBean {
     public Request() {
         this(Method.GET, null);
     }
-
+    
     /**
      * Creaets a new instance of Request with the specified URL. Other default
      * values are the same as for the default constructor.
@@ -194,7 +193,7 @@ public class Request extends AbstractBean {
     public Request(String url) {
         this(Method.GET, url);
     }
-
+    
     /**
      * Creates a new instance of Request with the specified HTTP method and url.
      * All other default values are the same as for the default consturctor.
@@ -205,7 +204,7 @@ public class Request extends AbstractBean {
      *            The url. If non null, any query parameters are extracted and
      *            set as params for this request.
      */
-    public Request(Method method, String url) {
+    public Request(String method, String url) {
         this.method = method == null ? Method.GET : method;
         setHeader("Accept-Encoding", "gzip");
         setHeader("Content-Type", "text/plain; charset=UTF-8");
@@ -213,7 +212,7 @@ public class Request extends AbstractBean {
             setUrlImpl(url);
         }
     }
-
+    
     /**
      * <p>
      * Creates a new instance of Request, using <code>source</code> as the basis
@@ -235,7 +234,7 @@ public class Request extends AbstractBean {
             url = source.url;
         }
     }
-
+    
     /**
      * Returns the Header with the given name, or null if there is no such
      * header. Header names are checked in a case insensitive manner.
@@ -251,7 +250,7 @@ public class Request extends AbstractBean {
         }
         return headers.get(name.toLowerCase());
     }
-
+    
     /**
      * Creates a new Header with the given name and value, and no elements and
      * adds it to the set of headers.
@@ -267,7 +266,7 @@ public class Request extends AbstractBean {
         }
         setHeader(new Header(name, value));
     }
-
+    
     /**
      * Creates a new Header with the given name, value, and elements and adds it
      * to the set of headers.
@@ -279,13 +278,14 @@ public class Request extends AbstractBean {
      * @param elements
      *            The elements. May be null.
      */
-    public final void setHeader(String name, String value, Element... elements) {
+    public final void setHeader(String name, String value,
+            Element... elements) {
         if (name == null) {
             throw new IllegalArgumentException("Name cannot be null");
         }
         setHeader(new Header(name, value, elements));
     }
-
+    
     /**
      * Adds the given header to the set of headers.
      *
@@ -313,7 +313,7 @@ public class Request extends AbstractBean {
             }
         }
     }
-
+    
     /**
      * Removes the given header from this Request.
      *
@@ -326,7 +326,7 @@ public class Request extends AbstractBean {
             headers.remove(header.getName().toLowerCase());
         }
     }
-
+    
     /**
      * Removes the given named header from this Request. The header is
      * case-insensitive.
@@ -339,7 +339,7 @@ public class Request extends AbstractBean {
     public final void removeHeader(String header) {
         headers.remove(header.toLowerCase());
     }
-
+    
     /**
      * Gets an array of all the Headers for this Request. This array will never
      * be null. Ordering of items is not guaranteed.
@@ -349,7 +349,7 @@ public class Request extends AbstractBean {
     public final Header[] getHeaders() {
         return headers.values().toArray(new Header[0]);
     }
-
+    
     /**
      * Sets the headers to use with this Request. This replaces whatever headers
      * may have been previously defined. If null, this array is treated as an
@@ -366,7 +366,7 @@ public class Request extends AbstractBean {
             }
         }
     }
-
+    
     /**
      * Returns the Parameter with the given name, or null if there is no such
      * Parameter.
@@ -381,7 +381,7 @@ public class Request extends AbstractBean {
         }
         return params.get(name);
     }
-
+    
     /**
      * Creates a Parameter using the given name and value and then adds it to
      * the set of parameters.
@@ -397,7 +397,7 @@ public class Request extends AbstractBean {
         }
         setParameter(new Parameter(name, value));
     }
-
+    
     /**
      * Adds the given parameter to the set of parameters.
      *
@@ -412,7 +412,7 @@ public class Request extends AbstractBean {
         }
         params.put(param.getName(), param);
     }
-
+    
     /**
      * Gets an array of all the Parameters for this Request. This array will
      * never be null. Ordering of items is not guaranteed.
@@ -422,7 +422,7 @@ public class Request extends AbstractBean {
     public final Parameter[] getParameters() {
         return params.values().toArray(new Parameter[0]);
     }
-
+    
     /**
      * Sets the parameters to use with this Request. This replaces whatever
      * parameters may have been previously defined. If null, this array is
@@ -439,7 +439,7 @@ public class Request extends AbstractBean {
             }
         }
     }
-
+    
     /**
      * Specifies whether to automatically follow redirects. An HTTP response may
      * indicate that the system should be redirected to a new page. In that
@@ -458,7 +458,7 @@ public class Request extends AbstractBean {
         this.followRedirects = b;
         firePropertyChange("followRedirects", old, this.followRedirects);
     }
-
+    
     /**
      * Gets whether to automatically follow redirct requests. @see
      * #setFollowRedirects(boolean).
@@ -468,7 +468,7 @@ public class Request extends AbstractBean {
     public final boolean getFollowRedirects() {
         return followRedirects;
     }
-
+    
     /**
      * Sets the http {@link Method} to use for this Request. If null, a GET
      * method will be used.
@@ -477,21 +477,21 @@ public class Request extends AbstractBean {
      *            the {@link Method} to use. If null, <code>Method.GET</code> is
      *            used.
      */
-    public void setMethod(Method method) {
-        Method old = getMethod();
+    public void setMethod(String method) {
+        String old = getMethod();
         this.method = method == null ? Method.GET : method;
         firePropertyChange("method", old, this.method);
     }
-
+    
     /**
      * Gets the http Method used.
      *
      * @return the {@link Method} for this Request.
      */
-    public final Method getMethod() {
+    public final String getMethod() {
         return method;
     }
-
+    
     /**
      * <p>
      * The URL to request content from. This must be an absolute URL. An
@@ -518,7 +518,7 @@ public class Request extends AbstractBean {
         setUrlImpl(url);
         firePropertyChange("url", old, this.url);
     }
-
+    
     /**
      * Sets the url impl.
      *
@@ -558,7 +558,7 @@ public class Request extends AbstractBean {
             }
         }
     }
-
+    
     /**
      * Returns the URL to request content from.
      *
@@ -567,7 +567,7 @@ public class Request extends AbstractBean {
     public final String getUrl() {
         return url;
     }
-
+    
     /**
      * Sets the username to use for Basic Authentication. If a username is
      * specified, then the Session will attempt to use Basic Authentication with
@@ -583,7 +583,7 @@ public class Request extends AbstractBean {
         resetAuthenticationHeader();
         firePropertyChange("username", old, this.username);
     }
-
+    
     /**
      * Reset authentication header.
      */
@@ -593,14 +593,14 @@ public class Request extends AbstractBean {
                 removeHeader("authentication");
             } else {
                 headers.put("authentication",
-                        new Header("Authentication", "Basic "
-                                + base64Encode(username + ":" + getPassword())));
+                        new Header("Authentication", "Basic " + base64Encode(
+                                username + ":" + getPassword())));
             }
         } catch (Exception e) {
             logger.severe(e.getMessage());
         }
     }
-
+    
     /**
      * Gets the username used for Basic Authentication.
      *
@@ -609,7 +609,7 @@ public class Request extends AbstractBean {
     public final String getUsername() {
         return username;
     }
-
+    
     /**
      * Sets the passsword to use for Basic Authentication. This property is only
      * used if a username is also specified. For security reasons, the password
@@ -623,7 +623,7 @@ public class Request extends AbstractBean {
         this.password = password == null ? new char[0] : password.toCharArray();
         resetAuthenticationHeader();
     }
-
+    
     /**
      * Gets the password. May be null.
      *
@@ -632,7 +632,7 @@ public class Request extends AbstractBean {
     final String getPassword() {
         return password == null ? "" : new String(password);
     }
-
+    
     /**
      * Sets the request body to be the specified String.
      *
@@ -643,7 +643,7 @@ public class Request extends AbstractBean {
         stringBody = body;
         setBody(body == null ? null : body.getBytes());
     }
-
+    
     /**
      * Sets the request body to be the specified array of bytes.
      *
@@ -657,7 +657,7 @@ public class Request extends AbstractBean {
             setBody(new ByteArrayInputStream(body));
         }
     }
-
+    
     /**
      * Sets the request body to be the specified {@link Document}.
      *
@@ -667,7 +667,7 @@ public class Request extends AbstractBean {
     public void setBody(Document body) {
         setBody(body == null ? null : XPathUtils.toXML(body));
     }
-
+    
     /**
      * Sets the request body to be the specified <code>InputStream</code>.
      *
@@ -677,7 +677,7 @@ public class Request extends AbstractBean {
     public void setBody(InputStream body) {
         this.requestBody = body;
     }
-
+    
     /**
      * Protected method which returns the request body. This is only called by
      * the Session. This method should never be called by client code, and
@@ -691,7 +691,7 @@ public class Request extends AbstractBean {
     protected InputStream getBody() throws Exception {
         return requestBody;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.lang.Object#toString()
@@ -703,7 +703,7 @@ public class Request extends AbstractBean {
         buffer.append(" " + getUrl() + "\n");
         for (Header h : getHeaders()) {
             buffer.append("  ").append(h.getName()).append(": ")
-            .append(h.getValue());
+                    .append(h.getValue());
             buffer.append("\n");
         }
         if (stringBody != null) {
@@ -713,7 +713,7 @@ public class Request extends AbstractBean {
         }
         return buffer.toString();
     }
-
+    
     /**
      * Base64 encode.
      *
@@ -724,9 +724,10 @@ public class Request extends AbstractBean {
      *             the exception
      */
     private static String base64Encode(String s) throws Exception {
-        return new String(Base64.getEncoder().encode(s.getBytes(StandardCharsets.UTF_8)));
+        return new String(
+                Base64.getEncoder().encode(s.getBytes(StandardCharsets.UTF_8)));
     }
-
+    
     /**
      * Base64 decode.
      *

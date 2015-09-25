@@ -25,64 +25,64 @@ import org.lobobrowser.ua.ParameterInfo;
  */
 public class LocalParameterInfo implements ParameterInfo {
 
-    /** The encoding type. */
-    private final String encodingType;
+	/** The encoding type. */
+	private final String encodingType;
 
-    /** The form inputs. */
-    private final FormInput[] formInputs;
+	/** The form inputs. */
+	private final FormInput[] formInputs;
 
-    /**
-     * Instantiates a new local parameter info.
-     *
-     * @param type
-     *            the type
-     * @param inputs
-     *            the inputs
-     */
-    public LocalParameterInfo(String type, FormInput[] inputs) {
-        super();
-        encodingType = type;
-        formInputs = inputs;
-    }
+	/**
+	 * Instantiates a new local parameter info.
+	 *
+	 * @param type
+	 *            the type
+	 * @param inputs
+	 *            the inputs
+	 */
+	public LocalParameterInfo(String type, FormInput[] inputs) {
+		super();
+		encodingType = type;
+		formInputs = inputs;
+	}
 
-    @Override
-    public String getEncoding() {
-        return this.encodingType;
-    }
+	@Override
+	public String getEncoding() {
+		return this.encodingType;
+	}
 
-    @Override
-    public Parameter[] getParameters() {
-        final FormInput[] formInputs = this.formInputs;
-        Parameter[] params = new Parameter[formInputs.length];
-        for (int i = 0; i < params.length; i++) {
-            final int index = i;
-            params[i] = new Parameter() {
-                @Override
-                public String getName() {
-                    return formInputs[index].getName();
-                }
+	@Override
+	public Parameter[] getParameters() {
+		final FormInput[] formInputs = this.formInputs;
+		Parameter[] params = new Parameter[formInputs.length];
+		for (int i = 0; i < params.length; i++) {
+			final int index = i;
+			params[i] = new Parameter() {
+				@Override
+				public String getName() {
+					return formInputs[index].getName();
+				}
 
-                @Override
-                public File[] getFileValue() {
-                    return formInputs[index].getFileValue();
-                }
+				@Override
+				public File[] getFileValue() {
+					return formInputs[index].getFileValue();
+				}
 
-                @Override
-                public String getTextValue() {
-                    return formInputs[index].getTextValue();
-                }
+				@Override
+				public String getTextValue() {
+					return formInputs[index].getTextValue();
+				}
 
-                @Override
-                public boolean isFile() {
-                    return formInputs[index].isFile();
-                }
+				@Override
+				public boolean isFile() {
+					return formInputs[index].isFile();
+				}
 
-                @Override
-                public boolean isText() {
-                    return formInputs[index].isText();
-                }
-            };
-        }
-        return params;
-    }
+				@Override
+				public boolean isText() {
+					return formInputs[index].isText();
+				}
+			};
+		}
+		return params;
+	}
 }

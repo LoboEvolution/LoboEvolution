@@ -35,9 +35,9 @@ public class TextViewerFindAction extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(TextViewerFindAction.class.getName());
+	private static final Logger logger = Logger.getLogger(TextViewerFindAction.class.getName());
 
 	/** The text. */
 	private TextViewerWindow text;
@@ -51,8 +51,10 @@ public class TextViewerFindAction extends AbstractAction {
 	/**
 	 * Instantiates a new text viewer close action.
 	 *
-	 * @param text            the text
-	 * @param window the window
+	 * @param text
+	 *            the text
+	 * @param window
+	 *            the window
 	 */
 	public TextViewerFindAction(TextViewerWindow text, NavigatorWindow window) {
 		this.text = text;
@@ -70,8 +72,7 @@ public class TextViewerFindAction extends AbstractAction {
 	private void searchWord() {
 		Window awtWindow = window.getAwtWindow();
 		if (!(awtWindow instanceof Frame)) {
-			throw new IllegalStateException(
-					"Search dialog only supported when an AWT Frame is available.");
+			throw new IllegalStateException("Search dialog only supported when an AWT Frame is available.");
 		}
 		SearchDialog dialog = new SearchDialog((Frame) awtWindow, true, "");
 		dialog.setTitle("Find");
@@ -80,52 +81,51 @@ public class TextViewerFindAction extends AbstractAction {
 		dialog.setSize(new Dimension(200, 100));
 		dialog.setVisible(true);
 		String find = dialog.getSearchKeywords();
-			
-			text.getTextArea().requestFocusInWindow();
-			// Make sure we have a valid search term
-			if (find != null && find.length() > 0) {
-				Document document = text.getTextArea().getDocument();
-				int findLength = find.length();
-				try {
-					boolean found = false;
-					// Rest the search position if we're at the end of
-					// the document
-					if (pos + findLength > document.getLength()) {
-						pos = 0;
-					}
-					// While we haven't reached the end...
-					// "<=" Correction
-					while (pos + findLength <= document.getLength()) {
-						// Extract the text from teh docuemnt
-						String match = document.getText(pos, findLength);
-						// Check to see if it matches or request
-						if (match.equals(find)) {
-							found = true;
-							break;
-						}
-						pos++;
-					}
 
-					// Did we find something...
-					if (found) {
-						// Get the rectangle of the where the text would
-						// be visible...
-						Rectangle viewRect = text.getTextArea()
-								.modelToView(pos);
-						// Scroll to make the rectangle visible
-						text.getTextArea().scrollRectToVisible(viewRect);
-						// Highlight the text
-						text.getTextArea().setCaretPosition(pos + findLength);
-						text.getTextArea().moveCaretPosition(pos);
-						// Move the search position beyond the current
-						// match
-						pos += findLength;
+		text.getTextArea().requestFocusInWindow();
+		// Make sure we have a valid search term
+		if (find != null && find.length() > 0) {
+			Document document = text.getTextArea().getDocument();
+			int findLength = find.length();
+			try {
+				boolean found = false;
+				// Rest the search position if we're at the end of
+				// the document
+				if (pos + findLength > document.getLength()) {
+					pos = 0;
+				}
+				// While we haven't reached the end...
+				// "<=" Correction
+				while (pos + findLength <= document.getLength()) {
+					// Extract the text from teh docuemnt
+					String match = document.getText(pos, findLength);
+					// Check to see if it matches or request
+					if (match.equals(find)) {
+						found = true;
+						break;
 					}
-
-				} catch (Exception exp) {
-					logger.severe(exp.getMessage());
+					pos++;
 				}
 
+				// Did we find something...
+				if (found) {
+					// Get the rectangle of the where the text would
+					// be visible...
+					Rectangle viewRect = text.getTextArea().modelToView(pos);
+					// Scroll to make the rectangle visible
+					text.getTextArea().scrollRectToVisible(viewRect);
+					// Highlight the text
+					text.getTextArea().setCaretPosition(pos + findLength);
+					text.getTextArea().moveCaretPosition(pos);
+					// Move the search position beyond the current
+					// match
+					pos += findLength;
+				}
+
+			} catch (Exception exp) {
+				logger.severe(exp.getMessage());
 			}
+
+		}
 	}
 }

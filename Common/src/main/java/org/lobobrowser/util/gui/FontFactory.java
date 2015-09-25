@@ -44,8 +44,8 @@ import org.lobobrowser.util.Objects;
  */
 public class FontFactory {
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(FontFactory.class
-            .getName());
+    private static final Logger logger = Logger
+            .getLogger(FontFactory.class.getName());
     /** The Constant loggableFine. */
     private static final boolean loggableFine = logger.isLoggable(Level.FINE);
     /** The Constant instance. */
@@ -59,7 +59,7 @@ public class FontFactory {
             0);
     /** The default font name. */
     private String defaultFontName = Font.SANS_SERIF;
-
+    
     /**
      * Instantiates a new font factory.
      */
@@ -78,7 +78,7 @@ public class FontFactory {
             }
         }
     }
-
+    
     /**
      * Gets the single instance of FontFactory.
      *
@@ -87,7 +87,7 @@ public class FontFactory {
     public static final FontFactory getInstance() {
         return instance;
     }
-
+    
     /**
      * Registers a font family. It does not close the stream provided. Fonts
      * should be registered before the renderer has a chance to cache document
@@ -112,7 +112,7 @@ public class FontFactory {
             this.registeredFonts.put(fontName.toLowerCase(), f);
         }
     }
-
+    
     /**
      * Unregisters a font previously registered with
      * {@link #registerFont(String, int, java.io.InputStream)}.
@@ -125,7 +125,7 @@ public class FontFactory {
             this.registeredFonts.remove(fontName.toLowerCase());
         }
     }
-
+    
     /**
      * Gets the font.
      *
@@ -145,8 +145,8 @@ public class FontFactory {
      *            the superscript
      * @return the font
      */
-    public Font getFont(String fontFamily, String fontStyle,
-            String fontVariant, String fontWeight, float fontSize, Set locales,
+    public Font getFont(String fontFamily, String fontStyle, String fontVariant,
+            String fontWeight, float fontSize, Set locales,
             Integer superscript) {
         FontKey key = new FontKey(fontFamily, fontStyle, fontVariant,
                 fontWeight, fontSize, locales, superscript);
@@ -159,7 +159,7 @@ public class FontFactory {
             return font;
         }
     }
-
+    
     /**
      * Gets the default font name.
      *
@@ -168,7 +168,7 @@ public class FontFactory {
     public String getDefaultFontName() {
         return defaultFontName;
     }
-
+    
     /**
      * Sets the default font name to be used when a name is unrecognized or when
      * a font is determined not to be capable of diplaying characters from a
@@ -180,11 +180,12 @@ public class FontFactory {
      */
     public void setDefaultFontName(String defaultFontName) {
         if (defaultFontName == null) {
-            throw new IllegalArgumentException("defaultFontName cannot be null");
+            throw new IllegalArgumentException(
+                    "defaultFontName cannot be null");
         }
         this.defaultFontName = defaultFontName;
     }
-
+    
     /**
      * Creates a new Font object.
      *
@@ -196,7 +197,7 @@ public class FontFactory {
         Font font = createFont_Impl(key);
         return superscriptFont(font, key.superscript);
     }
-
+    
     /**
      * Superscript font.
      *
@@ -210,8 +211,8 @@ public class FontFactory {
         if (newSuperscript == null) {
             return baseFont;
         }
-        Integer fontSuperScript = (Integer) baseFont.getAttributes().get(
-                TextAttribute.SUPERSCRIPT);
+        Integer fontSuperScript = (Integer) baseFont.getAttributes()
+                .get(TextAttribute.SUPERSCRIPT);
         if (fontSuperScript == null) {
             fontSuperScript = new Integer(0);
         }
@@ -223,7 +224,7 @@ public class FontFactory {
             return baseFont.deriveFont(additionalAttributes);
         }
     }
-
+    
     /**
      * Creates a new Font object.
      *
@@ -267,7 +268,8 @@ public class FontFactory {
             Set locales = key.locales;
             if (locales == null) {
                 Locale locale = Locale.getDefault();
-                if (font.canDisplayUpTo(locale.getDisplayLanguage(locale)) == -1) {
+                if (font.canDisplayUpTo(
+                        locale.getDisplayLanguage(locale)) == -1) {
                     return font;
                 }
             } else {
@@ -275,7 +277,8 @@ public class FontFactory {
                 boolean allMatch = true;
                 while (i.hasNext()) {
                     Locale locale = (Locale) i.next();
-                    if (font.canDisplayUpTo(locale.getDisplayLanguage(locale)) != -1) {
+                    if (font.canDisplayUpTo(
+                            locale.getDisplayLanguage(locale)) != -1) {
                         allMatch = false;
                         break;
                     }
@@ -290,7 +293,7 @@ public class FontFactory {
         return createFont(this.defaultFontName, fontStyle,
                 Math.round(key.fontSize));
     }
-
+    
     /**
      * Creates a new Font object.
      *
@@ -308,7 +311,7 @@ public class FontFactory {
         // return FontManager.getCompositeFontUIResource(new Font(name, style,
         // size));
     }
-
+    
     /**
      * The Class FontKey.
      */
@@ -327,7 +330,7 @@ public class FontFactory {
         public final Set locales;
         /** The superscript. */
         public final Integer superscript;
-
+        
         /**
          * Instantiates a new font key.
          *
@@ -352,14 +355,14 @@ public class FontFactory {
                 final Integer superscript) {
             this.fontFamily = fontFamily == null ? null : fontFamily.intern();
             this.fontStyle = fontStyle == null ? null : fontStyle.intern();
-            this.fontVariant = fontVariant == null ? null : fontVariant
-                    .intern();
+            this.fontVariant = fontVariant == null ? null
+                    : fontVariant.intern();
             this.fontWeight = fontWeight == null ? null : fontWeight.intern();
             this.fontSize = fontSize;
             this.locales = locales;
             this.superscript = superscript;
         }
-
+        
         /*
          * (non-Javadoc)
          * @see java.lang.Object#equals(java.lang.Object)
@@ -387,10 +390,10 @@ public class FontFactory {
                     && (this.superscript == ors.superscript)
                     && Objects.equals(this.locales, ors.locales);
         }
-
+        
         /** The cached hash. */
         private int cachedHash = -1;
-
+        
         /*
          * (non-Javadoc)
          * @see java.lang.Object#hashCode()
@@ -420,7 +423,7 @@ public class FontFactory {
             this.cachedHash = ch;
             return ch;
         }
-
+        
         /*
          * (non-Javadoc)
          * @see java.lang.Object#toString()

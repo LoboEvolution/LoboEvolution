@@ -25,38 +25,37 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class AboutAction extends ActionPool {
 
-    /** The window. */
-    private NavigatorWindow window;
+	/** The window. */
+	private NavigatorWindow window;
 
-    /**
-     * Instantiates a new about action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     */
-    public AboutAction(ComponentSource componentSource, NavigatorWindow window) {
-        super(componentSource, window);
-        this.window = window;
-    }
+	/**
+	 * Instantiates a new about action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 */
+	public AboutAction(ComponentSource componentSource, NavigatorWindow window) {
+		super(componentSource, window);
+		this.window = window;
+	}
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String name = window.getUserAgent().getName();
-        String userAgent = window.getUserAgent().getNameAndVersion();
-        window.getTopFrame().alert(
-                "This is " + userAgent + ", a pure Java web browser.\r\n"
-                        + "Copyright (c) 2015 The " + name + " Evolution.\r\n"
-                        + window.getUserAgent().getInfoUrl());
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String name = window.getUserAgent().getName();
+		String userAgent = window.getUserAgent().getNameAndVersion();
+		window.getTopFrame().alert("This is " + userAgent + ", a pure Java web browser.\r\n" + "Copyright (c) 2015 The "
+				+ name + " Evolution.\r\n" + window.getUserAgent().getInfoUrl());
 
-    }
+	}
 }

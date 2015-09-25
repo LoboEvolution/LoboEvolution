@@ -22,26 +22,25 @@ import org.lobobrowser.html.renderstate.RenderState;
  */
 public class HTMLStrongElementImpl extends HTMLAbstractUIElement {
 
-    /**
-     * Instantiates a new HTML strong element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLStrongElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML strong element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLStrongElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
-     * .html.renderstate.RenderState)
-     */
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        prevRenderState = new FontStyleRenderState(prevRenderState,
-                java.awt.Font.BOLD);
-        return super.createRenderState(prevRenderState);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
+	 * lobobrowser .html.renderstate.RenderState)
+	 */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		prevRenderState = new FontStyleRenderState(prevRenderState, java.awt.Font.BOLD);
+		return super.createRenderState(prevRenderState);
+	}
 }

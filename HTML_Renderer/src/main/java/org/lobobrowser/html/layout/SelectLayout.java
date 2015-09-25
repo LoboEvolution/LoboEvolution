@@ -26,27 +26,26 @@ import org.lobobrowser.html.renderer.RElement;
  */
 public class SelectLayout extends CommonWidgetLayout {
 
-    /**
-     * Instantiates a new select layout.
-     */
-    public SelectLayout() {
-        super(ADD_INLINE, true);
-    }
+	/**
+	 * Instantiates a new select layout.
+	 */
+	public SelectLayout() {
+		super(ADD_INLINE, true);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.lobobrowser
-     * .html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
-     */
-    @Override
-    protected RElement createRenderable(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-        HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
-        BaseInputControl uiControl = new InputSelectControl(bie);
-        bie.setInputContext(uiControl);
-        return new RUIControl(markupElement, uiControl,
-                bodyLayout.getContainer(), bodyLayout.getFrameContext(),
-                bodyLayout.getUserAgentContext());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.
+	 * lobobrowser .html.renderer.RBlockViewport,
+	 * org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
+	@Override
+	protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
+		BaseInputControl uiControl = new InputSelectControl(bie);
+		bie.setInputContext(uiControl);
+		return new RUIControl(markupElement, uiControl, bodyLayout.getContainer(), bodyLayout.getFrameContext(),
+				bodyLayout.getUserAgentContext());
+	}
 }

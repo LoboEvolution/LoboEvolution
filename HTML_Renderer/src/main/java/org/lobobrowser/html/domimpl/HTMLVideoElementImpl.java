@@ -25,18 +25,17 @@ import org.lobobrowser.w3c.html.VideoTrackList;
 /**
  * The Class HTMLVideoElementImpl.
  */
-public class HTMLVideoElementImpl extends HTMLElementImpl implements
-HTMLVideoElement {
+public class HTMLVideoElementImpl extends HTMLElementImpl implements HTMLVideoElement {
 
-    /**
-     * Instantiates a new HTML video element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLVideoElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML video element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLVideoElementImpl(String name) {
+		super(name);
+	}
 
 	@Override
 	public MediaError getError() {
@@ -53,7 +52,7 @@ HTMLVideoElement {
 	@Override
 	public void setSrc(String src) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -71,7 +70,7 @@ HTMLVideoElement {
 	@Override
 	public void setCrossOrigin(String crossOrigin) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -89,7 +88,7 @@ HTMLVideoElement {
 	@Override
 	public void setPreload(String preload) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -101,7 +100,7 @@ HTMLVideoElement {
 	@Override
 	public void load() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -131,7 +130,7 @@ HTMLVideoElement {
 	@Override
 	public void setCurrentTime(double currentTime) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -167,7 +166,7 @@ HTMLVideoElement {
 	@Override
 	public void setDefaultPlaybackRate(double defaultPlaybackRate) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -179,7 +178,7 @@ HTMLVideoElement {
 	@Override
 	public void setPlaybackRate(double playbackRate) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -209,7 +208,7 @@ HTMLVideoElement {
 	@Override
 	public void setAutoplay(boolean autoplay) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -221,19 +220,19 @@ HTMLVideoElement {
 	@Override
 	public void setLoop(boolean loop) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void play() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -245,7 +244,7 @@ HTMLVideoElement {
 	@Override
 	public void setMediaGroup(String mediaGroup) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -257,7 +256,7 @@ HTMLVideoElement {
 	@Override
 	public void setController(MediaController controller) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -269,7 +268,7 @@ HTMLVideoElement {
 	@Override
 	public void setControls(boolean controls) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -281,7 +280,7 @@ HTMLVideoElement {
 	@Override
 	public void setVolume(double volume) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -293,7 +292,7 @@ HTMLVideoElement {
 	@Override
 	public void setMuted(boolean muted) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -305,7 +304,7 @@ HTMLVideoElement {
 	@Override
 	public void setDefaultMuted(boolean defaultMuted) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -347,7 +346,7 @@ HTMLVideoElement {
 	@Override
 	public void setWidth(int width) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -359,7 +358,7 @@ HTMLVideoElement {
 	@Override
 	public void setHeight(int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -383,7 +382,7 @@ HTMLVideoElement {
 	@Override
 	public void setPoster(String poster) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

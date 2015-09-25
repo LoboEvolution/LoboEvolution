@@ -26,62 +26,60 @@ import org.lobobrowser.html.renderer.UIControlWrapper;
  */
 public class ObjectLayout extends CommonWidgetLayout {
 
-    /** The try to render content. */
-    private boolean tryToRenderContent;
+	/** The try to render content. */
+	private boolean tryToRenderContent;
 
-    /**
-     * Instantiates a new object layout.
-     *
-     * @param tryToRenderContent
-     *            If the object is unknown, content is rendered as HTML.
-     * @param usesAlignAttribute
-     *            the uses align attribute
-     */
-    public ObjectLayout(boolean tryToRenderContent, boolean usesAlignAttribute) {
-        super(ADD_INLINE, usesAlignAttribute);
-        this.tryToRenderContent = tryToRenderContent;
-    }
+	/**
+	 * Instantiates a new object layout.
+	 *
+	 * @param tryToRenderContent
+	 *            If the object is unknown, content is rendered as HTML.
+	 * @param usesAlignAttribute
+	 *            the uses align attribute
+	 */
+	public ObjectLayout(boolean tryToRenderContent, boolean usesAlignAttribute) {
+		super(ADD_INLINE, usesAlignAttribute);
+		this.tryToRenderContent = tryToRenderContent;
+	}
 
-    /**
-     * Must use this ThreadLocal because an ObjectLayout instance is shared
-     * across renderers.
-     */
-    private final ThreadLocal<HtmlObject> htmlObject = new ThreadLocal<HtmlObject>();
+	/**
+	 * Must use this ThreadLocal because an ObjectLayout instance is shared
+	 * across renderers.
+	 */
+	private final ThreadLocal<HtmlObject> htmlObject = new ThreadLocal<HtmlObject>();
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.layout.CommonWidgetLayout#layoutMarkup(org.lobobrowser
-     * .html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
-     */
-    @Override
-    public void layoutMarkup(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-        HtmlObject ho = bodyLayout.getRendererContext().getHtmlObject(
-                markupElement);
-        if ((ho == null) && this.tryToRenderContent) {
-            // Don't know what to do with it - render contents.
-            bodyLayout.layoutMarkup(markupElement);
-        } else if (ho != null) {
-            this.htmlObject.set(ho);
-            super.layoutMarkup(bodyLayout, markupElement);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.layout.CommonWidgetLayout#layoutMarkup(org.
+	 * lobobrowser .html.renderer.RBlockViewport,
+	 * org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
+	@Override
+	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		HtmlObject ho = bodyLayout.getRendererContext().getHtmlObject(markupElement);
+		if ((ho == null) && this.tryToRenderContent) {
+			// Don't know what to do with it - render contents.
+			bodyLayout.layoutMarkup(markupElement);
+		} else if (ho != null) {
+			this.htmlObject.set(ho);
+			super.layoutMarkup(bodyLayout, markupElement);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.lobobrowser
-     * .html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
-     */
-    @Override
-    protected RElement createRenderable(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-        HtmlObject ho = this.htmlObject.get();
-        UIControl uiControl = new UIControlWrapper(ho);
-        RUIControl ruiControl = new RUIControl(markupElement, uiControl,
-                bodyLayout.getContainer(), bodyLayout.getFrameContext(),
-                bodyLayout.getUserAgentContext());
-        return ruiControl;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.
+	 * lobobrowser .html.renderer.RBlockViewport,
+	 * org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
+	@Override
+	protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		HtmlObject ho = this.htmlObject.get();
+		UIControl uiControl = new UIControlWrapper(ho);
+		RUIControl ruiControl = new RUIControl(markupElement, uiControl, bodyLayout.getContainer(),
+				bodyLayout.getFrameContext(), bodyLayout.getUserAgentContext());
+		return ruiControl;
+	}
 }

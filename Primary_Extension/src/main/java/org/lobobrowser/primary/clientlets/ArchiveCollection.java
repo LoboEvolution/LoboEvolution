@@ -29,60 +29,60 @@ import java.util.LinkedList;
  */
 public class ArchiveCollection {
 
-    /** The archive infos. */
-    private final Collection<Object[]> archiveInfos;
+	/** The archive infos. */
+	private final Collection<Object[]> archiveInfos;
 
-    /**
-     * Instantiates a new archive collection.
-     */
-    public ArchiveCollection() {
-        this.archiveInfos = new LinkedList<Object[]>();
-    }
+	/**
+	 * Instantiates a new archive collection.
+	 */
+	public ArchiveCollection() {
+		this.archiveInfos = new LinkedList<Object[]>();
+	}
 
-    /**
-     * Instantiates a new archive collection.
-     *
-     * @param archiveInfos
-     *            the archive infos
-     */
-    public ArchiveCollection(Collection<Object[]> archiveInfos) {
-        this.archiveInfos = archiveInfos;
-    }
+	/**
+	 * Instantiates a new archive collection.
+	 *
+	 * @param archiveInfos
+	 *            the archive infos
+	 */
+	public ArchiveCollection(Collection<Object[]> archiveInfos) {
+		this.archiveInfos = archiveInfos;
+	}
 
-    // public void addArchiveInfo(ArchiveInfo ainfo) {
-    // synchronized(this) {
-    // this.archiveInfos.add(ainfo);
-    //}
-    //}
+	// public void addArchiveInfo(ArchiveInfo ainfo) {
+	// synchronized(this) {
+	// this.archiveInfos.add(ainfo);
+	// }
+	// }
 
-    /** The class loader. */
-    private ArchiveClassLoader classLoader;
+	/** The class loader. */
+	private ArchiveClassLoader classLoader;
 
-    /**
-     * Gets the class loader.
-     *
-     * @return the class loader
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    public ClassLoader getClassLoader() throws IOException {
-        synchronized (this) {
-            if (this.archiveInfos.size() == 0) {
-                return this.getClass().getClassLoader();
-            }
-            if (this.classLoader == null) {
-                this.classLoader = new ArchiveClassLoader(this.archiveInfos);
-            }
-            return this.classLoader;
-        }
-    }
+	/**
+	 * Gets the class loader.
+	 *
+	 * @return the class loader
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public ClassLoader getClassLoader() throws IOException {
+		synchronized (this) {
+			if (this.archiveInfos.size() == 0) {
+				return this.getClass().getClassLoader();
+			}
+			if (this.classLoader == null) {
+				this.classLoader = new ArchiveClassLoader(this.archiveInfos);
+			}
+			return this.classLoader;
+		}
+	}
 
-    /**
-     * Iterator.
-     *
-     * @return the iterator
-     */
-    public Iterator<Object[]> iterator() {
-        return this.archiveInfos.iterator();
-    }
+	/**
+	 * Iterator.
+	 *
+	 * @return the iterator
+	 */
+	public Iterator<Object[]> iterator() {
+		return this.archiveInfos.iterator();
+	}
 }

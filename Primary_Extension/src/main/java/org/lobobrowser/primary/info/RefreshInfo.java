@@ -20,25 +20,25 @@ package org.lobobrowser.primary.info;
  */
 public class RefreshInfo {
 
-    /** The wait seconds. */
-    private int waitSeconds;
+	/** The wait seconds. */
+	private int waitSeconds;
 
-    /** The destination url. */
-    private String destinationUrl;
+	/** The destination url. */
+	private String destinationUrl;
 
-    /**
-     * Instantiates a new refresh info.
-     *
-     * @param waitSeconds
-     *            the wait seconds
-     * @param destinationUrl
-     *            the destination url
-     */
-    public RefreshInfo(final int waitSeconds, final String destinationUrl) {
-        super();
-        this.waitSeconds = waitSeconds;
-        this.destinationUrl = destinationUrl;
-    }
+	/**
+	 * Instantiates a new refresh info.
+	 *
+	 * @param waitSeconds
+	 *            the wait seconds
+	 * @param destinationUrl
+	 *            the destination url
+	 */
+	public RefreshInfo(final int waitSeconds, final String destinationUrl) {
+		super();
+		this.waitSeconds = waitSeconds;
+		this.destinationUrl = destinationUrl;
+	}
 
 	/**
 	 * @return the waitSeconds
@@ -48,7 +48,8 @@ public class RefreshInfo {
 	}
 
 	/**
-	 * @param waitSeconds the waitSeconds to set
+	 * @param waitSeconds
+	 *            the waitSeconds to set
 	 */
 	public void setWaitSeconds(int waitSeconds) {
 		this.waitSeconds = waitSeconds;
@@ -62,7 +63,8 @@ public class RefreshInfo {
 	}
 
 	/**
-	 * @param destinationUrl the destinationUrl to set
+	 * @param destinationUrl
+	 *            the destinationUrl to set
 	 */
 	public void setDestinationUrl(String destinationUrl) {
 		this.destinationUrl = destinationUrl;

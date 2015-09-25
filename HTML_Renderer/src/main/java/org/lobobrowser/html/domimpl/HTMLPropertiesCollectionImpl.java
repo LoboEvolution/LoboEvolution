@@ -22,45 +22,50 @@ import org.w3c.dom.Node;
  */
 public class HTMLPropertiesCollectionImpl implements HTMLPropertiesCollection {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLCollection#getLength()
-     */
-    @Override
-    public int getLength() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLCollection#getLength()
+	 */
+	@Override
+	public int getLength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLCollection#item(int)
-     */
-    @Override
-    public Node item(int index) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLCollection#item(int)
+	 */
+	@Override
+	public Node item(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.w3c.html.HTMLPropertiesCollection#namedItem(java.lang.String)
-     */
-    @Override
-    public Node namedItem(String name) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLPropertiesCollection#namedItem(java.lang.
+	 * String)
+	 */
+	@Override
+	public Node namedItem(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLPropertiesCollection#getNames()
-     */
-    @Override
-    public DOMStringList getNames() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLPropertiesCollection#getNames()
+	 */
+	@Override
+	public DOMStringList getNames() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

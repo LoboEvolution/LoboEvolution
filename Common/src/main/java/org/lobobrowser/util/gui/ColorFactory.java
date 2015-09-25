@@ -33,8 +33,8 @@ import org.lobobrowser.util.ColorCommon;
  */
 public class ColorFactory {
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(ColorFactory.class
-            .getName());
+    private static final Logger logger = Logger
+            .getLogger(ColorFactory.class.getName());
     /** The instance. */
     private static ColorFactory instance;
     /** The Constant TRANSPARENT. */
@@ -45,7 +45,7 @@ public class ColorFactory {
     private static final String RGB_START = "rgb(";
     /** The Constant RGBA_START. */
     private static final String RGBA_START = "rgba(";
-
+    
     /**
      * Instantiates a new color factory.
      */
@@ -54,7 +54,7 @@ public class ColorFactory {
             this.colorMap = ColorCommon.mapColor();
         }
     }
-
+    
     /**
      * Gets the single instance of ColorFactory.
      *
@@ -70,7 +70,7 @@ public class ColorFactory {
         }
         return instance;
     }
-
+    
     /**
      * Checks if is color.
      *
@@ -92,7 +92,7 @@ public class ColorFactory {
             return colorMap.containsKey(normalSpec);
         }
     }
-
+    
     /**
      * Gets the color.
      *
@@ -108,79 +108,79 @@ public class ColorFactory {
                 int red = 0, green = 0, blue = 0, alpha = 0;
                 if (normalSpec.startsWith(RGBA_START)) {
                     int endIdx = normalSpec.lastIndexOf(')');
-                    String commaValues = endIdx == -1 ? normalSpec
-                            .substring(RGBA_START.length()) : normalSpec
-                            .substring(RGBA_START.length(), endIdx);
-                            StringTokenizer tok = new StringTokenizer(commaValues, ",");
+                    String commaValues = endIdx == -1
+                            ? normalSpec.substring(RGBA_START.length())
+                            : normalSpec.substring(RGBA_START.length(), endIdx);
+                    StringTokenizer tok = new StringTokenizer(commaValues, ",");
+                    if (tok.hasMoreTokens()) {
+                        String rstr = tok.nextToken().trim();
+                        try {
+                            red = Integer.parseInt(rstr);
+                        } catch (NumberFormatException nfe) {
+                            // ignore
+                        }
+                        if (tok.hasMoreTokens()) {
+                            String gstr = tok.nextToken().trim();
+                            try {
+                                green = Integer.parseInt(gstr);
+                            } catch (NumberFormatException nfe) {
+                                // ignore
+                            }
                             if (tok.hasMoreTokens()) {
-                                String rstr = tok.nextToken().trim();
+                                String bstr = tok.nextToken().trim();
                                 try {
-                                    red = Integer.parseInt(rstr);
+                                    blue = Integer.parseInt(bstr);
                                 } catch (NumberFormatException nfe) {
                                     // ignore
                                 }
                                 if (tok.hasMoreTokens()) {
-                                    String gstr = tok.nextToken().trim();
+                                    String astr = tok.nextToken().trim();
                                     try {
-                                        green = Integer.parseInt(gstr);
+                                        alpha = new Float(
+                                                255 * Float.parseFloat(astr))
+                                                        .intValue();
                                     } catch (NumberFormatException nfe) {
                                         // ignore
                                     }
-                                    if (tok.hasMoreTokens()) {
-                                        String bstr = tok.nextToken().trim();
-                                        try {
-                                            blue = Integer.parseInt(bstr);
-                                        } catch (NumberFormatException nfe) {
-                                            // ignore
-                                        }
-                                        if (tok.hasMoreTokens()) {
-                                            String astr = tok.nextToken().trim();
-                                            try {
-                                                alpha = new Float(
-                                                        255 * Float.parseFloat(astr))
-                                                .intValue();
-                                            } catch (NumberFormatException nfe) {
-                                                // ignore
-                                            }
-                                        }
-                                    }
                                 }
                             }
-                            color = new Color(normalize(red), normalize(green),
-                                    normalize(blue), alpha);
+                        }
+                    }
+                    color = new Color(normalize(red), normalize(green),
+                            normalize(blue), alpha);
                 } else if (normalSpec.startsWith(RGB_START)) {
                     // CssParser produces this format.
                     int endIdx = normalSpec.lastIndexOf(')');
-                    String commaValues = endIdx == -1 ? normalSpec
-                            .substring(RGB_START.length()) : normalSpec
-                            .substring(RGB_START.length(), endIdx);
-                            StringTokenizer tok = new StringTokenizer(commaValues, ",");
+                    String commaValues = endIdx == -1
+                            ? normalSpec.substring(RGB_START.length())
+                            : normalSpec.substring(RGB_START.length(), endIdx);
+                    StringTokenizer tok = new StringTokenizer(commaValues, ",");
+                    if (tok.hasMoreTokens()) {
+                        String rstr = tok.nextToken().trim();
+                        try {
+                            red = Integer.parseInt(rstr);
+                        } catch (NumberFormatException nfe) {
+                            // ignore
+                        }
+                        if (tok.hasMoreTokens()) {
+                            String gstr = tok.nextToken().trim();
+                            try {
+                                green = Integer.parseInt(gstr);
+                            } catch (NumberFormatException nfe) {
+                                // ignore
+                            }
                             if (tok.hasMoreTokens()) {
-                                String rstr = tok.nextToken().trim();
+                                String bstr = tok.nextToken().trim();
                                 try {
-                                    red = Integer.parseInt(rstr);
+                                    blue = Integer.parseInt(bstr);
                                 } catch (NumberFormatException nfe) {
                                     // ignore
                                 }
-                                if (tok.hasMoreTokens()) {
-                                    String gstr = tok.nextToken().trim();
-                                    try {
-                                        green = Integer.parseInt(gstr);
-                                    } catch (NumberFormatException nfe) {
-                                        // ignore
-                                    }
-                                    if (tok.hasMoreTokens()) {
-                                        String bstr = tok.nextToken().trim();
-                                        try {
-                                            blue = Integer.parseInt(bstr);
-                                        } catch (NumberFormatException nfe) {
-                                            // ignore
-                                        }
-                                    }
-                                }
                             }
-                            color = new Color(normalize(red), normalize(green),
-                                    normalize(blue));
+                        }
+                    }
+                    color = new Color(normalize(red), normalize(green),
+                            normalize(blue));
                 } else if (normalSpec.startsWith("#")) {
                     int len = normalSpec.length();
                     int[] rgba = new int[4];
@@ -188,8 +188,8 @@ public class ColorFactory {
                     for (int i = 0; i < rgba.length; i++) {
                         int idx = (2 * i) + 1;
                         if (idx < len) {
-                            String hexText = normalSpec.substring(idx, idx
-                                    + Math.min(2, len - idx));
+                            String hexText = normalSpec.substring(idx,
+                                    idx + Math.min(2, len - idx));
                             try {
                                 rgba[i] = Integer.parseInt(hexText, 16);
                             } catch (NumberFormatException nfe) {
@@ -210,7 +210,7 @@ public class ColorFactory {
             return color;
         }
     }
-
+    
     /**
      * Normalize color component within allow range 0..255
      *

@@ -31,221 +31,219 @@ import javax.swing.event.PopupMenuListener;
  */
 public class AddressField extends JComboBox<String> {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The component source. */
-    private final ComponentSource componentSource;
+	/** The component source. */
+	private final ComponentSource componentSource;
 
-    /**
-     * Instantiates a new address field.
-     *
-     * @param cs
-     *            the cs
-     */
-    public AddressField(ComponentSource cs) {
-        this.componentSource = cs;
-        this.setEditable(true);
-        TextFieldComboBoxEditor editor = new TextFieldComboBoxEditor();
-        this.setEditor(editor);
-        editor.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                onKeyReleased(e);
-            }
+	/**
+	 * Instantiates a new address field.
+	 *
+	 * @param cs
+	 *            the cs
+	 */
+	public AddressField(ComponentSource cs) {
+		this.componentSource = cs;
+		this.setEditable(true);
+		TextFieldComboBoxEditor editor = new TextFieldComboBoxEditor();
+		this.setEditor(editor);
+		editor.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				onKeyReleased(e);
+			}
 
-            @Override
-            public void keyPressed(KeyEvent e) {
-                onKeyPressed(e);
-            }
-        });
-        this.addPopupMenuListener(new PopupMenuListener() {
-            @Override
-            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-                onBeforePopupVisible();
-            }
+			@Override
+			public void keyPressed(KeyEvent e) {
+				onKeyPressed(e);
+			}
+		});
+		this.addPopupMenuListener(new PopupMenuListener() {
+			@Override
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+				onBeforePopupVisible();
+			}
 
-            @Override
-            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-            }
+			@Override
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			}
 
-            @Override
-            public void popupMenuCanceled(PopupMenuEvent e) {
-            }
-        });
-        this.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                String cmd = event.getActionCommand();
-                if ("comboBoxEdited".equals(cmd)) {
-                    onEdited(event.getModifiers());
-                } else if ("comboBoxChanged".equals(cmd)) {
-                }
-            }
-        });
-        // This needed the first time to set a reasonable
-        // popup size.
-        this.onBeforePopupVisible();
-    }
+			@Override
+			public void popupMenuCanceled(PopupMenuEvent e) {
+			}
+		});
+		this.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				String cmd = event.getActionCommand();
+				if ("comboBoxEdited".equals(cmd)) {
+					onEdited(event.getModifiers());
+				} else if ("comboBoxChanged".equals(cmd)) {
+				}
+			}
+		});
+		// This needed the first time to set a reasonable
+		// popup size.
+		this.onBeforePopupVisible();
+	}
 
-    /**
-     * Gets the text.
-     *
-     * @return the text
-     */
-    public String getText() {
-        if (this.isEditable()) {
-            return (String) this.getEditor().getItem();
-        } else {
-            return String.valueOf(this.getSelectedItem());
-        }
-    }
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
+	public String getText() {
+		if (this.isEditable()) {
+			return (String) this.getEditor().getItem();
+		} else {
+			return String.valueOf(this.getSelectedItem());
+		}
+	}
 
-    /**
-     * Sets the text.
-     *
-     * @param text
-     *            the new text
-     */
-    public void setText(String text) {
-        JComboBox<String> combo = this;
-        boolean editable = this.isEditable();
-        if (editable) {
-            combo.getEditor().setItem(text);
-        }
-    }
+	/**
+	 * Sets the text.
+	 *
+	 * @param text
+	 *            the new text
+	 */
+	public void setText(String text) {
+		JComboBox<String> combo = this;
+		boolean editable = this.isEditable();
+		if (editable) {
+			combo.getEditor().setItem(text);
+		}
+	}
 
-    /**
-     * Sets the url.
-     *
-     * @param url
-     *            the new url
-     */
-    public void setUrl(URL url) {
-        this.setText(url == null ? "" : url.toExternalForm());
-    }
+	/**
+	 * Sets the url.
+	 *
+	 * @param url
+	 *            the new url
+	 */
+	public void setUrl(URL url) {
+		this.setText(url == null ? "" : url.toExternalForm());
+	}
 
-    /**
-     * On before popup visible.
-     */
-    private void onBeforePopupVisible() {
-        if ((comboInvalid || comboHasHeadMatches) && !populatingMatches) {
-            populateCombo(this.getText());
-        }
-    }
+	/**
+	 * On before popup visible.
+	 */
+	private void onBeforePopupVisible() {
+		if ((comboInvalid || comboHasHeadMatches) && !populatingMatches) {
+			populateCombo(this.getText());
+		}
+	}
 
-    /** The combo invalid. */
-    private boolean comboInvalid = true;
+	/** The combo invalid. */
+	private boolean comboInvalid = true;
 
-    /** The combo has head matches. */
-    private boolean comboHasHeadMatches = false;
+	/** The combo has head matches. */
+	private boolean comboHasHeadMatches = false;
 
-    /** The populating matches. */
-    private boolean populatingMatches = false;
+	/** The populating matches. */
+	private boolean populatingMatches = false;
 
-    /**
-     * Populate combo.
-     *
-     * @param comboBoxText
-     *            the combo box text
-     */
-    private void populateCombo(String comboBoxText) {
-        // Expected to be called in GUI thread.
-        this.populatingMatches = true;
-        try {
-            JComboBox<String> urlComboBox = this;
-            urlComboBox.removeAllItems();
-            Collection<String> recentUrls = this.componentSource
-                    .getRecentLocations(30);
-            Iterator<String> i = recentUrls.iterator();
-            while (i.hasNext()) {
-                String matchUrl = i.next();
-                urlComboBox.addItem(matchUrl);
-            }
-            this.setText(comboBoxText);
-            this.comboHasHeadMatches = false;
-            this.comboInvalid = false;
-        } finally {
-            this.populatingMatches = false;
-        }
-    }
+	/**
+	 * Populate combo.
+	 *
+	 * @param comboBoxText
+	 *            the combo box text
+	 */
+	private void populateCombo(String comboBoxText) {
+		// Expected to be called in GUI thread.
+		this.populatingMatches = true;
+		try {
+			JComboBox<String> urlComboBox = this;
+			urlComboBox.removeAllItems();
+			Collection<String> recentUrls = this.componentSource.getRecentLocations(30);
+			Iterator<String> i = recentUrls.iterator();
+			while (i.hasNext()) {
+				String matchUrl = i.next();
+				urlComboBox.addItem(matchUrl);
+			}
+			this.setText(comboBoxText);
+			this.comboHasHeadMatches = false;
+			this.comboInvalid = false;
+		} finally {
+			this.populatingMatches = false;
+		}
+	}
 
-    /**
-     * On edited.
-     *
-     * @param modifiers
-     *            the modifiers
-     */
-    private void onEdited(int modifiers) {
-        // if(this.getText().length() != 0) {
-        // this.componentSource.navigateOrSearch();
-        //}
-    }
+	/**
+	 * On edited.
+	 *
+	 * @param modifiers
+	 *            the modifiers
+	 */
+	private void onEdited(int modifiers) {
+		// if(this.getText().length() != 0) {
+		// this.componentSource.navigateOrSearch();
+		// }
+	}
 
-    /**
-     * On key released.
-     *
-     * @param event
-     *            the event
-     */
-    private void onKeyReleased(KeyEvent event) {
-        AddressField urlComboBox = this;
-        char releasedChar = event.getKeyChar();
-        if (validPopupChar(releasedChar)) {
-            String urlText = urlComboBox.getText();
-            Collection<?> headMatches = this.componentSource
-                    .getPotentialMatches(urlText, 30);
-            if (headMatches.size() == 0) {
-                if (urlComboBox.isPopupVisible()) {
-                    urlComboBox.hidePopup();
-                }
-            } else {
-                populatingMatches = true;
-                try {
-                    urlComboBox.removeAllItems();
-                    Iterator<?> i = headMatches.iterator();
-                    while (i.hasNext()) {
-                        String matchUrl = (String) i.next();
-                        urlComboBox.addItem(matchUrl);
-                    }
-                    comboHasHeadMatches = true;
-                    if (!urlComboBox.isPopupVisible()) {
-                        urlComboBox.showPopup();
-                    }
-                    urlComboBox.setSelectedItem(null);
-                    urlComboBox.setText(urlText);
-                } finally {
-                    populatingMatches = false;
-                }
-            }
-        }
+	/**
+	 * On key released.
+	 *
+	 * @param event
+	 *            the event
+	 */
+	private void onKeyReleased(KeyEvent event) {
+		AddressField urlComboBox = this;
+		char releasedChar = event.getKeyChar();
+		if (validPopupChar(releasedChar)) {
+			String urlText = urlComboBox.getText();
+			Collection<?> headMatches = this.componentSource.getPotentialMatches(urlText, 30);
+			if (headMatches.size() == 0) {
+				if (urlComboBox.isPopupVisible()) {
+					urlComboBox.hidePopup();
+				}
+			} else {
+				populatingMatches = true;
+				try {
+					urlComboBox.removeAllItems();
+					Iterator<?> i = headMatches.iterator();
+					while (i.hasNext()) {
+						String matchUrl = (String) i.next();
+						urlComboBox.addItem(matchUrl);
+					}
+					comboHasHeadMatches = true;
+					if (!urlComboBox.isPopupVisible()) {
+						urlComboBox.showPopup();
+					}
+					urlComboBox.setSelectedItem(null);
+					urlComboBox.setText(urlText);
+				} finally {
+					populatingMatches = false;
+				}
+			}
+		}
 
-    }
+	}
 
-    /**
-     * On key pressed.
-     *
-     * @param event
-     *            the event
-     */
-    private void onKeyPressed(KeyEvent event) {
-        AddressField urlComboBox = this;
-        if (event.getKeyCode() == KeyEvent.VK_ENTER) {
-            String urlText = urlComboBox.getText();
-            if (urlText.length() != 0) {
-                this.componentSource.navigateOrSearch();
-            }
-        }
-    }
+	/**
+	 * On key pressed.
+	 *
+	 * @param event
+	 *            the event
+	 */
+	private void onKeyPressed(KeyEvent event) {
+		AddressField urlComboBox = this;
+		if (event.getKeyCode() == KeyEvent.VK_ENTER) {
+			String urlText = urlComboBox.getText();
+			if (urlText.length() != 0) {
+				this.componentSource.navigateOrSearch();
+			}
+		}
+	}
 
-    /**
-     * Valid popup char.
-     *
-     * @param ch
-     *            the ch
-     * @return true, if successful
-     */
-    private boolean validPopupChar(char ch) {
-        return Character.isLetterOrDigit(ch) || (ch == '.') || (ch == '/');
-    }
+	/**
+	 * Valid popup char.
+	 *
+	 * @param ch
+	 *            the ch
+	 * @return true, if successful
+	 */
+	private boolean validPopupChar(char ch) {
+		return Character.isLetterOrDigit(ch) || (ch == '.') || (ch == '/');
+	}
 }

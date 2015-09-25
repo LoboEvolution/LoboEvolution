@@ -26,38 +26,38 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class ShowBookmarksAction extends ActionPool {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The window. */
-    private NavigatorWindow window;
+	/** The window. */
+	private NavigatorWindow window;
 
-    /**
-     * Instantiates a new show bookmarks action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     */
-    public ShowBookmarksAction(ComponentSource componentSource,
-            NavigatorWindow window) {
-        super(componentSource, window);
-        this.window = window;
-    }
+	/**
+	 * Instantiates a new show bookmarks action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 */
+	public ShowBookmarksAction(ComponentSource componentSource, NavigatorWindow window) {
+		super(componentSource, window);
+		this.window = window;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        try {
-            window.getTopFrame().navigate("about:bookmarks");
-        } catch (MalformedURLException mfu) {
-            throw new IllegalStateException("not expected", mfu);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		try {
+			window.getTopFrame().navigate("about:bookmarks");
+		} catch (MalformedURLException mfu) {
+			throw new IllegalStateException("not expected", mfu);
+		}
+	}
 
 }

@@ -29,40 +29,42 @@ import org.xml.sax.SAXParseException;
  */
 public class LocalErrorHandler implements ErrorHandler {
 
-    /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(LocalErrorHandler.class.getName());
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(LocalErrorHandler.class.getName());
 
-    /**
-     * Instantiates a new local error handler.
-     */
-    public LocalErrorHandler() {
-    }
+	/**
+	 * Instantiates a new local error handler.
+	 */
+	public LocalErrorHandler() {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.xml.sax.ErrorHandler#warning(org.xml.sax.SAXParseException)
-     */
-    @Override
-    public void warning(SAXParseException exception) throws SAXException {
-        logger.log(Level.WARNING, exception.getMessage(), exception.getCause());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xml.sax.ErrorHandler#warning(org.xml.sax.SAXParseException)
+	 */
+	@Override
+	public void warning(SAXParseException exception) throws SAXException {
+		logger.log(Level.WARNING, exception.getMessage(), exception.getCause());
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.xml.sax.ErrorHandler#error(org.xml.sax.SAXParseException)
-     */
-    @Override
-    public void error(SAXParseException exception) throws SAXException {
-        logger.log(Level.SEVERE, exception.getMessage(), exception.getCause());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xml.sax.ErrorHandler#error(org.xml.sax.SAXParseException)
+	 */
+	@Override
+	public void error(SAXParseException exception) throws SAXException {
+		logger.log(Level.SEVERE, exception.getMessage(), exception.getCause());
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.xml.sax.ErrorHandler#fatalError(org.xml.sax.SAXParseException)
-     */
-    @Override
-    public void fatalError(SAXParseException exception) throws SAXException {
-        logger.log(Level.SEVERE, exception.getMessage(), exception.getCause());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xml.sax.ErrorHandler#fatalError(org.xml.sax.SAXParseException)
+	 */
+	@Override
+	public void fatalError(SAXParseException exception) throws SAXException {
+		logger.log(Level.SEVERE, exception.getMessage(), exception.getCause());
+	}
 }

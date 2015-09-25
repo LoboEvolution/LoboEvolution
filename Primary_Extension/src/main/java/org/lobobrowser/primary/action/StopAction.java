@@ -25,32 +25,33 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class StopAction extends ActionPool {
 
-    /** The window. */
-    private NavigatorWindow window;
+	/** The window. */
+	private NavigatorWindow window;
 
-    /**
-     * Instantiates a new stop action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     */
-    public StopAction(ComponentSource componentSource, NavigatorWindow window) {
-        super(componentSource, window);
-        this.window = window;
-    }
+	/**
+	 * Instantiates a new stop action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 */
+	public StopAction(ComponentSource componentSource, NavigatorWindow window) {
+		super(componentSource, window);
+		this.window = window;
+	}
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        window.stop();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		window.stop();
+	}
 }

@@ -19,9 +19,9 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.http.LRUCache;
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
-import org.lobobrowser.util.LRUCache;
 
 /**
  * Settings associated with host names. This is a singleton class with an

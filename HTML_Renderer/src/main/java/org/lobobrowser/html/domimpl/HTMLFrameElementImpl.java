@@ -27,230 +27,251 @@ import org.w3c.dom.Document;
 /**
  * The Class HTMLFrameElementImpl.
  */
-public class HTMLFrameElementImpl extends HTMLElementImpl implements
-HTMLFrameElement, FrameNode {
+public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameElement, FrameNode {
 
-    /** The browser frame. */
-    private volatile BrowserFrame browserFrame;
+	/** The browser frame. */
+	private volatile BrowserFrame browserFrame;
 
-    /**
-     * Instantiates a new HTML frame element impl.
-     *
-     * @param name
-     *            the name
-     * @param noStyleSheet
-     *            the no style sheet
-     */
-    public HTMLFrameElementImpl(String name, boolean noStyleSheet) {
-        super(name, noStyleSheet);
-    }
+	/**
+	 * Instantiates a new HTML frame element impl.
+	 *
+	 * @param name
+	 *            the name
+	 * @param noStyleSheet
+	 *            the no style sheet
+	 */
+	public HTMLFrameElementImpl(String name, boolean noStyleSheet) {
+		super(name, noStyleSheet);
+	}
 
-    /**
-     * Instantiates a new HTML frame element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLFrameElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML frame element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLFrameElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.dombl.FrameNode#setBrowserFrame(org.lobobrowser.html
-     * .BrowserFrame)
-     */
-    @Override
-    public void setBrowserFrame(BrowserFrame frame) {
-        this.browserFrame = frame;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.dombl.FrameNode#setBrowserFrame(org.lobobrowser.html
+	 * .BrowserFrame)
+	 */
+	@Override
+	public void setBrowserFrame(BrowserFrame frame) {
+		this.browserFrame = frame;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.FrameNode#getBrowserFrame()
-     */
-    @Override
-    public BrowserFrame getBrowserFrame() {
-        return this.browserFrame;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.FrameNode#getBrowserFrame()
+	 */
+	@Override
+	public BrowserFrame getBrowserFrame() {
+		return this.browserFrame;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getFrameBorder()
-     */
-    @Override
-    public String getFrameBorder() {
-        return this.getAttribute(HtmlAttributeProperties.FRAMEBORDER);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#getFrameBorder()
+	 */
+	@Override
+	public String getFrameBorder() {
+		return this.getAttribute(HtmlAttributeProperties.FRAMEBORDER);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.w3c.html.HTMLFrameElement#setFrameBorder(java.lang.String)
-     */
-    @Override
-    public void setFrameBorder(String frameBorder) {
-        this.setAttribute(HtmlAttributeProperties.FRAMEBORDER, frameBorder);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#setFrameBorder(java.lang.
+	 * String)
+	 */
+	@Override
+	public void setFrameBorder(String frameBorder) {
+		this.setAttribute(HtmlAttributeProperties.FRAMEBORDER, frameBorder);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getLongDesc()
-     */
-    @Override
-    public String getLongDesc() {
-        return this.getAttribute(HtmlAttributeProperties.LONGDESC);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#getLongDesc()
+	 */
+	@Override
+	public String getLongDesc() {
+		return this.getAttribute(HtmlAttributeProperties.LONGDESC);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#setLongDesc(java.lang.String)
-     */
-    @Override
-    public void setLongDesc(String longDesc) {
-        this.setAttribute(HtmlAttributeProperties.LONGDESC, longDesc);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLFrameElement#setLongDesc(java.lang.String)
+	 */
+	@Override
+	public void setLongDesc(String longDesc) {
+		this.setAttribute(HtmlAttributeProperties.LONGDESC, longDesc);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getMarginHeight()
-     */
-    @Override
-    public String getMarginHeight() {
-        return this.getAttribute(HtmlAttributeProperties.MARGINHEIGHT);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#getMarginHeight()
+	 */
+	@Override
+	public String getMarginHeight() {
+		return this.getAttribute(HtmlAttributeProperties.MARGINHEIGHT);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.w3c.html.HTMLFrameElement#setMarginHeight(java.lang.String)
-     */
-    @Override
-    public void setMarginHeight(String marginHeight) {
-        this.setAttribute(HtmlAttributeProperties.MARGINHEIGHT, marginHeight);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#setMarginHeight(java.lang.
+	 * String)
+	 */
+	@Override
+	public void setMarginHeight(String marginHeight) {
+		this.setAttribute(HtmlAttributeProperties.MARGINHEIGHT, marginHeight);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getMarginWidth()
-     */
-    @Override
-    public String getMarginWidth() {
-        return this.getAttribute(HtmlAttributeProperties.MARGINWIDTH);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#getMarginWidth()
+	 */
+	@Override
+	public String getMarginWidth() {
+		return this.getAttribute(HtmlAttributeProperties.MARGINWIDTH);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.w3c.html.HTMLFrameElement#setMarginWidth(java.lang.String)
-     */
-    @Override
-    public void setMarginWidth(String marginWidth) {
-        this.setAttribute(HtmlAttributeProperties.MARGINWIDTH, marginWidth);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#setMarginWidth(java.lang.
+	 * String)
+	 */
+	@Override
+	public void setMarginWidth(String marginWidth) {
+		this.setAttribute(HtmlAttributeProperties.MARGINWIDTH, marginWidth);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getName()
-     */
-    @Override
-    public String getName() {
-        return this.getAttribute(HtmlAttributeProperties.NAME);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#getName()
+	 */
+	@Override
+	public String getName() {
+		return this.getAttribute(HtmlAttributeProperties.NAME);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#setName(java.lang.String)
-     */
-    @Override
-    public void setName(String name) {
-        this.setAttribute(HtmlAttributeProperties.NAME, name);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#setName(java.lang.String)
+	 */
+	@Override
+	public void setName(String name) {
+		this.setAttribute(HtmlAttributeProperties.NAME, name);
+	}
 
-    /** The no resize. */
-    private boolean noResize;
+	/** The no resize. */
+	private boolean noResize;
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getNoResize()
-     */
-    @Override
-    public boolean getNoResize() {
-        return this.noResize;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#getNoResize()
+	 */
+	@Override
+	public boolean getNoResize() {
+		return this.noResize;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#setNoResize(boolean)
-     */
-    @Override
-    public void setNoResize(boolean noResize) {
-        this.noResize = noResize;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#setNoResize(boolean)
+	 */
+	@Override
+	public void setNoResize(boolean noResize) {
+		this.noResize = noResize;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getScrolling()
-     */
-    @Override
-    public String getScrolling() {
-        return this.getAttribute(HtmlAttributeProperties.SCROLLING);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#getScrolling()
+	 */
+	@Override
+	public String getScrolling() {
+		return this.getAttribute(HtmlAttributeProperties.SCROLLING);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#setScrolling(java.lang.String)
-     */
-    @Override
-    public void setScrolling(String scrolling) {
-        this.setAttribute(HtmlAttributeProperties.SCROLLING, scrolling);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLFrameElement#setScrolling(java.lang.String)
+	 */
+	@Override
+	public void setScrolling(String scrolling) {
+		this.setAttribute(HtmlAttributeProperties.SCROLLING, scrolling);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getSrc()
-     */
-    @Override
-    public String getSrc() {
-        return this.getAttribute(HtmlAttributeProperties.SRC);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#getSrc()
+	 */
+	@Override
+	public String getSrc() {
+		return this.getAttribute(HtmlAttributeProperties.SRC);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#setSrc(java.lang.String)
-     */
-    @Override
-    public void setSrc(String src) {
-        this.setAttribute(HtmlAttributeProperties.SRC, src);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#setSrc(java.lang.String)
+	 */
+	@Override
+	public void setSrc(String src) {
+		this.setAttribute(HtmlAttributeProperties.SRC, src);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameElement#getContentDocument()
-     */
-    @Override
-    public Document getContentDocument() {
-        BrowserFrame frame = this.browserFrame;
-        if (frame == null) {
-            // Not loaded yet
-            return null;
-        }
-        return frame.getContentDocument();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameElement#getContentDocument()
+	 */
+	@Override
+	public Document getContentDocument() {
+		BrowserFrame frame = this.browserFrame;
+		if (frame == null) {
+			// Not loaded yet
+			return null;
+		}
+		return frame.getContentDocument();
+	}
 
-    /**
-     * Gets the content window.
-     *
-     * @return the content window
-     */
-    public Window getContentWindow() {
-        BrowserFrame frame = this.browserFrame;
-        if (frame == null) {
-            // Not loaded yet
-            return null;
-        }
-        return Window.getWindow(frame.getHtmlRendererContext());
-    }
+	/**
+	 * Gets the content window.
+	 *
+	 * @return the content window
+	 */
+	@Override
+	public Window getContentWindow() {
+		BrowserFrame frame = this.browserFrame;
+		if (frame == null) {
+			// Not loaded yet
+			return null;
+		}
+		return Window.getWindow(frame.getHtmlRendererContext());
+	}
 
 }

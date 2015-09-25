@@ -43,6 +43,7 @@ import org.lobobrowser.clientlet.ClientletRequest;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.clientlet.SimpleComponentContent;
+import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.main.ExtensionManager;
 import org.lobobrowser.main.PlatformInit;
 import org.lobobrowser.request.ClientletRequestHandler;
@@ -56,7 +57,6 @@ import org.lobobrowser.ua.NavigationListener;
 import org.lobobrowser.ua.NavigationVetoException;
 import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.NavigatorProgressEvent;
-import org.lobobrowser.ua.NetworkRequest;
 import org.lobobrowser.ua.ParameterInfo;
 import org.lobobrowser.ua.ProgressType;
 import org.lobobrowser.ua.RequestType;
@@ -1652,8 +1652,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
      * @see org.lobobrowser.ua.NavigatorFrame#createNetworkRequest()
      */
     @Override
-    public NetworkRequest createNetworkRequest() {
-        return new org.lobobrowser.context.NetworkRequestImpl();
+    public HttpRequest createHttpRequest() {
+        return new HttpRequest();
     }
 
     /*
@@ -1818,7 +1818,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
     }
 
     /** The content properties. */
-    private Map contentProperties = null;
+    private Map<String, Object> contentProperties = null;
 
     /*
      * (non-Javadoc)
@@ -1832,9 +1832,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
             if (content != null) {
                 content.setProperty(name, value);
             }
-            Map props = this.contentProperties;
+            Map<String, Object> props = this.contentProperties;
             if (props == null) {
-                props = new HashMap(5);
+                props = new HashMap<String, Object>(5);
                 this.contentProperties = props;
             }
             props.put(name, value);
@@ -1849,9 +1849,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
      */
     private void updateContentProperties(ComponentContent content) {
         synchronized (this.propertiesMonitor) {
-            Map props = this.contentProperties;
+            Map<String, Object> props = this.contentProperties;
             if (props != null) {
-                Iterator i = props.entrySet().iterator();
+                Iterator<?> i = props.entrySet().iterator();
                 while (i.hasNext()) {
                     Map.Entry entry = (Map.Entry) i.next();
                     content.setProperty((String) entry.getKey(),

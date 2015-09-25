@@ -26,17 +26,14 @@ import org.lobobrowser.html.renderer.UIControl;
  */
 public class CanvasLayout extends CommonWidgetLayout {
 
-    public CanvasLayout() {
-        super(ADD_AS_BLOCK, true);
-    }
+	public CanvasLayout() {
+		super(ADD_AS_BLOCK, true);
+	}
 
-    @Override
-    protected RElement createRenderable(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-        UIControl control = new CanvasControl(
-                (HTMLCanvasElementImpl) markupElement);
-        return new RCanvasControl(markupElement, control,
-                bodyLayout.getContainer(), bodyLayout.getFrameContext(),
-                bodyLayout.getUserAgentContext());
-    }
+	@Override
+	protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		UIControl control = new CanvasControl((HTMLCanvasElementImpl) markupElement);
+		return new RCanvasControl(markupElement, control, bodyLayout.getContainer(), bodyLayout.getFrameContext(),
+				bodyLayout.getUserAgentContext());
+	}
 }

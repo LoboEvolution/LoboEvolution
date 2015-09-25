@@ -29,7 +29,7 @@ public class InputProgressEvent extends EventObject {
     private static final long serialVersionUID = -4768022316827973086L;
     /** The progress. */
     private final int progress;
-
+    
     /**
      * Instantiates a new input progress event.
      *
@@ -42,7 +42,7 @@ public class InputProgressEvent extends EventObject {
         super(arg0);
         this.progress = progress;
     }
-
+    
     /**
      * Gets the progress.
      *

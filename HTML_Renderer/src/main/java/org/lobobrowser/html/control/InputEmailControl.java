@@ -34,7 +34,7 @@ public class InputEmailControl extends BaseInputTextControl {
 
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	
+
 	private String strPattern;
 
 	public InputEmailControl(HTMLBaseInputElement modelNode) {
@@ -57,6 +57,7 @@ public class InputEmailControl extends BaseInputTextControl {
 
 	private KeyListener addKeyListener() {
 		KeyListener keyListener = new KeyListener() {
+			@Override
 			public void keyPressed(KeyEvent keyEvent) {
 
 				JTextFieldImpl email = (JTextFieldImpl) keyEvent.getSource();
@@ -67,9 +68,11 @@ public class InputEmailControl extends BaseInputTextControl {
 				}
 			}
 
+			@Override
 			public void keyReleased(KeyEvent keyEvent) {
 			}
 
+			@Override
 			public void keyTyped(KeyEvent keyEvent) {
 			}
 
@@ -79,7 +82,8 @@ public class InputEmailControl extends BaseInputTextControl {
 
 	private boolean isEmail(String keyCode) {
 		if (keyCode != null && keyCode.length() > 0) {
-			Pattern pattern = Pattern.compile((strPattern!= null && strPattern.length()>0) ? strPattern : EMAIL_PATTERN);
+			Pattern pattern = Pattern
+					.compile((strPattern != null && strPattern.length() > 0) ? strPattern : EMAIL_PATTERN);
 			Matcher matcher = pattern.matcher(keyCode);
 			return matcher.matches();
 		} else {

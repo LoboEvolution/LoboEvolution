@@ -359,10 +359,13 @@ public interface HTMLDocument extends Document, EventTarget {
 
 	public HTMLAllCollection getAll();
 
+	@Override
 	Node renameNode(Node n, String namespaceURI, String qualifiedName);
 
+	@Override
 	CDATASection createCDATASection(String data) throws DOMException;
 
+	@Override
 	Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException;
 
 	XPathResultImpl evaluate(String expression, HTMLElement contextNode, XPathNSResolverImpl resolver, Short type,

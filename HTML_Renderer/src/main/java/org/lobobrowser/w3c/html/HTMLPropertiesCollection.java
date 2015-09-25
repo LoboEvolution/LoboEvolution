@@ -7,6 +7,7 @@ import org.w3c.dom.Node;
 
 public interface HTMLPropertiesCollection extends HTMLCollection {
 	// HTMLPropertiesCollection
+	@Override
 	public Node namedItem(String name);
 
 	public DOMStringList getNames();

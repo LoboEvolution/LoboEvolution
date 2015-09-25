@@ -42,197 +42,194 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import org.lobobrowser.html.HtmlRendererContext;
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.gui.SelectionChangeEvent;
 import org.lobobrowser.html.gui.SelectionChangeListener;
+import org.lobobrowser.http.UserAgentContext;
 
 /**
  * A Swing frame that can be used to test the Cobra HTML rendering engine.
  */
 public class TestFrame extends JFrame {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(TestFrame.class
-            .getName());
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(TestFrame.class.getName());
 
-    /** The rcontext. */
-    private final SimpleHtmlRendererContext rcontext;
+	/** The rcontext. */
+	private final SimpleHtmlRendererContext rcontext;
 
-    /** The address field. */
-    private final JTextField addressField;
+	/** The address field. */
+	private final JTextField addressField;
 
-    /**
-     * Instantiates a new test frame.
-     *
-     * @throws HeadlessException
-     *             the headless exception
-     */
-    public TestFrame() throws HeadlessException {
-        this("");
-    }
+	/**
+	 * Instantiates a new test frame.
+	 *
+	 * @throws HeadlessException
+	 *             the headless exception
+	 */
+	public TestFrame() throws HeadlessException {
+		this("");
+	}
 
-    /**
-     * Instantiates a new test frame.
-     *
-     * @param title
-     *            the title
-     * @throws HeadlessException
-     *             the headless exception
-     */
-    public TestFrame(String title) throws HeadlessException {
-        super(title);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Container contentPane = this.getContentPane();
-        contentPane.setLayout(new BorderLayout());
-        JPanel topPanel = new JPanel();
-        topPanel.setLayout(new BorderLayout());
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new BorderLayout());
-        final JTextField textField = new JTextField();
-        this.addressField = textField;
-        JButton button = new JButton("Parse & Render");
-        final JTabbedPane tabbedPane = new JTabbedPane();
-        final JTree tree = new JTree();
-        final JScrollPane scrollPane = new JScrollPane(tree);
+	/**
+	 * Instantiates a new test frame.
+	 *
+	 * @param title
+	 *            the title
+	 * @throws HeadlessException
+	 *             the headless exception
+	 */
+	public TestFrame(String title) throws HeadlessException {
+		super(title);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container contentPane = this.getContentPane();
+		contentPane.setLayout(new BorderLayout());
+		JPanel topPanel = new JPanel();
+		topPanel.setLayout(new BorderLayout());
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new BorderLayout());
+		final JTextField textField = new JTextField();
+		this.addressField = textField;
+		JButton button = new JButton("Parse & Render");
+		final JTabbedPane tabbedPane = new JTabbedPane();
+		final JTree tree = new JTree();
+		final JScrollPane scrollPane = new JScrollPane(tree);
 
-        contentPane.add(topPanel, BorderLayout.NORTH);
-        contentPane.add(bottomPanel, BorderLayout.CENTER);
+		contentPane.add(topPanel, BorderLayout.NORTH);
+		contentPane.add(bottomPanel, BorderLayout.CENTER);
 
-        topPanel.add(new JLabel("URL: "), BorderLayout.WEST);
-        topPanel.add(textField, BorderLayout.CENTER);
-        topPanel.add(button, BorderLayout.EAST);
+		topPanel.add(new JLabel("URL: "), BorderLayout.WEST);
+		topPanel.add(textField, BorderLayout.CENTER);
+		topPanel.add(button, BorderLayout.EAST);
 
-        bottomPanel.add(tabbedPane, BorderLayout.CENTER);
+		bottomPanel.add(tabbedPane, BorderLayout.CENTER);
 
-        final HtmlPanel panel = new HtmlPanel();
-        panel.addSelectionChangeListener(new SelectionChangeListener() {
-            @Override
-            public void selectionChanged(SelectionChangeEvent event) {
-                if (logger.isLoggable(Level.INFO)) {
-                    logger.info("selectionChanged(): selection node: "
-                            + panel.getSelectionNode());
-                }
-            }
-        });
-        UserAgentContext ucontext = new SimpleUserAgentContext();
-        this.rcontext = new LocalHtmlRendererContext(panel, ucontext);
+		final HtmlPanel panel = new HtmlPanel();
+		panel.addSelectionChangeListener(new SelectionChangeListener() {
+			@Override
+			public void selectionChanged(SelectionChangeEvent event) {
+				if (logger.isLoggable(Level.INFO)) {
+					logger.info("selectionChanged(): selection node: " + panel.getSelectionNode());
+				}
+			}
+		});
+		UserAgentContext ucontext = new SimpleUserAgentContext();
+		this.rcontext = new LocalHtmlRendererContext(panel, ucontext);
 
-        final JTextArea textArea = new JTextArea();
-        textArea.setEditable(false);
-        final JScrollPane textAreaSp = new JScrollPane(textArea);
+		final JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
+		final JScrollPane textAreaSp = new JScrollPane(textArea);
 
-        tabbedPane.addTab("HTML", panel);
-        tabbedPane.addTab("Tree", scrollPane);
-        tabbedPane.addTab("Source", textAreaSp);
-        tabbedPane.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                Component component = tabbedPane.getSelectedComponent();
-                if (component == scrollPane) {
-                    tree.setModel(new NodeTreeModel(panel.getRootNode()));
-                } else if (component == textAreaSp) {
-                    textArea.setText(rcontext.getSourceCode());
-                }
-            }
-        });
+		tabbedPane.addTab("HTML", panel);
+		tabbedPane.addTab("Tree", scrollPane);
+		tabbedPane.addTab("Source", textAreaSp);
+		tabbedPane.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				Component component = tabbedPane.getSelectedComponent();
+				if (component == scrollPane) {
+					tree.setModel(new NodeTreeModel(panel.getRootNode()));
+				} else if (component == textAreaSp) {
+					textArea.setText(rcontext.getSourceCode());
+				}
+			}
+		});
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                process(textField.getText());
-            }
-        });
-    }
+		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				process(textField.getText());
+			}
+		});
+	}
 
-    /**
-     * Gets the html renderer context.
-     *
-     * @return the html renderer context
-     */
-    public HtmlRendererContext getHtmlRendererContext() {
-        return this.rcontext;
-    }
+	/**
+	 * Gets the html renderer context.
+	 *
+	 * @return the html renderer context
+	 */
+	public HtmlRendererContext getHtmlRendererContext() {
+		return this.rcontext;
+	}
 
-    /**
-     * Navigate.
-     *
-     * @param uri
-     *            the uri
-     */
-    public void navigate(String uri) {
-        this.addressField.setText(uri);
-        this.process(uri);
-    }
+	/**
+	 * Navigate.
+	 *
+	 * @param uri
+	 *            the uri
+	 */
+	public void navigate(String uri) {
+		this.addressField.setText(uri);
+		this.process(uri);
+	}
 
-    /**
-     * Process.
-     *
-     * @param uri
-     *            the uri
-     */
-    private void process(String uri) {
-        try {
-            URL url;
-            try {
-                url = new URL(uri);
-            } catch (MalformedURLException mfu) {
-                int idx = uri.indexOf(':');
-                if ((idx == -1) || (idx == 1)) {
-                    // try file
-                    url = new URL("file:" + uri);
-                } else {
-                    throw mfu;
-                }
-            }
-            // Call SimpleHtmlRendererContext.navigate()
-            // which implements incremental rendering.
-            this.rcontext.navigate(url, null);
-        } catch (Exception err) {
-            logger.log(Level.SEVERE, "Error trying to load URI=[" + uri + "].",
-                    err);
-        }
-    }
+	/**
+	 * Process.
+	 *
+	 * @param uri
+	 *            the uri
+	 */
+	private void process(String uri) {
+		try {
+			URL url;
+			try {
+				url = new URL(uri);
+			} catch (MalformedURLException mfu) {
+				int idx = uri.indexOf(':');
+				if ((idx == -1) || (idx == 1)) {
+					// try file
+					url = new URL("file:" + uri);
+				} else {
+					throw mfu;
+				}
+			}
+			// Call SimpleHtmlRendererContext.navigate()
+			// which implements incremental rendering.
+			this.rcontext.navigate(url, null);
+		} catch (Exception err) {
+			logger.log(Level.SEVERE, "Error trying to load URI=[" + uri + "].", err);
+		}
+	}
 
-    /**
-     * The Class LocalHtmlRendererContext.
-     */
-    private class LocalHtmlRendererContext extends SimpleHtmlRendererContext {
+	/**
+	 * The Class LocalHtmlRendererContext.
+	 */
+	private class LocalHtmlRendererContext extends SimpleHtmlRendererContext {
 
-        /**
-         * Instantiates a new local html renderer context.
-         *
-         * @param contextComponent
-         *            the context component
-         * @param ucontext
-         *            the ucontext
-         */
-        public LocalHtmlRendererContext(HtmlPanel contextComponent,
-                UserAgentContext ucontext) {
-            super(contextComponent, ucontext);
-        }
+		/**
+		 * Instantiates a new local html renderer context.
+		 *
+		 * @param contextComponent
+		 *            the context component
+		 * @param ucontext
+		 *            the ucontext
+		 */
+		public LocalHtmlRendererContext(HtmlPanel contextComponent, UserAgentContext ucontext) {
+			super(contextComponent, ucontext);
+		}
 
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.html.test.SimpleHtmlRendererContext#open(java.net.URL,
-         * java.lang.String, java.lang.String, boolean)
-         */
-        @Override
-        public HtmlRendererContext open(URL url, String windowName,
-                String windowFeatures, boolean replace) {
-            TestFrame frame = new TestFrame("Cobra Test Tool");
-            frame.setSize(600, 400);
-            frame.setExtendedState(Frame.NORMAL);
-            frame.setVisible(true);
-            HtmlRendererContext ctx = frame.getHtmlRendererContext();
-            ctx.setOpener(this);
-            frame.navigate(url.toExternalForm());
-            return ctx;
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.lobobrowser.html.test.SimpleHtmlRendererContext#open(java.net.
+		 * URL, java.lang.String, java.lang.String, boolean)
+		 */
+		@Override
+		public HtmlRendererContext open(URL url, String windowName, String windowFeatures, boolean replace) {
+			TestFrame frame = new TestFrame("Cobra Test Tool");
+			frame.setSize(600, 400);
+			frame.setExtendedState(Frame.NORMAL);
+			frame.setVisible(true);
+			HtmlRendererContext ctx = frame.getHtmlRendererContext();
+			ctx.setOpener(this);
+			frame.navigate(url.toExternalForm());
+			return ctx;
+		}
+	}
 }

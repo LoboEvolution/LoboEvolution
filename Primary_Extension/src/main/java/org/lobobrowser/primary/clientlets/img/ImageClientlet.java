@@ -35,29 +35,29 @@ import org.lobobrowser.util.io.IORoutines;
  */
 public class ImageClientlet implements Clientlet {
 
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(ImageClientlet.class.getName());
-    
-    /**
-     * Instantiates a new image clientlet.
-     */
-    public ImageClientlet() {
-        super();
-    }
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(ImageClientlet.class.getName());
 
-    @Override
+	/**
+	 * Instantiates a new image clientlet.
+	 */
+	public ImageClientlet() {
+		super();
+	}
+
+	@Override
 	public void process(ClientletContext context) throws ClientletException {
 		ClientletResponse response = context.getResponse();
 		String mimeType = response.getMimeType();
 		int contentLength = response.getContentLength();
 		URL url = response.getResponseURL();
 		Image image = null;
-				
+
 		if (url != null && url.toString().endsWith(".svg")) {
 
 			SVGRasterizer r = new SVGRasterizer(url);
-			image  = Toolkit.getDefaultToolkit().createImage(r.createBufferedImage().getSource());
-		
+			image = Toolkit.getDefaultToolkit().createImage(r.createBufferedImage().getSource());
+
 		} else {
 
 			byte[] imageBytes;
@@ -72,8 +72,7 @@ public class ImageClientlet implements Clientlet {
 				throw new ClientletException(ioe);
 			}
 			if (logger.isLoggable(Level.INFO)) {
-				logger.info("process(): Loaded " + imageBytes.length
-						+ " bytes.");
+				logger.info("process(): Loaded " + imageBytes.length + " bytes.");
 			}
 			image = Toolkit.getDefaultToolkit().createImage(imageBytes);
 

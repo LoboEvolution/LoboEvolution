@@ -24,7 +24,7 @@ public class RemovalEvent extends EventObject {
     private static final long serialVersionUID = -5119617932860542348L;
     /** The value removed. */
     public final Object valueRemoved;
-
+    
     /**
      * Instantiates a new removal event.
      *

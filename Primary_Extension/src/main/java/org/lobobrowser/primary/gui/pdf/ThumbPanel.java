@@ -24,6 +24,10 @@ import com.sun.pdfview.PDFPage;
  */
 public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObserver {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -6761217072379594185L;
 	/** The PDFFile being displayed */
 	PDFFile file;
 	/** Array of images, one per page in the file */
@@ -182,7 +186,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 
 	/**
 	 * Sets the default width of an un-processed thumbnail.
-	 * 
+	 *
 	 * @param width
 	 *            the width of an unknown thumbnail, in pixels.
 	 */
@@ -194,7 +198,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	/**
 	 * Handles a mouse click in the panel. Figures out which page was clicked,
 	 * and calls showPage.
-	 * 
+	 *
 	 * @param x
 	 *            the x coordinate of the mouse click
 	 * @param y

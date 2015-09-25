@@ -18,10 +18,10 @@ package org.lobobrowser.html.layout;
  */
 public class ListItemLayout extends CommonLayout {
 
-    /**
-     * Instantiates a new list item layout.
-     */
-    public ListItemLayout() {
-        super(DISPLAY_LIST_ITEM);
-    }
+	/**
+	 * Instantiates a new list item layout.
+	 */
+	public ListItemLayout() {
+		super(DISPLAY_LIST_ITEM);
+	}
 }

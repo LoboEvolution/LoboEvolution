@@ -33,27 +33,29 @@ import org.lobobrowser.primary.gui.pdf.PdfDialog;
  */
 public class PdfClientlet implements Clientlet {
 
-    /**
-     * Instantiates a new pdf clientlet.
-     */
-    public PdfClientlet() {
-        super();
-    }
+	/**
+	 * Instantiates a new pdf clientlet.
+	 */
+	public PdfClientlet() {
+		super();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.Clientlet#process(org.lobobrowser.clientlet.
-     * ClientletContext)
-     */
-    @Override
-    public void process(ClientletContext context) throws ClientletException {
-        ClientletResponse response = context.getResponse();
-        URL url = response.getResponseURL();
-        PdfDialog viewer;
-        viewer = new PdfDialog(true);
-        String fileName = url.toString();
-        if (fileName != null) {
-            viewer.doOpen(fileName);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.clientlet.Clientlet#process(org.lobobrowser.clientlet.
+	 * ClientletContext)
+	 */
+	@Override
+	public void process(ClientletContext context) throws ClientletException {
+		ClientletResponse response = context.getResponse();
+		URL url = response.getResponseURL();
+		PdfDialog viewer;
+		viewer = new PdfDialog(true);
+		String fileName = url.toString();
+		if (fileName != null) {
+			viewer.doOpen(fileName);
+		}
+	}
 }

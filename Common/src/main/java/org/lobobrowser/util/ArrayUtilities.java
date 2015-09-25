@@ -31,7 +31,7 @@ public class ArrayUtilities {
     private ArrayUtilities() {
         super();
     }
-
+    
     /**
      * Iterator.
      *
@@ -46,7 +46,7 @@ public class ArrayUtilities {
     public static Iterator iterator(Object[] array, int offset, int length) {
         return new ArrayIterator(array, offset, length);
     }
-
+    
     /**
      * The Class ArrayIterator.
      */
@@ -57,7 +57,7 @@ public class ArrayUtilities {
         private final int top;
         /** The offset. */
         private int offset;
-
+        
         /**
          * Instantiates a new array iterator.
          *
@@ -73,7 +73,7 @@ public class ArrayUtilities {
             this.offset = offset;
             this.top = offset + length;
         }
-
+        
         /*
          * (non-Javadoc)
          * @see java.util.Iterator#hasNext()
@@ -82,7 +82,7 @@ public class ArrayUtilities {
         public boolean hasNext() {
             return this.offset < this.top;
         }
-
+        
         /*
          * (non-Javadoc)
          * @see java.util.Iterator#next()
@@ -91,7 +91,7 @@ public class ArrayUtilities {
         public Object next() {
             return this.array[this.offset++];
         }
-
+        
         /*
          * (non-Javadoc)
          * @see java.util.Iterator#remove()

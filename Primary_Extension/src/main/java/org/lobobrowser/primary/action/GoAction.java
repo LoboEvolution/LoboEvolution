@@ -25,33 +25,35 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class GoAction extends ActionPool {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The component source. */
-    private ComponentSource componentSource;
+	/** The component source. */
+	private ComponentSource componentSource;
 
-    /**
-     * Instantiates a new go action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     */
-    public GoAction(ComponentSource componentSource, NavigatorWindow window) {
-        super(componentSource, window);
-        this.componentSource = componentSource;
-    }
+	/**
+	 * Instantiates a new go action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 */
+	public GoAction(ComponentSource componentSource, NavigatorWindow window) {
+		super(componentSource, window);
+		this.componentSource = componentSource;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.primary.ext.ActionPool#actionPerformed(java.awt.event
-     * .ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        componentSource.go();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.primary.ext.ActionPool#actionPerformed(java.awt.event
+	 * .ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		componentSource.go();
+	}
 
 }

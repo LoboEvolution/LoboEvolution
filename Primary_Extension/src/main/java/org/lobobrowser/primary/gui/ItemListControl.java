@@ -36,211 +36,211 @@ import javax.swing.JOptionPane;
  */
 public class ItemListControl<T> extends JComponent {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The combo box. */
-    private final JComboBox<T> comboBox;
+	/** The combo box. */
+	private final JComboBox<T> comboBox;
 
-    /** The item editor factory. */
-    private final ItemEditorFactory<T> itemEditorFactory;
+	/** The item editor factory. */
+	private final ItemEditorFactory<T> itemEditorFactory;
 
-    /**
-     * Instantiates a new item list control.
-     *
-     * @param ief
-     *            the ief
-     */
-    public ItemListControl(ItemEditorFactory<T> ief) {
-        this.itemEditorFactory = ief;
-        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        this.comboBox = new JComboBox<T>();
-        this.comboBox.setPreferredSize(new Dimension(100, 24));
-        this.comboBox.setEditable(false);
-        JButton editButton = new JButton();
-        editButton.setAction(new EditAction(false));
-        editButton.setText("Edit");
-        JButton addButton = new JButton();
-        addButton.setAction(new EditAction(true));
-        addButton.setText("Add");
-        JButton removeButton = new JButton();
-        removeButton.setAction(new RemoveAction());
-        removeButton.setText("Remove");
-        this.add(this.comboBox);
-        this.add(editButton);
-        this.add(addButton);
-        this.add(removeButton);
-    }
+	/**
+	 * Instantiates a new item list control.
+	 *
+	 * @param ief
+	 *            the ief
+	 */
+	public ItemListControl(ItemEditorFactory<T> ief) {
+		this.itemEditorFactory = ief;
+		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		this.comboBox = new JComboBox<T>();
+		this.comboBox.setPreferredSize(new Dimension(100, 24));
+		this.comboBox.setEditable(false);
+		JButton editButton = new JButton();
+		editButton.setAction(new EditAction(false));
+		editButton.setText("Edit");
+		JButton addButton = new JButton();
+		addButton.setAction(new EditAction(true));
+		addButton.setText("Add");
+		JButton removeButton = new JButton();
+		removeButton.setAction(new RemoveAction());
+		removeButton.setText("Remove");
+		this.add(this.comboBox);
+		this.add(editButton);
+		this.add(addButton);
+		this.add(removeButton);
+	}
 
-    /**
-     * Sets the items.
-     *
-     * @param items
-     *            the new items
-     */
-    public void setItems(Collection<T> items) {
-        JComboBox<T> comboBox = this.comboBox;
-        comboBox.removeAllItems();
-        for (T item : items) {
-            comboBox.addItem(item);
-        }
-    }
+	/**
+	 * Sets the items.
+	 *
+	 * @param items
+	 *            the new items
+	 */
+	public void setItems(Collection<T> items) {
+		JComboBox<T> comboBox = this.comboBox;
+		comboBox.removeAllItems();
+		for (T item : items) {
+			comboBox.addItem(item);
+		}
+	}
 
-    /**
-     * Gets the selected item.
-     *
-     * @return the selected item
-     */
-    @SuppressWarnings("unchecked")
-    private T getSelectedItem() {
-        return (T) this.comboBox.getSelectedItem();
-    }
+	/**
+	 * Gets the selected item.
+	 *
+	 * @return the selected item
+	 */
+	@SuppressWarnings("unchecked")
+	private T getSelectedItem() {
+		return (T) this.comboBox.getSelectedItem();
+	}
 
-    /**
-     * Adds the item.
-     *
-     * @param item
-     *            the item
-     */
-    private void addItem(T item) {
-        this.comboBox.addItem(item);
-        this.comboBox.setSelectedItem(item);
-    }
+	/**
+	 * Adds the item.
+	 *
+	 * @param item
+	 *            the item
+	 */
+	private void addItem(T item) {
+		this.comboBox.addItem(item);
+		this.comboBox.setSelectedItem(item);
+	}
 
-    /**
-     * Replace selected item.
-     *
-     * @param item
-     *            the item
-     */
-    private void replaceSelectedItem(T item) {
-        int index = this.comboBox.getSelectedIndex();
-        if (index != -1) {
-            this.comboBox.removeItemAt(index);
-        }
-        this.comboBox.addItem(item);
-        this.comboBox.setSelectedItem(item);
-    }
+	/**
+	 * Replace selected item.
+	 *
+	 * @param item
+	 *            the item
+	 */
+	private void replaceSelectedItem(T item) {
+		int index = this.comboBox.getSelectedIndex();
+		if (index != -1) {
+			this.comboBox.removeItemAt(index);
+		}
+		this.comboBox.addItem(item);
+		this.comboBox.setSelectedItem(item);
+	}
 
-    /**
-     * Removes the selected item.
-     */
-    private void removeSelectedItem() {
-        int index = this.comboBox.getSelectedIndex();
-        if (index != -1) {
-            this.comboBox.removeItemAt(index);
-        }
-    }
+	/**
+	 * Removes the selected item.
+	 */
+	private void removeSelectedItem() {
+		int index = this.comboBox.getSelectedIndex();
+		if (index != -1) {
+			this.comboBox.removeItemAt(index);
+		}
+	}
 
-    /**
-     * Gets the items.
-     *
-     * @return the items
-     */
-    public Collection<T> getItems() {
-        Collection<T> items = new ArrayList<T>();
-        int count = this.comboBox.getItemCount();
-        for (int i = 0; i < count; i++) {
-            items.add(this.comboBox.getItemAt(i));
-        }
-        return items;
-    }
+	/**
+	 * Gets the items.
+	 *
+	 * @return the items
+	 */
+	public Collection<T> getItems() {
+		Collection<T> items = new ArrayList<T>();
+		int count = this.comboBox.getItemCount();
+		for (int i = 0; i < count; i++) {
+			items.add(this.comboBox.getItemAt(i));
+		}
+		return items;
+	}
 
-    /** The edit list caption. */
-    private String editListCaption;
+	/** The edit list caption. */
+	private String editListCaption;
 
-    /**
-     * Sets the editor caption.
-     *
-     * @param caption
-     *            the new editor caption
-     */
-    public void setEditorCaption(String caption) {
-        this.editListCaption = caption;
-    }
+	/**
+	 * Sets the editor caption.
+	 *
+	 * @param caption
+	 *            the new editor caption
+	 */
+	public void setEditorCaption(String caption) {
+		this.editListCaption = caption;
+	}
 
-    /**
-     * The Class RemoveAction.
-     */
-    private class RemoveAction extends AbstractAction {
+	/**
+	 * The Class RemoveAction.
+	 */
+	private class RemoveAction extends AbstractAction {
 
-        /** The Constant serialVersionUID. */
-        private static final long serialVersionUID = 1L;
+		/** The Constant serialVersionUID. */
+		private static final long serialVersionUID = 1L;
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (JOptionPane.showConfirmDialog(ItemListControl.this,
-                    "Are you sure you want to remove the selected item?",
-                    "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                removeSelectedItem();
-            }
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
+		 * ActionEvent)
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (JOptionPane.showConfirmDialog(ItemListControl.this,
+					"Are you sure you want to remove the selected item?", "Confirm",
+					JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				removeSelectedItem();
+			}
+		}
+	}
 
-    /**
-     * The Class EditAction.
-     */
-    private class EditAction extends AbstractAction {
+	/**
+	 * The Class EditAction.
+	 */
+	private class EditAction extends AbstractAction {
 
-        /** The Constant serialVersionUID. */
-        private static final long serialVersionUID = 1L;
+		/** The Constant serialVersionUID. */
+		private static final long serialVersionUID = 1L;
 
-        /** The add. */
-        private final boolean add;
+		/** The add. */
+		private final boolean add;
 
-        /**
-         * Instantiates a new edits the action.
-         *
-         * @param add
-         *            the add
-         */
-        public EditAction(boolean add) {
-            this.add = add;
-        }
+		/**
+		 * Instantiates a new edits the action.
+		 *
+		 * @param add
+		 *            the add
+		 */
+		public EditAction(boolean add) {
+			this.add = add;
+		}
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Frame parentFrame = SwingTasks.getFrame(ItemListControl.this);
-            ItemEditorDialog<T> dialog;
-            if (parentFrame != null) {
-                dialog = new ItemEditorDialog<T>(parentFrame, itemEditorFactory);
-            } else {
-                Dialog parentDialog = SwingTasks
-                        .getDialog(ItemListControl.this);
-                dialog = new ItemEditorDialog<T>(parentDialog,
-                        itemEditorFactory);
-            }
-            dialog.setModal(true);
-            dialog.setTitle(this.add ? "Add Item" : "Edit Item");
-            dialog.setCaption(editListCaption);
-            dialog.pack();
-            Dimension size = dialog.getSize();
-            if (size.width > 400) {
-                dialog.setSize(new Dimension(400, size.height));
-            }
-            dialog.setLocationByPlatform(true);
-            if (!this.add) {
-                dialog.setItem(getSelectedItem());
-            }
-            dialog.setVisible(true);
-            T item = dialog.getResultingItem();
-            if (item != null) {
-                if (this.add) {
-                    addItem(item);
-                } else {
-                    replaceSelectedItem(item);
-                }
-            }
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
+		 * ActionEvent)
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Frame parentFrame = SwingTasks.getFrame(ItemListControl.this);
+			ItemEditorDialog<T> dialog;
+			if (parentFrame != null) {
+				dialog = new ItemEditorDialog<T>(parentFrame, itemEditorFactory);
+			} else {
+				Dialog parentDialog = SwingTasks.getDialog(ItemListControl.this);
+				dialog = new ItemEditorDialog<T>(parentDialog, itemEditorFactory);
+			}
+			dialog.setModal(true);
+			dialog.setTitle(this.add ? "Add Item" : "Edit Item");
+			dialog.setCaption(editListCaption);
+			dialog.pack();
+			Dimension size = dialog.getSize();
+			if (size.width > 400) {
+				dialog.setSize(new Dimension(400, size.height));
+			}
+			dialog.setLocationByPlatform(true);
+			if (!this.add) {
+				dialog.setItem(getSelectedItem());
+			}
+			dialog.setVisible(true);
+			T item = dialog.getResultingItem();
+			if (item != null) {
+				if (this.add) {
+					addItem(item);
+				} else {
+					replaceSelectedItem(item);
+				}
+			}
+		}
+	}
 }

@@ -27,42 +27,43 @@ import org.w3c.dom.NodeList;
 /**
  * The Class DOMNodeListImpl.
  */
-public class DOMNodeListImpl extends AbstractScriptableDelegate implements
-NodeList {
-    // Note: class must be public for reflection to work.
-    /** The node list. */
-    private final ArrayList nodeList = new ArrayList();
+public class DOMNodeListImpl extends AbstractScriptableDelegate implements NodeList {
+	// Note: class must be public for reflection to work.
+	/** The node list. */
+	private final ArrayList nodeList = new ArrayList();
 
-    /**
-     * Instantiates a new DOM node list impl.
-     *
-     * @param collection
-     *            the collection
-     */
-    public DOMNodeListImpl(Collection collection) {
-        super();
-        nodeList.addAll(collection);
-    }
+	/**
+	 * Instantiates a new DOM node list impl.
+	 *
+	 * @param collection
+	 *            the collection
+	 */
+	public DOMNodeListImpl(Collection collection) {
+		super();
+		nodeList.addAll(collection);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.NodeList#getLength()
-     */
-    @Override
-    public int getLength() {
-        return this.nodeList.size();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.NodeList#getLength()
+	 */
+	@Override
+	public int getLength() {
+		return this.nodeList.size();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.NodeList#item(int)
-     */
-    @Override
-    public Node item(int index) {
-        try {
-            return (Node) this.nodeList.get(index);
-        } catch (IndexOutOfBoundsException iob) {
-            return null;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.NodeList#item(int)
+	 */
+	@Override
+	public Node item(int index) {
+		try {
+			return (Node) this.nodeList.get(index);
+		} catch (IndexOutOfBoundsException iob) {
+			return null;
+		}
+	}
 }

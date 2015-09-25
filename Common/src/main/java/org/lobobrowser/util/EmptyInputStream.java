@@ -30,7 +30,7 @@ public class EmptyInputStream extends InputStream {
     public EmptyInputStream() {
         super();
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#read()
@@ -39,7 +39,7 @@ public class EmptyInputStream extends InputStream {
     public int read() throws IOException {
         return -1;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#available()
@@ -48,7 +48,7 @@ public class EmptyInputStream extends InputStream {
     public int available() throws IOException {
         return 0;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#close()
@@ -56,7 +56,7 @@ public class EmptyInputStream extends InputStream {
     @Override
     public void close() throws IOException {
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#read(byte[], int, int)

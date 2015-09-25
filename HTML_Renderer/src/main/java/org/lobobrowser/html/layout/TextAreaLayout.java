@@ -26,27 +26,26 @@ import org.lobobrowser.html.renderer.RElement;
  */
 public class TextAreaLayout extends CommonWidgetLayout {
 
-    /**
-     * Instantiates a new text area layout.
-     */
-    public TextAreaLayout() {
-        super(ADD_INLINE, true);
-    }
+	/**
+	 * Instantiates a new text area layout.
+	 */
+	public TextAreaLayout() {
+		super(ADD_INLINE, true);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.lobobrowser
-     * .html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
-     */
-    @Override
-    protected RElement createRenderable(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-        HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
-        BaseInputControl control = new InputTextAreaControl(bie);
-        bie.setInputContext(control);
-        return new RUIControl(markupElement, control,
-                bodyLayout.getContainer(), bodyLayout.getFrameContext(),
-                bodyLayout.getUserAgentContext());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.
+	 * lobobrowser .html.renderer.RBlockViewport,
+	 * org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
+	@Override
+	protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
+		BaseInputControl control = new InputTextAreaControl(bie);
+		bie.setInputContext(control);
+		return new RUIControl(markupElement, control, bodyLayout.getContainer(), bodyLayout.getFrameContext(),
+				bodyLayout.getUserAgentContext());
+	}
 }

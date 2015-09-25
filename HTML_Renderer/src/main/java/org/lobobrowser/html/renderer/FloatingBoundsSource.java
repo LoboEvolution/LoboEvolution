@@ -19,12 +19,12 @@ package org.lobobrowser.html.renderer;
  */
 public interface FloatingBoundsSource {
 
-    /**
-     * Gets the child block floating bounds.
-     *
-     * @param apparentBlockWidth
-     *            the apparent block width
-     * @return the child block floating bounds
-     */
-    FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth);
+	/**
+	 * Gets the child block floating bounds.
+	 *
+	 * @param apparentBlockWidth
+	 *            the apparent block width
+	 * @return the child block floating bounds
+	 */
+	FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth);
 }

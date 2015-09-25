@@ -22,52 +22,52 @@ import java.awt.Point;
  */
 public class RenderableSpot {
 
-    /** The renderable. */
-    public final BoundableRenderable renderable;
+	/** The renderable. */
+	public final BoundableRenderable renderable;
 
-    /** The x. */
-    public final int x;
+	/** The x. */
+	public final int x;
 
-    /** The y. */
-    public final int y;
+	/** The y. */
+	public final int y;
 
-    /**
-     * Instantiates a new renderable spot.
-     *
-     * @param renderable
-     *            the renderable
-     * @param x
-     *            the x
-     * @param y
-     *            the y
-     */
-    public RenderableSpot(BoundableRenderable renderable, int x, int y) {
-        super();
-        this.renderable = renderable;
-        this.x = x;
-        this.y = y;
-    }
+	/**
+	 * Instantiates a new renderable spot.
+	 *
+	 * @param renderable
+	 *            the renderable
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 */
+	public RenderableSpot(BoundableRenderable renderable, int x, int y) {
+		super();
+		this.renderable = renderable;
+		this.x = x;
+		this.y = y;
+	}
 
-    /**
-     * Gets the point.
-     *
-     * @return the point
-     */
-    public Point getPoint() {
-        return new Point(this.x, this.y);
-    }
+	/**
+	 * Gets the point.
+	 *
+	 * @return the point
+	 */
+	public Point getPoint() {
+		return new Point(this.x, this.y);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object other) {
-        if (!(other instanceof RenderableSpot)) {
-            return false;
-        }
-        RenderableSpot otherRp = (RenderableSpot) other;
-        return (otherRp.renderable == this.renderable) && (otherRp.x == this.x)
-                && (otherRp.y == this.y);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof RenderableSpot)) {
+			return false;
+		}
+		RenderableSpot otherRp = (RenderableSpot) other;
+		return (otherRp.renderable == this.renderable) && (otherRp.x == this.x) && (otherRp.y == this.y);
+	}
 }

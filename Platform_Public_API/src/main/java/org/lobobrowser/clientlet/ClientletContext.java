@@ -26,10 +26,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.io.ManagedStore;
 import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.NavigatorProgressEvent;
-import org.lobobrowser.ua.NetworkRequest;
 import org.lobobrowser.ua.ProgressType;
 import org.lobobrowser.ua.UserAgent;
 
@@ -261,12 +261,12 @@ public interface ClientletContext {
     NavigatorProgressEvent getProgressEvent();
 
     /**
-     * Creates a {@link NetworkRequest} object that can be used to load data
+     * Creates a {@link HttpRequest} object that can be used to load data
      * over HTTP and other network protocols.
      *
      * @return the network request
      */
-    NetworkRequest createNetworkRequest();
+    HttpRequest createNetworkRequest();
 
     /**
      * Opens an alert message dialog.

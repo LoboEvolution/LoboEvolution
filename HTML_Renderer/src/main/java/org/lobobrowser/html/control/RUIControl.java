@@ -29,7 +29,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
@@ -42,6 +41,7 @@ import org.lobobrowser.html.renderer.RenderableContainer;
 import org.lobobrowser.html.renderer.RenderableSpot;
 import org.lobobrowser.html.renderer.UIControl;
 import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.util.Objects;
 
 /**

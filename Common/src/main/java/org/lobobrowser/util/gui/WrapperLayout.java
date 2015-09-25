@@ -37,7 +37,7 @@ public class WrapperLayout implements LayoutManager {
     @Override
     public void addLayoutComponent(String arg0, Component arg1) {
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.awt.LayoutManager#removeLayoutComponent(java.awt.Component)
@@ -45,7 +45,7 @@ public class WrapperLayout implements LayoutManager {
     @Override
     public void removeLayoutComponent(Component arg0) {
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
@@ -56,14 +56,14 @@ public class WrapperLayout implements LayoutManager {
         int count = arg0.getComponentCount();
         if (count > 0) {
             Dimension d = arg0.getComponent(0).getPreferredSize();
-            return new Dimension(d.width + insets.left + insets.right, d.height
-                    + insets.top + insets.bottom);
+            return new Dimension(d.width + insets.left + insets.right,
+                    d.height + insets.top + insets.bottom);
         } else {
-            return new Dimension(insets.left + insets.right, insets.top
-                    + insets.bottom);
+            return new Dimension(insets.left + insets.right,
+                    insets.top + insets.bottom);
         }
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.awt.LayoutManager#minimumLayoutSize(java.awt.Container)
@@ -74,14 +74,14 @@ public class WrapperLayout implements LayoutManager {
         int count = arg0.getComponentCount();
         if (count > 0) {
             Dimension d = arg0.getComponent(0).getMinimumSize();
-            return new Dimension(d.width + insets.left + insets.right, d.height
-                    + insets.top + insets.bottom);
+            return new Dimension(d.width + insets.left + insets.right,
+                    d.height + insets.top + insets.bottom);
         } else {
-            return new Dimension(insets.left + insets.right, insets.top
-                    + insets.bottom);
+            return new Dimension(insets.left + insets.right,
+                    insets.top + insets.bottom);
         }
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.awt.LayoutManager#layoutContainer(java.awt.Container)
@@ -92,15 +92,15 @@ public class WrapperLayout implements LayoutManager {
         if (count > 0) {
             Component child = arg0.getComponent(0);
             Insets insets = arg0.getInsets();
-            child.setBounds(insets.left, insets.top, arg0.getWidth()
-                    - insets.left - insets.right, arg0.getHeight() - insets.top
-                    - insets.bottom);
+            child.setBounds(insets.left, insets.top,
+                    arg0.getWidth() - insets.left - insets.right,
+                    arg0.getHeight() - insets.top - insets.bottom);
         }
     }
-
+    
     /** The instance. */
     private static WrapperLayout instance = new WrapperLayout();
-
+    
     /**
      * Gets the single instance of WrapperLayout.
      *

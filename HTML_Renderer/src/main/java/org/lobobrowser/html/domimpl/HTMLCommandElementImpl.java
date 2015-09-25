@@ -18,99 +18,109 @@ import org.lobobrowser.w3c.html.HTMLCommandElement;
 /**
  * The Class HTMLCommandElementImpl.
  */
-public class HTMLCommandElementImpl extends HTMLElementImpl implements
-HTMLCommandElement {
+public class HTMLCommandElementImpl extends HTMLElementImpl implements HTMLCommandElement {
 
-    /**
-     * Instantiates a new HTML command element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLCommandElementImpl(String name) {
-        super(name);
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Instantiates a new HTML command element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLCommandElementImpl(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLCommandElement#getType()
-     */
-    @Override
-    public String getType() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLCommandElement#getType()
+	 */
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLCommandElement#setType(java.lang.String)
-     */
-    @Override
-    public void setType(String type) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLCommandElement#setType(java.lang.String)
+	 */
+	@Override
+	public void setType(String type) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLCommandElement#setLabel(java.lang.String)
-     */
-    @Override
-    public void setLabel(String label) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLCommandElement#setLabel(java.lang.String)
+	 */
+	@Override
+	public void setLabel(String label) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLCommandElement#setIcon(java.lang.String)
-     */
-    @Override
-    public void setIcon(String icon) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLCommandElement#setIcon(java.lang.String)
+	 */
+	@Override
+	public void setIcon(String icon) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLCommandElement#setDisabled(boolean)
-     */
-    @Override
-    public void setDisabled(boolean disabled) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLCommandElement#setDisabled(boolean)
+	 */
+	@Override
+	public void setDisabled(boolean disabled) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLCommandElement#setChecked(boolean)
-     */
-    @Override
-    public void setChecked(boolean checked) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLCommandElement#setChecked(boolean)
+	 */
+	@Override
+	public void setChecked(boolean checked) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLCommandElement#getRadiogroup()
-     */
-    @Override
-    public String getRadiogroup() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLCommandElement#getRadiogroup()
+	 */
+	@Override
+	public String getRadiogroup() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.w3c.html.HTMLCommandElement#setRadiogroup(java.lang.String)
-     */
-    @Override
-    public void setRadiogroup(String radiogroup) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLCommandElement#setRadiogroup(java.lang.
+	 * String)
+	 */
+	@Override
+	public void setRadiogroup(String radiogroup) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
 }

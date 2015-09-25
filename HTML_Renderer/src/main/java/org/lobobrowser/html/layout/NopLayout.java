@@ -22,14 +22,15 @@ import org.lobobrowser.html.renderer.RBlockViewport;
  */
 public class NopLayout implements MarkupLayout {
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.renderer.MarkupLayout#layoutMarkup(org.lobobrowser.html
-     * .renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
-     */
-    @Override
-    public void layoutMarkup(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.renderer.MarkupLayout#layoutMarkup(org.lobobrowser.
+	 * html .renderer.RBlockViewport,
+	 * org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
+	@Override
+	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+	}
 }

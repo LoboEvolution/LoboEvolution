@@ -14,6 +14,7 @@ public interface HTMLKeygenElement extends HTMLElement {
 
 	public void setChallenge(String challenge);
 
+	@Override
 	public boolean getDisabled();
 
 	public void setDisabled(boolean disabled);

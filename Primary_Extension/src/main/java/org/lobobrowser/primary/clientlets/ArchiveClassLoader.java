@@ -45,211 +45,199 @@ import org.lobobrowser.util.io.IORoutines;
  */
 public class ArchiveClassLoader extends BaseClassLoader {
 
-    /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(ArchiveClassLoader.class.getName());
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(ArchiveClassLoader.class.getName());
 
-    /**
-     * The Class LocalURLStreamHandler.
-     *
-     * @author J. H. S.
-     */
-    public class LocalURLStreamHandler extends java.net.URLStreamHandler {
+	/**
+	 * The Class LocalURLStreamHandler.
+	 *
+	 * @author J. H. S.
+	 */
+	public class LocalURLStreamHandler extends java.net.URLStreamHandler {
 
-        /** The resource name. */
-        private final String resourceName;
+		/** The resource name. */
+		private final String resourceName;
 
-        /**
-         * Instantiates a new local url stream handler.
-         *
-         * @param resourceName
-         *            the resource name
-         */
-        public LocalURLStreamHandler(String resourceName) {
-            super();
-            this.resourceName = resourceName;
-        }
+		/**
+		 * Instantiates a new local url stream handler.
+		 *
+		 * @param resourceName
+		 *            the resource name
+		 */
+		public LocalURLStreamHandler(String resourceName) {
+			super();
+			this.resourceName = resourceName;
+		}
 
-        /*
-         * (non-Javadoc)
-         * @see java.net.URLStreamHandler#openConnection(URL)
-         */
-        @Override
-        protected URLConnection openConnection(URL u) throws IOException {
-            return new GenericURLConnection(u,
-                    getResourceAsStreamImpl(this.resourceName));
-        }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.net.URLStreamHandler#openConnection(URL)
+		 */
+		@Override
+		protected URLConnection openConnection(URL u) throws IOException {
+			return new GenericURLConnection(u, getResourceAsStreamImpl(this.resourceName));
+		}
 
-        /*
-         * (non-Javadoc)
-         * @see java.net.URLStreamHandler#openConnection(URL, java.net.Proxy)
-         */
-        @Override
-        protected URLConnection openConnection(URL u, Proxy p)
-                throws IOException {
-            return this.openConnection(u);
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.net.URLStreamHandler#openConnection(URL, java.net.Proxy)
+		 */
+		@Override
+		protected URLConnection openConnection(URL u, Proxy p) throws IOException {
+			return this.openConnection(u);
+		}
+	}
 
-    /** The archive infos. */
-    private final ArchiveInfo[] archiveInfos;
+	/** The archive infos. */
+	private final ArchiveInfo[] archiveInfos;
 
-    /**
-     * Instantiates a new archive class loader.
-     *
-     * @param archiveInfos
-     *            the archive infos
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    ArchiveClassLoader(java.util.Collection<Object[]> archiveInfos)
-            throws IOException {
-        super(ArchiveClassLoader.class.getClassLoader());
-        this.archiveInfos = archiveInfos.toArray(ArchiveInfo.EMPTY_ARRAY);
-    }
+	/**
+	 * Instantiates a new archive class loader.
+	 *
+	 * @param archiveInfos
+	 *            the archive infos
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	ArchiveClassLoader(java.util.Collection<Object[]> archiveInfos) throws IOException {
+		super(ArchiveClassLoader.class.getClassLoader());
+		this.archiveInfos = archiveInfos.toArray(ArchiveInfo.EMPTY_ARRAY);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.ClassLoader#findClass(String)
-     */
-    @Override
-    protected Class findClass(String arg0) throws ClassNotFoundException {
-        final String subPath = arg0.replace('.', '/') + ".class";
-        ArchiveInfo[] ainfos = this.archiveInfos;
-        int len = ainfos.length;
-        byte[] classBytes = null;
-        final ArchiveInfo[] foundAinfo = new ArchiveInfo[1];
-        for (int i = 0; i < len; i++) {
-            final ArchiveInfo ainfo = ainfos[i];
-            try {
-                final JarFile jarFile = ainfo.getJarFile();
-                classBytes = (byte[]) AccessController
-                        .doPrivileged(new PrivilegedAction<Object>() {
-                            @Override
-                            public Object run() {
-                                try {
-                                    ZipEntry entry = jarFile.getEntry(subPath);
-                                    if (entry == null) {
-                                        return null;
-                                    }
-                                    InputStream in = jarFile
-                                            .getInputStream(entry);
-                                    try {
-                                        byte[] bytes = IORoutines.loadExact(in,
-                                                (int) entry.getSize());
-                                        foundAinfo[0] = ainfo;
-                                        return bytes;
-                                    } finally {
-                                        in.close();
-                                    }
-                                } catch (IOException ioe) {
-                                    return null;
-                                }
-                            }
-                        });
-            } catch (IOException ioe2) {
-                continue;
-            }
-            if (classBytes != null) {
-                break;
-            }
-        }
-        if (classBytes == null) {
-            throw new ClassNotFoundException("I/O error or entry not found: "
-                    + subPath);
-        }
-        // TODO Signers Certificates
-        CodeSource cs = new CodeSource(foundAinfo[0].url,
-                new java.security.cert.Certificate[0]);
-        return this.defineClass(arg0, classBytes, 0, classBytes.length, cs);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.ClassLoader#findClass(String)
+	 */
+	@Override
+	protected Class findClass(String arg0) throws ClassNotFoundException {
+		final String subPath = arg0.replace('.', '/') + ".class";
+		ArchiveInfo[] ainfos = this.archiveInfos;
+		int len = ainfos.length;
+		byte[] classBytes = null;
+		final ArchiveInfo[] foundAinfo = new ArchiveInfo[1];
+		for (int i = 0; i < len; i++) {
+			final ArchiveInfo ainfo = ainfos[i];
+			try {
+				final JarFile jarFile = ainfo.getJarFile();
+				classBytes = (byte[]) AccessController.doPrivileged(new PrivilegedAction<Object>() {
+					@Override
+					public Object run() {
+						try {
+							ZipEntry entry = jarFile.getEntry(subPath);
+							if (entry == null) {
+								return null;
+							}
+							InputStream in = jarFile.getInputStream(entry);
+							try {
+								byte[] bytes = IORoutines.loadExact(in, (int) entry.getSize());
+								foundAinfo[0] = ainfo;
+								return bytes;
+							} finally {
+								in.close();
+							}
+						} catch (IOException ioe) {
+							return null;
+						}
+					}
+				});
+			} catch (IOException ioe2) {
+				continue;
+			}
+			if (classBytes != null) {
+				break;
+			}
+		}
+		if (classBytes == null) {
+			throw new ClassNotFoundException("I/O error or entry not found: " + subPath);
+		}
+		// TODO Signers Certificates
+		CodeSource cs = new CodeSource(foundAinfo[0].url, new java.security.cert.Certificate[0]);
+		return this.defineClass(arg0, classBytes, 0, classBytes.length, cs);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.ClassLoader#findResource(String)
-     */
-    @Override
-    protected URL findResource(final String name) {
-        try {
-            return AccessController
-                    .doPrivileged(new PrivilegedAction<java.net.URL>() {
-                        @Override
-                        public URL run() {
-                            try {
-                                return new URL(null, "volatile:" + name,
-                                        new LocalURLStreamHandler(name));
-                            } catch (MalformedURLException mfu) {
-                                throw new IllegalStateException(mfu
-                                        .getMessage());
-                            }
-                        }
-                    });
-        } catch (RuntimeException err) {
-            logger.log(Level.SEVERE, "findResource()", err);
-            throw err;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.ClassLoader#findResource(String)
+	 */
+	@Override
+	protected URL findResource(final String name) {
+		try {
+			return AccessController.doPrivileged(new PrivilegedAction<java.net.URL>() {
+				@Override
+				public URL run() {
+					try {
+						return new URL(null, "volatile:" + name, new LocalURLStreamHandler(name));
+					} catch (MalformedURLException mfu) {
+						throw new IllegalStateException(mfu.getMessage());
+					}
+				}
+			});
+		} catch (RuntimeException err) {
+			logger.log(Level.SEVERE, "findResource()", err);
+			throw err;
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.ClassLoader#findResources(String)
-     */
-    @Override
-    protected Enumeration findResources(String name) throws IOException {
-        URL url = this.findResource(name);
-        if (url != null) {
-            return CollectionUtilities.getIteratorEnumeration(Collections
-                    .singletonList(url).iterator());
-        } else {
-            return CollectionUtilities
-                    .getIteratorEnumeration(Collections.EMPTY_LIST.iterator());
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.ClassLoader#findResources(String)
+	 */
+	@Override
+	protected Enumeration findResources(String name) throws IOException {
+		URL url = this.findResource(name);
+		if (url != null) {
+			return CollectionUtilities.getIteratorEnumeration(Collections.singletonList(url).iterator());
+		} else {
+			return CollectionUtilities.getIteratorEnumeration(Collections.EMPTY_LIST.iterator());
+		}
+	}
 
-    /**
-     * Gets the resource as stream impl.
-     *
-     * @param resourceName
-     *            the resource name
-     * @return the resource as stream impl
-     */
-    private InputStream getResourceAsStreamImpl(final String resourceName) {
-        ArchiveInfo[] ainfos = this.archiveInfos;
-        int len = ainfos.length;
-        InputStream in = null;
-        for (int i = 0; i < len; i++) {
-            final ArchiveInfo ainfo = ainfos[i];
-            try {
-                final JarFile jarFile = ainfo.getJarFile();
-                in = (InputStream) AccessController
-                        .doPrivileged(new PrivilegedAction<Object>() {
-                            @Override
-                            public Object run() {
-                                try {
-                                    ZipEntry entry = jarFile
-                                            .getEntry(resourceName);
-                                    if (entry == null) {
-                                        return null;
-                                    }
-                                    return jarFile.getInputStream(entry);
-                                } catch (IOException ioe) {
-                                    return null;
-                                }
-                            }
-                        });
-            } catch (IOException ioe2) {
-                continue;
-            }
-            if (in != null) {
-                break;
-            }
-        }
-        if (in == null) {
-            ClassLoader parent = this.getParent();
-            return parent != null ? parent.getResourceAsStream(resourceName)
-                    : null;
-        } else {
-            return in;
-        }
-    }
+	/**
+	 * Gets the resource as stream impl.
+	 *
+	 * @param resourceName
+	 *            the resource name
+	 * @return the resource as stream impl
+	 */
+	private InputStream getResourceAsStreamImpl(final String resourceName) {
+		ArchiveInfo[] ainfos = this.archiveInfos;
+		int len = ainfos.length;
+		InputStream in = null;
+		for (int i = 0; i < len; i++) {
+			final ArchiveInfo ainfo = ainfos[i];
+			try {
+				final JarFile jarFile = ainfo.getJarFile();
+				in = (InputStream) AccessController.doPrivileged(new PrivilegedAction<Object>() {
+					@Override
+					public Object run() {
+						try {
+							ZipEntry entry = jarFile.getEntry(resourceName);
+							if (entry == null) {
+								return null;
+							}
+							return jarFile.getInputStream(entry);
+						} catch (IOException ioe) {
+							return null;
+						}
+					}
+				});
+			} catch (IOException ioe2) {
+				continue;
+			}
+			if (in != null) {
+				break;
+			}
+		}
+		if (in == null) {
+			ClassLoader parent = this.getParent();
+			return parent != null ? parent.getResourceAsStream(resourceName) : null;
+		} else {
+			return in;
+		}
+	}
 }

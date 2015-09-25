@@ -24,7 +24,7 @@ package org.lobobrowser.w3c.html;
  * The public interface ValidityState.
  */
 public interface ValidityState {
-	// ValidityState
+
 	/**
 	 * Gets the value missing.
 	 *

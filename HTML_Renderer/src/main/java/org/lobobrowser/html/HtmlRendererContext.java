@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.Optional;
 
+import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.w3c.html.HTMLAnchorElement;
 import org.lobobrowser.w3c.html.HTMLCollection;
 import org.lobobrowser.w3c.html.HTMLElement;

@@ -13,35 +13,37 @@
  */
 package org.lobobrowser.lobo_testing;
 
-import org.lobobrowser.gui.*;
-import org.lobobrowser.main.*;
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+
+import org.lobobrowser.gui.FramePanel;
+import org.lobobrowser.main.PlatformInit;
 
 /**
  * The Class LoboTestFrame.
  */
 public class LoboTestFrame extends JFrame {
-    
+
 	private static final long serialVersionUID = 1L;
 
 	public static void main(String[] args) throws Exception {
-        // This optional step initializes logging so only warnings
-        // are printed out.
-        PlatformInit.getInstance().initLogging(false);
+		// This optional step initializes logging so only warnings
+		// are printed out.
+		PlatformInit.getInstance().initLogging(false);
 
-        // This step is necessary for extensions to work:
-        PlatformInit.getInstance().init(false, false);
+		// This step is necessary for extensions to work:
+		PlatformInit.getInstance().init(false, false);
 
-        // Create frame with a specific size.
-        JFrame frame = new LoboTestFrame();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(600, 400);
-        frame.setVisible(true);
-    }
+		// Create frame with a specific size.
+		JFrame frame = new LoboTestFrame();
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		frame.setSize(600, 400);
+		frame.setVisible(true);
+	}
 
-    public LoboTestFrame() throws Exception {
-        FramePanel framePanel = new FramePanel();
-        this.getContentPane().add(framePanel);
-        framePanel.navigate("www.google.com");
-    }
+	public LoboTestFrame() throws Exception {
+		FramePanel framePanel = new FramePanel();
+		this.getContentPane().add(framePanel);
+		framePanel.navigate("www.google.com");
+	}
 }

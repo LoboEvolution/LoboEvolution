@@ -21,13 +21,15 @@ import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
  */
 public class LinkBuilder extends HTMLElementBuilder {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
-     */
-    @Override
-    protected HTMLElementImpl build(String name) {
-        return new HTMLLinkElementImpl(name);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
+	@Override
+	protected HTMLElementImpl build(String name) {
+		return new HTMLLinkElementImpl(name);
+	}
 
 }

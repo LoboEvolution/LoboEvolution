@@ -23,19 +23,19 @@ import org.lobobrowser.primary.gui.ValidationException;
  */
 public abstract class AbstractSettingsUI extends JPanel {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Save.
-     *
-     * @throws ValidationException
-     *             the validation exception
-     */
-    public abstract void save() throws ValidationException;
+	/**
+	 * Save.
+	 *
+	 * @throws ValidationException
+	 *             the validation exception
+	 */
+	public abstract void save() throws ValidationException;
 
-    /**
-     * Restore defaults.
-     */
-    public abstract void restoreDefaults();
+	/**
+	 * Restore defaults.
+	 */
+	public abstract void restoreDefaults();
 }

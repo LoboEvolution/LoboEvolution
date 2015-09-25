@@ -27,162 +27,166 @@ import javax.swing.event.DocumentListener;
  */
 public class JTextAreaImpl extends JTextArea {
 
-    /* Class from http://lazicbrano.wordpress.com/2013/08/01/jtextfield-placeholder */
+	/*
+	 * Class from
+	 * http://lazicbrano.wordpress.com/2013/08/01/jtextfield-placeholder
+	 */
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The original font. */
-    private Font originalFont;
+	/** The original font. */
+	private Font originalFont;
 
-    /** The original foreground. */
-    private Color originalForeground;
+	/** The original foreground. */
+	private Color originalForeground;
 
-    /*
-     * Grey by default*
-     */
-    /** The placeholder foreground. */
-    private Color placeholderForeground = new Color(160, 160, 160);
+	/*
+	 * Grey by default*
+	 */
+	/** The placeholder foreground. */
+	private Color placeholderForeground = new Color(160, 160, 160);
 
-    /** The text written in. */
-    private boolean textWrittenIn;
+	/** The text written in. */
+	private boolean textWrittenIn;
 
-    /**
-     * Instantiates a new j text area impl.
-     */
-    public JTextAreaImpl() {
-    }
+	/**
+	 * Instantiates a new j text area impl.
+	 */
+	public JTextAreaImpl() {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.JTextArea#setFont(java.awt.Font)
-     */
-    @Override
-    public void setFont(Font f) {
-        super.setFont(f);
-        if (!isTextWrittenIn()) {
-            originalFont = f;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.JTextArea#setFont(java.awt.Font)
+	 */
+	@Override
+	public void setFont(Font f) {
+		super.setFont(f);
+		if (!isTextWrittenIn()) {
+			originalFont = f;
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.JComponent#setForeground(java.awt.Color)
-     */
-    @Override
-    public void setForeground(Color fg) {
-        super.setForeground(fg);
-        if (!isTextWrittenIn()) {
-            originalForeground = fg;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.JComponent#setForeground(java.awt.Color)
+	 */
+	@Override
+	public void setForeground(Color fg) {
+		super.setForeground(fg);
+		if (!isTextWrittenIn()) {
+			originalForeground = fg;
+		}
+	}
 
-    /**
-     * Gets the placeholder foreground.
-     *
-     * @return the placeholder foreground
-     */
-    public Color getPlaceholderForeground() {
-        return placeholderForeground;
-    }
+	/**
+	 * Gets the placeholder foreground.
+	 *
+	 * @return the placeholder foreground
+	 */
+	public Color getPlaceholderForeground() {
+		return placeholderForeground;
+	}
 
-    /**
-     * Sets the placeholder foreground.
-     *
-     * @param placeholderForeground
-     *            the new placeholder foreground
-     */
-    public void setPlaceholderForeground(Color placeholderForeground) {
-        this.placeholderForeground = placeholderForeground;
-    }
+	/**
+	 * Sets the placeholder foreground.
+	 *
+	 * @param placeholderForeground
+	 *            the new placeholder foreground
+	 */
+	public void setPlaceholderForeground(Color placeholderForeground) {
+		this.placeholderForeground = placeholderForeground;
+	}
 
-    /**
-     * Checks if is text written in.
-     *
-     * @return true, if is text written in
-     */
-    public boolean isTextWrittenIn() {
-        return textWrittenIn;
-    }
+	/**
+	 * Checks if is text written in.
+	 *
+	 * @return true, if is text written in
+	 */
+	public boolean isTextWrittenIn() {
+		return textWrittenIn;
+	}
 
-    /**
-     * Sets the text written in.
-     *
-     * @param textWrittenIn
-     *            the new text written in
-     */
-    public void setTextWrittenIn(boolean textWrittenIn) {
-        this.textWrittenIn = textWrittenIn;
-    }
+	/**
+	 * Sets the text written in.
+	 *
+	 * @param textWrittenIn
+	 *            the new text written in
+	 */
+	public void setTextWrittenIn(boolean textWrittenIn) {
+		this.textWrittenIn = textWrittenIn;
+	}
 
-    /**
-     * Sets the placeholder.
-     *
-     * @param text
-     *            the new placeholder
-     */
-    public void setPlaceholder(final String text) {
+	/**
+	 * Sets the placeholder.
+	 *
+	 * @param text
+	 *            the new placeholder
+	 */
+	public void setPlaceholder(final String text) {
 
-        this.customizeText(text);
+		this.customizeText(text);
 
-        this.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                warn();
-            }
+		this.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				warn();
+			}
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                warn();
-            }
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				warn();
+			}
 
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                warn();
-            }
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				warn();
+			}
 
-            public void warn() {
-                if (getText().trim().length() != 0) {
-                    setFont(originalFont);
-                    setForeground(originalForeground);
-                    setTextWrittenIn(true);
-                }
+			public void warn() {
+				if (getText().trim().length() != 0) {
+					setFont(originalFont);
+					setForeground(originalForeground);
+					setTextWrittenIn(true);
+				}
 
-            }
-        });
+			}
+		});
 
-        this.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (!isTextWrittenIn()) {
-                    setText("");
-                }
+		this.addFocusListener(new FocusListener() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (!isTextWrittenIn()) {
+					setText("");
+				}
 
-            }
+			}
 
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (getText().trim().length() == 0) {
-                    customizeText(text);
-                }
-            }
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (getText().trim().length() == 0) {
+					customizeText(text);
+				}
+			}
 
-        });
+		});
 
-    }
+	}
 
-    /**
-     * Customize text.
-     *
-     * @param text
-     *            the text
-     */
-    private void customizeText(String text) {
-        setText(text);
-        setFont(new Font(getFont().getFamily(), Font.ITALIC, getFont()
-                .getSize()));
-        setForeground(getPlaceholderForeground());
-        setTextWrittenIn(false);
-    }
+	/**
+	 * Customize text.
+	 *
+	 * @param text
+	 *            the text
+	 */
+	private void customizeText(String text) {
+		setText(text);
+		setFont(new Font(getFont().getFamily(), Font.ITALIC, getFont().getSize()));
+		setForeground(getPlaceholderForeground());
+		setTextWrittenIn(false);
+	}
 
 }

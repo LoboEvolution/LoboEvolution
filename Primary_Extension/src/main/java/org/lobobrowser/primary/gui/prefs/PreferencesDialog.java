@@ -42,217 +42,220 @@ import org.lobobrowser.primary.info.SettingsInfo;
  */
 public class PreferencesDialog extends JDialog {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The preferences panel. */
-    private final PreferencesPanel preferencesPanel;
+	/** The preferences panel. */
+	private final PreferencesPanel preferencesPanel;
 
-    /** The preferences tree. */
-    private final PreferencesTree preferencesTree;
+	/** The preferences tree. */
+	private final PreferencesTree preferencesTree;
 
-    /**
-     * Instantiates a new preferences dialog.
-     *
-     * @param parent
-     *            the parent
-     * @throws HeadlessException
-     *             the headless exception
-     */
-    public PreferencesDialog(Frame parent) throws HeadlessException {
-        super(parent);
-        this.preferencesPanel = new PreferencesPanel();
-        this.preferencesTree = new PreferencesTree();
-        Container contentPane = this.getContentPane();
-        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
-        contentPane.add(this.createLeftPane());
-        contentPane.add(this.createRightPane(this.preferencesPanel));
-        this.preferencesTree.initSelection();
-    }
+	/**
+	 * Instantiates a new preferences dialog.
+	 *
+	 * @param parent
+	 *            the parent
+	 * @throws HeadlessException
+	 *             the headless exception
+	 */
+	public PreferencesDialog(Frame parent) throws HeadlessException {
+		super(parent);
+		this.preferencesPanel = new PreferencesPanel();
+		this.preferencesTree = new PreferencesTree();
+		Container contentPane = this.getContentPane();
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
+		contentPane.add(this.createLeftPane());
+		contentPane.add(this.createRightPane(this.preferencesPanel));
+		this.preferencesTree.initSelection();
+	}
 
-    /**
-     * Creates the left pane.
-     *
-     * @return the component
-     */
-    private Component createLeftPane() {
-        PreferencesTree prefsTree = this.preferencesTree;
-        prefsTree.addTreeSelectionListener(new LocalTreeSelectionListener());
-        JScrollPane scrollPane = new JScrollPane(prefsTree);
-        Dimension size = new Dimension(150, 200);
-        scrollPane.setPreferredSize(size);
-        scrollPane.setMinimumSize(size);
-        scrollPane.setMaximumSize(new Dimension(150, Short.MAX_VALUE));
-        return scrollPane;
-    }
+	/**
+	 * Creates the left pane.
+	 *
+	 * @return the component
+	 */
+	private Component createLeftPane() {
+		PreferencesTree prefsTree = this.preferencesTree;
+		prefsTree.addTreeSelectionListener(new LocalTreeSelectionListener());
+		JScrollPane scrollPane = new JScrollPane(prefsTree);
+		Dimension size = new Dimension(150, 200);
+		scrollPane.setPreferredSize(size);
+		scrollPane.setMinimumSize(size);
+		scrollPane.setMaximumSize(new Dimension(150, Short.MAX_VALUE));
+		return scrollPane;
+	}
 
-    /**
-     * Creates the right pane.
-     *
-     * @param prefsPanel
-     *            the prefs panel
-     * @return the component
-     */
-    private Component createRightPane(Container prefsPanel) {
-        JPanel rightPanel = new JPanel();
-        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        rightPanel.add(prefsPanel);
-        rightPanel.add(this.createButtonsPanel());
-        return rightPanel;
-    }
+	/**
+	 * Creates the right pane.
+	 *
+	 * @param prefsPanel
+	 *            the prefs panel
+	 * @return the component
+	 */
+	private Component createRightPane(Container prefsPanel) {
+		JPanel rightPanel = new JPanel();
+		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+		rightPanel.add(prefsPanel);
+		rightPanel.add(this.createButtonsPanel());
+		return rightPanel;
+	}
 
-    /**
-     * Creates the buttons panel.
-     *
-     * @return the component
-     */
-    private Component createButtonsPanel() {
-        JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setBorder(new EmptyBorder(4, 4, 4, 4));
-        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
-        buttonsPanel.add(Box.createHorizontalGlue());
-        JButton okButton = new JButton();
-        okButton.setAction(new OkAction());
-        okButton.setText("OK");
-        JButton cancelButton = new JButton();
-        cancelButton.setAction(new CancelAction());
-        cancelButton.setText("Cancel");
-        JButton applyButton = new JButton();
-        applyButton.setAction(new ApplyAction());
-        applyButton.setText("Apply");
-        JButton defaultsButton = new JButton();
-        defaultsButton.setAction(new DefaultsAction());
-        defaultsButton.setText("Restore Defaults");
-        buttonsPanel.add(okButton);
-        buttonsPanel.add(cancelButton);
-        buttonsPanel.add(applyButton);
-        buttonsPanel.add(defaultsButton);
-        return buttonsPanel;
-    }
+	/**
+	 * Creates the buttons panel.
+	 *
+	 * @return the component
+	 */
+	private Component createButtonsPanel() {
+		JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setBorder(new EmptyBorder(4, 4, 4, 4));
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+		buttonsPanel.add(Box.createHorizontalGlue());
+		JButton okButton = new JButton();
+		okButton.setAction(new OkAction());
+		okButton.setText("OK");
+		JButton cancelButton = new JButton();
+		cancelButton.setAction(new CancelAction());
+		cancelButton.setText("Cancel");
+		JButton applyButton = new JButton();
+		applyButton.setAction(new ApplyAction());
+		applyButton.setText("Apply");
+		JButton defaultsButton = new JButton();
+		defaultsButton.setAction(new DefaultsAction());
+		defaultsButton.setText("Restore Defaults");
+		buttonsPanel.add(okButton);
+		buttonsPanel.add(cancelButton);
+		buttonsPanel.add(applyButton);
+		buttonsPanel.add(defaultsButton);
+		return buttonsPanel;
+	}
 
-    /**
-     * Update preferences panel.
-     *
-     * @param settingsInfo
-     *            the settings info
-     */
-    private void updatePreferencesPanel(SettingsInfo settingsInfo) {
-        if (settingsInfo != null) {
-            AbstractSettingsUI newUI = settingsInfo.createSettingsUI();
-            preferencesPanel.setSettingsUI(newUI);
-        } else {
-            preferencesPanel.setSettingsUI(null);
-        }
-    }
+	/**
+	 * Update preferences panel.
+	 *
+	 * @param settingsInfo
+	 *            the settings info
+	 */
+	private void updatePreferencesPanel(SettingsInfo settingsInfo) {
+		if (settingsInfo != null) {
+			AbstractSettingsUI newUI = settingsInfo.createSettingsUI();
+			preferencesPanel.setSettingsUI(newUI);
+		} else {
+			preferencesPanel.setSettingsUI(null);
+		}
+	}
 
-    /**
-     * The Class OkAction.
-     */
-    private class OkAction extends AbstractAction {
+	/**
+	 * The Class OkAction.
+	 */
+	private class OkAction extends AbstractAction {
 
-        /** The Constant serialVersionUID. */
-        private static final long serialVersionUID = 1L;
+		/** The Constant serialVersionUID. */
+		private static final long serialVersionUID = 1L;
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (preferencesPanel.save()) {
-                PreferencesDialog.this.dispose();
-            }
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
+		 * ActionEvent)
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (preferencesPanel.save()) {
+				PreferencesDialog.this.dispose();
+			}
+		}
+	}
 
-    /**
-     * The Class CancelAction.
-     */
-    private class CancelAction extends AbstractAction {
+	/**
+	 * The Class CancelAction.
+	 */
+	private class CancelAction extends AbstractAction {
 
-        /** The Constant serialVersionUID. */
-        private static final long serialVersionUID = 1L;
+		/** The Constant serialVersionUID. */
+		private static final long serialVersionUID = 1L;
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            PreferencesDialog.this.dispose();
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
+		 * ActionEvent)
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			PreferencesDialog.this.dispose();
+		}
+	}
 
-    /**
-     * The Class ApplyAction.
-     */
-    private class ApplyAction extends AbstractAction {
+	/**
+	 * The Class ApplyAction.
+	 */
+	private class ApplyAction extends AbstractAction {
 
-        /** The Constant serialVersionUID. */
-        private static final long serialVersionUID = 1L;
+		/** The Constant serialVersionUID. */
+		private static final long serialVersionUID = 1L;
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            preferencesPanel.save();
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
+		 * ActionEvent)
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			preferencesPanel.save();
+		}
+	}
 
-    /**
-     * The Class DefaultsAction.
-     */
-    private class DefaultsAction extends AbstractAction {
+	/**
+	 * The Class DefaultsAction.
+	 */
+	private class DefaultsAction extends AbstractAction {
 
-        /** The Constant serialVersionUID. */
-        private static final long serialVersionUID = 1L;
+		/** The Constant serialVersionUID. */
+		private static final long serialVersionUID = 1L;
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (JOptionPane.showConfirmDialog(PreferencesDialog.this,
-                    "Are you sure you want to restore defaults?", "Confirm",
-                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                preferencesPanel.restoreDefaults();
-            }
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
+		 * ActionEvent)
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (JOptionPane.showConfirmDialog(PreferencesDialog.this, "Are you sure you want to restore defaults?",
+					"Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				preferencesPanel.restoreDefaults();
+			}
+		}
+	}
 
-    /**
-     * The listener interface for receiving localTreeSelection events. The class
-     * that is interested in processing a localTreeSelection event implements
-     * this interface, and the object created with that class is registered with
-     * a component using the component's
-     * <code>addLocalTreeSelectionListener</code> method. When the
-     * localTreeSelection event occurs, that object's appropriate method is
-     * invoked.
-     *
-     * @see LocalTreeSelectionEvent
-     */
-    private class LocalTreeSelectionListener implements TreeSelectionListener {
+	/**
+	 * The listener interface for receiving localTreeSelection events. The class
+	 * that is interested in processing a localTreeSelection event implements
+	 * this interface, and the object created with that class is registered with
+	 * a component using the component's
+	 * <code>addLocalTreeSelectionListener</code> method. When the
+	 * localTreeSelection event occurs, that object's appropriate method is
+	 * invoked.
+	 *
+	 * @see LocalTreeSelectionEvent
+	 */
+	private class LocalTreeSelectionListener implements TreeSelectionListener {
 
-        /*
-         * (non-Javadoc)
-         * @see javax.swing.event.TreeSelectionListener#valueChanged(javax.swing.event.
-         * TreeSelectionEvent)
-         */
-        @Override
-        public void valueChanged(TreeSelectionEvent e) {
-            TreePath path = e.getPath();
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) path
-                    .getLastPathComponent();
-            SettingsInfo si = node == null ? null : (SettingsInfo) node
-                    .getUserObject();
-            updatePreferencesPanel(si);
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * javax.swing.event.TreeSelectionListener#valueChanged(javax.swing.
+		 * event. TreeSelectionEvent)
+		 */
+		@Override
+		public void valueChanged(TreeSelectionEvent e) {
+			TreePath path = e.getPath();
+			DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+			SettingsInfo si = node == null ? null : (SettingsInfo) node.getUserObject();
+			updatePreferencesPanel(si);
+		}
+	}
 }

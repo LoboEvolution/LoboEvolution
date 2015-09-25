@@ -21,24 +21,24 @@ import org.lobobrowser.primary.gui.prefs.AbstractSettingsUI;
  */
 public interface SettingsInfo {
 
-    /**
-     * Gets the name.
-     *
-     * @return the name
-     */
-    String getName();
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
+	String getName();
 
-    /**
-     * Gets the description.
-     *
-     * @return the description
-     */
-    String getDescription();
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
+	String getDescription();
 
-    /**
-     * Creates the settings ui.
-     *
-     * @return the abstract settings ui
-     */
-    AbstractSettingsUI createSettingsUI();
+	/**
+	 * Creates the settings ui.
+	 *
+	 * @return the abstract settings ui
+	 */
+	AbstractSettingsUI createSettingsUI();
 }

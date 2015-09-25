@@ -29,13 +29,13 @@ import java.util.LinkedList;
 public class EventDispatch {
     /** The listeners. */
     private Collection listeners;
-
+    
     /**
      * Instantiates a new event dispatch.
      */
     public EventDispatch() {
     }
-
+    
     /**
      * Creates the listener collection.
      *
@@ -44,7 +44,7 @@ public class EventDispatch {
     public Collection createListenerCollection() {
         return new LinkedList();
     }
-
+    
     /**
      * Adds the listener.
      *
@@ -59,7 +59,7 @@ public class EventDispatch {
             this.listeners.add(listener);
         }
     }
-
+    
     /**
      * Removes the listener.
      *
@@ -73,7 +73,7 @@ public class EventDispatch {
             }
         }
     }
-
+    
     /**
      * Fire event.
      *

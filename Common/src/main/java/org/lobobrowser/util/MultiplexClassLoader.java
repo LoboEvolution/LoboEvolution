@@ -29,7 +29,7 @@ public abstract class MultiplexClassLoader extends BaseClassLoader {
     private static final BaseClassLoader[] EMPTY_CLASS_LOADERS = new BaseClassLoader[0];
     /** The parent loaders. */
     private final BaseClassLoader[] parentLoaders;
-
+    
     /**
      * Instantiates a new multiplex class loader.
      *
@@ -41,7 +41,7 @@ public abstract class MultiplexClassLoader extends BaseClassLoader {
         this.parentLoaders = (BaseClassLoader[]) classLoaders
                 .toArray(EMPTY_CLASS_LOADERS);
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.lang.ClassLoader#loadClass(String, boolean)

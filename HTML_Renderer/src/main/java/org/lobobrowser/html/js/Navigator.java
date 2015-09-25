@@ -15,7 +15,7 @@
 
 package org.lobobrowser.html.js;
 
-import org.lobobrowser.html.UserAgentContext;
+import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 
 /**

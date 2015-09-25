@@ -26,47 +26,47 @@ import org.lobobrowser.html.style.HtmlInsets;
  */
 public class ListRenderState extends AbstractMarginRenderState {
 
-    /**
-     * Instantiates a new list render state.
-     *
-     * @param prevRenderState
-     *            the prev render state
-     * @param element
-     *            the element
-     */
-    public ListRenderState(RenderState prevRenderState, HTMLElementImpl element) {
-        super(prevRenderState, element);
-    }
+	/**
+	 * Instantiates a new list render state.
+	 *
+	 * @param prevRenderState
+	 *            the prev render state
+	 * @param element
+	 *            the element
+	 */
+	public ListRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+		super(prevRenderState, element);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.renderstate.AbstractMarginRenderState#getDefaultMarginInsets
-     * ()
-     */
-    @Override
-    protected HtmlInsets getDefaultMarginInsets() {
-        HtmlInsets insets = new HtmlInsets();
-        RenderState prevRS = this.getPreviousRenderState();
-        FontMetrics fm = prevRS == null ? this.getFontMetrics() : prevRS
-                .getFontMetrics();
-        insets.top = fm.getHeight();
-        insets.bottom = fm.getHeight();
-        insets.topType = HtmlInsets.TYPE_PIXELS;
-        insets.bottomType = HtmlInsets.TYPE_PIXELS;
-        int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit
-                .getDefaultToolkit().getScreenResolution();
-        insets.left = (int) Math.round((dpi * 30.0) / 72.0);
-        insets.leftType = HtmlInsets.TYPE_PIXELS;
-        return insets;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.renderstate.AbstractMarginRenderState#
+	 * getDefaultMarginInsets ()
+	 */
+	@Override
+	protected HtmlInsets getDefaultMarginInsets() {
+		HtmlInsets insets = new HtmlInsets();
+		RenderState prevRS = this.getPreviousRenderState();
+		FontMetrics fm = prevRS == null ? this.getFontMetrics() : prevRS.getFontMetrics();
+		insets.top = fm.getHeight();
+		insets.bottom = fm.getHeight();
+		insets.topType = HtmlInsets.TYPE_PIXELS;
+		insets.bottomType = HtmlInsets.TYPE_PIXELS;
+		int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
+		insets.left = (int) Math.round((dpi * 30.0) / 72.0);
+		insets.leftType = HtmlInsets.TYPE_PIXELS;
+		return insets;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderstate.BlockRenderState#getDefaultDisplay()
-     */
-    @Override
-    public int getDefaultDisplay() {
-        return DISPLAY_LIST_ITEM;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.renderstate.BlockRenderState#getDefaultDisplay()
+	 */
+	@Override
+	public int getDefaultDisplay() {
+		return DISPLAY_LIST_ITEM;
+	}
 }

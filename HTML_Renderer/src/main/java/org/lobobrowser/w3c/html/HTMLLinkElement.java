@@ -4,6 +4,7 @@ package org.lobobrowser.w3c.html;
 
 public interface HTMLLinkElement extends HTMLElement {
 	// HTMLLinkElement
+	@Override
 	public boolean getDisabled();
 
 	public void setDisabled(boolean disabled);

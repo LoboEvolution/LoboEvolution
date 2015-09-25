@@ -23,9 +23,9 @@ import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.test.SimpleUserAgentContext;
+import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.Document;
 
 /**
@@ -33,48 +33,46 @@ import org.w3c.dom.Document;
  */
 public class AttributesTest {
 
-    /** The Constant TEST_URI. */
-    private static final String TEST_URI = "http://www.google.com";
+	/** The Constant TEST_URI. */
+	private static final String TEST_URI = "http://www.google.com";
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) throws Exception {
-        Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
-        UserAgentContext uacontext = new SimpleUserAgentContext();
-        // In this case we will use a standard XML document
-        // as opposed to Cobra's HTML DOM implementation.
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        URL url = new URL(TEST_URI);
-        InputStream in = url.openConnection().getInputStream();
-        try {
-            Reader reader = new InputStreamReader(in, "UTF-8");
-            Document document = builder.newDocument();
-            // Here is where we use Cobra's HTML parser.
-            HtmlParser parser = new HtmlParser(uacontext, document);
-            parser.parse(reader);
-            org.w3c.dom.Element element = document.getDocumentElement();
-            if (element != null) {
-                org.w3c.dom.NodeList list = element
-                        .getElementsByTagName("input");
-                int size = list.getLength();
-                for (int i = 0; i < size; i++) {
-                    org.w3c.dom.Node currentNode = list.item(i);
-                    org.w3c.dom.NamedNodeMap map = currentNode.getAttributes();
-                    System.out.println("node#" + i + ": " + currentNode);
-                    int length = map.getLength();
-                    for (int j = 0; j < length; j++) {
-                        System.out.println("  item#" + i + "." + j + ": "
-                                + map.item(j));
-                    }
-                    org.w3c.dom.Node typeNode = map.getNamedItem("type");
-                    System.out.println("  type=" + typeNode);
-                }
-            }
-        } finally {
-            in.close();
-        }
-    }
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) throws Exception {
+		Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
+		UserAgentContext uacontext = new SimpleUserAgentContext();
+		// In this case we will use a standard XML document
+		// as opposed to Cobra's HTML DOM implementation.
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		URL url = new URL(TEST_URI);
+		InputStream in = url.openConnection().getInputStream();
+		try {
+			Reader reader = new InputStreamReader(in, "UTF-8");
+			Document document = builder.newDocument();
+			// Here is where we use Cobra's HTML parser.
+			HtmlParser parser = new HtmlParser(uacontext, document);
+			parser.parse(reader);
+			org.w3c.dom.Element element = document.getDocumentElement();
+			if (element != null) {
+				org.w3c.dom.NodeList list = element.getElementsByTagName("input");
+				int size = list.getLength();
+				for (int i = 0; i < size; i++) {
+					org.w3c.dom.Node currentNode = list.item(i);
+					org.w3c.dom.NamedNodeMap map = currentNode.getAttributes();
+					System.out.println("node#" + i + ": " + currentNode);
+					int length = map.getLength();
+					for (int j = 0; j < length; j++) {
+						System.out.println("  item#" + i + "." + j + ": " + map.item(j));
+					}
+					org.w3c.dom.Node typeNode = map.getNamedItem("type");
+					System.out.println("  type=" + typeNode);
+				}
+			}
+		} finally {
+			in.close();
+		}
+	}
 
 }

@@ -14,11 +14,11 @@
  */
 package org.lobobrowser.html.control;
 
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.renderer.FrameContext;
 import org.lobobrowser.html.renderer.RenderableContainer;
 import org.lobobrowser.html.renderer.UIControl;
+import org.lobobrowser.http.UserAgentContext;
 
 public class RCanvasControl extends RUIControl {
 

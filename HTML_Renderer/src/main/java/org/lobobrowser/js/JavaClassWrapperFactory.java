@@ -23,58 +23,56 @@ import java.util.WeakHashMap;
  */
 public class JavaClassWrapperFactory {
 
-    /** The instance. */
-    private static JavaClassWrapperFactory instance;
+	/** The instance. */
+	private static JavaClassWrapperFactory instance;
 
-    /** The class wrappers. */
-    private final Map<Class, WeakReference<JavaClassWrapper>> classWrappers = new WeakHashMap();
+	/** The class wrappers. */
+	private final Map<Class, WeakReference<JavaClassWrapper>> classWrappers = new WeakHashMap();
 
-    /**
-     * Instantiates a new java class wrapper factory.
-     */
-    private JavaClassWrapperFactory() {
-    }
+	/**
+	 * Instantiates a new java class wrapper factory.
+	 */
+	private JavaClassWrapperFactory() {
+	}
 
-    /**
-     * Gets the single instance of JavaClassWrapperFactory.
-     *
-     * @return single instance of JavaClassWrapperFactory
-     */
-    public static JavaClassWrapperFactory getInstance() {
-        if (instance == null) {
-            synchronized (JavaClassWrapperFactory.class) {
-                if (instance == null) {
-                    instance = new JavaClassWrapperFactory();
-                }
-            }
-        }
-        return instance;
-    }
+	/**
+	 * Gets the single instance of JavaClassWrapperFactory.
+	 *
+	 * @return single instance of JavaClassWrapperFactory
+	 */
+	public static JavaClassWrapperFactory getInstance() {
+		if (instance == null) {
+			synchronized (JavaClassWrapperFactory.class) {
+				if (instance == null) {
+					instance = new JavaClassWrapperFactory();
+				}
+			}
+		}
+		return instance;
+	}
 
-    /**
-     * Gets the class wrapper.
-     *
-     * @param clazz
-     *            the clazz
-     * @return the class wrapper
-     */
-    public JavaClassWrapper getClassWrapper(Class clazz) {
-        synchronized (this) {
-            // WeakHashMaps where the value refers to
-            // the key will retain keys. Must make it
-            // refer to the value weakly too.
-            WeakReference<JavaClassWrapper> jcwr = this.classWrappers
-                    .get(clazz);
-            JavaClassWrapper jcw = null;
-            if (jcwr != null) {
-                jcw = jcwr.get();
-            }
-            if (jcw == null) {
-                jcw = new JavaClassWrapper(clazz);
-                this.classWrappers.put(clazz,
-                        new WeakReference<JavaClassWrapper>(jcw));
-            }
-            return jcw;
-        }
-    }
+	/**
+	 * Gets the class wrapper.
+	 *
+	 * @param clazz
+	 *            the clazz
+	 * @return the class wrapper
+	 */
+	public JavaClassWrapper getClassWrapper(Class clazz) {
+		synchronized (this) {
+			// WeakHashMaps where the value refers to
+			// the key will retain keys. Must make it
+			// refer to the value weakly too.
+			WeakReference<JavaClassWrapper> jcwr = this.classWrappers.get(clazz);
+			JavaClassWrapper jcw = null;
+			if (jcwr != null) {
+				jcw = jcwr.get();
+			}
+			if (jcw == null) {
+				jcw = new JavaClassWrapper(clazz);
+				this.classWrappers.put(clazz, new WeakReference<JavaClassWrapper>(jcw));
+			}
+			return jcw;
+		}
+	}
 }

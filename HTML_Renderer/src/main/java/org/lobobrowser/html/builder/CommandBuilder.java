@@ -21,12 +21,14 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
  */
 public class CommandBuilder extends HTMLElementBuilder {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
-     */
-    @Override
-    protected HTMLElementImpl build(String name) {
-        return new HTMLCommandElementImpl(name);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
+	@Override
+	protected HTMLElementImpl build(String name) {
+		return new HTMLCommandElementImpl(name);
+	}
 }

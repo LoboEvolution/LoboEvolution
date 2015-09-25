@@ -26,27 +26,26 @@ import org.lobobrowser.html.renderer.RElement;
  */
 public class ButtonLayout extends CommonWidgetLayout {
 
-    /**
-     * Instantiates a new button layout.
-     */
-    public ButtonLayout() {
-        super(ADD_INLINE, true);
-    }
+	/**
+	 * Instantiates a new button layout.
+	 */
+	public ButtonLayout() {
+		super(ADD_INLINE, true);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.lobobrowser
-     * .html.renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
-     */
-    @Override
-    protected RElement createRenderable(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-        HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
-        BaseInputControl uiControl = new InputButtonControl(bie);
-        bie.setInputContext(uiControl);
-        return new RUIControl(markupElement, uiControl,
-                bodyLayout.getContainer(), bodyLayout.getFrameContext(),
-                bodyLayout.getUserAgentContext());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.
+	 * lobobrowser .html.renderer.RBlockViewport,
+	 * org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
+	@Override
+	protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
+		BaseInputControl uiControl = new InputButtonControl(bie);
+		bie.setInputContext(uiControl);
+		return new RUIControl(markupElement, uiControl, bodyLayout.getContainer(), bodyLayout.getFrameContext(),
+				bodyLayout.getUserAgentContext());
+	}
 }

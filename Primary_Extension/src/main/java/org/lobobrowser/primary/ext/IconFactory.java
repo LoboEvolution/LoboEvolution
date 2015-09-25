@@ -30,64 +30,60 @@ import org.lobobrowser.util.io.IORoutines;
  */
 public class IconFactory {
 
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(IconFactory.class
-            .getName());
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(IconFactory.class.getName());
 
-    /** The Constant instance. */
-    private static final IconFactory instance = new IconFactory();
+	/** The Constant instance. */
+	private static final IconFactory instance = new IconFactory();
 
-    /**
-     * Instantiates a new icon factory.
-     */
-    private IconFactory() {
-    }
+	/**
+	 * Instantiates a new icon factory.
+	 */
+	private IconFactory() {
+	}
 
-    /**
-     * Gets the single instance of IconFactory.
-     *
-     * @return single instance of IconFactory
-     */
-    public static IconFactory getInstance() {
-        return instance;
-    }
+	/**
+	 * Gets the single instance of IconFactory.
+	 *
+	 * @return single instance of IconFactory
+	 */
+	public static IconFactory getInstance() {
+		return instance;
+	}
 
-    /** The icon map. */
-    private Map<String, ImageIcon> iconMap = new HashMap<String, ImageIcon>();
+	/** The icon map. */
+	private Map<String, ImageIcon> iconMap = new HashMap<String, ImageIcon>();
 
-    /**
-     * Gets the icon.
-     *
-     * @param resourcePath
-     *            the resource path
-     * @return the icon
-     */
-    public ImageIcon getIcon(String resourcePath) {
-        try {
-            synchronized (this) {
-                ImageIcon icon = this.iconMap.get(resourcePath);
-                if (icon == null) {
-                    InputStream in = this.getClass().getResourceAsStream(
-                            resourcePath);
-                    if (in == null) {
-                        logger.warning("getIcon(): Resource path "
-                                + resourcePath + " not found.");
-                        return null;
-                    }
-                    try {
-                        byte[] imageBytes = IORoutines.load(in, 4096);
-                        icon = new ImageIcon(imageBytes);
-                        this.iconMap.put(resourcePath, icon);
-                    } finally {
-                        in.close();
-                    }
-                }
-                return icon;
-            }
-        } catch (IOException ioe) {
-            logger.log(Level.WARNING, "getIcon(): Resource path "
-                    + resourcePath + " gave error.", ioe);
-            return null;
-        }
-    }
+	/**
+	 * Gets the icon.
+	 *
+	 * @param resourcePath
+	 *            the resource path
+	 * @return the icon
+	 */
+	public ImageIcon getIcon(String resourcePath) {
+		try {
+			synchronized (this) {
+				ImageIcon icon = this.iconMap.get(resourcePath);
+				if (icon == null) {
+					InputStream in = this.getClass().getResourceAsStream(resourcePath);
+					if (in == null) {
+						logger.warning("getIcon(): Resource path " + resourcePath + " not found.");
+						return null;
+					}
+					try {
+						byte[] imageBytes = IORoutines.load(in, 4096);
+						icon = new ImageIcon(imageBytes);
+						this.iconMap.put(resourcePath, icon);
+					} finally {
+						in.close();
+					}
+				}
+				return icon;
+			}
+		} catch (IOException ioe) {
+			logger.log(Level.WARNING, "getIcon(): Resource path " + resourcePath + " gave error.", ioe);
+			return null;
+		}
+	}
 }

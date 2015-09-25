@@ -16,43 +16,40 @@ package org.lobobrowser.cobra_testing;
 import javax.swing.JFrame;
 
 import org.lobobrowser.html.BrowserFrame;
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.test.SimpleHtmlRendererContext;
 import org.lobobrowser.html.test.SimpleUserAgentContext;
-
+import org.lobobrowser.http.UserAgentContext;
 
 /**
  * The Class BrowserFrameCallback.
  */
 public class BrowserFrameCallback {
-    /**
-     * @param args
-     */
-    public static void main(String[] args) throws Exception {
-        JFrame window = new JFrame();
-        HtmlPanel panel = new HtmlPanel();
-        window.getContentPane().add(panel);
-        window.setSize(600, 400);
-        window.setVisible(true);
-        new LocalHtmlRendererContext(panel, new SimpleUserAgentContext())
-                .navigate("file:c:\\temp\\html\\usertest9.html");
-    }
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) throws Exception {
+		JFrame window = new JFrame();
+		HtmlPanel panel = new HtmlPanel();
+		window.getContentPane().add(panel);
+		window.setSize(600, 400);
+		window.setVisible(true);
+		new LocalHtmlRendererContext(panel, new SimpleUserAgentContext())
+				.navigate("file:c:\\temp\\html\\usertest9.html");
+	}
 
-    /**
-     * The Class LocalHtmlRendererContext.
-     */
-    private static class LocalHtmlRendererContext extends
-            SimpleHtmlRendererContext {
-        public LocalHtmlRendererContext(HtmlPanel contextComponent,
-                UserAgentContext ucontext) {
-            super(contextComponent, ucontext);
-        }
+	/**
+	 * The Class LocalHtmlRendererContext.
+	 */
+	private static class LocalHtmlRendererContext extends SimpleHtmlRendererContext {
+		public LocalHtmlRendererContext(HtmlPanel contextComponent, UserAgentContext ucontext) {
+			super(contextComponent, ucontext);
+		}
 
-        @Override
-        public BrowserFrame createBrowserFrame() {
-            System.out.println("## createBrowserFrame() called.");
-            return super.createBrowserFrame();
-        }
-    }
+		@Override
+		public BrowserFrame createBrowserFrame() {
+			System.out.println("## createBrowserFrame() called.");
+			return super.createBrowserFrame();
+		}
+	}
 }

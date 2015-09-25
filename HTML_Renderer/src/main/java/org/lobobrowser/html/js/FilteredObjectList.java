@@ -28,72 +28,72 @@ import org.lobobrowser.js.AbstractScriptableDelegate;
  */
 public class FilteredObjectList extends AbstractScriptableDelegate {
 
-    /** The source node list. */
-    private final Collection sourceNodeList;
+	/** The source node list. */
+	private final Collection sourceNodeList;
 
-    /** The filter. */
-    private final ObjectFilter filter;
+	/** The filter. */
+	private final ObjectFilter filter;
 
-    /** The lock. */
-    private final Object lock;
+	/** The lock. */
+	private final Object lock;
 
-    /**
-     * Instantiates a new filtered object list.
-     *
-     * @param filter
-     *            the filter
-     * @param list
-     *            the list
-     * @param lock
-     *            the lock
-     */
-    public FilteredObjectList(ObjectFilter filter, Collection list, Object lock) {
-        super();
-        this.filter = filter;
-        sourceNodeList = list;
-        this.lock = lock;
-    }
+	/**
+	 * Instantiates a new filtered object list.
+	 *
+	 * @param filter
+	 *            the filter
+	 * @param list
+	 *            the list
+	 * @param lock
+	 *            the lock
+	 */
+	public FilteredObjectList(ObjectFilter filter, Collection list, Object lock) {
+		super();
+		this.filter = filter;
+		sourceNodeList = list;
+		this.lock = lock;
+	}
 
-    /**
-     * Item.
-     *
-     * @param index
-     *            the index
-     * @return the object
-     */
-    public Object item(int index) {
-        synchronized (this.lock) {
-            int count = 0;
-            Iterator i = this.sourceNodeList.iterator();
-            while (i.hasNext()) {
-                Object node = i.next();
-                if (this.filter.accept(node)) {
-                    if (count == index) {
-                        return node;
-                    }
-                    count++;
-                }
-            }
-            return null;
-        }
-    }
+	/**
+	 * Item.
+	 *
+	 * @param index
+	 *            the index
+	 * @return the object
+	 */
+	public Object item(int index) {
+		synchronized (this.lock) {
+			int count = 0;
+			Iterator i = this.sourceNodeList.iterator();
+			while (i.hasNext()) {
+				Object node = i.next();
+				if (this.filter.accept(node)) {
+					if (count == index) {
+						return node;
+					}
+					count++;
+				}
+			}
+			return null;
+		}
+	}
 
-    /**
-     * Gets the length.
-     *
-     * @return the length
-     */
-    public int getLength() {
-        synchronized (this.lock) {
-            int count = 0;
-            Iterator i = this.sourceNodeList.iterator();
-            while (i.hasNext()) {
-                Object node = i.next();
-                if (this.filter.accept(node)) {
-                    count++;
-                }
-            }
-            return count;
-        }
-    }
+	/**
+	 * Gets the length.
+	 *
+	 * @return the length
+	 */
+	public int getLength() {
+		synchronized (this.lock) {
+			int count = 0;
+			Iterator i = this.sourceNodeList.iterator();
+			while (i.hasNext()) {
+				Object node = i.next();
+				if (this.filter.accept(node)) {
+					count++;
+				}
+			}
+			return count;
+		}
+	}
 }

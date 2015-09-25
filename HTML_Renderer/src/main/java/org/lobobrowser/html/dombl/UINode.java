@@ -25,35 +25,35 @@ import java.awt.Rectangle;
  */
 public interface UINode {
 
-    /**
-     * Called.
-     *
-     * @param modelNode
-     *            the model node
-     */
-    void repaint(ModelNode modelNode);
+	/**
+	 * Called.
+	 *
+	 * @param modelNode
+	 *            the model node
+	 */
+	void repaint(ModelNode modelNode);
 
-    /**
-     * Gets the bounds.
-     *
-     * @return the bounds
-     */
-    Rectangle getBounds();
+	/**
+	 * Gets the bounds.
+	 *
+	 * @return the bounds
+	 */
+	Rectangle getBounds();
 
-    /**
-     * Gets the bounds relative to block.
-     *
-     * @return the bounds relative to block
-     */
-    Rectangle getBoundsRelativeToBlock();
+	/**
+	 * Gets the bounds relative to block.
+	 *
+	 * @return the bounds relative to block
+	 */
+	Rectangle getBoundsRelativeToBlock();
 
-    /**
-     * Focus.
-     */
-    void focus();
+	/**
+	 * Focus.
+	 */
+	void focus();
 
-    /**
-     * Blur.
-     */
-    void blur();
+	/**
+	 * Blur.
+	 */
+	void blur();
 }

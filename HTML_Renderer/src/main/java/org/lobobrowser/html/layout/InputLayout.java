@@ -74,7 +74,7 @@ public class InputLayout extends CommonWidgetLayout {
      * @return the base input control
      */
 	private final BaseInputControl createInputControl(HTMLBaseInputElement markupElement) {
-		String type = markupElement.getAttribute(HtmlAttributeProperties.TYPE);
+		String type = markupElement.getAttribute(HtmlAttributeProperties.TYPE)==null ? "" : markupElement.getAttribute(HtmlAttributeProperties.TYPE);
 		
 		switch (type) {
 		case "text":

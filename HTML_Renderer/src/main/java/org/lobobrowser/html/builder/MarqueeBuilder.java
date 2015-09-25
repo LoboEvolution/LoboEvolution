@@ -21,13 +21,15 @@ import org.lobobrowser.html.domimpl.HTMLMarqueeElementImpl;
  */
 public class MarqueeBuilder extends HTMLElementBuilder {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
-     */
-    @Override
-    protected HTMLElementImpl build(String name) {
-        return new HTMLMarqueeElementImpl(name);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
+	@Override
+	protected HTMLElementImpl build(String name) {
+		return new HTMLMarqueeElementImpl(name);
+	}
 
 }

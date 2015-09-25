@@ -24,56 +24,56 @@ import java.net.URL;
  */
 public class HistoryEntry<T> {
 
-    /** The url. */
-    private final URL url;
+	/** The url. */
+	private final URL url;
 
-    /** The timetstamp. */
-    private final long timetstamp;
+	/** The timetstamp. */
+	private final long timetstamp;
 
-    /** The item info. */
-    private final T itemInfo;
+	/** The item info. */
+	private final T itemInfo;
 
-    /**
-     * Instantiates a new history entry.
-     *
-     * @param url
-     *            the url
-     * @param timetstamp
-     *            the timetstamp
-     * @param itemInfo
-     *            the item info
-     */
-    public HistoryEntry(final URL url, final long timetstamp, final T itemInfo) {
-        super();
-        this.url = url;
-        this.timetstamp = timetstamp;
-        this.itemInfo = itemInfo;
-    }
+	/**
+	 * Instantiates a new history entry.
+	 *
+	 * @param url
+	 *            the url
+	 * @param timetstamp
+	 *            the timetstamp
+	 * @param itemInfo
+	 *            the item info
+	 */
+	public HistoryEntry(final URL url, final long timetstamp, final T itemInfo) {
+		super();
+		this.url = url;
+		this.timetstamp = timetstamp;
+		this.itemInfo = itemInfo;
+	}
 
-    /**
-     * Gets the item info.
-     *
-     * @return the item info
-     */
-    public T getItemInfo() {
-        return itemInfo;
-    }
+	/**
+	 * Gets the item info.
+	 *
+	 * @return the item info
+	 */
+	public T getItemInfo() {
+		return itemInfo;
+	}
 
-    /**
-     * Gets the timetstamp.
-     *
-     * @return the timetstamp
-     */
-    public long getTimetstamp() {
-        return timetstamp;
-    }
+	/**
+	 * Gets the timetstamp.
+	 *
+	 * @return the timetstamp
+	 */
+	public long getTimetstamp() {
+		return timetstamp;
+	}
 
-    /**
-     * Gets the url.
-     *
-     * @return the url
-     */
-    public URL getUrl() {
-        return url;
-    }
+	/**
+	 * Gets the url.
+	 *
+	 * @return the url
+	 */
+	public URL getUrl() {
+		return url;
+	}
 }

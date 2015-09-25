@@ -25,58 +25,58 @@ import java.net.URL;
  */
 public class ArchiveInfo {
 
-    /** The Constant EMPTY_ARRAY. */
-    public static final ArchiveInfo[] EMPTY_ARRAY = new ArchiveInfo[0];
+	/** The Constant EMPTY_ARRAY. */
+	public static final ArchiveInfo[] EMPTY_ARRAY = new ArchiveInfo[0];
 
-    /** The file. */
-    public final java.io.File file;
+	/** The file. */
+	public final java.io.File file;
 
-    /** The url. */
-    public final URL url;
+	/** The url. */
+	public final URL url;
 
-    /**
-     * Instantiates a new archive info.
-     *
-     * @param url
-     *            the url
-     * @param file
-     *            the file
-     */
-    public ArchiveInfo(final URL url, final java.io.File file) {
-        super();
-        this.url = url;
-        this.file = file;
-    }
+	/**
+	 * Instantiates a new archive info.
+	 *
+	 * @param url
+	 *            the url
+	 * @param file
+	 *            the file
+	 */
+	public ArchiveInfo(final URL url, final java.io.File file) {
+		super();
+		this.url = url;
+		this.file = file;
+	}
 
-    /** The jar file. */
-    private java.util.jar.JarFile jarFile;
+	/** The jar file. */
+	private java.util.jar.JarFile jarFile;
 
-    /**
-     * Gets the jar file.
-     *
-     * @return the jar file
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    public java.util.jar.JarFile getJarFile() throws IOException {
-        if (this.jarFile == null) {
-            synchronized (this) {
-                if (this.jarFile == null) {
-                    this.jarFile = new java.util.jar.JarFile(this.file);
-                }
-            }
-        }
-        return this.jarFile;
-    }
+	/**
+	 * Gets the jar file.
+	 *
+	 * @return the jar file
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public java.util.jar.JarFile getJarFile() throws IOException {
+		if (this.jarFile == null) {
+			synchronized (this) {
+				if (this.jarFile == null) {
+					this.jarFile = new java.util.jar.JarFile(this.file);
+				}
+			}
+		}
+		return this.jarFile;
+	}
 
-    // private transient WarriorClassLoader classLoader = null;
-    //
-    // public WarriorClassLoader getClassLoader() throws IOException {
-    // synchronized(this) {
-    // if(this.classLoader == null) {
-    // this.classLoader = new ArchiveClassLoader(this.url, this.file);
-    //}
-    // return this.classLoader;
-    //}
-    //}
+	// private transient WarriorClassLoader classLoader = null;
+	//
+	// public WarriorClassLoader getClassLoader() throws IOException {
+	// synchronized(this) {
+	// if(this.classLoader == null) {
+	// this.classLoader = new ArchiveClassLoader(this.url, this.file);
+	// }
+	// return this.classLoader;
+	// }
+	// }
 }

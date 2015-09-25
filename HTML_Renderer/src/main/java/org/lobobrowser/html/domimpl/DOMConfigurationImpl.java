@@ -29,58 +29,62 @@ import org.w3c.dom.DOMStringList;
  */
 public class DOMConfigurationImpl implements DOMConfiguration {
 
-    /** The parameters. */
-    private final Map<String, Object> parameters = new HashMap<String, Object>();
+	/** The parameters. */
+	private final Map<String, Object> parameters = new HashMap<String, Object>();
 
-    /**
-     * Instantiates a new DOM configuration impl.
-     */
-    public DOMConfigurationImpl() {
-        super();
-    }
+	/**
+	 * Instantiates a new DOM configuration impl.
+	 */
+	public DOMConfigurationImpl() {
+		super();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.DOMConfiguration#setParameter(java.lang.String,
-     * java.lang.Object)
-     */
-    @Override
-    public void setParameter(String name, Object value) throws DOMException {
-        synchronized (this) {
-            this.parameters.put(name, value);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.DOMConfiguration#setParameter(java.lang.String,
+	 * java.lang.Object)
+	 */
+	@Override
+	public void setParameter(String name, Object value) throws DOMException {
+		synchronized (this) {
+			this.parameters.put(name, value);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.DOMConfiguration#getParameter(java.lang.String)
-     */
-    @Override
-    public Object getParameter(String name) throws DOMException {
-        synchronized (this) {
-            return this.parameters.get(name);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.DOMConfiguration#getParameter(java.lang.String)
+	 */
+	@Override
+	public Object getParameter(String name) throws DOMException {
+		synchronized (this) {
+			return this.parameters.get(name);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.DOMConfiguration#canSetParameter(java.lang.String,
-     * java.lang.Object)
-     */
-    @Override
-    public boolean canSetParameter(String name, Object value) {
-        // TODO
-        return true;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.DOMConfiguration#canSetParameter(java.lang.String,
+	 * java.lang.Object)
+	 */
+	@Override
+	public boolean canSetParameter(String name, Object value) {
+		// TODO
+		return true;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.DOMConfiguration#getParameterNames()
-     */
-    @Override
-    public DOMStringList getParameterNames() {
-        synchronized (this) {
-            return new DOMStringListImpl(parameters.keySet());
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.DOMConfiguration#getParameterNames()
+	 */
+	@Override
+	public DOMStringList getParameterNames() {
+		synchronized (this) {
+			return new DOMStringListImpl(parameters.keySet());
+		}
+	}
 }

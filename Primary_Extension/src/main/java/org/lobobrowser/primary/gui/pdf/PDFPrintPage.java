@@ -70,7 +70,7 @@ public class PDFPrintPage implements Printable {
 
 	/**
 	 * Create a new PDFPrintPage object for a particular PDFFile.
-	 * 
+	 *
 	 * @param file
 	 *            the PDFFile to be printed.
 	 */
@@ -167,7 +167,7 @@ public class PDFPrintPage implements Printable {
 
 	/**
 	 * Show the progress dialog for this print job
-	 * 
+	 *
 	 * @param pjob
 	 *            the PrinterJob representing the print job
 	 */

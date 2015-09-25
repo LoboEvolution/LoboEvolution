@@ -78,7 +78,7 @@ public class InputPasswordControl extends BaseInputTextControl {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.lobobrowser.html.render.InputTextControl#createTextField(String
 	 * )
 	 */
@@ -107,14 +107,15 @@ public class InputPasswordControl extends BaseInputTextControl {
 
 	private KeyListener addKeyListener() {
 		KeyListener keyListener = new KeyListener() {
+			@Override
 			public void keyPressed(KeyEvent keyEvent) {
 
 				JPasswordField url = (JPasswordField) keyEvent.getSource();
 				String srtPwd = "";
 				for (int i = 0; i < url.getPassword().length; i++) {
 					srtPwd += url.getPassword()[i];
-				} 
-				
+				}
+
 				if (!match(srtPwd, strPattern)) {
 					url.setBorder(BorderFactory.createLineBorder(Color.RED));
 				} else {
@@ -122,9 +123,11 @@ public class InputPasswordControl extends BaseInputTextControl {
 				}
 			}
 
+			@Override
 			public void keyReleased(KeyEvent keyEvent) {
 			}
 
+			@Override
 			public void keyTyped(KeyEvent keyEvent) {
 			}
 

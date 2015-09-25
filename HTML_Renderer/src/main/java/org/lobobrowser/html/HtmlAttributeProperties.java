@@ -18,402 +18,402 @@ package org.lobobrowser.html;
  */
 public interface HtmlAttributeProperties {
 
-    /** The align. */
-    String ALIGN = "align";
+	/** The align. */
+	String ALIGN = "align";
 
-    /** The archive. */
-    String ARCHIVE = "archive";
+	/** The archive. */
+	String ARCHIVE = "archive";
 
-    /** The alt. */
-    String ALT = "alt";
+	/** The alt. */
+	String ALT = "alt";
 
-    /** The alink. */
-    String ALINK = "aLink";
+	/** The alink. */
+	String ALINK = "aLink";
 
-    /** The acceptcharset. */
-    String ACCEPTCHARSET = "acceptcharset";
+	/** The acceptcharset. */
+	String ACCEPTCHARSET = "acceptcharset";
 
-    /** The action. */
-    String ACTION = "action";
+	/** The action. */
+	String ACTION = "action";
 
-    /** The abbr. */
-    String ABBR = "abbr";
+	/** The abbr. */
+	String ABBR = "abbr";
 
-    /** The axis. */
-    String AXIS = "axis";
+	/** The axis. */
+	String AXIS = "axis";
 
-    /** The accept. */
-    String ACCEPT = "accept";
+	/** The accept. */
+	String ACCEPT = "accept";
 
-    /** The accesskey. */
-    String ACCESSKEY = "accesskey";
+	/** The accesskey. */
+	String ACCESSKEY = "accesskey";
 
-    /** The autoplay. */
-    String AUTOPLAY = "autoplay";
+	/** The autoplay. */
+	String AUTOPLAY = "autoplay";
 
-    /** The autofocus. */
-    String AUTOFOCUS = "autofocus";
+	/** The autofocus. */
+	String AUTOFOCUS = "autofocus";
 
-    /** The autocomplete. */
-    String AUTOCOMPLETE = "autocomplete";
+	/** The autocomplete. */
+	String AUTOCOMPLETE = "autocomplete";
 
-    /** The background. */
-    String BACKGROUND = "background";
+	/** The background. */
+	String BACKGROUND = "background";
 
-    /** The bgcolor. */
-    String BGCOLOR = "bgcolor";
+	/** The bgcolor. */
+	String BGCOLOR = "bgcolor";
 
-    /** The border. */
-    String BORDER = "border";
+	/** The border. */
+	String BORDER = "border";
 
-    /** The challenge. */
-    String CHALLENGE = "challenge";
+	/** The challenge. */
+	String CHALLENGE = "challenge";
 
-    /** The color. */
-    String COLOR = "color";
+	/** The color. */
+	String COLOR = "color";
 
-    /** The code. */
-    String CODE = "code";
+	/** The code. */
+	String CODE = "code";
 
-    /** The codebase. */
-    String CODEBASE = "codebase";
+	/** The codebase. */
+	String CODEBASE = "codebase";
 
-    /** The checked. */
-    String CHECKED = "checked";
+	/** The checked. */
+	String CHECKED = "checked";
 
-    /** The codetype. */
-    String CODETYPE = "codetype";
+	/** The codetype. */
+	String CODETYPE = "codetype";
 
-    /** The compact. */
-    String COMPACT = "compact";
+	/** The compact. */
+	String COMPACT = "compact";
 
-    /** The controls. */
-    String CONTROLS = "controls";
+	/** The controls. */
+	String CONTROLS = "controls";
 
-    /** The contenteditable. */
-    String CONTENTEDITABLE = "contenteditable";
+	/** The contenteditable. */
+	String CONTENTEDITABLE = "contenteditable";
 
-    /** The choff. */
-    String CHOFF = "chOff";
+	/** The choff. */
+	String CHOFF = "chOff";
 
-    /** The ch. */
-    String CH = "ch";
+	/** The ch. */
+	String CH = "ch";
 
-    /** The cellspacing. */
-    String CELLSPACING = "cellspacing";
+	/** The cellspacing. */
+	String CELLSPACING = "cellspacing";
 
-    /** The cellpadding. */
-    String CELLPADDING = "cellPadding";
+	/** The cellpadding. */
+	String CELLPADDING = "cellPadding";
 
-    /** The colspan. */
-    String COLSPAN = "colspan";
+	/** The colspan. */
+	String COLSPAN = "colspan";
 
-    /** The cols. */
-    String COLS = "cols";
+	/** The cols. */
+	String COLS = "cols";
 
-    /** The captionside. */
-    String CAPTIONSIDE = "caption-side";
+	/** The captionside. */
+	String CAPTIONSIDE = "caption-side";
 
-    /** The class. */
-    String CLASS = "class";
+	/** The class. */
+	String CLASS = "class";
 
-    /** The charset. */
-    String CHARSET = "charset";
+	/** The charset. */
+	String CHARSET = "charset";
 
-    /** The clear. */
-    String CLEAR = "clear";
+	/** The clear. */
+	String CLEAR = "clear";
 
-    /** The data. */
-    String DATA = "data";
+	/** The data. */
+	String DATA = "data";
 
-    /** The datetime. */
-    String DATETIME = "datetime";
+	/** The datetime. */
+	String DATETIME = "datetime";
 
-    /** The declare. */
-    String DECLARE = "declare";
+	/** The declare. */
+	String DECLARE = "declare";
 
-    /** The dir. */
-    String DIR = "dir";
+	/** The dir. */
+	String DIR = "dir";
 
-    /** The disable. */
-    String DISABLE = "disabled";
+	/** The disable. */
+	String DISABLE = "disabled";
 
-    /** The draggable. */
-    String DRAGGABLE = "draggable";
+	/** The draggable. */
+	String DRAGGABLE = "draggable";
 
-    /** The defaultvalue. */
-    String DEFAULTVALUE = "defaultValue";
+	/** The defaultvalue. */
+	String DEFAULTVALUE = "defaultValue";
 
-    /** The enctype. */
-    String ENCTYPE = "enctype";
+	/** The enctype. */
+	String ENCTYPE = "enctype";
 
-    /** The event. */
-    String EVENT = "event";
+	/** The event. */
+	String EVENT = "event";
 
-    /** The face. */
-    String FACE = "face";
+	/** The face. */
+	String FACE = "face";
 
-    /** The form. */
-    String FORM = "form";
+	/** The form. */
+	String FORM = "form";
 
-    /** The formaction. */
-    String FORMACTION = "formaction";
+	/** The formaction. */
+	String FORMACTION = "formaction";
 
-    /** The formenctype. */
-    String FORMENCTYPE = "formenctype";
+	/** The formenctype. */
+	String FORMENCTYPE = "formenctype";
 
-    /** The formmethod. */
-    String FORMMETHOD = "formmethod";
+	/** The formmethod. */
+	String FORMMETHOD = "formmethod";
 
-    /** The formnovalidate. */
-    String FORMNOVALIDATE = "formnovalidate";
+	/** The formnovalidate. */
+	String FORMNOVALIDATE = "formnovalidate";
 
-    /** The formtarget. */
-    String FORMTARGET = "formtarget";
+	/** The formtarget. */
+	String FORMTARGET = "formtarget";
 
-    /** The frame. */
-    String FRAME = "frame";
+	/** The frame. */
+	String FRAME = "frame";
 
-    /** The frameborder. */
-    String FRAMEBORDER = "frameBorder";
+	/** The frameborder. */
+	String FRAMEBORDER = "frameBorder";
 
-    /** The height. */
-    String HEIGHT = "height";
+	/** The height. */
+	String HEIGHT = "height";
 
-    /** The hspace. */
-    String HSPACE = "hspace";
+	/** The hspace. */
+	String HSPACE = "hspace";
 
-    /** The href. */
-    String HREF = "href";
+	/** The href. */
+	String HREF = "href";
 
-    /** The hreflang. */
-    String HREFLANG = "hreflang";
+	/** The hreflang. */
+	String HREFLANG = "hreflang";
 
-    /** The htmlfor. */
-    String HTMLFOR = "htmlFor";
+	/** The htmlfor. */
+	String HTMLFOR = "htmlFor";
 
-    /** The headers. */
-    String HEADERS = "headers";
+	/** The headers. */
+	String HEADERS = "headers";
 
-    /** The hidden. */
-    String HIDDEN = "hidden";
+	/** The hidden. */
+	String HIDDEN = "hidden";
 
-    /** The id. */
-    String ID = "id";
+	/** The id. */
+	String ID = "id";
 
-    /** The ismap. */
-    String ISMAP = "isMap";
+	/** The ismap. */
+	String ISMAP = "isMap";
 
-    /** The itemscope. */
-    String ITEMSCOPE = "itemscope";
+	/** The itemscope. */
+	String ITEMSCOPE = "itemscope";
 
-    /** The itemtype. */
-    String ITEMTYPE = "itemtype";
+	/** The itemtype. */
+	String ITEMTYPE = "itemtype";
 
-    /** The itemid. */
-    String ITEMID = "itemid";
+	/** The itemid. */
+	String ITEMID = "itemid";
 
-    /** The itemref. */
-    String ITEMREF = "itemref";
+	/** The itemref. */
+	String ITEMREF = "itemref";
 
-    /** The itemprop. */
-    String ITEMPROP = "itemprop";
+	/** The itemprop. */
+	String ITEMPROP = "itemprop";
 
-    /** The link. */
-    String LINK = "link";
+	/** The link. */
+	String LINK = "link";
 
-    /** The label. */
-    String LABEL = "label";
+	/** The label. */
+	String LABEL = "label";
 
-    /** The longdesc. */
-    String LONGDESC = "longdesc";
+	/** The longdesc. */
+	String LONGDESC = "longdesc";
 
-    /** The lang. */
-    String LANG = "lang";
+	/** The lang. */
+	String LANG = "lang";
 
-    /** The leftmargin. */
-    String LEFTMARGIN = "leftmargin";
+	/** The leftmargin. */
+	String LEFTMARGIN = "leftmargin";
 
-    /** The loop. */
-    String LOOP = "loop";
+	/** The loop. */
+	String LOOP = "loop";
 
-    /** The low. */
-    String LOW = "low";
+	/** The low. */
+	String LOW = "low";
 
-    /** The keytype. */
-    String KEYTYPE = "keytype";
+	/** The keytype. */
+	String KEYTYPE = "keytype";
 
-    /** The max. */
-    String MAX = "max";
+	/** The max. */
+	String MAX = "max";
 
-    /** The media. */
-    String MEDIA = "media";
+	/** The media. */
+	String MEDIA = "media";
 
-    /** The multiple. */
-    String MULTIPLE = "multiple";
+	/** The multiple. */
+	String MULTIPLE = "multiple";
 
-    /** The marginheight. */
-    String MARGINHEIGHT = "marginHeight";
+	/** The marginheight. */
+	String MARGINHEIGHT = "marginHeight";
 
-    /** The marginwidth. */
-    String MARGINWIDTH = "marginWidth";
+	/** The marginwidth. */
+	String MARGINWIDTH = "marginWidth";
 
-    /** The method. */
-    String METHOD = "method";
+	/** The method. */
+	String METHOD = "method";
 
-    /** The maxlength. */
-    String MAXLENGTH = "maxlength";
+	/** The maxlength. */
+	String MAXLENGTH = "maxlength";
 
-    /** The min. */
-    String MIN = "min";
+	/** The min. */
+	String MIN = "min";
 
-    /** The muted. */
-    String MUTED = "muted";
+	/** The muted. */
+	String MUTED = "muted";
 
-    /** The noshade. */
-    String NOSHADE = "noshade";
+	/** The noshade. */
+	String NOSHADE = "noshade";
 
-    /** The nowrap. */
-    String NOWRAP = "nowrap";
+	/** The nowrap. */
+	String NOWRAP = "nowrap";
 
-    /** The novalidate. */
-    String NOVALIDATE = "novalidate";
+	/** The novalidate. */
+	String NOVALIDATE = "novalidate";
 
-    /** The name. */
-    String NAME = "name";
+	/** The name. */
+	String NAME = "name";
 
-    /** The onload. */
-    String ONLOAD = "onload";
+	/** The onload. */
+	String ONLOAD = "onload";
 
-    /** The object. */
-    String OBJECT = "object";
+	/** The object. */
+	String OBJECT = "object";
 
-    /** The open. */
-    String OPEN = "open";
+	/** The open. */
+	String OPEN = "open";
 
-    /** The optinum. */
-    String OPTINUM = "optinum";
+	/** The optinum. */
+	String OPTINUM = "optinum";
 
-    /** The pattern. */
-    String PATTERN = "pattern";
+	/** The pattern. */
+	String PATTERN = "pattern";
 
-    /** The poster. */
-    String POSTER = "poster";
+	/** The poster. */
+	String POSTER = "poster";
 
-    /** The preload. */
-    String PRELOAD = "preload";
+	/** The preload. */
+	String PRELOAD = "preload";
 
-    /** The placeholder. */
-    String PLACEHOLDER = "placeholder";
+	/** The placeholder. */
+	String PLACEHOLDER = "placeholder";
 
-    /** The profile. */
-    String PROFILE = "profile";
+	/** The profile. */
+	String PROFILE = "profile";
 
-    /** The rows. */
-    String ROWS = "rows";
+	/** The rows. */
+	String ROWS = "rows";
 
-    /** The rel. */
-    String REL = "rel";
+	/** The rel. */
+	String REL = "rel";
 
-    /** The reserved. */
-    String RESERVED = "reversed";
+	/** The reserved. */
+	String RESERVED = "reversed";
 
-    /** The rev. */
-    String REV = "rev";
+	/** The rev. */
+	String REV = "rev";
 
-    /** The rules. */
-    String RULES = "rules";
+	/** The rules. */
+	String RULES = "rules";
 
-    /** The rowspan. */
-    String ROWSPAN = "rowspan";
+	/** The rowspan. */
+	String ROWSPAN = "rowspan";
 
-    /** The rightmargin. */
-    String RIGHTMARGIN = "rightmargin";
+	/** The rightmargin. */
+	String RIGHTMARGIN = "rightmargin";
 
-    /** The required. */
-    String REQUIRED = "required";
+	/** The required. */
+	String REQUIRED = "required";
 
-    /** The size. */
-    String SIZE = "size";
+	/** The size. */
+	String SIZE = "size";
 
-    /** The sizes. */
-    String SIZES = "sizes";
+	/** The sizes. */
+	String SIZES = "sizes";
 
-    /** The standby. */
-    String STANDBY = "standby";
+	/** The standby. */
+	String STANDBY = "standby";
 
-    /** The start. */
-    String START = "start";
+	/** The start. */
+	String START = "start";
 
-    /** The step. */
-    String STEP = "step";
+	/** The step. */
+	String STEP = "step";
 
-    /** The scrolling. */
-    String SCROLLING = "scrolling";
+	/** The scrolling. */
+	String SCROLLING = "scrolling";
 
-    /** The src. */
-    String SRC = "src";
+	/** The src. */
+	String SRC = "src";
 
-    /** The selected. */
-    String SELECTED = "selected";
+	/** The selected. */
+	String SELECTED = "selected";
 
-    /** The summary. */
-    String SUMMARY = "summary";
+	/** The summary. */
+	String SUMMARY = "summary";
 
-    /** The scope. */
-    String SCOPE = "scope";
+	/** The scope. */
+	String SCOPE = "scope";
 
-    /** The scoped. */
-    String SCOPED = "scoped";
+	/** The scoped. */
+	String SCOPED = "scoped";
 
-    /** The style. */
-    String STYLE = "style";
+	/** The style. */
+	String STYLE = "style";
 
-    /** The spellcheck. */
-    String SPELLCHECK = "spellcheck";
+	/** The spellcheck. */
+	String SPELLCHECK = "spellcheck";
 
-    /** The tabindex. */
-    String TABINDEX = "tabindex";
+	/** The tabindex. */
+	String TABINDEX = "tabindex";
 
-    /** The target. */
-    String TARGET = "target";
+	/** The target. */
+	String TARGET = "target";
 
-    /** The text. */
-    String TEXT = "text";
+	/** The text. */
+	String TEXT = "text";
 
-    /** The type. */
-    String TYPE = "type";
+	/** The type. */
+	String TYPE = "type";
 
-    /** The title. */
-    String TITLE = "title";
+	/** The title. */
+	String TITLE = "title";
 
-    /** The topmargin. */
-    String TOPMARGIN = "topmargin";
+	/** The topmargin. */
+	String TOPMARGIN = "topmargin";
 
-    /** The textalign. */
-    String TEXTALIGN = "text-align";
+	/** The textalign. */
+	String TEXTALIGN = "text-align";
 
-    /** The usemap. */
-    String USEMAP = "useMap";
+	/** The usemap. */
+	String USEMAP = "useMap";
 
-    /** The version. */
-    String VERSION = "version";
+	/** The version. */
+	String VERSION = "version";
 
-    /** The value. */
-    String VALUE = "value";
+	/** The value. */
+	String VALUE = "value";
 
-    /** The vlink. */
-    String VLINK = "vlink";
+	/** The vlink. */
+	String VLINK = "vlink";
 
-    /** The vspace. */
-    String VSPACE = "vspace";
+	/** The vspace. */
+	String VSPACE = "vspace";
 
-    /** The valign. */
-    String VALIGN = "valign";
+	/** The valign. */
+	String VALIGN = "valign";
 
-    /** The width. */
-    String WIDTH = "width";
+	/** The width. */
+	String WIDTH = "width";
 
-    /** The wrap. */
-    String WRAP = "wrap";
+	/** The wrap. */
+	String WRAP = "wrap";
 }

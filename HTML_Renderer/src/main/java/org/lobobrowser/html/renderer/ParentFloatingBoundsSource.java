@@ -21,84 +21,82 @@ import org.lobobrowser.util.Objects;
  */
 public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 
-    /** The block shift right. */
-    private final int blockShiftRight;
+	/** The block shift right. */
+	private final int blockShiftRight;
 
-    /** The expected block width. */
-    private final int expectedBlockWidth;
+	/** The expected block width. */
+	private final int expectedBlockWidth;
 
-    /** The new x. */
-    private final int newX;
+	/** The new x. */
+	private final int newX;
 
-    /** The new y. */
-    private final int newY;
+	/** The new y. */
+	private final int newY;
 
-    /** The float bounds. */
-    private final FloatingBounds floatBounds;
+	/** The float bounds. */
+	private final FloatingBounds floatBounds;
 
-    /**
-     * Instantiates a new parent floating bounds source.
-     *
-     * @param blockShiftRight
-     *            the block shift right
-     * @param expectedWidth
-     *            the expected width
-     * @param newX
-     *            the new x
-     * @param newY
-     *            the new y
-     * @param floatBounds
-     *            the float bounds
-     */
-    public ParentFloatingBoundsSource(int blockShiftRight, int expectedWidth,
-            int newX, int newY, FloatingBounds floatBounds) {
-        super();
-        this.blockShiftRight = blockShiftRight;
-        this.expectedBlockWidth = expectedWidth;
-        this.newX = newX;
-        this.newY = newY;
-        this.floatBounds = floatBounds;
-    }
+	/**
+	 * Instantiates a new parent floating bounds source.
+	 *
+	 * @param blockShiftRight
+	 *            the block shift right
+	 * @param expectedWidth
+	 *            the expected width
+	 * @param newX
+	 *            the new x
+	 * @param newY
+	 *            the new y
+	 * @param floatBounds
+	 *            the float bounds
+	 */
+	public ParentFloatingBoundsSource(int blockShiftRight, int expectedWidth, int newX, int newY,
+			FloatingBounds floatBounds) {
+		super();
+		this.blockShiftRight = blockShiftRight;
+		this.expectedBlockWidth = expectedWidth;
+		this.newX = newX;
+		this.newY = newY;
+		this.floatBounds = floatBounds;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.renderer.FloatingBoundsSource#getChildBlockFloatingBounds
-     * (int)
-     */
-    @Override
-    public FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth) {
-        int actualRightShift = this.blockShiftRight
-                + (this.expectedBlockWidth - apparentBlockWidth);
-        return new ShiftedFloatingBounds(this.floatBounds, -this.newX,
-                -actualRightShift, -this.newY);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.renderer.FloatingBoundsSource#
+	 * getChildBlockFloatingBounds (int)
+	 */
+	@Override
+	public FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth) {
+		int actualRightShift = this.blockShiftRight + (this.expectedBlockWidth - apparentBlockWidth);
+		return new ShiftedFloatingBounds(this.floatBounds, -this.newX, -actualRightShift, -this.newY);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj) {
-        // Important for layout caching.
-        if (!(obj instanceof ParentFloatingBoundsSource)) {
-            return false;
-        }
-        ParentFloatingBoundsSource other = (ParentFloatingBoundsSource) obj;
-        return (this.blockShiftRight == other.blockShiftRight)
-                && (this.expectedBlockWidth == other.expectedBlockWidth)
-                && (this.newX == other.newX) && (this.newY == other.newY)
-                && Objects.equals(this.floatBounds, other.floatBounds);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// Important for layout caching.
+		if (!(obj instanceof ParentFloatingBoundsSource)) {
+			return false;
+		}
+		ParentFloatingBoundsSource other = (ParentFloatingBoundsSource) obj;
+		return (this.blockShiftRight == other.blockShiftRight) && (this.expectedBlockWidth == other.expectedBlockWidth)
+				&& (this.newX == other.newX) && (this.newY == other.newY)
+				&& Objects.equals(this.floatBounds, other.floatBounds);
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        return this.newX ^ this.newY ^ this.blockShiftRight
-                ^ this.expectedBlockWidth;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return this.newX ^ this.newY ^ this.blockShiftRight ^ this.expectedBlockWidth;
+	}
 }

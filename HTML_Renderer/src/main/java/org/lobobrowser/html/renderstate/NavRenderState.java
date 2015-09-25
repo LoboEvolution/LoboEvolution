@@ -21,24 +21,26 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
  */
 public class NavRenderState extends BlockRenderState {
 
-    /**
-     * Instantiates a new nav render state.
-     *
-     * @param prevRenderState
-     *            the prev render state
-     * @param element
-     *            the element
-     */
-    public NavRenderState(RenderState prevRenderState, HTMLElementImpl element) {
-        super(prevRenderState, element);
-    }
+	/**
+	 * Instantiates a new nav render state.
+	 *
+	 * @param prevRenderState
+	 *            the prev render state
+	 * @param element
+	 *            the element
+	 */
+	public NavRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+		super(prevRenderState, element);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getWhiteSpace()
-     */
-    @Override
-    public int getWhiteSpace() {
-        return 0;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.renderstate.StyleSheetRenderState#getWhiteSpace()
+	 */
+	@Override
+	public int getWhiteSpace() {
+		return 0;
+	}
 }

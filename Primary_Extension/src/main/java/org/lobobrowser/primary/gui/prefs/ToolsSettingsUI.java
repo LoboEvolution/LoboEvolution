@@ -33,77 +33,77 @@ import org.lobobrowser.primary.settings.ToolsSettings;
  */
 public class ToolsSettingsUI extends AbstractSettingsUI {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The settings. */
-    private final ToolsSettings settings = ToolsSettings.getInstance();
+	/** The settings. */
+	private final ToolsSettings settings = ToolsSettings.getInstance();
 
-    /** The search engine list control. */
-    private final ItemListControl<SearchEngine> searchEngineListControl;
+	/** The search engine list control. */
+	private final ItemListControl<SearchEngine> searchEngineListControl;
 
-    /**
-     * Instantiates a new tools settings ui.
-     */
-    public ToolsSettingsUI() {
-        ItemEditorFactory<SearchEngine> factory = new ItemEditorFactory<SearchEngine>() {
-            @Override
-            public AbstractItemEditor<SearchEngine> createItemEditor() {
-                return new SearchEngineEditor();
-            }
-        };
-        this.searchEngineListControl = new ItemListControl<SearchEngine>(
-                factory);
-        this.searchEngineListControl
-        .setEditorCaption("Please enter search engine information below.");
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(this.getSearchEnginePane());
-        this.add(SwingTasks.createVerticalFill());
-        this.loadSettings();
-    }
+	/**
+	 * Instantiates a new tools settings ui.
+	 */
+	public ToolsSettingsUI() {
+		ItemEditorFactory<SearchEngine> factory = new ItemEditorFactory<SearchEngine>() {
+			@Override
+			public AbstractItemEditor<SearchEngine> createItemEditor() {
+				return new SearchEngineEditor();
+			}
+		};
+		this.searchEngineListControl = new ItemListControl<SearchEngine>(factory);
+		this.searchEngineListControl.setEditorCaption("Please enter search engine information below.");
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.add(this.getSearchEnginePane());
+		this.add(SwingTasks.createVerticalFill());
+		this.loadSettings();
+	}
 
-    /**
-     * Gets the search engine pane.
-     *
-     * @return the search engine pane
-     */
-    private Component getSearchEnginePane() {
-        Box innerBox = new Box(BoxLayout.X_AXIS);
-        innerBox.add(new JLabel("Search Engines:"));
-        innerBox.add(this.searchEngineListControl);
-        Box groupBox = SwingTasks.createGroupBox(BoxLayout.Y_AXIS, "Search");
-        groupBox.add(innerBox);
-        return groupBox;
-    }
+	/**
+	 * Gets the search engine pane.
+	 *
+	 * @return the search engine pane
+	 */
+	private Component getSearchEnginePane() {
+		Box innerBox = new Box(BoxLayout.X_AXIS);
+		innerBox.add(new JLabel("Search Engines:"));
+		innerBox.add(this.searchEngineListControl);
+		Box groupBox = SwingTasks.createGroupBox(BoxLayout.Y_AXIS, "Search");
+		groupBox.add(innerBox);
+		return groupBox;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.primary.gui.prefs.AbstractSettingsUI#restoreDefaults()
-     */
-    @Override
-    public void restoreDefaults() {
-        this.settings.restoreDefaults();
-        this.loadSettings();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.primary.gui.prefs.AbstractSettingsUI#restoreDefaults()
+	 */
+	@Override
+	public void restoreDefaults() {
+		this.settings.restoreDefaults();
+		this.loadSettings();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.primary.gui.prefs.AbstractSettingsUI#save()
-     */
-    @Override
-    public void save() {
-        ToolsSettings settings = this.settings;
-        Collection<SearchEngine> items = this.searchEngineListControl
-                .getItems();
-        settings.setSearchEngines(items);
-        settings.save();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.primary.gui.prefs.AbstractSettingsUI#save()
+	 */
+	@Override
+	public void save() {
+		ToolsSettings settings = this.settings;
+		Collection<SearchEngine> items = this.searchEngineListControl.getItems();
+		settings.setSearchEngines(items);
+		settings.save();
+	}
 
-    /**
-     * Load settings.
-     */
-    private void loadSettings() {
-        ToolsSettings settings = this.settings;
-        this.searchEngineListControl.setItems(settings.getSearchEngines());
-    }
+	/**
+	 * Load settings.
+	 */
+	private void loadSettings() {
+		ToolsSettings settings = this.settings;
+		this.searchEngineListControl.setItems(settings.getSearchEngines());
+	}
 }

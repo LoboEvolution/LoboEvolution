@@ -22,27 +22,26 @@ import org.w3c.dom.Node;
  */
 public class ElementIdFilter implements NodeFilter {
 
-    /** The id. */
-    private final String id;
+	/** The id. */
+	private final String id;
 
-    /**
-     * Instantiates a new element id filter.
-     *
-     * @param id
-     *            the id
-     */
-    public ElementIdFilter(String id) {
-        this.id = id;
-    }
+	/**
+	 * Instantiates a new element id filter.
+	 *
+	 * @param id
+	 *            the id
+	 */
+	public ElementIdFilter(String id) {
+		this.id = id;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
-     */
-    @Override
-    public boolean accept(Node node) {
-        return (node instanceof Element)
-                && this.id.equals(((Element) node)
-                        .getAttribute(HtmlAttributeProperties.ID));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
+	@Override
+	public boolean accept(Node node) {
+		return (node instanceof Element) && this.id.equals(((Element) node).getAttribute(HtmlAttributeProperties.ID));
+	}
 }

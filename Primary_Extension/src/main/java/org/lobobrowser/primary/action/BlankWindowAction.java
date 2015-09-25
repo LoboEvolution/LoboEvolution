@@ -26,38 +26,39 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class BlankWindowAction extends ActionPool {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The window. */
-    private NavigatorWindow window;
+	/** The window. */
+	private NavigatorWindow window;
 
-    /**
-     * Instantiates a new blank window action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     */
-    public BlankWindowAction(ComponentSource componentSource,
-            NavigatorWindow window) {
-        super(componentSource, window);
-        this.window = window;
-    }
+	/**
+	 * Instantiates a new blank window action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 */
+	public BlankWindowAction(ComponentSource componentSource, NavigatorWindow window) {
+		super(componentSource, window);
+		this.window = window;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.primary.ext.ActionPool#actionPerformed(java.awt.event
-     * .ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        try {
-            window.getTopFrame().open("about:blank");
-        } catch (MalformedURLException mfu) {
-            throw new IllegalStateException("not expected", mfu);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.primary.ext.ActionPool#actionPerformed(java.awt.event
+	 * .ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		try {
+			window.getTopFrame().open("about:blank");
+		} catch (MalformedURLException mfu) {
+			throw new IllegalStateException("not expected", mfu);
+		}
+	}
 
 }

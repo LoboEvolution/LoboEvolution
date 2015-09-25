@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.lobobrowser.util.NameValuePair;
+import org.lobobrowser.http.NameValuePair;
 import org.lobobrowser.util.io.IORoutines;
 
 /**

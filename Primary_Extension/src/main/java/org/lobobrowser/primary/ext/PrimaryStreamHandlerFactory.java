@@ -22,25 +22,26 @@ import java.net.URLStreamHandlerFactory;
  */
 public class PrimaryStreamHandlerFactory implements URLStreamHandlerFactory {
 
-    /**
-     * Instantiates a new primary stream handler factory.
-     */
-    public PrimaryStreamHandlerFactory() {
-    }
+	/**
+	 * Instantiates a new primary stream handler factory.
+	 */
+	public PrimaryStreamHandlerFactory() {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.net.URLStreamHandlerFactory#createURLStreamHandler(java.lang.String)
-     */
-    @Override
-    public URLStreamHandler createURLStreamHandler(String protocol) {
-        if ("about".equals(protocol)) {
-            return new org.lobobrowser.protocol.about.Handler();
-        } else if ("data".equals(protocol)) {
-            return new org.lobobrowser.protocol.data.Handler();
-        } else {
-            return null;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.net.URLStreamHandlerFactory#createURLStreamHandler(java.lang.String)
+	 */
+	@Override
+	public URLStreamHandler createURLStreamHandler(String protocol) {
+		if ("about".equals(protocol)) {
+			return new org.lobobrowser.protocol.about.Handler();
+		} else if ("data".equals(protocol)) {
+			return new org.lobobrowser.protocol.data.Handler();
+		} else {
+			return null;
+		}
+	}
 }

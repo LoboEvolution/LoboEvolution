@@ -15,31 +15,30 @@
 package org.lobobrowser.html.renderer;
 
 import org.lobobrowser.html.HtmlRendererContext;
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLTableCaptionElementImpl;
+import org.lobobrowser.http.UserAgentContext;
 
 /**
  * The Class RTableCaption.
  */
 public class RTableCaption extends RBlock {
 
-    /**
-     * Instantiates a new r table caption.
-     *
-     * @param element
-     *            the element
-     * @param pcontext
-     *            the pcontext
-     * @param rcontext
-     *            the rcontext
-     * @param frameContext
-     *            the frame context
-     * @param tableAsContainer
-     *            the table as container
-     */
-    public RTableCaption(HTMLTableCaptionElementImpl element,
-            UserAgentContext pcontext, HtmlRendererContext rcontext,
-            FrameContext frameContext, RenderableContainer tableAsContainer) {
-        super(element, 0, pcontext, rcontext, frameContext, tableAsContainer);
-    }
+	/**
+	 * Instantiates a new r table caption.
+	 *
+	 * @param element
+	 *            the element
+	 * @param pcontext
+	 *            the pcontext
+	 * @param rcontext
+	 *            the rcontext
+	 * @param frameContext
+	 *            the frame context
+	 * @param tableAsContainer
+	 *            the table as container
+	 */
+	public RTableCaption(HTMLTableCaptionElementImpl element, UserAgentContext pcontext, HtmlRendererContext rcontext,
+			FrameContext frameContext, RenderableContainer tableAsContainer) {
+		super(element, 0, pcontext, rcontext, frameContext, tableAsContainer);
+	}
 }

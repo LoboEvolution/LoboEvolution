@@ -13,94 +13,96 @@
  */
 package org.lobobrowser.lobo_testing;
 
-import java.awt.event.WindowEvent;
 import java.awt.Component;
+import java.awt.event.WindowEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.*;
-import org.lobobrowser.gui.*;
-import org.lobobrowser.ua.*;
-import org.lobobrowser.w3c.html.HTMLElement;
-import org.lobobrowser.main.PlatformInit;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
+import org.lobobrowser.gui.BrowserPanel;
+import org.lobobrowser.gui.NavigationAdapter;
+import org.lobobrowser.main.PlatformInit;
+import org.lobobrowser.ua.NavigationEvent;
+import org.lobobrowser.ua.NavigationVetoException;
+import org.lobobrowser.w3c.html.HTMLElement;
 
 /**
  * The Class VetoableNavigationDemo.
  */
 public class VetoableNavigationDemo extends JFrame {
-    
-    private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
+
 	public static void main(String[] args) throws Exception {
-        // We'll disable all logging but WARNING.
-        Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
+		// We'll disable all logging but WARNING.
+		Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
 
-        // This step is necessary for extensions (including HTML) to work:
-        PlatformInit.getInstance().init(false, false);
+		// This step is necessary for extensions (including HTML) to work:
+		PlatformInit.getInstance().init(false, false);
 
-        // Create window with a specific size.
-        JFrame frame = new VetoableNavigationDemo();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(600, 400);
-        frame.setVisible(true);
-    }
+		// Create window with a specific size.
+		JFrame frame = new VetoableNavigationDemo();
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		frame.setSize(600, 400);
+		frame.setVisible(true);
+	}
 
-    public VetoableNavigationDemo() throws Exception {
-        this.setTitle("Lobo Vetoable Navigation Demo");
+	public VetoableNavigationDemo() throws Exception {
+		this.setTitle("Lobo Vetoable Navigation Demo");
 
-        // Create a BrowserPanel and set a default home page.
-        final BrowserPanel bp = new BrowserPanel();
-        bp.navigate("http://www.google.com");
+		// Create a BrowserPanel and set a default home page.
+		final BrowserPanel bp = new BrowserPanel();
+		bp.navigate("http://www.google.com");
 
-        // Add a navigation listener.
-        bp.addNavigationListener(new LocalNavigationListener());
+		// Add a navigation listener.
+		bp.addNavigationListener(new LocalNavigationListener());
 
-        // Add top-level components to window.
-        this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-        this.add(bp);
+		// Add top-level components to window.
+		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+		this.add(bp);
 
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                // This needs to be called in order
-                // to inform extensions about the
-                // window closing.
-                bp.windowClosing();
-            }
-        });
-    }
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// This needs to be called in order
+				// to inform extensions about the
+				// window closing.
+				bp.windowClosing();
+			}
+		});
+	}
 
-    /**
-     * The listener interface for receiving localNavigation events.
-     * The class that is interested in processing a localNavigation
-     * event implements this interface, and the object created
-     * with that class is registered with a component using the
-     * component's <code>addLocalNavigationListener<code> method. When
-     * the localNavigation event occurs, that object's appropriate
-     * method is invoked.
-     *
-     * @see LocalNavigationEvent
-     */
-    private class LocalNavigationListener extends NavigationAdapter {
-        @Override
-        public void beforeLocalNavigate(NavigationEvent event)
-                throws NavigationVetoException {
-            Object linkObject = event.getLinkObject();
-            if (linkObject instanceof HTMLElement) {
-                HTMLElement linkElement = (HTMLElement) linkObject;
-                String rel = linkElement.getAttribute("rel");
-                if ("nofollow".equalsIgnoreCase(rel)) {
-                    Component dialogParent = event.getOriginatingFrame()
-                            .getComponent();
-                    int response = JOptionPane
-                            .showConfirmDialog(
-                                    dialogParent,
-                                    "This is a rel='nofollow' link. Are you sure you want to continue?",
-                                    "Please Confirm", JOptionPane.YES_NO_OPTION);
-                    if (response != JOptionPane.YES_OPTION) {
-                        throw new NavigationVetoException();
-                    }
-                }
-            }
-        }
-    }
+	/**
+	 * The listener interface for receiving localNavigation events. The class
+	 * that is interested in processing a localNavigation event implements this
+	 * interface, and the object created with that class is registered with a
+	 * component using the component's <code>addLocalNavigationListener
+	 * <code> method. When the localNavigation event occurs, that object's
+	 * appropriate method is invoked.
+	 *
+	 * @see LocalNavigationEvent
+	 */
+	private class LocalNavigationListener extends NavigationAdapter {
+		@Override
+		public void beforeLocalNavigate(NavigationEvent event) throws NavigationVetoException {
+			Object linkObject = event.getLinkObject();
+			if (linkObject instanceof HTMLElement) {
+				HTMLElement linkElement = (HTMLElement) linkObject;
+				String rel = linkElement.getAttribute("rel");
+				if ("nofollow".equalsIgnoreCase(rel)) {
+					Component dialogParent = event.getOriginatingFrame().getComponent();
+					int response = JOptionPane.showConfirmDialog(dialogParent,
+							"This is a rel='nofollow' link. Are you sure you want to continue?", "Please Confirm",
+							JOptionPane.YES_NO_OPTION);
+					if (response != JOptionPane.YES_OPTION) {
+						throw new NavigationVetoException();
+					}
+				}
+			}
+		}
+	}
 }

@@ -28,38 +28,38 @@ import java.awt.Component;
  */
 public interface HtmlObject {
 
-    /**
-     * Gets the component.
-     *
-     * @return the component
-     */
-    Component getComponent();
+	/**
+	 * Gets the component.
+	 *
+	 * @return the component
+	 */
+	Component getComponent();
 
-    /**
-     * Suspend.
-     */
-    void suspend();
+	/**
+	 * Suspend.
+	 */
+	void suspend();
 
-    /**
-     * Resume.
-     */
-    void resume();
+	/**
+	 * Resume.
+	 */
+	void resume();
 
-    /**
-     * Destroy.
-     */
-    void destroy();
+	/**
+	 * Destroy.
+	 */
+	void destroy();
 
-    /**
-     * Called as the object is layed out, either the first time it's layed out
-     * or whenever the DOM changes. This is where the object should reset its
-     * state based on element children or attributes and possibly change its
-     * preferred size if appropriate.
-     *
-     * @param availableWidth
-     *            the available width
-     * @param availableHeight
-     *            the available height
-     */
-    void reset(int availableWidth, int availableHeight);
+	/**
+	 * Called as the object is layed out, either the first time it's layed out
+	 * or whenever the DOM changes. This is where the object should reset its
+	 * state based on element children or attributes and possibly change its
+	 * preferred size if appropriate.
+	 *
+	 * @param availableWidth
+	 *            the available width
+	 * @param availableHeight
+	 *            the available height
+	 */
+	void reset(int availableWidth, int availableHeight);
 }

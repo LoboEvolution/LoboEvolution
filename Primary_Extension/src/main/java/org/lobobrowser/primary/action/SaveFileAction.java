@@ -34,106 +34,100 @@ import org.lobobrowser.ua.NavigatorWindow;
  * The Class SaveFileAction.
  */
 public class SaveFileAction extends ActionPool {
-	
-	 /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(SaveFileAction.class.getName());
 
-    /** The window. */
-    private NavigatorWindow window;
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(SaveFileAction.class.getName());
 
-    /**
-     * Instantiates a new save file action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     */
-    public SaveFileAction(ComponentSource componentSource,
-            NavigatorWindow window) {
-        super(componentSource, window);
-        this.window = window;
-    }
+	/** The window. */
+	private NavigatorWindow window;
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/**
+	 * Instantiates a new save file action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 */
+	public SaveFileAction(ComponentSource componentSource, NavigatorWindow window) {
+		super(componentSource, window);
+		this.window = window;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        FileNameExtensionFilter filterHtml = new FileNameExtensionFilter(
-                "Hyper Text Markup Language", ".html");
-        FileNameExtensionFilter filterTxt = new FileNameExtensionFilter("Text",
-                ".txt");
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-        fileChooser.setFileFilter(filterHtml);
-        fileChooser.setFileFilter(filterTxt);
-        fileChooser.setAcceptAllFileFilterUsed(true);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		FileNameExtensionFilter filterHtml = new FileNameExtensionFilter("Hyper Text Markup Language", ".html");
+		FileNameExtensionFilter filterTxt = new FileNameExtensionFilter("Text", ".txt");
 
-        int returnValue = fileChooser.showSaveDialog(window.getTopFrame()
-                .getComponent());
+		fileChooser.setFileFilter(filterHtml);
+		fileChooser.setFileFilter(filterTxt);
+		fileChooser.setAcceptAllFileFilterUsed(true);
 
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
+		int returnValue = fileChooser.showSaveDialog(window.getTopFrame().getComponent());
 
-            File selectedFile = getSelectedFileWithExtension(fileChooser);
-            if (selectedFile.exists()) {
-                int response = JOptionPane.showConfirmDialog(null,
-                        "Overwrite existing file?", "Confirm Overwrite",
-                        JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.QUESTION_MESSAGE);
-                if (response == JOptionPane.CANCEL_OPTION) {
-                    return;
-                }
-            }
-            String source = window.getTopFrame().getSourceCode();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            try {
-                baos.write(source.getBytes());
-                OutputStream ops = new FileOutputStream(selectedFile);
-                baos.writeTo(ops);
-                baos.flush();
-            } catch (IOException e1) {
-            	logger.severe(e1.getMessage());
-            } finally {
-                try {
-                    baos.close();
-                } catch (IOException e1) {
-                	logger.severe(e1.getMessage());
-                }
-            }
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
 
-        }
-    }
+			File selectedFile = getSelectedFileWithExtension(fileChooser);
+			if (selectedFile.exists()) {
+				int response = JOptionPane.showConfirmDialog(null, "Overwrite existing file?", "Confirm Overwrite",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+				if (response == JOptionPane.CANCEL_OPTION) {
+					return;
+				}
+			}
+			String source = window.getTopFrame().getSourceCode();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			try {
+				baos.write(source.getBytes());
+				OutputStream ops = new FileOutputStream(selectedFile);
+				baos.writeTo(ops);
+				baos.flush();
+			} catch (IOException e1) {
+				logger.severe(e1.getMessage());
+			} finally {
+				try {
+					baos.close();
+				} catch (IOException e1) {
+					logger.severe(e1.getMessage());
+				}
+			}
 
-    /**
-     * Returns the selected file from a JFileChooser, including the extension
-     * from the file filter.
-     *
-     * @param c
-     *            the c
-     * @return the selected file with extension
-     */
-    private File getSelectedFileWithExtension(JFileChooser c) {
-        File file = c.getSelectedFile();
-        if (c.getFileFilter() instanceof FileNameExtensionFilter) {
-            String[] exts = ((FileNameExtensionFilter) c.getFileFilter())
-                    .getExtensions();
-            String nameLower = file.getName().toLowerCase();
-            for (String ext : exts) { // check if it already has a valid
-                // extension
-                if (nameLower.endsWith('.' + ext.toLowerCase())) {
-                    return file; // if yes, return as-is
-                }
-            }
-            // if not, append the first extension from the selected filter
-            file = new File(file.toString() + exts[0]);
-        }
-        return file;
-    }
+		}
+	}
+
+	/**
+	 * Returns the selected file from a JFileChooser, including the extension
+	 * from the file filter.
+	 *
+	 * @param c
+	 *            the c
+	 * @return the selected file with extension
+	 */
+	private File getSelectedFileWithExtension(JFileChooser c) {
+		File file = c.getSelectedFile();
+		if (c.getFileFilter() instanceof FileNameExtensionFilter) {
+			String[] exts = ((FileNameExtensionFilter) c.getFileFilter()).getExtensions();
+			String nameLower = file.getName().toLowerCase();
+			for (String ext : exts) { // check if it already has a valid
+				// extension
+				if (nameLower.endsWith('.' + ext.toLowerCase())) {
+					return file; // if yes, return as-is
+				}
+			}
+			// if not, append the first extension from the selected filter
+			file = new File(file.toString() + exts[0]);
+		}
+		return file;
+	}
 }

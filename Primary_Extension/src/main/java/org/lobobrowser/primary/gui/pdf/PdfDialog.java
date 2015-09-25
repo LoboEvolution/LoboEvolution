@@ -78,7 +78,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileFilter;
 
-import org.lobobrowser.http.SSLCertificate;
+import org.lobobrowser.util.SSLCertificate;
 
 import com.sun.pdfview.OutlineNode;
 import com.sun.pdfview.PDFDestination;
@@ -265,7 +265,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
 		 * PropertyChangeEvent )
 		 */
@@ -285,7 +285,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
 		 * ActionEvent)
 		 */
@@ -537,7 +537,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Thread#run()
 		 */
 		@Override
@@ -871,7 +871,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Thread#run()
 		 */
 		@Override
@@ -1059,7 +1059,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
@@ -1197,7 +1197,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
 	 */
 	@Override

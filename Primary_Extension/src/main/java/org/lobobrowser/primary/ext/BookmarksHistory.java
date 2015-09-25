@@ -24,61 +24,56 @@ import org.lobobrowser.store.StorageManager;
 /**
  * The Class BookmarksHistory.
  */
-public class BookmarksHistory extends BaseHistory<BookmarkInfo> implements
-java.io.Serializable {
+public class BookmarksHistory extends BaseHistory<BookmarkInfo>implements java.io.Serializable {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 2257845000200000300L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 2257845000200000300L;
 
-    /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(BookmarksHistory.class.getName());
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(BookmarksHistory.class.getName());
 
-    /** The Constant instance. */
-    private static final BookmarksHistory instance;
+	/** The Constant instance. */
+	private static final BookmarksHistory instance;
 
-    static {
-        BookmarksHistory ins = null;
-        try {
-            ins = (BookmarksHistory) StorageManager.getInstance()
-                    .retrieveSettings(BookmarksHistory.class.getSimpleName(),
-                            BookmarksHistory.class.getClassLoader());
-        } catch (Exception err) {
-            logger.log(Level.WARNING, "Unable to retrieve settings.", err);
-        }
-        if (ins == null) {
-            ins = new BookmarksHistory();
-        }
-        instance = ins;
-    }
+	static {
+		BookmarksHistory ins = null;
+		try {
+			ins = (BookmarksHistory) StorageManager.getInstance()
+					.retrieveSettings(BookmarksHistory.class.getSimpleName(), BookmarksHistory.class.getClassLoader());
+		} catch (Exception err) {
+			logger.log(Level.WARNING, "Unable to retrieve settings.", err);
+		}
+		if (ins == null) {
+			ins = new BookmarksHistory();
+		}
+		instance = ins;
+	}
 
-    /**
-     * Instantiates a new bookmarks history.
-     */
-    private BookmarksHistory() {
-    }
+	/**
+	 * Instantiates a new bookmarks history.
+	 */
+	private BookmarksHistory() {
+	}
 
-    /**
-     * Gets the single instance of BookmarksHistory.
-     *
-     * @return single instance of BookmarksHistory
-     */
-    public static BookmarksHistory getInstance() {
-        return instance;
-    }
+	/**
+	 * Gets the single instance of BookmarksHistory.
+	 *
+	 * @return single instance of BookmarksHistory
+	 */
+	public static BookmarksHistory getInstance() {
+		return instance;
+	}
 
-    /**
-     * Save.
-     */
-    public void save() {
-        synchronized (this) {
-            try {
-                StorageManager.getInstance().saveSettings(
-                        this.getClass().getSimpleName(), this);
-            } catch (IOException ioe) {
-                logger.log(Level.WARNING, "Unable to save settings: "
-                        + this.getClass().getSimpleName(), ioe);
-            }
-        }
-    }
+	/**
+	 * Save.
+	 */
+	public void save() {
+		synchronized (this) {
+			try {
+				StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
+			} catch (IOException ioe) {
+				logger.log(Level.WARNING, "Unable to save settings: " + this.getClass().getSimpleName(), ioe);
+			}
+		}
+	}
 }

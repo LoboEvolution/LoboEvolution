@@ -21,13 +21,15 @@ import org.lobobrowser.html.domimpl.HTMLStyleElementImpl;
  */
 public class StyleBuilder extends HTMLElementBuilder {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
-     */
-    @Override
-    protected HTMLElementImpl build(String name) {
-        return new HTMLStyleElementImpl(name);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
+	@Override
+	protected HTMLElementImpl build(String name) {
+		return new HTMLStyleElementImpl(name);
+	}
 
 }

@@ -13,32 +13,30 @@
  */
 package org.lobobrowser.cobra_testing;
 
-import java.util.*;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.util.Locale;
 
 /**
  * The Class FontTest.
  */
 public class FontTest {
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        Font[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment()
-                .getAllFonts();
-        String chinese = Locale.CHINESE.getDisplayLanguage(Locale.CHINESE);
-        String japanese = Locale.JAPANESE.getDisplayLanguage(Locale.JAPANESE);
-        String korean = Locale.KOREAN.getDisplayLanguage(Locale.KOREAN);
-        for (int i = 0; i < fonts.length; i++) {
-            Font font = fonts[i];
-            boolean cn = font.canDisplayUpTo(chinese) == -1;
-            boolean jp = font.canDisplayUpTo(japanese) == -1;
-            boolean kr = font.canDisplayUpTo(korean) == -1;
-            String prefix = cn && jp && kr ? "###" : "---";
-            System.out.println(prefix + "Font[name=" + font.getName()
-                    + ",family=" + font.getFamily() + ",cn=" + cn + ",jp=" + jp
-                    + ",kr=" + kr + "]");
-        }
-    }
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Font[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
+		String chinese = Locale.CHINESE.getDisplayLanguage(Locale.CHINESE);
+		String japanese = Locale.JAPANESE.getDisplayLanguage(Locale.JAPANESE);
+		String korean = Locale.KOREAN.getDisplayLanguage(Locale.KOREAN);
+		for (int i = 0; i < fonts.length; i++) {
+			Font font = fonts[i];
+			boolean cn = font.canDisplayUpTo(chinese) == -1;
+			boolean jp = font.canDisplayUpTo(japanese) == -1;
+			boolean kr = font.canDisplayUpTo(korean) == -1;
+			String prefix = cn && jp && kr ? "###" : "---";
+			System.out.println(prefix + "Font[name=" + font.getName() + ",family=" + font.getFamily() + ",cn=" + cn
+					+ ",jp=" + jp + ",kr=" + kr + "]");
+		}
+	}
 }

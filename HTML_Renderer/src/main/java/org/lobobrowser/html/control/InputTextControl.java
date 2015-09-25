@@ -36,98 +36,102 @@ import org.lobobrowser.html.renderer.HtmlController;
  */
 public class InputTextControl extends BaseInputTextControl {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-    private String strPattern = "";
-    
-    /**
-     * Instantiates a new input text control.
-     *
-     * @param modelNode
-     *            the model node
-     */
-    public InputTextControl(final HTMLBaseInputElement modelNode) {
-        super(modelNode);
-        JTextFieldImpl text = (JTextFieldImpl) this.widget;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+	private String strPattern = "";
 
-        if (modelNode.getTitle() != null) {
-            text.setToolTipText(modelNode.getTitle());
-        }
+	/**
+	 * Instantiates a new input text control.
+	 *
+	 * @param modelNode
+	 *            the model node
+	 */
+	public InputTextControl(final HTMLBaseInputElement modelNode) {
+		super(modelNode);
+		JTextFieldImpl text = (JTextFieldImpl) this.widget;
 
-        text.setVisible(modelNode.getHidden());
-        text.applyComponentOrientation(direction(modelNode.getDir()));
-        text.setEditable(new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
-        text.setEnabled(!modelNode.getDisabled());
-        text.setPlaceholder(modelNode.getPlaceholder());
-        text.setSelectionColor(Color.BLUE);
-        strPattern = modelNode.getAttribute(HtmlAttributeProperties.PATTERN);
-        
-        if (!match(modelNode.getAttribute(HtmlAttributeProperties.VALUE), strPattern)) {
-        	text.setBorder(BorderFactory.createLineBorder(Color.RED));
+		if (modelNode.getTitle() != null) {
+			text.setToolTipText(modelNode.getTitle());
+		}
+
+		text.setVisible(modelNode.getHidden());
+		text.applyComponentOrientation(direction(modelNode.getDir()));
+		text.setEditable(new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
+		text.setEnabled(!modelNode.getDisabled());
+		text.setPlaceholder(modelNode.getPlaceholder());
+		text.setSelectionColor(Color.BLUE);
+		strPattern = modelNode.getAttribute(HtmlAttributeProperties.PATTERN);
+
+		if (!match(modelNode.getAttribute(HtmlAttributeProperties.VALUE), strPattern)) {
+			text.setBorder(BorderFactory.createLineBorder(Color.RED));
 		} else {
 			text.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		}
-        
-        text.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                HtmlController.getInstance().onEnterPressed(modelNode, null);
-            }
-        });
-        text.addKeyListener(addKeyListener());
-    }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.render.BaseInputTextControl#createTextField(java.lang
-     * .String)
-     */
-    @Override
-    protected JTextComponent createTextField() {
-        return new JTextFieldImpl();
-    }
+		text.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				HtmlController.getInstance().onEnterPressed(modelNode, null);
+			}
+		});
+		text.addKeyListener(addKeyListener());
+	}
 
-    /**
-     * Direction.
-     *
-     * @param dir
-     *            the dir
-     * @return the component orientation
-     */
-    private ComponentOrientation direction(String dir) {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.render.BaseInputTextControl#createTextField(java.
+	 * lang .String)
+	 */
+	@Override
+	protected JTextComponent createTextField() {
+		return new JTextFieldImpl();
+	}
 
-        if ("ltr".equalsIgnoreCase(dir)) {
-            return ComponentOrientation.LEFT_TO_RIGHT;
-        } else if ("rtl".equalsIgnoreCase(dir)) {
-            return ComponentOrientation.RIGHT_TO_LEFT;
-        } else {
-            return ComponentOrientation.UNKNOWN;
-        }
-    }
-    
-    private KeyListener addKeyListener() {
+	/**
+	 * Direction.
+	 *
+	 * @param dir
+	 *            the dir
+	 * @return the component orientation
+	 */
+	private ComponentOrientation direction(String dir) {
+
+		if ("ltr".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.LEFT_TO_RIGHT;
+		} else if ("rtl".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.RIGHT_TO_LEFT;
+		} else {
+			return ComponentOrientation.UNKNOWN;
+		}
+	}
+
+	private KeyListener addKeyListener() {
 		KeyListener keyListener = new KeyListener() {
+			@Override
 			public void keyPressed(KeyEvent keyEvent) {
 
 				JTextFieldImpl url = (JTextFieldImpl) keyEvent.getSource();
-				if (!match(url.getText(),strPattern)) {
+				if (!match(url.getText(), strPattern)) {
 					url.setBorder(BorderFactory.createLineBorder(Color.RED));
 				} else {
 					url.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				}
 			}
 
+			@Override
 			public void keyReleased(KeyEvent keyEvent) {
 			}
 
+			@Override
 			public void keyTyped(KeyEvent keyEvent) {
 			}
 
 		};
 		return keyListener;
 	}
-    
+
 	private boolean match(String value, String strPattern) {
 		if (value != null && value.length() > 0 && strPattern != null && strPattern.length() > 0) {
 			Pattern pattern = Pattern.compile(strPattern);

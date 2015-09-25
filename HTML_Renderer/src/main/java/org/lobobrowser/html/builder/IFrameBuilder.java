@@ -21,12 +21,14 @@ import org.lobobrowser.html.domimpl.HTMLIFrameElementImpl;
  */
 public class IFrameBuilder extends HTMLElementBuilder {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
-     */
-    @Override
-    protected HTMLElementImpl build(String name) {
-        return new HTMLIFrameElementImpl(name);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.builder.HTMLElementBuilder#build(java.lang.String)
+	 */
+	@Override
+	protected HTMLElementImpl build(String name) {
+		return new HTMLIFrameElementImpl(name);
+	}
 }

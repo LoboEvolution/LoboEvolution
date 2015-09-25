@@ -20,68 +20,68 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.lobobrowser.html.parser.*;
+import org.lobobrowser.html.parser.DocumentBuilderImpl;
+import org.lobobrowser.html.parser.InputSourceImpl;
 import org.lobobrowser.html.test.SimpleUserAgentContext;
-import org.w3c.dom.*;
-
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * The Class LinkAndMetaTest.
  */
 public class LinkAndMetaTest {
 
-    /** The Constant TEST_URI. */
-    private static final String TEST_URI = "http://sourceforge.net/projects/loboevolution/";
+	/** The Constant TEST_URI. */
+	private static final String TEST_URI = "http://sourceforge.net/projects/loboevolution/";
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) throws Exception {
-        Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
-        SimpleUserAgentContext uacontext = new SimpleUserAgentContext();
-        uacontext.setScriptingEnabled(false);
-        URL url = new URL(TEST_URI);
-        InputStream in = url.openConnection().getInputStream();
-        try {
-            Reader reader = new InputStreamReader(in, "UTF-8");
-            DocumentBuilderImpl builder = new DocumentBuilderImpl(uacontext);
-            InputSourceImpl is = new InputSourceImpl(reader,
-                    url.toExternalForm());
-            Document document = builder.parse(is);
-            // Here is where we use Cobra's HTML parser.
-            NodeList metaList = document.getElementsByTagName("META");
-            int metaLength = metaList.getLength();
-            System.out.println("metaList.length=" + metaLength);
-            for (int i = 0; i < metaLength; i++) {
-                Node metaNode = metaList.item(i);
-                if (metaNode instanceof Element) {
-                    Element metaElement = (Element) metaNode;
-                    String name = metaElement.getAttribute("name");
-                    if ("description".equalsIgnoreCase(name)) {
-                        System.out.println("Description: "
-                                + metaElement.getAttribute("content"));
-                        break;
-                    }
-                }
-            }
-            NodeList linkList = document.getElementsByTagName("LINK");
-            int linkLength = linkList.getLength();
-            System.out.println("linkList.length=" + linkLength);
-            for (int i = 0; i < linkLength; i++) {
-                Node linkNode = linkList.item(i);
-                if (linkNode instanceof Element) {
-                    Element linkElement = (Element) linkNode;
-                    String rel = linkElement.getAttribute("rel");
-                    if ("alternate".equalsIgnoreCase(rel)) {
-                        String type = linkElement.getAttribute("type");
-                        System.out.println("Feed: " + type + ": "
-                                + linkElement.getAttribute("href"));
-                    }
-                }
-            }
-        } finally {
-            in.close();
-        }
-    }
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) throws Exception {
+		Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
+		SimpleUserAgentContext uacontext = new SimpleUserAgentContext();
+		uacontext.setScriptingEnabled(false);
+		URL url = new URL(TEST_URI);
+		InputStream in = url.openConnection().getInputStream();
+		try {
+			Reader reader = new InputStreamReader(in, "UTF-8");
+			DocumentBuilderImpl builder = new DocumentBuilderImpl(uacontext);
+			InputSourceImpl is = new InputSourceImpl(reader, url.toExternalForm());
+			Document document = builder.parse(is);
+			// Here is where we use Cobra's HTML parser.
+			NodeList metaList = document.getElementsByTagName("META");
+			int metaLength = metaList.getLength();
+			System.out.println("metaList.length=" + metaLength);
+			for (int i = 0; i < metaLength; i++) {
+				Node metaNode = metaList.item(i);
+				if (metaNode instanceof Element) {
+					Element metaElement = (Element) metaNode;
+					String name = metaElement.getAttribute("name");
+					if ("description".equalsIgnoreCase(name)) {
+						System.out.println("Description: " + metaElement.getAttribute("content"));
+						break;
+					}
+				}
+			}
+			NodeList linkList = document.getElementsByTagName("LINK");
+			int linkLength = linkList.getLength();
+			System.out.println("linkList.length=" + linkLength);
+			for (int i = 0; i < linkLength; i++) {
+				Node linkNode = linkList.item(i);
+				if (linkNode instanceof Element) {
+					Element linkElement = (Element) linkNode;
+					String rel = linkElement.getAttribute("rel");
+					if ("alternate".equalsIgnoreCase(rel)) {
+						String type = linkElement.getAttribute("type");
+						System.out.println("Feed: " + type + ": " + linkElement.getAttribute("href"));
+					}
+				}
+			}
+		} finally {
+			in.close();
+		}
+	}
 
 }

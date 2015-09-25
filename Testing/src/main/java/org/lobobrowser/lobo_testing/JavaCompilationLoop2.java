@@ -13,44 +13,42 @@
  */
 package org.lobobrowser.lobo_testing;
 
-import org.lobobrowser.gui.*;
-import org.lobobrowser.main.*;
-import org.lobobrowser.store.*;
-
+import org.lobobrowser.gui.BrowserPanel;
+import org.lobobrowser.main.PlatformInit;
+import org.lobobrowser.store.CacheInfo;
+import org.lobobrowser.store.CacheManager;
 
 /**
  * The Class JavaCompilationLoop2.
  */
 public class JavaCompilationLoop2 {
-    public static void main(String[] args) throws Exception {
-        PlatformInit.getInstance().init(false, false);
-        PlatformInit.getInstance().initLogging(false);
-        BrowserPanel panel = TestWindow.newWindow();
-        for (int i = 0; i < 100; i++) {
-            newTest(panel);
-        }
-    }
+	public static void main(String[] args) throws Exception {
+		PlatformInit.getInstance().init(false, false);
+		PlatformInit.getInstance().initLogging(false);
+		BrowserPanel panel = TestWindow.newWindow();
+		for (int i = 0; i < 100; i++) {
+			newTest(panel);
+		}
+	}
 
-    public static void newTest(BrowserPanel panel) throws Exception {
-        panel.navigate(getNewURL());
-        System.gc();
-        Thread.sleep(5000);
-        System.out.println("### Free memory: "
-                + Runtime.getRuntime().freeMemory());
-        CacheInfo cacheInfo = CacheManager.getInstance()
-                .getTransientCacheInfo();
-        System.out.println("### RAM cache entries: " + cacheInfo.numEntries);
-        System.out.println("### RAM cache size: " + cacheInfo.approximateSize);
-    }
+	public static void newTest(BrowserPanel panel) throws Exception {
+		panel.navigate(getNewURL());
+		System.gc();
+		Thread.sleep(5000);
+		System.out.println("### Free memory: " + Runtime.getRuntime().freeMemory());
+		CacheInfo cacheInfo = CacheManager.getInstance().getTransientCacheInfo();
+		System.out.println("### RAM cache entries: " + cacheInfo.numEntries);
+		System.out.println("### RAM cache size: " + cacheInfo.approximateSize);
+	}
 
-    /**
-     * Gets the new url.
-     *
-     * @return the new url
-     * @throws Exception the exception
-     */
-    public static String getNewURL() throws Exception {
-        return "http://lobobrowser.org/ext/jweb/ChartDemo.java?"
-                + System.nanoTime();
-    }
+	/**
+	 * Gets the new url.
+	 *
+	 * @return the new url
+	 * @throws Exception
+	 *             the exception
+	 */
+	public static String getNewURL() throws Exception {
+		return "http://lobobrowser.org/ext/jweb/ChartDemo.java?" + System.nanoTime();
+	}
 }

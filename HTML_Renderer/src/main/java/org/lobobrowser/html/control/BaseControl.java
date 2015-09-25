@@ -33,68 +33,67 @@ import org.lobobrowser.html.renderer.UIControl;
  */
 abstract class BaseControl extends JComponent implements UIControl {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(BaseControl.class
-            .getName());
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(BaseControl.class.getName());
 
-    /** The Constant ZERO_DIMENSION. */
-    protected static final Dimension ZERO_DIMENSION = new Dimension(0, 0);
+	/** The Constant ZERO_DIMENSION. */
+	protected static final Dimension ZERO_DIMENSION = new Dimension(0, 0);
 
-    /** The control element. */
-    protected final HTMLElementImpl controlElement;
+	/** The control element. */
+	protected final HTMLElementImpl controlElement;
 
-    /** The ruicontrol. */
-    protected RUIControl ruicontrol;
+	/** The ruicontrol. */
+	protected RUIControl ruicontrol;
 
-    /**
-     * Instantiates a new base control.
-     *
-     * @param modelNode
-     *            the model node
-     */
-    public BaseControl(HTMLElementImpl modelNode) {
-        this.controlElement = modelNode;
-    }
+	/**
+	 * Instantiates a new base control.
+	 *
+	 * @param modelNode
+	 *            the model node
+	 */
+	public BaseControl(HTMLElementImpl modelNode) {
+		this.controlElement = modelNode;
+	}
 
-    @Override
-    public Component getComponent() {
-        return this;
-    }
+	@Override
+	public Component getComponent() {
+		return this;
+	}
 
-    @Override
-    public void setRUIControl(RUIControl ruicontrol) {
-        this.ruicontrol = ruicontrol;
-    }
+	@Override
+	public void setRUIControl(RUIControl ruicontrol) {
+		this.ruicontrol = ruicontrol;
+	}
 
-    @Override
-    public int getVAlign() {
-        return RElement.VALIGN_BASELINE;
-    }
+	@Override
+	public int getVAlign() {
+		return RElement.VALIGN_BASELINE;
+	}
 
-    /**
-     * Method invoked when image changes size. It's expected to be called
-     * outside the GUI thread.
-     */
-    protected void invalidateAndRepaint() {
-        RUIControl rc = this.ruicontrol;
-        if (rc == null) {
-            logger.severe("invalidateAndPaint(): RUIControl not set.");
-            return;
-        }
-        if (rc.isValid()) {
-            rc.relayout();
-        }
-    }
+	/**
+	 * Method invoked when image changes size. It's expected to be called
+	 * outside the GUI thread.
+	 */
+	protected void invalidateAndRepaint() {
+		RUIControl rc = this.ruicontrol;
+		if (rc == null) {
+			logger.severe("invalidateAndPaint(): RUIControl not set.");
+			return;
+		}
+		if (rc.isValid()) {
+			rc.relayout();
+		}
+	}
 
-    @Override
-    public Color getBackgroundColor() {
-        return this.getBackground();
-    }
+	@Override
+	public Color getBackgroundColor() {
+		return this.getBackground();
+	}
 
-    @Override
-    public void reset(int availWidth, int availHeight) {
-    }
+	@Override
+	public void reset(int availWidth, int availHeight) {
+	}
 }

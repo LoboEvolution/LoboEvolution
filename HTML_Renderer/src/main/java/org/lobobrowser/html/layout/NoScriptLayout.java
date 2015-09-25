@@ -13,30 +13,31 @@
  */
 package org.lobobrowser.html.layout;
 
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.MarkupLayout;
 import org.lobobrowser.html.renderer.RBlockViewport;
+import org.lobobrowser.http.UserAgentContext;
 
 /**
  * The Class NoScriptLayout.
  */
 public class NoScriptLayout implements MarkupLayout {
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.renderer.MarkupLayout#layoutMarkup(org.lobobrowser.html
-     * .renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
-     */
-    @Override
-    public void layoutMarkup(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-        UserAgentContext ucontext = bodyLayout.getUserAgentContext();
-        if (!ucontext.isScriptingEnabled()) {
-            bodyLayout.layoutMarkup(markupElement);
-        } else {
-            // NOP
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.renderer.MarkupLayout#layoutMarkup(org.lobobrowser.
+	 * html .renderer.RBlockViewport,
+	 * org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
+	@Override
+	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		UserAgentContext ucontext = bodyLayout.getUserAgentContext();
+		if (!ucontext.isScriptingEnabled()) {
+			bodyLayout.layoutMarkup(markupElement);
+		} else {
+			// NOP
+		}
+	}
 }

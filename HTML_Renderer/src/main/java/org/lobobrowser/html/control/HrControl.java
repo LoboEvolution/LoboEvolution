@@ -31,73 +31,75 @@ import org.lobobrowser.html.renderstate.RenderState;
  */
 public class HrControl extends BaseControl {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Instantiates a new hr control.
-     *
-     * @param modelNode
-     *            the model node
-     */
-    public HrControl(HTMLElementImpl modelNode) {
-        super(modelNode);
-    }
+	/**
+	 * Instantiates a new hr control.
+	 *
+	 * @param modelNode
+	 *            the model node
+	 */
+	public HrControl(HTMLElementImpl modelNode) {
+		super(modelNode);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-     */
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Dimension size = this.getSize();
-        int offset = 8;
-        int x = offset;
-        int y = (size.height / 2) - 1;
-        int width = size.width - (offset * 2);
-        g.setColor(Color.black);
-        g.drawRect(x, y, width, 0);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		Dimension size = this.getSize();
+		int offset = 8;
+		int x = offset;
+		int y = (size.height / 2) - 1;
+		int width = size.width - (offset * 2);
+		g.setColor(Color.black);
+		g.drawRect(x, y, width, 0);
+	}
 
-    /**
-     * Paint selection.
-     *
-     * @param g
-     *            the g
-     * @param inSelection
-     *            the in selection
-     * @param startPoint
-     *            the start point
-     * @param endPoint
-     *            the end point
-     * @return true, if successful
-     */
-    public boolean paintSelection(Graphics g, boolean inSelection,
-            RenderableSpot startPoint, RenderableSpot endPoint) {
-        return inSelection;
-    }
+	/**
+	 * Paint selection.
+	 *
+	 * @param g
+	 *            the g
+	 * @param inSelection
+	 *            the in selection
+	 * @param startPoint
+	 *            the start point
+	 * @param endPoint
+	 *            the end point
+	 * @return true, if successful
+	 */
+	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
+		return inSelection;
+	}
 
-    /** The avail width. */
-    private int availWidth;
+	/** The avail width. */
+	private int availWidth;
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.control.BaseControl#reset(int, int)
-     */
-    @Override
-    public void reset(int availWidth, int availHeight) {
-        this.availWidth = availWidth;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.control.BaseControl#reset(int, int)
+	 */
+	@Override
+	public void reset(int availWidth, int availHeight) {
+		this.availWidth = availWidth;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.JComponent#getPreferredSize()
-     */
-    @Override
-    public Dimension getPreferredSize() {
-        RenderState rs = this.controlElement.getRenderState();
-        FontMetrics fm = rs.getFontMetrics();
-        return new Dimension(this.availWidth, fm.getHeight());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
+	@Override
+	public Dimension getPreferredSize() {
+		RenderState rs = this.controlElement.getRenderState();
+		FontMetrics fm = rs.getFontMetrics();
+		return new Dimension(this.availWidth, fm.getHeight());
+	}
 }

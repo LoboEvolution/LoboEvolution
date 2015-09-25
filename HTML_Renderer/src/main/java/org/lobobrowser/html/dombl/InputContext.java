@@ -24,235 +24,234 @@ import java.io.File;
  */
 public interface InputContext {
 
-    /**
-     * Gets the checked.
-     *
-     * @return the checked
-     */
-    boolean getChecked();
+	/**
+	 * Gets the checked.
+	 *
+	 * @return the checked
+	 */
+	boolean getChecked();
 
-    /**
-     * Sets the checked.
-     *
-     * @param checked
-     *            the new checked
-     */
-    void setChecked(boolean checked);
+	/**
+	 * Sets the checked.
+	 *
+	 * @param checked
+	 *            the new checked
+	 */
+	void setChecked(boolean checked);
 
-    /**
-     * Gets the disabled.
-     *
-     * @return the disabled
-     */
-    boolean getDisabled();
+	/**
+	 * Gets the disabled.
+	 *
+	 * @return the disabled
+	 */
+	boolean getDisabled();
 
-    /**
-     * Sets the disabled.
-     *
-     * @param disabled
-     *            the new disabled
-     */
-    void setDisabled(boolean disabled);
+	/**
+	 * Sets the disabled.
+	 *
+	 * @param disabled
+	 *            the new disabled
+	 */
+	void setDisabled(boolean disabled);
 
-    /**
-     * Gets the max length.
-     *
-     * @return the max length
-     */
-    int getMaxLength();
+	/**
+	 * Gets the max length.
+	 *
+	 * @return the max length
+	 */
+	int getMaxLength();
 
-    /**
-     * Sets the max length.
-     *
-     * @param maxLength
-     *            the new max length
-     */
-    void setMaxLength(int maxLength);
+	/**
+	 * Sets the max length.
+	 *
+	 * @param maxLength
+	 *            the new max length
+	 */
+	void setMaxLength(int maxLength);
 
-    /**
-     * Gets the name.
-     *
-     * @return the name
-     */
-    String getName();
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
+	String getName();
 
-    /**
-     * Sets the name.
-     *
-     * @param name
-     *            the new name
-     */
-    void setName(String name);
+	/**
+	 * Sets the name.
+	 *
+	 * @param name
+	 *            the new name
+	 */
+	void setName(String name);
 
-    /**
-     * Gets the read only.
-     *
-     * @return the read only
-     */
-    boolean getReadOnly();
+	/**
+	 * Gets the read only.
+	 *
+	 * @return the read only
+	 */
+	boolean getReadOnly();
 
-    /**
-     * Sets the read only.
-     *
-     * @param readOnly
-     *            the new read only
-     */
-    void setReadOnly(boolean readOnly);
+	/**
+	 * Sets the read only.
+	 *
+	 * @param readOnly
+	 *            the new read only
+	 */
+	void setReadOnly(boolean readOnly);
 
-    /**
-     * Gets the control size.
-     *
-     * @return the control size
-     */
-    int getControlSize();
+	/**
+	 * Gets the control size.
+	 *
+	 * @return the control size
+	 */
+	int getControlSize();
 
-    /**
-     * Sets the control size.
-     *
-     * @param size
-     *            the new control size
-     */
-    void setControlSize(int size);
+	/**
+	 * Sets the control size.
+	 *
+	 * @param size
+	 *            the new control size
+	 */
+	void setControlSize(int size);
 
-    /**
-     * Gets the tab index.
-     *
-     * @return the tab index
-     */
-    int getTabIndex();
+	/**
+	 * Gets the tab index.
+	 *
+	 * @return the tab index
+	 */
+	int getTabIndex();
 
-    /**
-     * Sets the tab index.
-     *
-     * @param tabIndex
-     *            the new tab index
-     */
-    void setTabIndex(int tabIndex);
+	/**
+	 * Sets the tab index.
+	 *
+	 * @param tabIndex
+	 *            the new tab index
+	 */
+	void setTabIndex(int tabIndex);
 
-    /**
-     * Gets the value.
-     *
-     * @return the value
-     */
-    String getValue();
+	/**
+	 * Gets the value.
+	 *
+	 * @return the value
+	 */
+	String getValue();
 
-    /**
-     * Gets the values.
-     *
-     * @return the values
-     */
-    String[] getValues();
+	/**
+	 * Gets the values.
+	 *
+	 * @return the values
+	 */
+	String[] getValues();
 
-    /**
-     * Sets the value.
-     *
-     * @param value
-     *            the new value
-     */
-    void setValue(String value);
+	/**
+	 * Sets the value.
+	 *
+	 * @param value
+	 *            the new value
+	 */
+	void setValue(String value);
 
-    /**
-     * Blur.
-     */
-    void blur();
+	/**
+	 * Blur.
+	 */
+	void blur();
 
-    /**
-     * Focus.
-     */
-    void focus();
+	/**
+	 * Focus.
+	 */
+	void focus();
 
-    /**
-     * Select.
-     */
-    void select();
+	/**
+	 * Select.
+	 */
+	void select();
 
-    /**
-     * Click.
-     */
-    void click();
+	/**
+	 * Click.
+	 */
+	void click();
 
-    /**
-     * Gets the rows.
-     *
-     * @return the rows
-     */
-    int getRows();
+	/**
+	 * Gets the rows.
+	 *
+	 * @return the rows
+	 */
+	int getRows();
 
-    /**
-     * Gets the cols.
-     *
-     * @return the cols
-     */
-    int getCols();
+	/**
+	 * Gets the cols.
+	 *
+	 * @return the cols
+	 */
+	int getCols();
 
-    /**
-     * Sets the rows.
-     *
-     * @param rows
-     *            the new rows
-     */
-    void setRows(int rows);
+	/**
+	 * Sets the rows.
+	 *
+	 * @param rows
+	 *            the new rows
+	 */
+	void setRows(int rows);
 
-    /**
-     * Sets the cols.
-     *
-     * @param cols
-     *            the new cols
-     */
-    void setCols(int cols);
+	/**
+	 * Sets the cols.
+	 *
+	 * @param cols
+	 *            the new cols
+	 */
+	void setCols(int cols);
 
-    /**
-     * Gets the selected index.
-     *
-     * @return the selected index
-     */
-    int getSelectedIndex();
+	/**
+	 * Gets the selected index.
+	 *
+	 * @return the selected index
+	 */
+	int getSelectedIndex();
 
-    /**
-     * Sets the selected index.
-     *
-     * @param value
-     *            the new selected index
-     */
-    void setSelectedIndex(int value);
+	/**
+	 * Sets the selected index.
+	 *
+	 * @param value
+	 *            the new selected index
+	 */
+	void setSelectedIndex(int value);
 
-    /**
-     * Gets the visible size.
-     *
-     * @return the visible size
-     */
-    int getVisibleSize();
+	/**
+	 * Gets the visible size.
+	 *
+	 * @return the visible size
+	 */
+	int getVisibleSize();
 
-    /**
-     * Sets the visible size.
-     *
-     * @param value
-     *            the new visible size
-     */
-    void setVisibleSize(int value);
+	/**
+	 * Sets the visible size.
+	 *
+	 * @param value
+	 *            the new visible size
+	 */
+	void setVisibleSize(int value);
 
-    /**
-     * Gets the file value.
-     *
-     * @return the file value
-     */
-    File[] getFileValue();
+	/**
+	 * Gets the file value.
+	 *
+	 * @return the file value
+	 */
+	File[] getFileValue();
 
-    /**
-     * Reset input.
-     */
-    void resetInput();
-    
-    
-    void setMin(int value);
+	/**
+	 * Reset input.
+	 */
+	void resetInput();
 
-    int getMin();
-    
-    void setMax(int value);
+	void setMin(int value);
 
-    int getMax();
-    
-    void setPattern(String value);
+	int getMin();
 
-    String getPattern();
+	void setMax(int value);
+
+	int getMax();
+
+	void setPattern(String value);
+
+	String getPattern();
 }

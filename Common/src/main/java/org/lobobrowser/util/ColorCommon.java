@@ -1040,7 +1040,7 @@ public class ColorCommon {
     private static final int YELLOW3 = 0x8B8B00;
     /** The Constant YELLOWGREEN. */
     private static final int YELLOWGREEN = 0x9ACD32;
-    
+
     public static Map<String, Color> mapColor() {
         Map<String, Color> colorMap = new HashMap<String, Color>();
         colorMap.put("transparent", new Color(0, 0, 0, 0));

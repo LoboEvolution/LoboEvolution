@@ -21,8 +21,8 @@ import org.w3c.dom.Node;
  */
 public class ColumnsFilter implements NodeFilter {
 
-    @Override
-    public final boolean accept(Node node) {
-        return (node instanceof HTMLTableCellElement);
-    }
+	@Override
+	public final boolean accept(Node node) {
+		return (node instanceof HTMLTableCellElement);
+	}
 }

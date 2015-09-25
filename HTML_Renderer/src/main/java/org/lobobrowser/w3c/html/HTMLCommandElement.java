@@ -8,18 +8,22 @@ public interface HTMLCommandElement extends HTMLElement {
 
 	public void setType(String type);
 
+	@Override
 	public String getLabel();
 
 	public void setLabel(String label);
 
+	@Override
 	public String getIcon();
 
 	public void setIcon(String icon);
 
+	@Override
 	public boolean getDisabled();
 
 	public void setDisabled(boolean disabled);
 
+	@Override
 	public boolean getChecked();
 
 	public void setChecked(boolean checked);

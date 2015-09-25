@@ -15,44 +15,46 @@ package org.lobobrowser.cobra_testing;
 
 import java.io.InputStream;
 import java.net.URL;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.parser.*;
-import org.lobobrowser.html.domimpl.*;
+import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.parser.DocumentBuilderImpl;
+import org.lobobrowser.html.parser.InputSourceImpl;
 import org.lobobrowser.html.test.SimpleUserAgentContext;
-import org.w3c.dom.NodeList;
+import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 /**
  * The Class IdTest.
  */
 public class IdTest {
 
-    /** The Constant TEST_URI. */
-    private static final String TEST_URI = "file:///C:/Users/Administrator/Desktop/1.html";
+	/** The Constant TEST_URI. */
+	private static final String TEST_URI = "file:///C:/Users/Administrator/Desktop/1.html";
 
-    public static void main(String[] args) throws Exception {
-        Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
-        UserAgentContext uacontext = new SimpleUserAgentContext();
-        URL url = new URL(TEST_URI);
-        InputStream in = url.openConnection().getInputStream();
-        try {
-            DocumentBuilderImpl builder = new DocumentBuilderImpl(uacontext);
-            InputSourceImpl is = new InputSourceImpl(in, TEST_URI, "UTF-8");
-            Document document = builder.parse(is);
-            HTMLDocumentImpl doc = (HTMLDocumentImpl) document;
-            Element element = doc.getElementById("1div");
-            System.out.println("##Element=" + element);
-            NodeList nodeList = doc.getElementsByTagName("input");
-            int length = nodeList.getLength();
-            for (int i = 0; i < length; i++) {
-                System.out.println("##Input=" + nodeList.item(i));
-            }
-        } finally {
-            in.close();
-        }
-    }
+	public static void main(String[] args) throws Exception {
+		Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
+		UserAgentContext uacontext = new SimpleUserAgentContext();
+		URL url = new URL(TEST_URI);
+		InputStream in = url.openConnection().getInputStream();
+		try {
+			DocumentBuilderImpl builder = new DocumentBuilderImpl(uacontext);
+			InputSourceImpl is = new InputSourceImpl(in, TEST_URI, "UTF-8");
+			Document document = builder.parse(is);
+			HTMLDocumentImpl doc = (HTMLDocumentImpl) document;
+			Element element = doc.getElementById("1div");
+			System.out.println("##Element=" + element);
+			NodeList nodeList = doc.getElementsByTagName("input");
+			int length = nodeList.getLength();
+			for (int i = 0; i < length; i++) {
+				System.out.println("##Input=" + nodeList.item(i));
+			}
+		} finally {
+			in.close();
+		}
+	}
 
 }

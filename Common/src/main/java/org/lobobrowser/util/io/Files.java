@@ -25,7 +25,7 @@ public class Files {
      */
     private Files() {
     }
-
+    
     /**
      * Guesses the right content-type for a local file, and includes a charset
      * if appropriate.
@@ -45,8 +45,8 @@ public class Files {
         }
         if ("html".equalsIgnoreCase(extension)
                 || "htm".equalsIgnoreCase(extension)) {
-            return "text/html; charset=\""
-                    + System.getProperty("file.encoding") + "\"";
+            return "text/html; charset=\"" + System.getProperty("file.encoding")
+                    + "\"";
         } else {
             return "application/octet-stream";
         }

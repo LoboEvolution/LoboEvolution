@@ -44,8 +44,7 @@ public class CanvasControl extends BaseControl {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(CanvasControl.class
-			.getName());
+	private static final Logger logger = Logger.getLogger(CanvasControl.class.getName());
 
 	/** The width. */
 	private int width;
@@ -71,7 +70,7 @@ public class CanvasControl extends BaseControl {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
 	 */
 	@Override
@@ -200,8 +199,7 @@ public class CanvasControl extends BaseControl {
 		} else if ("miter".equals(ci.getLineJoin())) {
 			intlineJoin = BasicStroke.JOIN_MITER;
 		}
-		g.setStroke(new BasicStroke(ci.getLineWidth(), intLineCap, intlineJoin,
-				ci.getMiterLimit()));
+		g.setStroke(new BasicStroke(ci.getLineWidth(), intLineCap, intlineJoin, ci.getMiterLimit()));
 		gradient(g, ci, ci.getStrokeStyle());
 		g.draw(ci.getPath());
 	}
@@ -265,8 +263,7 @@ public class CanvasControl extends BaseControl {
 			u = new URL(ci.getImage().getSrc());
 			Image img = ImageIO.read(u);
 
-			g.drawImage(img, ci.getX(), ci.getY(), ci.getWidth(),
-					ci.getHeight(), this);
+			g.drawImage(img, ci.getX(), ci.getY(), ci.getWidth(), ci.getHeight(), this);
 			g.finalize();
 		} catch (Exception e) {
 			logger.severe(e.getLocalizedMessage());
@@ -287,11 +284,9 @@ public class CanvasControl extends BaseControl {
 			u = new URL(ci.getImage().getSrc());
 			Image img = ImageIO.read(u);
 			img = createImage(new FilteredImageSource(img.getSource(),
-					new CropImageFilter(ci.getSx(), ci.getSy(), ci.getSw(),
-							ci.getSh())));
+					new CropImageFilter(ci.getSx(), ci.getSy(), ci.getSw(), ci.getSh())));
 
-			g.drawImage(img, ci.getDx(), ci.getDy(), ci.getDw(), ci.getDh(),
-					this);
+			g.drawImage(img, ci.getDx(), ci.getDy(), ci.getDw(), ci.getDh(), this);
 
 			g.finalize();
 		} catch (Exception e) {

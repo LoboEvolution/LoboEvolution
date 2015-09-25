@@ -54,6 +54,7 @@ public class InputNumberControl extends BaseInputTextControl {
 
 	private KeyListener addKeyListener() {
 		KeyListener keyListener = new KeyListener() {
+			@Override
 			public void keyPressed(KeyEvent keyEvent) {
 
 				JTextFieldImpl num = (JTextFieldImpl) keyEvent.getSource();
@@ -81,9 +82,11 @@ public class InputNumberControl extends BaseInputTextControl {
 				}
 			}
 
+			@Override
 			public void keyReleased(KeyEvent keyEvent) {
 			}
 
+			@Override
 			public void keyTyped(KeyEvent keyEvent) {
 			}
 
@@ -93,8 +96,9 @@ public class InputNumberControl extends BaseInputTextControl {
 
 	private boolean isNumeric(String keyCode) {
 		try {
-			if (keyCode == null || (keyCode != null && keyCode.length() == 0))
+			if (keyCode == null || (keyCode != null && keyCode.length() == 0)) {
 				return true;
+			}
 			Integer.parseInt(keyCode);
 			return true;
 		} catch (Exception ex) {

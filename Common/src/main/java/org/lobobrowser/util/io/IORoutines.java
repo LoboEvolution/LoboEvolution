@@ -38,8 +38,8 @@ import java.util.List;
  */
 public class IORoutines {
     /** The Constant LINE_BREAK_BYTES. */
-    public static final byte[] LINE_BREAK_BYTES = {(byte) 13, (byte) 10};
-
+    public static final byte[] LINE_BREAK_BYTES = { (byte) 13, (byte) 10 };
+    
     /**
      * Load as text.
      *
@@ -55,7 +55,7 @@ public class IORoutines {
             throws IOException {
         return loadAsText(in, encoding, 4096);
     }
-
+    
     /**
      * Load as text.
      *
@@ -90,7 +90,7 @@ public class IORoutines {
         }
         return new String(buffer, 0, offset);
     }
-
+    
     /**
      * Load.
      *
@@ -112,7 +112,7 @@ public class IORoutines {
             in.close();
         }
     }
-
+    
     /**
      * Load.
      *
@@ -125,7 +125,7 @@ public class IORoutines {
     public static byte[] load(InputStream in) throws IOException {
         return load(in, 4096);
     }
-
+    
     /**
      * Load.
      *
@@ -166,7 +166,7 @@ public class IORoutines {
         }
         return buffer;
     }
-
+    
     /**
      * Load exact.
      *
@@ -189,14 +189,14 @@ public class IORoutines {
             }
             int numRead = in.read(buffer, offset, remain);
             if (numRead == -1) {
-                throw new IOException("Reached EOF, read " + offset
-                        + " expecting " + length);
+                throw new IOException(
+                        "Reached EOF, read " + offset + " expecting " + length);
             }
             offset += numRead;
         }
         return buffer;
     }
-
+    
     /**
      * Equal content.
      *
@@ -222,7 +222,7 @@ public class IORoutines {
             in.close();
         }
     }
-
+    
     /**
      * Save.
      *
@@ -241,7 +241,7 @@ public class IORoutines {
             out.close();
         }
     }
-
+    
     /**
      * Reads line without buffering.
      *
@@ -270,7 +270,7 @@ public class IORoutines {
         }
         return sb == null ? null : sb.toString();
     }
-
+    
     /**
      * Touch.
      *
@@ -280,7 +280,7 @@ public class IORoutines {
     public static void touch(File file) {
         file.setLastModified(System.currentTimeMillis());
     }
-
+    
     /**
      * Save strings.
      *
@@ -308,7 +308,7 @@ public class IORoutines {
             bout.close();
         }
     }
-
+    
     /**
      * Load strings.
      *

@@ -22,46 +22,46 @@ package org.lobobrowser.html.dombl;
  */
 public class SkipVisitorException extends RuntimeException {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Instantiates a new skip visitor exception.
-     */
-    public SkipVisitorException() {
-        super();
-    }
+	/**
+	 * Instantiates a new skip visitor exception.
+	 */
+	public SkipVisitorException() {
+		super();
+	}
 
-    /**
-     * Instantiates a new skip visitor exception.
-     *
-     * @param message
-     *            the message
-     */
-    public SkipVisitorException(String message) {
-        super(message);
-    }
+	/**
+	 * Instantiates a new skip visitor exception.
+	 *
+	 * @param message
+	 *            the message
+	 */
+	public SkipVisitorException(String message) {
+		super(message);
+	}
 
-    /**
-     * Instantiates a new skip visitor exception.
-     *
-     * @param message
-     *            the message
-     * @param cause
-     *            the cause
-     */
-    public SkipVisitorException(String message, Throwable cause) {
-        super(message, cause);
-    }
+	/**
+	 * Instantiates a new skip visitor exception.
+	 *
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public SkipVisitorException(String message, Throwable cause) {
+		super(message, cause);
+	}
 
-    /**
-     * Instantiates a new skip visitor exception.
-     *
-     * @param cause
-     *            the cause
-     */
-    public SkipVisitorException(Throwable cause) {
-        super(cause);
-    }
+	/**
+	 * Instantiates a new skip visitor exception.
+	 *
+	 * @param cause
+	 *            the cause
+	 */
+	public SkipVisitorException(Throwable cause) {
+		super(cause);
+	}
 
 }

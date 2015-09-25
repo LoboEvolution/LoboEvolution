@@ -20,88 +20,89 @@ import org.w3c.dom.NodeList;
 /**
  * The Class HTMLProgressElementImpl.
  */
-public class HTMLProgressElementImpl extends HTMLElementImpl implements
-HTMLProgressElement {
+public class HTMLProgressElementImpl extends HTMLElementImpl implements HTMLProgressElement {
 
-    /**
-     * Instantiates a new HTML progress element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLProgressElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML progress element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLProgressElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLProgressElement#getValue()
-     */
-    @Override
-    public double getValue() {
-        try {
-            return Integer.parseInt(this
-                    .getAttribute(HtmlAttributeProperties.VALUE));
-        } catch (Exception thrown) {
-            this.warn("getSize(): Unable to parse size attribute in " + this
-                    + ".", thrown);
-            return 0;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLProgressElement#getValue()
+	 */
+	@Override
+	public double getValue() {
+		try {
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.VALUE));
+		} catch (Exception thrown) {
+			this.warn("getSize(): Unable to parse size attribute in " + this + ".", thrown);
+			return 0;
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLProgressElement#setValue(double)
-     */
-    @Override
-    public void setValue(double value) {
-        this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(value));
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLProgressElement#setValue(double)
+	 */
+	@Override
+	public void setValue(double value) {
+		this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(value));
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLProgressElement#getMax()
-     */
-    @Override
-    public double getMax() {
-        try {
-            return Integer.parseInt(this
-                    .getAttribute(HtmlAttributeProperties.MAX));
-        } catch (Exception thrown) {
-            this.warn("getSize(): Unable to parse size attribute in " + this
-                    + ".", thrown);
-            return 0;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLProgressElement#getMax()
+	 */
+	@Override
+	public double getMax() {
+		try {
+			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.MAX));
+		} catch (Exception thrown) {
+			this.warn("getSize(): Unable to parse size attribute in " + this + ".", thrown);
+			return 0;
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLProgressElement#setMax(double)
-     */
-    @Override
-    public void setMax(double max) {
-        this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(max));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLProgressElement#setMax(double)
+	 */
+	@Override
+	public void setMax(double max) {
+		this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(max));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLProgressElement#getPosition()
-     */
-    @Override
-    public double getPosition() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLProgressElement#getPosition()
+	 */
+	@Override
+	public double getPosition() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLProgressElement#getLabels()
-     */
-    @Override
-    public NodeList getLabels() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLProgressElement#getLabels()
+	 */
+	@Override
+	public NodeList getLabels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

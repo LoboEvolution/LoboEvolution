@@ -29,113 +29,119 @@ import org.w3c.dom.NodeList;
  */
 class NodeTreeModel implements TreeModel {
 
-    /** The root node. */
-    private final Node rootNode;
+	/** The root node. */
+	private final Node rootNode;
 
-    /**
-     * Instantiates a new node tree model.
-     *
-     * @param node
-     *            the node
-     */
-    public NodeTreeModel(Node node) {
-        super();
-        rootNode = node;
-    }
+	/**
+	 * Instantiates a new node tree model.
+	 *
+	 * @param node
+	 *            the node
+	 */
+	public NodeTreeModel(Node node) {
+		super();
+		rootNode = node;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.tree.TreeModel#getRoot()
-     */
-    @Override
-    public Object getRoot() {
-        return this.rootNode;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.tree.TreeModel#getRoot()
+	 */
+	@Override
+	public Object getRoot() {
+		return this.rootNode;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.tree.TreeModel#getChild(java.lang.Object, int)
-     */
-    @Override
-    public Object getChild(Object parent, int index) {
-        Node parentNode = (Node) parent;
-        return parentNode == null ? null : parentNode.getChildNodes().item(
-                index);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.tree.TreeModel#getChild(java.lang.Object, int)
+	 */
+	@Override
+	public Object getChild(Object parent, int index) {
+		Node parentNode = (Node) parent;
+		return parentNode == null ? null : parentNode.getChildNodes().item(index);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.tree.TreeModel#getChildCount(java.lang.Object)
-     */
-    @Override
-    public int getChildCount(Object parent) {
-        Node parentNode = (Node) parent;
-        return parentNode == null ? 0 : parentNode.getChildNodes().getLength();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.tree.TreeModel#getChildCount(java.lang.Object)
+	 */
+	@Override
+	public int getChildCount(Object parent) {
+		Node parentNode = (Node) parent;
+		return parentNode == null ? 0 : parentNode.getChildNodes().getLength();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.tree.TreeModel#isLeaf(java.lang.Object)
-     */
-    @Override
-    public boolean isLeaf(Object node) {
-        if (node == this.rootNode) {
-            return false;
-        }
-        Node domNode = (Node) node;
-        return domNode == null ? true
-                : domNode.getChildNodes().getLength() == 0;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.tree.TreeModel#isLeaf(java.lang.Object)
+	 */
+	@Override
+	public boolean isLeaf(Object node) {
+		if (node == this.rootNode) {
+			return false;
+		}
+		Node domNode = (Node) node;
+		return domNode == null ? true : domNode.getChildNodes().getLength() == 0;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * javax.swing.tree.TreeModel#valueForPathChanged(javax.swing.tree.TreePath,
-     * java.lang.Object)
-     */
-    @Override
-    public void valueForPathChanged(TreePath path, Object newValue) {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * javax.swing.tree.TreeModel#valueForPathChanged(javax.swing.tree.TreePath,
+	 * java.lang.Object)
+	 */
+	@Override
+	public void valueForPathChanged(TreePath path, Object newValue) {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.tree.TreeModel#getIndexOfChild(java.lang.Object,
-     * java.lang.Object)
-     */
-    @Override
-    public int getIndexOfChild(Object parent, Object child) {
-        Node parentNode = (Node) parent;
-        NodeList nodeList = parentNode == null ? null : parentNode
-                .getChildNodes();
-        if (nodeList == null) {
-            return -1;
-        }
-        int length = nodeList.getLength();
-        for (int i = 0; i < length; i++) {
-            if (nodeList.item(i) == child) {
-                return i;
-            }
-        }
-        return -1;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.tree.TreeModel#getIndexOfChild(java.lang.Object,
+	 * java.lang.Object)
+	 */
+	@Override
+	public int getIndexOfChild(Object parent, Object child) {
+		Node parentNode = (Node) parent;
+		NodeList nodeList = parentNode == null ? null : parentNode.getChildNodes();
+		if (nodeList == null) {
+			return -1;
+		}
+		int length = nodeList.getLength();
+		for (int i = 0; i < length; i++) {
+			if (nodeList.item(i) == child) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.tree.TreeModel#addTreeModelListener(javax.swing.event.
-     * TreeModelListener)
-     */
-    @Override
-    public void addTreeModelListener(TreeModelListener l) {
-        // nop
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.tree.TreeModel#addTreeModelListener(javax.swing.event.
+	 * TreeModelListener)
+	 */
+	@Override
+	public void addTreeModelListener(TreeModelListener l) {
+		// nop
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.tree.TreeModel#removeTreeModelListener(javax.swing.event.
-     * TreeModelListener)
-     */
-    @Override
-    public void removeTreeModelListener(TreeModelListener l) {
-        // nop
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * javax.swing.tree.TreeModel#removeTreeModelListener(javax.swing.event.
+	 * TreeModelListener)
+	 */
+	@Override
+	public void removeTreeModelListener(TreeModelListener l) {
+		// nop
+	}
 }

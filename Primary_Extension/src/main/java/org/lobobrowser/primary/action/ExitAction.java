@@ -25,33 +25,35 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class ExitAction extends ActionPool {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The window. */
-    private NavigatorWindow window;
+	/** The window. */
+	private NavigatorWindow window;
 
-    /**
-     * Instantiates a new exit action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     */
-    public ExitAction(ComponentSource componentSource, NavigatorWindow window) {
-        super(componentSource, window);
-        this.window = window;
-    }
+	/**
+	 * Instantiates a new exit action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 */
+	public ExitAction(ComponentSource componentSource, NavigatorWindow window) {
+		super(componentSource, window);
+		this.window = window;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.primary.ext.ActionPool#actionPerformed(java.awt.event
-     * .ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        window.dispose();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.primary.ext.ActionPool#actionPerformed(java.awt.event
+	 * .ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		window.dispose();
+	}
 
 }

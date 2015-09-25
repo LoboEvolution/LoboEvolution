@@ -116,7 +116,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 	public String getValue() {
 		return this.value;
 	}
-	
+
 	@Override
 	public String[] getValues() {
 		return null;
@@ -180,7 +180,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 	@Override
 	public void setRows(int rows) {
 	}
-	
+
 	@Override
 	public void setMin(int value) {
 		// For numeric
@@ -200,7 +200,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 	public int getMax() {
 		return 0;
 	}
-	
+
 	@Override
 	public void setPattern(String value) {
 

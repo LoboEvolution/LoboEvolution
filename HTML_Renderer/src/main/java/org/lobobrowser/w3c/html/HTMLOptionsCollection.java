@@ -6,10 +6,12 @@ import org.w3c.dom.Node;
 
 public interface HTMLOptionsCollection extends HTMLCollection {
 	// HTMLOptionsCollection
+	@Override
 	public int getLength();
 
 	public void setLength(int length);
 
+	@Override
 	public Node namedItem(String name);
 
 	public void add(HTMLElement element);

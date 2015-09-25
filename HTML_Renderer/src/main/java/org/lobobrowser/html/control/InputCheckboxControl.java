@@ -33,125 +33,129 @@ import org.lobobrowser.util.gui.WrapperLayout;
  */
 public class InputCheckboxControl extends BaseInputControl {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The widget. */
-    private final JCheckBox widget;
+	/** The widget. */
+	private final JCheckBox widget;
 
-    /**
-     * Instantiates a new input checkbox control.
-     *
-     * @param modelNode
-     *            the model node
-     */
-    public InputCheckboxControl(HTMLBaseInputElement modelNode) {
-        super(modelNode);
-        this.setLayout(WrapperLayout.getInstance());
-        JCheckBox checkBox = new JCheckBox();
-        checkBox.setOpaque(false);
-        this.widget = checkBox;
+	/**
+	 * Instantiates a new input checkbox control.
+	 *
+	 * @param modelNode
+	 *            the model node
+	 */
+	public InputCheckboxControl(HTMLBaseInputElement modelNode) {
+		super(modelNode);
+		this.setLayout(WrapperLayout.getInstance());
+		JCheckBox checkBox = new JCheckBox();
+		checkBox.setOpaque(false);
+		this.widget = checkBox;
 
-        if (modelNode.getTitle() != null) {
-            checkBox.setToolTipText(modelNode.getTitle());
-        }
-        checkBox.setVisible(modelNode.getHidden());
-        checkBox.applyComponentOrientation(direction(modelNode.getDir()));
-        checkBox.setSelected(this.controlElement
-                .getAttributeAsBoolean("checked"));
-        checkBox.setEnabled(!modelNode.getDisabled());
-        checkBox.setSelected(modelNode.getChecked());
-        widget.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                HtmlController.getInstance().onPressed(
-                        InputCheckboxControl.this.controlElement, null, 0, 0);
-            }
-        });
+		if (modelNode.getTitle() != null) {
+			checkBox.setToolTipText(modelNode.getTitle());
+		}
+		checkBox.setVisible(modelNode.getHidden());
+		checkBox.applyComponentOrientation(direction(modelNode.getDir()));
+		checkBox.setSelected(this.controlElement.getAttributeAsBoolean("checked"));
+		checkBox.setEnabled(!modelNode.getDisabled());
+		checkBox.setSelected(modelNode.getChecked());
+		widget.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				HtmlController.getInstance().onPressed(InputCheckboxControl.this.controlElement, null, 0, 0);
+			}
+		});
 
-        this.add(checkBox);
-    }
+		this.add(checkBox);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.control.BaseInputControl#reset(int, int)
-     */
-    @Override
-    public void reset(int availWidth, int availHeight) {
-        super.reset(availWidth, availHeight);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.control.BaseInputControl#reset(int, int)
+	 */
+	@Override
+	public void reset(int availWidth, int availHeight) {
+		super.reset(availWidth, availHeight);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.InputContext#click()
-     */
-    @Override
-    public void click() {
-        this.widget.doClick();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.InputContext#click()
+	 */
+	@Override
+	public void click() {
+		this.widget.doClick();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.InputContext#getChecked()
-     */
-    @Override
-    public boolean getChecked() {
-        return this.widget.isSelected();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.InputContext#getChecked()
+	 */
+	@Override
+	public boolean getChecked() {
+		return this.widget.isSelected();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.InputContext#setChecked(boolean)
-     */
-    @Override
-    public void setChecked(boolean checked) {
-        this.widget.setSelected(checked);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.InputContext#setChecked(boolean)
+	 */
+	@Override
+	public void setChecked(boolean checked) {
+		this.widget.setSelected(checked);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.InputContext#setDisabled(boolean)
-     */
-    @Override
-    public void setDisabled(boolean disabled) {
-        super.setDisabled(disabled);
-        this.widget.setEnabled(!disabled);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.InputContext#setDisabled(boolean)
+	 */
+	@Override
+	public void setDisabled(boolean disabled) {
+		super.setDisabled(disabled);
+		this.widget.setEnabled(!disabled);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.InputContext#resetInput()
-     */
-    @Override
-    public void resetInput() {
-        this.widget.setSelected(this.controlElement
-                .getAttributeAsBoolean("checked"));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.InputContext#resetInput()
+	 */
+	@Override
+	public void resetInput() {
+		this.widget.setSelected(this.controlElement.getAttributeAsBoolean("checked"));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.control.BaseInputControl#getValue()
-     */
-    @Override
-    public String getValue() {
-        return this.controlElement.getAttribute(HtmlAttributeProperties.VALUE);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.control.BaseInputControl#getValue()
+	 */
+	@Override
+	public String getValue() {
+		return this.controlElement.getAttribute(HtmlAttributeProperties.VALUE);
+	}
 
-    /**
-     * Direction.
-     *
-     * @param dir
-     *            the dir
-     * @return the component orientation
-     */
-    private ComponentOrientation direction(String dir) {
+	/**
+	 * Direction.
+	 *
+	 * @param dir
+	 *            the dir
+	 * @return the component orientation
+	 */
+	private ComponentOrientation direction(String dir) {
 
-        if ("ltr".equalsIgnoreCase(dir)) {
-            return ComponentOrientation.LEFT_TO_RIGHT;
-        } else if ("rtl".equalsIgnoreCase(dir)) {
-            return ComponentOrientation.RIGHT_TO_LEFT;
-        } else {
-            return ComponentOrientation.UNKNOWN;
-        }
-    }
+		if ("ltr".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.LEFT_TO_RIGHT;
+		} else if ("rtl".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.RIGHT_TO_LEFT;
+		} else {
+			return ComponentOrientation.UNKNOWN;
+		}
+	}
 }

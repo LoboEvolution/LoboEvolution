@@ -24,18 +24,18 @@ import org.mozilla.javascript.Scriptable;
  */
 public interface ScriptableDelegate {
 
-    /**
-     * Sets the scriptable.
-     *
-     * @param scriptable
-     *            the new scriptable
-     */
-    void setScriptable(Scriptable scriptable);
+	/**
+	 * Sets the scriptable.
+	 *
+	 * @param scriptable
+	 *            the new scriptable
+	 */
+	void setScriptable(Scriptable scriptable);
 
-    /**
-     * Gets the scriptable.
-     *
-     * @return the scriptable
-     */
-    Scriptable getScriptable();
+	/**
+	 * Gets the scriptable.
+	 *
+	 * @return the scriptable
+	 */
+	Scriptable getScriptable();
 }

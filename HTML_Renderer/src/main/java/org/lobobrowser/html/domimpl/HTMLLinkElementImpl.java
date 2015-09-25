@@ -20,9 +20,9 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.CSSUtilities;
+import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.w3c.html.DOMSettableTokenList;
 import org.lobobrowser.w3c.html.DOMTokenList;

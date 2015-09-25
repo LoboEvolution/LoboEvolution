@@ -22,22 +22,22 @@ import java.util.EventObject;
  */
 public class ImageEvent extends EventObject {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1101831272894733276L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1101831272894733276L;
 
-    /** The image. */
-    public final Image image;
+	/** The image. */
+	public final Image image;
 
-    /**
-     * Instantiates a new image event.
-     *
-     * @param source
-     *            the source
-     * @param image
-     *            the image
-     */
-    public ImageEvent(Object source, Image image) {
-        super(source);
-        this.image = image;
-    }
+	/**
+	 * Instantiates a new image event.
+	 *
+	 * @param source
+	 *            the source
+	 * @param image
+	 *            the image
+	 */
+	public ImageEvent(Object source, Image image) {
+		super(source);
+		this.image = image;
+	}
 }

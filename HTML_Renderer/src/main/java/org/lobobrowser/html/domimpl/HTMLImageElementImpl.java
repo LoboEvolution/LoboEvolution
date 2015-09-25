@@ -34,359 +34,354 @@ import org.mozilla.javascript.Function;
 /**
  * The Class HTMLImageElementImpl.
  */
-public class HTMLImageElementImpl extends HTMLAbstractUIElement implements
-HTMLImageElement {
-    
-    /** The image. */
-    private Image image = null;
+public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLImageElement {
 
-    /** The image src. */
-    private String imageSrc;
+	/** The image. */
+	private Image image = null;
 
-    /** The onload. */
-    private Function onload;
+	/** The image src. */
+	private String imageSrc;
 
-    /**
-     * Instantiates a new HTML image element impl.
-     */
-    public HTMLImageElementImpl() {
-        super(HtmlProperties.IMG);
-    }
+	/** The onload. */
+	private Function onload;
 
-    /**
-     * Instantiates a new HTML image element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLImageElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML image element impl.
+	 */
+	public HTMLImageElementImpl() {
+		super(HtmlProperties.IMG);
+	}
 
-    @Override
-    public String getName() {
-        return this.getAttribute(HtmlAttributeProperties.NAME);
-    }
+	/**
+	 * Instantiates a new HTML image element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLImageElementImpl(String name) {
+		super(name);
+	}
 
-    @Override
-    public void setName(String name) {
-        this.setAttribute(HtmlAttributeProperties.NAME, name);
-    }
+	@Override
+	public String getName() {
+		return this.getAttribute(HtmlAttributeProperties.NAME);
+	}
 
-    @Override
-    public String getAlign() {
-        return this.getAttribute(HtmlAttributeProperties.ALIGN);
-    }
+	@Override
+	public void setName(String name) {
+		this.setAttribute(HtmlAttributeProperties.NAME, name);
+	}
 
-    @Override
-    public void setAlign(String align) {
-        this.setAttribute(HtmlAttributeProperties.ALIGN, align);
-    }
+	@Override
+	public String getAlign() {
+		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+	}
 
-    @Override
-    public String getAlt() {
-        return this.getAttribute(HtmlAttributeProperties.ALT);
-    }
+	@Override
+	public void setAlign(String align) {
+		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+	}
 
-    @Override
-    public void setAlt(String alt) {
-        this.setAttribute(HtmlAttributeProperties.ALT, alt);
-    }
+	@Override
+	public String getAlt() {
+		return this.getAttribute(HtmlAttributeProperties.ALT);
+	}
 
-    @Override
-    public String getBorder() {
-        return this.getAttribute(HtmlAttributeProperties.BORDER);
-    }
+	@Override
+	public void setAlt(String alt) {
+		this.setAttribute(HtmlAttributeProperties.ALT, alt);
+	}
 
-    @Override
-    public void setBorder(String border) {
-        this.setAttribute(HtmlAttributeProperties.BORDER, border);
-    }
+	@Override
+	public String getBorder() {
+		return this.getAttribute(HtmlAttributeProperties.BORDER);
+	}
 
-    @Override
-    public int getHeight() {
-        String height = this.getAttribute(HtmlAttributeProperties.HEIGHT);
-        UINode r = this.uiNode;
+	@Override
+	public void setBorder(String border) {
+		this.setAttribute(HtmlAttributeProperties.BORDER, border);
+	}
 
-        if ((height != null) && (height.length() > 0)) {
-            return new Integer(height).intValue();
-        }
+	@Override
+	public int getHeight() {
+		String height = this.getAttribute(HtmlAttributeProperties.HEIGHT);
+		UINode r = this.uiNode;
 
-        return r == null ? 0 : r.getBounds().height;
-    }
+		if ((height != null) && (height.length() > 0)) {
+			return new Integer(height).intValue();
+		}
 
-    @Override
-    public void setHeight(int height) {
-        this.setAttribute(HtmlAttributeProperties.HEIGHT,
-                String.valueOf(height));
-    }
+		return r == null ? 0 : r.getBounds().height;
+	}
 
-    @Override
-    public int getHspace() {
-        return this.getAttributeAsInt(HtmlAttributeProperties.HSPACE, 0);
-    }
+	@Override
+	public void setHeight(int height) {
+		this.setAttribute(HtmlAttributeProperties.HEIGHT, String.valueOf(height));
+	}
 
-    @Override
-    public void setHspace(int hspace) {
-        this.setAttribute(HtmlAttributeProperties.HSPACE,
-                String.valueOf(hspace));
-    }
+	@Override
+	public int getHspace() {
+		return this.getAttributeAsInt(HtmlAttributeProperties.HSPACE, 0);
+	}
 
-    @Override
-    public boolean getIsMap() {
-        return this.getAttributeAsBoolean(HtmlAttributeProperties.ISMAP);
-    }
+	@Override
+	public void setHspace(int hspace) {
+		this.setAttribute(HtmlAttributeProperties.HSPACE, String.valueOf(hspace));
+	}
 
-    @Override
-    public void setIsMap(boolean isMap) {
-        this.setAttribute(HtmlAttributeProperties.ISMAP,
-                isMap ? HtmlAttributeProperties.ISMAP : null);
-    }
+	@Override
+	public boolean getIsMap() {
+		return this.getAttributeAsBoolean(HtmlAttributeProperties.ISMAP);
+	}
 
-    @Override
-    public String getLongDesc() {
-        return this.getAttribute(HtmlAttributeProperties.LONGDESC);
-    }
+	@Override
+	public void setIsMap(boolean isMap) {
+		this.setAttribute(HtmlAttributeProperties.ISMAP, isMap ? HtmlAttributeProperties.ISMAP : null);
+	}
 
-    @Override
-    public void setLongDesc(String longDesc) {
-        this.setAttribute(HtmlAttributeProperties.LONGDESC, longDesc);
-    }
+	@Override
+	public String getLongDesc() {
+		return this.getAttribute(HtmlAttributeProperties.LONGDESC);
+	}
 
-    @Override
-    public String getSrc() {
-        return this.getAttribute(HtmlAttributeProperties.SRC);
-    }
+	@Override
+	public void setLongDesc(String longDesc) {
+		this.setAttribute(HtmlAttributeProperties.LONGDESC, longDesc);
+	}
 
-    /**
-     * Sets the image URI and starts to load the image. Note that an
-     * HtmlRendererContext should be available to the HTML document for images
-     * to be loaded.
-     *
-     * @param src
-     *            the new src
-     */
-    @Override
-    public void setSrc(String src) {
-        this.setAttribute(HtmlAttributeProperties.SRC, src);
-    }
+	@Override
+	public String getSrc() {
+		return this.getAttribute(HtmlAttributeProperties.SRC);
+	}
 
-    @Override
-    public String getUseMap() {
-        return this.getAttribute(HtmlAttributeProperties.USEMAP);
-    }
+	/**
+	 * Sets the image URI and starts to load the image. Note that an
+	 * HtmlRendererContext should be available to the HTML document for images
+	 * to be loaded.
+	 *
+	 * @param src
+	 *            the new src
+	 */
+	@Override
+	public void setSrc(String src) {
+		this.setAttribute(HtmlAttributeProperties.SRC, src);
+	}
 
-    @Override
-    public void setUseMap(String useMap) {
-        this.setAttribute(HtmlAttributeProperties.USEMAP, useMap);
-    }
+	@Override
+	public String getUseMap() {
+		return this.getAttribute(HtmlAttributeProperties.USEMAP);
+	}
 
-    @Override
-    public int getVspace() {
-        return this.getAttributeAsInt(HtmlAttributeProperties.VSPACE, 0);
-    }
+	@Override
+	public void setUseMap(String useMap) {
+		this.setAttribute(HtmlAttributeProperties.USEMAP, useMap);
+	}
 
-    @Override
-    public void setVspace(int vspace) {
-        this.setAttribute(HtmlAttributeProperties.VSPACE,
-                String.valueOf(vspace));
-    }
+	@Override
+	public int getVspace() {
+		return this.getAttributeAsInt(HtmlAttributeProperties.VSPACE, 0);
+	}
 
-    @Override
-    public int getWidth() {
+	@Override
+	public void setVspace(int vspace) {
+		this.setAttribute(HtmlAttributeProperties.VSPACE, String.valueOf(vspace));
+	}
 
-        String width = this.getAttribute(HtmlAttributeProperties.WIDTH);
-        UINode r = this.uiNode;
+	@Override
+	public int getWidth() {
 
-        if ((width != null) && (width.length() > 0)) {
-            return new Integer(width).intValue();
-        }
+		String width = this.getAttribute(HtmlAttributeProperties.WIDTH);
+		UINode r = this.uiNode;
 
-        return r == null ? 0 : r.getBounds().width;
-    }
+		if ((width != null) && (width.length() > 0)) {
+			return new Integer(width).intValue();
+		}
 
-    @Override
-    public void setWidth(int width) {
-        this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
-    }
+		return r == null ? 0 : r.getBounds().width;
+	}
 
-    @Override
-    protected void assignAttributeField(String normalName, String value) {
-        super.assignAttributeField(normalName, value);
-        if (HtmlAttributeProperties.SRC.equals(normalName)) {
-            this.loadImage(value);
-        }
-    }
+	@Override
+	public void setWidth(int width) {
+		this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
+	}
 
-    @Override
-    public Function getOnload() {
-        return this.getEventFunction(this.onload, "onload");
-    }
+	@Override
+	protected void assignAttributeField(String normalName, String value) {
+		super.assignAttributeField(normalName, value);
+		if (HtmlAttributeProperties.SRC.equals(normalName)) {
+			this.loadImage(value);
+		}
+	}
 
-    @Override
-    public void setOnload(Function onload) {
-        this.onload = onload;
-    }
-    
-    /**
-     * Load image.
-     *
-     * @param src
-     *            the src
-     */
-    private void loadImage(String src) {
-        HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
-        if (document != null) {
-            synchronized (this.listeners) {
-                this.imageSrc = src;
-                this.image = null;
-            }
-            if (src != null) {
-                document.loadImage(src, new LocalImageListener(src));
-            }
-        }
-    }
+	@Override
+	public Function getOnload() {
+		return this.getEventFunction(this.onload, "onload");
+	}
 
-    /**
-     * Gets the image.
-     *
-     * @return the image
-     */
-    public final Image getImage() {
-        synchronized (this.listeners) {
-            return this.image;
-        }
-    }
+	@Override
+	public void setOnload(Function onload) {
+		this.onload = onload;
+	}
 
-    /** The listeners. */
-    private final ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(
-            1);
+	/**
+	 * Load image.
+	 *
+	 * @param src
+	 *            the src
+	 */
+	private void loadImage(String src) {
+		HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
+		if (document != null) {
+			synchronized (this.listeners) {
+				this.imageSrc = src;
+				this.image = null;
+			}
+			if (src != null) {
+				document.loadImage(src, new LocalImageListener(src));
+			}
+		}
+	}
 
-    /**
-     * Adds a listener of image loading events. The listener gets called right
-     * away if there's already an image.
-     *
-     * @param listener
-     *            the listener
-     */
-    public void addImageListener(ImageListener listener) {
-        ArrayList<ImageListener> l = this.listeners;
-        Image currentImage;
-        synchronized (l) {
-            currentImage = this.image;
-            l.add(listener);
-        }
-        if (currentImage != null) {
-            // Call listener right away if there's already an
-            // image; holding no locks.
-            listener.imageLoaded(new ImageEvent(this, currentImage));
-            // Should not call onload handler here. That's taken
-            // care of otherwise.
-        }
-    }
+	/**
+	 * Gets the image.
+	 *
+	 * @return the image
+	 */
+	public final Image getImage() {
+		synchronized (this.listeners) {
+			return this.image;
+		}
+	}
 
-    /**
-     * Removes the image listener.
-     *
-     * @param listener
-     *            the listener
-     */
-    public void removeImageListener(ImageListener listener) {
-        ArrayList<ImageListener> l = this.listeners;
-        synchronized (l) {
-            l.remove(l);
-        }
-    }
+	/** The listeners. */
+	private final ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
 
-    /**
-     * Dispatch event.
-     *
-     * @param expectedImgSrc
-     *            the expected img src
-     * @param event
-     *            the event
-     */
-    private void dispatchEvent(String expectedImgSrc, ImageEvent event) {
-        ArrayList<ImageListener> l = this.listeners;
-        ImageListener[] listenerArray;
-        synchronized (l) {
-            if (!expectedImgSrc.equals(this.imageSrc)) {
-                return;
-            }
-            this.image = event.image;
-            // Get array of listeners while holding lock.
-            listenerArray = l.toArray(ImageListener.EMPTY_ARRAY);
-        }
-        int llength = listenerArray.length;
-        for (int i = 0; i < llength; i++) {
-            // Inform listener, holding no lock.
-            listenerArray[i].imageLoaded(event);
-        }
-        Function onload = this.getOnload();
-        if (onload != null) {
-            // TODO: onload event object?
-            Executor.executeFunction(HTMLImageElementImpl.this, onload, null);
-        }
-    }
+	/**
+	 * Adds a listener of image loading events. The listener gets called right
+	 * away if there's already an image.
+	 *
+	 * @param listener
+	 *            the listener
+	 */
+	public void addImageListener(ImageListener listener) {
+		ArrayList<ImageListener> l = this.listeners;
+		Image currentImage;
+		synchronized (l) {
+			currentImage = this.image;
+			l.add(listener);
+		}
+		if (currentImage != null) {
+			// Call listener right away if there's already an
+			// image; holding no locks.
+			listener.imageLoaded(new ImageEvent(this, currentImage));
+			// Should not call onload handler here. That's taken
+			// care of otherwise.
+		}
+	}
 
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        return new ImageRenderState(prevRenderState, this);
-    }
+	/**
+	 * Removes the image listener.
+	 *
+	 * @param listener
+	 *            the listener
+	 */
+	public void removeImageListener(ImageListener listener) {
+		ArrayList<ImageListener> l = this.listeners;
+		synchronized (l) {
+			l.remove(l);
+		}
+	}
 
-    @Override
-    public int getNaturalWidth() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+	/**
+	 * Dispatch event.
+	 *
+	 * @param expectedImgSrc
+	 *            the expected img src
+	 * @param event
+	 *            the event
+	 */
+	private void dispatchEvent(String expectedImgSrc, ImageEvent event) {
+		ArrayList<ImageListener> l = this.listeners;
+		ImageListener[] listenerArray;
+		synchronized (l) {
+			if (!expectedImgSrc.equals(this.imageSrc)) {
+				return;
+			}
+			this.image = event.image;
+			// Get array of listeners while holding lock.
+			listenerArray = l.toArray(ImageListener.EMPTY_ARRAY);
+		}
+		int llength = listenerArray.length;
+		for (int i = 0; i < llength; i++) {
+			// Inform listener, holding no lock.
+			listenerArray[i].imageLoaded(event);
+		}
+		Function onload = this.getOnload();
+		if (onload != null) {
+			// TODO: onload event object?
+			Executor.executeFunction(HTMLImageElementImpl.this, onload, null);
+		}
+	}
 
-    @Override
-    public int getNaturalHeight() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new ImageRenderState(prevRenderState, this);
+	}
 
-    @Override
-    public boolean getComplete() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-    
-    /**
-     * The listener interface for receiving localImage events. The class that is
-     * interested in processing a localImage event implements this interface,
-     * and the object created with that class is registered with a component
-     * using the component's <code>addLocalImageListener</code> method. When the
-     * localImage event occurs, that object's appropriate method is invoked.
-     *
-     * @see LocalImageEvent
-     */
-    private class LocalImageListener implements ImageListener {
+	@Override
+	public int getNaturalWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-        /** The expected img src. */
-        private final String expectedImgSrc;
+	@Override
+	public int getNaturalHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-        /**
-         * Instantiates a new local image listener.
-         *
-         * @param imgSrc
-         *            the img src
-         */
-        public LocalImageListener(String imgSrc) {
-            this.expectedImgSrc = imgSrc;
-        }
+	@Override
+	public boolean getComplete() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * org.lobobrowser.html.dombl.ImageListener#imageLoaded(org.lobobrowser.html
-         * .dombl.ImageEvent)
-         */
-        @Override
-        public void imageLoaded(ImageEvent event) {
-            dispatchEvent(this.expectedImgSrc, event);
-        }
-    }
+	/**
+	 * The listener interface for receiving localImage events. The class that is
+	 * interested in processing a localImage event implements this interface,
+	 * and the object created with that class is registered with a component
+	 * using the component's <code>addLocalImageListener</code> method. When the
+	 * localImage event occurs, that object's appropriate method is invoked.
+	 *
+	 * @see LocalImageEvent
+	 */
+	private class LocalImageListener implements ImageListener {
+
+		/** The expected img src. */
+		private final String expectedImgSrc;
+
+		/**
+		 * Instantiates a new local image listener.
+		 *
+		 * @param imgSrc
+		 *            the img src
+		 */
+		public LocalImageListener(String imgSrc) {
+			this.expectedImgSrc = imgSrc;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.lobobrowser.html.dombl.ImageListener#imageLoaded(org.lobobrowser.
+		 * html .dombl.ImageEvent)
+		 */
+		@Override
+		public void imageLoaded(ImageEvent event) {
+			dispatchEvent(this.expectedImgSrc, event);
+		}
+	}
 
 	@Override
 	public String getCrossOrigin() {
@@ -397,6 +392,6 @@ HTMLImageElement {
 	@Override
 	public void setCrossOrigin(String crossOrigin) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

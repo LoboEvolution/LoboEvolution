@@ -19,59 +19,59 @@ package org.lobobrowser.html.js;
  */
 public interface Console {
 
-    /**
-     * Log.
-     *
-     * @param obj
-     *            the obj
-     */
-    void log(Object obj);
+	/**
+	 * Log.
+	 *
+	 * @param obj
+	 *            the obj
+	 */
+	void log(Object obj);
 
-    /**
-     * Debug.
-     *
-     * @param obj
-     *            the obj
-     */
-    void debug(Object obj);
+	/**
+	 * Debug.
+	 *
+	 * @param obj
+	 *            the obj
+	 */
+	void debug(Object obj);
 
-    /**
-     * Info.
-     *
-     * @param obj
-     *            the obj
-     */
-    void info(Object obj);
+	/**
+	 * Info.
+	 *
+	 * @param obj
+	 *            the obj
+	 */
+	void info(Object obj);
 
-    /**
-     * Warn.
-     *
-     * @param obj
-     *            the obj
-     */
-    void warn(Object obj);
+	/**
+	 * Warn.
+	 *
+	 * @param obj
+	 *            the obj
+	 */
+	void warn(Object obj);
 
-    /**
-     * Error.
-     *
-     * @param obj
-     *            the obj
-     */
-    void error(Object obj);
+	/**
+	 * Error.
+	 *
+	 * @param obj
+	 *            the obj
+	 */
+	void error(Object obj);
 
-    /**
-     * Time.
-     *
-     * @param name
-     *            the name
-     */
-    void time(String name);
+	/**
+	 * Time.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	void time(String name);
 
-    /**
-     * Time end.
-     *
-     * @param name
-     *            the name
-     */
-    void timeEnd(String name);
+	/**
+	 * Time end.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	void timeEnd(String name);
 }

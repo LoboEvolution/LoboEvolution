@@ -26,28 +26,29 @@ import org.lobobrowser.primary.gui.SearchDialog;
  */
 public class SearchOkAction extends AbstractAction {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The tags field. */
-    private final FormField tagsField;
+	/** The tags field. */
+	private final FormField tagsField;
 
-    /** The search. */
-    private SearchDialog search;
+	/** The search. */
+	private SearchDialog search;
 
-    public SearchOkAction(FormField tagsField, SearchDialog search) {
-        this.tagsField = tagsField;
-        this.search = search;
-    }
+	public SearchOkAction(FormField tagsField, SearchDialog search) {
+		this.tagsField = tagsField;
+		this.search = search;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        search.setSearchKeywords(tagsField.getValue());
-        search.dispose();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		search.setSearchKeywords(tagsField.getValue());
+		search.dispose();
+	}
 }

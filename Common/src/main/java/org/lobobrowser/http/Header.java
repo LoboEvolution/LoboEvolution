@@ -20,8 +20,6 @@ import java.util.List;
 
 import javax.xml.ws.Response;
 
-import org.lobobrowser.util.NameValuePair;
-
 /**
  * Represents a header field in an http {@link Request} or {@link Response}.
  *
@@ -30,13 +28,13 @@ import org.lobobrowser.util.NameValuePair;
 public class Header extends NameValuePair {
     /** The elements. */
     private List<Element> elements = new ArrayList<Element>();
-
+    
     /**
      * Creates a new Header with a null name and value, and no elements.
      */
     public Header() {
     }
-
+    
     /**
      * Creates a new Header with the given name and value, and no elements.
      *
@@ -48,7 +46,7 @@ public class Header extends NameValuePair {
     public Header(String name, String value) {
         super(name, value);
     }
-
+    
     /**
      * Creates a new Header with the given name, value, and elements. If
      * <code>elements</code> is null, then an empty set of elements will be used
@@ -66,7 +64,7 @@ public class Header extends NameValuePair {
         super(name, value);
         setElements(elements);
     }
-
+    
     /**
      * Returns an array of Elements for this Header. This array returned will
      * never be null. A new array instance will be returned for every invocation
@@ -77,7 +75,7 @@ public class Header extends NameValuePair {
     public Element[] getElements() {
         return elements.toArray(new Element[0]);
     }
-
+    
     /**
      * Sets the elements. If the <code>elements</code> param is null, this will
      * set the empty set of elements. That is, getElements() will return an
@@ -94,7 +92,7 @@ public class Header extends NameValuePair {
         }
         firePropertyChange("elements", old, getElements());
     }
-
+    
     /*
      * (non-Javadoc)
      * @see org.lobobrowser.util.NameValuePair#toString()
@@ -103,14 +101,14 @@ public class Header extends NameValuePair {
     public String toString() {
         return getName() + ": " + getValue();
     }
-
+    
     /**
      * A representation of an Element within a Header.
      */
     public static final class Element {
         /** The params. */
         private Parameter[] params = new Parameter[0];
-
+        
         /**
          * Create a new instance of Element with the given params.
          *
@@ -125,7 +123,7 @@ public class Header extends NameValuePair {
                 System.arraycopy(params, 0, this.params, 0, this.params.length);
             }
         }
-
+        
         /**
          * Gets the parameters. This array will never be null.
          *

@@ -26,67 +26,74 @@ import org.w3c.dom.Node;
  */
 public class DOMCommentImpl extends DOMCharacterDataImpl implements Comment {
 
-    /**
-     * Instantiates a new DOM comment impl.
-     *
-     * @param text
-     *            the text
-     */
-    public DOMCommentImpl(String text) {
-        super(text);
-    }
+	/**
+	 * Instantiates a new DOM comment impl.
+	 *
+	 * @param text
+	 *            the text
+	 */
+	public DOMCommentImpl(String text) {
+		super(text);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getLocalName()
-     */
-    @Override
-    public String getLocalName() {
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getLocalName()
+	 */
+	@Override
+	public String getLocalName() {
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeName()
-     */
-    @Override
-    public String getNodeName() {
-        return "#comment";
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeName()
+	 */
+	@Override
+	public String getNodeName() {
+		return "#comment";
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeValue()
-     */
-    @Override
-    public String getNodeValue() throws DOMException {
-        return this.getTextContent();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeValue()
+	 */
+	@Override
+	public String getNodeValue() throws DOMException {
+		return this.getTextContent();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setNodeValue(java.lang.String)
-     */
-    @Override
-    public void setNodeValue(String nodeValue) throws DOMException {
-        this.setTextContent(nodeValue);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.domimpl.DOMNodeImpl#setNodeValue(java.lang.String)
+	 */
+	@Override
+	public void setNodeValue(String nodeValue) throws DOMException {
+		this.setTextContent(nodeValue);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeType()
-     */
-    @Override
-    public short getNodeType() {
-        return Node.COMMENT_NODE;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeType()
+	 */
+	@Override
+	public short getNodeType() {
+		return Node.COMMENT_NODE;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#createSimilarNode()
-     */
-    @Override
-    protected Node createSimilarNode() {
-        return new DOMCommentImpl(this.text);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#createSimilarNode()
+	 */
+	@Override
+	protected Node createSimilarNode() {
+		return new DOMCommentImpl(this.text);
+	}
 }

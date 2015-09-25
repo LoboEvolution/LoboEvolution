@@ -22,14 +22,15 @@ import org.lobobrowser.util.EventDispatch2;
  * The Class SelectionDispatch.
  */
 public class SelectionDispatch extends EventDispatch2 {
-    /*
-     * (non-Javadoc)
-     * @see org.xamjwg.util.EventDispatch2#dispatchEvent(java.util.EventListener,
-     * java.util.EventObject)
-     */
-    @Override
-    protected void dispatchEvent(EventListener listener, EventObject event) {
-        ((SelectionChangeListener) listener)
-        .selectionChanged((SelectionChangeEvent) event);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.xamjwg.util.EventDispatch2#dispatchEvent(java.util.EventListener,
+	 * java.util.EventObject)
+	 */
+	@Override
+	protected void dispatchEvent(EventListener listener, EventObject event) {
+		((SelectionChangeListener) listener).selectionChanged((SelectionChangeEvent) event);
+	}
 }

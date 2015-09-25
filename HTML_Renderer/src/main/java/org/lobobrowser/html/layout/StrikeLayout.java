@@ -18,10 +18,10 @@ package org.lobobrowser.html.layout;
  */
 public class StrikeLayout extends CommonLayout {
 
-    /**
-     * Instantiates a new strike layout.
-     */
-    public StrikeLayout() {
-        super(DISPLAY_INLINE);
-    }
+	/**
+	 * Instantiates a new strike layout.
+	 */
+	public StrikeLayout() {
+		super(DISPLAY_INLINE);
+	}
 }

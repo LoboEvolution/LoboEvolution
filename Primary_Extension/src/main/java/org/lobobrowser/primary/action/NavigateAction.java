@@ -26,56 +26,56 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class NavigateAction extends ActionPool {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The component source. */
-    private ComponentSource componentSource;
+	/** The component source. */
+	private ComponentSource componentSource;
 
-    /** The url. */
-    private URL url;
+	/** The url. */
+	private URL url;
 
-    /**
-     * Instantiates a new navigate action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     */
-    public NavigateAction(ComponentSource componentSource,
-            NavigatorWindow window) {
-        super(componentSource, window);
-        this.componentSource = componentSource;
-    }
+	/**
+	 * Instantiates a new navigate action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 */
+	public NavigateAction(ComponentSource componentSource, NavigatorWindow window) {
+		super(componentSource, window);
+		this.componentSource = componentSource;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        componentSource.navigate(this.url);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		componentSource.navigate(this.url);
+	}
 
-    /**
-     * Gets the url.
-     *
-     * @return the url
-     */
-    public URL getUrl() {
-        return url;
-    }
+	/**
+	 * Gets the url.
+	 *
+	 * @return the url
+	 */
+	public URL getUrl() {
+		return url;
+	}
 
-    /**
-     * Sets the url.
-     *
-     * @param url
-     *            the new url
-     */
-    public void setUrl(URL url) {
-        this.url = url;
-    }
+	/**
+	 * Sets the url.
+	 *
+	 * @param url
+	 *            the new url
+	 */
+	public void setUrl(URL url) {
+		this.url = url;
+	}
 
 }

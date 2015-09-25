@@ -34,6 +34,8 @@ import java.util.StringTokenizer;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
+import org.lobobrowser.http.NameValuePair;
+
 /**
  * The Class Urls.
  */
@@ -43,18 +45,19 @@ public class Urls {
     /** The Constant PATTERN_RFC1123. */
     public static final DateFormat PATTERN_RFC1123 = new SimpleDateFormat(
             "EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
+            
     static {
         DateFormat df = PATTERN_RFC1123;
         df.setTimeZone(TimeZone.getTimeZone("GMT"));
     }
-
+    
     /**
      * Instantiates a new urls.
      */
     private Urls() {
         super();
     }
-
+    
     /**
      * Whether the URL refers to a resource in the local file system.
      *
@@ -81,7 +84,7 @@ public class Urls {
             return false;
         }
     }
-
+    
     /**
      * Whether the URL is a file in the local file system.
      *
@@ -93,7 +96,7 @@ public class Urls {
         String scheme = url.getProtocol();
         return "file".equalsIgnoreCase(scheme) && !hasHost(url);
     }
-
+    
     /**
      * Checks for host.
      *
@@ -105,7 +108,7 @@ public class Urls {
         String host = url.getHost();
         return (host != null) && !"".equals(host);
     }
-
+    
     /**
      * Creates an absolute URL in a manner equivalent to major browsers.
      *
@@ -116,21 +119,20 @@ public class Urls {
      * @return the url
      * @throws MalformedURLException
      *             the malformed url exception
-     * @throws UnsupportedEncodingException 
+     * @throws UnsupportedEncodingException
      */
     public static URL createURL(URL baseUrl, String relativeUrl)
             throws MalformedURLException, UnsupportedEncodingException {
-        
         if (relativeUrl.contains("base64")) {
-            relativeUrl = new String(Base64.getEncoder().encode(
-                    relativeUrl.getBytes(StandardCharsets.UTF_8)));
+            relativeUrl = new String(Base64.getEncoder()
+                    .encode(relativeUrl.getBytes(StandardCharsets.UTF_8)));
         }
         if (relativeUrl.contains("javascript:void")) {
             return null;
         }
         return new URL(baseUrl, relativeUrl);
     }
-
+    
     /**
      * Returns the time when the document should be considered expired. The time
      * will be zero if the document always needs to be revalidated. It will be
@@ -159,8 +161,9 @@ public class Urls {
                             seconds = Integer.parseInt(value);
                             return new Long(baseTime + (seconds * 1000));
                         } catch (NumberFormatException nfe) {
-                            logger.warning("getExpiration(): Bad Cache-Control max-age value: "
-                                    + value);
+                            logger.warning(
+                                    "getExpiration(): Bad Cache-Control max-age value: "
+                                            + value);
                             // ignore
                         }
                     }
@@ -187,7 +190,7 @@ public class Urls {
         }
         return null;
     }
-
+    
     /**
      * Gets the headers.
      *
@@ -211,7 +214,7 @@ public class Urls {
         }
         return headers;
     }
-
+    
     /**
      * Guess url.
      *
@@ -229,10 +232,10 @@ public class Urls {
         try {
             if (baseURL != null) {
                 int colonIdx = spec.indexOf(':');
-                String newProtocol = colonIdx == -1 ? null : spec.substring(0,
-                        colonIdx);
-                if ((newProtocol != null)
-                        && !newProtocol.equalsIgnoreCase(baseURL.getProtocol())) {
+                String newProtocol = colonIdx == -1 ? null
+                        : spec.substring(0, colonIdx);
+                if ((newProtocol != null) && !newProtocol
+                        .equalsIgnoreCase(baseURL.getProtocol())) {
                     baseURL = null;
                 }
             }
@@ -280,7 +283,7 @@ public class Urls {
         }
         return finalURL;
     }
-
+    
     /**
      * Guess url.
      *
@@ -293,7 +296,7 @@ public class Urls {
     public static URL guessURL(String spec) throws MalformedURLException {
         return guessURL(null, spec);
     }
-
+    
     /**
      * Gets the charset.
      *
@@ -323,7 +326,7 @@ public class Urls {
         }
         return getDefaultCharset(connection);
     }
-
+    
     /**
      * Gets the default charset.
      *
@@ -340,7 +343,7 @@ public class Urls {
             return "UTF-8";
         }
     }
-
+    
     /**
      * Gets the no ref form.
      *
@@ -353,13 +356,13 @@ public class Urls {
         int port = url.getPort();
         String portText = port == -1 ? "" : ":" + port;
         String userInfo = url.getUserInfo();
-        String userInfoText = (userInfo == null) || (userInfo.length() == 0) ? ""
-                : userInfo + "@";
-        String hostPort = (host == null) || (host.length() == 0) ? "" : "//"
-                + userInfoText + host + portText;
+        String userInfoText = (userInfo == null) || (userInfo.length() == 0)
+                ? "" : userInfo + "@";
+        String hostPort = (host == null) || (host.length() == 0) ? ""
+                : "//" + userInfoText + host + portText;
         return url.getProtocol() + ":" + hostPort + url.getFile();
     }
-
+    
     /**
      * Comparison that does not consider Ref.
      *
@@ -376,7 +379,7 @@ public class Urls {
                 && Objects.equals(url1.getFile(), url2.getFile())
                 && Objects.equals(url1.getUserInfo(), url2.getUserInfo());
     }
-
+    
     /**
      * Converts the given URL into a valid URL by encoding illegal characters.
      * Right now it is implemented like in IE7: only spaces are replaced with
@@ -390,7 +393,7 @@ public class Urls {
     public static String encodeIllegalCharacters(String url) {
         return url.replace(" ", "%20");
     }
-
+    
     /**
      * Converts the given URL into a valid URL by removing control characters
      * <code>(ASCII code &lt; 32)</code>.

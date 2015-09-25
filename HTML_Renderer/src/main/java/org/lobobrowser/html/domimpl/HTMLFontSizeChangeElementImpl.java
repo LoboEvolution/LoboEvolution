@@ -25,50 +25,50 @@ import org.lobobrowser.html.style.HtmlValues;
  */
 public class HTMLFontSizeChangeElementImpl extends HTMLAbstractUIElement {
 
-    /** The font change. */
-    private final int fontChange;
+	/** The font change. */
+	private final int fontChange;
 
-    /**
-     * Instantiates a new HTML font size change element impl.
-     *
-     * @param name
-     *            the name
-     * @param fontChange
-     *            the font change
-     */
-    public HTMLFontSizeChangeElementImpl(String name, int fontChange) {
-        super(name);
-        this.fontChange = fontChange;
-    }
+	/**
+	 * Instantiates a new HTML font size change element impl.
+	 *
+	 * @param name
+	 *            the name
+	 * @param fontChange
+	 *            the font change
+	 */
+	public HTMLFontSizeChangeElementImpl(String name, int fontChange) {
+		super(name);
+		this.fontChange = fontChange;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
-     * .html.renderstate.RenderState)
-     */
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        return super.createRenderState(prevRenderState);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
+	 * lobobrowser .html.renderstate.RenderState)
+	 */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return super.createRenderState(prevRenderState);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createDefaultStyleSheet()
-     */
-    @Override
-    protected AbstractCSS2Properties createDefaultStyleSheet() {
-        ModelNode parentModelNode = this.getParentModelNode();
-        RenderState parentRS = parentModelNode == null ? null : parentModelNode
-                .getRenderState();
-        String fontSize = null;
-        int prevFontSize = parentRS != null ? parentRS.getFont().getSize()
-                : HtmlValues.DEFAULT_FONT_SIZE_INT;
-        int newFontSize = prevFontSize + (this.fontChange * 2);
-        fontSize = newFontSize + "px";
-        ComputedCSS2Properties css = new ComputedCSS2Properties(this);
-        css.internalSetLC("font-size", fontSize);
-        return css;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.domimpl.HTMLElementImpl#createDefaultStyleSheet()
+	 */
+	@Override
+	protected AbstractCSS2Properties createDefaultStyleSheet() {
+		ModelNode parentModelNode = this.getParentModelNode();
+		RenderState parentRS = parentModelNode == null ? null : parentModelNode.getRenderState();
+		String fontSize = null;
+		int prevFontSize = parentRS != null ? parentRS.getFont().getSize() : HtmlValues.DEFAULT_FONT_SIZE_INT;
+		int newFontSize = prevFontSize + (this.fontChange * 2);
+		fontSize = newFontSize + "px";
+		ComputedCSS2Properties css = new ComputedCSS2Properties(this);
+		css.internalSetLC("font-size", fontSize);
+		return css;
+	}
 
 }

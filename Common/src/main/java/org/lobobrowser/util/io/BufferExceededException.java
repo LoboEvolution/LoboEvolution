@@ -20,14 +20,14 @@ package org.lobobrowser.util.io;
 public class BufferExceededException extends Exception {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -3105309904365634760L;
-
+    
     /**
      * Instantiates a new buffer exceeded exception.
      */
     public BufferExceededException() {
         super();
     }
-
+    
     /**
      * Instantiates a new buffer exceeded exception.
      *
@@ -39,7 +39,7 @@ public class BufferExceededException extends Exception {
     public BufferExceededException(String message, Throwable cause) {
         super(message, cause);
     }
-
+    
     /**
      * Instantiates a new buffer exceeded exception.
      *
@@ -49,7 +49,7 @@ public class BufferExceededException extends Exception {
     public BufferExceededException(String message) {
         super(message);
     }
-
+    
     /**
      * Instantiates a new buffer exceeded exception.
      *

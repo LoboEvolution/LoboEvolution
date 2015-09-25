@@ -30,35 +30,35 @@ import javax.swing.UIManager.LookAndFeelInfo;
  */
 public class TestEntry {
 
-    /**
-     * Instantiates a new test entry.
-     */
-    private TestEntry() {
-        super();
-    }
+	/**
+	 * Instantiates a new test entry.
+	 */
+	private TestEntry() {
+		super();
+	}
 
-    /**
-     * Test application entry point.
-     *
-     * @param args
-     *            Program arguments.
-     */
-    public static void main(String[] args) {
-        try {
-            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+	/**
+	 * Test application entry point.
+	 *
+	 * @param args
+	 *            Program arguments.
+	 */
+	public static void main(String[] args) {
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look
-            // and feel.
-        }
-        TestFrame frame = new TestFrame("Cobra Test Tool");
-        frame.setSize(800, 400);
-        frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-        frame.setVisible(true);
-    }
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// If Nimbus is not available, you can set the GUI to another look
+			// and feel.
+		}
+		TestFrame frame = new TestFrame("Cobra Test Tool");
+		frame.setSize(800, 400);
+		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+		frame.setVisible(true);
+	}
 }

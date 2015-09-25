@@ -25,43 +25,43 @@ package org.lobobrowser.html;
  */
 public interface HtmlEventProperties {
 
-    /** The uievent. */
-    String UIEVENT = "UIEvent";
+	/** The uievent. */
+	String UIEVENT = "UIEvent";
 
-    /** The uievents. */
-    String UIEVENTS = "UIEvents";
+	/** The uievents. */
+	String UIEVENTS = "UIEvents";
 
-    /** The mouseevent. */
-    String MOUSEEVENT = "MouseEvent";
+	/** The mouseevent. */
+	String MOUSEEVENT = "MouseEvent";
 
-    /** The mouseevents. */
-    String MOUSEEVENTS = "MouseEvents";
+	/** The mouseevents. */
+	String MOUSEEVENTS = "MouseEvents";
 
-    /** The mutationevent. */
-    String MUTATIONEVENT = "MutationEvent";
+	/** The mutationevent. */
+	String MUTATIONEVENT = "MutationEvent";
 
-    /** The mutationevents. */
-    String MUTATIONEVENTS = "MutationEvents";
+	/** The mutationevents. */
+	String MUTATIONEVENTS = "MutationEvents";
 
-    /** The mutationnameevent. */
-    String MUTATIONNAMEEVENT = "MutationNameEvent";
+	/** The mutationnameevent. */
+	String MUTATIONNAMEEVENT = "MutationNameEvent";
 
-    /** The textevent. */
-    String TEXTEVENT = "TextEvent";
+	/** The textevent. */
+	String TEXTEVENT = "TextEvent";
 
-    /** The keyboardevent. */
-    String KEYBOARDEVENT = "KeyboardEvent";
+	/** The keyboardevent. */
+	String KEYBOARDEVENT = "KeyboardEvent";
 
-    /** The customevent. */
-    String CUSTOMEVENT = "CustomEvent";
+	/** The customevent. */
+	String CUSTOMEVENT = "CustomEvent";
 
-    /** The event. */
-    String EVENT = "Event";
+	/** The event. */
+	String EVENT = "Event";
 
-    /** The svgevents. */
-    String SVGEVENTS = "SVGEvents";
+	/** The svgevents. */
+	String SVGEVENTS = "SVGEvents";
 
-    /** The svgzoomevents. */
-    String SVGZOOMEVENTS = "SVGZoomEvents";
+	/** The svgzoomevents. */
+	String SVGZOOMEVENTS = "SVGZoomEvents";
 
 }

@@ -23,35 +23,37 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
  */
 public class BlockRenderState extends StyleSheetRenderState {
 
-    /**
-     * Instantiates a new block render state.
-     *
-     * @param prevRenderState
-     *            the prev render state
-     * @param element
-     *            the element
-     */
-    public BlockRenderState(RenderState prevRenderState, HTMLElementImpl element) {
-        super(prevRenderState, element);
-    }
+	/**
+	 * Instantiates a new block render state.
+	 *
+	 * @param prevRenderState
+	 *            the prev render state
+	 * @param element
+	 *            the element
+	 */
+	public BlockRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+		super(prevRenderState, element);
+	}
 
-    /**
-     * Instantiates a new block render state.
-     *
-     * @param document
-     *            the document
-     */
-    public BlockRenderState(HTMLDocumentImpl document) {
-        super(document);
-    }
+	/**
+	 * Instantiates a new block render state.
+	 *
+	 * @param document
+	 *            the document
+	 */
+	public BlockRenderState(HTMLDocumentImpl document) {
+		super(document);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.renderstate.StyleSheetRenderState#getDefaultDisplay()
-     */
-    @Override
-    public int getDefaultDisplay() {
-        return DISPLAY_BLOCK;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.renderstate.StyleSheetRenderState#getDefaultDisplay(
+	 * )
+	 */
+	@Override
+	public int getDefaultDisplay() {
+		return DISPLAY_BLOCK;
+	}
 }

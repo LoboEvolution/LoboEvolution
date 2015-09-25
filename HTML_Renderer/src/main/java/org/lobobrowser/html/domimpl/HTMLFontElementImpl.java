@@ -25,115 +25,120 @@ import org.lobobrowser.w3c.html.HTMLFontElement;
 /**
  * The Class HTMLFontElementImpl.
  */
-public class HTMLFontElementImpl extends HTMLAbstractUIElement implements
-HTMLFontElement {
+public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFontElement {
 
-    /**
-     * Instantiates a new HTML font element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLFontElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML font element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLFontElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFontElement#getColor()
-     */
-    @Override
-    public String getColor() {
-        return this.getAttribute(HtmlAttributeProperties.COLOR);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFontElement#getColor()
+	 */
+	@Override
+	public String getColor() {
+		return this.getAttribute(HtmlAttributeProperties.COLOR);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFontElement#getFace()
-     */
-    @Override
-    public String getFace() {
-        return this.getAttribute(HtmlAttributeProperties.FACE);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFontElement#getFace()
+	 */
+	@Override
+	public String getFace() {
+		return this.getAttribute(HtmlAttributeProperties.FACE);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFontElement#getSize()
-     */
-    @Override
-    public String getSize() {
-        return this.getAttribute(HtmlAttributeProperties.SIZE);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFontElement#getSize()
+	 */
+	@Override
+	public String getSize() {
+		return this.getAttribute(HtmlAttributeProperties.SIZE);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFontElement#setColor(java.lang.String)
-     */
-    @Override
-    public void setColor(String color) {
-        this.setAttribute(HtmlAttributeProperties.COLOR, color);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFontElement#setColor(java.lang.String)
+	 */
+	@Override
+	public void setColor(String color) {
+		this.setAttribute(HtmlAttributeProperties.COLOR, color);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFontElement#setFace(java.lang.String)
-     */
-    @Override
-    public void setFace(String face) {
-        this.setAttribute(HtmlAttributeProperties.FACE, face);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFontElement#setFace(java.lang.String)
+	 */
+	@Override
+	public void setFace(String face) {
+		this.setAttribute(HtmlAttributeProperties.FACE, face);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFontElement#setSize(java.lang.String)
-     */
-    @Override
-    public void setSize(String size) {
-        this.setAttribute(HtmlAttributeProperties.SIZE, size);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFontElement#setSize(java.lang.String)
+	 */
+	@Override
+	public void setSize(String size) {
+		this.setAttribute(HtmlAttributeProperties.SIZE, size);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
-     * .html.renderstate.RenderState)
-     */
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        return super.createRenderState(prevRenderState);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
+	 * lobobrowser .html.renderstate.RenderState)
+	 */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return super.createRenderState(prevRenderState);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createDefaultStyleSheet()
-     */
-    @Override
-    protected AbstractCSS2Properties createDefaultStyleSheet() {
-        String fontFamily = this.getAttribute(HtmlAttributeProperties.FACE);
-        String color = this.getAttribute(HtmlAttributeProperties.COLOR);
-        String size = this.getAttribute(HtmlAttributeProperties.SIZE);
-        String fontSize = null;
-        if (size != null) {
-            ModelNode parentModelNode = this.getParentModelNode();
-            RenderState parentRS = parentModelNode == null ? null
-                    : parentModelNode.getRenderState();
-            if (parentRS != null) {
-                int fontNumber = HtmlValues.getFontNumberOldStyle(size,
-                        parentRS);
-                fontSize = HtmlValues.getFontSizeSpec(fontNumber);
-            }
-        }
-        ComputedCSS2Properties css = new ComputedCSS2Properties(this);
-        if (fontSize != null) {
-            css.internalSetLC("font-size", fontSize);
-        }
-        if (fontFamily != null) {
-            css.internalSetLC("font-family", fontFamily);
-        }
-        if (color != null) {
-            css.internalSetLC(HtmlAttributeProperties.COLOR, color);
-        }
-        return css;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.domimpl.HTMLElementImpl#createDefaultStyleSheet()
+	 */
+	@Override
+	protected AbstractCSS2Properties createDefaultStyleSheet() {
+		String fontFamily = this.getAttribute(HtmlAttributeProperties.FACE);
+		String color = this.getAttribute(HtmlAttributeProperties.COLOR);
+		String size = this.getAttribute(HtmlAttributeProperties.SIZE);
+		String fontSize = null;
+		if (size != null) {
+			ModelNode parentModelNode = this.getParentModelNode();
+			RenderState parentRS = parentModelNode == null ? null : parentModelNode.getRenderState();
+			if (parentRS != null) {
+				int fontNumber = HtmlValues.getFontNumberOldStyle(size, parentRS);
+				fontSize = HtmlValues.getFontSizeSpec(fontNumber);
+			}
+		}
+		ComputedCSS2Properties css = new ComputedCSS2Properties(this);
+		if (fontSize != null) {
+			css.internalSetLC("font-size", fontSize);
+		}
+		if (fontFamily != null) {
+			css.internalSetLC("font-family", fontFamily);
+		}
+		if (color != null) {
+			css.internalSetLC(HtmlAttributeProperties.COLOR, color);
+		}
+		return css;
+	}
 
 }

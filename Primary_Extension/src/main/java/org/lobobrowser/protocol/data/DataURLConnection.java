@@ -32,142 +32,147 @@ import java.util.logging.Logger;
 import javax.xml.bind.DatatypeConverter;
 
 public class DataURLConnection extends HttpURLConnection {
-	
-	 /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(DataURLConnection.class.getName());
 
-    /** The header map. */
-    private HashMap<String, String> headerMap = new HashMap<String, String>();
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(DataURLConnection.class.getName());
 
-    /** The content. */
-    private byte[] content = new byte[0];
+	/** The header map. */
+	private HashMap<String, String> headerMap = new HashMap<String, String>();
 
-    /**
-     * Instantiates a new data url connection.
-     *
-     * @param url
-     *            the url
-     */
-    protected DataURLConnection(URL url) {
-        super(url);
-    }
+	/** The content. */
+	private byte[] content = new byte[0];
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#connect()
-     */
-    @Override
-    public void connect() throws IOException {
-        loadHeaderMap();
-    }
+	/**
+	 * Instantiates a new data url connection.
+	 *
+	 * @param url
+	 *            the url
+	 */
+	protected DataURLConnection(URL url) {
+		super(url);
+	}
 
-    @Override
-    public String getContentType() {
-        String type = headerMap.get("Content-Type");
-        if (type == null) {
-            return "Content-Type: text/plain; charset=UTF-8";
-        }
-        return type;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#connect()
+	 */
+	@Override
+	public void connect() throws IOException {
+		loadHeaderMap();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getContentLength()
-     */
-    @Override
-    public int getContentLength() {
-        if (content != null) {
-            return content.length;
-        }
+	@Override
+	public String getContentType() {
+		String type = headerMap.get("Content-Type");
+		if (type == null) {
+			return "Content-Type: text/plain; charset=UTF-8";
+		}
+		return type;
+	}
 
-        return 0;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getContentLength()
+	 */
+	@Override
+	public int getContentLength() {
+		if (content != null) {
+			return content.length;
+		}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getHeaderField(int)
-     */
-    @Override
-    public String getHeaderField(int n) {
-        return headerMap.get(headerMap.keySet().toArray()[n]);
-    }
+		return 0;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getHeaderField(java.lang.String)
-     */
-    @Override
-    public String getHeaderField(String name) {
-        return headerMap.get(name);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getHeaderField(int)
+	 */
+	@Override
+	public String getHeaderField(int n) {
+		return headerMap.get(headerMap.keySet().toArray()[n]);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getInputStream()
-     */
-    @Override
-    public InputStream getInputStream() throws IOException {
-        connect();
-        if (content != null) {
-            return new ByteArrayInputStream(content);
-        }
-        return new ByteArrayInputStream(new byte[] {});
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getHeaderField(java.lang.String)
+	 */
+	@Override
+	public String getHeaderField(String name) {
+		return headerMap.get(name);
+	}
 
-    /**
-     * Load header map.
-     */
-    private void loadHeaderMap() {
-        String UTF8 = "UTF-8";
-        this.headerMap.clear();
-        String path = getURL().getPath();
-        int index2 = path.toLowerCase().indexOf(",");
-        if (index2 == -1) {
-            index2 = path.toLowerCase().lastIndexOf(";");
-        }
-        String mediatype = path.substring(0, index2).trim();
-        boolean base64 = false;
-        String[] split = mediatype.split("[;,]");
-        String value = path.substring(index2 + 1).trim();
-        if (split[0].equals("")) {
-            split[0] = "text/plain";
-        }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getInputStream()
+	 */
+	@Override
+	public InputStream getInputStream() throws IOException {
+		connect();
+		if (content != null) {
+			return new ByteArrayInputStream(content);
+		}
+		return new ByteArrayInputStream(new byte[] {});
+	}
 
-        this.headerMap.put("content-type", split[0]);
+	/**
+	 * Load header map.
+	 */
+	private void loadHeaderMap() {
+		String UTF8 = "UTF-8";
+		this.headerMap.clear();
+		String path = getURL().getPath();
+		int index2 = path.toLowerCase().indexOf(",");
+		if (index2 == -1) {
+			index2 = path.toLowerCase().lastIndexOf(";");
+		}
+		String mediatype = path.substring(0, index2).trim();
+		boolean base64 = false;
+		String[] split = mediatype.split("[;,]");
+		String value = path.substring(index2 + 1).trim();
+		if (split[0].equals("")) {
+			split[0] = "text/plain";
+		}
 
-        try {
-            for (int i = 1; i < split.length; i++) {
-                if (split[i].contains("=")) {
-                    int index = split[i].indexOf("=");
-                    String attr = split[i].substring(0, index);
-                    String v = split[i].substring(index + 1);
-                    this.headerMap.put(attr, URLDecoder.decode(v, UTF8));
-                } else if (split[i].equalsIgnoreCase("base64")) {
-                    base64 = true;
-                }
-            }
-            String charset = this.getHeaderField("charset");
-            if (charset == null) {
-                charset = UTF8;
-            }
+		this.headerMap.put("content-type", split[0]);
 
-            if (base64) {
-                this.content = DatatypeConverter.parseBase64Binary(value);
-            } else {
-                value = URLDecoder.decode(value, charset);
-                this.content = value.getBytes();
-            }
-        } catch (IOException e) {
-            logger.severe(e.getMessage());
-        }
-    }
+		try {
+			for (int i = 1; i < split.length; i++) {
+				if (split[i].contains("=")) {
+					int index = split[i].indexOf("=");
+					String attr = split[i].substring(0, index);
+					String v = split[i].substring(index + 1);
+					this.headerMap.put(attr, URLDecoder.decode(v, UTF8));
+				} else if (split[i].equalsIgnoreCase("base64")) {
+					base64 = true;
+				}
+			}
+			String charset = this.getHeaderField("charset");
+			if (charset == null) {
+				charset = UTF8;
+			}
 
-    @Override
-    public void disconnect() {
-    }
+			if (base64) {
+				this.content = DatatypeConverter.parseBase64Binary(value);
+			} else {
+				value = URLDecoder.decode(value, charset);
+				this.content = value.getBytes();
+			}
+		} catch (IOException e) {
+			logger.severe(e.getMessage());
+		}
+	}
 
-    @Override
-    public boolean usingProxy() {
-        return false;
-    }
+	@Override
+	public void disconnect() {
+	}
+
+	@Override
+	public boolean usingProxy() {
+		return false;
+	}
 }

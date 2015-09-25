@@ -29,7 +29,7 @@ public class Diagnostics {
     private Diagnostics() {
         super();
     }
-
+    
     /**
      * Assert.
      *

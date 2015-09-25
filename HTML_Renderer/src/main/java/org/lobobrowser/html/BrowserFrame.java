@@ -30,59 +30,59 @@ import org.w3c.dom.Document;
  */
 public interface BrowserFrame {
 
-    /**
-     * Gets the component that renders the frame. This can be a
-     * {@link org.lobobrowser.html.gui.HtmlPanel}.
-     *
-     * @return the component
-     */
-    Component getComponent();
+	/**
+	 * Gets the component that renders the frame. This can be a
+	 * {@link org.lobobrowser.html.gui.HtmlPanel}.
+	 *
+	 * @return the component
+	 */
+	Component getComponent();
 
-    /**
-     * Loads a URL in the frame.
-     *
-     * @param url
-     *            the url
-     */
-    void loadURL(URL url);
+	/**
+	 * Loads a URL in the frame.
+	 *
+	 * @param url
+	 *            the url
+	 */
+	void loadURL(URL url);
 
-    /**
-     * Gets the content document.
-     *
-     * @return the content document
-     */
-    Document getContentDocument();
+	/**
+	 * Gets the content document.
+	 *
+	 * @return the content document
+	 */
+	Document getContentDocument();
 
-    /**
-     * Gets the {@link HtmlRendererContext} of the frame.
-     *
-     * @return the html renderer context
-     */
-    HtmlRendererContext getHtmlRendererContext();
+	/**
+	 * Gets the {@link HtmlRendererContext} of the frame.
+	 *
+	 * @return the html renderer context
+	 */
+	HtmlRendererContext getHtmlRendererContext();
 
-    /**
-     * Sets the default margin insets of the browser frame.
-     *
-     * @param insets
-     *            The margin insets.
-     */
-    void setDefaultMarginInsets(Insets insets);
+	/**
+	 * Sets the default margin insets of the browser frame.
+	 *
+	 * @param insets
+	 *            The margin insets.
+	 */
+	void setDefaultMarginInsets(Insets insets);
 
-    /**
-     * Sets the default horizontal overflow of the browser frame.
-     *
-     * @param overflowX
-     *            See constants in
-     *            {@link org.lobobrowser.html.renderstate.RenderState}.
-     */
-    void setDefaultOverflowX(int overflowX);
+	/**
+	 * Sets the default horizontal overflow of the browser frame.
+	 *
+	 * @param overflowX
+	 *            See constants in
+	 *            {@link org.lobobrowser.html.renderstate.RenderState}.
+	 */
+	void setDefaultOverflowX(int overflowX);
 
-    /**
-     * Sets the default vertical overflow of the browser frame.
-     *
-     * @param overflowY
-     *            See constants in
-     *            {@link org.lobobrowser.html.renderstate.RenderState}.
-     */
-    void setDefaultOverflowY(int overflowY);
+	/**
+	 * Sets the default vertical overflow of the browser frame.
+	 *
+	 * @param overflowY
+	 *            See constants in
+	 *            {@link org.lobobrowser.html.renderstate.RenderState}.
+	 */
+	void setDefaultOverflowY(int overflowY);
 }

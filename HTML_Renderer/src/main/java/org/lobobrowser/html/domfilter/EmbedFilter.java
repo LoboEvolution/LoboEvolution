@@ -21,12 +21,13 @@ import org.w3c.dom.Node;
  */
 public class EmbedFilter implements NodeFilter {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
-     */
-    @Override
-    public boolean accept(Node node) {
-        return HtmlProperties.EMBED.equalsIgnoreCase(node.getNodeName());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
+	@Override
+	public boolean accept(Node node) {
+		return HtmlProperties.EMBED.equalsIgnoreCase(node.getNodeName());
+	}
 }

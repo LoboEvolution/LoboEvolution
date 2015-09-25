@@ -31,7 +31,7 @@ public class OS {
     private OS() {
         super();
     }
-
+    
     /**
      * Checks if is windows.
      *
@@ -41,7 +41,7 @@ public class OS {
         String osName = System.getProperty("os.name");
         return osName.indexOf("Windows") != -1;
     }
-
+    
     /**
      * Launch browser.
      *
@@ -63,7 +63,7 @@ public class OS {
             Runtime.getRuntime().exec("netscape " + url);
         }
     }
-
+    
     /**
      * Opens a file a directory with an appropriate program.
      *
@@ -75,13 +75,13 @@ public class OS {
     public static void launchPath(String path) throws IOException {
         if (isWindows()) {
             Runtime.getRuntime()
-            .exec(new String[] {"cmd.exe", "/c", "start", "\"title\"",
+                    .exec(new String[] { "cmd.exe", "/c", "start", "\"title\"",
                     path });
         } else {
             throw new UnsupportedOperationException("Unsupported");
         }
     }
-
+    
     /**
      * Supports launch path.
      *

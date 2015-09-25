@@ -34,14 +34,14 @@ public abstract class BaseClassLoader extends SecureClassLoader {
     public BaseClassLoader(ClassLoader parent) {
         super(parent);
     }
-
+    
     /**
      * Instantiates a new base class loader.
      */
     public BaseClassLoader() {
         super();
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.lang.ClassLoader#loadClass(String, boolean)

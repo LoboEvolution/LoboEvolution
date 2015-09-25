@@ -34,7 +34,7 @@ import java.util.EventObject;
 public class GenericPropertyChangeListener implements GenericEventListener {
     /** The delegate. */
     private final PropertyChangeListener delegate;
-
+    
     /**
      * Instantiates a new generic property change listener.
      *
@@ -44,7 +44,7 @@ public class GenericPropertyChangeListener implements GenericEventListener {
     public GenericPropertyChangeListener(PropertyChangeListener delegate) {
         this.delegate = delegate;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see
@@ -55,7 +55,7 @@ public class GenericPropertyChangeListener implements GenericEventListener {
     public void processEvent(EventObject event) {
         this.delegate.propertyChange((PropertyChangeEvent) event);
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
@@ -64,9 +64,9 @@ public class GenericPropertyChangeListener implements GenericEventListener {
     public boolean equals(Object other) {
         return (other instanceof GenericPropertyChangeListener)
                 && ((GenericPropertyChangeListener) other).delegate
-                .equals(this.delegate);
+                        .equals(this.delegate);
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.lang.Object#hashCode()

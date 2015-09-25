@@ -28,10 +28,10 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.StyleRuleInfo;
+import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.css.CSSImportRule;
@@ -59,16 +59,16 @@ public class StyleSheetAggregator {
 
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(StyleSheetAggregator.class.getName());
-	
+
 	/** The attribute. */
 	private String attribute;
-	
+
 	/** The attributeValue. */
 	private String attributeValue;
-	
+
 	/** The attributeOperator. */
 	private String attributeOperator = "";
-	
+
 	/** The element. */
 	private String htmlElement;
 
@@ -77,7 +77,7 @@ public class StyleSheetAggregator {
 
 	/** The class maps by element. */
 	private final Map<String, Map<String, Collection<StyleRuleInfo>>> classMapsByElement = new HashMap<String, Map<String, Collection<StyleRuleInfo>>>();
-	
+
 	/** The attr maps by element. */
 	private final Map<String, Map<String, Collection<StyleRuleInfo>>> attrMapsByElement = new HashMap<String, Map<String, Collection<StyleRuleInfo>>>();
 
@@ -86,14 +86,14 @@ public class StyleSheetAggregator {
 
 	/** The rules by element. */
 	private final Map<String, Collection<StyleRuleInfo>> rulesByElement = new HashMap<String, Collection<StyleRuleInfo>>();
-	
+
 	private final String OP_EQUAL = "=";
 	private final String OP_TILDE_EQUAL = "~=";
 	private final String OP_PIPE_EQUAL = "|=";
 	private final String OP_DOLLAR_EQUAL = "$=";
 	private final String OP_CIRCUMFLEX_EQUAL = "^=";
 	private final String OP_STAR_EQUAL = "*=";
-	private final String OP_ALL="ALL";
+	private final String OP_ALL = "ALL";
 
 	/**
 	 * Instantiates a new style sheet aggregator.
@@ -211,46 +211,46 @@ public class StyleSheetAggregator {
 					}
 				}
 			}
-			
+
 			if (selectorList.contains("[") && selectorList.endsWith("]")) {
 				String selector = selectorList.replace("\"", "");
-				int quadIdx =  selector.indexOf("[") +1;				
-				htmlElement = selector.substring(0,selector.indexOf("["));				
-				if(selectorList.contains(OP_PIPE_EQUAL)){
+				int quadIdx = selector.indexOf("[") + 1;
+				htmlElement = selector.substring(0, selector.indexOf("["));
+				if (selectorList.contains(OP_PIPE_EQUAL)) {
 					int eqIdx = selector.indexOf(OP_PIPE_EQUAL);
-					attribute = selector.substring(quadIdx,eqIdx);
-					attributeValue = selector.substring(eqIdx+2, selector.length()-1);
+					attribute = selector.substring(quadIdx, eqIdx);
+					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
 					attributeOperator = OP_PIPE_EQUAL;
-				}else if(selectorList.contains(OP_CIRCUMFLEX_EQUAL)){
+				} else if (selectorList.contains(OP_CIRCUMFLEX_EQUAL)) {
 					int eqIdx = selector.indexOf(OP_CIRCUMFLEX_EQUAL);
-					attribute = selector.substring(quadIdx,eqIdx);
-					attributeValue = selector.substring(eqIdx+2, selector.length()-1);
+					attribute = selector.substring(quadIdx, eqIdx);
+					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
 					attributeOperator = OP_CIRCUMFLEX_EQUAL;
-				} else if(selectorList.contains(OP_TILDE_EQUAL)){
+				} else if (selectorList.contains(OP_TILDE_EQUAL)) {
 					int eqIdx = selector.indexOf(OP_TILDE_EQUAL);
-					attribute = selector.substring(quadIdx,eqIdx);
-					attributeValue = selector.substring(eqIdx+2, selector.length()-1);
+					attribute = selector.substring(quadIdx, eqIdx);
+					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
 					attributeOperator = OP_TILDE_EQUAL;
-				} else if(selectorList.contains(OP_DOLLAR_EQUAL)){
+				} else if (selectorList.contains(OP_DOLLAR_EQUAL)) {
 					int eqIdx = selector.indexOf(OP_DOLLAR_EQUAL);
-					attribute = selector.substring(quadIdx,eqIdx);
-					attributeValue = selector.substring(eqIdx+2, selector.length()-1);
+					attribute = selector.substring(quadIdx, eqIdx);
+					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
 					attributeOperator = OP_DOLLAR_EQUAL;
-				} else if(selectorList.contains(OP_STAR_EQUAL)){
+				} else if (selectorList.contains(OP_STAR_EQUAL)) {
 					int eqIdx = selector.indexOf(OP_STAR_EQUAL);
-					attribute = selector.substring(quadIdx,eqIdx);
-					attributeValue = selector.substring(eqIdx+2, selector.length()-1);
+					attribute = selector.substring(quadIdx, eqIdx);
+					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
 					attributeOperator = OP_STAR_EQUAL;
-				} else if(selectorList.contains(OP_EQUAL)){
+				} else if (selectorList.contains(OP_EQUAL)) {
 					int eqIdx = selector.indexOf(OP_EQUAL);
-					attribute = selector.substring(quadIdx,eqIdx);
-					attributeValue = selector.substring(eqIdx+1, selector.length()-1);
+					attribute = selector.substring(quadIdx, eqIdx);
+					attributeValue = selector.substring(eqIdx + 1, selector.length() - 1);
 					attributeOperator = OP_EQUAL;
-		        } else{
-		        	attribute = selector.substring(quadIdx,selector.length()-1);
+				} else {
+					attribute = selector.substring(quadIdx, selector.length() - 1);
 					attributeValue = "-";
 					attributeOperator = OP_ALL;
-		        }
+				}
 				this.addAttributeRule(htmlElement, attributeValue, sr, new ArrayList<SimpleSelector>());
 			}
 		} else if (rule instanceof CSSImportRule) {
@@ -309,7 +309,7 @@ public class StyleSheetAggregator {
 		}
 		rules.add(new StyleRuleInfo(ancestorSelectors, styleRule));
 	}
-	
+
 	/**
 	 * Adds the class rule.
 	 *
@@ -322,7 +322,8 @@ public class StyleSheetAggregator {
 	 * @param ancestorSelectors
 	 *            the ancestor selectors
 	 */
-	private final void addAttributeRule(String elemtl, String attrtl, CSSStyleRule styleRule, ArrayList<SimpleSelector> ancestorSelectors) {
+	private final void addAttributeRule(String elemtl, String attrtl, CSSStyleRule styleRule,
+			ArrayList<SimpleSelector> ancestorSelectors) {
 		Map<String, Collection<StyleRuleInfo>> attrMap = this.attrMapsByElement.get(elemtl);
 		if (attrMap == null) {
 			attrMap = new HashMap<String, Collection<StyleRuleInfo>>();
@@ -399,8 +400,8 @@ public class StyleSheetAggregator {
 	 * @return the active style declarations
 	 */
 	public final Collection<CSSStyleDeclaration> getActiveStyleDeclarations(HTMLElementImpl element, String elementName,
-			String elementId, String className, Set pseudoNames,NamedNodeMap attributes) {
-		
+			String elementId, String className, Set pseudoNames, NamedNodeMap attributes) {
+
 		Collection<CSSStyleDeclaration> styleDeclarations = null;
 		String elementTL = elementName.toLowerCase();
 		Collection<StyleRuleInfo> elementRules = this.rulesByElement.get(elementTL);
@@ -416,14 +417,14 @@ public class StyleSheetAggregator {
 			String classNameTL = className.toLowerCase();
 			Map<String, Collection<StyleRuleInfo>> classMaps = this.classMapsByElement.get(elementTL);
 			if (classMaps != null) {
-				Collection<StyleRuleInfo> classRules = (Collection<StyleRuleInfo>) classMaps.get(classNameTL);
+				Collection<StyleRuleInfo> classRules = classMaps.get(classNameTL);
 				if (classRules != null) {
 					styleDeclarations = putStyleDeclarations(classRules, styleDeclarations, element, pseudoNames);
 				}
 			}
-			classMaps = this.classMapsByElement.get("*");	
+			classMaps = this.classMapsByElement.get("*");
 			if (classMaps != null) {
-				Collection<StyleRuleInfo> classRules = (Collection<StyleRuleInfo>) classMaps.get(classNameTL);
+				Collection<StyleRuleInfo> classRules = classMaps.get(classNameTL);
 				if (classRules != null) {
 					styleDeclarations = putStyleDeclarations(classRules, styleDeclarations, element, pseudoNames);
 				}
@@ -433,7 +434,7 @@ public class StyleSheetAggregator {
 			Map<String, Collection<StyleRuleInfo>> idMaps = this.idMapsByElement.get(elementTL);
 			if (idMaps != null) {
 				String elementIdTL = elementId.toLowerCase();
-				Collection<StyleRuleInfo> idRules = (Collection<StyleRuleInfo>) idMaps.get(elementIdTL);
+				Collection<StyleRuleInfo> idRules = idMaps.get(elementIdTL);
 				if (idRules != null) {
 					styleDeclarations = putStyleDeclarations(idRules, styleDeclarations, element, pseudoNames);
 				}
@@ -441,27 +442,28 @@ public class StyleSheetAggregator {
 			idMaps = this.idMapsByElement.get("*");
 			if (idMaps != null) {
 				String elementIdTL = elementId.toLowerCase();
-				Collection<StyleRuleInfo> idRules = (Collection<StyleRuleInfo>) idMaps.get(elementIdTL);
+				Collection<StyleRuleInfo> idRules = idMaps.get(elementIdTL);
 				if (idRules != null) {
 					styleDeclarations = putStyleDeclarations(idRules, styleDeclarations, element, pseudoNames);
 				}
 			}
 		}
-		
+
 		if (attributes != null && attributes.getLength() > 0) {
 			for (int i = 0; i < attributes.getLength(); i++) {
 				Attr attr = (Attr) attributes.item(i);
-				if (isAttributeOperator(attr,element)) {
+				if (isAttributeOperator(attr, element)) {
 					Map<String, Collection<StyleRuleInfo>> classMaps = this.attrMapsByElement.get(htmlElement);
 					if (classMaps != null) {
-						Collection<StyleRuleInfo> attrRules = (Collection<StyleRuleInfo>) classMaps.get(attributeValue);
+						Collection<StyleRuleInfo> attrRules = classMaps.get(attributeValue);
 						if (attrRules != null) {
-							styleDeclarations = putStyleDeclarations(attrRules, styleDeclarations, element, pseudoNames);
+							styleDeclarations = putStyleDeclarations(attrRules, styleDeclarations, element,
+									pseudoNames);
 						}
 					}
 				}
 			}
-		}	
+		}
 		return styleDeclarations;
 	}
 
@@ -499,14 +501,14 @@ public class StyleSheetAggregator {
 				String classNameTL = className.toLowerCase();
 				Map<String, Collection<StyleRuleInfo>> classMaps = this.classMapsByElement.get(elementTL);
 				if (classMaps != null) {
-					Collection<StyleRuleInfo> classRules = (Collection<StyleRuleInfo>) classMaps.get(classNameTL);
+					Collection<StyleRuleInfo> classRules = classMaps.get(classNameTL);
 					if (classRules != null) {
 						return isAffectedByPseudoNameInAncestor(elementRules, ancestor, element, pseudoName);
 					}
 				}
 				classMaps = this.classMapsByElement.get("*");
 				if (classMaps != null) {
-					Collection<StyleRuleInfo> classRules = (Collection<StyleRuleInfo>) classMaps.get(classNameTL);
+					Collection<StyleRuleInfo> classRules = classMaps.get(classNameTL);
 					if (classRules != null) {
 						return isAffectedByPseudoNameInAncestor(elementRules, ancestor, element, pseudoName);
 					}
@@ -517,7 +519,7 @@ public class StyleSheetAggregator {
 			Map<String, Collection<StyleRuleInfo>> idMaps = this.idMapsByElement.get(elementTL);
 			if (idMaps != null) {
 				String elementIdTL = elementId.toLowerCase();
-				Collection<StyleRuleInfo> idRules = (Collection<StyleRuleInfo>) idMaps.get(elementIdTL);
+				Collection<StyleRuleInfo> idRules = idMaps.get(elementIdTL);
 				if (idRules != null) {
 					return isAffectedByPseudoNameInAncestor(elementRules, ancestor, element, pseudoName);
 				}
@@ -525,7 +527,7 @@ public class StyleSheetAggregator {
 			idMaps = this.idMapsByElement.get("*");
 			if (idMaps != null) {
 				String elementIdTL = elementId.toLowerCase();
-				Collection<StyleRuleInfo> idRules = (Collection<StyleRuleInfo>) idMaps.get(elementIdTL);
+				Collection<StyleRuleInfo> idRules = idMaps.get(elementIdTL);
 				if (idRules != null) {
 					return isAffectedByPseudoNameInAncestor(elementRules, ancestor, element, pseudoName);
 				}
@@ -536,7 +538,7 @@ public class StyleSheetAggregator {
 
 	/**
 	 * is affected by pseudo name in ancestor
-	 * 
+	 *
 	 * @param elementRules
 	 * @param ancestor
 	 * @param element
@@ -563,7 +565,7 @@ public class StyleSheetAggregator {
 
 	/**
 	 * put style declarations
-	 * 
+	 *
 	 * @param elementRules
 	 * @param styleDeclarations
 	 * @param element
@@ -589,16 +591,16 @@ public class StyleSheetAggregator {
 		}
 		return styleDeclarations;
 	}
-	
+
 	/**
 	 * is attribute operator
-	 * 
+	 *
 	 * @param attr
 	 * @return
 	 */
 	private boolean isAttributeOperator(Attr attr, HTMLElementImpl element) {
-		
-	switch (attributeOperator) {
+
+		switch (attributeOperator) {
 		case OP_EQUAL:
 			if (attr.getName().equals(attribute) && attr.getValue().equals(attributeValue) && "*".equals(htmlElement)) {
 				return true;

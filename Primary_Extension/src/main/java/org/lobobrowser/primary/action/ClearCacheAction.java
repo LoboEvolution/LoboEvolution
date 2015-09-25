@@ -28,38 +28,37 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class ClearCacheAction extends ActionPool {
 
-    /**
-     * Instantiates a new clear cache action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     */
-    public ClearCacheAction(ComponentSource componentSource,
-            NavigatorWindow window) {
-        super(componentSource, window);
-    }
+	/**
+	 * Instantiates a new clear cache action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 */
+	public ClearCacheAction(ComponentSource componentSource, NavigatorWindow window) {
+		super(componentSource, window);
+	}
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(ClearCacheAction.class.getName());
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(ClearCacheAction.class.getName());
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        CacheManager clearCache = CacheManager.getInstance();
-        try {
-            clearCache.clearCache();
-        } catch (Throwable err) {
-            logger.log(Level.SEVERE, "ClearCacheAction", err);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		CacheManager clearCache = CacheManager.getInstance();
+		try {
+			clearCache.clearCache();
+		} catch (Throwable err) {
+			logger.log(Level.SEVERE, "ClearCacheAction", err);
+		}
+	}
 }

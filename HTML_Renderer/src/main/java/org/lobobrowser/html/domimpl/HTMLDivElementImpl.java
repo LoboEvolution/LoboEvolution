@@ -23,76 +23,79 @@ import org.lobobrowser.w3c.html.HTMLDivElement;
 /**
  * The Class HTMLDivElementImpl.
  */
-public class HTMLDivElementImpl extends HTMLAbstractUIElement implements
-HTMLDivElement {
+public class HTMLDivElementImpl extends HTMLAbstractUIElement implements HTMLDivElement {
 
-    /**
-     * Instantiates a new HTML div element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLDivElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML div element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLDivElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLDivElement#getAlign()
-     */
-    @Override
-    public String getAlign() {
-        return this.getAttribute(HtmlAttributeProperties.ALIGN);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLDivElement#getAlign()
+	 */
+	@Override
+	public String getAlign() {
+		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLDivElement#setAlign(java.lang.String)
-     */
-    @Override
-    public void setAlign(String align) {
-        this.setAttribute(HtmlAttributeProperties.ALIGN, align);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLDivElement#setAlign(java.lang.String)
+	 */
+	@Override
+	public void setAlign(String align) {
+		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
-     * .html.renderstate.RenderState)
-     */
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        return new BlockRenderState(prevRenderState, this);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
+	 * lobobrowser .html.renderstate.RenderState)
+	 */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new BlockRenderState(prevRenderState, this);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.
-     * StringBuffer)
-     */
-    @Override
-    protected void appendInnerTextImpl(StringBuffer buffer) {
-        int length = buffer.length();
-        int lineBreaks;
-        if (length == 0) {
-            lineBreaks = 2;
-        } else {
-            int start = length - 2;
-            if (start < 0) {
-                start = 0;
-            }
-            lineBreaks = 0;
-            for (int i = start; i < length; i++) {
-                char ch = buffer.charAt(i);
-                if (ch == '\n') {
-                    lineBreaks++;
-                }
-            }
-        }
-        for (int i = 0; i < (1 - lineBreaks); i++) {
-            buffer.append("\r\n");
-        }
-        super.appendInnerTextImpl(buffer);
-        buffer.append("\r\n");
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.
+	 * StringBuffer)
+	 */
+	@Override
+	protected void appendInnerTextImpl(StringBuffer buffer) {
+		int length = buffer.length();
+		int lineBreaks;
+		if (length == 0) {
+			lineBreaks = 2;
+		} else {
+			int start = length - 2;
+			if (start < 0) {
+				start = 0;
+			}
+			lineBreaks = 0;
+			for (int i = start; i < length; i++) {
+				char ch = buffer.charAt(i);
+				if (ch == '\n') {
+					lineBreaks++;
+				}
+			}
+		}
+		for (int i = 0; i < (1 - lineBreaks); i++) {
+			buffer.append("\r\n");
+		}
+		super.appendInnerTextImpl(buffer);
+		buffer.append("\r\n");
+	}
 }

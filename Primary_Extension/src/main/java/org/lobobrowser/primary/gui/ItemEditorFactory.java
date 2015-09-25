@@ -22,10 +22,10 @@ package org.lobobrowser.primary.gui;
  */
 public interface ItemEditorFactory<T> {
 
-    /**
-     * Creates a new ItemEditor object.
-     *
-     * @return the abstract item editor
-     */
-    AbstractItemEditor<T> createItemEditor();
+	/**
+	 * Creates a new ItemEditor object.
+	 *
+	 * @return the abstract item editor
+	 */
+	AbstractItemEditor<T> createItemEditor();
 }

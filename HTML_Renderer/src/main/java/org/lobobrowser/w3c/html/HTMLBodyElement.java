@@ -18,24 +18,32 @@ public interface HTMLBodyElement extends HTMLElement {
 
 	public void setOnbeforeunload(Function onbeforeunload);
 
+	@Override
 	public Function getOnblur();
 
+	@Override
 	public void setOnblur(Function onblur);
 
+	@Override
 	public Function getOnerror();
 
+	@Override
 	public void setOnerror(Function onerror);
 
+	@Override
 	public Function getOnfocus();
 
+	@Override
 	public void setOnfocus(Function onfocus);
 
 	public Function getOnhashchange();
 
 	public void setOnhashchange(Function onhashchange);
 
+	@Override
 	public Function getOnload();
 
+	@Override
 	public void setOnload(Function onload);
 
 	public Function getOnmessage();
@@ -70,8 +78,10 @@ public interface HTMLBodyElement extends HTMLElement {
 
 	public void setOnresize(Function onresize);
 
+	@Override
 	public Function getOnscroll();
 
+	@Override
 	public void setOnscroll(Function onscroll);
 
 	public Function getOnstorage();

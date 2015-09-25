@@ -10,6 +10,7 @@ public interface HTMLSelectElement extends HTMLElement {
 
 	public void setAutofocus(boolean autofocus);
 
+	@Override
 	public boolean getDisabled();
 
 	public void setDisabled(boolean disabled);

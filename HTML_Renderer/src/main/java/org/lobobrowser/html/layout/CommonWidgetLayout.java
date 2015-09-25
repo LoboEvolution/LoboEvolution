@@ -28,88 +28,84 @@ import org.lobobrowser.html.style.AbstractCSS2Properties;
  */
 public abstract class CommonWidgetLayout implements MarkupLayout {
 
-    /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(CommonWidgetLayout.class.getName());
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(CommonWidgetLayout.class.getName());
 
-    /** The Constant ADD_INLINE. */
-    protected static final int ADD_INLINE = 0;
+	/** The Constant ADD_INLINE. */
+	protected static final int ADD_INLINE = 0;
 
-    /** The Constant ADD_AS_BLOCK. */
-    protected static final int ADD_AS_BLOCK = 1;
+	/** The Constant ADD_AS_BLOCK. */
+	protected static final int ADD_AS_BLOCK = 1;
 
-    /** The method. */
-    private final int method;
+	/** The method. */
+	private final int method;
 
-    /** The use align attribute. */
-    private final boolean useAlignAttribute;
+	/** The use align attribute. */
+	private final boolean useAlignAttribute;
 
-    /**
-     * Instantiates a new common widget layout.
-     *
-     * @param method
-     *            the method
-     * @param usesAlignAttribute
-     *            the uses align attribute
-     */
-    public CommonWidgetLayout(int method, boolean usesAlignAttribute) {
-        this.method = method;
-        this.useAlignAttribute = usesAlignAttribute;
-    }
+	/**
+	 * Instantiates a new common widget layout.
+	 *
+	 * @param method
+	 *            the method
+	 * @param usesAlignAttribute
+	 *            the uses align attribute
+	 */
+	public CommonWidgetLayout(int method, boolean usesAlignAttribute) {
+		this.method = method;
+		this.useAlignAttribute = usesAlignAttribute;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.renderer.MarkupLayout#layoutMarkup(org.lobobrowser.html
-     * .renderer.RBlockViewport, org.lobobrowser.html.domimpl.HTMLElementImpl)
-     */
-    @Override
-    public void layoutMarkup(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-        AbstractCSS2Properties style = markupElement.getCurrentStyle();
-        if (style != null) {
-            String display = style.getDisplay();
-            if ((display != null) && "none".equalsIgnoreCase(display)) {
-                return;
-            }
-        }
-        UINode node = markupElement.getUINode();
-        RElement renderable = null;
-        if (node == null) {
-            renderable = this.createRenderable(bodyLayout, markupElement);
-            if (renderable == null) {
-                if (logger.isLoggable(Level.INFO)) {
-                    logger.info("layoutMarkup(): Don't know how to render "
-                            + markupElement + ".");
-                }
-                return;
-            }
-            markupElement.setUINode(renderable);
-        } else {
-            renderable = (RElement) node;
-        }
-        renderable.setOriginalParent(bodyLayout);
-        switch (this.method) {
-        case ADD_INLINE:
-            bodyLayout.addRenderableToLineCheckStyle(renderable, markupElement,
-                    this.useAlignAttribute);
-            break;
-        case ADD_AS_BLOCK:
-            bodyLayout.positionRElement(markupElement, renderable,
-                    this.useAlignAttribute, true, false);
-            break;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.renderer.MarkupLayout#layoutMarkup(org.lobobrowser.
+	 * html .renderer.RBlockViewport,
+	 * org.lobobrowser.html.domimpl.HTMLElementImpl)
+	 */
+	@Override
+	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		AbstractCSS2Properties style = markupElement.getCurrentStyle();
+		if (style != null) {
+			String display = style.getDisplay();
+			if ((display != null) && "none".equalsIgnoreCase(display)) {
+				return;
+			}
+		}
+		UINode node = markupElement.getUINode();
+		RElement renderable = null;
+		if (node == null) {
+			renderable = this.createRenderable(bodyLayout, markupElement);
+			if (renderable == null) {
+				if (logger.isLoggable(Level.INFO)) {
+					logger.info("layoutMarkup(): Don't know how to render " + markupElement + ".");
+				}
+				return;
+			}
+			markupElement.setUINode(renderable);
+		} else {
+			renderable = (RElement) node;
+		}
+		renderable.setOriginalParent(bodyLayout);
+		switch (this.method) {
+		case ADD_INLINE:
+			bodyLayout.addRenderableToLineCheckStyle(renderable, markupElement, this.useAlignAttribute);
+			break;
+		case ADD_AS_BLOCK:
+			bodyLayout.positionRElement(markupElement, renderable, this.useAlignAttribute, true, false);
+			break;
+		}
+	}
 
-    /**
-     * Creates the renderable.
-     *
-     * @param bodyLayout
-     *            the body layout
-     * @param markupElement
-     *            the markup element
-     * @return the r element
-     */
-    protected abstract RElement createRenderable(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement);
+	/**
+	 * Creates the renderable.
+	 *
+	 * @param bodyLayout
+	 *            the body layout
+	 * @param markupElement
+	 *            the markup element
+	 * @return the r element
+	 */
+	protected abstract RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement);
 }

@@ -26,61 +26,56 @@ import org.lobobrowser.store.StorageManager;
 /**
  * History of navigation locations. Not thread safe.
  */
-public class NavigationHistory extends BaseHistory<Object> implements
-java.io.Serializable {
+public class NavigationHistory extends BaseHistory<Object>implements java.io.Serializable {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 2257845000600200100L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 2257845000600200100L;
 
-    /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(NavigationHistory.class.getName());
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(NavigationHistory.class.getName());
 
-    /** The Constant instance. */
-    private static final NavigationHistory instance;
+	/** The Constant instance. */
+	private static final NavigationHistory instance;
 
-    static {
-        NavigationHistory ins = null;
-        try {
-            ins = (NavigationHistory) StorageManager.getInstance()
-                    .retrieveSettings(NavigationHistory.class.getSimpleName(),
-                            NavigationHistory.class.getClassLoader());
-        } catch (Exception err) {
-            logger.log(Level.WARNING, "Unable to retrieve settings.", err);
-        }
-        if (ins == null) {
-            ins = new NavigationHistory();
-        }
-        instance = ins;
-    }
+	static {
+		NavigationHistory ins = null;
+		try {
+			ins = (NavigationHistory) StorageManager.getInstance().retrieveSettings(
+					NavigationHistory.class.getSimpleName(), NavigationHistory.class.getClassLoader());
+		} catch (Exception err) {
+			logger.log(Level.WARNING, "Unable to retrieve settings.", err);
+		}
+		if (ins == null) {
+			ins = new NavigationHistory();
+		}
+		instance = ins;
+	}
 
-    /**
-     * Instantiates a new navigation history.
-     */
-    private NavigationHistory() {
-    }
+	/**
+	 * Instantiates a new navigation history.
+	 */
+	private NavigationHistory() {
+	}
 
-    /**
-     * Gets the single instance of NavigationHistory.
-     *
-     * @return single instance of NavigationHistory
-     */
-    public static NavigationHistory getInstance() {
-        return instance;
-    }
+	/**
+	 * Gets the single instance of NavigationHistory.
+	 *
+	 * @return single instance of NavigationHistory
+	 */
+	public static NavigationHistory getInstance() {
+		return instance;
+	}
 
-    /**
-     * Save.
-     */
-    public void save() {
-        synchronized (this) {
-            try {
-                StorageManager.getInstance().saveSettings(
-                        this.getClass().getSimpleName(), this);
-            } catch (IOException ioe) {
-                logger.log(Level.WARNING, "Unable to save settings: "
-                        + this.getClass().getSimpleName(), ioe);
-            }
-        }
-    }
+	/**
+	 * Save.
+	 */
+	public void save() {
+		synchronized (this) {
+			try {
+				StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
+			} catch (IOException ioe) {
+				logger.log(Level.WARNING, "Unable to save settings: " + this.getClass().getSimpleName(), ioe);
+			}
+		}
+	}
 }

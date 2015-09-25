@@ -30,71 +30,68 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class AddBookmarkAction extends ActionPool {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The window. */
-    private NavigatorWindow window;
+	/** The window. */
+	private NavigatorWindow window;
 
-    /**
-     * Instantiates a new adds the bookmark action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     */
-    public AddBookmarkAction(ComponentSource componentSource,
-            NavigatorWindow window) {
-        super(componentSource, window);
-        this.window = window;
-    }
+	/**
+	 * Instantiates a new adds the bookmark action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 */
+	public AddBookmarkAction(ComponentSource componentSource, NavigatorWindow window) {
+		super(componentSource, window);
+		this.window = window;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        addBookmark();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		addBookmark();
+	}
 
-    /**
-     * Adds the bookmark.
-     */
-    public void addBookmark() {
-        NavigationEntry entry = window.getCurrentNavigationEntry();
-        if (entry != null) {
-            URL url = entry.getUrl();
-            BookmarksHistory history = BookmarksHistory.getInstance();
-            BookmarkInfo existingInfo = history.getExistingInfo(url
-                    .toExternalForm());
-            if (existingInfo == null) {
-                existingInfo = new BookmarkInfo();
-                existingInfo.setUrl(url);
-                existingInfo.setTitle(entry.getTitle());
-                existingInfo.setDescription(entry.getDescription());
-            }
-            java.awt.Window awtWindow = window.getAwtWindow();
-            if (!(awtWindow instanceof java.awt.Frame)) {
-                throw new IllegalStateException(
-                        "Bookmaks dialog only supported when an AWT Frame is available.");
-            }
-            AddBookmarkDialog dialog = new AddBookmarkDialog(
-                    (java.awt.Frame) awtWindow, true, existingInfo);
-            dialog.setTitle("Add/Edit Bookmark");
-            dialog.setLocationByPlatform(true);
-            // dialog.setLocationRelativeTo(window.getAwtFrame());
-            dialog.setResizable(false);
-            dialog.pack();
-            dialog.setVisible(true);
-            BookmarkInfo info = dialog.getBookmarkInfo();
-            if (info != null) {
-                history.addAsRecent(info.getUrl(), info);
-                history.save();
-            }
-        }
-    }
+	/**
+	 * Adds the bookmark.
+	 */
+	public void addBookmark() {
+		NavigationEntry entry = window.getCurrentNavigationEntry();
+		if (entry != null) {
+			URL url = entry.getUrl();
+			BookmarksHistory history = BookmarksHistory.getInstance();
+			BookmarkInfo existingInfo = history.getExistingInfo(url.toExternalForm());
+			if (existingInfo == null) {
+				existingInfo = new BookmarkInfo();
+				existingInfo.setUrl(url);
+				existingInfo.setTitle(entry.getTitle());
+				existingInfo.setDescription(entry.getDescription());
+			}
+			java.awt.Window awtWindow = window.getAwtWindow();
+			if (!(awtWindow instanceof java.awt.Frame)) {
+				throw new IllegalStateException("Bookmaks dialog only supported when an AWT Frame is available.");
+			}
+			AddBookmarkDialog dialog = new AddBookmarkDialog((java.awt.Frame) awtWindow, true, existingInfo);
+			dialog.setTitle("Add/Edit Bookmark");
+			dialog.setLocationByPlatform(true);
+			// dialog.setLocationRelativeTo(window.getAwtFrame());
+			dialog.setResizable(false);
+			dialog.pack();
+			dialog.setVisible(true);
+			BookmarkInfo info = dialog.getBookmarkInfo();
+			if (info != null) {
+				history.addAsRecent(info.getUrl(), info);
+				history.save();
+			}
+		}
+	}
 
 }

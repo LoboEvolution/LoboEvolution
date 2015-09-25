@@ -28,8 +28,8 @@ import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.http.LRUCache;
 import org.lobobrowser.security.GenericLocalPermission;
-import org.lobobrowser.util.LRUCache;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.IORoutines;

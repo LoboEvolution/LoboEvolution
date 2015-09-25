@@ -24,71 +24,75 @@ import org.xml.sax.Locator;
  */
 class LocatorImpl implements Locator {
 
-    /** The public id. */
-    private final String publicId;
+	/** The public id. */
+	private final String publicId;
 
-    /** The system id. */
-    private final String systemId;
+	/** The system id. */
+	private final String systemId;
 
-    /** The line number. */
-    private final int lineNumber;
+	/** The line number. */
+	private final int lineNumber;
 
-    /** The column number. */
-    private final int columnNumber;
+	/** The column number. */
+	private final int columnNumber;
 
-    /**
-     * Instantiates a new locator impl.
-     *
-     * @param pid
-     *            the pid
-     * @param sid
-     *            the sid
-     * @param lnumber
-     *            the lnumber
-     * @param cnumber
-     *            the cnumber
-     */
-    public LocatorImpl(String pid, String sid, int lnumber, int cnumber) {
-        super();
-        publicId = pid;
-        systemId = sid;
-        lineNumber = lnumber;
-        columnNumber = cnumber;
-    }
+	/**
+	 * Instantiates a new locator impl.
+	 *
+	 * @param pid
+	 *            the pid
+	 * @param sid
+	 *            the sid
+	 * @param lnumber
+	 *            the lnumber
+	 * @param cnumber
+	 *            the cnumber
+	 */
+	public LocatorImpl(String pid, String sid, int lnumber, int cnumber) {
+		super();
+		publicId = pid;
+		systemId = sid;
+		lineNumber = lnumber;
+		columnNumber = cnumber;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.xml.sax.Locator#getPublicId()
-     */
-    @Override
-    public String getPublicId() {
-        return this.publicId;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xml.sax.Locator#getPublicId()
+	 */
+	@Override
+	public String getPublicId() {
+		return this.publicId;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.xml.sax.Locator#getSystemId()
-     */
-    @Override
-    public String getSystemId() {
-        return this.systemId;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xml.sax.Locator#getSystemId()
+	 */
+	@Override
+	public String getSystemId() {
+		return this.systemId;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.xml.sax.Locator#getLineNumber()
-     */
-    @Override
-    public int getLineNumber() {
-        return this.lineNumber;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xml.sax.Locator#getLineNumber()
+	 */
+	@Override
+	public int getLineNumber() {
+		return this.lineNumber;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.xml.sax.Locator#getColumnNumber()
-     */
-    @Override
-    public int getColumnNumber() {
-        return this.columnNumber;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xml.sax.Locator#getColumnNumber()
+	 */
+	@Override
+	public int getColumnNumber() {
+		return this.columnNumber;
+	}
 }

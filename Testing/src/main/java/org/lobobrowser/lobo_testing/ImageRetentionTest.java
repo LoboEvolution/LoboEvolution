@@ -16,71 +16,68 @@ package org.lobobrowser.lobo_testing;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.lobobrowser.gui.*;
-import org.lobobrowser.main.*;
-import org.lobobrowser.util.*;
-import org.lobobrowser.context.*;
-import org.lobobrowser.store.*;
-
+import org.lobobrowser.context.VolatileContentImpl;
+import org.lobobrowser.gui.BrowserPanel;
+import org.lobobrowser.main.PlatformInit;
+import org.lobobrowser.store.CacheInfo;
+import org.lobobrowser.store.CacheManager;
+import org.lobobrowser.util.ID;
 
 /**
  * The Class ImageRetentionTest.
  */
 public class ImageRetentionTest {
-    public static void main(String[] args) throws Exception {
-        Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
-        PlatformInit.getInstance().init(false, false);
-        BrowserPanel panel = TestWindow.newWindow();
-        for (int i = 0; i < 100; i++) {
-            newTest(panel);
-        }
-    }
+	public static void main(String[] args) throws Exception {
+		Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
+		PlatformInit.getInstance().init(false, false);
+		BrowserPanel panel = TestWindow.newWindow();
+		for (int i = 0; i < 100; i++) {
+			newTest(panel);
+		}
+	}
 
-    public static void newTest(BrowserPanel panel) throws Exception {
-        panel.navigate(getNewURL());
-        System.gc();
-        Thread.sleep(5000);
-        System.out.println("### Free memory: "
-                + Runtime.getRuntime().freeMemory());
-        System.out.println("### Total memory: "
-                + Runtime.getRuntime().totalMemory());
-        CacheInfo cacheInfo = CacheManager.getInstance()
-                .getTransientCacheInfo();
-        System.out.println("### RAM cache entries: " + cacheInfo.numEntries);
-        System.out.println("### RAM cache size: " + cacheInfo.approximateSize);
-    }
+	public static void newTest(BrowserPanel panel) throws Exception {
+		panel.navigate(getNewURL());
+		System.gc();
+		Thread.sleep(5000);
+		System.out.println("### Free memory: " + Runtime.getRuntime().freeMemory());
+		System.out.println("### Total memory: " + Runtime.getRuntime().totalMemory());
+		CacheInfo cacheInfo = CacheManager.getInstance().getTransientCacheInfo();
+		System.out.println("### RAM cache entries: " + cacheInfo.numEntries);
+		System.out.println("### RAM cache size: " + cacheInfo.approximateSize);
+	}
 
-    /** The Constant BIG_IMAGE_URL. */
-    private static final String BIG_IMAGE_URL = "file:c:\\temp\\image\\google-news.jpg";
-    
-    /** The Constant ANIMATED_IMAGE_URL. */
-    private static final String ANIMATED_IMAGE_URL = "file:c:\\temp\\image\\tease_stopwatch.gif";
-    
-    /** The Constant REMOTE_IMAGE_URL. */
-    private static final String REMOTE_IMAGE_URL = "http://lobobrowser.org/images/LoboLogo32.png";
-    
-    private static void addImages(StringBuffer buffer, int count, String baseURL) {
-        for (int i = 0; i < count; i++) {
-            buffer.append("<img width=40 height=30 hspace=4 vspace=4 src=\"");
-            buffer.append(baseURL + "?" + ID.generateInt());
-            buffer.append("\">");
-        }
-    }
+	/** The Constant BIG_IMAGE_URL. */
+	private static final String BIG_IMAGE_URL = "file:c:\\temp\\image\\google-news.jpg";
 
-    /**
-     * Gets the new url.
-     *
-     * @return the new url
-     */
-    public static String getNewURL() {
-        StringBuffer buffer = new StringBuffer();
-        buffer.append("<body>");
-        addImages(buffer, 20, ANIMATED_IMAGE_URL);
-        addImages(buffer, 20, BIG_IMAGE_URL);
-        addImages(buffer, 1, REMOTE_IMAGE_URL);
-        buffer.append("</body>");
-        byte[] content = buffer.toString().getBytes();
-        VolatileContentImpl vc = new VolatileContentImpl("text/html", content);
-        return vc.getURL().toExternalForm();
-    }
+	/** The Constant ANIMATED_IMAGE_URL. */
+	private static final String ANIMATED_IMAGE_URL = "file:c:\\temp\\image\\tease_stopwatch.gif";
+
+	/** The Constant REMOTE_IMAGE_URL. */
+	private static final String REMOTE_IMAGE_URL = "http://lobobrowser.org/images/LoboLogo32.png";
+
+	private static void addImages(StringBuffer buffer, int count, String baseURL) {
+		for (int i = 0; i < count; i++) {
+			buffer.append("<img width=40 height=30 hspace=4 vspace=4 src=\"");
+			buffer.append(baseURL + "?" + ID.generateInt());
+			buffer.append("\">");
+		}
+	}
+
+	/**
+	 * Gets the new url.
+	 *
+	 * @return the new url
+	 */
+	public static String getNewURL() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("<body>");
+		addImages(buffer, 20, ANIMATED_IMAGE_URL);
+		addImages(buffer, 20, BIG_IMAGE_URL);
+		addImages(buffer, 1, REMOTE_IMAGE_URL);
+		buffer.append("</body>");
+		byte[] content = buffer.toString().getBytes();
+		VolatileContentImpl vc = new VolatileContentImpl("text/html", content);
+		return vc.getURL().toExternalForm();
+	}
 }

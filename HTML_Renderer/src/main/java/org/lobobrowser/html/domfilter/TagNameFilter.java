@@ -21,29 +21,30 @@ import org.w3c.dom.Node;
  */
 public class TagNameFilter implements NodeFilter {
 
-    /** The name. */
-    private final String name;
+	/** The name. */
+	private final String name;
 
-    /**
-     * Instantiates a new tag name filter.
-     *
-     * @param name
-     *            the name
-     */
-    public TagNameFilter(String name) {
-        this.name = name;
-    }
+	/**
+	 * Instantiates a new tag name filter.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public TagNameFilter(String name) {
+		this.name = name;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
-     */
-    @Override
-    public boolean accept(Node node) {
-        if (!(node instanceof Element)) {
-            return false;
-        }
-        String n = this.name;
-        return n.equalsIgnoreCase(((Element) node).getTagName());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
+	@Override
+	public boolean accept(Node node) {
+		if (!(node instanceof Element)) {
+			return false;
+		}
+		String n = this.name;
+		return n.equalsIgnoreCase(((Element) node).getTagName());
+	}
 }

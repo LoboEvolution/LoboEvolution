@@ -21,21 +21,22 @@ import org.lobobrowser.html.renderer.RBlockViewport;
  */
 public class PLayout extends CommonLayout {
 
-    /**
-     * Instantiates a new p layout.
-     */
-    public PLayout() {
-        super(DISPLAY_BLOCK);
-    }
+	/**
+	 * Instantiates a new p layout.
+	 */
+	public PLayout() {
+		super(DISPLAY_BLOCK);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.render.MarkupLayout#layoutMarkup(java.awt.Container
-     * , java.awt.Insets, org.lobobrowser.html.dombl.HTMLElementImpl)
-     */
-    @Override
-    public void layoutMarkup(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-        super.layoutMarkup(bodyLayout, markupElement);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.render.MarkupLayout#layoutMarkup(java.awt.Container
+	 * , java.awt.Insets, org.lobobrowser.html.dombl.HTMLElementImpl)
+	 */
+	@Override
+	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		super.layoutMarkup(bodyLayout, markupElement);
+	}
 }

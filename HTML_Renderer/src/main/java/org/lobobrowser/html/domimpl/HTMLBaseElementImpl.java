@@ -23,39 +23,39 @@ import org.w3c.dom.UserDataHandler;
  */
 public class HTMLBaseElementImpl extends HTMLElementImpl {
 
-    /**
-     * Instantiates a new HTML base element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLBaseElementImpl(String name) {
-        super(name, true);
-    }
+	/**
+	 * Instantiates a new HTML base element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLBaseElementImpl(String name) {
+		super(name, true);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setUserData(java.lang.String,
-     * java.lang.Object, org.w3c.dom.UserDataHandler)
-     */
-    @Override
-    public Object setUserData(String key, Object data, UserDataHandler handler) {
-        if (HtmlParser.MODIFYING_KEY.equals(key)
-                && (data != Boolean.TRUE)) {
-            this.processBaseTag();
-        }
-        return super.setUserData(key, data, handler);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.domimpl.DOMNodeImpl#setUserData(java.lang.String,
+	 * java.lang.Object, org.w3c.dom.UserDataHandler)
+	 */
+	@Override
+	public Object setUserData(String key, Object data, UserDataHandler handler) {
+		if (HtmlParser.MODIFYING_KEY.equals(key) && (data != Boolean.TRUE)) {
+			this.processBaseTag();
+		}
+		return super.setUserData(key, data, handler);
+	}
 
-    /**
-     * Process base tag.
-     */
-    private final void processBaseTag() {
-        HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
-        if (doc != null) {
-            doc.setBaseURI(this.getAttribute(HtmlAttributeProperties.HREF));
-            doc.setDefaultTarget(this
-                    .getAttribute(HtmlAttributeProperties.TARGET));
-        }
-    }
+	/**
+	 * Process base tag.
+	 */
+	private final void processBaseTag() {
+		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		if (doc != null) {
+			doc.setBaseURI(this.getAttribute(HtmlAttributeProperties.HREF));
+			doc.setDefaultTarget(this.getAttribute(HtmlAttributeProperties.TARGET));
+		}
+	}
 }

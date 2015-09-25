@@ -26,6 +26,7 @@ import java.net.URL;
 import java.util.Properties;
 
 import org.lobobrowser.clientlet.ComponentContent;
+import org.lobobrowser.http.HttpRequest;
 
 /**
  * Represents a navigator frame. In many ways this interface parallels the
@@ -420,12 +421,12 @@ public interface NavigatorFrame {
     String getSourceCode();
 
     /**
-     * Creates a {@link NetworkRequest} object that can be used to load data
+     * Creates a {@link HttpRequest} object that can be used to load data
      * over HTTP and other network protocols.
      *
      * @return the network request
      */
-    NetworkRequest createNetworkRequest();
+    HttpRequest createHttpRequest();
 
     /**
      * Gets the component content currently set in the frame.
@@ -514,4 +515,6 @@ public interface NavigatorFrame {
      *            the property and the underlying implementation.
      */
     void setProperty(String name, Object value);
+
+	
 }

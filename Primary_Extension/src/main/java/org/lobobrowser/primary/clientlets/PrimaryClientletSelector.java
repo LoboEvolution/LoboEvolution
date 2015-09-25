@@ -33,103 +33,95 @@ import org.lobobrowser.primary.clientlets.pdf.PdfClientlet;
  */
 public class PrimaryClientletSelector implements ClientletSelector {
 
-    /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(PrimaryClientletSelector.class.getName());
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(PrimaryClientletSelector.class.getName());
 
-    /**
-     * Instantiates a new primary clientlet selector.
-     */
-    public PrimaryClientletSelector() {
-        super();
-    }
+	/**
+	 * Instantiates a new primary clientlet selector.
+	 */
+	public PrimaryClientletSelector() {
+		super();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.clientlet.ClientletSelector#select(org.lobobrowser.clientlet
-     * .ClientletRequest, org.lobobrowser.clientlet.ClientletResponse)
-     */
-    @Override
-    public Clientlet select(ClientletRequest request, ClientletResponse response) {
-        // Don't try to catch too much here.
-        // Clientlets here are not overriddable.
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.ClientletSelector#select(org.lobobrowser.
+	 * clientlet .ClientletRequest, org.lobobrowser.clientlet.ClientletResponse)
+	 */
+	@Override
+	public Clientlet select(ClientletRequest request, ClientletResponse response) {
+		// Don't try to catch too much here.
+		// Clientlets here are not overriddable.
 
-        String mimeType = response.getMimeType();
-       
-        System.out.println("mimeType: " + mimeType);
+		String mimeType = response.getMimeType();
 
-        if (logger.isLoggable(Level.INFO)) {
-            logger.info("select(): mimeType=" + mimeType);
-        }
-        String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
-        if ("text/html".equals(mimeTypeTL)) {
-            // TODO: XHTML needs its own clientlet.
-            return new HtmlClientlet();
-        } else if ("image/jpeg".equals(mimeTypeTL)
-                || "image/jpg".equals(mimeTypeTL)
-                || "image/gif".equals(mimeTypeTL)
-                || "image/png".equals(mimeTypeTL)
-                || "image/svg+xml".equals(mimeTypeTL)) {
-            return new ImageClientlet();
-        } else if ((mimeType == null)
-                || "application/octet-stream".equals(mimeTypeTL)
-                || "content/unknown".equals(mimeTypeTL)) {
+		System.out.println("mimeType: " + mimeType);
 
-            String path = response.getResponseURL().getPath();
-            int lastDotIdx = path.lastIndexOf('.');
-            String extension = lastDotIdx == -1 ? "" : path
-                    .substring(lastDotIdx + 1);
-            String extensionTL = extension.toLowerCase();
-            if ("html".equals(extensionTL) || "htm".equals(extensionTL)
-                    || (extensionTL.length() == 0)) {
-                return new HtmlClientlet();
-            } else if ("gif".equals(extensionTL) || "jpg".equals(extensionTL)
-                    || "png".equals(extensionTL) || "svg".equals(extensionTL)) {
-                return new ImageClientlet();
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
+		if (logger.isLoggable(Level.INFO)) {
+			logger.info("select(): mimeType=" + mimeType);
+		}
+		String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
+		if ("text/html".equals(mimeTypeTL)) {
+			// TODO: XHTML needs its own clientlet.
+			return new HtmlClientlet();
+		} else if ("image/jpeg".equals(mimeTypeTL) || "image/jpg".equals(mimeTypeTL) || "image/gif".equals(mimeTypeTL)
+				|| "image/png".equals(mimeTypeTL) || "image/svg+xml".equals(mimeTypeTL)) {
+			return new ImageClientlet();
+		} else if ((mimeType == null) || "application/octet-stream".equals(mimeTypeTL)
+				|| "content/unknown".equals(mimeTypeTL)) {
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.clientlet.ClientletSelector#lastResortSelect(org.lobobrowser
-     * .clientlet.ClientletRequest, org.lobobrowser.clientlet.ClientletResponse)
-     */
-    @Override
-    public Clientlet lastResortSelect(ClientletRequest request,
-            ClientletResponse response) {
-        String mimeType = response.getMimeType();
-        String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
-        System.out.println("mtttl2: " + mimeTypeTL);
-        if ((mimeTypeTL != null) && mimeTypeTL.startsWith("text/")) {
-            return new TextClientlet();
-        } else if ("application/xml".equals(mimeTypeTL)) {
-            // TODO: XHTML needs its own clientlet.
-            return new HtmlClientlet();
-        } else {
-            String path = response.getResponseURL().getPath();
-            int lastDotIdx = path.lastIndexOf('.');
-            String extension = lastDotIdx == -1 ? "" : path.substring(lastDotIdx + 1);
-            String extensionTL = extension.toLowerCase();
-            if ("xhtml".equals(extensionTL)) {
-                return new HtmlClientlet();
-            } else if ("txt".equals(extensionTL) || "xml".equals(extensionTL)
-                    || "js".equals(extensionTL) || "rss".equals(extensionTL)
-                    || "xaml".equals(extensionTL) || "css".equals(extensionTL)) {
-                return new TextClientlet();
-            } else if ("pdf".equals(extensionTL)) {
-                return new PdfClientlet();
-            } else if (mimeType == null) {
-                return new HtmlClientlet();
-            } else {
-                return new DownloadClientlet();
-            }
-        }
-    }
+			String path = response.getResponseURL().getPath();
+			int lastDotIdx = path.lastIndexOf('.');
+			String extension = lastDotIdx == -1 ? "" : path.substring(lastDotIdx + 1);
+			String extensionTL = extension.toLowerCase();
+			if ("html".equals(extensionTL) || "htm".equals(extensionTL) || (extensionTL.length() == 0)) {
+				return new HtmlClientlet();
+			} else if ("gif".equals(extensionTL) || "jpg".equals(extensionTL) || "png".equals(extensionTL)
+					|| "svg".equals(extensionTL)) {
+				return new ImageClientlet();
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.ClientletSelector#lastResortSelect(org.
+	 * lobobrowser .clientlet.ClientletRequest,
+	 * org.lobobrowser.clientlet.ClientletResponse)
+	 */
+	@Override
+	public Clientlet lastResortSelect(ClientletRequest request, ClientletResponse response) {
+		String mimeType = response.getMimeType();
+		String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
+		System.out.println("mtttl2: " + mimeTypeTL);
+		if ((mimeTypeTL != null) && mimeTypeTL.startsWith("text/")) {
+			return new TextClientlet();
+		} else if ("application/xml".equals(mimeTypeTL)) {
+			// TODO: XHTML needs its own clientlet.
+			return new HtmlClientlet();
+		} else {
+			String path = response.getResponseURL().getPath();
+			int lastDotIdx = path.lastIndexOf('.');
+			String extension = lastDotIdx == -1 ? "" : path.substring(lastDotIdx + 1);
+			String extensionTL = extension.toLowerCase();
+			if ("xhtml".equals(extensionTL)) {
+				return new HtmlClientlet();
+			} else if ("txt".equals(extensionTL) || "xml".equals(extensionTL) || "js".equals(extensionTL)
+					|| "rss".equals(extensionTL) || "xaml".equals(extensionTL) || "css".equals(extensionTL)) {
+				return new TextClientlet();
+			} else if ("pdf".equals(extensionTL)) {
+				return new PdfClientlet();
+			} else if (mimeType == null) {
+				return new HtmlClientlet();
+			} else {
+				return new DownloadClientlet();
+			}
+		}
+	}
 }

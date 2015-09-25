@@ -26,102 +26,102 @@ import org.w3c.dom.NodeList;
  */
 public class ElementAttributeFilter {
 
-    /** The attribute. */
-    private final String attribute;
+	/** The attribute. */
+	private final String attribute;
 
-    /** The node list. */
-    private final NodeList nodeList;
+	/** The node list. */
+	private final NodeList nodeList;
 
-    /**
-     * Instantiates a new element attribute filter.
-     *
-     * @param nodeList
-     *            the node list
-     * @param attribute
-     *            the attribute
-     */
-    public ElementAttributeFilter(NodeList nodeList, String attribute) {
-        this.attribute = attribute;
-        this.nodeList = nodeList;
-    }
+	/**
+	 * Instantiates a new element attribute filter.
+	 *
+	 * @param nodeList
+	 *            the node list
+	 * @param attribute
+	 *            the attribute
+	 */
+	public ElementAttributeFilter(NodeList nodeList, String attribute) {
+		this.attribute = attribute;
+		this.nodeList = nodeList;
+	}
 
-    /**
-     * Instantiates a new element attribute filter.
-     *
-     * @param attribute
-     *            the attribute
-     */
-    public ElementAttributeFilter(String attribute) {
-        this.attribute = attribute;
-        nodeList = null;
-    }
+	/**
+	 * Instantiates a new element attribute filter.
+	 *
+	 * @param attribute
+	 *            the attribute
+	 */
+	public ElementAttributeFilter(String attribute) {
+		this.attribute = attribute;
+		nodeList = null;
+	}
 
-    /**
-     * Gets the attribute.
-     *
-     * @return the attribute
-     */
-    public String getAttribute() {
+	/**
+	 * Gets the attribute.
+	 *
+	 * @return the attribute
+	 */
+	public String getAttribute() {
 
-        String result = "";
+		String result = "";
 
-        Node node = nodeList.item(0);
-        NamedNodeMap attribs = node.getAttributes();
+		Node node = nodeList.item(0);
+		NamedNodeMap attribs = node.getAttributes();
 
-        for (int s = 0; s < attribs.getLength(); s++) {
-            Attr attr = (Attr) attribs.item(s);
+		for (int s = 0; s < attribs.getLength(); s++) {
+			Attr attr = (Attr) attribs.item(s);
 
-            if (attribute.equalsIgnoreCase(attr.getNodeName())) {
-                result = attr.getNodeValue();
-            }
-        }
+			if (attribute.equalsIgnoreCase(attr.getNodeName())) {
+				result = attr.getNodeValue();
+			}
+		}
 
-        return result;
+		return result;
 
-    }
+	}
 
-    /**
-     * Sets the attribute.
-     *
-     * @param doc
-     *            the doc
-     * @param val
-     *            the val
-     */
-    public void setAttribute(HTMLDocumentImpl doc, String val) {
-        boolean result = false;
-        HTMLElement el = doc.getBody();
-        if (el != null) {
-            NamedNodeMap attributes = el.getAttributes();
-            for (int s = 0; s < attributes.getLength(); s++) {
-                Attr attr = (Attr) attributes.item(s);
+	/**
+	 * Sets the attribute.
+	 *
+	 * @param doc
+	 *            the doc
+	 * @param val
+	 *            the val
+	 */
+	public void setAttribute(HTMLDocumentImpl doc, String val) {
+		boolean result = false;
+		HTMLElement el = doc.getBody();
+		if (el != null) {
+			NamedNodeMap attributes = el.getAttributes();
+			for (int s = 0; s < attributes.getLength(); s++) {
+				Attr attr = (Attr) attributes.item(s);
 
-                if (attribute.equals(attr.getNodeName())) {
-                    attr.setNodeValue(val);
-                    el.setAttributeNode(attr);
-                    result = true;
-                }
-            }
+				if (attribute.equals(attr.getNodeName())) {
+					attr.setNodeValue(val);
+					el.setAttributeNode(attr);
+					result = true;
+				}
+			}
 
-            if (!result) {
-                Attr attr = new DOMAttrImpl(attribute, val, true, el, true);
-                el.setAttributeNode(attr);
-            }
-            doc.setBody(el);
-        }
-    }
+			if (!result) {
+				Attr attr = new DOMAttrImpl(attribute, val, true, el, true);
+				el.setAttributeNode(attr);
+			}
+			doc.setBody(el);
+		}
+	}
 
-    /**
-     * Removes the attribute.
-     *
-     * @param doc
-     *            the doc
-     * @param val
-     *            the val
-     */
-    public void removeAttribute(HTMLDocumentImpl doc, String val) {
-        HTMLElement el = doc.getBody();
-        el.removeAttribute(attribute);
-        doc.setBody(el);
-    }
+	/**
+	 * Removes the attribute.
+	 *
+	 * @param doc
+	 *            the doc
+	 * @param val
+	 *            the val
+	 */
+	public void removeAttribute(HTMLDocumentImpl doc, String val) {
+		HTMLElement el = doc.getBody();
+		el.removeAttribute(attribute);
+		doc.setBody(el);
+	}
 }

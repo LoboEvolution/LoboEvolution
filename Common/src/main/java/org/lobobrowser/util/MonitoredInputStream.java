@@ -34,7 +34,7 @@ public class MonitoredInputStream extends InputStream {
     private final long minProgressEventGap;
     /** The evt progress. */
     public final EventDispatch evtProgress = new EventDispatch();
-
+    
     /**
      * Instantiates a new monitored input stream.
      *
@@ -47,7 +47,7 @@ public class MonitoredInputStream extends InputStream {
         this.delegate = delegate;
         this.minProgressEventGap = minProgressEventGap;
     }
-
+    
     /**
      * Instantiates a new monitored input stream.
      *
@@ -57,7 +57,7 @@ public class MonitoredInputStream extends InputStream {
     public MonitoredInputStream(InputStream delegate) {
         this(delegate, 200);
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#available()
@@ -66,7 +66,7 @@ public class MonitoredInputStream extends InputStream {
     public int available() throws IOException {
         return this.delegate.available();
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#close()
@@ -75,7 +75,7 @@ public class MonitoredInputStream extends InputStream {
     public void close() throws IOException {
         this.delegate.close();
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#markSupported()
@@ -84,7 +84,7 @@ public class MonitoredInputStream extends InputStream {
     public boolean markSupported() {
         return false;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#read()
@@ -97,10 +97,10 @@ public class MonitoredInputStream extends InputStream {
         }
         return b;
     }
-
+    
     /** The last even posted. */
     private long lastEvenPosted = 0;
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#read(byte[], int, int)
@@ -111,9 +111,10 @@ public class MonitoredInputStream extends InputStream {
         if (numRead != -1) {
             this.progress += numRead;
             long currentTime = System.currentTimeMillis();
-            if ((currentTime - this.lastEvenPosted) > this.minProgressEventGap) {
-                this.evtProgress.fireEvent(new InputProgressEvent(this,
-                        this.progress));
+            if ((currentTime
+                    - this.lastEvenPosted) > this.minProgressEventGap) {
+                this.evtProgress
+                        .fireEvent(new InputProgressEvent(this, this.progress));
                 this.lastEvenPosted = currentTime;
             }
         }

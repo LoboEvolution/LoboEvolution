@@ -30,160 +30,163 @@ import org.lobobrowser.util.gui.ColorFactory;
  */
 public class TableRenderState extends StyleSheetRenderState {
 
-    /**
-     * Instantiates a new table render state.
-     *
-     * @param prevRenderState
-     *            the prev render state
-     * @param element
-     *            the element
-     */
-    public TableRenderState(RenderState prevRenderState, HTMLElementImpl element) {
-        super(prevRenderState, element);
-    }
+	/**
+	 * Instantiates a new table render state.
+	 *
+	 * @param prevRenderState
+	 *            the prev render state
+	 * @param element
+	 *            the element
+	 */
+	public TableRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+		super(prevRenderState, element);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.renderstate.StyleSheetRenderState#getTextBackgroundColor
-     * ()
-     */
-    @Override
-    public Color getTextBackgroundColor() {
-        return super.getTextBackgroundColor();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#
+	 * getTextBackgroundColor ()
+	 */
+	@Override
+	public Color getTextBackgroundColor() {
+		return super.getTextBackgroundColor();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.renderstate.StyleSheetRenderState#getDefaultDisplay()
-     */
-    @Override
-    protected int getDefaultDisplay() {
-        return DISPLAY_TABLE;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.renderstate.StyleSheetRenderState#getDefaultDisplay(
+	 * )
+	 */
+	@Override
+	protected int getDefaultDisplay() {
+		return DISPLAY_TABLE;
+	}
 
-    /** The background info. */
-    private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
+	/** The background info. */
+	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#invalidate()
-     */
-    @Override
-    public void invalidate() {
-        super.invalidate();
-        this.backgroundInfo = INVALID_BACKGROUND_INFO;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#invalidate()
+	 */
+	@Override
+	public void invalidate() {
+		super.invalidate();
+		this.backgroundInfo = INVALID_BACKGROUND_INFO;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.renderstate.StyleSheetRenderState#getBackgroundInfo()
-     */
-    @Override
-    public BackgroundInfo getBackgroundInfo() {
-        BackgroundInfo binfo = this.backgroundInfo;
-        if (binfo != INVALID_BACKGROUND_INFO) {
-            return binfo;
-        }
-        // Apply style based on deprecated attributes.
-        binfo = super.getBackgroundInfo();
-        HTMLTableElementImpl element = (HTMLTableElementImpl) this.element;
-        if ((binfo == null) || (binfo.getBackgroundColor() == null)) {
-            String bgColor = element.getBgColor();
-            if ((bgColor != null) && !"".equals(bgColor)) {
-                Color bgc = ColorFactory.getInstance().getColor(bgColor);
-                if (binfo == null) {
-                    binfo = new BackgroundInfo();
-                }
-                binfo.setBackgroundColor(bgc);
-            }
-        }
-        if ((binfo == null) || (binfo.getBackgroundImage() == null)) {
-            String background = element
-                    .getAttribute(HtmlAttributeProperties.BACKGROUND);
-            if ((background != null) && !"".equals(background)) {
-                if (binfo == null) {
-                    binfo = new BackgroundInfo();
-                }
-                binfo.setBackgroundImage(this.document.getFullURL(background));
-            }
-        }
-        this.backgroundInfo = binfo;
-        return binfo;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.renderstate.StyleSheetRenderState#getBackgroundInfo(
+	 * )
+	 */
+	@Override
+	public BackgroundInfo getBackgroundInfo() {
+		BackgroundInfo binfo = this.backgroundInfo;
+		if (binfo != INVALID_BACKGROUND_INFO) {
+			return binfo;
+		}
+		// Apply style based on deprecated attributes.
+		binfo = super.getBackgroundInfo();
+		HTMLTableElementImpl element = (HTMLTableElementImpl) this.element;
+		if ((binfo == null) || (binfo.getBackgroundColor() == null)) {
+			String bgColor = element.getBgColor();
+			if ((bgColor != null) && !"".equals(bgColor)) {
+				Color bgc = ColorFactory.getInstance().getColor(bgColor);
+				if (binfo == null) {
+					binfo = new BackgroundInfo();
+				}
+				binfo.setBackgroundColor(bgc);
+			}
+		}
+		if ((binfo == null) || (binfo.getBackgroundImage() == null)) {
+			String background = element.getAttribute(HtmlAttributeProperties.BACKGROUND);
+			if ((background != null) && !"".equals(background)) {
+				if (binfo == null) {
+					binfo = new BackgroundInfo();
+				}
+				binfo.setBackgroundImage(this.document.getFullURL(background));
+			}
+		}
+		this.backgroundInfo = binfo;
+		return binfo;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getBorderInfo()
-     */
-    @Override
-    public BorderInfo getBorderInfo() {
-        BorderInfo binfo = this.borderInfo;
-        if (binfo != INVALID_BORDER_INFO) {
-            return binfo;
-        }
-        binfo = super.getBorderInfo();
-        if ((binfo == null)
-                || ((binfo.getTopStyle() == HtmlValues.BORDER_STYLE_NONE)
-                        && (binfo.getBottomStyle() == HtmlValues.BORDER_STYLE_NONE)
-                        && (binfo.getLeftStyle() == HtmlValues.BORDER_STYLE_NONE) && (binfo
-                                .getRightStyle() == HtmlValues.BORDER_STYLE_NONE))) {
-            if (binfo == null) {
-                binfo = new BorderInfo();
-            }
-            HTMLElementImpl element = this.element;
-            if (element != null) {
-                String border = element
-                        .getAttribute(HtmlAttributeProperties.BORDER);
-                if (border != null) {
-                    border = border.trim();
-                    int value;
-                    int valueType;
-                    if (border.endsWith("%")) {
-                        valueType = HtmlInsets.TYPE_PERCENT;
-                        try {
-                            value = Integer.parseInt(border.substring(0,
-                                    border.length() - 1));
-                        } catch (NumberFormatException nfe) {
-                            value = 0;
-                        }
-                    } else {
-                        valueType = HtmlInsets.TYPE_PIXELS;
-                        try {
-                            value = Integer.parseInt(border);
-                        } catch (NumberFormatException nfe) {
-                            value = 0;
-                        }
-                    }
-                    HtmlInsets borderInsets = new HtmlInsets();
-                    borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value;
-                    borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = valueType;
-                    binfo.setInsets(borderInsets);
-                    if (binfo.getTopColor() == null) {
-                        binfo.setTopColor(Color.LIGHT_GRAY);
-                    }
-                    if (binfo.getLeftColor() == null) {
-                        binfo.setLeftColor(Color.LIGHT_GRAY);
-                    }
-                    if (binfo.getRightColor() == null) {
-                        binfo.setRightColor(Color.GRAY);
-                    }
-                    if (binfo.getBottomColor() == null) {
-                        binfo.setBottomColor(Color.GRAY);
-                    }
-                    if (value != 0) {
-                        binfo.setTopStyle(HtmlValues.BORDER_STYLE_SOLID);
-                        binfo.setLeftStyle(HtmlValues.BORDER_STYLE_SOLID);
-                        binfo.setRightStyle(HtmlValues.BORDER_STYLE_SOLID);
-                        binfo.setBottomStyle(HtmlValues.BORDER_STYLE_SOLID);
-                    }
-                }
-            }
-        }
-        this.borderInfo = binfo;
-        return binfo;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.renderstate.StyleSheetRenderState#getBorderInfo()
+	 */
+	@Override
+	public BorderInfo getBorderInfo() {
+		BorderInfo binfo = this.borderInfo;
+		if (binfo != INVALID_BORDER_INFO) {
+			return binfo;
+		}
+		binfo = super.getBorderInfo();
+		if ((binfo == null) || ((binfo.getTopStyle() == HtmlValues.BORDER_STYLE_NONE)
+				&& (binfo.getBottomStyle() == HtmlValues.BORDER_STYLE_NONE)
+				&& (binfo.getLeftStyle() == HtmlValues.BORDER_STYLE_NONE)
+				&& (binfo.getRightStyle() == HtmlValues.BORDER_STYLE_NONE))) {
+			if (binfo == null) {
+				binfo = new BorderInfo();
+			}
+			HTMLElementImpl element = this.element;
+			if (element != null) {
+				String border = element.getAttribute(HtmlAttributeProperties.BORDER);
+				if (border != null) {
+					border = border.trim();
+					int value;
+					int valueType;
+					if (border.endsWith("%")) {
+						valueType = HtmlInsets.TYPE_PERCENT;
+						try {
+							value = Integer.parseInt(border.substring(0, border.length() - 1));
+						} catch (NumberFormatException nfe) {
+							value = 0;
+						}
+					} else {
+						valueType = HtmlInsets.TYPE_PIXELS;
+						try {
+							value = Integer.parseInt(border);
+						} catch (NumberFormatException nfe) {
+							value = 0;
+						}
+					}
+					HtmlInsets borderInsets = new HtmlInsets();
+					borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value;
+					borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = valueType;
+					binfo.setInsets(borderInsets);
+					if (binfo.getTopColor() == null) {
+						binfo.setTopColor(Color.LIGHT_GRAY);
+					}
+					if (binfo.getLeftColor() == null) {
+						binfo.setLeftColor(Color.LIGHT_GRAY);
+					}
+					if (binfo.getRightColor() == null) {
+						binfo.setRightColor(Color.GRAY);
+					}
+					if (binfo.getBottomColor() == null) {
+						binfo.setBottomColor(Color.GRAY);
+					}
+					if (value != 0) {
+						binfo.setTopStyle(HtmlValues.BORDER_STYLE_SOLID);
+						binfo.setLeftStyle(HtmlValues.BORDER_STYLE_SOLID);
+						binfo.setRightStyle(HtmlValues.BORDER_STYLE_SOLID);
+						binfo.setBottomStyle(HtmlValues.BORDER_STYLE_SOLID);
+					}
+				}
+			}
+		}
+		this.borderInfo = binfo;
+		return binfo;
+	}
 
 }

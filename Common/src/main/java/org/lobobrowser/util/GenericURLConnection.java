@@ -32,7 +32,7 @@ import java.util.Map;
 public class GenericURLConnection extends URLConnection {
     /** The input stream. */
     private final InputStream inputStream;
-
+    
     /**
      * Instantiates a new generic url connection.
      *
@@ -45,7 +45,7 @@ public class GenericURLConnection extends URLConnection {
         super(url);
         this.inputStream = in;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.net.URLConnection#connect()
@@ -53,7 +53,7 @@ public class GenericURLConnection extends URLConnection {
     @Override
     public void connect() throws IOException {
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.net.URLConnection#getInputStream()
@@ -62,7 +62,7 @@ public class GenericURLConnection extends URLConnection {
     public InputStream getInputStream() throws IOException {
         return this.inputStream;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.net.URLConnection#getHeaderField(int)
@@ -71,7 +71,7 @@ public class GenericURLConnection extends URLConnection {
     public String getHeaderField(int n) {
         return null;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.net.URLConnection#getHeaderField(String)
@@ -80,7 +80,7 @@ public class GenericURLConnection extends URLConnection {
     public String getHeaderField(String name) {
         return null;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.net.URLConnection#getHeaderFieldKey(int)
@@ -89,7 +89,7 @@ public class GenericURLConnection extends URLConnection {
     public String getHeaderFieldKey(int n) {
         return null;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.net.URLConnection#getHeaderFields()

@@ -28,7 +28,7 @@ public class Objects {
      */
     private Objects() {
     }
-
+    
     /**
      * Equals.
      *
@@ -41,7 +41,7 @@ public class Objects {
     public static boolean equals(Object obj1, Object obj2) {
         return obj1 == null ? (obj2 == null) : (obj1.equals(obj2));
     }
-
+    
     /**
      * Checks if is box class.
      *
@@ -55,7 +55,7 @@ public class Objects {
                 || (clazz == Long.class) || (clazz == Byte.class)
                 || (clazz == Short.class) || (clazz == Character.class);
     }
-
+    
     /**
      * Are assignable to.
      *
@@ -77,7 +77,7 @@ public class Objects {
         }
         return true;
     }
-
+    
     /**
      * Checks if is assignable or box.
      *
@@ -111,7 +111,7 @@ public class Objects {
         }
         return false;
     }
-
+    
     /**
      * Checks if is numeric.
      *
@@ -120,12 +120,12 @@ public class Objects {
      * @return true, if is numeric
      */
     private static boolean isNumeric(Class clazz) {
-        return Number.class.isAssignableFrom(clazz)
-                || (clazz.isPrimitive() && ((clazz == int.class)
-                        || (clazz == double.class) || (clazz == byte.class)
-                        || (clazz == short.class) || (clazz == float.class) || (clazz == long.class)));
+        return Number.class.isAssignableFrom(clazz) || (clazz.isPrimitive()
+                && ((clazz == int.class) || (clazz == double.class)
+                        || (clazz == byte.class) || (clazz == short.class)
+                        || (clazz == float.class) || (clazz == long.class)));
     }
-
+    
     /**
      * Checks if is numeric.
      *

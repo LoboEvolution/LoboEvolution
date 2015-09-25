@@ -13,27 +13,27 @@
  */
 package org.lobobrowser.cobra_testing;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
-import org.lobobrowser.html.gui.*;
+import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.renderstate.RenderState;
-import org.lobobrowser.html.test.*;
+import org.lobobrowser.html.test.SimpleHtmlRendererContext;
+import org.lobobrowser.html.test.SimpleUserAgentContext;
 
 /**
  * The Class BareMinimumTest.
  */
 public class BareMinimumTest {
-    public static void main(String[] args) throws Exception {
-        JFrame window = new JFrame();
-        HtmlPanel panel = new HtmlPanel();
+	public static void main(String[] args) throws Exception {
+		JFrame window = new JFrame();
+		HtmlPanel panel = new HtmlPanel();
 
-        panel.setDefaultOverflowX(RenderState.OVERFLOW_HIDDEN);
-        panel.setDefaultOverflowY(RenderState.OVERFLOW_HIDDEN);
+		panel.setDefaultOverflowX(RenderState.OVERFLOW_HIDDEN);
+		panel.setDefaultOverflowY(RenderState.OVERFLOW_HIDDEN);
 
-        window.getContentPane().add(panel);
-        window.setSize(400, 400);
-        window.setVisible(true);
-        new SimpleHtmlRendererContext(panel, new SimpleUserAgentContext())
-                .navigate("http://www.google.com");
-    }
+		window.getContentPane().add(panel);
+		window.setSize(400, 400);
+		window.setVisible(true);
+		new SimpleHtmlRendererContext(panel, new SimpleUserAgentContext()).navigate("http://www.google.com");
+	}
 }

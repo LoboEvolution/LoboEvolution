@@ -24,129 +24,131 @@ import org.mozilla.javascript.ScriptableObject;
  */
 public class JavaConstructorObject extends ScriptableObject implements Function {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The class wrapper. */
-    private final JavaClassWrapper classWrapper;
+	/** The class wrapper. */
+	private final JavaClassWrapper classWrapper;
 
-    /** The instantiator. */
-    private final JavaInstantiator instantiator;
+	/** The instantiator. */
+	private final JavaInstantiator instantiator;
 
-    /** The name. */
-    private final String name;
+	/** The name. */
+	private final String name;
 
-    /**
-     * Instantiates a new java constructor object.
-     *
-     * @param name
-     *            the name
-     * @param classWrapper
-     *            the class wrapper
-     */
-    public JavaConstructorObject(String name, JavaClassWrapper classWrapper) {
-        this.name = name;
-        this.classWrapper = classWrapper;
-        this.instantiator = new SimpleInstantiator(classWrapper);
-    }
+	/**
+	 * Instantiates a new java constructor object.
+	 *
+	 * @param name
+	 *            the name
+	 * @param classWrapper
+	 *            the class wrapper
+	 */
+	public JavaConstructorObject(String name, JavaClassWrapper classWrapper) {
+		this.name = name;
+		this.classWrapper = classWrapper;
+		this.instantiator = new SimpleInstantiator(classWrapper);
+	}
 
-    /**
-     * Instantiates a new java constructor object.
-     *
-     * @param name
-     *            the name
-     * @param classWrapper
-     *            the class wrapper
-     * @param instantiator
-     *            the instantiator
-     */
-    public JavaConstructorObject(String name, JavaClassWrapper classWrapper,
-            JavaInstantiator instantiator) {
-        this.name = name;
-        this.classWrapper = classWrapper;
-        this.instantiator = instantiator;
-    }
+	/**
+	 * Instantiates a new java constructor object.
+	 *
+	 * @param name
+	 *            the name
+	 * @param classWrapper
+	 *            the class wrapper
+	 * @param instantiator
+	 *            the instantiator
+	 */
+	public JavaConstructorObject(String name, JavaClassWrapper classWrapper, JavaInstantiator instantiator) {
+		this.name = name;
+		this.classWrapper = classWrapper;
+		this.instantiator = instantiator;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getClassName()
-     */
-    @Override
-    public String getClassName() {
-        return this.name;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.mozilla.javascript.ScriptableObject#getClassName()
+	 */
+	@Override
+	public String getClassName() {
+		return this.name;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.mozilla.javascript.Function#call(org.mozilla.javascript.Context,
-     * org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable,
-     * java.lang.Object[])
-     */
-    @Override
-    public Object call(Context cx, Scriptable scope, Scriptable thisObj,
-            Object[] args) {
-        throw new UnsupportedOperationException();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.mozilla.javascript.Function#call(org.mozilla.javascript.Context,
+	 * org.mozilla.javascript.Scriptable, org.mozilla.javascript.Scriptable,
+	 * java.lang.Object[])
+	 */
+	@Override
+	public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+		throw new UnsupportedOperationException();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.mozilla.javascript.Function#construct(org.mozilla.javascript.Context,
-     * org.mozilla.javascript.Scriptable, java.lang.Object[])
-     */
-    @Override
-    public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
-        try {
-            Object javaObject = this.instantiator.newInstance();
-            Scriptable newObject = new JavaObjectWrapper(this.classWrapper,
-                    javaObject);
-            newObject.setParentScope(scope);
-            return newObject;
-        } catch (Exception err) {
-            throw new IllegalStateException(err.getMessage());
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.mozilla.javascript.Function#construct(org.mozilla.javascript.Context,
+	 * org.mozilla.javascript.Scriptable, java.lang.Object[])
+	 */
+	@Override
+	public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
+		try {
+			Object javaObject = this.instantiator.newInstance();
+			Scriptable newObject = new JavaObjectWrapper(this.classWrapper, javaObject);
+			newObject.setParentScope(scope);
+			return newObject;
+		} catch (Exception err) {
+			throw new IllegalStateException(err.getMessage());
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
-     */
-    @Override
-    public java.lang.Object getDefaultValue(Class hint) {
-        if (String.class.equals(hint)) {
-            return "function " + this.name;
-        } else {
-            return super.getDefaultValue(hint);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
+	 */
+	@Override
+	public java.lang.Object getDefaultValue(Class hint) {
+		if (String.class.equals(hint)) {
+			return "function " + this.name;
+		} else {
+			return super.getDefaultValue(hint);
+		}
+	}
 
-    /**
-     * The Class SimpleInstantiator.
-     */
-    public static class SimpleInstantiator implements JavaInstantiator {
+	/**
+	 * The Class SimpleInstantiator.
+	 */
+	public static class SimpleInstantiator implements JavaInstantiator {
 
-        /** The class wrapper. */
-        private final JavaClassWrapper classWrapper;
+		/** The class wrapper. */
+		private final JavaClassWrapper classWrapper;
 
-        /**
-         * Instantiates a new simple instantiator.
-         *
-         * @param classWrapper
-         *            the class wrapper
-         */
-        public SimpleInstantiator(final JavaClassWrapper classWrapper) {
-            super();
-            this.classWrapper = classWrapper;
-        }
+		/**
+		 * Instantiates a new simple instantiator.
+		 *
+		 * @param classWrapper
+		 *            the class wrapper
+		 */
+		public SimpleInstantiator(final JavaClassWrapper classWrapper) {
+			super();
+			this.classWrapper = classWrapper;
+		}
 
-        /*
-         * (non-Javadoc)
-         * @see org.lobobrowser.js.JavaInstantiator#newInstance()
-         */
-        @Override
-        public Object newInstance() throws InstantiationException,
-        IllegalAccessException {
-            return this.classWrapper.newInstance();
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.lobobrowser.js.JavaInstantiator#newInstance()
+		 */
+		@Override
+		public Object newInstance() throws InstantiationException, IllegalAccessException {
+			return this.classWrapper.newInstance();
+		}
+	}
 }

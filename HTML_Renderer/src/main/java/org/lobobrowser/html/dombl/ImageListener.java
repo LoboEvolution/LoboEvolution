@@ -25,14 +25,14 @@ package org.lobobrowser.html.dombl;
  */
 public interface ImageListener extends java.util.EventListener {
 
-    /** The Constant EMPTY_ARRAY. */
-    ImageListener[] EMPTY_ARRAY = new ImageListener[0];
+	/** The Constant EMPTY_ARRAY. */
+	ImageListener[] EMPTY_ARRAY = new ImageListener[0];
 
-    /**
-     * Image loaded.
-     *
-     * @param event
-     *            the event
-     */
-    void imageLoaded(ImageEvent event);
+	/**
+	 * Image loaded.
+	 *
+	 * @param event
+	 *            the event
+	 */
+	void imageLoaded(ImageEvent event);
 }

@@ -14,52 +14,56 @@
 package org.lobobrowser.lobo_testing;
 
 import java.awt.event.WindowEvent;
-import javax.swing.*;
-import java.util.*;
-import javax.swing.border.*;
-import org.lobobrowser.gui.*;
+import java.util.Locale;
+
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+import javax.swing.border.EtchedBorder;
+
+import org.lobobrowser.gui.BrowserPanel;
 import org.lobobrowser.main.PlatformInit;
 
 /**
  * The Class BrowserPanelNoSecurity.
  */
 public class BrowserPanelNoSecurity extends JFrame {
-    
+
 	private static final long serialVersionUID = 1L;
 
 	public static void main(String[] args) throws Exception {
-        // Set Locale to Chinese.
-        Locale.setDefault(Locale.CHINESE);
+		// Set Locale to Chinese.
+		Locale.setDefault(Locale.CHINESE);
 
-        // Initialize logging.
-        PlatformInit.getInstance().initLogging(false);
+		// Initialize logging.
+		PlatformInit.getInstance().initLogging(false);
 
-        // Essential steps - we're not even initializing the look & feel.
-        PlatformInit.getInstance().initProtocols();
-        PlatformInit.getInstance().initExtensions();
+		// Essential steps - we're not even initializing the look & feel.
+		PlatformInit.getInstance().initProtocols();
+		PlatformInit.getInstance().initExtensions();
 
-        // Create frame with a specific size.
-        JFrame frame = new BrowserPanelTest();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(600, 400);
-        frame.setVisible(true);
-    }
+		// Create frame with a specific size.
+		JFrame frame = new BrowserPanelTest();
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		frame.setSize(600, 400);
+		frame.setVisible(true);
+	}
 
-    public BrowserPanelNoSecurity() throws Exception {
-        this.setTitle("Lobo Demo - No Security!");
-        final BrowserPanel bp = new BrowserPanel();
-        bp.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(
-                EtchedBorder.RAISED), "Embedded browser"));
-        bp.navigate("http://www.google.com");
-        this.getContentPane().add(bp);
+	public BrowserPanelNoSecurity() throws Exception {
+		this.setTitle("Lobo Demo - No Security!");
+		final BrowserPanel bp = new BrowserPanel();
+		bp.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(EtchedBorder.RAISED), "Embedded browser"));
+		bp.navigate("http://www.google.com");
+		this.getContentPane().add(bp);
 
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                // This needs to be called in order
-                // to inform extensions about the
-                // window closing.
-                bp.windowClosing();
-            }
-        });
-    }
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// This needs to be called in order
+				// to inform extensions about the
+				// window closing.
+				bp.windowClosing();
+			}
+		});
+	}
 }

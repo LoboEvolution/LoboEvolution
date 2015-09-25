@@ -22,26 +22,25 @@ import org.lobobrowser.html.renderstate.TextDecorationRenderState;
  */
 public class HTMLUnderlineElementImpl extends HTMLAbstractUIElement {
 
-    /**
-     * Instantiates a new HTML underline element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLUnderlineElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML underline element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLUnderlineElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
-     * .html.renderstate.RenderState)
-     */
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        prevRenderState = new TextDecorationRenderState(prevRenderState,
-                RenderState.MASK_TEXTDECORATION_UNDERLINE);
-        return super.createRenderState(prevRenderState);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
+	 * lobobrowser .html.renderstate.RenderState)
+	 */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		prevRenderState = new TextDecorationRenderState(prevRenderState, RenderState.MASK_TEXTDECORATION_UNDERLINE);
+		return super.createRenderState(prevRenderState);
+	}
 }

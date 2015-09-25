@@ -45,10 +45,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
-import org.lobobrowser.http.SSLCertificate;
+import org.lobobrowser.http.UserAgentContext;
+import org.lobobrowser.util.SSLCertificate;
 import org.lobobrowser.util.io.IORoutines;
 import org.w3c.dom.Document;
 
@@ -57,155 +57,150 @@ import org.w3c.dom.Document;
  */
 public class ParserTest extends JFrame {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
-    /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(ParserTest.class
-            .getName());
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(ParserTest.class.getName());
 
-    /** The tree. */
-    private final JTree tree;
+	/** The tree. */
+	private final JTree tree;
 
-    /** The text area. */
-    private final JTextArea textArea;
+	/** The text area. */
+	private final JTextArea textArea;
 
-    /**
-     * Instantiates a new parser test.
-     *
-     * @throws HeadlessException
-     *             the headless exception
-     */
-    public ParserTest() throws HeadlessException {
-        this("HTML Parser-Only Test Tool");
-    }
+	/**
+	 * Instantiates a new parser test.
+	 *
+	 * @throws HeadlessException
+	 *             the headless exception
+	 */
+	public ParserTest() throws HeadlessException {
+		this("HTML Parser-Only Test Tool");
+	}
 
-    /**
-     * Instantiates a new parser test.
-     *
-     * @param title
-     *            the title
-     * @throws HeadlessException
-     *             the headless exception
-     */
-    public ParserTest(String title) throws HeadlessException {
-        super(title);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Container contentPane = this.getContentPane();
-        contentPane.setLayout(new BorderLayout());
-        JPanel topPanel = new JPanel();
-        topPanel.setLayout(new BorderLayout());
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new BorderLayout());
-        final JTextField textField = new JTextField();
-        JButton button = new JButton("Parse & Render");
-        final JTabbedPane tabbedPane = new JTabbedPane();
-        final JTree tree = new JTree();
-        tree.setModel(null);
-        final JScrollPane scrollPane = new JScrollPane(tree);
+	/**
+	 * Instantiates a new parser test.
+	 *
+	 * @param title
+	 *            the title
+	 * @throws HeadlessException
+	 *             the headless exception
+	 */
+	public ParserTest(String title) throws HeadlessException {
+		super(title);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container contentPane = this.getContentPane();
+		contentPane.setLayout(new BorderLayout());
+		JPanel topPanel = new JPanel();
+		topPanel.setLayout(new BorderLayout());
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new BorderLayout());
+		final JTextField textField = new JTextField();
+		JButton button = new JButton("Parse & Render");
+		final JTabbedPane tabbedPane = new JTabbedPane();
+		final JTree tree = new JTree();
+		tree.setModel(null);
+		final JScrollPane scrollPane = new JScrollPane(tree);
 
-        this.tree = tree;
+		this.tree = tree;
 
-        contentPane.add(topPanel, BorderLayout.NORTH);
-        contentPane.add(bottomPanel, BorderLayout.CENTER);
+		contentPane.add(topPanel, BorderLayout.NORTH);
+		contentPane.add(bottomPanel, BorderLayout.CENTER);
 
-        topPanel.add(new JLabel("URL: "), BorderLayout.WEST);
-        topPanel.add(textField, BorderLayout.CENTER);
-        topPanel.add(button, BorderLayout.EAST);
+		topPanel.add(new JLabel("URL: "), BorderLayout.WEST);
+		topPanel.add(textField, BorderLayout.CENTER);
+		topPanel.add(button, BorderLayout.EAST);
 
-        bottomPanel.add(tabbedPane, BorderLayout.CENTER);
+		bottomPanel.add(tabbedPane, BorderLayout.CENTER);
 
-        final JTextArea textArea = new JTextArea();
-        textArea.setEditable(false);
-        this.textArea = textArea;
-        final JScrollPane textAreaSp = new JScrollPane(textArea);
+		final JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
+		this.textArea = textArea;
+		final JScrollPane textAreaSp = new JScrollPane(textArea);
 
-        tabbedPane.addTab("HTML DOM", scrollPane);
-        tabbedPane.addTab("Source Code", textAreaSp);
+		tabbedPane.addTab("HTML DOM", scrollPane);
+		tabbedPane.addTab("Source Code", textAreaSp);
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                process(textField.getText());
-            }
-        });
-    }
+		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				process(textField.getText());
+			}
+		});
+	}
 
-    /**
-     * Process.
-     *
-     * @param uri
-     *            the uri
-     */
-    private void process(String uri) {
-        try {
-            URL url;
-            try {
-                url = new URL(uri);
-            } catch (MalformedURLException mfu) {
-                int idx = uri.indexOf(':');
-                if ((idx == -1) || (idx == 1)) {
-                    // try file
-                    url = new URL("file:" + uri);
-                } else {
-                    throw mfu;
-                }
-            }
-            logger.info("process(): Loading URI=[" + uri + "].");
-            long time0 = System.currentTimeMillis();
-            SSLCertificate.setCertificate();
-            URLConnection connection = url.openConnection();
-            connection.setRequestProperty("User-Agent",
-                    "Mozilla/4.0 (compatible;) Cobra/0.96.1+");
-            connection.setRequestProperty("Cookie", "");
-            if (connection instanceof HttpURLConnection) {
-                HttpURLConnection hc = (HttpURLConnection) connection;
-                hc.setInstanceFollowRedirects(true);
-                int responseCode = hc.getResponseCode();
-                logger.info("process(): HTTP response code: " + responseCode);
-            }
-            InputStream in = connection.getInputStream();
-            byte[] content;
-            try {
-                content = IORoutines.load(in, 8192);
-            } finally {
-                in.close();
-            }
-            String source = new String(content, "UTF-8");
+	/**
+	 * Process.
+	 *
+	 * @param uri
+	 *            the uri
+	 */
+	private void process(String uri) {
+		try {
+			URL url;
+			try {
+				url = new URL(uri);
+			} catch (MalformedURLException mfu) {
+				int idx = uri.indexOf(':');
+				if ((idx == -1) || (idx == 1)) {
+					// try file
+					url = new URL("file:" + uri);
+				} else {
+					throw mfu;
+				}
+			}
+			logger.info("process(): Loading URI=[" + uri + "].");
+			long time0 = System.currentTimeMillis();
+			SSLCertificate.setCertificate();
+			URLConnection connection = url.openConnection();
+			connection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible;) Cobra/0.96.1+");
+			connection.setRequestProperty("Cookie", "");
+			if (connection instanceof HttpURLConnection) {
+				HttpURLConnection hc = (HttpURLConnection) connection;
+				hc.setInstanceFollowRedirects(true);
+				int responseCode = hc.getResponseCode();
+				logger.info("process(): HTTP response code: " + responseCode);
+			}
+			InputStream in = connection.getInputStream();
+			byte[] content;
+			try {
+				content = IORoutines.load(in, 8192);
+			} finally {
+				in.close();
+			}
+			String source = new String(content, "UTF-8");
 
-            this.textArea.setText(source);
-            long time1 = System.currentTimeMillis();
-            InputStream bin = new ByteArrayInputStream(content);
-            UserAgentContext ucontext = new SimpleUserAgentContext();
-            DocumentBuilderImpl builder = new DocumentBuilderImpl(ucontext);
-            // Provide a proper URI, in case it was a file.
-            String actualURI = url.toExternalForm();
-            // Should change to use proper charset.
-            Document document = builder.parse(new InputSourceImpl(bin,
-                    actualURI, "UTF-8"));
-            long time2 = System.currentTimeMillis();
-            logger.info("Parsed URI=[" + uri + "]: Parse elapsed: "
-                    + (time2 - time1) + " ms. Load elapsed: " + (time1 - time0)
-                    + " ms.");
-            this.tree.setModel(new NodeTreeModel(document));
-        } catch (Exception err) {
-            logger.log(Level.SEVERE, "Error trying to load URI=[" + uri + "].",
-                    err);
-        }
-    }
+			this.textArea.setText(source);
+			long time1 = System.currentTimeMillis();
+			InputStream bin = new ByteArrayInputStream(content);
+			UserAgentContext ucontext = new SimpleUserAgentContext();
+			DocumentBuilderImpl builder = new DocumentBuilderImpl(ucontext);
+			// Provide a proper URI, in case it was a file.
+			String actualURI = url.toExternalForm();
+			// Should change to use proper charset.
+			Document document = builder.parse(new InputSourceImpl(bin, actualURI, "UTF-8"));
+			long time2 = System.currentTimeMillis();
+			logger.info("Parsed URI=[" + uri + "]: Parse elapsed: " + (time2 - time1) + " ms. Load elapsed: "
+					+ (time1 - time0) + " ms.");
+			this.tree.setModel(new NodeTreeModel(document));
+		} catch (Exception err) {
+			logger.log(Level.SEVERE, "Error trying to load URI=[" + uri + "].", err);
+		}
+	}
 
-    /**
-     * The main method.
-     *
-     * @param args
-     *            the arguments
-     */
-    public static void main(String[] args) {
-        ParserTest frame = new ParserTest();
-        frame.setSize(800, 400);
-        frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-        frame.setVisible(true);
-    }
+	/**
+	 * The main method.
+	 *
+	 * @param args
+	 *            the arguments
+	 */
+	public static void main(String[] args) {
+		ParserTest frame = new ParserTest();
+		frame.setSize(800, 400);
+		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+		frame.setVisible(true);
+	}
 }

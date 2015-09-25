@@ -24,41 +24,43 @@ import org.lobobrowser.w3c.html.HTMLHtmlElement;
 /**
  * The Class HTMLHtmlElementImpl.
  */
-public class HTMLHtmlElementImpl extends HTMLElementImpl implements
-HTMLHtmlElement {
+public class HTMLHtmlElementImpl extends HTMLElementImpl implements HTMLHtmlElement {
 
-    /**
-     * Instantiates a new HTML html element impl.
-     */
-    public HTMLHtmlElementImpl() {
-        super(HtmlProperties.HTML, true);
-    }
+	/**
+	 * Instantiates a new HTML html element impl.
+	 */
+	public HTMLHtmlElementImpl() {
+		super(HtmlProperties.HTML, true);
+	}
 
-    /**
-     * Instantiates a new HTML html element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLHtmlElementImpl(String name) {
-        super(name, true);
-    }
+	/**
+	 * Instantiates a new HTML html element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLHtmlElementImpl(String name) {
+		super(name, true);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLHtmlElement#getVersion()
-     */
-    @Override
-    public String getVersion() {
-        return this.getAttribute(HtmlAttributeProperties.VERSION);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLHtmlElement#getVersion()
+	 */
+	@Override
+	public String getVersion() {
+		return this.getAttribute(HtmlAttributeProperties.VERSION);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLHtmlElement#setVersion(java.lang.String)
-     */
-    @Override
-    public void setVersion(String version) {
-        this.setAttribute(HtmlAttributeProperties.VERSION, version);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLHtmlElement#setVersion(java.lang.String)
+	 */
+	@Override
+	public void setVersion(String version) {
+		this.setAttribute(HtmlAttributeProperties.VERSION, version);
+	}
 }

@@ -20,6 +20,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
+
 import javax.swing.JComponent;
 import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
@@ -57,10 +58,8 @@ public class ImageScrollable extends JComponent implements Scrollable {
 	}
 
 	@Override
-	public boolean imageUpdate(Image img, int infoflags, int x, int y, int w,
-			int h) {
-		if (((infoflags & ImageObserver.ALLBITS) != 0)
-				|| ((infoflags & ImageObserver.FRAMEBITS) != 0)) {
+	public boolean imageUpdate(Image img, int infoflags, int x, int y, int w, int h) {
+		if (((infoflags & ImageObserver.ALLBITS) != 0) || ((infoflags & ImageObserver.FRAMEBITS) != 0)) {
 			this.imageWidth = img.getWidth(this);
 			this.imageHeight = img.getHeight(this);
 			this.revalidate();
@@ -95,8 +94,7 @@ public class ImageScrollable extends JComponent implements Scrollable {
 	}
 
 	@Override
-	public int getScrollableBlockIncrement(Rectangle arg0, int orientation,
-			int direction) {
+	public int getScrollableBlockIncrement(Rectangle arg0, int orientation, int direction) {
 		if (orientation == SwingConstants.HORIZONTAL) {
 			return arg0.width;
 		} else {

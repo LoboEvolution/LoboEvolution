@@ -30,6 +30,7 @@ import java.util.LinkedList;
 public class Domains {
     /** The Constant gTLDs. */
     private static final Collection<String> gTLDs;
+    
     static {
         gTLDs = new HashSet<String>();
         gTLDs.add(".aero");
@@ -303,14 +304,14 @@ public class Domains {
         gTLDs.add(".zm");
         gTLDs.add(".zw");
     }
-
+    
     /**
      * Instantiates a new domains.
      */
     private Domains() {
         super();
     }
-
+    
     /**
      * Checks if is valid cookie domain.
      *
@@ -348,7 +349,7 @@ public class Domains {
             return Strings.countChars(domain, '.') >= 3;
         }
     }
-
+    
     /**
      * Ends with gtld.
      *
@@ -366,7 +367,7 @@ public class Domains {
         }
         return false;
     }
-
+    
     /**
      * Checks if is likely host name.
      *
@@ -389,7 +390,7 @@ public class Domains {
         // Check for country code.
         return lastDotIdx == (nameTL.length() - 3);
     }
-
+    
     /**
      * Gets the possible domains.
      *

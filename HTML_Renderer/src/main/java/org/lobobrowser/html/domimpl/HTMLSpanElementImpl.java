@@ -22,16 +22,15 @@ import org.lobobrowser.w3c.html.HTMLElement;
 /**
  * The Class HTMLSpanElementImpl.
  */
-public class HTMLSpanElementImpl extends HTMLAbstractUIElement implements
-HTMLElement {
+public class HTMLSpanElementImpl extends HTMLAbstractUIElement implements HTMLElement {
 
-    /**
-     * Instantiates a new HTML span element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLSpanElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML span element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLSpanElementImpl(String name) {
+		super(name);
+	}
 }

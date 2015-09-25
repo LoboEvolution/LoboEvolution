@@ -19,9 +19,9 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.CSSUtilities;
+import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.w3c.html.HTMLStyleElement;
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.UserDataHandler;

@@ -42,6 +42,7 @@ public class ID {
     private static final long globalProcessID;
     /** The Constant logger. */
     private static final Logger logger = Logger.getLogger(ID.class.getName());
+    
     static {
         long time = System.currentTimeMillis();
         long nanoTime = System.nanoTime();
@@ -62,23 +63,23 @@ public class ID {
         RANDOM2 = new Random(nanoTime);
         RANDOM3 = new Random(addressHashCode ^ freeMemory);
     }
-
+    
     /**
      * Instantiates a new id.
      */
     private ID() {
     }
-
+    
     /**
      * Generate long.
      *
      * @return the long
      */
     public static long generateLong() {
-        return Math.abs(RANDOM1.nextLong() ^ RANDOM2.nextLong()
-                ^ RANDOM3.nextLong());
+        return Math.abs(
+                RANDOM1.nextLong() ^ RANDOM2.nextLong() ^ RANDOM3.nextLong());
     }
-
+    
     /**
      * Generate int.
      *
@@ -87,7 +88,7 @@ public class ID {
     public static int generateInt() {
         return (int) generateLong();
     }
-
+    
     /**
      * Gets the m d5 bytes.
      *
@@ -105,7 +106,7 @@ public class ID {
             throw new IllegalStateException(uee);
         }
     }
-
+    
     /**
      * Gets the hex string.
      *
@@ -117,7 +118,7 @@ public class ID {
         // This method cannot change even if it's wrong.
         BigInteger bigInteger = BigInteger.ZERO;
         int shift = 0;
-        for (int i = bytes.length;--i >= 0;) {
+        for (int i = bytes.length; --i >= 0;) {
             BigInteger contrib = BigInteger.valueOf(bytes[i] & 0xFF);
             contrib = contrib.shiftLeft(shift);
             bigInteger = bigInteger.add(contrib);
@@ -125,7 +126,7 @@ public class ID {
         }
         return bigInteger.toString(16).toUpperCase();
     }
-
+    
     /**
      * Gets a process ID that is nearly guaranteed to be globally unique.
      *
@@ -134,7 +135,7 @@ public class ID {
     public static long getGlobalProcessID() {
         return globalProcessID;
     }
-
+    
     /**
      * Random.
      *

@@ -22,62 +22,58 @@ import javax.swing.JMenuItem;
  */
 public class SearchPageSource {
 
-    /** The action pool. */
-    private final ActionPool actionPool;
+	/** The action pool. */
+	private final ActionPool actionPool;
 
-    /**
-     * Instantiates a new search page source.
-     *
-     * @param actionPool
-     *            the action pool
-     */
-    SearchPageSource(ActionPool actionPool) {
-        this.actionPool = actionPool;
-    }
+	/**
+	 * Instantiates a new search page source.
+	 *
+	 * @param actionPool
+	 *            the action pool
+	 */
+	SearchPageSource(ActionPool actionPool) {
+		this.actionPool = actionPool;
+	}
 
-    /**
-     * Gets the search menu.
-     *
-     * @return the search menu
-     */
-    public JMenu getSearchMenu() {
-        JMenu searchMenu = new JMenu("Search");
-        searchMenu.setMnemonic('S');
-        searchMenu.add(this.getGoogleSearchMenu());
-        searchMenu.add(this.getYahooSearchMenu());
-        searchMenu.add(this.getBingSearchMenu());
-        return searchMenu;
-    }
+	/**
+	 * Gets the search menu.
+	 *
+	 * @return the search menu
+	 */
+	public JMenu getSearchMenu() {
+		JMenu searchMenu = new JMenu("Search");
+		searchMenu.setMnemonic('S');
+		searchMenu.add(this.getGoogleSearchMenu());
+		searchMenu.add(this.getYahooSearchMenu());
+		searchMenu.add(this.getBingSearchMenu());
+		return searchMenu;
+	}
 
-    /**
-     * Gets the google search menu.
-     *
-     * @return the google search menu
-     */
-    private JMenuItem getGoogleSearchMenu() {
-        return ComponentSource.menuItem("Google",
-                this.actionPool.createNavigateAction("http://google.com"));
-    }
+	/**
+	 * Gets the google search menu.
+	 *
+	 * @return the google search menu
+	 */
+	private JMenuItem getGoogleSearchMenu() {
+		return ComponentSource.menuItem("Google", this.actionPool.createNavigateAction("http://google.com"));
+	}
 
-    /**
-     * Gets the yahoo search menu.
-     *
-     * @return the yahoo search menu
-     */
-    private JMenuItem getYahooSearchMenu() {
-        return ComponentSource
-                .menuItem("Yahoo!", this.actionPool
-                        .createNavigateAction("http://search.yahoo.com"));
-    }
+	/**
+	 * Gets the yahoo search menu.
+	 *
+	 * @return the yahoo search menu
+	 */
+	private JMenuItem getYahooSearchMenu() {
+		return ComponentSource.menuItem("Yahoo!", this.actionPool.createNavigateAction("http://search.yahoo.com"));
+	}
 
-    /**
-     * Gets the bing search menu.
-     *
-     * @return the bing search menu
-     */
-    private JMenuItem getBingSearchMenu() {
-        return ComponentSource.menuItem("Bing",
-                this.actionPool.createNavigateAction("http://www.bing.com"));
-    }
+	/**
+	 * Gets the bing search menu.
+	 *
+	 * @return the bing search menu
+	 */
+	private JMenuItem getBingSearchMenu() {
+		return ComponentSource.menuItem("Bing", this.actionPool.createNavigateAction("http://www.bing.com"));
+	}
 
 }

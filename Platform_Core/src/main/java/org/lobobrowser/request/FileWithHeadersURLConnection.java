@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.lobobrowser.util.NameValuePair;
+import org.lobobrowser.http.NameValuePair;
 import org.lobobrowser.util.io.IORoutines;
 
 /**

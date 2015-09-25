@@ -22,7 +22,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 
 import org.jdatepicker.JDatePicker;
 import org.lobobrowser.html.HtmlAttributeProperties;
@@ -45,10 +44,10 @@ public class InputDatePickerControl extends BaseInputControl {
 		min = modelNode.getAttribute(HtmlAttributeProperties.MIN);
 		max = modelNode.getAttribute(HtmlAttributeProperties.MAX);
 
-		if(modelNode.getPattern()!= null && modelNode.getPattern().length()>0){
+		if (modelNode.getPattern() != null && modelNode.getPattern().length() > 0) {
 			datePattern = modelNode.getPattern();
 		}
-		
+
 		picker.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -64,7 +63,7 @@ public class InputDatePickerControl extends BaseInputControl {
 			}
 		});
 
-		this.add((JComponent) picker);
+		this.add(picker);
 	}
 
 	@Override
@@ -72,11 +71,12 @@ public class InputDatePickerControl extends BaseInputControl {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	private boolean isMin(Date keyCode) {
 		try {
-			if (keyCode == null)
+			if (keyCode == null) {
 				return true;
+			}
 			SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
 			return keyCode.before(dateFormatter.parse(min));
 		} catch (Exception ex) {
@@ -86,8 +86,9 @@ public class InputDatePickerControl extends BaseInputControl {
 
 	private boolean isMax(Date keyCode) {
 		try {
-			if (keyCode == null)
+			if (keyCode == null) {
 				return true;
+			}
 			SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
 			return keyCode.after(dateFormatter.parse(max));
 		} catch (Exception ex) {

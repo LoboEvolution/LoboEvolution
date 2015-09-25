@@ -27,52 +27,53 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class SourceAction extends AbstractAction implements EnableableAction {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The window. */
-    private NavigatorWindow window;
+	/** The window. */
+	private NavigatorWindow window;
 
-    /** The component source. */
-    private ComponentSource componentSource;
+	/** The component source. */
+	private ComponentSource componentSource;
 
-    /** The action. */
-    private ActionPool action;
+	/** The action. */
+	private ActionPool action;
 
-    /**
-     * Instantiates a new source action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     * @param action
-     *            the action
-     */
-    public SourceAction(ComponentSource componentSource,
-            NavigatorWindow window, ActionPool action) {
-        this.action = action;
-        this.window = window;
-        this.componentSource = componentSource;
-    }
+	/**
+	 * Instantiates a new source action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 * @param action
+	 *            the action
+	 */
+	public SourceAction(ComponentSource componentSource, NavigatorWindow window, ActionPool action) {
+		this.action = action;
+		this.window = window;
+		this.componentSource = componentSource;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.primary.action.EnableableAction#updateEnabling()
-     */
-    @Override
-    public void updateEnabling() {
-        action.setEnabled(window.hasSource());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.primary.action.EnableableAction#updateEnabling()
+	 */
+	@Override
+	public void updateEnabling() {
+		action.setEnabled(window.hasSource());
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        componentSource.showSource();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		componentSource.showSource();
+	}
 
 }

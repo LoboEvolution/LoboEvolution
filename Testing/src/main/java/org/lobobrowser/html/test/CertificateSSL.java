@@ -18,34 +18,33 @@ import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.lobobrowser.http.SSLCertificate;
+import org.lobobrowser.util.SSLCertificate;
 
 /**
  * The Class CertificateSSL.
  */
 public class CertificateSSL {
 
-    /**
-     * The main method.
-     *
-     * @param args
-     *            the arguments
-     * @throws Exception
-     *             the exception
-     */
-    public static void main(String[] args) throws Exception {
+	/**
+	 * The main method.
+	 *
+	 * @param args
+	 *            the arguments
+	 * @throws Exception
+	 *             the exception
+	 */
+	public static void main(String[] args) throws Exception {
 
-        SSLCertificate.setCertificate();
-        URL url = new URL(
-                "https://owa.valueteam.com/owa/14.2.390.1/themes/resources/logon.css");
-        URLConnection con = url.openConnection();
-        Reader reader = new InputStreamReader(con.getInputStream());
-        while (true) {
-            int ch = reader.read();
-            if (ch == -1) {
-                break;
-            }
-            System.out.print((char) ch);
-        }
-    }
+		SSLCertificate.setCertificate();
+		URL url = new URL("https://owa.valueteam.com/owa/14.2.390.1/themes/resources/logon.css");
+		URLConnection con = url.openConnection();
+		Reader reader = new InputStreamReader(con.getInputStream());
+		while (true) {
+			int ch = reader.read();
+			if (ch == -1) {
+				break;
+			}
+			System.out.print((char) ch);
+		}
+	}
 }

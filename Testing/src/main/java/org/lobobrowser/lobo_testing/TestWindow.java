@@ -13,40 +13,40 @@
  */
 package org.lobobrowser.lobo_testing;
 
-import java.awt.event.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-import javax.swing.*;
-import org.lobobrowser.gui.*;
+import javax.swing.JFrame;
 
+import org.lobobrowser.gui.BrowserPanel;
 
 /**
  * The Class TestWindow.
  */
 public class TestWindow extends JFrame {
-    
-    
+
 	private static final long serialVersionUID = 1L;
 	/** The browser panel. */
-    private final BrowserPanel browserPanel;
+	private final BrowserPanel browserPanel;
 
-    public TestWindow() {
-        super("Lobo Test...");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        final BrowserPanel panel = new BrowserPanel();
-        this.browserPanel = panel;
-        this.getContentPane().add(panel);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                panel.windowClosing();
-            }
-        });
-    }
+	public TestWindow() {
+		super("Lobo Test...");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		final BrowserPanel panel = new BrowserPanel();
+		this.browserPanel = panel;
+		this.getContentPane().add(panel);
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				panel.windowClosing();
+			}
+		});
+	}
 
-    public static BrowserPanel newWindow() {
-        TestWindow window = new TestWindow();
-        window.setSize(700, 500);
-        window.setVisible(true);
-        return window.browserPanel;
-    }
+	public static BrowserPanel newWindow() {
+		TestWindow window = new TestWindow();
+		window.setSize(700, 500);
+		window.setVisible(true);
+		return window.browserPanel;
+	}
 }

@@ -22,35 +22,35 @@ import java.util.Iterator;
  */
 public interface RCollection extends BoundableRenderable {
 
-    /**
-     * Gets the collection of {@link Renderable} children.
-     *
-     * @return the renderables
-     */
-    Iterator getRenderables();
+	/**
+	 * Gets the collection of {@link Renderable} children.
+	 *
+	 * @return the renderables
+	 */
+	Iterator getRenderables();
 
-    /**
-     * Update widget bounds.
-     *
-     * @param guiX
-     *            the gui x
-     * @param guiY
-     *            the gui y
-     */
-    void updateWidgetBounds(int guiX, int guiY);
+	/**
+	 * Update widget bounds.
+	 *
+	 * @param guiX
+	 *            the gui x
+	 * @param guiY
+	 *            the gui y
+	 */
+	void updateWidgetBounds(int guiX, int guiY);
 
-    /**
-     * Invalidates layout in all descendents.
-     */
-    void invalidateLayoutDeep();
+	/**
+	 * Invalidates layout in all descendents.
+	 */
+	void invalidateLayoutDeep();
 
-    /**
-     * Focus.
-     */
-    void focus();
+	/**
+	 * Focus.
+	 */
+	void focus();
 
-    /**
-     * Blur.
-     */
-    void blur();
+	/**
+	 * Blur.
+	 */
+	void blur();
 }

@@ -29,7 +29,7 @@ public interface ObjectFilter {
      * @return the object
      */
     Object decode(Object source);
-
+    
     /**
      * Encode.
      *

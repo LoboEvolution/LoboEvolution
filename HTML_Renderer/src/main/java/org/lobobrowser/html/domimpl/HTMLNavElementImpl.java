@@ -20,28 +20,27 @@ import org.lobobrowser.w3c.html.HTMLNavElement;
 /**
  * The Class HTMLNavElementImpl.
  */
-public class HTMLNavElementImpl extends HTMLAbstractUIElement implements
-HTMLNavElement {
+public class HTMLNavElementImpl extends HTMLAbstractUIElement implements HTMLNavElement {
 
-    /**
-     * Instantiates a new HTML nav element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLNavElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML nav element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLNavElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
-     * .html.renderstate.RenderState)
-     */
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        return new NavRenderState(prevRenderState, this);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
+	 * lobobrowser .html.renderstate.RenderState)
+	 */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new NavRenderState(prevRenderState, this);
+	}
 
 }

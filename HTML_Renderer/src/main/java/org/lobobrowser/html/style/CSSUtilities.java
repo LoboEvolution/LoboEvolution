@@ -26,9 +26,9 @@ import java.net.URLConnection;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
-import org.lobobrowser.http.SSLCertificate;
+import org.lobobrowser.http.UserAgentContext;
+import org.lobobrowser.util.SSLCertificate;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.IORoutines;
@@ -117,13 +117,12 @@ public class CSSUtilities {
 
 		URL url = null;
 		CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
-		
-		
+
 		URL baseURL = new URL(doc.getBaseURI());
-        URL scriptURL = Urls.createURL(baseURL, href);
-        String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
-        
-        try {
+		URL scriptURL = Urls.createURL(baseURL, href);
+		String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
+
+		try {
 			if (scriptURI.startsWith("//")) {
 				scriptURI = "http:" + scriptURI;
 			}

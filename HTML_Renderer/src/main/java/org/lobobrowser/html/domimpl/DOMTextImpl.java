@@ -27,160 +27,167 @@ import org.w3c.dom.Text;
  */
 public class DOMTextImpl extends DOMCharacterDataImpl implements Text {
 
-    /**
-     * Instantiates a new DOM text impl.
-     */
-    public DOMTextImpl() {
-        this("");
-    }
+	/**
+	 * Instantiates a new DOM text impl.
+	 */
+	public DOMTextImpl() {
+		this("");
+	}
 
-    /**
-     * Instantiates a new DOM text impl.
-     *
-     * @param text
-     *            the text
-     */
-    public DOMTextImpl(String text) {
-        this.text = text;
-    }
+	/**
+	 * Instantiates a new DOM text impl.
+	 *
+	 * @param text
+	 *            the text
+	 */
+	public DOMTextImpl(String text) {
+		this.text = text;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.Text#isElementContentWhitespace()
-     */
-    @Override
-    public boolean isElementContentWhitespace() {
-        String t = this.text;
-        return (t == null) || t.trim().equals("");
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.Text#isElementContentWhitespace()
+	 */
+	@Override
+	public boolean isElementContentWhitespace() {
+		String t = this.text;
+		return (t == null) || t.trim().equals("");
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.Text#replaceWholeText(String)
-     */
-    @Override
-    public Text replaceWholeText(String content) throws DOMException {
-        DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
-        if (parent == null) {
-            throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
-                    "Text node has no parent");
-        }
-        return parent.replaceAdjacentTextNodes(this, content);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.Text#replaceWholeText(String)
+	 */
+	@Override
+	public Text replaceWholeText(String content) throws DOMException {
+		DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
+		if (parent == null) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Text node has no parent");
+		}
+		return parent.replaceAdjacentTextNodes(this, content);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.Text#splitText(int)
-     */
-    @Override
-    public Text splitText(int offset) throws DOMException {
-        DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
-        if (parent == null) {
-            throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
-                    "Text node has no parent");
-        }
-        String t = this.text;
-        if ((offset < 0) || (offset > t.length())) {
-            throw new DOMException(DOMException.INDEX_SIZE_ERR, "Bad offset: "
-                    + offset);
-        }
-        String content1 = t.substring(0, offset);
-        String content2 = t.substring(offset);
-        this.text = content1;
-        DOMTextImpl newNode = new DOMTextImpl(content2);
-        newNode.setOwnerDocument(this.document);
-        return (Text) parent.insertAfter(newNode, this);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.Text#splitText(int)
+	 */
+	@Override
+	public Text splitText(int offset) throws DOMException {
+		DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
+		if (parent == null) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Text node has no parent");
+		}
+		String t = this.text;
+		if ((offset < 0) || (offset > t.length())) {
+			throw new DOMException(DOMException.INDEX_SIZE_ERR, "Bad offset: " + offset);
+		}
+		String content1 = t.substring(0, offset);
+		String content2 = t.substring(offset);
+		this.text = content1;
+		DOMTextImpl newNode = new DOMTextImpl(content2);
+		newNode.setOwnerDocument(this.document);
+		return (Text) parent.insertAfter(newNode, this);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.Text#getwholeText()
-     */
-    @Override
-    public String getWholeText() {
-        DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
-        if (parent == null) {
-            throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR,
-                    "Text node has no parent");
-        }
-        return parent.getTextContent();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.Text#getwholeText()
+	 */
+	@Override
+	public String getWholeText() {
+		DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
+		if (parent == null) {
+			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Text node has no parent");
+		}
+		return parent.getTextContent();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.DOMNodeImpl#getlocalName()
-     */
-    @Override
-    public String getLocalName() {
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getlocalName()
+	 */
+	@Override
+	public String getLocalName() {
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeName()
-     */
-    @Override
-    public String getNodeName() {
-        return "#text";
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeName()
+	 */
+	@Override
+	public String getNodeName() {
+		return "#text";
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeType()
-     */
-    @Override
-    public short getNodeType() {
-        return Node.TEXT_NODE;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeType()
+	 */
+	@Override
+	public short getNodeType() {
+		return Node.TEXT_NODE;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeValue()
-     */
-    @Override
-    public String getNodeValue() throws DOMException {
-        return this.text;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeValue()
+	 */
+	@Override
+	public String getNodeValue() throws DOMException {
+		return this.text;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.DOMNodeImpl#setnodeValue(String)
-     */
-    @Override
-    public void setNodeValue(String nodeValue) throws DOMException {
-        this.text = nodeValue;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#setnodeValue(String)
+	 */
+	@Override
+	public void setNodeValue(String nodeValue) throws DOMException {
+		this.text = nodeValue;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.DOMCharacterDataImpl#setTextContent(java.lang
-     * .String)
-     */
-    @Override
-    public void setTextContent(String textContent) throws DOMException {
-        this.text = textContent;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.domimpl.DOMCharacterDataImpl#setTextContent(java.
+	 * lang .String)
+	 */
+	@Override
+	public void setTextContent(String textContent) throws DOMException {
+		this.text = textContent;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#createSimilarNode()
-     */
-    @Override
-    protected Node createSimilarNode() {
-        return new DOMTextImpl(this.text);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#createSimilarNode()
+	 */
+	@Override
+	protected Node createSimilarNode() {
+		return new DOMTextImpl(this.text);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMCharacterDataImpl#toString()
-     */
-    @Override
-    public String toString() {
-        String text = this.text;
-        int textLength = text == null ? 0 : text.length();
-        return "#text[length=" + textLength + ",value=\""
-        + Strings.truncate(text, 64) + "\",renderState="
-        + this.getRenderState() + "]";
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMCharacterDataImpl#toString()
+	 */
+	@Override
+	public String toString() {
+		String text = this.text;
+		int textLength = text == null ? 0 : text.length();
+		return "#text[length=" + textLength + ",value=\"" + Strings.truncate(text, 64) + "\",renderState="
+				+ this.getRenderState() + "]";
+	}
 }

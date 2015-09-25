@@ -37,7 +37,7 @@ public class CenterLayout implements LayoutManager {
     @Override
     public void addLayoutComponent(String arg0, Component arg1) {
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.awt.LayoutManager#removeLayoutComponent(java.awt.Component)
@@ -45,7 +45,7 @@ public class CenterLayout implements LayoutManager {
     @Override
     public void removeLayoutComponent(Component arg0) {
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
@@ -56,14 +56,14 @@ public class CenterLayout implements LayoutManager {
         int count = arg0.getComponentCount();
         if (count > 0) {
             Dimension d = arg0.getComponent(0).getPreferredSize();
-            return new Dimension(d.width + insets.left + insets.right, d.height
-                    + insets.top + insets.bottom);
+            return new Dimension(d.width + insets.left + insets.right,
+                    d.height + insets.top + insets.bottom);
         } else {
-            return new Dimension(insets.left + insets.right, insets.top
-                    + insets.bottom);
+            return new Dimension(insets.left + insets.right,
+                    insets.top + insets.bottom);
         }
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.awt.LayoutManager#minimumLayoutSize(java.awt.Container)
@@ -74,14 +74,14 @@ public class CenterLayout implements LayoutManager {
         int count = arg0.getComponentCount();
         if (count > 0) {
             Dimension d = arg0.getComponent(0).getMinimumSize();
-            return new Dimension(d.width + insets.left + insets.right, d.height
-                    + insets.top + insets.bottom);
+            return new Dimension(d.width + insets.left + insets.right,
+                    d.height + insets.top + insets.bottom);
         } else {
-            return new Dimension(insets.left + insets.right, insets.top
-                    + insets.bottom);
+            return new Dimension(insets.left + insets.right,
+                    insets.top + insets.bottom);
         }
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.awt.LayoutManager#layoutContainer(java.awt.Container)
@@ -103,16 +103,16 @@ public class CenterLayout implements LayoutManager {
             int x;
             int y;
             if (preferredWidth < availWidth) {
-                x = (int) Math.round(insets.left
-                        + ((availWidth - preferredWidth) / 2));
+                x = (int) Math.round(
+                        insets.left + ((availWidth - preferredWidth) / 2));
                 width = (int) Math.round(preferredWidth);
             } else {
                 x = insets.left;
                 width = availWidth;
             }
             if (preferredHeight < availHeight) {
-                y = (int) Math.round(insets.top
-                        + ((availHeight - preferredHeight) / 2));
+                y = (int) Math.round(
+                        insets.top + ((availHeight - preferredHeight) / 2));
                 height = (int) Math.round(preferredHeight);
             } else {
                 y = insets.top;
@@ -121,10 +121,10 @@ public class CenterLayout implements LayoutManager {
             child.setBounds(x, y, width, height);
         }
     }
-
+    
     /** The instance. */
     private static CenterLayout instance = new CenterLayout();
-
+    
     /**
      * Gets the single instance of CenterLayout.
      *

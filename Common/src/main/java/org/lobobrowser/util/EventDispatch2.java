@@ -32,13 +32,13 @@ public abstract class EventDispatch2 {
     private Collection<EventListener> listeners;
     /** The Constant EMPTY_ARRAY. */
     private static final EventListener[] EMPTY_ARRAY = new EventListener[0];
-
+    
     /**
      * Instantiates a new event dispatch2.
      */
     public EventDispatch2() {
     }
-
+    
     /**
      * Creates the listener collection.
      *
@@ -47,7 +47,7 @@ public abstract class EventDispatch2 {
     public Collection<EventListener> createListenerCollection() {
         return new ArrayList<EventListener>();
     }
-
+    
     /**
      * Adds the listener.
      *
@@ -62,7 +62,7 @@ public abstract class EventDispatch2 {
             this.listeners.add(listener);
         }
     }
-
+    
     /**
      * Removes the listener.
      *
@@ -76,7 +76,7 @@ public abstract class EventDispatch2 {
             }
         }
     }
-
+    
     /**
      * Fire event.
      *
@@ -100,7 +100,7 @@ public abstract class EventDispatch2 {
         }
         return true;
     }
-
+    
     /**
      * Dispatch event.
      *

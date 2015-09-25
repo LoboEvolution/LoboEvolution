@@ -35,66 +35,64 @@ import org.lobobrowser.primary.action.SearchOkAction;
  */
 public class SearchDialog extends JDialog {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The tags field. */
-    private final FormField tagsField = new FormField(FieldType.TEXT,
-            "Keywords:");
+	/** The tags field. */
+	private final FormField tagsField = new FormField(FieldType.TEXT, "Keywords:");
 
-    /** The search keywords. */
-    private String searchKeywords = null;
+	/** The search keywords. */
+	private String searchKeywords = null;
 
-    /**
-     * Instantiates a new search dialog.
-     *
-     * @param owner
-     *            the owner
-     * @param modal
-     *            the modal
-     * @param keywordsTooltip
-     *            the keywords tooltip
-     * @throws HeadlessException
-     *             the headless exception
-     */
-    public SearchDialog(Frame owner, boolean modal, String keywordsTooltip)
-            throws HeadlessException {
-        super(owner, modal);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.tagsField.setToolTip(keywordsTooltip);
-        Container contentPane = this.getContentPane();
-        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-        FormPanel fieldsPanel = new FormPanel();
-        fieldsPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-        fieldsPanel.addField(this.tagsField);
-        contentPane.add(fieldsPanel);
-        JComponent buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
-        JButton okButton = new JButton();
-        okButton.setAction(new SearchOkAction(tagsField, this));
-        okButton.setText("Search");
-        JButton cancelButton = new JButton();
-        cancelButton.setAction(new SearchCancelAction(this));
-        cancelButton.setText("Cancel");
-        buttonsPanel.add(Box.createHorizontalGlue());
-        buttonsPanel.add(okButton);
-        buttonsPanel.add(Box.createRigidArea(new Dimension(4, 1)));
-        buttonsPanel.add(cancelButton);
-        buttonsPanel.add(Box.createHorizontalGlue());
-        contentPane.add(buttonsPanel);
-        contentPane.add(Box.createRigidArea(new Dimension(1, 4)));
-    }
+	/**
+	 * Instantiates a new search dialog.
+	 *
+	 * @param owner
+	 *            the owner
+	 * @param modal
+	 *            the modal
+	 * @param keywordsTooltip
+	 *            the keywords tooltip
+	 * @throws HeadlessException
+	 *             the headless exception
+	 */
+	public SearchDialog(Frame owner, boolean modal, String keywordsTooltip) throws HeadlessException {
+		super(owner, modal);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.tagsField.setToolTip(keywordsTooltip);
+		Container contentPane = this.getContentPane();
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+		FormPanel fieldsPanel = new FormPanel();
+		fieldsPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		fieldsPanel.addField(this.tagsField);
+		contentPane.add(fieldsPanel);
+		JComponent buttonsPanel = new JPanel();
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+		JButton okButton = new JButton();
+		okButton.setAction(new SearchOkAction(tagsField, this));
+		okButton.setText("Search");
+		JButton cancelButton = new JButton();
+		cancelButton.setAction(new SearchCancelAction(this));
+		cancelButton.setText("Cancel");
+		buttonsPanel.add(Box.createHorizontalGlue());
+		buttonsPanel.add(okButton);
+		buttonsPanel.add(Box.createRigidArea(new Dimension(4, 1)));
+		buttonsPanel.add(cancelButton);
+		buttonsPanel.add(Box.createHorizontalGlue());
+		contentPane.add(buttonsPanel);
+		contentPane.add(Box.createRigidArea(new Dimension(1, 4)));
+	}
 
-    /**
-     * Gets the search keywords.
-     *
-     * @return the search keywords
-     */
-    public String getSearchKeywords() {
-        return this.searchKeywords;
-    }
+	/**
+	 * Gets the search keywords.
+	 *
+	 * @return the search keywords
+	 */
+	public String getSearchKeywords() {
+		return this.searchKeywords;
+	}
 
-    public String setSearchKeywords(String searchKeywords) {
-        return this.searchKeywords = searchKeywords;
-    }
+	public String setSearchKeywords(String searchKeywords) {
+		return this.searchKeywords = searchKeywords;
+	}
 }

@@ -35,7 +35,7 @@ public class CollectionUtilities {
     private CollectionUtilities() {
         super();
     }
-
+    
     /**
      * Gets the iterator enumeration.
      *
@@ -49,14 +49,14 @@ public class CollectionUtilities {
             public boolean hasMoreElements() {
                 return i.hasNext();
             }
-
+            
             @Override
             public Object nextElement() {
                 return i.next();
             }
         };
     }
-
+    
     /**
      * Iterator union.
      *
@@ -69,7 +69,7 @@ public class CollectionUtilities {
             private int iteratorIndex = 0;
             private Iterator current = iterators.length > 0 ? iterators[0]
                     : null;
-
+                    
             @Override
             public boolean hasNext() {
                 for (;;) {
@@ -84,7 +84,7 @@ public class CollectionUtilities {
                             : iterators[iteratorIndex];
                 }
             }
-
+            
             @Override
             public Object next() {
                 for (;;) {
@@ -95,12 +95,12 @@ public class CollectionUtilities {
                         return this.current.next();
                     } catch (NoSuchElementException nse) {
                         this.iteratorIndex++;
-                        this.current = this.iteratorIndex >= iterators.length ? null
-                                : iterators[this.iteratorIndex];
+                        this.current = this.iteratorIndex >= iterators.length
+                                ? null : iterators[this.iteratorIndex];
                     }
                 }
             }
-
+            
             @Override
             public void remove() {
                 if (this.current == null) {
@@ -110,7 +110,7 @@ public class CollectionUtilities {
             }
         };
     }
-
+    
     /**
      * Reverse.
      *
@@ -126,7 +126,7 @@ public class CollectionUtilities {
         }
         return newCollection;
     }
-
+    
     /**
      * Singleton iterator.
      *
@@ -137,12 +137,12 @@ public class CollectionUtilities {
     public static Iterator singletonIterator(final Object item) {
         return new Iterator() {
             private boolean gotItem = false;
-
+            
             @Override
             public boolean hasNext() {
                 return !this.gotItem;
             }
-
+            
             @Override
             public Object next() {
                 if (this.gotItem) {
@@ -151,7 +151,7 @@ public class CollectionUtilities {
                 this.gotItem = true;
                 return item;
             }
-
+            
             @Override
             public void remove() {
                 if (!this.gotItem) {

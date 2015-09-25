@@ -19,49 +19,44 @@ import org.lobobrowser.main.PlatformInit;
 import org.lobobrowser.store.CacheInfo;
 import org.lobobrowser.store.CacheManager;
 
-
 /**
  * The Class TextRetentionTest.
  */
 public class TextRetentionTest {
-    public static void main(String[] args) throws Exception {
-        PlatformInit.getInstance().init(false, false);
-        BrowserPanel panel = TestWindow.newWindow();
-        for (int i = 0; i < 100; i++) {
-            newTest(panel);
-        }
-    }
+	public static void main(String[] args) throws Exception {
+		PlatformInit.getInstance().init(false, false);
+		BrowserPanel panel = TestWindow.newWindow();
+		for (int i = 0; i < 100; i++) {
+			newTest(panel);
+		}
+	}
 
-    public static void newTest(BrowserPanel panel) throws Exception {
-        panel.navigate(getNewURL());
-        System.gc();
-        Thread.sleep(5000);
-        System.out.println("### Free memory: "
-                + Runtime.getRuntime().freeMemory());
-        System.out.println("### Total memory: "
-                + Runtime.getRuntime().totalMemory());
-        CacheInfo cacheInfo = CacheManager.getInstance()
-                .getTransientCacheInfo();
-        System.out.println("### RAM cache entries: " + cacheInfo.numEntries);
-        System.out.println("### RAM cache size: " + cacheInfo.approximateSize);
-    }
+	public static void newTest(BrowserPanel panel) throws Exception {
+		panel.navigate(getNewURL());
+		System.gc();
+		Thread.sleep(5000);
+		System.out.println("### Free memory: " + Runtime.getRuntime().freeMemory());
+		System.out.println("### Total memory: " + Runtime.getRuntime().totalMemory());
+		CacheInfo cacheInfo = CacheManager.getInstance().getTransientCacheInfo();
+		System.out.println("### RAM cache entries: " + cacheInfo.numEntries);
+		System.out.println("### RAM cache size: " + cacheInfo.approximateSize);
+	}
 
-    /**
-     * Gets the new url.
-     *
-     * @return the new url
-     */
-    public static String getNewURL() {
-        StringBuffer buffer = new StringBuffer();
-        buffer.append("<body>");
-        int total = 10000;
-        for (int i = 0; i < total; i++) {
-            buffer.append("<div>This is line # " + i + " of " + total
-                    + " lines.</div>");
-        }
-        buffer.append("</body>");
-        byte[] content = buffer.toString().getBytes();
-        VolatileContentImpl vc = new VolatileContentImpl("text/html", content);
-        return vc.getURL().toExternalForm();
-    }
+	/**
+	 * Gets the new url.
+	 *
+	 * @return the new url
+	 */
+	public static String getNewURL() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("<body>");
+		int total = 10000;
+		for (int i = 0; i < total; i++) {
+			buffer.append("<div>This is line # " + i + " of " + total + " lines.</div>");
+		}
+		buffer.append("</body>");
+		byte[] content = buffer.toString().getBytes();
+		VolatileContentImpl vc = new VolatileContentImpl("text/html", content);
+		return vc.getURL().toExternalForm();
+	}
 }

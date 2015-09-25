@@ -24,30 +24,30 @@ import org.w3c.dom.Element;
  */
 class StopException extends Exception {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-    /** The element. */
-    private final Element element;
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+	/** The element. */
+	private final Element element;
 
-    /**
-     * Instantiates a new stop exception.
-     *
-     * @param element
-     *            the element
-     */
-    public StopException(Element element) {
-        super();
-        this.element = element;
-    }
+	/**
+	 * Instantiates a new stop exception.
+	 *
+	 * @param element
+	 *            the element
+	 */
+	public StopException(Element element) {
+		super();
+		this.element = element;
+	}
 
-    /**
-     * Gets the element.
-     *
-     * @return the element
-     */
-    public Element getElement() {
-        return this.element;
-    }
+	/**
+	 * Gets the element.
+	 *
+	 * @return the element
+	 */
+	public Element getElement() {
+		return this.element;
+	}
 }

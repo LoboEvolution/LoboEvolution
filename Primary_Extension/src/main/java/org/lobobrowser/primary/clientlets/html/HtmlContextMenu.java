@@ -45,10 +45,9 @@ import org.lobobrowser.w3c.html.HTMLElement;
  * The Class HtmlContextMenu.
  */
 public class HtmlContextMenu {
-	
-	 /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(HtmlContextMenu.class
-            .getName());
+
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(HtmlContextMenu.class.getName());
 
 	/** The element. */
 	private HTMLElement element;
@@ -111,53 +110,43 @@ public class HtmlContextMenu {
 
 			copyImageURL.setIcon(IconFactory.getInstance().getIcon(COPY));
 			copyImageURL.addActionListener(e -> {
-				Clipboard clipboard = Toolkit.getDefaultToolkit()
-						.getSystemClipboard();
-				clipboard.setContents(
-						new StringSelection(srcUrl.toExternalForm()), null);
+				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+				clipboard.setContents(new StringSelection(srcUrl.toExternalForm()), null);
 			});
 			popupMenu.add(copyImageURL);
 
 			JMenuItem saveImage = new JMenuItem("Save Image");
 
 			saveImage.setIcon(IconFactory.getInstance().getIcon(SAVE));
-			saveImage
-					.addActionListener(e -> {
-						JFileChooser fileChooser = new JFileChooser();
-						fileChooser
-								.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-						fileChooser.setAcceptAllFileFilterUsed(true);
+			saveImage.addActionListener(e -> {
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				fileChooser.setAcceptAllFileFilterUsed(true);
 
-						int returnValue = fileChooser.showSaveDialog(context
-								.getClientletFrame().getComponent());
+				int returnValue = fileChooser.showSaveDialog(context.getClientletFrame().getComponent());
 
-						if (returnValue == JFileChooser.APPROVE_OPTION) {
+				if (returnValue == JFileChooser.APPROVE_OPTION) {
 
-							File selectedFile = getSelectedFileWithExtension(fileChooser);
-							if (selectedFile.exists()) {
-								int response = JOptionPane.showConfirmDialog(
-										null, "Overwrite existing file?",
-										"Confirm Overwrite",
-										JOptionPane.OK_CANCEL_OPTION,
-										JOptionPane.QUESTION_MESSAGE);
-								if (response == JOptionPane.CANCEL_OPTION) {
-									return;
-								}
-							}
-							BufferedImage image = null;
-
-							try {
-								int dot = srcUrl.toExternalForm().lastIndexOf(
-										".");
-								String ext = srcUrl.toExternalForm().substring(
-										dot + 1);
-								image = ImageIO.read(srcUrl);
-								ImageIO.write(image, ext, selectedFile);
-							} catch (Exception e1) {
-								logger.severe(e1.getMessage());
-							}
+					File selectedFile = getSelectedFileWithExtension(fileChooser);
+					if (selectedFile.exists()) {
+						int response = JOptionPane.showConfirmDialog(null, "Overwrite existing file?",
+								"Confirm Overwrite", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+						if (response == JOptionPane.CANCEL_OPTION) {
+							return;
 						}
-					});
+					}
+					BufferedImage image = null;
+
+					try {
+						int dot = srcUrl.toExternalForm().lastIndexOf(".");
+						String ext = srcUrl.toExternalForm().substring(dot + 1);
+						image = ImageIO.read(srcUrl);
+						ImageIO.write(image, ext, selectedFile);
+					} catch (Exception e1) {
+						logger.severe(e1.getMessage());
+					}
+				}
+			});
 			popupMenu.add(saveImage);
 
 		} catch (MalformedURLException e) {
@@ -186,10 +175,8 @@ public class HtmlContextMenu {
 		JMenuItem copyLinkURL = new JMenuItem("Copy link URL");
 		copyLinkURL.setIcon(IconFactory.getInstance().getIcon(COPY));
 		copyLinkURL.addActionListener(e -> {
-			Clipboard clipboard = Toolkit.getDefaultToolkit()
-					.getSystemClipboard();
-			clipboard.setContents(new StringSelection(link.getAbsoluteHref()),
-					null);
+			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+			clipboard.setContents(new StringSelection(link.getAbsoluteHref()), null);
 		});
 		popupMenu.add(copyLinkURL);
 
@@ -198,21 +185,17 @@ public class HtmlContextMenu {
 		saveImage.setIcon(IconFactory.getInstance().getIcon(SAVE));
 		saveImage.addActionListener(e -> {
 			JFileChooser fileChooser = new JFileChooser();
-			fileChooser
-					.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+			fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			fileChooser.setAcceptAllFileFilterUsed(true);
 
-			int returnValue = fileChooser.showSaveDialog(context
-					.getClientletFrame().getComponent());
+			int returnValue = fileChooser.showSaveDialog(context.getClientletFrame().getComponent());
 
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 
 				File selectedFile = getSelectedFileWithExtension(fileChooser);
 				if (selectedFile.exists()) {
-					int response = JOptionPane.showConfirmDialog(null,
-							"Overwrite existing file?", "Confirm Overwrite",
-							JOptionPane.OK_CANCEL_OPTION,
-							JOptionPane.QUESTION_MESSAGE);
+					int response = JOptionPane.showConfirmDialog(null, "Overwrite existing file?", "Confirm Overwrite",
+							JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 					if (response == JOptionPane.CANCEL_OPTION) {
 						return;
 					}
@@ -227,8 +210,7 @@ public class HtmlContextMenu {
 				} catch (Exception e1) {
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
 					try {
-						baos.write(urlContent(link.getAbsoluteHref())
-								.getBytes());
+						baos.write(urlContent(link.getAbsoluteHref()).getBytes());
 						OutputStream ops = new FileOutputStream(selectedFile);
 						baos.writeTo(ops);
 						baos.flush();
@@ -265,8 +247,7 @@ public class HtmlContextMenu {
 			context.back();
 		});
 
-		if (context.getPreviousURL() != null
-				&& context.getPreviousURL().length() > 0) {
+		if (context.getPreviousURL() != null && context.getPreviousURL().length() > 0) {
 			menuBack.setEnabled(true);
 		} else {
 			menuBack.setEnabled(false);
@@ -293,7 +274,7 @@ public class HtmlContextMenu {
 			menuForward.setEnabled(false);
 		}
 		popupMenu.add(menuForward);
-		
+
 		return popupMenu;
 
 	}
@@ -308,8 +289,7 @@ public class HtmlContextMenu {
 	private File getSelectedFileWithExtension(JFileChooser c) {
 		File file = c.getSelectedFile();
 		if (c.getFileFilter() instanceof FileNameExtensionFilter) {
-			String[] exts = ((FileNameExtensionFilter) c.getFileFilter())
-					.getExtensions();
+			String[] exts = ((FileNameExtensionFilter) c.getFileFilter()).getExtensions();
 			String nameLower = file.getName().toLowerCase();
 			for (String ext : exts) {
 				if (nameLower.endsWith('.' + ext.toLowerCase())) {

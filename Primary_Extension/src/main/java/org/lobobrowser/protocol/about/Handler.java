@@ -29,21 +29,23 @@ import java.net.URLStreamHandler;
  * @author J. H. S.
  */
 public class Handler extends URLStreamHandler {
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLStreamHandler#openConnection(URL)
-     */
-    @Override
-    protected URLConnection openConnection(URL arg0) throws IOException {
-        return new AboutURLConnection(arg0);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLStreamHandler#openConnection(URL)
+	 */
+	@Override
+	protected URLConnection openConnection(URL arg0) throws IOException {
+		return new AboutURLConnection(arg0);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLStreamHandler#openConnection(URL, java.net.Proxy)
-     */
-    @Override
-    protected URLConnection openConnection(URL u, Proxy p) throws IOException {
-        return this.openConnection(u);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLStreamHandler#openConnection(URL, java.net.Proxy)
+	 */
+	@Override
+	protected URLConnection openConnection(URL u, Proxy p) throws IOException {
+		return this.openConnection(u);
+	}
 }

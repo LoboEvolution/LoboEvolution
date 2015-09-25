@@ -19,44 +19,43 @@ package org.lobobrowser.html.renderer;
  */
 class ExportedRenderable {
 
-    /** The original target. */
-    public final RBlockViewport originalTarget;
+	/** The original target. */
+	public final RBlockViewport originalTarget;
 
-    /** The renderable. */
-    public final BoundableRenderable renderable;
+	/** The renderable. */
+	public final BoundableRenderable renderable;
 
-    /**
-     * Coordinates in original target, for aligned blocks.
-     */
-    public final int x, y;
+	/**
+	 * Coordinates in original target, for aligned blocks.
+	 */
+	public final int x, y;
 
-    /**
-     * -1 (left), 0, or +1 (right).
-     */
-    public final int alignment;
+	/**
+	 * -1 (left), 0, or +1 (right).
+	 */
+	public final int alignment;
 
-    /**
-     * Instantiates a new exported renderable.
-     *
-     * @param originalTarget
-     *            the original target
-     * @param renderable
-     *            the renderable
-     * @param x
-     *            the x
-     * @param y
-     *            the y
-     * @param alignment
-     *            the alignment
-     */
-    public ExportedRenderable(final RBlockViewport originalTarget,
-            final BoundableRenderable renderable, final int x, final int y,
-            final int alignment) {
-        super();
-        this.originalTarget = originalTarget;
-        this.x = x;
-        this.y = y;
-        this.alignment = alignment;
-        this.renderable = renderable;
-    }
+	/**
+	 * Instantiates a new exported renderable.
+	 *
+	 * @param originalTarget
+	 *            the original target
+	 * @param renderable
+	 *            the renderable
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param alignment
+	 *            the alignment
+	 */
+	public ExportedRenderable(final RBlockViewport originalTarget, final BoundableRenderable renderable, final int x,
+			final int y, final int alignment) {
+		super();
+		this.originalTarget = originalTarget;
+		this.x = x;
+		this.y = y;
+		this.alignment = alignment;
+		this.renderable = renderable;
+	}
 }

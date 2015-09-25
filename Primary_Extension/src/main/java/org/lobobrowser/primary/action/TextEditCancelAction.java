@@ -25,24 +25,25 @@ import org.lobobrowser.primary.gui.SimpleTextEditDialog;
  */
 public class TextEditCancelAction extends AbstractAction {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The search. */
-    private SimpleTextEditDialog search;
+	/** The search. */
+	private SimpleTextEditDialog search;
 
-    public TextEditCancelAction(SimpleTextEditDialog search) {
-        this.search = search;
-    }
+	public TextEditCancelAction(SimpleTextEditDialog search) {
+		this.search = search;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        search.setResultingText(null);
-        search.dispose();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		search.setResultingText(null);
+		search.dispose();
+	}
 }

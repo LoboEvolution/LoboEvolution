@@ -29,7 +29,6 @@ import javax.swing.JComponent;
 import javax.swing.Timer;
 
 import org.lobobrowser.html.HtmlRendererContext;
-import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.dombl.DocumentNotificationListener;
 import org.lobobrowser.html.domimpl.DOMElementImpl;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
@@ -41,6 +40,7 @@ import org.lobobrowser.html.renderer.FrameContext;
 import org.lobobrowser.html.renderer.NodeRenderer;
 import org.lobobrowser.html.renderer.RenderableSpot;
 import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.util.EventDispatch2;
 import org.lobobrowser.util.gui.WrapperLayout;
 import org.lobobrowser.w3c.html.HTMLFrameSetElement;

@@ -33,12 +33,12 @@ import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 import org.lobobrowser.clientlet.ClientletResponse;
-import org.lobobrowser.http.SSLCertificate;
 import org.lobobrowser.ua.ProgressType;
 import org.lobobrowser.ua.RequestType;
 import org.lobobrowser.util.GenericEventListener;
 import org.lobobrowser.util.InputProgressEvent;
 import org.lobobrowser.util.MonitoredInputStream;
+import org.lobobrowser.util.SSLCertificate;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.BufferExceededException;

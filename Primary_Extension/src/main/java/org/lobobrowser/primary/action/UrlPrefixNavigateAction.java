@@ -29,112 +29,110 @@ import org.lobobrowser.ua.RequestType;
 /**
  * The Class UrlPrefixNavigateAction.
  */
-public class UrlPrefixNavigateAction extends AbstractAction implements
-EnableableAction {
+public class UrlPrefixNavigateAction extends AbstractAction implements EnableableAction {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The url prefix. */
-    private String urlPrefix;
+	/** The url prefix. */
+	private String urlPrefix;
 
-    /** The url encode. */
-    private boolean urlEncode;
+	/** The url encode. */
+	private boolean urlEncode;
 
-    /** The component source. */
-    private ComponentSource componentSource;
+	/** The component source. */
+	private ComponentSource componentSource;
 
-    /** The window. */
-    private NavigatorWindow window;
+	/** The window. */
+	private NavigatorWindow window;
 
-    /** The action. */
-    private ActionPool action;
+	/** The action. */
+	private ActionPool action;
 
-    /**
-     * Instantiates a new url prefix navigate action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     * @param action
-     *            the action
-     */
-    public UrlPrefixNavigateAction(ComponentSource componentSource,
-            NavigatorWindow window, ActionPool action) {
-        this.action = action;
-        this.window = window;
-        this.componentSource = componentSource;
-    }
+	/**
+	 * Instantiates a new url prefix navigate action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 * @param action
+	 *            the action
+	 */
+	public UrlPrefixNavigateAction(ComponentSource componentSource, NavigatorWindow window, ActionPool action) {
+		this.action = action;
+		this.window = window;
+		this.componentSource = componentSource;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.primary.ext.ActionPool.EnableableAction#updateEnabling()
-     */
-    @Override
-    public void updateEnabling() {
-        NavigationEntry entry = window.getCurrentNavigationEntry();
-        action.setEnabled((entry != null)
-                && !entry.getUrl().toExternalForm().startsWith(this.urlPrefix));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.primary.ext.ActionPool.EnableableAction#updateEnabling()
+	 */
+	@Override
+	public void updateEnabling() {
+		NavigationEntry entry = window.getCurrentNavigationEntry();
+		action.setEnabled((entry != null) && !entry.getUrl().toExternalForm().startsWith(this.urlPrefix));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        NavigationEntry entry = window.getCurrentNavigationEntry();
-        if (entry == null) {
-            return;
-        }
-        try {
-            String roughLocation = this.urlPrefix
-                    + (this.urlEncode ? URLEncoder.encode(entry.getUrl()
-                            .toExternalForm(), "UTF-8") : entry.getUrl()
-                            .toExternalForm());
-            componentSource.navigate(roughLocation, RequestType.PROGRAMMATIC);
-        } catch (UnsupportedEncodingException uee) {
-            // not expected - ignore
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		NavigationEntry entry = window.getCurrentNavigationEntry();
+		if (entry == null) {
+			return;
+		}
+		try {
+			String roughLocation = this.urlPrefix + (this.urlEncode
+					? URLEncoder.encode(entry.getUrl().toExternalForm(), "UTF-8") : entry.getUrl().toExternalForm());
+			componentSource.navigate(roughLocation, RequestType.PROGRAMMATIC);
+		} catch (UnsupportedEncodingException uee) {
+			// not expected - ignore
+		}
+	}
 
-    /**
-     * Gets the url prefix.
-     *
-     * @return the url prefix
-     */
-    public String getUrlPrefix() {
-        return urlPrefix;
-    }
+	/**
+	 * Gets the url prefix.
+	 *
+	 * @return the url prefix
+	 */
+	public String getUrlPrefix() {
+		return urlPrefix;
+	}
 
-    /**
-     * Sets the url prefix.
-     *
-     * @param urlPrefix
-     *            the new url prefix
-     */
-    public void setUrlPrefix(String urlPrefix) {
-        this.urlPrefix = urlPrefix;
-    }
+	/**
+	 * Sets the url prefix.
+	 *
+	 * @param urlPrefix
+	 *            the new url prefix
+	 */
+	public void setUrlPrefix(String urlPrefix) {
+		this.urlPrefix = urlPrefix;
+	}
 
-    /**
-     * Checks if is the url encode.
-     *
-     * @return the url encode
-     */
-    public boolean isUrlEncode() {
-        return urlEncode;
-    }
+	/**
+	 * Checks if is the url encode.
+	 *
+	 * @return the url encode
+	 */
+	public boolean isUrlEncode() {
+		return urlEncode;
+	}
 
-    /**
-     * Sets the url encode.
-     *
-     * @param urlEncode
-     *            the new url encode
-     */
-    public void setUrlEncode(boolean urlEncode) {
-        this.urlEncode = urlEncode;
-    }
+	/**
+	 * Sets the url encode.
+	 *
+	 * @param urlEncode
+	 *            the new url encode
+	 */
+	public void setUrlEncode(boolean urlEncode) {
+		this.urlEncode = urlEncode;
+	}
 }

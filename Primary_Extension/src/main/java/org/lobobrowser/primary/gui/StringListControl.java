@@ -31,111 +31,111 @@ import org.lobobrowser.primary.action.EditAction;
  */
 public class StringListControl extends JComponent {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The combo box. */
-    private final JComboBox<String> comboBox;
+	/** The combo box. */
+	private final JComboBox<String> comboBox;
 
-    /** The edit list caption. */
-    private String editListCaption;
+	/** The edit list caption. */
+	private String editListCaption;
 
-    /**
-     * Instantiates a new string list control.
-     */
-    public StringListControl() {
-        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        this.comboBox = new JComboBox<String>();
-        this.comboBox.setEditable(false);
-        JButton editButton = new JButton();
-        editButton.setAction(new EditAction(this));
-        editButton.setText("Edit List");
-        this.add(this.comboBox);
-        this.add(editButton);
-    }
+	/**
+	 * Instantiates a new string list control.
+	 */
+	public StringListControl() {
+		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		this.comboBox = new JComboBox<String>();
+		this.comboBox.setEditable(false);
+		JButton editButton = new JButton();
+		editButton.setAction(new EditAction(this));
+		editButton.setText("Edit List");
+		this.add(this.comboBox);
+		this.add(editButton);
+	}
 
-    /** The strings. */
-    private String[] strings;
+	/** The strings. */
+	private String[] strings;
 
-    /**
-     * Sets the strings.
-     *
-     * @param strings
-     *            the new strings
-     */
-    public void setStrings(String[] strings) {
-        this.strings = strings;
-        JComboBox<String> comboBox = this.comboBox;
-        comboBox.removeAllItems();
-        for (String string : strings) {
-            comboBox.addItem(string);
-        }
-    }
+	/**
+	 * Sets the strings.
+	 *
+	 * @param strings
+	 *            the new strings
+	 */
+	public void setStrings(String[] strings) {
+		this.strings = strings;
+		JComboBox<String> comboBox = this.comboBox;
+		comboBox.removeAllItems();
+		for (String string : strings) {
+			comboBox.addItem(string);
+		}
+	}
 
-    /**
-     * Gets the strings.
-     *
-     * @return the strings
-     */
-    public String[] getStrings() {
-        return this.strings;
-    }
+	/**
+	 * Gets the strings.
+	 *
+	 * @return the strings
+	 */
+	public String[] getStrings() {
+		return this.strings;
+	}
 
-    /**
-     * Gets the strings as text.
-     *
-     * @return the strings as text
-     */
-    public String getStringsAsText() {
-        String lineSeparator = System.getProperty("line.separator");
-        String[] strings = this.strings;
-        if (strings == null) {
-            return null;
-        }
-        StringBuffer buffer = new StringBuffer();
-        for (String string : strings) {
-            buffer.append(string);
-            buffer.append(lineSeparator);
-        }
-        return buffer.toString();
-    }
+	/**
+	 * Gets the strings as text.
+	 *
+	 * @return the strings as text
+	 */
+	public String getStringsAsText() {
+		String lineSeparator = System.getProperty("line.separator");
+		String[] strings = this.strings;
+		if (strings == null) {
+			return null;
+		}
+		StringBuffer buffer = new StringBuffer();
+		for (String string : strings) {
+			buffer.append(string);
+			buffer.append(lineSeparator);
+		}
+		return buffer.toString();
+	}
 
-    /**
-     * Sets the strings from text.
-     *
-     * @param text
-     *            the new strings from text
-     */
-    public void setStringsFromText(String text) {
-        try {
-            BufferedReader reader = new BufferedReader(new StringReader(text));
-            String line;
-            ArrayList<String> stringsAL = new ArrayList<String>();
-            while ((line = reader.readLine()) != null) {
-                stringsAL.add(line);
-            }
-            this.setStrings(stringsAL.toArray(new String[0]));
-        } catch (IOException ioe) {
-            throw new IllegalStateException("not expected", ioe);
-        }
-    }
+	/**
+	 * Sets the strings from text.
+	 *
+	 * @param text
+	 *            the new strings from text
+	 */
+	public void setStringsFromText(String text) {
+		try {
+			BufferedReader reader = new BufferedReader(new StringReader(text));
+			String line;
+			ArrayList<String> stringsAL = new ArrayList<String>();
+			while ((line = reader.readLine()) != null) {
+				stringsAL.add(line);
+			}
+			this.setStrings(stringsAL.toArray(new String[0]));
+		} catch (IOException ioe) {
+			throw new IllegalStateException("not expected", ioe);
+		}
+	}
 
-    /**
-     * Gets the edit list caption.
-     *
-     * @return the edit list caption
-     */
-    public String getEditListCaption() {
-        return editListCaption;
-    }
+	/**
+	 * Gets the edit list caption.
+	 *
+	 * @return the edit list caption
+	 */
+	public String getEditListCaption() {
+		return editListCaption;
+	}
 
-    /**
-     * Sets the edits the list caption.
-     *
-     * @param caption
-     *            the new edits the list caption
-     */
-    public void setEditListCaption(String caption) {
-        this.editListCaption = caption;
-    }
+	/**
+	 * Sets the edits the list caption.
+	 *
+	 * @param caption
+	 *            the new edits the list caption
+	 */
+	public void setEditListCaption(String caption) {
+		this.editListCaption = caption;
+	}
 }

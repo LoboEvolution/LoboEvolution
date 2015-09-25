@@ -35,6 +35,7 @@ import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.http.Cookie;
 import org.lobobrowser.store.RestrictedStore;
 import org.lobobrowser.store.StorageManager;
 import org.lobobrowser.util.Domains;

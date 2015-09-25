@@ -22,28 +22,33 @@ import javax.swing.event.MenuListener;
  */
 public abstract class MenuAdapter implements MenuListener {
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.event.MenuListener#menuCanceled(javax.swing.event.MenuEvent)
-     */
-    @Override
-    public void menuCanceled(MenuEvent e) {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * javax.swing.event.MenuListener#menuCanceled(javax.swing.event.MenuEvent)
+	 */
+	@Override
+	public void menuCanceled(MenuEvent e) {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * javax.swing.event.MenuListener#menuDeselected(javax.swing.event.MenuEvent)
-     */
-    @Override
-    public void menuDeselected(MenuEvent e) {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.event.MenuListener#menuDeselected(javax.swing.event.
+	 * MenuEvent)
+	 */
+	@Override
+	public void menuDeselected(MenuEvent e) {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.event.MenuListener#menuSelected(javax.swing.event.MenuEvent)
-     */
-    @Override
-    public void menuSelected(MenuEvent e) {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * javax.swing.event.MenuListener#menuSelected(javax.swing.event.MenuEvent)
+	 */
+	@Override
+	public void menuSelected(MenuEvent e) {
+	}
 }

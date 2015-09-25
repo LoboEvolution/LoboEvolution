@@ -27,57 +27,57 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class BookmarkNavigateAction extends ActionPool {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The url. */
-    private URL url;
+	/** The url. */
+	private URL url;
 
-    /** The component source. */
-    private ComponentSource componentSource;
+	/** The component source. */
+	private ComponentSource componentSource;
 
-    /**
-     * Instantiates a new bookmark navigate action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     */
-    public BookmarkNavigateAction(ComponentSource componentSource,
-            NavigatorWindow window) {
-        super(componentSource, window);
-        this.componentSource = componentSource;
-    }
+	/**
+	 * Instantiates a new bookmark navigate action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 */
+	public BookmarkNavigateAction(ComponentSource componentSource, NavigatorWindow window) {
+		super(componentSource, window);
+		this.componentSource = componentSource;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        BookmarksHistory.getInstance().touch(getUrl());
-        componentSource.navigate(getUrl());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		BookmarksHistory.getInstance().touch(getUrl());
+		componentSource.navigate(getUrl());
+	}
 
-    /**
-     * Gets the url.
-     *
-     * @return the url
-     */
-    public URL getUrl() {
-        return url;
-    }
+	/**
+	 * Gets the url.
+	 *
+	 * @return the url
+	 */
+	public URL getUrl() {
+		return url;
+	}
 
-    /**
-     * Sets the url.
-     *
-     * @param url
-     *            the new url
-     */
-    public void setUrl(URL url) {
-        this.url = url;
-    }
+	/**
+	 * Sets the url.
+	 *
+	 * @param url
+	 *            the new url
+	 */
+	public void setUrl(URL url) {
+		this.url = url;
+	}
 
 }

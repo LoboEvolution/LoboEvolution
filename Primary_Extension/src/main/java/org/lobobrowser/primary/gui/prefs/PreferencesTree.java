@@ -26,122 +26,122 @@ import org.lobobrowser.primary.info.SettingsInfo;
  */
 public class PreferencesTree extends JTree {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Instantiates a new preferences tree.
-     */
-    public PreferencesTree() {
-        TreeNode rootNode = this.createRootNode();
-        this.setModel(new DefaultTreeModel(rootNode));
-        this.setRootVisible(false);
-    }
+	/**
+	 * Instantiates a new preferences tree.
+	 */
+	public PreferencesTree() {
+		TreeNode rootNode = this.createRootNode();
+		this.setModel(new DefaultTreeModel(rootNode));
+		this.setRootVisible(false);
+	}
 
-    /**
-     * Inits the selection.
-     */
-    public void initSelection() {
-        this.addSelectionRow(0);
-    }
+	/**
+	 * Inits the selection.
+	 */
+	public void initSelection() {
+		this.addSelectionRow(0);
+	}
 
-    /**
-     * Creates the root node.
-     *
-     * @return the tree node
-     */
-    private TreeNode createRootNode() {
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode();
-        root.add(new DefaultMutableTreeNode(this.getGeneralSettingsInfo()));
-        root.add(new DefaultMutableTreeNode(this.getConnectionSettingsInfo()));
-        root.add(new DefaultMutableTreeNode(this.getToolsSettingsInfo()));
-        return root;
-    }
+	/**
+	 * Creates the root node.
+	 *
+	 * @return the tree node
+	 */
+	private TreeNode createRootNode() {
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+		root.add(new DefaultMutableTreeNode(this.getGeneralSettingsInfo()));
+		root.add(new DefaultMutableTreeNode(this.getConnectionSettingsInfo()));
+		root.add(new DefaultMutableTreeNode(this.getToolsSettingsInfo()));
+		return root;
+	}
 
-    /**
-     * Gets the general settings info.
-     *
-     * @return the general settings info
-     */
-    private SettingsInfo getGeneralSettingsInfo() {
-        return new SettingsInfo() {
-            @Override
-            public AbstractSettingsUI createSettingsUI() {
-                return new GeneralSettingsUI();
-            }
+	/**
+	 * Gets the general settings info.
+	 *
+	 * @return the general settings info
+	 */
+	private SettingsInfo getGeneralSettingsInfo() {
+		return new SettingsInfo() {
+			@Override
+			public AbstractSettingsUI createSettingsUI() {
+				return new GeneralSettingsUI();
+			}
 
-            @Override
-            public String getDescription() {
-                return "General browser settings.";
-            }
+			@Override
+			public String getDescription() {
+				return "General browser settings.";
+			}
 
-            @Override
-            public String getName() {
-                return "General";
-            }
+			@Override
+			public String getName() {
+				return "General";
+			}
 
-            @Override
-            public String toString() {
-                return this.getName();
-            }
-        };
-    }
+			@Override
+			public String toString() {
+				return this.getName();
+			}
+		};
+	}
 
-    /**
-     * Gets the connection settings info.
-     *
-     * @return the connection settings info
-     */
-    private SettingsInfo getConnectionSettingsInfo() {
-        return new SettingsInfo() {
-            @Override
-            public AbstractSettingsUI createSettingsUI() {
-                return new ConnectionSettingsUI();
-            }
+	/**
+	 * Gets the connection settings info.
+	 *
+	 * @return the connection settings info
+	 */
+	private SettingsInfo getConnectionSettingsInfo() {
+		return new SettingsInfo() {
+			@Override
+			public AbstractSettingsUI createSettingsUI() {
+				return new ConnectionSettingsUI();
+			}
 
-            @Override
-            public String getDescription() {
-                return "Network connection settings.";
-            }
+			@Override
+			public String getDescription() {
+				return "Network connection settings.";
+			}
 
-            @Override
-            public String getName() {
-                return "Connection";
-            }
+			@Override
+			public String getName() {
+				return "Connection";
+			}
 
-            @Override
-            public String toString() {
-                return this.getName();
-            }
-        };
-    }
+			@Override
+			public String toString() {
+				return this.getName();
+			}
+		};
+	}
 
-    /**
-     * Gets the tools settings info.
-     *
-     * @return the tools settings info
-     */
-    private SettingsInfo getToolsSettingsInfo() {
-        return new SettingsInfo() {
-            @Override
-            public AbstractSettingsUI createSettingsUI() {
-                return new ToolsSettingsUI();
-            }
+	/**
+	 * Gets the tools settings info.
+	 *
+	 * @return the tools settings info
+	 */
+	private SettingsInfo getToolsSettingsInfo() {
+		return new SettingsInfo() {
+			@Override
+			public AbstractSettingsUI createSettingsUI() {
+				return new ToolsSettingsUI();
+			}
 
-            @Override
-            public String getDescription() {
-                return "Tools settings.";
-            }
+			@Override
+			public String getDescription() {
+				return "Tools settings.";
+			}
 
-            @Override
-            public String getName() {
-                return "Tools";
-            }
+			@Override
+			public String getName() {
+				return "Tools";
+			}
 
-            @Override
-            public String toString() {
-                return this.getName();
-            }
-        };
-    }
+			@Override
+			public String toString() {
+				return this.getName();
+			}
+		};
+	}
 }

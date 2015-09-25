@@ -28,12 +28,12 @@ import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.clientlet.ContentBuffer;
 import org.lobobrowser.clientlet.SimpleComponentContent;
+import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.io.ManagedStore;
 import org.lobobrowser.request.UserAgentImpl;
 import org.lobobrowser.store.StorageManager;
 import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.NavigatorProgressEvent;
-import org.lobobrowser.ua.NetworkRequest;
 import org.lobobrowser.ua.ProgressType;
 import org.lobobrowser.ua.UserAgent;
 import org.lobobrowser.util.Urls;
@@ -113,7 +113,7 @@ public class ClientletContextImpl implements ClientletContext {
     @Override
     public Object getItem(String name) {
         synchronized (this) {
-            Map items = this.items;
+            Map<String, Object> items = this.items;
             if (items == null) {
                 return null;
             }
@@ -321,8 +321,8 @@ public class ClientletContextImpl implements ClientletContext {
      * @see org.lobobrowser.clientlet.ClientletContext#createNetworkRequest()
      */
     @Override
-    public NetworkRequest createNetworkRequest() {
-        return new NetworkRequestImpl();
+    public HttpRequest createNetworkRequest() {
+        return new HttpRequest();
     }
 
     /*

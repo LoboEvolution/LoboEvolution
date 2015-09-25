@@ -48,7 +48,7 @@ public class RecordedInputStream extends InputStream {
     private int readPosition = -1;
     /** The reset buffer. */
     private byte[] resetBuffer = null;
-
+    
     /**
      * Instantiates a new recorded input stream.
      *
@@ -62,7 +62,7 @@ public class RecordedInputStream extends InputStream {
         this.delegate = delegate;
         this.maxBufferSize = maxBufferSize;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#read()
@@ -89,7 +89,7 @@ public class RecordedInputStream extends InputStream {
             return b;
         }
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#available()
@@ -98,7 +98,7 @@ public class RecordedInputStream extends InputStream {
     public int available() throws IOException {
         return this.delegate.available();
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#close()
@@ -107,7 +107,7 @@ public class RecordedInputStream extends InputStream {
     public void close() throws IOException {
         this.delegate.close();
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#markSupported()
@@ -116,7 +116,7 @@ public class RecordedInputStream extends InputStream {
     public boolean markSupported() {
         return true;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#mark(int)
@@ -129,7 +129,7 @@ public class RecordedInputStream extends InputStream {
         }
         this.markPosition = this.store.size();
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#reset()
@@ -147,7 +147,7 @@ public class RecordedInputStream extends InputStream {
         this.resetBuffer = resetBuffer;
         this.readPosition = 0;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see java.io.InputStream#read(byte[], int, int)
@@ -156,8 +156,8 @@ public class RecordedInputStream extends InputStream {
     public int read(byte[] buffer, int offset, int length) throws IOException {
         if ((this.readPosition != -1)
                 && (this.readPosition < this.resetBuffer.length)) {
-            int minLength = Math.min(this.resetBuffer.length
-                    - this.readPosition, length);
+            int minLength = Math
+                    .min(this.resetBuffer.length - this.readPosition, length);
             System.arraycopy(this.resetBuffer, this.readPosition, buffer,
                     offset, minLength);
             this.readPosition += minLength;
@@ -177,7 +177,7 @@ public class RecordedInputStream extends InputStream {
             return numRead;
         }
     }
-
+    
     /**
      * Consume to eof.
      *
@@ -190,7 +190,7 @@ public class RecordedInputStream extends InputStream {
             ;
         }
     }
-
+    
     /**
      * Gets the bytes read.
      *
@@ -204,7 +204,7 @@ public class RecordedInputStream extends InputStream {
         }
         return this.store.toByteArray();
     }
-
+    
     /**
      * Gets the string.
      *
@@ -224,7 +224,7 @@ public class RecordedInputStream extends InputStream {
         byte[] bytes = this.store.toByteArray();
         return new String(bytes, encoding);
     }
-
+    
     /**
      * Checks for reached eof.
      *

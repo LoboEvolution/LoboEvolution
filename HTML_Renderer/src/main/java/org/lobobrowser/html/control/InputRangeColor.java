@@ -16,7 +16,7 @@ package org.lobobrowser.html.control;
 
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 
-public class InputRangeColor extends BaseInputControl{
+public class InputRangeColor extends BaseInputControl {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +28,7 @@ public class InputRangeColor extends BaseInputControl{
 	@Override
 	public void resetInput() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

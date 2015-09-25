@@ -25,51 +25,52 @@ import org.lobobrowser.ua.NavigatorWindow;
 /**
  * The Class ForwardMoreAction.
  */
-public class ForwardMoreAction extends AbstractAction implements
-EnableableAction {
+public class ForwardMoreAction extends AbstractAction implements EnableableAction {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The window. */
-    private NavigatorWindow window;
+	/** The window. */
+	private NavigatorWindow window;
 
-    /** The action. */
-    private ActionPool action;
+	/** The action. */
+	private ActionPool action;
 
-    /**
-     * Instantiates a new forward more action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     *
-     * @param action
-     *            the action
-     */
-    public ForwardMoreAction(ComponentSource componentSource,
-            NavigatorWindow window, ActionPool action) {
-        this.action = action;
-        this.window = window;
-    }
+	/**
+	 * Instantiates a new forward more action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 *
+	 * @param action
+	 *            the action
+	 */
+	public ForwardMoreAction(ComponentSource componentSource, NavigatorWindow window, ActionPool action) {
+		this.action = action;
+		this.window = window;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.primary.ext.ActionPool.EnableableAction#updateEnabling()
-     */
-    @Override
-    public void updateEnabling() {
-        action.setEnabled(window.canForward());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.primary.ext.ActionPool.EnableableAction#updateEnabling()
+	 */
+	@Override
+	public void updateEnabling() {
+		action.setEnabled(window.canForward());
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Only used for enabling
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// Only used for enabling
+	}
 }

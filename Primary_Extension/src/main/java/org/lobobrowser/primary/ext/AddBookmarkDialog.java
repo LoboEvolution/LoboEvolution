@@ -41,132 +41,132 @@ import org.lobobrowser.util.Strings;
  */
 public class AddBookmarkDialog extends JDialog {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The url field. */
-    private final FormField urlField = new FormField(FieldType.TEXT, "URL:");
+	/** The url field. */
+	private final FormField urlField = new FormField(FieldType.TEXT, "URL:");
 
-    /** The title field. */
-    private final FormField titleField = new FormField(FieldType.TEXT, "Title:");
+	/** The title field. */
+	private final FormField titleField = new FormField(FieldType.TEXT, "Title:");
 
-    /** The description field. */
-    private final FormField descriptionField = new FormField(FieldType.TEXT,
-            "Description:");
+	/** The description field. */
+	private final FormField descriptionField = new FormField(FieldType.TEXT, "Description:");
 
-    /** The tags field. */
-    private final FormField tagsField = new FormField(FieldType.TEXT, "Tags:");
+	/** The tags field. */
+	private final FormField tagsField = new FormField(FieldType.TEXT, "Tags:");
 
-    /** The url. */
-    private final URL url;
+	/** The url. */
+	private final URL url;
 
-    /**
-     * Instantiates a new adds the bookmark dialog.
-     *
-     * @param owner
-     *            the owner
-     * @param modal
-     *            the modal
-     * @param existingInfo
-     *            the existing info
-     * @throws HeadlessException
-     *             the headless exception
-     */
-    public AddBookmarkDialog(Frame owner, boolean modal,
-            BookmarkInfo existingInfo) throws HeadlessException {
-        super(owner, modal);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.url = existingInfo.getUrl();
-        this.urlField.setEditable(false);
-        this.tagsField.setToolTip("List of keywords separated by blanks.");
-        this.urlField.setValue(existingInfo.getUrl().toExternalForm());
-        this.titleField.setValue(existingInfo.getTitle());
-        this.descriptionField.setValue(existingInfo.getDescription());
-        this.tagsField.setValue(existingInfo.getTagsText());
-        Container contentPane = this.getContentPane();
-        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-        FormPanel fieldsPanel = new FormPanel();
-        fieldsPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-        fieldsPanel.addField(this.urlField);
-        fieldsPanel.addField(this.titleField);
-        fieldsPanel.addField(this.descriptionField);
-        fieldsPanel.addField(this.tagsField);
+	/**
+	 * Instantiates a new adds the bookmark dialog.
+	 *
+	 * @param owner
+	 *            the owner
+	 * @param modal
+	 *            the modal
+	 * @param existingInfo
+	 *            the existing info
+	 * @throws HeadlessException
+	 *             the headless exception
+	 */
+	public AddBookmarkDialog(Frame owner, boolean modal, BookmarkInfo existingInfo) throws HeadlessException {
+		super(owner, modal);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.url = existingInfo.getUrl();
+		this.urlField.setEditable(false);
+		this.tagsField.setToolTip("List of keywords separated by blanks.");
+		this.urlField.setValue(existingInfo.getUrl().toExternalForm());
+		this.titleField.setValue(existingInfo.getTitle());
+		this.descriptionField.setValue(existingInfo.getDescription());
+		this.tagsField.setValue(existingInfo.getTagsText());
+		Container contentPane = this.getContentPane();
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+		FormPanel fieldsPanel = new FormPanel();
+		fieldsPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		fieldsPanel.addField(this.urlField);
+		fieldsPanel.addField(this.titleField);
+		fieldsPanel.addField(this.descriptionField);
+		fieldsPanel.addField(this.tagsField);
 
-        Dimension fpps = fieldsPanel.getPreferredSize();
-        fieldsPanel.setPreferredSize(new Dimension(400, fpps.height));
+		Dimension fpps = fieldsPanel.getPreferredSize();
+		fieldsPanel.setPreferredSize(new Dimension(400, fpps.height));
 
-        contentPane.add(fieldsPanel);
-        JComponent buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
-        JButton okButton = new JButton();
-        okButton.setAction(new OkAction());
-        okButton.setText("Save");
-        JButton cancelButton = new JButton();
-        cancelButton.setAction(new CancelAction());
-        cancelButton.setText("Cancel");
-        buttonsPanel.add(Box.createHorizontalGlue());
-        buttonsPanel.add(okButton);
-        buttonsPanel.add(Box.createRigidArea(new Dimension(4, 1)));
-        buttonsPanel.add(cancelButton);
-        buttonsPanel.add(Box.createHorizontalGlue());
-        contentPane.add(buttonsPanel);
-        contentPane.add(Box.createRigidArea(new Dimension(1, 4)));
-    }
+		contentPane.add(fieldsPanel);
+		JComponent buttonsPanel = new JPanel();
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+		JButton okButton = new JButton();
+		okButton.setAction(new OkAction());
+		okButton.setText("Save");
+		JButton cancelButton = new JButton();
+		cancelButton.setAction(new CancelAction());
+		cancelButton.setText("Cancel");
+		buttonsPanel.add(Box.createHorizontalGlue());
+		buttonsPanel.add(okButton);
+		buttonsPanel.add(Box.createRigidArea(new Dimension(4, 1)));
+		buttonsPanel.add(cancelButton);
+		buttonsPanel.add(Box.createHorizontalGlue());
+		contentPane.add(buttonsPanel);
+		contentPane.add(Box.createRigidArea(new Dimension(1, 4)));
+	}
 
-    /** The bookmark info. */
-    private BookmarkInfo bookmarkInfo;
+	/** The bookmark info. */
+	private BookmarkInfo bookmarkInfo;
 
-    /**
-     * Gets the bookmark info.
-     *
-     * @return the bookmark info
-     */
-    public BookmarkInfo getBookmarkInfo() {
-        return this.bookmarkInfo;
-    }
+	/**
+	 * Gets the bookmark info.
+	 *
+	 * @return the bookmark info
+	 */
+	public BookmarkInfo getBookmarkInfo() {
+		return this.bookmarkInfo;
+	}
 
-    /**
-     * The Class OkAction.
-     */
-    private class OkAction extends AbstractAction {
+	/**
+	 * The Class OkAction.
+	 */
+	private class OkAction extends AbstractAction {
 
-        /** The Constant serialVersionUID. */
-        private static final long serialVersionUID = 1L;
+		/** The Constant serialVersionUID. */
+		private static final long serialVersionUID = 1L;
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            BookmarkInfo binfo = new BookmarkInfo();
-            binfo.setUrl(url);
-            binfo.setTitle(titleField.getValue());
-            binfo.setDescription(descriptionField.getValue());
-            binfo.setTags(Strings.split(tagsField.getValue()));
-            bookmarkInfo = binfo;
-            AddBookmarkDialog.this.dispose();
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
+		 * ActionEvent)
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			BookmarkInfo binfo = new BookmarkInfo();
+			binfo.setUrl(url);
+			binfo.setTitle(titleField.getValue());
+			binfo.setDescription(descriptionField.getValue());
+			binfo.setTags(Strings.split(tagsField.getValue()));
+			bookmarkInfo = binfo;
+			AddBookmarkDialog.this.dispose();
+		}
+	}
 
-    /**
-     * The Class CancelAction.
-     */
-    private class CancelAction extends AbstractAction {
+	/**
+	 * The Class CancelAction.
+	 */
+	private class CancelAction extends AbstractAction {
 
-        /** The Constant serialVersionUID. */
-        private static final long serialVersionUID = 1L;
+		/** The Constant serialVersionUID. */
+		private static final long serialVersionUID = 1L;
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            bookmarkInfo = null;
-            AddBookmarkDialog.this.dispose();
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
+		 * ActionEvent)
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			bookmarkInfo = null;
+			AddBookmarkDialog.this.dispose();
+		}
+	}
 }

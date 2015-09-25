@@ -26,55 +26,56 @@ import org.lobobrowser.ua.NavigatorWindow;
  */
 public class GoToAction extends ActionPool {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The entry. */
-    private NavigationEntry entry;
+	/** The entry. */
+	private NavigationEntry entry;
 
-    /** The window. */
-    private NavigatorWindow window;
+	/** The window. */
+	private NavigatorWindow window;
 
-    /**
-     * Instantiates a new go to action.
-     *
-     * @param componentSource
-     *            the component source
-     * @param window
-     *            the window
-     */
-    public GoToAction(ComponentSource componentSource, NavigatorWindow window) {
-        super(componentSource, window);
-        this.window = window;
-    }
+	/**
+	 * Instantiates a new go to action.
+	 *
+	 * @param componentSource
+	 *            the component source
+	 * @param window
+	 *            the window
+	 */
+	public GoToAction(ComponentSource componentSource, NavigatorWindow window) {
+		super(componentSource, window);
+		this.window = window;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        window.goTo(getEntry());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		window.goTo(getEntry());
+	}
 
-    /**
-     * Gets the entry.
-     *
-     * @return the entry
-     */
-    public NavigationEntry getEntry() {
-        return entry;
-    }
+	/**
+	 * Gets the entry.
+	 *
+	 * @return the entry
+	 */
+	public NavigationEntry getEntry() {
+		return entry;
+	}
 
-    /**
-     * Sets the entry.
-     *
-     * @param entry
-     *            the new entry
-     */
-    public void setEntry(NavigationEntry entry) {
-        this.entry = entry;
-    }
+	/**
+	 * Sets the entry.
+	 *
+	 * @param entry
+	 *            the new entry
+	 */
+	public void setEntry(NavigationEntry entry) {
+		this.entry = entry;
+	}
 
 }

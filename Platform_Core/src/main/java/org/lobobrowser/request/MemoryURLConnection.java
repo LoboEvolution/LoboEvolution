@@ -25,7 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.lobobrowser.util.NameValuePair;
+import org.lobobrowser.http.NameValuePair;
 
 /**
  * The Class MemoryURLConnection.
