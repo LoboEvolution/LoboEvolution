@@ -93,6 +93,8 @@ public class Parser
     private String prevNameTokenString = "";
     private int prevNameTokenLineno;
 
+    private boolean defaultUseStrictDirective;
+
     // Exception to unwind
     private static class ParserException extends RuntimeException
     {
@@ -549,8 +551,11 @@ public class Parser
 
         boolean inDirectivePrologue = true;
         boolean savedStrictMode = inUseStrictDirective;
-        // TODO: eval code should get strict mode from invoking code
-        inUseStrictDirective = false;
+
+        inUseStrictDirective = defaultUseStrictDirective;
+        if (inUseStrictDirective) {
+            root.setInStrictMode(true);
+        }
 
         try {
             for (;;) {
@@ -621,7 +626,7 @@ public class Parser
         return root;
     }
 
-    private AstNode parseFunctionBody(int type)
+    private AstNode parseFunctionBody(int type, FunctionNode fnNode)
         throws IOException
     {
         boolean isExpressionClosure = false;
@@ -675,6 +680,10 @@ public class Parser
                                     inDirectivePrologue = false;
                                 } else if (directive.equals("use strict")) {
                                     inUseStrictDirective = true;
+                                    fnNode.setInStrictMode(true);
+                                    if (!savedStrictMode) {
+                                        setRequiresActivation();
+                                    }
                                 }
                             }
                             break;
@@ -829,7 +838,7 @@ public class Parser
         PerFunctionVariables savedVars = new PerFunctionVariables(fnNode);
         try {
             parseFunctionParams(fnNode);
-            fnNode.setBody(parseFunctionBody(type));
+            fnNode.setBody(parseFunctionBody(type, fnNode));
             fnNode.setEncodedSourceBounds(functionSourceStart, ts.tokenEnd);
             fnNode.setLength(ts.tokenEnd - functionSourceStart);
 
@@ -910,7 +919,7 @@ public class Parser
                 fnNode.putProp(Node.DESTRUCTURING_PARAMS, destructuringNode);
             }
                 
-            fnNode.setBody(parseFunctionBody(FunctionNode.ARROW_FUNCTION));
+            fnNode.setBody(parseFunctionBody(FunctionNode.ARROW_FUNCTION, fnNode));
             fnNode.setEncodedSourceBounds(functionSourceStart, ts.tokenEnd);
             fnNode.setLength(ts.tokenEnd - functionSourceStart);
         } finally {
@@ -2163,7 +2172,12 @@ public class Parser
             return returnOrYield(tt, true);
         }
         AstNode pn = condExpr();
-        tt = peekToken();
+        boolean hasEOL = false;
+        tt = peekTokenOrEOL();
+        if (tt == Token.EOL) {
+            hasEOL = true;
+            tt = peekToken();
+        }
         if (Token.FIRST_ASSIGN <= tt && tt <= Token.LAST_ASSIGN) {
             consumeToken();
 
@@ -2184,7 +2198,7 @@ public class Parser
             if (currentJsDocComment != null) {
                 pn.setJsDocNode(getAndResetJsDoc());
             }
-        } else if (tt == Token.ARROW) {
+        } else if (!hasEOL && tt == Token.ARROW) {
             consumeToken();
             pn = arrowFunction(pn);
         }
@@ -2704,7 +2718,7 @@ public class Parser
             int maybeName = nextToken();
             if (maybeName != Token.NAME
                     && !(compilerEnv.isReservedKeywordAsIdentifier()
-                    && TokenStream.isKeyword(ts.getString()))) {
+                    && TokenStream.isKeyword(ts.getString(), compilerEnv.getLanguageVersion(), inUseStrictDirective))) {
               reportError("msg.no.name.after.dot");
             }
 
@@ -2740,6 +2754,13 @@ public class Parser
               //          '@::attr', '@::*', '@*', '@*::attr', '@*::*'
               ref = attributeAccess();
               break;
+
+          case Token.RESERVED: {
+              String name = ts.getString();
+              saveNameTokenData(ts.tokenBeg, name, ts.lineno);
+              ref = propertyName(-1, name, memberTypeFlags);
+              break;
+          }
 
           default:
               if (compilerEnv.isReservedKeywordAsIdentifier()) {
@@ -3468,7 +3489,7 @@ public class Parser
 
           default:
               if (compilerEnv.isReservedKeywordAsIdentifier()
-                      && TokenStream.isKeyword(ts.getString())) {
+                      && TokenStream.isKeyword(ts.getString(), compilerEnv.getLanguageVersion(), inUseStrictDirective)) {
                   // convert keyword to property name, e.g. ({if: 1})
                   pname = createNameNode();
                   break;
@@ -3586,10 +3607,12 @@ public class Parser
             return;
         }
         boolean activation = false;
-        if ("arguments".equals(name)
-            || (compilerEnv.getActivationNames() != null
-                && compilerEnv.getActivationNames().contains(name)))
-        {
+        if ("arguments".equals(name) &&
+            // An arrow function not generate arguments. So it not need activation.
+            ((FunctionNode)currentScriptOrFn).getFunctionType() != FunctionNode.ARROW_FUNCTION) {
+            activation = true;
+        } else if (compilerEnv.getActivationNames() != null
+                && compilerEnv.getActivationNames().contains(name)) {
             activation = true;
         } else if ("length".equals(name)) {
             if (token == Token.GETPROP
@@ -4006,11 +4029,11 @@ public class Parser
         int nodeType = left.getType();
         switch (nodeType) {
           case Token.NAME:
+              String name = ((Name) left).getIdentifier();
               if (inUseStrictDirective &&
-                  "eval".equals(((Name) left).getIdentifier()))
+                  ("eval".equals(name) || "arguments".equals(name)))
               {
-                  reportError("msg.bad.id.strict",
-                              ((Name) left).getIdentifier());
+                  reportError("msg.bad.id.strict", name);
               }
               left.setType(Token.BINDNAME);
               return new Node(Token.SETNAME, left, right);
@@ -4087,5 +4110,13 @@ public class Parser
         throw Kit.codeBug("ts.cursor=" + ts.cursor
                           + ", ts.tokenBeg=" + ts.tokenBeg
                           + ", currentToken=" + currentToken);
+    }
+
+    public void setDefaultUseStrictDirective(boolean useStrict) {
+        defaultUseStrictDirective = useStrict;
+    }
+
+    public boolean inUseStrictDirective() {
+        return inUseStrictDirective;
     }
 }
