@@ -80,8 +80,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	private static final Map<HtmlRendererContext, WeakReference<Window>> CONTEXT_WINDOWS = new WeakHashMap<HtmlRendererContext, WeakReference<Window>>();
 
 	/** The Constant XMLHTTPREQUEST_WRAPPER. */
-	private static final JavaClassWrapper XMLHTTPREQUEST_WRAPPER = JavaClassWrapperFactory.getInstance()
-			.getClassWrapper(XMLHttpRequest.class);
+	private static final JavaClassWrapper XMLHTTPREQUEST_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(XMLHttpRequest.class);
 
 	/** The timer id counter. */
 	private static int timerIdCounter = 0;
@@ -354,6 +353,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 * Clear state.
 	 */
 	private void clearState() {
+		Context ctx = Context.enter();
+		try{
 		Scriptable s = this.getWindowScope();
 		if (s != null) {
 			Object[] ids = s.getIds();
@@ -366,6 +367,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				}
 			}
 		}
+		} finally{
+			Context.exit();
+		}
+		
 	}
 
 	/**
@@ -717,9 +722,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			if (windowScope != null) {
 				return windowScope;
 			}
-			// Context.enter() OK in this particular case.
-			Context ctx = Context.enter();
 			try {
+				Context ctx = Context.enter();
 				// Window scope needs to be top-most scope.
 				windowScope = (ScriptableObject) JavaScript.getInstance().getJavascriptObject(this, null);
 				ctx.initStandardObjects(windowScope);
