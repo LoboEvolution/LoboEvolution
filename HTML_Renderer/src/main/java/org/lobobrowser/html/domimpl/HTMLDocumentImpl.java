@@ -374,15 +374,6 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
 			return (String) AccessController.doPrivileged(new PrivilegedAction<Object>() {
-				// Justification: A caller (e.g. Google Analytics
-				// script)
-				// might want to get cookies from the parent document.
-				// If the caller has access to the document, it appears
-				// they should be able to get cookies on that document.
-				// Note that this Document instance cannot be created
-				// with an arbitrary URL.
-
-				// TODO: Security: Review rationale.
 				@Override
 				public Object run() {
 					return ucontext.getCookie(documentURL);
@@ -403,12 +394,6 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
 			AccessController.doPrivileged(new PrivilegedAction<Object>() {
-				// Justification: A caller (e.g. Google Analytics script)
-				// might want to set cookies on the parent document.
-				// If the caller has access to the document, it appears
-				// they should be able to set cookies on that document.
-				// Note that this Document instance cannot be created
-				// with an arbitrary URL.
 				@Override
 				public Object run() {
 					ucontext.setCookie(documentURL, cookie);
@@ -522,10 +507,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 					// ignore
 				}
 				this.reader = null;
-			} else {
-				// do nothing - could be parsing document off the web.
 			}
-			// TODO: cause it to render
 		}
 	}
 
@@ -641,9 +623,6 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 */
 	@Override
 	public DocumentFragment createDocumentFragment() {
-		// TODO: According to documentation, when a document
-		// fragment is added to a node, its children are added,
-		// not itself.
 		DOMFragmentImpl node = new DOMFragmentImpl();
 		node.setOwnerDocument(this);
 		return node;
