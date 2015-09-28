@@ -136,8 +136,6 @@ public class InputPasswordControl extends BaseInputTextControl {
 	}
 
 	private boolean match(String value, String strPattern) {
-		System.out.println("value: " + value);
-		System.out.println("strPattern: " + strPattern);
 		if (value != null && value.length() > 0) {
 			Pattern pattern = Pattern.compile(strPattern);
 			Matcher matcher = pattern.matcher(value);
