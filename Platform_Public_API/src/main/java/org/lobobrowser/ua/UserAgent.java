@@ -1,22 +1,22 @@
 /*
- * Copyright 1994-2006 The Lobo Project. Copyright 2014 Lobo Evolution. All
- * rights reserved. Redistribution and use in source and binary forms, with or
- * without modification, are permitted provided that the following conditions
- * are met: Redistributions of source code must retain the above copyright
- * notice, this list of conditions and the following disclaimer. Redistributions
- * in binary form must reproduce the above copyright notice, this list of
- * conditions and the following disclaimer in the documentation and/or other
- * materials provided with the distribution. THIS SOFTWARE IS PROVIDED BY THE
- * LOBO PROJECT ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
- * NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
- * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE FREEBSD PROJECT OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.ua;
 
@@ -27,18 +27,16 @@ package org.lobobrowser.ua;
  */
 public interface UserAgent {
 
-    /**
-     * Gets the user agent name.
-     *
-     * @return the name
-     */
+    /** Gets the name.
+	 *
+	 * @return the name
+	 */
     String getName();
 
-    /**
-     * Gets the user agent version.
-     *
-     * @return the version
-     */
+    /** Gets the version.
+	 *
+	 * @return the version
+	 */
     String getVersion();
 
     // /**
@@ -48,32 +46,28 @@ public interface UserAgent {
     // */
     // String getXamjVersion();
 
-    /**
-     * Gets the internal Java runtime version the user agent runs on.
-     *
-     * @return the java version
-     */
+    /** Gets the java version.
+	 *
+	 * @return the java version
+	 */
     String getJavaVersion();
 
-    /**
-     * Gets the user agent name followed by the version.
-     *
-     * @return the name and version
-     */
+    /** Gets the name and version.
+	 *
+	 * @return the name and version
+	 */
     String getNameAndVersion();
 
-    /**
-     * Optional URL with information about the user agent.
-     *
-     * @return the info url
-     */
+    /** Gets the info url.
+	 *
+	 * @return the info url
+	 */
     String getInfoUrl();
 
-    /**
-     * Gets the value the User-Agent header should be set to.
-     *
-     * @return the user agent string
-     */
+    /** Gets the user agent string.
+	 *
+	 * @return the user agent string
+	 */
     String getUserAgentString();
 
     // (unavalilable for now)

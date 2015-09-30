@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The XAMJ Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.html.info;
 
@@ -23,6 +29,7 @@ import org.lobobrowser.html.renderer.ExportableFloat;
  */
 public class FloatingInfo implements Serializable {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6300332715805068001L;
 
 	/** The shift x. */
@@ -52,36 +59,46 @@ public class FloatingInfo implements Serializable {
 	}
 
 	/**
-	 * @return the shiftX
+	 * Gets the shift x.
+	 *
+	 * @return the shift x
 	 */
 	public int getShiftX() {
 		return shiftX;
 	}
 
 	/**
+	 * Sets the shift x.
+	 *
 	 * @param shiftX
-	 *            the shiftX to set
+	 *            the new shift x
 	 */
 	public void setShiftX(int shiftX) {
 		this.shiftX = shiftX;
 	}
 
 	/**
-	 * @return the shiftY
+	 * Gets the shift y.
+	 *
+	 * @return the shift y
 	 */
 	public int getShiftY() {
 		return shiftY;
 	}
 
 	/**
+	 * Sets the shift y.
+	 *
 	 * @param shiftY
-	 *            the shiftY to set
+	 *            the new shift y
 	 */
 	public void setShiftY(int shiftY) {
 		this.shiftY = shiftY;
 	}
 
 	/**
+	 * Gets the floats.
+	 *
 	 * @return the floats
 	 */
 	public ExportableFloat[] getFloats() {
@@ -89,8 +106,10 @@ public class FloatingInfo implements Serializable {
 	}
 
 	/**
+	 * Sets the floats.
+	 *
 	 * @param floats
-	 *            the floats to set
+	 *            the new floats
 	 */
 	public void setFloats(ExportableFloat[] floats) {
 		this.floats = floats;

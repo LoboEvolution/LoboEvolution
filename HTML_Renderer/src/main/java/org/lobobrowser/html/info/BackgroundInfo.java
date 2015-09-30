@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.html.info;
 
@@ -23,6 +29,7 @@ import java.net.URL;
  */
 public class BackgroundInfo implements Serializable {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -930859930039262249L;
 
 	/** The background color. */
@@ -59,105 +66,133 @@ public class BackgroundInfo implements Serializable {
 	public static final int BR_REPEAT_Y = 3;
 
 	/**
-	 * @return the backgroundColor
+	 * Gets the background color.
+	 *
+	 * @return the background color
 	 */
 	public Color getBackgroundColor() {
 		return backgroundColor;
 	}
 
 	/**
+	 * Sets the background color.
+	 *
 	 * @param backgroundColor
-	 *            the backgroundColor to set
+	 *            the new background color
 	 */
 	public void setBackgroundColor(Color backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
 
 	/**
-	 * @return the backgroundImage
+	 * Gets the background image.
+	 *
+	 * @return the background image
 	 */
 	public URL getBackgroundImage() {
 		return backgroundImage;
 	}
 
 	/**
+	 * Sets the background image.
+	 *
 	 * @param backgroundImage
-	 *            the backgroundImage to set
+	 *            the new background image
 	 */
 	public void setBackgroundImage(URL backgroundImage) {
 		this.backgroundImage = backgroundImage;
 	}
 
 	/**
-	 * @return the backgroundXPositionAbsolute
+	 * Checks if is background x position absolute.
+	 *
+	 * @return the background x position absolute
 	 */
 	public boolean isBackgroundXPositionAbsolute() {
 		return backgroundXPositionAbsolute;
 	}
 
 	/**
+	 * Sets the background x position absolute.
+	 *
 	 * @param backgroundXPositionAbsolute
-	 *            the backgroundXPositionAbsolute to set
+	 *            the new background x position absolute
 	 */
 	public void setBackgroundXPositionAbsolute(boolean backgroundXPositionAbsolute) {
 		this.backgroundXPositionAbsolute = backgroundXPositionAbsolute;
 	}
 
 	/**
-	 * @return the backgroundXPosition
+	 * Gets the background x position.
+	 *
+	 * @return the background x position
 	 */
 	public int getBackgroundXPosition() {
 		return backgroundXPosition;
 	}
 
 	/**
+	 * Sets the background x position.
+	 *
 	 * @param backgroundXPosition
-	 *            the backgroundXPosition to set
+	 *            the new background x position
 	 */
 	public void setBackgroundXPosition(int backgroundXPosition) {
 		this.backgroundXPosition = backgroundXPosition;
 	}
 
 	/**
-	 * @return the backgroundYPositionAbsolute
+	 * Checks if is background y position absolute.
+	 *
+	 * @return the background y position absolute
 	 */
 	public boolean isBackgroundYPositionAbsolute() {
 		return backgroundYPositionAbsolute;
 	}
 
 	/**
+	 * Sets the background y position absolute.
+	 *
 	 * @param backgroundYPositionAbsolute
-	 *            the backgroundYPositionAbsolute to set
+	 *            the new background y position absolute
 	 */
 	public void setBackgroundYPositionAbsolute(boolean backgroundYPositionAbsolute) {
 		this.backgroundYPositionAbsolute = backgroundYPositionAbsolute;
 	}
 
 	/**
-	 * @return the backgroundYPosition
+	 * Gets the background y position.
+	 *
+	 * @return the background y position
 	 */
 	public int getBackgroundYPosition() {
 		return backgroundYPosition;
 	}
 
 	/**
+	 * Sets the background y position.
+	 *
 	 * @param backgroundYPosition
-	 *            the backgroundYPosition to set
+	 *            the new background y position
 	 */
 	public void setBackgroundYPosition(int backgroundYPosition) {
 		this.backgroundYPosition = backgroundYPosition;
 	}
 
 	/**
-	 * @return the backgroundRepeat
+	 * Gets the background repeat.
+	 *
+	 * @return the background repeat
 	 */
 	public int getBackgroundRepeat() {
 		return backgroundRepeat;
 	}
 
 	/**
+	 * Sets the background repeat.
+	 *
 	 * @param backgroundRepeat
-	 *            the backgroundRepeat to set
+	 *            the new background repeat
 	 */
 	public void setBackgroundRepeat(int backgroundRepeat) {
 		this.backgroundRepeat = backgroundRepeat;

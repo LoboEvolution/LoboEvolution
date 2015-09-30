@@ -23,6 +23,7 @@ package org.lobobrowser.w3c.events;
 import org.lobobrowser.html.jsimpl.EventException;
 import org.w3c.dom.DOMException;
 
+
 /**
  * The public interface EventTarget.
  */

@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either verion 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Mar 12, 2005
@@ -70,13 +76,10 @@ public class StorageManager implements Runnable {
     /** The store directory. */
     private final File storeDirectory;
 
-    /**
-     * Gets the single instance of StorageManager.
-     *
-     * @return single instance of StorageManager
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
+    /** Gets the Constant instance.
+	 *
+	 * @return the Constant instance
+	 */
     public static StorageManager getInstance() throws IOException {
         return instance;
     }
@@ -111,11 +114,10 @@ public class StorageManager implements Runnable {
         }
     }
 
-    /**
-     * Gets the app home.
-     *
-     * @return the app home
-     */
+    /** Gets the app home.
+	 *
+	 * @return the app home
+	 */
     public File getAppHome() {
         return this.storeDirectory;
     }
@@ -159,11 +161,10 @@ public class StorageManager implements Runnable {
         return new File(xamjDir, fileName);
     }
 
-    /**
-     * Gets the cache root.
-     *
-     * @return the cache root
-     */
+    /** Gets the cache root.
+	 *
+	 * @return the cache root
+	 */
     public File getCacheRoot() {
         return new File(this.storeDirectory, CACHE_DIR);
     }
@@ -229,11 +230,10 @@ public class StorageManager implements Runnable {
         return store;
     }
 
-    /**
-     * Gets the settings directory.
-     *
-     * @return the settings directory
-     */
+    /** Gets the settings directory.
+	 *
+	 * @return the settings directory
+	 */
     public File getSettingsDirectory() {
         return new File(this.storeDirectory, SETTINGS_DIR);
     }

@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either verion 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General License for more details. You should have received
- * a copy of the GNU General License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.request;
 
@@ -30,35 +36,28 @@ import org.lobobrowser.ua.RequestType;
  */
 public interface RequestHandler {
 
-    /**
-     * Gets the request.
-     *
-     * @return the request
-     */
+    /** Gets the request.
+	 *
+	 * @return the request
+	 */
     ClientletRequest getRequest();
 
-    /**
-     * Gets the actual request URL, which may be different from the URL of the
-     * original request.
-     *
-     * @return the latest request url
-     */
+    /** Gets the latest request url.
+	 *
+	 * @return the latest request url
+	 */
     URL getLatestRequestURL();
 
-    /**
-     * Gets the actual request method, which may be different from the method of
-     * the original request.
-     *
-     * @return the latest request method
-     */
+    /** Gets the latest request method.
+	 *
+	 * @return the latest request method
+	 */
     String getLatestRequestMethod();
 
-    /**
-     * Gets a hostname verifier used when an HTTPS host does not match the
-     * cerificate information.
-     *
-     * @return the hostname verifier
-     */
+    /** Gets the hostname verifier.
+	 *
+	 * @return the hostname verifier
+	 */
     HostnameVerifier getHostnameVerifier();
 
     /**
@@ -110,17 +109,15 @@ public interface RequestHandler {
      */
     void cancel();
 
-    /**
-     * Checks if is cancelled.
-     *
-     * @return true, if is cancelled
-     */
+    /** Checks if is cancelled.
+	 *
+	 * @return true, if is cancelled
+	 */
     boolean isCancelled();
 
-    /**
-     * Gets the request type.
-     *
-     * @return the request type
-     */
+    /** Gets the request type.
+	 *
+	 * @return the request type
+	 */
     RequestType getRequestType();
 }

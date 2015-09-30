@@ -1,5 +1,5 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
+    GNU GENERAL LICENSE
     Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
 
     This program is free software; you can redistribute it and/or
@@ -10,7 +10,7 @@
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
+    General License for more details.
 
     You should have received a copy of the GNU General Public
     License along with this library; if not, write to the Free Software
@@ -52,30 +52,27 @@ public class Screen extends AbstractScriptableDelegate {
         }
     }
 
-    /**
-     * Gets the height.
-     *
-     * @return the height
-     */
+    /** Gets the height.
+	 *
+	 * @return the height
+	 */
     public int getHeight() {
         GraphicsDevice gd = this.graphicsDevice;
         return gd == null ? 0 : gd.getDisplayMode().getHeight();
     }
 
-    /**
-     * Gets the pixel depth.
-     *
-     * @return the pixel depth
-     */
+    /** Gets the pixel depth.
+	 *
+	 * @return the pixel depth
+	 */
     public int getPixelDepth() {
         return this.getColorDepth();
     }
 
-    /**
-     * Gets the width.
-     *
-     * @return the width
-     */
+    /** Gets the width.
+	 *
+	 * @return the width
+	 */
     public int getWidth() {
         GraphicsEnvironment ge = this.graphicsEnvironment;
         if (ge == null) {
@@ -85,11 +82,10 @@ public class Screen extends AbstractScriptableDelegate {
         return gd.getDisplayMode().getWidth();
     }
 
-    /**
-     * Gets the avail height.
-     *
-     * @return the avail height
-     */
+    /** Gets the avail height.
+	 *
+	 * @return the avail height
+	 */
     public int getAvailHeight() {
         GraphicsEnvironment ge = this.graphicsEnvironment;
         if (ge == null) {
@@ -98,11 +94,10 @@ public class Screen extends AbstractScriptableDelegate {
         return ge.getMaximumWindowBounds().height;
     }
 
-    /**
-     * Gets the avail width.
-     *
-     * @return the avail width
-     */
+    /** Gets the avail width.
+	 *
+	 * @return the avail width
+	 */
     public int getAvailWidth() {
         GraphicsEnvironment ge = this.graphicsEnvironment;
         if (ge == null) {
@@ -111,11 +106,10 @@ public class Screen extends AbstractScriptableDelegate {
         return ge.getMaximumWindowBounds().width;
     }
 
-    /**
-     * Gets the color depth.
-     *
-     * @return the color depth
-     */
+    /** Gets the color depth.
+	 *
+	 * @return the color depth
+	 */
     public int getColorDepth() {
         GraphicsDevice gd = this.graphicsDevice;
         if (gd == null) {

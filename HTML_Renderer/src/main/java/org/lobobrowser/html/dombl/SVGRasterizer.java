@@ -1,3 +1,23 @@
+/*
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ */
 package org.lobobrowser.html.dombl;
 
 import java.awt.Image;
@@ -117,69 +137,60 @@ public class SVGRasterizer {
 	}
 
 	/**
-	 * Sets the width of the image to rasterize.
+	 * Sets the image width.
 	 *
 	 * @param width
-	 *            the image width
+	 *            the new image width
 	 */
 	public void setImageWidth(float width) {
 		hints.put(ImageTranscoder.KEY_WIDTH, new Float(width));
 	}
 
 	/**
-	 * Sets the height of the image to rasterize.
+	 * Sets the image height.
 	 *
-	 * @param width
-	 *            the image height
+	 * @param height
+	 *            the new image height
 	 */
 	public void setImageHeight(float height) {
 		hints.put(ImageTranscoder.KEY_HEIGHT, new Float(height));
 	}
 
 	/**
-	 * Sets the preferred language to use. SVG documents can provide text in
-	 * multiple languages, this method lets you control which language to use if
-	 * possible. e.g. "en" for english or "fr" for french.
+	 * Sets the languages.
 	 *
 	 * @param language
-	 *            the preferred language to use
+	 *            the new languages
 	 */
 	public void setLanguages(String language) {
 		hints.put(ImageTranscoder.KEY_LANGUAGE, language);
 	}
 
 	/**
-	 * Sets the unit conversion factor to the specified value. This method lets
-	 * you choose how units such as 'em' are converted. e.g. 0.26458 is 96dpi
-	 * (the default) or 0.3528 is 72dpi.
+	 * Sets the pixel to mm factor.
 	 *
 	 * @param px2mm
-	 *            the pixel to millimeter convertion factor.
+	 *            the new pixel to mm factor
 	 */
 	public void setPixelToMMFactor(float px2mm) {
 		hints.put(ImageTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, new Float(px2mm));
 	}
 
 	/**
-	 * Sets the uri of the user stylesheet. The user stylesheet can be used to
-	 * override styles.
+	 * Sets the user style sheet uri.
 	 *
 	 * @param uri
-	 *            the uri of the user stylesheet
+	 *            the new user style sheet uri
 	 */
 	public void setUserStyleSheetURI(String uri) {
 		hints.put(ImageTranscoder.KEY_USER_STYLESHEET_URI, uri);
 	}
 
 	/**
-	 * Sets whether or not the XML parser used to parse SVG document should be
-	 * validating or not, depending on the specified parameter. For futher
-	 * details about how media work, see the <a
-	 * href="http://www.w3.org/TR/CSS2/media.html">Media types in the CSS2
-	 * specification</a>.
+	 * Sets the XML parser validating.
 	 *
 	 * @param b
-	 *            true means the XML parser will validate its input
+	 *            the new XML parser validating
 	 */
 	public void setXMLParserValidating(boolean b) {
 		hints.put(ImageTranscoder.KEY_XML_PARSER_VALIDATING, (b ? Boolean.TRUE
@@ -187,33 +198,30 @@ public class SVGRasterizer {
 	}
 
 	/**
-	 * Sets the media to rasterize. The medium should be separated by comma.
-	 * e.g. "screen", "print" or "screen, print"
+	 * Sets the media.
 	 *
 	 * @param media
-	 *            the media to use
+	 *            the new media
 	 */
 	public void setMedia(String media) {
 		hints.put(ImageTranscoder.KEY_MEDIA, media);
 	}
 
 	/**
-	 * Sets the alternate stylesheet to use. For futher details, you can have a
-	 * look at the <a href="http://www.w3.org/TR/xml-stylesheet/">Associating
-	 * Style Sheets with XML documents</a>.
+	 * Sets the alternate stylesheet.
 	 *
 	 * @param alternateStylesheet
-	 *            the alternate stylesheet to use if possible
+	 *            the new alternate stylesheet
 	 */
 	public void setAlternateStylesheet(String alternateStylesheet) {
 		hints.put(ImageTranscoder.KEY_ALTERNATE_STYLESHEET, alternateStylesheet);
 	}
 
 	/**
-	 * Sets the Paint to use for the background of the image.
+	 * Sets the background color.
 	 *
 	 * @param p
-	 *            the paint to use for the background
+	 *            the new background color
 	 */
 	public void setBackgroundColor(Paint p) {
 		hints.put(ImageTranscoder.KEY_BACKGROUND_COLOR, p);

@@ -1,3 +1,23 @@
+/*
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ */
 package org.lobobrowser.primary.gui.pdf;
 
 import java.awt.Color;
@@ -24,15 +44,16 @@ import com.sun.pdfview.PDFPage;
  */
 public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObserver {
 
-	/**
-	 *
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6761217072379594185L;
-	/** The PDFFile being displayed */
+	
+	/** The PDFFile being displayed. */
 	PDFFile file;
-	/** Array of images, one per page in the file */
+	
+	/** Array of images, one per page in the file. */
 	Image images[];
-	/** Size of the border between images */
+	
+	/** Size of the border between images. */
 	int border = 2;
 	/**
 	 * Height of each line. Thumbnails will be scaled to this height (minus the
@@ -48,7 +69,8 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 * this array indicates the start of a new line of thumbnails.
 	 */
 	int xloc[];
-	/** Thread that renders each thumbnail in turn */
+	
+	/** Thread that renders each thumbnail in turn. */
 	Thread anim;
 	/** Which thumbnail is selected, or -1 if no thumbnail selected. */
 	int showing = -1;
@@ -61,7 +83,8 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 * Whether the default width has been guesstimated for this PDFFile yet.
 	 */
 	boolean defaultNotSet = true;
-	/** The PageChangeListener that is listening for page changes */
+	
+	/** The PageChangeListener that is listening for page changes. */
 	PageChangeListener listener;
 
 	// Flag flag= new Flag();
@@ -185,10 +208,12 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	}
 
 	/**
-	 * Sets the default width of an un-processed thumbnail.
+	 * Sets the guesstimate of the width of a thumbnail that hasn't been
+	 * processed yet.
 	 *
 	 * @param width
-	 *            the width of an unknown thumbnail, in pixels.
+	 *            the new guesstimate of the width of a thumbnail that hasn't
+	 *            been processed yet
 	 */
 	public void setDefaultWidth(int width) {
 		defaultWidth = width;
@@ -259,6 +284,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 */
 	class GotoLater implements Runnable {
 
+		/** The page. */
 		int page;
 
 		public GotoLater(int pagenum) {

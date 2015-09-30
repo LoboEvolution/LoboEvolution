@@ -1,3 +1,23 @@
+/*
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ */
 package org.lobobrowser.html.info;
 
 import java.io.Serializable;
@@ -7,6 +27,7 @@ import java.io.Serializable;
  */
 public class CaptionSizeInfo implements Serializable {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -699151415264714503L;
 
 	/** The height. */
@@ -19,6 +40,8 @@ public class CaptionSizeInfo implements Serializable {
 	private int width;
 
 	/**
+	 * Gets the height.
+	 *
 	 * @return the height
 	 */
 	public int getHeight() {
@@ -26,29 +49,37 @@ public class CaptionSizeInfo implements Serializable {
 	}
 
 	/**
+	 * Sets the height.
+	 *
 	 * @param height
-	 *            the height to set
+	 *            the new height
 	 */
 	public void setHeight(int height) {
 		this.height = height;
 	}
 
 	/**
-	 * @return the heightOffset
+	 * Gets the height offset.
+	 *
+	 * @return the height offset
 	 */
 	public int getHeightOffset() {
 		return heightOffset;
 	}
 
 	/**
+	 * Sets the height offset.
+	 *
 	 * @param heightOffset
-	 *            the heightOffset to set
+	 *            the new height offset
 	 */
 	public void setHeightOffset(int heightOffset) {
 		this.heightOffset = heightOffset;
 	}
 
 	/**
+	 * Gets the width.
+	 *
 	 * @return the width
 	 */
 	public int getWidth() {
@@ -56,8 +87,10 @@ public class CaptionSizeInfo implements Serializable {
 	}
 
 	/**
+	 * Sets the width.
+	 *
 	 * @param width
-	 *            the width to set
+	 *            the new width
 	 */
 	public void setWidth(int width) {
 		this.width = width;

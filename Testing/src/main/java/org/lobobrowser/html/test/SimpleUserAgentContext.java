@@ -1,5 +1,5 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
+    GNU GENERAL LICENSE
     Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
 
     This program is free software; you can redistribute it and/or
@@ -10,7 +10,7 @@
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
+    General License for more details.
 
     You should have received a copy of the GNU General Public
     License along with this library; if not, write to the Free Software
@@ -93,22 +93,19 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	private java.net.Proxy proxy = java.net.Proxy.NO_PROXY;
 
 	/**
-	 * Gets the connection proxy used in requests created by
-	 * {@link #createHttpRequest()} by default. This implementation returns the
-	 * value of a local field.
+	 * Gets the proxy.
 	 *
 	 * @return the proxy
-	 * @see #setProxy(Proxy)
 	 */
 	protected java.net.Proxy getProxy() {
 		return this.proxy;
 	}
 
 	/**
-	 * Sets the value of the proxy normally returned by {@link #getProxy()}.
+	 * Sets the proxy.
 	 *
 	 * @param proxy
-	 *            A <code>java.net.Proxy</code> instance.
+	 *            the new proxy
 	 */
 	public void setProxy(Proxy proxy) {
 		this.proxy = proxy;
@@ -130,11 +127,10 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	}
 
 	/**
-	 * Sets the application code name normally returned by
-	 * {@link #getAppCodeName()}.
+	 * Sets the app code name.
 	 *
 	 * @param appCodeName
-	 *            An application "code name."
+	 *            the new app code name
 	 */
 	public void setAppCodeName(String appCodeName) {
 		this.appCodeName = appCodeName;
@@ -156,10 +152,10 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	}
 
 	/**
-	 * Sets the value normally returned by {@link #getAppMinorVersion()}.
+	 * Sets the app minor version.
 	 *
 	 * @param appMinorVersion
-	 *            The application's "minor version."
+	 *            the new app minor version
 	 */
 	public void setAppMinorVersion(String appMinorVersion) {
 		this.appMinorVersion = appMinorVersion;
@@ -181,10 +177,10 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	}
 
 	/**
-	 * Sets the value normally returned by {@link #getAppName()}.
+	 * Sets the app name.
 	 *
 	 * @param appName
-	 *            The application name.
+	 *            the new app name
 	 */
 	public void setAppName(String appName) {
 		this.appName = appName;
@@ -206,10 +202,10 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	}
 
 	/**
-	 * Sets the value normally returned by {@link #getAppVersion()}.
+	 * Sets the app version.
 	 *
 	 * @param appVersion
-	 *            The application version.
+	 *            the new app version
 	 */
 	public void setAppVersion(String appVersion) {
 		this.appVersion = appVersion;
@@ -253,10 +249,10 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	}
 
 	/**
-	 * Sets the value normally returned by {@link #getUserAgent()}.
+	 * Sets the user agent.
 	 *
 	 * @param userAgent
-	 *            A User-Agent string.
+	 *            the new user agent
 	 */
 	public void setUserAgent(String userAgent) {
 		this.userAgent = userAgent;
@@ -339,10 +335,10 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	}
 
 	/**
-	 * Sets the value normally returned by {@link #isScriptingEnabled()}.
+	 * Sets the scripting enabled.
 	 *
 	 * @param enable
-	 *            A boolean value.
+	 *            the new scripting enabled
 	 */
 	public void setScriptingEnabled(boolean enable) {
 		this.scriptingEnabled = enable;
@@ -399,11 +395,10 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	}
 
 	/**
-	 * Sets the value normally returned by
-	 * {@link #getScriptingOptimizationLevel()}.
+	 * Sets the scripting optimization level.
 	 *
 	 * @param level
-	 *            A Rhino optimization level.
+	 *            the new scripting optimization level
 	 */
 	public void setScriptingOptimizationLevel(int level) {
 		this.scriptingOptimizationLevel = level;
@@ -472,10 +467,10 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	}
 
 	/**
-	 * Sets the value normally returned by {@link #isExternalCSSEnabled()}.
+	 * Sets the external css enabled.
 	 *
 	 * @param enabled
-	 *            A boolean value.
+	 *            the new external css enabled
 	 */
 	public void setExternalCSSEnabled(boolean enabled) {
 		this.externalCSSEnabled = enabled;
@@ -497,10 +492,10 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	}
 
 	/**
-	 * Sets the value normally returned by {@link #isInternalCSSEnabled()}.
+	 * Sets the internal css enabled.
 	 *
 	 * @param internalCSSEnabled
-	 *            A boolean value.
+	 *            the new internal css enabled
 	 */
 	public void setInternalCSSEnabled(boolean internalCSSEnabled) {
 		this.internalCSSEnabled = internalCSSEnabled;

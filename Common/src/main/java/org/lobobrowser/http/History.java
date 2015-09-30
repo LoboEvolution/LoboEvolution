@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Jun 6, 2005
@@ -85,49 +91,44 @@ public class History implements java.io.Serializable {
         in.defaultReadObject();
     }
     
-    /**
-     * Gets the common entries capacity.
-     *
-     * @return Returns the commonEntriesCapacity.
-     */
+    /** Gets the common entries capacity.
+	 *
+	 * @return the common entries capacity
+	 */
     public int getCommonEntriesCapacity() {
         return commonEntriesCapacity;
     }
     
-    /**
-     * Sets the common entries capacity.
-     *
-     * @param commonEntriesCapacity
-     *            The commonEntriesCapacity to set.
-     */
+    /** Sets the common entries capacity.
+	 *
+	 * @param commonEntriesCapacity
+	 *            the new common entries capacity
+	 */
     public void setCommonEntriesCapacity(int commonEntriesCapacity) {
         this.commonEntriesCapacity = commonEntriesCapacity;
     }
     
-    /**
-     * Gets the sequence capacity.
-     *
-     * @return Returns the sequenceCapacity.
-     */
+    /** Gets the sequence capacity.
+	 *
+	 * @return the sequence capacity
+	 */
     public int getSequenceCapacity() {
         return sequenceCapacity;
     }
     
-    /**
-     * Sets the sequence capacity.
-     *
-     * @param sequenceCapacity
-     *            The sequenceCapacity to set.
-     */
+    /** Sets the sequence capacity.
+	 *
+	 * @param sequenceCapacity
+	 *            the new sequence capacity
+	 */
     public void setSequenceCapacity(int sequenceCapacity) {
         this.sequenceCapacity = sequenceCapacity;
     }
     
-    /**
-     * Gets the current item.
-     *
-     * @return the current item
-     */
+    /** Gets the current item.
+	 *
+	 * @return the current item
+	 */
     public String getCurrentItem() {
         if (this.sequenceIndex >= 0) {
             return this.historySequence.get(this.sequenceIndex);

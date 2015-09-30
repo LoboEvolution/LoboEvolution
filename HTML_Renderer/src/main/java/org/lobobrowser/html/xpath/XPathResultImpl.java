@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * $Id: XPathResultImpl.java 1225426 2011-12-29 04:13:08Z mrglavas $
@@ -690,70 +696,90 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * @return the anyType
+	 * Gets the any type.
+	 *
+	 * @return the any type
 	 */
 	public static short getANY_TYPE() {
 		return ANY_TYPE;
 	}
 
 	/**
-	 * @return the numberType
+	 * Gets the number type.
+	 *
+	 * @return the number type
 	 */
 	public static short getNUMBER_TYPE() {
 		return NUMBER_TYPE;
 	}
 
 	/**
-	 * @return the stringType
+	 * Gets the string type.
+	 *
+	 * @return the string type
 	 */
 	public static short getSTRING_TYPE() {
 		return STRING_TYPE;
 	}
 
 	/**
-	 * @return the booleanType
+	 * Gets the boolean type.
+	 *
+	 * @return the boolean type
 	 */
 	public static short getBOOLEAN_TYPE() {
 		return BOOLEAN_TYPE;
 	}
 
 	/**
-	 * @return the unorderedNodeIteratorType
+	 * Gets the unordered node iterator type.
+	 *
+	 * @return the unordered node iterator type
 	 */
 	public static short getUNORDERED_NODE_ITERATOR_TYPE() {
 		return UNORDERED_NODE_ITERATOR_TYPE;
 	}
 
 	/**
-	 * @return the orderedNodeIteratorType
+	 * Gets the ordered node iterator type.
+	 *
+	 * @return the ordered node iterator type
 	 */
 	public static short getORDERED_NODE_ITERATOR_TYPE() {
 		return ORDERED_NODE_ITERATOR_TYPE;
 	}
 
 	/**
-	 * @return the unorderedNodeSnapshotType
+	 * Gets the unordered node snapshot type.
+	 *
+	 * @return the unordered node snapshot type
 	 */
 	public static short getUNORDERED_NODE_SNAPSHOT_TYPE() {
 		return UNORDERED_NODE_SNAPSHOT_TYPE;
 	}
 
 	/**
-	 * @return the orderedNodeSnapshotType
+	 * Gets the ordered node snapshot type.
+	 *
+	 * @return the ordered node snapshot type
 	 */
 	public static short getORDERED_NODE_SNAPSHOT_TYPE() {
 		return ORDERED_NODE_SNAPSHOT_TYPE;
 	}
 
 	/**
-	 * @return the anyUnorderedNodeType
+	 * Gets the any unordered node type.
+	 *
+	 * @return the any unordered node type
 	 */
 	public static short getANY_UNORDERED_NODE_TYPE() {
 		return ANY_UNORDERED_NODE_TYPE;
 	}
 
 	/**
-	 * @return the firstOrderedNodeType
+	 * Gets the first ordered node type.
+	 *
+	 * @return the first ordered node type
 	 */
 	public static short getFIRST_ORDERED_NODE_TYPE() {
 		return FIRST_ORDERED_NODE_TYPE;

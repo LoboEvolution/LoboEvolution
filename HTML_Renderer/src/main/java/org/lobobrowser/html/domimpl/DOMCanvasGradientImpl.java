@@ -1,5 +1,22 @@
-/**
- * 
+/*
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.html.domimpl;
 
@@ -9,6 +26,9 @@ import java.util.ArrayList;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.html.CanvasGradient;
 
+/**
+ * The Class DOMCanvasGradientImpl.
+ */
 public class DOMCanvasGradientImpl implements CanvasGradient {
 
 	/** The fractions. */
@@ -46,6 +66,8 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 	}
 
 	/**
+	 * Gets the fractions.
+	 *
 	 * @return the fractions
 	 */
 	public ArrayList<Float> getFractions() {
@@ -53,14 +75,18 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 	}
 
 	/**
+	 * Sets the fractions.
+	 *
 	 * @param fractions
-	 *            the fractions to set
+	 *            the new fractions
 	 */
 	public void setFractions(ArrayList<Float> fractions) {
 		this.fractions = fractions;
 	}
 
 	/**
+	 * Gets the colors.
+	 *
 	 * @return the colors
 	 */
 	public ArrayList<Color> getColors() {
@@ -68,68 +94,86 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 	}
 
 	/**
+	 * Sets the colors.
+	 *
 	 * @param colors
-	 *            the colors to set
+	 *            the new colors
 	 */
 	public void setColors(ArrayList<Color> colors) {
 		this.colors = colors;
 	}
 
 	/**
-	 * @return the linearX
+	 * Gets the linear x.
+	 *
+	 * @return the linear x
 	 */
 	public Double getLinearX() {
 		return linearX;
 	}
 
 	/**
+	 * Sets the linear x.
+	 *
 	 * @param linearX
-	 *            the linearX to set
+	 *            the new linear x
 	 */
 	public void setLinearX(Double linearX) {
 		this.linearX = linearX;
 	}
 
 	/**
-	 * @return the linearX1
+	 * Gets the linear x1.
+	 *
+	 * @return the linear x1
 	 */
 	public Double getLinearX1() {
 		return linearX1;
 	}
 
 	/**
+	 * Sets the linear x1.
+	 *
 	 * @param linearX1
-	 *            the linearX1 to set
+	 *            the new linear x1
 	 */
 	public void setLinearX1(Double linearX1) {
 		this.linearX1 = linearX1;
 	}
 
 	/**
-	 * @return the linearY
+	 * Gets the linear y.
+	 *
+	 * @return the linear y
 	 */
 	public Double getLinearY() {
 		return linearY;
 	}
 
 	/**
+	 * Sets the linear y.
+	 *
 	 * @param linearY
-	 *            the linearY to set
+	 *            the new linear y
 	 */
 	public void setLinearY(Double linearY) {
 		this.linearY = linearY;
 	}
 
 	/**
-	 * @return the linearY1
+	 * Gets the linear y1.
+	 *
+	 * @return the linear y1
 	 */
 	public Double getLinearY1() {
 		return linearY1;
 	}
 
 	/**
+	 * Sets the linear y1.
+	 *
 	 * @param linearY1
-	 *            the linearY1 to set
+	 *            the new linear y1
 	 */
 	public void setLinearY1(Double linearY1) {
 		this.linearY1 = linearY1;

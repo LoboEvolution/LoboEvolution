@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Nov 12, 2005
@@ -1871,6 +1877,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Gets the onabort.
+	 *
 	 * @return the onabort
 	 */
 	public Function getOnabort() {
@@ -1878,14 +1886,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onabort.
+	 *
 	 * @param onabort
-	 *            the onabort to set
+	 *            the new onabort
 	 */
 	public void setOnabort(Function onabort) {
 		this.onabort = onabort;
 	}
 
 	/**
+	 * Gets the onafterprint.
+	 *
 	 * @return the onafterprint
 	 */
 	public Function getOnafterprint() {
@@ -1893,14 +1905,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onafterprint.
+	 *
 	 * @param onafterprint
-	 *            the onafterprint to set
+	 *            the new onafterprint
 	 */
 	public void setOnafterprint(Function onafterprint) {
 		this.onafterprint = onafterprint;
 	}
 
 	/**
+	 * Gets the onbeforeprint.
+	 *
 	 * @return the onbeforeprint
 	 */
 	public Function getOnbeforeprint() {
@@ -1908,14 +1924,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onbeforeprint.
+	 *
 	 * @param onbeforeprint
-	 *            the onbeforeprint to set
+	 *            the new onbeforeprint
 	 */
 	public void setOnbeforeprint(Function onbeforeprint) {
 		this.onbeforeprint = onbeforeprint;
 	}
 
 	/**
+	 * Gets the onbeforeunload.
+	 *
 	 * @return the onbeforeunload
 	 */
 	public Function getOnbeforeunload() {
@@ -1923,14 +1943,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onbeforeunload.
+	 *
 	 * @param onbeforeunload
-	 *            the onbeforeunload to set
+	 *            the new onbeforeunload
 	 */
 	public void setOnbeforeunload(Function onbeforeunload) {
 		this.onbeforeunload = onbeforeunload;
 	}
 
 	/**
+	 * Gets the onblur.
+	 *
 	 * @return the onblur
 	 */
 	public Function getOnblur() {
@@ -1938,14 +1962,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onblur.
+	 *
 	 * @param onblur
-	 *            the onblur to set
+	 *            the new onblur
 	 */
 	public void setOnblur(Function onblur) {
 		this.onblur = onblur;
 	}
 
 	/**
+	 * Gets the oncanplay.
+	 *
 	 * @return the oncanplay
 	 */
 	public Function getOncanplay() {
@@ -1953,14 +1981,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the oncanplay.
+	 *
 	 * @param oncanplay
-	 *            the oncanplay to set
+	 *            the new oncanplay
 	 */
 	public void setOncanplay(Function oncanplay) {
 		this.oncanplay = oncanplay;
 	}
 
 	/**
+	 * Gets the oncanplaythrough.
+	 *
 	 * @return the oncanplaythrough
 	 */
 	public Function getOncanplaythrough() {
@@ -1968,14 +2000,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the oncanplaythrough.
+	 *
 	 * @param oncanplaythrough
-	 *            the oncanplaythrough to set
+	 *            the new oncanplaythrough
 	 */
 	public void setOncanplaythrough(Function oncanplaythrough) {
 		this.oncanplaythrough = oncanplaythrough;
 	}
 
 	/**
+	 * Gets the onchange.
+	 *
 	 * @return the onchange
 	 */
 	public Function getOnchange() {
@@ -1983,14 +2019,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onchange.
+	 *
 	 * @param onchange
-	 *            the onchange to set
+	 *            the new onchange
 	 */
 	public void setOnchange(Function onchange) {
 		this.onchange = onchange;
 	}
 
 	/**
+	 * Gets the onclick.
+	 *
 	 * @return the onclick
 	 */
 	public Function getOnclick() {
@@ -2004,8 +2044,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onclick.
+	 *
 	 * @param onclick
-	 *            the onclick to set
+	 *            the new onclick
 	 */
 	public void setOnclick(Function onclick) {
 		Document doc = this.document;
@@ -2016,6 +2058,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Gets the oncontextmenu.
+	 *
 	 * @return the oncontextmenu
 	 */
 	public Function getOncontextmenu() {
@@ -2023,14 +2067,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the oncontextmenu.
+	 *
 	 * @param oncontextmenu
-	 *            the oncontextmenu to set
+	 *            the new oncontextmenu
 	 */
 	public void setOncontextmenu(Function oncontextmenu) {
 		this.oncontextmenu = oncontextmenu;
 	}
 
 	/**
+	 * Gets the ondblclick.
+	 *
 	 * @return the ondblclick
 	 */
 	public Function getOndblclick() {
@@ -2043,8 +2091,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the ondblclick.
+	 *
 	 * @param ondblclick
-	 *            the ondblclick to set
+	 *            the new ondblclick
 	 */
 	public void setOndblclick(Function ondblclick) {
 		Document doc = this.document;
@@ -2055,6 +2105,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Gets the ondrag.
+	 *
 	 * @return the ondrag
 	 */
 	public Function getOndrag() {
@@ -2062,14 +2114,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the ondrag.
+	 *
 	 * @param ondrag
-	 *            the ondrag to set
+	 *            the new ondrag
 	 */
 	public void setOndrag(Function ondrag) {
 		this.ondrag = ondrag;
 	}
 
 	/**
+	 * Gets the ondragend.
+	 *
 	 * @return the ondragend
 	 */
 	public Function getOndragend() {
@@ -2077,14 +2133,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the ondragend.
+	 *
 	 * @param ondragend
-	 *            the ondragend to set
+	 *            the new ondragend
 	 */
 	public void setOndragend(Function ondragend) {
 		this.ondragend = ondragend;
 	}
 
 	/**
+	 * Gets the ondragenter.
+	 *
 	 * @return the ondragenter
 	 */
 	public Function getOndragenter() {
@@ -2092,14 +2152,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the ondragenter.
+	 *
 	 * @param ondragenter
-	 *            the ondragenter to set
+	 *            the new ondragenter
 	 */
 	public void setOndragenter(Function ondragenter) {
 		this.ondragenter = ondragenter;
 	}
 
 	/**
+	 * Gets the ondragleave.
+	 *
 	 * @return the ondragleave
 	 */
 	public Function getOndragleave() {
@@ -2107,14 +2171,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the ondragleave.
+	 *
 	 * @param ondragleave
-	 *            the ondragleave to set
+	 *            the new ondragleave
 	 */
 	public void setOndragleave(Function ondragleave) {
 		this.ondragleave = ondragleave;
 	}
 
 	/**
+	 * Gets the ondragover.
+	 *
 	 * @return the ondragover
 	 */
 	public Function getOndragover() {
@@ -2122,14 +2190,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the ondragover.
+	 *
 	 * @param ondragover
-	 *            the ondragover to set
+	 *            the new ondragover
 	 */
 	public void setOndragover(Function ondragover) {
 		this.ondragover = ondragover;
 	}
 
 	/**
+	 * Gets the ondragstart.
+	 *
 	 * @return the ondragstart
 	 */
 	public Function getOndragstart() {
@@ -2137,14 +2209,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the ondragstart.
+	 *
 	 * @param ondragstart
-	 *            the ondragstart to set
+	 *            the new ondragstart
 	 */
 	public void setOndragstart(Function ondragstart) {
 		this.ondragstart = ondragstart;
 	}
 
 	/**
+	 * Gets the ondrop.
+	 *
 	 * @return the ondrop
 	 */
 	public Function getOndrop() {
@@ -2152,14 +2228,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the ondrop.
+	 *
 	 * @param ondrop
-	 *            the ondrop to set
+	 *            the new ondrop
 	 */
 	public void setOndrop(Function ondrop) {
 		this.ondrop = ondrop;
 	}
 
 	/**
+	 * Gets the ondurationchange.
+	 *
 	 * @return the ondurationchange
 	 */
 	public Function getOndurationchange() {
@@ -2167,14 +2247,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the ondurationchange.
+	 *
 	 * @param ondurationchange
-	 *            the ondurationchange to set
+	 *            the new ondurationchange
 	 */
 	public void setOndurationchange(Function ondurationchange) {
 		this.ondurationchange = ondurationchange;
 	}
 
 	/**
+	 * Gets the onemptied.
+	 *
 	 * @return the onemptied
 	 */
 	public Function getOnemptied() {
@@ -2182,14 +2266,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onemptied.
+	 *
 	 * @param onemptied
-	 *            the onemptied to set
+	 *            the new onemptied
 	 */
 	public void setOnemptied(Function onemptied) {
 		this.onemptied = onemptied;
 	}
 
 	/**
+	 * Gets the onended.
+	 *
 	 * @return the onended
 	 */
 	public Function getOnended() {
@@ -2197,14 +2285,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onended.
+	 *
 	 * @param onended
-	 *            the onended to set
+	 *            the new onended
 	 */
 	public void setOnended(Function onended) {
 		this.onended = onended;
 	}
 
 	/**
+	 * Gets the onerror.
+	 *
 	 * @return the onerror
 	 */
 	public Function getOnerror() {
@@ -2212,14 +2304,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onerror.
+	 *
 	 * @param onerror
-	 *            the onerror to set
+	 *            the new onerror
 	 */
 	public void setOnerror(Function onerror) {
 		this.onerror = onerror;
 	}
 
 	/**
+	 * Gets the onfocus.
+	 *
 	 * @return the onfocus
 	 */
 	public Function getOnfocus() {
@@ -2227,14 +2323,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onfocus.
+	 *
 	 * @param onfocus
-	 *            the onfocus to set
+	 *            the new onfocus
 	 */
 	public void setOnfocus(Function onfocus) {
 		this.onfocus = onfocus;
 	}
 
 	/**
+	 * Gets the onformchange.
+	 *
 	 * @return the onformchange
 	 */
 	public Function getOnformchange() {
@@ -2242,14 +2342,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onformchange.
+	 *
 	 * @param onformchange
-	 *            the onformchange to set
+	 *            the new onformchange
 	 */
 	public void setOnformchange(Function onformchange) {
 		this.onformchange = onformchange;
 	}
 
 	/**
+	 * Gets the onforminput.
+	 *
 	 * @return the onforminput
 	 */
 	public Function getOnforminput() {
@@ -2257,14 +2361,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onforminput.
+	 *
 	 * @param onforminput
-	 *            the onforminput to set
+	 *            the new onforminput
 	 */
 	public void setOnforminput(Function onforminput) {
 		this.onforminput = onforminput;
 	}
 
 	/**
+	 * Gets the onhashchange.
+	 *
 	 * @return the onhashchange
 	 */
 	public Function getOnhashchange() {
@@ -2272,14 +2380,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onhashchange.
+	 *
 	 * @param onhashchange
-	 *            the onhashchange to set
+	 *            the new onhashchange
 	 */
 	public void setOnhashchange(Function onhashchange) {
 		this.onhashchange = onhashchange;
 	}
 
 	/**
+	 * Gets the oninput.
+	 *
 	 * @return the oninput
 	 */
 	public Function getOninput() {
@@ -2287,14 +2399,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the oninput.
+	 *
 	 * @param oninput
-	 *            the oninput to set
+	 *            the new oninput
 	 */
 	public void setOninput(Function oninput) {
 		this.oninput = oninput;
 	}
 
 	/**
+	 * Gets the oninvalid.
+	 *
 	 * @return the oninvalid
 	 */
 	public Function getOninvalid() {
@@ -2302,14 +2418,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the oninvalid.
+	 *
 	 * @param oninvalid
-	 *            the oninvalid to set
+	 *            the new oninvalid
 	 */
 	public void setOninvalid(Function oninvalid) {
 		this.oninvalid = oninvalid;
 	}
 
 	/**
+	 * Gets the onkeydown.
+	 *
 	 * @return the onkeydown
 	 */
 	public Function getOnkeydown() {
@@ -2322,8 +2442,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onkeydown.
+	 *
 	 * @param onkeydown
-	 *            the onkeydown to set
+	 *            the new onkeydown
 	 */
 	public void setOnkeydown(Function onkeydown) {
 		Document doc = this.document;
@@ -2333,6 +2455,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Gets the onkeypress.
+	 *
 	 * @return the onkeypress
 	 */
 	public Function getOnkeypress() {
@@ -2345,8 +2469,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onkeypress.
+	 *
 	 * @param onkeypress
-	 *            the onkeypress to set
+	 *            the new onkeypress
 	 */
 	public void setOnkeypress(Function onkeypress) {
 		Document doc = this.document;
@@ -2356,6 +2482,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Gets the onkeyup.
+	 *
 	 * @return the onkeyup
 	 */
 	public Function getOnkeyup() {
@@ -2368,8 +2496,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onkeyup.
+	 *
 	 * @param onkeyup
-	 *            the onkeyup to set
+	 *            the new onkeyup
 	 */
 	public void setOnkeyup(Function onkeyup) {
 		Document doc = this.document;
@@ -2379,6 +2509,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Gets the onloadeddata.
+	 *
 	 * @return the onloadeddata
 	 */
 	public Function getOnloadeddata() {
@@ -2386,14 +2518,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onloadeddata.
+	 *
 	 * @param onloadeddata
-	 *            the onloadeddata to set
+	 *            the new onloadeddata
 	 */
 	public void setOnloadeddata(Function onloadeddata) {
 		this.onloadeddata = onloadeddata;
 	}
 
 	/**
+	 * Gets the onloadedmetadata.
+	 *
 	 * @return the onloadedmetadata
 	 */
 	public Function getOnloadedmetadata() {
@@ -2401,14 +2537,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onloadedmetadata.
+	 *
 	 * @param onloadedmetadata
-	 *            the onloadedmetadata to set
+	 *            the new onloadedmetadata
 	 */
 	public void setOnloadedmetadata(Function onloadedmetadata) {
 		this.onloadedmetadata = onloadedmetadata;
 	}
 
 	/**
+	 * Gets the onloadstart.
+	 *
 	 * @return the onloadstart
 	 */
 	public Function getOnloadstart() {
@@ -2416,14 +2556,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onloadstart.
+	 *
 	 * @param onloadstart
-	 *            the onloadstart to set
+	 *            the new onloadstart
 	 */
 	public void setOnloadstart(Function onloadstart) {
 		this.onloadstart = onloadstart;
 	}
 
 	/**
+	 * Gets the onmessage.
+	 *
 	 * @return the onmessage
 	 */
 	public Function getOnmessage() {
@@ -2431,14 +2575,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onmessage.
+	 *
 	 * @param onmessage
-	 *            the onmessage to set
+	 *            the new onmessage
 	 */
 	public void setOnmessage(Function onmessage) {
 		this.onmessage = onmessage;
 	}
 
 	/**
+	 * Gets the onmousedown.
+	 *
 	 * @return the onmousedown
 	 */
 	public Function getOnmousedown() {
@@ -2451,8 +2599,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onmousedown.
+	 *
 	 * @param onmousedown
-	 *            the onmousedown to set
+	 *            the new onmousedown
 	 */
 	public void setOnmousedown(Function onmousedown) {
 		Document doc = this.document;
@@ -2462,6 +2612,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Gets the onmousemove.
+	 *
 	 * @return the onmousemove
 	 */
 	public Function getOnmousemove() {
@@ -2469,14 +2621,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onmousemove.
+	 *
 	 * @param onmousemove
-	 *            the onmousemove to set
+	 *            the new onmousemove
 	 */
 	public void setOnmousemove(Function onmousemove) {
 		this.onmousemove = onmousemove;
 	}
 
 	/**
+	 * Gets the onmouseout.
+	 *
 	 * @return the onmouseout
 	 */
 	public Function getOnmouseout() {
@@ -2484,14 +2640,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onmouseout.
+	 *
 	 * @param onmouseout
-	 *            the onmouseout to set
+	 *            the new onmouseout
 	 */
 	public void setOnmouseout(Function onmouseout) {
 		this.onmouseout = onmouseout;
 	}
 
 	/**
+	 * Gets the onmouseover.
+	 *
 	 * @return the onmouseover
 	 */
 	public Function getOnmouseover() {
@@ -2504,8 +2664,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onmouseover.
+	 *
 	 * @param onmouseover
-	 *            the onmouseover to set
+	 *            the new onmouseover
 	 */
 	public void setOnmouseover(Function onmouseover) {
 		Document doc = this.document;
@@ -2515,6 +2677,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Gets the onmouseup.
+	 *
 	 * @return the onmouseup
 	 */
 	public Function getOnmouseup() {
@@ -2527,8 +2691,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onmouseup.
+	 *
 	 * @param onmouseup
-	 *            the onmouseup to set
+	 *            the new onmouseup
 	 */
 	public void setOnmouseup(Function onmouseup) {
 		Document doc = this.document;
@@ -2538,6 +2704,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Gets the onmousewheel.
+	 *
 	 * @return the onmousewheel
 	 */
 	public Function getOnmousewheel() {
@@ -2545,14 +2713,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onmousewheel.
+	 *
 	 * @param onmousewheel
-	 *            the onmousewheel to set
+	 *            the new onmousewheel
 	 */
 	public void setOnmousewheel(Function onmousewheel) {
 		this.onmousewheel = onmousewheel;
 	}
 
 	/**
+	 * Gets the onoffline.
+	 *
 	 * @return the onoffline
 	 */
 	public Function getOnoffline() {
@@ -2560,14 +2732,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onoffline.
+	 *
 	 * @param onoffline
-	 *            the onoffline to set
+	 *            the new onoffline
 	 */
 	public void setOnoffline(Function onoffline) {
 		this.onoffline = onoffline;
 	}
 
 	/**
+	 * Gets the ononline.
+	 *
 	 * @return the ononline
 	 */
 	public Function getOnonline() {
@@ -2575,14 +2751,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the ononline.
+	 *
 	 * @param ononline
-	 *            the ononline to set
+	 *            the new ononline
 	 */
 	public void setOnonline(Function ononline) {
 		this.ononline = ononline;
 	}
 
 	/**
+	 * Gets the onpause.
+	 *
 	 * @return the onpause
 	 */
 	public Function getOnpause() {
@@ -2590,14 +2770,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onpause.
+	 *
 	 * @param onpause
-	 *            the onpause to set
+	 *            the new onpause
 	 */
 	public void setOnpause(Function onpause) {
 		this.onpause = onpause;
 	}
 
 	/**
+	 * Gets the onplay.
+	 *
 	 * @return the onplay
 	 */
 	public Function getOnplay() {
@@ -2605,14 +2789,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onplay.
+	 *
 	 * @param onplay
-	 *            the onplay to set
+	 *            the new onplay
 	 */
 	public void setOnplay(Function onplay) {
 		this.onplay = onplay;
 	}
 
 	/**
+	 * Gets the onplaying.
+	 *
 	 * @return the onplaying
 	 */
 	public Function getOnplaying() {
@@ -2620,14 +2808,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onplaying.
+	 *
 	 * @param onplaying
-	 *            the onplaying to set
+	 *            the new onplaying
 	 */
 	public void setOnplaying(Function onplaying) {
 		this.onplaying = onplaying;
 	}
 
 	/**
+	 * Gets the onpagehide.
+	 *
 	 * @return the onpagehide
 	 */
 	public Function getOnpagehide() {
@@ -2635,14 +2827,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onpagehide.
+	 *
 	 * @param onpagehide
-	 *            the onpagehide to set
+	 *            the new onpagehide
 	 */
 	public void setOnpagehide(Function onpagehide) {
 		this.onpagehide = onpagehide;
 	}
 
 	/**
+	 * Gets the onpageshow.
+	 *
 	 * @return the onpageshow
 	 */
 	public Function getOnpageshow() {
@@ -2650,14 +2846,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onpageshow.
+	 *
 	 * @param onpageshow
-	 *            the onpageshow to set
+	 *            the new onpageshow
 	 */
 	public void setOnpageshow(Function onpageshow) {
 		this.onpageshow = onpageshow;
 	}
 
 	/**
+	 * Gets the onpopstate.
+	 *
 	 * @return the onpopstate
 	 */
 	public Function getOnpopstate() {
@@ -2665,14 +2865,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onpopstate.
+	 *
 	 * @param onpopstate
-	 *            the onpopstate to set
+	 *            the new onpopstate
 	 */
 	public void setOnpopstate(Function onpopstate) {
 		this.onpopstate = onpopstate;
 	}
 
 	/**
+	 * Gets the onprogress.
+	 *
 	 * @return the onprogress
 	 */
 	public Function getOnprogress() {
@@ -2680,14 +2884,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onprogress.
+	 *
 	 * @param onprogress
-	 *            the onprogress to set
+	 *            the new onprogress
 	 */
 	public void setOnprogress(Function onprogress) {
 		this.onprogress = onprogress;
 	}
 
 	/**
+	 * Gets the onratechange.
+	 *
 	 * @return the onratechange
 	 */
 	public Function getOnratechange() {
@@ -2695,14 +2903,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onratechange.
+	 *
 	 * @param onratechange
-	 *            the onratechange to set
+	 *            the new onratechange
 	 */
 	public void setOnratechange(Function onratechange) {
 		this.onratechange = onratechange;
 	}
 
 	/**
+	 * Gets the onreadystatechange.
+	 *
 	 * @return the onreadystatechange
 	 */
 	public Function getOnreadystatechange() {
@@ -2710,14 +2922,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onreadystatechange.
+	 *
 	 * @param onreadystatechange
-	 *            the onreadystatechange to set
+	 *            the new onreadystatechange
 	 */
 	public void setOnreadystatechange(Function onreadystatechange) {
 		this.onreadystatechange = onreadystatechange;
 	}
 
 	/**
+	 * Gets the onredo.
+	 *
 	 * @return the onredo
 	 */
 	public Function getOnredo() {
@@ -2725,14 +2941,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onredo.
+	 *
 	 * @param onredo
-	 *            the onredo to set
+	 *            the new onredo
 	 */
 	public void setOnredo(Function onredo) {
 		this.onredo = onredo;
 	}
 
 	/**
+	 * Gets the onresize.
+	 *
 	 * @return the onresize
 	 */
 	public Function getOnresize() {
@@ -2740,14 +2960,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onresize.
+	 *
 	 * @param onresize
-	 *            the onresize to set
+	 *            the new onresize
 	 */
 	public void setOnresize(Function onresize) {
 		this.onresize = onresize;
 	}
 
 	/**
+	 * Gets the onscroll.
+	 *
 	 * @return the onscroll
 	 */
 	public Function getOnscroll() {
@@ -2755,14 +2979,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onscroll.
+	 *
 	 * @param onscroll
-	 *            the onscroll to set
+	 *            the new onscroll
 	 */
 	public void setOnscroll(Function onscroll) {
 		this.onscroll = onscroll;
 	}
 
 	/**
+	 * Gets the onseeked.
+	 *
 	 * @return the onseeked
 	 */
 	public Function getOnseeked() {
@@ -2770,14 +2998,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onseeked.
+	 *
 	 * @param onseeked
-	 *            the onseeked to set
+	 *            the new onseeked
 	 */
 	public void setOnseeked(Function onseeked) {
 		this.onseeked = onseeked;
 	}
 
 	/**
+	 * Gets the onseeking.
+	 *
 	 * @return the onseeking
 	 */
 	public Function getOnseeking() {
@@ -2785,14 +3017,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onseeking.
+	 *
 	 * @param onseeking
-	 *            the onseeking to set
+	 *            the new onseeking
 	 */
 	public void setOnseeking(Function onseeking) {
 		this.onseeking = onseeking;
 	}
 
 	/**
+	 * Gets the onselect.
+	 *
 	 * @return the onselect
 	 */
 	public Function getOnselect() {
@@ -2800,14 +3036,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onselect.
+	 *
 	 * @param onselect
-	 *            the onselect to set
+	 *            the new onselect
 	 */
 	public void setOnselect(Function onselect) {
 		this.onselect = onselect;
 	}
 
 	/**
+	 * Gets the onshow.
+	 *
 	 * @return the onshow
 	 */
 	public Function getOnshow() {
@@ -2815,14 +3055,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onshow.
+	 *
 	 * @param onshow
-	 *            the onshow to set
+	 *            the new onshow
 	 */
 	public void setOnshow(Function onshow) {
 		this.onshow = onshow;
 	}
 
 	/**
+	 * Gets the onstalled.
+	 *
 	 * @return the onstalled
 	 */
 	public Function getOnstalled() {
@@ -2830,14 +3074,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onstalled.
+	 *
 	 * @param onstalled
-	 *            the onstalled to set
+	 *            the new onstalled
 	 */
 	public void setOnstalled(Function onstalled) {
 		this.onstalled = onstalled;
 	}
 
 	/**
+	 * Gets the onstorage.
+	 *
 	 * @return the onstorage
 	 */
 	public Function getOnstorage() {
@@ -2845,14 +3093,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onstorage.
+	 *
 	 * @param onstorage
-	 *            the onstorage to set
+	 *            the new onstorage
 	 */
 	public void setOnstorage(Function onstorage) {
 		this.onstorage = onstorage;
 	}
 
 	/**
+	 * Gets the onsubmit.
+	 *
 	 * @return the onsubmit
 	 */
 	public Function getOnsubmit() {
@@ -2860,14 +3112,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onsubmit.
+	 *
 	 * @param onsubmit
-	 *            the onsubmit to set
+	 *            the new onsubmit
 	 */
 	public void setOnsubmit(Function onsubmit) {
 		this.onsubmit = onsubmit;
 	}
 
 	/**
+	 * Gets the onsuspend.
+	 *
 	 * @return the onsuspend
 	 */
 	public Function getOnsuspend() {
@@ -2875,14 +3131,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onsuspend.
+	 *
 	 * @param onsuspend
-	 *            the onsuspend to set
+	 *            the new onsuspend
 	 */
 	public void setOnsuspend(Function onsuspend) {
 		this.onsuspend = onsuspend;
 	}
 
 	/**
+	 * Gets the ontimeupdate.
+	 *
 	 * @return the ontimeupdate
 	 */
 	public Function getOntimeupdate() {
@@ -2890,14 +3150,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the ontimeupdate.
+	 *
 	 * @param ontimeupdate
-	 *            the ontimeupdate to set
+	 *            the new ontimeupdate
 	 */
 	public void setOntimeupdate(Function ontimeupdate) {
 		this.ontimeupdate = ontimeupdate;
 	}
 
 	/**
+	 * Gets the onundo.
+	 *
 	 * @return the onundo
 	 */
 	public Function getOnundo() {
@@ -2905,14 +3169,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onundo.
+	 *
 	 * @param onundo
-	 *            the onundo to set
+	 *            the new onundo
 	 */
 	public void setOnundo(Function onundo) {
 		this.onundo = onundo;
 	}
 
 	/**
+	 * Gets the onvolumechange.
+	 *
 	 * @return the onvolumechange
 	 */
 	public Function getOnvolumechange() {
@@ -2920,14 +3188,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onvolumechange.
+	 *
 	 * @param onvolumechange
-	 *            the onvolumechange to set
+	 *            the new onvolumechange
 	 */
 	public void setOnvolumechange(Function onvolumechange) {
 		this.onvolumechange = onvolumechange;
 	}
 
 	/**
+	 * Gets the onwaiting.
+	 *
 	 * @return the onwaiting
 	 */
 	public Function getOnwaiting() {
@@ -2935,8 +3207,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * Sets the onwaiting.
+	 *
 	 * @param onwaiting
-	 *            the onwaiting to set
+	 *            the new onwaiting
 	 */
 	public void setOnwaiting(Function onwaiting) {
 		this.onwaiting = onwaiting;

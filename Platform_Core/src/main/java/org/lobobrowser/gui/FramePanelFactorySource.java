@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.gui;
 
@@ -27,32 +33,27 @@ public class FramePanelFactorySource {
     /** The active factory. */
     private volatile FramePanelFactory activeFactory = new DefaultFramePanelFactory();
 
-    /**
-     * Gets the single instance of FramePanelFactorySource.
-     *
-     * @return single instance of FramePanelFactorySource
-     */
+    /** Gets the Constant instance.
+	 *
+	 * @return the Constant instance
+	 */
     public static FramePanelFactorySource getInstance() {
         return instance;
     }
 
-    /**
-     * Gets the active factory.
-     *
-     * @return the active factory
-     */
+    /** Gets the active factory.
+	 *
+	 * @return the active factory
+	 */
     public FramePanelFactory getActiveFactory() {
         return activeFactory;
     }
 
-    /**
-     * Sets a new {@link FramePanelFactory} that is used to create
-     * <code>FramePanel</code>s as requested by browser content (e.g. IFRAMEs in
-     * HTML).
-     *
-     * @param activeFactory
-     *            the new active factory
-     */
+    /** Sets the active factory.
+	 *
+	 * @param activeFactory
+	 *            the new active factory
+	 */
     public void setActiveFactory(FramePanelFactory activeFactory) {
         if (activeFactory == null) {
             throw new IllegalArgumentException("activeFactory==null");

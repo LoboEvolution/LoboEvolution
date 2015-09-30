@@ -1,22 +1,22 @@
 /*
- * Copyright 1994-2006 The Lobo Project. Copyright 2014 Lobo Evolution. All
- * rights reserved. Redistribution and use in source and binary forms, with or
- * without modification, are permitted provided that the following conditions
- * are met: Redistributions of source code must retain the above copyright
- * notice, this list of conditions and the following disclaimer. Redistributions
- * in binary form must reproduce the above copyright notice, this list of
- * conditions and the following disclaimer in the documentation and/or other
- * materials provided with the distribution. THIS SOFTWARE IS PROVIDED BY THE
- * LOBO PROJECT ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
- * NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
- * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE FREEBSD PROJECT OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.clientlet;
 
@@ -58,25 +58,22 @@ public interface ClientletContext {
      */
     Object getItem(String name);
 
-    /**
-     * Gets the clientlet request.
-     *
-     * @return the request
-     */
+    /** Gets the request.
+	 *
+	 * @return the request
+	 */
     ClientletRequest getRequest();
 
-    /**
-     * Gets the clientlet response.
-     *
-     * @return the response
-     */
+    /** Gets the response.
+	 *
+	 * @return the response
+	 */
     ClientletResponse getResponse();
 
-    /**
-     * Gets a UserAgent instance with information about the current user agent.
-     *
-     * @return the user agent
-     */
+    /** Gets the user agent.
+	 *
+	 * @return the user agent
+	 */
     UserAgent getUserAgent();
 
     /**
@@ -108,15 +105,12 @@ public interface ClientletContext {
             String contentType, String content, String encoding)
                     throws UnsupportedEncodingException;
 
-    /**
-     * Gets a managed store instance (a small file system restricted by a quota)
-     * corresponding to the host of the clientlet response of this context.
-     *
-     * @return the managed store
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     * @see #getManagedStore(String)
-     */
+    /** Gets the managed store.
+	 *
+	 * @return the managed store
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
     ManagedStore getManagedStore() throws IOException;
 
     /**
@@ -135,38 +129,30 @@ public interface ClientletContext {
      */
     ManagedStore getManagedStore(String hostName) throws IOException;
 
-    /**
-     * Gets the frame interface associated with this context.
-     *
-     * @return the navigator frame
-     */
+    /** Gets the navigator frame.
+	 *
+	 * @return the navigator frame
+	 */
     NavigatorFrame getNavigatorFrame();
 
-    /**
-     * After processing a response a clientlet should invoke this method to set
-     * displayable frame content.
-     *
-     * @param content
-     *            the new resulting content
-     */
+    /** Sets the resulting content.
+	 *
+	 * @param content
+	 *            the new resulting content
+	 */
     void setResultingContent(ComponentContent content);
 
-    /**
-     * A simple alternative to {@link #setResultingContent(ComponentContent)}
-     * provided for convenience. It does not set any properties such as title or
-     * source code.
-     *
-     * @param content
-     *            the new resulting content
-     */
+    /** Sets the resulting content.
+	 *
+	 * @param content
+	 *            the new resulting content
+	 */
     void setResultingContent(Component content);
 
-    /**
-     * Gets content previously set with {@link #setResultingContent(Component)}.
-     * The return value may be <code>null</code>.
-     *
-     * @return the resulting content
-     */
+    /** Gets the resulting content.
+	 *
+	 * @return the resulting content
+	 */
     ComponentContent getResultingContent();
 
     /**
@@ -193,20 +179,16 @@ public interface ClientletContext {
      */
     void overrideWindowProperties(java.util.Properties properties);
 
-    /**
-     * Gets window properties previously set with
-     * {@link #overrideWindowProperties(java.util.Properties)}.
-     *
-     * @return the overridding window properties
-     */
+    /** Gets the overridding window properties.
+	 *
+	 * @return the overridding window properties
+	 */
     java.util.Properties getOverriddingWindowProperties();
 
-    /**
-     * Returns <code>true</code> if resulting content has already been set with
-     * {@link #setResultingContent(ComponentContent)}.
-     *
-     * @return true, if is resulting content set
-     */
+    /** Checks if is resulting content set.
+	 *
+	 * @return true, if is resulting content set
+	 */
     boolean isResultingContentSet();
 
     /**
@@ -241,23 +223,17 @@ public interface ClientletContext {
     void setProgressEvent(org.lobobrowser.ua.ProgressType progressType,
             int value, int max, URL url);
 
-    /**
-     * Sets the current progress state.
-     *
-     * @param event
-     *            The progress event.
-     * @see NavigatorFrame#setProgressEvent(NavigatorProgressEvent)
-     * @see #getProgressEvent()
-     */
+    /** Sets the progress event.
+	 *
+	 * @param event
+	 *            the new progress event
+	 */
     void setProgressEvent(NavigatorProgressEvent event);
 
-    /**
-     * Gets the progress event most recently set.
-     *
-     * @return the progress event
-     * @see #setProgressEvent(ProgressType, int, int)
-     * @see NavigatorFrame#setProgressEvent(NavigatorProgressEvent)
-     */
+    /** Gets the progress event.
+	 *
+	 * @return the progress event
+	 */
     NavigatorProgressEvent getProgressEvent();
 
     /**

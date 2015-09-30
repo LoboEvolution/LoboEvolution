@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.w3c.events;
 
+
 /**
  * The public interface Event.
  */

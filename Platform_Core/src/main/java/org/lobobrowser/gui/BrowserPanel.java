@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.gui;
 
@@ -67,9 +73,7 @@ import org.lobobrowser.util.Urls;
 public class BrowserPanel extends JPanel implements NavigatorWindow,
 BrowserWindow, WindowCallback {
 
-    /**
-     *
-     */
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
     /** The Constant logger. */
@@ -394,29 +398,19 @@ BrowserWindow, WindowCallback {
     /** The close window on dispose. */
     private boolean closeWindowOnDispose = true;
 
-    /**
-     * Returns a value indicating whether the parent window is closed when the
-     * current <code>BrowserPanel</code> is disposed.
-     *
-     * @return boolean
-     * @see #setCloseWindowOnDispose(boolean)
-     */
+    /** Checks if is close window on dispose.
+	 *
+	 * @return the close window on dispose
+	 */
     public boolean isCloseWindowOnDispose() {
         return closeWindowOnDispose;
     }
 
-    /**
-     * Sets a flag indicating whether the parent window should be closed when
-     * the current <code>BrowserPanel</code> is disposed. The
-     * <code>BrowserPanel</code> is normally disposed by the standard File/Exit
-     * menu and equivalent actions.
-     * <p>
-     * The default value of the flag is <code>true</code>.
-     *
-     * @param closeWindowOnDispose
-     *            A boolean value.
-     * @see #dispose()
-     */
+    /** Sets the close window on dispose.
+	 *
+	 * @param closeWindowOnDispose
+	 *            the new close window on dispose
+	 */
     public void setCloseWindowOnDispose(boolean closeWindowOnDispose) {
         this.closeWindowOnDispose = closeWindowOnDispose;
     }
@@ -693,21 +687,19 @@ BrowserWindow, WindowCallback {
     /** The document title. */
     private String documentTitle;
 
-    /**
-     * Gets the recommended title of the document currently in the top frame.
-     *
-     * @return String
-     */
+    /** Gets the document title.
+	 *
+	 * @return the document title
+	 */
     public String getDocumentTitle() {
         return documentTitle;
     }
 
-    /**
-     * Sets the document title.
-     *
-     * @param documentTitle
-     *            the new document title
-     */
+    /** Sets the document title.
+	 *
+	 * @param documentTitle
+	 *            the new document title
+	 */
     public void setDocumentTitle(String documentTitle) {
         this.documentTitle = documentTitle;
     }
@@ -737,11 +729,10 @@ BrowserWindow, WindowCallback {
         }
     }
 
-    /**
-     * Gets the safe extension manager.
-     *
-     * @return the safe extension manager
-     */
+    /** Gets the safe extension manager.
+	 *
+	 * @return the safe extension manager
+	 */
     private ExtensionManager getSafeExtensionManager() {
         return AccessController
                 .doPrivileged(new PrivilegedAction<ExtensionManager>() {
@@ -831,26 +822,18 @@ BrowserWindow, WindowCallback {
         });
     }
 
-    /**
-     * Gets an object that is used to represent the current frame content. For
-     * example, if the frame is currently showing HTML, this method will
-     * probably return an instance of
-     * <code>org.w3c.dom.html2.HTMLDocument</code>.
-     *
-     * @return Object
-     */
+    /** Gets the content object.
+	 *
+	 * @return the content object
+	 */
     public Object getContentObject() {
         return this.framePanel.getContentObject();
     }
 
-    /**
-     * Gets a mime type that goes with the object returned by
-     * {@link FramePanel#getContentObject()}. This is not necessarily the same
-     * as the mime type declared in the headers of the response that produced
-     * the current content.
-     *
-     * @return String
-     */
+    /** Gets the current mime type.
+	 *
+	 * @return the current mime type
+	 */
     public String getCurrentMimeType() {
         return this.framePanel.getCurrentMimeType();
     }
@@ -956,11 +939,10 @@ BrowserWindow, WindowCallback {
         this.framePanel.removeResponseListener(listener);
     }
 
-    /**
-     * Gets the component content currently set in the frame.
-     *
-     * @return ComponentContent
-     */
+    /** Gets the component content.
+	 *
+	 * @return the component content
+	 */
     public ComponentContent getComponentContent() {
         return this.framePanel.getComponentContent();
     }

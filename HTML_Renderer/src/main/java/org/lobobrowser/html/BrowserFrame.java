@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Jan 29, 2006
@@ -31,8 +37,7 @@ import org.w3c.dom.Document;
 public interface BrowserFrame {
 
 	/**
-	 * Gets the component that renders the frame. This can be a
-	 * {@link org.lobobrowser.html.gui.HtmlPanel}.
+	 * Gets the component.
 	 *
 	 * @return the component
 	 */
@@ -54,35 +59,33 @@ public interface BrowserFrame {
 	Document getContentDocument();
 
 	/**
-	 * Gets the {@link HtmlRendererContext} of the frame.
+	 * Gets the html renderer context.
 	 *
 	 * @return the html renderer context
 	 */
 	HtmlRendererContext getHtmlRendererContext();
 
 	/**
-	 * Sets the default margin insets of the browser frame.
+	 * Sets the default margin insets.
 	 *
 	 * @param insets
-	 *            The margin insets.
+	 *            the new default margin insets
 	 */
 	void setDefaultMarginInsets(Insets insets);
 
 	/**
-	 * Sets the default horizontal overflow of the browser frame.
+	 * Sets the default overflow x.
 	 *
 	 * @param overflowX
-	 *            See constants in
-	 *            {@link org.lobobrowser.html.renderstate.RenderState}.
+	 *            the new default overflow x
 	 */
 	void setDefaultOverflowX(int overflowX);
 
 	/**
-	 * Sets the default vertical overflow of the browser frame.
+	 * Sets the default overflow y.
 	 *
 	 * @param overflowY
-	 *            See constants in
-	 *            {@link org.lobobrowser.html.renderstate.RenderState}.
+	 *            the new default overflow y
 	 */
 	void setDefaultOverflowY(int overflowY);
 }

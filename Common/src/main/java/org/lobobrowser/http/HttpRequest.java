@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.http;
 
@@ -67,11 +73,23 @@ public class HttpRequest extends AbstractBean {
     private WeakReference<Image> imageRef;
     /** The buffer. */
     private ByteArrayOutputStream buffer;
+    
+    /** The response xml. */
     private Document responseXML;
+    
+    /** The async flag. */
     private boolean asyncFlag;
+    
+    /** The s. */
     private Session s;
+    
+    /** The exception. */
     private Exception exception;
+    
+    /** The on ready state change. */
     private PropertyChangeListener onReadyStateChange;
+    
+    /** The req. */
     private Request req = new Request(); // the request. Reset in reset(). Never
     // null.
     /* private EventListenerList listenerList = new EventListenerList(); */
@@ -84,40 +102,31 @@ public class HttpRequest extends AbstractBean {
     }
 
     // -------------------------------------------------------- Bean methods
-    /**
-     * Sets the {@link org.jdesktop.http.Session} to use with this request.
-     *
-     * @param s
-     *            the Session to use. This may be null. If null, then a default
-     *            Session will be created as necessary. This default Session
-     *            will NOT be available via the getSession() method, but will be
-     *            internal to this implementation.
-     */
+    /** Sets the session.
+	 *
+	 * @param s
+	 *            the new session
+	 */
     public void setSession(Session s) {
         Session old = getSession();
         this.s = s;
         firePropertyChange("session", old, getSession());
     }
 
-    /**
-     * Returns the {@link org.jdesktop.http.Session} used with this Request.
-     *
-     * @return the Session. May be null.
-     */
+    /** Gets the session.
+	 *
+	 * @return the session
+	 */
     public Session getSession() {
         return s;
     }
 
     // ------------------------------------ Methods as per the specification
-    /**
-     * Sets the listener to use for ready-state change event notification. This
-     * is functionally equivilent to adding the listener to the list of
-     * listeners via #addReadyStateChangeListener. This method exists soley for
-     * compliance with the spec.
-     *
-     * @param listener
-     *            the listener
-     */
+    /** Sets the on ready state change.
+	 *
+	 * @param listener
+	 *            the new on ready state change
+	 */
     public void setOnReadyStateChange(PropertyChangeListener listener) {
         PropertyChangeListener old = getOnReadyStateChange();
         removeReadyStateChangeListener(old);
@@ -126,37 +135,18 @@ public class HttpRequest extends AbstractBean {
         firePropertyChange("onReadyStateChange", old, listener);
     }
 
-    /**
-     * Returns the ready-state change listener. This method returns whatever is
-     * set via the #setOnReadyStateChange method. If listeners were added via
-     * #addReadyStateChangeListener, they are not reflected in this method.
-     *
-     * @return the onReadyStateChange listener.
-     */
+    /** Gets the on ready state change.
+	 *
+	 * @return the on ready state change
+	 */
     public final PropertyChangeListener getOnReadyStateChange() {
         return onReadyStateChange;
     }
 
-    /**
-     * <p>
-     * Gets the ready state of this HttpRequestImpl.
-     * </p>
-     *
-     * <p>
-     * Ready state will be one of the following values:
-     * <ul>
-     * <li><b>UNINITIALIZED:</b> The initial value.</li>
-     * <li><b>OPEN:</b> The open() method has been successfully called.</li>
-     * <li><b>SENT:</b> The UA successfully completed the request, but no data
-     * has yet been received.</li>
-     * <li><b>RECEIVING:</b> Immediately before receiving the message body (if
-     * any). All HTTP headers have been received.</li>
-     * <li><b>LOADED:</b> The data transfer has been completed.</li>
-     * </ul>
-     * </p>
-     *
-     * @return the readyState property. This will never be null.
-     */
+    /** Gets the ReadyState of this HttpRequestImpl.
+	 *
+	 * @return the ReadyState of this HttpRequestImpl
+	 */
     public final ReadyState getReadyState() {
         return readyState;
     }
@@ -383,20 +373,10 @@ public class HttpRequest extends AbstractBean {
         reset();
     };
 
-    /**
-     * <p>
-     * Gets all of the response headers as one long string.
-     * </p>
-     *
-     * <p>
-     * If the readyState property has a value other than RECEIVING or LOADED,
-     * this method will return null. Otherwise, it will return all the HTTP
-     * headers as a single string, with each header line separated by a CR/LF
-     * pair. The status line will not be included.
-     * </p>
-     *
-     * @return the response headers as a single string
-     */
+    /** Gets the all response headers.
+	 *
+	 * @return the all response headers
+	 */
     public String getAllResponseHeaders() {
         if (readyState == ReadyState.RECEIVING
                 || readyState == ReadyState.LOADED) {
@@ -440,13 +420,12 @@ public class HttpRequest extends AbstractBean {
         }
     }
 
-    /**
-     * If the readyState property has a value other than RECEIVING or LOADED,
-     * reponseText MUST be the empty string. Otherwise, it MUST be the fragment
-     * of the entity body received so far (when readyState is RECEIVING) or the
-     * complete entity body (when readyState is LOADED), interpreted as a stream
-     * of characters.
-     */
+    /** Gets the if the readyState attribute has a value other than RECEIVING
+	 * or LOADED, reponseText MUST be the empty string.
+	 *
+	 * @return the if the readyState attribute has a value other than RECEIVING
+	 *         or LOADED, reponseText MUST be the empty string
+	 */
     public String getResponseText() {
         if (readyState == ReadyState.RECEIVING) {
             return responseText == null ? "" : responseText;
@@ -457,11 +436,12 @@ public class HttpRequest extends AbstractBean {
         }
     }
 
-    /**
-     * If the status property is not available it MUST raise an exception. It
-     * MUST be available when readyState is RECEIVING or LOADED. When available,
-     * it MUST represent the HTTP status code.
-     */
+    /** Gets the if the status attribute is not available it MUST raise an
+	 * exception.
+	 *
+	 * @return the if the status attribute is not available it MUST raise an
+	 *         exception
+	 */
     public int getStatus() {
         if (readyState == ReadyState.RECEIVING
                 || readyState == ReadyState.LOADED) {
@@ -472,11 +452,12 @@ public class HttpRequest extends AbstractBean {
         }
     }
 
-    /**
-     * If the statusText property is not available, it MUST raise an exception.
-     * It MUST be available when readyState is RECEIVING or LOADED. When
-     * available, it MUST represent the HTTP status text sent by the server
-     */
+    /** Gets the if the statusText attribute is not available, it MUST raise
+	 * an exception.
+	 *
+	 * @return the if the statusText attribute is not available, it MUST raise
+	 *         an exception
+	 */
     public String getStatusText() {
         if (readyState == ReadyState.RECEIVING
                 || readyState == ReadyState.LOADED) {
@@ -489,13 +470,11 @@ public class HttpRequest extends AbstractBean {
     }
 
     // --------------------------- Optional methods as per the specification
-    /**
-     * Specifies whether the request should automatically follow redirects. By
-     * default, this is set to false.
-     *
-     * @param flag
-     *            indicates whether to follow redirects automatically
-     */
+    /** Sets the follows redirects.
+	 *
+	 * @param flag
+	 *            the new follows redirects
+	 */
     public void setFollowsRedirects(boolean flag) {
         if (readyState != ReadyState.OPEN) {
             throw new IllegalStateException(
@@ -504,12 +483,10 @@ public class HttpRequest extends AbstractBean {
         req.setFollowRedirects(flag);
     }
 
-    /**
-     * Returns true if this request should automatically follow redirects, false
-     * otherwise.
-     *
-     * @return whether to follow redirect requests
-     */
+    /** Gets the follow redirects.
+	 *
+	 * @return the follow redirects
+	 */
     public final boolean getFollowRedirects() {
         return req.getFollowRedirects();
     }
@@ -522,11 +499,10 @@ public class HttpRequest extends AbstractBean {
      */
 
     // ------------------------------------------------- Convenience methods
-    /**
-     * If during the processing of this request an exception occured, then this
-     * method will return that Exception. Otherwise, it returns null. It MUST
-     * return null if in any state other than LOADED
-     */
+    /** Gets the exception.
+	 *
+	 * @return the exception
+	 */
     public Exception getException() {
         if (readyState == ReadyState.LOADED) {
             return exception;
@@ -547,13 +523,11 @@ public class HttpRequest extends AbstractBean {
         return req.getParameter(name);
     }
 
-    /**
-     * Adds the given parameter to the set of parameters. These are reset
-     * whenever this HttpRequestImpl is reset.
-     *
-     * @param param
-     *            the Parameter to add. This must not be null.
-     */
+    /** Sets the parameter.
+	 *
+	 * @param param
+	 *            the new parameter
+	 */
     public void setParameter(Parameter param) {
         req.setParameter(param);
     }
@@ -571,26 +545,19 @@ public class HttpRequest extends AbstractBean {
         setParameter(new Parameter(name, value));
     }
 
-    /**
-     * Gets an array of all the Parameters for this Request. This array will
-     * never be null. Ordering of items is not guaranteed. These are reset
-     * whenever this HttpRequestImpl is reset.
-     *
-     * @return the array of Parameters for this request
-     */
+    /** Gets the parameters.
+	 *
+	 * @return the parameters
+	 */
     public Parameter[] getParameters() {
         return req.getParameters();
     }
 
-    /**
-     * Sets the parameters to use with this Request. This replaces whatever
-     * parameters may have been previously defined. If null, this array is
-     * treated as an empty array. These are reset whenever this HttpRequestImpl
-     * is reset.
-     *
-     * @param params
-     *            the Parameters to set for this Request. May be null.
-     */
+    /** Sets the parameters.
+	 *
+	 * @param params
+	 *            the new parameters
+	 */
     public void setParameters(Parameter... params) {
         req.setParameters(params);
     }
@@ -605,6 +572,10 @@ public class HttpRequest extends AbstractBean {
         super.removePropertyChangeListener("readyState", listener);
     }
 
+    /** Gets the ready state change listeners.
+	 *
+	 * @return the ready state change listeners
+	 */
     public PropertyChangeListener[] getReadyStateChangeListeners() {
         return super.getPropertyChangeListeners("readyState");
     }
@@ -652,39 +623,48 @@ public class HttpRequest extends AbstractBean {
     }
 
     // ---------------------------------------------- Private helper methods
-    /**
-     * This is private because readyState is a read only property. This method
-     * ensures that the readyState property change event is fired. This MUST be
-     * called on the EDT.
-     */
+    /** Sets the ReadyState of this HttpRequestImpl.
+	 *
+	 * @param state
+	 *            the new ReadyState of this HttpRequestImpl
+	 */
     private void setReadyState(ReadyState state) {
         ReadyState old = this.readyState;
         this.readyState = state;
         firePropertyChange("readyState", old, this.readyState);
     }
 
-    /**
-     * This is private because status is a read only property. This method
-     * ensures that the status property change event is fired. This MUST be
-     * called on the EDT.
-     */
+    /** Sets the if the status attribute is not available it MUST raise an
+	 * exception.
+	 *
+	 * @param status
+	 *            the new if the status attribute is not available it MUST raise
+	 *            an exception
+	 */
     private void setStatus(int status) {
         int old = this.status;
         this.status = status;
         firePropertyChange("status", old, this.status);
     }
 
-    /**
-     * This is private because statusText is a read only property. This method
-     * ensures that the statusText property change event is fired. This MUST be
-     * called on the EDT.
-     */
+    /** Sets the if the statusText attribute is not available, it MUST raise
+	 * an exception.
+	 *
+	 * @param text
+	 *            the new if the statusText attribute is not available, it MUST
+	 *            raise an exception
+	 */
     private void setStatusText(String text) {
         String old = this.statusText;
         this.statusText = text;
         firePropertyChange("statusText", old, this.statusText);
     }
 
+    /** Sets the response xml.
+	 *
+	 * @param dom
+	 *            the new response xml
+	 */
     private void setResponseXML(Document dom) {
         Document old = this.responseXML;
         this.responseXML = dom;
@@ -704,10 +684,18 @@ public class HttpRequest extends AbstractBean {
      * TODO }
      */
 
+    /** The Class AsyncWorker.
+	 */
     // -------------- Private impl details
     protected class AsyncWorker extends SwingWorker {
+        
+        /** The data. */
         private String data;
+        
+        /** The s. */
         private Session s;
+        
+        /** The response. */
         private Response response;
 
         private void sendRequest(Session s, String data) {
@@ -773,12 +761,10 @@ public class HttpRequest extends AbstractBean {
         }
     }
 
-    /**
-     * If the readyState attribute has a value other than LOADED, then this
-     * method will return null. Otherwise, if the Content-Type contains
-     * text/xml, application/xml, or ends in +xml then a Document will be
-     * returned. Otherwise, null is returned.
-     */
+    /** Gets the response xml.
+	 *
+	 * @return the response xml
+	 */
     public Document getResponseXML() {
         if (getReadyState() == ReadyState.LOADED) {
             return responseXML;
@@ -787,11 +773,10 @@ public class HttpRequest extends AbstractBean {
         }
     }
 
-    /**
-     * Gets the response image.
-     *
-     * @return the response image
-     */
+    /** Gets the response image.
+	 *
+	 * @return the response image
+	 */
     public Image getResponseImage() {
         // A hard reference to the image is not a good idea here.
         // Images will retain their observers, and it's also
@@ -808,6 +793,10 @@ public class HttpRequest extends AbstractBean {
         return img;
     }
 
+    /** Gets the response bytes.
+	 *
+	 * @return the response bytes
+	 */
     public byte[] getResponseBytes() {
         ByteArrayOutputStream out = this.buffer;
         return out == null ? null : out.toByteArray();

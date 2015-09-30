@@ -1,16 +1,22 @@
 /*
- * $Id: Session.java 299 2008-04-16 20:03:00Z rbair $ Copyright 2004 Sun
- * Microsystems, Inc., 4150 Network Circle, Santa Clara, California 95054,
- * U.S.A. All rights reserved. This library is free software; you can
- * redistribute it and/or modify it under the terms of the GNU Lesser General
- * Public License as published by the Free Software Foundation; either version
- * 2.1 of the License, or (at your option) any later version. This library is
- * distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
- * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.http;
 
@@ -65,10 +71,19 @@ public class Session extends AbstractBean {
      * @see #setSslSecurityLevel
      */
     public enum SecurityLevel {
-        Low, Medium, High
+        
+        /** The Low. */
+        Low, 
+ /** The Medium. */
+ Medium, 
+ /** The High. */
+ High
     };
 
+    /** The ssl security. */
     private SecurityLevel sslSecurity;
+    
+    /** The handler. */
     private SecurityHandler handler;
     /**
      * Keeps track of the state of the Session when performing a
@@ -113,31 +128,30 @@ public class Session extends AbstractBean {
         }
     }
 
-    /**
-     * Sets the security level to use with SSL.
-     *
-     * @param level
-     *            one of High, Medium, or Low. Low will not prompt or fail for
-     *            self signed certs. Medium will prompt for self signed certs.
-     *            High will fall back on the default behavior, and simply fail
-     *            for self signed certs.
-     */
+    /** Sets the ssl security level.
+	 *
+	 * @param level
+	 *            the new ssl security level
+	 */
     public void setSslSecurityLevel(SecurityLevel level) {
         SecurityLevel old = getSslSecurityLevel();
         sslSecurity = level;
         firePropertyChange("sslSecurityLevel", old, getSslSecurityLevel());
     }
 
-    /**
-     * Gets the SecurityLevel used for SSL connections.
-     *
-     * @return the SecurityLevel
-     * @see #setSslSecurityLevel
-     */
+    /** Gets the ssl security level.
+	 *
+	 * @return the ssl security level
+	 */
     public final SecurityLevel getSslSecurityLevel() {
         return sslSecurity;
     }
 
+    /** Sets the medium security handler.
+	 *
+	 * @param h
+	 *            the new medium security handler
+	 */
     void setMediumSecurityHandler(SecurityHandler h) {
         SecurityHandler old = getMediumSecurityHandler();
         this.handler = h;
@@ -145,6 +159,10 @@ public class Session extends AbstractBean {
                 getMediumSecurityHandler());
     }
 
+    /** Gets the medium security handler.
+	 *
+	 * @return the medium security handler
+	 */
     SecurityHandler getMediumSecurityHandler() {
         return handler;
     }
@@ -169,10 +187,23 @@ public class Session extends AbstractBean {
         }
     }
 
+    /** Gets the keeps track of the total number of bytes that are to be sent
+	 * or receieved.
+	 *
+	 * @return the keeps track of the total number of bytes that are to be sent
+	 *         or receieved
+	 */
     public final long getTotalBytes() {
         return totalBytes;
     }
 
+    /** Sets the keeps track of the total number of bytes that are to be sent
+	 * or receieved.
+	 *
+	 * @param bytes
+	 *            the new keeps track of the total number of bytes that are to
+	 *            be sent or receieved
+	 */
     private void setTotalBytes(long bytes) {
         long old = totalBytes;
         float oldProgress = getProgress();
@@ -180,10 +211,23 @@ public class Session extends AbstractBean {
         firePropertyChange("progress", oldProgress, getProgress());
     }
 
+    /** Gets the keeps track of the total number of bytes transfered upstream
+	 * or downstream.
+	 *
+	 * @return the keeps track of the total number of bytes transfered upstream
+	 *         or downstream
+	 */
     public final long getBytesSoFar() {
         return bytesSoFar;
     }
 
+    /** Sets the keeps track of the total number of bytes transfered upstream
+	 * or downstream.
+	 *
+	 * @param bytes
+	 *            the new keeps track of the total number of bytes transfered
+	 *            upstream or downstream
+	 */
     private void setBytesSoFar(long bytes) {
         long old = this.bytesSoFar;
         float oldProgress = getProgress();
@@ -191,6 +235,10 @@ public class Session extends AbstractBean {
         firePropertyChange("progress", oldProgress, getProgress());
     }
 
+    /** Gets the progress.
+	 *
+	 * @return the progress
+	 */
     public final float getProgress() {
         if (totalBytes <= 0) {
             return -1f;
@@ -200,10 +248,23 @@ public class Session extends AbstractBean {
         return num / total;
     }
 
+    /** Gets the keeps track of the state of the Session when performing a
+	 * request/response cycle.
+	 *
+	 * @return the keeps track of the state of the Session when performing a
+	 *         request/response cycle
+	 */
     public final State getState() {
         return state;
     }
 
+    /** Sets the keeps track of the state of the Session when performing a
+	 * request/response cycle.
+	 *
+	 * @param s
+	 *            the new keeps track of the state of the Session when
+	 *            performing a request/response cycle
+	 */
     protected void setState(State s) {
         State old = this.state;
         firePropertyChange("state", old, this.state = s);

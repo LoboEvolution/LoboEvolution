@@ -1,22 +1,22 @@
 /*
- * Copyright 1994-2006 The Lobo Project. Copyright 2014 Lobo Evolution. All
- * rights reserved. Redistribution and use in source and binary forms, with or
- * without modification, are permitted provided that the following conditions
- * are met: Redistributions of source code must retain the above copyright
- * notice, this list of conditions and the following disclaimer. Redistributions
- * in binary form must reproduce the above copyright notice, this list of
- * conditions and the following disclaimer in the documentation and/or other
- * materials provided with the distribution. THIS SOFTWARE IS PROVIDED BY THE
- * LOBO PROJECT ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
- * NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
- * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE FREEBSD PROJECT OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.ua;
 
@@ -243,13 +243,10 @@ public interface NavigatorFrame {
      */
     String prompt(String message, String inputDefault);
 
-    /**
-     * Gets a component for the current frame which could be serve as the parent
-     * of pop-up dialogs. This is <i>not</i> the rendered component.
-     *
-     * @return the component
-     * @see #getComponentContent()
-     */
+    /** Gets the component.
+	 *
+	 * @return the component
+	 */
     Component getComponent();
 
     /**
@@ -260,37 +257,29 @@ public interface NavigatorFrame {
      */
     void alert(String message);
 
-    /**
-     * Requests the frame to update its progress state.
-     *
-     * @param event
-     *            The progress event object.
-     * @see #getProgressEvent()
-     */
+    /** Sets the progress event.
+	 *
+	 * @param event
+	 *            the new progress event
+	 */
     void setProgressEvent(NavigatorProgressEvent event);
 
-    /**
-     * Gets the most recent progress event.
-     *
-     * @return the progress event
-     * @see #setProgressEvent(NavigatorProgressEvent)
-     */
+    /** Gets the progress event.
+	 *
+	 * @return the progress event
+	 */
     NavigatorProgressEvent getProgressEvent();
 
-    /**
-     * Gets the frame that contains the current one, if any. Returns
-     * <code>null</code> for the top frame.
-     *
-     * @return the parent frame
-     */
+    /** Gets the parent frame.
+	 *
+	 * @return the parent frame
+	 */
     NavigatorFrame getParentFrame();
 
-    /**
-     * Gets the top-most frame in the window. Returns the current frame if its
-     * parent is <code>null</code>.
-     *
-     * @return the top frame
-     */
+    /** Gets the top frame.
+	 *
+	 * @return the top frame
+	 */
     NavigatorFrame getTopFrame();
 
     // (commenting out - gives opportunity to retain objects)
@@ -332,55 +321,48 @@ public interface NavigatorFrame {
      */
     NavigatorFrame createFrame();
 
-    /**
-     * Gets the default status.
-     *
-     * @return the default status
-     */
+    /** Gets the default status.
+	 *
+	 * @return the default status
+	 */
     String getDefaultStatus();
 
-    /**
-     * Sets the default status.
-     *
-     * @param value
-     *            the new default status
-     */
+    /** Sets the default status.
+	 *
+	 * @param value
+	 *            the new default status
+	 */
     void setDefaultStatus(String value);
 
-    /**
-     * Gets the window id.
-     *
-     * @return the window id
-     */
+    /** Gets the window id.
+	 *
+	 * @return the window id
+	 */
     String getWindowId();
 
-    /**
-     * Gets the opener frame.
-     *
-     * @return the opener frame
-     */
+    /** Gets the opener frame.
+	 *
+	 * @return the opener frame
+	 */
     NavigatorFrame getOpenerFrame();
 
-    /**
-     * Gets the status.
-     *
-     * @return the status
-     */
+    /** Gets the status.
+	 *
+	 * @return the status
+	 */
     String getStatus();
 
-    /**
-     * Checks if is window closed.
-     *
-     * @return true, if is window closed
-     */
+    /** Checks if is window closed.
+	 *
+	 * @return true, if is window closed
+	 */
     boolean isWindowClosed();
 
-    /**
-     * Sets the status.
-     *
-     * @param status
-     *            the new status
-     */
+    /** Sets the status.
+	 *
+	 * @param status
+	 *            the new status
+	 */
     void setStatus(String status);
 
     /**
@@ -412,12 +394,10 @@ public interface NavigatorFrame {
      */
     void replaceContent(Component component);
 
-    /**
-     * Gets source code for content currently showing, if any. Thrown when the
-     * caller does not have permission to get the source code.
-     *
-     * @return the source code
-     */
+    /** Gets the source code.
+	 *
+	 * @return the source code
+	 */
     String getSourceCode();
 
     /**
@@ -428,11 +408,10 @@ public interface NavigatorFrame {
      */
     HttpRequest createHttpRequest();
 
-    /**
-     * Gets the component content currently set in the frame.
-     *
-     * @return the component content
-     */
+    /** Gets the component content.
+	 *
+	 * @return the component content
+	 */
     ComponentContent getComponentContent();
 
     /**
@@ -455,26 +434,22 @@ public interface NavigatorFrame {
      */
     void resizeWindowBy(int byWidth, int byHeight);
 
-    /**
-     * Gets an object that represents the current navigation entry in the
-     * frame's history.
-     *
-     * @return the current navigation entry
-     */
+    /** Gets the current navigation entry.
+	 *
+	 * @return the current navigation entry
+	 */
     NavigationEntry getCurrentNavigationEntry();
 
-    /**
-     * Gets the previous navigation entry.
-     *
-     * @return the previous navigation entry
-     */
+    /** Gets the previous navigation entry.
+	 *
+	 * @return the previous navigation entry
+	 */
     NavigationEntry getPreviousNavigationEntry();
 
-    /**
-     * Gets the next navigation entry.
-     *
-     * @return the next navigation entry
-     */
+    /** Gets the next navigation entry.
+	 *
+	 * @return the next navigation entry
+	 */
     NavigationEntry getNextNavigationEntry();
 
     /**
@@ -495,11 +470,10 @@ public interface NavigatorFrame {
      */
     void navigateInHistory(String absoluteURL);
 
-    /**
-     * Gets the length for the frame's history.
-     *
-     * @return the history length
-     */
+    /** Gets the history length.
+	 *
+	 * @return the history length
+	 */
     int getHistoryLength();
 
     /**

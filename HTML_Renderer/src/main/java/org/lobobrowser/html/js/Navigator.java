@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 
 package org.lobobrowser.html.js;
@@ -40,74 +46,66 @@ public class Navigator extends AbstractScriptableDelegate {
         this.context = context;
     }
 
-    /**
-     * Gets the app code name.
-     *
-     * @return the app code name
-     */
+    /** Gets the app code name.
+	 *
+	 * @return the app code name
+	 */
     public String getAppCodeName() {
         return this.context.getAppCodeName();
     }
 
-    /**
-     * Gets the app name.
-     *
-     * @return the app name
-     */
+    /** Gets the app name.
+	 *
+	 * @return the app name
+	 */
     public String getAppName() {
         return this.context.getAppName();
     }
 
-    /**
-     * Gets the app version.
-     *
-     * @return the app version
-     */
+    /** Gets the app version.
+	 *
+	 * @return the app version
+	 */
     public String getAppVersion() {
         return this.context.getAppVersion();
     }
 
-    /**
-     * Gets the app minor version.
-     *
-     * @return the app minor version
-     */
+    /** Gets the app minor version.
+	 *
+	 * @return the app minor version
+	 */
     public String getAppMinorVersion() {
         return this.context.getAppMinorVersion();
     }
 
-    /**
-     * Gets the platform.
-     *
-     * @return the platform
-     */
+    /** Gets the platform.
+	 *
+	 * @return the platform
+	 */
     public String getPlatform() {
         return this.context.getPlatform();
     }
 
-    /**
-     * Gets the user agent.
-     *
-     * @return the user agent
-     */
+    /** Gets the user agent.
+	 *
+	 * @return the user agent
+	 */
     public String getUserAgent() {
         return this.context.getUserAgent();
     }
 
-    /**
-     * Gets the vendor.
-     *
-     * @return the vendor
-     */
+    /** Gets the vendor.
+	 *
+	 * @return the vendor
+	 */
     public String getVendor() {
         return this.context.getVendor();
     }
 
-    /**
-     * Gets the product.
-     *
-     * @return the product
-     */
+    /** Gets the product.
+	 *
+	 * @return the product
+	 */
     public String getProduct() {
         return this.context.getProduct();
     }
@@ -122,21 +120,19 @@ public class Navigator extends AbstractScriptableDelegate {
         return true;
     }
 
-    /**
-     * Gets the language.
-     *
-     * @return the language
-     */
+    /** Gets the language.
+	 *
+	 * @return the language
+	 */
     public String getLanguage() {
         // TODO
         return null;
     }
 
-    /**
-     * Checks if is on line.
-     *
-     * @return true, if is on line
-     */
+    /** Checks if is on line.
+	 *
+	 * @return true, if is on line
+	 */
     public boolean isOnLine() {
         // TODO
         return false;
@@ -229,11 +225,10 @@ public class Navigator extends AbstractScriptableDelegate {
         // TODO
     }
 
-    /**
-     * Gets the mime types.
-     *
-     * @return the mime types
-     */
+    /** Gets the mime types.
+	 *
+	 * @return the mime types
+	 */
     public MimeTypesCollection getMimeTypes() {
         synchronized (this) {
             MimeTypesCollection mt = this.mimeTypes;
@@ -250,11 +245,10 @@ public class Navigator extends AbstractScriptableDelegate {
      */
     public class MimeTypesCollection {
         // Class must be public to allow JavaScript access
-        /**
-         * Gets the length.
-         *
-         * @return the length
-         */
+        /** Gets the length.
+		 *
+		 * @return the length
+		 */
         public int getLength() {
             return 0;
         }

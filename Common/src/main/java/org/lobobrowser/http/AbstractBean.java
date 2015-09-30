@@ -1,16 +1,22 @@
 /*
- * $Id: AbstractBean.java,v 1.2 2006/09/11 22:42:34 rbair Exp $ Copyright 2004
- * Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, California 95054,
- * U.S.A. All rights reserved. This library is free software; you can
- * redistribute it and/or modify it under the terms of the GNU Lesser General
- * Public License as published by the Free Software Foundation; either version
- * 2.1 of the License, or (at your option) any later version. This library is
- * distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
- * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.http;
 
@@ -194,37 +200,10 @@ public abstract class AbstractBean {
         pcs.removePropertyChangeListener(listener);
     }
     
-    /**
-     * Returns an array of all the listeners that were added to the
-     * PropertyChangeSupport object with addPropertyChangeListener().
-     * <p>
-     * If some listeners have been added with a named property, then the
-     * returned array will be a mixture of PropertyChangeListeners and
-     * <code>PropertyChangeListenerProxy</code>s. If the calling method is
-     * interested in distinguishing the listeners then it must test each element
-     * to see if it's a <code>PropertyChangeListenerProxy</code>, perform the
-     * cast, and examine the parameter.
-     *
-     * <pre>
-     *  <code>
-     *  PropertyChangeListener[] listeners = bean.getPropertyChangeListeners();
-     *  for (int i = 0; i &lt; listeners.length; i++) {
-     *  	 if (listeners[i] instanceof PropertyChangeListenerProxy) {
-     *      PropertyChangeListenerProxy proxy =
-     *                     (PropertyChangeListenerProxy)listeners[i];
-     *      if (proxy.getPropertyName().equals("foo")) {
-     *        // proxy is a PropertyChangeListener which was associated
-     *        // with the property named "foo"
-     *     }
-     *   }
-     * }
-     *  </code>
-     * </pre>
-     *
-     * @return all of the <code>PropertyChangeListeners</code> added or an empty
-     *         array if no listeners have been added
-     * @see java.beans.PropertyChangeListenerProxy
-     */
+    /** Gets the property change listeners.
+	 *
+	 * @return the property change listeners
+	 */
     public PropertyChangeListener[] getPropertyChangeListeners() {
         return pcs.getPropertyChangeListeners();
     }
@@ -392,15 +371,10 @@ public abstract class AbstractBean {
         vcs.removeVetoableChangeListener(listener);
     }
     
-    /**
-     * Returns the list of VetoableChangeListeners. If named vetoable change
-     * listeners were added, then VetoableChangeListenerProxy wrappers will
-     * returned
-     * <p>
-     *
-     * @return List of VetoableChangeListeners and VetoableChangeListenerProxys
-     *         if named property change listeners were added.
-     */
+    /** Gets the vetoable change listeners.
+	 *
+	 * @return the vetoable change listeners
+	 */
     public VetoableChangeListener[] getVetoableChangeListeners() {
         return vcs.getVetoableChangeListeners();
     }

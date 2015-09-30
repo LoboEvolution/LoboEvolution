@@ -1,16 +1,22 @@
 /*
- * $Id: Response.java 290 2008-04-08 21:00:46Z rbair $ Copyright 2004 Sun
- * Microsystems, Inc., 4150 Network Circle, Santa Clara, California 95054,
- * U.S.A. All rights reserved. This library is free software; you can
- * redistribute it and/or modify it under the terms of the GNU Lesser General
- * Public License as published by the Free Software Foundation; either version
- * 2.1 of the License, or (at your option) any later version. This library is
- * distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
- * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.http;
 
@@ -55,8 +61,14 @@ public class Response {
      * on a Request.
      */
     private String charset;
+    
+    /** The headers. */
     private Set<Header> headers;
+    
+    /** The status code. */
     private StatusCode statusCode;
+    
+    /** The status text. */
     private String statusText;
     // TODO I'm still dealing with this as a String. I originally used an
     // InputStream,
@@ -66,8 +78,11 @@ public class Response {
     // future
     // implementation will cache to disk. This requires security priviledges,
     // however,
+    /** The response body. */
     // and thus is somewhat problematic.
     private byte[] responseBody;
+    
+    /** The url. */
     private String url;
 
     /**
@@ -125,24 +140,18 @@ public class Response {
         return null;
     }
 
-    /**
-     * Gets an array of all the Headers for this Request. This array will never
-     * be null. Ordering of items is not guaranteed.
-     *
-     * @return the array of Headers for this request
-     */
+    /** Gets the headers.
+	 *
+	 * @return the headers
+	 */
     public Header[] getHeaders() {
         return headers.toArray(new Header[0]);
     }
 
-    /**
-     * Gets the Date specified in the Last-Modified header, if any. This is a
-     * special convenience method for reading the Last-Modified value. If the
-     * value associated with Last-Modified cannot be properly decoded, or if
-     * Last-Modified is not specified, then null is returned.
-     *
-     * @return
-     */
+    /** Gets the last modified.
+	 *
+	 * @return the last modified
+	 */
     public Date getLastModified() {
         Header h = getHeader("Last-Modified");
         if (h == null) {
@@ -158,42 +167,34 @@ public class Response {
         }
     }
 
-    /**
-     * Gets the status code. See {@link StatusCode} for the definitive list of
-     * status codes.
-     *
-     * @return a code indicating the status of the response. This is never null.
-     */
+    /** Gets the status code.
+	 *
+	 * @return the status code
+	 */
     public StatusCode getStatusCode() {
         return statusCode;
     }
 
-    /**
-     * Returns the status text.
-     *
-     * @return the status text
-     */
+    /** Gets the status text.
+	 *
+	 * @return the status text
+	 */
     public String getStatusText() {
         return statusText;
     }
 
-    /**
-     * Gets an <code>InputStream</code> from which the body of the response may
-     * be read.
-     *
-     * @returns the body as an <code>InputStream</code>. This will never be
-     *          null.
-     */
+    /** Gets the body as stream.
+	 *
+	 * @return the body as stream
+	 */
     public InputStream getBodyAsStream() {
         return new ByteArrayInputStream(getBodyAsBytes());
     }
 
-    /**
-     * Gets a <code>Reader</code> from which the body of the response may be
-     * read.
-     *
-     * @returns the body as a <code>Reader</code>. This will never be null.
-     */
+    /** Gets the body as reader.
+	 *
+	 * @return the body as reader
+	 */
     public Reader getBodyAsReader() {
         if (responseBody == null) {
             return new StringReader("");
@@ -202,20 +203,18 @@ public class Response {
         }
     }
 
-    /**
-     * Gets a byte array representing the body of the response.
-     *
-     * @returns the body as a byte array. This will never be null.
-     */
+    /** Gets the body as bytes.
+	 *
+	 * @return the body as bytes
+	 */
     public byte[] getBodyAsBytes() {
         return responseBody == null ? new byte[0] : responseBody;
     }
 
-    /**
-     * Gets the response body as a String.
-     *
-     * @returns the body as a String. This will never be null.
-     */
+    /** Gets the body.
+	 *
+	 * @return the body
+	 */
     public String getBody() {
         try {
             return responseBody == null ? ""
@@ -226,10 +225,10 @@ public class Response {
         }
     }
 
-    /**
-     * Gets the url that was used to produce this <code>Response</code>. This
-     * url will not contain a query string (that is, no parameters).
-     */
+    /** Gets the base url.
+	 *
+	 * @return the base url
+	 */
     public String getBaseUrl() {
         return url;
     }

@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Copyright (c) 2003 World Wide Web Consortium, (Massachusetts Institute of
@@ -24,6 +30,7 @@
 
 package org.lobobrowser.w3c.html;
 
+
 /**
  * This element is used for single-line text input. See the ISINDEX element
  * definition in HTML 4.01. This element is deprecated in HTML 4.01.
@@ -35,24 +42,21 @@ package org.lobobrowser.w3c.html;
 public interface HTMLIsIndexElement extends HTMLElement {
 
 	/**
-	 * Returns the <code>FORM</code> element containing this control. Returns
-	 * <code>null</code> if this control is not within the context of a form.
+	 * Gets the form.
 	 *
 	 * @return the form
 	 */
 	HTMLFormElement getForm();
 
 	/**
-	 * The prompt message. See the prompt attribute definition in HTML 4.01.
-	 * This attribute is deprecated in HTML 4.01.
+	 * Gets the prompt.
 	 *
 	 * @return the prompt
 	 */
 	String getPrompt();
 
 	/**
-	 * The prompt message. See the prompt attribute definition in HTML 4.01.
-	 * This attribute is deprecated in HTML 4.01.
+	 * Sets the prompt.
 	 *
 	 * @param prompt
 	 *            the new prompt

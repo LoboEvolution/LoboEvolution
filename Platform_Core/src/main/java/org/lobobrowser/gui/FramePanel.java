@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either verion 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.gui;
 
@@ -84,9 +90,7 @@ import org.lobobrowser.util.gui.WrapperLayout;
  */
 public class FramePanel extends JPanel implements NavigatorFrame {
 
-    /**
-     *
-     */
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
     /** The Constant logger. */
@@ -159,12 +163,11 @@ public class FramePanel extends JPanel implements NavigatorFrame {
         this((FramePanel) null);
     }
 
-    /**
-     * Sets the opener frame.
-     *
-     * @param opener
-     *            the new opener frame
-     */
+    /** Sets the opener frame.
+	 *
+	 * @param opener
+	 *            the new opener frame
+	 */
     public void setOpenerFrame(NavigatorFrame opener) {
         this.openerFrame = opener;
     }
@@ -430,15 +433,10 @@ public class FramePanel extends JPanel implements NavigatorFrame {
         }
     }
 
-    /**
-     * Gets a {@link WindowCallback} instance that is used to dispatch
-     * information during local navigation. The FramePanel tries to find an
-     * implementor of the interface among its ancestor components. Unless
-     * overridden, this implementation of <code>getWindowCallback</code> only
-     * looks for instances of the {@link BrowserWindow} interface.
-     *
-     * @return the window callback
-     */
+    /** Gets the window callback.
+	 *
+	 * @return the window callback
+	 */
     protected WindowCallback getWindowCallback() {
         FramePanel kpf = this.knownParentFrame;
         if (kpf != null) {
@@ -515,11 +513,10 @@ public class FramePanel extends JPanel implements NavigatorFrame {
         this.paintChildren(g);
     }
 
-    /**
-     * Gets an array of navigation entries that came before the current one.
-     *
-     * @return the back navigation entries
-     */
+    /** Gets the back navigation entries.
+	 *
+	 * @return the back navigation entries
+	 */
     public NavigationEntry[] getBackNavigationEntries() {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
@@ -530,12 +527,10 @@ public class FramePanel extends JPanel implements NavigatorFrame {
         }
     }
 
-    /**
-     * Gets an array of navigation entries that would be visited with
-     * consecutive <code>forward</code> calls.
-     *
-     * @return the forward navigation entries
-     */
+    /** Gets the forward navigation entries.
+	 *
+	 * @return the forward navigation entries
+	 */
     public NavigationEntry[] getForwardNavigationEntries() {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
@@ -759,11 +754,10 @@ public class FramePanel extends JPanel implements NavigatorFrame {
         this.content = null;
     }
 
-    /**
-     * Gets the window.
-     *
-     * @return the window
-     */
+    /** Gets the window.
+	 *
+	 * @return the window
+	 */
     private Window getWindow() {
         // TODO: Security? Getting parent security?
         FramePanel kpf = this.knownParentFrame;
@@ -1699,46 +1693,36 @@ public class FramePanel extends JPanel implements NavigatorFrame {
         }
     }
 
-    /**
-     * Gets the top frame window.
-     *
-     * @return the top frame window
-     */
+    /** Gets the top frame window.
+	 *
+	 * @return the top frame window
+	 */
     public Window getTopFrameWindow() {
         return topFrameWindow;
     }
 
-    /**
-     * Sets the top frame window.
-     *
-     * @param topFrameWindow
-     *            the new top frame window
-     */
+    /** Sets the top frame window.
+	 *
+	 * @param topFrameWindow
+	 *            the new top frame window
+	 */
     public void setTopFrameWindow(Window topFrameWindow) {
         this.topFrameWindow = topFrameWindow;
     }
 
-    /**
-     * Gets an object that is used to represent the current frame content. For
-     * example, if the frame is currently showing HTML, this method will
-     * probably return an instance of
-     * <code>org.w3c.dom.html2.HTMLDocument</code>.
-     *
-     * @return the content object
-     */
+    /** Gets the content object.
+	 *
+	 * @return the content object
+	 */
     public Object getContentObject() {
         ComponentContent content = this.getComponentContent();
         return content == null ? null : content.getContentObject();
     }
 
-    /**
-     * Gets a mime type that goes with the object returned by
-     * {@link FramePanel#getContentObject()}. This is not necessarily the same
-     * as the mime type declared in the headers of the response that produced
-     * the current content.
-     *
-     * @return the current mime type
-     */
+    /** Gets the current mime type.
+	 *
+	 * @return the current mime type
+	 */
     public String getCurrentMimeType() {
         ComponentContent content = this.getComponentContent();
         return content == null ? null : content.getMimeType();

@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.ua;
 
@@ -24,9 +30,7 @@ import java.net.URL;
  */
 public class NavigationEvent extends java.util.EventObject {
 
-    /**
-     *
-     */
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
     /** The u rl. */
@@ -158,74 +162,66 @@ public class NavigationEvent extends java.util.EventObject {
                 null, originatingFrame);
     }
 
-    /**
-     * Gets the url.
-     *
-     * @return the url
-     */
+    /** Gets the u rl.
+	 *
+	 * @return the u rl
+	 */
     public URL getURL() {
         return uRL;
     }
 
-    /**
-     * Gets the method.
-     *
-     * @return the method
-     */
+    /** Gets the method.
+	 *
+	 * @return the method
+	 */
     public String getMethod() {
         return method;
     }
 
-    /**
-     * Gets the param info.
-     *
-     * @return the param info
-     */
+    /** Gets the param info.
+	 *
+	 * @return the param info
+	 */
     public ParameterInfo getParamInfo() {
         return paramInfo;
     }
 
-    /**
-     * Gets the request type.
-     *
-     * @return the request type
-     */
+    /** Gets the request type.
+	 *
+	 * @return the request type
+	 */
     public RequestType getRequestType() {
         return requestType;
     }
 
-    /**
-     * Checks if is from click.
-     *
-     * @return true, if is from click
-     */
+    /** Checks if is from click.
+	 *
+	 * @return the from click
+	 */
     public boolean isFromClick() {
         return fromClick;
     }
 
-    /**
-     * Gets the link object.
-     *
-     * @return the link object
-     */
+    /** Gets the link object.
+	 *
+	 * @return the link object
+	 */
     public Object getLinkObject() {
         return linkObject;
     }
 
-    /**
-     * Gets the originating frame.
-     *
-     * @return the originating frame
-     */
+    /** Gets the originating frame.
+	 *
+	 * @return the originating frame
+	 */
     public NavigatorFrame getOriginatingFrame() {
         return originatingFrame;
     }
 
-    /**
-     * Gets the target type.
-     *
-     * @return the target type
-     */
+    /** Gets the target type.
+	 *
+	 * @return the target type
+	 */
     public TargetType getTargetType() {
         return targetType;
     }

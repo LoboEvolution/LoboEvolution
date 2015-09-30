@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Nov 19, 2005
@@ -124,21 +130,11 @@ public class HtmlPanel extends JComponent implements FrameContext {
         };
     }
 
-    /**
-     * Sets a preferred width that serves as a hint in calculating the preferred
-     * size of the <code>HtmlPanel</code>. Note that the preferred size can only
-     * be calculated when a document is available, and it will vary during
-     * incremental rendering.
-     * <p>
-     * This method currently does not have any effect when the document is a
-     * FRAMESET.
-     * <p>
-     * Note also that setting the preferred width (to a value other than
-     * <code>-1</code>) will negatively impact performance.
-     *
-     * @param width
-     *            The preferred width, or <code>-1</code> to unset.
-     */
+    /** Sets the preferred width.
+	 *
+	 * @param width
+	 *            the new preferred width
+	 */
     public void setPreferredWidth(int width) {
         this.preferredWidth = width;
         HtmlBlockPanel htmlBlock = this.htmlBlockPanel;
@@ -186,26 +182,19 @@ public class HtmlPanel extends JComponent implements FrameContext {
         }
     }
 
-    /**
-     * Gets the root <code>Renderable</code> of the HTML block. It returns
-     * <code>null</code> for FRAMESETs.
-     *
-     * @return the block renderable
-     */
+    /** Gets the block renderable.
+	 *
+	 * @return the block renderable
+	 */
     public BoundableRenderable getBlockRenderable() {
         HtmlBlockPanel htmlBlock = this.htmlBlockPanel;
         return htmlBlock == null ? null : htmlBlock.getRootRenderable();
     }
 
-    /**
-     * Gets an instance of {@link FrameSetPanel} in case the currently rendered
-     * page is a FRAMESET.
-     * <p>
-     * Note: This method should be invoked in the GUI thread.
-     *
-     * @return A <code>FrameSetPanel</code> instance or <code>null</code> if the
-     *         document currently rendered is not a FRAMESET.
-     */
+    /** Gets the frame set panel.
+	 *
+	 * @return the frame set panel
+	 */
     public FrameSetPanel getFrameSetPanel() {
         int componentCount = this.getComponentCount();
         if (componentCount == 0) {
@@ -240,12 +229,11 @@ public class HtmlPanel extends JComponent implements FrameContext {
         this.nodeRenderer = shp;
     }
 
-    /**
-     * Sets the up frame set.
-     *
-     * @param fsrn
-     *            the new up frame set
-     */
+    /** Sets the up frame set.
+	 *
+	 * @param fsrn
+	 *            the new up frame set
+	 */
     private void setUpFrameSet(DOMNodeImpl fsrn) {
         this.isFrameSet = true;
         this.htmlBlockPanel = null;
@@ -546,11 +534,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
         }
     }
 
-    /**
-     * Gets the HTML DOM node currently rendered if any.
-     *
-     * @return the root node
-     */
+    /** Gets the root node.
+	 *
+	 * @return the root node
+	 */
     public DOMNodeImpl getRootNode() {
         return this.rootNode;
     }
@@ -715,13 +702,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
         this.selectionDispatch.fireEvent(new SelectionChangeEvent(this, false));
     }
 
-    /**
-     * Gets the selection text.
-     * <p>
-     * Note: This method should be invoked in the GUI thread.
-     *
-     * @return the selection text
-     */
+    /** Gets the selection text.
+	 *
+	 * @return the selection text
+	 */
     public String getSelectionText() {
         HtmlBlockPanel block = this.htmlBlockPanel;
         if (block == null) {
@@ -731,17 +715,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
         }
     }
 
-    /**
-     * Gets a DOM node enclosing the selection. The node returned should be the
-     * inner-most node that encloses both selection start and end points. Note
-     * that the selection end point may be just outside of the selection.
-     * <p>
-     * Note: This method should be invoked in the GUI thread.
-     *
-     * @return A node enclosing the current selection, or <code>null</code> if
-     *         there is no such node. It also returns <code>null</code> for
-     *         FRAMESETs.
-     */
+    /** Gets the selection node.
+	 *
+	 * @return the selection node
+	 */
     public Node getSelectionNode() {
         HtmlBlockPanel block = this.htmlBlockPanel;
         if (block == null) {
@@ -802,15 +779,11 @@ public class HtmlPanel extends JComponent implements FrameContext {
         selectionDispatch.removeListener(listener);
     }
 
-    /**
-     * Sets the default margin insets. Note that in the root block, the margin
-     * behaves like padding.
-     * <p>
-     * This method has no effect on FRAMESETs.
-     *
-     * @param insets
-     *            The default margin insets.
-     */
+    /** Sets the default margin insets.
+	 *
+	 * @param insets
+	 *            the new default margin insets
+	 */
     public void setDefaultMarginInsets(Insets insets) {
         this.defaultMarginInsets = insets;
         HtmlBlockPanel block = this.htmlBlockPanel;
@@ -819,14 +792,11 @@ public class HtmlPanel extends JComponent implements FrameContext {
         }
     }
 
-    /**
-     * Sets the default horizontal overflow.
-     * <p>
-     * This method has no effect on FRAMESETs.
-     *
-     * @param overflow
-     *            See {@link org.lobobrowser.html.renderstate.RenderState}.
-     */
+    /** Sets the default overflow x.
+	 *
+	 * @param overflow
+	 *            the new default overflow x
+	 */
     public void setDefaultOverflowX(int overflow) {
         this.defaultOverflowX = overflow;
         HtmlBlockPanel block = this.htmlBlockPanel;
@@ -835,14 +805,11 @@ public class HtmlPanel extends JComponent implements FrameContext {
         }
     }
 
-    /**
-     * Sets the default vertical overflow.
-     * <p>
-     * This method has no effect on FRAMESETs.
-     *
-     * @param overflow
-     *            See {@link org.lobobrowser.html.renderstate.RenderState}.
-     */
+    /** Sets the default overflow y.
+	 *
+	 * @param overflow
+	 *            the new default overflow y
+	 */
     public void setDefaultOverflowY(int overflow) {
         this.defaultOverflowY = overflow;
         HtmlBlockPanel block = this.htmlBlockPanel;

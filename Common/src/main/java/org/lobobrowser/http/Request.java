@@ -1,16 +1,22 @@
 /*
- * $Id: Request.java 290 2008-04-08 21:00:46Z rbair $ Copyright 2004 Sun
- * Microsystems, Inc., 4150 Network Circle, Santa Clara, California 95054,
- * U.S.A. All rights reserved. This library is free software; you can
- * redistribute it and/or modify it under the terms of the GNU Lesser General
- * Public License as published by the Free Software Foundation; either version
- * 2.1 of the License, or (at your option) any later version. This library is
- * distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
- * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.http;
 
@@ -147,6 +153,8 @@ public class Request extends AbstractBean {
     /** The Constant logger. */
     private static final Logger logger = Logger
             .getLogger(Request.class.getName());
+    
+    /** The headers. */
     private Map<String, Header> headers = new HashMap<String, Header>();
     /** The params. */
     private Map<String, Parameter> params = new HashMap<String, Parameter>();
@@ -286,12 +294,11 @@ public class Request extends AbstractBean {
         setHeader(new Header(name, value, elements));
     }
     
-    /**
-     * Adds the given header to the set of headers.
-     *
-     * @param header
-     *            the Header to add. This must not be null.
-     */
+    /** Sets the header.
+	 *
+	 * @param header
+	 *            the new header
+	 */
     public void setHeader(Header header) {
         if (header == null) {
             throw new IllegalArgumentException("header cannot be null");
@@ -340,24 +347,19 @@ public class Request extends AbstractBean {
         headers.remove(header.toLowerCase());
     }
     
-    /**
-     * Gets an array of all the Headers for this Request. This array will never
-     * be null. Ordering of items is not guaranteed.
-     *
-     * @return the array of Headers for this request
-     */
+    /** Gets the headers.
+	 *
+	 * @return the headers
+	 */
     public final Header[] getHeaders() {
         return headers.values().toArray(new Header[0]);
     }
     
-    /**
-     * Sets the headers to use with this Request. This replaces whatever headers
-     * may have been previously defined. If null, this array is treated as an
-     * empty array.
-     *
-     * @param headers
-     *            the Headers to set for this Request. May be null.
-     */
+    /** Sets the headers.
+	 *
+	 * @param headers
+	 *            the new headers
+	 */
     public final void setHeaders(Header... headers) {
         this.headers.clear();
         if (headers != null) {
@@ -398,12 +400,11 @@ public class Request extends AbstractBean {
         setParameter(new Parameter(name, value));
     }
     
-    /**
-     * Adds the given parameter to the set of parameters.
-     *
-     * @param param
-     *            the Parameter to add. This must not be null.
-     */
+    /** Sets the parameter.
+	 *
+	 * @param param
+	 *            the new parameter
+	 */
     public void setParameter(Parameter param) {
         if (param == null) {
             throw new IllegalArgumentException("param cannot be null");
@@ -413,24 +414,19 @@ public class Request extends AbstractBean {
         params.put(param.getName(), param);
     }
     
-    /**
-     * Gets an array of all the Parameters for this Request. This array will
-     * never be null. Ordering of items is not guaranteed.
-     *
-     * @return the array of Parameters for this request
-     */
+    /** Gets the parameters.
+	 *
+	 * @return the parameters
+	 */
     public final Parameter[] getParameters() {
         return params.values().toArray(new Parameter[0]);
     }
     
-    /**
-     * Sets the parameters to use with this Request. This replaces whatever
-     * parameters may have been previously defined. If null, this array is
-     * treated as an empty array.
-     *
-     * @param params
-     *            the Parameters to set for this Request. May be null.
-     */
+    /** Sets the parameters.
+	 *
+	 * @param params
+	 *            the new parameters
+	 */
     public final void setParameters(Parameter... params) {
         this.params.clear();
         if (params != null) {
@@ -440,18 +436,11 @@ public class Request extends AbstractBean {
         }
     }
     
-    /**
-     * Specifies whether to automatically follow redirects. An HTTP response may
-     * indicate that the system should be redirected to a new page. In that
-     * case, if followRedirects is true, this will happen automatically and the
-     * Response will be the new page (as long as the new page does not also
-     * cause a redirect). It is possible to encounter infinite redirects.
-     *
-     * boolean b whether to automatically follow redirects
-     *
-     * @param b
-     *            the new follow redirects
-     */
+    /** Sets the follow redirects.
+	 *
+	 * @param b
+	 *            the new follow redirects
+	 */
     // TODO need to support a count of maximium redirects
     public void setFollowRedirects(boolean b) {
         boolean old = getFollowRedirects();
@@ -459,72 +448,49 @@ public class Request extends AbstractBean {
         firePropertyChange("followRedirects", old, this.followRedirects);
     }
     
-    /**
-     * Gets whether to automatically follow redirct requests. @see
-     * #setFollowRedirects(boolean).
-     *
-     * @return whether to automatically follow redirects.
-     */
+    /** Gets the follow redirects.
+	 *
+	 * @return the follow redirects
+	 */
     public final boolean getFollowRedirects() {
         return followRedirects;
     }
     
-    /**
-     * Sets the http {@link Method} to use for this Request. If null, a GET
-     * method will be used.
-     *
-     * @param method
-     *            the {@link Method} to use. If null, <code>Method.GET</code> is
-     *            used.
-     */
+    /** Sets the method.
+	 *
+	 * @param method
+	 *            the new method
+	 */
     public void setMethod(String method) {
         String old = getMethod();
         this.method = method == null ? Method.GET : method;
         firePropertyChange("method", old, this.method);
     }
     
-    /**
-     * Gets the http Method used.
-     *
-     * @return the {@link Method} for this Request.
-     */
+    /** Gets the method.
+	 *
+	 * @return the method
+	 */
     public final String getMethod() {
         return method;
     }
     
-    /**
-     * <p>
-     * The URL to request content from. This must be an absolute URL. An
-     * IllegalArgumentException will be thrown if this url is malformed. This
-     * value may be null, but must be specified prior to executing this Request,
-     * otherwise an IllegalStateException will occur at execution time.
-     * </p>
-     *
-     * <p>
-     * This URL <em>may</em> contain parameters (ie: in the query string). These
-     * parameters will be left in place. Any parameters added via
-     * #setParameters(Parameter[]) will be appened to this query string if this
-     * is not a POST request, otherwise, they will be included in the body of
-     * the post.
-     * </p>
-     *
-     * @param url
-     *            The url to request content from. May be null
-     * @throws IllegalArgumentException
-     *             if the url is malformed.
-     */
+    /** Sets the url.
+	 *
+	 * @param url
+	 *            the new url
+	 */
     public void setUrl(String url) throws IllegalArgumentException {
         String old = getUrl();
         setUrlImpl(url);
         firePropertyChange("url", old, this.url);
     }
     
-    /**
-     * Sets the url impl.
-     *
-     * @param url
-     *            the new url impl
-     */
+    /** Sets the url impl.
+	 *
+	 * @param url
+	 *            the new url impl
+	 */
     private void setUrlImpl(String url) {
         this.url = url;
         if (url != null) {
@@ -559,24 +525,19 @@ public class Request extends AbstractBean {
         }
     }
     
-    /**
-     * Returns the URL to request content from.
-     *
-     * @return the url
-     */
+    /** Gets the url.
+	 *
+	 * @return the url
+	 */
     public final String getUrl() {
         return url;
     }
     
-    /**
-     * Sets the username to use for Basic Authentication. If a username is
-     * specified, then the Session will attempt to use Basic Authentication with
-     * the web server. Setting username to null essentially turns off Basic
-     * Authentication. Setting this property causes a header to be added.
-     *
-     * @param username
-     *            the user name to use
-     */
+    /** Sets the username.
+	 *
+	 * @param username
+	 *            the new username
+	 */
     public void setUsername(String username) {
         String old = this.username;
         this.username = username;
@@ -601,55 +562,47 @@ public class Request extends AbstractBean {
         }
     }
     
-    /**
-     * Gets the username used for Basic Authentication.
-     *
-     * @return may be null.
-     */
+    /** Gets the username.
+	 *
+	 * @return the username
+	 */
     public final String getUsername() {
         return username;
     }
     
-    /**
-     * Sets the passsword to use for Basic Authentication. This property is only
-     * used if a username is also specified. For security reasons, the password
-     * cannot be retrieved after being set, and no property change event is
-     * fired for this property.
-     *
-     * @param password
-     *            the new password
-     */
+    /** Sets the password.
+	 *
+	 * @param password
+	 *            the new password
+	 */
     public void setPassword(String password) {
         this.password = password == null ? new char[0] : password.toCharArray();
         resetAuthenticationHeader();
     }
     
-    /**
-     * Gets the password. May be null.
-     *
-     * @return may be null.
-     */
+    /** Gets the password.
+	 *
+	 * @return the password
+	 */
     final String getPassword() {
         return password == null ? "" : new String(password);
     }
     
-    /**
-     * Sets the request body to be the specified String.
-     *
-     * @param body
-     *            the String to use for the body. May be null.
-     */
+    /** Sets the body.
+	 *
+	 * @param body
+	 *            the new body
+	 */
     public void setBody(String body) {
         stringBody = body;
         setBody(body == null ? null : body.getBytes());
     }
     
-    /**
-     * Sets the request body to be the specified array of bytes.
-     *
-     * @param body
-     *            the byte array to use for the body. May be null.
-     */
+    /** Sets the body.
+	 *
+	 * @param body
+	 *            the new body
+	 */
     public void setBody(byte[] body) {
         if ((body == null) || (body.length == 0)) {
             requestBody = null;
@@ -658,36 +611,30 @@ public class Request extends AbstractBean {
         }
     }
     
-    /**
-     * Sets the request body to be the specified {@link Document}.
-     *
-     * @param body
-     *            the DOM document to use for the body. May be null.
-     */
+    /** Sets the body.
+	 *
+	 * @param body
+	 *            the new body
+	 */
     public void setBody(Document body) {
         setBody(body == null ? null : XPathUtils.toXML(body));
     }
     
-    /**
-     * Sets the request body to be the specified <code>InputStream</code>.
-     *
-     * @param body
-     *            the InputStream to use for the body. May be null.
-     */
+    /** Sets the body.
+	 *
+	 * @param body
+	 *            the new body
+	 */
     public void setBody(InputStream body) {
         this.requestBody = body;
     }
     
-    /**
-     * Protected method which returns the request body. This is only called by
-     * the Session. This method should never be called by client code, and
-     * should only be overridden in subclasses where the body is constructed in
-     * a manner unique to the request (for example: FormRequest).
-     *
-     * @return the body
-     * @throws Exception
-     *             the exception
-     */
+    /** Gets the body.
+	 *
+	 * @return the body
+	 * @throws Exception
+	 *             the exception
+	 */
     protected InputStream getBody() throws Exception {
         return requestBody;
     }

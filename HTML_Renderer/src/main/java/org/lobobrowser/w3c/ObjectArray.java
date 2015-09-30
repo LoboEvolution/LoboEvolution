@@ -21,26 +21,42 @@
 
 package org.lobobrowser.w3c;
 
+
+/**
+ * The Interface ObjectArray.
+ *
+ * @param <E> the element type
+ */
 public interface ObjectArray<E> {
+	
 	/**
-	 * @return
+	 * Gets the length.
+	 *
+	 * @return the length
 	 */
 	int getLength();
 
 	/**
+	 * Sets the length.
+	 *
 	 * @param length
+	 *            the new length
 	 */
 	void setLength(int length);
 
 	/**
-	 * @param index
-	 * @return
+	 * Gets the element.
+	 *
+	 * @param index the index
+	 * @return the element
 	 */
 	E getElement(int index);
 
 	/**
-	 * @param index
-	 * @param value
+	 * Sets the element.
+	 *
+	 * @param index the index
+	 * @param value the value
 	 */
 	void setElement(int index, E value);
 }

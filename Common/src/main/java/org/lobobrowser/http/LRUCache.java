@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.http;
 
@@ -76,21 +82,19 @@ public class LRUCache implements java.io.Serializable {
         this.removalEvent = new RemovalDispatch();
     }
     
-    /**
-     * Gets the approx max size.
-     *
-     * @return the approx max size
-     */
+    /** Gets the approx max size.
+	 *
+	 * @return the approx max size
+	 */
     public int getApproxMaxSize() {
         return approxMaxSize;
     }
     
-    /**
-     * Sets the approx max size.
-     *
-     * @param approxMaxSize
-     *            the new approx max size
-     */
+    /** Sets the approx max size.
+	 *
+	 * @param approxMaxSize
+	 *            the new approx max size
+	 */
     public void setApproxMaxSize(int approxMaxSize) {
         this.approxMaxSize = approxMaxSize;
     }
@@ -215,29 +219,26 @@ public class LRUCache implements java.io.Serializable {
         this.removalEvent.removeListener(listener);
     }
     
-    /**
-     * Gets the approx size.
-     *
-     * @return the approx size
-     */
+    /** Gets the approx size.
+	 *
+	 * @return the approx size
+	 */
     public int getApproxSize() {
         return this.currentSize;
     }
     
-    /**
-     * Gets the num entries.
-     *
-     * @return the num entries
-     */
+    /** Gets the num entries.
+	 *
+	 * @return the num entries
+	 */
     public int getNumEntries() {
         return this.cacheMap.size();
     }
     
-    /**
-     * Gets the entry info list.
-     *
-     * @return the entry info list
-     */
+    /** Gets the entry info list.
+	 *
+	 * @return the entry info list
+	 */
     public List<EntryInfo> getEntryInfoList() {
         List<EntryInfo> list = new ArrayList<EntryInfo>();
         Iterator<OrderedValue> i = this.cacheMap.values().iterator();

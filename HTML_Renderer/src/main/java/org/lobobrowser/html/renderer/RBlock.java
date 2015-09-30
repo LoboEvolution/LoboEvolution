@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Apr 16, 2005
@@ -153,11 +159,10 @@ public class RBlock extends BaseElementRenderable implements
         bl.setY(Short.MAX_VALUE);
     }
 
-    /**
-     * Gets the width the vertical scrollbar has when shown.
-     *
-     * @return the v scroll bar width
-     */
+    /** Gets the v scroll bar width.
+	 *
+	 * @return the v scroll bar width
+	 */
     public int getVScrollBarWidth() {
         return SCROLL_BAR_THICKNESS;
     }
@@ -220,11 +225,10 @@ public class RBlock extends BaseElementRenderable implements
         }
     }
 
-    /**
-     * Gets the h scroll bar.
-     *
-     * @return the h scroll bar
-     */
+    /** Gets the h scroll bar.
+	 *
+	 * @return the h scroll bar
+	 */
     private JScrollBar getHScrollBar() {
         JScrollBar sb = this.hScrollBar;
         if (sb == null) {
@@ -237,11 +241,10 @@ public class RBlock extends BaseElementRenderable implements
         return sb;
     }
 
-    /**
-     * Gets the v scroll bar.
-     *
-     * @return the v scroll bar
-     */
+    /** Gets the v scroll bar.
+	 *
+	 * @return the v scroll bar
+	 */
     private JScrollBar getVScrollBar() {
         JScrollBar sb = this.vScrollBar;
         if (sb == null) {
@@ -254,62 +257,56 @@ public class RBlock extends BaseElementRenderable implements
         return sb;
     }
 
-    /**
-     * Checks if is overflow visible x.
-     *
-     * @return true, if is overflow visible x
-     */
+    /** Checks if is overflow visible x.
+	 *
+	 * @return true, if is overflow visible x
+	 */
     public final boolean isOverflowVisibleX() {
         int overflow = this.overflowX;
         return (overflow == RenderState.OVERFLOW_NONE)
                 || (overflow == RenderState.OVERFLOW_VISIBLE);
     }
 
-    /**
-     * Checks if is overflow visible y.
-     *
-     * @return true, if is overflow visible y
-     */
+    /** Checks if is overflow visible y.
+	 *
+	 * @return true, if is overflow visible y
+	 */
     public final boolean isOverflowVisibleY() {
         int overflow = this.overflowY;
         return (overflow == RenderState.OVERFLOW_NONE)
                 || (overflow == RenderState.OVERFLOW_VISIBLE);
     }
 
-    /**
-     * Gets the first line height.
-     *
-     * @return the first line height
-     */
+    /** Gets the first line height.
+	 *
+	 * @return the first line height
+	 */
     public int getFirstLineHeight() {
         return this.bodyLayout.getFirstLineHeight();
     }
 
-    /**
-     * Gets the first baseline offset.
-     *
-     * @return the first baseline offset
-     */
+    /** Gets the first baseline offset.
+	 *
+	 * @return the first baseline offset
+	 */
     public int getFirstBaselineOffset() {
         return this.bodyLayout.getFirstBaselineOffset();
     }
 
-    /**
-     * Sets the selection end.
-     *
-     * @param rpoint
-     *            the new selection end
-     */
+    /** Sets the selection end.
+	 *
+	 * @param rpoint
+	 *            the new selection end
+	 */
     public void setSelectionEnd(RenderableSpot rpoint) {
         this.endSelection = rpoint;
     }
 
-    /**
-     * Sets the selection start.
-     *
-     * @param rpoint
-     *            the new selection start
-     */
+    /** Sets the selection start.
+	 *
+	 * @param rpoint
+	 *            the new selection start
+	 */
     public void setSelectionStart(RenderableSpot rpoint) {
         this.startSelection = rpoint;
     }
@@ -1160,17 +1157,19 @@ public class RBlock extends BaseElementRenderable implements
     /** The armed renderable. */
     private BoundableRenderable armedRenderable;
 
-    /**
-     * @return the armedRenderable
-     */
+    /** Gets the armed renderable.
+	 *
+	 * @return the armed renderable
+	 */
     public BoundableRenderable getArmedRenderable() {
         return armedRenderable;
     }
 
-    /**
-     * @param armedRenderable
-     *            the armedRenderable to set
-     */
+    /** Sets the armed renderable.
+	 *
+	 * @param armedRenderable
+	 *            the new armed renderable
+	 */
     public void setArmedRenderable(BoundableRenderable armedRenderable) {
         this.armedRenderable = armedRenderable;
     }
@@ -1480,11 +1479,10 @@ public class RBlock extends BaseElementRenderable implements
         }
     }
 
-    /**
-     * Gets the r block viewport.
-     *
-     * @return the r block viewport
-     */
+    /** Gets the r block viewport.
+	 *
+	 * @return the r block viewport
+	 */
     public RBlockViewport getRBlockViewport() {
         return this.bodyLayout;
     }
@@ -1521,11 +1519,10 @@ public class RBlock extends BaseElementRenderable implements
         return "RBlock[node=" + this.modelNode + "]";
     }
 
-    /**
-     * Gets the exportable floating info.
-     *
-     * @return the exportable floating info
-     */
+    /** Gets the exportable floating info.
+	 *
+	 * @return the exportable floating info
+	 */
     public FloatingInfo getExportableFloatingInfo() {
         FloatingInfo info = this.bodyLayout.getExportableFloatingInfo();
         if (info == null) {
@@ -1589,40 +1586,36 @@ public class RBlock extends BaseElementRenderable implements
         }
     }
 
-    /**
-     * Gets the default overflow x.
-     *
-     * @return the default overflow x
-     */
+    /** Gets the default overflow x.
+	 *
+	 * @return the default overflow x
+	 */
     public int getDefaultOverflowX() {
         return defaultOverflowX;
     }
 
-    /**
-     * Gets the default overflow y.
-     *
-     * @return the default overflow y
-     */
+    /** Gets the default overflow y.
+	 *
+	 * @return the default overflow y
+	 */
     public int getDefaultOverflowY() {
         return defaultOverflowY;
     }
 
-    /**
-     * Sets the default overflow x.
-     *
-     * @param defaultOverflowX
-     *            the new default overflow x
-     */
+    /** Sets the default overflow x.
+	 *
+	 * @param defaultOverflowX
+	 *            the new default overflow x
+	 */
     public void setDefaultOverflowX(int defaultOverflowX) {
         this.defaultOverflowX = defaultOverflowX;
     }
 
-    /**
-     * Sets the default overflow y.
-     *
-     * @param defaultOverflowY
-     *            the new default overflow y
-     */
+    /** Sets the default overflow y.
+	 *
+	 * @param defaultOverflowY
+	 *            the new default overflow y
+	 */
     public void setDefaultOverflowY(int defaultOverflowY) {
         this.defaultOverflowY = defaultOverflowY;
     }

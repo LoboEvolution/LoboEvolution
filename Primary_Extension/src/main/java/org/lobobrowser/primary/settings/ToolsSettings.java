@@ -1,5 +1,5 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
+    GNU GENERAL LICENSE
     Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
 
     This program is free software; you can redistribute it and/or
@@ -10,7 +10,7 @@
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
+    General License for more details.
 
     You should have received a copy of the GNU General Public
     License along with this library; if not, write to the Free Software
@@ -94,9 +94,9 @@ public class ToolsSettings implements Serializable {
 	}
 
 	/**
-	 * Gets the single instance of ToolsSettings.
+	 * Gets the Constant instance.
 	 *
-	 * @return single instance of ToolsSettings
+	 * @return the Constant instance
 	 */
 	public static ToolsSettings getInstance() {
 		return instance;

@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either verion 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Jun 12, 2005
@@ -71,12 +77,10 @@ public class CacheInfo {
         this.memoryEntry = memEntry;
     }
 
-    /**
-     * This method should only be called if the connection is later going to be
-     * closed.
-     *
-     * @return the URL connection
-     */
+    /** Gets the URL connection.
+	 *
+	 * @return the URL connection
+	 */
     public final java.net.URLConnection getURLConnection() {
         if (this.connection == null) {
             MemoryCacheEntry memEntry = this.memoryEntry;
@@ -117,11 +121,10 @@ public class CacheInfo {
         return connection == this.getURLConnection();
     }
 
-    /**
-     * Gets the date as text.
-     *
-     * @return the date as text
-     */
+    /** Gets the date as text.
+	 *
+	 * @return the date as text
+	 */
     public final String getDateAsText() {
         return this.getURLConnection().getHeaderField("date");
     }
@@ -148,13 +151,10 @@ public class CacheInfo {
         }
     }
 
-    /**
-     * Gets the timestamp when the cache entry should expire and must be
-     * revalidated. If <code>null</code>, the browser can use a default. When
-     * the entry must be revalidated, this method returns zero.
-     *
-     * @return the expires
-     */
+    /** Gets the expires.
+	 *
+	 * @return the expires
+	 */
     public final Long getExpires() {
         MemoryCacheEntry entry = this.memoryEntry;
         if (entry != null) {
@@ -176,11 +176,10 @@ public class CacheInfo {
         }
     }
 
-    /**
-     * Gets the request time.
-     *
-     * @return the request time
-     */
+    /** Gets the request time.
+	 *
+	 * @return the request time
+	 */
     public long getRequestTime() {
         MemoryCacheEntry entry = this.memoryEntry;
         if (entry != null) {
@@ -205,21 +204,19 @@ public class CacheInfo {
         return this.memoryEntry != null;
     }
 
-    /**
-     * Gets the transient object.
-     *
-     * @return the transient object
-     */
+    /** Gets the transient object.
+	 *
+	 * @return the transient object
+	 */
     public Object getTransientObject() {
         MemoryCacheEntry memEntry = this.memoryEntry;
         return memEntry != null ? memEntry.altObject : null;
     }
 
-    /**
-     * Gets the transient object size.
-     *
-     * @return the transient object size
-     */
+    /** Gets the transient object size.
+	 *
+	 * @return the transient object size
+	 */
     public int getTransientObjectSize() {
         MemoryCacheEntry memEntry = this.memoryEntry;
         return memEntry != null ? memEntry.altObjectSize : 0;
@@ -277,11 +274,10 @@ public class CacheInfo {
         }
     }
 
-    /**
-     * Gets the persistent content.
-     *
-     * @return the persistent content
-     */
+    /** Gets the persistent content.
+	 *
+	 * @return the persistent content
+	 */
     public byte[] getPersistentContent() {
         return persistentContent;
     }

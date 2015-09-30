@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Apr 16, 2005
@@ -218,11 +224,10 @@ public class RBlockViewport extends BaseRCollection {
         this.layoutUpTreeCanBeInvalidated = true;
     }
 
-    /**
-     * Gets the avail content width.
-     *
-     * @return the avail content width
-     */
+    /** Gets the avail content width.
+	 *
+	 * @return the avail content width
+	 */
     public int getAvailContentWidth() {
         return this.availContentWidth;
     }
@@ -946,11 +951,10 @@ public class RBlockViewport extends BaseRCollection {
         return false;
     }
 
-    /**
-     * Gets the parent viewport.
-     *
-     * @return the parent viewport
-     */
+    /** Gets the parent viewport.
+	 *
+	 * @return the parent viewport
+	 */
     final RBlockViewport getParentViewport() {
         // Use originalParent, which for one, is not going to be null during
         // layout.
@@ -1608,11 +1612,10 @@ public class RBlockViewport extends BaseRCollection {
         }
     }
 
-    /**
-     * Gets the renderables array.
-     *
-     * @return the renderables array
-     */
+    /** Gets the renderables array.
+	 *
+	 * @return the renderables array
+	 */
     public Renderable[] getRenderablesArray() {
         SortedSet<PositionedRenderable> others = this.positionedRenderables;
         int othersSize = others == null ? 0 : others.size();
@@ -2047,11 +2050,10 @@ public class RBlockViewport extends BaseRCollection {
         }
     }
 
-    /**
-     * Gets the first line height.
-     *
-     * @return the first line height
-     */
+    /** Gets the first line height.
+	 *
+	 * @return the first line height
+	 */
     public int getFirstLineHeight() {
         ArrayList renderables = this.seqRenderables;
         if (renderables != null) {
@@ -2072,11 +2074,10 @@ public class RBlockViewport extends BaseRCollection {
         return 1;
     }
 
-    /**
-     * Gets the first baseline offset.
-     *
-     * @return the first baseline offset
-     */
+    /** Gets the first baseline offset.
+	 *
+	 * @return the first baseline offset
+	 */
     public int getFirstBaselineOffset() {
         ArrayList renderables = this.seqRenderables;
         if (renderables != null) {
@@ -2480,11 +2481,10 @@ public class RBlockViewport extends BaseRCollection {
     /** The is float limit. */
     private Boolean isFloatLimit = null;
 
-    /**
-     * Checks if is float limit.
-     *
-     * @return true, if is float limit
-     */
+    /** Checks if is float limit.
+	 *
+	 * @return true, if is float limit
+	 */
     private boolean isFloatLimit() {
         Boolean fl = this.isFloatLimit;
         if (fl == null) {
@@ -2560,11 +2560,10 @@ public class RBlockViewport extends BaseRCollection {
     // return null;
     // }
 
-    /**
-     * Gets the exportable floating info.
-     *
-     * @return the exportable floating info
-     */
+    /** Gets the exportable floating info.
+	 *
+	 * @return the exportable floating info
+	 */
     public FloatingInfo getExportableFloatingInfo() {
         ArrayList<ExportableFloat> ef = this.exportableFloats;
         if (ef == null) {
@@ -2639,38 +2638,34 @@ public class RBlockViewport extends BaseRCollection {
         addRenderableToLine(inlineBlock);
     }
 
-    /**
-     * Gets the frame context.
-     *
-     * @return the frame context
-     */
+    /** Gets the frame context.
+	 *
+	 * @return the frame context
+	 */
     public FrameContext getFrameContext() {
         return frameContext;
     }
 
-    /**
-     * Gets the container.
-     *
-     * @return the container
-     */
+    /** Gets the container.
+	 *
+	 * @return the container
+	 */
     public RenderableContainer getContainer() {
         return container;
     }
 
-    /**
-     * Gets the user agent context.
-     *
-     * @return the user agent context
-     */
+    /** Gets the user agent context.
+	 *
+	 * @return the user agent context
+	 */
     public UserAgentContext getUserAgentContext() {
         return userAgentContext;
     }
 
-    /**
-     * Gets the renderer context.
-     *
-     * @return the renderer context
-     */
+    /** Gets the renderer context.
+	 *
+	 * @return the renderer context
+	 */
     public HtmlRendererContext getRendererContext() {
         return rendererContext;
     }

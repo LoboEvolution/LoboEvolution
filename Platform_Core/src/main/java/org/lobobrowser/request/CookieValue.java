@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either verion 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Jun 2, 2005
@@ -75,47 +81,42 @@ public class CookieValue implements Serializable {
         this.expirationTime = null;
     }
 
-    /**
-     * Gets the value.
-     *
-     * @return the value
-     */
+    /** Gets the value.
+	 *
+	 * @return the value
+	 */
     public String getValue() {
         return this.value;
     }
 
-    /**
-     * Gets the expires.
-     *
-     * @return the expires
-     */
+    /** Gets the expires.
+	 *
+	 * @return the expires
+	 */
     public Long getExpires() {
         return this.expirationTime;
     }
 
-    /**
-     * Gets the path.
-     *
-     * @return the path
-     */
+    /** Gets the path.
+	 *
+	 * @return the path
+	 */
     public String getPath() {
         return path;
     }
 
-    /**
-     * Gets the domain.
-     *
-     * @return the domain
-     */
+    /** Gets the domain.
+	 *
+	 * @return the domain
+	 */
     public String getDomain() {
         return domain;
     }
 
-    /**
-     * Checks if is expired.
-     *
-     * @return true, if is expired
-     */
+    /** Checks if is expired.
+	 *
+	 * @return true, if is expired
+	 */
     public boolean isExpired() {
         Long exp = this.expirationTime;
         return exp == null ? false : exp.longValue() < System

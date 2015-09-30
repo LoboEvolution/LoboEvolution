@@ -1,32 +1,23 @@
 /*
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
 
-* $Id: FullScreenWindow.java,v 4 -- 23::33 tomoke Exp $
-Copyright 04 Sun Microsystems, Inc., 40 Network Circle,
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
 
-* Santa Clara, California 95054, U.S.A. All rights reserved.
-* This library is free software; you can redistribute it and/or
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
 
-* modify it under the terms of the GNU Lesser General Public
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-* License as published by the Free Software Foundation; either
-
-* version 1 of the License, or (at your option) any later version.
-
-This library is distributed in the hope that it will be useful,
-
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-
-* Lesser General Public License for more details.
-
-* You should have received a copy of the GNU Lesser General Public
-
-* License along with this library; if not, write to the Free Software
-
-* Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  0-01  USA
-
-*/
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ */
 package org.lobobrowser.primary.gui.pdf;
 
 import java.awt.Color;
@@ -43,23 +34,20 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+/**
+ * The Class FullScreenWindow.
+ */
 public class FullScreenWindow {
 
-	/**
-	 *
-	 * The screen that the user last chose for displaying a
-	 *
-	 * FullScreenWindow
-	 *
-	 */
+	/** The screen that the user last chose for displaying a FullScreenWindow. */
 
 	private static GraphicsDevice defaultScreen;
 
-	/** The current screen for the FullScreenWindow */
+	/** The current screen for the FullScreenWindow. */
 
 	private GraphicsDevice screen;
 
-	/** The JFrame filling the screen */
+	/** The JFrame filling the screen. */
 
 	private JFrame jf;
 
@@ -232,10 +220,10 @@ public class FullScreenWindow {
 
 	class PickMe extends JFrame {
 
-		/**
-		 *
-		 */
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = -658915481325845436L;
+		
+		/** The mygd. */
 		GraphicsDevice mygd;
 
 		/**
@@ -302,6 +290,8 @@ public class FullScreenWindow {
 	 */
 
 	private Flag flag = new Flag();
+	
+	/** The picked device. */
 	private GraphicsDevice pickedDevice;
 
 	/**

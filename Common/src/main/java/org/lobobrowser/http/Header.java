@@ -1,16 +1,22 @@
 /*
- * $Id: Header.java 197 2007-02-15 21:25:22Z rbair $ Copyright 2004 Sun
- * Microsystems, Inc., 4150 Network Circle, Santa Clara, California 95054,
- * U.S.A. All rights reserved. This library is free software; you can
- * redistribute it and/or modify it under the terms of the GNU Lesser General
- * Public License as published by the Free Software Foundation; either version
- * 2.1 of the License, or (at your option) any later version. This library is
- * distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
- * PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.http;
 
@@ -65,25 +71,19 @@ public class Header extends NameValuePair {
         setElements(elements);
     }
     
-    /**
-     * Returns an array of Elements for this Header. This array returned will
-     * never be null. A new array instance will be returned for every invocation
-     * of this method.
-     *
-     * @return array of Elements. This will never be null.
-     */
+    /** Gets the elements.
+	 *
+	 * @return the elements
+	 */
     public Element[] getElements() {
         return elements.toArray(new Element[0]);
     }
     
-    /**
-     * Sets the elements. If the <code>elements</code> param is null, this will
-     * set the empty set of elements. That is, getElements() will return an
-     * empty array rather than null.
-     *
-     * @param elements
-     *            The Elements. May be null. Replaces the old array of elements.
-     */
+    /** Sets the elements.
+	 *
+	 * @param elements
+	 *            the new elements
+	 */
     public void setElements(Element... elements) {
         Element[] old = getElements();
         this.elements.clear();
@@ -124,11 +124,10 @@ public class Header extends NameValuePair {
             }
         }
         
-        /**
-         * Gets the parameters. This array will never be null.
-         *
-         * @return the array of Parameters. This will never be null.
-         */
+        /** Gets the parameters.
+		 *
+		 * @return the parameters
+		 */
         public Parameter[] getParameters() {
             Parameter[] dest = new Parameter[params.length];
             System.arraycopy(params, 0, dest, 0, params.length);

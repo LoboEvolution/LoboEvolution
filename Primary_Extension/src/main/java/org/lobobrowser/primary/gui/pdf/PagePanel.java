@@ -1,22 +1,22 @@
 /*
- * $Id: PagePanel.java,v 1.3 2009/01/26 05:09:01 tomoke Exp $
- *
- * Copyright 2004 Sun Microsystems, Inc., 4150 Network Circle,
- * Santa Clara, California 95054, U.S.A. All rights reserved.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 
 package org.lobobrowser.primary.gui.pdf;
@@ -45,26 +45,38 @@ import com.sun.pdfview.PDFPage;
  */
 public class PagePanel extends JPanel implements ImageObserver, MouseListener, MouseMotionListener {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	/** The image of the rendered PDF page being displayed */
+	
+	/** The image of the rendered PDF page being displayed. */
 	Image currentImage;
-	/** The current PDFPage that was rendered into currentImage */
+	
+	/** The current PDFPage that was rendered into currentImage. */
 	PDFPage currentPage;
+	
+	/** The current xform. */
 	/* the current transform from device space to page space */
 	AffineTransform currentXform;
-	/** The horizontal offset of the image from the left edge of the panel */
+	
+	/** The horizontal offset of the image from the left edge of the panel. */
 	int offx;
-	/** The vertical offset of the image from the top of the panel */
+	
+	/** The vertical offset of the image from the top of the panel. */
 	int offy;
-	/** the current clip, in device space */
+	
+	/** the current clip, in device space. */
 	Rectangle2D clip;
-	/** the clipping region used for the image */
+	
+	/** the clipping region used for the image. */
 	Rectangle2D prevClip;
-	/** the size of the image */
+	
+	/** the size of the image. */
 	Dimension prevSize;
-	/** the zooming marquee */
+	
+	/** the zooming marquee. */
 	Rectangle zoomRect;
-	/** whether the zoom tool is enabled */
+	
+	/** whether the zoom tool is enabled. */
 	boolean useZoom = false;
 
 	// /** a listener for page changes */
@@ -209,21 +221,27 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 	}
 
 	/**
-	 * Gets the page currently being displayed
+	 * Gets the page.
+	 *
+	 * @return the page
 	 */
 	public PDFPage getPage() {
 		return currentPage;
 	}
 
 	/**
-	 * Gets the size of the image currently being displayed
+	 * Gets the cur size.
+	 *
+	 * @return the cur size
 	 */
 	public Dimension getCurSize() {
 		return prevSize;
 	}
 
 	/**
-	 * Gets the clipping rectangle in page space currently being displayed
+	 * Gets the cur clip.
+	 *
+	 * @return the cur clip
 	 */
 	public Rectangle2D getCurClip() {
 		return prevClip;
@@ -275,17 +293,20 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 	}
 
 	/**
-	 * Set the desired clipping region (in screen coordinates), and redraw the
-	 * image.
+	 * Sets the current clip, in device space.
+	 *
+	 * @param clip
+	 *            the new current clip, in device space
 	 */
 	public void setClip(Rectangle2D clip) {
 		this.clip = clip;
 		showPage(currentPage);
 	}
 
-	/** x location of the mouse-down event */
+	/** x location of the mouse-down event. */
 	int downx;
-	/** y location of the mouse-down event */
+	
+	/** y location of the mouse-down event. */
 	int downy;
 
 	/** Handles a mousePressed event */

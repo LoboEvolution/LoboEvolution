@@ -1,7 +1,22 @@
 /*
- * AbstractFunction.java Created on September 27, 2006, 10:10 PM To change this
- * template, choose Tools | Template Manager and open the template in the
- * editor.
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.xpath.function;
 
@@ -41,20 +56,18 @@ public abstract class AbstractFunction implements XPathFunction {
         this.name = name;
     }
     
-    /**
-     * Gets the arity.
-     *
-     * @return the arity
-     */
+    /** Gets the arity.
+	 *
+	 * @return the arity
+	 */
     public final int getArity() {
         return arity;
     }
     
-    /**
-     * Gets the name.
-     *
-     * @return the name
-     */
+    /** Gets the name.
+	 *
+	 * @return the name
+	 */
     public final String getName() {
         return name;
     }

@@ -1,5 +1,5 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
+    GNU GENERAL LICENSE
     Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
 
     This program is free software; you can redistribute it and/or
@@ -10,7 +10,7 @@
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
+    General License for more details.
 
     You should have received a copy of the GNU General Public
     License along with this library; if not, write to the Free Software
@@ -52,11 +52,10 @@ public class Location extends AbstractScriptableDelegate {
         this.window = window;
     }
 
-    /**
-     * Gets the url.
-     *
-     * @return the url
-     */
+    /** Gets the url.
+	 *
+	 * @return the url
+	 */
     private URL getURL() {
         URL url;
         try {
@@ -68,21 +67,19 @@ public class Location extends AbstractScriptableDelegate {
         return url;
     }
 
-    /**
-     * Gets the hash.
-     *
-     * @return the hash
-     */
+    /** Gets the hash.
+	 *
+	 * @return the hash
+	 */
     public String getHash() {
         URL url = this.getURL();
         return url == null ? null : url.getRef();
     }
 
-    /**
-     * Gets the host.
-     *
-     * @return the host
-     */
+    /** Gets the host.
+	 *
+	 * @return the host
+	 */
     public String getHost() {
         URL url = this.getURL();
         if (url == null) {
@@ -91,11 +88,10 @@ public class Location extends AbstractScriptableDelegate {
         return url.getHost() + (url.getPort() == -1 ? "" : ":" + url.getPort());
     }
 
-    /**
-     * Gets the hostname.
-     *
-     * @return the hostname
-     */
+    /** Gets the hostname.
+	 *
+	 * @return the hostname
+	 */
     public String getHostname() {
         URL url = this.getURL();
         if (url == null) {
@@ -104,21 +100,19 @@ public class Location extends AbstractScriptableDelegate {
         return url.getHost();
     }
 
-    /**
-     * Gets the pathname.
-     *
-     * @return the pathname
-     */
+    /** Gets the pathname.
+	 *
+	 * @return the pathname
+	 */
     public String getPathname() {
         URL url = this.getURL();
         return url == null ? null : url.getPath();
     }
 
-    /**
-     * Gets the port.
-     *
-     * @return the port
-     */
+    /** Gets the port.
+	 *
+	 * @return the port
+	 */
     public String getPort() {
         URL url = this.getURL();
         if (url == null) {
@@ -128,11 +122,10 @@ public class Location extends AbstractScriptableDelegate {
         return port == -1 ? null : String.valueOf(port);
     }
 
-    /**
-     * Gets the protocol.
-     *
-     * @return the protocol
-     */
+    /** Gets the protocol.
+	 *
+	 * @return the protocol
+	 */
     public String getProtocol() {
         URL url = this.getURL();
         if (url == null) {
@@ -141,11 +134,10 @@ public class Location extends AbstractScriptableDelegate {
         return url.getProtocol() + ":";
     }
 
-    /**
-     * Gets the search.
-     *
-     * @return the search
-     */
+    /** Gets the search.
+	 *
+	 * @return the search
+	 */
     public String getSearch() {
         URL url = this.getURL();
         String query = url == null ? null : url.getQuery();
@@ -156,41 +148,37 @@ public class Location extends AbstractScriptableDelegate {
     /** The target. */
     private String target;
 
-    /**
-     * Gets the target.
-     *
-     * @return the target
-     */
+    /** Gets the target.
+	 *
+	 * @return the target
+	 */
     public String getTarget() {
         return this.target;
     }
 
-    /**
-     * Sets the target.
-     *
-     * @param value
-     *            the new target
-     */
+    /** Sets the target.
+	 *
+	 * @param value
+	 *            the new target
+	 */
     public void setTarget(String value) {
         this.target = value;
     }
 
-    /**
-     * Gets the href.
-     *
-     * @return the href
-     */
+    /** Gets the href.
+	 *
+	 * @return the href
+	 */
     public String getHref() {
         Document document = this.window.getDocumentNode();
         return document == null ? null : document.getDocumentURI();
     }
 
-    /**
-     * Sets the href.
-     *
-     * @param uri
-     *            the new href
-     */
+    /** Sets the href.
+	 *
+	 * @param uri
+	 *            the new href
+	 */
     public void setHref(String uri) {
         HtmlRendererContext rcontext = this.window.getHtmlRendererContext();
         if (rcontext != null) {

@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Jan 15, 2006
@@ -274,10 +280,21 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 
 	}
 
+	/**
+	 * Gets the src.
+	 *
+	 * @return the src
+	 */
 	public String getSrc() {
 		return this.getAttribute(HtmlAttributeProperties.SRC);
 	}
 
+	/**
+	 * Sets the src.
+	 *
+	 * @param src
+	 *            the new src
+	 */
 	public void setSrc(String src) {
 		this.setAttribute(HtmlAttributeProperties.SRC, src);
 	}
@@ -494,46 +511,95 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	/**
+	 * Sets the autocomplete.
+	 *
+	 * @param autocomplete
+	 *            the new autocomplete
+	 */
 	public void setAutocomplete(String autocomplete) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Gets the indeterminate.
+	 *
+	 * @return the indeterminate
+	 */
 	public boolean getIndeterminate() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/**
+	 * Sets the indeterminate.
+	 *
+	 * @param indeterminate
+	 *            the new indeterminate
+	 */
 	public void setIndeterminate(boolean indeterminate) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Gets the list.
+	 *
+	 * @return the list
+	 */
 	public HTMLElement getList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Gets the value as date.
+	 *
+	 * @return the value as date
+	 */
 	public long getValueAsDate() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/**
+	 * Sets the value as date.
+	 *
+	 * @param valueAsDate
+	 *            the new value as date
+	 */
 	public void setValueAsDate(long valueAsDate) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Gets the value as number.
+	 *
+	 * @return the value as number
+	 */
 	public double getValueAsNumber() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/**
+	 * Sets the value as number.
+	 *
+	 * @param valueAsNumber
+	 *            the new value as number
+	 */
 	public void setValueAsNumber(double valueAsNumber) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Gets the selected option.
+	 *
+	 * @return the selected option
+	 */
 	public HTMLOptionElement getSelectedOption() {
 		// TODO Auto-generated method stub
 		return null;
@@ -559,36 +625,73 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 
 	}
 
+	/**
+	 * Gets the dir name.
+	 *
+	 * @return the dir name
+	 */
 	public String getDirName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Sets the dir name.
+	 *
+	 * @param dirName
+	 *            the new dir name
+	 */
 	public void setDirName(String dirName) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Gets the pattern.
+	 *
+	 * @return the pattern
+	 */
 	public String getPattern() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Sets the pattern.
+	 *
+	 * @param pattern
+	 *            the new pattern
+	 */
 	public void setPattern(String pattern) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Gets the will validate.
+	 *
+	 * @return the will validate
+	 */
 	public boolean getWillValidate() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/**
+	 * Gets the validity.
+	 *
+	 * @return the validity
+	 */
 	public ValidityState getValidity() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Gets the validation message.
+	 *
+	 * @return the validation message
+	 */
 	public String getValidationMessage() {
 		// TODO Auto-generated method stub
 		return null;
@@ -599,41 +702,85 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		return false;
 	}
 
+	/**
+	 * Sets the custom validity.
+	 *
+	 * @param error
+	 *            the new custom validity
+	 */
 	public void setCustomValidity(String error) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Gets the labels.
+	 *
+	 * @return the labels
+	 */
 	public NodeList getLabels() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Gets the selection start.
+	 *
+	 * @return the selection start
+	 */
 	public int getSelectionStart() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/**
+	 * Sets the selection start.
+	 *
+	 * @param selectionStart
+	 *            the new selection start
+	 */
 	public void setSelectionStart(int selectionStart) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Gets the selection end.
+	 *
+	 * @return the selection end
+	 */
 	public int getSelectionEnd() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/**
+	 * Sets the selection end.
+	 *
+	 * @param selectionEnd
+	 *            the new selection end
+	 */
 	public void setSelectionEnd(int selectionEnd) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Gets the selection direction.
+	 *
+	 * @return the selection direction
+	 */
 	public String getSelectionDirection() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Sets the selection direction.
+	 *
+	 * @param selectionDirection
+	 *            the new selection direction
+	 */
 	public void setSelectionDirection(String selectionDirection) {
 		// TODO Auto-generated method stub
 

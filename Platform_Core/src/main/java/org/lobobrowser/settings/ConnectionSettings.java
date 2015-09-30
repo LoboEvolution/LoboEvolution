@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either verion 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Jul 9, 2005
@@ -103,11 +109,10 @@ public class ConnectionSettings implements java.io.Serializable {
         }
     }
 
-    /**
-     * Gets the class singleton.
-     *
-     * @return single instance of ConnectionSettings
-     */
+    /** Gets the Constant instance.
+	 *
+	 * @return the Constant instance
+	 */
     public static ConnectionSettings getInstance() {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
@@ -143,11 +148,10 @@ public class ConnectionSettings implements java.io.Serializable {
         }
     }
 
-    /**
-     * Gets the password authentication.
-     *
-     * @return the password authentication
-     */
+    /** Gets the password authentication.
+	 *
+	 * @return the password authentication
+	 */
     public PasswordAuthentication getPasswordAuthentication() {
         String userName = this.userName;
         String password = this.password;
@@ -157,21 +161,19 @@ public class ConnectionSettings implements java.io.Serializable {
         return new PasswordAuthentication(userName, password.toCharArray());
     }
 
-    /**
-     * Checks if is authenticated.
-     *
-     * @return Returns the authenticated.
-     */
+    /** Checks if is authenticated.
+	 *
+	 * @return the authenticated
+	 */
     public boolean isAuthenticated() {
         return authenticated;
     }
 
-    /**
-     * Sets the authenticated.
-     *
-     * @param authenticated
-     *            The authenticated to set.
-     */
+    /** Sets the authenticated.
+	 *
+	 * @param authenticated
+	 *            the new authenticated
+	 */
     public void setAuthenticated(boolean authenticated) {
         this.authenticated = authenticated;
         synchronized (this) {
@@ -179,21 +181,19 @@ public class ConnectionSettings implements java.io.Serializable {
         }
     }
 
-    /**
-     * Gets the password.
-     *
-     * @return Returns the password.
-     */
+    /** Gets the password.
+	 *
+	 * @return the password
+	 */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * Sets the password.
-     *
-     * @param password
-     *            The password to set.
-     */
+    /** Sets the password.
+	 *
+	 * @param password
+	 *            the new password
+	 */
     public void setPassword(String password) {
         this.password = password;
         synchronized (this) {
@@ -201,21 +201,19 @@ public class ConnectionSettings implements java.io.Serializable {
         }
     }
 
-    /**
-     * Gets the user name.
-     *
-     * @return Returns the userName.
-     */
+    /** Gets the user name.
+	 *
+	 * @return the user name
+	 */
     public String getUserName() {
         return userName;
     }
 
-    /**
-     * Sets the user name.
-     *
-     * @param userName
-     *            The userName to set.
-     */
+    /** Sets the user name.
+	 *
+	 * @param userName
+	 *            the new user name
+	 */
     public void setUserName(String userName) {
         this.userName = userName;
         synchronized (this) {
@@ -223,21 +221,19 @@ public class ConnectionSettings implements java.io.Serializable {
         }
     }
 
-    /**
-     * Gets the proxy type.
-     *
-     * @return Returns the proxyType.
-     */
+    /** Gets the proxy type.
+	 *
+	 * @return the proxy type
+	 */
     public Proxy.Type getProxyType() {
         return proxyType;
     }
 
-    /**
-     * Sets the proxy type.
-     *
-     * @param proxyType
-     *            The proxyType to set.
-     */
+    /** Sets the proxy type.
+	 *
+	 * @param proxyType
+	 *            the new proxy type
+	 */
     public void setProxyType(Proxy.Type proxyType) {
         this.proxyType = proxyType;
         synchronized (this) {
@@ -245,21 +241,19 @@ public class ConnectionSettings implements java.io.Serializable {
         }
     }
 
-    /**
-     * Gets the inet socket address.
-     *
-     * @return Returns the socketAddress.
-     */
+    /** Gets the inet socket address.
+	 *
+	 * @return the inet socket address
+	 */
     public InetSocketAddress getInetSocketAddress() {
         return socketAddress;
     }
 
-    /**
-     * Sets the inet socket address.
-     *
-     * @param socketAddress
-     *            The socketAddress to set.
-     */
+    /** Sets the inet socket address.
+	 *
+	 * @param socketAddress
+	 *            the new inet socket address
+	 */
     public void setInetSocketAddress(InetSocketAddress socketAddress) {
         this.socketAddress = socketAddress;
         synchronized (this) {
@@ -267,21 +261,19 @@ public class ConnectionSettings implements java.io.Serializable {
         }
     }
 
-    /**
-     * Checks if is disable proxy for local addresses.
-     *
-     * @return true, if is disable proxy for local addresses
-     */
+    /** Checks if is disable proxy for local addresses.
+	 *
+	 * @return the disable proxy for local addresses
+	 */
     public boolean isDisableProxyForLocalAddresses() {
         return disableProxyForLocalAddresses;
     }
 
-    /**
-     * Sets the disable proxy for local addresses.
-     *
-     * @param disableProxyForLocalAddresses
-     *            the new disable proxy for local addresses
-     */
+    /** Sets the disable proxy for local addresses.
+	 *
+	 * @param disableProxyForLocalAddresses
+	 *            the new disable proxy for local addresses
+	 */
     public void setDisableProxyForLocalAddresses(
             boolean disableProxyForLocalAddresses) {
         this.disableProxyForLocalAddresses = disableProxyForLocalAddresses;

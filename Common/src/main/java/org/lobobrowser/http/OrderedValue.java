@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either verion 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.http;
 
@@ -76,78 +82,70 @@ public class OrderedValue implements Comparable<Object>, java.io.Serializable {
         return hc1 - hc2;
     }
     
-    /**
-     * Gets the timestamp.
-     *
-     * @return the timestamp
-     */
+    /** Gets the timestamp.
+	 *
+	 * @return the timestamp
+	 */
     public long getTimestamp() {
         return timestamp;
     }
     
-    /**
-     * Sets the timestamp.
-     *
-     * @param timestamp
-     *            the new timestamp
-     */
+    /** Sets the timestamp.
+	 *
+	 * @param timestamp
+	 *            the new timestamp
+	 */
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
     
-    /**
-     * Gets the value.
-     *
-     * @return the value
-     */
+    /** Gets the value.
+	 *
+	 * @return the value
+	 */
     public Object getValue() {
         return value;
     }
     
-    /**
-     * Sets the value.
-     *
-     * @param value
-     *            the new value
-     */
+    /** Sets the value.
+	 *
+	 * @param value
+	 *            the new value
+	 */
     public void setValue(Object value) {
         this.value = value;
     }
     
-    /**
-     * Gets the key.
-     *
-     * @return the key
-     */
+    /** Gets the key.
+	 *
+	 * @return the key
+	 */
     public Object getKey() {
         return key;
     }
     
-    /**
-     * Sets the key.
-     *
-     * @param key
-     *            the new key
-     */
+    /** Sets the key.
+	 *
+	 * @param key
+	 *            the new key
+	 */
     public void setKey(Object key) {
         this.key = key;
     }
     
-    /**
-     * Gets the approximate size.
-     *
-     * @return the approximate size
-     */
+    /** Gets the approximate size.
+	 *
+	 * @return the approximate size
+	 */
     public int getApproximateSize() {
         return approximateSize;
     }
     
-    /**
-     * Sets the approximate size.
-     *
-     * @param approximateSize
-     *            the new approximate size
-     */
+    /** Sets the approximate size.
+	 *
+	 * @param approximateSize
+	 *            the new approximate size
+	 */
     public void setApproximateSize(int approximateSize) {
         this.approximateSize = approximateSize;
     }

@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The XAMJ Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.html.style;
 
@@ -46,154 +52,138 @@ public class HtmlInsets {
     public HtmlInsets() {
     }
 
-    /**
-     * Gets the top.
-     *
-     * @return the top
-     */
+    /** Gets the right.
+	 *
+	 * @return the right
+	 */
     public int getTop() {
         return top;
     }
 
-    /**
-     * Sets the top.
-     *
-     * @param top
-     *            the new top
-     */
+    /** Sets the right.
+	 *
+	 * @param top
+	 *            the new right
+	 */
     public void setTop(int top) {
         this.top = top;
     }
 
-    /**
-     * Gets the bottom.
-     *
-     * @return the bottom
-     */
+    /** Gets the right.
+	 *
+	 * @return the right
+	 */
     public int getBottom() {
         return bottom;
     }
 
-    /**
-     * Sets the bottom.
-     *
-     * @param bottom
-     *            the new bottom
-     */
+    /** Sets the right.
+	 *
+	 * @param bottom
+	 *            the new right
+	 */
     public void setBottom(int bottom) {
         this.bottom = bottom;
     }
 
-    /**
-     * Gets the left.
-     *
-     * @return the left
-     */
+    /** Gets the right.
+	 *
+	 * @return the right
+	 */
     public int getLeft() {
         return left;
     }
 
-    /**
-     * Sets the left.
-     *
-     * @param left
-     *            the new left
-     */
+    /** Sets the right.
+	 *
+	 * @param left
+	 *            the new right
+	 */
     public void setLeft(int left) {
         this.left = left;
     }
 
-    /**
-     * Gets the right.
-     *
-     * @return the right
-     */
+    /** Gets the right.
+	 *
+	 * @return the right
+	 */
     public int getRight() {
         return right;
     }
 
-    /**
-     * Sets the right.
-     *
-     * @param right
-     *            the new right
-     */
+    /** Sets the right.
+	 *
+	 * @param right
+	 *            the new right
+	 */
     public void setRight(int right) {
         this.right = right;
     }
 
-    /**
-     * Gets the top type.
-     *
-     * @return the top type
-     */
+    /** Gets the right type.
+	 *
+	 * @return the right type
+	 */
     public int getTopType() {
         return topType;
     }
 
-    /**
-     * Sets the top type.
-     *
-     * @param topType
-     *            the new top type
-     */
+    /** Sets the right type.
+	 *
+	 * @param topType
+	 *            the new right type
+	 */
     public void setTopType(int topType) {
         this.topType = topType;
     }
 
-    /**
-     * Gets the bottom type.
-     *
-     * @return the bottom type
-     */
+    /** Gets the right type.
+	 *
+	 * @return the right type
+	 */
     public int getBottomType() {
         return bottomType;
     }
 
-    /**
-     * Sets the bottom type.
-     *
-     * @param bottomType
-     *            the new bottom type
-     */
+    /** Sets the right type.
+	 *
+	 * @param bottomType
+	 *            the new right type
+	 */
     public void setBottomType(int bottomType) {
         this.bottomType = bottomType;
     }
 
-    /**
-     * Gets the left type.
-     *
-     * @return the left type
-     */
+    /** Gets the right type.
+	 *
+	 * @return the right type
+	 */
     public int getLeftType() {
         return leftType;
     }
 
-    /**
-     * Sets the left type.
-     *
-     * @param leftType
-     *            the new left type
-     */
+    /** Sets the right type.
+	 *
+	 * @param leftType
+	 *            the new right type
+	 */
     public void setLeftType(int leftType) {
         this.leftType = leftType;
     }
 
-    /**
-     * Gets the right type.
-     *
-     * @return the right type
-     */
+    /** Gets the right type.
+	 *
+	 * @return the right type
+	 */
     public int getRightType() {
         return rightType;
     }
 
-    /**
-     * Sets the right type.
-     *
-     * @param rightType
-     *            the new right type
-     */
+    /** Sets the right type.
+	 *
+	 * @param rightType
+	 *            the new right type
+	 */
     public void setRightType(int rightType) {
         this.rightType = rightType;
     }

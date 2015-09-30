@@ -1,5 +1,5 @@
 /*
-    GNU GENERAL PUBLIC LICENSE
+    GNU GENERAL LICENSE
     Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
 
     This program is free software; you can redistribute it and/or
@@ -10,7 +10,7 @@
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General Public License for more details.
+    General License for more details.
 
     You should have received a copy of the GNU General Public
     License along with this library; if not, write to the Free Software
@@ -457,21 +457,19 @@ public class InputSelectControl extends BaseInputControl {
             }
         }
 
-        /**
-         * Sets the selected.
-         *
-         * @param value
-         *            the new selected
-         */
+        /** Sets the selected.
+		 *
+		 * @param value
+		 *            the new selected
+		 */
         public void setSelected(boolean value) {
             this.option.setSelected(value);
         }
 
-        /**
-         * Checks if is selected.
-         *
-         * @return true, if is selected
-         */
+        /** Checks if is selected.
+		 *
+		 * @return true, if is selected
+		 */
         public boolean isSelected() {
             return this.option.getSelected();
         }
@@ -485,11 +483,10 @@ public class InputSelectControl extends BaseInputControl {
             return this.caption;
         }
 
-        /**
-         * Gets the value.
-         *
-         * @return the value
-         */
+        /** Gets the value.
+		 *
+		 * @return the value
+		 */
         public String getValue() {
             String value = this.option.getValue();
             if (value == null) {

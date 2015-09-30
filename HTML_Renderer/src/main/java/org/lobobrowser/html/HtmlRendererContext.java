@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Aug 28, 2005
@@ -58,11 +64,10 @@ public interface HtmlRendererContext {
     void linkClicked(org.lobobrowser.w3c.html.HTMLElement linkNode,
             URL url, String target);
 
-    /**
-     * Gets the frames.
-     *
-     * @return the frames
-     */
+    /** Gets the frames.
+	 *
+	 * @return the frames
+	 */
     HTMLCollection getFrames();
 
     /**
@@ -91,11 +96,10 @@ public interface HtmlRendererContext {
      */
     BrowserFrame createBrowserFrame();
 
-    /**
-     * Gets the user agent context.
-     *
-     * @return the user agent context
-     */
+    /** Gets the user agent context.
+	 *
+	 * @return the user agent context
+	 */
     UserAgentContext getUserAgentContext();
 
     /**
@@ -169,11 +173,10 @@ public interface HtmlRendererContext {
      */
     void onMouseOut(HTMLElement element, MouseEvent event);
 
-    /**
-     * Checks if is image loading enabled.
-     *
-     * @return true, if is image loading enabled
-     */
+    /** Checks if is image loading enabled.
+	 *
+	 * @return true, if is image loading enabled
+	 */
     boolean isImageLoadingEnabled();
 
     //------Methods useful for Window implementation:
@@ -284,74 +287,67 @@ public interface HtmlRendererContext {
      */
     void resizeBy(int byWidth, int byHeight);
 
-    /**
-     * Checks if is closed.
-     *
-     * @return true, if is closed
-     */
+    /** Checks if is closed.
+	 *
+	 * @return true, if is closed
+	 */
     boolean isClosed();
 
-    /**
-     * Gets the default status.
-     *
-     * @return the default status
-     */
+    /** Gets the default status.
+	 *
+	 * @return the default status
+	 */
     String getDefaultStatus();
 
-    /**
-     * Sets the default status.
-     *
-     * @param value the new default status
-     */
+    /** Sets the default status.
+	 *
+	 * @param value
+	 *            the new default status
+	 */
     void setDefaultStatus(String value);
 
-    /**
-     * Gets the name.
-     *
-     * @return the name
-     */
+    /** Gets the name.
+	 *
+	 * @return the name
+	 */
     String getName();
 
-    /**
-     * Gets the parent.
-     *
-     * @return the parent
-     */
+    /** Gets the parent.
+	 *
+	 * @return the parent
+	 */
     HtmlRendererContext getParent();
 
-    /**
-     * Gets the opener.
-     *
-     * @return the opener
-     */
+    /** Gets the opener.
+	 *
+	 * @return the opener
+	 */
     HtmlRendererContext getOpener();
 
-    /**
-     * Sets the opener.
-     *
-     * @param opener the new opener
-     */
+    /** Sets the opener.
+	 *
+	 * @param opener
+	 *            the new opener
+	 */
     void setOpener(HtmlRendererContext opener);
 
-    /**
-     * Gets the status.
-     *
-     * @return the status
-     */
+    /** Gets the status.
+	 *
+	 * @return the status
+	 */
     String getStatus();
 
-    /**
-     * Sets the status.
-     *
-     * @param message the new status
-     */
+    /** Sets the status.
+	 *
+	 * @param message
+	 *            the new status
+	 */
     void setStatus(String message);
 
-    /**
-     * Gets the top.
-     *
-     * @return the top
-     */
+    /** Gets the top.
+	 *
+	 * @return the top
+	 */
     HtmlRendererContext getTop();
 
     /**
@@ -368,32 +364,28 @@ public interface HtmlRendererContext {
      */
     void reload();
 
-    /**
-     * Gets the history length.
-     *
-     * @return the history length
-     */
+    /** Gets the history length.
+	 *
+	 * @return the history length
+	 */
     int getHistoryLength();
 
-    /**
-     * Gets the current url.
-     *
-     * @return the current url
-     */
+    /** Gets the current url.
+	 *
+	 * @return the current url
+	 */
     String getCurrentURL();
 
-    /**
-     * Gets the next url.
-     *
-     * @return the next url
-     */
+    /** Gets the next url.
+	 *
+	 * @return the next url
+	 */
     String getNextURL();
 
-    /**
-     * Gets the previous url.
-     *
-     * @return the previous url
-     */
+    /** Gets the previous url.
+	 *
+	 * @return the previous url
+	 */
     String getPreviousURL();
 
     /**
@@ -418,10 +410,10 @@ public interface HtmlRendererContext {
      */
     void goToHistoryURL(String url);
 
-     /**
-      * Sets the cursor.
-      *
-      * @param cursorOpt the new cursor
-      */
+     /** Sets the cursor.
+		 *
+		 * @param cursorOpt
+		 *            the new cursor
+		 */
      void setCursor(Optional<Cursor> cursorOpt);
 }

@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either verion 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.gui;
 
@@ -119,12 +125,11 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
     private static volatile WindowFactory windowFactory = DefaultWindowFactory
             .getInstance();
 
-    /**
-     * Changes the {@link WindowFactory} that is used to create browser windows.
-     *
-     * @param wf
-     *            the new window factory
-     */
+    /** Sets the window factory.
+	 *
+	 * @param wf
+	 *            the new window factory
+	 */
     public static void setWindowFactory(WindowFactory wf) {
         windowFactory = wf;
     }
@@ -198,20 +203,18 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
         }
     }
 
-    /**
-     * Checks if is closed.
-     *
-     * @return true, if is closed
-     */
+    /** Checks if is closed.
+	 *
+	 * @return true, if is closed
+	 */
     public boolean isClosed() {
         return !this.browserWindow.isDisplayable();
     }
 
-    /**
-     * Gets the frame panel.
-     *
-     * @return the frame panel
-     */
+    /** Gets the frame panel.
+	 *
+	 * @return the frame panel
+	 */
     public FramePanel getFramePanel() {
         return this.framePanel;
     }
@@ -956,20 +959,18 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
         }
     }
 
-    /**
-     * Gets the address bar components.
-     *
-     * @return the address bar components
-     */
+    /** Gets the address bar components.
+	 *
+	 * @return the address bar components
+	 */
     public Collection<Component> getAddressBarComponents() {
         return addressBarComponents;
     }
 
-    /**
-     * Gets the menus.
-     *
-     * @return the menus
-     */
+    /** Gets the menus.
+	 *
+	 * @return the menus
+	 */
     public Collection<JMenu> getMenus() {
         return this.menus;
     }
@@ -978,38 +979,34 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
     // return sharedMenuItems;
     //}
 
-    /**
-     * Gets the shared toolbar components.
-     *
-     * @return the shared toolbar components
-     */
+    /** Gets the shared toolbar components.
+	 *
+	 * @return the shared toolbar components
+	 */
     public Collection<Component> getSharedToolbarComponents() {
         return sharedToolbarComponents;
     }
 
-    /**
-     * Gets the status bar components.
-     *
-     * @return the status bar components
-     */
+    /** Gets the status bar components.
+	 *
+	 * @return the status bar components
+	 */
     public Collection<Component> getStatusBarComponents() {
         return statusBarComponents;
     }
 
-    /**
-     * Gets the tool bars.
-     *
-     * @return the tool bars
-     */
+    /** Gets the tool bars.
+	 *
+	 * @return the tool bars
+	 */
     public Collection<Component> getToolBars() {
         return toolBars;
     }
 
-    /**
-     * Gets the component lock.
-     *
-     * @return the component lock
-     */
+    /** Gets the component lock.
+	 *
+	 * @return the component lock
+	 */
     public Object getComponentLock() {
         return this;
     }

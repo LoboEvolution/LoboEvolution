@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Nov 19, 2005
@@ -120,6 +126,11 @@ public class SimpleHttpRequest extends AbstractBean {
 	 * @see org.lobobrowser.html.HttpRequest#getReadyState()
 	 */
 
+	/**
+	 * Gets the ready state.
+	 *
+	 * @return the ready state
+	 */
 	public synchronized ReadyState getReadyState() {
 		return this.readyState;
 	}
@@ -130,6 +141,11 @@ public class SimpleHttpRequest extends AbstractBean {
 	 * @see org.lobobrowser.html.HttpRequest#getResponseText()
 	 */
 
+	/**
+	 * Gets the response text.
+	 *
+	 * @return the response text
+	 */
 	public synchronized String getResponseText() {
 		byte[] bytes = this.responseBytes;
 		java.net.URLConnection connection = this.connection;
@@ -157,6 +173,11 @@ public class SimpleHttpRequest extends AbstractBean {
 	 * @see org.lobobrowser.html.HttpRequest#getResponseXML()
 	 */
 
+	/**
+	 * Gets the response xml.
+	 *
+	 * @return the response xml
+	 */
 	public synchronized Document getResponseXML() {
 		byte[] bytes = this.responseBytes;
 		if (bytes == null) {
@@ -177,6 +198,11 @@ public class SimpleHttpRequest extends AbstractBean {
 	 * @see org.lobobrowser.html.HttpRequest#getResponseBytes()
 	 */
 
+	/**
+	 * Gets the response bytes.
+	 *
+	 * @return the response bytes
+	 */
 	public synchronized byte[] getResponseBytes() {
 		return this.responseBytes;
 	}
@@ -187,6 +213,11 @@ public class SimpleHttpRequest extends AbstractBean {
 	 * @see org.lobobrowser.html.HttpRequest#getResponseImage()
 	 */
 
+	/**
+	 * Gets the response image.
+	 *
+	 * @return the response image
+	 */
 	public synchronized Image getResponseImage() {
 		byte[] bytes = this.responseBytes;
 		if (bytes == null) {
@@ -201,6 +232,11 @@ public class SimpleHttpRequest extends AbstractBean {
 	 * @see org.lobobrowser.html.HttpRequest#getStatus()
 	 */
 
+	/**
+	 * Gets the status.
+	 *
+	 * @return the status
+	 */
 	public synchronized int getStatus() {
 		return this.status;
 	}
@@ -211,6 +247,11 @@ public class SimpleHttpRequest extends AbstractBean {
 	 * @see org.lobobrowser.html.HttpRequest#getStatusText()
 	 */
 
+	/**
+	 * Gets the status text.
+	 *
+	 * @return the status text
+	 */
 	public synchronized String getStatusText() {
 		return this.statusText;
 	}
@@ -243,6 +284,11 @@ public class SimpleHttpRequest extends AbstractBean {
 	 * @see org.lobobrowser.html.HttpRequest#getAllResponseHeaders()
 	 */
 
+	/**
+	 * Gets the all response headers.
+	 *
+	 * @return the all response headers
+	 */
 	public synchronized String getAllResponseHeaders() {
 		return this.responseHeaders;
 	}
@@ -363,8 +409,7 @@ public class SimpleHttpRequest extends AbstractBean {
 	}
 
 	/**
-	 * This is the charset used to post data provided to {@link #send(String)}.
-	 * It returns "UTF-8" unless overridden.
+	 * Gets the post charset.
 	 *
 	 * @return the post charset
 	 */
@@ -445,6 +490,11 @@ public class SimpleHttpRequest extends AbstractBean {
 		super.removePropertyChangeListener("readyState", listener);
 	}
 
+	/**
+	 * Gets the ready state change listeners.
+	 *
+	 * @return the ready state change listeners
+	 */
 	public PropertyChangeListener[] getReadyStateChangeListeners() {
 		return super.getPropertyChangeListeners("readyState");
 	}

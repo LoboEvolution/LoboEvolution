@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either verion 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Jun 12, 2005
@@ -74,11 +80,10 @@ public final class CacheManager implements Runnable {
     /** The instance. */
     private static CacheManager instance;
 
-    /**
-     * Gets the single instance of CacheManager.
-     *
-     * @return single instance of CacheManager
-     */
+    /** Gets the instance.
+	 *
+	 * @return the instance
+	 */
     public static CacheManager getInstance() {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
@@ -138,34 +143,31 @@ public final class CacheManager implements Runnable {
         }
     }
 
-    /**
-     * Sets the max transient cache size.
-     *
-     * @param approxMaxSize
-     *            the new max transient cache size
-     */
+    /** Sets the max transient cache size.
+	 *
+	 * @param approxMaxSize
+	 *            the new max transient cache size
+	 */
     public void setMaxTransientCacheSize(int approxMaxSize) {
         synchronized (this.transientCache) {
             this.transientCache.setApproxMaxSize(approxMaxSize);
         }
     }
 
-    /**
-     * Gets the max transient cache size.
-     *
-     * @return the max transient cache size
-     */
+    /** Gets the max transient cache size.
+	 *
+	 * @return the max transient cache size
+	 */
     public int getMaxTransientCacheSize() {
         synchronized (this.transientCache) {
             return this.transientCache.getApproxMaxSize();
         }
     }
 
-    /**
-     * Gets the transient cache info.
-     *
-     * @return the transient cache info
-     */
+    /** Gets the transient cache info.
+	 *
+	 * @return the transient cache info
+	 */
     public CacheInfo getTransientCacheInfo() {
         long approxSize;
         int numEntries;
@@ -420,11 +422,10 @@ public final class CacheManager implements Runnable {
         }
     }
 
-    /**
-     * Gets the max cache size.
-     *
-     * @return the max cache size
-     */
+    /** Gets the max cache size.
+	 *
+	 * @return the max cache size
+	 */
     private long getMaxCacheSize() {
         return MAX_CACHE_SIZE;
     }
@@ -478,13 +479,12 @@ public final class CacheManager implements Runnable {
         }
     }
 
-    /**
-     * Gets the cache store info.
-     *
-     * @return the cache store info
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
+    /** Gets the cache store info.
+	 *
+	 * @return the cache store info
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
     private CacheStoreInfo getCacheStoreInfo() throws IOException {
         CacheStoreInfo csinfo = new CacheStoreInfo();
         File cacheRoot = StorageManager.getInstance().getCacheRoot();

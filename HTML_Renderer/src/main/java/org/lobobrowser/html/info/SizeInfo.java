@@ -1,3 +1,23 @@
+/*
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ */
 package org.lobobrowser.html.info;
 
 import java.io.Serializable;
@@ -9,6 +29,7 @@ import org.lobobrowser.html.style.HtmlLength;
  */
 public class SizeInfo implements Serializable {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3550617662873087308L;
 
 	/** The html length. */
@@ -27,66 +48,84 @@ public class SizeInfo implements Serializable {
 	private int offset;
 
 	/**
-	 * @return the htmlLength
+	 * Gets the html length.
+	 *
+	 * @return the html length
 	 */
 	public HtmlLength getHtmlLength() {
 		return htmlLength;
 	}
 
 	/**
+	 * Sets the html length.
+	 *
 	 * @param htmlLength
-	 *            the htmlLength to set
+	 *            the new html length
 	 */
 	public void setHtmlLength(HtmlLength htmlLength) {
 		this.htmlLength = htmlLength;
 	}
 
 	/**
-	 * @return the actualSize
+	 * Gets the actual size.
+	 *
+	 * @return the actual size
 	 */
 	public int getActualSize() {
 		return actualSize;
 	}
 
 	/**
+	 * Sets the actual size.
+	 *
 	 * @param actualSize
-	 *            the actualSize to set
+	 *            the new actual size
 	 */
 	public void setActualSize(int actualSize) {
 		this.actualSize = actualSize;
 	}
 
 	/**
-	 * @return the layoutSize
+	 * Gets the layout size.
+	 *
+	 * @return the layout size
 	 */
 	public int getLayoutSize() {
 		return layoutSize;
 	}
 
 	/**
+	 * Sets the layout size.
+	 *
 	 * @param layoutSize
-	 *            the layoutSize to set
+	 *            the new layout size
 	 */
 	public void setLayoutSize(int layoutSize) {
 		this.layoutSize = layoutSize;
 	}
 
 	/**
-	 * @return the minSize
+	 * Gets the min size.
+	 *
+	 * @return the min size
 	 */
 	public int getMinSize() {
 		return minSize;
 	}
 
 	/**
+	 * Sets the min size.
+	 *
 	 * @param minSize
-	 *            the minSize to set
+	 *            the new min size
 	 */
 	public void setMinSize(int minSize) {
 		this.minSize = minSize;
 	}
 
 	/**
+	 * Gets the offset.
+	 *
 	 * @return the offset
 	 */
 	public int getOffset() {
@@ -94,8 +133,10 @@ public class SizeInfo implements Serializable {
 	}
 
 	/**
+	 * Sets the offset.
+	 *
 	 * @param offset
-	 *            the offset to set
+	 *            the new offset
 	 */
 	public void setOffset(int offset) {
 		this.offset = offset;

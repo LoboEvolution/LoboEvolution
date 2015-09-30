@@ -1,22 +1,22 @@
 /*
- * Copyright 1994-2006 The Lobo Project. Copyright 2014 Lobo Evolution. All
- * rights reserved. Redistribution and use in source and binary forms, with or
- * without modification, are permitted provided that the following conditions
- * are met: Redistributions of source code must retain the above copyright
- * notice, this list of conditions and the following disclaimer. Redistributions
- * in binary form must reproduce the above copyright notice, this list of
- * conditions and the following disclaimer in the documentation and/or other
- * materials provided with the distribution. THIS SOFTWARE IS PROVIDED BY THE
- * LOBO PROJECT ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
- * NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
- * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE FREEBSD PROJECT OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.ua;
 
@@ -114,11 +114,10 @@ public interface NavigatorWindow {
      */
     void removeNavigatorWindowListener(NavigatorWindowListener listener);
 
-    /**
-     * Gets the top frame of this window.
-     *
-     * @return the top frame
-     */
+    /** Gets the top frame.
+	 *
+	 * @return the top frame
+	 */
     NavigatorFrame getTopFrame();
 
     /**
@@ -152,11 +151,10 @@ public interface NavigatorWindow {
      */
     void dispose();
 
-    /**
-     * Gets the navigator for the window.
-     *
-     * @return the user agent
-     */
+    /** Gets the user agent.
+	 *
+	 * @return the user agent
+	 */
     UserAgent getUserAgent();
 
     /**
@@ -240,33 +238,27 @@ public interface NavigatorWindow {
      */
     boolean goTo(NavigationEntry entry);
 
-    /**
-     * Gets the back navigation entries.
-     *
-     * @return the back navigation entries
-     */
+    /** Gets the back navigation entries.
+	 *
+	 * @return the back navigation entries
+	 */
     NavigationEntry[] getBackNavigationEntries();
 
-    /**
-     * Gets the forward navigation entries.
-     *
-     * @return the forward navigation entries
-     */
+    /** Gets the forward navigation entries.
+	 *
+	 * @return the forward navigation entries
+	 */
     NavigationEntry[] getForwardNavigationEntries();
 
-    /**
-     * Gets the current navigation entry.
-     *
-     * @return the current navigation entry
-     */
+    /** Gets the current navigation entry.
+	 *
+	 * @return the current navigation entry
+	 */
     NavigationEntry getCurrentNavigationEntry();
 
-    /**
-     * Gets the <code>java.awt.Frame</code> instance associated with this
-     * <code>NavigatorWindow</code>. In most cases this method will return an
-     * instance of <code>javax.swing.JFrame</code>.
-     *
-     * @return the awt window
-     */
+    /** Gets the awt window.
+	 *
+	 * @return the awt window
+	 */
     Window getAwtWindow();
 }

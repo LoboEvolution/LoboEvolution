@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.html.info;
 
@@ -27,6 +33,7 @@ import org.w3c.dom.css.CSSStyleRule;
  */
 public class StyleRuleInfo implements Serializable {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 9165715430607111555L;
 
 	/** The style rule. */
@@ -182,15 +189,19 @@ public class StyleRuleInfo implements Serializable {
 	}
 
 	/**
-	 * @return the styleRule
+	 * Gets the style rule.
+	 *
+	 * @return the style rule
 	 */
 	public CSSStyleRule getStyleRule() {
 		return styleRule;
 	}
 
 	/**
+	 * Sets the style rule.
+	 *
 	 * @param styleRule
-	 *            the styleRule to set
+	 *            the new style rule
 	 */
 	public void setStyleRule(CSSStyleRule styleRule) {
 		this.styleRule = styleRule;

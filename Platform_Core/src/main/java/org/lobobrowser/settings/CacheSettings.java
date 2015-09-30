@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either verion 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.settings;
 
@@ -55,11 +61,10 @@ public class CacheSettings implements Serializable {
         instance = ins;
     }
 
-    /**
-     * Gets the class singleton.
-     *
-     * @return single instance of CacheSettings
-     */
+    /** Gets the Constant instance.
+	 *
+	 * @return the Constant instance
+	 */
     public static CacheSettings getInstance() {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
@@ -96,21 +101,19 @@ public class CacheSettings implements Serializable {
         this.setDefaultCacheExpirationOffset(60);
     }
 
-    /**
-     * Gets the max ram cache size.
-     *
-     * @return the max ram cache size
-     */
+    /** Gets the max ram cache size.
+	 *
+	 * @return the max ram cache size
+	 */
     public int getMaxRAMCacheSize() {
         return CacheManager.getInstance().getMaxTransientCacheSize();
     }
 
-    /**
-     * Sets the approximate maximum RAM cache size.
-     *
-     * @param maxRAMCacheSize
-     *            The maximum cache size in bytes.
-     */
+    /** Sets the max ram cache size.
+	 *
+	 * @param maxRAMCacheSize
+	 *            the new max ram cache size
+	 */
     public void setMaxRAMCacheSize(int maxRAMCacheSize) {
         CacheManager.getInstance().setMaxTransientCacheSize(maxRAMCacheSize);
     }
@@ -118,23 +121,19 @@ public class CacheSettings implements Serializable {
     /** The default cache expiration offset. */
     private int defaultCacheExpirationOffset;
 
-    /**
-     * Gets the default cache expiration offset.
-     *
-     * @return the default cache expiration offset
-     */
+    /** Gets the default cache expiration offset.
+	 *
+	 * @return the default cache expiration offset
+	 */
     public int getDefaultCacheExpirationOffset() {
         return defaultCacheExpirationOffset;
     }
 
-    /**
-     * Sets the default offset in seconds added to the response cache timestamp
-     * to get the expiration time of a document. This is used with cacheable
-     * documents when max-age and the Expires header are missing.
-     *
-     * @param defaultCacheExpirationOffset
-     *            the new default cache expiration offset
-     */
+    /** Sets the default cache expiration offset.
+	 *
+	 * @param defaultCacheExpirationOffset
+	 *            the new default cache expiration offset
+	 */
     public void setDefaultCacheExpirationOffset(int defaultCacheExpirationOffset) {
         this.defaultCacheExpirationOffset = defaultCacheExpirationOffset;
     }

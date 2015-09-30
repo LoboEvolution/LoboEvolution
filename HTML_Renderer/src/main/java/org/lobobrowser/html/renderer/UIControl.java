@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Nov 5, 2005
@@ -29,12 +35,11 @@ import org.lobobrowser.html.control.RUIControl;
  */
 public abstract interface UIControl {
 
-    /**
-     * Sets the RUI control.
-     *
-     * @param ruicontrol
-     *            the new RUI control
-     */
+    /** Sets the RUI control.
+	 *
+	 * @param ruicontrol
+	 *            the new RUI control
+	 */
     void setRUIControl(RUIControl ruicontrol);
 
     /**
@@ -50,18 +55,16 @@ public abstract interface UIControl {
      */
     void reset(int availWidth, int availHeight);
 
-    /**
-     * Gets the preferred size.
-     *
-     * @return the preferred size
-     */
+    /** Gets the preferred size.
+	 *
+	 * @return the preferred size
+	 */
     Dimension getPreferredSize();
 
-    /**
-     * Gets the v align.
-     *
-     * @return the v align
-     */
+    /** Gets the v align.
+	 *
+	 * @return the v align
+	 */
     int getVAlign();
 
     /**
@@ -83,11 +86,10 @@ public abstract interface UIControl {
      */
     void invalidate();
 
-    /**
-     * Gets the background color.
-     *
-     * @return the background color
-     */
+    /** Gets the background color.
+	 *
+	 * @return the background color
+	 */
     Color getBackgroundColor();
 
     // boolean paintSelection(Graphics g, boolean inSelection,
@@ -100,10 +102,9 @@ public abstract interface UIControl {
      */
     void paint(Graphics g);
 
-    /**
-     * Gets the component.
-     *
-     * @return the component
-     */
+    /** Gets the component.
+	 *
+	 * @return the component
+	 */
     Component getComponent();
 }

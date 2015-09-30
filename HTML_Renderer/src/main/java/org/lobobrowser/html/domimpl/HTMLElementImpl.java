@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Sep 3, 2005
@@ -134,8 +140,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	}
 
 	/**
-	 * Gets the style object associated with the . It may return null only if
-	 * the type of element does not handle stylesheets.
+	 * Gets the current style.
 	 *
 	 * @return the current style
 	 */
@@ -610,9 +615,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	}
 
 	/**
-	 * Gets the pseudo-element lowercase names currently applicable to this
-	 * element. Method must return <code>null</code> if there are no such
-	 * pseudo-elements.
+	 * Gets the pseudo names.
 	 *
 	 * @return the pseudo names
 	 */
@@ -682,8 +685,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	}
 
 	/**
-	 * Gets form input due to the current element. It should return
-	 * <code>null</code> except when the element is a form input element.
+	 * Gets the form inputs.
 	 *
 	 * @return the form inputs
 	 */

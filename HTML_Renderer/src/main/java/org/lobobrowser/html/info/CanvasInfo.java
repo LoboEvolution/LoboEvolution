@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either verion 2 of the
- * License; or (at your option) any later version. This program is distributed
- * in the hope that it will be useful; but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not;
- * write to the Free Software Foundation; Inc.; 51 Franklin St; Fifth Floor;
- * Boston; MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.html.info;
 
@@ -29,6 +35,7 @@ import org.lobobrowser.w3c.html.HTMLImageElement;
  */
 public class CanvasInfo implements Serializable {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4173240031155753085L;
 
 	/** The x. */
@@ -140,7 +147,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the x.
 	 *
 	 * @param x
-	 *            the x to set
+	 *            the new x
 	 */
 	public void setX(int x) {
 		this.x = x;
@@ -159,7 +166,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the y.
 	 *
 	 * @param y
-	 *            the y to set
+	 *            the new y
 	 */
 	public void setY(int y) {
 		this.y = y;
@@ -178,7 +185,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the width.
 	 *
 	 * @param width
-	 *            the width to set
+	 *            the new width
 	 */
 	public void setWidth(int width) {
 		this.width = width;
@@ -197,7 +204,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the height.
 	 *
 	 * @param height
-	 *            the height to set
+	 *            the new height
 	 */
 	public void setHeight(int height) {
 		this.height = height;
@@ -206,7 +213,7 @@ public class CanvasInfo implements Serializable {
 	/**
 	 * Gets the line width.
 	 *
-	 * @return the lineWidth
+	 * @return the line width
 	 */
 	public int getLineWidth() {
 		return lineWidth;
@@ -216,26 +223,26 @@ public class CanvasInfo implements Serializable {
 	 * Sets the line width.
 	 *
 	 * @param lineWidth
-	 *            the lineWidth to set
+	 *            the new line width
 	 */
 	public void setLineWidth(int lineWidth) {
 		this.lineWidth = lineWidth;
 	}
 
 	/**
-	 * Gets the miter limit.
+	 * Gets the Miter Limit.
 	 *
-	 * @return the miterLimit
+	 * @return the Miter Limit
 	 */
 	public int getMiterLimit() {
 		return miterLimit;
 	}
 
 	/**
-	 * Sets the miter limit.
+	 * Sets the Miter Limit.
 	 *
 	 * @param miterLimit
-	 *            the miterLimit to set
+	 *            the new Miter Limit
 	 */
 	public void setMiterLimit(int miterLimit) {
 		this.miterLimit = miterLimit;
@@ -244,7 +251,7 @@ public class CanvasInfo implements Serializable {
 	/**
 	 * Gets the max width.
 	 *
-	 * @return the maxWidth
+	 * @return the max width
 	 */
 	public int getMaxWidth() {
 		return maxWidth;
@@ -254,83 +261,83 @@ public class CanvasInfo implements Serializable {
 	 * Sets the max width.
 	 *
 	 * @param maxWidth
-	 *            the maxWidth to set
+	 *            the new max width
 	 */
 	public void setMaxWidth(int maxWidth) {
 		this.maxWidth = maxWidth;
 	}
 
 	/**
-	 * Gets the scale x.
+	 * Gets the Scale x.
 	 *
-	 * @return the scaleX
+	 * @return the Scale x
 	 */
 	public int getScaleX() {
 		return scaleX;
 	}
 
 	/**
-	 * Sets the scale x.
+	 * Sets the Scale x.
 	 *
 	 * @param scaleX
-	 *            the scaleX to set
+	 *            the new Scale x
 	 */
 	public void setScaleX(int scaleX) {
 		this.scaleX = scaleX;
 	}
 
 	/**
-	 * Gets the scale y.
+	 * Gets the Scale Y.
 	 *
-	 * @return the scaleY
+	 * @return the Scale Y
 	 */
 	public int getScaleY() {
 		return scaleY;
 	}
 
 	/**
-	 * Sets the scale y.
+	 * Sets the Scale Y.
 	 *
 	 * @param scaleY
-	 *            the scaleY to set
+	 *            the new Scale Y
 	 */
 	public void setScaleY(int scaleY) {
 		this.scaleY = scaleY;
 	}
 
 	/**
-	 * Gets the translate x.
+	 * Gets the Translate x.
 	 *
-	 * @return the translateX
+	 * @return the Translate x
 	 */
 	public int getTranslateX() {
 		return translateX;
 	}
 
 	/**
-	 * Sets the translate x.
+	 * Sets the Translate x.
 	 *
 	 * @param translateX
-	 *            the translateX to set
+	 *            the new Translate x
 	 */
 	public void setTranslateX(int translateX) {
 		this.translateX = translateX;
 	}
 
 	/**
-	 * Gets the translate y.
+	 * Gets the Translate Y.
 	 *
-	 * @return the translateY
+	 * @return the Translate Y
 	 */
 	public int getTranslateY() {
 		return translateY;
 	}
 
 	/**
-	 * Sets the translate y.
+	 * Sets the Translate Y.
 	 *
 	 * @param translateY
-	 *            the translateY to set
+	 *            the new Translate Y
 	 */
 	public void setTranslateY(int translateY) {
 		this.translateY = translateY;
@@ -349,7 +356,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the method.
 	 *
 	 * @param method
-	 *            the method to set
+	 *            the new method
 	 */
 	public void setMethod(int method) {
 		this.method = method;
@@ -368,7 +375,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the sx.
 	 *
 	 * @param sx
-	 *            the sx to set
+	 *            the new sx
 	 */
 	public void setSx(int sx) {
 		this.sx = sx;
@@ -387,7 +394,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the sy.
 	 *
 	 * @param sy
-	 *            the sy to set
+	 *            the new sy
 	 */
 	public void setSy(int sy) {
 		this.sy = sy;
@@ -406,7 +413,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the sw.
 	 *
 	 * @param sw
-	 *            the sw to set
+	 *            the new sw
 	 */
 	public void setSw(int sw) {
 		this.sw = sw;
@@ -425,7 +432,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the sh.
 	 *
 	 * @param sh
-	 *            the sh to set
+	 *            the new sh
 	 */
 	public void setSh(int sh) {
 		this.sh = sh;
@@ -444,7 +451,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the dx.
 	 *
 	 * @param dx
-	 *            the dx to set
+	 *            the new dx
 	 */
 	public void setDx(int dx) {
 		this.dx = dx;
@@ -463,7 +470,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the dy.
 	 *
 	 * @param dy
-	 *            the dy to set
+	 *            the new dy
 	 */
 	public void setDy(int dy) {
 		this.dy = dy;
@@ -482,7 +489,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the dw.
 	 *
 	 * @param dw
-	 *            the dw to set
+	 *            the new dw
 	 */
 	public void setDw(int dw) {
 		this.dw = dw;
@@ -501,7 +508,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the dh.
 	 *
 	 * @param dh
-	 *            the dh to set
+	 *            the new dh
 	 */
 	public void setDh(int dh) {
 		this.dh = dh;
@@ -520,7 +527,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the rotate.
 	 *
 	 * @param rotate
-	 *            the rotate to set
+	 *            the new rotate
 	 */
 	public void setRotate(Double rotate) {
 		this.rotate = rotate;
@@ -529,7 +536,7 @@ public class CanvasInfo implements Serializable {
 	/**
 	 * Gets the global alpha.
 	 *
-	 * @return the globalAlpha
+	 * @return the global alpha
 	 */
 	public AlphaComposite getGlobalAlpha() {
 		return globalAlpha;
@@ -539,7 +546,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the global alpha.
 	 *
 	 * @param globalAlpha
-	 *            the globalAlpha to set
+	 *            the new global alpha
 	 */
 	public void setGlobalAlpha(AlphaComposite globalAlpha) {
 		this.globalAlpha = globalAlpha;
@@ -558,45 +565,45 @@ public class CanvasInfo implements Serializable {
 	 * Sets the text.
 	 *
 	 * @param text
-	 *            the text to set
+	 *            the new text
 	 */
 	public void setText(String text) {
 		this.text = text;
 	}
 
 	/**
-	 * Gets the line cap.
+	 * Gets the Line Cap.
 	 *
-	 * @return the lineCap
+	 * @return the Line Cap
 	 */
 	public String getLineCap() {
 		return lineCap;
 	}
 
 	/**
-	 * Sets the line cap.
+	 * Sets the Line Cap.
 	 *
 	 * @param lineCap
-	 *            the lineCap to set
+	 *            the new Line Cap
 	 */
 	public void setLineCap(String lineCap) {
 		this.lineCap = lineCap;
 	}
 
 	/**
-	 * Gets the line join.
+	 * Gets the Line Join.
 	 *
-	 * @return the lineJoin
+	 * @return the Line Join
 	 */
 	public String getLineJoin() {
 		return lineJoin;
 	}
 
 	/**
-	 * Sets the line join.
+	 * Sets the Line Join.
 	 *
 	 * @param lineJoin
-	 *            the lineJoin to set
+	 *            the new Line Join
 	 */
 	public void setLineJoin(String lineJoin) {
 		this.lineJoin = lineJoin;
@@ -605,7 +612,7 @@ public class CanvasInfo implements Serializable {
 	/**
 	 * Gets the stroke style.
 	 *
-	 * @return the strokeStyle
+	 * @return the stroke style
 	 */
 	public Color getStrokeStyle() {
 		return strokeStyle;
@@ -615,7 +622,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the stroke style.
 	 *
 	 * @param strokeStyle
-	 *            the strokeStyle to set
+	 *            the new stroke style
 	 */
 	public void setStrokeStyle(Color strokeStyle) {
 		this.strokeStyle = strokeStyle;
@@ -624,7 +631,7 @@ public class CanvasInfo implements Serializable {
 	/**
 	 * Gets the fill style.
 	 *
-	 * @return the fillStyle
+	 * @return the fill style
 	 */
 	public Color getFillStyle() {
 		return fillStyle;
@@ -634,7 +641,7 @@ public class CanvasInfo implements Serializable {
 	 * Sets the fill style.
 	 *
 	 * @param fillStyle
-	 *            the fillStyle to set
+	 *            the new fill style
 	 */
 	public void setFillStyle(Color fillStyle) {
 		this.fillStyle = fillStyle;
@@ -653,45 +660,45 @@ public class CanvasInfo implements Serializable {
 	 * Sets the font.
 	 *
 	 * @param font
-	 *            the font to set
+	 *            the new font
 	 */
 	public void setFont(Font font) {
 		this.font = font;
 	}
 
 	/**
-	 * Gets the image.
+	 * Gets the html image element.
 	 *
-	 * @return the image
+	 * @return the html image element
 	 */
 	public HTMLImageElement getImage() {
 		return image;
 	}
 
 	/**
-	 * Sets the image.
+	 * Sets the html image element.
 	 *
 	 * @param image
-	 *            the image to set
+	 *            the new html image element
 	 */
 	public void setImage(HTMLImageElement image) {
 		this.image = image;
 	}
 
 	/**
-	 * Gets the path.
+	 * Gets the Genearl path.
 	 *
-	 * @return the path
+	 * @return the Genearl path
 	 */
 	public GeneralPath getPath() {
 		return path;
 	}
 
 	/**
-	 * Sets the path.
+	 * Sets the Genearl path.
 	 *
 	 * @param path
-	 *            the path to set
+	 *            the new Genearl path
 	 */
 	public void setPath(GeneralPath path) {
 		this.path = path;
@@ -700,7 +707,7 @@ public class CanvasInfo implements Serializable {
 	/**
 	 * Gets the linear gradient.
 	 *
-	 * @return the linearGradient
+	 * @return the linear gradient
 	 */
 	public LinearGradientPaint getLinearGradient() {
 		return linearGradient;
@@ -710,22 +717,26 @@ public class CanvasInfo implements Serializable {
 	 * Sets the linear gradient.
 	 *
 	 * @param linearGradient
-	 *            the linearGradient to set
+	 *            the new linear gradient
 	 */
 	public void setLinearGradient(LinearGradientPaint linearGradient) {
 		this.linearGradient = linearGradient;
 	}
 
 	/**
-	 * @return the affineTransform
+	 * Gets the Affine Transform.
+	 *
+	 * @return the Affine Transform
 	 */
 	public AffineTransform getAffineTransform() {
 		return affineTransform;
 	}
 
 	/**
+	 * Sets the Affine Transform.
+	 *
 	 * @param affineTransform
-	 *            the affineTransform to set
+	 *            the new Affine Transform
 	 */
 	public void setAffineTransform(AffineTransform affineTransform) {
 		this.affineTransform = affineTransform;

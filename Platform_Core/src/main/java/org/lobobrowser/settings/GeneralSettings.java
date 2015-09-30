@@ -1,16 +1,22 @@
 /*
- * GNU GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project. Copyright (C)
- * 2014 - 2015 Lobo Evolution This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public
- * License as published by the Free Software Foundation; either verion 2 of the
- * License, or (at your option) any later version. This program is distributed
- * in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
- * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details. You should have received
- * a copy of the GNU General Public License along with this library; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
- * Boston, MA 02110-1301 USA Contact info: lobochief@users.sourceforge.net;
- * ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.settings;
 
@@ -77,11 +83,10 @@ public class GeneralSettings implements java.io.Serializable {
         instance = ins;
     }
 
-    /**
-     * Gets the class singleton.
-     *
-     * @return single instance of GeneralSettings
-     */
+    /** Gets the Constant instance.
+	 *
+	 * @return the Constant instance
+	 */
     public static GeneralSettings getInstance() {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
@@ -130,12 +135,10 @@ public class GeneralSettings implements java.io.Serializable {
                 this.getClass().getSimpleName(), this);
     }
 
-    /**
-     * Gets URLs that the browser should open when it starts up.
-     *
-     * @return the startup ur ls
-     * @see #setStartupURLs(String[])
-     */
+    /** Gets the startup ur ls.
+	 *
+	 * @return the startup ur ls
+	 */
     public String[] getStartupURLs() {
         // Cannot return empty or null
         Collection<String> urls = this.startupURLs;
@@ -145,21 +148,19 @@ public class GeneralSettings implements java.io.Serializable {
         return urls.toArray(new String[0]);
     }
 
-    /**
-     * Sets the startup ur ls.
-     *
-     * @param urls
-     *            the new startup ur ls
-     */
+    /** Sets the startup ur ls.
+	 *
+	 * @param urls
+	 *            the new startup ur ls
+	 */
     public void setStartupURLs(String[] urls) {
         this.startupURLs = Arrays.asList(urls);
     }
 
-    /**
-     * Gets the initial window bounds.
-     *
-     * @return the initial window bounds
-     */
+    /** Gets the initial window bounds.
+	 *
+	 * @return the initial window bounds
+	 */
     public Rectangle getInitialWindowBounds() {
         Rectangle bounds = initialWindowBounds;
         if (bounds == null) {
@@ -175,71 +176,64 @@ public class GeneralSettings implements java.io.Serializable {
         return bounds;
     }
 
-    /**
-     * Sets the initial window bounds.
-     *
-     * @param initialWindowBounds
-     *            the new initial window bounds
-     */
+    /** Sets the initial window bounds.
+	 *
+	 * @param initialWindowBounds
+	 *            the new initial window bounds
+	 */
     public void setInitialWindowBounds(Rectangle initialWindowBounds) {
         this.initialWindowBounds = initialWindowBounds;
     }
 
-    /**
-     * Gets the ie version.
-     *
-     * @return the ie version
-     */
+    /** Gets the ie version.
+	 *
+	 * @return the ie version
+	 */
     public String getIeVersion() {
         return ieVersion;
     }
 
-    /**
-     * Sets the ie version.
-     *
-     * @param ieVersion
-     *            the new ie version
-     */
+    /** Sets the ie version.
+	 *
+	 * @param ieVersion
+	 *            the new ie version
+	 */
     public void setIeVersion(String ieVersion) {
         this.ieVersion = ieVersion;
         UserAgentImpl.getInstance().invalidateUserAgent();
     }
 
-    /**
-     * Checks if is spoof ie.
-     *
-     * @return true, if is spoof ie
-     */
+    /** Checks if is spoof ie.
+	 *
+	 * @return the spoof ie
+	 */
     public boolean isSpoofIE() {
         return spoofIE;
     }
 
-    /**
-     * Sets the spoof ie.
-     *
-     * @param spoofIE
-     *            the new spoof ie
-     */
+    /** Sets the spoof ie.
+	 *
+	 * @param spoofIE
+	 *            the new spoof ie
+	 */
     public void setSpoofIE(boolean spoofIE) {
         this.spoofIE = spoofIE;
         UserAgentImpl.getInstance().invalidateUserAgent();
     }
 
-    /**
-     * Gets the moz version.
-     *
-     * @return the moz version
-     */
+    /** Gets the moz version.
+	 *
+	 * @return the moz version
+	 */
     public String getMozVersion() {
         return mozVersion;
     }
 
-    /**
-     * Sets the moz version.
-     *
-     * @param mozVersion
-     *            the new moz version
-     */
+    /** Sets the moz version.
+	 *
+	 * @param mozVersion
+	 *            the new moz version
+	 */
     public void setMozVersion(String mozVersion) {
         this.mozVersion = mozVersion;
         UserAgentImpl.getInstance().invalidateUserAgent();

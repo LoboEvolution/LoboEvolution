@@ -1,16 +1,22 @@
 /*
- * GNU LESSER GENERAL PUBLIC LICENSE Copyright (C) 2006 The Lobo Project.
- * Copyright (C) 2014 - 2015 Lobo Evolution This library is free software; you
- * can redistribute it and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version. This
- * library is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details. You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- * Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Sep 3, 2005
@@ -97,22 +103,20 @@ Node, ModelNode {
         super();
     }
 
-    /**
-     * Sets the UI node.
-     *
-     * @param uiNode
-     *            the new UI node
-     */
+    /** Sets the UI node.
+	 *
+	 * @param uiNode
+	 *            the new UI node
+	 */
     public void setUINode(UINode uiNode) {
         // Called in GUI thread always.
         this.uiNode = uiNode;
     }
 
-    /**
-     * Gets the UI node.
-     *
-     * @return the UI node
-     */
+    /** Gets the UI node.
+	 *
+	 * @return the UI node
+	 */
     public UINode getUINode() {
         // Called in GUI thread always.
         return this.uiNode;
@@ -199,11 +203,10 @@ Node, ModelNode {
         return new DOMNodeListImpl(collection);
     }
 
-    /**
-     * Gets the children array.
-     *
-     * @return the children array
-     */
+    /** Gets the children array.
+	 *
+	 * @return the children array
+	 */
     public DOMNodeImpl[] getChildrenArray() {
         ArrayList<Node> nl = this.nodeList;
         synchronized (this.getTreeLock()) {
@@ -212,11 +215,10 @@ Node, ModelNode {
         }
     }
 
-    /**
-     * Gets the child count.
-     *
-     * @return the child count
-     */
+    /** Gets the child count.
+	 *
+	 * @return the child count
+	 */
     public int getChildCount() {
         ArrayList<Node> nl = this.nodeList;
         synchronized (this.getTreeLock()) {
@@ -227,11 +229,10 @@ Node, ModelNode {
     /** The children collection. */
     private ChildHTMLCollection childrenCollection;
 
-    /**
-     * Gets the children.
-     *
-     * @return the children
-     */
+    /** Gets the children.
+	 *
+	 * @return the children
+	 */
     public ChildHTMLCollection getChildren() {
         // Method required by JavaScript
         synchronized (this) {
@@ -373,11 +374,10 @@ Node, ModelNode {
         }
     }
 
-    /**
-     * Gets the node index.
-     *
-     * @return the node index
-     */
+    /** Gets the node index.
+	 *
+	 * @return the node index
+	 */
     private int getNodeIndex() {
         DOMNodeImpl parent = (DOMNodeImpl) this.getParentNode();
         return parent == null ? -1 : parent.getChildIndex(this);
@@ -484,12 +484,11 @@ Node, ModelNode {
         return this.document;
     }
 
-    /**
-     * Sets the owner document.
-     *
-     * @param value
-     *            the new owner document
-     */
+    /** Sets the owner document.
+	 *
+	 * @param value
+	 *            the new owner document
+	 */
     public void setOwnerDocument(Document value) {
         this.document = value;
         this.setTreeLock(value == null ? this : (Object) value);
@@ -1316,11 +1315,10 @@ Node, ModelNode {
         return this.getNodeName();
     }
 
-    /**
-     * Gets the user agent context.
-     *
-     * @return the user agent context
-     */
+    /** Gets the user agent context.
+	 *
+	 * @return the user agent context
+	 */
     public UserAgentContext getUserAgentContext() {
         Object doc = this.document;
         if (doc instanceof HTMLDocumentImpl) {
@@ -1330,11 +1328,10 @@ Node, ModelNode {
         }
     }
 
-    /**
-     * Gets the html renderer context.
-     *
-     * @return the html renderer context
-     */
+    /** Gets the html renderer context.
+	 *
+	 * @return the html renderer context
+	 */
     public HtmlRendererContext getHtmlRendererContext() {
         Object doc = this.document;
         if (doc instanceof HTMLDocumentImpl) {
@@ -1344,12 +1341,11 @@ Node, ModelNode {
         }
     }
 
-    /**
-     * Sets the parent impl.
-     *
-     * @param parent
-     *            the new parent impl
-     */
+    /** Sets the parent impl.
+	 *
+	 * @param parent
+	 *            the new parent impl
+	 */
     protected final void setParentImpl(Node parent) {
         // Call holding treeLock.
         this.parentNode = parent;
@@ -1361,11 +1357,10 @@ Node, ModelNode {
      * (non-Javadoc)
      * @see org.lobobrowser.html.render.RenderableContext#getAlignmentX()
      */
-    /**
-     * Gets the alignment x.
-     *
-     * @return the alignment x
-     */
+    /** Gets the alignment x.
+	 *
+	 * @return the alignment x
+	 */
     public float getAlignmentX() {
         // TODO: Removable method?
         return 0.5f;
@@ -1375,11 +1370,10 @@ Node, ModelNode {
      * (non-Javadoc)
      * @see org.lobobrowser.html.render.RenderableContext#getAlignmentY()
      */
-    /**
-     * Gets the alignment y.
-     *
-     * @return the alignment y
-     */
+    /** Gets the alignment y.
+	 *
+	 * @return the alignment y
+	 */
     public float getAlignmentY() {
         return 0.5f;
     }
@@ -1399,11 +1393,10 @@ Node, ModelNode {
         }
     }
 
-    /**
-     * Gets the document url.
-     *
-     * @return the document url
-     */
+    /** Gets the document url.
+	 *
+	 * @return the document url
+	 */
     public URL getDocumentURL() {
         Object doc = this.document;
         if (doc instanceof HTMLDocumentImpl) {
@@ -1664,11 +1657,10 @@ Node, ModelNode {
         }
     }
 
-    /**
-     * Gets the inner html.
-     *
-     * @return the inner html
-     */
+    /** Gets the inner html.
+	 *
+	 * @return the inner html
+	 */
     public String getInnerHTML() {
         StringBuffer buffer = new StringBuffer();
         synchronized (this) {
@@ -1716,12 +1708,10 @@ Node, ModelNode {
         return Strings.strictHtmlEncode(text, false);
     }
 
-    /**
-     * Attempts to convert the subtree starting at this point to a close text
-     * representation. BR elements are converted to line breaks, and so forth.
-     *
-     * @return the inner text
-     */
+    /** Gets the inner text.
+	 *
+	 * @return the inner text
+	 */
     public String getInnerText() {
         StringBuffer buffer = new StringBuffer();
         synchronized (this.getTreeLock()) {
@@ -1758,21 +1748,20 @@ Node, ModelNode {
         }
     }
 
-    /**
-     * Gets the tree lock.
-     *
-     * @return the tree lock
-     */
+    /** Gets the a tree lock is less deadlock-prone than a node-level lock.
+	 *
+	 * @return the a tree lock is less deadlock-prone than a node-level lock
+	 */
     public Object getTreeLock() {
         return treeLock;
     }
 
-    /**
-     * Sets the tree lock.
-     *
-     * @param treeLock
-     *            the new tree lock
-     */
+    /** Sets the a tree lock is less deadlock-prone than a node-level lock.
+	 *
+	 * @param treeLock
+	 *            the new a tree lock is less deadlock-prone than a node-level
+	 *            lock
+	 */
     public void setTreeLock(Object treeLock) {
         this.treeLock = treeLock;
     }

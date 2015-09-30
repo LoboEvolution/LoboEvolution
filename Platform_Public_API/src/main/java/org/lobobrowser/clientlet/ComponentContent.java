@@ -1,22 +1,22 @@
 /*
- * Copyright 1994-2006 The Lobo Project. Copyright 2014 Lobo Evolution. All
- * rights reserved. Redistribution and use in source and binary forms, with or
- * without modification, are permitted provided that the following conditions
- * are met: Redistributions of source code must retain the above copyright
- * notice, this list of conditions and the following disclaimer. Redistributions
- * in binary form must reproduce the above copyright notice, this list of
- * conditions and the following disclaimer in the documentation and/or other
- * materials provided with the distribution. THIS SOFTWARE IS PROVIDED BY THE
- * LOBO PROJECT ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
- * NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
- * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE FREEBSD PROJECT OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2015 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 2 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.clientlet;
 
@@ -31,25 +31,22 @@ import java.awt.Component;
  */
 public interface ComponentContent {
 
-    /**
-     * Gets the component.
-     *
-     * @return the component
-     */
+    /** Gets the component.
+	 *
+	 * @return the component
+	 */
     Component getComponent();
 
-    /**
-     * Gets the title.
-     *
-     * @return the title
-     */
+    /** Gets the title.
+	 *
+	 * @return the title
+	 */
     String getTitle();
 
-    /**
-     * Gets the description.
-     *
-     * @return the description
-     */
+    /** Gets the description.
+	 *
+	 * @return the description
+	 */
     String getDescription();
 
     /**
@@ -68,11 +65,10 @@ public interface ComponentContent {
      */
     boolean copy();
 
-    /**
-     * Gets the source code associated with the content.
-     *
-     * @return the source code
-     */
+    /** Gets the source code.
+	 *
+	 * @return the source code
+	 */
     String getSourceCode();
 
     /** Called after the content has been added to a container for display. */
@@ -84,23 +80,16 @@ public interface ComponentContent {
      */
     void removeNotify();
 
-    /**
-     * Gets an implementation-dependent object that represents the content. For
-     * example, if the content is HTML, the object returned by this method may
-     * be of type HTMLDocument.
-     *
-     * @return the content object
-     */
+    /** Gets the content object.
+	 *
+	 * @return the content object
+	 */
     Object getContentObject();
 
-    /**
-     * Gets a mime-type that can be said to be associated with the object
-     * returned by {@link #getContentObject()}. This may differ from the
-     * mime-type of the response that produced the content, and it may also be
-     * <code>null</code>.
-     *
-     * @return the mime type
-     */
+    /** Gets the mime type.
+	 *
+	 * @return the mime type
+	 */
     String getMimeType();
 
     /**
