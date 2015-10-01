@@ -37,6 +37,8 @@ import java.util.logging.Logger;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.StyleRuleInfo;
+import org.lobobrowser.html.style.selectors.SelectorMatcher;
+import org.lobobrowser.html.style.selectors.SimpleSelector;
 import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
@@ -92,6 +94,8 @@ public class StyleSheetAggregator {
 
 	/** The rules by element. */
 	private final Map<String, Collection<StyleRuleInfo>> rulesByElement = new HashMap<String, Collection<StyleRuleInfo>>();
+	
+	private String pseudoElement;
 
 	/** The op equal. */
 	private final String OP_EQUAL = "=";
@@ -202,7 +206,7 @@ public class StyleSheetAggregator {
 						}
 						int colonIdx = token.indexOf(':');
 						String simpleSelectorText = colonIdx == -1 ? token : token.substring(0, colonIdx);
-						String pseudoElement = colonIdx == -1 ? null : token.substring(colonIdx + 1);
+						pseudoElement = colonIdx == -1 ? null : token.substring(colonIdx + 1);
 						prevSelector = new SimpleSelector(simpleSelectorText, pseudoElement);
 						simpleSelectors.add(prevSelector);
 						if (!tok.hasMoreTokens()) {
@@ -330,7 +334,7 @@ public class StyleSheetAggregator {
 	}
 
 	/**
-	 * Adds the class rule.
+	 * Adds the attribute rule.
 	 *
 	 * @param elemtl
 	 *            the elemtl
@@ -425,7 +429,14 @@ public class StyleSheetAggregator {
 		String elementTL = elementName.toLowerCase();
 		Collection<StyleRuleInfo> elementRules = this.rulesByElement.get(elementTL);
 		if (elementRules != null) {
-			styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
+			SelectorMatcher sm = new SelectorMatcher();
+			System.out.println();
+			
+			if(sm.matchesPseudoClassSelector(pseudoElement, element) && element.getPseudoNames().contains(pseudoElement)){
+				styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
+			}else if(!sm.matchesPseudoClassSelector(pseudoElement, element) && !element.getPseudoNames().contains(pseudoElement)){
+				styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
+			}
 		}
 		elementRules = this.rulesByElement.get("*");
 		if (elementRules != null) {
@@ -485,7 +496,7 @@ public class StyleSheetAggregator {
 		}
 		return styleDeclarations;
 	}
-
+	
 	/**
 	 * Affected by pseudo name in ancestor.
 	 *
@@ -566,7 +577,7 @@ public class StyleSheetAggregator {
 	 */
 	private boolean isAffectedByPseudoNameInAncestor(Collection<StyleRuleInfo> elementRules, HTMLElementImpl ancestor,
 			HTMLElementImpl element, String pseudoName) {
-		if (elementRules != null) { // TODO null?!?
+		if (elementRules != null) {
 			Iterator<StyleRuleInfo> i = elementRules.iterator();
 			while (i.hasNext()) {
 				StyleRuleInfo styleRuleInfo = i.next();

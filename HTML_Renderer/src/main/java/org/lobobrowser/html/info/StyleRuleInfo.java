@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.style.SimpleSelector;
+import org.lobobrowser.html.style.selectors.SimpleSelector;
 import org.w3c.dom.css.CSSStyleRule;
 
 /**

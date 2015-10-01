@@ -620,13 +620,20 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 * @return the pseudo names
 	 */
 	public Set<String> getPseudoNames() {
-		Set<String> pnset = null;
-		if (this.isMouseOver) {
-			if (pnset == null) {
-				pnset = new HashSet<String>(1);
-			}
-			pnset.add("hover");
-		}
+		Set<String> pnset = new HashSet<String>();
+		pnset.add("last-child");
+		pnset.add("last-of-type");
+		pnset.add("first-child");
+		pnset.add("first-of-type");
+		pnset.add("only-child");
+		pnset.add("only-of-type");
+		pnset.add("nth-child");
+		pnset.add("nth-last-child");
+		pnset.add("nth-of-type");
+		pnset.add("nth-last-of-type");
+		pnset.add("hover");
+		pnset.add("root");
+		pnset.add("empty");
 		return pnset;
 	}
 
