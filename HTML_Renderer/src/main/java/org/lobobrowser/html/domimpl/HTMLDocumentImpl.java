@@ -802,12 +802,15 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 */
 	@Override
 	public Element getElementById(String elementId) {
-		Element element;
-		synchronized (this) {
-			element = this.elementsById.get(elementId);
+		if (elementId != null && elementId.length() > 0) {
+			synchronized (this) {
+				return this.elementsById.get(elementId);
+			}
+		} else {
+			return null;
 		}
-		return element;
 	}
+	
 
 	/**
 	 * Named item.
