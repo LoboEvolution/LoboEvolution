@@ -1041,6 +1041,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	public Insets getInsets(boolean hscroll, boolean vscroll) {
 		Insets mi = this.marginInsets;
 		Insets bi = this.borderInsets;
+		Insets pi = this.paddingInsets;
 		int top = 0;
 		int bottom = 0;
 		int left = 0;
@@ -1057,6 +1058,12 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			bottom += bi.bottom;
 			right += bi.right;
 		}
+		if (pi != null) {
+			top += pi.top;
+			left += pi.left;
+			bottom += pi.bottom;
+			right += pi.right;
+		}
 		if (hscroll) {
 			bottom += SCROLL_BAR_THICKNESS;
 		}
@@ -1064,6 +1071,13 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			right += SCROLL_BAR_THICKNESS;
 		}
 		return new Insets(top, left, bottom, right);
+	}
+	
+	/**
+	 * Gets insets of content area. */
+	
+	public Insets getBorderInsets() {
+		return this.borderInsets == null ? RBlockViewport.ZERO_INSETS : this.borderInsets;
 	}
 
 	/**

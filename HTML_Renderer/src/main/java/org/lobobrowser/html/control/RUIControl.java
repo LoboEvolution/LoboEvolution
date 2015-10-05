@@ -152,12 +152,8 @@ public class RUIControl extends BaseElementRenderable implements RElement {
             // Just don't paint it.
             return;
         }
-        // Prepaint borders, background images, etc.
         this.prePaint(g);
-        // We need to paint the GUI component.
-        // For various reasons, we need to do that
-        // instead of letting AWT do it.
-        Insets insets = this.getInsets(false, false);
+        Insets insets = this.getBorderInsets();
         g.translate(insets.left, insets.top);
         try {
             this.widget.paint(g);
@@ -331,10 +327,8 @@ public class RUIControl extends BaseElementRenderable implements RElement {
     public void updateWidgetBounds(int guiX, int guiY) {
         // Overrides
         super.updateWidgetBounds(guiX, guiY);
-        Insets insets = this.getInsets(false, false);
-        this.widget.setBounds(guiX + insets.left, guiY + insets.top, this.width
-                - insets.left - insets.right, this.height - insets.top
-                - insets.bottom);
+        Insets insets = this.getBorderInsets();
+        this.widget.setBounds(guiX + insets.left, guiY + insets.top, this.width - insets.left - insets.right, this.height - insets.top - insets.bottom);
     }
 
     /*
