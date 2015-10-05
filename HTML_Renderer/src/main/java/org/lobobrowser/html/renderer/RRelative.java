@@ -85,8 +85,13 @@ public class RRelative extends BaseRCollection {
 	public FloatingInfo getExportableFloatingInfo() {
 		RElement child = this.child;
 		if (child instanceof RBlock) {
-			// There are no insets, and hence no shift.
-			return ((RBlock) child).getExportableFloatingInfo();
+			final FloatingInfo floatingInfo = ((RBlock) child).getExportableFloatingInfo();
+			if (floatingInfo == null) {
+				return null;
+			} else {
+				return new FloatingInfo(xoffset + floatingInfo.getShiftX(), yoffset + floatingInfo.getShiftY(),
+						floatingInfo.getFloats());
+			}
 		} else {
 			return null;
 		}
