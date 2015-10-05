@@ -20,41 +20,109 @@
  */
 package org.lobobrowser.html.renderer;
 
+import java.awt.Insets;
+
+import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.html.style.HtmlValues;
+
 /**
  * The Class DelayedPair.
  */
 public class DelayedPair {
 
-    /** The target parent. */
-    public final RenderableContainer targetParent;
+	public final RenderableContainer containingBlock;
+	private final RenderableContainer immediateContainingBlock;
+	public final BoundableRenderable child;
+	private final String left;
+	private final String top;
+	private final String bottom;
+	private final String right;
+	private final RenderState rs;
+	private final int currY;
 
-    /** The child. */
-    public final BoundableRenderable child;
+	public DelayedPair(final RenderableContainer immediateContainingBlock, final RenderableContainer containingBlock,
+			final BoundableRenderable child, final String left, final String right, final String top,
+			final String bottom, final RenderState rs, final int currY) {
+		this.immediateContainingBlock = immediateContainingBlock;
+		this.containingBlock = containingBlock;
+		this.child = child;
+		this.left = left;
+		this.right = right;
+		this.top = top;
+		this.bottom = bottom;
+		this.rs = rs;
+		this.currY = currY;
+	}
 
-    /** The x. */
-    public final int x;
+	private static Integer helperGetPixelSize(final String spec, final RenderState rs, final int errorValue,
+			final int avail) {
+		if (spec != null) {
+			return HtmlValues.getPixelSize(spec, rs, errorValue, avail);
+		} else {
+			return null;
+		}
+	}
 
-    /** The y. */
-    public final int y;
+	public Integer getLeft() {
+		return helperGetPixelSize(left, rs, 0, containingBlock.getInnerWidth());
+	}
 
-    /**
-     * Instantiates a new delayed pair.
-     *
-     * @param parent
-     *            the parent
-     * @param child
-     *            the child
-     * @param x
-     *            the x
-     * @param y
-     *            the y
-     */
-    public DelayedPair(final RenderableContainer parent,
-            final BoundableRenderable child, int x, int y) {
-        super();
-        this.targetParent = parent;
-        this.child = child;
-        this.x = x;
-        this.y = y;
-    }
+	public Integer getRight() {
+		return helperGetPixelSize(right, rs, 0, containingBlock.getInnerWidth());
+	}
+
+	public Integer getTop() {
+		return helperGetPixelSize(top, rs, 0, containingBlock.getInnerHeight());
+	}
+
+	public Integer getBottom() {
+		return helperGetPixelSize(bottom, rs, 0, containingBlock.getInnerHeight());
+	}
+
+	public void positionPairChild() {
+		final RenderableContainer parent = this.containingBlock;
+		final BoundableRenderable child = this.child;
+		Integer x = this.getLeft();
+		Integer y = this.getTop();
+		Integer width = null;
+		Integer height = null;
+		final Integer right = this.getRight();
+		final Integer bottom = this.getBottom();
+		if (right != null) {
+			if (x != null) {
+				width = parent.getInnerWidth() - (x + right);
+			} else {
+				x = parent.getInnerWidth() - (child.getWidth() + right);
+			}
+		}
+		if (bottom != null) {
+			if (y != null) {
+				height = parent.getInnerHeight() - (y + bottom);
+			} else {
+				y = parent.getInnerHeight() - child.getHeight() - bottom;
+			}
+		}
+		if (x != null) {
+			child.setX(x);
+		} else {
+			child.setX(0);
+		}
+		if (y != null) {
+			child.setY(y);
+		} else {
+			if (this.immediateContainingBlock != parent) {
+				final Insets immediateInsets = this.immediateContainingBlock.getInsets(false, false);
+				child.setY(this.currY + (this.immediateContainingBlock.getY() + immediateInsets.top) - parent.getY());
+			} else {
+				child.setY(this.currY);
+			}
+		}
+		if (width != null) {
+			child.setWidth(width);
+		}
+		if (height != null) {
+			child.setHeight(height);
+		}
+	}
+
 }

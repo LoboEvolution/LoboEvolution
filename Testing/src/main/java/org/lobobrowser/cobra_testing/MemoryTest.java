@@ -315,6 +315,30 @@ public class MemoryTest {
 		@Override
 		public void clearDelayedPairs() {
 		}
+
+		@Override
+		public int getHeight() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getWidth() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getY() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public Insets getInsets(boolean hscroll, boolean vscroll) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
 
 	/**

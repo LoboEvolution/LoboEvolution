@@ -1092,7 +1092,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			Iterator<DelayedPair> i = gc.iterator();
 			while (i.hasNext()) {
 				DelayedPair pair = i.next();
-				if (pair.targetParent != this) {
+				if (pair.containingBlock != this) {
 					rc.addDelayedPair(pair);
 				}
 			}
