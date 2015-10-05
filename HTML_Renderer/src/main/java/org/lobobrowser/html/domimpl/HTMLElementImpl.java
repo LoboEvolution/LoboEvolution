@@ -414,7 +414,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 * @return the css input source for decl
 	 */
 	protected final InputSource getCssInputSourceForDecl(String text) {
-		java.io.Reader reader = new StringReader("{" + text + "}");
+		Reader reader = new StringReader(text);
 		InputSource is = new InputSource(reader);
 		return is;
 	}
@@ -680,15 +680,25 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 *            the normal name
 	 */
 	public void informInvalidAttibute(String normalName) {
-		// This is called when an attribute changes while
-		// the element is allowing notifications.
 		if ("style".equals(normalName)) {
 			this.forgetLocalStyle();
-		} else if ("id".equals(normalName) || "class".equals(normalName)) {
-			this.forgetStyle(false);
 		}
-		// Call super implementation of informValid().
+		forgetStyle(true);
+		informInvalidRecursive();
+	
+	}
+
+	private void informInvalidRecursive() {
 		super.informInvalid();
+		DOMNodeImpl[] nodeList = this.getChildrenArray();
+		if (nodeList != null) {
+			for (DOMNodeImpl n : nodeList) {
+				if (n instanceof HTMLElementImpl) {
+					HTMLElementImpl htmlElementImpl = (HTMLElementImpl) n;
+					htmlElementImpl.informInvalidRecursive();
+				}
+			}
+		}
 	}
 
 	/**
