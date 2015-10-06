@@ -68,17 +68,46 @@ public class HtmlParser {
 	/** The ucontext. */
 	private final UserAgentContext ucontext;
 
-	/** The public id. */
-	private final String publicId;
-
-	/** The system id. */
-	private final String systemId;
-
 	/** The entities. */
 	private static Map<String, Character> ENTITIES = new HashMap<String, Character>(256);
 
 	/** The element infos. */
 	private static Map<String, ElementInfo> ELEMENT_INFOS = new HashMap<String, ElementInfo>(35);
+	
+	/** The Constant TOKEN_EOD. */
+	private static final int TOKEN_EOD = 0;
+
+	/** The Constant TOKEN_COMMENT. */
+	private static final int TOKEN_COMMENT = 1;
+
+	/** The Constant TOKEN_TEXT. */
+	private static final int TOKEN_TEXT = 2;
+
+	/** The Constant TOKEN_BEGIN_ELEMENT. */
+	private static final int TOKEN_BEGIN_ELEMENT = 3;
+
+	/** The Constant TOKEN_END_ELEMENT. */
+	private static final int TOKEN_END_ELEMENT = 4;
+
+	/** The Constant TOKEN_FULL_ELEMENT. */
+	private static final int TOKEN_FULL_ELEMENT = 5;
+
+	/** The Constant TOKEN_BAD. */
+	private static final int TOKEN_BAD = 6;
+
+	/** The normal last tag. */
+	private String normalLastTag = null;
+
+	/** The just read tag begin. */
+	private boolean justReadTagBegin = false;
+
+	/** The just read tag end. */
+	private boolean justReadTagEnd = false;
+
+	/**
+	 * Only set when readAttribute returns false.
+	 */
+	private boolean justReadEmptyElement = false;
 
 	/**
 	 * A node <code>UserData</code> key used to tell nodes that their content
@@ -111,8 +140,6 @@ public class HtmlParser {
 			String systemId) {
 		this.ucontext = ucontext;
 		this.document = document;
-		this.publicId = publicId;
-		this.systemId = systemId;
 	}
 
 	/**
@@ -126,8 +153,6 @@ public class HtmlParser {
 	public HtmlParser(UserAgentContext ucontext, Document document) {
 		this.ucontext = ucontext;
 		this.document = document;
-		this.publicId = null;
-		this.systemId = null;
 	}
 
 	/**
@@ -252,42 +277,7 @@ public class HtmlParser {
 			parent.setUserData(MODIFYING_KEY, Boolean.FALSE, null);
 		}
 	}
-
-	/** The Constant TOKEN_EOD. */
-	private static final int TOKEN_EOD = 0;
-
-	/** The Constant TOKEN_COMMENT. */
-	private static final int TOKEN_COMMENT = 1;
-
-	/** The Constant TOKEN_TEXT. */
-	private static final int TOKEN_TEXT = 2;
-
-	/** The Constant TOKEN_BEGIN_ELEMENT. */
-	private static final int TOKEN_BEGIN_ELEMENT = 3;
-
-	/** The Constant TOKEN_END_ELEMENT. */
-	private static final int TOKEN_END_ELEMENT = 4;
-
-	/** The Constant TOKEN_FULL_ELEMENT. */
-	private static final int TOKEN_FULL_ELEMENT = 5;
-
-	/** The Constant TOKEN_BAD. */
-	private static final int TOKEN_BAD = 6;
-
-	/** The normal last tag. */
-	private String normalLastTag = null;
-
-	/** The just read tag begin. */
-	private boolean justReadTagBegin = false;
-
-	/** The just read tag end. */
-	private boolean justReadTagEnd = false;
-
-	/**
-	 * Only set when readAttribute returns false.
-	 */
-	private boolean justReadEmptyElement = false;
-
+	
 	/**
 	 * Parses text followed by one element.
 	 *
@@ -357,7 +347,10 @@ public class HtmlParser {
 					parent.appendChild(doc.createProcessingInstruction(tag, data.toString()));
 					return TOKEN_FULL_ELEMENT;
 				} else {
-					Element element = doc.createElement(tag);
+					int localIndex = normalTag.indexOf(':');
+					boolean tagHasPrefix = localIndex > 0;
+					String localName = tagHasPrefix ? normalTag.substring(localIndex + 1) : normalTag;
+					Element element = doc.createElement(localName);
 					element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
 					try {
 						if (!this.justReadTagEnd) {
@@ -375,7 +368,7 @@ public class HtmlParser {
 						// This is necessary for incremental rendering.
 						parent.appendChild(element);
 						if (!this.justReadEmptyElement) {
-							ElementInfo einfo = ELEMENT_INFOS.get(normalTag);
+							ElementInfo einfo = ELEMENT_INFOS.get(localName);
 							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.endElementType;
 							if (endTagType != ElementInfo.END_ELEMENT_FORBIDDEN) {
 								boolean childrenOk = einfo == null ? true : einfo.childElementOk;
@@ -610,13 +603,28 @@ public class HtmlParser {
 						}
 						sb.append("</");
 						sb.append(tempBuffer);
+					} else if (ch == '!') {
+						final String nextSeven = readN(reader, 7);
+						if ("[CDATA[".equals(nextSeven)) {
+							readCData(reader, sb);
+						} else {
+							sb.append('!');
+							if (nextSeven != null) {
+								sb.append(nextSeven);
+							}
+						}
 					} else {
 						sb.append('<');
+						sb.append(ch);
 					}
+				} else {
+					sb.append('<');
 				}
+			} else {
+				sb.append(ch);
 			}
-			sb.append(ch);
 		}
+
 		this.justReadTagBegin = false;
 		this.justReadTagEnd = false;
 		this.justReadEmptyElement = false;
@@ -1160,12 +1168,6 @@ public class HtmlParser {
 		}
 	}
 
-	/*
-	 * private final Locator getLocator(int lineNumber, int columnNumber)
-	 * {return new LocatorImpl(this.publicId, this.systemId, lineNumber,
-	 * columnNumber);}
-	 */
-
 	/**
 	 * Gets the entity char.
 	 *
@@ -1185,4 +1187,71 @@ public class HtmlParser {
 		}
 		return c.charValue();
 	}
+
+	/**
+	 * read CData
+	 *
+	 * @param LineNumberReader
+	 *            the reader
+	 * @param StringBuffer
+	 *            the sb
+	 * @return void
+	 */
+	private static void readCData(LineNumberReader reader, StringBuffer sb) throws IOException {
+		int next = reader.read();
+		while (next >= 0) {
+			final char nextCh = (char) next;
+			if (nextCh == ']') {
+				final String next2 = readN(reader, 2);
+				if (next2 != null) {
+					if ("]>".equals(next2)) {
+						break;
+					} else {
+						sb.append(next2);
+						next = reader.read();
+					}
+				} else {
+					break;
+				}
+			} else {
+				sb.append(nextCh);
+				next = reader.read();
+			}
+		}
+	}
+
+	/**
+	 * read N Tries to read at most n characters.
+	 *
+	 * @param LineNumberReader
+	 *            the reader
+	 * @param n
+	 *            the sb
+	 * @return String
+	 */
+	private static String readN(final LineNumberReader reader, final int n) {
+		char[] chars = new char[n];
+		int i = 0;
+		while (i < n) {
+			int ich = -1;
+			try {
+				ich = reader.read();
+			} catch (IOException e) {
+				break;
+			}
+			if (ich >= 0) {
+				chars[i] = (char) ich;
+				i += 1;
+			} else {
+				break;
+			}
+		}
+
+		if (i == 0) {
+			return null;
+		} else {
+			return new String(chars, 0, i);
+		}
+	}
+
 }
