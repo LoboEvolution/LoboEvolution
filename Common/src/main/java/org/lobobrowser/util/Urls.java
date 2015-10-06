@@ -129,7 +129,7 @@ public class Urls {
      */
     public static URL createURL(URL baseUrl, String relativeUrl)
             throws MalformedURLException, UnsupportedEncodingException {
-        if (relativeUrl.contains("base64")) {
+        if (relativeUrl.contains(";base64,")) {
             relativeUrl = new String(Base64.getEncoder()
                     .encode(relativeUrl.getBytes(StandardCharsets.UTF_8)));
         }
