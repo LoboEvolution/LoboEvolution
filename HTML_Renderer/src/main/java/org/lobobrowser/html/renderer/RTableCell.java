@@ -29,6 +29,7 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.info.SizeInfo;
 import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.http.UserAgentContext;
 
@@ -268,7 +269,13 @@ public class RTableCell extends RBlock {
 	 * @return the height text
 	 */
 	public String getHeightText() {
-		return this.cellElement.getHeight();
+		AbstractCSS2Properties props = this.cellElement.getCurrentStyle();
+		String heightText = props == null ? null : props.getHeight();
+		if (heightText == null) {
+			return this.cellElement.getHeight();
+		} else {
+			return heightText;
+		}
 	}
 
 	/**
@@ -277,7 +284,13 @@ public class RTableCell extends RBlock {
 	 * @return the width text
 	 */
 	public String getWidthText() {
-		return this.cellElement.getWidth();
+		AbstractCSS2Properties props = this.cellElement.getCurrentStyle();
+		String widthText = props == null ? null : props.getWidth();
+		if (widthText == null) {
+			return this.cellElement.getWidth();
+		} else {
+			return widthText;
+		}
 	}
 
 	/**
