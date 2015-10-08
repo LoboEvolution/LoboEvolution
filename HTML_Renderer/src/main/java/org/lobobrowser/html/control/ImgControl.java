@@ -146,7 +146,11 @@ public class ImgControl extends BaseControl implements ImageListener {
 				} else if (scriptURI.startsWith("https")) {
 					image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(u).getSource());
 				} else if (scriptURI.endsWith(".gif")) {
-					image = new ImageIcon(u).getImage();
+					try {
+						image = new ImageIcon(u).getImage();
+					} catch (Exception e) {
+						image = ImageIO.read(u);
+					}
 				} else if (scriptURI.endsWith(".bmp")) {
 					try {
 						image = ImageIO.read(u);

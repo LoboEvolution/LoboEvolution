@@ -702,7 +702,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			} else if (url.startsWith("https")) {
 				image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(imageURL).getSource());
 			} else if (url.endsWith(".gif")) {
-				image = new ImageIcon(imageURL).getImage();
+				try {
+					image = new ImageIcon(imageURL).getImage();
+				} catch (Exception e) {
+					image = ImageIO.read(imageURL);
+				}
 			} else if (url.endsWith(".bmp")) {
 				image = ImageIO.read(imageURL);
 			} else {
