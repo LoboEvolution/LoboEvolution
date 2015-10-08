@@ -34,22 +34,22 @@ import org.lobobrowser.util.io.IORoutines;
 public class MemoryCacheEntry {
 
     /** The content. */
-    public final byte[] content;
+    private byte[] content;
 
     /** The headers. */
-    public final List<NameValuePair> headers;
+    private List<NameValuePair> headers;
 
     /** The expiration. */
-    public final Long expiration;
+    private Long expiration;
 
     /** The alt object. */
-    public final Object altObject;
+    private Object altObject;
 
     /** The request time. */
-    public final long requestTime;
+    private long requestTime;
 
     /** The alt object size. */
-    public final int altObjectSize;
+    private int altObjectSize;
 
     /**
      * Instantiates a new memory cache entry.
@@ -122,5 +122,89 @@ public class MemoryCacheEntry {
         this.altObject = altObject;
         this.altObjectSize = altObjectSize;
     }
+
+	/**
+	 * @return the content
+	 */
+	public byte[] getContent() {
+		return content;
+	}
+
+	/**
+	 * @param content the content to set
+	 */
+	public void setContent(byte[] content) {
+		this.content = content;
+	}
+
+	/**
+	 * @return the headers
+	 */
+	public List<NameValuePair> getHeaders() {
+		return headers;
+	}
+
+	/**
+	 * @param headers the headers to set
+	 */
+	public void setHeaders(List<NameValuePair> headers) {
+		this.headers = headers;
+	}
+
+	/**
+	 * @return the expiration
+	 */
+	public Long getExpiration() {
+		return expiration;
+	}
+
+	/**
+	 * @param expiration the expiration to set
+	 */
+	public void setExpiration(Long expiration) {
+		this.expiration = expiration;
+	}
+
+	/**
+	 * @return the altObject
+	 */
+	public Object getAltObject() {
+		return altObject;
+	}
+
+	/**
+	 * @param altObject the altObject to set
+	 */
+	public void setAltObject(Object altObject) {
+		this.altObject = altObject;
+	}
+
+	/**
+	 * @return the requestTime
+	 */
+	public long getRequestTime() {
+		return requestTime;
+	}
+
+	/**
+	 * @param requestTime the requestTime to set
+	 */
+	public void setRequestTime(long requestTime) {
+		this.requestTime = requestTime;
+	}
+
+	/**
+	 * @return the altObjectSize
+	 */
+	public int getAltObjectSize() {
+		return altObjectSize;
+	}
+
+	/**
+	 * @param altObjectSize the altObjectSize to set
+	 */
+	public void setAltObjectSize(int altObjectSize) {
+		this.altObjectSize = altObjectSize;
+	}
 
 }

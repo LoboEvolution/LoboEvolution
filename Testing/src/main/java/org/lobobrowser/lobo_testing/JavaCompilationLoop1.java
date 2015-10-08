@@ -47,8 +47,8 @@ public class JavaCompilationLoop1 {
 		Thread.sleep(5000);
 		System.out.println("### Free memory: " + Runtime.getRuntime().freeMemory());
 		CacheInfo cacheInfo = CacheManager.getInstance().getTransientCacheInfo();
-		System.out.println("### RAM cache entries: " + cacheInfo.numEntries);
-		System.out.println("### RAM cache size: " + cacheInfo.approximateSize);
+		System.out.println("### RAM cache entries: " + cacheInfo.getNumEntries());
+		System.out.println("### RAM cache size: " + cacheInfo.getApproximateSize());
 	}
 
 	/**

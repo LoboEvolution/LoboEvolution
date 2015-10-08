@@ -110,12 +110,23 @@ public class TableMatrix {
 	/** The table height. */
 	private int tableHeight;
 
-	/*
-	 * This is so that we can draw the lines inside the table that appear when a
-	 * border attribute is used.
-	 */
 	/** The has old style border. */
 	private int hasOldStyleBorder;
+
+	/** The cell spacing y. */
+	private int cellSpacingY;
+
+	/** The cell spacing x. */
+	private int cellSpacingX;
+
+	/** The widths of extras. */
+	private int widthsOfExtras;
+
+	/** The heights of extras. */
+	private int heightsOfExtras;
+
+	/** The table width length. */
+	private HtmlLength tableWidthLength;
 
 	/**
 	 * Instantiates a new table matrix.
@@ -213,23 +224,7 @@ public class TableMatrix {
 		}
 		return 0;
 	}
-
-	// private int border;
-	/** The cell spacing y. */
-	private int cellSpacingY;
-
-	/** The cell spacing x. */
-	private int cellSpacingX;
-
-	/** The widths of extras. */
-	private int widthsOfExtras;
-
-	/** The heights of extras. */
-	private int heightsOfExtras;
-
-	/** The table width length. */
-	private HtmlLength tableWidthLength;
-
+	
 	/**
 	 * Called on every relayout. Element children might have changed.
 	 *
@@ -400,8 +395,7 @@ public class TableMatrix {
 		ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
 		ArrayList<HTMLTableRowElementImpl> rowElements = this.ROW_ELEMENTS;
 		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
-		Map<HTMLTableRowElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<HTMLTableRowElementImpl, ArrayList<VirtualCell>>(
-				2);
+		Map<HTMLTableRowElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<HTMLTableRowElementImpl, ArrayList<VirtualCell>>(2);
 		ArrayList<?> cellList = te.getDescendents(COLUMNS_FILTER, false);
 		ArrayList<VirtualCell> currentNullRow = null;
 		Iterator<?> ci = cellList.iterator();

@@ -610,8 +610,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		RenderableSpot start = this.startSelection;
 		RenderableSpot end = this.endSelection;
 		if ((start != null) && (end != null)) {
-			return Nodes.getCommonAncestor((Node) start.renderable.getModelNode(),
-					(Node) end.renderable.getModelNode());
+			return Nodes.getCommonAncestor((Node) start.getRenderable().getModelNode(),
+					(Node) end.getRenderable().getModelNode());
 		} else {
 			return null;
 		}
@@ -784,7 +784,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 		RBlock block = this.rblock;
 
-		for (BoundableRenderable r = spot.renderable; r != null; r = r.getParent()) {
+		for (BoundableRenderable r = spot.getRenderable(); r != null; r = r.getParent()) {
 			if (r instanceof RBlock) {
 				block = (RBlock) r;
 

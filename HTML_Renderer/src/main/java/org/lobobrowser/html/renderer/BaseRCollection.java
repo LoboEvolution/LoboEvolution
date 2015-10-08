@@ -149,8 +149,8 @@ RCollection {
         Point checkPoint1 = null;
         Point checkPoint2 = null;
         if (!inSelection) {
-            boolean isStart = startPoint.renderable == this;
-            boolean isEnd = endPoint.renderable == this;
+            boolean isStart = startPoint.getRenderable() == this;
+            boolean isEnd = endPoint.getRenderable() == this;
             if (isStart && isEnd) {
                 checkPoint1 = startPoint.getPoint();
                 checkPoint2 = endPoint.getPoint();
@@ -160,9 +160,9 @@ RCollection {
                 checkPoint1 = endPoint.getPoint();
             }
         } else {
-            if (startPoint.renderable == this) {
+            if (startPoint.getRenderable() == this) {
                 checkPoint1 = startPoint.getPoint();
-            } else if (endPoint.renderable == this) {
+            } else if (endPoint.getRenderable() == this) {
                 checkPoint1 = endPoint.getPoint();
             }
         }
@@ -236,8 +236,8 @@ RCollection {
         Point checkPoint1 = null;
         Point checkPoint2 = null;
         if (!inSelection) {
-            boolean isStart = startPoint.renderable == this;
-            boolean isEnd = endPoint.renderable == this;
+            boolean isStart = startPoint.getRenderable() == this;
+            boolean isEnd = endPoint.getRenderable() == this;
             if (isStart && isEnd) {
                 checkPoint1 = startPoint.getPoint();
                 checkPoint2 = endPoint.getPoint();
@@ -247,9 +247,9 @@ RCollection {
                 checkPoint1 = endPoint.getPoint();
             }
         } else {
-            if (startPoint.renderable == this) {
+            if (startPoint.getRenderable() == this) {
                 checkPoint1 = startPoint.getPoint();
-            } else if (endPoint.renderable == this) {
+            } else if (endPoint.getRenderable() == this) {
                 checkPoint1 = endPoint.getPoint();
             }
         }

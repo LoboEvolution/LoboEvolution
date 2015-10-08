@@ -29,13 +29,13 @@ import java.awt.Point;
 public class RenderableSpot {
 
 	/** The renderable. */
-	public final BoundableRenderable renderable;
+	private BoundableRenderable renderable;
 
 	/** The x. */
-	public final int x;
+	private int x;
 
 	/** The y. */
-	public final int y;
+	private int y;
 
 	/**
 	 * Instantiates a new renderable spot.
@@ -75,5 +75,47 @@ public class RenderableSpot {
 		}
 		RenderableSpot otherRp = (RenderableSpot) other;
 		return (otherRp.renderable == this.renderable) && (otherRp.x == this.x) && (otherRp.y == this.y);
+	}
+
+	/**
+	 * @return the renderable
+	 */
+	public BoundableRenderable getRenderable() {
+		return renderable;
+	}
+
+	/**
+	 * @param renderable the renderable to set
+	 */
+	public void setRenderable(BoundableRenderable renderable) {
+		this.renderable = renderable;
+	}
+
+	/**
+	 * @return the x
+	 */
+	public int getX() {
+		return x;
+	}
+
+	/**
+	 * @param x the x to set
+	 */
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	/**
+	 * @return the y
+	 */
+	public int getY() {
+		return y;
+	}
+
+	/**
+	 * @param y the y to set
+	 */
+	public void setY(int y) {
+		this.y = y;
 	}
 }

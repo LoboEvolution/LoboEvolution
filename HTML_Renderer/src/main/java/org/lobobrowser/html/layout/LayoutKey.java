@@ -31,37 +31,74 @@ import org.lobobrowser.util.Objects;
 public class LayoutKey {
 
 	/** The avail width. */
-	public final int availWidth;
+	private int availWidth;
 
 	/** The avail height. */
-	public final int availHeight;
-
-	/** The float bounds source. */
-	public final FloatingBoundsSource floatBoundsSource;
-
-	/** The default overflow x. */
-	public final int defaultOverflowX;
-
-	/** The default overflow y. */
-	public final int defaultOverflowY;
+	private int availHeight;
 
 	/** The whitespace. */
-	public final int whitespace;
+	private int whitespace;
 
 	/** The font. */
-	public final Font font;
-
-	/** The expand width. */
-	public final boolean expandWidth;
-
-	/** The expand height. */
-	public final boolean expandHeight;
-
-	/** The use declared size. */
-	public final boolean useDeclaredSize;
+	private Font font;
 
 	/** The override no wrap. */
-	public final boolean overrideNoWrap;
+	private boolean overrideNoWrap;
+
+	/** The float bounds source. */
+	private FloatingBoundsSource floatBoundsSource;
+
+	/** The default overflow x. */
+	private int defaultOverflowX;
+
+	/** The default overflow y. */
+	private int defaultOverflowY;
+
+	/** The expand width. */
+	private boolean expandWidth;
+
+	/** The expand height. */
+	private boolean expandHeight;
+
+	/** The use declared size. */
+	private boolean useDeclaredSize;
+
+	/**
+	 * Instantiates a new layout key.
+	 *
+	 * @param availWidth
+	 *            the avail width
+	 * @param availHeight
+	 *            the avail height
+	 */
+	public LayoutKey(int availWidth, int availHeight) {
+		super();
+		this.availWidth = availWidth;
+		this.availHeight = availHeight;
+	}
+
+	/**
+	 * Instantiates a new layout key.
+	 *
+	 * @param availWidth
+	 *            the avail width
+	 * @param availHeight
+	 *            the avail height
+	 * @param whitespace
+	 *            the whitespace
+	 * @param font
+	 *            the font
+	 * @param overrideNoWrap
+	 *            the override no wrap
+	 */
+	public LayoutKey(int availWidth, int availHeight, int whitespace, Font font, boolean overrideNoWrap) {
+		super();
+		this.availWidth = availWidth;
+		this.availHeight = availHeight;
+		this.whitespace = whitespace;
+		this.font = font;
+		this.overrideNoWrap = overrideNoWrap;
+	}
 
 	/**
 	 * Instantiates a new layout key.
@@ -137,5 +174,170 @@ public class LayoutKey {
 		Font font = this.font;
 		return ((this.availWidth * 1000) + this.availHeight) ^ (font == null ? 0 : font.hashCode())
 				^ (this.expandWidth ? 2 : 0) ^ (this.expandHeight ? 1 : 0) ^ (this.whitespace << 2);
+	}
+
+	/**
+	 * @return the availWidth
+	 */
+	public int getAvailWidth() {
+		return availWidth;
+	}
+
+	/**
+	 * @param availWidth
+	 *            the availWidth to set
+	 */
+	public void setAvailWidth(int availWidth) {
+		this.availWidth = availWidth;
+	}
+
+	/**
+	 * @return the availHeight
+	 */
+	public int getAvailHeight() {
+		return availHeight;
+	}
+
+	/**
+	 * @param availHeight
+	 *            the availHeight to set
+	 */
+	public void setAvailHeight(int availHeight) {
+		this.availHeight = availHeight;
+	}
+
+	/**
+	 * @return the whitespace
+	 */
+	public int getWhitespace() {
+		return whitespace;
+	}
+
+	/**
+	 * @param whitespace
+	 *            the whitespace to set
+	 */
+	public void setWhitespace(int whitespace) {
+		this.whitespace = whitespace;
+	}
+
+	/**
+	 * @return the font
+	 */
+	public Font getFont() {
+		return font;
+	}
+
+	/**
+	 * @param font
+	 *            the font to set
+	 */
+	public void setFont(Font font) {
+		this.font = font;
+	}
+
+	/**
+	 * @return the overrideNoWrap
+	 */
+	public boolean isOverrideNoWrap() {
+		return overrideNoWrap;
+	}
+
+	/**
+	 * @param overrideNoWrap
+	 *            the overrideNoWrap to set
+	 */
+	public void setOverrideNoWrap(boolean overrideNoWrap) {
+		this.overrideNoWrap = overrideNoWrap;
+	}
+
+	/**
+	 * @return the floatBoundsSource
+	 */
+	public FloatingBoundsSource getFloatBoundsSource() {
+		return floatBoundsSource;
+	}
+
+	/**
+	 * @param floatBoundsSource
+	 *            the floatBoundsSource to set
+	 */
+	public void setFloatBoundsSource(FloatingBoundsSource floatBoundsSource) {
+		this.floatBoundsSource = floatBoundsSource;
+	}
+
+	/**
+	 * @return the defaultOverflowX
+	 */
+	public int getDefaultOverflowX() {
+		return defaultOverflowX;
+	}
+
+	/**
+	 * @param defaultOverflowX
+	 *            the defaultOverflowX to set
+	 */
+	public void setDefaultOverflowX(int defaultOverflowX) {
+		this.defaultOverflowX = defaultOverflowX;
+	}
+
+	/**
+	 * @return the defaultOverflowY
+	 */
+	public int getDefaultOverflowY() {
+		return defaultOverflowY;
+	}
+
+	/**
+	 * @param defaultOverflowY
+	 *            the defaultOverflowY to set
+	 */
+	public void setDefaultOverflowY(int defaultOverflowY) {
+		this.defaultOverflowY = defaultOverflowY;
+	}
+
+	/**
+	 * @return the expandWidth
+	 */
+	public boolean isExpandWidth() {
+		return expandWidth;
+	}
+
+	/**
+	 * @param expandWidth
+	 *            the expandWidth to set
+	 */
+	public void setExpandWidth(boolean expandWidth) {
+		this.expandWidth = expandWidth;
+	}
+
+	/**
+	 * @return the expandHeight
+	 */
+	public boolean isExpandHeight() {
+		return expandHeight;
+	}
+
+	/**
+	 * @param expandHeight
+	 *            the expandHeight to set
+	 */
+	public void setExpandHeight(boolean expandHeight) {
+		this.expandHeight = expandHeight;
+	}
+
+	/**
+	 * @return the useDeclaredSize
+	 */
+	public boolean isUseDeclaredSize() {
+		return useDeclaredSize;
+	}
+
+	/**
+	 * @param useDeclaredSize
+	 *            the useDeclaredSize to set
+	 */
+	public void setUseDeclaredSize(boolean useDeclaredSize) {
+		this.useDeclaredSize = useDeclaredSize;
 	}
 }

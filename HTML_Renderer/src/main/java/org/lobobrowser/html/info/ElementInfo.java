@@ -35,19 +35,19 @@ public class ElementInfo implements Serializable {
 	private static final long serialVersionUID = -7783823451639961618L;
 
 	/** The end element type. */
-	public final int endElementType;
+	private int endElementType;
 
 	/** The child element ok. */
-	public final boolean childElementOk;
+	private boolean childElementOk;
 
 	/** The stop tags. */
-	public final Set<String> stopTags;
+	private Set<String> stopTags;
 
 	/** The no script element. */
-	public final boolean noScriptElement;
+	private boolean noScriptElement;
 
 	/** The decode entities. */
-	public final boolean decodeEntities;
+	private boolean decodeEntities;
 
 	/** The Constant END_ELEMENT_FORBIDDEN. */
 	public static final int END_ELEMENT_FORBIDDEN = 0;
@@ -127,6 +127,76 @@ public class ElementInfo implements Serializable {
 		this.endElementType = type;
 		this.stopTags = null;
 		this.noScriptElement = false;
+		this.decodeEntities = decodeEntities;
+	}
+
+	/**
+	 * @return the endElementType
+	 */
+	public int getEndElementType() {
+		return endElementType;
+	}
+
+	/**
+	 * @param endElementType the endElementType to set
+	 */
+	public void setEndElementType(int endElementType) {
+		this.endElementType = endElementType;
+	}
+
+	/**
+	 * @return the childElementOk
+	 */
+	public boolean isChildElementOk() {
+		return childElementOk;
+	}
+
+	/**
+	 * @param childElementOk the childElementOk to set
+	 */
+	public void setChildElementOk(boolean childElementOk) {
+		this.childElementOk = childElementOk;
+	}
+
+	/**
+	 * @return the stopTags
+	 */
+	public Set<String> getStopTags() {
+		return stopTags;
+	}
+
+	/**
+	 * @param stopTags the stopTags to set
+	 */
+	public void setStopTags(Set<String> stopTags) {
+		this.stopTags = stopTags;
+	}
+
+	/**
+	 * @return the noScriptElement
+	 */
+	public boolean isNoScriptElement() {
+		return noScriptElement;
+	}
+
+	/**
+	 * @param noScriptElement the noScriptElement to set
+	 */
+	public void setNoScriptElement(boolean noScriptElement) {
+		this.noScriptElement = noScriptElement;
+	}
+
+	/**
+	 * @return the decodeEntities
+	 */
+	public boolean isDecodeEntities() {
+		return decodeEntities;
+	}
+
+	/**
+	 * @param decodeEntities the decodeEntities to set
+	 */
+	public void setDecodeEntities(boolean decodeEntities) {
 		this.decodeEntities = decodeEntities;
 	}
 }

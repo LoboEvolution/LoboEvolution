@@ -26,16 +26,16 @@ package org.lobobrowser.html.layout;
 public class LayoutValue {
 
     /** The width. */
-    public final int width;
+    private int width;
 
     /** The height. */
-    public final int height;
+    private int height;
 
     /** The has h scroll bar. */
-    public final boolean hasHScrollBar;
+    private boolean hasHScrollBar;
 
     /** The has v scroll bar. */
-    public final boolean hasVScrollBar;
+    private boolean hasVScrollBar;
 
     /**
      * Instantiates a new layout value.
@@ -56,4 +56,60 @@ public class LayoutValue {
         this.hasHScrollBar = hasHScrollBar;
         this.hasVScrollBar = hasVScrollBar;
     }
+
+	/**
+	 * @return the width
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * @param width the width to set
+	 */
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	/**
+	 * @return the height
+	 */
+	public int getHeight() {
+		return height;
+	}
+
+	/**
+	 * @param height the height to set
+	 */
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	/**
+	 * @return the hasHScrollBar
+	 */
+	public boolean isHasHScrollBar() {
+		return hasHScrollBar;
+	}
+
+	/**
+	 * @param hasHScrollBar the hasHScrollBar to set
+	 */
+	public void setHasHScrollBar(boolean hasHScrollBar) {
+		this.hasHScrollBar = hasHScrollBar;
+	}
+
+	/**
+	 * @return the hasVScrollBar
+	 */
+	public boolean isHasVScrollBar() {
+		return hasVScrollBar;
+	}
+
+	/**
+	 * @param hasVScrollBar the hasVScrollBar to set
+	 */
+	public void setHasVScrollBar(boolean hasVScrollBar) {
+		this.hasVScrollBar = hasVScrollBar;
+	}
 }

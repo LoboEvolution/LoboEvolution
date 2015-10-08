@@ -38,16 +38,16 @@ import org.lobobrowser.html.renderstate.RenderState;
 final class RWord extends BaseBoundableRenderable {
 
     /** The shown word. */
-    final String shownWord;
+    private String shownWord;
 
     /** The font metrics. */
-    public final FontMetrics fontMetrics;
+   private FontMetrics fontMetrics;
 
     /** The descent. */
-    public final int descent;
+   private int descent;
 
     /** The ascent plus leading. */
-    public final int ascentPlusLeading;
+   private int ascentPlusLeading;
 
     /**
      * Instantiates a new r word.
@@ -190,11 +190,11 @@ final class RWord extends BaseBoundableRenderable {
             RenderableSpot startPoint, RenderableSpot endPoint) {
         int startX = -1;
         int endX = -1;
-        if (this == startPoint.renderable) {
-            startX = startPoint.x;
+        if (this == startPoint.getRenderable()) {
+            startX = startPoint.getX();
         }
-        if (this == endPoint.renderable) {
-            endX = endPoint.x;
+        if (this == endPoint.getRenderable()) {
+            endX = endPoint.getX();
         }
         if (!inSelection && (startX == -1) && (endX == -1)) {
             return false;
@@ -269,11 +269,11 @@ final class RWord extends BaseBoundableRenderable {
             RenderableSpot endPoint) {
         int startX = -1;
         int endX = -1;
-        if (this == startPoint.renderable) {
-            startX = startPoint.x;
+        if (this == startPoint.getRenderable()) {
+            startX = startPoint.getX();
         }
-        if (this == endPoint.renderable) {
-            endX = endPoint.x;
+        if (this == endPoint.getRenderable()) {
+            endX = endPoint.getX();
         }
         if (!inSelection && (startX == -1) && (endX == -1)) {
             return false;
@@ -505,5 +505,61 @@ final class RWord extends BaseBoundableRenderable {
     public String toString() {
         return "RWord[word=" + this.shownWord + "]";
     }
+
+	/**
+	 * @return the shownWord
+	 */
+	public String getShownWord() {
+		return shownWord;
+	}
+
+	/**
+	 * @param shownWord the shownWord to set
+	 */
+	public void setShownWord(String shownWord) {
+		this.shownWord = shownWord;
+	}
+
+	/**
+	 * @return the fontMetrics
+	 */
+	public FontMetrics getFontMetrics() {
+		return fontMetrics;
+	}
+
+	/**
+	 * @param fontMetrics the fontMetrics to set
+	 */
+	public void setFontMetrics(FontMetrics fontMetrics) {
+		this.fontMetrics = fontMetrics;
+	}
+
+	/**
+	 * @return the descent
+	 */
+	public int getDescent() {
+		return descent;
+	}
+
+	/**
+	 * @param descent the descent to set
+	 */
+	public void setDescent(int descent) {
+		this.descent = descent;
+	}
+
+	/**
+	 * @return the ascentPlusLeading
+	 */
+	public int getAscentPlusLeading() {
+		return ascentPlusLeading;
+	}
+
+	/**
+	 * @param ascentPlusLeading the ascentPlusLeading to set
+	 */
+	public void setAscentPlusLeading(int ascentPlusLeading) {
+		this.ascentPlusLeading = ascentPlusLeading;
+	}
 
 }

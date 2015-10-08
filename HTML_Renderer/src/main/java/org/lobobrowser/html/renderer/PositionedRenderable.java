@@ -29,16 +29,16 @@ class PositionedRenderable {
     public static final PositionedRenderable[] EMPTY_ARRAY = new PositionedRenderable[0];
 
     /** The renderable. */
-    public final BoundableRenderable renderable;
+    private BoundableRenderable renderable;
 
     /** The vertical alignable. */
-    public final boolean verticalAlignable;
+    private boolean verticalAlignable;
 
     /** The ordinal. */
-    public final int ordinal;
+    private int ordinal;
 
     /** The is float. */
-    public final boolean isFloat;
+    private boolean isFloat;
 
     /**
      * Instantiates a new positioned renderable.
@@ -60,4 +60,60 @@ class PositionedRenderable {
         this.ordinal = ordinal;
         this.isFloat = isFloat;
     }
+
+	/**
+	 * @return the renderable
+	 */
+	public BoundableRenderable getRenderable() {
+		return renderable;
+	}
+
+	/**
+	 * @param renderable the renderable to set
+	 */
+	public void setRenderable(BoundableRenderable renderable) {
+		this.renderable = renderable;
+	}
+
+	/**
+	 * @return the verticalAlignable
+	 */
+	public boolean isVerticalAlignable() {
+		return verticalAlignable;
+	}
+
+	/**
+	 * @param verticalAlignable the verticalAlignable to set
+	 */
+	public void setVerticalAlignable(boolean verticalAlignable) {
+		this.verticalAlignable = verticalAlignable;
+	}
+
+	/**
+	 * @return the ordinal
+	 */
+	public int getOrdinal() {
+		return ordinal;
+	}
+
+	/**
+	 * @param ordinal the ordinal to set
+	 */
+	public void setOrdinal(int ordinal) {
+		this.ordinal = ordinal;
+	}
+
+	/**
+	 * @return the isFloat
+	 */
+	public boolean isFloat() {
+		return isFloat;
+	}
+
+	/**
+	 * @param isFloat the isFloat to set
+	 */
+	public void setFloat(boolean isFloat) {
+		this.isFloat = isFloat;
+	}
 }

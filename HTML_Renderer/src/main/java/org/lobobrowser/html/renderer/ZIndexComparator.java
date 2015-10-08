@@ -37,12 +37,12 @@ class ZIndexComparator implements Comparator<Object> {
     public int compare(Object object1, Object object2) {
         PositionedRenderable element1 = (PositionedRenderable) object1;
         PositionedRenderable element2 = (PositionedRenderable) object2;
-        int zIndex1 = element1.renderable.getZIndex();
-        int zIndex2 = element2.renderable.getZIndex();
+        int zIndex1 = element1.getRenderable().getZIndex();
+        int zIndex2 = element2.getRenderable().getZIndex();
         int diff = zIndex1 - zIndex2;
         if (diff != 0) {
             return diff;
         }
-        return element1.ordinal - element2.ordinal;
+        return element1.getOrdinal() - element2.getOrdinal();
     }
 }

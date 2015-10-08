@@ -65,33 +65,29 @@ import org.w3c.dom.Node;
  * in this class. This class is in charge of laying out the DOM subtree of a
  * node, usually on behalf of an RBlock. It creates a renderer subtree
  * consisting of RLine's or RBlock's. RLine's in turn contain RWord's and so on.
- * This class also happens to be used as an RBlock scrollable viewport.
+ * This class also happens to be used as an RBlock scrollable viewport. * An
+ * RBlockViewport basically consists of two collections: seqRenderables and
+ * positionedRenderables. The seqRenderables collection is a sequential list of
+ * RLine's and RBlock's that is amenable to a binary search by Y position. The
+ * positionedRenderables collection is a z-index ordered collection meant for
+ * blocks with position=absolute and such.
+ *
+ * HOW FLOATS WORK Float boxes are scheduled to be added on the next available
+ * line. Line layout is bounded by the current floatBounds. When a float is
+ * placed with placeFloat(), an absolutely positioned box is added. Whether the
+ * float height expands the RBlockViewport height is determined by
+ * isFloatLimit().
+ *
+ * FloatingBounds are inherited by sub-boxes, but the bounds are shifted.
+ *
+ * The RBlockViewport also publishes a collection of "exporatable floating
+ * bounds." These are float boxes that go beyond the bounds of the
+ * RBlockViewport, so ancestor blocks can obtain them to adjust their own
+ * bounds.
  *
  * @author J. H. S.
  */
 public class RBlockViewport extends BaseRCollection {
-	// GENERAL NOTES
-	// An RBlockViewport basically consists of two collections:
-	// seqRenderables and positionedRenderables. The seqRenderables
-	// collection is a sequential list of RLine's and RBlock's
-	// that is amenable to a binary search by Y position. The
-	// positionedRenderables collection is a z-index ordered
-	// collection meant for blocks with position=absolute and such.
-	//
-	// HOW FLOATS WORK
-	// Float boxes are scheduled to be added on the next available line.
-	// Line layout is bounded by the current floatBounds.
-	// When a float is placed with placeFloat(), an absolutely positioned
-	// box is added. Whether the float height expands the RBlockViewport
-	// height is determined by isFloatLimit().
-	//
-	// FloatingBounds are inherited by sub-boxes, but the bounds are
-	// shifted.
-	//
-	// The RBlockViewport also publishes a collection of "exporatable
-	// floating bounds." These are float boxes that go beyond the bounds
-	// of the RBlockViewport, so ancestor blocks can obtain them to adjust
-	// their own bounds.
 
 	/** The Constant ZERO_INSETS. */
 	public static final Insets ZERO_INSETS = new Insets(0, 0, 0, 0);
@@ -100,19 +96,19 @@ public class RBlockViewport extends BaseRCollection {
 	private static final Logger logger = Logger.getLogger(RBlockViewport.class.getName());
 
 	/** The container. */
-	public final RenderableContainer container;
+	private RenderableContainer container;
 
 	/** The list nesting. */
-	public final int listNesting;
+	private int listNesting;
 
 	/** The user agent context. */
-	public final UserAgentContext userAgentContext;
+	private UserAgentContext userAgentContext;
 
 	/** The renderer context. */
-	public final HtmlRendererContext rendererContext;
+	private HtmlRendererContext rendererContext;
 
 	/** The frame context. */
-	public final FrameContext frameContext;
+	private FrameContext frameContext;
 
 	/** The positioned renderables. */
 	private SortedSet<PositionedRenderable> positionedRenderables;
@@ -348,11 +344,11 @@ public class RBlockViewport extends BaseRCollection {
 			Iterator<PositionedRenderable> i = posRenderables.iterator();
 			while (i.hasNext()) {
 				PositionedRenderable pr = i.next();
-				BoundableRenderable br = pr.renderable;
+				BoundableRenderable br = pr.getRenderable();
 				if ((br.getX() + br.getWidth()) > this.maxX) {
 					this.maxX = br.getX() + br.getWidth();
 				}
-				if (isFloatLimit || !pr.isFloat) {
+				if (isFloatLimit || !pr.isFloat()) {
 					if ((br.getY() + br.getHeight()) > maxY) {
 						this.maxY = maxY = br.getY() + br.getHeight();
 					}
@@ -511,8 +507,8 @@ public class RBlockViewport extends BaseRCollection {
 					Iterator<PositionedRenderable> i2 = others.iterator();
 					while (i2.hasNext()) {
 						PositionedRenderable pr = i2.next();
-						if (pr.verticalAlignable) {
-							BoundableRenderable br = pr.renderable;
+						if (pr.isVerticalAlignable()) {
+							BoundableRenderable br = pr.getRenderable();
 							int newY = br.getY() + shift;
 							br.setY(newY);
 							if ((newY + br.getHeight()) > this.maxY) {
@@ -987,7 +983,7 @@ public class RBlockViewport extends BaseRCollection {
 					boolean growHorizontally = relative && !floating;
 					block.layout(this.availContentWidth, this.availContentHeight, growHorizontally, false,
 							inheritedFloatBoundsSource, this.sizeOnly);
-					
+
 				} else {
 					renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
 				}
@@ -1049,8 +1045,10 @@ public class RBlockViewport extends BaseRCollection {
 					rrel.assignDimension();
 				}
 			} else {
-				 // Schedule as delayed pair. Will be positioned after everything else.
-				this.scheduleAbsDelayedPair(renderable, leftText, rightText, topText, bottomText, rs, currentLine.getY() + currentLine.getHeight());
+				// Schedule as delayed pair. Will be positioned after everything
+				// else.
+				this.scheduleAbsDelayedPair(renderable, leftText, rightText, topText, bottomText, rs,
+						currentLine.getY() + currentLine.getHeight());
 				return true;
 			}
 			int newBottomY = renderable.getY() + renderable.getHeight();
@@ -1126,7 +1124,7 @@ public class RBlockViewport extends BaseRCollection {
 			}
 		}
 		if (renderable instanceof RUIControl) {
-			this.container.addComponent(((RUIControl) renderable).widget.getComponent());
+			this.container.addComponent(((RUIControl) renderable).getWidget().getComponent());
 		}
 	}
 
@@ -1504,7 +1502,7 @@ public class RBlockViewport extends BaseRCollection {
 		Renderable pending = null;
 		while (i1.hasNext()) {
 			PositionedRenderable pr = (PositionedRenderable) i1.next();
-			BoundableRenderable r = pr.renderable;
+			BoundableRenderable r = pr.getRenderable();
 			if (r.getZIndex() >= 0) {
 				pending = r;
 				break;
@@ -1525,7 +1523,7 @@ public class RBlockViewport extends BaseRCollection {
 			destination.add(pending);
 			while (i1.hasNext()) {
 				PositionedRenderable pr = (PositionedRenderable) i1.next();
-				Renderable r = pr.renderable;
+				Renderable r = pr.getRenderable();
 				destination.add(r);
 			}
 		}
@@ -1583,7 +1581,7 @@ public class RBlockViewport extends BaseRCollection {
 		if (sr != null) {
 			Renderable[] array = (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
 			Range range = MarkupUtilities.findRenderables(array, clipBounds, true);
-			baseIterator = org.lobobrowser.util.ArrayUtilities.iterator(array, range.offset, range.length);
+			baseIterator = org.lobobrowser.util.ArrayUtilities.iterator(array, range.getOffset(), range.getLength());
 		}
 		SortedSet others = this.positionedRenderables;
 		if ((others == null) || (others.size() == 0)) {
@@ -1594,7 +1592,7 @@ public class RBlockViewport extends BaseRCollection {
 			Iterator i = others.iterator();
 			while (i.hasNext()) {
 				PositionedRenderable pr = (PositionedRenderable) i.next();
-				Object r = pr.renderable;
+				Object r = pr.getRenderable();
 				if (r instanceof BoundableRenderable) {
 					BoundableRenderable br = (BoundableRenderable) r;
 					Rectangle rbounds = br.getBounds();
@@ -1673,7 +1671,7 @@ public class RBlockViewport extends BaseRCollection {
 			// Must go in reverse order
 			for (index = size; --index >= 0;) {
 				PositionedRenderable pr = otherArray[index];
-				BoundableRenderable r = pr.renderable;
+				BoundableRenderable r = pr.getRenderable();
 				if (r.getZIndex() < 0) {
 					break;
 				}
@@ -1710,7 +1708,7 @@ public class RBlockViewport extends BaseRCollection {
 			// Must go in reverse order
 			for (; index >= 0; index--) {
 				PositionedRenderable pr = otherArray[index];
-				Renderable r = pr.renderable;
+				Renderable r = pr.getRenderable();
 				if (r instanceof BoundableRenderable) {
 					BoundableRenderable br = (BoundableRenderable) r;
 					Rectangle rbounds = br.getBounds();
@@ -1903,7 +1901,8 @@ public class RBlockViewport extends BaseRCollection {
 				break;
 			}
 		}
-		DelayedPair pair = new DelayedPair(this.container, container, renderable, leftText, rightText, topText, bottomText, rs, currY);
+		DelayedPair pair = new DelayedPair(this.container, container, renderable, leftText, rightText, topText,
+				bottomText, rs, currY);
 		this.container.addDelayedPair(pair);
 	}
 
@@ -1940,7 +1939,7 @@ public class RBlockViewport extends BaseRCollection {
 		others.add(new PositionedRenderable(renderable, verticalAlignable, this.positionedOrdinal++, isFloat));
 		renderable.setParent(this);
 		if (renderable instanceof RUIControl) {
-			this.container.addComponent(((RUIControl) renderable).widget.getComponent());
+			this.container.addComponent(((RUIControl) renderable).getWidget().getComponent());
 		}
 	}
 
@@ -2473,13 +2472,13 @@ public class RBlockViewport extends BaseRCollection {
 	 *            the shift y
 	 */
 	private void importFloat(ExportableFloat ef, int shiftX, int shiftY) {
-		BoundableRenderable renderable = ef.element;
-		int newX = ef.origX + shiftX;
-		int newY = ef.origY + shiftY;
+		BoundableRenderable renderable = ef.getElement();
+		int newX = ef.getOrigX() + shiftX;
+		int newY = ef.getOrigY() + shiftY;
 		renderable.setOrigin(newX, newY);
 		FloatingBounds prevBounds = this.floatBounds;
 		int offsetFromBorder;
-		boolean leftFloat = ef.leftFloat;
+		boolean leftFloat = ef.isLeftFloat();
 		if (leftFloat) {
 			offsetFromBorder = newX + renderable.getWidth();
 		} else {
@@ -2493,7 +2492,7 @@ public class RBlockViewport extends BaseRCollection {
 			this.addExportableFloat(renderable, leftFloat, newX, newY);
 		}
 	}
-		
+
 	public void positionDelayed() {
 		final Collection<DelayedPair> delayedPairs = container.getDelayedPairs();
 		if (delayedPairs != null && delayedPairs.size() > 0) {

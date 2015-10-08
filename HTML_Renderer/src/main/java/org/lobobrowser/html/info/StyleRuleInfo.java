@@ -82,7 +82,7 @@ public class StyleRuleInfo implements Serializable {
 				first = false;
 				continue;
 			}
-			String selectorText = simpleSelector.simpleSelectorText;
+			String selectorText = simpleSelector.getSimpleSelectorText();
 			int dotIdx = selectorText.indexOf('.');
 			HTMLElementImpl newElement;
 			if (dotIdx != -1) {
@@ -134,9 +134,9 @@ public class StyleRuleInfo implements Serializable {
 				first = false;
 				continue;
 			}
-			String selectorText = simpleSelector.simpleSelectorText;
+			String selectorText = simpleSelector.getSimpleSelectorText();
 			int dotIdx = selectorText.indexOf('.');
-			int selectorType = simpleSelector.selectorType;
+			int selectorType = simpleSelector.getSelectorType();
 			HTMLElementImpl priorElement;
 			if (dotIdx != -1) {
 				String elemtl = selectorText.substring(0, dotIdx);

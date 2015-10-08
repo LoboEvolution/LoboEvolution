@@ -358,12 +358,12 @@ public class RLine extends BaseRCollection {
 
 		int extraHeight = 0;
 		int maxDescent = this.height - this.baseLineOffset;
-		if (rword.descent > maxDescent) {
-			extraHeight += (rword.descent - maxDescent);
+		if (rword.getDescent() > maxDescent) {
+			extraHeight += (rword.getDescent() - maxDescent);
 		}
 		int maxAscentPlusLeading = this.baseLineOffset;
-		if (rword.ascentPlusLeading > maxAscentPlusLeading) {
-			extraHeight += (rword.ascentPlusLeading - maxAscentPlusLeading);
+		if (rword.getAscentPlusLeading() > maxAscentPlusLeading) {
+			extraHeight += (rword.getAscentPlusLeading() - maxAscentPlusLeading);
 		}
 		if (extraHeight > 0) {
 			int newHeight = this.height + extraHeight;
@@ -374,7 +374,7 @@ public class RLine extends BaseRCollection {
 		int x = offset;
 		offset += wiwidth;
 		this.width = this.xoffset = offset;
-		rword.setOrigin(x, this.baseLineOffset - rword.ascentPlusLeading);
+		rword.setOrigin(x, this.baseLineOffset - rword.getAscentPlusLeading());
 	}
 
 	/**
@@ -387,7 +387,7 @@ public class RLine extends BaseRCollection {
 		// NOTE: Blanks may be added without concern for wrapping (?)
 		int x = this.xoffset;
 		int width = rblank.width;
-		rblank.setOrigin(x, this.baseLineOffset - rblank.ascentPlusLeading);
+		rblank.setOrigin(x, this.baseLineOffset - rblank.getAscentPlusLeading());
 		this.renderables.add(rblank);
 		rblank.setParent(this);
 		// Only move xoffset, but not width
@@ -569,10 +569,10 @@ public class RLine extends BaseRCollection {
 			Object r = i.next();
 			if (r instanceof RWord) {
 				RWord rword = (RWord) r;
-				rword.setY(baseline - rword.ascentPlusLeading);
+				rword.setY(baseline - rword.getAscentPlusLeading());
 			} else if (r instanceof RBlank) {
 				RBlank rblank = (RBlank) r;
-				rblank.setY(baseline - rblank.ascentPlusLeading);
+				rblank.setY(baseline - rblank.getAscentPlusLeading());
 			} else if (r instanceof RElement) {
 				RElement relement = (RElement) r;
 				// int w = relement.getWidth();
@@ -739,46 +739,6 @@ public class RLine extends BaseRCollection {
 	public Color getBlockBackgroundColor() {
 		return this.container.getPaintedBackgroundColor();
 	}
-
-	// public final void adjustHorizontalBounds(int newX, int newMaxWidth)
-	// throws OverflowException {
-	// this.x = newX;
-	// this.desiredMaxWidth = newMaxWidth;
-	// int topX = newX + newMaxWidth;
-	// ArrayList renderables = this.renderables;
-	// int size = renderables.size();
-	// ArrayList overflown = null;
-	// Rectangle lastInLine = null;
-	// for(int i = 0; i < size; i++) {
-	// Object r = renderables.get(i);
-	// if(overflown == null) {
-	// if(r instanceof BoundableRenderable) {
-	// BoundableRenderable br = (BoundableRenderable) r;
-	// Rectangle brb = br.getBounds();
-	// int x2 = brb.x + brb.width;
-	// if(x2 > topX) {
-	// overflown = new ArrayList(1);
-	// }
-	// else {
-	// lastInLine = brb;
-	// }
-	// }
-	// }
-	// /* must not be else here */
-	// if(overflown != null) {
-	// //TODO: This could break a word across markup boundary.
-	// overflown.add(r);
-	// renderables.remove(i--);
-	// size--;
-	// }
-	// }
-	// if(overflown != null) {
-	// if(lastInLine != null) {
-	// this.width = this.xoffset = lastInLine.x + lastInLine.width;
-	// }
-	// throw new OverflowException(overflown);
-	// }
-	// }
 
 	/*
 	 * (non-Javadoc)

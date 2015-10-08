@@ -22,6 +22,7 @@ package org.lobobrowser.lobo_testing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -181,7 +182,7 @@ public class ContentObjectDemo extends JFrame {
 	private class LocationItem {
 
 		/** The url. */
-		public final java.net.URL url;
+		public final URL url;
 
 		/** The text. */
 		public final String text;

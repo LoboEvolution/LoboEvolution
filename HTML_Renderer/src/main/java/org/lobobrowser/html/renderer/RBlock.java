@@ -48,6 +48,7 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.info.FloatingInfo;
+import org.lobobrowser.html.layout.LayoutKey;
 import org.lobobrowser.html.layout.LayoutValue;
 import org.lobobrowser.html.renderstate.BlockRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
@@ -88,8 +89,7 @@ public class RBlock extends BaseElementRenderable implements
     protected final RBlockViewport bodyLayout;
 
     /** The cached layout. */
-    protected final Map<LayoutKey, LayoutValue> cachedLayout = new Hashtable<LayoutKey, LayoutValue>(
-            5);
+    protected final Map<LayoutKey, LayoutValue> cachedLayout = new Hashtable<LayoutKey, LayoutValue>(5);
 
     /** The start selection. */
     protected RenderableSpot startSelection;
@@ -621,10 +621,10 @@ public class RBlock extends BaseElementRenderable implements
                 this.lastLayoutValue = value;
             }
         }
-        this.width = value.width;
-        this.height = value.height;
-        this.hasHScrollBar = value.hasHScrollBar;
-        this.hasVScrollBar = value.hasVScrollBar;
+        this.width = value.getWidth();
+        this.height = value.getHeight();
+        this.hasHScrollBar = value.isHasHScrollBar();
+        this.hasVScrollBar = value.isHasVScrollBar();
         
         bodyLayout.positionDelayed();
 
@@ -1622,125 +1622,6 @@ public class RBlock extends BaseElementRenderable implements
         this.defaultOverflowY = defaultOverflowY;
     }
 
-    /**
-     * The Class LayoutKey.
-     */
-    public static class LayoutKey {
-
-        /** The avail width. */
-        public final int availWidth;
-
-        /** The avail height. */
-        public final int availHeight;
-
-        /** The float bounds source. */
-        public final FloatingBoundsSource floatBoundsSource;
-
-        /** The default overflow x. */
-        public final int defaultOverflowX;
-
-        /** The default overflow y. */
-        public final int defaultOverflowY;
-
-        /** The whitespace. */
-        public final int whitespace;
-
-        /** The font. */
-        public final Font font;
-
-        /** The expand width. */
-        public final boolean expandWidth;
-
-        /** The expand height. */
-        public final boolean expandHeight;
-
-        /** The use declared size. */
-        public final boolean useDeclaredSize;
-
-        /** The override no wrap. */
-        public final boolean overrideNoWrap;
-
-        /**
-         * Instantiates a new layout key.
-         *
-         * @param availWidth
-         *            the avail width
-         * @param availHeight
-         *            the avail height
-         * @param expandWidth
-         *            the expand width
-         * @param expandHeight
-         *            the expand height
-         * @param floatBoundsSource
-         *            the float bounds source
-         * @param defaultOverflowX
-         *            the default overflow x
-         * @param defaultOverflowY
-         *            the default overflow y
-         * @param whitespace
-         *            the whitespace
-         * @param font
-         *            the font
-         * @param overrideNoWrap
-         *            the override no wrap
-         */
-        public LayoutKey(int availWidth, int availHeight, boolean expandWidth,
-                boolean expandHeight, FloatingBoundsSource floatBoundsSource,
-                int defaultOverflowX, int defaultOverflowY, int whitespace,
-                Font font, boolean overrideNoWrap) {
-            super();
-            this.availWidth = availWidth;
-            this.availHeight = availHeight;
-            this.floatBoundsSource = floatBoundsSource;
-            this.defaultOverflowX = defaultOverflowX;
-            this.defaultOverflowY = defaultOverflowY;
-            this.whitespace = whitespace;
-            this.font = font;
-            this.expandWidth = expandWidth;
-            this.expandHeight = expandHeight;
-            this.useDeclaredSize = true;
-            this.overrideNoWrap = overrideNoWrap;
-        }
-
-        /*
- * (non-Javadoc)
- * @see java.lang.Object#equals(java.lang.Object)
- */
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == this) {
-                return true;
-            }
-            if (!(obj instanceof LayoutKey)) {
-                return false;
-            }
-            LayoutKey other = (LayoutKey) obj;
-            return (other.availWidth == this.availWidth)
-                    && (other.availHeight == this.availHeight)
-                    && (other.defaultOverflowX == this.defaultOverflowX)
-                    && (other.defaultOverflowY == this.defaultOverflowY)
-                    && (other.whitespace == this.whitespace)
-                    && (other.expandWidth == this.expandWidth)
-                    && (other.expandHeight == this.expandHeight)
-                    && (other.useDeclaredSize == this.useDeclaredSize)
-                    && (other.overrideNoWrap == this.overrideNoWrap)
-                    && Objects.equals(other.font, this.font)
-                    && Objects.equals(other.floatBoundsSource,
-                            this.floatBoundsSource);
-        }
-
-        /*
- * (non-Javadoc)
- * @see java.lang.Object#hashCode()
- */
-        @Override
-        public int hashCode() {
-            Font font = this.font;
-            return ((this.availWidth * 1000) + this.availHeight)
-                    ^ (font == null ? 0 : font.hashCode())
-                    ^ (this.expandWidth ? 2 : 0) ^ (this.expandHeight ? 1 : 0)
-                    ^ (this.whitespace << 2);
-        }
-    }
+        
 
 }

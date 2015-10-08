@@ -36,9 +36,8 @@ import org.lobobrowser.html.renderstate.RenderState;
  * The Class RBlank.
  */
 final class RBlank extends BaseBoundableRenderable {
-	// TODO: Is there a need for RBlank's at all?
 	/** The ascent plus leading. */
-	public final int ascentPlusLeading;
+	private int ascentPlusLeading;
 
 	/** The font metrics. */
 	private final FontMetrics fontMetrics;
@@ -266,7 +265,7 @@ final class RBlank extends BaseBoundableRenderable {
 	 */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
-		if ((this == startPoint.renderable) || (this == endPoint.renderable)) {
+		if ((this == startPoint.getRenderable()) || (this == endPoint.getRenderable())) {
 			if (inSelection) {
 				return false;
 			}
@@ -292,7 +291,7 @@ final class RBlank extends BaseBoundableRenderable {
 	@Override
 	public boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
-		if ((this == startPoint.renderable) || (this == endPoint.renderable)) {
+		if ((this == startPoint.getRenderable()) || (this == endPoint.getRenderable())) {
 			if (inSelection) {
 				return false;
 			}
@@ -340,6 +339,27 @@ final class RBlank extends BaseBoundableRenderable {
 		} else {
 			return true;
 		}
+	}
+
+	/**
+	 * @return the ascentPlusLeading
+	 */
+	public int getAscentPlusLeading() {
+		return ascentPlusLeading;
+	}
+
+	/**
+	 * @param ascentPlusLeading the ascentPlusLeading to set
+	 */
+	public void setAscentPlusLeading(int ascentPlusLeading) {
+		this.ascentPlusLeading = ascentPlusLeading;
+	}
+
+	/**
+	 * @return the fontMetrics
+	 */
+	public FontMetrics getFontMetrics() {
+		return fontMetrics;
 	}
 
 }

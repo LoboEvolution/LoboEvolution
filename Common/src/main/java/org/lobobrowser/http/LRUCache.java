@@ -250,40 +250,4 @@ public class LRUCache implements java.io.Serializable {
         }
         return list;
     }
-    
-    /**
-     * The Class EntryInfo.
-     */
-    public static class EntryInfo {
-        /** The value class. */
-        public final Class<?> valueClass;
-        /** The approximate size. */
-        public final int approximateSize;
-        
-        /**
-         * Instantiates a new entry info.
-         *
-         * @param valueClass
-         *            the value class
-         * @param approximateSize
-         *            the approximate size
-         */
-        public EntryInfo(final Class<?> valueClass, final int approximateSize) {
-            super();
-            this.valueClass = valueClass;
-            this.approximateSize = approximateSize;
-        }
-        
-        /*
-         * (non-Javadoc)
-         * @see java.lang.Object#toString()
-         */
-        @Override
-        public String toString() {
-            Class<?> vc = this.valueClass;
-            String vcName = vc == null ? "<none>" : vc.getName();
-            return "[class=" + vcName + ",approx-size=" + this.approximateSize
-                    + "]";
-        }
-    }
 }

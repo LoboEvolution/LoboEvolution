@@ -33,13 +33,13 @@ public class SimpleSelector {
 	public static final int PRECEEDING_SIBLING = 2;
 
 	/** The simple selector text. */
-	public final String simpleSelectorText;
+	private String simpleSelectorText;
 
 	/** The pseudo element. */
-	public final String pseudoElement;
+	private String pseudoElement;
 
 	/** The selector type. */
-	public int selectorType;
+	private int selectorType;
 
 	/**
 	 * Instantiates a new simple selector.
@@ -133,5 +133,33 @@ public class SimpleSelector {
 	 */
 	public void setSelectorType(int selectorType) {
 		this.selectorType = selectorType;
+	}
+
+	/**
+	 * @return the simpleSelectorText
+	 */
+	public String getSimpleSelectorText() {
+		return simpleSelectorText;
+	}
+
+	/**
+	 * @param simpleSelectorText the simpleSelectorText to set
+	 */
+	public void setSimpleSelectorText(String simpleSelectorText) {
+		this.simpleSelectorText = simpleSelectorText;
+	}
+
+	/**
+	 * @return the pseudoElement
+	 */
+	public String getPseudoElement() {
+		return pseudoElement;
+	}
+
+	/**
+	 * @param pseudoElement the pseudoElement to set
+	 */
+	public void setPseudoElement(String pseudoElement) {
+		this.pseudoElement = pseudoElement;
 	}
 }

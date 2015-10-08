@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.primary.clientlets;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -35,7 +36,7 @@ public class ArchiveInfo {
 	public static final ArchiveInfo[] EMPTY_ARRAY = new ArchiveInfo[0];
 
 	/** The file. */
-	public final java.io.File file;
+	public final File file;
 
 	/** The url. */
 	public final URL url;
@@ -48,7 +49,7 @@ public class ArchiveInfo {
 	 * @param file
 	 *            the file
 	 */
-	public ArchiveInfo(final URL url, final java.io.File file) {
+	public ArchiveInfo(final URL url, final File file) {
 		super();
 		this.url = url;
 		this.file = file;

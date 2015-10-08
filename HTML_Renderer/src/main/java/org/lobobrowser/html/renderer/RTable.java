@@ -43,6 +43,8 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.control.RUIControl;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.layout.LayoutKey;
+import org.lobobrowser.html.layout.LayoutValue;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.RenderThreadState;
 import org.lobobrowser.http.UserAgentContext;
@@ -161,7 +163,7 @@ class RTable extends BaseElementRenderable {
 				Iterator<PositionedRenderable> i = prs.iterator();
 				while (i.hasNext()) {
 					PositionedRenderable pr = i.next();
-					BoundableRenderable r = pr.renderable;
+					BoundableRenderable r = pr.getRenderable();
 					r.paintTranslated(g);
 				}
 			}
@@ -222,12 +224,12 @@ class RTable extends BaseElementRenderable {
 				Iterator<?> i = pairs.iterator();
 				while (i.hasNext()) {
 					DelayedPair pair = (DelayedPair) i.next();
-					if (pair.containingBlock  == this) {
+					if (pair.containingBlock == this) {
 						this.importDelayedPair(pair);
 					}
 				}
 			}
-			layoutValue = new LayoutValue(tm.getTableWidth(), tm.getTableHeight());
+			layoutValue = new LayoutValue(tm.getTableWidth(), tm.getTableHeight(),false,false);
 			if (sizeOnly) {
 				if (cachedLayout.size() > MAX_CACHE_SIZE) {
 					// Unlikely, but we should ensure it's bounded.
@@ -241,8 +243,8 @@ class RTable extends BaseElementRenderable {
 				this.lastLayoutValue = layoutValue;
 			}
 		}
-		this.width = layoutValue.width;
-		this.height = layoutValue.height;
+		this.width = layoutValue.getWidth();
+		this.height = layoutValue.getHeight();
 		this.sendGUIComponentsToParent();
 		this.sendDelayedPairsToParent();
 	}
@@ -276,7 +278,7 @@ class RTable extends BaseElementRenderable {
 			Iterator<PositionedRenderable> i = prs.iterator();
 			while (i.hasNext()) {
 				PositionedRenderable pr = i.next();
-				BoundableRenderable r = pr.renderable;
+				BoundableRenderable r = pr.getRenderable();
 				int childX = x - r.getX();
 				int childY = y - r.getY();
 				RenderableSpot rs = r.getLowestRenderableSpot(childX, childY);
@@ -306,7 +308,7 @@ class RTable extends BaseElementRenderable {
 			Iterator<PositionedRenderable> i = prs.iterator();
 			while (i.hasNext()) {
 				PositionedRenderable pr = i.next();
-				BoundableRenderable r = pr.renderable;
+				BoundableRenderable r = pr.getRenderable();
 				Rectangle bounds = r.getBounds();
 				if (bounds.contains(x, y)) {
 					int childX = x - r.getX();
@@ -334,7 +336,7 @@ class RTable extends BaseElementRenderable {
 			Iterator<PositionedRenderable> i = prs.iterator();
 			while (i.hasNext()) {
 				PositionedRenderable pr = i.next();
-				BoundableRenderable r = pr.renderable;
+				BoundableRenderable r = pr.getRenderable();
 				Rectangle bounds = r.getBounds();
 				if (bounds.contains(x, y)) {
 					int childX = x - r.getX();
@@ -374,7 +376,7 @@ class RTable extends BaseElementRenderable {
 			Iterator<PositionedRenderable> i = prs.iterator();
 			while (i.hasNext()) {
 				PositionedRenderable pr = i.next();
-				BoundableRenderable r = pr.renderable;
+				BoundableRenderable r = pr.getRenderable();
 				Rectangle bounds = r.getBounds();
 				if (bounds.contains(x, y)) {
 					int childX = x - r.getX();
@@ -402,7 +404,7 @@ class RTable extends BaseElementRenderable {
 			Iterator<PositionedRenderable> i = prs.iterator();
 			while (i.hasNext()) {
 				PositionedRenderable pr = i.next();
-				BoundableRenderable r = pr.renderable;
+				BoundableRenderable r = pr.getRenderable();
 				Rectangle bounds = r.getBounds();
 				if (bounds.contains(x, y)) {
 					int childX = x - r.getX();
@@ -477,7 +479,7 @@ class RTable extends BaseElementRenderable {
 			Iterator<PositionedRenderable> i = prs.iterator();
 			while (i.hasNext()) {
 				PositionedRenderable pr = i.next();
-				BoundableRenderable r = pr.renderable;
+				BoundableRenderable r = pr.getRenderable();
 				c.add(r);
 			}
 			Iterator<BoundableRenderable> i2 = this.tableMatrix.getRenderables();
@@ -533,7 +535,7 @@ class RTable extends BaseElementRenderable {
 		others.add(new PositionedRenderable(renderable, verticalAlignable, this.otherOrdinal++, isFloat));
 		renderable.setParent(this);
 		if (renderable instanceof RUIControl) {
-			this.container.addComponent(((RUIControl) renderable).widget.getComponent());
+			this.container.addComponent(((RUIControl) renderable).getWidget().getComponent());
 		}
 	}
 
@@ -558,105 +560,4 @@ class RTable extends BaseElementRenderable {
 	public String toString() {
 		return "RTable[this=" + System.identityHashCode(this) + ",node=" + this.modelNode + "]";
 	}
-
-	/**
-	 * The Class LayoutKey.
-	 */
-	public static class LayoutKey {
-
-		/** The avail width. */
-		public final int availWidth;
-
-		/** The avail height. */
-		public final int availHeight;
-
-		/** The whitespace. */
-		public final int whitespace;
-
-		/** The font. */
-		public final Font font;
-
-		/** The override no wrap. */
-		public final boolean overrideNoWrap;
-
-		/**
-		 * Instantiates a new layout key.
-		 *
-		 * @param availWidth
-		 *            the avail width
-		 * @param availHeight
-		 *            the avail height
-		 * @param whitespace
-		 *            the whitespace
-		 * @param font
-		 *            the font
-		 * @param overrideNoWrap
-		 *            the override no wrap
-		 */
-		public LayoutKey(int availWidth, int availHeight, int whitespace, Font font, boolean overrideNoWrap) {
-			super();
-			this.availWidth = availWidth;
-			this.availHeight = availHeight;
-			this.whitespace = whitespace;
-			this.font = font;
-			this.overrideNoWrap = overrideNoWrap;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.lang.Object#equals(java.lang.Object)
-		 */
-		@Override
-		public boolean equals(Object obj) {
-			if (obj == this) {
-				return true;
-			}
-			if (!(obj instanceof LayoutKey)) {
-				return false;
-			}
-			LayoutKey other = (LayoutKey) obj;
-			return (other.availWidth == this.availWidth) && (other.availHeight == this.availHeight)
-					&& (other.whitespace == this.whitespace) && (other.overrideNoWrap == this.overrideNoWrap)
-					&& Objects.equals(other.font, this.font);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.lang.Object#hashCode()
-		 */
-		@Override
-		public int hashCode() {
-			Font font = this.font;
-			return ((this.availWidth * 1000) + this.availHeight) ^ (font == null ? 0 : font.hashCode())
-					^ this.whitespace;
-		}
-	}
-
-	/**
-	 * The Class LayoutValue.
-	 */
-	public static class LayoutValue {
-
-		/** The width. */
-		public final int width;
-
-		/** The height. */
-		public final int height;
-
-		/**
-		 * Instantiates a new layout value.
-		 *
-		 * @param width
-		 *            the width
-		 * @param height
-		 *            the height
-		 */
-		public LayoutValue(int width, int height) {
-			this.width = width;
-			this.height = height;
-		}
-	}
-
 }

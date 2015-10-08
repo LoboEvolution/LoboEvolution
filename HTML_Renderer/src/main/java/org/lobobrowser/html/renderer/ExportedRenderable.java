@@ -26,20 +26,20 @@ package org.lobobrowser.html.renderer;
 class ExportedRenderable {
 
 	/** The original target. */
-	public final RBlockViewport originalTarget;
+	private RBlockViewport originalTarget;
 
 	/** The renderable. */
-	public final BoundableRenderable renderable;
+	private BoundableRenderable renderable;
 
 	/**
 	 * Coordinates in original target, for aligned blocks.
 	 */
-	public final int x, y;
+	private int x, y;
 
 	/**
 	 * -1 (left), 0, or +1 (right).
 	 */
-	public final int alignment;
+	private int alignment;
 
 	/**
 	 * Instantiates a new exported renderable.
@@ -63,5 +63,75 @@ class ExportedRenderable {
 		this.y = y;
 		this.alignment = alignment;
 		this.renderable = renderable;
+	}
+
+	/**
+	 * @return the originalTarget
+	 */
+	public RBlockViewport getOriginalTarget() {
+		return originalTarget;
+	}
+
+	/**
+	 * @param originalTarget the originalTarget to set
+	 */
+	public void setOriginalTarget(RBlockViewport originalTarget) {
+		this.originalTarget = originalTarget;
+	}
+
+	/**
+	 * @return the renderable
+	 */
+	public BoundableRenderable getRenderable() {
+		return renderable;
+	}
+
+	/**
+	 * @param renderable the renderable to set
+	 */
+	public void setRenderable(BoundableRenderable renderable) {
+		this.renderable = renderable;
+	}
+
+	/**
+	 * @return the x
+	 */
+	public int getX() {
+		return x;
+	}
+
+	/**
+	 * @param x the x to set
+	 */
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	/**
+	 * @return the y
+	 */
+	public int getY() {
+		return y;
+	}
+
+	/**
+	 * @param y the y to set
+	 */
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	/**
+	 * @return the alignment
+	 */
+	public int getAlignment() {
+		return alignment;
+	}
+
+	/**
+	 * @param alignment the alignment to set
+	 */
+	public void setAlignment(int alignment) {
+		this.alignment = alignment;
 	}
 }

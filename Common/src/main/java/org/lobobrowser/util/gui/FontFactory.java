@@ -41,8 +41,6 @@ import java.util.logging.Logger;
 
 import javax.swing.text.StyleContext;
 
-import org.lobobrowser.util.Objects;
-
 /**
  * A factory for creating Font objects.
  *
@@ -195,7 +193,7 @@ public class FontFactory {
      */
     private final Font createFont(FontKey key) {
         Font font = createFont_Impl(key);
-        return superscriptFont(font, key.superscript);
+        return superscriptFont(font, key.getSuperscript());
     }
     
     /**
@@ -233,7 +231,7 @@ public class FontFactory {
      * @return the font
      */
     private final Font createFont_Impl(FontKey key) {
-        String fontNames = key.fontFamily;
+        String fontNames = key.getFontFamily();
         String matchingFace = null;
         Set fontFamilies = this.fontFamilies;
         Map<String, Font> registeredFonts = this.registeredFonts;
@@ -253,19 +251,19 @@ public class FontFactory {
             }
         }
         int fontStyle = Font.PLAIN;
-        if ("italic".equalsIgnoreCase(key.fontStyle)) {
+        if ("italic".equalsIgnoreCase(key.getFontStyle())) {
             fontStyle |= Font.ITALIC;
         }
-        if ("bold".equalsIgnoreCase(key.fontWeight)
-                || "bolder".equalsIgnoreCase(key.fontWeight)) {
+        if ("bold".equalsIgnoreCase(key.getFontWeight())
+                || "bolder".equalsIgnoreCase(key.getFontWeight())) {
             fontStyle |= Font.BOLD;
         }
         if (baseFont != null) {
-            return baseFont.deriveFont(fontStyle, key.fontSize);
+            return baseFont.deriveFont(fontStyle, key.getFontSize());
         } else if (matchingFace != null) {
             Font font = createFont(matchingFace, fontStyle,
-                    Math.round(key.fontSize));
-            Set locales = key.locales;
+                    Math.round(key.getFontSize()));
+            Set locales = key.getLocales();
             if (locales == null) {
                 Locale locale = Locale.getDefault();
                 if (font.canDisplayUpTo(
@@ -291,7 +289,7 @@ public class FontFactory {
         }
         // Last resort:
         return createFont(this.defaultFontName, fontStyle,
-                Math.round(key.fontSize));
+                Math.round(key.getFontSize()));
     }
     
     /**
@@ -307,133 +305,5 @@ public class FontFactory {
      */
     private Font createFont(String name, int style, int size) {
         return StyleContext.getDefaultStyleContext().getFont(name, style, size);
-        // Proprietary Sun API. Maybe shouldn't use it. Works well for Chinese.
-        // return FontManager.getCompositeFontUIResource(new Font(name, style,
-        // size));
-    }
-    
-    /**
-     * The Class FontKey.
-     */
-    private static class FontKey {
-        /** The font family. */
-        public final String fontFamily;
-        /** The font style. */
-        public final String fontStyle;
-        /** The font variant. */
-        public final String fontVariant;
-        /** The font weight. */
-        public final String fontWeight;
-        /** The font size. */
-        public final float fontSize;
-        /** The locales. */
-        public final Set locales;
-        /** The superscript. */
-        public final Integer superscript;
-        
-        /**
-         * Instantiates a new font key.
-         *
-         * @param fontFamily
-         *            the font family
-         * @param fontStyle
-         *            the font style
-         * @param fontVariant
-         *            the font variant
-         * @param fontWeight
-         *            the font weight
-         * @param fontSize
-         *            the font size
-         * @param locales
-         *            the locales
-         * @param superscript
-         *            the superscript
-         */
-        public FontKey(final String fontFamily, final String fontStyle,
-                final String fontVariant, final String fontWeight,
-                final float fontSize, final Set locales,
-                final Integer superscript) {
-            this.fontFamily = fontFamily == null ? null : fontFamily.intern();
-            this.fontStyle = fontStyle == null ? null : fontStyle.intern();
-            this.fontVariant = fontVariant == null ? null
-                    : fontVariant.intern();
-            this.fontWeight = fontWeight == null ? null : fontWeight.intern();
-            this.fontSize = fontSize;
-            this.locales = locales;
-            this.superscript = superscript;
-        }
-        
-        /*
-         * (non-Javadoc)
-         * @see java.lang.Object#equals(java.lang.Object)
-         */
-        @Override
-        public boolean equals(Object other) {
-            if (other == this) {
-                // Quick check.
-                return true;
-            }
-            FontKey ors;
-            try {
-                ors = (FontKey) other;
-            } catch (ClassCastException cce) {
-                // Not expected
-                return false;
-            }
-            // Note that we use String.intern() for all string fields,
-            // so we can do instance comparisons.
-            return (this.fontSize == ors.fontSize)
-                    && (this.fontFamily == ors.fontFamily)
-                    && (this.fontStyle == ors.fontStyle)
-                    && (this.fontWeight == ors.fontWeight)
-                    && (this.fontVariant == ors.fontVariant)
-                    && (this.superscript == ors.superscript)
-                    && Objects.equals(this.locales, ors.locales);
-        }
-        
-        /** The cached hash. */
-        private int cachedHash = -1;
-        
-        /*
-         * (non-Javadoc)
-         * @see java.lang.Object#hashCode()
-         */
-        @Override
-        public int hashCode() {
-            int ch = this.cachedHash;
-            if (ch != -1) {
-                // Object is immutable - caching is ok.
-                return ch;
-            }
-            String ff = this.fontFamily;
-            if (ff == null) {
-                ff = "";
-            }
-            String fw = this.fontWeight;
-            if (fw == null) {
-                fw = "";
-            }
-            String fs = this.fontStyle;
-            if (fs == null) {
-                fs = "";
-            }
-            Integer ss = this.superscript;
-            ch = ff.hashCode() ^ fw.hashCode() ^ fs.hashCode()
-                    ^ (int) this.fontSize ^ (ss == null ? 0 : ss.intValue());
-            this.cachedHash = ch;
-            return ch;
-        }
-        
-        /*
-         * (non-Javadoc)
-         * @see java.lang.Object#toString()
-         */
-        @Override
-        public String toString() {
-            return "FontKey[family=" + this.fontFamily + ",size="
-                    + this.fontSize + ",style=" + this.fontStyle + ",weight="
-                    + this.fontWeight + ",variant=" + this.fontVariant
-                    + ",superscript=" + this.superscript + "]";
-        }
     }
 }

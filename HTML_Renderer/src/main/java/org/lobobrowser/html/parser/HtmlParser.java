@@ -164,7 +164,7 @@ public class HtmlParser {
 	 */
 	public static boolean isDecodeEntities(String elementName) {
 		ElementInfo einfo = ELEMENT_INFOS.get(elementName.toUpperCase());
-		return einfo == null ? true : einfo.decodeEntities;
+		return einfo == null ? true : einfo.isDecodeEntities();
 	}
 
 	/**
@@ -369,10 +369,10 @@ public class HtmlParser {
 						parent.appendChild(element);
 						if (!this.justReadEmptyElement) {
 							ElementInfo einfo = ELEMENT_INFOS.get(localName);
-							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.endElementType;
+							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.getEndElementType();
 							if (endTagType != ElementInfo.END_ELEMENT_FORBIDDEN) {
-								boolean childrenOk = einfo == null ? true : einfo.childElementOk;
-								Set<String> newStopSet = einfo == null ? null : einfo.stopTags;
+								boolean childrenOk = einfo == null ? true : einfo.isChildElementOk();
+								Set<String> newStopSet = einfo == null ? null : einfo.getStopTags();
 								if (newStopSet == null) {
 									if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
 										newStopSet = Collections.singleton(normalTag);
@@ -393,11 +393,11 @@ public class HtmlParser {
 									for (;;) {
 										try {
 											int token;
-											if ((einfo != null) && einfo.noScriptElement) {
+											if ((einfo != null) && einfo.isNoScriptElement()) {
 												UserAgentContext ucontext = this.ucontext;
 												if ((ucontext == null) || ucontext.isScriptingEnabled()) {
 													token = this.parseForEndTag(parent, reader, tag, false,
-															einfo.decodeEntities);
+															einfo.isDecodeEntities());
 												} else {
 													token = this.parseToken(element, reader, newStopSet, ancestors);
 												}
@@ -405,7 +405,7 @@ public class HtmlParser {
 												token = childrenOk
 														? this.parseToken(element, reader, newStopSet, ancestors)
 														: this.parseForEndTag(element, reader, tag, true,
-																einfo.decodeEntities);
+																einfo.isDecodeEntities());
 											}
 											if (token == TOKEN_END_ELEMENT) {
 												String normalLastTag = this.normalLastTag;
@@ -414,7 +414,7 @@ public class HtmlParser {
 												} else {
 													ElementInfo closeTagInfo = ELEMENT_INFOS.get(normalLastTag);
 													if ((closeTagInfo == null)
-															|| (closeTagInfo.endElementType != ElementInfo.END_ELEMENT_FORBIDDEN)) {
+															|| (closeTagInfo.getEndElementType() != ElementInfo.END_ELEMENT_FORBIDDEN)) {
 														// TODO: Rather
 														// inefficient
 														// algorithm, but it's
@@ -454,9 +454,9 @@ public class HtmlParser {
 											}
 											einfo = ELEMENT_INFOS.get(normalTag);
 											endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED
-													: einfo.endElementType;
-											childrenOk = einfo == null ? true : einfo.childElementOk;
-											newStopSet = einfo == null ? null : einfo.stopTags;
+													: einfo.getEndElementType();
+											childrenOk = einfo == null ? true : einfo.isChildElementOk();
+											newStopSet = einfo == null ? null : einfo.getStopTags();
 											if (newStopSet == null) {
 												if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
 													newStopSet = Collections.singleton(normalTag);

@@ -143,28 +143,4 @@ class VirtualCell {
         }
         return length;
     }
-
-    // public Dimension layoutMinWidth() {
-    //
-    // ActualCell cell = this.actualCell;
-    //
-    // Dimension ad = cell.layoutMinWidth();
-    //
-    // int colspan = cell.getColSpan();
-    //
-    // int rowspan = cell.getRowSpan();
-    //
-    // if(colspan == 1 && rowspan == 1) {
-    //
-    // return ad;
-    //
-    //}
-    //
-    // else {
-    //
-    // return new Dimension(ad.width / colspan, ad.height / rowspan);
-    //
-    //}
-    //
-    //}
 }

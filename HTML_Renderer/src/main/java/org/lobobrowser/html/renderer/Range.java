@@ -31,10 +31,10 @@ package org.lobobrowser.html.renderer;
 class Range {
 
     /** The offset. */
-    public final int offset;
+    private int offset;
 
     /** The length. */
-    public final int length;
+    private int length;
 
     /**
      * Instantiates a new range.
@@ -50,7 +50,21 @@ class Range {
         this.length = length;
     }
 
-    /*
+    /**
+	 * @return the offset
+	 */
+	public int getOffset() {
+		return offset;
+	}
+
+	/**
+	 * @return the length
+	 */
+	public int getLength() {
+		return length;
+	}
+
+	/*
      * (non-Javadoc)
      * @see java.lang.Object#toString()
      */

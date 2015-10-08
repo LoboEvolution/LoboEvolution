@@ -68,7 +68,7 @@ public class MemoryURLConnection extends URLConnection {
     public void connect() throws IOException {
         if (!this.connected) {
             this.readHeaders();
-            InputStream in = new ByteArrayInputStream(this.memoryEntry.content);
+            InputStream in = new ByteArrayInputStream(this.memoryEntry.getContent());
             this.inputStream = in;
             this.connected = true;
         }
@@ -82,7 +82,7 @@ public class MemoryURLConnection extends URLConnection {
      */
     private void readHeaders() throws IOException {
         Map<String, List<String>> headersMap = this.headersMap;
-        List origList = this.memoryEntry.headers;
+        List origList = this.memoryEntry.getHeaders();
         Iterator i = origList.iterator();
         while (i.hasNext()) {
             NameValuePair pair = (NameValuePair) i.next();
@@ -108,7 +108,7 @@ public class MemoryURLConnection extends URLConnection {
     public String getHeaderField(int n) {
         try {
             this.connect();
-            NameValuePair pair = this.memoryEntry.headers.get(n);
+            NameValuePair pair = this.memoryEntry.getHeaders().get(n);
             return pair.value;
         } catch (IndexOutOfBoundsException iob) {
             return null;
@@ -143,7 +143,7 @@ public class MemoryURLConnection extends URLConnection {
     public String getHeaderFieldKey(int n) {
         try {
             this.connect();
-            NameValuePair pair = this.memoryEntry.headers.get(n);
+            NameValuePair pair = this.memoryEntry.getHeaders().get(n);
             return pair.name;
         } catch (IndexOutOfBoundsException iob) {
             return null;

@@ -139,7 +139,7 @@ public class CacheInfo {
     public final Long getExpiresGivenOffset(long offsetSeconds) {
         MemoryCacheEntry entry = this.memoryEntry;
         if (entry != null) {
-            return entry.requestTime + (offsetSeconds * 1000);
+            return entry.getRequestTime() + (offsetSeconds * 1000);
         } else {
             String rtText = this.getURLConnection().getHeaderField(
                     HEADER_REQUEST_TIME);
@@ -158,7 +158,7 @@ public class CacheInfo {
     public final Long getExpires() {
         MemoryCacheEntry entry = this.memoryEntry;
         if (entry != null) {
-            return entry.expiration;
+            return entry.getExpiration();
         } else {
             URLConnection connection = this.getURLConnection();
             String requestTimeText = connection
@@ -183,7 +183,7 @@ public class CacheInfo {
     public long getRequestTime() {
         MemoryCacheEntry entry = this.memoryEntry;
         if (entry != null) {
-            return entry.requestTime;
+            return entry.getRequestTime();
         } else {
             URLConnection connection = this.getURLConnection();
             String requestTimeText = connection
@@ -210,7 +210,7 @@ public class CacheInfo {
 	 */
     public Object getTransientObject() {
         MemoryCacheEntry memEntry = this.memoryEntry;
-        return memEntry != null ? memEntry.altObject : null;
+        return memEntry != null ? memEntry.getAltObject() : null;
     }
 
     /** Gets the transient object size.
@@ -219,7 +219,7 @@ public class CacheInfo {
 	 */
     public int getTransientObjectSize() {
         MemoryCacheEntry memEntry = this.memoryEntry;
-        return memEntry != null ? memEntry.altObjectSize : 0;
+        return memEntry != null ? memEntry.getAltObjectSize() : 0;
     }
 
     /**

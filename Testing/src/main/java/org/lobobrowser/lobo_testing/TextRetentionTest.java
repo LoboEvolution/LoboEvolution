@@ -45,8 +45,8 @@ public class TextRetentionTest {
 		System.out.println("### Free memory: " + Runtime.getRuntime().freeMemory());
 		System.out.println("### Total memory: " + Runtime.getRuntime().totalMemory());
 		CacheInfo cacheInfo = CacheManager.getInstance().getTransientCacheInfo();
-		System.out.println("### RAM cache entries: " + cacheInfo.numEntries);
-		System.out.println("### RAM cache size: " + cacheInfo.approximateSize);
+		System.out.println("### RAM cache entries: " + cacheInfo.getNumEntries());
+		System.out.println("### RAM cache size: " + cacheInfo.getApproximateSize());
 	}
 
 	/**
