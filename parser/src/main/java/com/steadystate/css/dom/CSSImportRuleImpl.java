@@ -97,7 +97,7 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl implements CSSImportR
 
         final MediaList ml = getMedia();
         if (null != ml && ml.getLength() > 0) {
-            sb.append(" ").append(getMedia().toString());
+            sb.append(" ").append(((MediaListImpl) getMedia()).getMediaText(format));
         }
         sb.append(";");
         return sb.toString();

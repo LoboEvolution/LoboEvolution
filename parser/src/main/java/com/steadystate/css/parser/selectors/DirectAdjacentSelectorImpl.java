@@ -32,6 +32,8 @@ import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SiblingSelector;
 import org.w3c.css.sac.SimpleSelector;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.Locatable;
 import com.steadystate.css.parser.LocatableImpl;
 
@@ -39,7 +41,7 @@ import com.steadystate.css.parser.LocatableImpl;
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class DirectAdjacentSelectorImpl extends LocatableImpl implements SiblingSelector, Serializable {
+public class DirectAdjacentSelectorImpl extends LocatableImpl implements SiblingSelector, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = -7328602345833826516L;
 
@@ -88,8 +90,27 @@ public class DirectAdjacentSelectorImpl extends LocatableImpl implements Sibling
         return siblingSelector_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
+        final StringBuilder sb = new StringBuilder();
+
+        if (null != selector_) {
+            sb.append(((CSSFormatable) selector_).getCssText(format));
+        }
+
+        sb.append(" + ");
+
+        if (null != siblingSelector_) {
+            sb.append(((CSSFormatable) siblingSelector_).getCssText(format));
+        }
+
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
-        return selector_.toString() + " + " + siblingSelector_.toString();
+        return getCssText(null);
     }
 }

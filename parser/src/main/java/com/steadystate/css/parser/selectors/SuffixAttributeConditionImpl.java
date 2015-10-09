@@ -31,12 +31,15 @@ import java.io.Serializable;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Condition;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.LocatableImpl;
 
 /**
  * @author Ahmed Ashour
  */
-public class SuffixAttributeConditionImpl extends LocatableImpl implements AttributeCondition, Serializable {
+public class SuffixAttributeConditionImpl extends LocatableImpl
+                implements AttributeCondition, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = -957389472252773926L;
 
@@ -82,12 +85,19 @@ public class SuffixAttributeConditionImpl extends LocatableImpl implements Attri
         return value_;
     }
 
-    @Override
-    public String toString() {
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
         final String value = getValue();
         if (value != null) {
             return "[" + getLocalName() + "$=\"" + value + "\"]";
         }
         return "[" + getLocalName() + "]";
+    }
+
+    @Override
+    public String toString() {
+        return getCssText(null);
     }
 }

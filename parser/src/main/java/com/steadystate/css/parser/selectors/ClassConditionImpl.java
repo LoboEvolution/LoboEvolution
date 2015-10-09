@@ -31,6 +31,8 @@ import java.io.Serializable;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.Condition;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.LocatableImpl;
 
 /**
@@ -38,7 +40,7 @@ import com.steadystate.css.parser.LocatableImpl;
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class ClassConditionImpl extends LocatableImpl implements AttributeCondition, Serializable {
+public class ClassConditionImpl extends LocatableImpl implements AttributeCondition, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = -2216489300949054242L;
 
@@ -72,12 +74,19 @@ public class ClassConditionImpl extends LocatableImpl implements AttributeCondit
         return value_;
     }
 
-    @Override
-    public String toString() {
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
         final String value = getValue();
         if (value != null) {
             return "." + value;
         }
         return ".";
+    }
+
+    @Override
+    public String toString() {
+        return getCssText(null);
     }
 }

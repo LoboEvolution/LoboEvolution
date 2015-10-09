@@ -76,22 +76,22 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
      */
     @Override
     public String getCssText(final CSSFormat format) {
-        final StringBuilder result = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         final String sel = getSelectorText();
-        result.append("@page ").append(sel);
+        sb.append("@page ").append(sel);
 
         if (sel.length() > 0) {
-            result.append(" ");
+            sb.append(" ");
         }
-        result.append("{");
+        sb.append("{");
 
         final CSSStyleDeclaration style = getStyle();
         if (null != style) {
-            result.append(style.getCssText());
+            sb.append(style.getCssText());
         }
-        result.append("}");
-        return result.toString();
+        sb.append("}");
+        return sb.toString();
     }
 
     public void setCssText(final String cssText) throws DOMException {
@@ -133,12 +133,12 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl implements CSSPageRule 
     }
 
     public String getSelectorText() {
-        final StringBuilder result = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         if (null != pseudoPage_) {
-            result.append(":").append(pseudoPage_);
+            sb.append(":").append(pseudoPage_);
         }
-        return result.toString();
+        return sb.toString();
     }
 
     public void setSelectorText(final String selectorText) throws DOMException {

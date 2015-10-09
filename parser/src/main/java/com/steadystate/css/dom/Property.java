@@ -124,21 +124,16 @@ public class Property extends CSSOMObjectImpl implements CSSFormatable {
      * {@inheritDoc}
      */
     public String getCssText(final CSSFormat format) {
-        final StringBuilder result = new StringBuilder();
-        result.append(name_);
+        final StringBuilder sb = new StringBuilder();
+        sb.append(name_);
         if (null != value_) {
-            result.append(": ");
-            if (value_ instanceof CSSFormatable) {
-                result.append(((CSSFormatable) value_).getCssText(format));
-            }
-            else {
-                result.append(value_.toString());
-            }
+            sb.append(": ");
+            sb.append(((CSSValueImpl) value_).getCssText(format));
         }
         if (important_) {
-            result.append(" !important");
+            sb.append(" !important");
         }
-        return result.toString();
+        return sb.toString();
     }
 
     /**

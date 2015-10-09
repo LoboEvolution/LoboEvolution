@@ -33,13 +33,23 @@ package com.steadystate.css.format;
  */
 public class CSSFormat {
     private boolean rgbAsHex_;
+    private boolean suppressUniversalSelector_;
+
+    public boolean isSuppressUniversalSelector() {
+        return suppressUniversalSelector_;
+    }
+
+    public CSSFormat setSuppressUniversalSelector(final boolean suppressUniversalSelector) {
+        suppressUniversalSelector_ = suppressUniversalSelector;
+        return this;
+    }
 
     public boolean isRgbAsHex() {
         return rgbAsHex_;
     }
 
-    public void setRgbAsHex(final boolean rgbAsHex) {
+    public CSSFormat setRgbAsHex(final boolean rgbAsHex) {
         rgbAsHex_ = rgbAsHex;
+        return this;
     }
-
 }

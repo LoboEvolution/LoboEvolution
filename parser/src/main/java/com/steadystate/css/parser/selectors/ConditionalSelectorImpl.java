@@ -33,6 +33,8 @@ import org.w3c.css.sac.ConditionalSelector;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SimpleSelector;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.Locatable;
 import com.steadystate.css.parser.LocatableImpl;
 
@@ -41,7 +43,7 @@ import com.steadystate.css.parser.LocatableImpl;
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class ConditionalSelectorImpl extends LocatableImpl implements ConditionalSelector, Serializable {
+public class ConditionalSelectorImpl extends LocatableImpl implements ConditionalSelector, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = 7217145899707580586L;
 
@@ -87,8 +89,25 @@ public class ConditionalSelectorImpl extends LocatableImpl implements Conditiona
         return condition_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
+        final StringBuilder sb = new StringBuilder();
+
+        if (null != simpleSelector_) {
+            sb.append(((CSSFormatable) simpleSelector_).getCssText(format));
+        }
+
+        if (null != condition_) {
+            sb.append(((CSSFormatable) condition_).getCssText(format));
+        }
+
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
-        return simpleSelector_.toString() + condition_.toString();
+        return getCssText(null);
     }
 }

@@ -154,17 +154,17 @@ public class RGBColorImpl implements RGBColor, CSSFormatable, Serializable {
      * {@inheritDoc}
      */
     public String getCssText(final CSSFormat format) {
-        final StringBuilder result = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         if (null != format && format.isRgbAsHex()) {
-            result
+            sb
                 .append("#")
                 .append(getColorAsHex(red_))
                 .append(getColorAsHex(green_))
                 .append(getColorAsHex(blue_));
-            return result.toString();
+            return sb.toString();
         }
 
-        result
+        sb
             .append("rgb(")
             .append(red_)
             .append(", ")
@@ -172,7 +172,7 @@ public class RGBColorImpl implements RGBColor, CSSFormatable, Serializable {
             .append(", ")
             .append(blue_)
             .append(")");
-        return result.toString();
+        return sb.toString();
     }
 
     /**

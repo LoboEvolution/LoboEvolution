@@ -87,7 +87,9 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl implements CSSMediaRul
     @Override
     public String getCssText(final CSSFormat format) {
         final StringBuilder sb = new StringBuilder("@media ");
-        sb.append(getMedia().toString()).append(" {");
+
+        sb.append(((MediaListImpl) getMedia()).getMediaText(format));
+        sb.append(" {");
         for (int i = 0; i < getCssRules().getLength(); i++) {
             final CSSRule rule = getCssRules().item(i);
             sb.append(rule.getCssText()).append(" ");
@@ -250,8 +252,7 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl implements CSSMediaRul
                 final CSSRule cssRule = cssRules_.item(i);
                 if (cssRule instanceof AbstractCSSRuleImpl) {
                     ((AbstractCSSRuleImpl) cssRule).setParentRule(this);
-                    ((AbstractCSSRuleImpl) cssRule).setParentStyleSheet(
-                        getParentStyleSheetImpl());
+                    ((AbstractCSSRuleImpl) cssRule).setParentStyleSheet(getParentStyleSheetImpl());
                 }
             }
         }

@@ -107,12 +107,7 @@ public class CSSRuleListImpl implements CSSRuleList, CSSFormatable, Serializable
             }
 
             final CSSRule rule = item(i);
-            if (rule instanceof CSSFormatable) {
-                sb.append(((CSSFormatable) rule).getCssText(format));
-            }
-            else {
-                sb.append(rule.toString());
-            }
+            sb.append(((CSSFormatable) rule).getCssText(format));
         }
         return sb.toString();
     }

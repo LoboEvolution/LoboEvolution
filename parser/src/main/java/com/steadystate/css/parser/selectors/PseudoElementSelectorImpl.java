@@ -31,6 +31,8 @@ import java.io.Serializable;
 import org.w3c.css.sac.ElementSelector;
 import org.w3c.css.sac.Selector;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.LocatableImpl;
 
 /**
@@ -38,7 +40,7 @@ import com.steadystate.css.parser.LocatableImpl;
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class PseudoElementSelectorImpl extends LocatableImpl implements ElementSelector, Serializable {
+public class PseudoElementSelectorImpl extends LocatableImpl implements ElementSelector, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = 2913936296006875268L;
 
@@ -64,8 +66,15 @@ public class PseudoElementSelectorImpl extends LocatableImpl implements ElementS
         return localName_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
+        return localName_;
+    }
+
     @Override
     public String toString() {
-        return localName_;
+        return getCssText(null);
     }
 }

@@ -157,7 +157,7 @@ abstract class AbstractSACParser implements Parser {
     }
 
     protected String add_escapes(final String str) {
-        final StringBuilder retval = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         char ch;
         for (int i = 0; i < str.length(); i++) {
             ch = str.charAt(i);
@@ -165,41 +165,41 @@ abstract class AbstractSACParser implements Parser {
                 case 0 :
                     continue;
                 case '\b':
-                    retval.append("\\b");
+                    sb.append("\\b");
                     continue;
                 case '\t':
-                    retval.append("\\t");
+                    sb.append("\\t");
                     continue;
                 case '\n':
-                    retval.append("\\n");
+                    sb.append("\\n");
                     continue;
                 case '\f':
-                    retval.append("\\f");
+                    sb.append("\\f");
                     continue;
                 case '\r':
-                    retval.append("\\r");
+                    sb.append("\\r");
                     continue;
                 case '\"':
-                    retval.append("\\\"");
+                    sb.append("\\\"");
                     continue;
                 case '\'':
-                    retval.append("\\\'");
+                    sb.append("\\\'");
                     continue;
                 case '\\':
-                    retval.append("\\\\");
+                    sb.append("\\\\");
                     continue;
                 default:
                     if (ch < 0x20 || ch > 0x7e) {
                         final String s = "0000" + Integer.toString(ch, 16);
-                        retval.append("\\u" + s.substring(s.length() - 4, s.length()));
+                        sb.append("\\u" + s.substring(s.length() - 4, s.length()));
                     }
                     else {
-                        retval.append(ch);
+                        sb.append(ch);
                     }
                     continue;
             }
         }
-        return retval.toString();
+        return sb.toString();
     }
 
     protected CSSParseException toCSSParseException(final String key, final ParseException e) {

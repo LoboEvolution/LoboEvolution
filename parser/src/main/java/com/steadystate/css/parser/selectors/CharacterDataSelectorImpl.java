@@ -31,6 +31,8 @@ import java.io.Serializable;
 import org.w3c.css.sac.CharacterDataSelector;
 import org.w3c.css.sac.Selector;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.LocatableImpl;
 
 /**
@@ -38,7 +40,8 @@ import com.steadystate.css.parser.LocatableImpl;
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class CharacterDataSelectorImpl extends LocatableImpl implements CharacterDataSelector, Serializable {
+public class CharacterDataSelectorImpl extends LocatableImpl
+                implements CharacterDataSelector, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = 4635511567927852889L;
 
@@ -60,8 +63,19 @@ public class CharacterDataSelectorImpl extends LocatableImpl implements Characte
         return data_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
+        final String data = getData();
+        if (data == null) {
+            return "";
+        }
+        return data;
+    }
+
     @Override
     public String toString() {
-        return getData();
+        return getCssText(null);
     }
 }

@@ -32,6 +32,8 @@ import org.w3c.css.sac.DescendantSelector;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SimpleSelector;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.Locatable;
 import com.steadystate.css.parser.LocatableImpl;
 
@@ -39,7 +41,7 @@ import com.steadystate.css.parser.LocatableImpl;
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class ChildSelectorImpl extends LocatableImpl implements DescendantSelector, Serializable {
+public class ChildSelectorImpl extends LocatableImpl implements DescendantSelector, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = -5843289529637921083L;
 
@@ -77,8 +79,27 @@ public class ChildSelectorImpl extends LocatableImpl implements DescendantSelect
         return simpleSelector_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
+        final StringBuilder sb = new StringBuilder();
+
+        if (null != ancestorSelector_) {
+            sb.append(((CSSFormatable) ancestorSelector_).getCssText(format));
+        }
+
+        sb.append(" > ");
+
+        if (null != simpleSelector_) {
+            sb.append(((CSSFormatable) simpleSelector_).getCssText(format));
+        }
+
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
-        return ancestorSelector_.toString() + " > " + simpleSelector_.toString();
+        return getCssText(null);
     }
 }

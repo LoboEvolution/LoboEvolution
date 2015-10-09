@@ -87,18 +87,13 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl implements CSSStyleRul
             return "";
         }
 
-        final String styleText;
-        if (style instanceof CSSFormatable) {
-            styleText = ((CSSFormatable) style).getCssText(format);
-        }
-        else {
-            styleText = style.getCssText();
-        }
+        final String styleText = ((CSSFormatable) style).getCssText(format);
+        final String selectorText = ((CSSFormatable) selectors_).getCssText(format);
 
         if (null == styleText || styleText.length() == 0) {
-            return getSelectorText() + " { }";
+            return selectorText + " { }";
         }
-        return getSelectorText() + " { " + styleText + " }";
+        return selectorText + " { " + styleText + " }";
     }
 
     public void setCssText(final String cssText) throws DOMException {

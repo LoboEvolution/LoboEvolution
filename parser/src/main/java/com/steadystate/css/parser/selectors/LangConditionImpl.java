@@ -31,6 +31,8 @@ import java.io.Serializable;
 import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.LangCondition;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.LocatableImpl;
 
 /**
@@ -38,7 +40,7 @@ import com.steadystate.css.parser.LocatableImpl;
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class LangConditionImpl extends LocatableImpl implements LangCondition, Serializable {
+public class LangConditionImpl extends LocatableImpl implements LangCondition, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = 1701599531953055387L;
 
@@ -60,8 +62,24 @@ public class LangConditionImpl extends LocatableImpl implements LangCondition, S
         return lang_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
+        final StringBuilder result = new StringBuilder();
+        result.append(":lang(");
+
+        final String lang = getLang();
+        if (null != lang) {
+            result.append(lang);
+        }
+
+        result.append(")");
+        return result.toString();
+    }
+
     @Override
     public String toString() {
-        return ":lang(" + getLang() + ")";
+        return getCssText(null);
     }
 }

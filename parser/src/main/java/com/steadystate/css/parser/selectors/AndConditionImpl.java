@@ -31,6 +31,8 @@ import java.io.Serializable;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
 
+import com.steadystate.css.format.CSSFormat;
+import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.Locatable;
 import com.steadystate.css.parser.LocatableImpl;
 
@@ -39,7 +41,7 @@ import com.steadystate.css.parser.LocatableImpl;
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
  * @author rbri
  */
-public class AndConditionImpl extends LocatableImpl implements CombinatorCondition, Serializable {
+public class AndConditionImpl extends LocatableImpl implements CombinatorCondition, CSSFormatable, Serializable {
 
     private static final long serialVersionUID = -3180583860092672742L;
 
@@ -77,8 +79,27 @@ public class AndConditionImpl extends LocatableImpl implements CombinatorConditi
         return secondCondition_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public String getCssText(final CSSFormat format) {
+        final StringBuilder sb = new StringBuilder();
+
+        Condition cond = getFirstCondition();
+        if (null != cond) {
+            sb.append(((CSSFormatable) cond).getCssText(format));
+        }
+
+        cond = getSecondCondition();
+        if (null != cond) {
+            sb.append(((CSSFormatable) cond).getCssText(format));
+        }
+
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
-        return getFirstCondition().toString() + getSecondCondition().toString();
+        return getCssText(null);
     }
 }
