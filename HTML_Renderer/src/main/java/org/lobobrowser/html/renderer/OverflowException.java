@@ -30,7 +30,7 @@ import java.util.Collection;
  *
  * @author J. H. S.
  */
-class OverflowException extends Exception {
+public class OverflowException extends Exception {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;

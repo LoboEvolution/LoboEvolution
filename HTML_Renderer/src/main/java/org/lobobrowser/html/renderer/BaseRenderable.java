@@ -23,7 +23,7 @@ package org.lobobrowser.html.renderer;
 /**
  * The Class BaseRenderable.
  */
-abstract class BaseRenderable implements Renderable {
+public abstract class BaseRenderable implements Renderable {
 
 	/** The ordinal. */
 	private int ordinal = 0;

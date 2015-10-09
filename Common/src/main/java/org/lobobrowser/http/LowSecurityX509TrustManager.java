@@ -35,7 +35,7 @@ import javax.net.ssl.X509TrustManager;
 /**
  * The Class LowSecurityX509TrustManager.
  */
-class LowSecurityX509TrustManager implements X509TrustManager {
+public class LowSecurityX509TrustManager implements X509TrustManager {
     
     /** The standard trust manager. */
     private X509TrustManager standardTrustManager = null;

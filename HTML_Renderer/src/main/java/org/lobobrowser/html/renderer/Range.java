@@ -28,7 +28,7 @@ package org.lobobrowser.html.renderer;
  *
  * @author J. H. S.
  */
-class Range {
+public class Range {
 
     /** The offset. */
     private int offset;

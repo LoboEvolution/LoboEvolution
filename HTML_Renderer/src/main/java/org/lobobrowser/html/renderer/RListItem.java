@@ -36,7 +36,7 @@ import org.lobobrowser.w3c.html.HTMLElement;
 /**
  * The Class RListItem.
  */
-class RListItem extends BaseRListElement {
+public class RListItem extends BaseRListElement {
 
 	/** The Constant BULLET_WIDTH. */
 	private static final int BULLET_WIDTH = 5;

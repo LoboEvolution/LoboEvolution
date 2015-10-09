@@ -25,7 +25,7 @@ import org.lobobrowser.html.domimpl.DOMNodeImpl;
 /**
  * The Class DocumentNotification.
  */
-class DocumentNotification {
+public class DocumentNotification {
 
     /** The Constant LOOK. */
     public static final int LOOK = 0;

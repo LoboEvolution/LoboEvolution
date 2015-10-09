@@ -35,7 +35,7 @@ import org.lobobrowser.html.renderstate.RenderState;
 /**
  * The Class RBlank.
  */
-final class RBlank extends BaseBoundableRenderable {
+public final class RBlank extends BaseBoundableRenderable {
 	/** The ascent plus leading. */
 	private int ascentPlusLeading;
 

@@ -29,16 +29,13 @@ import java.awt.event.MouseEvent;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.renderstate.RenderState;
 
-// import java.util.logging.*;
-
 /**
  * The Class RStyleChanger.
  *
  * @author J. H. S.
  */
-final class RStyleChanger extends BaseRenderable implements Renderable {
-	// private final static Logger logger =
-	// Logger.getLogger(RStyleChanger.class);
+public final class RStyleChanger extends BaseRenderable implements Renderable {
+
 	/** The model node. */
 	private final ModelNode modelNode;
 

@@ -31,7 +31,7 @@ import org.lobobrowser.html.dombl.ModelNode;
 /**
  * The Class BaseRCollection.
  */
-abstract class BaseRCollection extends BaseBoundableRenderable implements
+public abstract class BaseRCollection extends BaseBoundableRenderable implements
 RCollection {
 
     /**

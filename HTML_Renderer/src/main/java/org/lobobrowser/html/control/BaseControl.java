@@ -37,7 +37,7 @@ import org.lobobrowser.html.renderer.UIControl;
 /**
  * The Class BaseControl.
  */
-abstract class BaseControl extends JComponent implements UIControl {
+public abstract class BaseControl extends JComponent implements UIControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

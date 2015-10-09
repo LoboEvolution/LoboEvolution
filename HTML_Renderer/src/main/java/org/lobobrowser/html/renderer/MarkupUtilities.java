@@ -28,22 +28,12 @@ import java.awt.Rectangle;
 
 import org.lobobrowser.util.Diagnostics;
 
-// import java.util.logging.*;
-
 /**
  * The Class MarkupUtilities.
  *
  * @author J. H. S.
  */
-class MarkupUtilities {
-    // private static final Logger logger =
-    // Logger.getLogger(MarkupUtilities.class);
-
-    // public static final int MODE_ABOVE_OR_AT = 0;
-    // public static final int MODE_BELOW_OR_AT = 1;
-    // public static final int MODE_LEFT_OR_AT = 0;
-    // public static final int MODE_RIGHT_OR_AT = 1;
-
+public class MarkupUtilities {
     /**
      * Instantiates a new markup utilities.
      */

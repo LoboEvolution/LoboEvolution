@@ -25,7 +25,7 @@ import org.lobobrowser.util.Objects;
 /**
  * The Class ShiftedFloatingBounds.
  */
-class ShiftedFloatingBounds implements FloatingBounds {
+public class ShiftedFloatingBounds implements FloatingBounds {
 
 	/** The prev bounds. */
 	private final FloatingBounds prevBounds;

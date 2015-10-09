@@ -28,7 +28,7 @@ import org.lobobrowser.html.style.HtmlLength;
 /**
  * The Class VirtualCell.
  */
-class VirtualCell {
+public class VirtualCell {
 
     /** The actual cell. */
     private final RTableCell actualCell;

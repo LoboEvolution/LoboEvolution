@@ -31,7 +31,7 @@ import org.lobobrowser.store.StorageManager;
 /**
  * The Class ManagedStoreSettings.
  */
-class ManagedStoreSettings implements Serializable {
+public class ManagedStoreSettings implements Serializable {
 
     /** The Constant logger. */
     private static final Logger logger = Logger

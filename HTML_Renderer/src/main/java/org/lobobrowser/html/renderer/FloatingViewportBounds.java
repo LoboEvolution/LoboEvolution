@@ -23,7 +23,7 @@ package org.lobobrowser.html.renderer;
 /**
  * The Class FloatingViewportBounds.
  */
-class FloatingViewportBounds implements FloatingBounds {
+public class FloatingViewportBounds implements FloatingBounds {
 
 	/** The prev bounds. */
 	private final FloatingBounds prevBounds;

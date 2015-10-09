@@ -42,7 +42,7 @@ import javax.swing.WindowConstants;
  *
  * @author rbair
  */
-class DefaultSecurityHandler implements SecurityHandler {
+public class DefaultSecurityHandler implements SecurityHandler {
     
     /** The message. */
     private String message = "<html><body><p style=\"text-align:justify\">"

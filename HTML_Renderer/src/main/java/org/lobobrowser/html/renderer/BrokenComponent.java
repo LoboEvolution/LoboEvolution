@@ -28,7 +28,7 @@ import java.awt.Graphics;
 /**
  * The Class BrokenComponent.
  */
-class BrokenComponent extends Component {
+public class BrokenComponent extends Component {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;

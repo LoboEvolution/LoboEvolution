@@ -31,7 +31,7 @@ import org.lobobrowser.http.UserAgentContext;
 /**
  * The Class RList.
  */
-class RList extends BaseRListElement {
+public class RList extends BaseRListElement {
 
 	/**
 	 * Instantiates a new r list.

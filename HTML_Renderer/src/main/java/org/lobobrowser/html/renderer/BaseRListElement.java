@@ -32,7 +32,7 @@ import org.lobobrowser.http.UserAgentContext;
 /**
  * The Class BaseRListElement.
  */
-class BaseRListElement extends RBlock {
+public class BaseRListElement extends RBlock {
 
     /** The Constant DEFAULT_COUNTER_NAME. */
     protected static final String DEFAULT_COUNTER_NAME = "$cobra.counter";

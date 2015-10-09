@@ -23,7 +23,7 @@ package org.lobobrowser.html.renderer;
 /**
  * The Class ExportedRenderable.
  */
-class ExportedRenderable {
+public class ExportedRenderable {
 
 	/** The original target. */
 	private RBlockViewport originalTarget;

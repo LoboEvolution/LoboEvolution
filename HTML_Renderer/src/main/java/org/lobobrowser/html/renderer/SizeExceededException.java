@@ -23,7 +23,7 @@ package org.lobobrowser.html.renderer;
 /**
  * The Class SizeExceededException.
  */
-class SizeExceededException extends RuntimeException {
+public class SizeExceededException extends RuntimeException {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

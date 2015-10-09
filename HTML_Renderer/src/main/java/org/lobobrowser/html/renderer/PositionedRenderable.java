@@ -23,7 +23,7 @@ package org.lobobrowser.html.renderer;
 /**
  * The Class PositionedRenderable.
  */
-class PositionedRenderable {
+public class PositionedRenderable {
 
     /** The Constant EMPTY_ARRAY. */
     public static final PositionedRenderable[] EMPTY_ARRAY = new PositionedRenderable[0];

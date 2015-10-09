@@ -22,13 +22,14 @@ package org.lobobrowser.html.renderer;
 
 import java.util.Comparator;
 
+/** It is assumed that objects don't change their
+  * z-indexes or ordinals after entering the sorted set.
+  * They may do so after the sorted set is no longer valid.**/
+
 /**
  * The Class ZIndexComparator.
  */
-class ZIndexComparator implements Comparator<Object> {
-    // Note: It is assumed that objects don't change their
-    // z-indexes or ordinals after entering the sorted set.
-    // They may do so after the sorted set is no longer valid.
+public class ZIndexComparator implements Comparator<Object> {
     /*
      * (non-Javadoc)
      * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)

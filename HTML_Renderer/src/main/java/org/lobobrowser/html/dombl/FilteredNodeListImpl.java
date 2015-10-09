@@ -34,7 +34,7 @@ import org.w3c.dom.NodeList;
 /**
  * The Class FilteredNodeListImpl.
  */
-class FilteredNodeListImpl extends AbstractScriptableDelegate implements
+public class FilteredNodeListImpl extends AbstractScriptableDelegate implements
 NodeList {
 
     /** The source node list. */

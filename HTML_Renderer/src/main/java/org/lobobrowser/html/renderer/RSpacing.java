@@ -32,7 +32,7 @@ import org.lobobrowser.html.dombl.ModelNode;
 /**
  * This is used when there's padding or margins in inline elements.
  */
-final class RSpacing extends BaseBoundableRenderable {
+public final class RSpacing extends BaseBoundableRenderable {
 
 	/**
 	 * Instantiates a new r spacing.

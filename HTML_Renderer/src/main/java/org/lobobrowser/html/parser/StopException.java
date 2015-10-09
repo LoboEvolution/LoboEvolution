@@ -28,7 +28,7 @@ import org.w3c.dom.Element;
 /**
  * The Class StopException.
  */
-class StopException extends Exception {
+public class StopException extends Exception {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

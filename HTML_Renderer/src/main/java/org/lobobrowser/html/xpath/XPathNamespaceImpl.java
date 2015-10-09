@@ -82,7 +82,7 @@ import org.w3c.dom.UserDataHandler;
  * @xsl.usage internal
  */
 
-class XPathNamespaceImpl implements XPathNamespace {
+public class XPathNamespaceImpl implements XPathNamespace {
 
 	/** The m_attribute node. */
 	// Node that XPathNamespaceImpl wraps

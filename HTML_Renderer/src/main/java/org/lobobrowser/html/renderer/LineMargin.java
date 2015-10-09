@@ -23,7 +23,7 @@ package org.lobobrowser.html.renderer;
 /**
  * The Class LineMargin.
  */
-class LineMargin {
+public class LineMargin {
 
     /** The clear x. */
     private final int clearX;

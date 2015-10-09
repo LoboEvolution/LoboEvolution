@@ -35,7 +35,7 @@ import org.lobobrowser.html.renderstate.RenderState;
 /**
  * The Class RWord.
  */
-final class RWord extends BaseBoundableRenderable {
+public final class RWord extends BaseBoundableRenderable {
 
     /** The shown word. */
     private String shownWord;

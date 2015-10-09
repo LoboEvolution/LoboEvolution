@@ -37,7 +37,7 @@ import javax.net.ssl.X509TrustManager;
  * accepts self-signed certificates, but prompts the user before accepting them.
  * </p>
  */
-class MediumSecurityX509TrustManager implements X509TrustManager {
+public class MediumSecurityX509TrustManager implements X509TrustManager {
     
     /** The standard trust manager. */
     private X509TrustManager standardTrustManager = null;

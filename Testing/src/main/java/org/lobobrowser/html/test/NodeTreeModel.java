@@ -33,7 +33,7 @@ import org.w3c.dom.NodeList;
 /**
  * The Class NodeTreeModel.
  */
-class NodeTreeModel implements TreeModel {
+public class NodeTreeModel implements TreeModel {
 
 	/** The root node. */
 	private final Node rootNode;

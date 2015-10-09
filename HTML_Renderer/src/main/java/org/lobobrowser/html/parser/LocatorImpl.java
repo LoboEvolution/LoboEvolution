@@ -28,7 +28,7 @@ import org.xml.sax.Locator;
 /**
  * The Class LocatorImpl.
  */
-class LocatorImpl implements Locator {
+public class LocatorImpl implements Locator {
 
 	/** The public id. */
 	private final String publicId;

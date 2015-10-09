@@ -30,7 +30,7 @@ import org.lobobrowser.store.StorageManager;
 /**
  * The Class CookieSettings.
  */
-class CookieSettings implements Serializable {
+public class CookieSettings implements Serializable {
 
     /** The Constant logger. */
     private static final Logger logger = Logger.getLogger(CookieSettings.class

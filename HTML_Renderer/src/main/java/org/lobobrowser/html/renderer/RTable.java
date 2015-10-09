@@ -53,7 +53,7 @@ import org.lobobrowser.util.Objects;
 /**
  * The Class RTable.
  */
-class RTable extends BaseElementRenderable {
+public class RTable extends BaseElementRenderable {
 
 	/** The Constant MAX_CACHE_SIZE. */
 	private static final int MAX_CACHE_SIZE = 10;

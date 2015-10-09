@@ -25,7 +25,7 @@ import org.lobobrowser.util.Objects;
 /**
  * The Class CombinedFloatingBounds.
  */
-class CombinedFloatingBounds implements FloatingBounds {
+public class CombinedFloatingBounds implements FloatingBounds {
 
 	/** The float bounds1. */
 	private final FloatingBounds floatBounds1;
