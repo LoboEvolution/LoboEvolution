@@ -19,3 +19,5 @@ The following open source externals are used by this project:
 * [https://xml.apache.org/xalan-j/] Xalan-Java is an XSLT processor for transforming XML documents into HTML, text, or other XML document types
 
 * [https://github.com/chrsan/css-selectors] A Java implementation of the W3C Selectors Specification.
+
+* [https://github.com/JDatePicker/JDatePicker] JDatePicker is an set of advanced DatePicker controls for Java Swing applications
