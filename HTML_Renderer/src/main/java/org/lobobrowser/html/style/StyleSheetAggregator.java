@@ -429,9 +429,7 @@ public class StyleSheetAggregator {
 		String elementTL = elementName.toLowerCase();
 		Collection<StyleRuleInfo> elementRules = this.rulesByElement.get(elementTL);
 		if (elementRules != null) {
-			SelectorMatcher sm = new SelectorMatcher();
-			System.out.println();
-			
+			SelectorMatcher sm = new SelectorMatcher();			
 			if(sm.matchesPseudoClassSelector(pseudoElement, element) && element.getPseudoNames().contains(pseudoElement)){
 				styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
 			}else if(!sm.matchesPseudoClassSelector(pseudoElement, element) && !element.getPseudoNames().contains(pseudoElement)){

@@ -33,10 +33,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
@@ -59,6 +63,9 @@ public class ImgControl extends BaseControl implements ImageListener {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(ImgControl.class.getName());
 
 	/** The image. */
 	private volatile Image image;
@@ -134,12 +141,13 @@ public class ImgControl extends BaseControl implements ImageListener {
 		});
 
 		if (modelNode.getSrc() != null) {
+			URL u = null;
 			try {
 				SSLCertificate.setCertificate();
 				URL baseURL = new URL(modelNode.getOwnerDocument().getBaseURI());
 				URL scriptURL = Urls.createURL(baseURL, modelNode.getSrc());
 				String scriptURI = scriptURL == null ? modelNode.getSrc() : scriptURL.toExternalForm();
-				URL u = new URL(scriptURI);
+				u = new URL(scriptURI);
 				if (scriptURI.endsWith(".svg")) {
 					SVGRasterizer r = new SVGRasterizer(u);
 					image = r.bufferedImageToImage();
@@ -155,12 +163,13 @@ public class ImgControl extends BaseControl implements ImageListener {
 					try {
 						image = ImageIO.read(u);
 					} catch (IOException e) {
-						System.out.println("read error: " + e.getMessage());
+						logger.log(Level.WARNING, "read error: " + e.getMessage());
 					}
 				}
-
+			} catch (FileNotFoundException | IIOException ex) {
+				logger.log(Level.WARNING, "ImgControl(): Image not found ",u);
 			} catch (TranscoderException | IOException e1) {
-				e1.printStackTrace();
+				logger.log(Level.WARNING, e1.getMessage());
 			}
 		}
 

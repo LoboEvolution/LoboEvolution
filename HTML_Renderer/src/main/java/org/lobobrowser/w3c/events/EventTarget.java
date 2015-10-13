@@ -21,6 +21,7 @@
 package org.lobobrowser.w3c.events;
 
 import org.lobobrowser.html.jsimpl.EventException;
+import org.mozilla.javascript.Function;
 import org.w3c.dom.DOMException;
 
 
@@ -39,7 +40,7 @@ public interface EventTarget {
 	 * @param useCapture
 	 *            the use capture
 	 */
-	void addEventListener(String type, EventListener listener, boolean useCapture);
+	void addEventListener(String type, Function listener, boolean useCapture);
 
 	/**
 	 * Removes the event listener.
@@ -51,7 +52,7 @@ public interface EventTarget {
 	 * @param useCapture
 	 *            the use capture
 	 */
-	void removeEventListener(String type, EventListener listener, boolean useCapture);
+	void removeEventListener(String type, Function listener, boolean useCapture);
 
 	/**
 	 * Dispatch event.

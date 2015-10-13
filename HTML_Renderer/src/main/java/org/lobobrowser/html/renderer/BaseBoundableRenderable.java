@@ -58,7 +58,6 @@ BoundableRenderable {
     /** The Constant SELECTION_XOR. */
     protected static final Color SELECTION_XOR = Color.LIGHT_GRAY;
 
-    // protected final Rectangle bounds = new Rectangle();
     /** The container. */
     protected final RenderableContainer container;
 

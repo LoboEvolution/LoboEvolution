@@ -163,13 +163,4 @@ public class SelectorMatcher {
 
 		return ((i - b) / a) >= 0 && ((i - b) % a) == 0;
 	}
-
-	private boolean matchesNthChild(DOMNodeImpl node) {
-
-		System.out.println(node.getChildCount());
-
-		return false;
-
-	}
-
 }

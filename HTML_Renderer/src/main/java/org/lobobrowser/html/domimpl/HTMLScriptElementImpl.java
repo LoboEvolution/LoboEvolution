@@ -27,6 +27,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -43,6 +44,7 @@ import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.w3c.html.HTMLScriptElement;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EcmaError;
+import org.mozilla.javascript.EvaluatorException;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Document;
 import org.w3c.dom.UserDataHandler;
@@ -313,7 +315,9 @@ HTMLScriptElement {
 					logger.log(Level.WARNING,
 							"Javascript error at " + ecmaError.sourceName()
 									+ ":" + ecmaError.columnNumber() + ": "
-									+ ecmaError.getMessage(), ecmaError);
+									+ ecmaError.getMessage());
+				} catch (EvaluatorException e){
+					logger.log(Level.WARNING, e.getMessage());
 				} catch (MissingResourceException err) {
 					logger.log(Level.WARNING, "Missing Resource");
 				} catch (Exception err) {
@@ -335,19 +339,20 @@ HTMLScriptElement {
 	 * @param url the url
 	 * @return the string
 	 */
-	private static String httpURLConnection(String url) {
+	private static String httpURLConnection(String srtUrl) {
 
-		URL obj;
 		StringBuffer response = new StringBuffer();
 		int responseCode = -1;
 		try {
-			obj = new URL(url);
+
+			URL url = new URL(srtUrl);
+			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
+			URL obj = uri.toURL();
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 			con.setRequestMethod("GET");
 			responseCode = con.getResponseCode();
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					con.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String inputLine;
 
 			while ((inputLine = in.readLine()) != null) {
@@ -356,8 +361,7 @@ HTMLScriptElement {
 			in.close();
 
 		} catch (Exception e) {
-			logger.warning("Unable to parse script. URI=[" + url
-					+ "]. Response status was " + responseCode + ".");
+			logger.warning("Unable to parse script. URI=[" + srtUrl + "]. Response status was " + responseCode + ".");
 			return "";
 		}
 		return response.toString();

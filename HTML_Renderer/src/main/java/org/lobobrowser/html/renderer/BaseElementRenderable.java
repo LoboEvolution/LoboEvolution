@@ -30,6 +30,7 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.image.ImageObserver;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
@@ -38,6 +39,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.logging.Level;
 
+import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
@@ -696,6 +698,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		String url = imageURL.toString();
 		try {
 			SSLCertificate.setCertificate();
+			
 			if (url.endsWith(".svg")) {
 				SVGRasterizer r = new SVGRasterizer(imageURL);
 				image = r.bufferedImageToImage();
@@ -712,12 +715,15 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			} else {
 				image = ImageIO.read(imageURL);
 			}
+			
 			BaseElementRenderable.this.backgroundImage = image;
 			int w = image.getWidth(BaseElementRenderable.this);
 			int h = image.getHeight(BaseElementRenderable.this);
 			if ((w != -1) && (h != -1)) {
 				BaseElementRenderable.this.repaint();
 			}
+		} catch (FileNotFoundException | IIOException ex) {
+			logger.log(Level.WARNING, "loadBackgroundImage(): Image not found ",url);
 		} catch (IOException | TranscoderException thrown) {
 			logger.log(Level.WARNING, "loadBackgroundImage()", thrown);
 		} catch (Exception e) {
