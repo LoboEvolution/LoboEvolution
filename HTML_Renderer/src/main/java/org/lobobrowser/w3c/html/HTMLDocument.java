@@ -270,25 +270,6 @@ public interface HTMLDocument extends Document, EventTarget {
 	public HTMLDocument open(String type, String replace);
 
 	/**
-	 * Open.
-	 *
-	 * @param url the url
-	 * @param name the name
-	 * @param features the features
-	 */
-	public void open(String url, String name, String features);
-
-	/**
-	 * Open.
-	 *
-	 * @param url the url
-	 * @param name the name
-	 * @param features the features
-	 * @param replace the replace
-	 */
-	public void open(String url, String name, String features, boolean replace);
-
-	/**
 	 * Close.
 	 */
 	public void close();
@@ -1307,31 +1288,6 @@ public interface HTMLDocument extends Document, EventTarget {
 	 * Clear.
 	 */
 	public void clear();
-
-	/**
-	 * Gets the all.
-	 *
-	 * @return the all
-	 */
-	public HTMLAllCollection getAll();
-
-	/* (non-Javadoc)
-	 * @see org.w3c.dom.Document#renameNode(org.w3c.dom.Node, java.lang.String, java.lang.String)
-	 */
-	@Override
-	Node renameNode(Node n, String namespaceURI, String qualifiedName);
-
-	/* (non-Javadoc)
-	 * @see org.w3c.dom.Document#createCDATASection(java.lang.String)
-	 */
-	@Override
-	CDATASection createCDATASection(String data) throws DOMException;
-
-	/* (non-Javadoc)
-	 * @see org.w3c.dom.Document#createAttributeNS(java.lang.String, java.lang.String)
-	 */
-	@Override
-	Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException;
 
 	/**
 	 * Evaluate.

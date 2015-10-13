@@ -106,9 +106,7 @@ import org.lobobrowser.util.WeakValueHashMap;
 import org.lobobrowser.util.io.EmptyReader;
 import org.lobobrowser.w3c.events.DocumentEvent;
 import org.lobobrowser.w3c.events.Event;
-import org.lobobrowser.w3c.events.EventListener;
 import org.lobobrowser.w3c.html.DOMElementMap;
-import org.lobobrowser.w3c.html.HTMLAllCollection;
 import org.lobobrowser.w3c.html.HTMLCollection;
 import org.lobobrowser.w3c.html.HTMLDocument;
 import org.lobobrowser.w3c.html.HTMLElement;
@@ -301,6 +299,142 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/** The onmouseover. */
 	private Function onmouseover;
 
+	/** The oncanplay. */
+	private Function oncanplay;
+
+	/** The onabort. */
+	private Function onabort;
+
+	/** The onblur. */
+	private Function onblur;
+
+	/** The oncanplaythrough. */
+	private Function oncanplaythrough;
+
+	/** The onchange. */
+	private Function onchange;
+
+	/** The oncontextmenu. */
+	private Function oncontextmenu;
+
+	/** The oncuechange. */
+	private Function oncuechange;
+
+	/** The ondrag. */
+	private Function ondrag;
+
+	/** The ondragend. */
+	private Function ondragend;
+
+	/** The ondragenter. */
+	private Function ondragenter;
+
+	/** The ondragleave. */
+	private Function ondragleave;
+
+	/** The ondragover. */
+	private Function ondragover;
+
+	/** The ondragstart. */
+	private Function ondragstart;
+
+	/** The ondrop. */
+	private Function ondrop;
+
+	/** The ondurationchange. */
+	private Function ondurationchange;
+
+	/** The onemptied. */
+	private Function onemptied;
+
+	/** The onended. */
+	private Function onended;
+
+	/** The onerror. */
+	private Function onerror;
+
+	/** The onfocus. */
+	private Function onfocus;
+
+	/** The oninput. */
+	private Function oninput;
+
+	/** The oninvalid. */
+	private Function oninvalid;
+
+	/** The onload. */
+	private Function onload;
+
+	/** The onloadeddata. */
+	private Function onloadeddata;
+
+	/** The onloadedmetadata. */
+	private Function onloadedmetadata;
+
+	/** The onloadstart. */
+	private Function onloadstart;
+
+	/** The onmousewheel. */
+	private Function onmousewheel;
+
+	/** The onpause. */
+	private Function onpause;
+
+	/** The onplay. */
+	private Function onplay;
+
+	/** The onplaying. */
+	private Function onplaying;
+
+	/** The onprogress. */
+	private Function onprogress;
+
+	/** The onreadystatechange. */
+	private Function onreadystatechange;
+
+	/** The onreset. */
+	private Function onreset;
+
+	/** The onscroll. */
+	private Function onscroll;
+
+	/** The onseeked. */
+	private Function onseeked;
+
+	/** The onseeking. */
+	private Function onseeking;
+
+	/** The onselect. */
+	private Function onselect;
+
+	/** The onshow. */
+	private Function onshow;
+
+	/** The onstalled. */
+	private Function onstalled;
+
+	/** The onsubmit. */
+	private Function onsubmit;
+
+	/** The onsuspend. */
+	private Function onsuspend;
+
+	/** The ontimeupdate. */
+	private Function ontimeupdate;
+
+	/** The onvolumechange. */
+	private Function onvolumechange;
+
+	/** The onwaiting. */
+	private Function onwaiting;
+
+	/** The omousemove. */
+	private Function onmousemove;
+
+	/** The onratechange. */
+	private Function onratechange;
+	
+	
 	/**
 	 * Instantiates a new HTML document impl.
 	 *
@@ -1064,10 +1198,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		synchronized (this.getTreeLock()) {
 			this.styleSheets.add(ss);
 			this.styleSheetAggregator = null;
-			// Need to invalidate all children up to
-			// this point.
 			this.forgetRenderState();
-			// TODO: this might be ineffcient.
 			ArrayList<?> nl = this.nodeList;
 			if (nl != null) {
 				Iterator<?> i = nl.iterator();
@@ -1092,10 +1223,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		if (forgetRenderStates) {
 			synchronized (this.getTreeLock()) {
 				this.styleSheetAggregator = null;
-				// Need to invalidate all children up to
-				// this point.
 				this.forgetRenderState();
-				// TODO: this might be ineffcient.
 				ArrayList<?> nl = this.nodeList;
 				if (nl != null) {
 					Iterator<?> i = nl.iterator();
@@ -1418,8 +1546,6 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 			ImageInfo info = map.get(urlText);
 			if (info != null) {
 				if (info.loaded) {
-					// TODO: This can't really happen because ImageInfo
-					// is removed right after image is loaded.
 					event = info.imageEvent;
 				} else {
 					info.addListener(imageListener);
@@ -1489,7 +1615,6 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		Function onloadHandler = this.onloadHandler;
 		if (onloadHandler != null) {
 			if (HtmlParser.MODIFYING_KEY.equals(key) && (data == Boolean.FALSE)) {
-				// TODO: onload event object?
 				Executor.executeFunction(this, onloadHandler, null);
 			}
 		}
@@ -2452,7 +2577,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 
 	@Override
 	public void addEventListener(String script, Function function) {
-
+		
 		String key = script.toLowerCase();
 
 		switch (key) {
@@ -2743,6 +2868,638 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	public void setOnmouseover(Function onmouseover) {
 		this.onmouseover = onmouseover;
 	}
+	
+	
+
+	/**
+	 * @return the oncanplay
+	 */
+	public Function getOncanplay() {
+		return oncanplay;
+	}
+
+	/**
+	 * @param oncanplay the oncanplay to set
+	 */
+	public void setOncanplay(Function oncanplay) {
+		this.oncanplay = oncanplay;
+	}
+
+	/**
+	 * @return the onabort
+	 */
+	public Function getOnabort() {
+		return onabort;
+	}
+
+	/**
+	 * @param onabort the onabort to set
+	 */
+	public void setOnabort(Function onabort) {
+		this.onabort = onabort;
+	}
+
+	/**
+	 * @return the onblur
+	 */
+	public Function getOnblur() {
+		return onblur;
+	}
+
+	/**
+	 * @param onblur the onblur to set
+	 */
+	public void setOnblur(Function onblur) {
+		this.onblur = onblur;
+	}
+
+	/**
+	 * @return the oncanplaythrough
+	 */
+	public Function getOncanplaythrough() {
+		return oncanplaythrough;
+	}
+
+	/**
+	 * @param oncanplaythrough the oncanplaythrough to set
+	 */
+	public void setOncanplaythrough(Function oncanplaythrough) {
+		this.oncanplaythrough = oncanplaythrough;
+	}
+
+	/**
+	 * @return the onchange
+	 */
+	public Function getOnchange() {
+		return onchange;
+	}
+
+	/**
+	 * @param onchange the onchange to set
+	 */
+	public void setOnchange(Function onchange) {
+		this.onchange = onchange;
+	}
+
+	/**
+	 * @return the oncontextmenu
+	 */
+	public Function getOncontextmenu() {
+		return oncontextmenu;
+	}
+
+	/**
+	 * @param oncontextmenu the oncontextmenu to set
+	 */
+	public void setOncontextmenu(Function oncontextmenu) {
+		this.oncontextmenu = oncontextmenu;
+	}
+
+	/**
+	 * @return the oncuechange
+	 */
+	public Function getOncuechange() {
+		return oncuechange;
+	}
+
+	/**
+	 * @param oncuechange the oncuechange to set
+	 */
+	public void setOncuechange(Function oncuechange) {
+		this.oncuechange = oncuechange;
+	}
+
+	/**
+	 * @return the ondrag
+	 */
+	public Function getOndrag() {
+		return ondrag;
+	}
+
+	/**
+	 * @param ondrag the ondrag to set
+	 */
+	public void setOndrag(Function ondrag) {
+		this.ondrag = ondrag;
+	}
+
+	/**
+	 * @return the ondragend
+	 */
+	public Function getOndragend() {
+		return ondragend;
+	}
+
+	/**
+	 * @param ondragend the ondragend to set
+	 */
+	public void setOndragend(Function ondragend) {
+		this.ondragend = ondragend;
+	}
+
+	/**
+	 * @return the ondragenter
+	 */
+	public Function getOndragenter() {
+		return ondragenter;
+	}
+
+	/**
+	 * @param ondragenter the ondragenter to set
+	 */
+	public void setOndragenter(Function ondragenter) {
+		this.ondragenter = ondragenter;
+	}
+
+	/**
+	 * @return the ondragleave
+	 */
+	public Function getOndragleave() {
+		return ondragleave;
+	}
+
+	/**
+	 * @param ondragleave the ondragleave to set
+	 */
+	public void setOndragleave(Function ondragleave) {
+		this.ondragleave = ondragleave;
+	}
+
+	/**
+	 * @return the ondragover
+	 */
+	public Function getOndragover() {
+		return ondragover;
+	}
+
+	/**
+	 * @param ondragover the ondragover to set
+	 */
+	public void setOndragover(Function ondragover) {
+		this.ondragover = ondragover;
+	}
+
+	/**
+	 * @return the ondragstart
+	 */
+	public Function getOndragstart() {
+		return ondragstart;
+	}
+
+	/**
+	 * @param ondragstart the ondragstart to set
+	 */
+	public void setOndragstart(Function ondragstart) {
+		this.ondragstart = ondragstart;
+	}
+
+	/**
+	 * @return the ondrop
+	 */
+	public Function getOndrop() {
+		return ondrop;
+	}
+
+	/**
+	 * @param ondrop the ondrop to set
+	 */
+	public void setOndrop(Function ondrop) {
+		this.ondrop = ondrop;
+	}
+
+	/**
+	 * @return the ondurationchange
+	 */
+	public Function getOndurationchange() {
+		return ondurationchange;
+	}
+
+	/**
+	 * @param ondurationchange the ondurationchange to set
+	 */
+	public void setOndurationchange(Function ondurationchange) {
+		this.ondurationchange = ondurationchange;
+	}
+
+	/**
+	 * @return the onemptied
+	 */
+	public Function getOnemptied() {
+		return onemptied;
+	}
+
+	/**
+	 * @param onemptied the onemptied to set
+	 */
+	public void setOnemptied(Function onemptied) {
+		this.onemptied = onemptied;
+	}
+
+	/**
+	 * @return the onended
+	 */
+	public Function getOnended() {
+		return onended;
+	}
+
+	/**
+	 * @param onended the onended to set
+	 */
+	public void setOnended(Function onended) {
+		this.onended = onended;
+	}
+
+	/**
+	 * @return the onerror
+	 */
+	public Function getOnerror() {
+		return onerror;
+	}
+
+	/**
+	 * @param onerror the onerror to set
+	 */
+	public void setOnerror(Function onerror) {
+		this.onerror = onerror;
+	}
+
+	/**
+	 * @return the onfocus
+	 */
+	public Function getOnfocus() {
+		return onfocus;
+	}
+
+	/**
+	 * @param onfocus the onfocus to set
+	 */
+	public void setOnfocus(Function onfocus) {
+		this.onfocus = onfocus;
+	}
+
+	/**
+	 * @return the oninput
+	 */
+	public Function getOninput() {
+		return oninput;
+	}
+
+	/**
+	 * @param oninput the oninput to set
+	 */
+	public void setOninput(Function oninput) {
+		this.oninput = oninput;
+	}
+
+	/**
+	 * @return the oninvalid
+	 */
+	public Function getOninvalid() {
+		return oninvalid;
+	}
+
+	/**
+	 * @param oninvalid the oninvalid to set
+	 */
+	public void setOninvalid(Function oninvalid) {
+		this.oninvalid = oninvalid;
+	}
+
+	/**
+	 * @return the onload
+	 */
+	public Function getOnload() {
+		return onload;
+	}
+
+	/**
+	 * @param onload the onload to set
+	 */
+	public void setOnload(Function onload) {
+		this.onload = onload;
+	}
+
+	/**
+	 * @return the onloadeddata
+	 */
+	public Function getOnloadeddata() {
+		return onloadeddata;
+	}
+
+	/**
+	 * @param onloadeddata the onloadeddata to set
+	 */
+	public void setOnloadeddata(Function onloadeddata) {
+		this.onloadeddata = onloadeddata;
+	}
+
+	/**
+	 * @return the onloadedmetadata
+	 */
+	public Function getOnloadedmetadata() {
+		return onloadedmetadata;
+	}
+
+	/**
+	 * @param onloadedmetadata the onloadedmetadata to set
+	 */
+	public void setOnloadedmetadata(Function onloadedmetadata) {
+		this.onloadedmetadata = onloadedmetadata;
+	}
+
+	/**
+	 * @return the onloadstart
+	 */
+	public Function getOnloadstart() {
+		return onloadstart;
+	}
+
+	/**
+	 * @param onloadstart the onloadstart to set
+	 */
+	public void setOnloadstart(Function onloadstart) {
+		this.onloadstart = onloadstart;
+	}
+
+	/**
+	 * @return the onmousewheel
+	 */
+	public Function getOnmousewheel() {
+		return onmousewheel;
+	}
+
+	/**
+	 * @param onmousewheel the onmousewheel to set
+	 */
+	public void setOnmousewheel(Function onmousewheel) {
+		this.onmousewheel = onmousewheel;
+	}
+
+	/**
+	 * @return the onpause
+	 */
+	public Function getOnpause() {
+		return onpause;
+	}
+
+	/**
+	 * @param onpause the onpause to set
+	 */
+	public void setOnpause(Function onpause) {
+		this.onpause = onpause;
+	}
+
+	/**
+	 * @return the onplay
+	 */
+	public Function getOnplay() {
+		return onplay;
+	}
+
+	/**
+	 * @param onplay the onplay to set
+	 */
+	public void setOnplay(Function onplay) {
+		this.onplay = onplay;
+	}
+
+	/**
+	 * @return the onplaying
+	 */
+	public Function getOnplaying() {
+		return onplaying;
+	}
+
+	/**
+	 * @param onplaying the onplaying to set
+	 */
+	public void setOnplaying(Function onplaying) {
+		this.onplaying = onplaying;
+	}
+
+	/**
+	 * @return the onprogress
+	 */
+	public Function getOnprogress() {
+		return onprogress;
+	}
+
+	/**
+	 * @param onprogress the onprogress to set
+	 */
+	public void setOnprogress(Function onprogress) {
+		this.onprogress = onprogress;
+	}
+
+	/**
+	 * @return the onreadystatechange
+	 */
+	public Function getOnreadystatechange() {
+		return onreadystatechange;
+	}
+
+	/**
+	 * @param onreadystatechange the onreadystatechange to set
+	 */
+	public void setOnreadystatechange(Function onreadystatechange) {
+		this.onreadystatechange = onreadystatechange;
+	}
+
+	/**
+	 * @return the onreset
+	 */
+	public Function getOnreset() {
+		return onreset;
+	}
+
+	/**
+	 * @param onreset the onreset to set
+	 */
+	public void setOnreset(Function onreset) {
+		this.onreset = onreset;
+	}
+
+	/**
+	 * @return the onscroll
+	 */
+	public Function getOnscroll() {
+		return onscroll;
+	}
+
+	/**
+	 * @param onscroll the onscroll to set
+	 */
+	public void setOnscroll(Function onscroll) {
+		this.onscroll = onscroll;
+	}
+
+	/**
+	 * @return the onseeked
+	 */
+	public Function getOnseeked() {
+		return onseeked;
+	}
+
+	/**
+	 * @param onseeked the onseeked to set
+	 */
+	public void setOnseeked(Function onseeked) {
+		this.onseeked = onseeked;
+	}
+
+	/**
+	 * @return the onseeking
+	 */
+	public Function getOnseeking() {
+		return onseeking;
+	}
+
+	/**
+	 * @param onseeking the onseeking to set
+	 */
+	public void setOnseeking(Function onseeking) {
+		this.onseeking = onseeking;
+	}
+
+	/**
+	 * @return the onselect
+	 */
+	public Function getOnselect() {
+		return onselect;
+	}
+
+	/**
+	 * @param onselect the onselect to set
+	 */
+	public void setOnselect(Function onselect) {
+		this.onselect = onselect;
+	}
+
+	/**
+	 * @return the onshow
+	 */
+	public Function getOnshow() {
+		return onshow;
+	}
+
+	/**
+	 * @param onshow the onshow to set
+	 */
+	public void setOnshow(Function onshow) {
+		this.onshow = onshow;
+	}
+
+	/**
+	 * @return the onstalled
+	 */
+	public Function getOnstalled() {
+		return onstalled;
+	}
+
+	/**
+	 * @param onstalled the onstalled to set
+	 */
+	public void setOnstalled(Function onstalled) {
+		this.onstalled = onstalled;
+	}
+
+	/**
+	 * @return the onsubmit
+	 */
+	public Function getOnsubmit() {
+		return onsubmit;
+	}
+
+	/**
+	 * @param onsubmit the onsubmit to set
+	 */
+	public void setOnsubmit(Function onsubmit) {
+		this.onsubmit = onsubmit;
+	}
+
+	/**
+	 * @return the onsuspend
+	 */
+	public Function getOnsuspend() {
+		return onsuspend;
+	}
+
+	/**
+	 * @param onsuspend the onsuspend to set
+	 */
+	public void setOnsuspend(Function onsuspend) {
+		this.onsuspend = onsuspend;
+	}
+
+	/**
+	 * @return the ontimeupdate
+	 */
+	public Function getOntimeupdate() {
+		return ontimeupdate;
+	}
+
+	/**
+	 * @param ontimeupdate the ontimeupdate to set
+	 */
+	public void setOntimeupdate(Function ontimeupdate) {
+		this.ontimeupdate = ontimeupdate;
+	}
+
+	/**
+	 * @return the onvolumechange
+	 */
+	public Function getOnvolumechange() {
+		return onvolumechange;
+	}
+
+	/**
+	 * @param onvolumechange the onvolumechange to set
+	 */
+	public void setOnvolumechange(Function onvolumechange) {
+		this.onvolumechange = onvolumechange;
+	}
+
+	/**
+	 * @return the onwaiting
+	 */
+	public Function getOnwaiting() {
+		return onwaiting;
+	}
+
+	/**
+	 * @param onwaiting the onwaiting to set
+	 */
+	public void setOnwaiting(Function onwaiting) {
+		this.onwaiting = onwaiting;
+	}
+
+	/**
+	 * @return the onmousemove
+	 */
+	public Function getOnmousemove() {
+		return onmousemove;
+	}
+
+	/**
+	 * @param onmousemove the onmousemove to set
+	 */
+	public void setOnmousemove(Function onmousemove) {
+		this.onmousemove = onmousemove;
+	}
+
+	/**
+	 * @return the onratechange
+	 */
+	public Function getOnratechange() {
+		return onratechange;
+	}
+
+	/**
+	 * @param onratechange the onratechange to set
+	 */
+	public void setOnratechange(Function onratechange) {
+		this.onratechange = onratechange;
+	}
 
 	/**
 	 * Evaluate.
@@ -2810,24 +3567,6 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	}
 
 	@Override
-	public void addEventListener(String type, EventListener listener, boolean useCapture) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void removeEventListener(String type, EventListener listener, boolean useCapture) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean dispatchEvent(Event evt) throws EventException, DOMException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public Object getElement(String name) {
 		// TODO Auto-generated method stub
 		return null;
@@ -2870,561 +3609,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	}
 
 	@Override
-	public void open(String url, String name, String features) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void open(String url, String name, String features, boolean replace) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public Element getActiveElement() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public Function getOnabort() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnabort(Function onabort) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnblur() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnblur(Function onblur) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOncanplay() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOncanplay(Function oncanplay) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOncanplaythrough() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOncanplaythrough(Function oncanplaythrough) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnchange() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnchange(Function onchange) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOncontextmenu() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOncontextmenu(Function oncontextmenu) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOncuechange() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOncuechange(Function oncuechange) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOndrag() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOndrag(Function ondrag) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOndragend() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOndragend(Function ondragend) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOndragenter() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOndragenter(Function ondragenter) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOndragleave() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOndragleave(Function ondragleave) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOndragover() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOndragover(Function ondragover) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOndragstart() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOndragstart(Function ondragstart) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOndrop() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOndrop(Function ondrop) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOndurationchange() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOndurationchange(Function ondurationchange) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnemptied() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnemptied(Function onemptied) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnended() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnended(Function onended) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnerror() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnerror(Function onerror) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnfocus() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnfocus(Function onfocus) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOninput() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOninput(Function oninput) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOninvalid() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOninvalid(Function oninvalid) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnload() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnload(Function onload) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnloadeddata() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnloadeddata(Function onloadeddata) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnloadedmetadata() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnloadedmetadata(Function onloadedmetadata) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnloadstart() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnloadstart(Function onloadstart) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnmousemove() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnmousemove(Function onmousemove) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnmousewheel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnmousewheel(Function onmousewheel) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnpause() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnpause(Function onpause) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnplay() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnplay(Function onplay) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnplaying() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnplaying(Function onplaying) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnprogress() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnprogress(Function onprogress) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnratechange() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnratechange(Function onratechange) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnreadystatechange() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnreadystatechange(Function onreadystatechange) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnreset() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnreset(Function onreset) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnscroll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnscroll(Function onscroll) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnseeked() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnseeked(Function onseeked) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnseeking() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnseeking(Function onseeking) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnselect() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnselect(Function onselect) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnshow() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnshow(Function onshow) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnstalled() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnstalled(Function onstalled) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnsubmit() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnsubmit(Function onsubmit) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnsuspend() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnsuspend(Function onsuspend) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOntimeupdate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOntimeupdate(Function ontimeupdate) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnvolumechange() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnvolumechange(Function onvolumechange) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Function getOnwaiting() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setOnwaiting(Function onwaiting) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -3433,9 +3620,10 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 
 	}
 
+
 	@Override
-	public HTMLAllCollection getAll() {
+	public boolean dispatchEvent(Event evt) throws EventException, DOMException {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 }
