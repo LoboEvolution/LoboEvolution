@@ -37,9 +37,9 @@ public class UserAgentImpl implements UserAgent {
 
     /** The Constant instance. */
     private static final UserAgentImpl instance = new UserAgentImpl();
-
-    // private static final Logger logger =
-    // Logger.getLogger(UserAgentImpl.class.getName());
+    
+    /** The text value. */
+    private volatile String textValue = null;
 
     /**
      * Instantiates a new user agent impl.
@@ -97,9 +97,6 @@ public class UserAgentImpl implements UserAgent {
     public String getJavaVersion() {
         return System.getProperty("java.version");
     }
-
-    /** The text value. */
-    private volatile String textValue = null;
 
     /*
      * (non-Javadoc)

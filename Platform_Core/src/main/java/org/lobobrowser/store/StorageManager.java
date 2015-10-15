@@ -44,7 +44,6 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.security.LocalSecurityPolicy;
-import org.lobobrowser.security.StoreHostPermission;
 
 /**
  * * @author J. H. S.

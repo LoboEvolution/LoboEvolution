@@ -63,7 +63,10 @@ public class GeneralSettings implements java.io.Serializable {
 
     /** The moz version. */
     private volatile String mozVersion;
-
+    
+    /** The spoof jd. */
+    private volatile boolean spoofJS;
+    
     /** The initial window bounds. */
     private volatile Rectangle initialWindowBounds;
 
@@ -120,6 +123,7 @@ public class GeneralSettings implements java.io.Serializable {
     public void restoreDefaults() {
         this.startupURLs = Collections.singletonList(DEFAULT_STARTUP);
         this.spoofIE = true;
+        this.spoofJS = true;
         this.ieVersion = "11.0";
         this.mozVersion = "5.0";
     }
@@ -238,4 +242,18 @@ public class GeneralSettings implements java.io.Serializable {
         this.mozVersion = mozVersion;
         UserAgentImpl.getInstance().invalidateUserAgent();
     }
+
+	/**
+	 * @return the spoofJS
+	 */
+	public boolean isSpoofJS() {
+		return spoofJS;
+	}
+
+	/**
+	 * @param spoofJS the spoofJS to set
+	 */
+	public void setSpoofJS(boolean spoofJS) {
+		this.spoofJS = spoofJS;
+	}
 }

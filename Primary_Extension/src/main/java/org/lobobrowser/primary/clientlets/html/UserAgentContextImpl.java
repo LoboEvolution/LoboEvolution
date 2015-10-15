@@ -21,7 +21,9 @@
 package org.lobobrowser.primary.clientlets.html;
 
 import java.net.URL;
+import java.security.AccessController;
 import java.security.Policy;
+import java.security.PrivilegedAction;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -32,6 +34,7 @@ import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.request.RequestEngine;
 import org.lobobrowser.request.UserAgentImpl;
 import org.lobobrowser.security.LocalSecurityPolicy;
+import org.lobobrowser.settings.GeneralSettings;
 import org.lobobrowser.ua.NavigatorFrame;
 
 /**
@@ -230,8 +233,14 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public boolean isScriptingEnabled() {
-		// TODO: Settings
-		return true;
+		GeneralSettings settings = AccessController
+                .doPrivileged(new PrivilegedAction<GeneralSettings>() {
+                    @Override
+                    public GeneralSettings run() {
+                        return GeneralSettings.getInstance();
+                    }
+                });
+		return settings.isSpoofJS();
 	}
 
 	/*
