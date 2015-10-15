@@ -74,6 +74,9 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	/** The javscript panel. */
 	private final CheckBoxPanel javscriptPanel;
 	
+	/** The css panel. */
+	private final CheckBoxPanel cssPanel;
+	
 	/** The moz panel. */
 	private final FormPanel mozPanel;
 
@@ -102,6 +105,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		networkPanel.setBorder(new EmptyBorder(1, 8, 8, 0));
 		this.ieSpoofPanel = new CheckBoxPanel(MSIE_USER_AGENT, iePanel);
 		this.javscriptPanel = new CheckBoxPanel("Enable Javascript", networkPanel);
+		this.cssPanel = new CheckBoxPanel("Enable Cascading Style Sheets", networkPanel);
 		this.mozPanel = new FormPanel();
 		mozPanel.addField(this.mozillaVersionField);
 		this.startupPagesStringListControl = new StringListControl();
@@ -117,6 +121,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.loadSettings();
 		this.ieSpoofPanel.updateEnabling();
 		this.javscriptPanel.updateEnabling();
+		this.cssPanel.updateEnabling();
 	}
 	
 	/**
@@ -162,6 +167,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
 		groupBox.setBorder(new TitledBorder(new EtchedBorder(), "Network"));
 		groupBox.add(this.getJSCheckBoxPanel());
+		groupBox.add(this.getCSSCheckBoxPanel());
 		return groupBox;
 	}
 
@@ -193,6 +199,15 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		return this.javscriptPanel;
 	}
 	
+	/**
+	 * Gets the CSS check box panel.
+	 *
+	 * @return the CSS check box panel
+	 */
+	private Component getCSSCheckBoxPanel() {
+		return this.cssPanel;
+	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -216,6 +231,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		GeneralSettings settings = this.settings;
 		settings.setSpoofIE(this.ieSpoofPanel.isSelected());
 		settings.setSpoofJS(this.javscriptPanel.isSelected());
+		settings.setSpoofCSS(this.cssPanel.isSelected());
 		settings.setIeVersion(this.ieVersionField.getValue());
 		settings.setMozVersion(this.mozillaVersionField.getValue());
 		settings.setStartupURLs(this.startupPagesStringListControl.getStrings());
@@ -229,6 +245,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		GeneralSettings settings = this.settings;
 		this.ieSpoofPanel.setSelected(settings.isSpoofIE());
 		this.javscriptPanel.setSelected(settings.isSpoofJS());
+		this.cssPanel.setSelected(settings.isSpoofCSS());
 		this.ieVersionField.setValue(settings.getIeVersion());
 		this.mozillaVersionField.setValue(settings.getMozVersion());
 		this.mozPanel.revalidate();

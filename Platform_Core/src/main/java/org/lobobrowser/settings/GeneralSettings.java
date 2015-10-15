@@ -67,6 +67,10 @@ public class GeneralSettings implements java.io.Serializable {
     /** The spoof jd. */
     private volatile boolean spoofJS;
     
+    /** The spoof jd. */
+    private volatile boolean spoofCSS;
+    
+    
     /** The initial window bounds. */
     private volatile Rectangle initialWindowBounds;
 
@@ -124,6 +128,7 @@ public class GeneralSettings implements java.io.Serializable {
         this.startupURLs = Collections.singletonList(DEFAULT_STARTUP);
         this.spoofIE = true;
         this.spoofJS = true;
+        this.spoofCSS = true;
         this.ieVersion = "11.0";
         this.mozVersion = "5.0";
     }
@@ -255,5 +260,19 @@ public class GeneralSettings implements java.io.Serializable {
 	 */
 	public void setSpoofJS(boolean spoofJS) {
 		this.spoofJS = spoofJS;
+	}
+
+	/**
+	 * @return the spoofCSS
+	 */
+	public boolean isSpoofCSS() {
+		return spoofCSS;
+	}
+
+	/**
+	 * @param spoofCSS the spoofCSS to set
+	 */
+	public void setSpoofCSS(boolean spoofCSS) {
+		this.spoofCSS = spoofCSS;
 	}
 }

@@ -284,7 +284,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public String getVendor() {
-		return "The Lobo Project";
+		return "The Lobo Evolution";
 	}
 
 	/*
@@ -304,7 +304,14 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public boolean isExternalCSSEnabled() {
-		return true;
+		GeneralSettings settings = AccessController
+                .doPrivileged(new PrivilegedAction<GeneralSettings>() {
+                    @Override
+                    public GeneralSettings run() {
+                        return GeneralSettings.getInstance();
+                    }
+                });
+		return settings.isSpoofCSS();
 	}
 
 	/*
@@ -314,6 +321,13 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public boolean isInternalCSSEnabled() {
-		return true;
+		GeneralSettings settings = AccessController
+                .doPrivileged(new PrivilegedAction<GeneralSettings>() {
+                    @Override
+                    public GeneralSettings run() {
+                        return GeneralSettings.getInstance();
+                    }
+                });
+		return settings.isSpoofCSS();
 	}
 }
