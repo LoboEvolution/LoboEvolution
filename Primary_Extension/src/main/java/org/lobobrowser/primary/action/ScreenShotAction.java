@@ -21,50 +21,44 @@
 package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.lobobrowser.primary.ext.ActionPool;
-import org.lobobrowser.primary.ext.ComponentSource;
-import org.lobobrowser.store.CacheManager;
+import javax.swing.AbstractAction;
+import org.lobobrowser.gui.FramePanel;
+import org.lobobrowser.primary.screenshot.ScreenShootFrame;
+import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigatorWindow;
 
-/**
- * The Class ClearCacheAction.
- */
-public class ClearCacheAction extends ActionPool {
-	
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
+public class ScreenShotAction extends AbstractAction implements EnableableAction{
 
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ClearCacheAction.class.getName());
+	private static final long serialVersionUID = 1L;
+	
+	/** The window. */
+	private NavigatorWindow window;
+
 
 	/**
-	 * Instantiates a new clear cache action.
+	 * Instantiates a new cloned window action.
 	 *
 	 * @param componentSource
 	 *            the component source
 	 * @param window
 	 *            the window
+	 * @param action
+	 *            the action
 	 */
-	public ClearCacheAction(ComponentSource componentSource, NavigatorWindow window) {
-		super(componentSource, window);
+	public ScreenShotAction(NavigatorWindow window) {
+		this.window = window;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
+	
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		CacheManager clearCache = CacheManager.getInstance();
-		try {
-			clearCache.clearCache();
-		} catch (Throwable err) {
-			logger.log(Level.SEVERE, "ClearCacheAction", err);
+	public void actionPerformed(ActionEvent arg0) {
+		NavigationEntry entry = window.getCurrentNavigationEntry();
+		if (entry != null) {
+			FramePanel f = (FramePanel) window.getTopFrame();
+			new ScreenShootFrame(f);
 		}
 	}
+	
+	@Override
+	public void updateEnabling() {}
 }

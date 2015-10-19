@@ -62,6 +62,7 @@ import org.lobobrowser.primary.action.PreferencesAction;
 import org.lobobrowser.primary.action.RecentHostsAction;
 import org.lobobrowser.primary.action.ReloadAction;
 import org.lobobrowser.primary.action.SaveFileAction;
+import org.lobobrowser.primary.action.ScreenShotAction;
 import org.lobobrowser.primary.action.SearchAction;
 import org.lobobrowser.primary.action.SearchBookmarksAction;
 import org.lobobrowser.primary.action.ShowBookmarksAction;
@@ -330,6 +331,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		menu.setMnemonic('T');
 		menu.add(this.searchersMenu);
 		menu.add(menuItem("Preferences...", 'P', new PreferencesAction(this, window)));
+		menu.add(menuItem("Screenshot", ' ', "", new ScreenShotAction(window)));
 		menu.add(menuItem("Clear Cache", 'M', "ctrl M", new ClearCacheAction(this, window)));
 		return menu;
 	}
