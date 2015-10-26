@@ -2,22 +2,24 @@ The following open source externals are used by this project:
 
 * [izforge.com] IzPack Installer That's how we build the Warrior installer. 
 
-* [http://sourceforge.net/projects/jregistrykey/] jRegistryKey
+* [http://sourceforge.net/projects/jregistrykey/] jRegistryKey.
   
-* [https://github.com/mozilla/rhino] Rhino - Javascript for Java 
+* [https://github.com/mozilla/rhino] Rhino - Javascript for Java .
   
-* [http://cssparser.sourceforge.net/] Cssparser
+* [http://cssparser.sourceforge.net/] Cssparser.
 
-* [http://java.sun.com] Java(TM) Look and Feel Graphics Repository 1.0
+* [http://java.sun.com] Java(TM) Look and Feel Graphics Repository 1.0.
 
 * [https://github.com/sabren/java-XmlHttpRequest] Java implementation of the W3C's XmlHttpRequest API.
 
 * [https://github.com/kevinsawicki/http-request] A simple convenience library for using a HttpURLConnection to make requests and access the response.
 
-* [https://xmlgraphics.apache.org/batik/] A java-based toolkit for applications or applets that want to use images in the Scalable Vector Graphics (SVG)
+* [https://xmlgraphics.apache.org/batik/] A java-based toolkit for applications or applets that want to use images in the Scalable Vector Graphics (SVG).
   
-* [https://xml.apache.org/xalan-j/] Xalan-Java is an XSLT processor for transforming XML documents into HTML, text, or other XML document types
+* [https://xml.apache.org/xalan-j/] Xalan-Java is an XSLT processor for transforming XML documents into HTML, text, or other XML document types.
 
 * [https://github.com/chrsan/css-selectors] A Java implementation of the W3C Selectors Specification.
 
-* [https://github.com/JDatePicker/JDatePicker] JDatePicker is an set of advanced DatePicker controls for Java Swing applications
+* [https://github.com/JDatePicker/JDatePicker] JDatePicker is an set of advanced DatePicker controls for Java Swing applications.
+
+* [http://www.jtattoo.net/index.html] JTattoo consists of several different Look and Feels for Swing applications.

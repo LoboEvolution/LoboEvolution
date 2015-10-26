@@ -33,13 +33,13 @@ import java.net.URLStreamHandler;
 import java.security.Permission;
 import java.security.Policy;
 import java.util.EventObject;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 
 import org.lobobrowser.gui.ConsoleModel;
 import org.lobobrowser.gui.DefaultWindowFactory;
@@ -53,6 +53,8 @@ import org.lobobrowser.util.GenericEventListener;
 import org.lobobrowser.util.SimpleThreadPool;
 import org.lobobrowser.util.SimpleThreadPoolTask;
 import org.lobobrowser.util.Urls;
+
+import com.jtattoo.plaf.aero.AeroLookAndFeel;
 
 
 /**
@@ -129,18 +131,10 @@ public class PlatformInit {
      *             the exception
      */
     public void initLookAndFeel() throws Exception {
-        try {
-            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        }
-
+    	Properties props = new Properties();
+    	props.put("logoString", "Lobo Evolution");
+    	AeroLookAndFeel.setCurrentTheme(props);
+    	UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
     }
 
     /** Checks if is code location directory.
@@ -204,8 +198,8 @@ public class PlatformInit {
 		Logger logger = Logger.getLogger(PlatformInit.class.getName());
 		if (logger.isLoggable(Level.INFO)) {
 			logger.warning("Entry(): Logger INFO level is enabled.");
-			java.util.Properties properties = System.getProperties();
-			java.util.Iterator i = properties.entrySet().iterator();
+			Properties properties = System.getProperties();
+			Iterator i = properties.entrySet().iterator();
 			while (i.hasNext()) {
 				Map.Entry entry = (Map.Entry) i.next();
 				logger.info("main(): " + entry.getKey() + "="

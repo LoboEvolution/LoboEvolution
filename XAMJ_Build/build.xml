@@ -124,8 +124,8 @@ The Lobo Evolution
     		 update="true"
 		/>
 		<jar destfile="${build.dir}/lobo.jar"
-    		 basedir="../Platform_Core/"
-    		 includes="**/*.png"
+    		 basedir="../Platform_Core/bin/"
+    		 includes="**/*.png,**/*.gif"
     		 update="true"
 		/>
 	</target>
