@@ -49,8 +49,7 @@ import com.steadystate.css.util.LangUtils;
  * @author rbri
  * @author Ahmed Ashour
  */
-public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, CSSFormatable, Serializable
-{
+public class CSSStyleDeclarationImpl implements CSSStyleDeclaration, CSSFormatable, Serializable {
     private static final long serialVersionUID = -2373755821317100189L;
 
     private static final String PRIORITY_IMPORTANT = "important";

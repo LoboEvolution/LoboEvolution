@@ -34,7 +34,6 @@ import org.w3c.css.sac.ErrorHandler;
 /**
  * Helper implementation of {@link ErrorHandler}, which throws CssException in case of problems.
  *
- * @version $Revision: $
  * @author rbri
  * @see ErrorHandler
  */

@@ -74,6 +74,14 @@ public class MediaQuery extends LocatableImpl implements CSSFormatable, Serializ
         properties_.add(mp);
     }
 
+    public boolean isOnly() {
+        return isOnly_;
+    }
+
+    public boolean isNot() {
+        return isNot_;
+    }
+
     /**
      * {@inheritDoc}
      */

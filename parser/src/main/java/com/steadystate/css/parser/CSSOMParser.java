@@ -234,15 +234,15 @@ public class CSSOMParser {
             href_ = href;
         }
 
-        public CSSOMHandler(final Stack<Object> nodeStack) {
+        CSSOMHandler(final Stack<Object> nodeStack) {
             nodeStack_ = nodeStack;
         }
 
-        public CSSOMHandler() {
+        CSSOMHandler() {
             nodeStack_ = new Stack<Object>();
         }
 
-        public Object getRoot() {
+        Object getRoot() {
             return root_;
         }
 

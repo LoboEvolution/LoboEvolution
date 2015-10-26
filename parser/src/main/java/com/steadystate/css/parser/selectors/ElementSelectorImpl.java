@@ -71,9 +71,6 @@ public class ElementSelectorImpl extends LocatableImpl implements ElementSelecto
     public String getCssText(final CSSFormat format) {
         final String localeName = getLocalName();
         if (localeName == null) {
-            if (format != null && format.isSuppressUniversalSelector()) {
-                return "";
-            }
             return "*";
         }
         return localeName;

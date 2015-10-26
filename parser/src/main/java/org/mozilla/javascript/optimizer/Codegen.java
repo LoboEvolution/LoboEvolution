@@ -4465,6 +4465,7 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
                 } else {
                     cfw.addALoad(reg);
                 }
+                addObjectToDouble();
                 if (post) {
                     cfw.add(ByteCode.DUP2);
                 }
