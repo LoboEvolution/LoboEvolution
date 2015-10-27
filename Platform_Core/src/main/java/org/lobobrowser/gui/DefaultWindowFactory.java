@@ -26,7 +26,9 @@ package org.lobobrowser.gui;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashSet;
@@ -41,6 +43,7 @@ import javax.swing.WindowConstants;
 
 import org.lobobrowser.main.ExtensionManager;
 import org.lobobrowser.main.PlatformInit;
+import org.lobobrowser.request.RequestEngine;
 import org.lobobrowser.settings.GeneralSettings;
 import org.lobobrowser.ua.NavigatorWindow;
 import org.lobobrowser.util.EventDispatch;
@@ -59,12 +62,9 @@ public class DefaultWindowFactory implements WindowFactory {
     /** The instance. */
     private static DefaultWindowFactory instance = new DefaultWindowFactory();
 
-    /** The Constant DEFAULT_ICON_URL. */
-    private static final String DEFAULT_ICON_URL = "res:/images/lobo.png";
-
     /** The evt window shown. */
     public final EventDispatch evtWindowShown = new EventDispatch();
-    // TODO: Should use an expiring cache instead of a WeakHashMap.
+    
     /** The image map. */
     private final Map<String, ImageIcon> imageMap = new WeakValueHashMap();
 
@@ -110,8 +110,30 @@ public class DefaultWindowFactory implements WindowFactory {
 	 * @return the default image icon
 	 */
     public ImageIcon getDefaultImageIcon() {
-        return this.getImageIcon(DEFAULT_ICON_URL);
+        return getImageIcon();
     }
+    
+    
+    /**
+	 * Gets an image icon.
+	 *
+	 * @return the image icon
+	 */
+	private ImageIcon getImageIcon() { 
+		ImageIcon image = null;
+		try {
+			Image img = Toolkit.getDefaultToolkit()
+					.getImage(getClass().getResource("/org/lobobrowser/images/lobo.png"));
+
+			if (img != null) {
+				image = new ImageIcon(img);
+			}
+
+		} catch (Throwable ex) {
+			 logger.log(Level.WARNING, ex.getMessage());
+		}
+		return image;
+	}
 
     /**
      * Gets an image icon.
@@ -125,8 +147,7 @@ public class DefaultWindowFactory implements WindowFactory {
             ImageIcon icon = this.imageMap.get(urlOrPath);
             if (icon == null) {
                 try {
-                    byte[] imageBytes = org.lobobrowser.request.RequestEngine
-                            .getInstance().loadBytes(urlOrPath);
+                    byte[] imageBytes = RequestEngine.getInstance().loadBytes(urlOrPath);
                     icon = new ImageIcon(imageBytes);
                     this.imageMap.put(urlOrPath, icon);
                 } catch (Exception err) {
