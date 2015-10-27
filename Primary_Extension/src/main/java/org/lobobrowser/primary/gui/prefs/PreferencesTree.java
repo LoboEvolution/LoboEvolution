@@ -58,8 +58,9 @@ public class PreferencesTree extends JTree {
 	 */
 	private TreeNode createRootNode() {
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
-		root.add(new DefaultMutableTreeNode(this.getGeneralSettingsInfo()));
 		root.add(new DefaultMutableTreeNode(this.getConnectionSettingsInfo()));
+		root.add(new DefaultMutableTreeNode(this.getGeneralSettingsInfo()));
+		root.add(new DefaultMutableTreeNode(this.getLookAndFeelsSettingsInfo()));
 		root.add(new DefaultMutableTreeNode(this.getToolsSettingsInfo()));
 		return root;
 	}
@@ -142,6 +143,35 @@ public class PreferencesTree extends JTree {
 			@Override
 			public String getName() {
 				return "Tools";
+			}
+
+			@Override
+			public String toString() {
+				return this.getName();
+			}
+		};
+	}
+	
+	/**
+	 * Gets the tools settings info.
+	 *
+	 * @return the Look and Feels settings info
+	 */
+	private SettingsInfo getLookAndFeelsSettingsInfo() {
+		return new SettingsInfo() {
+			@Override
+			public AbstractSettingsUI createSettingsUI() {
+				return new LookAndFeelsSettingsUI();
+			}
+
+			@Override
+			public String getDescription() {
+				return "Choice Look and Feels.";
+			}
+
+			@Override
+			public String getName() {
+				return "Look and Feels";
 			}
 
 			@Override

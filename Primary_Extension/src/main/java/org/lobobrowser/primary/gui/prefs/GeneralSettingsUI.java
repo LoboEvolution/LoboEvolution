@@ -171,44 +171,6 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		return groupBox;
 	}
 
-	/**
-	 * Gets the IE check box panel.
-	 *
-	 * @return the IE check box panel
-	 */
-	private Component getIECheckBoxPanel() {
-		return this.ieSpoofPanel;
-	}
-
-	/**
-	 * Gets the moz version panel.
-	 *
-	 * @return the moz version panel
-	 */
-	private Component getMozVersionPanel() {
-		return this.mozPanel;
-	}
-	
-	
-	/**
-	 * Gets the JS check box panel.
-	 *
-	 * @return the JS check box panel
-	 */
-	private Component getJSCheckBoxPanel() {
-		return this.javscriptPanel;
-	}
-	
-	/**
-	 * Gets the CSS check box panel.
-	 *
-	 * @return the CSS check box panel
-	 */
-	private Component getCSSCheckBoxPanel() {
-		return this.cssPanel;
-	}
-	
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -252,5 +214,42 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.iePanel.revalidate();
 		this.networkPanel.revalidate();
 		this.startupPagesStringListControl.setStrings(settings.getStartupURLs());
+	}
+	
+	/**
+	 * Gets the IE check box panel.
+	 *
+	 * @return the IE check box panel
+	 */
+	private Component getIECheckBoxPanel() {
+		return this.ieSpoofPanel;
+	}
+
+	/**
+	 * Gets the moz version panel.
+	 *
+	 * @return the moz version panel
+	 */
+	private Component getMozVersionPanel() {
+		return this.mozPanel;
+	}
+	
+	
+	/**
+	 * Gets the JS check box panel.
+	 *
+	 * @return the JS check box panel
+	 */
+	private Component getJSCheckBoxPanel() {
+		return this.javscriptPanel;
+	}
+	
+	/**
+	 * Gets the CSS check box panel.
+	 *
+	 * @return the CSS check box panel
+	 */
+	private Component getCSSCheckBoxPanel() {
+		return this.cssPanel;
 	}
 }

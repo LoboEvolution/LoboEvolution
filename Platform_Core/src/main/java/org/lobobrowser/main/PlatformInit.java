@@ -49,12 +49,24 @@ import org.lobobrowser.request.CookieManager;
 import org.lobobrowser.security.LocalSecurityManager;
 import org.lobobrowser.security.LocalSecurityPolicy;
 import org.lobobrowser.settings.GeneralSettings;
+import org.lobobrowser.settings.LAFSettings;
 import org.lobobrowser.util.GenericEventListener;
 import org.lobobrowser.util.SimpleThreadPool;
 import org.lobobrowser.util.SimpleThreadPoolTask;
 import org.lobobrowser.util.Urls;
 
+import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import com.jtattoo.plaf.aero.AeroLookAndFeel;
+import com.jtattoo.plaf.aluminium.AluminiumLookAndFeel;
+import com.jtattoo.plaf.bernstein.BernsteinLookAndFeel;
+import com.jtattoo.plaf.fast.FastLookAndFeel;
+import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
+import com.jtattoo.plaf.hifi.HiFiLookAndFeel;
+import com.jtattoo.plaf.luna.LunaLookAndFeel;
+import com.jtattoo.plaf.mcwin.McWinLookAndFeel;
+import com.jtattoo.plaf.noire.NoireLookAndFeel;
+import com.jtattoo.plaf.smart.SmartLookAndFeel;
+import com.jtattoo.plaf.texture.TextureLookAndFeel;
 
 
 /**
@@ -130,12 +142,71 @@ public class PlatformInit {
      * @throws Exception
      *             the exception
      */
-    public void initLookAndFeel() throws Exception {
-    	Properties props = new Properties();
-    	props.put("logoString", "Lobo Evolution");
-    	AeroLookAndFeel.setCurrentTheme(props);
-    	UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
-    }
+	public void initLookAndFeel() throws Exception {
+		LAFSettings settings = LAFSettings.getInstance();
+		Properties props = new Properties();
+		props.put("logoString", "Lobo Evolution");
+
+		if (settings.isAcryl()) {
+			AcrylLookAndFeel.setCurrentTheme(props);
+			UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+		}
+
+		if (settings.isAero()) {
+			AeroLookAndFeel.setCurrentTheme(props);
+			UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
+		}
+
+		if (settings.isAluminium()) {
+			AluminiumLookAndFeel.setCurrentTheme(props);
+			UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+		}
+
+		if (settings.isBernstein()) {
+			BernsteinLookAndFeel.setCurrentTheme(props);
+			UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
+		}
+
+		if (settings.isFast()) {
+			FastLookAndFeel.setCurrentTheme(props);
+			UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
+		}
+
+		if (settings.isGraphite()) {
+			GraphiteLookAndFeel.setCurrentTheme(props);
+			UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
+		}
+
+		if (settings.isHiFi()) {
+			HiFiLookAndFeel.setCurrentTheme(props);
+			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+		}
+
+		if (settings.isLuna()) {
+			LunaLookAndFeel.setCurrentTheme(props);
+			UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
+		}
+
+		if (settings.isMcWin()) {
+			McWinLookAndFeel.setCurrentTheme(props);
+			UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+		}
+
+		if (settings.isNoire()) {
+			NoireLookAndFeel.setCurrentTheme(props);
+			UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
+		}
+
+		if (settings.isSmart()) {
+			SmartLookAndFeel.setCurrentTheme(props);
+			UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+		}
+
+		if (settings.isTexture()) {
+			TextureLookAndFeel.setCurrentTheme(props);
+			UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+		}
+	}
 
     /** Checks if is code location directory.
 	 *

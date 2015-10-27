@@ -23,6 +23,7 @@ package org.lobobrowser.settings;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -37,7 +38,7 @@ import org.lobobrowser.store.StorageManager;
  * General browser settings. This is a singleton class with an instance obtained
  * by calling {@link #getInstance()}.
  */
-public class GeneralSettings implements java.io.Serializable {
+public class GeneralSettings implements Serializable {
 
     /** The Constant logger. */
     private static final Logger logger = Logger.getLogger(GeneralSettings.class
