@@ -71,6 +71,10 @@ public class SelectorFactoryImpl implements SelectorFactory {
         return new ElementSelectorImpl(localName);
     }
 
+    public ElementSelector createSyntheticElementSelector() throws CSSException {
+        return new SyntheticElementSelectorImpl();
+    }
+
     public CharacterDataSelector createTextNodeSelector(final String data) throws CSSException {
         throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
     }
