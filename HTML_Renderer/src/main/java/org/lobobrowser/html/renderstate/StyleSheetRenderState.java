@@ -49,6 +49,7 @@ import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderThreadState;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.util.gui.FontFactory;
+import org.lobobrowser.util.gui.LAFSettings;
 import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.css.CSS2Properties;
 
@@ -63,8 +64,8 @@ public class StyleSheetRenderState implements RenderState {
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
 
 	/** The Constant DEFAULT_FONT. */
-	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(Font.SANS_SERIF, null, null, null,
-			HtmlValues.DEFAULT_FONT_SIZE, null, null);
+	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(LAFSettings.getInstance().getFont(), null, null, null,
+			LAFSettings.getInstance().getFontSize(), null, null);
 
 	/** The Constant INVALID_INSETS. */
 	protected static final HtmlInsets INVALID_INSETS = new HtmlInsets();
@@ -337,13 +338,13 @@ public class StyleSheetRenderState implements RenderState {
 			try {
 				fontSize = new Float(HtmlValues.getFontSize(newFontSize, prs));
 			} catch (Exception err) {
-				fontSize = HtmlValues.DEFAULT_FONT_SIZE_BOX;
+				fontSize = LAFSettings.getInstance().getFontSize();
 			}
 		} else if (fontSize == null) {
 			if (prs != null) {
 				fontSize = new Float(prs.getFont().getSize());
 			} else {
-				fontSize = HtmlValues.DEFAULT_FONT_SIZE_BOX;
+				fontSize = LAFSettings.getInstance().getFontSize();
 			}
 		}
 		if (newFontFamily != null) {

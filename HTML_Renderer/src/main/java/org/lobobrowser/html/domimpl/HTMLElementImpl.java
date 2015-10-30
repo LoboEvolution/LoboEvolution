@@ -51,6 +51,7 @@ import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.style.LocalCSS2Properties;
 import org.lobobrowser.html.style.StyleSheetAggregator;
 import org.lobobrowser.util.Strings;
+import org.lobobrowser.util.gui.LAFSettings;
 import org.lobobrowser.w3c.html.DOMSettableTokenList;
 import org.lobobrowser.w3c.html.DOMStringMap;
 import org.lobobrowser.w3c.html.DOMTokenList;
@@ -226,8 +227,9 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 * @return the abstract cs s2 properties
 	 */
 	protected AbstractCSS2Properties createDefaultStyleSheet() {
-		// Override to provide element defaults.
-		return null;
+		ComputedCSS2Properties css = new ComputedCSS2Properties(this);
+		css.internalSetLC("font-size", String.valueOf((int)LAFSettings.getInstance().getFontSize())+"px");
+		return css;
 	}
 
 	/** The computed styles. */

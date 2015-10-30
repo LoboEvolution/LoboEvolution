@@ -24,13 +24,19 @@ import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
 import org.lobobrowser.primary.gui.CheckBoxPanel;
+import org.lobobrowser.primary.gui.FieldType;
+import org.lobobrowser.primary.gui.FormField;
 import org.lobobrowser.primary.gui.FormPanel;
 import org.lobobrowser.primary.gui.ValidationException;
-import org.lobobrowser.settings.LAFSettings;
+import org.lobobrowser.util.gui.LAFSettings;
 
 public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 
@@ -75,33 +81,50 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 
 	/** The Texture panel. */
 	private final CheckBoxPanel texturePanel;
-
+	
+	/** The font panel. */
+	private final FormPanel fontPanel;
+	
+	/** The search engine list control. */
+	private final JComboBox<String> fontList;	
+	
 	/** The network panel. */
 	private final FormPanel lafPanel;
+	
+	/** The Font Size field. */
+	private final FormField fontSizeField;
 
 	/** The settings. */
 	private final LAFSettings settings = LAFSettings.getInstance();
-
+	
 	public LookAndFeelsSettingsUI() {
 		FormPanel lafPanel = new FormPanel();
 		this.lafPanel = lafPanel;
+		this.fontList = new JComboBox<String>(LAFSettings.FONTS);
+		this.fontList.setToolTipText("Choose your favorite font");
+		this.fontList.setSelectedItem(LAFSettings.TIMES_NEW_ROMAN);
 		lafPanel.setBorder(new EmptyBorder(1, 8, 8, 0));
-		this.acrylPanel = new CheckBoxPanel("Acryl", lafPanel);
-		this.aeroPanel = new CheckBoxPanel("Aero", lafPanel);
-		this.aluminiumPanel = new CheckBoxPanel("Aluminium", lafPanel);
-		this.bernsteinPanel = new CheckBoxPanel("Bernstein", lafPanel);
-		this.fastPanel = new CheckBoxPanel("Fast", lafPanel);
-		this.graphitePanel = new CheckBoxPanel("Graphite", lafPanel);
-		this.hiFiPanel = new CheckBoxPanel("HiFi", lafPanel);
-		this.lunaPanel = new CheckBoxPanel("Luna", lafPanel);
-		this.mcWinPanel = new CheckBoxPanel("McWin", lafPanel);
-		this.mintPanel = new CheckBoxPanel("Mint", lafPanel);
-		this.noirePanel = new CheckBoxPanel("Noire", lafPanel);
-		this.smartPanel = new CheckBoxPanel("Smart", lafPanel);
-		this.texturePanel = new CheckBoxPanel("Texture", lafPanel);
+		this.acrylPanel = new CheckBoxPanel(LAFSettings.ACRYL, lafPanel);
+		this.aeroPanel = new CheckBoxPanel(LAFSettings.AERO, lafPanel);
+		this.aluminiumPanel = new CheckBoxPanel(LAFSettings.ALUMINIUM, lafPanel);
+		this.bernsteinPanel = new CheckBoxPanel(LAFSettings.BERNSTEIN, lafPanel);
+		this.fastPanel = new CheckBoxPanel(LAFSettings.FAST, lafPanel);
+		this.graphitePanel = new CheckBoxPanel(LAFSettings.GRAPHITE, lafPanel);
+		this.hiFiPanel = new CheckBoxPanel(LAFSettings.HIFI, lafPanel);
+		this.lunaPanel = new CheckBoxPanel(LAFSettings.LUNA, lafPanel);
+		this.mcWinPanel = new CheckBoxPanel(LAFSettings.MCWIN, lafPanel);
+		this.mintPanel = new CheckBoxPanel(LAFSettings.MINT, lafPanel);
+		this.noirePanel = new CheckBoxPanel(LAFSettings.NOIRE, lafPanel);
+		this.smartPanel = new CheckBoxPanel(LAFSettings.SMART, lafPanel);
+		this.texturePanel = new CheckBoxPanel(LAFSettings.TEXTURE, lafPanel);
+		this.fontPanel = new FormPanel();
+		this.fontSizeField = new FormField(FieldType.TEXT, "Font Size:");
+		this.fontSizeField.setToolTip("Choose your favorite size");
+		this.fontPanel.addField(this.fontSizeField);
+		
 
 		JPanel groupBox = new JPanel();
-		groupBox.setPreferredSize(new Dimension(100, 100));
+		groupBox.setPreferredSize(new Dimension(100, 150));
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
 		groupBox.add(this.getAcrylPanel());
 		groupBox.add(this.getAeroPanel());
@@ -110,7 +133,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		add(groupBox);
 
 		JPanel group1Box = new JPanel();
-		group1Box.setPreferredSize(new Dimension(100, 100));
+		group1Box.setPreferredSize(new Dimension(100, 150));
 		group1Box.setLayout(new BoxLayout(group1Box, BoxLayout.Y_AXIS));
 		group1Box.add(this.getFastPanel());
 		group1Box.add(this.getGraphitePanel());
@@ -119,7 +142,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		add(group1Box);
 
 		JPanel group2Box = new JPanel();
-		group2Box.setPreferredSize(new Dimension(100, 130));
+		group2Box.setPreferredSize(new Dimension(100, 150));
 		group2Box.setLayout(new BoxLayout(group2Box, BoxLayout.Y_AXIS));
 		group2Box.add(this.getMcWinPanel());
 		group2Box.add(this.getMintPanel());
@@ -127,6 +150,8 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		group2Box.add(this.getSmartPanel());
 		group2Box.add(this.getTexturePanel());
 		add(group2Box);
+		
+		add(getFontGroupBox());
 
 		this.loadSettings();
 		this.acrylPanel.updateEnabling();
@@ -160,7 +185,8 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		settings.setNoire(this.noirePanel.isSelected());
 		settings.setSmart(this.smartPanel.isSelected());
 		settings.setTexture(this.texturePanel.isSelected());
-
+		settings.setFontSize(new Float(this.fontSizeField.getValue()));
+		settings.setFont(this.getFontList().getSelectedItem().toString());
 		if (validate(settings)) {
 			settings.save();
 		}
@@ -181,6 +207,8 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		noirePanel.setSelected(settings.isNoire());
 		smartPanel.setSelected(settings.isSmart());
 		texturePanel.setSelected(settings.isTexture());
+		fontSizeField.setValue(String.valueOf(settings.getFontSize()));
+		getFontList().setSelectedItem(settings.getFont());
 		acrylPanel.revalidate();
 		acrylPanel.revalidate();
 		aeroPanel.revalidate();
@@ -196,6 +224,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		smartPanel.revalidate();
 		texturePanel.revalidate();
 		lafPanel.revalidate();
+		fontPanel.revalidate();
 
 	}
 
@@ -214,6 +243,8 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		noirePanel.setSelected(false);
 		smartPanel.setSelected(false);
 		texturePanel.setSelected(false);
+		fontSizeField.setValue("14.0");
+		getFontList().setSelectedItem("TimesNewRoman");
 		acrylPanel.revalidate();
 		acrylPanel.revalidate();
 		aeroPanel.revalidate();
@@ -228,6 +259,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		noirePanel.revalidate();
 		smartPanel.revalidate();
 		texturePanel.revalidate();
+		fontPanel.revalidate();
 		lafPanel.revalidate();
 
 	}
@@ -272,6 +304,22 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 			JOptionPane.showMessageDialog(this, "Please restart Lobo Evolution");
 			return true;
 		}
+	}
+	
+	
+	/**
+	 * Gets the font box.
+	 *
+	 * @return the font box
+	 */
+	private Component getFontGroupBox() {
+		JPanel groupBox = new JPanel();
+		groupBox.setPreferredSize(new Dimension(400, 65));
+		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
+		groupBox.setBorder(new TitledBorder(new EtchedBorder(), "Font"));
+		groupBox.add(this.getFontPanel());
+		groupBox.add(this.getFontList());
+		return groupBox;
 	}
 
 	/**
@@ -363,6 +411,27 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	 */
 	public Component getTexturePanel() {
 		return texturePanel;
+	}
+
+	/**
+	 * @return the fontSizeField
+	 */
+	public FormField getFontSizeField() {
+		return fontSizeField;
+	}
+
+	/**
+	 * @return the fontPanel
+	 */
+	public FormPanel getFontPanel() {
+		return fontPanel;
+	}
+
+	/**
+	 * @return the fontList
+	 */
+	public JComboBox<String> getFontList() {
+		return fontList;
 	}
 
 }

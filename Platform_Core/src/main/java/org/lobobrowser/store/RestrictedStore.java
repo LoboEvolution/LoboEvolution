@@ -51,6 +51,7 @@ import org.lobobrowser.io.ManagedFileFilter;
 import org.lobobrowser.io.ManagedStore;
 import org.lobobrowser.io.QuotaExceededException;
 import org.lobobrowser.util.WrapperException;
+import org.lobobrowser.util.gui.ClassLoaderObjectInputStream;
 
 /**
  * The Class RestrictedStore.

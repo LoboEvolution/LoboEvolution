@@ -25,6 +25,7 @@ import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.util.gui.LAFSettings;
 
 /**
  * This element is used for SMALL and BIG.
@@ -69,7 +70,7 @@ public class HTMLFontSizeChangeElementImpl extends HTMLAbstractUIElement {
 		ModelNode parentModelNode = this.getParentModelNode();
 		RenderState parentRS = parentModelNode == null ? null : parentModelNode.getRenderState();
 		String fontSize = null;
-		int prevFontSize = parentRS != null ? parentRS.getFont().getSize() : HtmlValues.DEFAULT_FONT_SIZE_INT;
+		int prevFontSize = parentRS != null ? parentRS.getFont().getSize() : (int)LAFSettings.getInstance().getFontSize();
 		int newFontSize = prevFontSize + (this.fontChange * 2);
 		fontSize = newFontSize + "px";
 		ComputedCSS2Properties css = new ComputedCSS2Properties(this);

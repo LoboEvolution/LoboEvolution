@@ -36,6 +36,7 @@ import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.util.gui.FontFactory;
+import org.lobobrowser.util.gui.LAFSettings;
 import org.lobobrowser.w3c.file.FileCallback;
 import org.lobobrowser.w3c.html.CanvasGradient;
 import org.lobobrowser.w3c.html.CanvasImageData;
@@ -144,7 +145,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		strokeStyle = Color.BLACK;
 		affineTransform = new AffineTransform(1,0,0,1,0,0);
 		font = FONT_FACTORY.getFont(Font.SANS_SERIF, null, null, null,
-				HtmlValues.DEFAULT_FONT_SIZE, null, null);
+				LAFSettings.getInstance().getFontSize(), null, null);
 	}
 
 	@Override
@@ -802,7 +803,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 		String[] arrFont = font.split(" ");
 
-		float fontSize = 14.0f;
+		float fontSize = LAFSettings.getInstance().getFontSize();
 		String fontStyle = CSSValuesProperties.ITALIC;
 		String fontVariant = CSSValuesProperties.SMALL_CAPS;
 		String fontFamily = Font.SANS_SERIF;

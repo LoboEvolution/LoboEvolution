@@ -44,11 +44,12 @@ import java.util.logging.Logger;
 
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.security.LocalSecurityPolicy;
+import org.lobobrowser.util.gui.StorageManagerCommon;
 
 /**
  * * @author J. H. S.
  */
-public class StorageManager implements Runnable {
+public class StorageManager extends StorageManagerCommon implements Runnable {
 
     /** The Constant logger. */
     private static final Logger logger = Logger.getLogger(StorageManager.class
@@ -235,76 +236,6 @@ public class StorageManager implements Runnable {
 	 */
     public File getSettingsDirectory() {
         return new File(this.storeDirectory, SETTINGS_DIR);
-    }
-
-    /**
-     * Save settings.
-     *
-     * @param name
-     *            the name
-     * @param data
-     *            the data
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    public void saveSettings(String name, Serializable data) throws IOException {
-        File dir = this.getSettingsDirectory();
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-        File file = new File(dir, name);
-        OutputStream out = new FileOutputStream(file);
-        BufferedOutputStream bos = new BufferedOutputStream(out);
-        ObjectOutputStream oos = new ObjectOutputStream(bos);
-        try {
-            oos.writeObject(data);
-            oos.flush();
-        } finally {
-            oos.close();
-            bos.close();
-            out.close();
-        }
-    }
-
-    /**
-     * Retrieve settings.
-     *
-     * @param name
-     *            the name
-     * @param classLoader
-     *            the class loader
-     * @return the serializable
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     * @throws ClassNotFoundException
-     *             the class not found exception
-     */
-    public Serializable retrieveSettings(String name, ClassLoader classLoader)
-            throws IOException, ClassNotFoundException {
-        File dir = this.getSettingsDirectory();
-        if (!dir.exists()) {
-            return null;
-        }
-        File file = new File(dir, name);
-        if (!file.exists()) {
-            return null;
-        }
-        InputStream in = new FileInputStream(file);
-        BufferedInputStream bin = new BufferedInputStream(in);
-        ObjectInputStream ois = new ClassLoaderObjectInputStream(bin,
-                classLoader);
-        try {
-            try {
-                return (Serializable) ois.readObject();
-            } catch (InvalidClassException ice) {
-                logger.severe(ice.getMessage());
-                return null;
-            }
-        } finally {
-            ois.close();
-            bin.close();
-            in.close();
-        }
     }
 
     /**

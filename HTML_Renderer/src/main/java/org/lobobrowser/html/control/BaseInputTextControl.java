@@ -40,6 +40,7 @@ import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.DOMElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.renderer.HtmlController;
+import org.lobobrowser.util.gui.LAFSettings;
 import org.lobobrowser.util.gui.WrapperLayout;
 
 /**
@@ -49,9 +50,6 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-
-	/** The Constant DEFAULT_FONT_SIZE. */
-	private static final float DEFAULT_FONT_SIZE = 14.0f;
 
 	/** The widget. */
 	protected final JTextComponent widget;
@@ -73,7 +71,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 		this.setLayout(WrapperLayout.getInstance());
 		JTextComponent widget = this.createTextField();
 		Font font = widget.getFont();
-		widget.setFont(font.deriveFont(DEFAULT_FONT_SIZE));
+		widget.setFont(font.deriveFont(LAFSettings.getInstance().getFontSize()));
 		widget.setDocument(new LimitedDocument());
 		widget.setSelectionColor(Color.BLUE);
 		DOMElementImpl element = this.controlElement;

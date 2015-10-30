@@ -33,8 +33,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.lobobrowser.store.CacheManager;
-import org.lobobrowser.store.ClassLoaderObjectInputStream;
 import org.lobobrowser.util.Urls;
+import org.lobobrowser.util.gui.ClassLoaderObjectInputStream;
 
 /**
  * The Class CacheInfo.

@@ -59,10 +59,10 @@ public class FontFactory {
     /** The font map. */
     private final Map<FontKey, Font> fontMap = new HashMap<FontKey, Font>(50);
     /** The registered fonts. */
-    private final Map<String, Font> registeredFonts = new HashMap<String, Font>(
-            0);
+    private final Map<String, Font> registeredFonts = new HashMap<String, Font>(0);
+    
     /** The default font name. */
-    private String defaultFontName = Font.SANS_SERIF;
+    private String defaultFontName = LAFSettings.getInstance().getFont();
     
     /**
      * Instantiates a new font factory.
@@ -304,6 +304,9 @@ public class FontFactory {
      * @return the font
      */
     private Font createFont(String name, int style, int size) {
+        System.out.println("name: " + name);
+        System.out.println("style: " + style);
+        System.out.println("size: " + size);
         return StyleContext.getDefaultStyleContext().getFont(name, style, size);
     }
 }

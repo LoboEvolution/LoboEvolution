@@ -49,11 +49,11 @@ import org.lobobrowser.request.CookieManager;
 import org.lobobrowser.security.LocalSecurityManager;
 import org.lobobrowser.security.LocalSecurityPolicy;
 import org.lobobrowser.settings.GeneralSettings;
-import org.lobobrowser.settings.LAFSettings;
 import org.lobobrowser.util.GenericEventListener;
 import org.lobobrowser.util.SimpleThreadPool;
 import org.lobobrowser.util.SimpleThreadPoolTask;
 import org.lobobrowser.util.Urls;
+import org.lobobrowser.util.gui.LAFSettings;
 
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import com.jtattoo.plaf.aero.AeroLookAndFeel;

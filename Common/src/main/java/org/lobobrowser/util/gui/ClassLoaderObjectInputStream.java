@@ -18,7 +18,7 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-package org.lobobrowser.store;
+package org.lobobrowser.util.gui;
 
 import java.io.IOException;
 import java.io.InputStream;

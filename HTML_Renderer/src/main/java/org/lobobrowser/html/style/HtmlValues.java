@@ -41,6 +41,7 @@ import org.lobobrowser.html.info.FontInfo;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.gui.ColorFactory;
+import org.lobobrowser.util.gui.LAFSettings;
 import org.w3c.dom.css.CSS2Properties;
 
 /**
@@ -53,15 +54,6 @@ public class HtmlValues {
 
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(HtmlValues.class.getName());
-
-	/** The Constant DEFAULT_FONT_SIZE. */
-	public static final float DEFAULT_FONT_SIZE = 14.0f;
-
-	/** The Constant DEFAULT_FONT_SIZE_INT. */
-	public static final int DEFAULT_FONT_SIZE_INT = (int) DEFAULT_FONT_SIZE;
-
-	/** The Constant DEFAULT_FONT_SIZE_BOX. */
-	public static final Float DEFAULT_FONT_SIZE_BOX = new Float(DEFAULT_FONT_SIZE);
 
 	/** The Constant DEFAULT_BORDER_WIDTH. */
 	public static final int DEFAULT_BORDER_WIDTH = 2;
@@ -557,9 +549,10 @@ public class HtmlValues {
 	 */
 	public static final float getFontSize(String spec, RenderState parentRenderState) {
 		String specTL = spec.toLowerCase();
+		
 		if (specTL.endsWith("em")) {
 			if (parentRenderState == null) {
-				return DEFAULT_FONT_SIZE;
+				return LAFSettings.getInstance().getFontSize();
 			}
 			Font font = parentRenderState.getFont();
 			String pxText = specTL.substring(0, specTL.length() - 2);
@@ -567,12 +560,12 @@ public class HtmlValues {
 			try {
 				value = Double.parseDouble(pxText);
 			} catch (NumberFormatException nfe) {
-				return DEFAULT_FONT_SIZE;
+				return LAFSettings.getInstance().getFontSize();
 			}
 			return (int) Math.round(font.getSize() * value);
 		} else if (specTL.endsWith("px") || specTL.endsWith("pt") || specTL.endsWith("em") || specTL.endsWith("pc")
 				|| specTL.endsWith("em") || specTL.endsWith("mm") || specTL.endsWith("ex")) {
-			int pixelSize = getPixelSize(spec, parentRenderState, DEFAULT_FONT_SIZE_INT);
+			int pixelSize = getPixelSize(spec, parentRenderState, (int)LAFSettings.getInstance().getFontSize());
 			int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
 			// Normally the factor below should be 72, but
 			// the font-size concept in HTML is handled differently.
@@ -584,7 +577,7 @@ public class HtmlValues {
 				double parentFontSize = parentRenderState == null ? 14.0 : parentRenderState.getFont().getSize();
 				return (float) ((parentFontSize * valued) / 100.0);
 			} catch (NumberFormatException nfe) {
-				return DEFAULT_FONT_SIZE;
+				return LAFSettings.getInstance().getFontSize();
 			}
 		} else if (CSSValuesProperties.SMALL.equals(specTL)) {
 			return 12.0f;
@@ -601,15 +594,15 @@ public class HtmlValues {
 		} else if (CSSValuesProperties.XX_LARGE.equals(specTL)) {
 			return 40.0f;
 		} else if (CSSValuesProperties.LARGER.equals(specTL)) {
-			int parentFontSize = parentRenderState == null ? DEFAULT_FONT_SIZE_INT
+			int parentFontSize = parentRenderState == null ? (int)LAFSettings.getInstance().getFontSize()
 					: parentRenderState.getFont().getSize();
 			return parentFontSize * 1.2f;
 		} else if (CSSValuesProperties.SMALLER.equals(specTL)) {
-			int parentFontSize = parentRenderState == null ? DEFAULT_FONT_SIZE_INT
+			int parentFontSize = parentRenderState == null ? (int)LAFSettings.getInstance().getFontSize()
 					: parentRenderState.getFont().getSize();
 			return parentFontSize / 1.2f;
 		} else {
-			return getPixelSize(spec, parentRenderState, DEFAULT_FONT_SIZE_INT);
+			return getPixelSize(spec, parentRenderState, (int)LAFSettings.getInstance().getFontSize());
 		}
 	}
 
