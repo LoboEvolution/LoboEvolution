@@ -304,9 +304,6 @@ public class FontFactory {
      * @return the font
      */
     private Font createFont(String name, int style, int size) {
-        System.out.println("name: " + name);
-        System.out.println("style: " + style);
-        System.out.println("size: " + size);
         return StyleContext.getDefaultStyleContext().getFont(name, style, size);
     }
 }
