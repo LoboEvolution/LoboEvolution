@@ -118,10 +118,10 @@ public class PreferencesDialog extends JDialog {
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
 		buttonsPanel.add(Box.createHorizontalGlue());
 		JButton okButton = new JButton();
-		okButton.setAction(new OkAction());
+		okButton.setAction(new OkCancelAction());
 		okButton.setText("OK");
 		JButton cancelButton = new JButton();
-		cancelButton.setAction(new CancelAction());
+		cancelButton.setAction(new OkCancelAction());
 		cancelButton.setText("Cancel");
 		JButton applyButton = new JButton();
 		applyButton.setAction(new ApplyAction());
@@ -154,29 +154,7 @@ public class PreferencesDialog extends JDialog {
 	/**
 	 * The Class OkAction.
 	 */
-	private class OkAction extends AbstractAction {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (preferencesPanel.save()) {
-				PreferencesDialog.this.dispose();
-			}
-		}
-	}
-
-	/**
-	 * The Class CancelAction.
-	 */
-	private class CancelAction extends AbstractAction {
+	private class OkCancelAction extends AbstractAction {
 
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
