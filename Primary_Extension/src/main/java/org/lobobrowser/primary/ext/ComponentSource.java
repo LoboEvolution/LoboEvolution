@@ -59,7 +59,6 @@ import org.lobobrowser.primary.action.ForwardMoreAction;
 import org.lobobrowser.primary.action.GoAction;
 import org.lobobrowser.primary.action.OpenFileAction;
 import org.lobobrowser.primary.action.PreferencesAction;
-import org.lobobrowser.primary.action.RecentHostsAction;
 import org.lobobrowser.primary.action.ReloadAction;
 import org.lobobrowser.primary.action.SaveFileAction;
 import org.lobobrowser.primary.action.ScreenShotAction;
@@ -115,9 +114,6 @@ public class ComponentSource implements NavigatorWindowListener {
 	/** The forward more menu. */
 	private final JMenu forwardMoreMenu;
 
-	/** The recent hosts menu. */
-	private final JMenu recentHostsMenu;
-
 	/** The searchers menu. */
 	private final JMenu searchersMenu;
 
@@ -126,9 +122,6 @@ public class ComponentSource implements NavigatorWindowListener {
 
 	/** The action pool. */
 	private final ActionPool actionPool;
-
-	/** The search page source. */
-	private final SearchPageSource searchPageSource;
 
 	/**
 	 * Instantiates a new component source.
@@ -139,7 +132,6 @@ public class ComponentSource implements NavigatorWindowListener {
 	public ComponentSource(final NavigatorWindow window) {
 		super();
 		this.actionPool = new ActionPool(this, window);
-		this.searchPageSource = new SearchPageSource(this.actionPool);
 		this.window = window;
 		this.addressField = new AddressField(this);
 		this.progressBar = new ProgressBar();
@@ -188,16 +180,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		});
 		this.forwardMoreMenu = forwardMoreMenu;
 		forwardMoreMenu.setText("Forward To");
-		JMenu recentHostsMenu = new JMenu();
-		recentHostsMenu.addMenuListener(new MenuAdapter() {
-			@Override
-			public void menuSelected(MenuEvent e) {
-				populateRecentHosts();
-			}
-		});
-		this.recentHostsMenu = recentHostsMenu;
-		recentHostsMenu.setAction(new RecentHostsAction(this, window, actionPool));
-		recentHostsMenu.setText("Recent Hosts");
+				
 		JMenu searchersMenu = new JMenu();
 		searchersMenu.addMenuListener(new MenuAdapter() {
 			@Override
@@ -278,9 +261,6 @@ public class ComponentSource implements NavigatorWindowListener {
 		menu.setMnemonic('V');
 		menu.add(menuItem("Page Source", 'S', new SourceAction(this, window, actionPool)));
 		menu.add(menuItem("Console", 'C', new ConsoleAction(this, window)));
-		menu.add(this.recentHostsMenu);
-		menu.add(this.searchPageSource.getSearchMenu());
-
 		return menu;
 	}
 
@@ -311,12 +291,37 @@ public class ComponentSource implements NavigatorWindowListener {
 		menu.add(menuItem("Back", 'B', "ctrl B", new BackAction(this, window, actionPool)));
 		menu.add(menuItem("Forward", 'F', new ForwardAction(this, window, actionPool)));
 		menu.add(menuItem("Stop", 'S', KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), new StopAction(this, window)));
-		menu.add(menuItem("Reload", 'R', KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0),
-				new ReloadAction(this, window, actionPool)));
+		menu.add(menuItem("Reload", 'R', KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0), new ReloadAction(this, window, actionPool)));
 		menu.addSeparator();
 		menu.add(this.backMoreMenu);
 		menu.add(this.forwardMoreMenu);
 
+		return menu;
+	}
+	
+	/**
+	 * Populate chronology
+	 */
+	public JMenu getChronologyMenu() {
+		JMenu menu = new JMenu("Chronology");
+
+		menu.removeAll();
+		Collection<HostEntry> hostEntries = NavigationHistory.getInstance()
+				.getRecentHostEntries(PREFERRED_MAX_MENU_SIZE);
+		for (HostEntry entry : hostEntries) {
+			String urlText = "http://" + entry.host;
+			try {
+				URL url = new URL(urlText);
+				long elapsed = System.currentTimeMillis() - entry.timestamp;
+				String menuText = entry.host + " (" + Timing.getElapsedText(elapsed) + " ago)";
+				Action action = this.actionPool.createNavigateAction(url);
+				JMenuItem menuItem = menuItem(menuText, action);
+				menuItem.setToolTipText(url.toExternalForm());
+				menu.add(menuItem);
+			} catch (MalformedURLException mfu) {
+				logger.log(Level.WARNING, "populateRecentHosts(): Bad URL=" + urlText, mfu);
+			}
+		}
 		return menu;
 	}
 
@@ -865,30 +870,6 @@ public class ComponentSource implements NavigatorWindowListener {
 	 */
 	public boolean hasRecentEntries() {
 		return NavigationHistory.getInstance().hasRecentEntries();
-	}
-
-	/**
-	 * Populate recent hosts.
-	 */
-	public void populateRecentHosts() {
-		JMenu recentHostsMenu = this.recentHostsMenu;
-		recentHostsMenu.removeAll();
-		Collection<HostEntry> hostEntries = NavigationHistory.getInstance()
-				.getRecentHostEntries(PREFERRED_MAX_MENU_SIZE);
-		for (HostEntry entry : hostEntries) {
-			String urlText = "http://" + entry.host;
-			try {
-				URL url = new URL(urlText);
-				long elapsed = System.currentTimeMillis() - entry.timestamp;
-				String menuText = entry.host + " (" + Timing.getElapsedText(elapsed) + " ago)";
-				Action action = this.actionPool.createNavigateAction(url);
-				JMenuItem menuItem = menuItem(menuText, action);
-				menuItem.setToolTipText(url.toExternalForm());
-				recentHostsMenu.add(menuItem);
-			} catch (MalformedURLException mfu) {
-				logger.log(Level.WARNING, "populateRecentHosts(): Bad URL=" + urlText, mfu);
-			}
-		}
 	}
 
 	/**
