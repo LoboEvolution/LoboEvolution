@@ -23,8 +23,10 @@ package org.lobobrowser.primary.gui.prefs;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import org.lobobrowser.primary.gui.AbstractSettingsUI;
 import org.lobobrowser.primary.gui.ValidationException;
 import org.lobobrowser.util.gui.WrapperLayout;
 
@@ -44,7 +46,7 @@ public class PreferencesPanel extends JPanel {
 	 */
 	public PreferencesPanel() {
 		this.setLayout(WrapperLayout.getInstance());
-		this.setBorder(new CompoundBorder(new EtchedBorder(), new javax.swing.border.EmptyBorder(8, 8, 8, 8)));
+		this.setBorder(new CompoundBorder(new EtchedBorder(), new EmptyBorder(8, 8, 8, 8)));
 	}
 
 	/**

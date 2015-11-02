@@ -24,8 +24,8 @@ import java.awt.event.ActionEvent;
 import java.net.URL;
 
 import org.lobobrowser.primary.ext.ActionPool;
-import org.lobobrowser.primary.ext.BookmarksHistory;
 import org.lobobrowser.primary.ext.ComponentSource;
+import org.lobobrowser.primary.gui.bookmarks.BookmarksHistory;
 import org.lobobrowser.ua.NavigatorWindow;
 
 /**

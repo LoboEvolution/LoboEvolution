@@ -18,7 +18,7 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-package org.lobobrowser.primary.ext;
+package org.lobobrowser.primary.gui.bookmarks;
 
 import java.awt.Container;
 import java.awt.Dimension;

@@ -20,11 +20,14 @@
  */
 package org.lobobrowser.primary.action;
 
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
-import java.net.MalformedURLException;
 
 import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
+import org.lobobrowser.primary.gui.bookmarks.BookmarksDialog;
 import org.lobobrowser.ua.NavigatorWindow;
 
 /**
@@ -59,11 +62,18 @@ public class ShowBookmarksAction extends ActionPool {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		try {
-			window.getTopFrame().navigate("about:bookmarks");
-		} catch (MalformedURLException mfu) {
-			throw new IllegalStateException("not expected", mfu);
+		
+		Window awtWindow = window.getAwtWindow();
+		if (!(awtWindow instanceof Frame)) {
+			throw new IllegalStateException("Bookmarks dialog only supported when an AWT Frame is available.");
 		}
+		
+		BookmarksDialog dialog = new BookmarksDialog(window);
+		dialog.setTitle("Bookmarks");
+		dialog.setLocationByPlatform(true);
+		dialog.setResizable(false);
+		dialog.setSize(new Dimension(600, 400));
+		dialog.setVisible(true);
 	}
 
 }

@@ -18,11 +18,9 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-package org.lobobrowser.primary.gui.prefs;
+package org.lobobrowser.primary.gui;
 
 import javax.swing.JPanel;
-
-import org.lobobrowser.primary.gui.ValidationException;
 
 /**
  * The Class AbstractSettingsUI.

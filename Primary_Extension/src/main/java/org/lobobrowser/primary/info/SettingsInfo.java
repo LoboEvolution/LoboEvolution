@@ -20,7 +20,7 @@
  */
 package org.lobobrowser.primary.info;
 
-import org.lobobrowser.primary.gui.prefs.AbstractSettingsUI;
+import org.lobobrowser.primary.gui.AbstractSettingsUI;
 
 /**
  * The Interface SettingsInfo.

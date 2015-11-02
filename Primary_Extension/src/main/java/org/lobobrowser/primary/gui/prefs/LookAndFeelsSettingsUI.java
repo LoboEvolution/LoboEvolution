@@ -31,6 +31,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import org.lobobrowser.primary.gui.AbstractSettingsUI;
 import org.lobobrowser.primary.gui.CheckBoxPanel;
 import org.lobobrowser.primary.gui.FieldType;
 import org.lobobrowser.primary.gui.FormField;

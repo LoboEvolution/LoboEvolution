@@ -28,6 +28,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
 import org.lobobrowser.primary.gui.AbstractItemEditor;
+import org.lobobrowser.primary.gui.AbstractSettingsUI;
 import org.lobobrowser.primary.gui.ItemEditorFactory;
 import org.lobobrowser.primary.gui.ItemListControl;
 import org.lobobrowser.primary.gui.SwingTasks;

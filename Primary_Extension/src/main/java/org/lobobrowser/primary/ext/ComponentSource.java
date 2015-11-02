@@ -64,10 +64,10 @@ import org.lobobrowser.primary.action.ReloadAction;
 import org.lobobrowser.primary.action.SaveFileAction;
 import org.lobobrowser.primary.action.ScreenShotAction;
 import org.lobobrowser.primary.action.SearchAction;
-import org.lobobrowser.primary.action.SearchBookmarksAction;
 import org.lobobrowser.primary.action.ShowBookmarksAction;
 import org.lobobrowser.primary.action.SourceAction;
 import org.lobobrowser.primary.action.StopAction;
+import org.lobobrowser.primary.gui.bookmarks.BookmarksHistory;
 import org.lobobrowser.primary.info.BookmarkInfo;
 import org.lobobrowser.primary.settings.SearchEngine;
 import org.lobobrowser.primary.settings.ToolsSettings;
@@ -295,7 +295,6 @@ public class ComponentSource implements NavigatorWindowListener {
 		menu.add(menuItem("Add Bookmark", 'A', "ctrl shift a", new AddBookmarkAction(this, window)));
 		menu.add(this.recentBookmarksMenu);
 		menu.add(this.taggedBookmarksMenu);
-		menu.add(menuItem("Search Bookmarks", 'S', new SearchBookmarksAction(this, window)));
 		menu.add(menuItem("Show All Bookmarks", 'S', new ShowBookmarksAction(this, window)));
 		return menu;
 	}
