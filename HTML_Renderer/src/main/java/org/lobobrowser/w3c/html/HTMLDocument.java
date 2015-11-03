@@ -26,12 +26,8 @@ import org.lobobrowser.html.xpath.XPathNSResolverImpl;
 import org.lobobrowser.html.xpath.XPathResultImpl;
 import org.lobobrowser.w3c.events.EventTarget;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.Attr;
-import org.w3c.dom.CDATASection;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.views.AbstractView;
 

@@ -743,15 +743,15 @@ public class HttpRequest extends AbstractBean {
          * Helper method which allows me to set the ready state on the EDT
          */
         protected void safeSetReadyState(final ReadyState state) {
-            if (!SwingUtilities.isEventDispatchThread()) {
+            if (SwingUtilities.isEventDispatchThread()) {
+                HttpRequest.this.setReadyState(state);
+            } else {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
                         HttpRequest.this.setReadyState(state);
                     }
                 });
-            } else {
-                HttpRequest.this.setReadyState(state);
             }
         }
 

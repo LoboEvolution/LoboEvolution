@@ -21,7 +21,6 @@
 package org.lobobrowser.primary.ext;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +36,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
@@ -270,16 +270,22 @@ public class TextViewerWindow extends JFrame {
 
 		@Override
 		public void insertUpdate(DocumentEvent e) {
-			EventQueue.invokeLater(new Runnable() {
-				// The model is updated outside the GUI thread.
-				// Doing this outside the GUI thread can cause a deadlock.
-				@Override
-				public void run() {
-					if (scrollsOnAppends) {
-						textArea.scrollRectToVisible(new Rectangle(0, Short.MAX_VALUE, 1, Short.MAX_VALUE));
-					}
+			if (SwingUtilities.isEventDispatchThread()) {
+				if (scrollsOnAppends) {
+					textArea.scrollRectToVisible(new Rectangle(0, Short.MAX_VALUE, 1, Short.MAX_VALUE));
 				}
-			});
+			} else {
+				SwingUtilities.invokeLater(new Runnable() {
+					// The model is updated outside the GUI thread.
+					// Doing this outside the GUI thread can cause a deadlock.
+					@Override
+					public void run() {
+						if (scrollsOnAppends) {
+							textArea.scrollRectToVisible(new Rectangle(0, Short.MAX_VALUE, 1, Short.MAX_VALUE));
+						}
+					}
+				});
+			}
 		}
 
 		@Override

@@ -26,7 +26,6 @@ package org.lobobrowser.html.renderer;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -34,6 +33,8 @@ import java.awt.event.MouseEvent;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.SwingUtilities;
 
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.ModelNode;
@@ -345,10 +346,10 @@ BoundableRenderable {
      */
     @Override
     public void relayout() {
-        if (EventQueue.isDispatchThread()) {
+        if (SwingUtilities.isEventDispatchThread()) {
             this.relayoutImpl(true, false);
         } else {
-            EventQueue.invokeLater(new Runnable() {
+            SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     relayoutImpl(true, false);
@@ -361,10 +362,10 @@ BoundableRenderable {
      * Relayout if valid.
      */
     public void relayoutIfValid() {
-        if (EventQueue.isDispatchThread()) {
+        if (SwingUtilities.isEventDispatchThread()) {
             this.relayoutImpl(true, true);
         } else {
-            EventQueue.invokeLater(new Runnable() {
+            SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     relayoutImpl(true, true);

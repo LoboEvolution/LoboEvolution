@@ -21,6 +21,7 @@
 package org.lobobrowser.html.control;
 
 import java.awt.Dimension;
+
 import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.dombl.JTextFieldImpl;

@@ -27,7 +27,6 @@ import java.awt.event.ActionEvent;
 
 import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
-import org.lobobrowser.primary.gui.bookmarks.BookmarksDialog;
 import org.lobobrowser.primary.gui.bookmarks.RecentHostsDialog;
 import org.lobobrowser.ua.NavigatorWindow;
 

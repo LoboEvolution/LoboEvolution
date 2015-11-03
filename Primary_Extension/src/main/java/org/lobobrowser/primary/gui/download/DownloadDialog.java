@@ -23,7 +23,6 @@ package org.lobobrowser.primary.gui.download;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
@@ -45,6 +44,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import org.lobobrowser.clientlet.ClientletException;
@@ -325,12 +325,17 @@ public class DownloadDialog extends JFrame {
 	 *            the total size
 	 */
 	private void doneWithDownload_Safe(final long totalSize) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				doneWithDownload(totalSize);
-			}
-		});
+		if (SwingUtilities.isEventDispatchThread()) {
+			doneWithDownload(totalSize);
+		} else {
+
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					doneWithDownload(totalSize);
+				}
+			});
+		}
 	}
 
 	/**
@@ -378,12 +383,16 @@ public class DownloadDialog extends JFrame {
 	 * Error in download_ safe.
 	 */
 	private void errorInDownload_Safe() {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				errorInDownload();
-			}
-		});
+		if (SwingUtilities.isEventDispatchThread()) {
+			errorInDownload();
+		} else {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					errorInDownload();
+				}
+			});
+		}
 	}
 
 	/**
@@ -446,12 +455,16 @@ public class DownloadDialog extends JFrame {
 	 *            the max
 	 */
 	private void updateProgress_Safe(final ProgressType progressType, final int value, final int max) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				updateProgress(progressType, value, max);
-			}
-		});
+		if (SwingUtilities.isEventDispatchThread()) {
+			updateProgress(progressType, value, max);
+		} else {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					updateProgress(progressType, value, max);
+				}
+			});
+		}
 	}
 
 	/**

@@ -23,8 +23,9 @@
  */
 package org.lobobrowser.async;
 
-import java.awt.EventQueue;
 import java.util.EventObject;
+
+import javax.swing.SwingUtilities;
 
 import org.lobobrowser.util.EventDispatch;
 import org.lobobrowser.util.GenericEventListener;
@@ -39,203 +40,243 @@ import org.lobobrowser.util.Objects;
  */
 public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 
-    /** The evt result. */
-    private final EventDispatch evtResult = new EventDispatch();
+	/** The evt result. */
+	private final EventDispatch evtResult = new EventDispatch();
 
-    /** The result. */
-    private TResult result;
+	/** The result. */
+	private TResult result;
 
-    /** The exception. */
-    private Throwable exception;
+	/** The exception. */
+	private Throwable exception;
 
-    /** The has result. */
-    private boolean hasResult = false;
+	/** The has result. */
+	private boolean hasResult = false;
 
-    /*
-     * (non-Javadoc)
-     * @see org.xamjwg.dom.AsyncResult#addResultListener(org.xamjwg.dom.
-     * AsyncResultListener)
-     */
-    @Override
-    public void addResultListener(final AsyncResultListener<TResult> listener) {
-        synchronized (this) {
-            if (this.hasResult) {
-                if (this.exception != null) {
-                    final Throwable exception = this.exception;
-                    EventQueue.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            // Invoke holding no locks
-                            AsyncResultEvent<Throwable> are = new AsyncResultEvent<Throwable>(
-                                    AsyncResultImpl.this, exception);
-                            listener.exceptionReceived(are);
-                        }
-                    });
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xamjwg.dom.AsyncResult#addResultListener(org.xamjwg.dom.
+	 * AsyncResultListener)
+	 */
+	@Override
+	public void addResultListener(final AsyncResultListener<TResult> listener) {
+		synchronized (this) {
+			if (this.hasResult) {
+				if (this.exception != null) {
+					final Throwable exception = this.exception;
+					if (SwingUtilities.isEventDispatchThread()) {
+						AsyncResultEvent<Throwable> are = new AsyncResultEvent<Throwable>(AsyncResultImpl.this,
+								exception);
+						listener.exceptionReceived(are);
+					} else {
 
-                } else {
-                    final TResult result = this.result;
-                    EventQueue.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            // Invoke holding no locks
-                            AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(
-                                    AsyncResultImpl.this, result);
-                            listener.resultReceived(are);
-                        }
-                    });
-                }
-            }
-            evtResult.addListener(new EventListenerWrapper<TResult>(listener));
-        }
-    }
+						SwingUtilities.invokeLater(new Runnable() {
+							@Override
+							public void run() {
+								// Invoke holding no locks
+								AsyncResultEvent<Throwable> are = new AsyncResultEvent<Throwable>(AsyncResultImpl.this,
+										exception);
+								listener.exceptionReceived(are);
+							}
+						});
+					}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.xamjwg.clientlet.AsyncResult#removeResultListener(org.xamjwg.clientlet
-     * .AsyncResultListener)
-     */
-    @Override
-    public void removeResultListener(AsyncResultListener<TResult> listener) {
-        this.evtResult.removeListener(new EventListenerWrapper<TResult>(
-                listener));
-    }
+				} else {
+					final TResult result = this.result;
+					if (SwingUtilities.isEventDispatchThread()) {
+						// Invoke holding no locks
+						AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(AsyncResultImpl.this, result);
+						listener.resultReceived(are);
+					} else {
 
-    /*
-     * (non-Javadoc)
-     * @see org.xamjwg.clientlet.AsyncResult#signal()
-     */
-    @Override
-    public void signal() {
-        synchronized (this) {
-            if (this.hasResult) {
-                if (this.exception != null) {
-                    final Throwable exception = this.exception;
-                    EventQueue.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            // Invoke holding no locks
-                            AsyncResultEvent<Throwable> are = new AsyncResultEvent<Throwable>(
-                                    AsyncResultImpl.this, exception);
-                            evtResult.fireEvent(are);
-                        }
-                    });
+						SwingUtilities.invokeLater(new Runnable() {
+							@Override
+							public void run() {
+								// Invoke holding no locks
+								AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(AsyncResultImpl.this,
+										result);
+								listener.resultReceived(are);
+							}
+						});
+					}
+				}
+			}
+			evtResult.addListener(new EventListenerWrapper<TResult>(listener));
+		}
+	}
 
-                } else {
-                    final TResult result = this.result;
-                    EventQueue.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            // Invoke holding no locks
-                            AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(
-                                    AsyncResultImpl.this, result);
-                            evtResult.fireEvent(are);
-                        }
-                    });
-                }
-            }
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xamjwg.clientlet.AsyncResult#removeResultListener(org.xamjwg.
+	 * clientlet .AsyncResultListener)
+	 */
+	@Override
+	public void removeResultListener(AsyncResultListener<TResult> listener) {
+		this.evtResult.removeListener(new EventListenerWrapper<TResult>(listener));
+	}
 
-    /** Sets the result.
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xamjwg.clientlet.AsyncResult#signal()
+	 */
+	@Override
+	public void signal() {
+		synchronized (this) {
+			if (this.hasResult) {
+				if (this.exception != null) {
+					final Throwable exception = this.exception;
+					if (SwingUtilities.isEventDispatchThread()) {
+						// Invoke holding no locks
+						AsyncResultEvent<Throwable> are = new AsyncResultEvent<Throwable>(AsyncResultImpl.this,
+								exception);
+						evtResult.fireEvent(are);
+					} else {
+
+						SwingUtilities.invokeLater(new Runnable() {
+							@Override
+							public void run() {
+								// Invoke holding no locks
+								AsyncResultEvent<Throwable> are = new AsyncResultEvent<Throwable>(AsyncResultImpl.this,
+										exception);
+								evtResult.fireEvent(are);
+							}
+						});
+					}
+
+				} else {
+					final TResult result = this.result;
+					if (SwingUtilities.isEventDispatchThread()) {
+						// Invoke holding no locks
+						AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(AsyncResultImpl.this, result);
+						evtResult.fireEvent(are);
+
+					} else {
+
+						SwingUtilities.invokeLater(new Runnable() {
+							@Override
+							public void run() {
+								// Invoke holding no locks
+								AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(AsyncResultImpl.this,
+										result);
+								evtResult.fireEvent(are);
+							}
+						});
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Sets the result.
 	 *
 	 * @param result
 	 *            the new result
 	 */
-    public void setResult(final TResult result) {
-        synchronized (this) {
-            this.result = result;
-            this.hasResult = true;
-            EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    // Invoke holding no locks
-                    evtResult.fireEvent(new AsyncResultEvent<TResult>(
-                            AsyncResultImpl.this, result));
-                }
-            });
-        }
-    }
+	public void setResult(final TResult result) {
+		synchronized (this) {
+			this.result = result;
+			this.hasResult = true;
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					// Invoke holding no locks
+					evtResult.fireEvent(new AsyncResultEvent<TResult>(AsyncResultImpl.this, result));
+				}
+			});
+		}
+	}
 
-    /** Sets the exception.
+	/**
+	 * Sets the exception.
 	 *
 	 * @param exception
 	 *            the new exception
 	 */
-    public void setException(final Throwable exception) {
-        synchronized (this) {
-            this.exception = exception;
-            this.hasResult = true;
-            EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    // Invoke holding no locks
-                    evtResult.fireEvent(new AsyncResultEvent<Throwable>(
-                            AsyncResultImpl.this, exception));
-                }
-            });
-        }
-    }
+	public void setException(final Throwable exception) {
+		synchronized (this) {
+			this.exception = exception;
+			this.hasResult = true;
+			if (SwingUtilities.isEventDispatchThread()) {
+				evtResult.fireEvent(new AsyncResultEvent<Throwable>(AsyncResultImpl.this, exception));
+			} else {
 
-    /**
-     * The Class EventListenerWrapper.
-     *
-     * @param <TR>
-     *            the generic type
-     */
-    private static class EventListenerWrapper<TR> implements
-    GenericEventListener {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						// Invoke holding no locks
+						evtResult.fireEvent(new AsyncResultEvent<Throwable>(AsyncResultImpl.this, exception));
+					}
+				});
+			}
+		}
+	}
 
-        /** The listener. */
-        private final AsyncResultListener<TR> listener;
+	/**
+	 * The Class EventListenerWrapper.
+	 *
+	 * @param
+	 * 			<TR>
+	 *            the generic type
+	 */
+	private static class EventListenerWrapper<TR> implements GenericEventListener {
 
-        /**
-         * Instantiates a new event listener wrapper.
-         *
-         * @param listener
-         *            the listener
-         */
-        public EventListenerWrapper(AsyncResultListener<TR> listener) {
-            super();
-            this.listener = listener;
-        }
+		/** The listener. */
+		private final AsyncResultListener<TR> listener;
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * org.lobobrowser.util.GenericEventListener#processEvent(java.util.EventObject)
-         */
-        @Override
-        public void processEvent(EventObject event) {
-            // Invoke holding no locks
-            AsyncResultEvent are = (AsyncResultEvent) event;
-            if (are.getResult() instanceof Exception) {
-                this.listener.exceptionReceived(are);
-            } else {
-                this.listener.resultReceived(are);
-            }
-        }
+		/**
+		 * Instantiates a new event listener wrapper.
+		 *
+		 * @param listener
+		 *            the listener
+		 */
+		public EventListenerWrapper(AsyncResultListener<TR> listener) {
+			super();
+			this.listener = listener;
+		}
 
-        /*
-         * (non-Javadoc)
-         * @see java.lang.Object#equals(java.lang.Object)
-         */
-        @Override
-        public boolean equals(Object other) {
-            if (!(other instanceof EventListenerWrapper)) {
-                return false;
-            }
-            EventListenerWrapper elw = (EventListenerWrapper) other;
-            return Objects.equals(elw.listener, this.listener);
-        }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.lobobrowser.util.GenericEventListener#processEvent(java.util.
+		 * EventObject)
+		 */
+		@Override
+		public void processEvent(EventObject event) {
+			// Invoke holding no locks
+			AsyncResultEvent are = (AsyncResultEvent) event;
+			if (are.getResult() instanceof Exception) {
+				this.listener.exceptionReceived(are);
+			} else {
+				this.listener.resultReceived(are);
+			}
+		}
 
-        /*
-         * (non-Javadoc)
-         * @see java.lang.Object#hashCode()
-         */
-        @Override
-        public int hashCode() {
-            return this.listener.hashCode();
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
+		@Override
+		public boolean equals(Object other) {
+			if (!(other instanceof EventListenerWrapper)) {
+				return false;
+			}
+			EventListenerWrapper elw = (EventListenerWrapper) other;
+			return Objects.equals(elw.listener, this.listener);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.lang.Object#hashCode()
+		 */
+		@Override
+		public int hashCode() {
+			return this.listener.hashCode();
+		}
+	}
 }

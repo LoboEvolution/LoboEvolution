@@ -23,7 +23,6 @@
  */
 package org.lobobrowser.html.gui;
 
-import java.awt.EventQueue;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.io.IOException;
@@ -32,6 +31,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import org.lobobrowser.html.HtmlRendererContext;
@@ -283,10 +283,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
      *            The y coordinate.
      */
     public void scroll(final int x, final int y) {
-        if (EventQueue.isDispatchThread()) {
+        if (SwingUtilities.isEventDispatchThread()) {
             this.scrollImpl(x, y);
         } else {
-            EventQueue.invokeLater(new Runnable() {
+            SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     scrollImpl(x, y);
@@ -304,10 +304,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
      *            the y
      */
     public void scrollBy(final int x, final int y) {
-        if (EventQueue.isDispatchThread()) {
+        if (SwingUtilities.isEventDispatchThread()) {
             this.scrollByImpl(x, y);
         } else {
-            EventQueue.invokeLater(new Runnable() {
+            SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     scrollByImpl(x, y);
@@ -348,10 +348,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
      * operation will be scheduled to be performed in the GUI thread.
      */
     public void clearDocument() {
-        if (EventQueue.isDispatchThread()) {
+        if (SwingUtilities.isEventDispatchThread()) {
             this.clearDocumentImpl();
         } else {
-            EventQueue.invokeLater(new Runnable() {
+            SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     HtmlPanel.this.clearDocumentImpl();
@@ -402,10 +402,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
      */
     public void setDocument(final Document node,
             final HtmlRendererContext rcontext) {
-        if (EventQueue.isDispatchThread()) {
+        if (SwingUtilities.isEventDispatchThread()) {
             this.setDocumentImpl(node, rcontext);
         } else {
-            EventQueue.invokeLater(new Runnable() {
+            SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     HtmlPanel.this.setDocumentImpl(node, rcontext);
@@ -425,10 +425,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
      *            The name or ID of the element in the document.
      */
     public void scrollToElement(final String nameOrId) {
-        if (EventQueue.isDispatchThread()) {
+        if (SwingUtilities.isEventDispatchThread()) {
             this.scrollToElementImpl(nameOrId);
         } else {
-            EventQueue.invokeLater(new Runnable() {
+            SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     scrollToElementImpl(nameOrId);
@@ -834,13 +834,13 @@ public class HtmlPanel extends JComponent implements FrameContext {
         synchronized (notifs) {
             notifs.add(notification);
         }
-        if (EventQueue.isDispatchThread()) {
+        if (SwingUtilities.isEventDispatchThread()) {
             // In this case we want the notification to be processed
             // immediately. However, we don't want potential recursions
             // to occur when a Javascript property is set in the GUI thread.
             // Additionally, many property values may be set in one
             // event block.
-            EventQueue.invokeLater(this.notificationImmediateAction);
+            SwingUtilities.invokeLater(this.notificationImmediateAction);
         } else {
             this.notificationTimer.restart();
         }

@@ -23,7 +23,6 @@
  */
 package org.lobobrowser.html.renderer;
 
-import java.awt.EventQueue;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Insets;
@@ -41,6 +40,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.SwingUtilities;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlLayoutMapping;
@@ -264,7 +265,7 @@ public class RBlockViewport extends BaseRCollection {
 			FloatingBounds floatBounds, boolean sizeOnly) {
 		// Expected in GUI thread. It's possible it may be invoked during pack()
 		// outside of the GUI thread.
-		if (!EventQueue.isDispatchThread() && logger.isLoggable(Level.INFO)) {
+		if (!SwingUtilities.isEventDispatchThread() && logger.isLoggable(Level.INFO)) {
 			logger.warning("layout(): Invoked outside GUI dispatch thread.");
 		}
 		RenderableContainer container = this.container;
@@ -1573,7 +1574,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @return the renderables
 	 */
 	public Iterator getRenderables(Rectangle clipBounds) {
-		if (!EventQueue.isDispatchThread() && logger.isLoggable(Level.INFO)) {
+		if (!SwingUtilities.isEventDispatchThread() && logger.isLoggable(Level.INFO)) {
 			logger.warning("getRenderables(): Invoked outside GUI dispatch thread.");
 		}
 		ArrayList sr = this.seqRenderables;
@@ -1655,7 +1656,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @return the renderables
 	 */
 	public Iterator getRenderables(int pointx, int pointy) {
-		if (!EventQueue.isDispatchThread() && logger.isLoggable(Level.INFO)) {
+		if (!SwingUtilities.isEventDispatchThread() && logger.isLoggable(Level.INFO)) {
 			logger.warning("getRenderable(): Invoked outside GUI dispatch thread.");
 		}
 		Collection result = null;

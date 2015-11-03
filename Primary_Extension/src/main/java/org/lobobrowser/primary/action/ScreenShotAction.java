@@ -21,7 +21,9 @@
 package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
+
 import org.lobobrowser.gui.FramePanel;
 import org.lobobrowser.primary.screenshot.ScreenShootFrame;
 import org.lobobrowser.ua.NavigationEntry;

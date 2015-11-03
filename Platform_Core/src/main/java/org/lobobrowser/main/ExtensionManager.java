@@ -20,7 +20,6 @@
  */
 package org.lobobrowser.main;
 
-import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -38,6 +37,8 @@ import java.util.StringTokenizer;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.SwingUtilities;
 
 import org.lobobrowser.clientlet.Clientlet;
 import org.lobobrowser.clientlet.ClientletRequest;
@@ -419,24 +420,43 @@ public class ExtensionManager {
             final ClientletResponse response, final Throwable exception) {
         final NavigatorExceptionEvent event = new NavigatorExceptionEvent(this,
                 NavigatorEventType.ERROR_OCCURRED, frame, response, exception);
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Collection<Extension> ext = extensions;
-                // Call all plugins once to see if they can select the response.
-                boolean dispatched = false;
-                for (Extension ei : ext) {
-                    if (ei.handleError(event)) {
-                        dispatched = true;
-                    }
-                }
-                if (!dispatched && logger.isLoggable(Level.INFO)) {
-                    logger.log(Level.WARNING,
-                            "No error handlers found for error that occurred while processing response=["
-                                    + response + "].", exception);
-                }
-            }
-        });
+        
+		if (SwingUtilities.isEventDispatchThread()) {
+			Collection<Extension> ext = extensions;
+			// Call all plugins once to see if they can select the response.
+			boolean dispatched = false;
+			for (Extension ei : ext) {
+				if (ei.handleError(event)) {
+					dispatched = true;
+				}
+			}
+			if (!dispatched && logger.isLoggable(Level.INFO)) {
+				logger.log(Level.WARNING,
+						"No error handlers found for error that occurred while processing response=[" + response + "].",
+						exception);
+			}
+		} else {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					Collection<Extension> ext = extensions;
+					// Call all plugins once to see if they can select the
+					// response.
+					boolean dispatched = false;
+					for (Extension ei : ext) {
+						if (ei.handleError(event)) {
+							dispatched = true;
+						}
+					}
+					if (!dispatched && logger.isLoggable(Level.INFO)) {
+						logger.log(Level.WARNING,
+								"No error handlers found for error that occurred while processing response=[" + response
+										+ "].",
+								exception);
+					}
+				}
+			});
+		}
     }
 
     /**

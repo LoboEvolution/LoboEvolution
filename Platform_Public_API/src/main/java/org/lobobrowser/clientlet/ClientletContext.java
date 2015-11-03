@@ -30,7 +30,6 @@ import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.io.ManagedStore;
 import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.NavigatorProgressEvent;
-import org.lobobrowser.ua.ProgressType;
 import org.lobobrowser.ua.UserAgent;
 
 /**

@@ -24,7 +24,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Window;
 import java.net.MalformedURLException;
@@ -599,13 +598,13 @@ public class FramePanel extends JPanel implements NavigatorFrame {
     public void replaceContent(final ClientletResponse response,
             final ComponentContent content) {
         // Method probably invoked outside GUI thread.
-        if (EventQueue.isDispatchThread()) {
+        if (SwingUtilities.isEventDispatchThread()) {
             this.replaceContentImpl(response, content);
         } else {
             // Security note: Need to pass security context of caller
             // into invokeLater task.
             final AccessControlContext context = AccessController.getContext();
-            EventQueue.invokeLater(new Runnable() {
+            SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     PrivilegedAction<Object> action = new PrivilegedAction<Object>() {
@@ -813,7 +812,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
      */
     @Override
     public void invokeLater(Runnable runnable) {
-        EventQueue.invokeLater(runnable);
+        SwingUtilities.invokeLater(runnable);
     }
 
     /*
@@ -1169,13 +1168,16 @@ public class FramePanel extends JPanel implements NavigatorFrame {
                 NavigatorProgressEvent pe = (NavigatorProgressEvent) event;
                 if ((pe == null)
                         || (pe.getProgressType() == ProgressType.DONE)) {
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            wcontext.resetAsNavigator(handler
-                                    .getContextWindowProperties());
-                        }
-                    });
+					if (SwingUtilities.isEventDispatchThread()) {
+						wcontext.resetAsNavigator(handler.getContextWindowProperties());
+					} else {
+						SwingUtilities.invokeLater(new Runnable() {
+							@Override
+							public void run() {
+								wcontext.resetAsNavigator(handler.getContextWindowProperties());
+							}
+						});
+					}
                     // We don't want to reset as navigator twice.
                     handler.evtProgress.removeListener(this);
                 } else {

@@ -20,7 +20,6 @@
  */
 package org.lobobrowser.cobra_testing;
 
-import java.awt.EventQueue;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -30,6 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.gui.HtmlPanel;
@@ -101,13 +101,18 @@ public class BarebonesTest {
 		// thread since the document is scheduled to
 		// be rendered in that thread, and is required
 		// for the preferred size determination.
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				frame.pack();
-				frame.setVisible(true);
-			}
-		});
+		if (SwingUtilities.isEventDispatchThread()) {
+			frame.pack();
+			frame.setVisible(true);
+		} else {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					frame.pack();
+					frame.setVisible(true);
+				}
+			});
+		}
 	}
 
 	/**

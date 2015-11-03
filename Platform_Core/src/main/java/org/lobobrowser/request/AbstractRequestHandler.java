@@ -188,36 +188,50 @@ public abstract class AbstractRequestHandler implements RequestHandler {
             if (vhs.contains(host)) {
                 return true;
             }
-            try {
-                SwingUtilities.invokeAndWait(new Runnable() {
-                    @Override
-                    public void run() {
-                        boolean verified = false;
-                        Component dc = dialogComponent;
-                        if (dc != null) {
-                            int result = JOptionPane
-                                    .showConfirmDialog(
-                                            dc,
-                                            "Host "
-                                                    + host
-                                                    + " does not match SSL certificate or CA not recognized. Proceed anyway?",
-                                                    "Security Warning",
-                                                    JOptionPane.YES_NO_OPTION);
-                            verified = result == JOptionPane.YES_OPTION;
-                            if (verified) {
-                                vhs.add(host);
-                            }
-                        }
-                        synchronized (LocalHostnameVerifier.this) {
-                            LocalHostnameVerifier.this.verified = verified;
-                        }
-                    }
-                });
-            } catch (InterruptedException ie) {
-                throw new IllegalStateException(ie);
-            } catch (InvocationTargetException ite) {
-                throw new IllegalStateException(ite.getCause());
-            }
+            
+			if (SwingUtilities.isEventDispatchThread()) {
+				boolean verified = false;
+				Component dc = dialogComponent;
+				if (dc != null) {
+					int result = JOptionPane.showConfirmDialog(dc,
+							"Host " + host + " does not match SSL certificate or CA not recognized. Proceed anyway?",
+							"Security Warning", JOptionPane.YES_NO_OPTION);
+					verified = result == JOptionPane.YES_OPTION;
+					if (verified) {
+						vhs.add(host);
+					}
+				}
+				synchronized (LocalHostnameVerifier.this) {
+					LocalHostnameVerifier.this.verified = verified;
+				}
+			} else {
+				try {
+					SwingUtilities.invokeAndWait(new Runnable() {
+						@Override
+						public void run() {
+							boolean verified = false;
+							Component dc = dialogComponent;
+							if (dc != null) {
+								int result = JOptionPane.showConfirmDialog(dc,
+										"Host " + host
+												+ " does not match SSL certificate or CA not recognized. Proceed anyway?",
+										"Security Warning", JOptionPane.YES_NO_OPTION);
+								verified = result == JOptionPane.YES_OPTION;
+								if (verified) {
+									vhs.add(host);
+								}
+							}
+							synchronized (LocalHostnameVerifier.this) {
+								LocalHostnameVerifier.this.verified = verified;
+							}
+						}
+					});
+				} catch (InterruptedException ie) {
+					throw new IllegalStateException(ie);
+				} catch (InvocationTargetException ite) {
+					throw new IllegalStateException(ite.getCause());
+				}
+			}
             synchronized (this) {
                 return this.verified;
             }

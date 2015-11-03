@@ -30,7 +30,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.lobobrowser.http.HttpRequest;
-import org.lobobrowser.http.Method;
 import org.lobobrowser.http.ReadyState;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.js.AbstractScriptableDelegate;

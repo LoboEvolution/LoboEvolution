@@ -25,7 +25,6 @@ package org.lobobrowser.html.control;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -43,6 +42,7 @@ import java.util.logging.Logger;
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 
 import org.apache.batik.transcoder.TranscoderException;
 import org.lobobrowser.html.dombl.ImageEvent;
@@ -337,18 +337,28 @@ public class ImgControl extends BaseControl implements ImageListener {
 	@Override
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, final int w, final int h) {
 		if (((infoflags & ImageObserver.ALLBITS) != 0) || ((infoflags & ImageObserver.FRAMEBITS) != 0)) {
-			EventQueue.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					if (!checkPreferredSizeChange()) {
-						repaint();
-					} else {
-						if (ruicontrol != null) {
-							ruicontrol.preferredSizeInvalidated();
-						}
+			if (SwingUtilities.isEventDispatchThread()) {
+				if (!checkPreferredSizeChange()) {
+					repaint();
+				} else {
+					if (ruicontrol != null) {
+						ruicontrol.preferredSizeInvalidated();
 					}
 				}
-			});
+			} else {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						if (!checkPreferredSizeChange()) {
+							repaint();
+						} else {
+							if (ruicontrol != null) {
+								ruicontrol.preferredSizeInvalidated();
+							}
+						}
+					}
+				});
+			}
 		}
 		return true;
 	}
@@ -364,18 +374,28 @@ public class ImgControl extends BaseControl implements ImageListener {
 	 *            the h
 	 */
 	public void imageUpdate(Image img, final int w, final int h) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				if (!checkPreferredSizeChange()) {
-					repaint();
-				} else {
-					if (ruicontrol != null) {
-						ruicontrol.preferredSizeInvalidated();
-					}
+		if (SwingUtilities.isEventDispatchThread()) {
+			if (!checkPreferredSizeChange()) {
+				repaint();
+			} else {
+				if (ruicontrol != null) {
+					ruicontrol.preferredSizeInvalidated();
 				}
 			}
-		});
+		} else {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					if (!checkPreferredSizeChange()) {
+						repaint();
+					} else {
+						if (ruicontrol != null) {
+							ruicontrol.preferredSizeInvalidated();
+						}
+					}
+				}
+			});
+		}
 	}
 
 	/**

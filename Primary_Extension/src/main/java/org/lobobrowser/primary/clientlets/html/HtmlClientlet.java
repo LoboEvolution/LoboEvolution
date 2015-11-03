@@ -38,6 +38,8 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.SwingUtilities;
+
 import org.lobobrowser.clientlet.Clientlet;
 import org.lobobrowser.clientlet.ClientletContext;
 import org.lobobrowser.clientlet.ClientletException;
@@ -601,14 +603,21 @@ public class HtmlClientlet implements Clientlet {
 			}
 			final HTMLDocumentImpl document = this.document;
 			document.removeDocumentNotificationListener(this);
-			java.awt.EventQueue.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					// Should have nicer effect (less flicker) in GUI thread.
-					htmlPanel.setDocument(document, rcontext);
-					ccontext.setResultingContent(content);
-				}
-			});
+			if (SwingUtilities.isEventDispatchThread()) {
+				// Should have nicer effect (less flicker) in GUI thread.
+				htmlPanel.setDocument(document, rcontext);
+				ccontext.setResultingContent(content);
+			} else {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						// Should have nicer effect (less flicker) in GUI
+						// thread.
+						htmlPanel.setDocument(document, rcontext);
+						ccontext.setResultingContent(content);
+					}
+				});
+			}
 		}
 
 		/**

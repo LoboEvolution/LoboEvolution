@@ -212,12 +212,16 @@ public class ContentObjectDemo extends JFrame {
 	private class LocalResponseListener implements ResponseListener {
 		@Override
 		public void responseProcessed(ResponseEvent event) {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					updateLinks();
-				}
-			});
+			if (SwingUtilities.isEventDispatchThread()) {
+				updateLinks();
+			} else {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						updateLinks();
+					}
+				});
+			}
 		}
 	}
 }

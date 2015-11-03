@@ -23,7 +23,6 @@ package org.lobobrowser.cobra_testing;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.Insets;
 import java.awt.Point;
 import java.io.ByteArrayInputStream;
@@ -35,6 +34,7 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
@@ -148,14 +148,21 @@ public class MemoryTest {
 			logger.info("Finished parsing: freeMemory=" + Runtime.getRuntime().freeMemory());
 			{
 				final Document doc = document;
-				EventQueue.invokeAndWait(new Runnable() {
-					@Override
-					public void run() {
-						RBlock block = new RBlock((DOMNodeImpl) doc, 0, rcontext.getUserAgentContext(), rcontext,
-								frameContext, renderableContainer);
-						block.layout(100, 100, false);
-					}
-				});
+				
+				if (SwingUtilities.isEventDispatchThread()) {
+					RBlock block = new RBlock((DOMNodeImpl) doc, 0, rcontext.getUserAgentContext(), rcontext,
+							frameContext, renderableContainer);
+					block.layout(100, 100, false);
+				} else {
+					SwingUtilities.invokeAndWait(new Runnable() {
+						@Override
+						public void run() {
+							RBlock block = new RBlock((DOMNodeImpl) doc, 0, rcontext.getUserAgentContext(), rcontext,
+									frameContext, renderableContainer);
+							block.layout(100, 100, false);
+						}
+					});
+				}
 				// panel.setDocument(doc, rcontext, pcontext);
 				Thread.sleep(50);
 				// panel.clearDocument();
@@ -205,12 +212,6 @@ public class MemoryTest {
 			Document document = builder.parse(new InputSourceImpl(bin, url.toExternalForm(), "UTF-8"));
 			logger.info("Finished parsing: freeMemory=" + Runtime.getRuntime().freeMemory());
 			panel.setDocument(document, rcontext);
-			EventQueue.invokeAndWait(new Runnable() {
-				@Override
-				public void run() {
-				}
-			});
-			// Without these sleeps, it does apparently run out of memory.
 			Thread.sleep(3000);
 			panel.clearDocument();
 			Thread.sleep(1000);
