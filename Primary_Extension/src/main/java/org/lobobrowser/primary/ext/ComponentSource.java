@@ -64,6 +64,7 @@ import org.lobobrowser.primary.action.SaveFileAction;
 import org.lobobrowser.primary.action.ScreenShotAction;
 import org.lobobrowser.primary.action.SearchAction;
 import org.lobobrowser.primary.action.ShowBookmarksAction;
+import org.lobobrowser.primary.action.ShowRecentHostsAction;
 import org.lobobrowser.primary.action.SourceAction;
 import org.lobobrowser.primary.action.StopAction;
 import org.lobobrowser.primary.gui.bookmarks.BookmarksHistory;
@@ -303,17 +304,16 @@ public class ComponentSource implements NavigatorWindowListener {
 	 * Populate chronology
 	 */
 	public JMenu getChronologyMenu() {
-		JMenu menu = new JMenu("Chronology");
-
+		JMenu menu = new JMenu("Recent Hosts");
 		menu.removeAll();
 		Collection<HostEntry> hostEntries = NavigationHistory.getInstance()
 				.getRecentHostEntries(PREFERRED_MAX_MENU_SIZE);
 		for (HostEntry entry : hostEntries) {
-			String urlText = "http://" + entry.host;
+			String urlText = "http://" + entry.getHost();
 			try {
 				URL url = new URL(urlText);
-				long elapsed = System.currentTimeMillis() - entry.timestamp;
-				String menuText = entry.host + " (" + Timing.getElapsedText(elapsed) + " ago)";
+				long elapsed = System.currentTimeMillis() - entry.getTimestamp();
+				String menuText = entry.getHost() + " (" + Timing.getElapsedText(elapsed) + " ago)";
 				Action action = this.actionPool.createNavigateAction(url);
 				JMenuItem menuItem = menuItem(menuText, action);
 				menuItem.setToolTipText(url.toExternalForm());
@@ -322,6 +322,7 @@ public class ComponentSource implements NavigatorWindowListener {
 				logger.log(Level.WARNING, "populateRecentHosts(): Bad URL=" + urlText, mfu);
 			}
 		}
+		menu.add(menuItem("Show All Recent Hosts", new ShowRecentHostsAction(this, window)));
 		return menu;
 	}
 

@@ -26,10 +26,10 @@ package org.lobobrowser.primary.ext;
 public class HostEntry {
 
 	/** The host. */
-	public final String host;
+	private String host;
 
 	/** The timestamp. */
-	public final long timestamp;
+	private long timestamp;
 
 	/**
 	 * Instantiates a new host entry.
@@ -41,7 +41,35 @@ public class HostEntry {
 	 */
 	public HostEntry(final String host, final long timestamp) {
 		super();
+		this.setHost(host);
+		this.setTimestamp(timestamp);
+	}
+
+	/**
+	 * @return the host
+	 */
+	public String getHost() {
+		return host;
+	}
+
+	/**
+	 * @param host the host to set
+	 */
+	public void setHost(String host) {
 		this.host = host;
+	}
+
+	/**
+	 * @return the timestamp
+	 */
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	/**
+	 * @param timestamp the timestamp to set
+	 */
+	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
 }
