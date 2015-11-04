@@ -607,27 +607,8 @@ public class ComponentSource implements NavigatorWindowListener {
 	 *            the max
 	 * @return the potential matches
 	 */
-	public Collection<String> getPotentialMatches(String urlPrefix, int max) {
-		int colonIdx = urlPrefix.indexOf(':');
-		String prefix;
-		if (colonIdx == -1) {
-			// Add http
-			prefix = "http://" + urlPrefix;
-		} else if (colonIdx == 1) {
-			// Must be a Windows file
-			prefix = "file://" + urlPrefix;
-		} else {
-			prefix = urlPrefix;
-		}
-		Collection<String> headMatches = NavigationHistory.getInstance().getHeadMatchItems(prefix, max);
-		if (headMatches.isEmpty()) {
-			// Try www
-			if ((colonIdx == -1) && !urlPrefix.startsWith("www")) {
-				prefix = "http://www." + urlPrefix;
-				headMatches = NavigationHistory.getInstance().getHeadMatchItems(prefix, max);
-			}
-		}
-		return headMatches;
+	public Collection<String> getPotentialMatches(String urlPrefix) {
+		return NavigationHistory.getInstance().getHeadMatchItems(urlPrefix);
 	}
 
 	/**

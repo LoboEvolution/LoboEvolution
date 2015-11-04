@@ -21,7 +21,7 @@
 package org.lobobrowser.primary.ext;
 
 import java.net.URL;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -190,19 +190,14 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	 *            the max num items
 	 * @return the head match items
 	 */
-	public Collection<String> getHeadMatchItems(String itemPrefix, int maxNumItems) {
+	public Collection<String> getHeadMatchItems(String itemPrefix) {
 		synchronized (this) {
 			Object[] array = this.historySortedSet.toArray();
-			int idx = Arrays.binarySearch(array, itemPrefix);
-			int startIdx = idx >= 0 ? idx : (-idx - 1);
-			int count = 0;
-			Collection<String> items = new LinkedList<String>();
-			for (int i = startIdx; (i < array.length) && (count++ < maxNumItems); i++) {
+			Collection<String> items = new ArrayList<String>();
+			for (int i = 0; i < array.length; i++) {
 				String potentialItem = (String) array[i];
-				if (potentialItem.startsWith(itemPrefix)) {
+				if (potentialItem.contains(itemPrefix)) {
 					items.add(potentialItem);
-				} else {
-					break;
 				}
 			}
 			return items;
