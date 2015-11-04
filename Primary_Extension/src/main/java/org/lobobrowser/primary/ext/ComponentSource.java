@@ -322,6 +322,7 @@ public class ComponentSource implements NavigatorWindowListener {
 				logger.log(Level.WARNING, "populateRecentHosts(): Bad URL=" + urlText, mfu);
 			}
 		}
+		menu.addSeparator();
 		menu.add(menuItem("Show All Recent Hosts", new ShowRecentHostsAction(this, window)));
 		return menu;
 	}
