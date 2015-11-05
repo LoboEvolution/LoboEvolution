@@ -147,7 +147,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 				URL baseURL = new URL(modelNode.getOwnerDocument().getBaseURI());
 				URL scriptURL = Urls.createURL(baseURL, modelNode.getSrc());
 				String scriptURI = scriptURL == null ? modelNode.getSrc() : scriptURL.toExternalForm();
-				u = new URL(scriptURI);
+				u = new URL(scriptURI.replace(" ", "%20"));
 				if (scriptURI.endsWith(".svg")) {
 					SVGRasterizer r = new SVGRasterizer(u);
 					image = r.bufferedImageToImage();
@@ -165,9 +165,11 @@ public class ImgControl extends BaseControl implements ImageListener {
 					} catch (IOException e) {
 						logger.log(Level.WARNING, "read error: " + e.getMessage());
 					}
+				} else {
+					image = ImageIO.read(u);
 				}
 			} catch (FileNotFoundException | IIOException ex) {
-				logger.log(Level.WARNING, "ImgControl(): Image not found ",u);
+				logger.log(Level.WARNING, "ImgControl(): Image not found "+modelNode.getSrc());
 			} catch (TranscoderException | IOException e1) {
 				logger.log(Level.WARNING, e1.getMessage());
 			}

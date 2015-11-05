@@ -723,12 +723,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				BaseElementRenderable.this.repaint();
 			}
 		} catch (FileNotFoundException | IIOException ex) {
-			logger.log(Level.WARNING, "loadBackgroundImage(): Image not found ",url);
+			logger.log(Level.WARNING, "loadBackgroundImage(): Image not found "+url);
 		} catch (IOException | TranscoderException thrown) {
 			logger.log(Level.WARNING, "loadBackgroundImage()", thrown);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.log(Level.WARNING, "loadBackgroundImage()", e);
 		}
 	}
 
