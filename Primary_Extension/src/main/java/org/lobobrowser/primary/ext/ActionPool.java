@@ -38,6 +38,7 @@ import org.lobobrowser.primary.action.BookmarkNavigateAction;
 import org.lobobrowser.primary.action.EnableableAction;
 import org.lobobrowser.primary.action.ForwardAction;
 import org.lobobrowser.primary.action.ForwardMoreAction;
+import org.lobobrowser.primary.action.FullScreenAction;
 import org.lobobrowser.primary.action.GoToAction;
 import org.lobobrowser.primary.action.NavigateAction;
 import org.lobobrowser.primary.action.ReloadAction;
@@ -86,6 +87,7 @@ public class ActionPool extends AbstractAction {
 		actions.add(new BackMoreAction(componentSource, window, this));
 		actions.add(new ForwardMoreAction(componentSource, window, this));
 		actions.add(new SourceAction(componentSource, window, this));
+		actions.add(new FullScreenAction(window, this));
 	}
 
 	/**

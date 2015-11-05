@@ -56,6 +56,7 @@ import org.lobobrowser.primary.action.CopyAction;
 import org.lobobrowser.primary.action.ExitAction;
 import org.lobobrowser.primary.action.ForwardAction;
 import org.lobobrowser.primary.action.ForwardMoreAction;
+import org.lobobrowser.primary.action.FullScreenAction;
 import org.lobobrowser.primary.action.GoAction;
 import org.lobobrowser.primary.action.OpenFileAction;
 import org.lobobrowser.primary.action.PreferencesAction;
@@ -262,6 +263,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		menu.setMnemonic('V');
 		menu.add(menuItem("Page Source", 'S', new SourceAction(this, window, actionPool)));
 		menu.add(menuItem("Console", 'C', new ConsoleAction(this, window)));
+		menu.add(menuItem("Full Screen", ' ',KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0), new FullScreenAction(window,actionPool)));
 		return menu;
 	}
 
