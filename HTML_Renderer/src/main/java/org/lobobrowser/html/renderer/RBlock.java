@@ -35,7 +35,8 @@ import java.awt.event.AdjustmentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.ImageObserver;
-import java.util.Hashtable;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -89,7 +90,7 @@ public class RBlock extends BaseElementRenderable implements
     protected final RBlockViewport bodyLayout;
 
     /** The cached layout. */
-    protected final Map<LayoutKey, LayoutValue> cachedLayout = new Hashtable<LayoutKey, LayoutValue>(5);
+    protected final Map<LayoutKey, LayoutValue> cachedLayout = Collections.synchronizedMap(new HashMap<LayoutKey, LayoutValue>(5));
 
     /** The start selection. */
     protected RenderableSpot startSelection;
