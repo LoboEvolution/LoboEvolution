@@ -32,7 +32,12 @@ import javax.swing.JInternalFrame;
  */
 public class GraphiteInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    public GraphiteInternalFrameTitlePane(JInternalFrame f) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public GraphiteInternalFrameTitlePane(JInternalFrame f) {
         super(f);
     }
 

@@ -262,8 +262,6 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 	 */
 	@Override
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
-		// System.out.println("Image update: " + (infoflags & ALLBITS));
-		Dimension sz = getSize();
 		if ((infoflags & (SOMEBITS | ALLBITS)) != 0) {
 			// [[MW: dink this rectangle by 1 to handle antialias issues]]
 			repaint(x + offx, y + offy, width, height);

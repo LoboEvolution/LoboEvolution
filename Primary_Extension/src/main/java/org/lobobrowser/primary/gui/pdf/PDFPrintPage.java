@@ -92,39 +92,46 @@ public class PDFPrintPage implements Printable {
 	 * @throws java.io.IOException
 	 */
 	public void printFile(String filename, boolean setupPaper) throws IOException {
-		File file = new File(filename);
-		FileInputStream fis = new FileInputStream(file);
-		FileChannel fc = fis.getChannel();
-		ByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-		PDFFile pdfFile = new PDFFile(bb); // Create PDF Print Page
+		FileInputStream fis = null;
+		try {
+			File file = new File(filename);
+			fis = new FileInputStream(file);
+			FileChannel fc = fis.getChannel();
+			ByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+			PDFFile pdfFile = new PDFFile(bb); // Create PDF Print Page
 
-		PDFPrintPage pages = new PDFPrintPage(pdfFile);
+			PDFPrintPage pages = new PDFPrintPage(pdfFile);
 
-		// Create Print Job.
-		// We set the margins to 0, on the default 8.5 x 11 paper
+			// Create Print Job.
+			// We set the margins to 0, on the default 8.5 x 11 paper
 
-		PrinterJob pjob = PrinterJob.getPrinterJob();
-		PageFormat pfDefault = PrinterJob.getPrinterJob().defaultPage();
-		Paper defaultPaper = new Paper();
-		defaultPaper.setImageableArea(0, 0, defaultPaper.getWidth(), defaultPaper.getHeight());
-		pfDefault.setPaper(defaultPaper);
-		if (setupPaper) {
-			pfDefault = PrinterJob.getPrinterJob().pageDialog(pfDefault);
-		}
-		pjob.setJobName(file.getName());
-		if (pjob.printDialog()) {
-			// validate the page against the chosen printer to correct
-			// paper settings and margins
-			pfDefault = pjob.validatePage(pfDefault);
-			Book book = new Book();
+			PrinterJob pjob = PrinterJob.getPrinterJob();
+			PageFormat pfDefault = PrinterJob.getPrinterJob().defaultPage();
+			Paper defaultPaper = new Paper();
+			defaultPaper.setImageableArea(0, 0, defaultPaper.getWidth(), defaultPaper.getHeight());
+			pfDefault.setPaper(defaultPaper);
+			if (setupPaper) {
+				pfDefault = PrinterJob.getPrinterJob().pageDialog(pfDefault);
+			}
+			pjob.setJobName(file.getName());
+			if (pjob.printDialog()) {
+				// validate the page against the chosen printer to correct
+				// paper settings and margins
+				pfDefault = pjob.validatePage(pfDefault);
+				Book book = new Book();
 
-			book.append(pages, pfDefault, pdfFile.getNumPages());
-			pjob.setPageable(book);
+				book.append(pages, pfDefault, pdfFile.getNumPages());
+				pjob.setPageable(book);
 
-			try {
-				pjob.print();
-			} catch (PrinterException exc) {
-				System.out.println(exc);
+				try {
+					pjob.print();
+				} catch (PrinterException exc) {
+					System.out.println(exc);
+				}
+			}
+		} finally {
+			if (fis != null) {
+				fis.close();
 			}
 		}
 	}

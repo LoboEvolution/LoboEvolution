@@ -32,7 +32,12 @@ import javax.swing.JRootPane;
  */
 public class McWinTitlePane extends BaseTitlePane {
 
-    public McWinTitlePane(JRootPane root, BaseRootPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public McWinTitlePane(JRootPane root, BaseRootPaneUI ui) {
         super(root, ui);
     }
 

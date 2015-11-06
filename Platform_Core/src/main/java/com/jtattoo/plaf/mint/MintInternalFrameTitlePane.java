@@ -33,7 +33,12 @@ import javax.swing.JInternalFrame;
  */
 public class MintInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    public MintInternalFrameTitlePane(JInternalFrame f) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public MintInternalFrameTitlePane(JInternalFrame f) {
         super(f);
     }
 

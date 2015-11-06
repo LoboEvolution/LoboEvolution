@@ -244,7 +244,11 @@ public class LunaBorders extends BaseBorders {
 
     public static class ComboBoxBorder extends AbstractBorder implements UIResource {
 
-        private static final Color fieldBorderColor = new Color(127, 157, 185);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Color fieldBorderColor = new Color(127, 157, 185);
         private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
@@ -269,7 +273,11 @@ public class LunaBorders extends BaseBorders {
 
     public static class TextFieldBorder extends AbstractBorder implements UIResource {
 
-        private static final Color fieldBorderColor = new Color(127, 157, 185);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Color fieldBorderColor = new Color(127, 157, 185);
         private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
@@ -294,7 +302,11 @@ public class LunaBorders extends BaseBorders {
 
     public static class ScrollPaneBorder extends AbstractBorder implements UIResource {
 
-        private static final Color fieldBorderColor = new Color(127, 157, 185);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Color fieldBorderColor = new Color(127, 157, 185);
         private static final Insets insets = new Insets(2, 2, 2, 2);
         private static final Insets tableInsets = new Insets(1, 1, 1, 1);
         private boolean tableBorder = false;
@@ -330,7 +342,12 @@ public class LunaBorders extends BaseBorders {
 
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
-        public InternalFrameBorder() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public InternalFrameBorder() {
             insets.top = 3;
         }
 
@@ -368,7 +385,11 @@ public class LunaBorders extends BaseBorders {
 
     public static class TableHeaderBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(0, 1, 1, 1);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(0, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getControlBackgroundColor(), 40));

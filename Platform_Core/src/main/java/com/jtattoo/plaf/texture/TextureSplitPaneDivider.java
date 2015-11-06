@@ -33,7 +33,12 @@ import javax.swing.*;
  */
 public class TextureSplitPaneDivider extends BaseSplitPaneDivider {
 
-    public TextureSplitPaneDivider(TextureSplitPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TextureSplitPaneDivider(TextureSplitPaneUI ui) {
         super(ui);
     }
 

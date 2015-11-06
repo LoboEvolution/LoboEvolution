@@ -33,7 +33,12 @@ import javax.swing.JInternalFrame;
  */
 public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    public SmartInternalFrameTitlePane(JInternalFrame f) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SmartInternalFrameTitlePane(JInternalFrame f) {
         super(f);
     }
 

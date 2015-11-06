@@ -23,10 +23,10 @@
  
 package com.jtattoo.plaf.fast;
 
+import javax.swing.plaf.ColorUIResource;
+
 import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
-import java.awt.Color;
-import javax.swing.plaf.ColorUIResource;
 
 /**
  * @author Michael Hagen

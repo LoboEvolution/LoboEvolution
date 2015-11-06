@@ -31,7 +31,12 @@ import java.awt.Graphics;
  */
 public class BernsteinSplitPaneDivider extends BaseSplitPaneDivider {
 
-    public BernsteinSplitPaneDivider(BernsteinSplitPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public BernsteinSplitPaneDivider(BernsteinSplitPaneUI ui) {
         super(ui);
     }
 

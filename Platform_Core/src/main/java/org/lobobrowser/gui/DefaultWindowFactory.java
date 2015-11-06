@@ -66,10 +66,10 @@ public class DefaultWindowFactory implements WindowFactory {
     public final EventDispatch evtWindowShown = new EventDispatch();
     
     /** The image map. */
-    private final Map<String, ImageIcon> imageMap = new WeakValueHashMap();
+    private final Map<Object, Object> imageMap = new WeakValueHashMap();
 
     /** The frames by id. */
-    private final Map<String, DefaultBrowserWindow> framesById = new WeakValueHashMap();
+    private final Map<Object, Object> framesById = new WeakValueHashMap();
 
     /** The frames. */
     private final Set<Frame> frames = new HashSet<Frame>();
@@ -144,7 +144,7 @@ public class DefaultWindowFactory implements WindowFactory {
      */
     private ImageIcon getImageIcon(String urlOrPath) {
         synchronized (this) {
-            ImageIcon icon = this.imageMap.get(urlOrPath);
+            ImageIcon icon = (ImageIcon) this.imageMap.get(urlOrPath);
             if (icon == null) {
                 try {
                     byte[] imageBytes = RequestEngine.getInstance().loadBytes(urlOrPath);
@@ -170,7 +170,7 @@ public class DefaultWindowFactory implements WindowFactory {
             return null;
         }
         synchronized (this) {
-            DefaultBrowserWindow window = this.framesById.get(windowId);
+            DefaultBrowserWindow window = (DefaultBrowserWindow) this.framesById.get(windowId);
             if ((window != null) && window.isDisplayable()) {
                 return window;
             }

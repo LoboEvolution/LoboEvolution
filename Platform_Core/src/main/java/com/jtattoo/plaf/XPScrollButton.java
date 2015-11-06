@@ -32,7 +32,12 @@ import javax.swing.UIManager;
  */
 public abstract class XPScrollButton extends BaseScrollButton {
 
-    public XPScrollButton(int direction, int width) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public XPScrollButton(int direction, int width) {
         super(direction, width);
     }
 

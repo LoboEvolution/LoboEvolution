@@ -34,7 +34,11 @@ import javax.swing.plaf.basic.BasicProgressBarUI;
  */
 public class FastLookAndFeel extends AbstractLookAndFeel {
 
-    private static final String darkBlue = "0 32 96";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final String darkBlue = "0 32 96";
     private static final String lightBlue = "160 160 200";
     private static final String extraLightBlue = "210 210 240";
     private static final String superLightBlue = "230 230 255";
@@ -45,8 +49,8 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
 
     private static FastDefaultTheme myTheme = null;
 
-    private static final ArrayList themesList = new ArrayList();
-    private static final HashMap themesMap = new HashMap();
+    private static final ArrayList<String> themesList = new ArrayList<String>();
+    private static final HashMap<String, Properties> themesMap = new HashMap<String, Properties>();
     private static final Properties defaultProps = new Properties();
     private static final Properties smallFontProps = new Properties();
     private static final Properties largeFontProps = new Properties();
@@ -113,7 +117,7 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
 
         String key;
         String value;
-        Iterator iter = smallFontProps.keySet().iterator();
+        Iterator<?> iter = smallFontProps.keySet().iterator();
         while (iter.hasNext()) {
             key = (String) iter.next();
             value = smallFontProps.getProperty(key);
@@ -179,7 +183,7 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
         themesMap.put("Green-Giant-Font", greenGiantFontProps);
     }
 
-    public static java.util.List getThemes() {
+    public static List<String> getThemes() {
         return themesList;
     }
 

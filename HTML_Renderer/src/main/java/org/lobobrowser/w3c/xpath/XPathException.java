@@ -28,6 +28,11 @@ package org.lobobrowser.w3c.xpath;
 public class XPathException extends RuntimeException {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Instantiates a new x path exception.
 	 *
 	 * @param code the code

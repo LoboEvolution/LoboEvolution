@@ -386,7 +386,12 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 //-----------------------------------------------------------------------------    
     private static class InvisibleScrollButton extends JButton {
         
-        public InvisibleScrollButton() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public InvisibleScrollButton() {
             super();
             setVisible(false);
         }

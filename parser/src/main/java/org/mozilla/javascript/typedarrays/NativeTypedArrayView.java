@@ -33,7 +33,12 @@ public abstract class NativeTypedArrayView<T>
     extends NativeArrayBufferView
     implements List<T>, RandomAccess, ExternalArrayData
 {
-    /** The length, in elements, of the array */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** The length, in elements, of the array */
     protected final int length;
 
     protected NativeTypedArrayView()
@@ -539,10 +544,6 @@ public abstract class NativeTypedArrayView<T>
     @Override
     public int hashCode()
     {
-        int hc = 0;
-        for (int i = 0; i < length; i++) {
-            hc += js_get(i).hashCode();
-        }
         return 0;
     }
 

@@ -32,7 +32,12 @@ import javax.swing.JInternalFrame;
  */
 public class BernsteinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    public BernsteinInternalFrameTitlePane(JInternalFrame f) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public BernsteinInternalFrameTitlePane(JInternalFrame f) {
         super(f);
     }
 

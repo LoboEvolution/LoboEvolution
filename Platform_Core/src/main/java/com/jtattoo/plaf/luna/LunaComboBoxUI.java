@@ -44,7 +44,12 @@ public class LunaComboBoxUI extends BaseComboBoxUI {
 //--------------------------------------------------------------------------------------------------    
     static class ArrowButton extends NoFocusButton {
 
-        public ArrowButton() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public ArrowButton() {
             setBorder(BorderFactory.createEmptyBorder());
             setBorderPainted(false);
             setContentAreaFilled(false);

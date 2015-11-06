@@ -32,7 +32,11 @@ import javax.swing.JRootPane;
  */
 public class AcrylTitlePane extends BaseTitlePane {
 
-    public AcrylTitlePane(JRootPane root, BaseRootPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public AcrylTitlePane(JRootPane root, BaseRootPaneUI ui) {
         super(root, ui);
     }
 

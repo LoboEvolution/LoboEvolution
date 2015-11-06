@@ -32,7 +32,11 @@ import javax.swing.plaf.basic.BasicArrowButton;
  */
 public class BaseScrollButton extends BasicArrowButton {
 
-    protected int buttonWidth = 24;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected int buttonWidth = 24;
 
     public BaseScrollButton(int direction, int width) {
         super(direction);

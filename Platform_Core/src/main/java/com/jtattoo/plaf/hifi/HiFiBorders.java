@@ -240,7 +240,12 @@ public class HiFiBorders extends BaseBorders {
 //-------------------------------------------------------------------------------------------------    
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
-        public InternalFrameBorder() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public InternalFrameBorder() {
             insets.top = 3;
         }
 
@@ -276,7 +281,11 @@ public class HiFiBorders extends BaseBorders {
 
     public static class ToolBarBorder extends AbstractBorder implements UIResource, SwingConstants {
 
-        private static final LazyImageIcon HOR_RUBBER_ICON = new LazyImageIcon("hifi/icons/HorRubber.gif");
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final LazyImageIcon HOR_RUBBER_ICON = new LazyImageIcon("hifi/icons/HorRubber.gif");
         private static final LazyImageIcon VER_RUBBER_ICON = new LazyImageIcon("hifi/icons/VerRubber.gif");
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {

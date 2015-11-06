@@ -32,7 +32,7 @@ public class LocalFilter implements ObjectFilter {
      */
     @Override
     public Object decode(Object source) {
-        WeakReference wf = (WeakReference) source;
+        WeakReference<?> wf = (WeakReference<?>) source;
         return wf == null ? null : wf.get();
     }
     

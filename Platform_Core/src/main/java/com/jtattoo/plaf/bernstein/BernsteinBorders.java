@@ -140,7 +140,11 @@ public class BernsteinBorders extends BaseBorders {
 
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
-        private static final Color borderColor = new Color(255, 244, 128);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Color borderColor = new Color(255, 244, 128);
         private static final Color FRAME_COLORS[] = {
             new Color(229, 187, 0),
             new Color(251, 232, 0),

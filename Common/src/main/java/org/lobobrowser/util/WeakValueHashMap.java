@@ -35,11 +35,11 @@ import java.util.Set;
 /**
  * The Class WeakValueHashMap.
  */
-public class WeakValueHashMap implements Map {
+public class WeakValueHashMap implements Map<Object, Object> {
     /** The map. */
-    private final Map map = new HashMap();
+    private final Map<Object, Object> map = new HashMap<Object, Object>();
     /** The queue. */
-    private final ReferenceQueue queue = new ReferenceQueue();
+    private final ReferenceQueue<?> queue = new ReferenceQueue<Object>();
     
     /**
      * Instantiates a new weak value hash map.
@@ -72,7 +72,7 @@ public class WeakValueHashMap implements Map {
      */
     @Override
     public boolean containsKey(Object key) {
-        WeakReference wf = (WeakReference) this.map.get(key);
+        WeakReference<?> wf = (WeakReference<?>) this.map.get(key);
         return (wf != null) && (wf.get() != null);
     }
     
@@ -92,7 +92,7 @@ public class WeakValueHashMap implements Map {
     @Override
     public Object get(Object key) {
         this.checkQueue();
-        WeakReference wf = (WeakReference) this.map.get(key);
+        WeakReference<?> wf = (WeakReference<?>) this.map.get(key);
         return wf == null ? null : wf.get();
     }
     
@@ -119,8 +119,8 @@ public class WeakValueHashMap implements Map {
         if (value == null) {
             throw new IllegalArgumentException("null values not accepted");
         }
-        Reference ref = new LocalWeakReference(key, value, this.queue);
-        WeakReference oldWf = (WeakReference) this.map.put(key, ref);
+        Reference<?> ref = new LocalWeakReference(key, value, this.queue);
+        WeakReference<?> oldWf = (WeakReference<?>) this.map.put(key, ref);
         return oldWf == null ? null : oldWf.get();
     }
     
@@ -131,7 +131,7 @@ public class WeakValueHashMap implements Map {
     @Override
     public Object remove(Object key) {
         this.checkQueue();
-        WeakReference wf = (WeakReference) this.map.remove(key);
+        WeakReference<?> wf = (WeakReference<?>) this.map.remove(key);
         return wf == null ? null : wf.get();
     }
     
@@ -140,9 +140,9 @@ public class WeakValueHashMap implements Map {
      * @see java.util.Map#putAll(java.util.Map)
      */
     @Override
-    public void putAll(Map t) {
+    public void putAll(Map<?, ?> t) {
         this.checkQueue();
-        Iterator i = t.entrySet().iterator();
+        Iterator<?> i = t.entrySet().iterator();
         while (i.hasNext()) {
             Map.Entry entry = (Map.Entry) i.next();
             this.putImpl(entry.getKey(), entry.getValue());
@@ -164,7 +164,7 @@ public class WeakValueHashMap implements Map {
      * @see java.util.Map#keySet()
      */
     @Override
-    public Set keySet() {
+    public Set<Object> keySet() {
         return this.map.keySet();
     }
     
@@ -172,7 +172,7 @@ public class WeakValueHashMap implements Map {
      * Check queue.
      */
     private final void checkQueue() {
-        ReferenceQueue queue = this.queue;
+        ReferenceQueue<?> queue = this.queue;
         LocalWeakReference ref;
         while ((ref = (LocalWeakReference) queue.poll()) != null) {
             this.map.remove(ref.getKey());
@@ -184,7 +184,7 @@ public class WeakValueHashMap implements Map {
      * @see java.util.Map#values()
      */
     @Override
-    public Collection values() {
+    public Collection<Object> values() {
         return new FilteredCollection(this.map.values(), new LocalFilter());
     }
     
@@ -193,7 +193,7 @@ public class WeakValueHashMap implements Map {
      * @see java.util.Map#entrySet()
      */
     @Override
-    public Set entrySet() {
+    public Set<Map.Entry<Object, Object>> entrySet() {
         throw new UnsupportedOperationException();
     }
 }

@@ -981,7 +981,11 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 //------------------------------------------------------------------------------    
     private static class ResizingPanel extends JPanel {
 
-        private BufferedImage bi = null;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private BufferedImage bi = null;
 
         public ResizingPanel(BufferedImage bi) {
             super();

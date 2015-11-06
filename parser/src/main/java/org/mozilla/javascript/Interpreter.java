@@ -170,21 +170,6 @@ public final class Interpreter extends Icode implements Evaluator
       return result;
     }
 
-    static {
-        // Checks for byte code consistencies, good compiler can eliminate them
-
-        if (Token.LAST_BYTECODE_TOKEN > 127) {
-            String str = "Violation of Token.LAST_BYTECODE_TOKEN <= 127";
-            System.err.println(str);
-            throw new IllegalStateException(str);
-        }
-        if (MIN_ICODE < -128) {
-            String str = "Violation of Interpreter.MIN_ICODE >= -128";
-            System.err.println(str);
-            throw new IllegalStateException(str);
-        }
-    }
-
     public Object compile(CompilerEnvirons compilerEnv,
                           ScriptNode tree,
                           String encodedSource,
@@ -477,8 +462,6 @@ public final class Interpreter extends Icode implements Evaluator
                 int handlerStart   = table[i + EXCEPTION_HANDLER_SLOT];
                 int type           = table[i + EXCEPTION_TYPE_SLOT];
                 int exceptionLocal = table[i + EXCEPTION_LOCAL_SLOT];
-                int scopeLocal     = table[i + EXCEPTION_SCOPE_SLOT];
-
                 out.println(" tryStart="+tryStart+" tryEnd="+tryEnd
                             +" handlerStart="+handlerStart
                             +" type="+(type == 0 ? "catch" : "finally")

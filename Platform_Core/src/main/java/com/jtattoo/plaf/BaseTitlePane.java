@@ -52,7 +52,11 @@ import javax.swing.plaf.UIResource;
  */
 public class BaseTitlePane extends JComponent implements TitlePane {
 
-    public static final String PAINT_ACTIVE = "paintActive";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static final String PAINT_ACTIVE = "paintActive";
     public static final String ICONIFY = "Iconify";
     public static final String MAXIMIZE = "Maximize";
     public static final String CLOSE = "Close";
@@ -155,7 +159,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
     protected Image getFrameIconImage() {
         // try to find icon for dialog windows
         if (getFrame() == null && JTattooUtilities.getJavaVersion() >= 1.6) {
-            java.util.List icons = getWindow().getIconImages();
+            java.util.List<Image> icons = getWindow().getIconImages();
             // No icon found ? search in window chain for an icon
             if (icons == null || icons.isEmpty()) {
                 Window owner = getWindow().getOwner();
@@ -665,7 +669,12 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 
     protected class CloseAction extends AbstractAction {
 
-        public CloseAction() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public CloseAction() {
             super(UIManager.getString("MetalTitlePane.closeTitle"));
         }
 
@@ -676,7 +685,12 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 
     protected class IconifyAction extends AbstractAction {
 
-        public IconifyAction() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public IconifyAction() {
             super(UIManager.getString("MetalTitlePane.iconifyTitle"));
         }
 
@@ -687,7 +701,12 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 
     protected class RestoreAction extends AbstractAction {
 
-        public RestoreAction() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public RestoreAction() {
             super(UIManager.getString("MetalTitlePane.restoreTitle"));
         }
 
@@ -698,7 +717,12 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 
     protected class MaximizeAction extends AbstractAction {
 
-        public MaximizeAction() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public MaximizeAction() {
             super(UIManager.getString("MetalTitlePane.maximizeTitle"));
         }
 
@@ -710,7 +734,12 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 //-----------------------------------------------------------------------------------------------
     protected class SystemMenuBar extends JMenuBar {
 
-        public SystemMenuBar() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public SystemMenuBar() {
             setOpaque(false);
         }
         
@@ -872,7 +901,6 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 
         public void layoutMacStyle(Container c) {
             int spacing = getHorSpacing();
-            int w = getWidth();
             int h = getHeight();
 
             // assumes all buttons have the same dimensions these dimensions include the borders

@@ -50,6 +50,7 @@ import org.lobobrowser.ua.NavigatorEventType;
 import org.lobobrowser.ua.NavigatorExceptionEvent;
 import org.lobobrowser.ua.NavigatorFrame;
 import org.lobobrowser.ua.NavigatorWindow;
+import org.lobobrowser.util.CollectionUtilities;
 import org.lobobrowser.util.JoinableTask;
 
 /**
@@ -233,15 +234,13 @@ public class ExtensionManager {
             logger.info("createExtensions(): Creating library class loader with URLs=["
                     + libraryURLCollection + "].");
         }
-        ClassLoader librariesCL = new URLClassLoader(
-                libraryURLCollection.toArray(new URL[0]), rootClassLoader);
-
+       
         // Initialize class loader in each extension, using librariesCL as
         // the parent class loader. Extensions are initialized in parallel.
         Collection<JoinableTask> tasks = new ArrayList<JoinableTask>();
         PlatformInit pm = PlatformInit.getInstance();
         for (Extension ei : extensions) {
-            final ClassLoader pcl = librariesCL;
+            final ClassLoader pcl = new URLClassLoader(libraryURLCollection.toArray(new URL[0]), rootClassLoader);;
             final Extension fei = ei;
             // Initialize rest of them in parallel.
             JoinableTask task = new JoinableTask() {
@@ -390,8 +389,7 @@ public class ExtensionManager {
         }
 
         // None handled it. Call the last resort handlers in reverse order.
-        for (Extension ei : (Collection<Extension>) org.lobobrowser.util.CollectionUtilities
-                .reverse(extensions)) {
+        for (Extension ei : (Collection<Extension>) CollectionUtilities.reverse(extensions)) {
             try {
                 Clientlet clientlet = ei.getLastResortClientlet(request,
                         response);

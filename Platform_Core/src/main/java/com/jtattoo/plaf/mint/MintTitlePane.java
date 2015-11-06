@@ -32,7 +32,12 @@ import javax.swing.JRootPane;
  */
 public class MintTitlePane extends BaseTitlePane {
 
-    public MintTitlePane(JRootPane root, BaseRootPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public MintTitlePane(JRootPane root, BaseRootPaneUI ui) {
         super(root, ui);
     }
 

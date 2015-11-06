@@ -32,7 +32,12 @@ import javax.swing.JRootPane;
  */
 public class LunaTitlePane extends BaseTitlePane {
 
-    public LunaTitlePane(JRootPane root, BaseRootPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public LunaTitlePane(JRootPane root, BaseRootPaneUI ui) {
         super(root, ui);
     }
 

@@ -33,7 +33,11 @@ import javax.swing.JInternalFrame;
  */
 public class LunaInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    private static final Color frameColor = new Color(0, 25, 207);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final Color frameColor = new Color(0, 25, 207);
 
     public LunaInternalFrameTitlePane(JInternalFrame f) {
         super(f);

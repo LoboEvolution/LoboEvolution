@@ -32,7 +32,12 @@ import javax.swing.JInternalFrame;
  */
 public class AluminiumInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    public AluminiumInternalFrameTitlePane(JInternalFrame f) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public AluminiumInternalFrameTitlePane(JInternalFrame f) {
         super(f);
     }
 

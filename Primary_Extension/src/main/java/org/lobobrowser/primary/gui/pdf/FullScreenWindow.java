@@ -22,7 +22,6 @@ package org.lobobrowser.primary.gui.pdf;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.DisplayMode;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -195,8 +194,6 @@ public class FullScreenWindow {
 
 		defaultScreen = screen;
 
-		DisplayMode dm = screen.getDisplayMode();
-
 		GraphicsConfiguration gc = screen.getDefaultConfiguration();
 
 		jf = new JFrame(gc);
@@ -327,20 +324,10 @@ public class FullScreenWindow {
 
 		flag.clear();
 
-		int count = 0;
-
 		PickMe pickers[] = new PickMe[scrns.length];
 
 		for (int i = 0; i < scrns.length; i++) {
-
-			if (scrns[i].isFullScreenSupported()) {
-
-				count++;
-
-			}
-
 			pickers[i] = new PickMe(scrns[i]);
-
 		}
 
 		flag.waitForFlag();

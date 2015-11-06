@@ -359,7 +359,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 * Clear state.
 	 */
 	private void clearState() {
-		Context ctx = Context.enter();
+		Context.enter();
 		try{
 		Scriptable s = this.getWindowScope();
 		if (s != null) {
@@ -1589,9 +1589,6 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		/** The timer. */
 		public final Timer timer;
 
-		/** The retained. */
-		private final Object retained;
-
 		/**
 		 * Instantiates a new task wrapper.
 		 *
@@ -1603,7 +1600,6 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		public TaskWrapper(Timer timer, Object retained) {
 			super();
 			this.timer = timer;
-			this.retained = retained;
 		}
 	}
 

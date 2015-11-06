@@ -59,12 +59,6 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 	/** The cancelable. */
 	private boolean cancelable;
 
-	/** The default prevented. */
-	private boolean defaultPrevented;
-
-	/** The is trusted. */
-	private boolean isTrusted;
-
 	/** The cancelled. */
 	private boolean cancelled;
 
@@ -474,7 +468,6 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 	@Override
 	public void preventDefault() {
 		if (this.cancelable) {
-			this.defaultPrevented = true;
 		}
 	}
 

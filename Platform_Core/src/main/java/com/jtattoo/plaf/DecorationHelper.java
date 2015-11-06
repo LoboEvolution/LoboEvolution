@@ -38,7 +38,7 @@ public class DecorationHelper {
     public static void decorateWindows(Boolean decorate) {
         if (JTattooUtilities.getJavaVersion() >= 1.4) {
             try {
-                Class classParams[] = {Boolean.TYPE};
+                Class<?> classParams[] = {Boolean.TYPE};
                 Method m = JFrame.class.getMethod("setDefaultLookAndFeelDecorated", classParams);
                 Object methodParams[] = {decorate};
                 m.invoke(null, methodParams);
@@ -54,7 +54,7 @@ public class DecorationHelper {
     public static int getWindowDecorationStyle(JRootPane root) {
         if (JTattooUtilities.getJavaVersion() >= 1.4) {
             try {
-                Class paramTypes[] = null;
+                Class<?> paramTypes[] = null;
                 Object args[] = null;
                 Method m = root.getClass().getMethod("getWindowDecorationStyle", paramTypes);
                 Integer i = (Integer) m.invoke(root, args);
@@ -68,7 +68,7 @@ public class DecorationHelper {
     public static int getExtendedState(Frame frame) {
         if (JTattooUtilities.getJavaVersion() >= 1.4) {
             try {
-                Class paramTypes[] = null;
+                Class<?> paramTypes[] = null;
                 Object args[] = null;
                 Method m = frame.getClass().getMethod("getExtendedState", paramTypes);
                 Integer i = (Integer) m.invoke(frame, args);
@@ -82,7 +82,7 @@ public class DecorationHelper {
     public static void setExtendedState(Frame frame, int state) {
         if (JTattooUtilities.getJavaVersion() >= 1.4) {
             try {
-                Class classParams[] = {Integer.TYPE};
+                Class<?> classParams[] = {Integer.TYPE};
                 Method m = frame.getClass().getMethod("setExtendedState", classParams);
                 Object methodParams[] = {new Integer(state)};
                 m.invoke(frame, methodParams);
@@ -94,7 +94,7 @@ public class DecorationHelper {
     public static boolean isFrameStateSupported(Toolkit tk, int state) {
         if (JTattooUtilities.getJavaVersion() >= 1.4) {
             try {
-                Class classParams[] = {Integer.TYPE};
+                Class<?> classParams[] = {Integer.TYPE};
                 Method m = tk.getClass().getMethod("isFrameStateSupported", classParams);
                 Object methodParams[] = {new Integer(state)};
                 Boolean b = (Boolean) m.invoke(tk, methodParams);
@@ -123,8 +123,8 @@ public class DecorationHelper {
                 }
             } else if (JTattooUtilities.getJavaVersion() >= 1.6010) {
                 try {
-                    Class clazz = Class.forName("com.sun.awt.AWTUtilities");
-                    Class classParams[] = {Window.class, Boolean.TYPE};
+                    Class<?> clazz = Class.forName("com.sun.awt.AWTUtilities");
+                    Class<?> classParams[] = {Window.class, Boolean.TYPE};
                     Method method = clazz.getMethod("setWindowOpaque", classParams);
                     if (translucent) {
                         Object methodParams[] = {wnd, Boolean.FALSE};

@@ -31,9 +31,7 @@ public class ResponseEvent extends EventObject {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
-    /** The response. */
-    private final ClientletResponse response;
-
+    
     /**
      * Instantiates a new response event.
      *
@@ -44,6 +42,5 @@ public class ResponseEvent extends EventObject {
      */
     public ResponseEvent(Object source, ClientletResponse response) {
         super(source);
-        this.response = response;
     }
 }

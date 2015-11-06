@@ -25,8 +25,6 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.logging.Logger;
-
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
@@ -41,10 +39,6 @@ public class HighSecurityX509TrustManager implements X509TrustManager {
     
     /** The standard trust manager. */
     private X509TrustManager standardTrustManager = null;
-    /** Log object for this class. */
-    private static final Logger LOG = Logger
-            .getLogger(MediumSecurityX509TrustManager.class.getName());
-            
     /**
      * Constructor for EasyX509TrustManager.
      */

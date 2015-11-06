@@ -687,7 +687,7 @@ public class HttpRequest extends AbstractBean {
     /** The Class AsyncWorker.
 	 */
     // -------------- Private impl details
-    protected class AsyncWorker extends SwingWorker {
+    protected class AsyncWorker extends SwingWorker<Object, Object> {
         
         /** The data. */
         private String data;

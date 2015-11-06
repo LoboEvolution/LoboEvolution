@@ -42,10 +42,9 @@ public abstract class MultiplexClassLoader extends BaseClassLoader {
      * @param classLoaders
      *            the class loaders
      */
-    public MultiplexClassLoader(Collection classLoaders) {
+    public MultiplexClassLoader(Collection<BaseClassLoader> classLoaders) {
         super(null);
-        this.parentLoaders = (BaseClassLoader[]) classLoaders
-                .toArray(EMPTY_CLASS_LOADERS);
+        this.parentLoaders = (BaseClassLoader[]) classLoaders.toArray(EMPTY_CLASS_LOADERS);
     }
     
     /*

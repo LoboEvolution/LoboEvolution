@@ -33,7 +33,9 @@ import javax.swing.JInternalFrame;
  */
 public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    public AcrylInternalFrameTitlePane(JInternalFrame f) {
+	private static final long serialVersionUID = 1L;
+
+	public AcrylInternalFrameTitlePane(JInternalFrame f) {
         super(f);
     }
 

@@ -33,7 +33,12 @@ import javax.swing.JRootPane;
  */
 public class HiFiTitlePane extends BaseTitlePane {
 
-    public HiFiTitlePane(JRootPane root, BaseRootPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public HiFiTitlePane(JRootPane root, BaseRootPaneUI ui) {
         super(root, ui);
     }
 

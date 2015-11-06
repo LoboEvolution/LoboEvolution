@@ -32,7 +32,12 @@ import javax.swing.JRootPane;
  */
 public class AluminiumTitlePane extends BaseTitlePane {
 
-    public AluminiumTitlePane(JRootPane root, BaseRootPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public AluminiumTitlePane(JRootPane root, BaseRootPaneUI ui) {
         super(root, ui);
     }
 

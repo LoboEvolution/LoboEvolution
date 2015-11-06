@@ -237,10 +237,6 @@ public class MemoryTest {
 			return null;
 		}
 
-		public void remove(Component c) {
-			// nop
-		}
-
 		/*
 		 * (non-Javadoc)
 		 * 
@@ -250,15 +246,6 @@ public class MemoryTest {
 		@Override
 		public Color getPaintedBackgroundColor() {
 			return Color.BLACK;
-		}
-
-		/**
-		 * Gets the insets.
-		 *
-		 * @return the insets
-		 */
-		public Insets getInsets() {
-			return new Insets(0, 0, 0, 0);
 		}
 
 		@Override

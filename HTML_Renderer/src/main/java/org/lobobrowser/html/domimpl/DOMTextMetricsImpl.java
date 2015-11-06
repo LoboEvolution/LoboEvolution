@@ -31,7 +31,7 @@ public class DOMTextMetricsImpl implements TextMetrics {
 	private String txt;
 
 	public DOMTextMetricsImpl(String txt) {
-		this.txt = txt;
+		this.setTxt(txt);
 	}
 
 	@Override
@@ -44,6 +44,20 @@ public class DOMTextMetricsImpl implements TextMetrics {
 	public double getHeight() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	/**
+	 * @return the txt
+	 */
+	public String getTxt() {
+		return txt;
+	}
+
+	/**
+	 * @param txt the txt to set
+	 */
+	public void setTxt(String txt) {
+		this.txt = txt;
 	}
 
 }

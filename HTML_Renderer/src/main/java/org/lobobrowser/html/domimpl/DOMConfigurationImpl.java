@@ -90,7 +90,7 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 	@Override
 	public DOMStringList getParameterNames() {
 		synchronized (this) {
-			return new DOMStringListImpl(parameters.keySet());
+			return new DOMStringListImpl(parameters.values());
 		}
 	}
 }

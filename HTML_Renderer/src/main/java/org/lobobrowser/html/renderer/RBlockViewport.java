@@ -1171,23 +1171,6 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	/**
-	 * Adds the as seq block check style.
-	 *
-	 * @param block
-	 *            the block
-	 * @param element
-	 *            the element
-	 * @param usesAlignAttribute
-	 *            the uses align attribute
-	 */
-	private void addAsSeqBlockCheckStyle(RElement block, HTMLElementImpl element, boolean usesAlignAttribute) {
-		if (this.addElsewhereIfPositioned(block, element, usesAlignAttribute, false, true)) {
-			return;
-		}
-		this.addAsSeqBlock(block);
-	}
-
-	/**
 	 * Adds the as seq block.
 	 *
 	 * @param block

@@ -148,7 +148,12 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 
     public static class ArrowButton extends NoFocusButton {
 
-        public void paint(Graphics g) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public void paint(Graphics g) {
             Dimension size = getSize();
             Color colors[];
             if (isEnabled()) {

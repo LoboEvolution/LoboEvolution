@@ -31,7 +31,12 @@ import java.awt.Color;
  */
 public class HiFiScrollButton extends XPScrollButton {
 
-    public HiFiScrollButton(int direction, int width) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public HiFiScrollButton(int direction, int width) {
         super(direction, width);
     }
 

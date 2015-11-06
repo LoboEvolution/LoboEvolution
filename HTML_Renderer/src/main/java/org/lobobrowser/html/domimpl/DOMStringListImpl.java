@@ -35,7 +35,7 @@ import org.w3c.dom.DOMStringList;
 public class DOMStringListImpl implements DOMStringList {
 
 	/** The source list. */
-	private final List sourceList;
+	private final List<Object> sourceList;
 
 	/**
 	 * Instantiates a new DOM string list impl.
@@ -43,8 +43,8 @@ public class DOMStringListImpl implements DOMStringList {
 	 * @param sourceList
 	 *            the source list
 	 */
-	public DOMStringListImpl(Collection sourceList) {
-		List list = new ArrayList();
+	public DOMStringListImpl(Collection<Object> sourceList) {
+		List<Object> list = new ArrayList<Object>();
 		list.addAll(sourceList);
 		this.sourceList = list;
 	}

@@ -216,7 +216,11 @@ public class GraphiteBorders extends BaseBorders {
 
     public static class MenuItemBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(2, 2, 2, 2);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             JMenuItem b = (JMenuItem) c;
@@ -252,7 +256,12 @@ public class GraphiteBorders extends BaseBorders {
 
     public static class PopupMenuBorder extends BasePopupMenuBorder {
         
-        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             Color borderColor = ColorHelper.darker(AbstractLookAndFeel.getMenuSelectionBackgroundColor(), 20);
             if (JTattooUtilities.isLeftToRight(c)) {
                 int dx = getBorderInsets(c).left;
@@ -314,7 +323,12 @@ public class GraphiteBorders extends BaseBorders {
 
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
-        public InternalFrameBorder() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public InternalFrameBorder() {
         }
 
         public Insets getBorderInsets(Component c) {

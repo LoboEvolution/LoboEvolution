@@ -33,10 +33,15 @@ import javax.swing.UIDefaults;
  */
 public class NoireLookAndFeel extends AbstractLookAndFeel {
 
-    private static NoireDefaultTheme myTheme = null;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private static final ArrayList themesList = new ArrayList();
-    private static final HashMap themesMap = new HashMap();
+	private static NoireDefaultTheme myTheme = null;
+
+    private static final ArrayList<String> themesList = new ArrayList<String>();
+    private static final HashMap<String, Properties> themesMap = new HashMap<String, Properties>();
     private static final Properties defaultProps = new Properties();
     private static final Properties smallFontProps = new Properties();
     private static final Properties largeFontProps = new Properties();
@@ -76,7 +81,7 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
        
     }
 
-    public static java.util.List getThemes() {
+    public static List<String> getThemes() {
         return themesList;
     }
 

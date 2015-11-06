@@ -34,7 +34,12 @@ import javax.swing.JRootPane;
  */
 public class TextureTitlePane extends BaseTitlePane {
     
-    public TextureTitlePane(JRootPane root, BaseRootPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TextureTitlePane(JRootPane root, BaseRootPaneUI ui) {
         super(root, ui); 
     }
 

@@ -271,7 +271,11 @@ public class HiFiIcons extends BaseIcons {
 
     private static class CheckBoxIcon implements Icon, UIResource, Serializable {
 
-        private static final int GAP = 2;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final int GAP = 2;
         private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("hifi/icons/small/check_symbol_12x11.png");
         private static final Icon SMALL_CHECK_INVERSE_ICON = new LazyImageIcon("icons/small/check_symbol_10x10.png");
         private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon("icons/small/check_symbol_disabled_10x10.png");
@@ -383,7 +387,11 @@ public class HiFiIcons extends BaseIcons {
 //----------------------------------------------------------------------------------------------------------------------
     private static class RadioButtonIcon implements Icon, UIResource, Serializable {
         
-        private static final int GAP = 2;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final int GAP = 2;
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {

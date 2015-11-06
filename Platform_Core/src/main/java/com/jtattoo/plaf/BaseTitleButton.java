@@ -32,7 +32,11 @@ import javax.swing.Icon;
  */
 public class BaseTitleButton extends NoFocusButton {
 
-    private float alpha = 1.0f;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private float alpha = 1.0f;
 
     public BaseTitleButton(Action action, String accessibleName, Icon icon, float alpha) {
         setContentAreaFilled(false);

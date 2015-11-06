@@ -22,7 +22,6 @@ package org.lobobrowser.html.domimpl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Logger;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
@@ -43,10 +42,6 @@ import com.steadystate.css.dom.CSSStyleSheetImpl;
  */
 public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements
 HTMLLinkElement {
-
-    /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(HTMLLinkElementImpl.class.getName());
 
     /** The style sheet. */
     private CSSStyleSheet styleSheet;

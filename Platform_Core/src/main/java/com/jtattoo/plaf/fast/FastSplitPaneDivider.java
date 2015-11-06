@@ -32,7 +32,12 @@ import java.awt.Graphics;
  */
 public class FastSplitPaneDivider extends BaseSplitPaneDivider {
 
-    public FastSplitPaneDivider(FastSplitPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public FastSplitPaneDivider(FastSplitPaneUI ui) {
         super(ui);
     }
 

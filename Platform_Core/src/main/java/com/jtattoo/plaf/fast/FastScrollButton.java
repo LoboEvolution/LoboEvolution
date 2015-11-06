@@ -30,7 +30,12 @@ import javax.swing.Icon;
 
 public class FastScrollButton extends BaseScrollButton {
 
-    public FastScrollButton(int direction, int width) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public FastScrollButton(int direction, int width) {
         super(direction, width);
     }
 

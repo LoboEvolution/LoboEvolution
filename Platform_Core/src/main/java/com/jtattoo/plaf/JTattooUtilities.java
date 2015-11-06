@@ -180,7 +180,7 @@ public class JTattooUtilities {
     public static boolean isWindowActive(Window window) {
         if (getJavaVersion() >= 1.4) {
             try {
-                Class paramTypes[] = null;
+                Class<?> paramTypes[] = null;
                 Object args[] = null;
                 Method m = window.getClass().getMethod("isActive", paramTypes);
                 Boolean b = (Boolean) m.invoke(window, args);
@@ -266,8 +266,8 @@ public class JTattooUtilities {
         FontMetrics fm = null;
         if (getJavaVersion() >= 1.6) {
             try {
-                Class swingUtilities2Class = Class.forName("sun.swing.SwingUtilities2");
-                Class classParams[] = {JComponent.class, Graphics.class, Font.class};
+                Class<?> swingUtilities2Class = Class.forName("sun.swing.SwingUtilities2");
+                Class<?> classParams[] = {JComponent.class, Graphics.class, Font.class};
                 Method m = swingUtilities2Class.getMethod("getFontMetrics", classParams);
                 Object methodParams[] = {c, g, f};
                 fm = (FontMetrics)m.invoke(null, methodParams);
@@ -307,8 +307,8 @@ public class JTattooUtilities {
         }
         if (getJavaVersion() >= 1.6) {
             try {
-                Class swingUtilities2Class = Class.forName("sun.swing.SwingUtilities2");
-                Class classParams[] = {JComponent.class, Graphics.class, String.class, Integer.TYPE, Integer.TYPE};
+                Class<?> swingUtilities2Class = Class.forName("sun.swing.SwingUtilities2");
+                Class<?> classParams[] = {JComponent.class, Graphics.class, String.class, Integer.TYPE, Integer.TYPE};
                 Method m = swingUtilities2Class.getMethod("drawString", classParams);
                 Object methodParams[] = {c, g, text, new Integer(x), new Integer(y)};
                 m.invoke(null, methodParams);
@@ -332,8 +332,8 @@ public class JTattooUtilities {
         }
         if (getJavaVersion() >= 1.6) {
             try {
-                Class swingUtilities2Class = Class.forName("sun.swing.SwingUtilities2");
-                Class classParams[] = {JComponent.class, Graphics.class, String.class, Integer.TYPE, Integer.TYPE, Integer.TYPE};
+                Class<?> swingUtilities2Class = Class.forName("sun.swing.SwingUtilities2");
+                Class<?> classParams[] = {JComponent.class, Graphics.class, String.class, Integer.TYPE, Integer.TYPE, Integer.TYPE};
                 Method m = swingUtilities2Class.getMethod("drawStringUnderlineCharAt", classParams);
                 Object methodParams[] = {c, g, text, new Integer(underlinedIndex), new Integer(x), new Integer(y)};
                 m.invoke(null, methodParams);

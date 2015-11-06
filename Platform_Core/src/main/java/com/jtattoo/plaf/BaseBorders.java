@@ -204,7 +204,11 @@ public class BaseBorders {
     //------------------------------------------------------------------------------------
     public static class FocusFrameBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(2, 2, 2, 2);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Color hiColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFocusFrameColor(), 60);
@@ -231,7 +235,11 @@ public class BaseBorders {
 
     public static class TextFieldBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(2, 2, 2, 2);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             g.setColor(AbstractLookAndFeel.getTheme().getFrameColor());
@@ -254,7 +262,11 @@ public class BaseBorders {
 
     public static class SpinnerBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(1, 1, 1, 1);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             g.setColor(AbstractLookAndFeel.getTheme().getFrameColor());
@@ -277,7 +289,11 @@ public class BaseBorders {
 
     public static class ComboBoxBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(1, 1, 1, 1);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             g.setColor(AbstractLookAndFeel.getTheme().getFrameColor());
@@ -300,7 +316,11 @@ public class BaseBorders {
 
     public static class TableHeaderBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(2, 2, 2, 0);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(2, 2, 2, 0);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             Graphics2D g2D = (Graphics2D)g;
@@ -329,7 +349,11 @@ public class BaseBorders {
 
     public static class ScrollPaneBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(2, 2, 2, 2);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(2, 2, 2, 2);
         private static final Insets tableInsets = new Insets(1, 1, 1, 1);
         
         private boolean tableBorder = false;
@@ -366,7 +390,11 @@ public class BaseBorders {
 
     public static class BasePopupMenuBorder extends AbstractBorder implements UIResource {
 
-        protected static Font logoFont;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		protected static Font logoFont;
         protected static Insets leftLogoInsets;
         protected static Insets rightLogoInsets;
         protected static Insets insets;
@@ -520,7 +548,12 @@ public class BaseBorders {
 
     public static class BasePopupMenuShadowBorder extends BasePopupMenuBorder {
 
-        public BasePopupMenuShadowBorder() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public BasePopupMenuShadowBorder() {
             shadowSize = 4;
         }
 
@@ -602,7 +635,11 @@ public class BaseBorders {
 
     public static class MenuItemBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(2, 2, 2, 2);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             JMenuItem b = (JMenuItem) c;
@@ -646,7 +683,11 @@ public class BaseBorders {
 
     public static class ToolBarBorder extends AbstractBorder implements UIResource, SwingConstants {
 
-        private static final Color shadow = new Color(160, 160, 160);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Color shadow = new Color(160, 160, 160);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             if (((JToolBar) c).isFloatable()) {
@@ -753,7 +794,11 @@ public class BaseBorders {
 
     public static class PaletteBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(1, 1, 1, 1);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             if (JTattooUtilities.isFrameActive((JComponent) c)) {
@@ -780,7 +825,11 @@ public class BaseBorders {
 
     public static class BaseInternalFrameBorder extends AbstractBorder implements UIResource {
 
-        protected final int dw = 5;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		protected final int dw = 5;
         protected final int trackWidth = 22;
         protected final Insets insets = new Insets(dw, dw, dw, dw);
         protected final Insets paletteInsets = new Insets(3, 3, 3, 3);
@@ -872,7 +921,11 @@ public class BaseBorders {
 
     public static class Down3DBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(1, 1, 1, 1);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             Color frameColor = AbstractLookAndFeel.getTheme().getBackgroundColor();

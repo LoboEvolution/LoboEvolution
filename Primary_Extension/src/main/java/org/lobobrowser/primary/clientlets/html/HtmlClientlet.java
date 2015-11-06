@@ -311,22 +311,6 @@ public class HtmlClientlet implements Clientlet {
 	}
 
 	/**
-	 * Gets the default charset.
-	 *
-	 * @param url
-	 *            the url
-	 * @return the default charset
-	 */
-	private String getDefaultCharset(URL url) {
-		if (Urls.isLocalFile(url)) {
-			String charset = System.getProperty("file.encoding");
-			return charset == null ? "UTF-8" : charset;
-		} else {
-			return "UTF-8";
-		}
-	}
-
-	/**
 	 * Extract refresh.
 	 *
 	 * @param refresh

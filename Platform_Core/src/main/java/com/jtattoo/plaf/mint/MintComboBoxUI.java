@@ -51,7 +51,12 @@ public class MintComboBoxUI extends BaseComboBoxUI {
 //------------------------------------------------------------------------------------
     static class ArrowButton extends NoFocusButton {
 
-        public void paint(Graphics g) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public void paint(Graphics g) {
             Dimension size = getSize();
             if (isEnabled()) {
                 if (getModel().isArmed() && getModel().isPressed()) {

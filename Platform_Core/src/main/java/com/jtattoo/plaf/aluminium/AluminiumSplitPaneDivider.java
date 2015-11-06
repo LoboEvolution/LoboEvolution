@@ -33,7 +33,12 @@ import java.awt.*;
  */
 public class AluminiumSplitPaneDivider extends BaseSplitPaneDivider {
 
-    public AluminiumSplitPaneDivider(AluminiumSplitPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public AluminiumSplitPaneDivider(AluminiumSplitPaneUI ui) {
         super(ui);
     }
 

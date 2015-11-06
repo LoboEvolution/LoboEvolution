@@ -212,7 +212,12 @@ public class SmartBorders extends BaseBorders {
 
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
-        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             Graphics2D g2D = (Graphics2D) g;
             boolean active = isActive(c);
             boolean resizable = isResizable(c);
@@ -318,7 +323,11 @@ public class SmartBorders extends BaseBorders {
 
     public static class PaletteBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(1, 1, 1, 1);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             if (JTattooUtilities.isFrameActive((JComponent) c)) {

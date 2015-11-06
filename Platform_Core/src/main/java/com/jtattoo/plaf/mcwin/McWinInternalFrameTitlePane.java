@@ -33,7 +33,12 @@ import javax.swing.JInternalFrame;
  */
 public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    public McWinInternalFrameTitlePane(JInternalFrame f) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public McWinInternalFrameTitlePane(JInternalFrame f) {
         super(f);
     }
 

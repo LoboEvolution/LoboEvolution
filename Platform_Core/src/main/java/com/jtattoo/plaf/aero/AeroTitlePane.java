@@ -33,7 +33,12 @@ import javax.swing.*;
  */
 public class AeroTitlePane extends BaseTitlePane {
 
-    public AeroTitlePane(JRootPane root, BaseRootPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public AeroTitlePane(JRootPane root, BaseRootPaneUI ui) {
         super(root, ui);
     }
 
@@ -86,7 +91,12 @@ public class AeroTitlePane extends BaseTitlePane {
 //------------------------------------------------------------------------------
     private class TitleButton extends BaseTitleButton {
 
-        public TitleButton(Action action, String accessibleName, Icon icon) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public TitleButton(Action action, String accessibleName, Icon icon) {
             super(action, accessibleName, icon, 1.0f);
         }
 

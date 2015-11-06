@@ -145,7 +145,12 @@ public class MintBorders extends BaseBorders {
 
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
-        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             boolean active = isActive(c);
             boolean resizable = isResizable(c);
             if (!resizable) {

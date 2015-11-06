@@ -116,9 +116,6 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 	/** The launched. */
 	private volatile boolean launched = false;
 
-	/** The disposing progress window. */
-	private volatile boolean disposingProgressWindow = false;
-
 	/** The window factory. */
 	private static volatile WindowFactory windowFactory = DefaultWindowFactory.getInstance();
 

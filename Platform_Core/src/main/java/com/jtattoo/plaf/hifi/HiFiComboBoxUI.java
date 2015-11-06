@@ -52,7 +52,11 @@ public class HiFiComboBoxUI extends BaseComboBoxUI {
 //--------------------------------------------------------------------------------------------------    
     static class ArrowButtonBorder extends AbstractBorder {
 
-        private static final Insets insets = new Insets(1, 3, 1, 2);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(1, 3, 1, 2);
         private static final Color frameLoColor = new Color(120, 120, 120);
         private static final Color frameLowerColor = new Color(104, 104, 104);
         private static final Color frameLowerLoColor = new Color(64, 64, 64);

@@ -34,7 +34,12 @@ import javax.swing.JInternalFrame;
  */
 public class TextureInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    public TextureInternalFrameTitlePane(JInternalFrame f) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TextureInternalFrameTitlePane(JInternalFrame f) {
         super(f);
     }
 

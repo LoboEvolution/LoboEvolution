@@ -241,7 +241,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
             return new Dimension(0, 0);
         }
         long width = 0;
-        Enumeration enumeration = header.getColumnModel().getColumns();
+        Enumeration<TableColumn> enumeration = header.getColumnModel().getColumns();
         while (enumeration.hasMoreElements()) {
             TableColumn aColumn = (TableColumn) enumeration.nextElement();
             width = width + aColumn.getPreferredWidth();
@@ -380,7 +380,12 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 //----------------------------------------------------------------------------------------------------------------------
     private class BaseDefaultHeaderRenderer extends DefaultTableCellRenderer {
 
-        public BaseDefaultHeaderRenderer() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public BaseDefaultHeaderRenderer() {
             super();
         }
 
@@ -391,7 +396,11 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 
     private class MyRenderComponent extends JLabel {
 
-        private JTable table = null;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private JTable table = null;
         private int col = 0;
 
         public MyRenderComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
@@ -418,10 +427,10 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
             setHorizontalTextPosition(SwingConstants.LEADING);
             setBorder(UIManager.getBorder("TableHeader.cellBorder"));
             if ((JTattooUtilities.getJavaVersion() >= 1.6) && (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel)) {
-                RowSorter rowSorter = table.getRowSorter();
-                List keyList = rowSorter == null ? null : rowSorter.getSortKeys();
+                RowSorter<? extends TableModel> rowSorter = table.getRowSorter();
+                List<? extends RowSorter.SortKey> keyList = rowSorter == null ? null : rowSorter.getSortKeys();
                 if ((keyList != null) && (keyList.size() > 0)) {
-                    RowSorter.SortKey sortKey = (RowSorter.SortKey) keyList.get(0);
+                    RowSorter.SortKey sortKey = keyList.get(0);
                     if (sortKey.getColumn() == table.convertColumnIndexToModel(col)) {
                         AbstractIconFactory iconFactory = ((AbstractLookAndFeel) UIManager.getLookAndFeel()).getIconFactory();
                         if (sortKey.getSortOrder().equals(SortOrder.ASCENDING)) {

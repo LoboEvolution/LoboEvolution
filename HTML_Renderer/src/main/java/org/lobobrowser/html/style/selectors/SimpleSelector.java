@@ -64,7 +64,7 @@ public class SimpleSelector {
 	 * @return true, if successful
 	 */
 	public final boolean matches(HTMLElementImpl element) {
-		Set names = element.getPseudoNames();
+		Set<String> names = element.getPseudoNames();
 		if (names == null) {
 			return this.pseudoElement == null;
 		} else {

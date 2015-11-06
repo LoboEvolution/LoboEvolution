@@ -161,7 +161,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	private final Window window;
 
 	/** The elements by id. */
-	private final Map<String, Element> elementsById = new WeakValueHashMap();
+	private final Map<Object, Object> elementsById = new WeakValueHashMap();
 
 	/** The elements by name. */
 	private final Map<String, Element> elementsByName = new HashMap<String, Element>(0);
@@ -938,7 +938,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	public Element getElementById(String elementId) {
 		if (elementId != null && elementId.length() > 0) {
 			synchronized (this) {
-				return this.elementsById.get(elementId);
+				return (Element) this.elementsById.get(elementId);
 			}
 		} else {
 			return null;

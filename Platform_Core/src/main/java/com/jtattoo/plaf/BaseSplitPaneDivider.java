@@ -34,7 +34,11 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
  */
 public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 
-    protected boolean centerOneTouchButtons = true;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected boolean centerOneTouchButtons = true;
     protected boolean flatMode = false;
 
     public BaseSplitPaneDivider(BasicSplitPaneUI ui) {
@@ -137,7 +141,12 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
     protected JButton createLeftOneTouchButton() {
         JButton b = new JButton() {
 
-            public void paint(Graphics g) {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public void paint(Graphics g) {
                 Color color = getBackground();
                 int w = getSize().width;
                 int h = getSize().height;
@@ -169,7 +178,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
                 }
             }
 
-            public boolean isFocusTraversable() {
+            public boolean isFocusable() {
                 return false;
             }
         };
@@ -184,7 +193,12 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
     protected JButton createRightOneTouchButton() {
         JButton b = new JButton() {
 
-            public void paint(Graphics g) {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public void paint(Graphics g) {
                 Color color = getBackground();
                 int w = getSize().width;
                 int h = getSize().height;
@@ -216,7 +230,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
                 }
             }
 
-            public boolean isFocusTraversable() {
+            public boolean isFocusable() {
                 return false;
             }
         };

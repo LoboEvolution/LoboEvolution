@@ -110,7 +110,11 @@ public class McWinIcons extends BaseIcons {
 //--------------------------------------------------------------------------------------------------------
     private static class CheckBoxIcon implements Icon, UIResource, Serializable {
         
-        private static final int GAP = 4;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final int GAP = 4;
         private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("mcwin/icons/small/check_symbol_16x11.png");
         private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon("mcwin/icons/small/check_symbol_disabled_16x11.png");
         private static final Icon MEDIUM_CHECK_ICON = new LazyImageIcon("mcwin/icons/medium/check_symbol_18x13.png");
@@ -207,7 +211,11 @@ public class McWinIcons extends BaseIcons {
 
     private static class RadioButtonIcon implements Icon, UIResource, Serializable {
 
-        private static final int GAP = 2;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final int GAP = 2;
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
@@ -298,7 +306,11 @@ public class McWinIcons extends BaseIcons {
 
     private static class ThumbIcon implements Icon, UIResource, Serializable {
 
-        private final static int WIDTH = 15;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private final static int WIDTH = 15;
         private final static int HEIGHT = 15;
         private boolean isRollover = false;
 

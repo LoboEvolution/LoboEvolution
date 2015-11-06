@@ -33,7 +33,12 @@ import javax.swing.JRootPane;
  */
 public class SmartTitlePane extends BaseTitlePane {
 
-    public SmartTitlePane(JRootPane root, BaseRootPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SmartTitlePane(JRootPane root, BaseRootPaneUI ui) {
         super(root, ui);
     }
 

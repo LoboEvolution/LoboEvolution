@@ -48,7 +48,11 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
  */
 public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane implements ActionListener {
 
-    public static final String PAINT_ACTIVE = "paintActive";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static final String PAINT_ACTIVE = "paintActive";
     public static final String ICONIFY = "Iconify";
     public static final String MAXIMIZE = "Maximize";
     public static final String CLOSE = "Close";

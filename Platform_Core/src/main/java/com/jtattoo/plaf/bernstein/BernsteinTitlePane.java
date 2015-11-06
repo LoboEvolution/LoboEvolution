@@ -32,7 +32,12 @@ import javax.swing.JRootPane;
  */
 public class BernsteinTitlePane extends BaseTitlePane {
 
-    public BernsteinTitlePane(JRootPane root, BaseRootPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public BernsteinTitlePane(JRootPane root, BaseRootPaneUI ui) {
         super(root, ui);
     }
 

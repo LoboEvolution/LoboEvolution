@@ -53,7 +53,12 @@ public class SmartComboBoxUI extends BaseComboBoxUI {
 //--------------------------------------------------------------------------------------------------
     static class ArrowButton extends BaseComboBoxUI.ArrowButton {
 
-        public void paint(Graphics g) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public void paint(Graphics g) {
             super.paint(g);
             if (getModel().isRollover()) {
                 g.setColor(AbstractLookAndFeel.getFocusColor());

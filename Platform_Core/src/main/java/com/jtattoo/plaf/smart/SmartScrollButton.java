@@ -32,7 +32,12 @@ import java.awt.Graphics;
  */
 public class SmartScrollButton extends BaseScrollButton {
 
-    public SmartScrollButton(int direction, int width) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SmartScrollButton(int direction, int width) {
         super(direction, width);
     }
 

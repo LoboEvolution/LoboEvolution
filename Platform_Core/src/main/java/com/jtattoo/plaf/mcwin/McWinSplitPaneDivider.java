@@ -32,7 +32,12 @@ import java.awt.Graphics;
  */
 public class McWinSplitPaneDivider extends BaseSplitPaneDivider {
 
-    public McWinSplitPaneDivider(McWinSplitPaneUI ui) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public McWinSplitPaneDivider(McWinSplitPaneUI ui) {
         super(ui);
     }
 

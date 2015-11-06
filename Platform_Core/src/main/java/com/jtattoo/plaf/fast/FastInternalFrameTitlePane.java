@@ -32,7 +32,12 @@ import javax.swing.JInternalFrame;
  */
 public class FastInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    public FastInternalFrameTitlePane(JInternalFrame f) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public FastInternalFrameTitlePane(JInternalFrame f) {
         super(f);
     }
 

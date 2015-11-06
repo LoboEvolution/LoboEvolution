@@ -39,7 +39,7 @@ import org.lobobrowser.util.WeakValueHashMap;
 public class VolatileContentImpl implements ContentBuffer {
 
     /** The Constant volatileMap. */
-    private static final Map<Long, ContentBuffer> volatileMap = new WeakValueHashMap();
+    private static final Map<Object, Object> volatileMap = new WeakValueHashMap();
 
     /** The id. */
     private final long id;

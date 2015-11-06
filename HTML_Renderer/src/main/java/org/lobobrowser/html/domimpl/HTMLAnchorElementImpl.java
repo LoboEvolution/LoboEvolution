@@ -25,8 +25,6 @@ import java.awt.Cursor;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
-import java.util.logging.Logger;
-
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.renderstate.ColorRenderState;
@@ -44,9 +42,6 @@ import org.lobobrowser.w3c.html.HTMLDocument;
  * The Class HTMLAnchorElementImpl.
  */
 public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTMLAnchorElement {
-
-	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(HTMLAnchorElementImpl.class.getName());
 
 	/**
 	 * Instantiates a new HTML link element impl.

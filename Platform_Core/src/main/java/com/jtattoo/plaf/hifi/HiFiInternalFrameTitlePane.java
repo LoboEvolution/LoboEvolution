@@ -33,7 +33,12 @@ import javax.swing.JInternalFrame;
  */
 public class HiFiInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    public HiFiInternalFrameTitlePane(JInternalFrame f) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public HiFiInternalFrameTitlePane(JInternalFrame f) {
         super(f);
     }
 

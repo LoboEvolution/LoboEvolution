@@ -228,7 +228,11 @@ public class TextureBorders extends BaseBorders {
 
     public static class PopupMenuBorder extends BasePopupMenuBorder {
 
-        private static final float shadowAlpha[] = {0.6f, 0.4f, 0.2f, 0.1f};
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final float shadowAlpha[] = {0.6f, 0.4f, 0.2f, 0.1f};
 
         public PopupMenuBorder() {
             shadowSize = 4;
@@ -300,7 +304,11 @@ public class TextureBorders extends BaseBorders {
 
     public static class MenuItemBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(2, 2, 2, 2);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             JMenuItem b = (JMenuItem) c;
@@ -341,7 +349,11 @@ public class TextureBorders extends BaseBorders {
 
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
-        private static final Color FRAME_BORDER_COLOR = new Color(128, 128, 128);
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final Color FRAME_BORDER_COLOR = new Color(128, 128, 128);
         private static final Color FRAME_COLORS[] = new Color[]{new Color(144, 144, 144), new Color(180, 180, 180), new Color(216, 216, 216), new Color(236, 236, 236), new Color(164, 164, 164), new Color(196, 196, 196), new Color(184, 184, 184), new Color(172, 172, 172)};
 
         public Insets getBorderInsets(Component c) {
@@ -453,7 +465,11 @@ public class TextureBorders extends BaseBorders {
 
     public static class ToolBarBorder extends AbstractBorder implements UIResource, SwingConstants {
 
-        private static final LazyImageIcon HOR_RUBBER_ICON = new LazyImageIcon("texture/icons/HorRubber.gif");
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private static final LazyImageIcon HOR_RUBBER_ICON = new LazyImageIcon("texture/icons/HorRubber.gif");
         private static final LazyImageIcon VER_RUBBER_ICON = new LazyImageIcon("texture/icons/VerRubber.gif");
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {

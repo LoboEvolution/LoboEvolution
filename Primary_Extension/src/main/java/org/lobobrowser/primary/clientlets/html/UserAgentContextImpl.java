@@ -48,9 +48,6 @@ public class UserAgentContextImpl implements UserAgentContext {
 	/** The Constant mediaNames. */
 	private static final Set<String> mediaNames = new HashSet<String>();
 
-	/** The frame. */
-	private final NavigatorFrame frame;
-
 	static {
 		// Media names supported here
 		Set<String> mn = mediaNames;
@@ -67,7 +64,6 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 *            the frame
 	 */
 	public UserAgentContextImpl(final NavigatorFrame frame) {
-		this.frame = frame;
 	}
 
 	/*
