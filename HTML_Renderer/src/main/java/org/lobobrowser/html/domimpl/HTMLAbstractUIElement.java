@@ -38,7 +38,7 @@ import org.w3c.dom.Document;
 /**
  * The Class HTMLAbstractUIElement.
  */
-public class HTMLAbstractUIElement extends HTMLElementImpl {
+public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttributeProperties {
 
 	/** The onfocus. */
 	private Function onfocus;
@@ -196,7 +196,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onafterprint
 	 */
 	public Function getOnafterprint() {
-		return this.getEventFunction(onafterprint, HtmlJsAttributeProperties.ONAFTERPRINT);
+		return this.getEventFunction(onafterprint, ONAFTERPRINT);
 	}
 
 	/**
@@ -215,7 +215,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onbeforeprint
 	 */
 	public Function getOnbeforeprint() {
-		return this.getEventFunction(onbeforeprint, HtmlJsAttributeProperties.ONBEFOREPRINT);
+		return this.getEventFunction(onbeforeprint, ONBEFOREPRINT);
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onbeforeunload
 	 */
 	public Function getOnbeforeunload() {
-		return this.getEventFunction(onbeforeunload, HtmlJsAttributeProperties.ONBEFOREUNLOAD);
+		return this.getEventFunction(onbeforeunload, ONBEFOREUNLOAD);
 	}
 
 	/**
@@ -254,7 +254,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnerror() {
-		return this.getEventFunction(onerror, HtmlJsAttributeProperties.ONERROR);
+		return this.getEventFunction(onerror, ONERROR);
 	}
 
 	/**
@@ -274,7 +274,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onhashchange
 	 */
 	public Function getOnhashchange() {
-		return this.getEventFunction(onhashchange, HtmlJsAttributeProperties.ONHASHCHANGE);
+		return this.getEventFunction(onhashchange, ONHASHCHANGE);
 	}
 
 	/**
@@ -293,7 +293,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onmessage
 	 */
 	public Function getOnmessage() {
-		return this.getEventFunction(onmessage, HtmlJsAttributeProperties.ONMESSAGE);
+		return this.getEventFunction(onmessage, ONMESSAGE);
 	}
 
 	/**
@@ -312,7 +312,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onoffline
 	 */
 	public Function getOnoffline() {
-		return this.getEventFunction(onoffline, HtmlJsAttributeProperties.ONOFFLINE);
+		return this.getEventFunction(onoffline, ONOFFLINE);
 	}
 
 	/**
@@ -331,7 +331,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the ononline
 	 */
 	public Function getOnonline() {
-		return this.getEventFunction(ononline, HtmlJsAttributeProperties.ONONLINE);
+		return this.getEventFunction(ononline, ONONLINE);
 	}
 
 	/**
@@ -350,7 +350,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onpopstate
 	 */
 	public Function getOnpopstate() {
-		return this.getEventFunction(onpopstate, HtmlJsAttributeProperties.ONPOPSTATE);
+		return this.getEventFunction(onpopstate, ONPOPSTATE);
 	}
 
 	/**
@@ -369,7 +369,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onpagehide
 	 */
 	public Function getOnpagehide() {
-		return this.getEventFunction(onpagehide, HtmlJsAttributeProperties.ONPAGEHIDE);
+		return this.getEventFunction(onpagehide, ONPAGEHIDE);
 	}
 
 	/**
@@ -388,7 +388,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onpageshow
 	 */
 	public Function getOnpageshow() {
-		return this.getEventFunction(onpageshow, HtmlJsAttributeProperties.ONPAGESHOW);
+		return this.getEventFunction(onpageshow, ONPAGESHOW);
 	}
 
 	/**
@@ -407,7 +407,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onredo
 	 */
 	public Function getOnredo() {
-		return this.getEventFunction(onredo, HtmlJsAttributeProperties.ONREDO);
+		return this.getEventFunction(onredo, ONREDO);
 	}
 
 	/**
@@ -426,7 +426,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onresize
 	 */
 	public Function getOnresize() {
-		return this.getEventFunction(onresize, HtmlJsAttributeProperties.ONRESIZE);
+		return this.getEventFunction(onresize, ONRESIZE);
 	}
 
 	/**
@@ -445,7 +445,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onstorage
 	 */
 	public Function getOnstorage() {
-		return this.getEventFunction(onstorage, HtmlJsAttributeProperties.ONSTORAGE);
+		return this.getEventFunction(onstorage, ONSTORAGE);
 	}
 
 	/**
@@ -464,7 +464,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onundo
 	 */
 	public Function getOnundo() {
-		return this.getEventFunction(onundo, HtmlJsAttributeProperties.ONUNDO);
+		return this.getEventFunction(onundo, ONUNDO);
 	}
 
 	/**
@@ -483,7 +483,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onunload
 	 */
 	public Function getOnunload() {
-		return this.getEventFunction(onunload, HtmlJsAttributeProperties.ONUNLOAD);
+		return this.getEventFunction(onunload, ONUNLOAD);
 	}
 
 	/**
@@ -512,7 +512,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onfinish
 	 */
 	public Function getOnfinish() {
-		return this.getEventFunction(onfinish, HtmlJsAttributeProperties.FINISH);
+		return this.getEventFunction(onfinish, ONFINISH);
 	}
 
 	/**
@@ -531,7 +531,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onstart
 	 */
 	public Function getOnstart() {
-		return this.getEventFunction(onstart, HtmlJsAttributeProperties.START);
+		return this.getEventFunction(onstart, ONSTART);
 	}
 
 	/**
@@ -550,7 +550,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 * @return the onbounce
 	 */
 	public Function getOnbounce() {
-		return this.getEventFunction(onbounce, HtmlJsAttributeProperties.BOUNCE);
+		return this.getEventFunction(onbounce, ONBOUNCE);
 	}
 
 	/**
@@ -570,7 +570,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnblur() {
-		return this.getEventFunction(onblur, HtmlJsAttributeProperties.BLUR);
+		return this.getEventFunction(onblur, ONBLUR);
 	}
 
 	/**
@@ -591,7 +591,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnclick() {
-		return this.getEventFunction(onclick, HtmlJsAttributeProperties.CLICK);
+		return this.getEventFunction(onclick, ONCLICK);
 	}
 
 	/**
@@ -612,7 +612,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOndblclick() {
-		return this.getEventFunction(ondblclick, HtmlJsAttributeProperties.DBLCLICK);
+		return this.getEventFunction(ondblclick, ONDBLCLICK);
 	}
 
 	/**
@@ -633,7 +633,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnfocus() {
-		return this.getEventFunction(onfocus, HtmlJsAttributeProperties.FOCUS);
+		return this.getEventFunction(onfocus, ONFOCUS);
 	}
 
 	/**
@@ -654,7 +654,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnkeydown() {
-		return this.getEventFunction(onkeydown, HtmlJsAttributeProperties.KEYDOWN);
+		return this.getEventFunction(onkeydown, ONKEYDOWN);
 	}
 
 	/**
@@ -675,7 +675,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnkeypress() {
-		return this.getEventFunction(onkeypress, HtmlJsAttributeProperties.KEYPRESS);
+		return this.getEventFunction(onkeypress, ONKEYPRESS);
 	}
 
 	/**
@@ -696,7 +696,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnkeyup() {
-		return this.getEventFunction(onkeyup, HtmlJsAttributeProperties.KEYUP);
+		return this.getEventFunction(onkeyup, ONKEYUP);
 	}
 
 	/**
@@ -717,7 +717,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnmousedown() {
-		return this.getEventFunction(onmousedown, HtmlJsAttributeProperties.MOUSEDOWN);
+		return this.getEventFunction(onmousedown, ONMOUSEDOWN);
 	}
 
 	/**
@@ -738,7 +738,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnmousemove() {
-		return this.getEventFunction(onmousemove, HtmlJsAttributeProperties.MOUSEMOVE);
+		return this.getEventFunction(onmousemove, ONMOUSEMOVE);
 	}
 
 	/**
@@ -759,7 +759,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnmouseout() {
-		return this.getEventFunction(onmouseout, HtmlJsAttributeProperties.MOUSEOUT);
+		return this.getEventFunction(onmouseout, ONMOUSEOUT);
 	}
 
 	/**
@@ -780,7 +780,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnmouseover() {
-		return this.getEventFunction(onmouseover, HtmlJsAttributeProperties.MOUSEOVER);
+		return this.getEventFunction(onmouseover, ONMOUSEOVER);
 	}
 
 	/**
@@ -801,7 +801,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnmouseup() {
-		return this.getEventFunction(onmouseup, HtmlJsAttributeProperties.MOUSEUP);
+		return this.getEventFunction(onmouseup, ONMOUSEUP);
 	}
 
 	/**
@@ -822,7 +822,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOncontextmenu() {
-		return this.getEventFunction(oncontextmenu, HtmlJsAttributeProperties.CTEXTMENU);
+		return this.getEventFunction(oncontextmenu, ONCONTEXTMENU);
 	}
 
 	/**
@@ -843,7 +843,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnabort() {
-		return this.getEventFunction(onabort, HtmlJsAttributeProperties.ABORT);
+		return this.getEventFunction(onabort, ONABORT);
 	}
 
 	/**
@@ -864,7 +864,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnplay() {
-		return this.getEventFunction(onplay, HtmlJsAttributeProperties.PLAY);
+		return this.getEventFunction(onplay, ONPLAY);
 	}
 
 	/**
@@ -885,7 +885,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnplaying() {
-		return this.getEventFunction(onplaying, HtmlJsAttributeProperties.PLAYING);
+		return this.getEventFunction(onplaying, ONPLAYING);
 	}
 
 	/**
@@ -906,7 +906,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnprogress() {
-		return this.getEventFunction(onprogress, HtmlJsAttributeProperties.PROGRESS);
+		return this.getEventFunction(onprogress, ONPROGRESS);
 	}
 
 	/**
@@ -927,7 +927,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnratechange() {
-		return this.getEventFunction(onprogress, HtmlJsAttributeProperties.PROGRESS);
+		return this.getEventFunction(onprogress, ONPROGRESS);
 	}
 
 	/**
@@ -947,7 +947,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnreadystatechange() {
-		return this.getEventFunction(onreadystatechange, HtmlJsAttributeProperties.READYSTATECHANGE);
+		return this.getEventFunction(onreadystatechange, ONREADYSTATECHANGE);
 	}
 
 	/**
@@ -968,7 +968,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnscroll() {
-		return this.getEventFunction(onscroll, HtmlJsAttributeProperties.SCROLL);
+		return this.getEventFunction(onscroll, ONSCROLL);
 	}
 
 	/**
@@ -989,7 +989,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnseeked() {
-		return this.getEventFunction(onseeked, HtmlJsAttributeProperties.SEEKED);
+		return this.getEventFunction(onseeked, ONSEEKED);
 	}
 
 	/**
@@ -1010,7 +1010,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnseeking() {
-		return this.getEventFunction(onseeking, HtmlJsAttributeProperties.SEEKING);
+		return this.getEventFunction(onseeking, ONSEEKING);
 	}
 
 	/**
@@ -1031,7 +1031,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnselect() {
-		return this.getEventFunction(onselect, HtmlJsAttributeProperties.SELECT);
+		return this.getEventFunction(onselect, ONSELECT);
 	}
 
 	/**
@@ -1052,7 +1052,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnshow() {
-		return this.getEventFunction(onshow, HtmlJsAttributeProperties.SHOW);
+		return this.getEventFunction(onshow, ONSHOW);
 	}
 
 	/**
@@ -1073,7 +1073,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnstalled() {
-		return this.getEventFunction(onstalled, HtmlJsAttributeProperties.STALLED);
+		return this.getEventFunction(onstalled, ONSTALLED);
 	}
 
 	/**
@@ -1094,7 +1094,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnsubmit() {
-		return this.getEventFunction(onsubmit, HtmlJsAttributeProperties.SUBMIT);
+		return this.getEventFunction(onsubmit, ONSUBMIT);
 	}
 
 	/**
@@ -1115,7 +1115,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnsuspend() {
-		return this.getEventFunction(onsuspend, HtmlJsAttributeProperties.SUSPEND);
+		return this.getEventFunction(onsuspend, ONSUSPEND);
 	}
 
 	/**
@@ -1136,7 +1136,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOntimeupdate() {
-		return this.getEventFunction(ontimeupdate, HtmlJsAttributeProperties.TIMEUPDATE);
+		return this.getEventFunction(ontimeupdate, ONTIMEUPDATE);
 	}
 
 	/**
@@ -1157,7 +1157,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnvolumechange() {
-		return this.getEventFunction(onvolumechange, HtmlJsAttributeProperties.VOLUMECHANGE);
+		return this.getEventFunction(onvolumechange, ONVOLUMECHANGE);
 	}
 
 	/**
@@ -1178,7 +1178,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnwaiting() {
-		return this.getEventFunction(onwaiting, HtmlJsAttributeProperties.WAITING);
+		return this.getEventFunction(onwaiting, ONWAITING);
 	}
 
 	/**
@@ -1199,7 +1199,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	 */
 	@Override
 	public Function getOnload() {
-		return this.getEventFunction(onload, HtmlJsAttributeProperties.LOAD);
+		return this.getEventFunction(onload, ONLOAD);
 	}
 
 	/**
@@ -1270,28 +1270,28 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 		String key = script.toLowerCase();
 
 		switch (key) {
-		case HtmlJsAttributeProperties.CLICK:
+		case CLICK:
 			setOnclick(function);
 			break;
-		case HtmlJsAttributeProperties.DBLCLICK:
+		case DBLCLICK:
 			setOndblclick(function);
 			break;
-		case HtmlJsAttributeProperties.MOUSEUP:
+		case MOUSEUP:
 			setOnmouseup(function);
 			break;
-		case HtmlJsAttributeProperties.MOUSEDOWN:
+		case MOUSEDOWN:
 			setOnmousedown(function);
 			break;
-		case HtmlJsAttributeProperties.KEYPRESS:
+		case KEYPRESS:
 			setOnkeypress(function);
 			break;
-		case HtmlJsAttributeProperties.KEYUP:
+		case KEYUP:
 			setOnkeyup(function);
 			break;
-		case HtmlJsAttributeProperties.KEYDOWN:
+		case KEYDOWN:
 			setOnkeydown(function);
 			break;
-		case HtmlJsAttributeProperties.LOAD:
+		case LOAD:
 			setOnload(function);
 			break;
 
@@ -1313,28 +1313,28 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 		String key = script.toLowerCase();
 
 		switch (key) {
-		case HtmlJsAttributeProperties.CLICK:
+		case CLICK:
 			setOnclick(null);
 			break;
-		case HtmlJsAttributeProperties.DBLCLICK:
+		case DBLCLICK:
 			setOndblclick(null);
 			break;
-		case HtmlJsAttributeProperties.MOUSEUP:
+		case MOUSEUP:
 			setOnmouseup(null);
 			break;
-		case HtmlJsAttributeProperties.MOUSEDOWN:
+		case MOUSEDOWN:
 			setOnmousedown(null);
 			break;
-		case HtmlJsAttributeProperties.KEYPRESS:
+		case KEYPRESS:
 			setOnkeypress(null);
 			break;
-		case HtmlJsAttributeProperties.KEYUP:
+		case KEYUP:
 			setOnkeyup(null);
 			break;
-		case HtmlJsAttributeProperties.KEYDOWN:
+		case KEYDOWN:
 			setOnkeydown(null);
 			break;
-		case HtmlJsAttributeProperties.LOAD:
+		case LOAD:
 			setOnload(null);
 			break;
 
