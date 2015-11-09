@@ -32,7 +32,7 @@ public interface HTMLTableElement extends HTMLElement {
 	 *
 	 * @return the caption
 	 */
-	// HTMLTableElement
+	
 	public HTMLTableCaptionElement getCaption();
 
 	/**
@@ -122,7 +122,14 @@ public interface HTMLTableElement extends HTMLElement {
 	 * @return the HTML element
 	 */
 	public HTMLElement createTBody();
-
+	
+	/**
+	 * delete the t body.
+	 *
+	 * @return the HTML element
+	 */
+	public HTMLElement deleteTBody();
+	
 	/**
 	 * Gets the rows.
 	 *

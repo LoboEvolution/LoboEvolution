@@ -21,18 +21,16 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLTableSectionElement.
  */
 public interface HTMLTableSectionElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the rows.
 	 *
 	 * @return the rows
 	 */
-	// HTMLTableSectionElement
 	public HTMLCollection getRows();
 
 	/**
@@ -45,7 +43,8 @@ public interface HTMLTableSectionElement extends HTMLElement {
 	/**
 	 * Insert row.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 * @return the HTML element
 	 */
 	public HTMLElement insertRow(int index);
@@ -53,7 +52,8 @@ public interface HTMLTableSectionElement extends HTMLElement {
 	/**
 	 * Delete row.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 */
 	public void deleteRow(int index);
 
@@ -62,7 +62,7 @@ public interface HTMLTableSectionElement extends HTMLElement {
 	 *
 	 * @return the align
 	 */
-	// HTMLTableSectionElement-30
+
 	public String getAlign();
 
 	/**

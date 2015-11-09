@@ -530,4 +530,10 @@ HTMLTableElement {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public HTMLElement deleteTBody() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
