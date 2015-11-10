@@ -273,7 +273,13 @@ public interface HtmlProperties {
 
     /** The tbody. */
     String TBODY = "TBODY";
-
+    
+    /** The thead. */
+    String THEAD = "THEAD";
+    
+    /** The tfoot. */
+    String TFOOT = "TFOOT";
+    
     /** The tt. */
     String TT = "TT";
 

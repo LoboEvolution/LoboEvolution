@@ -378,7 +378,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	private Component getBackButton() {
 		JButton button = new JButton();
 		button.setAction(new BackAction(this, window, actionPool));
-		button.setIcon(IconFactory.getInstance().getIcon("/toolbarButtonGraphics/navigation/Back16.gif"));
+		button.setIcon(IconFactory.getInstance().getIcon("/org/lobobrowser/images/back.png"));
 		button.setToolTipText("Back");
 		return button;
 	}
@@ -391,7 +391,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	private Component getForwardButton() {
 		JButton button = new JButton();
 		button.setAction(new ForwardAction(this, window, actionPool));
-		button.setIcon(IconFactory.getInstance().getIcon("/toolbarButtonGraphics/navigation/Forward16.gif"));
+		button.setIcon(IconFactory.getInstance().getIcon("/org/lobobrowser/images/forward.png"));
 		button.setToolTipText("Forward");
 		return button;
 	}
@@ -404,7 +404,8 @@ public class ComponentSource implements NavigatorWindowListener {
 	private Component getStopButton() {
 		JButton button = new JButton();
 		button.setAction(new StopAction(this, window));
-		button.setIcon(IconFactory.getInstance().getIcon("/toolbarButtonGraphics/general/Stop16.gif"));
+		button.setIcon(IconFactory.getInstance().getIcon("/org/lobobrowser/images/stop.png"));
+		button.setPreferredSize(new Dimension(18, 18));
 		button.setToolTipText("Stop");
 		return button;
 	}
@@ -417,7 +418,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	private Component getRefreshButton() {
 		JButton button = new JButton();
 		button.setAction(new ReloadAction(this, window, actionPool));
-		button.setIcon(IconFactory.getInstance().getIcon("/toolbarButtonGraphics/general/Refresh16.gif"));
+		button.setIcon(IconFactory.getInstance().getIcon("/org/lobobrowser/images/reload.png"));
 		button.setToolTipText("Refresh");
 		return button;
 	}
@@ -430,7 +431,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	private Component getGoButton() {
 		JButton button = new JButton();
 		button.setAction(new GoAction(this, window));
-		button.setIcon(IconFactory.getInstance().getIcon("/toolbarButtonGraphics/media/Play16.gif"));
+		button.setIcon(IconFactory.getInstance().getIcon("/org/lobobrowser/images/go.png"));
 		button.setToolTipText("Navigate to URL");
 		return button;
 	}
@@ -443,7 +444,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	private JButton getSearchButton() {
 		JButton button = new JButton();
 		button.setAction(new SearchAction(this, window));
-		button.setIcon(IconFactory.getInstance().getIcon("/toolbarButtonGraphics/general/Search16.gif"));
+		button.setIcon(IconFactory.getInstance().getIcon("/org/lobobrowser/images/search.png"));
 		return button;
 	}
 

@@ -190,7 +190,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The print action. */
-	Action printAction = new AbstractAction("Print...", getIcon("/toolbarButtonGraphics/general/Print16.gif")) {
+	Action printAction = new AbstractAction("Print...", getIcon("/org/lobobrowser/images/print.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -223,7 +223,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The zoom tool action. */
-	Action zoomToolAction = new AbstractAction("", getIcon("/toolbarButtonGraphics/general/ZoomIn16.gif")) {
+	Action zoomToolAction = new AbstractAction("", getIcon("/org/lobobrowser/images/zoomin.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -235,7 +235,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 
 	/** The fit in window action. */
 	Action fitInWindowAction = new AbstractAction("Fit in window",
-			getIcon("/toolbarButtonGraphics/general/ZoomOut16.gif")) {
+			getIcon("/org/lobobrowser/images/zoomout.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -299,7 +299,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	ThumbAction thumbAction = new ThumbAction();
 
 	/** The full screen action. */
-	Action fullScreenAction = new AbstractAction("Full screen", getIcon("/toolbarButtonGraphics/media/Play16.gif")) {
+	Action fullScreenAction = new AbstractAction("Full screen", getIcon("/org/lobobrowser/images/go.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -310,7 +310,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The next action. */
-	Action nextAction = new AbstractAction("Next", getIcon("/toolbarButtonGraphics/navigation/Forward16.gif")) {
+	Action nextAction = new AbstractAction("Next", getIcon("/org/lobobrowser/images/forward.png")) {
 		/**
 		 *
 		 */
@@ -323,7 +323,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The prev action. */
-	Action prevAction = new AbstractAction("Prev", getIcon("/toolbarButtonGraphics/navigation/Back16.gif")) {
+	Action prevAction = new AbstractAction("Prev", getIcon("/org/lobobrowser/images/back.png")) {
 		/**
 		 *
 		 */

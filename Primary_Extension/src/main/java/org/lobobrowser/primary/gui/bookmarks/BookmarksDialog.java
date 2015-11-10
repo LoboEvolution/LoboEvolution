@@ -65,7 +65,7 @@ public class BookmarksDialog extends JDialog {
 	private NavigatorWindow window;
 	
 	/** The search. */
-	private final String SEARCH = "/toolbarButtonGraphics/general/Search16.gif";
+	private final String SEARCH = "/org/lobobrowser/images/search.png";
 
 	/**
 	 * Instantiates a new bookmarks dialog.

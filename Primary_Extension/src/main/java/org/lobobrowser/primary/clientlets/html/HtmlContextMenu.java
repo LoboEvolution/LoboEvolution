@@ -63,22 +63,22 @@ public class HtmlContextMenu {
 	private HtmlRendererContextImpl context;
 
 	/** The search. */
-	private final String SEARCH = "/toolbarButtonGraphics/general/Search16.gif";
+	private final String SEARCH = "/org/lobobrowser/images/search.png";
 
 	/** The copy. */
-	private final String COPY = "/toolbarButtonGraphics/general/Copy16.gif";
+	private final String COPY = "/org/lobobrowser/images/copy.png";
 
 	/** The save. */
-	private final String SAVE = "/toolbarButtonGraphics/general/Save16.gif";
+	private final String SAVE = "/org/lobobrowser/images/save.png";
 
 	/** The back. */
-	private final String BACK = "/toolbarButtonGraphics/navigation/Back16.gif";
+	private final String BACK = "/org/lobobrowser/images/back.png";
 
 	/** The relod. */
-	private final String RELOD = "/toolbarButtonGraphics/general/Refresh16.gif";
+	private final String RELOD = "/org/lobobrowser/images/reload.png";
 
 	/** The forward. */
-	private final String FORWARD = "/toolbarButtonGraphics/navigation/Forward16.gif";
+	private final String FORWARD = "/org/lobobrowser/images/forward.png";
 
 	/**
 	 * Instantiates a new html context menu.
