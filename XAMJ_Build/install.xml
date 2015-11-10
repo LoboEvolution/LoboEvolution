@@ -71,7 +71,6 @@
             <file src="ext/primary.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/PDFrenderer.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/jdatepicker.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/jlfgr-1_0.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/batik-all-1.8.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/w3c.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/xalan.jar" targetdir="$INSTALL_PATH/ext"/>
