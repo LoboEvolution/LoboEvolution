@@ -1,0 +1,98 @@
+Version 0.97.5
+--------------
+
+- Added a BrowserPanel class, which contains
+  a FramePanel in addition to an optional
+  toolbar, address bar, status bar and
+  menu bar.
+
+- Patch #1856452: data protocol. Includes
+  implementation of "data" scheme plus 
+  a DomViewerWindow class. (Contributed by
+  user guenze.)
+
+- Fixed locale of cookie dates so it's
+  always US.
+ 
+- Fixed window.open() to understand "yes"
+  as a feature value, and to make
+  features false by default if width
+  and height are requested. 
+ 
+Cobra changes:
+
+- Provided rudimentary implementation of 
+  submitForm in SimpleHtmlRendererContext.
+  
+- Implemented BR attribute: clear.
+
+- Refactored block layout primarily to
+  fix an issue with nested blocks expanding
+  floats.
+  
+- Fixed so that floats are placed in the
+  next line.
+
+- Fixed layout of blocks with relative
+  positioning.
+
+- Fixed layout of tables in the presence
+  of float bounds.
+  
+- Fixed float wrapping.
+
+- Patch #1857157: Patch for [ 1835051 ] 
+  Problem with Named Entities. (Contributed
+  by user guenze.)
+
+- Bug #1827730: Page breaks scrolling.
+  Certain types of tables could cause
+  the renderer to throw 
+  IndexOutOfBoundsException, causing 
+  the page to appear blank.
+
+- Patch #1864257: document.styleSheets.
+  Implemented styleSheets collection
+  and set ownerNode on each style sheet.
+  (Patch contributed by user guenze
+  was modified.)
+
+- Patch #1868002: css2propertiesimpl.
+  Fixes missing and mispelled style
+  properties. (Contributed by user
+  guenze.)
+
+- Patch #1867969: ColorFactory missing 
+  colornames. (Contributed by user
+  guenze.)
+
+- Fixed Javascript calls on Java methods
+  that have a String argument, passing
+  a Scriptable object. (This is related
+  to patch #1865112 contributed by user
+  guenze.)
+  
+- Fixed string representation of 
+  "undefined".
+  
+- Fixed string representation of
+  anchors; usually expected to be
+  same as href.
+
+- Fixed document.URL property.
+
+- Clearing window state when a new
+  document is loaded.
+
+- Provided overridable getDocumentCharset
+  method in SimpleHtmlRendererContext.
+
+- Removed HtmlParserContext, previously
+  deprecated.  
+  
+- Fixed document.links collection to
+  return elements of type HTMLLinkElement,
+  rather than LINK elements.
+
+- Implemented a rudimentary window.open()
+  method in the Cobra Test Tool

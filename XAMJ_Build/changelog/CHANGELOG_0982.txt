@@ -1,0 +1,85 @@
+Version 0.98.2
+--------------
+
+- Added Scenario-*.jar to platform classpath
+  of JavaFX sources.
+
+- Improved caching of compiled Java or JavaFX
+  code so that java.lang.Class objects are
+  not retained and more compilation results
+  can be cached in main memory.
+  
+- Added sourcelist and classlist directives
+  which should be used instead of listing.xml.
+
+- HTML clientlet now checks Content-Language
+  header and sets document locales (a new
+  Cobra feature) accordingly.
+  
+- Changed Linux/Unix desktop launcher so it
+  runs "java -jar lobo.jar".
+  
+- Added toString() to URLJavaFileObject, which
+  fixes names of source files shown in some
+  compiler error messages.
+  
+- Added warning mechanisms to make it easier
+  to discover how to run Lobo from source.
+  
+Cobra changes:
+
+- Fixed NPE in updateGUIComponents() as
+  suggested by user vtec. 
+  
+- Bug [ 1911517 ] select control -- multiple 
+  attribute. Implemented multiple attribute
+  and corresponding Javascript property.
+  
+- Bug [ 1879945 ] No line breaks when using 
+  copy and paste.
+  
+- Implemented onchange event of SELECT
+  elements.
+
+- Patch [ 1933093 ] Text-Transform CSS 
+  property. (Patch contributed by user
+  vtec.)
+
+- Fixed processing of background-position
+  style property.
+
+- Bug [ 1925638 ] Ampersands in textarea 
+  body. HTML entities are now decoded in
+  textarea body.
+
+- Implemented CSS property priorities
+  (!important).
+
+- Changed RBlockViewport so that unknown elements
+  also get their style properties processed.
+
+- The background and foreground colors of input 
+  buttons can now be changed.
+
+- Changed the way document modification
+  notifications are handled in HtmlBlockPanel
+  in order to avoid potential recursion
+  and to allow multiple layout changes
+  initiated in the GUI thread to be processed
+  simultaneously.
+
+- Improved font-size and length
+  calculations.
+
+- Patch [ 1961128 ] Unmappable character. 
+  Affects lsquo and rsquo. (Suggested by
+  user gchii).
+
+CssParser changes:
+ 
+- Fixed an issue with repeat CSS property
+  values after a color. Bug introduced recently.
+  
+- Fixed missing color values in some 
+  properties. Bug introduced recently and
+  it typically affects border properties.

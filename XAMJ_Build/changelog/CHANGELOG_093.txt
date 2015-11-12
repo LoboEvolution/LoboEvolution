@@ -1,0 +1,31 @@
+Version 0.93:
+-------------
+
+- Implemented managed client-side storage
+  with size quota per host.
+  
+- New implicit import: org.xamjwg.io.*
+  
+- Added support for &nbsp; entity.
+
+- Fixed View/Source bug.
+
+- Fixed XML entities bug.
+
+- Added several new methods to existing 
+  elements.
+  
+- Added combo-box attribute maximumRowCount.
+
+- Added menu-item attribute armed.
+
+- Added password-field attribute echoChar.
+
+- Added split-box attributes dividerLocation
+  and proportionalDividerLocation.
+
+- Expression scriptlets are being
+  evaluated in CDATA sections, as
+  a consequence of the entities fix.
+  We'll evaluate if this needs to
+  be addressed.

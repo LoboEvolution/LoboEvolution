@@ -1,0 +1,23 @@
+Version 0.92.1 (Development Snapshot):
+--------------------------------------
+
+- Switched to developing with Eclipse 3.1.
+
+- Moved XAMJ event classes to package
+  org.xamjwg.event, which is now also an
+  implicit import.
+  
+- Events are now based on generics.
+
+- XamjEvaluatable now uses generics as well.
+
+- Fixed some issues with enabling/disabling
+  widget hierarchy.
+
+- Fixed so that clicking on a .htln from HTML
+  always brings window to front.
+  
+- Fixed so that progress splash window is
+  shown for links clicked from HTML (and in
+  general when navigating outside the Warrior
+  browser frame.)

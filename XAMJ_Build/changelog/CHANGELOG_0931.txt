@@ -1,0 +1,5 @@
+Version 0.93.1:
+---------------
+
+- Fixed bug preventing file paths to
+  be recognized as URLs.

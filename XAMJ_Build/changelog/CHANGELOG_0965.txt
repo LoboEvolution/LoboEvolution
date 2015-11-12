@@ -1,0 +1,97 @@
+Version 0.96.5 (Cobra only)
+---------------------------
+
+- Note: Some of the following fixes allow
+  the new Google link bar to render. Also,
+  Amazon.com rendering is now pretty close,
+  with some minor issues remaining.
+
+- Note: We are now using Rhino 1.6R5, which
+  is released under a dual MPL/GPL license.
+
+- Fixed ArrayStoreException related to 
+  selection listener. (Reported by user
+  ulifu).
+    
+- Implemented innerHTML property and added
+  setter for innerText.
+
+- Input type "image" was implemented. (You
+  will notice that in the Yahoo! page served
+  to Cobra and in the Amazon.com page).
+
+- Fixed so that selection node is not null
+  when selection does not include text. 
+  (Problem noted by user ulifu).
+
+- Implemented Image class functionality, 
+  including onload event.
+
+- Optimized image loading, particularly
+  when there are duplicate images.
+  
+- Fixed some table layout bugs, e.g. DIVs
+  nested in a table would expand the table.
+  
+- Fixed some horizontal alignment issues
+  in the presence of floats.
+
+- Added the following methods to HtmlPanel:
+  setHtml, hasSelection.
+
+- Fixed parameter type casting from 
+  Javascript to Java.
+
+- Fixed bug: Case sensitivity of element 
+  name in ID selector in CSS.
+
+- Implemented white-space style property
+  and NOWRAP attribute.
+
+- Implemented text-indent style property.
+
+- Implemented media types for LINK, STYLE
+  and @import rules.
+
+- Fixed bug: Background image not showing 
+  sometimes.
+
+- Added currentStyle property to elements,
+  and fixed style property to only include
+  local style attribute state.  
+  
+- Implemented BODY vlink and link attributes,
+  provided isVisitedLink() is implemented
+  in HtmlRendererContext.
+
+- Modified CSS parser to allow class names
+  that start with a number (given that
+  YouTube uses such a class name).
+  
+- Modified CSS parser to allow class names
+  with the underscore character. (First
+  reported by user dadvir).
+
+- Implemented BODY onload event. (UNTESTED)
+  
+- Implemented preferred size for HtmlPanel.
+  Method setPreferredWidth() must be called
+  first. This is useful when the caller needs
+  the panel to be sized depending on the 
+  HTML content. (Feature requested by user
+  kyank).
+  
+- Implemented element attributes offsetLeft,
+  offsetTop, offsetWidth and offsetHeight.
+  (A major refactoring of the way RenderState
+  is handled was done to implement this).
+  
+- Changed background color rendering so that
+  it matches FireFox behavior.
+
+- Allowing resolution of URLs (e.g. href in
+  anchor tags) when the document URL is 
+  malformed.
+
+- Fixed issue with text areas and selects
+  missing in form parameters.

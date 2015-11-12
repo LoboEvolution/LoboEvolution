@@ -1,0 +1,62 @@
+Version 0.96.1 (Cobra only)
+---------------------------
+
+- NOTE: Requiring Java 5 for Cobra now.
+
+- Fixed unintentional retention (memory
+  leak) of objects wrapped so they can be
+  used in Javascript.
+  
+- Added support for common event attributes.
+  Functional: onclick, ondblclick, onmouseup, 
+  onmousedown. Elements: a, anchor, i, b, 
+  span, div, input, etc.
+  
+- Fixed "hidden fields not submitted" bug. 
+  Fix contributed by user NetherBen.
+  
+- Added getSelectionNode() method, requested
+  by a few users. (UNTESTED)
+
+- Added support for CSS display property.
+  Values supported: block, inline, none.
+  Elements where it's supported: span,
+  div, b, i, em, strong, u, a, anchor.
+
+- Fixed: property values from element style 
+  attribute should precede stylesheet.
+  
+- Implemented innerText property for
+  elements, requested by user. (UNTESTED)
+  
+- Ensured all created graphic contexts 
+  are disposed of.
+
+- Changed graphic context creation to 
+  translation in most cases.
+  
+- Fixed word selection paint bug revealed
+  by the above.
+  
+- Fixed so that original element name
+  case is preserved in DOM.
+  
+- Implemented missing methods in 
+  CharacterDataImpl.
+  
+- Fixed case sensitivity bugs in methods
+  such as getElementsByTagName. Reported
+  by user dadvir. (UNTESTED)
+  
+- Changed architecture so that renderer
+  node always points to its corresponding
+  DOM node (called a ModelNode).
+
+- Fix: Images were being loaded synchronously
+  in SimpleHtmlRendererContext. 
+  
+- Fix: Scripts that fail to load over HTTP
+  no longer cause parser to throw exception
+  and exit.
+  
+- Switched Cobra to java.util.logging.

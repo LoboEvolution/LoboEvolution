@@ -1,0 +1,44 @@
+Version 0.98.1 (Cobra Only)
+---------------------------
+
+- Note: HtmlParser constructors now take
+  Document instances as opposed to just 
+  HTMLDocument ones.
+
+- Note: Made onContextMenu() callback return 
+  a boolean.
+  
+- Added setLocales() and getLocales() methods
+  to HTMLDocumentImpl. The locale is used
+  to determine if a font can display text 
+  in the locale language. When the document 
+  locale is null, the default platform locale 
+  is used.
+
+- Provided implementations of getCookie() and
+  setCookie() in SimpleUserAgentContext, based
+  on the default CookieHandler, if there is one
+  available.
+
+- Patch #1916821: Window.setInterval 
+  implementation. (Contributed by user
+  gwallet).
+
+- Added callback methods in HtmlRendererContext
+  for click and doubleclick events.
+  
+- Added setters for most of the state in
+  SimpleUserAgentContext, which means it's not
+  necessary to extend it most of the time.
+  
+- Added AbstractHtmlRendererContext, containing
+  blank method implementations.
+
+- In order to comply with the InputSource docs,
+  DocumentBuilderImpl now opens a stream from 
+  the URI provided, if neither a stream or 
+  reader are provided. (Issue noted by Jivko 
+  Sabev.)
+
+- Added isImageLoadingEnabled() method to
+  HtmlRendererContext.

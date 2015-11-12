@@ -1,0 +1,26 @@
+Version 0.95.3
+--------------
+
+- Added support for most character entities (including
+  &ndash; and so on).
+
+- Updated IzPack installer to verion 3.8.1. (Should fix
+  RedHat launcher icons).
+
+- Fixed XAMJ error calling context.alert().
+
+- Fixed issue with table column width calculation when 
+  colspan > 1.
+  
+- Implemented HR.
+
+- Fixed issue with text input size due to text font.
+
+- Parser checks if the InputSource's InputStream is unset,
+  and throws an exception. (Previously it would give a
+  NullPointerException).  
+
+- Fixed extra blank line under left- or right-aligned
+  blocks.
+
+- Implemented CSS @import rules

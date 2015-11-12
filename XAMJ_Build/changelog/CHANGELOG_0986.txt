@@ -1,0 +1,58 @@
+Version 0.98.6
+--------------
+
+- Added Look and Feel Nimbus. Nimbus is a polished cross-patform look and feel introduced in the Java SE 6 Update 10 (6u10) release.
+- Added Clear cache
+- Added Https suppor
+- Added multi select file in input tag file	
+- Added hidden attribute
+- Added global attribute suppor for input tag
+- Added css inline-block
+- Added RGBA support. Improve color support. Browser render 510 colors.List of color rendered http://jdatestamp.sourceforge.net/colors.html
+- Added placeholder attribute in input tag
+
+- Added more document javascript methods:
+	- document.getElementsByClassName
+	- document.lastModified
+	- document.linkColor
+	- document.vlinkColor
+	- document.alinkColor
+	- document.bgcolor
+	- document.commands
+	- document.scripts
+	- document.puglins 	
+	- document.embeds
+	- document.fgColor
+	- document.characterSet
+	- document.defaultCharset
+	- document.AddedEventListener
+	- document.removeEventListener. 
+
+- Added more element javascript methods:
+	- element.AddedEventListener
+	- element.removeEventListener
+	- element.hidden
+	- element.lassList 
+	- element.itemscope
+	- element.itemtype
+	- element.itemid
+
+- Added textarea javascript method:
+	- textlength
+
+- Added input javascript method:
+	- width
+
+- Improve css list-style-type
+	- Fixed list-style-type: upper-alpha
+	- Fixed list-style-type: lower-alpha
+	- Added list-style-type: upper-roman
+	- Added list-style-type: lower-roman
+	- Added list-style-type: decimal-leading-zero
+	
+LIBRARIES:
+
+- Added backport of OpenJFX 8 to run on Java 7 http://grepcode.com/snapshot/repo1.maven.org/maven2/net.java.openjfx.backport/openjfx-78-backport/1.8.0-ea-b96.1
+- Delete HtmlUnit-rhino-fork
+- Update Mozilla Rhino from fork https://github.com/apigee/rhino 
+- Update cssparser code to commit 462

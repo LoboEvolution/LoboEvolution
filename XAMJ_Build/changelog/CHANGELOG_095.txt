@@ -1,0 +1,14 @@
+Version 0.95
+------------
+
+- This has our first release of the pure Java HTML
+  renderer. This is work in progress. It is able
+  to render some pages (including our HTML-based site)
+  but it still has a number of limitations which will
+  be addressed in future versions.
+  
+- There are some minimal changes to the XAMJ and Clientlet API.
+  
+- The license was changed from BSD to LGPL.
+
+- Fixed tutorial Update button bug.

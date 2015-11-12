@@ -1,0 +1,148 @@
+Version 0.98.4
+--------------
+
+- Note: Renamed NavigatorListener to 
+  NavigatorErrorListener.  
+
+- Updated JavaFX support so it's 1.0 
+  compliant. 
+
+- Added methods getContentObject() and 
+  getCurrentMimeType() to FramePanel and
+  BrowserPanel. getContentObject() should
+  return HTMLDocumentImpl instances if HTML
+  is showing.
+  
+- Added navigation listener, content 
+  listener and response listener capabilities
+  to FramePanel and BrowserPanel. Navigation
+  events have a linkObject property that 
+  should be of type HTMLElement for HTML
+  clicks.
+
+- Added navigation listeners to extensions. 
+
+- Added connection pre- and post-processors
+  to extensions. 
+  
+- Added a FramePanelFactory capability. 
+  The factory that the browser uses to create
+  FramePanel instances (e.g. for IFRAMEs)
+  can be set with FramePanelFactorySource. 
+
+- Fixed a security issue that prevented
+  some windows from being opened programmatically.
+
+- Implemented status URLs on link hover.
+
+- Added insertProvider and removeProvider
+  permissions to security policy for local
+  code.
+
+- Fixed a general issue with Javascript operations
+  on windows that aren't yet open.
+  
+- Allowing cancellation of window open when
+  progress window gets disposed of.
+     
+- Patch [ 2339649 ] Remove special 'U' character; 
+  causes errors in some env's. Affects compilation
+  of source code. (Thanks Derrick Rice - 
+  derrick_rice).  
+
+- Fixed error in unquoting of content-type
+  charset. 
+
+- Fixed charset of cached documents.
+
+Cobra changes:
+
+- Implemented CSS child (>) and sibling (+)
+  selectors.
+
+- Bug [ 2351217 ] Link target as frame identifier 
+  no longer working. Name lookups of HTML 
+  collections were not working, except when
+  elements defined ID attributes instead of
+  NAME attributes.
+
+- Bug [ 2045717 ] Implement margin collapsing.  
+  Paragraph spacing works based on margin
+  collapsing. 
+  
+- Fixed layout issue with large right floats
+  overflowing to the left and getting cut off.
+  
+- Note: Did a new refactoring of layout engine. 
+  We're no longer using adjust() calls. An
+  annoying issue with the layout getting clobbered,
+  typically on mouse hover, has been addressed.
+  
+- Fixed nowrap layout issue affecting
+  contiguous spans.
+
+- Implemented known ways to set the BODY
+  margin and scrolling.
+  
+- Implemented overflow-x and overflow-y. 
+  (This is really a CSS3 feature).
+  
+- Implemented IFRAME frameborder, marginwidth
+  and marginheight attributes. Additionally,
+  overflow, overflow-x and overflow-y CSS
+  properties now work with IFRAMEs.
+
+- Implemented a box layout optimization.
+
+- Implemented window.history. Cobra has 
+  a blank implementation. Fully-functional 
+  in Lobo. This happens to fix AdSense ads.
+
+- Patch [ 2273159 ] Makes font fallback work 
+  properly. This fixes an long-standing issue
+  with some international fonts, particularly
+  Chinese. (Thanks Trejkaz - trejkaz).
+  
+- Patch [ 2102369 ] BugFix in text-transform CSS 
+  property handling. (Thanks Anonymous).
+  
+- Patch [ 2149273 ] Javascript implementation of 
+  scrollTo(x,y), resizeTo(w,h). (Thanks Joerg 
+  Ruethschilling - jr8).
+
+- Patch [ 2208172 ] Eclipse Project Fix. 
+  (Thanks Vinay Agarwal - vinaykagarwal).
+
+- Patch [ 2183864 ] addHeader function added to 
+  HTMLTableRowElementImpl. It's actually
+  insertHeader. Non-standard method. (Thanks 
+  Anonymous).
+
+- Bug [ 2098924 ] font element ignores style 
+  attribute. 
+  
+- Fixed font size "em" units used with certain
+  elements like H1.
+
+- setTimeout() timers no longer keep a 
+  hard reference to Window instances.
+  
+- Fixed so that boolean attributes are true
+  whenever the attribute is present, with
+  any value.
+
+- Fixed so that attributes with a blank value
+  are not set to null.
+  
+- Fixed processing of innerText for SCRIPT,
+  STYLE, and H elements.
+
+- Added a 'text' property setter to OPTION.
+
+- Added Window.open() method that only needs
+  one parameter: the URL.
+  
+- Instead of setting default BODY padding,
+  we set default BODY margin now: 8px.
+  
+- Implemented align="center" in tables.

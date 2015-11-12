@@ -1,0 +1,76 @@
+Version 0.97.1
+--------------
+
+- Chaged so that POSTs with multipart encoding
+  set a Content-Length instead of using chunked
+  encoding by default. (This fixes Wikimedia 
+  article editing - Monobook skin).
+
+- Fixed issue with settings/bookmark persistence 
+  in JRE 1.6.x.
+
+- Fixed META refresh when the URL is relative.
+  
+- Changed manner in which absolute URLs are
+  created given a relative URL, when the relative
+  URL has slashes. This is to match behavior
+  of major browsers.
+  
+- Implemented Referer header and 
+  document.referrer property.
+    
+- Temporarily removed all Windows registry 
+  associations made by the installer.
+
+- Added Uninstaller to program group.
+
+- Added Lobo launch step to installer.
+
+- Fixed startup directory determination.
+
+- Fixed "arial black" and other fonts.
+  
+Cobra changes:
+
+- Rewrote float logic. This fixes a number
+  of layout problems.
+
+- Fixed scoping issue, e.g. location vs. 
+  this.location or window.location. (Thanks
+  to Marc Guillemot of the HtmlUnit project
+  for pointing out what the error was).
+
+- Fixed exception that occured when a table
+  element is not of type HTMLTableElementImpl,
+  such as DIVs with display:table. (This 
+  fixes Google search results page).
+  
+- Fixed so that absolutely positioned blocks
+  that are descendents of absolutely positioned
+  tables are shown.
+
+- Implemented Javascript Event objects.
+  
+- Fixed an issue with tables becoming wider than
+  they should, forcing a horizontal scrollbar.
+
+- Fixed "align" attribute of table element.
+
+- Added Javascript objects Select and Option.
+
+- Implemented frame.contentWindow.
+
+- Fixed NullPointerException trying to get
+  selectedIndex from a SELECT element before
+  it's rendered.
+
+- Fixed rendering updates triggered by setting
+  style.display and other properties. (Google
+  popup menu opens, albeit not in the usual
+  location).
+  
+Cobra changes:
+
+- Bug #1785701: Lobo Not Repainting correctly 
+  on style change (specifically, changes to
+  style.display).

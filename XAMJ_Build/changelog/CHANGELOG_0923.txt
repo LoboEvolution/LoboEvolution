@@ -1,0 +1,10 @@
+Version 0.92.3 (Development Snapshot):
+--------------------------------------
+
+- Implemented grids (new elements: grid, 
+  column, row and grid-item.)
+  
+- Added mnemonic and accelerator attributes
+  to menu-item and derived elements.
+
+- Deprecated tree-box in favor of tree.

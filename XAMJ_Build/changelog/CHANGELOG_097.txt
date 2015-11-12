@@ -1,0 +1,207 @@
+Version 0.97
+------------
+
+- The Warrior browser has been renamed 'Lobo' 
+  and significant refactoring of code has occurred.
+
+- An extensions (plugins) API has been implemented.
+  Look for the Extensions and Clientlets API 
+  Documentation and the HOWTO page.  
+
+- The following new browser features have been
+  implemented: Open cloned or blank window, 
+  back-to and forward-to lists, recent hosts
+  list, page services such as Wayback Machine,
+  a different type of bookmarks system (with
+  tags and search), a separate directory menu, 
+  a search engines feature, more preferences, 
+  a new an improved download dialog, etc.
+
+- The HTML engine and others are
+  part of what is called the "primary extension".
+
+- The XAMJ language effort is now inactive and 
+  all code related to it has been moved to
+  module XAMJ_Extension.
+  
+- ClientletContext is now a simplified inteface
+  that has a ClientletFrame, which contains much
+  of the prior functionality of ClientletContext.
+
+- Incremental rendering implemented in HTML 
+  clientlet.
+  
+- Implemented HTTP authentication dialog.
+
+- Implemented META http-equiv elements, including
+  charset and refresh.
+    
+- Implemented window title in the expected way.
+
+- Worked around cookie date format issue. That
+  allowed Amazon cart to be persist across runs.
+  
+- Fixed to allow cookie domains that don't start
+  with a dot.
+
+- Fixed user-agent string.
+
+- Implemented POST with encoding 
+  multipart/form-data.  
+  
+- Fixed redirect on POST.
+
+- Implemented cookie path.
+
+- Implemented global cookie handler that 
+  applies to java.net.URL in general.
+
+- Implemented new and improved download 
+  window.
+
+- Now processing Set-Cookie2 header.
+
+- Implemented Max-Age cookie attribute.
+
+- Replaced log4j with java.util.logging.
+ 
+Cobra changes:
+
+- Note: For consistency with other project
+  changes, all Cobra package names have been 
+  renamed to have a prefix of "org.lobobrowser." 
+  instead of "org.xamjwg." 
+
+- Note: Simplified FormInput so that values
+  are of either type text or type file. 
+
+- Note: No longer using HtmlParserContext
+  interface, which is deprecated. Cookie
+  methods used to implement document.cookie
+  property have been moved to UserAgentContext.
+  
+- Note: No longer using context interface
+  logging methods, for consistency. Logging
+  should be controlled via java.util.logging
+  only.
+  
+- Note: Deprecated HtmlRendererContext open()
+  method that takes a String and replaced
+  with one that takes a URL.
+  
+- Fixed issue with document background 
+  color, introduced in 0.96.5.
+
+- Fixed issue with weak references:
+  Javascript object could be garbage
+  collected even if its Java delegate
+  was not. This resulted in new instances
+  of Javascript proxies being created
+  unnecessarily.
+
+- Fixed so that CSS selectors with commas are
+  processed properly.
+  
+- Implemented isScriptingEnabled() in
+  UserAgentContext, including support for
+  NOSCRIPT element. (Feature requested by
+  a couple users).
+
+- Fixed so that NOSCRIPT element is 
+  processed during parsing, i.e. child
+  nodes are not created at all.
+  
+- Fixed IFRAME functionality.
+
+- Fixed absolute positioning implementation 
+  (e.g. absolute positioned in absolute or
+  fixed, but not in static).
+
+- Fixed so that vertical alignment of table
+  cell is not inherited by blocks.
+
+- Implemented input types "file", "button"
+  and "reset".
+  
+- Implemented BUTTON element.
+
+- Fixed so that input type "image" still
+  works when input name is missing.
+
+- Fixed values of checkbox and radio
+  inputs.
+
+- Fixed so that "on" is used when radio
+  or checkbox value attribute missing.
+  
+- Fixed so that document does not scroll
+  back up while it's rendered.
+  
+- Implemented JavaScript security 
+  controller. There is a new 
+  UserAgentContext method named 
+  getSecurityPolicy().
+  
+- Implemented UserAgentContext method
+  getScriptingOptimizationLevel().
+
+- Fixed rare IllegalStateException while
+  rendering Amazon.com.
+  
+- Implemented deprecated document.<name>
+  accessor.
+
+- Implemented Window onload and onunload 
+  event handlers.
+
+- Fixed getDefaultValue() for Number hint.
+
+- Fixed so that element's className property
+  never returns null.
+
+- Fixed so that setTimeout can be called with
+  both a function and string arguments.  
+
+- Fixed so that nested boxes aren't clipped
+  when painted.
+
+- Added reload() method to HtmlRendererContext
+  and implemented Location.reload() with it.
+  
+- Fixed Location.search to include the question
+  mark.
+  
+- Application of left/right margins/padding
+  to inline elements.
+
+- Fixed clicking through transparent boxes.
+ 
+- Tweaked SimpleHtmlRendererContext so that
+  file URLs are loaded ignoring the query
+  string of the URL.
+    
+- Implemented Node's children property.
+
+- Changed getTextContent() to return text
+  content of node and its descendents, as
+  specified by W3C.
+  
+- Implemented setting document.title as 
+  document is loaded.
+  
+- Fixed issue with font-size as percent.
+
+- Added HtmlPanel.createHtmlBlockPanel()
+  and createFrameSetPanel() so that it's
+  easier to extend the Cobra GUI.
+  
+- Added some support for style properties
+  in tables, including absolute positioning.
+
+- Fixed so that Text nodes created by
+  setTextContent and other methods have 
+  correct document and parent instances set.
+  
+- Tweaked CSS parser to allow properties
+  that start with a dash (given that
+  Wikipedia uses some).

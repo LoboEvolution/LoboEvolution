@@ -1,0 +1,63 @@
+Version 0.92:
+-------------
+
+- Added mechanism to link from HTML. It consists of
+  using a file with mime-type application/x-htln+xml 
+  with a root element which has an href attribute. 
+  (We will also be providing a mechanism thru our 
+  website to make this easier.) This is passed to 
+  Warrior as a file, which in turns opens the 
+  target URL. (A XAMJ document over http runs 
+  in a secure sandbox.)
+
+- Added archive element, which goes below head.
+  Each archive element specifies one JAR archive to 
+  load.
+
+- Now caching XAMJ and other content. Very noticeable
+  the second time you launch Warrior.
+  
+- Now reusing JVM if running. Very noticeable if
+  you launch Warrior or an app while another is 
+  running.
+
+- Added a standard I/O console, which may be accessed
+  from the View menu and also from the Program Group.
+  This works since the JVM is now shared.
+
+- Added on-paint event to box/vbox/hbox which can 
+  be used to paint on an AWT Graphics/Graphics2D object.
+
+- Added href attribute to all button elements,
+  including menu items.
+
+- Added property attribute to on-property-change 
+  element.
+
+- Added param element for use with do-navigate.
+
+- Added do-open action element to open content in a 
+  new window. Similar to do-navigate.
+
+- Added do-set action element to set element properties.
+  May be used in conjunction with on-property-change.
+
+- Fixed issues with .xamj file association title, icon 
+  and mime type.
+
+- Fixed getSelectedButton method in XButtonGroupElement.
+
+- Added markup style attributes paragraphBreakBefore and
+  lineBreakBefore. Fixed <h> tag accordingly.
+  
+- Added expression scriptlet of the form (%: expr %) which
+  is short for (%= ((XElement) expr).getElementValue() %).
+  Should be typically used with param and do-set.
+  
+- Changed default width/height of boxes to sum preferred
+  width/height of children.
+  
+- Fixed so it cancels ongoing requests when nagivating to
+  new page.
+  
+- Method XElement.getName changed to XElement.getNodeName.  

@@ -1,0 +1,33 @@
+Version 0.96
+------------
+
+- Added text selection capability. Ctrl-C copies
+  to clipboard.
+  
+- Added getSelectionText() and addSelectionListener()
+  methods to HtmlPanel.
+
+- Fixed bug in Javascript evaluation of instance
+  variables.  
+
+- Fixed bug in clicking of "top" links in frames.
+
+- Fixed animated images.
+
+- Fixed security so that HTTPS protocol works.
+
+- Fixed table height attribute issue.
+
+- Implemented warning dialog for SSL host name
+  mismatches.
+
+- Implemented image clientlet so Warrior can
+  display JPG, GIF and PNG URLs.
+  
+- Implemented Javascript Window.navigator object.
+
+- Fixed Javascript processing so that function 
+  names are allowed to be used as variables.
+
+- Deprecated some InputSourceImpl constructors to 
+  encourage use of those with URIs.

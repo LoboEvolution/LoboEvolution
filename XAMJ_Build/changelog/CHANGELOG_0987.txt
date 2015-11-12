@@ -1,0 +1,101 @@
+Version 0.98.7
+--------------
+- Added PDF suppurt
+- Added Canvas support
+- Added Image support
+- Added SVG image support
+- Added color "navy"
+- Added right click context menu
+- Added image right button even
+- Added text cursor over words
+- Added hand cursor over href
+- Added Action "Find" in Page Source and Console
+- Added table attributes width and height
+- Added input attribute size
+- Added color to blue text selection
+- Added Cookies properties domain, expires, path, secure, version, maxage
+
+- Added javascript event:  
+	- CompositionEvent
+	- CustomEvent
+	- Event
+	- FocusEvent
+	- KeyboardEvent
+	- MouseEvent
+	- MutationEvent
+	- MutationNameEvent
+	- ProgressEvent
+	- TextEven
+	- UIEvent
+	- WheelEvent
+	- TextEvent 
+
+- Added Document javascript methods: 
+	- querySelector
+	- querySelectorAll
+	- queryCommandSupported 
+	- queryCommandEnabled
+	- createEvent
+	- AddedEventListener
+	- removeEventListener
+	- readystate
+ 
+- Added DocumentFragment javascript methods: 
+	- querySelector
+	- querySelectorAll
+
+- Added Element javascript methods:
+	- querySelector
+	- querySelectorAll
+	- style
+	- AddedEventListener 
+	- removeEventListener
+
+- Added Window javascript methods:
+	- ondblclick
+	- onclick
+	- onmouseup
+	- onmousedown
+	- onkeypress
+	- onkeyup
+	- onkeydown
+	- AddedEventListener
+	- removeEventListener
+	- getComputedStyle
+ 
+- Added Input and textarea javascript methods:
+	- onKeyPress
+	- onKeyUp
+	- onKeyDown
+ 
+- Added Console javascript methods:
+	- log
+	- debug
+	- info
+	- warn
+	- error
+	- time
+	- timeEnd
+
+- Fixed default div border size and color
+- Fixed border color style 
+- Fixed body color style
+- Fixed body background
+- Fixed href="javascript:void(0)"
+- Fixed background-image: url()
+- Fixed setparameter with value null 
+- Fixed window open
+- Fixed size pixel definition
+- Fixed size definition without character "px"
+- Fixed XMLHttpRequest/HttpRequest
+- Fixed Https
+- Fixed Hr rendering
+- Fixed Button rendering
+
+ LIBRARIES:
+ 
+- Added Batik 1.8
+- Added PDFRender
+- Update CSSParser to 0.9.16
+- Update Mozilla Rhino to 1.7.7
+- Remove javafx library.

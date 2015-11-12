@@ -1,0 +1,44 @@
+Version 0.97.2
+--------------
+
+- Added LoggingPermission to security policy.
+
+- Fixed issue with relative URLs.
+
+- Implemented BASE tag.
+
+- Changed so that floats are not propagated up
+  through elements with relative positioning.
+  (Wikipedia login form now shows, and it also
+  fixes some Wikipedia article images).
+
+- Fixed positioning of some left floats. 
+  (Wikipedia main page was not showing 
+  in 0.97.1).
+
+- Fixed access and functioning of some HTML 
+  collections, such as document.forms. (Fixes
+  HotBot search form).
+  
+- Fixed exception due to submit inputs with 
+  no name.
+  
+- Added Connection Settings checkbox to
+  disable proxy for local addresses.  
+
+- Added support for -1 index in table.insertRow.
+
+- Implemented row.insertCell and deleteCell.
+
+- Fixed cloneNode.
+
+- Allowed getting contentWindow and 
+  contentDocument from frame before it
+  is rendered, but they are null then.
+  
+- Allowed using "file" URLs with query
+  strings in browser.
+  
+- Fixed so that browser frame does not
+  have to implement BrowserFrame 
+  necessarily.

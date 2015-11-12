@@ -1,0 +1,20 @@
+Version 0.95.4 (Cobra only)
+---------------------------
+
+- Fixed @import relative URL context.
+
+- Fixed split of CSS property multi-values (e.g. background
+  attribute with rgb(...) color specs).
+
+- Fixed DIV width and height parsing.
+
+- Fixed font-size pc, cm and mm units.
+
+- Fixed so that document.open() does not close current web 
+  or file stream. (This allows blogger.com to render).
+  
+- Fixed DocumentBuilderImpl so that it allows Readers and not
+  just InputStreams from InputSource.
+ 
+- Fixed DocumentBuilderImpl so that charset from InputSource
+  can be null.

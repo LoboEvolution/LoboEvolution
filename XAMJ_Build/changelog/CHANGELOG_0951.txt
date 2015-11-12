@@ -1,0 +1,24 @@
+Version 0.95.1
+--------------
+
+- Implemented DIV and a most of the CSS2 box model.
+
+- Improved support for font-size property.
+
+- Fixed an issue with special characters in cookie values.
+
+- Fixed support for CSS selectors and CSS cascading.
+
+- Implemented some rendering performance optimizations.
+
+- Added support for H1... H6, CITE, TT, and CODE.
+
+- Fixed issue with Javascript security.
+
+- Fixed issues with input value attribute and initial text area text.
+
+- Fixed issue with ostg.com crashing the browser.
+
+- Fixed issue with NullPointerException when input has no name.
+
+- Fixed link URLs with &amp; and other entitiy references.

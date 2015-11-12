@@ -1,0 +1,31 @@
+Version 0.96.4 (Cobra only)
+---------------------------
+
+- Note: Added UserAgentContext interface which now
+  contains some of the methods previously in 
+  HtmlParserContext. Note that createHttpRequest()
+  has moved to UserAgentContext.
+
+- Fixed a nested table sizing bug.
+
+- Fixed a background image repeat bug.
+
+- Fixed processing of "font" CSS property.
+
+- Fixed a bug with text background color in table
+  cells.
+  
+- Fixed "bgcolor" attribute of BODY tag.
+
+- Implemented definition lists (DL, DT, DD).
+
+- Implemented BLOCKQUOTE.
+
+- Made RList and RListItem subclasses of RBlock.
+  As a result, borders, padding and so on now work
+  with lists.
+  
+- Implemented start attribute of OL, and added
+  support for more type attribute values. 
+  Implemented list-style-type and list-type 
+  properties to a limited extent.

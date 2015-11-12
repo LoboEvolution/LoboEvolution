@@ -1,0 +1,114 @@
+Version 0.98.3
+--------------
+  
+- Fixed retrieval of serialiazable LRUCache
+  affecting HTTP authentication.
+  
+- Bug [ 2034543 ] Incorrect Operating System 
+  User Agent.
+  
+- Bug [ 1980845 ] Lobo apparently duplicates 
+  cookies. Lobo was sending both cached
+  (transient) and persistent cookies with
+  the same name.
+
+- Bug [ 2051468 ] Greek characters 
+  recognition problem in www.yahoo.gr.
+  The charset provided with a 
+  Content-Type header must take
+  precedence over HTTP-EQUIV.
+
+- Added support for "See Other" 303 redirects.
+
+Cobra changes:
+
+- Added protected currentConnection field to
+  SimpleHtmlRendererContext. 
+  
+- Fixed so that elements can have both ID and
+  name attributes and both can be looked up by
+  ID.
+    
+- Patch [ 2003933 ] fix for the 1805733.
+  Implements SUB and SUP. Patch contributed
+  by Andrey Chorniy.
+
+- Patch [ 1998778 ] Fix NullPointer in 
+  TableMatrix.getWidthLength. Patch contributed
+  by anonymous user. 
+
+- Fixed so that LINK elements are considered
+  active stylesheets only if rel="stylesheet".
+  
+- Bug [ 2038801 ] Alternate style sheets 
+  and style sheet switching do not work.
+
+- Bug [ 2022584 ] Problem with image positioning.
+  ROWSPAN cannot go beyond last row.
+    
+- Bug [ 2009105 ] CSS List Rendering Issues.
+  No processing of list-style: none.
+  
+- Bug [ 1911217 ] document.body.offsetWidth 
+  not implemented. Changed it so it uses 
+  renderer dimensions. It still requires
+  rendering to have taken place, so it doesn't
+  work during parsing. 
+  
+- Bug [ 1911233 ] list item rendering.
+  Fixed so OL counter starts at 1. 
+  
+- Bug [ 1911245 ] meu captions not displayed.
+  Fixed display of elements with both
+  float and relative properties.
+  
+- Fixed so that image aspect ratio is 
+  maintained when either width or height
+  properties/attributes are not specified. 
+
+- [ 1928758 ] Element IDs need to be 
+  Javascript variables in context.
+
+- Allowing Window.length property to be
+  set. 
+
+- Changed parser to treat anchor end 
+  elements as optional, for consistency
+  with behavior of other browsers.
+  (Requested by user panzer_kavalier).
+    
+- Bug [ 1939192 ] Handling of < and > 
+  characters.    
+  
+- Bug [ 1994562 ] Screen does not work 
+  in headless mode. Changed Screen JS
+  object so it doesn't throw exceptions
+  in headless mode.  
+  
+- [ 2000696 ] Refresh tag error. META
+  refresh was reloading even after you
+  navigate away from page.   
+  
+- [ 2004283 ] getInnerHTML. Inner HTML
+  was always encoding special characters,
+  even when that shouldn't be done.   
+  
+- [ 2047122 ] Implement display:none 
+  for TR.
+
+- Moved getInnerText() up to NodeImpl
+  level.
+
+- Bug [ 2074376 ] OL list numbers not 
+  affected by CSS color.
+
+CssParser changes:
+
+- Bug [ 1935452 ] Incorrect error handling 
+  of star-property hack. Fixed so that 
+  erroneous tokens in a style rule declaration 
+  cause the declaration to be skipped, instead 
+  of the entire block.
+  
+- Catching hex color number format exceptions. 
+  See bug #2075667.

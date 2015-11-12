@@ -1,0 +1,42 @@
+Version 0.97.3
+--------------
+
+- Fixed missing security permissions causing 
+  JFileChooser to throw an exception in
+  Java 6.
+  
+- Fixed so that window bounds are not
+  persisted if the window got its bounds 
+  from an open() call.
+  
+Cobra changes:
+
+- Implemented onmouseover and onmouseout.
+
+- Implemented HtmlRendererContext methods
+  onMouseOver and onMouseOut to receive
+  corresponding callbacks.
+  
+- Implemented support for pseudo-elements.
+  In particular, implemented :hover.
+
+- Implemented oncontextmenu and corresponding
+  HtmlRendererContext method.
+
+- Bug #1785701: Lobo Not Repainting correctly 
+  on style change (particularly, change
+  to style.display.)
+
+- RFE #1803819: HtmlRendrerContext.navigate: 
+  receive original raw url. (Added 
+  HtmlRendererContext.linkClicked method
+  that gets passed the HTML anchor element.)
+
+- Implemented dashed border style.
+
+- Fixed so that indexing methods such as
+  item() are visible in Javascript objects,
+  primarily collections.  
+
+- Fixed so that NOWRAP takes no effect if
+  table cell has an absolute width declared.

@@ -1,0 +1,241 @@
+Version 0.98
+------------
+
+- Note: NavigatorWindow.getAwtFrame() method
+  has been replaced with getAwtWindow(). 
+  Clientletcontext.getNavigatorFrame() is now
+  getNavigatorFrame(). AbstractClientletContent
+  changed a bit. Recommended API initialization
+  has changed. There are other changes like 
+  this aimed to improve the Lobo APIs.
+
+- Implemented loading of Java and JavaFX
+  source code in the browser. They are
+  rendered much like HTML is.
+
+- A new project logo was contributed by
+  Oswaldo Danta. 
+
+- Fixed some erroneous security restrictions 
+  disallowing XMLHttpRequest. It also requires 
+  send() now.
+
+- Fixed alert and prompt dialogs so they
+  don't show an "Applet Window" status message
+  due to security restrictions.
+
+- Added ClientletAccess class, which provides
+  a utility method to obtain the ClientletContext
+  of the current thread.
+
+- Fixed BrowserPanel so that parent window
+  title is not set automatically when the
+  current document changes. There is a
+  new getDocumentTitle() method. If there's
+  a need to set the window title, this
+  can be triggered off of a navigation event.
+  
+- Implemented transient (main memory) caching, 
+  with APIs to add cache decoration objects, 
+  both transient and persistent. In general,
+  caching is more robust and efficient.
+  
+- Implemented addPrivilegedPermission() method
+  in PlatformInit so that permissions otherwise
+  missing from the security policy installed
+  by init() for application code can be added.
+  
+- Added warning for case when no extensions
+  are found. This is a setup error likely
+  encountered by Lobo API users.  
+  
+- Fixed a deadlock that could occur after 
+  opening the Console window.
+  
+- Added BrowserPanel.setCloseWindowOnDispose()
+  that can be used to control whether the 
+  parent window is closed when the BrowserPanel
+  is disposed by a File/Exit action.
+
+- Fixed so that clicking in browser launcher
+  icon brings new window to front.
+
+- Fixed copy/paste in error page.
+
+- Upgraded installer to IzPack 3.11.0.
+
+Cobra changes:
+
+- Note: SimpleHttpRequest.openSync() has
+  been removed, so it can no longer be
+  overridden. Please override sendSync()
+  instead.
+  
+- Note: Added structureInvalidated() method
+  to DocumentNotificationListener.
+  
+- Note: Removed unused listNesting parameter
+  from HtmlBlockPanel constructors.
+
+- Fixed issue with hover effects (and
+  other relayout triggers) causing inputs
+  to lose focus.
+
+- Fixed XMLHttpRequest to support send()
+  method and to properly report readyState
+  changes. The send() method now needs
+  to be called after open(), which is
+  how XMLHttpRequest is normally used
+  in Mozilla browsers.
+
+- Bug #1877923: HTMLSelectElementImpl 
+  not calling super implementation. 
+  Fixed this along with other selection
+  issues in the SELECT element.
+
+- Bug #1877254: visibility not supported.
+  The CSS2 visibility property has been
+  implemented. 
+
+- RFE #1899831: Anchors support. 
+  URL Refs/Anchors have been implemented.
+
+- Optimized HTML collections, which is
+  particularly relevant to those of 
+  SELECT options.
+
+- Reimplemented the way generic CSS properties
+  such as padding, margin, border, background
+  and font are handled. Setting them 
+  causes sub-properties to get automatically
+  set. (User guenze suggested this, and this
+  is how CSS properties work in IE and Mozilla.)
+
+- As a side-effect of the above, CSS properties
+  border-top, border-left, border-bottom and
+  border-right are now supported.
+  
+- Patch #1908245: Support for ProcessingInstructions 
+  in Cobra. (Patch contributed by user vtec.)
+
+- Fixed so that pseudo-elements ('hover' only
+  at the moment) can be placed in any simple
+  selector of a complex selector, e.g.
+  div:hover span a { text-decoration: underline; }
+
+- Fixed scrolling back to top on hover that
+  occurred with some pages (wikipedia.org).
+
+- Implemented scrolling methods in HtmlPanel,
+  HtmlBlockPanel and SimpleHtmlRendererContext.
+
+- Implemented method to retrieve the bounds
+  of a DOM node from HtmlBlockPanel.
+
+- Fixed so that anchors without an href
+  attribute don't show as hyperlinks.
+  
+- Implemented window.getComputedStyle() method, 
+  equivalent to Mozilla's. Note that elements
+  still support the IE counterpart property, 
+  currentStyle.
+
+- Implemented document.defaultView property.
+
+- Changed submitted TEXTAREA text values so
+  they have lines ending in CR+LF. (SourceForge
+  is particular about it.)
+
+- Patch #1867969: ColorFactory missing 
+  colornames. Added even more color 
+  names. (Patch addendum contributed by 
+  user guenze.)
+
+- Changed to treat normally inline elements
+  as blocks if they have an absolute or
+  fixed position, or float positioning. 
+  (This fixes SourceForge logo.)
+
+- Fixed text-indent line width issue.
+
+- Fixed issue with hover failing to trigger
+  in vertically aligned table cells. (Cause
+  of the bug brought to our attention by
+  user vtec.)
+
+- Bug #1875130: HeadlessException in 
+  HtmlValues. (Fixed as suggested in
+  bug report.)
+  
+- Bug #1870876: HeadlessException in 
+  HtmlBlockPanel. (Fixed as suggested
+  in bug report.) 
+  
+- Implemented isNavigationAsynchronous()
+  method in SimpleHtmlRendererContext,
+  so that there's a way to make navigation
+  synchronous.
+
+- Fixed SimpleHtmlRendererContext.submitForm()
+  so that lowercase request methods work.
+
+- Fixed SimpleHtmlRendererContext.submitForm()
+  so that GET requests with form inputs 
+  change the request URL as needed.
+
+- Added SimpleHtmlRendererContext.createDocument()
+  so that it can be overriden to provide a 
+  specialized document on navigation or 
+  form submission.
+
+- Made HTMLDocumentImpl.loadImage() method
+  protected. Allows providing an alternate
+  mechanism to load images by extending
+  the document class.
+
+- Moved getInnerHTML to the NodeImpl level.
+  This means the method may be invoked on
+  a HTMLDocumentImpl instance to get the
+  source of the entire document.
+
+- Fixed an issue with the setting of an
+  input element's value before the 
+  GUI component is created.
+
+- Fixed XMLHttpRequest to accept relative
+  URLs.
+
+- Made XMLHttpRequest.onreadystatechange
+  handler execute in the request thread 
+  as opposed to the GUI thread, so that
+  the readyState value is consistent 
+  with the state of the request.
+
+- Added vendor and product properties to
+  navigator object.
+
+- Better determination of charset default 
+  in SimpleHttpRequest and 
+  SimpleHtmlRendererContext.
+
+CssParser changes:
+
+- Bug #1870765: does not read stylesheet 
+  or maybe dynamic.
+  Fixes StringIndexOutOfBoundsException
+  in SACParserTokenManager.trimUrl.
+
+- Fixed so that background property value 
+  with a hex color followed by a URI works.
+    
+- Fixed so that MS values like 
+  'alpha(opacity=50)' don't halt the
+  parser.
+  
+- Allowing property names that start with
+  an underscore.
+
+- Fixed so that double-slash at the end of a 
+  CSS document doesn't cause parser to fail.
+  (SourceForge has apparently been testing
+  double-slashes at the end of CSS documents.)

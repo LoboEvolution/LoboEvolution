@@ -1,0 +1,39 @@
+Version 0.96.3
+--------------
+
+- Implemented IFRAME (untested), SELECT, 
+  OPTION, BIG, SMALL, FONT and FONTBASE
+  elements.
+
+- Implemented Location Javascript object.
+
+- Implemented some HtmlRendererContext
+  methods so that frame navigation works.
+  JavaDoc FRAMESETs are now functional in
+  the Cobra test tool.
+  
+- Fixed incremental rendering bug 
+  introduced in 0.96.2: Tables, FRAMESETs 
+  and aligned unsized images could 
+  be partially rendered or not rendered
+  depending on timing.
+  
+- Optimized background image painting. 
+  A background image with repeat was
+  enough to make the renderer do a lot
+  of paint work on every repaint (and
+  appear to "hang") as other images were 
+  loaded.
+
+- Fixed some parser bugs.
+
+- Fixed rendering of vertical values 
+  of image "align" attribute.
+  
+- Fixed font caching performance bug.
+
+- Implemented means to register custom
+  fonts (in class not currently in the
+  API docs). Look for package org.xamjwg.gui,
+  class FontFactory (a singleton), method
+  registerFont. (UNTESTED)

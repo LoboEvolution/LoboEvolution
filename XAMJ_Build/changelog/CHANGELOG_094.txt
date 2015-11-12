@@ -1,0 +1,17 @@
+Version 0.94:
+-------------
+
+- Did a significant refactoring of the API
+  which involved decoupling clientlets from
+  XAMJ. The main change is that XAMJ documents
+  now have access to a local 'context' variable
+  which contains members previously available
+  via the 'document' variable. This can break
+  some existing documents.
+  
+- Added method in platform API to add clientlet
+  selectors (essentially new content type 
+  handlers.)
+  
+- Added a way to set clientlet content using a
+  lightweight AWT or Swing component.

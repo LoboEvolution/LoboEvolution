@@ -1,0 +1,47 @@
+Version 0.91:
+-------------
+
+- Windows: Now adding .xamj file mapping during installation of
+  Warrior. This allows Windows users to double-click .xamj files
+  directly (works just as if it were an interpreted language,
+  even though it's compiled -- we just need to add caching
+  to make it fast.) Note, however, that clicking on .xamj links
+  in Internet Explorer causes the .xamj file to be downloaded by IE,
+  then passed to Warrior as a file, which will break relative URLs
+  contained in the .xamj file. We might have to add another kind of
+  file, such as .xamjlnk that contains the actual .xamj URL,
+  to allow effective linking from IE and other browsers. If
+  anyone knows a better way to achieve this, please email
+  info AT xamjwg DOT org.
+  
+- Changed mime-type to application/x-xamj+xml.
+
+- Fixed issue with split-box orientation.
+
+- Fixed issue with tree-node sizing after icon added.
+
+- Fixed issue with on-demand content loading not repainting sometimes.
+	
+- Added support for widget elements radio-button, check-box,
+  toggle-button, radio-button-menu-item, check-box-menu-item,
+  and button-group.
+
+- Added support for document-disposition element below head,
+  whose text value may be frame, window, or auto. The default is 
+  frame, which causes the document to be rendered in the Warrior
+  frame. Use window for standalone applications. The auto
+  value means that it depends on how it's invoked.
+
+- Warrior now runs in Mac OS X after fixing compiler bootclasspath.
+  (Thanks to Carlos Solorzano for reporting the issue and helping test
+  changes.)
+	
+- Added vbox and hbox abbreviations, like XUL.
+
+- Added validation of element parent types.
+
+- Changed tab attribute title to text.
+
+- Fixed issue with on-click event in nested markup elements.
+
+- Fixed issue with output stream not getting closed in download dialog.

@@ -1,0 +1,64 @@
+Version 0.96.2 
+--------------
+
+- Implemented XMLHttpRequest class for use
+  in Javascript. (This is what is often referred
+  to as "AJAX"). Currently allows requests
+  on any host, but note that this will certainly
+  be restricted in future versions.
+
+- Implemented incremental rendering.
+  The test tool now uses a simple incremental
+  rendering routine as part of the 
+  navigate() method.
+
+- Implemented "position" style property.
+  Supports absolute, relative and static.
+  (Absolute DIV in absolute DIV works;
+  rules need to be complied with in other 
+  scenarios).
+  
+- Implemented "z-index" style property.
+  (UNTESTED)
+    
+- Implemented "overflow" style property. 
+  It supports values scroll, auto, hide
+  and visible.
+  
+- Replaced top-level JScrollPane with a
+  block that has a default property similar
+  to "overflow: auto". This in turn fixed
+  some problems with JScrollPane layout,
+  such as relayout after resizing.
+  
+- Implemented "float" style property. Works 
+  with DIVs, images, and elements that 
+  support the "display" property.
+
+- Added means to allow "plugging in" a handler
+  for OBJECT, EMBED and APPLET tags. Look
+  for HtmlRendererContext.getHtmlObject().
+ 
+- Fixed attributes without an explicit
+  value (such as "checked" in radio buttons).
+
+- Implemented "screen" variable of Window.
+  
+- Changed Window.setTimeout() functionality so 
+  timeout events are delivered in GUI thread.
+  (UNTESTED)
+  
+- Fixed issue with Javascript objects wrapping
+  Java objects using weak references.
+  
+- "Fixed" so that TDs that don't have parent
+  TRs are also rendered.
+
+- Parser is now aware of SPACER elements, which
+  allows Yahoo! home page to render (but the
+  page Yahoo! gives Cobra is not the regular
+  home page).
+
+- Did some general refactoring of rendering
+  code to make it more robust. Fixed many
+  known and unknown layout bugs in the process.

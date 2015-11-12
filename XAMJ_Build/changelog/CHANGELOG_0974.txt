@@ -1,0 +1,62 @@
+Version 0.97.4
+--------------
+
+- Changed to allow META http-equiv elements
+  to be placed in HTML tag and not just the
+  HEAD tag.
+
+- Optimized checking of META http-equiv
+  so that scripts are not processed twice.
+
+- Changed cookie date formats to allow
+  2-digit years. (Allows permanent login
+  at FreshMeat.)
+
+Cobra changes:
+
+- NOTE: Moved isMedia() method to 
+  UserAgentContext so it can be used 
+  by parser-only code.
+
+- Fixed so that layout revalidation does
+  not cause inputs to be cleared.
+
+- Optimized so that hovering over certain
+  elements that do not have a hover
+  style declaration does not cause a layout
+  revalidation.  
+
+- Fixed so that some styles of images and
+  inputs are functional, e.g. border and
+  margins.
+  
+- Implemented image border, hspace and vspace
+  attributes.
+
+- Fixed Javascript scoping issue that was
+  noticed when BODY tag with an onload
+  handler was written using document.write().
+
+- Fixed relative URLs in CSS.
+
+- Implemented CSS @media rules.
+
+- RFE #1816542: Add Proxy Method. Added
+  protected getProxy() method to
+  SimpleUserAgentContext and 
+  SimpleHtmlRendererContext.
+
+- Fixed parser so that comments can end
+  with more than two dashes, e.g. --->.
+
+- Fixed so that blanks at the end of a
+  line don't expand its width. This addresses
+  some tables that force a horizontal 
+  scrollbar.
+  
+- Fixed positioning of list bullets.
+    
+CssParser changes:
+
+- Reversed order of lookup of property
+  values in CSS declarations.

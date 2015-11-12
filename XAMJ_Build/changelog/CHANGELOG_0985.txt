@@ -1,0 +1,40 @@
+Version 0.98.5
+--------------
+
+Fixed:
+- Create two separate objects using HTMLElementBuilder.Strong() for "B" and "STRONG"
+- Fixed the RBlock height computation resulting in wrong block display
+- Fixed an issue when mouse move events are propagated in the document tree.
+- Fixed background:none did not override background-color and background-image
+- Fixed scrollTo(node) scrolled to the top of the bounding box including margins.
+- Fixed text color attribute on body tag
+- Fixed exception when a color has an invalid value
+- Fixed problem with image path 
+- Fixed auto vertical overflow
+- Fixed mouse wheel for overflow scroll
+- Fixed encoding url
+- Fixed double alert when press onclick
+- Fixed incorrect parse html when locale is not-English 
+- Fixed font/text-antialiasing
+- Fixed error when the css file contains unrecognized characters
+- Fixed url BASE64 connection
+
+
+NEW:
+- Added setRequestHeader. Jquery defaults to passing specific request headers and sometimes needs to be overridden.
+- Added "Save As"
+- Added viewer for file .txt,.xml,.svg,.rss,.xml,.css,.js
+- Added support HTML tags DFN, VAR, SAMP, KBD, S
+- Added caption attribute. 
+- Added caption-side and text-align belongs to caption attribute.
+- Added support html style attribute
+- Added new parser project, the new project includes the code of cssparser and Mozilla rhino and HtmlUnit-rhino-fork
+
+UPDATE THIRD-PARTY LIBRARIES:
+- Java 8.
+- Apache-ant-1.9.4
+- Css Parser 0.9.14
+- Mozilla Rhino 1.7R4
+- HtmlUnit-rhino-fork
+- Sac 1.3.1
+- IzPack 4.3.4

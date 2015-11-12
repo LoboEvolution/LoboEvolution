@@ -1,0 +1,4 @@
+Version 0.95.2
+--------------
+
+- Fixed security error launching local XAMJ files.

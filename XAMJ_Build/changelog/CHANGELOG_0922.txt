@@ -1,0 +1,28 @@
+Version 0.92.2 (Development Snapshot):
+--------------------------------------
+
+- Connection/proxy settings have been
+  implemented. (Username/password must
+  be set in the preferences dialog, because
+  an interactive prompt has not been 
+  implemented yet.)
+
+- Added clientlet for text/plain. Using
+  it for text/xml too for now.
+  
+- Improved attribute assignment generation
+  by taking advantage of auto-boxing.
+
+- Fixed bad window flickering issue introduced 
+  in 0.92.1.
+  
+- Fixed another widget hierarchy
+  enabling/disabling issue.
+  
+- Fixed so that URL of internal error page
+  isn't shown to user (except for malformed
+  URL errors.)
+
+- Throwing MalformedURLException for URLs with
+  blanks (Java doesn't do that by itself and
+  servers give 505.)

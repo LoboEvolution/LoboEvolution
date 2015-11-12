@@ -1,0 +1,4 @@
+Version 0.94.1:
+---------------
+
+- Fixed security exception on DocumentBuilder.
