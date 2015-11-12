@@ -35,7 +35,7 @@ import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.domfilter.CaptionFilter;
 import org.lobobrowser.html.domfilter.ColumnsFilter;
-import org.lobobrowser.html.domfilter.NodeFilter;
+import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCaptionElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
@@ -55,12 +55,6 @@ import org.lobobrowser.w3c.html.HTMLTableRowElement;
  * The Class TableMatrix.
  */
 public class TableMatrix {
-
-	/** The Constant COLUMNS_FILTER. */
-	private static final NodeFilter COLUMNS_FILTER = new ColumnsFilter();
-
-	/** The Constant CAPTION_FILTER. */
-	private static final NodeFilter CAPTION_FILTER = new CaptionFilter();
 
 	/** The rows. */
 	private final ArrayList<ArrayList<VirtualCell>> ROWS = new ArrayList<ArrayList<VirtualCell>>();
@@ -396,9 +390,9 @@ public class TableMatrix {
 		ArrayList<HTMLTableRowElementImpl> rowElements = this.ROW_ELEMENTS;
 		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
 		Map<HTMLTableRowElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<HTMLTableRowElementImpl, ArrayList<VirtualCell>>(2);
-		ArrayList<?> cellList = te.getDescendents(COLUMNS_FILTER, false);
+		ArrayList<DOMNodeImpl> cellList = te.getDescendents( new ColumnsFilter(), false);
 		ArrayList<VirtualCell> currentNullRow = null;
-		Iterator<?> ci = cellList.iterator();
+		Iterator<DOMNodeImpl> ci = cellList.iterator();
 		while (ci.hasNext()) {
 			HTMLTableCellElementImpl columnNode = (HTMLTableCellElementImpl) ci.next();
 			HTMLTableRowElementImpl rowElement = this.getParentRow(columnNode);
@@ -444,7 +438,7 @@ public class TableMatrix {
 			allCells.add(ac);
 		}
 
-		ArrayList<?> captionList = te.getDescendents(CAPTION_FILTER, false);
+		ArrayList<DOMNodeImpl> captionList = te.getDescendents(new CaptionFilter(), false);
 		if (captionList.size() > 0) {
 			HTMLTableCaptionElementImpl capt = (HTMLTableCaptionElementImpl) captionList.get(0);
 			this.captionElement = capt;
@@ -463,7 +457,7 @@ public class TableMatrix {
 		ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
 		int numRows = rows.size();
 		for (int r = 0; r < numRows; r++) {
-			ArrayList<?> row = rows.get(r);
+			ArrayList<VirtualCell> row = rows.get(r);
 			int numCols = row.size();
 			for (int c = 0; c < numCols; c++) {
 				VirtualCell vc = (VirtualCell) row.get(c);
@@ -515,7 +509,7 @@ public class TableMatrix {
 
 		// Adjust row and column of virtual cells
 		for (int r = 0; r < numRows; r++) {
-			ArrayList<?> row = rows.get(r);
+			ArrayList<VirtualCell> row = rows.get(r);
 			int numCols = row.size();
 			for (int c = 0; c < numCols; c++) {
 				VirtualCell vc = (VirtualCell) row.get(c);
@@ -539,7 +533,7 @@ public class TableMatrix {
 		int numCols = 0;
 		ArrayList<HTMLTableRowElementImpl> rowElements = this.ROW_ELEMENTS;
 		for (int i = 0; i < numRows; i++) {
-			ArrayList<?> row = rows.get(i);
+			ArrayList<VirtualCell> row = rows.get(i);
 			int rs = row.size();
 			if (rs > numCols) {
 				numCols = rs;
@@ -589,7 +583,7 @@ public class TableMatrix {
 
 			// Cells with colspan==1 first.
 			for (int y = 0; y < numRows; y++) {
-				ArrayList<?> row = rows.get(y);
+				ArrayList<VirtualCell> row = rows.get(y);
 				VirtualCell vc;
 				try {
 					vc = (VirtualCell) row.get(i);
@@ -609,7 +603,7 @@ public class TableMatrix {
 			// Now cells with colspan>1.
 			if (bestWidthLength == null) {
 				for (int y = 0; y < numRows; y++) {
-					ArrayList<?> row = rows.get(y);
+					ArrayList<VirtualCell> row = rows.get(y);
 					VirtualCell vc;
 					try {
 						vc = (VirtualCell) row.get(i);
@@ -830,7 +824,7 @@ public class TableMatrix {
 		colSize.setLayoutSize(0);
 		for (int row = 0; row < numRows;) {
 			// SizeInfo rowSize = rowSizes[row];
-			ArrayList<?> columns = rows.get(row);
+			ArrayList<VirtualCell> columns = rows.get(row);
 			VirtualCell vc = null;
 			try {
 				vc = (VirtualCell) columns.get(col);

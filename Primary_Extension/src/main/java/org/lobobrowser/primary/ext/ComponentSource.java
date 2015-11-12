@@ -405,7 +405,6 @@ public class ComponentSource implements NavigatorWindowListener {
 		JButton button = new JButton();
 		button.setAction(new StopAction(this, window));
 		button.setIcon(IconFactory.getInstance().getIcon("/org/lobobrowser/images/stop.png"));
-		button.setPreferredSize(new Dimension(18, 18));
 		button.setToolTipText("Stop");
 		return button;
 	}
