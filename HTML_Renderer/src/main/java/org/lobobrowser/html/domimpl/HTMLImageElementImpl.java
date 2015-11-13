@@ -34,6 +34,7 @@ import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.renderstate.ImageRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLImageElement;
 import org.mozilla.javascript.Function;
 
@@ -114,7 +115,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 		UINode r = this.uiNode;
 
 		if ((height != null) && (height.length() > 0)) {
-			return new Integer(height).intValue();
+			return HtmlValues.getPixelSize(height, null, 1); 
 		}
 
 		return r == null ? 0 : r.getBounds().height;
@@ -200,7 +201,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 		UINode r = this.uiNode;
 
 		if ((width != null) && (width.length() > 0)) {
-			return new Integer(width).intValue();
+			return HtmlValues.getPixelSize(width, null, 1); 
 		}
 
 		return r == null ? 0 : r.getBounds().width;

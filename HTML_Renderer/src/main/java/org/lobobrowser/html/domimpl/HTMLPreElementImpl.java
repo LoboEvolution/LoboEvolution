@@ -26,6 +26,7 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.renderstate.PreRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLPreElement;
 
 /**
@@ -55,7 +56,7 @@ HTMLPreElement {
             return 0;
         }
         try {
-            return Integer.parseInt(widthText);
+            return HtmlValues.getPixelSize(widthText, null, 1);
         } catch (NumberFormatException nfe) {
             return 0;
         }

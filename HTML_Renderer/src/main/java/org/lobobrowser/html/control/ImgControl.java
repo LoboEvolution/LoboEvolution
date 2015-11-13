@@ -172,6 +172,8 @@ public class ImgControl extends BaseControl implements ImageListener {
 				logger.log(Level.WARNING, "ImgControl(): Image not found "+modelNode.getSrc());
 			} catch (TranscoderException | IOException e1) {
 				logger.log(Level.WARNING, e1.getMessage());
+			} catch (Exception e1) {
+				logger.log(Level.WARNING, "ImgControl(): Image not found "+modelNode.getSrc());
 			}
 		}
 

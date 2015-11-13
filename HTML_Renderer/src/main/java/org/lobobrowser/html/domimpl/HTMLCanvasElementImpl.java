@@ -155,7 +155,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 			return 0;
 		}
 		try {
-			return Integer.parseInt(widthText);
+			return HtmlValues.getPixelSize(widthText, null, 1);
 		} catch (NumberFormatException nfe) {
 			return 0;
 		}
@@ -173,7 +173,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 			return 0;
 		}
 		try {
-			return Integer.parseInt(heightText);
+			return HtmlValues.getPixelSize(heightText, null, 1);
 		} catch (NumberFormatException nfe) {
 			return 0;
 		}
