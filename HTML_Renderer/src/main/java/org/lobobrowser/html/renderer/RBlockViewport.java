@@ -49,6 +49,7 @@ import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.control.HrControl;
 import org.lobobrowser.html.control.RUIControl;
 import org.lobobrowser.html.dombl.ModelNode;
+import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
@@ -716,6 +717,7 @@ public class RBlockViewport extends BaseRCollection {
 			}
 			// Now add line, after float is set.
 			this.addLineAfterBlock(renderable, false);
+			layoutRelative(markupElement, renderable);
 		}
 	}
 
@@ -754,6 +756,7 @@ public class RBlockViewport extends BaseRCollection {
 				centerBlock = (align != null) && align.equalsIgnoreCase("center");
 			}
 			this.addAsSeqBlock(renderable, obeysFloats, false, true, centerBlock);
+			layoutRelative(markupElement, renderable);
 		}
 	}
 
@@ -1083,6 +1086,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
 		this.addRenderableToLine(renderable);
+		layoutRelative(element, renderable);
 	}
 
 	/**
@@ -2498,11 +2502,66 @@ public class RBlockViewport extends BaseRCollection {
 	 *            the markup element
 	 */
 	public void layoutRInlineBlock(final HTMLElementImpl markupElement) {
-		final RInlineBlock inlineBlock = new RInlineBlock(container, markupElement, userAgentContext, rendererContext,
-				frameContext);
-		inlineBlock.doLayout(availContentWidth, availContentHeight, sizeOnly);
-		addRenderableToLine(inlineBlock);
-	}
+		UINode uINode = markupElement.getUINode();
+	    RInlineBlock inlineBlock = null;
+	    if (uINode instanceof RInlineBlock) {
+	      inlineBlock = (RInlineBlock) uINode;
+	    } else {
+	      final RInlineBlock newInlineBlock = new RInlineBlock(container, markupElement, userAgentContext, rendererContext, frameContext);
+	      markupElement.setUINode(newInlineBlock);
+	      inlineBlock = newInlineBlock;
+	    }
+	    inlineBlock.doLayout(availContentWidth, availContentHeight, sizeOnly);
+	    addRenderableToLine(inlineBlock);
+	    inlineBlock.setOriginalParent(inlineBlock.getParent());
+	    layoutRelative(markupElement, inlineBlock);
+	  }
+	
+	/* This is used to bubble up relative elements (on the z-axis) */
+	  private boolean layoutRelative(final HTMLElementImpl markupElement, final RElement renderable) {
+	    int position = getPosition(markupElement);
+	    boolean isRelative = position == RenderState.POSITION_RELATIVE;
+	    if (isRelative) {
+	      RenderableContainer con = getPositionedAncestor(container);
+	      DelayedPair dp = new DelayedPair(container, con, renderable, null, null, null, null, null, position);
+	      container.addDelayedPair(dp);
+	      if (renderable instanceof RUIControl) {
+	        this.container.addComponent(((RUIControl) renderable).getWidget().getComponent());
+	      }
+	      return true;
+	    }
+
+	    return false;
+	  }
+	  
+	  /** Gets an ancestor which is "positioned" (that is whose position is not static).
+	   *  Stops searching when HTML element is encountered.
+	   */
+	  private static RenderableContainer getPositionedAncestor(RenderableContainer containingBlock) {
+	    for (;;) {
+	      if (containingBlock instanceof Renderable) {
+	        final ModelNode node = ((Renderable) containingBlock).getModelNode();
+	        if (node instanceof HTMLElementImpl) {
+	          HTMLElementImpl element = (HTMLElementImpl) node;
+	          int position = getPosition(element);
+	          // if (position != RenderState.POSITION_STATIC || (element instanceof HTMLHtmlElement)) {
+	          if (position != RenderState.POSITION_STATIC) {
+	            break;
+	          }
+	          RenderableContainer newContainer = containingBlock.getParentContainer();
+	          if (newContainer == null) {
+	            break;
+	          }
+	          containingBlock = newContainer;
+	        } else {
+	          break;
+	        }
+	      } else {
+	        break;
+	      }
+	    }
+	    return containingBlock;
+	  }
 
 	/**
 	 * Gets the frame context.
