@@ -1,2 +1,55 @@
 Version 0.99:
 ------------
+- Added: XPath in javaScript
+- Added: support bitmap and gif images
+- Added: Charset UTF-8
+- Added: CDATA parsing
+- Added new list of Internet top-level domains
+- Added: css position:relative
+- Added: CSSStyleDeclarationImpl support CSSProperties
+- Added: input color, date, email, hidden, number, phone, range.
+- Added: first version of validation
+- Added: input type date attributes value, min, max, pattern.
+- Added: css selector last-child,last-of-type,first-child,first-of-type,only-child,only-of-type,root,empty
+- Added: css attribute selectors [attribute] [attribute="value"] [attribute~="value"][attribute|="value"] [attribute^="value"][attribute$="value"] [attribute*=value] element[attribute] element[attribute="value"] element[attribute~="value"] element[attribute|="value"] element[attribute^="value"] element[attribute$="value"] element[attribute*=value]
+ 
+- Fixed: getStyleSheets return StyleSheetList intested Collection<CSSStyleSheet>
+- Fixed: NullPointerException when canvas.beginPath() is not present
+- Fixed: css background: url{}
+- Fixed: After click submit button and button image not all parameters are set
+- Fixed: set parameter when attribute name is null
+- Fixed: absolute relative position
+- Fixed: relative offsets
+- Fixed: Floats inside relative blocks should be shifted
+- Fixed: getElementById with empty or null parameter
+- Fixed: styles don't apply when parent's attributes are changed parse local styles correctly
+- Fixed: TD does not read width and height from css
+- Fixed: width and height size in pixels
+
+ NEW GUI
+- Added: new Look and Feels JTattoo
+- Added: Full Screen mode support
+- Added: ScreenShoot action. When tool/screenshot is pressed you can capture full web page screenshot
+- Added: new bookmarks GUI
+- Added: Look&Feel menu in tool/preference. Now the user is able to choice hiss preferred Look&Feel
+- Added: Possibility to enable/disable Cascading Style Sheets in General menu(tool/preference/general)
+- Added: Possibility to enable/disable Cascading Javascript in General menu(tool/preference/general)
+- Added: Bing search engine.
+- Added development home page and bug tracking in Help menu 
+
+- Improved: OK button only closes the window. APPLY button applies the changes
+- Improved: find text in console and page source
+- Improved: autocomplete address field
+- Improved: Total implementation of the W3C's XmlHttpRequest API from https://github.com/sabren/java-XmlHttpRequest
+- Improved: ProcessStyle and ProcessLink. Process css is more fast
+
+- Deleted: Google Code search engine.
+- Deleted: Google Scholar search engine
+- Deleted: page services menu. 
+
+ LIBRARIES:
+- Added JTattoo from http://www.jtattoo.net/index.html
+- Added JDatePicker from https://github.com/JDatePicker/JDatePicker
+- Update PDFRender.jar from https://github.com/oswetto/PDFrenderer 
+- Update CSSParser to 0.9.18
+- Update Mozilla Rhino to commit 3357
