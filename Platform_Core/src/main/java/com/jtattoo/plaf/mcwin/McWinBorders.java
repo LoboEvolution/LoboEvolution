@@ -31,12 +31,18 @@ import javax.swing.border.Border;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class McWinBorders.
+ *
  * @author Michael Hagen
  */
 public class McWinBorders extends BaseBorders {
 
     //------------------------------------------------------------------------------------
     // Lazy access methods
+    /** Gets the button border.
+	 *
+	 * @return the button border
+	 */
     //------------------------------------------------------------------------------------
     public static Border getButtonBorder() {
         if (buttonBorder == null) {
@@ -45,10 +51,18 @@ public class McWinBorders extends BaseBorders {
         return buttonBorder;
     }
 
+    /** Gets the toggle button border.
+	 *
+	 * @return the toggle button border
+	 */
     public static Border getToggleButtonBorder() {
         return getButtonBorder();
     }
 
+    /** Gets the rollover tool button border.
+	 *
+	 * @return the rollover tool button border
+	 */
     public static Border getRolloverToolButtonBorder() {
         if (rolloverToolButtonBorder == null) {
             rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -56,6 +70,10 @@ public class McWinBorders extends BaseBorders {
         return rolloverToolButtonBorder;
     }
 
+    /** Gets the internal frame border.
+	 *
+	 * @return the internal frame border
+	 */
     public static Border getInternalFrameBorder() {
         if (internalFrameBorder == null) {
             internalFrameBorder = new InternalFrameBorder();
@@ -63,12 +81,18 @@ public class McWinBorders extends BaseBorders {
         return internalFrameBorder;
     }
 
+    /** Gets the tabbed pane border.
+	 *
+	 * @return the tabbed pane border
+	 */
     public static Border getTabbedPaneBorder() {
         return null;
     }
 
     //------------------------------------------------------------------------------------
     // Implementation of border classes
+    /** The Class ButtonBorder.
+	 */
     //------------------------------------------------------------------------------------
     public static class ButtonBorder implements Border, UIResource {
 
@@ -97,6 +121,8 @@ public class McWinBorders extends BaseBorders {
         }
     } // class ButtonBorder
 
+    /** The Class RolloverToolButtonBorder.
+	 */
     public static class RolloverToolButtonBorder implements Border, UIResource {
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -131,11 +157,11 @@ public class McWinBorders extends BaseBorders {
         }
     } // class RolloverToolButtonBorder
 
+    /** The Class InternalFrameBorder.
+	 */
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {

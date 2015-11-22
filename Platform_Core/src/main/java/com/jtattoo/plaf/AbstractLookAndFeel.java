@@ -33,13 +33,13 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
 
 /**
+ * The Class AbstractLookAndFeel.
+ *
  * @author Michael Hagen
  */
 abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	// Workaround to avoid a bug in the java 1.3 VM
@@ -52,12 +52,22 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
         }
     }
 
+    /** The current theme name. */
     protected static String currentThemeName = "abstractTheme";
 
+    /** The my theme. */
     private static AbstractTheme myTheme = null;
 
+    /** Gets the border factory.
+	 *
+	 * @return the border factory
+	 */
     abstract public AbstractBorderFactory getBorderFactory();
 
+    /** Gets the icon factory.
+	 *
+	 * @return the icon factory
+	 */
     abstract public AbstractIconFactory getIconFactory();
 
     protected void initSystemColorDefaults(UIDefaults table) {
@@ -478,6 +488,11 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
         }
     }
 
+    /** Sets the theme.
+	 *
+	 * @param theme
+	 *            the new theme
+	 */
     public static void setTheme(AbstractTheme theme) {
         if (theme == null) {
             return;
@@ -492,229 +507,445 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
         }
     }
 
-    /**
-     * Set a theme by name. Allowed themes may come from the list returned by getThemes
-     *
-     * @param name the name of the theme
-     */
+    /** Sets the theme.
+	 *
+	 * @param name
+	 *            the new theme
+	 */
     public static void setTheme(String name) {
         // Overwrite this in derived classes
     }
 
+    /** Gets the theme.
+	 *
+	 * @return the theme
+	 */
     public static AbstractTheme getTheme() {
         return myTheme;
     }
 
+    /** Gets the current theme.
+	 *
+	 * @return the current theme
+	 */
     public static MetalTheme getCurrentTheme() {
         return myTheme;
     }
 
+    /** Gets the themes.
+	 *
+	 * @return the themes
+	 */
     public static List<String> getThemes() {
         ArrayList<String> themes = new ArrayList<String>();
         themes.add(getTheme().getName());
         return themes;
     }
 
+    /** Checks if is window decoration on.
+	 *
+	 * @return true, if is window decoration on
+	 */
     public static boolean isWindowDecorationOn() {
         return getTheme().isWindowDecorationOn();
     }
 
+    /** Gets the foreground color.
+	 *
+	 * @return the foreground color
+	 */
     public static ColorUIResource getForegroundColor() {
         return getTheme().getForegroundColor();
     }
 
+    /** Gets the disabled foreground color.
+	 *
+	 * @return the disabled foreground color
+	 */
     public static ColorUIResource getDisabledForegroundColor() {
         return getTheme().getDisabledForegroundColor();
     }
 
+    /** Gets the background color.
+	 *
+	 * @return the background color
+	 */
     public static ColorUIResource getBackgroundColor() {
         return getTheme().getBackgroundColor();
     }
 
+    /** Gets the alter background color.
+	 *
+	 * @return the alter background color
+	 */
     public static ColorUIResource getAlterBackgroundColor() {
         return getTheme().getAlterBackgroundColor();
     }
 
+    /** Gets the disabled background color.
+	 *
+	 * @return the disabled background color
+	 */
     public static ColorUIResource getDisabledBackgroundColor() {
         return getTheme().getDisabledBackgroundColor();
     }
 
+    /** Gets the input foreground color.
+	 *
+	 * @return the input foreground color
+	 */
     public static ColorUIResource getInputForegroundColor() {
         return getTheme().getInputForegroundColor();
     }
 
+    /** Gets the input background color.
+	 *
+	 * @return the input background color
+	 */
     public static ColorUIResource getInputBackgroundColor() {
         return getTheme().getInputBackgroundColor();
     }
 
+    /** Gets the focus color.
+	 *
+	 * @return the focus color
+	 */
     public static ColorUIResource getFocusColor() {
         return getTheme().getFocusColor();
     }
 
+    /** Gets the focus cell color.
+	 *
+	 * @return the focus cell color
+	 */
     public static ColorUIResource getFocusCellColor() {
         return getTheme().getFocusCellColor();
     }
 
+    /** Gets the frame color.
+	 *
+	 * @return the frame color
+	 */
     public static ColorUIResource getFrameColor() {
         return getTheme().getFrameColor();
     }
 
+    /** Gets the grid color.
+	 *
+	 * @return the grid color
+	 */
     public static ColorUIResource getGridColor() {
         return getTheme().getGridColor();
     }
 
+    /** Gets the selection foreground color.
+	 *
+	 * @return the selection foreground color
+	 */
     public static ColorUIResource getSelectionForegroundColor() {
         return getTheme().getSelectionForegroundColor();
     }
 
+    /** Gets the selection background color.
+	 *
+	 * @return the selection background color
+	 */
     public static ColorUIResource getSelectionBackgroundColor() {
         return getTheme().getSelectionBackgroundColor();
     }
 
+    /** Gets the button foreground color.
+	 *
+	 * @return the button foreground color
+	 */
     public static ColorUIResource getButtonForegroundColor() {
         return getTheme().getButtonForegroundColor();
     }
 
+    /** Gets the button background color.
+	 *
+	 * @return the button background color
+	 */
     public static ColorUIResource getButtonBackgroundColor() {
         return getTheme().getButtonBackgroundColor();
     }
 
+    /** Gets the button color light.
+	 *
+	 * @return the button color light
+	 */
     public static ColorUIResource getButtonColorLight() {
         return getTheme().getButtonColorLight();
     }
 
+    /** Gets the button color dark.
+	 *
+	 * @return the button color dark
+	 */
     public static ColorUIResource getButtonColorDark() {
         return getTheme().getButtonColorDark();
     }
 
+    /** Gets the control foreground color.
+	 *
+	 * @return the control foreground color
+	 */
     public static ColorUIResource getControlForegroundColor() {
         return getTheme().getControlForegroundColor();
     }
 
+    /** Gets the control background color.
+	 *
+	 * @return the control background color
+	 */
     public static ColorUIResource getControlBackgroundColor() {
         return getTheme().getControlBackgroundColor();
     }
 
+    /** Gets the control highlight color.
+	 *
+	 * @return the control highlight color
+	 */
     public ColorUIResource getControlHighlightColor() {
         return getTheme().getControlHighlightColor();
     }
 
+    /** Gets the control shadow color.
+	 *
+	 * @return the control shadow color
+	 */
     public ColorUIResource getControlShadowColor() {
         return getTheme().getControlShadowColor();
     }
 
+    /** Gets the control dark shadow color.
+	 *
+	 * @return the control dark shadow color
+	 */
     public ColorUIResource getControlDarkShadowColor() {
         return getTheme().getControlDarkShadowColor();
     }
 
+    /** Gets the control color light.
+	 *
+	 * @return the control color light
+	 */
     public static ColorUIResource getControlColorLight() {
         return getTheme().getControlColorLight();
     }
 
+    /** Gets the control color dark.
+	 *
+	 * @return the control color dark
+	 */
     public static ColorUIResource getControlColorDark() {
         return getTheme().getControlColorDark();
     }
 
+    /** Gets the window title foreground color.
+	 *
+	 * @return the window title foreground color
+	 */
     public static ColorUIResource getWindowTitleForegroundColor() {
         return getTheme().getWindowTitleForegroundColor();
     }
 
+    /** Gets the window title background color.
+	 *
+	 * @return the window title background color
+	 */
     public static ColorUIResource getWindowTitleBackgroundColor() {
         return getTheme().getWindowTitleBackgroundColor();
     }
 
+    /** Gets the window title color light.
+	 *
+	 * @return the window title color light
+	 */
     public static ColorUIResource getWindowTitleColorLight() {
         return getTheme().getWindowTitleColorLight();
     }
 
+    /** Gets the window title color dark.
+	 *
+	 * @return the window title color dark
+	 */
     public static ColorUIResource getWindowTitleColorDark() {
         return getTheme().getWindowTitleColorDark();
     }
 
+    /** Gets the window border color.
+	 *
+	 * @return the window border color
+	 */
     public static ColorUIResource getWindowBorderColor() {
         return getTheme().getWindowBorderColor();
     }
 
+    /** Gets the window inactive title foreground color.
+	 *
+	 * @return the window inactive title foreground color
+	 */
     public static ColorUIResource getWindowInactiveTitleForegroundColor() {
         return getTheme().getWindowInactiveTitleForegroundColor();
     }
 
+    /** Gets the window inactive title background color.
+	 *
+	 * @return the window inactive title background color
+	 */
     public static ColorUIResource getWindowInactiveTitleBackgroundColor() {
         return getTheme().getWindowInactiveTitleBackgroundColor();
     }
 
+    /** Gets the window inactive title color light.
+	 *
+	 * @return the window inactive title color light
+	 */
     public static ColorUIResource getWindowInactiveTitleColorLight() {
         return getTheme().getWindowInactiveTitleColorLight();
     }
 
+    /** Gets the window inactive title color dark.
+	 *
+	 * @return the window inactive title color dark
+	 */
     public static ColorUIResource getWindowInactiveTitleColorDark() {
         return getTheme().getWindowInactiveTitleColorDark();
     }
 
+    /** Gets the window inactive border color.
+	 *
+	 * @return the window inactive border color
+	 */
     public static ColorUIResource getWindowInactiveBorderColor() {
         return getTheme().getWindowInactiveBorderColor();
     }
 
+    /** Gets the menu foreground color.
+	 *
+	 * @return the menu foreground color
+	 */
     public static ColorUIResource getMenuForegroundColor() {
         return getTheme().getMenuForegroundColor();
     }
 
+    /** Gets the menu background color.
+	 *
+	 * @return the menu background color
+	 */
     public static ColorUIResource getMenuBackgroundColor() {
         return getTheme().getMenuBackgroundColor();
     }
 
+    /** Gets the menu selection foreground color.
+	 *
+	 * @return the menu selection foreground color
+	 */
     public static ColorUIResource getMenuSelectionForegroundColor() {
         return getTheme().getMenuSelectionForegroundColor();
     }
 
+    /** Gets the menu selection background color.
+	 *
+	 * @return the menu selection background color
+	 */
     public static ColorUIResource getMenuSelectionBackgroundColor() {
         return getTheme().getMenuSelectionBackgroundColor();
     }
 
+    /** Gets the menu color light.
+	 *
+	 * @return the menu color light
+	 */
     public static ColorUIResource getMenuColorLight() {
         return getTheme().getMenuColorLight();
     }
 
+    /** Gets the menu color dark.
+	 *
+	 * @return the menu color dark
+	 */
     public static ColorUIResource getMenuColorDark() {
         return getTheme().getMenuColorDark();
     }
 
+    /** Gets the toolbar foreground color.
+	 *
+	 * @return the toolbar foreground color
+	 */
     public static ColorUIResource getToolbarForegroundColor() {
         return getTheme().getToolbarForegroundColor();
     }
 
+    /** Gets the toolbar background color.
+	 *
+	 * @return the toolbar background color
+	 */
     public static ColorUIResource getToolbarBackgroundColor() {
         return getTheme().getToolbarBackgroundColor();
     }
 
+    /** Gets the toolbar color light.
+	 *
+	 * @return the toolbar color light
+	 */
     public static ColorUIResource getToolbarColorLight() {
         return getTheme().getToolbarColorLight();
     }
 
+    /** Gets the toolbar color dark.
+	 *
+	 * @return the toolbar color dark
+	 */
     public static ColorUIResource getToolbarColorDark() {
         return getTheme().getToolbarColorDark();
     }
 
+    /** Gets the toolbar docking color.
+	 *
+	 * @return the toolbar docking color
+	 */
     public static ColorUIResource getToolbarDockingColor() {
         return getTheme().getFocusColor();
     }
 
+    /** Gets the tab area background color.
+	 *
+	 * @return the tab area background color
+	 */
     public static ColorUIResource getTabAreaBackgroundColor() {
         return getTheme().getTabAreaBackgroundColor();
     }
 
+    /** Gets the tab selection foreground color.
+	 *
+	 * @return the tab selection foreground color
+	 */
     public static ColorUIResource getTabSelectionForegroundColor() {
         return getTheme().getTabSelectionForegroundColor();
     }
 
+    /** Gets the desktop color.
+	 *
+	 * @return the desktop color
+	 */
     public static ColorUIResource getDesktopColor() {
         return getTheme().getDesktopColor();
     }
 
+    /** Gets the tooltip foreground color.
+	 *
+	 * @return the tooltip foreground color
+	 */
     public static ColorUIResource getTooltipForegroundColor() {
         return getTheme().getTooltipForegroundColor();
     }
 
+    /** Gets the tooltip background color.
+	 *
+	 * @return the tooltip background color
+	 */
     public static ColorUIResource getTooltipBackgroundColor() {
         return getTheme().getTooltipBackgroundColor();
     }

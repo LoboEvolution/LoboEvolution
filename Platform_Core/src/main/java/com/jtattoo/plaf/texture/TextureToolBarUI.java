@@ -30,6 +30,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class TextureToolBarUI.
+ *
  * @author Michael Hagen
  */
 public class TextureToolBarUI extends AbstractToolBarUI

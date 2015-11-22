@@ -34,6 +34,8 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
+ * The Class TextureButtonUI.
+ *
  * @author Michael Hagen
  */
 public class TextureButtonUI extends BaseButtonUI {

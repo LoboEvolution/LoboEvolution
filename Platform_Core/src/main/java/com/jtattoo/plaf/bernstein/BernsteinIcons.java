@@ -30,10 +30,16 @@ import javax.swing.*;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class BernsteinIcons.
+ *
  * @author Michael Hagen
  */
 public class BernsteinIcons extends BaseIcons {
 
+    /** Gets the radio button icon.
+	 *
+	 * @return the radio button icon
+	 */
     public static Icon getRadioButtonIcon() {
         if (radioButtonIcon == null) {
             radioButtonIcon = new RadioButtonIcon();
@@ -41,6 +47,10 @@ public class BernsteinIcons extends BaseIcons {
         return radioButtonIcon;
     }
 
+    /** Gets the check box icon.
+	 *
+	 * @return the check box icon
+	 */
     public static Icon getCheckBoxIcon() {
         if (checkBoxIcon == null) {
             checkBoxIcon = new CheckBoxIcon();
@@ -48,6 +58,10 @@ public class BernsteinIcons extends BaseIcons {
         return checkBoxIcon;
     }
 
+    /** Gets the thumb hor icon.
+	 *
+	 * @return the thumb hor icon
+	 */
     public static Icon getThumbHorIcon() {
         if (thumbHorIcon == null) {
             thumbHorIcon = new LazyImageIcon("bernstein/icons/radio.gif");
@@ -55,6 +69,10 @@ public class BernsteinIcons extends BaseIcons {
         return thumbHorIcon;
     }
 
+    /** Gets the thumb ver icon.
+	 *
+	 * @return the thumb ver icon
+	 */
     public static Icon getThumbVerIcon() {
         if (thumbVerIcon == null) {
             thumbVerIcon = new LazyImageIcon("bernstein/icons/radio.gif");
@@ -62,6 +80,10 @@ public class BernsteinIcons extends BaseIcons {
         return thumbVerIcon;
     }
 
+    /** Gets the thumb hor icon rollover.
+	 *
+	 * @return the thumb hor icon rollover
+	 */
     public static Icon getThumbHorIconRollover() {
         if (thumbHorIconRollover == null) {
             thumbHorIconRollover = new LazyImageIcon("bernstein/icons/radio_rollover.gif");
@@ -69,6 +91,10 @@ public class BernsteinIcons extends BaseIcons {
         return thumbHorIconRollover;
     }
 
+    /** Gets the thumb ver icon rollover.
+	 *
+	 * @return the thumb ver icon rollover
+	 */
     public static Icon getThumbVerIconRollover() {
         if (thumbVerIconRollover == null) {
             thumbVerIconRollover = new LazyImageIcon("bernstein/icons/radio_rollover.gif");
@@ -76,6 +102,10 @@ public class BernsteinIcons extends BaseIcons {
         return thumbVerIconRollover;
     }
 
+    /** Gets the splitter up arrow icon.
+	 *
+	 * @return the splitter up arrow icon
+	 */
     public static Icon getSplitterUpArrowIcon() {
         if (splitterUpArrowIcon == null) {
             splitterUpArrowIcon = new LazyImageIcon("bernstein/icons/SplitterUpArrow.gif");
@@ -83,6 +113,10 @@ public class BernsteinIcons extends BaseIcons {
         return splitterUpArrowIcon;
     }
 
+    /** Gets the splitter down arrow icon.
+	 *
+	 * @return the splitter down arrow icon
+	 */
     public static Icon getSplitterDownArrowIcon() {
         if (splitterDownArrowIcon == null) {
             splitterDownArrowIcon = new LazyImageIcon("bernstein/icons/SplitterDownArrow.gif");
@@ -90,6 +124,10 @@ public class BernsteinIcons extends BaseIcons {
         return splitterDownArrowIcon;
     }
 
+    /** Gets the splitter left arrow icon.
+	 *
+	 * @return the splitter left arrow icon
+	 */
     public static Icon getSplitterLeftArrowIcon() {
         if (splitterLeftArrowIcon == null) {
             splitterLeftArrowIcon = new LazyImageIcon("bernstein/icons/SplitterLeftArrow.gif");
@@ -97,6 +135,10 @@ public class BernsteinIcons extends BaseIcons {
         return splitterLeftArrowIcon;
     }
 
+    /** Gets the splitter right arrow icon.
+	 *
+	 * @return the splitter right arrow icon
+	 */
     public static Icon getSplitterRightArrowIcon() {
         if (splitterRightArrowIcon == null) {
             splitterRightArrowIcon = new LazyImageIcon("bernstein/icons/SplitterRightArrow.gif");
@@ -104,15 +146,30 @@ public class BernsteinIcons extends BaseIcons {
         return splitterRightArrowIcon;
     }
 
+    /** The Class CheckBoxIcon.
+	 */
     //--------------------------------------------------------------------------------------------------------
     private static class CheckBoxIcon implements Icon, UIResource {
 
+        /** The check icon. */
         private static Icon checkIcon = null;
+        
+        /** The check selected icon. */
         private static Icon checkSelectedIcon = null;
+        
+        /** The check pressed icon. */
         private static Icon checkPressedIcon = null;
+        
+        /** The check rollover icon. */
         private static Icon checkRolloverIcon = null;
+        
+        /** The check rollover selected icon. */
         private static Icon checkRolloverSelectedIcon = null;
+        
+        /** The check disabled icon. */
         private static Icon checkDisabledIcon = null;
+        
+        /** The check disabled selected icon. */
         private static Icon checkDisabledSelectedIcon = null;
 
         public CheckBoxIcon() {
@@ -167,13 +224,26 @@ public class BernsteinIcons extends BaseIcons {
         }
     }
 
+    /** The Class RadioButtonIcon.
+	 */
     private static class RadioButtonIcon implements Icon, UIResource {
 
+        /** The radio icon. */
         private Icon radioIcon = null;
+        
+        /** The radio selected icon. */
         private Icon radioSelectedIcon = null;
+        
+        /** The radio rollover icon. */
         private Icon radioRolloverIcon = null;
+        
+        /** The radio rollover selected icon. */
         private Icon radioRolloverSelectedIcon = null;
+        
+        /** The radio disabled icon. */
         private Icon radioDisabledIcon = null;
+        
+        /** The radio disabled selected icon. */
         private Icon radioDisabledSelectedIcon = null;
 
         public RadioButtonIcon() {

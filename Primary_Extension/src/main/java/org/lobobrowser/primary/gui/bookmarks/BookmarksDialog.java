@@ -53,15 +53,21 @@ import org.lobobrowser.primary.ext.IconFactory;
 import org.lobobrowser.primary.info.BookmarkInfo;
 import org.lobobrowser.ua.NavigatorWindow;
 
+/**
+ * The Class BookmarksDialog.
+ */
 public class BookmarksDialog extends JDialog {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The jtf filter. */
 	private JTextField jtfFilter;
 
+	/** The row sorter. */
 	private TableRowSorter<TableModel> rowSorter;
 
+	/** The window. */
 	private NavigatorWindow window;
 	
 	/** The search. */

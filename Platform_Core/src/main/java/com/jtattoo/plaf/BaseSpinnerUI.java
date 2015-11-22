@@ -30,6 +30,7 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSpinnerUI;
 
 /**
+ * The Class BaseSpinnerUI.
  *
  * @author Michael Hagen
  */
@@ -40,6 +41,7 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
      */
     private static final Dimension zeroSize = new Dimension(0, 0);
 
+    /** The my layout manager. */
     private MyLayoutManager myLayoutManager = null;
 
     /**
@@ -103,14 +105,19 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 
 //-----------------------------------------------------------------------------------------
 // inner classes
+/**
+ * The Class SpinButton.
+ */
 //-----------------------------------------------------------------------------------------
     public static class SpinButton extends NoFocusButton {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant minSize. */
 		private static final Dimension minSize = new Dimension(14, 12);
+        
+        /** The direction. */
         private int direction = SwingConstants.NORTH;
 
         public SpinButton(int aDirection) {
@@ -165,11 +172,19 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 
 //----------------------------------------------------------------------------------------------
 // inner classes
+/**
+ * The Class MyLayoutManager.
+ */
 //----------------------------------------------------------------------------------------------
     private static class MyLayoutManager implements LayoutManager {
 
+        /** The next button. */
         private Component nextButton = null;
+        
+        /** The previous button. */
         private Component previousButton = null;
+        
+        /** The editor. */
         private Component editor = null;
 
         public void addLayoutComponent(String name, Component c) {

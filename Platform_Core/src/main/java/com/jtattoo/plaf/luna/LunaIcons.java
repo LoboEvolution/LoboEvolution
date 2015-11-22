@@ -29,14 +29,24 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 
 /**
+ * The Class LunaIcons.
+ *
  * @author Michael Hagen
  */
 public class LunaIcons extends BaseIcons {
 
+    /** Gets the combo box icon.
+	 *
+	 * @return the combo box icon
+	 */
     public static Icon getComboBoxIcon() {
         return getDownArrowIcon();
     }
 
+    /** Gets the up arrow icon.
+	 *
+	 * @return the up arrow icon
+	 */
     public static Icon getUpArrowIcon() {
         if (upArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -50,6 +60,10 @@ public class LunaIcons extends BaseIcons {
         return upArrowIcon;
     }
 
+    /** Gets the down arrow icon.
+	 *
+	 * @return the down arrow icon
+	 */
     public static Icon getDownArrowIcon() {
         if (downArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -63,6 +77,10 @@ public class LunaIcons extends BaseIcons {
         return downArrowIcon;
     }
 
+    /** Gets the left arrow icon.
+	 *
+	 * @return the left arrow icon
+	 */
     public static Icon getLeftArrowIcon() {
         if (leftArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -76,6 +94,10 @@ public class LunaIcons extends BaseIcons {
         return leftArrowIcon;
     }
 
+    /** Gets the right arrow icon.
+	 *
+	 * @return the right arrow icon
+	 */
     public static Icon getRightArrowIcon() {
         if (rightArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -89,6 +111,10 @@ public class LunaIcons extends BaseIcons {
         return rightArrowIcon;
     }
     
+    /** Gets the icon icon.
+	 *
+	 * @return the icon icon
+	 */
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -100,6 +126,10 @@ public class LunaIcons extends BaseIcons {
         return iconIcon;
     }
 
+    /** Gets the min icon.
+	 *
+	 * @return the min icon
+	 */
     public static Icon getMinIcon() {
         if (minIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -111,6 +141,10 @@ public class LunaIcons extends BaseIcons {
         return minIcon;
     }
 
+    /** Gets the max icon.
+	 *
+	 * @return the max icon
+	 */
     public static Icon getMaxIcon() {
         if (maxIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -122,6 +156,10 @@ public class LunaIcons extends BaseIcons {
         return maxIcon;
     }
 
+    /** Gets the close icon.
+	 *
+	 * @return the close icon
+	 */
     public static Icon getCloseIcon() {
         if (closeIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -133,20 +171,40 @@ public class LunaIcons extends BaseIcons {
         return closeIcon;
     }
 
+/**
+ * The Class TitleButtonIcon.
+ */
 //------------------------------------------------------------------------------
     private static class TitleButtonIcon implements Icon {
 
+        /** The Constant blueFrameColor. */
         private static final Color blueFrameColor = Color.white;
+        
+        /** The Constant blueColorLight. */
         private static final Color blueColorLight = new Color(154, 183, 250);
+        
+        /** The Constant blueColorDark. */
         private static final Color blueColorDark = new Color(0, 69, 211);
+        
+        /** The Constant closerColorLight. */
         private static final Color closerColorLight = new Color(241, 172, 154);
+        
+        /** The Constant closerColorDark. */
         private static final Color closerColorDark = new Color(224, 56, 2);
         
+        /** The Constant ICON_ICON_TYP. */
         private static final int ICON_ICON_TYP = 0;
+        
+        /** The Constant MIN_ICON_TYP. */
         private static final int MIN_ICON_TYP = 1;
+        
+        /** The Constant MAX_ICON_TYP. */
         private static final int MAX_ICON_TYP = 2;
+        
+        /** The Constant CLOSE_ICON_TYP. */
         private static final int CLOSE_ICON_TYP = 3;
         
+        /** The icon typ. */
         private int iconTyp = ICON_ICON_TYP;
 
         public TitleButtonIcon(int typ) {

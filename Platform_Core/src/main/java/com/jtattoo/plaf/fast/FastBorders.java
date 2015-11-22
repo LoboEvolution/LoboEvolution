@@ -30,12 +30,19 @@ import javax.swing.border.Border;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class FastBorders.
+ *
  * @author Michael Hagen
  */
 public class FastBorders extends BaseBorders {
 
 //------------------------------------------------------------------------------------
 // Lazy access methods
+/**
+ * Gets the button border.
+ *
+ * @return the button border
+ */
 //------------------------------------------------------------------------------------
     public static Border getButtonBorder() {
         if (buttonBorder == null) {
@@ -44,10 +51,18 @@ public class FastBorders extends BaseBorders {
         return buttonBorder;
     }
 
+    /** Gets the toggle button border.
+	 *
+	 * @return the toggle button border
+	 */
     public static Border getToggleButtonBorder() {
         return getButtonBorder();
     }
 
+    /** Gets the tool button border.
+	 *
+	 * @return the tool button border
+	 */
     public static Border getToolButtonBorder() {
         if (toolButtonBorder == null) {
             toolButtonBorder = new ToolButtonBorder();
@@ -55,6 +70,10 @@ public class FastBorders extends BaseBorders {
         return toolButtonBorder;
     }
 
+    /** Gets the rollover tool button border.
+	 *
+	 * @return the rollover tool button border
+	 */
     public static Border getRolloverToolButtonBorder() {
         if (rolloverToolButtonBorder == null) {
             rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -62,6 +81,10 @@ public class FastBorders extends BaseBorders {
         return rolloverToolButtonBorder;
     }
 
+    /** Gets the internal frame border.
+	 *
+	 * @return the internal frame border
+	 */
     public static Border getInternalFrameBorder() {
         if (internalFrameBorder == null) {
             internalFrameBorder = new InternalFrameBorder();
@@ -71,10 +94,16 @@ public class FastBorders extends BaseBorders {
 
 //------------------------------------------------------------------------------------
 // Implementation of border classes
+/**
+ * The Class ButtonBorder.
+ */
 //------------------------------------------------------------------------------------
     public static class ButtonBorder implements Border, UIResource {
 
+        /** The Constant defaultFrameColor. */
         private static final Color defaultFrameColor = new Color(0, 64, 255);
+        
+        /** The Constant insets. */
         private static final Insets insets = new Insets(4, 8, 4, 8);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -122,9 +151,13 @@ public class FastBorders extends BaseBorders {
         }
     } // class ButtonBorder
 
+/**
+ * The Class ToolButtonBorder.
+ */
 //------------------------------------------------------------------------------
     public static class ToolButtonBorder implements Border, UIResource {
 
+        /** The Constant insets. */
         private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -166,9 +199,13 @@ public class FastBorders extends BaseBorders {
         }
     } // class ToolButtonBorder
 
+/**
+ * The Class RolloverToolButtonBorder.
+ */
 //------------------------------------------------------------------------------
     public static class RolloverToolButtonBorder implements Border, UIResource {
 
+        /** The Constant insets. */
         private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -217,12 +254,13 @@ public class FastBorders extends BaseBorders {
         }
     } // class RolloverToolButtonBorder
 
+/**
+ * The Class InternalFrameBorder.
+ */
 //------------------------------------------------------------------------------
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {

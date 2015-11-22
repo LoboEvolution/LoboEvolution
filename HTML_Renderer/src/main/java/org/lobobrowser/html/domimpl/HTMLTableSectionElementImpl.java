@@ -4,6 +4,9 @@ import org.lobobrowser.w3c.html.HTMLCollection;
 import org.lobobrowser.w3c.html.HTMLElement;
 import org.lobobrowser.w3c.html.HTMLTableSectionElement;
 
+/**
+ * The Class HTMLTableSectionElementImpl.
+ */
 public class HTMLTableSectionElementImpl extends HTMLAbstractUIElement implements HTMLTableSectionElement {
 
 	public HTMLTableSectionElementImpl(String name) {

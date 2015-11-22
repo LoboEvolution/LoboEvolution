@@ -29,13 +29,13 @@ import javax.swing.Icon;
 import javax.swing.JInternalFrame;
 
 /**
+ * The Class SmartInternalFrameTitlePane.
+ *
  * @author Michael Hagen
  */
 public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public SmartInternalFrameTitlePane(JInternalFrame f) {

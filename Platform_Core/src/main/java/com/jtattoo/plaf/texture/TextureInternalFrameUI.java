@@ -29,6 +29,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class TextureInternalFrameUI.
+ *
  * @author Michael Hagen
  */
 public class TextureInternalFrameUI extends BaseInternalFrameUI {

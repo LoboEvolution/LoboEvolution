@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
 
 /**
+ * A factory for creating SmartIcon objects.
+ *
  * @author Michael Hagen
  */
 public class SmartIconFactory implements AbstractIconFactory {
 
+    /** The instance. */
     private static SmartIconFactory instance = null;
 
     private SmartIconFactory() {
     }
 
+    /** Gets the single instance of SmartIconFactory.
+	 *
+	 * @return single instance of SmartIconFactory
+	 */
     public static synchronized SmartIconFactory getInstance() {
         if (instance == null) {
             instance = new SmartIconFactory();

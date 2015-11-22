@@ -28,6 +28,8 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class BaseRadioButtonMenuItemUI.
+ *
  * @author Michael Hagen
  */
 public class BaseRadioButtonMenuItemUI extends BaseMenuItemUI {

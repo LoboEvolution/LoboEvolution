@@ -31,10 +31,16 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 
 /**
+ * The Class MintIcons.
+ *
  * @author Michael Hagen
  */
 public class MintIcons extends BaseIcons {
 
+    /** Gets the up arrow icon.
+	 *
+	 * @return the up arrow icon
+	 */
     public static Icon getUpArrowIcon() {
         if (upArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -48,6 +54,10 @@ public class MintIcons extends BaseIcons {
         return upArrowIcon;
     }
 
+    /** Gets the down arrow icon.
+	 *
+	 * @return the down arrow icon
+	 */
     public static Icon getDownArrowIcon() {
         if (downArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -61,6 +71,10 @@ public class MintIcons extends BaseIcons {
         return downArrowIcon;
     }
 
+    /** Gets the left arrow icon.
+	 *
+	 * @return the left arrow icon
+	 */
     public static Icon getLeftArrowIcon() {
         if (leftArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -74,6 +88,10 @@ public class MintIcons extends BaseIcons {
         return leftArrowIcon;
     }
 
+    /** Gets the right arrow icon.
+	 *
+	 * @return the right arrow icon
+	 */
     public static Icon getRightArrowIcon() {
         if (rightArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -87,6 +105,10 @@ public class MintIcons extends BaseIcons {
         return rightArrowIcon;
     }
     
+    /** Gets the icon icon.
+	 *
+	 * @return the icon icon
+	 */
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -98,6 +120,10 @@ public class MintIcons extends BaseIcons {
         return iconIcon;
     }
 
+    /** Gets the min icon.
+	 *
+	 * @return the min icon
+	 */
     public static Icon getMinIcon() {
         if (minIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -109,6 +135,10 @@ public class MintIcons extends BaseIcons {
         return minIcon;
     }
 
+    /** Gets the max icon.
+	 *
+	 * @return the max icon
+	 */
     public static Icon getMaxIcon() {
         if (maxIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -120,6 +150,10 @@ public class MintIcons extends BaseIcons {
         return maxIcon;
     }
 
+    /** Gets the close icon.
+	 *
+	 * @return the close icon
+	 */
     public static Icon getCloseIcon() {
         if (closeIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -131,17 +165,31 @@ public class MintIcons extends BaseIcons {
         return closeIcon;
     }
 
+/**
+ * The Class TitleButtonIcon.
+ */
 //------------------------------------------------------------------------------    
     private static class TitleButtonIcon implements Icon {
 
+        /** The Constant closerColorLight. */
         private static final Color closerColorLight = new Color(241, 172, 154);
+        
+        /** The Constant closerColorDark. */
         private static final Color closerColorDark = new Color(224, 56, 2);
         
+        /** The Constant ICON_ICON_TYP. */
         private static final int ICON_ICON_TYP = 0;
+        
+        /** The Constant MIN_ICON_TYP. */
         private static final int MIN_ICON_TYP = 1;
+        
+        /** The Constant MAX_ICON_TYP. */
         private static final int MAX_ICON_TYP = 2;
+        
+        /** The Constant CLOSE_ICON_TYP. */
         private static final int CLOSE_ICON_TYP = 3;
         
+        /** The icon typ. */
         private int iconTyp = ICON_ICON_TYP;
 
         public TitleButtonIcon(int typ) {

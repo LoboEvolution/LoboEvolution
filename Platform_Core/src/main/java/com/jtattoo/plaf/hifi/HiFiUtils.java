@@ -28,7 +28,9 @@ import com.jtattoo.plaf.JTattooUtilities;
 import java.awt.*;
 
 /**
- * @author  Michael Hagen
+ * The Class HiFiUtils.
+ *
+ * @author Michael Hagen
  */
 public class HiFiUtils {
 

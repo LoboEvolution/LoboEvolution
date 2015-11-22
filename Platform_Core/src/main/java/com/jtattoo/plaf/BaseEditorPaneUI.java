@@ -37,11 +37,16 @@ import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.JTextComponent;
 
 /**
+ * The Class BaseEditorPaneUI.
+ *
  * @author Michael Hagen
  */
 public class BaseEditorPaneUI extends BasicEditorPaneUI {
 
+    /** The org border. */
     private Border orgBorder = null;
+    
+    /** The focus listener. */
     private FocusListener focusListener = null;
 
     public static ComponentUI createUI(JComponent c) {

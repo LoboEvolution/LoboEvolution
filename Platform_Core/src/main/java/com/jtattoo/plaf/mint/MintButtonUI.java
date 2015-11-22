@@ -31,6 +31,8 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
+ * The Class MintButtonUI.
+ *
  * @author Michael Hagen
  */
 public class MintButtonUI extends BaseButtonUI {

@@ -30,6 +30,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class BernsteinToolBarUI.
+ *
  * @author Michael Hagen
  */
 public class BernsteinToolBarUI extends AbstractToolBarUI {

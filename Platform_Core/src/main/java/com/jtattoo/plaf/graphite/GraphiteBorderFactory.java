@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import javax.swing.border.Border;
 
 /**
+ * A factory for creating GraphiteBorder objects.
+ *
  * @author Michael Hagen
  */
 public class GraphiteBorderFactory implements AbstractBorderFactory {
 
+    /** The instance. */
     private static GraphiteBorderFactory instance = null;
 
     private GraphiteBorderFactory() {
     }
 
+    /** Gets the single instance of GraphiteBorderFactory.
+	 *
+	 * @return single instance of GraphiteBorderFactory
+	 */
     public static synchronized GraphiteBorderFactory getInstance() {
         if (instance == null) {
             instance = new GraphiteBorderFactory();

@@ -28,6 +28,9 @@ import com.jtattoo.plaf.ColorHelper;
 import java.awt.Color;
 import javax.swing.plaf.ColorUIResource;
 
+/**
+ * The Class AluminiumDefaultTheme.
+ */
 public class AluminiumDefaultTheme extends AbstractTheme {
 
     public AluminiumDefaultTheme() {

@@ -30,10 +30,13 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSeparatorUI;
 
 /**
+ * The Class AluminiumPopupMenuSeparatorUI.
+ *
  * @author Michael Hagen
  */
 public class AluminiumPopupMenuSeparatorUI extends BasicSeparatorUI {
 
+    /** The Constant size. */
     private static final Dimension size = new Dimension(1, 1);
 
     public static ComponentUI createUI(JComponent c) {

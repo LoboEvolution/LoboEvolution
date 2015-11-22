@@ -31,6 +31,8 @@ import javax.swing.plaf.basic.BasicMenuBarUI;
 
 
 /**
+ * The Class BernsteinMenuBarUI.
+ *
  * @author Michael Hagen
  */
 public class BernsteinMenuBarUI extends BasicMenuBarUI {

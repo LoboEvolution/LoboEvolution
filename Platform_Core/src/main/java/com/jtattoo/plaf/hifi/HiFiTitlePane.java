@@ -29,13 +29,13 @@ import java.awt.Graphics;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * The Class HiFiTitlePane.
+ *
+ * @author Michael Hagen
  */
 public class HiFiTitlePane extends BaseTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public HiFiTitlePane(JRootPane root, BaseRootPaneUI ui) {

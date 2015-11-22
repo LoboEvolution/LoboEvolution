@@ -31,10 +31,16 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 
 /**
+ * The Class SmartIcons.
+ *
  * @author Michael Hagen
  */
 public class SmartIcons extends BaseIcons {
 
+    /** Gets the icon icon.
+	 *
+	 * @return the icon icon
+	 */
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -46,6 +52,10 @@ public class SmartIcons extends BaseIcons {
         return iconIcon;
     }
 
+    /** Gets the min icon.
+	 *
+	 * @return the min icon
+	 */
     public static Icon getMinIcon() {
         if (minIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -57,6 +67,10 @@ public class SmartIcons extends BaseIcons {
         return minIcon;
     }
 
+    /** Gets the max icon.
+	 *
+	 * @return the max icon
+	 */
     public static Icon getMaxIcon() {
         if (maxIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -68,6 +82,10 @@ public class SmartIcons extends BaseIcons {
         return maxIcon;
     }
 
+    /** Gets the close icon.
+	 *
+	 * @return the close icon
+	 */
     public static Icon getCloseIcon() {
         if (closeIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -79,15 +97,31 @@ public class SmartIcons extends BaseIcons {
         return closeIcon;
     }
 
+/**
+ * The Class TitleButtonIcon.
+ */
 //------------------------------------------------------------------------------    
     private static class TitleButtonIcon implements Icon {
 
+        /** The closer color light. */
         private static Color closerColorLight = new Color(241, 172, 154);
+        
+        /** The closer color dark. */
         private static Color closerColorDark = new Color(224, 56, 2);
+        
+        /** The Constant ICON_ICON_TYP. */
         public static final int ICON_ICON_TYP = 0;
+        
+        /** The Constant MIN_ICON_TYP. */
         public static final int MIN_ICON_TYP = 1;
+        
+        /** The Constant MAX_ICON_TYP. */
         public static final int MAX_ICON_TYP = 2;
+        
+        /** The Constant CLOSE_ICON_TYP. */
         public static final int CLOSE_ICON_TYP = 3;
+        
+        /** The icon typ. */
         private int iconTyp = ICON_ICON_TYP;
 
         public TitleButtonIcon(int typ) {

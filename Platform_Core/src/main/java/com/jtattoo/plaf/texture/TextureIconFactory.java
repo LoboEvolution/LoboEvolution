@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
 
 /**
+ * A factory for creating TextureIcon objects.
+ *
  * @author Michael Hagen
  */
 public class TextureIconFactory implements AbstractIconFactory {
 
+    /** The instance. */
     private static TextureIconFactory instance = null;
 
     private TextureIconFactory() {
     }
 
+    /** Gets the single instance of TextureIconFactory.
+	 *
+	 * @return single instance of TextureIconFactory
+	 */
     public static synchronized TextureIconFactory getInstance() {
         if (instance == null) {
             instance = new TextureIconFactory();

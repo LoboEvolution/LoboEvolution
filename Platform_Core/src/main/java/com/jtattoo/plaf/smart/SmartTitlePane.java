@@ -29,13 +29,13 @@ import javax.swing.JDialog;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * The Class SmartTitlePane.
+ *
+ * @author Michael Hagen
  */
 public class SmartTitlePane extends BaseTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public SmartTitlePane(JRootPane root, BaseRootPaneUI ui) {

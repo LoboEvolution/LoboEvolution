@@ -27,14 +27,22 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import javax.swing.border.Border;
 
 /**
+ * A factory for creating AeroBorder objects.
+ *
  * @author Michael Hagen
  */
 public class AeroBorderFactory implements AbstractBorderFactory {
+    
+    /** The instance. */
     private static AeroBorderFactory instance = null;
     
     private AeroBorderFactory() {
     }
     
+    /** Gets the single instance of AeroBorderFactory.
+	 *
+	 * @return single instance of AeroBorderFactory
+	 */
     public static synchronized AeroBorderFactory getInstance() {
         if (instance == null)
             instance = new AeroBorderFactory();

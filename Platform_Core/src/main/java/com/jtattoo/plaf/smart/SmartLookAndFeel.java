@@ -28,42 +28,94 @@ import java.util.*;
 import javax.swing.UIDefaults;
 
 /**
+ * The Class SmartLookAndFeel.
+ *
  * @author Michael Hagen
  */
 public class SmartLookAndFeel extends AbstractLookAndFeel {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The my theme. */
 	private static SmartDefaultTheme myTheme = null;
 
+    /** The Constant themesList. */
     private static final ArrayList<String> themesList = new ArrayList<String>();
+    
+    /** The Constant themesMap. */
     private static final HashMap<String, Properties> themesMap = new HashMap<String, Properties>();
+    
+    /** The Constant defaultProps. */
     private static final Properties defaultProps = new Properties();
+    
+    /** The Constant smallFontProps. */
     private static final Properties smallFontProps = new Properties();
+    
+    /** The Constant largeFontProps. */
     private static final Properties largeFontProps = new Properties();
+    
+    /** The Constant giantFontProps. */
     private static final Properties giantFontProps = new Properties();
+    
+    /** The Constant goldProps. */
     private static final Properties goldProps = new Properties();
+    
+    /** The Constant goldSmallFontProps. */
     private static final Properties goldSmallFontProps = new Properties();
+    
+    /** The Constant goldLargeFontProps. */
     private static final Properties goldLargeFontProps = new Properties();
+    
+    /** The Constant goldGiantFontProps. */
     private static final Properties goldGiantFontProps = new Properties();
+    
+    /** The Constant greenProps. */
     private static final Properties greenProps = new Properties();
+    
+    /** The Constant greenSmallFontProps. */
     private static final Properties greenSmallFontProps = new Properties();
+    
+    /** The Constant greenLargeFontProps. */
     private static final Properties greenLargeFontProps = new Properties();
+    
+    /** The Constant greenGiantFontProps. */
     private static final Properties greenGiantFontProps = new Properties();
+    
+    /** The Constant brownProps. */
     private static final Properties brownProps = new Properties();
+    
+    /** The Constant brownSmallFontProps. */
     private static final Properties brownSmallFontProps = new Properties();
+    
+    /** The Constant brownLargeFontProps. */
     private static final Properties brownLargeFontProps = new Properties();
+    
+    /** The Constant brownGiantFontProps. */
     private static final Properties brownGiantFontProps = new Properties();
+    
+    /** The Constant lemmonProps. */
     private static final Properties lemmonProps = new Properties();
+    
+    /** The Constant lemmonSmallFontProps. */
     private static final Properties lemmonSmallFontProps = new Properties();
+    
+    /** The Constant lemmonLargeFontProps. */
     private static final Properties lemmonLargeFontProps = new Properties();
+    
+    /** The Constant lemmonGiantFontProps. */
     private static final Properties lemmonGiantFontProps = new Properties();
+    
+    /** The Constant grayProps. */
     private static final Properties grayProps = new Properties();
+    
+    /** The Constant graySmallFontProps. */
     private static final Properties graySmallFontProps = new Properties();
+    
+    /** The Constant grayLargeFontProps. */
     private static final Properties grayLargeFontProps = new Properties();
+    
+    /** The Constant grayGiantFontProps. */
     private static final Properties grayGiantFontProps = new Properties();
 
     static {
@@ -377,6 +429,10 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
         themesMap.put("Gray-Giant-Font", grayGiantFontProps);
     }
 
+    /** Gets the themes.
+	 *
+	 * @return the themes
+	 */
     public static List<String> getThemes() {
         return themesList;
     }
@@ -385,6 +441,11 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
         return ((Properties) themesMap.get(name));
     }
 
+    /** Sets the theme.
+	 *
+	 * @param name
+	 *            the new theme
+	 */
     public static void setTheme(String name) {
         setTheme((Properties) themesMap.get(name));
         if (myTheme != null) {
@@ -404,6 +465,11 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
         }
     }
 
+    /** Sets the theme.
+	 *
+	 * @param themesProps
+	 *            the new theme
+	 */
     public static void setTheme(Properties themesProps) {
         currentThemeName = "smartTheme";
         if (myTheme == null) {
@@ -417,6 +483,11 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
         }
     }
 
+    /** Sets the current theme.
+	 *
+	 * @param themesProps
+	 *            the new current theme
+	 */
     public static void setCurrentTheme(Properties themesProps) {
         setTheme(themesProps);
     }

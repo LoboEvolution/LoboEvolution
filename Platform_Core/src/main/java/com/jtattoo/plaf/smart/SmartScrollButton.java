@@ -28,13 +28,13 @@ import com.jtattoo.plaf.BaseScrollButton;
 import java.awt.Graphics;
 
 /**
- * @author  Michael Hagen
+ * The Class SmartScrollButton.
+ *
+ * @author Michael Hagen
  */
 public class SmartScrollButton extends BaseScrollButton {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public SmartScrollButton(int direction, int width) {

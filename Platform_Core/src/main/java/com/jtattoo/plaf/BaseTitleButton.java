@@ -28,14 +28,16 @@ import javax.swing.Action;
 import javax.swing.Icon;
 
 /**
- * @author  Michael Hagen
+ * The Class BaseTitleButton.
+ *
+ * @author Michael Hagen
  */
 public class BaseTitleButton extends NoFocusButton {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The alpha. */
 	private float alpha = 1.0f;
 
     public BaseTitleButton(Action action, String accessibleName, Icon icon, float alpha) {

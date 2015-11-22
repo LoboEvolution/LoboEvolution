@@ -30,10 +30,13 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class TexturePanelUI.
+ *
  * @author Michael Hagen
  */
 public class TexturePanelUI extends BasePanelUI {
 
+    /** The panel ui. */
     private static TexturePanelUI panelUI = null;
 
     public static ComponentUI createUI(JComponent c) {

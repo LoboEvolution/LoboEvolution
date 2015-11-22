@@ -29,13 +29,13 @@ import java.awt.Graphics;
 import javax.swing.JInternalFrame;
 
 /**
+ * The Class MintInternalFrameTitlePane.
+ *
  * @author Michael Hagen
  */
 public class MintInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public MintInternalFrameTitlePane(JInternalFrame f) {

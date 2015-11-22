@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
 
 /**
+ * A factory for creating McWinIcon objects.
+ *
  * @author Michael Hagen
  */
 public class McWinIconFactory implements AbstractIconFactory {
 
+    /** The instance. */
     private static McWinIconFactory instance = null;
 
     private McWinIconFactory() {
     }
 
+    /** Gets the single instance of McWinIconFactory.
+	 *
+	 * @return single instance of McWinIconFactory
+	 */
     public static synchronized McWinIconFactory getInstance() {
         if (instance == null) {
             instance = new McWinIconFactory();

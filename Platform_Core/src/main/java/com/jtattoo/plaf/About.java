@@ -28,6 +28,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 /**
+ * The Class About.
  *
  * @author Michael Hagen
  */
@@ -38,13 +39,22 @@ import javax.swing.*;
 //   wird in Linux die Toolbar beim maximieren verdeckt (siehe BaseTitlePane maximize)
 public class About extends JDialog {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The jtattoo version. */
 	public static String JTATTOO_VERSION = "Version: 1.6.11";
     
+    /** The Constant screenSize. */
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    
+    /** The Constant dlgSize. */
     private static final Dimension dlgSize = new Dimension(440, 240);
+    
+    /** The Constant dlgPosX. */
     private static final int dlgPosX = (screenSize.width / 2) - (dlgSize.width / 2);
+    
+    /** The Constant dlgPosY. */
     private static final int dlgPosY = (screenSize.height / 2) - (dlgSize.height / 2);
 
     public About() {

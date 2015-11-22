@@ -131,70 +131,95 @@ public class ElementInfo implements Serializable {
 	}
 
 	/**
-	 * @return the endElementType
+	 * Gets the end element type.
+	 *
+	 * @return the end element type
 	 */
 	public int getEndElementType() {
 		return endElementType;
 	}
 
 	/**
-	 * @param endElementType the endElementType to set
+	 * Sets the end element type.
+	 *
+	 * @param endElementType
+	 *            the new end element type
 	 */
 	public void setEndElementType(int endElementType) {
 		this.endElementType = endElementType;
 	}
 
 	/**
-	 * @return the childElementOk
+	 * Checks if is child element ok.
+	 *
+	 * @return the child element ok
 	 */
 	public boolean isChildElementOk() {
 		return childElementOk;
 	}
 
 	/**
-	 * @param childElementOk the childElementOk to set
+	 * Sets the child element ok.
+	 *
+	 * @param childElementOk
+	 *            the new child element ok
 	 */
 	public void setChildElementOk(boolean childElementOk) {
 		this.childElementOk = childElementOk;
 	}
 
 	/**
-	 * @return the stopTags
+	 * Gets the stop tags.
+	 *
+	 * @return the stop tags
 	 */
 	public Set<String> getStopTags() {
 		return stopTags;
 	}
 
 	/**
-	 * @param stopTags the stopTags to set
+	 * Sets the stop tags.
+	 *
+	 * @param stopTags
+	 *            the new stop tags
 	 */
 	public void setStopTags(Set<String> stopTags) {
 		this.stopTags = stopTags;
 	}
 
 	/**
-	 * @return the noScriptElement
+	 * Checks if is no script element.
+	 *
+	 * @return the no script element
 	 */
 	public boolean isNoScriptElement() {
 		return noScriptElement;
 	}
 
 	/**
-	 * @param noScriptElement the noScriptElement to set
+	 * Sets the no script element.
+	 *
+	 * @param noScriptElement
+	 *            the new no script element
 	 */
 	public void setNoScriptElement(boolean noScriptElement) {
 		this.noScriptElement = noScriptElement;
 	}
 
 	/**
-	 * @return the decodeEntities
+	 * Checks if is decode entities.
+	 *
+	 * @return the decode entities
 	 */
 	public boolean isDecodeEntities() {
 		return decodeEntities;
 	}
 
 	/**
-	 * @param decodeEntities the decodeEntities to set
+	 * Sets the decode entities.
+	 *
+	 * @param decodeEntities
+	 *            the new decode entities
 	 */
 	public void setDecodeEntities(boolean decodeEntities) {
 		this.decodeEntities = decodeEntities;

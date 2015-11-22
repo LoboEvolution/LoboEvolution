@@ -28,6 +28,8 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class McWinScrollPaneUI.
+ *
  * @author Michael Hagen
  */
 public class McWinScrollPaneUI extends BaseScrollPaneUI {

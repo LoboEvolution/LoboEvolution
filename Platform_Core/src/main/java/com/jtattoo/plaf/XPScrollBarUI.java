@@ -28,12 +28,16 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class XPScrollBarUI.
  *
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class XPScrollBarUI extends BaseScrollBarUI {
 
+    /** The rollover colors. */
     protected static Color rolloverColors[] = null;
+    
+    /** The drag colors. */
     protected static Color dragColors[] = null;
 
     public static ComponentUI createUI(JComponent c) {
@@ -51,6 +55,10 @@ public class XPScrollBarUI extends BaseScrollBarUI {
         }
     }
 
+    /** Gets the frame color.
+	 *
+	 * @return the frame color
+	 */
     protected Color getFrameColor() {
         return Color.white;
     }

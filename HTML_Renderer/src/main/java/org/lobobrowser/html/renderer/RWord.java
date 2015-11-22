@@ -507,34 +507,46 @@ public final class RWord extends BaseBoundableRenderable {
     }
 
 	/**
-	 * @return the shownWord
+	 * Gets the shown word.
+	 *
+	 * @return the shown word
 	 */
 	public String getShownWord() {
 		return shownWord;
 	}
 
 	/**
-	 * @param shownWord the shownWord to set
+	 * Sets the shown word.
+	 *
+	 * @param shownWord
+	 *            the new shown word
 	 */
 	public void setShownWord(String shownWord) {
 		this.shownWord = shownWord;
 	}
 
 	/**
-	 * @return the fontMetrics
+	 * Gets the font metrics.
+	 *
+	 * @return the font metrics
 	 */
 	public FontMetrics getFontMetrics() {
 		return fontMetrics;
 	}
 
 	/**
-	 * @param fontMetrics the fontMetrics to set
+	 * Sets the font metrics.
+	 *
+	 * @param fontMetrics
+	 *            the new font metrics
 	 */
 	public void setFontMetrics(FontMetrics fontMetrics) {
 		this.fontMetrics = fontMetrics;
 	}
 
 	/**
+	 * Gets the descent.
+	 *
 	 * @return the descent
 	 */
 	public int getDescent() {
@@ -542,21 +554,29 @@ public final class RWord extends BaseBoundableRenderable {
 	}
 
 	/**
-	 * @param descent the descent to set
+	 * Sets the descent.
+	 *
+	 * @param descent
+	 *            the new descent
 	 */
 	public void setDescent(int descent) {
 		this.descent = descent;
 	}
 
 	/**
-	 * @return the ascentPlusLeading
+	 * Gets the ascent plus leading.
+	 *
+	 * @return the ascent plus leading
 	 */
 	public int getAscentPlusLeading() {
 		return ascentPlusLeading;
 	}
 
 	/**
-	 * @param ascentPlusLeading the ascentPlusLeading to set
+	 * Sets the ascent plus leading.
+	 *
+	 * @param ascentPlusLeading
+	 *            the new ascent plus leading
 	 */
 	public void setAscentPlusLeading(int ascentPlusLeading) {
 		this.ascentPlusLeading = ascentPlusLeading;

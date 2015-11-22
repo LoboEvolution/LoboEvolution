@@ -29,14 +29,16 @@ import java.awt.Graphics;
 import javax.swing.JInternalFrame;
 
 /**
+ * The Class LunaInternalFrameTitlePane.
+ *
  * @author Michael Hagen
  */
 public class LunaInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant frameColor. */
 	private static final Color frameColor = new Color(0, 25, 207);
 
     public LunaInternalFrameTitlePane(JInternalFrame f) {

@@ -28,13 +28,13 @@ import java.awt.*;
 import javax.swing.JInternalFrame;
 
 /**
+ * The Class BernsteinInternalFrameTitlePane.
+ *
  * @author Michael Hagen
  */
 public class BernsteinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public BernsteinInternalFrameTitlePane(JInternalFrame f) {

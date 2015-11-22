@@ -29,7 +29,7 @@ package org.lobobrowser.clientlet;
  */
 public interface ClientletThreadGroup {
 
-    /** Gets the clientlet context.
+     /** Gets the clientlet context.
 	 *
 	 * @return the clientlet context
 	 */

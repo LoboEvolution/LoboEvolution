@@ -28,22 +28,40 @@ import com.jtattoo.plaf.hifi.HiFiIcons;
 import javax.swing.*;
 
 /**
+ * The Class NoireIcons.
+ *
  * @author Michael Hagen
  */
 public class NoireIcons extends HiFiIcons {
 
+    /** Gets the up arrow icon.
+	 *
+	 * @return the up arrow icon
+	 */
     public static Icon getUpArrowIcon() {
         return BaseIcons.getUpArrowIcon();
     }
 
+    /** Gets the down arrow icon.
+	 *
+	 * @return the down arrow icon
+	 */
     public static Icon getDownArrowIcon() {
         return BaseIcons.getDownArrowIcon();
     }
     
+    /** Gets the left arrow icon.
+	 *
+	 * @return the left arrow icon
+	 */
     public static Icon getLeftArrowIcon() {
         return BaseIcons.getLeftArrowIcon();
     }
     
+    /** Gets the right arrow icon.
+	 *
+	 * @return the right arrow icon
+	 */
     public static Icon getRightArrowIcon() {
         return BaseIcons.getRightArrowIcon();
     }

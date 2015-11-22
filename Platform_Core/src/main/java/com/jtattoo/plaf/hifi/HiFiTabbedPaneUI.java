@@ -31,6 +31,8 @@ import javax.swing.plaf.UIResource;
 import javax.swing.text.View;
 
 /**
+ * The Class HiFiTabbedPaneUI.
+ *
  * @author Michael Hagen
  */
 public class HiFiTabbedPaneUI extends BaseTabbedPaneUI {

@@ -27,10 +27,13 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class McWinCheckBoxUI.
+ *
  * @author Michael Hagen
  */
 public class McWinCheckBoxUI extends McWinRadioButtonUI {
 
+    /** The check box ui. */
     private static McWinCheckBoxUI checkBoxUI = null;
 
     public static ComponentUI createUI(JComponent b) {

@@ -35,11 +35,16 @@ import javax.swing.plaf.basic.BasicPasswordFieldUI;
 import javax.swing.text.DefaultEditorKit;
 
 /**
+ * The Class BasePasswordFieldUI.
+ *
  * @author Michael Hagen
  */
 public class BasePasswordFieldUI extends BasicPasswordFieldUI {
 
+    /** The org border. */
     private Border orgBorder = null;
+    
+    /** The focus listener. */
     private FocusListener focusListener = null;
 
     public static ComponentUI createUI(JComponent c) {

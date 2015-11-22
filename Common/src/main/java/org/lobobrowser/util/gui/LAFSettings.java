@@ -18,7 +18,12 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The Class LAFSettings.
+ */
 public class LAFSettings implements Serializable {
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
     /** The Constant logger. */
     private static final Logger logger = Logger
@@ -162,11 +167,10 @@ public class LAFSettings implements Serializable {
         this.font = TIMES_NEW_ROMAN;
     }
     
-    /**
-     * Gets the Constant instance.
-     *
-     * @return the Constant instance
-     */
+    /** Gets the Constant instance.
+	 *
+	 * @return the Constant instance
+	 */
     public static LAFSettings getInstance() {
         return instance;
     }
@@ -193,227 +197,257 @@ public class LAFSettings implements Serializable {
                 .saveSettings(this.getClass().getSimpleName(), this);
     }
     
-    /**
-     * @return the acryl
-     */
+    /** Checks if is Acryl .
+	 *
+	 * @return the Acryl
+	 */
     public boolean isAcryl() {
         return acryl;
     }
     
-    /**
-     * @return the aero
-     */
+    /** Checks if is Aero .
+	 *
+	 * @return the Aero
+	 */
     public boolean isAero() {
         return aero;
     }
     
-    /**
-     * @return the aluminium
-     */
+    /** Checks if is Aluminium .
+	 *
+	 * @return the Aluminium
+	 */
     public boolean isAluminium() {
         return aluminium;
     }
     
-    /**
-     * @return the bernstein
-     */
+    /** Checks if is Bernstein .
+	 *
+	 * @return the Bernstein
+	 */
     public boolean isBernstein() {
         return bernstein;
     }
     
-    /**
-     * @return the fast
-     */
+    /** Checks if is Fast .
+	 *
+	 * @return the Fast
+	 */
     public boolean isFast() {
         return fast;
     }
     
-    /**
-     * @return the graphite
-     */
+    /** Checks if is Graphite .
+	 *
+	 * @return the Graphite
+	 */
     public boolean isGraphite() {
         return graphite;
     }
     
-    /**
-     * @return the hiFi
-     */
+    /** Checks if is HiFi .
+	 *
+	 * @return the HiFi
+	 */
     public boolean isHiFi() {
         return hiFi;
     }
     
-    /**
-     * @return the luna
-     */
+    /** Checks if is Luna .
+	 *
+	 * @return the Luna
+	 */
     public boolean isLuna() {
         return luna;
     }
     
-    /**
-     * @return the mcWin
-     */
+    /** Checks if is McWin .
+	 *
+	 * @return the McWin
+	 */
     public boolean isMcWin() {
         return mcWin;
     }
     
-    /**
-     * @return the mint
-     */
+    /** Checks if is Mint .
+	 *
+	 * @return the Mint
+	 */
     public boolean isMint() {
         return mint;
     }
     
-    /**
-     * @return the noire
-     */
+    /** Checks if is Noire .
+	 *
+	 * @return the Noire
+	 */
     public boolean isNoire() {
         return noire;
     }
     
-    /**
-     * @return the smart
-     */
+    /** Checks if is Smart .
+	 *
+	 * @return the Smart
+	 */
     public boolean isSmart() {
         return smart;
     }
     
-    /**
-     * @return the texture
-     */
+    /** Checks if is Texture .
+	 *
+	 * @return the Texture
+	 */
     public boolean isTexture() {
         return texture;
     }
     
-    /**
-     * @param acryl
-     *            the acryl to set
-     */
+    /** Sets the Acryl .
+	 *
+	 * @param acryl
+	 *            the new Acryl
+	 */
     public void setAcryl(boolean acryl) {
         this.acryl = acryl;
     }
     
-    /**
-     * @param aero
-     *            the aero to set
-     */
+    /** Sets the Aero .
+	 *
+	 * @param aero
+	 *            the new Aero
+	 */
     public void setAero(boolean aero) {
         this.aero = aero;
     }
     
-    /**
-     * @param aluminium
-     *            the aluminium to set
-     */
+    /** Sets the Aluminium .
+	 *
+	 * @param aluminium
+	 *            the new Aluminium
+	 */
     public void setAluminium(boolean aluminium) {
         this.aluminium = aluminium;
     }
     
-    /**
-     * @param bernstein
-     *            the bernstein to set
-     */
+    /** Sets the Bernstein .
+	 *
+	 * @param bernstein
+	 *            the new Bernstein
+	 */
     public void setBernstein(boolean bernstein) {
         this.bernstein = bernstein;
     }
     
-    /**
-     * @param fast
-     *            the fast to set
-     */
+    /** Sets the Fast .
+	 *
+	 * @param fast
+	 *            the new Fast
+	 */
     public void setFast(boolean fast) {
         this.fast = fast;
     }
     
-    /**
-     * @param graphite
-     *            the graphite to set
-     */
+    /** Sets the Graphite .
+	 *
+	 * @param graphite
+	 *            the new Graphite
+	 */
     public void setGraphite(boolean graphite) {
         this.graphite = graphite;
     }
     
-    /**
-     * @param hiFi
-     *            the hiFi to set
-     */
+    /** Sets the HiFi .
+	 *
+	 * @param hiFi
+	 *            the new HiFi
+	 */
     public void setHiFi(boolean hiFi) {
         this.hiFi = hiFi;
     }
     
-    /**
-     * @param luna
-     *            the luna to set
-     */
+    /** Sets the Luna .
+	 *
+	 * @param luna
+	 *            the new Luna
+	 */
     public void setLuna(boolean luna) {
         this.luna = luna;
     }
     
-    /**
-     * @param mcWin
-     *            the mcWin to set
-     */
+    /** Sets the McWin .
+	 *
+	 * @param mcWin
+	 *            the new McWin
+	 */
     public void setMcWin(boolean mcWin) {
         this.mcWin = mcWin;
     }
     
-    /**
-     * @param mint
-     *            the mint to set
-     */
+    /** Sets the Mint .
+	 *
+	 * @param mint
+	 *            the new Mint
+	 */
     public void setMint(boolean mint) {
         this.mint = mint;
     }
     
-    /**
-     * @param noire
-     *            the noire to set
-     */
+    /** Sets the Noire .
+	 *
+	 * @param noire
+	 *            the new Noire
+	 */
     public void setNoire(boolean noire) {
         this.noire = noire;
     }
     
-    /**
-     * @param smart
-     *            the smart to set
-     */
+    /** Sets the Smart .
+	 *
+	 * @param smart
+	 *            the new Smart
+	 */
     public void setSmart(boolean smart) {
         this.smart = smart;
     }
     
-    /**
-     * @param texture
-     *            the texture to set
-     */
+    /** Sets the Texture .
+	 *
+	 * @param texture
+	 *            the new Texture
+	 */
     public void setTexture(boolean texture) {
         this.texture = texture;
     }
     
-    /**
-     * @return the fontSize
-     */
+    /** Gets the Font Size .
+	 *
+	 * @return the Font Size
+	 */
     public float getFontSize() {
         return fontSize;
     }
     
-    /**
-     * @return the font
-     */
+    /** Gets the Font .
+	 *
+	 * @return the Font
+	 */
     public String getFont() {
         return font;
     }
     
-    /**
-     * @param fontSize
-     *            the fontSize to set
-     */
+    /** Sets the Font Size .
+	 *
+	 * @param fontSize
+	 *            the new Font Size
+	 */
     public void setFontSize(float fontSize) {
         this.fontSize = fontSize;
     }
     
-    /**
-     * @param font
-     *            the font to set
-     */
+    /** Sets the Font .
+	 *
+	 * @param font
+	 *            the new Font
+	 */
     public void setFont(String font) {
         this.font = font;
     }

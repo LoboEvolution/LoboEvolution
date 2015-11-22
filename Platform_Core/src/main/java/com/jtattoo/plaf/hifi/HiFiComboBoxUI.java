@@ -32,6 +32,8 @@ import javax.swing.border.AbstractBorder;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class HiFiComboBoxUI.
+ *
  * @author Michael Hagen
  */
 public class HiFiComboBoxUI extends BaseComboBoxUI {
@@ -49,17 +51,28 @@ public class HiFiComboBoxUI extends BaseComboBoxUI {
     protected void setButtonBorder() {
     }
 
+/**
+ * The Class ArrowButtonBorder.
+ */
 //--------------------------------------------------------------------------------------------------    
     static class ArrowButtonBorder extends AbstractBorder {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant insets. */
 		private static final Insets insets = new Insets(1, 3, 1, 2);
+        
+        /** The Constant frameLoColor. */
         private static final Color frameLoColor = new Color(120, 120, 120);
+        
+        /** The Constant frameLowerColor. */
         private static final Color frameLowerColor = new Color(104, 104, 104);
+        
+        /** The Constant frameLowerLoColor. */
         private static final Color frameLowerLoColor = new Color(64, 64, 64);
+        
+        /** The Constant frameLowestColor. */
         private static final Color frameLowestColor = new Color(32, 32, 32);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {

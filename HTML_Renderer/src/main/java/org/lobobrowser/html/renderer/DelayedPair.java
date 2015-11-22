@@ -30,14 +30,31 @@ import org.lobobrowser.html.style.HtmlValues;
  */
 public class DelayedPair {
 
+	/** The containing block. */
 	public final RenderableContainer containingBlock;
+	
+	/** The immediate containing block. */
 	private final RenderableContainer immediateContainingBlock;
+	
+	/** The child. */
 	public final BoundableRenderable child;
+	
+	/** The left. */
 	private final String left;
+	
+	/** The top. */
 	private final String top;
+	
+	/** The bottom. */
 	private final String bottom;
+	
+	/** The right. */
 	private final String right;
+	
+	/** The rs. */
 	private final RenderState rs;
+	
+	/** The curr y. */
 	private final int currY;
 
 	public DelayedPair(final RenderableContainer immediateContainingBlock, final RenderableContainer containingBlock,
@@ -63,18 +80,38 @@ public class DelayedPair {
 		}
 	}
 
+	/**
+	 * Gets the left.
+	 *
+	 * @return the left
+	 */
 	public Integer getLeft() {
 		return helperGetPixelSize(left, rs, 0, containingBlock.getInnerWidth());
 	}
 
+	/**
+	 * Gets the right.
+	 *
+	 * @return the right
+	 */
 	public Integer getRight() {
 		return helperGetPixelSize(right, rs, 0, containingBlock.getInnerWidth());
 	}
 
+	/**
+	 * Gets the top.
+	 *
+	 * @return the top
+	 */
 	public Integer getTop() {
 		return helperGetPixelSize(top, rs, 0, containingBlock.getInnerHeight());
 	}
 
+	/**
+	 * Gets the bottom.
+	 *
+	 * @return the bottom
+	 */
 	public Integer getBottom() {
 		return helperGetPixelSize(bottom, rs, 0, containingBlock.getInnerHeight());
 	}

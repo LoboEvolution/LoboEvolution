@@ -30,6 +30,9 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
+/**
+ * The Class MintComboBoxUI.
+ */
 public class MintComboBoxUI extends BaseComboBoxUI {
 
     public static ComponentUI createUI(JComponent c) {
@@ -48,12 +51,13 @@ public class MintComboBoxUI extends BaseComboBoxUI {
         return button;
     }
 
+/**
+ * The Class ArrowButton.
+ */
 //------------------------------------------------------------------------------------
     static class ArrowButton extends NoFocusButton {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void paint(Graphics g) {

@@ -30,11 +30,16 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class McWinTabbedPaneUI.
+ *
  * @author Michael Hagen
  */
 public class McWinTabbedPaneUI extends BaseTabbedPaneUI {
 
+    /** The sep colors. */
     private Color sepColors[] = null;
+    
+    /** The alt sep colors. */
     private Color altSepColors[] = null;
 
     public static ComponentUI createUI(JComponent c) {

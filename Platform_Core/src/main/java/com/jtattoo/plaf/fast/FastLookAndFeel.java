@@ -30,38 +30,82 @@ import javax.swing.plaf.basic.BasicPopupMenuUI;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
 /**
+ * The Class FastLookAndFeel.
+ *
  * @author Michael Hagen
  */
 public class FastLookAndFeel extends AbstractLookAndFeel {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant darkBlue. */
 	private static final String darkBlue = "0 32 96";
+    
+    /** The Constant lightBlue. */
     private static final String lightBlue = "160 160 200";
+    
+    /** The Constant extraLightBlue. */
     private static final String extraLightBlue = "210 210 240";
+    
+    /** The Constant superLightBlue. */
     private static final String superLightBlue = "230 230 255";
+    
+    /** The Constant darkGreen. */
     private static final String darkGreen = "0 76 57";
+    
+    /** The Constant lightGreen. */
     private static final String lightGreen = "172 191 186";
+    
+    /** The Constant extraLightGreen. */
     private static final String extraLightGreen = "218 226 223";
+    
+    /** The Constant superLightGreen. */
     private static final String superLightGreen = "228 234 232";
 
+    /** The my theme. */
     private static FastDefaultTheme myTheme = null;
 
+    /** The Constant themesList. */
     private static final ArrayList<String> themesList = new ArrayList<String>();
+    
+    /** The Constant themesMap. */
     private static final HashMap<String, Properties> themesMap = new HashMap<String, Properties>();
+    
+    /** The Constant defaultProps. */
     private static final Properties defaultProps = new Properties();
+    
+    /** The Constant smallFontProps. */
     private static final Properties smallFontProps = new Properties();
+    
+    /** The Constant largeFontProps. */
     private static final Properties largeFontProps = new Properties();
+    
+    /** The Constant giantFontProps. */
     private static final Properties giantFontProps = new Properties();
+    
+    /** The Constant blueProps. */
     private static final Properties blueProps = new Properties();
+    
+    /** The Constant blueSmallFontProps. */
     private static final Properties blueSmallFontProps = new Properties();
+    
+    /** The Constant blueLargeFontProps. */
     private static final Properties blueLargeFontProps = new Properties();
+    
+    /** The Constant blueGiantFontProps. */
     private static final Properties blueGiantFontProps = new Properties();
+    
+    /** The Constant greenProps. */
     private static final Properties greenProps = new Properties();
+    
+    /** The Constant greenSmallFontProps. */
     private static final Properties greenSmallFontProps = new Properties();
+    
+    /** The Constant greenLargeFontProps. */
     private static final Properties greenLargeFontProps = new Properties();
+    
+    /** The Constant greenGiantFontProps. */
     private static final Properties greenGiantFontProps = new Properties();
 
 
@@ -183,6 +227,10 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
         themesMap.put("Green-Giant-Font", greenGiantFontProps);
     }
 
+    /** Gets the themes.
+	 *
+	 * @return the themes
+	 */
     public static List<String> getThemes() {
         return themesList;
     }
@@ -191,6 +239,11 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
         return ((Properties) themesMap.get(name));
     }
 
+    /** Sets the theme.
+	 *
+	 * @param name
+	 *            the new theme
+	 */
     public static void setTheme(String name) {
         setTheme((Properties) themesMap.get(name));
         if (myTheme != null) {
@@ -210,6 +263,11 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
         }
     }
 
+    /** Sets the theme.
+	 *
+	 * @param themesProps
+	 *            the new theme
+	 */
     public static void setTheme(Properties themesProps) {
         currentThemeName = "fastTheme";
         if (myTheme == null) {
@@ -223,6 +281,11 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
         }
     }
 
+    /** Sets the current theme.
+	 *
+	 * @param themesProps
+	 *            the new current theme
+	 */
     public static void setCurrentTheme(Properties themesProps) {
         setTheme(themesProps);
     }

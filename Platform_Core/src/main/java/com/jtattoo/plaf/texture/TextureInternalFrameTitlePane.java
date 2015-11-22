@@ -30,13 +30,13 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JInternalFrame;
 
 /**
+ * The Class TextureInternalFrameTitlePane.
+ *
  * @author Michael Hagen
  */
 public class TextureInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public TextureInternalFrameTitlePane(JInternalFrame f) {

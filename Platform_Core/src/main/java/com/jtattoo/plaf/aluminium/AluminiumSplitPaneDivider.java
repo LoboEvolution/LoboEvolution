@@ -29,13 +29,13 @@ import com.jtattoo.plaf.JTattooUtilities;
 import java.awt.*;
 
 /**
+ * The Class AluminiumSplitPaneDivider.
+ *
  * @author Michael Hagen
  */
 public class AluminiumSplitPaneDivider extends BaseSplitPaneDivider {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public AluminiumSplitPaneDivider(AluminiumSplitPaneUI ui) {

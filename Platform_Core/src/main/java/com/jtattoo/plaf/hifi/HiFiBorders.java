@@ -31,12 +31,18 @@ import javax.swing.border.Border;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class HiFiBorders.
+ *
  * @author Michael Hagen
  */
 public class HiFiBorders extends BaseBorders {
 
     //------------------------------------------------------------------------------------
     // Lazy access methods
+    /** Gets the button border.
+	 *
+	 * @return the button border
+	 */
     //------------------------------------------------------------------------------------
     public static Border getButtonBorder() {
         if (buttonBorder == null) {
@@ -45,10 +51,18 @@ public class HiFiBorders extends BaseBorders {
         return buttonBorder;
     }
 
+    /** Gets the toggle button border.
+	 *
+	 * @return the toggle button border
+	 */
     public static Border getToggleButtonBorder() {
         return getButtonBorder();
     }
 
+    /** Gets the rollover tool button border.
+	 *
+	 * @return the rollover tool button border
+	 */
     public static Border getRolloverToolButtonBorder() {
         if (rolloverToolButtonBorder == null) {
             rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -56,6 +70,10 @@ public class HiFiBorders extends BaseBorders {
         return rolloverToolButtonBorder;
     }
 
+    /** Gets the scroll pane border.
+	 *
+	 * @return the scroll pane border
+	 */
     public static Border getScrollPaneBorder() {
         if (scrollPaneBorder == null) {
             scrollPaneBorder = new ScrollPaneBorder();
@@ -63,6 +81,10 @@ public class HiFiBorders extends BaseBorders {
         return scrollPaneBorder;
     }
 
+    /** Gets the table scroll pane border.
+	 *
+	 * @return the table scroll pane border
+	 */
     public static Border getTableScrollPaneBorder() {
         if (tableScrollPaneBorder == null) {
             tableScrollPaneBorder = new ScrollPaneBorder();
@@ -70,6 +92,10 @@ public class HiFiBorders extends BaseBorders {
         return tableScrollPaneBorder;
     }
 
+    /** Gets the internal frame border.
+	 *
+	 * @return the internal frame border
+	 */
     public static Border getInternalFrameBorder() {
         if (internalFrameBorder == null) {
             internalFrameBorder = new InternalFrameBorder();
@@ -77,6 +103,10 @@ public class HiFiBorders extends BaseBorders {
         return internalFrameBorder;
     }
 
+    /** Gets the tool bar border.
+	 *
+	 * @return the tool bar border
+	 */
     public static Border getToolBarBorder() {
         if (toolBarBorder == null) {
             toolBarBorder = new ToolBarBorder();
@@ -86,9 +116,13 @@ public class HiFiBorders extends BaseBorders {
 
 //------------------------------------------------------------------------------------
 // Implementation of border classes
+/**
+ * The Class ButtonBorder.
+ */
 //------------------------------------------------------------------------------------
     public static class ButtonBorder implements Border, UIResource {
 
+        /** The Constant insets. */
         private static final Insets insets = new Insets(4, 8, 4, 8);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -140,9 +174,13 @@ public class HiFiBorders extends BaseBorders {
         }
     } // class ButtonBorder
 
+/**
+ * The Class RolloverToolButtonBorder.
+ */
 //-------------------------------------------------------------------------------------------------    
     public static class RolloverToolButtonBorder implements Border, UIResource {
 
+        /** The Constant insets. */
         private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -183,9 +221,13 @@ public class HiFiBorders extends BaseBorders {
         }
     } // class RolloverToolButtonBorder
 
+/**
+ * The Class ScrollPaneBorder.
+ */
 //-------------------------------------------------------------------------------------------------    
     public static class ScrollPaneBorder implements Border, UIResource {
 
+        /** The Constant insets. */
         private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -210,9 +252,13 @@ public class HiFiBorders extends BaseBorders {
         }
     } // class ScrollPaneBorder
 
+/**
+ * The Class TabbedPaneBorder.
+ */
 //-------------------------------------------------------------------------------------------------    
     public static class TabbedPaneBorder implements Border, UIResource {
 
+        /** The Constant insets. */
         private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -237,12 +283,13 @@ public class HiFiBorders extends BaseBorders {
         }
     } // class TabbedPaneBorder
 
+/**
+ * The Class InternalFrameBorder.
+ */
 //-------------------------------------------------------------------------------------------------    
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public InternalFrameBorder() {
@@ -279,13 +326,17 @@ public class HiFiBorders extends BaseBorders {
         }
     } // class InternalFrameBorder
 
+    /** The Class ToolBarBorder.
+	 */
     public static class ToolBarBorder extends AbstractBorder implements UIResource, SwingConstants {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant HOR_RUBBER_ICON. */
 		private static final LazyImageIcon HOR_RUBBER_ICON = new LazyImageIcon("hifi/icons/HorRubber.gif");
+        
+        /** The Constant VER_RUBBER_ICON. */
         private static final LazyImageIcon VER_RUBBER_ICON = new LazyImageIcon("hifi/icons/VerRubber.gif");
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {

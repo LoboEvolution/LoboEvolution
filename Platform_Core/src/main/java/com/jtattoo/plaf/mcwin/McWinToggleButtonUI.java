@@ -29,6 +29,8 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class McWinToggleButtonUI.
+ *
  * @author Michael Hagen
  */
 public class McWinToggleButtonUI extends BaseToggleButtonUI {

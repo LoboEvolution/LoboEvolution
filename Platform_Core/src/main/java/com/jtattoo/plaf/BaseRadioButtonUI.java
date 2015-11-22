@@ -30,11 +30,16 @@ import javax.swing.plaf.basic.*;
 import javax.swing.text.View;
 
 /**
+ * The Class BaseRadioButtonUI.
+ *
  * @author Michael Hagen
  */
 public class BaseRadioButtonUI extends BasicRadioButtonUI {
 
+    /** The radio button ui. */
     private static BaseRadioButtonUI radioButtonUI = null;
+    
+    /** The size. */
     /* These Dimensions/Rectangles are allocated once for all
      * RadioButtonUI.paint() calls.  Re-using rectangles
      * rather than allocating them in each paint call substantially
@@ -42,8 +47,14 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
      * method can't be re-entered.
      */
     protected static Dimension size = new Dimension();
+    
+    /** The view rect. */
     protected static Rectangle viewRect = new Rectangle();
+    
+    /** The icon rect. */
     protected static Rectangle iconRect = new Rectangle();
+    
+    /** The text rect. */
     protected static Rectangle textRect = new Rectangle();
 
     public static ComponentUI createUI(JComponent c) {

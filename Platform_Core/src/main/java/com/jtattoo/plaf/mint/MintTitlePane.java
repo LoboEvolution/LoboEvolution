@@ -28,13 +28,13 @@ import java.awt.*;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * The Class MintTitlePane.
+ *
+ * @author Michael Hagen
  */
 public class MintTitlePane extends BaseTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public MintTitlePane(JRootPane root, BaseRootPaneUI ui) {

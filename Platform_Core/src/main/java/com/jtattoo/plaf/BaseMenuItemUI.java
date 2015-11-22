@@ -30,6 +30,8 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicMenuItemUI;
 
 /**
+ * The Class BaseMenuItemUI.
+ *
  * @author Michael Hagen
  */
 public class BaseMenuItemUI extends BasicMenuItemUI {

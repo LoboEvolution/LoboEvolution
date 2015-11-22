@@ -35,6 +35,8 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
+ * The Class LunaButtonUI.
+ *
  * @author Michael Hagen
  */
 public class LunaButtonUI extends BaseButtonUI {

@@ -29,7 +29,9 @@ import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
 
 /**
- * @author  Michael Hagen
+ * The Class HiFiRootPaneUI.
+ *
+ * @author Michael Hagen
  */
 public class HiFiRootPaneUI extends BaseRootPaneUI {
 

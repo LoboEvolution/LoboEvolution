@@ -38,10 +38,13 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
+ * The Class GraphiteTabbedPaneUI.
+ *
  * @author Michael Hagen
  */
 public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
 
+    /** The sep colors. */
     private Color sepColors[] = null;
 
     public static ComponentUI createUI(JComponent c) {

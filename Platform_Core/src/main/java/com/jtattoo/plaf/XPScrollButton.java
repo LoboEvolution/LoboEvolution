@@ -28,19 +28,23 @@ import javax.swing.Icon;
 import javax.swing.UIManager;
 
 /**
- * @author  Michael Hagen
+ * The Class XPScrollButton.
+ *
+ * @author Michael Hagen
  */
 public abstract class XPScrollButton extends BaseScrollButton {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public XPScrollButton(int direction, int width) {
         super(direction, width);
     }
 
+    /** Gets the up arrow icon.
+	 *
+	 * @return the up arrow icon
+	 */
     private Icon getUpArrowIcon() {
         if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
             AbstractLookAndFeel laf = (AbstractLookAndFeel)UIManager.getLookAndFeel();
@@ -49,6 +53,10 @@ public abstract class XPScrollButton extends BaseScrollButton {
         return null;
     }
     
+    /** Gets the down arrow icon.
+	 *
+	 * @return the down arrow icon
+	 */
     private Icon getDownArrowIcon() {
         if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
             AbstractLookAndFeel laf = (AbstractLookAndFeel)UIManager.getLookAndFeel();
@@ -57,6 +65,10 @@ public abstract class XPScrollButton extends BaseScrollButton {
         return null;
     }
     
+    /** Gets the left arrow icon.
+	 *
+	 * @return the left arrow icon
+	 */
     private Icon getLeftArrowIcon() {
         if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
             AbstractLookAndFeel laf = (AbstractLookAndFeel)UIManager.getLookAndFeel();
@@ -65,6 +77,10 @@ public abstract class XPScrollButton extends BaseScrollButton {
         return null;
     }
     
+    /** Gets the right arrow icon.
+	 *
+	 * @return the right arrow icon
+	 */
     private Icon getRightArrowIcon() {
         if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
             AbstractLookAndFeel laf = (AbstractLookAndFeel)UIManager.getLookAndFeel();
@@ -73,6 +89,10 @@ public abstract class XPScrollButton extends BaseScrollButton {
         return null;
     }
     
+    /** Gets the frame color.
+	 *
+	 * @return the frame color
+	 */
     public Color getFrameColor() {
         return Color.white;
     }

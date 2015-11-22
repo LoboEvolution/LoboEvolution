@@ -48,30 +48,36 @@ public class EntryInfo {
                 + "]";
     }
     
-    /**
-     * @return the valueClass
-     */
+    /** Gets the value class.
+	 *
+	 * @return the value class
+	 */
     public Class<?> getValueClass() {
         return valueClass;
     }
 
-    /**
-     * @param valueClass the valueClass to set
-     */
+    /** Sets the value class.
+	 *
+	 * @param valueClass
+	 *            the new value class
+	 */
     public void setValueClass(Class<?> valueClass) {
         this.valueClass = valueClass;
     }
 
-    /**
-     * @return the approximateSize
-     */
+    /** Gets the approximate size.
+	 *
+	 * @return the approximate size
+	 */
     public int getApproximateSize() {
         return approximateSize;
     }
 
-    /**
-     * @param approximateSize the approximateSize to set
-     */
+    /** Sets the approximate size.
+	 *
+	 * @param approximateSize
+	 *            the new approximate size
+	 */
     public void setApproximateSize(int approximateSize) {
         this.approximateSize = approximateSize;
     }

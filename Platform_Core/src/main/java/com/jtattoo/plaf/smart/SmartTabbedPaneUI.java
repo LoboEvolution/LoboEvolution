@@ -30,7 +30,7 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
 /**
- * author Michael Hagen
+ * author Michael Hagen.
  */
 public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
 

@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
 
 /**
+ * A factory for creating MintIcon objects.
+ *
  * @author Michael Hagen
  */
 public class MintIconFactory implements AbstractIconFactory {
 
+    /** The instance. */
     private static MintIconFactory instance = null;
 
     private MintIconFactory() {
     }
 
+     /** Gets the instance.
+		 *
+		 * @return the instance
+		 */
     public static synchronized MintIconFactory getInstance() {
         if (instance == null) {
             instance = new MintIconFactory();

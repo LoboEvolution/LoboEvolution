@@ -29,6 +29,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class MintInternalFrameUI.
+ *
  * @author Michael Hagen
  */
 public class MintInternalFrameUI extends BaseInternalFrameUI {

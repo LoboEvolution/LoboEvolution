@@ -29,10 +29,13 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class BernsteinTabbedPaneUI.
+ *
  * @author Michael Hagen
  */
 public class BernsteinTabbedPaneUI extends BaseTabbedPaneUI {
 
+    /** The sep colors. */
     private static Color SEP_COLORS[] = {
         new Color(229, 187, 0),
         new Color(254, 240, 0),

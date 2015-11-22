@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
 
 /**
+ * A factory for creating AeroIcon objects.
+ *
  * @author Michael Hagen
  */
 public class AeroIconFactory implements AbstractIconFactory {
 
+    /** The instance. */
     private static AeroIconFactory instance = null;
 
     private AeroIconFactory() {
     }
 
+    /** Gets the single instance of AeroIconFactory.
+	 *
+	 * @return single instance of AeroIconFactory
+	 */
     public static synchronized AeroIconFactory getInstance() {
         if (instance == null) {
             instance = new AeroIconFactory();

@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import javax.swing.border.Border;
 
 /**
+ * A factory for creating HiFiBorder objects.
+ *
  * @author Michael Hagen
  */
 public class HiFiBorderFactory implements AbstractBorderFactory {
 
+    /** The instance. */
     private static HiFiBorderFactory instance = null;
 
     private HiFiBorderFactory() {
     }
 
+    /** Gets the single instance of HiFiBorderFactory.
+	 *
+	 * @return single instance of HiFiBorderFactory
+	 */
     public static synchronized HiFiBorderFactory getInstance() {
         if (instance == null) {
             instance = new HiFiBorderFactory();

@@ -27,10 +27,13 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class BaseCheckBoxUI.
+ *
  * @author Michael Hagen
  */
 public class BaseCheckBoxUI extends BaseRadioButtonUI {
 
+    /** The check box ui. */
     private static BaseCheckBoxUI checkBoxUI = null;
 
     public static ComponentUI createUI(JComponent b) {

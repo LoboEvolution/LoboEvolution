@@ -30,10 +30,13 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class HiFiPanelUI.
+ *
  * @author Michael Hagen
  */
 public class HiFiPanelUI extends BasePanelUI {
 
+    /** The panel ui. */
     private static HiFiPanelUI panelUI = null;
 
     public static ComponentUI createUI(JComponent c) {

@@ -29,6 +29,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class HiFiInternalFrameUI.
+ *
  * @author Michael Hagen
  */
 public class HiFiInternalFrameUI extends BaseInternalFrameUI {

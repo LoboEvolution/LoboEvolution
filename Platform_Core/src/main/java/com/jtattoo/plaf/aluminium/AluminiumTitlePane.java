@@ -28,13 +28,13 @@ import java.awt.Graphics;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * The Class AluminiumTitlePane.
+ *
+ * @author Michael Hagen
  */
 public class AluminiumTitlePane extends BaseTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public AluminiumTitlePane(JRootPane root, BaseRootPaneUI ui) {

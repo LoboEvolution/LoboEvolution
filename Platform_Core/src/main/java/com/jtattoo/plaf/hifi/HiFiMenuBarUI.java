@@ -31,6 +31,8 @@ import javax.swing.plaf.basic.BasicMenuBarUI;
 
 
 /**
+ * The Class HiFiMenuBarUI.
+ *
  * @author Michael Hagen
  */
 public class HiFiMenuBarUI extends BasicMenuBarUI {

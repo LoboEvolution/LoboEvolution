@@ -28,6 +28,8 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class BernsteinScrollPaneUI.
+ *
  * @author Michael Hagen
  */
 public class BernsteinScrollPaneUI extends BaseScrollPaneUI {

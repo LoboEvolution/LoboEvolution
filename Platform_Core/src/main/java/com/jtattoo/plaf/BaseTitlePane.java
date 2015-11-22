@@ -37,61 +37,110 @@ import javax.swing.plaf.UIResource;
 
 /**
  * This class is a modified copy of the javax.swing.plaf.metal.MetalTitlePaneUI
- *
+ * 
  * Class that manages a JLF awt.Window-descendant class's title bar.
  * <p>
- * This class assumes it will be created with a particular window
- * decoration style, and that if the style changes, a new one will
- * be created.
+ * This class assumes it will be created with a particular window decoration
+ * style, and that if the style changes, a new one will be created.
  *
- * @version 1.12 01/23/03
  * @author Terry Kellerman
  * @author Michael Hagen
- *
+ * @version 1.12 01/23/03
  * @since 1.4
  */
 public class BaseTitlePane extends JComponent implements TitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant PAINT_ACTIVE. */
 	public static final String PAINT_ACTIVE = "paintActive";
+    
+    /** The Constant ICONIFY. */
     public static final String ICONIFY = "Iconify";
+    
+    /** The Constant MAXIMIZE. */
     public static final String MAXIMIZE = "Maximize";
+    
+    /** The Constant CLOSE. */
     public static final String CLOSE = "Close";
+    
+    /** The property change listener. */
     protected PropertyChangeListener propertyChangeListener;
+    
+    /** The close action. */
     protected Action closeAction;
+    
+    /** The iconify action. */
     protected Action iconifyAction;
+    
+    /** The restore action. */
     protected Action restoreAction;
+    
+    /** The maximize action. */
     protected Action maximizeAction;
+    
+    /** The menu bar. */
     protected JMenuBar menuBar;
+    
+    /** The custom title panel. */
     protected JPanel customTitlePanel;
+    
+    /** The iconify button. */
     protected JButton iconifyButton;
+    
+    /** The max button. */
     protected JButton maxButton;
+    
+    /** The close button. */
     protected JButton closeButton;
+    
+    /** The iconify icon. */
     protected Icon iconifyIcon;
+    
+    /** The maximize icon. */
     protected Icon maximizeIcon;
+    
+    /** The minimize icon. */
     protected Icon minimizeIcon;
+    
+    /** The close icon. */
     protected Icon closeIcon;
+    
+    /** The window listener. */
     protected WindowListener windowListener;
+    
+    /** The window. */
     protected Window window;
+    
+    /** The root pane. */
     protected JRootPane rootPane;
+    
+    /** The root pane ui. */
     protected BaseRootPaneUI rootPaneUI;
+    
+    /** The buttons width. */
     protected int buttonsWidth;
+    
+    /** The state. */
     protected int state;
     // This flag is used to avoid a bug with OSX and java 1.7. The call to setExtendedState
     // with both flags ICONIFY and MAXIMIZED_BOTH throws an illegal state exception, so we
     // have to switch off the MAXIMIZED_BOTH flag in the iconify() method. If frame is deiconified
+    /** The was maximized. */
     // we use the wasMaximized flag to restore the maximized state.
     protected boolean wasMaximized;
     // This flag indicates a maximize error. This occurs on multiscreen environments where the first
     // screen does not have the same resolution as the second screen. In this case we only simulate the
     // maximize/restore behaviour. It's not a perfect simulation (frame border will stay visible, 
+    /** The was maximize error. */
     // and we have to restore the bounds if look and feel changes in maximized state)
     protected boolean wasMaximizeError = false;
     
+    /** The background image. */
     protected BufferedImage backgroundImage = null;
+    
+    /** The alpha value. */
     protected float alphaValue = 0.85f;
 
     public BaseTitlePane(JRootPane root, BaseRootPaneUI ui) {
@@ -137,6 +186,10 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         return rootPane;
     }
 
+    /** Gets the frame.
+	 *
+	 * @return the frame
+	 */
     protected Frame getFrame() {
         if (window instanceof Frame) {
             return (Frame) window;
@@ -144,18 +197,34 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         return null;
     }
     
+    /** Gets the window.
+	 *
+	 * @return the window
+	 */
     protected Window getWindow() {
         return window;
     }
 
+    /** Gets the window decoration style.
+	 *
+	 * @return the window decoration style
+	 */
     protected int getWindowDecorationStyle() {
         return DecorationHelper.getWindowDecorationStyle(rootPane);
     }
     
+    /** Checks if is mac style window decoration.
+	 *
+	 * @return true, if is mac style window decoration
+	 */
     protected boolean isMacStyleWindowDecoration() {
         return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn();
     }
 
+    /** Gets the frame icon image.
+	 *
+	 * @return the frame icon image
+	 */
     protected Image getFrameIconImage() {
         // try to find icon for dialog windows
         if (getFrame() == null && JTattooUtilities.getJavaVersion() >= 1.6) {
@@ -268,6 +337,11 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         }
     }
 
+    /** Sets the customized title panel.
+	 *
+	 * @param panel
+	 *            the new customized title panel
+	 */
     public void setCustomizedTitlePanel(JPanel panel) {
         if (customTitlePanel != null) {
             remove(customTitlePanel);
@@ -380,6 +454,11 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         return defaultValue;
     }
 
+    /** Sets the active.
+	 *
+	 * @param flag
+	 *            the new active
+	 */
     protected void setActive(boolean flag) {
         if (getWindowDecorationStyle() == BaseRootPaneUI.FRAME) {
             Boolean active = flag ? Boolean.TRUE : Boolean.FALSE;
@@ -390,22 +469,45 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         getRootPane().repaint();
     }
 
+    /** Checks if is active.
+	 *
+	 * @return true, if is active
+	 */
     protected boolean isActive() {
         return (window == null) ? true : JTattooUtilities.isWindowActive(window);
     }
 
+    /** Checks if is left to right.
+	 *
+	 * @return true, if is left to right
+	 */
     protected boolean isLeftToRight() {
         return (window == null) ? getRootPane().getComponentOrientation().isLeftToRight() : window.getComponentOrientation().isLeftToRight();
     }
 
+    /** Sets the background image.
+	 *
+	 * @param bgImage
+	 *            the new background image
+	 */
     public void setBackgroundImage(BufferedImage bgImage) {
         backgroundImage = bgImage;
     }
 
+    /** Sets the alpha transparency.
+	 *
+	 * @param alpha
+	 *            the new alpha transparency
+	 */
     public void setAlphaTransparency(float alpha) {
         alphaValue = alpha;
     }
 
+    /** Sets the state.
+	 *
+	 * @param state
+	 *            the new state
+	 */
     protected void setState(int state) {
         setState(state, false);
     }
@@ -493,10 +595,18 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         maxButton.setIcon(icon);
     }
 
+    /** Gets the hor spacing.
+	 *
+	 * @return the hor spacing
+	 */
     protected int getHorSpacing() {
         return 3;
     }
 
+    /** Gets the ver spacing.
+	 *
+	 * @return the ver spacing
+	 */
     protected int getVerSpacing() {
         return 3;
     }
@@ -505,6 +615,10 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         return true;
     }
 
+    /** Gets the title.
+	 *
+	 * @return the title
+	 */
     protected String getTitle() {
         if (window instanceof Frame) {
             return ((Frame) window).getTitle();
@@ -530,6 +644,10 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         }
     }
 
+    /** Gets the icon width.
+	 *
+	 * @return the icon width
+	 */
     protected int getIconWidth() {
         Image image = getFrameIconImage();
         if (image != null) {
@@ -667,11 +785,11 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         paintText(g, x, y, frameTitle);
     }
 
+    /** The Class CloseAction.
+	 */
     protected class CloseAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public CloseAction() {
@@ -683,11 +801,11 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         }
     }
 
+    /** The Class IconifyAction.
+	 */
     protected class IconifyAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public IconifyAction() {
@@ -699,11 +817,11 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         }
     }
 
+    /** The Class RestoreAction.
+	 */
     protected class RestoreAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public RestoreAction() {
@@ -715,11 +833,11 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         }
     }
 
+    /** The Class MaximizeAction.
+	 */
     protected class MaximizeAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public MaximizeAction() {
@@ -731,12 +849,13 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         }
     }
 
+/**
+ * The Class SystemMenuBar.
+ */
 //-----------------------------------------------------------------------------------------------
     protected class SystemMenuBar extends JMenuBar {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public SystemMenuBar() {
@@ -800,6 +919,9 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         }
     }
 
+/**
+ * The Class TitlePaneLayout.
+ */
 //-----------------------------------------------------------------------------------------------
     protected class TitlePaneLayout implements LayoutManager {
 
@@ -938,6 +1060,9 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         }
     }
 
+/**
+ * The Class PropertyChangeHandler.
+ */
 //-----------------------------------------------------------------------------------------------
     protected class PropertyChangeHandler implements PropertyChangeListener {
 
@@ -997,6 +1122,9 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         }
     }
 
+/**
+ * The Class WindowHandler.
+ */
 //-----------------------------------------------------------------------------------------------
     protected class WindowHandler extends WindowAdapter {
 

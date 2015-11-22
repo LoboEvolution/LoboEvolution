@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import javax.swing.border.Border;
 
 /**
+ * A factory for creating TextureBorder objects.
+ *
  * @author Michael Hagen
  */
 public class TextureBorderFactory implements AbstractBorderFactory {
 
+    /** The instance. */
     private static TextureBorderFactory instance = null;
     
     private TextureBorderFactory() {
     }
     
+    /** Gets the single instance of TextureBorderFactory.
+	 *
+	 * @return single instance of TextureBorderFactory
+	 */
     public static synchronized TextureBorderFactory getInstance() {
         if (instance == null)
             instance = new TextureBorderFactory();

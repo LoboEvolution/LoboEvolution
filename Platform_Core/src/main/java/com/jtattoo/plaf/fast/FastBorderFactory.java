@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import javax.swing.border.Border;
 
 /**
+ * A factory for creating FastBorder objects.
+ *
  * @author Michael Hagen
  */
 public class FastBorderFactory implements AbstractBorderFactory {
 
+    /** The instance. */
     private static FastBorderFactory instance = null;
 
     private FastBorderFactory() {
     }
 
+    /** Gets the single instance of FastBorderFactory.
+	 *
+	 * @return single instance of FastBorderFactory
+	 */
     public static synchronized FastBorderFactory getInstance() {
         if (instance == null) {
             instance = new FastBorderFactory();

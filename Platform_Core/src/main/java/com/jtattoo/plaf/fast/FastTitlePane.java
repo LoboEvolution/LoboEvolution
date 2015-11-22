@@ -29,13 +29,13 @@ import java.awt.Graphics;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * The Class FastTitlePane.
+ *
+ * @author Michael Hagen
  */
 public class FastTitlePane extends BaseTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public FastTitlePane(JRootPane root, BaseRootPaneUI ui) {

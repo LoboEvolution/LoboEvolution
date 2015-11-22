@@ -28,13 +28,13 @@ import java.awt.*;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * The Class LunaTitlePane.
+ *
+ * @author Michael Hagen
  */
 public class LunaTitlePane extends BaseTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public LunaTitlePane(JRootPane root, BaseRootPaneUI ui) {

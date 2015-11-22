@@ -62,6 +62,8 @@ public class PositionedRenderable {
     }
 
 	/**
+	 * Gets the renderable.
+	 *
 	 * @return the renderable
 	 */
 	public BoundableRenderable getRenderable() {
@@ -69,27 +71,37 @@ public class PositionedRenderable {
 	}
 
 	/**
-	 * @param renderable the renderable to set
+	 * Sets the renderable.
+	 *
+	 * @param renderable
+	 *            the new renderable
 	 */
 	public void setRenderable(BoundableRenderable renderable) {
 		this.renderable = renderable;
 	}
 
 	/**
-	 * @return the verticalAlignable
+	 * Checks if is vertical alignable.
+	 *
+	 * @return the vertical alignable
 	 */
 	public boolean isVerticalAlignable() {
 		return verticalAlignable;
 	}
 
 	/**
-	 * @param verticalAlignable the verticalAlignable to set
+	 * Sets the vertical alignable.
+	 *
+	 * @param verticalAlignable
+	 *            the new vertical alignable
 	 */
 	public void setVerticalAlignable(boolean verticalAlignable) {
 		this.verticalAlignable = verticalAlignable;
 	}
 
 	/**
+	 * Gets the ordinal.
+	 *
 	 * @return the ordinal
 	 */
 	public int getOrdinal() {
@@ -97,21 +109,29 @@ public class PositionedRenderable {
 	}
 
 	/**
-	 * @param ordinal the ordinal to set
+	 * Sets the ordinal.
+	 *
+	 * @param ordinal
+	 *            the new ordinal
 	 */
 	public void setOrdinal(int ordinal) {
 		this.ordinal = ordinal;
 	}
 
 	/**
-	 * @return the isFloat
+	 * Checks if is float.
+	 *
+	 * @return true, if is float
 	 */
 	public boolean isFloat() {
 		return isFloat;
 	}
 
 	/**
-	 * @param isFloat the isFloat to set
+	 * Sets the float.
+	 *
+	 * @param isFloat
+	 *            the new float
 	 */
 	public void setFloat(boolean isFloat) {
 		this.isFloat = isFloat;

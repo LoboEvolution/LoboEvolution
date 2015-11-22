@@ -26,15 +26,22 @@ import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
 
 /**
+ * A factory for creating GraphiteIcon objects.
+ *
  * @author Michael Hagen
  */
 public class GraphiteIconFactory implements AbstractIconFactory {
 
+    /** The instance. */
     private static GraphiteIconFactory instance = null;
 
     private GraphiteIconFactory() {
     }
 
+    /** Gets the single instance of GraphiteIconFactory.
+	 *
+	 * @return single instance of GraphiteIconFactory
+	 */
     public static synchronized GraphiteIconFactory getInstance() {
         if (instance == null) {
             instance = new GraphiteIconFactory();

@@ -32,6 +32,8 @@ import javax.swing.plaf.*;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
+ * The Class AluminiumToggleButtonUI.
+ *
  * @author Michael Hagen
  */
 public class AluminiumToggleButtonUI extends BaseToggleButtonUI {

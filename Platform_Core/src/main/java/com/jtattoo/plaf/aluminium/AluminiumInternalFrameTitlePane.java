@@ -28,13 +28,13 @@ import java.awt.Graphics;
 import javax.swing.JInternalFrame;
 
 /**
+ * The Class AluminiumInternalFrameTitlePane.
+ *
  * @author Michael Hagen
  */
 public class AluminiumInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public AluminiumInternalFrameTitlePane(JInternalFrame f) {

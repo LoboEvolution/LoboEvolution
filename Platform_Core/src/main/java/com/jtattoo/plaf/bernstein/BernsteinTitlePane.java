@@ -28,13 +28,13 @@ import java.awt.*;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * The Class BernsteinTitlePane.
+ *
+ * @author Michael Hagen
  */
 public class BernsteinTitlePane extends BaseTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public BernsteinTitlePane(JRootPane root, BaseRootPaneUI ui) {

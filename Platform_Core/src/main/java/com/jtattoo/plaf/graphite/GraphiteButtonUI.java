@@ -35,6 +35,8 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
+ * The Class GraphiteButtonUI.
+ *
  * @author Michael Hagen
  */
 public class GraphiteButtonUI extends BaseButtonUI {

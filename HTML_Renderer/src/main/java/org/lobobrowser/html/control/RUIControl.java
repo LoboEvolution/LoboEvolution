@@ -550,6 +550,8 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 	}
 
 	/**
+	 * Gets the widget.
+	 *
 	 * @return the widget
 	 */
 	public UIControl getWidget() {
@@ -557,8 +559,10 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 	}
 
 	/**
+	 * Sets the widget.
+	 *
 	 * @param widget
-	 *            the widget to set
+	 *            the new widget
 	 */
 	public void setWidget(UIControl widget) {
 		this.widget = widget;

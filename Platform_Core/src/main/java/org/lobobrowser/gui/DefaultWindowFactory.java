@@ -114,8 +114,7 @@ public class DefaultWindowFactory implements WindowFactory {
     }
     
     
-    /**
-	 * Gets an image icon.
+    /** Gets the image icon.
 	 *
 	 * @return the image icon
 	 */

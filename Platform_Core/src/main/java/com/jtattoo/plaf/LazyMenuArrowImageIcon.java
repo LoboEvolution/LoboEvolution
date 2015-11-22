@@ -28,14 +28,22 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
+ * The Class LazyMenuArrowImageIcon.
  *
  * @author Michael Hagen
  */
 public class LazyMenuArrowImageIcon implements Icon {
 
+    /** The left to right name. */
     private String leftToRightName = null;
+    
+    /** The right to leftt name. */
     private String rightToLefttName = null;
+    
+    /** The left to right icon. */
     private Icon leftToRightIcon = null;
+    
+    /** The right to left icon. */
     private Icon rightToLeftIcon = null;
 
     public LazyMenuArrowImageIcon(String leftToRightName, String rightToLefttName) {
@@ -43,6 +51,10 @@ public class LazyMenuArrowImageIcon implements Icon {
         this.rightToLefttName = rightToLefttName;
     }
 
+    /** Gets the left to right icon.
+	 *
+	 * @return the left to right icon
+	 */
     private Icon getLeftToRightIcon() {
         if (leftToRightIcon == null) {
             try {
@@ -54,6 +66,10 @@ public class LazyMenuArrowImageIcon implements Icon {
         return leftToRightIcon;
     }
 
+    /** Gets the right to left icon.
+	 *
+	 * @return the right to left icon
+	 */
     private Icon getRightToLeftIcon() {
         if (rightToLeftIcon == null) {
             try {

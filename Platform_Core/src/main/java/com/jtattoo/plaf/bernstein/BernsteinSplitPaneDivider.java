@@ -27,13 +27,13 @@ import com.jtattoo.plaf.BaseSplitPaneDivider;
 import java.awt.Graphics;
 
 /**
+ * The Class BernsteinSplitPaneDivider.
+ *
  * @author Michael Hagen
  */
 public class BernsteinSplitPaneDivider extends BaseSplitPaneDivider {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public BernsteinSplitPaneDivider(BernsteinSplitPaneUI ui) {

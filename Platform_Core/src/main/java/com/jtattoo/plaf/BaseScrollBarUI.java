@@ -40,13 +40,22 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 /**
+ * The Class BaseScrollBarUI.
+ *
  * @author Michael Hagen
  */
 public class BaseScrollBarUI extends BasicScrollBarUI {
 
+    /** The scroll bar width. */
     protected int scrollBarWidth = 17;
+    
+    /** The incr gap. */
     protected int incrGap = 0;
+    
+    /** The decr gap. */
     protected int decrGap = 0;
+    
+    /** The is rollover. */
     protected boolean isRollover = false;
 
     public static ComponentUI createUI(JComponent c) {
@@ -138,6 +147,10 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
         }
     }
 
+    /** Gets the thumb colors.
+	 *
+	 * @return the thumb colors
+	 */
     protected Color[] getThumbColors() {
         if (isRollover || isDragging) {
             return AbstractLookAndFeel.getTheme().getRolloverColors();
@@ -353,6 +366,16 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
     
 //-----------------------------------------------------------------------------
 // inner classes    
+/**
+ * The listener interface for receiving myTrack events. The class that is
+ * interested in processing a myTrack event implements this interface, and the
+ * object created with that class is registered with a component using the
+ * component's <code>addMyTrackListener<code> method. When
+ * the myTrack event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see MyTrackEvent
+ */
 //-----------------------------------------------------------------------------
     protected class MyTrackListener extends TrackListener {
 
@@ -383,12 +406,13 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
         }
     }
 
+/**
+ * The Class InvisibleScrollButton.
+ */
 //-----------------------------------------------------------------------------    
     private static class InvisibleScrollButton extends JButton {
         
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public InvisibleScrollButton() {

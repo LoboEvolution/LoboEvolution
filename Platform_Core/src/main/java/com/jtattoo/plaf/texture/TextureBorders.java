@@ -31,12 +31,19 @@ import javax.swing.border.Border;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class TextureBorders.
+ *
  * @author Michael Hagen
  */
 public class TextureBorders extends BaseBorders {
 
 //------------------------------------------------------------------------------------
 // Lazy access methods
+/**
+ * Gets the button border.
+ *
+ * @return the button border
+ */
 //------------------------------------------------------------------------------------
     public static Border getButtonBorder() {
         if (buttonBorder == null) {
@@ -45,10 +52,18 @@ public class TextureBorders extends BaseBorders {
         return buttonBorder;
     }
 
+    /** Gets the toggle button border.
+	 *
+	 * @return the toggle button border
+	 */
     public static Border getToggleButtonBorder() {
         return getButtonBorder();
     }
 
+    /** Gets the rollover tool button border.
+	 *
+	 * @return the rollover tool button border
+	 */
     public static Border getRolloverToolButtonBorder() {
         if (rolloverToolButtonBorder == null) {
             rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -56,6 +71,10 @@ public class TextureBorders extends BaseBorders {
         return rolloverToolButtonBorder;
     }
 
+    /** Gets the menu item border.
+	 *
+	 * @return the menu item border
+	 */
     public static Border getMenuItemBorder() {
         if (menuItemBorder == null) {
             menuItemBorder = new MenuItemBorder();
@@ -63,6 +82,10 @@ public class TextureBorders extends BaseBorders {
         return menuItemBorder;
     }
 
+    /** Gets the popup menu border.
+	 *
+	 * @return the popup menu border
+	 */
     public static Border getPopupMenuBorder() {
         if (popupMenuBorder == null) {
             popupMenuBorder = new PopupMenuBorder();
@@ -70,6 +93,10 @@ public class TextureBorders extends BaseBorders {
         return popupMenuBorder;
     }
 
+    /** Gets the internal frame border.
+	 *
+	 * @return the internal frame border
+	 */
     public static Border getInternalFrameBorder() {
         if (internalFrameBorder == null) {
             internalFrameBorder = new InternalFrameBorder();
@@ -77,6 +104,10 @@ public class TextureBorders extends BaseBorders {
         return internalFrameBorder;
     }
 
+    /** Gets the tool bar border.
+	 *
+	 * @return the tool bar border
+	 */
     public static Border getToolBarBorder() {
         if (toolBarBorder == null) {
             toolBarBorder = new ToolBarBorder();
@@ -86,11 +117,19 @@ public class TextureBorders extends BaseBorders {
 
 //------------------------------------------------------------------------------------
 // Inner classes
+/**
+ * The Class ButtonBorder.
+ */
 //------------------------------------------------------------------------------------
     public static class ButtonBorder implements Border, UIResource {
 
+        /** The Constant defaultColorHi. */
         private static final Color defaultColorHi = new Color(220, 230, 245);
+        
+        /** The Constant defaultColorLo. */
         private static final Color defaultColorLo = new Color(212, 224, 243);
+        
+        /** The Constant insets. */
         private static final Insets insets = new Insets(3, 4, 3, 4);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -176,8 +215,11 @@ public class TextureBorders extends BaseBorders {
         }
     } // class ButtonBorder
 
+    /** The Class RolloverToolButtonBorder.
+	 */
     public static class RolloverToolButtonBorder implements Border, UIResource {
 
+        /** The Constant insets. */
         private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -226,12 +268,14 @@ public class TextureBorders extends BaseBorders {
         }
     } // class RolloverToolButtonBorder
 
+    /** The Class PopupMenuBorder.
+	 */
     public static class PopupMenuBorder extends BasePopupMenuBorder {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant shadowAlpha. */
 		private static final float shadowAlpha[] = {0.6f, 0.4f, 0.2f, 0.1f};
 
         public PopupMenuBorder() {
@@ -302,12 +346,14 @@ public class TextureBorders extends BaseBorders {
         }
     } // class PopupMenuTextureBorder
 
+    /** The Class MenuItemBorder.
+	 */
     public static class MenuItemBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant insets. */
 		private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -347,13 +393,17 @@ public class TextureBorders extends BaseBorders {
         }
     } // class MenuItemBorder
 
+    /** The Class InternalFrameBorder.
+	 */
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant FRAME_BORDER_COLOR. */
 		private static final Color FRAME_BORDER_COLOR = new Color(128, 128, 128);
+        
+        /** The Constant FRAME_COLORS. */
         private static final Color FRAME_COLORS[] = new Color[]{new Color(144, 144, 144), new Color(180, 180, 180), new Color(216, 216, 216), new Color(236, 236, 236), new Color(164, 164, 164), new Color(196, 196, 196), new Color(184, 184, 184), new Color(172, 172, 172)};
 
         public Insets getBorderInsets(Component c) {
@@ -463,13 +513,17 @@ public class TextureBorders extends BaseBorders {
         }
     } // class InternalFrameBorder
 
+    /** The Class ToolBarBorder.
+	 */
     public static class ToolBarBorder extends AbstractBorder implements UIResource, SwingConstants {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant HOR_RUBBER_ICON. */
 		private static final LazyImageIcon HOR_RUBBER_ICON = new LazyImageIcon("texture/icons/HorRubber.gif");
+        
+        /** The Constant VER_RUBBER_ICON. */
         private static final LazyImageIcon VER_RUBBER_ICON = new LazyImageIcon("texture/icons/VerRubber.gif");
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {

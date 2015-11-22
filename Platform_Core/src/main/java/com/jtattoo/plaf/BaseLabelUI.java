@@ -31,10 +31,13 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicLabelUI;
 
 /**
+ * The Class BaseLabelUI.
+ *
  * @author Michael Hagen
  */
 public class BaseLabelUI extends BasicLabelUI {
 
+    /** The base label ui. */
     private static BaseLabelUI baseLabelUI = null;
 
     public static ComponentUI createUI(JComponent c) {

@@ -200,7 +200,7 @@ public abstract class AbstractBean {
         pcs.removePropertyChangeListener(listener);
     }
     
-    /** Gets the property change listeners.
+     /** Gets the property change listeners.
 	 *
 	 * @return the property change listeners
 	 */
@@ -371,7 +371,7 @@ public abstract class AbstractBean {
         vcs.removeVetoableChangeListener(listener);
     }
     
-    /** Gets the vetoable change listeners.
+     /** Gets the vetoable change listeners.
 	 *
 	 * @return the vetoable change listeners
 	 */

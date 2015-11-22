@@ -53,15 +53,21 @@ import org.lobobrowser.primary.ext.IconFactory;
 import org.lobobrowser.primary.ext.NavigationHistory;
 import org.lobobrowser.ua.NavigatorWindow;
 
+/**
+ * The Class RecentHostsDialog.
+ */
 public class RecentHostsDialog extends JDialog {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The jtf filter. */
 	private JTextField jtfFilter;
 
+	/** The row sorter. */
 	private TableRowSorter<TableModel> rowSorter;
 
+	/** The window. */
 	private NavigatorWindow window;
 	
 	/** The search. */

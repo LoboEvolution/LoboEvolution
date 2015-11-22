@@ -29,6 +29,8 @@ import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 
 /**
+ * The Class FastDefaultTheme.
+ *
  * @author Michael Hagen
  */
 public class FastDefaultTheme extends AbstractTheme {

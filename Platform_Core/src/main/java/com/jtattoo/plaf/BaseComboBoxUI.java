@@ -34,11 +34,21 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
+/**
+ * The Class BaseComboBoxUI.
+ */
 public class BaseComboBoxUI extends BasicComboBoxUI {
 
+    /** The property change listener. */
     private PropertyChangeListener propertyChangeListener = null;
+    
+    /** The focus listener. */
     private FocusListener focusListener = null;
+    
+    /** The org border. */
     private Border orgBorder = null;
+    
+    /** The org background color. */
     private Color orgBackgroundColor = null;
 
     public static ComponentUI createUI(JComponent c) {
@@ -135,6 +145,8 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
         }
     }
 
+    /** The Class PropertyChangeHandler.
+	 */
     public class PropertyChangeHandler implements PropertyChangeListener {
 
         public void propertyChange(PropertyChangeEvent e) {
@@ -146,11 +158,12 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
     }
 //-----------------------------------------------------------------------------    
 
-    public static class ArrowButton extends NoFocusButton {
+    /**
+ * The Class ArrowButton.
+ */
+public static class ArrowButton extends NoFocusButton {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void paint(Graphics g) {

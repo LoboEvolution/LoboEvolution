@@ -27,6 +27,9 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.logging.Logger;
 
+/**
+ * The Class StorageManagerCommon.
+ */
 public class StorageManagerCommon {
     /** The Constant logger. */
     private static final Logger logger = Logger
@@ -38,11 +41,10 @@ public class StorageManagerCommon {
     /** The Constant instance. */
     private static final StorageManagerCommon instance = new StorageManagerCommon();
     
-    /**
-     * Gets the Constant instance.
-     *
-     * @return the Constant instance
-     */
+    /** Gets the Constant instance.
+	 *
+	 * @return the Constant instance
+	 */
     public static StorageManagerCommon getInstance() throws IOException {
         return instance;
     }
@@ -118,11 +120,10 @@ public class StorageManagerCommon {
         }
     }
     
-    /**
-     * Gets the settings directory.
-     *
-     * @return the settings directory
-     */
+    /** Gets the settings directory.
+	 *
+	 * @return the settings directory
+	 */
     public File getSettingsDirectory() {
         File homeDir = new File(System.getProperty("user.home"));
         File settingsDir = new File(homeDir, STORE_DIR_NAME);

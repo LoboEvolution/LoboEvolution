@@ -32,10 +32,13 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
+ * The Class TextureRadioButtonUI.
+ *
  * @author Michael Hagen
  */
 public class TextureRadioButtonUI extends BaseRadioButtonUI {
 
+    /** The radio button ui. */
     private static TextureRadioButtonUI radioButtonUI = null;
 
     public static ComponentUI createUI(JComponent c) {

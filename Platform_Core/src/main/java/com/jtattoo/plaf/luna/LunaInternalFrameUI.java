@@ -29,6 +29,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class LunaInternalFrameUI.
+ *
  * @author Michael Hagen
  */
 public class LunaInternalFrameUI extends BaseInternalFrameUI {

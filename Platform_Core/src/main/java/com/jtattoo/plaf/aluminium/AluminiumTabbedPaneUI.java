@@ -30,11 +30,16 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class AluminiumTabbedPaneUI.
+ *
  * @author Michael Hagen
  */
 public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
 
+    /** The top selected tab colors. */
     private static Color TOP_SELECTED_TAB_COLORS[] = null;
+    
+    /** The bottom selected tab colors. */
     private static Color BOTTOM_SELECTED_TAB_COLORS[] = null;
     
     public static ComponentUI createUI(JComponent c) {

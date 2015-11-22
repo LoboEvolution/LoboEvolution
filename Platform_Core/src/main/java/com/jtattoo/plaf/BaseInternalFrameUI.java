@@ -36,17 +36,33 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
+/**
+ * The Class BaseInternalFrameUI.
+ */
 public class BaseInternalFrameUI extends BasicInternalFrameUI {
 
+    /** The Constant MY_PROPERTY_CHANGE_HANDLER. */
     private static final PropertyChangeListener MY_PROPERTY_CHANGE_HANDLER = new MyPropertyChangeHandler();
+    
+    /** The Constant MY_WINDOW_HANDLER. */
     private static final WindowAdapter MY_WINDOW_HANDLER = new MyWindowHandler();
 
+    /** The Constant HANDY_EMPTY_BORDER. */
     private static final Border HANDY_EMPTY_BORDER = new EmptyBorder(0, 0, 0, 0);
     
+    /** The Constant IS_PALETTE. */
     private static final String IS_PALETTE = "JInternalFrame.isPalette";
+    
+    /** The Constant FRAME_TYPE. */
     private static final String FRAME_TYPE = "JInternalFrame.frameType";
+    
+    /** The Constant FRAME_BORDER. */
     private static final String FRAME_BORDER = "InternalFrame.border";
+    
+    /** The Constant FRAME_PALETTE_BORDER. */
     private static final String FRAME_PALETTE_BORDER = "InternalFrame.paletteBorder";
+    
+    /** The Constant PALETTE_FRAME. */
     private static final String PALETTE_FRAME = "palette";
 
     public BaseInternalFrameUI(JInternalFrame b) {
@@ -115,10 +131,19 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
         return new BaseInternalFrameTitlePane(w);
     }
 
+    /** Gets the title pane.
+	 *
+	 * @return the title pane
+	 */
     public BaseInternalFrameTitlePane getTitlePane() {
         return (BaseInternalFrameTitlePane) titlePane;
     }
 
+    /** Sets the palette.
+	 *
+	 * @param isPalette
+	 *            the new palette
+	 */
     public void setPalette(boolean isPalette) {
         if (isPalette) {
             frame.setBorder(UIManager.getBorder(FRAME_PALETTE_BORDER));
@@ -130,6 +155,9 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 
 //-----------------------------------------------------------------------------
 // inner classes    
+/**
+ * The Class MyPropertyChangeHandler.
+ */
 //-----------------------------------------------------------------------------
     private static class MyPropertyChangeHandler implements PropertyChangeListener {
 
@@ -187,6 +215,9 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
         }
     } // end class MyPropertyChangeHandler
     
+/**
+ * The Class MyWindowHandler.
+ */
 //-----------------------------------------------------------------------------
     private static class MyWindowHandler extends WindowAdapter {
 

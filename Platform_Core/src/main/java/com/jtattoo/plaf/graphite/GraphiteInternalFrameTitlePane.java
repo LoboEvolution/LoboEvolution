@@ -28,13 +28,13 @@ import java.awt.*;
 import javax.swing.JInternalFrame;
 
 /**
+ * The Class GraphiteInternalFrameTitlePane.
+ *
  * @author Michael Hagen
  */
 public class GraphiteInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public GraphiteInternalFrameTitlePane(JInternalFrame f) {

@@ -124,6 +124,8 @@ public class MemoryCacheEntry {
     }
 
 	/**
+	 * Gets the content.
+	 *
 	 * @return the content
 	 */
 	public byte[] getContent() {
@@ -131,13 +133,18 @@ public class MemoryCacheEntry {
 	}
 
 	/**
-	 * @param content the content to set
+	 * Sets the content.
+	 *
+	 * @param content
+	 *            the new content
 	 */
 	public void setContent(byte[] content) {
 		this.content = content;
 	}
 
 	/**
+	 * Gets the headers.
+	 *
 	 * @return the headers
 	 */
 	public List<NameValuePair> getHeaders() {
@@ -145,13 +152,18 @@ public class MemoryCacheEntry {
 	}
 
 	/**
-	 * @param headers the headers to set
+	 * Sets the headers.
+	 *
+	 * @param headers
+	 *            the new headers
 	 */
 	public void setHeaders(List<NameValuePair> headers) {
 		this.headers = headers;
 	}
 
 	/**
+	 * Gets the expiration.
+	 *
 	 * @return the expiration
 	 */
 	public Long getExpiration() {
@@ -159,49 +171,67 @@ public class MemoryCacheEntry {
 	}
 
 	/**
-	 * @param expiration the expiration to set
+	 * Sets the expiration.
+	 *
+	 * @param expiration
+	 *            the new expiration
 	 */
 	public void setExpiration(Long expiration) {
 		this.expiration = expiration;
 	}
 
 	/**
-	 * @return the altObject
+	 * Gets the alt object.
+	 *
+	 * @return the alt object
 	 */
 	public Object getAltObject() {
 		return altObject;
 	}
 
 	/**
-	 * @param altObject the altObject to set
+	 * Sets the alt object.
+	 *
+	 * @param altObject
+	 *            the new alt object
 	 */
 	public void setAltObject(Object altObject) {
 		this.altObject = altObject;
 	}
 
 	/**
-	 * @return the requestTime
+	 * Gets the request time.
+	 *
+	 * @return the request time
 	 */
 	public long getRequestTime() {
 		return requestTime;
 	}
 
 	/**
-	 * @param requestTime the requestTime to set
+	 * Sets the request time.
+	 *
+	 * @param requestTime
+	 *            the new request time
 	 */
 	public void setRequestTime(long requestTime) {
 		this.requestTime = requestTime;
 	}
 
 	/**
-	 * @return the altObjectSize
+	 * Gets the alt object size.
+	 *
+	 * @return the alt object size
 	 */
 	public int getAltObjectSize() {
 		return altObjectSize;
 	}
 
 	/**
-	 * @param altObjectSize the altObjectSize to set
+	 * Sets the alt object size.
+	 *
+	 * @param altObjectSize
+	 *            the new alt object size
 	 */
 	public void setAltObjectSize(int altObjectSize) {
 		this.altObjectSize = altObjectSize;

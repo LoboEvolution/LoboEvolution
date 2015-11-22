@@ -30,6 +30,8 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class FastScrollBarUI.
+ *
  * @author Michael Hagen
  */
 public class FastScrollBarUI extends BaseScrollBarUI {

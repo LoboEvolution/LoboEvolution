@@ -33,6 +33,8 @@ import javax.swing.plaf.UIResource;
 import javax.swing.text.View;
 
 /**
+ * The Class TextureTabbedPaneUI.
+ *
  * @author Michael Hagen
  */
 public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
@@ -68,10 +70,18 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
+    /** Gets the texture.
+	 *
+	 * @return the texture
+	 */
     protected int getTexture() {
         return TextureUtils.BACKGROUND_TEXTURE_TYPE;
     }
 
+    /** Gets the selected texture.
+	 *
+	 * @return the selected texture
+	 */
     protected int getSelectedTexture() {
         return TextureUtils.SELECTED_TEXTURE_TYPE;
     }

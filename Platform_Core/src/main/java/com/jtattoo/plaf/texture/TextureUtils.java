@@ -31,36 +31,85 @@ import javax.swing.Icon;
 import javax.swing.JComponent;
 
 /**
- * @author  Michael Hagen
+ * The Class TextureUtils.
+ *
+ * @author Michael Hagen
  */
 public class TextureUtils {
 
+    /** The Constant WINDOW_TEXTURE_TYPE. */
     public static final int WINDOW_TEXTURE_TYPE = 0;
+    
+    /** The Constant BACKGROUND_TEXTURE_TYPE. */
     public static final int BACKGROUND_TEXTURE_TYPE = 1;
+    
+    /** The Constant ALTER_BACKGROUND_TEXTURE_TYPE. */
     public static final int ALTER_BACKGROUND_TEXTURE_TYPE = 2;
+    
+    /** The Constant SELECTED_TEXTURE_TYPE. */
     public static final int SELECTED_TEXTURE_TYPE = 3;
+    
+    /** The Constant ROLLOVER_TEXTURE_TYPE. */
     public static final int ROLLOVER_TEXTURE_TYPE = 4;
+    
+    /** The Constant PRESSED_TEXTURE_TYPE. */
     public static final int PRESSED_TEXTURE_TYPE = 5;
+    
+    /** The Constant DISABLED_TEXTURE_TYPE. */
     public static final int DISABLED_TEXTURE_TYPE = 6;
+    
+    /** The Constant MENUBAR_TEXTURE_TYPE. */
     public static final int MENUBAR_TEXTURE_TYPE = 7;
+    
+    /** The Constant LAST_TEXTURE_TYPE. */
     public static final int LAST_TEXTURE_TYPE = 7;
 
+    /** The Constant WINDOW_TEXTURE_KEY. */
     public static final String WINDOW_TEXTURE_KEY = "WindowTexture";
+    
+    /** The Constant BACKGROUND_TEXTURE_KEY. */
     public static final String BACKGROUND_TEXTURE_KEY = "BackgroundTexture";
+    
+    /** The Constant ALTER_BACKGROUND_TEXTURE_KEY. */
     public static final String ALTER_BACKGROUND_TEXTURE_KEY = "AlterBackgroundTexture";
+    
+    /** The Constant SELECTED_TEXTURE_KEY. */
     public static final String SELECTED_TEXTURE_KEY = "SelectedTexture";
+    
+    /** The Constant ROLLOVER_TEXTURE_KEY. */
     public static final String ROLLOVER_TEXTURE_KEY = "RolloverTexture";
+    
+    /** The Constant PRESSED_TEXTURE_KEY. */
     public static final String PRESSED_TEXTURE_KEY = "PressedTexture";
+    
+    /** The Constant DISABLED_TEXTURE_KEY. */
     public static final String DISABLED_TEXTURE_KEY = "DisabledTexture";
+    
+    /** The Constant MENUBAR_TEXTURE_KEY. */
     public static final String MENUBAR_TEXTURE_KEY = "MenubarTexture";
 
+    /** The window texture. */
     private static Icon windowTexture = null;
+    
+    /** The background texture. */
     private static Icon backgroundTexture = null;
+    
+    /** The alter background texture. */
     private static Icon alterBackgroundTexture = null;
+    
+    /** The selected texture. */
     private static Icon selectedTexture = null;
+    
+    /** The rollover texture. */
     private static Icon rolloverTexture = null;
+    
+    /** The pressed texture. */
     private static Icon pressedTexture = null;
+    
+    /** The disabled texture. */
     private static Icon disabledTexture = null;
+    
+    /** The menubar texture. */
     private static Icon menubarTexture = null;
     
     private TextureUtils() {

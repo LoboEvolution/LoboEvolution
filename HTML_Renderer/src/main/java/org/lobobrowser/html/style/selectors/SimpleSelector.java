@@ -136,28 +136,38 @@ public class SimpleSelector {
 	}
 
 	/**
-	 * @return the simpleSelectorText
+	 * Gets the simple selector text.
+	 *
+	 * @return the simple selector text
 	 */
 	public String getSimpleSelectorText() {
 		return simpleSelectorText;
 	}
 
 	/**
-	 * @param simpleSelectorText the simpleSelectorText to set
+	 * Sets the simple selector text.
+	 *
+	 * @param simpleSelectorText
+	 *            the new simple selector text
 	 */
 	public void setSimpleSelectorText(String simpleSelectorText) {
 		this.simpleSelectorText = simpleSelectorText;
 	}
 
 	/**
-	 * @return the pseudoElement
+	 * Gets the pseudo element.
+	 *
+	 * @return the pseudo element
 	 */
 	public String getPseudoElement() {
 		return pseudoElement;
 	}
 
 	/**
-	 * @param pseudoElement the pseudoElement to set
+	 * Sets the pseudo element.
+	 *
+	 * @param pseudoElement
+	 *            the new pseudo element
 	 */
 	public void setPseudoElement(String pseudoElement) {
 		this.pseudoElement = pseudoElement;

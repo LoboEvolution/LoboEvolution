@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import javax.swing.border.Border;
 
 /**
+ * A factory for creating AluminiumBorder objects.
+ *
  * @author Michael Hagen
  */
 public class AluminiumBorderFactory implements AbstractBorderFactory {
 
+    /** The instance. */
     private static AluminiumBorderFactory instance = null;
 
     private AluminiumBorderFactory() {
     }
 
+    /** Gets the single instance of AluminiumBorderFactory.
+	 *
+	 * @return single instance of AluminiumBorderFactory
+	 */
     public static synchronized AluminiumBorderFactory getInstance() {
         if (instance == null) {
             instance = new AluminiumBorderFactory();

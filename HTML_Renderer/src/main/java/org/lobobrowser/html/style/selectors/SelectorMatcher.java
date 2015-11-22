@@ -16,6 +16,9 @@ package org.lobobrowser.html.style.selectors;
 
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 
+/**
+ * The Class SelectorMatcher.
+ */
 public class SelectorMatcher {
 
 	public SelectorMatcher() {

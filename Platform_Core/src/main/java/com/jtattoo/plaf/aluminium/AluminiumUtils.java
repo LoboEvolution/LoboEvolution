@@ -32,12 +32,19 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.Icon;
 
 /**
- * @author  Michael Hagen
+ * The Class AluminiumUtils.
+ *
+ * @author Michael Hagen
  */
 public class AluminiumUtils {
 
+    /** The Constant BG_IMAGE. */
     private static final Icon BG_IMAGE = new LazyImageIcon("aluminium/icons/background.jpg");
+    
+    /** The Constant ALTER_BG_IMAGE. */
     private static final Icon ALTER_BG_IMAGE = new LazyImageIcon("aluminium/icons/alterBackground.jpg");
+    
+    /** The background image. */
     private static Image backgroundImage = null;
     
     private AluminiumUtils() {

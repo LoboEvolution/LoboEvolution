@@ -24,6 +24,7 @@
 package com.jtattoo.plaf;
 
 /**
+ * The Interface TitlePane.
  *
  * @author Michael Hagen
  */

@@ -40,10 +40,13 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSliderUI;
 
 /**
+ * The Class BaseSliderUI.
+ *
  * @author Michael Hagen
  */
 public class BaseSliderUI extends BasicSliderUI {
 
+    /** The is rollover. */
     protected boolean isRollover = false;
 
     public BaseSliderUI(JSlider slider) {
@@ -58,6 +61,10 @@ public class BaseSliderUI extends BasicSliderUI {
         return new MyTrackListener();
     }
 
+    /** Gets the thumb hor icon.
+	 *
+	 * @return the thumb hor icon
+	 */
     public Icon getThumbHorIcon() {
         if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
             return ((AbstractLookAndFeel) UIManager.getLookAndFeel()).getIconFactory().getThumbHorIcon();
@@ -65,6 +72,10 @@ public class BaseSliderUI extends BasicSliderUI {
         return null;
     }
 
+    /** Gets the thumb hor icon rollover.
+	 *
+	 * @return the thumb hor icon rollover
+	 */
     public Icon getThumbHorIconRollover() {
         if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
             return ((AbstractLookAndFeel) UIManager.getLookAndFeel()).getIconFactory().getThumbHorIconRollover();
@@ -72,6 +83,10 @@ public class BaseSliderUI extends BasicSliderUI {
         return null;
     }
 
+    /** Gets the thumb ver icon.
+	 *
+	 * @return the thumb ver icon
+	 */
     public Icon getThumbVerIcon() {
         if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
             return ((AbstractLookAndFeel) UIManager.getLookAndFeel()).getIconFactory().getThumbVerIcon();
@@ -79,6 +94,10 @@ public class BaseSliderUI extends BasicSliderUI {
         return null;
     }
 
+    /** Gets the thumb ver icon rollover.
+	 *
+	 * @return the thumb ver icon rollover
+	 */
     public Icon getThumbVerIconRollover() {
         if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
             return ((AbstractLookAndFeel) UIManager.getLookAndFeel()).getIconFactory().getThumbVerIconRollover();
@@ -86,6 +105,10 @@ public class BaseSliderUI extends BasicSliderUI {
         return null;
     }
 
+    /** Gets the track width.
+	 *
+	 * @return the track width
+	 */
     protected int getTrackWidth() {
         if (slider.getOrientation() == JSlider.HORIZONTAL) {
             return (thumbRect.height - 9);
@@ -344,6 +367,15 @@ public class BaseSliderUI extends BasicSliderUI {
         g2D.setComposite(savedComposite);
     }
 
+    /** The listener interface for receiving myTrack events. The class that
+	 * is interested in processing a myTrack event implements this interface,
+	 * and the object created with that class is registered with a component
+	 * using the component's <code>addMyTrackListener<code> method. When
+	 * the myTrack event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see MyTrackEvent
+	 */
     protected class MyTrackListener extends TrackListener {
 
         public void mouseEntered(MouseEvent e) {

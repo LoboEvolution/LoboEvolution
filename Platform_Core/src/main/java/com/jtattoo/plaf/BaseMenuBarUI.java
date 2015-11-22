@@ -29,6 +29,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicMenuBarUI;
 
 /**
+ * The Class BaseMenuBarUI.
+ *
  * @author Michael Hagen
  */
 public class BaseMenuBarUI extends BasicMenuBarUI {

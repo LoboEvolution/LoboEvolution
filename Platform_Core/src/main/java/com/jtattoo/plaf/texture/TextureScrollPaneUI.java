@@ -30,6 +30,8 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class TextureScrollPaneUI.
+ *
  * @author Michael Hagen
  */
 public class TextureScrollPaneUI extends BaseScrollPaneUI {

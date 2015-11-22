@@ -28,13 +28,13 @@ import java.awt.Graphics;
 import javax.swing.JInternalFrame;
 
 /**
+ * The Class FastInternalFrameTitlePane.
+ *
  * @author Michael Hagen
  */
 public class FastInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public FastInternalFrameTitlePane(JInternalFrame f) {

@@ -29,88 +29,223 @@ import javax.swing.*;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class BaseIcons.
+ *
  * @author Michael Hagen
  */
 public class BaseIcons {
     
+    /** The Constant PEARL_RED_SMALL. */
     public static final LazyImageIcon PEARL_RED_SMALL = new LazyImageIcon("icons/small/pearl_red_24x24.png");
+    
+    /** The Constant PEARL_YELLOW_SMALL. */
     public static final LazyImageIcon PEARL_YELLOW_SMALL = new LazyImageIcon("icons/small/pearl_yellow_24x24.png");
+    
+    /** The Constant PEARL_GREEN_SMALL. */
     public static final LazyImageIcon PEARL_GREEN_SMALL = new LazyImageIcon("icons/small/pearl_green_24x24.png");
+    
+    /** The Constant PEARL_GREY_SMALL. */
     public static final LazyImageIcon PEARL_GREY_SMALL = new LazyImageIcon("icons/small/pearl_grey_24x24.png");
+    
+    /** The Constant PEARL_RED_MEDIUM. */
     public static final LazyImageIcon PEARL_RED_MEDIUM = new LazyImageIcon("icons/medium/pearl_red_28x28.png");
+    
+    /** The Constant PEARL_YELLOW_MEDIUM. */
     public static final LazyImageIcon PEARL_YELLOW_MEDIUM = new LazyImageIcon("icons/medium/pearl_yellow_28x28.png");
+    
+    /** The Constant PEARL_GREEN_MEDIUM. */
     public static final LazyImageIcon PEARL_GREEN_MEDIUM = new LazyImageIcon("icons/medium/pearl_green_28x28.png");
+    
+    /** The Constant PEARL_GREY_MEDIUM. */
     public static final LazyImageIcon PEARL_GREY_MEDIUM = new LazyImageIcon("icons/medium/pearl_grey_28x28.png");
+    
+    /** The Constant PEARL_RED_LARGE. */
     public static final LazyImageIcon PEARL_RED_LARGE = new LazyImageIcon("icons/large/pearl_red_32x32.png");
+    
+    /** The Constant PEARL_YELLOW_LARGE. */
     public static final LazyImageIcon PEARL_YELLOW_LARGE = new LazyImageIcon("icons/large/pearl_yellow_32x32.png");
+    
+    /** The Constant PEARL_GREEN_LARGE. */
     public static final LazyImageIcon PEARL_GREEN_LARGE = new LazyImageIcon("icons/large/pearl_green_32x32.png");
+    
+    /** The Constant PEARL_GREY_LARGE. */
     public static final LazyImageIcon PEARL_GREY_LARGE = new LazyImageIcon("icons/large/pearl_grey_32x32.png");
     
+    /** The Constant ICONIZER_SMALL. */
     public static final LazyImageIcon ICONIZER_SMALL = new LazyImageIcon("icons/small/iconizer_10x10.png");
+    
+    /** The Constant MINIMIZER_SMALL. */
     public static final LazyImageIcon MINIMIZER_SMALL = new LazyImageIcon("icons/small/minimizer_10x10.png");
+    
+    /** The Constant MAXIMIZER_SMALL. */
     public static final LazyImageIcon MAXIMIZER_SMALL = new LazyImageIcon("icons/small/maximizer_10x10.png");
+    
+    /** The Constant CLOSER_SMALL. */
     public static final LazyImageIcon CLOSER_SMALL = new LazyImageIcon("icons/small/closer_10x10.png");
+    
+    /** The Constant ICONIZER_MEDIUM. */
     public static final LazyImageIcon ICONIZER_MEDIUM = new LazyImageIcon("icons/medium/iconizer_12x12.png");
+    
+    /** The Constant MINIMIZER_MEDIUM. */
     public static final LazyImageIcon MINIMIZER_MEDIUM = new LazyImageIcon("icons/medium/minimizer_12x12.png");
+    
+    /** The Constant MAXIMIZER_MEDIUM. */
     public static final LazyImageIcon MAXIMIZER_MEDIUM = new LazyImageIcon("icons/medium/maximizer_12x12.png");
+    
+    /** The Constant CLOSER_MEDIUM. */
     public static final LazyImageIcon CLOSER_MEDIUM = new LazyImageIcon("icons/medium/closer_12x12.png");
+    
+    /** The Constant ICONIZER_LARGE. */
     public static final LazyImageIcon ICONIZER_LARGE = new LazyImageIcon("icons/large/iconizer_12x12.png");
+    
+    /** The Constant MINIMIZER_LARGE. */
     public static final LazyImageIcon MINIMIZER_LARGE = new LazyImageIcon("icons/large/minimizer_12x12.png");
+    
+    /** The Constant MAXIMIZER_LARGE. */
     public static final LazyImageIcon MAXIMIZER_LARGE = new LazyImageIcon("icons/large/maximizer_12x12.png");
+    
+    /** The Constant CLOSER_LARGE. */
     public static final LazyImageIcon CLOSER_LARGE = new LazyImageIcon("icons/large/closer_12x12.png");
     
+    /** The Constant EMPTY_8x8. */
     public static final LazyImageIcon EMPTY_8x8 = new LazyImageIcon("icons/empty_8x8.png");
 
+    /** The check box icon. */
     protected static Icon checkBoxIcon = null;
+    
+    /** The menu check box icon. */
     protected static Icon menuCheckBoxIcon = null;
+    
+    /** The radio button icon. */
     protected static Icon radioButtonIcon = null;
+    
+    /** The menu radio button icon. */
     protected static Icon menuRadioButtonIcon = null;
+    
+    /** The option pane error icon. */
     protected static Icon optionPaneErrorIcon = null;
+    
+    /** The option pane warning icon. */
     protected static Icon optionPaneWarningIcon = null;
+    
+    /** The option pane information icon. */
     protected static Icon optionPaneInformationIcon = null;
+    
+    /** The option pane question icon. */
     protected static Icon optionPaneQuestionIcon = null;
     
+    /** The file chooser up folder icon. */
     protected static Icon fileChooserUpFolderIcon = null;
+    
+    /** The file chooser home folder icon. */
     protected static Icon fileChooserHomeFolderIcon = null;
+    
+    /** The file chooser new folder icon. */
     protected static Icon fileChooserNewFolderIcon = null;
+    
+    /** The file chooser list view icon. */
     protected static Icon fileChooserListViewIcon = null;
+    
+    /** The file chooser detail view icon. */
     protected static Icon fileChooserDetailViewIcon = null;
+    
+    /** The file view computer icon. */
     protected static Icon fileViewComputerIcon = null;
+    
+    /** The file view floppy drive icon. */
     protected static Icon fileViewFloppyDriveIcon = null;
+    
+    /** The file view hard drive icon. */
     protected static Icon fileViewHardDriveIcon = null;
     
+    /** The tree opened icon. */
     protected static Icon treeOpenedIcon = null;
+    
+    /** The tree closed icon. */
     protected static Icon treeClosedIcon = null;
+    
+    /** The tree leaf icon. */
     protected static Icon treeLeafIcon = null;
+    
+    /** The tree expanded icon. */
     protected static Icon treeExpandedIcon = null;
+    
+    /** The tree collapsed icon. */
     protected static Icon treeCollapsedIcon = null;
     
+    /** The palette close icon. */
     protected static Icon paletteCloseIcon = null;
+    
+    /** The menu icon. */
     protected static Icon menuIcon = null;
     
+    /** The icon icon. */
     protected static Icon iconIcon = null;
+    
+    /** The max icon. */
     protected static Icon maxIcon = null;
+    
+    /** The min icon. */
     protected static Icon minIcon = null;
+    
+    /** The close icon. */
     protected static Icon closeIcon = null;
     
+    /** The up arrow icon. */
     protected static Icon upArrowIcon = null;
+    
+    /** The up arrow inverse icon. */
     protected static Icon upArrowInverseIcon = null;
+    
+    /** The down arrow icon. */
     protected static Icon downArrowIcon = null;
+    
+    /** The down arrow inverse icon. */
     protected static Icon downArrowInverseIcon = null;
+    
+    /** The left arrow icon. */
     protected static Icon leftArrowIcon = null;
+    
+    /** The left arrow inverse icon. */
     protected static Icon leftArrowInverseIcon = null;
+    
+    /** The right arrow icon. */
     protected static Icon rightArrowIcon = null;
+    
+    /** The right arrow inverse icon. */
     protected static Icon rightArrowInverseIcon = null;
+    
+    /** The menu arrow icon. */
     protected static Icon menuArrowIcon = null;
+    
+    /** The splitter up arrow icon. */
     protected static Icon splitterUpArrowIcon = null;
+    
+    /** The splitter down arrow icon. */
     protected static Icon splitterDownArrowIcon = null;
+    
+    /** The splitter left arrow icon. */
     protected static Icon splitterLeftArrowIcon = null;
+    
+    /** The splitter right arrow icon. */
     protected static Icon splitterRightArrowIcon = null;
+    
+    /** The splitter hor bump icon. */
     protected static Icon splitterHorBumpIcon = null;
+    
+    /** The splitter ver bump icon. */
     protected static Icon splitterVerBumpIcon = null;
+    
+    /** The thumb hor icon. */
     protected static Icon thumbHorIcon = null;
+    
+    /** The thumb ver icon. */
     protected static Icon thumbVerIcon = null;
+    
+    /** The thumb hor icon rollover. */
     protected static Icon thumbHorIconRollover = null;
+    
+    /** The thumb ver icon rollover. */
     protected static Icon thumbVerIconRollover = null;
 
     public static void initDefaults() {
@@ -162,6 +297,10 @@ public class BaseIcons {
         thumbVerIconRollover = null;
     }
 
+    /** Gets the radio button icon.
+	 *
+	 * @return the radio button icon
+	 */
     public static Icon getRadioButtonIcon() {
         if (radioButtonIcon == null) {
             radioButtonIcon = new RadioButtonIcon();
@@ -169,6 +308,10 @@ public class BaseIcons {
         return radioButtonIcon;
     }
 
+    /** Gets the check box icon.
+	 *
+	 * @return the check box icon
+	 */
     public static Icon getCheckBoxIcon() {
         if (checkBoxIcon == null) {
             checkBoxIcon = new CheckBoxIcon();
@@ -176,15 +319,27 @@ public class BaseIcons {
         return checkBoxIcon;
     }
 
+    /** Gets the combo box icon.
+	 *
+	 * @return the combo box icon
+	 */
     // ComboBox
     public static Icon getComboBoxIcon() {
         return getDownArrowIcon();
     }
 
+    /** Gets the combo box inverse icon.
+	 *
+	 * @return the combo box inverse icon
+	 */
     public static Icon getComboBoxInverseIcon() {
         return getDownArrowInverseIcon();
     }
 
+    /** Gets the option pane error icon.
+	 *
+	 * @return the option pane error icon
+	 */
     // OptionPane
     public static Icon getOptionPaneErrorIcon() {
         if (optionPaneErrorIcon == null) {
@@ -199,6 +354,10 @@ public class BaseIcons {
         return optionPaneErrorIcon;
     }
 
+    /** Gets the option pane warning icon.
+	 *
+	 * @return the option pane warning icon
+	 */
     public static Icon getOptionPaneWarningIcon() {
         if (optionPaneWarningIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -212,6 +371,10 @@ public class BaseIcons {
         return optionPaneWarningIcon;
     }
 
+    /** Gets the option pane information icon.
+	 *
+	 * @return the option pane information icon
+	 */
     public static Icon getOptionPaneInformationIcon() {
         if (optionPaneInformationIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -225,6 +388,10 @@ public class BaseIcons {
         return optionPaneInformationIcon;
     }
 
+    /** Gets the option pane question icon.
+	 *
+	 * @return the option pane question icon
+	 */
     public static Icon getOptionPaneQuestionIcon() {
         if (optionPaneQuestionIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -238,6 +405,10 @@ public class BaseIcons {
         return optionPaneQuestionIcon;
     }
 
+    /** Gets the file chooser up folder icon.
+	 *
+	 * @return the file chooser up folder icon
+	 */
     // FileChooser
     public static Icon getFileChooserUpFolderIcon() {
         if (fileChooserUpFolderIcon == null) {
@@ -246,6 +417,10 @@ public class BaseIcons {
         return fileChooserUpFolderIcon;
     }
 
+    /** Gets the file chooser home folder icon.
+	 *
+	 * @return the file chooser home folder icon
+	 */
     public static Icon getFileChooserHomeFolderIcon() {
         if (fileChooserHomeFolderIcon == null) {
             fileChooserHomeFolderIcon = new LazyImageIcon("icons/home_22x22.png");
@@ -253,6 +428,10 @@ public class BaseIcons {
         return fileChooserHomeFolderIcon;
     }
 
+    /** Gets the file chooser new folder icon.
+	 *
+	 * @return the file chooser new folder icon
+	 */
     public static Icon getFileChooserNewFolderIcon() {
         if (fileChooserNewFolderIcon == null) {
             fileChooserNewFolderIcon = new LazyImageIcon("icons/folder_new_22x22.png");
@@ -260,6 +439,10 @@ public class BaseIcons {
         return fileChooserNewFolderIcon;
     }
 
+    /** Gets the file chooser list view icon.
+	 *
+	 * @return the file chooser list view icon
+	 */
     public static Icon getFileChooserListViewIcon() {
         if (fileChooserListViewIcon == null) {
             fileChooserListViewIcon = new LazyImageIcon("icons/view_list_22x22.png");
@@ -267,6 +450,10 @@ public class BaseIcons {
         return fileChooserListViewIcon;
     }
 
+    /** Gets the file chooser detail view icon.
+	 *
+	 * @return the file chooser detail view icon
+	 */
     public static Icon getFileChooserDetailViewIcon() {
         if (fileChooserDetailViewIcon == null) {
             fileChooserDetailViewIcon = new LazyImageIcon("icons/view_detail_22x22.png");
@@ -274,6 +461,10 @@ public class BaseIcons {
         return fileChooserDetailViewIcon;
     }
 
+    /** Gets the file view computer icon.
+	 *
+	 * @return the file view computer icon
+	 */
     public static Icon getFileViewComputerIcon() {
         if (fileViewComputerIcon == null) {
             fileViewComputerIcon = new LazyImageIcon("icons/computer_16x16.png");
@@ -281,6 +472,10 @@ public class BaseIcons {
         return fileViewComputerIcon;
     }
 
+    /** Gets the file view floppy drive icon.
+	 *
+	 * @return the file view floppy drive icon
+	 */
     public static Icon getFileViewFloppyDriveIcon() {
         if (fileViewFloppyDriveIcon == null) {
             fileViewFloppyDriveIcon = new LazyImageIcon("icons/floppy_drive_16x16.png");
@@ -288,6 +483,10 @@ public class BaseIcons {
         return fileViewFloppyDriveIcon;
     }
 
+    /** Gets the file view hard drive icon.
+	 *
+	 * @return the file view hard drive icon
+	 */
     public static Icon getFileViewHardDriveIcon() {
         if (fileViewHardDriveIcon == null) {
             fileViewHardDriveIcon = new LazyImageIcon("icons/hard_drive_16x16.png");
@@ -295,6 +494,10 @@ public class BaseIcons {
         return fileViewHardDriveIcon;
     }
 
+    /** Gets the tree opened icon.
+	 *
+	 * @return the tree opened icon
+	 */
     // Tree
     public static Icon getTreeOpenedIcon() {
         if (treeOpenedIcon == null) {
@@ -309,6 +512,10 @@ public class BaseIcons {
         return treeOpenedIcon;
     }
     
+    /** Gets the tree closed icon.
+	 *
+	 * @return the tree closed icon
+	 */
     public static Icon getTreeClosedIcon() {
         if (treeClosedIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -322,6 +529,10 @@ public class BaseIcons {
         return treeClosedIcon;
     }
 
+    /** Gets the tree leaf icon.
+	 *
+	 * @return the tree leaf icon
+	 */
     public static Icon getTreeLeafIcon() {
         if (treeLeafIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -335,6 +546,10 @@ public class BaseIcons {
         return treeLeafIcon;
     }
 
+    /** Gets the tree collapsed icon.
+	 *
+	 * @return the tree collapsed icon
+	 */
     public static Icon getTreeCollapsedIcon() {
         if (treeCollapsedIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -348,6 +563,10 @@ public class BaseIcons {
         return treeCollapsedIcon;
     }
     
+    /** Gets the tree expanded icon.
+	 *
+	 * @return the tree expanded icon
+	 */
     public static Icon getTreeExpandedIcon() {
         if (treeExpandedIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -361,6 +580,10 @@ public class BaseIcons {
         return treeExpandedIcon;
     }
 
+    /** Gets the menu icon.
+	 *
+	 * @return the menu icon
+	 */
     // TitlePane icons
     public static Icon getMenuIcon() {
         if (menuIcon == null) {
@@ -375,6 +598,10 @@ public class BaseIcons {
         return menuIcon;
     }
 
+    /** Gets the icon icon.
+	 *
+	 * @return the icon icon
+	 */
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -388,6 +615,10 @@ public class BaseIcons {
         return iconIcon;
     }
 
+    /** Gets the max icon.
+	 *
+	 * @return the max icon
+	 */
     public static Icon getMaxIcon() {
         if (maxIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -401,6 +632,10 @@ public class BaseIcons {
         return maxIcon;
     }
 
+    /** Gets the min icon.
+	 *
+	 * @return the min icon
+	 */
     public static Icon getMinIcon() {
         if (minIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -414,6 +649,10 @@ public class BaseIcons {
         return minIcon;
     }
 
+    /** Gets the close icon.
+	 *
+	 * @return the close icon
+	 */
     public static Icon getCloseIcon() {
         if (closeIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -427,6 +666,10 @@ public class BaseIcons {
         return closeIcon;
     }
 
+    /** Gets the palette close icon.
+	 *
+	 * @return the palette close icon
+	 */
     public static Icon getPaletteCloseIcon() {
         if (paletteCloseIcon == null) {
             paletteCloseIcon = new CloseSymbol(Color.black, null, Color.red);
@@ -434,6 +677,10 @@ public class BaseIcons {
         return paletteCloseIcon;
     }
 
+    /** Gets the menu arrow icon.
+	 *
+	 * @return the menu arrow icon
+	 */
     // MenuIcons
     public static Icon getMenuArrowIcon() {
         if (menuArrowIcon == null) {
@@ -442,6 +689,10 @@ public class BaseIcons {
         return menuArrowIcon;
     }
 
+    /** Gets the menu check box icon.
+	 *
+	 * @return the menu check box icon
+	 */
     public static Icon getMenuCheckBoxIcon() {
         if (menuCheckBoxIcon == null) {
             menuCheckBoxIcon = new CheckBoxIcon();
@@ -449,6 +700,10 @@ public class BaseIcons {
         return menuCheckBoxIcon;
     }
 
+    /** Gets the menu radio button icon.
+	 *
+	 * @return the menu radio button icon
+	 */
     public static Icon getMenuRadioButtonIcon() {
         if (menuRadioButtonIcon == null) {
             menuRadioButtonIcon = new RadioButtonIcon();
@@ -456,6 +711,10 @@ public class BaseIcons {
         return menuRadioButtonIcon;
     }
 
+    /** Gets the up arrow icon.
+	 *
+	 * @return the up arrow icon
+	 */
     // ArrowIcons
     public static Icon getUpArrowIcon() {
         if (upArrowIcon == null) {
@@ -470,6 +729,10 @@ public class BaseIcons {
         return upArrowIcon;
     }
 
+    /** Gets the up arrow inverse icon.
+	 *
+	 * @return the up arrow inverse icon
+	 */
     public static Icon getUpArrowInverseIcon() {
         if (upArrowInverseIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -483,6 +746,10 @@ public class BaseIcons {
         return upArrowInverseIcon;
     }
     
+    /** Gets the down arrow icon.
+	 *
+	 * @return the down arrow icon
+	 */
     public static Icon getDownArrowIcon() {
         if (downArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -496,6 +763,10 @@ public class BaseIcons {
         return downArrowIcon;
     }
 
+    /** Gets the down arrow inverse icon.
+	 *
+	 * @return the down arrow inverse icon
+	 */
     public static Icon getDownArrowInverseIcon() {
         if (downArrowInverseIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -509,6 +780,10 @@ public class BaseIcons {
         return downArrowInverseIcon;
     }
     
+    /** Gets the left arrow icon.
+	 *
+	 * @return the left arrow icon
+	 */
     public static Icon getLeftArrowIcon() {
         if (leftArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -522,6 +797,10 @@ public class BaseIcons {
         return leftArrowIcon;
     }
 
+    /** Gets the left arrow inverse icon.
+	 *
+	 * @return the left arrow inverse icon
+	 */
     public static Icon getLeftArrowInverseIcon() {
         if (leftArrowInverseIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -535,6 +814,10 @@ public class BaseIcons {
         return leftArrowInverseIcon;
     }
     
+    /** Gets the right arrow icon.
+	 *
+	 * @return the right arrow icon
+	 */
     public static Icon getRightArrowIcon() {
         if (rightArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -548,6 +831,10 @@ public class BaseIcons {
         return rightArrowIcon;
     }
 
+    /** Gets the right arrow inverse icon.
+	 *
+	 * @return the right arrow inverse icon
+	 */
     public static Icon getRightArrowInverseIcon() {
         if (rightArrowInverseIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -561,6 +848,10 @@ public class BaseIcons {
         return rightArrowInverseIcon;
     }
     
+    /** Gets the splitter up arrow icon.
+	 *
+	 * @return the splitter up arrow icon
+	 */
     // Splitter
     public static Icon getSplitterUpArrowIcon() {
         if (splitterUpArrowIcon == null) {
@@ -569,6 +860,10 @@ public class BaseIcons {
         return splitterUpArrowIcon;
     }
 
+    /** Gets the splitter down arrow icon.
+	 *
+	 * @return the splitter down arrow icon
+	 */
     public static Icon getSplitterDownArrowIcon() {
         if (splitterDownArrowIcon == null) {
             splitterDownArrowIcon = new LazyImageIcon("icons/SplitterDownArrow.gif");
@@ -576,6 +871,10 @@ public class BaseIcons {
         return splitterDownArrowIcon;
     }
 
+    /** Gets the splitter left arrow icon.
+	 *
+	 * @return the splitter left arrow icon
+	 */
     public static Icon getSplitterLeftArrowIcon() {
         if (splitterLeftArrowIcon == null) {
             splitterLeftArrowIcon = new LazyImageIcon("icons/SplitterLeftArrow.gif");
@@ -583,6 +882,10 @@ public class BaseIcons {
         return splitterLeftArrowIcon;
     }
 
+    /** Gets the splitter right arrow icon.
+	 *
+	 * @return the splitter right arrow icon
+	 */
     public static Icon getSplitterRightArrowIcon() {
         if (splitterRightArrowIcon == null) {
             splitterRightArrowIcon = new LazyImageIcon("icons/SplitterRightArrow.gif");
@@ -590,6 +893,10 @@ public class BaseIcons {
         return splitterRightArrowIcon;
     }
 
+    /** Gets the splitter hor bump icon.
+	 *
+	 * @return the splitter hor bump icon
+	 */
     public static Icon getSplitterHorBumpIcon() {
         if (splitterHorBumpIcon == null) {
             splitterHorBumpIcon = new LazyImageIcon("icons/SplitterHorBumps.gif");
@@ -597,6 +904,10 @@ public class BaseIcons {
         return splitterHorBumpIcon;
     }
 
+    /** Gets the splitter ver bump icon.
+	 *
+	 * @return the splitter ver bump icon
+	 */
     public static Icon getSplitterVerBumpIcon() {
         if (splitterVerBumpIcon == null) {
             splitterVerBumpIcon = new LazyImageIcon("icons/SplitterVerBumps.gif");
@@ -604,6 +915,10 @@ public class BaseIcons {
         return splitterVerBumpIcon;
     }
 
+    /** Gets the thumb hor icon.
+	 *
+	 * @return the thumb hor icon
+	 */
     // Slider
     public static Icon getThumbHorIcon() {
         if (thumbHorIcon == null) {
@@ -612,6 +927,10 @@ public class BaseIcons {
         return thumbHorIcon;
     }
 
+    /** Gets the thumb ver icon.
+	 *
+	 * @return the thumb ver icon
+	 */
     public static Icon getThumbVerIcon() {
         if (thumbVerIcon == null) {
             thumbVerIcon = new LazyImageIcon("icons/thumb_ver.gif");
@@ -619,6 +938,10 @@ public class BaseIcons {
         return thumbVerIcon;
     }
 
+    /** Gets the thumb hor icon rollover.
+	 *
+	 * @return the thumb hor icon rollover
+	 */
     public static Icon getThumbHorIconRollover() {
         if (thumbHorIconRollover == null) {
             thumbHorIconRollover = new LazyImageIcon("icons/thumb_hor_rollover.gif");
@@ -626,6 +949,10 @@ public class BaseIcons {
         return thumbHorIconRollover;
     }
 
+    /** Gets the thumb ver icon rollover.
+	 *
+	 * @return the thumb ver icon rollover
+	 */
     public static Icon getThumbVerIconRollover() {
         if (thumbVerIconRollover == null) {
             thumbVerIconRollover = new LazyImageIcon("icons/thumb_ver_rollover.gif");
@@ -633,15 +960,31 @@ public class BaseIcons {
         return thumbVerIconRollover;
     }
 
+/**
+ * The Class CheckBoxIcon.
+ */
 //-----------------------------------------------------------------------------------------------------------
     private static class CheckBoxIcon implements Icon {
 
+        /** The gap. */
         private static int GAP = 2;
+        
+        /** The Constant SMALL_CHECK_ICON. */
         private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("icons/small/check_symbol_10x10.png");
+        
+        /** The Constant SMALL_CHECK_DISABLED_ICON. */
         private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon("icons/small/check_symbol_disabled_10x10.png");
+        
+        /** The Constant MEDIUM_CHECK_ICON. */
         private static final Icon MEDIUM_CHECK_ICON = new LazyImageIcon("icons/medium/check_symbol_12x12.png");
+        
+        /** The Constant MEDIUM_CHECK_DISABLED_ICON. */
         private static final Icon MEDIUM_CHECK_DISABLED_ICON = new LazyImageIcon("icons/medium/check_symbol_disabled_12x12.png");
+        
+        /** The Constant LARGE_CHECK_ICON. */
         private static final Icon LARGE_CHECK_ICON = new LazyImageIcon("icons/large/check_symbol_14x14.png");
+        
+        /** The Constant LARGE_CHECK_DISABLED_ICON. */
         private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon("icons/large/check_symbol_disabled_14x14.png");
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -748,9 +1091,13 @@ public class BaseIcons {
         }
     }
 
+/**
+ * The Class RadioButtonIcon.
+ */
 //-----------------------------------------------------------------------------------------------------------
     private static class RadioButtonIcon implements Icon {
         
+        /** The gap. */
         private static int GAP = 2;
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -894,6 +1241,9 @@ public class BaseIcons {
         }
     }
 
+/**
+ * The Class MacCloseIcon.
+ */
 //-----------------------------------------------------------------------------------------------------------
     public static class MacCloseIcon implements Icon, UIResource {
 
@@ -942,6 +1292,8 @@ public class BaseIcons {
         }
     }
     
+    /** The Class MacIconIcon.
+	 */
     public static class MacIconIcon implements Icon, UIResource {
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -1012,6 +1364,8 @@ public class BaseIcons {
         }
     }
 
+    /** The Class MacMaxIcon.
+	 */
     public static class MacMaxIcon implements Icon, UIResource {
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -1081,6 +1435,8 @@ public class BaseIcons {
         }
     }
     
+    /** The Class MacMinIcon.
+	 */
     public static class MacMinIcon implements Icon, UIResource {
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -1150,14 +1506,28 @@ public class BaseIcons {
         }
     }
     
+/**
+ * The Class IconSymbol.
+ */
 //-----------------------------------------------------------------------------------------------------------
     public static class IconSymbol implements Icon {
 
+        /** The foreground color. */
         private Color foregroundColor = null;
+        
+        /** The shadow color. */
         private Color shadowColor = null;
+        
+        /** The inactive foreground color. */
         private Color inactiveForegroundColor = null;
+        
+        /** The inactive shadow color. */
         private Color inactiveShadowColor = null;
+        
+        /** The rollover color. */
         private Color rolloverColor = null;
+        
+        /** The insets. */
         private Insets insets = new Insets(0, 0, 0, 0);
 
         public IconSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor) {
@@ -1232,14 +1602,28 @@ public class BaseIcons {
         }
     }
 
+/**
+ * The Class MaxSymbol.
+ */
 //-----------------------------------------------------------------------------------------------------------
     public static class MaxSymbol implements Icon {
 
+        /** The foreground color. */
         private Color foregroundColor = null;
+        
+        /** The shadow color. */
         private Color shadowColor = null;
+        
+        /** The rollover color. */
         private Color rolloverColor = null;
+        
+        /** The inactive foreground color. */
         private Color inactiveForegroundColor = null;
+        
+        /** The inactive shadow color. */
         private Color inactiveShadowColor = null;
+        
+        /** The insets. */
         private Insets insets = new Insets(0, 0, 0, 0);
 
         public MaxSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor) {
@@ -1316,14 +1700,28 @@ public class BaseIcons {
         }
     }
 
+/**
+ * The Class MinSymbol.
+ */
 //-----------------------------------------------------------------------------------------------------------
     public static class MinSymbol implements Icon {
 
+        /** The foreground color. */
         private Color foregroundColor = null;
+        
+        /** The shadow color. */
         private Color shadowColor = null;
+        
+        /** The rollover color. */
         private Color rolloverColor = null;
+        
+        /** The inactive foreground color. */
         private Color inactiveForegroundColor = null;
+        
+        /** The inactive shadow color. */
         private Color inactiveShadowColor = null;
+        
+        /** The insets. */
         private Insets insets = new Insets(0, 0, 0, 0);
 
         public MinSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor) {
@@ -1424,14 +1822,28 @@ public class BaseIcons {
         }
     }
 
+/**
+ * The Class CloseSymbol.
+ */
 //-----------------------------------------------------------------------------------------------------------
     public static class CloseSymbol implements Icon {
 
+        /** The foreground color. */
         private Color foregroundColor = null;
+        
+        /** The shadow color. */
         private Color shadowColor = null;
+        
+        /** The rollover color. */
         private Color rolloverColor = null;
+        
+        /** The inactive foreground color. */
         private Color inactiveForegroundColor = null;
+        
+        /** The inactive shadow color. */
         private Color inactiveShadowColor = null;
+        
+        /** The insets. */
         private Insets insets = new Insets(0, 0, 0, 0);
 
         public CloseSymbol(Color foregroundColor, Color shadowColor, Color rolloverColor) {

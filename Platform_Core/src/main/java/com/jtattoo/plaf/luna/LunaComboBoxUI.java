@@ -28,6 +28,9 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
+/**
+ * The Class LunaComboBoxUI.
+ */
 public class LunaComboBoxUI extends BaseComboBoxUI {
 
     public static ComponentUI createUI(JComponent c) {
@@ -41,12 +44,13 @@ public class LunaComboBoxUI extends BaseComboBoxUI {
     protected void setButtonBorder() {
     }
 
+/**
+ * The Class ArrowButton.
+ */
 //--------------------------------------------------------------------------------------------------    
     static class ArrowButton extends NoFocusButton {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public ArrowButton() {

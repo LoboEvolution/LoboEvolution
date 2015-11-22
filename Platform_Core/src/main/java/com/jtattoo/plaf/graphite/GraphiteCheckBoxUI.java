@@ -27,10 +27,13 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class GraphiteCheckBoxUI.
+ *
  * @author Michael Hagen
  */
 public class GraphiteCheckBoxUI extends GraphiteRadioButtonUI {
 
+    /** The check box ui. */
     private static GraphiteCheckBoxUI checkBoxUI = null;
 
     public static ComponentUI createUI(JComponent b) {

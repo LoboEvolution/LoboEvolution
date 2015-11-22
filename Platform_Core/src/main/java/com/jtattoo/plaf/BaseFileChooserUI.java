@@ -34,17 +34,26 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.metal.MetalFileChooserUI;
 
 /**
+ * The Class BaseFileChooserUI.
+ *
  * @author Michael Hagen
  */
 public class BaseFileChooserUI extends MetalFileChooserUI {
 
+    /** The file view. */
     private FileView fileView = null;
 
+    /** The Constant PREF_WIDTH. */
     // Preferred and Minimum sizes for the dialog box
     private static final int PREF_WIDTH = 580;
+    
+    /** The Constant PREF_HEIGHT. */
     private static final int PREF_HEIGHT = 340;
+    
+    /** The Constant PREF_SIZE. */
     private static final Dimension PREF_SIZE = new Dimension(PREF_WIDTH, PREF_HEIGHT);
     
+    /** The ancestor listener. */
     private AncestorListener ancestorListener = null;
 
     public BaseFileChooserUI(JFileChooser fileChooser) {
@@ -113,6 +122,9 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
         }
     }
 
+/**
+ * The Class BaseFileView.
+ */
 //------------------------------------------------------------------------------    
     protected class BaseFileView extends BasicFileView {
 

@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
 
 /**
+ * A factory for creating LunaIcon objects.
+ *
  * @author Michael Hagen
  */
 public class LunaIconFactory implements AbstractIconFactory {
 
+    /** The instance. */
     private static LunaIconFactory instance = null;
 
     private LunaIconFactory() {
     }
 
+    /** Gets the single instance of LunaIconFactory.
+	 *
+	 * @return single instance of LunaIconFactory
+	 */
     public static synchronized LunaIconFactory getInstance() {
         if (instance == null) {
             instance = new LunaIconFactory();

@@ -66,20 +66,27 @@ public class ExportedRenderable {
 	}
 
 	/**
-	 * @return the originalTarget
+	 * Gets the original target.
+	 *
+	 * @return the original target
 	 */
 	public RBlockViewport getOriginalTarget() {
 		return originalTarget;
 	}
 
 	/**
-	 * @param originalTarget the originalTarget to set
+	 * Sets the original target.
+	 *
+	 * @param originalTarget
+	 *            the new original target
 	 */
 	public void setOriginalTarget(RBlockViewport originalTarget) {
 		this.originalTarget = originalTarget;
 	}
 
 	/**
+	 * Gets the renderable.
+	 *
 	 * @return the renderable
 	 */
 	public BoundableRenderable getRenderable() {
@@ -87,49 +94,67 @@ public class ExportedRenderable {
 	}
 
 	/**
-	 * @param renderable the renderable to set
+	 * Sets the renderable.
+	 *
+	 * @param renderable
+	 *            the new renderable
 	 */
 	public void setRenderable(BoundableRenderable renderable) {
 		this.renderable = renderable;
 	}
 
 	/**
-	 * @return the x
+	 * Gets the coordinates in original target, for aligned blocks.
+	 *
+	 * @return the coordinates in original target, for aligned blocks
 	 */
 	public int getX() {
 		return x;
 	}
 
 	/**
-	 * @param x the x to set
+	 * Sets the coordinates in original target, for aligned blocks.
+	 *
+	 * @param x
+	 *            the new coordinates in original target, for aligned blocks
 	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
 	/**
-	 * @return the y
+	 * Gets the coordinates in original target, for aligned blocks.
+	 *
+	 * @return the coordinates in original target, for aligned blocks
 	 */
 	public int getY() {
 		return y;
 	}
 
 	/**
-	 * @param y the y to set
+	 * Sets the coordinates in original target, for aligned blocks.
+	 *
+	 * @param y
+	 *            the new coordinates in original target, for aligned blocks
 	 */
 	public void setY(int y) {
 		this.y = y;
 	}
 
 	/**
-	 * @return the alignment
+	 * Gets the -1 (left), 0, or +1 (right).
+	 *
+	 * @return the -1 (left), 0, or +1 (right)
 	 */
 	public int getAlignment() {
 		return alignment;
 	}
 
 	/**
-	 * @param alignment the alignment to set
+	 * Sets the -1 (left), 0, or +1 (right).
+	 *
+	 * @param alignment
+	 *            the new -1 (left), 0, or +1 (right)
 	 */
 	public void setAlignment(int alignment) {
 		this.alignment = alignment;

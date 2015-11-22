@@ -28,30 +28,58 @@ import java.util.*;
 import javax.swing.UIDefaults;
 
 /**
+ * The Class AeroLookAndFeel.
+ *
  * @author Michael Hagen
  */
 public class AeroLookAndFeel extends AbstractLookAndFeel {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The my theme. */
 	private static AeroDefaultTheme myTheme = null;
 
+    /** The Constant themesList. */
     private static final ArrayList<String> themesList = new ArrayList<String>();
+    
+    /** The Constant themesMap. */
     private static final HashMap<String, Properties> themesMap = new HashMap<String, Properties>();
+    
+    /** The Constant defaultProps. */
     private static final Properties defaultProps = new Properties();
+    
+    /** The Constant smallFontProps. */
     private static final Properties smallFontProps = new Properties();
+    
+    /** The Constant largeFontProps. */
     private static final Properties largeFontProps = new Properties();
+    
+    /** The Constant giantFontProps. */
     private static final Properties giantFontProps = new Properties();
+    
+    /** The Constant goldProps. */
     private static final Properties goldProps = new Properties();
+    
+    /** The Constant goldSmallFontProps. */
     private static final Properties goldSmallFontProps = new Properties();
+    
+    /** The Constant goldLargeFontProps. */
     private static final Properties goldLargeFontProps = new Properties();
+    
+    /** The Constant goldGiantFontProps. */
     private static final Properties goldGiantFontProps = new Properties();
+    
+    /** The Constant greenProps. */
     private static final Properties greenProps = new Properties();
+    
+    /** The Constant greenSmallFontProps. */
     private static final Properties greenSmallFontProps = new Properties();
+    
+    /** The Constant greenLargeFontProps. */
     private static final Properties greenLargeFontProps = new Properties();
+    
+    /** The Constant greenGiantFontProps. */
     private static final Properties greenGiantFontProps = new Properties();
     
     static {
@@ -177,6 +205,10 @@ public class AeroLookAndFeel extends AbstractLookAndFeel {
         themesMap.put("Green-Giant-Font", greenGiantFontProps);
     }
     
+    /** Gets the themes.
+	 *
+	 * @return the themes
+	 */
     public static List<String> getThemes() { 
         return themesList; 
     }
@@ -185,6 +217,11 @@ public class AeroLookAndFeel extends AbstractLookAndFeel {
         return ((Properties)themesMap.get(name));
     }
     
+    /** Sets the theme.
+	 *
+	 * @param name
+	 *            the new theme
+	 */
     public static void setTheme(String name) {
         setTheme((Properties) themesMap.get(name));
         if (myTheme != null) {
@@ -204,6 +241,11 @@ public class AeroLookAndFeel extends AbstractLookAndFeel {
         }
     }
 
+    /** Sets the theme.
+	 *
+	 * @param themesProps
+	 *            the new theme
+	 */
     public static void setTheme(Properties themesProps) {
         currentThemeName = "aeroTheme";
         if (myTheme == null) {
@@ -217,6 +259,11 @@ public class AeroLookAndFeel extends AbstractLookAndFeel {
         }
     }
     
+    /** Sets the current theme.
+	 *
+	 * @param themesProps
+	 *            the new current theme
+	 */
     public static void setCurrentTheme(Properties themesProps) {
         setTheme(themesProps);
     }

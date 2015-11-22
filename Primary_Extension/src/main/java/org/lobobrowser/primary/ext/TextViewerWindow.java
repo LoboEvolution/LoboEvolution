@@ -67,6 +67,7 @@ public class TextViewerWindow extends JFrame {
 	/** The scrolls on appends. */
 	private boolean scrollsOnAppends;
 		
+	/** The pos. */
 	private int pos = 0;
 
 	/**

@@ -158,9 +158,9 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	}
 	
 	/**
-	 * Gets network box.
+	 * Gets the network box.
 	 *
-	 * @return the user agent group box
+	 * @return the network box
 	 */
 	private Component getNetworkBox() {
 		JPanel groupBox = new JPanel();

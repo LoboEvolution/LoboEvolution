@@ -29,10 +29,16 @@ import java.awt.Insets;
 import javax.swing.Icon;
 
 /**
+ * The Class AluminiumIcons.
+ *
  * @author Michael Hagen
  */
 public class AluminiumIcons extends BaseIcons {
 
+    /** Gets the icon icon.
+	 *
+	 * @return the icon icon
+	 */
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -47,6 +53,10 @@ public class AluminiumIcons extends BaseIcons {
         return iconIcon;
     }
 
+    /** Gets the min icon.
+	 *
+	 * @return the min icon
+	 */
     public static Icon getMinIcon() {
         if (minIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -61,6 +71,10 @@ public class AluminiumIcons extends BaseIcons {
         return minIcon;
     }
 
+    /** Gets the max icon.
+	 *
+	 * @return the max icon
+	 */
     public static Icon getMaxIcon() {
         if (maxIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -75,6 +89,10 @@ public class AluminiumIcons extends BaseIcons {
         return maxIcon;
     }
 
+    /** Gets the close icon.
+	 *
+	 * @return the close icon
+	 */
     public static Icon getCloseIcon() {
         if (closeIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -89,6 +107,10 @@ public class AluminiumIcons extends BaseIcons {
         return closeIcon;
     }
 
+    /** Gets the thumb hor icon.
+	 *
+	 * @return the thumb hor icon
+	 */
     public static Icon getThumbHorIcon() {
         if (thumbHorIcon == null) {
             thumbHorIcon = new LazyImageIcon("aluminium/icons/thumb_hor.gif");
@@ -96,6 +118,10 @@ public class AluminiumIcons extends BaseIcons {
         return thumbHorIcon;
     }
 
+    /** Gets the thumb hor icon rollover.
+	 *
+	 * @return the thumb hor icon rollover
+	 */
     public static Icon getThumbHorIconRollover() {
         if (thumbHorIconRollover == null) {
             thumbHorIconRollover = new LazyImageIcon("aluminium/icons/thumb_hor_rollover.gif");
@@ -103,6 +129,10 @@ public class AluminiumIcons extends BaseIcons {
         return thumbHorIconRollover;
     }
 
+    /** Gets the thumb ver icon.
+	 *
+	 * @return the thumb ver icon
+	 */
     public static Icon getThumbVerIcon() {
         if (thumbVerIcon == null) {
             thumbVerIcon = new LazyImageIcon("aluminium/icons/thumb_ver.gif");
@@ -110,6 +140,10 @@ public class AluminiumIcons extends BaseIcons {
         return thumbVerIcon;
     }
 
+    /** Gets the thumb ver icon rollover.
+	 *
+	 * @return the thumb ver icon rollover
+	 */
     public static Icon getThumbVerIconRollover() {
         if (thumbVerIconRollover == null) {
             thumbVerIconRollover = new LazyImageIcon("aluminium/icons/thumb_ver_rollover.gif");
@@ -117,6 +151,10 @@ public class AluminiumIcons extends BaseIcons {
         return thumbVerIconRollover;
     }
 
+    /** Gets the splitter up arrow icon.
+	 *
+	 * @return the splitter up arrow icon
+	 */
     public static Icon getSplitterUpArrowIcon() {
         if (splitterUpArrowIcon == null) {
             splitterUpArrowIcon = new LazyImageIcon("aluminium/icons/SplitterUpArrow.gif");
@@ -124,6 +162,10 @@ public class AluminiumIcons extends BaseIcons {
         return splitterUpArrowIcon;
     }
 
+    /** Gets the splitter down arrow icon.
+	 *
+	 * @return the splitter down arrow icon
+	 */
     public static Icon getSplitterDownArrowIcon() {
         if (splitterDownArrowIcon == null) {
             splitterDownArrowIcon = new LazyImageIcon("aluminium/icons/SplitterDownArrow.gif");
@@ -131,6 +173,10 @@ public class AluminiumIcons extends BaseIcons {
         return splitterDownArrowIcon;
     }
 
+    /** Gets the splitter left arrow icon.
+	 *
+	 * @return the splitter left arrow icon
+	 */
     public static Icon getSplitterLeftArrowIcon() {
         if (splitterLeftArrowIcon == null) {
             splitterLeftArrowIcon = new LazyImageIcon("aluminium/icons/SplitterLeftArrow.gif");
@@ -138,6 +184,10 @@ public class AluminiumIcons extends BaseIcons {
         return splitterLeftArrowIcon;
     }
 
+    /** Gets the splitter right arrow icon.
+	 *
+	 * @return the splitter right arrow icon
+	 */
     public static Icon getSplitterRightArrowIcon() {
         if (splitterRightArrowIcon == null) {
             splitterRightArrowIcon = new LazyImageIcon("aluminium/icons/SplitterRightArrow.gif");

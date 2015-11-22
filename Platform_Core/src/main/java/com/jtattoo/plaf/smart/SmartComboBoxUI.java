@@ -30,6 +30,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class SmartComboBoxUI.
+ *
  * @author Michael Hagen
  */
 public class SmartComboBoxUI extends BaseComboBoxUI {
@@ -50,12 +52,13 @@ public class SmartComboBoxUI extends BaseComboBoxUI {
         return button;
     }
 
+/**
+ * The Class ArrowButton.
+ */
 //--------------------------------------------------------------------------------------------------
     static class ArrowButton extends BaseComboBoxUI.ArrowButton {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void paint(Graphics g) {

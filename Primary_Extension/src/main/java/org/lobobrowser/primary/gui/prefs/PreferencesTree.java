@@ -154,9 +154,9 @@ public class PreferencesTree extends JTree {
 	}
 	
 	/**
-	 * Gets the tools settings info.
+	 * Gets the look and feels settings info.
 	 *
-	 * @return the Look and Feels settings info
+	 * @return the look and feels settings info
 	 */
 	private SettingsInfo getLookAndFeelsSettingsInfo() {
 		return new SettingsInfo() {

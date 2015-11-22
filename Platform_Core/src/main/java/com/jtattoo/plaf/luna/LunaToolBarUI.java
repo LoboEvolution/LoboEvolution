@@ -29,6 +29,9 @@ import javax.swing.JComponent;
 import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
+/**
+ * The Class LunaToolBarUI.
+ */
 public class LunaToolBarUI extends AbstractToolBarUI {
 
     public static ComponentUI createUI(JComponent c) {

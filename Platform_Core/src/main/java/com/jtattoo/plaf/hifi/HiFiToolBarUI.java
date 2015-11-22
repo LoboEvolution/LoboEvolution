@@ -30,6 +30,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class HiFiToolBarUI.
+ *
  * @author Michael Hagen
  */
 public class HiFiToolBarUI extends AbstractToolBarUI {

@@ -29,6 +29,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
 
 /**
+ * The Class AluminiumSplitPaneUI.
+ *
  * @author Michael Hagen
  */
 public class AluminiumSplitPaneUI extends BaseSplitPaneUI {

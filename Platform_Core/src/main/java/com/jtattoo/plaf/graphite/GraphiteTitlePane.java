@@ -28,13 +28,13 @@ import java.awt.*;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * The Class GraphiteTitlePane.
+ *
+ * @author Michael Hagen
  */
 public class GraphiteTitlePane extends BaseTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public GraphiteTitlePane(JRootPane root, BaseRootPaneUI ui) {

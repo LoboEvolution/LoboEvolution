@@ -29,13 +29,13 @@ import java.awt.Graphics;
 import javax.swing.*;
 
 /**
- * @author  Michael Hagen
+ * The Class AeroTitlePane.
+ *
+ * @author Michael Hagen
  */
 public class AeroTitlePane extends BaseTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public AeroTitlePane(JRootPane root, BaseRootPaneUI ui) {
@@ -88,12 +88,13 @@ public class AeroTitlePane extends BaseTitlePane {
         }
     }
 
+/**
+ * The Class TitleButton.
+ */
 //------------------------------------------------------------------------------
     private class TitleButton extends BaseTitleButton {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public TitleButton(Action action, String accessibleName, Icon icon) {

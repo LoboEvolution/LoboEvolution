@@ -32,6 +32,8 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class AluminiumSliderUI.
+ *
  * @author Michael Hagen
  */
 public class AluminiumSliderUI extends BaseSliderUI {

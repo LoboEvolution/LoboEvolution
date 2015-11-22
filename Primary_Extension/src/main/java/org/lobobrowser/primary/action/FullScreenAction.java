@@ -44,9 +44,16 @@ public class FullScreenAction extends AbstractAction implements EnableableAction
 	/** The action. */
 	private ActionPool action;
 	
+	/** The device. */
 	private static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
+	
+	/** The new display mode. */
 	private static DisplayMode newDisplayMode;
+	
+	/** The old display mode. */
 	private static DisplayMode oldDisplayMode = device.getDisplayMode();
+	
+	/** The count fs. */
 	private int countFs= 0;
 
 	/**

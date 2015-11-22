@@ -29,6 +29,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class McWinInternalFrameUI.
+ *
  * @author Michael Hagen
  */
 public class McWinInternalFrameUI extends BaseInternalFrameUI {

@@ -31,6 +31,7 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class AcrylSpinnerUI.
  *
  * @author Michael Hagen
  */

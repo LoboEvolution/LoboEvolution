@@ -34,14 +34,22 @@ import javax.swing.plaf.basic.BasicTableHeaderUI;
 import javax.swing.table.*;
 
 /**
+ * The Class BaseTableHeaderUI.
  *
  * @author Michael Hagen
  */
 public class BaseTableHeaderUI extends BasicTableHeaderUI {
 
+    /** The original header renderer. */
     private TableCellRenderer originalHeaderRenderer;
+    
+    /** The my mouse adapter. */
     protected MouseAdapter myMouseAdapter = null;
+    
+    /** The my mouse motion adapter. */
     protected MouseMotionAdapter myMouseMotionAdapter = null;
+    
+    /** The rollover col. */
     protected int rolloverCol = -1;
 
     public static ComponentUI createUI(JComponent h) {
@@ -194,6 +202,10 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
         return renderer.getTableCellRendererComponent(header.getTable(), tabCol.getHeaderValue(), false, false, -1, col);
     }
 
+    /** Gets the header height.
+	 *
+	 * @return the header height
+	 */
     private int getHeaderHeight() {
         if ((header == null) || (header.getTable() == null)) {
             return 0;
@@ -377,12 +389,13 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 
 //----------------------------------------------------------------------------------------------------------------------
 // inner classes
+/**
+ * The Class BaseDefaultHeaderRenderer.
+ */
 //----------------------------------------------------------------------------------------------------------------------
     private class BaseDefaultHeaderRenderer extends DefaultTableCellRenderer {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public BaseDefaultHeaderRenderer() {
@@ -394,13 +407,17 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
         }
     }
 
+    /** The Class MyRenderComponent.
+	 */
     private class MyRenderComponent extends JLabel {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The table. */
 		private JTable table = null;
+        
+        /** The col. */
         private int col = 0;
 
         public MyRenderComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {

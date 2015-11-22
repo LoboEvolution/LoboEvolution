@@ -27,13 +27,13 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 
 /**
- * @author  Michael Hagen
+ * The Class NoFocusButton.
+ *
+ * @author Michael Hagen
  */
 public class NoFocusButton extends JButton {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public NoFocusButton() {

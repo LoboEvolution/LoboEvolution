@@ -29,6 +29,8 @@ import java.awt.Color;
 import javax.swing.plaf.ColorUIResource;
 
 /**
+ * The Class BernsteinDefaultTheme.
+ *
  * @author Michael Hagen
  */
 public class BernsteinDefaultTheme extends AbstractTheme {

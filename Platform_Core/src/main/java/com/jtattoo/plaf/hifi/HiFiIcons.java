@@ -32,14 +32,24 @@ import javax.swing.*;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class HiFiIcons.
+ *
  * @author Michael Hagen
  */
 public class HiFiIcons extends BaseIcons {
     
+    /** Gets the combo box icon.
+	 *
+	 * @return the combo box icon
+	 */
     public static Icon getComboBoxIcon() {
         return getDownArrowIcon();
     }
     
+    /** Gets the icon icon.
+	 *
+	 * @return the icon icon
+	 */
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -54,6 +64,10 @@ public class HiFiIcons extends BaseIcons {
         return iconIcon;
     }
 
+    /** Gets the min icon.
+	 *
+	 * @return the min icon
+	 */
     public static Icon getMinIcon() {
         if (minIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -68,6 +82,10 @@ public class HiFiIcons extends BaseIcons {
         return minIcon;
     }
 
+    /** Gets the max icon.
+	 *
+	 * @return the max icon
+	 */
     public static Icon getMaxIcon() {
         if (maxIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -82,6 +100,10 @@ public class HiFiIcons extends BaseIcons {
         return maxIcon;
     }
 
+    /** Gets the close icon.
+	 *
+	 * @return the close icon
+	 */
     public static Icon getCloseIcon() {
         if (closeIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -96,6 +118,10 @@ public class HiFiIcons extends BaseIcons {
         return closeIcon;
     }
 
+    /** Gets the radio button icon.
+	 *
+	 * @return the radio button icon
+	 */
     public static Icon getRadioButtonIcon() {
         if (radioButtonIcon == null) {
             radioButtonIcon = new RadioButtonIcon();
@@ -103,6 +129,10 @@ public class HiFiIcons extends BaseIcons {
         return radioButtonIcon;
     }
 
+    /** Gets the check box icon.
+	 *
+	 * @return the check box icon
+	 */
     public static Icon getCheckBoxIcon() {
         if (checkBoxIcon == null) {
             checkBoxIcon = new CheckBoxIcon();
@@ -110,6 +140,10 @@ public class HiFiIcons extends BaseIcons {
         return checkBoxIcon;
     }
 
+    /** Gets the tree expanded icon.
+	 *
+	 * @return the tree expanded icon
+	 */
     public static Icon getTreeExpandedIcon() {
         if (treeExpandedIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -123,6 +157,10 @@ public class HiFiIcons extends BaseIcons {
         return treeExpandedIcon;
     }
     
+    /** Gets the tree collapsed icon.
+	 *
+	 * @return the tree collapsed icon
+	 */
     public static Icon getTreeCollapsedIcon() {
         if (treeCollapsedIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -136,6 +174,10 @@ public class HiFiIcons extends BaseIcons {
         return treeCollapsedIcon;
     }
 
+    /** Gets the menu arrow icon.
+	 *
+	 * @return the menu arrow icon
+	 */
     public static Icon getMenuArrowIcon() {
         if (menuArrowIcon == null) {
             menuArrowIcon = new LazyMenuArrowImageIcon("hifi/icons/medium/arrow_right_8x9.png", "hifi/icons/medium/arrow_left8x9.png");
@@ -143,6 +185,10 @@ public class HiFiIcons extends BaseIcons {
         return menuArrowIcon;
     }
 
+    /** Gets the splitter up arrow icon.
+	 *
+	 * @return the splitter up arrow icon
+	 */
     public static Icon getSplitterUpArrowIcon() {
         if (splitterUpArrowIcon == null) {
             splitterUpArrowIcon = new LazyImageIcon("hifi/icons/SplitterUpArrow.gif");
@@ -150,6 +196,10 @@ public class HiFiIcons extends BaseIcons {
         return splitterUpArrowIcon;
     }
 
+    /** Gets the splitter down arrow icon.
+	 *
+	 * @return the splitter down arrow icon
+	 */
     public static Icon getSplitterDownArrowIcon() {
         if (splitterDownArrowIcon == null) {
             splitterDownArrowIcon = new LazyImageIcon("hifi/icons/SplitterDownArrow.gif");
@@ -157,6 +207,10 @@ public class HiFiIcons extends BaseIcons {
         return splitterDownArrowIcon;
     }
 
+    /** Gets the splitter left arrow icon.
+	 *
+	 * @return the splitter left arrow icon
+	 */
     public static Icon getSplitterLeftArrowIcon() {
         if (splitterLeftArrowIcon == null) {
             splitterLeftArrowIcon = new LazyImageIcon("hifi/icons/SplitterLeftArrow.gif");
@@ -164,6 +218,10 @@ public class HiFiIcons extends BaseIcons {
         return splitterLeftArrowIcon;
     }
 
+    /** Gets the splitter right arrow icon.
+	 *
+	 * @return the splitter right arrow icon
+	 */
     public static Icon getSplitterRightArrowIcon() {
         if (splitterRightArrowIcon == null) {
             splitterRightArrowIcon = new LazyImageIcon("hifi/icons/SplitterRightArrow.gif");
@@ -171,6 +229,10 @@ public class HiFiIcons extends BaseIcons {
         return splitterRightArrowIcon;
     }
 
+    /** Gets the splitter hor bump icon.
+	 *
+	 * @return the splitter hor bump icon
+	 */
     public static Icon getSplitterHorBumpIcon() {
         if (splitterHorBumpIcon == null) {
             splitterHorBumpIcon = new LazyImageIcon("hifi/icons/SplitterHorBumps.gif");
@@ -178,6 +240,10 @@ public class HiFiIcons extends BaseIcons {
         return splitterHorBumpIcon;
     }
 
+    /** Gets the splitter ver bump icon.
+	 *
+	 * @return the splitter ver bump icon
+	 */
     public static Icon getSplitterVerBumpIcon() {
         if (splitterVerBumpIcon == null) {
             splitterVerBumpIcon = new LazyImageIcon("hifi/icons/SplitterVerBumps.gif");
@@ -185,6 +251,10 @@ public class HiFiIcons extends BaseIcons {
         return splitterVerBumpIcon;
     }
 
+    /** Gets the thumb hor icon.
+	 *
+	 * @return the thumb hor icon
+	 */
     public static Icon getThumbHorIcon() {
         if (thumbHorIcon == null) {
             thumbHorIcon = new LazyImageIcon("hifi/icons/thumb_hor.gif");
@@ -192,6 +262,10 @@ public class HiFiIcons extends BaseIcons {
         return thumbHorIcon;
     }
 
+    /** Gets the thumb ver icon.
+	 *
+	 * @return the thumb ver icon
+	 */
     public static Icon getThumbVerIcon() {
         if (thumbVerIcon == null) {
             thumbVerIcon = new LazyImageIcon("hifi/icons/thumb_ver.gif");
@@ -199,6 +273,10 @@ public class HiFiIcons extends BaseIcons {
         return thumbVerIcon;
     }
 
+    /** Gets the thumb hor icon rollover.
+	 *
+	 * @return the thumb hor icon rollover
+	 */
     public static Icon getThumbHorIconRollover() {
         if (thumbHorIconRollover == null) {
             thumbHorIconRollover = new LazyImageIcon("hifi/icons/thumb_hor_rollover.gif");
@@ -206,6 +284,10 @@ public class HiFiIcons extends BaseIcons {
         return thumbHorIconRollover;
     }
 
+    /** Gets the thumb ver icon rollover.
+	 *
+	 * @return the thumb ver icon rollover
+	 */
     public static Icon getThumbVerIconRollover() {
         if (thumbVerIconRollover == null) {
             thumbVerIconRollover = new LazyImageIcon("hifi/icons/thumb_ver_rollover.gif");
@@ -213,6 +295,10 @@ public class HiFiIcons extends BaseIcons {
         return thumbVerIconRollover;
     }
 
+    /** Gets the up arrow icon.
+	 *
+	 * @return the up arrow icon
+	 */
     public static Icon getUpArrowIcon() {
         if (upArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -226,6 +312,10 @@ public class HiFiIcons extends BaseIcons {
         return upArrowIcon;
     }
 
+    /** Gets the down arrow icon.
+	 *
+	 * @return the down arrow icon
+	 */
     public static Icon getDownArrowIcon() {
         if (downArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -239,6 +329,10 @@ public class HiFiIcons extends BaseIcons {
         return downArrowIcon;
     }
 
+    /** Gets the left arrow icon.
+	 *
+	 * @return the left arrow icon
+	 */
     public static Icon getLeftArrowIcon() {
         if (leftArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -252,6 +346,10 @@ public class HiFiIcons extends BaseIcons {
         return leftArrowIcon;
     }
 
+    /** Gets the right arrow icon.
+	 *
+	 * @return the right arrow icon
+	 */
     public static Icon getRightArrowIcon() {
         if (rightArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -269,21 +367,42 @@ public class HiFiIcons extends BaseIcons {
 // inner classes    
 //----------------------------------------------------------------------------------------------------------------------
 
-    private static class CheckBoxIcon implements Icon, UIResource, Serializable {
+    /**
+ * The Class CheckBoxIcon.
+ */
+private static class CheckBoxIcon implements Icon, UIResource, Serializable {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant GAP. */
 		private static final int GAP = 2;
+        
+        /** The Constant SMALL_CHECK_ICON. */
         private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("hifi/icons/small/check_symbol_12x11.png");
+        
+        /** The Constant SMALL_CHECK_INVERSE_ICON. */
         private static final Icon SMALL_CHECK_INVERSE_ICON = new LazyImageIcon("icons/small/check_symbol_10x10.png");
+        
+        /** The Constant SMALL_CHECK_DISABLED_ICON. */
         private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon("icons/small/check_symbol_disabled_10x10.png");
+        
+        /** The Constant MEDIUM_CHECK_ICON. */
         private static final Icon MEDIUM_CHECK_ICON = new LazyImageIcon("hifi/icons/medium/check_symbol_14x13.png");
+        
+        /** The Constant MEDIUM_CHECK_INVERSE_ICON. */
         private static final Icon MEDIUM_CHECK_INVERSE_ICON = new LazyImageIcon("icons/medium/check_symbol_12x12.png");
+        
+        /** The Constant MEDIUM_CHECK_DISABLED_ICON. */
         private static final Icon MEDIUM_CHECK_DISABLED_ICON = new LazyImageIcon("icons/medium/check_symbol_disabled_12x12.png");
+        
+        /** The Constant LARGE_CHECK_ICON. */
         private static final Icon LARGE_CHECK_ICON = new LazyImageIcon("hifi/icons/large/check_symbol_16x15.png");
+        
+        /** The Constant LARGE_CHECK_INVERSE_ICON. */
         private static final Icon LARGE_CHECK_INVERSE_ICON = new LazyImageIcon("icons/large/check_symbol_14x14.png");
+        
+        /** The Constant LARGE_CHECK_DISABLED_ICON. */
         private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon("icons/large/check_symbol_disabled_14x14.png");
         
         public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -384,13 +503,16 @@ public class HiFiIcons extends BaseIcons {
         }
     }
 
+/**
+ * The Class RadioButtonIcon.
+ */
 //----------------------------------------------------------------------------------------------------------------------
     private static class RadioButtonIcon implements Icon, UIResource, Serializable {
         
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant GAP. */
 		private static final int GAP = 2;
 
         public void paintIcon(Component c, Graphics g, int x, int y) {

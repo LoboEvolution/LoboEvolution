@@ -29,6 +29,8 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class GraphiteRadioButtonMenuItemUI.
+ *
  * @author Michael Hagen
  */
 public class GraphiteRadioButtonMenuItemUI extends BaseRadioButtonMenuItemUI {

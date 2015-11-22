@@ -28,6 +28,8 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class BaseCheckBoxMenuItemUI.
+ *
  * @author Michael Hagen
  */
 public class BaseCheckBoxMenuItemUI extends BaseMenuItemUI {

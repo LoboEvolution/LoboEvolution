@@ -29,22 +29,34 @@ import java.util.*;
 import javax.swing.UIDefaults;
 
 /**
+ * The Class NoireLookAndFeel.
+ *
  * @author Michael Hagen
  */
 public class NoireLookAndFeel extends AbstractLookAndFeel {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The my theme. */
 	private static NoireDefaultTheme myTheme = null;
 
+    /** The Constant themesList. */
     private static final ArrayList<String> themesList = new ArrayList<String>();
+    
+    /** The Constant themesMap. */
     private static final HashMap<String, Properties> themesMap = new HashMap<String, Properties>();
+    
+    /** The Constant defaultProps. */
     private static final Properties defaultProps = new Properties();
+    
+    /** The Constant smallFontProps. */
     private static final Properties smallFontProps = new Properties();
+    
+    /** The Constant largeFontProps. */
     private static final Properties largeFontProps = new Properties();
+    
+    /** The Constant giantFontProps. */
     private static final Properties giantFontProps = new Properties();
 
     static {
@@ -81,6 +93,10 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
        
     }
 
+    /** Gets the themes.
+	 *
+	 * @return the themes
+	 */
     public static List<String> getThemes() {
         return themesList;
     }
@@ -89,6 +105,11 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
         return ((Properties) themesMap.get(name));
     }
 
+    /** Sets the theme.
+	 *
+	 * @param name
+	 *            the new theme
+	 */
     public static void setTheme(String name) {
         AbstractTheme.setInternalName(name);
         setTheme((Properties) themesMap.get(name));
@@ -104,6 +125,11 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
         }
     }
 
+    /** Sets the theme.
+	 *
+	 * @param themesProps
+	 *            the new theme
+	 */
     public static void setTheme(Properties themesProps) {
         currentThemeName = "noireTheme";
         if (myTheme == null) {
@@ -117,6 +143,11 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
         }
     }
 
+    /** Sets the current theme.
+	 *
+	 * @param themesProps
+	 *            the new current theme
+	 */
     public static void setCurrentTheme(Properties themesProps) {
         setTheme(themesProps);
     }

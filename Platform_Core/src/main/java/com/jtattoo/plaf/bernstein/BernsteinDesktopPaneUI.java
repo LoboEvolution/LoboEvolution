@@ -29,10 +29,13 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class BernsteinDesktopPaneUI.
+ *
  * @author Michael Hagen
  */
 public class BernsteinDesktopPaneUI extends BaseDesktopPaneUI {
 
+    /** The desktop pane ui. */
     private static BernsteinDesktopPaneUI desktopPaneUI = null;
 
     public static ComponentUI createUI(JComponent c) {

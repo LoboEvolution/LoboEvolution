@@ -95,6 +95,7 @@ public class StyleSheetAggregator {
 	/** The rules by element. */
 	private final Map<String, Collection<StyleRuleInfo>> rulesByElement = new HashMap<String, Collection<StyleRuleInfo>>();
 	
+	/** The pseudo element. */
 	private String pseudoElement;
 
 	/** The op equal. */

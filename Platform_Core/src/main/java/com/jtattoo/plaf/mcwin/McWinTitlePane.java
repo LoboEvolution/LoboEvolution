@@ -28,13 +28,13 @@ import java.awt.*;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * The Class McWinTitlePane.
+ *
+ * @author Michael Hagen
  */
 public class McWinTitlePane extends BaseTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public McWinTitlePane(JRootPane root, BaseRootPaneUI ui) {
@@ -80,6 +80,9 @@ public class McWinTitlePane extends BaseTitlePane {
 
 //------------------------------------------------------------------------------
 // inner classes
+/**
+ * The Class TitlePaneLayout.
+ */
 //------------------------------------------------------------------------------
     protected class TitlePaneLayout implements LayoutManager {
 

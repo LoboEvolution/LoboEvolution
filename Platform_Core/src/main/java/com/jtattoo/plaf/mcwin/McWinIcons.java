@@ -32,10 +32,16 @@ import javax.swing.*;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class McWinIcons.
+ *
  * @author Michael Hagen
  */
 public class McWinIcons extends BaseIcons {
 
+    /** Gets the icon icon.
+	 *
+	 * @return the icon icon
+	 */
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             iconIcon = new MacIconIcon();
@@ -43,6 +49,10 @@ public class McWinIcons extends BaseIcons {
         return iconIcon;
     }
 
+    /** Gets the min icon.
+	 *
+	 * @return the min icon
+	 */
     public static Icon getMinIcon() {
         if (minIcon == null) {
             minIcon = new MacMinIcon();
@@ -50,6 +60,10 @@ public class McWinIcons extends BaseIcons {
         return minIcon;
     }
 
+    /** Gets the max icon.
+	 *
+	 * @return the max icon
+	 */
     public static Icon getMaxIcon() {
         if (maxIcon == null) {
             maxIcon = new MacMaxIcon();
@@ -57,6 +71,10 @@ public class McWinIcons extends BaseIcons {
         return maxIcon;
     }
 
+    /** Gets the close icon.
+	 *
+	 * @return the close icon
+	 */
     public static Icon getCloseIcon() {
         if (closeIcon == null) {
             closeIcon = new MacCloseIcon();
@@ -64,6 +82,10 @@ public class McWinIcons extends BaseIcons {
         return closeIcon;
     }
 
+    /** Gets the radio button icon.
+	 *
+	 * @return the radio button icon
+	 */
     public static Icon getRadioButtonIcon() {
         if (radioButtonIcon == null) {
             radioButtonIcon = new RadioButtonIcon();
@@ -71,6 +93,10 @@ public class McWinIcons extends BaseIcons {
         return radioButtonIcon;
     }
 
+    /** Gets the check box icon.
+	 *
+	 * @return the check box icon
+	 */
     public static Icon getCheckBoxIcon() {
         if (checkBoxIcon == null) {
             checkBoxIcon = new CheckBoxIcon();
@@ -78,6 +104,10 @@ public class McWinIcons extends BaseIcons {
         return checkBoxIcon;
     }
 
+    /** Gets the thumb hor icon.
+	 *
+	 * @return the thumb hor icon
+	 */
     public static Icon getThumbHorIcon() {
         if (thumbHorIcon == null) {
             thumbHorIcon = new ThumbIcon(false);
@@ -85,6 +115,10 @@ public class McWinIcons extends BaseIcons {
         return thumbHorIcon;
     }
 
+    /** Gets the thumb ver icon.
+	 *
+	 * @return the thumb ver icon
+	 */
     public static Icon getThumbVerIcon() {
         if (thumbVerIcon == null) {
             thumbVerIcon = new ThumbIcon(false);
@@ -92,6 +126,10 @@ public class McWinIcons extends BaseIcons {
         return thumbVerIcon;
     }
 
+    /** Gets the thumb hor icon rollover.
+	 *
+	 * @return the thumb hor icon rollover
+	 */
     public static Icon getThumbHorIconRollover() {
         if (thumbHorIconRollover == null) {
             thumbHorIconRollover = new ThumbIcon(true);
@@ -99,6 +137,10 @@ public class McWinIcons extends BaseIcons {
         return thumbHorIconRollover;
     }
 
+    /** Gets the thumb ver icon rollover.
+	 *
+	 * @return the thumb ver icon rollover
+	 */
     public static Icon getThumbVerIconRollover() {
         if (thumbVerIconRollover == null) {
             thumbVerIconRollover = new ThumbIcon(true);
@@ -107,19 +149,34 @@ public class McWinIcons extends BaseIcons {
     }
 
 
+/**
+ * The Class CheckBoxIcon.
+ */
 //--------------------------------------------------------------------------------------------------------
     private static class CheckBoxIcon implements Icon, UIResource, Serializable {
         
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant GAP. */
 		private static final int GAP = 4;
+        
+        /** The Constant SMALL_CHECK_ICON. */
         private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("mcwin/icons/small/check_symbol_16x11.png");
+        
+        /** The Constant SMALL_CHECK_DISABLED_ICON. */
         private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon("mcwin/icons/small/check_symbol_disabled_16x11.png");
+        
+        /** The Constant MEDIUM_CHECK_ICON. */
         private static final Icon MEDIUM_CHECK_ICON = new LazyImageIcon("mcwin/icons/medium/check_symbol_18x13.png");
+        
+        /** The Constant MEDIUM_CHECK_DISABLED_ICON. */
         private static final Icon MEDIUM_CHECK_DISABLED_ICON = new LazyImageIcon("mcwin/icons/medium/check_symbol_disabled_18x13.png");
+        
+        /** The Constant LARGE_CHECK_ICON. */
         private static final Icon LARGE_CHECK_ICON = new LazyImageIcon("mcwin/icons/large/check_symbol_20x15.png");
+        
+        /** The Constant LARGE_CHECK_DISABLED_ICON. */
         private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon("mcwin/icons/large/check_symbol_disabled_20x15.png");
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -209,12 +266,14 @@ public class McWinIcons extends BaseIcons {
         }
     }
 
+    /** The Class RadioButtonIcon.
+	 */
     private static class RadioButtonIcon implements Icon, UIResource, Serializable {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant GAP. */
 		private static final int GAP = 2;
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -304,14 +363,20 @@ public class McWinIcons extends BaseIcons {
         }
     }
 
+    /** The Class ThumbIcon.
+	 */
     private static class ThumbIcon implements Icon, UIResource, Serializable {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant WIDTH. */
 		private final static int WIDTH = 15;
+        
+        /** The Constant HEIGHT. */
         private final static int HEIGHT = 15;
+        
+        /** The is rollover. */
         private boolean isRollover = false;
 
         public ThumbIcon(boolean isRollover) {

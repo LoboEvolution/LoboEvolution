@@ -28,6 +28,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicScrollPaneUI;
 
 /**
+ * The Class BaseScrollPaneUI.
+ *
  * @author Michael Hagen
  */
 public class BaseScrollPaneUI extends BasicScrollPaneUI {

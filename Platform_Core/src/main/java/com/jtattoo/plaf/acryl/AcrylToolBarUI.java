@@ -31,6 +31,9 @@ import javax.swing.JToolBar;
 import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
+/**
+ * The Class AcrylToolBarUI.
+ */
 public class AcrylToolBarUI extends AbstractToolBarUI {
 
     public static ComponentUI createUI(JComponent c) {

@@ -29,30 +29,58 @@ import javax.swing.UIDefaults;
 import javax.swing.plaf.InsetsUIResource;
 
 /**
+ * The Class McWinLookAndFeel.
+ *
  * @author Michael Hagen
  */
 public class McWinLookAndFeel extends AbstractLookAndFeel {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The my theme. */
 	private static McWinDefaultTheme myTheme = null;
 
+    /** The Constant themesList. */
     private static final ArrayList<String> themesList = new ArrayList<String>();
+    
+    /** The Constant themesMap. */
     private static final HashMap<String, Properties> themesMap = new HashMap<String, Properties>();
+    
+    /** The Constant defaultProps. */
     private static final Properties defaultProps = new Properties();
+    
+    /** The Constant smallFontProps. */
     private static final Properties smallFontProps = new Properties();
+    
+    /** The Constant largeFontProps. */
     private static final Properties largeFontProps = new Properties();
+    
+    /** The Constant giantFontProps. */
     private static final Properties giantFontProps = new Properties();
+    
+    /** The Constant modernProps. */
     private static final Properties modernProps = new Properties();
+    
+    /** The Constant modernSmallFontProps. */
     private static final Properties modernSmallFontProps = new Properties();
+    
+    /** The Constant modernLargeFontProps. */
     private static final Properties modernLargeFontProps = new Properties();
+    
+    /** The Constant modernGiantFontProps. */
     private static final Properties modernGiantFontProps = new Properties();
+    
+    /** The Constant pinkProps. */
     private static final Properties pinkProps = new Properties();
+    
+    /** The Constant pinkSmallFontProps. */
     private static final Properties pinkSmallFontProps = new Properties();
+    
+    /** The Constant pinkLargeFontProps. */
     private static final Properties pinkLargeFontProps = new Properties();
+    
+    /** The Constant pinkGiantFontProps. */
     private static final Properties pinkGiantFontProps = new Properties();
 
     static {
@@ -195,6 +223,10 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
         themesMap.put("Pink-Giant-Font", pinkGiantFontProps);
     }
 
+    /** Gets the themes.
+	 *
+	 * @return the themes
+	 */
     public static List<String> getThemes() {
         return themesList;
     }
@@ -203,6 +235,11 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
         return ((Properties) themesMap.get(name));
     }
 
+    /** Sets the theme.
+	 *
+	 * @param name
+	 *            the new theme
+	 */
     public static void setTheme(String name) {
         setTheme((Properties) themesMap.get(name));
         if (myTheme != null) {
@@ -222,6 +259,11 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
         }
     }
 
+    /** Sets the theme.
+	 *
+	 * @param themesProps
+	 *            the new theme
+	 */
     public static void setTheme(Properties themesProps) {
         currentThemeName = "mcwinTheme";
         if (myTheme == null) {
@@ -235,6 +277,11 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
         }
     }
 
+    /** Sets the current theme.
+	 *
+	 * @param themesProps
+	 *            the new current theme
+	 */
     public static void setCurrentTheme(Properties themesProps) {
         setTheme(themesProps);
     }

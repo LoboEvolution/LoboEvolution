@@ -31,10 +31,13 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
+ * The Class GraphiteRadioButtonUI.
+ *
  * @author Michael Hagen
  */
 public class GraphiteRadioButtonUI extends BaseRadioButtonUI {
 
+    /** The radio button ui. */
     private static GraphiteRadioButtonUI radioButtonUI = null;
 
     public static ComponentUI createUI(JComponent c) {

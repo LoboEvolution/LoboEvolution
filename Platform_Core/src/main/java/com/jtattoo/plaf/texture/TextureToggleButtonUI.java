@@ -31,6 +31,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
+ * The Class TextureToggleButtonUI.
+ *
  * @author Michael Hagen
  */
 public class TextureToggleButtonUI extends BaseToggleButtonUI {

@@ -30,6 +30,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class TextureCheckBoxMenuItemUI.
+ *
  * @author Michael Hagen
  */
 public class TextureCheckBoxMenuItemUI extends BaseCheckBoxMenuItemUI {

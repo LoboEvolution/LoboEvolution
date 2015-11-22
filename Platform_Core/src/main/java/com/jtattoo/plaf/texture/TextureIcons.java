@@ -29,10 +29,16 @@ import java.awt.Insets;
 import javax.swing.Icon;
 
 /**
+ * The Class TextureIcons.
+ *
  * @author Michael Hagen
  */
 public class TextureIcons extends BaseIcons {
 
+    /** Gets the up arrow icon.
+	 *
+	 * @return the up arrow icon
+	 */
     public static Icon getUpArrowIcon() {
         if (upArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -46,6 +52,10 @@ public class TextureIcons extends BaseIcons {
         return upArrowIcon;
     }
 
+    /** Gets the down arrow icon.
+	 *
+	 * @return the down arrow icon
+	 */
     public static Icon getDownArrowIcon() {
         if (downArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -59,6 +69,10 @@ public class TextureIcons extends BaseIcons {
         return downArrowIcon;
     }
 
+    /** Gets the left arrow icon.
+	 *
+	 * @return the left arrow icon
+	 */
     public static Icon getLeftArrowIcon() {
         if (leftArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -72,6 +86,10 @@ public class TextureIcons extends BaseIcons {
         return leftArrowIcon;
     }
 
+    /** Gets the right arrow icon.
+	 *
+	 * @return the right arrow icon
+	 */
     public static Icon getRightArrowIcon() {
         if (rightArrowIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -85,6 +103,10 @@ public class TextureIcons extends BaseIcons {
         return rightArrowIcon;
     }
     
+    /** Gets the icon icon.
+	 *
+	 * @return the icon icon
+	 */
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -99,6 +121,10 @@ public class TextureIcons extends BaseIcons {
         return iconIcon;
     }
 
+    /** Gets the min icon.
+	 *
+	 * @return the min icon
+	 */
     public static Icon getMinIcon() {
         if (minIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -113,6 +139,10 @@ public class TextureIcons extends BaseIcons {
         return minIcon;
     }
 
+    /** Gets the max icon.
+	 *
+	 * @return the max icon
+	 */
     public static Icon getMaxIcon() {
         if (maxIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -127,6 +157,10 @@ public class TextureIcons extends BaseIcons {
         return maxIcon;
     }
 
+    /** Gets the close icon.
+	 *
+	 * @return the close icon
+	 */
     public static Icon getCloseIcon() {
         if (closeIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -141,6 +175,10 @@ public class TextureIcons extends BaseIcons {
         return closeIcon;
     }
 
+    /** Gets the splitter hor bump icon.
+	 *
+	 * @return the splitter hor bump icon
+	 */
     public static Icon getSplitterHorBumpIcon() {
         if (splitterHorBumpIcon == null) {
             splitterHorBumpIcon = new LazyImageIcon("texture/icons/SplitterHorBumps.gif");
@@ -148,6 +186,10 @@ public class TextureIcons extends BaseIcons {
         return splitterHorBumpIcon;
     }
 
+    /** Gets the splitter ver bump icon.
+	 *
+	 * @return the splitter ver bump icon
+	 */
     public static Icon getSplitterVerBumpIcon() {
         if (splitterVerBumpIcon == null) {
             splitterVerBumpIcon = new LazyImageIcon("texture/icons/SplitterVerBumps.gif");
@@ -155,6 +197,10 @@ public class TextureIcons extends BaseIcons {
         return splitterVerBumpIcon;
     }
 
+    /** Gets the thumb hor icon.
+	 *
+	 * @return the thumb hor icon
+	 */
     public static Icon getThumbHorIcon() {
         if ("Default".equals(AbstractLookAndFeel.getTheme().getName())) {
             if (thumbHorIcon == null) {
@@ -166,6 +212,10 @@ public class TextureIcons extends BaseIcons {
         }
     }
 
+    /** Gets the thumb ver icon.
+	 *
+	 * @return the thumb ver icon
+	 */
     public static Icon getThumbVerIcon() {
         if ("Default".equals(AbstractLookAndFeel.getTheme().getName())) {
             if (thumbVerIcon == null) {
@@ -177,6 +227,10 @@ public class TextureIcons extends BaseIcons {
         }
     }
 
+    /** Gets the thumb hor icon rollover.
+	 *
+	 * @return the thumb hor icon rollover
+	 */
     public static Icon getThumbHorIconRollover() {
         if ("Default".equals(AbstractLookAndFeel.getTheme().getName())) {
             if (thumbHorIconRollover == null) {
@@ -188,6 +242,10 @@ public class TextureIcons extends BaseIcons {
         }
     }
 
+    /** Gets the thumb ver icon rollover.
+	 *
+	 * @return the thumb ver icon rollover
+	 */
     public static Icon getThumbVerIconRollover() {
         if ("Default".equals(AbstractLookAndFeel.getTheme().getName())) {
             if (thumbVerIconRollover == null) {

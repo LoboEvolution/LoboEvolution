@@ -34,21 +34,51 @@ import javax.swing.border.Border;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicToolBarUI;
 
+/**
+ * The Class AbstractToolBarUI.
+ */
 public abstract class AbstractToolBarUI extends BasicToolBarUI {
 
+    /** The Constant IS_ROLLOVER. */
     private final static String IS_ROLLOVER = "JToolBar.isRollover";
+    
+    /** The Constant BUTTON_MARGIN. */
     private final static Insets BUTTON_MARGIN = new Insets(1, 1, 1, 1);
+    
+    /** The Constant INNER_BORDER. */
     private final static Border INNER_BORDER = BorderFactory.createEmptyBorder(2, 2, 2, 2);
+    
+    /** The rollover enabled. */
     private boolean rolloverEnabled = true;
+    
+    /** The property change listener. */
     private MyPropertyChangeListener propertyChangeListener = null;
+    
+    /** The container listener. */
     private MyContainerListener containerListener = null;
+    
+    /** The org borders. */
     private final Hashtable<AbstractButton, Border> orgBorders = new Hashtable<AbstractButton, Border>();
+    
+    /** The org margins. */
     private final Hashtable<AbstractButton, Insets> orgMargins = new Hashtable<AbstractButton, Insets>();
 
+    /** Gets the rollover border.
+	 *
+	 * @return the rollover border
+	 */
     public abstract Border getRolloverBorder();
 
+    /** Gets the non rollover border.
+	 *
+	 * @return the non rollover border
+	 */
     public abstract Border getNonRolloverBorder();
 
+    /** Checks if is button opaque.
+	 *
+	 * @return true, if is button opaque
+	 */
     public abstract boolean isButtonOpaque();
 
     public void installUI(JComponent c) {
@@ -93,6 +123,10 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
         super.uninstallListeners();
     }
 
+    /** Checks if is rollover enabled.
+	 *
+	 * @return true, if is rollover enabled
+	 */
     protected boolean isRolloverEnabled() {
         return rolloverEnabled;
     }
@@ -188,6 +222,10 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
         toolBar.repaint();
     }
 
+    /** Checks if is tool bar under menubar.
+	 *
+	 * @return true, if is tool bar under menubar
+	 */
     protected boolean isToolBarUnderMenubar() {
         if (toolBar != null && toolBar.getOrientation() == JToolBar.HORIZONTAL) {
             JRootPane rp = SwingUtilities.getRootPane(toolBar);
@@ -205,10 +243,24 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
         return false;
     }
     
+    /** Checks if is toolbar decorated.
+	 *
+	 * @return true, if is toolbar decorated
+	 */
     protected boolean isToolbarDecorated() {
         return AbstractLookAndFeel.getTheme().isToolbarDecorated();
     }
 
+    /** The listener interface for receiving myPropertyChange events. The
+	 * class that is interested in processing a myPropertyChange event
+	 * implements this interface, and the object created with that class is
+	 * registered with a component using the component's
+	 * <code>addMyPropertyChangeListener<code> method. When
+	 * the myPropertyChange event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see MyPropertyChangeEvent
+	 */
     protected class MyPropertyChangeListener implements PropertyChangeListener {
 
         public void propertyChange(PropertyChangeEvent e) {
@@ -223,6 +275,16 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
         }
     }
 
+    /** The listener interface for receiving myContainer events. The class
+	 * that is interested in processing a myContainer event implements this
+	 * interface, and the object created with that class is registered with a
+	 * component using the component's
+	 * <code>addMyContainerListener<code> method. When
+	 * the myContainer event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see MyContainerEvent
+	 */
     protected class MyContainerListener implements ContainerListener {
 
         public void componentAdded(ContainerEvent e) {
@@ -240,8 +302,11 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
         }
     }
 
+    /** The Class NullBorder.
+	 */
     private static class NullBorder implements Border, UIResource {
 
+        /** The Constant insets. */
         private static final Insets insets = new Insets(0, 0, 0, 0);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {

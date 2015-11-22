@@ -30,6 +30,8 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class FastButtonUI.
+ *
  * @author Michael Hagen
  */
 public class FastButtonUI extends BaseButtonUI {

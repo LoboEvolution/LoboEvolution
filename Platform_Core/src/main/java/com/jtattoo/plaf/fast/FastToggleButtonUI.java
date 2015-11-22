@@ -30,6 +30,8 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class FastToggleButtonUI.
+ *
  * @author Michael Hagen
  */
 public class FastToggleButtonUI extends BaseToggleButtonUI {

@@ -44,62 +44,122 @@ import javax.swing.text.View;
 
 /**
  * This class is a modified copy of the javax.swing.plaf.basic.BasicTabbedPaneUI
- *
+ * 
  * A Basic L&F implementation of TabbedPaneUI.
  *
- * @version 1.87 06/08/99
  * @author Amy Fowler
  * @author Philip Milne
  * @author Steve Wilson
  * @author Tom Santos
  * @author Dave Moore
  * @author Michael Hagen
+ * @version 1.87 06/08/99
  */
 public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
+    /** The Constant NULL_BORDER_INSETS. */
     protected static final Insets NULL_BORDER_INSETS = new Insets(0, 0, 0, 0);
+    
+    /** The Constant GAP. */
     protected static final int GAP = 5;
 
+    /** The tab pane. */
     // Instance variables initialized at installation
     protected JTabbedPane tabPane;
+    
+    /** The tab area background. */
     protected Color tabAreaBackground;
+    
+    /** The selected color. */
     protected Color selectedColor;
+    
+    /** The text icon gap. */
     protected int textIconGap;
+    
+    /** The tab run overlay. */
     protected int tabRunOverlay;
+    
+    /** The tab insets. */
     protected Insets tabInsets;
+    
+    /** The selected tab pad insets. */
     protected Insets selectedTabPadInsets;
+    
+    /** The tab area insets. */
     protected Insets tabAreaInsets;
+    
+    /** The content border insets. */
     protected Insets contentBorderInsets;
+
+/** The tab runs. */
 // Transient variables (recalculated each time TabbedPane is layed out)
     protected int tabRuns[] = new int[10];
+    
+    /** The run count. */
     protected int runCount = 0;
+    
+    /** The selected run. */
     protected int selectedRun = -1;
+    
+    /** The rects. */
     protected Rectangle rects[] = new Rectangle[0];
+    
+    /** The max tab height. */
     protected int maxTabHeight;
+    
+    /** The max tab width. */
     protected int maxTabWidth;
+
+/** The tab change listener. */
 // Listeners
     protected ChangeListener tabChangeListener;
+    
+    /** The tab component listener. */
     protected ComponentListener tabComponentListener;
+    
+    /** The property change listener. */
     protected PropertyChangeListener propertyChangeListener;
+    
+    /** The mouse listener. */
     protected MouseListener mouseListener;
+    
+    /** The mouse motion listener. */
     protected MouseMotionListener mouseMotionListener;
+    
+    /** The focus listener. */
     protected FocusListener focusListener;
+    
+    /** The container listener. */
     // PENDING(api): See comment for ContainerHandler
     private ContainerListener containerListener;
+
+/** The current pad insets. */
 // Private instance data
     private Insets currentPadInsets = new Insets(0, 0, 0, 0);
+    
+    /** The current tab area insets. */
     private Insets currentTabAreaInsets = new Insets(0, 0, 0, 0);
+    
+    /** The visible component. */
     private Component visibleComponent;
+    
+    /** The html views. */
     // PENDING(api): See comment for ContainerHandler
     private ArrayList<View> htmlViews;
+    
+    /** The mnemonic to index map. */
     private HashMap<Integer, Integer> mnemonicToIndexMap;
     /**
      * InputMap used for mnemonics. Only non-null if the JTabbedPane has
      * mnemonics associated with it. Lazily created in initMnemonics.
      */
     private InputMap mnemonicInputMap;
+    
+    /** The tab scroller. */
     // For use when tabLayoutPolicy = SCROLL_TAB_LAYOUT
     private ScrollableTabSupport tabScroller;
+    
+    /** The tab container. */
     private TabContainer tabContainer;
     /**
      * A rectangle used for general layout calculations in order
@@ -112,9 +172,17 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     // PENDING: This wouldn't be necessary if JTabbedPane had a better
     // way of notifying listeners when the count changed.
     private int tabCount;
+    
+    /** The old rollover index. */
     protected int oldRolloverIndex = -1;
+    
+    /** The rollover index. */
     protected int rolloverIndex = -1;
+    
+    /** The rounded tabs. */
     protected boolean roundedTabs = true;
+    
+    /** The simple button border. */
     protected boolean simpleButtonBorder = false;
     
     public static ComponentUI createUI(JComponent c) {
@@ -438,6 +506,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         return null;
     }
 
+    /** Gets the action map.
+	 *
+	 * @return the action map
+	 */
     ActionMap getActionMap() {
         ActionMap map = (ActionMap) UIManager.get("TabbedPane.actionMap");
 
@@ -526,6 +598,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         SwingUtilities.replaceUIInputMap(tabPane, JComponent.WHEN_IN_FOCUSED_WINDOW, mnemonicInputMap);
     }
 
+    /** Checks if is content opaque.
+	 *
+	 * @return true, if is content opaque
+	 */
     protected boolean isContentOpaque() {
         if (!tabPane.isOpaque()) {
             if (UIManager.get("TabbedPane.contentOpaque") != null) {
@@ -535,6 +611,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         return true;
     }
 
+    /** Checks if is tab opaque.
+	 *
+	 * @return true, if is tab opaque
+	 */
     protected boolean isTabOpaque() {
         if (!tabPane.isOpaque()) {
             if (UIManager.get("TabbedPane.tabsOpaque") != null) {
@@ -610,6 +690,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         return ColorHelper.createColorArr(loColor, darkLoColor, sepHeight);
     }
 
+    /** Gets the content border color.
+	 *
+	 * @return the content border color
+	 */
     protected Color getContentBorderColor() {
         return AbstractLookAndFeel.getFrameColor();
     }
@@ -805,6 +889,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
             }
         }
     }
+    
+    /** The x crop len. */
     /* This method will create and return a polygon shape for the given tab rectangle
      * which has been cropped at the specified cropline with a torn edge visual.
      * e.g. A "File" tab which has cropped been cropped just after the "i":
@@ -828,7 +914,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * to (tab.x).
      */
     private int xCropLen[] = {1, 1, 0, 0, 1, 1, 2, 2};
+    
+    /** The y crop len. */
     private int yCropLen[] = {0, 3, 3, 6, 6, 9, 9, 12};
+    
+    /** The Constant CROP_SEGMENT. */
     private static final int CROP_SEGMENT = 12;
 
     private Polygon createCroppedTabClip(int tabPlacement, Rectangle tabRect, int cropline) {
@@ -1648,11 +1738,20 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         return dest;
     }
 
+    /** Gets the visible component.
+	 *
+	 * @return the visible component
+	 */
     // BaseTabbedPaneUI methods
     protected Component getVisibleComponent() {
         return visibleComponent;
     }
 
+    /** Sets the visible component.
+	 *
+	 * @param component
+	 *            the new visible component
+	 */
     protected void setVisibleComponent(Component component) {
         if (visibleComponent != null && visibleComponent != component && visibleComponent.getParent() == tabPane) {
             visibleComponent.setVisible(false);
@@ -1854,6 +1953,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         return contentBorderInsets;
     }
 
+    /** Gets the font metrics.
+	 *
+	 * @return the font metrics
+	 */
     protected FontMetrics getFontMetrics() {
         Font font = tabPane.getFont().deriveFont(Font.BOLD);
         return JTattooUtilities.getFontMetrics(tabPane, null, font);
@@ -2123,11 +2226,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         return false;
     }
 
+    /** The Class RightAction.
+	 */
     private static class RightAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -2137,11 +2240,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     };
 
+    /** The Class LeftAction.
+	 */
     private static class LeftAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -2151,11 +2254,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     };
 
+    /** The Class UpAction.
+	 */
     private static class UpAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -2165,11 +2268,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     };
 
+    /** The Class DownAction.
+	 */
     private static class DownAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -2179,11 +2282,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     };
 
+    /** The Class NextAction.
+	 */
     private static class NextAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -2193,11 +2296,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     };
 
+    /** The Class PreviousAction.
+	 */
     private static class PreviousAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -2207,11 +2310,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     };
 
+    /** The Class PageUpAction.
+	 */
     private static class PageUpAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -2226,11 +2329,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     };
 
+    /** The Class PageDownAction.
+	 */
     private static class PageDownAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -2245,11 +2348,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     };
 
+    /** The Class RequestFocusAction.
+	 */
     private static class RequestFocusAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -2258,11 +2361,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     };
 
+    /** The Class RequestFocusForVisibleAction.
+	 */
     private static class RequestFocusForVisibleAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -2279,9 +2382,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      */
     private static class SetSelectedIndexAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -2305,11 +2406,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     };
 
+    /** The Class ScrollTabsForwardAction.
+	 */
     private static class ScrollTabsForwardAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -2330,11 +2431,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     }
 
+    /** The Class ScrollTabsBackwardAction.
+	 */
     private static class ScrollTabsBackwardAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void actionPerformed(ActionEvent e) {
@@ -2355,13 +2456,17 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     }
 
+    /** The Class ScrollTabsPopupMenuItemAction.
+	 */
     private static class ScrollTabsPopupMenuItemAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The tabbed pane. */
 		private JTabbedPane tabbedPane = null;
+        
+        /** The select index. */
         private int selectIndex = 0;
 
         public ScrollTabsPopupMenuItemAction(JTabbedPane pane, int index) {
@@ -2374,12 +2479,14 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     }
 
+    /** The Class ScrollTabsPopupMenuAction.
+	 */
     private static class ScrollTabsPopupMenuAction extends AbstractAction {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The tabbed pane. */
 		private JTabbedPane tabbedPane = null;
 
         public void actionPerformed(ActionEvent e) {
@@ -2984,6 +3091,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     }
 
+    /** The Class TabbedPaneScrollLayout.
+	 */
     private class TabbedPaneScrollLayout extends TabbedPaneLayout {
 
         protected int preferredTabAreaHeight(int tabPlacement, int width) {
@@ -3325,14 +3434,29 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     }
 
+    /** The Class ScrollableTabSupport.
+	 */
     private class ScrollableTabSupport implements ChangeListener {
 
+        /** The viewport. */
         public ScrollableTabViewport viewport;
+        
+        /** The tab panel. */
         public ScrollableTabPanel tabPanel;
+        
+        /** The scroll forward button. */
         public ScrollableTabButton scrollForwardButton;
+        
+        /** The scroll backward button. */
         public ScrollableTabButton scrollBackwardButton;
+        
+        /** The popup menu button. */
         public ScrollablePopupMenuTabButton popupMenuButton;
+        
+        /** The leading tab index. */
         public int leadingTabIndex;
+        
+        /** The tab view position. */
         private Point tabViewPosition = new Point(0, 0);
 
         ScrollableTabSupport(int tabPlacement) {
@@ -3508,11 +3632,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     }
 
+    /** The Class ScrollableTabViewport.
+	 */
     private class ScrollableTabViewport extends JViewport implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public ScrollableTabViewport() {
@@ -3522,11 +3646,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     }
 
+    /** The Class ScrollableTabPanel.
+	 */
     private class ScrollableTabPanel extends JPanel implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public ScrollableTabPanel() {
@@ -3548,12 +3672,14 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     }
 
+    /** The Class ArrowButton.
+	 */
     public class ArrowButton extends JButton implements SwingConstants {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The direction. */
 		protected int direction;
 
         public ArrowButton(int direction) {
@@ -3567,10 +3693,19 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
             }
         }
 
+        /** Gets the direction.
+		 *
+		 * @return the direction
+		 */
         public int getDirection() {
             return direction;
         }
 
+        /** Sets the direction.
+		 *
+		 * @param dir
+		 *            the new direction
+		 */
         public void setDirection(int dir) {
             direction = dir;
         }
@@ -3648,11 +3783,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     }
 
+    /** The Class ScrollableTabButton.
+	 */
     private class ScrollableTabButton extends ArrowButton implements UIResource, SwingConstants {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public ScrollableTabButton(int direction) {
@@ -3664,11 +3799,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     }
 
+    /** The Class ScrollablePopupMenuTabButton.
+	 */
     private class ScrollablePopupMenuTabButton extends ArrowButton implements UIResource, SwingConstants {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public ScrollablePopupMenuTabButton() {
@@ -3747,6 +3882,16 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     }
 
+    /** The listener interface for receiving myTabComponent events. The class
+	 * that is interested in processing a myTabComponent event implements this
+	 * interface, and the object created with that class is registered with a
+	 * component using the component's
+	 * <code>addMyTabComponentListener<code> method. When
+	 * the myTabComponent event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see MyTabComponentEvent
+	 */
     public class MyTabComponentListener implements PropertyChangeListener {
 
         public void propertyChange(PropertyChangeEvent evt) {
@@ -3780,6 +3925,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     }
 
+    /** The Class TabComponentHandler.
+	 */
     public class TabComponentHandler implements ComponentListener {
 
         public void componentResized(ComponentEvent ce) {
@@ -3943,6 +4090,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     }
 
+    /** The Class ContainerHandler.
+	 */
     /* GES 2/3/99:
     The container listener code was added to support HTML
     rendering of tab titles.
@@ -4040,12 +4189,14 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         return viewList;
     }
 
+    /** The Class TabContainer.
+	 */
     private class TabContainer extends JPanel implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The notify tabbed pane. */
 		private boolean notifyTabbedPane = true;
 
         public TabContainer() {

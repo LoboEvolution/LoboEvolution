@@ -28,13 +28,13 @@ import java.awt.*;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * The Class AcrylTitlePane.
+ *
+ * @author Michael Hagen
  */
 public class AcrylTitlePane extends BaseTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	public AcrylTitlePane(JRootPane root, BaseRootPaneUI ui) {
         super(root, ui);
@@ -78,6 +78,10 @@ public class AcrylTitlePane extends BaseTitlePane {
         }
         JTattooUtilities.drawString(rootPane, g, title, x, y);
     }
+
+/**
+ * The Class TitlePaneLayout.
+ */
 //-----------------------------------------------------------------------------------------------
     protected class TitlePaneLayout implements LayoutManager {
 

@@ -29,6 +29,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class AcrylInternalFrameUI.
+ *
  * @author Michael Hagen
  */
 public class AcrylInternalFrameUI extends BaseInternalFrameUI {

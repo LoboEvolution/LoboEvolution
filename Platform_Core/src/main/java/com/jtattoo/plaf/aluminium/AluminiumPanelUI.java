@@ -30,10 +30,13 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class AluminiumPanelUI.
+ *
  * @author Michael Hagen
  */
 public class AluminiumPanelUI extends BasePanelUI {
 
+    /** The panel ui. */
     private static AluminiumPanelUI panelUI = null;
 
     public static ComponentUI createUI(JComponent c) {

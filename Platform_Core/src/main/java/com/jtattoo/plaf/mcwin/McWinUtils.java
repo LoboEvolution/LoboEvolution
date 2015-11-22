@@ -27,7 +27,9 @@ import com.jtattoo.plaf.*;
 import java.awt.*;
 
 /**
- * @author  Michael Hagen
+ * The Class McWinUtils.
+ *
+ * @author Michael Hagen
  */
 public class McWinUtils {
 

@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import javax.swing.border.Border;
 
 /**
+ * A factory for creating SmartBorder objects.
+ *
  * @author Michael Hagen
  */
 public class SmartBorderFactory implements AbstractBorderFactory {
 
+    /** The instance. */
     private static SmartBorderFactory instance = null;
 
     private SmartBorderFactory() {
     }
 
+    /** Gets the single instance of SmartBorderFactory.
+	 *
+	 * @return single instance of SmartBorderFactory
+	 */
     public static synchronized SmartBorderFactory getInstance() {
         if (instance == null) {
             instance = new SmartBorderFactory();

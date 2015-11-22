@@ -27,10 +27,13 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class BernsteinCheckBoxUI.
+ *
  * @author Michael Hagen
  */
 public class BernsteinCheckBoxUI extends BernsteinRadioButtonUI {
 
+    /** The check box ui. */
     private static BernsteinCheckBoxUI checkBoxUI = null;
 
     public static ComponentUI createUI(JComponent b) {

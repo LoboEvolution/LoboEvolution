@@ -29,6 +29,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
 
 /**
+ * The Class BernsteinSplitPaneUI.
+ *
  * @author Michael Hagen
  */
 public class BernsteinSplitPaneUI extends BaseSplitPaneUI {

@@ -31,9 +31,13 @@ import javax.swing.plaf.UIResource;
 import javax.swing.text.View;
 
 /**
+ * The Class AeroTabbedPaneUI.
+ *
  * @author Michael Hagen
  */
 public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
+    
+    /** The sep colors. */
     private Color sepColors[] = null;
 
     public static ComponentUI createUI(JComponent c) {

@@ -177,36 +177,46 @@ public class LayoutKey {
 	}
 
 	/**
-	 * @return the availWidth
+	 * Gets the avail width.
+	 *
+	 * @return the avail width
 	 */
 	public int getAvailWidth() {
 		return availWidth;
 	}
 
 	/**
+	 * Sets the avail width.
+	 *
 	 * @param availWidth
-	 *            the availWidth to set
+	 *            the new avail width
 	 */
 	public void setAvailWidth(int availWidth) {
 		this.availWidth = availWidth;
 	}
 
 	/**
-	 * @return the availHeight
+	 * Gets the avail height.
+	 *
+	 * @return the avail height
 	 */
 	public int getAvailHeight() {
 		return availHeight;
 	}
 
 	/**
+	 * Sets the avail height.
+	 *
 	 * @param availHeight
-	 *            the availHeight to set
+	 *            the new avail height
 	 */
 	public void setAvailHeight(int availHeight) {
 		this.availHeight = availHeight;
 	}
 
 	/**
+	 * Gets the whitespace.
+	 *
 	 * @return the whitespace
 	 */
 	public int getWhitespace() {
@@ -214,14 +224,18 @@ public class LayoutKey {
 	}
 
 	/**
+	 * Sets the whitespace.
+	 *
 	 * @param whitespace
-	 *            the whitespace to set
+	 *            the new whitespace
 	 */
 	public void setWhitespace(int whitespace) {
 		this.whitespace = whitespace;
 	}
 
 	/**
+	 * Gets the font.
+	 *
 	 * @return the font
 	 */
 	public Font getFont() {
@@ -229,113 +243,143 @@ public class LayoutKey {
 	}
 
 	/**
+	 * Sets the font.
+	 *
 	 * @param font
-	 *            the font to set
+	 *            the new font
 	 */
 	public void setFont(Font font) {
 		this.font = font;
 	}
 
 	/**
-	 * @return the overrideNoWrap
+	 * Checks if is override no wrap.
+	 *
+	 * @return the override no wrap
 	 */
 	public boolean isOverrideNoWrap() {
 		return overrideNoWrap;
 	}
 
 	/**
+	 * Sets the override no wrap.
+	 *
 	 * @param overrideNoWrap
-	 *            the overrideNoWrap to set
+	 *            the new override no wrap
 	 */
 	public void setOverrideNoWrap(boolean overrideNoWrap) {
 		this.overrideNoWrap = overrideNoWrap;
 	}
 
 	/**
-	 * @return the floatBoundsSource
+	 * Gets the float bounds source.
+	 *
+	 * @return the float bounds source
 	 */
 	public FloatingBoundsSource getFloatBoundsSource() {
 		return floatBoundsSource;
 	}
 
 	/**
+	 * Sets the float bounds source.
+	 *
 	 * @param floatBoundsSource
-	 *            the floatBoundsSource to set
+	 *            the new float bounds source
 	 */
 	public void setFloatBoundsSource(FloatingBoundsSource floatBoundsSource) {
 		this.floatBoundsSource = floatBoundsSource;
 	}
 
 	/**
-	 * @return the defaultOverflowX
+	 * Gets the default overflow x.
+	 *
+	 * @return the default overflow x
 	 */
 	public int getDefaultOverflowX() {
 		return defaultOverflowX;
 	}
 
 	/**
+	 * Sets the default overflow x.
+	 *
 	 * @param defaultOverflowX
-	 *            the defaultOverflowX to set
+	 *            the new default overflow x
 	 */
 	public void setDefaultOverflowX(int defaultOverflowX) {
 		this.defaultOverflowX = defaultOverflowX;
 	}
 
 	/**
-	 * @return the defaultOverflowY
+	 * Gets the default overflow y.
+	 *
+	 * @return the default overflow y
 	 */
 	public int getDefaultOverflowY() {
 		return defaultOverflowY;
 	}
 
 	/**
+	 * Sets the default overflow y.
+	 *
 	 * @param defaultOverflowY
-	 *            the defaultOverflowY to set
+	 *            the new default overflow y
 	 */
 	public void setDefaultOverflowY(int defaultOverflowY) {
 		this.defaultOverflowY = defaultOverflowY;
 	}
 
 	/**
-	 * @return the expandWidth
+	 * Checks if is expand width.
+	 *
+	 * @return the expand width
 	 */
 	public boolean isExpandWidth() {
 		return expandWidth;
 	}
 
 	/**
+	 * Sets the expand width.
+	 *
 	 * @param expandWidth
-	 *            the expandWidth to set
+	 *            the new expand width
 	 */
 	public void setExpandWidth(boolean expandWidth) {
 		this.expandWidth = expandWidth;
 	}
 
 	/**
-	 * @return the expandHeight
+	 * Checks if is expand height.
+	 *
+	 * @return the expand height
 	 */
 	public boolean isExpandHeight() {
 		return expandHeight;
 	}
 
 	/**
+	 * Sets the expand height.
+	 *
 	 * @param expandHeight
-	 *            the expandHeight to set
+	 *            the new expand height
 	 */
 	public void setExpandHeight(boolean expandHeight) {
 		this.expandHeight = expandHeight;
 	}
 
 	/**
-	 * @return the useDeclaredSize
+	 * Checks if is use declared size.
+	 *
+	 * @return the use declared size
 	 */
 	public boolean isUseDeclaredSize() {
 		return useDeclaredSize;
 	}
 
 	/**
+	 * Sets the use declared size.
+	 *
 	 * @param useDeclaredSize
-	 *            the useDeclaredSize to set
+	 *            the new use declared size
 	 */
 	public void setUseDeclaredSize(boolean useDeclaredSize) {
 		this.useDeclaredSize = useDeclaredSize;

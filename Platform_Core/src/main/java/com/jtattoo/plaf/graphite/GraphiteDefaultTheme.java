@@ -30,6 +30,9 @@ import java.awt.Font;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 
+/**
+ * The Class GraphiteDefaultTheme.
+ */
 public class GraphiteDefaultTheme extends AbstractTheme {
 
     public GraphiteDefaultTheme() {

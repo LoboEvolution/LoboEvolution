@@ -32,12 +32,19 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicPopupMenuUI;
 
 /**
+ * The Class BasePopupMenuUI.
+ *
  * @author Michael Hagen
  */
 public class BasePopupMenuUI extends BasicPopupMenuUI {
 
+    /** The robot. */
     protected static Robot robot = null;
+    
+    /** The screen image. */
     protected BufferedImage screenImage = null;
+    
+    /** The my popup listener. */
     protected MyPopupMenuListener myPopupListener = null;
 
     public static ComponentUI createUI(JComponent c) {
@@ -69,10 +76,18 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
         super.uninstallListeners();
     }
 
+    /** Checks if is menu opaque.
+	 *
+	 * @return true, if is menu opaque
+	 */
     private boolean isMenuOpaque() {
         return (AbstractLookAndFeel.getTheme().isMenuOpaque() || (getRobot() == null));
     }
 
+    /** Gets the robot.
+	 *
+	 * @return the robot
+	 */
     private Robot getRobot() {
         if (robot == null) {
             try {
@@ -120,9 +135,20 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 
 //----------------------------------------------------------------------------------------    
 // inner classes    
+/**
+ * The listener interface for receiving myPopupMenu events. The class that is
+ * interested in processing a myPopupMenu event implements this interface, and
+ * the object created with that class is registered with a component using the
+ * component's <code>addMyPopupMenuListener<code> method. When
+ * the myPopupMenu event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see MyPopupMenuEvent
+ */
 //----------------------------------------------------------------------------------------    
     public static class MyPopupMenuListener implements PopupMenuListener {
 
+        /** The popup menu ui. */
         private BasePopupMenuUI popupMenuUI = null;
 
         public MyPopupMenuListener(BasePopupMenuUI aPopupMenuUI) {

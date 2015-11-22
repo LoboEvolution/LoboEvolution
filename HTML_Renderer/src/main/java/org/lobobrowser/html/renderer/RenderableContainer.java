@@ -123,19 +123,44 @@ public interface RenderableContainer {
 	 */
 	void clearDelayedPairs();
 
+	/**
+	 * Gets the height.
+	 *
+	 * @return the height
+	 */
 	int getHeight();
 
+	/**
+	 * Gets the width.
+	 *
+	 * @return the width
+	 */
 	int getWidth();
 
+	/**
+	 * Gets the y.
+	 *
+	 * @return the y
+	 */
 	int getY();
 
 	Insets getInsets(final boolean hscroll, final boolean vscroll);
 
+	/**
+	 * Gets the inner width.
+	 *
+	 * @return the inner width
+	 */
 	default public int getInnerWidth() {
 		final Insets insets = getInsets(false, false);
 		return getWidth() - (insets.left + insets.right);
 	}
 
+	/**
+	 * Gets the inner height.
+	 *
+	 * @return the inner height
+	 */
 	default public int getInnerHeight() {
 		final Insets insets = getInsets(false, false);
 		return getHeight() - (insets.top + insets.bottom);

@@ -1083,7 +1083,10 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	}
 	
 	/**
-	 * Gets insets of content area. */
+	 * Gets the border insets.
+	 *
+	 * @return the border insets
+	 */
 	
 	public Insets getBorderInsets() {
 		return this.borderInsets == null ? RBlockViewport.ZERO_INSETS : this.borderInsets;

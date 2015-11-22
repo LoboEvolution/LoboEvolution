@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import javax.swing.border.Border;
 
 /**
+ * A factory for creating LunaBorder objects.
+ *
  * @author Michael Hagen
  */
 public class LunaBorderFactory implements AbstractBorderFactory {
 
+    /** The instance. */
     private static LunaBorderFactory instance = null;
 
     private LunaBorderFactory() {
     }
 
+    /** Gets the single instance of LunaBorderFactory.
+	 *
+	 * @return single instance of LunaBorderFactory
+	 */
     public static synchronized LunaBorderFactory getInstance() {
         if (instance == null) {
             instance = new LunaBorderFactory();

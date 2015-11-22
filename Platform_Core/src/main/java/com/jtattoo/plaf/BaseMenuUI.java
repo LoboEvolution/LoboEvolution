@@ -32,10 +32,13 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicMenuUI;
 
 /**
+ * The Class BaseMenuUI.
+ *
  * @author Michael Hagen
  */
 public class BaseMenuUI extends BasicMenuUI {
 
+    /** The paint rollover border. */
     protected boolean paintRolloverBorder = true;
 
     public static ComponentUI createUI(JComponent c) {
@@ -156,7 +159,10 @@ public class BaseMenuUI extends BasicMenuUI {
 // inner classes
 //------------------------------------------------------------------------------
 
-    protected class MyMouseInputHandler extends BasicMenuUI.MouseInputHandler {
+    /**
+ * The Class MyMouseInputHandler.
+ */
+protected class MyMouseInputHandler extends BasicMenuUI.MouseInputHandler {
 
         public void mouseEntered(MouseEvent evt) {
             super.mouseEntered(evt);

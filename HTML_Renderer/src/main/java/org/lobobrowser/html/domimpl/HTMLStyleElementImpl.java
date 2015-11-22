@@ -168,7 +168,7 @@ HTMLStyleElement {
     }
     
     
-    /** Gets the sheet.
+     /** Gets the sheet.
 	 *
 	 * @return the sheet
 	 */

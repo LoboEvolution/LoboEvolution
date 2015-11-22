@@ -29,7 +29,9 @@ import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
 
 /**
- * @author  Michael Hagen
+ * The Class SmartRootPaneUI.
+ *
+ * @author Michael Hagen
  */
 public class SmartRootPaneUI extends BaseRootPaneUI {
 

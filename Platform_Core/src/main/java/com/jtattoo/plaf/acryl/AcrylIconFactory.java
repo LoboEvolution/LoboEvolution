@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
 
 /**
+ * A factory for creating AcrylIcon objects.
+ *
  * @author Michael Hagen
  */
 public class AcrylIconFactory implements AbstractIconFactory {
 
+    /** The instance. */
     private static AcrylIconFactory instance = null;
 
     private AcrylIconFactory() {
     }
 
+    /** Gets the single instance of AcrylIconFactory.
+	 *
+	 * @return single instance of AcrylIconFactory
+	 */
     public static synchronized AcrylIconFactory getInstance() {
         if (instance == null) {
             instance = new AcrylIconFactory();

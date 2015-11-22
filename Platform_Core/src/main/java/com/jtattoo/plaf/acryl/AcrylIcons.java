@@ -31,10 +31,16 @@ import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 
 /**
+ * The Class AcrylIcons.
+ *
  * @author Michael Hagen
  */
 public class AcrylIcons extends BaseIcons {
 
+    /** Gets the icon icon.
+	 *
+	 * @return the icon icon
+	 */
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -46,6 +52,10 @@ public class AcrylIcons extends BaseIcons {
         return iconIcon;
     }
 
+    /** Gets the min icon.
+	 *
+	 * @return the min icon
+	 */
     public static Icon getMinIcon() {
         if (minIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -57,6 +67,10 @@ public class AcrylIcons extends BaseIcons {
         return minIcon;
     }
 
+    /** Gets the max icon.
+	 *
+	 * @return the max icon
+	 */
     public static Icon getMaxIcon() {
         if (maxIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -68,6 +82,10 @@ public class AcrylIcons extends BaseIcons {
         return maxIcon;
     }
 
+    /** Gets the close icon.
+	 *
+	 * @return the close icon
+	 */
     public static Icon getCloseIcon() {
         if (closeIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -79,6 +97,10 @@ public class AcrylIcons extends BaseIcons {
         return closeIcon;
     }
 
+    /** Gets the tree expanded icon.
+	 *
+	 * @return the tree expanded icon
+	 */
     public static Icon getTreeExpandedIcon() {
         if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
             return BaseIcons.getTreeExpandedIcon();
@@ -96,6 +118,10 @@ public class AcrylIcons extends BaseIcons {
         }
     }
     
+    /** Gets the tree collapsed icon.
+	 *
+	 * @return the tree collapsed icon
+	 */
     public static Icon getTreeCollapsedIcon() {
         if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
             return BaseIcons.getTreeCollapsedIcon();
@@ -113,6 +139,10 @@ public class AcrylIcons extends BaseIcons {
         }
     }
     
+    /** Gets the radio button icon.
+	 *
+	 * @return the radio button icon
+	 */
     public static Icon getRadioButtonIcon() {
         if (radioButtonIcon == null) {
             radioButtonIcon = new RadioButtonIcon();
@@ -120,6 +150,10 @@ public class AcrylIcons extends BaseIcons {
         return radioButtonIcon;
     }
 
+    /** Gets the check box icon.
+	 *
+	 * @return the check box icon
+	 */
     public static Icon getCheckBoxIcon() {
         if (checkBoxIcon == null) {
             checkBoxIcon = new CheckBoxIcon();
@@ -127,6 +161,10 @@ public class AcrylIcons extends BaseIcons {
         return checkBoxIcon;
     }
 
+    /** Gets the thumb hor icon.
+	 *
+	 * @return the thumb hor icon
+	 */
     public static Icon getThumbHorIcon() {
         if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
             return BaseIcons.getThumbHorIcon();
@@ -138,6 +176,10 @@ public class AcrylIcons extends BaseIcons {
         return thumbHorIcon;
     }
 
+    /** Gets the thumb ver icon.
+	 *
+	 * @return the thumb ver icon
+	 */
     public static Icon getThumbVerIcon() {
         if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
             return BaseIcons.getThumbVerIcon();
@@ -149,6 +191,10 @@ public class AcrylIcons extends BaseIcons {
         return thumbVerIcon;
     }
 
+    /** Gets the thumb hor icon rollover.
+	 *
+	 * @return the thumb hor icon rollover
+	 */
     public static Icon getThumbHorIconRollover() {
         if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
             return BaseIcons.getThumbHorIconRollover();
@@ -160,6 +206,10 @@ public class AcrylIcons extends BaseIcons {
         return thumbHorIconRollover;
     }
 
+    /** Gets the thumb ver icon rollover.
+	 *
+	 * @return the thumb ver icon rollover
+	 */
     public static Icon getThumbVerIconRollover() {
         if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
             return BaseIcons.getThumbVerIconRollover();
@@ -173,16 +223,34 @@ public class AcrylIcons extends BaseIcons {
 
 //----------------------------------------------------------------------------------------------------------------------
 // inner classes    
+/**
+ * The Class TitleButtonIcon.
+ */
 //----------------------------------------------------------------------------------------------------------------------
     private static class TitleButtonIcon implements Icon {
 
+        /** The Constant extraLightGray. */
         private static final Color extraLightGray = new Color(240, 240, 240);
+        
+        /** The Constant closerColorLight. */
         private static final Color closerColorLight = new Color(241, 172, 154);
+        
+        /** The Constant closerColorDark. */
         private static final Color closerColorDark = new Color(224, 56, 2);
+        
+        /** The Constant ICON_ICON_TYP. */
         public static final int ICON_ICON_TYP = 0;
+        
+        /** The Constant MIN_ICON_TYP. */
         public static final int MIN_ICON_TYP = 1;
+        
+        /** The Constant MAX_ICON_TYP. */
         public static final int MAX_ICON_TYP = 2;
+        
+        /** The Constant CLOSE_ICON_TYP. */
         public static final int CLOSE_ICON_TYP = 3;
+        
+        /** The icon typ. */
         private int iconTyp = ICON_ICON_TYP;
 
         public TitleButtonIcon(int typ) {
@@ -262,21 +330,42 @@ public class AcrylIcons extends BaseIcons {
         }
     }
 
+/**
+ * The Class CheckBoxIcon.
+ */
 //----------------------------------------------------------------------------------------------------------------------
     private static class CheckBoxIcon implements Icon {
 
+        /** The Constant GAP. */
         private static final int GAP = 2;
         
+        /** The Constant SMALL_CHECK_ICON. */
         private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("acryl/icons/small/check_symbol_12x11.png");
+        
+        /** The Constant SMALL_CHECK_INVERSE_ICON. */
         private static final Icon SMALL_CHECK_INVERSE_ICON = new LazyImageIcon("icons/small/check_symbol_10x10.png");
+        
+        /** The Constant SMALL_CHECK_DISABLED_ICON. */
         //private static final Icon SMALL_CHECK_PRESSED_ICON = new LazyImageIcon("acryl/icons/small/check_symbol_pressed_10x10.png");
         private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon("icons/small/check_symbol_disabled_10x10.png");
+        
+        /** The Constant MEDIUM_CHECK_ICON. */
         private static final Icon MEDIUM_CHECK_ICON = new LazyImageIcon("acryl/icons/medium/check_symbol_14x13.png");
+        
+        /** The Constant MEDIUM_CHECK_INVERSE_ICON. */
         private static final Icon MEDIUM_CHECK_INVERSE_ICON = new LazyImageIcon("icons/medium/check_symbol_12x12.png");
+        
+        /** The Constant MEDIUM_CHECK_DISABLED_ICON. */
         //private static final Icon MEDIUM_CHECK_PRESSED_ICON = new LazyImageIcon("acryl/icons/medium/check_symbol_pressed_12x12.png");
         private static final Icon MEDIUM_CHECK_DISABLED_ICON = new LazyImageIcon("icons/medium/check_symbol_disabled_12x12.png");
+        
+        /** The Constant LARGE_CHECK_ICON. */
         private static final Icon LARGE_CHECK_ICON = new LazyImageIcon("acryl/icons/large/check_symbol_16x15.png");
+        
+        /** The Constant LARGE_CHECK_INVERSE_ICON. */
         private static final Icon LARGE_CHECK_INVERSE_ICON = new LazyImageIcon("icons/large/check_symbol_14x14.png");
+        
+        /** The Constant LARGE_CHECK_DISABLED_ICON. */
         //private static final Icon LARGE_CHECK_PRESSED_ICON = new LazyImageIcon("acryl/icons/large/check_symbol_pressed_14x14.png");
         private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon("icons/large/check_symbol_disabled_14x14.png");
         
@@ -375,9 +464,13 @@ public class AcrylIcons extends BaseIcons {
         }
     }
 
+/**
+ * The Class RadioButtonIcon.
+ */
 //----------------------------------------------------------------------------------------------------------------------
     private static class RadioButtonIcon implements Icon {
 
+        /** The Constant GAP. */
         private static final int GAP = 2;
         
         public void paintIcon(Component c, Graphics g, int x, int y) {

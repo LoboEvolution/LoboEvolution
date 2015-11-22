@@ -27,10 +27,13 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class HiFiCheckBoxUI.
+ *
  * @author Michael Hagen
  */
 public class HiFiCheckBoxUI extends HiFiRadioButtonUI {
 
+    /** The check box ui. */
     private static HiFiCheckBoxUI checkBoxUI = null;
 
     public static ComponentUI createUI(JComponent b) {

@@ -27,13 +27,13 @@ import com.jtattoo.plaf.*;
 import java.awt.Color;
 
 /**
- * @author  Michael Hagen
+ * The Class HiFiScrollButton.
+ *
+ * @author Michael Hagen
  */
 public class HiFiScrollButton extends XPScrollButton {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public HiFiScrollButton(int direction, int width) {

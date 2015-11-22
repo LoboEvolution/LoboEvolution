@@ -29,10 +29,13 @@ import javax.swing.Icon;
 import javax.swing.JInternalFrame;
 
 /**
+ * The Class AcrylInternalFrameTitlePane.
+ *
  * @author Michael Hagen
  */
 public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public AcrylInternalFrameTitlePane(JInternalFrame f) {
@@ -78,6 +81,9 @@ public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         JTattooUtilities.drawString(frame, g, title, x, y - 1);
     }
 
+/**
+ * The Class BaseTitlePaneLayout.
+ */
 //--------------------------------------------------------------------------------------------
     class BaseTitlePaneLayout extends TitlePaneLayout {
 

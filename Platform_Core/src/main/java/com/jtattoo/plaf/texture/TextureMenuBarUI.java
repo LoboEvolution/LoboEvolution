@@ -32,6 +32,8 @@ import javax.swing.plaf.basic.BasicMenuBarUI;
 
 
 /**
+ * The Class TextureMenuBarUI.
+ *
  * @author Michael Hagen
  */
 public class TextureMenuBarUI extends BasicMenuBarUI {

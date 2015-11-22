@@ -32,10 +32,13 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicLabelUI;
 
 /**
+ * The Class HiFiLabelUI.
+ *
  * @author Michael Hagen
  */
 public class HiFiLabelUI extends BasicLabelUI {
 
+    /** The hifi label ui. */
     private static HiFiLabelUI hifiLabelUI = null;
 
     public static ComponentUI createUI(JComponent c) {

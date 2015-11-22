@@ -50,7 +50,8 @@ public class Range {
         this.length = length;
     }
 
-    /**
+    /** Gets the offset.
+	 *
 	 * @return the offset
 	 */
 	public int getOffset() {
@@ -58,6 +59,8 @@ public class Range {
 	}
 
 	/**
+	 * Gets the length.
+	 *
 	 * @return the length
 	 */
 	public int getLength() {

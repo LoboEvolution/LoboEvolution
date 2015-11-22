@@ -29,6 +29,8 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class GraphiteMenuUI.
+ *
  * @author Michael Hagen
  */
 public class GraphiteMenuUI extends BaseMenuUI {

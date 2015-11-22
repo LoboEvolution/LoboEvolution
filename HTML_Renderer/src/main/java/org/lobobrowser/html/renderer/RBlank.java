@@ -342,21 +342,28 @@ public final class RBlank extends BaseBoundableRenderable {
 	}
 
 	/**
-	 * @return the ascentPlusLeading
+	 * Gets the ascent plus leading.
+	 *
+	 * @return the ascent plus leading
 	 */
 	public int getAscentPlusLeading() {
 		return ascentPlusLeading;
 	}
 
 	/**
-	 * @param ascentPlusLeading the ascentPlusLeading to set
+	 * Sets the ascent plus leading.
+	 *
+	 * @param ascentPlusLeading
+	 *            the new ascent plus leading
 	 */
 	public void setAscentPlusLeading(int ascentPlusLeading) {
 		this.ascentPlusLeading = ascentPlusLeading;
 	}
 
 	/**
-	 * @return the fontMetrics
+	 * Gets the font metrics.
+	 *
+	 * @return the font metrics
 	 */
 	public FontMetrics getFontMetrics() {
 		return fontMetrics;

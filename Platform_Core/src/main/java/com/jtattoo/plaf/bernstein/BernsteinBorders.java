@@ -31,12 +31,18 @@ import javax.swing.border.Border;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class BernsteinBorders.
+ *
  * @author Michael Hagen
  */
 public class BernsteinBorders extends BaseBorders {
 
     //------------------------------------------------------------------------------------
     // Lazy access methods
+     /** Gets the button border.
+	 *
+	 * @return the button border
+	 */
     //------------------------------------------------------------------------------------
     public static Border getButtonBorder() {
         if (buttonBorder == null) {
@@ -45,10 +51,18 @@ public class BernsteinBorders extends BaseBorders {
         return buttonBorder;
     }
 
+    /** Gets the toggle button border.
+	 *
+	 * @return the toggle button border
+	 */
     public static Border getToggleButtonBorder() {
         return getButtonBorder();
     }
 
+    /** Gets the rollover tool button border.
+	 *
+	 * @return the rollover tool button border
+	 */
     public static Border getRolloverToolButtonBorder() {
         if (rolloverToolButtonBorder == null) {
             rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -56,6 +70,10 @@ public class BernsteinBorders extends BaseBorders {
         return rolloverToolButtonBorder;
     }
 
+    /** Gets the internal frame border.
+	 *
+	 * @return the internal frame border
+	 */
     public static Border getInternalFrameBorder() {
         if (internalFrameBorder == null) {
             internalFrameBorder = new InternalFrameBorder();
@@ -65,9 +83,12 @@ public class BernsteinBorders extends BaseBorders {
 
     //------------------------------------------------------------------------------------
     // Implementation of border classes
+    /** The Class ButtonBorder.
+	 */
     //------------------------------------------------------------------------------------
     public static class ButtonBorder implements Border, UIResource {
 
+        /** The Constant insets. */
         private static final Insets insets = new Insets(4, 8, 4, 8);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -93,10 +114,17 @@ public class BernsteinBorders extends BaseBorders {
         }
     } // class ButtonBorder
 
+    /** The Class RolloverToolButtonBorder.
+	 */
     public static class RolloverToolButtonBorder implements Border, UIResource {
 
+        /** The Constant frameHiColor. */
         private static final Color frameHiColor = ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 60);
+        
+        /** The Constant frameLoColor. */
         private static final Color frameLoColor = AbstractLookAndFeel.getFrameColor();
+        
+        /** The Constant insets. */
         private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -138,13 +166,17 @@ public class BernsteinBorders extends BaseBorders {
         }
     } // class RolloverToolButtonBorder
 
+    /** The Class InternalFrameBorder.
+	 */
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant borderColor. */
 		private static final Color borderColor = new Color(255, 244, 128);
+        
+        /** The Constant FRAME_COLORS. */
         private static final Color FRAME_COLORS[] = {
             new Color(229, 187, 0),
             new Color(251, 232, 0),

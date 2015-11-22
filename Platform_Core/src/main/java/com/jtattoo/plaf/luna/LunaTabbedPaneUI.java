@@ -31,11 +31,14 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 
 /**
- * author Michael Hagen
+ * author Michael Hagen.
  */
 public class LunaTabbedPaneUI extends BaseTabbedPaneUI {
 
+    /** The selected tab colors. */
     private static Color[] selectedTabColors = new Color[]{AbstractLookAndFeel.getBackgroundColor()};
+    
+    /** The sep colors. */
     private static Color sepColors[] = {AbstractLookAndFeel.getControlDarkShadow()};
 
     public static ComponentUI createUI(JComponent c) {

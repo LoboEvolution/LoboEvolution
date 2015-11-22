@@ -29,6 +29,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class AeroInternalFrameUI.
+ *
  * @author Michael Hagen
  */
 public class AeroInternalFrameUI extends BaseInternalFrameUI {

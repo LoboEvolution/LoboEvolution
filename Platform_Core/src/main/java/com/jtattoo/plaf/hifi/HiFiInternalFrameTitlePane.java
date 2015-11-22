@@ -29,13 +29,13 @@ import java.awt.Graphics;
 import javax.swing.JInternalFrame;
 
 /**
+ * The Class HiFiInternalFrameTitlePane.
+ *
  * @author Michael Hagen
  */
 public class HiFiInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public HiFiInternalFrameTitlePane(JInternalFrame f) {

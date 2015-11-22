@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import javax.swing.border.Border;
 
 /**
+ * A factory for creating McWinBorder objects.
+ *
  * @author Michael Hagen
  */
 public class McWinBorderFactory implements AbstractBorderFactory {
 
+    /** The instance. */
     private static McWinBorderFactory instance = null;
 
     private McWinBorderFactory() {
     }
 
+    /** Gets the single instance of McWinBorderFactory.
+	 *
+	 * @return single instance of McWinBorderFactory
+	 */
     public static synchronized McWinBorderFactory getInstance() {
         if (instance == null) {
             instance = new McWinBorderFactory();

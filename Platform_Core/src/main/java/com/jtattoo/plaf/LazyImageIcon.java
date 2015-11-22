@@ -28,18 +28,26 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
+ * The Class LazyImageIcon.
  *
  * @author Michael Hagen
  */
 public class LazyImageIcon implements Icon {
 
+    /** The name. */
     private String name = null;
+    
+    /** The icon. */
     private ImageIcon icon = null;
 
     public LazyImageIcon(String name) {
         this.name = name;
     }
 
+    /** Gets the icon.
+	 *
+	 * @return the icon
+	 */
     private Icon getIcon() {
         if (icon == null) {
             try {
@@ -51,6 +59,10 @@ public class LazyImageIcon implements Icon {
         return icon;
     }
 
+    /** Gets the image.
+	 *
+	 * @return the image
+	 */
     public Image getImage() {
         if (getIcon() != null) {
             return icon.getImage();

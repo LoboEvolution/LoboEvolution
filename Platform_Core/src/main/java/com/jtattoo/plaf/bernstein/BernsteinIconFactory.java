@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
 
 /**
+ * A factory for creating BernsteinIcon objects.
+ *
  * @author Michael Hagen
  */
 public class BernsteinIconFactory implements AbstractIconFactory {
 
+    /** The instance. */
     private static BernsteinIconFactory instance = null;
 
     private BernsteinIconFactory() {
     }
 
+     /** Gets the single instance of BernsteinIconFactory.
+	 *
+	 * @return single instance of BernsteinIconFactory
+	 */
     public static synchronized BernsteinIconFactory getInstance() {
         if (instance == null) {
             instance = new BernsteinIconFactory();

@@ -30,6 +30,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class AcrylComboBoxUI.
+ *
  * @author Michael Hagen
  */
 public class AcrylComboBoxUI extends BaseComboBoxUI {

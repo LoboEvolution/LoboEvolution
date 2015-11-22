@@ -35,11 +35,16 @@ import javax.swing.plaf.metal.MetalTextFieldUI;
 import javax.swing.text.DefaultEditorKit;
 
 /**
+ * The Class BaseTextFieldUI.
+ *
  * @author Michael Hagen
  */
 public class BaseTextFieldUI extends MetalTextFieldUI {
 
+    /** The org border. */
     private Border orgBorder = null;
+    
+    /** The focus listener. */
     private FocusListener focusListener = null;
 
     public static ComponentUI createUI(JComponent c) {

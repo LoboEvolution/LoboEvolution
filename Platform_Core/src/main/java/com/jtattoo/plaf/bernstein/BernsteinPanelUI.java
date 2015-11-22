@@ -30,10 +30,13 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class BernsteinPanelUI.
+ *
  * @author Michael Hagen
  */
 public class BernsteinPanelUI extends BasePanelUI {
 
+    /** The panel ui. */
     private static BernsteinPanelUI panelUI = null;
 
     public static ComponentUI createUI(JComponent c) {

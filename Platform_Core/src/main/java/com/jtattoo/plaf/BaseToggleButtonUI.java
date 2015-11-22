@@ -30,10 +30,18 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.*;
 import javax.swing.text.View;
 
+/**
+ * The Class BaseToggleButtonUI.
+ */
 public class BaseToggleButtonUI extends BasicToggleButtonUI {
 
+    /** The Constant viewRect. */
     private static final Rectangle viewRect = new Rectangle();
+    
+    /** The Constant textRect. */
     private static final Rectangle textRect = new Rectangle();
+    
+    /** The Constant iconRect. */
     private static final Rectangle iconRect = new Rectangle();
 
     public static ComponentUI createUI(JComponent b) {

@@ -28,13 +28,13 @@ import com.jtattoo.plaf.BaseSplitPaneDivider;
 import java.awt.Graphics;
 
 /**
+ * The Class McWinSplitPaneDivider.
+ *
  * @author Michael Hagen
  */
 public class McWinSplitPaneDivider extends BaseSplitPaneDivider {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public McWinSplitPaneDivider(McWinSplitPaneUI ui) {

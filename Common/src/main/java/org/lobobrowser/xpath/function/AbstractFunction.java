@@ -56,7 +56,7 @@ public abstract class AbstractFunction implements XPathFunction {
         this.name = name;
     }
     
-    /** Gets the arity.
+     /** Gets the arity.
 	 *
 	 * @return the arity
 	 */
@@ -64,7 +64,7 @@ public abstract class AbstractFunction implements XPathFunction {
         return arity;
     }
     
-    /** Gets the name.
+     /** Gets the name.
 	 *
 	 * @return the name
 	 */

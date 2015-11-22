@@ -31,6 +31,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSeparatorUI;
 
 /**
+ * The Class TextureSeparatorUI.
+ *
  * @author Michael Hagen
  */
 public class TextureSeparatorUI extends BasicSeparatorUI {

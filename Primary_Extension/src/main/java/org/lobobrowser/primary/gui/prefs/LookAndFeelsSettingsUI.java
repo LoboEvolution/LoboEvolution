@@ -39,6 +39,9 @@ import org.lobobrowser.primary.gui.FormPanel;
 import org.lobobrowser.primary.gui.ValidationException;
 import org.lobobrowser.util.gui.LAFSettings;
 
+/**
+ * The Class LookAndFeelsSettingsUI.
+ */
 public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 
 	/** The Constant serialVersionUID. */
@@ -309,9 +312,9 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	
 	
 	/**
-	 * Gets the font box.
+	 * Gets the font group box.
 	 *
-	 * @return the font box
+	 * @return the font group box
 	 */
 	private Component getFontGroupBox() {
 		JPanel groupBox = new JPanel();
@@ -324,112 +327,144 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	}
 
 	/**
-	 * @return the acrylPanel
+	 * Gets the Acryl panel.
+	 *
+	 * @return the Acryl panel
 	 */
 	public Component getAcrylPanel() {
 		return acrylPanel;
 	}
 
 	/**
-	 * @return the aeroPanel
+	 * Gets the Aero panel.
+	 *
+	 * @return the Aero panel
 	 */
 	public Component getAeroPanel() {
 		return aeroPanel;
 	}
 
 	/**
-	 * @return the aluminiumPanel
+	 * Gets the Aluminium panel.
+	 *
+	 * @return the Aluminium panel
 	 */
 	public Component getAluminiumPanel() {
 		return aluminiumPanel;
 	}
 
 	/**
-	 * @return the bernsteinPanel
+	 * Gets the Bernstein panel.
+	 *
+	 * @return the Bernstein panel
 	 */
 	public Component getBernsteinPanel() {
 		return bernsteinPanel;
 	}
 
 	/**
-	 * @return the fastPanel
+	 * Gets the Fast panel.
+	 *
+	 * @return the Fast panel
 	 */
 	public Component getFastPanel() {
 		return fastPanel;
 	}
 
 	/**
-	 * @return the graphitePanel
+	 * Gets the Graphite panel.
+	 *
+	 * @return the Graphite panel
 	 */
 	public Component getGraphitePanel() {
 		return graphitePanel;
 	}
 
 	/**
-	 * @return the hiFiPanel
+	 * Gets the HiFi panel.
+	 *
+	 * @return the HiFi panel
 	 */
 	public Component getHiFiPanel() {
 		return hiFiPanel;
 	}
 
 	/**
-	 * @return the lunaPanel
+	 * Gets the Luna panel.
+	 *
+	 * @return the Luna panel
 	 */
 	public Component getLunaPanel() {
 		return lunaPanel;
 	}
 
 	/**
-	 * @return the mcWinPanel
+	 * Gets the McWin panel.
+	 *
+	 * @return the McWin panel
 	 */
 	public Component getMcWinPanel() {
 		return mcWinPanel;
 	}
 
 	/**
-	 * @return the mintPanel
+	 * Gets the Mint panel.
+	 *
+	 * @return the Mint panel
 	 */
 	public Component getMintPanel() {
 		return mintPanel;
 	}
 
 	/**
-	 * @return the noirePanel
+	 * Gets the Noire panel.
+	 *
+	 * @return the Noire panel
 	 */
 	public Component getNoirePanel() {
 		return noirePanel;
 	}
 
 	/**
-	 * @return the smartPanel
+	 * Gets the Smart panel.
+	 *
+	 * @return the Smart panel
 	 */
 	public Component getSmartPanel() {
 		return smartPanel;
 	}
 
 	/**
-	 * @return the texturePanel
+	 * Gets the Texture panel.
+	 *
+	 * @return the Texture panel
 	 */
 	public Component getTexturePanel() {
 		return texturePanel;
 	}
 
 	/**
-	 * @return the fontSizeField
+	 * Gets the Font Size field.
+	 *
+	 * @return the Font Size field
 	 */
 	public FormField getFontSizeField() {
 		return fontSizeField;
 	}
 
 	/**
-	 * @return the fontPanel
+	 * Gets the font panel.
+	 *
+	 * @return the font panel
 	 */
 	public FormPanel getFontPanel() {
 		return fontPanel;
 	}
 
 	/**
-	 * @return the fontList
+	 * Gets the search engine list control.
+	 *
+	 * @return the search engine list control
 	 */
 	public JComboBox<String> getFontList() {
 		return fontList;

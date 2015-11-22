@@ -302,7 +302,7 @@ BoundableRenderable {
         }
     }
 
-    /** Checks if is valid.
+     /** Checks if is valid.
 	 *
 	 * @return true, if is valid
 	 */
@@ -470,7 +470,7 @@ BoundableRenderable {
         this.repaint(0, 0, this.width, this.height);
     }
 
-    /** Gets the block background color.
+     /** Gets the block background color.
 	 *
 	 * @return the block background color
 	 */

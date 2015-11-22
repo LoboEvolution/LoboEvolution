@@ -32,6 +32,8 @@ import javax.swing.JMenuBar;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class AluminiumMenuBarUI.
+ *
  * @author Michael Hagen
  */
 public class AluminiumMenuBarUI extends BaseMenuBarUI {

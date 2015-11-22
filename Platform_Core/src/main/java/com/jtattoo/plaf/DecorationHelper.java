@@ -28,6 +28,8 @@ import java.lang.reflect.Method;
 import javax.swing.*;
 
 /**
+ * The Class DecorationHelper.
+ *
  * @author Michael Hagen
  */
 public class DecorationHelper {
@@ -105,6 +107,10 @@ public class DecorationHelper {
         return false;
     }
 
+    /** Checks if is translucent window supported.
+	 *
+	 * @return true, if is translucent window supported
+	 */
     public static boolean isTranslucentWindowSupported() {
         return (JTattooUtilities.getJavaVersion() >= 1.6010) && (JTattooUtilities.isMac() || JTattooUtilities.isWindows());
     }

@@ -28,27 +28,58 @@ import java.util.*;
 import javax.swing.UIDefaults;
 
 /**
+ * The Class GraphiteLookAndFeel.
+ *
  * @author Michael Hagen
  */
 public class GraphiteLookAndFeel extends AbstractLookAndFeel {
-    /**
-	 * 
-	 */
+    
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The my theme. */
 	private static GraphiteDefaultTheme myTheme = null;
+    
+    /** The Constant themesList. */
     private static final ArrayList<String> themesList = new ArrayList<String>();
+    
+    /** The Constant themesMap. */
     private static final HashMap<String, Properties> themesMap = new HashMap<String, Properties>();
+    
+    /** The Constant defaultProps. */
     private static final Properties defaultProps = new Properties();
+    
+    /** The Constant smallFontProps. */
     private static final Properties smallFontProps = new Properties();
+    
+    /** The Constant mediumFontProps. */
     private static final Properties mediumFontProps = new Properties();
+    
+    /** The Constant largeFontProps. */
     private static final Properties largeFontProps = new Properties();
+    
+    /** The Constant greenProps. */
     private static final Properties greenProps = new Properties();
+    
+    /** The Constant greenSmallFontProps. */
     private static final Properties greenSmallFontProps = new Properties();
+    
+    /** The Constant greenMediumFontProps. */
     private static final Properties greenMediumFontProps = new Properties();
+    
+    /** The Constant greenLargeFontProps. */
     private static final Properties greenLargeFontProps = new Properties();
+    
+    /** The Constant blueProps. */
     private static final Properties blueProps = new Properties();
+    
+    /** The Constant blueSmallFontProps. */
     private static final Properties blueSmallFontProps = new Properties();
+    
+    /** The Constant blueMediumFontProps. */
     private static final Properties blueMediumFontProps = new Properties();
+    
+    /** The Constant blueLargeFontProps. */
     private static final Properties blueLargeFontProps = new Properties();
 
     static {
@@ -214,6 +245,10 @@ public class GraphiteLookAndFeel extends AbstractLookAndFeel {
         themesMap.put("Blue-Large-Font", blueLargeFontProps);
     }
 
+    /** Gets the themes.
+	 *
+	 * @return the themes
+	 */
     public static List<String> getThemes() {
         return themesList;
     }
@@ -222,6 +257,11 @@ public class GraphiteLookAndFeel extends AbstractLookAndFeel {
         return ((Properties)themesMap.get(name));
     }
 
+    /** Sets the theme.
+	 *
+	 * @param name
+	 *            the new theme
+	 */
     public static void setTheme(String name) {
         setTheme((Properties)themesMap.get(name));
         if (myTheme != null) {
@@ -241,6 +281,11 @@ public class GraphiteLookAndFeel extends AbstractLookAndFeel {
         }
     }
 
+    /** Sets the theme.
+	 *
+	 * @param themesProps
+	 *            the new theme
+	 */
     public static void setTheme(Properties themesProps) {
         currentThemeName = "graphiteTheme";
         if (myTheme == null) {
@@ -254,6 +299,11 @@ public class GraphiteLookAndFeel extends AbstractLookAndFeel {
         }
     }
 
+    /** Sets the current theme.
+	 *
+	 * @param themesProps
+	 *            the new current theme
+	 */
     public static void setCurrentTheme(Properties themesProps) {
         setTheme(themesProps);
     }

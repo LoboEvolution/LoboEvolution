@@ -29,13 +29,13 @@ import javax.swing.Icon;
 import javax.swing.JInternalFrame;
 
 /**
+ * The Class McWinInternalFrameTitlePane.
+ *
  * @author Michael Hagen
  */
 public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public McWinInternalFrameTitlePane(JInternalFrame f) {
@@ -71,6 +71,9 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 //------------------------------------------------------------------------------
 // inner classes
+/**
+ * The Class MyTitlePaneLayout.
+ */
 //------------------------------------------------------------------------------
     class MyTitlePaneLayout extends TitlePaneLayout {
 

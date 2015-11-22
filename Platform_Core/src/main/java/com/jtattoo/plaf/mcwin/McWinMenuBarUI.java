@@ -31,10 +31,13 @@ import javax.swing.JMenuBar;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class McWinMenuBarUI.
+ *
  * @author Michael Hagen
  */
 public class McWinMenuBarUI extends BaseMenuBarUI {
 
+    /** The Constant shadowColors. */
     private static final Color shadowColors[] = ColorHelper.createColorArr(Color.white, new Color(240, 240, 240), 8);
 
     public static ComponentUI createUI(JComponent x) {

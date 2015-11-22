@@ -29,6 +29,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class GraphiteToolBarUI.
+ *
  * @author Michael Hagen
  */
 public class GraphiteToolBarUI extends AbstractToolBarUI {

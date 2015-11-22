@@ -28,6 +28,16 @@ import java.awt.event.MouseEvent;
 import javax.swing.AbstractButton;
 import javax.swing.plaf.basic.BasicButtonListener;
 
+/**
+ * The listener interface for receiving baseButton events. The class that is
+ * interested in processing a baseButton event implements this interface, and
+ * the object created with that class is registered with a component using the
+ * component's <code>addBaseButtonListener<code> method. When
+ * the baseButton event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see BaseButtonEvent
+ */
 public class BaseButtonListener extends BasicButtonListener {
 
     public BaseButtonListener(AbstractButton b) {

@@ -31,10 +31,13 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class AluminiumRadioButtonUI.
+ *
  * @author Michael Hagen
  */
 public class AluminiumRadioButtonUI extends BaseRadioButtonUI {
 
+    /** The radio button ui. */
     private static AluminiumRadioButtonUI radioButtonUI = null;
 
     public static ComponentUI createUI(JComponent c) {

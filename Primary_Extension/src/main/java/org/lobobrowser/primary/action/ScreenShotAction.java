@@ -29,8 +29,12 @@ import org.lobobrowser.primary.screenshot.ScreenShootFrame;
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigatorWindow;
 
+/**
+ * The Class ScreenShotAction.
+ */
 public class ScreenShotAction extends AbstractAction implements EnableableAction{
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
 	/** The window. */

@@ -32,6 +32,8 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class BernsteinButtonUI.
+ *
  * @author Michael Hagen
  */
 public class BernsteinButtonUI extends BaseButtonUI {

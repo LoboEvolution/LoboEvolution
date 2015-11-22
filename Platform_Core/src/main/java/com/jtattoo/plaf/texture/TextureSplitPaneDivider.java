@@ -29,13 +29,13 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
+ * The Class TextureSplitPaneDivider.
+ *
  * @author Michael Hagen
  */
 public class TextureSplitPaneDivider extends BaseSplitPaneDivider {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public TextureSplitPaneDivider(TextureSplitPaneUI ui) {

@@ -27,10 +27,13 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class TextureCheckBoxUI.
+ *
  * @author Michael Hagen
  */
 public class TextureCheckBoxUI extends TextureRadioButtonUI {
 
+    /** The check box ui. */
     private static TextureCheckBoxUI checkBoxUI = null;
 
     public static ComponentUI createUI(JComponent b) {

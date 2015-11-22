@@ -28,11 +28,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.Icon;
 
+/**
+ * The Class FastScrollButton.
+ */
 public class FastScrollButton extends BaseScrollButton {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public FastScrollButton(int direction, int width) {

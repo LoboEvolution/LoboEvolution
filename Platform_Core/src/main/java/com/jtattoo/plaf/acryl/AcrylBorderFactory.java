@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import javax.swing.border.Border;
 
 /**
+ * A factory for creating AcrylBorder objects.
+ *
  * @author Michael Hagen
  */
 public class AcrylBorderFactory implements AbstractBorderFactory {
 
+    /** The instance. */
     private static AcrylBorderFactory instance = null;
 
     private AcrylBorderFactory() {
     }
 
+    /** Gets the single instance of AcrylBorderFactory.
+	 *
+	 * @return single instance of AcrylBorderFactory
+	 */
     public static synchronized AcrylBorderFactory getInstance() {
         if (instance == null) {
             instance = new AcrylBorderFactory();

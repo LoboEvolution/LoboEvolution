@@ -30,6 +30,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class TextureMenuItemUI.
+ *
  * @author Michael Hagen
  */
 public class TextureMenuItemUI extends BaseMenuItemUI {

@@ -250,28 +250,38 @@ public class GeneralSettings implements Serializable {
     }
 
 	/**
-	 * @return the spoofJS
+	 * Checks if is spoof jd.
+	 *
+	 * @return the spoof jd
 	 */
 	public boolean isSpoofJS() {
 		return spoofJS;
 	}
 
 	/**
-	 * @param spoofJS the spoofJS to set
+	 * Sets the spoof jd.
+	 *
+	 * @param spoofJS
+	 *            the new spoof jd
 	 */
 	public void setSpoofJS(boolean spoofJS) {
 		this.spoofJS = spoofJS;
 	}
 
 	/**
-	 * @return the spoofCSS
+	 * Checks if is spoof jd.
+	 *
+	 * @return the spoof jd
 	 */
 	public boolean isSpoofCSS() {
 		return spoofCSS;
 	}
 
 	/**
-	 * @param spoofCSS the spoofCSS to set
+	 * Sets the spoof jd.
+	 *
+	 * @param spoofCSS
+	 *            the new spoof jd
 	 */
 	public void setSpoofCSS(boolean spoofCSS) {
 		this.spoofCSS = spoofCSS;

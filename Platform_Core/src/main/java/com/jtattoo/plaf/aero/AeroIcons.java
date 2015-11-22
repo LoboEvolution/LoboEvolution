@@ -30,10 +30,16 @@ import java.awt.Insets;
 import javax.swing.Icon;
 
 /**
+ * The Class AeroIcons.
+ *
  * @author Michael Hagen
  */
 public class AeroIcons extends BaseIcons {
     
+    /** Gets the icon icon.
+	 *
+	 * @return the icon icon
+	 */
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -45,6 +51,10 @@ public class AeroIcons extends BaseIcons {
         return iconIcon;
     }
     
+    /** Gets the min icon.
+	 *
+	 * @return the min icon
+	 */
     public static Icon getMinIcon() {
         if (minIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -56,6 +66,10 @@ public class AeroIcons extends BaseIcons {
         return minIcon;
     }
     
+    /** Gets the max icon.
+	 *
+	 * @return the max icon
+	 */
     public static Icon getMaxIcon() {
         if (maxIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -67,6 +81,10 @@ public class AeroIcons extends BaseIcons {
         return maxIcon;
     }
     
+    /** Gets the close icon.
+	 *
+	 * @return the close icon
+	 */
     public static Icon getCloseIcon() {
         if (closeIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {

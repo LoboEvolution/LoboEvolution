@@ -29,6 +29,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class SmartInternalFrameUI.
+ *
  * @author Michael Hagen
  */
 public class SmartInternalFrameUI extends BaseInternalFrameUI {

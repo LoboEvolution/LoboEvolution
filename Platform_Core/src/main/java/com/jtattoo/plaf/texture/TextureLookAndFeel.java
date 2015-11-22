@@ -29,32 +29,70 @@ import javax.swing.UIDefaults;
 import javax.swing.plaf.InsetsUIResource;
 
 /**
+ * The Class TextureLookAndFeel.
+ *
  * @author Michael Hagen
  */
 public class TextureLookAndFeel extends AbstractLookAndFeel {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The my theme. */
 	private static TextureDefaultTheme myTheme = null;
+    
+    /** The Constant themesList. */
     private static final ArrayList<String> themesList = new ArrayList<String>();
+    
+    /** The Constant themesMap. */
     private static final HashMap<String, Properties> themesMap = new HashMap<String, Properties>();
+    
+    /** The Constant defaultProps. */
     private static final Properties defaultProps = new Properties();
+    
+    /** The Constant smallFontProps. */
     private static final Properties smallFontProps = new Properties();
+    
+    /** The Constant mediumFontProps. */
     private static final Properties mediumFontProps = new Properties();
+    
+    /** The Constant largeFontProps. */
     private static final Properties largeFontProps = new Properties();
+    
+    /** The Constant rockProps. */
     private static final Properties rockProps = new Properties();
+    
+    /** The Constant rockSmallFontProps. */
     private static final Properties rockSmallFontProps = new Properties();
+    
+    /** The Constant rockMediumFontProps. */
     private static final Properties rockMediumFontProps = new Properties();
+    
+    /** The Constant rockLargeFontProps. */
     private static final Properties rockLargeFontProps = new Properties();
+    
+    /** The Constant textileProps. */
     private static final Properties textileProps = new Properties();
+    
+    /** The Constant textileSmallFontProps. */
     private static final Properties textileSmallFontProps = new Properties();
+    
+    /** The Constant textileMediumFontProps. */
     private static final Properties textileMediumFontProps = new Properties();
+    
+    /** The Constant textileLargeFontProps. */
     private static final Properties textileLargeFontProps = new Properties();
+    
+    /** The Constant snowProps. */
     private static final Properties snowProps = new Properties();
+    
+    /** The Constant snowSmallFontProps. */
     private static final Properties snowSmallFontProps = new Properties();
+    
+    /** The Constant snowMediumFontProps. */
     private static final Properties snowMediumFontProps = new Properties();
+    
+    /** The Constant snowLargeFontProps. */
     private static final Properties snowLargeFontProps = new Properties();
 
     static {
@@ -324,6 +362,10 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         themesMap.put("Snow-Large-Font", snowLargeFontProps);
     }
 
+    /** Gets the themes.
+	 *
+	 * @return the themes
+	 */
     public static List<String> getThemes() {
         return themesList;
     }
@@ -332,6 +374,11 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         return ((Properties) themesMap.get(name));
     }
 
+    /** Sets the theme.
+	 *
+	 * @param name
+	 *            the new theme
+	 */
     public static void setTheme(String name) {
         setTheme((Properties) themesMap.get(name));
         if (myTheme != null) {
@@ -351,6 +398,11 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         }
     }
 
+    /** Sets the theme.
+	 *
+	 * @param themesProps
+	 *            the new theme
+	 */
     public static void setTheme(Properties themesProps) {
         currentThemeName = "textureTheme";
         if (myTheme == null) {
@@ -366,6 +418,11 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         }
     }
 
+    /** Sets the current theme.
+	 *
+	 * @param themesProps
+	 *            the new current theme
+	 */
     public static void setCurrentTheme(Properties themesProps) {
         setTheme(themesProps);
     }

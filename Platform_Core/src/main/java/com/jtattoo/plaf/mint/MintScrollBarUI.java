@@ -30,8 +30,9 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class MintScrollBarUI.
  *
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class MintScrollBarUI extends XPScrollBarUI {
 

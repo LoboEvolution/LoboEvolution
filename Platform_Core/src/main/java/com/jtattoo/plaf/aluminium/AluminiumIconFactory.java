@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
 
 /**
+ * A factory for creating AluminiumIcon objects.
+ *
  * @author Michael Hagen
  */
 public class AluminiumIconFactory implements AbstractIconFactory {
 
+    /** The instance. */
     private static AluminiumIconFactory instance = null;
 
     private AluminiumIconFactory() {
     }
 
+    /** Gets the single instance of AluminiumIconFactory.
+	 *
+	 * @return single instance of AluminiumIconFactory
+	 */
     public static synchronized AluminiumIconFactory getInstance() {
         if (instance == null) {
             instance = new AluminiumIconFactory();

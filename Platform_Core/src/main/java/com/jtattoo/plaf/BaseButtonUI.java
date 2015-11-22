@@ -27,13 +27,22 @@ import javax.swing.plaf.basic.*;
 import javax.swing.text.View;
 
 /**
+ * The Class BaseButtonUI.
+ *
  * @author Michael Hagen
  */
 public class BaseButtonUI extends BasicButtonUI {
 
+    /** The view rect. */
     protected static Rectangle viewRect = new Rectangle();
+    
+    /** The text rect. */
     protected static Rectangle textRect = new Rectangle();
+    
+    /** The icon rect. */
     protected static Rectangle iconRect = new Rectangle();
+    
+    /** The default colors. */
     protected static Color[] defaultColors = null;
 
     public static ComponentUI createUI(JComponent c) {

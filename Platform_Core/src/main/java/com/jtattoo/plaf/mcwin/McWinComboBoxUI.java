@@ -31,6 +31,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class McWinComboBoxUI.
+ *
  * @author Michael Hagen
  */
 public class McWinComboBoxUI extends BaseComboBoxUI {
@@ -51,12 +53,13 @@ public class McWinComboBoxUI extends BaseComboBoxUI {
         return button;
     }
 
+/**
+ * The Class ArrowButton.
+ */
 //--------------------------------------------------------------------------------------------------
     static class ArrowButton extends NoFocusButton {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public void paint(Graphics g) {

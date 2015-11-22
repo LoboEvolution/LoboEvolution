@@ -32,12 +32,18 @@ import javax.swing.border.Border;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class LunaBorders.
+ *
  * @author Michael Hagen
  */
 public class LunaBorders extends BaseBorders {
 
     //------------------------------------------------------------------------------------
     // Lazy access methods
+    /** Gets the text border.
+	 *
+	 * @return the text border
+	 */
     //------------------------------------------------------------------------------------
     public static Border getTextBorder() {
         if (textFieldBorder == null) {
@@ -46,10 +52,18 @@ public class LunaBorders extends BaseBorders {
         return textFieldBorder;
     }
 
+    /** Gets the text field border.
+	 *
+	 * @return the text field border
+	 */
     public static Border getTextFieldBorder() {
         return getTextBorder();
     }
 
+    /** Gets the combo box border.
+	 *
+	 * @return the combo box border
+	 */
     public static Border getComboBoxBorder() {
         if (comboBoxBorder == null) {
             comboBoxBorder = new ComboBoxBorder();
@@ -57,6 +71,10 @@ public class LunaBorders extends BaseBorders {
         return comboBoxBorder;
     }
 
+    /** Gets the scroll pane border.
+	 *
+	 * @return the scroll pane border
+	 */
     public static Border getScrollPaneBorder() {
         if (scrollPaneBorder == null) {
             scrollPaneBorder = new ScrollPaneBorder(false);
@@ -64,6 +82,10 @@ public class LunaBorders extends BaseBorders {
         return scrollPaneBorder;
     }
 
+    /** Gets the table scroll pane border.
+	 *
+	 * @return the table scroll pane border
+	 */
     public static Border getTableScrollPaneBorder() {
         if (tableScrollPaneBorder == null) {
             tableScrollPaneBorder = new ScrollPaneBorder(true);
@@ -71,6 +93,10 @@ public class LunaBorders extends BaseBorders {
         return tableScrollPaneBorder;
     }
 
+    /** Gets the button border.
+	 *
+	 * @return the button border
+	 */
     public static Border getButtonBorder() {
         if (buttonBorder == null) {
             buttonBorder = new ButtonBorder();
@@ -78,10 +104,18 @@ public class LunaBorders extends BaseBorders {
         return buttonBorder;
     }
 
+    /** Gets the toggle button border.
+	 *
+	 * @return the toggle button border
+	 */
     public static Border getToggleButtonBorder() {
         return getButtonBorder();
     }
 
+    /** Gets the rollover tool button border.
+	 *
+	 * @return the rollover tool button border
+	 */
     public static Border getRolloverToolButtonBorder() {
         if (rolloverToolButtonBorder == null) {
             rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -89,6 +123,10 @@ public class LunaBorders extends BaseBorders {
         return rolloverToolButtonBorder;
     }
 
+    /** Gets the internal frame border.
+	 *
+	 * @return the internal frame border
+	 */
     public static Border getInternalFrameBorder() {
         if (internalFrameBorder == null) {
             internalFrameBorder = new InternalFrameBorder();
@@ -96,6 +134,10 @@ public class LunaBorders extends BaseBorders {
         return internalFrameBorder;
     }
 
+    /** Gets the table header border.
+	 *
+	 * @return the table header border
+	 */
     public static Border getTableHeaderBorder() {
         if (tableHeaderBorder == null) {
             tableHeaderBorder = new TableHeaderBorder();
@@ -105,12 +147,21 @@ public class LunaBorders extends BaseBorders {
 
     //------------------------------------------------------------------------------------
     // Implementation of border classes
+    /** The Class ButtonBorder.
+	 */
     //------------------------------------------------------------------------------------
     public static class ButtonBorder implements Border, UIResource {
 
+        /** The Constant defaultColorHi. */
         private static final Color defaultColorHi = new Color(220, 230, 245);
+        
+        /** The Constant defaultColorMed. */
         private static final Color defaultColorMed = new Color(212, 224, 243);
+        
+        /** The Constant defaultColorLo. */
         private static final Color defaultColorLo = new Color(200, 215, 240);
+        
+        /** The Constant insets. */
         private static final Insets insets = new Insets(3, 6, 3, 6);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -180,8 +231,11 @@ public class LunaBorders extends BaseBorders {
         }
     } // class ButtonBorder
 
+    /** The Class RolloverToolButtonBorder.
+	 */
     public static class RolloverToolButtonBorder implements Border, UIResource {
 
+        /** The Constant insets. */
         private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -242,13 +296,17 @@ public class LunaBorders extends BaseBorders {
         }
     } // class RolloverToolButtonBorder
 
+    /** The Class ComboBoxBorder.
+	 */
     public static class ComboBoxBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant fieldBorderColor. */
 		private static final Color fieldBorderColor = new Color(127, 157, 185);
+        
+        /** The Constant insets. */
         private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
@@ -271,13 +329,17 @@ public class LunaBorders extends BaseBorders {
         }
     } // class ComboBoxBorder
 
+    /** The Class TextFieldBorder.
+	 */
     public static class TextFieldBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant fieldBorderColor. */
 		private static final Color fieldBorderColor = new Color(127, 157, 185);
+        
+        /** The Constant insets. */
         private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
@@ -300,15 +362,23 @@ public class LunaBorders extends BaseBorders {
         }
     } // class TextFieldBorder
 
+    /** The Class ScrollPaneBorder.
+	 */
     public static class ScrollPaneBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant fieldBorderColor. */
 		private static final Color fieldBorderColor = new Color(127, 157, 185);
+        
+        /** The Constant insets. */
         private static final Insets insets = new Insets(2, 2, 2, 2);
+        
+        /** The Constant tableInsets. */
         private static final Insets tableInsets = new Insets(1, 1, 1, 1);
+        
+        /** The table border. */
         private boolean tableBorder = false;
 
         public ScrollPaneBorder(boolean tableBorder) {
@@ -340,11 +410,11 @@ public class LunaBorders extends BaseBorders {
         }
     } // class ScrollPaneBorder
 
+    /** The Class InternalFrameBorder.
+	 */
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public InternalFrameBorder() {
@@ -383,12 +453,14 @@ public class LunaBorders extends BaseBorders {
         }
     } // class InternalFrameBorder
 
+    /** The Class TableHeaderBorder.
+	 */
     public static class TableHeaderBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant insets. */
 		private static final Insets insets = new Insets(0, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {

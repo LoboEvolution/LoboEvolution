@@ -28,6 +28,8 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class HiFiScrollPaneUI.
+ *
  * @author Michael Hagen
  */
 public class HiFiScrollPaneUI extends BaseScrollPaneUI {

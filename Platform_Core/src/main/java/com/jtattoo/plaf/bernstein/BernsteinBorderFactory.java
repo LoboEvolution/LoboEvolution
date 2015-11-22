@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import javax.swing.border.Border;
 
 /**
+ * A factory for creating BernsteinBorder objects.
+ *
  * @author Michael Hagen
  */
 public class BernsteinBorderFactory implements AbstractBorderFactory {
 
+    /** The instance. */
     private static BernsteinBorderFactory instance = null;
 
     private BernsteinBorderFactory() {
     }
 
+    /** Gets the single instance of BernsteinBorderFactory.
+	 *
+	 * @return single instance of BernsteinBorderFactory
+	 */
     public static synchronized BernsteinBorderFactory getInstance() {
         if (instance == null) {
             instance = new BernsteinBorderFactory();

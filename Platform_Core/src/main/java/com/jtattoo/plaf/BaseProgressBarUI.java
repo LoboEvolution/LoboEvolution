@@ -33,10 +33,13 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
 /**
+ * The Class BaseProgressBarUI.
+ *
  * @author Michael Hagen
  */
 public class BaseProgressBarUI extends BasicProgressBarUI {
 
+    /** The property change listener. */
     protected PropertyChangeListener propertyChangeListener;
 
     public static ComponentUI createUI(JComponent c) {
@@ -258,6 +261,9 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
         }
     }
 
+/**
+ * The Class PropertyChangeHandler.
+ */
 //-----------------------------------------------------------------------------------------------
     protected class PropertyChangeHandler implements PropertyChangeListener {
 

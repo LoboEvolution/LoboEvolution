@@ -30,7 +30,7 @@ import javax.swing.plaf.*;
 import javax.swing.text.View;
 
 /**
- * author Michael Hagen
+ * author Michael Hagen.
  */
 public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 

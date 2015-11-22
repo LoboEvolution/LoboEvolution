@@ -128,66 +128,75 @@ public class FontKey {
         return ch;
     }
     
-    /**
-     * @return the cachedHash
-     */
+    /** Gets the cached hash.
+	 *
+	 * @return the cached hash
+	 */
     public int getCachedHash() {
         return cachedHash;
     }
     
-    /**
-     * @param cachedHash
-     *            the cachedHash to set
-     */
+    /** Sets the cached hash.
+	 *
+	 * @param cachedHash
+	 *            the new cached hash
+	 */
     public void setCachedHash(int cachedHash) {
         this.cachedHash = cachedHash;
     }
     
-    /**
-     * @return the fontFamily
-     */
+    /** Gets the font family.
+	 *
+	 * @return the font family
+	 */
     public String getFontFamily() {
         return fontFamily;
     }
     
-    /**
-     * @return the fontStyle
-     */
+    /** Gets the font style.
+	 *
+	 * @return the font style
+	 */
     public String getFontStyle() {
         return fontStyle;
     }
     
-    /**
-     * @return the fontVariant
-     */
+    /** Gets the font variant.
+	 *
+	 * @return the font variant
+	 */
     public String getFontVariant() {
         return fontVariant;
     }
     
-    /**
-     * @return the fontWeight
-     */
+    /** Gets the font weight.
+	 *
+	 * @return the font weight
+	 */
     public String getFontWeight() {
         return fontWeight;
     }
     
-    /**
-     * @return the fontSize
-     */
+    /** Gets the font size.
+	 *
+	 * @return the font size
+	 */
     public float getFontSize() {
         return fontSize;
     }
     
-    /**
-     * @return the locales
-     */
+    /** Gets the locales.
+	 *
+	 * @return the locales
+	 */
     public Set getLocales() {
         return locales;
     }
     
-    /**
-     * @return the superscript
-     */
+    /** Gets the superscript.
+	 *
+	 * @return the superscript
+	 */
     public Integer getSuperscript() {
         return superscript;
     }

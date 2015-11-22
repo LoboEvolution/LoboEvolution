@@ -29,23 +29,52 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
- * @author  Michael Hagen
+ * The Class JTattooUtilities.
+ *
+ * @author Michael Hagen
  */
 public class JTattooUtilities {
 
+    /** The Constant isWindows. */
     private static final boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("windows") != -1;
+    
+    /** The Constant isOS2. */
     private static final boolean isOS2 = System.getProperty("os.name").toLowerCase().indexOf("os/2") != -1;
+    
+    /** The Constant isMac. */
     private static final boolean isMac = System.getProperty("os.name").toLowerCase().indexOf("mac") != -1;
+    
+    /** The Constant isLinux. */
     private static final boolean isLinux = System.getProperty("os.name").toLowerCase().indexOf("linux") != -1;
+    
+    /** The Constant isSunOS. */
     private static final boolean isSunOS = System.getProperty("os.name").toLowerCase().indexOf("sunos") != -1;
+    
+    /** The Constant isAIX. */
     private static final boolean isAIX = System.getProperty("os.name").toLowerCase().indexOf("aix") != -1;
+    
+    /** The Constant isHPUX. */
     private static final boolean isHPUX = System.getProperty("os.name").toLowerCase().indexOf("hpux") != -1;
+    
+    /** The Constant isFreeBSD. */
     private static final boolean isFreeBSD = System.getProperty("os.name").toLowerCase().indexOf("freebsd") != -1;
+    
+    /** The Constant isHiresScreen. */
     private static final boolean isHiresScreen = Toolkit.getDefaultToolkit().getScreenSize().width > 1280;
+    
+    /** The java version. */
     private static Double javaVersion = null;
+    
+    /** The os version. */
     private static Double osVersion = null;
+    
+    /** The Constant ELLIPSIS. */
     private static final String ELLIPSIS = "...";
 
+    /** Gets the java version.
+	 *
+	 * @return the java version
+	 */
     public static double getJavaVersion() {
         if (javaVersion == null) {
             try {
@@ -70,6 +99,10 @@ public class JTattooUtilities {
         return javaVersion.doubleValue();
     }
 
+    /** Gets the OS version.
+	 *
+	 * @return the OS version
+	 */
     public static double getOSVersion() {
         if (osVersion == null) {
             try {
@@ -94,38 +127,74 @@ public class JTattooUtilities {
         return osVersion.doubleValue();
     }
     
+    /** Checks if is windows.
+	 *
+	 * @return true, if is windows
+	 */
     public static boolean isWindows() {
         return isWindows;
     }
 
+    /** Checks if is o s2.
+	 *
+	 * @return true, if is o s2
+	 */
     public static boolean isOS2() {
         return isOS2;
     }
 
+    /** Checks if is mac.
+	 *
+	 * @return true, if is mac
+	 */
     public static boolean isMac() {
         return isMac;
     }
 
+    /** Checks if is linux.
+	 *
+	 * @return true, if is linux
+	 */
     public static boolean isLinux() {
         return isLinux;
     }
 
+    /** Checks if is sun os.
+	 *
+	 * @return true, if is sun os
+	 */
     public static boolean isSunOS() {
         return isSunOS;
     }
 
+    /** Checks if is aix.
+	 *
+	 * @return true, if is aix
+	 */
     public static boolean isAIX() {
         return isAIX;
     }
 
+    /** Checks if is hpux.
+	 *
+	 * @return true, if is hpux
+	 */
     public static boolean isHPUX() {
         return isHPUX;
     }
 
+    /** Checks if is free bsd.
+	 *
+	 * @return true, if is free bsd
+	 */
     public static boolean isFreeBSD() {
         return isFreeBSD;
     }
 
+    /** Checks if is hires screen.
+	 *
+	 * @return true, if is hires screen
+	 */
     public static boolean isHiresScreen() {
         return isHiresScreen;
     }

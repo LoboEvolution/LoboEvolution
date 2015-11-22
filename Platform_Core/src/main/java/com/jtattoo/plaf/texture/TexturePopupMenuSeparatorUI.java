@@ -30,11 +30,16 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSeparatorUI;
 
 /**
+ * The Class TexturePopupMenuSeparatorUI.
+ *
  * @author Michael Hagen
  */
 public class TexturePopupMenuSeparatorUI extends BasicSeparatorUI {
 
+    /** The Constant size. */
     private static final Dimension size = new Dimension(8, 8);
+    
+    /** The Constant colors. */
     private static final Color colors[] = new Color[] { Color.black, new Color(164, 164, 164), new Color(48, 48, 48), new Color(128, 128, 128) };
 
     public static ComponentUI createUI(JComponent c) {

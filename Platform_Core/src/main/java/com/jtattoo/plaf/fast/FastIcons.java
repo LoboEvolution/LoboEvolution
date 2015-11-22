@@ -26,6 +26,8 @@ package com.jtattoo.plaf.fast;
 import com.jtattoo.plaf.BaseIcons;
 
 /**
+ * The Class FastIcons.
+ *
  * @author Michael Hagen
  */
 public class FastIcons extends BaseIcons {

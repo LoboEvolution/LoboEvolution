@@ -29,6 +29,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
 
 /**
+ * The Class TextureSplitPaneUI.
+ *
  * @author Michael Hagen
  */
 public class TextureSplitPaneUI extends BaseSplitPaneUI {

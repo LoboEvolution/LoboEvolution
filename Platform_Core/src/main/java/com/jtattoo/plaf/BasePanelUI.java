@@ -30,10 +30,13 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicPanelUI;
 
 /**
+ * The Class BasePanelUI.
+ *
  * @author Michael Hagen
  */
 public class BasePanelUI extends BasicPanelUI {
 
+    /** The panel ui. */
     private static BasePanelUI panelUI = null;
 
     public static ComponentUI createUI(JComponent c) {

@@ -58,6 +58,8 @@ public class LayoutValue {
     }
 
 	/**
+	 * Gets the width.
+	 *
 	 * @return the width
 	 */
 	public int getWidth() {
@@ -65,13 +67,18 @@ public class LayoutValue {
 	}
 
 	/**
-	 * @param width the width to set
+	 * Sets the width.
+	 *
+	 * @param width
+	 *            the new width
 	 */
 	public void setWidth(int width) {
 		this.width = width;
 	}
 
 	/**
+	 * Gets the height.
+	 *
 	 * @return the height
 	 */
 	public int getHeight() {
@@ -79,35 +86,48 @@ public class LayoutValue {
 	}
 
 	/**
-	 * @param height the height to set
+	 * Sets the height.
+	 *
+	 * @param height
+	 *            the new height
 	 */
 	public void setHeight(int height) {
 		this.height = height;
 	}
 
 	/**
-	 * @return the hasHScrollBar
+	 * Checks if is has h scroll bar.
+	 *
+	 * @return the has h scroll bar
 	 */
 	public boolean isHasHScrollBar() {
 		return hasHScrollBar;
 	}
 
 	/**
-	 * @param hasHScrollBar the hasHScrollBar to set
+	 * Sets the has h scroll bar.
+	 *
+	 * @param hasHScrollBar
+	 *            the new has h scroll bar
 	 */
 	public void setHasHScrollBar(boolean hasHScrollBar) {
 		this.hasHScrollBar = hasHScrollBar;
 	}
 
 	/**
-	 * @return the hasVScrollBar
+	 * Checks if is has v scroll bar.
+	 *
+	 * @return the has v scroll bar
 	 */
 	public boolean isHasVScrollBar() {
 		return hasVScrollBar;
 	}
 
 	/**
-	 * @param hasVScrollBar the hasVScrollBar to set
+	 * Sets the has v scroll bar.
+	 *
+	 * @param hasVScrollBar
+	 *            the new has v scroll bar
 	 */
 	public void setHasVScrollBar(boolean hasVScrollBar) {
 		this.hasVScrollBar = hasVScrollBar;

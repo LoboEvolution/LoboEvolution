@@ -31,6 +31,8 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 
 /**
+ * The Class NoireDefaultTheme.
+ *
  * @author Michael Hagen
  */
 public class NoireDefaultTheme extends AbstractTheme {

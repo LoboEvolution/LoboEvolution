@@ -47,6 +47,8 @@ public class DOMTextMetricsImpl implements TextMetrics {
 	}
 
 	/**
+	 * Gets the txt.
+	 *
 	 * @return the txt
 	 */
 	public String getTxt() {
@@ -54,7 +56,10 @@ public class DOMTextMetricsImpl implements TextMetrics {
 	}
 
 	/**
-	 * @param txt the txt to set
+	 * Sets the txt.
+	 *
+	 * @param txt
+	 *            the new txt
 	 */
 	public void setTxt(String txt) {
 		this.txt = txt;

@@ -28,13 +28,13 @@ import com.jtattoo.plaf.BaseSplitPaneDivider;
 import java.awt.Graphics;
 
 /**
+ * The Class FastSplitPaneDivider.
+ *
  * @author Michael Hagen
  */
 public class FastSplitPaneDivider extends BaseSplitPaneDivider {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public FastSplitPaneDivider(FastSplitPaneUI ui) {

@@ -29,6 +29,8 @@ import java.awt.Color;
 import javax.swing.plaf.ColorUIResource;
 
 /**
+ * The Class McWinDefaultTheme.
+ *
  * @author Michael Hagen
  */
 public class McWinDefaultTheme extends AbstractTheme {

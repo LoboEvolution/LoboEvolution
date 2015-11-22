@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
 
 /**
+ * A factory for creating HiFiIcon objects.
+ *
  * @author Michael Hagen
  */
 public class HiFiIconFactory implements AbstractIconFactory {
 
+    /** The instance. */
     private static HiFiIconFactory instance = null;
 
     private HiFiIconFactory() {
     }
 
+    /** Gets the single instance of HiFiIconFactory.
+	 *
+	 * @return single instance of HiFiIconFactory
+	 */
     public static synchronized HiFiIconFactory getInstance() {
         if (instance == null) {
             instance = new HiFiIconFactory();

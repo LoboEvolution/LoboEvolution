@@ -29,10 +29,13 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class AluminiumDesktopPaneUI.
+ *
  * @author Michael Hagen
  */
 public class AluminiumDesktopPaneUI extends BaseDesktopPaneUI {
 
+    /** The desktop pane ui. */
     private static AluminiumDesktopPaneUI desktopPaneUI = null;
 
     public static ComponentUI createUI(JComponent c) {

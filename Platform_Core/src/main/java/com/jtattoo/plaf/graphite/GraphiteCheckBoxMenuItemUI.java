@@ -29,6 +29,8 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class GraphiteCheckBoxMenuItemUI.
+ *
  * @author Michael Hagen
  */
 public class GraphiteCheckBoxMenuItemUI extends BaseCheckBoxMenuItemUI {

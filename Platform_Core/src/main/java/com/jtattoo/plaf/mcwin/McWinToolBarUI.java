@@ -30,6 +30,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class McWinToolBarUI.
+ *
  * @author Michael Hagen
  */
 public class McWinToolBarUI extends AbstractToolBarUI {

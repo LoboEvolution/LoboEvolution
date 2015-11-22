@@ -29,6 +29,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class FastToolBarUI.
+ *
  * @author Michael Hagen
  */
 public class FastToolBarUI extends AbstractToolBarUI {

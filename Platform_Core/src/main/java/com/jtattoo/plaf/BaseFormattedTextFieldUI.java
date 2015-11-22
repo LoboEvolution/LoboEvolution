@@ -33,11 +33,16 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicFormattedTextFieldUI;
 
 /**
+ * The Class BaseFormattedTextFieldUI.
+ *
  * @author Michael Hagen
  */
 public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 
+    /** The org border. */
     private Border orgBorder = null;
+    
+    /** The focus listener. */
     private FocusListener focusListener = null;
 
     public static ComponentUI createUI(JComponent c) {

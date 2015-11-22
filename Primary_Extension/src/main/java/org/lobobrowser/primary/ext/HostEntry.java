@@ -46,6 +46,8 @@ public class HostEntry {
 	}
 
 	/**
+	 * Gets the host.
+	 *
 	 * @return the host
 	 */
 	public String getHost() {
@@ -53,13 +55,18 @@ public class HostEntry {
 	}
 
 	/**
-	 * @param host the host to set
+	 * Sets the host.
+	 *
+	 * @param host
+	 *            the new host
 	 */
 	public void setHost(String host) {
 		this.host = host;
 	}
 
 	/**
+	 * Gets the timestamp.
+	 *
 	 * @return the timestamp
 	 */
 	public long getTimestamp() {
@@ -67,7 +74,10 @@ public class HostEntry {
 	}
 
 	/**
-	 * @param timestamp the timestamp to set
+	 * Sets the timestamp.
+	 *
+	 * @param timestamp
+	 *            the new timestamp
 	 */
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;

@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
 
 /**
+ * A factory for creating FastIcon objects.
+ *
  * @author Michael Hagen
  */
 public class FastIconFactory implements AbstractIconFactory {
 
+    /** The instance. */
     private static FastIconFactory instance = null;
 
     private FastIconFactory() {
     }
 
+    /** Gets the single instance of FastIconFactory.
+	 *
+	 * @return single instance of FastIconFactory
+	 */
     public static synchronized FastIconFactory getInstance() {
         if (instance == null) {
             instance = new FastIconFactory();

@@ -28,6 +28,8 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class MintTabbedPaneUI.
+ *
  * @author Michael Hagen
  */
 public class MintTabbedPaneUI extends BaseTabbedPaneUI {

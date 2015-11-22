@@ -29,7 +29,9 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTableUI;
 
 /**
- * @author  Michael Hagen
+ * The Class BaseTableUI.
+ *
+ * @author Michael Hagen
  */
 public class BaseTableUI extends BasicTableUI {
 

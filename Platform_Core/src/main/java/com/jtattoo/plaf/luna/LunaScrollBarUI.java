@@ -30,8 +30,9 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class LunaScrollBarUI.
  *
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class LunaScrollBarUI extends XPScrollBarUI {
 

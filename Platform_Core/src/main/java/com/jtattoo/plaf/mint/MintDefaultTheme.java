@@ -28,6 +28,9 @@ import com.jtattoo.plaf.ColorHelper;
 import java.awt.Color;
 import javax.swing.plaf.ColorUIResource;
 
+/**
+ * The Class MintDefaultTheme.
+ */
 public class MintDefaultTheme extends AbstractTheme {
 
     public MintDefaultTheme() {

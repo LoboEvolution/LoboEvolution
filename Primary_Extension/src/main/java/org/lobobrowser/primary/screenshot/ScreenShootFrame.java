@@ -43,9 +43,15 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * The Class ScreenShootFrame.
+ */
 public class ScreenShootFrame extends JFrame {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The image. */
 	private BufferedImage image;
 	
 	/** The Constant logger. */

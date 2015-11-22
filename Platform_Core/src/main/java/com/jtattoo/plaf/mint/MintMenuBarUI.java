@@ -31,6 +31,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicMenuBarUI;
 
 /**
+ * The Class MintMenuBarUI.
+ *
  * @author Michael Hagen
  */
 public class MintMenuBarUI extends BasicMenuBarUI {

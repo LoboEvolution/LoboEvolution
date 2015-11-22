@@ -30,13 +30,13 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * The Class TextureTitlePane.
+ *
+ * @author Michael Hagen
  */
 public class TextureTitlePane extends BaseTitlePane {
     
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public TextureTitlePane(JRootPane root, BaseRootPaneUI ui) {

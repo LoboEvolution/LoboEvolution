@@ -32,10 +32,13 @@ import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.text.View;
 
 /**
+ * The Class HiFiRadioButtonUI.
+ *
  * @author Michael Hagen
  */
 public class HiFiRadioButtonUI extends BaseRadioButtonUI {
 
+    /** The radio button ui. */
     private static HiFiRadioButtonUI radioButtonUI = null;
 
     public static ComponentUI createUI(JComponent c) {

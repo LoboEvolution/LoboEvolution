@@ -27,10 +27,13 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class AluminiumCheckBoxUI.
+ *
  * @author Michael Hagen
  */
 public class AluminiumCheckBoxUI extends AluminiumRadioButtonUI {
 
+    /** The check box ui. */
     private static AluminiumCheckBoxUI checkBoxUI = null;
 
     public static ComponentUI createUI(JComponent b) {

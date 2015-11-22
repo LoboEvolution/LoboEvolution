@@ -31,27 +31,64 @@ import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class BaseBorders.
+ *
  * @author Michael Hagen
  */
 public class BaseBorders {
 
+    /** The button border. */
     protected static Border buttonBorder = null;
+    
+    /** The focus frame border. */
     protected static Border focusFrameBorder = null;
+    
+    /** The text field border. */
     protected static Border textFieldBorder = null;
+    
+    /** The spinner border. */
     protected static Border spinnerBorder = null;
+    
+    /** The combo box border. */
     protected static Border comboBoxBorder = null;
+    
+    /** The progress bar border. */
     protected static Border progressBarBorder = null;
+    
+    /** The table header border. */
     protected static Border tableHeaderBorder = null;
+    
+    /** The popup menu border. */
     protected static Border popupMenuBorder = null;
+    
+    /** The menu item border. */
     protected static Border menuItemBorder = null;
+    
+    /** The tool bar border. */
     protected static Border toolBarBorder = null;
+    
+    /** The tool button border. */
     protected static Border toolButtonBorder = null;
+    
+    /** The rollover tool button border. */
     protected static Border rolloverToolButtonBorder = null;
+    
+    /** The internal frame border. */
     protected static Border internalFrameBorder = null;
+    
+    /** The palette border. */
     protected static Border paletteBorder = null;
+    
+    /** The scroll pane border. */
     protected static Border scrollPaneBorder = null;
+    
+    /** The table scroll pane border. */
     protected static Border tableScrollPaneBorder = null;
+    
+    /** The tabbed pane border. */
     protected static Border tabbedPaneBorder = null;
+    
+    /** The desktop icon border. */
     protected static Border desktopIconBorder = null;
 
     public static void initDefaults() {
@@ -76,6 +113,10 @@ public class BaseBorders {
 
     //------------------------------------------------------------------------------------
     // Lazy access methods
+    /** Gets the focus frame border.
+	 *
+	 * @return the focus frame border
+	 */
     //------------------------------------------------------------------------------------
     public static Border getFocusFrameBorder() {
         if (focusFrameBorder == null) {
@@ -86,6 +127,10 @@ public class BaseBorders {
 
     //------------------------------------------------------------------------------------
     // Lazy access methods
+    /** Gets the text border.
+	 *
+	 * @return the text border
+	 */
     //------------------------------------------------------------------------------------
     public static Border getTextBorder() {
         if (textFieldBorder == null) {
@@ -94,6 +139,10 @@ public class BaseBorders {
         return textFieldBorder;
     }
 
+    /** Gets the spinner border.
+	 *
+	 * @return the spinner border
+	 */
     public static Border getSpinnerBorder() {
         if (spinnerBorder == null) {
             spinnerBorder = new SpinnerBorder();
@@ -101,10 +150,18 @@ public class BaseBorders {
         return spinnerBorder;
     }
 
+    /** Gets the text field border.
+	 *
+	 * @return the text field border
+	 */
     public static Border getTextFieldBorder() {
         return getTextBorder();
     }
 
+    /** Gets the combo box border.
+	 *
+	 * @return the combo box border
+	 */
     public static Border getComboBoxBorder() {
         if (comboBoxBorder == null) {
             comboBoxBorder = new ComboBoxBorder();
@@ -112,6 +169,10 @@ public class BaseBorders {
         return comboBoxBorder;
     }
 
+    /** Gets the progress bar border.
+	 *
+	 * @return the progress bar border
+	 */
     public static Border getProgressBarBorder() {
         if (progressBarBorder == null) {
             progressBarBorder = BorderFactory.createLineBorder(ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 30));
@@ -119,6 +180,10 @@ public class BaseBorders {
         return progressBarBorder;
     }
 
+    /** Gets the table header border.
+	 *
+	 * @return the table header border
+	 */
     public static Border getTableHeaderBorder() {
         if (tableHeaderBorder == null) {
             tableHeaderBorder = new TableHeaderBorder();
@@ -126,6 +191,10 @@ public class BaseBorders {
         return tableHeaderBorder;
     }
 
+    /** Gets the popup menu border.
+	 *
+	 * @return the popup menu border
+	 */
     public static Border getPopupMenuBorder() {
         if (popupMenuBorder == null) {
             if (AbstractLookAndFeel.getTheme().isMenuOpaque()) {
@@ -137,6 +206,10 @@ public class BaseBorders {
         return popupMenuBorder;
     }
 
+    /** Gets the menu item border.
+	 *
+	 * @return the menu item border
+	 */
     public static Border getMenuItemBorder() {
         if (menuItemBorder == null) {
             menuItemBorder = new MenuItemBorder();
@@ -144,6 +217,10 @@ public class BaseBorders {
         return menuItemBorder;
     }
 
+    /** Gets the tool bar border.
+	 *
+	 * @return the tool bar border
+	 */
     public static Border getToolBarBorder() {
         if (toolBarBorder == null) {
             toolBarBorder = new ToolBarBorder();
@@ -151,6 +228,10 @@ public class BaseBorders {
         return toolBarBorder;
     }
 
+    /** Gets the tool button border.
+	 *
+	 * @return the tool button border
+	 */
     public static Border getToolButtonBorder() {
         if (toolButtonBorder == null) {
             toolButtonBorder = new ToolButtonBorder();
@@ -158,10 +239,18 @@ public class BaseBorders {
         return toolButtonBorder;
     }
 
+    /** Gets the menu bar border.
+	 *
+	 * @return the menu bar border
+	 */
     public static Border getMenuBarBorder() {
         return BorderFactory.createEmptyBorder(1, 1, 1, 1);
     }
 
+    /** Gets the palette border.
+	 *
+	 * @return the palette border
+	 */
     public static Border getPaletteBorder() {
         if (paletteBorder == null) {
             paletteBorder = new PaletteBorder();
@@ -169,6 +258,10 @@ public class BaseBorders {
         return paletteBorder;
     }
 
+    /** Gets the scroll pane border.
+	 *
+	 * @return the scroll pane border
+	 */
     public static Border getScrollPaneBorder() {
         if (scrollPaneBorder == null) {
             scrollPaneBorder = new ScrollPaneBorder(false);
@@ -176,6 +269,10 @@ public class BaseBorders {
         return scrollPaneBorder;
     }
 
+    /** Gets the table scroll pane border.
+	 *
+	 * @return the table scroll pane border
+	 */
     public static Border getTableScrollPaneBorder() {
         if (tableScrollPaneBorder == null) {
             tableScrollPaneBorder = new ScrollPaneBorder(true);
@@ -183,6 +280,10 @@ public class BaseBorders {
         return tableScrollPaneBorder;
     }
 
+    /** Gets the tabbed pane border.
+	 *
+	 * @return the tabbed pane border
+	 */
     public static Border getTabbedPaneBorder() {
         if (tabbedPaneBorder == null) {
             tabbedPaneBorder = BorderFactory.createEmptyBorder(1, 1, 1, 1);
@@ -190,6 +291,10 @@ public class BaseBorders {
         return tabbedPaneBorder;
     }
 
+    /** Gets the desktop icon border.
+	 *
+	 * @return the desktop icon border
+	 */
     public static Border getDesktopIconBorder() {
         if (desktopIconBorder == null) {
             desktopIconBorder = new BorderUIResource.CompoundBorderUIResource(
@@ -201,13 +306,15 @@ public class BaseBorders {
 
     //------------------------------------------------------------------------------------
     // Implementation of border classes
+    /** The Class FocusFrameBorder.
+	 */
     //------------------------------------------------------------------------------------
     public static class FocusFrameBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant insets. */
 		private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
@@ -233,12 +340,14 @@ public class BaseBorders {
 
     } // class FocusFrameBorder
 
+    /** The Class TextFieldBorder.
+	 */
     public static class TextFieldBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant insets. */
 		private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
@@ -260,12 +369,14 @@ public class BaseBorders {
 
     } // class TextFieldBorder
 
+    /** The Class SpinnerBorder.
+	 */
     public static class SpinnerBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant insets. */
 		private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
@@ -287,12 +398,14 @@ public class BaseBorders {
 
     } // class SpinnerBorder
 
+    /** The Class ComboBoxBorder.
+	 */
     public static class ComboBoxBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant insets. */
 		private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
@@ -314,12 +427,14 @@ public class BaseBorders {
 
     } // class ComboBoxBorder
 
+    /** The Class TableHeaderBorder.
+	 */
     public static class TableHeaderBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant insets. */
 		private static final Insets insets = new Insets(2, 2, 2, 0);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -347,15 +462,20 @@ public class BaseBorders {
 
     } // class TableHeaderBorder
 
+    /** The Class ScrollPaneBorder.
+	 */
     public static class ScrollPaneBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant insets. */
 		private static final Insets insets = new Insets(2, 2, 2, 2);
+        
+        /** The Constant tableInsets. */
         private static final Insets tableInsets = new Insets(1, 1, 1, 1);
         
+        /** The table border. */
         private boolean tableBorder = false;
 
         public ScrollPaneBorder(boolean tableBorder) {
@@ -388,16 +508,26 @@ public class BaseBorders {
 
     } // class ScrollPaneBorder
 
+    /** The Class BasePopupMenuBorder.
+	 */
     public static class BasePopupMenuBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The logo font. */
 		protected static Font logoFont;
+        
+        /** The left logo insets. */
         protected static Insets leftLogoInsets;
+        
+        /** The right logo insets. */
         protected static Insets rightLogoInsets;
+        
+        /** The insets. */
         protected static Insets insets;
+        
+        /** The shadow size. */
         protected static int shadowSize;
 
         public BasePopupMenuBorder() {
@@ -423,10 +553,18 @@ public class BaseBorders {
             return ((AbstractLookAndFeel.getTheme().getLogoString() != null) && (AbstractLookAndFeel.getTheme().getLogoString().length() > 0));
         }
 
+        /** Gets the logo color hi.
+		 *
+		 * @return the logo color hi
+		 */
         public Color getLogoColorHi() {
             return Color.white;
         }
         
+        /** Gets the logo color lo.
+		 *
+		 * @return the logo color lo
+		 */
         public Color getLogoColorLo() {
             return ColorHelper.darker(AbstractLookAndFeel.getTheme().getMenuSelectionBackgroundColor(), 20);
         }
@@ -546,11 +684,11 @@ public class BaseBorders {
 
     } // class PopupMenuBorder
 
+    /** The Class BasePopupMenuShadowBorder.
+	 */
     public static class BasePopupMenuShadowBorder extends BasePopupMenuBorder {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public BasePopupMenuShadowBorder() {
@@ -633,12 +771,14 @@ public class BaseBorders {
         
     } // class PopupMenuShadowBorder
 
+    /** The Class MenuItemBorder.
+	 */
     public static class MenuItemBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant insets. */
 		private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -681,12 +821,14 @@ public class BaseBorders {
 
     } // class MenuItemBorder
 
+    /** The Class ToolBarBorder.
+	 */
     public static class ToolBarBorder extends AbstractBorder implements UIResource, SwingConstants {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant shadow. */
 		private static final Color shadow = new Color(160, 160, 160);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -756,8 +898,11 @@ public class BaseBorders {
 
     } // class ToolBarBorder
 
+    /** The Class ToolButtonBorder.
+	 */
     public static class ToolButtonBorder implements Border, UIResource {
 
+        /** The Constant insets. */
         private static final Insets insets = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -792,12 +937,14 @@ public class BaseBorders {
         }
     } // class ToolButtonBorder
 
+    /** The Class PaletteBorder.
+	 */
     public static class PaletteBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant insets. */
 		private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -823,15 +970,23 @@ public class BaseBorders {
 
     } // class PaletteBorder
 
+    /** The Class BaseInternalFrameBorder.
+	 */
     public static class BaseInternalFrameBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The dw. */
 		protected final int dw = 5;
+        
+        /** The track width. */
         protected final int trackWidth = 22;
+        
+        /** The insets. */
         protected final Insets insets = new Insets(dw, dw, dw, dw);
+        
+        /** The palette insets. */
         protected final Insets paletteInsets = new Insets(3, 3, 3, 3);
 
         public BaseInternalFrameBorder() {
@@ -919,12 +1074,14 @@ public class BaseBorders {
 
     } // class BaseInternalFrameBorder
 
+    /** The Class Down3DBorder.
+	 */
     public static class Down3DBorder extends AbstractBorder implements UIResource {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The Constant insets. */
 		private static final Insets insets = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {

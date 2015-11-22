@@ -34,6 +34,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class AcrylButtonUI.
+ *
  * @author Michael Hagen
  */
 public class AcrylButtonUI extends BaseButtonUI {

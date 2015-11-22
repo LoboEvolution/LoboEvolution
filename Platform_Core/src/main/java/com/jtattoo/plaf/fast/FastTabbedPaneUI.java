@@ -30,7 +30,7 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 
 /**
- * author Michael Hagen
+ * author Michael Hagen.
  */
 public class FastTabbedPaneUI extends BaseTabbedPaneUI {
 

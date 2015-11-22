@@ -30,10 +30,13 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class McWinPanelUI.
+ *
  * @author Michael Hagen
  */
 public class McWinPanelUI extends BasePanelUI {
 
+    /** The panel ui. */
     private static McWinPanelUI panelUI = null;
 
     public static ComponentUI createUI(JComponent c) {

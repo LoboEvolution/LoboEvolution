@@ -37,44 +37,73 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicRootPaneUI;
 
 /**
- * This source is a modified copy of javax.swing.plaf.metal.MetalRootPaneUI Provides the base look and feel
- * implementation of <code>RootPaneUI</code>.
+ * This source is a modified copy of javax.swing.plaf.metal.MetalRootPaneUI
+ * Provides the base look and feel implementation of <code>RootPaneUI</code>.
  * <p>
- * <code>BaseRootPaneUI</code> provides support for the <code>windowDecorationStyle</code> property of
- * <code>JRootPane</code>. <code>BaseRootPaneUI</code> does this by way of installing a custom
- * <code>LayoutManager</code>, a private <code>Component</code> to render the appropriate widgets, and a private
- * <code>Border</code>. The <code>LayoutManager</code> is always installed, regardless of the value of the
- * <code>windowDecorationStyle</code> property, but the <code>Border</code> and <code>Component</code> are only
- * installed/added if the <code>windowDecorationStyle</code> is other than <code>JRootPane.NONE</code>.
+ * <code>BaseRootPaneUI</code> provides support for the
+ * <code>windowDecorationStyle</code> property of <code>JRootPane</code>.
+ * <code>BaseRootPaneUI</code> does this by way of installing a custom
+ * <code>LayoutManager</code>, a private <code>Component</code> to render the
+ * appropriate widgets, and a private <code>Border</code>. The
+ * <code>LayoutManager</code> is always installed, regardless of the value of
+ * the <code>windowDecorationStyle</code> property, but the <code>Border</code>
+ * and <code>Component</code> are only installed/added if the
+ * <code>windowDecorationStyle</code> is other than <code>JRootPane.NONE</code>.
  * <p>
- * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with future Swing releases. The current serialization support
- * is appropriate for short term storage or RMI between applications running the same version of Swing. As of 1.4,
- * support for long term storage of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
+ * <strong>Warning:</strong> Serialized objects of this class will not be
+ * compatible with future Swing releases. The current serialization support is
+ * appropriate for short term storage or RMI between applications running the
+ * same version of Swing. As of 1.4, support for long term storage of all
+ * JavaBeans<sup><font size="-2">TM</font></sup> has been added to the
+ * <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
- * @version 1.20 04/27/04
  * @author Terry Kellerman
  * @author Michael Hagen
+ * @version 1.20 04/27/04
  * @since 1.4
  */
 public class BaseRootPaneUI extends BasicRootPaneUI {
 
     // Konstanten aus javax.swing.JRootPane damit Attribute aus Java 1.4 sich mit Java 1.3 uebersetzen lassen
 
+    /** The Constant NONE. */
     public static final int NONE = 0;
+    
+    /** The Constant FRAME. */
     public static final int FRAME = 1;
+    
+    /** The Constant PLAIN_DIALOG. */
     public static final int PLAIN_DIALOG = 2;
+    
+    /** The Constant INFORMATION_DIALOG. */
     public static final int INFORMATION_DIALOG = 3;
+    
+    /** The Constant ERROR_DIALOG. */
     public static final int ERROR_DIALOG = 4;
+    
+    /** The Constant COLOR_CHOOSER_DIALOG. */
     public static final int COLOR_CHOOSER_DIALOG = 5;
+    
+    /** The Constant FILE_CHOOSER_DIALOG. */
     public static final int FILE_CHOOSER_DIALOG = 6;
+    
+    /** The Constant QUESTION_DIALOG. */
     public static final int QUESTION_DIALOG = 7;
+    
+    /** The Constant WARNING_DIALOG. */
     public static final int WARNING_DIALOG = 8;
+    
+    /** The Constant MAXIMIZED_HORIZ. */
     // Konstanten aus java.awt.Frame damit Attribute aus Java 1.4 sich mit Java 1.3 uebersetzen lassen
     public static final int MAXIMIZED_HORIZ = 2;
+    
+    /** The Constant MAXIMIZED_VERT. */
     public static final int MAXIMIZED_VERT = 4;
+    
+    /** The Constant MAXIMIZED_BOTH. */
     public static final int MAXIMIZED_BOTH = MAXIMIZED_VERT | MAXIMIZED_HORIZ;
+    
+    /** The Constant borderKeys. */
     private static final String[] borderKeys = new String[]{
         null,
         "RootPane.frameBorder",
@@ -86,10 +115,11 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         "RootPane.questionDialogBorder",
         "RootPane.warningDialogBorder"
     };
-    /**
-     * The minimum/maximum size of a Window
-     */
+    
+    /** The minimum/maximum size of a Window. */
     private static final Dimension MINIMUM_SIZE = new Dimension(120, 80);
+    
+    /** The Constant MAXIMUM_SIZE. */
     private static final Dimension MAXIMUM_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
     /**
      * The amount of space (in pixels) that the cursor is changed on.
@@ -135,6 +165,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
      */
     private JRootPane root;
 
+    /** The saved cursor. */
     private Cursor savedCursor = null;
 
     /**
@@ -386,13 +417,10 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         this.titlePane = titlePane;
     }
 
-    /**
-     * Returns the <code>BaseTitlePane</code> rendering the title pane. If this returns null, it implies there is no need
-     * to render window decorations.
-     *
-     * @return the current window title pane, or null
-     * @see #setTitlePane
-     */
+    /** Gets the <code>JComponent</code> providing window decorations.
+	 *
+	 * @return the <code>JComponent</code> providing window decorations
+	 */
     public BaseTitlePane getTitlePane() {
         if (titlePane instanceof BaseTitlePane) {
             return (BaseTitlePane)titlePane;
@@ -404,6 +432,10 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         return titlePane;
     }
     
+    /** Gets the root pane.
+	 *
+	 * @return the root pane
+	 */
     public JRootPane getRootPane() {
         return root;
     }
@@ -446,10 +478,17 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         }
     }
 
+    /** Checks if is dynamic layout.
+	 *
+	 * @return true, if is dynamic layout
+	 */
     private boolean isDynamicLayout() {
         return AbstractLookAndFeel.getTheme().isDynamicLayout();
     }
 
+/**
+ * The Class BaseRootLayout.
+ */
 //------------------------------------------------------------------------------    
     private static class BaseRootLayout implements LayoutManager2 {
 
@@ -639,7 +678,11 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
          * Height of the window when the drag started.
          */
         private int dragHeight;
+        
+        /** The saved content pane. */
         private Container savedContentPane = null;
+        
+        /** The resizing panel. */
         private ResizingPanel resizingPanel = null;
 
         public void mousePressed(MouseEvent ev) {
@@ -818,6 +861,10 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
             }
         }
 
+        /** Gets the min screen y.
+		 *
+		 * @return the min screen y
+		 */
         private int getMinScreenY() {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             GraphicsDevice devices[] = ge.getScreenDevices();
@@ -978,13 +1025,16 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         }
     }
 
+/**
+ * The Class ResizingPanel.
+ */
 //------------------------------------------------------------------------------    
     private static class ResizingPanel extends JPanel {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The bi. */
 		private BufferedImage bi = null;
 
         public ResizingPanel(BufferedImage bi) {

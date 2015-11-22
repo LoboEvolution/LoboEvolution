@@ -31,6 +31,9 @@ import javax.swing.JToolBar;
 import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
+/**
+ * The Class SmartToolBarUI.
+ */
 public class SmartToolBarUI extends AbstractToolBarUI {
 
     public static ComponentUI createUI(JComponent c) {

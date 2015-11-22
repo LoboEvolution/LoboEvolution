@@ -31,6 +31,8 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class SmartToggleButtonUI.
+ *
  * @author Michael Hagen
  */
 public class SmartToggleButtonUI extends BaseToggleButtonUI {

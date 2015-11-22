@@ -31,6 +31,8 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 
 /**
+ * The Class HiFiDefaultTheme.
+ *
  * @author Michael Hagen
  */
 public class HiFiDefaultTheme extends AbstractTheme {

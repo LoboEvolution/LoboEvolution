@@ -33,6 +33,8 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
+ * The Class MintToggleButtonUI.
+ *
  * @author Michael Hagen
  */
 public class MintToggleButtonUI extends BaseToggleButtonUI {

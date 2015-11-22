@@ -55,42 +55,57 @@ public class CacheInfo {
     }
 
 	/**
-	 * @return the approximateSize
+	 * Gets the approximate size.
+	 *
+	 * @return the approximate size
 	 */
 	public long getApproximateSize() {
 		return approximateSize;
 	}
 
 	/**
-	 * @param approximateSize the approximateSize to set
+	 * Sets the approximate size.
+	 *
+	 * @param approximateSize
+	 *            the new approximate size
 	 */
 	public void setApproximateSize(long approximateSize) {
 		this.approximateSize = approximateSize;
 	}
 
 	/**
-	 * @return the numEntries
+	 * Gets the num entries.
+	 *
+	 * @return the num entries
 	 */
 	public int getNumEntries() {
 		return numEntries;
 	}
 
 	/**
-	 * @param numEntries the numEntries to set
+	 * Sets the num entries.
+	 *
+	 * @param numEntries
+	 *            the new num entries
 	 */
 	public void setNumEntries(int numEntries) {
 		this.numEntries = numEntries;
 	}
 
 	/**
-	 * @return the entryInfoList
+	 * Gets the entry info list.
+	 *
+	 * @return the entry info list
 	 */
 	public java.util.List getEntryInfoList() {
 		return entryInfoList;
 	}
 
 	/**
-	 * @param entryInfoList the entryInfoList to set
+	 * Sets the entry info list.
+	 *
+	 * @param entryInfoList
+	 *            the new entry info list
 	 */
 	public void setEntryInfoList(java.util.List entryInfoList) {
 		this.entryInfoList = entryInfoList;

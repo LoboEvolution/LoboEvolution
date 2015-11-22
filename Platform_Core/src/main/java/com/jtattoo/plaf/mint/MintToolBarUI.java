@@ -30,6 +30,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class MintToolBarUI.
+ *
  * @author Michael Hagen
  */
 public class MintToolBarUI extends AbstractToolBarUI {

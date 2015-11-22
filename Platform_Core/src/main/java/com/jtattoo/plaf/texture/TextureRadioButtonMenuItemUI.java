@@ -30,6 +30,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class TextureRadioButtonMenuItemUI.
+ *
  * @author Michael Hagen
  */
 public class TextureRadioButtonMenuItemUI extends BaseRadioButtonMenuItemUI {

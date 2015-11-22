@@ -29,13 +29,13 @@ import java.awt.Graphics;
 import javax.swing.*;
 
 /**
+ * The Class AeroInternalFrameTitlePane.
+ *
  * @author Michael Hagen
  */
 public class AeroInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	public AeroInternalFrameTitlePane(JInternalFrame f) {
@@ -88,12 +88,13 @@ public class AeroInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         }
     }
 
+/**
+ * The Class TitleButton.
+ */
 //------------------------------------------------------------------------------
     private class TitleButton extends BaseTitleButton {
 
-        /**
-		 * 
-		 */
+        /** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		public TitleButton(Action action, String accessibleName, Icon icon) {

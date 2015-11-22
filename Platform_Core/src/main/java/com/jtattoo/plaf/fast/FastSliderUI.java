@@ -29,11 +29,16 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class FastSliderUI.
+ *
  * @author Michael Hagen
  */
 public class FastSliderUI extends BaseSliderUI {
 
+    /** The thumb hor icon. */
     private static ThumbHorIcon thumbHorIcon = new ThumbHorIcon();
+    
+    /** The thumb ver icon. */
     private static ThumbVerIcon thumbVerIcon = new ThumbVerIcon();
 
     public FastSliderUI(JSlider slider) {
@@ -141,9 +146,14 @@ public class FastSliderUI extends BaseSliderUI {
         g.translate(-trackRect.x, -trackRect.y);
     }
 
+    /** The Class ThumbHorIcon.
+	 */
     private static class ThumbHorIcon implements Icon {
 
+        /** The Constant WIDTH. */
         private static final int WIDTH = 11;
+        
+        /** The Constant HEIGHT. */
         private static final int HEIGHT = 18;
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -177,9 +187,14 @@ public class FastSliderUI extends BaseSliderUI {
         }
     }
 
+    /** The Class ThumbVerIcon.
+	 */
     private static class ThumbVerIcon implements Icon {
 
+        /** The Constant WIDTH. */
         private static final int WIDTH = 18;
+        
+        /** The Constant HEIGHT. */
         private static final int HEIGHT = 11;
 
         public void paintIcon(Component c, Graphics g, int x, int y) {

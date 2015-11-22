@@ -31,10 +31,13 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class McWinRadioButtonUI.
+ *
  * @author Michael Hagen
  */
 public class McWinRadioButtonUI extends BaseRadioButtonUI {
 
+    /** The radio button ui. */
     private static McWinRadioButtonUI radioButtonUI = null;
 
     public static ComponentUI createUI(JComponent c) {

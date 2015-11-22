@@ -30,6 +30,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class AluminiumToolBarUI.
+ *
  * @author Michael Hagen
  */
 public class AluminiumToolBarUI extends AbstractToolBarUI {

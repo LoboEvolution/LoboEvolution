@@ -30,6 +30,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicDesktopPaneUI;
 
 /**
+ * The Class BaseDesktopPaneUI.
+ *
  * @author Michael Hagen
  */
 public class BaseDesktopPaneUI extends BasicDesktopPaneUI {

@@ -61,6 +61,8 @@ public class ExportableFloat {
 	}
 
 	/**
+	 * Gets the element.
+	 *
 	 * @return the element
 	 */
 	public BoundableRenderable getElement() {
@@ -68,49 +70,67 @@ public class ExportableFloat {
 	}
 
 	/**
-	 * @param element the element to set
+	 * Sets the element.
+	 *
+	 * @param element
+	 *            the new element
 	 */
 	public void setElement(BoundableRenderable element) {
 		this.element = element;
 	}
 
 	/**
-	 * @return the leftFloat
+	 * Checks if is left float.
+	 *
+	 * @return the left float
 	 */
 	public boolean isLeftFloat() {
 		return leftFloat;
 	}
 
 	/**
-	 * @param leftFloat the leftFloat to set
+	 * Sets the left float.
+	 *
+	 * @param leftFloat
+	 *            the new left float
 	 */
 	public void setLeftFloat(boolean leftFloat) {
 		this.leftFloat = leftFloat;
 	}
 
 	/**
-	 * @return the origX
+	 * Gets the orig x.
+	 *
+	 * @return the orig x
 	 */
 	public int getOrigX() {
 		return origX;
 	}
 
 	/**
-	 * @param origX the origX to set
+	 * Sets the orig x.
+	 *
+	 * @param origX
+	 *            the new orig x
 	 */
 	public void setOrigX(int origX) {
 		this.origX = origX;
 	}
 
 	/**
-	 * @return the origY
+	 * Gets the orig y.
+	 *
+	 * @return the orig y
 	 */
 	public int getOrigY() {
 		return origY;
 	}
 
 	/**
-	 * @param origY the origY to set
+	 * Sets the orig y.
+	 *
+	 * @param origY
+	 *            the new orig y
 	 */
 	public void setOrigY(int origY) {
 		this.origY = origY;

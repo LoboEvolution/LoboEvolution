@@ -33,6 +33,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 
 /**
+ * The Class HiFiButtonUI.
+ *
  * @author Michael Hagen
  */
 public class HiFiButtonUI extends BaseButtonUI {

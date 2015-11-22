@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import javax.swing.border.Border;
 
 /**
+ * A factory for creating MintBorder objects.
+ *
  * @author Michael Hagen
  */
 public class MintBorderFactory implements AbstractBorderFactory {
 
+    /** The instance. */
     private static MintBorderFactory instance = null;
 
     private MintBorderFactory() {
     }
 
+    /** Gets the single instance of MintBorderFactory.
+	 *
+	 * @return single instance of MintBorderFactory
+	 */
     public static synchronized MintBorderFactory getInstance() {
         if (instance == null) {
             instance = new MintBorderFactory();

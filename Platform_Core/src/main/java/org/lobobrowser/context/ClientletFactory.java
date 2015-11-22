@@ -45,7 +45,7 @@ public class ClientletFactory {
         this.addClientletSelector(new CoreClientletSelector());
     }
 
-    /** Gets the instance.
+     /** Gets the instance.
 	 *
 	 * @return the instance
 	 */

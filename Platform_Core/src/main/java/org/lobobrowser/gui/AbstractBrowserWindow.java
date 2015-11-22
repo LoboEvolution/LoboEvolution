@@ -51,7 +51,7 @@ BrowserWindow {
     /** The bounds assigned. */
     private boolean boundsAssigned;
 
-    /** Checks if is bounds assigned.
+     /** Checks if is bounds assigned.
 	 *
 	 * @return the bounds assigned
 	 */
@@ -59,7 +59,7 @@ BrowserWindow {
         return boundsAssigned;
     }
 
-    /** Sets the bounds assigned.
+     /** Sets the bounds assigned.
 	 *
 	 * @param boundsAssigned
 	 *            the new bounds assigned

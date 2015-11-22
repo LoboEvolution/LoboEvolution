@@ -303,7 +303,9 @@ public class ComponentSource implements NavigatorWindowListener {
 	}
 	
 	/**
-	 * Populate chronology
+	 * Gets the chronology menu.
+	 *
+	 * @return the chronology menu
 	 */
 	public JMenu getChronologyMenu() {
 		JMenu menu = new JMenu("Recent Hosts");

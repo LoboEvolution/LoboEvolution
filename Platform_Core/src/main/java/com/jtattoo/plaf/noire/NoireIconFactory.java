@@ -27,15 +27,22 @@ import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
 
 /**
+ * A factory for creating NoireIcon objects.
+ *
  * @author Michael Hagen
  */
 public class NoireIconFactory implements AbstractIconFactory {
 
+    /** The instance. */
     private static NoireIconFactory instance = null;
 
     private NoireIconFactory() {
     }
 
+    /** Gets the single instance of NoireIconFactory.
+	 *
+	 * @return single instance of NoireIconFactory
+	 */
     public static synchronized NoireIconFactory getInstance() {
         if (instance == null) {
             instance = new NoireIconFactory();

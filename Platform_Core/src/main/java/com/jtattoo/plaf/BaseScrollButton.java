@@ -28,14 +28,16 @@ import javax.swing.Icon;
 import javax.swing.plaf.basic.BasicArrowButton;
 
 /**
+ * The Class BaseScrollButton.
+ *
  * @author Michael Hagen
  */
 public class BaseScrollButton extends BasicArrowButton {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The button width. */
 	protected int buttonWidth = 24;
 
     public BaseScrollButton(int direction, int width) {
@@ -124,6 +126,10 @@ public class BaseScrollButton extends BasicArrowButton {
         return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
     }
 
+    /** Gets the button width.
+	 *
+	 * @return the button width
+	 */
     public int getButtonWidth() {
         return buttonWidth;
     }

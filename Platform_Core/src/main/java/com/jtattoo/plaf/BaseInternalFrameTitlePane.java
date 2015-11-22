@@ -48,18 +48,34 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
  */
 public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane implements ActionListener {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant PAINT_ACTIVE. */
 	public static final String PAINT_ACTIVE = "paintActive";
+    
+    /** The Constant ICONIFY. */
     public static final String ICONIFY = "Iconify";
+    
+    /** The Constant MAXIMIZE. */
     public static final String MAXIMIZE = "Maximize";
+    
+    /** The Constant CLOSE. */
     public static final String CLOSE = "Close";
+    
+    /** The is palette. */
     protected boolean isPalette = false;
+    
+    /** The palette close icon. */
     protected Icon paletteCloseIcon;
+    
+    /** The palette title height. */
     protected int paletteTitleHeight;
+    
+    /** The buttons width. */
     protected int buttonsWidth = 0;
+    
+    /** The custom title panel. */
     protected JPanel customTitlePanel;
 
     public BaseInternalFrameTitlePane(JInternalFrame f) {
@@ -80,6 +96,11 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         }
     }
 
+    /** Sets the customized title panel.
+	 *
+	 * @param panel
+	 *            the new customized title panel
+	 */
     public void setCustomizedTitlePanel(JPanel panel) {
         if (customTitlePanel != null) {
             remove(customTitlePanel);
@@ -133,10 +154,18 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         return new BaseTitlePaneLayout();
     }
 
+    /** Gets the hor spacing.
+	 *
+	 * @return the hor spacing
+	 */
     protected int getHorSpacing() {
         return 3;
     }
 
+    /** Gets the ver spacing.
+	 *
+	 * @return the ver spacing
+	 */
     protected int getVerSpacing() {
         return 3;
     }
@@ -151,18 +180,35 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
     public void deactivateFrame() {
     }
 
+    /** Checks if is mac style window decoration.
+	 *
+	 * @return true, if is mac style window decoration
+	 */
     protected boolean isMacStyleWindowDecoration() {
         return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn();
     }
 
+    /** Checks if is active.
+	 *
+	 * @return true, if is active
+	 */
     public boolean isActive() {
         return JTattooUtilities.isActive(this);
     }
 
+    /** Checks if is palette.
+	 *
+	 * @return true, if is palette
+	 */
     public boolean isPalette() {
         return isPalette;
     }
 
+    /** Sets the palette.
+	 *
+	 * @param b
+	 *            the new palette
+	 */
     public void setPalette(boolean b) {
         isPalette = b;
         if (isPalette) {
@@ -224,6 +270,10 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         return null;
     }
 
+    /** Gets the icon width.
+	 *
+	 * @return the icon width
+	 */
     protected int getIconWidth() {
         Image image = iconToImage(frame.getFrameIcon());
         if (image != null) {
@@ -347,6 +397,8 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         paintBorder(g);
     }
 
+    /** The Class BasePropertyChangeHandler.
+	 */
     class BasePropertyChangeHandler extends BasicInternalFrameTitlePane.PropertyChangeHandler {
 
         public void propertyChange(PropertyChangeEvent evt) {
@@ -369,6 +421,9 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 
 //------------------------------------------------------------------------------
 // inner classes
+/**
+ * The Class BaseTitlePaneLayout.
+ */
 //------------------------------------------------------------------------------
     class BaseTitlePaneLayout extends TitlePaneLayout {
 

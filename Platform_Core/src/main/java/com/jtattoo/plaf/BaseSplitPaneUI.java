@@ -31,10 +31,13 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 /**
+ * The Class BaseSplitPaneUI.
+ *
  * @author Michael Hagen
  */
 public class BaseSplitPaneUI extends BasicSplitPaneUI {
 
+    /** The my property change listener. */
     protected PropertyChangeListener myPropertyChangeListener = null;
     
     public static ComponentUI createUI(JComponent c) {

@@ -28,6 +28,8 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class AluminiumScrollPaneUI.
+ *
  * @author Michael Hagen
  */
 public class AluminiumScrollPaneUI extends BaseScrollPaneUI {

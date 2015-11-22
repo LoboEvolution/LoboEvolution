@@ -32,11 +32,16 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.metal.MetalToolTipUI;
 
 /**
+ * The Class BaseToolTipUI.
+ *
  * @author Michael Hagen, Daniel Raedel
  */
 public class BaseToolTipUI extends MetalToolTipUI {
 
+    /** The fancy layout. */
     private boolean fancyLayout = false;
+    
+    /** The popup window listener. */
     private ComponentListener popupWindowListener = null;
 
     public static ComponentUI createUI(JComponent c) {

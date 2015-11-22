@@ -31,10 +31,13 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class BernsteinRadioButtonUI.
+ *
  * @author Michael Hagen
  */
 public class BernsteinRadioButtonUI extends BaseRadioButtonUI {
 
+    /** The radio button ui. */
     private static BernsteinRadioButtonUI radioButtonUI = null;
 
     public static ComponentUI createUI(JComponent c) {

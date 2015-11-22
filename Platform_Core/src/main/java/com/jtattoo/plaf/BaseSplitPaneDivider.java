@@ -30,15 +30,19 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 /**
+ * The Class BaseSplitPaneDivider.
+ *
  * @author Michael Hagen
  */
 public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The center one touch buttons. */
 	protected boolean centerOneTouchButtons = true;
+    
+    /** The flat mode. */
     protected boolean flatMode = false;
 
     public BaseSplitPaneDivider(BasicSplitPaneUI ui) {
@@ -55,10 +59,19 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
         }
     }
 
+    /** Checks if is flat mode.
+	 *
+	 * @return true, if is flat mode
+	 */
     public boolean isFlatMode() {
         return flatMode;
     }
     
+    /** Sets the flat mode.
+	 *
+	 * @param flatMode
+	 *            the new flat mode
+	 */
     public void setFlatMode(boolean flatMode) {
         this.flatMode = flatMode;
     }
@@ -67,6 +80,10 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
         return null;
     }
 
+    /** Gets the rollover color.
+	 *
+	 * @return the rollover color
+	 */
     public Color getRolloverColor() {
         return ColorHelper.darker(AbstractLookAndFeel.getTheme().getRolloverColor(), 16);
     }

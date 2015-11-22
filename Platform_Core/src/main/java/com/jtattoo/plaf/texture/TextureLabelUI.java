@@ -31,10 +31,13 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicLabelUI;
 
 /**
+ * The Class TextureLabelUI.
+ *
  * @author Michael Hagen
  */
 public class TextureLabelUI extends BasicLabelUI {
 
+    /** The hifi label ui. */
     private static TextureLabelUI hifiLabelUI = null;
 
     public static ComponentUI createUI(JComponent c) {

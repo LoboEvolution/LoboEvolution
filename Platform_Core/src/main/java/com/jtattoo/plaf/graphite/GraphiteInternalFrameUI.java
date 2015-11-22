@@ -29,6 +29,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class GraphiteInternalFrameUI.
+ *
  * @author Michael Hagen
  */
 public class GraphiteInternalFrameUI extends BaseInternalFrameUI {

@@ -29,8 +29,9 @@ import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * The Class AcrylScrollBarUI.
  *
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class AcrylScrollBarUI extends BaseScrollBarUI {
 

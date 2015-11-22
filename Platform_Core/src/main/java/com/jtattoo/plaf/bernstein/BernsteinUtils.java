@@ -28,12 +28,19 @@ import java.awt.*;
 import javax.swing.Icon;
 
 /**
- * @author  Michael Hagen
+ * The Class BernsteinUtils.
+ *
+ * @author Michael Hagen
  */
 public class BernsteinUtils {
 
+    /** The Constant BG_IMAGE. */
     private static final Icon BG_IMAGE = new LazyImageIcon("bernstein/icons/background.jpg");
+    
+    /** The Constant IMAGE_WIDTH. */
     private static final int IMAGE_WIDTH = BG_IMAGE.getIconWidth();
+    
+    /** The Constant IMAGE_HEIGHT. */
     private static final int IMAGE_HEIGHT = BG_IMAGE.getIconHeight();
 
     private BernsteinUtils() {
