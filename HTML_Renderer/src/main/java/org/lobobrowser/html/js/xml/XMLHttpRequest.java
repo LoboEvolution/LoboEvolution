@@ -18,7 +18,7 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-package org.lobobrowser.html.js;
+package org.lobobrowser.html.js.xml;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -29,6 +29,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.ReadyState;
 import org.lobobrowser.http.UserAgentContext;

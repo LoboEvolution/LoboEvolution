@@ -474,20 +474,23 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		this.ucontext = ucontext;
 		this.reader = reader;
 		this.documentURI = documentURI;
-		try {
-			URL docURL = new URL(documentURI);
-			SecurityManager sm = System.getSecurityManager();
-			if (sm != null) {
-				// Do not allow creation of HTMLDocumentImpl if there's
-				// no permission to connect to the host of the URL.
-				// This is so that cookies cannot be written arbitrarily
-				// with setCookie() method.
-				sm.checkPermission(new SocketPermission(docURL.getHost(), "connect"));
+		
+		if (documentURI != null) {
+			try {
+				URL docURL = new URL(documentURI);
+				SecurityManager sm = System.getSecurityManager();
+				if (sm != null) {
+					// Do not allow creation of HTMLDocumentImpl if there's
+					// no permission to connect to the host of the URL.
+					// This is so that cookies cannot be written arbitrarily
+					// with setCookie() method.
+					sm.checkPermission(new SocketPermission(docURL.getHost(), "connect"));
+				}
+				this.documentURL = docURL;
+				this.domain = docURL.getHost();
+			} catch (MalformedURLException mfu) {
+				logger.warning("HTMLDocumentImpl(): Document URI [" + documentURI + "] is malformed.");
 			}
-			this.documentURL = docURL;
-			this.domain = docURL.getHost();
-		} catch (MalformedURLException mfu) {
-			logger.warning("HTMLDocumentImpl(): Document URI [" + documentURI + "] is malformed.");
 		}
 		this.document = this;
 		// Get Window object

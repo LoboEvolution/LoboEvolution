@@ -45,6 +45,7 @@ import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.domimpl.HTMLOptionElementImpl;
 import org.lobobrowser.html.domimpl.HTMLScriptElementImpl;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
+import org.lobobrowser.html.js.xml.XMLHttpRequest;
 import org.lobobrowser.html.jsimpl.ConsoleImpl;
 import org.lobobrowser.html.xpath.XPathResultImpl;
 import org.lobobrowser.http.UserAgentContext;
@@ -86,7 +87,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	private static final Map<HtmlRendererContext, WeakReference<Window>> CONTEXT_WINDOWS = new WeakHashMap<HtmlRendererContext, WeakReference<Window>>();
 
 	/** The Constant XMLHTTPREQUEST_WRAPPER. */
-	private static final JavaClassWrapper XMLHTTPREQUEST_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(XMLHttpRequest.class);
+	private static final JavaClassWrapper XMLHTTPREQUEST_WRAPPER = JavaClassWrapperFactory.getInstance()
+			.getClassWrapper(XMLHttpRequest.class);
+
+	/** The Constant XMLHTTPREQUEST_WRAPPER. */
+	private static final JavaClassWrapper DOMPARSER_WRAPPER = JavaClassWrapperFactory.getInstance()
+			.getClassWrapper(DOMParser.class);
 
 	/** The timer id counter. */
 	private static int timerIdCounter = 0;
@@ -360,23 +366,23 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	private void clearState() {
 		Context.enter();
-		try{
-		Scriptable s = this.getWindowScope();
-		if (s != null) {
-			Object[] ids = s.getIds();
-			for (int i = 0; i < ids.length; i++) {
-				Object id = ids[i];
-				if (id instanceof String) {
-					s.delete((String) id);
-				} else if (id instanceof Integer) {
-					s.delete(((Integer) id).intValue());
+		try {
+			Scriptable s = this.getWindowScope();
+			if (s != null) {
+				Object[] ids = s.getIds();
+				for (int i = 0; i < ids.length; i++) {
+					Object id = ids[i];
+					if (id instanceof String) {
+						s.delete((String) id);
+					} else if (id instanceof Integer) {
+						s.delete(((Integer) id).intValue());
+					}
 				}
 			}
-		}
-		} finally{
+		} finally {
 			Context.exit();
 		}
-		
+
 	}
 
 	/**
@@ -687,9 +693,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 *            the doc
 	 */
 	private void initWindowScope(final Document doc) {
-		// Special Javascript class: XMLHttpRequest
 		final Scriptable ws = this.getWindowScope();
-		JavaInstantiator xi = new JavaInstantiator() {
+		JavaInstantiator jiXhttp = new JavaInstantiator() {
 			@Override
 			public Object newInstance() {
 				Document d = doc;
@@ -706,8 +711,18 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				return new XMLHttpRequest(uaContext, hd.getDocumentURL(), ws);
 			}
 		};
-		Function xmlHttpRequestC = JavaObjectWrapper.getConstructor("XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, ws, xi);
+		
+		JavaInstantiator jiDomParser = new JavaInstantiator() {
+			@Override
+			public Object newInstance() {
+				return new DOMParser();
+			}
+		};
+		Function xmlHttpRequestC = JavaObjectWrapper.getConstructor("XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, ws, jiXhttp);
 		ScriptableObject.defineProperty(ws, "XMLHttpRequest", xmlHttpRequestC, ScriptableObject.READONLY);
+
+		Function domParser = JavaObjectWrapper.getConstructor("DOMParser", DOMPARSER_WRAPPER, ws, jiDomParser);
+		ScriptableObject.defineProperty(ws, "DOMParser", domParser, ScriptableObject.READONLY);
 
 		// HTML element classes
 		this.defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);

@@ -603,6 +603,7 @@ public class HtmlParser {
 						}
 						sb.append("</");
 						sb.append(tempBuffer);
+						sb.append(">");
 					} else if (ch == '!') {
 						final String nextSeven = readN(reader, 7);
 						if ("[CDATA[".equals(nextSeven)) {
