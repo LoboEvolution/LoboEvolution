@@ -46,6 +46,7 @@ import org.lobobrowser.html.domimpl.HTMLOptionElementImpl;
 import org.lobobrowser.html.domimpl.HTMLScriptElementImpl;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
 import org.lobobrowser.html.js.xml.XMLHttpRequest;
+import org.lobobrowser.html.js.xml.XMLSerializer;
 import org.lobobrowser.html.jsimpl.ConsoleImpl;
 import org.lobobrowser.html.xpath.XPathResultImpl;
 import org.lobobrowser.http.UserAgentContext;
@@ -90,10 +91,14 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	private static final JavaClassWrapper XMLHTTPREQUEST_WRAPPER = JavaClassWrapperFactory.getInstance()
 			.getClassWrapper(XMLHttpRequest.class);
 
-	/** The Constant XMLHTTPREQUEST_WRAPPER. */
+	/** The Constant DOMPARSER_WRAPPER. */
 	private static final JavaClassWrapper DOMPARSER_WRAPPER = JavaClassWrapperFactory.getInstance()
 			.getClassWrapper(DOMParser.class);
-
+	
+	/** The Constant XMLSERIALIZER_WRAPPER. */
+	private static final JavaClassWrapper XMLSERIALIZER_WRAPPER = JavaClassWrapperFactory.getInstance()
+			.getClassWrapper(XMLSerializer.class);
+	
 	/** The timer id counter. */
 	private static int timerIdCounter = 0;
 
@@ -718,11 +723,25 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				return new DOMParser();
 			}
 		};
+		
+		JavaInstantiator jiXMLSerializer = new JavaInstantiator() {
+			@Override
+			public Object newInstance() {
+				return new XMLSerializer();
+			}
+		};
+		
+		
 		Function xmlHttpRequestC = JavaObjectWrapper.getConstructor("XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, ws, jiXhttp);
 		ScriptableObject.defineProperty(ws, "XMLHttpRequest", xmlHttpRequestC, ScriptableObject.READONLY);
 
 		Function domParser = JavaObjectWrapper.getConstructor("DOMParser", DOMPARSER_WRAPPER, ws, jiDomParser);
 		ScriptableObject.defineProperty(ws, "DOMParser", domParser, ScriptableObject.READONLY);
+		
+		Function xmlserial = JavaObjectWrapper.getConstructor("XMLSerializer", XMLSERIALIZER_WRAPPER, ws, jiXMLSerializer);
+		ScriptableObject.defineProperty(ws, "XMLSerializer", xmlserial, ScriptableObject.READONLY);
+		
+		
 
 		// HTML element classes
 		this.defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);
