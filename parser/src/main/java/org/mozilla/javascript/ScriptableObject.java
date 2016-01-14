@@ -351,11 +351,7 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
      */
     private static class RelinkedSlot extends Slot {
 
-        /**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		final Slot slot;
+        final Slot slot;
 
         RelinkedSlot(Slot slot) {
             super(slot.name, slot.indexOrHash, slot.attributes);

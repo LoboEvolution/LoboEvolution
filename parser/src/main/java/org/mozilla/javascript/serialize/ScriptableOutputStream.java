@@ -175,6 +175,7 @@ public class ScriptableOutputStream extends ObjectOutputStream {
     @Override
     protected Object replaceObject(Object obj) throws IOException
     {
+        if (false) throw new IOException(); // suppress warning
         String name = table.get(obj);
         if (name == null)
             return obj;

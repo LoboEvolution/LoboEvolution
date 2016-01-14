@@ -6,9 +6,10 @@
 
 package org.mozilla.javascript;
 
-import org.mozilla.javascript.ast.FunctionNode;
-import org.mozilla.javascript.ast.Jump;
+import org.mozilla.javascript.ast.AstRoot;
 import org.mozilla.javascript.ast.ScriptNode;
+import org.mozilla.javascript.ast.Jump;
+import org.mozilla.javascript.ast.FunctionNode;
 
 /**
  * Generates bytecode for the Interpreter.

@@ -3924,6 +3924,9 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
         // reset the variable object local
         cfw.addALoad(savedVariableObject);
         cfw.addAStore(variableObjectLocal);
+
+        String exceptionName = exceptionTypeToName(exceptionType);
+
         cfw.add(ByteCode.GOTO, catchLabel);
     }
 
@@ -4015,6 +4018,7 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
          */
         void setHandlers(int[] handlerLabels, int startLabel)
         {
+            ExceptionInfo top = getTop();
             for (int i = 0; i < handlerLabels.length; i++) {
                 if (handlerLabels[i] != 0) {
                     addHandler(i, handlerLabels[i], startLabel);
@@ -4155,12 +4159,14 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
         {
             ExceptionInfo(Jump node, Node finallyBlock)
             {
+                this.node = node;
                 this.finallyBlock = finallyBlock;
                 handlerLabels = new int[EXCEPTION_MAX];
                 exceptionStarts = new int[EXCEPTION_MAX];
                 currentFinally = null;
             }
 
+            Jump node;
             Node finallyBlock;
             int[] handlerLabels;
             int[] exceptionStarts;
@@ -4474,6 +4480,9 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
                     cfw.add(ByteCode.DUP);
                 }
                 cfw.addAStore(reg);
+                if (post) {
+                    addDoubleWrap();
+                }
             }
             break;
           case Token.NAME:
