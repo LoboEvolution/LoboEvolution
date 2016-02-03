@@ -44,7 +44,7 @@ public class GeneratorExpressionLoop extends ForInLoop {
                 + (isForEach()?"each ":"")
                 + "("
                 + iterator.toSource(0)
-                + (isForOf()?" of ":" in ")
+                + " in "
                 + iteratedObject.toSource(0)
                 + ")";
     }

@@ -853,7 +853,7 @@ public final class Interpreter extends Icode implements Evaluator
                                              Scriptable scope, Object[] args)
     {
         if (!ScriptRuntime.hasTopCall(cx)) {
-            return ScriptRuntime.doTopCall(c, cx, scope, null, args, cx.isTopLevelStrict);
+            return ScriptRuntime.doTopCall(c, cx, scope, null, args);
         }
 
         Object arg;
@@ -1648,8 +1648,7 @@ switch (op) {
     }
     case Token.ENUM_INIT_KEYS :
     case Token.ENUM_INIT_VALUES :
-    case Token.ENUM_INIT_ARRAY :
-    case Token.ENUM_INIT_VALUES_IN_ORDER : {
+    case Token.ENUM_INIT_ARRAY : {
         Object lhs = stack[stackTop];
         if (lhs == DBL_MRK) lhs = ScriptRuntime.wrapNumber(sDbl[stackTop]);
         --stackTop;
@@ -1658,8 +1657,6 @@ switch (op) {
                          ? ScriptRuntime.ENUMERATE_KEYS :
                        op == Token.ENUM_INIT_VALUES
                          ? ScriptRuntime.ENUMERATE_VALUES :
-                       op == Token.ENUM_INIT_VALUES_IN_ORDER
-                         ? ScriptRuntime.ENUMERATE_VALUES_IN_ORDER :
                        ScriptRuntime.ENUMERATE_ARRAY;
         stack[indexReg] = ScriptRuntime.enumInit(lhs, cx, frame.scope, enumType);
         continue Loop;
@@ -1714,14 +1711,9 @@ switch (op) {
         stack[indexReg] = frame.scope;
         continue Loop;
     case Icode_CLOSURE_EXPR :
-        InterpretedFunction fn = InterpretedFunction.createFunction(cx, frame.scope,
-                                                                    frame.fnOrScript,
-                                                                    indexReg);
-        if (fn.idata.itsFunctionType == FunctionNode.ARROW_FUNCTION) {
-            stack[++stackTop] = new ArrowFunction(cx, frame.scope, fn, frame.thisObj);
-        } else {
-            stack[++stackTop] = fn;
-        }
+        stack[++stackTop] = InterpretedFunction.createFunction(cx, frame.scope,
+                                                               frame.fnOrScript,
+                                                               indexReg);
         continue Loop;
     case Icode_CLOSURE_STMT :
         initFunction(cx, frame.scope, frame.fnOrScript, indexReg);
@@ -2758,11 +2750,8 @@ switch (op) {
             scope = fnOrScript.getParentScope();
 
             if (useActivation) {
-                if (idata.itsFunctionType == FunctionNode.ARROW_FUNCTION) {
-                    scope = ScriptRuntime.createArrowFunctionActivation(fnOrScript, scope, args, idata.isStrict);
-                } else {
-                    scope = ScriptRuntime.createFunctionActivation(fnOrScript, scope, args, idata.isStrict);
-                }
+                scope = ScriptRuntime.createFunctionActivation(
+                            fnOrScript, scope, args);
             }
         } else {
             scope = callerScope;

@@ -362,13 +362,9 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
                 }
             }
             else if (to.isInterface()) {
-
-                if (fromObj instanceof NativeFunction) {
+                if (fromObj instanceof NativeObject || fromObj instanceof NativeFunction) {
                     // See comments in createInterfaceAdapter
                     return 1;
-                }
-                if (fromObj instanceof NativeObject) {
-                    return 2;
                 }
                 return 12;
             }

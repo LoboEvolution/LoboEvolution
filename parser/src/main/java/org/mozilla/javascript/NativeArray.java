@@ -18,9 +18,6 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import static org.mozilla.javascript.NativeSymbol.ITERATOR_PROPERTY;
-import static org.mozilla.javascript.ScriptRuntimeES6.requireObjectCoercible;
-
 /**
  * This class implements the Array native object.
  * @author Norris Boyd
@@ -189,7 +186,7 @@ public class NativeArray extends IdScriptableObject implements List
     @Override
     protected void initPrototypeId(int id)
     {
-        String s, fnName = null;
+        String s;
         int arity;
         switch (id) {
           case Id_constructor:    arity=1; s="constructor";    break;
@@ -217,11 +214,9 @@ public class NativeArray extends IdScriptableObject implements List
           case Id_findIndex:      arity=1; s="findIndex";      break;
           case Id_reduce:         arity=1; s="reduce";         break;
           case Id_reduceRight:    arity=1; s="reduceRight";    break;
-          case Id_iterator:       arity=0; s= ITERATOR_PROPERTY; fnName="[Symbol.iterator]"; break;
           default: throw new IllegalArgumentException(String.valueOf(id));
         }
-
-        initPrototypeMethod(ARRAY_TAG, id, s, fnName, arity);
+        initPrototypeMethod(ARRAY_TAG, id, s, arity);
     }
 
     @Override
@@ -332,15 +327,12 @@ public class NativeArray extends IdScriptableObject implements List
               case Id_some:
               case Id_find:
               case Id_findIndex:
-                return iterativeMethod(cx, f, scope, thisObj, args);
+                return iterativeMethod(cx, id, scope, thisObj, args);
               case Id_reduce:
               case Id_reduceRight:
                 return reduceMethod(cx, id, scope, thisObj, args);
-
-              case Id_iterator:
-                return new NativeArrayIterator(scope, thisObj);
             }
-            throw new IllegalArgumentException("Array.prototype has no method: " + f.getFunctionName());
+            throw new IllegalArgumentException(String.valueOf(id));
         }
     }
 
@@ -1601,24 +1593,14 @@ public class NativeArray extends IdScriptableObject implements List
     /**
      * Implements the methods "every", "filter", "forEach", "map", and "some".
      */
-    private static Object iterativeMethod(Context cx, IdFunctionObject idFunctionObject, Scriptable scope,
+    private static Object iterativeMethod(Context cx, int id, Scriptable scope,
                                           Scriptable thisObj, Object[] args)
     {
-        int id = idFunctionObject.methodId();
-
-        if (Id_find == id || Id_findIndex == id) thisObj = requireObjectCoercible(cx, thisObj, idFunctionObject);
-
         long length = getLengthProperty(cx, thisObj);
         Object callbackArg = args.length > 0 ? args[0] : Undefined.instance;
         if (callbackArg == null || !(callbackArg instanceof Function)) {
             throw ScriptRuntime.notFunctionError(callbackArg);
-        }
-        if (cx.getLanguageVersion() >= Context.VERSION_ES6 && (callbackArg instanceof NativeRegExp)) {
-            // Previously, it was allowed to pass RegExp instance as a callback (it implements Function)
-            // But according to ES2015 21.2.6 Properties of RegExp Instances:
-            // > RegExp instances are ordinary objects that inherit properties from the RegExp prototype object.
-            // > RegExp instances have internal slots [[RegExpMatcher]], [[OriginalSource]], and [[OriginalFlags]].
-            // so, no [[Call]] for RegExp-s
+        } else if ((id == Id_find || id == Id_findIndex) && !(callbackArg instanceof NativeFunction)) {
             throw ScriptRuntime.notFunctionError(callbackArg);
         }
 
@@ -1631,6 +1613,10 @@ public class NativeArray extends IdScriptableObject implements List
             thisArg = ScriptRuntime.toObject(cx, scope, args[1]);
         }
 
+        if ((Id_find == id || Id_findIndex == id) && thisArg == thisObj) {
+            throw ScriptRuntime.typeError("Array.prototype method called on null or undefined");
+        }
+
         Scriptable array = null;
         if (id == Id_filter || id == Id_map) {
             int resultLength = id == Id_map ? (int) length : 0;
@@ -1641,11 +1627,7 @@ public class NativeArray extends IdScriptableObject implements List
             Object[] innerArgs = new Object[3];
             Object elem = getRawElem(thisObj, i);
             if (elem == Scriptable.NOT_FOUND) {
-                if (id == Id_find || id == Id_findIndex) {
-                    elem = Undefined.instance;
-                } else {
-                    continue;
-                }
+                continue;
             }
             innerArgs[0] = elem;
             innerArgs[1] = Long.valueOf(i);
@@ -1671,9 +1653,9 @@ public class NativeArray extends IdScriptableObject implements List
                 break;
               case Id_find:
                 if (ScriptRuntime.toBoolean(result))
-                    return elem;
+                  return elem;
                 break;
-              case Id_findIndex:
+            case Id_findIndex:
                 if (ScriptRuntime.toBoolean(result))
                     return ScriptRuntime.wrapNumber(i);
                 break;
@@ -2000,7 +1982,6 @@ public class NativeArray extends IdScriptableObject implements List
                 else if (c=='t') { X="toString";id=Id_toString; }
                 break L;
             case 9: X="findIndex";id=Id_findIndex; break L;
-            case 10: X="@@iterator";id=Id_iterator; break L;
             case 11: c=s.charAt(0);
                 if (c=='c') { X="constructor";id=Id_constructor; }
                 else if (c=='l') { X="lastIndexOf";id=Id_lastIndexOf; }
@@ -2041,9 +2022,9 @@ public class NativeArray extends IdScriptableObject implements List
         Id_findIndex            = 23,
         Id_reduce               = 24,
         Id_reduceRight          = 25,
-        Id_iterator             = 26,
 
-        MAX_PROTOTYPE_ID        = 26;
+
+        MAX_PROTOTYPE_ID        = 25;
 
 // #/string_id_map#
 

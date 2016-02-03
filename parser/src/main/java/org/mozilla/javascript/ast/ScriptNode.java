@@ -36,7 +36,6 @@ public class ScriptNode extends Scope {
 
     private Object compilerData;
     private int tempNumber = 0;
-    private boolean inStrictMode;
 
     {
         // during parsing, a ScriptNode or FunctionNode's top scope is itself
@@ -304,14 +303,6 @@ public class ScriptNode extends Scope {
 
     public String getNextTempName() {
         return "$" + tempNumber++;
-    }
-
-    public void setInStrictMode(boolean inStrictMode) {
-        this.inStrictMode = inStrictMode;
-    }
-
-    public boolean isInStrictMode() {
-        return inStrictMode;
     }
 
     @Override

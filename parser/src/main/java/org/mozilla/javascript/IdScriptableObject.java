@@ -188,15 +188,7 @@ public abstract class IdScriptableObject extends ScriptableObject
         {
             ensureId(id);
             int attr = attributeArray[id - 1];
-            // non-configurable
-            if ((attr & PERMANENT) != 0) {
-                Context cx = Context.getContext();
-                if (cx.isStrictMode()) {
-                    int nameSlot = (id  - 1) * SLOT_SPAN + NAME_SLOT;
-                    String name = (String)valueArray[nameSlot];
-                    throw ScriptRuntime.typeError1("msg.delete.property.with.configurable.false", name);
-                }
-            } else {
+            if ((attr & PERMANENT) == 0) {
                 int valueSlot = (id  - 1) * SLOT_SPAN;
                 synchronized (this) {
                     valueArray[valueSlot] = NOT_FOUND;
@@ -402,13 +394,7 @@ public abstract class IdScriptableObject extends ScriptableObject
             // Let the super class to throw exceptions for sealed objects
             if (!isSealed()) {
                 int attr = (info >>> 16);
-                // non-configurable
-                if ((attr & PERMANENT) != 0) {
-                    Context cx = Context.getContext();
-                    if (cx.isStrictMode()) {
-                        throw ScriptRuntime.typeError1("msg.delete.property.with.configurable.false", name);
-                    }
-                } else {
+                if ((attr & PERMANENT) == 0) {
                     int id = (info & 0xFFFF);
                     setInstanceIdValue(id, NOT_FOUND);
                 }
@@ -625,21 +611,12 @@ public abstract class IdScriptableObject extends ScriptableObject
         }
     }
 
-    public final IdFunctionObject initPrototypeMethod(Object tag, int id, String name,
-                                          int arity)
-    {
-		return initPrototypeMethod(tag, id, name, name, arity);
-    }
-
-    public final IdFunctionObject initPrototypeMethod(Object tag, int id, String propertyName, String functionName,
+    public final void initPrototypeMethod(Object tag, int id, String name,
                                           int arity)
     {
         Scriptable scope = ScriptableObject.getTopLevelScope(this);
-        IdFunctionObject function = newIdFunction(tag, id,
-            functionName != null ? functionName : propertyName,
-            arity, scope);
-        prototypeValues.initValue(id, propertyName, function, DONTENUM);
-        return function;
+        IdFunctionObject f = newIdFunction(tag, id, name, arity, scope);
+        prototypeValues.initValue(id, name, f, DONTENUM);
     }
 
     public final void initPrototypeConstructor(IdFunctionObject f)
@@ -711,15 +688,10 @@ public abstract class IdScriptableObject extends ScriptableObject
     private IdFunctionObject newIdFunction(Object tag, int id, String name,
                                            int arity, Scriptable scope)
     {
-        IdFunctionObject function = null;
-        if (Context.getContext().getLanguageVersion() < Context.VERSION_ES6) {
-            function = new IdFunctionObject(this, tag, id, name, arity, scope);
-        } else {
-            function = new IdFunctionObjectES6(this, tag, id, name, arity, scope);
-        }
-
-        if (isSealed()) { function.sealObject(); }
-        return function;
+        IdFunctionObject f = new IdFunctionObject(this, tag, id, name, arity,
+                                                  scope);
+        if (isSealed()) { f.sealObject(); }
+        return f;
     }
 
     @Override
