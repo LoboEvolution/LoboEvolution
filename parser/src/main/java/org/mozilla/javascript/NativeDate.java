@@ -16,6 +16,9 @@ import java.util.TimeZone;
  * This class implements the Date native object.
  * See ECMA 15.9.
  * @author Mike McCabe
+ *
+ * Significant parts of this code are adapted from the venerable jsdate.cpp (also Mozilla):
+ * https://dxr.mozilla.org/mozilla-central/source/js/src/jsdate.cpp
  */
 final class NativeDate extends IdScriptableObject
 {
@@ -429,7 +432,7 @@ final class NativeDate extends IdScriptableObject
 
     private static int YearFromTime(double t)
     {
-       if (Double.isInfinite(t) || Double.isNaN(t)) {
+        if (Double.isInfinite(t) || Double.isNaN(t)) {
             return 0;
         }
 

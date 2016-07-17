@@ -19,6 +19,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -174,6 +176,10 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
 
         boolean setValue(Object value, Scriptable owner, Scriptable start) {
             if ((attributes & READONLY) != 0) {
+                Context cx = Context.getContext();
+                if (cx.isStrictMode()) {
+                    throw ScriptRuntime.typeError1("msg.modify.readonly", name);
+                }
                 return true;
             }
             if (owner == start) {
@@ -242,6 +248,9 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
             ScriptRuntime.setBuiltinProtoAndParent(desc, scope, TopLevel.Builtins.Object);
             desc.defineProperty("enumerable", (attr & DONTENUM) == 0, EMPTY);
             desc.defineProperty("configurable", (attr & PERMANENT) == 0, EMPTY);
+            if (getter == null && setter == null) {
+                desc.defineProperty("writable", (attr & READONLY) == 0, EMPTY);
+            }
             if (getter != null) desc.defineProperty("get", getter, EMPTY);
             if (setter != null) desc.defineProperty("set", setter, EMPTY);
             return desc;
@@ -251,9 +260,11 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
         boolean setValue(Object value, Scriptable owner, Scriptable start) {
             if (setter == null) {
                 if (getter != null) {
-                    if (Context.getContext().hasFeature(Context.FEATURE_STRICT_MODE)) {
+                    Context cx = Context.getContext();
+                    if (cx.isStrictMode() ||
                         // Based on TC39 ES3.1 Draft of 9-Feb-2009, 8.12.4, step 2,
                         // we should throw a TypeError in this case.
+                        cx.hasFeature(Context.FEATURE_STRICT_MODE)) {
                         throw ScriptRuntime.typeError1("msg.set.prop.no.setter", name);
                     }
                     // Assignment to a property with only a getter defined. The
@@ -2709,6 +2720,12 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
     {
         // This method is very hot (basically called on each assignment)
         // so we inline the extensible/sealed checks below.
+        if (!isExtensible) {
+            Context cx = Context.getContext();
+            if (cx.isStrictMode()) {
+                throw ScriptRuntime.typeError0("msg.not.extensible");
+            }
+        }
         Slot slot;
         if (this != start) {
             slot = getSlot(name, index, SLOT_QUERY);
@@ -2743,6 +2760,12 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
                                  Object value, int constFlag)
     {
         assert (constFlag != EMPTY);
+        if (!isExtensible) {
+            Context cx = Context.getContext();
+            if (cx.isStrictMode()) {
+                throw ScriptRuntime.typeError0("msg.not.extensible");
+            }
+        }
         Slot slot;
         if (this != start) {
             slot = getSlot(name, index, SLOT_QUERY);
@@ -2954,7 +2977,15 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
                 prev = slot;
                 slot = slot.next;
             }
-            if (slot != null && (slot.getAttributes() & PERMANENT) == 0) {
+            if (slot != null) {
+                // non-configurable
+                if ((slot.getAttributes() & PERMANENT) != 0) {
+                    Context cx = Context.getContext();
+                    if (cx.isStrictMode()) {
+                        throw ScriptRuntime.typeError1("msg.delete.property.with.configurable.false", name);
+                    }
+                    return;
+                }
                 count--;
                 // remove slot from hash table
                 if (prev == slot) {
@@ -3089,6 +3120,13 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
         }
         Object[] result = new Object[c];
         System.arraycopy(a, 0, result, 0, c);
+
+        Context cx = Context.getCurrentContext();
+        if ((cx != null) && cx.hasFeature(Context.FEATURE_ENUMERATE_IDS_FIRST)) {
+            // Move all the numeric IDs to the front in numeric order
+            Arrays.sort(result, KEY_COMPARATOR);
+        }
+
         return result;
     }
 
@@ -3207,4 +3245,38 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
         }
     }
 
+    private static final Comparator<Object> KEY_COMPARATOR = new KeyComparator();
+
+    /**
+     * This comparator sorts property fields in spec-compliant order. Numeric ids first, in numeric
+     * order, folowed by string ids, in insertion order. Since this class already keeps string keys
+     * in insertion-time order, we treat all as equal. The "Arrays.sort" method will then not
+     * change their order, but simply move all the numeric properties to the front.
+     */
+    private static final class KeyComparator
+        implements Comparator<Object>
+    {
+        @Override
+        public int compare(Object o1, Object o2)
+        {
+            if (o1 instanceof Integer) {
+                if (o2 instanceof Integer) {
+                    int i1 = (Integer) o1;
+                    int i2 = (Integer) o2;
+                    if (i1 < i2) {
+                        return -1;
+                    }
+                    if (i1 > i2) {
+                        return 1;
+                    }
+                    return 0;
+                }
+                return -1;
+            }
+            if (o2 instanceof Integer) {
+                return 1;
+            }
+            return 0;
+        }
+    }
 }

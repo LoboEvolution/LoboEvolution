@@ -71,10 +71,11 @@ class CodeGenerator extends Icode {
         } else {
             scriptOrFn = tree;
         }
+
         itsData = new InterpreterData(compilerEnv.getLanguageVersion(),
                                       scriptOrFn.getSourceName(),
                                       encodedSource,
-                                      ((AstRoot)tree).isInStrictMode());
+                                      scriptOrFn.isInStrictMode());
         itsData.topLevel = true;
 
         if (returnFunction) {
@@ -99,6 +100,9 @@ class CodeGenerator extends Icode {
         if (theFunction.isGenerator()) {
           addIcode(Icode_GENERATOR);
           addUint16(theFunction.getBaseLineno() & 0xFFFF);
+        }
+        if (theFunction.isInStrictMode()) {
+            itsData.isStrict = true;
         }
 
         generateICodeFromTree(theFunction.getLastChild());
@@ -475,6 +479,7 @@ class CodeGenerator extends Icode {
           case Token.ENUM_INIT_KEYS:
           case Token.ENUM_INIT_VALUES:
           case Token.ENUM_INIT_ARRAY:
+          case Token.ENUM_INIT_VALUES_IN_ORDER:
             visitExpression(child, 0);
             addIndexOp(type, getLocalBlockRef(node));
             stackChange(-1);
@@ -504,7 +509,8 @@ class CodeGenerator extends Icode {
                 int fnIndex = node.getExistingIntProp(Node.FUNCTION_PROP);
                 FunctionNode fn = scriptOrFn.getFunctionNode(fnIndex);
                 // See comments in visitStatement for Token.FUNCTION case
-                if (fn.getFunctionType() != FunctionNode.FUNCTION_EXPRESSION) {
+                if (fn.getFunctionType() != FunctionNode.FUNCTION_EXPRESSION &&
+                    fn.getFunctionType() != FunctionNode.ARROW_FUNCTION) {
                     throw Kit.codeBug();
                 }
                 addIndexOp(Icode_CLOSURE_EXPR, fnIndex);

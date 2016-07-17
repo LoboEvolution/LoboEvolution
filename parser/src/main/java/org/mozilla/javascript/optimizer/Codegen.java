@@ -264,6 +264,7 @@ public class Codegen implements Evaluator
     {
         boolean hasScript = (scriptOrFnNodes[0].getType() == Token.SCRIPT);
         boolean hasFunctions = (scriptOrFnNodes.length > 1 || !hasScript);
+        boolean isStrictMode = scriptOrFnNodes[0].isInStrictMode();
 
         String sourceFile = null;
         if (compilerEnv.isGenerateDebugInfo()) {
@@ -286,7 +287,7 @@ public class Codegen implements Evaluator
             generateExecute(cfw);
         }
 
-        generateCallMethod(cfw);
+        generateCallMethod(cfw, isStrictMode);
         generateResumeGenerator(cfw);
 
         generateNativeFunctionOverrides(cfw, encodedSource);
@@ -465,7 +466,7 @@ public class Codegen implements Evaluator
         cfw.stopMethod((short)6);
     }
 
-    private void generateCallMethod(ClassFileWriter cfw)
+    private void generateCallMethod(ClassFileWriter cfw, boolean isStrictMode)
     {
         cfw.startMethod("call",
                         "(Lorg/mozilla/javascript/Context;" +
@@ -492,6 +493,7 @@ public class Codegen implements Evaluator
         cfw.addALoad(2);
         cfw.addALoad(3);
         cfw.addALoad(4);
+        cfw.addPush(isStrictMode);
         cfw.addInvoke(ByteCode.INVOKESTATIC,
                       "org/mozilla/javascript/ScriptRuntime",
                       "doTopCall",
@@ -500,6 +502,7 @@ public class Codegen implements Evaluator
                       +"Lorg/mozilla/javascript/Scriptable;"
                       +"Lorg/mozilla/javascript/Scriptable;"
                       +"[Ljava/lang/Object;"
+                      +"Z"
                       +")Ljava/lang/Object;");
         cfw.add(ByteCode.ARETURN);
         cfw.markLabel(nonTopCallLabel);
@@ -1346,10 +1349,12 @@ class BodyCodegen
         cfw.addALoad(funObjLocal);
         cfw.addALoad(variableObjectLocal);
         cfw.addALoad(argsLocal);
+        cfw.addPush(scriptOrFn.isInStrictMode());
         addScriptRuntimeInvoke("createFunctionActivation",
                                "(Lorg/mozilla/javascript/NativeFunction;"
                                +"Lorg/mozilla/javascript/Scriptable;"
                                +"[Ljava/lang/Object;"
+                               +"Z"
                                +")Lorg/mozilla/javascript/Scriptable;");
         cfw.addAStore(variableObjectLocal);
 
@@ -1617,15 +1622,22 @@ class BodyCodegen
 
 
         String debugVariableName;
+        boolean isArrow = false;
+        if (scriptOrFn instanceof FunctionNode) {
+            isArrow = ((FunctionNode)scriptOrFn).getFunctionType() == FunctionNode.ARROW_FUNCTION;
+        }
         if (fnCurrent != null) {
             debugVariableName = "activation";
             cfw.addALoad(funObjLocal);
             cfw.addALoad(variableObjectLocal);
             cfw.addALoad(argsLocal);
-            addScriptRuntimeInvoke("createFunctionActivation",
+            String methodName = isArrow ? "createArrowFunctionActivation" : "createFunctionActivation";
+            cfw.addPush(scriptOrFn.isInStrictMode());
+            addScriptRuntimeInvoke(methodName,
                                    "(Lorg/mozilla/javascript/NativeFunction;"
                                    +"Lorg/mozilla/javascript/Scriptable;"
                                    +"[Ljava/lang/Object;"
+                                   +"Z"
                                    +")Lorg/mozilla/javascript/Scriptable;");
             cfw.addAStore(variableObjectLocal);
             cfw.addALoad(contextLocal);
@@ -1999,6 +2011,7 @@ class BodyCodegen
               case Token.ENUM_INIT_KEYS:
               case Token.ENUM_INIT_VALUES:
               case Token.ENUM_INIT_ARRAY:
+              case Token.ENUM_INIT_VALUES_IN_ORDER:
                 generateExpression(child, node);
                 cfw.addALoad(contextLocal);
                 cfw.addALoad(variableObjectLocal);
@@ -2006,6 +2019,8 @@ class BodyCodegen
                                    ? ScriptRuntime.ENUMERATE_KEYS :
                                type == Token.ENUM_INIT_VALUES
                                    ? ScriptRuntime.ENUMERATE_VALUES :
+                               type == Token.ENUM_INIT_VALUES_IN_ORDER
+                                   ? ScriptRuntime.ENUMERATE_VALUES_IN_ORDER :
                                ScriptRuntime.ENUMERATE_ARRAY;
                 cfw.addPush(enumType);
                 addScriptRuntimeInvoke("enumInit",
@@ -2172,7 +2187,8 @@ class BodyCodegen
                     OptFunctionNode ofn = OptFunctionNode.get(scriptOrFn,
                                                              fnIndex);
                     int t = ofn.fnode.getFunctionType();
-                    if (t != FunctionNode.FUNCTION_EXPRESSION) {
+                    if (t != FunctionNode.FUNCTION_EXPRESSION &&
+                        t != FunctionNode.ARROW_FUNCTION) {
                         throw Codegen.badTree();
                     }
                     visitFunction(ofn, t);
@@ -2960,7 +2976,20 @@ class BodyCodegen
         cfw.addInvoke(ByteCode.INVOKESPECIAL, codegen.mainClassName,
                       "<init>", Codegen.FUNCTION_CONSTRUCTOR_SIGNATURE);
 
-        if (functionType == FunctionNode.FUNCTION_EXPRESSION) {
+        if (functionType == FunctionNode.ARROW_FUNCTION) {
+            cfw.addALoad(contextLocal);           // load 'cx'
+            cfw.addALoad(variableObjectLocal);
+            cfw.addALoad(thisObjLocal);
+            addOptRuntimeInvoke("bindThis",
+                                "(Lorg/mozilla/javascript/NativeFunction;"
+                                +"Lorg/mozilla/javascript/Context;"
+                                +"Lorg/mozilla/javascript/Scriptable;"
+                                +"Lorg/mozilla/javascript/Scriptable;"
+                                +")Lorg/mozilla/javascript/Function;");
+        }
+
+        if (functionType == FunctionNode.FUNCTION_EXPRESSION ||
+            functionType == FunctionNode.ARROW_FUNCTION) {
             // Leave closure object on stack and do not pass it to
             // initFunction which suppose to connect statements to scope
             return;
@@ -4436,10 +4465,10 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
                 } else {
                     cfw.addALoad(reg);
                 }
-                if (post) {
-                    cfw.add(ByteCode.DUP);
-                }
                 addObjectToDouble();
+                if (post) {
+                    cfw.add(ByteCode.DUP2);
+                }
                 cfw.addPush(1.0);
                 if ((incrDecrMask & Node.DECR_FLAG) == 0) {
                     cfw.add(ByteCode.DADD);

@@ -28,7 +28,7 @@ public final class NativeCall extends IdScriptableObject
 
     NativeCall() { }
 
-    NativeCall(NativeFunction function, Scriptable scope, Object[] args)
+    NativeCall(NativeFunction function, Scriptable scope, Object[] args, boolean isArrow, boolean isStrict)
     {
         this.function = function;
 
@@ -36,6 +36,7 @@ public final class NativeCall extends IdScriptableObject
         // leave prototype null
 
         this.originalArgs = (args == null) ? ScriptRuntime.emptyArgs : args;
+        this.isStrict = isStrict;
 
         // initialize values of arguments
         int paramAndVarCount = function.getParamAndVarCount();
@@ -51,8 +52,9 @@ public final class NativeCall extends IdScriptableObject
 
         // initialize "arguments" property but only if it was not overridden by
         // the parameter with the same name
-        if (!super.has("arguments", this)) {
-            defineProperty("arguments", new Arguments(this), PERMANENT);
+        if (!super.has("arguments", this) && !isArrow) {
+            arguments = new Arguments(this);
+            defineProperty("arguments", arguments, PERMANENT);
         }
 
         if (paramAndVarCount != 0) {
@@ -113,12 +115,20 @@ public final class NativeCall extends IdScriptableObject
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
+    public void defineAttributesForArguments() {
+        if (arguments != null) {
+            arguments.defineAttributesForStrictMode();
+        }
+    }
+
     private static final int
         Id_constructor   = 1,
         MAX_PROTOTYPE_ID = 1;
 
     NativeFunction function;
     Object[] originalArgs;
+    boolean isStrict;
+    private Arguments arguments;
 
     transient NativeCall parentActivationCall;
 }

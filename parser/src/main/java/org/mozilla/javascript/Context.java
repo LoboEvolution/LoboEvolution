@@ -292,6 +292,22 @@ public class Context
      */
     public static final int FEATURE_V8_EXTENSIONS = 14;
 
+    /**
+     * Defines how an undefined  "this" parameter is handled in certain calls. Previously Rhino
+     * would convert an undefined "this" to null, whereas recent specs call for it to be treated
+     * differently. Default is to be set if language version <= 1.7.
+     * @since 1.7.7
+     */
+    public static final int FEATURE_OLD_UNDEF_NULL_THIS = 15;
+
+    /**
+     * If set, then the order of property key enumeration will be first numeric keys in numeric order,
+     * followed by string keys in order of creation, and finally Symbol keys, as specified in ES6.
+     * Default is true for language version >= "ES6" and false otherwise.
+     * @since 1.7.8
+     */
+    public static final int FEATURE_ENUMERATE_IDS_FIRST = 16;
+
     public static final String languageVersionProperty = "language version";
     public static final String errorReporterProperty   = "error reporter";
 
@@ -1309,7 +1325,7 @@ public class Context
         // Annotate so we can check later to ensure no java code in
         // intervening frames
         isContinuationsTopCall = true;
-        return ScriptRuntime.doTopCall(function, this, scope, scope, args);
+        return ScriptRuntime.doTopCall(function, this, scope, scope, args, isTopLevelStrict);
     }
 
     /**
@@ -2483,6 +2499,9 @@ public class Context
         if (returnFunction) {
             p.calledByCompileFunction = true;
         }
+        if (isStrictMode()) {
+            p.setDefaultUseStrictDirective(true);
+        }
         AstRoot ast;
         if (sourceString != null) {
             ast = p.parse(sourceString, sourceName, lineno);
@@ -2669,6 +2688,10 @@ public class Context
             activationNames.remove(name);
     }
 
+    public final boolean isStrictMode() {
+        return isTopLevelStrict || (currentActivationCall != null && currentActivationCall.isStrict);
+    }
+
     private static String implementationVersion;
 
     private final ContextFactory factory;
@@ -2738,4 +2761,6 @@ public class Context
 
     // Generate an observer count on compiled code
     public boolean generateObserverCount = false;
+
+    boolean isTopLevelStrict;
 }
