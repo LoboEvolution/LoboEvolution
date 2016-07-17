@@ -403,6 +403,7 @@ public class CookieStore {
                                         hostMap.put(cookieName, cookieValue);
                                     }
                                     // Now add cookie to the collection.
+                                    Cookie cookie = new Cookie();
                                     cookie.setName(cookieName);
                                     cookie.setValue(cookieValue.getValue());
                                     cookie.setPath(cookieValue.getPath());
