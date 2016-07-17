@@ -328,7 +328,6 @@ public class CookieStore {
         }
         boolean liflag = logger.isLoggable(Level.INFO);
         Collection<Cookie> cookies = new LinkedList<Cookie>();
-        Cookie cookie = new Cookie();
         Set<String> transientCookieNames = new HashSet<String>();
         synchronized (this) {
             Map<String, CookieValue> hostMap = this.transientMapByHost
@@ -349,6 +348,7 @@ public class CookieStore {
                         if (path.startsWith(cookieValue.getPath())) {
                             String cookieName = entry.getKey();
                             transientCookieNames.add(cookieName);
+                            Cookie cookie = new Cookie();
                             cookie.setName(cookieName);
                             cookie.setValue(cookieValue.getValue());
                             cookie.setPath(cookieValue.getPath());
