@@ -1,30 +1,21 @@
 /*
- * CSS Parser Project
+ * Copyright (C) 1999-2016 David Schweinsberg.  All rights reserved.
  *
- * Copyright (C) 1999-2015 David Schweinsberg.  All rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * To contact the authors of the library:
- *
- * http://cssparser.sourceforge.net/
- * mailto:davidsch@users.sourceforge.net
- *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.steadystate.css.util;
+
+import java.util.List;
 
 public final class LangUtils {
     public static final int HASH_SEED = 17;
@@ -43,6 +34,30 @@ public final class LangUtils {
 
     public static int hashCode(final int seed, final Object obj) {
         return hashCode(seed, obj != null ? obj.hashCode() : 0);
+    }
+
+    public static String join(final List<String> values, String separator) {
+        if (values == null) {
+            return null;
+        }
+        if (separator == null) {
+            separator = "";
+        }
+
+        boolean isFirst = true;
+        final StringBuilder result = new StringBuilder();
+        for (String part : values) {
+            if (part != null && part.length() > 0) {
+                if (isFirst) {
+                    isFirst = false;
+                }
+                else {
+                    result.append(separator);
+                }
+                result.append(part);
+            }
+        }
+        return result.toString();
     }
 
     public static boolean equals(final Object obj1, final Object obj2) {

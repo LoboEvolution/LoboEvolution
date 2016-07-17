@@ -36,6 +36,9 @@ public final class CssCharStream implements CharStream
   private int maxNextCharInd = 0;
   private int inBuf = 0;
 
+  private int tabSize = 1;
+  private boolean trackLineColumn = true;
+
   private void ExpandBuff(boolean wrapAround)
   {
     char[] newbuffer = new char[bufsize + BUFFER_SIZE];
@@ -342,5 +345,21 @@ public final class CssCharStream implements CharStream
 
     line = bufline[j];
     column = bufcolumn[j];
+  }
+
+  public void setTabSize(int i) {
+      tabSize = i;
+  }
+
+  public int getTabSize() {
+      return tabSize;
+  }
+
+  public boolean getTrackLineColumn() {
+      return trackLineColumn;
+  }
+
+  public void setTrackLineColumn(boolean tlc) {
+      trackLineColumn = tlc;
   }
 }
