@@ -1057,6 +1057,12 @@ public final class RequestEngine {
                 SSLCertificate.setCertificate();
                 URLConnection connection = this.getURLConnection(connectionUrl,
                         request, protocol, method, rhandler, cacheInfo);
+                
+                String redirect = connection.getHeaderField("Location");
+        	    if (redirect != null){
+        	        connection = new URL(redirect).openConnection();
+        	    }
+        	    
                 rinfo = new RequestInfo(connection, rhandler);
                 InputStream responseIn = null;
                 if (trackRequestInfo) {
