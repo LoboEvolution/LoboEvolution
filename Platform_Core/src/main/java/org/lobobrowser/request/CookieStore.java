@@ -25,8 +25,6 @@ package org.lobobrowser.request;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,13 +35,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.lobobrowser.http.Cookie;
 import org.lobobrowser.store.RestrictedStore;
 import org.lobobrowser.store.StorageManager;
+import org.lobobrowser.util.DateUtil;
 import org.lobobrowser.util.Domains;
 import org.lobobrowser.util.Strings;
 
@@ -60,16 +58,7 @@ public class CookieStore {
     /** The Constant COOKIE_PATH_PATTERN. */
     private static final String COOKIE_PATH_PATTERN = "\\.W\\$Cookies/.*";
 
-    /** The Constant EXPIRES_FORMAT. */
-    private static final DateFormat EXPIRES_FORMAT;
-
-    /** The Constant EXPIRES_FORMAT_BAK1. */
-    private static final DateFormat EXPIRES_FORMAT_BAK1;
-
-    /** The Constant EXPIRES_FORMAT_BAK2. */
-    private static final DateFormat EXPIRES_FORMAT_BAK2;
-
-    /** The Constant instance. */
+   /** The Constant instance. */
     private static final CookieStore instance = new CookieStore();
 
     /** The Constant logger. */
@@ -78,25 +67,6 @@ public class CookieStore {
 
     /** The transient map by host. */
     private final Map<String, Map<String, CookieValue>> transientMapByHost = new HashMap<String, Map<String, CookieValue>>();
-
-    static {
-        // Note: Using yy in case years are given as two digits.
-        // Note: Must use US locale for cookie dates.
-        Locale locale = Locale.US;
-        SimpleDateFormat ef1 = new SimpleDateFormat(
-                "EEE, dd MMM yy HH:mm:ss 'GMT'", locale);
-        SimpleDateFormat ef2 = new SimpleDateFormat(
-                "EEE, dd-MMM-yy HH:mm:ss 'GMT'", locale);
-        SimpleDateFormat ef3 = new SimpleDateFormat(
-                "EEE, dd-MMM-yyyy HH:mm:ss 'UTC'", locale);
-        TimeZone gmtTimeZone = TimeZone.getTimeZone("GMT");
-        ef1.setTimeZone(gmtTimeZone);
-        ef2.setTimeZone(gmtTimeZone);
-        ef3.setTimeZone(gmtTimeZone);
-        EXPIRES_FORMAT = ef1;
-        EXPIRES_FORMAT_BAK1 = ef2;
-        EXPIRES_FORMAT_BAK2 = ef3;
-    }
 
     /**
      * Instantiates a new cookie store.
@@ -212,29 +182,8 @@ public class CookieStore {
                                 + maxAge + ".");
             }
         } else if (expires != null) {
-            synchronized (EXPIRES_FORMAT) {
-                try {
-                    expiresDate = EXPIRES_FORMAT.parse(expires);
-                } catch (Exception pe) {
-                    if (logger.isLoggable(Level.INFO)) {
-                        logger.log(Level.INFO,
-                                "saveCookie(): Bad date format: " + expires
-                                + ". Will try again.", pe);
-                    }
-                    try {
-                        expiresDate = EXPIRES_FORMAT_BAK1.parse(expires);
-                    } catch (Exception pe2) {
-                        try {
-                            expiresDate = EXPIRES_FORMAT_BAK2.parse(expires);
-                        } catch (Exception pe3) {
-                            logger.log(Level.SEVERE,
-                                    "saveCookie(): Giving up on cookie date format: "
-                                            + expires, pe3);
-                            return;
-                        }
-                    }
-                }
-            }
+        	DateUtil du = new DateUtil();
+    		expiresDate = du.determineDateFormat(expires, Locale.US);
         }
         this.saveCookie(domain, path, cookieName, expiresDate, cookieValue);
     }
