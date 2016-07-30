@@ -62,9 +62,7 @@ public class PrimaryClientletSelector implements ClientletSelector {
 		// Clientlets here are not overriddable.
 
 		String mimeType = response.getMimeType();
-
-		System.out.println("mimeType: " + mimeType);
-
+		
 		if (logger.isLoggable(Level.INFO)) {
 			logger.info("select(): mimeType=" + mimeType);
 		}
