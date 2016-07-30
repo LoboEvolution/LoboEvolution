@@ -218,6 +218,7 @@ public class Domains {
         gTLDs.add(".my");
         gTLDs.add(".mz");
         gTLDs.add(".na");
+        gTLDs.add(".news");
         gTLDs.add(".nc");
         gTLDs.add(".ne");
         gTLDs.add(".nf");
