@@ -129,13 +129,19 @@ public class Urls {
      */
     public static URL createURL(URL baseUrl, String relativeUrl)
             throws MalformedURLException, UnsupportedEncodingException {
+    	
         if (relativeUrl.contains(";base64,")) {
             relativeUrl = new String(Base64.getEncoder()
                     .encode(relativeUrl.getBytes(StandardCharsets.UTF_8)));
         }
+        
         if (relativeUrl.contains("javascript:void")) {
             return null;
         }
+        
+        if (relativeUrl.contains("..")) {
+        	relativeUrl = relativeUrl.replace("..", "");
+        } 
         return new URL(baseUrl, relativeUrl);
     }
     
