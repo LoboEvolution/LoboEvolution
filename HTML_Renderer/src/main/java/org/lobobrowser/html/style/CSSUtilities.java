@@ -145,7 +145,7 @@ public class CSSUtilities {
 		logger.info("process(): Loading URI=[" + scriptURI + "].");
 		SSLCertificate.setCertificate();
 		URLConnection connection = url.openConnection();
-		connection.setRequestProperty("User-Agent", "Mozilla/5.0 (compatible;) Cobra/0.97+");
+		connection.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
 		connection.setRequestProperty("Cookie", "");
 		if (connection instanceof HttpURLConnection) {
 			HttpURLConnection hc = (HttpURLConnection) connection;

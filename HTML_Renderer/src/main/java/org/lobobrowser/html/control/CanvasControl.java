@@ -32,6 +32,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -39,6 +40,7 @@ import javax.imageio.ImageIO;
 
 import org.lobobrowser.html.domimpl.HTMLCanvasElementImpl;
 import org.lobobrowser.html.info.CanvasInfo;
+import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.w3c.html.HTMLCanvasElement;
 
 /**
@@ -267,7 +269,9 @@ public class CanvasControl extends BaseControl {
 		try {
 
 			u = new URL(ci.getImage().getSrc());
-			Image img = ImageIO.read(u);
+			URLConnection con = u.openConnection();
+            con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
+			Image img = ImageIO.read(con.getInputStream());
 
 			g.drawImage(img, ci.getX(), ci.getY(), ci.getWidth(), ci.getHeight(), this);
 			g.finalize();
@@ -288,7 +292,10 @@ public class CanvasControl extends BaseControl {
 		URL u;
 		try {
 			u = new URL(ci.getImage().getSrc());
-			Image img = ImageIO.read(u);
+			URLConnection con = u.openConnection();
+            con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
+			Image img = ImageIO.read(con.getInputStream());
+			
 			img = createImage(new FilteredImageSource(img.getSource(),
 					new CropImageFilter(ci.getSx(), ci.getSy(), ci.getSw(), ci.getSh())));
 

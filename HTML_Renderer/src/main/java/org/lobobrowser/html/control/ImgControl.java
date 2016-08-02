@@ -36,6 +36,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,6 +54,7 @@ import org.lobobrowser.html.renderer.HtmlController;
 import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.RenderableSpot;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.util.SSLCertificate;
 import org.lobobrowser.util.Urls;
 
@@ -147,26 +149,30 @@ public class ImgControl extends BaseControl implements ImageListener {
 				URL baseURL = new URL(modelNode.getOwnerDocument().getBaseURI());
 				URL scriptURL = Urls.createURL(baseURL, modelNode.getSrc());
 				String scriptURI = scriptURL == null ? modelNode.getSrc() : scriptURL.toExternalForm();
-				u = new URL(scriptURI.replace(" ", "%20"));
-				if (scriptURI.endsWith(".svg")) {
+				
+				u = new URL(scriptURI.replace(" ", "%20"));	
+				URLConnection con = u.openConnection();
+                con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
+                
+                if (scriptURI.endsWith(".svg")) {
 					SVGRasterizer r = new SVGRasterizer(u);
 					image = r.bufferedImageToImage();
 				} else if (scriptURI.startsWith("https")) {
-					image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(u).getSource());
+					image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(con.getInputStream()).getSource());
 				} else if (scriptURI.endsWith(".gif")) {
 					try {
 						image = new ImageIcon(u).getImage();
 					} catch (Exception e) {
-						image = ImageIO.read(u);
+						image = ImageIO.read(con.getInputStream());
 					}
 				} else if (scriptURI.endsWith(".bmp")) {
 					try {
-						image = ImageIO.read(u);
+						image = ImageIO.read(con.getInputStream());
 					} catch (IOException e) {
 						logger.log(Level.WARNING, "read error: " + e.getMessage());
 					}
 				} else {
-					image = ImageIO.read(u);
+					image = ImageIO.read(con.getInputStream());
 				}
 			} catch (FileNotFoundException | IIOException ex) {
 				logger.log(Level.WARNING, "ImgControl(): Image not found "+modelNode.getSrc());
@@ -193,7 +199,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 			}
 		}
 	}
-
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

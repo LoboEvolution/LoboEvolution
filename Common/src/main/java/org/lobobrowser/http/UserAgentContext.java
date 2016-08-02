@@ -33,6 +33,9 @@ import java.net.URL;
  * @see org.lobobrowser.html.parser.DocumentBuilderImpl#DocumentBuilderImpl(UserAgentContext)
  */
 public interface UserAgentContext {
+	
+	String DEFAULT_USER_AGENT = "Mozilla/5.0 (compatible;) Cobra/0.97+";
+	
     /**
      * Creates an instance of {@link org.lobobrowser.http.HttpRequest} which can
      * be used by the renderer to load images, scripts, external style sheets,

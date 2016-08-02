@@ -349,6 +349,7 @@ HTMLScriptElement {
 			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
 			URL obj = uri.toURL();
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
 			con.setRequestMethod("GET");
 			responseCode = con.getResponseCode();
 

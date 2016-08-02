@@ -33,6 +33,7 @@ import java.awt.image.ImageObserver;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -699,21 +700,24 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		try {
 			SSLCertificate.setCertificate();
 			
+			URLConnection con = imageURL.openConnection();
+            con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
+			
 			if (url.endsWith(".svg")) {
 				SVGRasterizer r = new SVGRasterizer(imageURL);
 				image = r.bufferedImageToImage();
 			} else if (url.startsWith("https")) {
-				image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(imageURL).getSource());
+				image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(con.getInputStream()).getSource());
 			} else if (url.endsWith(".gif")) {
 				try {
 					image = new ImageIcon(imageURL).getImage();
 				} catch (Exception e) {
-					image = ImageIO.read(imageURL);
+					image = ImageIO.read(con.getInputStream());
 				}
 			} else if (url.endsWith(".bmp")) {
-				image = ImageIO.read(imageURL);
+				image = ImageIO.read(con.getInputStream());
 			} else {
-				image = ImageIO.read(imageURL);
+				image = ImageIO.read(con.getInputStream());
 			}
 			
 			BaseElementRenderable.this.backgroundImage = image;
