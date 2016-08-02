@@ -163,11 +163,7 @@ public class XPathExpressionImpl implements XPathExpression {
 		if (!XPathResultImpl.isValidType(type)) {
 			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_INVALID_XPATH_TYPE,
 					new Object[] { new Integer(type) });
-			throw new XPathException(XPathException.TYPE_ERR, fmsg); // Invalid
-																		// XPath
-																		// type
-																		// argument:
-																		// {0}
+			throw new XPathException(XPathException.TYPE_ERR, fmsg);
 		}
 
 		// Create an XPathContext that doesn't support pushing and popping of

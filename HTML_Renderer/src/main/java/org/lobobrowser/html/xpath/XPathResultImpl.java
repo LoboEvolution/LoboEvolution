@@ -245,27 +245,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 				String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_INCOMPATIBLE_TYPES,
 						new Object[] { m_xpath.getPatternString(), getTypeString(getTypeFromXObject(m_resultObj)),
 								getTypeString(m_resultType) });
-				throw new XPathException(XPathException.TYPE_ERR, fmsg); // "The
-																			// XPathResult
-																			// of
-																			// XPath
-																			// expression
-																			// {0}
-																			// has
-																			// an
-																			// XPathResultType
-																			// of
-																			// {1}
-																			// which
-																			// cannot
-																			// be
-																			// coerced
-																			// into
-																			// the
-																			// specified
-																			// XPathResultType
-																			// of
-																			// {2}."},
+				throw new XPathException(XPathException.TYPE_ERR, fmsg); 
 			}
 		}
 	}

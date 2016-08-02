@@ -89,14 +89,7 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 		@Override
 		public String getNamespaceForPrefix(String prefix, Node context) {
 			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NULL_RESOLVER, null);
-			throw new DOMException(DOMException.NAMESPACE_ERR, fmsg); // Unable
-																		// to
-																		// resolve
-																		// prefix
-																		// with
-																		// null
-																		// prefix
-																		// resolver.
+			throw new DOMException(DOMException.NAMESPACE_ERR, fmsg); 
 		}
 
 		/**
