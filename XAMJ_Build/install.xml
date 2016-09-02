@@ -64,7 +64,6 @@
             <file src="LICENSE.txt" targetdir="$INSTALL_PATH"/>
             <file src="ACKNOWLEDGMENTS.txt" targetdir="$INSTALL_PATH"/>
             <file src="README.txt" targetdir="$INSTALL_PATH"/>
-            <file src="log4j2.xml" targetdir="$INSTALL_PATH"/>
             <file src="lobo.ico" targetdir="$INSTALL_PATH" os="windows"/>
             <file src="lobo.png" targetdir="$INSTALL_PATH"/>
             <file src="lobo-pub.jar" targetdir="$INSTALL_PATH"/>
@@ -74,10 +73,7 @@
             <file src="ext/jdatepicker.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/batik-all-1.8.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="ext/w3c.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/JTattoo-1.6.11.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/log4j-api-2.6.2.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/log4j-core-2.6.2.jar" targetdir="$INSTALL_PATH/ext"/>
-            
+            <file src="ext/xalan.jar" targetdir="$INSTALL_PATH/ext"/>
             <file src="lobo.jar" targetdir="$INSTALL_PATH"/>
             <executable targetfile="$INSTALL_PATH/lobo.jar"/>
         </pack>
