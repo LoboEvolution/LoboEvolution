@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Appenders>
+		<File name="lobo_info" fileName="logs/loboevolution_info.log">
+			<PatternLayout
+				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+		</File>
+		<File name="lobo_error" fileName="logs/loboevolution_error.log">
+			<PatternLayout
+				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+		</File>
+		<File name="lobo_debug" fileName="logs/loboevolution_debug.log">
+			<PatternLayout
+				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+		</File>
+		<File name="lobo_warn" fileName="logs/loboevolution_warn.log">
+			<PatternLayout
+				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+		</File>
+		<Async name="Async">
+			<AppenderRef ref="lobo_info" />
+			<AppenderRef ref="lobo_error" />
+			<AppenderRef ref="lobo_debug" />
+			<AppenderRef ref="lobo_warn" />
+		</Async>
+	</Appenders>
+	<Loggers>
+		<Root level="error">
+			<AppenderRef ref="lobo_error" />
+		</Root>
+		<Logger name="lobo_info" additivity="TRUE" level="info">
+			<AppenderRef ref="lobo_info" level="info" />
+		</Logger>
+		<Logger name="lobo_debug" additivity="TRUE" level="debug">
+			<AppenderRef ref="lobo_debug" level="debug" />
+		</Logger>
+		<Logger name="lobo_warn" additivity="TRUE" level="warn">
+			<AppenderRef ref="lobo_warn" level="warn" />
+		</Logger>
+	</Loggers>
+</Configuration>
