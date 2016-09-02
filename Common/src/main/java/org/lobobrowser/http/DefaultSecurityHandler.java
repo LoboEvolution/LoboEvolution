@@ -100,7 +100,7 @@ public class DefaultSecurityHandler implements SecurityHandler {
         };
         showCertAction.putValue(Action.NAME, "Show Certificate");
         JLabel iconLabel = new JLabel(new ImageIcon(
-                getClass().getResource("resources/security-warning.png")));
+                getClass().getResource("resources/security.warning.png")));
         // add the components to their containers
         JButton continueButton = new JButton(continueAction);
         JButton cancelButton = new JButton(cancelAction);

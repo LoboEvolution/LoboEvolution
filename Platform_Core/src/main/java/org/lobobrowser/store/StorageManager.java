@@ -29,8 +29,10 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.security.LocalSecurityPolicy;
@@ -42,7 +44,7 @@ import org.lobobrowser.util.gui.StorageManagerCommon;
 public class StorageManager extends StorageManagerCommon implements Runnable {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(StorageManager.class
+    private static final Logger logger = LogManager.getLogger(StorageManager.class
             .getName());
 
     /** The Constant HOST_STORE_QUOTA. */
@@ -272,7 +274,7 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
                     stores[i].updateSizeFile();
                 }
             } catch (Throwable err) {
-                logger.log(Level.SEVERE, "run()", err);
+                logger.log(Level.ERROR, "run()", err);
                 try {
                     Thread.sleep(MANAGED_STORE_UPDATE_DELAY);
                 } catch (InterruptedException ie) {

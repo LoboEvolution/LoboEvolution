@@ -35,8 +35,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.http.Cookie;
 import org.lobobrowser.store.RestrictedStore;
@@ -62,7 +64,7 @@ public class CookieStore {
     private static final CookieStore instance = new CookieStore();
 
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(CookieStore.class
+    private static final Logger logger = LogManager.getLogger(CookieStore.class
             .getName());
 
     /** The transient map by host. */
@@ -104,7 +106,7 @@ public class CookieStore {
      */
     public void saveCookie(String urlHostName, String cookieSpec) {
         // TODO: SECURITY
-        if (logger.isLoggable(Level.INFO)) {
+        if (logger.isInfoEnabled()) {
             logger.info("saveCookie(): host=" + urlHostName + ",cookieSpec=["
                     + cookieSpec + "]");
         }
@@ -144,7 +146,7 @@ public class CookieStore {
             }
         }
         if (cookieName == null) {
-            logger.log(Level.SEVERE, "saveCookie(): Invalid cookie spec from '"
+            logger.log(Level.ERROR, "saveCookie(): Invalid cookie spec from '"
                     + urlHostName + "'");
             return;
         }
@@ -153,13 +155,13 @@ public class CookieStore {
         }
         if (domain != null) {
             if ((expires == null) && (maxAge == null)
-                    && logger.isLoggable(Level.INFO)) {
+                    && logger.isInfoEnabled()) {
                 logger.log(Level.INFO,
                         "saveCookie(): Not rejecting transient cookie that specifies domain '"
                                 + domain + "'.");
             }
             if (!Domains.isValidCookieDomain(domain, urlHostName)) {
-                logger.log(Level.WARNING,
+                logger.log(Level.WARN,
                         "saveCookie(): Rejecting cookie with invalid domain '"
                                 + domain + "' for host '" + urlHostName + "'.");
                 return;
@@ -177,7 +179,7 @@ public class CookieStore {
                 expiresDate = new java.util.Date(System.currentTimeMillis()
                         + (Integer.parseInt(maxAge) * 1000));
             } catch (NumberFormatException nfe) {
-                logger.log(Level.WARNING,
+                logger.log(Level.WARN,
                         "saveCookie(): Max-age is not formatted correctly: "
                                 + maxAge + ".");
             }
@@ -205,7 +207,7 @@ public class CookieStore {
     public void saveCookie(String domain, String path, String name,
             Date expires, String value) {
         // TODO: SECURITY
-        if (logger.isLoggable(Level.INFO)) {
+        if (logger.isInfoEnabled()) {
             logger.info("saveCookie(): domain=" + domain + ",name=" + name
                     + ",expires=" + expires + ",value=[" + value + "].");
         }
@@ -228,7 +230,7 @@ public class CookieStore {
                         .getRestrictedStore(domain, true);
                 store.saveObject(this.getPathFromCookieName(name), cookieValue);
             } catch (IOException ioe) {
-                logger.log(Level.WARNING,
+                logger.log(Level.WARN,
                         "saveCookie(): Unable to save cookie named '" + name
                         + "' with domain '" + domain + "'", ioe);
             }
@@ -275,7 +277,7 @@ public class CookieStore {
         if ((path == null) || (path.length() == 0)) {
             path = "/";
         }
-        boolean liflag = logger.isLoggable(Level.INFO);
+        boolean liflag = logger.isInfoEnabled();
         Collection<Cookie> cookies = new LinkedList<Cookie>();
         Set<String> transientCookieNames = new HashSet<String>();
         synchronized (this) {
@@ -330,7 +332,7 @@ public class CookieStore {
                                 .retrieveObject(filePath);
                         if (cookieValue != null) {
                             if (cookieValue.isExpired()) {
-                                if (logger.isLoggable(Level.INFO)) {
+                                if (logger.isInfoEnabled()) {
                                     logger.info("getCookiesStrict(): Cookie "
                                             + cookieName + " from " + hostName
                                             + " expired: "
@@ -359,7 +361,7 @@ public class CookieStore {
                                     cookie.setDomain(cookieValue.getDomain());
                                     cookies.add(cookie);
                                 } else {
-                                    if (logger.isLoggable(Level.INFO)) {
+                                    if (logger.isInfoEnabled()) {
                                         logger.info("getCookiesStrict(): Skipping cookie "
                                                 + cookieValue
                                                 + " since it does not match path "
@@ -368,16 +370,16 @@ public class CookieStore {
                                 }
                             }
                         } else {
-                            logger.warning("getCookiesStrict(): Expected to find cookie named "
+                            logger.warn("getCookiesStrict(): Expected to find cookie named "
                                     + cookieName + " but file is missing.");
                         }
                     }
                 }
             }
         } catch (IOException ioe) {
-            logger.log(Level.SEVERE, "getCookiesStrict()", ioe);
+            logger.log(Level.ERROR, "getCookiesStrict()", ioe);
         } catch (ClassNotFoundException cnf) {
-            logger.log(Level.SEVERE,
+            logger.log(Level.ERROR,
                     "getCookiesStrict(): Possible engine versioning error.",
                     cnf);
         }
@@ -401,7 +403,7 @@ public class CookieStore {
         for (String domain : possibleDomains) {
             cookies.addAll(this.getCookiesStrict(domain, path));
         }
-        if (logger.isLoggable(Level.INFO)) {
+        if (logger.isInfoEnabled()) {
             logger.info("getCookies(): For host=" + hostName + ", found "
                     + cookies.size() + " cookies: " + cookies);
         }

@@ -26,8 +26,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -56,7 +58,7 @@ public class ActionPool extends AbstractAction {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ActionPool.class.getName());
+	private static final Logger logger = LogManager.getLogger(ActionPool.class);
 
 	/** The component source. */
 	private final ComponentSource componentSource;
@@ -111,7 +113,7 @@ public class ActionPool extends AbstractAction {
 		try {
 			url = new URL(fullURL);
 		} catch (MalformedURLException mfu) {
-			logger.log(Level.WARNING, "createNavigateAction()", mfu);
+			logger.log(Level.WARN, "createNavigateAction()", mfu);
 			url = null;
 		}
 		NavigateAction nav = new NavigateAction(componentSource, window);

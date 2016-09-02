@@ -35,8 +35,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.SwingUtilities;
 
@@ -68,7 +68,7 @@ import org.w3c.dom.Element;
 public class HtmlClientlet implements Clientlet {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(HtmlClientlet.class.getName());
+	private static final Logger logger = LogManager.getLogger(HtmlClientlet.class);
 
 	/** The Constant NON_VISIBLE_ELEMENTS. */
 	private static final Set<String> NON_VISIBLE_ELEMENTS = new HashSet<String>();
@@ -184,7 +184,7 @@ public class HtmlClientlet implements Clientlet {
 			if (charset == null) {
 				charset = "UTF-8";
 			}
-			if (logger.isLoggable(Level.INFO)) {
+			if (logger.isInfoEnabled()) {
 				logger.info("process(): charset=" + charset + " for URI=[" + uri + "]");
 			}
 			InputSourceImpl is = new InputSourceImpl(rin, uri, charset);
@@ -205,7 +205,7 @@ public class HtmlClientlet implements Clientlet {
 			try {
 				document.load(false);
 			} catch (HttpEquivRetryException retry) {
-				if (logger.isLoggable(Level.INFO)) {
+				if (logger.isInfoEnabled()) {
 					logger.info("processImpl(): Resetting due to META http-equiv: " + uri);
 				}
 				// This is a recursive call, but it doesn't go further
@@ -214,10 +214,10 @@ public class HtmlClientlet implements Clientlet {
 				return;
 			}
 			long time2 = System.currentTimeMillis();
-			if (logger.isLoggable(Level.INFO)) {
+			if (logger.isInfoEnabled()) {
 				logger.info("process(): Parse elapsed=" + (time2 - time1) + " ms.");
-				if (logger.isLoggable(Level.FINE)) {
-					logger.fine("process(): HTML follows:\r\n" + content.getSourceCode());
+				if (logger.isInfoEnabled()) {
+					logger.debug("process(): HTML follows:\r\n" + content.getSourceCode());
 				}
 			}
 			// We're done parsing, but let's make sure
@@ -341,7 +341,7 @@ public class HtmlClientlet implements Clientlet {
 		try {
 			delay = Integer.parseInt(delayText);
 		} catch (NumberFormatException nfe) {
-			logger.warning("extractRefresh(): Bad META refresh delay: " + delayText + ".");
+			logger.warn("extractRefresh(): Bad META refresh delay: " + delayText + ".");
 			delay = 0;
 		}
 		return new RefreshInfo(delay, urlText);
@@ -566,7 +566,7 @@ public class HtmlClientlet implements Clientlet {
 			if (node instanceof HTMLElement) {
 				HTMLElement element = (HTMLElement) node;
 				boolean visible = !NON_VISIBLE_ELEMENTS.contains(element.getTagName().toLowerCase());
-				if (visible && logger.isLoggable(Level.INFO)) {
+				if (visible && logger.isInfoEnabled()) {
 					logger.info("mayBeVisibleElement(): Found possibly visible element: " + element.getTagName());
 				}
 				return visible;

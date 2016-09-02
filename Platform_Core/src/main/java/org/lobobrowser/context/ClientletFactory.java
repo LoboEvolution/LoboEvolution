@@ -34,7 +34,7 @@ import org.lobobrowser.security.GenericLocalPermission;
  */
 public class ClientletFactory {
     // private static final Logger logger =
-    // Logger.getLogger(ClientletFactory.class.getName());
+    // LogManager.getLogger(ClientletFactory.class);
     /** The instance. */
     private static ClientletFactory instance;
 

@@ -35,8 +35,10 @@ import java.security.PrivilegedAction;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.jar.JarFile;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.util.zip.ZipEntry;
 
 import org.lobobrowser.util.BaseClassLoader;
@@ -52,7 +54,7 @@ import org.lobobrowser.util.io.IORoutines;
 public class ArchiveClassLoader extends BaseClassLoader {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ArchiveClassLoader.class.getName());
+	private static final Logger logger = LogManager.getLogger(ArchiveClassLoader.class);
 
 	/**
 	 * The Class LocalURLStreamHandler.
@@ -183,7 +185,7 @@ public class ArchiveClassLoader extends BaseClassLoader {
 				}
 			});
 		} catch (RuntimeException err) {
-			logger.log(Level.SEVERE, "findResource()", err);
+			logger.log(Level.ERROR, "findResource()", err);
 			throw err;
 		}
 	}

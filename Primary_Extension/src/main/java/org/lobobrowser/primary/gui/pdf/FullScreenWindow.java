@@ -273,8 +273,6 @@ public class FullScreenWindow {
 
 			int y = bounds.height / 2 - sz.height / 2 + bounds.y;
 
-			// System.out.println("Opening picker at "+x+","+y);
-
 			setLocation(x, y);
 
 			setVisible(true);

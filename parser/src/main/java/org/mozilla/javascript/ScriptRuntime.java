@@ -12,6 +12,9 @@ import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.v8dtoa.DoubleConversion;
 import org.mozilla.javascript.v8dtoa.FastDtoa;
@@ -25,6 +28,9 @@ import org.mozilla.javascript.xml.XMLLib;
  */
 
 public class ScriptRuntime {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(ScriptRuntime.class);
 
     /**
      * No instances should be created.
@@ -4170,7 +4176,7 @@ public class ScriptRuntime {
 +"Rhino runtime detected object "+nonJSObject+" of class "+nonJSObject.getClass().getName()+" where it expected String, Number, Boolean or Scriptable instance. Please check your code for missing Context.javaToJS() call.";
         Context.reportWarning(message);
         // Just to be sure that it would be noticed
-        System.err.println(message);
+        logger.log(Level.ERROR,message);
     }
 
     public static RegExpProxy getRegExpProxy(Context cx)

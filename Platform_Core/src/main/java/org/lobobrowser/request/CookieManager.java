@@ -32,8 +32,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.http.Cookie;
 
@@ -42,8 +44,8 @@ import org.lobobrowser.http.Cookie;
  */
 public class CookieManager extends CookieHandler {
     /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(CookieManager.class.getName());
+    private static final Logger logger = LogManager
+            .getLogger(CookieManager.class);
     /** The cookie store. */
     private final CookieStore cookieStore = CookieStore.getInstance();
     
@@ -79,7 +81,7 @@ public class CookieManager extends CookieHandler {
                         .singletonList(cookieHeaderValue.toString()));
             }
         }
-        if (logger.isLoggable(Level.FINE)) {
+        if (logger.isInfoEnabled()) {
             logger.info("get():----Cookie headers for uri=[" + uri + "].");
             this.printHeaders(resultHeaders);
         }
@@ -93,7 +95,7 @@ public class CookieManager extends CookieHandler {
     @Override
     public void put(URI uri, Map<String, List<String>> responseHeaders)
             throws IOException {
-        if (logger.isLoggable(Level.FINE)) {
+        if (logger.isInfoEnabled()) {
             logger.info("put():----Response headers for uri=[" + uri + "].");
             this.printHeaders(responseHeaders);
         }

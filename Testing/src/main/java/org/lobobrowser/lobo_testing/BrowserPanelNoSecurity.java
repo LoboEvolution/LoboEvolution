@@ -44,7 +44,7 @@ public class BrowserPanelNoSecurity extends JFrame {
 		Locale.setDefault(Locale.CHINESE);
 
 		// Initialize logging.
-		PlatformInit.getInstance().initLogging(false);
+		PlatformInit.getInstance().initLogging();
 
 		// Essential steps - we're not even initializing the look & feel.
 		PlatformInit.getInstance().initProtocols();

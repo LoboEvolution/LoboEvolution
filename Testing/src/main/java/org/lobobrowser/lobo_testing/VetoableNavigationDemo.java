@@ -22,8 +22,10 @@ package org.lobobrowser.lobo_testing;
 
 import java.awt.Component;
 import java.awt.event.WindowEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -47,10 +49,10 @@ public class VetoableNavigationDemo extends JFrame {
 
 	public static void main(String[] args) throws Exception {
 		// We'll disable all logging but WARNING.
-		Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
+		LogManager.getLogger("org.lobobrowser");
 
 		// This step is necessary for extensions (including HTML) to work:
-		PlatformInit.getInstance().init(false, false);
+		PlatformInit.getInstance().init(false);
 
 		// Create window with a specific size.
 		JFrame frame = new VetoableNavigationDemo();

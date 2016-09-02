@@ -30,8 +30,10 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -43,7 +45,6 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 import javax.swing.event.MenuEvent;
 
-import org.lobobrowser.gui.ConsoleModel;
 import org.lobobrowser.primary.action.AboutAction;
 import org.lobobrowser.primary.action.AddBookmarkAction;
 import org.lobobrowser.primary.action.BackAction;
@@ -51,7 +52,6 @@ import org.lobobrowser.primary.action.BackMoreAction;
 import org.lobobrowser.primary.action.BlankWindowAction;
 import org.lobobrowser.primary.action.ClearCacheAction;
 import org.lobobrowser.primary.action.ClonedWindowAction;
-import org.lobobrowser.primary.action.ConsoleAction;
 import org.lobobrowser.primary.action.CopyAction;
 import org.lobobrowser.primary.action.ExitAction;
 import org.lobobrowser.primary.action.ForwardAction;
@@ -87,7 +87,7 @@ import org.lobobrowser.util.Timing;
 public class ComponentSource implements NavigatorWindowListener {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ComponentSource.class.getName());
+	private static final Logger logger = LogManager.getLogger(ComponentSource.class);
 
 	/** The Constant PREFERRED_MAX_MENU_SIZE. */
 	private static final int PREFERRED_MAX_MENU_SIZE = 20;
@@ -262,7 +262,6 @@ public class ComponentSource implements NavigatorWindowListener {
 		JMenu menu = new JMenu("View");
 		menu.setMnemonic('V');
 		menu.add(menuItem("Page Source", 'S', new SourceAction(this, window, actionPool)));
-		menu.add(menuItem("Console", 'C', new ConsoleAction(this, window)));
 		menu.add(menuItem("Full Screen", ' ',KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0), new FullScreenAction(window,actionPool)));
 		return menu;
 	}
@@ -323,7 +322,7 @@ public class ComponentSource implements NavigatorWindowListener {
 				menuItem.setToolTipText(url.toExternalForm());
 				menu.add(menuItem);
 			} catch (MalformedURLException mfu) {
-				logger.log(Level.WARNING, "populateRecentHosts(): Bad URL=" + urlText, mfu);
+				logger.log(Level.WARN, "populateRecentHosts(): Bad URL=" + urlText, mfu);
 			}
 		}
 		menu.addSeparator();
@@ -529,7 +528,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 */
 	@Override
 	public void documentRendering(NavigatorWindowEvent event) {
-		if (logger.isLoggable(Level.INFO)) {
+		if (logger.isInfoEnabled()) {
 			logger.info("documentRendering(): event=" + event);
 		}
 		if (this.window.getTopFrame() == event.getNavigatorFrame()) {
@@ -869,18 +868,6 @@ public class ComponentSource implements NavigatorWindowListener {
 		}
 		TextViewerWindow textViewer = new TextViewerWindow(window);
 		textViewer.setText(sourceCode);
-		textViewer.setSize(new Dimension(600, 400));
-		textViewer.setLocationByPlatform(true);
-		textViewer.setVisible(true);
-	}
-
-	/**
-	 * Show console.
-	 */
-	public void showConsole() {
-		TextViewerWindow textViewer = new TextViewerWindow(window);
-		textViewer.setScrollsOnAppends(true);
-		textViewer.setSwingDocument(ConsoleModel.getStandard());
 		textViewer.setSize(new Dimension(600, 400));
 		textViewer.setLocationByPlatform(true);
 		textViewer.setVisible(true);

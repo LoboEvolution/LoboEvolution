@@ -36,8 +36,10 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.store.StorageManager;
 
@@ -47,7 +49,7 @@ import org.lobobrowser.store.StorageManager;
 public class ReuseManager {
 	
 	 /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(ReuseManager.class.getName());
+    private static final Logger logger = LogManager.getLogger(ReuseManager.class);
 
     /**
      * Instantiates a new reuse manager.
@@ -114,7 +116,7 @@ public class ReuseManager {
                         in.close();
                     }
                 } catch (EOFException eofe) {
-                    eofe.printStackTrace(System.err);
+                	logger.log(Level.ERROR,eofe);
                     portFile.delete();
                 } catch (FileNotFoundException fnfe) {
                     // Likely not running
@@ -152,9 +154,9 @@ public class ReuseManager {
                     } catch (IOException ioe) {
                         // VM must have died. We don't have logging at this
                         // point.
-                        PlatformInit.getInstance().initLogging(false);
-                        Logger.getLogger(ReuseManager.class.getName())
-                        .log(Level.WARNING,
+                        PlatformInit.getInstance().initLogging();
+                        LogManager.getLogger(ReuseManager.class)
+                        .log(Level.WARN,
                                 "Another instance of the application must have been running but was not shut down properly.",
                                 ioe);
                         portFile.delete();
@@ -184,19 +186,12 @@ public class ReuseManager {
                 break OUTER;
             }
         } catch (Throwable e) {
-            logger.severe(e.getMessage());
+            logger.error(e.getMessage());
         }
         if (!launched) {
             PlatformInit entry = PlatformInit.getInstance();
-            boolean debugOn = false;
-            for (int i = 0; i < args.length; i++) {
-                String url = args[i];
-                if (url.equals("-debug")) {
-                    debugOn = true;
-                }
-            }
-            entry.initLogging(debugOn);
-            entry.init(true, !debugOn);
+            entry.initLogging();
+            entry.init(true);
             entry.start(args);
         }
     }

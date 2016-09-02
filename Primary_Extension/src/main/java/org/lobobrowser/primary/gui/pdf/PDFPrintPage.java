@@ -46,6 +46,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.sun.pdfview.PDFFile;
 import com.sun.pdfview.PDFPage;
 import com.sun.pdfview.PDFRenderer;
@@ -56,6 +60,9 @@ import com.sun.pdfview.PDFRenderer;
  * job.
  */
 public class PDFPrintPage implements Printable {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(PDFPrintPage.class);
 
 	/** The PDFFile to be printed. */
 	private PDFFile file;
@@ -126,7 +133,7 @@ public class PDFPrintPage implements Printable {
 				try {
 					pjob.print();
 				} catch (PrinterException exc) {
-					System.out.println(exc);
+					logger.log(Level.ERROR,exc);
 				}
 			}
 		} finally {

@@ -27,8 +27,10 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
@@ -41,8 +43,8 @@ import org.lobobrowser.util.io.NetRoutines;
 public class ConnectionSettings implements java.io.Serializable {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(ConnectionSettings.class.getName());
+    private static final Logger logger = LogManager
+            .getLogger(ConnectionSettings.class);
 
     /** The Constant instance. */
     private static final ConnectionSettings instance;
@@ -78,7 +80,7 @@ public class ConnectionSettings implements java.io.Serializable {
                     .retrieveSettings(ConnectionSettings.class.getSimpleName(),
                             ConnectionSettings.class.getClassLoader());
         } catch (Exception err) {
-            logger.log(Level.WARNING,
+            logger.log(Level.WARN,
                     "getInstance(): Unable to retrieve settings.", err);
         }
         if (ins == null) {
@@ -290,7 +292,7 @@ public class ConnectionSettings implements java.io.Serializable {
             StorageManager.getInstance().saveSettings(
                     this.getClass().getSimpleName(), this);
         } catch (IOException ioe) {
-            logger.log(Level.WARNING, "save(): Unable to save settings", ioe);
+            logger.log(Level.WARN, "save(): Unable to save settings", ioe);
         }
     }
 }

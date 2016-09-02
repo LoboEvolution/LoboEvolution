@@ -29,8 +29,10 @@ import java.net.InetAddress;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The Class ID.
@@ -47,7 +49,7 @@ public class ID {
     /** The Constant globalProcessID. */
     private static final long globalProcessID;
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(ID.class.getName());
+    private static final Logger logger = LogManager.getLogger(ID.class);
     
     static {
         long time = System.currentTimeMillis();
@@ -60,7 +62,7 @@ public class ID {
             addressHashCode = inetAddress.getHostName().hashCode()
                     ^ inetAddress.getHostAddress().hashCode();
         } catch (Exception err) {
-            logger.log(Level.WARNING, "Unable to get local host information.",
+            logger.log(Level.WARN, "Unable to get local host information.",
                     err);
             addressHashCode = ID.class.hashCode();
         }

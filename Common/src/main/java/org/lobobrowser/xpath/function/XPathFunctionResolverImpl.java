@@ -93,9 +93,7 @@ public class XPathFunctionResolverImpl
             return XMLConstants.XML_NS_URI;
         }
         prefix = prefix.intern();
-        for (String s : namespaces.keySet()) {
-            System.out.println(s);
-        }
+
         if (namespaces.containsKey(prefix)) {
             return namespaces.get(prefix);
         }
@@ -189,17 +187,4 @@ public class XPathFunctionResolverImpl
             return functionName.hashCode() + arity;
         }
     }
-    // public static void main(String[] args) {
-    // QName name1 = new QName("http://swinglabs.org/xpath/fs", "ends-with");
-    // QName name2 = new QName("http://swinglabs.org/xpath/fs", "ends-with");
-    // System.out.println("Equals: " + name1.equals(name2));
-    // System.out.println("Hash: " + name1.hashCode() + ", " +
-    // name2.hashCode());
-    //
-    // Signature s1 = new Signature(name1, 3);
-    // Signature s2 = new Signature(name2, 3);
-    // System.out.println("Equals: " + s1.equals(s2));
-    // System.out.println("Hash: " + s1.hashCode() + ", " + s2.hashCode());
-    //
-    // }
 }

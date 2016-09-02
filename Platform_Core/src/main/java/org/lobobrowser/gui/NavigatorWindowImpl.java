@@ -38,8 +38,10 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.Box;
 import javax.swing.JFrame;
@@ -71,7 +73,7 @@ import org.lobobrowser.util.Urls;
 public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(NavigatorWindowImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(NavigatorWindowImpl.class);
 
 	/** The Constant HGAP. */
 	private static final int HGAP = 4;
@@ -183,7 +185,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 				@Override
 				public void windowClosed(WindowEvent e) {
 					if (!launched) {
-						if (logger.isLoggable(Level.INFO)) {
+						if (logger.isInfoEnabled()) {
 							logger.info(
 									"NavigatorWindowImpl(): Disposing browserWindow due to progress window getting closed.");
 						}
@@ -226,7 +228,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 		this.launched = true;
 		if (this.progressWindow != null) {
 			if (!progressWindow.isDisplayable()) {
-				if (logger.isLoggable(Level.INFO)) {
+				if (logger.isInfoEnabled()) {
 					logger.info(
 							"resetAsNavigator(): Progress window is not displayable, so it must have been closed; cancelling operation.");
 				}
@@ -342,7 +344,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 			props.load(in);
 		} catch (IOException ioe) {
 			// impossible
-			logger.log(Level.SEVERE, "unexpected", ioe);
+			logger.log(Level.ERROR, "unexpected", ioe);
 		}
 		return props;
 	}
@@ -564,7 +566,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 				response);
 		latestAccessedFrame = event.getNavigatorFrame();
 		if (!EVENT.fireEvent(event)) {
-			logger.warning("handleDocumentRendering(): Did not deliver event to any window: " + event);
+			logger.warn("handleDocumentRendering(): Did not deliver event to any window: " + event);
 		}
 	}
 

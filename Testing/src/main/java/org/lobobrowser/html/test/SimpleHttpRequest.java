@@ -36,8 +36,10 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -63,7 +65,7 @@ import org.w3c.dom.Document;
 public class SimpleHttpRequest extends AbstractBean {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(SimpleHttpRequest.class.getName());
+	private static final Logger logger = LogManager.getLogger(SimpleHttpRequest.class);
 
 	/** The ready state. */
 	private ReadyState readyState;
@@ -156,7 +158,7 @@ public class SimpleHttpRequest extends AbstractBean {
 		try {
 			return bytes == null ? null : new String(bytes, encoding);
 		} catch (UnsupportedEncodingException uee) {
-			logger.log(Level.WARNING,
+			logger.log(Level.WARN,
 					"getResponseText(): Charset '" + encoding + "' did not work. Retrying with UTF-8.", uee);
 			try {
 				return new String(bytes, "UTF-8");
@@ -187,7 +189,7 @@ public class SimpleHttpRequest extends AbstractBean {
 		try {
 			return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(in);
 		} catch (Exception err) {
-			logger.log(Level.WARNING, "Unable to parse response as XML.", err);
+			logger.log(Level.WARN, "Unable to parse response as XML.", err);
 			return null;
 		}
 	}
@@ -273,7 +275,7 @@ public class SimpleHttpRequest extends AbstractBean {
 			try {
 				c.getInputStream().close();
 			} catch (IOException ioe) {
-				logger.severe(ioe.getMessage());
+				logger.error(ioe.getMessage());
 			}
 		}
 	}
@@ -396,7 +398,7 @@ public class SimpleHttpRequest extends AbstractBean {
 						try {
 							sendSync(content);
 						} catch (Throwable thrown) {
-							logger.log(Level.WARNING, "send(): Error in asynchronous request on " + url, thrown);
+							logger.log(Level.WARN, "send(): Error in asynchronous request on " + url, thrown);
 						}
 					}
 				}.start();

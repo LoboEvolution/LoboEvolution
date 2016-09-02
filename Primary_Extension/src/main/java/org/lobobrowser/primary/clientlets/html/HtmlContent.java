@@ -22,8 +22,8 @@ package org.lobobrowser.primary.clientlets.html;
 
 import java.awt.Component;
 import java.io.UnsupportedEncodingException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.html.gui.HtmlPanel;
@@ -40,7 +40,7 @@ import org.w3c.dom.NodeList;
 public class HtmlContent implements ComponentContent {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(HtmlContent.class.getName());
+	private static final Logger logger = LogManager.getLogger(HtmlContent.class);
 
 	/** The document. */
 	private final HTMLDocument document;
@@ -241,7 +241,7 @@ public class HtmlContent implements ComponentContent {
 		} else if ("defaultOverflowY".equals(name) && (value instanceof Integer)) {
 			this.panel.setDefaultOverflowY((Integer) value);
 		} else {
-			if (logger.isLoggable(Level.INFO)) {
+			if (logger.isInfoEnabled()) {
 				logger.info("setProperty(): Unknown property: " + name);
 			}
 		}

@@ -42,7 +42,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,7 +61,7 @@ import org.lobobrowser.util.gui.ClassLoaderObjectInputStream;
 public final class RestrictedStore implements QuotaSource, ManagedStore {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(RestrictedStore.class
+    private static final Logger logger = LogManager.getLogger(RestrictedStore.class
             .getName());
 
     /**
@@ -134,7 +136,7 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
             this.updateSizeFileImpl(totalSize);
         }
         if ((prevSize != -1) && (Math.abs(totalSize - prevSize) > 10000)) {
-            logger.warning("updateSizeFile(): Corrected a size discrepancy of "
+            logger.warn("updateSizeFile(): Corrected a size discrepancy of "
                     + (totalSize - prevSize) + " bytes in store '"
                     + this.baseDirectory + "'.");
         }

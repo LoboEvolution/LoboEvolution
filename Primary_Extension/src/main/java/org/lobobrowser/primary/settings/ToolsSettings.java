@@ -26,8 +26,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.store.StorageManager;
 
@@ -37,7 +39,7 @@ import org.lobobrowser.store.StorageManager;
 public class ToolsSettings implements Serializable {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ToolsSettings.class.getName());
+	private static final Logger logger = LogManager.getLogger(ToolsSettings.class);
 
 	/** The Constant instance. */
 	private static final ToolsSettings instance;
@@ -63,7 +65,7 @@ public class ToolsSettings implements Serializable {
 			ins = (ToolsSettings) StorageManager.getInstance().retrieveSettings(ToolsSettings.class.getSimpleName(),
 					ToolsSettings.class.getClassLoader());
 		} catch (Exception err) {
-			logger.log(Level.WARNING, "getInstance(): Unable to retrieve settings.", err);
+			logger.log(Level.WARN, "getInstance(): Unable to retrieve settings.", err);
 		}
 		if (ins == null) {
 			ins = new ToolsSettings();
@@ -161,7 +163,7 @@ public class ToolsSettings implements Serializable {
 		try {
 			StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
 		} catch (IOException ioe) {
-			logger.log(Level.WARNING, "Unable to save settings: " + this.getClass().getSimpleName() + ".", ioe);
+			logger.log(Level.WARN, "Unable to save settings: " + this.getClass().getSimpleName() + ".", ioe);
 		}
 	}
 

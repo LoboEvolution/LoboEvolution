@@ -15,6 +15,9 @@
 
 package com.steadystate.css.parser;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
@@ -30,6 +33,9 @@ import com.steadystate.css.sac.DocumentHandlerExt;
  * Empty implementation of the DocumentHandlerExt interface.
  */
 public class HandlerBase implements DocumentHandlerExt, ErrorHandler {
+	
+	/** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(HandlerBase.class);
 
     public void startDocument(final InputSource source) throws CSSException {
         // empty default impl
@@ -134,7 +140,7 @@ public class HandlerBase implements DocumentHandlerExt, ErrorHandler {
             .append(exception.getColumnNumber())
             .append("] ")
             .append(exception.getMessage());
-        System.err.println(sb.toString());
+        logger.log(Level.ERROR,sb.toString());
     }
 
     public void error(final CSSParseException exception) throws CSSException {
@@ -146,7 +152,7 @@ public class HandlerBase implements DocumentHandlerExt, ErrorHandler {
             .append(exception.getColumnNumber())
             .append("] ")
             .append(exception.getMessage());
-        System.err.println(sb.toString());
+        logger.log(Level.ERROR,sb.toString());
     }
 
     public void fatalError(final CSSParseException exception) throws CSSException {
@@ -158,6 +164,6 @@ public class HandlerBase implements DocumentHandlerExt, ErrorHandler {
             .append(exception.getColumnNumber())
             .append("] ")
             .append(exception.getMessage());
-        System.err.println(sb.toString());
+        logger.log(Level.ERROR,sb.toString());
     }
 }

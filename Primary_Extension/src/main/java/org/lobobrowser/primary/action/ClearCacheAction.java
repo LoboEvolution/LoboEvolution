@@ -21,8 +21,10 @@
 package org.lobobrowser.primary.action;
 
 import java.awt.event.ActionEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
@@ -38,7 +40,7 @@ public class ClearCacheAction extends ActionPool {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ClearCacheAction.class.getName());
+	private static final Logger logger = LogManager.getLogger(ClearCacheAction.class);
 
 	/**
 	 * Instantiates a new clear cache action.
@@ -64,7 +66,7 @@ public class ClearCacheAction extends ActionPool {
 		try {
 			clearCache.clearCache();
 		} catch (Throwable err) {
-			logger.log(Level.SEVERE, "ClearCacheAction", err);
+			logger.log(Level.ERROR, "ClearCacheAction", err);
 		}
 	}
 }

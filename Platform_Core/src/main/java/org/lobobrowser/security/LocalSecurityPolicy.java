@@ -45,14 +45,22 @@ import java.util.LinkedList;
 import java.util.PropertyPermission;
 import java.util.logging.LoggingPermission;
 
+import javax.management.MBeanServerPermission;
 import javax.net.ssl.SSLPermission;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.util.Domains;
 
 /**
  * The Class LocalSecurityPolicy.
  */
 public class LocalSecurityPolicy extends Policy {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(LocalSecurityPolicy.class);
+    		
     /**
      * Directory where Lobo should save files. Any files saved here have
      * privileges of a remote file.
@@ -79,7 +87,7 @@ public class LocalSecurityPolicy extends Policy {
         try {
             settingsCanonical = settingsDir.getCanonicalPath();
         } catch (IOException ioe) {
-            ioe.printStackTrace(System.err);
+        	logger.log(Level.ERROR,ioe);
         }
         STORE_DIRECTORY_CANONICAL = settingsCanonical;
 
@@ -120,6 +128,7 @@ public class LocalSecurityPolicy extends Policy {
         permissions.add(new LoggingPermission("control", null));
         permissions.add(GenericLocalPermission.EXT_GENERIC);
         permissions.add(new FilePermission("<<ALL FILES>>","read,write,delete,execute"));
+        permissions.add(new MBeanServerPermission("createMBeanServer"));
     }
 
     /**
@@ -200,8 +209,8 @@ public class LocalSecurityPolicy extends Policy {
                                 String canonical = file.getCanonicalPath();
                                 return !canonical
                                         .startsWith(STORE_DIRECTORY_CANONICAL);
-                            } catch (java.io.IOException ioe) {
-                                ioe.printStackTrace(System.err);
+                            } catch (IOException ioe) {
+                            	logger.log(Level.ERROR,ioe);
                                 return false;
                             }
                         }

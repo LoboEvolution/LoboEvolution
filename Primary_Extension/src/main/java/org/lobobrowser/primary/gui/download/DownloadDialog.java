@@ -33,8 +33,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.Box;
@@ -73,7 +75,7 @@ public class DownloadDialog extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(DownloadDialog.class.getName());
+	private static final Logger logger = LogManager.getLogger(DownloadDialog.class);
 
 	/** The progress bar. */
 	private final JProgressBar progressBar = new JProgressBar();
@@ -568,7 +570,7 @@ public class DownloadDialog extends JFrame {
 				try {
 					OS.launchPath(file.getParentFile().getAbsolutePath());
 				} catch (Exception thrown) {
-					logger.log(Level.WARNING, "Unable to open folder of file: " + file + ".", thrown);
+					logger.log(Level.WARN, "Unable to open folder of file: " + file + ".", thrown);
 					JOptionPane.showMessageDialog(DownloadDialog.this, "An error occurred trying to open the folder.");
 				}
 			}
@@ -597,7 +599,7 @@ public class DownloadDialog extends JFrame {
 					OS.launchPath(file.getAbsolutePath());
 					DownloadDialog.this.dispose();
 				} catch (Exception thrown) {
-					logger.log(Level.WARNING, "Unable to open file: " + file + ".", thrown);
+					logger.log(Level.WARN, "Unable to open file: " + file + ".", thrown);
 					JOptionPane.showMessageDialog(DownloadDialog.this, "An error occurred trying to open the file.");
 				}
 			}
@@ -653,7 +655,7 @@ public class DownloadDialog extends JFrame {
 			try {
 				RequestEngine.getInstance().inlineRequest(this.handler);
 			} catch (Exception err) {
-				logger.log(Level.SEVERE, "Unexpected error on download of [" + url.toExternalForm() + "].", err);
+				logger.log(Level.ERROR, "Unexpected error on download of [" + url.toExternalForm() + "].", err);
 			}
 		}
 	}
@@ -696,7 +698,7 @@ public class DownloadDialog extends JFrame {
 		 */
 		@Override
 		public boolean handleException(ClientletResponse response, Throwable exception) throws ClientletException {
-			logger.log(Level.WARNING,
+			logger.log(Level.WARN,
 					"An error occurred trying to download " + response.getResponseURL() + " to " + this.file + ".",
 					exception);
 			errorInDownload_Safe();

@@ -36,7 +36,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.ua.ProgressType;
@@ -58,8 +60,8 @@ import org.lobobrowser.util.io.RecordedInputStream;
 public class ClientletResponseImpl implements ClientletResponse {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(ClientletResponseImpl.class.getName());
+    private static final Logger logger = LogManager
+            .getLogger(ClientletResponseImpl.class);
 
     /** The Constant MAX_CACHE_BUFFER_SIZE. */
     private static final int MAX_CACHE_BUFFER_SIZE = 10 * 1024 * 1024;
@@ -302,7 +304,7 @@ public class ClientletResponseImpl implements ClientletResponse {
             final int bufferSize = contentLength <= 0 ? 4096 : Math.min(
                     contentLength, 8192);
             final URL responseURL = this.getResponseURL();
-            // if(logger.isLoggable(Level.INFO))logger.info("getInputStream(): Connection stream is "
+            // if(logger.isInfoEnabled())logger.info("getInputStream(): Connection stream is "
             // + in);
             InputStream bis;
             if (this.requestHandler != null) {
@@ -397,7 +399,7 @@ public class ClientletResponseImpl implements ClientletResponse {
                 try {
                     return rin.getBytesRead();
                 } catch (BufferExceededException bee) {
-                    logger.warning("getStoredContent(): Recorded stream buffer size exceeded.");
+                    logger.warn("getStoredContent(): Recorded stream buffer size exceeded.");
                     return null;
                 }
             }
@@ -615,7 +617,7 @@ public class ClientletResponseImpl implements ClientletResponse {
         try {
             return Urls.PATTERN_RFC1123.parse(dateText);
         } catch (java.text.ParseException pe) {
-            logger.warning("getDate(): Bad date '" + dateText + "' from "
+            logger.warn("getDate(): Bad date '" + dateText + "' from "
                     + this.getResponseURL() + ".");
             return null;
         }

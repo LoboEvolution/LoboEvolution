@@ -24,6 +24,9 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ConditionFactory;
 import org.w3c.css.sac.DocumentHandler;
@@ -49,6 +52,10 @@ import com.steadystate.css.sac.DocumentHandlerExt;
  * @author RBRi
  */
 abstract class AbstractSACParser implements Parser {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(AbstractSACParser.class);
+    		
     private DocumentHandler documentHandler_;
     private ErrorHandler errorHandler_;
     private InputSource source_;
@@ -131,7 +138,7 @@ abstract class AbstractSACParser implements Parser {
                     getLocale());
             }
             catch (final MissingResourceException e) {
-                e.printStackTrace();
+            	logger.log(Level.ERROR, e);
             }
         }
         return sacParserMessages_;

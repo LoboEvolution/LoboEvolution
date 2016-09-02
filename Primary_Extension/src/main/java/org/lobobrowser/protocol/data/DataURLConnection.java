@@ -27,7 +27,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -37,7 +39,7 @@ import javax.xml.bind.DatatypeConverter;
 public class DataURLConnection extends HttpURLConnection {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(DataURLConnection.class.getName());
+	private static final Logger logger = LogManager.getLogger(DataURLConnection.class);
 
 	/** The header map. */
 	private HashMap<String, String> headerMap = new HashMap<String, String>();
@@ -166,7 +168,7 @@ public class DataURLConnection extends HttpURLConnection {
 				this.content = value.getBytes();
 			}
 		} catch (IOException e) {
-			logger.severe(e.getMessage());
+			logger.error(e.getMessage());
 		}
 	}
 

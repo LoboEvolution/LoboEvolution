@@ -34,7 +34,9 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
@@ -54,7 +56,7 @@ import org.lobobrowser.w3c.html.HTMLElement;
 public class HtmlContextMenu {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(HtmlContextMenu.class.getName());
+	private static final Logger logger = LogManager.getLogger(HtmlContextMenu.class);
 
 	/** The element. */
 	private HTMLElement element;
@@ -150,14 +152,14 @@ public class HtmlContextMenu {
 						image = ImageIO.read(srcUrl);
 						ImageIO.write(image, ext, selectedFile);
 					} catch (Exception e1) {
-						logger.severe(e1.getMessage());
+						logger.error(e1.getMessage());
 					}
 				}
 			});
 			popupMenu.add(saveImage);
 
 		} catch (MalformedURLException e) {
-			logger.severe(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return popupMenu;
 
@@ -222,12 +224,12 @@ public class HtmlContextMenu {
 						baos.writeTo(ops);
 						baos.flush();
 					} catch (IOException e2) {
-						logger.severe(e1.getMessage());
+						logger.error(e1.getMessage());
 					} finally {
 						try {
 							baos.close();
 						} catch (IOException e2) {
-							logger.severe(e1.getMessage());
+							logger.error(e1.getMessage());
 						}
 					}
 				}
@@ -336,15 +338,15 @@ public class HtmlContextMenu {
 			}
 			result = sb.toString();
 		} catch (MalformedURLException e) {
-			logger.severe(e.getMessage());
+			logger.error(e.getMessage());
 		} catch (IOException e) {
-			logger.severe(e.getMessage());
+			logger.error(e.getMessage());
 		} finally {
 			try {
 				isr.close();
 				is.close();
 			} catch (IOException e) {
-				logger.severe(e.getMessage());
+				logger.error(e.getMessage());
 			}
 		}
 		return result;

@@ -15,8 +15,10 @@ package org.lobobrowser.util.gui;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The Class LAFSettings.
@@ -26,8 +28,8 @@ public class LAFSettings implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
     /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(LAFSettings.class.getName());
+    private static final Logger logger = LogManager
+            .getLogger(LAFSettings.class);
     /** The Acryl . */
     private volatile boolean acryl;
     /** The Aero . */
@@ -137,7 +139,7 @@ public class LAFSettings implements Serializable {
                     .retrieveSettings(LAFSettings.class.getSimpleName(),
                             LAFSettings.class.getClassLoader());
         } catch (Exception err) {
-            logger.log(Level.WARNING,
+            logger.log(Level.WARN,
                     "getInstance(): Unable to retrieve settings.", err);
         }
         if (ins == null) {
@@ -182,7 +184,7 @@ public class LAFSettings implements Serializable {
         try {
             this.saveChecked();
         } catch (IOException ioe) {
-            logger.log(Level.WARNING, "save(): Unable to save settings", ioe);
+            logger.log(Level.WARN, "save(): Unable to save settings", ioe);
         }
     }
     

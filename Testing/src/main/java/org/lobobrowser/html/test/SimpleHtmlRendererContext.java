@@ -40,8 +40,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JOptionPane;
 
@@ -77,7 +79,7 @@ import org.w3c.dom.Node;
 public class SimpleHtmlRendererContext implements HtmlRendererContext {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(SimpleHtmlRendererContext.class.getName());
+	private static final Logger logger = LogManager.getLogger(SimpleHtmlRendererContext.class);
 
 	/** The html panel. */
 	private final HtmlPanel htmlPanel;
@@ -274,7 +276,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 			HTMLCollection frames = topCtx.getFrames();
 			if (frames != null) {
 				Node frame = frames.namedItem(target);
-				if (logger.isLoggable(Level.INFO)) {
+				if (logger.isInfoEnabled()) {
 					logger.info("submitForm(): Frame matching target=" + target + " is " + frame);
 				}
 				if (frame instanceof FrameNode) {
@@ -304,7 +306,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 			} else if ("_this".equals(actualTarget)) {
 				// fall through
 			} else {
-				logger.warning("submitForm(): Link target unrecognized: " + actualTarget);
+				logger.warn("submitForm(): Link target unrecognized: " + actualTarget);
 			}
 		}
 
@@ -394,7 +396,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 					newUrlBuffer.append("=");
 					newUrlBuffer.append(encValue);
 				} else {
-					logger.warning("postData(): Ignoring non-textual parameter " + name + " for GET.");
+					logger.warn("postData(): Ignoring non-textual parameter " + name + " for GET.");
 				}
 			}
 			resolvedURL = new URL(newUrlBuffer.toString());
@@ -416,7 +418,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 		} else {
 			urlForLoading = resolvedURL;
 		}
-		if (logger.isLoggable(Level.INFO)) {
+		if (logger.isInfoEnabled()) {
 			logger.info("process(): Loading URI=[" + urlForLoading + "].");
 		}
 		long time0 = System.currentTimeMillis();
@@ -456,7 +458,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 							bufOut.write((byte) '=');
 							bufOut.write(encValue.getBytes("UTF-8"));
 						} else {
-							logger.warning("postData(): Ignoring non-textual parameter " + name + " for POST.");
+							logger.warn("postData(): Ignoring non-textual parameter " + name + " for POST.");
 						}
 					}
 				}
@@ -476,7 +478,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 			if (connection instanceof HttpURLConnection) {
 				HttpURLConnection hc = (HttpURLConnection) connection;
 				int responseCode = hc.getResponseCode();
-				if (logger.isLoggable(Level.INFO)) {
+				if (logger.isInfoEnabled()) {
 					logger.info("process(): HTTP response code: " + responseCode);
 				}
 				if ((responseCode == HttpURLConnection.HTTP_MOVED_PERM)
@@ -484,7 +486,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 						|| (responseCode == HttpURLConnection.HTTP_SEE_OTHER)) {
 					String location = hc.getHeaderField("Location");
 					if (location == null) {
-						logger.warning("No Location header in redirect from " + action + ".");
+						logger.warn("No Location header in redirect from " + action + ".");
 					} else {
 						URL href;
 						href = Urls.createURL(action, location);
@@ -509,7 +511,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 				// Now start loading.
 				document.load();
 				long time2 = System.currentTimeMillis();
-				if (logger.isLoggable(Level.INFO)) {
+				if (logger.isInfoEnabled()) {
 					logger.info("Parsed URI=[" + urlForLoading + "]: Parse elapsed: " + (time2 - time1)
 							+ " ms. Connection elapsed: " + (time1 - time0) + " ms.");
 				}
@@ -807,8 +809,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 *            the throwable
 	 */
 	public void warn(String message, Throwable throwable) {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, message, throwable);
+		if (logger.isWarnEnabled()) {
+			logger.log(Level.WARN, message, throwable);
 		}
 	}
 
@@ -821,8 +823,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 *            the throwable
 	 */
 	public void error(String message, Throwable throwable) {
-		if (logger.isLoggable(Level.SEVERE)) {
-			logger.log(Level.SEVERE, message, throwable);
+		if (logger.isErrorEnabled()) {
+			logger.log(Level.ERROR, message, throwable);
 		}
 	}
 
@@ -833,8 +835,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 *            the message
 	 */
 	public void warn(String message) {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, message);
+		if (logger.isWarnEnabled()) {
+			logger.log(Level.WARN, message);
 		}
 	}
 
@@ -845,8 +847,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 *            the message
 	 */
 	public void error(String message) {
-		if (logger.isLoggable(Level.SEVERE)) {
-			logger.log(Level.SEVERE, message);
+		if (logger.isErrorEnabled()) {
+			logger.log(Level.ERROR, message);
 		}
 	}
 
@@ -1032,8 +1034,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 */
 	@Override
 	public void back() {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, "back() does nothing, unless overridden.");
+		if (logger.isWarnEnabled()) {
+			logger.log(Level.WARN, "back() does nothing, unless overridden.");
 		}
 	}
 
@@ -1044,8 +1046,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 */
 	@Override
 	public void forward() {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, "forward() does nothing, unless overridden.");
+		if (logger.isWarnEnabled()) {
+			logger.log(Level.WARN, "forward() does nothing, unless overridden.");
 		}
 	}
 
@@ -1102,8 +1104,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 */
 	@Override
 	public void goToHistoryURL(String url) {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, "goToHistoryURL() does nothing, unless overridden.");
+		if (logger.isWarnEnabled()) {
+			logger.log(Level.WARN, "goToHistoryURL() does nothing, unless overridden.");
 		}
 	}
 
@@ -1114,8 +1116,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 */
 	@Override
 	public void moveInHistory(int offset) {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, "moveInHistory() does nothing, unless overridden.");
+		if (logger.isWarnEnabled()) {
+			logger.log(Level.WARN, "moveInHistory() does nothing, unless overridden.");
 		}
 	}
 

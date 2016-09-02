@@ -24,8 +24,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * A thread pool that allows cancelling all running tasks without shutting down
@@ -33,8 +35,8 @@ import java.util.logging.Logger;
  */
 public class SimpleThreadPool {
     /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(SimpleThreadPool.class.getName());
+    private static final Logger logger = LogManager
+            .getLogger(SimpleThreadPool.class);
     /** The task list. */
     private final LinkedList<SimpleThreadPoolTask> taskList = new LinkedList<SimpleThreadPoolTask>();
     /** The running set. */
@@ -195,13 +197,13 @@ public class SimpleThreadPool {
                             currentThread
                                     .setName(baseName + ":" + task.toString());
                         } catch (Throwable thrown) {
-                            logger.log(Level.WARNING,
+                            logger.log(Level.WARN,
                                     "run(): Unable to set task name.", thrown);
                         }
                         try {
                             task.run();
                         } catch (Throwable thrown) {
-                            logger.log(Level.SEVERE,
+                            logger.log(Level.ERROR,
                                     "run(): Error in task: " + task + ".",
                                     thrown);
                         }
@@ -209,7 +211,7 @@ public class SimpleThreadPool {
                         currentThread.setName(baseName);
                     }
                 } catch (Throwable thrown) {
-                    logger.log(Level.SEVERE, "run(): Error in thread pool: "
+                    logger.log(Level.ERROR, "run(): Error in thread pool: "
                             + SimpleThreadPool.this.name + ".", thrown);
                 }
             }

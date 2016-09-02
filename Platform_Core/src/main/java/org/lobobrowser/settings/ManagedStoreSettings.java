@@ -22,8 +22,10 @@ package org.lobobrowser.settings;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
@@ -34,8 +36,8 @@ import org.lobobrowser.store.StorageManager;
 public class ManagedStoreSettings implements Serializable {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(ManagedStoreSettings.class.getName());
+    private static final Logger logger = LogManager
+            .getLogger(ManagedStoreSettings.class);
 
     /** The Constant instance. */
     private static final ManagedStoreSettings instance;
@@ -51,7 +53,7 @@ public class ManagedStoreSettings implements Serializable {
                             ManagedStoreSettings.class.getSimpleName(),
                             ManagedStoreSettings.class.getClassLoader());
         } catch (Exception err) {
-            logger.log(Level.WARNING,
+            logger.log(Level.WARN,
                     "getInstance(): Unable to retrieve settings.", err);
         }
         if (ins == null) {
@@ -86,7 +88,7 @@ public class ManagedStoreSettings implements Serializable {
             StorageManager.getInstance().saveSettings(
                     this.getClass().getSimpleName(), this);
         } catch (IOException ioe) {
-            logger.log(Level.WARNING, "Unable to save settings: "
+            logger.log(Level.WARN, "Unable to save settings: "
                     + this.getClass().getSimpleName(), ioe);
         }
     }

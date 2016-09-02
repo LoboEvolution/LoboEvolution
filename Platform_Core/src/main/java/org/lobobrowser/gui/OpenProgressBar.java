@@ -21,8 +21,10 @@
 package org.lobobrowser.gui;
 
 import java.awt.Graphics;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JProgressBar;
 
@@ -34,7 +36,7 @@ public class OpenProgressBar extends JProgressBar {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(OpenProgressBar.class
+    private static final Logger logger = LogManager.getLogger(OpenProgressBar.class
             .getName());
 
     /*
@@ -46,7 +48,7 @@ public class OpenProgressBar extends JProgressBar {
         try {
             super.paintComponent(g);
         } catch (Exception err) {
-            logger.log(Level.SEVERE, "paintComponent(): Swing bug?", err);
+            logger.log(Level.ERROR, "paintComponent(): Swing bug?", err);
         }
     }
 }

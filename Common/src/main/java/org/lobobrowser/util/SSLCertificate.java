@@ -24,7 +24,9 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -38,8 +40,8 @@ import javax.net.ssl.X509TrustManager;
  */
 public class SSLCertificate {
     /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(SSLCertificate.class.getName());
+    private static final Logger logger = LogManager
+            .getLogger(SSLCertificate.class);
             
     /**
      * Sets the certificate fix for Exception in thread "main"
@@ -85,9 +87,9 @@ public class SSLCertificate {
              * end of the fix
              */
         } catch (KeyManagementException e) {
-            logger.severe(e.getMessage());
+            logger.error(e.getMessage());
         } catch (NoSuchAlgorithmException e) {
-            logger.severe(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 }

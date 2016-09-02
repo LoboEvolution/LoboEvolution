@@ -32,7 +32,6 @@ import java.util.EventListener;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -41,6 +40,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.main.ExtensionManager;
@@ -75,7 +76,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(BrowserPanel.class.getName());
+	private static final Logger logger = LogManager.getLogger(BrowserPanel.class);
 
 	/** The has tool bar. */
 	private final boolean hasToolBar;
@@ -754,7 +755,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 				response);
 		this.latestAccessedFrame = event.getNavigatorFrame();
 		if (!EVENT.fireEvent(event)) {
-			logger.warning("handleDocumentRendering(): Did not deliver event to any window: " + event);
+			logger.warn("handleDocumentRendering(): Did not deliver event to any window: " + event);
 		}
 	}
 

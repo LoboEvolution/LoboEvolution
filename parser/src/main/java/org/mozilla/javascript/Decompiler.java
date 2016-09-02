@@ -6,6 +6,9 @@
 
 package org.mozilla.javascript;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mozilla.javascript.ast.FunctionNode;
 
 /**
@@ -43,6 +46,9 @@ import org.mozilla.javascript.ast.FunctionNode;
  */
 public class Decompiler
 {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(Decompiler.class);
     /**
      * Flag to indicate that the decompilation should omit the
      * function header and trailing brace.
@@ -275,7 +281,7 @@ public class Decompiler
         // Spew tokens in source, for debugging.
         // as TYPE number char
         if (printSource) {
-            System.err.println("length:" + length);
+            
             for (int i = 0; i < length; ++i) {
                 // Note that tokenToName will fail unless Context.printTrees
                 // is true.
@@ -289,14 +295,12 @@ public class Decompiler
                 String pad = tokenname.length() > 7
                     ? "\t"
                     : "\t\t";
-                System.err.println
-                    (tokenname
-                     + pad + (int)source.charAt(i)
-                     + "\t'" + ScriptRuntime.escapeString
-                     (source.substring(i, i+1))
-                     + "'");
-            }
-            System.err.println();
+                logger.log(Level.ERROR,tokenname
+                        + pad + (int)source.charAt(i)
+                        + "\t'" + ScriptRuntime.escapeString
+                        (source.substring(i, i+1))
+                        + "'");
+            }            
         }
 
         int braceNesting = 0;

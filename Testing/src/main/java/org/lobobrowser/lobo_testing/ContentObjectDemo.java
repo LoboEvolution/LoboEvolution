@@ -23,8 +23,10 @@ package org.lobobrowser.lobo_testing;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
@@ -61,10 +63,10 @@ public class ContentObjectDemo extends JFrame {
 
 	public static void main(String[] args) throws Exception {
 		// We'll disable all logging but WARNING.
-		Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
+		LogManager.getLogger("org.lobobrowser");
 
 		// This step is necessary for extensions (including HTML) to work:
-		PlatformInit.getInstance().init(false, false);
+		PlatformInit.getInstance().init(false);
 
 		// Create window with a specific size.
 		JFrame frame = new ContentObjectDemo();
@@ -122,7 +124,7 @@ public class ContentObjectDemo extends JFrame {
 		NavigationEntry navEntry = this.browserPanel.getCurrentNavigationEntry();
 		java.net.URL baseURL = navEntry == null ? null : navEntry.getUrl();
 		if (baseURL == null) {
-			Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "updateLinks(): No URL in current entry.");
+			LogManager.getLogger(this.getClass().getName()).log(Level.WARN, "updateLinks(): No URL in current entry.");
 			return;
 		}
 		if (contentObject instanceof HTMLDocumentImpl) {
@@ -139,7 +141,7 @@ public class ContentObjectDemo extends JFrame {
 					try {
 						itemURL = new java.net.URL(baseURL, href);
 					} catch (java.net.MalformedURLException mfu) {
-						Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "updateLinks()", mfu);
+						LogManager.getLogger(this.getClass().getName()).log(Level.WARN, "updateLinks()", mfu);
 						continue;
 					}
 					String textContent = anchor.getTextContent();
@@ -170,7 +172,7 @@ public class ContentObjectDemo extends JFrame {
 				try {
 					browserPanel.navigate(item.url);
 				} catch (java.net.MalformedURLException mfu) {
-					Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "actionPerformed()", mfu);
+					LogManager.getLogger(this.getClass().getName()).log(Level.WARN, "actionPerformed()", mfu);
 				}
 			}
 		}

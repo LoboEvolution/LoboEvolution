@@ -49,8 +49,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -94,7 +96,7 @@ import com.sun.pdfview.action.PDFAction;
 public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListener, PageChangeListener {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(PdfDialog.class.getName());
+	private static final Logger logger = LogManager.getLogger(PdfDialog.class);
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -170,8 +172,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 			url = getClass().getResource(name);
 			icon = new ImageIcon(url);
 		} catch (Exception e) {
-			System.out.println("Couldn't find " + getClass().getName() + "/" + name);
-			logger.severe(e.getMessage());
+			logger.log(Level.ERROR,e);
 		}
 		return icon;
 	}
@@ -478,7 +479,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		} else if (pagenum >= curFile.getNumPages()) {
 			pagenum = curFile.getNumPages() - 1;
 		}
-		// System.out.println("Going to page " + pagenum);
+		
 		curpage = pagenum;
 		// update the page text field
 		pageField.setText(String.valueOf(curpage + 1));
@@ -544,9 +545,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		public void run() {
 			Dimension size = null;
 			Rectangle2D clip = null;
-			// wait for the current page
-			// System.out.println("Preparer waiting for page " + (waitforPage +
-			// 1));
+			
 			if (fspp != null) {
 				fspp.waitForCurrentPage();
 				size = fspp.getCurSize();
@@ -557,17 +556,9 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 				clip = page.getCurClip();
 			}
 			if (waitforPage == curpage) {
-				// don't go any further if the user changed pages.
-				// System.out.println("Preparer generating page " + (prepPage +
-				// 2));
 				PDFPage pdfPage = curFile.getPage(prepPage + 1, true);
 				if ((pdfPage != null) && (waitforPage == curpage)) {
-					// don't go any further if the user changed pages
-					// System.out.println("Generating image for page " +
-					// (prepPage + 2));
 					pdfPage.getImage(size.width, size.height, clip, null, true, true);
-					// System.out.println("Generated image for page "+
-					// (prepPage+2));
 				}
 			}
 		}
@@ -687,9 +678,9 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 			buf.put(byteBuf);
 			openPDFByteBuffer(buf, file.getPath(), file.getName());
 		} catch (FileNotFoundException e) {
-			logger.severe(e.getMessage());
+			logger.error(e.getMessage());
 		} catch (IOException e) {
-			logger.severe(e.getMessage());
+			logger.error(e.getMessage());
 		} finally {
 			if (istr != null) {
 				try {
@@ -806,7 +797,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 					prevDirChoice = fc.getSelectedFile();
 					openFile(fc.getSelectedFile());
 				} catch (IOException e) {
-					logger.severe(e.getMessage());
+					logger.error(e.getMessage());
 				}
 			}
 		} catch (Exception e) {
@@ -814,7 +805,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 					"Opening files from your local " + "disk is not available\nfrom the "
 							+ "Java Web Start version of this " + "program.\n",
 					"Error opening directory", JOptionPane.ERROR_MESSAGE);
-			logger.severe(e.getMessage());
+			logger.error(e.getMessage());
 		}
 	}
 
@@ -831,7 +822,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 			try {
 				openFile(new File(name));
 			} catch (IOException ex) {
-				Logger.getLogger(PdfDialog.class.getName()).log(Level.SEVERE, null, ex);
+				LogManager.getLogger(PdfDialog.class).debug(ex);
 			}
 		}
 	}
@@ -1252,7 +1243,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 					}
 				}
 			} catch (IOException ioe) {
-				logger.severe(ioe.getMessage());
+				logger.error(ioe.getMessage());
 			}
 		}
 	}

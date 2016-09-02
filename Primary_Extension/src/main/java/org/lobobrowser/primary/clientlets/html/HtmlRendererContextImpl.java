@@ -29,8 +29,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.WeakHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JPopupMenu;
 
@@ -63,7 +65,7 @@ import org.w3c.dom.Document;
 public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(HtmlRendererContextImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(HtmlRendererContextImpl.class);
 
 	/** The Constant weakAssociation. */
 	private static final Map<NavigatorFrame, WeakReference<HtmlRendererContextImpl>> weakAssociation = new WeakHashMap<NavigatorFrame, WeakReference<HtmlRendererContextImpl>>();
@@ -139,7 +141,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	 *            the throwable
 	 */
 	public void warn(String message, Throwable throwable) {
-		logger.log(Level.WARNING, message, throwable);
+		logger.log(Level.WARN, message, throwable);
 	}
 
 	/**
@@ -151,7 +153,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	 *            the throwable
 	 */
 	public void error(String message, Throwable throwable) {
-		logger.log(Level.SEVERE, message, throwable);
+		logger.log(Level.ERROR, message, throwable);
 	}
 
 	/**
@@ -161,7 +163,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	 *            the message
 	 */
 	public void warn(String message) {
-		logger.warning(message);
+		logger.warn(message);
 	}
 
 	/**
@@ -171,7 +173,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	 *            the message
 	 */
 	public void error(String message) {
-		logger.log(Level.SEVERE, message);
+		logger.log(Level.ERROR, message);
 	}
 
 	@Override
@@ -197,7 +199,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	 *            the link object
 	 */
 	private void navigateImpl(URL href, String target, RequestType requestType, Object linkObject) {
-		if (logger.isLoggable(Level.INFO)) {
+		if (logger.isInfoEnabled()) {
 			logger.info("navigateImpl(): href=" + href + ",target=" + target);
 		}
 		// First check if target is a frame identifier.
@@ -267,7 +269,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			URL urlObj = org.lobobrowser.util.Urls.guessURL(url);
 			return this.open(urlObj, windowName, windowFeatures, replace);
 		} catch (Exception err) {
-			logger.log(Level.WARNING, "open(): Unable to open URL [" + url + "].", err);
+			logger.log(Level.WARN, "open(): Unable to open URL [" + url + "].", err);
 			return null;
 		}
 	}
@@ -340,7 +342,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			}
 			return HtmlRendererContextImpl.getHtmlRendererContext(newFrame);
 		} catch (Exception err) {
-			logger.log(Level.WARNING, "open(): Unable to open URL [" + urlObj + "].", err);
+			logger.log(Level.WARN, "open(): Unable to open URL [" + urlObj + "].", err);
 			return null;
 		}
 	}

@@ -13,13 +13,19 @@ import java.util.ArrayList;
 
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.ScriptNode;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mozilla.javascript.ScriptRuntime.NoSuchMethodShim;
 import org.mozilla.javascript.debug.DebugFrame;
 
 import static org.mozilla.javascript.UniqueTag.DOUBLE_MARK;
 
-public final class Interpreter extends Icode implements Evaluator
-{
+public final class Interpreter extends Icode implements Evaluator {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(Interpreter.class);
+    
     // data for parsing
     InterpreterData itsData;
 
@@ -168,21 +174,6 @@ public final class Interpreter extends Icode implements Evaluator
       result.frameIndex = 0;
 
       return result;
-    }
-
-    static {
-        // Checks for byte code consistencies, good compiler can eliminate them
-
-        if (Token.LAST_BYTECODE_TOKEN > 127) {
-            String str = "Violation of Token.LAST_BYTECODE_TOKEN <= 127";
-            System.err.println(str);
-            throw new IllegalStateException(str);
-        }
-        if (MIN_ICODE < -128) {
-            String str = "Violation of Interpreter.MIN_ICODE >= -128";
-            System.err.println(str);
-            throw new IllegalStateException(str);
-        }
     }
 
     public Object compile(CompilerEnvirons compilerEnv,
@@ -1940,9 +1931,7 @@ switch (op) {
             }  // end of interpreter withoutExceptions: try
             catch (Throwable ex) {
                 if (throwable != null) {
-                    // This is serious bug and it is better to track it ASAP
-                    ex.printStackTrace(System.err);
-                    throw new IllegalStateException();
+                	logger.log(Level.ERROR,ex);
                 }
                 throwable = ex;
             }
@@ -2953,9 +2942,7 @@ switch (op) {
                     frame.debuggerFrame.onExit(cx, false, result);
                 }
             } catch (Throwable ex) {
-                System.err.println(
-"RHINO USAGE WARNING: onExit terminated with exception");
-                ex.printStackTrace(System.err);
+                logger.log(Level.ERROR,ex);
             }
         }
     }

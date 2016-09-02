@@ -25,15 +25,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The Class StorageManagerCommon.
  */
 public class StorageManagerCommon {
     /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(StorageManagerCommon.class.getName());
+    private static final Logger logger = LogManager
+            .getLogger(StorageManagerCommon.class);
     /** The Constant SETTINGS_DIR. */
     private static final String SETTINGS_DIR = "settings";
     /** The Constant STORE_DIR_NAME. */
@@ -110,7 +112,7 @@ public class StorageManagerCommon {
             try {
                 return (Serializable) ois.readObject();
             } catch (InvalidClassException ice) {
-                logger.severe(ice.getMessage());
+                logger.error(ice.getMessage());
                 return null;
             }
         } finally {

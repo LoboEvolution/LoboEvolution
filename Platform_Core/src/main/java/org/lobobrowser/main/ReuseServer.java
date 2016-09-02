@@ -33,10 +33,17 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Random;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * The local-bound server that allows the browser JVM to be reused.
  */
 public class ReuseServer implements Runnable {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(ReuseServer.class);
 
     /**
      * Instantiates a new reuse server.
@@ -88,7 +95,7 @@ public class ReuseServer implements Runnable {
                     this.notify();
                     return rport;
                 } catch (IOException ioe) {
-                    ioe.printStackTrace(System.err);
+                	logger.log(Level.ERROR,ioe);
                 }
             }
         }
@@ -155,7 +162,7 @@ public class ReuseServer implements Runnable {
                     in.close();
                 }
             } catch (Throwable t) {
-                t.printStackTrace(System.err);
+            	logger.log(Level.ERROR,t);
             }
         }
     }

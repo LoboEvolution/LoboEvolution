@@ -26,8 +26,10 @@ import java.security.Policy;
 import java.security.PrivilegedAction;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
@@ -43,7 +45,7 @@ import org.lobobrowser.ua.NavigatorFrame;
 public class UserAgentContextImpl implements UserAgentContext {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(UserAgentContextImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(UserAgentContextImpl.class);
 
 	/** The Constant mediaNames. */
 	private static final Set<String> mediaNames = new HashSet<String>();
@@ -85,7 +87,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 *            the throwable
 	 */
 	public void warn(String message, Throwable throwable) {
-		logger.log(Level.WARNING, message, throwable);
+		logger.log(Level.WARN, message, throwable);
 	}
 
 	/**
@@ -97,7 +99,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 *            the throwable
 	 */
 	public void error(String message, Throwable throwable) {
-		logger.log(Level.SEVERE, message, throwable);
+		logger.log(Level.ERROR, message, throwable);
 	}
 
 	/**
@@ -107,7 +109,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 *            the message
 	 */
 	public void warn(String message) {
-		logger.warning(message);
+		logger.warn(message);
 	}
 
 	/**
@@ -117,7 +119,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 *            the message
 	 */
 	public void error(String message) {
-		logger.log(Level.SEVERE, message);
+		logger.log(Level.ERROR, message);
 	}
 
 	/*

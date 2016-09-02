@@ -27,8 +27,8 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.util.ColorCommon;
 
@@ -39,8 +39,8 @@ import org.lobobrowser.util.ColorCommon;
  */
 public class ColorFactory {
     /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(ColorFactory.class.getName());
+    private static final Logger logger = LogManager
+            .getLogger(ColorFactory.class);
     /** The instance. */
     private static ColorFactory instance;
     /** The Constant TRANSPARENT. */
@@ -204,8 +204,8 @@ public class ColorFactory {
                     }
                     color = new Color(rgba[0], rgba[1], rgba[2], rgba[3]);
                 } else {
-                    if (logger.isLoggable(Level.INFO)) {
-                        logger.warning("getColor(): Color spec [" + normalSpec
+                    if (logger.isInfoEnabled()) {
+                        logger.warn("getColor(): Color spec [" + normalSpec
                                 + "] unknown.");
                     }
                     return Color.RED;

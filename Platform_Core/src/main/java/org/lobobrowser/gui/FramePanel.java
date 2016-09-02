@@ -37,8 +37,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -93,7 +93,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
     private static final long serialVersionUID = 1L;
 
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(FramePanel.class
+    private static final Logger logger = LogManager.getLogger(FramePanel.class
             .getName());
 
     /** The window id. */
@@ -691,7 +691,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
      */
     protected void replaceContentImpl(final ClientletResponse response,
             final ComponentContent content) {
-        if (logger.isLoggable(Level.INFO)) {
+        if (logger.isInfoEnabled()) {
             logger.info("replaceContentImpl(): this=" + this + ",response="
                     + response + ", content=" + content);
         }
@@ -876,7 +876,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
         try {
             this.dispatchBeforeNavigate(event);
         } catch (NavigationVetoException nve) {
-            if (logger.isLoggable(Level.INFO)) {
+            if (logger.isInfoEnabled()) {
                 logger.info("navigateLocal(): Navigation was vetoed: "
                         + nve.getMessage());
             }
@@ -970,7 +970,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
         try {
             this.dispatchBeforeLocalNavigate(event);
         } catch (NavigationVetoException nve) {
-            if (logger.isLoggable(Level.INFO)) {
+            if (logger.isInfoEnabled()) {
                 logger.info("navigateLocal(): Navigation was vetoed: "
                         + nve.getMessage());
             }
@@ -1097,7 +1097,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
         try {
             this.dispatchBeforeWindowOpen(event);
         } catch (NavigationVetoException nve) {
-            if (logger.isLoggable(Level.INFO)) {
+            if (logger.isInfoEnabled()) {
                 logger.info("navigateLocal(): Navigation was vetoed: "
                         + nve.getMessage());
             }
@@ -1669,7 +1669,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
     @Override
     public void resizeWindowBy(int byWidth, int byHeight) {
         Window window = this.getWindow();
-        if (logger.isLoggable(Level.INFO)) {
+        if (logger.isInfoEnabled()) {
             logger.info("resizeWindowBy(): byWidth=" + byWidth + ",byHeight="
                     + byHeight + "; window=" + window);
         }
@@ -1686,7 +1686,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
     @Override
     public void resizeWindowTo(int width, int height) {
         Window window = this.getWindow();
-        if (logger.isLoggable(Level.INFO)) {
+        if (logger.isInfoEnabled()) {
             logger.info("resizeWindowTo(): width=" + width + ",height="
                     + height + "; window=" + window);
         }

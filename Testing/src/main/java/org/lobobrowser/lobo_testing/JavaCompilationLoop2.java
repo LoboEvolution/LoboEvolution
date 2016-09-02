@@ -30,8 +30,8 @@ import org.lobobrowser.store.CacheManager;
  */
 public class JavaCompilationLoop2 {
 	public static void main(String[] args) throws Exception {
-		PlatformInit.getInstance().init(false, false);
-		PlatformInit.getInstance().initLogging(false);
+		PlatformInit.getInstance().init(false);
+		PlatformInit.getInstance().initLogging();
 		BrowserPanel panel = TestWindow.newWindow();
 		for (int i = 0; i < 100; i++) {
 			newTest(panel);

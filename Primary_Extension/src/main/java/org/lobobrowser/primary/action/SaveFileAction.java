@@ -26,7 +26,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -42,7 +44,7 @@ import org.lobobrowser.ua.NavigatorWindow;
 public class SaveFileAction extends ActionPool {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(SaveFileAction.class.getName());
+	private static final Logger logger = LogManager.getLogger(SaveFileAction.class);
 
 	/** The window. */
 	private NavigatorWindow window;
@@ -100,12 +102,12 @@ public class SaveFileAction extends ActionPool {
 				baos.writeTo(ops);
 				baos.flush();
 			} catch (IOException e1) {
-				logger.severe(e1.getMessage());
+				logger.error(e1.getMessage());
 			} finally {
 				try {
 					baos.close();
 				} catch (IOException e1) {
-					logger.severe(e1.getMessage());
+					logger.error(e1.getMessage());
 				}
 			}
 

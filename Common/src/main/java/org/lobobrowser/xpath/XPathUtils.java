@@ -22,7 +22,9 @@ package org.lobobrowser.xpath;
 
 import java.io.StringWriter;
 import java.util.Properties;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -49,8 +51,8 @@ import org.w3c.dom.Node;
  */
 public class XPathUtils {
     /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(XPathUtils.class.getName());
+    private static final Logger logger = LogManager
+            .getLogger(XPathUtils.class);
     /** The Constant xpath. */
     private static final XPath xpath;
     /** The Constant functionResolver. */
@@ -254,7 +256,7 @@ public class XPathUtils {
             writer.close();
             return s;
         } catch (Exception e) {
-            logger.severe(e.getMessage());
+            logger.error(e.getMessage());
             return null;
         }
     }

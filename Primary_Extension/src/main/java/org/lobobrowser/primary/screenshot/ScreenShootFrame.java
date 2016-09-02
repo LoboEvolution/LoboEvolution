@@ -27,7 +27,9 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
@@ -55,7 +57,7 @@ public class ScreenShootFrame extends JFrame {
 	private BufferedImage image;
 	
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ScreenShootFrame.class.getName());
+	private static final Logger logger = LogManager.getLogger(ScreenShootFrame.class);
 
 	public ScreenShootFrame(JPanel panelframe) {
 		setTitle("Screenshot");
@@ -111,7 +113,7 @@ public class ScreenShootFrame extends JFrame {
 				try {
 					ImageIO.write(image, "jpg", new File(selectedFile.getAbsolutePath()));
 				} catch (IOException e) {
-					logger.severe(e.getMessage());
+					logger.error(e.getMessage());
 				}
 			}			
 		}

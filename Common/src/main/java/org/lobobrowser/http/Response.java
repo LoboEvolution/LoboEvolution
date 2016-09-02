@@ -29,6 +29,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * <p>
  * Represents a Response from an http {@link Request}. Instances of this class
@@ -55,6 +59,10 @@ import java.util.Set;
  * @author rbair
  */
 public class Response {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(Response.class);
+    		
     /**
      * The encoding for the body to be used when constructing a String from the
      * bytes. This defaults to UTF-8, but can be set by specifying the encoding
@@ -220,7 +228,7 @@ public class Response {
             return responseBody == null ? ""
                     : new String(responseBody, charset);
         } catch (UnsupportedEncodingException ex) {
-            ex.printStackTrace();
+        	logger.log(Level.ERROR, ex);
             return responseBody == null ? "" : new String(responseBody);
         }
     }

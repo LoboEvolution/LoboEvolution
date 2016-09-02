@@ -31,8 +31,10 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.jar.JarFile;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.http.LRUCache;
 import org.lobobrowser.security.GenericLocalPermission;
@@ -48,7 +50,7 @@ import org.lobobrowser.util.io.IORoutines;
 public final class CacheManager implements Runnable {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(CacheManager.class
+    private static final Logger logger = LogManager.getLogger(CacheManager.class
             .getName());
 
     /** The Constant AFTER_SWEEP_SLEEP. */
@@ -412,7 +414,7 @@ public final class CacheManager implements Runnable {
                 this.sweepCache();
                 Thread.sleep(AFTER_SWEEP_SLEEP);
             } catch (Throwable err) {
-                logger.log(Level.SEVERE, "run()", err);
+                logger.log(Level.ERROR, "run()", err);
                 try {
                     Thread.sleep(AFTER_SWEEP_SLEEP);
                 } catch (InterruptedException ie) {
@@ -438,7 +440,7 @@ public final class CacheManager implements Runnable {
      */
     private void sweepCache() throws Exception {
         CacheStoreInfo sinfo = this.getCacheStoreInfo();
-        if (logger.isLoggable(Level.INFO)) {
+        if (logger.isInfoEnabled()) {
             logger.info("sweepCache(): Cache size is " + sinfo.getLength()
                     + " with a max of " + this.getMaxCacheSize()
                     + ". The number of cache files is "
@@ -462,7 +464,7 @@ public final class CacheManager implements Runnable {
                             long time1 = System.currentTimeMillis();
                             finfo.delete();
                             long time2 = System.currentTimeMillis();
-                            if (logger.isLoggable(Level.INFO)) {
+                            if (logger.isInfoEnabled()) {
                                 logger.info("sweepCache(): Removed " + finfo
                                         + " in " + (time2 - time1) + " ms.");
                             }
@@ -473,7 +475,7 @@ public final class CacheManager implements Runnable {
                         }
                     }
                 } catch (Throwable thrown) {
-                    logger.log(Level.WARNING, "sweepCache()", thrown);
+                    logger.log(Level.WARN, "sweepCache()", thrown);
                 }
             }
         }
@@ -503,7 +505,7 @@ public final class CacheManager implements Runnable {
     private void populateCacheStoreInfo(CacheStoreInfo csinfo, File directory) {
         File[] files = directory.listFiles();
         if (files == null) {
-            logger.severe("populateCacheStoreInfo(): Unexpected: '" + directory
+            logger.error("populateCacheStoreInfo(): Unexpected: '" + directory
                     + "' is not a directory.");
             return;
         }

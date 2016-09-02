@@ -12,12 +12,19 @@ import java.io.Reader;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Collection of utilities
  */
 
-public class Kit
-{
+public class Kit {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(Kit.class);
+    
     /**
      * Reflection of Throwable.initCause(Throwable) from JDK 1.4
      * or nul if it is not available.
@@ -416,7 +423,7 @@ public class Kit
     {
         RuntimeException ex = new IllegalStateException("FAILED ASSERTION");
         // Print stack trace ASAP
-        ex.printStackTrace(System.err);
+        logger.log(Level.ERROR,ex);
         throw ex;
     }
 
@@ -432,7 +439,7 @@ public class Kit
         msg = "FAILED ASSERTION: " + msg;
         RuntimeException ex = new IllegalStateException(msg);
         // Print stack trace ASAP
-        ex.printStackTrace(System.err);
+        logger.log(Level.ERROR,ex);
         throw ex;
     }
 }

@@ -25,9 +25,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import org.apache.logging.log4j.LogManager;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -47,8 +46,8 @@ import org.xml.sax.InputSource;
  */
 public class BarebonesTest {
 	public static void main(String[] args) throws Exception {
-		// Initialize logging so only Cobra warnings are seen.
-		Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
+		// Initialize logging so only Cobra.warns are seen.
+		LogManager.getLogger("org.lobobrowser");
 
 		// Open a connection on the URL we want to render first.
 		String uri = "http://www.google.com";

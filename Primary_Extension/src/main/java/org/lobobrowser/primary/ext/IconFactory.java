@@ -24,8 +24,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.ImageIcon;
 
@@ -37,7 +39,7 @@ import org.lobobrowser.util.io.IORoutines;
 public class IconFactory {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(IconFactory.class.getName());
+	private static final Logger logger = LogManager.getLogger(IconFactory.class);
 
 	/** The Constant instance. */
 	private static final IconFactory instance = new IconFactory();
@@ -74,7 +76,7 @@ public class IconFactory {
 				if (icon == null) {
 					InputStream in = this.getClass().getResourceAsStream(resourcePath);
 					if (in == null) {
-						logger.warning("getIcon(): Resource path " + resourcePath + " not found.");
+						logger.warn("getIcon(): Resource path " + resourcePath + " not found.");
 						return null;
 					}
 					try {
@@ -88,7 +90,7 @@ public class IconFactory {
 				return icon;
 			}
 		} catch (IOException ioe) {
-			logger.log(Level.WARNING, "getIcon(): Resource path " + resourcePath + " gave error.", ioe);
+			logger.log(Level.WARN, "getIcon(): Resource path " + resourcePath + " gave error.", ioe);
 			return null;
 		}
 	}

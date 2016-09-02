@@ -22,8 +22,10 @@ package org.lobobrowser.primary.gui.bookmarks;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.primary.ext.BaseHistory;
 import org.lobobrowser.primary.info.BookmarkInfo;
@@ -38,7 +40,7 @@ public class BookmarksHistory extends BaseHistory<BookmarkInfo>implements Serial
 	private static final long serialVersionUID = 2257845000200000300L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(BookmarksHistory.class.getName());
+	private static final Logger logger = LogManager.getLogger(BookmarksHistory.class);
 
 	/** The Constant instance. */
 	private static final BookmarksHistory instance;
@@ -49,7 +51,7 @@ public class BookmarksHistory extends BaseHistory<BookmarkInfo>implements Serial
 			ins = (BookmarksHistory) StorageManager.getInstance()
 					.retrieveSettings(BookmarksHistory.class.getSimpleName(), BookmarksHistory.class.getClassLoader());
 		} catch (Exception err) {
-			logger.log(Level.WARNING, "Unable to retrieve settings.", err);
+			logger.log(Level.WARN, "Unable to retrieve settings.", err);
 		}
 		if (ins == null) {
 			ins = new BookmarksHistory();
@@ -80,7 +82,7 @@ public class BookmarksHistory extends BaseHistory<BookmarkInfo>implements Serial
 			try {
 				StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
 			} catch (IOException ioe) {
-				logger.log(Level.WARNING, "Unable to save settings: " + this.getClass().getSimpleName(), ioe);
+				logger.log(Level.WARN, "Unable to save settings: " + this.getClass().getSimpleName(), ioe);
 			}
 		}
 	}

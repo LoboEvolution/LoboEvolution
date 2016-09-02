@@ -32,8 +32,10 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.clientlet.ClientletException;
 import org.lobobrowser.clientlet.ClientletResponse;
@@ -63,7 +65,7 @@ import org.lobobrowser.w3c.html.HTMLDocument;
 public class ExtensionImpl implements NavigatorExtension {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ExtensionImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(ExtensionImpl.class);
 
 	/*
 	 * (non-Javadoc)
@@ -146,8 +148,8 @@ public class ExtensionImpl implements NavigatorExtension {
 	 *            the exception
 	 */
 	public static void showError(NavigatorFrame frame, ClientletResponse response, Throwable exception) {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, "showError(): An error occurred trying to process document "
+		if (logger.isWarnEnabled()) {
+			logger.log(Level.WARN, "showError(): An error occurred trying to process document "
 					+ (response == null ? "[null]" : response.getResponseURL()), exception.getCause());
 		}
 		ComponentContent errorComponent = getErrorComponent(frame, response, exception);

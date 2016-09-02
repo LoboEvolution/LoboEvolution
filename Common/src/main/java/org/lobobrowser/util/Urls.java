@@ -38,7 +38,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.TimeZone;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.http.NameValuePair;
 
@@ -47,7 +49,7 @@ import org.lobobrowser.http.NameValuePair;
  */
 public class Urls {
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(Urls.class.getName());
+    private static final Logger logger = LogManager.getLogger(Urls.class);
     /** The Constant PATTERN_RFC1123. */
     public static final DateFormat PATTERN_RFC1123 = new SimpleDateFormat(
             "EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
@@ -173,7 +175,7 @@ public class Urls {
                             seconds = Integer.parseInt(value);
                             return new Long(baseTime + (seconds * 1000));
                         } catch (NumberFormatException nfe) {
-                            logger.warning(
+                            logger.warn(
                                     "getExpiration(): Bad Cache-Control max-age value: "
                                             + value);
                             // ignore
@@ -195,7 +197,7 @@ public class Urls {
                     seconds = Integer.parseInt(expires);
                     return new Long(baseTime + (seconds * 1000));
                 } catch (NumberFormatException nfe) {
-                    logger.warning("getExpiration(): Bad Expires header value: "
+                    logger.warn("getExpiration(): Bad Expires header value: "
                             + expires);
                 }
             }
@@ -283,7 +285,7 @@ public class Urls {
                         throw mfu;
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
-                        logger.severe(e.getMessage());
+                        logger.error(e.getMessage());
                     }
                 }
             }

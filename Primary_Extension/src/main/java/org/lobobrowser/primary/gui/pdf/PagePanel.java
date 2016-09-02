@@ -37,6 +37,10 @@ import java.awt.image.ImageObserver;
 
 import javax.swing.JPanel;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.sun.pdfview.PDFPage;
 
 /**
@@ -45,6 +49,9 @@ import com.sun.pdfview.PDFPage;
  */
 public class PagePanel extends JPanel implements ImageObserver, MouseListener, MouseMotionListener {
 
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(PagePanel.class);
+    		
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
@@ -120,16 +127,13 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 		} else {
 			// start drawing -- clear the flag to indicate we're in progress.
 			flag.clear();
-			// System.out.println(" flag cleared");
-
+			
 			Dimension sz = getSize();
 			if (sz.width + sz.height == 0) {
 				// no image to draw.
 				return;
 			}
-			// System.out.println("Ratios: scrn="+((float)sz.width/sz.height)+
-			// ", clip="+(clip==null ? 0 : clip.getWidth()/clip.getHeight()));
-
+			
 			// calculate the clipping rectangle in page space from the
 			// desired clip in screen space.
 			Rectangle2D useClip = clip;
@@ -147,8 +151,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 			try {
 				currentXform = currentXform.createInverse();
 			} catch (NoninvertibleTransformException nte) {
-				System.out.println("Error inverting page transform!");
-				nte.printStackTrace();
+				logger.log(Level.ERROR, nte);
 			}
 
 			prevClip = useClip;
@@ -268,7 +271,6 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 		}
 		if ((infoflags & (ALLBITS | ERROR | ABORT)) != 0) {
 			flag.set();
-			// System.out.println(" flag set");
 			return false;
 		} else {
 			return true;

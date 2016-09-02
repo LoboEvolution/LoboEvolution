@@ -26,8 +26,10 @@ import java.awt.Toolkit;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.clientlet.Clientlet;
 import org.lobobrowser.clientlet.ClientletContext;
@@ -42,7 +44,7 @@ import org.lobobrowser.util.io.IORoutines;
 public class ImageClientlet implements Clientlet {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ImageClientlet.class.getName());
+	private static final Logger logger = LogManager.getLogger(ImageClientlet.class);
 
 	/**
 	 * Instantiates a new image clientlet.
@@ -77,7 +79,7 @@ public class ImageClientlet implements Clientlet {
 			} catch (IOException ioe) {
 				throw new ClientletException(ioe);
 			}
-			if (logger.isLoggable(Level.INFO)) {
+			if (logger.isInfoEnabled()) {
 				logger.info("process(): Loaded " + imageBytes.length + " bytes.");
 			}
 			image = Toolkit.getDefaultToolkit().createImage(imageBytes);

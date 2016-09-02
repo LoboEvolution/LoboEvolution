@@ -21,8 +21,10 @@
 package org.lobobrowser.settings;
 
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
@@ -33,7 +35,7 @@ import org.lobobrowser.store.StorageManager;
 public class CookieSettings implements Serializable {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(CookieSettings.class
+    private static final Logger logger = LogManager.getLogger(CookieSettings.class
             .getName());
 
     /** The Constant instance. */
@@ -49,7 +51,7 @@ public class CookieSettings implements Serializable {
                     .retrieveSettings(CookieSettings.class.getSimpleName(),
                             CookieSettings.class.getClassLoader());
         } catch (Exception err) {
-            logger.log(Level.WARNING,
+            logger.log(Level.WARN,
                     "getInstance(): Unable to retrieve settings.", err);
         }
         if (ins == null) {

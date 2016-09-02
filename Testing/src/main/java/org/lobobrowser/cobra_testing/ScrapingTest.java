@@ -30,8 +30,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -70,7 +72,7 @@ public class ScrapingTest {
 	private static final String SEARCH_FORM_XPATH = "//form[@id='aspnetForm']";
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ScrapingTest.class.getName());
+	private static final Logger logger = LogManager.getLogger(ScrapingTest.class);
 
 	public static void main(String[] args) throws Exception {
 		UserAgentContext uacontext = new LocalUserAgentContext();
@@ -226,7 +228,7 @@ public class ScrapingTest {
 				URL url = org.lobobrowser.util.Urls.guessURL(urlOrPath);
 				this.submitForm("GET", url, "_this", null, null);
 			} catch (java.net.MalformedURLException mfu) {
-				logger.log(Level.WARNING, "navigate()", mfu);
+				logger.log(Level.WARN, "navigate()", mfu);
 			}
 		}
 
@@ -353,7 +355,7 @@ public class ScrapingTest {
 				}
 			} catch (Exception err) {
 				this.document = null;
-				logger.log(Level.WARNING, "submitForm()", err);
+				logger.log(Level.WARN, "submitForm()", err);
 			}
 		}
 

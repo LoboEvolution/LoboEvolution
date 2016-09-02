@@ -22,8 +22,10 @@ package org.lobobrowser.cobra_testing;
 
 import java.io.InputStream;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
@@ -43,7 +45,7 @@ public class IdTest {
 	private static final String TEST_URI = "file:///C:/Users/Administrator/Desktop/1.html";
 
 	public static void main(String[] args) throws Exception {
-		Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
+		LogManager.getLogger("org.lobobrowser");
 		UserAgentContext uacontext = new SimpleUserAgentContext();
 		URL url = new URL(TEST_URI);
 		InputStream in = url.openConnection().getInputStream();

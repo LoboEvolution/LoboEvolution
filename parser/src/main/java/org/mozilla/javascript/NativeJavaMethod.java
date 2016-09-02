@@ -10,6 +10,10 @@ import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * This class reflects Java methods into the JavaScript environment and
  * handles overloading of methods.
@@ -20,9 +24,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @see NativeJavaClass
  */
 
-public class NativeJavaMethod extends BaseFunction
-{
+public class NativeJavaMethod extends BaseFunction {
     static final long serialVersionUID = -3440381785576412928L;
+    
+    /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(NativeJavaMethod.class);
 
     NativeJavaMethod(MemberBox[] methods)
     {
@@ -228,7 +234,7 @@ public class NativeJavaMethod extends BaseFunction
         if (debug) {
             Class<?> actualType = (retval == null) ? null
                                                 : retval.getClass();
-            System.err.println(" ----- Returned " + retval +
+            logger.log(Level.ERROR," ----- Returned " + retval +
                                " actual = " + actualType +
                                " expect = " + staticType);
         }
@@ -238,7 +244,7 @@ public class NativeJavaMethod extends BaseFunction
         if (debug) {
             Class<?> actualType = (wrapped == null) ? null
                                                  : wrapped.getClass();
-            System.err.println(" ----- Wrapped as " + wrapped +
+            logger.log(Level.ERROR," ----- Wrapped as " + wrapped +
                                " class = " + actualType);
         }
 

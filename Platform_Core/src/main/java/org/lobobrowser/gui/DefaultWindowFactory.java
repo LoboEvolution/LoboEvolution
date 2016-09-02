@@ -35,8 +35,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.WindowConstants;
@@ -56,8 +58,8 @@ import org.lobobrowser.util.WeakValueHashMap;
 public class DefaultWindowFactory implements WindowFactory {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(DefaultWindowFactory.class.getName());
+    private static final Logger logger = LogManager
+            .getLogger(DefaultWindowFactory.class);
 
     /** The instance. */
     private static DefaultWindowFactory instance = new DefaultWindowFactory();
@@ -129,7 +131,7 @@ public class DefaultWindowFactory implements WindowFactory {
 			}
 
 		} catch (Throwable ex) {
-			 logger.log(Level.WARNING, ex.getMessage());
+			 logger.log(Level.WARN, ex.getMessage());
 		}
 		return image;
 	}
@@ -150,7 +152,7 @@ public class DefaultWindowFactory implements WindowFactory {
                     icon = new ImageIcon(imageBytes);
                     this.imageMap.put(urlOrPath, icon);
                 } catch (Exception err) {
-                    logger.log(Level.WARNING,
+                    logger.log(Level.WARN,
                             "getImageIcon(): Unable to load image: "
                                     + urlOrPath, err);
                 }
@@ -205,7 +207,7 @@ public class DefaultWindowFactory implements WindowFactory {
                 this.framesById.put(windowId, window);
             }
             window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            if (logger.isLoggable(Level.INFO)) {
+            if (logger.isInfoEnabled()) {
                 logger.info("createBaseWindow(): Adding window listener: window="
                         + window + ",windowId=" + windowId);
             }
@@ -214,7 +216,7 @@ public class DefaultWindowFactory implements WindowFactory {
                 public void windowClosing(WindowEvent e) {
                     super.windowClosing(e);
                     if (!window.isBoundsAssigned()) {
-                        if (logger.isLoggable(Level.INFO)) {
+                        if (logger.isInfoEnabled()) {
                             logger.info("windowClosing(): Saving general settings: bounds="
                                     + window.getBounds());
                         }
@@ -231,7 +233,7 @@ public class DefaultWindowFactory implements WindowFactory {
                     super.windowClosed(e);
                     Set frames = DefaultWindowFactory.this.frames;
                     synchronized (DefaultWindowFactory.this) {
-                        if (logger.isLoggable(Level.INFO)) {
+                        if (logger.isInfoEnabled()) {
                             logger.info("windowClosed(): frames.size()="
                                     + frames.size()
                                     + ",exitWhenAllWindowsClosed="
@@ -239,7 +241,7 @@ public class DefaultWindowFactory implements WindowFactory {
                         }
                         frames.remove(window);
                         if ((frames.size() == 0) && exitWhenAllWindowsClosed) {
-                            logger.warning("Exiting JVM because all windows are now closed!");
+                            logger.warn("Exiting JVM because all windows are now closed!");
                             PlatformInit.shutdown();
                         }
                     }
@@ -320,7 +322,7 @@ public class DefaultWindowFactory implements WindowFactory {
                 width = Integer.parseInt(widthText);
             } catch (NumberFormatException nfe) {
                 logger.log(
-                        Level.WARNING,
+                        Level.WARN,
                         "PlatformWindowContextImpl(): Unable to parse window width.",
                         nfe);
             }
@@ -330,7 +332,7 @@ public class DefaultWindowFactory implements WindowFactory {
                 height = Integer.parseInt(heightText);
             } catch (NumberFormatException nfe) {
                 logger.log(
-                        Level.WARNING,
+                        Level.WARN,
                         "PlatformWindowContextImpl(): Unable to parse window height.",
                         nfe);
             }
@@ -396,7 +398,7 @@ public class DefaultWindowFactory implements WindowFactory {
                 width = Integer.parseInt(widthText);
             } catch (NumberFormatException nfe) {
                 logger.log(
-                        Level.WARNING,
+                        Level.WARN,
                         "PlatformWindowContextImpl(): Unable to parse window width.",
                         nfe);
             }
@@ -406,7 +408,7 @@ public class DefaultWindowFactory implements WindowFactory {
                 height = Integer.parseInt(heightText);
             } catch (NumberFormatException nfe) {
                 logger.log(
-                        Level.WARNING,
+                        Level.WARN,
                         "PlatformWindowContextImpl(): Unable to parse window height.",
                         nfe);
             }

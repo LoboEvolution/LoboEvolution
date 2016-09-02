@@ -26,8 +26,8 @@ package org.lobobrowser.primary.clientlets.html;
 import java.awt.Component;
 import java.awt.Insets;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.HtmlRendererContext;
@@ -41,7 +41,7 @@ import org.lobobrowser.ua.TargetType;
 public class BrowserFrameImpl implements BrowserFrame {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(BrowserFrameImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(BrowserFrameImpl.class);
 
 	/** The frame. */
 	private final NavigatorFrame frame;
@@ -58,7 +58,7 @@ public class BrowserFrameImpl implements BrowserFrame {
 	 *            the parentrcontext
 	 */
 	public BrowserFrameImpl(NavigatorFrame frame, HtmlRendererContext parentrcontext) {
-		if (logger.isLoggable(Level.INFO)) {
+		if (logger.isInfoEnabled()) {
 			logger.info("BrowserFrameImpl(): frame=" + frame + ",parentrcontext=" + parentrcontext);
 		}
 		this.frame = frame;
@@ -102,7 +102,7 @@ public class BrowserFrameImpl implements BrowserFrame {
 	 */
 	@Override
 	public void loadURL(URL url) {
-		if (logger.isLoggable(Level.INFO)) {
+		if (logger.isInfoEnabled()) {
 			logger.info("loadURL(): frame=" + frame + ",url=" + url);
 		}
 		this.frame.navigate(url, "GET", null, TargetType.SELF, RequestType.FRAME);

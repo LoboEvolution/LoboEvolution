@@ -47,8 +47,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -87,10 +89,10 @@ import org.lobobrowser.util.io.IORoutines;
 public final class RequestEngine {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(RequestEngine.class.getName());
+	private static final Logger logger = LogManager.getLogger(RequestEngine.class);
 
 	/** The Constant loggerInfo. */
-	private static final boolean loggerInfo = logger.isLoggable(Level.INFO);
+	private static final boolean loggerInfo = logger.isInfoEnabled();
 
 	/** The thread pool. */
 	private final SimpleThreadPool threadPool;
@@ -278,7 +280,7 @@ public final class RequestEngine {
 					bufOut.write((byte) '=');
 					bufOut.write(encValue.getBytes("UTF-8"));
 				} else {
-					logger.warning("postData(): Ignoring non-textual parameter " + name + " for POST with encoding "
+					logger.warn("postData(): Ignoring non-textual parameter " + name + " for POST with encoding "
 							+ encoding + ".");
 				}
 			}
@@ -334,7 +336,7 @@ public final class RequestEngine {
 								}
 							}
 						} else {
-							logger.warning("postData(): Skipping parameter " + name
+							logger.warn("postData(): Skipping parameter " + name
 									+ " of unknown type for POST with encoding " + encoding + ".");
 						}
 					}
@@ -389,7 +391,7 @@ public final class RequestEngine {
 					sb.append(URLEncoder.encode(paramText, "UTF-8"));
 					separator = '&';
 				} else {
-					logger.warning("completeGetUrl(): Skipping non-textual parameter " + parameters[i].getName()
+					logger.warn("completeGetUrl(): Skipping non-textual parameter " + parameters[i].getName()
 							+ " in GET request.");
 				}
 			}
@@ -453,7 +455,7 @@ public final class RequestEngine {
 				if (headerName.startsWith("X-")) {
 					connection.addRequestProperty(headerName, headers[i].getValue());
 				} else {
-					logger.warning("run(): Ignoring request header: " + headerName);
+					logger.warn("run(): Ignoring request header: " + headerName);
 				}
 			}
 		}
@@ -486,7 +488,7 @@ public final class RequestEngine {
 						try {
 							persistentContent = cm.getPersistent(url, false);
 						} catch (IOException ioe) {
-							logger.log(Level.WARNING, "getCacheInfo(): Unable to load cache file.", ioe);
+							logger.log(Level.WARN, "getCacheInfo(): Unable to load cache file.", ioe);
 						}
 					}
 				}
@@ -592,7 +594,7 @@ public final class RequestEngine {
 					try {
 						cm.putPersistent(url, out.toByteArray(), false);
 					} catch (Exception err) {
-						logger.log(Level.WARNING, "cache(): Unable to cache response content.", err);
+						logger.log(Level.WARN, "cache(): Unable to cache response content.", err);
 					}
 					if (altPersistentObject != null) {
 						try {
@@ -603,17 +605,17 @@ public final class RequestEngine {
 							objOut.flush();
 							byte[] byteArray = fileOut.toByteArray();
 							if (byteArray.length == 0) {
-								logger.log(Level.WARNING,
+								logger.log(Level.WARN,
 										"cache(): Serialized content has zero bytes for persistent object "
 												+ altPersistentObject + ".");
 							}
 							cm.putPersistent(url, byteArray, true);
 						} catch (Exception err) {
-							logger.log(Level.WARNING, "cache(): Unable to write persistent cached object.", err);
+							logger.log(Level.WARN, "cache(): Unable to write persistent cached object.", err);
 						}
 					}
 				} catch (Exception err) {
-					logger.log(Level.WARNING, "cache()", err);
+					logger.log(Level.WARN, "cache()", err);
 				}
 				return null;
 			}
@@ -893,7 +895,7 @@ public final class RequestEngine {
 		// functionality as altering the Accept header.
 		connection = this.getSafeExtensionManager().dispatchPreConnection(connection);
 		// Print request headers
-		if (logger.isLoggable(Level.FINE)) {
+		if (logger.isInfoEnabled()) {
 			this.printRequestHeaders(connection);
 		}
 		// POST data if we need to.
@@ -1149,7 +1151,7 @@ public final class RequestEngine {
 								this.cache(rhandler, connectionUrl, connection, content, persObject, altObject,
 										altObjectSize);
 							} else {
-								logger.warning("processHandler(): Cacheable response not available: " + connectionUrl);
+								logger.warn("processHandler(): Cacheable response not available: " + connectionUrl);
 							}
 						} else if ((cacheInfo != null) && !cacheInfo.hasTransientEntry()) {
 							// Content that came from cache cannot be cached
@@ -1210,7 +1212,7 @@ public final class RequestEngine {
 				logger.log(Level.INFO, "run(): Clientlet cancelled: " + baseURL, cce);
 			}
 		} catch (Throwable exception) {
-			exception.printStackTrace();
+			logger.log(Level.ERROR, exception);
 		} finally {
 			rhandler.handleProgress(ProgressType.DONE, baseURL, method, 0, 0);
 		}
@@ -1269,7 +1271,7 @@ public final class RequestEngine {
 					in.close();
 				}
 			} catch (Exception err) {
-				logger.log(Level.SEVERE, "abort()", err);
+				logger.log(Level.ERROR, "abort()", err);
 			}
 		}
 

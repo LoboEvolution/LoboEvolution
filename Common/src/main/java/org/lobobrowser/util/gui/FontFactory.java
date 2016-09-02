@@ -36,8 +36,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.text.StyleContext;
 
@@ -48,10 +48,10 @@ import javax.swing.text.StyleContext;
  */
 public class FontFactory {
     /** The Constant logger. */
-    private static final Logger logger = Logger
-            .getLogger(FontFactory.class.getName());
+    private static final Logger logger = LogManager
+            .getLogger(FontFactory.class);
     /** The Constant loggableFine. */
-    private static final boolean loggableFine = logger.isLoggable(Level.FINE);
+    private static final boolean loggableFine = logger.isInfoEnabled();
     /** The Constant instance. */
     private static final FontFactory instance = new FontFactory();
     /** The font families. */
@@ -76,7 +76,7 @@ public class FontFactory {
             for (int i = 0; i < ffns.length; i++) {
                 String ffn = ffns[i];
                 if (liflag) {
-                    logger.fine("FontFactory(): family=" + ffn);
+                    logger.debug("FontFactory(): family=" + ffn);
                 }
                 fontFamilies.add(ffn.toLowerCase());
             }

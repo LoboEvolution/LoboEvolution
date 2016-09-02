@@ -33,8 +33,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -69,7 +71,7 @@ public class CssParserTest extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(CssParserTest.class.getName());
+	private static final Logger logger = LogManager.getLogger(CssParserTest.class);
 
 	/** The css output. */
 	private final HtmlPanel cssOutput;
@@ -185,7 +187,7 @@ public class CssParserTest extends JFrame {
 					+ (time1 - time0) + " ms.");
 			this.showStyleSheet(styleSheet);
 		} catch (Exception err) {
-			logger.log(Level.SEVERE, "Error trying to load URI=[" + uri + "].", err);
+			logger.log(Level.ERROR, "Error trying to load URI=[" + uri + "].", err);
 			this.clearCssOutput();
 		}
 	}

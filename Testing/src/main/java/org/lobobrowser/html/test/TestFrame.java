@@ -32,8 +32,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -62,7 +64,7 @@ public class TestFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(TestFrame.class.getName());
+	private static final Logger logger = LogManager.getLogger(TestFrame.class);
 
 	/** The rcontext. */
 	private final SimpleHtmlRendererContext rcontext;
@@ -117,7 +119,7 @@ public class TestFrame extends JFrame {
 		panel.addSelectionChangeListener(new SelectionChangeListener() {
 			@Override
 			public void selectionChanged(SelectionChangeEvent event) {
-				if (logger.isLoggable(Level.INFO)) {
+				if (logger.isInfoEnabled()) {
 					logger.info("selectionChanged(): selection node: " + panel.getSelectionNode());
 				}
 			}
@@ -196,7 +198,7 @@ public class TestFrame extends JFrame {
 			// which implements incremental rendering.
 			this.rcontext.navigate(url, null);
 		} catch (Exception err) {
-			logger.log(Level.SEVERE, "Error trying to load URI=[" + uri + "].", err);
+			logger.log(Level.ERROR, "Error trying to load URI=[" + uri + "].", err);
 		}
 	}
 

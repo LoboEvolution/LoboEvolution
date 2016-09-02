@@ -25,8 +25,10 @@ package org.lobobrowser.primary.ext;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.store.StorageManager;
 
@@ -39,7 +41,7 @@ public class NavigationHistory extends BaseHistory<Object>implements Serializabl
 	private static final long serialVersionUID = 2257845000600200100L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(NavigationHistory.class.getName());
+	private static final Logger logger = LogManager.getLogger(NavigationHistory.class);
 
 	/** The Constant instance. */
 	private static final NavigationHistory instance;
@@ -50,7 +52,7 @@ public class NavigationHistory extends BaseHistory<Object>implements Serializabl
 			ins = (NavigationHistory) StorageManager.getInstance().retrieveSettings(
 					NavigationHistory.class.getSimpleName(), NavigationHistory.class.getClassLoader());
 		} catch (Exception err) {
-			logger.log(Level.WARNING, "Unable to retrieve settings.", err);
+			logger.log(Level.WARN, "Unable to retrieve settings.", err);
 		}
 		if (ins == null) {
 			ins = new NavigationHistory();
@@ -81,7 +83,7 @@ public class NavigationHistory extends BaseHistory<Object>implements Serializabl
 			try {
 				StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
 			} catch (IOException ioe) {
-				logger.log(Level.WARNING, "Unable to save settings: " + this.getClass().getSimpleName(), ioe);
+				logger.log(Level.WARN, "Unable to save settings: " + this.getClass().getSimpleName(), ioe);
 			}
 		}
 	}

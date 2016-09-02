@@ -35,12 +35,12 @@ public class LoboTestFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	public static void main(String[] args) throws Exception {
-		// This optional step initializes logging so only warnings
+		// This optional step initializes logging so only.warns
 		// are printed out.
-		PlatformInit.getInstance().initLogging(false);
+		PlatformInit.getInstance().initLogging();
 
 		// This step is necessary for extensions to work:
-		PlatformInit.getInstance().init(false, false);
+		PlatformInit.getInstance().init(false);
 
 		// Create frame with a specific size.
 		JFrame frame = new LoboTestFrame();

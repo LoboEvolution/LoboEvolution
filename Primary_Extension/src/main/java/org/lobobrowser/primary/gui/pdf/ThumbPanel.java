@@ -35,6 +35,10 @@ import javax.swing.JViewport;
 import javax.swing.Scrollable;
 import javax.swing.SwingUtilities;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.sun.pdfview.PDFFile;
 import com.sun.pdfview.PDFPage;
 
@@ -43,6 +47,9 @@ import com.sun.pdfview.PDFPage;
  * PageChangeListener to be informed of when the user clicks one of the pages.
  */
 public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObserver {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(ThumbPanel.class);
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6761217072379594185L;
@@ -150,32 +157,20 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 			// build the page
 			try {
 				int pagetoread = workingon + 1;
-				// int pagetoread= 1;
-				// System.out.println("Read page: " + pagetoread);
 				PDFPage p = file.getPage(pagetoread, true);
-
 				int wid = (int) Math.ceil((lineheight - border) * p.getAspectRatio());
-				// if (!p.isFinished()) {
-				// System.out.println("Page not finished!");
-				// p.waitForFinish();
-				// }
-				// flag.clear();
-				// int pagetowrite= 0;
 				int pagetowrite = workingon;
 
 				Image i = p.getImage(wid, (lineheight - border), null, this, true, true);
-
-				// images[0] = i;
 				images[pagetowrite] = i;
 
-				// flag.waitForFlag();
 				if (defaultNotSet) {
 					defaultNotSet = false;
 					setDefaultWidth(wid);
 				}
 				repaint();
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.log(Level.ERROR, e);
 
 				int size = lineheight - border;
 				images[workingon] = new BufferedImage(size, size, BufferedImage.TYPE_BYTE_BINARY);

@@ -23,8 +23,8 @@
  */
 package org.lobobrowser.primary.clientlets;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.clientlet.Clientlet;
 import org.lobobrowser.clientlet.ClientletRequest;
@@ -41,7 +41,7 @@ import org.lobobrowser.primary.clientlets.pdf.PdfClientlet;
 public class PrimaryClientletSelector implements ClientletSelector {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(PrimaryClientletSelector.class.getName());
+	private static final Logger logger = LogManager.getLogger(PrimaryClientletSelector.class);
 
 	/**
 	 * Instantiates a new primary clientlet selector.
@@ -63,7 +63,7 @@ public class PrimaryClientletSelector implements ClientletSelector {
 
 		String mimeType = response.getMimeType();
 		
-		if (logger.isLoggable(Level.INFO)) {
+		if (logger.isInfoEnabled()) {
 			logger.info("select(): mimeType=" + mimeType);
 		}
 		String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
@@ -104,7 +104,7 @@ public class PrimaryClientletSelector implements ClientletSelector {
 	public Clientlet lastResortSelect(ClientletRequest request, ClientletResponse response) {
 		String mimeType = response.getMimeType();
 		String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
-		System.out.println("mtttl2: " + mimeTypeTL);
+		
 		if ((mimeTypeTL != null) && mimeTypeTL.startsWith("text/")) {
 			return new TextClientlet();
 		} else if ("application/xml".equals(mimeTypeTL)) {

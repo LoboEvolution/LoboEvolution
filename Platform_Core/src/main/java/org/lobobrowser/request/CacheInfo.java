@@ -29,8 +29,10 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.store.CacheManager;
 import org.lobobrowser.util.Urls;
@@ -42,7 +44,7 @@ import org.lobobrowser.util.gui.ClassLoaderObjectInputStream;
 public class CacheInfo {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(CacheInfo.class
+    private static final Logger logger = LogManager.getLogger(CacheInfo.class
             .getName());
 
     /** The Constant HEADER_REQUEST_TIME. */
@@ -164,7 +166,7 @@ public class CacheInfo {
             String requestTimeText = connection
                     .getHeaderField(HEADER_REQUEST_TIME);
             if (requestTimeText == null) {
-                if (logger.isLoggable(Level.INFO)) {
+                if (logger.isInfoEnabled()) {
                     logger.info("getExpires(): Cached content does not have "
                             + HEADER_REQUEST_TIME + " header: " + this.url
                             + ".");
@@ -247,13 +249,13 @@ public class CacheInfo {
             }
         } catch (IOException ioe) {
             logger.log(
-                    Level.WARNING,
+                    Level.WARN,
                     "getPersistentObject(): Unable to load persistent cached object.",
                     ioe);
             return null;
         } catch (ClassNotFoundException ioe) {
             logger.log(
-                    Level.WARNING,
+                    Level.WARN,
                     "getPersistentObject(): Failed to load persistent cached object apparently due to versioning issue.",
                     ioe);
             return null;
@@ -270,7 +272,7 @@ public class CacheInfo {
             cm.removePersistent(this.url, false);
             cm.removePersistent(this.url, true);
         } catch (IOException ioe) {
-            logger.log(Level.WARNING, "delete()", ioe);
+            logger.log(Level.WARN, "delete()", ioe);
         }
     }
 

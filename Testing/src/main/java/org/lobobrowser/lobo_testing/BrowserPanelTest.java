@@ -44,10 +44,10 @@ public class BrowserPanelTest extends JFrame {
 		Locale.setDefault(Locale.CHINESE);
 
 		// Initialize logging.
-		PlatformInit.getInstance().initLogging(false);
+		PlatformInit.getInstance().initLogging();
 
 		// This step is necessary for extensions to work:
-		PlatformInit.getInstance().init(false, false);
+		PlatformInit.getInstance().init(false);
 
 		// Create frame with a specific size.
 		JFrame frame = new BrowserPanelTest();

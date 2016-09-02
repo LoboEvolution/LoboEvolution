@@ -41,6 +41,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.gui.DefaultWindowFactory;
 import org.lobobrowser.primary.action.TextViewerCloseAction;
 import org.lobobrowser.primary.action.TextViewerCopyAction;
@@ -51,6 +54,9 @@ import org.lobobrowser.ua.NavigatorWindow;
  * The Class TextViewerWindow.
  */
 public class TextViewerWindow extends JFrame {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(TextViewerWindow.class);
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -120,7 +126,7 @@ public class TextViewerWindow extends JFrame {
 						}
 
 					} catch (Exception exp) {
-						exp.printStackTrace();
+						logger.log(Level.ERROR, exp);
 					}
 
 				}

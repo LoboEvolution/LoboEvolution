@@ -31,7 +31,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Collection;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -61,7 +63,7 @@ public class MemoryTest {
 	// - 1.5M file with simple markup.
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(MemoryTest.class.getName());
+	private static final Logger logger = LogManager.getLogger(MemoryTest.class);
 
 	/**
 	 * @param args

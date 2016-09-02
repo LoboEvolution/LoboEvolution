@@ -30,18 +30,21 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLStreamHandler;
+import java.net.URLStreamHandlerFactory;
+import java.security.CodeSource;
 import java.security.Permission;
 import java.security.Policy;
+import java.security.ProtectionDomain;
 import java.util.EventObject;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.UIManager;
 
-import org.lobobrowser.gui.ConsoleModel;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.gui.DefaultWindowFactory;
 import org.lobobrowser.gui.FramePanel;
 import org.lobobrowser.request.AuthenticatorImpl;
@@ -76,6 +79,9 @@ import com.jtattoo.plaf.texture.TextureLookAndFeel;
  * @see #getInstance()
  */
 public class PlatformInit {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(PlatformInit.class);
 
     /** The Constant NATIVE_DIR_NAME. */
     private static final String NATIVE_DIR_NAME = "native";
@@ -90,8 +96,7 @@ public class PlatformInit {
      * Instantiates a new platform init.
      */
     private PlatformInit() {
-        this.threadExecutor = new SimpleThreadPool("MainThreadPool", 2, 10,
-                60 * 1000);
+        this.threadExecutor = new SimpleThreadPool("MainThreadPool", 2, 10, 60 * 1000);
         // One way to avoid a security exception.
         this.generalSettings = GeneralSettings.getInstance();
     }
@@ -220,24 +225,6 @@ public class PlatformInit {
     }
 
     /**
-     * Resets standard output and error streams so they are redirected to the
-     * browser console.
-     *
-     * @see ConsoleModel
-     */
-    public void initConsole() {
-        java.io.PrintStream oldOut = System.out;
-        ConsoleModel standard = ConsoleModel.getStandard();
-        java.io.PrintStream ps = standard.getPrintStream();
-        System.setOut(ps);
-        System.setErr(ps);
-        if (this.isCodeLocationDirectory()) {
-            // Should only be shown when running from Eclipse.
-            oldOut.println("WARNING: initConsole(): Switching standard output and standard error to application console. If running EntryPoint, pass -debug to avoid this.");
-        }
-    }
-
-    /**
      * Initializes platform logging. Note that this method is not implicitly
      * called by {@link #init(boolean, boolean)}.
      *
@@ -247,28 +234,13 @@ public class PlatformInit {
      * @throws Exception
      *             the exception
      */
-    public void initLogging(boolean debugOn) throws Exception {
-		// Set up debugging & console
-		String loggingToken = debugOn ? "logging-debug" : "logging";
-		java.io.InputStream in = this.getClass().getResourceAsStream(
-				"/properties/" + loggingToken + ".properties");
-		if (in == null) {
-			in = this.getClass().getResourceAsStream(
-					"properties/" + loggingToken + ".properties");
-			if (in == null) {
-				throw new java.io.IOException(
-						"Unable to locate logging properties file.");
-			}
-		}
-		try {
-			java.util.logging.LogManager.getLogManager().readConfiguration(in);
-		} finally {
-			in.close();
-		}
-		// Configure log4j
-		Logger logger = Logger.getLogger(PlatformInit.class.getName());
-		if (logger.isLoggable(Level.INFO)) {
-			logger.warning("Entry(): Logger INFO level is enabled.");
+    public void initLogging() throws Exception {
+		
+		// Configure log4j2
+    	
+    	Logger logger = LogManager.getLogger(PlatformInit.class);
+		if (logger.isInfoEnabled()) {
+			logger.warn("Entry(): Logger INFO level is enabled.");
 			Properties properties = System.getProperties();
 			Iterator i = properties.entrySet().iterator();
 			while (i.hasNext()) {
@@ -321,9 +293,6 @@ public class PlatformInit {
      * This method is called by {@link #init(boolean, boolean)}.
      */
     public void initOtherProperties() {
-        // Required for array serialization in Java 6.
-        System.setProperty("sun.lang.ClassLoader.allowArraySyntax", "true");
-        // Don't cache host lookups for ever
         System.setProperty("networkaddress.cache.ttl", "3600");
         System.setProperty("networkaddress.cache.negative.ttl", "1");
 
@@ -353,17 +322,13 @@ public class PlatformInit {
      * @see #initProtocols()
      * @see #initExtensions()
      */
-    public void init(boolean exitWhenAllWindowsAreClosed, boolean initConsole)
-            throws Exception {
+    public void init(boolean exitWhenAllWindowsAreClosed) throws Exception {
         initOtherProperties();
         initNative(NATIVE_DIR_NAME);
         initSecurity();
         initProtocols();
         initHTTP();
         initLookAndFeel();
-        if (initConsole) {
-            initConsole();
-        }
         initWindowFactory(exitWhenAllWindowsAreClosed);
         initExtensions();
     }
@@ -377,7 +342,7 @@ public class PlatformInit {
      *             the malformed url exception
      */
     public void launch(String urlOrPath) throws MalformedURLException {
-        URL url = org.lobobrowser.util.Urls.guessURL(urlOrPath);
+        URL url = Urls.guessURL(urlOrPath);
         FramePanel.openWindow(null, url, null, new Properties(), "GET", null);
     }
 
@@ -392,8 +357,8 @@ public class PlatformInit {
     public void launch() throws MalformedURLException {
         SecurityManager sm = System.getSecurityManager();
         if (sm == null) {
-            Logger logger = Logger.getLogger(PlatformInit.class.getName());
-            logger.warning("launch(): Security manager not set!");
+            Logger logger = LogManager.getLogger(PlatformInit.class);
+            logger.warn("launch(): Security manager not set!");
         }
         String[] startupURLs = this.generalSettings.getStartupURLs();
         for (String url : startupURLs) {
@@ -436,7 +401,7 @@ public class PlatformInit {
                     launched = true;
                     this.launch(url);
                 } catch (Exception err) {
-                    err.printStackTrace(System.err);
+                	logger.log(Level.ERROR,err);
                 }
             }
         }
@@ -472,7 +437,7 @@ public class PlatformInit {
         try {
             ReuseManager.getInstance().shutdown();
         } catch (Exception err) {
-            err.printStackTrace(System.err);
+        	logger.log(Level.ERROR,err);
         }
         System.exit(0);
     }
@@ -513,9 +478,8 @@ public class PlatformInit {
     public File getApplicationDirectory() {
         File appDir = this.applicationDirectory;
         if (appDir == null) {
-            java.security.ProtectionDomain pd = this.getClass()
-                    .getProtectionDomain();
-            java.security.CodeSource cs = pd.getCodeSource();
+            ProtectionDomain pd = this.getClass().getProtectionDomain();
+            CodeSource cs = pd.getCodeSource();
             URL url = cs.getLocation();
             String jarPath = url.getPath();
             File jarFile;
@@ -546,8 +510,8 @@ public class PlatformInit {
             this.applicationDirectory = appDir;
 
             // Static logger should not be created in this class.
-            Logger logger = Logger.getLogger(this.getClass().getName());
-            if (logger.isLoggable(Level.INFO)) {
+            Logger logger = LogManager.getLogger(this.getClass().getName());
+            if (logger.isInfoEnabled()) {
                 logger.info("getApplicationDirectory(): url=" + url
                         + ",appDir=" + appDir);
             }
@@ -558,8 +522,7 @@ public class PlatformInit {
     /**
      * A factory for creating LocalStreamHandler objects.
      */
-    private static class LocalStreamHandlerFactory implements
-    java.net.URLStreamHandlerFactory {
+    private static class LocalStreamHandlerFactory implements URLStreamHandlerFactory {
 
         /*
          * (non-Javadoc)

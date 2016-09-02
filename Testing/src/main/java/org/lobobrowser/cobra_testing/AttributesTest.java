@@ -24,8 +24,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -47,7 +49,7 @@ public class AttributesTest {
 	 * @param args
 	 */
 	public static void main(String[] args) throws Exception {
-		Logger.getLogger("org.lobobrowser").setLevel(Level.WARNING);
+		LogManager.getLogger("org.lobobrowser");
 		UserAgentContext uacontext = new SimpleUserAgentContext();
 		// In this case we will use a standard XML document
 		// as opposed to Cobra's HTML DOM implementation.

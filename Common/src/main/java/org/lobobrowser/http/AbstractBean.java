@@ -112,7 +112,7 @@ import java.beans.VetoableChangeSupport;
  *       }
  *        a.setFoo("red");
  *     } catch (Exception e) {
- *        logger.severe(e.getMessage()); // this will be executed
+ *        logger.error(e.getMessage()); // this will be executed
  *     }
  *   }
  * }

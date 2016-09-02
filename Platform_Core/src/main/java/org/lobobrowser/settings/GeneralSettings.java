@@ -22,14 +22,18 @@ package org.lobobrowser.settings;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
 import org.lobobrowser.request.UserAgentImpl;
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
@@ -41,7 +45,7 @@ import org.lobobrowser.store.StorageManager;
 public class GeneralSettings implements Serializable {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(GeneralSettings.class
+    private static final Logger logger = LogManager.getLogger(GeneralSettings.class
             .getName());
 
     /** The Constant DEFAULT_STARTUP. */
@@ -82,7 +86,7 @@ public class GeneralSettings implements Serializable {
                     .retrieveSettings(GeneralSettings.class.getSimpleName(),
                             GeneralSettings.class.getClassLoader());
         } catch (Exception err) {
-            logger.log(Level.WARNING,
+            logger.log(Level.WARN,
                     "getInstance(): Unable to retrieve settings.", err);
         }
         if (ins == null) {
@@ -99,7 +103,7 @@ public class GeneralSettings implements Serializable {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
             sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
-        }
+        }   	
         return instance;
     }
 
@@ -118,7 +122,7 @@ public class GeneralSettings implements Serializable {
         try {
             this.saveChecked();
         } catch (IOException ioe) {
-            logger.log(Level.WARNING, "save(): Unable to save settings", ioe);
+            logger.log(Level.WARN, "save(): Unable to save settings", ioe);
         }
     }
 

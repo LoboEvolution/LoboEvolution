@@ -31,8 +31,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
@@ -47,7 +49,7 @@ import org.lobobrowser.http.UserAgentContext;
 public class SimpleUserAgentContext implements UserAgentContext {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(SimpleUserAgentContext.class.getName());
+	private static final Logger logger = LogManager.getLogger(SimpleUserAgentContext.class);
 
 	/** The Constant mediaNames. */
 	private static final Set<String> mediaNames = new HashSet<String>();
@@ -290,7 +292,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		try {
 			results = handler.get(url.toURI(), new HashMap<String, List<String>>());
 		} catch (Exception err) {
-			logger.log(Level.WARNING, "getCookie()", err);
+			logger.log(Level.WARN, "getCookie()", err);
 			return "";
 		}
 		if (results == null) {
@@ -364,7 +366,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		try {
 			handler.put(url.toURI(), headers);
 		} catch (Exception err) {
-			logger.log(Level.WARNING, "setCookie()", err);
+			logger.log(Level.WARN, "setCookie()", err);
 		}
 	}
 
