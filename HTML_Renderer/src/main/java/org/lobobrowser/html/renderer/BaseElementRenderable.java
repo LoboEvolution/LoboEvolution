@@ -38,7 +38,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.logging.Level;
+import org.apache.logging.log4j.Level;
 
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
@@ -674,7 +674,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				try {
 					this.zIndex = Integer.parseInt(zIndex);
 				} catch (NumberFormatException err) {
-					logger.log(Level.WARNING,
+					logger.log(Level.WARN,
 							"Unable to parse z-index [" + zIndex + "] in element " + this.modelNode + ".", err);
 					this.zIndex = 0;
 				}
@@ -727,11 +727,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				BaseElementRenderable.this.repaint();
 			}
 		} catch (FileNotFoundException | IIOException ex) {
-			logger.log(Level.WARNING, "loadBackgroundImage(): Image not found "+url);
+			logger.log(Level.WARN, "loadBackgroundImage(): Image not found "+url);
 		} catch (IOException | TranscoderException thrown) {
-			logger.log(Level.WARNING, "loadBackgroundImage()", thrown);
+			logger.log(Level.WARN, "loadBackgroundImage()", thrown);
 		} catch (Exception e) {
-			logger.log(Level.WARNING, "loadBackgroundImage()", e);
+			logger.log(Level.WARN, "loadBackgroundImage()", e);
 		}
 	}
 

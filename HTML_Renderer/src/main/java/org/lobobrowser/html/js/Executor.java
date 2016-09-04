@@ -22,8 +22,9 @@ package org.lobobrowser.html.js;
 
 import java.net.URL;
 import java.util.MissingResourceException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.http.UserAgentContext;
@@ -41,7 +42,7 @@ import org.w3c.dom.Document;
 public class Executor {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(Executor.class
+    private static final Logger logger = LogManager.getLogger(Executor.class
             .getName());
 
     /**
@@ -66,7 +67,7 @@ public class Executor {
                 ctx.setSecurityController(new SecurityControllerImpl(
                         codeSource, ucontext.getSecurityPolicy()));
             } catch (MissingResourceException err) {
-                logger.log(Level.WARNING, "Missing Resource");
+                logger.log(Level.WARN, "Missing Resource");
             }
         }
         return ctx;
@@ -133,7 +134,7 @@ public class Executor {
                 return ((Boolean) result).booleanValue();
             } catch (Exception ex) {
                 logger.log(
-                        Level.WARNING,
+                        Level.WARN,
                         "executeFunction(): There was an error in Javascript code.",
                         ex);
                 return true;

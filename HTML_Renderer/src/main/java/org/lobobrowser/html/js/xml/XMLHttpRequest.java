@@ -26,8 +26,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.http.HttpRequest;
@@ -50,7 +51,7 @@ import org.w3c.dom.events.EventException;
 public class XMLHttpRequest extends AbstractScriptableDelegate {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(XMLHttpRequest.class.getName());
+	private static final Logger logger = LogManager.getLogger(XMLHttpRequest.class.getName());
 
 	/** The request. */
 	private final HttpRequest request;
@@ -438,7 +439,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 				}
 			}
 		} catch (Exception err) {
-			logger.log(Level.WARNING, "Error processing ready state change.", err);
+			logger.log(Level.WARN, "Error processing ready state change.", err);
 		}
 	}
 }

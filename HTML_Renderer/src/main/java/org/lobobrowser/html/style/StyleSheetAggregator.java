@@ -32,7 +32,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
@@ -66,7 +68,7 @@ import org.w3c.dom.stylesheets.MediaList;
 public class StyleSheetAggregator {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(StyleSheetAggregator.class.getName());
+	private static final Logger logger = LogManager.getLogger(StyleSheetAggregator.class.getName());
 
 	/** The attribute. */
 	private String attribute;
@@ -289,7 +291,7 @@ public class StyleSheetAggregator {
 							this.addStyleSheet(sheet);
 						}
 					} catch (Exception err) {
-						logger.severe("Unable to parse CSS. URI=[" + href + "]." + err);
+						logger.error("Unable to parse CSS. URI=[" + href + "]." + err);
 					}
 				}
 			}

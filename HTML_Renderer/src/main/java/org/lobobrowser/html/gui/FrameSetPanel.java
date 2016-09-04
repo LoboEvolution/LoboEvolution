@@ -31,7 +31,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -60,7 +62,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(FrameSetPanel.class.getName());
+	private static final Logger logger = LogManager.getLogger(FrameSetPanel.class.getName());
 
 	/**
 	 * Instantiates a new frame set panel.
@@ -90,7 +92,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 			try {
 				lengths.add(new HtmlLength(token));
 			} catch (Exception err) {
-				logger.warning("Frame rows or cols value [" + spec + "] is invalid.");
+				logger.warn("Frame rows or cols value [" + spec + "] is invalid.");
 			}
 		}
 		return lengths.toArray(HtmlLength.EMPTY_ARRAY);
@@ -235,7 +237,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 										frame.loadURL(url);
 									}
 								} catch (MalformedURLException mfu) {
-									logger.warning("Frame URI=[" + src + "] is malformed.");
+									logger.warn("Frame URI=[" + src + "] is malformed.");
 								}
 							}
 							frameComponents[i] = frame.getComponent();

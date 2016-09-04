@@ -26,7 +26,9 @@ package org.lobobrowser.html.control;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JComponent;
 
@@ -43,7 +45,7 @@ public abstract class BaseControl extends JComponent implements UIControl {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(BaseControl.class.getName());
+	private static final Logger logger = LogManager.getLogger(BaseControl.class.getName());
 
 	/** The Constant ZERO_DIMENSION. */
 	protected static final Dimension ZERO_DIMENSION = new Dimension(0, 0);
@@ -86,7 +88,7 @@ public abstract class BaseControl extends JComponent implements UIControl {
 	protected void invalidateAndRepaint() {
 		RUIControl rc = this.ruicontrol;
 		if (rc == null) {
-			logger.severe("invalidateAndPaint(): RUIControl not set.");
+			logger.error("invalidateAndPaint(): RUIControl not set.");
 			return;
 		}
 		if (rc.isValid()) {

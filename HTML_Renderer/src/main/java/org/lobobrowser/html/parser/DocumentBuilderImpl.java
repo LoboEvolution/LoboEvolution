@@ -29,7 +29,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 
@@ -56,7 +58,7 @@ import org.xml.sax.SAXException;
 public class DocumentBuilderImpl extends DocumentBuilder {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(DocumentBuilderImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(DocumentBuilderImpl.class.getName());
 
 	/** The resolver. */
 	private EntityResolver resolver;
@@ -162,7 +164,7 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 		}
 		String uri = is.getSystemId();
 		if (uri == null) {
-			logger.warning("parse(): InputSource has no SystemId (URI); document item URLs will not be resolvable.");
+			logger.warn("parse(): InputSource has no SystemId (URI); document item URLs will not be resolvable.");
 		}
 		WritableLineReader wis;
 		Reader reader = is.getCharacterStream();

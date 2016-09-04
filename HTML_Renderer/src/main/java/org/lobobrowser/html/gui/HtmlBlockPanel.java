@@ -54,8 +54,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
@@ -101,10 +102,10 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(HtmlBlockPanel.class.getName());
+	private static final Logger logger = LogManager.getLogger(HtmlBlockPanel.class.getName());
 
 	/** The Constant loggableInfo. */
-	private static final boolean loggableInfo = logger.isLoggable(Level.INFO);
+	private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
 
 	/** The frame context. */
 	protected final FrameContext frameContext;
@@ -528,7 +529,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 							}
 						});
 					} catch (Exception err) {
-						logger.log(Level.SEVERE, "Unable to do preferred size layout.", err);
+						logger.log(Level.ERROR, "Unable to do preferred size layout.", err);
 					}
 				}
 				// Adjust for permanent vertical scrollbar.
@@ -946,7 +947,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				}
 			}
 		} catch (Throwable thrown) {
-			logger.log(Level.SEVERE, "Unexpected error in layout engine. Document is " + this.getRootNode(), thrown);
+			logger.log(Level.ERROR, "Unexpected error in layout engine. Document is " + this.getRootNode(), thrown);
 		}
 	}
 

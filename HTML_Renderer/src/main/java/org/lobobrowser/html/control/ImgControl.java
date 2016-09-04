@@ -37,8 +37,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
@@ -67,7 +68,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 	private static final long serialVersionUID = 1L;
 	
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ImgControl.class.getName());
+	private static final Logger logger = LogManager.getLogger(ImgControl.class.getName());
 
 	/** The image. */
 	private volatile Image image;
@@ -169,17 +170,17 @@ public class ImgControl extends BaseControl implements ImageListener {
 					try {
 						image = ImageIO.read(con.getInputStream());
 					} catch (IOException e) {
-						logger.log(Level.WARNING, "read error: " + e.getMessage());
+						logger.log(Level.WARN, "read error: " + e.getMessage());
 					}
 				} else {
 					image = ImageIO.read(con.getInputStream());
 				}
 			} catch (FileNotFoundException | IIOException ex) {
-				logger.log(Level.WARNING, "ImgControl(): Image not found "+modelNode.getSrc());
+				logger.log(Level.WARN, "ImgControl(): Image not found "+modelNode.getSrc());
 			} catch (TranscoderException | IOException e1) {
-				logger.log(Level.WARNING, e1.getMessage());
+				logger.log(Level.WARN, e1.getMessage());
 			} catch (Exception e1) {
-				logger.log(Level.WARNING, "ImgControl(): Image not found "+modelNode.getSrc());
+				logger.log(Level.WARN, "ImgControl(): Image not found "+modelNode.getSrc());
 			}
 		}
 

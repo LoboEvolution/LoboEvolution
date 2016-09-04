@@ -32,8 +32,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.Timer;
 
@@ -82,7 +83,7 @@ import org.w3c.dom.views.DocumentView;
 public class Window extends AbstractScriptableDelegate implements AbstractView {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(Window.class.getName());
+	private static final Logger logger = LogManager.getLogger(Window.class.getName());
 
 	/** The Constant CONTEXT_WINDOWS. */
 	private static final Map<HtmlRendererContext, WeakReference<Window>> CONTEXT_WINDOWS = new WeakHashMap<HtmlRendererContext, WeakReference<Window>>();
@@ -672,7 +673,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 								+ Executor.SCOPE_KEY);
 			}
 			String scriptURI = "window.eval";
-			if (logger.isLoggable(Level.INFO)) {
+			if (logger.isEnabled(Level.INFO)) {
 				logger.info("eval(): javascript follows...\r\n" + javascript);
 			}
 			return ctx.evaluateString(scope, javascript, scriptURI, 1, null);
@@ -1525,7 +1526,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			try {
 				Window window = this.getWindow();
 				if (window == null) {
-					if (logger.isLoggable(Level.INFO)) {
+					if (logger.isEnabled(Level.INFO)) {
 						logger.info("actionPerformed(): Window is no longer available.");
 					}
 					return;
@@ -1544,7 +1545,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				Executor.executeFunction(window.getWindowScope(), function, doc.getDocumentURL(),
 						window.getUserAgentContext());
 			} catch (Throwable err) {
-				logger.log(Level.WARNING, "actionPerformed()", err.getCause());
+				logger.log(Level.WARN, "actionPerformed()", err.getCause());
 			}
 		}
 	}
@@ -1596,7 +1597,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			try {
 				Window window = this.getWindow();
 				if (window == null) {
-					if (logger.isLoggable(Level.INFO)) {
+					if (logger.isEnabled(Level.INFO)) {
 						logger.info("actionPerformed(): Window is no longer available.");
 					}
 					return;
@@ -1610,7 +1611,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				}
 				window.eval(this.expression);
 			} catch (Throwable err) {
-				logger.log(Level.WARNING, "actionPerformed()", err.getCause());
+				logger.log(Level.WARN, "actionPerformed()", err.getCause());
 			}
 		}
 	}

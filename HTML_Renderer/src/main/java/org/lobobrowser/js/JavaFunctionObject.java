@@ -23,8 +23,9 @@ package org.lobobrowser.js;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.util.Objects;
 import org.mozilla.javascript.Context;
@@ -42,11 +43,11 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
     private static final long serialVersionUID = 1L;
 
     /** The Constant logger. */
-    private static final Logger logger = Logger
+    private static final Logger logger = LogManager
             .getLogger(JavaFunctionObject.class.getName());
 
     /** The Constant loggableInfo. */
-    private static final boolean loggableInfo = logger.isLoggable(Level.INFO);
+    private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
 
     /** The class name. */
     private final String className;
@@ -176,9 +177,9 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 			Object raw = method.invoke(jcw.getJavaObject(), actualArgs);
 			return manager.getJavascriptObject(raw, scope);
 		} catch (IllegalAccessException iae) {
-			logger.severe("Unable to call " + this.className + ".");
+			logger.error("Unable to call " + this.className + ".");
 		} catch (InvocationTargetException ite) {
-			logger.severe("Unable to call " + this.className + " on "
+			logger.error("Unable to call " + this.className + " on "
 					+ jcw.getJavaObject() + ".");
 		} catch (IllegalArgumentException iae) {
 			StringBuffer argTypes = new StringBuffer();
@@ -189,7 +190,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 				argTypes.append(actualArgs[i] == null ? "<null>"
 						: actualArgs[i].getClass().getName());
 			}
-			logger.severe("Unable to call " + this.className
+			logger.error("Unable to call " + this.className
 					+ ". Argument types: " + argTypes + ".");
 		}
 		return manager;

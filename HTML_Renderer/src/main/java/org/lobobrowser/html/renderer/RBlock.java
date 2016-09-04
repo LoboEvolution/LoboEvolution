@@ -40,8 +40,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JScrollBar;
 
@@ -68,11 +69,11 @@ public class RBlock extends BaseElementRenderable implements
         RenderableContainer, ImageObserver {
 
     /** The Constant logger. */
-    protected static final Logger logger = Logger.getLogger(RBlock.class
+    protected static final Logger logger = LogManager.getLogger(RBlock.class
             .getName());
 
     /** The Constant loggableInfo. */
-    private static final boolean loggableInfo = logger.isLoggable(Level.INFO);
+    private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
 
     /** The Constant MAX_CACHE_SIZE. */
     private static final int MAX_CACHE_SIZE = 10;

@@ -42,8 +42,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlCommandMapping;
@@ -146,7 +147,7 @@ import com.steadystate.css.dom.CSSStyleSheetListImpl;
 public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, DocumentView, DocumentEvent, XPathEvaluator {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(HTMLDocumentImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(HTMLDocumentImpl.class.getName());
 
 	/** The factory. */
 	private final ElementFactory factory;
@@ -489,7 +490,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				this.documentURL = docURL;
 				this.domain = docURL.getHost();
 			} catch (MalformedURLException mfu) {
-				logger.warning("HTMLDocumentImpl(): Document URI [" + documentURI + "] is malformed.");
+				logger.warn("HTMLDocumentImpl(): Document URI [" + documentURI + "] is malformed.");
 			}
 		}
 		this.document = this;
@@ -625,7 +626,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 					try {
 						reader.close();
 					} catch (Exception err) {
-						logger.log(Level.WARNING, "load(): Unable to close stream", err);
+						logger.log(Level.WARN, "load(): Unable to close stream", err);
 					}
 					synchronized (this.getTreeLock()) {
 						this.reader = null;
@@ -1154,7 +1155,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 			try {
 				return new URL(uri);
 			} catch (MalformedURLException mfu2) {
-				logger.log(Level.WARNING,
+				logger.log(Level.WARN,
 						"Unable to create URL for URI=[" + uri + "], with base=[" + this.getBaseURI() + "].", mfu);
 				return null;
 			}
@@ -1264,7 +1265,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				try {
 					ssa.addStyleSheets(this.styleSheets.getCSSStyleSheets());
 				} catch (MalformedURLException | UnsupportedEncodingException mfu) {
-					logger.log(Level.WARNING, "getStyleSheetAggregator()", mfu);
+					logger.log(Level.WARN, "getStyleSheetAggregator()", mfu);
 				}
 				this.styleSheetAggregator = ssa;
 			}
@@ -2142,13 +2143,12 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		try {
 			SSLCertificate.setCertificate();
 			URL docURL = new URL(documentURI);
-			System.out.println(documentURI);
 			URLConnection connection = docURL.openConnection();
 			result = connection.getHeaderField("Last-Modified");
 		} catch (NullPointerException npe) {
-			logger.severe("Header not found");
+			logger.error("Header not found");
 		} catch (Exception e) {
-			logger.severe("Connection error: " + e);
+			logger.error("Connection error: " + e);
 		}
 
 		return result;

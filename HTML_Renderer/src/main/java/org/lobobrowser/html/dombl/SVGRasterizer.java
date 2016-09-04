@@ -28,7 +28,9 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
 import java.util.Map;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
@@ -46,7 +48,7 @@ import org.apache.batik.transcoder.image.ImageTranscoder;
 public class SVGRasterizer {
 	
 	/** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(SVGRasterizer.class.getName());
+    private static final Logger logger = LogManager.getLogger(SVGRasterizer.class.getName());
 
 	/**
 	 * The transcoder input.
@@ -122,7 +124,7 @@ public class SVGRasterizer {
 		try {
 			r.transcode(input, null);
 		} catch (TranscoderException e) {
-			logger.severe(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return img;
 	}

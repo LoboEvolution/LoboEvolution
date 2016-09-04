@@ -20,8 +20,9 @@
  */
 package org.lobobrowser.html.layout;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
@@ -36,7 +37,7 @@ import org.lobobrowser.html.style.AbstractCSS2Properties;
 public abstract class CommonWidgetLayout implements MarkupLayout {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(CommonWidgetLayout.class.getName());
+	private static final Logger logger = LogManager.getLogger(CommonWidgetLayout.class.getName());
 
 	/** The Constant ADD_INLINE. */
 	protected static final int ADD_INLINE = 0;
@@ -85,7 +86,7 @@ public abstract class CommonWidgetLayout implements MarkupLayout {
 		if (node == null) {
 			renderable = this.createRenderable(bodyLayout, markupElement);
 			if (renderable == null) {
-				if (logger.isLoggable(Level.INFO)) {
+				if (logger.isEnabled(Level.INFO)) {
 					logger.info("layoutMarkup(): Don't know how to render " + markupElement + ".");
 				}
 				return;

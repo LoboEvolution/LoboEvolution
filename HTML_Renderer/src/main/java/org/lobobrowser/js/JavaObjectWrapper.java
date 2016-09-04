@@ -21,8 +21,9 @@
 package org.lobobrowser.js;
 
 import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.info.PropertyInfo;
 import org.mozilla.javascript.EvaluatorException;
@@ -39,10 +40,10 @@ public class JavaObjectWrapper extends ScriptableObject {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(JavaObjectWrapper.class.getName());
+	private static final Logger logger = LogManager.getLogger(JavaObjectWrapper.class.getName());
 
 	/** The Constant loggableInfo. */
-	private static final boolean loggableInfo = logger.isLoggable(Level.INFO);
+	private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
 
 	/** The delegate. */
 	private final Object delegate;

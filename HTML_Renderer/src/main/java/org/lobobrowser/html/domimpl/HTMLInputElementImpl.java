@@ -21,7 +21,7 @@
 package org.lobobrowser.html.domimpl;
 
 import java.io.File;
-import java.util.logging.Level;
+import org.apache.logging.log4j.Level;
 
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
@@ -324,7 +324,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 			} else if (FILE.equals(type)) {
 				File[] files = this.getFileValue();
 				if (files == null) {
-					if (logger.isLoggable(Level.INFO)) {
+					if (logger.isEnabled(Level.INFO)) {
 						logger.info("getFormInputs(): File input named " + name + " has null file.");
 					}
 					return null;

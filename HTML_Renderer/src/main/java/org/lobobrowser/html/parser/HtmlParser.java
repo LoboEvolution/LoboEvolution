@@ -36,8 +36,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.HtmlMapping;
 import org.lobobrowser.html.HtmlMappingChar;
@@ -60,7 +61,7 @@ import org.xml.sax.SAXException;
 public class HtmlParser {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(HtmlParser.class.getName());
+	private static final Logger logger = LogManager.getLogger(HtmlParser.class.getName());
 
 	/** The document. */
 	private final Document document;
@@ -313,7 +314,7 @@ public class HtmlParser {
 				parent.appendChild(textNode);
 			} catch (DOMException de) {
 				if ((parent.getNodeType() != Node.DOCUMENT_NODE) || (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
-					logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
+					logger.log(Level.WARN, "parseToken(): Unable to append child to " + parent + ".", de);
 				}
 			}
 		}
@@ -707,7 +708,7 @@ public class HtmlParser {
 					} catch (DOMException de) {
 						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
 								|| (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
-							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
+							logger.log(Level.WARN, "parseToken(): Unable to append child to " + parent + ".", de);
 						}
 					}
 					if (chInt == -1) {
@@ -734,7 +735,7 @@ public class HtmlParser {
 					} catch (DOMException de) {
 						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
 								|| (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
-							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
+							logger.log(Level.WARN, "parseToken(): Unable to append child to " + parent + ".", de);
 						}
 					}
 					if (chInt == -1) {
@@ -1151,7 +1152,7 @@ public class HtmlParser {
 						decimal = Integer.parseInt(number);
 					}
 				} catch (NumberFormatException nfe) {
-					logger.log(Level.WARNING, "entityDecode()", nfe);
+					logger.log(Level.WARN, "entityDecode()", nfe);
 					decimal = 0;
 				}
 				sb.append((char) decimal);

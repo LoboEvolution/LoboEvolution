@@ -32,8 +32,9 @@ import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.MissingResourceException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
@@ -56,11 +57,11 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements
 HTMLScriptElement {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger
+    private static final Logger logger = LogManager
             .getLogger(HTMLScriptElementImpl.class.getName());
 
     /** The Constant loggableInfo. */
-    private static final boolean loggableInfo = logger.isLoggable(Level.INFO);
+    private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
 
     /**
      * Instantiates a new HTML script element impl.
@@ -246,7 +247,7 @@ HTMLScriptElement {
 								request.open(Method.GET, getFullURL(scriptURI), false);
 								request.send();
 							} catch (IOException thrown) {
-								logger.log(Level.WARNING, "processScript()",
+								logger.log(Level.WARN, "processScript()",
 										thrown);
 							}
 						} else {
@@ -261,7 +262,7 @@ HTMLScriptElement {
 												request.open(Method.GET, getFullURL(scriptURI), false);
 												request.send();
 											} catch (IOException thrown) {
-												logger.log(Level.WARNING,
+												logger.log(Level.WARN,
 														"processScript()",
 														thrown);
 											}
@@ -305,31 +306,31 @@ HTMLScriptElement {
 										+ (time2 - time1) + " ms.");
 							}
 						} else {
-							logger.severe("No Script at uri "  + scriptURI);
+							logger.error("No Script at uri "  + scriptURI);
 						}
 					} else {
-						logger.severe("No Scope");
+						logger.error("No Scope");
 					}
 
 				} catch (EcmaError ecmaError) {
-					logger.log(Level.WARNING,
+					logger.log(Level.WARN,
 							"Javascript error at " + ecmaError.sourceName()
 									+ ":" + ecmaError.columnNumber() + ": "
 									+ ecmaError.getMessage());
 				} catch (EvaluatorException e){
-					logger.log(Level.WARNING, e.getMessage());
+					logger.log(Level.WARN, e.getMessage());
 				} catch (MissingResourceException err) {
-					logger.log(Level.WARNING, "Missing Resource");
+					logger.log(Level.WARN, "Missing Resource");
 				} catch (Exception err) {
-					logger.severe("scriptURI: " + scriptURI);
-					logger.log(Level.WARNING,
+					logger.error("scriptURI: " + scriptURI);
+					logger.log(Level.WARN,
 							"Unable to evaluate Javascript code", err);
 				} finally {
 					Context.exit();
 				}
 			}
 		} else {
-			logger.severe("No user agent context");
+			logger.error("No user agent context");
 		}
 	}
     
@@ -362,7 +363,7 @@ HTMLScriptElement {
 			in.close();
 
 		} catch (Exception e) {
-			logger.warning("Unable to parse script. URI=[" + srtUrl + "]. Response status was " + responseCode + ".");
+			logger.warn("Unable to parse script. URI=[" + srtUrl + "]. Response status was " + responseCode + ".");
 			return "";
 		}
 		return response.toString();

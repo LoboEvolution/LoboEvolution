@@ -22,7 +22,7 @@ package org.lobobrowser.html.domimpl;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
+import org.apache.logging.log4j.Level;
 
 import org.lobobrowser.html.HtmlJsAttributeProperties;
 import org.lobobrowser.html.dombl.UINode;
@@ -1396,11 +1396,11 @@ public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttr
 							f = ctx.compileFunction(thisScope, functionCode,
 									this.getTagName() + "[" + this.getId() + "]." + attributeName, 1, null);
 						} catch (EcmaError ecmaError) {
-							logger.log(Level.WARNING, "Javascript error at " + ecmaError.sourceName() + ":"
+							logger.log(Level.WARN, "Javascript error at " + ecmaError.sourceName() + ":"
 									+ ecmaError.lineNumber() + ": " + ecmaError.getMessage(), ecmaError);
 							f = null;
 						} catch (Exception err) {
-							logger.log(Level.WARNING, "Unable to evaluate Javascript code", err);
+							logger.log(Level.WARN, "Unable to evaluate Javascript code", err);
 							f = null;
 						}
 					} finally {

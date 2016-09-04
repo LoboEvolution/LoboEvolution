@@ -31,8 +31,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.SwingUtilities;
 
@@ -50,7 +51,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements
 BoundableRenderable {
 
     /** The Constant logger. */
-    protected static final Logger logger = Logger
+    protected static final Logger logger = LogManager
             .getLogger(BaseBoundableRenderable.class.getName());
 
     /** The Constant SELECTION_COLOR. */
@@ -332,8 +333,8 @@ BoundableRenderable {
             // Has to be top RBlock.
             this.container.relayout();
         } else {
-            if (logger.isLoggable(Level.INFO)) {
-                logger.warning("relayout(): Don't know how to relayout " + this
+            if (logger.isEnabled(Level.INFO)) {
+                logger.warn("relayout(): Don't know how to relayout " + this
                         + ", parent being " + parent);
             }
         }
@@ -454,8 +455,8 @@ BoundableRenderable {
             // Has to be top RBlock.
             this.container.repaint(x, y, width, height);
         } else {
-            if (logger.isLoggable(Level.INFO)) {
-                logger.warning("repaint(): Don't know how to repaint " + this
+            if (logger.isEnabled(Level.INFO)) {
+                logger.warn("repaint(): Don't know how to repaint " + this
                         + ", parent being " + parent);
             }
         }

@@ -34,7 +34,9 @@ import java.awt.image.FilteredImageSource;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.imageio.ImageIO;
 
@@ -52,7 +54,7 @@ public class CanvasControl extends BaseControl {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(CanvasControl.class.getName());
+	private static final Logger logger = LogManager.getLogger(CanvasControl.class.getName());
 
 	/** The width. */
 	private int width;
@@ -276,7 +278,7 @@ public class CanvasControl extends BaseControl {
 			g.drawImage(img, ci.getX(), ci.getY(), ci.getWidth(), ci.getHeight(), this);
 			g.finalize();
 		} catch (Exception e) {
-			logger.severe(e.getLocalizedMessage());
+			logger.error(e.getLocalizedMessage());
 		}
 	}
 
@@ -303,7 +305,7 @@ public class CanvasControl extends BaseControl {
 
 			g.finalize();
 		} catch (Exception e) {
-			logger.severe(e.getLocalizedMessage());
+			logger.error(e.getLocalizedMessage());
 		}
 	}
 

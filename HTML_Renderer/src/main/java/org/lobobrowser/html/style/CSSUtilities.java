@@ -30,7 +30,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.StringTokenizer;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.http.UserAgentContext;
@@ -51,7 +53,7 @@ import com.steadystate.css.parser.SACParserCSS3;
 public class CSSUtilities {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(CSSUtilities.class.getName());
+	private static final Logger logger = LogManager.getLogger(CSSUtilities.class.getName());
 
 	/**
 	 * Instantiates a new CSS utilities.

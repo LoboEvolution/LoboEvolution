@@ -19,7 +19,9 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Stack;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.ErrorHandler;
@@ -101,10 +103,10 @@ public class CSSOMParser {
                 }
             }
             catch (final Exception e) {
-                final Logger log = Logger.getLogger("com.steadystate.css");
-                log.warning(e.toString());
-                log.warning("using the default 'SACParserCSS21' instead");
-                log.throwing("CSSOMParser", "consturctor", e);
+                final Logger log = LogManager.getLogger("com.steadystate.css");
+                log.warn(e.toString());
+                log.warn("using the default 'SACParserCSS21' instead");
+                log.error("CSSOMParser", "consturctor", e);
                 LastFailed_ = currentParser;
                 parser_ = new SACParserCSS21();
             }

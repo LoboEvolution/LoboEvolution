@@ -38,8 +38,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.SwingUtilities;
 
@@ -95,7 +96,7 @@ public class RBlockViewport extends BaseRCollection {
 	public static final Insets ZERO_INSETS = new Insets(0, 0, 0, 0);
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(RBlockViewport.class.getName());
+	private static final Logger logger = LogManager.getLogger(RBlockViewport.class.getName());
 
 	/** The container. */
 	private RenderableContainer container;
@@ -266,8 +267,8 @@ public class RBlockViewport extends BaseRCollection {
 			FloatingBounds floatBounds, boolean sizeOnly) {
 		// Expected in GUI thread. It's possible it may be invoked during pack()
 		// outside of the GUI thread.
-		if (!SwingUtilities.isEventDispatchThread() && logger.isLoggable(Level.INFO)) {
-			logger.warning("layout(): Invoked outside GUI dispatch thread.");
+		if (!SwingUtilities.isEventDispatchThread() && logger.isEnabled(Level.INFO)) {
+			logger.warn("layout(): Invoked outside GUI dispatch thread.");
 		}
 		RenderableContainer container = this.container;
 		this.paddingInsets = paddingInsets;
@@ -1561,8 +1562,8 @@ public class RBlockViewport extends BaseRCollection {
 	 * @return the renderables
 	 */
 	public Iterator getRenderables(Rectangle clipBounds) {
-		if (!SwingUtilities.isEventDispatchThread() && logger.isLoggable(Level.INFO)) {
-			logger.warning("getRenderables(): Invoked outside GUI dispatch thread.");
+		if (!SwingUtilities.isEventDispatchThread() && logger.isEnabled(Level.INFO)) {
+			logger.warn("getRenderables(): Invoked outside GUI dispatch thread.");
 		}
 		ArrayList sr = this.seqRenderables;
 		Iterator baseIterator = null;
@@ -1643,8 +1644,8 @@ public class RBlockViewport extends BaseRCollection {
 	 * @return the renderables
 	 */
 	public Iterator getRenderables(int pointx, int pointy) {
-		if (!SwingUtilities.isEventDispatchThread() && logger.isLoggable(Level.INFO)) {
-			logger.warning("getRenderable(): Invoked outside GUI dispatch thread.");
+		if (!SwingUtilities.isEventDispatchThread() && logger.isEnabled(Level.INFO)) {
+			logger.warn("getRenderable(): Invoked outside GUI dispatch thread.");
 		}
 		Collection result = null;
 		SortedSet others = this.positionedRenderables;

@@ -33,8 +33,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.info.FontInfo;
@@ -53,7 +54,7 @@ public class HtmlValues {
 	public static final Map<String, FontInfo> SYSTEM_FONTS = new HashMap<String, FontInfo>();
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(HtmlValues.class.getName());
+	private static final Logger logger = LogManager.getLogger(HtmlValues.class.getName());
 
 	/** The Constant DEFAULT_BORDER_WIDTH. */
 	public static final int DEFAULT_BORDER_WIDTH = 2;
@@ -804,7 +805,7 @@ public class HtmlValues {
 		try {
 			return Urls.createURL(null, tentativeUri);
 		} catch (MalformedURLException | UnsupportedEncodingException mfu) {
-			logger.log(Level.WARNING, "Unable to create URL for URI=[" + tentativeUri + "].", mfu);
+			logger.log(Level.WARN, "Unable to create URL for URI=[" + tentativeUri + "].", mfu);
 			return null;
 		}
 	}

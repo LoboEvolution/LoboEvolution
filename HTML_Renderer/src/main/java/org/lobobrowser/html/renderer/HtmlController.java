@@ -23,8 +23,9 @@ package org.lobobrowser.html.renderer;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
@@ -50,7 +51,7 @@ import org.w3c.dom.NodeList;
 public class HtmlController {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(HtmlController.class.getName());
+	private static final Logger logger = LogManager.getLogger(HtmlController.class.getName());
 
 	/** The Constant instance. */
 	private static final HtmlController instance = new HtmlController();
@@ -99,7 +100,7 @@ public class HtmlController {
 	 * @return True to propagate further and false if the event was consumed.
 	 */
 	public boolean onMouseClick(ModelNode node, MouseEvent event, RBlockViewport bodyLayout, int x, int y) {
-		if (logger.isLoggable(Level.INFO)) {
+		if (logger.isEnabled(Level.INFO)) {
 			logger.info("onMouseClick(): node=" + node + ",class=" + node.getClass().getName());
 		}
 
@@ -189,7 +190,7 @@ public class HtmlController {
 	 * @return true, if successful
 	 */
 	public boolean onContextMenu(ModelNode node, MouseEvent event, int x, int y) {
-		if (logger.isLoggable(Level.INFO)) {
+		if (logger.isEnabled(Level.INFO)) {
 			logger.info("onContextMenu(): node=" + node + ",class=" + node.getClass().getName());
 		}
 		if (node instanceof HTMLAbstractUIElement) {
@@ -308,7 +309,7 @@ public class HtmlController {
 	 * @return True to propagate further, false if consumed.
 	 */
 	public boolean onDoubleClick(ModelNode node, MouseEvent event, RBlockViewport bodyLayout, int x, int y) {
-		if (logger.isLoggable(Level.INFO)) {
+		if (logger.isEnabled(Level.INFO)) {
 			logger.info("onDoubleClick(): node=" + node + ",class=" + node.getClass().getName());
 		}
 

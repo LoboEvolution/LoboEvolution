@@ -30,8 +30,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.info.FontInfo;
 import org.lobobrowser.js.AbstractScriptableDelegate;
@@ -49,7 +50,7 @@ import org.w3c.dom.css.CSSStyleSheet;
 public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate implements CSS2Properties {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(AbstractCSS2Properties.class.getName());
+	private static final Logger logger = LogManager.getLogger(AbstractCSS2Properties.class.getName());
 
 	/** The Constant FLOAT. */
 	public static final String FLOAT = "float";
@@ -3614,7 +3615,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 									+ HtmlValues.quoteAndEscape(Urls.createURL(styleUrl, tentativeUri).toExternalForm())
 									+ ")";
 						} catch (MalformedURLException | UnsupportedEncodingException mfu) {
-							logger.log(Level.WARNING, "Unable to create URL for URI=[" + tentativeUri + "], with base=["
+							logger.log(Level.WARN, "Unable to create URL for URI=[" + tentativeUri + "], with base=["
 									+ baseHref + "].", mfu);
 							finalValue = newValue;
 						}

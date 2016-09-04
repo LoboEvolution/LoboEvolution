@@ -21,7 +21,9 @@
 package org.lobobrowser.html.jsimpl;
 
 import java.util.Date;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.js.Console;
 
@@ -31,7 +33,7 @@ import org.lobobrowser.html.js.Console;
 public class ConsoleImpl implements Console {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(ConsoleImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(ConsoleImpl.class.getName());
 
 	/** The time. */
 	private Date time;
@@ -41,12 +43,12 @@ public class ConsoleImpl implements Console {
 
 	@Override
 	public void log(Object obj) {
-		logger.severe(obj.toString());
+		logger.error(obj.toString());
 	}
 
 	@Override
 	public void debug(Object obj) {
-		logger.severe(obj.toString());
+		logger.error(obj.toString());
 
 	}
 
@@ -58,13 +60,13 @@ public class ConsoleImpl implements Console {
 
 	@Override
 	public void warn(Object obj) {
-		logger.warning(obj.toString());
+		logger.warn(obj.toString());
 
 	}
 
 	@Override
 	public void error(Object obj) {
-		logger.severe(obj.toString());
+		logger.error(obj.toString());
 
 	}
 

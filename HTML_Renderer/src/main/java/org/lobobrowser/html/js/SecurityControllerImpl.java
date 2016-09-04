@@ -30,8 +30,9 @@ import java.security.PrivilegedAction;
 import java.security.ProtectionDomain;
 import java.security.cert.Certificate;
 import java.util.MissingResourceException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.mozilla.javascript.Callable;
 import org.mozilla.javascript.Context;
@@ -54,7 +55,7 @@ public class SecurityControllerImpl extends SecurityController {
 	private final CodeSource codesource;
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(SecurityControllerImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(SecurityControllerImpl.class.getName());
 
 	/**
 	 * Instantiates a new security controller impl.
@@ -99,7 +100,7 @@ public class SecurityControllerImpl extends SecurityController {
 				return AccessController.doPrivileged(action, acctx);
 			}
 		} catch (MissingResourceException err) {
-			logger.log(Level.WARNING, "Missing Resource");
+			logger.log(Level.WARN, "Missing Resource");
 		}
 		return obj;
 	}

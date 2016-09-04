@@ -23,8 +23,9 @@
  */
 package org.lobobrowser.html.dombl;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
@@ -36,7 +37,7 @@ import org.xml.sax.SAXParseException;
 public class LocalErrorHandler implements ErrorHandler {
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(LocalErrorHandler.class.getName());
+	private static final Logger logger = LogManager.getLogger(LocalErrorHandler.class.getName());
 
 	/**
 	 * Instantiates a new local error handler.
@@ -51,7 +52,7 @@ public class LocalErrorHandler implements ErrorHandler {
 	 */
 	@Override
 	public void warning(SAXParseException exception) throws SAXException {
-		logger.log(Level.WARNING, exception.getMessage(), exception.getCause());
+		logger.log(Level.WARN, exception.getMessage(), exception.getCause());
 	}
 
 	/*
@@ -61,7 +62,7 @@ public class LocalErrorHandler implements ErrorHandler {
 	 */
 	@Override
 	public void error(SAXParseException exception) throws SAXException {
-		logger.log(Level.SEVERE, exception.getMessage(), exception.getCause());
+		logger.log(Level.ERROR, exception.getMessage(), exception.getCause());
 	}
 
 	/*
@@ -71,6 +72,6 @@ public class LocalErrorHandler implements ErrorHandler {
 	 */
 	@Override
 	public void fatalError(SAXParseException exception) throws SAXException {
-		logger.log(Level.SEVERE, exception.getMessage(), exception.getCause());
+		logger.log(Level.ERROR, exception.getMessage(), exception.getCause());
 	}
 }

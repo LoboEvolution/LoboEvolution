@@ -22,8 +22,9 @@ package org.lobobrowser.html.js;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
@@ -36,7 +37,7 @@ import org.w3c.dom.Document;
 public class Location extends AbstractScriptableDelegate {
 
     /** The Constant logger. */
-    private static final Logger logger = Logger.getLogger(Location.class
+    private static final Logger logger = LogManager.getLogger(Location.class
             .getName());
 
     /** The window. */
@@ -193,7 +194,7 @@ public class Location extends AbstractScriptableDelegate {
                 }
                 rcontext.navigate(url, this.target);
             } catch (MalformedURLException mfu) {
-                logger.log(Level.WARNING, "setHref(): Malformed location: ["
+                logger.log(Level.WARN, "setHref(): Malformed location: ["
                         + uri + "].", mfu);
             }
         }

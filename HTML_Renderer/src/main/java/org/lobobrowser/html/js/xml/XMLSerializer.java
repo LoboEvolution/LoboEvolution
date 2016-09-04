@@ -23,7 +23,9 @@ package org.lobobrowser.html.js.xml;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -42,7 +44,7 @@ import org.w3c.dom.html.HTMLDocument;
 public class XMLSerializer extends AbstractScriptableDelegate{
 
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(XMLSerializer.class.getName());
+	private static final Logger logger = LogManager.getLogger(XMLSerializer.class.getName());
 
 	/**
 	 * The subtree rooted by the specified element is serialized to a string.
@@ -71,7 +73,7 @@ public class XMLSerializer extends AbstractScriptableDelegate{
 			transformer.transform(new DOMSource(root), new StreamResult(writer));
 			return writer.getBuffer().toString().replaceAll("\n|\r", "");
 		} catch (TransformerException e) {
-			logger.severe(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return "";
 	}

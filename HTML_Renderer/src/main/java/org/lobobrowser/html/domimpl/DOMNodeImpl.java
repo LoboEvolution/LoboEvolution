@@ -33,8 +33,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.ChildHTMLCollection;
@@ -78,7 +79,7 @@ Node, ModelNode {
             null);
 
     /** The Constant logger. */
-    protected static final Logger logger = Logger.getLogger(DOMNodeImpl.class
+    protected static final Logger logger = LogManager.getLogger(DOMNodeImpl.class
             .getName());
 
     /** The ui node. */
@@ -1465,7 +1466,7 @@ Node, ModelNode {
      */
     @Override
     public void warn(String message, Throwable err) {
-        logger.log(Level.WARNING, message, err);
+        logger.log(Level.WARN, message, err);
     }
 
     /**
@@ -1475,7 +1476,7 @@ Node, ModelNode {
      *            the message
      */
     public void warn(String message) {
-        logger.log(Level.WARNING, message);
+        logger.log(Level.WARN, message);
     }
 
     /**

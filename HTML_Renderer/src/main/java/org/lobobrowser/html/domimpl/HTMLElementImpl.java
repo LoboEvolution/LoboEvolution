@@ -35,7 +35,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
+import org.apache.logging.log4j.Level;
 
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
@@ -346,7 +346,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 */
 	@Override
 	public void warn(String message, Throwable err) {
-		logger.log(Level.WARNING, message, err);
+		logger.log(Level.WARN, message, err);
 	}
 
 	/*
@@ -356,7 +356,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 */
 	@Override
 	public void warn(String message) {
-		logger.log(Level.WARNING, message);
+		logger.log(Level.WARN, message);
 	}
 
 	/**
