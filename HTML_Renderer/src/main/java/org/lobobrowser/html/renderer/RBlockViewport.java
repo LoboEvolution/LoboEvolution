@@ -673,10 +673,6 @@ public class RBlockViewport extends BaseRCollection {
 					}
 					ml.layoutMarkup(this, (HTMLElementImpl) child);
 					this.currentLine.addStyleChanger(new RStyleChanger(node));
-				} else if ((nodeType == Node.COMMENT_NODE) || (nodeType == Node.PROCESSING_INSTRUCTION_NODE)) {
-					// ignore
-				} else {
-					throw new IllegalStateException("Unknown node: " + child);
 				}
 			}
 		}
