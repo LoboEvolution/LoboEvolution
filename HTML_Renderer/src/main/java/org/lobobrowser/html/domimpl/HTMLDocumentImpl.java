@@ -711,7 +711,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 			// This sets up another Javascript scope Window. Does it matter?
 			parser.parse(strReader);
 		} catch (Exception err) {
-			this.warn("Unable to parse written HTML text. BaseURI=[" + this.getBaseURI() + "].", err);
+			logger.error("Unable to parse written HTML text. BaseURI=[" + this.getBaseURI() + "].", err);
 		}
 	}
 

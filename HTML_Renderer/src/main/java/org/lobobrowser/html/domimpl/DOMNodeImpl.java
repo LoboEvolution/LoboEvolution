@@ -411,7 +411,7 @@ Node, ModelNode {
             try {
                 return nl == null ? null : (Node) nl.get(index);
             } catch (IndexOutOfBoundsException iob) {
-                this.warn("getChildAtIndex(): Bad index=" + index
+            	logger.error("getChildAtIndex(): Bad index=" + index
                         + " for node=" + this + ".");
                 return null;
             }
@@ -1457,26 +1457,6 @@ Node, ModelNode {
     @Override
     public final ModelNode getParentModelNode() {
         return (ModelNode) this.parentNode;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.ModelNode#warn(java.lang.String,
-     * java.lang.Throwable)
-     */
-    @Override
-    public void warn(String message, Throwable err) {
-        logger.log(Level.WARN, message, err);
-    }
-
-    /**
-     * Warn.
-     *
-     * @param message
-     *            the message
-     */
-    public void warn(String message) {
-        logger.log(Level.WARN, message);
     }
 
     /**

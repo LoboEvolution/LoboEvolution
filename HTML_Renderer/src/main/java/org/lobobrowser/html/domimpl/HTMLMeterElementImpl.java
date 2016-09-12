@@ -50,7 +50,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 		try {
 			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.VALUE));
 		} catch (Exception thrown) {
-			this.warn("getSize(): Unable to parse size attribute in " + this + ".", thrown);
+			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
 			return 0;
 		}
 	}
@@ -76,7 +76,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 		try {
 			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.MIN));
 		} catch (Exception thrown) {
-			this.warn("getSize(): Unable to parse size attribute in " + this + ".", thrown);
+			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
 			return 0;
 		}
 	}
@@ -102,7 +102,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 		try {
 			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.MAX));
 		} catch (Exception thrown) {
-			this.warn("getSize(): Unable to parse size attribute in " + this + ".", thrown);
+			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
 			return 0;
 		}
 	}
@@ -128,7 +128,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 		try {
 			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.LOW));
 		} catch (Exception thrown) {
-			this.warn("getSize(): Unable to parse size attribute in " + this + ".", thrown);
+			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
 			return 0;
 		}
 	}
@@ -154,7 +154,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 		try {
 			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.HEIGHT));
 		} catch (Exception thrown) {
-			this.warn("getSize(): Unable to parse size attribute in " + this + ".", thrown);
+			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
 			return 0;
 		}
 	}
@@ -180,7 +180,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 		try {
 			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.OPTINUM));
 		} catch (Exception thrown) {
-			this.warn("getSize(): Unable to parse size attribute in " + this + ".", thrown);
+			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
 			return 0;
 		}
 	}

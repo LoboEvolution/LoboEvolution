@@ -209,7 +209,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 				} catch (Exception err) {
 					String id = this.getId();
 					String withId = id == null ? "" : " with ID '" + id + "'";
-					this.warn("Unable to parse style attribute value for element " + this.getTagName() + withId + " in "
+					logger.error("Unable to parse style attribute value for element " + this.getTagName() + withId + " in "
 							+ this.getDocumentURL() + ".", err);
 				}
 			}
@@ -338,27 +338,6 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		this.setAttribute(HtmlAttributeProperties.CHARSET, charset);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#warn(java.lang.String,
-	 * java.lang.Throwable)
-	 */
-	@Override
-	public void warn(String message, Throwable err) {
-		logger.log(Level.WARN, message, err);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#warn(java.lang.String)
-	 */
-	@Override
-	public void warn(String message) {
-		logger.log(Level.WARN, message);
-	}
-
 	/**
 	 * Gets the attribute as int.
 	 *
@@ -373,7 +352,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		try {
 			return Integer.parseInt(value);
 		} catch (Exception err) {
-			this.warn("Bad integer", err);
+			logger.error("Bad integer", err);
 			return defaultValue;
 		}
 	}
@@ -992,7 +971,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	public void setInnerHTML(String newHtml) {
 		HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
 		if (document == null) {
-			this.warn("setInnerHTML(): Element " + this + " does not belong to a document.");
+			logger.error("setInnerHTML(): Element " + this + " does not belong to a document.");
 			return;
 		}
 		HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, null, null);
@@ -1011,7 +990,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 				reader.close();
 			}
 		} catch (Exception thrown) {
-			this.warn("setInnerHTML(): Error setting inner HTML.", thrown);
+			logger.error("setInnerHTML(): Error setting inner HTML.", thrown);
 		}
 	}
 

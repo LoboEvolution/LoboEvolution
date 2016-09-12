@@ -49,7 +49,7 @@ public class HTMLProgressElementImpl extends HTMLElementImpl implements HTMLProg
 		try {
 			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.VALUE));
 		} catch (Exception thrown) {
-			this.warn("getSize(): Unable to parse size attribute in " + this + ".", thrown);
+			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
 			return 0;
 		}
 	}
@@ -75,7 +75,7 @@ public class HTMLProgressElementImpl extends HTMLElementImpl implements HTMLProg
 		try {
 			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.MAX));
 		} catch (Exception thrown) {
-			this.warn("getSize(): Unable to parse size attribute in " + this + ".", thrown);
+			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
 			return 0;
 		}
 	}

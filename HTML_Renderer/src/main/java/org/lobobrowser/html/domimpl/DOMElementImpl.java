@@ -953,7 +953,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	public void setInnerText(String newText) {
 		org.w3c.dom.Document document = this.document;
 		if (document == null) {
-			this.warn("setInnerText(): Element " + this + " does not belong to a document.");
+			logger.error("setInnerText(): Element " + this + " does not belong to a document.");
 			return;
 		}
 		synchronized (this.getTreeLock()) {

@@ -143,7 +143,7 @@ HTMLStyleElement {
 						}
 
 					} catch (Throwable err) {
-						this.warn("Unable to parse style sheet", err);
+						logger.error("Unable to parse style sheet", err);
 					}
 				}
             }

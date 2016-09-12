@@ -66,7 +66,7 @@ HTMLIFrameElement, FrameNode {
                 try {
                     frame.loadURL(this.getFullURL(src));
                 } catch (MalformedURLException mfu) {
-                    this.warn("setBrowserFrame(): Unable to navigate to src.",
+                	logger.error("setBrowserFrame(): Unable to navigate to src.",
                             mfu);
                 }
             }
@@ -309,7 +309,7 @@ HTMLIFrameElement, FrameNode {
                 try {
                     frame.loadURL(this.getFullURL(value));
                 } catch (MalformedURLException mfu) {
-                    this.warn(
+                	logger.error(
                             "assignAttributeField(): Unable to navigate to src.",
                             mfu);
                 }

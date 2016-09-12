@@ -143,7 +143,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 					URL url = this.getFullURL(href);
 					return url == null ? null : url.toExternalForm();
 				} catch (MalformedURLException mfu) {
-					this.warn("Malformed URI: [" + href + "].", mfu);
+					logger.error("Malformed URI: [" + href + "].", mfu);
 				}
 			}
 		}
@@ -166,7 +166,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 						rcontext.linkClicked(this, url, target);
 					}
 				} catch (MalformedURLException mfu) {
-					this.warn("Malformed URI: [" + href + "].", mfu);
+					logger.error("Malformed URI: [" + href + "].", mfu);
 				}
 			}
 		}

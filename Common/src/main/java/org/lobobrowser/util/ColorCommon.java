@@ -1336,6 +1336,7 @@ public class ColorCommon {
         colorMap.put("lightgoldenrod4", new Color(LIGHTGOLDENROD4));
         colorMap.put("lightgoldenrodyellow", new Color(LIGHTGOLDENRODYELLOW));
         colorMap.put("lightgray", new Color(LIGHTGRAY));
+        colorMap.put("lightgrey", new Color(LIGHTGRAY));
         colorMap.put("lightgreen", new Color(LIGHTGREEN));
         colorMap.put("lightpink", new Color(LIGHTPINK));
         colorMap.put("lightpink1", new Color(LIGHTPINK1));

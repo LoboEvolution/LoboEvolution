@@ -48,16 +48,6 @@ public interface ModelNode {
     URL getFullURL(String spec) throws MalformedURLException;
 
     /**
-     * Warn.
-     *
-     * @param message
-     *            the message
-     * @param err
-     *            the err
-     */
-    void warn(String message, Throwable err);
-
-    /**
      * Checks if is equal or descendent of.
      *
      * @param otherNode

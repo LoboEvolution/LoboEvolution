@@ -342,7 +342,7 @@ HTMLFormElement {
                 context.submitForm(this.getMethod(), url, this.getTarget(),
                         this.getEnctype(), fia);
             } catch (MalformedURLException mfu) {
-                this.warn("submit()", mfu);
+            	logger.error("submit()", mfu);
             }
         }
     }

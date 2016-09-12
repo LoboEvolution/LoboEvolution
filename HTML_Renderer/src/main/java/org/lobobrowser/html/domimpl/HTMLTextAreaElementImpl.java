@@ -149,7 +149,7 @@ HTMLTextAreaElement {
             return Integer.parseInt(this
                     .getAttribute(HtmlAttributeProperties.MAXLENGTH));
         } catch (Exception thrown) {
-            this.warn("getMaxLength(): Unable to parse size attribute in "
+            logger.error("getMaxLength(): Unable to parse size attribute in "
                     + this + ".", thrown);
             return 0;
         }

@@ -211,7 +211,7 @@ public class Location extends AbstractScriptableDelegate {
             if (rcontext != null) {
                 rcontext.reload();
             } else {
-                docImpl.warn("reload(): No renderer context in Location's document.");
+            	logger.info("reload(): No renderer context in Location's document.");
             }
         }
     }

@@ -35,8 +35,7 @@ public class LAFSettings implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
     /** The Constant logger. */
-    private static final Logger logger = LogManager
-            .getLogger(LAFSettings.class);
+    private static final Logger logger = LogManager.getLogger(LAFSettings.class);
     /** The Acryl . */
     private volatile boolean acryl;
     /** The Aero . */

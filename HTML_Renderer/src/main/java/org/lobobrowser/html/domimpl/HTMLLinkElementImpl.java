@@ -209,10 +209,10 @@ HTMLLinkElement {
 							}
 
 						} catch (MalformedURLException mfe) {
-							this.warn("Will not parse CSS. URI=[" + this.getHref() + "] with BaseURI=["
+							logger.error("Will not parse CSS. URI=[" + this.getHref() + "] with BaseURI=["
 									+ doc.getBaseURI() + "] does not appear to be a valid URI.");
 						} catch (Throwable err) {
-							this.warn("Unable to parse CSS. URI=[" + this.getHref() + "].", err);
+							logger.error("Unable to parse CSS. URI=[" + this.getHref() + "].", err);
 						}
 					}
                 }
@@ -233,7 +233,7 @@ HTMLLinkElement {
                     URL url = this.getFullURL(href);
                     return url == null ? null : url.toExternalForm();
                 } catch (MalformedURLException mfu) {
-                    this.warn("Malformed URI: [" + href + "].", mfu);
+                	logger.error("Malformed URI: [" + href + "].", mfu);
                 }
             }
         }
