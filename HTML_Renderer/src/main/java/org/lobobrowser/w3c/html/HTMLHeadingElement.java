@@ -21,18 +21,17 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLHeadingElement.
  */
 public interface HTMLHeadingElement extends HTMLElement {
-	// HTMLHeadingElement
+
 	/**
 	 * Gets the align.
 	 *
 	 * @return the align
 	 */
-	// HTMLHeadingElement-12
+
 	public String getAlign();
 
 	/**

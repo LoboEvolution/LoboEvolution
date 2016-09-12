@@ -21,17 +21,19 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.renderstate.HeadingRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
-import org.lobobrowser.util.gui.LAFSettings;
 import org.lobobrowser.w3c.html.HTMLHeadingElement;
 
 /**
  * The Class HTMLHeadingElementImpl.
  */
-public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTMLHeadingElement {
+public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTMLHeadingElement, HtmlProperties {
+
+	private String name;
 
 	/**
 	 * Instantiates a new HTML heading element impl.
@@ -41,6 +43,7 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 	 */
 	public HTMLHeadingElementImpl(String name) {
 		super(name);
+		this.name = name;
 	}
 
 	/*
@@ -117,8 +120,58 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 	@Override
 	protected AbstractCSS2Properties createDefaultStyleSheet() {
 		ComputedCSS2Properties css = new ComputedCSS2Properties(this);
-		css.internalSetLC("font-size", String.valueOf((int)LAFSettings.getInstance().getFontSize())+"px");
-		css.internalSetLC("font-weight", "bolder");
+
+		switch (name) {
+		case H1:
+			css.internalSetLC("font-size", "2em");
+			css.internalSetLC("font-weight", "bolder");
+			css.internalSetLC("margin-top", "0.67em");
+			css.internalSetLC("margin-bottom", "0.67em");
+			css.internalSetLC("margin-left", "0em");
+			css.internalSetLC("margin-right", "0em");
+			break;
+		case H2:
+			css.internalSetLC("font-size", "1.5em");
+			css.internalSetLC("font-weight", "bolder");
+			css.internalSetLC("margin-top", "0.83em");
+			css.internalSetLC("margin-bottom", "0.83em");
+			css.internalSetLC("margin-left", "0em");
+			css.internalSetLC("margin-right", "0em");
+			break;
+		case H3:
+			css.internalSetLC("font-size", "1.17em");
+			css.internalSetLC("font-weight", "bolder");
+			css.internalSetLC("margin-top", "1em");
+			css.internalSetLC("margin-bottom", "1em");
+			css.internalSetLC("margin-left", "0em");
+			css.internalSetLC("margin-right", "0em");
+			break;
+		case H4:
+			css.internalSetLC("font-weight", "bolder");
+			css.internalSetLC("margin-top", "1.33em");
+			css.internalSetLC("margin-bottom", "1.33em");
+			css.internalSetLC("margin-left", "0em");
+			css.internalSetLC("margin-right", "0em");
+			break;
+		case H5:
+			css.internalSetLC("font-size", "0.83em");
+			css.internalSetLC("font-weight", "bolder");
+			css.internalSetLC("margin-top", "1.67em");
+			css.internalSetLC("margin-bottom", "1.67em");
+			css.internalSetLC("margin-left", "0em");
+			css.internalSetLC("margin-right", "0em");
+			break;
+		case H6:
+			css.internalSetLC("font-size", "0.67em");
+			css.internalSetLC("font-weight", "bolder");
+			css.internalSetLC("margin-top", "2.33em");
+			css.internalSetLC("margin-bottom", "2.33em");
+			css.internalSetLC("margin-left", "0em");
+			css.internalSetLC("margin-right", "0em");
+			break;
+		default:
+			break;
+		}
 		return css;
 	}
 }
