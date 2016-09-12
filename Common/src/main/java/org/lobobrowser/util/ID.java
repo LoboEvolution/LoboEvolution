@@ -62,7 +62,7 @@ public class ID {
             addressHashCode = inetAddress.getHostName().hashCode()
                     ^ inetAddress.getHostAddress().hashCode();
         } catch (Exception err) {
-            logger.log(Level.WARN, "Unable to get local host information.",
+            logger.error("Unable to get local host information.",
                     err);
             addressHashCode = ID.class.hashCode();
         }

@@ -53,7 +53,7 @@ public class ManagedStoreSettings implements Serializable {
                             ManagedStoreSettings.class.getSimpleName(),
                             ManagedStoreSettings.class.getClassLoader());
         } catch (Exception err) {
-            logger.log(Level.WARN,
+            logger.error(
                     "getInstance(): Unable to retrieve settings.", err);
         }
         if (ins == null) {
@@ -88,7 +88,7 @@ public class ManagedStoreSettings implements Serializable {
             StorageManager.getInstance().saveSettings(
                     this.getClass().getSimpleName(), this);
         } catch (IOException ioe) {
-            logger.log(Level.WARN, "Unable to save settings: "
+            logger.error("Unable to save settings: "
                     + this.getClass().getSimpleName(), ioe);
         }
     }

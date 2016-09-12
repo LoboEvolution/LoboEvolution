@@ -805,7 +805,7 @@ public class HtmlValues {
 		try {
 			return Urls.createURL(null, tentativeUri);
 		} catch (MalformedURLException | UnsupportedEncodingException mfu) {
-			logger.log(Level.WARN, "Unable to create URL for URI=[" + tentativeUri + "].", mfu);
+			logger.error("Unable to create URL for URI=[" + tentativeUri + "].", mfu);
 			return null;
 		}
 	}

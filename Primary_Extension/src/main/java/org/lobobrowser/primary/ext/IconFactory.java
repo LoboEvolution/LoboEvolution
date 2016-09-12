@@ -90,7 +90,7 @@ public class IconFactory {
 				return icon;
 			}
 		} catch (IOException ioe) {
-			logger.log(Level.WARN, "getIcon(): Resource path " + resourcePath + " gave error.", ioe);
+			logger.error("getIcon(): Resource path " + resourcePath + " gave error.", ioe);
 			return null;
 		}
 	}

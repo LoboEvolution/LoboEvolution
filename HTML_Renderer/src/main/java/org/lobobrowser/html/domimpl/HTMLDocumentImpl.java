@@ -626,7 +626,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 					try {
 						reader.close();
 					} catch (Exception err) {
-						logger.log(Level.WARN, "load(): Unable to close stream", err);
+						logger.error("load(): Unable to close stream", err);
 					}
 					synchronized (this.getTreeLock()) {
 						this.reader = null;
@@ -1155,7 +1155,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 			try {
 				return new URL(uri);
 			} catch (MalformedURLException mfu2) {
-				logger.log(Level.WARN,
+				logger.error(
 						"Unable to create URL for URI=[" + uri + "], with base=[" + this.getBaseURI() + "].", mfu);
 				return null;
 			}
@@ -1265,7 +1265,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				try {
 					ssa.addStyleSheets(this.styleSheets.getCSSStyleSheets());
 				} catch (MalformedURLException | UnsupportedEncodingException mfu) {
-					logger.log(Level.WARN, "getStyleSheetAggregator()", mfu);
+					logger.error("getStyleSheetAggregator()", mfu);
 				}
 				this.styleSheetAggregator = ssa;
 			}

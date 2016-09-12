@@ -322,7 +322,7 @@ public class ComponentSource implements NavigatorWindowListener {
 				menuItem.setToolTipText(url.toExternalForm());
 				menu.add(menuItem);
 			} catch (MalformedURLException mfu) {
-				logger.log(Level.WARN, "populateRecentHosts(): Bad URL=" + urlText, mfu);
+				logger.error("populateRecentHosts(): Bad URL=" + urlText, mfu);
 			}
 		}
 		menu.addSeparator();

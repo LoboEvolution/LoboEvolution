@@ -54,7 +54,7 @@ public class AssociatedSettings implements Serializable {
                     .retrieveSettings(AssociatedSettings.class.getSimpleName(),
                             AssociatedSettings.class.getClassLoader());
         } catch (Exception err) {
-            logger.log(Level.WARN, "Unable to retrieve settings.", err);
+            logger.error("Unable to retrieve settings.", err);
         }
         if (ins == null) {
             ins = new AssociatedSettings();
@@ -88,7 +88,7 @@ public class AssociatedSettings implements Serializable {
             StorageManager.getInstance().saveSettings(
                     this.getClass().getSimpleName(), this);
         } catch (IOException ioe) {
-            logger.log(Level.WARN, "Unable to save settings: "
+            logger.error("Unable to save settings: "
                     + this.getClass().getSimpleName(), ioe);
         }
     }

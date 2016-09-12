@@ -51,7 +51,7 @@ public class BookmarksHistory extends BaseHistory<BookmarkInfo>implements Serial
 			ins = (BookmarksHistory) StorageManager.getInstance()
 					.retrieveSettings(BookmarksHistory.class.getSimpleName(), BookmarksHistory.class.getClassLoader());
 		} catch (Exception err) {
-			logger.log(Level.WARN, "Unable to retrieve settings.", err);
+			logger.error("Unable to retrieve settings.", err);
 		}
 		if (ins == null) {
 			ins = new BookmarksHistory();
@@ -82,7 +82,7 @@ public class BookmarksHistory extends BaseHistory<BookmarkInfo>implements Serial
 			try {
 				StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
 			} catch (IOException ioe) {
-				logger.log(Level.WARN, "Unable to save settings: " + this.getClass().getSimpleName(), ioe);
+				logger.error("Unable to save settings: " + this.getClass().getSimpleName(), ioe);
 			}
 		}
 	}

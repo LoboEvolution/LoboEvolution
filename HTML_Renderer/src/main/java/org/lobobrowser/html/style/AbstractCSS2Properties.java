@@ -3615,7 +3615,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 									+ HtmlValues.quoteAndEscape(Urls.createURL(styleUrl, tentativeUri).toExternalForm())
 									+ ")";
 						} catch (MalformedURLException | UnsupportedEncodingException mfu) {
-							logger.log(Level.WARN, "Unable to create URL for URI=[" + tentativeUri + "], with base=["
+							logger.error("Unable to create URL for URI=[" + tentativeUri + "], with base=["
 									+ baseHref + "].", mfu);
 							finalValue = newValue;
 						}

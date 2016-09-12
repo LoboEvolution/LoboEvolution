@@ -113,7 +113,7 @@ public class ActionPool extends AbstractAction {
 		try {
 			url = new URL(fullURL);
 		} catch (MalformedURLException mfu) {
-			logger.log(Level.WARN, "createNavigateAction()", mfu);
+			logger.error("createNavigateAction()", mfu);
 			url = null;
 		}
 		NavigateAction nav = new NavigateAction(componentSource, window);

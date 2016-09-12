@@ -51,7 +51,7 @@ public class CookieSettings implements Serializable {
                     .retrieveSettings(CookieSettings.class.getSimpleName(),
                             CookieSettings.class.getClassLoader());
         } catch (Exception err) {
-            logger.log(Level.WARN,
+            logger.error(
                     "getInstance(): Unable to retrieve settings.", err);
         }
         if (ins == null) {

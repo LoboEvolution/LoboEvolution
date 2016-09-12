@@ -52,7 +52,7 @@ public class NavigationHistory extends BaseHistory<Object>implements Serializabl
 			ins = (NavigationHistory) StorageManager.getInstance().retrieveSettings(
 					NavigationHistory.class.getSimpleName(), NavigationHistory.class.getClassLoader());
 		} catch (Exception err) {
-			logger.log(Level.WARN, "Unable to retrieve settings.", err);
+			logger.error("Unable to retrieve settings.", err);
 		}
 		if (ins == null) {
 			ins = new NavigationHistory();
@@ -83,7 +83,7 @@ public class NavigationHistory extends BaseHistory<Object>implements Serializabl
 			try {
 				StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
 			} catch (IOException ioe) {
-				logger.log(Level.WARN, "Unable to save settings: " + this.getClass().getSimpleName(), ioe);
+				logger.error("Unable to save settings: " + this.getClass().getSimpleName(), ioe);
 			}
 		}
 	}

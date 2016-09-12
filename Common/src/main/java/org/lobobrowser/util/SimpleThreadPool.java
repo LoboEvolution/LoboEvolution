@@ -197,8 +197,7 @@ public class SimpleThreadPool {
                             currentThread
                                     .setName(baseName + ":" + task.toString());
                         } catch (Throwable thrown) {
-                            logger.log(Level.WARN,
-                                    "run(): Unable to set task name.", thrown);
+                            logger.error("run(): Unable to set task name.", thrown);
                         }
                         try {
                             task.run();

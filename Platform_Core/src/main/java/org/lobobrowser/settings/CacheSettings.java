@@ -54,7 +54,7 @@ public class CacheSettings implements Serializable {
                     .retrieveSettings(CacheSettings.class.getSimpleName(),
                             CacheSettings.class.getClassLoader());
         } catch (Exception err) {
-            logger.log(Level.WARN,
+            logger.error(
                     "getInstance(): Unable to retrieve settings.", err);
         }
         if (ins == null) {
@@ -83,7 +83,7 @@ public class CacheSettings implements Serializable {
             StorageManager.getInstance().saveSettings(
                     this.getClass().getSimpleName(), this);
         } catch (IOException ioe) {
-            logger.log(Level.WARN, "Unable to save settings: "
+            logger.error("Unable to save settings: "
                     + this.getClass().getSimpleName() + ".", ioe);
         }
     }

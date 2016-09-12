@@ -475,7 +475,7 @@ public final class CacheManager implements Runnable {
                         }
                     }
                 } catch (Throwable thrown) {
-                    logger.log(Level.WARN, "sweepCache()", thrown);
+                    logger.error("sweepCache()", thrown);
                 }
             }
         }

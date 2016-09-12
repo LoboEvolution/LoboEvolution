@@ -272,7 +272,7 @@ public class CacheInfo {
             cm.removePersistent(this.url, false);
             cm.removePersistent(this.url, true);
         } catch (IOException ioe) {
-            logger.log(Level.WARN, "delete()", ioe);
+            logger.error("delete()", ioe);
         }
     }
 

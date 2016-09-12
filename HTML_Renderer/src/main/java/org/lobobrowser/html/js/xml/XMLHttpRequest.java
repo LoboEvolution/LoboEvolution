@@ -439,7 +439,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 				}
 			}
 		} catch (Exception err) {
-			logger.log(Level.WARN, "Error processing ready state change.", err);
+			logger.error("Error processing ready state change.", err);
 		}
 	}
 }

@@ -131,7 +131,7 @@ public class DefaultWindowFactory implements WindowFactory {
 			}
 
 		} catch (Throwable ex) {
-			 logger.log(Level.WARN, ex.getMessage());
+			 logger.error(ex.getMessage());
 		}
 		return image;
 	}
@@ -152,7 +152,7 @@ public class DefaultWindowFactory implements WindowFactory {
                     icon = new ImageIcon(imageBytes);
                     this.imageMap.put(urlOrPath, icon);
                 } catch (Exception err) {
-                    logger.log(Level.WARN,
+                    logger.error(
                             "getImageIcon(): Unable to load image: "
                                     + urlOrPath, err);
                 }

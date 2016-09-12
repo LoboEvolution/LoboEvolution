@@ -80,7 +80,7 @@ public class ConnectionSettings implements java.io.Serializable {
                     .retrieveSettings(ConnectionSettings.class.getSimpleName(),
                             ConnectionSettings.class.getClassLoader());
         } catch (Exception err) {
-            logger.log(Level.WARN,
+            logger.error(
                     "getInstance(): Unable to retrieve settings.", err);
         }
         if (ins == null) {
@@ -292,7 +292,7 @@ public class ConnectionSettings implements java.io.Serializable {
             StorageManager.getInstance().saveSettings(
                     this.getClass().getSimpleName(), this);
         } catch (IOException ioe) {
-            logger.log(Level.WARN, "save(): Unable to save settings", ioe);
+            logger.error("save(): Unable to save settings", ioe);
         }
     }
 }

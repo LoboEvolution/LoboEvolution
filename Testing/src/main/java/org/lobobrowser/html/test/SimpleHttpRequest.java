@@ -158,7 +158,7 @@ public class SimpleHttpRequest extends AbstractBean {
 		try {
 			return bytes == null ? null : new String(bytes, encoding);
 		} catch (UnsupportedEncodingException uee) {
-			logger.log(Level.WARN,
+			logger.error(
 					"getResponseText(): Charset '" + encoding + "' did not work. Retrying with UTF-8.", uee);
 			try {
 				return new String(bytes, "UTF-8");
@@ -189,7 +189,7 @@ public class SimpleHttpRequest extends AbstractBean {
 		try {
 			return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(in);
 		} catch (Exception err) {
-			logger.log(Level.WARN, "Unable to parse response as XML.", err);
+			logger.error("Unable to parse response as XML.", err);
 			return null;
 		}
 	}
@@ -398,7 +398,7 @@ public class SimpleHttpRequest extends AbstractBean {
 						try {
 							sendSync(content);
 						} catch (Throwable thrown) {
-							logger.log(Level.WARN, "send(): Error in asynchronous request on " + url, thrown);
+							logger.error("send(): Error in asynchronous request on " + url, thrown);
 						}
 					}
 				}.start();

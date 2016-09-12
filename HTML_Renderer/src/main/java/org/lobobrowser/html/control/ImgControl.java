@@ -170,17 +170,17 @@ public class ImgControl extends BaseControl implements ImageListener {
 					try {
 						image = ImageIO.read(con.getInputStream());
 					} catch (IOException e) {
-						logger.log(Level.WARN, "read error: " + e.getMessage());
+						logger.error("read error: " + e.getMessage());
 					}
 				} else {
 					image = ImageIO.read(con.getInputStream());
 				}
 			} catch (FileNotFoundException | IIOException ex) {
-				logger.log(Level.WARN, "ImgControl(): Image not found "+modelNode.getSrc());
+				logger.error("ImgControl(): Image not found "+modelNode.getSrc());
 			} catch (TranscoderException | IOException e1) {
-				logger.log(Level.WARN, e1.getMessage());
+				logger.error(e1.getMessage());
 			} catch (Exception e1) {
-				logger.log(Level.WARN, "ImgControl(): Image not found "+modelNode.getSrc());
+				logger.error("ImgControl(): Image not found "+modelNode.getSrc());
 			}
 		}
 

@@ -292,7 +292,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		try {
 			results = handler.get(url.toURI(), new HashMap<String, List<String>>());
 		} catch (Exception err) {
-			logger.log(Level.WARN, "getCookie()", err);
+			logger.error("getCookie()", err);
 			return "";
 		}
 		if (results == null) {
@@ -366,7 +366,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		try {
 			handler.put(url.toURI(), headers);
 		} catch (Exception err) {
-			logger.log(Level.WARN, "setCookie()", err);
+			logger.error("setCookie()", err);
 		}
 	}
 

@@ -199,7 +199,7 @@ public class ExtensionManager {
                 try {
                     this.addExtension(file);
                 } catch (IOException ioe) {
-                    logger.log(Level.WARN,
+                    logger.error(
                             "createExtensions(): Unable to load '" + file
                             + "'.", ioe);
                 }
@@ -209,7 +209,7 @@ public class ExtensionManager {
             try {
                 this.addExtension(file);
             } catch (IOException ioe) {
-                logger.log(Level.WARN,
+                logger.error(
                         "createExtensions(): Unable to load '" + file + "'.",
                         ioe);
             }
@@ -251,7 +251,7 @@ public class ExtensionManager {
                     try {
                         fei.initClassLoader(pcl);
                     } catch (Exception err) {
-                        logger.log(Level.WARN,
+                        logger.error(
                                 "Unable to create class loader for " + fei
                                 + ".", err);
                     }
@@ -431,7 +431,7 @@ public class ExtensionManager {
 				}
 			}
 			if (!dispatched && logger.isInfoEnabled()) {
-				logger.log(Level.WARN,
+				logger.error(
 						"No error handlers found for error that occurred while processing response=[" + response + "].",
 						exception);
 			}
@@ -449,7 +449,7 @@ public class ExtensionManager {
 						}
 					}
 					if (!dispatched && logger.isInfoEnabled()) {
-						logger.log(Level.WARN,
+						logger.error(
 								"No error handlers found for error that occurred while processing response=[" + response
 										+ "].",
 								exception);

@@ -161,7 +161,7 @@ public class CookieStore {
                                 + domain + "'.");
             }
             if (!Domains.isValidCookieDomain(domain, urlHostName)) {
-                logger.log(Level.WARN,
+                logger.error(
                         "saveCookie(): Rejecting cookie with invalid domain '"
                                 + domain + "' for host '" + urlHostName + "'.");
                 return;
@@ -179,7 +179,7 @@ public class CookieStore {
                 expiresDate = new java.util.Date(System.currentTimeMillis()
                         + (Integer.parseInt(maxAge) * 1000));
             } catch (NumberFormatException nfe) {
-                logger.log(Level.WARN,
+                logger.error(
                         "saveCookie(): Max-age is not formatted correctly: "
                                 + maxAge + ".");
             }
@@ -230,7 +230,7 @@ public class CookieStore {
                         .getRestrictedStore(domain, true);
                 store.saveObject(this.getPathFromCookieName(name), cookieValue);
             } catch (IOException ioe) {
-                logger.log(Level.WARN,
+                logger.error(
                         "saveCookie(): Unable to save cookie named '" + name
                         + "' with domain '" + domain + "'", ioe);
             }

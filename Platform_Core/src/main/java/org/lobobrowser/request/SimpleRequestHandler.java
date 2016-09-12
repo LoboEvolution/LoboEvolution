@@ -176,7 +176,7 @@ public abstract class SimpleRequestHandler implements RequestHandler {
     @Override
     public boolean handleException(ClientletResponse response,
             Throwable exception) throws ClientletException {
-        logger.log(Level.WARN,
+        logger.error(
                 "handleException(): Error processing response=[" + response
                 + "]", exception);
         return true;

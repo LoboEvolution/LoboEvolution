@@ -570,7 +570,7 @@ public class DownloadDialog extends JFrame {
 				try {
 					OS.launchPath(file.getParentFile().getAbsolutePath());
 				} catch (Exception thrown) {
-					logger.log(Level.WARN, "Unable to open folder of file: " + file + ".", thrown);
+					logger.error("Unable to open folder of file: " + file + ".", thrown);
 					JOptionPane.showMessageDialog(DownloadDialog.this, "An error occurred trying to open the folder.");
 				}
 			}
@@ -599,7 +599,7 @@ public class DownloadDialog extends JFrame {
 					OS.launchPath(file.getAbsolutePath());
 					DownloadDialog.this.dispose();
 				} catch (Exception thrown) {
-					logger.log(Level.WARN, "Unable to open file: " + file + ".", thrown);
+					logger.error("Unable to open file: " + file + ".", thrown);
 					JOptionPane.showMessageDialog(DownloadDialog.this, "An error occurred trying to open the file.");
 				}
 			}
@@ -698,7 +698,7 @@ public class DownloadDialog extends JFrame {
 		 */
 		@Override
 		public boolean handleException(ClientletResponse response, Throwable exception) throws ClientletException {
-			logger.log(Level.WARN,
+			logger.error(
 					"An error occurred trying to download " + response.getResponseURL() + " to " + this.file + ".",
 					exception);
 			errorInDownload_Safe();

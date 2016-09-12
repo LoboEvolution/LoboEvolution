@@ -194,7 +194,7 @@ public class Location extends AbstractScriptableDelegate {
                 }
                 rcontext.navigate(url, this.target);
             } catch (MalformedURLException mfu) {
-                logger.log(Level.WARN, "setHref(): Malformed location: ["
+                logger.error("setHref(): Malformed location: ["
                         + uri + "].", mfu);
             }
         }

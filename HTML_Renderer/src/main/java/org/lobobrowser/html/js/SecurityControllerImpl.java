@@ -100,7 +100,7 @@ public class SecurityControllerImpl extends SecurityController {
 				return AccessController.doPrivileged(action, acctx);
 			}
 		} catch (MissingResourceException err) {
-			logger.log(Level.WARN, "Missing Resource");
+			logger.error("Missing Resource");
 		}
 		return obj;
 	}

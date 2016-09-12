@@ -247,7 +247,7 @@ HTMLScriptElement {
 								request.open(Method.GET, getFullURL(scriptURI), false);
 								request.send();
 							} catch (IOException thrown) {
-								logger.log(Level.WARN, "processScript()",
+								logger.error("processScript()",
 										thrown);
 							}
 						} else {
@@ -262,7 +262,7 @@ HTMLScriptElement {
 												request.open(Method.GET, getFullURL(scriptURI), false);
 												request.send();
 											} catch (IOException thrown) {
-												logger.log(Level.WARN,
+												logger.error(
 														"processScript()",
 														thrown);
 											}
@@ -313,17 +313,17 @@ HTMLScriptElement {
 					}
 
 				} catch (EcmaError ecmaError) {
-					logger.log(Level.WARN,
+					logger.error(
 							"Javascript error at " + ecmaError.sourceName()
 									+ ":" + ecmaError.columnNumber() + ": "
 									+ ecmaError.getMessage());
 				} catch (EvaluatorException e){
-					logger.log(Level.WARN, e.getMessage());
+					logger.error(e.getMessage());
 				} catch (MissingResourceException err) {
-					logger.log(Level.WARN, "Missing Resource");
+					logger.error("Missing Resource");
 				} catch (Exception err) {
 					logger.error("scriptURI: " + scriptURI);
-					logger.log(Level.WARN,
+					logger.error(
 							"Unable to evaluate Javascript code", err);
 				} finally {
 					Context.exit();

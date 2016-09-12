@@ -145,7 +145,7 @@ public class LAFSettings implements Serializable {
                     .retrieveSettings(LAFSettings.class.getSimpleName(),
                             LAFSettings.class.getClassLoader());
         } catch (Exception err) {
-            logger.log(Level.WARN,
+            logger.error(
                     "getInstance(): Unable to retrieve settings.", err);
         }
         if (ins == null) {
@@ -190,7 +190,7 @@ public class LAFSettings implements Serializable {
         try {
             this.saveChecked();
         } catch (IOException ioe) {
-            logger.log(Level.WARN, "save(): Unable to save settings", ioe);
+            logger.error("save(): Unable to save settings", ioe);
         }
     }
     

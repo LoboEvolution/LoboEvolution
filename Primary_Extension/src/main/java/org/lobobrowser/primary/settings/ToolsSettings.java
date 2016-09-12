@@ -65,7 +65,7 @@ public class ToolsSettings implements Serializable {
 			ins = (ToolsSettings) StorageManager.getInstance().retrieveSettings(ToolsSettings.class.getSimpleName(),
 					ToolsSettings.class.getClassLoader());
 		} catch (Exception err) {
-			logger.log(Level.WARN, "getInstance(): Unable to retrieve settings.", err);
+			logger.error("getInstance(): Unable to retrieve settings.", err);
 		}
 		if (ins == null) {
 			ins = new ToolsSettings();
@@ -163,7 +163,7 @@ public class ToolsSettings implements Serializable {
 		try {
 			StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
 		} catch (IOException ioe) {
-			logger.log(Level.WARN, "Unable to save settings: " + this.getClass().getSimpleName() + ".", ioe);
+			logger.error("Unable to save settings: " + this.getClass().getSimpleName() + ".", ioe);
 		}
 	}
 

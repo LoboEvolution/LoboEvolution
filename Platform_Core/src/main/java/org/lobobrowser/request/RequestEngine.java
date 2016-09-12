@@ -488,7 +488,7 @@ public final class RequestEngine {
 						try {
 							persistentContent = cm.getPersistent(url, false);
 						} catch (IOException ioe) {
-							logger.log(Level.WARN, "getCacheInfo(): Unable to load cache file.", ioe);
+							logger.error("getCacheInfo(): Unable to load cache file.", ioe);
 						}
 					}
 				}
@@ -594,7 +594,7 @@ public final class RequestEngine {
 					try {
 						cm.putPersistent(url, out.toByteArray(), false);
 					} catch (Exception err) {
-						logger.log(Level.WARN, "cache(): Unable to cache response content.", err);
+						logger.error("cache(): Unable to cache response content.", err);
 					}
 					if (altPersistentObject != null) {
 						try {
@@ -605,17 +605,17 @@ public final class RequestEngine {
 							objOut.flush();
 							byte[] byteArray = fileOut.toByteArray();
 							if (byteArray.length == 0) {
-								logger.log(Level.WARN,
+								logger.error(
 										"cache(): Serialized content has zero bytes for persistent object "
 												+ altPersistentObject + ".");
 							}
 							cm.putPersistent(url, byteArray, true);
 						} catch (Exception err) {
-							logger.log(Level.WARN, "cache(): Unable to write persistent cached object.", err);
+							logger.error("cache(): Unable to write persistent cached object.", err);
 						}
 					}
 				} catch (Exception err) {
-					logger.log(Level.WARN, "cache()", err);
+					logger.error("cache()", err);
 				}
 				return null;
 			}

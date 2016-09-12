@@ -228,7 +228,7 @@ public class ScrapingTest {
 				URL url = org.lobobrowser.util.Urls.guessURL(urlOrPath);
 				this.submitForm("GET", url, "_this", null, null);
 			} catch (java.net.MalformedURLException mfu) {
-				logger.log(Level.WARN, "navigate()", mfu);
+				logger.error("navigate()", mfu);
 			}
 		}
 
@@ -355,7 +355,7 @@ public class ScrapingTest {
 				}
 			} catch (Exception err) {
 				this.document = null;
-				logger.log(Level.WARN, "submitForm()", err);
+				logger.error("submitForm()", err);
 			}
 		}
 

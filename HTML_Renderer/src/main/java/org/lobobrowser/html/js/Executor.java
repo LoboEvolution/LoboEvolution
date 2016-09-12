@@ -67,7 +67,7 @@ public class Executor {
                 ctx.setSecurityController(new SecurityControllerImpl(
                         codeSource, ucontext.getSecurityPolicy()));
             } catch (MissingResourceException err) {
-                logger.log(Level.WARN, "Missing Resource");
+                logger.error("Missing Resource");
             }
         }
         return ctx;

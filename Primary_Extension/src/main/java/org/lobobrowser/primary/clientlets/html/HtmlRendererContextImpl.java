@@ -141,7 +141,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	 *            the throwable
 	 */
 	public void warn(String message, Throwable throwable) {
-		logger.log(Level.WARN, message, throwable);
+		logger.error(message, throwable);
 	}
 
 	/**
@@ -269,7 +269,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			URL urlObj = org.lobobrowser.util.Urls.guessURL(url);
 			return this.open(urlObj, windowName, windowFeatures, replace);
 		} catch (Exception err) {
-			logger.log(Level.WARN, "open(): Unable to open URL [" + url + "].", err);
+			logger.error("open(): Unable to open URL [" + url + "].", err);
 			return null;
 		}
 	}
@@ -342,7 +342,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 			}
 			return HtmlRendererContextImpl.getHtmlRendererContext(newFrame);
 		} catch (Exception err) {
-			logger.log(Level.WARN, "open(): Unable to open URL [" + urlObj + "].", err);
+			logger.error("open(): Unable to open URL [" + urlObj + "].", err);
 			return null;
 		}
 	}

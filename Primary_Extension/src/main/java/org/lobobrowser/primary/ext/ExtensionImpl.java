@@ -149,7 +149,7 @@ public class ExtensionImpl implements NavigatorExtension {
 	 */
 	public static void showError(NavigatorFrame frame, ClientletResponse response, Throwable exception) {
 		if (logger.isWarnEnabled()) {
-			logger.log(Level.WARN, "showError(): An error occurred trying to process document "
+			logger.error("showError(): An error occurred trying to process document "
 					+ (response == null ? "[null]" : response.getResponseURL()), exception.getCause());
 		}
 		ComponentContent errorComponent = getErrorComponent(frame, response, exception);

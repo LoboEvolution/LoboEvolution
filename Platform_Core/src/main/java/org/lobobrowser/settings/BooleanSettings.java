@@ -59,7 +59,7 @@ public class BooleanSettings implements Serializable {
                     .retrieveSettings(BooleanSettings.class.getSimpleName(),
                             BooleanSettings.class.getClassLoader());
         } catch (Exception err) {
-            logger.log(Level.WARN, "Unable to retrieve settings.", err);
+            logger.error("Unable to retrieve settings.", err);
         }
         if (ins == null) {
             ins = new BooleanSettings();
@@ -101,7 +101,7 @@ public class BooleanSettings implements Serializable {
             StorageManager.getInstance().saveSettings(
                     this.getClass().getSimpleName(), this);
         } catch (IOException ioe) {
-            logger.log(Level.WARN, "Unable to save settings: "
+            logger.error("Unable to save settings: "
                     + this.getClass().getSimpleName(), ioe);
         }
     }

@@ -810,7 +810,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 */
 	public void warn(String message, Throwable throwable) {
 		if (logger.isWarnEnabled()) {
-			logger.log(Level.WARN, message, throwable);
+			logger.error(message, throwable);
 		}
 	}
 
@@ -836,7 +836,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 */
 	public void warn(String message) {
 		if (logger.isWarnEnabled()) {
-			logger.log(Level.WARN, message);
+			logger.error(message);
 		}
 	}
 
@@ -1035,7 +1035,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	@Override
 	public void back() {
 		if (logger.isWarnEnabled()) {
-			logger.log(Level.WARN, "back() does nothing, unless overridden.");
+			logger.error("back() does nothing, unless overridden.");
 		}
 	}
 
@@ -1047,7 +1047,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	@Override
 	public void forward() {
 		if (logger.isWarnEnabled()) {
-			logger.log(Level.WARN, "forward() does nothing, unless overridden.");
+			logger.error("forward() does nothing, unless overridden.");
 		}
 	}
 
@@ -1105,7 +1105,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	@Override
 	public void goToHistoryURL(String url) {
 		if (logger.isWarnEnabled()) {
-			logger.log(Level.WARN, "goToHistoryURL() does nothing, unless overridden.");
+			logger.error("goToHistoryURL() does nothing, unless overridden.");
 		}
 	}
 
@@ -1117,7 +1117,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	@Override
 	public void moveInHistory(int offset) {
 		if (logger.isWarnEnabled()) {
-			logger.log(Level.WARN, "moveInHistory() does nothing, unless overridden.");
+			logger.error("moveInHistory() does nothing, unless overridden.");
 		}
 	}
 

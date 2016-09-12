@@ -1396,11 +1396,11 @@ public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttr
 							f = ctx.compileFunction(thisScope, functionCode,
 									this.getTagName() + "[" + this.getId() + "]." + attributeName, 1, null);
 						} catch (EcmaError ecmaError) {
-							logger.log(Level.WARN, "Javascript error at " + ecmaError.sourceName() + ":"
+							logger.error("Javascript error at " + ecmaError.sourceName() + ":"
 									+ ecmaError.lineNumber() + ": " + ecmaError.getMessage(), ecmaError);
 							f = null;
 						} catch (Exception err) {
-							logger.log(Level.WARN, "Unable to evaluate Javascript code", err);
+							logger.error("Unable to evaluate Javascript code", err);
 							f = null;
 						}
 					} finally {

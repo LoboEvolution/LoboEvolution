@@ -674,7 +674,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				try {
 					this.zIndex = Integer.parseInt(zIndex);
 				} catch (NumberFormatException err) {
-					logger.log(Level.WARN,
+					logger.error(
 							"Unable to parse z-index [" + zIndex + "] in element " + this.modelNode + ".", err);
 					this.zIndex = 0;
 				}
@@ -727,11 +727,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				BaseElementRenderable.this.repaint();
 			}
 		} catch (FileNotFoundException | IIOException ex) {
-			logger.log(Level.WARN, "loadBackgroundImage(): Image not found "+url);
+			logger.error("loadBackgroundImage(): Image not found "+url);
 		} catch (IOException | TranscoderException thrown) {
-			logger.log(Level.WARN, "loadBackgroundImage()", thrown);
+			logger.error("loadBackgroundImage()", thrown);
 		} catch (Exception e) {
-			logger.log(Level.WARN, "loadBackgroundImage()", e);
+			logger.error("loadBackgroundImage()", e);
 		}
 	}
 

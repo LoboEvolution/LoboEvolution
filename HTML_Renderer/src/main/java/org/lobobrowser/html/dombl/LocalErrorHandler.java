@@ -52,7 +52,7 @@ public class LocalErrorHandler implements ErrorHandler {
 	 */
 	@Override
 	public void warning(SAXParseException exception) throws SAXException {
-		logger.log(Level.WARN, exception.getMessage(), exception.getCause());
+		logger.error(exception.getMessage(), exception.getCause());
 	}
 
 	/*

@@ -86,7 +86,7 @@ public class GeneralSettings implements Serializable {
                     .retrieveSettings(GeneralSettings.class.getSimpleName(),
                             GeneralSettings.class.getClassLoader());
         } catch (Exception err) {
-            logger.log(Level.WARN,
+            logger.error(
                     "getInstance(): Unable to retrieve settings.", err);
         }
         if (ins == null) {
@@ -122,7 +122,7 @@ public class GeneralSettings implements Serializable {
         try {
             this.saveChecked();
         } catch (IOException ioe) {
-            logger.log(Level.WARN, "save(): Unable to save settings", ioe);
+            logger.error("save(): Unable to save settings", ioe);
         }
     }
 

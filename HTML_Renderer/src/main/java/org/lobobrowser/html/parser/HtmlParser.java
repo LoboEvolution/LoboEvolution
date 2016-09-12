@@ -314,7 +314,7 @@ public class HtmlParser {
 				parent.appendChild(textNode);
 			} catch (DOMException de) {
 				if ((parent.getNodeType() != Node.DOCUMENT_NODE) || (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
-					logger.log(Level.WARN, "parseToken(): Unable to append child to " + parent + ".", de);
+					logger.error("parseToken(): Unable to append child to " + parent + ".", de);
 				}
 			}
 		}
@@ -708,7 +708,7 @@ public class HtmlParser {
 					} catch (DOMException de) {
 						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
 								|| (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
-							logger.log(Level.WARN, "parseToken(): Unable to append child to " + parent + ".", de);
+							logger.error("parseToken(): Unable to append child to " + parent + ".", de);
 						}
 					}
 					if (chInt == -1) {
@@ -735,7 +735,7 @@ public class HtmlParser {
 					} catch (DOMException de) {
 						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
 								|| (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
-							logger.log(Level.WARN, "parseToken(): Unable to append child to " + parent + ".", de);
+							logger.error("parseToken(): Unable to append child to " + parent + ".", de);
 						}
 					}
 					if (chInt == -1) {
@@ -1152,7 +1152,7 @@ public class HtmlParser {
 						decimal = Integer.parseInt(number);
 					}
 				} catch (NumberFormatException nfe) {
-					logger.log(Level.WARN, "entityDecode()", nfe);
+					logger.error("entityDecode()", nfe);
 					decimal = 0;
 				}
 				sb.append((char) decimal);
