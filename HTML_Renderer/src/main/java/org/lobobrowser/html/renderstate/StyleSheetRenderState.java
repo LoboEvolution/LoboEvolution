@@ -37,6 +37,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
@@ -59,6 +61,10 @@ import org.w3c.dom.css.CSS2Properties;
  * @author J. H. S.
  */
 public class StyleSheetRenderState implements RenderState {
+	
+	 /** The Constant logger. */
+    protected static final Logger logger = LogManager
+            .getLogger(StyleSheetRenderState.class.getName());
 
 	/** The Constant FONT_FACTORY. */
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
@@ -838,7 +844,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (binfo != INVALID_BACKGROUND_INFO) {
 			return binfo;
 		}
-		binfo = null;
+		
 		AbstractCSS2Properties props = this.getCssProperties();
 		if (props != null) {
 			String backgroundColorText = props.getBackgroundColor();
