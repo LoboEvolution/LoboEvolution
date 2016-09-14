@@ -1,90 +1,80 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
 
 <installation version="1.0">
-    <info>
-        <appname>Lobo Evolution</appname>
-        <appversion>0.99</appversion>
-        <authors>
-            <author name="Ivan Di Francesco" email="ivan.difrancesco@yahoo.it"/>
-        </authors>
-        <url>http://sourceforge.net/projects/loboevolution/</url>
+	<info>
+		<appname>Lobo Evolution</appname>
+		<appversion>0.99</appversion>
+		<authors>
+			<author name="Ivan Di Francesco" email="ivan.difrancesco@yahoo.it" />
+		</authors>
+		<url>http://sourceforge.net/projects/loboevolution/</url>
 		<javaversion>1.8</javaversion>
-    </info>
-    
-    <!-- 
-        The gui preferences indication.
-        Sets the installer window to 640x480. It will not be able to change the size.
-    -->
-    <guiprefs width="640" height="480" resizable="no">
-    	<modifier key="headingPanelCounter" value="progressbar"/>
-  		<modifier key="headingPanelCounterPos" value="inNavigationPanel"/>
-    </guiprefs>
-    
-    <!-- 
-        The locale section.
-    -->
-    <locale>
-        <langpack iso3="eng"/>
-    </locale>
-    
-    <!-- 
-        The resources section.
-        The ids must be these ones if you want to use the LicencePanel and/or the InfoPanel.
-    -->
-    <resources>
-        <res id="LicencePanel.licence" src="LICENSE.txt"/>
-        <res id="InfoPanel.info" src="ACKNOWLEDGMENTS.txt"/>
-        <res id="Unix_shortcutSpec.xml" src="default-shortcut-spec.xml"/>
-        <res id="shortcutSpec.xml" src="windows-shortcut-spec.xml"/>
-        <res id="ProcessPanel.Spec.xml" src="process-panel.xml"/>
-    </resources>
-    
-    <!-- 
-        The panels section.
-        We indicate here which panels we want to use. The order will be respected.
-    -->
-    <panels>
-        <panel classname="HelloPanel"/>
-        <panel classname="LicencePanel"/>
-        <panel classname="InfoPanel"/>
-        <panel classname="TargetPanel"/> 
-        <panel classname="InstallPanel"/>
-        <panel classname="ShortcutPanel"/>
-        <panel classname="RegistryPanel"/>
-        <panel classname="SimpleFinishPanel"/>
-    </panels>
-    
-    <!-- 
-        The packs section.
-        We specify here our packs.
-    -->
-    <packs>
-        <pack name="Lobo Files" required="yes">
-            <description>The base files</description>
-            <file src="LICENSE.txt" targetdir="$INSTALL_PATH"/>
-            <file src="ACKNOWLEDGMENTS.txt" targetdir="$INSTALL_PATH"/>
-            <file src="README.txt" targetdir="$INSTALL_PATH"/>
-            <file src="log4j2.xml" targetdir="$INSTALL_PATH"/>
-            <file src="lobo.ico" targetdir="$INSTALL_PATH" os="windows"/>
-            <file src="lobo.png" targetdir="$INSTALL_PATH"/>
-            <file src="lobo-pub.jar" targetdir="$INSTALL_PATH"/>
-            <file src="ext/cobra-no-commons.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/primary.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/PDFrenderer.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/jdatepicker.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/batik-all-1.8.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/w3c.jar" targetdir="$INSTALL_PATH/ext"/>
-			<file src="ext/xalan.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/JTattoo-1.6.11.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/log4j-api-2.6.2.jar" targetdir="$INSTALL_PATH/ext"/>
-            <file src="ext/log4j-core-2.6.2.jar" targetdir="$INSTALL_PATH/ext"/>
-            
-            <file src="lobo.jar" targetdir="$INSTALL_PATH"/>
-            <executable targetfile="$INSTALL_PATH/lobo.jar"/>
-        </pack>
-    </packs>
-    
-    <!-- Needed for shortcuts -->
-    <native type="izpack" name="ShellLink.dll" os="windows"/>
-    <jar src="../RegistryPanel.jar"/>
+	</info>
+
+	<!-- The gui preferences indication. Sets the installer window to 640x480. 
+		It will not be able to change the size. -->
+	<guiprefs width="640" height="480" resizable="no">
+		<modifier key="headingPanelCounter" value="progressbar" />
+		<modifier key="headingPanelCounterPos" value="inNavigationPanel" />
+	</guiprefs>
+
+	<!-- The locale section. -->
+	<locale>
+		<langpack iso3="eng" />
+	</locale>
+
+	<!-- The resources section. The ids must be these ones if you want to use 
+		the LicencePanel and/or the InfoPanel. -->
+	<resources>
+		<res id="LicencePanel.licence" src="LICENSE.txt" />
+		<res id="InfoPanel.info" src="ACKNOWLEDGMENTS.txt" />
+		<res id="Unix_shortcutSpec.xml" src="default-shortcut-spec.xml" />
+		<res id="shortcutSpec.xml" src="windows-shortcut-spec.xml" />
+		<res id="ProcessPanel.Spec.xml" src="process-panel.xml" />
+	</resources>
+
+	<!-- The panels section. We indicate here which panels we want to use. The 
+		order will be respected. -->
+	<panels>
+		<panel classname="HelloPanel" />
+		<panel classname="LicencePanel" />
+		<panel classname="InfoPanel" />
+		<panel classname="TargetPanel" />
+		<panel classname="InstallPanel" />
+		<panel classname="ShortcutPanel" />
+		<panel classname="RegistryPanel" />
+		<panel classname="SimpleFinishPanel" />
+	</panels>
+
+	<!-- The packs section. We specify here our packs. -->
+	<packs>
+		<pack name="Lobo Files" required="yes">
+			<description>The base files</description>
+			<file src="LICENSE.txt" targetdir="$INSTALL_PATH" />
+			<file src="ACKNOWLEDGMENTS.txt" targetdir="$INSTALL_PATH" />
+			<file src="README.txt" targetdir="$INSTALL_PATH" />
+			<file src="log4j2.xml" targetdir="$INSTALL_PATH" />
+			<file src="lobo.ico" targetdir="$INSTALL_PATH" os="windows" />
+			<file src="lobo.png" targetdir="$INSTALL_PATH" />
+			<file src="lobo-pub.jar" targetdir="$INSTALL_PATH" />
+			<file src="ext/cobra-no-commons.jar" targetdir="$INSTALL_PATH/ext" />
+			<file src="ext/primary.jar" targetdir="$INSTALL_PATH/ext" />
+			<file src="ext/PDFrenderer.jar" targetdir="$INSTALL_PATH/ext" />
+			<file src="ext/jdatepicker.jar" targetdir="$INSTALL_PATH/ext" />
+			<file src="ext/batik-all-1.8.jar" targetdir="$INSTALL_PATH/ext" />
+			<file src="ext/w3c.jar" targetdir="$INSTALL_PATH/ext" />
+			<file src="ext/xalan.jar" targetdir="$INSTALL_PATH/ext" />
+			<file src="ext/JTattoo-1.6.11.jar" targetdir="$INSTALL_PATH/ext" />
+			<file src="ext/log4j-api-2.6.2.jar" targetdir="$INSTALL_PATH/ext" />
+			<file src="ext/log4j-core-2.6.2.jar" targetdir="$INSTALL_PATH/ext" />
+
+			<file src="lobo.jar" targetdir="$INSTALL_PATH" />
+			<executable targetfile="$INSTALL_PATH/lobo.jar" />
+		</pack>
+	</packs>
+
+	<!-- Needed for shortcuts -->
+	<native type="izpack" name="ShellLink.dll" os="windows" />
+	<native type="izpack" name="ShellLink_x64.dll" os="windows" />
+	<jar src="../RegistryPanel.jar" />
 </installation>

@@ -25,10 +25,6 @@ package com.izforge.izpack.panels;
 
 import java.io.File;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.izforge.izpack.installer.InstallData;
 import com.izforge.izpack.installer.InstallerFrame;
 import com.izforge.izpack.installer.IzPanel;
@@ -44,11 +40,7 @@ public class RegistryPanel extends IzPanel implements NativeLibraryClient {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(RegistryPanel.class
-            .getName());
-
-    /**
+   /**
      * Instantiates a new registry panel.
      *
      * @param arg0
@@ -81,7 +73,7 @@ public class RegistryPanel extends IzPanel implements NativeLibraryClient {
             File cacheHome = new File(loboHome, "cache");
             this.deleteDecorationFiles(cacheHome);
         } catch (Exception err) {
-            logger.log(Level.ERROR, "performFileActions()", err);
+        	err.printStackTrace();
         }
     }
 

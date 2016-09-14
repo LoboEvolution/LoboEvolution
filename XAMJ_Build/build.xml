@@ -27,7 +27,7 @@ The Lobo Evolution
 		<copy todir="${izpack.home}/bin/panels">
 			<fileset dir="${build.dir}" includes="RegistryPanel.jar" />
 		</copy>
-		<izpack input="C:\Users\utente\workspace\Loboevolution\trunk\XAMJ_Build\install.xml" output="${build.dir}/install-lobo-${lobo.version}.jar" installerType="standard" basedir="${lobo.dir}" izPackDir="${izpack.home}" />
+		<izpack input="install.xml" output="${build.dir}/install-lobo-${lobo.version}.jar" installerType="standard" basedir="${lobo.dir}" izPackDir="${izpack.home}" />
 	</target>
 
 	<target name="lobo_zip" depends="directory_structure">
