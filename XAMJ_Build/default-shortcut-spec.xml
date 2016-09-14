@@ -7,7 +7,7 @@
 		type="Application"
 		target="java -jar $INSTALL_PATH/lobo.jar"
 		description="Runs Lobo, the pure Java web browser"
-		iconFile="$INSTALL_PATH/lobo.png"
+		iconFile="$INSTALL_PATH/lobo.ico"
 		initialState="normal"
 		programGroup="yes"
 		desktop="yes"

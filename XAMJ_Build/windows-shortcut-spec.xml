@@ -6,7 +6,7 @@
 		name="Lobo Browser"
 		target="$INSTALL_PATH/lobo.jar"
 		description="Runs Lobo Evolution, the pure Java web browser"
-		iconFile="$INSTALL_PATH/lobo.png"
+		iconFile="$INSTALL_PATH/lobo.ico"
 		initialState="normal"
 		programGroup="yes"
 		desktop="yes"
