@@ -845,6 +845,10 @@ public class StyleSheetRenderState implements RenderState {
 			return binfo;
 		}
 		
+		if(element != null && !"BODY".equals(element.getNodeName())){
+			binfo = null;
+		}
+		
 		AbstractCSS2Properties props = this.getCssProperties();
 		if (props != null) {
 			String backgroundColorText = props.getBackgroundColor();
