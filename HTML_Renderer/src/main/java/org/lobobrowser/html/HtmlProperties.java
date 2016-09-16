@@ -81,6 +81,9 @@ public interface HtmlProperties {
 
     /** The code. */
     String CODE = "CODE";
+    
+    /** The del. */
+    String DEL = "DEL";
 
     /** The div. */
     String DIV = "DIV";
@@ -162,6 +165,9 @@ public interface HtmlProperties {
 
     /** The img. */
     String IMG = "IMG";
+    
+    /** The ins. */
+    String INS = "INS";
 
     /** The link. */
     String LINK = "LINK";

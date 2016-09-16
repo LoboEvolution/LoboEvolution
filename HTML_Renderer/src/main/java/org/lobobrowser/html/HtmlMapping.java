@@ -230,6 +230,7 @@ public class HtmlMapping implements HtmlProperties {
 		StrikeBuilder strike = new StrikeBuilder();
 		builders.put(STRIKE, strike);
 		builders.put(S, strike);
+		builders.put(DEL, strike);
 
 		builders.put(HTML, new HtmlBuilder());
 		builders.put(HEAD, new HeadBuilder());
@@ -276,6 +277,7 @@ public class HtmlMapping implements HtmlProperties {
 		builders.put(STRONG, new StrongBuilder());
 		builders.put(NAV, new NavBuilder());
 		builders.put(U, new UnderlineBuilder());
+		builders.put(INS, new UnderlineBuilder());
 		builders.put(SUP, new SupBuilder());
 		builders.put(SUB, new SubBuilder());
 		builders.put(CANVAS, new CanvasBuilder());
