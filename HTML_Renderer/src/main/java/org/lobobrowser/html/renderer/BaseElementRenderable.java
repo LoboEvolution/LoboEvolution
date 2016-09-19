@@ -53,6 +53,7 @@ import org.lobobrowser.html.info.BackgroundInfo;
 import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
+import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.http.UserAgentContext;
@@ -303,6 +304,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				return -1;
 			}
 			String widthText = props.getWidth();
+			
+			if(CSSValuesProperties.INHERIT.equalsIgnoreCase(widthText)) {
+				widthText = element.getParentStyle().getWidth();
+			}
+
 			if ((widthText == null) || "".equals(widthText)) {
 				return -1;
 			}
@@ -350,6 +356,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				return -1;
 			}
 			String heightText = props.getHeight();
+			
+			if(CSSValuesProperties.INHERIT.equalsIgnoreCase(heightText)) {
+				heightText = element.getParentStyle().getHeight();
+			}
+			
 			if ((heightText == null) || "".equals(heightText)) {
 				return -1;
 			}
