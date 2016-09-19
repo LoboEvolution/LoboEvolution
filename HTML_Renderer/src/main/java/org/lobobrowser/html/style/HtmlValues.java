@@ -254,6 +254,15 @@ public class HtmlValues {
 		}
 		if (CSSValuesProperties.AUTO.equalsIgnoreCase(sizeText)) {
 			insets.topType = HtmlInsets.TYPE_AUTO;
+			
+		} else if(CSSValuesProperties.INHERIT.equalsIgnoreCase(sizeText)) {
+			if (renderState != null && 
+				renderState.getPreviousRenderState() != null && 
+				renderState.getPreviousRenderState().getMarginInsets() != null) {
+				insets.top = renderState.getPreviousRenderState().getMarginInsets().getTop();
+				insets.topType = renderState.getPreviousRenderState().getMarginInsets().getTopType();
+			}
+
 		} else if (sizeText.endsWith("%")) {
 			insets.topType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -292,6 +301,13 @@ public class HtmlValues {
 		}
 		if (CSSValuesProperties.AUTO.equalsIgnoreCase(sizeText)) {
 			insets.leftType = HtmlInsets.TYPE_AUTO;
+		} else if (CSSValuesProperties.INHERIT.equalsIgnoreCase(sizeText)) {
+			if (renderState != null && 
+				renderState.getPreviousRenderState() != null && 
+				renderState.getPreviousRenderState().getMarginInsets() != null) {
+				insets.left = renderState.getPreviousRenderState().getMarginInsets().getLeft();
+				insets.leftType = renderState.getPreviousRenderState().getMarginInsets().getLeftType();
+			}
 		} else if (sizeText.endsWith("%")) {
 			insets.leftType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -330,6 +346,13 @@ public class HtmlValues {
 		}
 		if (CSSValuesProperties.AUTO.equalsIgnoreCase(sizeText)) {
 			insets.bottomType = HtmlInsets.TYPE_AUTO;
+		} else if (CSSValuesProperties.INHERIT.equalsIgnoreCase(sizeText)) {
+			if (renderState != null && 
+				renderState.getPreviousRenderState() != null && 
+				renderState.getPreviousRenderState().getMarginInsets() != null) {
+				insets.bottom = renderState.getPreviousRenderState().getMarginInsets().getBottom();
+				insets.bottomType = renderState.getPreviousRenderState().getMarginInsets().getBottomType();
+			}
 		} else if (sizeText.endsWith("%")) {
 			insets.bottomType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -368,6 +391,13 @@ public class HtmlValues {
 		}
 		if (CSSValuesProperties.AUTO.equalsIgnoreCase(sizeText)) {
 			insets.rightType = HtmlInsets.TYPE_AUTO;
+		} else if (CSSValuesProperties.INHERIT.equalsIgnoreCase(sizeText)) {
+			if (renderState != null && 
+				renderState.getPreviousRenderState() != null && 
+				renderState.getPreviousRenderState().getMarginInsets() != null) {
+				insets.right = renderState.getPreviousRenderState().getMarginInsets().getRight();
+				insets.rightType = renderState.getPreviousRenderState().getMarginInsets().getRightType();
+			}
 		} else if (sizeText.endsWith("%")) {
 			insets.rightType = HtmlInsets.TYPE_PERCENT;
 			try {
