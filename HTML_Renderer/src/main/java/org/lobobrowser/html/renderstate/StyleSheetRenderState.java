@@ -856,41 +856,77 @@ public class StyleSheetRenderState implements RenderState {
 		
 		AbstractCSS2Properties props = this.getCssProperties();
 		if (props != null) {
-			String backgroundColorText = props.getBackgroundColor();
-			if (backgroundColorText != null) {
+			String backgroundText = props.getBackground();
+			if (backgroundText != null) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}
-				
-				if(CSSValuesProperties.INHERIT.equalsIgnoreCase(backgroundColorText)) {
-					binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
-				} else{
-					binfo.setBackgroundColor(ColorFactory.getInstance().getColor(backgroundColorText));
+
+				String[] backList = backgroundText.split(" ");
+
+				for (int i = 0; i < backList.length; i++) {
+					String back = backList[i];
+
+					if (back.contains("url")) {
+						binfo.setBackgroundImage(this.document.getFullURL(back));
+					}
+					if (ColorFactory.getInstance().getColor(back) != null) {
+						binfo.setBackgroundColor(ColorFactory.getInstance().getColor(back));
+					} else if (CSSValuesProperties.INHERIT.equalsIgnoreCase(back)) {
+						binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
+					}
+					this.applyBackgroundPosition(binfo, back);
+					this.applyBackgroundRepeat(binfo, back);
 				}
-			}
-			String backgroundImageText = props.getBackgroundImage();
-			if ((backgroundImageText != null) && (backgroundImageText.length() > 0)) {
-				URL backgroundImage = HtmlValues.getURIFromStyleValue(backgroundImageText);
-				if (backgroundImage != null) {
+			} else {
+				
+				String background = this.element.getAttribute(HtmlAttributeProperties.BACKGROUND);
+				if ((background != null) && !"".equals(background)) {
 					if (binfo == null) {
 						binfo = new BackgroundInfo();
 					}
-					binfo.setBackgroundImage(backgroundImage);
+					binfo.setBackgroundImage(this.document.getFullURL(background));
 				}
-			}
-			String backgroundRepeatText = props.getBackgroundRepeat();
-			if (backgroundRepeatText != null) {
-				if (binfo == null) {
-					binfo = new BackgroundInfo();
+
+				String backgroundColorText = props.getBackgroundColor();
+				if (backgroundColorText != null) {
+					if (binfo == null) {
+						binfo = new BackgroundInfo();
+					}
+
+					if (CSSValuesProperties.INHERIT.equalsIgnoreCase(backgroundColorText)) {
+						binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
+					} else {
+						binfo.setBackgroundColor(ColorFactory.getInstance().getColor(backgroundColorText));
+					}
 				}
-				this.applyBackgroundRepeat(binfo, backgroundRepeatText);
-			}
-			String backgroundPositionText = props.getBackgroundPosition();
-			if (backgroundPositionText != null) {
-				if (binfo == null) {
-					binfo = new BackgroundInfo();
+
+				String backgroundImageText = props.getBackgroundImage();
+				if ((backgroundImageText != null) && (backgroundImageText.length() > 0)) {
+					URL backgroundImage = HtmlValues.getURIFromStyleValue(backgroundImageText);
+					if (backgroundImage != null) {
+						if (binfo == null) {
+							binfo = new BackgroundInfo();
+						}
+						binfo.setBackgroundImage(backgroundImage);
+					}
 				}
-				this.applyBackgroundPosition(binfo, backgroundPositionText);
+
+				String backgroundRepeatText = props.getBackgroundRepeat();
+				if (backgroundRepeatText != null) {
+					if (binfo == null) {
+						binfo = new BackgroundInfo();
+					}
+					this.applyBackgroundRepeat(binfo, backgroundRepeatText);
+				}
+
+				String backgroundPositionText = props.getBackgroundPosition();
+				if (backgroundPositionText != null) {
+					if (binfo == null) {
+						binfo = new BackgroundInfo();
+					}
+					this.applyBackgroundPosition(binfo, backgroundPositionText);
+				}
 			}
 		}
 		this.iBackgroundInfo = binfo;

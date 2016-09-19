@@ -208,7 +208,7 @@ public class ColorFactory {
                         logger.warn("getColor(): Color spec [" + normalSpec
                                 + "] unknown.");
                     }
-                    return Color.RED;
+                    return null;
                 }
                 colorMap.put(normalSpec, color);
             }

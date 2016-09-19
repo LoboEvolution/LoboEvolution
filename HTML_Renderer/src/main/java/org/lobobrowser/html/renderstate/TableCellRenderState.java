@@ -222,16 +222,7 @@ public class TableCellRenderState extends DisplayRenderState {
                 binfo.setBackgroundColor(bgc);
             }
         }
-        if ((binfo == null) || (binfo.getBackgroundImage() == null)) {
-            String background = element
-                    .getAttribute(HtmlAttributeProperties.BACKGROUND);
-            if ((background != null) && !"".equals(background)) {
-                if (binfo == null) {
-                    binfo = new BackgroundInfo();
-                }
-                binfo.setBackgroundImage(this.document.getFullURL(background));
-            }
-        }
+        
         this.backgroundInfo = binfo;
         return binfo;
     }

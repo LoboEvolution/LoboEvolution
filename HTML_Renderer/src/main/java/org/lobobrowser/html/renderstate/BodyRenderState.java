@@ -72,26 +72,16 @@ public class BodyRenderState extends StyleSheetRenderState {
 		binfo = super.getBackgroundInfo();
 		if ((binfo == null) || (binfo.getBackgroundColor() == null)) {
 			String bgcolor = this.element.getAttribute(HtmlAttributeProperties.BGCOLOR);
-			String background = this.element.getAttribute(HtmlAttributeProperties.BACKGROUND);
-
-			if ((bgcolor != null) && (bgcolor.length() != 0)) {
+				if ((bgcolor != null) && (bgcolor.length() > 0)) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}
 				binfo.setBackgroundColor(ColorFactory.getInstance().getColor(bgcolor));
 			}
-
-			if ((background != null) && (background.length() != 0)) {
-				if (binfo == null) {
-					binfo = new BackgroundInfo();
-				}
-				binfo.setBackgroundImage(this.document.getFullURL(background));
-			}
 		}
 		this.iBackgroundInfo = binfo;
 		return binfo;
 	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
