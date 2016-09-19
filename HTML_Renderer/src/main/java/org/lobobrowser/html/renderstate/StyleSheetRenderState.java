@@ -46,6 +46,7 @@ import org.lobobrowser.html.info.BackgroundInfo;
 import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.info.WordInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
+import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderThreadState;
@@ -413,7 +414,10 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		AbstractCSS2Properties props = this.getCssProperties();
 		String colorValue = props == null ? null : props.getColor();
-		if ((colorValue == null) || "".equals(colorValue)) {
+		
+		if(CSSValuesProperties.INHERIT.equals(colorValue) && this.getPreviousRenderState()!= null){
+			return this.getPreviousRenderState().getColor();
+		} else if ((colorValue == null) || "".equals(colorValue)) {
 			RenderState prs = this.prevRenderState;
 			if (prs != null) {
 				c = prs.getColor();
@@ -423,6 +427,7 @@ public class StyleSheetRenderState implements RenderState {
 				colorValue = "black";
 			}
 		}
+		
 		c = ColorFactory.getInstance().getColor(colorValue);
 		this.iColor = c;
 		return c;

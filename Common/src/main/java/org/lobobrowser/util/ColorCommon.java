@@ -40,6 +40,8 @@ public class ColorCommon {
     private static final int ANTIQUEWHITE3 = 0xCDC0B0;
     /** The Constant ANTIQUEWHITE4. */
     private static final int ANTIQUEWHITE4 = 0x8B8378;
+    /** The Constant AQUA. */
+    private static final int AQUA = 0x00FFFF;
     /** The Constant AQUAMARINE. */
     private static final int AQUAMARINE = 0x7FFFD4;
     /** The Constant AQUAMARINE1. */
@@ -1056,6 +1058,7 @@ public class ColorCommon {
         colorMap.put("antiquewhite2", new Color(ANTIQUEWHITE2));
         colorMap.put("antiquewhite3", new Color(ANTIQUEWHITE3));
         colorMap.put("antiquewhite4", new Color(ANTIQUEWHITE4));
+        colorMap.put("aqua", new Color(AQUA));
         colorMap.put("aquamarine", new Color(AQUAMARINE));
         colorMap.put("aquamarine1", new Color(AQUAMARINE1));
         colorMap.put("aquamarine2", new Color(AQUAMARINE2));
