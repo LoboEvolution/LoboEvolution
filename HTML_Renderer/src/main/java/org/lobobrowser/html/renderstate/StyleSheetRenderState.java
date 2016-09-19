@@ -857,26 +857,39 @@ public class StyleSheetRenderState implements RenderState {
 		AbstractCSS2Properties props = this.getCssProperties();
 		if (props != null) {
 			String backgroundText = props.getBackground();
+			
 			if (backgroundText != null) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}
+				
+				if((backgroundText.startsWith(ColorFactory.RGB_START) || 
+						backgroundText.startsWith(ColorFactory.RGB_START)) && backgroundText.endsWith(")")){
+					binfo.setBackgroundColor(ColorFactory.getInstance().getColor(backgroundText));
+				} else {
 
-				String[] backList = backgroundText.split(" ");
+					String[] backList = backgroundText.split(" ");
 
-				for (int i = 0; i < backList.length; i++) {
-					String back = backList[i];
+					for (int i = 0; i < backList.length; i++) {
+						String back = backList[i];
 
-					if (back.contains("url")) {
-						binfo.setBackgroundImage(this.document.getFullURL(back));
+						if (back.contains("url")) {
+							
+							String start = "url(";
+							int startIdx = start.length();
+							int closingIdx = back.lastIndexOf(')');
+							String quotedUri = back.substring(startIdx, closingIdx);
+							
+							binfo.setBackgroundImage(this.document.getFullURL(quotedUri));
+						}
+						if (ColorFactory.getInstance().getColor(back) != null) {
+							binfo.setBackgroundColor(ColorFactory.getInstance().getColor(back));
+						} else if (CSSValuesProperties.INHERIT.equalsIgnoreCase(back)) {
+							binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
+						}
+						this.applyBackgroundPosition(binfo, back);
+						this.applyBackgroundRepeat(binfo, back);
 					}
-					if (ColorFactory.getInstance().getColor(back) != null) {
-						binfo.setBackgroundColor(ColorFactory.getInstance().getColor(back));
-					} else if (CSSValuesProperties.INHERIT.equalsIgnoreCase(back)) {
-						binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
-					}
-					this.applyBackgroundPosition(binfo, back);
-					this.applyBackgroundRepeat(binfo, back);
 				}
 			} else {
 				

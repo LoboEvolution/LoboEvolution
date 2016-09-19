@@ -48,9 +48,9 @@ public class ColorFactory {
     /** The color map. */
     private Map<String, Color> colorMap = new HashMap<String, Color>(510);
     /** The Constant RGB_START. */
-    private static final String RGB_START = "rgb(";
+    public static final String RGB_START = "rgb(";
     /** The Constant RGBA_START. */
-    private static final String RGBA_START = "rgba(";
+    public static final String RGBA_START = "rgba(";
     
     /**
      * Instantiates a new color factory.
