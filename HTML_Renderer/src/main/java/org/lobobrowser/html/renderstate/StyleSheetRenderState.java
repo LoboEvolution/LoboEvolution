@@ -861,7 +861,12 @@ public class StyleSheetRenderState implements RenderState {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}
-				binfo.setBackgroundColor(ColorFactory.getInstance().getColor(backgroundColorText));
+				
+				if(CSSValuesProperties.INHERIT.equalsIgnoreCase(backgroundColorText)) {
+					binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
+				} else{
+					binfo.setBackgroundColor(ColorFactory.getInstance().getColor(backgroundColorText));
+				}
 			}
 			String backgroundImageText = props.getBackgroundImage();
 			if ((backgroundImageText != null) && (backgroundImageText.length() > 0)) {
