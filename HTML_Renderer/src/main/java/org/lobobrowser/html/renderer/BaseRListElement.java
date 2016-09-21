@@ -83,10 +83,18 @@ public class BaseRListElement extends RBlock {
         ListStyle listStyle = null;
         String listStyleText = props.getListStyle();
         if (listStyleText != null) {
+        	if(INHERIT.equals(listStyleText)){
+        		listStyleText = rootElement.getParentStyle().getListStyle();
+        	}
             listStyle = HtmlValues.getListStyle(listStyleText);
         }
         String listStyleTypeText = props.getListStyleType();
         if (listStyleTypeText != null) {
+        	
+        	if(INHERIT.equals(listStyleTypeText)){
+        		listStyleTypeText = rootElement.getParentStyle().getListStyleType();
+        	}
+        	
             int listType = HtmlValues.getListStyleType(listStyleTypeText);
             if (listType != ListStyle.TYPE_UNSET) {
                 if (listStyle == null) {
@@ -96,11 +104,14 @@ public class BaseRListElement extends RBlock {
             }
         }
         if ((listStyle == null) || (listStyle.type == ListStyle.TYPE_UNSET)) {
-            String typeAttributeText = rootElement
-                    .getAttribute(HtmlAttributeProperties.TYPE);
+            String typeAttributeText = rootElement.getAttribute(HtmlAttributeProperties.TYPE);
             if (typeAttributeText != null) {
-                int newStyleType = HtmlValues
-                        .getListStyleTypeDeprecated(typeAttributeText);
+            	
+            	if(INHERIT.equals(typeAttributeText)){
+            		typeAttributeText = rootElement.getParentStyle().getListStyle();
+            	}
+            	
+            	int newStyleType = HtmlValues.getListStyleType(typeAttributeText);
                 if (newStyleType != ListStyle.TYPE_UNSET) {
                     if (listStyle == null) {
                         listStyle = new ListStyle();

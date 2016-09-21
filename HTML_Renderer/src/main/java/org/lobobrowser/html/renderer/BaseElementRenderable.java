@@ -66,7 +66,7 @@ import org.w3c.dom.css.CSS2Properties;
  * The Class BaseElementRenderable.
  */
 public abstract class BaseElementRenderable extends BaseRCollection
-		implements RElement, RenderableContainer, ImageObserver {
+		implements RElement, RenderableContainer, ImageObserver,CSSValuesProperties {
 
 	/** The Constant INVALID_SIZE. */
 	protected static final Integer INVALID_SIZE = new Integer(Integer.MIN_VALUE);
@@ -305,7 +305,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			}
 			String widthText = props.getWidth();
 			
-			if(CSSValuesProperties.INHERIT.equalsIgnoreCase(widthText)) {
+			if(INHERIT.equalsIgnoreCase(widthText)) {
 				widthText = element.getParentStyle().getWidth();
 			}
 
@@ -357,7 +357,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			}
 			String heightText = props.getHeight();
 			
-			if(CSSValuesProperties.INHERIT.equalsIgnoreCase(heightText)) {
+			if(INHERIT.equalsIgnoreCase(heightText)) {
 				heightText = element.getParentStyle().getHeight();
 			}
 			

@@ -209,12 +209,11 @@ public class BrowserFrameUIControl implements UIControl {
      */
     @Override
     public Dimension getPreferredSize() {
-        int width = HtmlValues.getOldSyntaxPixelSize(
-                element.getAttribute(HtmlAttributeProperties.WIDTH),
-                this.availWidth, 100);
-        int height = HtmlValues.getOldSyntaxPixelSize(
-                element.getAttribute(HtmlAttributeProperties.HEIGHT),
-                this.availHeight, 100);
+    	
+    	String w = element.getAttribute(HtmlAttributeProperties.WIDTH);
+		String h = element.getAttribute(HtmlAttributeProperties.HEIGHT);
+		int width = HtmlValues.getPixelSize(w, null, 100, this.availWidth);
+		int height = HtmlValues.getPixelSize(h, null, 100, this.availHeight);
         return new Dimension(width, height);
     }
 

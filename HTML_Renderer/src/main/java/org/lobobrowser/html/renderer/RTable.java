@@ -420,14 +420,9 @@ public class RTable extends BaseElementRenderable {
 
 	@Override
 	public boolean onKeyPressed(KeyEvent event) {
-
-		// TODO
-
 		ModelNode me = this.modelNode;
 		if (me != null) {
-
 			return HtmlController.getInstance().onKeyPress(this.modelNode, event);
-
 		} else {
 			return true;
 		}
@@ -436,12 +431,8 @@ public class RTable extends BaseElementRenderable {
 
 	@Override
 	public boolean onKeyUp(KeyEvent event) {
-
-		// TODO
-
 		ModelNode me = this.modelNode;
 		if (me != null) {
-
 			return HtmlController.getInstance().onKeyUp(this.modelNode, event);
 
 		} else {
@@ -452,12 +443,8 @@ public class RTable extends BaseElementRenderable {
 
 	@Override
 	public boolean onKeyDown(KeyEvent event) {
-
-		// TODO
-
 		ModelNode me = this.modelNode;
 		if (me != null) {
-
 			return HtmlController.getInstance().onKeyDown(this.modelNode, event);
 
 		} else {

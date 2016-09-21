@@ -143,28 +143,28 @@ public class BodyRenderState extends StyleSheetRenderState {
 				if (insets == null) {
 					insets = new HtmlInsets();
 				}
-				insets.left = HtmlValues.getOldSyntaxPixelSizeSimple(leftMargin, 0);
+				insets.left = HtmlValues.getPixelSize(leftMargin, null, 0);
 				insets.leftType = HtmlInsets.TYPE_PIXELS;
 			}
 			if (rightMargin != null) {
 				if (insets == null) {
 					insets = new HtmlInsets();
 				}
-				insets.right = HtmlValues.getOldSyntaxPixelSizeSimple(rightMargin, 0);
+				insets.right = HtmlValues.getPixelSize(rightMargin, null, 0);
 				insets.rightType = HtmlInsets.TYPE_PIXELS;
 			}
 			if (topMargin != null) {
 				if (insets == null) {
 					insets = new HtmlInsets();
 				}
-				insets.top = HtmlValues.getOldSyntaxPixelSizeSimple(topMargin, 0);
+				insets.top = HtmlValues.getPixelSize(topMargin, null, 0);
 				insets.topType = HtmlInsets.TYPE_PIXELS;
 			}
 			if (bottomMargin != null) {
 				if (insets == null) {
 					insets = new HtmlInsets();
 				}
-				insets.bottom = HtmlValues.getOldSyntaxPixelSizeSimple(bottomMargin, 0);
+				insets.bottom = HtmlValues.getPixelSize(bottomMargin, null, 0);
 				insets.bottomType = HtmlInsets.TYPE_PIXELS;
 			}
 		}

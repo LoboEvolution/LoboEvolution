@@ -36,7 +36,7 @@ import java.util.StringTokenizer;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.info.FontInfo;
 import org.lobobrowser.html.renderstate.RenderState;
@@ -48,7 +48,7 @@ import org.w3c.dom.css.CSS2Properties;
 /**
  * The Class HtmlValues.
  */
-public class HtmlValues {
+public class HtmlValues implements CSSValuesProperties{
 
 	/** The Constant SYSTEM_FONTS. */
 	public static final Map<String, FontInfo> SYSTEM_FONTS = new HashMap<String, FontInfo>();
@@ -91,12 +91,12 @@ public class HtmlValues {
 
 	static {
 		FontInfo systemFont = new FontInfo();
-		SYSTEM_FONTS.put(CSSValuesProperties.CAPTION, systemFont);
-		SYSTEM_FONTS.put(CSSValuesProperties.ICON, systemFont);
-		SYSTEM_FONTS.put(CSSValuesProperties.MENU, systemFont);
-		SYSTEM_FONTS.put(CSSValuesProperties.MESSAGE_BOX, systemFont);
-		SYSTEM_FONTS.put(CSSValuesProperties.SMALL_CAPTION, systemFont);
-		SYSTEM_FONTS.put(CSSValuesProperties.STATUS_BAR, systemFont);
+		SYSTEM_FONTS.put(CAPTION, systemFont);
+		SYSTEM_FONTS.put(ICON, systemFont);
+		SYSTEM_FONTS.put(MENU, systemFont);
+		SYSTEM_FONTS.put(MESSAGE_BOX, systemFont);
+		SYSTEM_FONTS.put(SMALL_CAPTION, systemFont);
+		SYSTEM_FONTS.put(STATUS_BAR, systemFont);
 	}
 
 	/**
@@ -114,11 +114,11 @@ public class HtmlValues {
 	 */
 	public static boolean isBorderStyle(String token) {
 		String tokenTL = token.toLowerCase();
-		return tokenTL.equals(CSSValuesProperties.SOLID) || tokenTL.equals(CSSValuesProperties.DASHED)
-				|| tokenTL.equals(CSSValuesProperties.DOTTED) || tokenTL.equals(CSSValuesProperties.DOUBLE)
-				|| tokenTL.equals(CSSValuesProperties.NONE) || tokenTL.equals(CSSValuesProperties.HIDDEN)
-				|| tokenTL.equals(CSSValuesProperties.GROOVE) || tokenTL.equals(CSSValuesProperties.RIDGE)
-				|| tokenTL.equals(CSSValuesProperties.INSET) || tokenTL.equals(CSSValuesProperties.OUTSET);
+		return tokenTL.equals(SOLID) || tokenTL.equals(DASHED)
+				|| tokenTL.equals(DOTTED) || tokenTL.equals(DOUBLE)
+				|| tokenTL.equals(NONE) || tokenTL.equals(HIDDEN)
+				|| tokenTL.equals(GROOVE) || tokenTL.equals(RIDGE)
+				|| tokenTL.equals(INSET) || tokenTL.equals(OUTSET);
 	}
 
 	/**
@@ -252,10 +252,10 @@ public class HtmlValues {
 		if (insets == null) {
 			insets = new HtmlInsets();
 		}
-		if (CSSValuesProperties.AUTO.equalsIgnoreCase(sizeText)) {
+		if (AUTO.equalsIgnoreCase(sizeText)) {
 			insets.topType = HtmlInsets.TYPE_AUTO;
 			
-		} else if(CSSValuesProperties.INHERIT.equalsIgnoreCase(sizeText)) {
+		} else if(INHERIT.equalsIgnoreCase(sizeText)) {
 			if (renderState != null && 
 				renderState.getPreviousRenderState() != null && 
 				renderState.getPreviousRenderState().getMarginInsets() != null) {
@@ -299,9 +299,9 @@ public class HtmlValues {
 		if (insets == null) {
 			insets = new HtmlInsets();
 		}
-		if (CSSValuesProperties.AUTO.equalsIgnoreCase(sizeText)) {
+		if (AUTO.equalsIgnoreCase(sizeText)) {
 			insets.leftType = HtmlInsets.TYPE_AUTO;
-		} else if (CSSValuesProperties.INHERIT.equalsIgnoreCase(sizeText)) {
+		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
 			if (renderState != null && 
 				renderState.getPreviousRenderState() != null && 
 				renderState.getPreviousRenderState().getMarginInsets() != null) {
@@ -344,9 +344,9 @@ public class HtmlValues {
 		if (insets == null) {
 			insets = new HtmlInsets();
 		}
-		if (CSSValuesProperties.AUTO.equalsIgnoreCase(sizeText)) {
+		if (AUTO.equalsIgnoreCase(sizeText)) {
 			insets.bottomType = HtmlInsets.TYPE_AUTO;
-		} else if (CSSValuesProperties.INHERIT.equalsIgnoreCase(sizeText)) {
+		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
 			if (renderState != null && 
 				renderState.getPreviousRenderState() != null && 
 				renderState.getPreviousRenderState().getMarginInsets() != null) {
@@ -389,9 +389,9 @@ public class HtmlValues {
 		if (insets == null) {
 			insets = new HtmlInsets();
 		}
-		if (CSSValuesProperties.AUTO.equalsIgnoreCase(sizeText)) {
+		if (AUTO.equalsIgnoreCase(sizeText)) {
 			insets.rightType = HtmlInsets.TYPE_AUTO;
-		} else if (CSSValuesProperties.INHERIT.equalsIgnoreCase(sizeText)) {
+		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
 			if (renderState != null && 
 				renderState.getPreviousRenderState() != null && 
 				renderState.getPreviousRenderState().getMarginInsets() != null) {
@@ -610,29 +610,33 @@ public class HtmlValues {
 			} catch (NumberFormatException nfe) {
 				return LAFSettings.getInstance().getFontSize();
 			}
-		} else if (CSSValuesProperties.SMALL.equals(specTL)) {
+		} else if (SMALL.equals(specTL)) {
 			return 12.0f;
-		} else if (CSSValuesProperties.MEDIUM.equals(specTL)) {
+		} else if (MEDIUM.equals(specTL)) {
 			return 14.0f;
-		} else if (CSSValuesProperties.LARGE.equals(specTL)) {
+		} else if (LARGE.equals(specTL)) {
 			return 20.0f;
-		} else if (CSSValuesProperties.X_SMALL.equals(specTL)) {
+		} else if (X_SMALL.equals(specTL)) {
 			return 11.0f;
-		} else if (CSSValuesProperties.XX_SMALL.equals(specTL)) {
+		} else if (XX_SMALL.equals(specTL)) {
 			return 10.0f;
-		} else if (CSSValuesProperties.X_LARGE.equals(specTL)) {
+		} else if (X_LARGE.equals(specTL)) {
 			return 26.0f;
-		} else if (CSSValuesProperties.XX_LARGE.equals(specTL)) {
+		} else if (XX_LARGE.equals(specTL)) {
 			return 40.0f;
-		} else if (CSSValuesProperties.LARGER.equals(specTL)) {
-			int parentFontSize = parentRenderState == null ? (int)LAFSettings.getInstance().getFontSize()
-					: parentRenderState.getFont().getSize();
+		} else if (LARGER.equals(specTL)) {
+			int parentFontSize = (int)LAFSettings.getInstance().getFontSize();
+			if(parentRenderState!= null) parentFontSize = parentRenderState.getFont().getSize();
 			return parentFontSize * 1.2f;
-		} else if (CSSValuesProperties.SMALLER.equals(specTL)) {
-			int parentFontSize = parentRenderState == null ? (int)LAFSettings.getInstance().getFontSize()
-					: parentRenderState.getFont().getSize();
+		} else if (SMALLER.equals(specTL)) {
+			int parentFontSize = (int)LAFSettings.getInstance().getFontSize();
+			if(parentRenderState!= null) parentFontSize = parentRenderState.getFont().getSize();
 			return parentFontSize / 1.2f;
-		} else {
+		} else if (INHERIT.equals(specTL)) { 
+			int parentFontSize = (int)LAFSettings.getInstance().getFontSize();
+			if(parentRenderState!= null) parentRenderState.getPreviousRenderState().getFont().getSize();
+			return parentFontSize; 
+		}else {
 			return getPixelSize(spec, parentRenderState, (int)LAFSettings.getInstance().getFontSize());
 		}
 	}
@@ -762,54 +766,6 @@ public class HtmlValues {
 			} catch (NumberFormatException nfe) {
 				return errorValue;
 			}
-		}
-	}
-
-	/**
-	 * Gets the old syntax pixel size.
-	 *
-	 * @param spec
-	 *            the spec
-	 * @param availSize
-	 *            the avail size
-	 * @param errorValue
-	 *            the error value
-	 * @return the old syntax pixel size
-	 */
-	public static int getOldSyntaxPixelSize(String spec, int availSize, int errorValue) {
-		if (spec == null) {
-			return errorValue;
-		}
-		spec = spec.trim();
-		try {
-			if (spec.endsWith("%")) {
-				return (availSize * Integer.parseInt(spec.substring(0, spec.length() - 1))) / 100;
-			} else {
-				return Integer.parseInt(spec);
-			}
-		} catch (NumberFormatException nfe) {
-			return errorValue;
-		}
-	}
-
-	/**
-	 * Gets the old syntax pixel size simple.
-	 *
-	 * @param spec
-	 *            the spec
-	 * @param errorValue
-	 *            the error value
-	 * @return the old syntax pixel size simple
-	 */
-	public static int getOldSyntaxPixelSizeSimple(String spec, int errorValue) {
-		if (spec == null) {
-			return errorValue;
-		}
-		spec = spec.trim();
-		try {
-			return Integer.parseInt(spec);
-		} catch (NumberFormatException nfe) {
-			return errorValue;
 		}
 	}
 
@@ -1049,54 +1005,33 @@ public class HtmlValues {
 	 */
 	public static int getListStyleType(String token) {
 		String tokenTL = token.toLowerCase();
-		if (CSSValuesProperties.NONE.equals(tokenTL)) {
+		
+		switch (tokenTL) {
+		case NONE:
 			return ListStyle.TYPE_NONE;
-		} else if (CSSValuesProperties.DISC.equals(tokenTL)) {
+		case DISC:
 			return ListStyle.TYPE_DISC;
-		} else if (CSSValuesProperties.CIRCLE.equals(tokenTL)) {
+		case CIRCLE:
 			return ListStyle.TYPE_CIRCLE;
-		} else if (CSSValuesProperties.SQUARE.equals(tokenTL)) {
+		case SQUARE:
 			return ListStyle.TYPE_SQUARE;
-		} else if (CSSValuesProperties.DECIMAL.equals(tokenTL)) {
+		case DECIMAL:
 			return ListStyle.TYPE_DECIMAL;
-		} else if (CSSValuesProperties.DECIMAL_LEADING_ZERO.equals(tokenTL)) {
+		case DECIMAL_LEADING_ZERO:
 			return ListStyle.TYPE_DECIMAL_LEADING_ZERO;
-		} else if (CSSValuesProperties.LOWER_ALPHA.equals(tokenTL) || CSSValuesProperties.LOWER_LATIN.equals(tokenTL)) {
+		case LOWER_ALPHA:
 			return ListStyle.TYPE_LOWER_ALPHA;
-		} else if (CSSValuesProperties.UPPER_ALPHA.equals(tokenTL) || CSSValuesProperties.UPPER_LATIN.equals(tokenTL)) {
+		case LOWER_LATIN :
+			return ListStyle.TYPE_LOWER_ALPHA;
+		case UPPER_ALPHA:
 			return ListStyle.TYPE_UPPER_ALPHA;
-		} else if (CSSValuesProperties.LOWER_ROMAN.equals(tokenTL)) {
+		case UPPER_LATIN:
+			return ListStyle.TYPE_UPPER_ALPHA;
+		case LOWER_ROMAN:
 			return ListStyle.TYPE_LOWER_ROMAN;
-		} else if (CSSValuesProperties.UPPER_ROMAN.equals(tokenTL)) {
+		case UPPER_ROMAN:
 			return ListStyle.TYPE_UPPER_ROMAN;
-		} else {
-			// TODO: Many types missing here
-			return ListStyle.TYPE_UNSET;
-		}
-	}
-
-	/**
-	 * Gets the list style type deprecated.
-	 *
-	 * @param token
-	 *            the token
-	 * @return the list style type deprecated
-	 */
-	public static int getListStyleTypeDeprecated(String token) {
-		String tokenTL = token.toLowerCase();
-		if (CSSValuesProperties.DISC.equals(tokenTL)) {
-			return ListStyle.TYPE_DISC;
-		} else if (CSSValuesProperties.CIRCLE.equals(tokenTL)) {
-			return ListStyle.TYPE_CIRCLE;
-		} else if (CSSValuesProperties.SQUARE.equals(tokenTL)) {
-			return ListStyle.TYPE_SQUARE;
-		} else if ("1".equals(tokenTL)) {
-			return ListStyle.TYPE_DECIMAL;
-		} else if ("a".equals(tokenTL)) {
-			return ListStyle.TYPE_LOWER_ALPHA;
-		} else if ("A".equals(tokenTL)) {
-			return ListStyle.TYPE_UPPER_ALPHA;
-		} else {
+		default:
 			return ListStyle.TYPE_UNSET;
 		}
 	}
@@ -1110,9 +1045,9 @@ public class HtmlValues {
 	 */
 	public static int getListStylePosition(String token) {
 		String tokenTL = token.toLowerCase();
-		if (CSSValuesProperties.INSIDE.equals(tokenTL)) {
+		if (INSIDE.equals(tokenTL)) {
 			return ListStyle.POSITION_INSIDE;
-		} else if (CSSValuesProperties.OUTSIDE.equals(tokenTL)) {
+		} else if (OUTSIDE.equals(tokenTL)) {
 			return ListStyle.POSITION_OUTSIDE;
 		} else {
 			return ListStyle.POSITION_UNSET;
@@ -1154,8 +1089,8 @@ public class HtmlValues {
 	 * @return true, if is font style
 	 */
 	public static boolean isFontStyle(String token) {
-		return CSSValuesProperties.ITALIC.equals(token) || CSSValuesProperties.NORMAL.equals(token)
-				|| CSSValuesProperties.OBLIQUE.equals(token);
+		return ITALIC.equals(token) || NORMAL.equals(token)
+				|| OBLIQUE.equals(token);
 	}
 
 	/**
@@ -1166,7 +1101,7 @@ public class HtmlValues {
 	 * @return true, if is font variant
 	 */
 	public static boolean isFontVariant(String token) {
-		return CSSValuesProperties.SMALL_CAPS.equals(token) || CSSValuesProperties.NORMAL.equals(token);
+		return SMALL_CAPS.equals(token) || NORMAL.equals(token);
 	}
 
 	/**
@@ -1177,8 +1112,8 @@ public class HtmlValues {
 	 * @return true, if is font weight
 	 */
 	public static boolean isFontWeight(String token) {
-		if (CSSValuesProperties.BOLD.equals(token) || CSSValuesProperties.BOLDER.equals(token)
-				|| CSSValuesProperties.LIGHTER.equals(token)) {
+		if (BOLD.equals(token) || BOLDER.equals(token)
+				|| LIGHTER.equals(token)) {
 			return true;
 		}
 		try {
@@ -1201,35 +1136,41 @@ public class HtmlValues {
 	public static BorderInfo getBorderInfo(CSS2Properties properties, RenderState renderState) {
 
 		BorderInfo binfo = new BorderInfo();
-
-		binfo.setTopStyle(getBorderStyle(properties.getBorderTopStyle()));
-		binfo.setRightStyle(getBorderStyle(properties.getBorderRightStyle()));
-		binfo.setBottomStyle(getBorderStyle(properties.getBorderBottomStyle()));
-		binfo.setLeftStyle(getBorderStyle(properties.getBorderLeftStyle()));
-
-		binfo.setTopColor(getBorderColor(properties.getBorderTopColor(), properties, binfo));
-		binfo.setLeftColor(getBorderColor(properties.getBorderLeftColor(), properties, binfo));
-		binfo.setRightColor(getBorderColor(properties.getBorderRightColor(), properties, binfo));
-		binfo.setBottomColor(getBorderColor(properties.getBorderBottomColor(), properties, binfo));
-
+		
+		if(INHERIT.equals(properties.getBorderTopStyle())){
+			binfo.setTopStyle(renderState.getPreviousRenderState().getBorderInfo().getTopStyle());
+			binfo.setTopColor(renderState.getPreviousRenderState().getBorderInfo().getTopColor());
+		}else{
+			binfo.setTopStyle(getBorderStyle(properties.getBorderTopStyle()));
+			binfo.setTopColor(getBorderColor(properties.getBorderTopColor(), properties, binfo));
+		}
+		
+		if(INHERIT.equals(properties.getBorderBottomStyle())){
+			binfo.setBottomStyle(renderState.getPreviousRenderState().getBorderInfo().getBottomStyle());
+			binfo.setBottomColor(renderState.getPreviousRenderState().getBorderInfo().getBottomColor());
+		}else{
+			binfo.setBottomStyle(getBorderStyle(properties.getBorderBottomStyle()));
+			binfo.setBottomColor(getBorderColor(properties.getBorderBottomColor(), properties, binfo));
+		}
+		
+		if(INHERIT.equals(properties.getBorderRightStyle())){
+			binfo.setRightStyle(renderState.getPreviousRenderState().getBorderInfo().getRightStyle());
+			binfo.setRightColor(renderState.getPreviousRenderState().getBorderInfo().getRightColor());
+		}else{
+			binfo.setRightStyle(getBorderStyle(properties.getBorderRightStyle()));
+			binfo.setRightColor(getBorderColor(properties.getBorderRightColor(), properties, binfo));
+		}
+		
+		if(INHERIT.equals(properties.getBorderLeftStyle())){
+			binfo.setLeftStyle(renderState.getPreviousRenderState().getBorderInfo().getLeftStyle());
+			binfo.setLeftColor(renderState.getPreviousRenderState().getBorderInfo().getLeftColor());
+		}else{
+			binfo.setLeftStyle(getBorderStyle(properties.getBorderLeftStyle()));
+			binfo.setLeftColor(getBorderColor(properties.getBorderLeftColor(), properties, binfo));
+		}
+		
 		HtmlValues.populateBorderInsets(binfo, properties, renderState);
-
 		return binfo;
-	}
-
-	/**
-	 * Gets the border styles.
-	 *
-	 * @param properties
-	 *            the properties
-	 * @return the border styles
-	 */
-	public static Insets getBorderStyles(CSS2Properties properties) {
-		int topStyle = getBorderStyle(properties.getBorderTopStyle());
-		int rightStyle = getBorderStyle(properties.getBorderRightStyle());
-		int bottomStyle = getBorderStyle(properties.getBorderBottomStyle());
-		int leftStyle = getBorderStyle(properties.getBorderLeftStyle());
-		return new Insets(topStyle, leftStyle, bottomStyle, rightStyle);
 	}
 
 	/**
@@ -1244,27 +1185,29 @@ public class HtmlValues {
 			return HtmlValues.BORDER_STYLE_NONE;
 		}
 		String stl = styleText.toLowerCase();
-		if (CSSValuesProperties.SOLID.equals(stl)) {
+		
+		switch (stl) {
+		case SOLID:
 			return BORDER_STYLE_SOLID;
-		} else if (CSSValuesProperties.DASHED.equals(stl)) {
+		case DASHED:
 			return BORDER_STYLE_DASHED;
-		} else if (CSSValuesProperties.DOTTED.equals(stl)) {
+		case DOTTED:
 			return BORDER_STYLE_DOTTED;
-		} else if (CSSValuesProperties.NONE.equals(stl)) {
+		case NONE:
 			return BORDER_STYLE_NONE;
-		} else if (CSSValuesProperties.HIDDEN.equals(stl)) {
+		case HIDDEN:
 			return BORDER_STYLE_HIDDEN;
-		} else if (CSSValuesProperties.DOUBLE.equals(stl)) {
+		case DOUBLE:
 			return BORDER_STYLE_DOUBLE;
-		} else if (CSSValuesProperties.GROOVE.equals(stl)) {
+		case GROOVE:
 			return BORDER_STYLE_GROOVE;
-		} else if (CSSValuesProperties.RIDGE.equals(stl)) {
+		case RIDGE:
 			return BORDER_STYLE_RIDGE;
-		} else if (CSSValuesProperties.INSET.equals(stl)) {
+		case INSET:
 			return BORDER_STYLE_INSET;
-		} else if (CSSValuesProperties.OUTSET.equals(stl)) {
+		case OUTSET:
 			return BORDER_STYLE_OUTSET;
-		} else {
+		default:
 			return BORDER_STYLE_NONE;
 		}
 	}
@@ -1309,7 +1252,7 @@ public class HtmlValues {
 	 */
 	public static boolean isBackgroundRepeat(String repeat) {
 		String repeatTL = repeat.toLowerCase();
-		return repeatTL.indexOf(CSSValuesProperties.REPEAT) != -1;
+		return repeatTL.indexOf(REPEAT) != -1;
 	}
 
 	/**
@@ -1320,10 +1263,10 @@ public class HtmlValues {
 	 * @return true, if is background position
 	 */
 	public static boolean isBackgroundPosition(String token) {
-		return isLength(token) || token.endsWith("%") || token.equalsIgnoreCase(CSSValuesProperties.TOP)
-				|| token.equalsIgnoreCase(CSSValuesProperties.CENTER)
-				|| token.equalsIgnoreCase(CSSValuesProperties.BOTTOM)
-				|| token.equalsIgnoreCase(CSSValuesProperties.LEFT)
-				|| token.equalsIgnoreCase(CSSValuesProperties.RIGHT);
+		return isLength(token) || token.endsWith("%") || token.equalsIgnoreCase(TOP)
+				|| token.equalsIgnoreCase(CENTER)
+				|| token.equalsIgnoreCase(BOTTOM)
+				|| token.equalsIgnoreCase(LEFT)
+				|| token.equalsIgnoreCase(RIGHT);
 	}
 }

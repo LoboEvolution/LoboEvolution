@@ -154,9 +154,10 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		HTMLElementImpl element = this.controlElement;
-		int dw = HtmlValues.getOldSyntaxPixelSize(element.getAttribute(HtmlAttributeProperties.WIDTH), availWidth, -1);
-		int dh = HtmlValues.getOldSyntaxPixelSize(element.getAttribute(HtmlAttributeProperties.HEIGHT), availHeight,
-				-1);
+		String width = element.getAttribute(HtmlAttributeProperties.WIDTH);
+		String height = element.getAttribute(HtmlAttributeProperties.HEIGHT);
+		int dw = HtmlValues.getPixelSize(width, null,-1,availWidth);
+		int dh = HtmlValues.getPixelSize(height, null,-1,availHeight);
 		this.declaredWidth = dw;
 		this.declaredHeight = dh;
 		this.preferredSize = this.createPreferredSize(dw, dh);

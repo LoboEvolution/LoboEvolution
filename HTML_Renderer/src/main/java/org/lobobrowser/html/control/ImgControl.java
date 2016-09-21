@@ -242,8 +242,8 @@ public class ImgControl extends BaseControl implements ImageListener {
 	@Override
 	public void reset(int availWidth, int availHeight) {
 		// Expected in the GUI thread.
-		int dw = HtmlValues.getOldSyntaxPixelSize(String.valueOf(imageWidth), availWidth, -1);
-		int dh = HtmlValues.getOldSyntaxPixelSize(String.valueOf(imageHeight), availHeight, -1);
+		int dw = HtmlValues.getPixelSize(String.valueOf(imageWidth), null, -1, availWidth);
+		int dh = HtmlValues.getPixelSize(String.valueOf(imageHeight), null, -1, availHeight);
 		this.declaredWidth = dw;
 		this.declaredHeight = dh;
 		this.preferredSize = this.createPreferredSize(dw, dh);

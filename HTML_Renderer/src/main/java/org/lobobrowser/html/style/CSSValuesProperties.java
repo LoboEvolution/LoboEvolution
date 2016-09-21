@@ -25,8 +25,16 @@ package org.lobobrowser.html.style;
  */
 public interface CSSValuesProperties {
 
+	/** The Constant ABSOLUTE. */
+	String ABSOLUTE = "absolute";
+	
     /** The Constant AUTO. */
      String AUTO = "auto";
+     
+     String BLINK = "blink";
+     
+     /** The Constant BLOCK. */
+     String BLOCK = "block";
 
     /** The Constant BOLD. */
      String BOLD = "bold";
@@ -36,6 +44,9 @@ public interface CSSValuesProperties {
 
     /** The Constant BOTTOM. */
      String BOTTOM = "bottom";
+     
+     /** The Constant CAPITALIZE. */
+     String CAPITALIZE = "capitalize";
 
     /** The Constant CAPTION. */
      String CAPTION = "caption";
@@ -45,6 +56,12 @@ public interface CSSValuesProperties {
 
     /** The Constant CIRCLE. */
      String CIRCLE = "circle";
+     
+     /** The Constant COLLAPSE. */
+     String COLLAPSE = "collapse";
+     
+     /** The Constant CROSSHAIR. */
+     String CROSSHAIR = "crosshair";
 
     /** The Constant DASHED. */
      String DASHED = "dashed";
@@ -54,6 +71,8 @@ public interface CSSValuesProperties {
 
     /** The Constant DECIMAL_LEADING_ZERO. */
      String DECIMAL_LEADING_ZERO = "decimal-leading-zero";
+     
+     String DEFAULT = "default";
 
     /** The Constant DISC. */
      String DISC = "dis";
@@ -63,6 +82,8 @@ public interface CSSValuesProperties {
 
     /** The Constant DOUBLE. */
      String DOUBLE = "double";
+     
+     String FIXED = "fixed";
 
     /** The Constant GROOVE. */
      String GROOVE = "groove";
@@ -75,6 +96,12 @@ public interface CSSValuesProperties {
     
      /** The Constant INHERIT. */
      String INHERIT = "inherit";
+     
+     /** The Constant INLINE. */
+     String INLINE = "inline";
+     
+     /** The Constant INLINE_BLOCK. */
+     String INLINE_BLOCK = "inline-block";
 
     /** The Constant INSIDE. */
      String INSIDE = "inside";
@@ -96,6 +123,15 @@ public interface CSSValuesProperties {
 
     /** The Constant LIGHTER. */
      String LIGHTER = "lighter";
+     
+     /** The Constant LINE_THROUGH. */
+     String LINE_THROUGH = "line-through";
+     
+     /** The Constant LIST_ITEM. */
+     String LIST_ITEM = "list-item";
+     
+     /** The Constant LOWERCASE. */
+     String LOWERCASE = "lowercase";
 
     /** The Constant LOWER_ALPHA. */
      String LOWER_ALPHA = "lower-alpha";
@@ -114,14 +150,20 @@ public interface CSSValuesProperties {
 
     /** The Constant MESSAGE_BOX. */
      String MESSAGE_BOX = "message-box";
+     
+     /** The Constant MOVE. */
+     String MOVE = "move";
 
     /** The Constant NONE. */
      String NONE = "none";
-
-    /** The Constant NORMAL. */
+     
+     /** The Constant NORMAL. */
      String NORMAL = "normal";
 
-    /** The Constant OBLIQUE. */
+     /** The Constant NOWRAP. */	
+     String NOWRAP = "nowrap";
+     
+     /** The Constant OBLIQUE. */
      String OBLIQUE = "oblique";
 
     /** The Constant OUTSIDE. */
@@ -129,6 +171,14 @@ public interface CSSValuesProperties {
 
     /** The Constant OUTSET. */
      String OUTSET = "outset";
+     
+     /** The Constant OVERLINE. */
+     String OVERLINE = "overline";
+     
+     /** The Constant UNDERLINE. */
+     String UNDERLINE = "underline";
+     
+     String UPPERCASE = "uppercase";
 
     /** The Constant UPPER_ALPHA. */
      String UPPER_ALPHA = "upper-alpha";
@@ -138,13 +188,34 @@ public interface CSSValuesProperties {
 
     /** The Constant UPPER_ROMAN. */
      String UPPER_ROMAN = "upper-roman";
+     
+     /** The Constant POINTER. */
+     String POINTER = "pointer";
+     
+     /** The Constant PRE. */
+     String PRE = "pre";
+     
+     /** The Constant RELATIVE. */
+     String RELATIVE = "relative";
 
     /** The Constant REPEAT. */
      String REPEAT = "repeat";
-
+     
+     /** The Constant REPEAT_X. */
+     String REPEAT_X = "repeat-x";
+     
+     /** The Constant REPEAT_Y. */
+     String REPEAT_Y = "repeat-y";
+     
+     /** The Constant REPEAT_NO. */
+     String REPEAT_NO = "no-repeat";
+     
     /** The Constant RIDGE. */
      String RIDGE = "ridge";
-
+     
+     /** The Constant SCROLL. */
+     String SCROLL = "scroll";
+     
     /** The Constant RIGHT. */
      String RIGHT = "right";
 
@@ -165,9 +236,24 @@ public interface CSSValuesProperties {
 
     /** The Constant SQUARE. */
      String SQUARE = "square";
-
+     
+     /** The Constant STATIC. */
+     String STATIC = "static";
+     
     /** The Constant STATUS_BAR. */
      String STATUS_BAR = "status-bar";
+     
+     /** The Constant TABLE. */
+     String TABLE = "table";
+     
+     /** The Constant TABLE_ROW. */
+     String TABLE_ROW = "table-row";
+     
+     /** The Constant TABLE_CELL. */
+     String TABLE_CELL = "table-cell";
+     
+     /** The Constant TEXT. */
+     String TEXT = "text";
 
     /** The Constant TOP. */
      String TOP = "top";
@@ -183,4 +269,8 @@ public interface CSSValuesProperties {
 
     /** The Constant XX_LARGE. */
      String XX_LARGE = "xx-large";
+     
+     String WAIT = "wait";
+     /** The Constant VISIBLE. */
+     String VISIBLE = "visible";
 }

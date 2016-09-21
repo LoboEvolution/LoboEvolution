@@ -38,7 +38,10 @@ import org.lobobrowser.html.style.HtmlInsets;
  * The Interface RenderState.
  */
 public interface RenderState {
-
+	
+	/** The mask textdecoration none. */
+	int MASK_TEXTDECORATION_NONE = 0;
+	
 	/** The mask textdecoration underline. */
 	int MASK_TEXTDECORATION_UNDERLINE = 1;
 
@@ -62,9 +65,7 @@ public interface RenderState {
 
 	/** The texttransform lowercase. */
 	int TEXTTRANSFORM_LOWERCASE = 4;
-	// TODO how to handle style cascading?
-	// int TEXTTRANSFORM_INHERIT = 8;
-
+	
 	/** The display none. */
 	int DISPLAY_NONE = 0;
 
