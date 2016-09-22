@@ -305,8 +305,10 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			}
 			String widthText = props.getWidth();
 			
-			if(INHERIT.equalsIgnoreCase(widthText)) {
+			if (INHERIT.equalsIgnoreCase(widthText)) {
 				widthText = element.getParentStyle().getWidth();
+			} else if (INITIAL.equalsIgnoreCase(widthText)) {
+				widthText = "100%";
 			}
 
 			if ((widthText == null) || "".equals(widthText)) {
@@ -357,8 +359,10 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			}
 			String heightText = props.getHeight();
 			
-			if(INHERIT.equalsIgnoreCase(heightText)) {
+			if (INHERIT.equalsIgnoreCase(heightText)) {
 				heightText = element.getParentStyle().getHeight();
+			} else if (INITIAL.equalsIgnoreCase(heightText)) {
+				heightText = "100%";
 			}
 			
 			if ((heightText == null) || "".equals(heightText)) {

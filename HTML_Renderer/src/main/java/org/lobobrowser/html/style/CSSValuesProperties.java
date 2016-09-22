@@ -97,6 +97,9 @@ public interface CSSValuesProperties {
      /** The Constant INHERIT. */
      String INHERIT = "inherit";
      
+     /** The Constant INITIAL. */
+     String INITIAL = "initial";
+     
      /** The Constant INLINE. */
      String INLINE = "inline";
      

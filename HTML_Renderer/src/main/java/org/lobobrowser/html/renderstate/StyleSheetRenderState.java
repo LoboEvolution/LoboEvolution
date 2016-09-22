@@ -207,6 +207,15 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 	protected int getDefaultDisplay() {
 		return DISPLAY_INLINE;
 	}
+	
+	/**
+	 * Gets the default color.
+	 *
+	 * @return the default color
+	 */
+	protected Color getDefaultColor() {
+		return Color.BLACK;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -249,6 +258,9 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				break;
 			case INHERIT:
 				displayInt = this.getPreviousRenderState().getDisplay();
+				break;
+			case INITIAL:
+				displayInt = this.getDefaultDisplay();
 				break;
 			default:
 				displayInt = this.getDefaultDisplay();
@@ -457,8 +469,10 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 		AbstractCSS2Properties props = this.getCssProperties();
 		String colorValue = props == null ? null : props.getColor();
 		
-		if(INHERIT.equals(colorValue) && this.getPreviousRenderState()!= null){
+		if (INHERIT.equals(colorValue) && this.getPreviousRenderState() != null) {
 			return this.getPreviousRenderState().getColor();
+		} else if (INITIAL.equals(colorValue)) {
+			return getDefaultColor();
 		} else if ((colorValue == null) || "".equals(colorValue)) {
 			RenderState prs = this.prevRenderState;
 			if (prs != null) {
@@ -466,12 +480,10 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				this.iColor = c;
 				return c;
 			} else {
-				colorValue = "black";
+				this.iColor = getDefaultColor();
+				return getDefaultColor();
 			}
 		}
-		
-		c = ColorFactory.getInstance().getColor(colorValue);
-		this.iColor = c;
 		return c;
 	}
 
@@ -610,6 +622,9 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				case INHERIT:
 					td |= this.getPreviousRenderState().getTextDecorationMask();
 					break;
+				case INITIAL:
+					td |= MASK_TEXTDECORATION_NONE;
+					break;
 				default:
 					td |= MASK_TEXTDECORATION_NONE;
 					break;
@@ -659,6 +674,9 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				break;
 			case INHERIT:
 				tt |= this.getPreviousRenderState().getTextTransform();
+				break;
+			case INITIAL:
+				tt |= TEXTTRANSFORM_NONE;
 				break;
 			default:
 				tt |= TEXTTRANSFORM_NONE;
@@ -786,8 +804,9 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 			axp = 100;
 		} else if (INHERIT.equalsIgnoreCase(textAlign)) {
 			axp = this.getPreviousRenderState().getAlignXPercent();
+		} else if (INITIAL.equalsIgnoreCase(textAlign)) {
+			axp = 0;
 		} else {
-			// TODO: justify, <string>
 			axp = 0;
 		}
 		this.alignXPercent = axp;
@@ -938,7 +957,10 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 							binfo.setBackgroundColor(ColorFactory.getInstance().getColor(back));
 						} else if (INHERIT.equalsIgnoreCase(back)) {
 							binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
+						} else if (INITIAL.equalsIgnoreCase(back)) {
+							binfo.setBackgroundColor(Color.WHITE);
 						}
+						
 						this.applyBackgroundPosition(binfo, back);
 						this.applyBackgroundRepeat(binfo, back);
 					}
@@ -961,7 +983,9 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 
 					if (INHERIT.equalsIgnoreCase(backgroundColorText)) {
 						binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
-					} else {
+					} else if (INITIAL.equalsIgnoreCase(backgroundColorText)) {
+						binfo.setBackgroundColor(Color.WHITE);
+					}else {
 						binfo.setBackgroundColor(ColorFactory.getInstance().getColor(backgroundColorText));
 					}
 				}
@@ -1072,6 +1096,8 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				wsValue = WS_PRE;
 			} else if (INHERIT.equals(whiteSpaceTextTL)) {
 				wsValue = this.getPreviousRenderState().getWhiteSpace();
+			} else if (INITIAL.equals(whiteSpaceTextTL)) {
+				wsValue = WS_NORMAL;
 			} else {
 				wsValue = WS_NORMAL;
 			}
@@ -1139,28 +1165,35 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 			} catch (NumberFormatException nfe) {
 				binfo.setBackgroundXPosition(0);
 			}
-		} else if (CENTER.equalsIgnoreCase(xposition)) {
-			binfo.setBackgroundXPositionAbsolute(false);
-			binfo.setBackgroundXPosition(50);
-		} else if (RIGHT.equalsIgnoreCase(xposition)) {
-			binfo.setBackgroundXPositionAbsolute(false);
-			binfo.setBackgroundXPosition(100);
-		} else if (LEFT.equalsIgnoreCase(xposition)) {
-			binfo.setBackgroundXPositionAbsolute(false);
-			binfo.setBackgroundXPosition(0);
-		} else if (BOTTOM.equalsIgnoreCase(xposition)) {
-			binfo.setBackgroundYPositionAbsolute(false);
-			binfo.setBackgroundYPosition(100);
-		} else if (TOP.equalsIgnoreCase(xposition)) {
-			binfo.setBackgroundYPositionAbsolute(false);
-			binfo.setBackgroundYPosition(0);
-		} else if (INHERIT.equalsIgnoreCase(xposition)) {
-			BackgroundInfo bi = this.getPreviousRenderState().getBackgroundInfo();
-			binfo.setBackgroundYPositionAbsolute(bi.isBackgroundYPositionAbsolute());
-			binfo.setBackgroundYPosition(bi.getBackgroundYPosition());
 		} else {
-			binfo.setBackgroundXPositionAbsolute(true);
-			binfo.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, this, 0));
+			
+			switch (xposition) {
+			case CENTER:
+				binfo.setBackgroundXPositionAbsolute(false);
+				binfo.setBackgroundXPosition(50);
+			case RIGHT:
+				binfo.setBackgroundXPositionAbsolute(false);
+				binfo.setBackgroundXPosition(100);
+			case LEFT:
+				binfo.setBackgroundXPositionAbsolute(false);
+				binfo.setBackgroundXPosition(0);
+			case BOTTOM:
+				binfo.setBackgroundYPositionAbsolute(false);
+				binfo.setBackgroundYPosition(100);
+			case TOP:
+				binfo.setBackgroundYPositionAbsolute(false);
+				binfo.setBackgroundYPosition(0);
+			case INHERIT:
+				BackgroundInfo bi = this.getPreviousRenderState().getBackgroundInfo();
+				binfo.setBackgroundYPositionAbsolute(bi.isBackgroundYPositionAbsolute());
+				binfo.setBackgroundYPosition(bi.getBackgroundYPosition());
+			case INITIAL:
+				binfo.setBackgroundXPositionAbsolute(true);
+				binfo.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, this, 0));
+			default:
+				binfo.setBackgroundXPositionAbsolute(true);
+				binfo.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, this, 0));
+			}
 		}
 	}
 
@@ -1181,28 +1214,35 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 			} catch (NumberFormatException nfe) {
 				binfo.setBackgroundYPosition(0);
 			}
-		} else if (CENTER.equalsIgnoreCase(yposition)) {
-			binfo.setBackgroundYPositionAbsolute(false);
-			binfo.setBackgroundYPosition(50);
-		} else if (BOTTOM.equalsIgnoreCase(yposition)) {
-			binfo.setBackgroundYPositionAbsolute(false);
-			binfo.setBackgroundYPosition(100);
-		} else if (TOP.equalsIgnoreCase(yposition)) {
-			binfo.setBackgroundYPositionAbsolute(false);
-			binfo.setBackgroundYPosition(0);
-		} else if (RIGHT.equalsIgnoreCase(yposition)) {
-			binfo.setBackgroundXPositionAbsolute(false);
-			binfo.setBackgroundXPosition(100);
-		} else if (LEFT.equalsIgnoreCase(yposition)) {
-			binfo.setBackgroundXPositionAbsolute(false);
-			binfo.setBackgroundXPosition(0);
-		} else if (INHERIT.equalsIgnoreCase(yposition)) {
-			BackgroundInfo bi = this.getPreviousRenderState().getBackgroundInfo();
-			binfo.setBackgroundXPositionAbsolute(bi.isBackgroundXPositionAbsolute());
-			binfo.setBackgroundXPosition(bi.getBackgroundXPosition());
 		} else {
-			binfo.setBackgroundYPositionAbsolute(true);
-			binfo.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, this, 0));
+
+			switch (yposition) {
+			case CENTER:
+				binfo.setBackgroundYPositionAbsolute(false);
+				binfo.setBackgroundYPosition(50);
+			case RIGHT:
+				binfo.setBackgroundYPositionAbsolute(false);
+				binfo.setBackgroundYPosition(100);
+			case LEFT:
+				binfo.setBackgroundYPositionAbsolute(false);
+				binfo.setBackgroundYPosition(0);
+			case BOTTOM:
+				binfo.setBackgroundYPositionAbsolute(false);
+				binfo.setBackgroundYPosition(100);
+			case TOP:
+				binfo.setBackgroundYPositionAbsolute(false);
+				binfo.setBackgroundYPosition(0);
+			case INHERIT:
+				BackgroundInfo bi = this.getPreviousRenderState().getBackgroundInfo();
+				binfo.setBackgroundYPositionAbsolute(bi.isBackgroundYPositionAbsolute());
+				binfo.setBackgroundYPosition(bi.getBackgroundYPosition());
+			case INITIAL:
+				binfo.setBackgroundYPositionAbsolute(true);
+				binfo.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, this, 0));
+			default:
+				binfo.setBackgroundYPositionAbsolute(true);
+				binfo.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, this, 0));
+			}
 		}
 	}
 
@@ -1286,6 +1326,9 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				case INHERIT:
 					visibility = this.getPreviousRenderState().getVisibility();
 					break;
+				case INITIAL:
+					visibility = VISIBILITY_VISIBLE;
+					break;
 				default:
 					visibility = VISIBILITY_VISIBLE;
 					break;
@@ -1334,6 +1377,9 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				case INHERIT:
 					position = this.getPreviousRenderState().getPosition();
 					break;
+				case INITIAL:
+					position = POSITION_STATIC;
+					break;
 				default:
 					position = POSITION_STATIC;
 					break;
@@ -1378,6 +1424,9 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 					break;
 				case INHERIT:
 					floatValue = this.getPreviousRenderState().getFloat();
+					break;
+				case INITIAL:
+					floatValue = FLOAT_NONE;
 					break;
 				}
 			}
@@ -1436,6 +1485,9 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 			case INHERIT:
 				overflow = this.getPreviousRenderState().getOverflowX();
 				break;
+			case INITIAL:
+				overflow = OVERFLOW_NONE;
+				break;
 			default:
 				overflow = OVERFLOW_NONE;
 			}
@@ -1483,6 +1535,9 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				break;
 			case INHERIT:
 				overflow = this.getPreviousRenderState().getOverflowY();
+				break;
+			case INITIAL:
+				overflow = OVERFLOW_NONE;
 				break;
 			default:
 				overflow = OVERFLOW_NONE;
@@ -1559,6 +1614,9 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 					break;
 				case INHERIT:
 					prevCursorOpt = this.getPreviousRenderState().getCursor();
+					break;
+				case INITIAL:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 					break;
 				default:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));

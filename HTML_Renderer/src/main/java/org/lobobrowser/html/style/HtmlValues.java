@@ -263,6 +263,10 @@ public class HtmlValues implements CSSValuesProperties{
 				insets.topType = renderState.getPreviousRenderState().getMarginInsets().getTopType();
 			}
 
+		} else if(INITIAL.equalsIgnoreCase(sizeText)) {
+			insets.topType = HtmlInsets.TYPE_PIXELS;
+			insets.top = HtmlValues.getPixelSize(sizeText, renderState, 0);
+
 		} else if (sizeText.endsWith("%")) {
 			insets.topType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -308,6 +312,10 @@ public class HtmlValues implements CSSValuesProperties{
 				insets.left = renderState.getPreviousRenderState().getMarginInsets().getLeft();
 				insets.leftType = renderState.getPreviousRenderState().getMarginInsets().getLeftType();
 			}
+		} else if(INITIAL.equalsIgnoreCase(sizeText)) {
+			insets.leftType = HtmlInsets.TYPE_PIXELS;
+			insets.left = HtmlValues.getPixelSize(sizeText, renderState, 0);
+
 		} else if (sizeText.endsWith("%")) {
 			insets.leftType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -353,6 +361,10 @@ public class HtmlValues implements CSSValuesProperties{
 				insets.bottom = renderState.getPreviousRenderState().getMarginInsets().getBottom();
 				insets.bottomType = renderState.getPreviousRenderState().getMarginInsets().getBottomType();
 			}
+		} else if(INITIAL.equalsIgnoreCase(sizeText)) {
+			insets.bottomType = HtmlInsets.TYPE_PIXELS;
+			insets.bottom = HtmlValues.getPixelSize(sizeText, renderState, 0);
+
 		} else if (sizeText.endsWith("%")) {
 			insets.bottomType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -398,6 +410,10 @@ public class HtmlValues implements CSSValuesProperties{
 				insets.right = renderState.getPreviousRenderState().getMarginInsets().getRight();
 				insets.rightType = renderState.getPreviousRenderState().getMarginInsets().getRightType();
 			}
+		} else if(INITIAL.equalsIgnoreCase(sizeText)) {
+			insets.rightType = HtmlInsets.TYPE_PIXELS;
+			insets.right = HtmlValues.getPixelSize(sizeText, renderState, 0);
+
 		} else if (sizeText.endsWith("%")) {
 			insets.rightType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -610,34 +626,45 @@ public class HtmlValues implements CSSValuesProperties{
 			} catch (NumberFormatException nfe) {
 				return LAFSettings.getInstance().getFontSize();
 			}
-		} else if (SMALL.equals(specTL)) {
-			return 12.0f;
-		} else if (MEDIUM.equals(specTL)) {
-			return 14.0f;
-		} else if (LARGE.equals(specTL)) {
-			return 20.0f;
-		} else if (X_SMALL.equals(specTL)) {
-			return 11.0f;
-		} else if (XX_SMALL.equals(specTL)) {
-			return 10.0f;
-		} else if (X_LARGE.equals(specTL)) {
-			return 26.0f;
-		} else if (XX_LARGE.equals(specTL)) {
-			return 40.0f;
-		} else if (LARGER.equals(specTL)) {
-			int parentFontSize = (int)LAFSettings.getInstance().getFontSize();
-			if(parentRenderState!= null) parentFontSize = parentRenderState.getFont().getSize();
-			return parentFontSize * 1.2f;
-		} else if (SMALLER.equals(specTL)) {
-			int parentFontSize = (int)LAFSettings.getInstance().getFontSize();
-			if(parentRenderState!= null) parentFontSize = parentRenderState.getFont().getSize();
-			return parentFontSize / 1.2f;
-		} else if (INHERIT.equals(specTL)) { 
-			int parentFontSize = (int)LAFSettings.getInstance().getFontSize();
-			if(parentRenderState!= null) parentRenderState.getPreviousRenderState().getFont().getSize();
-			return parentFontSize; 
-		}else {
-			return getPixelSize(spec, parentRenderState, (int)LAFSettings.getInstance().getFontSize());
+		} else {
+			
+			int parentFontSize = 0;
+
+			switch (specTL) {
+			case SMALL:
+				return 12.0f;
+			case MEDIUM:
+				return 14.0f;
+			case LARGE:
+				return 20.0f;
+			case X_SMALL:
+				return 11.0f;
+			case XX_SMALL:
+				return 10.0f;
+			case X_LARGE:
+				return 26.0f;
+			case XX_LARGE:
+				return 40.0f;
+			case LARGER:
+				parentFontSize = (int) LAFSettings.getInstance().getFontSize();
+				if (parentRenderState != null)
+					parentFontSize = parentRenderState.getFont().getSize();
+				return parentFontSize * 1.2f;
+			case SMALLER:
+				parentFontSize = (int) LAFSettings.getInstance().getFontSize();
+				if (parentRenderState != null)
+					parentFontSize = parentRenderState.getFont().getSize();
+				return parentFontSize / 1.2f;
+			case INHERIT:
+				parentFontSize = (int) LAFSettings.getInstance().getFontSize();
+				if (parentRenderState != null)
+					parentRenderState.getPreviousRenderState().getFont().getSize();
+				return parentFontSize;
+			case INITIAL:
+				return getPixelSize(spec, parentRenderState, (int) LAFSettings.getInstance().getFontSize());
+			default:
+				return getPixelSize(spec, parentRenderState, (int) LAFSettings.getInstance().getFontSize());
+			}
 		}
 	}
 
@@ -1030,6 +1057,8 @@ public class HtmlValues implements CSSValuesProperties{
 		case LOWER_ROMAN:
 			return ListStyle.TYPE_LOWER_ROMAN;
 		case UPPER_ROMAN:
+			return ListStyle.TYPE_UPPER_ROMAN;
+		case INITIAL:
 			return ListStyle.TYPE_UPPER_ROMAN;
 		default:
 			return ListStyle.TYPE_UNSET;
