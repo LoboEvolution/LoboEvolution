@@ -736,9 +736,15 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			}
 			
 			BaseElementRenderable.this.backgroundImage = image;
-			int w = image.getWidth(BaseElementRenderable.this);
-			int h = image.getHeight(BaseElementRenderable.this);
-			if ((w != -1) && (h != -1)) {
+			
+			int w = -1;
+			int h = -1;
+			if(image!= null){
+				w = image.getWidth(BaseElementRenderable.this);
+				h = image.getHeight(BaseElementRenderable.this);
+			}
+			
+			if (w != -1 && h != -1) {
 				BaseElementRenderable.this.repaint();
 			}
 		} catch (FileNotFoundException | IIOException ex) {
