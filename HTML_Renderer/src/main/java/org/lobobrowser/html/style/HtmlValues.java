@@ -229,7 +229,7 @@ public class HtmlValues implements CSSValuesProperties{
 		}
 		binfo.setInsets(insets);
 	}
-
+	
 	/**
 	 * Update top inset.
 	 *
@@ -267,6 +267,10 @@ public class HtmlValues implements CSSValuesProperties{
 			insets.topType = HtmlInsets.TYPE_PIXELS;
 			insets.top = HtmlValues.getPixelSize(sizeText, renderState, 0);
 
+		} else if(MEDIUM.equalsIgnoreCase(sizeText)) {
+			insets.topType = HtmlInsets.TYPE_PIXELS;
+			insets.top = HtmlValues.getPixelSize("3px", renderState, 0);
+		
 		} else if (sizeText.endsWith("%")) {
 			insets.topType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -316,6 +320,10 @@ public class HtmlValues implements CSSValuesProperties{
 			insets.leftType = HtmlInsets.TYPE_PIXELS;
 			insets.left = HtmlValues.getPixelSize(sizeText, renderState, 0);
 
+		} else if(MEDIUM.equalsIgnoreCase(sizeText)) {
+			insets.leftType = HtmlInsets.TYPE_PIXELS;
+			insets.left = HtmlValues.getPixelSize("3px", renderState, 0);
+		
 		} else if (sizeText.endsWith("%")) {
 			insets.leftType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -365,6 +373,10 @@ public class HtmlValues implements CSSValuesProperties{
 			insets.bottomType = HtmlInsets.TYPE_PIXELS;
 			insets.bottom = HtmlValues.getPixelSize(sizeText, renderState, 0);
 
+		} else if(MEDIUM.equalsIgnoreCase(sizeText)) {
+			insets.bottomType = HtmlInsets.TYPE_PIXELS;
+			insets.bottom = HtmlValues.getPixelSize("3px", renderState, 0);
+		
 		} else if (sizeText.endsWith("%")) {
 			insets.bottomType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -414,6 +426,10 @@ public class HtmlValues implements CSSValuesProperties{
 			insets.rightType = HtmlInsets.TYPE_PIXELS;
 			insets.right = HtmlValues.getPixelSize(sizeText, renderState, 0);
 
+		} else if(MEDIUM.equalsIgnoreCase(sizeText)) {
+			insets.rightType = HtmlInsets.TYPE_PIXELS;
+			insets.right = HtmlValues.getPixelSize("3px", renderState, 0);
+		
 		} else if (sizeText.endsWith("%")) {
 			insets.rightType = HtmlInsets.TYPE_PERCENT;
 			try {
