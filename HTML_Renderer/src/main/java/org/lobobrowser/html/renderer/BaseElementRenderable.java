@@ -310,11 +310,30 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			} else if (INITIAL.equalsIgnoreCase(widthText)) {
 				widthText = "100%";
 			}
-
-			if ((widthText == null) || "".equals(widthText)) {
-				return -1;
+			
+			int width = -1;
+			
+			if (widthText !=null){
+				width = HtmlValues.getPixelSize(widthText, renderState, -1, availWidth);
 			}
-			return HtmlValues.getPixelSize(widthText, renderState, -1, availWidth);
+			
+			if (props.getMaxWidth() != null) {
+				int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), renderState, -1, availWidth);
+				
+				if (width == -1 || width > maxWidth) {
+					width = maxWidth;
+				}
+			}
+			
+			if (props.getMinWidth() != null) {
+				int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), 0, availWidth);
+				
+				if (width == 0 || width < minWidth) {
+					width = minWidth;
+				}
+			}
+			
+			return width;
 		} else {
 			return -1;
 		}
@@ -365,10 +384,29 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				heightText = "100%";
 			}
 			
-			if ((heightText == null) || "".equals(heightText)) {
-				return -1;
+			int height = -1;
+			
+			if (heightText !=null){
+				height = HtmlValues.getPixelSize(heightText, element.getRenderState(), -1, availHeight);
 			}
-			return HtmlValues.getPixelSize(heightText, renderState, -1, availHeight);
+			
+			if (props.getMaxHeight() != null) {
+				int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), element.getRenderState(), -1, availHeight);
+				
+				if (height == 0 || height > maxHeight) {
+					height = maxHeight;
+				}
+			}
+			
+			if (props.getMinHeight() != null) {
+				int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), element.getRenderState(), -1, availHeight);
+				
+				if (height == 0 || height < minHeight) {
+					height = minHeight;
+				}
+			}
+			
+			return height;
 		} else {
 			return -1;
 		}

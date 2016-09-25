@@ -31,6 +31,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.domfilter.CaptionFilter;
@@ -45,6 +47,7 @@ import org.lobobrowser.html.info.CaptionSizeInfo;
 import org.lobobrowser.html.info.SizeInfo;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
+import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderThreadState;
@@ -54,7 +57,10 @@ import org.lobobrowser.w3c.html.HTMLTableRowElement;
 /**
  * The Class TableMatrix.
  */
-public class TableMatrix {
+public class TableMatrix implements CSSValuesProperties{
+	
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(TableMatrix.class);
 
 	/** The rows. */
 	private final ArrayList<ArrayList<VirtualCell>> ROWS = new ArrayList<ArrayList<VirtualCell>>();
@@ -346,7 +352,34 @@ public class TableMatrix {
 				}
 				return new HtmlLength(widthAttr);
 			} else {
-				return new HtmlLength(HtmlValues.getPixelSize(widthText, element.getRenderState(), 0, availWidth));
+				
+				if(INHERIT.equals(widthText)){
+					widthText = element.getParentStyle().getWidth();
+				}
+				
+				int width = -1;
+				
+				if (widthText !=null){
+					width = HtmlValues.getPixelSize(widthText, element.getRenderState(), 0, availWidth);
+				}
+				
+				if (props.getMaxWidth() != null) {
+					int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), element.getRenderState(), 0, availWidth);
+					
+					if (width == 0 || width > maxWidth) {
+						width = maxWidth;
+					}
+				}
+				
+				if (props.getMinWidth() != null) {
+					int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), 0, availWidth);
+					
+					if (width == 0 || width < minWidth) {
+						width = minWidth;
+					}
+				}
+				
+				return new HtmlLength(width);
 			}
 		} catch (Exception err) {
 			return null;
@@ -374,6 +407,33 @@ public class TableMatrix {
 					return new HtmlLength(ha);
 				}
 			} else {
+				
+				if(INHERIT.equals(heightText)){
+					heightText = element.getParentStyle().getHeight();
+				}
+				
+				int height = -1;
+				
+				if (heightText !=null){
+					height = HtmlValues.getPixelSize(heightText, element.getRenderState(), 0, availHeight);
+				}
+				
+				if (props.getMaxWidth() != null) {
+					int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), element.getRenderState(), 0, availHeight);
+					
+					if (height == 0 || height > maxHeight) {
+						height = maxHeight;
+					}
+				}
+				
+				if (props.getMinHeight() != null) {
+					int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), element.getRenderState(), 0, availHeight);
+					
+					if (height == 0 || height < minHeight) {
+						height = minHeight;
+					}
+				}
+				
 				return new HtmlLength(HtmlValues.getPixelSize(heightText, element.getRenderState(), 0, availHeight));
 			}
 		} catch (Exception err) {
