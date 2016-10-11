@@ -23,12 +23,21 @@
  */
 package org.lobobrowser.html.renderer;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
+import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlLength;
+import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.w3c.html.HTMLTableElement;
 
 /**
  * The Class VirtualCell.
  */
-public class VirtualCell {
+public class VirtualCell implements CSSValuesProperties{
+	
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(VirtualCell.class);
 
     /** The actual cell. */
     private final RTableCell actualCell;
@@ -113,10 +122,19 @@ public class VirtualCell {
         // TODO: Does not consider cellpadding and border
         RTableCell cell = this.actualCell;
         String heightText = cell.getHeightText();
+        
         HtmlLength length;
         try {
-            length = heightText == null ? null : new HtmlLength(heightText);
+        	if (INHERIT.equals(heightText)) {
+				Object parent = cell.getParent().getModelNode();
+				if (parent instanceof HTMLTableElement) {
+					HTMLTableElementImpl el = (HTMLTableElementImpl) parent;
+					heightText = el.getCurrentStyle().getHeight();
+				}
+			}
+        	length = heightText == null ? new HtmlLength("1px") : new HtmlLength(heightText);
         } catch (Exception err) {
+        	err.printStackTrace();
             length = null;
         }
         if (length != null) {
@@ -134,7 +152,14 @@ public class VirtualCell {
         String widthText = cell.getWidthText();
         HtmlLength length;
         try {
-            length = widthText == null ? null : new HtmlLength(widthText);
+        	if (INHERIT.equals(widthText)) {
+				Object parent = cell.getParent().getModelNode();
+				if (parent instanceof HTMLTableElement) {
+					HTMLTableElementImpl el = (HTMLTableElementImpl) parent;
+					widthText = el.getCurrentStyle().getWidth();
+				}
+			}
+            length = widthText == null ? new HtmlLength("1px") : new HtmlLength(widthText);
         } catch (Exception err) {
             length = null;
         }

@@ -76,13 +76,13 @@ public class TableCaptionRenderState extends DisplayRenderState {
             textAlign = props.getTextAlign();
         }
 
-        if ("center".equalsIgnoreCase(textAlign)) {
+        if (CENTER.equalsIgnoreCase(textAlign)) {
             axp = 50;
-        } else if ("left".equalsIgnoreCase(textAlign)) {
+        } else if (LEFT.equalsIgnoreCase(textAlign)) {
             axp = 0;
-        } else if ("right".equalsIgnoreCase(textAlign)) {
+        } else if (RIGHT.equalsIgnoreCase(textAlign)) {
             axp = 100;
-        } else if ("inherit".equalsIgnoreCase(textAlign)) {
+        } else if (INHERIT.equalsIgnoreCase(textAlign)) {
             Node parent = htmlElement.getParentNode();
             if (parent instanceof HTMLElementImpl) {
                 return getAlignXPercent((HTMLElementImpl) parent);
