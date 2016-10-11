@@ -143,7 +143,8 @@ public class Urls {
         
         if (relativeUrl.contains("..")) {
         	relativeUrl = relativeUrl.replace("..", "");
-        } 
+        	return new URL(baseUrl.toExternalForm()+relativeUrl);
+        }
         return new URL(baseUrl, relativeUrl);
     }
     
