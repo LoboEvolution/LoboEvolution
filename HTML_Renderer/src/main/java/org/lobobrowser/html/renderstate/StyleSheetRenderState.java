@@ -253,6 +253,9 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 			case TABLE_ROW:
 				displayInt = DISPLAY_TABLE_ROW;
 				break;
+			case INLINE:
+				displayInt = DISPLAY_INLINE;
+				break;	
 			case INLINE_BLOCK:
 				displayInt = DISPLAY_INLINE_BLOCK;
 				break;
