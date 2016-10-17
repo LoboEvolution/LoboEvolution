@@ -21,7 +21,6 @@
 package org.lobobrowser.html.layout;
 
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.renderer.MarkupLayout;
 import org.lobobrowser.html.renderer.RBlockViewport;
 
 /**

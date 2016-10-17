@@ -21,9 +21,10 @@
 /*
  * Created on Nov 6, 2005
  */
-package org.lobobrowser.html.renderer;
+package org.lobobrowser.html.layout;
 
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.renderer.RBlockViewport;
 
 /**
  * The Interface MarkupLayout.

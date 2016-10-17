@@ -23,7 +23,6 @@ package org.lobobrowser.html.layout;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.BaseBoundableRenderable;
-import org.lobobrowser.html.renderer.MarkupLayout;
 import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.renderstate.RenderState;
 
