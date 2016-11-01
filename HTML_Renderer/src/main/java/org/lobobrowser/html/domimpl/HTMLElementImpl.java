@@ -50,6 +50,7 @@ import org.lobobrowser.html.style.CSS2PropertiesContext;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.style.LocalCSS2Properties;
 import org.lobobrowser.html.style.StyleSheetAggregator;
+import org.lobobrowser.html.style.selectors.SelectorMatcher;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.LAFSettings;
 import org.lobobrowser.w3c.html.DOMSettableTokenList;
@@ -602,19 +603,19 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 */
 	public Set<String> getPseudoNames() {
 		Set<String> pnset = new HashSet<String>();
-		pnset.add("last-child");
-		pnset.add("last-of-type");
-		pnset.add("first-child");
-		pnset.add("first-of-type");
-		pnset.add("only-child");
-		pnset.add("only-of-type");
-		pnset.add("nth-child");
-		pnset.add("nth-last-child");
-		pnset.add("nth-of-type");
-		pnset.add("nth-last-of-type");
-		pnset.add("hover");
-		pnset.add("root");
-		pnset.add("empty");
+		pnset.add(SelectorMatcher.LAST_CHILD);
+		pnset.add(SelectorMatcher.LAST_OF_TYPE);
+		pnset.add(SelectorMatcher.FIRST_CHILD);
+		pnset.add(SelectorMatcher.FIRST_OF_TYPE);
+		pnset.add(SelectorMatcher.ONLY_CHILD);
+		pnset.add(SelectorMatcher.ONLY_OF_TYPE);
+		pnset.add(SelectorMatcher.NTH_CHILD);
+		pnset.add(SelectorMatcher.NTH_LAST_CHILD);
+		pnset.add(SelectorMatcher.NTH_OF_TYPE);
+		pnset.add(SelectorMatcher.NTH_LAST_OF_TYPE);
+		pnset.add(SelectorMatcher.HOVER);
+		pnset.add(SelectorMatcher.ROOT);
+		pnset.add(SelectorMatcher.EMPTY);
 		return pnset;
 	}
 

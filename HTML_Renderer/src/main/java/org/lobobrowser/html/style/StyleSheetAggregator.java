@@ -100,27 +100,6 @@ public class StyleSheetAggregator {
 	/** The pseudo element. */
 	private String pseudoElement;
 
-	/** The op equal. */
-	private final String OP_EQUAL = "=";
-	
-	/** The op tilde equal. */
-	private final String OP_TILDE_EQUAL = "~=";
-	
-	/** The op pipe equal. */
-	private final String OP_PIPE_EQUAL = "|=";
-	
-	/** The op dollar equal. */
-	private final String OP_DOLLAR_EQUAL = "$=";
-	
-	/** The op circumflex equal. */
-	private final String OP_CIRCUMFLEX_EQUAL = "^=";
-	
-	/** The op star equal. */
-	private final String OP_STAR_EQUAL = "*=";
-	
-	/** The op all. */
-	private final String OP_ALL = "ALL";
-
 	/**
 	 * Instantiates a new style sheet aggregator.
 	 *
@@ -242,40 +221,40 @@ public class StyleSheetAggregator {
 				String selector = selectorList.replace("\"", "");
 				int quadIdx = selector.indexOf("[") + 1;
 				htmlElement = selector.substring(0, selector.indexOf("["));
-				if (selectorList.contains(OP_PIPE_EQUAL)) {
-					int eqIdx = selector.indexOf(OP_PIPE_EQUAL);
+				if (selectorList.contains(SelectorMatcher.OP_PIPE_EQUAL)) {
+					int eqIdx = selector.indexOf(SelectorMatcher.OP_PIPE_EQUAL);
 					attribute = selector.substring(quadIdx, eqIdx);
 					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
-					attributeOperator = OP_PIPE_EQUAL;
-				} else if (selectorList.contains(OP_CIRCUMFLEX_EQUAL)) {
-					int eqIdx = selector.indexOf(OP_CIRCUMFLEX_EQUAL);
+					attributeOperator = SelectorMatcher.OP_PIPE_EQUAL;
+				} else if (selectorList.contains(SelectorMatcher.OP_CIRCUMFLEX_EQUAL)) {
+					int eqIdx = selector.indexOf(SelectorMatcher.OP_CIRCUMFLEX_EQUAL);
 					attribute = selector.substring(quadIdx, eqIdx);
 					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
-					attributeOperator = OP_CIRCUMFLEX_EQUAL;
-				} else if (selectorList.contains(OP_TILDE_EQUAL)) {
-					int eqIdx = selector.indexOf(OP_TILDE_EQUAL);
+					attributeOperator = SelectorMatcher.OP_CIRCUMFLEX_EQUAL;
+				} else if (selectorList.contains(SelectorMatcher.OP_TILDE_EQUAL)) {
+					int eqIdx = selector.indexOf(SelectorMatcher.OP_TILDE_EQUAL);
 					attribute = selector.substring(quadIdx, eqIdx);
 					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
-					attributeOperator = OP_TILDE_EQUAL;
-				} else if (selectorList.contains(OP_DOLLAR_EQUAL)) {
-					int eqIdx = selector.indexOf(OP_DOLLAR_EQUAL);
+					attributeOperator = SelectorMatcher.OP_TILDE_EQUAL;
+				} else if (selectorList.contains(SelectorMatcher.OP_DOLLAR_EQUAL)) {
+					int eqIdx = selector.indexOf(SelectorMatcher.OP_DOLLAR_EQUAL);
 					attribute = selector.substring(quadIdx, eqIdx);
 					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
-					attributeOperator = OP_DOLLAR_EQUAL;
-				} else if (selectorList.contains(OP_STAR_EQUAL)) {
-					int eqIdx = selector.indexOf(OP_STAR_EQUAL);
+					attributeOperator = SelectorMatcher.OP_DOLLAR_EQUAL;
+				} else if (selectorList.contains(SelectorMatcher.OP_STAR_EQUAL)) {
+					int eqIdx = selector.indexOf(SelectorMatcher.OP_STAR_EQUAL);
 					attribute = selector.substring(quadIdx, eqIdx);
 					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
-					attributeOperator = OP_STAR_EQUAL;
-				} else if (selectorList.contains(OP_EQUAL)) {
-					int eqIdx = selector.indexOf(OP_EQUAL);
+					attributeOperator = SelectorMatcher.OP_STAR_EQUAL;
+				} else if (selectorList.contains(SelectorMatcher.OP_EQUAL)) {
+					int eqIdx = selector.indexOf(SelectorMatcher.OP_EQUAL);
 					attribute = selector.substring(quadIdx, eqIdx);
 					attributeValue = selector.substring(eqIdx + 1, selector.length() - 1);
-					attributeOperator = OP_EQUAL;
+					attributeOperator = SelectorMatcher.OP_EQUAL;
 				} else {
 					attribute = selector.substring(quadIdx, selector.length() - 1);
 					attributeValue = "-";
-					attributeOperator = OP_ALL;
+					attributeOperator = SelectorMatcher.OP_ALL;
 				}
 				this.addAttributeRule(htmlElement, attributeValue, sr, new ArrayList<SimpleSelector>());
 			}
@@ -432,10 +411,16 @@ public class StyleSheetAggregator {
 		String elementTL = elementName.toLowerCase();
 		Collection<StyleRuleInfo> elementRules = this.rulesByElement.get(elementTL);
 		if (elementRules != null) {
-			SelectorMatcher sm = new SelectorMatcher();			
-			if(sm.matchesPseudoClassSelector(pseudoElement, element) && element.getPseudoNames().contains(pseudoElement)){
+			SelectorMatcher sm = new SelectorMatcher();
+			
+			String psElement = pseudoElement;
+			if (psElement != null && psElement.contains("(")) {
+				psElement = psElement.substring(0, psElement.indexOf("("));
+			}
+			
+			if(sm.matchesPseudoClassSelector(pseudoElement, element) && element.getPseudoNames().contains(psElement)){
 				styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
-			}else if(!sm.matchesPseudoClassSelector(pseudoElement, element) && !element.getPseudoNames().contains(pseudoElement)){
+			}else if(!sm.matchesPseudoClassSelector(pseudoElement, element) && !element.getPseudoNames().contains(psElement)){
 				styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
 			}
 		}
@@ -632,7 +617,7 @@ public class StyleSheetAggregator {
 	private boolean isAttributeOperator(Attr attr, HTMLElementImpl element) {
 
 		switch (attributeOperator) {
-		case OP_EQUAL:
+		case SelectorMatcher.OP_EQUAL:
 			if (attr.getName().equals(attribute) && attr.getValue().equals(attributeValue) && "*".equals(htmlElement)) {
 				return true;
 			} else if (attr.getName().equals(attribute) && attr.getValue().equals(attributeValue)
@@ -640,8 +625,8 @@ public class StyleSheetAggregator {
 				return true;
 			}
 			break;
-		case OP_TILDE_EQUAL:
-		case OP_STAR_EQUAL:
+		case SelectorMatcher.OP_TILDE_EQUAL:
+		case SelectorMatcher.OP_STAR_EQUAL:
 			if (attr.getName().equals(attribute) && attr.getValue().contains(attributeValue)
 					&& "*".equals(htmlElement)) {
 				return true;
@@ -650,8 +635,8 @@ public class StyleSheetAggregator {
 				return true;
 			}
 			break;
-		case OP_PIPE_EQUAL:
-		case OP_CIRCUMFLEX_EQUAL:
+		case SelectorMatcher.OP_PIPE_EQUAL:
+		case SelectorMatcher.OP_CIRCUMFLEX_EQUAL:
 			if (attr.getName().equals(attribute) && attr.getValue().startsWith(attributeValue)
 					&& "*".equals(htmlElement)) {
 				return true;
@@ -660,7 +645,7 @@ public class StyleSheetAggregator {
 				return true;
 			}
 			break;
-		case OP_DOLLAR_EQUAL:
+		case SelectorMatcher.OP_DOLLAR_EQUAL:
 			if (attr.getName().equals(attribute) && attr.getValue().endsWith(attributeValue)
 					&& "*".equals(htmlElement)) {
 				return true;
@@ -669,7 +654,7 @@ public class StyleSheetAggregator {
 				return true;
 			}
 			break;
-		case OP_ALL:
+		case SelectorMatcher.OP_ALL:
 			if (attr.getName().equals(attribute) && "*".equals(htmlElement)) {
 				return true;
 			} else if (attr.getName().equals(attribute) && element.getNodeName().equals(htmlElement)) {

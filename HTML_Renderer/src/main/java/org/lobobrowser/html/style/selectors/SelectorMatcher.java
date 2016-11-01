@@ -26,6 +26,66 @@ import org.lobobrowser.html.domimpl.DOMNodeImpl;
  * The Class SelectorMatcher.
  */
 public class SelectorMatcher {
+	
+	/** The op equal. */
+	public final static String OP_EQUAL = "=";
+	
+	/** The op tilde equal. */
+	public final static String OP_TILDE_EQUAL = "~=";
+	
+	/** The op pipe equal. */
+	public final static String OP_PIPE_EQUAL = "|=";
+	
+	/** The op dollar equal. */
+	public final static String OP_DOLLAR_EQUAL = "$=";
+	
+	/** The op circumflex equal. */
+	public final static String OP_CIRCUMFLEX_EQUAL = "^=";
+	
+	/** The op star equal. */
+	public final static String OP_STAR_EQUAL = "*=";
+	
+	/** The op all. */
+	public final static String OP_ALL = "ALL";
+
+	/** The last child. */
+	public final static String LAST_CHILD = "last-child";
+	
+	/** The last of type . */
+	public final static String LAST_OF_TYPE = "last-of-type";
+	
+	/** The first child. */
+	public final static String FIRST_CHILD = "first-child";
+	
+	/** The first of type. */
+	public final static String FIRST_OF_TYPE = "first-of-type";
+	
+	/** The only child. */
+	public final static String ONLY_CHILD = "only-child";
+	
+	/** The only of type. */
+	public final static String ONLY_OF_TYPE = "only-of-type";
+	
+	/** The nth child. */
+	public final static String NTH_CHILD = "nth-child";
+	
+	/** The nth last child. */
+	public final static String NTH_LAST_CHILD = "nth-last-child";
+	
+	/** The nth of type. */
+	public final static String NTH_OF_TYPE = "nth-of-type";
+	
+	/** The nth last of type. */
+	public final static String NTH_LAST_OF_TYPE = "nth-last-of-type";
+	
+	/** The hover. */
+	public final static String HOVER = "hover";
+	
+	/** The root. */
+	public final static String ROOT ="root";
+	
+	/** The empty. */
+	public final static String EMPTY = "empty";
 
 	public SelectorMatcher() {
 	}
@@ -48,40 +108,27 @@ public class SelectorMatcher {
 		}
 
 		switch (selector) {
-		case "first-child":
+		case FIRST_CHILD:
 			return matchesFirstOrLastChild(node, true);
-		case "last-child":
+		case LAST_CHILD:
 			return matchesFirstOrLastChild(node, false);
-		case "only-child":
+		case ONLY_CHILD:
 			return matchesFirstOrLastChild(node, true) && matchesFirstOrLastChild(node, false);
-		case "first-of-type":
-			return matchesNthChild(node, 0, 1, true, false);
-		case "last-of-type":
-			return matchesNthChild(node, 0, 1, true, true);
-		case "only-of-type":
-			return matchesNthChild(node, 0, 1, true, false) && matchesNthChild(node, 0, 1, true, true);
-		case "root":
+		case FIRST_OF_TYPE:
+			return matchesChild(node, 0, 1, true, false);
+		case LAST_OF_TYPE:
+			return matchesChild(node, 0, 1, true, true);
+		case ONLY_OF_TYPE:
+			return matchesChild(node, 0, 1, true, false) && matchesChild(node, 0, 1, true, true);
+		case ROOT:
 			DOMNodeImpl parentDOMNodeImpl = (DOMNodeImpl) node.getParentNode();
 			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == DOMNodeImpl.DOCUMENT_TYPE_NODE;
-		case "empty":
-			for (DOMNodeImpl child = (DOMNodeImpl) node.getFirstChild(); child != null; child = (DOMNodeImpl) child
-					.getNextSibling()) {
-				switch (child.getNodeType()) {
-				case DOMNodeImpl.ELEMENT_NODE:
-					return false;
-				case DOMNodeImpl.TEXT_NODE:
-					String data = child.getNodeName();
-					if (data != null && !data.isEmpty()) {
-						return false;
-					}
-				}
-			}
-
-			return true;
-		case "nth-child":
-		case "nth-last-child":
-		case "nth-of-type":
-		case "nth-last-of-type":
+		case EMPTY: 
+			return isEmpty(node);	
+		case NTH_CHILD:
+		case NTH_LAST_CHILD:
+		case NTH_OF_TYPE:
+		case NTH_LAST_OF_TYPE:
 			return false;
 		default:
 			return false;
@@ -134,7 +181,7 @@ public class SelectorMatcher {
 	 *            If matching is performed from the end.
 	 * @return {@code true} or {@code false}
 	 */
-	private boolean matchesNthChild(DOMNodeImpl node, int a, int b, boolean isOfType, boolean fromEnd) {
+	private boolean matchesChild(DOMNodeImpl node, int a, int b, boolean isOfType, boolean fromEnd) {
 		DOMNodeImpl parentDOMNodeImpl = (DOMNodeImpl) node.getParentNode();
 		if (parentDOMNodeImpl == null || parentDOMNodeImpl.getNodeType() == DOMNodeImpl.DOCUMENT_TYPE_NODE) {
 			return false;
@@ -171,5 +218,29 @@ public class SelectorMatcher {
 		}
 
 		return ((i - b) / a) >= 0 && ((i - b) % a) == 0;
+	}
+	
+	/**
+	 *  Matches a empty.
+	 *
+	 * @param node
+	 *            The root node.
+	 *            
+	 * @return {@code true} or {@code false}
+	 */
+	private static boolean isEmpty(DOMNodeImpl node) {
+		for (DOMNodeImpl child = (DOMNodeImpl) node.getFirstChild(); child != null; child = (DOMNodeImpl) child
+				.getNextSibling()) {
+			switch (child.getNodeType()) {
+			case DOMNodeImpl.ELEMENT_NODE:
+				return false;
+			case DOMNodeImpl.TEXT_NODE:
+				String data = child.getNodeName();
+				if (data != null && !data.isEmpty()) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }
