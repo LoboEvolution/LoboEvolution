@@ -24,6 +24,7 @@ import org.lobobrowser.w3c.html.DOMSettableTokenList;
 import org.lobobrowser.w3c.html.HTMLFormElement;
 import org.lobobrowser.w3c.html.HTMLOutputElement;
 import org.lobobrowser.w3c.html.ValidityState;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -71,8 +72,11 @@ public class HTMLOutputElementImpl extends HTMLElementImpl implements HTMLOutput
 	 */
 	@Override
 	public HTMLFormElement getForm() {
-		// TODO Auto-generated method stub
-		return null;
+		Node parent = this.getParentNode();
+		while ((parent != null) && !(parent instanceof HTMLFormElement)) {
+			parent = parent.getParentNode();
+		}
+		return (HTMLFormElement) parent;
 	}
 
 	/*

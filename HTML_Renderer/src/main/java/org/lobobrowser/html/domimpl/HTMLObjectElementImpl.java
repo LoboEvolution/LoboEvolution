@@ -26,6 +26,7 @@ import org.lobobrowser.w3c.html.HTMLFormElement;
 import org.lobobrowser.w3c.html.HTMLObjectElement;
 import org.lobobrowser.w3c.html.ValidityState;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 /**
  * The Class HTMLObjectElementImpl.
@@ -282,7 +283,11 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public HTMLFormElement getForm() {
-		return (HTMLFormElement) this.getAncestorForJavaClass(HTMLFormElement.class);
+		Node parent = this.getParentNode();
+		while ((parent != null) && !(parent instanceof HTMLFormElement)) {
+			parent = parent.getParentNode();
+		}
+		return (HTMLFormElement) parent;
 	}
 
 	/*

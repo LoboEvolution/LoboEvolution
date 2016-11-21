@@ -24,6 +24,7 @@ import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.w3c.html.HTMLFormElement;
 import org.lobobrowser.w3c.html.HTMLOptionElement;
 import org.lobobrowser.w3c.html.HTMLSelectElement;
+import org.w3c.dom.Node;
 
 /**
  * The Class HTMLOptionElementImpl.
@@ -65,7 +66,11 @@ HTMLOptionElement {
      */
     @Override
     public HTMLFormElement getForm() {
-        return this.getForm();
+    	Node parent = this.getParentNode();
+		while ((parent != null) && !(parent instanceof HTMLFormElement)) {
+			parent = parent.getParentNode();
+		}
+		return (HTMLFormElement) parent;
     }
 
     /*
