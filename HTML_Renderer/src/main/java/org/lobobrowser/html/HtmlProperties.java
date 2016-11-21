@@ -168,6 +168,9 @@ public interface HtmlProperties {
     
     /** The ins. */
     String INS = "INS";
+    
+    /** The label. */
+    String LABEL = "LABEL";
 
     /** The link. */
     String LINK = "LINK";

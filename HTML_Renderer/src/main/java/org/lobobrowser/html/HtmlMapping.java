@@ -56,6 +56,7 @@ import org.lobobrowser.html.builder.IFrameBuilder;
 import org.lobobrowser.html.builder.ImgBuilder;
 import org.lobobrowser.html.builder.InputBuilder;
 import org.lobobrowser.html.builder.KeygenBuilder;
+import org.lobobrowser.html.builder.LabelBuilder;
 import org.lobobrowser.html.builder.LiBuilder;
 import org.lobobrowser.html.builder.LinkBuilder;
 import org.lobobrowser.html.builder.MarqueeBuilder;
@@ -291,6 +292,7 @@ public class HtmlMapping implements HtmlProperties {
 		builders.put(OUTPUT, new OutputBuilder());
 		builders.put(TIME, new TimeBuilder());
 		builders.put(VIDEO, new VideoBuilder());
+		builders.put(LABEL, new LabelBuilder());
 		return builders;
 	}
 }

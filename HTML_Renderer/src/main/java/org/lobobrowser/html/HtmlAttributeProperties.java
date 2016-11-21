@@ -159,6 +159,9 @@ public interface HtmlAttributeProperties {
 
 	/** The face. */
 	String FACE = "face";
+	
+	/** The for. */
+	String FOR = "For";
 
 	/** The form. */
 	String FORM = "form";
