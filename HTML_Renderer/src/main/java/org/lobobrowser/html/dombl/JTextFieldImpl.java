@@ -199,7 +199,7 @@ public class JTextFieldImpl extends JTextField {
 
 	@Override
 	public synchronized void addKeyListener(KeyListener l) {
-		super.addKeyListener(l);
+		super.addKeyListener(null);
 	}
 
 	/**

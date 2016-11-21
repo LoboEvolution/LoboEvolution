@@ -47,7 +47,7 @@ public class InputTextControl extends BaseInputTextControl {
 	
 	/** The str pattern. */
 	private String strPattern = "";
-
+	
 	/**
 	 * Instantiates a new input text control.
 	 *
@@ -65,7 +65,7 @@ public class InputTextControl extends BaseInputTextControl {
 		text.setVisible(modelNode.getHidden());
 		text.applyComponentOrientation(direction(modelNode.getDir()));
 		text.setEditable(new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
-		text.setEnabled(!modelNode.getDisabled());
+		text.setEnabled(!modelNode.getDisabled());		
 		text.setPlaceholder(modelNode.getPlaceholder());
 		text.setSelectionColor(Color.BLUE);
 		strPattern = modelNode.getAttribute(HtmlAttributeProperties.PATTERN);
@@ -95,6 +95,11 @@ public class InputTextControl extends BaseInputTextControl {
 	@Override
 	protected JTextComponent createTextField() {
 		return new JTextFieldImpl();
+	}
+	
+	@Override
+	public void reset(int availWidth, int availHeight) {
+		super.reset(availWidth, availHeight);
 	}
 
 	/**

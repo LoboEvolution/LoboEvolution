@@ -31,6 +31,7 @@ import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
@@ -47,7 +48,7 @@ import org.lobobrowser.util.gui.WrapperLayout;
  * The Class BaseInputTextControl.
  */
 public abstract class BaseInputTextControl extends BaseInputControl {
-
+	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
@@ -102,6 +103,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	@Override
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
+		RUIControl ruiControl = this.ruicontrol;
 		String maxLengthText = this.controlElement.getAttribute(HtmlAttributeProperties.MAXLENGTH);
 		if (maxLengthText != null) {
 			try {
@@ -109,6 +111,29 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 			} catch (NumberFormatException nfe) {
 				// ignore
 			}
+		}
+		
+		if(ruiControl.hasBackground()){
+			widget.setBackground(ruiControl.getBackgroundColor());
+		}
+		
+		widget.setMargin(new Insets(ruiControl.getMarginTop(), 
+								  ruiControl.getMarginLeft(), 
+								  ruiControl.getMarginBottom(), 
+								  ruiControl.getMarginRight()));
+		
+		
+		if(ruiControl.getBorderInsets().top == 0 &&
+		   ruiControl.getBorderInsets().left == 0 &&
+		   ruiControl.getBorderInsets().bottom == 0 &&
+		   ruiControl.getBorderInsets().right == 0){
+			widget.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+		} else {
+			widget.setBorder(BorderFactory.createMatteBorder(ruiControl.getBorderInsets().top, 
+					   ruiControl.getBorderInsets().left, 
+					   ruiControl.getBorderInsets().bottom, 
+					   ruiControl.getBorderInsets().right, 
+					   Color.BLACK));	
 		}
 
 	}

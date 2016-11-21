@@ -18,9 +18,6 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Oct 8, 2005
- */
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;

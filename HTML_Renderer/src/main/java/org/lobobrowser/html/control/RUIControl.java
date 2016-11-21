@@ -548,6 +548,15 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		RenderState rs = this.modelNode.getRenderState();
 		return rs == null ? null : rs.getColor();
 	}
+	
+	/**
+	 * Gets the background color.
+	 *
+	 * @return the background color
+	 */
+	public Color getBackgroundColor() {
+		return this.backgroundColor;
+	}
 
 	/**
 	 * Gets the widget.

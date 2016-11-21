@@ -54,13 +54,6 @@ public class InputLayout extends CommonWidgetLayout {
 		super(ADD_INLINE, true);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.lobobrowser.html.layout.CommonWidgetLayout#createRenderable(org.
-	 * lobobrowser .html.renderer.RBlockViewport,
-	 * org.lobobrowser.html.domimpl.HTMLElementImpl)
-	 */
 	@Override
 	protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 		HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
