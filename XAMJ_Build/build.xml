@@ -6,7 +6,7 @@ The Lobo Evolution
 
 	<description> Lobo Evolution</description>
 
-	<property name="lobo.version" value="0.99" />
+	<property name="lobo.version" value="0.99.1" />
 	<property name="build.dir" value="/tmp/lobo-build/" />
 	<property name="lobo.dir" value="${build.dir}/lobo-${lobo.version}" />
 	<property name="izpack.home" value="/tmp/IzPack/" />
@@ -27,7 +27,7 @@ The Lobo Evolution
 		<copy todir="${izpack.home}/bin/panels">
 			<fileset dir="${build.dir}" includes="RegistryPanel.jar" />
 		</copy>
-		<izpack input="install.xml" output="${build.dir}/install-lobo-${lobo.version}.jar" installerType="standard" basedir="${lobo.dir}" izPackDir="${izpack.home}" />
+		<izpack input="C:\Users\utente\workspace\Loboevolution\trunk\XAMJ_Build\install.xml" output="${build.dir}/install-lobo-${lobo.version}.jar" installerType="standard" basedir="${lobo.dir}" izPackDir="${izpack.home}" />
 	</target>
 
 	<target name="lobo_zip" depends="directory_structure">

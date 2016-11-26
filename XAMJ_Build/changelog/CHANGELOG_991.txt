@@ -1,0 +1,29 @@
+Version 0.99.1:
+------------
+- Added: css h1,h2,h3,h4,h5,h6 style sheet
+- Added: css position property RELATIVE 
+- Added: css property value INHERIT
+- Added: css property value INITIAL
+- Added  css border-width property vaue MEDIUM
+- Added  css properties min-width, max-width, min-height, max-heigth
+- Added: html tag DEL and INS
+- Added  html tag label
+- Added: html properties: for
+- Added: javascript objects DOMParser, XMLDocument and XMLSerializer
+- Added: java-based logging utility log4j2
+- Added: GNU General Public License 3
+- Added: New shortcut image
+- Added: folder \Lobo Evolution\logs
+
+- Fixed: HTTP response status code 301 Moved Permanently 
+- Fixed: Cookie date error format
+- Fixed: error when browser start without default url
+- Fixed: Unknown node #document-fragment
+- Fixed: installer error windows 64bit
+- Fixed: css background-repeat rendering issue
+- Fixed  input css support
+
+ LIBRARIES:
+- PDFrenderer commit 145
+- CSSParser 0.9.20
+- Mozilla Rhino 1.7.7.1
