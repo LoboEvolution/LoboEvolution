@@ -79,7 +79,6 @@ import org.w3c.dom.UserDataHandler;
  * This implementation wraps the DOM attribute node that contained the namespace
  * declaration.
  * 
- * @xsl.usage internal
  */
 
 public class XPathNamespaceImpl implements XPathNamespace {

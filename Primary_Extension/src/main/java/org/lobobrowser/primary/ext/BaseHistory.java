@@ -186,8 +186,6 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	 *
 	 * @param itemPrefix
 	 *            the item prefix
-	 * @param maxNumItems
-	 *            the max num items
 	 * @return the head match items
 	 */
 	public Collection<String> getHeadMatchItems(String itemPrefix) {

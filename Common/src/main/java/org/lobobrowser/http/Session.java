@@ -105,7 +105,7 @@ public class Session extends AbstractBean {
     private long bytesSoFar = 0;
 
     /**
-     * Creates a new Session. Automatically installs the {@link CookieManager}.
+     * Creates a new Session.
      */
     public Session() {
         this(true);

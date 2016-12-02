@@ -356,7 +356,6 @@ public class HtmlClientlet implements Clientlet {
 	 * localDocumentNotification event occurs, that object's appropriate method
 	 * is invoked.
 	 *
-	 * @see LocalDocumentNotificationEvent
 	 */
 	private static class LocalDocumentNotificationListener implements DocumentNotificationListener {
 

@@ -108,9 +108,6 @@ public class ImgControl extends BaseControl implements ImageListener {
 	 *
 	 * @param modelNode
 	 *            the model node
-	 * @throws MalformedURLException
-	 * @throws TranscoderException
-	 * @throws IOException
 	 */
 	public ImgControl(HTMLImageElementImpl modelNode) {
 		super(modelNode);

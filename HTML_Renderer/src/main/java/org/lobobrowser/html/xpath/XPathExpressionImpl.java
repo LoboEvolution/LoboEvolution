@@ -52,8 +52,6 @@ import org.w3c.dom.Node;
  * resolved XPath expression. </p>
  *
  * @see org.w3c.dom.xpath.XPathExpression
- *
- * @xsl.usage internal
  */
 public class XPathExpressionImpl implements XPathExpression {
 
@@ -131,8 +129,7 @@ public class XPathExpressionImpl implements XPathExpression {
 	 *                NOT_SUPPORTED_ERR: The Node is not a type permitted as an
 	 *                XPath context node.
 	 *
-	 * @see org.w3c.dom.xpath.XPathExpression#evaluate(Node, short, XPathResult)
-	 * @xsl.usage internal
+	 * @see org.w3c.dom.xpath.XPathExpression#evaluate(Node, short, Object)
 	 */
 	@Override
 	public Object evaluate(Node contextNode, short type, Object result) throws XPathException, DOMException {

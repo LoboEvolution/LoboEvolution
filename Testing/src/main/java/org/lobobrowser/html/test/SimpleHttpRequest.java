@@ -341,8 +341,6 @@ public class SimpleHttpRequest extends AbstractBean {
 	 *            The user name of the request (not supported.)
 	 * @param password
 	 *            The password of the request (not supported.)
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
 
 	public void open(final Method method, final URL url, boolean asyncFlag, final String userName,
@@ -381,8 +379,6 @@ public class SimpleHttpRequest extends AbstractBean {
 	 *
 	 * @param content
 	 *            POST content or <code>null</code> if there's no such content.
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
 	 */
 
 	public void send(final String content) {

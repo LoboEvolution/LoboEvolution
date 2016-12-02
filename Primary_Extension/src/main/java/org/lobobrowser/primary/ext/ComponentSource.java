@@ -606,8 +606,6 @@ public class ComponentSource implements NavigatorWindowListener {
 	 *
 	 * @param urlPrefix
 	 *            the url prefix
-	 * @param max
-	 *            the max
 	 * @return the potential matches
 	 */
 	public Collection<String> getPotentialMatches(String urlPrefix) {

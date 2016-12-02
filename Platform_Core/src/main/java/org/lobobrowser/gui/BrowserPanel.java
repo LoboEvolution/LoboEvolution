@@ -45,7 +45,6 @@ import org.apache.logging.log4j.Logger;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.main.ExtensionManager;
-import org.lobobrowser.main.PlatformInit;
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigationListener;
 import org.lobobrowser.ua.NavigatorEvent;
@@ -67,8 +66,6 @@ import org.lobobrowser.util.Urls;
  * <p>
  * Invoke {@link #navigate(String)} to load a document into the top frame of the
  * <code>BrowserPanel</code>.
- *
- * @see PlatformInit#init(boolean, boolean)
  */
 public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWindow, WindowCallback {
 

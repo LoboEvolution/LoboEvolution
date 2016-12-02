@@ -241,9 +241,6 @@ public class Response {
         return url;
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();

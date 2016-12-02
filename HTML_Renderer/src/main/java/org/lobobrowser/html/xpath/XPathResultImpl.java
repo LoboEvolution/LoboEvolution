@@ -60,8 +60,6 @@ import org.w3c.dom.traversal.NodeIterator;
  *
  * @see org.apache.xpath.objects.XObject
  * @see org.w3c.dom.xpath.XPathResult
- *
- * @xsl.usage internal
  */
 public class XPathResultImpl implements XPathResult, EventListener {
 
