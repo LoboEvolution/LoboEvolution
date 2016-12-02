@@ -27,7 +27,7 @@
 		<izpack input="install.xml" output="${build.dir}/install-lobo-${lobo.version}.jar" installerType="standard" basedir="${lobo.dir}" izPackDir="${izpack.home}" />
 	</target>
 	
-	<target name="lobo_zip" depends="directory_structure">
+	<target name="lobo_zip" depends="directory_structure,findbugs_compile">
 		<zip destfile="${build.dir}/lobo-distro-${lobo.version}.zip">
 			<zipfileset dir="${lobo.dir}" includes="**" prefix="lobo-distro-${lobo.version}" />
 		</zip>
@@ -102,7 +102,7 @@
 		<javac srcdir="../HTML_Renderer/bin/" source="1.8" destdir="../HTML_Renderer/bin/" classpath="Common:parser/bin/" debug="on" includeantruntime="false" />
 	</target>
 	
-	<target name="parser_classfiles" depends="findbugs_compile">
+	<target name="parser_classfiles">
 		<javac srcdir="../parser/bin/" source="1.8" destdir="../parser/bin/" classpath="" debug="on" includeantruntime="false" />
 	</target>
 	
@@ -115,7 +115,7 @@
 		<javac srcdir="../IzPack_RegistryPanel/bin/" source="1.8" destdir="../IzPack_RegistryPanel/bin/" classpath="XAMJ_Build/installer.jar" debug="on" includeantruntime="false" />
 	</target>
 	
-	<target name="findbugs_compile" description="Run code analysis over code to check for problems.">
+	<target name="findbugs_compile">
 		<taskdef name="findbugs" classpath="lib/findbugs-ant-3.0.0.jar" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" />
 		<mkdir dir="${report.findbugs.dir}" />
 		<findbugs home="." workHard="true" output="html" outputFile="${report.findbugs.dir}/findbugs.html">
