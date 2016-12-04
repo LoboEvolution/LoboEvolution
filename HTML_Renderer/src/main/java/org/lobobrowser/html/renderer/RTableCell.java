@@ -164,16 +164,6 @@ public class RTableCell extends RBlock {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.lobobrowser.html.renderer.RBlock#finalize()
-	 */
-	@Override
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-
 	/**
 	 * Sets the top left virtual cell.
 	 *

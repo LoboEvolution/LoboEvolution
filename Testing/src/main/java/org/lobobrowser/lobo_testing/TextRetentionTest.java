@@ -20,6 +20,8 @@
  */
 package org.lobobrowser.lobo_testing;
 
+import java.nio.charset.StandardCharsets;
+
 import org.lobobrowser.context.VolatileContentImpl;
 import org.lobobrowser.gui.BrowserPanel;
 import org.lobobrowser.main.PlatformInit;
@@ -40,7 +42,7 @@ public class TextRetentionTest {
 
 	public static void newTest(BrowserPanel panel) throws Exception {
 		panel.navigate(getNewURL());
-		System.gc();
+		Runtime.getRuntime().gc();;
 		Thread.sleep(5000);
 		System.out.println("### Free memory: " + Runtime.getRuntime().freeMemory());
 		System.out.println("### Total memory: " + Runtime.getRuntime().totalMemory());
@@ -62,7 +64,7 @@ public class TextRetentionTest {
 			buffer.append("<div>This is line # " + i + " of " + total + " lines.</div>");
 		}
 		buffer.append("</body>");
-		byte[] content = buffer.toString().getBytes();
+		byte[] content = buffer.toString().getBytes(StandardCharsets.UTF_8);
 		VolatileContentImpl vc = new VolatileContentImpl("text/html", content);
 		return vc.getURL().toExternalForm();
 	}

@@ -95,13 +95,11 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
     private void ensureThreadStarted() {
         if (!this.threadStarted) {
             synchronized (this) {
-                if (!this.threadStarted) {
-                    Thread t = new Thread(this, "StorageManager");
-                    t.setDaemon(true);
-                    t.setPriority(Thread.MIN_PRIORITY);
-                    t.start();
-                    this.threadStarted = true;
-                }
+            	Thread t = new Thread(this, "StorageManager");
+                t.setDaemon(true);
+                t.setPriority(Thread.MIN_PRIORITY);
+                t.start();
+                this.threadStarted = true;
             }
         }
     }

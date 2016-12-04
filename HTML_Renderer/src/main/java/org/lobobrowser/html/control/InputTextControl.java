@@ -64,7 +64,7 @@ public class InputTextControl extends BaseInputTextControl {
 
 		text.setVisible(modelNode.getHidden());
 		text.applyComponentOrientation(direction(modelNode.getDir()));
-		text.setEditable(new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
+		text.setEditable(Boolean.valueOf(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		text.setEnabled(!modelNode.getDisabled());		
 		text.setPlaceholder(modelNode.getPlaceholder());
 		text.setSelectionColor(Color.BLUE);

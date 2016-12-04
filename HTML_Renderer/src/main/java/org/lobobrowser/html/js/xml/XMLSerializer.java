@@ -23,6 +23,7 @@ package org.lobobrowser.html.js.xml;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -81,7 +82,7 @@ public class XMLSerializer extends AbstractScriptableDelegate{
 	private String documentToString(Document doc) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		elementToStream(doc.getDocumentElement(), baos);
-		return new String(baos.toByteArray());
+		return new String(baos.toByteArray(), Charset.defaultCharset());
 	}
 
 	private void elementToStream(Element element, OutputStream out) {

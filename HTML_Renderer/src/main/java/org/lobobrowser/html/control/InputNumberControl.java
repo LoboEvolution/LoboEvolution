@@ -81,9 +81,9 @@ public class InputNumberControl extends BaseInputTextControl {
 
 					if ((min != null && min.length() > 0) && (max != null && max.length() > 0)) {
 						try {
-							int intText = new Integer(num.getText());
-							int intMin = new Integer(min);
-							int intMax = new Integer(max);
+							int intText = Integer.valueOf(num.getText());
+							int intMin = Integer.valueOf(min).intValue();
+							int intMax = Integer.valueOf(max).intValue();
 
 							if (intText < intMin || intText > intMax) {
 								numeric.setBorder(BorderFactory.createLineBorder(Color.RED));

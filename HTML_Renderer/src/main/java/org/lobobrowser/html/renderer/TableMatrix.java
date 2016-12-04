@@ -154,16 +154,6 @@ public class TableMatrix implements CSSValuesProperties{
 		this.container = tableAsContainer;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#finalize()
-	 */
-	@Override
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-
 	/**
 	 * Gets the num rows.
 	 *

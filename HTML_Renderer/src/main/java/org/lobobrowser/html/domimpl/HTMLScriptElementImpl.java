@@ -29,6 +29,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.MissingResourceException;
@@ -39,6 +40,7 @@ import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.js.Executor;
+import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.Method;
 import org.lobobrowser.http.UserAgentContext;
@@ -206,8 +208,8 @@ HTMLScriptElement {
      */
     @Override
     public Object setUserData(String key, Object data, UserDataHandler handler) {
-        if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key)
-                && (data != Boolean.TRUE)) {
+    	boolean dataBool = (boolean)data;
+		if (HtmlParser.MODIFYING_KEY.equals(key) && !dataBool) {
             this.processScript();
         }
         return super.setUserData(key, data, handler);
@@ -354,7 +356,7 @@ HTMLScriptElement {
 			con.setRequestMethod("GET");
 			responseCode = con.getResponseCode();
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(),StandardCharsets.UTF_8));
 			String inputLine;
 
 			while ((inputLine = in.readLine()) != null) {

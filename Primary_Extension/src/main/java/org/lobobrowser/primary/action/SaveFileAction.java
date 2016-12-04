@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -97,7 +98,7 @@ public class SaveFileAction extends ActionPool {
 			String source = window.getTopFrame().getSourceCode();
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			try {
-				baos.write(source.getBytes());
+				baos.write(source.getBytes(StandardCharsets.UTF_8));
 				OutputStream ops = new FileOutputStream(selectedFile);
 				baos.writeTo(ops);
 				baos.flush();

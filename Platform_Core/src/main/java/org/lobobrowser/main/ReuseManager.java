@@ -36,6 +36,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -127,8 +128,7 @@ public class ReuseManager {
                         s.setTcpNoDelay(true);
                         OutputStream out = s.getOutputStream();
                         try {
-                            OutputStreamWriter writer = new OutputStreamWriter(
-                                    out);
+                            OutputStreamWriter writer = new OutputStreamWriter(out,StandardCharsets.UTF_8);
                             boolean hadPath = false;
                             for (int i = 0; i < args.length; i++) {
                                 String url = args[i];

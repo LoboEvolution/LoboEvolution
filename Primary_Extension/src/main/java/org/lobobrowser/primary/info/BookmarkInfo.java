@@ -68,7 +68,7 @@ public class BookmarkInfo implements Serializable {
 	 * @return the tags
 	 */
 	public String[] getTags() {
-		return tags;
+		return this.tags;
 	}
 
 	/**

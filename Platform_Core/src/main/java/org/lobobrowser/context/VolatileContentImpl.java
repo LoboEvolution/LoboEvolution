@@ -64,7 +64,7 @@ public class VolatileContentImpl implements ContentBuffer {
         this.contentType = contentType;
         this.bytes = bytes;
         synchronized (volatileMap) {
-            volatileMap.put(new Long(this.id), this);
+            volatileMap.put(Long.valueOf(this.id), this);
         }
     }
 
@@ -90,7 +90,7 @@ public class VolatileContentImpl implements ContentBuffer {
      */
     public static VolatileContentImpl getVolatileContent(long id) {
         synchronized (volatileMap) {
-            return (VolatileContentImpl) volatileMap.get(new Long(id));
+            return (VolatileContentImpl) volatileMap.get(Long.valueOf(id));
         }
     }
 

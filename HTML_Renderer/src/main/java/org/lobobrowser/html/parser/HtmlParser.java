@@ -114,7 +114,7 @@ public class HtmlParser {
 	 * A node <code>UserData</code> key used to tell nodes that their content
 	 * may be about to be modified. Elements could use this to temporarily
 	 * suspend notifications. The value set will be either
-	 * <code>Boolean.TRUE</code> or <code>Boolean.FALSE</code>.
+	 * <code>true</code> or <code>Boolean.FALSE</code>.
 	 */
 	public static final String MODIFYING_KEY = "cobra.suspend";
 
@@ -266,7 +266,7 @@ public class HtmlParser {
 	public void parse(LineNumberReader reader, Node parent) throws IOException, SAXException {
 		// Note: Parser does not clear document. It could be used incrementally.
 		try {
-			parent.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
+			parent.setUserData(MODIFYING_KEY, true, null);
 			try {
 				while (this.parseToken(parent, reader, null, new LinkedList<String>()) != TOKEN_EOD) {
 					;
@@ -352,7 +352,7 @@ public class HtmlParser {
 					boolean tagHasPrefix = localIndex > 0;
 					String localName = tagHasPrefix ? normalTag.substring(localIndex + 1) : normalTag;
 					Element element = doc.createElement(localName);
-					element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
+					element.setUserData(MODIFYING_KEY, true, null);
 					try {
 						if (!this.justReadTagEnd) {
 							while (this.readAttribute(reader, element)) {

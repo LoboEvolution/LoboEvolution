@@ -171,7 +171,7 @@ public class CacheInfo {
                             + HEADER_REQUEST_TIME + " header: " + this.url
                             + ".");
                 }
-                return new Long(0);
+                return Long.valueOf(0);
             }
             long requestTime = Long.parseLong(requestTimeText);
             return Urls.getExpiration(connection, requestTime);

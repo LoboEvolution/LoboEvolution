@@ -94,7 +94,7 @@ public class RListItem extends BaseRListElement {
 	}
 
 	/** The Constant UNSET. */
-	private static final Integer UNSET = new Integer(Integer.MIN_VALUE);
+	private static final Integer UNSET = Integer.valueOf(Integer.MIN_VALUE);
 
 	/** The value. */
 	private Integer value = null;

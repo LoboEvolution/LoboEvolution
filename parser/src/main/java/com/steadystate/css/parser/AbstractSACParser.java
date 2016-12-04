@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -425,7 +426,7 @@ abstract class AbstractSACParser implements Parser {
             return new CssCharStream(reader, 1, 1);
         }
         if (source.getURI() != null) {
-            final InputStreamReader reader = new InputStreamReader(new URL(source.getURI()).openStream());
+            final InputStreamReader reader = new InputStreamReader(new URL(source.getURI()).openStream(),StandardCharsets.UTF_8);
             return new CssCharStream(reader, 1, 1);
         }
         return null;

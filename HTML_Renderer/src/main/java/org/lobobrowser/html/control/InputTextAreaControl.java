@@ -79,7 +79,7 @@ public class InputTextAreaControl extends BaseInputControl {
 		widget.setVisible(modelNode.getHidden());
 		widget.applyComponentOrientation(direction(modelNode.getDir()));
 		widget.setEditable(
-				new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
+				Boolean.valueOf(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		widget.setEnabled(!modelNode.getDisabled());
 		widget.setPlaceholder(modelNode.getPlaceholder());
 		widget.setSelectionColor(Color.BLUE);

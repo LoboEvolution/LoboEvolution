@@ -339,9 +339,7 @@ RCollection {
             boolean triggerEvent, ModelNode limit) {
         super.onMouseMoved(event, x, y, triggerEvent, limit);
         BoundableRenderable oldRenderable = this.renderableWithMouse;
-        Renderable r = this.getRenderable(x, y);
-        BoundableRenderable newRenderable = r instanceof BoundableRenderable ? (BoundableRenderable) r
-                : null;
+        BoundableRenderable newRenderable = this.getRenderable(x, y);
         ModelNode newLimit;
         if (this.isContainedByNode()) {
             newLimit = this.modelNode;

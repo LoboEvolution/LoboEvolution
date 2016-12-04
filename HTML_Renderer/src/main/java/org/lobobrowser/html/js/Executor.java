@@ -169,7 +169,7 @@ public class Executor {
                 }
                 return ((Boolean) result).booleanValue();
             } catch (Throwable err) {
-            	err.getCause();
+            	logger.error(err);
                 return true;
             }
         } finally {

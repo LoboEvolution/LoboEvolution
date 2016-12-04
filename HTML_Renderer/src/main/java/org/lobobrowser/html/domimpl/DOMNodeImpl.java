@@ -46,6 +46,7 @@ import org.lobobrowser.html.dombl.StopVisitorException;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.domfilter.NodeFilter;
 import org.lobobrowser.html.domfilter.TextFilter;
+import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.renderstate.StyleSheetRenderState;
 import org.lobobrowser.http.UserAgentContext;
@@ -843,8 +844,8 @@ Node, ModelNode {
      */
     @Override
     public Object setUserData(String key, Object data, UserDataHandler handler) {
-        if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key)) {
-            boolean ns = (Boolean.TRUE == data);
+		if (HtmlParser.MODIFYING_KEY.equals(key)) {
+            boolean ns = (boolean) data;
             this.notificationsSuspended = ns;
             if (!ns) {
                 this.informNodeLoaded();

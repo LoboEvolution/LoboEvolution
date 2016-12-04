@@ -20,6 +20,8 @@
  */
 package org.lobobrowser.lobo_testing;
 
+import java.nio.charset.StandardCharsets;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,7 +47,7 @@ public class ImageRetentionTest {
 
 	public static void newTest(BrowserPanel panel) throws Exception {
 		panel.navigate(getNewURL());
-		System.gc();
+		Runtime.getRuntime().gc();;
 		Thread.sleep(5000);
 		System.out.println("### Free memory: " + Runtime.getRuntime().freeMemory());
 		System.out.println("### Total memory: " + Runtime.getRuntime().totalMemory());
@@ -83,7 +85,7 @@ public class ImageRetentionTest {
 		addImages(buffer, 20, BIG_IMAGE_URL);
 		addImages(buffer, 1, REMOTE_IMAGE_URL);
 		buffer.append("</body>");
-		byte[] content = buffer.toString().getBytes();
+		byte[] content = buffer.toString().getBytes(StandardCharsets.UTF_8);
 		VolatileContentImpl vc = new VolatileContentImpl("text/html", content);
 		return vc.getURL().toExternalForm();
 	}

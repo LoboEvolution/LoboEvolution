@@ -212,7 +212,7 @@ public class FontFactory {
         Integer fontSuperScript = (Integer) baseFont.getAttributes()
                 .get(TextAttribute.SUPERSCRIPT);
         if (fontSuperScript == null) {
-            fontSuperScript = new Integer(0);
+            fontSuperScript = Integer.valueOf(0);
         }
         if (fontSuperScript.equals(newSuperscript)) {
             return baseFont;

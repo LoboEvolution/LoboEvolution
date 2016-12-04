@@ -100,16 +100,12 @@ BoundableRenderable {
      * @see org.lobobrowser.html.renderer.BoundableRenderable#getGUIPoint(int, int)
      */
     @Override
-    public java.awt.Point getGUIPoint(int clientX, int clientY) {
+    public Point getGUIPoint(int clientX, int clientY) {
         Renderable parent = this.getParent();
-        if (parent instanceof BoundableRenderable) {
-            return ((BoundableRenderable) parent).getGUIPoint(clientX + this.x,
-                    clientY + this.y);
-        } else if (parent == null) {
-            return this.container.getGUIPoint(clientX + this.x, clientY
-                    + this.y);
+        if (parent !=null) {
+            return ((BoundableRenderable) parent).getGUIPoint(clientX + this.x, clientY + this.y);
         } else {
-            throw new IllegalStateException("parent=" + parent);
+            return this.container.getGUIPoint(clientX + this.x, clientY + this.y);
         }
     }
 
@@ -122,13 +118,10 @@ BoundableRenderable {
     @Override
     public Point getRenderablePoint(int guiX, int guiY) {
         Renderable parent = this.getParent();
-        if (parent instanceof BoundableRenderable) {
-            return ((BoundableRenderable) parent).getRenderablePoint(guiX
-                    - this.x, guiY - this.y);
-        } else if (parent == null) {
-            return new Point(guiX - this.x, guiY - this.y);
+        if (parent != null) {
+            return ((BoundableRenderable) parent).getRenderablePoint(guiX - this.x, guiY - this.y);
         } else {
-            throw new IllegalStateException("parent=" + parent);
+            return new Point(guiX - this.x, guiY - this.y);
         }
     }
 
@@ -448,17 +441,10 @@ BoundableRenderable {
     @Override
     public void repaint(int x, int y, int width, int height) {
         Renderable parent = this.parent;
-        if (parent instanceof BoundableRenderable) {
-            ((BoundableRenderable) parent).repaint(x + this.x, y + this.y,
-                    width, height);
+        if(parent!= null) {
+            ((BoundableRenderable) parent).repaint(x + this.x, y + this.y, width, height);
         } else if (parent == null) {
-            // Has to be top RBlock.
             this.container.repaint(x, y, width, height);
-        } else {
-            if (logger.isEnabled(Level.INFO)) {
-                logger.warn("repaint(): Don't know how to repaint " + this
-                        + ", parent being " + parent);
-            }
         }
     }
 

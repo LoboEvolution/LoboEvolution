@@ -558,7 +558,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 			fill.setFillStyle(fillStyle);
 			fill.setLineCap(getLineCap());
 			fill.setLineJoin(getLineJoin());
-			fill.setLineWidth(lineWidth > 1 ? lineWidth : lineWidth);
+			fill.setLineWidth(lineWidth);
 			listCanvasInfo.add(fill);
 		}
 
@@ -727,7 +727,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 			stroke.setStrokeStyle(strokeStyle);
 			stroke.setLineCap(getLineCap());
 			stroke.setLineJoin(getLineJoin());
-			stroke.setLineWidth(lineWidth > 1 ? lineWidth : lineWidth);
+			stroke.setLineWidth(lineWidth);
 			listCanvasInfo.add(stroke);
 		}
 	}

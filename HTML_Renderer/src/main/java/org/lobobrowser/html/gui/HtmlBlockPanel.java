@@ -540,11 +540,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		return new Dimension(600, 400);
 	}
 
-	@Override
-	protected void finalize() throws Throwable {
-		super.finalize();
-	}
-
 	/**
 	 * Copy.
 	 *

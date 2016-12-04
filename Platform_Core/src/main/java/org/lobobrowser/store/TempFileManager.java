@@ -77,9 +77,7 @@ public class TempFileManager {
         // Do it this way to allow other statics to initialize.
         if (instance == null) {
             synchronized (TempFileManager.class) {
-                if (instance == null) {
-                    instance = new TempFileManager();
-                }
+            	instance = new TempFileManager();
             }
         }
         return instance;

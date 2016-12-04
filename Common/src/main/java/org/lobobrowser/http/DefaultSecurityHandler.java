@@ -68,8 +68,8 @@ public class DefaultSecurityHandler implements SecurityHandler {
         messagePane.setContentType("text/html");
         messagePane.setEditable(false);
         messagePane.setOpaque(false);
-        messagePane.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES,
-                Boolean.TRUE);
+        messagePane.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES,true);
+        
         Action continueAction = new AbstractAction() {
             private static final long serialVersionUID = 1L;
 

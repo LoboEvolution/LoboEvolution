@@ -31,7 +31,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -299,10 +301,9 @@ public class IORoutines {
      */
     public static void saveStrings(File file, Collection list)
             throws IOException {
-        BufferedOutputStream bout = new BufferedOutputStream(
-                new FileOutputStream(file));
+        BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(file));
         try {
-            PrintWriter writer = new PrintWriter(bout);
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(bout,StandardCharsets.UTF_8));
             Iterator i = list.iterator();
             while (i.hasNext()) {
                 String text = (String) i.next();
@@ -328,8 +329,7 @@ public class IORoutines {
         List<String> list = new LinkedList<String>();
         InputStream in = new FileInputStream(file);
         try {
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(in));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in,StandardCharsets.UTF_8));
             String line;
             while ((line = reader.readLine()) != null) {
                 list.add(line);

@@ -26,6 +26,7 @@ package org.lobobrowser.primary.clientlets;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.jar.JarFile;
 
 /**
  * The Class ArchiveInfo.
@@ -56,32 +57,19 @@ public class ArchiveInfo {
 	}
 
 	/** The jar file. */
-	private java.util.jar.JarFile jarFile;
+	private JarFile jarFile;
 
 	/**
 	 * Gets the jar file.
 	 *
 	 * @return the jar file
 	 */
-	public java.util.jar.JarFile getJarFile() throws IOException {
+	public JarFile getJarFile() throws IOException {
 		if (this.jarFile == null) {
 			synchronized (this) {
-				if (this.jarFile == null) {
-					this.jarFile = new java.util.jar.JarFile(this.file);
-				}
+				this.jarFile = new JarFile(this.file);
 			}
 		}
 		return this.jarFile;
 	}
-
-	// private transient WarriorClassLoader classLoader = null;
-	//
-	// public WarriorClassLoader getClassLoader() throws IOException {
-	// synchronized(this) {
-	// if(this.classLoader == null) {
-	// this.classLoader = new ArchiveClassLoader(this.url, this.file);
-	// }
-	// return this.classLoader;
-	// }
-	// }
 }

@@ -52,9 +52,7 @@ public class ClientletFactory {
     public static ClientletFactory getInstance() {
         if (instance == null) {
             synchronized (ClientletFactory.class) {
-                if (instance == null) {
-                    instance = new ClientletFactory();
-                }
+            	instance = new ClientletFactory();
             }
         }
         return instance;

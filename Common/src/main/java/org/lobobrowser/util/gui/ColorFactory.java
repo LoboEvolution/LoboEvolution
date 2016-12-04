@@ -68,9 +68,7 @@ public class ColorFactory {
     public static final ColorFactory getInstance() {
         if (instance == null) {
             synchronized (ColorFactory.class) {
-                if (instance == null) {
                     instance = new ColorFactory();
-                }
             }
         }
         return instance;
@@ -141,9 +139,7 @@ public class ColorFactory {
                                 if (tok.hasMoreTokens()) {
                                     String astr = tok.nextToken().trim();
                                     try {
-                                        alpha = new Float(
-                                                255 * Float.parseFloat(astr))
-                                                        .intValue();
+                                        alpha = 255 * Integer.parseInt(astr);
                                     } catch (NumberFormatException nfe) {
                                         // ignore
                                     }

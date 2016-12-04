@@ -43,7 +43,7 @@ public class JavaCompilationLoop1 {
 
 	public static void newTest(BrowserPanel panel) throws Exception {
 		panel.navigate(getNewURL());
-		System.gc();
+		Runtime.getRuntime().gc();;
 		Thread.sleep(5000);
 		System.out.println("### Free memory: " + Runtime.getRuntime().freeMemory());
 		CacheInfo cacheInfo = CacheManager.getInstance().getTransientCacheInfo();

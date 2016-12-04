@@ -674,7 +674,7 @@ public class HtmlValues implements CSSValuesProperties{
 			case INHERIT:
 				parentFontSize = (int) LAFSettings.getInstance().getFontSize();
 				if (parentRenderState != null)
-					parentRenderState.getPreviousRenderState().getFont().getSize();
+					parentFontSize = parentRenderState.getPreviousRenderState().getFont().getSize();
 				return parentFontSize;
 			case INITIAL:
 				return getPixelSize(spec, parentRenderState, (int) LAFSettings.getInstance().getFontSize());

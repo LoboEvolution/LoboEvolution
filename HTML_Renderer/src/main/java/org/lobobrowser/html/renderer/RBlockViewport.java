@@ -1578,14 +1578,12 @@ public class RBlockViewport extends BaseRCollection {
 			Iterator i = others.iterator();
 			while (i.hasNext()) {
 				PositionedRenderable pr = (PositionedRenderable) i.next();
-				Object r = pr.getRenderable();
-				if (r instanceof BoundableRenderable) {
-					BoundableRenderable br = (BoundableRenderable) r;
-					Rectangle rbounds = br.getBounds();
-					if (clipBounds.intersects(rbounds)) {
-						matches.add(pr);
-					}
+				BoundableRenderable br = pr.getRenderable();
+				Rectangle rbounds = br.getBounds();
+				if (clipBounds.intersects(rbounds)) {
+					matches.add(pr);
 				}
+				
 			}
 			if (matches.size() == 0) {
 				return baseIterator;
@@ -1657,19 +1655,18 @@ public class RBlockViewport extends BaseRCollection {
 			// Must go in reverse order
 			for (index = size; --index >= 0;) {
 				PositionedRenderable pr = otherArray[index];
-				BoundableRenderable r = pr.getRenderable();
-				if (r.getZIndex() < 0) {
+				BoundableRenderable br = pr.getRenderable();
+				if (br.getZIndex() < 0) {
 					break;
 				}
-				if (r instanceof BoundableRenderable) {
-					BoundableRenderable br = r;
-					Rectangle rbounds = br.getBounds();
-					if (rbounds.contains(px, py)) {
-						if (result == null) {
-							result = new LinkedList();
-						}
-						result.add(br);
+				
+				Rectangle rbounds = br.getBounds();
+				
+				if (rbounds.contains(px, py)) {
+					if (result == null) {
+						result = new LinkedList();
 					}
+					result.add(br);
 				}
 			}
 		}
@@ -1694,16 +1691,13 @@ public class RBlockViewport extends BaseRCollection {
 			// Must go in reverse order
 			for (; index >= 0; index--) {
 				PositionedRenderable pr = otherArray[index];
-				Renderable r = pr.getRenderable();
-				if (r instanceof BoundableRenderable) {
-					BoundableRenderable br = (BoundableRenderable) r;
-					Rectangle rbounds = br.getBounds();
-					if (rbounds.contains(px, py)) {
-						if (result == null) {
-							result = new LinkedList();
-						}
-						result.add(br);
+				BoundableRenderable br = pr.getRenderable();
+				Rectangle rbounds = br.getBounds();
+				if (rbounds.contains(px, py)) {
+					if (result == null) {
+						result = new LinkedList();
 					}
+					result.add(br);
 				}
 			}
 		}
@@ -2208,21 +2202,23 @@ public class RBlockViewport extends BaseRCollection {
 		if (line == null) {
 			int y = line == null ? this.paddingInsets.top : line.getY();
 			this.placeFloat(floatInfo.getRenderable(), y, floatInfo.isLeftFloat());
-		} else if (line.getWidth() == 0) {
-			int y = line.getY();
-			this.placeFloat(floatInfo.getRenderable(), y, floatInfo.isLeftFloat());
-			int leftOffset = this.fetchLeftOffset(y);
-			int rightOffset = this.fetchRightOffset(y);
-			line.changeLimits(leftOffset, this.desiredWidth - leftOffset - rightOffset);
 		} else {
-			// These pending floats are positioned when
-			// lineDone() is called.
-			Collection<RFloatInfo> c = this.pendingFloats;
-			if (c == null) {
-				c = new LinkedList<RFloatInfo>();
-				this.pendingFloats = c;
+			if (line.getWidth() == 0) {
+				int y = line.getY();
+				this.placeFloat(floatInfo.getRenderable(), y, floatInfo.isLeftFloat());
+				int leftOffset = this.fetchLeftOffset(y);
+				int rightOffset = this.fetchRightOffset(y);
+				line.changeLimits(leftOffset, this.desiredWidth - leftOffset - rightOffset);
+			} else {
+				// These pending floats are positioned when
+				// lineDone() is called.
+				Collection<RFloatInfo> c = this.pendingFloats;
+				if (c == null) {
+					c = new LinkedList<RFloatInfo>();
+					this.pendingFloats = c;
+				}
+				c.add(floatInfo);
 			}
-			c.add(floatInfo);
 		}
 	}
 
@@ -2380,38 +2376,38 @@ public class RBlockViewport extends BaseRCollection {
 	private Boolean isFloatLimitImpl() {
 		Object parent = this.getOriginalOrCurrentParent();
 		if (!(parent instanceof RBlock)) {
-			return Boolean.TRUE;
+			return true;
 		}
 		RBlock blockParent = (RBlock) parent;
 		Object grandParent = blockParent.getOriginalOrCurrentParent();
 		if (!(grandParent instanceof RBlockViewport)) {
 			// Could be contained in a table, or it could
 			// be a list item, for example.
-			return Boolean.TRUE;
+			return true;
 		}
 		ModelNode node = this.modelNode;
 		if (!(node instanceof HTMLElementImpl)) {
 			// Can only be a document here.
-			return Boolean.TRUE;
+			return true;
 		}
 		HTMLElementImpl element = (HTMLElementImpl) node;
 		int position = getPosition(element);
 		if ((position == RenderState.POSITION_ABSOLUTE) || (position == RenderState.POSITION_FIXED)) {
-			return Boolean.TRUE;
+			return true;
 		}
 		element.getCurrentStyle();
 		RenderState rs = element.getRenderState();
 		int floatValue = rs == null ? RenderState.FLOAT_NONE : rs.getFloat();
 		if (floatValue != RenderState.FLOAT_NONE) {
-			return Boolean.TRUE;
+			return true;
 		}
 		int overflowX = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowX();
 		int overflowY = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowY();
 		if ((overflowX == RenderState.OVERFLOW_AUTO) || (overflowX == RenderState.OVERFLOW_SCROLL)
 				|| (overflowY == RenderState.OVERFLOW_AUTO) || (overflowY == RenderState.OVERFLOW_SCROLL)) {
-			return Boolean.TRUE;
+			return true;
 		}
-		return Boolean.FALSE;
+		return false;
 	}
 
 	/**

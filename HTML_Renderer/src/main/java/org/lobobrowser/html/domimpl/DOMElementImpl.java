@@ -260,7 +260,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 		if (draggable == null) {
 			return false;
 		} else {
-			return new Boolean(draggable);
+			return Boolean.valueOf(draggable);
 		}
 	}
 
@@ -284,7 +284,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 		if (content == null) {
 			return false;
 		} else {
-			return new Boolean(content);
+			return Boolean.valueOf(content);
 		}
 	}
 
@@ -316,7 +316,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 		if (itemscope == null) {
 			return false;
 		} else {
-			return new Boolean(itemscope);
+			return Boolean.valueOf(itemscope);
 		}
 	}
 

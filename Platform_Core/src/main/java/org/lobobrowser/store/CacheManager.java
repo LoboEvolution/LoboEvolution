@@ -93,9 +93,7 @@ public final class CacheManager implements Runnable {
         }
         if (instance == null) {
             synchronized (CacheManager.class) {
-                if (instance == null) {
-                    instance = new CacheManager();
-                }
+            	instance = new CacheManager();
             }
         }
         return instance;
@@ -375,14 +373,16 @@ public final class CacheManager implements Runnable {
     private void deleteRecursive(File rootDir) {
 
         File[] c = rootDir.listFiles();
-        for (File file : c) {
-            if (file.isDirectory()) {
-                deleteRecursive(file);
-                file.delete();
-            } else {
-                file.delete();
-            }
-        }
+		if (c != null) {
+			for (File file : c) {
+				if (file.isDirectory()) {
+					deleteRecursive(file);
+					file.delete();
+				} else {
+					file.delete();
+				}
+			}
+		}
     }
 
     /**

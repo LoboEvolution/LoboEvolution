@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 import org.apache.logging.log4j.LogManager;
@@ -165,7 +166,7 @@ public class DataURLConnection extends HttpURLConnection {
 				this.content = DatatypeConverter.parseBase64Binary(value);
 			} else {
 				value = URLDecoder.decode(value, charset);
-				this.content = value.getBytes();
+				this.content = value.getBytes(StandardCharsets.UTF_8);
 			}
 		} catch (IOException e) {
 			logger.error(e.getMessage());

@@ -36,6 +36,7 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.AccessControlContext;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -288,7 +289,7 @@ public final class RequestEngine {
 			// can be picky about that (namely, java.net).
 			byte[] postContent = bufOut.toByteArray();
 			if (loggerInfo) {
-				logger.info("postData(): Will post: " + new String(postContent));
+				logger.info("postData(): Will post: " + new String(postContent,StandardCharsets.UTF_8));
 			}
 			if (connection instanceof HttpURLConnection) {
 				if (boolSettings.isHttpUseChunkedEncodingPOST()) {

@@ -102,11 +102,11 @@ public class FilteredCollection implements Collection<Object> {
                 while (sourceIterator.hasNext()) {
                     Object item = filter.decode(sourceIterator.next());
                     if (item != null) {
-                        hasNext = Boolean.TRUE;
+                        hasNext = true;
                         this.next = item;
                     }
                 }
-                hasNext = Boolean.FALSE;
+                hasNext = false;
             }
             
             /*

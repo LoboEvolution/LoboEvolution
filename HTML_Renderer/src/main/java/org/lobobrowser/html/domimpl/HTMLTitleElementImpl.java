@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobobrowser.html.parser.HtmlParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.UserDataHandler;
 
@@ -45,8 +46,8 @@ public class HTMLTitleElementImpl extends HTMLElementImpl {
      */
     @Override
     public Object setUserData(String key, Object data, UserDataHandler handler) {
-        if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key)
-                && (data == Boolean.FALSE)) {
+    	boolean dataBool = (boolean)data;
+		if (HtmlParser.MODIFYING_KEY.equals(key) && !dataBool) {
             Document document = this.document;
             if (document instanceof HTMLDocumentImpl) {
                 String textContent = this.getTextContent();

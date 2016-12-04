@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -229,7 +230,7 @@ public class Response {
                     : new String(responseBody, charset);
         } catch (UnsupportedEncodingException ex) {
         	logger.log(Level.ERROR, ex);
-            return responseBody == null ? "" : new String(responseBody);
+            return responseBody == null ? "" : new String(responseBody,StandardCharsets.UTF_8);
         }
     }
 

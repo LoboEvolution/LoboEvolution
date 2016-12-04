@@ -71,21 +71,27 @@ public class StorageManagerCommon {
     public void saveSettings(String name, Serializable data)
             throws IOException {
         File dir = this.getSettingsDirectory();
+        boolean rslt = true;
+        
         if (!dir.exists()) {
-            dir.mkdirs();
+        	rslt = dir.mkdirs();
         }
-        File file = new File(dir, name);
-        OutputStream out = new FileOutputStream(file);
-        BufferedOutputStream bos = new BufferedOutputStream(out);
-        ObjectOutputStream oos = new ObjectOutputStream(bos);
-        try {
-            oos.writeObject(data);
-            oos.flush();
-        } finally {
-            oos.close();
-            bos.close();
-            out.close();
-        }
+        
+        if(rslt){
+	        
+        	File file = new File(dir, name);
+	        OutputStream out = new FileOutputStream(file);
+	        BufferedOutputStream bos = new BufferedOutputStream(out);
+	        ObjectOutputStream oos = new ObjectOutputStream(bos);
+	        try {
+	            oos.writeObject(data);
+	            oos.flush();
+	        } finally {
+	            oos.close();
+	            bos.close();
+	            out.close();
+	        }
+        }   
     }
     
     /**

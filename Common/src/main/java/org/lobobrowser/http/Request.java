@@ -597,7 +597,7 @@ public class Request extends AbstractBean {
 	 */
     public void setBody(String body) {
         stringBody = body;
-        setBody(body == null ? null : body.getBytes());
+        setBody(body == null ? null : body.getBytes(StandardCharsets.UTF_8));
     }
     
     /** Sets the body.
@@ -673,8 +673,8 @@ public class Request extends AbstractBean {
      *             the exception
      */
     private static String base64Encode(String s) throws Exception {
-        return new String(
-                Base64.getEncoder().encode(s.getBytes(StandardCharsets.UTF_8)));
+    	byte[] encode = Base64.getEncoder().encode(s.getBytes(StandardCharsets.UTF_8));
+    	return new String(encode,StandardCharsets.UTF_8);
     }
     
     /**
@@ -688,6 +688,6 @@ public class Request extends AbstractBean {
      */
     private static String base64Decode(String s) throws Exception {
         byte[] asBytes = Base64.getDecoder().decode(s);
-        return new String(new String(asBytes, "utf-8"));
+        return new String(asBytes, StandardCharsets.UTF_8);
     }
 }

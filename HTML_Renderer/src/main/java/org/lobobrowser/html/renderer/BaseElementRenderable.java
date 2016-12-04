@@ -32,6 +32,8 @@ import java.awt.Toolkit;
 import java.awt.image.ImageObserver;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Collection;
@@ -69,7 +71,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		implements RElement, RenderableContainer, ImageObserver,CSSValuesProperties {
 
 	/** The Constant INVALID_SIZE. */
-	protected static final Integer INVALID_SIZE = new Integer(Integer.MIN_VALUE);
+	protected static final Integer INVALID_SIZE = Integer.valueOf(Integer.MIN_VALUE);
 
 	/**
 	 * A collection of all GUI components added by descendents.
@@ -258,7 +260,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		if ((dw == INVALID_SIZE) || (actualAvailWidth != this.lastAvailWidthForDeclared)) {
 			this.lastAvailWidthForDeclared = actualAvailWidth;
 			int dwInt = this.getDeclaredWidthImpl(renderState, actualAvailWidth);
-			dw = dwInt == -1 ? null : new Integer(dwInt);
+			dw = dwInt == -1 ? null : Integer.valueOf(dwInt);
 			this.declaredWidth = dw;
 		}
 		return dw;
@@ -353,7 +355,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		if ((dh == INVALID_SIZE) || (actualAvailHeight != this.lastAvailHeightForDeclared)) {
 			this.lastAvailHeightForDeclared = actualAvailHeight;
 			int dhInt = this.getDeclaredHeightImpl(renderState, actualAvailHeight);
-			dh = dhInt == -1 ? null : new Integer(dhInt);
+			dh = dhInt == -1 ? null : Integer.valueOf(dhInt);
 			this.declaredHeight = dh;
 		}
 		return dh;
@@ -624,13 +626,22 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		}
 		BackgroundInfo binfo = rs.getBackgroundInfo();
 		this.backgroundColor = binfo == null ? null : binfo.getBackgroundColor();
-		URL backgroundImageUri = binfo == null ? null : binfo.getBackgroundImage();
-		if (backgroundImageUri == null) {
-			this.backgroundImage = null;
-			this.lastBackgroundImageUri = null;
-		} else if (!backgroundImageUri.equals(this.lastBackgroundImageUri)) {
-			this.lastBackgroundImageUri = backgroundImageUri;
-			this.loadBackgroundImage(backgroundImageUri);
+		URL backgroundImage = binfo == null ? null : binfo.getBackgroundImage();
+		
+		
+		try {
+			if (backgroundImage == null) {
+				this.backgroundImage = null;
+				this.lastBackgroundImageUri = null;
+			} else {
+				URI backgroundImageUri = backgroundImage.toURI();
+				if (!backgroundImageUri.equals(this.lastBackgroundImageUri)) {
+					this.lastBackgroundImageUri = backgroundImage;
+					this.loadBackgroundImage(backgroundImage);
+				}
+			}
+		} catch (URISyntaxException e) {
+			logger.error(e);
 		}
 		AbstractCSS2Properties props = rootElement.getCurrentStyle();
 		if (props == null) {

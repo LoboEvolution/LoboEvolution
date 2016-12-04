@@ -30,6 +30,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.EventListener;
 import java.util.EventObject;
@@ -258,7 +259,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 		}
 
 		// Initialize title
-		if (window instanceof Frame) {
+		if (window != null) {
 			NavigationEntry currentEntry = this.getCurrentNavigationEntry();
 			if (currentEntry != null) {
 				String title = currentEntry.getTitle();
@@ -267,12 +268,13 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 				}
 				((Frame) window).setTitle(title);
 			}
+			
+			// Make visible and bring to front
+			if (!window.isVisible()) {
+				window.setVisible(true);
+			}
+			window.toFront();
 		}
-		// Make visible and bring to front
-		if (!window.isVisible()) {
-			window.setVisible(true);
-		}
-		window.toFront();
 	}
 
 	/**
@@ -338,7 +340,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 			buffer.append(lineBreak);
 		}
 		Properties props = new Properties();
-		byte[] bytes = buffer.toString().getBytes();
+		byte[] bytes = buffer.toString().getBytes(StandardCharsets.UTF_8);
 		ByteArrayInputStream in = new ByteArrayInputStream(bytes);
 		try {
 			props.load(in);
@@ -558,7 +560,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 		if (frame == this.framePanel) {
 			String title = this.getWindowTitle(response, content);
 			Object window = this.browserWindow;
-			if (window instanceof Frame) {
+			if (window != null) {
 				((Frame) window).setTitle(title);
 			}
 		}

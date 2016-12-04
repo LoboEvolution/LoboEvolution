@@ -49,9 +49,7 @@ public class JavaClassWrapperFactory {
 	public static JavaClassWrapperFactory getInstance() {
 		if (instance == null) {
 			synchronized (JavaClassWrapperFactory.class) {
-				if (instance == null) {
 					instance = new JavaClassWrapperFactory();
-				}
 			}
 		}
 		return instance;

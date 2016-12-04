@@ -78,7 +78,7 @@ final class NativeBoolean extends IdScriptableObject
                     : ScriptRuntime.toBoolean(args[0]);
             }
             if (thisObj == null) {
-                // new Boolean(val) creates a new boolean object.
+                // Boolean.valueOf(val) creates a new boolean object.
                 return new NativeBoolean(b);
             }
             // Boolean(val) converts val to a boolean.
@@ -97,7 +97,7 @@ final class NativeBoolean extends IdScriptableObject
             return value ? "true" : "false";
 
           case Id_toSource:
-            return value ? "(new Boolean(true))" : "(new Boolean(false))";
+            return value ? "(Boolean.valueOf(true))" : "(Boolean.valueOf(false))";
 
           case Id_valueOf:
             return ScriptRuntime.wrapBoolean(value);

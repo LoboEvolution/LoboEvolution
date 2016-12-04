@@ -69,33 +69,33 @@ public class LAFSettings implements Serializable {
     /** The Constant instance. */
     private static final LAFSettings instance;
     /** The Constant ACRYL. */
-    public static String ACRYL = "Acryl";
+    public final static String ACRYL = "Acryl";
     /** The Constant AERO. */
-    public static String AERO = "Aero";
+    public final static String AERO = "Aero";
     /** The Constant ALUMINIUM. */
-    public static String ALUMINIUM = "Aluminium";
+    public final static String ALUMINIUM = "Aluminium";
     /** The Constant BERNSTEIN. */
-    public static String BERNSTEIN = "Bernstein";
+    public final static String BERNSTEIN = "Bernstein";
     /** The Constant FAST. */
-    public static String FAST = "Fast";
+    public final static String FAST = "Fast";
     /** The Constant GRAPHITE. */
-    public static String GRAPHITE = "Graphite";
+    public final static String GRAPHITE = "Graphite";
     /** The Constant HIFI. */
-    public static String HIFI = "HiFi";
+    public final static String HIFI = "HiFi";
     /** The Constant LUNA. */
-    public static String LUNA = "Luna";
+    public final static String LUNA = "Luna";
     /** The Constant MCWIN. */
-    public static String MCWIN = "McWin";
+    public final static String MCWIN = "McWin";
     /** The Constant MINT. */
-    public static String MINT = "Mint";
+    public final static String MINT = "Mint";
     /** The Constant NOIRE. */
-    public static String NOIRE = "Noire";
+    public final static String NOIRE = "Noire";
     /** The Constant SMART. */
-    public static String SMART = "Smart";
+    public final static String SMART = "Smart";
     /** The Constant TEXTURE. */
-    public static String TEXTURE = "Texture";
+    public final static String TEXTURE = "Texture";
     /** The Constant TIMES_NEW_ROMAN. */
-    public static String TIMES_NEW_ROMAN = "TimesNewRoman";
+    public final static String TIMES_NEW_ROMAN = "TimesNewRoman";
     /** The FONTS . */
     public static String[] FONTS = { "Aharoni", "Andalus", "AngsanaNew",
             "AngsanaUPC", "AngsanaUPC", "Aparajita", "ArabicTypesetting",

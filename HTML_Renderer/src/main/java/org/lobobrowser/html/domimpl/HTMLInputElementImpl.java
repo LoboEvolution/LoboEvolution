@@ -34,31 +34,31 @@ import org.lobobrowser.w3c.html.HTMLInputElement;
 public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLInputElement {
 
 	/** The image. */
-	private final String IMAGE = "image";
+	private String IMAGE = "image";
 
 	/** The submit. */
-	private final String SUBMIT = "submit";
+	private String SUBMIT = "submit";
 
 	/** The text. */
-	private final String TEXT = "tetx";
+	private String TEXT = "tetx";
 
 	/** The password. */
-	private final String PASSWORD = "password";
+	private String PASSWORD = "password";
 
 	/** The hidden. */
-	private final String HIDDEN = "hidden";
+	private String HIDDEN = "hidden";
 
 	/** The radio. */
-	private final String RADIO = "radio";
+	private String RADIO = "radio";
 
 	/** The checkbox. */
-	private final String CHECKBOX = "checkbox";
+	private String CHECKBOX = "checkbox";
 
 	/** The reset. */
-	private final String RESET = "reset";
+	private String RESET = "reset";
 
 	/** The file. */
-	private final String FILE = "file";
+	private String FILE = "file";
 
 	/**
 	 * Instantiates a new HTML input element impl.
