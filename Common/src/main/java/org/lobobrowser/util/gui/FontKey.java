@@ -79,7 +79,7 @@ public class FontKey {
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals(Object other) {
+    public boolean equals(final Object other) {
         if (other == this) {
             // Quick check.
             return true;
@@ -148,7 +148,7 @@ public class FontKey {
 	 * @param cachedHash
 	 *            the new cached hash
 	 */
-    public void setCachedHash(int cachedHash) {
+    public void setCachedHash(final int cachedHash) {
         this.cachedHash = cachedHash;
     }
     

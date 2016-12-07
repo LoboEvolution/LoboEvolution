@@ -31,7 +31,6 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Optional;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

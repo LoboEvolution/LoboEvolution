@@ -61,8 +61,8 @@ public class Strings {
      *            the starts with digits
      * @return the int
      */
-    public static int compareVersions(String version1, String version2,
-            boolean startsWithDigits) {
+    public static int compareVersions(final String version1, final String version2,
+            final boolean startsWithDigits) {
         if (version1 == null) {
             return version2 == null ? 0 : -1;
         } else if (version2 == null) {
@@ -117,7 +117,7 @@ public class Strings {
      *            the text
      * @return the string
      */
-    public static String leadingDigits(String text) {
+    public static String leadingDigits(final String text) {
         int length = text.length();
         StringBuffer buffer = null;
         for (int i = 0; i < length; i++) {
@@ -140,7 +140,7 @@ public class Strings {
      *            the text
      * @return the string
      */
-    public static String leadingNonDigits(String text) {
+    public static String leadingNonDigits(final String text) {
         int length = text.length();
         StringBuffer buffer = null;
         for (int i = 0; i < length; i++) {
@@ -163,7 +163,7 @@ public class Strings {
      *            the text
      * @return true, if is blank
      */
-    public static boolean isBlank(String text) {
+    public static boolean isBlank(final String text) {
         return (text == null) || "".equals(text);
     }
     
@@ -174,7 +174,7 @@ public class Strings {
      *            the text
      * @return the int
      */
-    public static int countLines(String text) {
+    public static int countLines(final String text) {
         int startIdx = 0;
         int lineCount = 1;
         for (;;) {
@@ -195,7 +195,7 @@ public class Strings {
      *            the id
      * @return true, if is java identifier
      */
-    public static boolean isJavaIdentifier(String id) {
+    public static boolean isJavaIdentifier(final String id) {
         if (id == null) {
             return false;
         }
@@ -221,7 +221,7 @@ public class Strings {
      *            the text
      * @return the java string literal
      */
-    public static String getJavaStringLiteral(String text) {
+    public static String getJavaStringLiteral(final String text) {
         StringBuffer buf = new StringBuffer();
         buf.append('"');
         int len = text.length();
@@ -259,7 +259,7 @@ public class Strings {
      *            the candidate id
      * @return the java identifier
      */
-    public static String getJavaIdentifier(String candidateID) {
+    public static String getJavaIdentifier(final String candidateID) {
         int len = candidateID.length();
         StringBuffer buf = new StringBuffer();
         for (int i = 0; i < len; i++) {
@@ -285,7 +285,7 @@ public class Strings {
      *            the source
      * @return the m d5
      */
-    public static String getMD5(String source) {
+    public static String getMD5(final String source) {
         byte[] bytes;
         try {
             bytes = source.getBytes("UTF-8");
@@ -318,7 +318,7 @@ public class Strings {
      * @throws UnsupportedEncodingException
      *             the unsupported encoding exception
      */
-    public static String getHash32(String source)
+    public static String getHash32(final String source)
             throws UnsupportedEncodingException {
         String md5 = getMD5(source);
         return md5.substring(0, 8);
@@ -333,7 +333,7 @@ public class Strings {
      * @throws UnsupportedEncodingException
      *             the unsupported encoding exception
      */
-    public static String getHash64(String source)
+    public static String getHash64(final String source)
             throws UnsupportedEncodingException {
         String md5 = getMD5(source);
         return md5.substring(0, 16);
@@ -348,7 +348,7 @@ public class Strings {
      *            the ch
      * @return the int
      */
-    public static int countChars(String text, char ch) {
+    public static int countChars(final String text, final char ch) {
         int len = text.length();
         int count = 0;
         for (int i = 0; i < len; i++) {
@@ -400,7 +400,7 @@ public class Strings {
      *            the text
      * @return the string
      */
-    public static String unquote(String text) {
+    public static String unquote(final String text) {
         if (text.startsWith("\"") && text.endsWith("\"")) {
             // substring works on indices
             return text.substring(1, text.length() - 1);
@@ -415,7 +415,7 @@ public class Strings {
      *            the phrase
      * @return the string[]
      */
-    public static String[] split(String phrase) {
+    public static String[] split(final String phrase) {
         int length = phrase.length();
         ArrayList<String> wordList = new ArrayList<String>();
         StringBuffer word = null;
@@ -453,7 +453,7 @@ public class Strings {
      *            the max length
      * @return the string
      */
-    public static String truncate(String text, int maxLength) {
+    public static String truncate(final String text, final int maxLength) {
         if (text == null) {
             return null;
         }
@@ -472,7 +472,7 @@ public class Strings {
      *            the quotes
      * @return the string
      */
-    public static String strictHtmlEncode(String rawText, boolean quotes) {
+    public static String strictHtmlEncode(final String rawText, final boolean quotes) {
         StringBuffer output = new StringBuffer();
         int length = rawText.length();
         for (int i = 0; i < length; i++) {
@@ -508,7 +508,7 @@ public class Strings {
      *            the raw text
      * @return the string
      */
-    public static String trimForAlphaNumDash(String rawText) {
+    public static String trimForAlphaNumDash(final String rawText) {
         int length = rawText.length();
         for (int i = 0; i < length; i++) {
             char ch = rawText.charAt(i);
@@ -528,7 +528,7 @@ public class Strings {
      *            the original
      * @return the CRLF string
      */
-    public static String getCRLFString(String original) {
+    public static String getCRLFString(final String original) {
         if (original == null) {
             return null;
         }

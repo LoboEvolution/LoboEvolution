@@ -49,7 +49,7 @@ public class ArrayUtilities {
      *            the length
      * @return the iterator
      */
-    public static Iterator iterator(Object[] array, int offset, int length) {
+    public static Iterator iterator(final Object[] array, final int offset, final int length) {
         return new ArrayIterator(array, offset, length);
     }
     
@@ -74,7 +74,7 @@ public class ArrayUtilities {
          * @param length
          *            the length
          */
-        public ArrayIterator(Object[] array, int offset, int length) {
+        ArrayIterator(final Object[] array, final int offset, final int length) {
             this.array = array;
             this.offset = offset;
             this.top = offset + length;

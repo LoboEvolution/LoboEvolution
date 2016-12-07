@@ -44,7 +44,7 @@ public class EqualsIgnoreCase extends AbstractFunction {
      * @see javax.xml.xpath.XPathFunction#evaluate(java.util.List)
      */
     @Override
-    public Object evaluate(List args) throws XPathFunctionException {
+    public Object evaluate(final List args) throws XPathFunctionException {
         NodeList nodes = (NodeList) args.get(0);
         String s1 = nodes.getLength() > 0 ? nodes.item(0).getLocalName() : "";
         String s2 = getStringParam(args.get(1));

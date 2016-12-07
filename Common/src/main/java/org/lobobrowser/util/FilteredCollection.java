@@ -45,8 +45,8 @@ public class FilteredCollection implements Collection<Object> {
      * @param filter
      *            the filter
      */
-    public FilteredCollection(Collection<Object> sourceCollection,
-            ObjectFilter filter) {
+    public FilteredCollection(final Collection<Object> sourceCollection,
+            final ObjectFilter filter) {
         this.filter = filter;
         this.sourceCollection = sourceCollection;
     }
@@ -87,7 +87,7 @@ public class FilteredCollection implements Collection<Object> {
      * @see java.util.Collection#contains(java.lang.Object)
      */
     @Override
-    public boolean contains(Object o) {
+    public boolean contains(final Object o) {
         return this.sourceCollection.contains(this.filter.encode(o));
     }
     
@@ -163,7 +163,7 @@ public class FilteredCollection implements Collection<Object> {
      * @see java.util.Collection#toArray(java.lang.Object[])
      */
     @Override
-    public Object[] toArray(Object[] a) {
+    public Object[] toArray(final Object[] a) {
         Collection<Object> bucket = new ArrayList<Object>();
         Iterator<Object> i = this.sourceCollection.iterator();
         while (i.hasNext()) {
@@ -180,7 +180,7 @@ public class FilteredCollection implements Collection<Object> {
      * @see java.util.Collection#add(java.lang.Object)
      */
     @Override
-    public boolean add(Object o) {
+    public boolean add(final Object o) {
         return this.sourceCollection.add(this.filter.encode(o));
     }
     
@@ -189,7 +189,7 @@ public class FilteredCollection implements Collection<Object> {
      * @see java.util.Collection#remove(java.lang.Object)
      */
     @Override
-    public boolean remove(Object o) {
+    public boolean remove(final Object o) {
         return this.sourceCollection.remove(this.filter.encode(o));
     }
     
@@ -198,7 +198,7 @@ public class FilteredCollection implements Collection<Object> {
      * @see java.util.Collection#containsAll(java.util.Collection)
      */
     @Override
-    public boolean containsAll(Collection c) {
+    public boolean containsAll(final Collection c) {
         Iterator i = c.iterator();
         while (i.hasNext()) {
             if (!this.contains(i.next())) {
@@ -213,7 +213,7 @@ public class FilteredCollection implements Collection<Object> {
      * @see java.util.Collection#addAll(java.util.Collection)
      */
     @Override
-    public boolean addAll(Collection c) {
+    public boolean addAll(final Collection c) {
         boolean result = false;
         Iterator i = c.iterator();
         while (i.hasNext()) {
@@ -229,7 +229,7 @@ public class FilteredCollection implements Collection<Object> {
      * @see java.util.Collection#removeAll(java.util.Collection)
      */
     @Override
-    public boolean removeAll(Collection c) {
+    public boolean removeAll(final Collection c) {
         boolean result = false;
         Iterator i = c.iterator();
         while (i.hasNext()) {
@@ -245,7 +245,7 @@ public class FilteredCollection implements Collection<Object> {
      * @see java.util.Collection#retainAll(java.util.Collection)
      */
     @Override
-    public boolean retainAll(Collection c) {
+    public boolean retainAll(final Collection c) {
         boolean result = false;
         Object[] values = this.toArray();
         for (int i = 0; i < values.length; i++) {

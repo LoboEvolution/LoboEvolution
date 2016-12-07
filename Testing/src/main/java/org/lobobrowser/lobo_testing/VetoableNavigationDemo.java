@@ -23,10 +23,7 @@ package org.lobobrowser.lobo_testing;
 import java.awt.Component;
 import java.awt.event.WindowEvent;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;

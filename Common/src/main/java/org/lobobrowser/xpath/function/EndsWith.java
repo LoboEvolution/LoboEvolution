@@ -42,7 +42,7 @@ public class EndsWith extends AbstractFunction {
      * @see javax.xml.xpath.XPathFunction#evaluate(java.util.List)
      */
     @Override
-    public Object evaluate(List args) throws XPathFunctionException {
+    public Object evaluate(final List args) throws XPathFunctionException {
         String s1 = getStringParam(args.get(0));
         String s2 = getStringParam(args.get(1));
         return s1.endsWith(s2);

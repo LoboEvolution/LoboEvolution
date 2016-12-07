@@ -44,7 +44,7 @@ public class Objects {
      *            the obj2
      * @return true, if successful
      */
-    public static boolean equals(Object obj1, Object obj2) {
+    public static boolean equals(final Object obj1, final Object obj2) {
         return obj1 == null ? (obj2 == null) : (obj1.equals(obj2));
     }
     
@@ -55,7 +55,7 @@ public class Objects {
      *            the clazz
      * @return true, if is box class
      */
-    public static boolean isBoxClass(Class clazz) {
+    public static boolean isBoxClass(final Class clazz) {
         return (clazz == Integer.class) || (clazz == Boolean.class)
                 || (clazz == Double.class) || (clazz == Float.class)
                 || (clazz == Long.class) || (clazz == Byte.class)
@@ -71,7 +71,7 @@ public class Objects {
      *            the types
      * @return true, if successful
      */
-    public static boolean areAssignableTo(Object[] objects, Class[] types) {
+    public static boolean areAssignableTo(final Object[] objects, final Class[] types) {
         int length = objects.length;
         if (length != types.length) {
             return false;
@@ -93,7 +93,7 @@ public class Objects {
      *            the clazz
      * @return true, if is assignable or box
      */
-    public static boolean isAssignableOrBox(Object value, Class clazz) {
+    public static boolean isAssignableOrBox(final Object value, final Class clazz) {
         if (clazz.isInstance(value)) {
             return true;
         }
@@ -125,7 +125,7 @@ public class Objects {
      *            the clazz
      * @return true, if is numeric
      */
-    private static boolean isNumeric(Class clazz) {
+    private static boolean isNumeric(final Class clazz) {
         return Number.class.isAssignableFrom(clazz) || (clazz.isPrimitive()
                 && ((clazz == int.class) || (clazz == double.class)
                         || (clazz == byte.class) || (clazz == short.class)
@@ -139,7 +139,7 @@ public class Objects {
      *            the value
      * @return true, if is numeric
      */
-    private static boolean isNumeric(Object value) {
+    private static boolean isNumeric(final Object value) {
         if (value == null) {
             return false;
         }

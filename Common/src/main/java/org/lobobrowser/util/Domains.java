@@ -328,7 +328,7 @@ public class Domains {
      *            the host name
      * @return true, if is valid cookie domain
      */
-    public static boolean isValidCookieDomain(String domain, String hostName) {
+    public static boolean isValidCookieDomain(String domain, final String hostName) {
         String plainDomain;
         if (!domain.startsWith(".")) {
             // Valid domains must start with a dot
@@ -364,7 +364,7 @@ public class Domains {
      *            A host name in lower case.
      * @return true, if successful
      */
-    public static boolean endsWithGTLD(String host) {
+    public static boolean endsWithGTLD(final String host) {
         Iterator<String> i = gTLDs.iterator();
         while (i.hasNext()) {
             String ending = i.next();
@@ -382,7 +382,7 @@ public class Domains {
      *            the name
      * @return true, if is likely host name
      */
-    public static boolean isLikelyHostName(String name) {
+    public static boolean isLikelyHostName(final String name) {
         String nameTL = name.toLowerCase();
         if (nameTL.startsWith("www.")) {
             return true;
@@ -405,7 +405,7 @@ public class Domains {
      *            the host name
      * @return the possible domains
      */
-    public static Collection<String> getPossibleDomains(String hostName) {
+    public static Collection<String> getPossibleDomains(final String hostName) {
         Collection<String> domains = new LinkedList<String>();
         domains.add(hostName);
         int dotIdx = hostName.indexOf('.', 1);

@@ -24,10 +24,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.net.URL;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -38,6 +34,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.EtchedBorder;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 import org.lobobrowser.gui.BrowserPanel;
 import org.lobobrowser.gui.ResponseEvent;
 import org.lobobrowser.gui.ResponseListener;

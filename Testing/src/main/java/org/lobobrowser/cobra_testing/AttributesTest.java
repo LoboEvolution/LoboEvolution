@@ -25,13 +25,10 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.logging.log4j.LogManager;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.test.SimpleUserAgentContext;
 import org.lobobrowser.http.UserAgentContext;

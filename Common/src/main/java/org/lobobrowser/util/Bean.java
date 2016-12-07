@@ -23,7 +23,6 @@
  */
 package org.lobobrowser.util;
 
-// import java.util.logging.*;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -48,7 +47,7 @@ public class Bean {
      * @param clazz
      *            the clazz
      */
-    public Bean(Class<?> clazz) {
+    public Bean(final Class<?> clazz) {
         this.clazz = clazz;
     }
     
@@ -65,7 +64,7 @@ public class Bean {
      * @throws IntrospectionException
      *             the introspection exception
      */
-    private void populateDescriptors(Map<String, PropertyDescriptor> map, Class<?> clazz)
+    private void populateDescriptors(final Map<String, PropertyDescriptor> map, final Class<?> clazz)
             throws IntrospectionException {
         BeanInfo beanInfo = Introspector.getBeanInfo(clazz);
         PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
@@ -89,7 +88,7 @@ public class Bean {
      * @throws IntrospectionException
      *             the introspection exception
      */
-    public PropertyDescriptor getPropertyDescriptor(String propertyName)
+    public PropertyDescriptor getPropertyDescriptor(final String propertyName)
             throws IntrospectionException {
         synchronized (this) {
             if (this.propertyDescriptors == null) {
@@ -141,8 +140,8 @@ public class Bean {
      * @throws Exception
      *             the exception
      */
-    public void setPropertyForFQN(Object receiver,
-            String fullyQualifiedPropertyName, Object value) throws Exception {
+    public void setPropertyForFQN(final Object receiver,
+            final String fullyQualifiedPropertyName, final Object value) throws Exception {
         int idx = fullyQualifiedPropertyName.indexOf('.');
         if (idx == -1) {
             PropertyDescriptor pd = this
@@ -186,7 +185,7 @@ public class Bean {
      *            the target type
      * @return the object
      */
-    private static Object convertValue(Object value, Class<?> targetType) {
+    private static Object convertValue(Object value, final Class<?> targetType) {
         boolean targetString = targetType.isAssignableFrom(String.class);
         
         if (targetString) {

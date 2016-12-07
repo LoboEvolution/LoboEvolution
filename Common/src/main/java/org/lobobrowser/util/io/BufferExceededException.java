@@ -42,7 +42,7 @@ public class BufferExceededException extends Exception {
      * @param cause
      *            the cause
      */
-    public BufferExceededException(String message, Throwable cause) {
+    public BufferExceededException(final String message, final Throwable cause) {
         super(message, cause);
     }
     
@@ -52,7 +52,7 @@ public class BufferExceededException extends Exception {
      * @param message
      *            the message
      */
-    public BufferExceededException(String message) {
+    public BufferExceededException(final String message) {
         super(message);
     }
     
@@ -62,7 +62,7 @@ public class BufferExceededException extends Exception {
      * @param cause
      *            the cause
      */
-    public BufferExceededException(Throwable cause) {
+    public BufferExceededException(final Throwable cause) {
         super(cause);
     }
 }

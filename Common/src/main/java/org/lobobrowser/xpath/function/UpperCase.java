@@ -42,7 +42,7 @@ public class UpperCase extends AbstractFunction {
      * @see javax.xml.xpath.XPathFunction#evaluate(java.util.List)
      */
     @Override
-    public Object evaluate(List args) throws XPathFunctionException {
+    public Object evaluate(final List args) throws XPathFunctionException {
         return getStringParam(args.get(0)).toUpperCase();
     }
 }

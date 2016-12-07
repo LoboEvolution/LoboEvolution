@@ -108,8 +108,8 @@ public class FontFactory {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public void registerFont(String fontName, int fontFormat,
-            InputStream fontStream) throws FontFormatException, IOException {
+    public void registerFont(final String fontName, final int fontFormat,
+            final InputStream fontStream) throws FontFormatException, IOException {
         Font f = Font.createFont(fontFormat, fontStream);
         synchronized (this) {
             this.registeredFonts.put(fontName.toLowerCase(), f);
@@ -123,7 +123,7 @@ public class FontFactory {
      * @param fontName
      *            The font name to be removed.
      */
-    public void unregisterFont(String fontName) {
+    public void unregisterFont(final String fontName) {
         synchronized (this) {
             this.registeredFonts.remove(fontName.toLowerCase());
         }
@@ -148,9 +148,9 @@ public class FontFactory {
      *            the superscript
      * @return the font
      */
-    public Font getFont(String fontFamily, String fontStyle, String fontVariant,
-            String fontWeight, float fontSize, Set locales,
-            Integer superscript) {
+    public Font getFont(final String fontFamily, final String fontStyle, final String fontVariant,
+            final String fontWeight, final float fontSize, final Set locales,
+            final Integer superscript) {
         FontKey key = new FontKey(fontFamily, fontStyle, fontVariant,
                 fontWeight, fontSize, locales, superscript);
         synchronized (this) {
@@ -176,7 +176,7 @@ public class FontFactory {
 	 * @param defaultFontName
 	 *            the new default font name
 	 */
-    public void setDefaultFontName(String defaultFontName) {
+    public void setDefaultFontName(final String defaultFontName) {
         if (defaultFontName == null) {
             throw new IllegalArgumentException(
                     "defaultFontName cannot be null");
@@ -191,7 +191,7 @@ public class FontFactory {
      *            the key
      * @return the font
      */
-    private final Font createFont(FontKey key) {
+    private final Font createFont(final FontKey key) {
         Font font = createFont_Impl(key);
         return superscriptFont(font, key.getSuperscript());
     }
@@ -205,7 +205,7 @@ public class FontFactory {
      *            the new superscript
      * @return the font
      */
-    public static Font superscriptFont(Font baseFont, Integer newSuperscript) {
+    public static Font superscriptFont(final Font baseFont, final Integer newSuperscript) {
         if (newSuperscript == null) {
             return baseFont;
         }
@@ -230,7 +230,7 @@ public class FontFactory {
      *            the key
      * @return the font
      */
-    private final Font createFont_Impl(FontKey key) {
+    private final Font createFont_Impl(final FontKey key) {
         String fontNames = key.getFontFamily();
         String matchingFace = null;
         Set fontFamilies = this.fontFamilies;
@@ -303,7 +303,7 @@ public class FontFactory {
      *            the size
      * @return the font
      */
-    private Font createFont(String name, int style, int size) {
+    private Font createFont(final String name, final int style, final int size) {
         return StyleContext.getDefaultStyleContext().getFont(name, style, size);
     }
 }

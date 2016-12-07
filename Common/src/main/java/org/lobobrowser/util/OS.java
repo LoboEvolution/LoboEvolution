@@ -55,7 +55,7 @@ public class OS {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static void launchBrowser(String url) throws IOException {
+    public static void launchBrowser(final String url) throws IOException {
         String cmdLine;
         if (isWindows()) {
             cmdLine = "rundll32 url.dll,FileProtocolHandler " + url;
@@ -77,7 +77,7 @@ public class OS {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static void launchPath(String path) throws IOException {
+    public static void launchPath(final String path) throws IOException {
         if (isWindows()) {
             Runtime.getRuntime()
                     .exec(new String[] { "cmd.exe", "/c", "start", "\"title\"",

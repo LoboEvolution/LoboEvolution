@@ -22,7 +22,6 @@ package org.lobobrowser.html.js;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

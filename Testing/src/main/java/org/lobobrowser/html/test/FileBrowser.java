@@ -94,11 +94,6 @@ class FileBrowser {
     private JRadioButton isDirectory;
     private JRadioButton isFile;
 
-    /* GUI options/containers for new File/Directory creation.  Created lazily. */
-    private JPanel newFilePanel;
-    private JRadioButton newTypeFile;
-    private JTextField name;
-
     public Container getGui() {
         if (gui==null) {
             gui = new JPanel(new BorderLayout(3,3));
@@ -321,30 +316,6 @@ class FileBrowser {
         tree.setSelectionInterval(0,0);
     }
 
-    private TreePath findTreePath(File find) {
-        for (int ii=0; ii<tree.getRowCount(); ii++) {
-            TreePath treePath = tree.getPathForRow(ii);
-            Object object = treePath.getLastPathComponent();
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode)object;
-            File nodeFile = (File)node.getUserObject();
-
-            if (nodeFile==find) {
-                return treePath;
-            }
-        }
-        // not found!
-        return null;
-    }
-
-    private void showErrorMessage(String errorMessage, String errorTitle) {
-        JOptionPane.showMessageDialog(
-            gui,
-            errorMessage,
-            errorTitle,
-            JOptionPane.ERROR_MESSAGE
-            );
-    }
-
     private void showThrowable(Throwable t) {
         t.printStackTrace();
         JOptionPane.showMessageDialog(
@@ -510,7 +481,11 @@ class FileBrowser {
 /** A TableModel to hold File[]. */
 class FileTableModel extends AbstractTableModel {
 
-    private File[] files;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private File[] files;
     private FileSystemView fileSystemView = FileSystemView.getFileSystemView();
     private String[] columns = {
         "Icon",
@@ -605,7 +580,12 @@ class FileTableModel extends AbstractTableModel {
 /** A TreeCellRenderer for a File. */
 class FileTreeCellRenderer extends DefaultTreeCellRenderer {
 
-    private FileSystemView fileSystemView;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private FileSystemView fileSystemView;
 
     private JLabel label;
 

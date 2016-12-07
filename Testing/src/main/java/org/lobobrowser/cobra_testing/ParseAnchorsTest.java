@@ -25,8 +25,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;

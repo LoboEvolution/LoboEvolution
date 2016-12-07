@@ -67,8 +67,8 @@ public class Cookie extends NameValuePair {
      * @param expires
      *            the expires
      */
-    public Cookie(String name, String value, String path, String domain,
-            long expires) {
+    public Cookie(final String name, final String value, final String path, final String domain,
+            final long expires) {
         super(name, value);
         this.path = path;
         this.domain = domain;
@@ -100,7 +100,7 @@ public class Cookie extends NameValuePair {
 	 * @param comment
 	 *            the new comment
 	 */
-    public void setComment(String comment) {
+    public void setComment(final String comment) {
         String old = getComment();
         this.comment = comment;
         firePropertyChange("comment", old, getComment());
@@ -127,7 +127,7 @@ public class Cookie extends NameValuePair {
 	 * @param domain
 	 *            the new domain
 	 */
-    public void setDomain(String domain) {
+    public void setDomain(final String domain) {
         String old = getDomain();
         this.domain = domain;
         firePropertyChange("domain", old, getDomain());
@@ -146,7 +146,7 @@ public class Cookie extends NameValuePair {
 	 * @param age
 	 *            the new max age
 	 */
-    public void setMaxAge(int age) {
+    public void setMaxAge(final int age) {
         long old = getMaxAge();
         this.maxAge = age;
         firePropertyChange("maxAge", old, getMaxAge());
@@ -165,7 +165,7 @@ public class Cookie extends NameValuePair {
 	 * @param path
 	 *            the new path
 	 */
-    public void setPath(String path) {
+    public void setPath(final String path) {
         String old = getPath();
         this.path = path;
         firePropertyChange("path", old, getPath());
@@ -184,7 +184,7 @@ public class Cookie extends NameValuePair {
 	 * @param secure
 	 *            the new secure
 	 */
-    public void setSecure(boolean secure) {
+    public void setSecure(final boolean secure) {
         boolean old = isSecure();
         this.secure = secure;
         firePropertyChange("secure", old, isSecure());
@@ -203,7 +203,7 @@ public class Cookie extends NameValuePair {
 	 * @param version
 	 *            the new version
 	 */
-    public void setVersion(int version) {
+    public void setVersion(final int version) {
         int old = getVersion();
         this.version = version;
         firePropertyChange("version", old, getVersion());

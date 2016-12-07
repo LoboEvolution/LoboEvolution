@@ -8,7 +8,11 @@ package org.mozilla.javascript;
 
 public class NativeSymbol extends IdScriptableObject {
 
-    public static final String SPECIES_PROPERTY = "@@species";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static final String SPECIES_PROPERTY = "@@species";
     public static final String ITERATOR_PROPERTY = "@@iterator";
     public static final String TO_STRING_TAG_PROPERTY = "@@toStringTag";
 

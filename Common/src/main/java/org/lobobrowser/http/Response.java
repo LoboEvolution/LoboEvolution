@@ -98,8 +98,8 @@ public class Response {
      * Creates a new instance of Response. Response is an immutable object,
      * hence this large constructor.
      */
-    Response(StatusCode statusCode, String statusText, byte[] responseBody,
-            String charset, Set<Header> headers, String baseUrl) {
+    Response(final StatusCode statusCode, final String statusText, byte[] responseBody,
+            final String charset, final Set<Header> headers, final String baseUrl) {
         if (statusCode == null) {
             throw new NullPointerException("statusCode cannot be null");
         }
@@ -107,8 +107,7 @@ public class Response {
         if (responseBody == null) {
             responseBody = new byte[0];
         }
-        
-        
+       
         this.statusCode = statusCode;
         this.statusText = statusText;
         this.responseBody = responseBody;
@@ -135,7 +134,7 @@ public class Response {
      *            the name to look for. This must not be null.
      * @return the Header with the given name.
      */
-    public Header getHeader(String name) {
+    public Header getHeader(final String name) {
         if (name == null) {
             throw new NullPointerException("name cannot be null");
         }

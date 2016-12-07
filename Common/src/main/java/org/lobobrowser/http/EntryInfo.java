@@ -68,7 +68,7 @@ public class EntryInfo {
 	 * @param valueClass
 	 *            the new value class
 	 */
-    public void setValueClass(Class<?> valueClass) {
+    public void setValueClass(final Class<?> valueClass) {
         this.valueClass = valueClass;
     }
 
@@ -85,7 +85,7 @@ public class EntryInfo {
 	 * @param approximateSize
 	 *            the new approximate size
 	 */
-    public void setApproximateSize(int approximateSize) {
+    public void setApproximateSize(final int approximateSize) {
         this.approximateSize = approximateSize;
     }
  }

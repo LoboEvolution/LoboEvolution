@@ -34,7 +34,7 @@ public class NetRoutines {
      *            the host
      * @return true, if is local address
      */
-    public static boolean isLocalAddress(String host) {
+    public static boolean isLocalAddress(final String host) {
         try {
             InetAddress address = InetAddress.getByName(host);
             return address.isAnyLocalAddress() || address.isLinkLocalAddress()

@@ -45,7 +45,7 @@ public class OrderedValue implements Comparable<Object>, java.io.Serializable {
      * @param approxSize
      *            the approx size
      */
-    public OrderedValue(Object key, Object value, int approxSize) {
+    public OrderedValue(final Object key, final Object value, final int approxSize) {
         this.value = value;
         this.touch();
     }
@@ -62,7 +62,7 @@ public class OrderedValue implements Comparable<Object>, java.io.Serializable {
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override
-    public int compareTo(Object arg0) {
+    public int compareTo(final Object arg0) {
         if (this == arg0) {
             return 0;
         }
@@ -95,7 +95,7 @@ public class OrderedValue implements Comparable<Object>, java.io.Serializable {
 	 * @param timestamp
 	 *            the new timestamp
 	 */
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(final long timestamp) {
         this.timestamp = timestamp;
     }
     
@@ -112,7 +112,7 @@ public class OrderedValue implements Comparable<Object>, java.io.Serializable {
 	 * @param value
 	 *            the new value
 	 */
-    public void setValue(Object value) {
+    public void setValue(final Object value) {
         this.value = value;
     }
     
@@ -129,7 +129,7 @@ public class OrderedValue implements Comparable<Object>, java.io.Serializable {
 	 * @param key
 	 *            the new key
 	 */
-    public void setKey(Object key) {
+    public void setKey(final Object key) {
         this.key = key;
     }
     
@@ -146,7 +146,7 @@ public class OrderedValue implements Comparable<Object>, java.io.Serializable {
 	 * @param approximateSize
 	 *            the new approximate size
 	 */
-    public void setApproximateSize(int approximateSize) {
+    public void setApproximateSize(final int approximateSize) {
         this.approximateSize = approximateSize;
     }
 }

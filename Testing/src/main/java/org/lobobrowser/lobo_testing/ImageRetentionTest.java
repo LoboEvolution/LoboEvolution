@@ -23,8 +23,6 @@ package org.lobobrowser.lobo_testing;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.context.VolatileContentImpl;
 import org.lobobrowser.gui.BrowserPanel;
 import org.lobobrowser.main.PlatformInit;

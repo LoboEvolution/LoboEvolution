@@ -44,7 +44,7 @@ public class InputProgressEvent extends EventObject {
      * @param progress
      *            the progress
      */
-    public InputProgressEvent(Object arg0, int progress) {
+    public InputProgressEvent(final Object arg0, final int progress) {
         super(arg0);
         this.progress = progress;
     }

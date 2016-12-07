@@ -46,7 +46,7 @@ public class Items {
      *            the name
      * @return the item
      */
-    public static Object getItem(Object source, String name) {
+    public static Object getItem(final Object source, final String name) {
         Map<Object,Map<String,Object>> sm = sourceMap;
         synchronized (sm) {
             Map<String,Object> itemMap = (Map<String,Object>) sm.get(source);
@@ -67,7 +67,7 @@ public class Items {
      * @param value
      *            the value
      */
-    public static void setItem(Object source, String name, Object value) {
+    public static void setItem(final Object source, final String name, final Object value) {
         Map<Object,Map<String,Object>> sm = sourceMap;
         synchronized (sm) {
             Map<String,Object> itemMap = (Map<String,Object>) sm.get(source);

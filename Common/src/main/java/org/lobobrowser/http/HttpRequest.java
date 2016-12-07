@@ -107,7 +107,7 @@ public class HttpRequest extends AbstractBean {
 	 * @param s
 	 *            the new session
 	 */
-    public void setSession(Session s) {
+    public void setSession(final Session s) {
         Session old = getSession();
         this.s = s;
         firePropertyChange("session", old, getSession());
@@ -127,7 +127,7 @@ public class HttpRequest extends AbstractBean {
 	 * @param listener
 	 *            the new on ready state change
 	 */
-    public void setOnReadyStateChange(PropertyChangeListener listener) {
+    public void setOnReadyStateChange(final PropertyChangeListener listener) {
         PropertyChangeListener old = getOnReadyStateChange();
         removeReadyStateChangeListener(old);
         addReadyStateChangeListener(listener);
@@ -154,14 +154,14 @@ public class HttpRequest extends AbstractBean {
     /**
      * Initializes the HttpRequestImpl prior to sending a request.
      */
-    public void open(String method, URL url) {
+    public void open(final String method, final URL url) {
         open(method, url, true);
     }
 
     /**
      * Initializes the HttpRequestImpl prior to sending a request.
      */
-    public void open(String method, URL url, boolean asyncFlag) {
+    public void open(final String method, final URL url, final boolean asyncFlag) {
         open(method, url, asyncFlag, null, null);
     }
 
@@ -187,8 +187,8 @@ public class HttpRequest extends AbstractBean {
      * @param password
      *            Defaults to null
      */
-    public void open(String method, URL url, boolean asyncFlag, String username,
-            String password) {
+    public void open(final String method, final URL url, final boolean asyncFlag, final String username,
+            final String password) {
         if (worker != null && (readyState == ReadyState.SENT
                 || readyState == ReadyState.RECEIVING)) {
             throw new IllegalStateException(
@@ -210,7 +210,7 @@ public class HttpRequest extends AbstractBean {
      * @param header
      * @param value
      */
-    public void setRequestHeader(String header, String value) {
+    public void setRequestHeader(final String header, final String value) {
         if (getReadyState() != ReadyState.OPEN) {
             throw new IllegalStateException(
                     "The HttpRequestImpl must be opened prior to "
@@ -340,7 +340,7 @@ public class HttpRequest extends AbstractBean {
     /**
      * @param content
      */
-    public void send(String content) {
+    public void send(final String content) {
         if (readyState != ReadyState.OPEN) {
             throw new IllegalStateException(
                     "HttpRequestImpl must be in an OPEN state before "
@@ -353,7 +353,7 @@ public class HttpRequest extends AbstractBean {
     /**
      * @param dom
      */
-    public void send(Document dom) {
+    public void send(final Document dom) {
         // convert the dom to a String, and send that
         if (dom == null) {
             send((String) null);
@@ -410,7 +410,7 @@ public class HttpRequest extends AbstractBean {
      *            the label of the response header to retreive.
      * @return the response header corrosponding to the provided label
      */
-    public String getResponseHeader(String headerLabel) {
+    public String getResponseHeader(final String headerLabel) {
         if (readyState == ReadyState.RECEIVING
                 || readyState == ReadyState.LOADED) {
             Header header = worker.response.getHeader(headerLabel);
@@ -475,7 +475,7 @@ public class HttpRequest extends AbstractBean {
 	 * @param flag
 	 *            the new follows redirects
 	 */
-    public void setFollowsRedirects(boolean flag) {
+    public void setFollowsRedirects(final boolean flag) {
         if (readyState != ReadyState.OPEN) {
             throw new IllegalStateException(
                     "The request must be OPEN before setting the follows redirects flag");
@@ -519,7 +519,7 @@ public class HttpRequest extends AbstractBean {
      *            the name to look for. This must not be null.
      * @return the Parameter with the given name.
      */
-    public Parameter getParameter(String name) {
+    public Parameter getParameter(final String name) {
         return req.getParameter(name);
     }
 
@@ -528,7 +528,7 @@ public class HttpRequest extends AbstractBean {
 	 * @param param
 	 *            the new parameter
 	 */
-    public void setParameter(Parameter param) {
+    public void setParameter(final Parameter param) {
         req.setParameter(param);
     }
 
@@ -541,7 +541,7 @@ public class HttpRequest extends AbstractBean {
      * @param value
      *            the value of the parameter
      */
-    public void setParameter(String name, String value) {
+    public void setParameter(final String name, final String value) {
         setParameter(new Parameter(name, value));
     }
 
@@ -558,17 +558,17 @@ public class HttpRequest extends AbstractBean {
 	 * @param params
 	 *            the new parameters
 	 */
-    public void setParameters(Parameter... params) {
+    public void setParameters(final Parameter... params) {
         req.setParameters(params);
     }
 
     // -------------- Event Listener
-    public void addReadyStateChangeListener(PropertyChangeListener listener) {
+    public void addReadyStateChangeListener(final PropertyChangeListener listener) {
         super.addPropertyChangeListener("readyState", listener);
     }
 
     public void removeReadyStateChangeListener(
-            PropertyChangeListener listener) {
+            final PropertyChangeListener listener) {
         super.removePropertyChangeListener("readyState", listener);
     }
 
@@ -589,7 +589,7 @@ public class HttpRequest extends AbstractBean {
      */
 
     // --------------------------------------------------- Protected Methods
-    protected AsyncWorker createAsyncWorker(String content) {
+    protected AsyncWorker createAsyncWorker(final String content) {
         return new AsyncWorker();
     }
 
@@ -619,7 +619,7 @@ public class HttpRequest extends AbstractBean {
      * as DOM, JSONObject, etc) when the response has been fully read. There is
      * no need to call super.handleResponse(txt).
      */
-    protected void handleResponse(String responseText) throws Exception {
+    protected void handleResponse(final String responseText) throws Exception {
     }
 
     // ---------------------------------------------- Private helper methods
@@ -628,7 +628,7 @@ public class HttpRequest extends AbstractBean {
 	 * @param state
 	 *            the new ReadyState of this HttpRequestImpl
 	 */
-    private void setReadyState(ReadyState state) {
+    private void setReadyState(final ReadyState state) {
         ReadyState old = this.readyState;
         this.readyState = state;
         firePropertyChange("readyState", old, this.readyState);
@@ -641,7 +641,7 @@ public class HttpRequest extends AbstractBean {
 	 *            the new if the status attribute is not available it MUST raise
 	 *            an exception
 	 */
-    private void setStatus(int status) {
+    private void setStatus(final int status) {
         int old = this.status;
         this.status = status;
         firePropertyChange("status", old, this.status);
@@ -654,7 +654,7 @@ public class HttpRequest extends AbstractBean {
 	 *            the new if the statusText attribute is not available, it MUST
 	 *            raise an exception
 	 */
-    private void setStatusText(String text) {
+    private void setStatusText(final String text) {
         String old = this.statusText;
         this.statusText = text;
         firePropertyChange("statusText", old, this.statusText);
@@ -665,7 +665,7 @@ public class HttpRequest extends AbstractBean {
 	 * @param dom
 	 *            the new response xml
 	 */
-    private void setResponseXML(Document dom) {
+    private void setResponseXML(final Document dom) {
         Document old = this.responseXML;
         this.responseXML = dom;
         firePropertyChange("responseXML", old, this.responseXML);
@@ -698,7 +698,7 @@ public class HttpRequest extends AbstractBean {
         /** The response. */
         private Response response;
 
-        private void sendRequest(Session s, String data) {
+        private void sendRequest(final Session s, final String data) {
             this.s = s == null ? new Session() : s;
             safeSetReadyState(ReadyState.SENT);
             this.data = data;

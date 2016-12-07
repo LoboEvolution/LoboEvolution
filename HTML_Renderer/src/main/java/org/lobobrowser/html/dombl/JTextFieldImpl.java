@@ -27,7 +27,6 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyListener;
 
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 

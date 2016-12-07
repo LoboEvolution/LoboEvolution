@@ -48,7 +48,7 @@ public class NameValuePair extends AbstractBean implements Cloneable {
      * @param value
      *            the value
      */
-    public NameValuePair(String name, String value) {
+    public NameValuePair(final String name, final String value) {
         this.name = name;
         this.value = value;
     }
@@ -58,7 +58,7 @@ public class NameValuePair extends AbstractBean implements Cloneable {
 	 * @param name
 	 *            the new name
 	 */
-    public void setName(String name) {
+    public void setName(final String name) {
         String old = getName();
         this.name = name;
         firePropertyChange("name", old, name);
@@ -77,7 +77,7 @@ public class NameValuePair extends AbstractBean implements Cloneable {
 	 * @param value
 	 *            the new value
 	 */
-    public void setValue(String value) {
+    public void setValue(final String value) {
         String old = getValue();
         this.value = value;
         firePropertyChange("value", old, value);

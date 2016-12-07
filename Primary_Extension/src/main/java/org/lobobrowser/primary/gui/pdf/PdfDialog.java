@@ -44,7 +44,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
@@ -358,7 +357,6 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	/**
 	 * Initialize this PdfDialog by creating the GUI.
 	 */
-	@SuppressWarnings("deprecation")
 	protected void init() {
 		page = new PagePanel();
 		page.addKeyListener(this);

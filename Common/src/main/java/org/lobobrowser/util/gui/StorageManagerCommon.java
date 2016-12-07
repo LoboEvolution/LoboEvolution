@@ -68,7 +68,7 @@ public class StorageManagerCommon {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public void saveSettings(String name, Serializable data)
+    public void saveSettings(final String name, final Serializable data)
             throws IOException {
         File dir = this.getSettingsDirectory();
         boolean rslt = true;
@@ -107,7 +107,7 @@ public class StorageManagerCommon {
      * @throws ClassNotFoundException
      *             the class not found exception
      */
-    public Serializable retrieveSettings(String name, ClassLoader classLoader)
+    public Serializable retrieveSettings(final String name, final ClassLoader classLoader)
             throws IOException, ClassNotFoundException {
         File dir = this.getSettingsDirectory();
         if (!dir.exists()) {

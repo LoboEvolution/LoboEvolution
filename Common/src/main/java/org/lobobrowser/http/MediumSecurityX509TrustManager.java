@@ -48,8 +48,8 @@ public class MediumSecurityX509TrustManager implements X509TrustManager {
     /**
      * Constructor for EasyX509TrustManager.
      */
-    public MediumSecurityX509TrustManager(String host, SecurityHandler handler,
-            KeyStore keystore)
+    public MediumSecurityX509TrustManager(final String host, final SecurityHandler handler,
+            final KeyStore keystore)
                     throws NoSuchAlgorithmException, KeyStoreException {
         super();
         this.host = host;
@@ -69,8 +69,8 @@ public class MediumSecurityX509TrustManager implements X509TrustManager {
      *      String authType)
      */
     @Override
-    public void checkClientTrusted(X509Certificate[] certificates,
-            String authType) throws CertificateException {
+    public void checkClientTrusted(final X509Certificate[] certificates,
+            final String authType) throws CertificateException {
         standardTrustManager.checkClientTrusted(certificates, authType);
     }
     
@@ -79,8 +79,8 @@ public class MediumSecurityX509TrustManager implements X509TrustManager {
      *      String authType)
      */
     @Override
-    public void checkServerTrusted(X509Certificate[] certificates,
-            String authType) throws CertificateException {
+    public void checkServerTrusted(final X509Certificate[] certificates,
+            final String authType) throws CertificateException {
         if ((certificates != null) && (certificates.length == 1)
                 && handler != null) {
             certificates[0].checkValidity();

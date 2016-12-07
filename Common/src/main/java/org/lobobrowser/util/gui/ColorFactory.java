@@ -82,7 +82,7 @@ public class ColorFactory {
      *            the color spec
      * @return true, if is color
      */
-    public boolean isColor(String colorSpec) {
+    public boolean isColor(final String colorSpec) {
         if (colorSpec.startsWith("#")) {
             return true;
         }
@@ -104,7 +104,7 @@ public class ColorFactory {
      *            the color spec
      * @return the color
      */
-    public Color getColor(String colorSpec) {
+    public Color getColor(final String colorSpec) {
         String normalSpec = colorSpec.toLowerCase();
         synchronized (this) {
             Color color = colorMap.get(normalSpec);

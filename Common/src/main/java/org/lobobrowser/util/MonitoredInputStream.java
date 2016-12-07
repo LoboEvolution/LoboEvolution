@@ -49,7 +49,7 @@ public class MonitoredInputStream extends InputStream {
      * @param minProgressEventGap
      *            the min progress event gap
      */
-    public MonitoredInputStream(InputStream delegate, int minProgressEventGap) {
+    public MonitoredInputStream(final InputStream delegate, final int minProgressEventGap) {
         this.delegate = delegate;
         this.minProgressEventGap = minProgressEventGap;
     }
@@ -60,7 +60,7 @@ public class MonitoredInputStream extends InputStream {
      * @param delegate
      *            the delegate
      */
-    public MonitoredInputStream(InputStream delegate) {
+    public MonitoredInputStream(final InputStream delegate) {
         this(delegate, 200);
     }
     
@@ -112,7 +112,7 @@ public class MonitoredInputStream extends InputStream {
      * @see java.io.InputStream#read(byte[], int, int)
      */
     @Override
-    public int read(byte[] arg0, int arg1, int arg2) throws IOException {
+    public int read(final byte[] arg0, final int arg1, final int arg2) throws IOException {
         int numRead = this.delegate.read(arg0, arg1, arg2);
         if (numRead != -1) {
             this.progress += numRead;

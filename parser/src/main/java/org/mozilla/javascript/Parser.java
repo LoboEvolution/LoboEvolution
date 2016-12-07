@@ -372,15 +372,6 @@ public class Parser
         return tt;
     }
 
-    private int nextFlaggedToken()
-        throws IOException
-    {
-        peekToken();
-        int ttFlagged = currentFlaggedToken;
-        consumeToken();
-        return ttFlagged;
-    }
-
     private boolean matchToken(int toMatch)
         throws IOException
     {
@@ -3182,7 +3173,7 @@ public class Parser
         if (nextToken() != Token.FOR) codeBug();
         int pos = ts.tokenBeg;
         int eachPos = -1, lp = -1, rp = -1, inPos = -1;
-        boolean isForIn = false, isForOf = false;
+        boolean isForOf = false;
         ArrayComprehensionLoop pn = new ArrayComprehensionLoop(pos);
 
         pushScope(pn);
@@ -3223,7 +3214,6 @@ public class Parser
             switch (nextToken()) {
             case Token.IN:
                 inPos = ts.tokenBeg - pos;
-                isForIn = true;
                 break;
             case Token.NAME:
                 if ("of".equals(ts.getString())) {

@@ -68,7 +68,7 @@ public class EmptyInputStream extends InputStream {
      * @see java.io.InputStream#read(byte[], int, int)
      */
     @Override
-    public int read(byte[] b, int off, int len) throws IOException {
+    public int read(final byte[] b, final int off, final int len) throws IOException {
         return -1;
     }
 }

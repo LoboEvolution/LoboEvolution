@@ -124,7 +124,7 @@ public class CollectionUtilities {
      *            the collection
      * @return the collection
      */
-    public static Collection reverse(Collection collection) {
+    public static Collection reverse(final Collection collection) {
         LinkedList newCollection = new LinkedList();
         Iterator i = collection.iterator();
         while (i.hasNext()) {

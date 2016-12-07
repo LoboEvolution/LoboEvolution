@@ -28,7 +28,6 @@ import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
 import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlLength;
-import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLTableElement;
 
 /**

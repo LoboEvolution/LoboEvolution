@@ -60,7 +60,7 @@ public abstract class EventDispatch2 {
      * @param listener
      *            the listener
      */
-    public final void addListener(EventListener listener) {
+    public final void addListener(final EventListener listener) {
         synchronized (this) {
             if (this.listeners == null) {
                 this.listeners = this.createListenerCollection();
@@ -75,7 +75,7 @@ public abstract class EventDispatch2 {
      * @param listener
      *            the listener
      */
-    public final void removeListener(EventListener listener) {
+    public final void removeListener(final EventListener listener) {
         synchronized (this) {
             if (this.listeners != null) {
                 this.listeners.remove(listener);
@@ -90,7 +90,7 @@ public abstract class EventDispatch2 {
      *            the event
      * @return true, if successful
      */
-    public final boolean fireEvent(EventObject event) {
+    public final boolean fireEvent(final EventObject event) {
         EventListener[] larray;
         synchronized (this) {
             Collection<EventListener> listeners = this.listeners;
