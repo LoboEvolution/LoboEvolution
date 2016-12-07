@@ -6,7 +6,7 @@
 
 package org.mozilla.javascript;
 
-public final class NativeStringIterator extends ES6Iterator {
+public class NativeStringIterator extends ES6Iterator {
     private static final long serialVersionUID = 1L;
     private static final String ITERATOR_TAG = "StringIterator";
 

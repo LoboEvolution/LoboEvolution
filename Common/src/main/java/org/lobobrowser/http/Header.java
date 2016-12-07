@@ -105,7 +105,7 @@ public class Header extends NameValuePair {
     /**
      * A representation of an Element within a Header.
      */
-    public static final class Element {
+    public static class Element {
         /** The params. */
         private Parameter[] params = new Parameter[0];
         

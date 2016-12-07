@@ -7,7 +7,7 @@ package org.mozilla.javascript.optimizer;
 
 import org.mozilla.javascript.*;
 
-public final class OptRuntime extends ScriptRuntime
+public class OptRuntime extends ScriptRuntime
 {
 
     public static final Double zeroObj = new Double(0.0);

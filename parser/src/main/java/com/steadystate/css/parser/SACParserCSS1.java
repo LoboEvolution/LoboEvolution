@@ -1454,7 +1454,7 @@ public class SACParserCSS1 extends AbstractSACParser implements Parser, SACParse
 		throw generateParseException();
 	}
 
-	static private final class LookaheadSuccess extends java.lang.Error {
+	static private class LookaheadSuccess extends java.lang.Error {
 
 		/**
 		 * 
@@ -1640,7 +1640,7 @@ public class SACParserCSS1 extends AbstractSACParser implements Parser, SACParse
 		p.arg = xla;
 	}
 
-	static final class JJCalls {
+	static class JJCalls {
 		int gen;
 		Token first;
 		int arg;

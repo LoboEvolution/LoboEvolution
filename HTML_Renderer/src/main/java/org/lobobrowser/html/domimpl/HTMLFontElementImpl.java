@@ -102,18 +102,7 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	public void setSize(String size) {
 		this.setAttribute(HtmlAttributeProperties.SIZE, size);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
-	 * lobobrowser .html.renderstate.RenderState)
-	 */
-	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
-		return super.createRenderState(prevRenderState);
-	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

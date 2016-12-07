@@ -76,11 +76,9 @@ HTMLFormElement {
             this.visit(new NodeVisitor() {
                 @Override
                 public void visit(Node node) {
-                    if (HTMLFormElementImpl.isInput(node)) {
-                        if (name.equals(((Element) node)
-                                .getAttribute(HtmlAttributeProperties.NAME))) {
-                            throw new StopVisitorException(node);
-                        }
+                	String nd = ((Element) node).getAttribute(HtmlAttributeProperties.NAME);
+                	if (HTMLFormElementImpl.isInput(node) && name.equals(nd)) {
+                        throw new StopVisitorException(node);
                     }
                 }
             });
@@ -298,12 +296,11 @@ HTMLFormElement {
      */
     public final void submit(final FormInput[] extraFormInputs) {
         Function onsubmit = this.getOnsubmit();
-        if (onsubmit != null) {
-            // TODO: onsubmit event object?
-            if (!Executor.executeFunction(this, onsubmit, null)) {
-                return;
-            }
+        
+        if (onsubmit != null && !Executor.executeFunction(this, onsubmit, null)) {
+            return;
         }
+        
         HtmlRendererContext context = this.getHtmlRendererContext();
         if (context != null) {
             final ArrayList<FormInput> formInputs = new ArrayList<FormInput>();

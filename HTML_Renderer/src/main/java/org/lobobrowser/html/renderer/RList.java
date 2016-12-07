@@ -113,7 +113,7 @@ public class RList extends BaseRListElement {
 			try {
 				counterStart = Integer.parseInt(startText);
 			} catch (NumberFormatException nfe) {
-				// ignore
+				logger.error(nfe);
 			}
 		}
 		renderState.resetCount(DEFAULT_COUNTER_NAME, this.listNesting, counterStart);

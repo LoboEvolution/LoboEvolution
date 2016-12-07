@@ -1429,7 +1429,7 @@ public class ClassFileWriter {
      * stack map table contains the state of local variable and operand stack
      * for a given super block.
      */
-    final class StackMapTable {
+    class StackMapTable {
         StackMapTable() {
             superBlocks = null;
             locals = stack = null;
@@ -4268,7 +4268,7 @@ public class ClassFileWriter {
     private char[] tmpCharBuffer = new char[64];
 }
 
-final class ExceptionTableEntry
+class ExceptionTableEntry
 {
 
     ExceptionTableEntry(int startLabel, int endLabel,
@@ -4286,7 +4286,7 @@ final class ExceptionTableEntry
     short itsCatchType;
 }
 
-final class ClassFileField
+class ClassFileField
 {
 
     ClassFileField(short nameIndex, short typeIndex, short flags)
@@ -4343,7 +4343,7 @@ final class ClassFileField
     private int itsIndex;
 }
 
-final class ClassFileMethod
+class ClassFileMethod
 {
 
     ClassFileMethod(String name, short nameIndex, String type, short typeIndex,
@@ -4403,7 +4403,7 @@ final class ClassFileMethod
 
 }
 
-final class ConstantPool
+class ConstantPool
 {
 
     ConstantPool(ClassFileWriter cfw)
@@ -4737,7 +4737,7 @@ final class ConstantPool
     private byte itsPool[];
 }
 
-final class FieldOrMethodRef
+class FieldOrMethodRef
 {
     FieldOrMethodRef(String className, String name, String type)
     {
@@ -4796,7 +4796,7 @@ final class FieldOrMethodRef
  * outputs stack map frames at the start of every super block except the method
  * start.
  */
-final class SuperBlock {
+class SuperBlock {
     SuperBlock(int index, int start, int end, int[] initialLocals) {
         this.index = index;
         this.start = start;
@@ -4952,7 +4952,7 @@ final class SuperBlock {
  * tag in the output, we store it in bits 8-23 for uniformity; the tag is
  * always in bits 0-7.
  */
-final class TypeInfo {
+class TypeInfo {
     private TypeInfo() { }
 
     static final int TOP = 0;

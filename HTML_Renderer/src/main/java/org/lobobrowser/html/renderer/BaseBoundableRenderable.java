@@ -292,7 +292,6 @@ BoundableRenderable {
             } else {
                 parent.invalidateLayoutUpTree();
             }
-        } else {
         }
     }
 
@@ -521,11 +520,9 @@ BoundableRenderable {
     @Override
     public void onMouseMoved(MouseEvent event, int x, int y,
             boolean triggerEvent, ModelNode limit) {
-        if (triggerEvent) {
-            if (this.isContainedByNode()) {
-                HtmlController.getInstance().onMouseOver(this.modelNode, event, x, y, limit);
-                setMouseOnMouseOver(this, this.modelNode, limit);
-            }
+    	if (triggerEvent && this.isContainedByNode()) {
+            HtmlController.getInstance().onMouseOver(this.modelNode, event, x, y, limit);
+            setMouseOnMouseOver(this, this.modelNode, limit);
         }
     }
     
@@ -604,11 +601,10 @@ BoundableRenderable {
                 rcontext.setCursor(cursorOpt);
                 break;
               } else {
-                if (node.getParentModelNode() == limit) {                    
-                  if (renderable instanceof RWord || renderable instanceof RBlank) {
-                    rcontext.setCursor(Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR)));
-                  } 
-                }
+				if (node.getParentModelNode() == limit && 
+					(renderable instanceof RWord || renderable instanceof RBlank)) {
+					rcontext.setCursor(Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR)));
+				}
               }
             }
             node = node.getParentModelNode();

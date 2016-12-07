@@ -222,8 +222,8 @@ Node, ModelNode {
 	 * @return the child count
 	 */
     public int getChildCount() {
+    	synchronized (this.getTreeLock()) {
         ArrayList<Node> nl = this.nodeList;
-        synchronized (this.getTreeLock()) {
             return nl == null ? 0 : nl.size();
         }
     }
@@ -1722,9 +1722,8 @@ Node, ModelNode {
             if (child instanceof DOMElementImpl) {
                 ((DOMElementImpl) child).appendInnerTextImpl(buffer);
             }
-            if (child instanceof Comment) {
-                // skip
-            } else if (child instanceof Text) {
+            
+            if (child instanceof Text) {
                 buffer.append(((Text) child).getTextContent());
             }
         }

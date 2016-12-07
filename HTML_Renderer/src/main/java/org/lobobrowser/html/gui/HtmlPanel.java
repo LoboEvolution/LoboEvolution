@@ -605,7 +605,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
         for (int i = 0; i < length; i++) {
             DOMNodeImpl child = children[i];
             if (child instanceof Text) {
-                // Ignore
+            	return null;
             } else if (child instanceof DOMElementImpl) {
                 String tagName = child.getNodeName();
                 if ("HEAD".equalsIgnoreCase(tagName)
@@ -614,7 +614,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
                         || "META".equalsIgnoreCase(tagName)
                         || "SCRIPT".equalsIgnoreCase(tagName)
                         || "NOSCRIPT".equalsIgnoreCase(tagName)) {
-                    // ignore it
+                	return null;
                 } else if ("FRAMESET".equalsIgnoreCase(tagName)) {
                     frameSet = child;
                     break;
@@ -652,10 +652,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
                     if ((textContent != null) && !"".equals(textContent.trim())) {
                         return false;
                     }
-                } else if (child instanceof DOMElementImpl) {
-                    if (this.hasSomeHtml((DOMElementImpl) child)) {
-                        return false;
-                    }
+                } else if (child instanceof DOMElementImpl && this.hasSomeHtml((DOMElementImpl) child)) {
+                	return false;
                 }
             }
         }
@@ -882,12 +880,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
         int length = notifsArray.length;
         for (int i = 0; i < length; i++) {
             DocumentNotification dn = notifsArray[i];
-            if ((dn.node instanceof HTMLFrameSetElement)
-                    && (this.htmlBlockPanel != null)) {
-                if (this.resetIfFrameSet()) {
-                    // Revalidation already taken care of.
-                    return;
-                }
+            if ((dn.node instanceof HTMLFrameSetElement) && (this.htmlBlockPanel != null) && this.resetIfFrameSet()) {
+            	 return;
             }
         }
         HtmlBlockPanel blockPanel = this.htmlBlockPanel;

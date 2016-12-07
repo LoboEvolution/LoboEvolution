@@ -47,7 +47,7 @@ import org.lobobrowser.util.io.IORoutines;
  *
  * @author J. H. S.
  */
-public final class CacheManager implements Runnable {
+public class CacheManager implements Runnable {
 
     /** The Constant logger. */
     private static final Logger logger = LogManager.getLogger(CacheManager.class

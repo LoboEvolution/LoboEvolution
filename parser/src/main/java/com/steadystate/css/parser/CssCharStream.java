@@ -9,7 +9,7 @@ package com.steadystate.css.parser;
  * unicode escapes in this class is too early.
  */
 
-public final class CssCharStream implements CharStream
+public class CssCharStream implements CharStream
 {
   /** Whether parser is static. */
   public static final boolean staticFlag = false;

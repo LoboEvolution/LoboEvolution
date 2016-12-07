@@ -242,7 +242,7 @@ public class ExtensionManager {
         Collection<JoinableTask> tasks = new ArrayList<JoinableTask>();
         PlatformInit pm = PlatformInit.getInstance();
         for (Extension ei : extensions) {
-            final ClassLoader pcl = new URLClassLoader(libraryURLCollection.toArray(new URL[0]), rootClassLoader);;
+            final ClassLoader pcl = new URLClassLoader(libraryURLCollection.toArray(new URL[0]), rootClassLoader);
             final Extension fei = ei;
             // Initialize rest of them in parallel.
             JoinableTask task = new JoinableTask() {

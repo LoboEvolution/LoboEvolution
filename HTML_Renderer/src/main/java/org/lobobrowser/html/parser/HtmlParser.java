@@ -374,10 +374,8 @@ public class HtmlParser {
 							if (endTagType != ElementInfo.END_ELEMENT_FORBIDDEN) {
 								boolean childrenOk = einfo == null ? true : einfo.isChildElementOk();
 								Set<String> newStopSet = einfo == null ? null : einfo.getStopTags();
-								if (newStopSet == null) {
-									if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
-										newStopSet = Collections.singleton(normalTag);
-									}
+								if (newStopSet == null && endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
+									newStopSet = Collections.singleton(normalTag);
 								}
 								if (stopTags != null) {
 									if (newStopSet != null) {
@@ -458,10 +456,8 @@ public class HtmlParser {
 													: einfo.getEndElementType();
 											childrenOk = einfo == null ? true : einfo.isChildElementOk();
 											newStopSet = einfo == null ? null : einfo.getStopTags();
-											if (newStopSet == null) {
-												if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
-													newStopSet = Collections.singleton(normalTag);
-												}
+											if (newStopSet == null && endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
+												newStopSet = Collections.singleton(normalTag);
 											}
 											if ((stopTags != null) && (newStopSet != null)) {
 												Set<String> newStopSet2 = new HashSet<String>();

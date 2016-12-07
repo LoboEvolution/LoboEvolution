@@ -49,16 +49,6 @@ public class BodyRenderState extends StyleSheetRenderState {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#invalidate()
-	 */
-	@Override
-	public void invalidate() {
-		super.invalidate();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.lobobrowser.html.renderstate.StyleSheetRenderState#getBackgroundInfo(
 	 * )

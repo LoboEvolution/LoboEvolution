@@ -34,6 +34,8 @@ import java.awt.event.KeyListener;
 import javax.swing.JScrollPane;
 import javax.swing.text.JTextComponent;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.JTextAreaImpl;
 import org.lobobrowser.html.domimpl.DOMElementImpl;
@@ -48,6 +50,9 @@ public class InputTextAreaControl extends BaseInputControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant logger. */
+    protected static final Logger logger = LogManager.getLogger(InputTextAreaControl.class.getName());
 
 	/** The widget. */
 	private final JTextAreaImpl widget;
@@ -118,7 +123,7 @@ public class InputTextAreaControl extends BaseInputControl {
 			try {
 				this.setCols(Integer.parseInt(colsStr));
 			} catch (NumberFormatException nfe) {
-				// ignore
+				logger.error(nfe);
 			}
 		}
 		String rowsStr = element.getAttribute(HtmlAttributeProperties.ROWS);
@@ -126,7 +131,7 @@ public class InputTextAreaControl extends BaseInputControl {
 			try {
 				this.setRows(Integer.parseInt(rowsStr));
 			} catch (NumberFormatException nfe) {
-				// ignore
+				logger.error(nfe);
 			}
 		}
 	}

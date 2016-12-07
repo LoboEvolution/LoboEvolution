@@ -9,7 +9,7 @@ import org.mozilla.javascript.*;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.ScriptNode;
 
-public final class OptFunctionNode
+public class OptFunctionNode
 {
     OptFunctionNode(FunctionNode fnode)
     {

@@ -35,7 +35,7 @@ import org.lobobrowser.html.renderstate.RenderState;
 /**
  * The Class RWord.
  */
-public final class RWord extends BaseBoundableRenderable {
+public class RWord extends BaseBoundableRenderable {
 
     /** The shown word. */
     private String shownWord;
@@ -161,9 +161,6 @@ public final class RWord extends BaseBoundableRenderable {
                 FontMetrics fm = this.fontMetrics;
                 int lineOffset = fm.getLeading();
                 g.drawLine(0, lineOffset, width, lineOffset);
-            }
-            if ((td & RenderState.MASK_TEXTDECORATION_BLINK) != 0) {
-                // TODO
             }
         }
         Color over = rs.getOverlayColor();

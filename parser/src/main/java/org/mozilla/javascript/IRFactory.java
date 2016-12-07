@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @author Mike McCabe
  * @author Norris Boyd
  */
-public final class IRFactory extends Parser
+public class IRFactory extends Parser
 {
     private static final int LOOP_DO_WHILE = 0;
     private static final int LOOP_WHILE    = 1;

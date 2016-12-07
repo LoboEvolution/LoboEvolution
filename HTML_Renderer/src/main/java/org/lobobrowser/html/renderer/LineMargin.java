@@ -88,6 +88,11 @@ public class LineMargin {
         return (olm.clearX == this.clearX) && (olm.clearY == this.clearY)
                 && org.lobobrowser.util.Objects.equals(olm.next, this.next);
     }
+    
+    @Override
+    public int hashCode() {
+    	return super.hashCode();
+    }
 
     /**
      * Translated.

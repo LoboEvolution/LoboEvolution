@@ -113,7 +113,7 @@ public class ReuseServer implements Runnable {
                 try {
                     this.serverSocket.close();
                 } catch (IOException ioe) {
-                    // ignore
+                	logger.error(ioe);
                 }
                 this.serverSocket = null;
             }

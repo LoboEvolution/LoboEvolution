@@ -145,7 +145,7 @@ public class XPathFunctionResolverImpl
     /**
      * The Class Signature.
      */
-    private static final class Signature {
+    private static class Signature {
         /** The function name. */
         private QName functionName;
         /** The arity. */

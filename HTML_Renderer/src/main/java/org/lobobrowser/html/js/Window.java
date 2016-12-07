@@ -1447,7 +1447,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 * Force gc.
 	 */
 	public void forceGC() {
-		Runtime.getRuntime().gc();;
+		Runtime.getRuntime().gc();
 	}
 
 	/**

@@ -149,12 +149,9 @@ import org.w3c.dom.Document;
  * @author rbair
  */
 public class Request extends AbstractBean {
-    /**
-     * Header keys are stored in a case insensitive manner.
-     */
+    
     /** The Constant logger. */
-    private static final Logger logger = LogManager
-            .getLogger(Request.class);
+    private static final Logger logger = LogManager.getLogger(Request.class);
     
     /** The headers. */
     private Map<String, Header> headers = new HashMap<String, Header>();
@@ -318,7 +315,8 @@ public class Request extends AbstractBean {
                 String oldUsername = this.username;
                 firePropertyChange("username", oldUsername, this.username = u);
                 this.password = p.toCharArray();
-            } catch (Exception e) { /* oh well */
+            } catch (Exception e) {
+            	logger.error(e);
             }
         }
     }

@@ -21,7 +21,7 @@ import org.mozilla.javascript.debug.DebugFrame;
 
 import static org.mozilla.javascript.UniqueTag.DOUBLE_MARK;
 
-public final class Interpreter extends Icode implements Evaluator {
+public class Interpreter extends Icode implements Evaluator {
 	
 	 /** The Constant logger. */
     private static final Logger logger = LogManager.getLogger(Interpreter.class);
@@ -110,7 +110,7 @@ public final class Interpreter extends Icode implements Evaluator {
         }
     }
 
-    private static final class ContinuationJump implements Serializable
+    private static class ContinuationJump implements Serializable
     {
         static final long serialVersionUID = 7687739156004308247L;
 

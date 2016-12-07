@@ -30,7 +30,7 @@
 
 package org.mozilla.javascript.v8dtoa;
 
-public final class DoubleConversion {
+public class DoubleConversion {
     private static final long kSignMask = 0x8000000000000000L;
     private static final long kExponentMask = 0x7FF0000000000000L;
     private static final long kSignificandMask = 0x000FFFFFFFFFFFFFL;

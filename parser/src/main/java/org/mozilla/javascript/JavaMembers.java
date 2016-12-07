@@ -374,7 +374,7 @@ class JavaMembers
         }
     }
 
-    private static final class MethodSignature
+    private static class MethodSignature
     {
         private final String name;
         private final Class<?>[] args;

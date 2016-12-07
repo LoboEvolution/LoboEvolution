@@ -442,10 +442,8 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 						setVisible(true);
 					}
 				});
-			} catch (InvocationTargetException ie) {
-				// ignore
-			} catch (InterruptedException ie) {
-				// ignore
+			} catch (Exception ie) {
+				logger.error(ie);
 			}
 		}
 	}
@@ -686,7 +684,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 				try {
 					istr.close();
 				} catch (Exception e) {
-					// ignore error on close
+					logger.error(e);
 				}
 			}
 		}
@@ -732,6 +730,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		try {
 			outline = curFile.getOutline();
 		} catch (IOException ioe) {
+			logger.error(ioe);
 		}
 		if (outline != null) {
 			if (outline.getChildCount() > 0) {
@@ -1014,10 +1013,13 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	 */
 	public void doPageTyped() {
 		int pagenum = -1;
+		
 		try {
 			pagenum = Integer.parseInt(pageField.getText()) - 1;
 		} catch (NumberFormatException nfe) {
+			logger.error(nfe);
 		}
+		
 		if (pagenum >= curFile.getNumPages()) {
 			pagenum = curFile.getNumPages() - 1;
 		}

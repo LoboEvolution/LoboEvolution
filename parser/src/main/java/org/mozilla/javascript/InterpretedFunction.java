@@ -8,7 +8,7 @@ package org.mozilla.javascript;
 
 import org.mozilla.javascript.debug.DebuggableScript;
 
-final class InterpretedFunction extends NativeFunction implements Script
+class InterpretedFunction extends NativeFunction implements Script
 {
     static final long serialVersionUID = 541475680333911468L;
 

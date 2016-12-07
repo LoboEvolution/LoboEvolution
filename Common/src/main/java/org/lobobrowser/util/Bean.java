@@ -38,9 +38,8 @@ import java.util.Map;
  * @author J. H. S.
  */
 public class Bean {
-    // private static final org.apache.logging.log4j.Logger logger =
-    // LogManager.getLogger(Bean.class);
-    /** The clazz. */
+    
+	/** The clazz. */
     private final Class<?> clazz;
     
     /**
@@ -189,9 +188,8 @@ public class Bean {
      */
     private static Object convertValue(Object value, Class<?> targetType) {
         boolean targetString = targetType.isAssignableFrom(String.class);
-        if ((value instanceof String) && targetString) {
-            // ignore
-        } else if (targetString) {
+        
+        if (targetString) {
             value = String.valueOf(value);
         } else if (!(value instanceof Byte)
                 && ((targetType == Byte.class) || (targetType == byte.class))) {

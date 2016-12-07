@@ -2960,7 +2960,7 @@ class REGlobalData {
  * use of the class converts the source representation into a bitmap.
  *
  */
-final class RECharSet implements Serializable
+class RECharSet implements Serializable
 {
     static final long serialVersionUID = 7931787979395898394L;
 

@@ -252,7 +252,7 @@ public class HttpRequest extends AbstractBean {
                 || header.equalsIgnoreCase("Trailer")
                 || header.equalsIgnoreCase("Transfer-Encoding")
                 || header.equalsIgnoreCase("Upgrade")) {
-            // ignore the header
+            return;
         }
         if (header.equalsIgnoreCase("Authorization")
                 || header.equalsIgnoreCase("Content-Base")

@@ -26,6 +26,8 @@ import java.net.URLEncoder;
 
 import javax.swing.AbstractAction;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.ua.NavigationEntry;
@@ -39,6 +41,9 @@ public class UrlPrefixNavigateAction extends AbstractAction implements Enableabl
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(UrlPrefixNavigateAction.class);
 
 	/** The url prefix. */
 	private String urlPrefix;
@@ -100,7 +105,7 @@ public class UrlPrefixNavigateAction extends AbstractAction implements Enableabl
 					? URLEncoder.encode(entry.getUrl().toExternalForm(), "UTF-8") : entry.getUrl().toExternalForm());
 			componentSource.navigate(roughLocation, RequestType.PROGRAMMATIC);
 		} catch (UnsupportedEncodingException uee) {
-			// not expected - ignore
+			logger.error(uee);
 		}
 	}
 

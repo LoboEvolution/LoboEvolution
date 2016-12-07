@@ -252,10 +252,9 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 				this.document.removeDocumentNotificationListener(this);
 				return;
 			}
-			if (collection.isValid()) {
-				if (Nodes.isSameOrAncestorOf(collection.rootNode, node)) {
-					collection.invalidate();
-				}
+			
+			if (collection.isValid() && Nodes.isSameOrAncestorOf(collection.rootNode, node)) {
+				collection.invalidate();
 			}
 		}
 

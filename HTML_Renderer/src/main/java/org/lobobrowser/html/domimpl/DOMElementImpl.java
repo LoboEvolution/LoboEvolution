@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.util.Objects;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.w3c.html.HTMLMenuElement;
@@ -987,7 +988,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 */
 	@Override
 	protected String htmlEncodeChildText(String text) {
-		if (org.lobobrowser.html.parser.HtmlParser.isDecodeEntities(this.name)) {
+		if (HtmlParser.isDecodeEntities(this.name)) {
 			return Strings.strictHtmlEncode(text, false);
 		} else {
 			return text;

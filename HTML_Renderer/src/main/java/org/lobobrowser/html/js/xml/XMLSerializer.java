@@ -93,6 +93,7 @@ public class XMLSerializer extends AbstractScriptableDelegate{
 			Transformer transformer = transFactory.newTransformer();
 			transformer.transform(source, result);
 		} catch (Exception ex) {
+			logger.error(ex);
 		}
 	}
 

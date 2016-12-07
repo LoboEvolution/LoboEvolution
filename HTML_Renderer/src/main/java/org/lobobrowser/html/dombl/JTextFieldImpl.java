@@ -97,12 +97,7 @@ public class JTextFieldImpl extends JTextField {
 			originalForeground = fg;
 		}
 	}
-
-	@Override
-	public void setBorder(Border border) {
-		super.setBorder(border);
-	}
-
+	
 	/**
 	 * Gets the grey by default*.
 	 *

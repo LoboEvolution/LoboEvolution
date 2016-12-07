@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author Hannes Wallnoefer
  * @since 1.7R3
  */
-public final class ScriptStackElement implements Serializable {
+public class ScriptStackElement implements Serializable {
 
     static final long serialVersionUID = -6416688260860477449L;
     

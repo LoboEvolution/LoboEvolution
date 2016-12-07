@@ -67,14 +67,12 @@ public class ResURLConnection extends URLConnection {
         }
         String file = this.url.getPath();
         InputStream in = classLoader.getResourceAsStream(file);
-        if (in == null) {
-            if (file.startsWith("/")) {
-                file = file.substring(1);
-                in = classLoader.getResourceAsStream(file);
-                if (in == null) {
-                    throw new IOException("Resource " + file + " not found in "
-                            + host + ".");
-                }
+        if (in == null && file.startsWith("/")) {
+            file = file.substring(1);
+            in = classLoader.getResourceAsStream(file);
+            if (in == null) {
+                throw new IOException("Resource " + file + " not found in "
+                        + host + ".");
             }
         }
         return in;

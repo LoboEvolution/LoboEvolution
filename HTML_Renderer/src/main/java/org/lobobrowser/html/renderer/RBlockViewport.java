@@ -352,10 +352,8 @@ public class RBlockViewport extends BaseRCollection {
 				if ((br.getX() + br.getWidth()) > this.maxX) {
 					this.maxX = br.getX() + br.getWidth();
 				}
-				if (isFloatLimit || !pr.isFloat()) {
-					if ((br.getY() + br.getHeight()) > maxY) {
-						this.maxY = maxY = br.getY() + br.getHeight();
-					}
+				if ((isFloatLimit || !pr.isFloat()) && (br.getY() + br.getHeight()) > maxY) {
+					this.maxY = maxY = br.getY() + br.getHeight();
 				}
 			}
 		}
@@ -903,8 +901,6 @@ public class RBlockViewport extends BaseRCollection {
 			} else if ("right".equalsIgnoreCase(align)) {
 				this.layoutFloat(renderable, layout, false);
 				return true;
-			} else {
-				// fall through
 			}
 		}
 		return false;
@@ -2344,10 +2340,8 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		// Adjust maxY based on float, but only if this viewport is the float
 		// limit.
-		if (this.isFloatLimit()) {
-			if ((boxY + boxHeight) > this.maxY) {
-				this.maxY = boxY + boxHeight;
-			}
+		if (this.isFloatLimit() && (boxY + boxHeight) > this.maxY) {
+			this.maxY = boxY + boxHeight;
 		}
 	}
 

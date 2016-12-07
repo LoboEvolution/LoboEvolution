@@ -128,14 +128,12 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 			while (i.hasNext()) {
 				TimedEntry entry = i.next();
 				String host = entry.url.getHost();
-				if ((host != null) && (host.length() != 0)) {
-					if (!hosts.contains(host)) {
-						hosts.add(host);
-						if (hosts.size() >= maxNumItems) {
-							break;
-						}
-						items.add(new HostEntry(host, entry.timestamp));
+				if ((host != null) && (host.length() != 0) && (!hosts.contains(host))) {
+					hosts.add(host);
+					if (hosts.size() >= maxNumItems) {
+						break;
 					}
+					items.add(new HostEntry(host, entry.timestamp));
 				}
 			}
 			return items;

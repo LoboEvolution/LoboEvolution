@@ -109,7 +109,7 @@ public class MemoryTest {
 			Document document = builder.parse(new InputSourceImpl(bin, url.toExternalForm(), "UTF-8"));
 			logger.info("Finished parsing: freeMemory=" + Runtime.getRuntime().freeMemory() + ",document=" + document);
 			document = null;
-			Runtime.getRuntime().gc();;
+			Runtime.getRuntime().gc();
 			logger.info("After GC: freeMemory=" + Runtime.getRuntime().freeMemory());
 			Thread.sleep(2);
 		}
@@ -170,7 +170,7 @@ public class MemoryTest {
 				// panel.clearDocument();
 			}
 			document = null;
-			Runtime.getRuntime().gc();;
+			Runtime.getRuntime().gc();
 			logger.info("After GC: freeMemory=" + Runtime.getRuntime().freeMemory());
 			Thread.sleep(2);
 		}
@@ -218,7 +218,7 @@ public class MemoryTest {
 			panel.clearDocument();
 			Thread.sleep(1000);
 			document = null;
-			Runtime.getRuntime().gc();;
+			Runtime.getRuntime().gc();
 			logger.info("After GC: freeMemory=" + Runtime.getRuntime().freeMemory());
 			Thread.sleep(2000);
 		}

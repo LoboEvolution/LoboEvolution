@@ -27,7 +27,7 @@ import org.lobobrowser.html.dombl.ModelNode;
 /**
  * The Class RFloatInfo.
  */
-public final class RFloatInfo implements Renderable {
+public class RFloatInfo implements Renderable {
 
     /** The model node. */
     private final ModelNode modelNode;

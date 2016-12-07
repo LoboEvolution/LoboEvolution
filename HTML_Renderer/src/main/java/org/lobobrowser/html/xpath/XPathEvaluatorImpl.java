@@ -62,7 +62,7 @@ import org.w3c.dom.Node;
  * @see org.w3c.dom.xpath.XPathEvaluator
  *
  */
-public final class XPathEvaluatorImpl implements XPathEvaluator {
+public class XPathEvaluatorImpl implements XPathEvaluator {
 
 	/**
 	 * This prefix resolver is created whenever null is passed to the evaluate

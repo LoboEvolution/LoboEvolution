@@ -6,7 +6,7 @@
 
 package org.mozilla.javascript;
 
-public final class NativeContinuation extends IdScriptableObject
+public class NativeContinuation extends IdScriptableObject
     implements Function
 {
     static final long serialVersionUID = 1794167133757605367L;

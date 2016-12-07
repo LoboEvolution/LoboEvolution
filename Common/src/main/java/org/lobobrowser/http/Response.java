@@ -103,14 +103,12 @@ public class Response {
         if (statusCode == null) {
             throw new NullPointerException("statusCode cannot be null");
         }
+        
         if (responseBody == null) {
             responseBody = new byte[0];
         }
-        if (baseUrl != null) {
-            // TODO assure that there are no parameters in this URL. If there
-            // are,
-            // remove them
-        }
+        
+        
         this.statusCode = statusCode;
         this.statusText = statusText;
         this.responseBody = responseBody;

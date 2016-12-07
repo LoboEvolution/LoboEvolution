@@ -38,9 +38,10 @@ import org.lobobrowser.util.ColorCommon;
  * @author J. H. S.
  */
 public class ColorFactory {
-    /** The Constant logger. */
-    private static final Logger logger = LogManager
-            .getLogger(ColorFactory.class);
+    
+	/** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(ColorFactory.class);
+    
     /** The instance. */
     private static ColorFactory instance;
     /** The Constant TRANSPARENT. */
@@ -120,28 +121,28 @@ public class ColorFactory {
                         try {
                             red = Integer.parseInt(rstr);
                         } catch (NumberFormatException nfe) {
-                            // ignore
+                            logger.error(nfe);
                         }
                         if (tok.hasMoreTokens()) {
                             String gstr = tok.nextToken().trim();
                             try {
                                 green = Integer.parseInt(gstr);
                             } catch (NumberFormatException nfe) {
-                                // ignore
+                                logger.error(nfe);
                             }
                             if (tok.hasMoreTokens()) {
                                 String bstr = tok.nextToken().trim();
                                 try {
                                     blue = Integer.parseInt(bstr);
                                 } catch (NumberFormatException nfe) {
-                                    // ignore
+                                    logger.error(nfe);
                                 }
                                 if (tok.hasMoreTokens()) {
                                     String astr = tok.nextToken().trim();
                                     try {
                                         alpha = 255 * Integer.parseInt(astr);
                                     } catch (NumberFormatException nfe) {
-                                        // ignore
+                                        logger.error(nfe);
                                     }
                                 }
                             }
@@ -161,21 +162,21 @@ public class ColorFactory {
                         try {
                             red = Integer.parseInt(rstr);
                         } catch (NumberFormatException nfe) {
-                            // ignore
+                            logger.error(nfe);
                         }
                         if (tok.hasMoreTokens()) {
                             String gstr = tok.nextToken().trim();
                             try {
                                 green = Integer.parseInt(gstr);
                             } catch (NumberFormatException nfe) {
-                                // ignore
+                                logger.error(nfe);
                             }
                             if (tok.hasMoreTokens()) {
                                 String bstr = tok.nextToken().trim();
                                 try {
                                     blue = Integer.parseInt(bstr);
                                 } catch (NumberFormatException nfe) {
-                                    // ignore
+                                    logger.error(nfe);
                                 }
                             }
                         }
@@ -194,7 +195,7 @@ public class ColorFactory {
                             try {
                                 rgba[i] = Integer.parseInt(hexText, 16);
                             } catch (NumberFormatException nfe) {
-                                // Ignore
+                            	logger.error(nfe);
                             }
                         }
                     }

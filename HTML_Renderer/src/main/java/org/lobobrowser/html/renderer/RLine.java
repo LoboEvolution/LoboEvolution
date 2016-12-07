@@ -575,10 +575,7 @@ public class RLine extends BaseRCollection {
 				rblank.setY(baseline - rblank.getAscentPlusLeading());
 			} else if (r instanceof RElement) {
 				RElement relement = (RElement) r;
-				// int w = relement.getWidth();
 				this.setElementY(relement, relement.getHeight(), relement.getVAlign());
-			} else {
-				// RSpacing and RStyleChanger don't matter?
 			}
 		}
 		// TODO: Could throw OverflowException when we add floating widgets

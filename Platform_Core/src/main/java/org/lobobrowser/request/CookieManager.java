@@ -159,7 +159,7 @@ public class CookieManager extends CookieHandler {
      * Wraps cookies that are placed in the in-memory cache, such that cookies
      * are compared based on their getName() property for equality.
      */
-    private static final class Wrapper {
+    private static class Wrapper {
         
         /** The cookie. */
         private Cookie cookie;

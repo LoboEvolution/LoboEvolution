@@ -24,7 +24,7 @@ import java.io.Writer;
  *
  * @author rbri
  */
-public final class Output {
+public class Output {
     private static final String NEW_LINE = System.getProperty("line.separator");
 
     private Writer writer_;

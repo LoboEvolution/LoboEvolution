@@ -139,9 +139,6 @@ public class CookieStore {
                     domain = value;
                 } else if ("expires".equalsIgnoreCase(name)) {
                     expires = value;
-                } else if ("secure".equalsIgnoreCase(name)) {
-                    // TODO: SECURITY
-                    // secure = value;
                 }
             }
         }

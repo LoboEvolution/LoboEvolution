@@ -27,7 +27,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public final class DateUtil {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class DateUtil {
+	
+	  /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(DateUtil.class.getName());
 
     /**
      * Validate the actual date of the given date string based on the given date format pattern and
@@ -58,7 +64,9 @@ public final class DateUtil {
 		for (String regexp : DATE_FORMAT) {
 			try {
 				 return parse(dateString, regexp,loc);
-			} catch (ParseException e) {}
+			} catch (ParseException e) {
+				logger.error(e);
+			}
 		}
 		return null; // Unknown format.
 	}

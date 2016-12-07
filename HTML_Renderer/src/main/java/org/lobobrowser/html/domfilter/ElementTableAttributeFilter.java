@@ -28,7 +28,7 @@ import org.w3c.dom.Node;
 /**
  * The Class ElementTableAttributeFilter.
  */
-public final class ElementTableAttributeFilter implements NodeFilter {
+public class ElementTableAttributeFilter implements NodeFilter {
 
 	/** The element name. */
 	private final String elementName;

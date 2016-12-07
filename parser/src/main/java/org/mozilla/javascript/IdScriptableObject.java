@@ -32,7 +32,7 @@ public abstract class IdScriptableObject extends ScriptableObject
 {
     private transient PrototypeValues prototypeValues;
 
-    private static final class PrototypeValues implements Serializable
+    private static class PrototypeValues implements Serializable
     {
         static final long serialVersionUID = 3038645279153854371L;
 

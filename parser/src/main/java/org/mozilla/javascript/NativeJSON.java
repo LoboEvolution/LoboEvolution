@@ -20,7 +20,7 @@ import java.util.LinkedList;
  * See ECMA 15.12.
  * @author Matthew Crumley, Raphael Speyer
  */
-public final class NativeJSON extends IdScriptableObject
+public class NativeJSON extends IdScriptableObject
 {
     static final long serialVersionUID = -4567599697595654984L;
 

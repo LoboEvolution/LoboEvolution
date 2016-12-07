@@ -42,7 +42,7 @@ public class TextRetentionTest {
 
 	public static void newTest(BrowserPanel panel) throws Exception {
 		panel.navigate(getNewURL());
-		Runtime.getRuntime().gc();;
+		Runtime.getRuntime().gc();
 		Thread.sleep(5000);
 		System.out.println("### Free memory: " + Runtime.getRuntime().freeMemory());
 		System.out.println("### Total memory: " + Runtime.getRuntime().totalMemory());

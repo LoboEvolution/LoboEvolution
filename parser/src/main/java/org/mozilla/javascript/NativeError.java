@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
  *
  *  ECMA 15.11
  */
-final class NativeError extends IdScriptableObject
+class NativeError extends IdScriptableObject
 {
     static final long serialVersionUID = -5338413581437645187L;
 
@@ -353,7 +353,7 @@ final class NativeError extends IdScriptableObject
      * We will attch this object to the constructor and use it solely to store the constructor properties
      * that are "global." We can't make them static because there can be many contexts in the same JVM.
      */
-    private static final class ProtoProps
+    private static class ProtoProps
         implements Serializable
     {
         static final String KEY = "_ErrorPrototypeProps";

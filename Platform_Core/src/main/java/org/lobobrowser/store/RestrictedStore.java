@@ -58,7 +58,7 @@ import org.lobobrowser.util.gui.ClassLoaderObjectInputStream;
 /**
  * The Class RestrictedStore.
  */
-public final class RestrictedStore implements QuotaSource, ManagedStore {
+public class RestrictedStore implements QuotaSource, ManagedStore {
 
     /** The Constant logger. */
     private static final Logger logger = LogManager.getLogger(RestrictedStore.class
@@ -527,7 +527,7 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 							this.checkPath(canonical, "not-shown");
 							paths.add(relativePath);
 						} catch (SecurityException se) {
-							// ignore file
+							logger.error(se);
 						}
 					}
 				}
@@ -963,7 +963,7 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
                                     RestrictedStore.this
                                     .addUsedBytes(DIRECTORY_SIZE);
                                 } catch (IOException ioe) {
-                                    // Ignore
+                                    logger.error(ioe);
                                 }
                             }
                             return success;
@@ -990,7 +990,7 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
                                     RestrictedStore.this
                                     .addUsedBytes(DIRECTORY_SIZE);
                                 } catch (IOException ioe) {
-                                    // Ignore
+                                    logger.error(ioe);
                                 }
                             }
                             return success;

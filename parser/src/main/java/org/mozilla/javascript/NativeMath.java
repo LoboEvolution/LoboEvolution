@@ -14,7 +14,7 @@ import org.mozilla.javascript.typedarrays.Conversions;
  * @author Norris Boyd
  */
 
-final class NativeMath extends IdScriptableObject
+class NativeMath extends IdScriptableObject
 {
     static final long serialVersionUID = -8838847185801131569L;
 

@@ -12,7 +12,7 @@ import java.io.*;
 import java.security.*;
 import java.util.*;
 
-public final class JavaAdapter implements IdFunctionCall
+public class JavaAdapter implements IdFunctionCall
 {
     /**
      * Provides a key with which to distinguish previously generated

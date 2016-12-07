@@ -82,7 +82,7 @@ public class ReuseManager {
             File portFile = new File(appHome, PORT_FILE);
             portFile.delete();
         } catch (IOException ioe) {
-            // ignore
+            logger.error(ioe);
         }
     }
 
@@ -120,7 +120,7 @@ public class ReuseManager {
                 	logger.log(Level.ERROR,eofe);
                     portFile.delete();
                 } catch (FileNotFoundException fnfe) {
-                    // Likely not running
+                	logger.error(fnfe);
                 }
                 if (port != -1) {
                     Socket s = new Socket(bindHost, port);

@@ -65,8 +65,6 @@ RCollection {
         RCollection parent = this.parent;
         if (parent != null) {
             parent.focus();
-        } else {
-            // TODO: Remove local focus
         }
     }
 

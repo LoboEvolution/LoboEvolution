@@ -20,7 +20,7 @@ import java.util.TimeZone;
  * Significant parts of this code are adapted from the venerable jsdate.cpp (also Mozilla):
  * https://dxr.mozilla.org/mozilla-central/source/js/src/jsdate.cpp
  */
-final class NativeDate extends IdScriptableObject
+class NativeDate extends IdScriptableObject
 {
     static final long serialVersionUID = -8307438915861678966L;
 

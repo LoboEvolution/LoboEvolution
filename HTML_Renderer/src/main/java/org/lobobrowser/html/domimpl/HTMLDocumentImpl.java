@@ -562,7 +562,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 					try {
 						this.reader.close();
 					} catch (IOException ioe) {
-						// ignore
+						logger.error(ioe);
 					}
 					this.reader = null;
 				} else {
@@ -648,7 +648,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				try {
 					this.reader.close();
 				} catch (IOException ioe) {
-					// ignore
+					logger.error(ioe);
 				}
 				this.reader = null;
 			}
@@ -668,7 +668,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 					// This can end up in openBufferChanged
 					this.reader.write(text);
 				} catch (IOException ioe) {
-					// ignore
+					logger.error(ioe);
 				}
 			}
 		}
@@ -687,7 +687,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 					// This can end up in openBufferChanged
 					this.reader.write(text + "\r\n");
 				} catch (IOException ioe) {
-					// ignore
+					logger.error(ioe);
 				}
 			}
 		}
@@ -1321,7 +1321,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.sizeInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}
@@ -1349,7 +1349,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.lookInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 
@@ -1376,7 +1376,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.positionInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}
@@ -1403,7 +1403,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.invalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}
@@ -1429,7 +1429,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.structureInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}
@@ -1455,7 +1455,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.nodeLoaded(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}
@@ -1481,7 +1481,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.externalScriptLoading(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}
@@ -1504,7 +1504,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.allInvalidated();
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}

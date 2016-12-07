@@ -87,7 +87,7 @@ import org.lobobrowser.util.io.IORoutines;
 /**
  * The Class RequestEngine.
  */
-public final class RequestEngine {
+public class RequestEngine {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(RequestEngine.class);
@@ -484,13 +484,11 @@ public final class RequestEngine {
 				byte[] persistentContent = null;
 				CacheManager cm = CacheManager.getInstance();
 				entry = (MemoryCacheEntry) cm.getTransient(url);
-				if (entry == null) {
-					if (!"file".equalsIgnoreCase(url.getProtocol()) || !Strings.isBlank(url.getHost())) {
-						try {
-							persistentContent = cm.getPersistent(url, false);
-						} catch (IOException ioe) {
-							logger.error("getCacheInfo(): Unable to load cache file.", ioe);
-						}
+				if (entry == null && !"file".equalsIgnoreCase(url.getProtocol()) || !Strings.isBlank(url.getHost())) {
+					try {
+						persistentContent = cm.getPersistent(url, false);
+					} catch (IOException ioe) {
+						logger.error("getCacheInfo(): Unable to load cache file.", ioe);
 					}
 				}
 				if ((persistentContent == null) && (entry == null)) {
@@ -1193,7 +1191,7 @@ public final class RequestEngine {
 							try {
 								responseIn.close();
 							} catch (IOException ioe) {
-								// ignore
+								logger.error(ioe);
 							}
 						}
 						if (connection instanceof HttpURLConnection) {
