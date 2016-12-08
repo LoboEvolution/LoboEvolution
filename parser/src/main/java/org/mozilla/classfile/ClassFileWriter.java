@@ -423,6 +423,7 @@ public class ClassFileWriter {
         if (stackMapTableLength > 0) {
             int stackMapTableAttrIndex =
                     itsConstantPool.addUtf8("StackMapTable");
+            int start = index;
             index = putInt16(stackMapTableAttrIndex, codeAttribute, index);
             index = stackMap.write(codeAttribute, index);
         }
@@ -1428,7 +1429,7 @@ public class ClassFileWriter {
      * stack map table contains the state of local variable and operand stack
      * for a given super block.
      */
-    class StackMapTable {
+    final class StackMapTable {
         StackMapTable() {
             superBlocks = null;
             locals = stack = null;
@@ -2552,6 +2553,7 @@ public class ClassFileWriter {
         }
 
         private int writeTypes(int[] types, int start) {
+            int startOffset = rawStackMapTop;
             for (int i = start; i < types.length; i++) {
                 rawStackMapTop = writeType(types[i]);
             }
@@ -4266,7 +4268,7 @@ public class ClassFileWriter {
     private char[] tmpCharBuffer = new char[64];
 }
 
-class ExceptionTableEntry
+final class ExceptionTableEntry
 {
 
     ExceptionTableEntry(int startLabel, int endLabel,
@@ -4284,7 +4286,7 @@ class ExceptionTableEntry
     short itsCatchType;
 }
 
-class ClassFileField
+final class ClassFileField
 {
 
     ClassFileField(short nameIndex, short typeIndex, short flags)
@@ -4341,7 +4343,7 @@ class ClassFileField
     private int itsIndex;
 }
 
-class ClassFileMethod
+final class ClassFileMethod
 {
 
     ClassFileMethod(String name, short nameIndex, String type, short typeIndex,
@@ -4401,7 +4403,7 @@ class ClassFileMethod
 
 }
 
-class ConstantPool
+final class ConstantPool
 {
 
     ConstantPool(ClassFileWriter cfw)
@@ -4735,7 +4737,7 @@ class ConstantPool
     private byte itsPool[];
 }
 
-class FieldOrMethodRef
+final class FieldOrMethodRef
 {
     FieldOrMethodRef(String className, String name, String type)
     {
@@ -4794,7 +4796,7 @@ class FieldOrMethodRef
  * outputs stack map frames at the start of every super block except the method
  * start.
  */
-class SuperBlock {
+final class SuperBlock {
     SuperBlock(int index, int start, int end, int[] initialLocals) {
         this.index = index;
         this.start = start;
@@ -4950,7 +4952,7 @@ class SuperBlock {
  * tag in the output, we store it in bits 8-23 for uniformity; the tag is
  * always in bits 0-7.
  */
-class TypeInfo {
+final class TypeInfo {
     private TypeInfo() { }
 
     static final int TOP = 0;

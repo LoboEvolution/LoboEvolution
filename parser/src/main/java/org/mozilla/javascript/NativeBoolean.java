@@ -11,7 +11,7 @@ package org.mozilla.javascript;
  * See ECMA 15.6.
  * @author Norris Boyd
  */
-class NativeBoolean extends IdScriptableObject
+final class NativeBoolean extends IdScriptableObject
 {
     static final long serialVersionUID = -3716996899943880933L;
 
@@ -78,7 +78,7 @@ class NativeBoolean extends IdScriptableObject
                     : ScriptRuntime.toBoolean(args[0]);
             }
             if (thisObj == null) {
-                // Boolean.valueOf(val) creates a new boolean object.
+                // new Boolean(val) creates a new boolean object.
                 return new NativeBoolean(b);
             }
             // Boolean(val) converts val to a boolean.
@@ -97,7 +97,7 @@ class NativeBoolean extends IdScriptableObject
             return value ? "true" : "false";
 
           case Id_toSource:
-            return value ? "(Boolean.valueOf(true))" : "(Boolean.valueOf(false))";
+            return value ? "(new Boolean(true))" : "(new Boolean(false))";
 
           case Id_valueOf:
             return ScriptRuntime.wrapBoolean(value);

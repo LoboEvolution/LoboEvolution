@@ -17,7 +17,7 @@ import java.io.Serializable;
  * ObjectInputStream would not restore them correctly as it lacks support
  * for readResolve method
  */
-public class UniqueTag implements Serializable
+public final class UniqueTag implements Serializable
 {
     static final long serialVersionUID = -4320556826714577259L;
 

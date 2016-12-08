@@ -735,7 +735,7 @@ public class RegExpImpl implements RegExpProxy {
 }
 
 
-class GlobData
+final class GlobData
 {
     int      mode;      /* input: return index, match object, or void */
     boolean  global;    /* output: whether regexp was global */

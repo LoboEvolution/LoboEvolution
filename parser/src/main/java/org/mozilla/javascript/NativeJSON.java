@@ -20,7 +20,7 @@ import java.util.LinkedList;
  * See ECMA 15.12.
  * @author Matthew Crumley, Raphael Speyer
  */
-public class NativeJSON extends IdScriptableObject
+public final class NativeJSON extends IdScriptableObject
 {
     static final long serialVersionUID = -4567599697595654984L;
 
@@ -196,6 +196,7 @@ public class NativeJSON extends IdScriptableObject
             this.gap = gap;
             this.replacer = replacer;
             this.propertyList = propertyList;
+            this.space = space;
         }
 
         Stack<Scriptable> stack = new Stack<Scriptable>();
@@ -203,6 +204,8 @@ public class NativeJSON extends IdScriptableObject
         String gap;
         Callable replacer;
         List<Object> propertyList;
+        Object space;
+
         Context cx;
         Scriptable scope;
     }

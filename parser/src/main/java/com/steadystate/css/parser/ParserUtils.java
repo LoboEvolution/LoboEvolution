@@ -20,7 +20,7 @@ package com.steadystate.css.parser;
  *
  * @author RBRi
  */
-public class ParserUtils {
+public final class ParserUtils {
 
     private ParserUtils() {
     }

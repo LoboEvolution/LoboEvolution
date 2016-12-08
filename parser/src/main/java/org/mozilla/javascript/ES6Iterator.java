@@ -11,12 +11,7 @@ import static org.mozilla.javascript.NativeSymbol.TO_STRING_TAG_PROPERTY;
 
 public abstract class ES6Iterator extends IdScriptableObject {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	static void init(ScriptableObject scope, boolean sealed, IdScriptableObject prototype, String tag) {
+    static void init(ScriptableObject scope, boolean sealed, IdScriptableObject prototype, String tag) {
         if (scope != null) {
             prototype.setParentScope(scope);
             prototype.setPrototype(getObjectPrototype(scope));

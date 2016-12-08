@@ -30,13 +30,9 @@ may override scopeInit or fillConstructorProperties methods.
 public abstract class IdScriptableObject extends ScriptableObject
     implements IdFunctionCall
 {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private transient PrototypeValues prototypeValues;
+    private transient PrototypeValues prototypeValues;
 
-    private static class PrototypeValues implements Serializable
+    private static final class PrototypeValues implements Serializable
     {
         static final long serialVersionUID = 3038645279153854371L;
 

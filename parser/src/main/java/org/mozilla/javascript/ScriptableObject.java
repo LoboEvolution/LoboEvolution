@@ -229,7 +229,7 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
         return desc;
     }
 
-    private static class GetterSlot extends Slot
+    private static final class GetterSlot extends Slot
     {
         static final long serialVersionUID = -4900574849788797588L;
 
@@ -353,11 +353,7 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
      */
     private static class RelinkedSlot extends Slot {
 
-        /**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		final Slot slot;
+        final Slot slot;
 
         RelinkedSlot(Slot slot) {
             super(slot.name, slot.indexOrHash, slot.attributes);
@@ -3257,7 +3253,7 @@ public abstract class ScriptableObject implements Scriptable, Serializable,
      * in insertion-time order, we treat all as equal. The "Arrays.sort" method will then not
      * change their order, but simply move all the numeric properties to the front.
      */
-    private static class KeyComparator
+    private static final class KeyComparator
         implements Comparator<Object>
     {
         @Override

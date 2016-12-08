@@ -2,12 +2,7 @@ package org.mozilla.javascript;
 
 public class IdFunctionObjectES6 extends IdFunctionObject{
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	public IdFunctionObjectES6(IdFunctionCall idcall, Object tag, int id, String name, int arity, Scriptable scope) {
+    public IdFunctionObjectES6(IdFunctionCall idcall, Object tag, int id, String name, int arity, Scriptable scope) {
         super(idcall, tag, id, name, arity, scope);
     }
 

@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 import org.mozilla.javascript.debug.DebuggableScript;
 
-class InterpreterData implements Serializable, DebuggableScript
+final class InterpreterData implements Serializable, DebuggableScript
 {
     static final long serialVersionUID = 5067677351589230234L;
 

@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
  *
  *  ECMA 15.11
  */
-class NativeError extends IdScriptableObject
+final class NativeError extends IdScriptableObject
 {
     static final long serialVersionUID = -5338413581437645187L;
 
@@ -353,7 +353,7 @@ class NativeError extends IdScriptableObject
      * We will attch this object to the constructor and use it solely to store the constructor properties
      * that are "global." We can't make them static because there can be many contexts in the same JVM.
      */
-    private static class ProtoProps
+    private static final class ProtoProps
         implements Serializable
     {
         static final String KEY = "_ErrorPrototypeProps";
@@ -379,12 +379,43 @@ class NativeError extends IdScriptableObject
         private int stackTraceLimit = DEFAULT_STACK_LIMIT;
         private Function prepareStackTrace;
 
+        public Object getStackTraceLimit(Scriptable thisObj) {
+            if (stackTraceLimit >= 0) {
+                return stackTraceLimit;
+            } else {
+                return Double.POSITIVE_INFINITY;
+            }
+        }
+
         public int getStackTraceLimit() {
             return stackTraceLimit;
         }
 
+        public void setStackTraceLimit(Scriptable thisObj, Object value) {
+            double limit = Context.toNumber(value);
+            if (Double.isNaN(limit) || Double.isInfinite(limit)) {
+                stackTraceLimit = -1;
+            } else {
+                stackTraceLimit = (int)limit;
+            }
+        }
+
+        public Object getPrepareStackTrace(Scriptable thisObj)
+        {
+            Object ps = getPrepareStackTrace();
+            return (ps == null ? Undefined.instance : ps);
+        }
+
         public Function getPrepareStackTrace() {
             return prepareStackTrace;
+        }
+
+        public void setPrepareStackTrace(Scriptable thisObj, Object value) {
+            if ((value == null) || Undefined.instance.equals(value)) {
+                prepareStackTrace = null;
+            } else if (value instanceof Function) {
+                prepareStackTrace = (Function)value;
+            }
         }
     }
 }

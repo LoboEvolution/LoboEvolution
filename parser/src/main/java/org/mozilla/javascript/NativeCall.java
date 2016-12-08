@@ -14,7 +14,7 @@ package org.mozilla.javascript;
  * @see org.mozilla.javascript.Arguments
  * @author Norris Boyd
  */
-public class NativeCall extends IdScriptableObject
+public final class NativeCall extends IdScriptableObject
 {
     static final long serialVersionUID = -7471457301304454454L;
 

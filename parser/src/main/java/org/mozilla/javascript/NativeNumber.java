@@ -13,7 +13,7 @@ package org.mozilla.javascript;
  *
  * @author Norris Boyd
  */
-class NativeNumber extends IdScriptableObject
+final class NativeNumber extends IdScriptableObject
 {
     static final long serialVersionUID = 3504516769741512101L;
 

@@ -27,7 +27,7 @@ import static org.mozilla.javascript.ScriptRuntimeES6.requireObjectCoercible;
  * @author Mike McCabe
  * @author Norris Boyd
  */
-class NativeString extends IdScriptableObject
+final class NativeString extends IdScriptableObject
 {
     static final long serialVersionUID = 920268368584188687L;
 

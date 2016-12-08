@@ -17,7 +17,7 @@ package com.steadystate.css.util;
 
 import java.util.List;
 
-public class LangUtils {
+public final class LangUtils {
     public static final int HASH_SEED = 17;
     public static final int HASH_OFFSET = 37;
 
