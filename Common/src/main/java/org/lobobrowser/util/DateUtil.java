@@ -113,6 +113,8 @@ public class DateUtil {
     	DATE_FORMAT.add("EEEMMM ddyyyy");
     	DATE_FORMAT.add("EEEdd MMM yyyy HHmmss Z");
     	DATE_FORMAT.add("EEE, dd MMM yyyy HH:mm:ss Z");
+    	DATE_FORMAT.add("EEE, dd-MMM-yyyy hh:mm:ss z");
+    	DATE_FORMAT.add("EEE, dd/MMM/yyyy hh:mm:ss z");
     	DATE_FORMAT.add("EEE MMM dd HHmmss Z yyyy");
     	DATE_FORMAT.add("yyyy-MM-dd HHmmss Z");
     	DATE_FORMAT.add("yyyy-MM-dd HHmmss.S");
