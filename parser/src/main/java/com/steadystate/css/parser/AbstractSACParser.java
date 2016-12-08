@@ -66,8 +66,6 @@ abstract class AbstractSACParser implements Parser {
 
     private static final String NUM_CHARS = "0123456789.";
 
-    protected abstract Token getToken();
-
     protected DocumentHandler getDocumentHandler() {
         if (documentHandler_ == null) {
             setDocumentHandler(new HandlerBase());
@@ -142,10 +140,6 @@ abstract class AbstractSACParser implements Parser {
             }
         }
         return sacParserMessages_;
-    }
-
-    public Locator getLocator() {
-        return createLocator(getToken());
     }
 
     protected Locator createLocator(final Token t) {

@@ -322,6 +322,7 @@ public interface SACParserCSS3Constants {
     "<FUNCTION>",
     "<ATKEYWORD>",
     "<UNKNOWN>",
+    "\"progid:\"",
   };
 
 }

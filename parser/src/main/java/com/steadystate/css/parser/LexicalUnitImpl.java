@@ -348,7 +348,7 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, CSSFo
 
                 // replace line breaks
                 String value = getStringValue();
-                value = value.replace("\n", "\\a ").replace("\r", "\\d ");
+                value = value.replace("\n", "\\A ").replace("\r", "\\D ");
                 sb.append(value);
 
                 sb.append("\"");

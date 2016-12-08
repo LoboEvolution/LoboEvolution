@@ -280,6 +280,7 @@ public interface SACParserCSS21Constants {
     "<FUNCTION>",
     "<ATKEYWORD>",
     "<UNKNOWN>",
+    "\"progid:\"",
   };
 
 }
