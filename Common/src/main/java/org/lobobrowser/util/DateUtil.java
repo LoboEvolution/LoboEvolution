@@ -65,7 +65,7 @@ public class DateUtil {
 			try {
 				 return parse(dateString, regexp,loc);
 			} catch (ParseException e) {
-				logger.error(e);
+				continue;
 			}
 		}
 		return null; // Unknown format.
