@@ -9,6 +9,8 @@
 		</authors>
 		<url>http://sourceforge.net/projects/loboevolution/</url>
 		<javaversion>1.8</javaversion>
+		<run-privileged condition="izpack.windowsinstall|izpack.macinstall|izpack.linuxinstall|izpack.solarisinstall|izpack.solarisinstall.x86|izpack.solarisinstall.sparc"/>
+		<uninstaller  name="uninstall.jar" path="${INSTALL_PATH}/uninstaller" write="yes"/>
 	</info>
 
 	<!-- The gui preferences indication. Sets the installer window to 640x480. 
@@ -72,9 +74,21 @@
 			<executable targetfile="$INSTALL_PATH/lobo.jar" />
 		</pack>
 	</packs>
+	
+	<listeners>
+		<listener classname="RegistryInstallerListener" stage="install">
+			<os family="windows" />
+		</listener>
+		<listener classname="RegistryUninstallerListener" stage="uninstall">
+			<os family="windows" />
+		</listener>
+	</listeners>
 
 	<!-- Needed for shortcuts -->
 	<native type="izpack" name="ShellLink.dll" os="windows" />
 	<native type="izpack" name="ShellLink_x64.dll" os="windows" />
+	<native type="3rdparty" name="COIOSHelper.dll" os="windows" stage="both"/>
+	<native type="3rdparty" name="COIOSHelper_x64.dll" os="windows" stage="both"/>
 	<jar src="../RegistryPanel.jar" />
+	
 </installation>
