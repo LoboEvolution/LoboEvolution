@@ -11,7 +11,7 @@
 	<property name="report.findbugs.dir" value="${build.dir}/findbugs/" />
 	<property name="report.pmd.dir" value="${build.dir}/pmd/" />
 	<taskdef name="izpack" classpath="compiler.jar" classname="com.izforge.izpack.ant.IzPackTask" />
-	<target name="default" depends="builddir,distros" />
+	<target name="default" depends="builddir,distros,findbugs_compile,pmd_compile" />
 	<target name="distros" depends="installer,lobo_zip" />
 
 	<target name="builddir">
