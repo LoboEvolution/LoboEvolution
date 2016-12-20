@@ -28,7 +28,7 @@
 		<izpack input="install.xml" output="${build.dir}/install-lobo-${lobo.version}.jar" installerType="standard" basedir="${lobo.dir}" izPackDir="${izpack.home}" />
 	</target>
 
-	<target name="lobo_zip" depends="directory_structure,findbugs_compile,pmd_compile">
+	<target name="lobo_zip" depends="directory_structure">
 		<zip destfile="${build.dir}/lobo-distro-${lobo.version}.zip">
 			<zipfileset dir="${lobo.dir}" includes="**" prefix="lobo-distro-${lobo.version}" />
 		</zip>
