@@ -33,12 +33,7 @@ public class HtmlOptionTest extends SimpleLoboTest {
 	@Test
     public void basicTest() throws Exception {
         String htmlSource = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
+            + "</head><body >\n"
             + "<select>\n"
             + "  <option id='myId'>test1</option>\n"
             + "  <option id='myId2'>test2</option>\n"

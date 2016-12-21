@@ -31,14 +31,8 @@ public class HtmlMetaTest extends SimpleLoboTest {
     public void basicTest() throws Exception {
         String htmlSource = "<html><head>\n"
             + "<meta id='myId' http-equiv='content-type' content='text/html'>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('m'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
+            + "</head><body >\n"
             + "</body></html>";
-
 
         HTMLDocumentImpl doc = loadPage(htmlSource);
         assertTrue(META.equals(doc.getElementById("myId").getNodeName()));

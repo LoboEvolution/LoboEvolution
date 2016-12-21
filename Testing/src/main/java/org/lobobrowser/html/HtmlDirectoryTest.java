@@ -28,12 +28,7 @@ public class HtmlDirectoryTest extends SimpleLoboTest {
     @Test
     public void basicTest() throws Exception {
         String htmlSource = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
+            + "</head><body >\n"
             + "  <dir id='myId'>\n"
             + "    <li>First Item</li>\n"
             + "    <li>Secong Item</li>\n"

@@ -30,7 +30,7 @@ public class HtmlFrameTest extends SimpleLoboTest {
     public void basicTest() throws Exception {
         final String htmlSource =
             "<html><head><title>frames</title></head>\n"
-            + "<frameset cols='180,*'>\n"
+            + "<frameset cols='180,*' id='myId'>\n"
             + "<frame name='f1' src='1.html'/>\n"
             + "<frame name='f2' src='2.html'/>\n"
             + "</frameset>\n"

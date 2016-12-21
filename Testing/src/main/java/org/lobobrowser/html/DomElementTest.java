@@ -35,7 +35,7 @@ public final class DomElementTest extends SimpleLoboTest {
                 + "    alert(document.f1.getElementsByTagName('INPUT').length);\n"
                 + "}\n"
                 + "</script></head>\n"
-                + "<body onload='test()'>\n"
+                + "<body >\n"
                 + "  <form name='f1'>\n"
                 + "    <input>\n"
                 + "    <INPUT>\n"

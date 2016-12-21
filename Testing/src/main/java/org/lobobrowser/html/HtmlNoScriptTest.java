@@ -31,7 +31,7 @@ public class HtmlNoScriptTest extends SimpleLoboTest {
         String htmlSource
             = "<html><body>\n"
             + "<form name='item' method='get'>\n"
-            + "  <noscript>\n"
+            + "  <noscript id ='myId'>\n"
             + "    <input type=hidden name='__webpage_no_js__' value='1'>\n"
             + "  </noscript>\n"
             + "  <input type=hidden name='myParam' value='myValue'>\n"

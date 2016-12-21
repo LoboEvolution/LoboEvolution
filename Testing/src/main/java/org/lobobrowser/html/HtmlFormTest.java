@@ -30,7 +30,7 @@ public class HtmlFormTest extends SimpleLoboTest {
     public void basicTest() throws Exception {
         final String htmlSource
             = "<html><head><title>First</title></head><body>\n"
-            + "<form method='get' action='javascript:alert(\"clicked\")'>\n"
+            + "<form id='myId' method='get' action='javascript:alert(\"clicked\")'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
             + "</body></html>";
 

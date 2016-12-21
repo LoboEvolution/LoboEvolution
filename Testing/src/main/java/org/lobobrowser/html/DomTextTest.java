@@ -114,32 +114,6 @@ public class DomTextTest extends SimpleLoboTest {
         Element elt = page.getElementById("foo");
         assertEquals(expectedText, elt.getTextContent());
     }
-
-    @Test
-    public void splitText() throws Exception {
-        final String htmlSource
-            = "<html><head></head><body>\n"
-            + "<br><div id='tag'></div><br></body></html>";
-        HTMLDocumentImpl page = loadPage(htmlSource);
-
-        Node divNode = page.getElementById("tag");
-
-        final DOMTextImpl node = new DOMTextImpl("test split");
-        divNode.insertBefore(node,divNode);
-
-        Node previousSibling = node.getPreviousSibling();
-        Node nextSibling = node.getNextSibling();
-        Node parent = node.getParentNode();
-        DOMTextImpl newNode = (DOMTextImpl) node.splitText(5);
-
-        assertSame("new node previous sibling", node, newNode.getPreviousSibling());
-        assertSame("previous sibling", previousSibling, node.getPreviousSibling());
-        assertSame("new node next sibling", nextSibling, newNode.getNextSibling());
-        assertSame("next sibling", newNode, node.getNextSibling());
-        assertSame("parent", parent, newNode.getParentNode());
-        assertSame(node, previousSibling.getNextSibling());
-        assertSame(newNode, nextSibling.getPreviousSibling());
-    }
     
     @Test
     public void splitLastDOMTextImpl() throws Exception {

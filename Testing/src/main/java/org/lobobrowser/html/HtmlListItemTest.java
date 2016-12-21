@@ -30,17 +30,11 @@ public class HtmlListItemTest extends SimpleLoboTest {
     @Test
     public void basicTest() throws Exception {
         String htmlSource = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
+            + "</head><body >\n"
             + "  <ul>\n"
             + "    <li id='myId'>Item1></li>\n"
             + "  </ul>\n"
             + "</body></html>";
-
 
         HTMLDocumentImpl doc = loadPage(htmlSource);
         assertTrue(LI.equals(doc.getElementById("myId").getNodeName()));

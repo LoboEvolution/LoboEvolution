@@ -30,7 +30,7 @@ public class HtmlBaseTest extends SimpleLoboTest{
     public void basicTest() throws Exception {
         String htmlSource = "<html><head>\n"
             + "<base id='myId' target='MyNewWindow'/>\n"
-            + "</head><body onload='test()'>\n"
+            + "</head><body >\n"
             + "</body></html>";
         
         HTMLDocumentImpl doc = loadPage(htmlSource);

@@ -31,15 +31,9 @@ public class HtmlQuoteTest extends SimpleLoboTest {
     @Test
     public void basicTest() throws Exception {
         String htmlSource = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId1'));\n"
-            + "    alert(document.getElementById('myId2'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
+            + "</head><body >\n"
             + "  <q id='myId1'>First Quote</q>\n"
-            + "  <blockquote id='myId2'>Second Quote</blockquote>\n"
+            + "  <blockquote id='myId'>Second Quote</blockquote>\n"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

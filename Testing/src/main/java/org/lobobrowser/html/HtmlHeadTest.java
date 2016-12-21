@@ -30,12 +30,8 @@ public class HtmlHeadTest extends SimpleLoboTest {
     
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head id='myId'><script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
+        String htmlSource = "<html><head id='myId'>"
+            + "</head><body >\n"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

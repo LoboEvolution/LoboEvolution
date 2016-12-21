@@ -36,7 +36,7 @@ public class HtmlFieldSetTest extends SimpleLoboTest {
             + "    alert(fs.form);\n"
             + "  }\n"
             + "</script>\n"
-            + "</head><body onload='test()'>\n"
+            + "</head><body >\n"
             + "  <form>\n"
             + "    <fieldset id='fs'>\n"
             + "      <legend>Legend</legend>\n"

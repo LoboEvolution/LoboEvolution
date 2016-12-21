@@ -31,7 +31,7 @@ public class HtmlScriptTest extends SimpleLoboTest {
 		
 		String htmlSource
             = "<html><head></head><body>\n"
-            + "<script>alert('Second page loading')</script>\n"
+            + "<script id='myId'>alert('Second page loading')</script>\n"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);
