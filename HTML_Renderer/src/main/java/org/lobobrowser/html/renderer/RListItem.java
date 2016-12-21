@@ -141,7 +141,7 @@ public class RListItem extends BaseRListElement {
 		// Note: Count must be calculated even if layout is valid.
 		RenderState renderState = this.modelNode.getRenderState();
 		Integer value = this.getValue();
-		if (value == UNSET) {
+		if (value.intValue() == UNSET.intValue()) {
 			this.count = renderState.incrementCount(DEFAULT_COUNTER_NAME, this.listNesting);
 		} else {
 			int newCount = value.intValue();
@@ -163,7 +163,7 @@ public class RListItem extends BaseRListElement {
 		RBlockViewport layout = this.bodyLayout;
 		if (layout != null) {
 			ListStyle listStyle = this.listStyle;
-			int bulletType = listStyle == null ? ListStyle.TYPE_UNSET : listStyle.type;
+			int bulletType = listStyle == null ? ListStyle.TYPE_UNSET : listStyle.getType();
 			if (bulletType != ListStyle.TYPE_NONE) {
 				if (bulletType == ListStyle.TYPE_UNSET) {
 					RCollection parent = this.getOriginalOrCurrentParent();
@@ -172,7 +172,7 @@ public class RListItem extends BaseRListElement {
 					}
 					if (parent instanceof RList) {
 						ListStyle parentListStyle = ((RList) parent).listStyle;
-						bulletType = parentListStyle == null ? ListStyle.TYPE_DISC : parentListStyle.type;
+						bulletType = parentListStyle == null ? ListStyle.TYPE_DISC : parentListStyle.getType();
 					} else {
 						bulletType = ListStyle.TYPE_DISC;
 					}

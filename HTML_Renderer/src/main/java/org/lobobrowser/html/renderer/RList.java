@@ -66,7 +66,7 @@ public class RList extends BaseRListElement {
 	protected void applyStyle(int availWidth, int availHeight) {
 		super.applyStyle(availWidth, availHeight);
 		ListStyle listStyle = this.listStyle;
-		if ((listStyle == null) || (listStyle.type == ListStyle.TYPE_UNSET)) {
+		if ((listStyle == null) || (listStyle.getType() == ListStyle.TYPE_UNSET)) {
 			Object rootNode = this.modelNode;
 			if (!(rootNode instanceof HTMLElementImpl)) {
 				return;
@@ -79,14 +79,14 @@ public class RList extends BaseRListElement {
 			if ("ul".equalsIgnoreCase(rootElement.getTagName())) {
 				int listNesting = this.listNesting;
 				if (listNesting == 0) {
-					listStyle.type = ListStyle.TYPE_DISC;
+					listStyle.setType(ListStyle.TYPE_DISC);
 				} else if (listNesting == 1) {
-					listStyle.type = ListStyle.TYPE_CIRCLE;
+					listStyle.setType(ListStyle.TYPE_CIRCLE);
 				} else {
-					listStyle.type = ListStyle.TYPE_SQUARE;
+					listStyle.setType(ListStyle.TYPE_SQUARE);
 				}
 			} else {
-				listStyle.type = ListStyle.TYPE_DECIMAL;
+				listStyle.setType(ListStyle.TYPE_DECIMAL);
 			}
 		}
 	}

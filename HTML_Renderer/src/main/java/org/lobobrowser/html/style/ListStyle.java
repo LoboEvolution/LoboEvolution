@@ -78,13 +78,13 @@ public class ListStyle {
     public static final int POSITION_OUTSIDE = 0;
 
     /** The type. */
-    public int type;
+    private int type;
 
     /** The image. */
-    public java.awt.Image image;
+    private Image image;
 
     /** The position. */
-    public int position;
+    private int position;
 
     /**
      * Instantiates a new list style.
@@ -98,18 +98,14 @@ public class ListStyle {
      */
     public ListStyle(final int type, final Image image, final int position) {
         super();
-        this.type = type;
-        this.image = image;
-        this.position = position;
+        this.setType(type);
+        this.setImage(image);
+        this.setPosition(position);
     }
+    
+    public ListStyle() {}
 
-    /**
-     * Instantiates a new list style.
-     */
-    public ListStyle() {
-    }
-
-    /**
+	/**
      * Gets the roman numerals.
      *
      * @param num
@@ -159,5 +155,29 @@ public class ListStyle {
         }
         return sb.toString();
     }
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
 
 }

@@ -443,10 +443,13 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	@Override
 	public final String getAttribute(String name) {
 		String normalName = this.normalizeAttributeName(name);
-		synchronized (this) {
-			Map<String, String> attributes = this.attributes;
-			return attributes == null ? null : (String) attributes.get(normalName);
+		if (normalName != null && normalName.length() > 0) {
+			synchronized (this) {
+				Map<String, String> attributes = this.attributes;
+				return attributes == null ? null : (String) attributes.get(normalName);
+			}
 		}
+		return null;
 	}
 
 	/**

@@ -99,7 +99,7 @@ public class VolatileContentImpl implements ContentBuffer {
 	 * @return the bytes
 	 */
     public byte[] getBytes() {
-        return bytes;
+        return this.bytes;
     }
 
     /** Gets the content type.

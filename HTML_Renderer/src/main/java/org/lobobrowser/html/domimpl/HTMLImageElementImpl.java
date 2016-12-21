@@ -261,7 +261,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 	}
 
 	/** The listeners. */
-	private final ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
+	private ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
 
 	/**
 	 * Adds a listener of image loading events. The listener gets called right
@@ -293,10 +293,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 	 *            the listener
 	 */
 	public void removeImageListener(ImageListener listener) {
-		ArrayList<ImageListener> l = this.listeners;
-		synchronized (l) {
-			l.remove(l);
-		}
+		this.listeners = new ArrayList<ImageListener>();
 	}
 
 	/**

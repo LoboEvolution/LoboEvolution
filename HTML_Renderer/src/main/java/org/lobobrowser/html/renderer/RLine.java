@@ -46,7 +46,7 @@ public class RLine extends BaseRCollection {
 
 	/** The renderables. */
 	private final ArrayList<Renderable> renderables = new ArrayList<Renderable>(8);
-	// private final RenderState startRenderState;
+	
 	/** The base line offset. */
 	private int baseLineOffset;
 
@@ -168,6 +168,7 @@ public class RLine extends BaseRCollection {
 
 	@Override
 	public void paint(Graphics g) {
+		logger.error("paint");
 		// Paint according to render state of the start of line first.
 		RenderState rs = this.modelNode.getRenderState();
 		if (rs != null) {
@@ -512,6 +513,7 @@ public class RLine extends BaseRCollection {
 	 *            the valign
 	 */
 	private void adjustHeight(int newHeight, int elementHeight, int valign) {
+		
 		// Set new line height
 		// int oldHeight = this.height;
 		this.height = newHeight;

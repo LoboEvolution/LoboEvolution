@@ -256,7 +256,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 					actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
 					setter.invoke(this.getJavaObject(), new Object[] { actualValue });
 				} catch (IllegalArgumentException iae) {
-					iae.getCause();
+					logger.error(iae);
 				} catch (Exception err) {
 					logger.error(err);
 				}

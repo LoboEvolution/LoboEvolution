@@ -2047,27 +2047,6 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getTextContent()
-	 */
-	@Override
-	public String getTextContent() throws DOMException {
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * org.lobobrowser.html.domimpl.DOMNodeImpl#setTextContent(java.lang.String)
-	 */
-	@Override
-	public void setTextContent(String textContent) throws DOMException {
-		// NOP, per spec
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
 	 * @see org.lobobrowser.w3c.html.HTMLDocument#getTitle()
 	 */
 	@Override
@@ -3518,9 +3497,8 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 * @param result
 	 *            the result
 	 */
-	public void evaluate(String expression, HTMLDocumentImpl contextNode, XPathNSResolver resolver, short type,
-			Object result) {
-		evaluate(expression, contextNode, resolver, type, result);
+	public void evaluate(String expression, HTMLDocumentImpl contextNode, XPathNSResolver resolver, short type, Object result) {
+		eval(expression, contextNode, resolver, type, result);
 	}
 
 	@Override
@@ -3562,8 +3540,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 *            the result
 	 * @return the x path result
 	 */
-	private XPathResultImpl eval(String expression, Node contextNode, XPathNSResolver resolver, short type,
-			Object result) {
+	private XPathResultImpl eval(String expression, Node contextNode, XPathNSResolver resolver, short type, Object result) {
 		XPathEvaluatorImpl evaluator = new XPathEvaluatorImpl(document);
 		return (XPathResultImpl) evaluator.evaluate(expression, contextNode, resolver, type, result);
 

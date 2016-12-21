@@ -94,11 +94,11 @@ public class FontKey {
         // Note that we use String.intern() for all string fields,
         // so we can do instance comparisons.
         return (this.fontSize == ors.fontSize)
-                && (this.fontFamily == ors.fontFamily)
-                && (this.fontStyle == ors.fontStyle)
-                && (this.fontWeight == ors.fontWeight)
-                && (this.fontVariant == ors.fontVariant)
-                && (this.superscript == ors.superscript)
+                && (this.fontFamily.equals(ors.fontFamily))
+                && (this.fontStyle.equals(ors.fontStyle))
+                && (this.fontWeight.equals(ors.fontWeight))
+                && (this.fontVariant.equals(ors.fontVariant))
+                && (this.superscript.intValue() == ors.superscript.intValue())
                 && Objects.equals(this.locales, ors.locales);
     }
     

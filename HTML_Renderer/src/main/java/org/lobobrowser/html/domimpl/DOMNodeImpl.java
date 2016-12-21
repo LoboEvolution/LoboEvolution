@@ -167,7 +167,7 @@ Node, ModelNode {
     /**
      * Removes the all children.
      */
-    protected void removeAllChildren() {
+    public void removeAllChildren() {
         synchronized (this.getTreeLock()) {
             this.removeAllChildrenImpl();
         }
@@ -993,7 +993,7 @@ Node, ModelNode {
                 }
             }
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     /*

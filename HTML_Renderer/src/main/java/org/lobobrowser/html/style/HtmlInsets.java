@@ -21,13 +21,16 @@
 package org.lobobrowser.html.style;
 
 import java.awt.Insets;
+import java.io.Serializable;
 
 /**
  * The Class HtmlInsets.
  */
-public class HtmlInsets {
+public class HtmlInsets implements Serializable{
 
-    /** The Constant TYPE_UNDEFINED. */
+	private static final long serialVersionUID = 1L;
+
+	/** The Constant TYPE_UNDEFINED. */
     public static final int TYPE_UNDEFINED = 0;
 
     /** The Constant TYPE_PIXELS. */

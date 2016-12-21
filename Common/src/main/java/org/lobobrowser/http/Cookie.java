@@ -32,18 +32,25 @@ import java.net.URLEncoder;
  * @author J. H. S.
  */
 public class Cookie extends NameValuePair {
+	
     /** The comment. */
     private String comment;
+    
     /** The domain. */
     private String domain;
+    
     /** The expires. */
     private long expires;
+    
     /** The max age. */
     private int maxAge = -1;
+    
     /** The path. */
     private String path;
+    
     /** The secure. */
     private boolean secure;
+    
     /** The version. */
     private int version;
     

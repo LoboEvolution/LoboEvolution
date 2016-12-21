@@ -848,9 +848,9 @@ public class RBlockViewport extends BaseRCollection {
 		int newLineY;
 		FloatingBounds fb = this.floatBounds;
 		if ((breakType == LineBreak.NONE) || (fb == null)) {
-			newLineY = line == null ? this.paddingInsets.top : line.y + line.height;
+			newLineY = line.y + line.height;
 		} else {
-			int prevY = line == null ? this.paddingInsets.top : line.y + line.height;
+			int prevY = line.y + line.height;
 			switch (breakType) {
 			case LineBreak.LEFT:
 				newLineY = fb.getLeftClearY(prevY);
@@ -1392,8 +1392,8 @@ public class RBlockViewport extends BaseRCollection {
 						}
 						RLine line = this.currentLine;
 						if (line.width > 0) {
-							RBlank rblank = new RBlank(textNode, fm, container, ascentPlusLeading, blankWidth,
-									wordHeight);
+							logger.error("textNode: " + textNode.getTextContent());
+							RBlank rblank = new RBlank(textNode, fm, container, ascentPlusLeading, blankWidth, wordHeight);
 							line.addBlank(rblank);
 						}
 						for (i++; i < length; i++) {

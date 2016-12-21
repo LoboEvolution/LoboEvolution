@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EventListener;
@@ -33,9 +34,13 @@ import java.util.EventObject;
  *
  * @author J. H. S.
  */
-public abstract class EventDispatch2 {
-    /** The listeners. */
+public abstract class EventDispatch2 implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
+	/** The listeners. */
     private Collection<EventListener> listeners;
+    
     /** The Constant EMPTY_ARRAY. */
     private static final EventListener[] EMPTY_ARRAY = new EventListener[0];
     

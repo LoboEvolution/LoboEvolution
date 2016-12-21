@@ -78,12 +78,9 @@ public class TempFileManager {
 	 *
 	 * @return the instance
 	 */
-    public static TempFileManager getInstance() {
-        // Do it this way to allow other statics to initialize.
+    public synchronized static TempFileManager getInstance() {
         if (instance == null) {
-            synchronized (TempFileManager.class) {
-            	instance = new TempFileManager();
-            }
+        	instance = new TempFileManager();
         }
         return instance;
     }

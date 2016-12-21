@@ -1111,13 +1111,13 @@ public class HtmlValues implements CSSValuesProperties{
 			String token = tokens[i];
 			int listStyleType = HtmlValues.getListStyleType(token);
 			if (listStyleType != ListStyle.TYPE_UNSET) {
-				listStyle.type = listStyleType;
+				listStyle.setType(listStyleType);
 			} else if (HtmlValues.isUrl(token)) {
 				// TODO: listStyle.image
 			} else {
 				int listStylePosition = HtmlValues.getListStylePosition(token);
 				if (listStylePosition != ListStyle.POSITION_UNSET) {
-					listStyle.position = listStylePosition;
+					listStyle.setPosition(listStylePosition);
 				}
 			}
 		}

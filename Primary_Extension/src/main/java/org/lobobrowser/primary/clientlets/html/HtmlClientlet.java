@@ -24,6 +24,7 @@
 package org.lobobrowser.primary.clientlets.html;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collection;
@@ -59,6 +60,7 @@ import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.RecordedInputStream;
 import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 /**
  * The Class HtmlClientlet.
@@ -258,7 +260,7 @@ public class HtmlClientlet implements Clientlet {
 				timer.setRepeats(false);
 				timer.start();
 			}
-		} catch (Exception err) {
+		} catch (IOException | SAXException err) {
 			throw new ClientletException(err);
 		}
 	}

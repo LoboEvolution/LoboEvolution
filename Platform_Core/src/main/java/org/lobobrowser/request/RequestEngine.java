@@ -316,7 +316,6 @@ public class RequestEngine {
 			}
 			MultipartFormDataWriter writer = new MultipartFormDataWriter(mfstream, boundary);
 			try {
-				if (pinfo != null) {
 					Parameter[] parameters = pinfo.getParameters();
 					for (int i = 0; i < parameters.length; i++) {
 						Parameter parameter = parameters[i];
@@ -325,9 +324,9 @@ public class RequestEngine {
 							writer.writeText(name, parameter.getTextValue(), "UTF-8");
 						} else if (parameter.isFile()) {
 							File[] file = parameter.getFileValue();
-
+	
 							for (int f = 0; f < file.length; f++) {
-
+	
 								FileInputStream in = new FileInputStream(file[f]);
 								try {
 									BufferedInputStream bin = new BufferedInputStream(in, 8192);
@@ -341,7 +340,6 @@ public class RequestEngine {
 									+ " of unknown type for POST with encoding " + encoding + ".");
 						}
 					}
-				}
 			} finally {
 				writer.send();
 			}
@@ -613,7 +611,7 @@ public class RequestEngine {
 							logger.error("cache(): Unable to write persistent cached object.", err);
 						}
 					}
-				} catch (Exception err) {
+				} catch (IOException err) {
 					logger.error("cache()", err);
 				}
 				return null;

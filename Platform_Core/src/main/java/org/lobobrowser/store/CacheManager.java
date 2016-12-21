@@ -86,15 +86,13 @@ public class CacheManager implements Runnable {
 	 *
 	 * @return the instance
 	 */
-    public static CacheManager getInstance() {
+    public synchronized static CacheManager getInstance() {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
             sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         if (instance == null) {
-            synchronized (CacheManager.class) {
-            	instance = new CacheManager();
-            }
+        	instance = new CacheManager();
         }
         return instance;
     }
@@ -341,8 +339,7 @@ public class CacheManager implements Runnable {
         File file = getCacheFile(url, isDecoration);
         synchronized (getLock(file)) {
             if (file.exists()) {
-                file.setLastModified(System.currentTimeMillis());
-                return true;
+                return file.setLastModified(System.currentTimeMillis());
             }
             return false;
         }

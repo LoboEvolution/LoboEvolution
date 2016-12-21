@@ -100,10 +100,10 @@ public class BaseRListElement extends RBlock {
                 if (listStyle == null) {
                     listStyle = new ListStyle();
                 }
-                listStyle.type = listType;
+                listStyle.setType(listType);
             }
         }
-        if ((listStyle == null) || (listStyle.type == ListStyle.TYPE_UNSET)) {
+        if ((listStyle == null) || (listStyle.getType() == ListStyle.TYPE_UNSET)) {
             String typeAttributeText = rootElement.getAttribute(HtmlAttributeProperties.TYPE);
             if (typeAttributeText != null) {
             	
@@ -117,7 +117,7 @@ public class BaseRListElement extends RBlock {
                         listStyle = new ListStyle();
                         this.listStyle = listStyle;
                     }
-                    listStyle.type = newStyleType;
+                    listStyle.setType(newStyleType);
                 }
             }
         }

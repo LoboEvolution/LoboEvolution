@@ -28,15 +28,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.MissingResourceException;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.js.Executor;
@@ -364,13 +365,12 @@ HTMLScriptElement {
 			}
 			in.close();
 
-		} catch (Exception e) {
+		} catch (URISyntaxException | IOException e) {
 			logger.warn("Unable to parse script. URI=[" + srtUrl + "]. Response status was " + responseCode + ".");
 			return "";
 		}
 		return response.toString();
 	}
-
     /*
      * (non-Javadoc)
      * @see org.lobobrowser.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.

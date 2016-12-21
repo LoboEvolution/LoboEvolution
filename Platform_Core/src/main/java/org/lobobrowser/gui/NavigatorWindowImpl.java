@@ -259,22 +259,20 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 		}
 
 		// Initialize title
-		if (window != null) {
-			NavigationEntry currentEntry = this.getCurrentNavigationEntry();
-			if (currentEntry != null) {
-				String title = currentEntry.getTitle();
-				if (title == null) {
-					title = Urls.getNoRefForm(currentEntry.getUrl());
-				}
-				((Frame) window).setTitle(title);
+		NavigationEntry currentEntry = this.getCurrentNavigationEntry();
+		if (currentEntry != null) {
+			String title = currentEntry.getTitle();
+			if (title == null) {
+				title = Urls.getNoRefForm(currentEntry.getUrl());
 			}
-			
-			// Make visible and bring to front
-			if (!window.isVisible()) {
-				window.setVisible(true);
-			}
-			window.toFront();
+			((Frame) window).setTitle(title);
 		}
+		
+		// Make visible and bring to front
+		if (!window.isVisible()) {
+			window.setVisible(true);
+		}
+		window.toFront();
 	}
 
 	/**

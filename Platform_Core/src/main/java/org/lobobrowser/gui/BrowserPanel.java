@@ -45,6 +45,7 @@ import org.apache.logging.log4j.Logger;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.main.ExtensionManager;
+import org.lobobrowser.request.RequestEngine;
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.ua.NavigationListener;
 import org.lobobrowser.ua.NavigatorEvent;
@@ -583,7 +584,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 	 */
 	@Override
 	public boolean stop() {
-		org.lobobrowser.request.RequestEngine.getInstance().cancelAllRequests();
+		RequestEngine.getInstance().cancelAllRequests();
 		return true;
 	}
 

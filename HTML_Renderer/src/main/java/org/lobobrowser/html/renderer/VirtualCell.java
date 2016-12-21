@@ -150,18 +150,17 @@ public class VirtualCell implements CSSValuesProperties{
         RTableCell cell = this.actualCell;
         String widthText = cell.getWidthText();
         HtmlLength length;
-        try {
-        	if (INHERIT.equals(widthText)) {
-				Object parent = cell.getParent().getModelNode();
-				if (parent instanceof HTMLTableElement) {
-					HTMLTableElementImpl el = (HTMLTableElementImpl) parent;
-					widthText = el.getCurrentStyle().getWidth();
-				}
+       
+    	if (INHERIT.equals(widthText)) {
+			Object parent = cell.getParent().getModelNode();
+			if (parent instanceof HTMLTableElement) {
+				HTMLTableElementImpl el = (HTMLTableElementImpl) parent;
+				widthText = el.getCurrentStyle().getWidth();
 			}
-            length = widthText == null ? new HtmlLength("1px") : new HtmlLength(widthText);
-        } catch (Exception err) {
-            length = null;
-        }
+		}
+        
+    	length = widthText == null ? new HtmlLength("1px") : new HtmlLength(widthText);
+     
         if (length != null) {
             length.divideBy(cell.getColSpan());
         }
