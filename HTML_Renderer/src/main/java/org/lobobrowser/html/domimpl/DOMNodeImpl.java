@@ -843,7 +843,7 @@ Node, ModelNode {
      */
     @Override
     public Object setUserData(String key, Object data, UserDataHandler handler) {
-		if (HtmlParser.MODIFYING_KEY.equals(key)) {
+		if (HtmlParser.MODIFYING_KEY.equals(key) && data instanceof Boolean) {
             boolean ns = (boolean) data;
             this.notificationsSuspended = ns;
             if (!ns) {

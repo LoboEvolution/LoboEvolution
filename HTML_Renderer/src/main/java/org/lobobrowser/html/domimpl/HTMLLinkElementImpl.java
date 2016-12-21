@@ -148,10 +148,10 @@ HTMLLinkElement {
     public void setType(String type) {
         this.setAttribute(HtmlAttributeProperties.TYPE, type);
     }
+    
     @Override
     public Object setUserData(String key, Object data, UserDataHandler handler) {
-    	boolean dataBool = (boolean)data;
-		if (HtmlParser.MODIFYING_KEY.equals(key) && !dataBool) {
+    	if (HtmlParser.MODIFYING_KEY.equals(key) && data instanceof Boolean && !(boolean) data) {
             this.processLink();
         } else if ("styleSheet.disabled.changed".equals(key)) {
             this.informDocumentInvalid();

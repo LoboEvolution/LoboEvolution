@@ -209,8 +209,7 @@ HTMLScriptElement {
      */
     @Override
     public Object setUserData(String key, Object data, UserDataHandler handler) {
-    	boolean dataBool = (boolean)data;
-		if (HtmlParser.MODIFYING_KEY.equals(key) && !dataBool) {
+    	if (HtmlParser.MODIFYING_KEY.equals(key) && data instanceof Boolean && !(boolean) data) {
             this.processScript();
         }
         return super.setUserData(key, data, handler);

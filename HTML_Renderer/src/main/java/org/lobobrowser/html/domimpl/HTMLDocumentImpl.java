@@ -1616,7 +1616,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		Function onloadHandler = this.onloadHandler;
-		if (onloadHandler != null) {
+		if (onloadHandler != null && data instanceof Boolean) {
 			boolean dataBool = (boolean)data;
 			if (HtmlParser.MODIFYING_KEY.equals(key) && !dataBool) {
 				Executor.executeFunction(this, onloadHandler, null);
