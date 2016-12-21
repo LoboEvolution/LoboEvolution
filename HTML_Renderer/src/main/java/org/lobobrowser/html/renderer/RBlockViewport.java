@@ -1392,7 +1392,6 @@ public class RBlockViewport extends BaseRCollection {
 						}
 						RLine line = this.currentLine;
 						if (line.width > 0) {
-							logger.error("textNode: " + textNode.getTextContent());
 							RBlank rblank = new RBlank(textNode, fm, container, ascentPlusLeading, blankWidth, wordHeight);
 							line.addBlank(rblank);
 						}

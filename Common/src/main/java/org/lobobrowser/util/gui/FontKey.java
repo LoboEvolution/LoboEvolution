@@ -93,13 +93,12 @@ public class FontKey {
         }
         // Note that we use String.intern() for all string fields,
         // so we can do instance comparisons.
-        return (this.fontSize == ors.fontSize)
-                && (this.fontFamily.equals(ors.fontFamily))
-                && (this.fontStyle.equals(ors.fontStyle))
-                && (this.fontWeight.equals(ors.fontWeight))
-                && (this.fontVariant.equals(ors.fontVariant))
-                && (this.superscript.intValue() == ors.superscript.intValue())
-                && Objects.equals(this.locales, ors.locales);
+		return (this.fontSize == ors.fontSize) && (this.fontFamily != null && this.fontFamily.equals(ors.fontFamily))
+				&& (this.fontStyle != null && this.fontStyle.equals(ors.fontStyle))
+				&& (this.fontWeight != null && this.fontWeight.equals(ors.fontWeight))
+				&& (this.fontWeight != null && this.fontWeight.equals(ors.fontVariant))
+				&& (this.superscript != null && this.superscript.intValue() == ors.superscript.intValue())
+				&& Objects.equals(this.locales, ors.locales);
     }
     
     /** The cached hash. */

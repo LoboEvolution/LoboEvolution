@@ -47,9 +47,9 @@ import javax.swing.text.StyleContext;
  * @author J. H. S.
  */
 public class FontFactory {
+	
     /** The Constant logger. */
-    private static final Logger logger = LogManager
-            .getLogger(FontFactory.class);
+    private static final Logger logger = LogManager.getLogger(FontFactory.class);
     /** The Constant loggableFine. */
     private static final boolean loggableFine = logger.isInfoEnabled();
     /** The Constant instance. */
@@ -154,7 +154,7 @@ public class FontFactory {
         FontKey key = new FontKey(fontFamily, fontStyle, fontVariant,
                 fontWeight, fontSize, locales, superscript);
         synchronized (this) {
-            Font font = this.fontMap.get(key);
+        	Font font = this.fontMap.get(key);
             if (font == null) {
                 font = this.createFont(key);
                 this.fontMap.put(key, font);

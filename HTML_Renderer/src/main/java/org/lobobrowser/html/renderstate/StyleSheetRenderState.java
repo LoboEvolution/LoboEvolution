@@ -452,8 +452,7 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 		if ((superscript == null) && (prs != null)) {
 			superscript = (Integer) prs.getFont().getAttributes().get(TextAttribute.SUPERSCRIPT);
 		}
-		f = FONT_FACTORY.getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize.floatValue(), locales,
-				superscript);
+		f = FONT_FACTORY.getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize.floatValue(), locales, superscript);
 		this.iFont = f;
 		return f;
 	}

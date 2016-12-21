@@ -474,7 +474,6 @@ BoundableRenderable {
     public final void paintTranslated(Graphics g) {
         int x = this.x;
         int y = this.y;
-        logger.error(y + " " + x);
         g.translate(x, y);
         try {
             this.paint(g);

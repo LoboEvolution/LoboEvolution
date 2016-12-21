@@ -168,7 +168,6 @@ public class RLine extends BaseRCollection {
 
 	@Override
 	public void paint(Graphics g) {
-		logger.error("paint");
 		// Paint according to render state of the start of line first.
 		RenderState rs = this.modelNode.getRenderState();
 		if (rs != null) {

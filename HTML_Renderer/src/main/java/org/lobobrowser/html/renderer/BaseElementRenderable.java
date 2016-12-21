@@ -252,7 +252,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 * @return the declared width
 	 */
 	protected Integer getDeclaredWidth(RenderState renderState, int actualAvailWidth) {
-		Integer dw = this.declaredWidth;
+		Integer dw = this.declaredWidth == null ? 0 : this.declaredWidth;
 		if ((dw.intValue() == INVALID_SIZE.intValue()) || (actualAvailWidth != this.lastAvailWidthForDeclared)) {
 			this.lastAvailWidthForDeclared = actualAvailWidth;
 			int dwInt = this.getDeclaredWidthImpl(renderState, actualAvailWidth);
@@ -268,7 +268,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 * @return true, if successful
 	 */
 	public final boolean hasDeclaredWidth() {
-		Integer dw = this.declaredWidth;
+		Integer dw = this.declaredWidth == null ? 0 : this.declaredWidth;
 		if (dw.intValue() == INVALID_SIZE.intValue()) {
 			Object rootNode = this.modelNode;
 			if (rootNode instanceof HTMLElementImpl) {
@@ -347,7 +347,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 * @return the declared height
 	 */
 	protected Integer getDeclaredHeight(RenderState renderState, int actualAvailHeight) {
-		Integer dh = this.declaredHeight;
+		Integer dh = this.declaredHeight == null ? 0: this.declaredHeight;
 		if ((dh.intValue() == INVALID_SIZE.intValue()) || (actualAvailHeight != this.lastAvailHeightForDeclared)) {
 			this.lastAvailHeightForDeclared = actualAvailHeight;
 			int dhInt = this.getDeclaredHeightImpl(renderState, actualAvailHeight);
@@ -691,13 +691,19 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			Integer declaredHeight = this.getDeclaredHeight(rs, actualAvailHeight);
 			int autoMarginX = 0, autoMarginY = 0;
 			
-			autoMarginX = (availWidth - declaredWidth.intValue()
-					- (borderInsets == null ? 0 : borderInsets.left - borderInsets.right)
-					- (paddingInsets == null ? 0 : paddingInsets.left - paddingInsets.right)) / 2;
+			if(declaredWidth!= null){
+
+				autoMarginX = (availWidth - declaredWidth.intValue()
+						- (borderInsets == null ? 0 : borderInsets.left - borderInsets.right)
+						- (paddingInsets == null ? 0 : paddingInsets.left - paddingInsets.right)) / 2;
+			}
 			
-			autoMarginY = (availHeight - declaredHeight.intValue()
-					- (borderInsets == null ? 0 : borderInsets.top - borderInsets.bottom)
-					- (paddingInsets == null ? 0 : paddingInsets.top - paddingInsets.bottom)) / 2;
+			if(declaredHeight!= null){
+			
+				autoMarginY = (availHeight - declaredHeight.intValue()
+						- (borderInsets == null ? 0 : borderInsets.top - borderInsets.bottom)
+						- (paddingInsets == null ? 0 : paddingInsets.top - paddingInsets.bottom)) / 2;
+			}
 			
 			this.borderInsets = borderInsets;
 			if (isRootBlock) {
