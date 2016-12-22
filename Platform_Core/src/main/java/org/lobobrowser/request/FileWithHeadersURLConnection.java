@@ -33,8 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lobobrowser.http.NameValuePair;
 import org.lobobrowser.util.io.IORoutines;
 
@@ -44,8 +42,6 @@ import org.lobobrowser.util.io.IORoutines;
  * @author J. H. S.
  */
 public class FileWithHeadersURLConnection extends HttpURLConnection {
-	
-	private static final Logger logger = LogManager.getLogger(FileWithHeadersURLConnection.class.getName());
 
     /** The content. */
     private final byte[] content;
@@ -87,7 +83,7 @@ public class FileWithHeadersURLConnection extends HttpURLConnection {
                 try {
                     in.close();
                 } catch (IOException ioe) {
-                   logger.error(ioe);
+                    // ignore
                 }
             }
         }

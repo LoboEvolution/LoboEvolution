@@ -128,12 +128,14 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 			while (i.hasNext()) {
 				TimedEntry entry = i.next();
 				String host = entry.url.getHost();
-				if ((host != null) && (host.length() != 0) && (!hosts.contains(host))) {
-					hosts.add(host);
-					if (hosts.size() >= maxNumItems) {
-						break;
+				if ((host != null) && (host.length() != 0)) {
+					if (!hosts.contains(host)) {
+						hosts.add(host);
+						if (hosts.size() >= maxNumItems) {
+							break;
+						}
+						items.add(new HostEntry(host, entry.timestamp));
 					}
-					items.add(new HostEntry(host, entry.timestamp));
 				}
 			}
 			return items;
@@ -184,6 +186,8 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	 *
 	 * @param itemPrefix
 	 *            the item prefix
+	 * @param maxNumItems
+	 *            the max num items
 	 * @return the head match items
 	 */
 	public Collection<String> getHeadMatchItems(String itemPrefix) {

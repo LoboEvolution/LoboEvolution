@@ -43,6 +43,8 @@ package org.lobobrowser.primary.gui.pdf;
 /**
  * A listener to indicate that some control has asked for a particular page to
  * be displayed.
+ *
+ * @see PageChangeEvent
  */
 public interface PageChangeListener {
 	/**

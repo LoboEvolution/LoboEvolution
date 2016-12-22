@@ -65,6 +65,8 @@ RCollection {
         RCollection parent = this.parent;
         if (parent != null) {
             parent.focus();
+        } else {
+            // TODO: Remove local focus
         }
     }
 
@@ -337,7 +339,9 @@ RCollection {
             boolean triggerEvent, ModelNode limit) {
         super.onMouseMoved(event, x, y, triggerEvent, limit);
         BoundableRenderable oldRenderable = this.renderableWithMouse;
-        BoundableRenderable newRenderable = this.getRenderable(x, y);
+        Renderable r = this.getRenderable(x, y);
+        BoundableRenderable newRenderable = r instanceof BoundableRenderable ? (BoundableRenderable) r
+                : null;
         ModelNode newLimit;
         if (this.isContainedByNode()) {
             newLimit = this.modelNode;

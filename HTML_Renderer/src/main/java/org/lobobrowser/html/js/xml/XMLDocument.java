@@ -24,7 +24,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -96,7 +95,7 @@ public class XMLDocument implements Document {
 			if (f.isFile()) {
 				doc = builder.parse(fileStr);
 			} else {
-				InputStream is = new ByteArrayInputStream(fileStr.getBytes(StandardCharsets.UTF_8));
+				InputStream is = new ByteArrayInputStream(fileStr.getBytes());
 				doc = builder.parse(is);
 			}
 			doc.getDocumentElement().normalize();

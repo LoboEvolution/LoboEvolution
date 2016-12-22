@@ -35,8 +35,7 @@ import org.lobobrowser.html.renderstate.RenderState;
 /**
  * The Class RBlank.
  */
-public class RBlank extends BaseBoundableRenderable {
-	
+public final class RBlank extends BaseBoundableRenderable {
 	/** The ascent plus leading. */
 	private int ascentPlusLeading;
 
@@ -240,8 +239,10 @@ public class RBlank extends BaseBoundableRenderable {
 				int lineOffset = this.fontMetrics.getLeading();
 				g.drawLine(0, lineOffset, this.width, lineOffset);
 			}
+			if ((td & RenderState.MASK_TEXTDECORATION_BLINK) != 0) {
+				// TODO
+			}
 		}
-		
 		Color over = rs.getOverlayColor();
 		if (over != null) {
 			Color oldColor = g.getColor();

@@ -26,6 +26,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -47,7 +48,7 @@ public class LowSecurityX509TrustManager implements X509TrustManager {
     /**
      * Constructor for LowSecurityX509TrustManager.
      */
-    public LowSecurityX509TrustManager(final KeyStore keystore)
+    public LowSecurityX509TrustManager(KeyStore keystore)
             throws NoSuchAlgorithmException, KeyStoreException {
         super();
         TrustManagerFactory factory = TrustManagerFactory
@@ -65,8 +66,8 @@ public class LowSecurityX509TrustManager implements X509TrustManager {
      *      String authType)
      */
     @Override
-    public void checkClientTrusted(final X509Certificate[] certificates,
-            final String authType) throws CertificateException {
+    public void checkClientTrusted(X509Certificate[] certificates,
+            String authType) throws CertificateException {
         standardTrustManager.checkClientTrusted(certificates, authType);
     }
     
@@ -75,8 +76,8 @@ public class LowSecurityX509TrustManager implements X509TrustManager {
      *      String authType)
      */
     @Override
-    public void checkServerTrusted(final X509Certificate[] certificates,
-            final String authType) throws CertificateException {
+    public void checkServerTrusted(X509Certificate[] certificates,
+            String authType) throws CertificateException {
         if ((certificates != null) && LOG.isInfoEnabled()) {
             LOG.debug("Server certificate chain:");
             for (int i = 0; i < certificates.length; i++) {

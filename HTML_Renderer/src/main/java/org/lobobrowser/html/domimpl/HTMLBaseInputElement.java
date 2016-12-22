@@ -885,7 +885,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	}
 
 	/** The image listeners. */
-	private ArrayList<ImageListener> imageListeners = new ArrayList<ImageListener>(1);
+	private final ArrayList<ImageListener> imageListeners = new ArrayList<ImageListener>(1);
 
 	/**
 	 * Adds a listener of image loading events. The listener gets called right
@@ -917,7 +917,10 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 *            the listener
 	 */
 	public void removeImageListener(ImageListener listener) {
-		this.imageListeners = new ArrayList<ImageListener>();
+		ArrayList<ImageListener> l = this.imageListeners;
+		synchronized (l) {
+			l.remove(l);
+		}
 	}
 
 	/**

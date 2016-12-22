@@ -31,7 +31,7 @@ public class LocalFilter implements ObjectFilter {
      * @see org.xamjwg.util.ObjectFilter#decode(Object)
      */
     @Override
-    public Object decode(final Object source) {
+    public Object decode(Object source) {
         WeakReference<?> wf = (WeakReference<?>) source;
         return wf == null ? null : wf.get();
     }
@@ -41,7 +41,7 @@ public class LocalFilter implements ObjectFilter {
      * @see org.xamjwg.util.ObjectFilter#encode(Object)
      */
     @Override
-    public Object encode(final Object source) {
+    public Object encode(Object source) {
         throw new UnsupportedOperationException("Read-only collection.");
     }
 }

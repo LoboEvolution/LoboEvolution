@@ -23,7 +23,6 @@
  */
 package org.lobobrowser.util;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EventListener;
@@ -34,13 +33,9 @@ import java.util.EventObject;
  *
  * @author J. H. S.
  */
-public abstract class EventDispatch2 implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
-	
-	/** The listeners. */
+public abstract class EventDispatch2 {
+    /** The listeners. */
     private Collection<EventListener> listeners;
-    
     /** The Constant EMPTY_ARRAY. */
     private static final EventListener[] EMPTY_ARRAY = new EventListener[0];
     
@@ -65,7 +60,7 @@ public abstract class EventDispatch2 implements Serializable{
      * @param listener
      *            the listener
      */
-    public final void addListener(final EventListener listener) {
+    public final void addListener(EventListener listener) {
         synchronized (this) {
             if (this.listeners == null) {
                 this.listeners = this.createListenerCollection();
@@ -80,7 +75,7 @@ public abstract class EventDispatch2 implements Serializable{
      * @param listener
      *            the listener
      */
-    public final void removeListener(final EventListener listener) {
+    public final void removeListener(EventListener listener) {
         synchronized (this) {
             if (this.listeners != null) {
                 this.listeners.remove(listener);
@@ -95,7 +90,7 @@ public abstract class EventDispatch2 implements Serializable{
      *            the event
      * @return true, if successful
      */
-    public final boolean fireEvent(final EventObject event) {
+    public final boolean fireEvent(EventObject event) {
         EventListener[] larray;
         synchronized (this) {
             Collection<EventListener> listeners = this.listeners;

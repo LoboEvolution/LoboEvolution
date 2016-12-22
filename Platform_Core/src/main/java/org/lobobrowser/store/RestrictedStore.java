@@ -58,7 +58,7 @@ import org.lobobrowser.util.gui.ClassLoaderObjectInputStream;
 /**
  * The Class RestrictedStore.
  */
-public class RestrictedStore implements QuotaSource, ManagedStore {
+public final class RestrictedStore implements QuotaSource, ManagedStore {
 
     /** The Constant logger. */
     private static final Logger logger = LogManager.getLogger(RestrictedStore.class
@@ -254,20 +254,18 @@ public class RestrictedStore implements QuotaSource, ManagedStore {
         }
         long total = DIRECTORY_SIZE;
         File[] files = directory.listFiles();
-		if (files != null) {
-			for (int i = 0; i < files.length; i++) {
-				Thread.yield();
-				File file = files[i];
-				if (file.isDirectory() && !file.equals(directory)) {
-					String fileCanonical = file.getCanonicalPath();
-					if (fileCanonical.startsWith(this.baseCanonicalPath)) {
-						total += this.computeSize(file);
-					}
-				} else {
-					total += (EMPTY_FILE_SIZE + file.length());
-				}
-			}
-		}
+        for (int i = 0; i < files.length; i++) {
+            Thread.yield();
+            File file = files[i];
+            if (file.isDirectory() && !file.equals(directory)) {
+                String fileCanonical = file.getCanonicalPath();
+                if (fileCanonical.startsWith(this.baseCanonicalPath)) {
+                    total += this.computeSize(file);
+                }
+            } else {
+                total += (EMPTY_FILE_SIZE + file.length());
+            }
+        }
         return total;
     }
 
@@ -511,28 +509,26 @@ public class RestrictedStore implements QuotaSource, ManagedStore {
             throws IOException {
         // Security: This method is expected to be private.
         Collection paths = new LinkedList();
-		File[] localFiles = directory.listFiles();
-		if (localFiles != null) {
-			for (int i = 0; i < localFiles.length; i++) {
-				File file = localFiles[i];
-				if (file.isDirectory()) {
-					Collection subPaths = this.getPaths(pattern, file);
-					paths.addAll(subPaths);
-				} else {
-					String canonical = file.getCanonicalPath();
-					String relativePath = this.getRelativePath(canonical);
-					Matcher matcher = pattern.matcher(relativePath);
-					if (matcher.matches()) {
-						try {
-							this.checkPath(canonical, "not-shown");
-							paths.add(relativePath);
-						} catch (SecurityException se) {
-							logger.error(se);
-						}
-					}
-				}
-			}
-		}
+        File[] localFiles = directory.listFiles();
+        for (int i = 0; i < localFiles.length; i++) {
+            File file = localFiles[i];
+            if (file.isDirectory()) {
+                Collection subPaths = this.getPaths(pattern, file);
+                paths.addAll(subPaths);
+            } else {
+                String canonical = file.getCanonicalPath();
+                String relativePath = this.getRelativePath(canonical);
+                Matcher matcher = pattern.matcher(relativePath);
+                if (matcher.matches()) {
+                    try {
+                        this.checkPath(canonical, "not-shown");
+                        paths.add(relativePath);
+                    } catch (SecurityException se) {
+                        // ignore file
+                    }
+                }
+            }
+        }
         return paths;
     }
 
@@ -924,15 +920,14 @@ public class RestrictedStore implements QuotaSource, ManagedStore {
                                 try {
                                     File[] files = nativeFile.listFiles();
                                     List<ManagedFile> mfs = new ArrayList<ManagedFile>();
-									if (files != null) {
-										for (int i = 0; i < files.length; i++) {
-											File file = files[i];
-											ManagedFile mf = nativeToManaged(file);
-											if ((filter == null) || filter.accept(mf)) {
-												mfs.add(mf);
-											}
-										}
-									}
+                                    for (int i = 0; i < files.length; i++) {
+                                        File file = files[i];
+                                        ManagedFile mf = nativeToManaged(file);
+                                        if ((filter == null)
+                                                || filter.accept(mf)) {
+                                            mfs.add(mf);
+                                        }
+                                    }
                                     return mfs.toArray(new ManagedFile[0]);
                                 } catch (IOException ioe) {
                                     throw new WrapperException(ioe);
@@ -963,7 +958,7 @@ public class RestrictedStore implements QuotaSource, ManagedStore {
                                     RestrictedStore.this
                                     .addUsedBytes(DIRECTORY_SIZE);
                                 } catch (IOException ioe) {
-                                    logger.error(ioe);
+                                    // Ignore
                                 }
                             }
                             return success;
@@ -990,7 +985,7 @@ public class RestrictedStore implements QuotaSource, ManagedStore {
                                     RestrictedStore.this
                                     .addUsedBytes(DIRECTORY_SIZE);
                                 } catch (IOException ioe) {
-                                    logger.error(ioe);
+                                    // Ignore
                                 }
                             }
                             return success;

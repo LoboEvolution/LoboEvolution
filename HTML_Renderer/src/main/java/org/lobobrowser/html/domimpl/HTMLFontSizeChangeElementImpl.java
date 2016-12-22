@@ -46,7 +46,18 @@ public class HTMLFontSizeChangeElementImpl extends HTMLAbstractUIElement {
 		super(name);
 		this.fontChange = fontChange;
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
+	 * lobobrowser .html.renderstate.RenderState)
+	 */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return super.createRenderState(prevRenderState);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

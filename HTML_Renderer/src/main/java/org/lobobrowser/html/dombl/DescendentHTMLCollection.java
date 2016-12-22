@@ -105,8 +105,8 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 		if (this.itemsByName == null) {
 			ArrayList<DOMNodeImpl> descendents = this.rootNode.getDescendents(this.nodeFilter,
 					this.nestIntoMatchingNodes);
-			this.itemsByIndex = descendents;
-			int size = descendents.size();
+			this.itemsByIndex = descendents == null ? Collections.emptyList() : descendents;
+			int size = descendents == null ? 0 : descendents.size();
 			Map<String, DOMElementImpl> itemsByName = new HashMap<String, DOMElementImpl>((size * 3) / 2);
 			this.itemsByName = itemsByName;
 			for (int i = 0; i < size; i++) {
@@ -252,9 +252,10 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 				this.document.removeDocumentNotificationListener(this);
 				return;
 			}
-			
-			if (collection.isValid() && Nodes.isSameOrAncestorOf(collection.rootNode, node)) {
-				collection.invalidate();
+			if (collection.isValid()) {
+				if (Nodes.isSameOrAncestorOf(collection.rootNode, node)) {
+					collection.invalidate();
+				}
 			}
 		}
 

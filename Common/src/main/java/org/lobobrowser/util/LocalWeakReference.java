@@ -40,7 +40,7 @@ public class LocalWeakReference extends WeakReference {
      * @param queue
      *            the queue
      */
-    public LocalWeakReference(final Object key, final Object target, final ReferenceQueue queue) {
+    public LocalWeakReference(Object key, Object target, ReferenceQueue queue) {
         super(target, queue);
         this.key = key;
     }
@@ -58,7 +58,7 @@ public class LocalWeakReference extends WeakReference {
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals(final Object other) {
+    public boolean equals(Object other) {
         Object target1 = this.get();
         Object target2 = other instanceof LocalWeakReference
                 ? ((LocalWeakReference) other).get() : null;

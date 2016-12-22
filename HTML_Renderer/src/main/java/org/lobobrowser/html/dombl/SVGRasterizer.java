@@ -195,7 +195,8 @@ public class SVGRasterizer {
 	 *            the new XML parser validating
 	 */
 	public void setXMLParserValidating(boolean b) {
-		hints.put(ImageTranscoder.KEY_XML_PARSER_VALIDATING, (b ? true : false));
+		hints.put(ImageTranscoder.KEY_XML_PARSER_VALIDATING, (b ? Boolean.TRUE
+				: Boolean.FALSE));
 	}
 
 	/**

@@ -159,17 +159,17 @@ public class JavaScript {
             }
         } else if ((type == int.class) || (type == Integer.class)) {
             if (javascriptObject instanceof Double) {
-                return Integer.valueOf(((Double) javascriptObject).intValue());
+                return new Integer(((Double) javascriptObject).intValue());
             } else if (javascriptObject instanceof Integer) {
                 return javascriptObject;
             } else if (javascriptObject instanceof String) {
                 return Integer.valueOf((String) javascriptObject);
             } else if (javascriptObject instanceof Short) {
-                return Integer.valueOf(((Short) javascriptObject).shortValue());
+                return new Integer(((Short) javascriptObject).shortValue());
             } else if (javascriptObject instanceof Long) {
-                return Integer.valueOf(((Long) javascriptObject).intValue());
+                return new Integer(((Long) javascriptObject).intValue());
             } else if (javascriptObject instanceof Float) {
-                return Integer.valueOf(((Float) javascriptObject).intValue());
+                return new Integer(((Float) javascriptObject).intValue());
             } else {
                 return javascriptObject;
             }

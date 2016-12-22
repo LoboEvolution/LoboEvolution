@@ -45,7 +45,7 @@ public abstract class AbstractFunction implements XPathFunction {
      * @param arity
      *            the arity
      */
-    protected AbstractFunction(final String name, final int arity) {
+    protected AbstractFunction(String name, int arity) {
         if (name == null) {
             throw new NullPointerException();
         }
@@ -81,7 +81,7 @@ public abstract class AbstractFunction implements XPathFunction {
      * @throws XPathFunctionException
      *             the x path function exception
      */
-    protected String getStringParam(final Object o) throws XPathFunctionException {
+    protected String getStringParam(Object o) throws XPathFunctionException {
         // perform conversions
         String output = null;
         if (o instanceof String) {
@@ -109,7 +109,7 @@ public abstract class AbstractFunction implements XPathFunction {
      * @throws XPathFunctionException
      *             the x path function exception
      */
-    protected Number getNumberParam(final Object o) throws XPathFunctionException {
+    protected Number getNumberParam(Object o) throws XPathFunctionException {
         // perform conversions
         Number output = null;
         try {

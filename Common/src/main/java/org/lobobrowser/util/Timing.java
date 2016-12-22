@@ -31,7 +31,7 @@ public class Timing {
      *            the value
      * @return the double
      */
-    public static double round1(final double value) {
+    public static double round1(double value) {
         return Math.round(value * 10.0) / 10.0;
     }
     
@@ -42,7 +42,7 @@ public class Timing {
      *            the elapsed millis
      * @return the elapsed text
      */
-    public static String getElapsedText(final long elapsedMillis) {
+    public static String getElapsedText(long elapsedMillis) {
         if (elapsedMillis < 60000) {
             double unit = round1(elapsedMillis / 1000.0);
             return unit + (unit == 1 ? " second" : " seconds");

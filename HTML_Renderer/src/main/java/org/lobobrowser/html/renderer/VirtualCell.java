@@ -28,6 +28,7 @@ import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
 import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlLength;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLTableElement;
 
 /**
@@ -150,17 +151,18 @@ public class VirtualCell implements CSSValuesProperties{
         RTableCell cell = this.actualCell;
         String widthText = cell.getWidthText();
         HtmlLength length;
-       
-    	if (INHERIT.equals(widthText)) {
-			Object parent = cell.getParent().getModelNode();
-			if (parent instanceof HTMLTableElement) {
-				HTMLTableElementImpl el = (HTMLTableElementImpl) parent;
-				widthText = el.getCurrentStyle().getWidth();
+        try {
+        	if (INHERIT.equals(widthText)) {
+				Object parent = cell.getParent().getModelNode();
+				if (parent instanceof HTMLTableElement) {
+					HTMLTableElementImpl el = (HTMLTableElementImpl) parent;
+					widthText = el.getCurrentStyle().getWidth();
+				}
 			}
-		}
-        
-    	length = widthText == null ? new HtmlLength("1px") : new HtmlLength(widthText);
-     
+            length = widthText == null ? new HtmlLength("1px") : new HtmlLength(widthText);
+        } catch (Exception err) {
+            length = null;
+        }
         if (length != null) {
             length.divideBy(cell.getColSpan());
         }

@@ -24,7 +24,6 @@
 package org.lobobrowser.primary.clientlets.html;
 
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collection;
@@ -60,7 +59,6 @@ import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.io.RecordedInputStream;
 import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
 
 /**
  * The Class HtmlClientlet.
@@ -139,8 +137,10 @@ public class HtmlClientlet implements Clientlet {
 			while (hi.hasNext()) {
 				String headerName = (String) hi.next();
 				String[] headerValues = response.getHeaders(headerName);
-				if ((headerValues != null) && (headerValues.length > 0) && "refresh".equalsIgnoreCase(headerName)) {
-					refresh = this.extractRefresh(headerValues[headerValues.length - 1]);
+				if ((headerValues != null) && (headerValues.length > 0)) {
+					if ("refresh".equalsIgnoreCase(headerName)) {
+						refresh = this.extractRefresh(headerValues[headerValues.length - 1]);
+					}
 				}
 			}
 			String httpEquivCharset = null;
@@ -260,7 +260,7 @@ public class HtmlClientlet implements Clientlet {
 				timer.setRepeats(false);
 				timer.start();
 			}
-		} catch (IOException | SAXException err) {
+		} catch (Exception err) {
 			throw new ClientletException(err);
 		}
 	}
@@ -356,6 +356,7 @@ public class HtmlClientlet implements Clientlet {
 	 * localDocumentNotification event occurs, that object's appropriate method
 	 * is invoked.
 	 *
+	 * @see LocalDocumentNotificationEvent
 	 */
 	private static class LocalDocumentNotificationListener implements DocumentNotificationListener {
 
@@ -489,34 +490,36 @@ public class HtmlClientlet implements Clientlet {
 		@Override
 		public void nodeLoaded(DOMNodeImpl node) {
 			// We can expect this to occur only in the parser thread.
-			if (this.detectHttpEquiv && node instanceof HTMLElement) {
-				HTMLElement element = (HTMLElement) node;
-				String tagName = element.getTagName();
-				if ("meta".equalsIgnoreCase(tagName)) {
-					String httpEquiv = element.getAttribute("http-equiv");
-					if (httpEquiv != null) {
-						this.addHttpEquivElement(element);
+			if (this.detectHttpEquiv) {
+				if (node instanceof HTMLElement) {
+					HTMLElement element = (HTMLElement) node;
+					String tagName = element.getTagName();
+					if ("meta".equalsIgnoreCase(tagName)) {
+						String httpEquiv = element.getAttribute("http-equiv");
+						if (httpEquiv != null) {
+							this.addHttpEquivElement(element);
+						}
 					}
-				}
-				if ("head".equalsIgnoreCase(tagName) || "script".equalsIgnoreCase(tagName)
-						|| "html".equalsIgnoreCase(tagName)) {
-					// Note: SCRIPT is checked as an optimization. We do not
-					// want
-					// scripts to be processed twice. HTML is checked
-					// because
-					// sometimes sites don't put http-equiv in HEAD, e.g.
-					// http://baidu.com.
-					Map<String, String> httpEquiv = this.getHttpEquivData();
-					if ((httpEquiv != null) && (httpEquiv.size() > 0)) {
-						throw new HttpEquivRetryException(httpEquiv);
+					if ("head".equalsIgnoreCase(tagName) || "script".equalsIgnoreCase(tagName)
+							|| "html".equalsIgnoreCase(tagName)) {
+						// Note: SCRIPT is checked as an optimization. We do not
+						// want
+						// scripts to be processed twice. HTML is checked
+						// because
+						// sometimes sites don't put http-equiv in HEAD, e.g.
+						// http://baidu.com.
+						Map<String, String> httpEquiv = this.getHttpEquivData();
+						if ((httpEquiv != null) && (httpEquiv.size() > 0)) {
+							throw new HttpEquivRetryException(httpEquiv);
+						}
 					}
 				}
 			}
-			
-			if (!this.hasVisibleElements && this.mayBeVisibleElement(node)) {
-				this.hasVisibleElements = true;
+			if (!this.hasVisibleElements) {
+				if (this.mayBeVisibleElement(node)) {
+					this.hasVisibleElements = true;
+				}
 			}
-			
 			if (this.hasVisibleElements && ((System.currentTimeMillis() - this.startTimestamp) > MAX_WAIT)) {
 				this.ensureSwitchedToRendering();
 			}

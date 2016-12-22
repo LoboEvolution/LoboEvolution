@@ -30,6 +30,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -103,7 +104,7 @@ public class ID {
      *            the content
      * @return the m d5 bytes
      */
-    public static byte[] getMD5Bytes(final String content) {
+    public static byte[] getMD5Bytes(String content) {
         try {
             MessageDigest digest = MessageDigest.getInstance("MD5");
             return digest.digest(content.getBytes("UTF-8"));
@@ -121,7 +122,7 @@ public class ID {
      *            the bytes
      * @return the hex string
      */
-    public static String getHexString(final byte[] bytes) {
+    public static String getHexString(byte[] bytes) {
         // This method cannot change even if it's wrong.
         BigInteger bigInteger = BigInteger.ZERO;
         int shift = 0;
@@ -151,7 +152,7 @@ public class ID {
      *            the max
      * @return the int
      */
-    public static int random(final int min, final int max) {
+    public static int random(int min, int max) {
         if (max <= min) {
             return min;
         }

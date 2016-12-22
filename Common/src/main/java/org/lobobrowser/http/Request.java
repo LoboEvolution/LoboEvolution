@@ -149,9 +149,12 @@ import org.w3c.dom.Document;
  * @author rbair
  */
 public class Request extends AbstractBean {
-    
+    /**
+     * Header keys are stored in a case insensitive manner.
+     */
     /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(Request.class);
+    private static final Logger logger = LogManager
+            .getLogger(Request.class);
     
     /** The headers. */
     private Map<String, Header> headers = new HashMap<String, Header>();
@@ -197,7 +200,7 @@ public class Request extends AbstractBean {
      * @param url
      *            the url
      */
-    public Request(final String url) {
+    public Request(String url) {
         this(Method.GET, url);
     }
     
@@ -211,7 +214,7 @@ public class Request extends AbstractBean {
      *            The url. If non null, any query parameters are extracted and
      *            set as params for this request.
      */
-    public Request(final String method, final String url) {
+    public Request(String method, String url) {
         this.method = method == null ? Method.GET : method;
         setHeader("Accept-Encoding", "gzip");
         setHeader("Content-Type", "text/plain; charset=UTF-8");
@@ -230,7 +233,7 @@ public class Request extends AbstractBean {
      * @param source
      *            The source Request to copy
      */
-    public Request(final Request source) {
+    public Request(Request source) {
         if (source != null) {
             username = source.username;
             password = source.password;
@@ -251,7 +254,7 @@ public class Request extends AbstractBean {
      *            returned
      * @return the Header with the given name.
      */
-    public final Header getHeader(final String name) {
+    public final Header getHeader(String name) {
         if (name == null) {
             return null;
         }
@@ -267,7 +270,7 @@ public class Request extends AbstractBean {
      * @param value
      *            The value. May be null.
      */
-    public final void setHeader(final String name, final String value) {
+    public final void setHeader(String name, String value) {
         if (name == null) {
             throw new IllegalArgumentException("Name cannot be null");
         }
@@ -285,8 +288,8 @@ public class Request extends AbstractBean {
      * @param elements
      *            The elements. May be null.
      */
-    public final void setHeader(final String name, final String value,
-            final Element... elements) {
+    public final void setHeader(String name, String value,
+            Element... elements) {
         if (name == null) {
             throw new IllegalArgumentException("Name cannot be null");
         }
@@ -298,7 +301,7 @@ public class Request extends AbstractBean {
 	 * @param header
 	 *            the new header
 	 */
-    public void setHeader(final Header header) {
+    public void setHeader(Header header) {
         if (header == null) {
             throw new IllegalArgumentException("header cannot be null");
         } else if (header.getName() == null) {
@@ -315,8 +318,7 @@ public class Request extends AbstractBean {
                 String oldUsername = this.username;
                 firePropertyChange("username", oldUsername, this.username = u);
                 this.password = p.toCharArray();
-            } catch (Exception e) {
-            	logger.error(e);
+            } catch (Exception e) { /* oh well */
             }
         }
     }
@@ -328,7 +330,7 @@ public class Request extends AbstractBean {
      *            the Header to remove. If null, nothing happens. If the header
      *            is not specified in this Request, nothing happens.
      */
-    public final void removeHeader(final Header header) {
+    public final void removeHeader(Header header) {
         if (header != null) {
             headers.remove(header.getName().toLowerCase());
         }
@@ -343,7 +345,7 @@ public class Request extends AbstractBean {
      *            the header is not specified in this Request, nothing happens.
      *            Matches in a case-insensitive manner.
      */
-    public final void removeHeader(final String header) {
+    public final void removeHeader(String header) {
         headers.remove(header.toLowerCase());
     }
     
@@ -360,7 +362,7 @@ public class Request extends AbstractBean {
 	 * @param headers
 	 *            the new headers
 	 */
-    public final void setHeaders(final Header... headers) {
+    public final void setHeaders(Header... headers) {
         this.headers.clear();
         if (headers != null) {
             for (Header h : headers) {
@@ -377,7 +379,7 @@ public class Request extends AbstractBean {
      *            the name to look for. If null, null is returned.
      * @return the Parameter with the given name.
      */
-    public final Parameter getParameter(final String name) {
+    public final Parameter getParameter(String name) {
         if (name == null) {
             return null;
         }
@@ -393,7 +395,7 @@ public class Request extends AbstractBean {
      * @param value
      *            the value
      */
-    public final void setParameter(final String name, final String value) {
+    public final void setParameter(String name, String value) {
         if (name == null) {
             throw new IllegalArgumentException("Parameter name cannot be null");
         }
@@ -405,7 +407,7 @@ public class Request extends AbstractBean {
 	 * @param param
 	 *            the new parameter
 	 */
-    public void setParameter(final Parameter param) {
+    public void setParameter(Parameter param) {
         if (param == null) {
             throw new IllegalArgumentException("param cannot be null");
         } else if (param.getName() == null) {
@@ -427,7 +429,7 @@ public class Request extends AbstractBean {
 	 * @param params
 	 *            the new parameters
 	 */
-    public final void setParameters(final Parameter... params) {
+    public final void setParameters(Parameter... params) {
         this.params.clear();
         if (params != null) {
             for (Parameter p : params) {
@@ -442,7 +444,7 @@ public class Request extends AbstractBean {
 	 *            the new follow redirects
 	 */
     // TODO need to support a count of maximium redirects
-    public void setFollowRedirects(final boolean b) {
+    public void setFollowRedirects(boolean b) {
         boolean old = getFollowRedirects();
         this.followRedirects = b;
         firePropertyChange("followRedirects", old, this.followRedirects);
@@ -461,7 +463,7 @@ public class Request extends AbstractBean {
 	 * @param method
 	 *            the new method
 	 */
-    public void setMethod(final String method) {
+    public void setMethod(String method) {
         String old = getMethod();
         this.method = method == null ? Method.GET : method;
         firePropertyChange("method", old, this.method);
@@ -480,7 +482,7 @@ public class Request extends AbstractBean {
 	 * @param url
 	 *            the new url
 	 */
-    public void setUrl(final String url) throws IllegalArgumentException {
+    public void setUrl(String url) throws IllegalArgumentException {
         String old = getUrl();
         setUrlImpl(url);
         firePropertyChange("url", old, this.url);
@@ -491,7 +493,7 @@ public class Request extends AbstractBean {
 	 * @param url
 	 *            the new url impl
 	 */
-    private void setUrlImpl(final String url) {
+    private void setUrlImpl(String url) {
         this.url = url;
         if (url != null) {
             // if there is a ? in the url, then there are query params
@@ -538,7 +540,7 @@ public class Request extends AbstractBean {
 	 * @param username
 	 *            the new username
 	 */
-    public void setUsername(final String username) {
+    public void setUsername(String username) {
         String old = this.username;
         this.username = username;
         resetAuthenticationHeader();
@@ -575,7 +577,7 @@ public class Request extends AbstractBean {
 	 * @param password
 	 *            the new password
 	 */
-    public void setPassword(final String password) {
+    public void setPassword(String password) {
         this.password = password == null ? new char[0] : password.toCharArray();
         resetAuthenticationHeader();
     }
@@ -593,9 +595,9 @@ public class Request extends AbstractBean {
 	 * @param body
 	 *            the new body
 	 */
-    public void setBody(final String body) {
+    public void setBody(String body) {
         stringBody = body;
-        setBody(body == null ? null : body.getBytes(StandardCharsets.UTF_8));
+        setBody(body == null ? null : body.getBytes());
     }
     
     /** Sets the body.
@@ -603,7 +605,7 @@ public class Request extends AbstractBean {
 	 * @param body
 	 *            the new body
 	 */
-    public void setBody(final byte[] body) {
+    public void setBody(byte[] body) {
         if ((body == null) || (body.length == 0)) {
             requestBody = null;
         } else {
@@ -616,7 +618,7 @@ public class Request extends AbstractBean {
 	 * @param body
 	 *            the new body
 	 */
-    public void setBody(final Document body) {
+    public void setBody(Document body) {
         setBody(body == null ? null : XPathUtils.toXML(body));
     }
     
@@ -625,7 +627,7 @@ public class Request extends AbstractBean {
 	 * @param body
 	 *            the new body
 	 */
-    public void setBody(final InputStream body) {
+    public void setBody(InputStream body) {
         this.requestBody = body;
     }
     
@@ -670,9 +672,9 @@ public class Request extends AbstractBean {
      * @throws Exception
      *             the exception
      */
-    private static String base64Encode(final String s) throws Exception {
-    	byte[] encode = Base64.getEncoder().encode(s.getBytes(StandardCharsets.UTF_8));
-    	return new String(encode,StandardCharsets.UTF_8);
+    private static String base64Encode(String s) throws Exception {
+        return new String(
+                Base64.getEncoder().encode(s.getBytes(StandardCharsets.UTF_8)));
     }
     
     /**
@@ -684,8 +686,8 @@ public class Request extends AbstractBean {
      * @throws Exception
      *             the exception
      */
-    private static String base64Decode(final String s) throws Exception {
+    private static String base64Decode(String s) throws Exception {
         byte[] asBytes = Base64.getDecoder().decode(s);
-        return new String(asBytes, StandardCharsets.UTF_8);
+        return new String(new String(asBytes, "utf-8"));
     }
 }

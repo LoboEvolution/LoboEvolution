@@ -47,7 +47,7 @@ import org.lobobrowser.util.io.IORoutines;
  *
  * @author J. H. S.
  */
-public class CacheManager implements Runnable {
+public final class CacheManager implements Runnable {
 
     /** The Constant logger. */
     private static final Logger logger = LogManager.getLogger(CacheManager.class
@@ -86,13 +86,17 @@ public class CacheManager implements Runnable {
 	 *
 	 * @return the instance
 	 */
-    public synchronized static CacheManager getInstance() {
+    public static CacheManager getInstance() {
         SecurityManager sm = System.getSecurityManager();
         if (sm != null) {
             sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
         }
         if (instance == null) {
-        	instance = new CacheManager();
+            synchronized (CacheManager.class) {
+                if (instance == null) {
+                    instance = new CacheManager();
+                }
+            }
         }
         return instance;
     }
@@ -339,7 +343,8 @@ public class CacheManager implements Runnable {
         File file = getCacheFile(url, isDecoration);
         synchronized (getLock(file)) {
             if (file.exists()) {
-                return file.setLastModified(System.currentTimeMillis());
+                file.setLastModified(System.currentTimeMillis());
+                return true;
             }
             return false;
         }
@@ -370,16 +375,14 @@ public class CacheManager implements Runnable {
     private void deleteRecursive(File rootDir) {
 
         File[] c = rootDir.listFiles();
-		if (c != null) {
-			for (File file : c) {
-				if (file.isDirectory()) {
-					deleteRecursive(file);
-					file.delete();
-				} else {
-					file.delete();
-				}
-			}
-		}
+        for (File file : c) {
+            if (file.isDirectory()) {
+                deleteRecursive(file);
+                file.delete();
+            } else {
+                file.delete();
+            }
+        }
     }
 
     /**

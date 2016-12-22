@@ -29,7 +29,6 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,6 +38,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import org.apache.logging.log4j.Level;
+
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -68,7 +69,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		implements RElement, RenderableContainer, ImageObserver,CSSValuesProperties {
 
 	/** The Constant INVALID_SIZE. */
-	protected static final Integer INVALID_SIZE = Integer.valueOf(Integer.MIN_VALUE);
+	protected static final Integer INVALID_SIZE = new Integer(Integer.MIN_VALUE);
 
 	/**
 	 * A collection of all GUI components added by descendents.
@@ -253,11 +254,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 * @return the declared width
 	 */
 	protected Integer getDeclaredWidth(RenderState renderState, int actualAvailWidth) {
-		Integer dw = this.declaredWidth == null ? 0 : this.declaredWidth;
-		if ((dw.intValue() == INVALID_SIZE.intValue()) || (actualAvailWidth != this.lastAvailWidthForDeclared)) {
+		Integer dw = this.declaredWidth;
+		if ((dw == INVALID_SIZE) || (actualAvailWidth != this.lastAvailWidthForDeclared)) {
 			this.lastAvailWidthForDeclared = actualAvailWidth;
 			int dwInt = this.getDeclaredWidthImpl(renderState, actualAvailWidth);
-			dw = dwInt == -1 ? null : Integer.valueOf(dwInt);
+			dw = dwInt == -1 ? null : new Integer(dwInt);
 			this.declaredWidth = dw;
 		}
 		return dw;
@@ -269,8 +270,8 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 * @return true, if successful
 	 */
 	public final boolean hasDeclaredWidth() {
-		Integer dw = this.declaredWidth == null ? 0 : this.declaredWidth;
-		if (dw.intValue() == INVALID_SIZE.intValue()) {
+		Integer dw = this.declaredWidth;
+		if (dw == INVALID_SIZE) {
 			Object rootNode = this.modelNode;
 			if (rootNode instanceof HTMLElementImpl) {
 				HTMLElementImpl element = (HTMLElementImpl) rootNode;
@@ -348,11 +349,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 * @return the declared height
 	 */
 	protected Integer getDeclaredHeight(RenderState renderState, int actualAvailHeight) {
-		Integer dh = this.declaredHeight == null ? 0: this.declaredHeight;
-		if ((dh.intValue() == INVALID_SIZE.intValue()) || (actualAvailHeight != this.lastAvailHeightForDeclared)) {
+		Integer dh = this.declaredHeight;
+		if ((dh == INVALID_SIZE) || (actualAvailHeight != this.lastAvailHeightForDeclared)) {
 			this.lastAvailHeightForDeclared = actualAvailHeight;
 			int dhInt = this.getDeclaredHeightImpl(renderState, actualAvailHeight);
-			dh = dhInt == -1 ? null : Integer.valueOf(dhInt);
+			dh = dhInt == -1 ? null : new Integer(dhInt);
 			this.declaredHeight = dh;
 		}
 		return dh;
@@ -623,17 +624,13 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		}
 		BackgroundInfo binfo = rs.getBackgroundInfo();
 		this.backgroundColor = binfo == null ? null : binfo.getBackgroundColor();
-		URL backgroundImage = binfo == null ? null : binfo.getBackgroundImage();
-		
-		
-		if (backgroundImage == null) {
+		URL backgroundImageUri = binfo == null ? null : binfo.getBackgroundImage();
+		if (backgroundImageUri == null) {
 			this.backgroundImage = null;
 			this.lastBackgroundImageUri = null;
-		} else {
-			if (!backgroundImage.equals(this.lastBackgroundImageUri)) {
-				this.lastBackgroundImageUri = backgroundImage;
-				this.loadBackgroundImage(backgroundImage);
-			}
+		} else if (!backgroundImageUri.equals(this.lastBackgroundImageUri)) {
+			this.lastBackgroundImageUri = backgroundImageUri;
+			this.loadBackgroundImage(backgroundImageUri);
 		}
 		AbstractCSS2Properties props = rootElement.getCurrentStyle();
 		if (props == null) {
@@ -646,66 +643,52 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			HtmlInsets pinsets = rs.getPaddingInsets();
 			Insets defaultMarginInsets = this.defaultMarginInsets;
 			int dmleft = 0, dmright = 0, dmtop = 0, dmbottom = 0;
-			
 			if (defaultMarginInsets != null) {
 				dmleft = defaultMarginInsets.left;
 				dmright = defaultMarginInsets.right;
 				dmtop = defaultMarginInsets.top;
 				dmbottom = defaultMarginInsets.bottom;
 			}
-			
 			Insets defaultPaddingInsets = this.defaultPaddingInsets;
 			int dpleft = 0, dpright = 0, dptop = 0, dpbottom = 0;
-			
 			if (defaultPaddingInsets != null) {
 				dpleft = defaultPaddingInsets.left;
 				dpright = defaultPaddingInsets.right;
 				dptop = defaultPaddingInsets.top;
 				dpbottom = defaultPaddingInsets.bottom;
 			}
-			
 			Insets borderInsets = binsets == null ? null
 					: binsets.getAWTInsets(0, 0, 0, 0, availWidth, availHeight, 0, 0);
 			if (borderInsets == null) {
 				borderInsets = RBlockViewport.ZERO_INSETS;
 			}
-			
 			Insets paddingInsets = pinsets == null ? defaultPaddingInsets
 					: pinsets.getAWTInsets(dptop, dpleft, dpbottom, dpright, availWidth, availHeight, 0, 0);
 			if (paddingInsets == null) {
 				paddingInsets = RBlockViewport.ZERO_INSETS;
 			}
-			
 			Insets tentativeMarginInsets = minsets == null ? defaultMarginInsets
 					: minsets.getAWTInsets(dmtop, dmleft, dmbottom, dmright, availWidth, availHeight, 0, 0);
-			
 			if (tentativeMarginInsets == null) {
 				tentativeMarginInsets = RBlockViewport.ZERO_INSETS;
 			}
-			
 			int actualAvailWidth = availWidth - paddingInsets.left - paddingInsets.right - borderInsets.left
 					- borderInsets.right - tentativeMarginInsets.left - tentativeMarginInsets.right;
 			int actualAvailHeight = availHeight - paddingInsets.top - paddingInsets.bottom - borderInsets.top
 					- borderInsets.bottom - tentativeMarginInsets.top - tentativeMarginInsets.bottom;
-			
 			Integer declaredWidth = this.getDeclaredWidth(rs, actualAvailWidth);
 			Integer declaredHeight = this.getDeclaredHeight(rs, actualAvailHeight);
 			int autoMarginX = 0, autoMarginY = 0;
-			
-			if(declaredWidth!= null){
-
+			if (declaredWidth != null) {
 				autoMarginX = (availWidth - declaredWidth.intValue()
 						- (borderInsets == null ? 0 : borderInsets.left - borderInsets.right)
 						- (paddingInsets == null ? 0 : paddingInsets.left - paddingInsets.right)) / 2;
 			}
-			
-			if(declaredHeight!= null){
-			
+			if (declaredHeight != null) {
 				autoMarginY = (availHeight - declaredHeight.intValue()
 						- (borderInsets == null ? 0 : borderInsets.top - borderInsets.bottom)
 						- (paddingInsets == null ? 0 : paddingInsets.top - paddingInsets.bottom)) / 2;
 			}
-			
 			this.borderInsets = borderInsets;
 			if (isRootBlock) {
 				// In the root block, the margin behaves like an extra padding.
@@ -777,9 +760,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				SVGRasterizer r = new SVGRasterizer(imageURL);
 				image = r.bufferedImageToImage();
 			} else if (url.startsWith("https")) {
-				
-				BufferedImage bi = ImageIO.read(con.getInputStream());
-				if(bi!= null) image = Toolkit.getDefaultToolkit().createImage(bi.getSource());
+				image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(con.getInputStream()).getSource());
 			} else if (url.endsWith(".gif")) {
 				try {
 					image = new ImageIcon(imageURL).getImage();
@@ -1014,82 +995,84 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		Graphics clientG = g.create(startX, startY, totalWidth, totalHeight);
 		try {
 			Rectangle bkgBounds = null;
-			Color bkg = this.backgroundColor;
-			if ((bkg != null) && (bkg.getAlpha() > 0)) {
-				clientG.setColor(bkg);
-				bkgBounds = clientG.getClipBounds();
-				clientG.fillRect(bkgBounds.x, bkgBounds.y, bkgBounds.width, bkgBounds.height);
-			}
-			BackgroundInfo binfo = rs == null ? null : rs.getBackgroundInfo();
-			Image image = this.backgroundImage;
-			if (image != null) {
-				if (bkgBounds == null) {
+			if (node != null) {
+				Color bkg = this.backgroundColor;
+				if ((bkg != null) && (bkg.getAlpha() > 0)) {
+					clientG.setColor(bkg);
 					bkgBounds = clientG.getClipBounds();
+					clientG.fillRect(bkgBounds.x, bkgBounds.y, bkgBounds.width, bkgBounds.height);
 				}
-				int w = image.getWidth(this);
-				int h = image.getHeight(this);
-				if ((w != -1) && (h != -1)) {
-					switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.backgroundRepeat) {
-					case BackgroundInfo.BR_NO_REPEAT: {
-						int imageX;
-						if (binfo.isBackgroundXPositionAbsolute()) {
-							imageX = binfo.getBackgroundXPosition();
-						} else {
-							imageX = (binfo.getBackgroundXPosition() * (totalWidth - w)) / 100;
-						}
-						int imageY;
-						if (binfo.isBackgroundYPositionAbsolute()) {
-							imageY = binfo.getBackgroundYPosition();
-						} else {
-							imageY = (binfo.getBackgroundYPosition() * (totalHeight - h)) / 100;
-						}
-						clientG.drawImage(image, imageX, imageY, w, h, this);
-						break;
+				BackgroundInfo binfo = rs == null ? null : rs.getBackgroundInfo();
+				Image image = this.backgroundImage;
+				if (image != null) {
+					if (bkgBounds == null) {
+						bkgBounds = clientG.getClipBounds();
 					}
-					case BackgroundInfo.BR_REPEAT_X: {
-						int imageY;
-						if (binfo.isBackgroundYPositionAbsolute()) {
-							imageY = binfo.getBackgroundYPosition();
-						} else {
-							imageY = (binfo.getBackgroundYPosition() * (totalHeight - h)) / 100;
-						}
-						// Modulate starting x.
-						int x = (bkgBounds.x / w) * w;
-						int topX = bkgBounds.x + bkgBounds.width;
-						for (; x < topX; x += w) {
-							clientG.drawImage(image, x, imageY, w, h, this);
-						}
-						break;
-					}
-					case BackgroundInfo.BR_REPEAT_Y: {
-						int imageX;
-						if (binfo.isBackgroundXPositionAbsolute()) {
-							imageX = binfo.getBackgroundXPosition();
-						} else {
-							imageX = (binfo.getBackgroundXPosition() * (totalWidth - w)) / 100;
-						}
-						// Modulate starting y.
-						int y = (bkgBounds.y / h) * h;
-						int topY = bkgBounds.y + bkgBounds.height;
-						for (; y < topY; y += h) {
-							clientG.drawImage(image, imageX, y, w, h, this);
-						}
-						break;
-					}
-					default: {
-						// Modulate starting x and y.
-						int baseX = (bkgBounds.x / w) * w;
-						int baseY = (bkgBounds.y / h) * h;
-						int topX = bkgBounds.x + bkgBounds.width;
-						int topY = bkgBounds.y + bkgBounds.height;
-						// Replacing this:
-						for (int x = baseX; x < topX; x += w) {
-							for (int y = baseY; y < topY; y += h) {
-								clientG.drawImage(image, x, y, w, h, this);
+					int w = image.getWidth(this);
+					int h = image.getHeight(this);
+					if ((w != -1) && (h != -1)) {
+						switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.backgroundRepeat) {
+						case BackgroundInfo.BR_NO_REPEAT: {
+							int imageX;
+							if (binfo.isBackgroundXPositionAbsolute()) {
+								imageX = binfo.getBackgroundXPosition();
+							} else {
+								imageX = (binfo.getBackgroundXPosition() * (totalWidth - w)) / 100;
 							}
+							int imageY;
+							if (binfo.isBackgroundYPositionAbsolute()) {
+								imageY = binfo.getBackgroundYPosition();
+							} else {
+								imageY = (binfo.getBackgroundYPosition() * (totalHeight - h)) / 100;
+							}
+							clientG.drawImage(image, imageX, imageY, w, h, this);
+							break;
 						}
-						break;
-					}
+						case BackgroundInfo.BR_REPEAT_X: {
+							int imageY;
+							if (binfo.isBackgroundYPositionAbsolute()) {
+								imageY = binfo.getBackgroundYPosition();
+							} else {
+								imageY = (binfo.getBackgroundYPosition() * (totalHeight - h)) / 100;
+							}
+							// Modulate starting x.
+							int x = (bkgBounds.x / w) * w;
+							int topX = bkgBounds.x + bkgBounds.width;
+							for (; x < topX; x += w) {
+								clientG.drawImage(image, x, imageY, w, h, this);
+							}
+							break;
+						}
+						case BackgroundInfo.BR_REPEAT_Y: {
+							int imageX;
+							if (binfo.isBackgroundXPositionAbsolute()) {
+								imageX = binfo.getBackgroundXPosition();
+							} else {
+								imageX = (binfo.getBackgroundXPosition() * (totalWidth - w)) / 100;
+							}
+							// Modulate starting y.
+							int y = (bkgBounds.y / h) * h;
+							int topY = bkgBounds.y + bkgBounds.height;
+							for (; y < topY; y += h) {
+								clientG.drawImage(image, imageX, y, w, h, this);
+							}
+							break;
+						}
+						default: {
+							// Modulate starting x and y.
+							int baseX = (bkgBounds.x / w) * w;
+							int baseY = (bkgBounds.y / h) * h;
+							int topX = bkgBounds.x + bkgBounds.width;
+							int topY = bkgBounds.y + bkgBounds.height;
+							// Replacing this:
+							for (int x = baseX; x < topX; x += w) {
+								for (int y = baseY; y < topY; y += h) {
+									clientG.drawImage(image, x, y, w, h, this);
+								}
+							}
+							break;
+						}
+						}
 					}
 				}
 			}

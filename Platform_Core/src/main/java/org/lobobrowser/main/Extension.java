@@ -146,7 +146,8 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
             this.jarFile = null;
             this.extId = extRoot.getName();
             File propsFile = new File(extRoot, EXTENSION_PROPERTIES_FILE);
-            propsInputStream = propsFile.exists() ? new FileInputStream(propsFile) : null;
+            propsInputStream = propsFile.exists() ? new FileInputStream(
+                    propsFile) : null;
         } else {
             JarFile jarFile = new JarFile(extRoot);
             this.isPrimary = extRoot.getName().toLowerCase()

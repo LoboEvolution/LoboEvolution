@@ -100,12 +100,16 @@ BoundableRenderable {
      * @see org.lobobrowser.html.renderer.BoundableRenderable#getGUIPoint(int, int)
      */
     @Override
-    public Point getGUIPoint(int clientX, int clientY) {
+    public java.awt.Point getGUIPoint(int clientX, int clientY) {
         Renderable parent = this.getParent();
-        if (parent !=null) {
-            return ((BoundableRenderable) parent).getGUIPoint(clientX + this.x, clientY + this.y);
+        if (parent instanceof BoundableRenderable) {
+            return ((BoundableRenderable) parent).getGUIPoint(clientX + this.x,
+                    clientY + this.y);
+        } else if (parent == null) {
+            return this.container.getGUIPoint(clientX + this.x, clientY
+                    + this.y);
         } else {
-            return this.container.getGUIPoint(clientX + this.x, clientY + this.y);
+            throw new IllegalStateException("parent=" + parent);
         }
     }
 
@@ -118,10 +122,13 @@ BoundableRenderable {
     @Override
     public Point getRenderablePoint(int guiX, int guiY) {
         Renderable parent = this.getParent();
-        if (parent != null) {
-            return ((BoundableRenderable) parent).getRenderablePoint(guiX - this.x, guiY - this.y);
-        } else {
+        if (parent instanceof BoundableRenderable) {
+            return ((BoundableRenderable) parent).getRenderablePoint(guiX
+                    - this.x, guiY - this.y);
+        } else if (parent == null) {
             return new Point(guiX - this.x, guiY - this.y);
+        } else {
+            throw new IllegalStateException("parent=" + parent);
         }
     }
 
@@ -292,6 +299,7 @@ BoundableRenderable {
             } else {
                 parent.invalidateLayoutUpTree();
             }
+        } else {
         }
     }
 
@@ -440,10 +448,17 @@ BoundableRenderable {
     @Override
     public void repaint(int x, int y, int width, int height) {
         Renderable parent = this.parent;
-        if(parent!= null) {
-            ((BoundableRenderable) parent).repaint(x + this.x, y + this.y, width, height);
+        if (parent instanceof BoundableRenderable) {
+            ((BoundableRenderable) parent).repaint(x + this.x, y + this.y,
+                    width, height);
         } else if (parent == null) {
+            // Has to be top RBlock.
             this.container.repaint(x, y, width, height);
+        } else {
+            if (logger.isEnabled(Level.INFO)) {
+                logger.warn("repaint(): Don't know how to repaint " + this
+                        + ", parent being " + parent);
+            }
         }
     }
 
@@ -520,9 +535,11 @@ BoundableRenderable {
     @Override
     public void onMouseMoved(MouseEvent event, int x, int y,
             boolean triggerEvent, ModelNode limit) {
-    	if (triggerEvent && this.isContainedByNode()) {
-            HtmlController.getInstance().onMouseOver(this.modelNode, event, x, y, limit);
-            setMouseOnMouseOver(this, this.modelNode, limit);
+        if (triggerEvent) {
+            if (this.isContainedByNode()) {
+                HtmlController.getInstance().onMouseOver(this.modelNode, event, x, y, limit);
+                setMouseOnMouseOver(this, this.modelNode, limit);
+            }
         }
     }
     
@@ -601,10 +618,11 @@ BoundableRenderable {
                 rcontext.setCursor(cursorOpt);
                 break;
               } else {
-				if (node.getParentModelNode() == limit && 
-					(renderable instanceof RWord || renderable instanceof RBlank)) {
-					rcontext.setCursor(Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR)));
-				}
+                if (node.getParentModelNode() == limit) {                    
+                  if (renderable instanceof RWord || renderable instanceof RBlank) {
+                    rcontext.setCursor(Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR)));
+                  } 
+                }
               }
             }
             node = node.getParentModelNode();

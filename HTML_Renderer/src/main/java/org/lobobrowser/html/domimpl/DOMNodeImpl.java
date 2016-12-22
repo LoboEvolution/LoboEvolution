@@ -33,6 +33,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,7 +46,6 @@ import org.lobobrowser.html.dombl.StopVisitorException;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.domfilter.NodeFilter;
 import org.lobobrowser.html.domfilter.TextFilter;
-import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.renderstate.StyleSheetRenderState;
 import org.lobobrowser.http.UserAgentContext;
@@ -221,8 +221,8 @@ Node, ModelNode {
 	 * @return the child count
 	 */
     public int getChildCount() {
-    	synchronized (this.getTreeLock()) {
         ArrayList<Node> nl = this.nodeList;
+        synchronized (this.getTreeLock()) {
             return nl == null ? 0 : nl.size();
         }
     }
@@ -843,8 +843,8 @@ Node, ModelNode {
      */
     @Override
     public Object setUserData(String key, Object data, UserDataHandler handler) {
-		if (HtmlParser.MODIFYING_KEY.equals(key) && data instanceof Boolean) {
-            boolean ns = (boolean) data;
+        if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key)) {
+            boolean ns = (Boolean.TRUE == data);
             this.notificationsSuspended = ns;
             if (!ns) {
                 this.informNodeLoaded();
@@ -993,7 +993,7 @@ Node, ModelNode {
                 }
             }
         }
-        return sb.toString().trim();
+        return sb.toString();
     }
 
     /*
@@ -1721,8 +1721,9 @@ Node, ModelNode {
             if (child instanceof DOMElementImpl) {
                 ((DOMElementImpl) child).appendInnerTextImpl(buffer);
             }
-            
-            if (child instanceof Text) {
+            if (child instanceof Comment) {
+                // skip
+            } else if (child instanceof Text) {
                 buffer.append(((Text) child).getTextContent());
             }
         }

@@ -272,7 +272,7 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 		} else {
 			displayInt = this.getDefaultDisplay();
 		}
-		d = Integer.valueOf(displayInt);
+		d = new Integer(displayInt);
 		this.iDisplay = d;
 		return displayInt;
 	}
@@ -445,14 +445,15 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 
 		Integer superscript = null;
 		if (isSuper) {
-			superscript = Integer.valueOf(1);
+			superscript = new Integer(1);
 		} else if (isSub) {
-			superscript = Integer.valueOf(-1);
+			superscript = new Integer(-1);
 		}
 		if ((superscript == null) && (prs != null)) {
 			superscript = (Integer) prs.getFont().getAttributes().get(TextAttribute.SUPERSCRIPT);
 		}
-		f = FONT_FACTORY.getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize.floatValue(), locales, superscript);
+		f = FONT_FACTORY.getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize.floatValue(), locales,
+				superscript);
 		this.iFont = f;
 		return f;
 	}
@@ -880,7 +881,7 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 			while (counterArray.size() <= nesting) {
 				counterArray.add(null);
 			}
-			counterArray.set(nesting, Integer.valueOf(value));
+			counterArray.set(nesting, new Integer(value));
 		}
 	}
 
@@ -910,7 +911,7 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 		}
 		Integer integer = (Integer) counterArray.get(nesting);
 		int prevValue = integer == null ? 0 : integer.intValue();
-		counterArray.set(nesting, Integer.valueOf(prevValue + 1));
+		counterArray.set(nesting, new Integer(prevValue + 1));
 		return prevValue;
 	}
 
@@ -940,7 +941,7 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				}
 				
 				if((backgroundText.startsWith(ColorFactory.RGB_START) || 
-						backgroundText.startsWith(ColorFactory.RGBA_START)) && backgroundText.endsWith(")")){
+						backgroundText.startsWith(ColorFactory.RGB_START)) && backgroundText.endsWith(")")){
 					binfo.setBackgroundColor(ColorFactory.getInstance().getColor(backgroundText));
 				} else {
 
@@ -1107,7 +1108,7 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				wsValue = WS_NORMAL;
 			}
 		}
-		this.iWhiteSpace = Integer.valueOf(wsValue);
+		this.iWhiteSpace = new Integer(wsValue);
 		return wsValue;
 	}
 	
@@ -1344,7 +1345,7 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				}
 			}
 		}
-		this.cachedVisibility = Integer.valueOf(visibility);
+		this.cachedVisibility = new Integer(visibility);
 		return visibility;
 	}
 	
@@ -1395,7 +1396,7 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				}
 			}
 		}
-		this.cachedPosition = Integer.valueOf(position);
+		this.cachedPosition = new Integer(position);
 		return position;
 	}
 	
@@ -1440,7 +1441,7 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				}
 			}
 		}
-		this.cachedFloat = Integer.valueOf(floatValue);
+		this.cachedFloat = new Integer(floatValue);
 		return floatValue;
 	}
 

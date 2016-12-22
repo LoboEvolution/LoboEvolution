@@ -23,6 +23,7 @@ package org.lobobrowser.util.gui;
 import java.io.IOException;
 import java.io.Serializable;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -68,33 +69,33 @@ public class LAFSettings implements Serializable {
     /** The Constant instance. */
     private static final LAFSettings instance;
     /** The Constant ACRYL. */
-    public static final String ACRYL = "Acryl";
+    public static String ACRYL = "Acryl";
     /** The Constant AERO. */
-    public static final String AERO = "Aero";
+    public static String AERO = "Aero";
     /** The Constant ALUMINIUM. */
-    public static final String ALUMINIUM = "Aluminium";
+    public static String ALUMINIUM = "Aluminium";
     /** The Constant BERNSTEIN. */
-    public static final String BERNSTEIN = "Bernstein";
+    public static String BERNSTEIN = "Bernstein";
     /** The Constant FAST. */
-    public static final String FAST = "Fast";
+    public static String FAST = "Fast";
     /** The Constant GRAPHITE. */
-    public static final String GRAPHITE = "Graphite";
+    public static String GRAPHITE = "Graphite";
     /** The Constant HIFI. */
-    public static final String HIFI = "HiFi";
+    public static String HIFI = "HiFi";
     /** The Constant LUNA. */
-    public static final String LUNA = "Luna";
+    public static String LUNA = "Luna";
     /** The Constant MCWIN. */
-    public static final String MCWIN = "McWin";
+    public static String MCWIN = "McWin";
     /** The Constant MINT. */
-    public static final String MINT = "Mint";
+    public static String MINT = "Mint";
     /** The Constant NOIRE. */
-    public static final String NOIRE = "Noire";
+    public static String NOIRE = "Noire";
     /** The Constant SMART. */
-    public static final String SMART = "Smart";
+    public static String SMART = "Smart";
     /** The Constant TEXTURE. */
-    public static final String TEXTURE = "Texture";
+    public static String TEXTURE = "Texture";
     /** The Constant TIMES_NEW_ROMAN. */
-    public static final String TIMES_NEW_ROMAN = "TimesNewRoman";
+    public static String TIMES_NEW_ROMAN = "TimesNewRoman";
     /** The FONTS . */
     public static String[] FONTS = { "Aharoni", "Andalus", "AngsanaNew",
             "AngsanaUPC", "AngsanaUPC", "Aparajita", "ArabicTypesetting",
@@ -313,7 +314,7 @@ public class LAFSettings implements Serializable {
 	 * @param acryl
 	 *            the new Acryl
 	 */
-    public void setAcryl(final boolean acryl) {
+    public void setAcryl(boolean acryl) {
         this.acryl = acryl;
     }
     
@@ -322,7 +323,7 @@ public class LAFSettings implements Serializable {
 	 * @param aero
 	 *            the new Aero
 	 */
-    public void setAero(final boolean aero) {
+    public void setAero(boolean aero) {
         this.aero = aero;
     }
     
@@ -331,7 +332,7 @@ public class LAFSettings implements Serializable {
 	 * @param aluminium
 	 *            the new Aluminium
 	 */
-    public void setAluminium(final boolean aluminium) {
+    public void setAluminium(boolean aluminium) {
         this.aluminium = aluminium;
     }
     
@@ -340,7 +341,7 @@ public class LAFSettings implements Serializable {
 	 * @param bernstein
 	 *            the new Bernstein
 	 */
-    public void setBernstein(final boolean bernstein) {
+    public void setBernstein(boolean bernstein) {
         this.bernstein = bernstein;
     }
     
@@ -349,7 +350,7 @@ public class LAFSettings implements Serializable {
 	 * @param fast
 	 *            the new Fast
 	 */
-    public void setFast(final boolean fast) {
+    public void setFast(boolean fast) {
         this.fast = fast;
     }
     
@@ -358,7 +359,7 @@ public class LAFSettings implements Serializable {
 	 * @param graphite
 	 *            the new Graphite
 	 */
-    public void setGraphite(final boolean graphite) {
+    public void setGraphite(boolean graphite) {
         this.graphite = graphite;
     }
     
@@ -367,7 +368,7 @@ public class LAFSettings implements Serializable {
 	 * @param hiFi
 	 *            the new HiFi
 	 */
-    public void setHiFi(final boolean hiFi) {
+    public void setHiFi(boolean hiFi) {
         this.hiFi = hiFi;
     }
     
@@ -376,7 +377,7 @@ public class LAFSettings implements Serializable {
 	 * @param luna
 	 *            the new Luna
 	 */
-    public void setLuna(final boolean luna) {
+    public void setLuna(boolean luna) {
         this.luna = luna;
     }
     
@@ -385,7 +386,7 @@ public class LAFSettings implements Serializable {
 	 * @param mcWin
 	 *            the new McWin
 	 */
-    public void setMcWin(final boolean mcWin) {
+    public void setMcWin(boolean mcWin) {
         this.mcWin = mcWin;
     }
     
@@ -394,7 +395,7 @@ public class LAFSettings implements Serializable {
 	 * @param mint
 	 *            the new Mint
 	 */
-    public void setMint(final boolean mint) {
+    public void setMint(boolean mint) {
         this.mint = mint;
     }
     
@@ -403,7 +404,7 @@ public class LAFSettings implements Serializable {
 	 * @param noire
 	 *            the new Noire
 	 */
-    public void setNoire(final boolean noire) {
+    public void setNoire(boolean noire) {
         this.noire = noire;
     }
     
@@ -412,7 +413,7 @@ public class LAFSettings implements Serializable {
 	 * @param smart
 	 *            the new Smart
 	 */
-    public void setSmart(final boolean smart) {
+    public void setSmart(boolean smart) {
         this.smart = smart;
     }
     
@@ -421,7 +422,7 @@ public class LAFSettings implements Serializable {
 	 * @param texture
 	 *            the new Texture
 	 */
-    public void setTexture(final boolean texture) {
+    public void setTexture(boolean texture) {
         this.texture = texture;
     }
     
@@ -446,7 +447,7 @@ public class LAFSettings implements Serializable {
 	 * @param fontSize
 	 *            the new Font Size
 	 */
-    public void setFontSize(final float fontSize) {
+    public void setFontSize(float fontSize) {
         this.fontSize = fontSize;
     }
     
@@ -455,7 +456,7 @@ public class LAFSettings implements Serializable {
 	 * @param font
 	 *            the new Font
 	 */
-    public void setFont(final String font) {
+    public void setFont(String font) {
         this.font = font;
     }
 }

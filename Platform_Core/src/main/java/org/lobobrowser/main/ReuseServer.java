@@ -31,7 +31,6 @@ import java.io.Reader;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 import org.apache.logging.log4j.Level;
@@ -113,7 +112,7 @@ public class ReuseServer implements Runnable {
                 try {
                     this.serverSocket.close();
                 } catch (IOException ioe) {
-                	logger.error(ioe);
+                    // ignore
                 }
                 this.serverSocket = null;
             }
@@ -140,7 +139,7 @@ public class ReuseServer implements Runnable {
                 s.setTcpNoDelay(true);
                 InputStream in = s.getInputStream();
                 try {
-                    Reader reader = new InputStreamReader(in,StandardCharsets.UTF_8);
+                    Reader reader = new InputStreamReader(in);
                     BufferedReader br = new BufferedReader(reader);
                     String line;
                     while ((line = br.readLine()) != null) {

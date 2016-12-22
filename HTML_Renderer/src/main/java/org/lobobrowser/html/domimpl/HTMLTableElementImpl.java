@@ -332,15 +332,19 @@ HTMLTableElement {
      * @return the height length
      */
     public HtmlLength getHeightLength(int availHeight) {
-	    AbstractCSS2Properties props = this.getCurrentStyle();
-	    String heightText = props == null ? null : props.getHeight();
-	    if (heightText == null) {
-	        return new HtmlLength(
-	                this.getAttribute(HtmlAttributeProperties.HEIGHT));
-	    } else {
-	        return new HtmlLength(HtmlValues.getPixelSize(heightText,
-	                this.getRenderState(), 0, availHeight));
-	    }
+        try {
+            AbstractCSS2Properties props = this.getCurrentStyle();
+            String heightText = props == null ? null : props.getHeight();
+            if (heightText == null) {
+                return new HtmlLength(
+                        this.getAttribute(HtmlAttributeProperties.HEIGHT));
+            } else {
+                return new HtmlLength(HtmlValues.getPixelSize(heightText,
+                        this.getRenderState(), 0, availHeight));
+            }
+        } catch (Exception err) {
+            return null;
+        }
     }
 
     /*
@@ -355,15 +359,19 @@ HTMLTableElement {
      * @return the width length
      */
     public HtmlLength getWidthLength(int availWidth) {
-	    AbstractCSS2Properties props = this.getCurrentStyle();
-	    String widthText = props == null ? null : props.getWidth();
-	    if (widthText == null) {
-	        return new HtmlLength(
-	                this.getAttribute(HtmlAttributeProperties.WIDTH));
-	    } else {
-	        return new HtmlLength(HtmlValues.getPixelSize(widthText,
-	                this.getRenderState(), 0, availWidth));
-	    }
+        try {
+            AbstractCSS2Properties props = this.getCurrentStyle();
+            String widthText = props == null ? null : props.getWidth();
+            if (widthText == null) {
+                return new HtmlLength(
+                        this.getAttribute(HtmlAttributeProperties.WIDTH));
+            } else {
+                return new HtmlLength(HtmlValues.getPixelSize(widthText,
+                        this.getRenderState(), 0, availWidth));
+            }
+        } catch (Exception err) {
+            return null;
+        }
     }
 
     /*

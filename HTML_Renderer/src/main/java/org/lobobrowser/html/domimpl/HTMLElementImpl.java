@@ -35,6 +35,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+import org.apache.logging.log4j.Level;
+
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.QuerySelectorImpl;

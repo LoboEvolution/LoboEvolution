@@ -527,7 +527,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			throw new IllegalArgumentException("Timeout value " + aTimeInMs + " is not supported.");
 		}
 		final int timeID = generateTimerID();
-		final Integer timeIDInt = Integer.valueOf(timeID);
+		final Integer timeIDInt = new Integer(timeID);
 		ActionListener task = new FunctionTimerTask(this, timeIDInt, aFunction, false);
 		int t = (int) aTimeInMs;
 		if (t < 1) {
@@ -557,7 +557,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			throw new IllegalArgumentException("Timeout value " + aTimeInMs + " is not supported.");
 		}
 		final int timeID = generateTimerID();
-		final Integer timeIDInt = Integer.valueOf(timeID);
+		final Integer timeIDInt = new Integer(timeID);
 		ActionListener task = new ExpressionTimerTask(this, timeIDInt, aExpression, false);
 		int t = (int) aTimeInMs;
 		if (t < 1) {
@@ -579,7 +579,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 *      Window.clearInterval interface Definition</a>
 	 */
 	public void clearInterval(int aTimerID) {
-		Integer key = Integer.valueOf(aTimerID);
+		Integer key = new Integer(aTimerID);
 		this.forgetTask(key, true);
 	}
 
@@ -622,7 +622,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 *            the timeout id
 	 */
 	public void clearTimeout(int timeoutID) {
-		Integer key = Integer.valueOf(timeoutID);
+		Integer key = new Integer(timeoutID);
 		this.forgetTask(key, true);
 	}
 
@@ -854,7 +854,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		if (rcontext != null) {
 			URL url;
 			Object document = this.document;
-			if (document != null) {
+			if (document instanceof HTMLDocumentImpl) {
 				url = ((HTMLDocumentImpl) document).getFullURL(relativeUrl);
 			} else {
 				try {
@@ -1026,7 +1026,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			throw new IllegalArgumentException("Timeout value " + millis + " is not supported.");
 		}
 		final int timeID = generateTimerID();
-		final Integer timeIDInt = Integer.valueOf(timeID);
+		final Integer timeIDInt = new Integer(timeID);
 		ActionListener task = new ExpressionTimerTask(this, timeIDInt, expr, true);
 		int t = (int) millis;
 		if (t < 1) {
@@ -1052,7 +1052,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			throw new IllegalArgumentException("Timeout value " + millis + " is not supported.");
 		}
 		final int timeID = generateTimerID();
-		final Integer timeIDInt = Integer.valueOf(timeID);
+		final Integer timeIDInt = new Integer(timeID);
 		ActionListener task = new FunctionTimerTask(this, timeIDInt, function, true);
 		int t = (int) millis;
 		if (t < 1) {
@@ -1110,7 +1110,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public HTMLCollection getFrames() {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			return ((HTMLDocumentImpl) doc).getFrames();
 		}
 		return null;
@@ -1383,7 +1383,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public Function getOnload() {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			return ((HTMLDocumentImpl) doc).getOnloadHandler();
 		} else {
 			return null;
@@ -1400,7 +1400,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		// Note that body.onload overrides
 		// window.onload.
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			((HTMLDocumentImpl) doc).setOnloadHandler(onload);
 		}
 	}
@@ -1447,7 +1447,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 * Force gc.
 	 */
 	public void forceGC() {
-		Runtime.getRuntime().gc();
+		System.gc();
 	}
 
 	/**
@@ -1648,14 +1648,14 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public void addEventListener(String script, Function function) {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			((HTMLDocumentImpl) doc).addEventListener(script, function);
 		}
 	}
 
 	public void removeEventListener(String script, Function function) {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			((HTMLDocumentImpl) doc).removeEventListener(script, function);
 		}
 	}
@@ -2067,7 +2067,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	public Function getOnclick() {
 
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			return ((HTMLDocumentImpl) doc).getOnclick();
 		} else {
 			return null;
@@ -2082,7 +2082,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public void setOnclick(Function onclick) {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			((HTMLDocumentImpl) doc).setOnclick(onclick);
 
 		}
@@ -2114,7 +2114,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public Function getOndblclick() {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			return ((HTMLDocumentImpl) doc).getOndblclick();
 		} else {
 			return null;
@@ -2129,7 +2129,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public void setOndblclick(Function ondblclick) {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			((HTMLDocumentImpl) doc).setOndblclick(ondblclick);
 
 		}
@@ -2465,7 +2465,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public Function getOnkeydown() {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			return ((HTMLDocumentImpl) doc).getOnkeydown();
 		} else {
 			return null;
@@ -2480,7 +2480,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public void setOnkeydown(Function onkeydown) {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			((HTMLDocumentImpl) doc).setOnkeydown(onkeydown);
 		}
 	}
@@ -2492,7 +2492,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public Function getOnkeypress() {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			return ((HTMLDocumentImpl) doc).getOnkeypress();
 		} else {
 			return null;
@@ -2507,7 +2507,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public void setOnkeypress(Function onkeypress) {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			((HTMLDocumentImpl) doc).setOnkeypress(onkeypress);
 		}
 	}
@@ -2519,7 +2519,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public Function getOnkeyup() {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			return ((HTMLDocumentImpl) doc).getOnkeyup();
 		} else {
 			return null;
@@ -2534,7 +2534,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public void setOnkeyup(Function onkeyup) {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			((HTMLDocumentImpl) doc).setOnkeyup(onkeyup);
 		}
 	}
@@ -2622,7 +2622,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public Function getOnmousedown() {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			return ((HTMLDocumentImpl) doc).getOnmousedown();
 		} else {
 			return null;
@@ -2637,7 +2637,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public void setOnmousedown(Function onmousedown) {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			((HTMLDocumentImpl) doc).setOnmousedown(onmousedown);
 		}
 	}
@@ -2687,7 +2687,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public Function getOnmouseover() {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			return ((HTMLDocumentImpl) doc).getOnmouseover();
 		} else {
 			return null;
@@ -2702,8 +2702,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public void setOnmouseover(Function onmouseover) {
 		Document doc = this.document;
-		if (doc != null)
+		if (doc instanceof HTMLDocumentImpl) {
 			((HTMLDocumentImpl) doc).setOnmouseover(onmouseover);
+		}
 	}
 
 	/**
@@ -2713,7 +2714,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public Function getOnmouseup() {
 		Document doc = this.document;
-		if (doc != null) {
+		if (doc instanceof HTMLDocumentImpl) {
 			return ((HTMLDocumentImpl) doc).getOnmouseup();
 		} else {
 			return null;
@@ -2728,8 +2729,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public void setOnmouseup(Function onmouseup) {
 		Document doc = this.document;
-		if (doc != null)
+		if (doc instanceof HTMLDocumentImpl) {
 			((HTMLDocumentImpl) doc).setOnmouseup(onmouseup);
+		}
 	}
 
 	/**

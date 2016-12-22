@@ -36,7 +36,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -82,7 +81,7 @@ public class ReuseManager {
             File portFile = new File(appHome, PORT_FILE);
             portFile.delete();
         } catch (IOException ioe) {
-            logger.error(ioe);
+            // ignore
         }
     }
 
@@ -120,7 +119,7 @@ public class ReuseManager {
                 	logger.log(Level.ERROR,eofe);
                     portFile.delete();
                 } catch (FileNotFoundException fnfe) {
-                	logger.error(fnfe);
+                    // Likely not running
                 }
                 if (port != -1) {
                     Socket s = new Socket(bindHost, port);
@@ -128,7 +127,8 @@ public class ReuseManager {
                         s.setTcpNoDelay(true);
                         OutputStream out = s.getOutputStream();
                         try {
-                            OutputStreamWriter writer = new OutputStreamWriter(out,StandardCharsets.UTF_8);
+                            OutputStreamWriter writer = new OutputStreamWriter(
+                                    out);
                             boolean hadPath = false;
                             for (int i = 0; i < args.length; i++) {
                                 String url = args[i];

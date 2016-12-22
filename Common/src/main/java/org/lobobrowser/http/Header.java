@@ -49,7 +49,7 @@ public class Header extends NameValuePair {
      * @param value
      *            The value. May be null.
      */
-    public Header(final String name, final String value) {
+    public Header(String name, String value) {
         super(name, value);
     }
     
@@ -66,7 +66,7 @@ public class Header extends NameValuePair {
      *            The elements. May be null. If null, then getElements() will
      *            return an empty array, rather than null.
      */
-    public Header(final String name, final String value, final Element... elements) {
+    public Header(String name, String value, Element... elements) {
         super(name, value);
         setElements(elements);
     }
@@ -84,7 +84,7 @@ public class Header extends NameValuePair {
 	 * @param elements
 	 *            the new elements
 	 */
-    public void setElements(final Element... elements) {
+    public void setElements(Element... elements) {
         Element[] old = getElements();
         this.elements.clear();
         if (elements != null) {
@@ -105,7 +105,7 @@ public class Header extends NameValuePair {
     /**
      * A representation of an Element within a Header.
      */
-    public static class Element {
+    public static final class Element {
         /** The params. */
         private Parameter[] params = new Parameter[0];
         
@@ -115,7 +115,7 @@ public class Header extends NameValuePair {
          * @param params
          *            the Parameters. May be null.
          */
-        public Element(final Parameter... params) {
+        public Element(Parameter... params) {
             if (params == null) {
                 this.params = new Parameter[0];
             } else {

@@ -27,6 +27,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyListener;
 
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -96,7 +97,12 @@ public class JTextFieldImpl extends JTextField {
 			originalForeground = fg;
 		}
 	}
-	
+
+	@Override
+	public void setBorder(Border border) {
+		super.setBorder(border);
+	}
+
 	/**
 	 * Gets the grey by default*.
 	 *

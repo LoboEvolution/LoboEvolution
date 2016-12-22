@@ -105,7 +105,7 @@ public class Session extends AbstractBean {
     private long bytesSoFar = 0;
 
     /**
-     * Creates a new Session.
+     * Creates a new Session. Automatically installs the {@link CookieManager}.
      */
     public Session() {
         this(true);
@@ -119,7 +119,7 @@ public class Session extends AbstractBean {
      *
      * @param installCookieManager
      */
-    public Session(final boolean installCookieManager) {
+    public Session(boolean installCookieManager) {
         setSslSecurityLevel(SecurityLevel.Medium);
         // register a default security handler
         setMediumSecurityHandler(new DefaultSecurityHandler());
@@ -133,7 +133,7 @@ public class Session extends AbstractBean {
 	 * @param level
 	 *            the new ssl security level
 	 */
-    public void setSslSecurityLevel(final SecurityLevel level) {
+    public void setSslSecurityLevel(SecurityLevel level) {
         SecurityLevel old = getSslSecurityLevel();
         sslSecurity = level;
         firePropertyChange("sslSecurityLevel", old, getSslSecurityLevel());
@@ -152,7 +152,7 @@ public class Session extends AbstractBean {
 	 * @param h
 	 *            the new medium security handler
 	 */
-    void setMediumSecurityHandler(final SecurityHandler h) {
+    void setMediumSecurityHandler(SecurityHandler h) {
         SecurityHandler old = getMediumSecurityHandler();
         this.handler = h;
         firePropertyChange("mediumSecurityHandler", old,
@@ -167,7 +167,7 @@ public class Session extends AbstractBean {
         return handler;
     }
 
-    private SSLSocketFactory createSocketFactory(final String host) {
+    private SSLSocketFactory createSocketFactory(String host) {
         try {
             TrustManager tm = null;
             Session.SecurityLevel level = getSslSecurityLevel();
@@ -204,7 +204,7 @@ public class Session extends AbstractBean {
 	 *            the new keeps track of the total number of bytes that are to
 	 *            be sent or receieved
 	 */
-    private void setTotalBytes(final long bytes) {
+    private void setTotalBytes(long bytes) {
         long old = totalBytes;
         float oldProgress = getProgress();
         firePropertyChange("totalBytes", old, this.totalBytes = bytes);
@@ -228,7 +228,7 @@ public class Session extends AbstractBean {
 	 *            the new keeps track of the total number of bytes transfered
 	 *            upstream or downstream
 	 */
-    private void setBytesSoFar(final long bytes) {
+    private void setBytesSoFar(long bytes) {
         long old = this.bytesSoFar;
         float oldProgress = getProgress();
         firePropertyChange("bytesSoFar", old, this.bytesSoFar = bytes);
@@ -265,7 +265,7 @@ public class Session extends AbstractBean {
 	 *            the new keeps track of the state of the Session when
 	 *            performing a request/response cycle
 	 */
-    protected void setState(final State s) {
+    protected void setState(State s) {
         State old = this.state;
         firePropertyChange("state", old, this.state = s);
     }
@@ -284,7 +284,7 @@ public class Session extends AbstractBean {
      *             normal http errors occur, they will not throw an exception
      *             (such as BAD_GATEWAY, etc).
      */
-    public final Response get(final String url) throws Exception {
+    public final Response get(String url) throws Exception {
         return execute(Method.GET, url);
     }
 
@@ -304,7 +304,7 @@ public class Session extends AbstractBean {
      *             normal http errors occur, they will not throw an exception
      *             (such as BAD_GATEWAY, etc).
      */
-    public final Response get(final String url, final Parameter... params)
+    public final Response get(String url, Parameter... params)
             throws Exception {
         return execute(Method.GET, url, params);
     }
@@ -323,7 +323,7 @@ public class Session extends AbstractBean {
      *             normal http errors occur, they will not throw an exception
      *             (such as BAD_GATEWAY, etc).
      */
-    public final Response post(final String url) throws Exception {
+    public final Response post(String url) throws Exception {
         return execute(Method.POST, url);
     }
 
@@ -343,7 +343,7 @@ public class Session extends AbstractBean {
      *             normal http errors occur, they will not throw an exception
      *             (such as BAD_GATEWAY, etc).
      */
-    public final Response post(final String url, final Parameter... params)
+    public final Response post(String url, Parameter... params)
             throws Exception {
         return execute(Method.POST, url, params);
     }
@@ -362,7 +362,7 @@ public class Session extends AbstractBean {
      *             normal http errors occur, they will not throw an exception
      *             (such as BAD_GATEWAY, etc).
      */
-    public final Response put(final String url) throws Exception {
+    public final Response put(String url) throws Exception {
         return execute(Method.PUT, url);
     }
 
@@ -382,7 +382,7 @@ public class Session extends AbstractBean {
      *             normal http errors occur, they will not throw an exception
      *             (such as BAD_GATEWAY, etc).
      */
-    public final Response put(final String url, final Parameter... params)
+    public final Response put(String url, Parameter... params)
             throws Exception {
         return execute(Method.PUT, url, params);
     }
@@ -405,7 +405,7 @@ public class Session extends AbstractBean {
      *             normal http errors occur, they will not throw an exception
      *             (such as BAD_GATEWAY, etc).
      */
-    public final Response execute(final String method, final String url) throws Exception {
+    public final Response execute(String method, String url) throws Exception {
         return execute(method, url, new Parameter[0]);
     }
 
@@ -430,8 +430,8 @@ public class Session extends AbstractBean {
      *             normal http errors occur, they will not throw an exception
      *             (such as BAD_GATEWAY, etc).
      */
-    public final Response execute(final String method, final String url,
-            final Parameter... params) throws Exception {
+    public final Response execute(String method, String url,
+            Parameter... params) throws Exception {
         if (method == null) {
             throw new NullPointerException("method cannot be null");
         }
@@ -458,7 +458,7 @@ public class Session extends AbstractBean {
      *             normal http errors occur, they will not throw an exception
      *             (such as BAD_GATEWAY, etc).
      */
-    public Response execute(final Request req) throws Exception {
+    public Response execute(Request req) throws Exception {
         try {
             // initialize the state and such
             setTotalBytes(-1);
@@ -655,6 +655,7 @@ public class Session extends AbstractBean {
         } catch (InterruptedException ex) {
             setState(State.ABORTED);
             throw ex;
+        } finally {
         }
     }
 
@@ -671,11 +672,11 @@ public class Session extends AbstractBean {
      * @return
      * @throws java.io.IOException
      */
-    protected URL createURL(final String surl) throws MalformedURLException {
+    protected URL createURL(String surl) throws MalformedURLException {
         return new URL(surl.toString());
     }
 
-    private byte[] readFully(final InputStream in) throws IOException {
+    private byte[] readFully(InputStream in) throws IOException {
         if (in == null) {
             return new byte[0];
         }

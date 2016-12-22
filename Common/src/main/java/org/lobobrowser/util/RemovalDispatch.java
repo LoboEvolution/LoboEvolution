@@ -34,7 +34,7 @@ public class RemovalDispatch extends EventDispatch2 {
      * , java.util.EventObject)
      */
     @Override
-    protected void dispatchEvent(final EventListener listener, final EventObject event) {
+    protected void dispatchEvent(EventListener listener, EventObject event) {
         ((RemovalListener) listener).removed((RemovalEvent) event);
     }
 }

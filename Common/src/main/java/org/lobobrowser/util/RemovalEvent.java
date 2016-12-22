@@ -39,7 +39,7 @@ public class RemovalEvent extends EventObject {
      * @param valueRemoved
      *            the value removed
      */
-    public RemovalEvent(final Object source, final Object valueRemoved) {
+    public RemovalEvent(Object source, Object valueRemoved) {
         super(source);
         this.valueRemoved = valueRemoved;
     }

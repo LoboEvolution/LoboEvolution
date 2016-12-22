@@ -104,7 +104,7 @@ public class PlatformInit {
     /**
      * Intializes security by installing a security policy and a security
      * manager. Programs that use the browser API should invoke this method (or
-     * {@link #init(boolean) init }) to prevent web content from having
+     * {@link #init(boolean, boolean) init }) to prevent web content from having
      * full access to the user's computer.
      *
      * @see #addPrivilegedPermission(Permission)
@@ -118,7 +118,7 @@ public class PlatformInit {
     /**
      * Initializes the global URLStreamHandlerFactory.
      * <p>
-     * This method is invoked by {@link #init(boolean)}.
+     * This method is invoked by {@link #init(boolean, boolean)}.
      */
     public void initProtocols() {
         // Configure URL protocol handlers
@@ -132,7 +132,7 @@ public class PlatformInit {
      * Initializes the HTTP authenticator and the cookie handler. This is
      * essential for the browser to work properly.
      * <p>
-     * This method is invoked by {@link #init(boolean)}.
+     * This method is invoked by {@link #init(boolean, boolean)}.
      */
     public void initHTTP() {
         // Configure authenticator
@@ -226,14 +226,19 @@ public class PlatformInit {
 
     /**
      * Initializes platform logging. Note that this method is not implicitly
-     * called by {@link #init(boolean)}.
+     * called by {@link #init(boolean, boolean)}.
      *
+     * @param debugOn
+     *            Debugging mode. This determines which one of two different
+     *            logging configurations is used.
      * @throws Exception
      *             the exception
      */
     public void initLogging() throws Exception {
 		
-		Logger logger = LogManager.getLogger(PlatformInit.class);
+		// Configure log4j2
+    	
+    	Logger logger = LogManager.getLogger(PlatformInit.class);
 		if (logger.isInfoEnabled()) {
 			logger.warn("Entry(): Logger INFO level is enabled.");
 			Properties properties = System.getProperties();
@@ -249,7 +254,7 @@ public class PlatformInit {
     /**
      * Initializes browser extensions. Invoking this method is essential to
      * enable the primary extension and all basic browser functionality. This
-     * method is invoked by {@link #init(boolean)}.
+     * method is invoked by {@link #init(boolean, boolean)}.
      */
     public void initExtensions() {
         ExtensionManager.getInstance().initExtensions();
@@ -270,7 +275,7 @@ public class PlatformInit {
     /**
      * Initializers the <code>java.library.path</code> property.
      * <p>
-     * This method is called by {@link #init(boolean)}.
+     * This method is called by {@link #init(boolean, boolean)}.
      *
      * @param dirName
      *            A directory name relative to the browser application
@@ -285,7 +290,7 @@ public class PlatformInit {
     /**
      * Initializes some Java properties required by the browser.
      * <p>
-     * This method is called by {@link #init(boolean)}.
+     * This method is called by {@link #init(boolean, boolean)}.
      */
     public void initOtherProperties() {
         System.setProperty("networkaddress.cache.ttl", "3600");
@@ -307,6 +312,10 @@ public class PlatformInit {
      * @param exitWhenAllWindowsAreClosed
      *            Whether the JVM should exit when all windows created by the
      *            default window factory are closed.
+     * @param initConsole
+     *            If this parameter is <code>true</code>, standard output is
+     *            redirected to a browser console. See
+     *            {@link org.lobobrowser.gui.ConsoleModel}.
      * @throws Exception
      *             the exception
      * @see #initSecurity()
@@ -437,7 +446,7 @@ public class PlatformInit {
      * Adds one permission to the base set of permissions assigned to privileged
      * code, i.e. code loaded from the local system rather than a remote
      * location. This method must be called before a security manager has been
-     * set, that is, before {@link #init(boolean)} or
+     * set, that is, before {@link #init(boolean, boolean)} or
      * {@link #initSecurity()} are invoked. The purpose of the method is to add
      * permissions otherwise missing from the security policy installed by this
      * facility.

@@ -31,17 +31,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.jar.JarFile;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lobobrowser.security.LocalSecurityPolicy;
 
 /**
  * The Class TempFileManager.
  */
 public class TempFileManager {
-	
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(TempFileManager.class);
 
     /** The instance. */
     private static TempFileManager instance;
@@ -78,9 +73,14 @@ public class TempFileManager {
 	 *
 	 * @return the instance
 	 */
-    public synchronized static TempFileManager getInstance() {
+    public static TempFileManager getInstance() {
+        // Do it this way to allow other statics to initialize.
         if (instance == null) {
-        	instance = new TempFileManager();
+            synchronized (TempFileManager.class) {
+                if (instance == null) {
+                    instance = new TempFileManager();
+                }
+            }
         }
         return instance;
     }
@@ -101,7 +101,12 @@ public class TempFileManager {
             // Cleanup files theoretically left by previously running instance.
             for (int i = 0; i < files.length; i++) {
                 String name = files[i].getName();
-                if (name.startsWith(GENERAL_PREFIX) && !name.startsWith(FILE_PREFIX)) {
+                if (name.startsWith(GENERAL_PREFIX)
+                        && !name.startsWith(FILE_PREFIX)) {
+                    // We can't really assume only one instance of the
+                    // application
+                    // is running. Need to be a little lenient about deleting
+                    // these.
                     if (files[i].lastModified() < (System.currentTimeMillis() - ONE_MONTH)) {
                         files[i].delete();
                     }
@@ -135,7 +140,7 @@ public class TempFileManager {
                         file.delete();
                     }
                 } catch (IOException ioe) {
-                	logger.error(ioe);
+                    // ignore
                 }
             }
         }
@@ -234,5 +239,5 @@ public class TempFileManager {
         public void run() {
             shutdownCleanup();
         }
-    }    
+    }
 }

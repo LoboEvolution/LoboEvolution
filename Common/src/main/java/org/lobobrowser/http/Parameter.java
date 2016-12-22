@@ -45,7 +45,7 @@ public class Parameter extends NameValuePair {
      * @param value
      *            The value. May be null.
      */
-    public Parameter(final String name, final String value) {
+    public Parameter(String name, String value) {
         super(name, value);
     }
     

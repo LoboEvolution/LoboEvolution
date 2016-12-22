@@ -31,7 +31,7 @@ public class Html {
      *            the text
      * @return the string
      */
-    public static String textToHTML(final String text) {
+    public static String textToHTML(String text) {
         if (text == null) {
             return null;
         }

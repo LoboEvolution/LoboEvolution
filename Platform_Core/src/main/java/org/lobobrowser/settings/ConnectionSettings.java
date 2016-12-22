@@ -28,6 +28,7 @@ import java.net.InetSocketAddress;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -140,8 +141,10 @@ public class ConnectionSettings implements java.io.Serializable {
                 }
             }
             Proxy proxy = this.proxy;
-            if ((proxy != Proxy.NO_PROXY) && this.disableProxyForLocalAddresses && NetRoutines.isLocalAddress(host)) {
-            	 proxy = Proxy.NO_PROXY;
+            if ((proxy != Proxy.NO_PROXY) && this.disableProxyForLocalAddresses) {
+                if (NetRoutines.isLocalAddress(host)) {
+                    proxy = Proxy.NO_PROXY;
+                }
             }
             return proxy;
         }

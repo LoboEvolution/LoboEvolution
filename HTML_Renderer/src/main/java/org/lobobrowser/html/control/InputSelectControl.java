@@ -164,7 +164,7 @@ public class InputSelectControl extends BaseInputControl {
         }
         comboBox.setVisible(modelNode.getHidden());
         comboBox.applyComponentOrientation(direction(modelNode.getDir()));
-        comboBox.setEditable(Boolean.valueOf(
+        comboBox.setEditable(new Boolean(
                 modelNode.getContentEditable() == null ? "true" : modelNode
                         .getContentEditable()));
         comboBox.setEnabled(!modelNode.getDisabled());
@@ -268,13 +268,13 @@ public class InputSelectControl extends BaseInputControl {
                         if (selectedIndexes == null) {
                             selectedIndexes = new LinkedList<Integer>();
                         }
-                        selectedIndexes.add(Integer.valueOf(index));
+                        selectedIndexes.add(new Integer(index));
                     }
                     if (option.getDefaultSelected()) {
                         if (defaultSelectedIndexes == null) {
                             defaultSelectedIndexes = new LinkedList<Integer>();
                         }
-                        defaultSelectedIndexes.add(Integer.valueOf(index));
+                        defaultSelectedIndexes.add(new Integer(index));
                     }
                 }
                 if ((selectedIndexes != null) && (selectedIndexes.size() != 0)) {

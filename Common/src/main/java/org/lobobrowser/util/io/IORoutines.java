@@ -31,9 +31,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -59,7 +57,7 @@ public class IORoutines {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static String loadAsText(final InputStream in, final String encoding)
+    public static String loadAsText(InputStream in, String encoding)
             throws IOException {
         return loadAsText(in, encoding, 4096);
     }
@@ -77,8 +75,8 @@ public class IORoutines {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static String loadAsText(final InputStream in, final String encoding,
-            final int bufferSize) throws IOException {
+    public static String loadAsText(InputStream in, String encoding,
+            int bufferSize) throws IOException {
         InputStreamReader reader = new InputStreamReader(in, encoding);
         char[] buffer = new char[bufferSize];
         int offset = 0;
@@ -108,7 +106,7 @@ public class IORoutines {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static byte[] load(final File file) throws IOException {
+    public static byte[] load(File file) throws IOException {
         long fileLength = file.length();
         if (fileLength > Integer.MAX_VALUE) {
             throw new IOException("File '" + file.getName() + "' too big");
@@ -130,7 +128,7 @@ public class IORoutines {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static byte[] load(final InputStream in) throws IOException {
+    public static byte[] load(InputStream in) throws IOException {
         return load(in, 4096);
     }
     
@@ -145,7 +143,7 @@ public class IORoutines {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static byte[] load(final InputStream in, int initialBufferSize)
+    public static byte[] load(InputStream in, int initialBufferSize)
             throws IOException {
         if (initialBufferSize == 0) {
             initialBufferSize = 1;
@@ -186,7 +184,7 @@ public class IORoutines {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static byte[] loadExact(final InputStream in, final int length)
+    public static byte[] loadExact(InputStream in, int length)
             throws IOException {
         byte[] buffer = new byte[length];
         int offset = 0;
@@ -216,7 +214,7 @@ public class IORoutines {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static boolean equalContent(final File file, final byte[] content)
+    public static boolean equalContent(File file, byte[] content)
             throws IOException {
         long length = file.length();
         if (length > Integer.MAX_VALUE) {
@@ -241,7 +239,7 @@ public class IORoutines {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static void save(final File file, final byte[] content) throws IOException {
+    public static void save(File file, byte[] content) throws IOException {
         FileOutputStream out = new FileOutputStream(file);
         try {
             out.write(content);
@@ -259,7 +257,7 @@ public class IORoutines {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static String readLine(final InputStream in) throws IOException {
+    public static String readLine(InputStream in) throws IOException {
         int b;
         StringBuffer sb = null;
         OUTER: while ((b = in.read()) != -1) {
@@ -285,7 +283,7 @@ public class IORoutines {
      * @param file
      *            the file
      */
-    public static void touch(final File file) {
+    public static void touch(File file) {
         file.setLastModified(System.currentTimeMillis());
     }
     
@@ -299,11 +297,12 @@ public class IORoutines {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static void saveStrings(final File file, final Collection list)
+    public static void saveStrings(File file, Collection list)
             throws IOException {
-        BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(file));
+        BufferedOutputStream bout = new BufferedOutputStream(
+                new FileOutputStream(file));
         try {
-            PrintWriter writer = new PrintWriter(new OutputStreamWriter(bout,StandardCharsets.UTF_8));
+            PrintWriter writer = new PrintWriter(bout);
             Iterator i = list.iterator();
             while (i.hasNext()) {
                 String text = (String) i.next();
@@ -325,11 +324,12 @@ public class IORoutines {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public static List<String> loadStrings(final File file) throws IOException {
+    public static List<String> loadStrings(File file) throws IOException {
         List<String> list = new LinkedList<String>();
         InputStream in = new FileInputStream(file);
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in,StandardCharsets.UTF_8));
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(in));
             String line;
             while ((line = reader.readLine()) != null) {
                 list.add(line);

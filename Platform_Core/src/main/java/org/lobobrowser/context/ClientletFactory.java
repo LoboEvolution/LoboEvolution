@@ -33,8 +33,9 @@ import org.lobobrowser.security.GenericLocalPermission;
  * A factory for creating Clientlet objects.
  */
 public class ClientletFactory {
-    
-	/** The instance. */
+    // private static final Logger logger =
+    // LogManager.getLogger(ClientletFactory.class);
+    /** The instance. */
     private static ClientletFactory instance;
 
     /**
@@ -48,9 +49,13 @@ public class ClientletFactory {
 	 *
 	 * @return the instance
 	 */
-    public synchronized static ClientletFactory getInstance() {
+    public static ClientletFactory getInstance() {
         if (instance == null) {
-        	instance = new ClientletFactory();
+            synchronized (ClientletFactory.class) {
+                if (instance == null) {
+                    instance = new ClientletFactory();
+                }
+            }
         }
         return instance;
     }

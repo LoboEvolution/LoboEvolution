@@ -154,6 +154,16 @@ public class TableMatrix implements CSSValuesProperties{
 		this.container = tableAsContainer;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#finalize()
+	 */
+	@Override
+	public void finalize() throws Throwable {
+		super.finalize();
+	}
+
 	/**
 	 * Gets the num rows.
 	 *
@@ -241,7 +251,7 @@ public class TableMatrix implements CSSValuesProperties{
 					border = 0;
 				}
 			} catch (NumberFormatException nfe) {
-				logger.error(nfe);
+				// ignore
 			}
 		}
 		String cellSpacingText = this.tableElement.getAttribute(HtmlAttributeProperties.CELLSPACING);
@@ -254,7 +264,7 @@ public class TableMatrix implements CSSValuesProperties{
 					cellSpacing = 0;
 				}
 			} catch (NumberFormatException nfe) {
-				logger.error(nfe);
+				// ignore
 			}
 		}
 		this.cellSpacingX = cellSpacing;
@@ -606,7 +616,7 @@ public class TableMatrix implements CSSValuesProperties{
 				try {
 					rowHeightLength = new HtmlLength(rowHeightText);
 				} catch (Exception err) {
-					logger.error(err);
+					// ignore
 				}
 			}
 			if (rowHeightLength != null) {
@@ -813,20 +823,22 @@ public class TableMatrix implements CSSValuesProperties{
 				}
 
 				// See if percentages need to be contracted
-				if (difference > 0 && widthUsedByPercent > 0) {
-					int expectedPercentWidthTotal = widthUsedByPercent - difference;
-					if (expectedPercentWidthTotal < 0) {
-						expectedPercentWidthTotal = 0;
-					}
-					double ratio = (double) expectedPercentWidthTotal / widthUsedByPercent;
-					for (int i = 0; i < numCols; i++) {
-						SizeInfo sizeInfo = columnSizes[i];
-						HtmlLength widthLength = columnSizes[i].getHtmlLength();
-						if ((widthLength != null) && (widthLength.getLengthType() == HtmlLength.LENGTH)) {
-							int oldActualSize = sizeInfo.getActualSize();
-							int newActualSize = (int) Math.round(oldActualSize * ratio);
-							sizeInfo.setActualSize(newActualSize);
-							totalWidthUsed += (newActualSize - oldActualSize);
+				if (difference > 0) {
+					if (widthUsedByPercent > 0) {
+						int expectedPercentWidthTotal = widthUsedByPercent - difference;
+						if (expectedPercentWidthTotal < 0) {
+							expectedPercentWidthTotal = 0;
+						}
+						double ratio = (double) expectedPercentWidthTotal / widthUsedByPercent;
+						for (int i = 0; i < numCols; i++) {
+							SizeInfo sizeInfo = columnSizes[i];
+							HtmlLength widthLength = columnSizes[i].getHtmlLength();
+							if ((widthLength != null) && (widthLength.getLengthType() == HtmlLength.LENGTH)) {
+								int oldActualSize = sizeInfo.getActualSize();
+								int newActualSize = (int) Math.round(oldActualSize * ratio);
+								sizeInfo.setActualSize(newActualSize);
+								totalWidthUsed += (newActualSize - oldActualSize);
+							}
 						}
 					}
 				}
@@ -879,56 +891,59 @@ public class TableMatrix implements CSSValuesProperties{
 			} catch (IndexOutOfBoundsException iob) {
 				vc = null;
 			}
-			
 			RTableCell ac = vc == null ? null : vc.getActualCell();
-			if (ac != null && ac.getVirtualRow() == row) {
-				// Only process actual cells with a row
-				// beginning at the current row being processed.
-				int colSpan = ac.getColSpan();
-				if (colSpan > 1) {
-					int firstCol = ac.getVirtualColumn();
-					int cellExtras = (colSpan - 1) * (cellSpacingX + (2 * hasBorder));
-					int vcActualWidth = cellExtras;
-					for (int x = 0; x < colSpan; x++) {
-						vcActualWidth += columnSizes[firstCol + x].getActualSize();
-					}
-					// TODO: better height possible
-
-					Dimension size = ac.doCellLayout(vcActualWidth, 0, true, true, true);
-					int vcRenderWidth = size.width;
-
-					int denominator = (vcActualWidth - cellExtras);
-					int newTentativeCellWidth;
-					if (denominator > 0) {
-						newTentativeCellWidth = (actualSize * (vcRenderWidth - cellExtras)) / denominator;
-					} else {
-						newTentativeCellWidth = (vcRenderWidth - cellExtras) / colSpan;
-					}
-					if (newTentativeCellWidth > colSize.getLayoutSize()) {
-						colSize.setLayoutSize(newTentativeCellWidth);
-					}
-					int rowSpan = ac.getRowSpan();
-					int vch = (size.height - ((rowSpan - 1) * (this.cellSpacingY + (2 * hasBorder)))) / rowSpan;
-					for (int y = 0; y < rowSpan; y++) {
-						if (rowSizes[row + y].getMinSize() < vch) {
-							rowSizes[row + y].setMinSize(vch);
+			if (ac != null) {
+				if (ac.getVirtualRow() == row) {
+					// Only process actual cells with a row
+					// beginning at the current row being processed.
+					int colSpan = ac.getColSpan();
+					if (colSpan > 1) {
+						int firstCol = ac.getVirtualColumn();
+						int cellExtras = (colSpan - 1) * (cellSpacingX + (2 * hasBorder));
+						int vcActualWidth = cellExtras;
+						for (int x = 0; x < colSpan; x++) {
+							vcActualWidth += columnSizes[firstCol + x].getActualSize();
 						}
-					}
-				} else {
-					// TODO: better height possible
-					Dimension size = ac.doCellLayout(actualSize, 0, true, true, true);
-					if (size.width > colSize.getLayoutSize()) {
-						colSize.setLayoutSize(size.width);
-					}
-					int rowSpan = ac.getRowSpan();
-					int vch = (size.height - ((rowSpan - 1) * (this.cellSpacingY + (2 * hasBorder)))) / rowSpan;
-					for (int y = 0; y < rowSpan; y++) {
-						if (rowSizes[row + y].getMinSize() < vch) {
-							rowSizes[row + y].setMinSize(vch);
+						// TODO: better height possible
+
+						Dimension size = ac.doCellLayout(vcActualWidth, 0, true, true, true);
+						int vcRenderWidth = size.width;
+
+						int denominator = (vcActualWidth - cellExtras);
+						int newTentativeCellWidth;
+						if (denominator > 0) {
+							newTentativeCellWidth = (actualSize * (vcRenderWidth - cellExtras)) / denominator;
+						} else {
+							newTentativeCellWidth = (vcRenderWidth - cellExtras) / colSpan;
+						}
+						if (newTentativeCellWidth > colSize.getLayoutSize()) {
+							colSize.setLayoutSize(newTentativeCellWidth);
+						}
+						int rowSpan = ac.getRowSpan();
+						int vch = (size.height - ((rowSpan - 1) * (this.cellSpacingY + (2 * hasBorder)))) / rowSpan;
+						for (int y = 0; y < rowSpan; y++) {
+							if (rowSizes[row + y].getMinSize() < vch) {
+								rowSizes[row + y].setMinSize(vch);
+							}
+						}
+					} else {
+						// TODO: better height possible
+						Dimension size = ac.doCellLayout(actualSize, 0, true, true, true);
+						if (size.width > colSize.getLayoutSize()) {
+							colSize.setLayoutSize(size.width);
+						}
+						int rowSpan = ac.getRowSpan();
+						int vch = (size.height - ((rowSpan - 1) * (this.cellSpacingY + (2 * hasBorder)))) / rowSpan;
+						for (int y = 0; y < rowSpan; y++) {
+							if (rowSizes[row + y].getMinSize() < vch) {
+								rowSizes[row + y].setMinSize(vch);
+							}
 						}
 					}
 				}
 			}
+			// row = (ac == null ? row + 1 : ac.getVirtualRow() +
+			// ac.getRowSpan());
 			row++;
 		}
 	}

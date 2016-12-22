@@ -42,6 +42,8 @@ public class NoScriptLayout implements MarkupLayout {
 		UserAgentContext ucontext = bodyLayout.getUserAgentContext();
 		if (!ucontext.isScriptingEnabled()) {
 			bodyLayout.layoutMarkup(markupElement);
+		} else {
+			// NOP
 		}
 	}
 }

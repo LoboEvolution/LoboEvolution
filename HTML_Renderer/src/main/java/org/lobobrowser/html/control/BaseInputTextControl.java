@@ -37,8 +37,6 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.PlainDocument;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.DOMElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
@@ -53,9 +51,6 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
-	/** The Constant logger. */
-    protected static final Logger logger = LogManager.getLogger(BaseInputTextControl.class.getName());
 
 	/** The widget. */
 	protected final JTextComponent widget;
@@ -114,7 +109,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 			try {
 				this.maxLength = Integer.parseInt(maxLengthText);
 			} catch (NumberFormatException nfe) {
-				logger.error(nfe);
+				// ignore
 			}
 		}
 		

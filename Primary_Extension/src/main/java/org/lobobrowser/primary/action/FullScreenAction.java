@@ -90,7 +90,7 @@ public class FullScreenAction extends AbstractAction implements EnableableAction
 		if(countFs==0){
 			countFs = countFs+1;
 			device.setFullScreenWindow(window.getAwtWindow()); 
-			if(device.isDisplayChangeSupported()) {
+			if(device != null && device.isDisplayChangeSupported()) {
 				device.setDisplayMode(newDisplayMode);
 	        }
 		}else{

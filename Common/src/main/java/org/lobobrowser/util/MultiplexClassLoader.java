@@ -25,19 +25,12 @@ package org.lobobrowser.util;
 
 import java.util.Collection;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 /**
  * The Class MultiplexClassLoader.
  *
  * @author J. H. S.
  */
 public abstract class MultiplexClassLoader extends BaseClassLoader {
-	
-	  /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(MultiplexClassLoader.class.getName());
-            		
     /** The Constant EMPTY_CLASS_LOADERS. */
     private static final BaseClassLoader[] EMPTY_CLASS_LOADERS = new BaseClassLoader[0];
     /** The parent loaders. */
@@ -77,7 +70,7 @@ public abstract class MultiplexClassLoader extends BaseClassLoader {
                                 return c;
                             }
                         } catch (ClassNotFoundException cnfe) {
-                        	logger.error(cnfe);
+                            // ignore
                         }
                     }
                 }

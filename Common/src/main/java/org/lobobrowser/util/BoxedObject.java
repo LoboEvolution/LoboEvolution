@@ -39,7 +39,7 @@ public class BoxedObject {
      * @param object
      *            the object
      */
-    public BoxedObject(final Object object) {
+    public BoxedObject(Object object) {
         super();
         this.object = object;
     }
@@ -57,7 +57,7 @@ public class BoxedObject {
 	 * @param object
 	 *            the new object
 	 */
-    public void setObject(final Object object) {
+    public void setObject(Object object) {
         this.object = object;
     }
 }

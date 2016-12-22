@@ -37,7 +37,7 @@ public class TimedEntry implements Comparable<Object>, java.io.Serializable {
      * @param value
      *            the value
      */
-    public TimedEntry(final String value) {
+    public TimedEntry(String value) {
         this.value = value;
     }
     
@@ -53,7 +53,7 @@ public class TimedEntry implements Comparable<Object>, java.io.Serializable {
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(Object obj) {
         TimedEntry other = (TimedEntry) obj;
         return other.value.equals(this.value);
     }
@@ -63,7 +63,7 @@ public class TimedEntry implements Comparable<Object>, java.io.Serializable {
      * @see java.lang.Comparable#compareTo(Object)
      */
     @Override
-    public int compareTo(final Object arg0) {
+    public int compareTo(Object arg0) {
         if (this.equals(arg0)) {
             return 0;
         }

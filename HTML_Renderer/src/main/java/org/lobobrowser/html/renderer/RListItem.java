@@ -94,7 +94,7 @@ public class RListItem extends BaseRListElement {
 	}
 
 	/** The Constant UNSET. */
-	private static final Integer UNSET = Integer.valueOf(Integer.MIN_VALUE);
+	private static final Integer UNSET = new Integer(Integer.MIN_VALUE);
 
 	/** The value. */
 	private Integer value = null;
@@ -141,7 +141,7 @@ public class RListItem extends BaseRListElement {
 		// Note: Count must be calculated even if layout is valid.
 		RenderState renderState = this.modelNode.getRenderState();
 		Integer value = this.getValue();
-		if (value.intValue() == UNSET.intValue()) {
+		if (value == UNSET) {
 			this.count = renderState.incrementCount(DEFAULT_COUNTER_NAME, this.listNesting);
 		} else {
 			int newCount = value.intValue();
@@ -163,7 +163,7 @@ public class RListItem extends BaseRListElement {
 		RBlockViewport layout = this.bodyLayout;
 		if (layout != null) {
 			ListStyle listStyle = this.listStyle;
-			int bulletType = listStyle == null ? ListStyle.TYPE_UNSET : listStyle.getType();
+			int bulletType = listStyle == null ? ListStyle.TYPE_UNSET : listStyle.type;
 			if (bulletType != ListStyle.TYPE_NONE) {
 				if (bulletType == ListStyle.TYPE_UNSET) {
 					RCollection parent = this.getOriginalOrCurrentParent();
@@ -172,7 +172,7 @@ public class RListItem extends BaseRListElement {
 					}
 					if (parent instanceof RList) {
 						ListStyle parentListStyle = ((RList) parent).listStyle;
-						bulletType = parentListStyle == null ? ListStyle.TYPE_DISC : parentListStyle.getType();
+						bulletType = parentListStyle == null ? ListStyle.TYPE_DISC : parentListStyle.type;
 					} else {
 						bulletType = ListStyle.TYPE_DISC;
 					}
@@ -203,12 +203,14 @@ public class RListItem extends BaseRListElement {
 						break;
 					case ListStyle.TYPE_LOWER_ALPHA:
 						numberText = ((char) ('a' + (bulletNumber - 1))) + ".";
+
 						break;
 					case ListStyle.TYPE_UPPER_ALPHA:
 						numberText = ((char) ('A' + (bulletNumber - 1))) + ".";
 						break;
 					case ListStyle.TYPE_LOWER_ROMAN:
 						numberText = ListStyle.getRomanNumerals(bulletNumber).toLowerCase() + ".";
+						;
 						break;
 					case ListStyle.TYPE_UPPER_ROMAN:
 						numberText = ListStyle.getRomanNumerals(bulletNumber).toUpperCase() + ".";

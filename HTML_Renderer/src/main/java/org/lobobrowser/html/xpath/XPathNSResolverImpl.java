@@ -45,6 +45,7 @@ import org.w3c.dom.Node;
  * by any application.</p>
  *
  * @see org.w3c.dom.xpath.XPathNSResolver
+ * @xsl.usage internal
  */
 public class XPathNSResolverImpl extends PrefixResolverDefault implements XPathNSResolver {
 

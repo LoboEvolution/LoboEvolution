@@ -131,12 +131,12 @@ public class JavaObjectWrapper extends ScriptableObject {
 				if (javaObject == null) {
 					throw new IllegalStateException("Java object (class=" + this.classWrapper + ") is null.");
 				}
-				Object raw = getter.invoke(javaObject, new Object[] { Integer.valueOf(index) });
+				Object raw = getter.invoke(javaObject, new Object[] { new Integer(index) });
 				if (raw != null) {
 					return JavaScript.getInstance().getJavascriptObject(raw, this.getParentScope());
 				}
 			} catch (Exception err) {
-				logger.error(err);
+				err.getCause();
 			}
 		}
 		return Scriptable.NOT_FOUND;
@@ -165,7 +165,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 				Object val = getter.invoke(javaObject, (Object[]) null);
 				return JavaScript.getInstance().getJavascriptObject(val, start.getParentScope());
 			} catch (Exception err) {
-				logger.error(err);
+				err.getCause();
 				return new Object();
 			}
 		} else {
@@ -198,7 +198,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 								return JavaScript.getInstance().getJavascriptObject(val, start.getParentScope());
 							}
 						} catch (Exception err) {
-							logger.error(err);
+							err.getCause();
 						}
 					}
 				}
@@ -226,9 +226,9 @@ public class JavaObjectWrapper extends ScriptableObject {
 				}
 				Object actualValue;
 				actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
-				setter.invoke(this.getJavaObject(), new Object[] { Integer.valueOf(index), actualValue });
+				setter.invoke(this.getJavaObject(), new Object[] { new Integer(index), actualValue });
 			} catch (Exception err) {
-				logger.error(err);
+				err.getCause();
 			}
 		}
 	}
@@ -256,9 +256,9 @@ public class JavaObjectWrapper extends ScriptableObject {
 					actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
 					setter.invoke(this.getJavaObject(), new Object[] { actualValue });
 				} catch (IllegalArgumentException iae) {
-					logger.error(iae);
+					iae.getCause();
 				} catch (Exception err) {
-					logger.error(err);
+					err.getCause();
 				}
 			} else {
 				PropertyInfo ni = this.classWrapper.getNameIndexer();
@@ -270,7 +270,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 							actualValue = JavaScript.getInstance().getJavaObject(value, ni.getPropertyType());
 							setter.invoke(this.getJavaObject(), new Object[] { name, actualValue });
 						} catch (Exception err) {
-							logger.error(err);
+							err.getCause();
 						}
 					} else {
 						super.put(name, start, value);

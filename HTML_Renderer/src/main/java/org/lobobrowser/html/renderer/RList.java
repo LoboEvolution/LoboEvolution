@@ -66,7 +66,7 @@ public class RList extends BaseRListElement {
 	protected void applyStyle(int availWidth, int availHeight) {
 		super.applyStyle(availWidth, availHeight);
 		ListStyle listStyle = this.listStyle;
-		if ((listStyle == null) || (listStyle.getType() == ListStyle.TYPE_UNSET)) {
+		if ((listStyle == null) || (listStyle.type == ListStyle.TYPE_UNSET)) {
 			Object rootNode = this.modelNode;
 			if (!(rootNode instanceof HTMLElementImpl)) {
 				return;
@@ -79,14 +79,14 @@ public class RList extends BaseRListElement {
 			if ("ul".equalsIgnoreCase(rootElement.getTagName())) {
 				int listNesting = this.listNesting;
 				if (listNesting == 0) {
-					listStyle.setType(ListStyle.TYPE_DISC);
+					listStyle.type = ListStyle.TYPE_DISC;
 				} else if (listNesting == 1) {
-					listStyle.setType(ListStyle.TYPE_CIRCLE);
+					listStyle.type = ListStyle.TYPE_CIRCLE;
 				} else {
-					listStyle.setType(ListStyle.TYPE_SQUARE);
+					listStyle.type = ListStyle.TYPE_SQUARE;
 				}
 			} else {
-				listStyle.setType(ListStyle.TYPE_DECIMAL);
+				listStyle.type = ListStyle.TYPE_DECIMAL;
 			}
 		}
 	}
@@ -113,7 +113,7 @@ public class RList extends BaseRListElement {
 			try {
 				counterStart = Integer.parseInt(startText);
 			} catch (NumberFormatException nfe) {
-				logger.error(nfe);
+				// ignore
 			}
 		}
 		renderState.resetCount(DEFAULT_COUNTER_NAME, this.listNesting, counterStart);

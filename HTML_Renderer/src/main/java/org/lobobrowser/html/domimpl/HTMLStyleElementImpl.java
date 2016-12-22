@@ -102,8 +102,7 @@ HTMLStyleElement {
 
     @Override
     public Object setUserData(String key, Object data, UserDataHandler handler) {
-    	boolean dataBool = (boolean)data;
-		if (HtmlParser.MODIFYING_KEY.equals(key) && !dataBool) {
+        if (HtmlParser.MODIFYING_KEY.equals(key) && (data != Boolean.TRUE)) {
             this.processStyle();
         } else if ("styleSheet.disabled.changed".equals(key)) {
             this.informDocumentInvalid();
@@ -117,36 +116,37 @@ HTMLStyleElement {
     protected void processStyle() {
         this.styleSheet = null;
         UserAgentContext uacontext = this.getUserAgentContext();
-        if (uacontext.isInternalCSSEnabled() && 
-        		CSSUtilities.matchesMedia(this.getMedia(), this.getUserAgentContext())) {
-        	
-            String text = this.getRawInnerText(true);
-			if ((text != null) && !"".equals(text)) {
+        if (uacontext.isInternalCSSEnabled()) {
+            if (CSSUtilities.matchesMedia(this.getMedia(),
+                    this.getUserAgentContext())) {
+                String text = this.getRawInnerText(true);
+				if ((text != null) && !"".equals(text)) {
 
-				HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getOwnerDocument();
+					HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getOwnerDocument();
 
-				try {
+					try {
 
-					CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+						CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
 
-					InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(text, doc.getBaseURI());
-					CSSStyleSheet sheet = parser.parseStyleSheet(is, null, null);
+						InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(text, doc.getBaseURI());
+						CSSStyleSheet sheet = parser.parseStyleSheet(is, null, null);
 
-					if (sheet != null) {
-						doc.addStyleSheet(sheet);
-						this.styleSheet = sheet;
-						if (sheet instanceof CSSStyleSheetImpl) {
-							CSSStyleSheetImpl sheetImpl = (CSSStyleSheetImpl) sheet;
-							sheetImpl.setDisabled(disabled);
-						} else {
-							sheet.setDisabled(this.disabled);
+						if (sheet != null) {
+							doc.addStyleSheet(sheet);
+							this.styleSheet = sheet;
+							if (sheet instanceof CSSStyleSheetImpl) {
+								CSSStyleSheetImpl sheetImpl = (CSSStyleSheetImpl) sheet;
+								sheetImpl.setDisabled(disabled);
+							} else {
+								sheet.setDisabled(this.disabled);
+							}
 						}
-					}
 
-				} catch (Throwable err) {
-					logger.error("Unable to parse style sheet", err);
+					} catch (Throwable err) {
+						logger.error("Unable to parse style sheet", err);
+					}
 				}
-			}
+            }
         }
     }
 

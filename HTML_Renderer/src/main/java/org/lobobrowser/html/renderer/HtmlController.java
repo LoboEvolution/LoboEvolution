@@ -147,6 +147,8 @@ public class HtmlController {
 				button.submitForm(formInputs);
 			} else if ("reset".equals(type)) {
 				button.resetForm();
+			} else {
+				// NOP for "button"!
 			}
 			return false;
 		} else if (node instanceof HTMLAbstractUIElement) {
@@ -160,8 +162,10 @@ public class HtmlController {
 				}
 			}
 			HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-			if (rcontext != null && !rcontext.onMouseClick(uiElement, event)) {
-				return false;
+			if (rcontext != null) {
+				if (!rcontext.onMouseClick(uiElement, event)) {
+					return false;
+				}
 			}
 		}
 
@@ -199,8 +203,12 @@ public class HtmlController {
 				}
 			}
 			HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-			if (rcontext != null && !rcontext.onContextMenu(uiElement, event)) {
-				return false;
+			if (rcontext != null) {
+				// Needs to be done after Javascript, so the script
+				// is able to prevent it.
+				if (!rcontext.onContextMenu(uiElement, event)) {
+					return false;
+				}
 			}
 		}
 		ModelNode parent = node.getParentModelNode();
@@ -335,8 +343,10 @@ public class HtmlController {
 				}
 			}
 			HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-			if (rcontext != null && !rcontext.onDoubleClick(uiElement, event)) {
-				return false;
+			if (rcontext != null) {
+				if (!rcontext.onDoubleClick(uiElement, event)) {
+					return false;
+				}
 			}
 		}
 		ModelNode parent = node.getParentModelNode();

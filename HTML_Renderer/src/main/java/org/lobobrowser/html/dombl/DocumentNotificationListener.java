@@ -25,6 +25,7 @@ import org.lobobrowser.html.domimpl.DOMNodeImpl;
 /**
  * A listener of document changes.
  *
+ * @see DocumentNotificationEvent
  */
 public interface DocumentNotificationListener {
 

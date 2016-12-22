@@ -33,8 +33,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.info.FontInfo;
 import org.lobobrowser.html.renderstate.RenderState;
@@ -672,7 +674,7 @@ public class HtmlValues implements CSSValuesProperties{
 			case INHERIT:
 				parentFontSize = (int) LAFSettings.getInstance().getFontSize();
 				if (parentRenderState != null)
-					parentFontSize = parentRenderState.getPreviousRenderState().getFont().getSize();
+					parentRenderState.getPreviousRenderState().getFont().getSize();
 				return parentFontSize;
 			case INITIAL:
 				return getPixelSize(spec, parentRenderState, (int) LAFSettings.getInstance().getFontSize());
@@ -1111,13 +1113,13 @@ public class HtmlValues implements CSSValuesProperties{
 			String token = tokens[i];
 			int listStyleType = HtmlValues.getListStyleType(token);
 			if (listStyleType != ListStyle.TYPE_UNSET) {
-				listStyle.setType(listStyleType);
+				listStyle.type = listStyleType;
 			} else if (HtmlValues.isUrl(token)) {
 				// TODO: listStyle.image
 			} else {
 				int listStylePosition = HtmlValues.getListStylePosition(token);
 				if (listStylePosition != ListStyle.POSITION_UNSET) {
-					listStyle.setPosition(listStylePosition);
+					listStyle.position = listStylePosition;
 				}
 			}
 		}

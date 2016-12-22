@@ -76,8 +76,7 @@ public class RenderableSpot {
 		RenderableSpot otherRp = (RenderableSpot) other;
 		return (otherRp.renderable == this.renderable) && (otherRp.x == this.x) && (otherRp.y == this.y);
 	}
-	
-	
+
 	/**
 	 * Gets the renderable.
 	 *

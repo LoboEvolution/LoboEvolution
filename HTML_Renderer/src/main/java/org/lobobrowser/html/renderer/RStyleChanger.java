@@ -34,7 +34,7 @@ import org.lobobrowser.html.renderstate.RenderState;
  *
  * @author J. H. S.
  */
-public class RStyleChanger extends BaseRenderable implements Renderable {
+public final class RStyleChanger extends BaseRenderable implements Renderable {
 
 	/** The model node. */
 	private final ModelNode modelNode;

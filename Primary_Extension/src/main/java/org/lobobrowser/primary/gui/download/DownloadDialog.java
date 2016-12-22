@@ -261,9 +261,11 @@ public class DownloadDialog extends JFrame {
 		}
 		if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			File file = chooser.getSelectedFile();
-			if (file.exists() && JOptionPane.showConfirmDialog(this, "The file exists. Are you sure you want to overwrite it?",
-					"Confirm", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
-				return;
+			if (file.exists()) {
+				if (JOptionPane.showConfirmDialog(this, "The file exists. Are you sure you want to overwrite it?",
+						"Confirm", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+					return;
+				}
 			}
 			settings.setDownloadDirectory(file.getParentFile());
 			settings.save();

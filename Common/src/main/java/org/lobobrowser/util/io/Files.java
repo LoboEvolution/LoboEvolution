@@ -40,7 +40,7 @@ public class Files {
      *            the file
      * @return the content type
      */
-    public static String getContentType(final File file) {
+    public static String getContentType(File file) {
         // Not very complete at the moment :)
         String name = file.getName();
         int dotIdx = name.lastIndexOf('.');

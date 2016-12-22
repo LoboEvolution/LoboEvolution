@@ -31,6 +31,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -605,6 +606,8 @@ public class ComponentSource implements NavigatorWindowListener {
 	 *
 	 * @param urlPrefix
 	 *            the url prefix
+	 * @param max
+	 *            the max
 	 * @return the potential matches
 	 */
 	public Collection<String> getPotentialMatches(String urlPrefix) {
@@ -773,13 +776,13 @@ public class ComponentSource implements NavigatorWindowListener {
 			if (tags != null) {
 				for (String tag : tags) {
 					JMenu tagMenu = tagMenus.get(tag);
-					
-					if (tagMenu == null && tagMenus.size() < PREFERRED_MAX_MENU_SIZE) {
-						tagMenu = new JMenu(tag);
-						tagMenus.put(tag, tagMenu);
-						bookmarksMenu.add(tagMenu);
+					if (tagMenu == null) {
+						if (tagMenus.size() < PREFERRED_MAX_MENU_SIZE) {
+							tagMenu = new JMenu(tag);
+							tagMenus.put(tag, tagMenu);
+							bookmarksMenu.add(tagMenu);
+						}
 					}
-					
 					if ((tagMenu != null) && (tagMenu.getItemCount() < PREFERRED_MAX_MENU_SIZE)) {
 						String text = binfo.getTitle();
 						if ((text == null) || (text.length() == 0)) {

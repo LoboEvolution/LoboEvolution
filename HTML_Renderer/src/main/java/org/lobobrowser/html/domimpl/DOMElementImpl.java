@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.util.Objects;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.w3c.html.HTMLMenuElement;
@@ -261,7 +260,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 		if (draggable == null) {
 			return false;
 		} else {
-			return Boolean.valueOf(draggable);
+			return new Boolean(draggable);
 		}
 	}
 
@@ -285,7 +284,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 		if (content == null) {
 			return false;
 		} else {
-			return Boolean.valueOf(content);
+			return new Boolean(content);
 		}
 	}
 
@@ -317,7 +316,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 		if (itemscope == null) {
 			return false;
 		} else {
-			return Boolean.valueOf(itemscope);
+			return new Boolean(itemscope);
 		}
 	}
 
@@ -443,13 +442,10 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	@Override
 	public final String getAttribute(String name) {
 		String normalName = this.normalizeAttributeName(name);
-		if (normalName != null && normalName.length() > 0) {
-			synchronized (this) {
-				Map<String, String> attributes = this.attributes;
-				return attributes == null ? null : (String) attributes.get(normalName);
-			}
+		synchronized (this) {
+			Map<String, String> attributes = this.attributes;
+			return attributes == null ? null : (String) attributes.get(normalName);
 		}
-		return null;
 	}
 
 	/**
@@ -991,7 +987,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 */
 	@Override
 	protected String htmlEncodeChildText(String text) {
-		if (HtmlParser.isDecodeEntities(this.name)) {
+		if (org.lobobrowser.html.parser.HtmlParser.isDecodeEntities(this.name)) {
 			return Strings.strictHtmlEncode(text, false);
 		} else {
 			return text;

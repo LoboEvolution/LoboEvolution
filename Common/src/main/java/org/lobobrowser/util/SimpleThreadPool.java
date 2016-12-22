@@ -72,8 +72,8 @@ public class SimpleThreadPool {
      * @param idleAliveMillis
      *            the idle alive millis
      */
-    public SimpleThreadPool(final String name, final int minShrinkToThreads, final int maxThreads,
-            final int idleAliveMillis) {
+    public SimpleThreadPool(String name, int minShrinkToThreads, int maxThreads,
+            int idleAliveMillis) {
         this.minThreads = minShrinkToThreads;
         this.maxThreads = maxThreads;
         this.idleAliveMillis = idleAliveMillis;
@@ -92,7 +92,7 @@ public class SimpleThreadPool {
      * @param task
      *            the task
      */
-    public void schedule(final SimpleThreadPoolTask task) {
+    public void schedule(SimpleThreadPoolTask task) {
         if (task == null) {
             throw new IllegalArgumentException("null task");
         }
@@ -112,7 +112,7 @@ public class SimpleThreadPool {
      * @param task
      *            the task
      */
-    public void cancel(final SimpleThreadPoolTask task) {
+    public void cancel(SimpleThreadPoolTask task) {
         synchronized (this.taskMonitor) {
             this.taskList.remove(task);
         }

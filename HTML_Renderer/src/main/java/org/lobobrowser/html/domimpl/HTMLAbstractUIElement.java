@@ -22,6 +22,8 @@ package org.lobobrowser.html.domimpl;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.logging.log4j.Level;
+
 import org.lobobrowser.html.HtmlJsAttributeProperties;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.js.Executor;

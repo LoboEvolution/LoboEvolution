@@ -28,20 +28,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.MissingResourceException;
-
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.js.Executor;
-import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.Method;
 import org.lobobrowser.http.UserAgentContext;
@@ -209,7 +206,8 @@ HTMLScriptElement {
      */
     @Override
     public Object setUserData(String key, Object data, UserDataHandler handler) {
-    	if (HtmlParser.MODIFYING_KEY.equals(key) && data instanceof Boolean && !(boolean) data) {
+        if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key)
+                && (data != Boolean.TRUE)) {
             this.processScript();
         }
         return super.setUserData(key, data, handler);
@@ -356,7 +354,7 @@ HTMLScriptElement {
 			con.setRequestMethod("GET");
 			responseCode = con.getResponseCode();
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(),StandardCharsets.UTF_8));
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String inputLine;
 
 			while ((inputLine = in.readLine()) != null) {
@@ -364,12 +362,13 @@ HTMLScriptElement {
 			}
 			in.close();
 
-		} catch (URISyntaxException | IOException e) {
+		} catch (Exception e) {
 			logger.warn("Unable to parse script. URI=[" + srtUrl + "]. Response status was " + responseCode + ".");
 			return "";
 		}
 		return response.toString();
 	}
+
     /*
      * (non-Javadoc)
      * @see org.lobobrowser.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.

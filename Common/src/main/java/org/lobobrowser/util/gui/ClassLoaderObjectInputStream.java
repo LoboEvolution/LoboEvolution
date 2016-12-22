@@ -43,7 +43,7 @@ public class ClassLoaderObjectInputStream extends ObjectInputStream {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public ClassLoaderObjectInputStream(final InputStream in, final ClassLoader classLoader)
+    public ClassLoaderObjectInputStream(InputStream in, ClassLoader classLoader)
             throws IOException {
         super(in);
         this.classLoader = classLoader;
@@ -54,7 +54,7 @@ public class ClassLoaderObjectInputStream extends ObjectInputStream {
      * @see java.io.ObjectInputStream#resolveClass(java.io.ObjectStreamClass)
      */
     @Override
-    protected Class<?> resolveClass(final ObjectStreamClass desc) throws IOException,
+    protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException,
     ClassNotFoundException {
         return Class.forName(desc.getName(), false, this.classLoader);
     }

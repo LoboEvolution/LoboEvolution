@@ -32,6 +32,7 @@ import org.lobobrowser.html.domimpl.DOMNodeImpl;
  * localDocumentNotification event occurs, that object's appropriate method is
  * invoked.
  *
+ * @see LocalDocumentNotificationEvent
  */
 public class LocalDocumentNotificationListener implements
 DocumentNotificationListener {

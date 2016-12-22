@@ -47,7 +47,7 @@ public class GenericURLConnection extends URLConnection {
      * @param in
      *            the in
      */
-    public GenericURLConnection(final URL url, final InputStream in) {
+    public GenericURLConnection(URL url, InputStream in) {
         super(url);
         this.inputStream = in;
     }
@@ -74,7 +74,7 @@ public class GenericURLConnection extends URLConnection {
      * @see java.net.URLConnection#getHeaderField(int)
      */
     @Override
-    public String getHeaderField(final int n) {
+    public String getHeaderField(int n) {
         return null;
     }
     
@@ -83,7 +83,7 @@ public class GenericURLConnection extends URLConnection {
      * @see java.net.URLConnection#getHeaderField(String)
      */
     @Override
-    public String getHeaderField(final String name) {
+    public String getHeaderField(String name) {
         return null;
     }
     
@@ -92,7 +92,7 @@ public class GenericURLConnection extends URLConnection {
      * @see java.net.URLConnection#getHeaderFieldKey(int)
      */
     @Override
-    public String getHeaderFieldKey(final int n) {
+    public String getHeaderFieldKey(int n) {
         return null;
     }
     

@@ -23,7 +23,6 @@ package org.lobobrowser.request;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 
 /**
  * The Class MultipartFormDataWriter.
@@ -40,7 +39,7 @@ public class MultipartFormDataWriter {
     private final String boundary;
 
     static {
-        LINE_BREAK_BYTES = "\r\n".getBytes(StandardCharsets.UTF_8);
+        LINE_BREAK_BYTES = "\r\n".getBytes();
     }
 
     /**

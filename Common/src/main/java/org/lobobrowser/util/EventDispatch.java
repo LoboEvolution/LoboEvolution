@@ -57,7 +57,7 @@ public class EventDispatch {
      * @param listener
      *            the listener
      */
-    public final void addListener(final GenericEventListener listener) {
+    public final void addListener(GenericEventListener listener) {
         synchronized (this) {
             if (this.listeners == null) {
                 this.listeners = this.createListenerCollection();
@@ -72,7 +72,7 @@ public class EventDispatch {
      * @param listener
      *            the listener
      */
-    public final void removeListener(final GenericEventListener listener) {
+    public final void removeListener(GenericEventListener listener) {
         synchronized (this) {
             if (this.listeners != null) {
                 this.listeners.remove(listener);
@@ -86,7 +86,7 @@ public class EventDispatch {
      * @param event
      *            the event
      */
-    public final void fireEvent(final EventObject event) {
+    public final void fireEvent(EventObject event) {
         GenericEventListener[] larray = null;
         synchronized (this) {
             if (this.listeners != null) {

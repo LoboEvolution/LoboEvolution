@@ -66,7 +66,7 @@ public class History implements java.io.Serializable {
      * @param commonEntriesCapacity
      *            the common entries capacity
      */
-    public History(final int sequenceCapacity, final int commonEntriesCapacity) {
+    public History(int sequenceCapacity, int commonEntriesCapacity) {
         super();
         this.historySequence = new ArrayList<String>();
         this.sequenceIndex = -1;
@@ -84,7 +84,7 @@ public class History implements java.io.Serializable {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    private void readObject(final ObjectInputStream in)
+    private void readObject(ObjectInputStream in)
             throws ClassNotFoundException, IOException {
         this.historySequence = new ArrayList<String>();
         this.sequenceIndex = -1;
@@ -104,7 +104,7 @@ public class History implements java.io.Serializable {
 	 * @param commonEntriesCapacity
 	 *            the new common entries capacity
 	 */
-    public void setCommonEntriesCapacity(final int commonEntriesCapacity) {
+    public void setCommonEntriesCapacity(int commonEntriesCapacity) {
         this.commonEntriesCapacity = commonEntriesCapacity;
     }
     
@@ -121,7 +121,7 @@ public class History implements java.io.Serializable {
 	 * @param sequenceCapacity
 	 *            the new sequence capacity
 	 */
-    public void setSequenceCapacity(final int sequenceCapacity) {
+    public void setSequenceCapacity(int sequenceCapacity) {
         this.sequenceCapacity = sequenceCapacity;
     }
     
@@ -172,7 +172,7 @@ public class History implements java.io.Serializable {
      *            the max num items
      * @return the recent items
      */
-    public Collection<String> getRecentItems(final int maxNumItems) {
+    public Collection<String> getRecentItems(int maxNumItems) {
         Collection<String> items = new LinkedList<String>();
         Iterator<TimedEntry> i = this.historyTimedSet.iterator();
         int count = 0;
@@ -192,7 +192,7 @@ public class History implements java.io.Serializable {
      *            the max num items
      * @return the head match items
      */
-    public Collection<String> getHeadMatchItems(final String item, final int maxNumItems) {
+    public Collection<String> getHeadMatchItems(String item, int maxNumItems) {
         Object[] array = this.historySortedSet.toArray();
         int idx = Arrays.binarySearch(array, item);
         int startIdx = idx >= 0 ? idx : (-idx - 1);
@@ -216,7 +216,7 @@ public class History implements java.io.Serializable {
      * @param item
      *            the item
      */
-    public void addAsRecentOnly(final String item) {
+    public void addAsRecentOnly(String item) {
         TimedEntry entry = this.historyMap.get(item);
         if (entry != null) {
             this.historyTimedSet.remove(entry);
@@ -245,7 +245,7 @@ public class History implements java.io.Serializable {
      * @param updateAsRecent
      *            the update as recent
      */
-    public void addItem(final String item, final boolean updateAsRecent) {
+    public void addItem(String item, boolean updateAsRecent) {
         int newIndex = this.sequenceIndex + 1;
         while (newIndex >= this.historySequence.size()) {
             this.historySequence.add(null);

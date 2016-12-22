@@ -85,6 +85,7 @@ public class AddressField extends JComboBox<String> {
 				String cmd = event.getActionCommand();
 				if ("comboBoxEdited".equals(cmd)) {
 					onEdited(event.getModifiers());
+				} else if ("comboBoxChanged".equals(cmd)) {
 				}
 			}
 		});

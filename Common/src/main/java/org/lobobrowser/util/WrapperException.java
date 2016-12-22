@@ -43,7 +43,7 @@ public class WrapperException extends RuntimeException {
      * @param message
      *            the message
      */
-    public WrapperException(final String message) {
+    public WrapperException(String message) {
         super(message);
     }
     
@@ -55,7 +55,7 @@ public class WrapperException extends RuntimeException {
      * @param cause
      *            the cause
      */
-    public WrapperException(final String message, final Throwable cause) {
+    public WrapperException(String message, Throwable cause) {
         super(message, cause);
     }
     
@@ -65,7 +65,7 @@ public class WrapperException extends RuntimeException {
      * @param cause
      *            the cause
      */
-    public WrapperException(final Throwable cause) {
+    public WrapperException(Throwable cause) {
         super(cause);
     }
 }

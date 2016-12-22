@@ -65,7 +65,7 @@ public class PreRenderState extends BlockRenderState {
                 wsValue = WS_PRE;
             }
         }
-        this.iWhiteSpace = Integer.valueOf(wsValue);
+        this.iWhiteSpace = new Integer(wsValue);
         return wsValue;
     }
 }

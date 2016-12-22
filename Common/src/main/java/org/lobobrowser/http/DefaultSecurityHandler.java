@@ -68,13 +68,13 @@ public class DefaultSecurityHandler implements SecurityHandler {
         messagePane.setContentType("text/html");
         messagePane.setEditable(false);
         messagePane.setOpaque(false);
-        messagePane.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES,true);
-        
+        messagePane.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES,
+                Boolean.TRUE);
         Action continueAction = new AbstractAction() {
             private static final long serialVersionUID = 1L;
 
             @Override
-            public void actionPerformed(final ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 accepted = true;
                 dlg.setVisible(false);
             }
@@ -84,7 +84,7 @@ public class DefaultSecurityHandler implements SecurityHandler {
             private static final long serialVersionUID = 1L;
 
             @Override
-            public void actionPerformed(final ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 accepted = false;
                 dlg.setVisible(false);
             }
@@ -94,7 +94,7 @@ public class DefaultSecurityHandler implements SecurityHandler {
             private static final long serialVersionUID = 1L;
 
             @Override
-            public void actionPerformed(final ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 // TODO!!!
             }
         };
@@ -147,7 +147,7 @@ public class DefaultSecurityHandler implements SecurityHandler {
     }
 
     @Override
-    public boolean isServerTrusted(final String host, final X509Certificate cert) {
+    public boolean isServerTrusted(String host, X509Certificate cert) {
         accepted = false;
         JDialog dlg = createDialog();
         // populate the fields

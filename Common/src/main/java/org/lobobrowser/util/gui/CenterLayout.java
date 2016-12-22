@@ -41,7 +41,7 @@ public class CenterLayout implements LayoutManager {
      * java.awt.Component)
      */
     @Override
-    public void addLayoutComponent(final String arg0, final Component arg1) {
+    public void addLayoutComponent(String arg0, Component arg1) {
     }
     
     /*
@@ -49,7 +49,7 @@ public class CenterLayout implements LayoutManager {
      * @see java.awt.LayoutManager#removeLayoutComponent(java.awt.Component)
      */
     @Override
-    public void removeLayoutComponent(final Component arg0) {
+    public void removeLayoutComponent(Component arg0) {
     }
     
     /*
@@ -57,7 +57,7 @@ public class CenterLayout implements LayoutManager {
      * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
      */
     @Override
-    public Dimension preferredLayoutSize(final Container arg0) {
+    public Dimension preferredLayoutSize(Container arg0) {
         Insets insets = arg0.getInsets();
         int count = arg0.getComponentCount();
         if (count > 0) {
@@ -75,7 +75,7 @@ public class CenterLayout implements LayoutManager {
      * @see java.awt.LayoutManager#minimumLayoutSize(java.awt.Container)
      */
     @Override
-    public Dimension minimumLayoutSize(final Container arg0) {
+    public Dimension minimumLayoutSize(Container arg0) {
         Insets insets = arg0.getInsets();
         int count = arg0.getComponentCount();
         if (count > 0) {
@@ -93,7 +93,7 @@ public class CenterLayout implements LayoutManager {
      * @see java.awt.LayoutManager#layoutContainer(java.awt.Container)
      */
     @Override
-    public void layoutContainer(final Container container) {
+    public void layoutContainer(Container container) {
         int count = container.getComponentCount();
         if (count > 0) {
             Component child = container.getComponent(0);

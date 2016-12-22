@@ -352,8 +352,10 @@ public class RBlockViewport extends BaseRCollection {
 				if ((br.getX() + br.getWidth()) > this.maxX) {
 					this.maxX = br.getX() + br.getWidth();
 				}
-				if ((isFloatLimit || !pr.isFloat()) && (br.getY() + br.getHeight()) > maxY) {
-					this.maxY = maxY = br.getY() + br.getHeight();
+				if (isFloatLimit || !pr.isFloat()) {
+					if ((br.getY() + br.getHeight()) > maxY) {
+						this.maxY = maxY = br.getY() + br.getHeight();
+					}
 				}
 			}
 		}
@@ -848,9 +850,9 @@ public class RBlockViewport extends BaseRCollection {
 		int newLineY;
 		FloatingBounds fb = this.floatBounds;
 		if ((breakType == LineBreak.NONE) || (fb == null)) {
-			newLineY = line.y + line.height;
+			newLineY = line == null ? this.paddingInsets.top : line.y + line.height;
 		} else {
-			int prevY = line.y + line.height;
+			int prevY = line == null ? this.paddingInsets.top : line.y + line.height;
 			switch (breakType) {
 			case LineBreak.LEFT:
 				newLineY = fb.getLeftClearY(prevY);
@@ -901,6 +903,8 @@ public class RBlockViewport extends BaseRCollection {
 			} else if ("right".equalsIgnoreCase(align)) {
 				this.layoutFloat(renderable, layout, false);
 				return true;
+			} else {
+				// fall through
 			}
 		}
 		return false;
@@ -1392,7 +1396,8 @@ public class RBlockViewport extends BaseRCollection {
 						}
 						RLine line = this.currentLine;
 						if (line.width > 0) {
-							RBlank rblank = new RBlank(textNode, fm, container, ascentPlusLeading, blankWidth, wordHeight);
+							RBlank rblank = new RBlank(textNode, fm, container, ascentPlusLeading, blankWidth,
+									wordHeight);
 							line.addBlank(rblank);
 						}
 						for (i++; i < length; i++) {
@@ -1573,12 +1578,14 @@ public class RBlockViewport extends BaseRCollection {
 			Iterator i = others.iterator();
 			while (i.hasNext()) {
 				PositionedRenderable pr = (PositionedRenderable) i.next();
-				BoundableRenderable br = pr.getRenderable();
-				Rectangle rbounds = br.getBounds();
-				if (clipBounds.intersects(rbounds)) {
-					matches.add(pr);
+				Object r = pr.getRenderable();
+				if (r instanceof BoundableRenderable) {
+					BoundableRenderable br = (BoundableRenderable) r;
+					Rectangle rbounds = br.getBounds();
+					if (clipBounds.intersects(rbounds)) {
+						matches.add(pr);
+					}
 				}
-				
 			}
 			if (matches.size() == 0) {
 				return baseIterator;
@@ -1650,18 +1657,19 @@ public class RBlockViewport extends BaseRCollection {
 			// Must go in reverse order
 			for (index = size; --index >= 0;) {
 				PositionedRenderable pr = otherArray[index];
-				BoundableRenderable br = pr.getRenderable();
-				if (br.getZIndex() < 0) {
+				BoundableRenderable r = pr.getRenderable();
+				if (r.getZIndex() < 0) {
 					break;
 				}
-				
-				Rectangle rbounds = br.getBounds();
-				
-				if (rbounds.contains(px, py)) {
-					if (result == null) {
-						result = new LinkedList();
+				if (r instanceof BoundableRenderable) {
+					BoundableRenderable br = r;
+					Rectangle rbounds = br.getBounds();
+					if (rbounds.contains(px, py)) {
+						if (result == null) {
+							result = new LinkedList();
+						}
+						result.add(br);
 					}
-					result.add(br);
 				}
 			}
 		}
@@ -1686,13 +1694,16 @@ public class RBlockViewport extends BaseRCollection {
 			// Must go in reverse order
 			for (; index >= 0; index--) {
 				PositionedRenderable pr = otherArray[index];
-				BoundableRenderable br = pr.getRenderable();
-				Rectangle rbounds = br.getBounds();
-				if (rbounds.contains(px, py)) {
-					if (result == null) {
-						result = new LinkedList();
+				Renderable r = pr.getRenderable();
+				if (r instanceof BoundableRenderable) {
+					BoundableRenderable br = (BoundableRenderable) r;
+					Rectangle rbounds = br.getBounds();
+					if (rbounds.contains(px, py)) {
+						if (result == null) {
+							result = new LinkedList();
+						}
+						result.add(br);
 					}
-					result.add(br);
 				}
 			}
 		}
@@ -2197,23 +2208,21 @@ public class RBlockViewport extends BaseRCollection {
 		if (line == null) {
 			int y = line == null ? this.paddingInsets.top : line.getY();
 			this.placeFloat(floatInfo.getRenderable(), y, floatInfo.isLeftFloat());
+		} else if (line.getWidth() == 0) {
+			int y = line.getY();
+			this.placeFloat(floatInfo.getRenderable(), y, floatInfo.isLeftFloat());
+			int leftOffset = this.fetchLeftOffset(y);
+			int rightOffset = this.fetchRightOffset(y);
+			line.changeLimits(leftOffset, this.desiredWidth - leftOffset - rightOffset);
 		} else {
-			if (line.getWidth() == 0) {
-				int y = line.getY();
-				this.placeFloat(floatInfo.getRenderable(), y, floatInfo.isLeftFloat());
-				int leftOffset = this.fetchLeftOffset(y);
-				int rightOffset = this.fetchRightOffset(y);
-				line.changeLimits(leftOffset, this.desiredWidth - leftOffset - rightOffset);
-			} else {
-				// These pending floats are positioned when
-				// lineDone() is called.
-				Collection<RFloatInfo> c = this.pendingFloats;
-				if (c == null) {
-					c = new LinkedList<RFloatInfo>();
-					this.pendingFloats = c;
-				}
-				c.add(floatInfo);
+			// These pending floats are positioned when
+			// lineDone() is called.
+			Collection<RFloatInfo> c = this.pendingFloats;
+			if (c == null) {
+				c = new LinkedList<RFloatInfo>();
+				this.pendingFloats = c;
 			}
+			c.add(floatInfo);
 		}
 	}
 
@@ -2339,8 +2348,10 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		// Adjust maxY based on float, but only if this viewport is the float
 		// limit.
-		if (this.isFloatLimit() && (boxY + boxHeight) > this.maxY) {
-			this.maxY = boxY + boxHeight;
+		if (this.isFloatLimit()) {
+			if ((boxY + boxHeight) > this.maxY) {
+				this.maxY = boxY + boxHeight;
+			}
 		}
 	}
 
@@ -2369,38 +2380,38 @@ public class RBlockViewport extends BaseRCollection {
 	private Boolean isFloatLimitImpl() {
 		Object parent = this.getOriginalOrCurrentParent();
 		if (!(parent instanceof RBlock)) {
-			return true;
+			return Boolean.TRUE;
 		}
 		RBlock blockParent = (RBlock) parent;
 		Object grandParent = blockParent.getOriginalOrCurrentParent();
 		if (!(grandParent instanceof RBlockViewport)) {
 			// Could be contained in a table, or it could
 			// be a list item, for example.
-			return true;
+			return Boolean.TRUE;
 		}
 		ModelNode node = this.modelNode;
 		if (!(node instanceof HTMLElementImpl)) {
 			// Can only be a document here.
-			return true;
+			return Boolean.TRUE;
 		}
 		HTMLElementImpl element = (HTMLElementImpl) node;
 		int position = getPosition(element);
 		if ((position == RenderState.POSITION_ABSOLUTE) || (position == RenderState.POSITION_FIXED)) {
-			return true;
+			return Boolean.TRUE;
 		}
 		element.getCurrentStyle();
 		RenderState rs = element.getRenderState();
 		int floatValue = rs == null ? RenderState.FLOAT_NONE : rs.getFloat();
 		if (floatValue != RenderState.FLOAT_NONE) {
-			return true;
+			return Boolean.TRUE;
 		}
 		int overflowX = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowX();
 		int overflowY = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowY();
 		if ((overflowX == RenderState.OVERFLOW_AUTO) || (overflowX == RenderState.OVERFLOW_SCROLL)
 				|| (overflowY == RenderState.OVERFLOW_AUTO) || (overflowY == RenderState.OVERFLOW_SCROLL)) {
-			return true;
+			return Boolean.TRUE;
 		}
-		return false;
+		return Boolean.FALSE;
 	}
 
 	/**

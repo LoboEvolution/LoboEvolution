@@ -169,7 +169,15 @@ public class RBlock extends BaseElementRenderable implements
         return SCROLL_BAR_THICKNESS;
     }
 
-   
+    /*
+ * (non-Javadoc)
+ * @see java.lang.Object#finalize()
+ */
+    @Override
+    public void finalize() throws Throwable {
+        super.finalize();
+    }
+
     /*
  * (non-Javadoc)
  * @see org.lobobrowser.html.renderer.RElement#getVAlign()
@@ -372,6 +380,8 @@ public class RBlock extends BaseElementRenderable implements
                 if (linfo) {
                     time3 = System.currentTimeMillis();
                 }
+            } else {
+                // nop
             }
 
             // Paint FrameContext selection.

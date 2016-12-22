@@ -36,7 +36,6 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.security.AccessControlContext;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -87,7 +86,7 @@ import org.lobobrowser.util.io.IORoutines;
 /**
  * The Class RequestEngine.
  */
-public class RequestEngine {
+public final class RequestEngine {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(RequestEngine.class);
@@ -289,7 +288,7 @@ public class RequestEngine {
 			// can be picky about that (namely, java.net).
 			byte[] postContent = bufOut.toByteArray();
 			if (loggerInfo) {
-				logger.info("postData(): Will post: " + new String(postContent,StandardCharsets.UTF_8));
+				logger.info("postData(): Will post: " + new String(postContent));
 			}
 			if (connection instanceof HttpURLConnection) {
 				if (boolSettings.isHttpUseChunkedEncodingPOST()) {
@@ -316,6 +315,7 @@ public class RequestEngine {
 			}
 			MultipartFormDataWriter writer = new MultipartFormDataWriter(mfstream, boundary);
 			try {
+				if (pinfo != null) {
 					Parameter[] parameters = pinfo.getParameters();
 					for (int i = 0; i < parameters.length; i++) {
 						Parameter parameter = parameters[i];
@@ -324,9 +324,9 @@ public class RequestEngine {
 							writer.writeText(name, parameter.getTextValue(), "UTF-8");
 						} else if (parameter.isFile()) {
 							File[] file = parameter.getFileValue();
-	
+
 							for (int f = 0; f < file.length; f++) {
-	
+
 								FileInputStream in = new FileInputStream(file[f]);
 								try {
 									BufferedInputStream bin = new BufferedInputStream(in, 8192);
@@ -340,6 +340,7 @@ public class RequestEngine {
 									+ " of unknown type for POST with encoding " + encoding + ".");
 						}
 					}
+				}
 			} finally {
 				writer.send();
 			}
@@ -482,11 +483,13 @@ public class RequestEngine {
 				byte[] persistentContent = null;
 				CacheManager cm = CacheManager.getInstance();
 				entry = (MemoryCacheEntry) cm.getTransient(url);
-				if (entry == null && !"file".equalsIgnoreCase(url.getProtocol()) || !Strings.isBlank(url.getHost())) {
-					try {
-						persistentContent = cm.getPersistent(url, false);
-					} catch (IOException ioe) {
-						logger.error("getCacheInfo(): Unable to load cache file.", ioe);
+				if (entry == null) {
+					if (!"file".equalsIgnoreCase(url.getProtocol()) || !Strings.isBlank(url.getHost())) {
+						try {
+							persistentContent = cm.getPersistent(url, false);
+						} catch (IOException ioe) {
+							logger.error("getCacheInfo(): Unable to load cache file.", ioe);
+						}
 					}
 				}
 				if ((persistentContent == null) && (entry == null)) {
@@ -611,7 +614,7 @@ public class RequestEngine {
 							logger.error("cache(): Unable to write persistent cached object.", err);
 						}
 					}
-				} catch (IOException err) {
+				} catch (Exception err) {
 					logger.error("cache()", err);
 				}
 				return null;
@@ -1189,7 +1192,7 @@ public class RequestEngine {
 							try {
 								responseIn.close();
 							} catch (IOException ioe) {
-								logger.error(ioe);
+								// ignore
 							}
 						}
 						if (connection instanceof HttpURLConnection) {

@@ -46,7 +46,7 @@ public class RLine extends BaseRCollection {
 
 	/** The renderables. */
 	private final ArrayList<Renderable> renderables = new ArrayList<Renderable>(8);
-	
+	// private final RenderState startRenderState;
 	/** The base line offset. */
 	private int baseLineOffset;
 
@@ -512,7 +512,6 @@ public class RLine extends BaseRCollection {
 	 *            the valign
 	 */
 	private void adjustHeight(int newHeight, int elementHeight, int valign) {
-		
 		// Set new line height
 		// int oldHeight = this.height;
 		this.height = newHeight;
@@ -576,7 +575,10 @@ public class RLine extends BaseRCollection {
 				rblank.setY(baseline - rblank.getAscentPlusLeading());
 			} else if (r instanceof RElement) {
 				RElement relement = (RElement) r;
+				// int w = relement.getWidth();
 				this.setElementY(relement, relement.getHeight(), relement.getVAlign());
+			} else {
+				// RSpacing and RStyleChanger don't matter?
 			}
 		}
 		// TODO: Could throw OverflowException when we add floating widgets

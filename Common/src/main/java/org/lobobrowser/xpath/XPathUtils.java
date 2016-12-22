@@ -103,7 +103,7 @@ public class XPathUtils {
      * @throws XPathExpressionException
      *             if the expression does not parse
      */
-    public static synchronized Node getElement(final String expression, final Node node)
+    public synchronized static Node getElement(String expression, Node node)
             throws XPathExpressionException {
         Node n = (Node) xpath.evaluate(expression, node, XPathConstants.NODE);
         return n;
@@ -121,7 +121,7 @@ public class XPathUtils {
      * @throws XPathExpressionException
      *             the x path expression exception
      */
-    public static synchronized String getString(final String expression, final Node node)
+    public synchronized static String getString(String expression, Node node)
             throws XPathExpressionException {
         Node n = (Node) xpath.evaluate(expression, node, XPathConstants.NODE);
         return n == null ? null : n.getTextContent();
@@ -142,8 +142,8 @@ public class XPathUtils {
      * @throws XPathExpressionException
      *             the x path expression exception
      */
-    public static synchronized String getString(final String expression, final Node node,
-            final String namespace, final String namespacePrefix)
+    public synchronized static String getString(String expression, Node node,
+            String namespace, String namespacePrefix)
                     throws XPathExpressionException {
         functionResolver.addNamespaceMapping(namespacePrefix, namespace);
         Node n = (Node) xpath.evaluate(expression, node, XPathConstants.NODE);
@@ -183,8 +183,8 @@ public class XPathUtils {
      * @throws XPathExpressionException
      *             if the expression does not parse
      */
-    public static synchronized Node getElement(final XPathExpression expression,
-            final Node node) throws XPathExpressionException {
+    public synchronized static Node getElement(XPathExpression expression,
+            Node node) throws XPathExpressionException {
         Node n = (Node) expression.evaluate(node, XPathConstants.NODE);
         return n;
     }
@@ -201,8 +201,8 @@ public class XPathUtils {
      * @throws XPathExpressionException
      *             the x path expression exception
      */
-    public static synchronized String getString(final XPathExpression expression,
-            final Node node) throws XPathExpressionException {
+    public synchronized static String getString(XPathExpression expression,
+            Node node) throws XPathExpressionException {
         Node n = (Node) expression.evaluate(node, XPathConstants.NODE);
         return n == null ? null : n.getTextContent();
     }
@@ -217,7 +217,7 @@ public class XPathUtils {
      * @throws XPathExpressionException
      *             for a malformed XPath expression
      */
-    public static synchronized XPathExpression compile(final String expression)
+    public synchronized static XPathExpression compile(String expression)
             throws XPathExpressionException {
         return xpath.compile(expression);
     }
@@ -229,7 +229,7 @@ public class XPathUtils {
      *            the dom
      * @return the string
      */
-    public static String toXML(final Document dom) {
+    public static String toXML(Document dom) {
         return toXML(dom, null);
     }
 
@@ -242,7 +242,7 @@ public class XPathUtils {
      *            the output properties
      * @return the string
      */
-    public static String toXML(final Document dom, final Properties outputProperties) {
+    public static String toXML(Document dom, Properties outputProperties) {
         try {
             DOMSource source = new DOMSource(dom);
             StringWriter writer = new StringWriter();

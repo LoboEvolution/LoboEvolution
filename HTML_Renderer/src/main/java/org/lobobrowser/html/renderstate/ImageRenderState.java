@@ -73,7 +73,7 @@ public class ImageRenderState extends StyleSheetRenderState {
                 try {
                     hspace = Integer.parseInt(hspaceText);
                 } catch (NumberFormatException nfe) {
-                    logger.error(nfe);
+                    // TODO: Percentages?
                 }
             }
             String vspaceText = this.element
@@ -83,7 +83,7 @@ public class ImageRenderState extends StyleSheetRenderState {
                 try {
                     vspace = Integer.parseInt(vspaceText);
                 } catch (NumberFormatException nfe) {
-                	logger.error(nfe);
+                    // TODO: Percentages?
                 }
             }
             if (createNew) {

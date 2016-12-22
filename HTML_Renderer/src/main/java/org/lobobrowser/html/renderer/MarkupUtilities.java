@@ -280,8 +280,10 @@ public class MarkupUtilities {
                     int newLen = middleIndex - index;
                     int resultIdx = newLen == 0 ? -1 : findFirstIndex(
                             renderables, clipArea, index, newLen, vertical);
-                    if (resultIdx == -1 && intersects(clipArea, rbounds, vertical)) {
-                    	return middleIndex;
+                    if (resultIdx == -1) {
+                        if (intersects(clipArea, rbounds, vertical)) {
+                            return middleIndex;
+                        }
                     }
                     return resultIdx;
                 }
@@ -293,8 +295,10 @@ public class MarkupUtilities {
                 } else {
                     int resultIdx = findFirstIndex(renderables, clipArea,
                             index, middleIndex - index, vertical);
-                    if (resultIdx == -1 && intersects(clipArea, rbounds, vertical)) {
-                    	return middleIndex;
+                    if (resultIdx == -1) {
+                        if (intersects(clipArea, rbounds, vertical)) {
+                            return middleIndex;
+                        }
                     }
                     return resultIdx;
                 }
@@ -358,8 +362,10 @@ public class MarkupUtilities {
                     int resultIdx = newLen == 0 ? -1 : findLastIndex(
                             renderables, clipArea, middleIndex + 1, newLen,
                             vertical);
-                    if (resultIdx == -1 && intersects(clipArea, rbounds, vertical)) {
-                    	return middleIndex;
+                    if (resultIdx == -1) {
+                        if (intersects(clipArea, rbounds, vertical)) {
+                            return middleIndex;
+                        }
                     }
                     return resultIdx;
                 }
@@ -371,8 +377,10 @@ public class MarkupUtilities {
                     int resultIdx = findLastIndex(renderables, clipArea,
                             middleIndex + 1, length
                             - ((middleIndex - index) + 1), vertical);
-                    if (resultIdx == -1 && intersects(clipArea, rbounds, vertical)) {
-                    	return middleIndex;
+                    if (resultIdx == -1) {
+                        if (intersects(clipArea, rbounds, vertical)) {
+                            return middleIndex;
+                        }
                     }
                     return resultIdx;
                 }

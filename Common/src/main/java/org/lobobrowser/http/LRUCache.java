@@ -46,7 +46,7 @@ public class LRUCache implements java.io.Serializable {
     /** The cache map. */
     private final Map<Object, OrderedValue> cacheMap = new HashMap<Object, OrderedValue>();
     /** The removal event. */
-    private transient volatile EventDispatch2 removalEvent;
+    private volatile transient EventDispatch2 removalEvent;
     /**
      * Ascending timestamp order. First is least recently used.
      */
@@ -60,7 +60,7 @@ public class LRUCache implements java.io.Serializable {
      * @param approxMaxSize
      *            the approx max size
      */
-    public LRUCache(final int approxMaxSize) {
+    public LRUCache(int approxMaxSize) {
         this.approxMaxSize = approxMaxSize;
         this.removalEvent = new RemovalDispatch();
     }
@@ -75,7 +75,7 @@ public class LRUCache implements java.io.Serializable {
      * @throws ClassNotFoundException
      *             the class not found exception
      */
-    private void readObject(final ObjectInputStream in)
+    private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         // Need to initialize transient fields here.
@@ -95,7 +95,7 @@ public class LRUCache implements java.io.Serializable {
 	 * @param approxMaxSize
 	 *            the new approx max size
 	 */
-    public void setApproxMaxSize(final int approxMaxSize) {
+    public void setApproxMaxSize(int approxMaxSize) {
         this.approxMaxSize = approxMaxSize;
     }
     
@@ -109,7 +109,7 @@ public class LRUCache implements java.io.Serializable {
      * @param approxSize
      *            the approx size
      */
-    public void put(final Object key, final Object value, final int approxSize) {
+    public void put(Object key, Object value, int approxSize) {
         if (approxSize > this.approxMaxSize) {
             // Can't be inserted.
             return;
@@ -167,7 +167,7 @@ public class LRUCache implements java.io.Serializable {
      *            the key
      * @return the object
      */
-    public Object get(final Object key) {
+    public Object get(Object key) {
         OrderedValue ordVal = this.cacheMap.get(key);
         if (ordVal != null) {
             this.timedSet.remove(ordVal);
@@ -186,7 +186,7 @@ public class LRUCache implements java.io.Serializable {
      *            the key
      * @return the object
      */
-    public Object remove(final Object key) {
+    public Object remove(Object key) {
         OrderedValue ordVal = this.cacheMap.get(key);
         if (ordVal != null) {
             this.removalEvent
@@ -205,7 +205,7 @@ public class LRUCache implements java.io.Serializable {
      * @param listener
      *            the listener
      */
-    public void addRemovalListener(final RemovalListener listener) {
+    public void addRemovalListener(RemovalListener listener) {
         this.removalEvent.addListener(listener);
     }
     
@@ -215,7 +215,7 @@ public class LRUCache implements java.io.Serializable {
      * @param listener
      *            the listener
      */
-    public void removeRemovalListener(final RemovalListener listener) {
+    public void removeRemovalListener(RemovalListener listener) {
         this.removalEvent.removeListener(listener);
     }
     

@@ -61,8 +61,9 @@ import org.w3c.dom.Node;
  *
  * @see org.w3c.dom.xpath.XPathEvaluator
  *
+ * @xsl.usage internal
  */
-public class XPathEvaluatorImpl implements XPathEvaluator {
+public final class XPathEvaluatorImpl implements XPathEvaluator {
 
 	/**
 	 * This prefix resolver is created whenever null is passed to the evaluate
@@ -172,7 +173,8 @@ public class XPathEvaluatorImpl implements XPathEvaluator {
 	 *                prefixes which cannot be resolved by the specified
 	 *                <code>XPathNSResolver</code>.
 	 * 
-	 * @see org.w3c.dom.xpath.XPathEvaluator#createExpression(String, XPathNSResolver)
+	 * @see org.w3c.dom.xpath.XPathEvaluator#createExpression(String,
+	 *      XPathNSResolver)
 	 */
 	@Override
 	public XPathExpression createExpression(String expression, XPathNSResolver resolver)

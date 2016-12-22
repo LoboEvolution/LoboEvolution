@@ -347,7 +347,7 @@ public class TableCellRenderState extends DisplayRenderState {
                 }
             }
         }
-        this.iWhiteSpace = Integer.valueOf(wsValue);
+        this.iWhiteSpace = new Integer(wsValue);
         return wsValue;
     }
 

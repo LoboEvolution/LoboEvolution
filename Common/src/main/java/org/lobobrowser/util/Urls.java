@@ -48,7 +48,6 @@ import org.lobobrowser.http.NameValuePair;
  * The Class Urls.
  */
 public class Urls {
-	
     /** The Constant logger. */
     private static final Logger logger = LogManager.getLogger(Urls.class);
     /** The Constant PATTERN_RFC1123. */
@@ -74,7 +73,7 @@ public class Urls {
      *            the url
      * @return true, if is local
      */
-    public static boolean isLocal(final URL url) {
+    public static boolean isLocal(URL url) {
         if (isLocalFile(url)) {
             return true;
         }
@@ -101,7 +100,7 @@ public class Urls {
      *            the url
      * @return true, if is local file
      */
-    public static boolean isLocalFile(final URL url) {
+    public static boolean isLocalFile(URL url) {
         String scheme = url.getProtocol();
         return "file".equalsIgnoreCase(scheme) && !hasHost(url);
     }
@@ -113,7 +112,7 @@ public class Urls {
      *            the url
      * @return true, if successful
      */
-    public static boolean hasHost(final URL url) {
+    public static boolean hasHost(URL url) {
         String host = url.getHost();
         return (host != null) && !"".equals(host);
     }
@@ -130,12 +129,12 @@ public class Urls {
      *             the malformed url exception
      * @throws UnsupportedEncodingException
      */
-    public static URL createURL(final URL baseUrl, String relativeUrl)
+    public static URL createURL(URL baseUrl, String relativeUrl)
             throws MalformedURLException, UnsupportedEncodingException {
     	
         if (relativeUrl.contains(";base64,")) {
-        	byte[] encode = Base64.getEncoder().encode(relativeUrl.getBytes(StandardCharsets.UTF_8));
-            relativeUrl = new String(encode,StandardCharsets.UTF_8);
+            relativeUrl = new String(Base64.getEncoder()
+                    .encode(relativeUrl.getBytes(StandardCharsets.UTF_8)));
         }
         
         if (relativeUrl.contains("javascript:void")) {
@@ -144,7 +143,7 @@ public class Urls {
         
         if (relativeUrl.contains("..")) {
         	relativeUrl = relativeUrl.replace("..", "");
-        	return new URL(baseUrl.toExternalForm() + relativeUrl);
+        	return new URL(baseUrl.toExternalForm()+relativeUrl);
         }
         return new URL(baseUrl, relativeUrl);
     }
@@ -160,14 +159,14 @@ public class Urls {
      *            the base time
      * @return the expiration
      */
-    public static Long getExpiration(final URLConnection connection, final long baseTime) {
+    public static Long getExpiration(URLConnection connection, long baseTime) {
         String cacheControl = connection.getHeaderField("Cache-Control");
         if (cacheControl != null) {
             StringTokenizer tok = new StringTokenizer(cacheControl, ",");
             while (tok.hasMoreTokens()) {
                 String token = tok.nextToken().trim().toLowerCase();
                 if ("must-revalidate".equals(token)) {
-                    return Long.valueOf(0);
+                    return new Long(0);
                 } else if (token.startsWith("max-age")) {
                     int eqIdx = token.indexOf('=');
                     if (eqIdx != -1) {
@@ -175,7 +174,7 @@ public class Urls {
                         int seconds;
                         try {
                             seconds = Integer.parseInt(value);
-                            return Long.valueOf(baseTime + (seconds * 1000));
+                            return new Long(baseTime + (seconds * 1000));
                         } catch (NumberFormatException nfe) {
                             logger.warn(
                                     "getExpiration(): Bad Cache-Control max-age value: "
@@ -191,13 +190,13 @@ public class Urls {
             try {
                 synchronized (PATTERN_RFC1123) {
                     Date expDate = PATTERN_RFC1123.parse(expires);
-                    return Long.valueOf(expDate.getTime());
+                    return new Long(expDate.getTime());
                 }
             } catch (java.text.ParseException pe) {
                 int seconds;
                 try {
                     seconds = Integer.parseInt(expires);
-                    return Long.valueOf(baseTime + (seconds * 1000));
+                    return new Long(baseTime + (seconds * 1000));
                 } catch (NumberFormatException nfe) {
                     logger.warn("getExpiration(): Bad Expires header value: "
                             + expires);
@@ -214,7 +213,7 @@ public class Urls {
      *            the connection
      * @return the headers
      */
-    public static List<NameValuePair> getHeaders(final URLConnection connection) {
+    public static List<NameValuePair> getHeaders(URLConnection connection) {
         // Random access index recommended.
         List<NameValuePair> headers = new ArrayList<NameValuePair>();
         for (int n = 0;; n++) {
@@ -309,7 +308,7 @@ public class Urls {
      * @throws MalformedURLException
      *             the malformed url exception
      */
-    public static URL guessURL(final String spec) throws MalformedURLException {
+    public static URL guessURL(String spec) throws MalformedURLException {
         return guessURL(null, spec);
     }
     
@@ -320,7 +319,7 @@ public class Urls {
      *            the connection
      * @return the charset
      */
-    public static String getCharset(final URLConnection connection) {
+    public static String getCharset(URLConnection connection) {
         String contentType = connection.getContentType();
         if (contentType == null) {
             return getDefaultCharset(connection);
@@ -350,7 +349,7 @@ public class Urls {
      *            the connection
      * @return the default charset
      */
-    private static String getDefaultCharset(final URLConnection connection) {
+    private static String getDefaultCharset(URLConnection connection) {
         URL url = connection.getURL();
         if (Urls.isLocalFile(url)) {
             String charset = System.getProperty("file.encoding");
@@ -367,7 +366,7 @@ public class Urls {
      *            the url
      * @return the no ref form
      */
-    public static String getNoRefForm(final URL url) {
+    public static String getNoRefForm(URL url) {
         String host = url.getHost();
         int port = url.getPort();
         String portText = port == -1 ? "" : ":" + port;
@@ -388,7 +387,7 @@ public class Urls {
      *            the url2
      * @return true, if successful
      */
-    public static boolean sameNoRefURL(final URL url1, final URL url2) {
+    public static boolean sameNoRefURL(URL url1, URL url2) {
         return Objects.equals(url1.getHost(), url2.getHost())
                 && Objects.equals(url1.getProtocol(), url2.getProtocol())
                 && (url1.getPort() == url2.getPort())
@@ -406,7 +405,7 @@ public class Urls {
      *            URL to convert
      * @return the encoded URL
      */
-    public static String encodeIllegalCharacters(final String url) {
+    public static String encodeIllegalCharacters(String url) {
         return url.replace(" ", "%20");
     }
     
@@ -418,7 +417,7 @@ public class Urls {
      *            URL to convert
      * @return the encoded URL
      */
-    public static String removeControlCharacters(final String url) {
+    public static String removeControlCharacters(String url) {
         StringBuilder sb = new StringBuilder(url.length());
         for (int i = 0; i < url.length(); i++) {
             char c = url.charAt(i);

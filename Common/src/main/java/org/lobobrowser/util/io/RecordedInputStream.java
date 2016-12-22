@@ -63,7 +63,7 @@ public class RecordedInputStream extends InputStream {
      * @param maxBufferSize
      *            the max buffer size
      */
-    public RecordedInputStream(final InputStream delegate, final int maxBufferSize) {
+    public RecordedInputStream(InputStream delegate, int maxBufferSize) {
         super();
         this.delegate = delegate;
         this.maxBufferSize = maxBufferSize;
@@ -128,7 +128,7 @@ public class RecordedInputStream extends InputStream {
      * @see java.io.InputStream#mark(int)
      */
     @Override
-    public synchronized void mark(final int readlimit) {
+    public synchronized void mark(int readlimit) {
         if (this.hasReachedMaxBufferSize) {
             throw new IllegalStateException(
                     "Maximum buffer size was already reached.");
@@ -159,7 +159,7 @@ public class RecordedInputStream extends InputStream {
      * @see java.io.InputStream#read(byte[], int, int)
      */
     @Override
-    public int read(final byte[] buffer, final int offset, final int length) throws IOException {
+    public int read(byte[] buffer, int offset, int length) throws IOException {
         if ((this.readPosition != -1)
                 && (this.readPosition < this.resetBuffer.length)) {
             int minLength = Math
@@ -221,7 +221,7 @@ public class RecordedInputStream extends InputStream {
      * @throws BufferExceededException
      *             the buffer exceeded exception
      */
-    public String getString(final String encoding)
+    public String getString(String encoding)
             throws UnsupportedEncodingException, BufferExceededException {
         if (this.hasReachedMaxBufferSize) {
             throw new BufferExceededException();

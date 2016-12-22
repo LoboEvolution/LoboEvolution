@@ -60,6 +60,8 @@ import org.w3c.dom.traversal.NodeIterator;
  *
  * @see org.apache.xpath.objects.XObject
  * @see org.w3c.dom.xpath.XPathResult
+ *
+ * @xsl.usage internal
  */
 public class XPathResultImpl implements XPathResult, EventListener {
 
@@ -155,7 +157,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 		// Check that the type is valid
 		if (!isValidType(type)) {
 			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_INVALID_XPATH_TYPE,
-					new Object[] { Integer.valueOf(type) });
+					new Object[] { new Integer(type) });
 			throw new XPathException(XPathException.TYPE_ERR, fmsg); // Invalid
 																		// XPath
 																		// type

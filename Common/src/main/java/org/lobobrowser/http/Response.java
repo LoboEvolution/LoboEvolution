@@ -25,7 +25,6 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -98,16 +97,19 @@ public class Response {
      * Creates a new instance of Response. Response is an immutable object,
      * hence this large constructor.
      */
-    Response(final StatusCode statusCode, final String statusText, byte[] responseBody,
-            final String charset, final Set<Header> headers, final String baseUrl) {
+    Response(StatusCode statusCode, String statusText, byte[] responseBody,
+            String charset, Set<Header> headers, String baseUrl) {
         if (statusCode == null) {
             throw new NullPointerException("statusCode cannot be null");
         }
-        
         if (responseBody == null) {
             responseBody = new byte[0];
         }
-       
+        if (baseUrl != null) {
+            // TODO assure that there are no parameters in this URL. If there
+            // are,
+            // remove them
+        }
         this.statusCode = statusCode;
         this.statusText = statusText;
         this.responseBody = responseBody;
@@ -134,7 +136,7 @@ public class Response {
      *            the name to look for. This must not be null.
      * @return the Header with the given name.
      */
-    public Header getHeader(final String name) {
+    public Header getHeader(String name) {
         if (name == null) {
             throw new NullPointerException("name cannot be null");
         }
@@ -227,7 +229,7 @@ public class Response {
                     : new String(responseBody, charset);
         } catch (UnsupportedEncodingException ex) {
         	logger.log(Level.ERROR, ex);
-            return responseBody == null ? "" : new String(responseBody,StandardCharsets.UTF_8);
+            return responseBody == null ? "" : new String(responseBody);
         }
     }
 
@@ -239,6 +241,9 @@ public class Response {
         return url;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();

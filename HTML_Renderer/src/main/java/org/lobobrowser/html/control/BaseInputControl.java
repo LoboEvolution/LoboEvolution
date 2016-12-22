@@ -26,8 +26,6 @@ package org.lobobrowser.html.control;
 import java.awt.Graphics;
 import java.io.File;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
@@ -42,9 +40,6 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
-	/** The Constant logger. */
-    protected static final Logger logger = LogManager.getLogger(BaseInputControl.class.getName());
 
 	/** The value. */
 	protected String value;
@@ -75,7 +70,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 			try {
 				this.size = Integer.parseInt(sizeText);
 			} catch (NumberFormatException nfe) {
-				logger.error(nfe);
+				// ignore
 			}
 		}
 	}

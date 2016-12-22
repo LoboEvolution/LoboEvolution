@@ -26,7 +26,7 @@ package org.lobobrowser.html.style;
 /**
  * The Class HtmlLength.
  */
-public class HtmlLength {
+public final class HtmlLength {
 	// Note: Preferred type has higher value
 	/** The Constant PIXELS. */
 	public static final int PIXELS = 1;

@@ -207,7 +207,7 @@ public abstract class DOMCharacterDataImpl extends DOMNodeImpl implements Charac
 	public String toString() {
 		String someText = this.text;
 		int length = someText.length();
-		if (someText.length() > 32) {
+		if ((someText != null) && (someText.length() > 32)) {
 			someText = someText.substring(0, 29) + "...";
 		}
 		return this.getNodeName() + "[length=" + length + ",text=" + someText + "]";

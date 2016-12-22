@@ -218,7 +218,7 @@ public enum StatusCode {
     /** The description. */
     private String description;
 
-    private StatusCode(final int code, final String description) {
+    private StatusCode(int code, String description) {
         this.code = code;
         this.description = description;
     }
@@ -244,7 +244,7 @@ public enum StatusCode {
         return "HTTP " + code + ": " + description;
     }
 
-    public static StatusCode valueOf(final int code) {
+    public static StatusCode valueOf(int code) {
         for (StatusCode sc : StatusCode.values()) {
             if (sc.code == code) {
                 return sc;

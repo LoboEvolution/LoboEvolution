@@ -46,9 +46,13 @@ public class JavaClassWrapperFactory {
 	 *
 	 * @return the instance
 	 */
-	public synchronized static JavaClassWrapperFactory getInstance() {
+	public static JavaClassWrapperFactory getInstance() {
 		if (instance == null) {
-			instance = new JavaClassWrapperFactory();
+			synchronized (JavaClassWrapperFactory.class) {
+				if (instance == null) {
+					instance = new JavaClassWrapperFactory();
+				}
+			}
 		}
 		return instance;
 	}

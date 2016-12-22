@@ -42,6 +42,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -561,7 +562,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 					try {
 						this.reader.close();
 					} catch (IOException ioe) {
-						logger.error(ioe);
+						// ignore
 					}
 					this.reader = null;
 				} else {
@@ -647,7 +648,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				try {
 					this.reader.close();
 				} catch (IOException ioe) {
-					logger.error(ioe);
+					// ignore
 				}
 				this.reader = null;
 			}
@@ -667,7 +668,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 					// This can end up in openBufferChanged
 					this.reader.write(text);
 				} catch (IOException ioe) {
-					logger.error(ioe);
+					// ignore
 				}
 			}
 		}
@@ -686,7 +687,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 					// This can end up in openBufferChanged
 					this.reader.write(text + "\r\n");
 				} catch (IOException ioe) {
-					logger.error(ioe);
+					// ignore
 				}
 			}
 		}
@@ -1320,7 +1321,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.sizeInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error(iob);
+				// ignore
 			}
 		}
 	}
@@ -1348,7 +1349,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.lookInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error(iob);
+				// ignore
 			}
 		}
 
@@ -1375,7 +1376,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.positionInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error(iob);
+				// ignore
 			}
 		}
 	}
@@ -1402,7 +1403,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.invalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error(iob);
+				// ignore
 			}
 		}
 	}
@@ -1428,7 +1429,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.structureInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error(iob);
+				// ignore
 			}
 		}
 	}
@@ -1454,7 +1455,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.nodeLoaded(node);
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error(iob);
+				// ignore
 			}
 		}
 	}
@@ -1480,7 +1481,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.externalScriptLoading(node);
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error(iob);
+				// ignore
 			}
 		}
 	}
@@ -1503,7 +1504,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.allInvalidated();
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error(iob);
+				// ignore
 			}
 		}
 	}
@@ -1616,9 +1617,8 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		Function onloadHandler = this.onloadHandler;
-		if (onloadHandler != null && data instanceof Boolean) {
-			boolean dataBool = (boolean)data;
-			if (HtmlParser.MODIFYING_KEY.equals(key) && !dataBool) {
+		if (onloadHandler != null) {
+			if (HtmlParser.MODIFYING_KEY.equals(key) && (data == Boolean.FALSE)) {
 				Executor.executeFunction(this, onloadHandler, null);
 			}
 		}
@@ -2042,6 +2042,27 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	@Override
 	public AbstractView getDefaultView() {
 		return this.window;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getTextContent()
+	 */
+	@Override
+	public String getTextContent() throws DOMException {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * org.lobobrowser.html.domimpl.DOMNodeImpl#setTextContent(java.lang.String)
+	 */
+	@Override
+	public void setTextContent(String textContent) throws DOMException {
+		// NOP, per spec
 	}
 
 	/*
@@ -3497,8 +3518,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 * @param result
 	 *            the result
 	 */
-	public void evaluate(String expression, HTMLDocumentImpl contextNode, XPathNSResolver resolver, short type, Object result) {
-		eval(expression, contextNode, resolver, type, result);
+	public void evaluate(String expression, HTMLDocumentImpl contextNode, XPathNSResolver resolver, short type,
+			Object result) {
+		evaluate(expression, contextNode, resolver, type, result);
 	}
 
 	@Override
@@ -3540,7 +3562,8 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 *            the result
 	 * @return the x path result
 	 */
-	private XPathResultImpl eval(String expression, Node contextNode, XPathNSResolver resolver, short type, Object result) {
+	private XPathResultImpl eval(String expression, Node contextNode, XPathNSResolver resolver, short type,
+			Object result) {
 		XPathEvaluatorImpl evaluator = new XPathEvaluatorImpl(document);
 		return (XPathResultImpl) evaluator.evaluate(expression, contextNode, resolver, type, result);
 

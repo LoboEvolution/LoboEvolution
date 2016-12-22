@@ -79,7 +79,7 @@ public class FontKey {
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
-    public boolean equals(final Object other) {
+    public boolean equals(Object other) {
         if (other == this) {
             // Quick check.
             return true;
@@ -93,12 +93,13 @@ public class FontKey {
         }
         // Note that we use String.intern() for all string fields,
         // so we can do instance comparisons.
-		return (this.fontSize == ors.fontSize) && (this.fontFamily != null && this.fontFamily.equals(ors.fontFamily))
-				&& (this.fontStyle != null && this.fontStyle.equals(ors.fontStyle))
-				&& (this.fontWeight != null && this.fontWeight.equals(ors.fontWeight))
-				&& (this.fontWeight != null && this.fontWeight.equals(ors.fontVariant))
-				&& (this.superscript != null && this.superscript.intValue() == ors.superscript.intValue())
-				&& Objects.equals(this.locales, ors.locales);
+        return (this.fontSize == ors.fontSize)
+                && (this.fontFamily == ors.fontFamily)
+                && (this.fontStyle == ors.fontStyle)
+                && (this.fontWeight == ors.fontWeight)
+                && (this.fontVariant == ors.fontVariant)
+                && (this.superscript == ors.superscript)
+                && Objects.equals(this.locales, ors.locales);
     }
     
     /** The cached hash. */
@@ -147,7 +148,7 @@ public class FontKey {
 	 * @param cachedHash
 	 *            the new cached hash
 	 */
-    public void setCachedHash(final int cachedHash) {
+    public void setCachedHash(int cachedHash) {
         this.cachedHash = cachedHash;
     }
     

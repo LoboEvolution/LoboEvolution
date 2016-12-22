@@ -60,13 +60,13 @@ public class SSLCertificate {
                     }
                     
                     @Override
-                    public void checkClientTrusted(final X509Certificate[] certs,
-                            final String authType) {
+                    public void checkClientTrusted(X509Certificate[] certs,
+                            String authType) {
                     }
                     
                     @Override
-                    public void checkServerTrusted(final X509Certificate[] certs,
-                            final String authType) {
+                    public void checkServerTrusted(X509Certificate[] certs,
+                            String authType) {
                     }
                 } };
         try {
@@ -77,7 +77,7 @@ public class SSLCertificate {
             // Create all-trusting host name verifier
             HostnameVerifier allHostsValid = new HostnameVerifier() {
                 @Override
-                public boolean verify(final String hostname, final SSLSession session) {
+                public boolean verify(String hostname, SSLSession session) {
                     return true;
                 }
             };

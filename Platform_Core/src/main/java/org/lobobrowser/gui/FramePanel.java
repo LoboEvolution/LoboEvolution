@@ -37,19 +37,20 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lobobrowser.clientlet.ClientletRequest;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.clientlet.SimpleComponentContent;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.main.ExtensionManager;
+import org.lobobrowser.main.PlatformInit;
 import org.lobobrowser.request.ClientletRequestHandler;
 import org.lobobrowser.request.ClientletRequestImpl;
 import org.lobobrowser.request.RequestEngine;
@@ -84,6 +85,7 @@ import org.lobobrowser.util.gui.WrapperLayout;
  * A frame panel with navigation controls and a status bar can be obtained with
  * {@link BrowserPanel}.
  *
+ * @see PlatformInit#init(boolean, boolean)
  */
 public class FramePanel extends JPanel implements NavigatorFrame {
 

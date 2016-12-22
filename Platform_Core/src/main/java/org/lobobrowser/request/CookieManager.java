@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -158,7 +159,7 @@ public class CookieManager extends CookieHandler {
      * Wraps cookies that are placed in the in-memory cache, such that cookies
      * are compared based on their getName() property for equality.
      */
-    private static class Wrapper {
+    private static final class Wrapper {
         
         /** The cookie. */
         private Cookie cookie;

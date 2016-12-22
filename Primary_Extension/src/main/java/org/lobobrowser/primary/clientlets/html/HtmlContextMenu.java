@@ -34,7 +34,6 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -220,7 +219,7 @@ public class HtmlContextMenu {
 				} catch (Exception e1) {
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
 					try {
-						baos.write(urlContent(link.getAbsoluteHref()).getBytes(StandardCharsets.UTF_8));
+						baos.write(urlContent(link.getAbsoluteHref()).getBytes());
 						OutputStream ops = new FileOutputStream(selectedFile);
 						baos.writeTo(ops);
 						baos.flush();
@@ -329,7 +328,7 @@ public class HtmlContextMenu {
 			URL url = new URL(webPage);
 			URLConnection urlConnection = url.openConnection();
 			is = urlConnection.getInputStream();
-			isr = new InputStreamReader(is,StandardCharsets.UTF_8);
+			isr = new InputStreamReader(is);
 
 			int numCharsRead;
 			char[] charArray = new char[1024];
