@@ -2043,28 +2043,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	public AbstractView getDefaultView() {
 		return this.window;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getTextContent()
-	 */
-	@Override
-	public String getTextContent() throws DOMException {
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * org.lobobrowser.html.domimpl.DOMNodeImpl#setTextContent(java.lang.String)
-	 */
-	@Override
-	public void setTextContent(String textContent) throws DOMException {
-		// NOP, per spec
-	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 *
