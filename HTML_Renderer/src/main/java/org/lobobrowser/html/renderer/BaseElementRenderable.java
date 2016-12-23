@@ -29,6 +29,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -601,6 +602,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		// and availHeight, so it doesn't need to be redone on
 		// every resize.
 		// Note: Overridden by tables and lists.
+		
 		Object rootNode = this.modelNode;
 		HTMLElementImpl rootElement;
 		boolean isRootBlock;
@@ -760,7 +762,9 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				SVGRasterizer r = new SVGRasterizer(imageURL);
 				image = r.bufferedImageToImage();
 			} else if (url.startsWith("https")) {
-				image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(con.getInputStream()).getSource());
+				BufferedImage bi = ImageIO.read(con.getInputStream());
+				if(bi!= null)
+					image = Toolkit.getDefaultToolkit().createImage(bi.getSource());
 			} else if (url.endsWith(".gif")) {
 				try {
 					image = new ImageIcon(imageURL).getImage();
