@@ -30,7 +30,6 @@ import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.info.SizeInfo;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
-import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.http.UserAgentContext;
 
 /**
@@ -104,25 +103,8 @@ public class RTableCell extends RBlock {
 	protected Dimension doCellLayout(int width, int height, boolean expandWidth, boolean expandHeight, boolean sizeOnly,
 			boolean useCache) {
 		try {
-
-			int cellWidth = 0;
-
-			if (cellElement.getWidth() != null && cellElement.getWidth().length() > 0) {
-				cellWidth = new HtmlLength(cellElement.getWidth()).getLength(0);
-			} else {
-				cellWidth = width;
-			}
-
-			int cellHeight = 0;
-
-			if (cellElement.getHeight() != null && cellElement.getHeight().length() > 0) {
-				cellHeight = new HtmlLength(cellElement.getHeight()).getLength(0);
-			} else {
-				cellHeight = height;
-			}
-			this.doLayout(cellWidth, cellHeight, expandWidth, expandHeight, null, RenderState.OVERFLOW_NONE,
-					RenderState.OVERFLOW_NONE, sizeOnly, useCache);
-			this.layout(cellWidth, cellHeight, expandWidth, expandHeight, null, sizeOnly);
+			
+			this.layout(width, height, expandWidth, expandHeight, null, sizeOnly);
 			return new Dimension(this.width, this.height);
 		} finally {
 			this.layoutUpTreeCanBeInvalidated = true;
