@@ -29,9 +29,9 @@ public class HtmlButtonTest extends SimpleLoboTest {
 
 	@Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "<button id='myId'>OK</button>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "<button id='myId'>OK</button>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

@@ -28,20 +28,20 @@ public class HtmlFieldSetTest extends SimpleLoboTest {
     @Test
     public void basicTest() throws Exception {
         final String htmlSource
-            = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var fs = document.getElementById('fs');\n"
-            + "    alert(fs);\n"
-            + "    alert(fs.form);\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body >\n"
-            + "  <form>\n"
-            + "    <fieldset id='fs'>\n"
-            + "      <legend>Legend</legend>\n"
-            + "    </fieldset>\n"
-            + "  </form>\n"
+            = "<html><head>"
+            + "<script>"
+            + "  function test() {"
+            + "    var fs = document.getElementById('fs');"
+            + "    alert(fs);"
+            + "    alert(fs.form);"
+            + "  }"
+            + "</script>"
+            + "</head><body >"
+            + "  <form>"
+            + "    <fieldset id='fs'>"
+            + "      <legend>Legend</legend>"
+            + "    </fieldset>"
+            + "  </form>"
             + "</body></html>";
         
         HTMLDocumentImpl doc = loadPage(htmlSource);

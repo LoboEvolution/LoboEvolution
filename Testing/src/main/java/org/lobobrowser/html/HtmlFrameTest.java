@@ -29,11 +29,11 @@ public class HtmlFrameTest extends SimpleLoboTest {
 	@Test
     public void basicTest() throws Exception {
         final String htmlSource =
-            "<html><head><title>frames</title></head>\n"
-            + "<frameset cols='180,*' id='myId'>\n"
-            + "<frame name='f1' src='1.html'/>\n"
-            + "<frame name='f2' src='2.html'/>\n"
-            + "</frameset>\n"
+            "<html><head><title>frames</title></head>"
+            + "<frameset cols='180,*' id='myId'>"
+            + "<frame name='f1' src='1.html'/>"
+            + "<frame name='f2' src='2.html'/>"
+            + "</frameset>"
             + "</html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

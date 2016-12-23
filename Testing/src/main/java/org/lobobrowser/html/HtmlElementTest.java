@@ -332,8 +332,8 @@ public class HtmlElementTest extends SimpleLoboTest {
 
 	@Test
 	public void getForm() throws Exception {
-		String htmlSource = "<html><head><title>foo</title></head><body>\n" + "<form id='form1'>\n"
-				+ "<table><tr><td><input type='text' id='foo'/></td></tr></table>\n" + "</form></body></html>";
+		String htmlSource = "<html><head><title>foo</title></head><body>" + "<form id='form1'>"
+				+ "<table><tr><td><input type='text' id='foo'/></td></tr></table>" + "</form></body></html>";
 		HTMLDocumentImpl page = loadPage(htmlSource);
 		final HTMLFormElementImpl form = (HTMLFormElementImpl) page.getElementById("form1");
 
@@ -343,13 +343,13 @@ public class HtmlElementTest extends SimpleLoboTest {
 
 	@Test
 	public void getElementsByTagName() throws Exception {
-		String htmlSource = "<html>\n" + "<head>\n" + "<script>\n" + "  function test() {\n"
-				+ "    var form = document.getElementById('myForm');\n"
-				+ "    alert(form.getElementsByTagName('input').length);\n"
-				+ "    alert(document.body.getElementsByTagName('input').length);\n" + "  }\n" + "</script>\n"
-				+ "</head>\n" + "<body >\n" + "<form id='myForm'>\n"
-				+ "  <input type='button' name='button1' value='pushme'>\n" + "</form>\n"
-				+ "<input type='button' name='button2'>\n" + "</body></html>";
+		String htmlSource = "<html>" + "<head>" + "<script>" + "  function test() {"
+				+ "    var form = document.getElementById('myForm');"
+				+ "    alert(form.getElementsByTagName('input').length);"
+				+ "    alert(document.body.getElementsByTagName('input').length);" + "  }" + "</script>"
+				+ "</head>" + "<body >" + "<form id='myForm'>"
+				+ "  <input type='button' name='button1' value='pushme'>" + "</form>"
+				+ "<input type='button' name='button2'>" + "</body></html>";
 
 		HTMLDocumentImpl page = loadPage(htmlSource);
 		assertEquals(1, page.getElementById("myForm").getElementsByTagName("input").getLength());
@@ -358,9 +358,9 @@ public class HtmlElementTest extends SimpleLoboTest {
 
 	@Test
 	public void getElementsByTagName2() throws Exception {
-		String htmlSource = "<html><head><title>First</title></head>\n" + "<body>\n"
-				+ "<form><input type='button' name='button1' value='pushme'></form>\n"
-				+ "<div>a</div> <div>b</div> <div>c</div>\n" + "</body></html>";
+		String htmlSource = "<html><head><title>First</title></head>" + "<body>"
+				+ "<form><input type='button' name='button1' value='pushme'></form>"
+				+ "<div>a</div> <div>b</div> <div>c</div>" + "</body></html>";
 
 		HTMLDocumentImpl page = loadPage(htmlSource);
 		Element body = page.getBody();

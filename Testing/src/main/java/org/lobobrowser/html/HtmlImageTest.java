@@ -30,12 +30,12 @@ public class HtmlImageTest extends SimpleLoboTest {
 	@Test
 	public void basicTest() throws Exception {
         String htmlSource
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<img id='myId' src='foo.png' usemap='#map1'>\n"
-            + "<map name='map1'>\n"
-            + "<area href='a.html' shape='rect' coords='5,5,20,20'>\n"
-            + "<area href='b.html' shape='circle' coords='25,10,10%'>\n"
-            + "</map>\n"
+            = "<html><head><title>foo</title></head><body>"
+            + "<img id='myId' src='foo.png' usemap='#map1'>"
+            + "<map name='map1'>"
+            + "<area href='a.html' shape='rect' coords='5,5,20,20'>"
+            + "<area href='b.html' shape='circle' coords='25,10,10%'>"
+            + "</map>"
             + "</body></html>";
         
         HTMLDocumentImpl doc = loadPage(htmlSource);

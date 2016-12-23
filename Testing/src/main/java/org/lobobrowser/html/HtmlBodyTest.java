@@ -29,8 +29,8 @@ public class HtmlBodyTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body  id='myId'>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body  id='myId'>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

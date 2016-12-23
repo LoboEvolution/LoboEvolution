@@ -29,9 +29,9 @@ public class HtmlMetaTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "<meta id='myId' http-equiv='content-type' content='text/html'>\n"
-            + "</head><body >\n"
+        String htmlSource = "<html><head>"
+            + "<meta id='myId' http-equiv='content-type' content='text/html'>"
+            + "</head><body >"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

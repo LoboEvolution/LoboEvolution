@@ -29,9 +29,9 @@ public class HtmlDivisionTest extends SimpleLoboTest {
 
 	@Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "  <div id='myId'/>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "  <div id='myId'/>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);
@@ -58,7 +58,7 @@ public class HtmlDivisionTest extends SimpleLoboTest {
     }
 
     private void testAsText(final String expected, final String htmlSnippet) throws Exception {
-        String htmlSource = "<html><head></head><body>\n"
+        String htmlSource = "<html><head></head><body>"
             + htmlSnippet
             + "</body></html>";
 
@@ -68,8 +68,8 @@ public class HtmlDivisionTest extends SimpleLoboTest {
 
     @Test
     public void asTextDiv() throws Exception {
-        String htmlSource = "<html><head></head><body>\n"
-            + "<div id='foo'>\n \n hello </div>\n"
+        String htmlSource = "<html><head></head><body>"
+            + "<div id='foo'>  hello </div>"
             + "</body></html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);
@@ -80,8 +80,8 @@ public class HtmlDivisionTest extends SimpleLoboTest {
 
     @Test
     public void css() throws Exception {
-        String htmlSource = "<html><head></head><body>\n"
-            + "<div style='display:inline'>1</div><div style='display:inline'>2</div>\n"
+        String htmlSource = "<html><head></head><body>"
+            + "<div style='display:inline'>1</div><div style='display:inline'>2</div>"
             + "</body></html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);

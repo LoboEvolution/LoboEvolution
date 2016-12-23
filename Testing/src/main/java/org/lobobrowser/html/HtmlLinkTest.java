@@ -29,9 +29,9 @@ public class HtmlLinkTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "<link id='myId' href='file1.css'></link>\n"
-            + "</head><body>\n"
+        String htmlSource = "<html><head>"
+            + "<link id='myId' href='file1.css'></link>"
+            + "</head><body>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

@@ -31,10 +31,10 @@ public class DomNodeListTest extends SimpleLoboTest {
     @Test
     public void getElementsByTagName() throws Exception {
         final String firstContent
-            = "<html><head><title>First</title></head>\n"
-            + "<body>\n"
-            + "<form><input type='button' name='button1' value='pushme'></form>\n"
-            + "<div>a</div> <div>b</div> <div>c</div>\n"
+            = "<html><head><title>First</title></head>"
+            + "<body>"
+            + "<form><input type='button' name='button1' value='pushme'></form>"
+            + "<div>a</div> <div>b</div> <div>c</div>"
             + "</body></html>";
 
         HTMLDocumentImpl page = loadPage(firstContent);

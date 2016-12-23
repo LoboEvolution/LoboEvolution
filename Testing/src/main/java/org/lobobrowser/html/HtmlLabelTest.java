@@ -29,9 +29,9 @@ public class HtmlLabelTest extends SimpleLoboTest {
 
 	@Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body>\n"
-            + "<label id='myId'>Item</label>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body>"
+            + "<label id='myId'>Item</label>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

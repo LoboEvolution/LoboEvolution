@@ -31,9 +31,9 @@ public class HtmlOrderedListTest extends SimpleLoboTest {
 
 	@Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "  <ol id='myId'/>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "  <ol id='myId'/>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);
@@ -42,13 +42,13 @@ public class HtmlOrderedListTest extends SimpleLoboTest {
 	
     @Test
     public void asText() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body>\n"
-            + "  <ol id='foo'>\n"
-            + "  <li>first item</li>\n"
-            + "  <li>second item</li>\n"
-            + "  </ol>\n"
-            + "  </table>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body>"
+            + "  <ol id='foo'>"
+            + "  <li>first item</li>"
+            + "  <li>second item</li>"
+            + "  </ol>"
+            + "  </table>"
             + "</body></html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);

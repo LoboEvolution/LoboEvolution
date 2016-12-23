@@ -30,10 +30,10 @@ public class HtmlQuoteTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "  <q id='myId1'>First Quote</q>\n"
-            + "  <blockquote id='myId'>Second Quote</blockquote>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "  <q id='myId1'>First Quote</q>"
+            + "  <blockquote id='myId'>Second Quote</blockquote>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

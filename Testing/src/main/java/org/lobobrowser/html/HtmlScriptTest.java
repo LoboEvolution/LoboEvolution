@@ -30,8 +30,8 @@ public class HtmlScriptTest extends SimpleLoboTest {
     public void changingLocationSkipsFurtherScriptsOnPage() throws Exception {
 		
 		String htmlSource
-            = "<html><head></head><body>\n"
-            + "<script id='myId'>alert('Second page loading')</script>\n"
+            = "<html><head></head><body>"
+            + "<script id='myId'>alert('Second page loading')</script>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

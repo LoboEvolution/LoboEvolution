@@ -29,9 +29,9 @@ public class HtmlFontTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "  <font id='myId'/>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "  <font id='myId'/>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

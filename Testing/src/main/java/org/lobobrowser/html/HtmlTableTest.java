@@ -29,9 +29,9 @@ public class HtmlTableTest extends SimpleLoboTest {
 	
 	@Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "  <table id='myId'/>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "  <table id='myId'/>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

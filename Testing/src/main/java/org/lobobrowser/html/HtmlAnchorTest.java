@@ -29,8 +29,8 @@ public class HtmlAnchorTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><body>\n"
-            + "<a name='foo' id='myId'></a>\n"
+        String htmlSource = "<html><body>"
+            + "<a name='foo' id='myId'></a>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

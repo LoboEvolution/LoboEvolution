@@ -102,10 +102,10 @@ public class DomNodeTest extends SimpleLoboTest {
     @Test
     public void removeAllChildren() throws Exception {
         final String content
-            = "<html><head></head><body>\n"
-            + "<p id='tag'><table>\n"
-            + "<tr><td>row 1</td></tr>\n"
-            + "<tr><td>row 2</td></tr>\n"
+            = "<html><head></head><body>"
+            + "<p id='tag'><table>"
+            + "<tr><td>row 1</td></tr>"
+            + "<tr><td>row 2</td></tr>"
             + "</table></p></body></html>";
         HTMLDocumentImpl page = loadPage(content);
 

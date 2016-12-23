@@ -30,9 +30,9 @@ public class HtmlBaseFontTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "  <basefont id='myId'/>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "  <basefont id='myId'/>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

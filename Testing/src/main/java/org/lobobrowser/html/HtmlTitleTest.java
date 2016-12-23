@@ -31,8 +31,8 @@ public class HtmlTitleTest extends SimpleLoboTest {
 
 	@Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head><title id='myId'>foo</title>\n"
-            + "</head><body >\n"
+        String htmlSource = "<html><head><title id='myId'>foo</title>"
+            + "</head><body >"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);
@@ -41,15 +41,15 @@ public class HtmlTitleTest extends SimpleLoboTest {
 	 
     @Test
     public void pageAsText() throws Exception {
-        String htmlSource = "<html>\n"
-            + "<head>\n"
-            + "<title>Dummy</title>\n"
-            + "</head>\n"
-            + "\n"
-            + "<body>\n"
-            + "Dummy page\n"
-            + "</body>\n"
-            + "</html>\n";
+        String htmlSource = "<html>"
+            + "<head>"
+            + "<title>Dummy</title>"
+            + "</head>"
+            + ""
+            + "<body>"
+            + "Dummy page"
+            + "</body>"
+            + "</html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);
         final String expected = "Dummy" + SEPARATOR_LINE + "Dummy page";
@@ -58,15 +58,15 @@ public class HtmlTitleTest extends SimpleLoboTest {
 
     @Test
     public void asText() throws Exception {
-        String htmlSource = "<html>\n"
-            + "<head>\n"
-            + "<title>Title\nText     Test</title>\n"
-            + "</head>\n"
-            + "\n"
-            + "<body>\n"
-            + "Dummy page\n"
-            + "</body>\n"
-            + "</html>\n";
+        String htmlSource = "<html>"
+            + "<head>"
+            + "<title>TitleText     Test</title>"
+            + "</head>"
+            + ""
+            + "<body>"
+            + "Dummy page"
+            + "</body>"
+            + "</html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);
         assertEquals("Title Text Test", page.getTextContent());
@@ -74,15 +74,14 @@ public class HtmlTitleTest extends SimpleLoboTest {
 
     @Test
     public void asTextEmptyTitle() throws Exception {
-        String htmlSource = "<html>\n"
-            + "<head>\n"
-            + "<title></title>\n"
-            + "</head>\n"
-            + "\n"
-            + "<body>\n"
-            + "Dummy page\n"
-            + "</body>\n"
-            + "</html>\n";
+        String htmlSource = "<html>"
+            + "<head>"
+            + "<title></title>"
+            + "</head>"
+            + "<body>"
+            + "Dummy page"
+            + "</body>"
+            + "</html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);
         assertEquals("", page.getTextContent());

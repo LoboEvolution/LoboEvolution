@@ -29,15 +29,15 @@ public class HtmlHeadingTest extends SimpleLoboTest {
 
     @Test
     public void asText() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body>"
             + "begin"
-            + "<h1>in h1</h1>after h1\n"
-            + "<h2>in h2</h2>after h2\n"
-            + "<h3>in h3</h3>after h3\n"
-            + "<h4>in h4</h4>after h4\n"
-            + "<h5>in h5</h5>after h5\n"
-            + "<h6>in h6</h6>after h6\n"
+            + "<h1>in h1</h1>after h1"
+            + "<h2>in h2</h2>after h2"
+            + "<h3>in h3</h3>after h3"
+            + "<h4>in h4</h4>after h4"
+            + "<h5>in h5</h5>after h5"
+            + "<h6>in h6</h6>after h6"
             + "</body></html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);

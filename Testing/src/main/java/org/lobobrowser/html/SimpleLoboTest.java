@@ -38,7 +38,7 @@ import org.xml.sax.SAXException;
 
 public class SimpleLoboTest implements HtmlProperties{
 	
-	public final String SEPARATOR_LINE = "\n";
+	public final String SEPARATOR_LINE = "";
 
 	public static HTMLDocumentImpl loadPage(String htmlSource) {
 		try {

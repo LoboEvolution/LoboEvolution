@@ -29,14 +29,14 @@ public class HtmlTableCellTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "  <table>\n"
-            + "    <tr>\n"
-            + "      <td id='myId1'/>\n"
-            + "      <th id='myId2'/>\n"
-            + "    </tr>\n"
-            + "  </table>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "  <table>"
+            + "    <tr>"
+            + "      <td id='myId1'/>"
+            + "      <th id='myId2'/>"
+            + "    </tr>"
+            + "  </table>"
             + "</body></html>";
         HTMLDocumentImpl doc = loadPage(htmlSource);
 		assertTrue(TD.equals(doc.getElementById("myId1").getNodeName()));

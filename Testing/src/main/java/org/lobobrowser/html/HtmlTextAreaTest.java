@@ -28,11 +28,11 @@ public class HtmlTextAreaTest extends SimpleLoboTest {
 
     public void basicTest() throws Exception {
         String htmlSource
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1'>\n"
-            + "<textarea name='textArea1'> foo \n bar "
-            + "<p>html snippet</p>\n"
-            + "</textarea>\n"
+            = "<html><head><title>foo</title></head><body>"
+            + "<form id='form1'>"
+            + "<textarea name='textArea1'> foo  bar "
+            + "<p>html snippet</p>"
+            + "</textarea>"
             + "</form></body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

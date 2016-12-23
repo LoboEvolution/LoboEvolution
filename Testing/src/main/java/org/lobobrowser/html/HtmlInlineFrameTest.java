@@ -30,9 +30,9 @@ public class HtmlInlineFrameTest extends SimpleLoboTest {
 
 	@Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "  <iframe id='myId'>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "  <iframe id='myId'>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);
@@ -42,11 +42,11 @@ public class HtmlInlineFrameTest extends SimpleLoboTest {
 
     @Test
     public void brokenIframe() throws Exception {
-        String htmlSource = "<html>\n"
-                + "<head></head>\n"
+        String htmlSource = "<html>"
+                + "<head></head>"
                 + "<body>"
                 + "1<div>2<iframe/>3</div>4"
-                + "</body>\n"
+                + "</body>"
                 + "</html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);

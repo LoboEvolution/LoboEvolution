@@ -31,10 +31,10 @@ public class HtmlNoFramesTest extends SimpleLoboTest {
     @Test
     public void basicTest() throws Exception {
         String htmlSource
-            = "<html>\n"
-            + "  <noframes>\n"
-            + "    <b>Some bold text</b>\n"
-            + "  </noframes>\n"
+            = "<html>"
+            + "  <noframes>"
+            + "    <b>Some bold text</b>"
+            + "  </noframes>"
             + "</html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);
@@ -44,10 +44,10 @@ public class HtmlNoFramesTest extends SimpleLoboTest {
     @Test
     public void asText() throws Exception {
         final String htmlSource
-            = "<html>\n"
-            + "  <noframes id='it'>\n"
-            + "    Some text\n"
-            + "  </noframes>\n"
+            = "<html>"
+            + "  <noframes id='it'>"
+            + "    Some text"
+            + "  </noframes>"
             + "</html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);

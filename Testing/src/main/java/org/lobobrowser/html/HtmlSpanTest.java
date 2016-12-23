@@ -32,9 +32,9 @@ public class HtmlSpanTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body>\n"
-            + "<span id='myId'></span>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body>"
+            + "<span id='myId'></span>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);
@@ -44,18 +44,18 @@ public class HtmlSpanTest extends SimpleLoboTest {
 
     @Test
     public void asText() throws Exception {
-        String htmlSource = "<html><head></head><body>\n"
-            + "<span id='outside'>\n"
-            + "<span>\n"
-            + "before\n"
-            + "</span>\n"
-            + "<span>\n"
-            + "inside\n"
-            + "</span>\n"
-            + "<span>\n"
-            + "after\n"
-            + "</span>\n"
-            + "</span>\n"
+        String htmlSource = "<html><head></head><body>"
+            + "<span id='outside'>"
+            + "<span>"
+            + "before"
+            + "</span>"
+            + "<span>"
+            + "inside"
+            + "</span>"
+            + "<span>"
+            + "after"
+            + "</span>"
+            + "</span>"
             + "</body></html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);

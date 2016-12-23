@@ -29,11 +29,11 @@ public class HtmlListItemTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "  <ul>\n"
-            + "    <li id='myId'>Item1></li>\n"
-            + "  </ul>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "  <ul>"
+            + "    <li id='myId'>Item1></li>"
+            + "  </ul>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

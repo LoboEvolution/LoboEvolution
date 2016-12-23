@@ -28,11 +28,11 @@ public class HtmlCaptionTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "  <table>\n"
-            + "    <caption id='myId'/>\n"
-            + "  </table>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "  <table>"
+            + "    <caption id='myId'/>"
+            + "  </table>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

@@ -31,7 +31,7 @@ public class HtmlHeadTest extends SimpleLoboTest {
     @Test
     public void basicTest() throws Exception {
         String htmlSource = "<html><head id='myId'>"
-            + "</head><body >\n"
+            + "</head><body >"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

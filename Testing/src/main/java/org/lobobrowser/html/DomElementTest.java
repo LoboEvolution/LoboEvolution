@@ -29,17 +29,17 @@ public final class DomElementTest extends SimpleLoboTest {
 
     @Test
     public void getElementsByTagName() throws Exception {
-        String htmlSource = "<html><head><script>\n"
-                + "function test() {\n"
-                + "    alert(document.f1.getElementsByTagName('input').length);\n"
-                + "    alert(document.f1.getElementsByTagName('INPUT').length);\n"
-                + "}\n"
-                + "</script></head>\n"
-                + "<body >\n"
-                + "  <form name='f1'>\n"
-                + "    <input>\n"
-                + "    <INPUT>\n"
-                + "  </form>\n"
+        String htmlSource = "<html><head><script>"
+                + "function test() {"
+                + "    alert(document.f1.getElementsByTagName('input').length);"
+                + "    alert(document.f1.getElementsByTagName('INPUT').length);"
+                + "}"
+                + "</script></head>"
+                + "<body >"
+                + "  <form name='f1'>"
+                + "    <input>"
+                + "    <INPUT>"
+                + "  </form>"
                 + "</body></html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);

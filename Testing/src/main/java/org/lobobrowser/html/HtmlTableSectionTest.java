@@ -29,15 +29,15 @@ public class HtmlTableSectionTest extends SimpleLoboTest {
 
     @Test
     public void asText() throws Exception {
-        String htmlSource = "<html>\n"
-            + "<body>\n"
-            + "  <table>\n"
-            + "    <tfoot><td>Five</td></tfoot>\n"
-            + "    <tbody><td>Two</td></tbody>\n"
-            + "    <thead><td>One</td></thead>\n"
-            + "    <thead><td>Three</td></thead>\n"
-            + "    <tfoot><td>Four</td></tfoot>\n"
-            + "  </table>\n"
+        String htmlSource = "<html>"
+            + "<body>"
+            + "  <table>"
+            + "    <tfoot><td>Five</td></tfoot>"
+            + "    <tbody><td>Two</td></tbody>"
+            + "    <thead><td>One</td></thead>"
+            + "    <thead><td>Three</td></thead>"
+            + "    <tfoot><td>Four</td></tfoot>"
+            + "  </table>"
             + "</body></html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);

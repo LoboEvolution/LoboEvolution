@@ -29,14 +29,14 @@ public class HtmlNoScriptTest extends SimpleLoboTest {
     @Test
     public void basicTest() throws Exception {
         String htmlSource
-            = "<html><body>\n"
-            + "<form name='item' method='get'>\n"
-            + "  <noscript id ='myId'>\n"
-            + "    <input type=hidden name='__webpage_no_js__' value='1'>\n"
-            + "  </noscript>\n"
-            + "  <input type=hidden name='myParam' value='myValue'>\n"
-            + "  <input type='submit' id='clickMe'>\n"
-            + "</form>\n"
+            = "<html><body>"
+            + "<form name='item' method='get'>"
+            + "  <noscript id ='myId'>"
+            + "    <input type=hidden name='__webpage_no_js__' value='1'>"
+            + "  </noscript>"
+            + "  <input type=hidden name='myParam' value='myValue'>"
+            + "  <input type='submit' id='clickMe'>"
+            + "</form>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

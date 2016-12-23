@@ -31,15 +31,15 @@ public class HtmlStyleTest extends SimpleLoboTest {
     @Test
     public void basicTest() throws Exception {
         final String htmlSource
-            = "<html>\n"
-            + "<head>\n"
-            + "  <title>foo</title>\n"
-            + "  <style type='text/css' id='testStyle'>\n"
-            + "    img { border: 0px }\n"
-            + "  </style>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "</body>\n"
+            = "<html>"
+            + "<head>"
+            + "  <title>foo</title>"
+            + "  <style type='text/css' id='testStyle'>"
+            + "    img { border: 0px }"
+            + "  </style>"
+            + "</head>"
+            + "<body>"
+            + "</body>"
             + "</html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);

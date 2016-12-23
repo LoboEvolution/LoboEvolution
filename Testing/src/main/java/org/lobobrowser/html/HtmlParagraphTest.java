@@ -29,8 +29,8 @@ public class HtmlParagraphTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><body>\n"
-            + "<p id='foo' id='myId'></p>\n"
+        String htmlSource = "<html><body>"
+            + "<p id='foo' id='myId'></p>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

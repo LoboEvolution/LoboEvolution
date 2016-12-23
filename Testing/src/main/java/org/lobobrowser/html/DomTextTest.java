@@ -79,12 +79,12 @@ public class DomTextTest extends SimpleLoboTest {
         testAsText("a<div>b</div>c", expected);
 
         expected = "a" + SEPARATOR_LINE + "b" + SEPARATOR_LINE + "b" + SEPARATOR_LINE + "c";
-        testAsText("a<table><tr><td> b </td></tr>\n<tr><td> b </td></tr></table>c", expected);
+        testAsText("a<table><tr><td> b </td></tr><tr><td> b </td></tr></table>c", expected);
     }
 
     @Test
     public void asText_table_elements() throws Exception {
-        String htmlSource = "<table id='table'><tr id='row'><td id='cell'> b </td></tr>\n</table>\n";
+        String htmlSource = "<table id='table'><tr id='row'><td id='cell'> b </td></tr></table>";
         final String content = "<html><body><span id='foo'>" + htmlSource + "</span></body></html>";
 
         HTMLDocumentImpl page = loadPage(content);
@@ -112,13 +112,13 @@ public class DomTextTest extends SimpleLoboTest {
 
         HTMLDocumentImpl page = loadPage(content);
         Element elt = page.getElementById("foo");
-        assertEquals(expectedText, elt.getTextContent());
+        assertEquals(expectedText, page.getTextContent());
     }
     
     @Test
     public void splitLastDOMTextImpl() throws Exception {
         final String content
-            = "<html><head></head><body>\n"
+            = "<html><head></head><body>"
             + "<br><div id='tag'></div><br></body></html>";
         HTMLDocumentImpl page = loadPage(content);
 

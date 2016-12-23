@@ -30,9 +30,9 @@ public class HtmlBreakTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "  <br id='myId'>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "  <br id='myId'>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);
@@ -47,6 +47,6 @@ public class HtmlBreakTest extends SimpleLoboTest {
             + "</body></html>";
         
         HTMLDocumentImpl doc = loadPage(htmlSource);
-        assertEquals("Hello" + SEPARATOR_LINE + "world", doc.getTextContent());
+        assertEquals("Hello" + SEPARATOR_LINE + "world", doc.getBody().getTextContent());
     }
 }

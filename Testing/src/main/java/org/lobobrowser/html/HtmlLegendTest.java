@@ -30,11 +30,11 @@ public class HtmlLegendTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "  <fieldset>\n"
-            + "    <legend id='myId'>Legend</legend>\n"
-            + "  </fieldset>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "  <fieldset>"
+            + "    <legend id='myId'>Legend</legend>"
+            + "  </fieldset>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

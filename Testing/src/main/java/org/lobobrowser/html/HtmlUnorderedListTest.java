@@ -33,11 +33,11 @@ public class HtmlUnorderedListTest extends SimpleLoboTest {
         String htmlSource = "<html><head>"
             + "</head><body>"
             + "<ul id='foo'>"
-            + "<li>first item</li>\n"
-            + "<li>second item</li>\n"
-            + "something without li node\n"
-            + "<li>third item</li>\n"
-            + "</ul>\n"
+            + "<li>first item</li>"
+            + "<li>second item</li>"
+            + "something without li node"
+            + "<li>third item</li>"
+            + "</ul>"
             + "</body></html>";
 
         HTMLDocumentImpl page = loadPage(htmlSource);

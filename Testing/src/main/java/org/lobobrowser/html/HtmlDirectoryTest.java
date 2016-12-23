@@ -27,12 +27,12 @@ public class HtmlDirectoryTest extends SimpleLoboTest {
 
     @Test
     public void basicTest() throws Exception {
-        String htmlSource = "<html><head>\n"
-            + "</head><body >\n"
-            + "  <dir id='myId'>\n"
-            + "    <li>First Item</li>\n"
-            + "    <li>Secong Item</li>\n"
-            + "  </dir>\n"
+        String htmlSource = "<html><head>"
+            + "</head><body >"
+            + "  <dir id='myId'>"
+            + "    <li>First Item</li>"
+            + "    <li>Secong Item</li>"
+            + "  </dir>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);

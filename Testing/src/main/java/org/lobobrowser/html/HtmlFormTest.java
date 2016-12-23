@@ -29,9 +29,9 @@ public class HtmlFormTest extends SimpleLoboTest {
 	@Test
     public void basicTest() throws Exception {
         final String htmlSource
-            = "<html><head><title>First</title></head><body>\n"
-            + "<form id='myId' method='get' action='javascript:alert(\"clicked\")'>\n"
-            + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
+            = "<html><head><title>First</title></head><body>"
+            + "<form id='myId' method='get' action='javascript:alert(\"clicked\")'>"
+            + "<input name='button' type='submit' value='PushMe' id='button'/></form>"
             + "</body></html>";
 
         HTMLDocumentImpl doc = loadPage(htmlSource);
