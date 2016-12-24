@@ -615,49 +615,47 @@ public class StyleSheetAggregator {
 	 * @return
 	 */
 	private boolean isAttributeOperator(Attr attr, HTMLElementImpl element) {
+		
+		String name = attr.getName();
+		String value = attr.getValue();
+		String nodeName = element.getNodeName();
 
 		switch (attributeOperator) {
 		case SelectorMatcher.OP_EQUAL:
-			if (attr.getName().equals(attribute) && attr.getValue().equals(attributeValue) && "*".equals(htmlElement)) {
+			if (name.equals(attribute) && value.equals(attributeValue) && "*".equals(htmlElement)) {
 				return true;
-			} else if (attr.getName().equals(attribute) && attr.getValue().equals(attributeValue)
-					&& element.getNodeName().equals(htmlElement)) {
+			} else if (name.equals(attribute) && value.equals(attributeValue) && nodeName.equals(htmlElement)) {
 				return true;
 			}
 			break;
 		case SelectorMatcher.OP_TILDE_EQUAL:
 		case SelectorMatcher.OP_STAR_EQUAL:
-			if (attr.getName().equals(attribute) && attr.getValue().contains(attributeValue)
-					&& "*".equals(htmlElement)) {
+			if (name.equals(attribute) && value.contains(attributeValue) && "*".equals(htmlElement)) {
 				return true;
-			} else if (attr.getName().equals(attribute) && attr.getValue().contains(attributeValue)
-					&& element.getNodeName().equals(htmlElement)) {
+			} else if (name.equals(attribute) && value.contains(attributeValue) && nodeName.equals(htmlElement)) {
 				return true;
 			}
 			break;
 		case SelectorMatcher.OP_PIPE_EQUAL:
 		case SelectorMatcher.OP_CIRCUMFLEX_EQUAL:
-			if (attr.getName().equals(attribute) && attr.getValue().startsWith(attributeValue)
+			if (name.equals(attribute) && value.startsWith(attributeValue)
 					&& "*".equals(htmlElement)) {
 				return true;
-			} else if (attr.getName().equals(attribute) && attr.getValue().startsWith(attributeValue)
-					&& element.getNodeName().equals(htmlElement)) {
+			} else if (name.equals(attribute) && value.startsWith(attributeValue) && nodeName.equals(htmlElement)) {
 				return true;
 			}
 			break;
 		case SelectorMatcher.OP_DOLLAR_EQUAL:
-			if (attr.getName().equals(attribute) && attr.getValue().endsWith(attributeValue)
-					&& "*".equals(htmlElement)) {
+			if (name.equals(attribute) && value.endsWith(attributeValue) && "*".equals(htmlElement)) {
 				return true;
-			} else if (attr.getName().equals(attribute) && attr.getValue().endsWith(attributeValue)
-					&& element.getNodeName().equals(htmlElement)) {
+			} else if (name.equals(attribute) && value.endsWith(attributeValue) && nodeName.equals(htmlElement)) {
 				return true;
 			}
 			break;
 		case SelectorMatcher.OP_ALL:
-			if (attr.getName().equals(attribute) && "*".equals(htmlElement)) {
+			if (name.equals(attribute) && "*".equals(htmlElement)) {
 				return true;
-			} else if (attr.getName().equals(attribute) && element.getNodeName().equals(htmlElement)) {
+			} else if (name.equals(attribute) && nodeName.equals(htmlElement)) {
 				return true;
 			}
 			break;
