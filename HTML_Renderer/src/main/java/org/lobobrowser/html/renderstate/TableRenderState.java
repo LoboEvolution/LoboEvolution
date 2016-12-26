@@ -140,39 +140,36 @@ public class TableRenderState extends StyleSheetRenderState {
 				String border = element.getAttribute(HtmlAttributeProperties.BORDER);
 				if (border != null) {
 					border = border.trim();
-					int value;
+					int value = HtmlValues.getPixelSize(border, this, 0);
 					int valueType;
+					
 					if (border.endsWith("%")) {
 						valueType = HtmlInsets.TYPE_PERCENT;
-						try {
-							value = Integer.parseInt(border.substring(0, border.length() - 1));
-						} catch (NumberFormatException nfe) {
-							value = 0;
-						}
 					} else {
 						valueType = HtmlInsets.TYPE_PIXELS;
-						try {
-							value = Integer.parseInt(border);
-						} catch (NumberFormatException nfe) {
-							value = 0;
-						}
 					}
+					
 					HtmlInsets borderInsets = new HtmlInsets();
 					borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value;
 					borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = valueType;
 					binfo.setInsets(borderInsets);
+					
 					if (binfo.getTopColor() == null) {
 						binfo.setTopColor(Color.LIGHT_GRAY);
 					}
+					
 					if (binfo.getLeftColor() == null) {
 						binfo.setLeftColor(Color.LIGHT_GRAY);
 					}
+					
 					if (binfo.getRightColor() == null) {
 						binfo.setRightColor(Color.GRAY);
 					}
+					
 					if (binfo.getBottomColor() == null) {
 						binfo.setBottomColor(Color.GRAY);
 					}
+					
 					if (value != 0) {
 						binfo.setTopStyle(HtmlValues.BORDER_STYLE_SOLID);
 						binfo.setLeftStyle(HtmlValues.BORDER_STYLE_SOLID);

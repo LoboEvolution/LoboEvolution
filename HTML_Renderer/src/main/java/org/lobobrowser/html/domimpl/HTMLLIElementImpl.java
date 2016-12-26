@@ -26,6 +26,7 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.renderstate.DisplayRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLLIElement;
 
 /**
@@ -69,14 +70,7 @@ HTMLLIElement {
     @Override
     public int getValue() {
         String valueText = this.getAttribute(HtmlAttributeProperties.VALUE);
-        if (valueText == null) {
-            return 0;
-        }
-        try {
-            return Integer.parseInt(valueText);
-        } catch (NumberFormatException nfe) {
-            return 0;
-        }
+        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
     }
 
     /*

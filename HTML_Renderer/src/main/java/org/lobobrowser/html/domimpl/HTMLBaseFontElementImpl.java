@@ -93,12 +93,8 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 	 */
 	@Override
 	public int getSize() {
-		try {
-			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.SIZE));
-		} catch (Exception thrown) {
-			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
-			return 0;
-		}
+		String valueText = this.getAttribute(HtmlAttributeProperties.SIZE);
+        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*

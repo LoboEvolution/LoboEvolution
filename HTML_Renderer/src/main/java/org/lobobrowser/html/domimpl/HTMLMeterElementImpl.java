@@ -21,6 +21,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLMeterElement;
 import org.w3c.dom.NodeList;
 
@@ -47,12 +48,8 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public double getValue() {
-		try {
-			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.VALUE));
-		} catch (Exception thrown) {
-			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
-			return 0;
-		}
+		String valueText = this.getAttribute(HtmlAttributeProperties.VALUE);
+        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -73,12 +70,8 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public double getMin() {
-		try {
-			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.MIN));
-		} catch (Exception thrown) {
-			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
-			return 0;
-		}
+		String valueText = this.getAttribute(HtmlAttributeProperties.MIN);
+        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -99,12 +92,8 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public double getMax() {
-		try {
-			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.MAX));
-		} catch (Exception thrown) {
-			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
-			return 0;
-		}
+		String valueText = this.getAttribute(HtmlAttributeProperties.MAX);
+        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -125,12 +114,8 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public double getLow() {
-		try {
-			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.LOW));
-		} catch (Exception thrown) {
-			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
-			return 0;
-		}
+		String valueText = this.getAttribute(HtmlAttributeProperties.LOW);
+        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -151,12 +136,8 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public double getHigh() {
-		try {
-			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.HEIGHT));
-		} catch (Exception thrown) {
-			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
-			return 0;
-		}
+		String valueText = this.getAttribute(HtmlAttributeProperties.HEIGHT);
+        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -177,12 +158,8 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public double getOptimum() {
-		try {
-			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.OPTINUM));
-		} catch (Exception thrown) {
-			logger.error("getSize(): Unable to parse size attribute in " + this + ".", thrown);
-			return 0;
-		}
+		String valueText = this.getAttribute(HtmlAttributeProperties.OPTINUM);
+        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*

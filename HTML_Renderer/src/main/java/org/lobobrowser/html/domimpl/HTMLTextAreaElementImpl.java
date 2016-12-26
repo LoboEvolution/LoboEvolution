@@ -27,6 +27,7 @@ import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.InputContext;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLTextAreaElement;
 
 /**
@@ -145,14 +146,8 @@ HTMLTextAreaElement {
      */
     @Override
     public int getMaxLength() {
-        try {
-            return Integer.parseInt(this
-                    .getAttribute(HtmlAttributeProperties.MAXLENGTH));
-        } catch (Exception thrown) {
-            logger.error("getMaxLength(): Unable to parse size attribute in "
-                    + this + ".", thrown);
-            return 0;
-        }
+    	String maxLength = this.getAttribute(HtmlAttributeProperties.MAXLENGTH);
+    	return HtmlValues.getPixelSize(maxLength, this.getRenderState(), 0);
     }
 
     /*

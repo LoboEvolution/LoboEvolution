@@ -723,6 +723,11 @@ public class HtmlValues implements CSSValuesProperties{
 	 * @return the pixel size
 	 */
 	public static final int getPixelSize(String spec, RenderState renderState, int errorValue) {
+		
+		if(spec== null){
+			return 0;
+		}
+		
 		String lcSpec = spec.toLowerCase();
 		if (lcSpec.endsWith("px")) {
 			String pxText = lcSpec.substring(0, lcSpec.length() - 2);

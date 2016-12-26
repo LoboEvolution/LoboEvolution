@@ -26,6 +26,7 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.renderstate.ListRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLOListElement;
 
 /**
@@ -71,14 +72,7 @@ HTMLOListElement {
     @Override
     public int getStart() {
         String startText = this.getAttribute(HtmlAttributeProperties.START);
-        if (startText == null) {
-            return 1;
-        }
-        try {
-            return Integer.parseInt(startText);
-        } catch (NumberFormatException nfe) {
-            return 1;
-        }
+        return HtmlValues.getPixelSize(startText, this.getRenderState(), 0);
     }
 
     /*

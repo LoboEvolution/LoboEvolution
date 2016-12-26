@@ -63,29 +63,12 @@ public class ImageRenderState extends StyleSheetRenderState {
             mi = HtmlValues.getMarginInsets(props, this);
         }
         if (mi == null) {
-            int hspace = 0;
-            int vspace = 0;
             boolean createNew = false;
-            String hspaceText = this.element
-                    .getAttribute(HtmlAttributeProperties.HSPACE);
-            if ((hspaceText != null) && (hspaceText.length() != 0)) {
-                createNew = true;
-                try {
-                    hspace = Integer.parseInt(hspaceText);
-                } catch (NumberFormatException nfe) {
-                    // TODO: Percentages?
-                }
-            }
-            String vspaceText = this.element
-                    .getAttribute(HtmlAttributeProperties.VSPACE);
-            if ((vspaceText != null) && (vspaceText.length() != 0)) {
-                createNew = true;
-                try {
-                    vspace = Integer.parseInt(vspaceText);
-                } catch (NumberFormatException nfe) {
-                    // TODO: Percentages?
-                }
-            }
+            String hspaceText = this.element.getAttribute(HtmlAttributeProperties.HSPACE);
+            int hspace = HtmlValues.getPixelSize(hspaceText, this, 0);
+            String vspaceText = this.element.getAttribute(HtmlAttributeProperties.VSPACE);
+            int vspace = HtmlValues.getPixelSize(vspaceText, this, 0);
+            
             if (createNew) {
                 mi = new HtmlInsets();
                 mi.top = vspace;
@@ -123,28 +106,18 @@ public class ImageRenderState extends StyleSheetRenderState {
             }
             HTMLElementImpl element = this.element;
             if (element != null) {
-                String border = element
-                        .getAttribute(HtmlAttributeProperties.BORDER);
+                String border = element .getAttribute(HtmlAttributeProperties.BORDER);
+                
                 if (border != null) {
-                    border = border.trim();
-                    int value;
                     int valueType;
+                    int value = HtmlValues.getPixelSize(border, this, 0);
+                    
                     if (border.endsWith("%")) {
                         valueType = HtmlInsets.TYPE_PERCENT;
-                        try {
-                            value = Integer.parseInt(border.substring(0,
-                                    border.length() - 1));
-                        } catch (NumberFormatException nfe) {
-                            value = 0;
-                        }
                     } else {
                         valueType = HtmlInsets.TYPE_PIXELS;
-                        try {
-                            value = Integer.parseInt(border);
-                        } catch (NumberFormatException nfe) {
-                            value = 0;
-                        }
                     }
+                    
                     HtmlInsets borderInsets = new HtmlInsets();
                     borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value;
                     borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = valueType;

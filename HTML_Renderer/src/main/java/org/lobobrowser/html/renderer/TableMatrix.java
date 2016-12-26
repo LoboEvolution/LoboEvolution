@@ -241,35 +241,12 @@ public class TableMatrix implements CSSValuesProperties{
 		ROWS.clear();
 		ALL_CELLS.clear();
 		ROW_ELEMENTS.clear();
-		// TODO: Does it need this old-style border?
 		String borderText = this.tableElement.getAttribute(HtmlAttributeProperties.BORDER);
-		int border = 0;
-		if (borderText != null) {
-			try {
-				border = Integer.parseInt(borderText);
-				if (border < 0) {
-					border = 0;
-				}
-			} catch (NumberFormatException nfe) {
-				// ignore
-			}
-		}
+		int border = HtmlValues.getPixelSize(borderText, this.tableElement.getRenderState(), 0);
 		String cellSpacingText = this.tableElement.getAttribute(HtmlAttributeProperties.CELLSPACING);
-		int cellSpacing = 1;
-		if (cellSpacingText != null) {
-			try {
-				// TODO: cellSpacing can be a percentage as well
-				cellSpacing = Integer.parseInt(cellSpacingText);
-				if (cellSpacing < 0) {
-					cellSpacing = 0;
-				}
-			} catch (NumberFormatException nfe) {
-				// ignore
-			}
-		}
+		int cellSpacing = HtmlValues.getPixelSize(cellSpacingText, this.tableElement.getRenderState(), 0);
 		this.cellSpacingX = cellSpacing;
 		this.cellSpacingY = cellSpacing;
-
 		this.tableWidthLength = TableMatrix.getWidthLength(this.tableElement, availWidth);
 
 		this.populateRows();

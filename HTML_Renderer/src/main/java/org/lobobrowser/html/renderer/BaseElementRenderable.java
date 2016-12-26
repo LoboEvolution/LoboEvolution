@@ -726,13 +726,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			}
 			String zIndex = props.getZIndex();
 			if (zIndex != null) {
-				try {
-					this.zIndex = Integer.parseInt(zIndex);
-				} catch (NumberFormatException err) {
-					logger.error(
-							"Unable to parse z-index [" + zIndex + "] in element " + this.modelNode + ".", err);
-					this.zIndex = 0;
-				}
+				this.zIndex = HtmlValues.getPixelSize(zIndex, null, 0);
 			} else {
 				this.zIndex = 0;
 			}

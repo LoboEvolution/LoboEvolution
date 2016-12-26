@@ -52,14 +52,7 @@ HTMLPreElement {
     @Override
     public int getWidth() {
         String widthText = this.getAttribute(HtmlAttributeProperties.WIDTH);
-        if (widthText == null) {
-            return 0;
-        }
-        try {
-            return HtmlValues.getPixelSize(widthText, null, 1);
-        } catch (NumberFormatException nfe) {
-            return 0;
-        }
+        return HtmlValues.getPixelSize(widthText, null, 1);
     }
 
     /*

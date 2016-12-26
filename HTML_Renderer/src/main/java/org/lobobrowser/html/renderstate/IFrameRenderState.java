@@ -131,24 +131,15 @@ public class IFrameRenderState extends StyleSheetRenderState {
             }
             HTMLElementImpl element = this.element;
             if (element != null) {
-                String border = element
-                        .getAttribute(HtmlAttributeProperties.FRAMEBORDER);
+                String border = element.getAttribute(HtmlAttributeProperties.FRAMEBORDER);
+                int value = 0;
                 if (border != null) {
                     border = border.trim();
+                    value = HtmlValues.getPixelSize(border, this, 0);
                 }
-                int value;
-                if (border != null) {
-                    try {
-                        value = Integer.parseInt(border);
-                    } catch (NumberFormatException nfe) {
-                        value = 0;
-                    }
-                } else {
-                    value = 1;
-                }
+                
                 HtmlInsets borderInsets = new HtmlInsets();
-                borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = (value != 0 ? 1
-                        : 0);
+                borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = (value != 0 ? 1 : 0);
                 borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = HtmlInsets.TYPE_PIXELS;
                 binfo.setInsets(borderInsets);
                 if (binfo.getTopColor() == null) {

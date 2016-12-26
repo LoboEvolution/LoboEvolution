@@ -29,6 +29,7 @@ import org.lobobrowser.html.domimpl.HTMLTableRowElementImpl;
 import org.lobobrowser.html.info.BackgroundInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlInsets;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderThreadState;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.html.HTMLElement;
@@ -260,28 +261,18 @@ public class TableCellRenderState extends DisplayRenderState {
                 // Return without caching
                 return null;
             }
-            String cellPaddingText = tableElement
-                    .getAttribute(HtmlAttributeProperties.CELLPADDING);
+            String cellPaddingText = tableElement.getAttribute(HtmlAttributeProperties.CELLPADDING);
             if ((cellPaddingText != null) && (cellPaddingText.length() != 0)) {
                 cellPaddingText = cellPaddingText.trim();
-                int cellPadding;
+                int cellPadding = HtmlValues.getPixelSize(cellPaddingText, this, 0);
                 int cellPaddingType;
+                
                 if (cellPaddingText.endsWith("%")) {
                     cellPaddingType = HtmlInsets.TYPE_PERCENT;
-                    try {
-                        cellPadding = Integer.parseInt(cellPaddingText
-                                .substring(0, cellPaddingText.length() - 1));
-                    } catch (NumberFormatException nfe) {
-                        cellPadding = 0;
-                    }
                 } else {
                     cellPaddingType = HtmlInsets.TYPE_PIXELS;
-                    try {
-                        cellPadding = Integer.parseInt(cellPaddingText);
-                    } catch (NumberFormatException nfe) {
-                        cellPadding = 0;
-                    }
                 }
+                
                 insets = new HtmlInsets();
                 insets.top = insets.left = insets.right = insets.bottom = cellPadding;
                 insets.topType = insets.leftType = insets.rightType = insets.bottomType = cellPaddingType;

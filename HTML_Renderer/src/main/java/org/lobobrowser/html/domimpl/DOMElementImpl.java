@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.Objects;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.w3c.html.HTMLMenuElement;
@@ -376,11 +377,8 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the tab index
 	 */
 	public int getTabIndex() {
-		try {
-			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.TABINDEX));
-		} catch (Exception err) {
-			return 0;
-		}
+		String valueText = this.getAttribute(HtmlAttributeProperties.TABINDEX);
+        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/**

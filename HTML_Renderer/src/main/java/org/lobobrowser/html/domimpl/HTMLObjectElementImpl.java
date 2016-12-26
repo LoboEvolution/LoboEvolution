@@ -22,6 +22,7 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.js.Window;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLFormElement;
 import org.lobobrowser.w3c.html.HTMLObjectElement;
 import org.lobobrowser.w3c.html.ValidityState;
@@ -297,11 +298,8 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public int getHspace() {
-		try {
-			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.HSPACE));
-		} catch (Exception err) {
-			return 0;
-		}
+		String valueText = this.getAttribute(HtmlAttributeProperties.HSPACE);
+        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -321,11 +319,8 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public int getTabIndex() {
-		try {
-			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.TABINDEX));
-		} catch (Exception err) {
-			return 0;
-		}
+		String valueText = this.getAttribute(HtmlAttributeProperties.TABINDEX);
+        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -355,11 +350,8 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public int getVspace() {
-		try {
-			return Integer.parseInt(this.getAttribute(HtmlAttributeProperties.VSPACE));
-		} catch (Exception err) {
-			return 0;
-		}
+		String valueText = this.getAttribute(HtmlAttributeProperties.VSPACE);
+        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*

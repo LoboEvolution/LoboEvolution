@@ -48,6 +48,7 @@ import org.lobobrowser.html.renderstate.StyleSheetRenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.CSS2PropertiesContext;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.LocalCSS2Properties;
 import org.lobobrowser.html.style.StyleSheetAggregator;
 import org.lobobrowser.html.style.selectors.SelectorMatcher;
@@ -349,13 +350,8 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 * @return the attribute as int
 	 */
 	protected int getAttributeAsInt(String name, int defaultValue) {
-		String value = this.getAttribute(name);
-		try {
-			return Integer.parseInt(value);
-		} catch (Exception err) {
-			logger.error("Bad integer", err);
-			return defaultValue;
-		}
+		String valueText = this.getAttribute(name);
+        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/**
