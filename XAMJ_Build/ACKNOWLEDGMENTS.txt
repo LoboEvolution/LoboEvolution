@@ -1,8 +1,6 @@
 The following open source externals are used by this project:
 
 * [izforge.com] IzPack Installer That's how we build the Warrior installer. 
-
-* [http://sourceforge.net/projects/jregistrykey/] jRegistryKey.
   
 * [https://github.com/mozilla/rhino] Rhino - Javascript for Java .
   
