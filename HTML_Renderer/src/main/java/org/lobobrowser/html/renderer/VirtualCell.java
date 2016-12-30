@@ -132,7 +132,7 @@ public class VirtualCell implements CSSValuesProperties{
 					heightText = el.getCurrentStyle().getHeight();
 				}
 			}
-        	length = heightText == null ? new HtmlLength("1px") : new HtmlLength(heightText);
+        	length = heightText == null ? null : new HtmlLength(heightText);
         } catch (Exception err) {
         	err.printStackTrace();
             length = null;
@@ -159,7 +159,7 @@ public class VirtualCell implements CSSValuesProperties{
 					widthText = el.getCurrentStyle().getWidth();
 				}
 			}
-            length = widthText == null ? new HtmlLength("1px") : new HtmlLength(widthText);
+            length = widthText == null ? null : new HtmlLength(widthText);
         } catch (Exception err) {
             length = null;
         }
