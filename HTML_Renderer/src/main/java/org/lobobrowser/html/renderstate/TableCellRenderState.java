@@ -250,33 +250,33 @@ public class TableCellRenderState extends DisplayRenderState {
      */
     @Override
     public HtmlInsets getPaddingInsets() {
-        HtmlInsets insets = this.paddingInsets;
+    	
+    	HtmlInsets insets = this.paddingInsets;
         if (insets != INVALID_INSETS) {
             return insets;
-        }
-        insets = super.getPaddingInsets();
-        if (insets == null) {
+        }else{
+        	
             HTMLTableElement tableElement = this.getTableElement();
             if (tableElement == null) {
-                // Return without caching
                 return null;
             }
+            
             String cellPaddingText = tableElement.getAttribute(HtmlAttributeProperties.CELLPADDING);
-            if ((cellPaddingText != null) && (cellPaddingText.length() != 0)) {
+            if (cellPaddingText != null && cellPaddingText.length() != 0) {
                 cellPaddingText = cellPaddingText.trim();
                 int cellPadding = HtmlValues.getPixelSize(cellPaddingText, this, 0);
-                int cellPaddingType;
+                int cellPaddingType = HtmlInsets.TYPE_PIXELS;
                 
                 if (cellPaddingText.endsWith("%")) {
                     cellPaddingType = HtmlInsets.TYPE_PERCENT;
-                } else {
-                    cellPaddingType = HtmlInsets.TYPE_PIXELS;
                 }
                 
                 insets = new HtmlInsets();
                 insets.top = insets.left = insets.right = insets.bottom = cellPadding;
                 insets.topType = insets.leftType = insets.rightType = insets.bottomType = cellPaddingType;
-            }
+			} else {
+				insets = super.getPaddingInsets();
+			}
         }
         this.paddingInsets = insets;
         return insets;
