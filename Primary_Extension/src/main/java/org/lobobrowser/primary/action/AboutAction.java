@@ -1,6 +1,6 @@
 /*
     GNU GENERAL LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2016 Lobo Evolution
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2017 Lobo Evolution
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public
@@ -60,7 +60,7 @@ public class AboutAction extends ActionPool {
 	public void actionPerformed(ActionEvent e) {
 		String name = window.getUserAgent().getName();
 		String userAgent = window.getUserAgent().getNameAndVersion();
-		window.getTopFrame().alert("This is " + userAgent + ", a pure Java web browser.\r\n" + "Copyright (c) 2016 The "
+		window.getTopFrame().alert("This is " + userAgent + ", a pure Java web browser.\r\n" + "Copyright (c) 2017 The "
 				+ name + " Evolution.\r\n" + window.getUserAgent().getInfoUrl());
 
 	}
