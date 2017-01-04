@@ -33,10 +33,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.info.FontInfo;
 import org.lobobrowser.html.renderstate.RenderState;
@@ -132,14 +130,44 @@ public class HtmlValues implements CSSValuesProperties{
 	 */
 	public static HtmlInsets getMarginInsets(CSS2Properties cssProperties, RenderState renderState) {
 		HtmlInsets insets = null;
-		String topText = cssProperties.getMarginTop();
-		insets = updateTopInset(insets, topText, renderState);
-		String leftText = cssProperties.getMarginLeft();
-		insets = updateLeftInset(insets, leftText, renderState);
-		String bottomText = cssProperties.getMarginBottom();
-		insets = updateBottomInset(insets, bottomText, renderState);
-		String rightText = cssProperties.getMarginRight();
-		insets = updateRightInset(insets, rightText, renderState);
+		String marginText = cssProperties.getMargin();
+		if (marginText != null) {
+			String[] mg = marginText.split(" ");
+			int sizeMargin = mg.length;
+			switch (sizeMargin) {
+			case 4:
+				insets = updateTopInset(insets, mg[0], renderState);
+				insets = updateRightInset(insets, mg[1], renderState);
+				insets = updateBottomInset(insets, mg[2], renderState);
+				insets = updateLeftInset(insets, mg[3], renderState);
+				break;
+			case 3:
+				insets = updateTopInset(insets, mg[0], renderState);
+				insets = updateRightInset(insets, mg[1], renderState);
+				insets = updateBottomInset(insets, mg[2], renderState);
+				break;
+			case 2:
+				insets = updateTopInset(insets, mg[0], renderState);
+				insets = updateRightInset(insets, mg[1], renderState);
+				break;
+			case 1:
+				insets = updateTopInset(insets, mg[0], renderState);
+				insets = updateRightInset(insets, mg[0], renderState);
+				insets = updateBottomInset(insets, mg[0], renderState);
+				insets = updateLeftInset(insets, mg[0], renderState);
+				break;
+			}
+		} else {
+
+			String topText = cssProperties.getMarginTop();
+			insets = updateTopInset(insets, topText, renderState);
+			String leftText = cssProperties.getMarginLeft();
+			insets = updateLeftInset(insets, leftText, renderState);
+			String bottomText = cssProperties.getMarginBottom();
+			insets = updateBottomInset(insets, bottomText, renderState);
+			String rightText = cssProperties.getMarginRight();
+			insets = updateRightInset(insets, rightText, renderState);
+		}
 		return insets;
 	}
 
@@ -154,14 +182,43 @@ public class HtmlValues implements CSSValuesProperties{
 	 */
 	public static HtmlInsets getPaddingInsets(CSS2Properties cssProperties, RenderState renderState) {
 		HtmlInsets insets = null;
-		String topText = cssProperties.getPaddingTop();
-		insets = updateTopInset(insets, topText, renderState);
-		String leftText = cssProperties.getPaddingLeft();
-		insets = updateLeftInset(insets, leftText, renderState);
-		String bottomText = cssProperties.getPaddingBottom();
-		insets = updateBottomInset(insets, bottomText, renderState);
-		String rightText = cssProperties.getPaddingRight();
-		insets = updateRightInset(insets, rightText, renderState);
+		String paddingText = cssProperties.getPadding();
+		if (paddingText != null) {
+			String[] pd = paddingText.split(" ");
+			int sizePadding = pd.length;
+			switch (sizePadding) {
+			case 4:
+				insets = updateTopInset(insets, pd[0], renderState);
+				insets = updateRightInset(insets, pd[1], renderState);
+				insets = updateBottomInset(insets, pd[2], renderState);
+				insets = updateLeftInset(insets, pd[3], renderState);
+				break;
+			case 3:
+				insets = updateTopInset(insets, pd[0], renderState);
+				insets = updateRightInset(insets, pd[1], renderState);
+				insets = updateBottomInset(insets, pd[2], renderState);
+				break;
+			case 2:
+				insets = updateTopInset(insets, pd[0], renderState);
+				insets = updateRightInset(insets, pd[1], renderState);
+				break;
+			case 1:
+				insets = updateTopInset(insets, pd[0], renderState);
+				insets = updateRightInset(insets, pd[0], renderState);
+				insets = updateBottomInset(insets, pd[0], renderState);
+				insets = updateLeftInset(insets, pd[0], renderState);
+				break;
+			}
+		}else{
+			String topText = cssProperties.getPaddingTop();
+			insets = updateTopInset(insets, topText, renderState);
+			String leftText = cssProperties.getPaddingLeft();
+			insets = updateLeftInset(insets, leftText, renderState);
+			String bottomText = cssProperties.getPaddingBottom();
+			insets = updateBottomInset(insets, bottomText, renderState);
+			String rightText = cssProperties.getPaddingRight();
+			insets = updateRightInset(insets, rightText, renderState);	
+		}
 		return insets;
 	}
 
@@ -179,21 +236,51 @@ public class HtmlValues implements CSSValuesProperties{
 	public static HtmlInsets getBorderInsets(Insets borderStyles, CSS2Properties cssProperties,
 			RenderState renderState) {
 		HtmlInsets insets = null;
-		if (borderStyles.top != HtmlValues.BORDER_STYLE_NONE) {
-			String topText = cssProperties.getBorderTopWidth();
-			insets = updateTopInset(insets, topText, renderState);
-		}
-		if (borderStyles.left != HtmlValues.BORDER_STYLE_NONE) {
-			String leftText = cssProperties.getBorderLeftWidth();
-			insets = updateLeftInset(insets, leftText, renderState);
-		}
-		if (borderStyles.bottom != HtmlValues.BORDER_STYLE_NONE) {
-			String bottomText = cssProperties.getBorderBottomWidth();
-			insets = updateBottomInset(insets, bottomText, renderState);
-		}
-		if (borderStyles.right != HtmlValues.BORDER_STYLE_NONE) {
-			String rightText = cssProperties.getBorderRightWidth();
-			insets = updateRightInset(insets, rightText, renderState);
+		String borderText = cssProperties.getBorder();
+		if (borderText != null) {
+			String[] br = borderText.split(" ");
+			int sizeBorder = br.length;
+			switch (sizeBorder) {
+			case 4:
+				insets = updateTopInset(insets, br[0], renderState);
+				insets = updateRightInset(insets, br[1], renderState);
+				insets = updateBottomInset(insets, br[2], renderState);
+				insets = updateLeftInset(insets, br[3], renderState);
+				break;
+			case 3:
+				insets = updateTopInset(insets, br[0], renderState);
+				insets = updateRightInset(insets, br[1], renderState);
+				insets = updateBottomInset(insets, br[2], renderState);
+				break;
+			case 2:
+				insets = updateTopInset(insets, br[0], renderState);
+				insets = updateRightInset(insets, br[1], renderState);
+				break;
+			case 1:
+				insets = updateTopInset(insets, br[0], renderState);
+				insets = updateRightInset(insets, br[0], renderState);
+				insets = updateBottomInset(insets, br[0], renderState);
+				insets = updateLeftInset(insets, br[0], renderState);
+				break;
+			}
+		} else {
+
+			if (borderStyles.top != HtmlValues.BORDER_STYLE_NONE) {
+				String topText = cssProperties.getBorderTopWidth();
+				insets = updateTopInset(insets, topText, renderState);
+			}
+			if (borderStyles.left != HtmlValues.BORDER_STYLE_NONE) {
+				String leftText = cssProperties.getBorderLeftWidth();
+				insets = updateLeftInset(insets, leftText, renderState);
+			}
+			if (borderStyles.bottom != HtmlValues.BORDER_STYLE_NONE) {
+				String bottomText = cssProperties.getBorderBottomWidth();
+				insets = updateBottomInset(insets, bottomText, renderState);
+			}
+			if (borderStyles.right != HtmlValues.BORDER_STYLE_NONE) {
+				String rightText = cssProperties.getBorderRightWidth();
+				insets = updateRightInset(insets, rightText, renderState);
+			}
 		}
 		return insets;
 	}
