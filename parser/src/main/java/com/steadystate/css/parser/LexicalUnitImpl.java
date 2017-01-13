@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2016 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2017 David Schweinsberg.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -348,7 +348,7 @@ public class LexicalUnitImpl extends LocatableImpl implements LexicalUnit, CSSFo
 
                 // replace line breaks
                 String value = getStringValue();
-                value = value.replace("\n", "\\a ").replace("\r", "\\d ");
+                value = value.replace("\n", "\\A ").replace("\r", "\\D ");
                 sb.append(value);
 
                 sb.append("\"");

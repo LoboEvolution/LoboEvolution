@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2016 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2017 David Schweinsberg.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,6 +61,7 @@ import com.steadystate.css.userdata.UserDataConstants;
  */
 public class CSSOMParser {
 
+    private static final Object LOCK = new Object();
     private static final String DEFAULT_PARSER = "com.steadystate.css.parser.SACParserCSS21";
 
     private static String LastFailed_;
@@ -79,7 +80,7 @@ public class CSSOMParser {
      * @param parser the SAC Parser
      */
     public CSSOMParser(final Parser parser) {
-        synchronized (DEFAULT_PARSER) {
+        synchronized (LOCK) {
             if (null != parser) {
                 System.setProperty("org.w3c.css.sac.parser", parser.getClass().getCanonicalName());
                 parser_ = parser;
@@ -447,8 +448,7 @@ public class CSSOMParser {
 
         public void property(final String name, final LexicalUnit value, final boolean important,
                                 final Locator locator) {
-            final CSSStyleDeclarationImpl decl =
-                (CSSStyleDeclarationImpl) nodeStack_.peek();
+            final CSSStyleDeclarationImpl decl = (CSSStyleDeclarationImpl) nodeStack_.peek();
             try {
                 final Property property = new Property(name, new CSSValueImpl(value), important);
                 addLocator(locator, property);

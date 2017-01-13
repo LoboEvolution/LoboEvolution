@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2016 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2017 David Schweinsberg.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,9 +64,9 @@ abstract class AbstractSACParser implements Parser {
     private ConditionFactory conditionFactory_;
     private ResourceBundle sacParserMessages_;
 
-    private static final String NUM_CHARS = "0123456789.";
+    private boolean ieStarHackAccepted_;
 
-    protected abstract Token getToken();
+    private static final String NUM_CHARS = "0123456789.";
 
     protected DocumentHandler getDocumentHandler() {
         if (documentHandler_ == null) {
@@ -92,6 +92,14 @@ abstract class AbstractSACParser implements Parser {
 
     protected InputSource getInputSource() {
         return source_;
+    }
+
+    public void setIeStarHackAccepted(final boolean accepted) {
+        ieStarHackAccepted_ = accepted;
+    }
+
+    public boolean isIeStarHackAccepted() {
+        return ieStarHackAccepted_;
     }
 
     public void setLocale(final Locale locale) {
@@ -142,10 +150,6 @@ abstract class AbstractSACParser implements Parser {
             }
         }
         return sacParserMessages_;
-    }
-
-    public Locator getLocator() {
-        return createLocator(getToken());
     }
 
     protected Locator createLocator(final Token t) {

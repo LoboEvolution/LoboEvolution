@@ -199,17 +199,21 @@ public interface SACParserCSS3Constants {
   /** RegularExpression Id. */
   int DIMENSION = 97;
   /** RegularExpression Id. */
-  int URI = 98;
+  int H_PLACEHOLDER = 98;
   /** RegularExpression Id. */
-  int FUNCTION_NOT = 99;
+  int UNICODE_RANGE = 99;
   /** RegularExpression Id. */
-  int FUNCTION_LANG = 100;
+  int URI = 100;
   /** RegularExpression Id. */
-  int FUNCTION = 101;
+  int FUNCTION_NOT = 101;
   /** RegularExpression Id. */
-  int ATKEYWORD = 102;
+  int FUNCTION_LANG = 102;
   /** RegularExpression Id. */
-  int UNKNOWN = 103;
+  int FUNCTION = 103;
+  /** RegularExpression Id. */
+  int ATKEYWORD = 104;
+  /** RegularExpression Id. */
+  int UNKNOWN = 105;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -316,12 +320,15 @@ public interface SACParserCSS3Constants {
     "<RESOLUTION_DPCM>",
     "<PERCENTAGE>",
     "<DIMENSION>",
+    "<H_PLACEHOLDER>",
+    "<UNICODE_RANGE>",
     "<URI>",
     "<FUNCTION_NOT>",
     "<FUNCTION_LANG>",
     "<FUNCTION>",
     "<ATKEYWORD>",
     "<UNKNOWN>",
+    "\"progid:\"",
   };
 
 }
