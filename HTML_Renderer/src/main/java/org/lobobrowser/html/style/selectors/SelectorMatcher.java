@@ -20,7 +20,14 @@
  */
 package org.lobobrowser.html.style.selectors;
 
+import java.util.Set;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
+import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.w3c.dom.Attr;
+import org.w3c.dom.NamedNodeMap;
 
 /**
  * The Class SelectorMatcher.
@@ -86,8 +93,106 @@ public class SelectorMatcher {
 	
 	/** The empty. */
 	public final static String EMPTY = "empty";
+	
+	/** The lang. */
+	public final static String LANG = "lang";
+	
+	/** The Constant ANCESTOR. */
+	public final static int ANCESTOR = 0;
 
-	public SelectorMatcher() {
+	/** The Constant PARENT. */
+	public final static int PARENT = 1;
+
+	/** The Constant PRECEEDING_SIBLING. */
+	public final static int PRECEEDING_SIBLING = 2;
+
+	/** The simple selector text. */
+	private String simpleSelectorText;
+
+	/** The pseudo element. */
+	private String pseudoElement;
+
+	/** The selector type. */
+	private int selectorType;
+
+	public SelectorMatcher() {}
+	
+	/**
+	 * Instantiates a new simple selector.
+	 *
+	 * @param simpleSelectorText
+	 *            Simple selector text in lower case.
+	 * @param pseudoElement
+	 *            The pseudo-element if any.
+	 */
+	public SelectorMatcher(String simpleSelectorText, String pseudoElement) {
+		this.simpleSelectorText = simpleSelectorText;
+		this.pseudoElement = pseudoElement;
+		this.selectorType = ANCESTOR;
+	}
+
+	/**
+	 * Matches.
+	 *
+	 * @param element
+	 *            the element
+	 * @return true, if successful
+	 */
+	public final boolean matches(HTMLElementImpl element) {
+		Set<String> names = element.getPseudoNames();
+		if (names == null) {
+			return this.pseudoElement == null;
+		} else {
+			String pe = this.pseudoElement;
+			return (pe == null) || names.contains(pe);
+		}
+	}
+
+	/**
+	 * Matches.
+	 *
+	 * @param names
+	 *            the names
+	 * @return true, if successful
+	 */
+	public final boolean matches(Set names) {
+		if (names == null) {
+			return this.pseudoElement == null;
+		} else {
+			String pe = this.pseudoElement;
+			
+			if (pe != null && pe.contains("(")) 
+				pe = pe.substring(0, pe.indexOf("("));
+			
+			return (pe == null) || names.contains(pe);
+		}
+	}
+
+	/**
+	 * Matches.
+	 *
+	 * @param pseudoName
+	 *            the pseudo name
+	 * @return true, if successful
+	 */
+	public final boolean matches(String pseudoName) {
+		if (pseudoName == null) {
+			return this.pseudoElement == null;
+		} else {
+			String pe = this.pseudoElement;
+			return (pe == null) || pseudoName.equals(pe);
+		}
+	}
+
+	/**
+	 * Checks for pseudo name.
+	 *
+	 * @param pseudoName
+	 *            the pseudo name
+	 * @return true, if successful
+	 */
+	public final boolean hasPseudoName(String pseudoName) {
+		return pseudoName.equals(this.pseudoElement);
 	}
 
 	/**
@@ -100,7 +205,8 @@ public class SelectorMatcher {
 	 * @return {@code true} or {@code false}
 	 */
 	public boolean matchesPseudoClassSelector(String selector, DOMNodeImpl node) {
-
+		
+		String select = selector;
 		if (selector != null && selector.contains("(")) {
 			selector = selector.substring(0, selector.indexOf("("));
 		} else if (selector == null) {
@@ -129,6 +235,19 @@ public class SelectorMatcher {
 		case NTH_LAST_CHILD:
 		case NTH_OF_TYPE:
 		case NTH_LAST_OF_TYPE:
+			return false;
+		case LANG:
+			
+			String value = select.replace("lang", "").replace("(","").replace(")","").trim();
+			NamedNodeMap attributes = node.getAttributes();
+			
+			for (int s = 0; s < attributes.getLength(); s++) {
+                Attr attr = (Attr) attributes.item(s);
+                if(LANG.equals(attr.getName()) && value.equals(attr.getValue())){
+                	return true;
+                }
+			 }
+              
 			return false;
 		default:
 			return false;
@@ -229,8 +348,7 @@ public class SelectorMatcher {
 	 * @return {@code true} or {@code false}
 	 */
 	private static boolean isEmpty(DOMNodeImpl node) {
-		for (DOMNodeImpl child = (DOMNodeImpl) node.getFirstChild(); child != null; child = (DOMNodeImpl) child
-				.getNextSibling()) {
+		for (DOMNodeImpl child = (DOMNodeImpl) node.getFirstChild(); child != null; child = (DOMNodeImpl) child.getNextSibling()) {
 			switch (child.getNodeType()) {
 			case DOMNodeImpl.ELEMENT_NODE:
 				return false;
@@ -242,5 +360,62 @@ public class SelectorMatcher {
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Gets the selector type.
+	 *
+	 * @return the selector type
+	 */
+	public int getSelectorType() {
+		return selectorType;
+	}
+
+	/**
+	 * Sets the selector type.
+	 *
+	 * @param selectorType
+	 *            the new selector type
+	 */
+	public void setSelectorType(int selectorType) {
+		this.selectorType = selectorType;
+	}
+
+	/**
+	 * Gets the simple selector text.
+	 *
+	 * @return the simple selector text
+	 */
+	public String getSimpleSelectorText() {
+		return simpleSelectorText;
+	}
+
+	/**
+	 * Sets the simple selector text.
+	 *
+	 * @param simpleSelectorText
+	 *            the new simple selector text
+	 */
+	public void setSimpleSelectorText(String simpleSelectorText) {
+		this.simpleSelectorText = simpleSelectorText;
+	}
+
+	/**
+	 * Gets the pseudo element.
+	 *
+	 * @return the pseudo element
+	 */
+	public String getPseudoElement() {
+		return pseudoElement;
+	}
+
+	/**
+	 * Sets the pseudo element.
+	 *
+	 * @param pseudoElement
+	 *            the new pseudo element
+	 */
+	public void setPseudoElement(String pseudoElement) {
+		this.pseudoElement = pseudoElement;
 	}
 }
