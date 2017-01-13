@@ -35,7 +35,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import org.apache.logging.log4j.Level;
 
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
@@ -612,6 +611,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		pnset.add(SelectorMatcher.HOVER);
 		pnset.add(SelectorMatcher.ROOT);
 		pnset.add(SelectorMatcher.EMPTY);
+		pnset.add(SelectorMatcher.LANG);
 		return pnset;
 	}
 

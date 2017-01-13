@@ -24,8 +24,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.style.selectors.SimpleSelector;
+import org.lobobrowser.html.style.selectors.SelectorMatcher;
 import org.w3c.dom.css.CSSStyleRule;
 
 /**
@@ -35,24 +37,28 @@ public class StyleRuleInfo implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 9165715430607111555L;
+	
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(StyleRuleInfo.class.getName());
+
 
 	/** The style rule. */
 	private CSSStyleRule styleRule;
 
 	/** The ancestor selectors. */
-	private final ArrayList<SimpleSelector> ancestorSelectors;
+	private final ArrayList<SelectorMatcher> ancestorSelectors;
 
 	/**
 	 * Instantiates a new style rule info.
 	 *
-	 * @param simpleSelectors
-	 *            A collection of SimpleSelector's.
+	 * @param SelectorMatchers
+	 *            A collection of SelectorMatcher's.
 	 * @param rule
 	 *            A CSS rule.
 	 */
-	public StyleRuleInfo(ArrayList<SimpleSelector> simpleSelectors, CSSStyleRule rule) {
+	public StyleRuleInfo(ArrayList<SelectorMatcher> SelectorMatchers, CSSStyleRule rule) {
 		super();
-		ancestorSelectors = simpleSelectors;
+		ancestorSelectors = SelectorMatchers;
 		setStyleRule(rule);
 	}
 
@@ -69,20 +75,20 @@ public class StyleRuleInfo implements Serializable {
 	 */
 	public final boolean affectedByPseudoNameInAncestor(HTMLElementImpl element, HTMLElementImpl ancestor,
 			String pseudoName) {
-		ArrayList<SimpleSelector> as = this.ancestorSelectors;
+		ArrayList<SelectorMatcher> as = this.ancestorSelectors;
 		HTMLElementImpl currentElement = element;
 		int size = as.size();
 		boolean first = true;
 		for (int i = size; --i >= 0;) {
-			SimpleSelector simpleSelector = as.get(i);
+			SelectorMatcher selectorMatcher = as.get(i);
 			if (first) {
 				if (ancestor == element) {
-					return simpleSelector.hasPseudoName(pseudoName);
+					return selectorMatcher.hasPseudoName(pseudoName);
 				}
 				first = false;
 				continue;
 			}
-			String selectorText = simpleSelector.getSimpleSelectorText();
+			String selectorText = selectorMatcher.getSimpleSelectorText();
 			int dotIdx = selectorText.indexOf('.');
 			HTMLElementImpl newElement;
 			if (dotIdx != -1) {
@@ -105,7 +111,7 @@ public class StyleRuleInfo implements Serializable {
 			}
 			currentElement = newElement;
 			if (currentElement == ancestor) {
-				return simpleSelector.hasPseudoName(pseudoName);
+				return selectorMatcher.hasPseudoName(pseudoName);
 			}
 		}
 		return false;
@@ -121,31 +127,32 @@ public class StyleRuleInfo implements Serializable {
 	 * @return true, if is selector match
 	 */
 	public final boolean isSelectorMatch(HTMLElementImpl element, Set pseudoNames) {
-		ArrayList<SimpleSelector> as = this.ancestorSelectors;
+		ArrayList<SelectorMatcher> as = this.ancestorSelectors;
 		HTMLElementImpl currentElement = element;
 		int size = as.size();
 		boolean first = true;
 		for (int i = size; --i >= 0;) {
-			SimpleSelector simpleSelector = as.get(i);
+			SelectorMatcher selectorMatcher = as.get(i);
 			if (first) {
-				if (!simpleSelector.matches(pseudoNames)) {
+				if (!selectorMatcher.matches(pseudoNames)) {
+					logger.error("1");
 					return false;
 				}
 				first = false;
 				continue;
 			}
-			String selectorText = simpleSelector.getSimpleSelectorText();
+			String selectorText = selectorMatcher.getSimpleSelectorText();
 			int dotIdx = selectorText.indexOf('.');
-			int selectorType = simpleSelector.getSelectorType();
+			int selectorType = selectorMatcher.getSelectorType();
 			HTMLElementImpl priorElement;
 			if (dotIdx != -1) {
 				String elemtl = selectorText.substring(0, dotIdx);
 				String classtl = selectorText.substring(dotIdx + 1);
-				if (selectorType == SimpleSelector.ANCESTOR) {
+				if (selectorType == SelectorMatcher.ANCESTOR) {
 					priorElement = currentElement.getAncestorWithClass(elemtl, classtl);
-				} else if (selectorType == SimpleSelector.PARENT) {
+				} else if (selectorType == SelectorMatcher.PARENT) {
 					priorElement = currentElement.getParentWithClass(elemtl, classtl);
-				} else if (selectorType == SimpleSelector.PRECEEDING_SIBLING) {
+				} else if (selectorType == SelectorMatcher.PRECEEDING_SIBLING) {
 					priorElement = currentElement.getPreceedingSiblingWithClass(elemtl, classtl);
 				} else {
 					throw new IllegalStateException("selectorType=" + selectorType);
@@ -155,22 +162,22 @@ public class StyleRuleInfo implements Serializable {
 				if (poundIdx != -1) {
 					String elemtl = selectorText.substring(0, poundIdx);
 					String idtl = selectorText.substring(poundIdx + 1);
-					if (selectorType == SimpleSelector.ANCESTOR) {
+					if (selectorType == SelectorMatcher.ANCESTOR) {
 						priorElement = currentElement.getAncestorWithId(elemtl, idtl);
-					} else if (selectorType == SimpleSelector.PARENT) {
+					} else if (selectorType == SelectorMatcher.PARENT) {
 						priorElement = currentElement.getParentWithId(elemtl, idtl);
-					} else if (selectorType == SimpleSelector.PRECEEDING_SIBLING) {
+					} else if (selectorType == SelectorMatcher.PRECEEDING_SIBLING) {
 						priorElement = currentElement.getPreceedingSiblingWithId(elemtl, idtl);
 					} else {
 						throw new IllegalStateException("selectorType=" + selectorType);
 					}
 				} else {
 					String elemtl = selectorText;
-					if (selectorType == SimpleSelector.ANCESTOR) {
+					if (selectorType == SelectorMatcher.ANCESTOR) {
 						priorElement = currentElement.getAncestor(elemtl);
-					} else if (selectorType == SimpleSelector.PARENT) {
+					} else if (selectorType == SelectorMatcher.PARENT) {
 						priorElement = currentElement.getParent(elemtl);
-					} else if (selectorType == SimpleSelector.PRECEEDING_SIBLING) {
+					} else if (selectorType == SelectorMatcher.PRECEEDING_SIBLING) {
 						priorElement = currentElement.getPreceedingSibling(elemtl);
 					} else {
 						throw new IllegalStateException("selectorType=" + selectorType);
@@ -178,9 +185,11 @@ public class StyleRuleInfo implements Serializable {
 				}
 			}
 			if (priorElement == null) {
+				logger.error("2");
 				return false;
 			}
-			if (!simpleSelector.matches(priorElement)) {
+			if (!selectorMatcher.matches(priorElement)) {
+				logger.error("3");
 				return false;
 			}
 			currentElement = priorElement;

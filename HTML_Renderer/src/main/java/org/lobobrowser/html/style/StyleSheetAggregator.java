@@ -35,12 +35,10 @@ import java.util.StringTokenizer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.StyleRuleInfo;
 import org.lobobrowser.html.style.selectors.SelectorMatcher;
-import org.lobobrowser.html.style.selectors.SimpleSelector;
 import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
@@ -167,51 +165,52 @@ public class StyleSheetAggregator {
 			StringTokenizer commaTok = new StringTokenizer(selectorList, ",");
 			while (commaTok.hasMoreTokens()) {
 				String selectorPart = commaTok.nextToken().toLowerCase();
-				ArrayList<SimpleSelector> simpleSelectors = null;
+				ArrayList<SelectorMatcher> selectorMatchers = null;
 				String lastSelectorText = null;
 				StringTokenizer tok = new StringTokenizer(selectorPart, " \t\r\n");
 				if (tok.hasMoreTokens()) {
-					simpleSelectors = new ArrayList<SimpleSelector>();
-					SimpleSelector prevSelector = null;
+					selectorMatchers = new ArrayList<SelectorMatcher>();
+					SelectorMatcher prevSelector = null;
 					SELECTOR_FOR: for (;;) {
 						String token = tok.nextToken();
 						if (">".equals(token)) {
 							if (prevSelector != null) {
-								prevSelector.setSelectorType(SimpleSelector.PARENT);
+								prevSelector.setSelectorType(SelectorMatcher.PARENT);
 							}
 							continue SELECTOR_FOR;
 						} else if ("+".equals(token)) {
 							if (prevSelector != null) {
-								prevSelector.setSelectorType(SimpleSelector.PRECEEDING_SIBLING);
+								prevSelector.setSelectorType(SelectorMatcher.PRECEEDING_SIBLING);
 							}
 							continue SELECTOR_FOR;
 						}
 						int colonIdx = token.indexOf(':');
-						String simpleSelectorText = colonIdx == -1 ? token : token.substring(0, colonIdx);
+						String selectorText = colonIdx == -1 ? token : token.substring(0, colonIdx);
 						pseudoElement = colonIdx == -1 ? null : token.substring(colonIdx + 1);
-						prevSelector = new SimpleSelector(simpleSelectorText, pseudoElement);
-						simpleSelectors.add(prevSelector);
+						prevSelector = new SelectorMatcher(selectorText, pseudoElement);
+						selectorMatchers.add(prevSelector);
 						if (!tok.hasMoreTokens()) {
-							lastSelectorText = simpleSelectorText;
+							lastSelectorText = selectorText;
 							break;
 						}
 					}
 				}
+				
 				if (lastSelectorText != null) {
 					int dotIdx = lastSelectorText.indexOf('.');
 					if (dotIdx != -1) {
 						String elemtl = lastSelectorText.substring(0, dotIdx);
 						String classtl = lastSelectorText.substring(dotIdx + 1);
-						this.addClassRule(elemtl, classtl, sr, simpleSelectors);
+						this.addClassRule(elemtl, classtl, sr, selectorMatchers);
 					} else {
 						int poundIdx = lastSelectorText.indexOf('#');
 						if (poundIdx != -1) {
 							String elemtl = lastSelectorText.substring(0, poundIdx);
 							String idtl = lastSelectorText.substring(poundIdx + 1);
-							this.addIdRule(elemtl, idtl, sr, simpleSelectors);
+							this.addIdRule(elemtl, idtl, sr, selectorMatchers);
 						} else {
 							String elemtl = lastSelectorText;
-							this.addElementRule(elemtl, sr, simpleSelectors);
+							this.addElementRule(elemtl, sr, selectorMatchers);
 						}
 					}
 				}
@@ -256,7 +255,7 @@ public class StyleSheetAggregator {
 					attributeValue = "-";
 					attributeOperator = SelectorMatcher.OP_ALL;
 				}
-				this.addAttributeRule(htmlElement, attributeValue, sr, new ArrayList<SimpleSelector>());
+				this.addAttributeRule(htmlElement, attributeValue, sr, new ArrayList<SelectorMatcher>());
 			}
 		} else if (rule instanceof CSSImportRule) {
 			UserAgentContext uacontext = document.getUserAgentContext();
@@ -301,7 +300,12 @@ public class StyleSheetAggregator {
 	 *            the ancestor selectors
 	 */
 	private final void addClassRule(String elemtl, String classtl, CSSStyleRule styleRule,
-			ArrayList<SimpleSelector> ancestorSelectors) {
+			ArrayList<SelectorMatcher> ancestorSelectors) {
+		
+		if(elemtl == null || "".equals(elemtl)){
+			elemtl = "*";
+		}
+		
 		Map<String, Collection<StyleRuleInfo>> classMap = this.classMapsByElement.get(elemtl);
 		if (classMap == null) {
 			classMap = new HashMap<String, Collection<StyleRuleInfo>>();
@@ -328,7 +332,12 @@ public class StyleSheetAggregator {
 	 *            the ancestor selectors
 	 */
 	private final void addAttributeRule(String elemtl, String attrtl, CSSStyleRule styleRule,
-			ArrayList<SimpleSelector> ancestorSelectors) {
+			ArrayList<SelectorMatcher> ancestorSelectors) {
+		
+		if(elemtl == null || "".equals(elemtl)){
+			elemtl = "*";
+		}
+		
 		Map<String, Collection<StyleRuleInfo>> attrMap = this.attrMapsByElement.get(elemtl);
 		if (attrMap == null) {
 			attrMap = new HashMap<String, Collection<StyleRuleInfo>>();
@@ -355,7 +364,12 @@ public class StyleSheetAggregator {
 	 *            the ancestor selectors
 	 */
 	private final void addIdRule(String elemtl, String idtl, CSSStyleRule styleRule,
-			ArrayList<SimpleSelector> ancestorSelectors) {
+			ArrayList<SelectorMatcher> ancestorSelectors) {
+		
+		if(elemtl == null || "".equals(elemtl)){
+			elemtl = "*";
+		}
+		
 		Map<String, Collection<StyleRuleInfo>> idsMap = this.idMapsByElement.get(elemtl);
 		if (idsMap == null) {
 			idsMap = new HashMap<String, Collection<StyleRuleInfo>>();
@@ -380,7 +394,12 @@ public class StyleSheetAggregator {
 	 *            the ancestor selectors
 	 */
 	private final void addElementRule(String elemtl, CSSStyleRule styleRule,
-			ArrayList<SimpleSelector> ancestorSelectors) {
+			ArrayList<SelectorMatcher> ancestorSelectors) {
+		
+		if(elemtl == null || "".equals(elemtl)){
+			elemtl = "*";
+		}
+		
 		Collection<StyleRuleInfo> rules = this.rulesByElement.get(elemtl);
 		if (rules == null) {
 			rules = new LinkedList<StyleRuleInfo>();
@@ -624,7 +643,7 @@ public class StyleSheetAggregator {
 		case SelectorMatcher.OP_EQUAL:
 			if (name.equals(attribute) && value.equals(attributeValue) && "*".equals(htmlElement)) {
 				return true;
-			} else if (name.equals(attribute) && value.equals(attributeValue) && nodeName.equals(htmlElement)) {
+			} else if (name.equals(attribute) && value.equals(attributeValue) && nodeName.equalsIgnoreCase(htmlElement)) {
 				return true;
 			}
 			break;
@@ -632,7 +651,7 @@ public class StyleSheetAggregator {
 		case SelectorMatcher.OP_STAR_EQUAL:
 			if (name.equals(attribute) && value.contains(attributeValue) && "*".equals(htmlElement)) {
 				return true;
-			} else if (name.equals(attribute) && value.contains(attributeValue) && nodeName.equals(htmlElement)) {
+			} else if (name.equals(attribute) && value.contains(attributeValue) && nodeName.equalsIgnoreCase(htmlElement)) {
 				return true;
 			}
 			break;
@@ -641,21 +660,21 @@ public class StyleSheetAggregator {
 			if (name.equals(attribute) && value.startsWith(attributeValue)
 					&& "*".equals(htmlElement)) {
 				return true;
-			} else if (name.equals(attribute) && value.startsWith(attributeValue) && nodeName.equals(htmlElement)) {
+			} else if (name.equals(attribute) && value.startsWith(attributeValue) && nodeName.equalsIgnoreCase(htmlElement)) {
 				return true;
 			}
 			break;
 		case SelectorMatcher.OP_DOLLAR_EQUAL:
 			if (name.equals(attribute) && value.endsWith(attributeValue) && "*".equals(htmlElement)) {
 				return true;
-			} else if (name.equals(attribute) && value.endsWith(attributeValue) && nodeName.equals(htmlElement)) {
+			} else if (name.equals(attribute) && value.endsWith(attributeValue) && nodeName.equalsIgnoreCase(htmlElement)) {
 				return true;
 			}
 			break;
 		case SelectorMatcher.OP_ALL:
 			if (name.equals(attribute) && "*".equals(htmlElement)) {
 				return true;
-			} else if (name.equals(attribute) && nodeName.equals(htmlElement)) {
+			} else if (name.equals(attribute) && nodeName.equalsIgnoreCase(htmlElement)) {
 				return true;
 			}
 			break;
