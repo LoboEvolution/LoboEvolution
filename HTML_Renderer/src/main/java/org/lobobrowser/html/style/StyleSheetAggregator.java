@@ -431,16 +431,22 @@ public class StyleSheetAggregator {
 		Collection<StyleRuleInfo> elementRules = this.rulesByElement.get(elementTL);
 		if (elementRules != null) {
 			SelectorMatcher sm = new SelectorMatcher();
-			
 			String psElement = pseudoElement;
 			if (psElement != null && psElement.contains("(")) {
 				psElement = psElement.substring(0, psElement.indexOf("("));
 			}
 			
-			if(sm.matchesPseudoClassSelector(pseudoElement, element) && element.getPseudoNames().contains(psElement)){
-				styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
-			}else if(!sm.matchesPseudoClassSelector(pseudoElement, element) && !element.getPseudoNames().contains(psElement)){
-				styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
+			Iterator<StyleRuleInfo> i = elementRules.iterator();
+			while (i.hasNext()) {
+				StyleRuleInfo styleRuleInfo = i.next();	
+				for (int a = 0; a < styleRuleInfo.getAncestorSelectors().size();a++) {
+					SelectorMatcher selectorMatcher = styleRuleInfo.getAncestorSelectors().get(a);
+					if(sm.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element) && element.getPseudoNames().contains(psElement)){
+						styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
+					}else if(!sm.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element) && !element.getPseudoNames().contains(psElement)){
+						styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
+					}
+				}
 			}
 		}
 		elementRules = this.rulesByElement.get("*");
@@ -485,8 +491,8 @@ public class StyleSheetAggregator {
 		}
 
 		if (attributes != null && attributes.getLength() > 0) {
-			for (int i = 0; i < attributes.getLength(); i++) {
-				Attr attr = (Attr) attributes.item(i);
+			for (int i1 = 0; i1 < attributes.getLength(); i1++) {
+				Attr attr = (Attr) attributes.item(i1);
 				if (isAttributeOperator(attr, element)) {
 					Map<String, Collection<StyleRuleInfo>> classMaps = this.attrMapsByElement.get(htmlElement);
 					if (classMaps != null) {

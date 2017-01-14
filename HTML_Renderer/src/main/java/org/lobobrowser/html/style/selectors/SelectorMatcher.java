@@ -22,8 +22,6 @@ package org.lobobrowser.html.style.selectors;
 
 import java.util.Set;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.w3c.dom.Attr;
@@ -206,6 +204,7 @@ public class SelectorMatcher {
 	 */
 	public boolean matchesPseudoClassSelector(String selector, DOMNodeImpl node) {
 		
+		String cnt = "";
 		String select = selector;
 		if (selector != null && selector.contains("(")) {
 			selector = selector.substring(0, selector.indexOf("("));
@@ -232,22 +231,26 @@ public class SelectorMatcher {
 		case EMPTY: 
 			return isEmpty(node);	
 		case NTH_CHILD:
+			cnt = select.replace(NTH_CHILD, "").replace("(","").replace(")","").trim();			
+			return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
 		case NTH_LAST_CHILD:
+			cnt= select.replace(NTH_LAST_CHILD, "").replace("(","").replace(")","").trim();
+			return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, true);
 		case NTH_OF_TYPE:
+			cnt= select.replace(NTH_OF_TYPE, "").replace("(","").replace(")","").trim();
+			return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
 		case NTH_LAST_OF_TYPE:
-			return false;
+			cnt= select.replace(NTH_LAST_OF_TYPE, "").replace("(","").replace(")","").trim();
+			return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, true);
 		case LANG:
-			
-			String value = select.replace("lang", "").replace("(","").replace(")","").trim();
+			String value = select.replace("", "").replace("(","").replace(")","").trim();
 			NamedNodeMap attributes = node.getAttributes();
-			
 			for (int s = 0; s < attributes.getLength(); s++) {
                 Attr attr = (Attr) attributes.item(s);
                 if(LANG.equals(attr.getName()) && value.equals(attr.getValue())){
                 	return true;
                 }
 			 }
-              
 			return false;
 		default:
 			return false;

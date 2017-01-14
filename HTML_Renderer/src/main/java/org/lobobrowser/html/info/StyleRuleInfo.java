@@ -37,17 +37,13 @@ public class StyleRuleInfo implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 9165715430607111555L;
-	
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(StyleRuleInfo.class.getName());
-
 
 	/** The style rule. */
 	private CSSStyleRule styleRule;
 
 	/** The ancestor selectors. */
 	private final ArrayList<SelectorMatcher> ancestorSelectors;
-
+	
 	/**
 	 * Instantiates a new style rule info.
 	 *
@@ -135,7 +131,6 @@ public class StyleRuleInfo implements Serializable {
 			SelectorMatcher selectorMatcher = as.get(i);
 			if (first) {
 				if (!selectorMatcher.matches(pseudoNames)) {
-					logger.error("1");
 					return false;
 				}
 				first = false;
@@ -185,11 +180,9 @@ public class StyleRuleInfo implements Serializable {
 				}
 			}
 			if (priorElement == null) {
-				logger.error("2");
 				return false;
 			}
 			if (!selectorMatcher.matches(priorElement)) {
-				logger.error("3");
 				return false;
 			}
 			currentElement = priorElement;
@@ -214,5 +207,12 @@ public class StyleRuleInfo implements Serializable {
 	 */
 	public void setStyleRule(CSSStyleRule styleRule) {
 		this.styleRule = styleRule;
+	}
+	
+	/**
+	 * get Ancestor Selectors.
+	 */
+	public ArrayList<SelectorMatcher> getAncestorSelectors() {
+		return ancestorSelectors;
 	}
 }
