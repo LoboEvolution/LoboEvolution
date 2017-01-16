@@ -103,6 +103,12 @@ public class SelectorMatcher {
 
 	/** The Constant PRECEEDING_SIBLING. */
 	public final static int PRECEEDING_SIBLING = 2;
+	
+	/** The Constant ODD. */
+	private String ODD = "odd";
+	
+	/** The Constant ODD. */
+	private String EVEN = "even";
 
 	/** The simple selector text. */
 	private String simpleSelectorText;
@@ -202,7 +208,7 @@ public class SelectorMatcher {
 	 *            The root node.
 	 * @return {@code true} or {@code false}
 	 */
-	public boolean matchesPseudoClassSelector(String selector, DOMNodeImpl node) {
+	public boolean matchesPseudoClassSelector(String selector, DOMNodeImpl node, int c) {
 		
 		String cnt = "";
 		String select = selector;
@@ -231,19 +237,59 @@ public class SelectorMatcher {
 		case EMPTY: 
 			return isEmpty(node);	
 		case NTH_CHILD:
-			cnt = select.replace(NTH_CHILD, "").replace("(","").replace(")","").trim();			
-			return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
+			cnt = getValue(NTH_CHILD, select);
+			if(EVEN.equals(cnt) || ODD.equals(cnt)){
+				if(EVEN.equals(cnt) && isEven(c)){
+					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
+				} else if(ODD.equals(cnt) && !isEven(c)){
+					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
+				} else{
+					return false;
+				}	
+			} else{
+				return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
+			}
 		case NTH_LAST_CHILD:
-			cnt= select.replace(NTH_LAST_CHILD, "").replace("(","").replace(")","").trim();
-			return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, true);
+			cnt= getValue(NTH_LAST_CHILD, select);
+			if(EVEN.equals(cnt) || ODD.equals(cnt)){
+				if(EVEN.equals(cnt) && isEven(c)){
+					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
+				} else if(ODD.equals(cnt) && !isEven(c)){
+					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
+				} else{
+					return false;
+				}	
+			} else{
+				return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
+			}
 		case NTH_OF_TYPE:
-			cnt= select.replace(NTH_OF_TYPE, "").replace("(","").replace(")","").trim();
-			return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
+			cnt= getValue(NTH_OF_TYPE, select);
+			if(EVEN.equals(cnt) || ODD.equals(cnt)){
+				if(EVEN.equals(cnt) && isEven(c)){
+					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
+				} else if(ODD.equals(cnt) && !isEven(c)){
+					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
+				} else{
+					return false;
+				}	
+			} else{
+				return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
+			}
 		case NTH_LAST_OF_TYPE:
-			cnt= select.replace(NTH_LAST_OF_TYPE, "").replace("(","").replace(")","").trim();
-			return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, true);
+			cnt= getValue(NTH_LAST_OF_TYPE, select);
+			if(EVEN.equals(cnt) || ODD.equals(cnt)){
+				if(EVEN.equals(cnt) && isEven(c)){
+					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
+				} else if(ODD.equals(cnt) && !isEven(c)){
+					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
+				} else{
+					return false;
+				}	
+			} else{
+				return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
+			}
 		case LANG:
-			String value = select.replace("", "").replace("(","").replace(")","").trim();
+			String value = select.replace(LANG, "").replace("(","").replace(")","").trim();
 			NamedNodeMap attributes = node.getAttributes();
 			for (int s = 0; s < attributes.getLength(); s++) {
                 Attr attr = (Attr) attributes.item(s);
@@ -363,6 +409,18 @@ public class SelectorMatcher {
 			}
 		}
 		return true;
+	}
+	
+	
+	private boolean isEven(int number){
+		 if(number%2 == 0){
+             return true;
+		 }
+      return false;
+	}
+	
+	private String getValue(String selector, String select){
+		return select.replace(selector, "").replace("(","").replace(")","").trim();
 	}
 	
 	/**

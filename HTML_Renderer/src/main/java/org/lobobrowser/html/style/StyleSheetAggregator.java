@@ -97,6 +97,8 @@ public class StyleSheetAggregator {
 	
 	/** The pseudo element. */
 	private String pseudoElement;
+	
+	private int cnt = 1;
 
 	/**
 	 * Instantiates a new style sheet aggregator.
@@ -436,14 +438,16 @@ public class StyleSheetAggregator {
 				psElement = psElement.substring(0, psElement.indexOf("("));
 			}
 			
+			int c = cnt++;
+			
 			Iterator<StyleRuleInfo> i = elementRules.iterator();
 			while (i.hasNext()) {
 				StyleRuleInfo styleRuleInfo = i.next();	
 				for (int a = 0; a < styleRuleInfo.getAncestorSelectors().size();a++) {
 					SelectorMatcher selectorMatcher = styleRuleInfo.getAncestorSelectors().get(a);
-					if(sm.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element) && element.getPseudoNames().contains(psElement)){
+					if(sm.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element,c) && element.getPseudoNames().contains(psElement)){
 						styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
-					}else if(!sm.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element) && !element.getPseudoNames().contains(psElement)){
+					}else if(!sm.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element,c) && !element.getPseudoNames().contains(psElement)){
 						styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
 					}
 				}
