@@ -247,20 +247,52 @@ public class SelectorMatcher {
 					return false;
 				}	
 			} else{
-				return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
+				if(cnt.contains("n+")){
+					String[] split = cnt.split("n\\+");
+					int a = Integer.valueOf(split[0]).intValue();
+					int b = Integer.valueOf(split[1]).intValue();
+					return matchesChild(node, a, b, true, false);
+				} else if(cnt.contains("n-")){
+					String[] split = cnt.split("n\\-");
+					int a = Integer.valueOf(split[0]).intValue();
+					int b = Integer.valueOf(split[1]).intValue();
+					return matchesChild(node, a, (a-b), true, false);
+				} else if(cnt.contains("n")){
+					String[] split = cnt.split("n");
+					int a = Integer.valueOf(split[0]).intValue();
+					return matchesChild(node, a, a, true, false);
+				} else{
+					return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
+				}
 			}
 		case NTH_LAST_CHILD:
 			cnt= getValue(NTH_LAST_CHILD, select);
 			if(EVEN.equals(cnt) || ODD.equals(cnt)){
 				if(EVEN.equals(cnt) && isEven(c)){
-					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
+					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, true);
 				} else if(ODD.equals(cnt) && !isEven(c)){
-					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
+					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, true);
 				} else{
 					return false;
 				}	
 			} else{
-				return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
+				if(cnt.contains("n+")){
+					String[] split = cnt.split("n\\+");
+					int a = Integer.valueOf(split[0]).intValue();
+					int b = Integer.valueOf(split[1]).intValue();
+					return matchesChild(node, a, b, true, true);
+				} else if(cnt.contains("n-")){
+					String[] split = cnt.split("n\\-");
+					int a = Integer.valueOf(split[0]).intValue();
+					int b = Integer.valueOf(split[1]).intValue();
+					return matchesChild(node, a, (a-b), true, true);
+				} else if(cnt.contains("n")){
+					String[] split = cnt.split("n");
+					int a = Integer.valueOf(split[0]).intValue();
+					return matchesChild(node, a, a, true, true);
+				} else {
+					return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, true);
+				}
 			}
 		case NTH_OF_TYPE:
 			cnt= getValue(NTH_OF_TYPE, select);
@@ -273,23 +305,55 @@ public class SelectorMatcher {
 					return false;
 				}	
 			} else{
-				return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
+				if(cnt.contains("n+")){
+					String[] split = cnt.split("n\\+");
+					int a = Integer.valueOf(split[0]).intValue();
+					int b = Integer.valueOf(split[1]).intValue();
+					return matchesChild(node, a, b, true, false);
+				} else if(cnt.contains("n-")){
+					String[] split = cnt.split("n\\-");
+					int a = Integer.valueOf(split[0]).intValue();
+					int b = Integer.valueOf(split[1]).intValue();
+					return matchesChild(node, a, (a-b), true, false);
+				} else if(cnt.contains("n")){
+					String[] split = cnt.split("n");
+					int a = Integer.valueOf(split[0]).intValue();
+					return matchesChild(node, a, a, true, false);
+				} else {
+					return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
+				}
 			}
 		case NTH_LAST_OF_TYPE:
 			cnt= getValue(NTH_LAST_OF_TYPE, select);
 			if(EVEN.equals(cnt) || ODD.equals(cnt)){
 				if(EVEN.equals(cnt) && isEven(c)){
-					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
+					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, true);
 				} else if(ODD.equals(cnt) && !isEven(c)){
-					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
+					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, true);
 				} else{
 					return false;
 				}	
 			} else{
-				return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
+				if(cnt.contains("n+")){
+					String[] split = cnt.split("n\\+");
+					int a = Integer.valueOf(split[0]).intValue();
+					int b = Integer.valueOf(split[1]).intValue();
+					return matchesChild(node, a, b, true, true);
+				} else if(cnt.contains("n-")){
+					String[] split = cnt.split("n\\-");
+					int a = Integer.valueOf(split[0]).intValue();
+					int b = Integer.valueOf(split[1]).intValue();
+					return matchesChild(node, a, (a-b), true, true);
+				} else if(cnt.contains("n")){
+					String[] split = cnt.split("n");
+					int a = Integer.valueOf(split[0]).intValue();
+					return matchesChild(node, a, a, true, true);
+				} else {
+					return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, true);
+				}
 			}
 		case LANG:
-			String value = select.replace(LANG, "").replace("(","").replace(")","").trim();
+			String value = getValue(LANG, select);
 			NamedNodeMap attributes = node.getAttributes();
 			for (int s = 0; s < attributes.getLength(); s++) {
                 Attr attr = (Attr) attributes.item(s);
