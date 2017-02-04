@@ -72,7 +72,7 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 
 	/** The Constant DEFAULT_FONT. */
 	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(LAFSettings.getInstance().getFont(), null, null, null,
-			LAFSettings.getInstance().getFontSize(), null, null);
+			LAFSettings.getInstance().getFontSize(), null, null,0);
 
 	/** The Constant INVALID_INSETS. */
 	protected static final HtmlInsets INVALID_INSETS = new HtmlInsets();
@@ -383,6 +383,7 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 		String newFontVariant = style == null ? null : style.getFontVariant();
 		String newFontWeight = style == null ? null : style.getFontWeight();
 		String verticalAlign = style == null ? null : style.getVerticalAlign();
+		String letterSpacing = style == null ? null : style.getLetterSpacing();
 		boolean isSuper = (verticalAlign != null) && verticalAlign.equalsIgnoreCase("super");
 		boolean isSub = (verticalAlign != null) && verticalAlign.equalsIgnoreCase("sub");
 		if ((newFontSize == null) && (newFontWeight == null) && (newFontStyle == null) && (newFontFamily == null)
@@ -411,14 +412,17 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				fontSize = LAFSettings.getInstance().getFontSize();
 			}
 		}
+		
 		if (newFontFamily != null) {
 			fontFamily = newFontFamily;
 		} else if ((fontFamily == null) && (prs != null)) {
 			fontFamily = prs.getFont().getFamily();
 		}
+		
 		if (fontFamily == null) {
 			fontFamily = Font.SANS_SERIF;
 		}
+		
 		if (newFontStyle != null) {
 			fontStyle = newFontStyle;
 		} else if ((fontStyle == null) && (prs != null)) {
@@ -427,11 +431,13 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				fontStyle = "italic";
 			}
 		}
+		
 		if (newFontVariant != null) {
 			fontVariant = newFontVariant;
 		} else if (prs != null) {
 			// TODO: smallcaps?
 		}
+		
 		if (newFontWeight != null) {
 			fontWeight = newFontWeight;
 		} else if ((fontWeight == null) && (prs != null)) {
@@ -440,20 +446,24 @@ public class StyleSheetRenderState implements RenderState,CSSValuesProperties {
 				fontWeight = "bold";
 			}
 		}
+		
 		HTMLDocumentImpl document = this.document;
 		Set locales = document == null ? null : document.getLocales();
 
 		Integer superscript = null;
+		
 		if (isSuper) {
 			superscript = new Integer(1);
 		} else if (isSub) {
 			superscript = new Integer(-1);
 		}
+		
 		if ((superscript == null) && (prs != null)) {
 			superscript = (Integer) prs.getFont().getAttributes().get(TextAttribute.SUPERSCRIPT);
 		}
-		f = FONT_FACTORY.getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize.floatValue(), locales,
-				superscript);
+		
+		int intLetterSpacing = HtmlValues.getPixelSize(letterSpacing, prs, 0);
+		f = FONT_FACTORY.getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize.floatValue(), locales, superscript, intLetterSpacing);
 		this.iFont = f;
 		return f;
 	}

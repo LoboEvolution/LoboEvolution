@@ -28,20 +28,30 @@ import org.lobobrowser.util.Objects;
  * The Class FontKey.
  */
 public class FontKey {
+	
     /** The font family. */
     private String fontFamily;
+    
     /** The font style. */
     private String fontStyle;
+    
     /** The font variant. */
     private String fontVariant;
+    
     /** The font weight. */
     private String fontWeight;
+    
     /** The font size. */
     private float fontSize;
+    
     /** The locales. */
     private Set locales;
+    
     /** The superscript. */
     private Integer superscript;
+    
+    /** The letterSpacing. */
+    private int letterSpacing;
     
     /**
      * Instantiates a new font key.
@@ -64,7 +74,7 @@ public class FontKey {
     public FontKey(final String fontFamily, final String fontStyle,
             final String fontVariant, final String fontWeight,
             final float fontSize, final Set locales,
-            final Integer superscript) {
+            final Integer superscript, final Integer letterSpacing) {
         this.fontFamily = fontFamily == null ? null : fontFamily.intern();
         this.fontStyle = fontStyle == null ? null : fontStyle.intern();
         this.fontVariant = fontVariant == null ? null : fontVariant.intern();
@@ -72,6 +82,7 @@ public class FontKey {
         this.fontSize = fontSize;
         this.locales = locales;
         this.superscript = superscript;
+        this.letterSpacing = letterSpacing;
     }
     
     /*
@@ -208,6 +219,14 @@ public class FontKey {
         return superscript;
     }
     
+    /** Gets the letterSpacing.
+	 *
+	 * @return the letterSpacing
+	 */
+    public int getLetterSpacing() {
+		return letterSpacing;
+	}
+    
     /*
      * (non-Javadoc)
      * @see java.lang.Object#toString()
@@ -217,6 +236,7 @@ public class FontKey {
         return "FontKey[family=" + this.fontFamily + ",size=" + this.fontSize
                 + ",style=" + this.fontStyle + ",weight=" + this.fontWeight
                 + ",variant=" + this.fontVariant + ",superscript="
-                + this.superscript + "]";
+                + this.superscript + ",letterSpacing="
+                + this.letterSpacing + "]";
     }
 }

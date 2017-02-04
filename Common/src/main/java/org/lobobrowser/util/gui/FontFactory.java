@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.util.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -39,6 +40,8 @@ import java.util.StringTokenizer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.text.StyleContext;
 
 /**
@@ -150,9 +153,9 @@ public class FontFactory {
      */
     public Font getFont(String fontFamily, String fontStyle, String fontVariant,
             String fontWeight, float fontSize, Set locales,
-            Integer superscript) {
+            Integer superscript, Integer letterSpacing) {
         FontKey key = new FontKey(fontFamily, fontStyle, fontVariant,
-                fontWeight, fontSize, locales, superscript);
+                fontWeight, fontSize, locales, superscript,letterSpacing);
         synchronized (this) {
             Font font = this.fontMap.get(key);
             if (font == null) {
@@ -232,6 +235,7 @@ public class FontFactory {
      */
     private final Font createFont_Impl(FontKey key) {
         String fontNames = key.getFontFamily();
+        int letterSpacing = key.getLetterSpacing();
         String matchingFace = null;
         Set fontFamilies = this.fontFamilies;
         Map<String, Font> registeredFonts = this.registeredFonts;
@@ -250,25 +254,30 @@ public class FontFactory {
                 }
             }
         }
+        
         int fontStyle = Font.PLAIN;
         if ("italic".equalsIgnoreCase(key.getFontStyle())) {
             fontStyle |= Font.ITALIC;
         }
+        
         if ("bold".equalsIgnoreCase(key.getFontWeight())
                 || "bolder".equalsIgnoreCase(key.getFontWeight())) {
             fontStyle |= Font.BOLD;
         }
+        
+        Map<TextAttribute, Object> attributes = new HashMap<TextAttribute, Object>();
+        attributes.put(TextAttribute.TRACKING, ((double)letterSpacing/10)/2);
+        
         if (baseFont != null) {
-            return baseFont.deriveFont(fontStyle, key.getFontSize());
+        	Font f = baseFont.deriveFont(fontStyle, key.getFontSize());
+        	return f.deriveFont(attributes);
         } else if (matchingFace != null) {
-            Font font = createFont(matchingFace, fontStyle,
-                    Math.round(key.getFontSize()));
+            Font font = createFont(matchingFace, fontStyle, Math.round(key.getFontSize()));
             Set locales = key.getLocales();
             if (locales == null) {
                 Locale locale = Locale.getDefault();
-                if (font.canDisplayUpTo(
-                        locale.getDisplayLanguage(locale)) == -1) {
-                    return font;
+                if (font.canDisplayUpTo(locale.getDisplayLanguage(locale)) == -1) {
+                    return font.deriveFont(attributes);
                 }
             } else {
                 Iterator i = locales.iterator();
@@ -282,14 +291,13 @@ public class FontFactory {
                     }
                 }
                 if (allMatch) {
-                    return font;
+                    return font.deriveFont(attributes);
                 }
             }
             // Otherwise, fall through.
         }
         // Last resort:
-        return createFont(this.defaultFontName, fontStyle,
-                Math.round(key.getFontSize()));
+        return createFont(this.defaultFontName, fontStyle, Math.round(key.getFontSize())).deriveFont(attributes);
     }
     
     /**

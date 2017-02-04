@@ -145,7 +145,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		strokeStyle = Color.BLACK;
 		affineTransform = new AffineTransform(1,0,0,1,0,0);
 		font = FONT_FACTORY.getFont(Font.SANS_SERIF, null, null, null,
-				LAFSettings.getInstance().getFontSize(), null, null);
+				LAFSettings.getInstance().getFontSize(), null, null,0);
 	}
 
 	@Override
@@ -824,7 +824,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 			}
 		}
 		return FontFactory.getInstance().getFont(fontFamily, fontStyle,
-				fontVariant, fontWeight, fontSize, null, null);
+				fontVariant, fontWeight, fontSize, null, null,0);
 
 	}
 
