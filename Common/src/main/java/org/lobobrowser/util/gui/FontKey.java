@@ -51,7 +51,13 @@ public class FontKey {
     private Integer superscript;
     
     /** The letterSpacing. */
-    private int letterSpacing;
+    private Integer letterSpacing;
+    
+    /** The strikethrough. */
+    private Boolean strikethrough;
+
+    /** The underline. */
+    private Integer underline;
     
     /**
      * Instantiates a new font key.
@@ -74,7 +80,8 @@ public class FontKey {
     public FontKey(final String fontFamily, final String fontStyle,
             final String fontVariant, final String fontWeight,
             final float fontSize, final Set locales,
-            final Integer superscript, final Integer letterSpacing) {
+            final Integer superscript, final Integer letterSpacing, 
+            final boolean strikethrough, final Integer underline) {
         this.fontFamily = fontFamily == null ? null : fontFamily.intern();
         this.fontStyle = fontStyle == null ? null : fontStyle.intern();
         this.fontVariant = fontVariant == null ? null : fontVariant.intern();
@@ -83,6 +90,8 @@ public class FontKey {
         this.locales = locales;
         this.superscript = superscript;
         this.letterSpacing = letterSpacing;
+        this.strikethrough = strikethrough;
+        this.underline = underline;
     }
     
     /*
@@ -223,20 +232,33 @@ public class FontKey {
 	 *
 	 * @return the letterSpacing
 	 */
-    public int getLetterSpacing() {
+    public Integer getLetterSpacing() {
 		return letterSpacing;
+	}
+    
+    /**
+	 * @return the strikethrough
+	 */
+	public Boolean getStrikethrough() {
+		return strikethrough;
+	}
+
+	/**
+	 * @return the underline
+	 */
+	public Integer getUnderline() {
+		return underline;
 	}
     
     /*
      * (non-Javadoc)
      * @see java.lang.Object#toString()
      */
-    @Override
-    public String toString() {
-        return "FontKey[family=" + this.fontFamily + ",size=" + this.fontSize
-                + ",style=" + this.fontStyle + ",weight=" + this.fontWeight
-                + ",variant=" + this.fontVariant + ",superscript="
-                + this.superscript + ",letterSpacing="
-                + this.letterSpacing + "]";
-    }
+	@Override
+	public String toString() {
+		return "FontKey[family=" + this.fontFamily + ",size=" + this.fontSize + ",style=" + this.fontStyle + ",weight="
+				+ this.fontWeight + ",variant=" + this.fontVariant + ",superscript=" + this.superscript
+				+ ",letterSpacing=" + this.letterSpacing + ",strikethrough=" + this.strikethrough  +",underline="
+				+ this.underline + "]";
+	}
 }

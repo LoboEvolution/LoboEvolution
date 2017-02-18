@@ -23,7 +23,6 @@
  */
 package org.lobobrowser.util.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -40,8 +39,6 @@ import java.util.StringTokenizer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.text.StyleContext;
 
 /**
@@ -50,17 +47,22 @@ import javax.swing.text.StyleContext;
  * @author J. H. S.
  */
 public class FontFactory {
-    /** The Constant logger. */
-    private static final Logger logger = LogManager
-            .getLogger(FontFactory.class);
+    
+	/** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(FontFactory.class);
+    
     /** The Constant loggableFine. */
     private static final boolean loggableFine = logger.isInfoEnabled();
+    
     /** The Constant instance. */
     private static final FontFactory instance = new FontFactory();
+    
     /** The font families. */
     private final Set<String> fontFamilies = new HashSet<String>(40);
+    
     /** The font map. */
     private final Map<FontKey, Font> fontMap = new HashMap<FontKey, Font>(50);
+    
     /** The registered fonts. */
     private final Map<String, Font> registeredFonts = new HashMap<String, Font>(0);
     
@@ -153,9 +155,9 @@ public class FontFactory {
      */
     public Font getFont(String fontFamily, String fontStyle, String fontVariant,
             String fontWeight, float fontSize, Set locales,
-            Integer superscript, Integer letterSpacing) {
+            Integer superscript, Integer letterSpacing, boolean strikethrough, Integer underline) {
         FontKey key = new FontKey(fontFamily, fontStyle, fontVariant,
-                fontWeight, fontSize, locales, superscript,letterSpacing);
+                fontWeight, fontSize, locales, superscript,letterSpacing,strikethrough,underline);
         synchronized (this) {
             Font font = this.fontMap.get(key);
             if (font == null) {
@@ -196,11 +198,11 @@ public class FontFactory {
      */
     private final Font createFont(FontKey key) {
         Font font = createFont_Impl(key);
-        return superscriptFont(font, key.getSuperscript());
+        return scriptFont(font, key);
     }
     
     /**
-     * Superscript font.
+     * Script font.
      *
      * @param baseFont
      *            the base font
@@ -208,22 +210,29 @@ public class FontFactory {
      *            the new superscript
      * @return the font
      */
-    public static Font superscriptFont(Font baseFont, Integer newSuperscript) {
-        if (newSuperscript == null) {
-            return baseFont;
-        }
-        Integer fontSuperScript = (Integer) baseFont.getAttributes()
-                .get(TextAttribute.SUPERSCRIPT);
+    public static Font scriptFont(Font baseFont, FontKey key) {
+    	
+    	Map<TextAttribute, Object> additionalAttributes = new HashMap<TextAttribute, Object>();
+    	
+    	Integer fontSuperScript = (Integer) baseFont.getAttributes().get(TextAttribute.SUPERSCRIPT);
         if (fontSuperScript == null) {
-            fontSuperScript = new Integer(0);
+        	fontSuperScript = key.getSuperscript();
         }
-        if (fontSuperScript.equals(newSuperscript)) {
-            return baseFont;
-        } else {
-            Map<TextAttribute, Integer> additionalAttributes = new HashMap<TextAttribute, Integer>();
-            additionalAttributes.put(TextAttribute.SUPERSCRIPT, newSuperscript);
-            return baseFont.deriveFont(additionalAttributes);
+        additionalAttributes.put(TextAttribute.SUPERSCRIPT, fontSuperScript);
+        
+        Integer fontUnderline = (Integer) baseFont.getAttributes().get(TextAttribute.UNDERLINE);
+        if (fontUnderline == null) {
+        	fontUnderline = key.getUnderline();
         }
+        additionalAttributes.put(TextAttribute.UNDERLINE, fontUnderline);
+        
+        Boolean fontStrikethrough = (Boolean) baseFont.getAttributes().get(TextAttribute.STRIKETHROUGH_ON);
+        if (fontStrikethrough == null) {
+        	fontStrikethrough = key.getStrikethrough();
+        }
+        additionalAttributes.put(TextAttribute.STRIKETHROUGH, fontStrikethrough);
+        
+        return baseFont.deriveFont(additionalAttributes);
     }
     
     /**

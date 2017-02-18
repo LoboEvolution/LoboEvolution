@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.primary.action;
 
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 
@@ -75,7 +76,7 @@ public class PreferencesAction extends ActionPool {
 		dialog.setTitle("Preferences");
 		dialog.setLocationByPlatform(true);
 		dialog.setResizable(false);
-		dialog.setSize(new java.awt.Dimension(600, 400));
+		dialog.setSize(new Dimension(600, 500));
 		dialog.setVisible(true);
 	}
 

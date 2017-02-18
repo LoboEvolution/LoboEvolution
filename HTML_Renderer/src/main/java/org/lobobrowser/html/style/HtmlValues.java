@@ -1376,7 +1376,7 @@ public class HtmlValues implements CSSValuesProperties{
 			return cf.getColor(properties.getBorderColor());
 		}
 
-		return Color.BLACK;
+		return LAFSettings.getInstance().getColor();
 
 	}
 

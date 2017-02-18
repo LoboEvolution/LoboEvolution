@@ -30,6 +30,7 @@ import java.util.Map;
 import org.lobobrowser.html.info.WordInfo;
 import org.lobobrowser.html.style.RenderStateDelegator;
 import org.lobobrowser.util.gui.FontFactory;
+import org.lobobrowser.util.gui.FontKey;
 
 /**
  * The Class FontStyleRenderState.
@@ -105,7 +106,8 @@ public class FontStyleRenderState extends RenderStateDelegator {
         } else {
             f = parentFont;
         }
-        f = FontFactory.superscriptFont(f, superscript);
+        
+        f = FontFactory.scriptFont(f, new FontKey("", "", "", "", 0, null, superscript, 0, false, 0));
 
         this.iFont = f;
         return f;
