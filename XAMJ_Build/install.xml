@@ -69,6 +69,7 @@
 			<file src="ext/JTattoo-1.6.11.jar" targetdir="$INSTALL_PATH/ext" />
 			<file src="ext/log4j-api-2.7.jar" targetdir="$INSTALL_PATH/ext" />
 			<file src="ext/log4j-core-2.7.jar" targetdir="$INSTALL_PATH/ext" />
+			<file src="ext/rsyntaxtextarea.jar" targetdir="$INSTALL_PATH/ext" />
 
 			<file src="lobo.jar" targetdir="$INSTALL_PATH" />
 			<executable targetfile="$INSTALL_PATH/lobo.jar" />

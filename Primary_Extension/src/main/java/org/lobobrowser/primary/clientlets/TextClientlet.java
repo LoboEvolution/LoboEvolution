@@ -27,22 +27,33 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.lobobrowser.clientlet.Clientlet;
 import org.lobobrowser.clientlet.ClientletContext;
 import org.lobobrowser.clientlet.ClientletException;
+import org.lobobrowser.primary.ext.SourceViewerWindow;
 import org.lobobrowser.util.io.IORoutines;
 
 /**
  * The Class TextClientlet.
  */
 public class TextClientlet implements Clientlet {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager.getLogger(TextClientlet.class);
 
 	/**
 	 * Instantiates a new text clientlet.
 	 */
-	public TextClientlet() {
+	
+	private String extension;
+	
+	public TextClientlet(String extension) {
+		this.extension = extension;
 	}
 
 	/*
@@ -58,7 +69,27 @@ public class TextClientlet implements Clientlet {
 			InputStream in = context.getResponse().getInputStream();
 			try {
 				String text = IORoutines.loadAsText(in, "UTF-8");
-				JTextArea textArea = new JTextArea(text);
+				RSyntaxTextArea textArea = new RSyntaxTextArea(text);
+				
+				logger.error("extension: " + extension);
+				
+				switch (extension) {
+				case "css":
+					textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSS);
+					break;
+				case "js":
+					textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
+					break;
+				case "xml":
+					textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
+					break;
+				case "xaml":
+					textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
+					break;
+				default:
+					break;
+				}
+				
 				textArea.setEditable(false);
 				JScrollPane pane = new JScrollPane(textArea);
 				context.setResultingContent(pane);
@@ -68,5 +99,13 @@ public class TextClientlet implements Clientlet {
 		} catch (IOException ioe) {
 			throw new ClientletException(ioe);
 		}
+	}
+
+	public String getExtension() {
+		return extension;
+	}
+
+	public void setExtension(String extension) {
+		this.extension = extension;
 	}
 }

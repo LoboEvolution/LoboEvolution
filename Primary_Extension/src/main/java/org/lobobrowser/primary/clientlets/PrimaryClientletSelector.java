@@ -105,9 +105,7 @@ public class PrimaryClientletSelector implements ClientletSelector {
 		String mimeType = response.getMimeType();
 		String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
 		
-		if ((mimeTypeTL != null) && mimeTypeTL.startsWith("text/")) {
-			return new TextClientlet();
-		} else if ("application/xml".equals(mimeTypeTL)) {
+		if ("application/xml".equals(mimeTypeTL)) {
 			// TODO: XHTML needs its own clientlet.
 			return new HtmlClientlet();
 		} else {
@@ -119,7 +117,7 @@ public class PrimaryClientletSelector implements ClientletSelector {
 				return new HtmlClientlet();
 			} else if ("txt".equals(extensionTL) || "xml".equals(extensionTL) || "js".equals(extensionTL)
 					|| "rss".equals(extensionTL) || "xaml".equals(extensionTL) || "css".equals(extensionTL)) {
-				return new TextClientlet();
+				return new TextClientlet(extensionTL);
 			} else if ("pdf".equals(extensionTL)) {
 				return new PdfClientlet();
 			} else if (mimeType == null) {

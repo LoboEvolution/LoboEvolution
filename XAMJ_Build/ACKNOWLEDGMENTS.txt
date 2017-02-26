@@ -21,3 +21,5 @@ The following open source externals are used by this project:
 * [https://github.com/JDatePicker/JDatePicker] JDatePicker is an set of advanced DatePicker controls for Java Swing applications.
 
 * [http://www.jtattoo.net/index.html] JTattoo consists of several different Look and Feels for Swing applications.
+
+* [https://github.com/bobbylight/RSyntaxTextArea] RSyntaxTextArea, syntax highlighting, code folding text editor for Java Swing applications.

@@ -866,7 +866,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		if (sourceCode == null) {
 			sourceCode = "";
 		}
-		TextViewerWindow textViewer = new TextViewerWindow(window);
+		SourceViewerWindow textViewer = new SourceViewerWindow(window);
 		textViewer.setText(sourceCode);
 		textViewer.setSize(new Dimension(600, 400));
 		textViewer.setLocationByPlatform(true);
