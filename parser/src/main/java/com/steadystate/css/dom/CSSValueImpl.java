@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2016 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2017 David Schweinsberg.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -118,16 +118,10 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
     }
 
     private List<CSSValueImpl> getValues(final LexicalUnit value) {
-        // We need to be a CSSValueList
-        // Values in an "expr" can be seperated by "operator"s, which are
-        // either '/' or ',' - ignore these operators
         final List<CSSValueImpl> values = new ArrayList<CSSValueImpl>();
         LexicalUnit lu = value;
         while (lu != null) {
-            if ((lu.getLexicalUnitType() != LexicalUnit.SAC_OPERATOR_COMMA)
-                && (lu.getLexicalUnitType() != LexicalUnit.SAC_OPERATOR_SLASH)) {
-                values.add(new CSSValueImpl(lu, true));
-            }
+            values.add(new CSSValueImpl(lu, true));
             lu = lu.getNextLexicalUnit();
         }
         return values;
@@ -152,50 +146,31 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
             final StringBuilder sb = new StringBuilder();
             final List<?> list = (List<?>) value_;
             final Iterator<?> it = list.iterator();
+
+            boolean separate = false;
             while (it.hasNext()) {
                 final Object o = it.next();
+
                 final CSSValueImpl cssValue = (CSSValueImpl) o;
-                if (cssValue.value_ instanceof LexicalUnitImpl) {
-                    LexicalUnitImpl lu = (LexicalUnitImpl) cssValue.value_;
-                    sb.append(lu.getCssText(format));
-
-                    // Step to the next lexical unit, determining what spacing we
-                    // need to put around the operators
-                    final LexicalUnit prev = lu;
-                    lu = (LexicalUnitImpl) lu.getNextLexicalUnit();
-                    if ((lu != null)
-                            && ((lu.getLexicalUnitType() == LexicalUnit.SAC_OPERATOR_COMMA)
-                            || (lu.getLexicalUnitType() == LexicalUnit.SAC_OPERATOR_SLASH)
-                            || (prev.getLexicalUnitType() == LexicalUnit.SAC_OPERATOR_SLASH)
-                        )) {
-                        sb.append(lu.getCssText(format));
+                if (separate) {
+                    if (cssValue.value_ instanceof LexicalUnit) {
+                        final LexicalUnit lu = (LexicalUnit) cssValue.value_;
+                        if (lu.getLexicalUnitType() != LexicalUnit.SAC_OPERATOR_COMMA) {
+                            sb.append(" ");
+                        }
+                    }
+                    else {
+                        sb.append(" ");
                     }
                 }
-                else if (cssValue.value_ instanceof LexicalUnit) {
-                    LexicalUnit lu = (LexicalUnit) cssValue.value_;
-                    sb.append(lu.toString());
 
-                    // Step to the next lexical unit, determining what spacing we
-                    // need to put around the operators
-                    final LexicalUnit prev = lu;
-                    lu = lu.getNextLexicalUnit();
-                    if ((lu != null)
-                            && ((lu.getLexicalUnitType() == LexicalUnit.SAC_OPERATOR_COMMA)
-                            || (lu.getLexicalUnitType() == LexicalUnit.SAC_OPERATOR_SLASH)
-                            || (prev.getLexicalUnitType() == LexicalUnit.SAC_OPERATOR_SLASH)
-                        )) {
-                        sb.append(lu.toString());
-                    }
-                }
-                else if (cssValue.value_ instanceof CSSFormatable) {
+                if (cssValue.value_ instanceof CSSFormatable) {
                     sb.append(((CSSFormatable) o).getCssText(format));
                 }
                 else {
-                    sb.append(o);
+                    sb.append(o.toString());
                 }
-                if (it.hasNext()) {
-                    sb.append(" ");
-                }
+                separate = true;
             }
             return sb.toString();
         }
@@ -363,6 +338,11 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
                 || (lu.getLexicalUnitType() == LexicalUnit.SAC_INHERIT)
                 || (lu.getLexicalUnitType() == LexicalUnit.SAC_ATTR)) {
                 return lu.getStringValue();
+            }
+
+            // for rgba values we are using this type
+            if (lu.getLexicalUnitType() == LexicalUnit.SAC_FUNCTION) {
+                return lu.toString();
             }
         }
         else if (value_ instanceof List) {

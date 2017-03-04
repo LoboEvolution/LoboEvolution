@@ -209,10 +209,7 @@ ruleFound = true;
         jj_la1[7] = jj_gen;
 ParseException e = generateParseException();
         invalidRule();
-if (token.kind == EOF) {
-                    {if ("" != null) return;}
-                }
-                Token t = getNextToken();
+Token t = getNextToken();
 
                 boolean charsetProcessed = false;
                 if (t.kind == CHARSET_SYM) {
@@ -245,9 +242,6 @@ if (token.kind == EOF) {
                     }
                     if (t.kind == EOF) {
                         {if ("" != null) return;}
-                    }
-                    if (t.kind == RBRACE) {
-                        getNextToken();
                     }
                 }
       }
@@ -2260,9 +2254,6 @@ return true;
 // expr
 //   : term [ operator term ]*
 //   ;
-//
-// TODO: Deal with the operator
-//
   final public LexicalUnit expr() throws ParseException {LexicalUnit head;
     LexicalUnit body;
     try {
@@ -2958,6 +2949,24 @@ return hexcolorInternal(prev, t);
     finally { jj_save(0, xla); }
   }
 
+  private boolean jj_3R_79()
+ {
+    if (jj_scan_token(GREATER)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_89()
+ {
+    if (jj_scan_token(LSQUARE)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_90()
+ {
+    if (jj_scan_token(COLON)) return true;
+    return false;
+  }
+
   private boolean jj_3R_73()
  {
     if (jj_3R_76()) return true;
@@ -3151,24 +3160,6 @@ return hexcolorInternal(prev, t);
       xsp = jj_scanpos;
       if (jj_3R_77()) { jj_scanpos = xsp; break; }
     }
-    return false;
-  }
-
-  private boolean jj_3R_79()
- {
-    if (jj_scan_token(GREATER)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_89()
- {
-    if (jj_scan_token(LSQUARE)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_90()
- {
-    if (jj_scan_token(COLON)) return true;
     return false;
   }
 

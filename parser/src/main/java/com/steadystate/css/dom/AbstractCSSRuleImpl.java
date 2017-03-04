@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2016 David Schweinsberg.  All rights reserved.
+ * Copyright (C) 1999-2017 David Schweinsberg.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,7 +65,7 @@ public abstract class AbstractCSSRuleImpl extends CSSOMObjectImpl implements CSS
     /**
      * {@inheritDoc}
      */
-    public abstract String getCssText(final CSSFormat format);
+    public abstract String getCssText(CSSFormat format);
 
     /**
      * Same as {@link #getCssText(CSSFormat)} but using the default format.

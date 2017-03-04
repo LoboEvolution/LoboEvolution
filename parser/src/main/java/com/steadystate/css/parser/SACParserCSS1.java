@@ -955,9 +955,6 @@ return true;
 // expr
 //   : term [ operator term ]*
 //   ;
-//
-// TODO: Deal with the operator
-//
   final public LexicalUnit expr() throws ParseException {LexicalUnit head;
     LexicalUnit body;
     try {

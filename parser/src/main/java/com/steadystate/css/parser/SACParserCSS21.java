@@ -193,10 +193,7 @@ ruleFound = true;
         jj_la1[7] = jj_gen;
 ParseException e = generateParseException();
         invalidRule();
-if (token.kind == EOF) {
-                    {if ("" != null) return;}
-                }
-                Token t = getNextToken();
+Token t = getNextToken();
 
                 boolean charsetProcessed = false;
                 if (t.kind == CHARSET_SYM) {
@@ -229,9 +226,6 @@ if (token.kind == EOF) {
                     }
                     if (t.kind == EOF) {
                         {if ("" != null) return;}
-                    }
-                    if (t.kind == RBRACE) {
-                        getNextToken();
                     }
                 }
       }
@@ -1747,9 +1741,6 @@ return true;
 // expr
 //   : term [ operator term ]*
 //   ;
-//
-// TODO: Deal with the operator
-//
   final public LexicalUnit expr() throws ParseException {LexicalUnit head;
     LexicalUnit body;
     try {
@@ -2223,6 +2214,23 @@ return hexcolorInternal(prev, t);
     finally { jj_save(0, xla); }
   }
 
+  private boolean jj_3R_58()
+ {
+    if (jj_scan_token(PLUS)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_55()
+ {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_58()) {
+    jj_scanpos = xsp;
+    if (jj_3R_59()) return true;
+    }
+    return false;
+  }
+
   private boolean jj_3R_49()
  {
     Token xsp;
@@ -2394,23 +2402,6 @@ return hexcolorInternal(prev, t);
   private boolean jj_3R_53()
  {
     if (jj_3R_56()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_58()
- {
-    if (jj_scan_token(PLUS)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_55()
- {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_58()) {
-    jj_scanpos = xsp;
-    if (jj_3R_59()) return true;
-    }
     return false;
   }
 

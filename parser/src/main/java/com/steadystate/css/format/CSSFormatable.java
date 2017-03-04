@@ -29,5 +29,5 @@ public interface CSSFormatable {
      * @param format the formatting rules
      * @return the formated string
      */
-    String getCssText(final CSSFormat format);
+    String getCssText(CSSFormat format);
 }
