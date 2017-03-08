@@ -82,13 +82,16 @@ public class CSSOMParser {
     public CSSOMParser(final Parser parser) {
         synchronized (LOCK) {
             if (null != parser) {
-                System.setProperty("org.w3c.css.sac.parser", parser.getClass().getCanonicalName());
+                //System.setProperty("org.w3c.css.sac.parser", parser.getClass().getCanonicalName());
                 parser_ = parser;
                 return;
+            } else{
+            	parser_ = new SACParserCSS21();
+            	return;
             }
 
             // no parser provided, determine the correct one
-            String currentParser = System.getProperty("org.w3c.css.sac.parser");
+            /*String currentParser = System.getProperty("org.w3c.css.sac.parser");
             try {
                 // use the direct method if we already failed once before
                 if (null != LastFailed_ && LastFailed_.equals(currentParser)) {
@@ -96,7 +99,7 @@ public class CSSOMParser {
                 }
                 else {
                     if (null == currentParser) {
-                        System.setProperty("org.w3c.css.sac.parser", DEFAULT_PARSER);
+                        //System.setProperty("org.w3c.css.sac.parser", DEFAULT_PARSER);
                         currentParser = DEFAULT_PARSER;
                     }
                     final ParserFactory factory = new ParserFactory();
@@ -108,9 +111,9 @@ public class CSSOMParser {
                 log.warn(e.toString());
                 log.warn("using the default 'SACParserCSS21' instead");
                 log.error("CSSOMParser", "consturctor", e);
-                LastFailed_ = currentParser;
+                //LastFailed_ = currentParser;
                 parser_ = new SACParserCSS21();
-            }
+            }*/
         }
     }
 
