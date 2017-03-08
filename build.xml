@@ -1,6 +1,6 @@
 <project name="trevis_build" default="build">
   <target name="build">
-      <ant antfile="XAMJ_Build/build.xml" target="build">
+      <ant antfile="XAMJ_Build/build.xml">
       </ant>
   </target>
   <target name="test" depends="build">
