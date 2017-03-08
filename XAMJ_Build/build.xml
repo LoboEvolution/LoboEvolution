@@ -117,7 +117,7 @@
 	</target>
 
 	<target name="findbugs_compile">
-		<taskdef name="findbugs" classpath="XAMJ_Build/lib/findbugs-ant-3.0.0.jar" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" />
+		<taskdef name="findbugs" classpath="lib/findbugs-ant-3.0.0.jar" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" />
 		<mkdir dir="${report.findbugs.dir}" />
 		<findbugs home="." workHard="true" output="html" outputFile="${report.findbugs.dir}/findbugs.html" >
 			<class location="${build.dir}/cobra-no-commons.jar" />
@@ -128,7 +128,7 @@
 	</target>
 
 	<target name="pmd_compile">
-		<taskdef name="pmd" classpath="XAMJ_Build/lib/pmd/pmd-4.2.6.jar" classname="net.sourceforge.pmd.ant.PMDTask"/>
+		<taskdef name="pmd" classpath="lib/pmd/pmd-4.2.6.jar" classname="net.sourceforge.pmd.ant.PMDTask"/>
 		<mkdir dir="${report.pmd.dir}" />
 		<pmd rulesetfiles="lib/pmd/rulset.xml">
 			<formatter type="html" toFile="${report.pmd.dir}/pmd.html"/>
