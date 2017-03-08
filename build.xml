@@ -3,4 +3,12 @@
       <ant antfile="/XAMJ_Build/build.xml" target="build">
       </ant>
   </target>
+  <target name="test" depends="build">
+    <junit>
+        <formatter type="plain" usefile="false" /> <!-- to screen -->
+        <batchtest>
+            <fileset dir="/Testing/src/main/java/org/lobobrowser/html/" includes="**/*.java" />
+        </batchtest>
+    </junit>
+</target>
 </project>
