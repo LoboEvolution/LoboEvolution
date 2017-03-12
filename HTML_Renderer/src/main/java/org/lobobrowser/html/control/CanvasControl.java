@@ -21,25 +21,26 @@
 package org.lobobrowser.html.control;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.imageio.ImageIO;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.domimpl.HTMLCanvasElementImpl;
 import org.lobobrowser.html.info.CanvasInfo;
 import org.lobobrowser.http.UserAgentContext;
@@ -88,6 +89,7 @@ public class CanvasControl extends BaseControl {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawRect(0, 0, new Integer(width), new Integer(height));
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		for (int i = 0; i < listCanvasInfo.size(); i++) {
 			CanvasInfo ci = listCanvasInfo.get(i);
@@ -136,9 +138,8 @@ public class CanvasControl extends BaseControl {
 	 *            the ci
 	 */
 	private void fill(Graphics2D g, CanvasInfo ci) {
-		gradient(g, ci, ci.getFillStyle());
+		g.setPaint(ci.getFillPaint());
 		g.fill(ci.getPath());
-
 	}
 
 	/**
@@ -152,7 +153,7 @@ public class CanvasControl extends BaseControl {
 	private void fillRect(Graphics2D g, CanvasInfo ci) {
 
 		g.setComposite(ci.getGlobalAlpha());
-		gradient(g, ci, ci.getFillStyle());
+		g.setPaint(ci.getFillPaint());
 		g.rotate(ci.getRotate());
 		g.scale(ci.getScaleX(), ci.getScaleY());
 		g.translate(ci.getTranslateX(), ci.getTranslateY());
@@ -169,13 +170,13 @@ public class CanvasControl extends BaseControl {
 	 *            the ci
 	 */
 	private void fillText(Graphics2D g, CanvasInfo ci) {
-		gradient(g, ci, ci.getFillStyle());
+		g.setPaint(ci.getFillPaint());
 		g.setFont(ci.getFont());
 		g.rotate(ci.getRotate());
 		g.scale(ci.getScaleX(), ci.getScaleY());
 		g.translate(ci.getTranslateX(), ci.getTranslateY());
-		g.drawString(ci.getText(), ci.getX(), ci.getY());
-
+		Point2D.Float f = calcTextPos(ci, g);
+		g.drawString(ci.getText(), f.x, f.y);
 	}
 
 	/**
@@ -210,7 +211,7 @@ public class CanvasControl extends BaseControl {
 			intlineJoin = BasicStroke.JOIN_MITER;
 		}
 		g.setStroke(new BasicStroke(ci.getLineWidth(), intLineCap, intlineJoin, ci.getMiterLimit()));
-		gradient(g, ci, ci.getStrokeStyle());
+		g.setPaint(ci.getStrokePaint());
 		g.draw(ci.getPath());
 	}
 
@@ -223,9 +224,8 @@ public class CanvasControl extends BaseControl {
 	 *            the ci
 	 */
 	private void strokeRect(Graphics2D g, CanvasInfo ci) {
-
 		g.setComposite(ci.getGlobalAlpha());
-		gradient(g, ci, ci.getStrokeStyle());
+		g.setPaint(ci.getStrokePaint());
 		g.rotate(ci.getRotate());
 		g.setStroke(new BasicStroke(ci.getLineWidth()));
 		g.scale(ci.getScaleX(), ci.getScaleY());
@@ -243,13 +243,13 @@ public class CanvasControl extends BaseControl {
 	 *            the ci
 	 */
 	private void strokeText(Graphics2D g, CanvasInfo ci) {
-
 		FontRenderContext frc = new FontRenderContext(null, false, false);
 		TextLayout tl = new TextLayout(ci.getText(), ci.getFont(), frc);
-		AffineTransform textAt = new AffineTransform();
+		Point2D.Float pos = calcTextPos(ci,g);
+		AffineTransform textAt = AffineTransform.getTranslateInstance(pos.x, pos.y);
 		textAt.translate(ci.getX(), ci.getY());
 		Shape outline = tl.getOutline(textAt);
-		gradient(g, ci, ci.getStrokeStyle());
+		g.setPaint(ci.getStrokePaint());
 		g.rotate(ci.getRotate());
 		g.setStroke(new BasicStroke(2));
 		g.scale(ci.getScaleX(), ci.getScaleY());
@@ -274,7 +274,6 @@ public class CanvasControl extends BaseControl {
 			URLConnection con = u.openConnection();
             con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
 			Image img = ImageIO.read(con.getInputStream());
-
 			g.drawImage(img, ci.getX(), ci.getY(), ci.getWidth(), ci.getHeight(), this);
 			g.finalize();
 		} catch (Exception e) {
@@ -320,23 +319,34 @@ public class CanvasControl extends BaseControl {
 	private void clearRect(Graphics2D g, CanvasInfo ci) {
 		g.clearRect(ci.getX(), ci.getY(), ci.getWidth(), ci.getHeight());
 	}
+	
+	private Point2D.Float calcTextPos(CanvasInfo ci, Graphics2D graphics) {
 
-	/**
-	 * Gradient.
-	 *
-	 * @param g
-	 *            the g
-	 * @param ci
-	 *            the ci
-	 * @param color
-	 *            the color
-	 */
-	private void gradient(Graphics2D g, CanvasInfo ci, Color color) {
+		FontMetrics metrics = graphics.getFontMetrics();
 
-		if (ci.getLinearGradient() != null) {
-			g.setPaint(ci.getLinearGradient());
-		} else {
-			g.setPaint(color);
+		int x = ci.getX();
+		int y = ci.getY();
+		String bs = ci.getBaseline();
+		String ta = ci.getTextAlign();
+		
+		if ("center".equals(ta)) {
+			x = x - metrics.stringWidth(ci.getText()) / 2;
+		} else if ("right".equals(ta)) {
+			x = x - metrics.stringWidth(ci.getText());
 		}
+
+		if ("baseline".equals(bs)) {
+			y = y - metrics.getLeading() + metrics.getAscent();
+		} else if ("top".equals(bs)) {
+			y = y - metrics.getLeading();
+		} else if ("middle".equals(bs)) {
+			y = y - metrics.getLeading() - metrics.getAscent() / 2;
+		} else if ("bottom".equals(bs) || "text-bottom".equals(bs)) {
+			y = y - metrics.getHeight();
+		} else {
+			y = y + metrics.getLeading() + metrics.getAscent();
+		}
+
+		return new Point2D.Float(x, y);
 	}
 }

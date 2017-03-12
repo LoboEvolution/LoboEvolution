@@ -34,7 +34,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	 *
 	 * @return the fill style
 	 */
-	Color getFillStyle();
+	Object getFillStyle();
 
 	/**
 	 * Sets the fill style.
@@ -214,7 +214,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	 *
 	 * @return the stroke style
 	 */
-	Color getStrokeStyle();
+	Object getStrokeStyle();
 
 	/**
 	 * Sets the stroke style.
@@ -637,14 +637,6 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	 *            the sy
 	 */
 	void scale(int sx, int sy);
-
-	/**
-	 * Sets the composite operation.
-	 *
-	 * @param compositeOperation
-	 *            the new composite operation
-	 */
-	void setCompositeOperation(String compositeOperation);
 
 	/**
 	 * Sets the transform.

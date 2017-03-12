@@ -25,6 +25,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.LinearGradientPaint;
+import java.awt.Paint;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
@@ -60,10 +61,16 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	private ArrayList<CanvasInfo> listCanvasInfo;
 
 	/** The fill style. */
-	private Color fillStyle;
+	private Object fillStyle;
 
 	/** The stroke style. */
-	private Color strokeStyle;
+	private Object strokeStyle;
+	
+	/** The fill paint. */
+	private Paint fillPaint;
+
+	/** The stroke paint. */
+	private Paint strokePaint;
 
 	/** The line width. */
 	private int lineWidth;
@@ -113,14 +120,17 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	/** The path. */
 	private GeneralPath path;
 
-	/** The linear gradient. */
-	private LinearGradientPaint fillLinearGradient;
-	
-	/** The linear gradient. */
-	private LinearGradientPaint strokeLinearGradient;
-	
 	/** The Affine Transform. */
 	private AffineTransform affineTransform;
+	
+	/** The global Composite Operation. */
+	private String globalCompositeOperation;
+	
+	/** The text align */
+	private String textAlign;
+	
+	/** The baseline. */
+	private String baseline;
 	
 	/**
 	 * Instantiates a new HTML canvas element impl.
@@ -143,8 +153,13 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		intlineJoin = BasicStroke.JOIN_BEVEL;
 		fillStyle = Color.BLACK;
 		strokeStyle = Color.BLACK;
+		fillPaint = Color.BLACK;
+		strokePaint = Color.BLACK;
 		affineTransform = new AffineTransform(1,0,0,1,0,0);
 		font = FONT_FACTORY.getFont(Font.SANS_SERIF, null, null, null, LAFSettings.getInstance().getFontSize(), null, null,0,false,0);
+		globalCompositeOperation = "source-over";
+		textAlign = "left";
+		baseline = "alphabetic";
 	}
 
 	@Override
@@ -193,21 +208,22 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public Color getFillStyle() {
+	public Object getFillStyle() {
 		return fillStyle;
 	}
 
 	@Override
 	public void setFillStyle(Object style) {
+		this.fillStyle = style;
 		if (style instanceof CanvasGradient) {
-
 			DOMCanvasGradientImpl cgi = (DOMCanvasGradientImpl) style;
-			
-			fillLinearGradient = linearGradient(cgi.getFractions(),
+			fillPaint = linearGradient(cgi.getFractions(),
 					cgi.getColors(), cgi.getLinearX(), cgi.getLinearX1(),
 					cgi.getLinearY(), cgi.getLinearY1());
-		} else {
-			fillStyle = ColorFactory.getInstance().getColor(style.toString());
+		} else if (style instanceof CanvasPattern) {
+			fillPaint = ((DOMCanvasPatternImpl) style).getPaint();
+		} else if (style instanceof String) {
+			fillPaint = ColorFactory.getInstance().getColor(style.toString());
 		}
 	}
 
@@ -230,18 +246,18 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	@Override
 	public void setGlobalAlpha(Double ga) {
 		globalAlpha = ga.floatValue();
+		setGlobalCompositeOperation(globalCompositeOperation);
 
 	}
 
 	@Override
 	public String getGlobalCompositeOperation() {
-		// TODO Auto-generated method stub
-		return null;
+		return globalCompositeOperation;
 	}
 
 	@Override
-	public void setGlobalCompositeOperation(String arg) {
-		// TODO Auto-generated method stub
+	public void setGlobalCompositeOperation(String op) {
+		globalCompositeOperation = op;
 
 	}
 
@@ -281,14 +297,12 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 	@Override
 	public void setLineJoin(String lineJoin) {
-
 		if ("round".equals(lineJoin)) {
 			intlineJoin = BasicStroke.JOIN_ROUND;
 
 		} else if ("miter".equals(lineJoin)) {
 			intlineJoin = BasicStroke.JOIN_MITER;
 		}
-
 	}
 
 	@Override
@@ -361,48 +375,48 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public Color getStrokeStyle() {
+	public Object getStrokeStyle() {
 		return strokeStyle;
 	}
 
 	@Override
 	public void setStrokeStyle(Object style) {
+		this.strokeStyle = style;
 		if (style instanceof CanvasGradient) {
 			DOMCanvasGradientImpl cgi = (DOMCanvasGradientImpl) style;
-			strokeLinearGradient = linearGradient(cgi.getFractions(),
+			strokePaint = linearGradient(cgi.getFractions(),
 					cgi.getColors(), cgi.getLinearX(), cgi.getLinearX1(),
 					cgi.getLinearY(), cgi.getLinearY1());
-		} else {
-			strokeStyle = ColorFactory.getInstance().getColor(style.toString());
+		} else if (style instanceof CanvasPattern) {
+			strokePaint = ((DOMCanvasPatternImpl) style).getPaint();
+		} else if (style instanceof String) {
+			strokePaint = ColorFactory.getInstance().getColor(style.toString());
 		}
 	}
 
 	@Override
 	public String getTextAlign() {
-		// TODO Auto-generated method stub
-		return null;
+		return textAlign;
 	}
 
 	@Override
 	public void setTextAlign(String textAlign) {
-		// TODO Auto-generated method stub
+		this.textAlign = textAlign;
 	}
 
 	@Override
 	public String getTextBaseline() {
-		// TODO Auto-generated method stub
-		return null;
+		return baseline;
 	}
 
 	@Override
-	public void setTextBaseline(String arg) {
-		// TODO Auto-generated method stub
+	public void setTextBaseline(String bs) {
+		baseline = bs;
 
 	}
 
 	@Override
-	public void arc(int x, int y, int radius, int startAngle, int endAngle,
-			boolean anticlockwise) {
+	public void arc(int x, int y, int radius, int startAngle, int endAngle, boolean anticlockwise) {
 		// TODO Auto-generated method stub
 
 	}
@@ -420,8 +434,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public void bezierCurveTo(int cp1x, int cp1y, int cp2x, int cp2y, int x,
-			int y) {
+	public void bezierCurveTo(int cp1x, int cp1y, int cp2x, int cp2y, int x, int y) {
 		path.curveTo(cp1x, cp1y, cp2x, cp2y, x, y);
 	}
 
@@ -456,25 +469,22 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public CanvasGradient createLinearGradient(Object x0, Object y0, Object x1,
-			Object y1) {
+	public CanvasGradient createLinearGradient(Object x0, Object y0, Object x1, Object y1) {
 		return new DOMCanvasGradientImpl(x0, y0, x1, y1);
 	}
 
 	@Override
-	public CanvasPattern createPattern(HTMLCanvasElement canvas,
-			String repetitionType) {
+	public CanvasPattern createPattern(HTMLCanvasElement canvas, String repetitionType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public CanvasPattern createPattern(HTMLImageElement image,
-			String repetitionType) {
+	public CanvasPattern createPattern(HTMLImageElement image, String repetitionType) {
 		// TODO Auto-generated method stub
-		return null;
+				return null;
 	}
-
+	
 	@Override
 	public CanvasGradient createRadialGradient(Object x0, Object y0, Object r0, Object x1, Object y1, Object r1) {
 		// TODO Auto-generated method stub
@@ -483,9 +493,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 	@Override
 	public void drawImage(Object image, Integer x, Integer y) {
-
 		CanvasInfo cimage = new CanvasInfo();
-
 		if (image instanceof HTMLImageElementImpl) {
 			cimage.setImage((HTMLImageElementImpl) image);
 			cimage.setX(x);
@@ -498,8 +506,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public void drawImage(Object image, Integer x, Integer y, Integer width,
-			Integer height) {
+	public void drawImage(Object image, Integer x, Integer y, Integer width, Integer height) {
 		CanvasInfo cimage = new CanvasInfo();
 		if (image instanceof HTMLImageElementImpl) {
 			cimage.setImage((HTMLImageElementImpl) image);
@@ -508,14 +515,12 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 			cimage.setWidth(width);
 			cimage.setHeight(height);
 			cimage.setMethod(IMAGE);
-
 		}
 		listCanvasInfo.add(cimage);
 	}
 
 	@Override
-	public void drawImage(Object image, Integer sx, Integer sy, Integer sw,
-			Integer sh, Integer dx, Integer dy, Integer dw, Integer dh) {
+	public void drawImage(Object image, Integer sx, Integer sy, Integer sw, Integer sh, Integer dx, Integer dy, Integer dw, Integer dh) {
 		CanvasInfo cimage = new CanvasInfo();
 		if (image instanceof HTMLImageElementImpl) {
 			cimage.setImage((HTMLImageElementImpl) image);
@@ -540,13 +545,12 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 			CanvasInfo fill = new CanvasInfo();
 			fill.setMethod(FILL);
 			fill.setPath(path);
-			fill.setFillStyle(fillStyle);
+			fill.setFillPaint(fillPaint);
 			fill.setLineCap(getLineCap());
 			fill.setLineJoin(getLineJoin());
 			fill.setLineWidth(lineWidth > 1 ? lineWidth : lineWidth);
 			listCanvasInfo.add(fill);
 		}
-
 	}
 
 	@Override
@@ -556,15 +560,13 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		fillrect.setY(y);
 		fillrect.setWidth(width);
 		fillrect.setHeight(height);
-		fillrect.setFillStyle(fillStyle);
-		fillrect.setGlobalAlpha(AlphaComposite.getInstance(
-				AlphaComposite.SRC_OVER, globalAlpha));
+		fillrect.setFillPaint(fillPaint);
+		fillrect.setGlobalAlpha(comosite(globalCompositeOperation));
 		fillrect.setTranslateX(translateX);
 		fillrect.setTranslateY(translateY);
 		fillrect.setRotate(rotate);
 		fillrect.setScaleX(scaleX);
 		fillrect.setScaleY(scaleY);
-		fillrect.setLinearGradient(fillLinearGradient);
 		fillrect.setAffineTransform(affineTransform);
 		fillrect.setMethod(FILL_RECT);
 		listCanvasInfo.add(fillrect);
@@ -573,7 +575,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	@Override
 	public void fillText(String text, int x, int y) {
 		fillText(text, x, y, 0);
-
 	}
 
 	@Override
@@ -582,7 +583,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		fillText.setText(text);
 		fillText.setX(x);
 		fillText.setY(y);
-		fillText.setFillStyle(fillStyle);
+		fillText.setFillPaint(fillPaint);
 		fillText.setFont(font);
 		fillText.setMethod(FILL_TEXT);
 		fillText.setTranslateX(translateX);
@@ -591,7 +592,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		fillText.setScaleX(scaleX);
 		fillText.setScaleY(scaleY);
 		fillText.setMaxWidth(maxWidth);
-		fillText.setLinearGradient(fillLinearGradient);
+		fillText.setTextAlign(textAlign);
+		fillText.setBaseline(baseline);
 		listCanvasInfo.add(fillText);
 
 	}
@@ -611,10 +613,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	@Override
 	public void lineTo(int x, int y) {
 		if(path == null)
-			path = new GeneralPath();
-		
+			path = new GeneralPath();	
 		path.lineTo(x, y);
-
 	}
 
 	@Override
@@ -627,9 +627,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	public void moveTo(int x, int y) {
 		if(path == null)
 			path = new GeneralPath();
-		
 		path.moveTo(x, y);
-
 	}
 
 	@Override
@@ -639,8 +637,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public void putImageData(CanvasImageData imagedata, int dx, int dy,
-			int dirtyX, int dirtyY, int dirtyWidth, int dirtyHeight) {
+	public void putImageData(CanvasImageData imagedata, int dx, int dy, int dirtyX, int dirtyY, int dirtyWidth, int dirtyHeight) {
 		// TODO Auto-generated method stub
 
 	}
@@ -685,12 +682,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public void setCompositeOperation(String compositeOperation) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void setTransform(Double m11, Double m12, Double m21, Double m22, Double dx, Double dy) {
 		transform(m11, m12, m21, m22, dx, dy);
 	}
@@ -709,7 +700,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 			CanvasInfo stroke = new CanvasInfo();
 			stroke.setMethod(STROKE);
 			stroke.setPath(path);
-			stroke.setStrokeStyle(strokeStyle);
+			stroke.setStrokePaint(strokePaint);
 			stroke.setLineCap(getLineCap());
 			stroke.setLineJoin(getLineJoin());
 			stroke.setLineWidth(lineWidth > 1 ? lineWidth : lineWidth);
@@ -731,15 +722,13 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		strokeRect.setWidth(width);
 		strokeRect.setHeight(height);
 		strokeRect.setLineWidth(lineWidth > 1 ? lineWidth : this.lineWidth);
-		strokeRect.setStrokeStyle(strokeStyle);
-		strokeRect.setGlobalAlpha(AlphaComposite.getInstance(
-				AlphaComposite.SRC_OVER, globalAlpha));
+		strokeRect.setStrokePaint(strokePaint);
+		strokeRect.setGlobalAlpha(comosite(globalCompositeOperation));
 		strokeRect.setTranslateX(translateX);
 		strokeRect.setTranslateY(translateY);
 		strokeRect.setRotate(rotate);
 		strokeRect.setScaleX(scaleX);
 		strokeRect.setScaleY(scaleY);
-		strokeRect.setLinearGradient(strokeLinearGradient);
 		strokeRect.setAffineTransform(affineTransform);
 		strokeRect.setMethod(STROKE_RECT);
 		listCanvasInfo.add(strokeRect);
@@ -756,7 +745,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		strokeText.setText(text);
 		strokeText.setX(x);
 		strokeText.setY(y);
-		strokeText.setStrokeStyle(strokeStyle);
+		strokeText.setStrokePaint(strokePaint);
 		strokeText.setFont(font);
 		strokeText.setMethod(STROKE_TEXT);
 		strokeText.setTranslateX(translateX);
@@ -765,7 +754,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		strokeText.setScaleX(scaleX);
 		strokeText.setScaleY(scaleY);
 		strokeText.setMaxWidth(maxWidth);
-		strokeText.setLinearGradient(strokeLinearGradient);
+		strokeText.setTextAlign(textAlign);
+		strokeText.setBaseline(baseline);
 		listCanvasInfo.add(strokeText);
 
 	}
@@ -885,5 +875,32 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	public void toBlob(FileCallback callback, String type, Object... args) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	
+	private AlphaComposite comosite(String op) {
+		int c;
+		if ("source-atop".equals(op)) {
+			c = AlphaComposite.SRC_ATOP;
+		} else if ("source-in".equals(op)) {
+			c = AlphaComposite.SRC_IN;
+		} else if ("source-out".equals(op)) {
+			c = AlphaComposite.SRC_OUT;
+		} else if ("destination-atop".equals(op)) {
+			c = AlphaComposite.DST_ATOP;
+		} else if ("destination-in".equals(op)) {
+			c = AlphaComposite.DST_IN;
+		} else if ("destination-out".equals(op)) {
+			c = AlphaComposite.DST_OUT;
+		} else if ("destination-over".equals(op)) {
+			c = AlphaComposite.DST_OVER;
+		} else if ("xor".equals(op)) {
+			c = AlphaComposite.XOR;
+		} else if ("over".equals(op)) {
+			c = AlphaComposite.CLEAR;
+		} else {
+			c = AlphaComposite.SRC_OVER;
+		}
+		return AlphaComposite.getInstance(c, globalAlpha);
 	}
 }

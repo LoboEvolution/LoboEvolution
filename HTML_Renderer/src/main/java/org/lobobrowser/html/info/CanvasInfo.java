@@ -24,6 +24,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.LinearGradientPaint;
+import java.awt.Paint;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.io.Serializable;
@@ -113,11 +114,11 @@ public class CanvasInfo implements Serializable {
 	/** The Line Join. */
 	private String lineJoin;
 
-	/** The stroke style. */
-	private Color strokeStyle;
+	/** The stroke paint. */
+	private Paint strokePaint;
 
-	/** The fill style. */
-	private Color fillStyle;
+	/** The fill paint. */
+	private Paint fillPaint;
 
 	/** The font. */
 	private Font font;
@@ -128,11 +129,14 @@ public class CanvasInfo implements Serializable {
 	/** The Genearl path. */
 	private GeneralPath path;
 
-	/** The linear gradient. */
-	private LinearGradientPaint linearGradient;
-
 	/** The Affine Transform. */
 	private AffineTransform affineTransform;
+	
+	/** The Text Align. */
+	private String textAlign;
+	
+	/** The Base Line. */
+	private String baseline;
 
 	/**
 	 * Gets the x.
@@ -610,41 +614,41 @@ public class CanvasInfo implements Serializable {
 	}
 
 	/**
-	 * Gets the stroke style.
+	 * Gets the stroke Paint.
 	 *
-	 * @return the stroke style
+	 * @return the stroke Paint
 	 */
-	public Color getStrokeStyle() {
-		return strokeStyle;
+	public Paint getStrokePaint() {
+		return strokePaint;
 	}
 
 	/**
-	 * Sets the stroke style.
+	 * Sets the stroke Paint.
 	 *
-	 * @param strokeStyle
-	 *            the new stroke style
+	 * @param strokePaint
+	 *            the new stroke Paint
 	 */
-	public void setStrokeStyle(Color strokeStyle) {
-		this.strokeStyle = strokeStyle;
+	public void setStrokePaint(Paint strokePaint) {
+		this.strokePaint = strokePaint;
 	}
 
 	/**
-	 * Gets the fill style.
+	 * Gets the fill Paint.
 	 *
-	 * @return the fill style
+	 * @return the fill Paint
 	 */
-	public Color getFillStyle() {
-		return fillStyle;
+	public Paint getFillPaint() {
+		return fillPaint;
 	}
 
 	/**
-	 * Sets the fill style.
+	 * Sets the fill Paint.
 	 *
-	 * @param fillStyle
-	 *            the new fill style
+	 * @param fillPaint
+	 *            the new fill Paint
 	 */
-	public void setFillStyle(Color fillStyle) {
-		this.fillStyle = fillStyle;
+	public void setFillPaint(Paint fillPaint) {
+		this.fillPaint = fillPaint;
 	}
 
 	/**
@@ -705,25 +709,6 @@ public class CanvasInfo implements Serializable {
 	}
 
 	/**
-	 * Gets the linear gradient.
-	 *
-	 * @return the linear gradient
-	 */
-	public LinearGradientPaint getLinearGradient() {
-		return linearGradient;
-	}
-
-	/**
-	 * Sets the linear gradient.
-	 *
-	 * @param linearGradient
-	 *            the new linear gradient
-	 */
-	public void setLinearGradient(LinearGradientPaint linearGradient) {
-		this.linearGradient = linearGradient;
-	}
-
-	/**
 	 * Gets the Affine Transform.
 	 *
 	 * @return the Affine Transform
@@ -740,5 +725,21 @@ public class CanvasInfo implements Serializable {
 	 */
 	public void setAffineTransform(AffineTransform affineTransform) {
 		this.affineTransform = affineTransform;
+	}
+
+	public String getTextAlign() {
+		return textAlign;
+	}
+
+	public void setTextAlign(String textAlign) {
+		this.textAlign = textAlign;
+	}
+
+	public String getBaseline() {
+		return baseline;
+	}
+
+	public void setBaseline(String baseline) {
+		this.baseline = baseline;
 	}
 }
