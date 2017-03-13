@@ -221,7 +221,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 					cgi.getColors(), cgi.getLinearX(), cgi.getLinearX1(),
 					cgi.getLinearY(), cgi.getLinearY1());
 		} else if (style instanceof CanvasPattern) {
-			fillPaint = ((DOMCanvasPatternImpl) style).getPaint();
+			//fillPaint = ((DOMCanvasPatternImpl) style).getPaint();
 		} else if (style instanceof String) {
 			fillPaint = ColorFactory.getInstance().getColor(style.toString());
 		}
@@ -388,7 +388,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 					cgi.getColors(), cgi.getLinearX(), cgi.getLinearX1(),
 					cgi.getLinearY(), cgi.getLinearY1());
 		} else if (style instanceof CanvasPattern) {
-			strokePaint = ((DOMCanvasPatternImpl) style).getPaint();
+			//strokePaint = ((DOMCanvasPatternImpl) style).getPaint();
 		} else if (style instanceof String) {
 			strokePaint = ColorFactory.getInstance().getColor(style.toString());
 		}
