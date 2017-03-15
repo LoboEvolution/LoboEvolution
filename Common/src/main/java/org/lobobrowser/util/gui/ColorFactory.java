@@ -186,8 +186,7 @@ public class ColorFactory {
                     }
                     color = new Color(normalize(red), normalize(green), normalize(blue));
                 } else if (normalSpec.startsWith("#")) {
-                	String hexText = normalSpec.split("#")[1];
-                    color = new Color(Integer.parseInt(hexText,16));
+                    color = Color.decode(normalSpec);
                 } else {
                     if (logger.isInfoEnabled()) {
                         logger.warn("getColor(): Color spec [" + normalSpec
