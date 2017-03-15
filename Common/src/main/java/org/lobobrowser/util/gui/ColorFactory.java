@@ -184,25 +184,10 @@ public class ColorFactory {
                             }
                         }
                     }
-                    color = new Color(normalize(red), normalize(green),
-                            normalize(blue));
+                    color = new Color(normalize(red), normalize(green), normalize(blue));
                 } else if (normalSpec.startsWith("#")) {
-                    int len = normalSpec.length();
-                    int[] rgba = new int[4];
-                    rgba[3] = 255;
-                    for (int i = 0; i < rgba.length; i++) {
-                        int idx = (2 * i) + 1;
-                        if (idx < len) {
-                            String hexText = normalSpec.substring(idx,
-                                    idx + Math.min(2, len - idx));
-                            try {
-                                rgba[i] = Integer.parseInt(hexText, 16);
-                            } catch (NumberFormatException nfe) {
-                                // Ignore
-                            }
-                        }
-                    }
-                    color = new Color(rgba[0], rgba[1], rgba[2], rgba[3]);
+                	String hexText = normalSpec.split("#")[1];
+                    color = new Color(Integer.parseInt(hexText,16));
                 } else {
                     if (logger.isInfoEnabled()) {
                         logger.warn("getColor(): Color spec [" + normalSpec
