@@ -23,6 +23,8 @@ package org.lobobrowser.html.domimpl;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.html.CanvasGradient;
 
@@ -30,6 +32,10 @@ import org.lobobrowser.w3c.html.CanvasGradient;
  * The Class DOMCanvasGradientImpl.
  */
 public class DOMCanvasGradientImpl implements CanvasGradient {
+	
+	 /** The Constant logger. */
+    private static final Logger logger = LogManager
+            .getLogger(DOMCanvasGradientImpl.class);
 
 	/** The fractions. */
 	private ArrayList<Float> fractions;
@@ -48,6 +54,12 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 
 	/** The linear y1. */
 	private Double linearY1;
+	
+	/** The r1. */
+	private Double r1;
+	
+	/** The r2. */
+	private Double r2;
 
 	public DOMCanvasGradientImpl(Object x0, Object y0, Object x1, Object y1) {
 		fractions = new ArrayList<Float>();
@@ -56,6 +68,17 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 		setLinearX1(new Double(y0.toString()));
 		setLinearY(new Double(x1.toString()));
 		setLinearY1(new Double(y1.toString()));
+	}
+	
+	public DOMCanvasGradientImpl(Object x0, Object y0, Object x1, Object y1, Object r1, Object r2) {
+		fractions = new ArrayList<Float>();
+		colors = new ArrayList<Color>();
+		setLinearX(new Double(x0.toString()));
+		setLinearX1(new Double(y0.toString()));
+		setLinearY(new Double(x1.toString()));
+		setLinearY1(new Double(y1.toString()));
+		setR1(new Double(r1.toString()));
+		setR2(new Double(r2.toString()));
 	}
 	
 	@Override
@@ -179,4 +202,31 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 		this.linearY1 = linearY1;
 	}
 
+	/**
+	 * @return the r1
+	 */
+	public Double getR1() {
+		return r1;
+	}
+
+	/**
+	 * @param r1 the r1 to set
+	 */
+	public void setR1(Double r1) {
+		this.r1 = r1;
+	}
+	
+	/**
+	 * @return the r2
+	 */
+	public Double getR2() {
+		return r2;
+	}
+
+	/**
+	 * @param r2 the r2 to set
+	 */
+	public void setR2(Double r2) {
+		this.r2 = r2;
+	}
 }

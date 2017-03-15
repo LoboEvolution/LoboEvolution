@@ -138,8 +138,10 @@ public class CanvasControl extends BaseControl {
 	 *            the ci
 	 */
 	private void fill(Graphics2D g, CanvasInfo ci) {
+		g.setTransform(g.getTransform());
 		g.setPaint(ci.getFillPaint());
 		g.fill(ci.getPath());
+		g.setTransform(new AffineTransform());
 	}
 
 	/**
