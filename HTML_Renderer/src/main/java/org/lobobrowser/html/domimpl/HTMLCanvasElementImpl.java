@@ -26,6 +26,7 @@ import java.awt.RadialGradientPaint;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.geom.GeneralPath;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -147,6 +148,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		globalCompositeOperation = "source-over";
 		textAlign = "left";
 		baseline = "alphabetic";
+		path = new GeneralPath(); 
 	}
 
 	@Override
@@ -168,8 +170,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 	@Override
 	public void setHeight(int height) {
-		this.setAttribute(HtmlAttributeProperties.HEIGHT,
-				String.valueOf(height));
+		this.setAttribute(HtmlAttributeProperties.HEIGHT, String.valueOf(height));
 	}
 
 	@Override
@@ -210,7 +211,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 								 cgi.getR1(),cgi.getR2());
 		} else if (style instanceof CanvasPattern) {
 			//fillPaint = ((DOMCanvasPatternImpl) style).getPaint();
-		} else{
+		} else if (style instanceof String) {
 			fillPaint = ColorFactory.getInstance().getColor(style.toString());
 		}
 	}
@@ -378,7 +379,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 								   cgi.getR1(),cgi.getR2());
 		} else if (style instanceof CanvasPattern) {
 			//strokePaint = ((DOMCanvasPatternImpl) style).getPaint();
-		} else {
+		} else if (style instanceof String) {
 			strokePaint = ColorFactory.getInstance().getColor(style.toString());
 		}
 	}
@@ -587,21 +588,13 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public CanvasImageData getImageData(int sx, int sy, int sw, int sh) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean isPointInPath(int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
+		Point2D p = new Point2D.Float(x, y);
+		return path.contains(p);
 	}
 
 	@Override
 	public void lineTo(int x, int y) {
-		if(path == null)
-			path = new GeneralPath();	
 		path.lineTo(x, y);
 	}
 
@@ -613,11 +606,16 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 	@Override
 	public void moveTo(int x, int y) {
-		if(path == null)
-			path = new GeneralPath();
 		path.moveTo(x, y);
 	}
 
+	
+	@Override
+	public CanvasImageData getImageData(int sx, int sy, int sw, int sh) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public void putImageData(CanvasImageData imagedata, int dx, int dy) {
 		// TODO Auto-generated method stub

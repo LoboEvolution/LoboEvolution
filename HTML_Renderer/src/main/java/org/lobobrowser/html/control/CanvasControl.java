@@ -1,21 +1,17 @@
 /*
     GNU GENERAL LICENSE
     Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2017 Lobo Evolution
-
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public
     License as published by the Free Software Foundation; either
     verion 3 of the License, or (at your option) any later version.
-
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     General License for more details.
-
     You should have received a copy of the GNU General Public
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
-
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
 package org.lobobrowser.html.control;
@@ -31,8 +27,10 @@ import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageObserver;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -138,10 +136,10 @@ public class CanvasControl extends BaseControl {
 	 *            the ci
 	 */
 	private void fill(Graphics2D g, CanvasInfo ci) {
-		g.setTransform(g.getTransform());
-		g.setPaint(ci.getFillPaint());
-		g.fill(ci.getPath());
 		g.setTransform(new AffineTransform());
+		g.setPaint(ci.getFillPaint());
+		g.setTransform(g.getTransform());
+		g.fill(ci.getPath());
 	}
 
 	/**
@@ -268,7 +266,7 @@ public class CanvasControl extends BaseControl {
 	 * @param ci
 	 *            the ci
 	 */
-	private void image(Graphics2D g, CanvasInfo ci) {
+	private void image(Graphics2D graphics, CanvasInfo ci) {
 		URL u;
 		try {
 
@@ -276,8 +274,8 @@ public class CanvasControl extends BaseControl {
 			URLConnection con = u.openConnection();
             con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
 			Image img = ImageIO.read(con.getInputStream());
-			g.drawImage(img, ci.getX(), ci.getY(), ci.getWidth(), ci.getHeight(), this);
-			g.finalize();
+			AffineTransform at = new AffineTransform(ci.getWidth() / ci.getImage().getWidth(), 0, 0, ci.getHeight() / ci.getImage().getHeight(), ci.getX(), ci.getY());
+			graphics.drawImage(img, at, (ImageObserver) null);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
 		}
@@ -298,13 +296,9 @@ public class CanvasControl extends BaseControl {
 			URLConnection con = u.openConnection();
             con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
 			Image img = ImageIO.read(con.getInputStream());
-			
-			img = createImage(new FilteredImageSource(img.getSource(),
-					new CropImageFilter(ci.getSx(), ci.getSy(), ci.getSw(), ci.getSh())));
-
+			img = createImage(new FilteredImageSource(img.getSource(), new CropImageFilter(ci.getSx(), ci.getSy(), ci.getSw(), ci.getSh())));
+			g.clip(new Rectangle2D.Float(ci.getDx(), ci.getDy(), ci.getDw(), ci.getDh()));
 			g.drawImage(img, ci.getDx(), ci.getDy(), ci.getDw(), ci.getDh(), this);
-
-			g.finalize();
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
 		}
