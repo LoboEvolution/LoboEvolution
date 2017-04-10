@@ -53,10 +53,10 @@ public interface CSSValuesProperties {
 
     /** The Constant CENTER. */
      String CENTER = "center";
-
-    /** The Constant CIRCLE. */
-     String CIRCLE = "circle";
      
+     /** The Constant CIRCLE. */
+     String CIRCLE = "circle";
+    
      /** The Constant COLLAPSE. */
      String COLLAPSE = "collapse";
      

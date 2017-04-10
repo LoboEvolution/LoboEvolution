@@ -75,12 +75,10 @@ Node, ModelNode {
     private static final DOMNodeImpl[] EMPTY_ARRAY = new DOMNodeImpl[0];
 
     /** The Constant INVALID_RENDER_STATE. */
-    private static final RenderState INVALID_RENDER_STATE = new StyleSheetRenderState(
-            null);
+    private static final RenderState INVALID_RENDER_STATE = new StyleSheetRenderState(null);
 
     /** The Constant logger. */
-    protected static final Logger logger = LogManager.getLogger(DOMNodeImpl.class
-            .getName());
+    protected static final Logger logger = LogManager.getLogger(DOMNodeImpl.class.getName());
 
     /** The ui node. */
     protected UINode uiNode;

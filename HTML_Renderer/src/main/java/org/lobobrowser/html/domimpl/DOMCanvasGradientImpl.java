@@ -23,8 +23,6 @@ package org.lobobrowser.html.domimpl;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.html.CanvasGradient;
 
@@ -32,10 +30,6 @@ import org.lobobrowser.w3c.html.CanvasGradient;
  * The Class DOMCanvasGradientImpl.
  */
 public class DOMCanvasGradientImpl implements CanvasGradient {
-	
-	 /** The Constant logger. */
-    private static final Logger logger = LogManager
-            .getLogger(DOMCanvasGradientImpl.class);
 
 	/** The fractions. */
 	private ArrayList<Float> fractions;

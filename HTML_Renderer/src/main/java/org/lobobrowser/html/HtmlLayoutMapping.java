@@ -43,6 +43,7 @@ import org.lobobrowser.html.layout.NoScriptLayout;
 import org.lobobrowser.html.layout.NopLayout;
 import org.lobobrowser.html.layout.ObjectLayout;
 import org.lobobrowser.html.layout.PLayout;
+import org.lobobrowser.html.layout.SVGLayout;
 import org.lobobrowser.html.layout.SelectLayout;
 import org.lobobrowser.html.layout.SpanLayout;
 import org.lobobrowser.html.layout.StrikeLayout;
@@ -141,6 +142,7 @@ public class HtmlLayoutMapping implements HtmlProperties{
 		el.put(EMBED, ol);
 		el.put(IFRAME, new IFrameLayout());
 		el.put(CANVAS, new CanvasLayout());
+		el.put(SVG, new SVGLayout());
 
 		return el;
 

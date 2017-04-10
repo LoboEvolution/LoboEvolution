@@ -76,8 +76,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 	 * java.lang.String, org.w3c.dom.DocumentType)
 	 */
 	@Override
-	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype)
-			throws DOMException {
+	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype) throws DOMException {
 		return new HTMLDocumentImpl(this.context);
 	}
 

@@ -63,6 +63,9 @@ public interface HtmlProperties {
 
     /** The basefont. */
     String BASEFONT = "BASEFONT";
+    
+    /** The Constant CIRCLE. */
+    String CIRCLE = "CIRCLE";
 
     /** The center. */
     String CENTER = "CENTER";
@@ -102,6 +105,9 @@ public interface HtmlProperties {
 
     /** The details. */
     String DETAILS = "DETAILS";
+    
+    /** The ellipse. */
+    String ELLIPSE = "ELLIPSE";
 
     /** The em. */
     String EM = "EM";
@@ -177,6 +183,9 @@ public interface HtmlProperties {
 
     /** The li. */
     String LI = "LI";
+    
+    /** The line. */
+    String LINE = "LINE";
 
     /** The keygen. */
     String KEYGEN = "KEYGEN";
@@ -213,12 +222,18 @@ public interface HtmlProperties {
 
     /** The p. */
     String P = "P";
+    
+    /** The polygon. */
+    String POLYGON = "POLYGON";
 
     /** The pre. */
     String PRE = "PRE";
 
     /** The progress. */
     String PROGRESS = "PROGRESS";
+    
+    /** The Constant RECT. */
+    String RECT = "RECT";
 
     /** The s. */
     String S = "S";
@@ -261,6 +276,9 @@ public interface HtmlProperties {
 
     /** The spacer. */
     String SPACER = "SPACER";
+    
+    /**The svg*/
+    String SVG = "SVG";
 
     /** The title. */
     String TITLE = "TITLE";

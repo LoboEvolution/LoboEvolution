@@ -68,6 +68,12 @@ import org.lobobrowser.html.builder.OutputBuilder;
 import org.lobobrowser.html.builder.PBuilder;
 import org.lobobrowser.html.builder.PreBuilder;
 import org.lobobrowser.html.builder.ProgressBuilder;
+import org.lobobrowser.html.builder.SVGBuilder;
+import org.lobobrowser.html.builder.SVGCircleBuilder;
+import org.lobobrowser.html.builder.SVGEllipseBuilder;
+import org.lobobrowser.html.builder.SVGLineBuilder;
+import org.lobobrowser.html.builder.SVGPolygonBuilder;
+import org.lobobrowser.html.builder.SVGRectBuilder;
 import org.lobobrowser.html.builder.ScriptBuilder;
 import org.lobobrowser.html.builder.SectionBuilder;
 import org.lobobrowser.html.builder.SelectBuilder;
@@ -142,6 +148,7 @@ public class HtmlMapping implements HtmlProperties {
 		paragraphStopElements.add(FOOTER);
 		paragraphStopElements.add(ARTICLE);
 		paragraphStopElements.add(CANVAS);
+		paragraphStopElements.add(SVG);
 
 		ElementInfo paragraphElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, paragraphStopElements);
 
@@ -293,6 +300,14 @@ public class HtmlMapping implements HtmlProperties {
 		builders.put(TIME, new TimeBuilder());
 		builders.put(VIDEO, new VideoBuilder());
 		builders.put(LABEL, new LabelBuilder());
+		builders.put(SVG, new SVGBuilder());
+		builders.put(CIRCLE, new SVGCircleBuilder());
+		builders.put(RECT, new SVGRectBuilder());
+		builders.put(ELLIPSE, new SVGEllipseBuilder());
+		builders.put(LINE, new SVGLineBuilder());
+		builders.put(POLYGON, new SVGPolygonBuilder());
+		
+		
 		return builders;
 	}
 }

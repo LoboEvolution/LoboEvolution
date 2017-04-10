@@ -75,8 +75,7 @@ public class ElementFactory {
             String name) throws DOMException {
         String normalName = name.toUpperCase(Locale.ENGLISH);
         // No need to synchronize; read-only map at this point.
-        HTMLElementBuilder builder = (HTMLElementBuilder) this.builders
-                .get(normalName);
+        HTMLElementBuilder builder = (HTMLElementBuilder) this.builders.get(normalName);
         if (builder == null) {
             // TODO: IE would assume name is html text here?
             HTMLElementImpl element = new HTMLElementImpl(name);

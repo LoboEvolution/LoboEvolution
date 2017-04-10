@@ -18,9 +18,6 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Nov 20, 2005
- */
 package org.lobobrowser.html.style;
 
 import java.io.UnsupportedEncodingException;
@@ -280,7 +277,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		this.overlayColor = value;
 		this.context.informLookInvalid();
 	}
-
+	
 	/**
 	 * Gets the float.
 	 *
@@ -300,8 +297,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		this.setPropertyValueLC(FLOAT, value);
 	}
 
-	// ----------Implemented properties
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -774,6 +770,15 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 
 		return this.getPropertyValueLC(EMPTY_CELLS);
 	}
+	
+	public String getFill() {
+		return this.getPropertyValueLC(FILL);
+	}
+
+	public void setFill(String value) {
+		this.setPropertyValueLC(FILL, value);
+	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -2125,6 +2130,16 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		new FontSetter().changeValue(this, font, null);
 		this.context.informInvalid();
 	}
+	
+	
+	public String getFillOpacity() {
+		return this.getPropertyValueLC(FILL_OPACITY);
+	}
+
+	public void setFillOpacity(String value) {
+		this.setPropertyValueLC(FILL_OPACITY, value);
+		this.context.informInvalid();
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -2420,6 +2435,16 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	@Override
 	public void setOrphans(String orphans) throws DOMException {
 		this.setPropertyValueLC(ORPHANS, orphans);
+	}
+	
+	
+	public String getOpacity() {
+		return this.getPropertyValueLC(OPACITY);
+	}
+
+	public void setOpacity(String value) {
+		this.setPropertyValueLC(OPACITY, value);
+		this.context.informInvalid();
 	}
 
 	/*
@@ -2747,6 +2772,63 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	@Override
 	public void setStress(String stress) throws DOMException {
 		this.setPropertyValueLC(STRESS, stress);
+	}
+	
+	public String getStroke() {
+		return this.getPropertyValueLC(STROKE);
+	}
+
+	public void setStroke(String value) {
+		this.setPropertyValueLC(STROKE, value);
+		this.context.informInvalid();
+	}
+	
+	public String getStrokeDashArray() {
+		return this.getPropertyValueLC(STROKE_DASHARRAY);
+	}
+
+	public void setStrokeDashArray(String value) {
+		this.setPropertyValueLC(STROKE_DASHARRAY, value);
+		this.context.informInvalid();
+	}
+	
+	
+	
+	public String getStrokeLineCap() {
+		return this.getPropertyValueLC(STROKE_LINE_CAP);
+	}
+
+	public void setStrokeLineCap(String value) {
+		this.setPropertyValueLC(STROKE_LINE_CAP, value);
+		this.context.informInvalid();
+	}
+	
+	public String getStrokeMiterLimit() {
+		return this.getPropertyValueLC(STROKE_MITERLIMIT);
+	}
+
+	public void setStrokeMiterLimit(String value) {
+		this.setPropertyValueLC(STROKE_MITERLIMIT, value);
+		this.context.informInvalid();
+	}
+	
+	public String getStrokeOpacity() {
+		return this.getPropertyValueLC(STROKE_OPACITY);
+	}
+
+	public void setStrokeOpacity(String value) {
+		this.setPropertyValueLC(STROKE_OPACITY, value);
+		this.context.informInvalid();
+	}
+	
+	
+	public String getStrokeWidth() {
+		return this.getPropertyValueLC(STROKE_WIDTH);
+	}
+
+	public void setStrokeWidth(String value) {
+		this.setPropertyValueLC(STROKE_WIDTH, value);
+		this.context.informInvalid();
 	}
 
 	/*

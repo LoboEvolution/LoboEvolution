@@ -111,6 +111,12 @@ public interface HtmlAttributeProperties {
 
 	/** The cellpadding. */
 	String CELLPADDING = "cellPadding";
+	
+	/** The CY. */
+	String CY = "cy";
+	
+	/** The CX. */
+	String CX = "cx";
 
 	/** The colspan. */
 	String COLSPAN = "colspan";
@@ -159,6 +165,8 @@ public interface HtmlAttributeProperties {
 
 	/** The face. */
 	String FACE = "face";
+	
+	String FILL = "fill";
 	
 	/** The for. */
 	String FOR = "For";
@@ -228,6 +236,15 @@ public interface HtmlAttributeProperties {
 
 	/** The itemprop. */
 	String ITEMPROP = "itemprop";
+	
+	/** The y. */
+	String Y = "y";
+	
+	/** The y1. */
+	String Y1 = "y1";
+	
+	/** The y2. */
+	String Y2 = "y2";
 
 	/** The link. */
 	String LINK = "link";
@@ -307,6 +324,9 @@ public interface HtmlAttributeProperties {
 	/** The pattern. */
 	String PATTERN = "pattern";
 
+	/** The points. */
+	String POINTS = "points";
+	
 	/** The poster. */
 	String POSTER = "poster";
 
@@ -318,6 +338,15 @@ public interface HtmlAttributeProperties {
 
 	/** The profile. */
 	String PROFILE = "profile";
+	
+	/** The r. */
+	String R = "r";
+	
+	/** The ry. */
+	String RY = "ry";
+	
+	/** The rx. */
+	String RX = "rx";
 
 	/** The rows. */
 	String ROWS = "rows";
@@ -357,6 +386,9 @@ public interface HtmlAttributeProperties {
 
 	/** The step. */
 	String STEP = "step";
+	
+	/** The stroke. */
+	String STROKE = "stroke";
 
 	/** The scrolling. */
 	String SCROLLING = "scrolling";
@@ -402,6 +434,9 @@ public interface HtmlAttributeProperties {
 
 	/** The textalign. */
 	String TEXTALIGN = "text-align";
+	
+	/** The trasform. */
+	String TRASFORM = "trasform";
 
 	/** The usemap. */
 	String USEMAP = "useMap";
@@ -426,4 +461,15 @@ public interface HtmlAttributeProperties {
 
 	/** The wrap. */
 	String WRAP = "wrap";
+
+	/** The x. */
+	String X = "x";
+	
+	/** The x1. */
+	String X1 = "x1";
+	
+	/** The x2. */
+	String X2 = "x2";
+	
+	
 }
