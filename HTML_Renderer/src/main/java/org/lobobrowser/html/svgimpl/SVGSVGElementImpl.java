@@ -2,6 +2,7 @@ package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLAbstractUIElement;
+import org.lobobrowser.html.style.CSSProperties;
 import org.lobobrowser.w3c.svg.SVGAngle;
 import org.lobobrowser.w3c.svg.SVGAnimatedBoolean;
 import org.lobobrowser.w3c.svg.SVGAnimatedLength;
@@ -29,7 +30,7 @@ import org.w3c.dom.events.EventListener;
 import org.w3c.dom.stylesheets.StyleSheetList;
 import org.w3c.dom.views.DocumentView;
 
-public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGElement {
+public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGElement, CSSProperties {
 
 	public SVGSVGElementImpl(String name) {
 		super(name);
@@ -474,5 +475,33 @@ public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGEl
 	public Element getElementById(String elementId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public String getFill() {
+		return this.getAttribute(FILL);
+	}
+	
+	public String getStroke() {
+		return this.getAttribute(STROKE);
+	}
+
+	public String getStrokeDashArray() {
+		return this.getAttribute(STROKE_DASHARRAY);
+	}
+	
+	public String getStrokeLineCap() {
+		return this.getAttribute(STROKE_LINE_CAP);
+	}
+
+	public String getStrokeMiterLimit() {
+		return this.getAttribute(STROKE_MITERLIMIT);
+	}
+
+	public String getStrokeOpacity() {
+		return this.getAttribute(STROKE_OPACITY);
+	}
+	
+	public String getStrokeWidth() {
+		return this.getAttribute(STROKE_WIDTH);
 	}
 }

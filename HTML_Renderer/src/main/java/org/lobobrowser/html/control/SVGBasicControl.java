@@ -91,6 +91,26 @@ public class SVGBasicControl extends BaseControl {
 	
 	public void polygon(Graphics2D g2d, SVGInfo svgi) {
 		GeneralPath path = new GeneralPath();
+		SVGPointList points = svgi.getPoilist();
+		int numPoints = points.getNumberOfItems();
+		for (int i = 0; i < numPoints; i++) {
+			SVGPoint point = points.getItem(i);
+			float x = point.getX();
+			float y = point.getY();
+			if (i == 0) {
+				path.moveTo(x, y);
+			} else {
+				path.lineTo(x, y);
+			}
+		}
+
+	    path.closePath();
+	    drawFillAndStroke(g2d, path, svgi);
+		
+	}
+	
+	public void polyline(Graphics2D g2d, SVGInfo svgi) {
+		GeneralPath path = new GeneralPath();
 	    SVGPointList points = svgi.getPoilist();
 	    int numPoints = points.getNumberOfItems();
 	    for (int i = 0; i < numPoints; i++) {
@@ -103,7 +123,6 @@ public class SVGBasicControl extends BaseControl {
 	        path.lineTo(x,y);
 	      }
 	    }
-	    
 	    path.closePath();
 	    drawFillAndStroke(g2d, path, svgi);
 		
@@ -139,8 +158,6 @@ public class SVGBasicControl extends BaseControl {
 		}
 
 		if (svgi.getStyle().getFill() != null && !"none".equalsIgnoreCase(svgi.getStyle().getFill())) {
-			
-			logger.error("fill: " + svgi.getStyle().getFill());
 			Color color = ColorFactory.getInstance().getColor(svgi.getStyle().getFill());
 			fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * fillOpacity));
 		}

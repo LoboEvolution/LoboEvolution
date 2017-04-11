@@ -225,6 +225,9 @@ public interface HtmlProperties {
     
     /** The polygon. */
     String POLYGON = "POLYGON";
+    
+    /** The polygon. */
+    String POLYLINE = "POLYLINE";
 
     /** The pre. */
     String PRE = "PRE";
