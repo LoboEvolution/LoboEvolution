@@ -19,7 +19,9 @@ package org.lobobrowser.html.info;
 import java.io.Serializable;
 
 import org.lobobrowser.html.style.AbstractCSS2Properties;
+import org.lobobrowser.w3c.svg.SVGPathSegList;
 import org.lobobrowser.w3c.svg.SVGPointList;
+import org.lobobrowser.w3c.svg.SVGTransformList;
 
 public class SVGInfo implements Serializable {
 
@@ -60,10 +62,18 @@ public class SVGInfo implements Serializable {
 
 	/** The method. */
 	private int method;
-
+	
+	/** The style. */
 	private AbstractCSS2Properties style;
 	
+	/** The poilist. */
 	private SVGPointList poilist;
+	
+	/** The transformList. */
+	private SVGTransformList transformList;
+	
+	/** The pathSegList. */
+	private SVGPathSegList pathSegList;
 
 	/**
 	 * @return the x
@@ -259,5 +269,33 @@ public class SVGInfo implements Serializable {
 	 */
 	public void setPoilist(SVGPointList poilist) {
 		this.poilist = poilist;
+	}
+
+	/**
+	 * @return the transformList
+	 */
+	public SVGTransformList getTransformList() {
+		return transformList;
+	}
+
+	/**
+	 * @param transformList the transformList to set
+	 */
+	public void setTransformList(SVGTransformList transformList) {
+		this.transformList = transformList;
+	}
+
+	/**
+	 * @return the pathSegList
+	 */
+	public SVGPathSegList getPathSegList() {
+		return pathSegList;
+	}
+
+	/**
+	 * @param pathSegList the pathSegList to set
+	 */
+	public void setPathSegList(SVGPathSegList pathSegList) {
+		this.pathSegList = pathSegList;
 	}
 }

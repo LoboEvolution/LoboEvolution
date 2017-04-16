@@ -20,34 +20,44 @@
  */
 package org.lobobrowser.html.svgimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.w3c.svg.SVGAnimatedLength;
-import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
-import org.lobobrowser.w3c.svg.SVGCircleElement;
+import java.io.Serializable;
 
-public class SVGCircleElementImpl extends SVGSVGElementImpl implements SVGCircleElement {
+import org.lobobrowser.w3c.svg.SVGPathSeg;
 
-	public SVGCircleElementImpl(String name) {
-		super(name);
+public class SVGPathSegImpl implements SVGPathSeg, Serializable {
+
+	private static final long serialVersionUID = 1124449439816136129L;
+	
+	protected float x; 
+	protected float y;
+
+	@Override
+	public float getX() {
+		return this.x;
 	}
 
 	@Override
-	public SVGAnimatedTransformList getTransform() {
-		return new SVGAnimatedTransformListImpl(this.getAttribute(HtmlAttributeProperties.TRANSFORM));
+	public float getY() {
+		return this.y;
 	}
 
 	@Override
-	public SVGAnimatedLength getCx() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.CX)));
+	public void setX(float x) {
+		this.x = x;
 	}
 
 	@Override
-	public SVGAnimatedLength getCy() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.CY)));
+	public void setY(float y) {
+		this.y = y;
 	}
 
 	@Override
-	public SVGAnimatedLength getR() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.R)));
+	public short getPathSegType() {
+		return SVGPathSeg.PATHSEG_UNKNOWN;
+	}
+
+	@Override
+	public String getPathSegTypeAsLetter() {	
+		return "?";
 	}
 }

@@ -17,30 +17,32 @@
     
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
- */
-package org.lobobrowser.html.svgimpl;
+ */package org.lobobrowser.html.svgimpl;
 
-import org.lobobrowser.w3c.svg.SVGAnimatedLength;
-import org.lobobrowser.w3c.svg.SVGLength;
+import org.lobobrowser.w3c.svg.SVGPathSeg;
+import org.lobobrowser.w3c.svg.SVGPathSegCurvetoQuadraticSmoothAbs;
 
-public class SVGAnimatedLengthImpl implements SVGAnimatedLength {
 
-	private SVGLength baseValue;
-	private SVGLength animValue;
+public class SVGPathSegCurvetoQuadraticSmoothAbsImpl extends SVGPathSegImpl implements SVGPathSegCurvetoQuadraticSmoothAbs {
 
-	public SVGAnimatedLengthImpl(SVGLength baseValue) {
-		this.baseValue = baseValue;
-		this.animValue = baseValue;
+	private static final long serialVersionUID = -6722776032077341870L;
+	
+	/**
+	 * @param x
+	 * @param y
+	 */
+	public SVGPathSegCurvetoQuadraticSmoothAbsImpl(float x, float y) {
+		this.x = x;
+		this.y = y;
 	}
 
 	@Override
-	public SVGLength getBaseVal() {
-		return this.baseValue;
+	public short getPathSegType() {
+		return SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
 	}
 
 	@Override
-	public SVGLength getAnimVal() {
-		return this.animValue;
+	public String getPathSegTypeAsLetter() {
+		return "T";
 	}
-
 }

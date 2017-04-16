@@ -127,6 +127,9 @@ public interface CSSProperties {
 
 	/** The Constant CURSOR. */
 	String CURSOR = "cursor";
+	
+	/** The Constant D. */
+	String D = "d";
 
 	/** The Constant DIRECTION. */
 	String DIRECTION = "direction";

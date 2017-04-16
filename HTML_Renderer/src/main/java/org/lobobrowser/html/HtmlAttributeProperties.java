@@ -436,7 +436,7 @@ public interface HtmlAttributeProperties {
 	String TEXTALIGN = "text-align";
 	
 	/** The trasform. */
-	String TRASFORM = "trasform";
+	String TRANSFORM = "transform";
 
 	/** The usemap. */
 	String USEMAP = "useMap";

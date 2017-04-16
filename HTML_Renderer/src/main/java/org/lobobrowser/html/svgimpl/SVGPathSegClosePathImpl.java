@@ -18,29 +18,23 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
+
 package org.lobobrowser.html.svgimpl;
 
-import org.lobobrowser.w3c.svg.SVGAnimatedLength;
-import org.lobobrowser.w3c.svg.SVGLength;
+import org.lobobrowser.w3c.svg.SVGPathSeg;
+import org.lobobrowser.w3c.svg.SVGPathSegClosePath;
 
-public class SVGAnimatedLengthImpl implements SVGAnimatedLength {
+public class SVGPathSegClosePathImpl extends SVGPathSegImpl implements SVGPathSegClosePath {
 
-	private SVGLength baseValue;
-	private SVGLength animValue;
+	private static final long serialVersionUID = -6722776032077341870L;
 
-	public SVGAnimatedLengthImpl(SVGLength baseValue) {
-		this.baseValue = baseValue;
-		this.animValue = baseValue;
+	@Override
+	public short getPathSegType() {
+		return SVGPathSeg.PATHSEG_CLOSEPATH;
 	}
 
 	@Override
-	public SVGLength getBaseVal() {
-		return this.baseValue;
+	public String getPathSegTypeAsLetter() {
+		return "z";
 	}
-
-	@Override
-	public SVGLength getAnimVal() {
-		return this.animValue;
-	}
-
 }

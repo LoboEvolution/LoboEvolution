@@ -33,6 +33,7 @@ import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.svgimpl.SVGCircleElementImpl;
 import org.lobobrowser.html.svgimpl.SVGEllipseElementImpl;
 import org.lobobrowser.html.svgimpl.SVGLineElementImpl;
+import org.lobobrowser.html.svgimpl.SVGPathElementImpl;
 import org.lobobrowser.html.svgimpl.SVGPolygonElementImpl;
 import org.lobobrowser.html.svgimpl.SVGPolylineElementImpl;
 import org.lobobrowser.html.svgimpl.SVGRectElementImpl;
@@ -67,6 +68,9 @@ public class SVGControl extends SVGBasicControl {
 	
 	/** The line. */
 	private final int POLYLINE = 6;
+	
+	/** The path. */
+	private final int PATH = 7;
 
 	public SVGControl(SVGSVGElementImpl modelNode) {
 		super(modelNode);
@@ -111,7 +115,8 @@ public class SVGControl extends SVGBasicControl {
 				if (svgcircle.getStrokeWidth() != null) {
 					style.setStrokeWidth(svgcircle.getStrokeWidth());
 				}
-
+				
+				svgi.setTransformList(svgcircle.getTransform().getBaseVal());
 				svgi.setStyle(style);
 				svgList.add(svgi);
 			}
@@ -156,7 +161,8 @@ public class SVGControl extends SVGBasicControl {
 				if (svgrect.getStrokeWidth() != null) {
 					style.setStrokeWidth(svgrect.getStrokeWidth());
 				}
-
+				
+				svgi.setTransformList(svgrect.getTransform().getBaseVal());
 				svgi.setStyle(style);
 				svgList.add(svgi);
 			}
@@ -200,6 +206,7 @@ public class SVGControl extends SVGBasicControl {
 					style.setStrokeWidth(svgellipse.getStrokeWidth());
 				}
 				
+				svgi.setTransformList(svgellipse.getTransform().getBaseVal());
 				svgi.setStyle(svgellipse.getStyle());
 				svgList.add(svgi);
 			}
@@ -243,12 +250,12 @@ public class SVGControl extends SVGBasicControl {
 					style.setStrokeWidth(svgline.getStrokeWidth());
 				}
 				
+				svgi.setTransformList(svgline.getTransform().getBaseVal());
 				svgi.setStyle(svgline.getStyle());
 				svgList.add(svgi);
 			}
 			
 			if (n instanceof SVGPolylineElementImpl) {
-				logger.error("SVGPolylineElementImpl");
 				SVGPolylineElementImpl svgline = (SVGPolylineElementImpl) n;
 				AbstractCSS2Properties style = svgline.getStyle();
 				
@@ -284,6 +291,7 @@ public class SVGControl extends SVGBasicControl {
 					style.setStrokeWidth(svgline.getStrokeWidth());
 				}
 				
+				svgi.setTransformList(svgline.getTransform().getBaseVal());
 				svgi.setStyle(svgline.getStyle());
 				svgList.add(svgi);
 			}
@@ -323,10 +331,51 @@ public class SVGControl extends SVGBasicControl {
 				if (svgline.getStrokeWidth() != null) {
 					style.setStrokeWidth(svgline.getStrokeWidth());
 				}
-					
+				
+				svgi.setTransformList(svgline.getTransform().getBaseVal());
 				svgi.setStyle(svgline.getStyle());
 				svgList.add(svgi);
-			}	
+			}
+			
+			if (n instanceof SVGPathElementImpl) {
+				SVGPathElementImpl svgpath = (SVGPathElementImpl)n;
+				AbstractCSS2Properties style = svgpath.getStyle();
+				SVGInfo svgi = new SVGInfo();
+				svgi.setMethod(PATH);
+				
+				if (svgpath.getFill() != null) {
+					style.setFill(svgpath.getFill());
+				}
+				
+				if (svgpath.getStroke() != null) {
+					style.setStroke(svgpath.getStroke());
+				}
+				
+				if (svgpath.getStrokeDashArray() != null) {
+					style.setStrokeDashArray(svgpath.getStrokeDashArray());
+				}
+				
+				if (svgpath.getStrokeLineCap() != null) {
+					style.setStrokeLineCap(svgpath.getStrokeLineCap());
+				}
+				
+				if (svgpath.getStrokeMiterLimit() != null) {
+					style.setStrokeMiterLimit(svgpath.getStrokeMiterLimit());
+				}
+				
+				if (svgpath.getStrokeOpacity() != null) {
+					style.setStrokeOpacity(svgpath.getStrokeOpacity());
+				}
+				
+				if (svgpath.getStrokeWidth() != null) {
+					style.setStrokeWidth(svgpath.getStrokeWidth());
+				}
+				
+				svgi.setPathSegList(svgpath.getPathSegList());
+				svgi.setStyle(svgpath.getStyle());
+				svgList.add(svgi);
+				
+			}
 		}
 	}
 
@@ -355,6 +404,9 @@ public class SVGControl extends SVGBasicControl {
 					break;
 				case POLYLINE:
 					polyline(g2d, svgi);
+					break;
+				case PATH:
+					path(g2d, svgi);
 					break;
 				default:
 					break;

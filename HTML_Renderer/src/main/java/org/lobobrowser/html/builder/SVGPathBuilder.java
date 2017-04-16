@@ -18,29 +18,15 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-package org.lobobrowser.html.svgimpl;
+package org.lobobrowser.html.builder;
 
-import org.lobobrowser.w3c.svg.SVGAnimatedLength;
-import org.lobobrowser.w3c.svg.SVGLength;
+import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.svgimpl.SVGPathElementImpl;
 
-public class SVGAnimatedLengthImpl implements SVGAnimatedLength {
-
-	private SVGLength baseValue;
-	private SVGLength animValue;
-
-	public SVGAnimatedLengthImpl(SVGLength baseValue) {
-		this.baseValue = baseValue;
-		this.animValue = baseValue;
-	}
+public class SVGPathBuilder extends HTMLElementBuilder {
 
 	@Override
-	public SVGLength getBaseVal() {
-		return this.baseValue;
+	protected HTMLElementImpl build(String name) {
+		return new SVGPathElementImpl(name);
 	}
-
-	@Override
-	public SVGLength getAnimVal() {
-		return this.animValue;
-	}
-
 }

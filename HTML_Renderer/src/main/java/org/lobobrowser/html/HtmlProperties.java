@@ -223,6 +223,9 @@ public interface HtmlProperties {
     /** The p. */
     String P = "P";
     
+    /** The path. */
+    String PATH = "PATH";
+    
     /** The polygon. */
     String POLYGON = "POLYGON";
     
