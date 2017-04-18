@@ -1,3 +1,23 @@
+/*
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2017 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 3 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ */
 package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
@@ -34,7 +54,38 @@ public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGEl
 
 	public SVGSVGElementImpl(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
+	}
+
+	public String getFill() {
+		return this.getAttribute(FILL);
+	}
+
+	public String getStroke() {
+		return this.getAttribute(STROKE);
+	}
+
+	public String getStrokeDashArray() {
+		return this.getAttribute(STROKE_DASHARRAY);
+	}
+
+	public String getStrokeLineCap() {
+		return this.getAttribute(STROKE_LINE_CAP);
+	}
+
+	public String getStrokeMiterLimit() {
+		return this.getAttribute(STROKE_MITERLIMIT);
+	}
+
+	public String getStrokeOpacity() {
+		return this.getAttribute(STROKE_OPACITY);
+	}
+
+	public String getStrokeWidth() {
+		return this.getAttribute(STROKE_WIDTH);
+	}
+	
+	public String getD() {
+		return this.getAttribute(D);
 	}
 
 	@Override
@@ -182,31 +233,31 @@ public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGEl
 	}
 
 	@Override
-	public void addEventListener(String arg0, EventListener arg1, boolean arg2) {
+	public void addEventListener(String type, EventListener listener, boolean useCapture) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean dispatchEvent(Event arg0) throws EventException {
+	public void removeEventListener(String type, EventListener listener, boolean useCapture) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean dispatchEvent(Event evt) throws EventException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void removeEventListener(String arg0, EventListener arg1, boolean arg2) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Event createEvent(String arg0) throws DOMException {
+	public Event createEvent(String eventType) throws DOMException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public CSSStyleDeclaration getComputedStyle(Element arg0, String arg1) {
+	public CSSStyleDeclaration getComputedStyle(Element elt, String pseudoElt) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -218,7 +269,7 @@ public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGEl
 	}
 
 	@Override
-	public CSSStyleDeclaration getOverrideStyle(Element arg0, String arg1) {
+	public CSSStyleDeclaration getOverrideStyle(Element elt, String pseudoElt) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -476,32 +527,6 @@ public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGEl
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public String getFill() {
-		return this.getAttribute(FILL);
-	}
-	
-	public String getStroke() {
-		return this.getAttribute(STROKE);
-	}
 
-	public String getStrokeDashArray() {
-		return this.getAttribute(STROKE_DASHARRAY);
-	}
 	
-	public String getStrokeLineCap() {
-		return this.getAttribute(STROKE_LINE_CAP);
-	}
-
-	public String getStrokeMiterLimit() {
-		return this.getAttribute(STROKE_MITERLIMIT);
-	}
-
-	public String getStrokeOpacity() {
-		return this.getAttribute(STROKE_OPACITY);
-	}
-	
-	public String getStrokeWidth() {
-		return this.getAttribute(STROKE_WIDTH);
-	}
 }

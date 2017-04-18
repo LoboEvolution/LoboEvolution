@@ -85,8 +85,7 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 
 	@Override
 	public SVGAnimatedTransformList getTransform() {
-		//TODO
-		return null;
+		return new SVGAnimatedTransformListImpl(this.getAttribute(HtmlAttributeProperties.TRANSFORM));
 	}
 
 	@Override

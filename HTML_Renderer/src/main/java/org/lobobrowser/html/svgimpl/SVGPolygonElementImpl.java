@@ -1,10 +1,27 @@
-package org.lobobrowser.html.svgimpl;
+/*
+    GNU GENERAL LICENSE
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2017 Lobo Evolution
 
-import java.util.StringTokenizer;
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 3 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    
+
+    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+ */
+package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
-import org.lobobrowser.w3c.svg.SVGPoint;
 import org.lobobrowser.w3c.svg.SVGPointList;
 import org.lobobrowser.w3c.svg.SVGPolygonElement;
 
@@ -16,29 +33,16 @@ public class SVGPolygonElementImpl extends SVGSVGElementImpl implements SVGPolyg
 
 	@Override
 	public SVGAnimatedTransformList getTransform() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SVGAnimatedTransformListImpl(this.getAttribute(HtmlAttributeProperties.TRANSFORM));
 	}
 
 	@Override
 	public SVGPointList getPoints() {
-		return constructPointList(this.getAttribute(HtmlAttributeProperties.POINTS));
+		return SVGUtility.constructPointList(this.getAttribute(HtmlAttributeProperties.POINTS));
 	}
 
 	@Override
 	public SVGPointList getAnimatedPoints() {
-		return constructPointList(this.getAttribute(HtmlAttributeProperties.POINTS));
-	}
-
-	private SVGPointList constructPointList(String pointString) {
-		SVGPointListImpl points = new SVGPointListImpl();
-		StringTokenizer st = new StringTokenizer(pointString, " ,", false);
-		while (st.hasMoreTokens()) {
-			float x = Float.parseFloat(st.nextToken());
-			float y = Float.parseFloat(st.nextToken());
-			SVGPoint point = new SVGPointImpl(x, y);
-			points.appendItem(point);
-		}
-		return points;
+		return SVGUtility.constructPointList(this.getAttribute(HtmlAttributeProperties.POINTS));
 	}
 }

@@ -46,4 +46,12 @@ public interface SVGPathSeg {
 	public short getPathSegType();
 
 	public String getPathSegTypeAsLetter();
+
+	float getX();
+
+	float getY();
+
+	void setX(float x);
+
+	void setY(float y);
 }

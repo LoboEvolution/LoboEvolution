@@ -24,21 +24,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lobobrowser.w3c.svg.SVGException;
-import org.lobobrowser.w3c.svg.SVGPoint;
-import org.lobobrowser.w3c.svg.SVGPointList;
+import org.lobobrowser.w3c.svg.SVGMatrix;
+import org.lobobrowser.w3c.svg.SVGTransform;
+import org.lobobrowser.w3c.svg.SVGTransformList;
 import org.w3c.dom.DOMException;
 
-public class SVGPointListImpl implements SVGPointList {
-
-	private List<SVGPoint> points;
-
-	public SVGPointListImpl() {
-		this(new SVGPoint[0]);
+public class SVGTransformListImpl implements SVGTransformList {
+	
+	private List<SVGTransform> points;
+	
+	public SVGTransformListImpl() {
+		this(new SVGTransform[0]);
 	}
 
-	public SVGPointListImpl(SVGPoint[] points) {
-		this.points = new ArrayList<SVGPoint>();
-		for (SVGPoint s : points) {
+	public SVGTransformListImpl(SVGTransform[] points) {
+		this.points = new ArrayList<SVGTransform>();
+		for (SVGTransform s : points) {
 			this.points.add(s);
 		}
 	}
@@ -54,40 +55,53 @@ public class SVGPointListImpl implements SVGPointList {
 	}
 
 	@Override
-	public SVGPoint initialize(SVGPoint newItem) throws DOMException, SVGException {
-		points = new ArrayList<SVGPoint>();
+	public SVGTransform initialize(SVGTransform newItem) throws DOMException, SVGException {
+		points = new ArrayList<SVGTransform>();
 		points.add(newItem);
 		return newItem;
 	}
 
 	@Override
-	public SVGPoint getItem(int index) throws DOMException {
+	public SVGTransform getItem(int index) throws DOMException {
 		return points.get(index);
 	}
 
 	@Override
-	public SVGPoint insertItemBefore(SVGPoint newItem, int index) throws DOMException, SVGException {
+	public SVGTransform insertItemBefore(SVGTransform newItem, int index) throws DOMException, SVGException {
 		points.add(index, newItem);
 		return newItem;
 	}
 
 	@Override
-	public SVGPoint replaceItem(SVGPoint newItem, int index) throws DOMException, SVGException {
+	public SVGTransform replaceItem(SVGTransform newItem, int index) throws DOMException, SVGException {
 		points.remove(index);
 		points.add(index, newItem);
 		return newItem;
 	}
 
 	@Override
-	public SVGPoint removeItem(int index) throws DOMException {
-		SVGPoint item = points.get(index);
+	public SVGTransform removeItem(int index) throws DOMException {
+		SVGTransform item = points.get(index);
 		points.remove(index);
 		return item;
 	}
 
 	@Override
-	public SVGPoint appendItem(SVGPoint newItem) throws DOMException, SVGException {
+	public SVGTransform appendItem(SVGTransform newItem) throws DOMException, SVGException {
 		points.add(newItem);
 		return newItem;
 	}
+
+	@Override
+	public SVGTransform createSVGTransformFromMatrix(SVGMatrix matrix) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SVGTransform consolidate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

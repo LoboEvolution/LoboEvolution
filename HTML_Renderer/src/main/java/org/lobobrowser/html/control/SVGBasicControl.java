@@ -38,6 +38,7 @@ import java.awt.geom.RoundRectangle2D;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.SVGInfo;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.html.svgimpl.SVGMatrixImpl;
 import org.lobobrowser.html.svgimpl.SVGPathSegArcAbsImpl;
 import org.lobobrowser.html.svgimpl.SVGPathSegArcRelImpl;
 import org.lobobrowser.html.svgimpl.SVGPathSegCurvetoCubicAbsImpl;
@@ -62,10 +63,12 @@ import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.svg.SVGPathSegList;
 import org.lobobrowser.w3c.svg.SVGPoint;
 import org.lobobrowser.w3c.svg.SVGPointList;
+import org.lobobrowser.w3c.svg.SVGTransform;
+import org.lobobrowser.w3c.svg.SVGTransformList;
 import org.w3c.dom.svg.SVGPathSeg;
 
 public class SVGBasicControl extends BaseControl {
-
+	
 	private static final long serialVersionUID = 1L;
 
 	public SVGBasicControl(HTMLElementImpl modelNode) {
@@ -468,7 +471,6 @@ public class SVGBasicControl extends BaseControl {
 		if (radiiCheck > 1) {
 			rx = (float) Math.sqrt(radiiCheck) * rx;
 			ry = (float) Math.sqrt(radiiCheck) * ry;
-			System.out.println("radii not large enough, increasing to: " + rx + "," + ry);
 			rx2 = rx * rx;
 			ry2 = ry * ry;
 		}
@@ -565,19 +567,25 @@ public class SVGBasicControl extends BaseControl {
 			g2d.setPaint(strokeColor);
 			g2d.draw(basicStroke.createStrokedShape(shape2d));
 			g2d.setPaint(fillColor);
+			transform(g2d, svgi);
 			g2d.fill(shape2d);
 		} else if (fillColor != null) {
 			g2d.setPaint(fillColor);
+			//AffineTransform t = new AffineTransform();
+		    //t.rotate(Math.toRadians(45));
+		    //g2d.transform(t);
+			transform(g2d, svgi);
 			g2d.fill(shape2d);
 		} else if (strokeColor != null) {
 			g2d.setPaint(strokeColor);
+			transform(g2d, svgi);
 			g2d.draw(basicStroke.createStrokedShape(shape2d));
 		} else {
+			g2d.setStroke(prevStroke);
+			g2d.setPaint(prevPaint);
+			transform(g2d, svgi);
 			g2d.draw(shape2d);
 		}
-
-		g2d.setPaint(prevPaint);
-		g2d.setStroke(prevStroke);
 	}
 
 	private BasicStroke getStroking(Graphics2D g2d, SVGInfo svgi) {
@@ -633,5 +641,41 @@ public class SVGBasicControl extends BaseControl {
 	private Point2D.Float convertCoordinate(Point2D.Float p1) {
 		Point2D.Float p = p1;
 		return p;
+	}
+
+	private void transform(Graphics2D g2d, SVGInfo svgi) {
+		SVGTransformList transformList = svgi.getTransformList();
+		
+		if(transformList == null)
+			return;
+		
+		int numPoints = transformList.getNumberOfItems();
+		for (int i = 0; i < numPoints; i++) {
+			SVGTransform point = transformList.getItem(i);
+			SVGMatrixImpl mtrx = (SVGMatrixImpl) point.getMatrix();
+			AffineTransform affine = new AffineTransform();
+			
+			switch (point.getType()) {
+			case SVGTransform.SVG_TRANSFORM_MATRIX:
+				affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
+				break;
+			case SVGTransform.SVG_TRANSFORM_TRANSLATE:
+				affine.translate(mtrx.getE(), mtrx.getF());
+				break;
+			case SVGTransform.SVG_TRANSFORM_SCALE:
+				affine.scale(mtrx.getA(), mtrx.getD());
+				break;
+			case SVGTransform.SVG_TRANSFORM_ROTATE:
+				affine.rotate(Math.toRadians(mtrx.getA()), mtrx.getB(), mtrx.getC());
+				break;
+			case SVGTransform.SVG_TRANSFORM_SKEWX:
+				affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
+				break;
+			case SVGTransform.SVG_TRANSFORM_SKEWY:
+				affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
+				break;
+			}
+			g2d.transform(affine);
+		}
 	}
 }
