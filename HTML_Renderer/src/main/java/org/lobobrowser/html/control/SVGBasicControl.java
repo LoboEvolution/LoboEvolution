@@ -71,6 +71,7 @@ public class SVGBasicControl extends BaseControl {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private SVGInfo svgiGroup = new SVGInfo();
 
 	public SVGBasicControl(HTMLElementImpl modelNode) {
 		super(modelNode);
