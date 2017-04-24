@@ -71,6 +71,7 @@ import org.lobobrowser.html.builder.ProgressBuilder;
 import org.lobobrowser.html.builder.SVGBuilder;
 import org.lobobrowser.html.builder.SVGCircleBuilder;
 import org.lobobrowser.html.builder.SVGEllipseBuilder;
+import org.lobobrowser.html.builder.SVGGBuilder;
 import org.lobobrowser.html.builder.SVGLineBuilder;
 import org.lobobrowser.html.builder.SVGPathBuilder;
 import org.lobobrowser.html.builder.SVGPolygonBuilder;
@@ -310,6 +311,7 @@ public class HtmlMapping implements HtmlProperties {
 		builders.put(POLYGON, new SVGPolygonBuilder());
 		builders.put(POLYLINE, new SVGPolylineBuilder());
 		builders.put(PATH, new SVGPathBuilder());
+		builders.put(G, new SVGGBuilder());
 		
 		
 		return builders;

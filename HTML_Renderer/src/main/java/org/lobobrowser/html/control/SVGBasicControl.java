@@ -70,14 +70,15 @@ import org.w3c.dom.svg.SVGPathSeg;
 public class SVGBasicControl extends BaseControl {
 	
 	private static final long serialVersionUID = 1L;
+	
 
 	public SVGBasicControl(HTMLElementImpl modelNode) {
 		super(modelNode);
 	}
 
 	public void circle(Graphics2D g2d, SVGInfo svgi) {
-		Shape circle = new Ellipse2D.Double(svgi.getX() - svgi.getR(), svgi.getY() - svgi.getR(), 2 * svgi.getR(),
-				2 * svgi.getR());
+		Shape circle = new Ellipse2D.Double(svgi.getX() - svgi.getR(), svgi.getY() - svgi.getR(), 2 * svgi.getR(), 2 * svgi.getR());
+		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, circle, svgi);
 	}
 
@@ -94,15 +95,16 @@ public class SVGBasicControl extends BaseControl {
 		} else {
 			rect = new Rectangle2D.Float(svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight());
 		}
+		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, rect, svgi);
 	}
 
 	public void ellipse(Graphics2D g2d, SVGInfo svgi) {
 		Point2D.Float center = convertCoordinate(new Point2D.Float(svgi.getX(), svgi.getY()));
-		Point2D.Float corner = convertCoordinate(
-				new Point2D.Float(svgi.getX() - svgi.getRx(), svgi.getY() - svgi.getRy()));
+		Point2D.Float corner = convertCoordinate(new Point2D.Float(svgi.getX() - svgi.getRx(), svgi.getY() - svgi.getRy()));
 		Ellipse2D.Float ellipse2d = new Ellipse2D.Float();
 		ellipse2d.setFrameFromCenter(center, corner);
+		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, ellipse2d, svgi);
 	}
 
@@ -112,6 +114,7 @@ public class SVGBasicControl extends BaseControl {
 		p = new Point2D.Float(svgi.getX2(), svgi.getY2());
 		Point2D.Float p2 = convertCoordinate(p);
 		Line2D line2d = new Line2D.Float(p1, p2);
+		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, line2d, svgi);
 	}
 
@@ -131,6 +134,7 @@ public class SVGBasicControl extends BaseControl {
 		}
 
 		path.closePath();
+		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, path, svgi);
 
 	}
@@ -150,6 +154,7 @@ public class SVGBasicControl extends BaseControl {
 			}
 		}
 		path.closePath();
+		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, path, svgi);
 
 	}
@@ -173,6 +178,7 @@ public class SVGBasicControl extends BaseControl {
 					i++;
 					seg = (SVGPathSegImpl) list.getItem(i);
 				}
+				
 				if (seg.getPathSegTypeAsLetter().equalsIgnoreCase("m")) {
 					if (seg.getPathSegType() == SVGPathSeg.PATHSEG_MOVETO_REL) {
 						float x = ((SVGPathSegMovetoRelImpl) seg).getX();
@@ -452,6 +458,7 @@ public class SVGBasicControl extends BaseControl {
 			}
 		}
 
+		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, path, svgi);
 
 	}
@@ -538,53 +545,64 @@ public class SVGBasicControl extends BaseControl {
 		Color fillColor = null;
 		float fillOpacity = 1.0F;
 		float strokeOpacity = 1.0F;
-
-		if (svgi.getStyle().getFillOpacity() != null) {
+		
+		SVGInfo group = getSvgiGroup();
+		
+		if (group.getStyle() != null && group.getStyle().getFillOpacity() != null) {
+			fillOpacity = Float.parseFloat(group.getStyle().getFillOpacity());
+		} else if (svgi.getStyle().getFillOpacity() != null) {
 			fillOpacity = Float.parseFloat(svgi.getStyle().getFillOpacity());
 		}
 
-		if (svgi.getStyle().getStrokeOpacity() != null) {
+		if (group.getStyle() != null && group.getStyle().getStrokeOpacity() != null) {
+			strokeOpacity = Float.parseFloat(group.getStyle().getStrokeOpacity());
+		} else if (svgi.getStyle().getStrokeOpacity() != null) {
 			strokeOpacity = Float.parseFloat(svgi.getStyle().getStrokeOpacity());
 		}
 
-		if (svgi.getStyle().getOpacity() != null) {
+		if (group.getStyle() != null && group.getStyle().getOpacity() != null) {
+			fillOpacity = Float.parseFloat(group.getStyle().getOpacity());
+			strokeOpacity = Float.parseFloat(group.getStyle().getOpacity());
+		} else if (svgi.getStyle().getOpacity() != null) {
 			fillOpacity = Float.parseFloat(svgi.getStyle().getOpacity());
 			strokeOpacity = Float.parseFloat(svgi.getStyle().getOpacity());
 		}
 
-		if (svgi.getStyle().getStroke() != null && !"none".equalsIgnoreCase(svgi.getStyle().getStroke())) {
+		if (group.getStyle() != null && group.getStyle().getStroke() != null && !"none".equalsIgnoreCase(group.getStyle().getStroke())) {
+			Color color = ColorFactory.getInstance().getColor(group.getStyle().getStroke());
+			strokeColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * strokeOpacity));
+			basicStroke = getStroking(g2d, group);
+		} else if (svgi.getStyle().getStroke() != null && !"none".equalsIgnoreCase(svgi.getStyle().getStroke())) {
 			Color color = ColorFactory.getInstance().getColor(svgi.getStyle().getStroke());
 			strokeColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * strokeOpacity));
 			basicStroke = getStroking(g2d, svgi);
 		}
 
-		if (svgi.getStyle().getFill() != null && !"none".equalsIgnoreCase(svgi.getStyle().getFill())) {
+		if (group.getStyle() != null && group.getStyle().getFill() != null && !"none".equalsIgnoreCase(group.getStyle().getFill())) {
+			Color color = ColorFactory.getInstance().getColor(group.getStyle().getFill());
+			fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * fillOpacity));
+		} else if (svgi.getStyle().getFill() != null && !"none".equalsIgnoreCase(svgi.getStyle().getFill())) {
 			Color color = ColorFactory.getInstance().getColor(svgi.getStyle().getFill());
 			fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * fillOpacity));
 		}
 		
-		if (fillColor != null && strokeColor != null) {
-			g2d.setPaint(strokeColor);
-			g2d.draw(basicStroke.createStrokedShape(shape2d));
-			g2d.setPaint(fillColor);
-			transform(g2d, svgi);
-			g2d.fill(shape2d);
-		} else if (fillColor != null) {
-			g2d.setPaint(fillColor);
-			//AffineTransform t = new AffineTransform();
-		    //t.rotate(Math.toRadians(45));
-		    //g2d.transform(t);
-			transform(g2d, svgi);
-			g2d.fill(shape2d);
-		} else if (strokeColor != null) {
-			g2d.setPaint(strokeColor);
-			transform(g2d, svgi);
-			g2d.draw(basicStroke.createStrokedShape(shape2d));
-		} else {
+		if (fillColor == null && strokeColor == null) {
 			g2d.setStroke(prevStroke);
 			g2d.setPaint(prevPaint);
-			transform(g2d, svgi);
+			//transform(g2d, svgi, group);
 			g2d.draw(shape2d);
+		}
+		
+		if (fillColor != null) {
+			g2d.setPaint(fillColor);
+			//transform(g2d, svgi, group);
+			g2d.fill(shape2d);
+		}
+		
+		if (strokeColor != null) {
+			g2d.setPaint(strokeColor);
+			//transform(g2d, svgi, group);
+			g2d.draw(basicStroke.createStrokedShape(shape2d));
 		}
 	}
 
@@ -643,8 +661,15 @@ public class SVGBasicControl extends BaseControl {
 		return p;
 	}
 
-	private void transform(Graphics2D g2d, SVGInfo svgi) {
-		SVGTransformList transformList = svgi.getTransformList();
+	public void transform(Graphics2D g2d, SVGInfo svgi, SVGInfo group) {
+		
+		SVGTransformList transformList = null;
+		
+		if (group.getTransformList() != null) {
+			transformList = group.getTransformList();
+		} else {
+			transformList = svgi.getTransformList();
+		}
 		
 		if(transformList == null)
 			return;
@@ -677,5 +702,19 @@ public class SVGBasicControl extends BaseControl {
 			}
 			g2d.transform(affine);
 		}
+	}
+
+	/**
+	 * @return the svgiGroup
+	 */
+	public SVGInfo getSvgiGroup() {
+		return svgiGroup;
+	}
+
+	/**
+	 * @param svgiGroup the svgiGroup to set
+	 */
+	public void setSvgiGroup(SVGInfo svgiGroup) {
+		this.svgiGroup = svgiGroup;
 	}
 }

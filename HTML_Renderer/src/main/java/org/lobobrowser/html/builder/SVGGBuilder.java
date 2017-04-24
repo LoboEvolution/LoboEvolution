@@ -21,12 +21,12 @@
 package org.lobobrowser.html.builder;
 
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.svgimpl.SVGLineElementImpl;
+import org.lobobrowser.html.svgimpl.SVGGElementImpl;
 
-public class SVGLineBuilder extends HTMLElementBuilder {
-
+public class SVGGBuilder extends HTMLElementBuilder {
+	
 	@Override
 	protected HTMLElementImpl build(String name) {
-		return new SVGLineElementImpl(name);
+		return new SVGGElementImpl(name);
 	}
 }

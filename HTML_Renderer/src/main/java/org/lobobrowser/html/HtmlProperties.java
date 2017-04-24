@@ -129,6 +129,9 @@ public interface HtmlProperties {
 
     /** The frame. */
     String FRAME = "FRAME";
+    
+    /** The g. */
+    String G = "G";
 
     /** The head. */
     String HEAD = "HEAD";

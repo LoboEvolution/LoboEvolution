@@ -18,15 +18,30 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-package org.lobobrowser.html.builder;
+package org.lobobrowser.html.svgimpl;
 
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.svgimpl.SVGLineElementImpl;
+import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.jsimpl.EventException;
+import org.lobobrowser.w3c.events.Event;
+import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
+import org.lobobrowser.w3c.svg.SVGGElement;
+import org.w3c.dom.DOMException;
 
-public class SVGLineBuilder extends HTMLElementBuilder {
+public class SVGGElementImpl extends SVGSVGElementImpl implements SVGGElement {
+
+	public SVGGElementImpl(String name) {
+		super(name);
+	}
 
 	@Override
-	protected HTMLElementImpl build(String name) {
-		return new SVGLineElementImpl(name);
+	public SVGAnimatedTransformList getTransform() {
+		return new SVGAnimatedTransformListImpl(this.getAttribute(HtmlAttributeProperties.TRANSFORM));
 	}
+
+	@Override
+	public boolean dispatchEvent(Event evt) throws EventException, DOMException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
