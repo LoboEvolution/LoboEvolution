@@ -85,8 +85,12 @@ public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGEl
 	}
 	
 	public String getD() {
-		return this.getAttribute(D);
-	}
+        String d = this.getAttribute(D);
+        if (d != null) {
+            d.replaceAll("\\r|\\n", "");
+        }
+        return d;
+    }
 
 	@Override
 	public String getXMLbase() {
