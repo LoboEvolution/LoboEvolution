@@ -168,6 +168,7 @@ public class SVGControl extends SVGBasicControl {
 	}
 	
 	private void svgChildren(Node n) {
+		
 		if (n instanceof SVGCircleElementImpl) {
 			SVGCircleElementImpl svgcircle = (SVGCircleElementImpl) n;
 			AbstractCSS2Properties style = svgcircle.getStyle();
@@ -464,7 +465,52 @@ public class SVGControl extends SVGBasicControl {
 			svgi.setPathSegList(svgpath.getPathSegList());
 			svgi.setStyle(svgpath.getStyle());
 			svgList.add(svgi);
+		}
+		
+		if (n instanceof SVGGElementImpl) {
+			SVGGElementImpl svgGroup = (SVGGElementImpl) n;
+			AbstractCSS2Properties style = svgGroup.getStyle();
 			
-		}		
+			if (svgGroup.getFill() != null) {
+				style.setFill(svgGroup.getFill());
+			}
+			
+			if (svgGroup.getStroke() != null) {
+				style.setStroke(svgGroup.getStroke());
+			}
+			
+			if (svgGroup.getStrokeDashArray() != null) {
+				style.setStrokeDashArray(svgGroup.getStrokeDashArray());
+			}
+			
+			if (svgGroup.getStrokeLineCap() != null) {
+				style.setStrokeLineCap(svgGroup.getStrokeLineCap());
+			}
+			
+			if (svgGroup.getStrokeMiterLimit() != null) {
+				style.setStrokeMiterLimit(svgGroup.getStrokeMiterLimit());
+			}
+			
+			if (svgGroup.getStrokeOpacity() != null) {
+				style.setStrokeOpacity(svgGroup.getStrokeOpacity());
+			}
+			
+			if (svgGroup.getStrokeWidth() != null) {
+				style.setStrokeWidth(svgGroup.getStrokeWidth());
+			}
+			
+			SVGInfo svgiGroup = new SVGInfo();
+			svgiGroup.setTransformList(svgGroup.getTransform().getBaseVal());
+			svgiGroup.setStyle(svgGroup.getStyle());
+			setSvgiGroup(svgiGroup);
+			
+			NodeList gChildNodes = svgGroup.getChildNodes();
+			logger.error("gChildNodes.getLength(): " + gChildNodes.getLength());
+			for (int g = 0; g < gChildNodes.getLength(); g++) {
+				Node n1 = (Node) gChildNodes.item(g);
+				logger.error(n1.getClass().getName());
+				svgChildren(n1);
+			}
+		}
 	}
 }
