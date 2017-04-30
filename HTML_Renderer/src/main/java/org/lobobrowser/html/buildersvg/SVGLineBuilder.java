@@ -18,15 +18,16 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-package org.lobobrowser.html.builder;
+package org.lobobrowser.html.buildersvg;
 
+import org.lobobrowser.html.builder.HTMLElementBuilder;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.svgimpl.SVGGElementImpl;
+import org.lobobrowser.html.svgimpl.SVGLineElementImpl;
 
-public class SVGGBuilder extends HTMLElementBuilder {
-	
+public class SVGLineBuilder extends HTMLElementBuilder {
+
 	@Override
 	protected HTMLElementImpl build(String name) {
-		return new SVGGElementImpl(name);
+		return new SVGLineElementImpl(name);
 	}
 }
