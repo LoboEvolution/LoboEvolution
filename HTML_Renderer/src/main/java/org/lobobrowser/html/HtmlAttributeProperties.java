@@ -471,5 +471,8 @@ public interface HtmlAttributeProperties {
 	/** The x2. */
 	String X2 = "x2";
 	
+	/** The xlink:href. */
+	String XLINK_HREF = "xlink:href";
+	
 	
 }

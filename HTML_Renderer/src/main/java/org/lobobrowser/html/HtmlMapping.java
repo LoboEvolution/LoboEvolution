@@ -68,15 +68,6 @@ import org.lobobrowser.html.builder.OutputBuilder;
 import org.lobobrowser.html.builder.PBuilder;
 import org.lobobrowser.html.builder.PreBuilder;
 import org.lobobrowser.html.builder.ProgressBuilder;
-import org.lobobrowser.html.builder.SVGBuilder;
-import org.lobobrowser.html.builder.SVGCircleBuilder;
-import org.lobobrowser.html.builder.SVGEllipseBuilder;
-import org.lobobrowser.html.builder.SVGGBuilder;
-import org.lobobrowser.html.builder.SVGLineBuilder;
-import org.lobobrowser.html.builder.SVGPathBuilder;
-import org.lobobrowser.html.builder.SVGPolygonBuilder;
-import org.lobobrowser.html.builder.SVGPolylineBuilder;
-import org.lobobrowser.html.builder.SVGRectBuilder;
 import org.lobobrowser.html.builder.ScriptBuilder;
 import org.lobobrowser.html.builder.SectionBuilder;
 import org.lobobrowser.html.builder.SelectBuilder;
@@ -98,6 +89,17 @@ import org.lobobrowser.html.builder.TtBuilder;
 import org.lobobrowser.html.builder.UlBuilder;
 import org.lobobrowser.html.builder.UnderlineBuilder;
 import org.lobobrowser.html.builder.VideoBuilder;
+import org.lobobrowser.html.buildersvg.SVGBuilder;
+import org.lobobrowser.html.buildersvg.SVGCircleBuilder;
+import org.lobobrowser.html.buildersvg.SVGDefsBuilder;
+import org.lobobrowser.html.buildersvg.SVGEllipseBuilder;
+import org.lobobrowser.html.buildersvg.SVGGBuilder;
+import org.lobobrowser.html.buildersvg.SVGLineBuilder;
+import org.lobobrowser.html.buildersvg.SVGPathBuilder;
+import org.lobobrowser.html.buildersvg.SVGPolygonBuilder;
+import org.lobobrowser.html.buildersvg.SVGPolylineBuilder;
+import org.lobobrowser.html.buildersvg.SVGRectBuilder;
+import org.lobobrowser.html.buildersvg.SVGUseBuilder;
 import org.lobobrowser.html.info.ElementInfo;
 
 /**
@@ -312,7 +314,8 @@ public class HtmlMapping implements HtmlProperties {
 		builders.put(POLYLINE, new SVGPolylineBuilder());
 		builders.put(PATH, new SVGPathBuilder());
 		builders.put(G, new SVGGBuilder());
-		
+		builders.put(DEFS, new SVGDefsBuilder());
+		builders.put(USE, new SVGUseBuilder());
 		
 		return builders;
 	}

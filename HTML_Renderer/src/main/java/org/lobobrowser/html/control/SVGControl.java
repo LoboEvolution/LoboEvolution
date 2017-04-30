@@ -31,6 +31,7 @@ import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.info.SVGInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.svgimpl.SVGCircleElementImpl;
+import org.lobobrowser.html.svgimpl.SVGDefsElementImpl;
 import org.lobobrowser.html.svgimpl.SVGEllipseElementImpl;
 import org.lobobrowser.html.svgimpl.SVGGElementImpl;
 import org.lobobrowser.html.svgimpl.SVGLineElementImpl;
@@ -39,6 +40,7 @@ import org.lobobrowser.html.svgimpl.SVGPolygonElementImpl;
 import org.lobobrowser.html.svgimpl.SVGPolylineElementImpl;
 import org.lobobrowser.html.svgimpl.SVGRectElementImpl;
 import org.lobobrowser.html.svgimpl.SVGSVGElementImpl;
+import org.lobobrowser.html.svgimpl.SVGUseElementImpl;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -50,34 +52,17 @@ public class SVGControl extends SVGBasicControl {
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(SVGControl.class.getName());
 
+	private SVGSVGElementImpl modelNode;
+	
 	private ArrayList<SVGInfo> svgList = new ArrayList<SVGInfo>();
-	
-	/** The circle. */
-	private final int CIRCLE = 1;
-
-	/** The rect. */
-	private final int RECT = 2;
-
-	/** The ellipse. */
-	private final int ELLIPSE = 3;
-	
-	/** The line. */
-	private final int LINE = 4;
-	
-	/** The line. */
-	private final int POLYGON = 5;
-	
-	/** The line. */
-	private final int POLYLINE = 6;
-	
-	/** The path. */
-	private final int PATH = 7;
 	
 	public SVGControl(SVGSVGElementImpl modelNode) {
 		super(modelNode);
+		this.modelNode = modelNode;
 		NodeList childNodes = modelNode.getChildNodes();
 		for (int i = 0; i < childNodes.getLength(); i++) {
 			Node n = (Node) childNodes.item(i);
+						
 			if (n instanceof SVGGElementImpl) {
 				SVGGElementImpl svgGroup = (SVGGElementImpl) n;
 				AbstractCSS2Properties style = svgGroup.getStyle();
@@ -120,6 +105,12 @@ public class SVGControl extends SVGBasicControl {
 					Node n1 = (Node) gChildNodes.item(g);
 					svgChildren(n1);
 				}
+			}else if (n instanceof SVGDefsElementImpl) {
+				SVGDefsElementImpl defs = (SVGDefsElementImpl) n;
+				SVGInfo svgiDefs= new SVGInfo();
+				svgiDefs.setTransformList(defs.getTransform().getBaseVal());
+				setSvgiGroup(svgiDefs);
+				setDefsList(defs.getChildNodes());
 			} else{
 				svgChildren(n);
 			}
@@ -158,6 +149,8 @@ public class SVGControl extends SVGBasicControl {
 				case PATH:
 					path(g2d, svgi);
 					break;
+				case USE:
+					use(g2d, svgi, modelNode);
 				default:
 					break;
 				}
@@ -167,7 +160,7 @@ public class SVGControl extends SVGBasicControl {
 		}
 	}
 	
-	private void svgChildren(Node n) {
+	private  void svgChildren(Node n) {
 		
 		if (n instanceof SVGCircleElementImpl) {
 			SVGCircleElementImpl svgcircle = (SVGCircleElementImpl) n;
@@ -505,12 +498,62 @@ public class SVGControl extends SVGBasicControl {
 			setSvgiGroup(svgiGroup);
 			
 			NodeList gChildNodes = svgGroup.getChildNodes();
-			logger.error("gChildNodes.getLength(): " + gChildNodes.getLength());
 			for (int g = 0; g < gChildNodes.getLength(); g++) {
 				Node n1 = (Node) gChildNodes.item(g);
-				logger.error(n1.getClass().getName());
 				svgChildren(n1);
 			}
+		}
+		
+		if (n instanceof SVGUseElementImpl) {
+			SVGUseElementImpl use = (SVGUseElementImpl) n;
+			AbstractCSS2Properties style = use.getStyle();
+			boolean isStyle = false;
+			SVGInfo svgi = new SVGInfo();
+			svgi.setMethod(USE);
+			svgi.setHref(use.getHref().getBaseVal());
+			svgi.setX(use.getX().getBaseVal().getValue());
+			svgi.setY(use.getY().getBaseVal().getValue());
+			svgi.setTransformList(use.getTransform().getBaseVal());
+			
+			if (use.getFill() != null) {
+				style.setFill(use.getFill());
+				isStyle = true;
+			}
+			
+			if (use.getStroke() != null) {
+				style.setStroke(use.getStroke());
+			}
+			
+			if (use.getStrokeDashArray() != null) {
+				style.setStrokeDashArray(use.getStrokeDashArray());
+				isStyle = true;
+			}
+			
+			if (use.getStrokeLineCap() != null) {
+				style.setStrokeLineCap(use.getStrokeLineCap());
+				isStyle = true;
+			}
+			
+			if (use.getStrokeMiterLimit() != null) {
+				style.setStrokeMiterLimit(use.getStrokeMiterLimit());
+				isStyle = true;
+			}
+			
+			if (use.getStrokeOpacity() != null) {
+				style.setStrokeOpacity(use.getStrokeOpacity());
+				isStyle = true;
+			}
+			
+			if (use.getStrokeWidth() != null) {
+				style.setStrokeWidth(use.getStrokeWidth());
+				isStyle = true;
+			}
+			
+			if(isStyle){
+				svgi.setStyle(use.getStyle());
+			}
+			
+			svgList.add(svgi);
 		}
 	}
 }

@@ -23,9 +23,7 @@ package org.lobobrowser.html.control;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Paint;
 import java.awt.Shape;
-import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
@@ -34,11 +32,18 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
+import java.util.ArrayList;
 
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.SVGInfo;
+import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.html.svgimpl.SVGCircleElementImpl;
+import org.lobobrowser.html.svgimpl.SVGEllipseElementImpl;
+import org.lobobrowser.html.svgimpl.SVGGElementImpl;
+import org.lobobrowser.html.svgimpl.SVGLineElementImpl;
 import org.lobobrowser.html.svgimpl.SVGMatrixImpl;
+import org.lobobrowser.html.svgimpl.SVGPathElementImpl;
 import org.lobobrowser.html.svgimpl.SVGPathSegArcAbsImpl;
 import org.lobobrowser.html.svgimpl.SVGPathSegArcRelImpl;
 import org.lobobrowser.html.svgimpl.SVGPathSegCurvetoCubicAbsImpl;
@@ -59,12 +64,20 @@ import org.lobobrowser.html.svgimpl.SVGPathSegLinetoVerticalRelImpl;
 import org.lobobrowser.html.svgimpl.SVGPathSegMovetoAbsImpl;
 import org.lobobrowser.html.svgimpl.SVGPathSegMovetoRelImpl;
 import org.lobobrowser.html.svgimpl.SVGPointImpl;
+import org.lobobrowser.html.svgimpl.SVGPolygonElementImpl;
+import org.lobobrowser.html.svgimpl.SVGPolylineElementImpl;
+import org.lobobrowser.html.svgimpl.SVGRectElementImpl;
+import org.lobobrowser.html.svgimpl.SVGSVGElementImpl;
+import org.lobobrowser.html.svgimpl.SVGUseElementImpl;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.svg.SVGPathSegList;
 import org.lobobrowser.w3c.svg.SVGPoint;
 import org.lobobrowser.w3c.svg.SVGPointList;
 import org.lobobrowser.w3c.svg.SVGTransform;
 import org.lobobrowser.w3c.svg.SVGTransformList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.svg.SVGPathSeg;
 
 public class SVGBasicControl extends BaseControl {
@@ -72,6 +85,34 @@ public class SVGBasicControl extends BaseControl {
 	private static final long serialVersionUID = 1L;
 	
 	private SVGInfo svgiGroup = new SVGInfo();
+	
+	private ArrayList<SVGInfo> useList;
+	
+	private NodeList defsList;
+	
+	/** The circle. */
+	public final int CIRCLE = 1;
+
+	/** The rect. */
+	public final int RECT = 2;
+
+	/** The ellipse. */
+	public final int ELLIPSE = 3;
+	
+	/** The line. */
+	public final int LINE = 4;
+	
+	/** The line. */
+	public final int POLYGON = 5;
+	
+	/** The line. */
+	public final int POLYLINE = 6;
+	
+	/** The path. */
+	public final int PATH = 7;
+	
+	/** The use. */
+	public final int USE = 8;
 
 	public SVGBasicControl(HTMLElementImpl modelNode) {
 		super(modelNode);
@@ -463,7 +504,110 @@ public class SVGBasicControl extends BaseControl {
 		drawFillAndStroke(g2d, path, svgi);
 
 	}
-	
+		
+	public void use(Graphics2D g2d, SVGInfo svgi,SVGSVGElementImpl svg) {
+		
+		useList = new ArrayList<SVGInfo>();
+		String href = svgi.getHref();
+		float x = svgi.getX();
+		float y = svgi.getY();
+		AbstractCSS2Properties style = svgi.getStyle();
+		SVGTransformList transformList = svgi.getTransformList();
+		
+		Element elementById = svg.getOwnerDocument().getElementById(href.split("#")[1]);
+		useChildren(elementById);
+		
+		
+		for (int i = 0; i < useList.size(); i++) {
+			SVGInfo info = useList.get(i);
+			
+			if (x > 0) {
+				info.setX(x);
+			}
+
+			if (y > 0) {
+				info.setY(y);
+			}
+			
+			if(style != null){
+				info.setStyle(style);
+			}
+			
+			if(transformList!= null && transformList.getNumberOfItems() > 0){
+				info.setTransformList(transformList);
+			}
+			
+			switch (info.getMethod()) {
+			case CIRCLE:
+				circle(g2d, info);
+				break;
+			case RECT:
+				rectangle(g2d, info);
+				break;
+			case ELLIPSE:
+				ellipse(g2d, info);
+				break;
+			case LINE:
+				line(g2d, info);
+				break;
+			case POLYGON:
+				polygon(g2d, info);
+				break;
+			case POLYLINE:
+				polyline(g2d, info);
+				break;
+			case PATH:
+				path(g2d, info);
+				break;
+			default:
+				break;
+			}
+		}		
+	}
+
+    public void transform(Graphics2D g2d, SVGInfo svgi, SVGInfo group) {
+		
+		SVGTransformList transformList = null;
+		
+		if (group.getTransformList() != null) {
+			transformList = group.getTransformList();
+		} else {
+			transformList = svgi.getTransformList();
+		}
+		
+		if(transformList == null)
+			return;
+		
+		int numPoints = transformList.getNumberOfItems();
+		for (int i = 0; i < numPoints; i++) {
+			SVGTransform point = transformList.getItem(i);
+			SVGMatrixImpl mtrx = (SVGMatrixImpl) point.getMatrix();
+			AffineTransform affine = new AffineTransform();
+			
+			switch (point.getType()) {
+			case SVGTransform.SVG_TRANSFORM_MATRIX:
+				affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
+				break;
+			case SVGTransform.SVG_TRANSFORM_TRANSLATE:
+				affine.translate(mtrx.getE(), mtrx.getF());
+				break;
+			case SVGTransform.SVG_TRANSFORM_SCALE:
+				affine.scale(mtrx.getA(), mtrx.getD());
+				break;
+			case SVGTransform.SVG_TRANSFORM_ROTATE:
+				affine.rotate(Math.toRadians(mtrx.getA()), mtrx.getB(), mtrx.getC());
+				break;
+			case SVGTransform.SVG_TRANSFORM_SKEWX:
+				affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
+				break;
+			case SVGTransform.SVG_TRANSFORM_SKEWY:
+				affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
+				break;
+			}
+			g2d.transform(affine);
+		}
+	}
+
 	private Shape createArc(float x1, float y1, float x2, float y2, float rx, float ry, float angle, boolean fA, boolean fS) {
 
 		double cosAngle = Math.cos(angle);
@@ -536,14 +680,12 @@ public class SVGBasicControl extends BaseControl {
 		arc = AffineTransform.getRotateInstance(angle, cx, cy).createTransformedShape(arc);
 		return arc;
 	}
-
+	
 	private void drawFillAndStroke(Graphics2D g2d, Shape shape2d, SVGInfo svgi) {
 
-		Stroke prevStroke = g2d.getStroke();
-		Paint prevPaint = g2d.getPaint();
 		BasicStroke basicStroke = null;
 		Color strokeColor = null;
-		Color fillColor = null;
+		Color fillColor = Color.BLACK;
 		float fillOpacity = 1.0F;
 		float strokeOpacity = 1.0F;
 		
@@ -587,22 +729,13 @@ public class SVGBasicControl extends BaseControl {
 			fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * fillOpacity));
 		}
 		
-		if (fillColor == null && strokeColor == null) {
-			g2d.setStroke(prevStroke);
-			g2d.setPaint(prevPaint);
-			//transform(g2d, svgi, group);
-			g2d.draw(shape2d);
-		}
-		
 		if (fillColor != null) {
 			g2d.setPaint(fillColor);
-			//transform(g2d, svgi, group);
 			g2d.fill(shape2d);
 		}
 		
 		if (strokeColor != null) {
 			g2d.setPaint(strokeColor);
-			//transform(g2d, svgi, group);
 			g2d.draw(basicStroke.createStrokedShape(shape2d));
 		}
 	}
@@ -662,47 +795,360 @@ public class SVGBasicControl extends BaseControl {
 		return p;
 	}
 
-	public void transform(Graphics2D g2d, SVGInfo svgi, SVGInfo group) {
+	private void useChildren(Node n) {
 		
-		SVGTransformList transformList = null;
-		
-		if (group.getTransformList() != null) {
-			transformList = group.getTransformList();
-		} else {
-			transformList = svgi.getTransformList();
-		}
-		
-		if(transformList == null)
-			return;
-		
-		int numPoints = transformList.getNumberOfItems();
-		for (int i = 0; i < numPoints; i++) {
-			SVGTransform point = transformList.getItem(i);
-			SVGMatrixImpl mtrx = (SVGMatrixImpl) point.getMatrix();
-			AffineTransform affine = new AffineTransform();
+		if (n instanceof SVGCircleElementImpl) {
+			SVGCircleElementImpl svgcircle = (SVGCircleElementImpl) n;
+			AbstractCSS2Properties style = svgcircle.getStyle();
 			
-			switch (point.getType()) {
-			case SVGTransform.SVG_TRANSFORM_MATRIX:
-				affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
-				break;
-			case SVGTransform.SVG_TRANSFORM_TRANSLATE:
-				affine.translate(mtrx.getE(), mtrx.getF());
-				break;
-			case SVGTransform.SVG_TRANSFORM_SCALE:
-				affine.scale(mtrx.getA(), mtrx.getD());
-				break;
-			case SVGTransform.SVG_TRANSFORM_ROTATE:
-				affine.rotate(Math.toRadians(mtrx.getA()), mtrx.getB(), mtrx.getC());
-				break;
-			case SVGTransform.SVG_TRANSFORM_SKEWX:
-				affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
-				break;
-			case SVGTransform.SVG_TRANSFORM_SKEWY:
-				affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
-				break;
+			SVGInfo svgi = new SVGInfo();
+			svgi.setMethod(CIRCLE);
+			svgi.setX(svgcircle.getCx().getBaseVal().getValue());
+			svgi.setY(svgcircle.getCy().getBaseVal().getValue());
+			svgi.setR(svgcircle.getR().getBaseVal().getValue());
+
+			if (svgcircle.getFill() != null) {
+				style.setFill(svgcircle.getFill());
 			}
-			g2d.transform(affine);
+			
+			if (svgcircle.getStroke() != null) {
+				style.setStroke(svgcircle.getStroke());
+			}
+			
+			if (svgcircle.getStrokeDashArray() != null) {
+				style.setStrokeDashArray(svgcircle.getStrokeDashArray());
+			}
+			
+			if (svgcircle.getStrokeLineCap() != null) {
+				style.setStrokeLineCap(svgcircle.getStrokeLineCap());
+			}
+			
+			if (svgcircle.getStrokeMiterLimit() != null) {
+				style.setStrokeMiterLimit(svgcircle.getStrokeMiterLimit());
+			}
+			
+			if (svgcircle.getStrokeOpacity() != null) {
+				style.setStrokeOpacity(svgcircle.getStrokeOpacity());
+			}
+			
+			if (svgcircle.getStrokeWidth() != null) {
+				style.setStrokeWidth(svgcircle.getStrokeWidth());
+			}
+			
+			svgi.setTransformList(svgcircle.getTransform().getBaseVal());
+			svgi.setStyle(style);
+			useList.add(svgi);
 		}
+
+		if (n instanceof SVGRectElementImpl) {
+			SVGRectElementImpl svgrect = (SVGRectElementImpl) n;
+			AbstractCSS2Properties style = svgrect.getStyle();
+			
+			SVGInfo svgi = new SVGInfo();
+			svgi.setMethod(RECT);
+			svgi.setX(svgrect.getX().getBaseVal().getValue());
+			svgi.setY(svgrect.getY().getBaseVal().getValue());
+			svgi.setWidth(svgrect.getWidth().getBaseVal().getValue());
+			svgi.setHeight(svgrect.getHeight().getBaseVal().getValue());
+			svgi.setRx(svgrect.getRx().getBaseVal().getValue());
+			svgi.setRy(svgrect.getRy().getBaseVal().getValue());
+
+			if (svgrect.getFill() != null) {
+				style.setFill(svgrect.getFill());
+			}
+			
+			if (svgrect.getStroke() != null) {
+				style.setStroke(svgrect.getStroke());
+			}
+			
+			if (svgrect.getStrokeDashArray() != null) {
+				style.setStrokeDashArray(svgrect.getStrokeDashArray());
+			}
+			
+			if (svgrect.getStrokeLineCap() != null) {
+				style.setStrokeLineCap(svgrect.getStrokeLineCap());
+			}
+			
+			if (svgrect.getStrokeMiterLimit() != null) {
+				style.setStrokeMiterLimit(svgrect.getStrokeMiterLimit());
+			}
+			
+			if (svgrect.getStrokeOpacity() != null) {
+				style.setStrokeOpacity(svgrect.getStrokeOpacity());
+			}
+			
+			if (svgrect.getStrokeWidth() != null) {
+				style.setStrokeWidth(svgrect.getStrokeWidth());
+			}
+			
+			svgi.setTransformList(svgrect.getTransform().getBaseVal());
+			svgi.setStyle(style);
+			useList.add(svgi);
+		}
+
+		if (n instanceof SVGEllipseElementImpl) {
+			SVGEllipseElementImpl svgellipse = (SVGEllipseElementImpl) n;
+			AbstractCSS2Properties style = svgellipse.getStyle();
+			
+			SVGInfo svgi = new SVGInfo();
+			svgi.setMethod(ELLIPSE);
+			svgi.setX(svgellipse.getCx().getBaseVal().getValue());
+			svgi.setY(svgellipse.getCy().getBaseVal().getValue());
+			svgi.setRx(svgellipse.getRx().getBaseVal().getValue());
+			svgi.setRy(svgellipse.getRy().getBaseVal().getValue());
+			
+			if (svgellipse.getFill() != null) {
+				style.setFill(svgellipse.getFill());
+			}
+			
+			if (svgellipse.getStroke() != null) {
+				style.setStroke(svgellipse.getStroke());
+			}
+			
+			if (svgellipse.getStrokeDashArray() != null) {
+				style.setStrokeDashArray(svgellipse.getStrokeDashArray());
+			}
+			
+			if (svgellipse.getStrokeLineCap() != null) {
+				style.setStrokeLineCap(svgellipse.getStrokeLineCap());
+			}
+			
+			if (svgellipse.getStrokeMiterLimit() != null) {
+				style.setStrokeMiterLimit(svgellipse.getStrokeMiterLimit());
+			}
+			
+			if (svgellipse.getStrokeOpacity() != null) {
+				style.setStrokeOpacity(svgellipse.getStrokeOpacity());
+			}
+			
+			if (svgellipse.getStrokeWidth() != null) {
+				style.setStrokeWidth(svgellipse.getStrokeWidth());
+			}
+			
+			svgi.setTransformList(svgellipse.getTransform().getBaseVal());
+			svgi.setStyle(svgellipse.getStyle());
+			useList.add(svgi);
+		}
+		
+		if (n instanceof SVGLineElementImpl) {
+			SVGLineElementImpl svgline = (SVGLineElementImpl) n;
+			AbstractCSS2Properties style = svgline.getStyle();
+			
+			SVGInfo svgi = new SVGInfo();
+			svgi.setMethod(LINE);
+			svgi.setX1(svgline.getX1().getBaseVal().getValue());
+			svgi.setY1(svgline.getY1().getBaseVal().getValue());
+			svgi.setX2(svgline.getX2().getBaseVal().getValue());
+			svgi.setY2(svgline.getY2().getBaseVal().getValue());
+			
+			if (svgline.getFill() != null) {
+				style.setFill(svgline.getFill());
+			}
+			
+			if (svgline.getStroke() != null) {
+				style.setStroke(svgline.getStroke());
+			}
+			
+			if (svgline.getStrokeDashArray() != null) {
+				style.setStrokeDashArray(svgline.getStrokeDashArray());
+			}
+			
+			if (svgline.getStrokeLineCap() != null) {
+				style.setStrokeLineCap(svgline.getStrokeLineCap());
+			}
+			
+			if (svgline.getStrokeMiterLimit() != null) {
+				style.setStrokeMiterLimit(svgline.getStrokeMiterLimit());
+			}
+			
+			if (svgline.getStrokeOpacity() != null) {
+				style.setStrokeOpacity(svgline.getStrokeOpacity());
+			}
+			
+			if (svgline.getStrokeWidth() != null) {
+				style.setStrokeWidth(svgline.getStrokeWidth());
+			}
+			
+			svgi.setTransformList(svgline.getTransform().getBaseVal());
+			svgi.setStyle(svgline.getStyle());
+			useList.add(svgi);
+		}
+		
+		if (n instanceof SVGPolylineElementImpl) {
+			SVGPolylineElementImpl svgline = (SVGPolylineElementImpl) n;
+			AbstractCSS2Properties style = svgline.getStyle();
+			
+			SVGInfo svgi = new SVGInfo();
+			svgi.setMethod(POLYLINE);
+			svgi.setPoilist(svgline.getPoints());
+			
+			if (svgline.getFill() != null) {
+				style.setFill(svgline.getFill());
+			}
+			
+			if (svgline.getStroke() != null) {
+				style.setStroke(svgline.getStroke());
+			}
+			
+			if (svgline.getStrokeDashArray() != null) {
+				style.setStrokeDashArray(svgline.getStrokeDashArray());
+			}
+			
+			if (svgline.getStrokeLineCap() != null) {
+				style.setStrokeLineCap(svgline.getStrokeLineCap());
+			}
+			
+			if (svgline.getStrokeMiterLimit() != null) {
+				style.setStrokeMiterLimit(svgline.getStrokeMiterLimit());
+			}
+			
+			if (svgline.getStrokeOpacity() != null) {
+				style.setStrokeOpacity(svgline.getStrokeOpacity());
+			}
+			
+			if (svgline.getStrokeWidth() != null) {
+				style.setStrokeWidth(svgline.getStrokeWidth());
+			}
+			
+			svgi.setTransformList(svgline.getTransform().getBaseVal());
+			svgi.setStyle(svgline.getStyle());
+			useList.add(svgi);
+		}
+		
+		if (n instanceof SVGPolygonElementImpl) {
+			SVGPolygonElementImpl svgline = (SVGPolygonElementImpl) n;
+			AbstractCSS2Properties style = svgline.getStyle();
+			
+			SVGInfo svgi = new SVGInfo();
+			svgi.setMethod(POLYGON);
+			svgi.setPoilist(svgline.getPoints());
+			
+			if (svgline.getFill() != null) {
+				style.setFill(svgline.getFill());
+			}
+			
+			if (svgline.getStroke() != null) {
+				style.setStroke(svgline.getStroke());
+			}
+			
+			if (svgline.getStrokeDashArray() != null) {
+				style.setStrokeDashArray(svgline.getStrokeDashArray());
+			}
+			
+			if (svgline.getStrokeLineCap() != null) {
+				style.setStrokeLineCap(svgline.getStrokeLineCap());
+			}
+			
+			if (svgline.getStrokeMiterLimit() != null) {
+				style.setStrokeMiterLimit(svgline.getStrokeMiterLimit());
+			}
+			
+			if (svgline.getStrokeOpacity() != null) {
+				style.setStrokeOpacity(svgline.getStrokeOpacity());
+			}
+			
+			if (svgline.getStrokeWidth() != null) {
+				style.setStrokeWidth(svgline.getStrokeWidth());
+			}
+			
+			svgi.setTransformList(svgline.getTransform().getBaseVal());
+			svgi.setStyle(svgline.getStyle());
+			useList.add(svgi);
+		}
+		
+		if (n instanceof SVGPathElementImpl) {
+			SVGPathElementImpl svgpath = (SVGPathElementImpl)n;
+			AbstractCSS2Properties style = svgpath.getStyle();
+			SVGInfo svgi = new SVGInfo();
+			svgi.setMethod(PATH);
+			
+			if (svgpath.getFill() != null) {
+				style.setFill(svgpath.getFill());
+			}
+			
+			if (svgpath.getStroke() != null) {
+				style.setStroke(svgpath.getStroke());
+			}
+			
+			if (svgpath.getStrokeDashArray() != null) {
+				style.setStrokeDashArray(svgpath.getStrokeDashArray());
+			}
+			
+			if (svgpath.getStrokeLineCap() != null) {
+				style.setStrokeLineCap(svgpath.getStrokeLineCap());
+			}
+			
+			if (svgpath.getStrokeMiterLimit() != null) {
+				style.setStrokeMiterLimit(svgpath.getStrokeMiterLimit());
+			}
+			
+			if (svgpath.getStrokeOpacity() != null) {
+				style.setStrokeOpacity(svgpath.getStrokeOpacity());
+			}
+			
+			if (svgpath.getStrokeWidth() != null) {
+				style.setStrokeWidth(svgpath.getStrokeWidth());
+			}
+			
+			svgi.setPathSegList(svgpath.getPathSegList());
+			svgi.setStyle(svgpath.getStyle());
+			useList.add(svgi);
+		}
+		
+		if (n instanceof SVGGElementImpl) {
+			SVGGElementImpl svgGroup = (SVGGElementImpl) n;
+			AbstractCSS2Properties style = svgGroup.getStyle();
+			
+			if (svgGroup.getFill() != null) {
+				style.setFill(svgGroup.getFill());
+			}
+			
+			if (svgGroup.getStroke() != null) {
+				style.setStroke(svgGroup.getStroke());
+			}
+			
+			if (svgGroup.getStrokeDashArray() != null) {
+				style.setStrokeDashArray(svgGroup.getStrokeDashArray());
+			}
+			
+			if (svgGroup.getStrokeLineCap() != null) {
+				style.setStrokeLineCap(svgGroup.getStrokeLineCap());
+			}
+			
+			if (svgGroup.getStrokeMiterLimit() != null) {
+				style.setStrokeMiterLimit(svgGroup.getStrokeMiterLimit());
+			}
+			
+			if (svgGroup.getStrokeOpacity() != null) {
+				style.setStrokeOpacity(svgGroup.getStrokeOpacity());
+			}
+			
+			if (svgGroup.getStrokeWidth() != null) {
+				style.setStrokeWidth(svgGroup.getStrokeWidth());
+			}
+			
+			SVGInfo svgiGroup = new SVGInfo();
+			svgiGroup.setTransformList(svgGroup.getTransform().getBaseVal());
+			svgiGroup.setStyle(svgGroup.getStyle());
+			setSvgiGroup(svgiGroup);
+			
+			NodeList gChildNodes = svgGroup.getChildNodes();
+			for (int g = 0; g < gChildNodes.getLength(); g++) {
+				Node n1 = (Node) gChildNodes.item(g);
+				useChildren(n1);
+			}
+		}
+		
+		if (n instanceof SVGUseElementImpl) {
+			SVGUseElementImpl use = (SVGUseElementImpl) n;
+			SVGInfo svgi = new SVGInfo();
+			svgi.setMethod(USE);
+			svgi.setHref(use.getHref().getBaseVal());
+			svgi.setX(use.getX().getBaseVal().getValue());
+			svgi.setY(use.getY().getBaseVal().getValue());
+			svgi.setTransformList(use.getTransform().getBaseVal());
+			useList.add(svgi);
+		}		
 	}
 
 	/**
@@ -718,4 +1164,18 @@ public class SVGBasicControl extends BaseControl {
 	public void setSvgiGroup(SVGInfo svgiGroup) {
 		this.svgiGroup = svgiGroup;
 	}
+
+		/**
+	 * @param defsList the defsList to set
+	 */
+	public void setDefsList(NodeList defsList) {
+		this.defsList = defsList;
+	}
+
+		/**
+		 * @return the defsList
+		 */
+		public NodeList getDefsList() {
+			return defsList;
+		}
 }

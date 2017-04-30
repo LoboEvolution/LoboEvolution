@@ -85,6 +85,9 @@ public interface HtmlProperties {
     /** The code. */
     String CODE = "CODE";
     
+    /** The code. */
+    String DEFS = "DEFS";
+    
     /** The del. */
     String DEL = "DEL";
 
@@ -322,11 +325,14 @@ public interface HtmlProperties {
     /** The time. */
     String TIME = "TIME";
 
-    /** The ul. */
-    String UL = "UL";
-
     /** The u. */
     String U = "U";
+    
+    /** The ul. */
+    String UL = "UL";
+    
+    /** The u. */
+    String USE = "USE";
 
     /** The var. */
     String VAR = "VAR";
