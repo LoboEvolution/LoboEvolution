@@ -289,6 +289,9 @@ public interface HtmlProperties {
     /** The spacer. */
     String SPACER = "SPACER";
     
+    /** The symbol. */
+    String SYMBOL = "SYMBOL";
+    
     /**The svg*/
     String SVG = "SVG";
 

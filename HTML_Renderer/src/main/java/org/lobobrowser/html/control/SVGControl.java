@@ -62,7 +62,7 @@ public class SVGControl extends SVGBasicControl {
 		NodeList childNodes = modelNode.getChildNodes();
 		for (int i = 0; i < childNodes.getLength(); i++) {
 			Node n = (Node) childNodes.item(i);
-						
+									
 			if (n instanceof SVGGElementImpl) {
 				SVGGElementImpl svgGroup = (SVGGElementImpl) n;
 				AbstractCSS2Properties style = svgGroup.getStyle();
@@ -105,12 +105,11 @@ public class SVGControl extends SVGBasicControl {
 					Node n1 = (Node) gChildNodes.item(g);
 					svgChildren(n1);
 				}
-			}else if (n instanceof SVGDefsElementImpl) {
+			} else if (n instanceof SVGDefsElementImpl) {
 				SVGDefsElementImpl defs = (SVGDefsElementImpl) n;
 				SVGInfo svgiDefs= new SVGInfo();
 				svgiDefs.setTransformList(defs.getTransform().getBaseVal());
 				setSvgiGroup(svgiDefs);
-				setDefsList(defs.getChildNodes());
 			} else{
 				svgChildren(n);
 			}
