@@ -294,6 +294,9 @@ public interface HtmlProperties {
     
     /**The svg*/
     String SVG = "SVG";
+    
+    /**The text*/
+    String TEXT = "TEXT";
 
     /** The title. */
     String TITLE = "TITLE";

@@ -24,11 +24,14 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
+import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
@@ -69,6 +72,7 @@ import org.lobobrowser.html.svgimpl.SVGPolylineElementImpl;
 import org.lobobrowser.html.svgimpl.SVGRectElementImpl;
 import org.lobobrowser.html.svgimpl.SVGSVGElementImpl;
 import org.lobobrowser.html.svgimpl.SVGUseElementImpl;
+import org.lobobrowser.html.svgimpl.SVGUtility;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.svg.SVGPathSegList;
 import org.lobobrowser.w3c.svg.SVGPoint;
@@ -109,6 +113,9 @@ public class SVGBasicControl extends BaseControl {
 	
 	/** The use. */
 	public final int USE = 8;
+	
+	/** The text. */
+	public final int TEXT = 9;
 
 	public SVGBasicControl(HTMLElementImpl modelNode) {
 		super(modelNode);
@@ -601,7 +608,22 @@ public class SVGBasicControl extends BaseControl {
 		}
 	}
 
-	private Shape createArc(float x1, float y1, float x2, float y2, float rx, float ry, float angle, boolean fA, boolean fS) {
+    public void text(Graphics2D g2d, SVGInfo svgi) {
+    	GeneralPath path = new GeneralPath();
+		path.setWindingRule(Path2D.WIND_NON_ZERO);
+		FontRenderContext frc = new FontRenderContext(null, false, false);
+    	TextLayout tl = new TextLayout(svgi.getText(), svgi.getFont(), frc);
+    	Point2D.Float pos = SVGUtility.calcTextPos(svgi, g2d);
+		AffineTransform textAt = AffineTransform.getTranslateInstance(pos.x, pos.y);
+		textAt.translate(svgi.getX(), svgi.getY());
+		Shape textShape = tl.getOutline(textAt);
+    	path.append(textShape, false);
+    	SVGUtility.getTextAnchor(svgi.getTextAnchor(), path);
+		transform(g2d, svgi, new SVGInfo());
+		drawFillAndStroke(g2d, path, svgi);
+	}
+    
+    private Shape createArc(float x1, float y1, float x2, float y2, float rx, float ry, float angle, boolean fA, boolean fS) {
 
 		double cosAngle = Math.cos(angle);
 		double sinAngle = Math.sin(angle);
@@ -1152,6 +1174,7 @@ public class SVGBasicControl extends BaseControl {
 		return useList;
 	}
 
+	
 	/**
 	 * @return the svgiGroup
 	 */

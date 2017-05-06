@@ -40,7 +40,9 @@ import org.lobobrowser.html.svgimpl.SVGPolygonElementImpl;
 import org.lobobrowser.html.svgimpl.SVGPolylineElementImpl;
 import org.lobobrowser.html.svgimpl.SVGRectElementImpl;
 import org.lobobrowser.html.svgimpl.SVGSVGElementImpl;
+import org.lobobrowser.html.svgimpl.SVGTextElementImpl;
 import org.lobobrowser.html.svgimpl.SVGUseElementImpl;
+import org.lobobrowser.html.svgimpl.SVGUtility;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -150,6 +152,8 @@ public class SVGControl extends SVGBasicControl {
 					break;
 				case USE:
 					use(g2d, svgi, modelNode);
+				case TEXT:
+					text(g2d, svgi);
 				default:
 					break;
 				}
@@ -552,6 +556,48 @@ public class SVGControl extends SVGBasicControl {
 				svgi.setStyle(use.getStyle());
 			}
 			
+			svgList.add(svgi);
+		} else if (n instanceof SVGTextElementImpl) {
+			SVGTextElementImpl text = (SVGTextElementImpl) n;
+			AbstractCSS2Properties style = text.getStyle();
+			SVGInfo svgi = new SVGInfo();
+			svgi.setMethod(TEXT);
+			svgi.setX(text.getX().getBaseVal().getValue());
+			svgi.setY(text.getY().getBaseVal().getValue());
+			svgi.setTransformList(text.getTransform().getBaseVal());
+			svgi.setFont(SVGUtility.getFontValue(text.getFontFamily(), text.getFontSize()));
+			svgi.setText(SVGUtility.getText(n));
+			svgi.setTextAnchor(text.getTextAnchor());
+
+			if (text.getFill() != null) {
+				style.setFill(text.getFill());
+			}
+
+			if (text.getStroke() != null) {
+				style.setStroke(text.getStroke());
+			}
+
+			if (text.getStrokeDashArray() != null) {
+				style.setStrokeDashArray(text.getStrokeDashArray());
+			}
+
+			if (text.getStrokeLineCap() != null) {
+				style.setStrokeLineCap(text.getStrokeLineCap());
+			}
+
+			if (text.getStrokeMiterLimit() != null) {
+				style.setStrokeMiterLimit(text.getStrokeMiterLimit());
+			}
+
+			if (text.getStrokeOpacity() != null) {
+				style.setStrokeOpacity(text.getStrokeOpacity());
+			}
+
+			if (text.getStrokeWidth() != null) {
+				style.setStrokeWidth(text.getStrokeWidth());
+			}
+			
+			svgi.setStyle(style);
 			svgList.add(svgi);
 		}
 	}

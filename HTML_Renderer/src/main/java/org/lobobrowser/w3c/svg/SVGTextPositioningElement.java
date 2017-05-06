@@ -21,9 +21,6 @@
 package org.lobobrowser.w3c.svg;
 
 public interface SVGTextPositioningElement extends SVGTextContentElement {
-	public SVGAnimatedLengthList getX();
-
-	public SVGAnimatedLengthList getY();
 
 	public SVGAnimatedLengthList getDx();
 

@@ -531,6 +531,12 @@ public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGEl
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	
+	public String getFontSize(){
+		return this.getAttribute(HtmlAttributeProperties.FONTSIZE);
+	}
+	
+	public String getFontFamily(){
+		return this.getAttribute(HtmlAttributeProperties.FONTFAMILY);
+	}	
 }

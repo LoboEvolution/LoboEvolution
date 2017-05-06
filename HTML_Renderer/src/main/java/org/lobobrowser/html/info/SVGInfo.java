@@ -16,6 +16,7 @@
  */
 package org.lobobrowser.html.info;
 
+import java.awt.Font;
 import java.io.Serializable;
 
 import org.lobobrowser.html.style.AbstractCSS2Properties;
@@ -77,6 +78,15 @@ public class SVGInfo implements Serializable {
 	
 	/** The pathSegList. */
 	private SVGPathSegList pathSegList;
+	
+	/** The font. */
+	private Font font;
+	
+	/** The text. */
+	private String text;
+	
+	/** The textAnchor. */
+	private String textAnchor;
 
 	/**
 	 * @return the x
@@ -314,5 +324,47 @@ public class SVGInfo implements Serializable {
 	 */
 	public void setPathSegList(SVGPathSegList pathSegList) {
 		this.pathSegList = pathSegList;
+	}
+
+	/**
+	 * @return the font
+	 */
+	public Font getFont() {
+		return font;
+	}
+
+	/**
+	 * @param font the font to set
+	 */
+	public void setFont(Font font) {
+		this.font = font;
+	}
+
+	/**
+	 * @return the text
+	 */
+	public String getText() {
+		return text;
+	}
+
+	/**
+	 * @param text the text to set
+	 */
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	/**
+	 * @return the textAnchor
+	 */
+	public String getTextAnchor() {
+		return textAnchor;
+	}
+
+	/**
+	 * @param textAnchor the textAnchor to set
+	 */
+	public void setTextAnchor(String textAnchor) {
+		this.textAnchor = textAnchor;
 	}
 }

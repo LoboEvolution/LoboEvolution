@@ -1,10 +1,23 @@
 package org.lobobrowser.html.svgimpl;
 
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Point2D;
 import java.util.StringTokenizer;
 
+import org.lobobrowser.html.info.SVGInfo;
+import org.lobobrowser.html.style.CSSValuesProperties;
+import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.util.gui.FontFactory;
+import org.lobobrowser.util.gui.LAFSettings;
 import org.lobobrowser.w3c.svg.SVGPoint;
 import org.lobobrowser.w3c.svg.SVGPointList;
 import org.lobobrowser.w3c.svg.SVGTransformList;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class SVGUtility {
 	
@@ -136,5 +149,60 @@ public class SVGUtility {
 			}
 		}
 		return transformList;
+	}
+
+	public static Font getFontValue(String ff, String fs) {
+
+		float fontSize = LAFSettings.getInstance().getFontSize();
+		String fontStyle = CSSValuesProperties.ITALIC;
+		String fontVariant = CSSValuesProperties.SMALL_CAPS;
+		String fontFamily = Font.SANS_SERIF;
+		String fontWeight = CSSValuesProperties.BOLD;
+		
+		if (fs != null) {
+			fontSize = HtmlValues.getFontSize(fs, null);
+		}
+
+		if (ff != null) {
+			fontFamily = ff;
+		}
+		return FontFactory.getInstance().getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize, null, null,0,false,0);
+	}
+
+	public static String getText(Node n) {
+		String text = "";
+		NodeList children = n.getChildNodes();
+		int numChildren = children.getLength();
+		for (int i = 0; i < numChildren; i++) {
+			Node child = children.item(i);
+			if (child.getNodeType() == Node.TEXT_NODE) { // it is #PCDATA
+				String nodeValue = child.getNodeValue();
+				nodeValue = nodeValue.replace('\n', ' ');
+				nodeValue = nodeValue.replace('\r', ' ');
+				nodeValue = nodeValue.replace('\t', ' ');
+				text = nodeValue;;
+			}
+		}
+		return text.trim();
+	}
+
+	public static Point2D.Float calcTextPos(SVGInfo svgi, Graphics2D graphics) {
+		FontMetrics metrics = graphics.getFontMetrics();
+		float x = svgi.getX();
+		float y = svgi.getY();
+		y = y + metrics.getLeading() + metrics.getAscent();
+		return new Point2D.Float(x, y);
+	}
+
+	public static void getTextAnchor(String textAnchor, GeneralPath path) {
+		if (textAnchor != null) {
+			if (textAnchor.equals("middle")) {
+				double swidth = path.getBounds2D().getWidth();
+				path.transform(AffineTransform.getTranslateInstance(-swidth / 2.0, 0));
+			} else if (textAnchor.equals("end")) {
+				double swidth = path.getBounds2D().getWidth();
+				path.transform(AffineTransform.getTranslateInstance(-swidth, 0));
+			}
+		}
 	}
 }

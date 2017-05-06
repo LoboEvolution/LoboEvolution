@@ -194,6 +194,12 @@ public interface HtmlAttributeProperties {
 
 	/** The frameborder. */
 	String FRAMEBORDER = "frameBorder";
+	
+	/** The font-size. */
+	String FONTSIZE = "font-size";
+	
+	/** The font-family. */
+	String FONTFAMILY = "font-family";
 
 	/** The height. */
 	String HEIGHT = "height";
@@ -431,6 +437,9 @@ public interface HtmlAttributeProperties {
 
 	/** The topmargin. */
 	String TOPMARGIN = "topmargin";
+	
+	/** The textanchor. */
+	String TEXTANCHOR = "text-anchor";
 
 	/** The textalign. */
 	String TEXTALIGN = "text-align";
