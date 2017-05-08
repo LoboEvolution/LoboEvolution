@@ -135,6 +135,12 @@ public interface HtmlAttributeProperties {
 
 	/** The clear. */
 	String CLEAR = "clear";
+	
+	/** The DY. */
+	String DY = "dy";
+	
+	/** The DX. */
+	String DX = "dx";
 
 	/** The data. */
 	String DATA = "data";

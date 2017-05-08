@@ -20,14 +20,12 @@ public class SVGTextElementImpl extends SVGSVGElementImpl implements SVGTextElem
 
 	@Override
 	public SVGAnimatedLengthList getDx() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SVGAnimatedLengthListImpl(SVGUtility.constructLengthList(this.getAttribute(HtmlAttributeProperties.DX)));
 	}
 
 	@Override
 	public SVGAnimatedLengthList getDy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SVGAnimatedLengthListImpl(SVGUtility.constructLengthList(this.getAttribute(HtmlAttributeProperties.DY)));
 	}
 
 	@Override

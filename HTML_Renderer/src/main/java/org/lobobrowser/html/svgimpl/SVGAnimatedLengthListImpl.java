@@ -20,31 +20,25 @@
  */
 package org.lobobrowser.html.svgimpl;
 
-import org.lobobrowser.w3c.svg.SVGAnimatedString;
-import org.w3c.dom.DOMException;
+import org.lobobrowser.w3c.svg.SVGAnimatedLengthList;
+import org.lobobrowser.w3c.svg.SVGLengthList;
 
-public class SVGAnimatedStringImpl implements SVGAnimatedString {
+public class SVGAnimatedLengthListImpl implements SVGAnimatedLengthList {
+	
+	private SVGLengthList lengths;
+		
+	public SVGAnimatedLengthListImpl(SVGLengthList lengths) {
+		this.lengths = lengths;
+	}
 
-	private String href;
 
-	public SVGAnimatedStringImpl(String href) {
-		this.href = href;
+	@Override
+	public SVGLengthList getBaseVal() {
+		return this.lengths;
 	}
 
 	@Override
-	public String getBaseVal() {
-		return href;
+	public SVGLengthList getAnimVal() {
+		return this.lengths;
 	}
-
-	@Override
-	public void setBaseVal(String baseVal) throws DOMException {
-		this.href = baseVal;
-
-	}
-
-	@Override
-	public String getAnimVal() {
-		return href;
-	}
-
 }

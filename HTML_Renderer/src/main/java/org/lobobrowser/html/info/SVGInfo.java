@@ -20,6 +20,7 @@ import java.awt.Font;
 import java.io.Serializable;
 
 import org.lobobrowser.html.style.AbstractCSS2Properties;
+import org.lobobrowser.w3c.svg.SVGLengthList;
 import org.lobobrowser.w3c.svg.SVGPathSegList;
 import org.lobobrowser.w3c.svg.SVGPointList;
 import org.lobobrowser.w3c.svg.SVGTransformList;
@@ -75,6 +76,12 @@ public class SVGInfo implements Serializable {
 	
 	/** The transformList. */
 	private SVGTransformList transformList;
+	
+	/** The dyList. */
+	private SVGLengthList dyList;
+	
+	/** The dxList. */
+	private SVGLengthList dxList;
 	
 	/** The pathSegList. */
 	private SVGPathSegList pathSegList;
@@ -255,7 +262,7 @@ public class SVGInfo implements Serializable {
 	public void setMethod(int method) {
 		this.method = method;
 	}
-	
+
 	/**
 	 * @return the href
 	 */
@@ -313,6 +320,34 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
+	 * @return the dyList
+	 */
+	public SVGLengthList getDyList() {
+		return dyList;
+	}
+
+	/**
+	 * @param dyList the dyList to set
+	 */
+	public void setDyList(SVGLengthList dyList) {
+		this.dyList = dyList;
+	}
+
+	/**
+	 * @return the dxList
+	 */
+	public SVGLengthList getDxList() {
+		return dxList;
+	}
+
+	/**
+	 * @param dxList the dxList to set
+	 */
+	public void setDxList(SVGLengthList dxList) {
+		this.dxList = dxList;
+	}
+
+	/**
 	 * @return the pathSegList
 	 */
 	public SVGPathSegList getPathSegList() {
@@ -367,4 +402,5 @@ public class SVGInfo implements Serializable {
 	public void setTextAnchor(String textAnchor) {
 		this.textAnchor = textAnchor;
 	}
+
 }

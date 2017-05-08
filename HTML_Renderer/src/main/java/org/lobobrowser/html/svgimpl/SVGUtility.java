@@ -13,6 +13,8 @@ import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.FontFactory;
 import org.lobobrowser.util.gui.LAFSettings;
+import org.lobobrowser.w3c.svg.SVGLength;
+import org.lobobrowser.w3c.svg.SVGLengthList;
 import org.lobobrowser.w3c.svg.SVGPoint;
 import org.lobobrowser.w3c.svg.SVGPointList;
 import org.lobobrowser.w3c.svg.SVGTransformList;
@@ -40,6 +42,22 @@ public class SVGUtility {
 		}
 		return points;
 	}
+	
+	public static SVGLengthList constructLengthList(String lengthString) {
+		
+		SVGLengthListImpl lengthList = new SVGLengthListImpl();
+		
+		if(lengthString == null)
+			return lengthList;
+			
+		StringTokenizer st = new StringTokenizer(lengthString, " ", false);
+		while (st.hasMoreTokens()) {
+			int length = Integer.parseInt(st.nextToken());
+			SVGLength lnt = new SVGLengthImpl(length);
+			lengthList.appendItem(lnt);
+		}
+		return lengthList;
+	}	
 	
 	public static SVGTransformList createTransformList(String transformString) {
 

@@ -568,7 +568,9 @@ public class SVGControl extends SVGBasicControl {
 			svgi.setFont(SVGUtility.getFontValue(text.getFontFamily(), text.getFontSize()));
 			svgi.setText(SVGUtility.getText(n));
 			svgi.setTextAnchor(text.getTextAnchor());
-
+			svgi.setDyList(text.getDy().getBaseVal());
+			svgi.setDxList(text.getDx().getBaseVal());
+			
 			if (text.getFill() != null) {
 				style.setFill(text.getFill());
 			}

@@ -44,6 +44,7 @@ import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.svgimpl.SVGCircleElementImpl;
 import org.lobobrowser.html.svgimpl.SVGEllipseElementImpl;
 import org.lobobrowser.html.svgimpl.SVGGElementImpl;
+import org.lobobrowser.html.svgimpl.SVGLengthImpl;
 import org.lobobrowser.html.svgimpl.SVGLineElementImpl;
 import org.lobobrowser.html.svgimpl.SVGMatrixImpl;
 import org.lobobrowser.html.svgimpl.SVGPathElementImpl;
@@ -74,6 +75,7 @@ import org.lobobrowser.html.svgimpl.SVGSVGElementImpl;
 import org.lobobrowser.html.svgimpl.SVGUseElementImpl;
 import org.lobobrowser.html.svgimpl.SVGUtility;
 import org.lobobrowser.util.gui.ColorFactory;
+import org.lobobrowser.w3c.svg.SVGLengthList;
 import org.lobobrowser.w3c.svg.SVGPathSegList;
 import org.lobobrowser.w3c.svg.SVGPoint;
 import org.lobobrowser.w3c.svg.SVGPointList;
@@ -608,17 +610,52 @@ public class SVGBasicControl extends BaseControl {
 		}
 	}
 
-    public void text(Graphics2D g2d, SVGInfo svgi) {
-    	GeneralPath path = new GeneralPath();
+	public void text(Graphics2D g2d, SVGInfo svgi) {
+		GeneralPath path = new GeneralPath();
 		path.setWindingRule(Path2D.WIND_NON_ZERO);
 		FontRenderContext frc = new FontRenderContext(null, false, false);
-    	TextLayout tl = new TextLayout(svgi.getText(), svgi.getFont(), frc);
-    	Point2D.Float pos = SVGUtility.calcTextPos(svgi, g2d);
-		AffineTransform textAt = AffineTransform.getTranslateInstance(pos.x, pos.y);
-		textAt.translate(svgi.getX(), svgi.getY());
-		Shape textShape = tl.getOutline(textAt);
-    	path.append(textShape, false);
-    	SVGUtility.getTextAnchor(svgi.getTextAnchor(), path);
+
+		SVGLengthList dxList = svgi.getDxList();
+		SVGLengthList dyList = svgi.getDyList();
+		char[] cr = svgi.getText().toCharArray();
+		float x = svgi.getX();
+		float y = svgi.getY();
+		
+		for (int i = 0; i < cr.length; i++) {
+			if (dxList != null && dxList.getNumberOfItems() > 0) {
+				try {
+					
+					if(i == 0){
+						x = i + (dxList.getItem(i).getValue());
+					} else {
+						x = dxList.getItem(i).getValue() + x;
+					}
+				} catch (Exception e) {
+					x = 8 + x;
+				}
+			} else if (dyList != null && dyList.getNumberOfItems() > 0) {
+				try {
+					if(i == 0){
+						y = i + (dyList.getItem(i).getValue());
+					} else {
+						y = dyList.getItem(i).getValue() + y;
+					}
+				} catch (Exception e) {
+					y = 20 + y;
+				}
+			} else {
+				if (i > 0)
+					x = i * 8;
+			}
+			
+			TextLayout tl = new TextLayout(String.valueOf(cr[i]), svgi.getFont(), frc);
+			Point2D.Float pos = new Point2D.Float(x, y);
+			AffineTransform textAt = AffineTransform.getTranslateInstance(pos.x, pos.y);
+			textAt.translate(x, y);
+			Shape textShape = tl.getOutline(textAt);
+			path.append(textShape, false);
+		}
+		path.closePath();
 		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, path, svgi);
 	}
