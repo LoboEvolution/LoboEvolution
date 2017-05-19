@@ -61,6 +61,12 @@ public class SVGInfo implements Serializable {
 
 	/** The ry. */
 	private float ry;
+	
+	/** The fx. */
+	private float fx;
+
+	/** The fy. */
+	private float fy;
 
 	/** The method. */
 	private int method;
@@ -240,6 +246,34 @@ public class SVGInfo implements Serializable {
 	 */
 	public float getRy() {
 		return ry;
+	}
+
+	/**
+	 * @return the fx
+	 */
+	public float getFx() {
+		return fx;
+	}
+
+	/**
+	 * @param fx the fx to set
+	 */
+	public void setFx(float fx) {
+		this.fx = fx;
+	}
+
+	/**
+	 * @return the fy
+	 */
+	public float getFy() {
+		return fy;
+	}
+
+	/**
+	 * @param fy the fy to set
+	 */
+	public void setFy(float fy) {
+		this.fy = fy;
 	}
 
 	/**

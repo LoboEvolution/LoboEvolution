@@ -168,6 +168,12 @@ public interface HtmlAttributeProperties {
 
 	/** The event. */
 	String EVENT = "event";
+	
+	/** The FY. */
+	String FY = "fy";
+	
+	/** The FX. */
+	String FX = "fx";
 
 	/** The face. */
 	String FACE = "face";
@@ -326,6 +332,9 @@ public interface HtmlAttributeProperties {
 
 	/** The object. */
 	String OBJECT = "object";
+	
+	/** The offset. */
+	String OFFSET = "offset";
 
 	/** The open. */
 	String OPEN = "open";
@@ -398,6 +407,12 @@ public interface HtmlAttributeProperties {
 
 	/** The step. */
 	String STEP = "step";
+	
+	/** The stop-color. */
+	String STOP_COLOR = "stop-color";
+	
+	/** The stop-opacity. */
+	String STOP_OPACITY = "stop-opacity";
 	
 	/** The stroke. */
 	String STROKE = "stroke";

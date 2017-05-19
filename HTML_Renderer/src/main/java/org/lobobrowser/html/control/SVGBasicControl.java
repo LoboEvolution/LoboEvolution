@@ -23,6 +23,9 @@ package org.lobobrowser.html.control;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.LinearGradientPaint;
+import java.awt.Paint;
+import java.awt.RadialGradientPaint;
 import java.awt.Shape;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
@@ -36,16 +39,16 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.SVGInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.svgimpl.SVGCircleElementImpl;
 import org.lobobrowser.html.svgimpl.SVGEllipseElementImpl;
 import org.lobobrowser.html.svgimpl.SVGGElementImpl;
-import org.lobobrowser.html.svgimpl.SVGLengthImpl;
 import org.lobobrowser.html.svgimpl.SVGLineElementImpl;
+import org.lobobrowser.html.svgimpl.SVGLinearGradientElementImpl;
 import org.lobobrowser.html.svgimpl.SVGMatrixImpl;
 import org.lobobrowser.html.svgimpl.SVGPathElementImpl;
 import org.lobobrowser.html.svgimpl.SVGPathSegArcAbsImpl;
@@ -70,10 +73,11 @@ import org.lobobrowser.html.svgimpl.SVGPathSegMovetoRelImpl;
 import org.lobobrowser.html.svgimpl.SVGPointImpl;
 import org.lobobrowser.html.svgimpl.SVGPolygonElementImpl;
 import org.lobobrowser.html.svgimpl.SVGPolylineElementImpl;
+import org.lobobrowser.html.svgimpl.SVGRadialGradientElementImpl;
 import org.lobobrowser.html.svgimpl.SVGRectElementImpl;
 import org.lobobrowser.html.svgimpl.SVGSVGElementImpl;
+import org.lobobrowser.html.svgimpl.SVGStopElementImpl;
 import org.lobobrowser.html.svgimpl.SVGUseElementImpl;
-import org.lobobrowser.html.svgimpl.SVGUtility;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.svg.SVGLengthList;
 import org.lobobrowser.w3c.svg.SVGPathSegList;
@@ -118,9 +122,15 @@ public class SVGBasicControl extends BaseControl {
 	
 	/** The text. */
 	public final int TEXT = 9;
-
-	public SVGBasicControl(HTMLElementImpl modelNode) {
+	
+	/** The radial. */
+	public final int RADIAL = 10;
+	
+	private SVGSVGElementImpl modelN;
+	
+	public SVGBasicControl(SVGSVGElementImpl modelNode) {
 		super(modelNode);
+		this.modelN = modelNode;
 	}
 
 	public void circle(Graphics2D g2d, SVGInfo svgi) {
@@ -736,8 +746,8 @@ public class SVGBasicControl extends BaseControl {
 	private void drawFillAndStroke(Graphics2D g2d, Shape shape2d, SVGInfo svgi) {
 
 		BasicStroke basicStroke = null;
-		Color strokeColor = null;
-		Color fillColor = Color.BLACK;
+		Paint strokeColor = null;
+		Paint fillColor = Color.BLACK;
 		float fillOpacity = 1.0F;
 		float strokeOpacity = 1.0F;
 		
@@ -769,7 +779,17 @@ public class SVGBasicControl extends BaseControl {
 			basicStroke = getStroking(g2d, group);
 		} else if (svgi.getStyle().getStroke() != null && !"none".equalsIgnoreCase(svgi.getStyle().getStroke())) {
 			Color color = ColorFactory.getInstance().getColor(svgi.getStyle().getStroke());
-			strokeColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * strokeOpacity));
+			
+			String stroke = svgi.getStyle().getStroke();
+			if(stroke.contains("url")){
+				String idElement = stroke.split("#")[1].replace(")","").trim();
+				Element elementById = modelN.getOwnerDocument().getElementById(idElement);
+				if (elementById instanceof SVGRadialGradientElementImpl || elementById instanceof SVGLinearGradientElementImpl) {
+					strokeColor = gradient(elementById, shape2d);
+				}
+			} else {
+				strokeColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * strokeOpacity));
+			}
 			basicStroke = getStroking(g2d, svgi);
 		}
 
@@ -777,8 +797,18 @@ public class SVGBasicControl extends BaseControl {
 			Color color = ColorFactory.getInstance().getColor(group.getStyle().getFill());
 			fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * fillOpacity));
 		} else if (svgi.getStyle().getFill() != null && !"none".equalsIgnoreCase(svgi.getStyle().getFill())) {
-			Color color = ColorFactory.getInstance().getColor(svgi.getStyle().getFill());
-			fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * fillOpacity));
+			
+			String fill = svgi.getStyle().getFill();
+			if(fill.contains("url")){
+				String idElement = fill.split("#")[1].replace(")","").trim();
+				Element elementById = modelN.getOwnerDocument().getElementById(idElement);
+				if (elementById instanceof SVGRadialGradientElementImpl || elementById instanceof SVGLinearGradientElementImpl) {
+					fillColor = gradient(elementById, shape2d);
+				}				
+			} else  {
+				Color color = ColorFactory.getInstance().getColor(svgi.getStyle().getFill());
+				fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * fillOpacity));
+			}
 		}
 		
 		if (fillColor != null) {
@@ -1207,10 +1237,96 @@ public class SVGBasicControl extends BaseControl {
 				svgi.setTransformList(use.getTransform().getBaseVal());
 				useList.add(svgi);
 			}
+			
+			if (n instanceof SVGRadialGradientElementImpl) {
+				SVGRadialGradientElementImpl radial = (SVGRadialGradientElementImpl) n;
+				SVGInfo svgi = new SVGInfo();
+				svgi.setMethod(RADIAL);
+				svgi.setHref(radial.getHref().getBaseVal());
+				svgi.setX(radial.getCx().getBaseVal().getValue());
+				svgi.setY(radial.getCy().getBaseVal().getValue());
+				svgi.setR(radial.getR().getBaseVal().getValue());
+				svgi.setFx(radial.getFx().getBaseVal().getValue());
+				svgi.setFy(radial.getCy().getBaseVal().getValue());
+				useList.add(svgi);
+			}
 		}
 		return useList;
 	}
+	
+	private Paint gradient(Element gradient, Shape shape2d) {
+		if (gradient instanceof SVGRadialGradientElementImpl) {
+			SVGRadialGradientElementImpl radial = (SVGRadialGradientElementImpl)gradient;
+			return radial(shape2d, radial.getCx().getBaseVal().getValue(), radial.getCy().getBaseVal().getValue(), 
+										  radial.getR().getBaseVal().getValue(),
+										  fractions(radial), colors(radial));
+		}
+		
+		if(gradient instanceof SVGLinearGradientElementImpl){
+			SVGLinearGradientElementImpl linear = (SVGLinearGradientElementImpl)gradient;
+			return new LinearGradientPaint(linear.getX1().getBaseVal().getValue(),
+										   linear.getY1().getBaseVal().getValue(), 
+										   linear.getX2().getBaseVal().getValue(),
+										   linear.getY2().getBaseVal().getValue(), 
+										   fractions(linear), colors(linear));
+		}
+		return null;
+	}
+	
+	
+	private Paint radial(Shape shape, float x, float y, float radius, float[] fractions, Color[] colors) {
+		final float[] FRACTIONS = { 0.0f, 1.0f };
+		final Color[] DARK_COLORS = { Color.RED, Color.BLUE };
+		double w = shape.getBounds2D().getWidth();
+		double h = shape.getBounds2D().getHeight();
+		Point2D.Float center = new Point2D.Float(x, y);
+		double cx = w * center.getX() + shape.getBounds2D().getX();
+		double cy = h * center.getY() + shape.getBounds2D().getY();
+		final Point2D newCenter = new Point2D.Double(cx, cy);
+		double delta = newCenter.distance(new Point2D.Double(shape.getBounds2D().getCenterX(), shape.getBounds2D().getCenterY()));
+		final double r = Math.sqrt(w * w + h * h) / 2;
+		final double newRadius = delta + r * radius;
+		return new RadialGradientPaint(newCenter, (float) newRadius, FRACTIONS, DARK_COLORS);
+	}
+	
+	private float[] fractions(Element elem) {
+		ArrayList<Float> fractions = new ArrayList<Float>();
+		NodeList childNodes = elem.getChildNodes();
+		for (int i = 0; i < childNodes.getLength(); i++) {
+			Node n = (Node) childNodes.item(i);
+			if (n instanceof SVGStopElementImpl) {
+				SVGStopElementImpl stop = (SVGStopElementImpl) n;
+				fractions.add(stop.getOffset().getBaseVal());
+			}
+		}
+		float[] floatArray = new float[fractions.size()];
+		int i = 0;
 
+		for (Float f : fractions) {
+			floatArray[i++] = (f != null ? f : Float.NaN);
+		}
+		Arrays.sort(floatArray);
+		return floatArray;
+	}
+	
+	private Color[] colors(Element elem) {
+		ArrayList<Color> colors = new ArrayList<Color>();
+		NodeList childNodes = elem.getChildNodes();
+		for (int i = 0; i < childNodes.getLength(); i++) {
+			Node n = (Node) childNodes.item(i);
+			if (n instanceof SVGStopElementImpl) {
+				SVGStopElementImpl stop = (SVGStopElementImpl) n;
+				colors.add(stop.getStopColor());
+			}
+		}
+		Color[] colorArray = new Color[colors.size()];
+		int i = 0;
+		for (Color c : colors) {
+			colorArray[i++] = c;
+		}
+		return colorArray;
+	}
+	
 	
 	/**
 	 * @return the svgiGroup

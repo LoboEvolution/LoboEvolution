@@ -95,10 +95,13 @@ import org.lobobrowser.html.buildersvg.SVGDefsBuilder;
 import org.lobobrowser.html.buildersvg.SVGEllipseBuilder;
 import org.lobobrowser.html.buildersvg.SVGGBuilder;
 import org.lobobrowser.html.buildersvg.SVGLineBuilder;
+import org.lobobrowser.html.buildersvg.SVGLinearGradientBuilder;
 import org.lobobrowser.html.buildersvg.SVGPathBuilder;
 import org.lobobrowser.html.buildersvg.SVGPolygonBuilder;
 import org.lobobrowser.html.buildersvg.SVGPolylineBuilder;
+import org.lobobrowser.html.buildersvg.SVGRadialGradientBuilder;
 import org.lobobrowser.html.buildersvg.SVGRectBuilder;
+import org.lobobrowser.html.buildersvg.SVGStopBuilder;
 import org.lobobrowser.html.buildersvg.SVGSymbolBuilder;
 import org.lobobrowser.html.buildersvg.SVGTextBuilder;
 import org.lobobrowser.html.buildersvg.SVGUseBuilder;
@@ -320,8 +323,9 @@ public class HtmlMapping implements HtmlProperties {
 		builders.put(USE, new SVGUseBuilder());
 		builders.put(SYMBOL, new SVGSymbolBuilder());
 		builders.put(TEXT, new SVGTextBuilder());
-		
-		
+		builders.put(RADIAL_GRADIENT, new SVGRadialGradientBuilder());
+		builders.put(LINEAR_GRADIENT, new SVGLinearGradientBuilder());
+		builders.put(STOP, new SVGStopBuilder());
 		return builders;
 	}
 }

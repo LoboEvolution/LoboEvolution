@@ -112,7 +112,7 @@ public class SVGControl extends SVGBasicControl {
 				SVGInfo svgiDefs= new SVGInfo();
 				svgiDefs.setTransformList(defs.getTransform().getBaseVal());
 				setSvgiGroup(svgiDefs);
-			} else{
+			} else {
 				svgChildren(n);
 			}
 		}

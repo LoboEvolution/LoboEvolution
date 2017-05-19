@@ -192,6 +192,9 @@ public interface HtmlProperties {
     
     /** The line. */
     String LINE = "LINE";
+    
+    /** The linearGradient. */
+    String LINEAR_GRADIENT = "LINEARGRADIENT";
 
     /** The keygen. */
     String KEYGEN = "KEYGEN";
@@ -244,6 +247,9 @@ public interface HtmlProperties {
     /** The progress. */
     String PROGRESS = "PROGRESS";
     
+    /** The radialGradient. */
+    String RADIAL_GRADIENT = "RADIALGRADIENT";
+    
     /** The Constant RECT. */
     String RECT = "RECT";
 
@@ -255,6 +261,9 @@ public interface HtmlProperties {
 
     /** The strike. */
     String STRIKE = "STRIKE";
+    
+    /** The stop. */
+    String STOP = "STOP";
 
     /** The section. */
     String SECTION = "SECTION";
