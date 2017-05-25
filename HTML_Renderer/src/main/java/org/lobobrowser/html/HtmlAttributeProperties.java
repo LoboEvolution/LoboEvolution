@@ -93,6 +93,12 @@ public interface HtmlAttributeProperties {
 
 	/** The compact. */
 	String COMPACT = "compact";
+	
+	/** The contentScriptType **/
+	String CONTENTSCRIPTTYPE = "contentScriptType";
+	
+	/** The contentStyleType **/
+	String CONTENTSTYLETYPE = "contentStyleType";
 
 	/** The controls. */
 	String CONTROLS = "controls";

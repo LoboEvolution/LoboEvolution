@@ -21,7 +21,6 @@
 package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.domimpl.HTMLAbstractUIElement;
 import org.lobobrowser.html.style.CSSProperties;
 import org.lobobrowser.w3c.svg.SVGAngle;
 import org.lobobrowser.w3c.svg.SVGAnimatedBoolean;
@@ -50,7 +49,7 @@ import org.w3c.dom.events.EventListener;
 import org.w3c.dom.stylesheets.StyleSheetList;
 import org.w3c.dom.views.DocumentView;
 
-public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGElement, CSSProperties {
+public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, CSSProperties {
 
 	public SVGSVGElementImpl(String name) {
 		super(name);
@@ -91,31 +90,7 @@ public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGEl
         }
         return d;
     }
-
-	@Override
-	public String getXMLbase() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setXMLbase(String xmlbase) throws DOMException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public SVGSVGElement getOwnerSVGElement() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public SVGElement getViewportElement() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public SVGStringList getRequiredFeatures() {
 		// TODO Auto-generated method stub
@@ -136,8 +111,11 @@ public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGEl
 
 	@Override
 	public boolean hasExtension(String extension) {
-		// TODO Auto-generated method stub
-		return false;
+		if (extension.equalsIgnoreCase("svg")) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -184,8 +162,12 @@ public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGEl
 
 	@Override
 	public SVGElement getFarthestViewportElement() {
-		// TODO Auto-generated method stub
-		return null;
+		SVGSVGElement root = getOwnerSVGElement();
+		if (root != this) {
+			return root;
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -306,56 +288,52 @@ public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGEl
 
 	@Override
 	public String getContentScriptType() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.CONTENTSCRIPTTYPE);
 	}
 
 	@Override
 	public void setContentScriptType(String contentScriptType) throws DOMException {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.CONTENTSCRIPTTYPE, contentScriptType);
 		
 	}
 
 	@Override
 	public String getContentStyleType() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getAttribute(HtmlAttributeProperties.CONTENTSTYLETYPE);
 	}
 
 	@Override
 	public void setContentStyleType(String contentStyleType) throws DOMException {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute(HtmlAttributeProperties.CONTENTSTYLETYPE, contentStyleType);	
 	}
 
 	@Override
 	public SVGRect getViewport() {
-		// TODO Auto-generated method stub
-		return null;
+		float x = getX().getBaseVal().getValue();
+		float y = getY().getBaseVal().getValue();
+		float width = getWidth().getBaseVal().getValue();
+		float height = getHeight().getBaseVal().getValue();
+		return new SVGRectImpl(x, y, width, height);
 	}
 
 	@Override
 	public float getPixelUnitToMillimeterX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (float) 0.28;
 	}
 
 	@Override
 	public float getPixelUnitToMillimeterY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (float) 0.28;
 	}
 
 	@Override
 	public float getScreenPixelToMillimeterX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (float) 0.28;
 	}
 
 	@Override
 	public float getScreenPixelToMillimeterY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (float) 0.28;
 	}
 
 	@Override
@@ -480,14 +458,12 @@ public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGEl
 
 	@Override
 	public SVGNumber createSVGNumber() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SVGNumberImpl();
 	}
 
 	@Override
 	public SVGLength createSVGLength() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SVGLengthImpl();
 	}
 
 	@Override
@@ -498,32 +474,29 @@ public class SVGSVGElementImpl extends HTMLAbstractUIElement implements SVGSVGEl
 
 	@Override
 	public SVGPoint createSVGPoint() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SVGPointImpl(0, 0);
 	}
 
 	@Override
 	public SVGMatrix createSVGMatrix() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SVGMatrixImpl();
 	}
 
 	@Override
 	public SVGRect createSVGRect() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SVGRectImpl(0, 0, 0, 0);
 	}
 
 	@Override
 	public SVGTransform createSVGTransform() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SVGTransformImpl();
 	}
 
 	@Override
 	public SVGTransform createSVGTransformFromMatrix(SVGMatrix matrix) {
-		// TODO Auto-generated method stub
-		return null;
+		SVGTransform transform = new SVGTransformImpl();
+		transform.setMatrix(matrix);
+		return transform;
 	}
 
 	@Override
