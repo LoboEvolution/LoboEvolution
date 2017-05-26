@@ -100,6 +100,130 @@ public class SVGInfo implements Serializable {
 	
 	/** The textAnchor. */
 	private String textAnchor;
+	
+	/** The clipPath. */
+	private String clipPath;
+	
+	/** The id. */
+	private String id;
+	
+	private boolean isClip;
+	
+	public SVGInfo(){}
+	
+	public SVGInfo(int method, float x, float y, float height, float width, float rx, float ry, AbstractCSS2Properties style, boolean isClip, String clipPath, SVGTransformList transformList) {
+		this.method = method;
+		this.x = x;
+		this.y = y;
+		this.height = height;
+		this.width = width;
+		this.rx = rx;
+		this.ry = ry;
+		this.style = style;
+		this.isClip = isClip;
+		this.clipPath = clipPath;
+		this.transformList = transformList;
+	}
+	
+	public SVGInfo(int method, float x, float y, float rx, float ry, AbstractCSS2Properties style, boolean isClip, String clipPath, SVGTransformList transformList) {
+		this.method = method;
+		this.x = x;
+		this.y = y;
+		this.rx = rx;
+		this.ry = ry;
+		this.style = style;
+		this.isClip = isClip;
+		this.clipPath = clipPath;
+		this.transformList = transformList;
+	}
+	
+	
+	
+	public SVGInfo(int method, float x, float y, float r, AbstractCSS2Properties style, boolean isClip, String clipPath, SVGTransformList transformList) {
+		this.method = method;
+		this.x = x;
+		this.y = y;
+		this.r = r;
+		this.style = style;
+		this.isClip = isClip;
+		this.clipPath = clipPath;
+		this.transformList = transformList;
+	}
+	
+	public SVGInfo(int method, float x1, float y1, float x2, float y2, AbstractCSS2Properties style, String clipPath, boolean isClip, SVGTransformList transformList) {
+		this.method = method;
+		this.x1 = x1;
+		this.y1 = y1;
+		this.x2 = x2;
+		this.y2 = y2;
+		this.style = style;
+		this.isClip = isClip;
+		this.clipPath = clipPath;
+		this.transformList = transformList;
+	}
+	
+	public SVGInfo(int method, SVGPointList poilist, AbstractCSS2Properties style, boolean isClip, String clipPath, SVGTransformList transformList) {
+		this.method = method;
+		this.style = style;
+		this.isClip = isClip;
+		this.clipPath = clipPath;
+		this.transformList = transformList;
+		this.poilist = poilist;
+	}
+	
+	public SVGInfo(int method, SVGPathSegList pathSegList, AbstractCSS2Properties style, boolean isClip, String clipPath, SVGTransformList transformList) {
+		this.method = method;
+		this.style = style;
+		this.isClip = isClip;
+		this.clipPath = clipPath;
+		this.transformList = transformList;
+		this.pathSegList = pathSegList;
+	}
+	
+	public SVGInfo(AbstractCSS2Properties style, SVGTransformList transformList) {
+		this.style = style;
+		this.transformList = transformList;
+	}
+	
+	public SVGInfo(int method, float x, float y, Font font, String text, String textAnchor, SVGLengthList dyList, SVGLengthList dxList, AbstractCSS2Properties style, String clipPath, boolean isClip, SVGTransformList transformList) {
+		this.method = method;
+		this.x = x;
+		this.y = y;
+		this.font = font;
+		this.text = text;
+		this.textAnchor = textAnchor;
+		this.dyList = dyList;
+		this.dxList = dxList;
+		this.style = style;
+		this.isClip = isClip;
+		this.clipPath = clipPath;
+		this.transformList = transformList;
+	}
+	
+	public SVGInfo(int method, float x, float y, String href, AbstractCSS2Properties style, String clipPath, boolean isClip, SVGTransformList transformList) {
+		this.method = method;
+		this.x = x;
+		this.y = y;
+		this.href = href;
+		this.style = style;
+		this.isClip = isClip;
+		this.clipPath = clipPath;
+		this.transformList = transformList;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	/**
 	 * @return the x
@@ -435,6 +559,34 @@ public class SVGInfo implements Serializable {
 	 */
 	public void setTextAnchor(String textAnchor) {
 		this.textAnchor = textAnchor;
+	}
+
+	/**
+	 * @return the clipPath
+	 */
+	public String getClipPath() {
+		return clipPath;
+	}
+
+	/**
+	 * @param clipPath the clipPath to set
+	 */
+	public void setClipPath(String clipPath) {
+		this.clipPath = clipPath;
+	}
+
+	/**
+	 * @return the isClip
+	 */
+	public boolean isClip() {
+		return isClip;
+	}
+
+	/**
+	 * @param isClip the isClip to set
+	 */
+	public void setClip(boolean isClip) {
+		this.isClip = isClip;
 	}
 
 }

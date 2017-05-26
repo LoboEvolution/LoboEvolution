@@ -21,6 +21,7 @@
 
 package org.lobobrowser.html.control;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -43,6 +44,10 @@ import org.lobobrowser.html.svgimpl.SVGSVGElementImpl;
 import org.lobobrowser.html.svgimpl.SVGTextElementImpl;
 import org.lobobrowser.html.svgimpl.SVGUseElementImpl;
 import org.lobobrowser.html.svgimpl.SVGUtility;
+import org.lobobrowser.w3c.svg.SVGLengthList;
+import org.lobobrowser.w3c.svg.SVGPathSegList;
+import org.lobobrowser.w3c.svg.SVGPointList;
+import org.lobobrowser.w3c.svg.SVGTransformList;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -67,40 +72,9 @@ public class SVGControl extends SVGBasicControl {
 									
 			if (n instanceof SVGGElementImpl) {
 				SVGGElementImpl svgGroup = (SVGGElementImpl) n;
-				AbstractCSS2Properties style = svgGroup.getStyle();
-				
-				if (svgGroup.getFill() != null) {
-					style.setFill(svgGroup.getFill());
-				}
-				
-				if (svgGroup.getStroke() != null) {
-					style.setStroke(svgGroup.getStroke());
-				}
-				
-				if (svgGroup.getStrokeDashArray() != null) {
-					style.setStrokeDashArray(svgGroup.getStrokeDashArray());
-				}
-				
-				if (svgGroup.getStrokeLineCap() != null) {
-					style.setStrokeLineCap(svgGroup.getStrokeLineCap());
-				}
-				
-				if (svgGroup.getStrokeMiterLimit() != null) {
-					style.setStrokeMiterLimit(svgGroup.getStrokeMiterLimit());
-				}
-				
-				if (svgGroup.getStrokeOpacity() != null) {
-					style.setStrokeOpacity(svgGroup.getStrokeOpacity());
-				}
-				
-				if (svgGroup.getStrokeWidth() != null) {
-					style.setStrokeWidth(svgGroup.getStrokeWidth());
-				}
-				
-				SVGInfo svgiGroup = new SVGInfo();
-				svgiGroup.setTransformList(svgGroup.getTransform().getBaseVal());
-				svgiGroup.setStyle(svgGroup.getStyle());
-				setSvgiGroup(svgiGroup);
+				SVGTransformList tl = svgGroup.getTransform().getBaseVal();
+				AbstractCSS2Properties style = svgGroup.getSVGStyle();
+				setSvgiGroup(new SVGInfo(style, tl));
 				
 				NodeList gChildNodes = n.getChildNodes();
 				for (int g = 0; g < gChildNodes.getLength(); g++) {
@@ -109,9 +83,8 @@ public class SVGControl extends SVGBasicControl {
 				}
 			} else if (n instanceof SVGDefsElementImpl) {
 				SVGDefsElementImpl defs = (SVGDefsElementImpl) n;
-				SVGInfo svgiDefs= new SVGInfo();
-				svgiDefs.setTransformList(defs.getTransform().getBaseVal());
-				setSvgiGroup(svgiDefs);
+				SVGTransformList tl = defs.getTransform().getBaseVal();
+				setSvgiGroup(new SVGInfo(null, tl));
 			} else {
 				svgChildren(n);
 			}
@@ -167,338 +140,85 @@ public class SVGControl extends SVGBasicControl {
 		
 		if (n instanceof SVGCircleElementImpl) {
 			SVGCircleElementImpl svgcircle = (SVGCircleElementImpl) n;
-			AbstractCSS2Properties style = svgcircle.getStyle();
-			
-			SVGInfo svgi = new SVGInfo();
-			svgi.setMethod(CIRCLE);
-			svgi.setX(svgcircle.getCx().getBaseVal().getValue());
-			svgi.setY(svgcircle.getCy().getBaseVal().getValue());
-			svgi.setR(svgcircle.getR().getBaseVal().getValue());
-
-			if (svgcircle.getFill() != null) {
-				style.setFill(svgcircle.getFill());
-			}
-			
-			if (svgcircle.getStroke() != null) {
-				style.setStroke(svgcircle.getStroke());
-			}
-			
-			if (svgcircle.getStrokeDashArray() != null) {
-				style.setStrokeDashArray(svgcircle.getStrokeDashArray());
-			}
-			
-			if (svgcircle.getStrokeLineCap() != null) {
-				style.setStrokeLineCap(svgcircle.getStrokeLineCap());
-			}
-			
-			if (svgcircle.getStrokeMiterLimit() != null) {
-				style.setStrokeMiterLimit(svgcircle.getStrokeMiterLimit());
-			}
-			
-			if (svgcircle.getStrokeOpacity() != null) {
-				style.setStrokeOpacity(svgcircle.getStrokeOpacity());
-			}
-			
-			if (svgcircle.getStrokeWidth() != null) {
-				style.setStrokeWidth(svgcircle.getStrokeWidth());
-			}
-			
-			svgi.setTransformList(svgcircle.getTransform().getBaseVal());
-			svgi.setStyle(style);
-			svgList.add(svgi);
+			float x = svgcircle.getCx().getBaseVal().getValue();
+			float y= svgcircle.getCy().getBaseVal().getValue();
+			float r = svgcircle.getR().getBaseVal().getValue();
+			String clippath = svgcircle.getClipPath();
+			SVGTransformList tl = svgcircle.getTransform().getBaseVal();
+			AbstractCSS2Properties style = svgcircle.getSVGStyle();
+			svgList.add(new SVGInfo(CIRCLE, x, y, r, style, false, clippath, tl));
 		}
 
 		if (n instanceof SVGRectElementImpl) {
 			SVGRectElementImpl svgrect = (SVGRectElementImpl) n;
-			AbstractCSS2Properties style = svgrect.getStyle();
-			
-			SVGInfo svgi = new SVGInfo();
-			svgi.setMethod(RECT);
-			svgi.setX(svgrect.getX().getBaseVal().getValue());
-			svgi.setY(svgrect.getY().getBaseVal().getValue());
-			svgi.setWidth(svgrect.getWidth().getBaseVal().getValue());
-			svgi.setHeight(svgrect.getHeight().getBaseVal().getValue());
-			svgi.setRx(svgrect.getRx().getBaseVal().getValue());
-			svgi.setRy(svgrect.getRy().getBaseVal().getValue());
-
-			if (svgrect.getFill() != null) {
-				style.setFill(svgrect.getFill());
-			}
-			
-			if (svgrect.getStroke() != null) {
-				style.setStroke(svgrect.getStroke());
-			}
-			
-			if (svgrect.getStrokeDashArray() != null) {
-				style.setStrokeDashArray(svgrect.getStrokeDashArray());
-			}
-			
-			if (svgrect.getStrokeLineCap() != null) {
-				style.setStrokeLineCap(svgrect.getStrokeLineCap());
-			}
-			
-			if (svgrect.getStrokeMiterLimit() != null) {
-				style.setStrokeMiterLimit(svgrect.getStrokeMiterLimit());
-			}
-			
-			if (svgrect.getStrokeOpacity() != null) {
-				style.setStrokeOpacity(svgrect.getStrokeOpacity());
-			}
-			
-			if (svgrect.getStrokeWidth() != null) {
-				style.setStrokeWidth(svgrect.getStrokeWidth());
-			}
-			
-			svgi.setTransformList(svgrect.getTransform().getBaseVal());
-			svgi.setStyle(style);
-			svgList.add(svgi);
+			float x = svgrect.getX().getBaseVal().getValue();
+			float y= svgrect.getY().getBaseVal().getValue();
+			float height =svgrect.getHeight().getBaseVal().getValue();
+			float width = svgrect.getWidth().getBaseVal().getValue();
+			float rx = svgrect.getRx().getBaseVal().getValue();
+			float ry= svgrect.getRy().getBaseVal().getValue();
+			String clippath = svgrect.getClipPath();
+			SVGTransformList tl = svgrect.getTransform().getBaseVal();
+			AbstractCSS2Properties style = svgrect.getSVGStyle();
+			svgList.add(new SVGInfo(RECT, x, y, height, width, rx, ry, style, false, clippath, tl));
 		}
 
 		if (n instanceof SVGEllipseElementImpl) {
 			SVGEllipseElementImpl svgellipse = (SVGEllipseElementImpl) n;
-			AbstractCSS2Properties style = svgellipse.getStyle();
-			
-			SVGInfo svgi = new SVGInfo();
-			svgi.setMethod(ELLIPSE);
-			svgi.setX(svgellipse.getCx().getBaseVal().getValue());
-			svgi.setY(svgellipse.getCy().getBaseVal().getValue());
-			svgi.setRx(svgellipse.getRx().getBaseVal().getValue());
-			svgi.setRy(svgellipse.getRy().getBaseVal().getValue());
-			
-			if (svgellipse.getFill() != null) {
-				style.setFill(svgellipse.getFill());
-			}
-			
-			if (svgellipse.getStroke() != null) {
-				style.setStroke(svgellipse.getStroke());
-			}
-			
-			if (svgellipse.getStrokeDashArray() != null) {
-				style.setStrokeDashArray(svgellipse.getStrokeDashArray());
-			}
-			
-			if (svgellipse.getStrokeLineCap() != null) {
-				style.setStrokeLineCap(svgellipse.getStrokeLineCap());
-			}
-			
-			if (svgellipse.getStrokeMiterLimit() != null) {
-				style.setStrokeMiterLimit(svgellipse.getStrokeMiterLimit());
-			}
-			
-			if (svgellipse.getStrokeOpacity() != null) {
-				style.setStrokeOpacity(svgellipse.getStrokeOpacity());
-			}
-			
-			if (svgellipse.getStrokeWidth() != null) {
-				style.setStrokeWidth(svgellipse.getStrokeWidth());
-			}
-			
-			svgi.setTransformList(svgellipse.getTransform().getBaseVal());
-			svgi.setStyle(svgellipse.getStyle());
-			svgList.add(svgi);
+			float x = svgellipse.getCx().getBaseVal().getValue();
+			float y= svgellipse.getCy().getBaseVal().getValue();
+			float rx = svgellipse.getRx().getBaseVal().getValue();
+			float ry= svgellipse.getRy().getBaseVal().getValue();
+			String clippath = svgellipse.getClipPath();
+			SVGTransformList tl = svgellipse.getTransform().getBaseVal();
+			AbstractCSS2Properties style = svgellipse.getSVGStyle();
+			svgList.add(new SVGInfo(ELLIPSE, x, y, rx, ry, style, false, clippath, tl));
 		}
 		
 		if (n instanceof SVGLineElementImpl) {
 			SVGLineElementImpl svgline = (SVGLineElementImpl) n;
-			AbstractCSS2Properties style = svgline.getStyle();
-			
-			SVGInfo svgi = new SVGInfo();
-			svgi.setMethod(LINE);
-			svgi.setX1(svgline.getX1().getBaseVal().getValue());
-			svgi.setY1(svgline.getY1().getBaseVal().getValue());
-			svgi.setX2(svgline.getX2().getBaseVal().getValue());
-			svgi.setY2(svgline.getY2().getBaseVal().getValue());
-			
-			if (svgline.getFill() != null) {
-				style.setFill(svgline.getFill());
-			}
-			
-			if (svgline.getStroke() != null) {
-				style.setStroke(svgline.getStroke());
-			}
-			
-			if (svgline.getStrokeDashArray() != null) {
-				style.setStrokeDashArray(svgline.getStrokeDashArray());
-			}
-			
-			if (svgline.getStrokeLineCap() != null) {
-				style.setStrokeLineCap(svgline.getStrokeLineCap());
-			}
-			
-			if (svgline.getStrokeMiterLimit() != null) {
-				style.setStrokeMiterLimit(svgline.getStrokeMiterLimit());
-			}
-			
-			if (svgline.getStrokeOpacity() != null) {
-				style.setStrokeOpacity(svgline.getStrokeOpacity());
-			}
-			
-			if (svgline.getStrokeWidth() != null) {
-				style.setStrokeWidth(svgline.getStrokeWidth());
-			}
-			
-			svgi.setTransformList(svgline.getTransform().getBaseVal());
-			svgi.setStyle(svgline.getStyle());
-			svgList.add(svgi);
+			float x1 = svgline.getX1().getBaseVal().getValue();
+			float x2= svgline.getX2().getBaseVal().getValue();
+			float y1 = svgline.getY1().getBaseVal().getValue();
+			float y2 = svgline.getY2().getBaseVal().getValue();
+			String clippath = svgline.getClipPath();
+			SVGTransformList tl = svgline.getTransform().getBaseVal();
+			AbstractCSS2Properties style = svgline.getSVGStyle();
+			svgList.add(new SVGInfo(LINE, x1, y1, x2, y2, style, clippath, false, tl));
 		}
 		
 		if (n instanceof SVGPolylineElementImpl) {
-			SVGPolylineElementImpl svgline = (SVGPolylineElementImpl) n;
-			AbstractCSS2Properties style = svgline.getStyle();
-			
-			SVGInfo svgi = new SVGInfo();
-			svgi.setMethod(POLYLINE);
-			svgi.setPoilist(svgline.getPoints());
-			
-			if (svgline.getFill() != null) {
-				style.setFill(svgline.getFill());
-			}
-			
-			if (svgline.getStroke() != null) {
-				style.setStroke(svgline.getStroke());
-			}
-			
-			if (svgline.getStrokeDashArray() != null) {
-				style.setStrokeDashArray(svgline.getStrokeDashArray());
-			}
-			
-			if (svgline.getStrokeLineCap() != null) {
-				style.setStrokeLineCap(svgline.getStrokeLineCap());
-			}
-			
-			if (svgline.getStrokeMiterLimit() != null) {
-				style.setStrokeMiterLimit(svgline.getStrokeMiterLimit());
-			}
-			
-			if (svgline.getStrokeOpacity() != null) {
-				style.setStrokeOpacity(svgline.getStrokeOpacity());
-			}
-			
-			if (svgline.getStrokeWidth() != null) {
-				style.setStrokeWidth(svgline.getStrokeWidth());
-			}
-			
-			svgi.setTransformList(svgline.getTransform().getBaseVal());
-			svgi.setStyle(svgline.getStyle());
-			svgList.add(svgi);
+			SVGPolylineElementImpl svgpolyline = (SVGPolylineElementImpl) n;
+			SVGPointList points = svgpolyline.getPoints();
+			String clippath = svgpolyline.getClipPath();
+			SVGTransformList tl = svgpolyline.getTransform().getBaseVal();
+			AbstractCSS2Properties style = svgpolyline.getSVGStyle();
+			svgList.add(new SVGInfo(POLYLINE, points, style, false, clippath, tl));
 		}
 		
 		if (n instanceof SVGPolygonElementImpl) {
-			SVGPolygonElementImpl svgline = (SVGPolygonElementImpl) n;
-			AbstractCSS2Properties style = svgline.getStyle();
-			
-			SVGInfo svgi = new SVGInfo();
-			svgi.setMethod(POLYGON);
-			svgi.setPoilist(svgline.getPoints());
-			
-			if (svgline.getFill() != null) {
-				style.setFill(svgline.getFill());
-			}
-			
-			if (svgline.getStroke() != null) {
-				style.setStroke(svgline.getStroke());
-			}
-			
-			if (svgline.getStrokeDashArray() != null) {
-				style.setStrokeDashArray(svgline.getStrokeDashArray());
-			}
-			
-			if (svgline.getStrokeLineCap() != null) {
-				style.setStrokeLineCap(svgline.getStrokeLineCap());
-			}
-			
-			if (svgline.getStrokeMiterLimit() != null) {
-				style.setStrokeMiterLimit(svgline.getStrokeMiterLimit());
-			}
-			
-			if (svgline.getStrokeOpacity() != null) {
-				style.setStrokeOpacity(svgline.getStrokeOpacity());
-			}
-			
-			if (svgline.getStrokeWidth() != null) {
-				style.setStrokeWidth(svgline.getStrokeWidth());
-			}
-			
-			svgi.setTransformList(svgline.getTransform().getBaseVal());
-			svgi.setStyle(svgline.getStyle());
-			svgList.add(svgi);
+			SVGPolygonElementImpl svgpolygon = (SVGPolygonElementImpl) n;
+			SVGPointList points = svgpolygon.getPoints();
+			String clippath = svgpolygon.getClipPath();
+			SVGTransformList tl = svgpolygon.getTransform().getBaseVal();
+			AbstractCSS2Properties style = svgpolygon.getSVGStyle();
+			svgList.add(new SVGInfo(POLYGON, points, style, false, clippath, tl));
 		}
 		
 		if (n instanceof SVGPathElementImpl) {
 			SVGPathElementImpl svgpath = (SVGPathElementImpl)n;
-			AbstractCSS2Properties style = svgpath.getStyle();
-			SVGInfo svgi = new SVGInfo();
-			svgi.setMethod(PATH);
-			
-			if (svgpath.getFill() != null) {
-				style.setFill(svgpath.getFill());
-			}
-			
-			if (svgpath.getStroke() != null) {
-				style.setStroke(svgpath.getStroke());
-			}
-			
-			if (svgpath.getStrokeDashArray() != null) {
-				style.setStrokeDashArray(svgpath.getStrokeDashArray());
-			}
-			
-			if (svgpath.getStrokeLineCap() != null) {
-				style.setStrokeLineCap(svgpath.getStrokeLineCap());
-			}
-			
-			if (svgpath.getStrokeMiterLimit() != null) {
-				style.setStrokeMiterLimit(svgpath.getStrokeMiterLimit());
-			}
-			
-			if (svgpath.getStrokeOpacity() != null) {
-				style.setStrokeOpacity(svgpath.getStrokeOpacity());
-			}
-			
-			if (svgpath.getStrokeWidth() != null) {
-				style.setStrokeWidth(svgpath.getStrokeWidth());
-			}
-			
-			svgi.setPathSegList(svgpath.getPathSegList());
-			svgi.setStyle(svgpath.getStyle());
-			svgList.add(svgi);
+			SVGPathSegList points = svgpath.getPathSegList();
+			String clippath = svgpath.getClipPath();
+			SVGTransformList tl = svgpath.getTransform().getBaseVal();
+			AbstractCSS2Properties style = svgpath.getSVGStyle();
+			svgList.add(new SVGInfo(PATH, points, style, false, clippath, tl));
 		}
 		
 		if (n instanceof SVGGElementImpl) {
 			SVGGElementImpl svgGroup = (SVGGElementImpl) n;
-			AbstractCSS2Properties style = svgGroup.getStyle();
-			
-			if (svgGroup.getFill() != null) {
-				style.setFill(svgGroup.getFill());
-			}
-			
-			if (svgGroup.getStroke() != null) {
-				style.setStroke(svgGroup.getStroke());
-			}
-			
-			if (svgGroup.getStrokeDashArray() != null) {
-				style.setStrokeDashArray(svgGroup.getStrokeDashArray());
-			}
-			
-			if (svgGroup.getStrokeLineCap() != null) {
-				style.setStrokeLineCap(svgGroup.getStrokeLineCap());
-			}
-			
-			if (svgGroup.getStrokeMiterLimit() != null) {
-				style.setStrokeMiterLimit(svgGroup.getStrokeMiterLimit());
-			}
-			
-			if (svgGroup.getStrokeOpacity() != null) {
-				style.setStrokeOpacity(svgGroup.getStrokeOpacity());
-			}
-			
-			if (svgGroup.getStrokeWidth() != null) {
-				style.setStrokeWidth(svgGroup.getStrokeWidth());
-			}
-			
-			SVGInfo svgiGroup = new SVGInfo();
-			svgiGroup.setTransformList(svgGroup.getTransform().getBaseVal());
-			svgiGroup.setStyle(svgGroup.getStyle());
-			setSvgiGroup(svgiGroup);
+			SVGTransformList tl = svgGroup.getTransform().getBaseVal();
+			AbstractCSS2Properties style = svgGroup.getSVGStyle();
+			setSvgiGroup(new SVGInfo(style, tl));
 			
 			NodeList gChildNodes = svgGroup.getChildNodes();
 			for (int g = 0; g < gChildNodes.getLength(); g++) {
@@ -509,98 +229,28 @@ public class SVGControl extends SVGBasicControl {
 		
 		if (n instanceof SVGUseElementImpl) {
 			SVGUseElementImpl use = (SVGUseElementImpl) n;
-			AbstractCSS2Properties style = use.getStyle();
-			boolean isStyle = false;
-			SVGInfo svgi = new SVGInfo();
-			svgi.setMethod(USE);
-			svgi.setHref(use.getHref().getBaseVal());
-			svgi.setX(use.getX().getBaseVal().getValue());
-			svgi.setY(use.getY().getBaseVal().getValue());
-			svgi.setTransformList(use.getTransform().getBaseVal());
-			
-			if (use.getFill() != null) {
-				style.setFill(use.getFill());
-				isStyle = true;
-			}
-			
-			if (use.getStroke() != null) {
-				style.setStroke(use.getStroke());
-			}
-			
-			if (use.getStrokeDashArray() != null) {
-				style.setStrokeDashArray(use.getStrokeDashArray());
-				isStyle = true;
-			}
-			
-			if (use.getStrokeLineCap() != null) {
-				style.setStrokeLineCap(use.getStrokeLineCap());
-				isStyle = true;
-			}
-			
-			if (use.getStrokeMiterLimit() != null) {
-				style.setStrokeMiterLimit(use.getStrokeMiterLimit());
-				isStyle = true;
-			}
-			
-			if (use.getStrokeOpacity() != null) {
-				style.setStrokeOpacity(use.getStrokeOpacity());
-				isStyle = true;
-			}
-			
-			if (use.getStrokeWidth() != null) {
-				style.setStrokeWidth(use.getStrokeWidth());
-				isStyle = true;
-			}
-			
-			if(isStyle){
-				svgi.setStyle(use.getStyle());
-			}
-			
-			svgList.add(svgi);
-		} else if (n instanceof SVGTextElementImpl) {
+			float x = use.getX().getBaseVal().getValue();
+			float y = use.getY().getBaseVal().getValue();
+			String href = use.getHref().getBaseVal();
+			String clippath = use.getClipPath();
+			SVGTransformList tl = use.getTransform().getBaseVal();
+			AbstractCSS2Properties style = use.getSVGStyle();
+			svgList.add(new SVGInfo(USE, x, y, href, style, clippath, false, tl));
+		}
+		
+		if (n instanceof SVGTextElementImpl) {
 			SVGTextElementImpl text = (SVGTextElementImpl) n;
-			AbstractCSS2Properties style = text.getStyle();
-			SVGInfo svgi = new SVGInfo();
-			svgi.setMethod(TEXT);
-			svgi.setX(text.getX().getBaseVal().getValue());
-			svgi.setY(text.getY().getBaseVal().getValue());
-			svgi.setTransformList(text.getTransform().getBaseVal());
-			svgi.setFont(SVGUtility.getFontValue(text.getFontFamily(), text.getFontSize()));
-			svgi.setText(SVGUtility.getText(n));
-			svgi.setTextAnchor(text.getTextAnchor());
-			svgi.setDyList(text.getDy().getBaseVal());
-			svgi.setDxList(text.getDx().getBaseVal());
-			
-			if (text.getFill() != null) {
-				style.setFill(text.getFill());
-			}
-
-			if (text.getStroke() != null) {
-				style.setStroke(text.getStroke());
-			}
-
-			if (text.getStrokeDashArray() != null) {
-				style.setStrokeDashArray(text.getStrokeDashArray());
-			}
-
-			if (text.getStrokeLineCap() != null) {
-				style.setStrokeLineCap(text.getStrokeLineCap());
-			}
-
-			if (text.getStrokeMiterLimit() != null) {
-				style.setStrokeMiterLimit(text.getStrokeMiterLimit());
-			}
-
-			if (text.getStrokeOpacity() != null) {
-				style.setStrokeOpacity(text.getStrokeOpacity());
-			}
-
-			if (text.getStrokeWidth() != null) {
-				style.setStrokeWidth(text.getStrokeWidth());
-			}
-			
-			svgi.setStyle(style);
-			svgList.add(svgi);
+			float x = text.getX().getBaseVal().getValue();
+			float y = text.getY().getBaseVal().getValue();
+			Font font = SVGUtility.getFontValue(text.getFontFamily(), text.getFontSize());
+			String clippath = text.getClipPath();
+			String txt = SVGUtility.getText(n);
+			String txtAnchor = text.getTextAnchor();
+			SVGLengthList dyList = text.getDy().getBaseVal();
+			SVGLengthList dxList = text.getDx().getBaseVal();
+			SVGTransformList tl = text.getTransform().getBaseVal();
+			AbstractCSS2Properties style = text.getSVGStyle();
+			svgList.add(new SVGInfo(TEXT, x, y, font, txt, txtAnchor, dyList, dxList, style, clippath, false, tl));
 		}
 	}
 }
