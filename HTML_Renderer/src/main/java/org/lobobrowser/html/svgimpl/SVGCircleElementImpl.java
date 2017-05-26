@@ -21,6 +21,7 @@
 package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.w3c.svg.SVGAnimatedLength;
 import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
 import org.lobobrowser.w3c.svg.SVGCircleElement;
@@ -49,5 +50,18 @@ public class SVGCircleElementImpl extends SVGSVGElementImpl implements SVGCircle
 	@Override
 	public SVGAnimatedLength getR() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.R)));
+	}
+
+	@Override
+	public AbstractCSS2Properties getSVGStyle() {
+		AbstractCSS2Properties style = this.getStyle();
+		style.setFill(this.getFill());
+		style.setStroke(this.getStroke());
+		style.setStrokeDashArray(this.getStrokeDashArray());
+		style.setStrokeLineCap(this.getStrokeLineCap());
+		style.setStrokeMiterLimit(this.getStrokeMiterLimit());
+		style.setStrokeOpacity(this.getStrokeOpacity());
+		style.setStrokeWidth(this.getStrokeWidth());
+		return style;
 	}
 }

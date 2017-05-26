@@ -21,6 +21,7 @@
 package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
 import org.lobobrowser.w3c.svg.SVGPointList;
 import org.lobobrowser.w3c.svg.SVGPolygonElement;
@@ -44,5 +45,18 @@ public class SVGPolygonElementImpl extends SVGSVGElementImpl implements SVGPolyg
 	@Override
 	public SVGPointList getAnimatedPoints() {
 		return SVGUtility.constructPointList(this.getAttribute(HtmlAttributeProperties.POINTS));
+	}
+
+	@Override
+	public AbstractCSS2Properties getSVGStyle() {
+		AbstractCSS2Properties style = this.getStyle();
+		style.setFill(this.getFill());
+		style.setStroke(this.getStroke());
+		style.setStrokeDashArray(this.getStrokeDashArray());
+		style.setStrokeLineCap(this.getStrokeLineCap());
+		style.setStrokeMiterLimit(this.getStrokeMiterLimit());
+		style.setStrokeOpacity(this.getStrokeOpacity());
+		style.setStrokeWidth(this.getStrokeWidth());
+		return style;
 	}
 }

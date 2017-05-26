@@ -20,25 +20,27 @@
  */
 package org.lobobrowser.html.svgimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.style.AbstractCSS2Properties;
-import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
-import org.lobobrowser.w3c.svg.SVGDefsElement;
+import org.lobobrowser.w3c.svg.SVGAnimatedEnumeration;
+import org.w3c.dom.DOMException;
 
-public class SVGDefsElementImpl extends SVGSVGElementImpl implements SVGDefsElement {
-
-	public SVGDefsElementImpl(String name) {
-		super(name);
-	}
+public class SVGAnimatedEnumerationImpl implements SVGAnimatedEnumeration {
 
 	@Override
-	public SVGAnimatedTransformList getTransform() {
-		return new SVGAnimatedTransformListImpl(this.getAttribute(HtmlAttributeProperties.TRANSFORM));
-	}
-
-	@Override
-	public AbstractCSS2Properties getSVGStyle() {
+	public short getBaseVal() {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
+
+	@Override
+	public void setBaseVal(short baseVal) throws DOMException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public short getAnimVal() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

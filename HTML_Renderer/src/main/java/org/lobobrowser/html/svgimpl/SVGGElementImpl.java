@@ -22,6 +22,7 @@ package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.jsimpl.EventException;
+import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.w3c.events.Event;
 import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
 import org.lobobrowser.w3c.svg.SVGGElement;
@@ -42,6 +43,19 @@ public class SVGGElementImpl extends SVGSVGElementImpl implements SVGGElement {
 	public boolean dispatchEvent(Event evt) throws EventException, DOMException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public AbstractCSS2Properties getSVGStyle() {
+		AbstractCSS2Properties style = this.getStyle();
+		style.setFill(this.getFill());
+		style.setStroke(this.getStroke());
+		style.setStrokeDashArray(this.getStrokeDashArray());
+		style.setStrokeLineCap(this.getStrokeLineCap());
+		style.setStrokeMiterLimit(this.getStrokeMiterLimit());
+		style.setStrokeOpacity(this.getStrokeOpacity());
+		style.setStrokeWidth(this.getStrokeWidth());
+		return style;
 	}
 
 }

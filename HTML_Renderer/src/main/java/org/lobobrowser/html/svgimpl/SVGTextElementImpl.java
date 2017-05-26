@@ -1,6 +1,7 @@
 package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.svgimpl.SVGSVGElementImpl;
 import org.lobobrowser.w3c.svg.SVGAnimatedEnumeration;
 import org.lobobrowser.w3c.svg.SVGAnimatedLength;
@@ -107,5 +108,18 @@ public class SVGTextElementImpl extends SVGSVGElementImpl implements SVGTextElem
 	
 	public String getTextAnchor() {
 		return this.getAttribute(HtmlAttributeProperties.TEXTANCHOR);
+	}
+
+	@Override
+	public AbstractCSS2Properties getSVGStyle() {
+		AbstractCSS2Properties style = this.getStyle();
+		style.setFill(this.getFill());
+		style.setStroke(this.getStroke());
+		style.setStrokeDashArray(this.getStrokeDashArray());
+		style.setStrokeLineCap(this.getStrokeLineCap());
+		style.setStrokeMiterLimit(this.getStrokeMiterLimit());
+		style.setStrokeOpacity(this.getStrokeOpacity());
+		style.setStrokeWidth(this.getStrokeWidth());
+		return style;
 	}
 }

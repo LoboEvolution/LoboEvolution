@@ -458,7 +458,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 
 	@Override
 	public SVGNumber createSVGNumber() {
-		return new SVGNumberImpl();
+		return new SVGNumberImpl("0");
 	}
 
 	@Override
@@ -511,5 +511,9 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	
 	public String getFontFamily(){
 		return this.getAttribute(HtmlAttributeProperties.FONTFAMILY);
-	}	
+	}
+	
+	public String getClipPath(){
+		return this.getAttribute(HtmlAttributeProperties.CLIPPATH);
+	}
 }

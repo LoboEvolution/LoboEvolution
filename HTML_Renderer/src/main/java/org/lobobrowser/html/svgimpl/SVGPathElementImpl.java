@@ -26,6 +26,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.w3c.svg.SVGAnimatedNumber;
 import org.lobobrowser.w3c.svg.SVGAnimatedPathData;
 import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
@@ -594,5 +595,18 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 	
 	static protected String nextString(LinkedList<String> l) {
 		return l.removeFirst();
+	}
+
+	@Override
+	public AbstractCSS2Properties getSVGStyle() {
+		AbstractCSS2Properties style = this.getStyle();
+		style.setFill(this.getFill());
+		style.setStroke(this.getStroke());
+		style.setStrokeDashArray(this.getStrokeDashArray());
+		style.setStrokeLineCap(this.getStrokeLineCap());
+		style.setStrokeMiterLimit(this.getStrokeMiterLimit());
+		style.setStrokeOpacity(this.getStrokeOpacity());
+		style.setStrokeWidth(this.getStrokeWidth());
+		return style;
 	}
 }

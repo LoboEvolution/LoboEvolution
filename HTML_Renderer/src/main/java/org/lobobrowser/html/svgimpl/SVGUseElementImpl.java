@@ -21,6 +21,7 @@
 package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.w3c.svg.SVGAnimatedString;
 import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
 import org.lobobrowser.w3c.svg.SVGElementInstance;
@@ -56,5 +57,50 @@ public class SVGUseElementImpl extends SVGSVGElementImpl implements SVGUseElemen
 	public SVGElementInstance getAnimatedInstanceRoot() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public AbstractCSS2Properties getSVGStyle() {
+		AbstractCSS2Properties style = this.getStyle();
+		boolean isStyle = false;
+		if (this.getFill() != null) {
+			style.setFill(this.getFill());
+			isStyle = true;
+		}
+		
+		if (this.getStroke() != null) {
+			style.setStroke(this.getStroke());
+		}
+		
+		if (this.getStrokeDashArray() != null) {
+			style.setStrokeDashArray(this.getStrokeDashArray());
+			isStyle = true;
+		}
+		
+		if (this.getStrokeLineCap() != null) {
+			style.setStrokeLineCap(this.getStrokeLineCap());
+			isStyle = true;
+		}
+		
+		if (this.getStrokeMiterLimit() != null) {
+			style.setStrokeMiterLimit(this.getStrokeMiterLimit());
+			isStyle = true;
+		}
+		
+		if (this.getStrokeOpacity() != null) {
+			style.setStrokeOpacity(this.getStrokeOpacity());
+			isStyle = true;
+		}
+		
+		if (this.getStrokeWidth() != null) {
+			style.setStrokeWidth(this.getStrokeWidth());
+			isStyle = true;
+		}
+		
+		if(!isStyle){
+			style = null;
+		}
+		
+		return style;
 	}
 }
