@@ -135,6 +135,9 @@ public interface HtmlAttributeProperties {
 
 	/** The class. */
 	String CLASS = "class";
+	
+	/** The class. */
+	String CLIPPATH = "clip-path";
 
 	/** The charset. */
 	String CHARSET = "charset";

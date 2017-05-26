@@ -20,56 +20,33 @@
  */
 package org.lobobrowser.html.svgimpl;
 
-import org.lobobrowser.w3c.svg.SVGAnimateElement;
-import org.lobobrowser.w3c.svg.SVGElement;
-import org.w3c.dom.DOMException;
+import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.style.AbstractCSS2Properties;
+import org.lobobrowser.w3c.svg.SVGAnimatedEnumeration;
+import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
+import org.lobobrowser.w3c.svg.SVGClipPathElement;
 
-public class SVGAnimateElementImpl extends SVGSVGElementImpl implements SVGAnimateElement {
+public class SVGClipPathElementImpl extends SVGSVGElementImpl implements SVGClipPathElement {
 
-	public SVGAnimateElementImpl(String name) {
+	public SVGClipPathElementImpl(String name) {
 		super(name);
 	}
 
 	@Override
-	public SVGElement getTargetElement() {
+	public SVGAnimatedTransformList getTransform() {
+		return new SVGAnimatedTransformListImpl(this.getAttribute(HtmlAttributeProperties.TRANSFORM));
+	}
+
+	@Override
+	public SVGAnimatedEnumeration getClipPathUnits() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public float getStartTime() {
+	public AbstractCSS2Properties getSVGStyle() {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getSimpleDuration() throws DOMException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean beginElement() throws DOMException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean beginElementAt(float arg0) throws DOMException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean endElement() throws DOMException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean endElementAt(float arg0) throws DOMException {
-		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 }

@@ -127,7 +127,7 @@ public class SVGBasicControl extends BaseControl {
 	public final int RADIAL = 10;
 	
 	private SVGSVGElementImpl modelN;
-	
+		
 	public SVGBasicControl(SVGSVGElementImpl modelNode) {
 		super(modelNode);
 		this.modelN = modelNode;
@@ -152,8 +152,10 @@ public class SVGBasicControl extends BaseControl {
 		} else {
 			rect = new Rectangle2D.Float(svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight());
 		}
+		
 		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, rect, svgi);
+		
 	}
 
 	public void ellipse(Graphics2D g2d, SVGInfo svgi) {
@@ -778,8 +780,6 @@ public class SVGBasicControl extends BaseControl {
 			strokeColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * strokeOpacity));
 			basicStroke = getStroking(g2d, group);
 		} else if (svgi.getStyle().getStroke() != null && !"none".equalsIgnoreCase(svgi.getStyle().getStroke())) {
-			Color color = ColorFactory.getInstance().getColor(svgi.getStyle().getStroke());
-			
 			String stroke = svgi.getStyle().getStroke();
 			if(stroke.contains("url")){
 				String idElement = stroke.split("#")[1].replace(")","").trim();
@@ -788,6 +788,7 @@ public class SVGBasicControl extends BaseControl {
 					strokeColor = gradient(elementById, shape2d);
 				}
 			} else {
+				Color color = ColorFactory.getInstance().getColor(svgi.getStyle().getStroke());
 				strokeColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * strokeOpacity));
 			}
 			basicStroke = getStroking(g2d, svgi);
@@ -797,7 +798,6 @@ public class SVGBasicControl extends BaseControl {
 			Color color = ColorFactory.getInstance().getColor(group.getStyle().getFill());
 			fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * fillOpacity));
 		} else if (svgi.getStyle().getFill() != null && !"none".equalsIgnoreCase(svgi.getStyle().getFill())) {
-			
 			String fill = svgi.getStyle().getFill();
 			if(fill.contains("url")){
 				String idElement = fill.split("#")[1].replace(")","").trim();
@@ -811,14 +811,34 @@ public class SVGBasicControl extends BaseControl {
 			}
 		}
 		
-		if (fillColor != null) {
-			g2d.setPaint(fillColor);
+		if (svgi.isClip()) {
+			g2d.clip(shape2d);
+			
+			if (fillColor != null) {
+				g2d.setPaint(fillColor);
+				g2d.fill(shape2d);
+			}
+			
+			if (strokeColor != null) {
+				g2d.setPaint(strokeColor);
+				g2d.draw(basicStroke.createStrokedShape(shape2d));
+			}
+		} else if (svgi.getClipPath() != null && svgi.getClipPath().length() > 0) {
+			g2d.setClip(shape2d);
+			g2d.setPaint(Color.WHITE);
+			g2d.draw(shape2d);
 			g2d.fill(shape2d);
-		}
-		
-		if (strokeColor != null) {
-			g2d.setPaint(strokeColor);
-			g2d.draw(basicStroke.createStrokedShape(shape2d));
+			clip(svgi,g2d);
+		} else {
+			if (fillColor != null) {
+				g2d.setPaint(fillColor);
+				g2d.fill(shape2d);
+			}
+			
+			if (strokeColor != null) {
+				g2d.setPaint(strokeColor);
+				g2d.draw(basicStroke.createStrokedShape(shape2d));
+			}
 		}
 	}
 
@@ -887,338 +907,85 @@ public class SVGBasicControl extends BaseControl {
 
 			if (n instanceof SVGCircleElementImpl) {
 				SVGCircleElementImpl svgcircle = (SVGCircleElementImpl) n;
-				AbstractCSS2Properties style = svgcircle.getStyle();
-
-				SVGInfo svgi = new SVGInfo();
-				svgi.setMethod(CIRCLE);
-				svgi.setX(svgcircle.getCx().getBaseVal().getValue());
-				svgi.setY(svgcircle.getCy().getBaseVal().getValue());
-				svgi.setR(svgcircle.getR().getBaseVal().getValue());
-
-				if (svgcircle.getFill() != null) {
-					style.setFill(svgcircle.getFill());
-				}
-
-				if (svgcircle.getStroke() != null) {
-					style.setStroke(svgcircle.getStroke());
-				}
-
-				if (svgcircle.getStrokeDashArray() != null) {
-					style.setStrokeDashArray(svgcircle.getStrokeDashArray());
-				}
-
-				if (svgcircle.getStrokeLineCap() != null) {
-					style.setStrokeLineCap(svgcircle.getStrokeLineCap());
-				}
-
-				if (svgcircle.getStrokeMiterLimit() != null) {
-					style.setStrokeMiterLimit(svgcircle.getStrokeMiterLimit());
-				}
-
-				if (svgcircle.getStrokeOpacity() != null) {
-					style.setStrokeOpacity(svgcircle.getStrokeOpacity());
-				}
-
-				if (svgcircle.getStrokeWidth() != null) {
-					style.setStrokeWidth(svgcircle.getStrokeWidth());
-				}
-
-				svgi.setTransformList(svgcircle.getTransform().getBaseVal());
-				svgi.setStyle(style);
-				useList.add(svgi);
+				float x = svgcircle.getCx().getBaseVal().getValue();
+				float y= svgcircle.getCy().getBaseVal().getValue();
+				float r = svgcircle.getR().getBaseVal().getValue();
+				String clippath = svgcircle.getClipPath();
+				SVGTransformList tl = svgcircle.getTransform().getBaseVal();
+				AbstractCSS2Properties style = svgcircle.getSVGStyle();
+				useList.add(new SVGInfo(CIRCLE, x, y, r, style, false, clippath, tl));
 			}
 
 			if (n instanceof SVGRectElementImpl) {
 				SVGRectElementImpl svgrect = (SVGRectElementImpl) n;
-				AbstractCSS2Properties style = svgrect.getStyle();
-
-				SVGInfo svgi = new SVGInfo();
-				svgi.setMethod(RECT);
-				svgi.setX(svgrect.getX().getBaseVal().getValue());
-				svgi.setY(svgrect.getY().getBaseVal().getValue());
-				svgi.setWidth(svgrect.getWidth().getBaseVal().getValue());
-				svgi.setHeight(svgrect.getHeight().getBaseVal().getValue());
-				svgi.setRx(svgrect.getRx().getBaseVal().getValue());
-				svgi.setRy(svgrect.getRy().getBaseVal().getValue());
-
-				if (svgrect.getFill() != null) {
-					style.setFill(svgrect.getFill());
-				}
-
-				if (svgrect.getStroke() != null) {
-					style.setStroke(svgrect.getStroke());
-				}
-
-				if (svgrect.getStrokeDashArray() != null) {
-					style.setStrokeDashArray(svgrect.getStrokeDashArray());
-				}
-
-				if (svgrect.getStrokeLineCap() != null) {
-					style.setStrokeLineCap(svgrect.getStrokeLineCap());
-				}
-
-				if (svgrect.getStrokeMiterLimit() != null) {
-					style.setStrokeMiterLimit(svgrect.getStrokeMiterLimit());
-				}
-
-				if (svgrect.getStrokeOpacity() != null) {
-					style.setStrokeOpacity(svgrect.getStrokeOpacity());
-				}
-
-				if (svgrect.getStrokeWidth() != null) {
-					style.setStrokeWidth(svgrect.getStrokeWidth());
-				}
-
-				svgi.setTransformList(svgrect.getTransform().getBaseVal());
-				svgi.setStyle(style);
-				useList.add(svgi);
+				float x = svgrect.getX().getBaseVal().getValue();
+				float y= svgrect.getY().getBaseVal().getValue();
+				float height =svgrect.getHeight().getBaseVal().getValue();
+				float width = svgrect.getWidth().getBaseVal().getValue();
+				float rx = svgrect.getRx().getBaseVal().getValue();
+				float ry= svgrect.getRy().getBaseVal().getValue();
+				String clippath = svgrect.getClipPath();
+				SVGTransformList tl = svgrect.getTransform().getBaseVal();
+				AbstractCSS2Properties style = svgrect.getSVGStyle();
+				useList.add(new SVGInfo(RECT, x, y, height, width, rx, ry, style, false, clippath, tl));
 			}
 
 			if (n instanceof SVGEllipseElementImpl) {
 				SVGEllipseElementImpl svgellipse = (SVGEllipseElementImpl) n;
-				AbstractCSS2Properties style = svgellipse.getStyle();
-
-				SVGInfo svgi = new SVGInfo();
-				svgi.setMethod(ELLIPSE);
-				svgi.setX(svgellipse.getCx().getBaseVal().getValue());
-				svgi.setY(svgellipse.getCy().getBaseVal().getValue());
-				svgi.setRx(svgellipse.getRx().getBaseVal().getValue());
-				svgi.setRy(svgellipse.getRy().getBaseVal().getValue());
-
-				if (svgellipse.getFill() != null) {
-					style.setFill(svgellipse.getFill());
-				}
-
-				if (svgellipse.getStroke() != null) {
-					style.setStroke(svgellipse.getStroke());
-				}
-
-				if (svgellipse.getStrokeDashArray() != null) {
-					style.setStrokeDashArray(svgellipse.getStrokeDashArray());
-				}
-
-				if (svgellipse.getStrokeLineCap() != null) {
-					style.setStrokeLineCap(svgellipse.getStrokeLineCap());
-				}
-
-				if (svgellipse.getStrokeMiterLimit() != null) {
-					style.setStrokeMiterLimit(svgellipse.getStrokeMiterLimit());
-				}
-
-				if (svgellipse.getStrokeOpacity() != null) {
-					style.setStrokeOpacity(svgellipse.getStrokeOpacity());
-				}
-
-				if (svgellipse.getStrokeWidth() != null) {
-					style.setStrokeWidth(svgellipse.getStrokeWidth());
-				}
-
-				svgi.setTransformList(svgellipse.getTransform().getBaseVal());
-				svgi.setStyle(svgellipse.getStyle());
-				useList.add(svgi);
+				float x = svgellipse.getCx().getBaseVal().getValue();
+				float y= svgellipse.getCy().getBaseVal().getValue();
+				float rx = svgellipse.getRx().getBaseVal().getValue();
+				float ry= svgellipse.getRy().getBaseVal().getValue();
+				String clippath = svgellipse.getClipPath();
+				SVGTransformList tl = svgellipse.getTransform().getBaseVal();
+				AbstractCSS2Properties style = svgellipse.getSVGStyle();
+				useList.add(new SVGInfo(ELLIPSE, x, y, rx, ry, style, false, clippath, tl));
 			}
 
 			if (n instanceof SVGLineElementImpl) {
 				SVGLineElementImpl svgline = (SVGLineElementImpl) n;
-				AbstractCSS2Properties style = svgline.getStyle();
-
-				SVGInfo svgi = new SVGInfo();
-				svgi.setMethod(LINE);
-				svgi.setX1(svgline.getX1().getBaseVal().getValue());
-				svgi.setY1(svgline.getY1().getBaseVal().getValue());
-				svgi.setX2(svgline.getX2().getBaseVal().getValue());
-				svgi.setY2(svgline.getY2().getBaseVal().getValue());
-
-				if (svgline.getFill() != null) {
-					style.setFill(svgline.getFill());
-				}
-
-				if (svgline.getStroke() != null) {
-					style.setStroke(svgline.getStroke());
-				}
-
-				if (svgline.getStrokeDashArray() != null) {
-					style.setStrokeDashArray(svgline.getStrokeDashArray());
-				}
-
-				if (svgline.getStrokeLineCap() != null) {
-					style.setStrokeLineCap(svgline.getStrokeLineCap());
-				}
-
-				if (svgline.getStrokeMiterLimit() != null) {
-					style.setStrokeMiterLimit(svgline.getStrokeMiterLimit());
-				}
-
-				if (svgline.getStrokeOpacity() != null) {
-					style.setStrokeOpacity(svgline.getStrokeOpacity());
-				}
-
-				if (svgline.getStrokeWidth() != null) {
-					style.setStrokeWidth(svgline.getStrokeWidth());
-				}
-
-				svgi.setTransformList(svgline.getTransform().getBaseVal());
-				svgi.setStyle(svgline.getStyle());
-				useList.add(svgi);
+				float x1 = svgline.getX1().getBaseVal().getValue();
+				float x2= svgline.getX2().getBaseVal().getValue();
+				float y1 = svgline.getY1().getBaseVal().getValue();
+				float y2 = svgline.getY2().getBaseVal().getValue();
+				String clippath = svgline.getClipPath();
+				SVGTransformList tl = svgline.getTransform().getBaseVal();
+				AbstractCSS2Properties style = svgline.getSVGStyle();
+				useList.add(new SVGInfo(LINE, x1, y1, x2, y2, style, clippath, false, tl));
 			}
 
 			if (n instanceof SVGPolylineElementImpl) {
-				SVGPolylineElementImpl svgline = (SVGPolylineElementImpl) n;
-				AbstractCSS2Properties style = svgline.getStyle();
-
-				SVGInfo svgi = new SVGInfo();
-				svgi.setMethod(POLYLINE);
-				svgi.setPoilist(svgline.getPoints());
-
-				if (svgline.getFill() != null) {
-					style.setFill(svgline.getFill());
-				}
-
-				if (svgline.getStroke() != null) {
-					style.setStroke(svgline.getStroke());
-				}
-
-				if (svgline.getStrokeDashArray() != null) {
-					style.setStrokeDashArray(svgline.getStrokeDashArray());
-				}
-
-				if (svgline.getStrokeLineCap() != null) {
-					style.setStrokeLineCap(svgline.getStrokeLineCap());
-				}
-
-				if (svgline.getStrokeMiterLimit() != null) {
-					style.setStrokeMiterLimit(svgline.getStrokeMiterLimit());
-				}
-
-				if (svgline.getStrokeOpacity() != null) {
-					style.setStrokeOpacity(svgline.getStrokeOpacity());
-				}
-
-				if (svgline.getStrokeWidth() != null) {
-					style.setStrokeWidth(svgline.getStrokeWidth());
-				}
-
-				svgi.setTransformList(svgline.getTransform().getBaseVal());
-				svgi.setStyle(svgline.getStyle());
-				useList.add(svgi);
+				SVGPolylineElementImpl svgpolyline = (SVGPolylineElementImpl) n;
+				SVGPointList points = svgpolyline.getPoints();
+				String clippath = svgpolyline.getClipPath();
+				SVGTransformList tl = svgpolyline.getTransform().getBaseVal();
+				AbstractCSS2Properties style = svgpolyline.getSVGStyle();
+				useList.add(new SVGInfo(POLYLINE, points, style, false, clippath, tl));
 			}
 
 			if (n instanceof SVGPolygonElementImpl) {
-				SVGPolygonElementImpl svgline = (SVGPolygonElementImpl) n;
-				AbstractCSS2Properties style = svgline.getStyle();
-
-				SVGInfo svgi = new SVGInfo();
-				svgi.setMethod(POLYGON);
-				svgi.setPoilist(svgline.getPoints());
-
-				if (svgline.getFill() != null) {
-					style.setFill(svgline.getFill());
-				}
-
-				if (svgline.getStroke() != null) {
-					style.setStroke(svgline.getStroke());
-				}
-
-				if (svgline.getStrokeDashArray() != null) {
-					style.setStrokeDashArray(svgline.getStrokeDashArray());
-				}
-
-				if (svgline.getStrokeLineCap() != null) {
-					style.setStrokeLineCap(svgline.getStrokeLineCap());
-				}
-
-				if (svgline.getStrokeMiterLimit() != null) {
-					style.setStrokeMiterLimit(svgline.getStrokeMiterLimit());
-				}
-
-				if (svgline.getStrokeOpacity() != null) {
-					style.setStrokeOpacity(svgline.getStrokeOpacity());
-				}
-
-				if (svgline.getStrokeWidth() != null) {
-					style.setStrokeWidth(svgline.getStrokeWidth());
-				}
-
-				svgi.setTransformList(svgline.getTransform().getBaseVal());
-				svgi.setStyle(svgline.getStyle());
-				useList.add(svgi);
+				SVGPolygonElementImpl svgpolygon = (SVGPolygonElementImpl) n;
+				SVGPointList points = svgpolygon.getPoints();
+				String clippath = svgpolygon.getClipPath();
+				SVGTransformList tl = svgpolygon.getTransform().getBaseVal();
+				AbstractCSS2Properties style = svgpolygon.getSVGStyle();
+				useList.add(new SVGInfo(POLYGON, points, style, false, clippath, tl));
 			}
 
 			if (n instanceof SVGPathElementImpl) {
-				SVGPathElementImpl svgpath = (SVGPathElementImpl) n;
-				AbstractCSS2Properties style = svgpath.getStyle();
-				SVGInfo svgi = new SVGInfo();
-				svgi.setMethod(PATH);
-
-				if (svgpath.getFill() != null) {
-					style.setFill(svgpath.getFill());
-				}
-
-				if (svgpath.getStroke() != null) {
-					style.setStroke(svgpath.getStroke());
-				}
-
-				if (svgpath.getStrokeDashArray() != null) {
-					style.setStrokeDashArray(svgpath.getStrokeDashArray());
-				}
-
-				if (svgpath.getStrokeLineCap() != null) {
-					style.setStrokeLineCap(svgpath.getStrokeLineCap());
-				}
-
-				if (svgpath.getStrokeMiterLimit() != null) {
-					style.setStrokeMiterLimit(svgpath.getStrokeMiterLimit());
-				}
-
-				if (svgpath.getStrokeOpacity() != null) {
-					style.setStrokeOpacity(svgpath.getStrokeOpacity());
-				}
-
-				if (svgpath.getStrokeWidth() != null) {
-					style.setStrokeWidth(svgpath.getStrokeWidth());
-				}
-
-				svgi.setPathSegList(svgpath.getPathSegList());
-				svgi.setStyle(svgpath.getStyle());
-				useList.add(svgi);
+				SVGPathElementImpl svgpath = (SVGPathElementImpl)n;
+				SVGPathSegList points = svgpath.getPathSegList();
+				String clippath = svgpath.getClipPath();
+				SVGTransformList tl = svgpath.getTransform().getBaseVal();
+				AbstractCSS2Properties style = svgpath.getSVGStyle();
+				useList.add(new SVGInfo(PATH, points, style, false, clippath, tl));
 			}
 
 			if (n instanceof SVGGElementImpl) {
 				SVGGElementImpl svgGroup = (SVGGElementImpl) n;
-				AbstractCSS2Properties style = svgGroup.getStyle();
-
-				if (svgGroup.getFill() != null) {
-					style.setFill(svgGroup.getFill());
-				}
-
-				if (svgGroup.getStroke() != null) {
-					style.setStroke(svgGroup.getStroke());
-				}
-
-				if (svgGroup.getStrokeDashArray() != null) {
-					style.setStrokeDashArray(svgGroup.getStrokeDashArray());
-				}
-
-				if (svgGroup.getStrokeLineCap() != null) {
-					style.setStrokeLineCap(svgGroup.getStrokeLineCap());
-				}
-
-				if (svgGroup.getStrokeMiterLimit() != null) {
-					style.setStrokeMiterLimit(svgGroup.getStrokeMiterLimit());
-				}
-
-				if (svgGroup.getStrokeOpacity() != null) {
-					style.setStrokeOpacity(svgGroup.getStrokeOpacity());
-				}
-
-				if (svgGroup.getStrokeWidth() != null) {
-					style.setStrokeWidth(svgGroup.getStrokeWidth());
-				}
-
-				SVGInfo svgiGroup = new SVGInfo();
-				svgiGroup.setTransformList(svgGroup.getTransform().getBaseVal());
-				svgiGroup.setStyle(svgGroup.getStyle());
-				setSvgiGroup(svgiGroup);
+				SVGTransformList tl = svgGroup.getTransform().getBaseVal();
+				AbstractCSS2Properties style = svgGroup.getSVGStyle();
+				setSvgiGroup(new SVGInfo(style, tl));
 
 				NodeList gChildNodes = svgGroup.getChildNodes();
 				for (int g = 0; g < gChildNodes.getLength(); g++) {
@@ -1273,7 +1040,6 @@ public class SVGBasicControl extends BaseControl {
 		return null;
 	}
 	
-	
 	private Paint radial(Shape shape, float x, float y, float radius, float[] fractions, Color[] colors) {
 		final float[] FRACTIONS = { 0.0f, 1.0f };
 		final Color[] DARK_COLORS = { Color.RED, Color.BLUE };
@@ -1327,6 +1093,85 @@ public class SVGBasicControl extends BaseControl {
 		return colorArray;
 	}
 	
+	private void clip(SVGInfo svginfo, Graphics2D g2d) {
+		
+		if(svginfo.getClipPath()!= null && svginfo.getClipPath().contains("url")){
+			String clipElemId = svginfo.getClipPath().split("#")[1].replace(")","").trim();
+			Element elementById = modelN.getOwnerDocument().getElementById(clipElemId);
+			NodeList gChildNodes = elementById.getChildNodes();
+			for (int g = 0; g < gChildNodes.getLength(); g++) {
+				Node n1 = (Node) gChildNodes.item(g);
+				if (n1 instanceof SVGRectElementImpl) {
+					SVGRectElementImpl svgrect = (SVGRectElementImpl) n1;
+					float x = svgrect.getX().getBaseVal().getValue();
+					float y= svgrect.getY().getBaseVal().getValue();
+					float height =svgrect.getHeight().getBaseVal().getValue();
+					float width = svgrect.getWidth().getBaseVal().getValue();
+					float rx = svgrect.getRx().getBaseVal().getValue();
+					float ry= svgrect.getRy().getBaseVal().getValue();
+					AbstractCSS2Properties style = svginfo.getStyle();
+					SVGInfo svgi = new SVGInfo(RECT, x, y, height, width, rx, ry, style, true, null, null);
+					rectangle(g2d, svgi);
+				}
+				
+				if (n1 instanceof SVGCircleElementImpl) {
+					SVGCircleElementImpl svgcircle = (SVGCircleElementImpl) n1;
+					float x = svgcircle.getCx().getBaseVal().getValue();
+					float y= svgcircle.getCy().getBaseVal().getValue();
+					float r = svgcircle.getR().getBaseVal().getValue();
+					AbstractCSS2Properties style = svgcircle.getSVGStyle();
+					SVGInfo svgi = new SVGInfo(CIRCLE, x, y, r, style, true, null, null);
+					circle(g2d, svgi);
+				}
+
+				if (n1 instanceof SVGEllipseElementImpl) {
+					SVGEllipseElementImpl svgellipse = (SVGEllipseElementImpl) n1;
+					float x = svgellipse.getCx().getBaseVal().getValue();
+					float y= svgellipse.getCy().getBaseVal().getValue();
+					float rx = svgellipse.getRx().getBaseVal().getValue();
+					float ry= svgellipse.getRy().getBaseVal().getValue();
+					AbstractCSS2Properties style = svgellipse.getSVGStyle();
+					SVGInfo svgi = new SVGInfo(ELLIPSE, x, y, rx, ry, style, true, null, null);
+					ellipse(g2d, svgi);
+				}
+
+				if (n1 instanceof SVGLineElementImpl) {
+					SVGLineElementImpl svgline = (SVGLineElementImpl) n1;
+					float x1 = svgline.getX1().getBaseVal().getValue();
+					float x2= svgline.getX2().getBaseVal().getValue();
+					float y1 = svgline.getY1().getBaseVal().getValue();
+					float y2 = svgline.getY2().getBaseVal().getValue();
+					AbstractCSS2Properties style = svgline.getSVGStyle();
+					SVGInfo svgi = new SVGInfo(LINE, x1, y1, x2, y2, style, null, true, null);
+					line(g2d, svgi);
+				}
+
+				if (n1 instanceof SVGPolylineElementImpl) {
+					SVGPolylineElementImpl svgpolyline = (SVGPolylineElementImpl) n1;
+					SVGPointList points = svgpolyline.getPoints();
+					AbstractCSS2Properties style = svgpolyline.getSVGStyle();
+					SVGInfo svgi = new SVGInfo(POLYLINE, points, style, true, null, null);
+					polygon(g2d, svgi);
+				}
+
+				if (n1 instanceof SVGPolygonElementImpl) {
+					SVGPolygonElementImpl svgpolygon = (SVGPolygonElementImpl) n1;
+					SVGPointList points = svgpolygon.getPoints();
+					AbstractCSS2Properties style = svgpolygon.getSVGStyle();
+					SVGInfo svgi = new SVGInfo(POLYGON, points, style, true, null, null);
+					polygon(g2d, svgi);
+				}
+
+				if (n1 instanceof SVGPathElementImpl) {
+					SVGPathElementImpl svgpath = (SVGPathElementImpl)n1;
+					SVGPathSegList points = svgpath.getPathSegList();
+					AbstractCSS2Properties style = svgpath.getSVGStyle();
+					SVGInfo svgi = new SVGInfo(PATH, points, style, true, null, null);
+					path(g2d, svgi);
+				}
+			}
+		}
+	}
 	
 	/**
 	 * @return the svgiGroup
@@ -1341,4 +1186,5 @@ public class SVGBasicControl extends BaseControl {
 	public void setSvgiGroup(SVGInfo svgiGroup) {
 		this.svgiGroup = svgiGroup;
 	}
+
 }

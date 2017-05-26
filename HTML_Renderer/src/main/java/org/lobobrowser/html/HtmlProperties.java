@@ -64,26 +64,29 @@ public interface HtmlProperties {
     /** The basefont. */
     String BASEFONT = "BASEFONT";
     
-    /** The Constant CIRCLE. */
-    String CIRCLE = "CIRCLE";
-
-    /** The center. */
-    String CENTER = "CENTER";
-
-    /** The caption. */
-    String CAPTION = "CAPTION";
-
     /** The canvas. */
     String CANVAS = "CANVAS";
+    
+    /** The caption. */
+    String CAPTION = "CAPTION";
+    
+    /** The center. */
+    String CENTER = "CENTER";
+    
+    /** The Constant CIRCLE. */
+    String CIRCLE = "CIRCLE";
+    
+    /** The cite. */
+    String CITE = "CITE";
+    
+    /** The clippath. */
+    String CLIPPATH = "CLIPPATH";
+    
+    /** The code. */
+    String CODE = "CODE";
 
     /** The command. */
     String COMMAND = "COMMAND";
-
-    /** The cite. */
-    String CITE = "CITE";
-
-    /** The code. */
-    String CODE = "CODE";
     
     /** The code. */
     String DEFS = "DEFS";
