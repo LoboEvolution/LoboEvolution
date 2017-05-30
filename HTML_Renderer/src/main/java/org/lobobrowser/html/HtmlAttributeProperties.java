@@ -494,6 +494,9 @@ public interface HtmlAttributeProperties {
 
 	/** The valign. */
 	String VALIGN = "valign";
+	
+	/** The viewBox. */
+	String VIEW_BOX = "viewBox";
 
 	/** The width. */
 	String WIDTH = "width";

@@ -196,8 +196,20 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 
 	@Override
 	public SVGAnimatedRect getViewBox() {
-		// TODO Auto-generated method stub
-		return null;
+		String viewBox = this.getAttribute(HtmlAttributeProperties.VIEW_BOX);
+		
+		if(viewBox == null){
+			SVGRectImpl rect = (SVGRectImpl) getViewport();
+			return new SVGAnimatedRectImpl(rect);
+		}
+		
+		String[] result = viewBox.split(" ");
+		float x = Float.parseFloat(result[0]);
+		float y = Float.parseFloat(result[1]);
+		float width = Float.parseFloat(result[2]);
+		float height = Float.parseFloat(result[3]);
+		SVGRectImpl rect = new SVGRectImpl(x, y, width, height);
+		return new SVGAnimatedRectImpl(rect);
 	}
 
 	@Override

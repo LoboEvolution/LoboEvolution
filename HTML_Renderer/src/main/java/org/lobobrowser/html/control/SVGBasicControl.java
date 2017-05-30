@@ -78,6 +78,7 @@ import org.lobobrowser.html.svgimpl.SVGRectElementImpl;
 import org.lobobrowser.html.svgimpl.SVGSVGElementImpl;
 import org.lobobrowser.html.svgimpl.SVGStopElementImpl;
 import org.lobobrowser.html.svgimpl.SVGUseElementImpl;
+import org.lobobrowser.html.svgimpl.SVGViewBoxImpl;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.svg.SVGLengthList;
 import org.lobobrowser.w3c.svg.SVGPathSegList;
@@ -126,7 +127,9 @@ public class SVGBasicControl extends BaseControl {
 	/** The radial. */
 	public final int RADIAL = 10;
 	
+	/** The modelN. */
 	private SVGSVGElementImpl modelN;
+	
 		
 	public SVGBasicControl(SVGSVGElementImpl modelNode) {
 		super(modelNode);
@@ -134,23 +137,24 @@ public class SVGBasicControl extends BaseControl {
 	}
 
 	public void circle(Graphics2D g2d, SVGInfo svgi) {
-		Shape circle = new Ellipse2D.Double(svgi.getX() - svgi.getR(), svgi.getY() - svgi.getR(), 2 * svgi.getR(), 2 * svgi.getR());
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(), svgi.getR());
+		Shape circle = new Ellipse2D.Double(viewbox.getX() - viewbox.getR(), viewbox.getY() - viewbox.getR(), 2 * viewbox.getR(), 2 * viewbox.getR());
 		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, circle, svgi);
 	}
 
 	public void rectangle(Graphics2D g2d, SVGInfo svgi) {
 		Shape rect;
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(), 0);
 		if (svgi.getRx() > 0 || svgi.getRy() > 0) {
 			if (svgi.getRx() > 0 && svgi.getRy() == 0) {
 				svgi.setRy(svgi.getRx());
 			} else if (svgi.getRx() == 0 && svgi.getRy() > 0) {
 				svgi.setRx(svgi.getRy());
 			}
-			rect = new RoundRectangle2D.Float(svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(),
-					svgi.getRx() * 2, svgi.getRy() * 2);
+			rect = new RoundRectangle2D.Float(viewbox.getX(), viewbox.getY(), viewbox.getWidth(), viewbox.getHeight(), svgi.getRx() * 2, svgi.getRy() * 2);
 		} else {
-			rect = new Rectangle2D.Float(svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight());
+			rect = new Rectangle2D.Float(viewbox.getX(), viewbox.getY(), viewbox.getWidth(), viewbox.getHeight());
 		}
 		
 		transform(g2d, svgi, new SVGInfo());
@@ -159,8 +163,9 @@ public class SVGBasicControl extends BaseControl {
 	}
 
 	public void ellipse(Graphics2D g2d, SVGInfo svgi) {
-		Point2D.Float center = convertCoordinate(new Point2D.Float(svgi.getX(), svgi.getY()));
-		Point2D.Float corner = convertCoordinate(new Point2D.Float(svgi.getX() - svgi.getRx(), svgi.getY() - svgi.getRy()));
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(), svgi.getR());
+		Point2D.Float center = new Point2D.Float(viewbox.getX(), viewbox.getY());
+		Point2D.Float corner = new Point2D.Float(viewbox.getX() - svgi.getRx(), viewbox.getY() - svgi.getRy());
 		Ellipse2D.Float ellipse2d = new Ellipse2D.Float();
 		ellipse2d.setFrameFromCenter(center, corner);
 		transform(g2d, svgi, new SVGInfo());
@@ -169,9 +174,9 @@ public class SVGBasicControl extends BaseControl {
 
 	public void line(Graphics2D g2d, SVGInfo svgi) {
 		Point2D.Float p = new Point2D.Float(svgi.getX1(), svgi.getY1());
-		Point2D.Float p1 = convertCoordinate(p);
+		Point2D.Float p1 = p;
 		p = new Point2D.Float(svgi.getX2(), svgi.getY2());
-		Point2D.Float p2 = convertCoordinate(p);
+		Point2D.Float p2 = p;
 		Line2D line2d = new Line2D.Float(p1, p2);
 		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, line2d, svgi);
@@ -183,8 +188,9 @@ public class SVGBasicControl extends BaseControl {
 		int numPoints = points.getNumberOfItems();
 		for (int i = 0; i < numPoints; i++) {
 			SVGPoint point = points.getItem(i);
-			float x = point.getX();
-			float y = point.getY();
+			SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, point.getX(), point.getY(), 0, 0, 0);
+			float x = viewbox.getX();
+			float y = viewbox.getY();
 			if (i == 0) {
 				path.moveTo(x, y);
 			} else {
@@ -204,8 +210,9 @@ public class SVGBasicControl extends BaseControl {
 		int numPoints = points.getNumberOfItems();
 		for (int i = 0; i < numPoints; i++) {
 			SVGPoint point = points.getItem(i);
-			float x = point.getX();
-			float y = point.getY();
+			SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, point.getX(), point.getY(), 0, 0, 0);
+			float x = viewbox.getX();
+			float y = viewbox.getY();
 			if (i == 0) {
 				path.moveTo(x, y);
 			} else {
@@ -891,12 +898,7 @@ public class SVGBasicControl extends BaseControl {
 		}
 		return basicStroke;
 	}
-
-	private Point2D.Float convertCoordinate(Point2D.Float p1) {
-		Point2D.Float p = p1;
-		return p;
-	}
-
+	
 	private ArrayList<SVGInfo> useChildren(Node element) {
 		
 		ArrayList<SVGInfo> useList = new ArrayList<SVGInfo>();

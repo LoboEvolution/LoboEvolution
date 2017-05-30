@@ -157,126 +157,144 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 
 	@Override
 	public SVGPathSegMovetoAbs createSVGPathSegMovetoAbs(float x, float y) {
-		SVGPathSegMovetoAbs pathSeg = new SVGPathSegMovetoAbsImpl(x, y);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegMovetoAbs pathSeg = new SVGPathSegMovetoAbsImpl(viewbox.getX(), viewbox.getY());
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegMovetoRel createSVGPathSegMovetoRel(float x, float y) {
-		SVGPathSegMovetoRel pathSeg = new SVGPathSegMovetoRelImpl(x, y);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegMovetoRel pathSeg = new SVGPathSegMovetoRelImpl(viewbox.getX(), viewbox.getY());
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegLinetoAbs createSVGPathSegLinetoAbs(float x, float y) {
-		SVGPathSegLinetoAbs pathSeg = new SVGPathSegLinetoAbsImpl(x, y);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegLinetoAbs pathSeg = new SVGPathSegLinetoAbsImpl(viewbox.getX(), viewbox.getY());
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegLinetoRel createSVGPathSegLinetoRel(float x, float y) {
-		SVGPathSegLinetoRel pathSeg = new SVGPathSegLinetoRelImpl(x, y);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegLinetoRel pathSeg = new SVGPathSegLinetoRelImpl(viewbox.getX(), viewbox.getY());
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegCurvetoCubicAbs createSVGPathSegCurvetoCubicAbs(float x1, float y1, float x2, float y2, float x, float y) {
-		SVGPathSegCurvetoCubicAbs pathSeg = new SVGPathSegCurvetoCubicAbsImpl(x1, y1, x2, y2, x, y);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegCurvetoCubicAbs pathSeg = new SVGPathSegCurvetoCubicAbsImpl(x1, y1, x2, y2, viewbox.getX(), viewbox.getY());
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegCurvetoCubicRel createSVGPathSegCurvetoCubicRel(float x, float y, float x1, float y1, float x2, float y2) {
-		SVGPathSegCurvetoCubicRel pathSeg = new SVGPathSegCurvetoCubicRelImpl(x, y, x1, y1, x2, y2);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegCurvetoCubicRel pathSeg = new SVGPathSegCurvetoCubicRelImpl(viewbox.getX(), viewbox.getY(), x1, y1, x2, y2);
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegCurvetoQuadraticAbs createSVGPathSegCurvetoQuadraticAbs(float x, float y, float x1, float y1) {
-		SVGPathSegCurvetoQuadraticAbs pathSeg = new SVGPathSegCurvetoQuadraticAbsImpl(x, y, x1, y1);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegCurvetoQuadraticAbs pathSeg = new SVGPathSegCurvetoQuadraticAbsImpl(viewbox.getX(), viewbox.getY(), x1, y1);
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegCurvetoQuadraticRel createSVGPathSegCurvetoQuadraticRel(float x, float y, float x1, float y1) {
-		SVGPathSegCurvetoQuadraticRel pathSeg = new SVGPathSegCurvetoQuadraticRelImpl(x, y, x1, y1);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegCurvetoQuadraticRel pathSeg = new SVGPathSegCurvetoQuadraticRelImpl(viewbox.getX(), viewbox.getY(), x1, y1);
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegArcAbs createSVGPathSegArcAbs(float x, float y, float r1, float r2, float angle, boolean largeArcFlag, boolean sweepFlag) {
-		SVGPathSegArcAbs pathSeg = new SVGPathSegArcAbsImpl(x, y, r1, r2, angle, largeArcFlag, sweepFlag);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegArcAbs pathSeg = new SVGPathSegArcAbsImpl(viewbox.getX(), viewbox.getY(), r1, r2, angle, largeArcFlag, sweepFlag);
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegArcRel createSVGPathSegArcRel(float x, float y, float r1, float r2, float angle, boolean largeArcFlag, boolean sweepFlag) {
-		SVGPathSegArcRel pathSeg = new SVGPathSegArcRelImpl(x, y, r1, r2, angle, largeArcFlag, sweepFlag);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegArcRel pathSeg = new SVGPathSegArcRelImpl(viewbox.getX(), viewbox.getY(), r1, r2, angle, largeArcFlag, sweepFlag);
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegLinetoHorizontalAbs createSVGPathSegLinetoHorizontalAbs(float x) {
-		SVGPathSegLinetoHorizontalAbs pathSeg = new SVGPathSegLinetoHorizontalAbsImpl(x);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, 0, 0, 0, 0);
+		SVGPathSegLinetoHorizontalAbs pathSeg = new SVGPathSegLinetoHorizontalAbsImpl(viewbox.getX());
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegLinetoHorizontalRel createSVGPathSegLinetoHorizontalRel(float x) {
-		SVGPathSegLinetoHorizontalRel pathSeg = new SVGPathSegLinetoHorizontalRelImpl(x);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, 0, 0, 0, 0);
+		SVGPathSegLinetoHorizontalRel pathSeg = new SVGPathSegLinetoHorizontalRelImpl(viewbox.getX());
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegLinetoVerticalAbs createSVGPathSegLinetoVerticalAbs(float y) {
-		SVGPathSegLinetoVerticalAbs pathSeg = new SVGPathSegLinetoVerticalAbsImpl(y);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), 0, y, 0, 0, 0);
+		SVGPathSegLinetoVerticalAbs pathSeg = new SVGPathSegLinetoVerticalAbsImpl(viewbox.getY());
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegLinetoVerticalRel createSVGPathSegLinetoVerticalRel(float y) {
-		SVGPathSegLinetoVerticalRel pathSeg = new SVGPathSegLinetoVerticalRelImpl(y);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), 0, y, 0, 0, 0);
+		SVGPathSegLinetoVerticalRel pathSeg = new SVGPathSegLinetoVerticalRelImpl(viewbox.getY());
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegCurvetoCubicSmoothAbs createSVGPathSegCurvetoCubicSmoothAbs(float x2, float y2, float x, float y) {
-		SVGPathSegCurvetoCubicSmoothAbs pathSeg = new SVGPathSegCurvetoCubicSmoothAbsImpl(x2, y2, x, y);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegCurvetoCubicSmoothAbs pathSeg = new SVGPathSegCurvetoCubicSmoothAbsImpl(x2, y2, viewbox.getX(), viewbox.getY());
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegCurvetoCubicSmoothRel createSVGPathSegCurvetoCubicSmoothRel(float x2, float y2, float x, float y) {
-		SVGPathSegCurvetoCubicSmoothRel pathSeg = new SVGPathSegCurvetoCubicSmoothRelImpl(x2, y2, x, y);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegCurvetoCubicSmoothRel pathSeg = new SVGPathSegCurvetoCubicSmoothRelImpl(x2, y2, viewbox.getX(), viewbox.getY());
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegCurvetoQuadraticSmoothAbs createSVGPathSegCurvetoQuadraticSmoothAbs(float x, float y) {
-		SVGPathSegCurvetoQuadraticSmoothAbs pathSeg = new SVGPathSegCurvetoQuadraticSmoothAbsImpl(x, y);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegCurvetoQuadraticSmoothAbs pathSeg = new SVGPathSegCurvetoQuadraticSmoothAbsImpl(viewbox.getX(), viewbox.getY());
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
 
 	@Override
 	public SVGPathSegCurvetoQuadraticSmoothRel createSVGPathSegCurvetoQuadraticSmoothRel(float x, float y) {
-		SVGPathSegCurvetoQuadraticSmoothRel pathSeg = new SVGPathSegCurvetoQuadraticSmoothRelImpl(x, y);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(this.getOwnerSVGElement(), x, y, 0, 0, 0);
+		SVGPathSegCurvetoQuadraticSmoothRel pathSeg = new SVGPathSegCurvetoQuadraticSmoothRelImpl(viewbox.getX(), viewbox.getY());
 		pathData.getPathSegList().appendItem(pathSeg);
 		return pathSeg;
 	}
