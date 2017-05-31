@@ -38,7 +38,37 @@ public class SVGDefsElementImpl extends SVGSVGElementImpl implements SVGDefsElem
 
 	@Override
 	public AbstractCSS2Properties getSVGStyle() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		AbstractCSS2Properties style = this.getStyle();
+		
+		if(style.getStroke() == null){
+			style.setStroke(this.getStroke());
+		}
+		
+		if(style.getStrokeDashArray() == null){
+			style.setStrokeDashArray(this.getStrokeDashArray());
+		}
+		
+		if(style.getStrokeLineCap() == null){
+			style.setStrokeLineCap(this.getStrokeLineCap());
+		}
+		
+		if(style.getStrokeMiterLimit() == null){
+			style.setStrokeMiterLimit(this.getStrokeMiterLimit());
+		}
+		
+		if(style.getStrokeOpacity() == null){
+			style.setStrokeOpacity(this.getStrokeOpacity());
+		}
+		
+		if(style.getStrokeWidth() == null){
+			style.setStrokeWidth(this.getStrokeWidth());
+		}
+		
+		if(style.getFill() == null){
+			style.setFill(this.getFill());
+		}
+		
+		return style;
 	}
 }

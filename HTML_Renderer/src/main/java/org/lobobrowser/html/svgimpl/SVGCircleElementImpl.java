@@ -54,14 +54,37 @@ public class SVGCircleElementImpl extends SVGSVGElementImpl implements SVGCircle
 
 	@Override
 	public AbstractCSS2Properties getSVGStyle() {
+		
 		AbstractCSS2Properties style = this.getStyle();
-		style.setFill(this.getFill());
-		style.setStroke(this.getStroke());
-		style.setStrokeDashArray(this.getStrokeDashArray());
-		style.setStrokeLineCap(this.getStrokeLineCap());
-		style.setStrokeMiterLimit(this.getStrokeMiterLimit());
-		style.setStrokeOpacity(this.getStrokeOpacity());
-		style.setStrokeWidth(this.getStrokeWidth());
+		
+		if(style.getStroke() == null){
+			style.setStroke(this.getStroke());
+		}
+		
+		if(style.getStrokeDashArray() == null){
+			style.setStrokeDashArray(this.getStrokeDashArray());
+		}
+		
+		if(style.getStrokeLineCap() == null){
+			style.setStrokeLineCap(this.getStrokeLineCap());
+		}
+		
+		if(style.getStrokeMiterLimit() == null){
+			style.setStrokeMiterLimit(this.getStrokeMiterLimit());
+		}
+		
+		if(style.getStrokeOpacity() == null){
+			style.setStrokeOpacity(this.getStrokeOpacity());
+		}
+		
+		if(style.getStrokeWidth() == null){
+			style.setStrokeWidth(this.getStrokeWidth());
+		}
+		
+		if(style.getFill() == null){
+			style.setFill(this.getFill());
+		}
+		
 		return style;
 	}
 }
