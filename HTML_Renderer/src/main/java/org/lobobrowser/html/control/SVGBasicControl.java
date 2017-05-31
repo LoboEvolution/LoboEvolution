@@ -24,6 +24,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.LinearGradientPaint;
+import java.awt.MultipleGradientPaint;
 import java.awt.Paint;
 import java.awt.RadialGradientPaint;
 import java.awt.Shape;
@@ -1017,6 +1018,7 @@ public class SVGBasicControl extends BaseControl {
 				svgi.setR(radial.getR().getBaseVal().getValue());
 				svgi.setFx(radial.getFx().getBaseVal().getValue());
 				svgi.setFy(radial.getCy().getBaseVal().getValue());
+				svgi.setTransformList(radial.getGradientTransform().getBaseVal());
 				useList.add(svgi);
 			}
 		}
@@ -1026,9 +1028,7 @@ public class SVGBasicControl extends BaseControl {
 	private Paint gradient(Element gradient, Shape shape2d) {
 		if (gradient instanceof SVGRadialGradientElementImpl) {
 			SVGRadialGradientElementImpl radial = (SVGRadialGradientElementImpl)gradient;
-			return radial(shape2d, radial.getCx().getBaseVal().getValue(), radial.getCy().getBaseVal().getValue(), 
-										  radial.getR().getBaseVal().getValue(),
-										  fractions(radial), colors(radial));
+			return radial(shape2d, radial, fractions(radial), colors(radial));
 		}
 		
 		if(gradient instanceof SVGLinearGradientElementImpl){
@@ -1042,19 +1042,27 @@ public class SVGBasicControl extends BaseControl {
 		return null;
 	}
 	
-	private Paint radial(Shape shape, float x, float y, float radius, float[] fractions, Color[] colors) {
-		final float[] FRACTIONS = { 0.0f, 1.0f };
-		final Color[] DARK_COLORS = { Color.RED, Color.BLUE };
+	private Paint radial(Shape shape, SVGRadialGradientElementImpl radial, float[] fractions, Color[] colors) {
+		
+		float x = radial.getCx().getBaseVal().getValue();
+		float y = radial.getCy().getBaseVal().getValue(); 
+		float radius = radial.getR().getBaseVal().getValue();
 		double w = shape.getBounds2D().getWidth();
 		double h = shape.getBounds2D().getHeight();
-		Point2D.Float center = new Point2D.Float(x, y);
+		Point2D.Float center = new Point2D.Float(x/100, y/100);		
 		double cx = w * center.getX() + shape.getBounds2D().getX();
 		double cy = h * center.getY() + shape.getBounds2D().getY();
 		final Point2D newCenter = new Point2D.Double(cx, cy);
 		double delta = newCenter.distance(new Point2D.Double(shape.getBounds2D().getCenterX(), shape.getBounds2D().getCenterY()));
 		final double r = Math.sqrt(w * w + h * h) / 2;
-		final double newRadius = delta + r * radius;
-		return new RadialGradientPaint(newCenter, (float) newRadius, FRACTIONS, DARK_COLORS);
+		final float newRadius = (float) (delta + r * (radius/100));
+		
+		return new RadialGradientPaint(newCenter, newRadius, newCenter,
+                                 fractions, colors,
+                                 MultipleGradientPaint.CycleMethod.REFLECT,
+                                 MultipleGradientPaint.ColorSpaceType.SRGB,
+                                 new AffineTransform());
+		
 	}
 	
 	private float[] fractions(Element elem) {

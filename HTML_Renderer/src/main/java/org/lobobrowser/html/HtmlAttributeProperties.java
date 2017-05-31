@@ -221,6 +221,9 @@ public interface HtmlAttributeProperties {
 	
 	/** The font-family. */
 	String FONTFAMILY = "font-family";
+	
+	/** The gradientTransform. */
+	String GRADIENT_TRANSFORM = "gradientTransform";
 
 	/** The height. */
 	String HEIGHT = "height";
