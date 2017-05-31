@@ -42,7 +42,7 @@ public class SVGStopElementImpl extends SVGSVGElementImpl implements SVGStopElem
 	public Color getStopColor() {
 		String stopcolor = this.getAttribute(HtmlAttributeProperties.STOP_COLOR);
 		Color color = ColorFactory.getInstance().getColor(stopcolor);
-		return new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * Integer.parseInt(getStopOpacity())));
+		return new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * Float.parseFloat(getStopOpacity())));
 	}
 	
 	public String getStopOpacity() {
