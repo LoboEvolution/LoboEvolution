@@ -78,10 +78,7 @@ public class DescendantSelectorImpl extends LocatableImpl implements DescendantS
             sb.append(((CSSFormatable) ancestorSelector_).getCssText(format));
         }
 
-        if (Selector.SAC_PSEUDO_ELEMENT_SELECTOR == getSimpleSelector().getSelectorType()) {
-            sb.append(':');
-        }
-        else {
+        if (Selector.SAC_PSEUDO_ELEMENT_SELECTOR != getSimpleSelector().getSelectorType()) {
             sb.append(' ');
         }
 

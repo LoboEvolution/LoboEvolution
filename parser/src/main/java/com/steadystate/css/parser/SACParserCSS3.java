@@ -15,6 +15,8 @@ import org.w3c.css.sac.SelectorList;
 import org.w3c.css.sac.SimpleSelector;
 
 import com.steadystate.css.parser.media.MediaQuery;
+import com.steadystate.css.parser.selectors.PseudoClassConditionImpl;
+import com.steadystate.css.parser.selectors.PseudoElementSelectorImpl;
 import com.steadystate.css.parser.ParserUtils;
 import com.steadystate.css.util.LangUtils;
 import com.steadystate.css.dom.Property;
@@ -1858,6 +1860,7 @@ throw toCSSParseException("invalidAttrib", e);
     Token t;
     String function;
     Selector sel;
+    boolean doubleColon = false;
     Locator locator;
     try {
       jj_consume_token(COLON);
@@ -1865,6 +1868,7 @@ locator = createLocator(token);
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case COLON:{
         jj_consume_token(COLON);
+doubleColon = true;
         break;
         }
       default:
@@ -1885,10 +1889,16 @@ String s = unescape(t.image, false);
                     if (pseudoElementSel instanceof Locatable) {
                         ((Locatable) pseudoElementSel).setLocator(locator);
                     }
+                    if (doubleColon && (pseudoElementSel instanceof PseudoElementSelectorImpl)) {
+                      ((PseudoElementSelectorImpl) pseudoElementSel).prefixedWithDoubleColon();
+                    }
                     return pseudoElementSel;                }
                 c = getConditionFactory().createPseudoClassCondition(null, s);
                 if (c instanceof Locatable) {
                     ((Locatable) c).setLocator(locator);
+                }
+                if (doubleColon && (c instanceof PseudoClassConditionImpl)) {
+                  ((PseudoClassConditionImpl) c).prefixedWithDoubleColon();
                 }
                 {if ("" != null) return (pred == null)
                     ? c
@@ -1933,6 +1943,9 @@ if (pseudoElementFound) { throw toCSSParseException("duplicatePseudo", new Strin
                     if (c instanceof Locatable) {
                         ((Locatable) c).setLocator(locator);
                     }
+                        if (doubleColon && (c instanceof PseudoClassConditionImpl)) {
+                            ((PseudoClassConditionImpl) c).prefixedWithDoubleColon();
+                        }
                     {if ("" != null) return (pred == null)
                         ? c
                         : getConditionFactory().createAndCondition(pred, c);}
@@ -2064,6 +2077,9 @@ if (pseudoElementFound) { throw toCSSParseException("duplicatePseudo", new Strin
                     if (c instanceof Locatable) {
                         ((Locatable) c).setLocator(locator);
                     }
+                        if (doubleColon && (c instanceof PseudoClassConditionImpl)) {
+                            ((PseudoClassConditionImpl) c).prefixedWithDoubleColon();
+                        }
                     {if ("" != null) return (pred == null)
                         ? c
                         : getConditionFactory().createAndCondition(pred, c);}
@@ -2949,21 +2965,15 @@ return hexcolorInternal(prev, t);
     finally { jj_save(0, xla); }
   }
 
-  private boolean jj_3R_79()
+  private boolean jj_3R_90()
  {
-    if (jj_scan_token(GREATER)) return true;
+    if (jj_scan_token(COLON)) return true;
     return false;
   }
 
   private boolean jj_3R_89()
  {
     if (jj_scan_token(LSQUARE)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_90()
- {
-    if (jj_scan_token(COLON)) return true;
     return false;
   }
 
@@ -2996,6 +3006,12 @@ return hexcolorInternal(prev, t);
   private boolean jj_3R_80()
  {
     if (jj_scan_token(TILDE)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_87()
+ {
+    if (jj_scan_token(HASH)) return true;
     return false;
   }
 
@@ -3099,12 +3115,6 @@ return hexcolorInternal(prev, t);
     return false;
   }
 
-  private boolean jj_3R_87()
- {
-    if (jj_scan_token(HASH)) return true;
-    return false;
-  }
-
   private boolean jj_3R_83()
  {
     if (jj_3R_87()) return true;
@@ -3160,6 +3170,12 @@ return hexcolorInternal(prev, t);
       xsp = jj_scanpos;
       if (jj_3R_77()) { jj_scanpos = xsp; break; }
     }
+    return false;
+  }
+
+  private boolean jj_3R_79()
+ {
+    if (jj_scan_token(GREATER)) return true;
     return false;
   }
 

@@ -34,6 +34,7 @@ public class PseudoElementSelectorImpl extends LocatableImpl implements ElementS
     private static final long serialVersionUID = 2913936296006875268L;
 
     private String localName_;
+    private boolean doubleColon_;
 
     public void setLocaleName(final String localName) {
         localName_ = localName;
@@ -55,11 +56,18 @@ public class PseudoElementSelectorImpl extends LocatableImpl implements ElementS
         return localName_;
     }
 
+    public void prefixedWithDoubleColon() {
+        doubleColon_ = true;
+    }
+
     /**
      * {@inheritDoc}
      */
     public String getCssText(final CSSFormat format) {
-        return localName_;
+        if (localName_ == null) {
+            return localName_;
+        }
+        return (doubleColon_ ? "::" : ":") + localName_;
     }
 
     @Override

@@ -34,6 +34,7 @@ public class PseudoClassConditionImpl extends LocatableImpl implements Attribute
     private static final long serialVersionUID = 1798016773089155610L;
 
     private String value_;
+    private boolean doubleColon_;
 
     public void setValue(final String value) {
         value_ = value;
@@ -63,15 +64,19 @@ public class PseudoClassConditionImpl extends LocatableImpl implements Attribute
         return value_;
     }
 
+    public void prefixedWithDoubleColon() {
+        doubleColon_ = true;
+    }
+
     /**
      * {@inheritDoc}
      */
     public String getCssText(final CSSFormat format) {
         final String value = getValue();
-        if (value != null) {
-            return ":" + value;
+        if (value == null) {
+            return value;
         }
-        return ":";
+        return (doubleColon_ ? "::" : ":") + value;
     }
 
     @Override
