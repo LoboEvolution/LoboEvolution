@@ -23,6 +23,7 @@ package org.lobobrowser.html.svgimpl;
 import java.awt.Color;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.svg.SVGAnimatedNumber;
 import org.lobobrowser.w3c.svg.SVGStopElement;
@@ -41,14 +42,24 @@ public class SVGStopElementImpl extends SVGSVGElementImpl implements SVGStopElem
 	
 	public Color getStopColor() {
 		String stopcolor = this.getAttribute(HtmlAttributeProperties.STOP_COLOR);
-		Color color = ColorFactory.getInstance().getColor(stopcolor);
+		Color color = Color.BLACK;
+		if(stopcolor != null){
+			color = ColorFactory.getInstance().getColor(stopcolor);
+		} else {
+			AbstractCSS2Properties style = this.getStyle();
+			color = ColorFactory.getInstance().getColor(style.getStopColor());
+		}
 		return new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * Float.parseFloat(getStopOpacity())));
 	}
 	
 	public String getStopOpacity() {
 		String opacity = this.getAttribute(HtmlAttributeProperties.STOP_OPACITY);
-		if(opacity == null){
-			return "1";
+		if (opacity == null) {
+			AbstractCSS2Properties style = this.getStyle();
+			opacity = style.getStopOpacity();
+			if (opacity == null) {
+				opacity = "1";
+			}
 		}
 		return opacity;
 	}

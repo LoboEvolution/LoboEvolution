@@ -1072,6 +1072,7 @@ public class SVGBasicControl extends BaseControl {
 			Node n = (Node) childNodes.item(i);
 			if (n instanceof SVGStopElementImpl) {
 				SVGStopElementImpl stop = (SVGStopElementImpl) n;
+				logger.error("offset: " + stop.getOffset().getBaseVal());
 				fractions.add(stop.getOffset().getBaseVal());
 			}
 		}

@@ -332,6 +332,12 @@ public interface CSSProperties {
 	/** The Constant STRESS. */
 	String STRESS = "stress";
 	
+	/** The Constant STOP_COLOR. */
+	String STOP_COLOR = "stop-color";
+	
+	/** The Constant STOP_OPACITY. */
+	String STOP_OPACITY = "stop-opacity";
+	
 	/** The Constant STROKE. */
 	String STROKE = "stroke";
 	

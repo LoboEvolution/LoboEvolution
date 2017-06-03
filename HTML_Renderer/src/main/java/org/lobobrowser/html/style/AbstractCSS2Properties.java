@@ -2774,6 +2774,14 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		this.setPropertyValueLC(STRESS, stress);
 	}
 	
+	public String getStopColor() {
+		return this.getPropertyValueLC(STOP_COLOR);
+	}
+	
+	public String getStopOpacity() {
+		return this.getPropertyValueLC(STOP_OPACITY);
+	}
+	
 	public String getStroke() {
 		return this.getPropertyValueLC(STROKE);
 	}
