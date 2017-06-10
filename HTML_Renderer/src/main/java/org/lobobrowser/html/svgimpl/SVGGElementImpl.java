@@ -29,6 +29,8 @@ import org.lobobrowser.w3c.svg.SVGGElement;
 import org.w3c.dom.DOMException;
 
 public class SVGGElementImpl extends SVGSVGElementImpl implements SVGGElement {
+	
+	private SVGSVGElementImpl svg;
 
 	public SVGGElementImpl(String name) {
 		super(name);
@@ -79,6 +81,20 @@ public class SVGGElementImpl extends SVGSVGElementImpl implements SVGGElement {
 		}
 		
 		return style;
+	}
+
+	/**
+	 * @return the svg
+	 */
+	public SVGSVGElementImpl getSvg() {
+		return svg;
+	}
+
+	/**
+	 * @param svg the svg to set
+	 */
+	public void setSvg(SVGSVGElementImpl svg) {
+		this.svg = svg;
 	}
 
 }

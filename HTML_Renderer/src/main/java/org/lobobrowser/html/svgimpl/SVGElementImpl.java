@@ -51,6 +51,12 @@ public class SVGElementImpl extends HTMLAbstractUIElement implements SVGElement 
 		while (parent != null && !(parent instanceof SVGSVGElement)) {
 			parent = parent.getParentNode();
 		}
+		
+		if(parent instanceof SVGGElementImpl){
+			SVGGElementImpl a = (SVGGElementImpl)parent;
+			return a.getSvg();
+		}
+				
 		return (SVGSVGElement) parent;
 	}
 

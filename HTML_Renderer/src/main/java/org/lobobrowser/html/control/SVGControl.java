@@ -75,7 +75,7 @@ public class SVGControl extends SVGBasicControl {
 				SVGTransformList tl = svgGroup.getTransform().getBaseVal();
 				AbstractCSS2Properties style = svgGroup.getSVGStyle();
 				setSvgiGroup(new SVGInfo(style, tl));
-				
+				svgGroup.setSvg(modelNode);
 				NodeList gChildNodes = n.getChildNodes();
 				for (int g = 0; g < gChildNodes.getLength(); g++) {
 					Node n1 = (Node) gChildNodes.item(g);
@@ -219,7 +219,7 @@ public class SVGControl extends SVGBasicControl {
 			SVGTransformList tl = svgGroup.getTransform().getBaseVal();
 			AbstractCSS2Properties style = svgGroup.getSVGStyle();
 			setSvgiGroup(new SVGInfo(style, tl));
-			
+			svgGroup.setSvg(modelNode);
 			NodeList gChildNodes = svgGroup.getChildNodes();
 			for (int g = 0; g < gChildNodes.getLength(); g++) {
 				Node n1 = (Node) gChildNodes.item(g);

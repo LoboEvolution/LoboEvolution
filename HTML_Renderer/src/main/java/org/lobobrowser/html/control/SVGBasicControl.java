@@ -989,6 +989,7 @@ public class SVGBasicControl extends BaseControl {
 				SVGTransformList tl = svgGroup.getTransform().getBaseVal();
 				AbstractCSS2Properties style = svgGroup.getSVGStyle();
 				setSvgiGroup(new SVGInfo(style, tl));
+				svgGroup.setSvg(modelN);
 
 				NodeList gChildNodes = svgGroup.getChildNodes();
 				for (int g = 0; g < gChildNodes.getLength(); g++) {
@@ -1072,7 +1073,6 @@ public class SVGBasicControl extends BaseControl {
 			Node n = (Node) childNodes.item(i);
 			if (n instanceof SVGStopElementImpl) {
 				SVGStopElementImpl stop = (SVGStopElementImpl) n;
-				logger.error("offset: " + stop.getOffset().getBaseVal());
 				fractions.add(stop.getOffset().getBaseVal());
 			}
 		}
