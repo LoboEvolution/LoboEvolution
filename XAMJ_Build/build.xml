@@ -11,7 +11,7 @@
 	<property name="report.findbugs.dir" value="${build.dir}/findbugs/" />
 	<property name="report.pmd.dir" value="${build.dir}/pmd/" />
 	<taskdef name="izpack" classpath="XAMJ_Build\compiler.jar" classname="com.izforge.izpack.ant.IzPackTask" />
-	<target name="default" depends="builddir,distros,findbugs_compile,pmd_compile" />
+	<target name="default" depends="builddir,distros" />
 	<target name="distros" depends="installer,lobo_zip" />
 
 	<target name="builddir">
@@ -114,27 +114,5 @@
 
 	<target name="izpackext_classfiles">
 		<javac srcdir="IzPack_RegistryPanel\bin" source="1.8" destdir="IzPack_RegistryPanel\bin" classpath="XAMJ_Build/installer.jar" debug="on" includeantruntime="false" />
-	</target>
-
-	<target name="findbugs_compile">
-		<taskdef name="findbugs" classpath="lib/findbugs-ant-3.0.0.jar" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" />
-		<mkdir dir="${report.findbugs.dir}" />
-		<findbugs home="." workHard="true" output="html" outputFile="${report.findbugs.dir}/findbugs.html" >
-			<class location="${build.dir}/cobra-no-commons.jar" />
-			<class location="${build.dir}/lobo.jar" />
-			<class location="${build.dir}/lobo-pub.jar" />
-			<class location="${build.dir}/primary.jar" />
-		</findbugs>
-	</target>
-
-	<target name="pmd_compile">
-		<taskdef name="pmd" classpath="lib/pmd/pmd-4.2.6.jar" classname="net.sourceforge.pmd.ant.PMDTask"/>
-		<mkdir dir="${report.pmd.dir}" />
-		<pmd rulesetfiles="lib/pmd/rulset.xml">
-			<formatter type="html" toFile="${report.pmd.dir}/pmd.html"/>
-			<fileset dir="..">
-				<include name="**/*.java"/>
-			</fileset>
-		</pmd>
 	</target>
 </project>

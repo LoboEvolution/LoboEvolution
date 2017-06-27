@@ -3,14 +3,4 @@
       <ant antfile="XAMJ_Build/build.xml">
       </ant>
   </target>
-  <target name="test" depends="build">
-    <junit>
-		<classpath path="lib/junit/junit-4.12.jar"/>
-		<classpath path="lib/junit/hamcrest-core-1.3.jar"/>
-        <formatter type="plain" usefile="false" /> <!-- to screen -->
-        <batchtest>
-            <fileset dir="Testing/src/main/java/org/lobobrowser/html/" includes="**/*.class" />
-        </batchtest>
-    </junit>
-</target>
 </project>
