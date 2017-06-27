@@ -20,9 +20,9 @@
  */
 package org.lobobrowser.w3c.svg;
 
+import org.lobobrowser.w3c.smil.ElementTimeControl;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.events.EventTarget;
-import org.w3c.dom.smil.ElementTimeControl;
 
 public interface SVGAnimationElement
 		extends SVGElement, SVGTests, SVGExternalResourcesRequired, ElementTimeControl, EventTarget {
