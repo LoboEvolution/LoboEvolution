@@ -25,7 +25,6 @@ package org.lobobrowser.primary.clientlets;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.clientlet.Clientlet;
 import org.lobobrowser.clientlet.ClientletRequest;
 import org.lobobrowser.clientlet.ClientletResponse;
@@ -67,11 +66,11 @@ public class PrimaryClientletSelector implements ClientletSelector {
 			logger.info("select(): mimeType=" + mimeType);
 		}
 		String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
-		if ("text/html".equals(mimeTypeTL)) {
+		if ("text/html".equals(mimeTypeTL) || "image/svg+xml".equals(mimeTypeTL)) {
 			// TODO: XHTML needs its own clientlet.
 			return new HtmlClientlet();
 		} else if ("image/jpeg".equals(mimeTypeTL) || "image/jpg".equals(mimeTypeTL) || "image/gif".equals(mimeTypeTL)
-				|| "image/png".equals(mimeTypeTL) || "image/svg+xml".equals(mimeTypeTL)) {
+				|| "image/png".equals(mimeTypeTL)) {
 			return new ImageClientlet();
 		} else if ((mimeType == null) || "application/octet-stream".equals(mimeTypeTL)
 				|| "content/unknown".equals(mimeTypeTL)) {
@@ -80,10 +79,9 @@ public class PrimaryClientletSelector implements ClientletSelector {
 			int lastDotIdx = path.lastIndexOf('.');
 			String extension = lastDotIdx == -1 ? "" : path.substring(lastDotIdx + 1);
 			String extensionTL = extension.toLowerCase();
-			if ("html".equals(extensionTL) || "htm".equals(extensionTL) || (extensionTL.length() == 0)) {
+			if ("html".equals(extensionTL) || "htm".equals(extensionTL) || "svg".equals(extensionTL) || (extensionTL.length() == 0)) {
 				return new HtmlClientlet();
-			} else if ("gif".equals(extensionTL) || "jpg".equals(extensionTL) || "png".equals(extensionTL)
-					|| "svg".equals(extensionTL)) {
+			} else if ("gif".equals(extensionTL) || "jpg".equals(extensionTL) || "png".equals(extensionTL)) {
 				return new ImageClientlet();
 			} else {
 				return null;
