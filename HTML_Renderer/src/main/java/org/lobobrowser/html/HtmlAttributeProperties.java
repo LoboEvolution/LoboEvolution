@@ -63,6 +63,12 @@ public interface HtmlAttributeProperties {
 
 	/** The autocomplete. */
 	String AUTOCOMPLETE = "autocomplete";
+	
+	/** The attributeName. */
+	String ATTRIBUTE_NAME = "attributeName";
+	
+	/** The attributeType. */
+	String ATTRIBUTE_TYPE = "attributeType";
 
 	/** The background. */
 	String BACKGROUND = "background";
@@ -72,6 +78,9 @@ public interface HtmlAttributeProperties {
 
 	/** The border. */
 	String BORDER = "border";
+	
+	/** The begin. */
+	String BEGIN = "begin";
 
 	/** The challenge. */
 	String CHALLENGE = "challenge";
@@ -150,6 +159,9 @@ public interface HtmlAttributeProperties {
 	
 	/** The DX. */
 	String DX = "dx";
+	
+	/** The DUR. */
+	String DUR = "dur";
 
 	/** The data. */
 	String DATA = "data";
@@ -221,6 +233,9 @@ public interface HtmlAttributeProperties {
 	
 	/** The font-family. */
 	String FONTFAMILY = "font-family";
+	
+	/** The from. */
+	String FROM = "from";
 	
 	/** The gradientTransform. */
 	String GRADIENT_TRANSFORM = "gradientTransform";
@@ -479,6 +494,9 @@ public interface HtmlAttributeProperties {
 	
 	/** The trasform. */
 	String TRANSFORM = "transform";
+	
+	/** The to. */
+	String TO = "to";
 
 	/** The usemap. */
 	String USEMAP = "useMap";

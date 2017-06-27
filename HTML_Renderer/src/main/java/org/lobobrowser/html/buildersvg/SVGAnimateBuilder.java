@@ -18,37 +18,16 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-package org.lobobrowser.html.svgimpl;
+package org.lobobrowser.html.buildersvg;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.w3c.svg.SVGAnimateElement;
-import org.lobobrowser.w3c.svg.SVGElement;
-import org.w3c.dom.DOMException;
+import org.lobobrowser.html.builder.HTMLElementBuilder;
+import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.svgimpl.SVGAnimateElementImpl;
 
-public class SVGAnimateElementImpl extends SVGAnimationImpl implements SVGAnimateElement {
-
-	public SVGAnimateElementImpl(String name) {
-		super(name);
-	}
+public class SVGAnimateBuilder extends HTMLElementBuilder {
 	
 	@Override
-	public SVGElement getTargetElement() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public float getStartTime() {
-		String beginTime = this.getAttribute(HtmlAttributeProperties.BEGIN);
-		if (beginTime != null && !beginTime.equalsIgnoreCase("indefinite") && beginTime.length() > 0) {
-			return SVGUtility.getClockSecs(beginTime);
-		} else {
-			return 0;
-		}
-	}
-
-	@Override
-	public float getSimpleDuration() throws DOMException {
-		return getDur();
+	protected HTMLElementImpl build(String name) {
+		return new SVGAnimateElementImpl(name);
 	}
 }

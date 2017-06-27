@@ -40,6 +40,7 @@ import org.lobobrowser.w3c.svg.SVGTransform;
 import org.lobobrowser.w3c.svg.SVGViewSpec;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.css.CSSValue;
@@ -527,5 +528,16 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	
 	public String getClipPath(){
 		return this.getAttribute(HtmlAttributeProperties.CLIPPATH);
+	}
+	
+	public SVGAnimateElementImpl getAnimateElement(){
+		NodeList gChildNodes = this.getChildNodes();
+		for (int g = 0; g < gChildNodes.getLength(); g++) {
+			Node n = (Node) gChildNodes.item(g);
+			if (n instanceof SVGAnimateElementImpl) {
+				return (SVGAnimateElementImpl) n;
+			}
+		}
+		return null;
 	}
 }

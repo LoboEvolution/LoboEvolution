@@ -27,6 +27,9 @@ public interface HtmlProperties {
 
     /** The a. */
     String A = "A";
+    
+    /** The animate. */
+    String ANIMATE = "ANIMATE";
 
     /** The applet. */
     String APPLET = "APPLET";

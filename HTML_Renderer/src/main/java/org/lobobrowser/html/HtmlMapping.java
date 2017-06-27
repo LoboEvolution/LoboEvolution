@@ -89,6 +89,7 @@ import org.lobobrowser.html.builder.TtBuilder;
 import org.lobobrowser.html.builder.UlBuilder;
 import org.lobobrowser.html.builder.UnderlineBuilder;
 import org.lobobrowser.html.builder.VideoBuilder;
+import org.lobobrowser.html.buildersvg.SVGAnimateBuilder;
 import org.lobobrowser.html.buildersvg.SVGBuilder;
 import org.lobobrowser.html.buildersvg.SVGCircleBuilder;
 import org.lobobrowser.html.buildersvg.SVGClipPathBuilder;
@@ -328,6 +329,7 @@ public class HtmlMapping implements HtmlProperties {
 		builders.put(LINEAR_GRADIENT, new SVGLinearGradientBuilder());
 		builders.put(STOP, new SVGStopBuilder());
 		builders.put(CLIPPATH, new SVGClipPathBuilder());
+		builders.put(ANIMATE, new SVGAnimateBuilder());
 		return builders;
 	}
 }
