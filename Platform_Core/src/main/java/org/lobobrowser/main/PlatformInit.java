@@ -295,6 +295,7 @@ public class PlatformInit {
     public void initOtherProperties() {
         System.setProperty("networkaddress.cache.ttl", "3600");
         System.setProperty("networkaddress.cache.negative.ttl", "1");
+        System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
 
     }
 
