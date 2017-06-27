@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
 	<Appenders>
-		<File name="lobo_log" fileName="logs/loboevolution.log">
-			<PatternLayout
-				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+		<!-- File name="lobo_log" fileName="logs/loboevolution.log"><PatternLayout	pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" /><Filters><ThresholdFilter level="warn"  onMatch="DENY" onMismatch="NEUTRAL"/><ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/><ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL"/><ThresholdFilter level="info"  onMatch="ACCEPT" onMismatch="DENY"/></Filters></File-->
+		<!-- File name="lobo_error" fileName="logs/loboevolution_error.log"><PatternLayout	pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" /></File-->
+		<RandomAccessFile name="lobo_log" fileName="logs/loboevolution.log" immediateFlush="false" append="false">
+			<PatternLayout	pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
 			<Filters>
 				<ThresholdFilter level="warn"  onMatch="DENY" onMismatch="NEUTRAL"/>
-        		<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
-        		<ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL"/>
+				<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+				<ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL"/>
 				<ThresholdFilter level="info"  onMatch="ACCEPT" onMismatch="DENY"/>
-    		</Filters>
-		</File>
-		<File name="lobo_error" fileName="logs/loboevolution_error.log">
-			<PatternLayout
-				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
-		</File>
+			</Filters>
+		</RandomAccessFile>
+		<RandomAccessFile name="lobo_error" fileName="logs/loboevolution_error.log" immediateFlush="false" append="false">
+			<PatternLayout	pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+		</RandomAccessFile>
 	</Appenders>
 	<Loggers>
 		<Root level="debug">
